@@ -1,0 +1,43 @@
+/*   
+Theme Name: Undergraduate Admissions, UCF
+Author: UCF Web Communications
+Template: thematic
+Version: 1.0
+Tags: Thematic
+.
+*/
+
+/*/ Global Styles /*/
+#header h1 a{font-size: 37px; font-family: "Georgia", "serif"; color: #313130;}
+.firefox #header h1{position: relative; top: 3px;}
+.ie7 #header h1{position: relative; top: 3px;}
+.ie7 #header #menu{padding-bottom: 1em;}
+.ie8 #header h1{position: relative; top: 3px;}
+.ie8 #header #menu{}
+body{color: #333333;}
+a{color: #333; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+h2, h3, h4{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; color: #333;}
+.slideshow {position: relative;}
+.slideshow img { position:absolute; top:0; left:0; z-index:8; opacity:0.0; }
+.slideshow img.active { z-index:10; opacity:1.0; }
+.slideshow img.last-active { z-index:9; }
+
+.document {background: transparent url('static/img/document.png') no-repeat center left; overflow:hidden; padding: 5px 5px 5px 25px;}
+.document a { text-decoration: underline; color: #333;}
+.pdf        { background-image: url('static/img/document-pdf.png'); }
+.doc, .docx, .docm { background-image: url('static/img/document-doc.png'); }
+.ppt, .pptx, .pptm { background-image: url('static/img/document-ppt.png'); }
+.xls, .xlsx, .xlsm, .xlt, .xltx, .xltm { background-image: url('static/img/document-xls.png'); }
+.missing    { background-image: url('static/img/document-missing.png'); }
+
+.required{font-weight: bold; font-size: 12px; color: #A00;}
+.required:after{content: ')';}
+.required:before{content: '(';}
+.optional{font-weight: bold; font-size: 12px; color: #aaa;}
+.optional:after{content: ')';}
+.optional:before{content: '(';}
+#footer{margin-top: 20px;}
+ul,ol{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+ul.none{padding: 0; margin: 0; list-style-type: none;}
+
+.blue tr:nth-child(even) td, .blue tr.even td {background:#e5ecf9;}
