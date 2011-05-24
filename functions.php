@@ -34,10 +34,14 @@ $SCRIPTS = array(
 	"<script src='".ADMISSIONS_JS_URL."/jquery-ui.js' type='text/javascript' ></script>",
 	"<script src='".ADMISSIONS_JS_URL."/jquery-browser.js' type='text/javascript' ></script>",
 	"<script src='".ADMISSIONS_JS_URL."/jquery-uniform.js' type='text/javascript' ></script>",
+	"<script src='".ADMISSIONS_JS_URL."/jquery-tools.js' type='text/javascript'></script>",
+	"<script src='".ADMISSIONS_JS_URL."/jquery-carousel.js' type='text/javascript'></script>",
+	"<script src='".ADMISSIONS_JS_URL."/shadowbox/shadowbox.js' type='text/javascript'></script>",
 	"<script src='http://events.ucf.edu/tools/script.js' type='text/javascript'></script>",
 	"<script type='text/javascript'>
 		var ADMISSIONS_MISC_URL = '".ADMISSIONS_MISC_URL."';
-		var GA_ACCOUNT       = 'UA-7506281-3';
+		var ADMISSIONS_JS_URL   = '".ADMISSIONS_JS_URL."';
+		var GA_ACCOUNT          = 'UA-7506281-3';
 	</script>",
 	"<script src='".ADMISSIONS_JS_URL."/script.js' type='text/javascript'></script>",
 );
@@ -78,7 +82,11 @@ function admissions_template_redirect(){
 	global $post;
 	$type  = $post->post_type;
 	$title = get_the_title();
-	switch($type){}
+	switch($title){
+		case 'Home':
+			include('templates/home.php');
+			die();
+	}
 }
 add_filter('template_redirect', 'admissions_template_redirect');
 

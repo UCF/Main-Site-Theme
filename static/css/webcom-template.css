@@ -1,143 +1,99 @@
-@charset "UTF-8";
-
-/*  UCF Web Communications, Summer 2010*/
-
-html, body{padding:0; margin:0}
-html{background:url("../img/gradient.png") repeat-x top left #fff}
-a img{border:0}
-.end {clear:both; display: block; height: 0;}
-
-.uppercase{text-transform:uppercase}
-
-.navigation_end{margin-bottom:-10px; clear:both}
-#navigation{margin:25px auto 0 auto; position:relative; left:5px; font-family:Georgia,serif; font-size:95%; width:802px; padding:0; list-style-type:none}
-#navigation li{float:left; margin:0 0 0 11px; padding:0 0 0 13px; background-image:url(img/bullet.png); background-position:center left; background-repeat:no-repeat}
-#navigation li.first{margin-left:0; padding-left:0; background-image:none}
-
-#navigation li a{color:#262626; text-decoration:none}
-#navigation li a:hover{color:#959491}
-
-#main_body a{color:#600; text-decoration:none; border-bottom:#CCC}
-#main_body a:hover{color:#e50606; text-decoration:none; border-bottom:#e50606}
-
-#footer{clear:both; text-align:center; font-family:Helvetica, Arial, sans-serif; border-top: 1px dotted black;}
-#footer a#ucf-logo{display:block; height:109px; width:278px; text-indent:-9000px; background:url(../img/sfo-stacked.jpg) no-repeat;}
-#footer .text{text-align: right; font-size: 14px;}
-
+@charset "UTF-8"; /*  UCF Web Communications, Summer 2010*/
 
 /******************************************************************************\
     General Styles
 \******************************************************************************/
-body { font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size:16px; text-align:left; }
-#wrap { width:950px; padding:24px 0 32px; margin:0 auto; }
-abbr {border:1px dash black; outline:0; }
-a { color:#990000; }
-a:hover { cursor:pointer; color:#C30202; }
-.inline { display:inline; }
-.borderless { border:0; }
-.hidden { display:none; }
-.orange { color:#ff7700; }
+html, body {padding: 0; margin: 0}
+html {background: url("../img/gradient.png") repeat-x top left #fff}
+a img {border: 0;}
+body {font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 16px; text-align: left;}
+#wrap {width: 950px; padding: 24px 0 32px; margin: 0 auto;}
+abbr {border: 1px dash black; outline: 0;}
+a {color: #990000;}
+a: hover {cursor: pointer; color: #C30202;}
+.inline {display: inline;}
+.borderless {border: 0;}
+.hidden {display: none;}
+.orange {color: #ff7700;}
+.end {clear: both; display: block; height: 0;}
+.uppercase {text-transform: uppercase}
 
 
-h1 { font-family:georgia, serif; font-size:2em; }
-h1 a {text-decoration:none; color:black; }
-h1 a:hover {color:black; }
-h2, h3, h4, h5{font-family: "Helvetica Neue", "Helvetica", "Arial Black", arial, sans-serif; color: #000; font-weight: bold;}
-h2 {font-size:1.6em; margin:0; padding:0 0 1em 0; }
-h3 {letter-spacing:.5px; font-size:1.15em; padding:.5em 0; margin:0; }
-h4 {font-size:1em; padding:.5em 0; margin:0;}
+h1 {font-family: georgia, serif; font-size: 2em;}
+h1 a {text-decoration: none; color: black;}
+h1 a:hover {color: black;}
+h2, h3, h4, h5 {font-family: "Helvetica Neue", "Helvetica", "Arial Black", arial, sans-serif; color: #000; font-weight: bold;}
+h2 {font-size: 1.6em; margin: 0; padding: 0 0 1em 0;}
+h3 {letter-spacing: .5px; font-size: 1.15em; padding: .5em 0; margin: 0;}
+h4 {font-size: 1em; padding: .5em 0; margin: 0;}
 
 
-ul, ol { font-family:georgia; }
-li { line-height:120%; padding-bottom:1em; } 
-ul.checkboxes { margin-top:0; padding-top:0; padding-left:0px; }
-ul.checkboxes li {list-style:none; display:block; clear:both; padding:5px 0;  }
-p { padding-bottom:1em; margin-bottom:0; line-height:150%; }
-address { padding-left:2em; font-style:normal; font-family:georgia; }
-address a { color:black; text-decoration:none; border-bottom:1px dotted black; }
+ul, ol {font-family: georgia;}
+li {line-height: 120%; padding-bottom: 1em;} 
+ul.checkboxes {margin-top: 0; padding-top: 0; padding-left: 0px;}
+ul.checkboxes li {list-style: none; display: block; clear: both; padding: 5px 0;}
+p {padding-bottom: 1em; margin-bottom: 0; line-height: 150%;}
+address {padding-left: 2em; font-style: normal; font-family: georgia;}
+address a {color: black; text-decoration: none; border-bottom: 1px dotted black;}
 
-.ribbon a[target="blank"], .ribbon a[target="_blank"] { background-position: right -100px; } 
-a[href^="tel"] { color:black; text-decoration:none; }
-a[href^="tel"]:hover { cursor:default; }
+.ribbon a[target="blank"], .ribbon a[target="_blank"] {background-position: right -100px;} 
+a[href^="tel"] {color: black; text-decoration: none;}
+a[href^="tel"]: hover {cursor: default;}
 
 
-.indent { padding-left:2em; }
-.indent ul { padding-left:1em; font-family:georgia; }
-.upfont { font-size:123%; }
+.indent {padding-left: 2em;}
+.indent ul {padding-left: 1em; font-family: georgia;}
+.upfont {font-size: 123%;}
 
-.plain{font-family: "Georgia"; list-style-type: none; padding: 0; margin: 0;}
+.plain {font-family: "Georgia"; list-style-type: none; padding: 0; margin: 0;}
 .plain li {}
 
-.pdf-link a{height: 17px; padding-left: 20px; background-image: url(img/pdficon_small.gif); background-repeat: no-repeat; background-position: middle left;}
-.pdf-link a.loading{background-image: url(img/spinner.gif);}
+.pdf-link a {height: 17px; padding-left: 20px; background-image: url(img/pdficon_small.gif); background-repeat: no-repeat; background-position: middle left;}
+.pdf-link a.loading {background-image: url(img/spinner.gif);}
 
 /******************************************************************************\
     sans serif content
 \******************************************************************************/
-.sans { font-size:.9em; font-family:helvetica, sans-serif; padding:0 0 1em 1em; }
-.sans p { font-family:helvetica, sans-serif; padding-bottom:.5em; }
-.sans h3 { font-family:helvetica, sans-serif; font-weight:bold; }
-.sans h4 { font-family:helvetica, sans-serif; font-size:1em; padding-bottom:0;}
-figure img { -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;  }
-.ie figure img { border:1px solid #CCC; }
-figure { padding:.5em 0 1.5em;}
+.sans {font-size: .9em; font-family: helvetica, sans-serif; padding: 0 0 1em 1em;}
+.sans p {font-family: helvetica, sans-serif; padding-bottom: .5em;}
+.sans h3 {font-family: helvetica, sans-serif; font-weight: bold;}
+.sans h4 {font-family: helvetica, sans-serif; font-size: 1em; padding-bottom: 0;}
+figure img {-webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;}
+.ie figure img {border: 1px solid #CCC;}
+figure {padding: .5em 0 1.5em;}
 
 /******************************************************************************\
     Block Styles
 \******************************************************************************/
 
 /* html5 elements */
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
 
-
-/******************************************************************************\
-    Layout
-\******************************************************************************/
-#header { border-bottom:1px dotted black; margin-bottom:1em;}
-#header h1{ margin-bottom: 0; padding-bottom: 10px; font-size: 37px;}
-.menu ul { list-style:none; margin:0; color:#6d6e71; padding:.28em 0 0 0; font-size: 14px;}
-.menu ul li{ display:inline-block; margin-right:3px; padding: 17px 0 0 0;}
-.msie .menu ul li{display: block; float: left; margin-right: 6px;}
-.menu ul li:after { content:"\2022"; margin-left:1px; }
-.menu ul li.last:after{ content:""; margin-left:0; }
-.menu ul li a { font-family: Georgia, Times, serif; margin-right:5px; color:#333; font-size:16px; text-decoration: none; font-weight: normal; }
-.menu ul li a:hover {  color:#ed1c24;  text-decoration: underline; }
-
-.pad-l { padding-left:1em; }
-.pad-r { padding-right:1em; }
-
-#left-col .menu{list-style-type: none; padding: 0; margin: 0;}
-#left-col .menu li{}
-#left-col .menu li a{color: #000; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-size: 14px; text-decoration: none;}
-
-#footer { width: 100%; margin:0; text-align:left; padding: 10px 0;}
-#footer .menu ul li a {font-family: Helvetica, Arial, sans-serif; font-size: 13px;}
-#footer .menu ul li {padding-top: 0;}
-#footer .menu ul{margin-bottom: 10px;}
+.pad-l {padding-left: 1em;}
+.pad-r {padding-right: 1em;}
 
 
 /******************************************************************************\
     Blueprint Fixes / UI tweaks
 \******************************************************************************/
-.ui-dialog .ui-dialog-buttonpane button { padding:0; }
-.ui-state-error { background-image:url(img/ui-bg-red-diagonals.png); }
-.ui-state-highlight { border-color:#004276; color:#001D39; background:#F4FAFF; }
-.ui-state-success { background:#F0FFE3; border:1px solid #97D369; color:#142305; }
-.ui-state-success .ui-icon { background-image:url(img/ui-icons.png); }
-.ui-widget p { margin:0; padding:1em; }
-.ui-icon { margin-top:2px; float:left; margin-right:.3em; }
-.success .ui-icon {background-image:url(img/ui-icons.png); }
-.highlight { border:1px solid #004276; color:#001D39; background:#F4FAFF; display:block; padding:.2em; margin:.2em 0; }
-#UCFHBHeader select { margin:0; padding:0; }
-#UCFHBHeader input.text { margin:0; padding:0; }
-a.ui-button .ui-button-text { line-height:1.3; }
-input[value=Next] { margin-top:1em; }
+.ui-dialog .ui-dialog-buttonpane button {padding: 0;}
+.ui-state-error {background-image: url(img/ui-bg-red-diagonals.png);}
+.ui-state-highlight {border-color: #004276; color: #001D39; background: #F4FAFF;}
+.ui-state-success {background: #F0FFE3; border: 1px solid #97D369; color: #142305;}
+.ui-state-success .ui-icon {background-image: url(img/ui-icons.png);}
+.ui-widget p {margin: 0; padding: 1em;}
+.ui-icon {margin-top: 2px; float: left; margin-right: .3em;}
+.success .ui-icon {background-image: url(img/ui-icons.png);}
+.highlight {border: 1px solid #004276; color: #001D39; background: #F4FAFF; display: block; padding: .2em; margin: .2em 0;}
+#UCFHBHeader select {margin: 0; padding: 0;}
+#UCFHBHeader input.text {margin: 0; padding: 0;}
+a.ui-button .ui-button-text {line-height: 1.3;}
+input[value=Next] {margin-top: 1em;}
 
 
 /******************************************************************************\
     IE fixes
 \******************************************************************************/
-.ie7 #header h1 { padding-bottom:3px; }
-.ie7 a.ui-button {vertical-align:bottom; padding-bottom:3px; margin-bottom:2px; }
-.ie7 td input.button { top:auto; }
-.ie7 .QAPanel { zoom:1;  }
+.ie7 a.ui-button {vertical-align: bottom; padding-bottom: 3px; margin-bottom: 2px;}
+.ie7 td input.button {top: auto;}
+.ie7 .QAPanel {zoom: 1;}

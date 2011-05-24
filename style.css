@@ -4,40 +4,107 @@ Author: UCF Web Communications
 Template: thematic
 Version: 1.0
 Tags: Thematic
-.
 */
 
 /*/ Global Styles /*/
-#header h1 a{font-size: 37px; font-family: "Georgia", "serif"; color: #313130;}
-.firefox #header h1{position: relative; top: 3px;}
-.ie7 #header h1{position: relative; top: 3px;}
-.ie7 #header #menu{padding-bottom: 1em;}
-.ie8 #header h1{position: relative; top: 3px;}
-.ie8 #header #menu{}
-body{color: #333333;}
-a{color: #333; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-h2, h3, h4{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; color: #333;}
+html {background: #000;}
+body {font-family: "Trebuchet MS", sans-serif; font-size: 90%; text-align: left; line-height: 17px; background: url("static/img/gradient.png") repeat-x top left #fff;}
+#wrap {width: 950px; padding: 24px 0 32px; margin: 0 auto;}
+abbr {border: 1px dash black; outline: 0;}
+a {color: #990000;}
+a:hover {cursor: pointer; color: #C30202;}
+h1 {font-family: georgia, serif; font-size: 2em;}
+h1 a {text-decoration: none; color: black;}
+h1 a:hover {color: black;}
+h2 {color: #f3c00b; font-family: "Arial Black", arial, sans-serif; font-size: 1.6em; margin: 0; padding: 0 0 .5em 0;}
+h3 {letter-spacing: .5px; font-size: 1.15em; font-family: "Arial Black", arial, sans-serif; padding: .5em 0; margin: 0;}
+h4 {font-weight: bold; font-size: 1em; padding: .5em 0; margin: 0; font-family: georgia;}
+
+.ribbon {background: url("static/img/white-triangle.png") no-repeat scroll left center #CC9900; color: white; font-size: 1em; font-weight: bold; height: 40px; line-height: 40px; margin-bottom: 1.5em; padding: 0; padding-left: 45px;}
+.ribbon a {color: white; text-decoration: none; border-bottom: 1px dotted;}
+.ribbon a:hover {border-bottom: 1px solid;}
+
+ul, ol {font-family: georgia;}
+li {line-height: 120%; padding-bottom: 1em;} 
+ul.checkboxes {margin-top: 0; padding-top: 0; padding-left: 0px;}
+ul.checkboxes li {list-style: none; display: block; clear: both; padding: 5px 0;}
+p {font-family: georgia; padding-bottom: 1em; margin-bottom: 0; line-height: 150%;}
+address {padding-left: 2em; font-style: normal; font-family: georgia;}
+address a {color: black; text-decoration: none; border-bottom: 1px dotted black;}
+a[href^="tel"] {color: black; text-decoration: none;}
+a[href^="tel"]: hover {cursor: default;}
+
+.inline {display: inline;}
+.borderless {border: 0;}
+.hidden {display: none;}
+.orange {color: #ff7700;}
+
 .slideshow {position: relative;}
-.slideshow img { position:absolute; top:0; left:0; z-index:8; opacity:0.0; }
-.slideshow img.active { z-index:10; opacity:1.0; }
-.slideshow img.last-active { z-index:9; }
+.slideshow img {position: absolute; top: 0; left: 0; z-index: 8; opacity: 0.0;}
+.slideshow img.active {z-index: 10; opacity: 1.0;}
+.slideshow img.last-active {z-index: 9;}
 
-.document {background: transparent url('static/img/document.png') no-repeat center left; overflow:hidden; padding: 5px 5px 5px 25px;}
-.document a { text-decoration: underline; color: #333;}
-.pdf        { background-image: url('static/img/document-pdf.png'); }
-.doc, .docx, .docm { background-image: url('static/img/document-doc.png'); }
-.ppt, .pptx, .pptm { background-image: url('static/img/document-ppt.png'); }
-.xls, .xlsx, .xlsm, .xlt, .xltx, .xltm { background-image: url('static/img/document-xls.png'); }
-.missing    { background-image: url('static/img/document-missing.png'); }
+.document {background: transparent url('static/img/document.png') no-repeat center left; overflow: hidden; padding: 5px 5px 5px 25px;}
+.document a {text-decoration: underline; color: #333;}
+.pdf {background-image: url('static/img/document-pdf.png');}
+.doc, .docx, .docm {background-image: url('static/img/document-doc.png');}
+.ppt, .pptx, .pptm {background-image: url('static/img/document-ppt.png');}
+.xls, .xlsx, .xlsm, .xlt, .xltx, .xltm {background-image: url('static/img/document-xls.png');}
+.missing {background-image: url('static/img/document-missing.png');}
 
-.required{font-weight: bold; font-size: 12px; color: #A00;}
-.required:after{content: ')';}
-.required:before{content: '(';}
-.optional{font-weight: bold; font-size: 12px; color: #aaa;}
-.optional:after{content: ')';}
-.optional:before{content: '(';}
-#footer{margin-top: 20px;}
-ul,ol{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-ul.none{padding: 0; margin: 0; list-style-type: none;}
+.required {font-weight: bold; font-size: 12px; color: #A00;}
+.required: after {content: ')';}
+.required: before {content: '(';}
+.optional {font-weight: bold; font-size: 12px; color: #aaa;}
+.optional: after {content: ')';}
+.optional: before {content: '(';}
+ul,ol {font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+ul.none {padding: 0; margin: 0; list-style-type: none;}
 
-.blue tr:nth-child(even) td, .blue tr.even td {background:#e5ecf9;}
+.blue tr: nth-child(even) td, .blue tr.even td {background: #e5ecf9;}
+
+
+/*/ Header Styles /*/
+#header h1 a {font-size: 29px; font-family: "Georgia", "serif"; color: #313130;}
+.firefox #header h1 {position: relative; top: 3px;}
+.ie7 #header h1 {position: relative; top: 3px;}
+.ie7 #header #menu {padding-bottom: 1em;}
+.ie8 #header h1 {position: relative; top: 3px;}
+.ie8 #header #menu {}
+
+#header {border-bottom: 1px dotted black; margin-bottom: 1em;}
+#header h1 {margin-bottom: 0; padding-bottom: 10px; font-size: 37px;}
+#header ul {list-style: none; margin: 0; color: #6d6e71; padding: .28em 0 0 0; font-size: 14px;}
+#header ul li {display: inline-block; margin-right: 3px; padding: 17px 0 0 0;}
+.msie #header ul li {display: block; float: left; margin-right: 6px;}
+#header ul li:after {content: "\2022"; margin-left: 1px;}
+#header ul li.last:after {content: ""; margin-left: 0;}
+#header ul li a {font-family: Georgia, Times, serif; margin-right: 5px; color: #333; font-size: 16px; text-decoration: none; font-weight: normal;}
+#header ul li a:hover {color: #ed1c24; text-decoration: underline;}
+
+/*/ Footer Styles /*/
+#footer {margin-top: 20px; letter-spacing:1px; text-align: center; font-family: "Arial", "Helvetica", "sans-serif"; padding-top: 30px;}
+#footer {width: 100%; background: black; margin: 0; text-align: left; color: white; padding: 1.5em 0; font-size: 80%;}
+#footer h2 {font-size: 1.2em; margin: 0; padding: 0; color: #ffcc00;}
+#footer h2 a {color: #ffcc00;}
+#footer h2 a: hover {color: #C30202;}
+#footer h3 {color: white; font-size: 1em; font-weight: bold; margin: 0; padding: .2em 0 0 0;}
+#footer a {color: white;}
+#footer a: hover {color: #C30202;}
+#footer a[href^="tel"]: hover {color: white;}
+#footer a[target="blank"] {background-position: right -100px;}
+#footer a[target="blank"]: hover {background-position: right -50px;}
+#footer dl, #footer dt, #footer dd, #footer ul, #footer ul li {margin: 0; padding: 0; color: white;}
+#footer dt {color: #ff6d02; font-style: italic; font-weight: normal; padding-top: .5em;}
+#footer ul {margin: 0; padding: 0; font-family: arial, sans-serif;}
+#footer ul a {color: white; text-decoration: none;}
+#footer ul a:before {content: "» ";}
+#footer ul a:visited {color: white;}
+#footer ul a:hover {color: white; cursor: pointer; color: #C30202;}
+#footer ul li {margin: 0; padding: 0; display: block;}
+#footer ul li.hr {display: block; border-bottom: 1px dotted white; overflow: hidden; background: black; padding-bottom: 5px; margin-bottom: 5px;}
+#footer dl {margin: 0; padding: 0; color: white;}
+#footer .wrap {width: 950px; margin: 0 auto; background: black;}
+
+/*/ Home Styles /*/
+#home .slideshow{margin-bottom: 25px;}

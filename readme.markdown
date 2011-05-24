@@ -8,7 +8,13 @@ Rewrite of admissions theme created for wordpress.
 
 ## Custom Post Types
 
-* None
+* Publications - title, thumbnails, order
+* Videos - title, thumbnails, order
+* Downloads - title, thumbnail, order
+* FAQs - title, editor, categories
+* Profiles - name, title, photo, email, phone number
+* Video Spotlights
+* Spotlights (Features)
 
 ## Short Codes
 

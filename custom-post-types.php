@@ -139,6 +139,126 @@ abstract class CustomPostType{
 }
 
 
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'custom_post_type',
+		$plural_name    = 'Custom Posts',
+		$singular_name  = 'Custom Post',
+		$add_new_item   = 'Add New Custom Post',
+		$edit_item      = 'Edit Custom Post',
+		$new_item       = 'New Custom Post',
+		$public         = True,
+		$use_categories = False,
+		$use_thumbnails = False,
+		$use_editor     = False,
+		$use_order      = False,
+		$use_title      = False,
+		$use_metabox    = False;
+}
+
+
 /*/-------------------------------------
 Register custom post types and functions for display
 -------------------------------------/*/
@@ -165,9 +285,6 @@ function admissions_post_types(){
 	
 	#This ensures that the permalinks for custom posts work
 	flush_rewrite_rules();
-	
-	#Override default page post type to use categories
-	register_taxonomy_for_object_type('category', 'page');
 }
 add_action('init', 'admissions_post_types');
 

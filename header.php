@@ -44,12 +44,18 @@
 ?>
 	<div id="wrap">
 		<div id="header" class="span-24 last">
-			<h1 class="span-9"><a href="<?php bloginfo('url')?>">Undergraduate Admissions</a></h1>
-			<div class="span-15 last" id="menu">
+			<h1 class="span-10"><a href="<?php bloginfo('url')?>">Undergraduate Admissions</a></h1>
+			<div class="span-14 last" id="menu">
 				<?=preg_replace(
 					'/<li[^>]*>([^<]*<[^>]+>[^<]+<[^>]+>)<\/li>[\s]*<\/ul>/',
 					'<li class="last">$1</ul>',
-					wp_nav_menu(array('container_class' => 'menu', 'echo' => False,))
+					wp_nav_menu(
+						array(
+							'menu' => 'Navigation',
+							'container_class' => 'menu',
+							'echo' => False,
+						)
+					)
 				)?>
 				<div class="end"><!-- --></div>
 			</div>
