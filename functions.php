@@ -41,7 +41,7 @@ $SCRIPTS = array(
 	"<script type='text/javascript'>
 		var ADMISSIONS_MISC_URL = '".ADMISSIONS_MISC_URL."';
 		var ADMISSIONS_JS_URL   = '".ADMISSIONS_JS_URL."';
-		var GA_ACCOUNT          = 'UA-7506281-3';
+		var GA_ACCOUNT          = 'UA-555555-5';
 	</script>",
 	"<script src='".ADMISSIONS_JS_URL."/script.js' type='text/javascript'></script>",
 );
@@ -171,23 +171,6 @@ function get_custom_post_type($class){
 		}
 	}
 	return null;
-}
-
-
-/**
- * Returns pages associated with the menu defined by $c;
- *
- * @return array
- * @author Jared Lang
- **/
-function get_menu_pages($c){
-	return get_posts(array(
-		'numberposts' => -1,
-		'orderby'     => 'menu_order',
-		'order'       => 'ASC',
-		'post_type'   => 'page',
-		'category'    => get_category_by_slug($c)->term_id,
-	));
 }
 
 function disallow_direct_load($page){

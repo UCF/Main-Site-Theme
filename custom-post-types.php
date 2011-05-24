@@ -139,131 +139,30 @@ abstract class CustomPostType{
 }
 
 
-class Video extends CustomPostType{
+class Example extends CustomPostType{
 	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
+		$name           = 'example',
+		$plural_name    = 'Examples',
+		$singular_name  = 'Example',
+		$add_new_item   = 'Add New Example',
+		$edit_item      = 'Edit Example',
+		$new_item       = 'New Example',
 		$public         = True,
 		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
+		$use_thumbnails = True,
+		$use_editor     = True,
+		$use_order      = True,
+		$use_title      = True,
 		$use_metabox    = False;
 }
-
-class Video extends CustomPostType{
-	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
-}
-
-class Video extends CustomPostType{
-	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
-}
-
-class Video extends CustomPostType{
-	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
-}
-
-class Video extends CustomPostType{
-	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
-}
-
-class Video extends CustomPostType{
-	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
-}
-
-class Video extends CustomPostType{
-	public 
-		$name           = 'custom_post_type',
-		$plural_name    = 'Custom Posts',
-		$singular_name  = 'Custom Post',
-		$add_new_item   = 'Add New Custom Post',
-		$edit_item      = 'Edit Custom Post',
-		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
-}
-
 
 /*/-------------------------------------
 Register custom post types and functions for display
 -------------------------------------/*/
 function installed_custom_post_types(){
-	$installed = array();
+	$installed = array(
+		'Example',
+	);
 	
 	return array_map(create_function('$class', '
 		return new $class;

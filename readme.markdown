@@ -1,6 +1,6 @@
-# Wordpress Theme for Admissions at UCF
+# Base Wordpress Theme for UCF Marketing
 
-Rewrite of admissions theme created for wordpress.
+Description
 
 ## Notes
 
@@ -8,13 +8,7 @@ Rewrite of admissions theme created for wordpress.
 
 ## Custom Post Types
 
-* Publications - title, thumbnails, order
-* Videos - title, thumbnails, order
-* Downloads - title, thumbnail, order
-* FAQs - title, editor, categories
-* Profiles - name, title, photo, email, phone number
-* Video Spotlights
-* Spotlights (Features)
+* None
 
 ## Short Codes
 
