@@ -1,0 +1,48 @@
+html{background: url("../img/gradient.png") repeat-x top left #fff;}
+body{color: #222;}
+
+/**
+ * Element styles (No font-family)
+ **/
+a{text-decoration: underline; color: #313130;}
+h1{font-size: 28px; margin: 0 0 .5em 0;}
+h1 a{text-decoration: none; color: #313130;}
+h2{margin: 0 0 .5em 0; font-size: 22px; color: #E3B00B;}
+h3{margin: 0 0 .5em 0; font-size: 17px; font-weight: bold; color: #000;}
+h4{margin: 0 0 .5em 0; font-size: 14px; font-weight: bold; color: #000;}
+p{line-height: 1.5em; font-size: 16px; margin: 0 0 1em 0;}
+ol,
+ul{padding-left: 2em; margin: 0 0 1em 0; font-size: 14px;}
+li{margin: 0 0 .75em 0;}
+ul li{list-style: disc;}
+ul li ul li{list-style: circle; margin: .75em 0 0 0;}
+ol li{list-style: decimal;}
+ol li ol li{list-style: lower-roman; margin: .75em 0 0 0;}
+ol li ol li ol li{list-style: lower-alpha;}
+
+/**
+ * Font declarations 
+ **/
+h2,
+.sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+h1, h4, p, ul, ol,
+.sans-serif{font-family: "Georgia", "serif";}
+h3,
+.sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
+
+/**
+ * Generic Classes
+ **/
+.normal{font-weight: normal;}
+.heavy{font-weight: bold;}
+.upfont{font-size: 135%;}
+.downfont{font-size: 85%; line-height: 1.75em;}
+.clear-left{clear: left;}
+.clear-right{clear: right;}
+.clear{clear: both;}
+
+
+/**
+ * Location specific styles
+ **/
+#header h1{margin: 0;}

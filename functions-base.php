@@ -1,5 +1,14 @@
 <?php
 
+function __init__(){
+	add_theme_support('menus');
+	add_theme_support('thumbnails');
+	register_nav_menus(array(
+		'header-menu' => __('Header Menu'),
+		'footer-menu' => __('Footer Menu'),
+	));
+}
+add_action('init', '__init__');
 
 function create_html_element($tag, $attr=array(), $content=null, $self_close=True){
 	$attr_str = create_attribute_string($attr);
@@ -50,7 +59,7 @@ function header_meta(){
 	
 	foreach($metas as $meta){
 		$meta        = array_merge($defaults, $meta);
-		$meta_html[] = create_html_element('meta', $meta, null, False);
+		$meta_html[] = create_html_element('meta', $meta);
 	}
 	$meta_html = implode("\n", $meta_html);
 	return $meta_html;
@@ -245,13 +254,16 @@ class Config{
 	}
 	
 	static function add_css($attr){
-		if (isset(!$attr['name']) or !isset($attr['src'])){
+		if (!isset($attr['name']) or !isset($attr['src'])){
 			throw new ArgumentException('add_css expects argument array to contain keys "name" and "src"');
 		}
-		$default = array('media' => 'all',);
+		$default = array('media' => 'all', 'admin' => False,);
 		$attr    = array_merge($default, $attr);
-		wp_deregister_script($attr['name']);
-		wp_enqueue_script($attr['name'], $attr['src'], null, null, $attr['media']);
+		
+		if ($attr['admin'] or !is_admin()){
+			wp_deregister_style($attr['name']);
+			wp_enqueue_style($attr['name'], $attr['src'], null, null, $attr['media']);
+		}
 	}
 	
 	static function add_meta($attr){
@@ -262,12 +274,18 @@ class Config{
 	}
 	
 	static function add_script($attr){
-		if (isset(!$attr['name']) or !isset($attr['src'])){
+		if (!isset($attr['name']) or !isset($attr['src'])){
 			throw new ArgumentException('add_script expects argument array to contain keys "name" and "src"');
 		}
-		# Override previously defined scripts
-		wp_deregister_script($attr['name']);
-		wp_enqueue_script($attr['name'], $attr['src'], null, null, True);
+		$default = array('admin' => False,);
+		$attr    = array_merge($default, $attr);
+		
+		
+		if ($attr['admin'] or !is_admin()){
+			# Override previously defined scripts
+			wp_deregister_script($attr['name']);
+			wp_enqueue_script($attr['name'], $attr['src'], null, null, True);
+		}
 	}
 }
 

@@ -15,14 +15,78 @@ require_once('custom-post-types.php');
 require_once('shortcodes.php');
 
 
-Config::add_css(array('name' => 'university-bar', 'src' => 'http://universityheader.ucf.edu/bar/css/bar.css',));
-Config::add_css(array('name' => 'jquery-ui', 'src' => THEME_CSS_URL.'/jquery-ui.css',));
-Config::add_css(array('name' => 'jquery-uniform', 'src' => THEME_CSS_URL.'/jquery-uniform.css',));
-Config::add_css(array('name' => 'blueprint-screen', 'src' => THEME_CSS_URL.'/blueprint-screen.css',));
-Config::add_css(array('name' => 'blueprint-print', 'src' => THEME_CSS_URL.'/blueprint-print.css',));
-Config::add_css(array('name' => 'theme', 'href' => get_bloginfo('stylesheet_url'),));
+# Configure meta
 
-Config::add_script(array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.6.1.min.js',));
-Config::add_script(array('name' => 'jquery-ui', 'src' => THEME_JS_URL.'/jquery-ui.js',));
-Config::add_script(array('name' => 'jquery-browser', 'src' => THEME_JS_URL.'/jquery-browser.js',));
-Config::add_script(array('name' => 'jquery-uniform', 'src' => THEME_JS_URL.'/jquery-uniform.js',));
+#if (!is_admin()){
+	Config::add_meta(array(
+		'charset' => 'utf-8',
+	));
+
+	Config::add_css(array(
+		'name'  => 'university-bar',
+		'media' => 'all',
+		'src'   => 'http://universityheader.ucf.edu/bar/css/bar.css',
+	));
+	Config::add_css(array(
+		'name'  => 'jquery-ui',
+		'media' => 'screen,projection',
+		'src'   => THEME_CSS_URL.'/jquery-ui.css',
+	));
+	Config::add_css(array(
+		'name'  => 'jquery-uniform',
+		'media' => 'screen,projection',
+		'src'   => THEME_CSS_URL.'/jquery-uniform.css',
+	));
+	Config::add_css(array(
+		'name'  => 'blueprint-screen',
+		'media' => 'screen,projection',
+		'src'   => THEME_CSS_URL.'/blueprint-screen.css',
+	));
+	Config::add_css(array(
+		'name'  => 'blueprint-print',
+		'media' => 'print',
+		'src'   => THEME_CSS_URL.'/blueprint-print.css',
+	));
+	Config::add_css(array(
+		'name'  => 'yahoo-reset',
+		'media' => 'all',
+		'src'   => THEME_CSS_URL.'/yahoo-reset.css',
+	));
+	Config::add_css(array(
+		'name'  => 'yahoo-fonts',
+		'media' => 'all',
+		'src'   => THEME_CSS_URL.'/yahoo-fonts.css',
+	));
+	Config::add_css(array(
+		'name'  => 'webcom-base',
+		'media' => 'all',
+		'src'   => THEME_CSS_URL.'/webcom-base.css',
+	));
+	Config::add_css(array(
+		'name'  => 'theme',
+		'media' => 'all',
+		'src'   => get_bloginfo('stylesheet_url'),
+	));
+
+
+	Config::add_script(array(
+		'name' => 'university-header',
+		'src'  => 'http://universityheader.ucf.edu/bar/js/university-header.js',
+	));
+	Config::add_script(array(
+		'name' => 'jquery',
+		'src'  => 'http://code.jquery.com/jquery-1.6.1.min.js',
+	));
+	Config::add_script(array(
+		'name' => 'jquery-ui',
+		'src'  => THEME_JS_URL.'/jquery-ui.js',
+	));
+	Config::add_script(array(
+		'name' => 'jquery-browser',
+		'src'  => THEME_JS_URL.'/jquery-browser.js',
+	));
+	Config::add_script(array(
+		'name' => 'jquery-uniform',
+		'src'  => THEME_JS_URL.'/jquery-uniform.js',
+	));
+#}
