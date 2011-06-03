@@ -114,7 +114,7 @@ abstract class CustomPostType{
 			add_meta_box(
 				$metabox['id'],
 				$metabox['title'],
-				'admissions_show_meta_boxes',
+				'show_meta_boxes',
 				$metabox['page'],
 				$metabox['context'],
 				$metabox['priority']
@@ -176,7 +176,7 @@ function installed_custom_post_types(){
  * @return void
  * @author Jared Lang
  **/
-function admissions_post_types(){
+function register_custom_post_types(){
 	#Register custom post types
 	foreach(installed_custom_post_types() as $custom_post_type){
 		$custom_post_type->register();
@@ -185,7 +185,7 @@ function admissions_post_types(){
 	#This ensures that the permalinks for custom posts work
 	flush_rewrite_rules();
 }
-add_action('init', 'admissions_post_types');
+add_action('init', 'register_custom_post_types');
 
 
 /**
@@ -194,13 +194,13 @@ add_action('init', 'admissions_post_types');
  * @return void
  * @author Jared Lang
  **/
-function admissions_meta_boxes(){
+function register_meta_boxes(){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
 		$custom_post_type->register_metaboxes();
 	}
 }
-add_action('do_meta_boxes', 'admissions_meta_boxes');
+add_action('do_meta_boxes', 'register_meta_boxes');
 
 
 /**
@@ -209,7 +209,7 @@ add_action('do_meta_boxes', 'admissions_meta_boxes');
  * @return void
  * @author Jared Lang
  **/
-function admissions_save_meta_data($post){
+function save_meta_data($post){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
 		if (get_post_type($post) == $custom_post_type->options('name')){
@@ -221,7 +221,7 @@ function admissions_save_meta_data($post){
 	return _save_meta_data($post, $meta_box);
 	
 }
-add_action('save_post', 'admissions_save_meta_data');
+add_action('save_post', 'save_meta_data');
 
 
 /**
@@ -230,7 +230,7 @@ add_action('save_post', 'admissions_save_meta_data');
  * @return void
  * @author Jared Lang
  **/
-function admissions_show_meta_boxes($post){
+function show_meta_boxes($post){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
 		if (get_post_type($post) == $custom_post_type->options('name')){
@@ -272,32 +272,6 @@ function save_file($post_id, $field){
 	}
 }
 
-function save_members($post_id, $field){
-	$new_members = $_POST[$field['id']];
-	$members     = array();
-	if (count($new_members)){
-		foreach($new_members as $id){
-			if(isset($_POST[$field['id'].'_'.$id.'_role'])){
-				$members[$id] =  $_POST[$field['id'].'_'.$id.'_role'];
-			}else{
-				$members[$id] = null;
-			}
-		}
-		update_post_meta($post_id, $field['id'], $members);
-	}
-}
-
-function save_simple_members($post_id, $field){
-	$new_members = $_POST[$field['id']];
-	$members     = array();
-	if (count($new_members)){
-		foreach($new_members as $id){
-			$members[] = $id;
-		}
-	}
-	update_post_meta($post_id, $field['id'], $members);
-}
-
 function save_default($post_id, $field){
 	$old = get_post_meta($post_id, $field['id'], true);
 	$new = $_POST[$field['id']];
@@ -316,7 +290,7 @@ function save_default($post_id, $field){
  **/
 function _save_meta_data($post_id, $meta_box){
 	// verify nonce
-	if (!wp_verify_nonce($_POST['admissions_meta_box_nonce'], basename(__FILE__))) {
+	if (!wp_verify_nonce($_POST['meta_box_nonce'], basename(__FILE__))) {
 		return $post_id;
 	}
 
@@ -339,12 +313,6 @@ function _save_meta_data($post_id, $meta_box){
 			case 'file':
 				save_file($post_id, $field);
 				break;
-			case 'members':
-				save_members($post_id, $field);
-				break;
-			case 'simple-members':
-				save_simple_members($post_id, $field);
-				break;
 			default:
 				save_default($post_id, $field);
 				break;
@@ -359,9 +327,10 @@ function _save_meta_data($post_id, $meta_box){
  * @author Jared Lang
  **/
 function _show_meta_boxes($post, $meta_box){
+	?>
 	// Use nonce for verification
-	echo '<input type="hidden" name="admissions_meta_box_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
-	echo '<table class="form-table">';
+	<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>';
+	<table class="form-table">
 	foreach ($meta_box['fields'] as $field) {
 		// get current post meta data
 		$meta = get_post_meta($post->ID, $field['id'], true);
@@ -383,25 +352,6 @@ function _show_meta_boxes($post, $meta_box){
 				}
 				echo '</select>';
 				break;
-			case 'selector':
-					$help_url = get_post_meta($post->ID, 'admissions_help_url', true);
-				?>
-					<label for="<?=$field['id']?>"><?=$field['desc']?></label><br />
-					<select class="filler" name="<?=$field['id']?>" id="<?=$field['id']?>">
-						<option>Choose form...</option>
-						<?php foreach($field['options'] as $k=>$v):?>
-						<?php
-						 	$this_url  = get_post_meta($v, 'admissions_form_url', true);
-							$this_file = get_post_meta($v, 'admissions_form_file', true);
-							if ($this_file){
-								$this_url = wp_get_attachment_url(get_post($this_file)->ID);
-							}
-						?>
-						<option value="<?=$this_url?>"><?=$k?></option>
-						<?php endforeach;?>
-					</select>
-				<?php
-				break;
 			case 'radio':
 				foreach ($field['options'] as $option) {
 					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
@@ -410,22 +360,6 @@ function _show_meta_boxes($post, $meta_box){
 			case 'checkbox':
 				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
 				break;
-			case 'file':
-				$document_id = get_post_meta($post->ID, $field['id'], True);
-				if ($document_id){
-					$document = get_post($document_id);
-					$url      = wp_get_attachment_url($document->ID);
-				}else{
-					$document = null;
-				}
-				?>
-				<label for="file_<?=$post->ID?>"><?=$field['desc'];?></label><br />
-				<?php if($document):?>
-				Current file:
-				<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
-				<?php endif;?>
-				<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
-				<?php break;
 		}
 		echo     '<td>',
 		'</tr>';
@@ -434,5 +368,6 @@ function _show_meta_boxes($post, $meta_box){
 	echo '</table>';
 	
 	if($meta_box['helptxt']) echo '<p style="font-size:13px; padding:5px 0; color:#666;">' . $meta_box['helptxt'] . "</p>";
+	<?php
 }
 ?>
