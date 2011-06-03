@@ -1,12 +1,15 @@
-html{background: url("../img/gradient.png") repeat-x top left #fff;}
-body{color: #222;}
+/**
+ * A collection of commonly used styles for wordpress themes.
+ **/
 
 /**
  * Element styles (No font-family)
  **/
-a{text-decoration: underline; color: #313130;}
-h1{font-size: 28px; margin: 0 0 .5em 0;}
-h1 a{text-decoration: none; color: #313130;}
+html{background: url("../img/gradient.png") repeat-x top left #fff;}
+body{color: #222;}
+a{text-decoration: underline; color: #313130; font-weight: bold;}
+h1{font-size: 29px; margin: 0 0 .5em 0;}
+h1 a{text-decoration: none; color: #313130; font-weight: normal;}
 h2{margin: 0 0 .5em 0; font-size: 22px; color: #E3B00B;}
 h3{margin: 0 0 .5em 0; font-size: 17px; font-weight: bold; color: #000;}
 h4{margin: 0 0 .5em 0; font-size: 14px; font-weight: bold; color: #000;}
@@ -25,7 +28,7 @@ ol li ol li ol li{list-style: lower-alpha;}
  **/
 h2,
 .sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-h1, h4, p, ul, ol,
+h1, h4, p, ul, ol, a,
 .sans-serif{font-family: "Georgia", "serif";}
 h3,
 .sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
@@ -33,6 +36,14 @@ h3,
 /**
  * Generic Classes
  **/
+.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
+.menu a:hover{color: #ed1c24; text-decoration: underline;}
+.menu.horizontal{list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0;}
+.menu.horizontal li{display: inline-block; margin: 0 3px 0 0; padding: 0;}
+.msie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
+.menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
+.menu.horizontal .last:after {content: ""; margin-left: 0;}
+
 .normal{font-weight: normal;}
 .heavy{font-weight: bold;}
 .upfont{font-size: 135%;}
@@ -45,4 +56,7 @@ h3,
 /**
  * Location specific styles
  **/
+#blueprint-container{padding-top: 24px;}
 #header h1{margin: 0;}
+#header{border-bottom: 1px dotted #000; padding-bottom: 10px; margin-bottom: 10px;}
+#footer{border-top: 1px dotted #000; padding-top: 10px; margin-top: 10px;}

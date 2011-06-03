@@ -3,12 +3,35 @@
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('thumbnails');
-	register_nav_menus(array(
-		'header-menu' => __('Header Menu'),
-		'footer-menu' => __('Footer Menu'),
-	));
+	register_nav_menu('header-menu', __('Header Menu'));
+	register_nav_menu('footer-menu', __('Footer Menu'));
 }
 add_action('init', '__init__');
+
+
+function get_menu($menu, $classes=null, $id=null){
+	$locations = get_nav_menu_locations();
+	$menu      = @$locations[$menu];
+	
+	if (!$menu){
+		return "<div class='error'>No menu location found with name '{$menu}'.</div>";
+	}
+	
+	$items = wp_get_nav_menu_items($menu);
+	ob_start();
+	?>
+	<ul<?php if($classes):?> class="<?=$classes?>"<?php endif;?><?php if($id):?> id="<?=$id?>"<?php endif;?>>
+		<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
+		<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
+		<?php endforeach;?>
+	</ul>
+	<?php
+	$menu = ob_get_clean();
+	
+	return $menu;
+	
+}
+
 
 function create_html_element($tag, $attr=array(), $content=null, $self_close=True){
 	$attr_str = create_attribute_string($attr);
