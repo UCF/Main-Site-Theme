@@ -10,83 +10,38 @@ define('THEME_JS_URL', THEME_STATIC_URL.'/js');
 define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 
 
-require_once('functions-base.php');
-require_once('custom-post-types.php');
-require_once('shortcodes.php');
+require_once('functions-base.php');     # "Base Theme" Functions
+require_once('custom-post-types.php');  # Where per theme post types are defined
+require_once('shortcodes.php');         # Per theme shortcodes
 
 
-Config::add_meta(array(
-	'charset' => 'utf-8',
-));
+/**
+ * Set config values including meta tags, registered custom post types, styles,
+ * scripts, and any other statically defined assets that belong in the Config
+ * object.
+ **/
+Config::$custom_post_types = array('Example',);
 
-Config::add_css(array(
-	'name'  => 'university-bar',
-	'media' => 'all',
-	'src'   => 'http://universityheader.ucf.edu/bar/css/bar.css',
-));
-Config::add_css(array(
-	'name'  => 'jquery-ui',
-	'media' => 'screen,projection',
-	'src'   => THEME_CSS_URL.'/jquery-ui.css',
-));
-Config::add_css(array(
-	'name'  => 'jquery-uniform',
-	'media' => 'screen,projection',
-	'src'   => THEME_CSS_URL.'/jquery-uniform.css',
-));
-Config::add_css(array(
-	'name'  => 'blueprint-screen',
-	'media' => 'screen,projection',
-	'src'   => THEME_CSS_URL.'/blueprint-screen.css',
-));
-Config::add_css(array(
-	'name'  => 'blueprint-print',
-	'media' => 'print',
-	'src'   => THEME_CSS_URL.'/blueprint-print.css',
-));
-Config::add_css(array(
-	'name'  => 'yahoo-reset',
-	'media' => 'all',
-	'src'   => THEME_CSS_URL.'/yahoo-reset.css',
-));
-Config::add_css(array(
-	'name'  => 'yahoo-fonts',
-	'media' => 'all',
-	'src'   => THEME_CSS_URL.'/yahoo-fonts.css',
-));
-Config::add_css(array(
-	'name'  => 'webcom-base',
-	'media' => 'all',
-	'src'   => THEME_CSS_URL.'/webcom-base.css',
-));
-Config::add_css(array(
-	'name'  => 'theme',
-	'media' => 'all',
-	'src'   => get_bloginfo('stylesheet_url'),
-));
+Config::$metas = array(
+	array('charset' => 'utf-8',),
+);
 
-
-Config::add_script(array(
-	'name' => 'university-header',
-	'src'  => 'http://universityheader.ucf.edu/bar/js/university-header.js',
-));
-Config::add_script(array(
-	'name' => 'jquery',
-	'src'  => 'http://code.jquery.com/jquery-1.6.1.min.js',
-));
-Config::add_script(array(
-	'name' => 'jquery-ui',
-	'src'  => THEME_JS_URL.'/jquery-ui.js',
-));
-Config::add_script(array(
-	'name' => 'jquery-browser',
-	'src'  => THEME_JS_URL.'/jquery-browser.js',
-));
-Config::add_script(array(
-	'name' => 'jquery-uniform',
-	'src'  => THEME_JS_URL.'/jquery-uniform.js',
-));
-Config::add_script(array(
-	'name' => 'theme',
-	'src'  => THEME_JS_URL.'/script.js',
-));
+Config::$styles = array(
+	'http://universityheader.ucf.edu/bar/css/bar.css',
+	THEME_CSS_URL.'/jquery-ui.css',
+	THEME_CSS_URL.'/jquery-uniform.css',
+	THEME_CSS_URL.'/blueprint-screen.css',
+	array('media' => 'print', 'src' => THEME_CSS_URL.'/blueprint-print.css',),
+	THEME_CSS_URL.'/yahoo-reset.css',
+	THEME_CSS_URL.'/yahoo-fonts.css',
+	THEME_CSS_URL.'/webcom-base.css',
+	get_bloginfo('stylesheet_url'),
+);
+Config::$scripts = array(
+	'http://universityheader.ucf.edu/bar/js/university-header.js',
+	array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.6.1.min.js',),
+	THEME_JS_URL.'/jquery-ui.js',
+	THEME_JS_URL.'/jquery-browser.js',
+	THEME_JS_URL.'/jquery-uniform.js',
+	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
+);
