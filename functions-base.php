@@ -59,7 +59,10 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
-		if ($attr['admin'] or !is_admin()){
+		if (
+			($attr['admin'] and is_admin()) or
+			(!$attr['admin'] and !is_admin())
+		){
 			wp_deregister_style($attr['name']);
 			wp_enqueue_style($attr['name'], $attr['src'], null, null, $attr['media']);
 		}

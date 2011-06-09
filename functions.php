@@ -1,7 +1,5 @@
 <?php
-
-# Custom Child Theme Functions
-# http://themeshaper.com/thematic-for-wordpress/guide-customizing-thematic-theme-framework/
+# Define stuff
 define('THEME_URL', get_bloginfo('stylesheet_directory'));
 define('THEME_DIR', get_stylesheet_directory());
 define('THEME_STATIC_URL', THEME_URL.'/static');
@@ -9,11 +7,9 @@ define('THEME_IMG_URL', THEME_STATIC_URL.'/img');
 define('THEME_JS_URL', THEME_STATIC_URL.'/js');
 define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 
-
 require_once('functions-base.php');     # "Base Theme" Functions
 require_once('custom-post-types.php');  # Where per theme post types are defined
 require_once('shortcodes.php');         # Per theme shortcodes
-
 
 /**
  * Set config values including meta tags, registered custom post types, styles,
@@ -27,6 +23,7 @@ Config::$metas = array(
 );
 
 Config::$styles = array(
+	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_CSS_URL.'/jquery-ui.css',
 	THEME_CSS_URL.'/jquery-uniform.css',
@@ -38,6 +35,7 @@ Config::$styles = array(
 	get_bloginfo('stylesheet_url'),
 );
 Config::$scripts = array(
+	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	'http://universityheader.ucf.edu/bar/js/university-header.js',
 	array('name' => 'jquery', 'src' => 'http://code.jquery.com/jquery-1.6.1.min.js',),
 	THEME_JS_URL.'/jquery-ui.js',

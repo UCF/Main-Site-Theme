@@ -1,4 +1,6 @@
-var __init__ = function($){};
+var __init__ = function($){
+	// YAYAY
+};
 
 
 (function($){
