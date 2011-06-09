@@ -5,8 +5,22 @@ function __init__(){
 	add_theme_support('thumbnails');
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
+	register_sidebar(array(
+		'name'          => __('Sidebar'),
+		'id'            => 'sidebar',
+		'description'   => 'Sidebar found throughout site',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
 }
 add_action('init', '__init__');
+
+
+function slug($s, $spaces='-'){
+	$s = strtolower($s);
+	$s = preg_replace('/[-_\s]/', $spaces, $s);
+	return $s;
+}
 
 
 function get_menu($menu, $classes=null, $id=null){
@@ -118,19 +132,19 @@ function header_title(){
 		$content = single_post_title('', FALSE); 
 	}
 	elseif ( is_search() ) { 
-		$content = __('Search Results for:', 'thematic'); 
+		$content = __('Search Results for:'); 
 		$content .= ' ' . esc_html(stripslashes(get_search_query()));
 	}
 	elseif ( is_category() ) {
-		$content = __('Category Archives:', 'thematic');
+		$content = __('Category Archives:');
 		$content .= ' ' . single_cat_title("", false);;
 	}
 	elseif ( is_tag() ) { 
-		$content = __('Tag Archives:', 'thematic');
+		$content = __('Tag Archives:');
 		$content .= ' ' . thematic_tag_query();
 	}
 	elseif ( is_404() ) { 
-		$content = __('Not Found', 'thematic'); 
+		$content = __('Not Found'); 
 	}
 	else { 
 		$content = get_bloginfo('description');
@@ -244,7 +258,7 @@ function browser_classes() {
 			$classes[] = 'firefox';
 			
 			preg_match( "/Firefox\/(\d)/si", $browser, $matches);
-			$ff_version = 'ff' . str_replace( '.', '-', $matches[1] );      
+			$ff_version = 'ff' . str_replace( '.', '-', $matches[1] );
 			$classes[] = $ff_version;
 	} else {
 		$classes[] = 'unknown-browser';
@@ -262,8 +276,6 @@ function disallow_direct_load($page){
 
 
 class ArgumentException extends Exception{}
-
-
 class Config{
 	static
 		$links   = array(),
@@ -275,6 +287,7 @@ class Config{
 		}
 		self::$links[] = $attr;
 	}
+	
 	
 	static function add_css($attr){
 		if (!isset($attr['name']) or !isset($attr['src'])){
@@ -289,12 +302,14 @@ class Config{
 		}
 	}
 	
+	
 	static function add_meta($attr){
 		if (!count($attr)){
 			throw new ArgumentException('add_meta expects a non-empty array of values to create tags.');
 		}
 		self::$metas[] = $attr;
 	}
+	
 	
 	static function add_script($attr){
 		if (!isset($attr['name']) or !isset($attr['src'])){

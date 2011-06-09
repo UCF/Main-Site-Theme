@@ -86,3 +86,7 @@ Config::add_script(array(
 	'name' => 'jquery-uniform',
 	'src'  => THEME_JS_URL.'/jquery-uniform.js',
 ));
+Config::add_script(array(
+	'name' => 'theme',
+	'src'  => THEME_JS_URL.'/script.js',
+));

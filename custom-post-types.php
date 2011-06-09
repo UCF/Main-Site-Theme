@@ -148,12 +148,56 @@ class Example extends CustomPostType{
 		$edit_item      = 'Edit Example',
 		$new_item       = 'New Example',
 		$public         = True,
-		$use_categories = False,
+		$use_categories = True,
 		$use_thumbnails = True,
 		$use_editor     = True,
 		$use_order      = True,
 		$use_title      = True,
-		$use_metabox    = False;
+		$use_metabox    = True;
+	
+	public function fields(){
+		return array(
+			array(
+				'name'  => 'Helpy Help',
+				'desc'  => 'Help Example, static content to assist the nice users.',
+				'id'    => $this->options('name').'_help',
+				'type'  => 'help',
+			),
+			array(
+				'name' => 'Text',
+				'desc' => 'Text field example',
+				'id'   => $this->options('name').'_text',
+				'type' => 'text',
+			),
+			array(
+				'name' => 'Textarea',
+				'desc' => 'Textarea example',
+				'id'   => $this->options('name').'_textarea',
+				'type' => 'textarea',
+			),
+			array(
+				'name'    => 'Select',
+				'desc'    => 'Select example',
+				'default' => '(None)',
+				'id'      => $this->options('name').'_select',
+				'options' => array('Select One' => 1, 'Select Two' => 2,),
+				'type'    => 'select',
+			),
+			array(
+				'name'    => 'Radio',
+				'desc'    => 'Radio example',
+				'id'      => $this->options('name').'_radio',
+				'options' => array('Key One' => 1, 'Key Two' => 2,),
+				'type'    => 'radio',
+			),
+			array(
+				'name'  => 'Checkbox',
+				'desc'  => 'Checkbox example',
+				'id'    => $this->options('name').'_checkbox',
+				'type'  => 'checkbox',
+			),
+		);
+	}
 }
 
 /*/-------------------------------------
@@ -241,45 +285,20 @@ function show_meta_boxes($post){
 	return _show_meta_boxes($post, $meta_box);
 }
 
-/**
- * Field type save functions.
- */
-function save_file($post_id, $field){
-	$file_uploaded = @!empty($_FILES[$field['id']]);
-	if ($file_uploaded){
-		require_once(ABSPATH.'wp-admin/includes/file.php');
-		$override['action'] = 'editpost';
-		$file               = $_FILES[$field['id']];
-		$uploaded_file      = wp_handle_upload($file, $override);
-		
-		# TODO: Pass reason for error back to frontend
-		if ($uploaded_file['error']){return;}
-		
-		$attachment = array(
-			'post_title'     => $file['name'],
-			'post_content'   => '',
-			'post_type'      => 'attachment',
-			'post_parent'    => $post_id,
-			'post_mime_type' => $file['type'],
-			'guid'           => $uploaded_file['url'],
-		);
-		$id = wp_insert_attachment($attachment, $file['file'], $post_id);
-		wp_update_attachment_metadata(
-			$id,
-			wp_generate_attachment_metadata($id, $file['file'])
-		);
-		update_post_meta($post_id, $field['id'], $id);
-	}
-}
-
 function save_default($post_id, $field){
 	$old = get_post_meta($post_id, $field['id'], true);
 	$new = $_POST[$field['id']];
-	if ($new && $new != $old) {
+	
+	# Update if new is not empty and is not the same value as old
+	if ($new !== "" and $new !== null and $new != $old) {
 		update_post_meta($post_id, $field['id'], $new);
-	} elseif ('' == $new && $old) {
+	}
+	# Delete if we're sending a new null value and there was an old value
+	elseif ($new === "" and $old) {
 		delete_post_meta($post_id, $field['id'], $old);
 	}
+	# Otherwise we do nothing, field stays the same
+	return;
 }
 
 /**
@@ -310,9 +329,6 @@ function _save_meta_data($post_id, $meta_box){
 	
 	foreach ($meta_box['fields'] as $field) {
 		switch ($field['type']){
-			case 'file':
-				save_file($post_id, $field);
-				break;
 			default:
 				save_default($post_id, $field);
 				break;
@@ -328,46 +344,56 @@ function _save_meta_data($post_id, $meta_box){
  **/
 function _show_meta_boxes($post, $meta_box){
 	?>
-	// Use nonce for verification
-	<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>';
+	<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
 	<table class="form-table">
-	foreach ($meta_box['fields'] as $field) {
-		// get current post meta data
-		$meta = get_post_meta($post->ID, $field['id'], true);
+	<?php foreach($meta_box['fields'] as $field):
+		$current_value = get_post_meta($post->ID, $field['id'], true);?>
+		<tr>
+			<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
+			<td>
+			<?php if($field['desc']):?>
+				<div class="description">
+					<?=$field['desc']?>
+				</div>
+			<?php endif;?>
+			
+			<?php switch ($field['type']): 
+				case 'text':?>
+				<input type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : $field['std']?>" />
+			
+			<?php break; case 'textarea':?>
+				<textarea name="<?=$field['id']?>" id="<?=$field['id']?>" cols="60" rows="4"><?=($current_value) ? htmlentities($current_value) : $field['std']?></textarea>
+			
+			<?php break; case 'select':?>
+				<select name="<?=$field['id']?>" id="<?=$field['id']?>">
+					<option value=""><?=($field['default']) ? $field['default'] : '--'?></option>
+				<?php foreach ($field['options'] as $k=>$v):?>
+					<option <?=($current_value == $v) ? ' selected="selected"' : ''?> value="<?=$v?>"><?=$k?></option>
+				<?php endforeach;?>
+				</select>
+			
+			<?php break; case 'radio':?>
+				<?php foreach ($field['options'] as $k=>$v):?>
+				<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
+				<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
+				<?php endforeach;?>
+			
+			<?php break; case 'checkbox':?>
+				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
+			
+			<?php break; case 'help':?><!-- Do nothing for help -->
+			<?php break; default:?>
+				<p class="error">Don't know how to handle field of type '<?=$field['type']?>'</p>
+			<?php break; endswitch;?>
+			<td>
+		</tr>
+	<?php endforeach;?>
+	</table>
 	
-		echo '<tr>',
-			'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
-			'<td>';
-		switch ($field['type']) {
-			case 'text':
-				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? htmlentities($meta) : $field['std'], '" size="30" style="width:97%" />', "\n", $field['desc'];
-				break;
-			case 'textarea':
-				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? htmlentities($meta) : $field['std'], '</textarea>', "\n", $field['desc'];
-				break;
-			case 'select':
-				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
-				foreach ($field['options'] as $k=>$option) {
-					echo '<option', $meta == $option ? ' selected="selected"' : '', ' value="', $option, '">', $k, '</option>';
-				}
-				echo '</select>';
-				break;
-			case 'radio':
-				foreach ($field['options'] as $option) {
-					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
-				}
-				break;
-			case 'checkbox':
-				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-				break;
-		}
-		echo     '<td>',
-		'</tr>';
-	}
-	
-	echo '</table>';
-	
-	if($meta_box['helptxt']) echo '<p style="font-size:13px; padding:5px 0; color:#666;">' . $meta_box['helptxt'] . "</p>";
+	<?php if($meta_box['helptxt']):?>
+	<p><?=$meta_box['helptxt']?></p>
+	<?php endif;?>
 	<?php
 }
+
 ?>
