@@ -99,7 +99,10 @@ class Config{
 		$attr = array_merge($default, $attr);
 		
 		
-		if ($attr['admin'] or !is_admin()){
+		if (
+			($attr['admin'] and is_admin()) or
+			(!$attr['admin'] and !is_admin())
+		){
 			# Override previously defined scripts
 			wp_deregister_script($attr['name']);
 			wp_enqueue_script($attr['name'], $attr['src'], null, null, True);
@@ -145,13 +148,13 @@ function slug($s, $spaces='-'){
 
 
 /**
- * Wraps wordpresses native functions, allowing you to get a menu defined by
- * it's location rather than the name given to the menu.  The argument $classes
- * let's you define a custom class(es) to place on the list generated, $id does
+ * Wraps wordpress' native functions, allowing you to get a menu defined by
+ * its location rather than the name given to the menu.  The argument $classes
+ * lets you define a custom class(es) to place on the list generated, $id does
  * the same but with an id attribute.
  *
  * If you require more customization of the output, a final optional argument
- * $callback let's you specify a function that will generate the output. Any
+ * $callback lets you specify a function that will generate the output. Any
  * callback passed should accept one argument, which will be the items for the
  * menu in question.
  **/

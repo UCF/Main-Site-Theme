@@ -1,5 +1,5 @@
 var analytics = function($){
-	var set = typeof GA_ACCOUNT === undefined;
+	var set = typeof GA_ACCOUNT !== undefined;
 	
 	if (set){
 		// Google analytics code
