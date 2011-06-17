@@ -55,7 +55,6 @@ h3,
 .clear-right{clear: right;}
 .clear{clear: both;}
 .frame{display:block; margin-bottom:1em; -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; background-color: white; -moz-border-radius: 5px; -webkit-border-radius: 5x; border-radius:5px; padding:5px; position:relative;}
-.frame{-moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;}
 .ie .frame{border:1px solid #CCC;}
 
 
