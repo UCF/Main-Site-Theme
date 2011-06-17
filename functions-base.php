@@ -158,12 +158,12 @@ function slug($s, $spaces='-'){
  * callback passed should accept one argument, which will be the items for the
  * menu in question.
  **/
-function get_menu($menu, $classes=null, $id=null, $callback=null){
+function get_menu($name, $classes=null, $id=null, $callback=null){
 	$locations = get_nav_menu_locations();
-	$menu      = @$locations[$menu];
+	$menu      = @$locations[$name];
 	
 	if (!$menu){
-		return "<div class='error'>No menu location found with name '{$menu}'.</div>";
+		return "<div class='error'>No menu location found with name '{$name}'.</div>";
 	}
 	
 	$items = wp_get_nav_menu_items($menu);
