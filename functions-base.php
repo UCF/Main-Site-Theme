@@ -118,7 +118,7 @@ class Config{
  **/
 function __init__(){
 	add_theme_support('menus');
-	add_theme_support('thumbnails');
+	add_theme_support('post-thumbnails');
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(
@@ -131,7 +131,7 @@ function __init__(){
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 }
-add_action('init', '__init__');
+add_action('after_setup_theme', '__init__');
 
 
 /**
