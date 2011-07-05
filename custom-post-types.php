@@ -9,6 +9,7 @@ abstract class CustomPostType{
 		$edit_item      = 'Edit Custom Post',
 		$new_item       = 'New Custom Post',
 		$public         = True,
+		$use_revisions  = True,
 		$use_categories = False,
 		$use_thumbnails = False,
 		$use_editor     = False,
@@ -57,16 +58,19 @@ abstract class CustomPostType{
 		#Default support array
 		$supports = array();
 		if ($this->options('use_title')){
-			$supports = array_merge($supports, array('title'));
+			$supports[] = 'title';
 		}
 		if ($this->options('use_order')){
-			$supports = array_merge($supports, array('page-attributes'));
+			$supports[] = 'page-attributes';
 		}
 		if ($this->options('use_thumbnails')){
-			$supports = array_merge($supports, array('thumbnail'));
+			$supports[] = 'thumbnail';
 		}
 		if ($this->options('use_editor')){
-			$supports = array_merge($supports, array('editor'));
+			$supports[] = 'editor';
+		}
+		if ($this->options('use_revisions')){
+			$supports[] = 'revisions';
 		}
 		return $supports;
 	}

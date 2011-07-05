@@ -135,6 +135,27 @@ add_action('after_setup_theme', '__init__');
 
 
 /**
+ * Really get the post type.  A post type of revision will return it's parent
+ * post type.
+ **/
+function post_type($post){
+	if (is_int($post)){
+		$post = get_post($post);
+	}
+	
+	# check post_type field
+	$post_type = $post->post_type;
+	
+	if ($post_type === 'revision'){
+		$parent    = (int)$post->post_parent;
+		$post_type = post_type($parent);
+	}
+	
+	return $post_type;
+}
+
+
+/**
  * Will return a string $s normalized to a slug value.  The optional argument, 
  * $spaces, allows you to define what spaces and other undesirable characters
  * will be replaced with.  Useful for content that will appear in urls or
@@ -499,12 +520,11 @@ add_action('do_meta_boxes', 'register_meta_boxes');
 function save_meta_data($post){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
-		if (get_post_type($post) == $custom_post_type->options('name')){
+		if (post_type($post) == $custom_post_type->options('name')){
 			$meta_box = $custom_post_type->metabox();
 			break;
 		}
 	}
-	
 	return _save_meta_data($post, $meta_box);
 	
 }
@@ -520,7 +540,7 @@ add_action('save_post', 'save_meta_data');
 function show_meta_boxes($post){
 	#Register custom post types metaboxes
 	foreach(installed_custom_post_types() as $custom_post_type){
-		if (get_post_type($post) == $custom_post_type->options('name')){
+		if (post_type($post) == $custom_post_type->options('name')){
 			$meta_box = $custom_post_type->metabox();
 			break;
 		}
