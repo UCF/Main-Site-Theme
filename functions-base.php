@@ -111,6 +111,25 @@ class Config{
 }
 
 
+function dump(){
+	$args = func_get_args();
+	$out  = array();
+	foreach($args as $arg){
+		$out[] = print_r($arg, True);
+	}
+	$out = implode('<br />\n', $out);
+	return "<pre>{$out}</pre>";
+}
+
+
+function debug($string){
+	if (!isset($_GET['debug'])){
+		return;
+	}
+	print "<!-- DEBUG: {$string} -->\n";
+}
+
+
 /**
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,
