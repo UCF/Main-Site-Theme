@@ -8,14 +8,16 @@ abstract class CustomPostType{
 		$add_new_item   = 'Add New Custom Post',
 		$edit_item      = 'Edit Custom Post',
 		$new_item       = 'New Custom Post',
-		$public         = True,
-		$use_revisions  = True,
-		$use_categories = False,
-		$use_thumbnails = False,
-		$use_editor     = False,
-		$use_order      = False,
-		$use_title      = False,
-		$use_metabox    = False;
+		$public         = True,  # I dunno...leave it true
+		$use_title      = True,  # Title field
+		$use_editor     = True,  # WYSIWYG editor, post content field
+		$use_revisions  = True,  # Revisions on post content and titles
+		$use_tags       = True,  # Tags taxonomy
+		$use_categories = False, # Categories taxonomy
+		$use_thumbnails = False, # Featured images
+		$use_order      = False, # Wordpress built-in order meta data
+		$use_metabox    = False, # Enable if you have custom fields to display in admin
+		$use_shortcode  = False; # Auto generate a shortcode for the post type (see also toHTML method)
 	
 	public function get_objects($options=array()){
 		$defaults = array(
@@ -119,13 +121,45 @@ abstract class CustomPostType{
 			'supports' => $this->supports(),
 			'public'   => $this->options('public'),
 		);
+		
 		if ($this->options('use_order')){
 			$regisration = array_merge($registration, array('hierarchical' => True,));
 		}
+		
 		register_post_type($this->options('name'), $registration);
+		
 		if ($this->options('use_categories')){
 			register_taxonomy_for_object_type('category', $this->options('name'));
 		}
+		
+		if ($this->options('use_tags')){
+			register_taxonomy_for_object_type('post_tag', $this->options('name'));
+		}
+		
+		if ($this->options('use_shortcode')){
+			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
+		}
+	}
+	
+	public function shortcode($attr){
+		$default = array(
+			'type' => $this->options('name'),
+		);
+		if (is_array($attr)){
+			$attr = array_merge($default, $attr);
+		}else{
+			$attr = $default;
+		}
+		return sc_object($attr);
+	}
+	
+	public function toHTML($post){
+		if (is_int($post)){
+			$post = get_post($post);
+		}
+		
+		$html = '<a href="'.get_permalink($post->ID).'">'.$post->post_title.'</a>';
+		return $html;
 	}
 }
 
@@ -144,6 +178,7 @@ class Example extends CustomPostType{
 		$use_editor     = True,
 		$use_order      = True,
 		$use_title      = True,
+		$use_shortcode  = True,
 		$use_metabox    = True;
 	
 	public function fields(){

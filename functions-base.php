@@ -187,6 +187,17 @@ function slug($s, $spaces='-'){
 }
 
 
+function get_custom_post_type($name){
+	$installed = installed_custom_post_types();
+	foreach($installed as $object){
+		if ($object->options('name') == $name){
+			return get_class($object);
+		}
+	}
+	return null;
+}
+
+
 /**
  * Wraps wordpress' native functions, allowing you to get a menu defined by
  * its location rather than the name given to the menu.  The argument $classes
