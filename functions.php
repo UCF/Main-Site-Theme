@@ -11,6 +11,10 @@ require_once('functions-base.php');     # "Base Theme" Functions
 require_once('custom-post-types.php');  # Where per theme post types are defined
 require_once('shortcodes.php');         # Per theme shortcodes
 
+if (is_login()){
+	
+}
+
 if (is_admin()){
 	require_once('functions-admin.php');
 }
