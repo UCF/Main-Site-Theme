@@ -14,7 +14,7 @@ function init_theme_options(){
 
 
 function create_theme_options_page() {
-	add_theme_page(
+	add_utility_page(
 		__(THEME_OPTION_PAGE_TITLE),
 		__(THEME_OPTION_PAGE_TITLE),
 		'edit_theme_options',
