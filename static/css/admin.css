@@ -7,3 +7,7 @@
 .radio-list{padding: 0; margin: 0;}
 .checkbox-list li,
 .radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
+.description em{font-family: monospace; font-weight: bold; color: #21759B;}
+.field label{display: none;}
+.field li label{display: inherit;}
+textarea{width: 70%; height: 10em;}

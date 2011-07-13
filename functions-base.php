@@ -117,7 +117,7 @@ function dump(){
 	foreach($args as $arg){
 		$out[] = print_r($arg, True);
 	}
-	$out = implode('<br />\n', $out);
+	$out = implode("<br />", $out);
 	return "<pre>{$out}</pre>";
 }
 

@@ -2,6 +2,7 @@
 
 define('THEME_OPTION_GROUP', 'settings');
 define('THEME_OPTION_NAME', 'theme');
+define('THEME_OPTION_PAGE_TITLE', 'Theme Options');
 
 add_action('admin_menu', 'create_theme_options_page');
 add_action('admin_init', 'init_theme_options');
@@ -14,8 +15,8 @@ function init_theme_options(){
 
 function create_theme_options_page() {
 	add_theme_page(
-		__('Theme Options'),
-		__('Theme Options'),
+		__(THEME_OPTION_PAGE_TITLE),
+		__(THEME_OPTION_PAGE_TITLE),
 		'edit_theme_options',
 		'theme-options',
 		'theme_options_page'
@@ -24,7 +25,7 @@ function create_theme_options_page() {
 
 
 function theme_options_page(){
-	$theme_options    = get_option(THEME_OPTION_NAME) || null;
+	$theme_options    = get_option(THEME_OPTION_NAME);
 	$checkbox_choices = $radio_choices = $select_choices = array(
 		'(None)'   => '',
 		'Choice 1' => 1,
@@ -32,6 +33,7 @@ function theme_options_page(){
 		'Choice 3' => 3,
 	);
 	$settings = array(
+		new TextField('Google Analytics Account', THEME_OPTION_NAME.'[analytics]', 'Google Analytics Account. E.g., <em>UA-9876543-21</em>. Leave blank for development.', null, $theme_options['analytics']),
 		new TextField('Text Test', THEME_OPTION_NAME.'[text]', 'Text input test field.', null, $theme_options['text']),
 		new TextareaField('Textarea Test', THEME_OPTION_NAME.'[textarea]', null, null, $theme_options['textarea']),
 		new SelectField('Select Test', THEME_OPTION_NAME.'[select]', $select_choices, 'Select description area.', null, $theme_options['select']),
@@ -42,7 +44,7 @@ function theme_options_page(){
 	
 	<form method="post" action="options.php">
 		<div class="wrap">
-			<h2><?=get_current_theme()?> <?=__('Theme Options')?></h2>
+			<h2><?=__(THEME_OPTION_PAGE_TITLE)?></h2>
 			
 			<?php if (False != $_REQUEST['updated']):?>
 			<div class="updated fade"><p><strong><?=__( 'Options saved' ); ?></strong></p></div>
@@ -52,8 +54,8 @@ function theme_options_page(){
 			<table class="form-table">
 				<?php foreach($settings as $setting):?>
 				<tr valign="top">
-					<th scope="row"><?=$setting->name?></th>
-					<td><?=$setting->html()?></td>
+					<th scope="row"><label for="<?=htmlentities($setting->id)?>"><?=$setting->name?></label></th>
+					<td class="field"><?=$setting->html()?></td>
 				</tr>
 				<?php endforeach;?>
 			</table>
@@ -127,7 +129,7 @@ class SelectField extends ChoicesField{
 		<label class="block" for="<?=$this->id?>"><?=__($this->name)?></label>
 		<select name="<?=htmlentities($this->id)?>" id="<?=htmlentities($this->id)?>">
 			<?php foreach($this->choices as $key=>$value):?>
-			<option<?php if($this->value === $value):?> selected="selected"<?php endif;?> value="<?=htmlentities($value)?>"><?=htmlentities($key)?></option>
+			<option<?php if($this->value == $value):?> selected="selected"<?php endif;?> value="<?=htmlentities($value)?>"><?=htmlentities($key)?></option>
 			<?php endforeach;?>
 		</select>
 		<?php if($this->description):?>
@@ -146,7 +148,7 @@ class RadioField extends ChoicesField{
 		<ul class="radio-list">
 			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
 			<li>
-				<input<?php if($this->value === $value):?> checked="checked"<?php endif;?> type="radio" name="<?=htmlentities($this->id)?>" id="<?=$id?>" value="<?=htmlentities($value)?>" />
+				<input<?php if($this->value == $value):?> checked="checked"<?php endif;?> type="radio" name="<?=htmlentities($this->id)?>" id="<?=$id?>" value="<?=htmlentities($value)?>" />
 				<label for="<?=$id?>"><?=htmlentities($key)?></label>
 			</li>
 			<?php endforeach;?>
@@ -167,7 +169,7 @@ class CheckboxField extends ChoicesField{
 		<ul class="checkbox-list">
 			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
 			<li>
-				<input<?php if($this->value === $value):?> checked="checked"<?php endif;?> type="checkbox" name="<?=htmlentities($this->id)?>[]" id="<?=$id?>" value="<?=htmlentities($value)?>" />
+				<input<?php if(is_array($this->value) and in_array($value, $this->value)):?> checked="checked"<?php endif;?> type="checkbox" name="<?=htmlentities($this->id)?>[]" id="<?=$id?>" value="<?=htmlentities($value)?>" />
 				<label for="<?=$id?>"><?=htmlentities($key)?></label>
 			</li>
 			<?php endforeach;?>
