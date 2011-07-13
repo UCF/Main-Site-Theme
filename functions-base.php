@@ -487,7 +487,7 @@ function browser_classes() {
 		$op_version = 'op' . str_replace( '.', '-', $matches[1] );
 		$classes[] = $op_version;
 	} elseif ( preg_match( "/MSIE/", $browser ) ) {
-		$classes[] = 'msie';
+		$classes[] = 'ie';
 		
 		if( preg_match( "/MSIE 6.0/", $browser ) ) {
 			$classes[] = 'ie6';
