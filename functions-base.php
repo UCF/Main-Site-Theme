@@ -59,9 +59,14 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
+		$is_admin = (is_admin() or in_array($GLOBALS['pagenow'], array(
+			'wp-login.php',
+			'wp-register.php',
+		)));
+		
 		if (
-			($attr['admin'] and is_admin()) or
-			(!$attr['admin'] and !is_admin())
+			($attr['admin'] and $is_admin) or
+			(!$attr['admin'] and !$is_admin)
 		){
 			wp_deregister_style($attr['name']);
 			wp_enqueue_style($attr['name'], $attr['src'], null, null, $attr['media']);
@@ -98,10 +103,14 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
+		$is_admin = (is_admin() or in_array($GLOBALS['pagenow'], array(
+			'wp-login.php',
+			'wp-register.php',
+		)));
 		
 		if (
-			($attr['admin'] and is_admin()) or
-			(!$attr['admin'] and !is_admin())
+			($attr['admin'] and $is_admin) or
+			(!$attr['admin'] and !$is_admin)
 		){
 			# Override previously defined scripts
 			wp_deregister_script($attr['name']);
