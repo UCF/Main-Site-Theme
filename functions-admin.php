@@ -19,7 +19,8 @@ function create_theme_options_page() {
 		__(THEME_OPTION_PAGE_TITLE),
 		'edit_theme_options',
 		'theme-options',
-		'theme_options_page'
+		'theme_options_page',
+		THEME_IMG_URL.'/pegasus.png'
 	);
 }
 
