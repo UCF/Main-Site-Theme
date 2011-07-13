@@ -111,6 +111,31 @@ class Config{
 }
 
 
+function mimetype_to_application($mimetype){
+	switch($mimetype){
+		default:
+			$type = 'document';
+			break;
+		case 'application/pdf':
+			$type = 'pdf';
+			break;
+		case 'application/msword':
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			$type = 'word';
+			break;
+		case 'application/msexcel':
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			$type = 'excel';
+			break;
+		case 'application/vnd.ms-powerpoint':
+		case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+			$type = 'powerpoint';
+			break;
+	}
+	return $type;
+}
+
+
 function dump(){
 	$args = func_get_args();
 	$out  = array();
