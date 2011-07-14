@@ -23,7 +23,7 @@ var analytics = function($){
 var handleExternalLinks = function($){
 	var func = function(){
 		var url   = $(this).attr('href');
-		var host  = window.location.host;
+		var host  = window.location.host.toLowerCase();
 		
 		if (url.search(host) < 0 && url.search('http') > -1){
 			$(this).attr('target', '_blank');

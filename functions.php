@@ -15,6 +15,11 @@ if (is_admin()){
 	require_once('functions-admin.php');
 }
 
+if (is_login()){
+	require_once('functions-admin.php');
+	add_action('login_head', 'login_scripts', 0);
+}
+
 /**
  * Set config values including meta tags, registered custom post types, styles,
  * scripts, and any other statically defined assets that belong in the Config

@@ -59,9 +59,11 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
+		$is_admin = (is_admin() or is_login());
+		
 		if (
-			($attr['admin'] and is_admin()) or
-			(!$attr['admin'] and !is_admin())
+			($attr['admin'] and $is_admin) or
+			(!$attr['admin'] and !$is_admin)
 		){
 			wp_deregister_style($attr['name']);
 			wp_enqueue_style($attr['name'], $attr['src'], null, null, $attr['media']);
@@ -98,16 +100,53 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
+		$is_admin = (is_admin() or is_login());
 		
 		if (
-			($attr['admin'] and is_admin()) or
-			(!$attr['admin'] and !is_admin())
+			($attr['admin'] and $is_admin) or
+			(!$attr['admin'] and !$is_admin)
 		){
 			# Override previously defined scripts
 			wp_deregister_script($attr['name']);
 			wp_enqueue_script($attr['name'], $attr['src'], null, null, True);
 		}
 	}
+}
+
+
+function mimetype_to_application($mimetype){
+	switch($mimetype){
+		default:
+			$type = 'document';
+			break;
+		case 'application/zip':
+			$type = "zip";
+			break;
+		case 'application/pdf':
+			$type = 'pdf';
+			break;
+		case 'application/msword':
+		case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+			$type = 'word';
+			break;
+		case 'application/msexcel':
+		case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			$type = 'excel';
+			break;
+		case 'application/vnd.ms-powerpoint':
+		case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+			$type = 'powerpoint';
+			break;
+	}
+	return $type;
+}
+
+
+function is_login(){
+	return in_array($GLOBALS['pagenow'], array(
+			'wp-login.php',
+			'wp-register.php',
+	));
 }
 
 
