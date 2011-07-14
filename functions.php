@@ -68,6 +68,7 @@ Config::$theme_settings = array(
 		'name'        => 'Radio Example',
 		'id'          => THEME_OPTIONS_NAME.'[radio]',
 		'description' => 'Radio example, shows you some radio field stuff',
+		'default'     => 1,
 		'choices'     => array(
 			'Choice One' => 1,
 			'Choice Two' => 2,
