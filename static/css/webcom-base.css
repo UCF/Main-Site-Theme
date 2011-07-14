@@ -60,12 +60,14 @@ h3,
 /**
  * Mimetype icons
  **/
+.zip,
 .pdf,
 .word,
 .powerpoint,
 .excel,
 .missing,
 .document{background: transparent url('../img/document.png') no-repeat center left; overflow: hidden; padding: 5px 5px 5px 20px;}
+.zip{background-image: url('../img/document-zip.png');}
 .pdf{background-image: url('../img/document-pdf.png');}
 .word{background-image: url('../img/document-doc.png');}
 .powerpoint{background-image: url('../img/document-ppt.png');}

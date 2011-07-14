@@ -119,6 +119,9 @@ function mimetype_to_application($mimetype){
 		default:
 			$type = 'document';
 			break;
+		case 'application/zip':
+			$type = "zip";
+			break;
 		case 'application/pdf':
 			$type = 'pdf';
 			break;
