@@ -8,8 +8,20 @@
 		<link href="http://cdn.ucf.edu/webcom/-/css/blueprint-ie.css" rel="stylesheet" media="screen, projection">
 		<![endif]-->
 		<script type="text/javascript">
-			var _sf_startpt=(new Date()).getTime();
-			var _gaq = _gaq || [];
+			<?php if(GA_ACCOUNT):?>
+			
+			var GA_ACCOUNT      = '<?=GA_ACCOUNT?>';
+			
+			<?php endif;?>
+			<?php if(CB_UID):?>
+			
+			var CB_UID          = '<?=CB_UID?>';
+			var CB_DOMAIN       = '<?=CB_DOMAIN?>';
+			
+			<?php endif?>
+			
+			var _sf_startpt     = (new Date()).getTime();
+			var _gaq            = _gaq || [];
 		</script>
 	</head>
 	<body class="<?=body_classes()?>">
