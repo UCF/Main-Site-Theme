@@ -18,7 +18,7 @@ require_once('functions-admin.php');    # Admin/login functions
 $theme_options = get_option(THEME_OPTIONS_NAME);
 
 define('GA_ACCOUNT', $theme_options['ga_account']);
-define('GW_VERIFICATION', $theme_options['gw_verification']);
+define('GW_VERIFY', $theme_options['gw_verify']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
@@ -45,10 +45,10 @@ Config::$theme_settings = array(
 	)),
 	new TextField(array(
 		'name'        => 'Google WebMaster Verification',
-		'id'          => THEME_OPTIONS_NAME.'[gw_verification]',
+		'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
 		'description' => 'Example <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
 		'default'     => null,
-		'value'       => $theme_options['gw_verification'],
+		'value'       => $theme_options['gw_verify'],
 	)),
 	new TextField(array(
 		'name'        => 'Chartbeat UID',
