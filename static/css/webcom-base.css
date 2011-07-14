@@ -60,19 +60,19 @@ h3,
 /**
  * Mimetype icons
  **/
-.zip,
-.pdf,
-.word,
-.powerpoint,
-.excel,
-.missing,
-.document{background: transparent url('../img/document.png') no-repeat center left; overflow: hidden; padding: 5px 5px 5px 20px;}
-.zip{background-image: url('../img/document-zip.png');}
-.pdf{background-image: url('../img/document-pdf.png');}
-.word{background-image: url('../img/document-doc.png');}
-.powerpoint{background-image: url('../img/document-ppt.png');}
-.excel{background-image: url('../img/document-xls.png');}
-.missing{background-image: url('../img/document-missing.png');}
+.powerpoint:before,
+.missing:before,
+.excel:before,
+.word:before,
+.zip:before,
+.pdf:before,
+.document:before{background: url('../img/documents.png'); margin: 0 5px 0 0; height: 18px; width: 18px; content: ''; display: inline-block; position: relative; top: 4px;}
+.word:before{background-position: 0 18px;}
+.zip:before{background-position: 0 36px;}
+.excel:before{background-position: 0 54px;}
+.missing:before{background-position: 0 72px;}
+.pdf:before{background-position: 0 90px;}
+.powerpoint:before{background-position: 0 108px;}
 
 
 /**
