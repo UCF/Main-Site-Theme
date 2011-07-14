@@ -49,13 +49,16 @@ function theme_options_page(){
 		new RadioField('Radio Test', THEME_OPTION_NAME.'[radio]', $radio_choices, null, null, $theme_options['radio']),
 		new CheckboxField('Checkbox Test', THEME_OPTION_NAME.'[checkbox]', $checkbox_choices, null, null, $theme_options['checkbox']),
 	);
+	
+	# Check for settings updated or updated, varies between wp versions
+	$updated = (bool)($_GET['settings-updated'] or $_GET['updated']);
 	?>
 	
 	<form method="post" action="options.php">
 		<div class="wrap">
 			<h2><?=__(THEME_OPTION_PAGE_TITLE)?></h2>
 			
-			<?php if (False != $_REQUEST['updated']):?>
+			<?php if ($updated):?>
 			<div class="updated fade"><p><strong><?=__( 'Options saved' ); ?></strong></p></div>
 			<?php endif; ?>
 			
