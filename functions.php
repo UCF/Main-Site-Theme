@@ -17,6 +17,11 @@ require_once('functions-admin.php');    # Admin/login functions
 
 $theme_options = get_option(THEME_OPTIONS_NAME);
 
+define('GA_ACCOUNT', $theme_options['ga_account']);
+define('GW_VERIFICATION', $theme_options['gw_verification']);
+define('CB_UID', $theme_options['cb_uid']);
+define('CB_DOMAIN', $theme_options['cb_domain']);
+
 /**
  * Set config values including meta tags, registered custom post types, styles,
  * scripts, and any other statically defined assets that belong in the Config
@@ -40,10 +45,10 @@ Config::$theme_settings = array(
 	)),
 	new TextField(array(
 		'name'        => 'Google WebMaster Verification',
-		'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
+		'id'          => THEME_OPTIONS_NAME.'[gw_verification]',
 		'description' => 'Example <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
 		'default'     => null,
-		'value'       => $theme_options['gw_verify'],
+		'value'       => $theme_options['gw_verification'],
 	)),
 	new TextField(array(
 		'name'        => 'Chartbeat UID',
@@ -54,14 +59,14 @@ Config::$theme_settings = array(
 	)),
 	new TextField(array(
 		'name'        => 'Chartbeat Domain',
-		'id'          => THEME_OPTIONS_NAMES.'[cb_domain]',
+		'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
 		'description' => 'Example <em>some.domain.com</em>',
 		'default'     => null,
 		'value'       => $theme_options['cb_domain'],
 	)),
 	new RadioField(array(
 		'name'        => 'Radio Example',
-		'id'          => THEME_OPTIONS_NAMES.'[radio]',
+		'id'          => THEME_OPTIONS_NAME.'[radio]',
 		'description' => 'Radio example, shows you some radio field stuff',
 		'choices'     => array(
 			'Choice One' => 1,
@@ -78,6 +83,12 @@ Config::$theme_settings = array(
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
+if ((bool)$theme_options['gw_verify']){
+	Config::$metas[] = array(
+		'name'    => 'google-site-verification',
+		'content' => htmlentities($theme_options['gw_verify']),
+	);
+}
 
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
