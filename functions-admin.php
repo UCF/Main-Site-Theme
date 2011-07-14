@@ -7,6 +7,14 @@ define('THEME_OPTION_PAGE_TITLE', 'Theme Options');
 add_action('admin_menu', 'create_theme_options_page');
 add_action('admin_init', 'init_theme_options');
 
+function login_scripts(){
+	ob_start();?>
+	<link rel="stylesheet" href="<?=THEME_CSS_URL?>/admin.css" type="text/css" media="screen" charset="utf-8" />
+	<?php 
+	$out = ob_get_clean();
+	print $out;
+}
+
 
 function init_theme_options(){
 	register_setting(THEME_OPTION_GROUP, THEME_OPTION_NAME, 'theme_options_sanitize');

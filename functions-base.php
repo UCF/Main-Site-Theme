@@ -59,10 +59,7 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
-		$is_admin = (is_admin() or in_array($GLOBALS['pagenow'], array(
-			'wp-login.php',
-			'wp-register.php',
-		)));
+		$is_admin = (is_admin() or is_login());
 		
 		if (
 			($attr['admin'] and $is_admin) or
@@ -103,10 +100,7 @@ class Config{
 		);
 		$attr = array_merge($default, $attr);
 		
-		$is_admin = (is_admin() or in_array($GLOBALS['pagenow'], array(
-			'wp-login.php',
-			'wp-register.php',
-		)));
+		$is_admin = (is_admin() or is_login());
 		
 		if (
 			($attr['admin'] and $is_admin) or
@@ -142,6 +136,14 @@ function mimetype_to_application($mimetype){
 			break;
 	}
 	return $type;
+}
+
+
+function is_login(){
+	return in_array($GLOBALS['pagenow'], array(
+			'wp-login.php',
+			'wp-register.php',
+	));
 }
 
 
