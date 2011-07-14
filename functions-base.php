@@ -7,6 +7,7 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
+		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
 		$styles            = array(), # Stylesheets to register
 		$scripts           = array(), # Scripts to register
@@ -110,6 +111,117 @@ class Config{
 			wp_deregister_script($attr['name']);
 			wp_enqueue_script($attr['name'], $attr['src'], null, null, True);
 		}
+	}
+}
+
+
+abstract class Field{
+	function __construct($attr){
+		$this->name        = @$attr['name'];
+		$this->id          = @$attr['id'];
+		$this->value       = @$attr['value'];
+		$this->description = @$attr['description'];
+		$this->default     = @$attr['default'];
+		
+		if ($this->value === null){
+			$this->value = $this->default;
+		}
+	}
+}
+
+
+abstract class ChoicesField extends Field{
+	function __construct($attr){
+		$this->choices = @$attr['choices'];
+		parent::__construct($attr);
+	}
+}
+
+class TextField extends Field{
+	function html(){
+		ob_start();
+		?>
+		<label class="block" for="<?=htmlentities($this->id)?>"><?=__($this->name)?></label>
+		<input type="text" id="<?=htmlentities($this->id)?>" name="<?=htmlentities($this->id)?>" value="<?=htmlentities($this->value)?>" />
+		<?php if($this->description):?>
+		<p class="description"><?=__($this->description)?></p>
+		<?php endif;?>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+class TextareaField extends Field{
+	function html(){
+		ob_start();
+		?>
+		<label class="block" for="<?=htmlentities($this->id)?>"><?=__($this->name)?></label>
+		<textarea id="<?=htmlentities($this->id)?>" name="<?=htmlentities($this->id)?>"><?=htmlentities($this->value)?></textarea>
+		<?php if($this->description):?>
+		<p class="description"><?=__($this->description)?></p>
+		<?php endif;?>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+class SelectField extends ChoicesField{
+	function html(){
+		ob_start();
+		?>
+		<label class="block" for="<?=$this->id?>"><?=__($this->name)?></label>
+		<select name="<?=htmlentities($this->id)?>" id="<?=htmlentities($this->id)?>">
+			<?php foreach($this->choices as $key=>$value):?>
+			<option<?php if($this->value == $value):?> selected="selected"<?php endif;?> value="<?=htmlentities($value)?>"><?=htmlentities($key)?></option>
+			<?php endforeach;?>
+		</select>
+		<?php if($this->description):?>
+		<p class="description"><?=__($this->description)?></p>
+		<?php endif;?>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+class RadioField extends ChoicesField{
+	function html(){
+		ob_start();
+		?>
+		<label class="block"><?=__($this->name)?></label>
+		<ul class="radio-list">
+			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
+			<li>
+				<input<?php if($this->value == $value):?> checked="checked"<?php endif;?> type="radio" name="<?=htmlentities($this->id)?>" id="<?=$id?>" value="<?=htmlentities($value)?>" />
+				<label for="<?=$id?>"><?=htmlentities($key)?></label>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php if($this->description):?>
+		<p class="description"><?=__($this->description)?></p>
+		<?php endif;?>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+class CheckboxField extends ChoicesField{
+	function html(){
+		ob_start();
+		?>
+		<label class="block"><?=__($this->name)?></label>
+		<ul class="checkbox-list">
+			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
+			<li>
+				<input<?php if(is_array($this->value) and in_array($value, $this->value)):?> checked="checked"<?php endif;?> type="checkbox" name="<?=htmlentities($this->id)?>[]" id="<?=$id?>" value="<?=htmlentities($value)?>" />
+				<label for="<?=$id?>"><?=htmlentities($key)?></label>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php if($this->description):?>
+		<p class="description"><?=__($this->description)?></p>
+		<?php endif;?>
+		<?php
+		return ob_get_clean();
 	}
 }
 
