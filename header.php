@@ -9,17 +9,12 @@
 		<![endif]-->
 		<script type="text/javascript">
 			<?php if(GA_ACCOUNT):?>
-			
 			var GA_ACCOUNT      = '<?=GA_ACCOUNT?>';
-			
 			<?php endif;?>
 			<?php if(CB_UID):?>
-			
 			var CB_UID          = '<?=CB_UID?>';
 			var CB_DOMAIN       = '<?=CB_DOMAIN?>';
-			
-			<?php endif?>
-			
+			<?php endif?>	
 			var _sf_startpt     = (new Date()).getTime();
 			var _gaq            = _gaq || [];
 		</script>

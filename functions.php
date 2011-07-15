@@ -81,15 +81,10 @@ Config::$theme_settings = array(
  * Configure theme settings, see abstract class Field's descendants for
  * available fields. -- functions-base.php
  **/
-Config::$metas = array(
-	array('charset' => 'utf-8',),
+
+Config::$links = array(
+	array('rel' => 'shortcut icon', 'href' => THEME_IMG_URL.'/favicon.ico',),
 );
-if ((bool)$theme_options['gw_verify']){
-	Config::$metas[] = array(
-		'name'    => 'google-site-verification',
-		'content' => htmlentities($theme_options['gw_verify']),
-	);
-}
 
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
@@ -103,6 +98,7 @@ Config::$styles = array(
 	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url'),
 );
+
 Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	'http://universityheader.ucf.edu/bar/js/university-header.js',
@@ -112,3 +108,13 @@ Config::$scripts = array(
 	THEME_JS_URL.'/jquery-uniform.js',
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
+
+Config::$metas = array(
+	array('charset' => 'utf-8',),
+);
+if ((bool)$theme_options['gw_verify']){
+	Config::$metas[] = array(
+		'name'    => 'google-site-verification',
+		'content' => htmlentities($theme_options['gw_verify']),
+	);
+}

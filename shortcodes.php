@@ -9,7 +9,8 @@
 function sc_empty_shortcode(){
 	return 'shortcode';
 }
-add_shortcode('empty-shortcode', 'empty_shortcode');
+add_shortcode('empty-shortcode', 'sc_empty_shortcode');
+
 
 /**
  * Fetches objects defined by arguments passed, outputs the objects according
