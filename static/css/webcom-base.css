@@ -2,6 +2,7 @@
  * A collection of commonly used styles for wordpress themes.
  **/
 
+
 /**
  * Element styles (No font-family)
  **/
@@ -11,18 +12,26 @@ a{text-decoration: underline; color: #313130; font-weight: bold;}
 a:hover{color: #ed1c24;}
 h1{font-size: 29px; margin: 0 0 .5em 0;}
 h1 a{text-decoration: none; color: #313130; font-weight: normal;}
-h2{margin: 0 0 .5em 0; font-size: 22px; color: #E3B00B;}
-h3{margin: 0 0 .5em 0; font-size: 17px; font-weight: bold; color: #000;}
-h4{margin: 0 0 .5em 0; font-size: 14px; font-weight: bold; color: #000;}
+h2{margin: .5em 0 1em 0; font-size: 22px; color: #E3B00B;}
+h3{margin: .5em 0 1em 0; font-size: 17px; font-weight: bold; color: #000;}
+h4{margin: 1em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
 p{line-height: 1.5em; font-size: 16px; margin: 0 0 1em 0;}
+blockquote{padding: 0 2em;}
 ol,
-ul{padding-left: 2em; margin: 0 0 1em 0; font-size: 14px;}
+ul{padding-left: 2em; margin: 1.5em 0; font-size: 16px;}
 li{margin: 0 0 .75em 0;}
 ul li{list-style: disc;}
-ul li ul li{list-style: circle; margin: .75em 0 0 0;}
+ul ol,
+ol ul,
+ol ol,
+ul ul{margin: 0 0 .75em 0;}
+ul ul li{list-style: circle; margin: .75em 0 0 0;}
 ol li{list-style: decimal;}
-ol li ol li{list-style: lower-roman; margin: .75em 0 0 0;}
-ol li ol li ol li{list-style: lower-alpha;}
+ol ol li{list-style: lower-roman; margin: .75em 0 0 0;}
+ol ol ol li{list-style: lower-alpha;}
+strong{font-weight: bold;}
+em{font-style: italic;}
+
 
 /**
  * Font declarations 
@@ -33,6 +42,7 @@ h1, h4, p, ul, ol, a,
 .sans-serif{font-family: "Georgia", "serif";}
 h3,
 .sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
+
 
 /**
  * Generic Classes
@@ -56,7 +66,8 @@ h3,
 .clear{clear: both;}
 .frame{display:block; margin-bottom:1em; -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; background-color: white; -moz-border-radius: 5px; -webkit-border-radius: 5x; border-radius:5px; padding:5px; position:relative;}
 .ie .frame{border:1px solid #CCC;}
-.light {  font-family: 'Helvetica Neue Light', 'Helvetica Light', 'HelveticaLight', 'Helvetica-Light', "Helvetica Neue", Helvetica; font-weight:200; letter-spacing:1px; }
+.light{font-family: 'Helvetica Neue Light', 'Helvetica Light', 'HelveticaLight', 'Helvetica-Light', "Helvetica Neue", Helvetica; font-weight:200; letter-spacing:1px;}
+
 
 /**
  * Mimetype icons
