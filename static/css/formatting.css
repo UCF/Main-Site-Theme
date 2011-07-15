@@ -1,0 +1,76 @@
+/**
+ * Element styles (No font-family)
+ **/
+a{text-decoration: underline; color: #313130; font-weight: bold;}
+a:hover{color: #ed1c24;}
+h1{font-size: 29px; margin: 0 0 .5em 0;}
+h1 a{text-decoration: none; color: #313130; font-weight: normal;}
+h2{margin: .5em 0 1em 0; font-size: 22px; color: #E3B00B;}
+h3{margin: .5em 0 1em 0; font-size: 17px; font-weight: bold; color: #000;}
+h4{margin: 1em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
+p{line-height: 1.5em; font-size: 16px; margin: 0 0 1em 0;}
+blockquote{padding: 0 2em; color: #333; font-style: italic;}
+ol,
+ul{padding-left: 2em; margin: 1.5em 0; font-size: 16px;}
+li{margin: 0 0 .75em 0;}
+ul li{list-style: disc;}
+ul ol,
+ol ul,
+ol ol,
+ul ul{margin: 0 0 .75em 0;}
+ul ul li{list-style: circle; margin: .75em 0 0 0;}
+ol li{list-style: decimal;}
+ol ol li{list-style: lower-roman; margin: .75em 0 0 0;}
+ol ol ol li{list-style: lower-alpha;}
+strong{font-weight: bold;}
+em{font-style: italic;}
+
+
+/**
+ * Font declarations 
+ **/
+h2,
+.sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+h3,
+.sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
+h1, h4, p, ul, ol, a, blockquote,
+.serif{font-family: "Georgia", "serif";}
+
+
+/**
+ * Generic Classes
+ **/
+ul.nobullet,
+ol.nobullet{padding-left: 0; margin-left: 0;}
+.nobullet,
+.nobullet li{list-style-type: none;}
+.aligncenter{margin-left: auto; margin-right: auto; display: block;}
+.alignright{margin-left: auto; margin-right: 0; display: block;}
+.normal{font-weight: normal;}
+.heavy{font-weight: bold;}
+.upfont{font-size: 150%;}
+.downfont{font-size: 90%; line-height: 1.75em;}
+.clear-left{clear: left;}
+.clear-right{clear: right;}
+.clear{clear: both;}
+.frame{display:block; margin-bottom:1em; -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; background-color: white; -moz-border-radius: 5px; -webkit-border-radius: 5x; border-radius:5px; padding:5px; position:relative;}
+.ie .frame{border:1px solid #CCC;}
+.light{font-family: 'Helvetica Neue Light', 'Helvetica Light', 'HelveticaLight', 'Helvetica-Light', "Helvetica Neue", Helvetica; font-weight:200; letter-spacing:1px;}
+
+
+/**
+ * Mimetype icons
+ **/
+.powerpoint:before,
+.missing:before,
+.excel:before,
+.word:before,
+.zip:before,
+.pdf:before,
+.document:before{background: url('../img/documents.png'); margin: 0 5px 0 0; height: 18px; width: 18px; content: ''; display: inline-block; position: relative; top: 4px;}
+.word:before{background-position: 0 18px;}
+.zip:before{background-position: 0 36px;}
+.excel:before{background-position: 0 54px;}
+.missing:before{background-position: 0 72px;}
+.pdf:before{background-position: 0 90px;}
+.powerpoint:before{background-position: 0 108px;}

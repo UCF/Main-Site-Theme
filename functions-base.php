@@ -304,6 +304,24 @@ function __init__(){
 add_action('after_setup_theme', '__init__');
 
 
+function editor_styles($css){
+	$css   = array_map('trim', explode(',', $css));
+	$css[] = THEME_CSS_URL.'/formatting.css';
+	$css   = implode(',', $css);
+	return $css;
+}
+add_filter('mce_css', 'editor_styles');
+
+
+function editor_format_options($row){
+	$found = array_search('underline', $row);
+	if (False !== $found){
+		unset($row[$found]);
+	}
+	return $row;
+}
+add_filter('mce_buttons_2', 'editor_format_options');
+
 /**
  * Really get the post type.  A post type of revision will return it's parent
  * post type.
@@ -427,6 +445,17 @@ function create_attribute_string($attr){
 }
 
 
+function indent($html, $n){
+	$tabs = str_repeat("\t", $n);
+	$html = explode("\n", $html);
+	foreach($html as $key=>$line){
+		$html[$key] = $tabs.$line;
+	}
+	$html = implode("\n", $html);
+	return $html;
+}
+
+
 /**
  * Footer content
  **/
@@ -440,13 +469,15 @@ function footer_(){
 /**
  * Header content
  **/
-function header_(){
+function header_($tabs=2){
 	ob_start();
 	wp_head();
-	print header_title();
-	print header_meta();
-	print header_links();
-	return ob_get_clean();
+	print header_title()."\n";
+	print header_meta()."\n";
+	print header_links()."\n";
+	$html = ob_get_clean();
+	$html = indent($html, $tabs);
+	return $html;
 }
 
 
@@ -556,7 +587,7 @@ function header_title(){
 	$doctitle = $elements;
 	}
 
-	$doctitle = "\t" . "<title>" . $doctitle . "</title>" . "\n\n";
+	$doctitle = "<title>". $doctitle ."</title>";
 
 	return $doctitle;
 }
