@@ -3,10 +3,12 @@
 	
 	<div class="span-24 last page-content" id="<?=$post->post_name?>">
 		<div class="span-18">
-			<h2><?php the_title();?></h2>
-			<?php the_content();?>
+			<article>
+				<h1><?php the_title();?></h1>
+				<?php the_content();?>
+			</article>
 		</div>
-		<div class="span-6 last">
+		<div id="sidebar" class="span-6 last">
 			<?=get_sidebar();?>
 		</div>
 		

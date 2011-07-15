@@ -2,7 +2,6 @@
 
 <div class="page-content" id="post-list">
 	<div class="span-18">
-		
 		<?php while(have_posts()): the_post();?>
 		<article>
 			<h1><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
@@ -14,7 +13,7 @@
 		</article>
 		<?php endwhile;?>
 	</div>
-	<div class="span-6 last">
+	<div id="sidebar" class="span-6 last">
 		<?=get_sidebar();?>
 	</div>
 	

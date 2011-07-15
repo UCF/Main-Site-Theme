@@ -3,11 +3,12 @@
  **/
 a{text-decoration: underline; color: #313130; font-weight: bold;}
 a:hover{color: #ed1c24;}
-h1{font-size: 29px; margin: 0 0 .5em 0;}
-h1 a{text-decoration: none; color: #313130; font-weight: normal;}
-h2{margin: .5em 0 1em 0; font-size: 22px; color: #E3B00B;}
-h3{margin: .5em 0 1em 0; font-size: 17px; font-weight: bold; color: #000;}
-h4{margin: 1em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
+h1{margin: .5em 0 1em 0; font-size: 22px; color: #E3B00B;}
+h2{margin: .5em 0 1em 0; font-size: 17px; font-weight: bold; color: #000;}
+h3{margin: .5em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
+h4,
+h5,
+h6{margin: 1em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
 p{line-height: 1.5em; font-size: 16px; margin: 0 0 1em 0;}
 blockquote{padding: 0 2em; color: #333; font-style: italic;}
 ol,
@@ -29,11 +30,11 @@ em{font-style: italic;}
 /**
  * Font declarations 
  **/
-h2,
+h1,
 .sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-h3,
+h2,
 .sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
-h1, h4, p, ul, ol, a, blockquote,
+h3, h4, h5, h6, p, ul, ol, a, blockquote,
 .serif{font-family: "Georgia", "serif";}
 
 
