@@ -2,7 +2,8 @@
 /**
  * Element styles (No font-family)
  **/
-a{text-decoration: underline; color: #313130; font-weight: bold;}
+a{text-decoration: underline; color: #313130; }
+.default a { font-weight:bold; }
 a:hover{color: #ed1c24;}
 h1{margin: .5em 0 1em 0; font-size: 22px; color: #E3B00B;}
 h2{margin: .5em 0 1em 0; font-size: 17px; font-weight: bold; color: #000;}
