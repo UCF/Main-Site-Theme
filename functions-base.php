@@ -423,6 +423,12 @@ function editor_format_options($row){
 add_filter('mce_buttons_2', 'editor_format_options');
 
 /**
+ * Remove paragraph tag from excerpts
+ **/
+remove_filter('the_excerpt', 'wpautop');
+
+
+/**
  * Really get the post type.  A post type of revision will return it's parent
  * post type.
  **/
