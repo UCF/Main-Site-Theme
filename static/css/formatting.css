@@ -37,9 +37,10 @@ h3,
 h1, h4, p, ul, ol, a, blockquote,
 .serif{font-family: "Georgia", "serif";}
 
-.bold { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue Bold', 'f1', 'Helvetica Bold', 'HelveticaBold', 'Helvetica-Bold', sans-serif; font-size-adjust: 0.52; }
-.light { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue UltraLight', 'Helvetica Neue Light', 'f2', 'Helvetica Light', 'HelveticaLight', 'Helvetica-Light', sans-serif; font-size-adjust: 0.51; }
-.rock { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Rockwell Light', 'f3', 'RockwellLight', 'Rockwell-Light', serif; font-size-adjust: 0.47; }
+.bold { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue Bold', 'f1', 'Helvetica Bold', 'HelveticaBold', 'Helvetica-Bold', sans-serif; }
+.light { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue Light', 'f4', 'Helvetica Light', 'HelveNeuLig', 'Helvetica-Light', sans-serif; }
+.ulight { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue UltraLight', 'f2', 'Helvetica Ultra Light', 'HelveNeuUltLig', sans-serif; }
+.rock { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Rockwell Light', 'f3', 'RockwellLight', 'Rockwell-Light', serif; }
 
 
 /**
