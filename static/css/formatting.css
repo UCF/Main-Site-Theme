@@ -31,13 +31,6 @@ em{font-style: italic;}
 /**
  * Font declarations 
  **/
-h1,
-.sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-h2,
-.sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
-h3, h4, h5, h6, p, ul, ol, a, blockquote,
-.serif{font-family: "Georgia", "serif";}
-
 .bold { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue Bold', 'f1', 'Helvetica Bold', 'HelveticaBold', 'Helvetica-Bold', sans-serif; }
 .light { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue Light', 'f4', 'Helvetica Light', 'HelveNeuLig', 'Helvetica-Light', sans-serif; }
 .ulight { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue UltraLight', 'f2', 'Helvetica Ultra Light', 'HelveNeuUltLig', sans-serif; }
