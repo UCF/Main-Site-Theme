@@ -1,3 +1,4 @@
+@import url('fonts/fonts.css');
 /**
  * Element styles (No font-family)
  **/
@@ -36,6 +37,10 @@ h3,
 h1, h4, p, ul, ol, a, blockquote,
 .serif{font-family: "Georgia", "serif";}
 
+.bold { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue Bold', 'f1', 'Helvetica Bold', 'HelveticaBold', 'Helvetica-Bold', sans-serif; font-size-adjust: 0.52; }
+.light { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Helvetica Neue UltraLight', 'Helvetica Neue Light', 'f2', 'Helvetica Light', 'HelveticaLight', 'Helvetica-Light', sans-serif; font-size-adjust: 0.51; }
+.rock { font-weight: normal; font-style: normal; line-height:normal; font-family: 'Rockwell Light', 'f3', 'RockwellLight', 'Rockwell-Light', serif; font-size-adjust: 0.47; }
+
 
 /**
  * Generic Classes
@@ -55,7 +60,6 @@ ol.nobullet{padding-left: 0; margin-left: 0;}
 .clear{clear: both;}
 .frame{display:block; margin-bottom:1em; -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; -moz-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px; background-color: white; -moz-border-radius: 5px; -webkit-border-radius: 5x; border-radius:5px; padding:5px; position:relative;}
 .ie .frame{border:1px solid #CCC;}
-.light{font-family: 'Helvetica Neue Light', 'Helvetica Light', 'HelveticaLight', 'Helvetica-Light', "Helvetica Neue", Helvetica; font-weight:200; letter-spacing:1px;}
 
 
 /**
