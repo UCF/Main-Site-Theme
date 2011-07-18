@@ -19,6 +19,12 @@ abstract class CustomPostType{
 		$use_metabox    = False, # Enable if you have custom fields to display in admin
 		$use_shortcode  = False; # Auto generate a shortcode for the post type (see also toHTML method)
 	
+	
+	/**
+	 * Wrapper for get_posts function, that predefines post_type for this
+	 * custom post type.  Any options valid in get_posts can be passed as an
+	 * option array.  Returns an array of objects.
+	 **/
 	public function get_objects($options=array()){
 		$defaults = array(
 			'numberposts'   => -1,
@@ -31,12 +37,17 @@ abstract class CustomPostType{
 		return $objects;
 	}
 	
+	
+	/**
+	 * Similar to get_objects, but returns array of key values mapping post
+	 * title to id if available, otherwise it defaults to id=>id.
+	 **/
 	public function get_objects_as_options($options=array()){
 		$objects = $this->get_objects($options);
 		$opt     = array();
 		foreach($objects as $o){
 			switch(True){
-				case $this->use_title:
+				case $this->options('use_title'):
 					$opt[$o->post_title] = $o->ID;
 					break;
 				default:
@@ -47,15 +58,29 @@ abstract class CustomPostType{
 		return $opt;
 	}
 	
+	
+	/**
+	 * Return the instances values defined by $key.
+	 **/
 	public function options($key){
 		$vars = get_object_vars($this);
 		return $vars[$key];
 	}
 	
+	
+	/**
+	 * Additional fields on a custom post type may be defined by overriding this
+	 * method on an descendant object.
+	 **/
 	public function fields(){
 		return array();
 	}
 	
+	
+	/**
+	 * Using instance variables defined, returns an array defining what this
+	 * custom post type supports.
+	 **/
 	public function supports(){
 		#Default support array
 		$supports = array();
@@ -77,6 +102,10 @@ abstract class CustomPostType{
 		return $supports;
 	}
 	
+	
+	/**
+	 * Creates labels array, defining names for admin panel.
+	 **/
 	public function labels(){
 		return array(
 			'name'          => __($this->options('plural_name')),
@@ -87,6 +116,11 @@ abstract class CustomPostType{
 		);
 	}
 	
+	
+	/**
+	 * Creates metabox array for custom post type. Override method in
+	 * descendants to add or modify metaboxes.
+	 **/
 	public function metabox(){
 		if ($this->options('use_metabox')){
 			return array(
@@ -101,6 +135,10 @@ abstract class CustomPostType{
 		return null;
 	}
 	
+	
+	/**
+	 * Registers metaboxes defined for custom post type.
+	 **/
 	public function register_metaboxes(){
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
@@ -115,6 +153,11 @@ abstract class CustomPostType{
 		}
 	}
 	
+	
+	/**
+	 * Registers the custom post type and any other ancillary actions that are
+	 * required for the post to function properly.
+	 **/
 	public function register(){
 		$registration = array(
 			'labels'   => $this->labels(),
@@ -141,6 +184,12 @@ abstract class CustomPostType{
 		}
 	}
 	
+	
+	/**
+	 * Shortcode for this custom post type.  Can be overridden for descendants.
+	 * Defaults to just outputting a list of objects outputted as defined by
+	 * toHTML method.
+	 **/
 	public function shortcode($attr){
 		$default = array(
 			'type' => $this->options('name'),
@@ -153,6 +202,10 @@ abstract class CustomPostType{
 		return sc_object($attr);
 	}
 	
+	
+	/**
+	 * Outputs this item in HTML.  Can be overridden for descendants.
+	 **/
 	public function toHTML($post){
 		if (is_int($post)){
 			$post = get_post($post);
