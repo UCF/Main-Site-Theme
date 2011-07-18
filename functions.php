@@ -31,6 +31,8 @@ Config::$custom_post_types = array(
 	'Example',
 );
 
+Config::$body_classes = array('default',);
+
 /**
  * Configure theme settings, see abstract class Field's descendants for
  * available fields. -- functions-base.php

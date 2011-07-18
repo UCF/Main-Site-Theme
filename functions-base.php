@@ -7,6 +7,7 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
+		$body_classes      = array(), # Body classes 
 		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
 		$styles            = array(), # Stylesheets to register
@@ -703,7 +704,7 @@ function header_title(){
  * Returns string to use for value of class attribute on body tag
  **/
 function body_classes(){
-	$classes = array();
+	$classes = Config::$body_classes;
 	$classes = array_merge($classes, browser_classes());
 	
 	return implode(' ', $classes);
