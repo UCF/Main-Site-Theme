@@ -555,7 +555,7 @@ function indent($html, $n){
 	$tabs = str_repeat("\t", $n);
 	$html = explode("\n", $html);
 	foreach($html as $key=>$line){
-		$html[$key] = $tabs.$line;
+		$html[$key] = $tabs.trim($line);
 	}
 	$html = implode("\n", $html);
 	return $html;
