@@ -11,7 +11,8 @@ h3{margin: .5em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
 h4,
 h5,
 h6{margin: 1em 0 1em 0; font-size: 14px; font-weight: bold; color: #000;}
-p{line-height: 1.5em; font-size: 16px; margin: 0 0 1em 0;}
+p{line-height: 1.5em; margin: 0 0 1em 0;}
+.default p { font-size:16px; }
 blockquote{padding: 0 2em; color: #333; font-style: italic;}
 ol,
 ul{padding-left: 2em; margin: 1.5em 0; font-size: 16px;}
