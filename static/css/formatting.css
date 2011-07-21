@@ -15,7 +15,8 @@ p{line-height: 1.5em; margin: 0 0 1em 0;}
 .default p { font-size:16px; }
 blockquote{padding: 0 2em; color: #333; font-style: italic;}
 ol,
-ul{padding-left: 2em; margin: 1.5em 0; font-size: 16px;}
+ul{padding-left: 2em; margin: 1.5em 0; }
+.default ul { font-size:16px; }
 li{margin: 0 0 .75em 0;}
 ul li{list-style: disc;}
 ul ol,
