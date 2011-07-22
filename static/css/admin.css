@@ -18,3 +18,5 @@ body.login #loginform{margin-bottom: 20px;}
 body.login #login h1 a{background: transparent url('../img/login-logo.png') no-repeat 50% 0; text-indent: 0; text-align: center; text-decoration: none; padding-top: 92px; height: inherit; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; color: #333;}
 body.login #login h1 a:hover{color: #555;}
 body.login #login h1 a .hide{display: block;}
+
+.description code { background:none; font-weight:bold; color:#21759B; padding:0; }
