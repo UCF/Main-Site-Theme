@@ -6,10 +6,12 @@
 		<article>
 			<h1><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
 			<div class="meta">
-				<span class="date">Posted on <?php the_time("F j, Y");?></span>
+				<span class="date"><?php the_time("F j, Y");?></span>
 				<span class="author">by <?php the_author_posts_link();?></span>
 			</div>
-			<?php the_excerpt();?>
+			<div class="summary">
+				<?php the_excerpt();?>
+			</div>
 		</article>
 		<?php endwhile;?>
 	</div>
