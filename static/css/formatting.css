@@ -93,7 +93,7 @@ a.button:active, button:active {top: 1px;}
 /**
  * External links
  **/
-a.external:after{background: url('../img/external.png'); margin: 0 0 0 5px; height: 16px; width: 16px; content: ''; display: inline-block; position: relative; top: 2px;}
+.default a.external:after{background: url('../img/external.png'); margin: 0 0 0 5px; height: 16px; width: 16px; content: ''; display: inline-block; position: relative; top: 2px;}
 
 /**
  * Mimetype icons
