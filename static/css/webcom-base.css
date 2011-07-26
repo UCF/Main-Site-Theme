@@ -17,13 +17,55 @@ body{color: #222;}
 .menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
 .menu.horizontal .last:after {content: ""; margin-left: 0;}
 
+.search-form label{display: none;}
+.search-form .search-field{}
+.search-form .search-submit{}
+
+
+/**
+ * Form styles
+ **/
+input,
+textarea{padding: 4px; color: #333; border: 1px solid #ccc; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;}
+.msie input,
+.msie textarea{padding: 3px;}
+.firefox input,
+.firefox textarea{padding: 5px;}
+
+
+/**
+ * Button styles
+ **/
+a.button, button {display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
+button {margin-left: 0; margin-right: 0; *padding: 5px;}
+a.button {-moz-user-select: none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-user-select: none; -webkit-touch-callout: none;}
+button::-moz-focus-inner {border: 0; padding:0px;}
+a.button.primary, button.primary {font-weight: bold}
+button:focus,a.button:hover,
+button:hover {color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5;}
+a.button:active, button:active,
+a.button.active, button.active {background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none;}
+a.button:active, button:active {top: 1px;}
+
 /**
  * Location specific styles
  **/
+#search-results .result-list{padding: 0; margin: 0;}
+#search-results .result-list li{list-style-type: none;}
+#search-results .result-list .item{margin: 0 0 2em 0;}
+#search-results .result-list .item h3{margin: 0 0 10px 0;}
+#search-results .result-list .item a{text-decoration: none;}
+#search-results .result-list .item a:hover .url,
+#search-results .result-list .item a:hover .title{color: #000; text-decoration: underline;}
+#search-results .result-list .item .title{display: block; font-size: 18px; color: #333; margin: 0 0 5px 0;}
+#search-results .result-list .item .url{display: block; font-size: 14px; color: #666;}
+#search-results .result-list .item .snippet{font-size: 14px;}
+#search-results .search-field{width: 560px;}
+#search-results .search-form{margin-bottom: 2em;}
 #post-list article .summary{margin: 5px 0 0 0;}
 #blueprint-container{padding-top: 24px;}
 #header h1{margin: 0; font-size: 29px;}
 #header h1 a{text-decoration: none; color: #313130; font-weight: normal;}
 #header{border-bottom: 1px dotted #000; padding-bottom: 10px; margin-bottom: 10px;}
-#sidebar h2{margin: .5em 0 1em 0; font-size: 22px; color: #E3B00B;}
+#sidebar h2{margin: .5em 0 1em 0; font-size: 17px; color: #E3B00B;}
 #footer{border-top: 1px dotted #000; padding-top: 10px; margin: 10px 0 20px 0;}

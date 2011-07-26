@@ -62,8 +62,64 @@ var chartbeat = function($){
 	}
 };
 
+var loadMoreSearchResults = function($){
+	var more  = '#search-results .more';
+	var items = '#search-results .result-list .item';
+	var list  = '#search-results .result-list';
+	
+	var next = null;
+	var sema = null;
+	
+	var load = (function(){
+		if (sema){
+			setTimeout(function(){load();}, 100);
+			return;
+		}
+		
+		if (next == null){return;}
+		
+		// Grab results content and append to current results
+		var results = $(next).find(items);
+		$(list).append(results);
+		
+		// Grab new more link and replace current with new
+		var anchor = $(next).find(more);
+		$(more).attr('href', anchor.attr('href'));
+		
+		next = null;
+	});
+	
+	var prefetch = (function(){
+		sema = true;
+		// Fetch url for href via ajax
+		var url = $(more).attr('href');
+		$.ajax({
+			'url'     : url,
+			'success' : function(data){
+				next = data;
+			},
+			'complete' : function(){
+				sema = false;
+			}
+		});
+	});
+	
+	var load_and_prefetch = (function(){
+		load();
+		prefetch();
+	});
+	
+	load_and_prefetch();
+	
+	$(more).click(function(){
+		load_and_prefetch();
+		return false;
+	});
+};
+
 (function($){
 	chartbeat($);
 	analytics($);
 	handleExternalLinks($);
+	loadMoreSearchResults($);
 })(jQuery);
