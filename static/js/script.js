@@ -19,18 +19,15 @@ var analytics = function($){
 };
 
 var handleExternalLinks = function($){
-	var func = function(){
-		var url   = $(this).attr('href');
-		var host  = window.location.host.toLowerCase();
+	$('a').each(function(){
+		var url  = $(this).attr('href');
+		var host = window.location.host.toLowerCase();
 		
 		if (url.search(host) < 0 && url.search('http') > -1){
 			$(this).attr('target', '_blank');
+			$(this).addClass('external');
 		}
-		
-		return true;
-	};
-	
-	$('a').click(func);
+	});
 };
 
 var chartbeat = function($){
@@ -109,12 +106,14 @@ var loadMoreSearchResults = function($){
 		prefetch();
 	});
 	
-	load_and_prefetch();
-	
-	$(more).click(function(){
+	if ($(more).length > 0){
 		load_and_prefetch();
-		return false;
-	});
+	
+		$(more).click(function(){
+			load_and_prefetch();
+			return false;
+		});
+	}
 };
 
 (function($){
