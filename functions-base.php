@@ -227,6 +227,24 @@ class CheckboxField extends ChoicesField{
 }
 
 
+function cleanup($content){
+	#Remove incomplete tags at start and end
+	$content = preg_replace('/^<\/p>[\s]*/i', '', $content);
+	$content = preg_replace('/[\s]*<p>$/i', '', $content);
+	$content = preg_replace('/^<br \/>/i', '', $content);
+	$content = preg_replace('/<br \/>$/i', '', $content);
+
+	#Remove paragraph and linebreak tags wrapped around shortcodes
+	$content = preg_replace('/(<p>|<br \/>)\[/i', '[', $content);
+	$content = preg_replace('/\](<\/p>|<br \/>)/i', ']', $content);
+
+	#Remove empty paragraphs
+	$content = preg_replace('/<p><\/p>/i', '', $content);
+
+	return $content;
+}
+
+
 /**
  * Given a mimetype, will attempt to return a string representing the
  * application it is associated with.
