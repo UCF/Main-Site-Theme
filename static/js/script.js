@@ -87,6 +87,9 @@ var loadMoreSearchResults = function($){
 		
 		// Grab new more link and replace current with new
 		var anchor = $(next).find(more);
+		if (anchor.length < 1){
+			$(more).remove();
+		}
 		$(more).attr('href', anchor.attr('href'));
 		
 		next = null;
@@ -96,15 +99,17 @@ var loadMoreSearchResults = function($){
 		sema = true;
 		// Fetch url for href via ajax
 		var url = $(more).attr('href');
-		$.ajax({
-			'url'     : url,
-			'success' : function(data){
-				next = data;
-			},
-			'complete' : function(){
-				sema = false;
-			}
-		});
+		if (url){
+			$.ajax({
+				'url'     : url,
+				'success' : function(data){
+					next = data;
+				},
+				'complete' : function(){
+					sema = false;
+				}
+			});
+		}
 	});
 	
 	var load_and_prefetch = (function(){
@@ -118,7 +123,6 @@ var loadMoreSearchResults = function($){
 		$(more).click(function(){
 			load_and_prefetch();
 			var scroll_to = $('.' + start_class).offset().top - 10;
-			console.log($('.' + start_class).offset().top);
 			$('body').animate({'scrollTop' : scroll_to}, 1000);
 			return false;
 		});
