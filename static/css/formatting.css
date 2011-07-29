@@ -76,6 +76,22 @@ ol.nobullet{padding-left: 0; margin-left: 0;}
 
 
 /**
+ * Captioned items. Generally only useful with images. Example:
+ * <div class="captioned">
+ *   <div class="content"><img src=.../></div>
+ *   <div class="caption">
+ *     <p>This is a caption, it captions something wow.</p>
+ *   </div>
+ * </div>
+ **/
+.captioned{display: block; position: relative;}
+.captioned .content{}
+.captioned .caption{position: absolute; bottom: 5px; left: 0; padding: 10px 10px 0 10px; background-color: #333; color: #fff;}
+.firefox .caption{bottom: 7px;}
+.captioned .caption p{margin: 0 0 10px 0;}
+
+
+/**
  * Button styles
  **/
 a.button, button {display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
