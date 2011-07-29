@@ -38,14 +38,14 @@ textarea{padding: 4px; color: #333; border: 1px solid #ccc; -webkit-border-radiu
  **/
 #search-results .more{padding-left: 10px; padding-right: 10px;}
 #search-results .result-list{padding: 0; margin: 0;}
-#search-results .result-list li{list-style-type: none;}
+#search-results .result-list li{list-style-type: none; word-wrap: break-word;}
 #search-results .result-list .item{margin: 0 0 2em 0;}
 #search-results .result-list .item h3{margin: 0 0 10px 0;}
 #search-results .result-list .item a{text-decoration: none;}
 #search-results .result-list .item a:hover .url,
 #search-results .result-list .item a:hover .title{color: #000; text-decoration: underline;}
-#search-results .result-list .item .title{display: block; font-size: 18px; color: #333; margin: 0 0 5px 0;}
-#search-results .result-list .item .url{display: block; font-size: 14px; color: #666;}
+#search-results .result-list .item .title{display: block; font-size: 18px; color: #333;}
+#search-results .result-list .item .url{display: block; font-size: 14px; color: #666; margin: 5px 0 0 0;}
 #search-results .result-list .item .snippet{font-size: 14px;}
 #search-results .search-field{width: 560px;}
 #search-results .search-form{margin-bottom: 2em;}

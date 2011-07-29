@@ -655,10 +655,11 @@ function indent($html, $n){
 /**
  * Footer content
  **/
-function footer_(){
+function footer_($tabs=2){
 	ob_start();
 	wp_footer();
-	return ob_get_clean();
+	$html = ob_get_clean();
+	return indent($html, $tabs);
 }
 
 

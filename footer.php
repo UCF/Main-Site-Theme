@@ -2,6 +2,6 @@
 				<?=get_menu('footer-menu', 'menu horizontal', 'footer-menu')?>
 			</div>
 		</div><!-- #blueprint-container -->
-		<?=footer_()?>
+		<?="\n".footer_()."\n"?>
 	</body>
 </html>

@@ -1,5 +1,4 @@
 <?php get_header();?>
-
 <div class="page-content" id="post-list">
 	<div class="span-18">
 		<?php while(have_posts()): the_post();?>
@@ -23,6 +22,4 @@
 	<?php get_template_part('templates/below-the-fold'); ?>
 	
 </div>
-
-
 <?php get_footer();?>

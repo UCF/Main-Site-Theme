@@ -18,8 +18,8 @@
 				<li class="item">
 					<h3>
 						<a class="ignore-external" href="<?=$result['url']?>">
-							<span class="title sans"><?=$result['title']?></span>
-							<span class="<?php if($result['mime']):?><?=mimetype_to_application($result['mime'])?> <?php endif;?>url sans"><?=$result['url']?></span>
+							<span class="title sans <?=mimetype_to_application($result['mime'])?>"><?=$result['title']?></span>
+							<span class="url sans"><?=$result['url']?></span>
 						</a>
 					</h3>
 					<div class="snippet sans">
