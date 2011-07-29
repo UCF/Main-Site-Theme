@@ -30,7 +30,7 @@
 			</ul>
 			
 			<?php if($start + $limit < $results['number']):?>
-			<a class="more" href="./?s=<?=$_GET['s']?>&amp;start=<?=$start + $limit?>">More Results</a>
+			<a class="button more" href="./?s=<?=$_GET['s']?>&amp;start=<?=$start + $limit?>">More Results</a>
 			<?php endif;?>
 			
 			<?php else:?>
