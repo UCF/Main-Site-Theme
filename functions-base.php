@@ -424,12 +424,15 @@ add_action('after_setup_theme', '__init__');
  **/
 function get_search_results(
 		$query,
-		$start=0,
-		$per_page=10,
+		$start=null,
+		$per_page=null,
+		$domain=null,
 		$search_url="http://google.cc.ucf.edu/search"
 	){
 	
-	$domain    = (isset($_GET['domain'])) ? $_GET['domain'] : $_SERVER['SERVER_NAME'];
+	$start     = ($start) ? $start : 0;
+	$per_page  = ($per_page) ? $per_page : 10;
+	$domain    = ($domain) ? $domain : $_SERVER['SERVER_NAME'];
 	$results   = array(
 		'number' => 0,
 		'items'  => array(),
