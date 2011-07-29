@@ -417,10 +417,8 @@ add_action('after_setup_theme', '__init__');
 
 
 /**
- * Uses the google search appliance to search the current site.  A debug mode
- * to test the results is available.  If a get variable named domain is passed
- * during the search, the specified domain will be searched. Useful when
- * developing locally.
+ * Uses the google search appliance to search the current site or the site 
+ * defined by the argument $domain.
  **/
 function get_search_results(
 		$query,
