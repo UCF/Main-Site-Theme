@@ -116,7 +116,96 @@ var loadMoreSearchResults = function($){
 	}
 };
 
+var slideshow = function($){
+	/**
+	 * Create slideshow of arbitrary objects.  Class each item to be a slide
+	 * as 'slide', and recommend you set a static height and width on the 
+	 * slideshow container.
+	 * 
+	 * Example:
+	 * <div class="slides">
+	 *   <img class="slide"...>
+	 *   <div class="slide">...</div>
+	 * </div>
+	 * 
+	 * $('.slides').slideShow({
+	 *   'transition_length' : 2000,
+	 *   'cycle_length': 4000
+	 * });
+	 *
+	 * The options can be overridden by setting the data-tranlen and
+	 * data-cyclelen attributes on the slideshow container.
+	 **/
+	$.fn.slideShow = function (args){
+		var cycle = function(items, index){
+			if (items.length < 1){ return;}
+			
+			var next_index = (index + 1) % items.length;
+			
+			// Initialize active and null elements
+			var active = $(items[index]);
+			var next   = $(items[next_index]);
+			
+			next.css({'left' : -width});
+			next.show();
+			
+			active.animate({
+				'left' : '+=' + width
+			}, options.transition_length, function(){
+				next.css({'left' : 0});
+			});
+			
+			next.animate({
+				'left' : 0
+			}, options.transition_length, function(){
+				next.css({'left' : 0});
+				
+				setTimeout(function(){
+					cycle(items, next_index);
+				}, options.cycle_length);
+			});
+			
+			return;
+		};
+		
+		var defaults = {
+			'transition_length' : 1000,
+			'cycle_length'      : 5000
+		};
+		var options   = $.extend({}, defaults, args);
+		var container = $(this);
+		if (container.attr('data-tranlen')){
+			options.transition_length = parseInt(container.attr('data-tranlen'));
+		}
+		if (container.attr('data-cyclelen')){
+			options.cycle_length = parseInt(container.attr('data-cyclelen'));
+		}
+		var width     = container.width();
+		var animating = false;
+		var items     = container.children('.slide');
+		var first     = $(items[0]);
+		
+		container.css({
+			'position' : 'relative',
+			'overflow' : 'hidden'
+		});
+		items.css({
+			'position' : 'absolute',
+			'width'    : width + 'px'
+		});
+		items.hide();
+		first.show();
+		
+		return setTimeout(function(){
+			cycle(items, 0);
+		}, options.cycle_length);
+	};
+	
+	$('.slideshow').slideShow();
+};
+
 (function($){
+	slideshow($);
 	chartbeat($);
 	analytics($);
 	handleExternalLinks($);
