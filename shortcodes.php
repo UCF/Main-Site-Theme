@@ -46,8 +46,8 @@ function sc_slideshow($attr, $content=null){
 	
 	$height    = ($attr['height']) ? $attr['height'] : '100px';
 	$width     = ($attr['width']) ? $attr['width'] : '100%';
-	$tran_len  = ($attr['transition']) ? $attr['transition_length'] : 1000;
-	$cycle_len = ($attr['cycle']) ? $attr['cycle_length'] : 5000;
+	$tran_len  = ($attr['transition']) ? $attr['transition'] : 1000;
+	$cycle_len = ($attr['cycle']) ? $attr['cycle'] : 5000;
 	
 	ob_start();
 	?>
