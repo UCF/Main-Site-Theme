@@ -17,11 +17,11 @@
 				<?php foreach($results['items'] as $result):?>
 				<li class="item">
 					<h3>
-						<a class="ignore-external" href="<?=$result['url']?>">
-							<span class="title sans <?=mimetype_to_application($result['mime'])?>"><?=$result['title']?></span>
-							<span class="url sans"><?=$result['url']?></span>
+						<a class="sans ignore-external title <?=mimetype_to_application(($result['mime']) ? $result['mime'] : 'text/html')?>" href="<?=$result['url']?>">
+							<?=$result['title']?>
 						</a>
 					</h3>
+					<a href="<?=$result['url']?>" class="ignore-external url sans"><?=$result['url']?></a>
 					<div class="snippet sans">
 						<?=str_replace('<br>', '', $result['snippet'])?>
 					</div>
@@ -40,21 +40,19 @@
 			<?php endif;?>
 		</div>
 		
-		<?php
-			// Remove search widget if included, redundant
-			ob_start();
-			get_search_form();
-			$search = ob_get_clean();
-			
-			ob_start();
-			get_sidebar();
-			$sidebar = str_replace($search, '', ob_get_clean());
-		?>
+		
 		<div id="sidebar" class="span-6 last">
+			<?php
+				// Remove search widget if included, redundant on this page
+				ob_start(); get_search_form(); $search  = ob_get_clean();
+				ob_start(); get_sidebar()    ; $sidebar = ob_get_clean();
+				$sidebar = str_replace($search, '', $sidebar);
+			?>
 			<?=$sidebar?>
 		</div>
 		
-		<div class="clear"><!-- --></div>
-		<?php get_template_part('templates/below-the-fold'); ?>
+		<div id="below-the-fold" class="clear">
+			<?php get_template_part('templates/below-the-fold'); ?>
+		</div>
 	</div>
 <?php get_footer();?>

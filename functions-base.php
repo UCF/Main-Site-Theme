@@ -254,6 +254,9 @@ function mimetype_to_application($mimetype){
 		default:
 			$type = 'document';
 			break;
+		case 'text/html':
+			$type = "html";
+			break;
 		case 'application/zip':
 			$type = "zip";
 			break;

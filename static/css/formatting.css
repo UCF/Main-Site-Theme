@@ -94,16 +94,22 @@ ol.nobullet{padding-left: 0; margin-left: 0;}
 /**
  * Button styles
  **/
-a.button, button {display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
-button {margin-left: 0; margin-right: 0; *padding: 5px;}
-a.button {-moz-user-select: none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-user-select: none; -webkit-touch-callout: none;}
-button::-moz-focus-inner {border: 0; padding:0px;}
-a.button.primary, button.primary {font-weight: bold}
-button:focus,a.button:hover,
-button:hover {color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5;}
-a.button:active, button:active,
-a.button.active, button.active {background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none;}
-a.button:active, button:active {top: 1px;}
+a.button,
+button {display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
+button{margin-left: 0; margin-right: 0; *padding: 5px;}
+a.button{-moz-user-select: none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-user-select: none; -webkit-touch-callout: none;}
+button::-moz-focus-inner{border: 0; padding:0px;}
+a.button.primary,
+button.primary {font-weight: bold}
+button:focus,
+a.button:hover,
+button:hover{color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5;}
+a.button:active,
+button:active,
+a.button.active,
+button.active {background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none;}
+a.button:active,
+button:active{top: 1px;}
 
 
 /**
@@ -120,10 +126,12 @@ a.button:active, button:active {top: 1px;}
 .word:before,
 .zip:before,
 .pdf:before,
+.html:before,
 .document:before{background: url('../img/documents.png'); margin: 0 5px 0 0; height: 18px; width: 18px; content: ''; display: inline-block; position: relative; top: 3px;}
-.word:before{background-position: 0 18px;}
-.zip:before{background-position: 0 36px;}
-.excel:before{background-position: 0 54px;}
-.missing:before{background-position: 0 72px;}
-.pdf:before{background-position: 0 90px;}
-.powerpoint:before{background-position: 0 108px;}
+.powerpoint:before{background-position: 0 -18px;}
+.pdf:before{background-position: 0 -36px;}
+.missing:before{background-position: 0 -54px;}
+.excel:before{background-position: 0 -72px;}
+.zip:before{background-position: 0 -90px;}
+.word:before{background-position: 0 -108px;}
+.html:before{background-position: 0 -126px;}
