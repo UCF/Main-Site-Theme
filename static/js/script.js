@@ -19,7 +19,7 @@ var analytics = function($){
 };
 
 var handleExternalLinks = function($){
-	$('a').each(function(){
+	$('a:not(.ignore-external)').each(function(){
 		var url  = $(this).attr('href');
 		var host = window.location.host.toLowerCase();
 		
@@ -60,9 +60,10 @@ var chartbeat = function($){
 };
 
 var loadMoreSearchResults = function($){
-	var more  = '#search-results .more';
-	var items = '#search-results .result-list .item';
-	var list  = '#search-results .result-list';
+	var more        = '#search-results .more';
+	var items       = '#search-results .result-list .item';
+	var list        = '#search-results .result-list';
+	var start_class = 'new-start';
 	
 	var next = null;
 	var sema = null;
@@ -77,6 +78,11 @@ var loadMoreSearchResults = function($){
 		
 		// Grab results content and append to current results
 		var results = $(next).find(items);
+		
+		// Add navigation class for scroll
+		$('.' + start_class).removeClass(start_class);
+		$(results[0]).addClass(start_class);
+		
 		$(list).append(results);
 		
 		// Grab new more link and replace current with new
@@ -111,6 +117,9 @@ var loadMoreSearchResults = function($){
 	
 		$(more).click(function(){
 			load_and_prefetch();
+			var scroll_to = $('.' + start_class).offset().top - 10;
+			console.log($('.' + start_class).offset().top);
+			$('body').animate({'scrollTop' : scroll_to}, 1000);
 			return false;
 		});
 	}
