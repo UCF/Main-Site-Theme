@@ -95,8 +95,10 @@ ol.nobullet{padding-left: 0; margin-left: 0;}
  * Button styles
  **/
 a.button,
-button {display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
-button{margin-left: 0; margin-right: 0; *padding: 5px;}
+button{display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
+button{margin-left: 0; margin-right: 0;}
+.msie a.button,
+button{padding: 6px 5px 6px 5px;}
 a.button{-moz-user-select: none; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-user-select: none; -webkit-touch-callout: none;}
 button::-moz-focus-inner{border: 0; padding:0px;}
 a.button.primary,

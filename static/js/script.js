@@ -123,7 +123,14 @@ var loadMoreSearchResults = function($){
 		$(more).click(function(){
 			load_and_prefetch();
 			var scroll_to = $('.' + start_class).offset().top - 10;
-			$('body').animate({'scrollTop' : scroll_to}, 1000);
+			
+			var element = 'body';
+			
+			if($.browser.mozilla || $.browser.msie){
+				element = 'html';
+			}
+			
+			$(element).animate({'scrollTop' : scroll_to}, 1000);
 			return false;
 		});
 	}
