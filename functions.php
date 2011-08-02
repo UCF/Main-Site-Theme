@@ -93,15 +93,6 @@ Config::$theme_settings = array(
 	)),
 );
 
-
-if(get_option(THEME_OPTIONS_NAME) === False) {
-	foreach(Config::$theme_settings as $setting) {
-		if(!is_null($setting['default'])) {
-			update_option($setting['id'], $setting['default']);
-		}
-	}
-}
-
 /**
  * Configure theme settings, see abstract class Field's descendants for
  * available fields. -- functions-base.php
