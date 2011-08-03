@@ -93,11 +93,6 @@ Config::$theme_settings = array(
 	)),
 );
 
-/**
- * Configure theme settings, see abstract class Field's descendants for
- * available fields. -- functions-base.php
- **/
-
 Config::$links = array(
 	array('rel' => 'shortcut icon', 'href' => THEME_IMG_URL.'/favicon.ico',),
 	array('rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => get_bloginfo('rss_url'),),
