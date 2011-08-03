@@ -281,6 +281,97 @@ function mimetype_to_application($mimetype){
 
 
 /**
+ * Fetches objects defined by arguments passed, outputs the objects according
+ * to the objectsToHTML method located on the object.  Used by the auto
+ * generated shortcodes enabled on custom post types. See also:
+ * 
+ *   CustomPostType::objectsToHTML
+ *   CustomPostType::toHTML
+ *
+ **/
+function sc_object_list($attr, $default_content=null){
+	if (!is_array($attr)){return '';}
+	
+	# set defaults and combine with passed arguments
+	$defaults = array(
+		'type'  => null,
+		'limit' => -1,
+		'join'  => 'or',
+	);
+	$options = array_merge($defaults, $attr);
+	
+	# verify options
+	if ($options['type'] == null){
+		return '<p class="error">No type defined for object list.</p>';
+	}
+	if (!is_numeric($options['limit'])){
+		return '<p class="error">Invalid limit argument, must be a number.</p>';
+	}
+	if (!in_array(strtoupper($options['join']), array('AND', 'OR'))){
+		return '<p class="error">Invalid join type, must be one of "and" or "or".</p>';
+	}
+	if (null == ($class = get_custom_post_type($options['type']))){
+		return '<p class="error">Invalid post type.</p>';
+	}
+	
+	# get taxonomies and translation
+	$translate  = array(
+		'tags'       => 'post_tag',
+		'categories' => 'category',
+	);
+	$taxonomies = array_diff(array_keys($attr), array_keys($defaults));
+	
+	# assemble taxonomy query
+	$tax_queries             = array();
+	$tax_queries['relation'] = strtoupper($options['join']);
+	
+	foreach($taxonomies as $tax){
+		$terms = $options[$tax];
+		$terms = trim(preg_replace('/\s+/', ' ', $terms));
+		$terms = explode(' ', $terms);
+		
+		if (array_key_exists($tax, $translate)){
+			$tax = $translate[$tax];
+		}
+		
+		$tax_queries[] = array(
+			'taxonomy' => $tax,
+			'field'    => 'slug',
+			'terms'    => $terms,
+		);
+	}
+	
+	# perform query
+	$query_array = array(
+		'tax_query'      => $tax_queries,
+		'post_status'    => 'publish',
+		'post_type'      => $options['type'],
+		'posts_per_page' => $options['limit'],
+		'orderby'        => 'menu_order title',
+		'order'          => 'ASC',
+	);
+	$query = new WP_Query($query_array);
+	$class = new $class;
+	
+	
+	global $post;
+	$objects = array();
+	while($query->have_posts()){
+		$query->the_post();
+		$objects[] = $post;
+	}
+	wp_reset_postdata();
+	
+	if (count($objects)){
+		$html = $class->objectsToHTML($objects);
+	}else{
+		$html = $default_content;
+	}
+	return $html;
+}
+
+
+/**
  * Creates an array 
  **/
 function shortcodes(){
@@ -298,8 +389,8 @@ function shortcodes(){
 		$scode  = $code->options('name').'-list';
 		$plural = $code->options('plural_name');
 		$doc = <<<DOC
- Outputs a list of {$plural} filtered by tag
- or category.
+ Outputs a list of {$plural} filtered by arbitrary taxonomies, for example a tag
+or category.
 
  Example:
  # Output a maximum of 5 items tagged foo or bar.
@@ -307,6 +398,13 @@ function shortcodes(){
 
  # Output all objects categorized as foo
  [{$scode} categories="foo"]
+
+ # Output all objects matching the terms in the custom taxonomy named foo
+ [{$scode} foo="term list example"]
+
+ # Combined taxonomy example, all objects with category staff and tagged small,
+ # funny, and with a custom taxonomy of term, list, and example.
+ [{$scode} limit="5" join="and" categories="staff" tags="small funny" foo="term list example"]
 DOC;
 		$codes[] = array(
 			'documentation' => $doc,
