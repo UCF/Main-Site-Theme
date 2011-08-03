@@ -4,9 +4,10 @@
 \******************************************************************************/
 var Webcom = {};
 
+if(!window.console ) { window.console = { log: function() { return; } }; }
+
 // for jslint validation
 /*global window, document, Image, google, $, jQuery */
-
 
 Webcom.analytics = function($){
 	if ((typeof GA_ACCOUNT !== 'undefined') && Boolean(GA_ACCOUNT)){
