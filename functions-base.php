@@ -390,11 +390,12 @@ function shortcodes(){
 		$plural = $code->options('plural_name');
 		$doc = <<<DOC
  Outputs a list of {$plural} filtered by arbitrary taxonomies, for example a tag
-or category.
+or category.  A default output for when no objects matching the criteria are
+found.
 
  Example:
- # Output a maximum of 5 items tagged foo or bar.
- [{$scode} tags="foo bar" limit="5"]
+ # Output a maximum of 5 items tagged foo or bar, with a default output.
+ [{$scode} tags="foo bar" limit="5"]No {$plural} were found.[/{$scode}]
 
  # Output all objects categorized as foo
  [{$scode} categories="foo"]
@@ -402,9 +403,8 @@ or category.
  # Output all objects matching the terms in the custom taxonomy named foo
  [{$scode} foo="term list example"]
 
- # Combined taxonomy example, all objects with category staff and tagged small,
- # funny, and with a custom taxonomy of term, list, and example.
- [{$scode} limit="5" join="and" categories="staff" tags="small funny" foo="term list example"]
+ # Outputs all objects found categorized as staff and tagged as small.
+ [{$scode} limit="5" join="and" categories="staff" tags="small"]
 DOC;
 		$codes[] = array(
 			'documentation' => $doc,
