@@ -38,48 +38,54 @@ Config::$body_classes = array('default',);
  * available fields. -- functions-base.php
  **/
 Config::$theme_settings = array(
-	new TextField(array(
-		'name'        => 'Google Analytics Account',
-		'id'          => THEME_OPTIONS_NAME.'[ga_account]',
-		'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
-		'default'     => null,
-		'value'       => $theme_options['ga_account'],
-	)),
-	new TextField(array(
-		'name'        => 'Google WebMaster Verification',
-		'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
-		'description' => 'Example <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
-		'default'     => null,
-		'value'       => $theme_options['gw_verify'],
-	)),
-	new TextField(array(
-		'name'        => 'Chartbeat UID',
-		'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
-		'description' => 'Example <em>1842</em>',
-		'default'     => null,
-		'value'       => $theme_options['cb_uid'],
-	)),
-	new TextField(array(
-		'name'        => 'Chartbeat Domain',
-		'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
-		'description' => 'Example <em>some.domain.com</em>',
-		'default'     => null,
-		'value'       => $theme_options['cb_domain'],
-	)),
-	new TextField(array(
-		'name'        => 'Search Domain',
-		'id'          => THEME_OPTIONS_NAME.'[search_domain]',
-		'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example <em>some.domain.com</em>',
-		'default'     => null,
-		'value'       => $theme_options['search_domain'],
-	)),
-	new TextField(array(
-		'name'        => 'Search Results Per Page',
-		'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
-		'description' => 'Number of search results to show per page of results',
-		'default'     => 10,
-		'value'       => $theme_options['search_per_page'],
-	)),
+	'Google' => array(
+		new TextField(array(
+			'name'        => 'Google Analytics Account',
+			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
+			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+			'default'     => null,
+			'value'       => $theme_options['ga_account'],
+		)),
+		new TextField(array(
+			'name'        => 'Google WebMaster Verification',
+			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
+			'description' => 'Example <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+			'default'     => null,
+			'value'       => $theme_options['gw_verify'],
+		)),
+	),
+	'Chartbeat' => array(
+		new TextField(array(
+			'name'        => 'Chartbeat UID',
+			'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
+			'description' => 'Example <em>1842</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_uid'],
+		)),
+		new TextField(array(
+			'name'        => 'Chartbeat Domain',
+			'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
+			'description' => 'Example <em>some.domain.com</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_domain'],
+		)),
+	),
+	'Search' => array(
+		new TextField(array(
+			'name'        => 'Search Domain',
+			'id'          => THEME_OPTIONS_NAME.'[search_domain]',
+			'description' => 'Domain to use for the built-in google search.  Useful for development or if the site needs to search a domain other than the one it occupies. Example <em>some.domain.com</em>',
+			'default'     => null,
+			'value'       => $theme_options['search_domain'],
+		)),
+		new TextField(array(
+			'name'        => 'Search Results Per Page',
+			'id'          => THEME_OPTIONS_NAME.'[search_per_page]',
+			'description' => 'Number of search results to show per page of results',
+			'default'     => 10,
+			'value'       => $theme_options['search_per_page'],
+		)),
+	),
 	new RadioField(array(
 		'name'        => 'Radio Example',
 		'id'          => THEME_OPTIONS_NAME.'[radio]',

@@ -20,3 +20,9 @@ body.login #login h1 a:hover{color: #555;}
 body.login #login h1 a .hide{display: block;}
 
 .description code { background:none; font-weight:bold; color:#21759B; padding:0; }
+
+tr.section{padding-bottom: 20px;}
+tr.section td{padding: 0;}
+tr.section td td{padding: 10px; margin: 0;}
+tr.section h3{padding: 10px; margin: 0; background-color: #efefef; color: #21759B; border: 1px solid #DFDFDF;}
+tr.section table{padding: 0; margin: 0 0 20px 0;}

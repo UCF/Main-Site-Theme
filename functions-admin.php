@@ -50,11 +50,27 @@ function theme_options_page(){
 			
 			<?php settings_fields(THEME_OPTIONS_GROUP);?>
 			<table class="form-table">
-				<?php foreach(Config::$theme_settings as $setting):?>
+				<?php foreach(Config::$theme_settings as $key=>$setting):?>
+				<?php if(is_array($setting)): $section = $setting;?>
+				<tr class="section">
+					<td colspan="2">
+						<h3><?=$key?></h3>
+						<table class="form-table">
+							<?php foreach($section as $setting):?>
+							<tr valign="top">
+								<th scope="row"><label for="<?=htmlentities($setting->id)?>"><?=$setting->name?></label></th>
+								<td class="field"><?=$setting->html()?></td>
+							</tr>
+							<?php endforeach;?>
+						</table>
+					</td>
+				</tr>
+				<?php else:?>
 				<tr valign="top">
 					<th scope="row"><label for="<?=htmlentities($setting->id)?>"><?=$setting->name?></label></th>
 					<td class="field"><?=$setting->html()?></td>
 				</tr>
+				<?php endif;?>
 				<?php endforeach;?>
 			</table>
 			<div class="submit">
