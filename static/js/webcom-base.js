@@ -173,10 +173,24 @@ Webcom.slideshow = function($){
 			
 			var next_index = (index + 1) % items.length;
 			
-			// Initialize active and null elements
 			var active = $(items[index]);
 			var next   = $(items[next_index]);
 			
+			if (animating){
+				animation(active, next, function(){
+					setTimeout(function(){
+						cycle(items, next_index);
+					}, options.cycle_length);
+				});
+			}else{
+				setTimeout(function(){
+					cycle(items, next_index - 1);
+				}, 100);
+			}
+			return;
+		};
+		
+		var slideAnimation = function (active, next, complete_callback){
 			next.css({'left' : -width});
 			next.show();
 			
@@ -190,47 +204,108 @@ Webcom.slideshow = function($){
 				'left' : 0
 			}, options.transition_length, function(){
 				next.css({'left' : 0});
-				
-				setTimeout(function(){
-					cycle(items, next_index);
-				}, options.cycle_length);
+				complete_callback();
+			});
+		}
+		slideAnimation.init = function(container, items){
+			var first = $(items[0]);
+			
+			container.css({
+				'position' : 'relative',
+				'overflow' : 'hidden'
+			});
+			items.css({
+				'position' : 'absolute',
+				'display'  : 'none',
+				'width'    : width + 'px'
 			});
 			
-			return;
+			first.show();
 		};
 		
+		var fadeAnimation = function(active, next, complete_callback){
+			active.animate({'opacity' : '0.0'}, options.transition_length, function(){
+				active.css({'display' : 'none', 'opacity' : '1.0'});
+			});
+			next.css({'display' : 'block', 'opacity' : '0.0'})
+			next.animate({'opacity' : '1.0'}, options.transition_length, function(){
+				next.css({'display' : 'block', 'opacity' : '1.0'});
+				complete_callback();
+			});
+		}
+		fadeAnimation.init = function(container, items){
+			var first = $(items[0]);
+			
+			if ($.browser.msie){
+				// Lessens the visibility of the opacity filter bug in IE6/7/8
+				container.css({
+					'background-color' : '#000'
+				});
+			}
+			container.css({
+				'position' : 'relative',
+				'overflow' : 'hidden'
+			});
+			
+			items.css({
+				'position' : 'absolute',
+				'display'  : 'none'
+			});
+			
+			first.show();
+		};
+		
+		var animations = {
+			'slide' : slideAnimation,
+			'fade'  : fadeAnimation
+		};
+		
+		// Options configurations
 		var defaults = {
 			'transition_length' : 1000,
-			'cycle_length'      : 5000
+			'cycle_length'      : 5000,
+			'animation'         : 'slide'
 		};
 		var options   = $.extend({}, defaults, args);
+		
 		var container = $(this);
+		var height    = container.height();
+		var width     = container.width();
+		var items     = container.children();
+		var animating = true;
+		
+		// Stop animation while user mouse is hovering
+		$(container).mouseenter(function(){
+			animating = false;
+		});
+		$(container).mouseleave(function(){
+			animating = true;
+		});
+		
+		// data attribute overrides
 		if (container.attr('data-tranlen')){
 			options.transition_length = parseInt(container.attr('data-tranlen'));
 		}
 		if (container.attr('data-cyclelen')){
 			options.cycle_length = parseInt(container.attr('data-cyclelen'));
 		}
-		var width     = container.width();
-		var animating = false;
-		var items     = container.children('.slide');
-		var first     = $(items[0]);
 		
-		container.css({
-			'position' : 'relative',
-			'overflow' : 'hidden'
-		});
-		items.css({
-			'position' : 'absolute',
-			'width'    : width + 'px'
-		});
-		items.hide();
-		first.show();
+		var animation  = animations[options.animation];
+		animation.init(container, items);
 		
 		return setTimeout(function(){
 			cycle(items, 0);
 		}, options.cycle_length);
 	};
 	
-	$('.slideshow').slideShow();
+	$('.slideshow.fade').slideShow({
+		'transition_length' : 750,
+		'cycle_length'      : 2000,
+		'animation'         : 'fade'
+	});
+	$('.slideshow.slide').slideShow({
+		'transition_length' : 750,
+		'cycle_length'      : 2000,
+		'animation'         : 'slide'
+	});
 };

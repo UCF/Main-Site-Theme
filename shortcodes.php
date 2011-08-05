@@ -35,6 +35,7 @@ function sc_slideshow($attr, $content=null){
 		}
 	}
 	
+	$animation = ($attr['animation']) ? $attr['animation'] : 'slide';
 	$height    = ($attr['height']) ? $attr['height'] : '100px';
 	$width     = ($attr['width']) ? $attr['width'] : '100%';
 	$tran_len  = ($attr['transition']) ? $attr['transition'] : 1000;
@@ -43,7 +44,7 @@ function sc_slideshow($attr, $content=null){
 	ob_start();
 	?>
 	<div 
-		class="slideshow"
+		class="slideshow <?=$animation?>"
 		data-tranlen="<?=$tran_len?>"
 		data-cyclelen="<?=$cycle_len?>"
 		style="height: <?=$height?>; width: <?=$width?>;"

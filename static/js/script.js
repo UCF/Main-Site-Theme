@@ -1,5 +1,4 @@
 jQuery(document).ready(function($) {
-	
 	Webcom.slideshow($);
 	Webcom.chartbeat($);
 	Webcom.analytics($);

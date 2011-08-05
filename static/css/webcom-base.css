@@ -21,6 +21,8 @@ body{color: #222;}
 .search-form .search-field{}
 .search-form .search-submit{}
 
+.slideshow{overflow: hidden; margin: 0 0 1em 0;}
+
 
 /**
  * Form styles
