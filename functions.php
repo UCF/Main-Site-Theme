@@ -111,8 +111,7 @@ Config::$styles = array(
 	THEME_CSS_URL.'/jquery-uniform.css',
 	THEME_CSS_URL.'/blueprint-screen.css',
 	array('media' => 'print', 'src' => THEME_CSS_URL.'/blueprint-print.css',),
-	THEME_CSS_URL.'/yahoo-reset.css',
-	THEME_CSS_URL.'/yahoo-fonts.css',
+	THEME_CSS_URL.'/yahoo.css',
 	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url'),
 );

@@ -513,6 +513,8 @@ function __init__(){
 	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
+	
+	wp_deregister_script('l10n');
 }
 add_action('after_setup_theme', '__init__');
 
@@ -769,11 +771,11 @@ function footer_($tabs=2){
  **/
 function header_($tabs=2){
 	ob_start();
+	print header_meta()."\n";
 	remove_action('wp_head', 'rsd_link');
 	wp_head();
-	print header_title()."\n";
-	print header_meta()."\n";
 	print header_links()."\n";
+	print header_title()."\n";
 	$html = ob_get_clean();
 	$html = indent($html, $tabs);
 	return $html;
