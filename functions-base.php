@@ -769,6 +769,7 @@ function footer_($tabs=2){
  **/
 function header_($tabs=2){
 	ob_start();
+	remove_action('wp_head', 'rsd_link');
 	wp_head();
 	print header_title()."\n";
 	print header_meta()."\n";
