@@ -695,9 +695,7 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 		<?php
 		$menu = ob_get_clean();
 	}else{
-		$menu = (is_array($callback)) ?
-			call_user_func_array($callback, array($items)) :
-			call_user_func($callback, array($items));
+		$menu = call_user_func($callback, array($items));
 	}
 	
 	return $menu;
