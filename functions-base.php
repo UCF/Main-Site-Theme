@@ -486,11 +486,12 @@ function dump(){
  * Will add a debug comment to the output when the get variable debug is set.
  * Any value, including null, is enough to trigger it.
  **/
-function debug($string){
-	if (!isset($_GET['debug'])){
-		return;
+if (isset($_GET['debug'])){
+	function debug($string){
+		print "<!-- DEBUG: {$string} -->\n";
 	}
-	print "<!-- DEBUG: {$string} -->\n";
+}else{
+	function debug($string){return;}
 }
 
 
