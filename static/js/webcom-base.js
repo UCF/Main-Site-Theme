@@ -11,9 +11,6 @@ if(!window.console ) { window.console = { log: function() { return; } }; }
 
 Webcom.analytics = function($){
 	if ((typeof GA_ACCOUNT !== 'undefined') && Boolean(GA_ACCOUNT)){
-		// Google analytics code
-		var _sf_startpt=(new Date()).getTime();
-		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', GA_ACCOUNT]);
 		_gaq.push(['_setDomainName', 'none']);
 		_gaq.push(['_setAllowLinker', true]);
