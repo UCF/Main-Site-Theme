@@ -514,9 +514,20 @@ function __init__(){
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
+	global $starttime;
+	$starttime = microtime(True);
+	
 	wp_deregister_script('l10n');
 }
 add_action('after_setup_theme', '__init__');
+
+function __shutdown__(){
+		global $starttime;
+		$end     = microtime(True);
+		$elapsed = round(($end - $starttime) * 1000);
+		debug("{$elapsed} milliseconds");
+}
+add_action('shutdown', '__shutdown__');
 
 
 /**
