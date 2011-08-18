@@ -834,15 +834,18 @@ function opengraph_setup(){
 	ob_start();
 	the_excerpt();
 	$description = trim(str_replace('[...]', '', ob_get_clean()));
-	$description = '';
 	if (strlen($description) < 1){
 		ob_start();
 		the_content();
-		$description = apply_filters('the_excerpt', strip_tags(ob_get_clean()));
+		$description = apply_filters('the_excerpt', preg_replace(
+			'/\s+/',
+			' ',
+			strip_tags(ob_get_clean()))
+		);
 		$words       = explode(' ', $description);
-		$description = implode(' ', array_slice($words, 0, 50));
+		$description = implode(' ', array_slice($words, 0, 60));
 	}
-	$metas[]     = array('name' => 'og:description', 'content' => $description);
+	$metas[] = array('name' => 'og:description', 'content' => $description);
 	
 	Config::$metas = array_merge(Config::$metas, $metas);
 }
