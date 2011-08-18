@@ -69,7 +69,7 @@ Config::$theme_settings = array(
 		new TextField(array(
 			'name'        => 'Facebook Admins',
 			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
-			'description' => 'Space seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074 abe.lincoln</em>',
+			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
 			'default'     => null,
 			'value'       => $theme_options['fb_admins'],
 		)),
