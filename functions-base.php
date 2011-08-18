@@ -515,10 +515,6 @@ function __init__(){
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
-	if (isset($_GET['debug'])){
-		error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
-	}
-	
 	global $starttime;
 	$starttime = microtime(True);
 	
@@ -837,15 +833,16 @@ function opengraph_setup(){
 	# Generate a description if excerpt is unavailable
 	ob_start();
 	the_excerpt();
-	$description = trim(ob_get_clean());
+	$description = trim(str_replace('[...]', '', ob_get_clean()));
+	$description = '';
 	if (strlen($description) < 1){
 		ob_start();
 		the_content();
-		$description = ob_get_clean();
+		$description = apply_filters('the_excerpt', strip_tags(ob_get_clean()));
 		$words       = explode(' ', $description);
 		$description = implode(' ', array_slice($words, 0, 50));
 	}
-	$metas[] = array('name' => 'og:description', 'content' => $description);
+	$metas[]     = array('name' => 'og:description', 'content' => $description);
 	
 	Config::$metas = array_merge(Config::$metas, $metas);
 }
