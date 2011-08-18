@@ -515,6 +515,10 @@ function __init__(){
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
+	if (isset($_GET['debug'])){
+		error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+	}
+	
 	global $starttime;
 	$starttime = microtime(True);
 	
@@ -780,15 +784,70 @@ function footer_($tabs=2){
  * Header content
  **/
 function header_($tabs=2){
+	opengraph_setup();
+	remove_action('wp_head', 'rsd_link');
+	
 	ob_start();
 	print header_meta()."\n";
-	remove_action('wp_head', 'rsd_link');
 	wp_head();
 	print header_links()."\n";
 	print header_title()."\n";
-	$html = ob_get_clean();
-	$html = indent($html, $tabs);
-	return $html;
+	
+	return indent(ob_get_clean(), $tabs);
+}
+
+
+function opengraph_setup(){
+	$options = get_option(THEME_OPTIONS_NAME);
+	
+	if (!(bool)$options['enable_og']){return;}
+	if (!is_single() and !is_page()){return;}
+	
+	global $post;
+	setup_postdata($post);
+	
+	$title       = htmlentities($post->post_title);
+	$url         = get_permalink($post->ID);
+	$site_name   = htmlentities(get_bloginfo('name'));
+	$description = htmlentities('robot');
+	
+	# http://stackoverflow.com/questions/4177700/html5-and-rdfa-support
+	# Using name instead of property because of the answer in the above url
+	$metas = array(
+		array('name' => 'og:title'      , 'content' => $title),
+		array('name' => 'og:url'        , 'content' => $url),
+		array('name' => 'og:site_name'  , 'content' => $site_name),
+	);
+	
+	# Include admins if available
+	$admins = trim($options['fb_admins']);
+	if (strlen($admins) > 0){
+		$metas[] = array('name' => 'fb:admins', 'content' => $admins);
+	}
+	
+	# Include image if available
+	if (has_post_thumbnail($post->ID)){
+		$image = wp_get_attachment_image_src(
+			get_post_thumbnail_id( $post->ID ),
+			'single-post-thumbnail'
+		);
+		$metas[] = array('name' => 'og:image', 'content' => $image);
+	}
+	
+	# Generate a description if excerpt is unavailable
+	ob_start();
+	the_excerpt();
+	$description = trim(ob_get_clean());
+	if (strlen($description) < 1){
+		ob_start();
+		the_content();
+		$description = ob_get_clean();
+		$words       = explode(' ', $description);
+		$description = implode(' ', array_slice($words, 0, 50));
+	}
+	$metas[] = array('name' => 'og:description', 'content' => $description);
+	
+	Config::$metas = array_merge(Config::$metas, $metas);
 }
 
 
