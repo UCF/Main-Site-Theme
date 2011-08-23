@@ -827,7 +827,7 @@ function opengraph_setup(){
 			get_post_thumbnail_id( $post->ID ),
 			'single-post-thumbnail'
 		);
-		$metas[] = array('name' => 'og:image', 'content' => $image);
+		$metas[] = array('name' => 'og:image', 'content' => $image[0]);
 	}
 	
 	# Generate a description if excerpt is unavailable
