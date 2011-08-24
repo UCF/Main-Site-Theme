@@ -15,7 +15,8 @@ p{line-height: 1.5em; margin: 0 0 1em 0;}
 blockquote{padding: 0 2em; color: #333; font-style: italic;}
 ol,
 ul{padding-left: 2em; margin: 1.5em 0; }
-.default ul { font-size:16px; }
+.default ul,
+.default ol{ font-size:16px; }
 li{margin: 0 0 .75em 0;}
 ul li{list-style: disc;}
 ul ol,
@@ -95,7 +96,20 @@ ol.nobullet{padding-left: 0; margin-left: 0;}
  * Button styles
  **/
 a.button,
-button{display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;}
+button{display: inline; padding: 5px; color: #3C3C3D; text-shadow: 1px 1px 0 #FFFFFF; background: #ECECEC; white-space: nowrap; overflow: visible; cursor: pointer; text-decoration: none; border: 1px solid #CACACA; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; outline: none; zoom: 1; line-height: 1;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.25, #D9D9D9),
+		color-stop(0.64, #ECECEC)
+	);
+	background-image: -moz-linear-gradient(
+		center bottom,
+		#D9D9D9 25%,
+		#ECECEC 64%
+	);
+}
 button{margin-left: 0; margin-right: 0;}
 .msie a.button,
 button{padding: 6px 5px 6px 5px;}
@@ -105,11 +119,11 @@ a.button.primary,
 button.primary {font-weight: bold}
 button:focus,
 a.button:hover,
-button:hover{color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5;}
+button:hover{background-image: none; color: #FFFFFF; border-color: #388AD4; text-decoration: none; text-shadow: -1px -1px 0 rgba(0,0,0,0.3); background-position: 0 -40px; background-color: #2D7DC5;}
 a.button:active,
 button:active,
 a.button.active,
-button.active {background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none;}
+button.active {background-image: none; background-position: 0 -81px; border-color: #347BBA; background-color: #0F5EA2; color: #FFFFFF; text-shadow: none;}
 a.button:active,
 button:active{top: 1px;}
 
