@@ -18,7 +18,11 @@
 				<li class="item">
 					<h3>
 						<a class="sans ignore-external title <?=mimetype_to_application(($result['mime']) ? $result['mime'] : 'text/html')?>" href="<?=$result['url']?>">
+							<?php if($result['title']):?>
 							<?=$result['title']?>
+							<?php else:?>
+							<?=substr($result['url'], 0, 45)?>...
+							<?php endif;?>
 						</a>
 					</h3>
 					<a href="<?=$result['url']?>" class="ignore-external url sans"><?=$result['url']?></a>
