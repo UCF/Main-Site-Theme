@@ -797,15 +797,41 @@ function opengraph_setup(){
 	$options = get_option(THEME_OPTIONS_NAME);
 	
 	if (!(bool)$options['enable_og']){return;}
-	if (!is_single() and !is_page()){return;}
+	if (is_search()){return;}
 	
-	global $post;
+	global $post, $page;
 	setup_postdata($post);
 	
-	$title       = htmlentities($post->post_title);
-	$url         = get_permalink($post->ID);
-	$site_name   = htmlentities(get_bloginfo('name'));
-	$description = htmlentities('robot');
+	if (is_front_page()){
+		$title       = htmlentities(get_bloginfo('name'));
+		$url         = get_bloginfo('url');
+		$site_name   = $title;
+	}else{
+		$title     = htmlentities($post->post_title);
+		$url       = get_permalink($post->ID);
+		$site_name = htmlentities(get_bloginfo('name'));
+	}
+	
+	# Set description
+	if (is_front_page()){
+		$description = htmlentities(get_bloginfo('description'));
+	}else{
+		ob_start();
+		the_excerpt();
+		$description = trim(str_replace('[...]', '', ob_get_clean()));
+		# Generate a description if excerpt is unavailable
+		if (strlen($description) < 1){
+			ob_start();
+			the_content();
+			$description = apply_filters('the_excerpt', preg_replace(
+				'/\s+/',
+				' ',
+				strip_tags(ob_get_clean()))
+			);
+			$words       = explode(' ', $description);
+			$description = implode(' ', array_slice($words, 0, 60));
+		}
+	}
 	
 	# http://stackoverflow.com/questions/4177700/html5-and-rdfa-support
 	# Using name instead of property because of the answer in the above url
@@ -813,13 +839,8 @@ function opengraph_setup(){
 		array('name' => 'og:title'      , 'content' => $title),
 		array('name' => 'og:url'        , 'content' => $url),
 		array('name' => 'og:site_name'  , 'content' => $site_name),
+		array('name' => 'og:description', 'content' => $description),
 	);
-	
-	# Include admins if available
-	$admins = trim($options['fb_admins']);
-	if (strlen($admins) > 0){
-		$metas[] = array('name' => 'fb:admins', 'content' => $admins);
-	}
 	
 	# Include image if available
 	if (has_post_thumbnail($post->ID)){
@@ -830,22 +851,12 @@ function opengraph_setup(){
 		$metas[] = array('name' => 'og:image', 'content' => $image[0]);
 	}
 	
-	# Generate a description if excerpt is unavailable
-	ob_start();
-	the_excerpt();
-	$description = trim(str_replace('[...]', '', ob_get_clean()));
-	if (strlen($description) < 1){
-		ob_start();
-		the_content();
-		$description = apply_filters('the_excerpt', preg_replace(
-			'/\s+/',
-			' ',
-			strip_tags(ob_get_clean()))
-		);
-		$words       = explode(' ', $description);
-		$description = implode(' ', array_slice($words, 0, 60));
+	
+	# Include admins if available
+	$admins = trim($options['fb_admins']);
+	if (strlen($admins) > 0){
+		$metas[] = array('name' => 'fb:admins', 'content' => $admins);
 	}
-	$metas[] = array('name' => 'og:description', 'content' => $description);
 	
 	Config::$metas = array_merge(Config::$metas, $metas);
 }

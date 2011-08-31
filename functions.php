@@ -18,7 +18,6 @@ require_once('functions-admin.php');    # Admin/login functions
 $theme_options = get_option(THEME_OPTIONS_NAME);
 
 define('GA_ACCOUNT', $theme_options['ga_account']);
-define('GW_VERIFY', $theme_options['gw_verify']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
@@ -38,7 +37,30 @@ Config::$body_classes = array('default',);
  * available fields. -- functions-base.php
  **/
 Config::$theme_settings = array(
-	'Google' => array(
+	'Webmaster Tools' => array(
+		new TextField(array(
+			'name'        => 'Google WebMaster Verification',
+			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
+			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+			'default'     => null,
+			'value'       => $theme_options['gw_verify'],
+		)),
+		new TextField(array(
+			'name'        => 'Yahoo! Site Explorer',
+			'id'          => THEME_OPTIONS_NAME.'[yw_verify]',
+			'description' => 'Example: <em>3236dee82aabe064</em>',
+			'default'     => null,
+			'value'       => $theme_options['yw_verify'],
+		)),
+		new TextField(array(
+			'name'        => 'Bing Webmaster Center',
+			'id'          => THEME_OPTIONS_NAME.'[bw_verify]',
+			'description' => 'Example: <em>12C1203B5086AECE94EB3A3D9830B2E</em>',
+			'default'     => null,
+			'value'       => $theme_options['bw_verify'],
+		)),
+	),
+	'Analytics' => array(
 		new TextField(array(
 			'name'        => 'Google Analytics Account',
 			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
@@ -47,11 +69,18 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['ga_account'],
 		)),
 		new TextField(array(
-			'name'        => 'Google WebMaster Verification',
-			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
-			'description' => 'Example: <em>9Wsa3fspoaoRE8zx8COo48-GCMdi5Kd-1qFpQTTXSIw</em>',
+			'name'        => 'Chartbeat UID',
+			'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
+			'description' => 'Example: <em>1842</em>',
 			'default'     => null,
-			'value'       => $theme_options['gw_verify'],
+			'value'       => $theme_options['cb_uid'],
+		)),
+		new TextField(array(
+			'name'        => 'Chartbeat Domain',
+			'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
+			'description' => 'Example: <em>some.domain.com</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_domain'],
 		)),
 	),
 	'Facebook' => array(
@@ -72,22 +101,6 @@ Config::$theme_settings = array(
 			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
 			'default'     => null,
 			'value'       => $theme_options['fb_admins'],
-		)),
-	),
-	'Chartbeat' => array(
-		new TextField(array(
-			'name'        => 'Chartbeat UID',
-			'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
-			'description' => 'Example: <em>1842</em>',
-			'default'     => null,
-			'value'       => $theme_options['cb_uid'],
-		)),
-		new TextField(array(
-			'name'        => 'Chartbeat Domain',
-			'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
-			'description' => 'Example: <em>some.domain.com</em>',
-			'default'     => null,
-			'value'       => $theme_options['cb_domain'],
 		)),
 	),
 	'Search' => array(
@@ -138,9 +151,21 @@ Config::$scripts = array(
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
-if ((bool)$theme_options['gw_verify']){
+if ($theme_options['gw_verify']){
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
 		'content' => htmlentities($theme_options['gw_verify']),
+	);
+}
+if ($theme_options['yw_verify']){
+	Config::$metas[] = array(
+		'name'    => 'y_key',
+		'content' => htmlentities($theme_options['yw_verify']),
+	);
+}
+if ($theme_options['bw_verify']){
+	Config::$metas[] = array(
+		'name'    => 'msvalidate.01',
+		'content' => htmlentities($theme_options['bw_verify']),
 	);
 }
