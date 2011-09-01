@@ -836,10 +836,10 @@ function opengraph_setup(){
 	# http://stackoverflow.com/questions/4177700/html5-and-rdfa-support
 	# Using name instead of property because of the answer in the above url
 	$metas = array(
-		array('name' => 'og:title'      , 'content' => $title),
-		array('name' => 'og:url'        , 'content' => $url),
-		array('name' => 'og:site_name'  , 'content' => $site_name),
-		array('name' => 'og:description', 'content' => $description),
+		array('property' => 'og:title'      , 'content' => $title),
+		array('property' => 'og:url'        , 'content' => $url),
+		array('property' => 'og:site_name'  , 'content' => $site_name),
+		array('property' => 'og:description', 'content' => $description),
 	);
 	
 	# Include image if available
@@ -848,14 +848,14 @@ function opengraph_setup(){
 			get_post_thumbnail_id( $post->ID ),
 			'single-post-thumbnail'
 		);
-		$metas[] = array('name' => 'og:image', 'content' => $image[0]);
+		$metas[] = array('property' => 'og:image', 'content' => $image[0]);
 	}
 	
 	
 	# Include admins if available
 	$admins = trim($options['fb_admins']);
 	if (strlen($admins) > 0){
-		$metas[] = array('name' => 'fb:admins', 'content' => $admins);
+		$metas[] = array('property' => 'fb:admins', 'content' => $admins);
 	}
 	
 	Config::$metas = array_merge(Config::$metas, $metas);
@@ -889,7 +889,7 @@ function header_links(){
 	
 	foreach($links as $link){
 		$link         = array_merge($defaults, $link);
-		$links_html[] = create_html_element('link', $link, null, False);
+		$links_html[] = create_html_element('link', $link, null, True);
 	}
 	
 	$links_html = implode("\n", $links_html);
