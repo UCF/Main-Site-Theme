@@ -522,6 +522,7 @@ function __init__(){
 }
 add_action('after_setup_theme', '__init__');
 
+
 function __shutdown__(){
 		global $starttime;
 		$end     = microtime(True);
@@ -580,7 +581,7 @@ function get_search_results(
 			if ($total){
 				foreach($items as $result){
 					$item            = array();
-					$item['url']     = $result->U;
+					$item['url']     = str_replace('https', 'http', $result->U);
 					$item['title']   = $result->T;
 					$item['rank']    = $result->RK;
 					$item['snippet'] = $result->S;
@@ -1064,6 +1065,23 @@ function installed_custom_post_types(){
 }
 
 
+function flush_rewrite_rules_if_necessary(){
+	global $wp_rewrite;
+	$start    = microtime(True);
+	$original = get_option('rewrite_rules');
+	$rules    = $wp_rewrite->rewrite_rules();
+	ksort($rules);
+	ksort($original);
+	
+	$rules    = md5(implode('', array_keys($rules)));
+	$original = md5(implode('', array_keys($original)));
+	
+	if ($rules != $original){
+		flush_rewrite_rules();
+	}
+}
+
+
 /**
  * Registers all installed custom post types
  *
@@ -1077,7 +1095,7 @@ function register_custom_post_types(){
 	}
 	
 	#This ensures that the permalinks for custom posts work
-	flush_rewrite_rules();
+	flush_rewrite_rules_if_necessary();
 }
 add_action('init', 'register_custom_post_types');
 
