@@ -1070,6 +1070,10 @@ function flush_rewrite_rules_if_necessary(){
 	$start    = microtime(True);
 	$original = get_option('rewrite_rules');
 	$rules    = $wp_rewrite->rewrite_rules();
+	
+	if (!$rules or !$original){
+		return;
+	}
 	ksort($rules);
 	ksort($original);
 	
