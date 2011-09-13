@@ -228,6 +228,29 @@ class CheckboxField extends ChoicesField{
 
 
 function cleanup($content){
+	# Balance auto paragraphs
+	$lines = explode("\n", $content);
+	foreach($lines as $key=>$line){
+		$null = null;
+		$found_closed = preg_match_all('/<\/p>/', $line, $null);
+		$found_opened = preg_match_all('/<p[^>]*>/', $line, $null);
+		
+		$diff = $found_closed - $found_opened;
+		# Balanced tags
+		if ($diff == 0){continue;}
+		
+		# missing closed
+		if ($diff < 0){
+			$lines[$key] = $lines[$key] . str_repeat('</p>', abs($diff));
+		}
+		
+		# missing open
+		if ($diff > 0){
+			$lines[$key] = str_repeat('<p>', abs($diff)) . $lines[$key];
+		}
+	}
+	$content = implode("\n", $lines);
+	
 	#Remove incomplete tags at start and end
 	$content = preg_replace('/^<\/p>[\s]*/i', '', $content);
 	$content = preg_replace('/[\s]*<p>$/i', '', $content);
