@@ -141,9 +141,9 @@ Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_CSS_URL.'/jquery.css',
+	THEME_CSS_URL.'/yahoo.css',
 	THEME_CSS_URL.'/blueprint-screen.css',
 	array('media' => 'print', 'src' => THEME_CSS_URL.'/blueprint-print.css',),
-	THEME_CSS_URL.'/yahoo.css',
 	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url'),
 );
