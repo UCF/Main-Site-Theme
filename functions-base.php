@@ -834,8 +834,6 @@ function opengraph_setup(){
 		}
 	}
 	
-	# http://stackoverflow.com/questions/4177700/html5-and-rdfa-support
-	# Using name instead of property because of the answer in the above url
 	$metas = array(
 		array('property' => 'og:title'      , 'content' => $title),
 		array('property' => 'og:url'        , 'content' => $url),
