@@ -1,5 +1,6 @@
+<?php $options = get_option(THEME_OPTIONS_NAME);?>
+<?php if ($options['enable_google'] or $options['enable_google'] === null):?>
 <?php
-	$options = get_option(THEME_OPTIONS_NAME);
 	$domain  = $options['search_domain'];
 	$limit   = (int)$options['search_per_page'];
 	$start   = (is_numeric($_GET['start'])) ? (int)$_GET['start'] : 0;
@@ -60,3 +61,36 @@
 		</div>
 	</div>
 <?php get_footer();?>
+<?php else:?>
+	<?php get_header();?>
+	<div class="page-content">
+		<div class="results span-16 append-2">
+			<?php if(have_posts()):?>
+			<?php while(have_posts()): the_post();?>
+			<article>
+				<h1><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
+				<div class="meta">
+					<span class="date"><?php the_time("F j, Y");?></span>
+					<span class="author">by <?php the_author_posts_link();?></span>
+				</div>
+				<div class="summary">
+					<?php the_excerpt();?>
+				</div>
+			</article>
+			<?php endwhile;?>
+			<?php else:?>
+				
+			<p>No results found for "<?=htmlentities($_GET['s'])?>".</p>
+			<?php endif;?>
+		</div>
+		
+		<div id="sidebar" class="span-6 last">
+			<?php get_sidebar()?>
+		</div>
+		
+		<div id="below-the-fold" class="clear">
+			<?php get_template_part('templates/below-the-fold'); ?>
+		</div>
+	</div>
+	<?php get_footer();?>
+<?php endif;?>

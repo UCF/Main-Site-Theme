@@ -104,6 +104,17 @@ Config::$theme_settings = array(
 		)),
 	),
 	'Search' => array(
+		new RadioField(array(
+			'name'        => 'Enable Google Search',
+			'id'          => THEME_OPTIONS_NAME.'[enable_google]',
+			'description' => 'Enable to use the google search appliance to power the search functionality.',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_google'],
+	    )),
 		new TextField(array(
 			'name'        => 'Search Domain',
 			'id'          => THEME_OPTIONS_NAME.'[search_domain]',
