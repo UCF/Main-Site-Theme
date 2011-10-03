@@ -40,7 +40,7 @@ function theme_options_page(){
 	$updated = (bool)($_GET['settings-updated'] or $_GET['updated']);
 	?>
 	
-	<form method="post" action="options.php">
+	<form method="post" action="options.php" id="theme-options">
 		<div class="wrap">
 			<h2><?=__(THEME_OPTIONS_PAGE_TITLE)?></h2>
 			

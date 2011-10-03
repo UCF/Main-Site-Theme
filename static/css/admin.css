@@ -2,15 +2,15 @@
  * Custom admin styles go here.
  **/
 
-.block{display: block;}
-.checkbox-list,
-.radio-list{padding: 0; margin: 0;}
-.checkbox-list li,
-.radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
-.description em{font-family: monospace; font-weight: bold; color: #21759B;}
-.field label{display: none;}
-.field li label{display: inherit;}
-textarea{width: 70%; height: 10em;}
+#theme-options .block{display: block;}
+#theme-options .checkbox-list,
+#theme-options .radio-list{padding: 0; margin: 0;}
+#theme-options .checkbox-list li,
+#theme-options .radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
+#theme-options .description em{font-family: monospace; font-weight: bold; color: #21759B;}
+#theme-options .field label{display: none;}
+#theme-options .field li label{display: inherit;}
+#theme-options textarea{width: 70%; height: 10em;}
 
 body.login #nav,
 body.login #backtoblog{display: inline;}
