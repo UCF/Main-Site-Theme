@@ -995,71 +995,7 @@ function header_title(){
  **/
 function body_classes(){
 	$classes = Config::$body_classes;
-	$classes = array_merge($classes, browser_classes());
-	
 	return implode(' ', $classes);
-}
-
-
-/**
- * Returns a list of classes to determined by current user agent string, for
- * platform specific purposes.  Pulled from thematic wordpress theme
- * (http://themeshaper.com/)
- **/
-function browser_classes() {
-	$browser = $_SERVER[ 'HTTP_USER_AGENT' ];
-	
-	// Mac, PC ...or Linux
-	if ( preg_match( "/Mac/", $browser ) ){
-		$classes[] = 'mac';
-	} elseif ( preg_match( "/Windows/", $browser ) ){
-		$classes[] = 'windows';
-	} elseif ( preg_match( "/Linux/", $browser ) ) {
-		$classes[] = 'linux';
-	} else {
-		$classes[] = 'unknown-os';
-	}
-	
-	// Checks browsers in this order: Chrome, Safari, Opera, MSIE, FF
-	if ( preg_match( "/Chrome/", $browser ) ) {
-		$classes[] = 'chrome';
-	
-		preg_match( "/Chrome\/(\d.\d)/si", $browser, $matches);
-		$ch_version = 'ch' . str_replace( '.', '-', $matches[1] );
-		$classes[] = $ch_version;
-	} elseif ( preg_match( "/Safari/", $browser ) ) {
-		$classes[] = 'safari';
-		
-		preg_match( "/Version\/(\d.\d)/si", $browser, $matches);
-		$sf_version = 'sf' . str_replace( '.', '-', $matches[1] );
-		$classes[] = $sf_version;
-	} elseif ( preg_match( "/Opera/", $browser ) ) {
-		$classes[] = 'opera';
-		
-		preg_match( "/Opera\/(\d.\d)/si", $browser, $matches);
-		$op_version = 'op' . str_replace( '.', '-', $matches[1] );
-		$classes[] = $op_version;
-	} elseif ( preg_match( "/MSIE/", $browser ) ) {
-		$classes[] = 'ie';
-		
-		if( preg_match( "/MSIE 6.0/", $browser ) ) {
-			$classes[] = 'ie6';
-		} elseif ( preg_match( "/MSIE 7.0/", $browser ) ){
-			$classes[] = 'ie7';
-		} elseif ( preg_match( "/MSIE 8.0/", $browser ) ){
-			$classes[] = 'ie8';
-		}
-	} elseif ( preg_match( "/Firefox/", $browser ) && preg_match( "/Gecko/", $browser ) ) {
-			$classes[] = 'firefox';
-			
-			preg_match( "/Firefox\/(\d)/si", $browser, $matches);
-			$ff_version = 'ff' . str_replace( '.', '-', $matches[1] );
-			$classes[] = $ff_version;
-	} else {
-		$classes[] = 'unknown-browser';
-	}
-	// return the $classes array
-	return $classes;
 }
 
 
