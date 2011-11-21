@@ -805,6 +805,11 @@ function footer_($tabs=2){
  **/
 function header_($tabs=2){
 	opengraph_setup();
+	remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
+	remove_action('wp_head', 'index_rel_link');
+	remove_action('wp_head', 'rel_canonical');
+	remove_action('wp_head', 'wp_generator');
+	remove_action('wp_head', 'wlwmanifest_link');
 	remove_action('wp_head', 'rsd_link');
 	
 	ob_start();
