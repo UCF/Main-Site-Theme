@@ -3,24 +3,26 @@
 	<head>
 		<?="\n".header_()."\n"?>
 		<!--[if IE]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<style>article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}</style>
 		<link href="http://cdn.ucf.edu/webcom/-/css/blueprint-ie.css" rel="stylesheet" media="screen, projection">
 		<![endif]-->
+		<?php if(GA_ACCOUNT or CB_UID):?>
+		
 		<script type="text/javascript">
 			<?php if(GA_ACCOUNT):?>
 			
-			var GA_ACCOUNT      = '<?=GA_ACCOUNT?>';
+			var _gaq        = _gaq || [];
+			var GA_ACCOUNT  = '<?=GA_ACCOUNT?>';
 			<?php endif;?>
 			<?php if(CB_UID):?>
 			
-			var CB_UID          = '<?=CB_UID?>';
-			var CB_DOMAIN       = '<?=CB_DOMAIN?>';
+			var _sf_startpt = (new Date()).getTime();
+			var CB_UID      = '<?=CB_UID?>';
+			var CB_DOMAIN   = '<?=CB_DOMAIN?>';
 			<?php endif?>
 			
-			var _sf_startpt     = (new Date()).getTime();
-			var _gaq            = _gaq || [];
 		</script>
+		<?php endif;?>
+		
 	</head>
 	<body class="<?=body_classes()?>">
 		<div id="blueprint-container" class="container">
