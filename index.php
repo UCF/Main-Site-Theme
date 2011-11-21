@@ -2,7 +2,7 @@
 <div class="page-content" id="post-list">
 	<div class="span-18">
 		<?php while(have_posts()): the_post();?>
-		<article>
+		<article class="<?=$post->post_status?>">
 			<h1><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
 			<div class="meta">
 				<span class="date"><?php the_time("F j, Y");?></span>
