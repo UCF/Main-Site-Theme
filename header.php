@@ -8,14 +8,18 @@
 		<?php if(GA_ACCOUNT or CB_UID):?>
 		
 		<script type="text/javascript">
+			var _sf_startpt = (new Date()).getTime();
 			<?php if(GA_ACCOUNT):?>
 			
-			var _gaq        = _gaq || [];
 			var GA_ACCOUNT  = '<?=GA_ACCOUNT?>';
+			var _gaq        = _gaq || [];
+			_gaq.push(['_setAccount', GA_ACCOUNT]);
+			_gaq.push(['_setDomainName', 'none']);
+			_gaq.push(['_setAllowLinker', true]);
+			_gaq.push(['_trackPageview']);
 			<?php endif;?>
 			<?php if(CB_UID):?>
 			
-			var _sf_startpt = (new Date()).getTime();
 			var CB_UID      = '<?=CB_UID?>';
 			var CB_DOMAIN   = '<?=CB_DOMAIN?>';
 			<?php endif?>
