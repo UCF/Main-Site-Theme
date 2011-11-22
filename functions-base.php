@@ -115,7 +115,12 @@ class Config{
 	}
 }
 
-
+/**
+ * Abstracted field class, all form fields should inherit from this.
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 abstract class Field{
 	function __construct($attr){
 		$this->name        = @$attr['name'];
@@ -131,6 +136,13 @@ abstract class Field{
 }
 
 
+/**
+ * Abstracted choices field.  Choices fields have an additional attribute named
+ * choices which allow a selection of values to be chosen from.
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 abstract class ChoicesField extends Field{
 	function __construct($attr){
 		$this->choices = @$attr['choices'];
@@ -138,6 +150,13 @@ abstract class ChoicesField extends Field{
 	}
 }
 
+
+/**
+ * TextField class represents a simple text input
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 class TextField extends Field{
 	function html(){
 		ob_start();
@@ -152,6 +171,13 @@ class TextField extends Field{
 	}
 }
 
+
+/**
+ * TextareaField represents a textarea form element
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 class TextareaField extends Field{
 	function html(){
 		ob_start();
@@ -166,6 +192,13 @@ class TextareaField extends Field{
 	}
 }
 
+
+/**
+ * Select form element
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 class SelectField extends ChoicesField{
 	function html(){
 		ob_start();
@@ -184,6 +217,13 @@ class SelectField extends ChoicesField{
 	}
 }
 
+
+/**
+ * Radio form element
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 class RadioField extends ChoicesField{
 	function html(){
 		ob_start();
@@ -205,6 +245,13 @@ class RadioField extends ChoicesField{
 	}
 }
 
+
+/**
+ * Checkbox form element
+ *
+ * @package default
+ * @author Jared Lang
+ **/
 class CheckboxField extends ChoicesField{
 	function html(){
 		ob_start();
@@ -227,6 +274,68 @@ class CheckboxField extends ChoicesField{
 }
 
 
+/**
+ * Convenience class to calculate total execution times.
+ *
+ * @package default
+ * @author Jared Lang
+ **/
+class Timer{
+	private $start_time  = null;
+	private $end_time    = null;
+	
+	public function start_timer(){
+		$this->start_time = microtime(True);
+		$this->end_time   = null;
+	}
+	
+	public function stop_timer(){
+		$this->end_time = microtime(True);
+	}
+	
+	public function clear_timer(){
+		$this->start_time = null;
+		$this->end_time   = null;
+	}
+	
+	public function reset_timer(){
+		$this->clear_timer();
+		$this->start_timer();
+	}
+	
+	public function elapsed(){
+		if ($this->end_time !== null){
+			return $this->end_time - $this->start_time;
+		}else{
+			return microtime(True) - $this->start_time;
+		}
+	}
+	
+	public function __toString(){
+		return $this->elapsed;
+	}
+	
+	/**
+	 * Returns a started instance of timer
+	 *
+	 * @return instance of Timer
+	 * @author Jared Lang
+	 **/
+	public static function start(){
+		$timer_instance = new self();
+		$timer_instance->start_timer();
+		return $timer_instance;
+	}
+}
+
+/**
+ * Strings passed to this function will be modified under the assumption that
+ * they were outputted by wordpress' the_output filter.  It checks for a handful
+ * of things like empty p tags, unnecessary and unclosed tags.
+ *
+ * @return string
+ * @author Jared Lang
+ **/
 function cleanup($content){
 	# Balance auto paragraphs
 	$lines = explode("\n", $content);
@@ -270,7 +379,11 @@ function cleanup($content){
 
 /**
  * Given a mimetype, will attempt to return a string representing the
- * application it is associated with.
+ * application it is associated with.  If the mimetype is unknown, the default
+ * return is 'document'.
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function mimetype_to_application($mimetype){
 	switch($mimetype){
@@ -311,6 +424,8 @@ function mimetype_to_application($mimetype){
  *   CustomPostType::objectsToHTML
  *   CustomPostType::toHTML
  *
+ * @return string
+ * @author Jared Lang
  **/
 function sc_object_list($attr, $default_content=null){
 	if (!is_array($attr)){return '';}
@@ -395,7 +510,11 @@ function sc_object_list($attr, $default_content=null){
 
 
 /**
- * Creates an array 
+ * Creates an array of shortcodes mapped to a documentation string for that
+ * shortcode.  Used to generate the auto shortcode documentation.
+ * 
+ * @return array
+ * @author Jared Lang
  **/
 function shortcodes(){
 	$file = file_get_contents(THEME_DIR.'/shortcodes.php');
@@ -451,6 +570,13 @@ DOC;
 }
 
 
+/**
+ * Creates the shortcode help section in admin screens for custom and built-in
+ * post types.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function admin_help(){
 	global $post;
 	$shortcodes = shortcodes();
@@ -472,6 +598,13 @@ function admin_help(){
 }
 
 
+/**
+ * Creates the help meta box used for the admin shortcode documentation, and 
+ * registers the admin_help callback for output.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function admin_meta_boxes(){
 	global $post;
 	add_meta_box('page-help', 'Help', 'admin_help', 'page', 'normal', 'high');
@@ -481,6 +614,9 @@ add_action('admin_init', 'admin_meta_boxes');
 
 /**
  * Returns true if the current request is on the login screen.
+ * 
+ * @return boolean
+ * @author Jared Lang
  **/
 function is_login(){
 	return in_array($GLOBALS['pagenow'], array(
@@ -492,7 +628,11 @@ function is_login(){
 
 /**
  * Given an arbitrary number of arguments, will return a string with the
- * arguments dumped recursively.
+ * arguments dumped recursively, similar to the output of print_r but with pre
+ * tags wrapped around the output.
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function dump(){
 	$args = func_get_args();
@@ -506,10 +646,13 @@ function dump(){
 
 
 /**
- * Will add a debug comment to the output when the get variable debug is set.
+ * Will add a debug comment to the output when the debug constant is set true.
  * Any value, including null, is enough to trigger it.
+ * 
+ * @return void
+ * @author Jared Lang
  **/
-if (isset($_GET['debug'])){
+if (DEBUG){
 	function debug($string){
 		print "<!-- DEBUG: {$string} -->\n";
 	}
@@ -519,9 +662,29 @@ if (isset($_GET['debug'])){
 
 
 /**
+ * Will execute the function $func with the arguments passed via $args if the
+ * debug constant is set true.  Returns whatever value the called function
+ * returns, or void if debug is not set active.
+ *
+ * @return mixed
+ * @author Jared Lang
+ **/
+if (DEBUG){
+	function debug_callfunc($func, $args){
+		return call_user_func_array($func, $args);
+	}
+}else{
+	function debug_callfunc($func, $args){return;}
+}
+
+
+/**
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,
  * etc.
+ * 
+ * @return void
+ * @author Jared Lang
  **/
 function __init__(){
 	add_theme_support('menus');
@@ -538,18 +701,23 @@ function __init__(){
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
-	global $starttime;
-	$starttime = microtime(True);
+	global $timer;
+	$timer = Timer::start();
 	
 	wp_deregister_script('l10n');
 }
 add_action('after_setup_theme', '__init__');
 
 
+/**
+ * Runs as wordpress is shutting down.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function __shutdown__(){
-		global $starttime;
-		$end     = microtime(True);
-		$elapsed = round(($end - $starttime) * 1000);
+		global $timer;
+		$elapsed = round($timer->elapsed() * 1000);
 		debug("{$elapsed} milliseconds");
 }
 add_action('shutdown', '__shutdown__');
@@ -558,6 +726,9 @@ add_action('shutdown', '__shutdown__');
 /**
  * Uses the google search appliance to search the current site or the site 
  * defined by the argument $domain.
+ *
+ * @return array
+ * @author Jared Lang
  **/
 function get_search_results(
 		$query,
@@ -566,7 +737,6 @@ function get_search_results(
 		$domain=null,
 		$search_url="http://google.cc.ucf.edu/search"
 	){
-	
 	$start     = ($start) ? $start : 0;
 	$per_page  = ($per_page) ? $per_page : 10;
 	$domain    = ($domain) ? $domain : $_SERVER['SERVER_NAME'];
@@ -622,7 +792,10 @@ function get_search_results(
 
 
 /**
- * Appends formatting styles for tinyMCE editor box.
+ * Modifies the default stylesheets associated with the TinyMCE editor.
+ * 
+ * @return string
+ * @author Jared Lang
  **/
 function editor_styles($css){
 	$css   = array_map('trim', explode(',', $css));
@@ -634,7 +807,10 @@ add_filter('mce_css', 'editor_styles');
 
 
 /**
- * Edits second row of buttons in tinyMCE editor.
+ * Edits second row of buttons in tinyMCE editor. Removing/adding actions
+ *
+ * @return array
+ * @author Jared Lang
  **/
 function editor_format_options($row){
 	$found = array_search('underline', $row);
@@ -654,6 +830,9 @@ remove_filter('the_excerpt', 'wpautop');
 /**
  * Really get the post type.  A post type of revision will return it's parent
  * post type.
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function post_type($post){
 	if (is_int($post)){
@@ -677,6 +856,9 @@ function post_type($post){
  * $spaces, allows you to define what spaces and other undesirable characters
  * will be replaced with.  Useful for content that will appear in urls or
  * turning plain text into an id.
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function slug($s, $spaces='-'){
 	$s = strtolower($s);
@@ -686,7 +868,11 @@ function slug($s, $spaces='-'){
 
 
 /**
- * Given a name will return the custom post type's class name
+ * Given a name will return the custom post type's class name, or null if not
+ * found
+ * 
+ * @return string
+ * @author Jared Lang
  **/
 function get_custom_post_type($name){
 	$installed = installed_custom_post_types();
@@ -709,6 +895,9 @@ function get_custom_post_type($name){
  * $callback lets you specify a function that will generate the output. Any
  * callback passed should accept one argument, which will be the items for the
  * menu in question.
+ * 
+ * @return void
+ * @author Jared Lang
  **/
 function get_menu($name, $classes=null, $id=null, $callback=null){
 	$locations = get_nav_menu_locations();
@@ -745,6 +934,9 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
  * associated values for the tag created. $content determines what data the tag
  * wraps.  And $self_close defines whether or not the tag should close like
  * <tag></tag> (False) or <tag /> (True).
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function create_html_element($tag, $attr=array(), $content=null, $self_close=True){
 	$attr_str = create_attribute_string($attr);
@@ -765,6 +957,9 @@ function create_html_element($tag, $attr=array(), $content=null, $self_close=Tru
 /**
  * Creates a string of attributes and their values from the key/value defined by
  * $attr.  The string is suitable for use in html tags.
+ * 
+ * @return string
+ * @author Jared Lang
  **/
 function create_attribute_string($attr){
 	$attr_string = '';
@@ -776,7 +971,10 @@ function create_attribute_string($attr){
 
 
 /**
- * Indent content passed by n indentations.
+ * Indent contents of $html passed by $n indentations.
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function indent($html, $n){
 	$tabs = str_repeat("\t", $n);
@@ -791,6 +989,9 @@ function indent($html, $n){
 
 /**
  * Footer content
+ * 
+ * @return string
+ * @author Jared Lang
  **/
 function footer_($tabs=2){
 	ob_start();
@@ -802,6 +1003,9 @@ function footer_($tabs=2){
 
 /**
  * Header content
+ * 
+ * @return string
+ * @author Jared Lang
  **/
 function header_($tabs=2){
 	opengraph_setup();
@@ -822,6 +1026,13 @@ function header_($tabs=2){
 }
 
 
+/**
+ * Assembles the appropriate meta elements for facebook's opengraph stuff.
+ * Utilizes the themes Config object to queue up the created elements.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function opengraph_setup(){
 	$options = get_option(THEME_OPTIONS_NAME);
 	
@@ -891,6 +1102,9 @@ function opengraph_setup(){
 
 /**
  * Handles generating the meta tags configured for this theme.
+ * 
+ * @return string
+ * @author Jared Lang
  **/
 function header_meta(){
 	$metas     = Config::$metas;
@@ -908,6 +1122,9 @@ function header_meta(){
 
 /**
  * Handles generating the link tags configured for this theme.
+ *
+ * @return string
+ * @author Jared Lang
  **/
 function header_links(){
 	$links      = Config::$links;
@@ -925,7 +1142,7 @@ function header_links(){
 
 
 /**
- * Generates a title based on context page is viewed.
+ * Generates a title based on context page is viewed.  Stolen from Thematic
  **/
 function header_title(){
 	$site_name = get_bloginfo('name');

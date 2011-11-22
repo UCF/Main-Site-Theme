@@ -9,6 +9,12 @@ if (is_admin()){
 	add_action('admin_init', 'init_theme_options');
 }
 
+/**
+ * Prints out additional login scripts, called by the login_head action
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function login_scripts(){
 	ob_start();?>
 	<link rel="stylesheet" href="<?=THEME_CSS_URL?>/admin.css" type="text/css" media="screen" charset="utf-8" />
@@ -18,11 +24,23 @@ function login_scripts(){
 }
 
 
+/**
+ * Called on admin init, initialize admin theme here.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function init_theme_options(){
 	register_setting(THEME_OPTIONS_GROUP, THEME_OPTIONS_NAME, 'theme_options_sanitize');
 }
 
 
+/**
+ * Registers the theme options page with wordpress' admin.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function create_theme_options_page() {
 	add_utility_page(
 		__(THEME_OPTIONS_PAGE_TITLE),
@@ -35,6 +53,12 @@ function create_theme_options_page() {
 }
 
 
+/**
+ * Outputs the theme options page html
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function theme_options_page(){
 	# Check for settings updated or updated, varies between wp versions
 	$updated = (bool)($_GET['settings-updated'] or $_GET['updated']);
@@ -82,6 +106,13 @@ function theme_options_page(){
 	<?php
 }
 
+
+/**
+ * Stub, processing on theme options input
+ *
+ * @return void
+ * @author Jared Lang
+ **/
 function theme_options_sanitize($input){
 	return $input;
 }

@@ -1,5 +1,10 @@
 <?php
-# Define stuff
+$theme_options = get_option(THEME_OPTIONS_NAME);
+
+# Set theme constants
+#define('DEBUG', True);                  # Always on
+#define('DEBUG', False);                 # Always off
+define('DEBUG', isset($_GET['debug'])); # Enable via get parameter
 define('THEME_URL', get_bloginfo('stylesheet_directory'));
 define('THEME_DIR', get_stylesheet_directory());
 define('THEME_STATIC_URL', THEME_URL.'/static');
@@ -9,17 +14,15 @@ define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
+define('GA_ACCOUNT', $theme_options['ga_account']);
+define('CB_UID', $theme_options['cb_uid']);
+define('CB_DOMAIN', $theme_options['cb_domain']);
 
 require_once('functions-base.php');     # Base theme functions
 require_once('custom-post-types.php');  # Where per theme post types are defined
 require_once('shortcodes.php');         # Per theme shortcodes
 require_once('functions-admin.php');    # Admin/login functions
 
-$theme_options = get_option(THEME_OPTIONS_NAME);
-
-define('GA_ACCOUNT', $theme_options['ga_account']);
-define('CB_UID', $theme_options['cb_uid']);
-define('CB_DOMAIN', $theme_options['cb_domain']);
 
 /**
  * Set config values including meta tags, registered custom post types, styles,
