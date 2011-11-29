@@ -15,8 +15,6 @@ defined.
 shortcode for more information.
 * custom-post-types.php - Where the abstract custom post type and all its
 descendants live.
-* templates - this should be where we place any custom templates to keep the
-base theme as simple as possible.
 * static - where, aside from style.css in the root, all static content such as
 javascript, images, and css should live.
 
@@ -39,4 +37,4 @@ edits from there.
 
 ## Short Codes
 
-* None
+* Slideshow - All top level elements contained within will be displayed as a slideshow.  Arguments controlling transition timing and animations are available.

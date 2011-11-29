@@ -611,12 +611,19 @@ function admin_help(){
 	switch($post->post_title){
 		default:
 			?>
-			<h2>Available shortcodes:</h2>
-			<ul>
+			<ul class="shortcode-list">
 				<?php foreach($shortcodes as $sc):?>
-				<li>
-					<h3><?=$sc['shortcode']?></h3>
-					<p><?=nl2br(str_replace(' *', '', htmlentities($sc['documentation'])))?></p>
+				<li class="shortcode">
+					<div class="name"><?=$sc['shortcode']?></div>
+					<div class="documentation">
+						<?=nl2br(trim(
+							str_replace(
+								array(' *'),
+								array(''),
+								htmlentities($sc['documentation'])
+							)
+						))?>
+					</div>
 				</li>
 				<?php endforeach;?>
 			</ul>
@@ -635,7 +642,7 @@ function admin_help(){
  **/
 function admin_meta_boxes(){
 	global $post;
-	add_meta_box('page-help', 'Help', 'admin_help', 'page', 'normal', 'high');
+	add_meta_box('page-help', 'Shortcode Help', 'admin_help', 'page', 'normal', 'high');
 }
 add_action('admin_init', 'admin_meta_boxes');
 

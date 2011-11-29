@@ -9,6 +9,7 @@
  * width      => css width of the outputted slideshow, ex. width="100%"
  * transition => length of transition in milliseconds, ex. transition="1000"
  * cycle      => length of each cycle in milliseconds, ex cycle="5000"
+ * animation  => The animation type, one of: 'slide' or 'fade'
  *
  * Example:
  * [slideshow height="500px" transition="500" cycle="2000"]

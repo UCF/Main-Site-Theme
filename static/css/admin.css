@@ -11,6 +11,12 @@
 #theme-options .field li label{display: inherit;}
 #theme-options textarea{width: 70%; height: 10em;}
 
+#page-help{}
+#page-help h2{}
+#page-help .shortcode{background-color: #fcfcfc; border: 1px solid #e0e0e0;}
+#page-help .name{font-size: 18px; margin: 0 0 1em 0; background-color: #eaeaea; padding: 10px; border-bottom: 1px solid #e0e0e0;}
+#page-help .documentation{line-height: 1.5em; padding: 10px;}
+
 body.login #nav{float: left; width: 50%;}
 body.login #backtoblog{margin-left: 50%;}
 body.login #nav,
