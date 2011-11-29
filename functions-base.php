@@ -359,7 +359,7 @@ class Timer{
 /**
  * Strings passed to this function will be modified under the assumption that
  * they were outputted by wordpress' the_output filter.  It checks for a handful
- * of things like empty p tags, unnecessary and unclosed tags.
+ * of things like empty, unnecessary, and unclosed tags.
  *
  * @return string
  * @author Jared Lang
@@ -1109,7 +1109,7 @@ function opengraph_setup(){
 	);
 	
 	# Include image if available
-	if (has_post_thumbnail($post->ID)){
+	if (!is_front_page() and has_post_thumbnail($post->ID)){
 		$image = wp_get_attachment_image_src(
 			get_post_thumbnail_id( $post->ID ),
 			'single-post-thumbnail'
