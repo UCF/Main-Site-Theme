@@ -11,8 +11,15 @@
 #theme-options .field li label{display: inherit;}
 #theme-options textarea{width: 70%; height: 10em;}
 
+body.login #nav{float: left; width: 50%;}
+body.login #backtoblog{margin-left: 50%;}
 body.login #nav,
-body.login #backtoblog{display: inline;}
+body.login #backtoblog{padding: 0;}
+body.login #nav a,
+body.login #backtoblog a{color: #666 !important; font-size: 14px; text-decoration: none; padding: 10px;}
+body.login #nav a:hover,
+body.login #backtoblog a:hover{text-decoration: underline; color: #000 !important;}
+body.login #lostpasswordform,
 body.login #loginform{margin-bottom: 20px;}
 body.login #login h1 a{background: transparent url('../img/login-logo.png') no-repeat 50% 0; text-indent: 0; text-align: center; text-decoration: none; padding-top: 92px; height: inherit; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; color: #333;}
 body.login #login h1 a:hover{color: #555;}
