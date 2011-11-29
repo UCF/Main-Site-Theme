@@ -122,6 +122,8 @@ class Config{
  * @author Jared Lang
  **/
 abstract class Field{
+	private $input_type = 'abstract';
+	
 	function __construct($attr){
 		$this->name        = @$attr['name'];
 		$this->id          = @$attr['id'];
@@ -132,6 +134,36 @@ abstract class Field{
 		if ($this->value === null){
 			$this->value = $this->default;
 		}
+	}
+	
+	function label_html(){
+		ob_start();
+		?>
+		<label class="block" for="<?=htmlentities($this->id)?>"><?=__($this->name)?></label>
+		<?php
+		return ob_get_clean();
+	}
+	
+	function input_html(){
+		return "Abstract Input Field, Override in Descendants";
+	}
+	
+	function description_html(){
+		ob_start();
+		?>
+		<?php if($this->description):?>
+		<p class="description"><?=__($this->description)?></p>
+		<?php endif;?>
+		<?php
+		return ob_get_clean();
+	}
+	
+	function html(){
+		$label       = $this->label_html();
+		$input       = $this->input_html();
+		$description = $this->description_html();
+		
+		return $label.$input.$description;
 	}
 }
 
@@ -158,14 +190,12 @@ abstract class ChoicesField extends Field{
  * @author Jared Lang
  **/
 class TextField extends Field{
-	function html(){
+	private $type_attr = 'text';
+	
+	function input_html(){
 		ob_start();
 		?>
-		<label class="block" for="<?=htmlentities($this->id)?>"><?=__($this->name)?></label>
-		<input type="text" id="<?=htmlentities($this->id)?>" name="<?=htmlentities($this->id)?>" value="<?=htmlentities($this->value)?>" />
-		<?php if($this->description):?>
-		<p class="description"><?=__($this->description)?></p>
-		<?php endif;?>
+		<input type="<?=$this->type_attr?>" id="<?=htmlentities($this->id)?>" name="<?=htmlentities($this->id)?>" value="<?=htmlentities($this->value)?>" />
 		<?php
 		return ob_get_clean();
 	}
@@ -179,14 +209,10 @@ class TextField extends Field{
  * @author Jared Lang
  **/
 class TextareaField extends Field{
-	function html(){
+	function input_html(){
 		ob_start();
 		?>
-		<label class="block" for="<?=htmlentities($this->id)?>"><?=__($this->name)?></label>
 		<textarea id="<?=htmlentities($this->id)?>" name="<?=htmlentities($this->id)?>"><?=htmlentities($this->value)?></textarea>
-		<?php if($this->description):?>
-		<p class="description"><?=__($this->description)?></p>
-		<?php endif;?>
 		<?php
 		return ob_get_clean();
 	}
@@ -200,18 +226,14 @@ class TextareaField extends Field{
  * @author Jared Lang
  **/
 class SelectField extends ChoicesField{
-	function html(){
+	function input_html(){
 		ob_start();
 		?>
-		<label class="block" for="<?=$this->id?>"><?=__($this->name)?></label>
 		<select name="<?=htmlentities($this->id)?>" id="<?=htmlentities($this->id)?>">
 			<?php foreach($this->choices as $key=>$value):?>
 			<option<?php if($this->value == $value):?> selected="selected"<?php endif;?> value="<?=htmlentities($value)?>"><?=htmlentities($key)?></option>
 			<?php endforeach;?>
 		</select>
-		<?php if($this->description):?>
-		<p class="description"><?=__($this->description)?></p>
-		<?php endif;?>
 		<?php
 		return ob_get_clean();
 	}
@@ -225,10 +247,9 @@ class SelectField extends ChoicesField{
  * @author Jared Lang
  **/
 class RadioField extends ChoicesField{
-	function html(){
+	function input_html(){
 		ob_start();
 		?>
-		<label class="block"><?=__($this->name)?></label>
 		<ul class="radio-list">
 			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
 			<li>
@@ -237,9 +258,6 @@ class RadioField extends ChoicesField{
 			</li>
 			<?php endforeach;?>
 		</ul>
-		<?php if($this->description):?>
-		<p class="description"><?=__($this->description)?></p>
-		<?php endif;?>
 		<?php
 		return ob_get_clean();
 	}
@@ -253,10 +271,9 @@ class RadioField extends ChoicesField{
  * @author Jared Lang
  **/
 class CheckboxField extends ChoicesField{
-	function html(){
+	function input_html(){
 		ob_start();
 		?>
-		<label class="block"><?=__($this->name)?></label>
 		<ul class="checkbox-list">
 			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
 			<li>
@@ -265,9 +282,6 @@ class CheckboxField extends ChoicesField{
 			</li>
 			<?php endforeach;?>
 		</ul>
-		<?php if($this->description):?>
-		<p class="description"><?=__($this->description)?></p>
-		<?php endif;?>
 		<?php
 		return ob_get_clean();
 	}
