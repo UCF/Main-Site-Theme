@@ -122,7 +122,11 @@ class Config{
  * @author Jared Lang
  **/
 abstract class Field{
-	private $input_type = 'abstract';
+	protected function check_for_default(){
+		if ($this->value === null){
+			$this->value = $this->default;
+		}
+	}
 	
 	function __construct($attr){
 		$this->name        = @$attr['name'];
@@ -131,9 +135,7 @@ abstract class Field{
 		$this->description = @$attr['description'];
 		$this->default     = @$attr['default'];
 		
-		if ($this->value === null){
-			$this->value = $this->default;
-		}
+		$this->check_for_default();
 	}
 	
 	function label_html(){
@@ -190,7 +192,7 @@ abstract class ChoicesField extends Field{
  * @author Jared Lang
  **/
 class TextField extends Field{
-	private $type_attr = 'text';
+	protected $type_attr = 'text';
 	
 	function input_html(){
 		ob_start();
@@ -199,6 +201,18 @@ class TextField extends Field{
 		<?php
 		return ob_get_clean();
 	}
+}
+
+
+/**
+ * PasswordField can be used to accept sensitive information, not encrypted on
+ * wordpress' end however.
+ *
+ * @package default
+ * @author Jared Lang
+ **/
+class PasswordField extends TextField{
+	protected $type_attr = 'password';
 }
 
 

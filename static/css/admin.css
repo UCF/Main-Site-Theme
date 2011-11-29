@@ -8,7 +8,6 @@
 #theme-options .checkbox-list li,
 #theme-options .radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
 #theme-options .description em{font-family: monospace; font-weight: bold; color: #21759B;}
-#theme-options .field label{display: none;}
 #theme-options .field li label{display: inherit;}
 #theme-options textarea{width: 70%; height: 10em;}
 

@@ -82,8 +82,11 @@ function theme_options_page(){
 						<table class="form-table">
 							<?php foreach($section as $setting):?>
 							<tr valign="top">
-								<th scope="row"><label for="<?=htmlentities($setting->id)?>"><?=$setting->name?></label></th>
-								<td class="field"><?=$setting->html()?></td>
+								<th scope="row"><?=$setting->label_html()?></th>
+								<td class="field">
+									<?=$setting->input_html()?>
+									<?=$setting->description_html()?>
+								</td>
 							</tr>
 							<?php endforeach;?>
 						</table>
@@ -91,8 +94,11 @@ function theme_options_page(){
 				</tr>
 				<?php else:?>
 				<tr valign="top">
-					<th scope="row"><label for="<?=htmlentities($setting->id)?>"><?=$setting->name?></label></th>
-					<td class="field"><?=$setting->html()?></td>
+					<th scope="row"><?=$setting->label_html()?></th>
+					<td class="field">
+						<?=$setting->input_html()?>
+						<?=$setting->description_html()?>
+					</td>
 				</tr>
 				<?php endif;?>
 				<?php endforeach;?>
