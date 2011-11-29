@@ -1,5 +1,4 @@
 <?php
-$theme_options = get_option(THEME_OPTIONS_NAME);
 
 # Set theme constants
 #define('DEBUG', True);                  # Always on
@@ -14,6 +13,8 @@ define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
+
+$theme_options = get_option(THEME_OPTIONS_NAME);
 define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
