@@ -455,7 +455,7 @@ function mimetype_to_application($mimetype){
  * @return string
  * @author Jared Lang
  **/
-function sc_object_list($attr, $default_content=null){
+function sc_object_list($attr, $default_content=null, $sort_func=null){
 	if (!is_array($attr)){return '';}
 	
 	# set defaults and combine with passed arguments
@@ -463,6 +463,7 @@ function sc_object_list($attr, $default_content=null){
 		'type'  => null,
 		'limit' => -1,
 		'join'  => 'or',
+		'class' => '',
 	);
 	$options = array_merge($defaults, $attr);
 	
@@ -519,17 +520,22 @@ function sc_object_list($attr, $default_content=null){
 	$query = new WP_Query($query_array);
 	$class = new $class;
 	
-	
 	global $post;
 	$objects = array();
 	while($query->have_posts()){
 		$query->the_post();
 		$objects[] = $post;
 	}
+	
+	# Custom sort if applicable
+	if ($sort_func !== null){
+		usort($objects, $sort_func);
+	}
+	
 	wp_reset_postdata();
 	
 	if (count($objects)){
-		$html = $class->objectsToHTML($objects);
+		$html = $class->objectsToHTML($objects, $options['class']);
 	}else{
 		$html = $default_content;
 	}

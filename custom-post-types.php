@@ -210,7 +210,7 @@ abstract class CustomPostType{
 	 * this, if you just want to override how a single object is outputted, see
 	 * the toHTML method.
 	 **/
-	public function objectsToHTML($objects){
+	public function objectsToHTML($objects, $css_classes){
 		if (count($objects) < 1){ return '';}
 		
 		$class = get_custom_post_type($objects[0]->post_type);
@@ -218,7 +218,7 @@ abstract class CustomPostType{
 		
 		ob_start();
 		?>
-		<ul class="<?=$class->options('name')?>-list">
+		<ul class="<?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
 			<?php foreach($objects as $o):?>
 			<li>
 				<?=$class->toHTML($o)?>
