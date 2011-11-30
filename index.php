@@ -19,7 +19,7 @@
 	</div>
 	
 	<div id="below-the-fold" class="clear">
-		<?php get_template_part('templates/below-the-fold'); ?>
+		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 </div>
 <?php get_footer();?>

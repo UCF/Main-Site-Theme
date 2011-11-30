@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="clear"><!-- --></div>
-		<?php get_template_part('templates/below-the-fold'); ?>
+		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 
 <?php get_footer();?>
