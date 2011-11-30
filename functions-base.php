@@ -1376,6 +1376,34 @@ function show_meta_boxes($post){
 	return _show_meta_boxes($post, $meta_box);
 }
 
+function save_file($post_id, $field){
+	$file_uploaded = @!empty($_FILES[$field['id']]);
+	if ($file_uploaded){
+		require_once(ABSPATH.'wp-admin/includes/file.php');
+		$override['action'] = 'editpost';
+		$file               = $_FILES[$field['id']];
+		$uploaded_file      = wp_handle_upload($file, $override);
+		
+		# TODO: Pass reason for error back to frontend
+		if ($uploaded_file['error']){return;}
+		
+		$attachment = array(
+			'post_title'     => $file['name'],
+			'post_content'   => '',
+			'post_type'      => 'attachment',
+			'post_parent'    => $post_id,
+			'post_mime_type' => $file['type'],
+			'guid'           => $uploaded_file['url'],
+		);
+		$id = wp_insert_attachment($attachment, $file['file'], $post_id);
+		wp_update_attachment_metadata(
+			$id,
+			wp_generate_attachment_metadata($id, $file['file'])
+		);
+		update_post_meta($post_id, $field['id'], $id);
+	}
+}
+
 function save_default($post_id, $field){
 	$old = get_post_meta($post_id, $field['id'], true);
 	$new = $_POST[$field['id']];
@@ -1420,6 +1448,9 @@ function _save_meta_data($post_id, $meta_box){
 	
 	foreach ($meta_box['fields'] as $field) {
 		switch ($field['type']){
+			case 'file':
+				save_file($post_id, $field);
+				break;
 			default:
 				save_default($post_id, $field);
 				break;
@@ -1471,6 +1502,21 @@ function _show_meta_boxes($post, $meta_box){
 			
 			<?php break; case 'checkbox':?>
 				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
+			
+			<?php break; case 'file':?>
+				<?php
+					$document_id = get_post_meta($post->ID, $field['id'], True);
+					if ($document_id){
+						$document = get_post($document_id);
+						$url      = wp_get_attachment_url($document->ID);
+					}else{
+						$document = null;
+					}
+				?>
+				<?php if($document):?>
+				<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
+				<?php endif;?>
+				<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
 			
 			<?php break; case 'help':?><!-- Do nothing for help -->
 			<?php break; default:?>

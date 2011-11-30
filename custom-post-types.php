@@ -241,85 +241,119 @@ abstract class CustomPostType{
 }
 
 
-class Example extends CustomPostType{
-	public 
-		$name           = 'example',
-		$plural_name    = 'Examples',
-		$singular_name  = 'Example',
-		$add_new_item   = 'Add New Example',
-		$edit_item      = 'Edit Example',
-		$new_item       = 'New Example',
-		$public         = True,
-		$use_categories = True,
-		$use_thumbnails = True,
-		$use_editor     = True,
-		$use_order      = True,
+class Document extends CustomPostType{
+	public
+		$name           = 'document',
+		$plural_name    = 'Documents',
+		$singular_name  = 'Document',
+		$add_new_item   = 'Add New Document',
+		$edit_item      = 'Edit Document',
+		$new_item       = 'New Document',
 		$use_title      = True,
+		$use_editor     = False,
 		$use_shortcode  = True,
 		$use_metabox    = True;
 	
+	public function fields(){
+		$fields   = parent::fields();
+		$fields[] = array(
+			'name' => __('URL'),
+			'desc' => __('Associate this document with a URL.  This will take precedence over any uploaded file, so leave empty if you want to use a file instead.'),
+			'id'   => $this->options('name').'_url',
+			'type' => 'text',
+		);
+		$fields[] = array(
+			'name'    => __('File'),
+			'desc'    => __('Associate this document with an already existing file.'),
+			'id'      => $this->options('name').'_file',
+			'type'    => 'file',
+		);
+		return $fields;
+	}
 	
-	public function objectsToHTML($objects){
-		$class = get_custom_post_type($objects[0]->post_type);
-		$class = new $class;
-		
-		$outputs = array();
-		foreach($objects as $o){
-			$outputs[] = $class->toHTML($o);
+	
+	static function get_document_application($form){
+		return mimetype_to_application(self::get_mimetype($form));
+	}
+	
+	
+	static function get_mimetype($form){
+		if (is_numeric($form)){
+			$form = get_post($form);
 		}
 		
-		return implode(', ', $outputs);
+		$prefix   = post_type($form);
+		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
+		
+		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
+		
+		return ($is_url) ? "text/html" : $document->post_mime_type;
 	}
 	
 	
+	static function get_title($form){
+		if (is_numeric($form)){
+			$form = get_post($form);
+		}
+		
+		$prefix = post_type($form);
+		
+		return $form->post_title;
+	}
+	
+	static function get_url($form){
+		if (is_numeric($form)){
+			$form = get_post($form);
+		}
+		
+		$prefix = post_type($form);
+		
+		$x = get_post_meta($form->ID, $prefix.'_url', True);
+		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
+		
+		if (!$x and !$y){
+			return '#';
+		}
+		
+		return ($x) ? $x : $y;
+	}
+	
+	
+	/**
+	 * Handles output for a list of objects, can be overridden for descendants.
+	 * If you want to override how a list of objects are outputted, override
+	 * this, if you just want to override how a single object is outputted, see
+	 * the toHTML method.
+	 **/
+	public function objectsToHTML($objects, $css_classes){
+		if (count($objects) < 1){ return '';}
+		
+		$class_name = get_custom_post_type($objects[0]->post_type);
+		$class      = new $class_name;
+		
+		ob_start();
+		?>
+		<ul class="nobullet <?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
+			<?php foreach($objects as $o):?>
+			<li class="document <?=$class_name::get_document_application($o)?>">
+				<?=$class->toHTML($o)?>
+			</li>
+			<?php endforeach;?>
+		</ul>
+		<?php
+		$html = ob_get_clean();
+		return $html;
+	}
+	
+	
+	/**
+	 * Outputs this item in HTML.  Can be overridden for descendants.
+	 **/
 	public function toHTML($object){
-		return $object->post_title;
-	}
-	
-	
-	public function fields(){
-		return array(
-			array(
-				'name'  => 'Helpy Help',
-				'desc'  => 'Help Example, static content to assist the nice users.',
-				'id'    => $this->options('name').'_help',
-				'type'  => 'help',
-			),
-			array(
-				'name' => 'Text',
-				'desc' => 'Text field example',
-				'id'   => $this->options('name').'_text',
-				'type' => 'text',
-			),
-			array(
-				'name' => 'Textarea',
-				'desc' => 'Textarea example',
-				'id'   => $this->options('name').'_textarea',
-				'type' => 'textarea',
-			),
-			array(
-				'name'    => 'Select',
-				'desc'    => 'Select example',
-				'default' => '(None)',
-				'id'      => $this->options('name').'_select',
-				'options' => array('Select One' => 1, 'Select Two' => 2,),
-				'type'    => 'select',
-			),
-			array(
-				'name'    => 'Radio',
-				'desc'    => 'Radio example',
-				'id'      => $this->options('name').'_radio',
-				'options' => array('Key One' => 1, 'Key Two' => 2,),
-				'type'    => 'radio',
-			),
-			array(
-				'name'  => 'Checkbox',
-				'desc'  => 'Checkbox example',
-				'id'    => $this->options('name').'_checkbox',
-				'type'  => 'checkbox',
-			),
-		);
+		$title = Document::get_title($object);
+		$url   = Document::get_url($object);
+		$html = "<a href='{$url}'>{$title}</a>";
+		return $html;
 	}
 }
-
 ?>
