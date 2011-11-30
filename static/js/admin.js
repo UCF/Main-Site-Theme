@@ -1,8 +1,7 @@
-var __init__ = function($){
-	// YAYAY
-};
+var WebcomAdmin = {};
 
+WebcomAdmin.__init__ = function($){};
 
 (function($){
-	__init__($);
+	WebcomAdmin.__init__($);
 })(jQuery);
