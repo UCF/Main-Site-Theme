@@ -1,49 +1,52 @@
 <?php 
 	# Check for settings updated or updated, varies between wp versions
-	$updated = (bool)($_GET['settings-updated'] or $_GET['updated']);
+	$updated  = (bool)($_GET['settings-updated'] or $_GET['updated']);
+	$settings = array_filter(Config::$theme_settings, 'is_array');
+	$misc     = array('Miscellaneous' => array_filter(Config::$theme_settings, 'is_object'));
+	
+	if (count($misc[0])){ $settings = array_merge($settings, $misc);}
+	
+	$sections = array_keys($settings);
 ?>
 
 <form method="post" action="options.php" id="theme-options">
-	<div class="wrap">
+    <?php settings_fields(THEME_OPTIONS_GROUP);?>
+	<div class="container">
 		<h2><?=__(THEME_OPTIONS_PAGE_TITLE)?></h2>
 		
 		<?php if ($updated):?>
 		<div class="updated fade"><p><strong><?=__( 'Options saved' ); ?></strong></p></div>
 		<?php endif; ?>
 		
-		<?php settings_fields(THEME_OPTIONS_GROUP);?>
-		<table class="form-table">
-			<?php foreach(Config::$theme_settings as $key=>$setting):?>
-			<?php if(is_array($setting)): $section = $setting;?>
-			<tr class="section">
-				<td colspan="2">
-					<h3><?=$key?></h3>
+		<div class="sections">
+			<ul>
+				<?php foreach($sections as $key=>$section):?>
+				<li class="section"><a href="#<?=slug($section)?>"><?=$section?></a></li>
+				<?php endforeach;?>
+			</ul>
+		</div>
+		<div class="fields">
+			<ul>
+				<?php foreach($settings as $section=>$fields):?>
+				<li class="section" id="<?=slug($section)?>">
+					<h3><?=$section?></h3>
 					<table class="form-table">
-						<?php foreach($section as $setting):?>
+						<?php foreach($fields as $field):?>
 						<tr valign="top">
-							<th scope="row"><?=$setting->label_html()?></th>
+							<th scope="row"><?=$field->label_html()?></th>
 							<td class="field">
-								<?=$setting->input_html()?>
-								<?=$setting->description_html()?>
+								<?=$field->input_html()?>
+								<?=$field->description_html()?>
 							</td>
 						</tr>
 						<?php endforeach;?>
 					</table>
-				</td>
-			</tr>
-			<?php else:?>
-			<tr valign="top">
-				<th scope="row"><?=$setting->label_html()?></th>
-				<td class="field">
-					<?=$setting->input_html()?>
-					<?=$setting->description_html()?>
-				</td>
-			</tr>
-			<?php endif;?>
-			<?php endforeach;?>
-		</table>
-		<div class="submit">
-			<input type="submit" class="button-primary" value="<?= __('Save Options')?>" />
+				</li>
+				<?php endforeach;?>
+			</ul>
+			<div class="submit">
+				<input type="submit" class="button-primary" value="<?= __('Save Options')?>" />
+			</div>
 		</div>
 	</div>
 </form>

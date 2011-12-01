@@ -2,6 +2,8 @@
  * Custom admin styles go here.
  **/
 
+#theme-options .updated{margin: 0 0 20px 0;}
+#theme-options .container{margin: 0 19px 0 0; padding: 0;}
 #theme-options .block{display: block;}
 #theme-options .checkbox-list,
 #theme-options .radio-list{padding: 0; margin: 0;}
@@ -10,6 +12,16 @@
 #theme-options .description em{font-family: monospace; font-weight: bold; color: #21759B;}
 #theme-options .field li label{display: inherit;}
 #theme-options textarea{width: 70%; height: 10em;}
+#theme-options .updated{position: absolute; top: 40px; left: 50%; z-index: 100; text-align: center;}
+#theme-options .fields{margin-left: 215px; background-color: #fefefe; padding: 20px; border: 1px solid #f0f0f0;}
+#theme-options .fields .section h3{padding: 0 0 10px 0; margin: 0; color: #21759B; font-size: 20px; border-bottom: 1px solid #E1E5EB;}
+#theme-options .fields .section table{padding: 0; margin: 20px 0 20px 0; clear: none;}
+#theme-options .fields .submit{text-align: right; margin: 0; padding: 0;}
+#theme-options .sections{width: 200px; float: left;}
+#theme-options .sections .section{margin: 0 0 8px 0;}
+#theme-options .sections a{display: block; padding: 10px; color: #ccc; text-decoration: none; border: 1px solid #f0f0f0; background-color: #fafafa; font-size: 16px; font-weight: bold;}
+#theme-options .sections a.active,
+#theme-options .sections a:hover{background-color: #fff; border: 1px solid #f0f0f0; color: #21759B;}
 
 #page-help{}
 #page-help h2{}
@@ -32,9 +44,3 @@ body.login #login h1 a:hover{color: #555;}
 body.login #login h1 a .hide{display: block;}
 
 .description code { background:none; font-weight:bold; color:#21759B; padding:0; }
-
-tr.section{padding-bottom: 20px;}
-tr.section td{padding: 0;}
-tr.section td td{padding: 10px; margin: 0;}
-tr.section h3{padding: 10px; margin: 0; background-color: #efefef; color: #21759B; border: 1px solid #DFDFDF;}
-tr.section table{padding: 0; margin: 0 0 20px 0;}
