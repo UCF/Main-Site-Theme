@@ -2,9 +2,8 @@
 	# Check for settings updated or updated, varies between wp versions
 	$updated  = (bool)($_GET['settings-updated'] or $_GET['updated']);
 	$settings = array_filter(Config::$theme_settings, 'is_array');
-	$misc     = array('Miscellaneous' => array_filter(Config::$theme_settings, 'is_object'));
-	
-	if (count($misc[0])){ $settings = array_merge($settings, $misc);}
+	$misc     = array_filter(Config::$theme_settings, 'is_object');
+	if (count($misc)){ $settings['Miscellaneous'] = $misc;}
 	
 	$sections = array_keys($settings);
 ?>

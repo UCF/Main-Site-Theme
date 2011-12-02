@@ -13,13 +13,17 @@
 #theme-options .field li label{display: inherit;}
 #theme-options textarea{width: 70%; height: 10em;}
 #theme-options .updated{position: absolute; top: 40px; left: 50%; z-index: 100; text-align: center;}
-#theme-options .fields{margin-left: 215px; background-color: #fefefe; padding: 20px; border: 1px solid #f0f0f0;}
+#theme-options .fields{margin-left: 215px; background-color: #fefefe; padding: 20px; border: 1px solid #f0f0f0;
+	box-shadow: rgba(160, 160, 160, .1) 0px 0px 12px;
+}
 #theme-options .fields .section h3{padding: 0 0 10px 0; margin: 0; color: #21759B; font-size: 20px; border-bottom: 1px solid #E1E5EB;}
 #theme-options .fields .section table{padding: 0; margin: 20px 0 20px 0; clear: none;}
 #theme-options .fields .submit{text-align: right; margin: 0; padding: 0;}
 #theme-options .sections{width: 200px; float: left;}
-#theme-options .sections .section{margin: 0 0 8px 0;}
-#theme-options .sections a{display: block; padding: 10px; color: #ccc; text-decoration: none; border: 1px solid #f0f0f0; background-color: #fafafa; font-size: 16px; font-weight: bold;}
+#theme-options .sections .section{margin: 0 0 8px 0;
+	box-shadow: rgba(160, 160, 160, .1) 0px 0px 12px;
+}
+#theme-options .sections a{display: block; padding: 10px; color: #aaa; text-decoration: none; border: 1px solid #f0f0f0; background-color: #fafafa; font-size: 16px; font-weight: bold;}
 #theme-options .sections a.active,
 #theme-options .sections a:hover{background-color: #fff; border: 1px solid #f0f0f0; color: #21759B;}
 
