@@ -8,7 +8,18 @@
 ?>
 <?php get_header();?>
 	<div class="page-content" id="search-results">
-		<div class="results span-16 append-2">
+	    
+		<div id="sidebar" class="span-6 append-2">
+			<?php
+				// Remove search widget if included, redundant on this page
+				ob_start(); get_search_form(); $search  = ob_get_clean();
+				ob_start(); get_sidebar()    ; $sidebar = ob_get_clean();
+				$sidebar = str_replace($search, '', $sidebar);
+			?>
+			<?=$sidebar?>
+		</div>
+		
+		<div class="results span-16 last">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
@@ -45,17 +56,6 @@
 			<?php endif;?>
 		</div>
 		
-		
-		<div id="sidebar" class="span-6 last">
-			<?php
-				// Remove search widget if included, redundant on this page
-				ob_start(); get_search_form(); $search  = ob_get_clean();
-				ob_start(); get_sidebar()    ; $sidebar = ob_get_clean();
-				$sidebar = str_replace($search, '', $sidebar);
-			?>
-			<?=$sidebar?>
-		</div>
-		
 		<div id="below-the-fold" class="clear">
 			<?php get_template_part('includes/below-the-fold'); ?>
 		</div>
@@ -63,29 +63,31 @@
 <?php get_footer();?>
 <?php else:?>
 	<?php get_header();?>
-	<div class="page-content">
-		<div class="results span-16 append-2">
+	<div class="page-content" id="search-results">
+		<div id="sidebar" class="span-6 append-2">
+			<?php get_sidebar()?>
+		</div>
+		
+		<div class="results span-16 last">
+			<h2>Search results</h2>
+			<?php get_search_form()?>
+			
 			<?php if(have_posts()):?>
-			<?php while(have_posts()): the_post();?>
-			<article>
-				<h1><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>
-				<div class="meta">
-					<span class="date"><?php the_time("F j, Y");?></span>
-					<span class="author">by <?php the_author_posts_link();?></span>
-				</div>
-				<div class="summary">
-					<?php the_excerpt();?>
-				</div>
-			</article>
-			<?php endwhile;?>
+			<ul class="result-list">
+    			<?php while(have_posts()): the_post();?>
+    			<li class="item">
+    				<h3><a class="sans title" href="<?php the_permalink();?>"><?php the_title();?></a></h3>
+    				<a href="<?php the_permalink();?>" class="url sans"><?php the_permalink();?></a>
+    				<div class="snippet sans">
+    					<?php the_excerpt();?>
+    				</div>
+    			</li>
+			    <?php endwhile;?>
+			</ul>
 			<?php else:?>
 				
 			<p>No results found for "<?=htmlentities($_GET['s'])?>".</p>
 			<?php endif;?>
-		</div>
-		
-		<div id="sidebar" class="span-6 last">
-			<?php get_sidebar()?>
 		</div>
 		
 		<div id="below-the-fold" class="clear">

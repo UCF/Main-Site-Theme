@@ -44,7 +44,6 @@ WebcomAdmin.themeOptions = function($){
 			cls.buttons.filter('[href="' + window.location.hash + '"]').click();
 		}
 		
-		// Fade update box after a 
 		var fadeTimer = setInterval(function(){
 			$('.updated').fadeOut(1000);
 			clearInterval(fadeTimer);
