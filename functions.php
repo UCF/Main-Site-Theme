@@ -42,7 +42,7 @@ Config::$body_classes = array('default',);
  * available fields. -- functions-base.php
  **/
 Config::$theme_settings = array(
-	'Webmaster Tools' => array(
+	'Analytics' => array(
 		new TextField(array(
 			'name'        => 'Google WebMaster Verification',
 			'id'          => THEME_OPTIONS_NAME.'[gw_verify]',
@@ -64,8 +64,6 @@ Config::$theme_settings = array(
 			'default'     => null,
 			'value'       => $theme_options['bw_verify'],
 		)),
-	),
-	'Analytics' => array(
 		new TextField(array(
 			'name'        => 'Google Analytics Account',
 			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
@@ -88,7 +86,38 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['cb_domain'],
 		)),
 	),
-	'Facebook' => array(
+	'News and Events' => array(
+		new RadioField(array(
+			'name'        => 'Enable UCF Events',
+			'id'          => THEME_OPTIONS_NAME.'[enable_events]',
+			'description' => 'Where applicable, pull data from UCF\'s events system',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_events'],
+		)),
+		new RadioField(array(
+			'name'        => 'Enable News',
+			'id'          => THEME_OPTIONS_NAME.'[enable_news]',
+			'description' => 'Display news stories from UCF Today or a custom RSS feed',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_news'],
+		)),
+		new TextField(array(
+			'name'        => 'News Feed',
+			'id'          => THEME_OPTIONS_NAME.'[news_feed]',
+			'description' => 'Use the following URL for the news RSS feed <br />Example: <em>http://today.ucf.edu/feed/</em>',
+			'value'       => $theme_options['news_feed'],
+			'default'     => 'http://today.ucf.edu/feed/',
+		)),
+	),
+	'Social' => array(
 		new RadioField(array(
 			'name'        => 'Enable OpenGraph',
 			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
@@ -106,6 +135,20 @@ Config::$theme_settings = array(
 			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
 			'default'     => null,
 			'value'       => $theme_options['fb_admins'],
+		)),
+		new TextField(array(
+			'name'        => 'Twitter User',
+			'id'          => THEME_OPTIONS_NAME.'[twitter_user]',
+			'description' => 'Associate a twitter account to this site by providing a valid twitter user id.',
+			'default'     => null,
+			'value'       => $theme_options['twitter_user'],
+		)),
+		new TextField(array(
+			'name'        => 'Flickr User',
+			'id'          => THEME_OPTIONS_NAME.'[flickr_user]',
+			'description' => 'Associate a flickr stream to this site by providing the flickr user id you wish to use.',
+			'default'     => null,
+			'value'       => $theme_options['flickr_user'],
 		)),
 	),
 	'Search' => array(
