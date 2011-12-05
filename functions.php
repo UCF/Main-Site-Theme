@@ -98,6 +98,13 @@ Config::$theme_settings = array(
 			),
 			'value'       => $theme_options['enable_events'],
 		)),
+		new TextField(array(
+			'name'        => 'Events Calendar',
+			'id'          => THEME_OPTIONS_NAME.'[events_calendar]',
+			'description' => 'Calendar to use for events information',
+			'value'       => $theme_options['events_calendar'],
+			'default'     => '1',
+		)),
 		new RadioField(array(
 			'name'        => 'Enable News',
 			'id'          => THEME_OPTIONS_NAME.'[enable_news]',
