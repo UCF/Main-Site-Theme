@@ -771,8 +771,9 @@ add_action('shutdown', '__shutdown__');
  * request as they are stored in memory for later use.
  **/
 class FeedManager{
-	static private $feeds       = array();
-	static public $cache_length = 0xD2F0;
+	static private
+		$feeds        = array(),
+		$cache_length = 0xD2F0;
 	
 	/**
 	 * Provided a URL, will return an array representing the feed item for that
@@ -841,6 +842,30 @@ class FeedManager{
 			return array();
 		}
 		
+	}
+	
+	
+	/**
+	 * Retrieve the current cache expiration value.
+	 *
+	 * @return void
+	 * @author Jared Lang
+	 **/
+	static public function get_cache_expiration(){
+		return self::$cache_length;
+	}
+	
+	
+	/**
+	 * Set the cache expiration length for all feeds from this manager.
+	 *
+	 * @return void
+	 * @author Jared Lang
+	 **/
+	static public function set_cache_expiration($expire){
+		if (is_number($expire)){
+			self::$cache_length = (int)$expire;
+		}
 	}
 	
 	
