@@ -171,22 +171,21 @@ Config::$theme_settings = array(
 			'default'     => null,
 			'value'       => $theme_options['fb_admins'],
 		)),
-		new TextField(array(
-			'name'        => 'Twitter User',
-			'id'          => THEME_OPTIONS_NAME.'[twitter_user]',
-			'description' => 'Associate a twitter account to this site by providing a valid twitter user id.',
-			'default'     => null,
-			'value'       => $theme_options['twitter_user'],
-		)),
-		new TextField(array(
-			'name'        => 'Flickr User',
-			'id'          => THEME_OPTIONS_NAME.'[flickr_user]',
-			'description' => 'Associate a flickr stream to this site by providing the flickr user id you wish to use.',
-			'default'     => null,
-			'value'       => $theme_options['flickr_user'],
-		)),
 	),
-	'Search' => array(
+	'Site' => array(
+		new TextField(array(
+			'name'        => 'Site Title',
+			'id'          => THEME_OPTIONS_NAME.'[site_title]',
+			'description' => 'What do you want to call your site?',
+			'default'     => get_bloginfo('Site Name'),
+			'value'       => $theme_options['site_title'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Site Description',
+			'id'          => THEME_OPTIONS_NAME.'[site_description]',
+			'description' => 'A quick description of your organization and its role.',
+			'value'       => $theme_options['site_description'],
+		)),
 		new RadioField(array(
 			'name'        => 'Enable Google Search',
 			'id'          => THEME_OPTIONS_NAME.'[enable_google]',
