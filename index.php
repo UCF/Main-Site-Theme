@@ -14,12 +14,5 @@
 		</article>
 		<?php endwhile;?>
 	</div>
-	<div id="sidebar" class="span-6 last">
-		<?=get_sidebar();?>
-	</div>
-	
-	<div id="below-the-fold" class="clear">
-		<?php get_template_part('includes/below-the-fold'); ?>
-	</div>
 </div>
 <?php get_footer();?>

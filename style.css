@@ -6,3 +6,38 @@ Version: v0.0.1
 */
 
 /*/ Global Styles /*/
+
+.end {clear: both;}
+
+#below-the-fold{border-top: 1px dotted #ccc; padding-top: 1em;}
+#below-the-fold h2{font-size: 18px; margin: 0 0 1em 0; padding: 0;}
+
+.events,
+.events .date,
+.events .title,
+.events .title a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+.events{border-spacing: 16px; padding: 0; margin: 0; position: relative; top: -16px;}
+.events .date{text-align: center; width: 1px; padding: 8px 12px; background-color: #fef7c8; color: #666; font-weight: bold; border: 1px solid #ded7a8;
+	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+}
+.events .month{font-size: 18px;}
+.events .day{font-size: 16px;}
+.events .title{font-size: 14px; text-align: left;}
+.events .title .wrap{display: block; max-height: 50px; overflow: hidden;}
+
+.news,
+.news .item,
+.news .title,
+.news .description{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+.news{list-style-type: none; padding: 0; margin: 0;}
+.news li{list-style-type: none; margin: 0 0 32px 0; clear: both;}
+.news .item .title{font-weight: bold; font-size: 18px; clear: left; margin: 0 0 16px 0;}
+.news .item img{float: left; max-height: 150px; max-width: 256px; margin: 0 15px 10px 0; border: 1px solid #aaa;
+	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, .2);
+}
+.news .item a{font-weight: normal; text-decoration: none; color: #333;}
+.news .item a:hover{text-decoration: underline; color: #ed1c24;}

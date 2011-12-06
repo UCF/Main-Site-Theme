@@ -739,6 +739,20 @@ function __init__(){
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 	));
+	register_sidebar(array(
+		'name'          => __('Bottom Left'),
+		'id'            => 'bottom-left',
+		'description'   => 'Left column on the bottom of pages, after news if enabled.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
+	register_sidebar(array(
+		'name'          => __('Bottom Right'),
+		'id'            => 'bottom-right',
+		'description'   => 'Right column on the bottom of pages, after events if enabled.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
@@ -764,6 +778,21 @@ function __shutdown__(){
 add_action('shutdown', '__shutdown__');
 
 
+function get_article_image($article){
+	$image = $article->get_enclosure();
+	if ($image){
+		return ($image->get_thumbnail()) ? $image->get_thumbnail() : $image->get_link();
+	}else{
+		$matches = array();
+		$found   = preg_match('/<img[^>]+src=[\'\"]([^\'\"]+)[\'\"][^>]+>/i',  $article->get_content(), $matches);
+		if($found){ 
+			return $matches[1];
+		}
+	}
+	return null;
+}
+
+
 /**
  * Handles fetching and processing of feeds.  Currently uses SimplePie to parse
  * retrieved feeds, and automatically handles caching of content fetches.
@@ -784,6 +813,7 @@ class FeedManager{
 	 * @author Jared Lang
 	 **/
 	static private function __new_feed($url){
+		$timer = Timer::start();
 		require_once(THEME_DIR.'/third-party/simplepie.php');
 		
 		$simplepie = null;
@@ -817,6 +847,8 @@ class FeedManager{
 			$failed = True;
 		}
 		
+		$elapsed = round($timer->elapsed() * 1000);
+		debug("__new_feed: {$elapsed} milliseconds");
 		return array(
 			'content'   => $content,
 			'url'       => $url,
@@ -876,11 +908,37 @@ class FeedManager{
 	 * @return array
 	 * @author Jared Lang
 	 **/
-	static function get_items($url, $start=0, $limit=5){
+	static function get_items($url, $start=null, $limit=null){
+		if ($start === null){$start = 0;}
+		
 		$items = self::__get_items($url);
 		$items = array_slice($items, $start, $limit);
 		return $items;
 	}
+}
+
+
+function get_events($start=null, $limit=null){
+	$options = get_option(THEME_OPTIONS_NAME);
+	$qstring = (bool)strpos($options['events_url'], '?');
+	$url     = $options['events_url'];
+	if (!$qstring){
+		$url .= '?';
+	}else{
+		$url .= '&';
+	}
+	$url    .= 'upcoming=upcoming&format=rss';
+	$events  = array_reverse(FeedManager::get_items($url));
+	$events  = array_slice($events, $start, $limit);
+	return $events;
+}
+
+
+function get_news($start=null, $limit=null){
+	$options = get_option(THEME_OPTIONS_NAME);
+	$url     = $options['news_url'];
+	$news    = FeedManager::get_items($url, $start, $limit);
+	return $news;
 }
 
 
