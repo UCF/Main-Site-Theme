@@ -5,7 +5,7 @@ if (is_login()){
 }
 
 if (is_admin()){
-	add_action('admin_menu', 'create_theme_options_page');
+	add_action('admin_menu', 'create_utility_pages');
 	add_action('admin_init', 'init_theme_options');
 }
 
@@ -41,7 +41,7 @@ function init_theme_options(){
  * @return void
  * @author Jared Lang
  **/
-function create_theme_options_page() {
+function create_utility_pages() {
 	add_utility_page(
 		__(THEME_OPTIONS_PAGE_TITLE),
 		__(THEME_OPTIONS_PAGE_TITLE),
@@ -50,6 +50,25 @@ function create_theme_options_page() {
 		'theme_options_page',
 		THEME_IMG_URL.'/pegasus.png'
 	);
+	add_utility_page(
+		__('Help'),
+		__('Help'),
+		'',
+		'theme-help',
+		'theme_help_page',
+		THEME_IMG_URL.'/help.png'
+	);
+}
+
+
+/**
+ * Outputs theme help page
+ *
+ * @return void
+ * @author Jared Lang
+ **/
+function theme_help_page(){
+	include(THEME_INCLUDES_DIR.'/theme-help.php');
 }
 
 

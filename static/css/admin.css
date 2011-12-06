@@ -2,30 +2,30 @@
  * Custom admin styles go here.
  **/
 
-#theme-options .updated{margin: 0 0 20px 0;}
-#theme-options .container{margin: 0 19px 0 0; padding: 0;}
-#theme-options .block{display: block;}
-#theme-options .checkbox-list,
-#theme-options .radio-list{padding: 0; margin: 0;}
-#theme-options .checkbox-list li,
-#theme-options .radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
-#theme-options .description em{font-family: monospace; font-weight: bold; color: #21759B;}
-#theme-options .field li label{display: inherit;}
-#theme-options textarea{width: 70%; height: 10em;}
-#theme-options .updated{position: absolute; top: 40px; left: 50%; z-index: 100; text-align: center;}
-#theme-options .fields{margin-left: 215px; background-color: #fefefe; padding: 20px; border: 1px solid #f0f0f0;
+.i-am-a-fancy-admin .updated{margin: 0 0 20px 0;}
+.i-am-a-fancy-admin .container{margin: 0 19px 0 0; padding: 0;}
+.i-am-a-fancy-admin .block{display: block;}
+.i-am-a-fancy-admin .checkbox-list,
+.i-am-a-fancy-admin .radio-list{padding: 0; margin: 0;}
+.i-am-a-fancy-admin .checkbox-list li,
+.i-am-a-fancy-admin .radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
+.i-am-a-fancy-admin .description em{font-family: monospace; font-weight: bold; color: #21759B;}
+.i-am-a-fancy-admin .field li label{display: inherit;}
+.i-am-a-fancy-admin textarea{width: 70%; height: 10em;}
+.i-am-a-fancy-admin .updated{position: absolute; top: 40px; left: 50%; z-index: 100; text-align: center;}
+.i-am-a-fancy-admin .fields{margin-left: 215px; background-color: #fefefe; padding: 20px; border: 1px solid #f0f0f0;
 	box-shadow: rgba(160, 160, 160, .1) 0px 0px 12px;
 }
-#theme-options .fields .section h3{padding: 0 0 10px 0; margin: 0; color: #21759B; font-size: 20px; border-bottom: 1px solid #E1E5EB;}
-#theme-options .fields .section table{padding: 0; margin: 20px 0 20px 0; clear: none;}
-#theme-options .fields .submit{text-align: right; margin: 0; padding: 0;}
-#theme-options .sections{width: 200px; float: left;}
-#theme-options .sections .section{margin: 0 0 8px 0;
+.i-am-a-fancy-admin .fields .section h3{padding: 0 0 10px 0; margin: 0; color: #21759B; font-size: 20px; border-bottom: 1px solid #E1E5EB;}
+.i-am-a-fancy-admin .fields .section table{padding: 0; margin: 20px 0 20px 0; clear: none;}
+.i-am-a-fancy-admin .fields .submit{text-align: right; margin: 0; padding: 0;}
+.i-am-a-fancy-admin .sections{width: 200px; float: left;}
+.i-am-a-fancy-admin .sections .section{margin: 0 0 8px 0;
 	box-shadow: rgba(160, 160, 160, .1) 0px 0px 12px;
 }
-#theme-options .sections a{display: block; padding: 10px; color: #aaa; text-decoration: none; border: 1px solid #f0f0f0; background-color: #fafafa; font-size: 16px; font-weight: bold;}
-#theme-options .sections a.active,
-#theme-options .sections a:hover{background-color: #fff; border: 1px solid #f0f0f0; color: #21759B;}
+.i-am-a-fancy-admin .sections a{display: block; padding: 10px; color: #aaa; text-decoration: none; border: 1px solid #f0f0f0; background-color: #fafafa; font-size: 16px; font-weight: bold;}
+.i-am-a-fancy-admin .sections a.active,
+.i-am-a-fancy-admin .sections a:hover{background-color: #fff; border: 1px solid #f0f0f0; color: #21759B;}
 
 #page-help{}
 #page-help h2{}

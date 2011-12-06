@@ -8,7 +8,7 @@
 	$sections = array_keys($settings);
 ?>
 
-<form method="post" action="options.php" id="theme-options">
+<form method="post" action="options.php" id="theme-options" class="i-am-a-fancy-admin">
     <?php settings_fields(THEME_OPTIONS_GROUP);?>
 	<div class="container">
 		<h2><?=__(THEME_OPTIONS_PAGE_TITLE)?></h2>

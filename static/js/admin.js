@@ -11,9 +11,9 @@ WebcomAdmin.__init__ = function($){
 WebcomAdmin.themeOptions = function($){
 	cls          = this;
 	cls.active   = null;
-	cls.form     = $('#theme-options');
-	cls.sections = $('#theme-options .fields .section');
-	cls.buttons  = $('#theme-options .sections .section a');
+	cls.parent   = $('.i-am-a-fancy-admin');
+	cls.sections = $('.i-am-a-fancy-admin .fields .section');
+	cls.buttons  = $('.i-am-a-fancy-admin .sections .section a');
 	
 	this.showSection = function(e){
 		var button  = $(this);
@@ -29,7 +29,7 @@ WebcomAdmin.themeOptions = function($){
 		cls.active.show();
 		
 		history.pushState({}, "", button.attr('href'));
-		var http_referrer = cls.form.find('input[name="_wp_http_referer"]');
+		var http_referrer = cls.parent.find('input[name="_wp_http_referer"]');
 		http_referrer.val(window.location);
 		return false;
 	}
@@ -50,7 +50,7 @@ WebcomAdmin.themeOptions = function($){
 		}, 2000);
 	};
 	
-	if (cls.form.length > 0){
+	if (cls.parent.length > 0){
 		cls.__init__();
 	}
 };
