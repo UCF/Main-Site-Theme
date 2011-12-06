@@ -800,7 +800,7 @@ function set_defaults_for_options(){
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
-	add_image_size('homepage', 590);
+	add_image_size('homepage', 620);
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(

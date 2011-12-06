@@ -30,12 +30,14 @@ em{font-style: italic;}
 
 .default a {font-weight:bold;}
 .default h1,
+.default h1 a,
 .default .sans{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 .default h1 a,
 .default h2 a{text-decoration: none;}
 .default h1 a:hover,
 .default h2 a:hover{text-decoration: underline;}
 .default h2,
+.default h2 a,
 .default .sans-alt{font-family: "Arial Black", "Arial", "sans-serif";}
 .default h3,
 .default h4,
