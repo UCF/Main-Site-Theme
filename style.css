@@ -18,6 +18,13 @@ Version: v0.0.1
 #home .description p{font-size: 24px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
 
+#footer-menu{margin-bottom: 1em;}
+#footer .ucf{}
+#footer .info{position: relative; top: -10px;}
+#footer .info,
+#footer .info a{line-height: 1.5em; text-align: right; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-weight: normal; font-size: 14px;}
+#footer .info .copyright{margin-top: 1em;}
+
 #below-the-fold{border-top: 1px dotted #666; padding-top: 1em;}
 #below-the-fold h2{font-size: 18px; margin: 0 0 1em 0; padding: 0;}
 

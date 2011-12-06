@@ -173,19 +173,24 @@ Config::$theme_settings = array(
 		)),
 	),
 	'Site' => array(
+		new TextField(array(
+			'name'        => 'Contact Email',
+			'id'          => THEME_OPTIONS_NAME.'[site_contact]',
+			'description' => 'Contact email address that visitors to your site can use to contact you.',
+			'value'       => $theme_options['site_contact'],
+		)),
+		new TextField(array(
+			'name'        => 'Organization Name',
+			'id'          => THEME_OPTIONS_NAME.'[organization_name]',
+			'description' => 'Your organization\'s name',
+			'value'       => $theme_options['organization_name'],
+		)),
 		new SelectField(array(
 			'name'        => 'Home Image',
 			'id'          => THEME_OPTIONS_NAME.'[site_image]',
 			'description' => 'Image to feature on the homepage.  Select any image uploaded to the media gallery.',
 			'choices'     => get_image_choices(),
 			'value'       => $theme_options['site_image'],
-		)),
-		new TextField(array(
-			'name'        => 'Site Title',
-			'id'          => THEME_OPTIONS_NAME.'[site_title]',
-			'description' => 'What do you want to call your site?',
-			'default'     => get_bloginfo('Site Name'),
-			'value'       => $theme_options['site_title'],
 		)),
 		new TextareaField(array(
 			'name'        => 'Site Description',
