@@ -173,6 +173,13 @@ Config::$theme_settings = array(
 		)),
 	),
 	'Site' => array(
+		new SelectField(array(
+			'name'        => 'Home Image',
+			'id'          => THEME_OPTIONS_NAME.'[site_image]',
+			'description' => 'Image to feature on the homepage.  Select any image uploaded to the media gallery.',
+			'choices'     => get_image_choices(),
+			'value'       => $theme_options['site_image'],
+		)),
 		new TextField(array(
 			'name'        => 'Site Title',
 			'id'          => THEME_OPTIONS_NAME.'[site_title]',

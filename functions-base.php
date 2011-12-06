@@ -404,6 +404,40 @@ function cleanup($content){
 	return $content;
 }
 
+/**
+ * Return an array of choices representing all the images uploaded to the media
+ * gallery.
+ *
+ * @return array
+ * @author Jared Lang
+ **/
+function get_image_choices(){
+	$image_mimes = array(
+		'image/jpeg',
+		'image/png',
+	);
+	
+	$images = array('(None)' => null);
+	$args   = array(
+		'post_type'   => 'attachment',
+		'post_status' => 'inherit',
+		'numberposts' => -1,
+	);
+	
+	$attachments = get_posts($args);
+	$attachments = array_filter($attachments, create_function('$a', '
+		$is_image = (strpos($a->post_mime_type, "image/") !== False);
+		return $is_image;
+	'));
+	foreach($attachments as $image){
+		$filename = basename(get_attached_file($image->ID));
+		$value    = $image->ID;
+		$key      = $image->post_title. " | {$filename}";
+		$images[$key] = $value;
+	}
+	return $images;
+}
+
 
 /**
  * Given a mimetype, will attempt to return a string representing the
@@ -720,6 +754,42 @@ if (DEBUG){
 
 
 /**
+ * Sets the default values for any theme options that are not currently stored.
+ *
+ * @return void
+ * @author Jared Lang
+ **/
+function set_defaults_for_options(){
+	$values  = get_option(THEME_OPTIONS_NAME);
+	if ($values === False or is_string($values)){
+		add_option(THEME_OPTIONS_NAME);
+		$values = array();
+	}
+	
+	$options = array();
+	foreach(Config::$theme_settings as $option){
+		if (is_array($option)){
+			$options = array_merge($option, $options);
+		}else{
+			$options[] = $option;
+		}
+	}
+	
+	foreach ($options as $option){
+		if ($option->default !== null and !isset($values[$option->id])){
+			$key = str_replace(
+				array(THEME_OPTIONS_NAME, '[', ']'),
+				array('', '', ''),
+				$option->id
+			);
+			$values[$key] = $option->default;
+			update_option(THEME_OPTIONS_NAME, $values);
+		}
+	}
+}
+
+
+/**
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,
  * etc.
@@ -730,6 +800,7 @@ if (DEBUG){
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
+	add_image_size('homepage', 590);
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(
@@ -760,6 +831,7 @@ function __init__(){
 	$timer = Timer::start();
 	
 	wp_deregister_script('l10n');
+	set_defaults_for_options();
 }
 add_action('after_setup_theme', '__init__');
 
@@ -915,6 +987,63 @@ class FeedManager{
 		$items = array_slice($items, $start, $limit);
 		return $items;
 	}
+}
+
+
+function display_events($header='h2'){?>
+	<?php $events = get_events(0, ($count) ? $count : 3);?>
+	<?php if(count($events)):?>
+		<<?=$header?>><?=$events[0]->get_feed()->get_title()?></<?=$header?>>
+		<table class="events">
+			<?php foreach($events as $item):?>
+			<tr class="item">
+				<td class="date">
+					<?php
+						$month = $item->get_date("M");
+						$day   = $item->get_date("j");
+					?>
+					<div class="month"><?=$month?></div>
+					<div class="day"><?=$day?></div>
+				</td>
+				<td class="title">
+					<a href="<?=$item->get_link()?>" class="wrap ignore-external"><?=$item->get_title()?></a>
+				</td>
+			</tr>
+			<?php endforeach;?>
+		</table>
+	<?php else:?>
+		<p>Unable to fetch events</p>
+	<?php endif;?>
+<?php
+}
+
+
+function display_news($header='h2'){?>
+	<?php $news = get_news(0, ($count) ? $count : 2);?>
+	<?php if(count($news)):?>
+		<<?=$header?>><?=$news[0]->get_feed()->get_title()?></<?=$header?>>
+		<ul class="news">
+			<?php foreach($news as $item): $image = get_article_image($item);?>
+			<li class="item">
+				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
+				<p>
+					<a class="image ignore-external" href="<?=$item->get_link()?>">
+						<?php if($image):?>
+						<img src="<?=$image?>" alt="Feed image for <?=$item->get_title()?>" />
+						<?php endif;?>
+					</a>
+					<a class="description ignore-external"  href="<?=$item->get_link()?>">
+						<?= $item->get_description();?>
+					</a>
+				</p>
+				<div class="end"><!-- --></div>
+			</li>
+			<?php endforeach;?>
+		</ul>
+	<?php else:?>
+		<p>Unable to fetch news.</p>
+	<?php endif;?>
+<?php
 }
 
 

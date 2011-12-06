@@ -9,7 +9,7 @@ Version: v0.0.1
 
 .end {clear: both;}
 
-#below-the-fold{border-top: 1px dotted #ccc; padding-top: 1em;}
+#below-the-fold{border-top: 1px dotted #666; padding-top: 1em;}
 #below-the-fold h2{font-size: 18px; margin: 0 0 1em 0; padding: 0;}
 
 .events,
