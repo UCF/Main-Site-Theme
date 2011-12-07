@@ -154,3 +154,11 @@ button:active{top: 1px;}
 .zip:before{background-position: 0 -90px;}
 .word:before{background-position: 0 -108px;}
 .html:before{background-position: 0 -126px;}
+
+/**
+ * Social Icons
+ **/
+.facebook:before,
+.twitter:before{background: url('../img/social-32x32.png'); margin: 0 5px 0 0; height: 32px; width: 32px; content: ''; display: inline-block; position: relative; top: 3px;}
+.twitter:before{background-position: 0 0;}
+.facebook:before{background-position: 0 -32px;}

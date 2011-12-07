@@ -18,6 +18,10 @@ Version: v0.0.1
 #home .description p{font-size: 24px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
 
+#header .social{}
+#header .social.menu.horizontal a{text-indent: -1024px;}
+#header .social.menu.horizontal li:after{content: "";}
+
 #footer-menu{margin-bottom: 1em;}
 #footer .ucf{}
 #footer .info{position: relative; top: -10px;}

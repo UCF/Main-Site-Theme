@@ -993,7 +993,7 @@ class FeedManager{
 function display_events($header='h2'){?>
 	<?php $events = get_events(0, ($count) ? $count : 3);?>
 	<?php if(count($events)):?>
-		<<?=$header?>><?=$events[0]->get_feed()->get_title()?></<?=$header?>>
+		<<?=$header?>><a href="<?=$events[0]->get_feed()->get_link()?>"><?=$events[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<table class="events">
 			<?php foreach($events as $item):?>
 			<tr class="item">
@@ -1021,7 +1021,7 @@ function display_events($header='h2'){?>
 function display_news($header='h2'){?>
 	<?php $news = get_news(0, ($count) ? $count : 2);?>
 	<?php if(count($news)):?>
-		<<?=$header?>><?=$news[0]->get_feed()->get_title()?></<?=$header?>>
+		<<?=$header?>><a href="<?=$news[0]->get_feed()->get_link()?>"><?=$news[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<ul class="news">
 			<?php foreach($news as $item): $image = get_article_image($item);?>
 			<li class="item">

@@ -171,6 +171,19 @@ Config::$theme_settings = array(
 			'default'     => null,
 			'value'       => $theme_options['fb_admins'],
 		)),
+		new TextField(array(
+			'name'        => 'Facebook URL',
+			'id'          => THEME_OPTIONS_NAME.'[facebook_url]',
+			'description' => 'URL to the facebook page you would like to direct visitors to.  Example: <em>https://www.facebook.com/CSBrisketBus</em>',
+			'default'     => null,
+			'value'       => $theme_options['facebook_url'],
+		)),
+		new TextField(array(
+			'name'        => 'Twitter URL',
+			'id'          => THEME_OPTIONS_NAME.'[twitter_url]',
+			'description' => 'URL to the twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/csbrisketbus</em>',
+			'value'       => $theme_options['twitter_url'],
+		)),
 	),
 	'Site' => array(
 		new TextField(array(
