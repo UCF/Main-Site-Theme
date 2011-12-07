@@ -776,12 +776,12 @@ function set_defaults_for_options(){
 	}
 	
 	foreach ($options as $option){
-		if ($option->default !== null and !isset($values[$option->id])){
-			$key = str_replace(
-				array(THEME_OPTIONS_NAME, '[', ']'),
-				array('', '', ''),
-				$option->id
-			);
+		$key = str_replace(
+			array(THEME_OPTIONS_NAME, '[', ']'),
+			array('', '', ''),
+			$option->id
+		);
+		if ($option->default !== null and !isset($values[$key])){
 			$values[$key] = $option->default;
 			update_option(THEME_OPTIONS_NAME, $values);
 		}
@@ -991,7 +991,9 @@ class FeedManager{
 
 
 function display_events($header='h2'){?>
-	<?php $events = get_events(0, ($count) ? $count : 3);?>
+	<?php $options = get_option(THEME_OPTIONS_NAME);?>
+	<?php $count   = $options['events_max_items']?>
+	<?php $events  = get_events(0, ($count) ? $count : 3);?>
 	<?php if(count($events)):?>
 		<<?=$header?>><a href="<?=$events[0]->get_feed()->get_link()?>"><?=$events[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<table class="events">
@@ -1017,9 +1019,10 @@ function display_events($header='h2'){?>
 <?php
 }
 
-
 function display_news($header='h2'){?>
-	<?php $news = get_news(0, ($count) ? $count : 2);?>
+	<?php $options = get_option(THEME_OPTIONS_NAME);?>
+	<?php $count   = $options['news_max_items'];?>
+	<?php $news    = get_news(0, ($count) ? $count : 2);?>
 	<?php if(count($news)):?>
 		<<?=$header?>><a href="<?=$news[0]->get_feed()->get_link()?>"><?=$news[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<ul class="news">

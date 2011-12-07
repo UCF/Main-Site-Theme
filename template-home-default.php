@@ -11,10 +11,17 @@
 			<?=wp_get_attachment_image($options['site_image'], 'homepage')?>
 		</div>
 		
-		<div class="description span-8 last">
-			<?php $description = $options['site_description'];?>
-			<p><?=$description?></p>
+		<div class="right-column span-8 last">
+			<div class="description">
+				<?php $description = $options['site_description'];?>
+				<p><?=$description?></p>
+			</div>
+			
+			<div class="search">
+				<?php get_search_form();?>
+			</div>
 		</div>
+		
 		
 		<div class="bottom span-24 last">
 			<div class="content span-15 append-1">

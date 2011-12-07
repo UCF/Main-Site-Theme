@@ -9,7 +9,7 @@
 <?php get_header();?>
 	<div class="page-content" id="search-results">
 		
-		<div class="results span-16 append-2">
+		<div class="results span-24 last">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
@@ -45,27 +45,14 @@
 			
 			<?php endif;?>
 		</div>
-	    
-		<div id="sidebar" class="span-6 last">
-			<?php
-				// Remove search widget if included, redundant on this page
-				ob_start(); get_search_form(); $search  = ob_get_clean();
-				ob_start(); get_sidebar()    ; $sidebar = ob_get_clean();
-				$sidebar = str_replace($search, '', $sidebar);
-			?>
-			<?=$sidebar?>
-		</div>
 		
-		<div id="below-the-fold" class="clear">
-			<?php get_template_part('includes/below-the-fold'); ?>
-		</div>
+		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 <?php get_footer();?>
 <?php else:?>
 	<?php get_header();?>
 	<div class="page-content" id="search-results">
-		
-		<div class="results span-16 append-2">
+		<div class="results span-24 last">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
@@ -86,14 +73,7 @@
 			<p>No results found for "<?=htmlentities($_GET['s'])?>".</p>
 			<?php endif;?>
 		</div>
-		
-		<div id="sidebar" class="span-6 last">
-			<?php get_sidebar()?>
-		</div>
-		
-		<div id="below-the-fold" class="clear">
-			<?php get_template_part('includes/below-the-fold'); ?>
-		</div>
+		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 	<?php get_footer();?>
 <?php endif;?>
