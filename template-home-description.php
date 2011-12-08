@@ -1,7 +1,7 @@
 <?php get_header();?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
-	<div class="span-24 last page-content" id="home">
+	<div class="span-24 last page-content" id="home" data-template="home-description">
 		<div class="site-image span-16">
 			<?=wp_get_attachment_image($options['site_image'], 'homepage')?>
 		</div>

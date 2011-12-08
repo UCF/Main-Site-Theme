@@ -3,56 +3,78 @@ var Generic = {};
 Generic.homeDimensions = function($){
 	var cls = this;
 	cls.home_element = $('#home');
-	cls.left_column  = cls.home_element.children('.image');
-	cls.right_column = cls.home_element.children('.right-column');
 	
-	cls.resizeRightColumn = function(){
-		var height = cls.left_column.height();
-		cls.right_column.height(height);
+	cls.resizeSearch = function(){
+		var div           = $('.search');
+		var height        = div.height();
+		var form          = div.find('form');
+		var search_field  = form.find('.search-field');
+		var search_button = form.find('.search-submit');
+		var padding       = parseInt(div.css('padding-left')) + parseInt(div.css('padding-right'));
+		
+		var loops = 0;
+		
+		while (div.height() == height){
+			var width = search_field.width();
+			search_field.width(++width);
+			
+			loops++;
+			if (loops > 1024){break;}
+		}
+		search_field.width(search_field.width() - 1);
 	};
 	
-	cls.resizeDescription = function(){
-		var text_element  = cls.right_column.find('.description p');
-		if (text_element.length < 1){return;}
+	cls.resizeToHeight = function(element, target_height){
+		if(element.length < 1){return;}
 		
-		cls.right_column.css({
-			'position' : 'relative',
-			'overflow' : 'hidden'
-		});
-		cls.right_column.children('.search').css({
-			'position' : 'absolute',
-			'bottom'   : '0'
-		});
+		var loops = 0;
 		
-		var target_height = cls.right_column.height() - cls.right_column.children('.search').height();
-		var difference    = function(){
-			return Math.abs(text_element.height() - target_height);
+		var difference = function(){
+			return Math.abs(element.height() - target_height);
 		};
 		
 		// Adjust smaller if the text is too large
-		while (text_element.height() > target_height){
-			var current_font_size = parseInt(text_element.css('font-size'));
-			text_element.css('font-size', --current_font_size + 'px');
-			if (current_font_size < 10){
+		while (element.height() > target_height){
+			var current_font_size = parseInt(element.css('font-size'));
+			element.css('font-size', --current_font_size + 'px');
+			if (current_font_size < 12){
 				break;
 			}
+			if (++loops > 1024){break;}
 		}
 		
 		
 		// Adjust larger if the text is too small
-		while (text_element.height() < target_height && difference() > 10){
-			var current_font_size = parseInt(text_element.css('font-size'));
-			text_element.css('font-size', ++current_font_size + 'px');
-			if (text_element.height() > target_height){
-				text_element.css('font-size', --current_font_size + 'px');
+		while (element.height() < target_height && difference() > 8){
+			var current_font_size = parseInt(element.css('font-size'));
+			element.css('font-size', ++current_font_size + 'px');
+			if (element.height() > target_height && difference() > 8){
+				element.css('font-size', --current_font_size + 'px');
 				break;
 			}
+			if (++loops > 1024){break;}
 		}
+		
+		element.height(target_height);
+	};
+	
+	cls.uniformHeight = function(){
+		var template = cls.home_element.data()['template'];
+		
+		if (template == "home-nodescription"){
+			cls.resizeToHeight($('.content'), $('.site-image').height());
+		}
+		
+		if (template == "home-description"){
+			cls.resizeToHeight($('.description'), $('.site-image').height() - $('.search').height());
+		}
+		return;
 	};
 	
 	if (cls.home_element.length < 1){return;}
-	cls.resizeRightColumn();
-	cls.resizeDescription();
+	
+	cls.uniformHeight();
+	cls.resizeSearch();
 	
 	
 };

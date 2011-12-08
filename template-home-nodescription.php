@@ -1,7 +1,7 @@
 <?php get_header();?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
-	<div class="span-24 last page-content" id="home">
+	<div class="span-24 last page-content nodescription" id="home" data-template="home-nodescription">
 		<div class="content span-10">
 			<?php $content = str_replace(']]>', ']]&gt;', apply_filters('the_content', $page->post_content));?>
 			<?=$content?>

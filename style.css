@@ -9,16 +9,17 @@ Version: v0.0.1
 
 .end {clear: both;}
 
-#home .site-image img{display: block; margin: 0 auto 1em auto; border: 5px solid #fff;
+#home .site-image img{display: block; margin: 0 auto 0 auto; border: 5px solid #fff;
 	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
 	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
 	box-shadow: 0px 0px 6px rgba(0, 0, 0, .2);
 }
-#home .description p{font-size: 24px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-#home .right-column{overflow: hidden;}
+#home .description{font-size: 16px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+#home .description p{font-size: inherit;}
 #home .search{background-color: #eee; width: 100%;}
+#home.nodescription .search{margin-top: 1em;}
 #home .search form{padding: 20px;}
-#home .search .search-field{width: 70%;}
+#home .search .search-field{}
 #home .search label{display: block; color: #C14D00; font-size: 16px; font-weight: normal; font-family: "Georgia", "serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
 
