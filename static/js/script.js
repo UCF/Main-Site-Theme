@@ -13,6 +13,17 @@ Generic.homeDimensions = function($){
 	
 	cls.resizeDescription = function(){
 		var text_element  = cls.right_column.find('.description p');
+		if (text_element.length < 1){return;}
+		
+		cls.right_column.css({
+			'position' : 'relative',
+			'overflow' : 'hidden'
+		});
+		cls.right_column.children('.search').css({
+			'position' : 'absolute',
+			'bottom'   : '0'
+		});
+		
 		var target_height = cls.right_column.height() - cls.right_column.children('.search').height();
 		var difference    = function(){
 			return Math.abs(text_element.height() - target_height);

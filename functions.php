@@ -238,11 +238,34 @@ Config::$theme_settings = array(
 			'description' => 'URL to the twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/csbrisketbus</em>',
 			'value'       => $theme_options['twitter_url'],
 		)),
+		new RadioField(array(
+			'name'        => 'Enable Flickr',
+			'id'          => THEME_OPTIONS_NAME.'[enable_flickr]',
+			'description' => 'Automatically display flickr images throughout the site',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_flickr'],
+		)),
 		new TextField(array(
-			'name'        => 'Flickr Photostream URL',
-			'id'          => THEME_OPTIONS_NAME.'[flickr_url]',
-			'description' => 'URL to the flickr photostream you would like to show pictures from.  Example: <em>http://www.flickr.com/photos/iamafancyuser/</em>',
-			'value'       => $theme_options['flickr_url'],
+			'name'        => 'Flickr Photostream ID',
+			'id'          => THEME_OPTIONS_NAME.'[flickr_id]',
+			'description' => 'ID of the flickr photostream you would like to show pictures from.  Example: <em>65412398@N05</em>',
+			'value'       => $theme_options['flickr_id'],
+		)),
+		new SelectField(array(
+			'name'        => 'Flickr Max Images',
+			'id'          => THEME_OPTIONS_NAME.'[flickr_max_items]',
+			'description' => 'Maximum number of flickr images to display',
+			'value'       => $theme_options['flickr_max_items'],
+			'default'     => 12,
+			'choices'     => array(
+				'6'  => 6,
+				'12' => 12,
+				'18' => 18,
+			),
 		)),
 	),
 );

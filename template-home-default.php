@@ -1,21 +1,18 @@
-<?php
-/**
- * Template Name: Home
- **/
-?>
 <?php get_header();?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
 	<div class="span-24 last page-content" id="home">
-		<div class="image span-16">
+		<div class="site-image span-16">
 			<?=wp_get_attachment_image($options['site_image'], 'homepage')?>
 		</div>
 		
 		<div class="right-column span-8 last">
+			<?php $description = $options['site_description'];?>
+			<?php if($description):?>
 			<div class="description">
-				<?php $description = $options['site_description'];?>
 				<p><?=$description?></p>
 			</div>
+			<?php endif;?>
 			
 			<div class="search">
 				<?php get_search_form();?>

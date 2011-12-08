@@ -801,24 +801,32 @@ function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
 	add_image_size('homepage', 620);
+	add_image_size('homepage-secondary', 540);
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(
 		'name'          => __('Sidebar'),
 		'id'            => 'sidebar',
-		'description'   => 'Sidebar found throughout site',
+		'description'   => 'Sidebar found on two column page templates',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 	));
 	register_sidebar(array(
-		'name'          => __('Bottom Left'),
+		'name'          => __('Below the Fold - Left'),
 		'id'            => 'bottom-left',
 		'description'   => 'Left column on the bottom of pages, after news if enabled.',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 	));
 	register_sidebar(array(
-		'name'          => __('Bottom Right'),
+		'name'          => __('Below the Fold - Center'),
+		'id'            => 'bottom-center',
+		'description'   => 'Center column on the bottom of pages, after flickr images if enabled.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
+	register_sidebar(array(
+		'name'          => __('Below the Fold - Right'),
 		'id'            => 'bottom-right',
 		'description'   => 'Right column on the bottom of pages, after events if enabled.',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
@@ -848,6 +856,39 @@ function __shutdown__(){
 		debug("{$elapsed} milliseconds");
 }
 add_action('shutdown', '__shutdown__');
+
+
+/**
+ * Using the user defined value for Flickr ID set in the admin, will return the 
+ * photostream URL for that ID.  Will return null if no id is set.
+ *
+ * @return string
+ * @author Jared Lang
+ **/
+function get_flickr_feed_url(){
+	$rss_url = "http://api.flickr.com/services/feeds/photos_public.gne?id=%s&amp;lang=en-us&amp;format=rss_200";
+	$options = get_option(THEME_OPTIONS_NAME);
+	$id = $options['flickr_id'];
+	
+	if ($id){
+		return sprintf($rss_url, $id);
+	}else{
+		return null;
+	}
+}
+
+
+function get_flickr_stream_url(){
+	$rss_url = "http://flickr.com/photos/%s";
+	$options = get_option(THEME_OPTIONS_NAME);
+	$id = $options['flickr_id'];
+	
+	if ($id){
+		return sprintf($rss_url, $id);
+	}else{
+		return null;
+	}
+}
 
 
 function get_article_image($article){
@@ -884,7 +925,7 @@ class FeedManager{
 	 * @return array
 	 * @author Jared Lang
 	 **/
-	static private function __new_feed($url){
+	static protected function __new_feed($url){
 		$timer = Timer::start();
 		require_once(THEME_DIR.'/third-party/simplepie.php');
 		
@@ -936,7 +977,7 @@ class FeedManager{
 	 * @return array
 	 * @author Jared Lang
 	 **/
-	static private function __get_items($url){
+	static protected function __get_items($url){
 		if (!array_key_exists($url, self::$feeds)){
 			self::$feeds[$url] = self::__new_feed($url);
 		}
@@ -980,13 +1021,77 @@ class FeedManager{
 	 * @return array
 	 * @author Jared Lang
 	 **/
-	static function get_items($url, $start=null, $limit=null){
+	static public function get_items($url, $start=null, $limit=null){
 		if ($start === null){$start = 0;}
 		
 		$items = self::__get_items($url);
 		$items = array_slice($items, $start, $limit);
 		return $items;
 	}
+}
+
+
+class FlickrManager extends FeedManager{
+	static protected $sizes = array(
+		'large'     => 'b',
+		'medium'    => 'z',
+		'small'     => 'm',
+		'thumbnail' => 't',
+		'square'    => 's',
+	);
+	
+	static protected function __items_to_photos($items){
+		$photos = array();
+		
+		foreach($items as $item){
+			$title = $item->get_title();
+			$urls  = array();
+			try{
+				$url = $item->get_enclosure()->get_link();
+			}catch (Exception $e){
+				continue;
+			}
+			
+			foreach(FlickrManager::$sizes as $key=>$size){
+				$size             = "_{$size}.jpg";
+				$urls[$key]       = str_replace('_b.jpg', $size, $url);
+				$urls['original'] = $url;
+				$urls['title']    = $title;
+				$urls['page']     = $item->get_link();
+			}
+			$photos[] = $urls;
+		}
+		return $photos;
+	}
+	
+	
+	static public function get_photos($url, $start=null, $limit=null){
+		if ($start === null){$start = 0;}
+		
+		$items  = self::__get_items($url);
+		$photos = array_slice(self::__items_to_photos($items), $start, $limit);
+		return $photos;
+	}
+}
+
+
+function display_flickr($header='h2'){
+	$options  = get_option(THEME_OPTIONS_NAME);
+	$count    = $options['flickr_max_items'];
+	$feed_url = get_flickr_feed_url();
+	$photos   = FlickrManager::get_photos($feed_url, 0, $count);
+	
+	if(count($photos)):?>
+		<<?=$header?>><a href="<?=get_flickr_stream_url()?>">Flickr Stream</a></<?=$header?>>
+		<ul class="flickr-stream">
+			<?php foreach($photos as $photo):?>
+			<li><a class="ignore-external" href="<?=$photo['page']?>"><img height="75" width="75" src="<?=$photo['square']?>" title="<?=$photo['title']?>" /></a></li>
+			<?php endforeach;?>
+		</ul>
+	<?php else:?>
+		<p>Unable to fetch events</p>
+	<?php endif;?>
+<?php
 }
 
 
@@ -1019,6 +1124,7 @@ function display_events($header='h2'){?>
 <?php
 }
 
+
 function display_news($header='h2'){?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $count   = $options['news_max_items'];?>
@@ -1026,8 +1132,8 @@ function display_news($header='h2'){?>
 	<?php if(count($news)):?>
 		<<?=$header?>><a href="<?=$news[0]->get_feed()->get_link()?>"><?=$news[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<ul class="news">
-			<?php foreach($news as $item): $image = get_article_image($item);?>
-			<li class="item">
+			<?php foreach($news as $key=>$item): $image = get_article_image($item); $first = ($key == 0);?>
+			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
 				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
 				<p>
 					<a class="image ignore-external" href="<?=$item->get_link()?>">
@@ -1043,6 +1149,7 @@ function display_news($header='h2'){?>
 			</li>
 			<?php endforeach;?>
 		</ul>
+		<div class="end"><!-- --></div>
 	<?php else:?>
 		<p>Unable to fetch news.</p>
 	<?php endif;?>
