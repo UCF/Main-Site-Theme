@@ -8,7 +8,13 @@
 		</div>
 		
 		<div class="site-image span-14 last">
-			<?=wp_get_attachment_image($options['site_image'], 'homepage-secondary')?>
+			<?php $image = wp_get_attachment_image($options['site_image'], 'homepage-secondary');?>
+			<?php if($image):?>
+				<?=$image?>
+			<?php else:?>
+				<img height="400px" width="540px" src="<?=THEME_IMG_URL?>/default-site-image-540.jpg">
+			<?php endif;?>
+			
 			<div class="search">
 				<?php get_search_form();?>
 			</div>

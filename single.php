@@ -12,9 +12,7 @@
 			<?=get_sidebar();?>
 		</div>
 		
-		<div id="below-the-fold" class="clear">
-			<?php get_template_part('includes/below-the-fold'); ?>
-		</div>
+		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 
 <?php get_footer();?>

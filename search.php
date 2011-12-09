@@ -8,13 +8,16 @@
 ?>
 <?php get_header();?>
 	<div class="page-content" id="search-results">
+		<div id="sidebar" class="span-5 append-1">
+			<?=get_sidebar();?>&nbsp;
+		</div>
 		
-		<div class="results span-24 last">
+		<div class="results span-18 last">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
 			<?php if(count($results['items'])):?>
-				
+			
 			<ul class="result-list">
 				<?php foreach($results['items'] as $result):?>
 				<li class="item">

@@ -15,7 +15,9 @@ Version: v0.0.1
 	box-shadow: 0px 0px 6px rgba(0, 0, 0, .2);
 }
 #home .description{font-size: 16px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
+#home .content p,
 #home .description p{font-size: inherit;}
+#home .content .upfont{font-size: 150%;}
 #home .search{background-color: #eee; width: 100%;}
 #home.nodescription .search{margin-top: 1em;}
 #home .search form{padding: 20px;}
@@ -23,6 +25,7 @@ Version: v0.0.1
 #home .search label{display: block; color: #C14D00; font-size: 16px; font-weight: normal; font-family: "Georgia", "serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
 
+#header{margin-bottom: .5em;}
 #header .social{}
 #header .social.menu.horizontal a{text-indent: -1024px;}
 #header .social.menu.horizontal li:after{content: "";}

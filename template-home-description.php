@@ -3,7 +3,12 @@
 	<?php $page    = get_page_by_title('Home');?>
 	<div class="span-24 last page-content" id="home" data-template="home-description">
 		<div class="site-image span-16">
-			<?=wp_get_attachment_image($options['site_image'], 'homepage')?>
+			<?php $image = wp_get_attachment_image($options['site_image'], 'homepage')?>
+			<?php if($image):?>
+				<?=$image?>
+			<?php else:?>
+				<img height="400px" width="620px" src="<?=THEME_IMG_URL?>/default-site-image-540.jpg">
+			<?php endif;?>
 		</div>
 		
 		<div class="right-column span-8 last">
@@ -30,6 +35,8 @@
 				<?php display_events()?>
 			</div>
 		</div>
+		
+		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 
 <?php get_footer();?>
