@@ -154,6 +154,17 @@ Config::$theme_settings = array(
 	),
 	'Search' => array(
 		new RadioField(array(
+			'name'        => 'Enable Events on Search Page',
+			'id'          => THEME_OPTIONS_NAME.'[enable_search_events]',
+			'description' => 'Display events on the search results page.',
+			'value'       => $theme_options['enable_search_events'],
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+		)),
+		new RadioField(array(
 			'name'        => 'Enable Google Search',
 			'id'          => THEME_OPTIONS_NAME.'[enable_google]',
 			'description' => 'Enable to use the google search appliance to power the search functionality.',

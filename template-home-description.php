@@ -26,14 +26,8 @@
 		
 		
 		<div class="bottom span-24 last">
-			<div class="content span-15 append-1">
-				<?php $content = str_replace(']]>', ']]&gt;', apply_filters('the_content', $page->post_content));?>
-				<?=$content?>
-			</div>
-		
-			<div class="span-8 last">
-				<?php display_events()?>
-			</div>
+			<?php $content = str_replace(']]>', ']]&gt;', apply_filters('the_content', $page->post_content));?>
+			<?=$content?>
 		</div>
 		
 		<?php get_template_part('includes/below-the-fold'); ?>

@@ -8,11 +8,16 @@
 ?>
 <?php get_header();?>
 	<div class="page-content" id="search-results">
-		<div id="sidebar" class="span-5 append-1">
+		<div id="sidebar" class="span-6 append-1">
+			<?php if($options['enable_search_events']):?>
+				<?php display_events('h2')?>
+			<?php else:?>&nbsp;
+				<?php debug("Events feed is disabled.")?>
+			<?php endif;?>
 			<?=get_sidebar();?>&nbsp;
 		</div>
 		
-		<div class="results span-18 last">
+		<div class="results span-17 last">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
@@ -55,7 +60,16 @@
 <?php else:?>
 	<?php get_header();?>
 	<div class="page-content" id="search-results">
-		<div class="results span-24 last">
+		<div id="sidebar" class="span-6 append-1">
+			<?php if($options['enable_search_events']):?>
+				<?php display_events('h2')?>
+			<?php else:?>&nbsp;
+				<?php debug("Events feed is disabled.")?>
+			<?php endif;?>
+			<?=get_sidebar();?>&nbsp;
+		</div>
+		
+		<div class="results span-17 last">
 			<h2>Search results</h2>
 			<?php get_search_form()?>
 			
