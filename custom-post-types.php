@@ -356,4 +356,109 @@ class Document extends CustomPostType{
 		return $html;
 	}
 }
+
+
+class Video extends CustomPostType{
+	public 
+		$name           = 'video',
+		$plural_name    = 'Videos',
+		$singular_name  = 'Video',
+		$add_new_item   = 'Add New Video',
+		$edit_item      = 'Edit Video',
+		$new_item       = 'New Video',
+		$public         = True,
+		$use_editor     = False,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True;
+	
+	public function get_player_html($video){
+		return sc_video(array('video' => $video));
+	}
+	
+	public function metabox(){
+		$metabox = parent::metabox();
+		
+		$metabox['title']   = 'Videos on Media Page';
+		$metabox['helptxt'] = 'Video icon will be resized to width 210px, height 118px.';
+		return $metabox;
+	}
+	
+	public function fields(){
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'URL',
+				'desc' => 'YouTube URL pointing to video.<br>  Example: http://www.youtube.com/watch?v=IrSeMg7iPbM',
+				'id'   => $prefix.'url',
+				'type' => 'text',
+				'std'  => ''
+			),
+			array(
+				'name' => 'Video Description',
+				'desc' => 'Short description of the video.',
+				'id'   => $prefix.'description',
+				'type' => 'textarea',
+				'std'  => ''
+			),
+			array(
+				'name' => 'Shortcode',
+				'desc' => 'To include this video in other posts, use the following shortcode:',
+				'id'   => 'video_shortcode',
+				'type' => 'shortcode',
+				'value' => '[video name="TITLE"]',
+			),
+		);
+	}
+}
+
+
+class Publication extends CustomPostType{
+	public 
+		$name           = 'publication',
+		$plural_name    = 'Publications',
+		$singular_name  = 'Publication',
+		$add_new_item   = 'Add New Publication',
+		$edit_item      = 'Edit Publication',
+		$new_item       = 'New Publication',
+		$public         = True,
+		$use_editor     = False,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True;
+	
+	public function toHTML($pub){
+		return sc_publication(array('pub' => $pub));
+	}
+	
+	public function metabox(){
+		$metabox = parent::metabox();
+		
+		$metabox['title']   = 'Publications on Media Page';
+		$metabox['helptxt'] = 'Publication cover icon will be resized to width 153px, height 198px.';
+		return $metabox;
+	}
+	
+	public function fields(){
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name'  => 'Publication URL',
+				'desc' => 'Example: <span style="font-family:monospace;font-weight:bold;color:#21759B;">http://publications.smca.ucf.edu/admissions/viewbook.html</span>',
+				'id'   => $prefix.'url',
+				'type' => 'text',
+				'std'  => '',
+			),
+			array(
+				'name' => 'Shortcode',
+				'desc' => 'To include this publication in other posts, use the following shortcode: <input disabled="disabled" type="text" value="[publication name=]" />',
+				'id'   => 'publication_shortcode',
+				'type' => 'help',
+				'value' => '[publication name="TITLE"]',
+			),
+		);
+	}
+}
 ?>

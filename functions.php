@@ -32,7 +32,9 @@ require_once('functions-admin.php');    # Admin/login functions
  * object.
  **/
 Config::$custom_post_types = array(
+	'Video',
 	'Document',
+	'Publication',
 );
 
 Config::$body_classes = array('default',);
@@ -86,17 +88,28 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['cb_domain'],
 		)),
 	),
-	'News and Events' => array(
+	'Events' => array(
 		new RadioField(array(
-			'name'        => 'Enable UCF Events',
+			'name'        => 'Enable Events Below the Fold',
 			'id'          => THEME_OPTIONS_NAME.'[enable_events]',
-			'description' => 'Where applicable, pull data from UCF\'s events system',
+			'description' => 'Display events in the bottom page content, appearing on most pages.',
 			'default'     => 1,
 			'choices'     => array(
 				'On'  => 1,
 				'Off' => 0,
 			),
 			'value'       => $theme_options['enable_events'],
+		)),
+		new RadioField(array(
+			'name'        => 'Enable Events on Search Page',
+			'id'          => THEME_OPTIONS_NAME.'[enable_search_events]',
+			'description' => 'Display events on the search results page.',
+			'value'       => $theme_options['enable_search_events'],
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
 		)),
 		new SelectField(array(
 			'name'        => 'Events Max Items',
@@ -119,10 +132,12 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['events_url'],
 			'default'     => 'http://events.ucf.edu',
 		)),
+	),
+	'News' => array(
 		new RadioField(array(
-			'name'        => 'Enable News',
+			'name'        => 'Enable News Below the Fold',
 			'id'          => THEME_OPTIONS_NAME.'[enable_news]',
-			'description' => 'Display news stories from UCF Today or a custom RSS feed',
+			'description' => 'Display UCF Today news in the bottom page content, appearing on most pages.',
 			'default'     => 1,
 			'choices'     => array(
 				'On'  => 1,
@@ -153,17 +168,6 @@ Config::$theme_settings = array(
 		)),
 	),
 	'Search' => array(
-		new RadioField(array(
-			'name'        => 'Enable Events on Search Page',
-			'id'          => THEME_OPTIONS_NAME.'[enable_search_events]',
-			'description' => 'Display events on the search results page.',
-			'value'       => $theme_options['enable_search_events'],
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-		)),
 		new RadioField(array(
 			'name'        => 'Enable Google Search',
 			'id'          => THEME_OPTIONS_NAME.'[enable_google]',
