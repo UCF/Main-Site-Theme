@@ -9,6 +9,45 @@ if (is_admin()){
 	add_action('admin_init', 'init_theme_options');
 }
 
+
+function shortcode_interface_html(){
+	global $shortcode_tags;
+	$shortcodes = $shortcode_tags;
+	$ignore     = array(
+		"wp_caption" => null,
+		"caption"    => null,
+		"gallery"    => null,
+		"embed"      => null,
+	);
+	$shortcodes = array_diff_key($shortcodes, $ignore);
+	ksort($shortcodes);
+	?>
+	<input type="text" name="shortcode-search" id="shortcode-search" />
+	<button type="button">Search</button>
+		
+	<ul id="shortcode-results" class="empty">
+	</ul>
+		
+	<p>Or select:</p>
+	<select name="shortcode-select" id="shortcode-select">
+		<option value="">--Choose Shortcode--</option>
+		<?php foreach($shortcodes as $name=>$callback):?>
+		<option class="shortcode" value="<?=$name?>"><?=$name?></option>
+		<?php endforeach;?>
+	</select>
+	<?php
+}
+
+
+function shortcode_interface(){
+	add_meta_box('shortcodes-metabox', __('Shortcodes'), 'shortcode_interface_html', 'page', 'side', 'low');
+	#foreach(Config::$custom_post_types as $type){
+	#	add_meta_box('', __(), '', $type);
+	#}
+}
+add_action('add_meta_boxes', 'shortcode_interface');
+
+
 /**
  * Prints out additional login scripts, called by the login_head action
  *

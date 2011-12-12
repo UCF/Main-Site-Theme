@@ -1,3 +1,9 @@
+// Adds filter method to array objects
+// https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter
+if(!Array.prototype.filter){
+	Array.prototype.filter=function(a){"use strict";if(this===void 0||this===null)throw new TypeError;var b=Object(this);var c=b.length>>>0;if(typeof a!=="function")throw new TypeError;var d=[];var e=arguments[1];for(var f=0;f<c;f++){if(f in b){var g=b[f];if(a.call(e,g,f,b))d.push(g)}}return d}
+}
+
 var WebcomAdmin = {};
 
 
@@ -5,6 +11,92 @@ WebcomAdmin.__init__ = function($){
 	// Allows forms with input fields of type file to upload files
 	$('input[type="file"]').parents('form').attr('enctype','multipart/form-data');
 	$('input[type="file"]').parents('form').attr('encoding','multipart/form-data');
+};
+
+
+WebcomAdmin.shortcodeTool = function($){
+	cls         = this;
+	cls.metabox = $('#shortcodes-metabox');
+	if (cls.metabox.length < 1){console.log('no meta'); return;}
+	
+	cls.form    = cls.metabox.find('form');
+	cls.search  = cls.metabox.find('#shortcode-search');
+	cls.button  = cls.metabox.find('button');
+	cls.results = cls.metabox.find('#shortcode-results');
+	cls.select  = cls.metabox.find('#shortcode-select');
+	
+	cls.shortcodes = (function(){
+		var shortcodes = new Array();
+		cls.select.children('.shortcode').each(function(){
+			shortcodes.push($(this).val());
+		});
+		return shortcodes;
+	})();
+	
+	
+	cls.searchAction = function(){
+		cls.results.children().remove();
+		
+		var value = cls.search.val();
+		
+		if (value.length < 1){
+			return;
+		}
+		
+		var found = cls.shortcodes.filter(function(e, i, a){
+			return e.match(value);
+		});
+		
+		if (found.length > 1){
+			cls.results.removeClass('empty');
+		}else{
+		}
+		
+		$(found).each(function(){
+			var item      = $("<li />");
+			var link      = $("<a />");
+			link.text(this.valueOf());
+			item.append(link);
+			cls.results.append(item);
+		});
+		
+		
+		if (found.length > 1){
+			cls.results.removeClass('empty');
+		}else{
+			cls.results.addClass('empty');
+		}
+		
+	};
+	
+	cls.buttonAction = function(){cls.searchAction();};
+	
+	cls.itemAction   = function(){console.log('item');};
+	
+	cls.selectAction = function(){
+		var selected = $(this).find(".shortcode:selected");
+		if (selected.length < 1){return;}
+		
+		var value = selected.val();
+	};
+	
+	//Resize results list to match size of input
+	cls.results.width(cls.search.outerWidth());
+	
+	// Disable enter key causing form submit on shortcode search field
+	cls.search.keydown(function(e){
+		if (e.keyCode == 13){
+			cls.button.click();
+			return false;
+		}
+		cls.searchAction();
+	});
+	// Search button click action, cause search
+	cls.button.click(cls.buttonAction);
+	// Option change for select, cause action
+	cls.select.change(cls.selectAction);
+	// Results click actions
+	cls.results.children('li a').live('click', cls.itemAction);
 };
 
 
@@ -59,4 +151,5 @@ WebcomAdmin.themeOptions = function($){
 (function($){
 	WebcomAdmin.__init__($);
 	WebcomAdmin.themeOptions($);
+	WebcomAdmin.shortcodeTool($);
 })(jQuery);

@@ -27,6 +27,14 @@
 .i-am-a-fancy-admin .sections a.active,
 .i-am-a-fancy-admin .sections a:hover{background-color: #fff; border: 1px solid #f0f0f0; color: #21759B;}
 
+#shortcodes-metabox{}
+#shortcodes-metabox form{}
+#shortcodes-metabox .empty{dislpay: none;}
+#shortcodes-metabox #shortcode-results{}
+#shortcodes-metabox #shortcode-results li{margin: 0;}
+#shortcodes-metabox #shortcode-results li a{cursor: pointer; display: block; background-color: #fff; padding: 5px; border: 1px solid #eee; border-top: none;}
+#shortcodes-metabox #shortcode-results li a:hover{border: 1px solid #ddd; border-top: none;}
+
 #page-help{}
 #page-help h2{}
 #page-help .shortcode{background-color: #fcfcfc; border: 1px solid #e0e0e0;}

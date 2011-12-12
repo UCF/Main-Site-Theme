@@ -1669,7 +1669,6 @@ function header_title(){
 }
 
 
-
 /**
  * Returns string to use for value of class attribute on body tag
  **/
