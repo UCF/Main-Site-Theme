@@ -19,11 +19,13 @@ WebcomAdmin.shortcodeTool = function($){
 	cls.metabox = $('#shortcodes-metabox');
 	if (cls.metabox.length < 1){console.log('no meta'); return;}
 	
-	cls.form    = cls.metabox.find('form');
-	cls.search  = cls.metabox.find('#shortcode-search');
-	cls.button  = cls.metabox.find('button');
-	cls.results = cls.metabox.find('#shortcode-results');
-	cls.select  = cls.metabox.find('#shortcode-select');
+	cls.form     = cls.metabox.find('form');
+	cls.search   = cls.metabox.find('#shortcode-search');
+	cls.button   = cls.metabox.find('button');
+	cls.results  = cls.metabox.find('#shortcode-results');
+	cls.select   = cls.metabox.find('#shortcode-select');
+	cls.form_url = cls.metabox.find("#shortcode-form").val();
+	cls.text_url = cls.metabox.find("#shortcode-text").val();
 	
 	cls.shortcodes = (function(){
 		var shortcodes = new Array();
@@ -33,6 +35,10 @@ WebcomAdmin.shortcodeTool = function($){
 		return shortcodes;
 	})();
 	
+	cls.shortcodeAction = function(shortcode){
+		var text = "[" + shortcode + "]"
+		send_to_editor(text);
+	};
 	
 	cls.searchAction = function(){
 		cls.results.children().remove();
@@ -49,12 +55,12 @@ WebcomAdmin.shortcodeTool = function($){
 		
 		if (found.length > 1){
 			cls.results.removeClass('empty');
-		}else{
 		}
 		
 		$(found).each(function(){
 			var item      = $("<li />");
 			var link      = $("<a />");
+			link.attr('href', '#');
 			link.text(this.valueOf());
 			item.append(link);
 			cls.results.append(item);
@@ -69,34 +75,44 @@ WebcomAdmin.shortcodeTool = function($){
 		
 	};
 	
-	cls.buttonAction = function(){cls.searchAction();};
+	cls.buttonAction = function(){
+		cls.searchAction();
+	};
 	
-	cls.itemAction   = function(){console.log('item');};
+	cls.itemAction = function(){
+		var shortcode = $(this).text();
+		cls.shortcodeAction(shortcode);
+		return false;
+	};
 	
 	cls.selectAction = function(){
 		var selected = $(this).find(".shortcode:selected");
 		if (selected.length < 1){return;}
 		
 		var value = selected.val();
+		cls.shortcodeAction(value);
 	};
 	
 	//Resize results list to match size of input
 	cls.results.width(cls.search.outerWidth());
 	
 	// Disable enter key causing form submit on shortcode search field
-	cls.search.keydown(function(e){
+	cls.search.keyup(function(e){
+		cls.searchAction();
+		
 		if (e.keyCode == 13){
-			cls.button.click();
 			return false;
 		}
-		cls.searchAction();
 	});
+	
 	// Search button click action, cause search
 	cls.button.click(cls.buttonAction);
+	
 	// Option change for select, cause action
 	cls.select.change(cls.selectAction);
+	
 	// Results click actions
-	cls.results.children('li a').live('click', cls.itemAction);
+	cls.results.find('li a').live('click', cls.itemAction);
 };
 
 

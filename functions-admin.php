@@ -22,7 +22,9 @@ function shortcode_interface_html(){
 	$shortcodes = array_diff_key($shortcodes, $ignore);
 	ksort($shortcodes);
 	?>
-	<input type="text" name="shortcode-search" id="shortcode-search" />
+	<input type="hidden" name="shortcode-form" id="shortcode-form" value="<?=THEME_URL."/includes/shortcode-form.php"?>" />
+	<input type="hidden" name="shortcode-text" id="shortcode-text" value="<?=THEME_URL."/includes/shortcode-text.php"?>" />
+	<input type="text" name="shortcode-search" id="shortcode-search" placeholder="Find shortcodes..."/>
 	<button type="button">Search</button>
 		
 	<ul id="shortcode-results" class="empty">
@@ -40,7 +42,7 @@ function shortcode_interface_html(){
 
 
 function shortcode_interface(){
-	add_meta_box('shortcodes-metabox', __('Shortcodes'), 'shortcode_interface_html', 'page', 'side', 'low');
+	add_meta_box('shortcodes-metabox', __('Shortcodes'), 'shortcode_interface_html', 'page', 'side', 'core');
 	#foreach(Config::$custom_post_types as $type){
 	#	add_meta_box('', __(), '', $type);
 	#}

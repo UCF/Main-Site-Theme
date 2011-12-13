@@ -639,55 +639,6 @@ DOC;
 
 
 /**
- * Creates the shortcode help section in admin screens for custom and built-in
- * post types.
- *
- * @return void
- * @author Jared Lang
- **/
-function admin_help(){
-	global $post;
-	$shortcodes = shortcodes();
-	switch($post->post_title){
-		default:
-			?>
-			<ul class="shortcode-list">
-				<?php foreach($shortcodes as $sc):?>
-				<li class="shortcode">
-					<div class="name"><?=$sc['shortcode']?></div>
-					<div class="documentation">
-						<?=nl2br(trim(
-							str_replace(
-								array(' *'),
-								array(''),
-								htmlentities($sc['documentation'])
-							)
-						))?>
-					</div>
-				</li>
-				<?php endforeach;?>
-			</ul>
-			<?php
-			break;
-	}
-}
-
-
-/**
- * Creates the help meta box used for the admin shortcode documentation, and 
- * registers the admin_help callback for output.
- *
- * @return void
- * @author Jared Lang
- **/
-function admin_meta_boxes(){
-	global $post;
-	add_meta_box('page-help', 'Shortcode Help', 'admin_help', 'page', 'normal', 'high');
-}
-add_action('admin_init', 'admin_meta_boxes');
-
-
-/**
  * Returns true if the current request is on the login screen.
  * 
  * @return boolean
@@ -851,11 +802,12 @@ add_action('after_setup_theme', '__init__');
  * @author Jared Lang
  **/
 function __shutdown__(){
-		global $timer;
-		$elapsed = round($timer->elapsed() * 1000);
-		debug("{$elapsed} milliseconds");
+	global $timer;
+	$elapsed = round($timer->elapsed() * 1000);
+	debug("{$elapsed} milliseconds");
 }
 add_action('shutdown', '__shutdown__');
+
 
 
 /**
