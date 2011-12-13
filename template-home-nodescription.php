@@ -4,7 +4,11 @@
 	<div class="span-24 last page-content nodescription" id="home" data-template="home-nodescription">
 		<div class="content span-10">
 			<?php $content = str_replace(']]>', ']]&gt;', apply_filters('the_content', $page->post_content));?>
+			<?php if($content):?>
 			<?=$content?>
+			<?php elseif($page == null):?>
+			<p>To edit this content, create a page titled "Home" and add your content. <a href="<?=get_admin_url()?>post-new.php?post_type=page">Add a new page</a>.</p>
+			<?php endif;?>
 		</div>
 		
 		<div class="site-image span-14 last">
