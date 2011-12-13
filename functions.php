@@ -34,7 +34,6 @@ require_once('functions-admin.php');    # Admin/login functions
  **/
 Config::$custom_post_types = array(
 	'Video',
-	'Example',
 	'Document',
 	'Publication',
 );
