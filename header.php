@@ -46,4 +46,5 @@
 				<div class="social span-6 last">&nbsp;</div>
 				<?php endif;?>
 			</div>
+			<div class="end"><!-- --></div>
 			<?=get_menu('header-menu', 'menu horizontal', 'header-menu')?>

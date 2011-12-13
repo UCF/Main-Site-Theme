@@ -211,7 +211,7 @@ Config::$theme_settings = array(
 		new SelectField(array(
 			'name'        => 'Home Image',
 			'id'          => THEME_OPTIONS_NAME.'[site_image]',
-			'description' => 'Image to feature on the homepage.  Select any image uploaded to the media gallery.',
+			'description' => 'Image to feature on the homepage.  Select any image uploaded to the <a href="'.get_admin_url().'upload.php">media gallery</a> or <a href="'.get_admin_url().'media-new.php">upload a new image</a>.',
 			'choices'     => get_image_choices(),
 			'value'       => $theme_options['site_image'],
 		)),
@@ -219,6 +219,7 @@ Config::$theme_settings = array(
 			'name'        => 'Site Description',
 			'id'          => THEME_OPTIONS_NAME.'[site_description]',
 			'description' => 'A quick description of your organization and its role.',
+			'default'     => 'This is the site\'s default description, change or remove it on the <a href="'.get_admin_url().'admin.php?page=theme-options#site">theme options page</a> in the admin site.',
 			'value'       => $theme_options['site_description'],
 		)),
 	),
@@ -269,6 +270,7 @@ Config::$theme_settings = array(
 			'name'        => 'Flickr Photostream ID',
 			'id'          => THEME_OPTIONS_NAME.'[flickr_id]',
 			'description' => 'ID of the flickr photostream you would like to show pictures from.  Example: <em>65412398@N05</em>',
+			'default'     => '36226710@N08',
 			'value'       => $theme_options['flickr_id'],
 		)),
 		new SelectField(array(

@@ -1041,7 +1041,7 @@ function display_flickr($header='h2'){
 			<?php endforeach;?>
 		</ul>
 	<?php else:?>
-		<p>Unable to fetch events</p>
+		<p>Unable to fetch flickr feed.</p>
 	<?php endif;?>
 <?php
 }
@@ -1314,7 +1314,7 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 	$menu      = @$locations[$name];
 	
 	if (!$menu){
-		return "<div class='error'>No menu location found with name '{$name}'.</div>";
+		return "<div class='error'>No menu location found with name '{$name}'. Set up menus in the <a href='".get_admin_url()."nav-menus.php'>admin's appearance menu.</a></div>";
 	}
 	
 	$items = wp_get_nav_menu_items($menu);
