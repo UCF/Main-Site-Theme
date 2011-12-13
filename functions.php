@@ -5,6 +5,7 @@
 #define('DEBUG', False);                 # Always off
 define('DEBUG', isset($_GET['debug'])); # Enable via get parameter
 define('THEME_URL', get_bloginfo('stylesheet_directory'));
+define('THEME_ADMIN_URL', get_admin_url());
 define('THEME_DIR', get_stylesheet_directory());
 define('THEME_INCLUDES_DIR', THEME_DIR.'/includes');
 define('THEME_STATIC_URL', THEME_URL.'/static');
@@ -33,6 +34,7 @@ require_once('functions-admin.php');    # Admin/login functions
  **/
 Config::$custom_post_types = array(
 	'Video',
+	'Example',
 	'Document',
 	'Publication',
 );

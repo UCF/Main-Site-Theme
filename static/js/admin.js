@@ -61,6 +61,7 @@ WebcomAdmin.shortcodeTool = function($){
 			var item      = $("<li />");
 			var link      = $("<a />");
 			link.attr('href', '#');
+			link.addClass('shortcode');
 			link.text(this.valueOf());
 			item.append(link);
 			cls.results.append(item);
@@ -112,7 +113,7 @@ WebcomAdmin.shortcodeTool = function($){
 	cls.select.change(cls.selectAction);
 	
 	// Results click actions
-	cls.results.find('li a').live('click', cls.itemAction);
+	cls.results.find('li a.shortcode').live('click', cls.itemAction);
 };
 
 

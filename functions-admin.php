@@ -37,15 +37,21 @@ function shortcode_interface_html(){
 		<option class="shortcode" value="<?=$name?>"><?=$name?></option>
 		<?php endforeach;?>
 	</select>
+	
+	<p>For more information about available shortcodes, please see the <a href="<?=get_admin_url()?>admin.php?page=theme-help#shortcodes">help documentation for shortcodes</a>.</p>
 	<?php
 }
 
 
 function shortcode_interface(){
 	add_meta_box('shortcodes-metabox', __('Shortcodes'), 'shortcode_interface_html', 'page', 'side', 'core');
-	#foreach(Config::$custom_post_types as $type){
-	#	add_meta_box('', __(), '', $type);
-	#}
+	add_meta_box('shortcodes-metabox', __('Shortcodes'), 'shortcode_interface_html', 'post', 'side', 'core');
+	foreach(Config::$custom_post_types as $type){
+		$instance = new $type;
+		if ($instance->options('use_editor')){
+			add_meta_box('shortcodes-metabox', __('Shortcodes'), 'shortcode_interface_html', $instance->options('name'), 'side', 'core');
+		}
+	}
 }
 add_action('add_meta_boxes', 'shortcode_interface');
 

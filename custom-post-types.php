@@ -461,4 +461,5 @@ class Publication extends CustomPostType{
 		);
 	}
 }
+
 ?>
