@@ -7,7 +7,7 @@
 			<?php if($content):?>
 			<?=$content?>
 			<?php elseif($page == null):?>
-			<p>To edit this content, create a page titled "Home" and add your content. <a href="<?=get_admin_url()?>post-new.php?post_type=page">Add a new page</a>.</p>
+			<p>To edit this content, <a href="<?=get_admin_url()?>post-new.php?post_type=page">create a new page</a> titled "Home" and add your content. The home page image can be set by selecting an uploaded file on the <a href="<?=get_admin_url()?>admin.php?page=theme-options#site">theme options page</a> in the admin.</p>
 			<?php endif;?>
 		</div>
 		

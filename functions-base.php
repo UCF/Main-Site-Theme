@@ -758,7 +758,7 @@ function __init__(){
 	register_sidebar(array(
 		'name'          => __('Sidebar'),
 		'id'            => 'sidebar',
-		'description'   => 'Sidebar found on two column page templates',
+		'description'   => 'Sidebar found on two column page templates and search pages',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 	));
