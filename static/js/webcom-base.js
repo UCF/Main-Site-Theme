@@ -183,19 +183,19 @@ Webcom.slideshow = function($){
 		};
 		
 		var slideAnimation = function (active, next, complete_callback){
-			next.css({'left' : -width});
+			next.css({'right' : width});
 			next.show();
 			
 			active.animate({
-				'left' : '+=' + width
+				'right' : '-=' + width
 			}, options.transition_length, function(){
-				next.css({'left' : 0});
+				next.css({'right' : 0});
 			});
 			
 			next.animate({
-				'left' : 0
+				'right' : 0
 			}, options.transition_length, function(){
-				next.css({'left' : 0});
+				next.css({'right' : 0});
 				complete_callback();
 			});
 		}
