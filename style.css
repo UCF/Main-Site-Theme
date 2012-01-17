@@ -39,7 +39,7 @@ Version: v1.0.0
 
 #below-the-fold{border-top: 1px dotted #666; margin-top: 2em; padding-top: 1em;}
 #below-the-fold h2{font-size: 18px; margin: 0 0 1em 0; padding: 0;}
-
+#below-the-fold h2 a {font-weight:normal;}
 
 .flickr-stream{padding: 0; margin: 0;}
 .flickr-stream li{list-style-type: none; float: left; margin: 1px; padding: 0;}
