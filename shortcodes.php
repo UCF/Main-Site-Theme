@@ -62,4 +62,15 @@ function sc_slideshow($attr, $content=null){
 }
 add_shortcode('slideshow', 'sc_slideshow');
 
+
+function sc_search_form() {
+	ob_start();
+	?>
+	<div class="search">
+		<?get_search_form()?>
+	</div>
+	<?
+	return ob_get_clean();
+}
+add_shortcode('search_form', 'sc_search_form');
 ?>
