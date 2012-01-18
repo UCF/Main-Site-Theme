@@ -25,13 +25,38 @@
 					
 					<h4>slideshow</h4>
 					<p>Create a javascript slideshow of each top level element in the shortcode.  All attributes are optional, but may default to less than ideal values.  Available attributes:</p>
-					<ul>
-						<li>height => css height of the outputted slideshow, ex. height="100px"</li>
-						<li>width => css width of the outputted slideshow, ex. width="100%"</li>
-						<li>transition => length of transition in milliseconds, ex. transition="1000"</li>
-						<li>cycle => length of each cycle in milliseconds, ex cycle="5000"</li>
-						<li>animation => The animation type, one of: 'slide' or 'fade'</li>
-					</ul>
+					<table>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Description</th>
+							<th scope="col">Default Value</th>
+						</tr>
+						<tr>
+							<td>height</td>
+							<td>CSS height of the outputted slideshow</td>
+							<td>100px</td>
+						</tr>
+						<tr>
+							<td>width</td>
+							<td>CSS width of the outputted slideshow</th>
+							<td>100%</td>
+						</tr>
+						<tr>
+							<td>transition</td>
+							<td>Length of transition in milliseconds</td>
+							<td>1000</td>
+						</tr>
+						<tr>
+							<td>cycle</td>
+							<td>Length of each cycle in milliseconds</td>
+							<td>5000</td>
+						</tr>
+						<tr>
+							<td>animation</td>
+							<td>The animation type, one of: 'slide' or 'fade'</td>
+							<td>slide</td>
+						</tr>
+					</table>
 					<p>Example:
 <pre><code>[slideshow height="500px" transition="500" cycle="2000"]
 &lt;img src="http://some.image.com" .../&gt;

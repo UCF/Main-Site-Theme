@@ -56,3 +56,7 @@ body.login #login h1 a:hover{color: #555;}
 body.login #login h1 a .hide{display: block;}
 
 .description code { background:none; font-weight:bold; color:#21759B; padding:0; }
+
+#theme-help table {border-collapse:collapse;}
+#theme-help table th, #theme-help table td {border:1px solid #333;padding:5px;}
+#theme-help table th {background-color:#f1f1f1;}
