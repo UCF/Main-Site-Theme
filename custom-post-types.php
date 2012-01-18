@@ -17,8 +17,9 @@ abstract class CustomPostType{
 		$use_thumbnails = False, # Featured images
 		$use_order      = False, # Wordpress built-in order meta data
 		$use_metabox    = False, # Enable if you have custom fields to display in admin
-		$use_shortcode  = False; # Auto generate a shortcode for the post type
+		$use_shortcode  = False, # Auto generate a shortcode for the post type
 		                         # (see also objectsToHTML and toHTML methods)
+		$built_in       = False;
 	
 	
 	/**
@@ -164,6 +165,7 @@ abstract class CustomPostType{
 			'labels'   => $this->labels(),
 			'supports' => $this->supports(),
 			'public'   => $this->options('public'),
+			'_builtin' => $this->options('built_in')
 		);
 		
 		if ($this->options('use_order')){
@@ -462,4 +464,32 @@ class Publication extends CustomPostType{
 	}
 }
 
+class Page extends CustomPostType {
+	public
+		$name           = 'page',
+		$plural_name    = 'Pages',
+		$singular_name  = 'Page',
+		$add_new_item   = 'Add New Page',
+		$edit_item      = 'Edit Page',
+		$new_item       = 'New Page',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$built_in       = True;
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'Hide Lower Section',
+				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
+				'id'   => $prefix.'hide_fold',
+				'type' => 'checkbox',
+			)
+		);
+	}
+}
 ?>

@@ -17,7 +17,11 @@
 			<?=get_sidebar();?>
 		</div>
 		
-		<?php get_template_part('includes/below-the-fold');?>
+		<?
+		if(get_post_meta($post->ID, 'page_hide_fold', True) != 'on'): 
+			get_template_part('includes/below-the-fold'); 
+		endif
+		?>
 	</div>
 
 <?php get_footer();?>

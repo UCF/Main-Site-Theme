@@ -36,6 +36,7 @@ Config::$custom_post_types = array(
 	'Video',
 	'Document',
 	'Publication',
+	'Page'
 );
 
 Config::$body_classes = array('default',);
