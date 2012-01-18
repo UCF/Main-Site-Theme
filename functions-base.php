@@ -1781,7 +1781,7 @@ function save_default($post_id, $field){
 		update_post_meta($post_id, $field['id'], $new);
 	}
 	# Delete if we're sending a new null value and there was an old value
-	elseif ($new === "" and $old) {
+	elseif (($new === "" or is_null($new)) and $old) {
 		delete_post_meta($post_id, $field['id'], $old);
 	}
 	# Otherwise we do nothing, field stays the same
