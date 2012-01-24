@@ -7,7 +7,7 @@
 		<?php else:?>&nbsp;
 			<?php debug("Flickr images are disabled.")?>
 		<?php endif;?>
-		<?php if(!function_exists('dynamic_sidebar') or !dynamic_sidebar('Bottom Center')):?><?php endif;?>
+		<?php if(!function_exists('dynamic_sidebar') or !dynamic_sidebar('Bottom Left')):?><?php endif;?>
 	</div>
 	<div class="span-9 append-1">
 		<?php if($options['enable_news']):?>
@@ -15,7 +15,7 @@
 		<?php else:?>&nbsp;
 			<?php debug("News feed is disabled.")?>
 		<?php endif;?>
-		<?php if(!function_exists('dynamic_sidebar') or !dynamic_sidebar('Bottom Left')):?><?php endif;?>
+		<?php if(!function_exists('dynamic_sidebar') or !dynamic_sidebar('Bottom Center')):?><?php endif;?>
 	</div>
 	<div class="span-7 last">
 		<?php if($options['enable_events']):?>
