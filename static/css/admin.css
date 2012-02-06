@@ -1,0 +1,62 @@
+/**
+ * Custom admin styles go here.
+ **/
+
+.i-am-a-fancy-admin .updated{margin: 0 0 20px 0;}
+.i-am-a-fancy-admin .container{margin: 0 19px 0 0; padding: 0;}
+.i-am-a-fancy-admin .block{display: block;}
+.i-am-a-fancy-admin .checkbox-list,
+.i-am-a-fancy-admin .radio-list{padding: 0; margin: 0;}
+.i-am-a-fancy-admin .checkbox-list li,
+.i-am-a-fancy-admin .radio-list li{list-style-type: none; display: inline; margin-right: 20px;}
+.i-am-a-fancy-admin .description em{font-family: monospace; font-weight: bold; color: #21759B;}
+.i-am-a-fancy-admin .field li label{display: inherit;}
+.i-am-a-fancy-admin textarea{width: 70%; height: 10em;}
+.i-am-a-fancy-admin .updated{position: absolute; top: 40px; left: 50%; z-index: 100; text-align: center;}
+.i-am-a-fancy-admin .fields{margin-left: 215px; background-color: #fefefe; padding: 20px; border: 1px solid #f0f0f0;
+	box-shadow: rgba(160, 160, 160, .1) 0px 0px 12px;
+}
+.i-am-a-fancy-admin .fields .section h3{padding: 0 0 10px 0; margin: 0; color: #21759B; font-size: 20px; border-bottom: 1px solid #E1E5EB;}
+.i-am-a-fancy-admin .fields .section table{padding: 0; margin: 20px 0 20px 0; clear: none;}
+.i-am-a-fancy-admin .fields .submit{text-align: right; margin: 0; padding: 0;}
+.i-am-a-fancy-admin .sections{width: 200px; float: left;}
+.i-am-a-fancy-admin .sections .section{margin: 0 0 8px 0;
+	box-shadow: rgba(160, 160, 160, .1) 0px 0px 12px;
+}
+.i-am-a-fancy-admin .sections a{display: block; padding: 10px; color: #aaa; text-decoration: none; border: 1px solid #f0f0f0; background-color: #fafafa; font-size: 16px; font-weight: bold;}
+.i-am-a-fancy-admin .sections a.active,
+.i-am-a-fancy-admin .sections a:hover{background-color: #fff; border: 1px solid #f0f0f0; color: #21759B;}
+.i-am-a-fancy-admin code{display: block; background-color: #fafafa; padding: 10px; border: 1px solid #ddd;}
+
+#shortcodes-metabox{}
+#shortcodes-metabox form{}
+#shortcodes-metabox .empty{dislpay: none;}
+#shortcodes-metabox #shortcode-results{list-style-type: disc; padding: 0 0 0 32px; margin: 1em 0;}
+#shortcodes-metabox #shortcode-results li a{text-decoration: none;}
+#shortcodes-metabox #shortcode-results li a:focus{text-decoration: underline;}
+
+#page-help{}
+#page-help h2{}
+#page-help .shortcode{background-color: #fcfcfc; border: 1px solid #e0e0e0;}
+#page-help .name{font-size: 18px; margin: 0 0 1em 0; background-color: #eaeaea; padding: 10px; border-bottom: 1px solid #e0e0e0;}
+#page-help .documentation{line-height: 1.5em; padding: 10px;}
+
+body.login #nav{float: left; width: 50%;}
+body.login #backtoblog{margin-left: 50%;}
+body.login #nav,
+body.login #backtoblog{padding: 0;}
+body.login #nav a,
+body.login #backtoblog a{color: #666 !important; font-size: 14px; text-decoration: none; padding: 10px;}
+body.login #nav a:hover,
+body.login #backtoblog a:hover{text-decoration: underline; color: #000 !important;}
+body.login #lostpasswordform,
+body.login #loginform{margin-bottom: 20px;}
+body.login #login h1 a{background: transparent url('../img/login-logo.png') no-repeat 50% 0; text-indent: 0; text-align: center; text-decoration: none; padding-top: 92px; height: inherit; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; color: #333;}
+body.login #login h1 a:hover{color: #555;}
+body.login #login h1 a .hide{display: block;}
+
+.description code { background:none; font-weight:bold; color:#21759B; padding:0; }
+
+#theme-help table {border-collapse:collapse;}
+#theme-help table th, #theme-help table td {border:1px solid #333;padding:5px;}
+#theme-help table th {background-color:#f1f1f1;}

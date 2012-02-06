@@ -1,0 +1,63 @@
+/**
+ * A collection of commonly used styles for wordpress themes.
+ **/
+@import url('formatting.css');
+
+/**
+ * Element styles (No font-family)
+ **/
+html{background: url("../img/gradient.png") repeat-x top left #fff;}
+body{color: #333;}
+
+.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
+.menu a:hover{text-decoration: underline;}
+.menu.horizontal{list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0;}
+.menu.horizontal li{display: inline-block; margin: 0 3px 0 0; padding: 0;}
+.ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
+.menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
+.menu.horizontal .last:after {content: ""; margin-left: 0;}
+
+.search-form label{display: none;}
+.search-form .search-field{}
+.search-form .search-submit{}
+
+.slideshow{overflow: hidden; margin: 0 0 1em 0;}
+
+
+/**
+ * Form styles
+ **/
+input,
+textarea{padding: 4px; color: #333; border: 1px solid #ccc; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;}
+.msie input,
+.msie textarea{padding: 4px 3px 4px 3px;}
+.firefox input,
+.firefox textarea{padding: 5px;}
+
+
+/**
+ * Location specific styles
+ **/
+#search-results .more{clear: both;}
+#search-results .result-list{padding: 0; margin: 0;}
+#search-results .result-list li{list-style-type: none; word-wrap: break-word;}
+#search-results .result-list .item{margin: 0 0 2em 0;}
+#search-results .result-list .item h3{margin: 0 0 5px 0;}
+#search-results .result-list .item a{text-decoration: none;}
+#search-results .result-list .item a:hover{color: #000; text-decoration: underline;}
+#search-results .result-list .item .title{display: block; font-size: 18px; color: #c00202;}
+#search-results .result-list .item .url{display: block; font-size: 14px; color: #666; margin: 0 0 5px 0;}
+#search-results .result-list .item .snippet{font-size: 14px;}
+#search-results .search-form{margin-bottom: 2em;}
+#post-list article {margin: 0 0 2em 0; font-size: 16px;}
+#post-list article h1{margin: 0 0 .5em 0;}
+#post-list article .meta{margin: 0 0 .5em 0; color: #666;}
+#post-list article .summary{margin: 0; line-height: 1.5em;}
+#blueprint-container{padding-top: 24px;}
+#header h1{margin: 0; font-size: 40px;}
+#header h1 a{text-decoration: none; color: #313130; font-weight: bold;}
+#header h1 a:hover{color: #ed1c24; text-decoration: underline;}
+#header{border-bottom: 1px dotted #666; padding-bottom: 8px;}
+#header-menu{margin-bottom: 16px;}
+#sidebar h2{margin: .5em 0 1em 0; font-size: 17px; color: #A3B00B;}
+#footer{border-top: 1px dotted #666; padding-top: 0px; margin: 10px 0 20px 0;}
