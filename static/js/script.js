@@ -51,6 +51,7 @@ Generic.homeDimensions = function($){
 				break;
 			}
 			if (++loops > 1024){break;}
+			console.log(element.height(), target_height, current_font_size);
 		}
 		
 		element.height(target_height);
@@ -86,6 +87,6 @@ if (typeof jQuery != 'undefined'){
 		
 		/* Theme Specific Code Here */
 		Generic.homeDimensions($);
-		Generic.resizeSearch($);
+		//Generic.resizeSearch($);
 	});
 }else{console.log('jQuery dependancy failed to load');}

@@ -1,6 +1,6 @@
 <?php $options = get_option(THEME_OPTIONS_NAME);?>
-<div id="below-the-fold" class="span-24 last">
-	<div class="span3 append1">
+<div id="below-the-fold" class="row-border-bottom-top">
+	<div class="span4">
 		<?php if($options['enable_flickr']):?>
 			<?php display_flickr('h2')?>
 			<div class="end"><!-- --></div>

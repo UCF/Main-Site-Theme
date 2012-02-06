@@ -9,10 +9,14 @@ Version: v1.0.5
 
 .end {clear: both;}
 
-#home .site-image img{display: block; margin: 0; border: 5px solid #fff;}
+.row-border-bottom-top {margin-left:20px;}
+.row-border-bottom-top *:first-child {margin-left:0;}
+
+/*#home .site-image img{display: block; margin: 0; border: 5px solid #fff;}*/
 #home .description{font-size: 16px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 #home .content p,
 #home .description p{font-size: inherit;}
+#home .description p {line-height:1em;}
 #home .content .upfont{font-size: 150%;}
 #home .search{background-color: #eee; width: 100%;}
 #home.nodescription .search{margin-top: 1em;}
@@ -21,7 +25,7 @@ Version: v1.0.5
 #home .search label{display: block; color: #C14D00; font-size: 16px; font-weight: normal; font-family: "Georgia", "serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
 
-#header{margin-bottom: .5em;}
+#header{margin-bottom: .5em;margin-top:20px;}
 #header .social{}
 #header .social.menu.horizontal a{text-indent: -1024px;}
 #header .social.menu.horizontal li:after{content: "";}
@@ -33,9 +37,8 @@ Version: v1.0.5
 #footer .info a{line-height: 1.5em; text-align: right; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif"; font-weight: normal; font-size: 14px;}
 #footer .info .copyright{margin-top: 1em;}
 
-#below-the-fold{border-top: 1px dotted #666; margin-top: 2em; padding-top: 1em;}
+#below-the-fold{margin-top: 2em; padding-top: 1em;border-top: 1px dotted #666;}
 #below-the-fold h2{font-size: 18px; margin: 0 0 1em 0; padding: 0;}
-#below-the-fold h2 a {font-weight:normal;}
 
 .flickr-stream{padding: 0; margin: 0;}
 .flickr-stream li{list-style-type: none; float: left; margin: 1px; padding: 0;}
@@ -46,7 +49,7 @@ Version: v1.0.5
 .events .date,
 .events .title,
 .events .title a{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
-.events{border-spacing: 16px; padding: 0; margin: 0; position: relative; top: -16px;}
+.events{border-spacing: 16px; border-collapse:separate; padding: 0; margin: 0; position: relative; top: -16px;}
 .events .date{text-align: center; width: 1px; padding: 8px 12px; background-color: #fef7c8; color: #666; font-weight: bold; border: 1px solid #ded7a8;
 	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
 	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);
@@ -54,7 +57,7 @@ Version: v1.0.5
 }
 .events .month{font-size: 18px;}
 .events .day{font-size: 16px;}
-.events .title{font-size: 14px; text-align: left;}
+.events .title{font-size: 14px; text-align: left; padding-left:10px;}
 .events .title .wrap{display: block; max-height: 50px; overflow: hidden;}
 
 .news,
@@ -63,7 +66,7 @@ Version: v1.0.5
 .news .description{font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
 .news{list-style-type: none; padding: 0; margin: 0;}
 .news .item{list-style-type: none; margin: 0 0 32px 0;}
-.news .item .title{font-weight: bold; font-size: 18px; margin: 0 0 16px 0;}
+.news .item .title{font-weight: bold; font-size: 18px}
 .news .item .description{font-size: 14px; line-height: 1.5em;}
 .news .item img{float: left; max-height: 128px; max-width: 128px; margin: 0 15px 5px 0; border: 1px solid #aaa;
 	-moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, .2);

@@ -6,8 +6,7 @@
 /**
  * Element styles (No font-family)
  **/
-html{background: url("../img/gradient.png") repeat-x top left #fff;}
-body{color: #333;}
+body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 
 .menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
 .menu a:hover{text-decoration: underline;}
@@ -23,6 +22,12 @@ body{color: #333;}
 
 .slideshow{overflow: hidden; margin: 0 0 1em 0;}
 
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {color:#333;}
 
 /**
  * Form styles
@@ -54,7 +59,7 @@ textarea{padding: 4px; color: #333; border: 1px solid #ccc; -webkit-border-radiu
 #post-list article .meta{margin: 0 0 .5em 0; color: #666;}
 #post-list article .summary{margin: 0; line-height: 1.5em;}
 #blueprint-container{padding-top: 24px;}
-#header h1{margin: 0; font-size: 40px;}
+#header h1{font-size: 40px;}
 #header h1 a{text-decoration: none; color: #313130; font-weight: bold;}
 #header h1 a:hover{color: #ed1c24; text-decoration: underline;}
 #header{border-bottom: 1px dotted #666; padding-bottom: 8px;}
