@@ -1,11 +1,11 @@
-			<div id="footer" class="span-24 last">
+			<div id="footer" class="span12">
 				
 				<?=get_menu('footer-menu', 'menu horizontal', 'footer-menu')?>
 				
-				<div class="ucf span-18">
+				<div class="ucf span9">
 					<a class="ignore-external" href="http://www.ucf.edu"><img src="<?=THEME_IMG_URL?>/logo.png" alt="" title="" /></a>
 				</div>
-				<div class="info span-6 last">
+				<div class="info span3">
 					<?php $options = get_option(THEME_OPTIONS_NAME);?>
 					<?php if($options['site_contact'] or $options['organization_name']):?>
 					<div class="maintained">
