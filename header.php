@@ -31,7 +31,7 @@
 	<body class="<?=body_classes()?>">
 		<div class="container">
 			<div class="row">
-				<div id="header" class="row-border-bottom-top clear">
+				<div id="header" class="row-border-bottom-top">
 					<h1 class="span4 sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 					<?php $options = get_option(THEME_OPTIONS_NAME);?>
 					<?php if($options['facebook_url'] or $options['twitter_url']):?>
@@ -46,9 +46,7 @@
 					<?php else:?>
 					<div class="social span3">&nbsp;</div>
 					<?php endif;?>
+					<div class="end"><!-- --></div>
 				</div>
 			</div>
-			<div class="end"><!-- --></div>
-			<!--
-			<?=get_menu('header-menu', 'menu horizontal', 'header-menu')?>
-			-->
+			<?=get_menu('header-menu', 'menu horizontal span12', 'header-menu')?>

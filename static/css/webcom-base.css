@@ -17,7 +17,7 @@ body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 .menu.horizontal .last:after {content: ""; margin-left: 0;}
 
 .search-form label{display: none;}
-.search-form .search-field{}
+.search-form .search-field{width:50px;}
 .search-form .search-submit{}
 
 .slideshow{overflow: hidden; margin: 0 0 1em 0;}

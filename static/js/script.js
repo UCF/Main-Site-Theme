@@ -15,7 +15,7 @@ Generic.resizeSearch = function($){
 		loops++;
 		if (loops > 1024){break;}
 	}
-	search_field.width(search_field.width() - 1);
+	search_field.width(search_field.width() + search_button.width() - 1);
 };
 
 Generic.homeDimensions = function($){
@@ -87,6 +87,6 @@ if (typeof jQuery != 'undefined'){
 		
 		/* Theme Specific Code Here */
 		Generic.homeDimensions($);
-		//Generic.resizeSearch($);
+		Generic.resizeSearch($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
