@@ -32,7 +32,7 @@
 		<div class="container">
 			<div class="row">
 				<div id="header" class="row-border-bottom-top">
-					<h1 class="span4 sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
+					<h1 class="span9 sans"><a href="<?=bloginfo('url')?>"><?=bloginfo('name')?></a></h1>
 					<?php $options = get_option(THEME_OPTIONS_NAME);?>
 					<?php if($options['facebook_url'] or $options['twitter_url']):?>
 					<ul class="social menu horizontal span3">
