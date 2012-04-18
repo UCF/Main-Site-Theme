@@ -492,4 +492,127 @@ class Page extends CustomPostType {
 		);
 	}
 }
+
+/**
+ * Describes a staff member
+ *
+ * @author Chris Conover
+ **/
+class Person extends CustomPostType
+{
+	/*
+	The following query will pre-populate the person_orderby_name
+	meta field with a guess of the last name extracted from the post title.
+	
+	>>>BE SURE TO REPLACE wp_<number>_... WITH THE APPROPRIATE SITE ID<<<
+	
+	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value) 
+	(	SELECT	id AS post_id, 
+						'person_orderby_name' AS meta_key, 
+						REVERSE(SUBSTR(REVERSE(post_title), 1, LOCATE(' ', REVERSE(post_title)))) AS meta_value
+		FROM		wp_29_posts AS posts
+		WHERE		post_type = 'person' AND
+						(	SELECT meta_id 
+							FROM wp_29_postmeta 
+							WHERE post_id = posts.id AND
+										meta_key = 'person_orderby_name') IS NULL)
+	*/
+	
+	public
+		$name           = 'person',
+		$plural_name    = 'People',
+		$singular_name  = 'Person',
+		$add_new_item   = 'Add Person',
+		$edit_item      = 'Edit Person',
+		$new_item       = 'New Person',
+		$public         = True,
+		$use_shortcode  = True,
+		$use_metabox    = True,
+		$use_thumbnails = True,
+		$use_order      = True;
+		#$taxonomies     = Array('rosen_org_groups', 'category');
+		
+		public function fields(){
+			$fields = array(
+				array(
+					'name'    => __('Title Prefix'),
+					'desc'    => '',
+					'id'      => $this->options('name').'_title_prefix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Title Suffix'),
+					'desc'    => __('Be sure to include leading comma or space if neccessary.'),
+					'id'      => $this->options('name').'_title_suffix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Job Title'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_jobtitle',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Phone'),
+					'desc'    => __('Separate multiple entries with commas.'),
+					'id'      => $this->options('name').'_phones',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Email'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_email',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Order By Name'),
+					'desc'    => __('Name used for sorting. Leaving this field blank may lead to an unexpected sort order.'),
+					'id'      => $this->options('name').'_orderby_name',
+					'type'    => 'text',
+				),
+			);
+			return $fields;
+		}
+	
+	public function objectsToHTML($objects, $tax_queries) {
+		# We could try to use the objects passed here but it simpler
+		# to just look them up again already split up into sections 
+		# based on the tax_queries array
+		
+		ob_start();
+		if(count($tax_queries) ==0) {
+			// Dean's Suite is always first if everything is being displayed
+			$dean_suite_name = get_theme_option('aboutus_featured_group');
+			$dean_suite = False;
+			if($dean_suite_name !== False) {
+				$dean_suite = get_term_by('name', $dean_suite_name, 'rosen_org_groups');
+				if($dean_suite !== False) {
+					$people = get_term_people($dean_suite->term_id, 'menu_order'); 
+					include('templates/staff-pics.php');
+				}
+			}
+		}
+		
+		if(count($tax_queries) == 0) {
+			$terms = get_terms('rosen_org_groups', Array('orderby' => 'name'));
+		} else {
+			$terms = array();
+			foreach($tax_queries as $key=>$query) {
+				foreach($query['terms'] as $term_slug) {
+					$term = get_term_by('slug', $term_slug, $query['taxonomy']);
+					if($term !== False) {
+						array_push($terms, $term);
+					}
+				}
+			}
+		}
+		foreach($terms as $term) {
+			if(count($tax_queries) > 0 || ($dean_suite_name === False || $dean_suite === False || $term->term_id != $dean_suite->term_id)) {
+				$people = get_term_people($term->term_id, 'meta_value');
+				include('templates/staff-table.php');
+			}
+		}
+		return ob_get_clean();
+	}
+} // END class 
 ?>
