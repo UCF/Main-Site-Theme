@@ -12,13 +12,12 @@ abstract class CustomPostType{
 		$use_title      = True,  # Title field
 		$use_editor     = True,  # WYSIWYG editor, post content field
 		$use_revisions  = True,  # Revisions on post content and titles
-		$use_tags       = True,  # Tags taxonomy
-		$use_categories = False, # Categories taxonomy
 		$use_thumbnails = False, # Featured images
 		$use_order      = False, # Wordpress built-in order meta data
 		$use_metabox    = False, # Enable if you have custom fields to display in admin
 		$use_shortcode  = False, # Auto generate a shortcode for the post type
 		                         # (see also objectsToHTML and toHTML methods)
+		$taxonomies     = array('post_tag'),
 		$built_in       = False;
 	
 	
@@ -174,12 +173,8 @@ abstract class CustomPostType{
 		
 		register_post_type($this->options('name'), $registration);
 		
-		if ($this->options('use_categories')){
-			register_taxonomy_for_object_type('category', $this->options('name'));
-		}
-		
-		if ($this->options('use_tags')){
-			register_taxonomy_for_object_type('post_tag', $this->options('name'));
+		foreach($this->options('taxonomies') as $taxonomy) {
+			register_taxonomy_for_object_type($taxonomy, $this->options('name'));
 		}
 		
 		if ($this->options('use_shortcode')){
