@@ -8,7 +8,7 @@
 				<?php if($image):?>
 					<?=$image?>
 				<?php else:?>
-					<img height="400px" width="620px" src="<?=THEME_IMG_URL?>/default-site-image-540.jpg">
+					<img width="770" src="<?=THEME_IMG_URL?>/default-site-image-540.jpg">
 				<?php endif;?>
 			</div>
 			

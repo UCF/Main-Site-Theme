@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<?="\n".header_()."\n"?>
 		<!--[if IE]>
 		<link href="http://cdn.ucf.edu/webcom/-/css/blueprint-ie.css" rel="stylesheet" media="screen, projection">
