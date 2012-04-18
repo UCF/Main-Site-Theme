@@ -81,14 +81,14 @@ abstract class CustomTaxonomy {
 }
 
 /**
- * Describes organizational groups inside Rosen College
+ * Describes organizational groups
  *
  * @author Chris Conover
  **/
-class RosenOrganizationalGroups extends CustomTaxonomy
+class OrganizationalGroups extends CustomTaxonomy
 {
 	public
-		$name               = 'rosen_org_groups',
+		$name               = 'org_groups',
 		$general_name       = 'Organizational Groups',
 		$singular_name      = 'Organizational Group',
 		$search_items       = 'Search Organizational Groups',
