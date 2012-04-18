@@ -161,10 +161,11 @@ abstract class CustomPostType{
 	 **/
 	public function register(){
 		$registration = array(
-			'labels'   => $this->labels(),
-			'supports' => $this->supports(),
-			'public'   => $this->options('public'),
-			'_builtin' => $this->options('built_in')
+			'labels'     => $this->labels(),
+			'supports'   => $this->supports(),
+			'public'     => $this->options('public'),
+			'taxonomies' => $this->options('taxonomies'),
+			'_builtin'   => $this->options('built_in')
 		);
 		
 		if ($this->options('use_order')){
@@ -172,10 +173,6 @@ abstract class CustomPostType{
 		}
 		
 		register_post_type($this->options('name'), $registration);
-		
-		foreach($this->options('taxonomies') as $taxonomy) {
-			register_taxonomy_for_object_type($taxonomy, $this->options('name'));
-		}
 		
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
@@ -524,8 +521,8 @@ class Person extends CustomPostType
 		$use_shortcode  = True,
 		$use_metabox    = True,
 		$use_thumbnails = True,
-		$use_order      = True;
-		#$taxonomies     = Array('rosen_org_groups', 'category');
+		$use_order      = True,
+		$taxonomies     = array('org_groups', 'category');
 		
 		public function fields(){
 			$fields = array(
