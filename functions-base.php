@@ -10,6 +10,7 @@ class Config{
 		$body_classes      = array(), # Body classes 
 		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
+		$custom_taxonomies = array(), # Custom taxonomies to register
 		$styles            = array(), # Stylesheets to register
 		$scripts           = array(), # Scripts to register
 		$links             = array(), # <link>s to include in <head>
@@ -1652,6 +1653,17 @@ function installed_custom_post_types(){
 	'), $installed);
 }
 
+/**
+ * Adding custom taxonomies to the installed array defined in this function
+ * will activate and make available for use those types.
+ **/
+function installed_custom_taxonomies(){
+	$installed = Config::$custom_taxonomies;
+	
+	return array_map(create_function('$class', '
+		return new $class;
+	'), $installed);
+}
 
 function flush_rewrite_rules_if_necessary(){
 	global $wp_rewrite;
@@ -1690,6 +1702,21 @@ function register_custom_post_types(){
 	flush_rewrite_rules_if_necessary();
 }
 add_action('init', 'register_custom_post_types');
+
+
+/**
+ * Registers all installed custom taxonomies
+ *
+ * @return void
+ * @author Chris Conover
+ **/
+function register_custom_taxonomies(){
+	#Register custom post types
+	foreach(installed_custom_taxonomies() as $custom_taxonomy){
+		$custom_taxonomy->register();
+	}
+}
+add_action('init', 'register_custom_taxonomies');
 
 
 /**
