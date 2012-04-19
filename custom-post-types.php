@@ -566,12 +566,26 @@ class Person extends CustomPostType
 			return $fields;
 		}
 	
+
+	public static function get_name($person) {
+		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
+		$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
+		$name = $person->post_title;
+		return $prefix.' '.$name.$suffix;
+	}
+
+	public static function get_phones($person) {
+		$phones = get_post_meta($person->ID, 'person_phones', True);
+		return ($phones != '') ? explode(',', $phones) : array();
+	}
+
 	public function objectsToHTML($objects, $tax_queries) {
 		# We could try to use the objects passed here but it simpler
 		# to just look them up again already split up into sections 
 		# based on the tax_queries array
 		
 		ob_start();
+		/*
 		if(count($tax_queries) ==0) {
 			// Dean's Suite is always first if everything is being displayed
 			$dean_suite_name = get_theme_option('aboutus_featured_group');
@@ -584,9 +598,10 @@ class Person extends CustomPostType
 				}
 			}
 		}
-		
-		if(count($tax_queries) == 0) {
-			$terms = get_terms('rosen_org_groups', Array('orderby' => 'name'));
+		*/
+
+		if(count($tax_queries) == 1) {
+			$terms = get_terms('org_groups', Array('orderby' => 'name'));
 		} else {
 			$terms = array();
 			foreach($tax_queries as $key=>$query) {
@@ -599,9 +614,20 @@ class Person extends CustomPostType
 			}
 		}
 		foreach($terms as $term) {
-			if(count($tax_queries) > 0 || ($dean_suite_name === False || $dean_suite === False || $term->term_id != $dean_suite->term_id)) {
-				$people = get_term_people($term->term_id, 'meta_value');
-				include('templates/staff-table.php');
+			if(count($tax_queries) > 0) {
+				$people = get_posts(Array(
+						'numberposts' => -1,
+						'order'       => 'ASC',
+						'orderby'     => 'person_orderby_name',
+						'post_type'   => 'person',
+						'meta_key'    => 'person_orderby_name',
+						'tax_query'   => Array(
+							Array(
+								'taxonomy' => 'org_groups',
+								'field' =>  'id',
+								'terms' => $term->term_id))));
+
+				include('includes/staff-table.php');
 			}
 		}
 		return ob_get_clean();
