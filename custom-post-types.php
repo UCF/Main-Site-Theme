@@ -586,7 +586,7 @@ class Person extends CustomPostType
 		return ($phones != '') ? explode(',', $phones) : array();
 	}
 
-	public function objectsToHTML($people, $tax_queries) {
+	public function objectsToHTML($people, $css_classes) {
 		
 		$sections = array();
 
