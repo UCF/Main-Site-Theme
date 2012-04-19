@@ -25,7 +25,7 @@
 						<td class="phones">
 							<a href="<?=get_permalink($person->ID)?>">
 								<ul>
-									<? foreach(Person::get_phones($person->ID) as $phone) { ?>
+									<? foreach(Person::get_phones($person) as $phone) { ?>
 									<li><?=$phone?></li>
 									<? } ?>
 								</ul>
