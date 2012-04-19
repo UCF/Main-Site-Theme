@@ -588,8 +588,9 @@ class Person extends CustomPostType
 
 	public function objectsToHTML($people, $css_classes) {
 		
+		# Separate the people into sections based on their
+		# organization group affiliation(s)
 		$sections = array();
-
 		foreach($people as $person) {
 			$terms = wp_get_post_terms($person->ID, 'org_groups');
 			if(count($terms) == 0) {
@@ -598,11 +599,12 @@ class Person extends CustomPostType
 				}
 				$terms[''][] = $person;
 			} else {
-				$term = $terms[0];
-				if(!isset($sections[$term->name])) {
-					$sections[$term->name] = array();
+				foreach($terms as $term) {
+					if(!isset($sections[$term->name])) {
+						$sections[$term->name] = array();
+					}
+					$sections[$term->name][] = $person;
 				}
-				$sections[$term->name][] = $person;
 			}
 		}
 		ob_start();
