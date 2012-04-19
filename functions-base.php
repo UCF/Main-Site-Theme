@@ -490,7 +490,7 @@ function mimetype_to_application($mimetype){
  * @return string
  * @author Jared Lang
  **/
-function sc_object_list($attr, $default_content=null, $sort_func=null){
+function sc_object_list($attr, $default_content=null){
 	if (!is_array($attr)){return '';}
 	
 	# set defaults and combine with passed arguments
@@ -552,25 +552,12 @@ function sc_object_list($attr, $default_content=null, $sort_func=null){
 		'orderby'        => 'menu_order title',
 		'order'          => 'ASC',
 	);
-	$query = new WP_Query($query_array);
+
 	$class = new $class;
-	
-	global $post;
-	$objects = array();
-	while($query->have_posts()){
-		$query->the_post();
-		$objects[] = $post;
-	}
-	
-	# Custom sort if applicable
-	if ($sort_func !== null){
-		usort($objects, $sort_func);
-	}
-	
-	wp_reset_postdata();
+	$objects = $class->get_objects($query_array);
 	
 	if (count($objects)){
-		$html = $class->objectsToHTML($objects, $tax_queries);
+		$html = $class->objectsToHTML($objects, $options['class']);
 	}else{
 		$html = $default_content;
 	}
