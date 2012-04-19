@@ -570,7 +570,7 @@ function sc_object_list($attr, $default_content=null, $sort_func=null){
 	wp_reset_postdata();
 	
 	if (count($objects)){
-		$html = $class->objectsToHTML($objects, $options['class']);
+		$html = $class->objectsToHTML($objects, $tax_queries);
 	}else{
 		$html = $default_content;
 	}
