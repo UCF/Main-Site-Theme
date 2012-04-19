@@ -1654,7 +1654,7 @@ function installed_custom_post_types(){
 }
 
 /**
- * Adding custom taxonomies to the installed array defined in this function
+ * Adding custom post types to the installed array defined in this function
  * will activate and make available for use those types.
  **/
 function installed_custom_taxonomies(){
@@ -1685,6 +1685,19 @@ function flush_rewrite_rules_if_necessary(){
 	}
 }
 
+/**
+ * Registers all installed custom taxonomies
+ *
+ * @return void
+ * @author Chris Conover
+ **/
+function register_custom_taxonomies(){
+	#Register custom post types
+	foreach(installed_custom_taxonomies() as $custom_taxonomy){
+		$custom_taxonomy->register();
+	}
+}
+add_action('init', 'register_custom_taxonomies');
 
 /**
  * Registers all installed custom post types
@@ -1702,22 +1715,6 @@ function register_custom_post_types(){
 	flush_rewrite_rules_if_necessary();
 }
 add_action('init', 'register_custom_post_types');
-
-
-/**
- * Registers all installed custom taxonomies
- *
- * @return void
- * @author Chris Conover
- **/
-function register_custom_taxonomies(){
-	#Register custom post types
-	foreach(installed_custom_taxonomies() as $custom_taxonomy){
-		$custom_taxonomy->register();
-	}
-}
-add_action('init', 'register_custom_taxonomies');
-
 
 /**
  * Registers all metaboxes for install custom post types
