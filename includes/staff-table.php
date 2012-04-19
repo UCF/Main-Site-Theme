@@ -1,5 +1,7 @@
+<? foreach($sections as $name => $people) {?>
+
 <div class="dept clear">
-	<h3><?=$term->name?></h3>
+	<? if($name != ''): ?><h3><?=$name?></h3><? endif ?>
 	<table>
 		<thead class="sans">
 			<tr>
@@ -39,3 +41,4 @@
 		</tbody>
 	</table>
 </div>
+<? } ?>
