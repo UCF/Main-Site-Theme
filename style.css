@@ -13,7 +13,7 @@ Version: v1.0.6
 .row-border-bottom-top {margin-left:20px;}
 .row-border-bottom-top *:first-child {margin-left:0;}
 
-.search input[type="text"] {
+.search-form input[type="text"] {
 	width:100%;display:block;
 	box-sizing: border-box;
     -moz-box-sizing: border-box;
