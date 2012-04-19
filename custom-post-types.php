@@ -12,13 +12,12 @@ abstract class CustomPostType{
 		$use_title      = True,  # Title field
 		$use_editor     = True,  # WYSIWYG editor, post content field
 		$use_revisions  = True,  # Revisions on post content and titles
-		$use_tags       = True,  # Tags taxonomy
-		$use_categories = False, # Categories taxonomy
 		$use_thumbnails = False, # Featured images
 		$use_order      = False, # Wordpress built-in order meta data
 		$use_metabox    = False, # Enable if you have custom fields to display in admin
 		$use_shortcode  = False, # Auto generate a shortcode for the post type
 		                         # (see also objectsToHTML and toHTML methods)
+		$taxonomies     = array('post_tag'),
 		$built_in       = False;
 	
 	
@@ -28,6 +27,7 @@ abstract class CustomPostType{
 	 * option array.  Returns an array of objects.
 	 **/
 	public function get_objects($options=array()){
+
 		$defaults = array(
 			'numberposts'   => -1,
 			'orderby'       => 'title',
@@ -162,10 +162,11 @@ abstract class CustomPostType{
 	 **/
 	public function register(){
 		$registration = array(
-			'labels'   => $this->labels(),
-			'supports' => $this->supports(),
-			'public'   => $this->options('public'),
-			'_builtin' => $this->options('built_in')
+			'labels'     => $this->labels(),
+			'supports'   => $this->supports(),
+			'public'     => $this->options('public'),
+			'taxonomies' => $this->options('taxonomies'),
+			'_builtin'   => $this->options('built_in')
 		);
 		
 		if ($this->options('use_order')){
@@ -173,14 +174,6 @@ abstract class CustomPostType{
 		}
 		
 		register_post_type($this->options('name'), $registration);
-		
-		if ($this->options('use_categories')){
-			register_taxonomy_for_object_type('category', $this->options('name'));
-		}
-		
-		if ($this->options('use_tags')){
-			register_taxonomy_for_object_type('post_tag', $this->options('name'));
-		}
 		
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
@@ -492,4 +485,177 @@ class Page extends CustomPostType {
 		);
 	}
 }
+
+/**
+ * Describes a staff member
+ *
+ * @author Chris Conover
+ **/
+class Person extends CustomPostType
+{
+	/*
+	The following query will pre-populate the person_orderby_name
+	meta field with a guess of the last name extracted from the post title.
+	
+	>>>BE SURE TO REPLACE wp_<number>_... WITH THE APPROPRIATE SITE ID<<<
+	
+	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value) 
+	(	SELECT	id AS post_id, 
+						'person_orderby_name' AS meta_key, 
+						REVERSE(SUBSTR(REVERSE(post_title), 1, LOCATE(' ', REVERSE(post_title)))) AS meta_value
+		FROM		wp_29_posts AS posts
+		WHERE		post_type = 'person' AND
+						(	SELECT meta_id 
+							FROM wp_29_postmeta 
+							WHERE post_id = posts.id AND
+										meta_key = 'person_orderby_name') IS NULL)
+	*/
+	
+	public
+		$name           = 'person',
+		$plural_name    = 'People',
+		$singular_name  = 'Person',
+		$add_new_item   = 'Add Person',
+		$edit_item      = 'Edit Person',
+		$new_item       = 'New Person',
+		$public         = True,
+		$use_shortcode  = True,
+		$use_metabox    = True,
+		$use_thumbnails = True,
+		$use_order      = True,
+		$taxonomies     = array('org_groups', 'category');
+		
+		public function fields(){
+			$fields = array(
+				array(
+					'name'    => __('Title Prefix'),
+					'desc'    => '',
+					'id'      => $this->options('name').'_title_prefix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Title Suffix'),
+					'desc'    => __('Be sure to include leading comma or space if neccessary.'),
+					'id'      => $this->options('name').'_title_suffix',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Job Title'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_jobtitle',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Phone'),
+					'desc'    => __('Separate multiple entries with commas.'),
+					'id'      => $this->options('name').'_phones',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Email'),
+					'desc'    => __(''),
+					'id'      => $this->options('name').'_email',
+					'type'    => 'text',
+				),
+				array(
+					'name'    => __('Order By Name'),
+					'desc'    => __('Name used for sorting. Leaving this field blank may lead to an unexpected sort order.'),
+					'id'      => $this->options('name').'_orderby_name',
+					'type'    => 'text',
+				),
+			);
+			return $fields;
+		}
+	
+	public function get_objects($options=array()){
+		$options['order']    = 'ASC';
+		$options['orderby']  = 'person_orderby_name';
+		$options['meta_key'] = 'person_orderby_name';
+		return parent::get_objects($options);
+	}
+
+	public static function get_name($person) {
+		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
+		$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
+		$name = $person->post_title;
+		return $prefix.' '.$name.$suffix;
+	}
+
+	public static function get_phones($person) {
+		$phones = get_post_meta($person->ID, 'person_phones', True);
+		return ($phones != '') ? explode(',', $phones) : array();
+	}
+
+	public function objectsToHTML($people, $css_classes) {
+		
+		# Separate the people into sections based on their
+		# organization group affiliation(s)
+		$sections = array();
+		foreach($people as $person) {
+			$terms = wp_get_post_terms($person->ID, 'org_groups');
+			if(count($terms) == 0) {
+				if(!isset($sections[''])) {
+					$sections[''] = array();
+				}
+				$terms[''][] = $person;
+			} else {
+				foreach($terms as $term) {
+					if(!isset($sections[$term->name])) {
+						$sections[$term->name] = array();
+					}
+					$sections[$term->name][] = $person;
+				}
+			}
+		}
+
+		# Display each section
+		ob_start();
+		foreach($sections as $name => $people) {
+		?>
+		<div class="dept clear">
+			<? if($name != ''): ?><h3><?=$name?></h3><? endif ?>
+			<table>
+				<thead class="sans">
+					<tr>
+						<th scope="col" class="name">Name</th>
+						<th scope="col" class="job_title">Title</th>
+						<th scope="col" class="phones">Phone(s)</th>
+						<th scope="col" class="email">E-Mail</th>
+					</tr>
+				</thead>
+				<tbody class="serif">
+					<?$count = 0;
+						foreach($people as $person) {
+							$count++;
+							$email     = get_post_meta($person->ID, 'person_email', True);
+						?>
+							<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>" data-profile-url="<?=get_permalink($person->ID);?>">
+								<td class="name">
+									<a href="<?=get_permalink($person->ID)?>"><?=$this->get_name($person)?></a>
+								</td>
+								<td class="job_title">
+									<a href="<?=get_permalink($person->ID)?>"><?=get_post_meta($person->ID, 'person_jobtitle', True)?></a>
+								</td> 
+								<td class="phones">
+									<a href="<?=get_permalink($person->ID)?>">
+										<ul>
+											<? foreach($this->get_phones($person) as $phone) { ?>
+											<li><?=$phone?></li>
+											<? } ?>
+										</ul>
+									</a>
+								</td>
+								<td class="email">
+									<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+								</td>
+							</tr>
+					<? } ?>
+				</tbody>
+			</table>
+		</div>
+		<?
+		}
+		return ob_get_clean();
+	}
+} // END class 
 ?>

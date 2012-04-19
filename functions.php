@@ -22,6 +22,7 @@ define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
 require_once('functions-base.php');     # Base theme functions
+require_once('custom-taxonomies.php');  # Where per theme taxonomies are defined
 require_once('custom-post-types.php');  # Where per theme post types are defined
 require_once('shortcodes.php');         # Per theme shortcodes
 require_once('functions-admin.php');    # Admin/login functions
@@ -36,7 +37,12 @@ Config::$custom_post_types = array(
 	'Video',
 	'Document',
 	'Publication',
-	'Page'
+	'Page',
+	'Person'
+);
+
+Config::$custom_taxonomies = array(
+	'OrganizationalGroups'
 );
 
 Config::$body_classes = array('default',);

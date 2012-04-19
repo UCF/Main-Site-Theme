@@ -10,6 +10,7 @@ class Config{
 		$body_classes      = array(), # Body classes 
 		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
+		$custom_taxonomies = array(), # Custom taxonomies to register
 		$styles            = array(), # Stylesheets to register
 		$scripts           = array(), # Scripts to register
 		$links             = array(), # <link>s to include in <head>
@@ -489,7 +490,7 @@ function mimetype_to_application($mimetype){
  * @return string
  * @author Jared Lang
  **/
-function sc_object_list($attr, $default_content=null, $sort_func=null){
+function sc_object_list($attr, $default_content=null){
 	if (!is_array($attr)){return '';}
 	
 	# set defaults and combine with passed arguments
@@ -551,22 +552,9 @@ function sc_object_list($attr, $default_content=null, $sort_func=null){
 		'orderby'        => 'menu_order title',
 		'order'          => 'ASC',
 	);
-	$query = new WP_Query($query_array);
+
 	$class = new $class;
-	
-	global $post;
-	$objects = array();
-	while($query->have_posts()){
-		$query->the_post();
-		$objects[] = $post;
-	}
-	
-	# Custom sort if applicable
-	if ($sort_func !== null){
-		usort($objects, $sort_func);
-	}
-	
-	wp_reset_postdata();
+	$objects = $class->get_objects($query_array);
 	
 	if (count($objects)){
 		$html = $class->objectsToHTML($objects, $options['class']);
@@ -1652,6 +1640,17 @@ function installed_custom_post_types(){
 	'), $installed);
 }
 
+/**
+ * Adding custom post types to the installed array defined in this function
+ * will activate and make available for use those types.
+ **/
+function installed_custom_taxonomies(){
+	$installed = Config::$custom_taxonomies;
+	
+	return array_map(create_function('$class', '
+		return new $class;
+	'), $installed);
+}
 
 function flush_rewrite_rules_if_necessary(){
 	global $wp_rewrite;
@@ -1673,6 +1672,19 @@ function flush_rewrite_rules_if_necessary(){
 	}
 }
 
+/**
+ * Registers all installed custom taxonomies
+ *
+ * @return void
+ * @author Chris Conover
+ **/
+function register_custom_taxonomies(){
+	#Register custom post types
+	foreach(installed_custom_taxonomies() as $custom_taxonomy){
+		$custom_taxonomy->register();
+	}
+}
+add_action('init', 'register_custom_taxonomies');
 
 /**
  * Registers all installed custom post types
@@ -1690,7 +1702,6 @@ function register_custom_post_types(){
 	flush_rewrite_rules_if_necessary();
 }
 add_action('init', 'register_custom_post_types');
-
 
 /**
  * Registers all metaboxes for install custom post types
