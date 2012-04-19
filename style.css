@@ -13,7 +13,13 @@ Version: v1.0.6
 .row-border-bottom-top {margin-left:20px;}
 .row-border-bottom-top *:first-child {margin-left:0;}
 
-.search input[type="text"] {width:100%;}
+.search input[type="text"] {
+	width:100%;display:block;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding:15px 10px;
+}
 
 /*#home .site-image img{display: block; margin: 0; border: 5px solid #fff;}*/
 #home .description{font-size: 16px; font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";}
