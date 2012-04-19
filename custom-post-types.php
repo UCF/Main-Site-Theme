@@ -612,10 +612,10 @@ class Person extends CustomPostType
 		ob_start();
 		foreach($sections as $name => $people) {
 		?>
-		<div class="dept clear">
+		<div class="people-org-group">
 			<? if($name != ''): ?><h3><?=$name?></h3><? endif ?>
-			<table>
-				<thead class="sans">
+			<table class="table table-striped">
+				<thead>
 					<tr>
 						<th scope="col" class="name">Name</th>
 						<th scope="col" class="job_title">Title</th>
@@ -623,13 +623,13 @@ class Person extends CustomPostType
 						<th scope="col" class="email">E-Mail</th>
 					</tr>
 				</thead>
-				<tbody class="serif">
+				<tbody>
 					<?$count = 0;
 						foreach($people as $person) {
 							$count++;
 							$email     = get_post_meta($person->ID, 'person_email', True);
 						?>
-							<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>" data-profile-url="<?=get_permalink($person->ID);?>">
+							<tr>
 								<td class="name">
 									<a href="<?=get_permalink($person->ID)?>"><?=$this->get_name($person)?></a>
 								</td>
