@@ -74,6 +74,7 @@ function sc_search_form() {
 }
 add_shortcode('search_form', 'sc_search_form');
 
+
 function sc_person_picture_list($attrs) {
 	$attrs['type'] = 'person';
 	$row_size = isset($attrs['row-size']) ? (int)$attrs['row-size'] : 5;
