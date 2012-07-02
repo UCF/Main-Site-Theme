@@ -510,7 +510,7 @@ class Person extends CustomPostType
 							WHERE post_id = posts.id AND
 										meta_key = 'person_orderby_name') IS NULL)
 	*/
-	
+
 	public
 		$name           = 'person',
 		$plural_name    = 'People',
@@ -524,7 +524,7 @@ class Person extends CustomPostType
 		$use_thumbnails = True,
 		$use_order      = True,
 		$taxonomies     = array('org_groups', 'category');
-		
+
 		public function fields(){
 			$fields = array(
 				array(
@@ -566,7 +566,7 @@ class Person extends CustomPostType
 			);
 			return $fields;
 		}
-	
+
 	public function get_objects($options=array()){
 		$options['order']    = 'ASC';
 		$options['orderby']  = 'person_orderby_name';
@@ -587,75 +587,53 @@ class Person extends CustomPostType
 	}
 
 	public function objectsToHTML($people, $css_classes) {
-		
-		# Separate the people into sections based on their
-		# organization group affiliation(s)
-		$sections = array();
-		foreach($people as $person) {
-			$terms = wp_get_post_terms($person->ID, 'org_groups');
-			if(count($terms) == 0) {
-				if(!isset($sections[''])) {
-					$sections[''] = array();
-				}
-				$terms[''][] = $person;
-			} else {
-				foreach($terms as $term) {
-					if(!isset($sections[$term->name])) {
-						$sections[$term->name] = array();
-					}
-					$sections[$term->name][] = $person;
-				}
-			}
-		}
-
-		# Display each section
-		ob_start();
-		foreach($sections as $name => $people) {
-		?>
-		<div class="people-org-group">
-			<? if($name != ''): ?><h3><?=$name?></h3><? endif ?>
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th scope="col" class="name">Name</th>
-						<th scope="col" class="job_title">Title</th>
-						<th scope="col" class="phones">Phone(s)</th>
-						<th scope="col" class="email">E-Mail</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?$count = 0;
-						foreach($people as $person) {
-							$count++;
-							$email     = get_post_meta($person->ID, 'person_email', True);
-						?>
-							<tr>
-								<td class="name">
-									<a href="<?=get_permalink($person->ID)?>"><?=$this->get_name($person)?></a>
-								</td>
-								<td class="job_title">
-									<a href="<?=get_permalink($person->ID)?>"><?=get_post_meta($person->ID, 'person_jobtitle', True)?></a>
-								</td> 
-								<td class="phones">
-									<a href="<?=get_permalink($person->ID)?>">
-										<ul>
-											<? foreach($this->get_phones($person) as $phone) { ?>
-											<li><?=$phone?></li>
-											<? } ?>
-										</ul>
-									</a>
-								</td>
-								<td class="email">
-									<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
-								</td>
-							</tr>
-					<? } ?>
+		ob_start();?>
+		<div class="row">
+			<div class="span12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col" class="name">Name</th>
+							<th scope="col" class="job_title">Title</th>
+							<th scope="col" class="phones">Phone(s)</th>
+							<th scope="col" class="email">E-Mail</th>
+						</tr>
+					</thead>
+					<tbody>
+				<?
+				foreach($people as $person) { 
+					$email = get_post_meta($person->ID, 'person_email', True); 
+					$link = ($person->post_content == '') ? False : True; ?>
+						<tr>
+							<td class="name">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+									<?=$this->get_name($person)?>
+								<?if($link) {?></a><?}?>
+							</td>
+							<td class="job_title">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
+								<?if($link) {?></a><?}?>
+							</td> 
+							<td class="phones">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+									<ul class="unstyled">
+										<? foreach($this->get_phones($person) as $phone) { ?>
+										<li><?=$phone?></li>
+										<? } ?>
+									</ul>
+								<?if($link) {?></a><?}?>
+							</td>
+							<td class="email">
+								<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
+							</td>
+						</tr>
+				<? } ?>
 				</tbody>
-			</table>
+			</table> 
 		</div>
-		<?
-		}
-		return ob_get_clean();
+	</div><?
+	return ob_get_clean();
 	}
 } // END class 
 ?>
