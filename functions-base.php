@@ -520,6 +520,7 @@ function sc_object_list($attr, $default_content=null){
 	$translate  = array(
 		'tags'       => 'post_tag',
 		'categories' => 'category',
+		'org_groups' => 'org_groups'
 	);
 	$taxonomies = array_diff(array_keys($attr), array_keys($defaults));
 	
@@ -553,15 +554,33 @@ function sc_object_list($attr, $default_content=null){
 		'order'          => 'ASC',
 	);
 
-	$class = new $class;
-	$objects = $class->get_objects($query_array);
-	
-	if (count($objects)){
-		$html = $class->objectsToHTML($objects, $options['class']);
-	}else{
-		$html = $default_content;
-	}
-	return $html;
+		$query = new WP_Query($query_array);
+		$class = new $class;
+		
+		global $post;
+		$objects = array();
+		while($query->have_posts()){
+			$query->the_post();
+			$objects[] = $post;
+		}
+		
+		# Custom sort if applicable
+		if ($sort_func !== null){
+			usort($objects, $sort_func);
+		}
+		
+		wp_reset_postdata();
+		
+		if($objects_only) {
+			return $objects;
+		}
+		
+		if (count($objects)){
+			$html = $class->objectsToHTML($objects, $params['class']);
+		}else{
+			$html = $default_content;
+		}
+		return $html;
 }
 
 
