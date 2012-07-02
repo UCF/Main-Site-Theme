@@ -578,7 +578,7 @@ class Person extends CustomPostType
 		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
 		$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
 		$name = $person->post_title;
-		return $prefix.' '.$name.$suffix;
+		return $prefix.' '.$name.' '.$suffix;
 	}
 
 	public static function get_phones($person) {
