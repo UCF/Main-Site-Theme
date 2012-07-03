@@ -1303,6 +1303,21 @@ function get_custom_post_type($name){
 
 
 /**
+* Get featured image for a post
+*
+* @return array
+* @author Chris Conover
+**/
+function get_featured_image_url($post) {
+	if(has_post_thumbnail($post) && ($thumbnail_id = get_post_thumbnail_id($post->ID)) && ($image = wp_get_attachment_image_src($thumbnail_id))) {
+		return $image[0];
+	}
+	return False;
+}
+
+
+
+/**
  * Wraps wordpress' native functions, allowing you to get a menu defined by
  * its location rather than the name given to the menu.  The argument $classes
  * lets you define a custom class(es) to place on the list generated, $id does
