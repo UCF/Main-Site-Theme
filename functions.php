@@ -293,6 +293,32 @@ Config::$theme_settings = array(
 			),
 		)),
 	),
+	'Styles' => array(
+		new RadioField(array(
+			'name'        => 'Enable Responsiveness',
+			'id'          => THEME_OPTIONS_NAME.'[bootstrap_enable_responsive]',
+			'description' => 'Turn on responsive styles provided by the Twitter Bootstrap framework.  This setting should be decided upon before building out subpages, etc. to ensure content is designed to shrink down appropriately.  Turning this off will enable the single 940px-wide Bootstrap layout.',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['bootstrap_enable_responsive'],
+	    )),
+		new SelectField(array(
+			'name'        => 'Header Menu Styles',
+			'id'          => THEME_OPTIONS_NAME.'[bootstrap_menu_styles]',
+			'description' => 'Adjust the styles that the header menu links will use.  Non-default options Twitter Bootstrap navigation components for sub-navigation support.',
+			'default'     => 'default',
+			'choices'     => array(
+				'Default (list of links, no subnavigation)'  => 'default',
+				'Tabs with dropdowns - above' => 'tabs_above',
+				'Tabs with dropdowns - below' => 'tabs_below',
+				'Pills with dropdowns' => 'pills'
+			),
+			'value'       => $theme_options['bootstrap_menu_styles'],
+	    )),
+	),
 );
 
 Config::$links = array(
@@ -304,10 +330,11 @@ Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	'http://universityheader.ucf.edu/bar/css/bar.css',
 	THEME_STATIC_URL.'/bootstrap/build/css/bootstrap.css',
-	THEME_STATIC_URL.'/bootstrap/build/css/bootstrap-responsive.css',
-	THEME_CSS_URL.'/webcom-base.css',
-	get_bloginfo('stylesheet_url'),
 );
+if ($theme_options['bootstrap_enable_responsive'] == 1) {
+	array_push(Config::$styles, THEME_STATIC_URL.'/bootstrap/build/css/bootstrap-responsive.css');	
+}
+array_push(Config::$styles,	THEME_CSS_URL.'/webcom-base.css', get_bloginfo('stylesheet_url'));
 
 
 Config::$scripts = array(
