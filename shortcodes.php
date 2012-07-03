@@ -81,6 +81,9 @@ function sc_person_picture_list($attrs) {
 	$people = sc_object_list($attrs, array('objects_only' => True));
 	
 	ob_start();
+	
+	var_dump($people);
+	
 	?><div class="person-picture-list"><?
 	$count = 0;
 	foreach($people as $person) {

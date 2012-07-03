@@ -480,56 +480,64 @@ function mimetype_to_application($mimetype){
 
 
 /**
- * Fetches objects defined by arguments passed, outputs the objects according
- * to the objectsToHTML method located on the object.  Used by the auto
- * generated shortcodes enabled on custom post types. See also:
- * 
- *   CustomPostType::objectsToHTML
- *   CustomPostType::toHTML
- *
- * @return string
- * @author Jared Lang
- **/
-function sc_object_list($attr, $default_content=null){
-	if (!is_array($attr)){return '';}
+* Fetches objects defined by arguments passed, outputs the objects according
+* to the objectsToHTML method located on the object. Used by the auto
+* generated shortcodes enabled on custom post types. See also:
+*
+* CustomPostType::objectsToHTML
+* CustomPostType::toHTML
+*
+* @return string
+* @author Jared Lang
+**/
+function sc_object_list($attrs, $options = array()){
+	if (!is_array($attrs)){return '';}
+	
+	$default_options = array(
+		'default_content' => null,
+		'sort_func' => null,
+		'objects_only' => False
+	);
+	
+	extract(array_merge($default_options, $options));
 	
 	# set defaults and combine with passed arguments
-	$defaults = array(
-		'type'  => null,
+	$default_attrs = array(
+		'type' => null,
 		'limit' => -1,
-		'join'  => 'or',
+		'join' => 'or',
 		'class' => '',
 	);
-	$options = array_merge($defaults, $attr);
+	$params = array_merge($default_attrs, $attrs);
 	
 	# verify options
-	if ($options['type'] == null){
+	if ($params['type'] == null){
 		return '<p class="error">No type defined for object list.</p>';
 	}
-	if (!is_numeric($options['limit'])){
+	if (!is_numeric($params['limit'])){
 		return '<p class="error">Invalid limit argument, must be a number.</p>';
 	}
-	if (!in_array(strtoupper($options['join']), array('AND', 'OR'))){
+	if (!in_array(strtoupper($params['join']), array('AND', 'OR'))){
 		return '<p class="error">Invalid join type, must be one of "and" or "or".</p>';
 	}
-	if (null == ($class = get_custom_post_type($options['type']))){
+	if (null == ($class = get_custom_post_type($params['type']))){
 		return '<p class="error">Invalid post type.</p>';
 	}
 	
 	# get taxonomies and translation
-	$translate  = array(
-		'tags'       => 'post_tag',
+	$translate = array(
+		'tags' => 'post_tag',
 		'categories' => 'category',
 		'org_groups' => 'org_groups'
 	);
-	$taxonomies = array_diff(array_keys($attr), array_keys($defaults));
+	$taxonomies = array_diff(array_keys($attrs), array_keys($default_attrs));
 	
 	# assemble taxonomy query
-	$tax_queries             = array();
-	$tax_queries['relation'] = strtoupper($options['join']);
+	$tax_queries = array();
+	$tax_queries['relation'] = strtoupper($params['join']);
 	
 	foreach($taxonomies as $tax){
-		$terms = $options[$tax];
+		$terms = $params[$tax];
 		$terms = trim(preg_replace('/\s+/', ' ', $terms));
 		$terms = explode(' ', $terms);
 		
@@ -539,50 +547,49 @@ function sc_object_list($attr, $default_content=null){
 		
 		$tax_queries[] = array(
 			'taxonomy' => $tax,
-			'field'    => 'slug',
-			'terms'    => $terms,
+			'field' => 'slug',
+			'terms' => $terms,
 		);
 	}
 	
 	# perform query
 	$query_array = array(
-		'tax_query'      => $tax_queries,
-		'post_status'    => 'publish',
-		'post_type'      => $options['type'],
-		'posts_per_page' => $options['limit'],
-		'orderby'        => 'menu_order title',
-		'order'          => 'ASC',
+		'tax_query' => $tax_queries,
+		'post_status' => 'publish',
+		'post_type' => $params['type'],
+		'posts_per_page' => $params['limit'],
+		'orderby' => 'menu_order title',
+		'order' => 'ASC',
 	);
-
-		$query = new WP_Query($query_array);
-		$class = new $class;
-		
-		global $post;
-		$objects = array();
-		while($query->have_posts()){
-			$query->the_post();
-			$objects[] = $post;
-		}
-		
-		# Custom sort if applicable
-		if ($sort_func !== null){
-			usort($objects, $sort_func);
-		}
-		
-		wp_reset_postdata();
-		
-		if($objects_only) {
-			return $objects;
-		}
-		
-		if (count($objects)){
-			$html = $class->objectsToHTML($objects, $params['class']);
-		}else{
-			$html = $default_content;
-		}
-		return $html;
+	
+	$query = new WP_Query($query_array);
+	$class = new $class;
+	
+	global $post;
+	$objects = array();
+	while($query->have_posts()){
+		$query->the_post();
+		$objects[] = $post;
+	}
+	
+	# Custom sort if applicable
+	if ($sort_func !== null){
+		usort($objects, $sort_func);
+	}
+	
+	wp_reset_postdata();
+	
+	if($objects_only) {
+		return $objects;
+	}
+	
+	if (count($objects)){
+		$html = $class->objectsToHTML($objects, $params['class']);
+	}else{
+		$html = $default_content;
+	}
+	return $html;
 }
-
 
 /**
  * Creates an array of shortcodes mapped to a documentation string for that
