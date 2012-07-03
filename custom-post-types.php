@@ -481,7 +481,13 @@ class Page extends CustomPostType {
 				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
 				'id'   => $prefix.'hide_fold',
 				'type' => 'checkbox',
-			)
+			),
+				array(
+					'name' => 'Stylesheet',
+					'desc' => '',
+					'id' => $prefix.'stylesheet',
+					'type' => 'file',
+				),
 		);
 	}
 }
