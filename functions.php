@@ -313,7 +313,6 @@ Config::$theme_settings = array(
 			'choices'     => array(
 				'Default (list of links, no subnavigation)'  => 'default',
 				'Tabs with dropdowns - above' => 'tabs_above',
-				'Tabs with dropdowns - below' => 'tabs_below',
 				'Pills with dropdowns' => 'pills'
 			),
 			'value'       => $theme_options['bootstrap_menu_styles'],
