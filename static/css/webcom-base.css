@@ -14,14 +14,15 @@ body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 .menu.horizontal li{display: inline-block; margin: 0 3px 0 0; padding: 0;}
 .ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
 .menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
-.menu.horizontal .last:after {content: ""; margin-left: 0;}
+.menu.horizontal li:last-child:after {content: none;}
 
-.menu.nav-tabs, .menu.nav-pills {
-	margin-left: 0;
-}
-ul.dropdown-menu li a {
-	margin-right: 0;
-}
+.menu.nav-tabs, .menu.nav-pills { margin-left: 0; }
+ul.dropdown-menu li { width: 100%; }
+ul.dropdown-menu li:after{ content: none !important; }
+ul.dropdown-menu li a { margin-right: 0; white-space: pre-wrap; }
+
+.menu.horizontal .dropdown-menu { margin-top: 3px; }
+.menu.horizontal .dropdown.open .dropdown-toggle { background: none; color: #0088CC; }
 
 .search-form label{display: none;}
 .search-form .search-field{width:50px;}
