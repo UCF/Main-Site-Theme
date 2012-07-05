@@ -1,6 +1,14 @@
 			<div id="footer">
 				
-				<?=get_menu('footer-menu', 'menu horizontal', 'footer-menu')?>
+				<?=wp_nav_menu(array(
+					'theme_location' => 'footer-menu', 
+					'container' => 'false', 
+					'menu_class' => 'menu horizontal', 
+					'menu_id' => 'footer-menu', 
+					'depth' => 1,
+					'walker' => new Bootstrap_Walker_Nav_Menu()
+					));
+				?>
 				<div class="row">
 					<div class="ucf span9">
 						<a class="ignore-external" href="http://www.ucf.edu"><img src="<?=THEME_IMG_URL?>/logo.png" alt="" title="" /></a>
