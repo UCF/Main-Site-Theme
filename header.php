@@ -57,4 +57,11 @@
 				</div>
 			</div>
 			<? //get_menu('header-menu', '', '', 'get_custom_header_menu')?>
-			<?=wp_nav_menu(array('theme_location' => 'header-menu', 'container' => 'false', 'menu_class' => 'menu horizontal span12', 'menu_id' => 'header-menu', 'walker' => new Bootstrap_Walker_Nav_Menu()));?>
+			<?=wp_nav_menu(array(
+				'theme_location' => 'header-menu', 
+				'container' => 'false', 
+				'menu_class' => 'nav menu horizontal span12 '.get_header_styles(), 
+				'menu_id' => 'header-menu', 
+				'walker' => new Bootstrap_Walker_Nav_Menu()
+				));
+				 ?>

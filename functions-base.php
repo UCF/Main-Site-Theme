@@ -1370,7 +1370,7 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 /**
  * Walker function to add Bootstrap classes to nav menus using wp_nav_menu()
  * 
- * via https://gist.github.com/1597994
+ * based on https://gist.github.com/1597994
  **/
 function bootstrap_menus() {
 	class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
@@ -1466,7 +1466,32 @@ function bootstrap_menus() {
 			
 		}	
 }
+add_action( 'after_setup_theme', 'bootstrap_menus' );
 
+
+/**
+ * Get value of Header Menu Styles and assign it to a variable
+ *
+ * @author Jo Greybill
+ **/
+function get_header_styles() {
+	$options = get_option(THEME_OPTIONS_NAME);
+	$id = $options['bootstrap_menu_styles'];
+	
+	switch ($id) {
+		case 'nav-tabs':
+			$header_menu_class = 'nav-tabs';
+			break;	
+		case 'nav-pills':
+			$header_menu_class = 'nav-pills';
+			break;
+		default:
+			$header_menu_class = '';
+			break;
+	}
+	return $header_menu_class;
+	
+}
 
 
 
