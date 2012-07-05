@@ -1359,11 +1359,64 @@ function get_menu($name, $classes=null, $id=null, $callback=null){
 		<?php
 		$menu = ob_get_clean();
 	}else{
-		$menu = call_user_func($callback, array($items));
+		$menu = call_user_func($callback, $items);
 	}
 	
 	return $menu;
 	
+}
+
+
+/**
+ * Callback function written for get_menu() to pull the value of
+ * $theme_options['bootstrap_menu_styles'] and generate a menu accordingly
+ * 
+ * @return void
+ * @author Jo Greybill
+ **/
+function get_custom_header_menu($items) {
+	
+	$options = get_option(THEME_OPTIONS_NAME);
+	$menu_style = $options['bootstrap_menu_styles'];
+	
+	print "get_custom_header_menu $items value: <br/>";
+	var_dump($items);
+	print "<br/><br/>";
+	
+	ob_start();
+	
+	switch ($menu_style) {
+		case 'tabs_above':
+			?>
+			<ul class="menu horizontal nav nav-tabs span12" id="header-menu">
+				<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
+				<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
+				<?php endforeach;?>
+			</ul>
+			<?php
+			break;
+		case 'pills':
+			?>
+			<ul class="menu horizontal nav nav-tabs span12" id="header-menu">
+				<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
+				<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
+				<?php endforeach;?>
+			</ul>
+			<?php
+			break;
+		default:
+			?>
+			<ul class="menu horizontal span12" id="header-menu">
+				<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
+				<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
+				<?php endforeach;?>
+			</ul>
+			<?php
+			break;
+	}
+	
+	$custom_menu = ob_get_clean();
+	return $custom_menu;
 }
 
 
