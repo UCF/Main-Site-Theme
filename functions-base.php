@@ -1470,7 +1470,7 @@ add_action( 'after_setup_theme', 'bootstrap_menus' );
 
 
 /**
- * Get value of Header Menu Styles and assign it to a variable
+ * Get value of Header Menu Styles and return relevant Boostrap CSS classes
  *
  * @author Jo Greybill
  **/
