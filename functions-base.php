@@ -1480,13 +1480,13 @@ function get_header_styles() {
 	
 	switch ($id) {
 		case 'nav-tabs':
-			$header_menu_class = 'nav-tabs';
+			$header_menu_class = 'nav nav-tabs';
 			break;	
 		case 'nav-pills':
-			$header_menu_class = 'nav-pills';
+			$header_menu_class = 'nav nav-pills';
 			break;
 		default:
-			$header_menu_class = '';
+			$header_menu_class = 'horizontal';
 			break;
 	}
 	return $header_menu_class;
