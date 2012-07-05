@@ -144,7 +144,7 @@
 				if (post_type_exists('person')) { ?>
 				
 				<h4>person-picture-list</h4>
-				<p>Outputs a list of People with thumbnails, person names, and job titles.  If a person's description is available, a link to the person's profile will be outputted.  If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.  An optional row_size parameter is available to customize the number of rows that will display.</p>
+				<p>Outputs a list of People with thumbnails, person names, and job titles.  If a person's description is available, a link to the person's profile will be outputted.  If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.  An optional <strong>row_size</strong> parameter is available to customize the number of rows that will display, in addition to the other filter parameters available to the <strong>person-list</strong> shortcode.</p>
 				
 				<p>Example:</p>
 <pre><code># Output all People (default to 5 columns.)
