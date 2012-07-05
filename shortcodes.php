@@ -77,7 +77,9 @@ add_shortcode('search_form', 'sc_search_form');
 
 function sc_person_picture_list($atts) {
 	$row_size 		= ($atts['row_size']) ? (intval($atts['row_size'])) : 5;
-	$people 		= sc_object_list(array('type' => 'person'), array('objects_only' => True));
+	$categories		= ($atts['categories']) ? $atts['categories'] : null;
+	$org_groups		= ($atts['org_groups']) ? $atts['org_groups'] : null;
+	$people 		= sc_object_list(array('type' => 'person', 'categories' => $categories, 'org_groups' => $org_groups), array('objects_only' => True));
 	
 	ob_start();
 	
