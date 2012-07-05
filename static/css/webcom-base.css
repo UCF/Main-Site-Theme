@@ -16,6 +16,13 @@ body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 .menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
 .menu.horizontal .last:after {content: ""; margin-left: 0;}
 
+.menu.nav-tabs, .menu.nav-pills {
+	margin-left: 0;
+}
+ul.dropdown-menu li a {
+	margin-right: 0;
+}
+
 .search-form label{display: none;}
 .search-form .search-field{width:50px;}
 .search-form .search-submit{}
