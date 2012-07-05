@@ -311,7 +311,7 @@ Config::$theme_settings = array(
 			'description' => 'Adjust the styles that the header menu links will use.  Non-default options Twitter Bootstrap navigation components for sub-navigation support.',
 			'default'     => 'default',
 			'choices'     => array(
-				'Default (list of links, no subnavigation)'  => 'default',
+				'Default (list of links with dropdowns)'  => 'default',
 				'Tabs with dropdowns' => 'nav-tabs',
 				'Pills with dropdowns' => 'nav-pills'
 			),
