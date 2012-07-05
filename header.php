@@ -56,7 +56,6 @@
 					<div class="end"><!-- --></div>
 				</div>
 			</div>
-			<? //get_menu('header-menu', '', '', 'get_custom_header_menu')?>
 			<?=wp_nav_menu(array(
 				'theme_location' => 'header-menu', 
 				'container' => 'false', 
@@ -64,4 +63,4 @@
 				'menu_id' => 'header-menu', 
 				'walker' => new Bootstrap_Walker_Nav_Menu()
 				));
-				 ?>
+			?>
