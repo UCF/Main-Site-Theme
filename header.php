@@ -56,4 +56,5 @@
 					<div class="end"><!-- --></div>
 				</div>
 			</div>
-			<?=get_menu('header-menu', 'menu horizontal span12', 'header-menu')?>
+			<? //get_menu('header-menu', '', '', 'get_custom_header_menu')?>
+			<?=wp_nav_menu(array('theme_location' => 'header-menu', 'container' => 'false', 'menu_class' => 'menu horizontal span12', 'menu_id' => 'header-menu', 'walker' => new Bootstrap_Walker_Nav_Menu()));?>
