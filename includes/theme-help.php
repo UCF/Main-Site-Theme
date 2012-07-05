@@ -64,7 +64,9 @@
 &lt;p&gt;I'm a slide!&lt;/p&gt;
 [/slideshow]</code></pre>
 					
-					<h4 id="shortcodes">(post type)-list</h4>
+					
+					
+					<h4>(post type)-list</h4>
 					<p>Outputs a list of a given post type filtered by arbitrary taxonomies, for 
 					example a tag or category.  A default output can be added for when no objects 
 					matching the criteria are found.  Available attributes:</p>
@@ -123,9 +125,9 @@
 						
 				</table>
 					
-					<p>Example:</p>
+					<p>Examples:</p>
 <pre><code># Output a maximum of 5 Documents tagged 'foo' or 'bar', with a default output.
-[document-list tags="foo bar" limit="5"]No Documents were found.[/document-list]
+[document-list tags="foo bar" limit=5]No Documents were found.[/document-list]
 
 # Output all People categorized as 'foo'
 [person-list categories="foo"]
@@ -137,7 +139,25 @@
 [person-list limit=5 join="and" categories="staff" org_groups="small"]</code></pre>
 				
 				
+				<?php 
+				// As long as the Person post type is active, let's show info for person-picture-list:
+				if (post_type_exists('person')) { ?>
 				
+				<h4>person-picture-list</h4>
+				<p>Outputs a list of People with thumbnails, person names, and job titles.  If a person's description is available, a link to the person's profile will be outputted.  If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.  An optional row_size parameter is available to customize the number of rows that will display.</p>
+				
+				<p>Example:</p>
+<pre><code># Output all People (default to 5 columns.)
+[person-picture-list]
+
+# Output all People in 4 columns.
+[person-picture-list row_size=4]
+
+# Output People in org_group 'staff' in 6 columns.
+[person-picture-list org_groups="staff" row_size=6]
+</code></pre>
+
+				<?php } ?>
 				</li>
 				
 			</ul>
