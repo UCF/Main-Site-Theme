@@ -82,13 +82,12 @@ function sc_person_picture_list($attrs) {
 	
 	ob_start();
 	
-	var_dump($people);
-	
 	?><div class="person-picture-list"><?
 	$count = 0;
 	foreach($people as $person) {
 		
-		$image_url = get_featured_image_url($person);
+		$image_url = get_featured_image_url($person->ID);
+		
 		$link = ($person->post_content != '') ? True : False;
 		if( ($count % $row_size) == 0) {
 			if($count > 0) {
@@ -96,6 +95,7 @@ function sc_person_picture_list($attrs) {
 			}
 			?><div class="row"><?
 		}
+		
 		?>
 		<div class="span2">
 			<? if($link) {?><a href="<?=get_permalink($person->ID)?>"><? } ?>
