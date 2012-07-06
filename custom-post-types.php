@@ -601,8 +601,8 @@ class Person extends CustomPostType
 						<tr>
 							<th scope="col" class="name">Name</th>
 							<th scope="col" class="job_title">Title</th>
-							<th scope="col" class="phones">Phone(s)</th>
-							<th scope="col" class="email">E-Mail</th>
+							<th scope="col" class="phones">Phone</th>
+							<th scope="col" class="email">Email</th>
 						</tr>
 					</thead>
 					<tbody>
