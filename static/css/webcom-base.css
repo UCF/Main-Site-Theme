@@ -77,4 +77,4 @@ textarea{padding: 4px; color: #333; border: 1px solid #ccc; -webkit-border-radiu
 #sidebar h2{margin: .5em 0 1em 0; font-size: 17px; color: #A3B00B;}
 #footer{border-top: 1px dotted #666; padding-top: 0px; margin: 10px 0 20px 0;}
 #footer-menu { clear: right; }
-#footer .row { clear: both; }
+#footer .row { clear: both; padding-top: 5px; }
