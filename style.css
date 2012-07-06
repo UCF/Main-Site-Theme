@@ -37,7 +37,7 @@ select#UCFHBHeaderLinks {
 /*/ Global Styles /*/
 #UCFHBHeader * {height:auto;}
 
-.end {clear: both;}
+.end {clear: both; height: 1px;}
 
 .row-border-bottom-top {margin-left:20px;}
 .row-border-bottom-top *:first-child {margin-left:0;}
