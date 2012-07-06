@@ -61,7 +61,7 @@ select#UCFHBHeaderLinks {
 #home.nodescription .search{margin-top: 1em;}
 #home .search form{padding: 20px;}
 #home .search .search-field{}
-#home .search #s { *width: 258px; } /* IE7 fix */
+#home .search #s { *width: 238px; } /* IE7 fix */
 #home .search label{display: block; color: #C14D00; font-size: 16px; font-weight: normal; font-family: "Georgia", "serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
 
