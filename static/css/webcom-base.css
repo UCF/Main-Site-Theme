@@ -24,6 +24,8 @@ ul.dropdown-menu li a { margin-right: 0; white-space: pre-wrap; }
 .menu.horizontal .dropdown-menu { margin-top: 3px; }
 .menu.horizontal .dropdown.open .dropdown-toggle { background: none; color: #0088CC; }
 
+.page-content { clear: both; }
+
 .search-form label{display: none;}
 .search-form .search-field{width:50px;}
 .search-form .search-submit{}
