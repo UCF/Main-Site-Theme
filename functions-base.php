@@ -591,66 +591,6 @@ function sc_object_list($attrs, $options = array()){
 	return $html;
 }
 
-/**
- * Creates an array of shortcodes mapped to a documentation string for that
- * shortcode.  Used to generate the auto shortcode documentation.
- * 
- * @return array
- * @author Jared Lang
- **/
-function shortcodes(){
-	$file = file_get_contents(THEME_DIR.'/shortcodes.php');
-	
-	$documentation = "\/\*\*(?P<documentation>.*?)\*\*\/";
-	$declaration   = "function[\s]+(?P<declaration>[^\(]+)";
-	
-	# Auto generated shortcode documentation.
-	$codes = array();
-	$auto  = array_filter(installed_custom_post_types(), create_function('$c', '
-		return $c->options("use_shortcode");
-	'));
-	foreach($auto as $code){
-		$scode  = $code->options('name').'-list';
-		$plural = $code->options('plural_name');
-		$doc = <<<DOC
- Outputs a list of {$plural} filtered by arbitrary taxonomies, for example a tag
-or category.  A default output for when no objects matching the criteria are
-found.
-
- Example:
- # Output a maximum of 5 items tagged foo or bar, with a default output.
- [{$scode} tags="foo bar" limit="5"]No {$plural} were found.[/{$scode}]
-
- # Output all objects categorized as foo
- [{$scode} categories="foo"]
-
- # Output all objects matching the terms in the custom taxonomy named foo
- [{$scode} foo="term list example"]
-
- # Outputs all objects found categorized as staff and tagged as small.
- [{$scode} limit="5" join="and" categories="staff" tags="small"]
-DOC;
-		$codes[] = array(
-			'documentation' => $doc,
-			'shortcode'     => $scode,
-		);
-	}
-	
-	# Defined shortcode documentation
-	$found = preg_match_all("/{$documentation}\s*{$declaration}/is", $file, $matches);
-	if ($found){
-		foreach ($matches['declaration'] as $key=>$match){
-			$codes[$match]['documentation'] = $matches['documentation'][$key];
-			$codes[$match]['shortcode']     = str_replace(
-				array('sc_', '_',),
-				array('', '-',),
-				$matches['declaration'][$key]
-			);
-		}
-	}
-	return $codes;
-}
-
 
 /**
  * Returns true if the current request is on the login screen.
