@@ -80,7 +80,7 @@ Generic.defaultMenuSeparators = function($) {
 	// Because IE sucks, we're removing the last stray separator
 	// on default navigation menus for browsers that don't 
 	// support the :last-child CSS property
-	$('.menu.horizontal li:last-child:after').css({content: ""});
+	$('.menu.horizontal li:last-child').addClass('last');
 };
 
 
