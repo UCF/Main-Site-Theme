@@ -10,7 +10,7 @@ body{color: #333;background: url("../img/gradient.png") repeat-x top left #fff;}
 
 .menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
 .menu a:hover{text-decoration: underline;}
-.menu.horizontal{list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear: right;}
+.menu.horizontal{list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 16px 0; clear: right;}
 .menu.horizontal li{display: inline-block; margin: 0 6px 0 0; padding: 0; float: left;}
 .ie .menu.horizontal li{display: block; float: left; margin-right: 6px;}
 .menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
