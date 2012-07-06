@@ -73,9 +73,18 @@ Generic.homeDimensions = function($){
 	if (cls.home_element.length < 1){return;}
 	
 	cls.uniformHeight();
-	
-	
 };
+
+
+Generic.defaultMenuSeparators = function($) {
+	// Because IE sucks, we're adding in separators through jQuery for
+	// the default nav menu and removing the excess separator at the end
+	if ($('.menu.horizontal li:after').css("content") == "") {
+		$('.menu.horizontal li:after').css({content: "\2022"});
+	}
+	$('.menu.horizontal li:last-child:after').css({content: ""});
+};
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -88,5 +97,6 @@ if (typeof jQuery != 'undefined'){
 		/* Theme Specific Code Here */
 		//Generic.homeDimensions($);
 		//Generic.resizeSearch($);
+		Generic.defaultMenuSeparators($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
