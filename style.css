@@ -44,6 +44,7 @@ select#UCFHBHeaderLinks {
 
 .search-form #s {
 	width:100%;
+	*width: 258px; /* IE7 fix */
 	display:block;
 	box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -59,7 +60,7 @@ select#UCFHBHeaderLinks {
 #home .content .upfont{font-size: 150%;}
 #home .search{background-color: #eee; width: 100%;}
 #home.nodescription .search{margin-top: 1em;}
-#home .search form{padding: 20px 0 20px 20px; margin: 0 20px 18px 0;}
+#home .search form{padding: 20px;}
 #home .search .search-field{}
 #home .search label{display: block; color: #C14D00; font-size: 16px; font-weight: normal; font-family: "Georgia", "serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
