@@ -6,6 +6,8 @@
 @media (max-width: 767px) {
 	#header { margin-left: 0; }
 	
+	#home .description { margin-top: 10px; }
+	
 	#below-the-fold { margin-left: 0; }
 	#below-the-fold .span4 { width: 100%; margin-left: 0; margin-bottom: 20px; }
 	
