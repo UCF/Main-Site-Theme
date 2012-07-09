@@ -1,0 +1,14 @@
+@media (max-width: 979px) {
+	#UCFHBSearch_and_links { display: none; }
+	#UCFHBHeader div.UCFHBWrapper { width: 100%; }
+}
+
+@media (max-width: 767px) {
+	#header { margin-left: 0; }
+	
+	#below-the-fold { margin-left: 0; }
+	#below-the-fold .span4 { width: 100%; margin-left: 0; margin-bottom: 20px; }
+	
+	.news .item { margin-bottom: 10px; }
+}
+
