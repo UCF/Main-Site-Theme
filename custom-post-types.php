@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Abstract class for defining custom post types.  
+ * 
+ **/
 abstract class CustomPostType{
 	public 
 		$name           = 'custom_post_type',
