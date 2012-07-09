@@ -75,6 +75,11 @@ select#UCFHBHeaderLinks {
 #header .social{}
 #header .social.menu.horizontal a{text-indent: -1024px;}
 #header .social.menu.horizontal li:after{content: "";}
+@media (max-width: 767px) {
+	#header {
+		margin-left: 0;
+	}
+}
 
 #footer-menu{ }
 #footer-widget-wrap { margin-top: 16px; }
