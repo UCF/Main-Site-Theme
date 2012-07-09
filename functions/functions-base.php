@@ -5,7 +5,6 @@
  * 
  ***************************************************************************/
 
-
 /**
  * The Config class provides a set of static properties and methods which store
  * and facilitate configuration of the theme.
@@ -446,9 +445,110 @@ function indent($html, $n){
 /***************************************************************************
  * GENERAL USE FUNCTIONS
  * 
- * Functions intended for front-end use.
+ * Theme-wide general use functions. (Alphabetized)
  * 
  ***************************************************************************/
+
+/**
+ * Walker function to add Bootstrap classes to nav menus using wp_nav_menu()
+ * 
+ * based on https://gist.github.com/1597994
+ **/
+function bootstrap_menus() {
+	class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
+
+			
+			function start_lvl( &$output, $depth ) {
+
+				$indent = str_repeat( "\t", $depth );
+				$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";
+				
+			}
+
+			function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+				
+				$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+
+				$li_attributes = '';
+				$class_names = $value = '';
+
+				$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+				$classes[] = ($args->has_children) ? 'dropdown' : '';
+				$classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
+				$classes[] = 'menu-item-' . $item->ID;
+
+
+				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
+				$class_names = ' class="' . esc_attr( $class_names ) . '"';
+
+				$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
+				$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
+
+				$output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
+
+				$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
+				$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
+				$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
+				$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
+				$attributes .= ($args->has_children) 	    ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
+
+				$item_output = $args->before;
+				$item_output .= '<a'. $attributes .'>';
+				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
+				$item_output .= ($args->has_children) ? ' <b class="caret"></b></a>' : '</a>';
+				$item_output .= $args->after;
+
+				$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+			}
+
+			function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
+				
+				if ( !$element )
+					return;
+				
+				$id_field = $this->db_fields['id'];
+
+				//display this element
+				if ( is_array( $args[0] ) ) 
+					$args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
+				else if ( is_object( $args[0] ) ) 
+					$args[0]->has_children = ! empty( $children_elements[$element->$id_field] ); 
+				$cb_args = array_merge( array(&$output, $element, $depth), $args);
+				call_user_func_array(array(&$this, 'start_el'), $cb_args);
+
+				$id = $element->$id_field;
+
+				// descend only when the depth is right and there are childrens for this element
+				if ( ($max_depth == 0 || $max_depth > $depth+1 ) && isset( $children_elements[$id]) ) {
+
+					foreach( $children_elements[ $id ] as $child ){
+
+						if ( !isset($newlevel) ) {
+							$newlevel = true;
+							//start the child delimiter
+							$cb_args = array_merge( array(&$output, $depth), $args);
+							call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
+						}
+						$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
+					}
+						unset( $children_elements[ $id ] );
+				}
+
+				if ( isset($newlevel) && $newlevel ){
+					//end the child delimiter
+					$cb_args = array_merge( array(&$output, $depth), $args);
+					call_user_func_array(array(&$this, 'end_lvl'), $cb_args);
+				}
+
+				//end this element
+				$cb_args = array_merge( array(&$output, $element, $depth), $args);
+				call_user_func_array(array(&$this, 'end_el'), $cb_args);
+				
+			}
+			
+		}	
+}
+add_action( 'after_setup_theme', 'bootstrap_menus' );
 
 
 /**
@@ -499,6 +599,118 @@ function cleanup($content){
 	return $content;
 }
 
+
+/**
+ * Creates a string of attributes and their values from the key/value defined by
+ * $attr.  The string is suitable for use in html tags.
+ * 
+ * @return string
+ * @author Jared Lang
+ **/
+function create_attribute_string($attr){
+	$attr_string = '';
+	foreach($attr as $key=>$value){
+		$attr_string .= " {$key}='{$value}'";
+	}
+	return $attr_string;
+}
+
+
+/**
+ * Creates an arbitrary html element.  $tag defines what element will be created
+ * such as a p, h1, or div.  $attr is an array defining attributes and their
+ * associated values for the tag created. $content determines what data the tag
+ * wraps.  And $self_close defines whether or not the tag should close like
+ * <tag></tag> (False) or <tag /> (True).
+ *
+ * @return string
+ * @author Jared Lang
+ **/
+function create_html_element($tag, $attr=array(), $content=null, $self_close=True){
+	$attr_str = create_attribute_string($attr);
+	if ($content){
+		$element = "<{$tag}{$attr_str}>{$content}</{$tag}>";
+	}else{
+		if ($self_close){
+			$element = "<{$tag}{$attr_str}/>";
+		}else{
+			$element = "<{$tag}{$attr_str}></{$tag}>";
+		}
+	}
+	
+	return $element;
+}
+
+
+/**
+ * When called, prevents direct loads of the value of $page.
+ **/
+function disallow_direct_load($page){
+	if ($page == basename($_SERVER['SCRIPT_FILENAME'])){
+		die('No');
+	}
+}
+
+
+/**
+ * Given a name will return the custom post type's class name, or null if not
+ * found
+ * 
+ * @return string
+ * @author Jared Lang
+ **/
+function get_custom_post_type($name){
+	$installed = installed_custom_post_types();
+	foreach($installed as $object){
+		if ($object->options('name') == $name){
+			return get_class($object);
+		}
+	}
+	return null;
+}
+
+
+/**
+* Get featured image for a post
+*
+* @return array
+* @author Chris Conover
+**/
+function get_featured_image_url($post) {
+	if(has_post_thumbnail($post) && ($thumbnail_id = get_post_thumbnail_id($post)) && ($image = wp_get_attachment_image_src($thumbnail_id))) {
+		return $image[0];
+	}
+	return False;
+}
+
+
+/**
+ * Get value of Header Menu Styles and return relevant Boostrap CSS classes.
+ * Indended for use as wp_nav_menu()'s menu_class argument.
+ * See http://codex.wordpress.org/Function_Reference/wp_nav_menu
+ *
+ * @author Jo Greybill
+ **/
+function get_header_styles() {
+	$options = get_option(THEME_OPTIONS_NAME);
+	$id = $options['bootstrap_menu_styles'];
+	
+	switch ($id) {
+		case 'nav-tabs':
+			$header_menu_class = 'nav nav-tabs';
+			break;	
+		case 'nav-pills':
+			$header_menu_class = 'nav nav-pills';
+			break;
+		default:
+			$header_menu_class = 'horizontal';
+			break;
+	}
+	return $header_menu_class;
+	
+}
+
+
 /**
  * Return an array of choices representing all the images uploaded to the media
  * gallery.
@@ -531,6 +743,131 @@ function get_image_choices(){
 		$images[$key] = $value;
 	}
 	return $images;
+}
+
+
+/**
+ * Wraps wordpress' native functions, allowing you to get a menu defined by
+ * its location rather than the name given to the menu.  The argument $classes
+ * lets you define a custom class(es) to place on the list generated, $id does
+ * the same but with an id attribute.
+ *
+ * If you require more customization of the output, a final optional argument
+ * $callback lets you specify a function that will generate the output. Any
+ * callback passed should accept one argument, which will be the items for the
+ * menu in question.
+ * 
+ * @return void
+ * @author Jared Lang
+ **/
+function get_menu($name, $classes=null, $id=null, $callback=null){
+	$locations = get_nav_menu_locations();
+	$menu      = @$locations[$name];
+	
+	if (!$menu){
+		return "<div class='error'>No menu location found with name '{$name}'. Set up menus in the <a href='".get_admin_url()."nav-menus.php'>admin's appearance menu.</a></div>";
+	}
+	
+	$items = wp_get_nav_menu_items($menu);
+	
+	if ($callback === null){
+		ob_start();
+		?>
+		<ul<?php if($classes):?> class="<?=$classes?>"<?php endif;?><?php if($id):?> id="<?=$id?>"<?php endif;?>>
+			<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
+			<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
+			<?php endforeach;?>
+		</ul>
+		<?php
+		$menu = ob_get_clean();
+	}else{
+		$menu = call_user_func($callback, $items);
+	}
+	
+	return $menu;
+	
+}
+
+
+/**
+ * Uses the google search appliance to search the current site or the site 
+ * defined by the argument $domain.
+ *
+ * @return array
+ * @author Jared Lang
+ **/
+function get_search_results(
+		$query,
+		$start=null,
+		$per_page=null,
+		$domain=null,
+		$search_url="http://google.cc.ucf.edu/search"
+	){
+	$start     = ($start) ? $start : 0;
+	$per_page  = ($per_page) ? $per_page : 10;
+	$domain    = ($domain) ? $domain : $_SERVER['SERVER_NAME'];
+	$results   = array(
+		'number' => 0,
+		'items'  => array(),
+	);
+	$query     = trim($query);
+	$per_page  = (int)$per_page;
+	$start     = (int)$start;
+	$query     = urlencode($query);
+	$arguments = array(
+		'num'        => $per_page,
+		'start'      => $start,
+		'ie'         => 'UTF-8',
+		'oe'         => 'UTF-8',
+		'client'     => 'default_frontend',
+		'output'     => 'xml',
+		'sitesearch' => $domain,
+		'q'          => $query,
+	);
+	
+	if (strlen($query) > 0){
+		$query_string = http_build_query($arguments);
+		$url          = $search_url.'?'.$query_string;
+		$response     = file_get_contents($url);
+		
+		if ($response){
+			$xml   = simplexml_load_string($response);
+			$items = $xml->RES->R;
+			$total = $xml->RES->M;
+			
+			$temp = array();
+			
+			if ($total){
+				foreach($items as $result){
+					$item            = array();
+					$item['url']     = str_replace('https', 'http', $result->U);
+					$item['title']   = $result->T;
+					$item['rank']    = $result->RK;
+					$item['snippet'] = $result->S;
+					$item['mime']    = $result['MIME'];
+					$temp[]          = $item;
+				}
+				$results['items'] = $temp;
+			}
+			$results['number'] = $total;
+		}
+	}
+	
+	return $results;
+}
+
+
+/**
+ * Returns true if the current request is on the login screen.
+ * 
+ * @return boolean
+ * @author Jared Lang
+ **/
+function is_login(){
+	return in_array($GLOBALS['pagenow'], array(
+			'wp-login.php',
+			'wp-register.php',
+	));
 }
 
 
@@ -570,6 +907,30 @@ function mimetype_to_application($mimetype){
 			break;
 	}
 	return $type;
+}
+
+
+/**
+ * Really get the post type.  A post type of revision will return it's parent
+ * post type.
+ *
+ * @return string
+ * @author Jared Lang
+ **/
+function post_type($post){
+	if (is_int($post)){
+		$post = get_post($post);
+	}
+	
+	# check post_type field
+	$post_type = $post->post_type;
+	
+	if ($post_type === 'revision'){
+		$parent    = (int)$post->post_parent;
+		$post_type = post_type($parent);
+	}
+	
+	return $post_type;
 }
 
 
@@ -687,23 +1048,6 @@ function sc_object_list($attrs, $options = array()){
 
 
 /**
- * Returns true if the current request is on the login screen.
- * 
- * @return boolean
- * @author Jared Lang
- **/
-function is_login(){
-	return in_array($GLOBALS['pagenow'], array(
-			'wp-login.php',
-			'wp-register.php',
-	));
-}
-
-
-
-
-
-/**
  * Sets the default values for any theme options that are not currently stored.
  *
  * @return void
@@ -754,99 +1098,6 @@ add_action('shutdown', '__shutdown__');
 
 
 /**
- * Uses the google search appliance to search the current site or the site 
- * defined by the argument $domain.
- *
- * @return array
- * @author Jared Lang
- **/
-function get_search_results(
-		$query,
-		$start=null,
-		$per_page=null,
-		$domain=null,
-		$search_url="http://google.cc.ucf.edu/search"
-	){
-	$start     = ($start) ? $start : 0;
-	$per_page  = ($per_page) ? $per_page : 10;
-	$domain    = ($domain) ? $domain : $_SERVER['SERVER_NAME'];
-	$results   = array(
-		'number' => 0,
-		'items'  => array(),
-	);
-	$query     = trim($query);
-	$per_page  = (int)$per_page;
-	$start     = (int)$start;
-	$query     = urlencode($query);
-	$arguments = array(
-		'num'        => $per_page,
-		'start'      => $start,
-		'ie'         => 'UTF-8',
-		'oe'         => 'UTF-8',
-		'client'     => 'default_frontend',
-		'output'     => 'xml',
-		'sitesearch' => $domain,
-		'q'          => $query,
-	);
-	
-	if (strlen($query) > 0){
-		$query_string = http_build_query($arguments);
-		$url          = $search_url.'?'.$query_string;
-		$response     = file_get_contents($url);
-		
-		if ($response){
-			$xml   = simplexml_load_string($response);
-			$items = $xml->RES->R;
-			$total = $xml->RES->M;
-			
-			$temp = array();
-			
-			if ($total){
-				foreach($items as $result){
-					$item            = array();
-					$item['url']     = str_replace('https', 'http', $result->U);
-					$item['title']   = $result->T;
-					$item['rank']    = $result->RK;
-					$item['snippet'] = $result->S;
-					$item['mime']    = $result['MIME'];
-					$temp[]          = $item;
-				}
-				$results['items'] = $temp;
-			}
-			$results['number'] = $total;
-		}
-	}
-	
-	return $results;
-}
-
-
-
-/**
- * Really get the post type.  A post type of revision will return it's parent
- * post type.
- *
- * @return string
- * @author Jared Lang
- **/
-function post_type($post){
-	if (is_int($post)){
-		$post = get_post($post);
-	}
-	
-	# check post_type field
-	$post_type = $post->post_type;
-	
-	if ($post_type === 'revision'){
-		$parent    = (int)$post->post_parent;
-		$post_type = post_type($parent);
-	}
-	
-	return $post_type;
-}
-
-
-/**
  * Will return a string $s normalized to a slug value.  The optional argument, 
  * $spaces, allows you to define what spaces and other undesirable characters
  * will be replaced with.  Useful for content that will appear in urls or
@@ -862,265 +1113,16 @@ function slug($s, $spaces='-'){
 }
 
 
-/**
- * Given a name will return the custom post type's class name, or null if not
- * found
+
+
+/***************************************************************************
+ * HEADER AND FOOTER FUNCTIONS
  * 
- * @return string
- * @author Jared Lang
- **/
-function get_custom_post_type($name){
-	$installed = installed_custom_post_types();
-	foreach($installed as $object){
-		if ($object->options('name') == $name){
-			return get_class($object);
-		}
-	}
-	return null;
-}
-
-
-/**
-* Get featured image for a post
-*
-* @return array
-* @author Chris Conover
-**/
-function get_featured_image_url($post) {
-	if(has_post_thumbnail($post) && ($thumbnail_id = get_post_thumbnail_id($post)) && ($image = wp_get_attachment_image_src($thumbnail_id))) {
-		return $image[0];
-	}
-	return False;
-}
-
-
-
-/**
- * Wraps wordpress' native functions, allowing you to get a menu defined by
- * its location rather than the name given to the menu.  The argument $classes
- * lets you define a custom class(es) to place on the list generated, $id does
- * the same but with an id attribute.
- *
- * If you require more customization of the output, a final optional argument
- * $callback lets you specify a function that will generate the output. Any
- * callback passed should accept one argument, which will be the items for the
- * menu in question.
+ * Functions that generate output for the header and footer, including
+ * <meta>, <link>, page titles, body classes and Facebook OpenGraph
+ * stuff.
  * 
- * @return void
- * @author Jared Lang
- **/
-function get_menu($name, $classes=null, $id=null, $callback=null){
-	$locations = get_nav_menu_locations();
-	$menu      = @$locations[$name];
-	
-	if (!$menu){
-		return "<div class='error'>No menu location found with name '{$name}'. Set up menus in the <a href='".get_admin_url()."nav-menus.php'>admin's appearance menu.</a></div>";
-	}
-	
-	$items = wp_get_nav_menu_items($menu);
-	
-	if ($callback === null){
-		ob_start();
-		?>
-		<ul<?php if($classes):?> class="<?=$classes?>"<?php endif;?><?php if($id):?> id="<?=$id?>"<?php endif;?>>
-			<?php foreach($items as $key=>$item): $last = $key == count($items) - 1;?>
-			<li<?php if($last):?> class="last"<?php endif;?>><a href="<?=$item->url?>"><?=$item->title?></a></li>
-			<?php endforeach;?>
-		</ul>
-		<?php
-		$menu = ob_get_clean();
-	}else{
-		$menu = call_user_func($callback, $items);
-	}
-	
-	return $menu;
-	
-}
-
-
-/**
- * Walker function to add Bootstrap classes to nav menus using wp_nav_menu()
- * 
- * based on https://gist.github.com/1597994
- **/
-function bootstrap_menus() {
-	class Bootstrap_Walker_Nav_Menu extends Walker_Nav_Menu {
-
-			
-			function start_lvl( &$output, $depth ) {
-
-				$indent = str_repeat( "\t", $depth );
-				$output	   .= "\n$indent<ul class=\"dropdown-menu\">\n";
-				
-			}
-
-			function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-				
-				$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-
-				$li_attributes = '';
-				$class_names = $value = '';
-
-				$classes = empty( $item->classes ) ? array() : (array) $item->classes;
-				$classes[] = ($args->has_children) ? 'dropdown' : '';
-				$classes[] = ($item->current || $item->current_item_ancestor) ? 'active' : '';
-				$classes[] = 'menu-item-' . $item->ID;
-
-
-				$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
-				$class_names = ' class="' . esc_attr( $class_names ) . '"';
-
-				$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args );
-				$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
-
-				$output .= $indent . '<li' . $id . $value . $class_names . $li_attributes . '>';
-
-				$attributes  = ! empty( $item->attr_title ) ? ' title="'  . esc_attr( $item->attr_title ) .'"' : '';
-				$attributes .= ! empty( $item->target )     ? ' target="' . esc_attr( $item->target     ) .'"' : '';
-				$attributes .= ! empty( $item->xfn )        ? ' rel="'    . esc_attr( $item->xfn        ) .'"' : '';
-				$attributes .= ! empty( $item->url )        ? ' href="'   . esc_attr( $item->url        ) .'"' : '';
-				$attributes .= ($args->has_children) 	    ? ' class="dropdown-toggle" data-toggle="dropdown"' : '';
-
-				$item_output = $args->before;
-				$item_output .= '<a'. $attributes .'>';
-				$item_output .= $args->link_before . apply_filters( 'the_title', $item->title, $item->ID ) . $args->link_after;
-				$item_output .= ($args->has_children) ? ' <b class="caret"></b></a>' : '</a>';
-				$item_output .= $args->after;
-
-				$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
-			}
-
-			function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-				
-				if ( !$element )
-					return;
-				
-				$id_field = $this->db_fields['id'];
-
-				//display this element
-				if ( is_array( $args[0] ) ) 
-					$args[0]['has_children'] = ! empty( $children_elements[$element->$id_field] );
-				else if ( is_object( $args[0] ) ) 
-					$args[0]->has_children = ! empty( $children_elements[$element->$id_field] ); 
-				$cb_args = array_merge( array(&$output, $element, $depth), $args);
-				call_user_func_array(array(&$this, 'start_el'), $cb_args);
-
-				$id = $element->$id_field;
-
-				// descend only when the depth is right and there are childrens for this element
-				if ( ($max_depth == 0 || $max_depth > $depth+1 ) && isset( $children_elements[$id]) ) {
-
-					foreach( $children_elements[ $id ] as $child ){
-
-						if ( !isset($newlevel) ) {
-							$newlevel = true;
-							//start the child delimiter
-							$cb_args = array_merge( array(&$output, $depth), $args);
-							call_user_func_array(array(&$this, 'start_lvl'), $cb_args);
-						}
-						$this->display_element( $child, $children_elements, $max_depth, $depth + 1, $args, $output );
-					}
-						unset( $children_elements[ $id ] );
-				}
-
-				if ( isset($newlevel) && $newlevel ){
-					//end the child delimiter
-					$cb_args = array_merge( array(&$output, $depth), $args);
-					call_user_func_array(array(&$this, 'end_lvl'), $cb_args);
-				}
-
-				//end this element
-				$cb_args = array_merge( array(&$output, $element, $depth), $args);
-				call_user_func_array(array(&$this, 'end_el'), $cb_args);
-				
-			}
-			
-		}	
-}
-add_action( 'after_setup_theme', 'bootstrap_menus' );
-
-
-/**
- * Get value of Header Menu Styles and return relevant Boostrap CSS classes
- *
- * @author Jo Greybill
- **/
-function get_header_styles() {
-	$options = get_option(THEME_OPTIONS_NAME);
-	$id = $options['bootstrap_menu_styles'];
-	
-	switch ($id) {
-		case 'nav-tabs':
-			$header_menu_class = 'nav nav-tabs';
-			break;	
-		case 'nav-pills':
-			$header_menu_class = 'nav nav-pills';
-			break;
-		default:
-			$header_menu_class = 'horizontal';
-			break;
-	}
-	return $header_menu_class;
-	
-}
-
-
-
-/**
- * Creates an arbitrary html element.  $tag defines what element will be created
- * such as a p, h1, or div.  $attr is an array defining attributes and their
- * associated values for the tag created. $content determines what data the tag
- * wraps.  And $self_close defines whether or not the tag should close like
- * <tag></tag> (False) or <tag /> (True).
- *
- * @return string
- * @author Jared Lang
- **/
-function create_html_element($tag, $attr=array(), $content=null, $self_close=True){
-	$attr_str = create_attribute_string($attr);
-	if ($content){
-		$element = "<{$tag}{$attr_str}>{$content}</{$tag}>";
-	}else{
-		if ($self_close){
-			$element = "<{$tag}{$attr_str}/>";
-		}else{
-			$element = "<{$tag}{$attr_str}></{$tag}>";
-		}
-	}
-	
-	return $element;
-}
-
-
-/**
- * Creates a string of attributes and their values from the key/value defined by
- * $attr.  The string is suitable for use in html tags.
- * 
- * @return string
- * @author Jared Lang
- **/
-function create_attribute_string($attr){
-	$attr_string = '';
-	foreach($attr as $key=>$value){
-		$attr_string .= " {$key}='{$value}'";
-	}
-	return $attr_string;
-}
-
-
-/**
- * Footer content
- * 
- * @return string
- * @author Jared Lang
- **/
-function footer_($tabs=2){
-	ob_start();
-	wp_footer();
-	$html = ob_get_clean();
-	return indent($html, $tabs);
-}
-
+ ***************************************************************************/
 
 /**
  * Header content
@@ -1144,6 +1146,20 @@ function header_($tabs=2){
 	print header_title()."\n";
 	
 	return indent(ob_get_clean(), $tabs);
+}
+
+
+/**
+ * Footer content
+ * 
+ * @return string
+ * @author Jared Lang
+ **/
+function footer_($tabs=2){
+	ob_start();
+	wp_footer();
+	$html = ob_get_clean();
+	return indent($html, $tabs);
 }
 
 
@@ -1341,15 +1357,15 @@ function body_classes(){
 }
 
 
-/**
- * When called, prevents direct loads of the value of $page.
- **/
-function disallow_direct_load($page){
-	if ($page == basename($_SERVER['SCRIPT_FILENAME'])){
-		die('No');
-	}
-}
 
+
+/***************************************************************************
+ * REGISTRATION AND INSTALLATION FUNCTIONS
+ * 
+ * Functions that register and install custom post types, taxonomies,
+ * and meta boxes.
+ * 
+ ***************************************************************************/
 
 /**
  * Adding custom post types to the installed array defined in this function
@@ -1441,6 +1457,15 @@ function register_meta_boxes(){
 add_action('do_meta_boxes', 'register_meta_boxes');
 
 
+
+
+/***************************************************************************
+ * POST DATA HANDLERS and META BOX FUNCTIONS
+ * 
+ * Functions that display and save custom post types and their meta data.
+ * 
+ ***************************************************************************/
+
 /**
  * Saves the data for a given post type
  *
@@ -1523,7 +1548,7 @@ function save_default($post_id, $field){
 }
 
 /**
- * Handles saving a custom post as well as it's custom fields and metadata.
+ * Handles saving a custom post as well as its custom fields and metadata.
  *
  * @return void
  * @author Jared Lang
