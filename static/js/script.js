@@ -91,6 +91,13 @@ Generic.removeExtraGformStyles = function($) {
 	$('link#gforms_css-css').remove();
 }
 
+Generic.tableResize = function($) {
+	if ($(window).width() < 767) {
+		$('.table tbody tr td ul').filter(function() { return $.trim($(this).html()) === '' }).parent().remove();
+		$('.table tbody tr td').filter(function() { return $.trim($(this).html()) === '' }).remove();
+	}
+}
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -105,5 +112,6 @@ if (typeof jQuery != 'undefined'){
 		//Generic.resizeSearch($);
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
+		Generic.tableResize($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
