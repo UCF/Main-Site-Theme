@@ -425,6 +425,23 @@ if (DEBUG){
 }
 
 
+/**
+ * Indent contents of $html passed by $n indentations.
+ *
+ * @return string
+ * @author Jared Lang
+ **/
+function indent($html, $n){
+	$tabs = str_repeat("\t", $n);
+	$html = explode("\n", $html);
+	foreach($html as $key=>$line){
+		$html[$key] = $tabs.trim($line);
+	}
+	$html = implode("\n", $html);
+	return $html;
+}
+
+
 
 /***************************************************************************
  * GENERAL USE FUNCTIONS
@@ -1088,23 +1105,6 @@ function create_attribute_string($attr){
 		$attr_string .= " {$key}='{$value}'";
 	}
 	return $attr_string;
-}
-
-
-/**
- * Indent contents of $html passed by $n indentations.
- *
- * @return string
- * @author Jared Lang
- **/
-function indent($html, $n){
-	$tabs = str_repeat("\t", $n);
-	$html = explode("\n", $html);
-	foreach($html as $key=>$line){
-		$html[$key] = $tabs.trim($line);
-	}
-	$html = implode("\n", $html);
-	return $html;
 }
 
 
