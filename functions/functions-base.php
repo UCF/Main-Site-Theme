@@ -685,8 +685,8 @@ function get_featured_image_url($post) {
 
 
 /**
- * Get value of Header Menu Styles and return relevant Boostrap CSS classes.
- * Indended for use as wp_nav_menu()'s menu_class argument.
+ * Get value of Theme Option Header Menu Styles and return relevant Boostrap 
+ * CSS classes.  Indended for use as wp_nav_menu()'s menu_class argument.
  * See http://codex.wordpress.org/Function_Reference/wp_nav_menu
  *
  * @author Jo Greybill
