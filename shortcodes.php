@@ -111,7 +111,7 @@ function sc_person_picture_list($atts) {
 		}
 		
 		?>
-		<div class="span2">
+		<div class="span2 person-picture-wrap">
 			<? if($link) {?><a href="<?=get_permalink($person->ID)?>"><? } ?>
 				<img src="<?=$image_url ? $image_url : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
 				<div class="name"><?=Person::get_name($person)?></div>
