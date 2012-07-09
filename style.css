@@ -70,7 +70,8 @@ select#UCFHBHeaderLinks {
 #header .social.menu.horizontal a{text-indent: -1024px;}
 #header .social.menu.horizontal li:after{content: "";}
 
-#footer-menu{margin-bottom: 1em;}
+#footer-menu{ }
+#footer-widget-wrap { margin-top: 16px; }
 #footer .ucf{}
 #footer .info{position: relative; top: -10px;}
 #footer .info,
