@@ -83,6 +83,14 @@ Generic.defaultMenuSeparators = function($) {
 	$('.menu.horizontal li:last-child').addClass('last');
 };
 
+Generic.removeExtraGformStyles = function($) {
+	// Since we're re-registering the Gravity Form stylesheet
+	// manually and we can't dequeue the stylesheet GF adds
+	// by default, we're removing the reference to the script if
+	// it exists on the page (if CSS hasn't been turned off in GF settings.)
+	$('link#gforms_css-css').remove();
+}
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -96,5 +104,6 @@ if (typeof jQuery != 'undefined'){
 		//Generic.homeDimensions($);
 		//Generic.resizeSearch($);
 		Generic.defaultMenuSeparators($);
+		Generic.removeExtraGformStyles($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
