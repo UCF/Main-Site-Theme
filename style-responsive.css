@@ -37,6 +37,9 @@
 		border-bottom: 1px solid #ddd;
 		border-left: 1px solid #ddd;
 	}
+	.table.table-striped tbody tr td:empty {
+		display: none;
+	}
 	.table.table-striped td, 
 	.table.table-striped td.name, 
 	.table.table-striped td.email, 
