@@ -49,7 +49,8 @@ select#UCFHBHeaderLinks {
 	box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    padding:15px 10px;
+    padding:5px 10px;
+	height: 30px;
 }
 
 /*#home .site-image img{display: block; margin: 0; border: 5px solid #fff;}*/
@@ -60,8 +61,8 @@ select#UCFHBHeaderLinks {
 #home .content .upfont{font-size: 150%;}
 #home .search{background-color: #eee; width: 100%;}
 #home.nodescription .search{margin-top: 1em;}
-#home .search form{padding: 20px;}
 #home .search .search-field{}
+#home .search form{padding: 20px;}
 #home .search #s { *width: 238px; } /* IE7 fix */
 #home .search label{display: block; color: #C14D00; font-size: 16px; font-weight: normal; font-family: "Georgia", "serif";}
 #home .bottom{margin-top: 16px; border-top: none;}
