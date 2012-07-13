@@ -139,13 +139,6 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['gw_verify'],
 		)),
 		new TextField(array(
-			'name'        => 'Yahoo! Site Explorer',
-			'id'          => THEME_OPTIONS_NAME.'[yw_verify]',
-			'description' => 'Example: <em>3236dee82aabe064</em>',
-			'default'     => null,
-			'value'       => $theme_options['yw_verify'],
-		)),
-		new TextField(array(
 			'name'        => 'Google Analytics Account',
 			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
 			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
@@ -424,12 +417,6 @@ if ($theme_options['gw_verify']){
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
 		'content' => htmlentities($theme_options['gw_verify']),
-	);
-}
-if ($theme_options['yw_verify']){
-	Config::$metas[] = array(
-		'name'    => 'y_key',
-		'content' => htmlentities($theme_options['yw_verify']),
 	);
 }
 
