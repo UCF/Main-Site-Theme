@@ -159,20 +159,6 @@ Config::$theme_settings = array(
 			'default'     => null,
 			'value'       => $theme_options['ga_account'],
 		)),
-		new TextField(array(
-			'name'        => 'Chartbeat UID',
-			'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
-			'description' => 'Example: <em>1842</em>',
-			'default'     => null,
-			'value'       => $theme_options['cb_uid'],
-		)),
-		new TextField(array(
-			'name'        => 'Chartbeat Domain',
-			'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
-			'description' => 'Example: <em>some.domain.com</em>',
-			'default'     => null,
-			'value'       => $theme_options['cb_domain'],
-		)),
 	),
 	'Events' => array(
 		new RadioField(array(
