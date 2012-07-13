@@ -146,13 +146,6 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['yw_verify'],
 		)),
 		new TextField(array(
-			'name'        => 'Bing Webmaster Center',
-			'id'          => THEME_OPTIONS_NAME.'[bw_verify]',
-			'description' => 'Example: <em>12C1203B5086AECE94EB3A3D9830B2E</em>',
-			'default'     => null,
-			'value'       => $theme_options['bw_verify'],
-		)),
-		new TextField(array(
 			'name'        => 'Google Analytics Account',
 			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
 			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
@@ -437,12 +430,6 @@ if ($theme_options['yw_verify']){
 	Config::$metas[] = array(
 		'name'    => 'y_key',
 		'content' => htmlentities($theme_options['yw_verify']),
-	);
-}
-if ($theme_options['bw_verify']){
-	Config::$metas[] = array(
-		'name'    => 'msvalidate.01',
-		'content' => htmlentities($theme_options['bw_verify']),
 	);
 }
 
