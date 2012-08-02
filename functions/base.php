@@ -1048,21 +1048,6 @@ function sc_object_list($attrs, $options = array()){
 
 
 /**
- * Enable complete SSL support through WordPress-- fixes issues with media
- * in posts that force https:// instead of http://
- *
- * NOTE: the WordPress wp-config file should also include the following fixes:
- * http://prosauce.org/blog/2010/08/enable-complete-support-for-ssl-on-wordpress/
- **/
-function content_over_ssl($content) {
-  if (isset($_SERVER["HTTPS"]))
-    $content = ereg_replace("http://" . $_SERVER["SERVER_NAME"], "https://" . $_SERVER["SERVER_NAME"], $content);
-  return $content;
-}
-add_filter('the_content', 'content_over_ssl');
-
-
-/**
  * Sets the default values for any theme options that are not currently stored.
  *
  * @return void
