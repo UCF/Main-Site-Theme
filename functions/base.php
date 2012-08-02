@@ -398,12 +398,12 @@ function dump(){
  * @return void
  * @author Jared Lang
  **/
-if (DEBUG){
+if (DEBUG){ /*
 	function debug($string){
 		print "<!-- DEBUG: {$string} -->\n";
-	}
+	} 
 }else{
-	function debug($string){return;}
+	function debug($string){return;} */
 }
 
 
