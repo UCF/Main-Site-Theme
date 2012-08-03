@@ -59,6 +59,12 @@
 	.table.table-striped td.phones ul li {
 		line-height: 16px;
 	}
+	.table.table-bordered {
+		border: 0;
+	}
+	.table.table-bordered tbody tr td {
+		border-left: 0;
+	}
 
 }
 
