@@ -17,8 +17,10 @@
 		</div>
 	
 	</div>
+</div>
 	
-	<div class="container" id="colleges_wrap">
+<div class="contaner-fullwidth" id="colleges_wrap">	
+	<div class="container">
 		<div class="row">
 			<div class="span2">
 				<h3>UCF Colleges</h3>
@@ -32,5 +34,9 @@
 			</div>
 		</div>
 	</div>
+</div>
 
-<?php get_footer();?>
+<div class="container">
+	<div class="row">
+
+		<?php get_footer();?>

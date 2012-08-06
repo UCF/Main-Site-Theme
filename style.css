@@ -134,6 +134,7 @@ body { font-family: Georgia, serif; }
 #header-menu li:after { margin-left: 3px; }
 #header-menu li a { color: #262626; }
 
+#colleges_wrap { width: 100%; background: #FFEFB3; }
 #menu-colleges-menu { list-style-type: none; }
 #menu-colleges-menu li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
 #menu-colleges-menu li:after { content: "|"; }
