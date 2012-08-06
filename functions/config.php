@@ -14,6 +14,7 @@ function __init__(){
 	add_image_size('homepage', 620);
 	add_image_size('homepage-secondary', 540);
 	register_nav_menu('header-menu', __('Header Menu'));
+	register_nav_menu('ucf-colleges', __('UCF Colleges'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
 	register_sidebar(array(
 		'name'          => __('Sidebar'),
