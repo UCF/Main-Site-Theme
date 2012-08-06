@@ -121,10 +121,12 @@ Generic.mobileNavBar = function($) {
 		}
 	}
 	
-	adjust_mobile_nav();
-	$(window).resize(function() {
+	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
 		adjust_mobile_nav();
-	});
+		$(window).resize(function() {
+			adjust_mobile_nav();
+		});
+	}
 }
 
 
