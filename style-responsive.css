@@ -1,3 +1,7 @@
+@media (min-width: 1200px) {
+	#UCFHBHeader div.UCFHBWrapper { width: 1200px; }
+	#UCFHBHeader #UCFHBSearch_and_links { margin-left: 750px; }
+}
 @media (max-width: 979px) {
 	#UCFHBSearch_and_links { display: none; }
 	#UCFHBHeader div.UCFHBWrapper { width: 100%; }

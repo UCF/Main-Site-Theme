@@ -128,18 +128,46 @@ body { font-family: Georgia, serif; }
 
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
 #header h1 { text-indent: -9999px; }
-#header-menu { margin: 15px 0 10px 0; }
+
+#header-nav-wrap { float: right; position: relative; left: -50%; }
+#header-menu { margin: 15px 0 10px 0; position: relative; left: 50%; }
 #header-menu.menu.horizontal { color: #262626; }
 #header-menu.menu.horizontal li { margin-right: 9px; }
 #header-menu li:after { margin-left: 3px; }
+#header-menu li#menu-item-19:after { content: ""; } /* NEED TO CHANGE WITH NAV MENU UPDATES! (Next to last nav item) */
 #header-menu li a { color: #262626; }
+#header-menu li.last a {
+	display: block;
+	padding: 0 15px 2px 15px;
+	-webkit-border-radius: 15px;
+	border-radius: 15px; 
+	-webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+	box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+	font-family: Verdana, Geneva, sans-serif;
+	font-weight: 600;
+	font-size: 11px;
+	letter-spacing: -0.4px;
+	background: #fdcf4a; /* Old browsers */
+	background: -moz-linear-gradient(top, #fdcf4a 0%, #fdcf4a 50%, #f9bf1a 51%, #f9bf1a 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdcf4a), color-stop(50%,#fdcf4a), color-stop(51%,#f9bf1a), color-stop(100%,#f9bf1a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* W3C */ 
+	position: relative;
+	top: 0px;
+}
+#header-menu li.last a:hover { text-decoration: none; }
 
-#colleges_wrap { width: 100%; background: #FFEFB3; }
+#colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
+#colleges_wrap .span2 { width: 100px; }
+#colleges_wrap h3 { font-family: Verdana, Geneva, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
 #menu-colleges-menu { list-style-type: none; }
 #menu-colleges-menu li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
 #menu-colleges-menu li:after { content: "|"; }
 #menu-colleges-menu li a { font-size: 11px; color: #262626; }
 
+#footer { border-top: 0; margin: 20px 0; }
 #footer-navwrap { float: right; position: relative; left: -50%; }
 #footer-menu { position: relative; left: 50%; }
 #footer-menu li { margin-right: 8px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 0.8px; }
