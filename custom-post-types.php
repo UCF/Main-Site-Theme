@@ -666,7 +666,7 @@ class Slider extends CustomPostType {
 		$taxonomies     = '';
 	
 	public function fields(){
-		$prefix = $this->options('name').'_';
+		$prefix = 'ss_';
 		$fields = array(
 			// Basic:
 			array(
