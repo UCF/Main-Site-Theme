@@ -128,4 +128,81 @@ function sc_person_picture_list($atts) {
 }
 add_shortcode('person-picture-list', 'sc_person_picture_list');
 
+
+
+/* -------------------------------------------------- */
+/*	Slider
+/*  stolen from SmartStart theme
+/* -------------------------------------------------- */
+
+	function ss_framework_slider_sc( $atts, $content = null ) {
+		
+		extract( shortcode_atts( array(
+			'id' => ''
+			), $atts ) );
+
+		global $post;
+
+		$args = array('name'           => esc_attr( $id ),
+					  'post_type'      => 'slider',
+					  'posts_per_page' => '1'
+				  );
+
+		query_posts( $args );
+
+		if( have_posts() ) while ( have_posts() ) : the_post();
+
+			$output = '<section id="ss-' . $post->post_name . '" class="ss-slider">';
+
+				$slides = get_post_meta( $post->ID, 'ss_slider_slides' );
+
+				if( !$slides || !$slides[0] )
+					return;
+
+				foreach ( $slides[0] as $slide ) :
+
+					$output .= '<article class="slide">';
+
+						if( $slide['slide-link-url'] )
+							$output .= '<a href="' . $slide['slide-link-url'] . '" class="' . $slide['slide-link-lightbox'] . '">';
+
+						$output .= '<img src="' . $slide['slide-img-src'] . '" alt="' . $post->post_title . '" class="slide-bg-image" />';
+						
+						$output .= '<div class="slide-button ' . ( $slide['slide-button-type'] ? $slide['slide-button-type'] : null ) . '">';
+
+							if( $slide['slide-button-dropcap'] && $slide['slide-button-type'] != 'image' )
+								$output .= '<span class="dropcap">' . $slide['slide-button-dropcap'] . '</span>';
+
+							if( $slide['slide-button-title'] && $slide['slide-button-type'] != 'image' )
+								$output .= '<h5>' . $slide['slide-button-title'] . '</h5>';
+
+							if( $slide['slide-button-description'] && $slide['slide-button-type'] != 'image' )
+								$output .= '<span class="description">' . $slide['slide-button-description'] . '</span>';
+							
+							if( $slide['slide-button-img-src'] && $slide['slide-button-type'] == 'image' )
+								$output .= '<img src="' . $slide['slide-button-img-src'] . '" alt="' . $post->post_title . '" />';
+
+						$output .= '</div>';
+
+						if( $slide['slide-link-url'] )
+							$output .= '</a>';
+
+						if( isset( $slide['slide-content'] ) )
+							$output .= '<div class="slide-content">' . do_shortcode( $slide['slide-content'] ) . '</div>';
+
+					$output .= '</article><!-- end .slide -->';
+
+				endforeach;
+
+			$output .= '</section><!-- end .ss-slider -->';
+
+		endwhile;
+
+		wp_reset_query();
+
+		return $output;
+
+	}
+	add_shortcode('slider', 'ss_framework_slider_sc');
+
 ?>
