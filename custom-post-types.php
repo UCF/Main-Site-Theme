@@ -668,181 +668,50 @@ class Slider extends CustomPostType {
 	public function fields(){
 		$prefix = 'ss_';
 		$fields = array(
-			// Basic:
 			array(
-				'name'    => __('Transition type for the animation'),
-				'id'      => $prefix . 'slider_transition',
-				'type'    => 'select',
-				'std'     => 'random',
-				'desc'    => '',
+				'name' => 'Type of Slider Content',
+				'desc' => 'Select what type of content will go in the slide.',
+				'id' => $slider_prefix . 'type_of_content',
+				'type' => 'radio',
 				'options' => array(
-					'def'                 => 'def',
-					'fade'                => 'fade',
-					'seqFade'             => 'seqFade',
-					'horizontalSlide'     => 'horizontalSlide',
-					'seqHorizontalSlide'  => 'seqHorizontalSlide',
-					'verticalSlide'       => 'verticalSlide',
-					'seqVerticalSlide'    => 'seqVerticalSlide',
-					'verticalSlideAlt'    => 'verticalSlideAlt',
-					'seqVerticalSlideAlt' => 'seqVerticalSlideAlt',
-					'random'              => 'random'
-				)
-			),	
-			array(
-				'name' => __('Speed of the animation transition'),
-				'id'   => $prefix . 'slider_speed',
-				'type' => 'text',
-				'std'  => '400',
-				'desc' => ''
+					array('name' => 'Image', 'value' => 'image'),
+					array('name' => 'Video', 'value' => 'video')
+				),
 			),
 			array(
-				'name' => __('Time between slide transitions'),
-				'id'   => $prefix . 'slider_autoplay',
-				'type' => 'text',
-				'std'  => '3000',
-				'desc' => __('0 to disable autoplay.')
+				'name' => 'Slider Image',
+				'desc' => 'Upload slider image here.',
+				'id' => $slider_prefix . 'slider_image',
+				'type' => 'file',
 			),
 			array(
-				'name' => __('Interval between each slide\'s animation'),
-				'id'   => $prefix . 'slider_seq_factor',
-				'type' => 'text',
-				'std'  => '100',
-				'desc' => __('Used for seqFade, seqHorizontalSlide, seqVerticalSlide &amp; seqVerticalSlideAlt.')
+				'name' => 'Select box',
+				'id' => $slider_prefix . 'select',
+				'type' => 'select',
+				'options' => array('Option 1', 'Option 2', 'Option 3')
 			),
 			array(
-				'name' => __('First slide to be displayed'),
-				'id'   => $prefix . 'slider_first_slide',
-				'type' => 'text',
-				'std'  => '0',
-				'desc' => __('Zero-based index.')
-			),
-			// Advanced:
-			array(
-				'name'    => __('Easing type for the animation'),
-				'id'      => $prefix . 'slider_easing',
-				'type'    => 'select',
-				'std'     => 'easeInOutExpo',
-				'desc'    => '',
+				'name' => 'Radio',
+				'id' => $slider_prefix . 'radio',
+				'type' => 'radio',
 				'options' => array(
-					'linear'           => 'linear',
-					'swing'            => 'swing',
-					'jswing'           => 'jswing',
-					'easeInQuad'       => 'easeInQuad',
-					'easeOutQuad'      => 'easeOutQuad',
-					'easeInOutQuad'    => 'easeInOutQuad',
-					'easeInCubic'      => 'easeInCubic',
-					'easeOutCubic'     => 'easeOutCubic',
-					'easeInOutCubic'   => 'easeInOutCubic',
-					'easeInQuart'      => 'easeInQuart',
-					'easeOutQuart'     => 'easeOutQuart',
-					'easeInOutQuart'   => 'easeInOutQuart',
-					'easeInQuint'      => 'easeInQuint',
-					'easeOutQuint'     => 'easeOutQuint',
-					'easeInOutQuint'   => 'easeInOutQuint',
-					'easeInSine'       => 'easeInSine',
-					'easeOutSine'      => 'easeOutSine',
-					'easeInOutSine'    => 'easeInOutSine',
-					'easeInExpo'       => 'easeInExpo',
-					'easeOutExpo'      => 'easeOutExpo',
-					'easeInOutExpo'    => 'easeInOutExpo',
-					'easeInCirc'       => 'easeInCirc',
-					'easeOutCirc'      => 'easeOutCirc',
-					'easeInOutCirc'    => 'easeInOutCirc',
-					'easeInElastic'    => 'easeInElastic',
-					'easeOutElastic'   => 'easeOutElastic',
-					'easeInOutElastic' => 'easeInOutElastic',
-					'easeInBack'       => 'easeInBack',
-					'easeOutBack'      => 'easeOutBack',
-					'easeInOutBack'    => 'easeInOutBack',
-					'easeInBounce'     => 'easeInBounce',
-					'easeOutBounce'    => 'easeOutBounce',
-					'easeInOutBounce'  => 'easeInOutBounce'
+					array('name' => 'Name 1', 'value' => 'Value 1'),
+					array('name' => 'Name 2', 'value' => 'Value 2')
 				)
 			),
 			array(
-				'name' => __('Pause autoplay on mouseover'),
-				'id'   => $prefix . 'slider_pause_on_hover',
-				'type' => 'checkbox',
-				'std'  => '1',
-				'desc' => ''
-			),
-			array(
-				'name' => __('Stop autoplay on click'),
-				'id'   => $prefix . 'slider_stop_on_click',
-				'type' => 'checkbox',
-				'std'  => '0',
-				'desc' => ''
-			),
-			array(
-				'name'    => __('Content box position'),
-				'id'      => $prefix . 'slider_content_position',
-				'type'    => 'select',
-				'std'     => 'def',
-				'desc'    => '',
-				'options' => array(
-					''     => 'default',
-					'center' => 'center',
-					'bottom' => 'bottom'
-				)
-			),
-			array(
-				'name' => __('Speed of the content box transition'),
-				'id'   => $prefix . 'slider_content_speed',
-				'type' => 'text',
-				'std'  => '450',
-				'desc' => ''
-			),
-			array(
-				'name' => __('Show content box only on mouseover'),
-				'id'   => $prefix . 'slider_show_content_onhover',
-				'type' => 'checkbox',
-				'std'  => '1',
-				'desc' => ''
-			),
-			array(
-				'name' => __('Hide content box'),
-				'id'   => $prefix . 'slider_hide_content',
-				'type' => 'checkbox',
-				'std'  => '0',
-				'desc' => ''
-			),
-			array(
-				'name' => __('Hide bottom navigation buttons'),
-				'id'   => $prefix . 'slider_hide_bottom_buttons',
-				'type' => 'checkbox',
-				'std'  => '0',
-				'desc' => ''
-			),
-			array(
-				'name' => __('Slider container height'),
-				'id'   => $prefix . 'slider_height',
-				'type' => 'text',
-				'std'  => '380',
-				'desc' => ''
-			),
-			array(
-				'name' => __('Slider container width'),
-				'id'   => $prefix . 'slider_width',
-				'type' => 'text',
-				'std'  => '940',
-				'desc' => ''
+				'name' => 'Checkbox',
+				'id' => $slider_prefix . 'checkbox',
+				'type' => 'checkbox'
 			)
 		);
 		return $fields;
 	}
 	
 	public function metabox(){
-		if ($this->options('use_metabox')){
-			return array(
-				'id'       => $this->options('name').'_metabox',
-				'title'    => __($this->options('singular_name').' Display Options'),
-				'page'     => $this->options('name'),
-				'context'  => 'side',
-				'priority' => 'default',
-				'fields'   => $this->fields(),
-			);
-		}
-		return null;
+		$metabox = parent::metabox();
+		$metabox['title'] = 'Slide';
+		return $metabox;
 	}
 }
 ?>
