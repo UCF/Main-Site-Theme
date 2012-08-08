@@ -117,7 +117,8 @@ Config::$custom_post_types = array(
 	'Document',
 	'Publication',
 	'Page',
-	'Person'
+	'Person',
+	'Slider',
 );
 
 Config::$custom_taxonomies = array(
@@ -408,6 +409,7 @@ Config::$scripts = array(
 	THEME_STATIC_URL.'/bootstrap/build/js/bootstrap.js',
 	//THEME_JS_URL.'/jquery-extras.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
+	THEME_JS_URL.'/jquery.smartStartSlider.js',
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
 

@@ -639,4 +639,210 @@ class Person extends CustomPostType
 	return ob_get_clean();
 	}
 } // END class 
+
+
+
+/**
+ * Describes a set of centerpiece slides
+ *
+ * @author Jo Greybill
+ * borrowed from SmartStart theme
+ **/
+
+class Slider extends CustomPostType {
+	public 
+		$name           = 'slider',
+		$plural_name    = 'Sliders',
+		$singular_name  = 'Slider',
+		$add_new_item   = 'Add New Slider',
+		$edit_item      = 'Edit Slider',
+		$new_item       = 'New Slider',
+		$public         = True,
+		$use_editor     = False,
+		$use_thumbnails = False,
+		$use_order      = False,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies     = '';
+	
+	public function fields(){
+		$prefix = $this->options('name').'_';
+		$fields = array(
+			// Basic:
+			array(
+				'name'    => __('Transition type for the animation'),
+				'id'      => $prefix . 'slider_transition',
+				'type'    => 'select',
+				'std'     => 'random',
+				'desc'    => '',
+				'options' => array(
+					'def'                 => 'def',
+					'fade'                => 'fade',
+					'seqFade'             => 'seqFade',
+					'horizontalSlide'     => 'horizontalSlide',
+					'seqHorizontalSlide'  => 'seqHorizontalSlide',
+					'verticalSlide'       => 'verticalSlide',
+					'seqVerticalSlide'    => 'seqVerticalSlide',
+					'verticalSlideAlt'    => 'verticalSlideAlt',
+					'seqVerticalSlideAlt' => 'seqVerticalSlideAlt',
+					'random'              => 'random'
+				)
+			),	
+			array(
+				'name' => __('Speed of the animation transition'),
+				'id'   => $prefix . 'slider_speed',
+				'type' => 'text',
+				'std'  => '400',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Time between slide transitions'),
+				'id'   => $prefix . 'slider_autoplay',
+				'type' => 'text',
+				'std'  => '3000',
+				'desc' => __('0 to disable autoplay.')
+			),
+			array(
+				'name' => __('Interval between each slide\'s animation'),
+				'id'   => $prefix . 'slider_seq_factor',
+				'type' => 'text',
+				'std'  => '100',
+				'desc' => __('Used for seqFade, seqHorizontalSlide, seqVerticalSlide &amp; seqVerticalSlideAlt.')
+			),
+			array(
+				'name' => __('First slide to be displayed'),
+				'id'   => $prefix . 'slider_first_slide',
+				'type' => 'text',
+				'std'  => '0',
+				'desc' => __('Zero-based index.')
+			),
+			// Advanced:
+			array(
+				'name'    => __('Easing type for the animation'),
+				'id'      => $prefix . 'slider_easing',
+				'type'    => 'select',
+				'std'     => 'easeInOutExpo',
+				'desc'    => '',
+				'options' => array(
+					'linear'           => 'linear',
+					'swing'            => 'swing',
+					'jswing'           => 'jswing',
+					'easeInQuad'       => 'easeInQuad',
+					'easeOutQuad'      => 'easeOutQuad',
+					'easeInOutQuad'    => 'easeInOutQuad',
+					'easeInCubic'      => 'easeInCubic',
+					'easeOutCubic'     => 'easeOutCubic',
+					'easeInOutCubic'   => 'easeInOutCubic',
+					'easeInQuart'      => 'easeInQuart',
+					'easeOutQuart'     => 'easeOutQuart',
+					'easeInOutQuart'   => 'easeInOutQuart',
+					'easeInQuint'      => 'easeInQuint',
+					'easeOutQuint'     => 'easeOutQuint',
+					'easeInOutQuint'   => 'easeInOutQuint',
+					'easeInSine'       => 'easeInSine',
+					'easeOutSine'      => 'easeOutSine',
+					'easeInOutSine'    => 'easeInOutSine',
+					'easeInExpo'       => 'easeInExpo',
+					'easeOutExpo'      => 'easeOutExpo',
+					'easeInOutExpo'    => 'easeInOutExpo',
+					'easeInCirc'       => 'easeInCirc',
+					'easeOutCirc'      => 'easeOutCirc',
+					'easeInOutCirc'    => 'easeInOutCirc',
+					'easeInElastic'    => 'easeInElastic',
+					'easeOutElastic'   => 'easeOutElastic',
+					'easeInOutElastic' => 'easeInOutElastic',
+					'easeInBack'       => 'easeInBack',
+					'easeOutBack'      => 'easeOutBack',
+					'easeInOutBack'    => 'easeInOutBack',
+					'easeInBounce'     => 'easeInBounce',
+					'easeOutBounce'    => 'easeOutBounce',
+					'easeInOutBounce'  => 'easeInOutBounce'
+				)
+			),
+			array(
+				'name' => __('Pause autoplay on mouseover'),
+				'id'   => $prefix . 'slider_pause_on_hover',
+				'type' => 'checkbox',
+				'std'  => '1',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Stop autoplay on click'),
+				'id'   => $prefix . 'slider_stop_on_click',
+				'type' => 'checkbox',
+				'std'  => '0',
+				'desc' => ''
+			),
+			array(
+				'name'    => __('Content box position'),
+				'id'      => $prefix . 'slider_content_position',
+				'type'    => 'select',
+				'std'     => 'def',
+				'desc'    => '',
+				'options' => array(
+					''     => 'default',
+					'center' => 'center',
+					'bottom' => 'bottom'
+				)
+			),
+			array(
+				'name' => __('Speed of the content box transition'),
+				'id'   => $prefix . 'slider_content_speed',
+				'type' => 'text',
+				'std'  => '450',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Show content box only on mouseover'),
+				'id'   => $prefix . 'slider_show_content_onhover',
+				'type' => 'checkbox',
+				'std'  => '1',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Hide content box'),
+				'id'   => $prefix . 'slider_hide_content',
+				'type' => 'checkbox',
+				'std'  => '0',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Hide bottom navigation buttons'),
+				'id'   => $prefix . 'slider_hide_bottom_buttons',
+				'type' => 'checkbox',
+				'std'  => '0',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Slider container height'),
+				'id'   => $prefix . 'slider_height',
+				'type' => 'text',
+				'std'  => '380',
+				'desc' => ''
+			),
+			array(
+				'name' => __('Slider container width'),
+				'id'   => $prefix . 'slider_width',
+				'type' => 'text',
+				'std'  => '940',
+				'desc' => ''
+			)
+		);
+		return $fields;
+	}
+	
+	public function metabox(){
+		if ($this->options('use_metabox')){
+			return array(
+				'id'       => $this->options('name').'_metabox',
+				'title'    => __($this->options('singular_name').' Display Options'),
+				'page'     => $this->options('name'),
+				'context'  => 'side',
+				'priority' => 'default',
+				'fields'   => $this->fields(),
+			);
+		}
+		return null;
+	}
+}
 ?>

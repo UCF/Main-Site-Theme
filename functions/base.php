@@ -1595,7 +1595,7 @@ function _show_meta_boxes($post, $meta_box){
 	?>
 	<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
 	<table class="form-table">
-	<?php foreach($meta_box['fields'] as $field):
+	<?php foreach($meta_box['fields'] as $field):	
 		$current_value = get_post_meta($post->ID, $field['id'], true);?>
 		<tr>
 			<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
