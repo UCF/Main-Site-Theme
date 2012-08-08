@@ -673,36 +673,53 @@ class Slider extends CustomPostType {
 				'desc' => 'Select what type of content will go in the slide.',
 				'id' => $slider_prefix . 'type_of_content',
 				'type' => 'radio',
-				'options' => array(
-					array('name' => 'Image', 'value' => 'image'),
-					array('name' => 'Video', 'value' => 'video')
-				),
+				'options' => array('Image' => 'image', 'Video' => 'video'),
 			),
 			array(
-				'name' => 'Slider Image',
-				'desc' => 'Upload slider image here.',
-				'id' => $slider_prefix . 'slider_image',
+				'name' => 'Slide Image',
+				'id' => $slider_prefix . 'slide_image',
 				'type' => 'file',
 			),
 			array(
-				'name' => 'Select box',
-				'id' => $slider_prefix . 'select',
-				'type' => 'select',
-				'options' => array('Option 1', 'Option 2', 'Option 3')
+				'name' => 'Slide Video',
+				'desc' => 'Copy and paste your video embed code here.',
+				'id' => $slider_prefix . 'slide_video',
+				'type' => 'textarea',
 			),
 			array(
-				'name' => 'Radio',
-				'id' => $slider_prefix . 'radio',
+				'name' => 'Button Type',
+				'id' => $slider_prefix . 'button_type',
 				'type' => 'radio',
-				'options' => array(
-					array('name' => 'Name 1', 'value' => 'Value 1'),
-					array('name' => 'Name 2', 'value' => 'Value 2')
-				)
+				'options' => array('Text' => 'text', 'Image' => 'image'),
 			),
 			array(
-				'name' => 'Checkbox',
-				'id' => $slider_prefix . 'checkbox',
-				'type' => 'checkbox'
+				'name' => 'Dropcap',
+				'desc' => '(Optional)',
+				'id' => $slider_prefix . 'button_dropcap',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Title',
+				'id' => $slider_prefix . 'button_title',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Description',
+				'desc' => '(Optional)',
+				'id' => $slider_prefix . 'button_desc',
+				'type' => 'text'
+			),
+			array(
+				'name' => 'Slide Content',
+				'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
+				'id' => $slider_prefix . 'slide_content',
+				'type' => 'textarea',
+			),
+			array(
+				'name' => 'Slide Links To',
+				'desc' => '(Optional) Link slide image to an external URL.  Opens in a new tab.',
+				'id' => $slider_prefix . 'slide_links_to',
+				'type' => 'text',
 			)
 		);
 		return $fields;
