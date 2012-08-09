@@ -4,7 +4,7 @@
 	<div class="row page-content nodescription" id="home" data-template="home-nodescription">
 		
 		<div class="span12">
-			<p>Slideshow will go here</p>
+			<p><?php do_shortcode('[slider id="something"]'); ?></p>
 		</div>
 		<div class="span4" id="home_leftcol">	
 			<p>Spotlight column --  make this a widget?</p>

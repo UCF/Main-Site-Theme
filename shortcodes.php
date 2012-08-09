@@ -151,10 +151,11 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 		query_posts( $args );
 
 		if( have_posts() ) while ( have_posts() ) : the_post();
-
 			$output = '<section id="ss-' . $post->post_name . '" class="ss-slider">';
 
 				$slides = get_post_meta( $post->ID, 'ss_slider_slides' );
+
+				$output .= var_dump(get_post_custom($post->ID));
 
 				if( !$slides || !$slides[0] )
 					return;
