@@ -10,7 +10,6 @@ require_once('shortcodes.php');         		# Per theme shortcodes
 //Add theme-specific functions here.
 
 
-
 /** 
  * Slider post type customizations 
  * Stolen from SmartStart theme

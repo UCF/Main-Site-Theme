@@ -673,8 +673,8 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')){
 			$single_slide_content =
 				array(
-					'id'       => $this->options('name').'_metabox',
-					'title'    => __($this->options('singular_name').' Fields'),
+					'id'       => 'slider-slide-content',
+					'title'    => 'Slide',
 					'page'     => 'slider',
 					'context'  => 'normal',
 					'priority' => 'high',
@@ -734,7 +734,7 @@ class Slider extends CustomPostType {
 						)
 					),
 				);
-				$single_slide_count = 	
+			$single_slide_count = 	
 				// Single Slide Count:
 				array(
 					'id'       => 'slider-slides-settings-count',
@@ -752,7 +752,7 @@ class Slider extends CustomPostType {
 						)
 					), // fields
 				);
-				$basic_slide_options = 
+			$basic_slide_options = 
 				// Basic Slider Display Options:
 				array(
 					'id' => 'slider-slides-settings-basic',
@@ -810,7 +810,7 @@ class Slider extends CustomPostType {
 						),		
 					), // fields
 				);
-				$advanced_slide_options = 	
+			$advanced_slide_options = 	
 				// Advanced Slider Display Options:
 				array(
 					'id' => 'slider-slides-settings-advanced',
@@ -931,244 +931,178 @@ class Slider extends CustomPostType {
 						)
 					), // fields
 				);
-			$all_metaboxes = array($single_slide_content, $single_slide_count, $basic_slide_options, $advanced_slide_options);
+			$all_metaboxes = array('slider-slide-content' => $single_slide_content, 'slider-slides-settings-count' => $single_slide_count, 'slider-slides-settings-basic' => $basic_slide_options, 'slider-slides-settings-advanced' => $advanced_slide_options);
 			return $all_metaboxes;
 		}
 		return null;
+	}	
+	
+	
+	
+	/**
+	  * Show meta box fields for Slider post type
+	  * Copied from _show_meta_boxes (functions/base.php)
+	 **/
+	public static function display_meta_fields($post, $field) { ?>
+		<tr>
+					<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
+					<td>
+					<?php if($field['desc']):?>
+						<div class="description">
+							<?=$field['desc']?>
+						</div>
+					<?php endif;?>
+					
+					<?php switch ($field['type']): 
+						case 'text':?>
+						<input type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : $field['std']?>" />
+					
+					<?php break; case 'textarea':?>
+						<textarea name="<?=$field['id']?>" id="<?=$field['id']?>" cols="60" rows="4"><?=($current_value) ? htmlentities($current_value) : $field['std']?></textarea>
+					
+					<?php break; case 'select':?>
+						<select name="<?=$field['id']?>" id="<?=$field['id']?>">
+							<option value=""><?=($field['default']) ? $field['default'] : '--'?></option>
+						<?php foreach ($field['options'] as $k=>$v):?>
+							<option <?=($current_value == $v) ? ' selected="selected"' : ''?> value="<?=$v?>"><?=$k?></option>
+						<?php endforeach;?>
+						</select>
+					
+					<?php break; case 'radio':?>
+						<?php foreach ($field['options'] as $k=>$v):?>
+						<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
+						<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
+						<?php endforeach;?>
+					
+					<?php break; case 'checkbox':?>
+						<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
+					
+					<?php break; case 'file':?>
+						<?php
+							$document_id = get_post_meta($post->ID, $field['id'], True);
+							if ($document_id){
+								$document = get_post($document_id);
+								$url      = wp_get_attachment_url($document->ID);
+							}else{
+								$document = null;
+							}
+						?>
+						<?php if($document):?>
+						<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
+						<?php endif;?>
+						<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
+					
+					<?php break; case 'help':?><!-- Do nothing for help -->
+					<?php break; default:?>
+						<p class="error">Don't know how to handle field of type '<?=$field['type']?>'</p>
+					<?php break; endswitch;?>
+					<td>
+				</tr>
+	<?php			
 	}
+
+	/**
+	 * Individual functions for showing metabox content
+	 *
+	 **/
+	
+	public function show_meta_box_slide_content($post) {
+		if ($this->options('use_metabox')) {
+			$meta_box = $this->metabox();
+		}
+		$meta_box = $meta_box['slider-slide-content']; ?>
+		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		<table class="form-table">
+		<?php
+			foreach($meta_box['fields'] as $field):
+				$current_value = get_post_meta($post->ID, $field['id'], true);
+				$this->display_meta_fields($post, $field);
+			endforeach;
+		print "</table>";
+	}
+	
+	public function show_meta_box_slide_count($post) {
+		if ($this->options('use_metabox')) {
+			$meta_box = $this->metabox();
+		}
+		$meta_box = $meta_box['slider-slides-settings-count']; ?>
+		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		<table class="form-table">
+		<?php
+			foreach($meta_box['fields'] as $field):
+				$current_value = get_post_meta($post->ID, $field['id'], true);
+				$this->display_meta_fields($post, $field);
+			endforeach;
+		print "</table>";
+	}
+	
+	public function show_meta_box_slide_basic($post) {
+		if ($this->options('use_metabox')) {
+			$meta_box = $this->metabox();
+		}
+		$meta_box = $meta_box['slider-slides-settings-basic']; ?>
+		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		<table class="form-table">
+		<?php
+			foreach($meta_box['fields'] as $field):
+				$current_value = get_post_meta($post->ID, $field['id'], true);
+				$this->display_meta_fields($post, $field);
+			endforeach;
+		print "</table>";
+	}
+	
+	public function show_meta_box_slide_advanced($post) {
+		if ($this->options('use_metabox')) {
+			$meta_box = $this->metabox();
+		}
+		$meta_box = $meta_box['slider-slides-settings-advanced']; ?>
+		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		<table class="form-table">
+		<?php
+			foreach($meta_box['fields'] as $field):
+				$current_value = get_post_meta($post->ID, $field['id'], true);
+				$this->display_meta_fields($post, $field);
+			endforeach;
+		print "</table>";
+	}
+	
+	
 	
 	public function register_metaboxes(){
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
-			$metabox_count = count($metabox);
+			//$metabox_count = count($metabox);
 			//var_dump($metabox[1]['id']); /* Correct notation! */
-			for ($i = 0; $i < $metabox_count; $i++) {
+			foreach ($metabox as $key => $single_metabox) {
+				switch ($key) {
+					case 'slider-slide-content':
+						$metabox_view_function = 'show_meta_box_slide_content';
+						break;
+					case 'slider-slides-settings-count':
+						$metabox_view_function = 'show_meta_box_slide_count';
+						break;
+					case 'slider-slides-settings-basic':
+						$metabox_view_function = 'show_meta_box_slide_basic';
+						break;
+					case 'slider-slides-settings-advanced':
+						$metabox_view_function = 'show_meta_box_slide_advanced';
+						break;
+					default:
+						break;
+				}
 				add_meta_box(
-					$metabox[$i]['id'],
-					$metabox[$i]['title'],
-					'show_meta_boxes',
-					$metabox[$i]['page'],
-					$metabox[$i]['context'],
-					$metabox[$i]['priority']
+					$single_metabox['id'],
+					$single_metabox['title'],
+					array( &$this, $metabox_view_function ),
+					$single_metabox['page'],
+					$single_metabox['context'],
+					$single_metabox['priority']
 				);
 			}			
 		}
 	}
 	
-}
-
-
-
-
-
-// Add the boxes:
-/*
-function add_slider_extra_metaboxes() {
-	global $slider_metabox_basic, $slider_metabox_advanced, $slider_metabox_count;
-	add_meta_box(
-		$slider_metabox_count['id'],
-		$slider_metabox_count['title'], 
-		'show_slider_count_metabox', 
-		$slider_metabox_count['page'], 
-		$slider_metabox_count['context'], 
-		$slider_metabox_count['priority']
-	);
-	add_meta_box(
-		$slider_metabox_basic['id'],
-		$slider_metabox_basic['title'], 
-		'show_slider_basic_metabox', 
-		$slider_metabox_basic['page'], 
-		$slider_metabox_basic['context'], 
-		$slider_metabox_basic['priority']
-	);
-	add_meta_box(
-		$slider_metabox_advanced['id'],
-		$slider_metabox_advanced['title'], 
-		'show_slider_advanced_metabox', 
-		$slider_metabox_advanced['page'], 
-		$slider_metabox_advanced['context'], 
-		$slider_metabox_advanced['priority']
-	);
-}
-add_action('add_meta_boxes', 'add_slider_extra_metaboxes');
-*/
-
-/*function show_slider_count_metabox() {
-	global $slider_metabox_count, $post;
-	 // Use nonce for verification
-	echo '<input type="hidden" name="slider_metabox_count_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
-	echo '<table class="form-table">';
-	foreach ($slider_metabox_count['fields'] as $field) {
-		// get current post meta data
-		$meta = get_post_meta($post->ID, $field['id'], true);
-		echo '<tr>',
-		'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
-		'<td>';
-		switch ($field['type']) {
-			case 'text':
-				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
-				break;
-			case 'textarea':
-				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
-				break;
-			case 'select':
-				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
-				foreach ($field['options'] as $option) {
-					echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
-				}
-				echo '</select>';
-				break;
-			case 'radio':
-				foreach ($field['options'] as $option) {
-					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
-				}
-				break;
-			case 'checkbox':
-				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-				break;
-		}
-		echo '</td><td>',
-		'</td></tr>';
-	}
-	echo '</table>';
-}*/
-
-
-// Show the basic options box's content:
-/*function show_slider_basic_metabox() {
-	global $slider_metabox_basic, $post;
 	
-	 // Use nonce for verification
-	echo '<input type="hidden" name="slider_metabox_basic_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
-	echo '<table class="form-table">';
-	foreach ($slider_metabox_basic['fields'] as $field) {
-		// get current post meta data
-		$meta = get_post_meta($post->ID, $field['id'], true);
-		echo '<tr>',
-		'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
-		'<td>';
-		switch ($field['type']) {
-			case 'text':
-				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
-				break;
-			case 'textarea':
-				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
-				break;
-			case 'select':
-				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
-				foreach ($field['options'] as $option) {
-					echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
-				}
-				echo '</select>';
-				break;
-			case 'radio':
-				foreach ($field['options'] as $option) {
-					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
-				}
-				break;
-			case 'checkbox':
-				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-				break;
-		}
-		echo '</td><td>',
-		'</td></tr>';
-	}
-	echo '</table>';
 }
 
-// Show the advanced options box's content:
-function show_slider_advanced_metabox() {
-	global $slider_metabox_advanced, $post;
-	
-	 // Use nonce for verification
-	echo '<input type="hidden" name="slider_metabox_advanced_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
-	echo '<table class="form-table">';
-	foreach ($slider_metabox_advanced['fields'] as $field) {
-		// get current post meta data
-		$meta = get_post_meta($post->ID, $field['id'], true);
-		echo '<tr>',
-		'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
-		'<td>';
-		switch ($field['type']) {
-			case 'text':
-				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
-				break;
-			case 'textarea':
-				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
-				break;
-			case 'select':
-				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
-				foreach ($field['options'] as $option) {
-					echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
-				}
-				echo '</select>';
-				break;
-			case 'radio':
-				foreach ($field['options'] as $option) {
-					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
-				}
-				break;
-			case 'checkbox':
-				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
-				break;
-		}
-		echo '</td><td>',
-		'</td></tr>';
-	}
-	echo '</table>';
-}
-
-
-// Save data from the meta box content:
-function save_slider_content_data($post_id) {
-	global $slider_metabox_basic, $slider_metabox_advanced, $slider_metabox_count;
-	// verify nonce
-	//if (!wp_verify_nonce($_POST['slider_metabox_count_nonce'], basename(__FILE__))) {
-	//	return $post_id;
-	//}
-	if (!wp_verify_nonce($_POST['slider_metabox_basic_nonce'], basename(__FILE__))) {
-		return $post_id;
-	}
-	if (!wp_verify_nonce($_POST['slider_metabox_advanced_nonce'], basename(__FILE__))) {
-		return $post_id;
-	}
-	// check autosave
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return $post_id;
-	}
-	// check permissions
-	if (!current_user_can('edit_post', $post_id)) {
-		return $post_id;
-	}
-	/*foreach ($slider_metabox_count['fields'] as $field) {
-		$old = get_post_meta($post_id, $field['id'], true);
-		$new = $_POST[$field['id']];
-		if ($new && $new != $old) {
-			update_post_meta($post_id, $field['id'], $new);
-		} elseif ('' == $new && $old) {
-			delete_post_meta($post_id, $field['id'], $old);
-		}
-	}*/
-	/*
-	foreach ($slider_metabox_basic['fields'] as $field) {
-		$old = get_post_meta($post_id, $field['id'], true);
-		$new = $_POST[$field['id']];
-		if ($new && $new != $old) {
-			update_post_meta($post_id, $field['id'], $new);
-		} elseif ('' == $new && $old) {
-			delete_post_meta($post_id, $field['id'], $old);
-		}
-	}
-	foreach ($slider_metabox_advanced['fields'] as $field) {
-		$old = get_post_meta($post_id, $field['id'], true);
-		$new = $_POST[$field['id']];
-		if ($new && $new != $old) {
-			update_post_meta($post_id, $field['id'], $new);
-		} elseif ('' == $new && $old) {
-			delete_post_meta($post_id, $field['id'], $old);
-		}
-	}
-}
-add_action('save_post', 'save_slider_content_data');
-*/
 ?>
