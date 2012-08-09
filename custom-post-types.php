@@ -666,69 +666,509 @@ class Slider extends CustomPostType {
 		$taxonomies     = '';
 	
 	public function fields(){
-		$prefix = 'ss_';
-		$fields = array(
-			array(
-				'name' => 'Type of Slider Content',
-				'desc' => 'Select what type of content will go in the slide.',
-				'id' => $slider_prefix . 'type_of_content',
-				'type' => 'radio',
-				'options' => array('Image' => 'image', 'Video' => 'video'),
-			),
-			array(
-				'name' => 'Slide Image',
-				'id' => $slider_prefix . 'slide_image',
-				'type' => 'file',
-			),
-			array(
-				'name' => 'Slide Video',
-				'desc' => 'Copy and paste your video embed code here.',
-				'id' => $slider_prefix . 'slide_video',
-				'type' => 'textarea',
-			),
-			array(
-				'name' => 'Button Type',
-				'id' => $slider_prefix . 'button_type',
-				'type' => 'radio',
-				'options' => array('Text' => 'text', 'Image' => 'image'),
-			),
-			array(
-				'name' => 'Dropcap',
-				'desc' => '(Optional)',
-				'id' => $slider_prefix . 'button_dropcap',
-				'type' => 'text'
-			),
-			array(
-				'name' => 'Title',
-				'id' => $slider_prefix . 'button_title',
-				'type' => 'text'
-			),
-			array(
-				'name' => 'Description',
-				'desc' => '(Optional)',
-				'id' => $slider_prefix . 'button_desc',
-				'type' => 'text'
-			),
-			array(
-				'name' => 'Slide Content',
-				'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
-				'id' => $slider_prefix . 'slide_content',
-				'type' => 'textarea',
-			),
-			array(
-				'name' => 'Slide Links To',
-				'desc' => '(Optional) Link slide image to an external URL.  Opens in a new tab.',
-				'id' => $slider_prefix . 'slide_links_to',
-				'type' => 'text',
-			)
-		);
-		return $fields;
+	//
 	}
 	
 	public function metabox(){
-		$metabox = parent::metabox();
-		$metabox['title'] = 'Slide';
-		return $metabox;
+		if ($this->options('use_metabox')){
+			$single_slide_content =
+				array(
+					'id'       => $this->options('name').'_metabox',
+					'title'    => __($this->options('singular_name').' Fields'),
+					'page'     => 'slider',
+					'context'  => 'normal',
+					'priority' => 'high',
+					'fields'   => array(
+						array(
+							'name' => 'Type of Slider Content',
+							'desc' => 'Select what type of content will go in the slide.',
+							'id' => $slider_prefix . 'type_of_content',
+							'type' => 'radio',
+							'options' => array('Image' => 'image', 'Video' => 'video'),
+						),
+						array(
+							'name' => 'Slide Image',
+							'id' => $slider_prefix . 'slide_image',
+							'type' => 'file',
+						),
+						array(
+							'name' => 'Slide Video',
+							'desc' => 'Copy and paste your video embed code here.',
+							'id' => $slider_prefix . 'slide_video',
+							'type' => 'textarea',
+						),
+						array(
+							'name' => 'Button Type',
+							'id' => $slider_prefix . 'button_type',
+							'type' => 'radio',
+							'options' => array('Text' => 'text', 'Image' => 'image'),
+						),
+						array(
+							'name' => 'Dropcap',
+							'desc' => '(Optional)',
+							'id' => $slider_prefix . 'button_dropcap',
+							'type' => 'text'
+						),
+						array(
+							'name' => 'Title',
+							'id' => $slider_prefix . 'button_title',
+							'type' => 'text'
+						),
+						array(
+							'name' => 'Description',
+							'desc' => '(Optional)',
+							'id' => $slider_prefix . 'button_desc',
+							'type' => 'text'
+						),
+						array(
+							'name' => 'Slide Content',
+							'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
+							'id' => $slider_prefix . 'slide_content',
+							'type' => 'textarea',
+						),
+						array(
+							'name' => 'Slide Links To',
+							'desc' => '(Optional) Link slide image to an external URL.  Opens in a new tab.',
+							'id' => $slider_prefix . 'slide_links_to',
+							'type' => 'text',
+						)
+					),
+				);
+				$single_slide_count = 	
+				// Single Slide Count:
+				array(
+					'id'       => 'slider-slides-settings-count',
+					'title'    => 'Slides Count',
+					'page'    => 'slider',
+					'context'  => 'normal',
+					'priority' => 'default',
+					'fields'   => array(
+						array(
+							'name' => __('Total Slide Count'),
+							'id'   => $prefix . 'slider_slidecount',
+							'type' => 'text',
+							'std'  => 'test',
+							'desc' => ''
+						)
+					), // fields
+				);
+				$basic_slide_options = 
+				// Basic Slider Display Options:
+				array(
+					'id' => 'slider-slides-settings-basic',
+					'title' => 'Basic Slider Display Options',
+					'page' => 'slider',
+					'context' => 'side',
+					'priority' => 'default',
+					'fields' => array(
+						array(
+							'name'    => __('Transition type for the animation'),
+							'id'      => $prefix . 'slider_transition',
+							'type'    => 'select',
+							'std'     => 'random',
+							'desc'    => '',
+							'options' => array(
+								'def'                 => 'def',
+								'fade'                => 'fade',
+								'seqFade'             => 'seqFade',
+								'horizontalSlide'     => 'horizontalSlide',
+								'seqHorizontalSlide'  => 'seqHorizontalSlide',
+								'verticalSlide'       => 'verticalSlide',
+								'seqVerticalSlide'    => 'seqVerticalSlide',
+								'verticalSlideAlt'    => 'verticalSlideAlt',
+								'seqVerticalSlideAlt' => 'seqVerticalSlideAlt',
+								'random'              => 'random'
+							)
+						),	
+						array(
+							'name' => __('Speed of the animation transition'),
+							'id'   => $prefix . 'slider_speed',
+							'type' => 'text',
+							'std'  => '400',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Time between slide transitions'),
+							'id'   => $prefix . 'slider_autoplay',
+							'type' => 'text',
+							'std'  => '3000',
+							'desc' => __('0 to disable autoplay.')
+						),
+						array(
+							'name' => __('Interval between each slide\'s animation'),
+							'id'   => $prefix . 'slider_seq_factor',
+							'type' => 'text',
+							'std'  => '100',
+							'desc' => __('Used for seqFade, seqHorizontalSlide, seqVerticalSlide &amp; seqVerticalSlideAlt.')
+						),
+						array(
+							'name' => __('First slide to be displayed'),
+							'id'   => $prefix . 'slider_first_slide',
+							'type' => 'text',
+							'std'  => '0',
+							'desc' => __('Zero-based index.')
+						),		
+					), // fields
+				);
+				$advanced_slide_options = 	
+				// Advanced Slider Display Options:
+				array(
+					'id' => 'slider-slides-settings-advanced',
+					'title' => 'Advanced Slider Display Options',
+					'page' => 'slider',
+					'context' => 'side',
+					'priority' => 'default',
+					'fields' => array(
+						array(
+							'name'    => __('Easing type for the animation'),
+							'id'      => $prefix . 'slider_easing',
+							'type'    => 'select',
+							'std'     => 'easeInOutExpo',
+							'desc'    => '',
+							'options' => array(
+								'linear'           => 'linear',
+								'swing'            => 'swing',
+								'jswing'           => 'jswing',
+								'easeInQuad'       => 'easeInQuad',
+								'easeOutQuad'      => 'easeOutQuad',
+								'easeInOutQuad'    => 'easeInOutQuad',
+								'easeInCubic'      => 'easeInCubic',
+								'easeOutCubic'     => 'easeOutCubic',
+								'easeInOutCubic'   => 'easeInOutCubic',
+								'easeInQuart'      => 'easeInQuart',
+								'easeOutQuart'     => 'easeOutQuart',
+								'easeInOutQuart'   => 'easeInOutQuart',
+								'easeInQuint'      => 'easeInQuint',
+								'easeOutQuint'     => 'easeOutQuint',
+								'easeInOutQuint'   => 'easeInOutQuint',
+								'easeInSine'       => 'easeInSine',
+								'easeOutSine'      => 'easeOutSine',
+								'easeInOutSine'    => 'easeInOutSine',
+								'easeInExpo'       => 'easeInExpo',
+								'easeOutExpo'      => 'easeOutExpo',
+								'easeInOutExpo'    => 'easeInOutExpo',
+								'easeInCirc'       => 'easeInCirc',
+								'easeOutCirc'      => 'easeOutCirc',
+								'easeInOutCirc'    => 'easeInOutCirc',
+								'easeInElastic'    => 'easeInElastic',
+								'easeOutElastic'   => 'easeOutElastic',
+								'easeInOutElastic' => 'easeInOutElastic',
+								'easeInBack'       => 'easeInBack',
+								'easeOutBack'      => 'easeOutBack',
+								'easeInOutBack'    => 'easeInOutBack',
+								'easeInBounce'     => 'easeInBounce',
+								'easeOutBounce'    => 'easeOutBounce',
+								'easeInOutBounce'  => 'easeInOutBounce'
+							)
+						),
+						array(
+							'name' => __('Pause autoplay on mouseover'),
+							'id'   => $prefix . 'slider_pause_on_hover',
+							'type' => 'checkbox',
+							'std'  => '1',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Stop autoplay on click'),
+							'id'   => $prefix . 'slider_stop_on_click',
+							'type' => 'checkbox',
+							'std'  => '0',
+							'desc' => ''
+						),
+						array(
+							'name'    => __('Content box position'),
+							'id'      => $prefix . 'slider_content_position',
+							'type'    => 'select',
+							'std'     => 'def',
+							'desc'    => '',
+							'options' => array(
+								''     => 'default',
+								'center' => 'center',
+								'bottom' => 'bottom'
+							)
+						),
+						array(
+							'name' => __('Speed of the content box transition'),
+							'id'   => $prefix . 'slider_content_speed',
+							'type' => 'text',
+							'std'  => '450',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Show content box only on mouseover'),
+							'id'   => $prefix . 'slider_show_content_onhover',
+							'type' => 'checkbox',
+							'std'  => '1',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Hide content box'),
+							'id'   => $prefix . 'slider_hide_content',
+							'type' => 'checkbox',
+							'std'  => '0',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Hide bottom navigation buttons'),
+							'id'   => $prefix . 'slider_hide_bottom_buttons',
+							'type' => 'checkbox',
+							'std'  => '0',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Slider container height'),
+							'id'   => $prefix . 'slider_height',
+							'type' => 'text',
+							'std'  => '380',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Slider container width'),
+							'id'   => $prefix . 'slider_width',
+							'type' => 'text',
+							'std'  => '940',
+							'desc' => ''
+						)
+					), // fields
+				);
+			$all_metaboxes = array($single_slide_content, $single_slide_count, $basic_slide_options, $advanced_slide_options);
+			return $all_metaboxes;
+		}
+		return null;
+	}
+	
+	public function register_metaboxes(){
+		if ($this->options('use_metabox')){
+			$metabox = $this->metabox();
+			$metabox_count = count($metabox);
+			//var_dump($metabox[1]['id']); /* Correct notation! */
+			for ($i = 0; $i < $metabox_count; $i++) {
+				add_meta_box(
+					$metabox[$i]['id'],
+					$metabox[$i]['title'],
+					'show_meta_boxes',
+					$metabox[$i]['page'],
+					$metabox[$i]['context'],
+					$metabox[$i]['priority']
+				);
+			}			
+		}
+	}
+	
+}
+
+
+
+
+
+// Add the boxes:
+/*
+function add_slider_extra_metaboxes() {
+	global $slider_metabox_basic, $slider_metabox_advanced, $slider_metabox_count;
+	add_meta_box(
+		$slider_metabox_count['id'],
+		$slider_metabox_count['title'], 
+		'show_slider_count_metabox', 
+		$slider_metabox_count['page'], 
+		$slider_metabox_count['context'], 
+		$slider_metabox_count['priority']
+	);
+	add_meta_box(
+		$slider_metabox_basic['id'],
+		$slider_metabox_basic['title'], 
+		'show_slider_basic_metabox', 
+		$slider_metabox_basic['page'], 
+		$slider_metabox_basic['context'], 
+		$slider_metabox_basic['priority']
+	);
+	add_meta_box(
+		$slider_metabox_advanced['id'],
+		$slider_metabox_advanced['title'], 
+		'show_slider_advanced_metabox', 
+		$slider_metabox_advanced['page'], 
+		$slider_metabox_advanced['context'], 
+		$slider_metabox_advanced['priority']
+	);
+}
+add_action('add_meta_boxes', 'add_slider_extra_metaboxes');
+*/
+
+/*function show_slider_count_metabox() {
+	global $slider_metabox_count, $post;
+	 // Use nonce for verification
+	echo '<input type="hidden" name="slider_metabox_count_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+	echo '<table class="form-table">';
+	foreach ($slider_metabox_count['fields'] as $field) {
+		// get current post meta data
+		$meta = get_post_meta($post->ID, $field['id'], true);
+		echo '<tr>',
+		'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
+		'<td>';
+		switch ($field['type']) {
+			case 'text':
+				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
+				break;
+			case 'textarea':
+				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
+				break;
+			case 'select':
+				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
+				foreach ($field['options'] as $option) {
+					echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
+				}
+				echo '</select>';
+				break;
+			case 'radio':
+				foreach ($field['options'] as $option) {
+					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
+				}
+				break;
+			case 'checkbox':
+				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
+				break;
+		}
+		echo '</td><td>',
+		'</td></tr>';
+	}
+	echo '</table>';
+}*/
+
+
+// Show the basic options box's content:
+/*function show_slider_basic_metabox() {
+	global $slider_metabox_basic, $post;
+	
+	 // Use nonce for verification
+	echo '<input type="hidden" name="slider_metabox_basic_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+	echo '<table class="form-table">';
+	foreach ($slider_metabox_basic['fields'] as $field) {
+		// get current post meta data
+		$meta = get_post_meta($post->ID, $field['id'], true);
+		echo '<tr>',
+		'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
+		'<td>';
+		switch ($field['type']) {
+			case 'text':
+				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
+				break;
+			case 'textarea':
+				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
+				break;
+			case 'select':
+				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
+				foreach ($field['options'] as $option) {
+					echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
+				}
+				echo '</select>';
+				break;
+			case 'radio':
+				foreach ($field['options'] as $option) {
+					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
+				}
+				break;
+			case 'checkbox':
+				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
+				break;
+		}
+		echo '</td><td>',
+		'</td></tr>';
+	}
+	echo '</table>';
+}
+
+// Show the advanced options box's content:
+function show_slider_advanced_metabox() {
+	global $slider_metabox_advanced, $post;
+	
+	 // Use nonce for verification
+	echo '<input type="hidden" name="slider_metabox_advanced_nonce" value="', wp_create_nonce(basename(__FILE__)), '" />';
+	echo '<table class="form-table">';
+	foreach ($slider_metabox_advanced['fields'] as $field) {
+		// get current post meta data
+		$meta = get_post_meta($post->ID, $field['id'], true);
+		echo '<tr>',
+		'<th style="width:20%"><label for="', $field['id'], '">', $field['name'], '</label></th>',
+		'<td>';
+		switch ($field['type']) {
+			case 'text':
+				echo '<input type="text" name="', $field['id'], '" id="', $field['id'], '" value="', $meta ? $meta : $field['std'], '" size="30" style="width:97%" />', '<br />', $field['desc'];
+				break;
+			case 'textarea':
+				echo '<textarea name="', $field['id'], '" id="', $field['id'], '" cols="60" rows="4" style="width:97%">', $meta ? $meta : $field['std'], '</textarea>', '<br />', $field['desc'];
+				break;
+			case 'select':
+				echo '<select name="', $field['id'], '" id="', $field['id'], '">';
+				foreach ($field['options'] as $option) {
+					echo '<option ', $meta == $option ? ' selected="selected"' : '', '>', $option, '</option>';
+				}
+				echo '</select>';
+				break;
+			case 'radio':
+				foreach ($field['options'] as $option) {
+					echo '<input type="radio" name="', $field['id'], '" value="', $option['value'], '"', $meta == $option['value'] ? ' checked="checked"' : '', ' />', $option['name'];
+				}
+				break;
+			case 'checkbox':
+				echo '<input type="checkbox" name="', $field['id'], '" id="', $field['id'], '"', $meta ? ' checked="checked"' : '', ' />';
+				break;
+		}
+		echo '</td><td>',
+		'</td></tr>';
+	}
+	echo '</table>';
+}
+
+
+// Save data from the meta box content:
+function save_slider_content_data($post_id) {
+	global $slider_metabox_basic, $slider_metabox_advanced, $slider_metabox_count;
+	// verify nonce
+	//if (!wp_verify_nonce($_POST['slider_metabox_count_nonce'], basename(__FILE__))) {
+	//	return $post_id;
+	//}
+	if (!wp_verify_nonce($_POST['slider_metabox_basic_nonce'], basename(__FILE__))) {
+		return $post_id;
+	}
+	if (!wp_verify_nonce($_POST['slider_metabox_advanced_nonce'], basename(__FILE__))) {
+		return $post_id;
+	}
+	// check autosave
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return $post_id;
+	}
+	// check permissions
+	if (!current_user_can('edit_post', $post_id)) {
+		return $post_id;
+	}
+	/*foreach ($slider_metabox_count['fields'] as $field) {
+		$old = get_post_meta($post_id, $field['id'], true);
+		$new = $_POST[$field['id']];
+		if ($new && $new != $old) {
+			update_post_meta($post_id, $field['id'], $new);
+		} elseif ('' == $new && $old) {
+			delete_post_meta($post_id, $field['id'], $old);
+		}
+	}*/
+	/*
+	foreach ($slider_metabox_basic['fields'] as $field) {
+		$old = get_post_meta($post_id, $field['id'], true);
+		$new = $_POST[$field['id']];
+		if ($new && $new != $old) {
+			update_post_meta($post_id, $field['id'], $new);
+		} elseif ('' == $new && $old) {
+			delete_post_meta($post_id, $field['id'], $old);
+		}
+	}
+	foreach ($slider_metabox_advanced['fields'] as $field) {
+		$old = get_post_meta($post_id, $field['id'], true);
+		$new = $_POST[$field['id']];
+		if ($new && $new != $old) {
+			update_post_meta($post_id, $field['id'], $new);
+		} elseif ('' == $new && $old) {
+			delete_post_meta($post_id, $field['id'], $old);
+		}
 	}
 }
+add_action('save_post', 'save_slider_content_data');
+*/
 ?>

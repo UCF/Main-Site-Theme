@@ -1500,7 +1500,15 @@ function show_meta_boxes($post){
 			break;
 		}
 	}
-	return _show_meta_boxes($post, $meta_box);
+	if ($meta_box[1]) {
+		foreach ($meta_box as $single_meta_box) {
+			return _show_meta_boxes($post, $single_meta_box);
+		}
+	}
+	else {
+		return _show_meta_boxes($post, $meta_box);
+	}
+	
 }
 
 function save_file($post_id, $field){
@@ -1591,11 +1599,34 @@ function _save_meta_data($post_id, $meta_box){
  * @return void
  * @author Jared Lang
  **/
-function _show_meta_boxes($post, $meta_box){
+function _show_meta_boxes($post, $meta_box) {
 	?>
 	<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
-	<table class="form-table">
-	<?php foreach($meta_box['fields'] as $field):	
+	<table class="form-table">	
+	
+	<?php
+	if ($meta_box[0]['id']) {
+		
+		foreach ($meta_box as $single_meta_box) {
+			//if ($single_meta_box['id'] == $post) {
+				foreach($single_meta_box['fields'] as $field):
+					
+					print "<br/>";
+					var_dump($field);
+						
+				endforeach;
+					
+			//}
+		}?>
+		</table>
+			
+					<?php if($meta_box['helptxt']):?>
+					<p><?=$meta_box['helptxt']?></p>
+					<?php endif;
+	}
+	else { 
+		foreach($meta_box['fields'] as $field):
+		
 		$current_value = get_post_meta($post->ID, $field['id'], true);?>
 		<tr>
 			<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
@@ -1651,13 +1682,14 @@ function _show_meta_boxes($post, $meta_box){
 			<?php break; endswitch;?>
 			<td>
 		</tr>
-	<?php endforeach;?>
+	<?php endforeach; ?>
 	</table>
 	
 	<?php if($meta_box['helptxt']):?>
 	<p><?=$meta_box['helptxt']?></p>
 	<?php endif;?>
 	<?php
+}
 }
 
 ?>
