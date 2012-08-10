@@ -1523,11 +1523,13 @@ function save_file($post_id, $field){
 			'post_mime_type' => $file['type'],
 			'guid'           => $uploaded_file['url'],
 		);
-		$id = wp_insert_attachment($attachment, $file['file'], $post_id);
+		$id = wp_insert_attachment($attachment, $file['file'], $post_id);		
+		$metadata = wp_generate_attachment_metadata($id, $uploaded_file['url']);	
 		wp_update_attachment_metadata(
 			$id,
-			wp_generate_attachment_metadata($id, $file['file'])
+			$metadata
 		);
+		
 		update_post_meta($post_id, $field['id'], $id);
 	}
 }
@@ -1545,7 +1547,6 @@ function save_default($post_id, $field){
 		delete_post_meta($post_id, $field['id'], $old);
 	}
 	# Otherwise we do nothing, field stays the same
-	//var_dump($post_id);
 	return;
 }
 
@@ -1558,38 +1559,7 @@ function save_default($post_id, $field){
 function _save_meta_data($post_id, $meta_box){
 	
 	// verify nonce
-	
-	if (post_type($post_id) == 'slider') {/*
-		foreach ($meta_box as $key => $single_metabox) {		
-		
-			switch ($key) {
-				case 'slider-slide-content':
-					$metabox_nonce = 'nonce-content';
-					break;
-				case 'slider-slides-settings-count':
-					$metabox_nonce = 'nonce-count';
-					break;
-				case 'slider-slides-settings-basic':
-					$metabox_nonce = 'nonce-basic';
-					break;
-				case 'slider-slides-settings-advanced':
-					$metabox_nonce = 'nonce-advanced';
-					break;
-				default:
-					break;
-			}
-			if (!wp_verify_nonce($_POST['meta_box_nonce'], $metabox_nonce)) { //if nonce did not verify
-				//return $post_id;
-				var_dump(wp_verify_nonce($_POST['meta_box_nonce'], $metabox_nonce));
-				print "<br/><br/>";
-			}
-			else { // if nonce DID verify
-				var_dump($metabox_nonce);
-				print "<br/><br/>";
-			}
-		
-		
-		}*/
+	if (post_type($post_id) == 'slider') {
 		if (!wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content')) {
 			//var_dump(wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content'));
 			return $post_id;

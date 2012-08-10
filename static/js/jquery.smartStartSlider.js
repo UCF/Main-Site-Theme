@@ -770,13 +770,13 @@
 								if( $el.data('randomEffect') ) settings.type.mode = animationModes[Math.floor( Math.random() * animationModes.length )];
 								
 								// If smaller screen,
-								if( $(window).width() < 960 ) {
+								//if( $(window).width() < 960 ) {
 									// Animate slides in simplified way
 									anim['responsiveDef'].slide( $el, $slides, nmbSlides, slideWidth, $slideBg, $button, $slideBgImage, $slideImagesContainer, $slidesContainer, settings );
-								} else {
+								//} else {
 									// Animate slides in normal way
-									anim[settings.type.mode].slide( $el, $slides, nmbSlides, slideWidth, $slideBg, $button, $slideImagesContainer, $slidesContainer, settings );
-								}
+								//	anim[settings.type.mode].slide( $el, $slides, nmbSlides, slideWidth, $slideBg, $button, $slideImagesContainer, $slidesContainer, settings );
+								//}
 								
 								// Animate rest stuff
 								$curContent.stop(true, true).fadeIn( settings.contentSpeed );

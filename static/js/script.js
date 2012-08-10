@@ -130,6 +130,72 @@ Generic.mobileNavBar = function($) {
 }
 
 
+/* Slider init */
+
+ssSlider = function($) {
+
+	var slider = $('.ss-slider');
+
+	if( slider.length ) {
+
+		// Prevent multiple initialization
+		if( slider.data('init') === true )
+			return false;
+		
+		slider.data( 'init', true )
+			   .smartStartSlider({
+				   width              : parseInt(slider.attr('data-slider_width')),
+				   height             : parseInt(slider.attr('data-slider_height')),
+				   contentSpeed       : parseInt(slider.attr('data-slider_contentspeed')),
+				   showContentOnhover : parseInt(slider.attr('data-slider_showcontentonhover')),
+				   hideContent        : parseInt(slider.attr('data-slider_hidecontent')),
+				   contentPosition    : slider.attr('data-slider_contentposition'),
+				   timeout            : parseInt(slider.attr('data-slider_timeout')),
+				   pause              : parseInt(slider.attr('data-slider_pause')),
+				   pauseOnHover       : parseInt(slider.attr('data-slider_pauseonhover')),
+				   hideBottomButtons  : parseInt(slider.attr('data-slider_hidebottombuttons')),
+				   type               : {
+					   mode           : parseInt(slider.attr('data-slider_mode')),
+					   speed          : parseInt(slider.attr('data-slider_speed')),
+					   easing         : parseInt(slider.attr('data-slider_easing')),
+					   seqfactor      : parseInt(slider.attr('data-slider_seqfactor'))
+				   }
+			   });
+
+/*
+		// Detect swipe gestures support
+		if( Modernizr.touch ) {
+
+			function swipeFunc( e, dir ) {
+			
+				var $slider = $( e.currentTarget );
+				
+				if( dir === 'left' ) {
+					$slider.find('.pagination-container .next').trigger('click');
+				}
+				
+				if( dir === 'right' ) {
+					$slider.find('.pagination-container .prev').trigger('click');
+				}
+				
+			}
+			
+			slider.swipe({
+				swipeLeft       : swipeFunc,
+				swipeRight      : swipeFunc,
+				allowPageScroll : 'auto'
+			});
+			
+		}*/
+
+	}
+
+}
+
+
+
+
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -143,5 +209,9 @@ if (typeof jQuery != 'undefined'){
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
+		
+		
+		ssSlider($);
+		
 	});
 }else{console.log('jQuery dependancy failed to load');}
