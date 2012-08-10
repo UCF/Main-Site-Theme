@@ -211,8 +211,7 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 				// Get meta field values per each numbered meta box:
 				$type_of_content = 			$post_custom_fields['ss_type_of_content-'.$i][0];
 				$slide_image_id = 			$post_custom_fields['ss_slide_image-'.$i][0];
-				$slide_image_id = 			(int)$slide_image_id;
-				$slide_image = 				wp_get_attachment_image($slide_image_id);
+				$slide_image = 				wp_get_attachment_image_src((int)$slide_image_id, array($slider_width, $slider_height));
 				$slide_video = 				$post_custom_fields['ss_slide_video-'.$i][0];
 				$button_type = 				$post_custom_fields['ss_button_type-'.$i][0];
 				$button_dropcap = 			$post_custom_fields['ss_button_dropcap-'.$i][0];
@@ -229,7 +228,7 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 							$output .= '<a target="_blank" href="' . $slide_links_to . '">';
 						}
 
-						$output .= '<img src="' . $slide_image . '" alt="' . $post->post_title . '" class="slide-bg-image" />';
+						$output .= '<img src="' . $slide_image[0] . '" alt="' . $post->post_title . '" class="slide-bg-image" />';
 						
 						$output .= '<div class="slide-button ' . ( $button_type ? $button_type : null ) . '">';
 
