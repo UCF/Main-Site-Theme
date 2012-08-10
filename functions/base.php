@@ -1545,6 +1545,7 @@ function save_default($post_id, $field){
 		delete_post_meta($post_id, $field['id'], $old);
 	}
 	# Otherwise we do nothing, field stays the same
+	//var_dump($post_id);
 	return;
 }
 
@@ -1555,9 +1556,50 @@ function save_default($post_id, $field){
  * @author Jared Lang
  **/
 function _save_meta_data($post_id, $meta_box){
+	
 	// verify nonce
-	if (!wp_verify_nonce($_POST['meta_box_nonce'], basename(__FILE__))) {
-		return $post_id;
+	
+	if (post_type($post_id) == 'slider') {/*
+		foreach ($meta_box as $key => $single_metabox) {		
+		
+			switch ($key) {
+				case 'slider-slide-content':
+					$metabox_nonce = 'nonce-content';
+					break;
+				case 'slider-slides-settings-count':
+					$metabox_nonce = 'nonce-count';
+					break;
+				case 'slider-slides-settings-basic':
+					$metabox_nonce = 'nonce-basic';
+					break;
+				case 'slider-slides-settings-advanced':
+					$metabox_nonce = 'nonce-advanced';
+					break;
+				default:
+					break;
+			}
+			if (!wp_verify_nonce($_POST['meta_box_nonce'], $metabox_nonce)) { //if nonce did not verify
+				//return $post_id;
+				var_dump(wp_verify_nonce($_POST['meta_box_nonce'], $metabox_nonce));
+				print "<br/><br/>";
+			}
+			else { // if nonce DID verify
+				var_dump($metabox_nonce);
+				print "<br/><br/>";
+			}
+		
+		
+		}*/
+		if (!wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content')) {
+			//var_dump(wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content'));
+			return $post_id;
+		}
+		
+	}
+	else {
+		if (!wp_verify_nonce($_POST['meta_box_nonce'], basename(__FILE__))) {
+			return $post_id;
+		}
 	}
 
 	// check autosave
@@ -1574,14 +1616,30 @@ function _save_meta_data($post_id, $meta_box){
 		return $post_id;
 	}
 	
-	foreach ($meta_box['fields'] as $field) {
-		switch ($field['type']){
-			case 'file':
-				save_file($post_id, $field);
-				break;
-			default:
-				save_default($post_id, $field);
-				break;
+	if (post_type($post_id) == 'slider') {
+		foreach ($meta_box as $single_meta_box) {
+			foreach ($single_meta_box['fields'] as $field) {				
+				switch ($field['type']){
+					case 'file':
+						save_file($post_id, $field);
+						break;
+					default:
+						save_default($post_id, $field);
+						break;
+				}
+			}
+		}
+	}
+	else {
+		foreach ($meta_box['fields'] as $field) {
+			switch ($field['type']){
+				case 'file':
+					save_file($post_id, $field);
+					break;
+				default:
+					save_default($post_id, $field);
+					break;
+			}
 		}
 	}
 }

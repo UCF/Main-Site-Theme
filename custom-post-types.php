@@ -943,7 +943,9 @@ class Slider extends CustomPostType {
 	  * Show meta box fields for Slider post type
 	  * Copied from _show_meta_boxes (functions/base.php)
 	 **/
-	public static function display_meta_fields($post, $field) { ?>
+	public static function display_meta_fields($post, $field) { 
+	$current_value = get_post_meta($post->ID, $field['id'], true);
+	?>
 		<tr>
 					<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
 					<td>
@@ -1000,22 +1002,23 @@ class Slider extends CustomPostType {
 				</tr>
 	<?php			
 	}
+ 
 
 	/**
 	 * Individual functions for showing metabox content
 	 *
 	 **/
-	
+	 
 	public function show_meta_box_slide_content($post) {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
 		}
-		$meta_box = $meta_box['slider-slide-content']; ?>
-		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		$meta_box = $meta_box['slider-slide-content'];
+		?>
+		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 		<table class="form-table">
 		<?php
 			foreach($meta_box['fields'] as $field):
-				$current_value = get_post_meta($post->ID, $field['id'], true);
 				$this->display_meta_fields($post, $field);
 			endforeach;
 		print "</table>";
@@ -1025,12 +1028,11 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
 		}
-		$meta_box = $meta_box['slider-slides-settings-count']; ?>
-		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		$meta_box = $meta_box['slider-slides-settings-count'];
+		?>
 		<table class="form-table">
 		<?php
 			foreach($meta_box['fields'] as $field):
-				$current_value = get_post_meta($post->ID, $field['id'], true);
 				$this->display_meta_fields($post, $field);
 			endforeach;
 		print "</table>";
@@ -1040,12 +1042,11 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
 		}
-		$meta_box = $meta_box['slider-slides-settings-basic']; ?>
-		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		$meta_box = $meta_box['slider-slides-settings-basic'];
+		?>
 		<table class="form-table">
 		<?php
 			foreach($meta_box['fields'] as $field):
-				$current_value = get_post_meta($post->ID, $field['id'], true);
 				$this->display_meta_fields($post, $field);
 			endforeach;
 		print "</table>";
@@ -1055,12 +1056,11 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
 		}
-		$meta_box = $meta_box['slider-slides-settings-advanced']; ?>
-		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+		$meta_box = $meta_box['slider-slides-settings-advanced'];
+		?>
 		<table class="form-table">
 		<?php
 			foreach($meta_box['fields'] as $field):
-				$current_value = get_post_meta($post->ID, $field['id'], true);
 				$this->display_meta_fields($post, $field);
 			endforeach;
 		print "</table>";
@@ -1071,8 +1071,6 @@ class Slider extends CustomPostType {
 	public function register_metaboxes(){
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
-			//$metabox_count = count($metabox);
-			//var_dump($metabox[1]['id']); /* Correct notation! */
 			foreach ($metabox as $key => $single_metabox) {
 				switch ($key) {
 					case 'slider-slide-content':
