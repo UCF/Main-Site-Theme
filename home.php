@@ -1,10 +1,9 @@
 <?php get_header();?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
-	<div class="row page-content nodescription" id="home" data-template="home-nodescription">
-		
+	<div class="row page-content nodescription" id="home" data-template="home-nodescription">		
 		<div class="span12">
-			<p><?php do_shortcode('[slider id="something"]'); ?></p>
+			<p><?php do_shortcode('[slider id="another-new-slider"]'); ?></p>
 		</div>
 		<div class="span4" id="home_leftcol">	
 			<p>Spotlight column --  make this a widget?</p>
