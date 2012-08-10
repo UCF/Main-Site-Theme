@@ -162,6 +162,37 @@ WebcomAdmin.themeOptions = function($){
 	if (cls.parent.length > 0){
 		cls.__init__();
 	}
+	
+	
+	
+	// Slider Meta Box Updates:
+	
+	// Hide slide count box:
+	//$('#slider-slides-settings-count').hide();
+	
+	// Update slide count based on slides with a designated type of slider content:
+	var slideCount = 0;
+	if ($("input[name='ss_button_type-1']:checked").val()) {
+		slideCount = slideCount + 1;
+	}
+	if ($("input[name='ss_button_type-2']:checked").val()) {
+		slideCount = slideCount + 1;
+	}
+	if ($("input[name='ss_button_type-3']:checked").val()) {
+		slideCount = slideCount + 1;
+	}
+	if ($("input[name='ss_button_type-4']:checked").val()) {
+		slideCount = slideCount + 1;
+	}
+	if ($("input[name='ss_button_type-5']:checked").val()) {
+		slideCount = slideCount + 1;
+	}
+	alert(slideCount);
+	$('input#publish').click(function() {
+		$('input#ss_slider_slidecount').val(slideCount);
+	});
+	
+	
 };
 
 (function($){
