@@ -1520,16 +1520,14 @@ function save_file($post_id, $field){
 			'post_content'   => '',
 			'post_type'      => 'attachment',
 			'post_parent'    => $post_id,
-			'post_mime_type' => $file['type'],
+			'post_mime_type' => $uploaded_file['type'],
 			'guid'           => $uploaded_file['url'],
 		);
-		$id = wp_insert_attachment($attachment, $file['file'], $post_id);		
-		$metadata = wp_generate_attachment_metadata($id, $uploaded_file['url']);	
+		$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
 		wp_update_attachment_metadata(
 			$id,
-			$metadata
+			wp_generate_attachment_metadata($id, $uploaded_file['file'])
 		);
-		
 		update_post_meta($post_id, $field['id'], $id);
 	}
 }
