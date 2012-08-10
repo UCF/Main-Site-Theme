@@ -1014,6 +1014,7 @@ class Slider extends CustomPostType {
 			$meta_box = $this->metabox();
 		}
 		$meta_box = $meta_box['slider-slide-content'];
+		// Use one nonce for Slider form:
 		?>
 		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 		<table class="form-table">
