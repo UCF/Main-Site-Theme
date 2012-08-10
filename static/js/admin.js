@@ -164,7 +164,6 @@ WebcomAdmin.themeOptions = function($){
 	}
 };
 
-
 (function($){
 	WebcomAdmin.__init__($);
 	WebcomAdmin.themeOptions($);

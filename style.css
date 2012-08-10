@@ -190,7 +190,7 @@ body { font-family: Georgia, serif; }
 	/* -------------------------------------------------- */
 
 	.ss-slider {
-		background: #fff url(images/loader.gif) no-repeat center 185px;
+		background: #fff url(static/img/loader.gif) no-repeat center 185px;
 		margin: 20px auto 80px;
 		max-height: 465px;
 		max-width: 940px;
@@ -489,9 +489,9 @@ body { font-family: Georgia, serif; }
 		/* ---------------------------------------- */
 		
 		.ss-slider .pagination-container a {
-			background: rgb(241, 90, 35) url(images/slider-arrows-small.png) no-repeat 0 center; /* Fallback for old IE */
+			background: rgb(241, 90, 35) url(static/img/slider-arrows-small.png) no-repeat 0 center; /* Fallback for old IE */
 			filter: alpha(opacity=60); /* Fallback for old IE */
-			background: rgba(241, 90, 35, 0.6) url(images/slider-arrows-small.png) no-repeat 0 center;
+			background: rgba(241, 90, 35, 0.6) url(static/img/slider-arrows-small.png) no-repeat 0 center;
 			bottom: 115px;
 			color: transparent;
 			cursor: pointer;
@@ -529,7 +529,7 @@ body { font-family: Georgia, serif; }
 			}
 			
 			.ss-slider .pagination-container.center a {		
-				background-image: url(images/slider-arrows-large.png);
+				background-image: url(static/img/slider-arrows-large.png);
 				bottom: auto;
 				left: 50%;		
 				min-height: 40px;
@@ -549,7 +549,7 @@ body { font-family: Georgia, serif; }
 				}
 			
 			.ss-slider .pagination-container.bottom a {		
-				background-image: url(images/slider-arrows-medium.png);
+				background-image: url(static/img/slider-arrows-medium.png);
 				bottom: 85px;
 				min-height: 20px;
 				width: 37px;
