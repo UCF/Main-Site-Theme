@@ -179,8 +179,15 @@ WebcomAdmin.themeOptions = function($){
 		// Hide slide count box:
 		//slide_count_widget.hide();
 		
+		// Append a 'Add Slide' and 'Remove Slide' button to each Slide widget
+		// (Slide 1 has no 'Remove Slide' button; Slide 5 has no 'Add Slide'):
+		
+		
 		// Hide any slides (except Slide 1) that don't have a Content Type assigned:
-		if (slide_content_type_2.filter(':checked').length == 0) {
+		
+		// HOLD OFF ON USING THIS UNTIL AFTER DRAG+DROP SORTING IS DONE
+		
+		/*if (slide_content_type_2.filter(':checked').length == 0) {
 			$('#slider-slide-content-2').hide();
 		}
 		if (slide_content_type_3.filter(':checked').length == 0) {
@@ -191,7 +198,7 @@ WebcomAdmin.themeOptions = function($){
 		}
 		if (slide_content_type_5.filter(':checked').length == 0) {
 			$('#slider-slide-content-5').hide();
-		}
+		}*/
 		
 		// Function that updates slide count value based on if a Slide's Content Type is selected:
 		var checkSlideCount = function() {
