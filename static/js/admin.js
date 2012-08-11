@@ -166,31 +166,63 @@ WebcomAdmin.themeOptions = function($){
 	
 	
 	// Slider Meta Box Updates:
-	
-	// Hide slide count box:
-	//$('#slider-slides-settings-count').hide();
-	
-	// Update slide count based on slides with a designated type of slider content:
-	var slideCount = 0;
-	if ($("input[name='ss_button_type-1']:checked").val()) {
-		slideCount = slideCount + 1;
+	// (only run this code if we're on a screen with #slider-slides-settings-basic;
+	// i.e. if we're on a slider edit screen:
+	if ($('#poststuff #slider-slides-settings-basic')) {
+		var slide_count_widget 	 = $('#slider-slides-settings-count'),
+			slide_content_type_1 = $("input[name='ss_type_of_content-1']"),
+			slide_content_type_2 = $("input[name='ss_type_of_content-2']"),
+			slide_content_type_3 = $("input[name='ss_type_of_content-3']"),
+			slide_content_type_4 = $("input[name='ss_type_of_content-4']"),
+			slide_content_type_5 = $("input[name='ss_type_of_content-5']");
+		
+		// Hide slide count box:
+		//slide_count_widget.hide();
+		
+		// Hide any slides (except Slide 1) that don't have a Content Type assigned:
+		if (slide_content_type_2.filter(':checked').length == 0) {
+			$('#slider-slide-content-2').hide();
+		}
+		if (slide_content_type_3.filter(':checked').length == 0) {
+			$('#slider-slide-content-3').hide();
+		}
+		if (slide_content_type_4.filter(':checked').length == 0) {
+			$('#slider-slide-content-4').hide();
+		}
+		if (slide_content_type_5.filter(':checked').length == 0) {
+			$('#slider-slide-content-5').hide();
+		}
+		
+		// Function that updates slide count value based on if a Slide's Content Type is selected:
+		var checkSlideCount = function() {
+			var slideCount = 0;
+			if (slide_content_type_1.filter(':checked').length > 0) {
+				slideCount = slideCount + 1;
+			}
+			if (slide_content_type_2.filter(':checked').length > 0) {
+				slideCount = slideCount + 1;
+			}
+			if (slide_content_type_3.filter(':checked').length > 0) {
+				slideCount = slideCount + 1;
+			}
+			if (slide_content_type_4.filter(':checked').length > 0) { 
+				slideCount = slideCount + 1;
+			}
+			if (slide_content_type_5.filter(':checked').length > 0) {
+				slideCount = slideCount + 1;
+			}
+			$("input#ss_slider_slidecount").val(slideCount);
+		}
+		
+		// Update slide count field on edit screen when a Content Type radio button changes:
+		$("input[name='ss_type_of_content-1'], input[name='ss_type_of_content-2'], input[name='ss_type_of_content-3'], input[name='ss_type_of_content-4'], input[name='ss_type_of_content-5']").change(function() {
+			// Re-show and hide the count widget div so we can affect its children:
+			slide_count_widget.show();
+			checkSlideCount();
+			slide_count_widget.hide();
+		});
+		
 	}
-	if ($("input[name='ss_button_type-2']:checked").val()) {
-		slideCount = slideCount + 1;
-	}
-	if ($("input[name='ss_button_type-3']:checked").val()) {
-		slideCount = slideCount + 1;
-	}
-	if ($("input[name='ss_button_type-4']:checked").val()) {
-		slideCount = slideCount + 1;
-	}
-	if ($("input[name='ss_button_type-5']:checked").val()) {
-		slideCount = slideCount + 1;
-	}
-	alert(slideCount);
-	$('input#publish').click(function() {
-		$('input#ss_slider_slidecount').val(slideCount);
-	});
 	
 	
 };
