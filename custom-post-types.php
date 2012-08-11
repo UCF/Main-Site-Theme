@@ -753,7 +753,7 @@ class Slider extends CustomPostType {
 							'name' => __('Total Slide Count'),
 							'id'   => $prefix . 'slider_slidecount',
 							'type' => 'text',
-							'std'  => '1',
+							'std'  => '0',
 							'desc' => ''
 						)
 					), // fields
