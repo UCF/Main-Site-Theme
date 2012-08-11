@@ -179,9 +179,28 @@ WebcomAdmin.themeOptions = function($){
 		// Hide slide count box:
 		//slide_count_widget.hide();
 		
-		// Append a 'Add Slide' and 'Remove Slide' button to each Slide widget
-		// (Slide 1 has no 'Remove Slide' button; Slide 5 has no 'Add Slide'):
-		
+		// Function that shows/hides Slide widget options based on the Content Type selected:
+		var displaySlideOptions = function() {
+			
+			var image_field_tr_1 = 		$('label[for="ss_slide_image-1"]').closest('tr'),
+				video_field_tr_1 = 		$('label[for="ss_slide_video-1"]').closest('tr'),
+				links_to_field_tr_1 = 	$('label[for="ss_slide_links_to-1"]').closest('tr');
+			
+			if (slide_content_type_1.filter(':checked').length == 0) {
+				image_field_tr_1.hide();
+				video_field_tr_1.hide();
+			}
+			else if (slide_content_type_1.filter(':checked').val() == 'image') {
+				video_field_tr_1.hide();
+				image_field_tr_1.fadeIn();
+				links_to_field_tr_1.fadeIn();
+			}
+			else if (slide_content_type_1.filter(':checked').val() == 'video') {
+				image_field_tr_1.hide();
+				links_to_field_tr_1.hide();
+				video_field_tr_1.fadeIn();
+			}
+		}
 		
 		// Hide any slides (except Slide 1) that don't have a Content Type assigned:
 		
@@ -221,12 +240,17 @@ WebcomAdmin.themeOptions = function($){
 			$("input#ss_slider_slidecount").val(slideCount);
 		}
 		
-		// Update slide count field on edit screen when a Content Type radio button changes:
+		
+		// Admin onload:
+		displaySlideOptions();
+		
+		// Content Type radio button onchange:
 		$("input[name='ss_type_of_content-1'], input[name='ss_type_of_content-2'], input[name='ss_type_of_content-3'], input[name='ss_type_of_content-4'], input[name='ss_type_of_content-5']").change(function() {
 			// Re-show and hide the count widget div so we can affect its children:
 			slide_count_widget.show();
 			checkSlideCount();
 			slide_count_widget.hide();
+			displaySlideOptions();
 		});
 		
 	}
