@@ -169,6 +169,9 @@ WebcomAdmin.themeOptions = function($){
 	// (only run this code if we're on a screen with #slider-slides-settings-basic;
 	// i.e. if we're on a slider edit screen:
 	if ($('#poststuff #slider-slides-settings-basic')) {
+		
+		
+		
 		var slide_count_widget 	 = $('#slider-slides-settings-count'),
 			slide_content_type_1 = $("input[name='ss_type_of_content-1']"),
 			slide_content_type_2 = $("input[name='ss_type_of_content-2']"),
@@ -180,12 +183,26 @@ WebcomAdmin.themeOptions = function($){
 		//slide_count_widget.hide();
 		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
+		// Todo: simplify function to dynamically generate variables/values based on slide count range
 		var displaySlideOptions = function() {
 			
 			var image_field_tr_1 = 		$('label[for="ss_slide_image-1"]').closest('tr'),
 				video_field_tr_1 = 		$('label[for="ss_slide_video-1"]').closest('tr'),
-				links_to_field_tr_1 = 	$('label[for="ss_slide_links_to-1"]').closest('tr');
+				links_to_field_tr_1 = 	$('label[for="ss_slide_links_to-1"]').closest('tr'),
+				image_field_tr_2 = 		$('label[for="ss_slide_image-2"]').closest('tr'),
+				video_field_tr_2 = 		$('label[for="ss_slide_video-2"]').closest('tr'),
+				links_to_field_tr_2 = 	$('label[for="ss_slide_links_to-2"]').closest('tr'),
+				image_field_tr_3 = 		$('label[for="ss_slide_image-3"]').closest('tr'),
+				video_field_tr_3 = 		$('label[for="ss_slide_video-3"]').closest('tr'),
+				links_to_field_tr_3 = 	$('label[for="ss_slide_links_to-3"]').closest('tr'),
+				image_field_tr_4 = 		$('label[for="ss_slide_image-4"]').closest('tr'),
+				video_field_tr_4 = 		$('label[for="ss_slide_video-4"]').closest('tr'),
+				links_to_field_tr_4 = 	$('label[for="ss_slide_links_to-4"]').closest('tr'),
+				image_field_tr_5 = 		$('label[for="ss_slide_image-5"]').closest('tr'),
+				video_field_tr_5 = 		$('label[for="ss_slide_video-5"]').closest('tr'),
+				links_to_field_tr_5 = 	$('label[for="ss_slide_links_to-5"]').closest('tr');
 			
+			// Slide 1:
 			if (slide_content_type_1.filter(':checked').length == 0) {
 				image_field_tr_1.hide();
 				video_field_tr_1.hide();
@@ -200,6 +217,71 @@ WebcomAdmin.themeOptions = function($){
 				links_to_field_tr_1.hide();
 				video_field_tr_1.fadeIn();
 			}
+			
+			// Slide 2:
+			if (slide_content_type_2.filter(':checked').length == 0) {
+				image_field_tr_2.hide();
+				video_field_tr_2.hide();
+			}
+			else if (slide_content_type_2.filter(':checked').val() == 'image') {
+				video_field_tr_2.hide();
+				image_field_tr_2.fadeIn();
+				links_to_field_tr_2.fadeIn();
+			}
+			else if (slide_content_type_2.filter(':checked').val() == 'video') {
+				image_field_tr_2.hide();
+				links_to_field_tr_2.hide();
+				video_field_tr_2.fadeIn();
+			}
+			
+			// Slide 3:
+			if (slide_content_type_3.filter(':checked').length == 0) {
+				image_field_tr_3.hide();
+				video_field_tr_3.hide();
+			}
+			else if (slide_content_type_3.filter(':checked').val() == 'image') {
+				video_field_tr_3.hide();
+				image_field_tr_3.fadeIn();
+				links_to_field_tr_3.fadeIn();
+			}
+			else if (slide_content_type_3.filter(':checked').val() == 'video') {
+				image_field_tr_3.hide();
+				links_to_field_tr_3.hide();
+				video_field_tr_3.fadeIn();
+			}
+			
+			// Slide 4:
+			if (slide_content_type_4.filter(':checked').length == 0) {
+				image_field_tr_4.hide();
+				video_field_tr_4.hide();
+			}
+			else if (slide_content_type_4.filter(':checked').val() == 'image') {
+				video_field_tr_4.hide();
+				image_field_tr_4.fadeIn();
+				links_to_field_tr_4.fadeIn();
+			}
+			else if (slide_content_type_4.filter(':checked').val() == 'video') {
+				image_field_tr_4.hide();
+				links_to_field_tr_4.hide();
+				video_field_tr_4.fadeIn();
+			}
+			
+			// Slide 5:
+			if (slide_content_type_5.filter(':checked').length == 0) {
+				image_field_tr_5.hide();
+				video_field_tr_5.hide();
+			}
+			else if (slide_content_type_5.filter(':checked').val() == 'image') {
+				video_field_tr_5.hide();
+				image_field_tr_5.fadeIn();
+				links_to_field_tr_5.fadeIn();
+			}
+			else if (slide_content_type_5.filter(':checked').val() == 'video') {
+				image_field_tr_5.hide();
+				links_to_field_tr_5.hide();
+				video_field_tr_5.fadeIn();
+			}
+			
 		}
 		
 		// Hide any slides (except Slide 1) that don't have a Content Type assigned:
