@@ -679,7 +679,7 @@ class Slider extends CustomPostType {
 				${$varname} =
 					array(
 						'id'       => 'slider-slide-content' . $suffix,
-						'title'    => 'Slide',
+						'title'    => 'Slide' . $suffix,
 						'page'     => 'slider',
 						'context'  => 'normal',
 						'priority' => 'high',
@@ -741,7 +741,7 @@ class Slider extends CustomPostType {
 					);
 			}
 			$single_slide_count = 	
-				// Single Slide Count:
+				// Single Slide Count (and order):
 				array(
 					'id'       => 'slider-slides-settings-count',
 					'title'    => 'Slides Count',
@@ -754,6 +754,13 @@ class Slider extends CustomPostType {
 							'id'   => $prefix . 'slider_slidecount',
 							'type' => 'text',
 							'std'  => '0',
+							'desc' => ''
+						),
+						array(
+							'name' => __('Slide Order'),
+							'id'   => $prefix . 'slider_slideorder',
+							'type' => 'text',
+							'std'  => '1,2,3,4,5,',
 							'desc' => ''
 						)
 					), // fields

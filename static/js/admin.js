@@ -170,17 +170,12 @@ WebcomAdmin.themeOptions = function($){
 	// i.e. if we're on a slider edit screen:
 	if ($('#poststuff #slider-slides-settings-basic')) {
 		
-		
-		
 		var slide_count_widget 	 = $('#slider-slides-settings-count'),
 			slide_content_type_1 = $("input[name='ss_type_of_content-1']"),
 			slide_content_type_2 = $("input[name='ss_type_of_content-2']"),
 			slide_content_type_3 = $("input[name='ss_type_of_content-3']"),
 			slide_content_type_4 = $("input[name='ss_type_of_content-4']"),
 			slide_content_type_5 = $("input[name='ss_type_of_content-5']");
-		
-		// Hide slide count box:
-		//slide_count_widget.hide();
 		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
 		// Todo: simplify function to dynamically generate variables/values based on slide count range
@@ -322,8 +317,30 @@ WebcomAdmin.themeOptions = function($){
 			$("input#ss_slider_slidecount").val(slideCount);
 		}
 		
+		// Update the slide sort order:
+		var updateSliderSortOrder = function() {
+			var sortOrder = [];
+			$('#normal-sortables .postbox').each(function() {
+				sortOrder[sortOrder.length] = $(this).attr('id');
+			});
+			slide_count_widget.show();
+			var orderString = '';
+			$.each(sortOrder, function(index, value) {
+				value = parseInt(value.substr(value.length-1));
+				// make sure we only have number values (i.e. only slider widgets):
+				if (!isNaN(value)) {
+					orderString += value + ",";
+				}
+			});
+			// add each value to Slide Order field value:
+			$('#ss_slider_slideorder').attr('value', orderString);
+			slide_count_widget.hide();
+		}
+		
 		
 		// Admin onload:
+		slide_count_widget.hide();
+		updateSliderSortOrder();
 		displaySlideOptions();
 		
 		// Content Type radio button onchange:
@@ -335,6 +352,13 @@ WebcomAdmin.themeOptions = function($){
 			displaySlideOptions();
 		});
 		
+		// Slide widget drag/drop on stop:
+		$('#slider-slide-content-1 .hndle, #slider-slide-content-2 .hndle, #slider-slide-content-3 .hndle, #slider-slide-content-4 .hndle, #slider-slide-content-5 .hndle')
+		.mousedown(function() {
+			$(window).mousemove(function() { // Not perfect but works:
+				updateSliderSortOrder();
+			});
+		});
 	}
 	
 	
