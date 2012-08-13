@@ -1046,43 +1046,103 @@ class Slider extends CustomPostType {
 	public static function display_slide_meta_fields($post) { 
 		
 		// Get any already-existing values for these fields:
-		$all_meta 					= get_post_custom($post_id);
-		$slide_content_type 		= $all_meta['ss_type_of_content'];
-		$slide_image				= $all_meta['ss_slide_image'];
-		$slide_video				= $all_meta['ss_slide_video'];
-		$slide_button_type			= $all_meta['ss_button_type'];
-		$slide_button_dropcap		= $all_meta['ss_button_dropcap'];
-		$slide_button_title			= $all_meta['ss_button_title'];
-		$slide_button_desc			= $all_meta['ss_button_desc'];
-		$slide_content				= $all_meta['ss_slide_content'];
-		$slide_links_to				= $all_meta['ss_slide_links_to'];
-		$slide_meta					= array(
-											$slide_content_type,
-											$slide_image,
-											$slide_video,
-											$slide_button_type,
-											$slide_button_dropcap,
-											$slide_button_title,
-											$slide_button_desc,
-											$slide_content,
-											$slide_links_to
-										);
+		$slide_content_type 		= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
+		$slide_image				= get_post_meta($post->ID, 'ss_slide_image', TRUE);
+		$slide_video				= get_post_meta($post->ID, 'ss_slide_video', TRUE);
+		$slide_button_type			= get_post_meta($post->ID, 'ss_button_type', TRUE);
+		$slide_button_dropcap		= get_post_meta($post->ID, 'ss_button_dropcap', TRUE);
+		$slide_button_title			= get_post_meta($post->ID, 'ss_button_title', TRUE);
+		$slide_button_desc			= get_post_meta($post->ID, 'ss_button_desc', TRUE);
+		$slide_content				= get_post_meta($post->ID, 'ss_slide_content', TRUE);
+		$slide_links_to				= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
 		
 		?>
 		<div id="ss_slides_wrapper">
 			<ul id="ss_slides_all">
 				<?php
-				
-				//var_dump($slide_meta);
 					
 					$i = 0;
-					
-					if ($slide_meta[0]) { // Foreach $slide_meta as $row => $val, print a <li> (per slide) ... ?>
-						<li id="slide-repeatable" class="custom_repeatable"><span class="sort hndle">Drag Meeeee</span>
-							<p>This is a test</p>
-						</li>
-						<a class="repeatable-remove button" href="#">-</a>
+					if ($slide_content_type[$i] !== '') { 
+						for ($i = 0; $i < 50; $i++) { // Arbitrary limit of 50
+					?>
+						<li class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
+							<table class="form-table">
+							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
+								<tr>
+									<th><label for="ss_type_of_content[<?=$i?>]">Type of Content</label></th>
+									<td>
+										<input type="radio" name="ss_type_of_content[<?=$i?>]" id="ss_type_of_content_image[<?=$i?>]" <?php ($slide_content_type[$i] == 'image') ? print 'checked="checked"' : ''; ?> value="image" />
+											<label for="ss_type_of_content_image[<?=$i?>]">Image</label>
+										<input type="radio" name="ss_type_of_content[<?=$i?>]" id="ss_type_of_content_video[<?=$i?>]" <?php ($slide_content_type[$i] == 'video') ? print 'checked="checked"' : ''; ?> value="video" />
+											<label for="ss_type_of_content_video[<?=$i?>]">Video</label>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_image[<?=$i?>]">Slide Image</label></th>
+									<td>
+										
+									
+										<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$i?>]"><br />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_video[<?=$i?>]">Slide Video</label></th>
+									<td>
+										<span class="description">Copy and paste your video embed code here.</span><br/>
+										<textarea name="ss_slide_video[<?=$i?>]" id="ss_slide_video[<?=$i?>]" cols="60" rows="4">
+										<?php ($slide_video[$i] !== '') ? print $slide_video[$i] : ''; ?>
+										</textarea>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_type[<?=$i?>]">Button Type</label></th>
+									<td>
+										<input type="radio" name="ss_button_type[<?=$i?>]" id="ss_button_type_image[<?=$i?>]" <?php ($slide_button_type[$i] == 'image') ? print 'checked="checked"' : ''; ?> value="image" />
+											<label for="ss_button_type_image[<?=$i?>]">Image</label>
+										<input type="radio" name="ss_button_type[<?=$i?>]" id="ss_button_type_text[<?=$i?>]" <?php ($slide_button_type[$i] == 'text') ? print 'checked="checked"' : ''; ?> value="text" />
+											<label for="ss_button_type_text[<?=$i?>]">Text</label>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_dropcap[<?=$i?>]">Button Dropcap</label></th>
+									<td>
+										<input type="text" name="ss_button_dropcap[<?=$i?>]" id="ss_button_dropcap[<?=$i?>]" value="<?php ($slide_button_dropcap[$i] !== '') ? print $slide_button_dropcap[$i] : ''; ?>" /><span class="description"> (Optional)</span><br/>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_title[<?=$i?>]">Button Title</label></th>
+									<td>
+										<input type="text" name="ss_button_title[<?=$i?>]" id="ss_button_title[<?=$i?>]" value="<?php ($slide_button_title[$i] !== '') ? print $slide_button_title[$i] : ''; ?>" />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_desc[<?=$i?>]">Button Description</label></th>
+									<td>
+										<input type="text" name="ss_button_desc[<?=$i?>]" id="ss_button_desc[<?=$i?>]" value="<?php ($slide_button_desc[$i] !== '') ? print $slide_button_desc[$i] : ''; ?>" /><span class="description"> (Optional)</span><br/>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_content[<?=$i?>]">Slide Content</label></th>
+									<td>
+										<span class="description">(Optional) HTML tags and WordPress shortcodes are allowed.</span><br/>
+										<textarea name="ss_slide_content[<?=$i?>]" id="ss_slide_content[<?=$i?>]" cols="60" rows="4">
+										<?php ($slide_content[$i] !== '') ? print $slide_content[$i] : ''; ?>
+										</textarea>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_links_to[<?=$i?>]">Slide Links To</label></th>
+									<td>
+										<input type="text" name="ss_slide_links_to[<?=$i?>]" id="ss_slide_links_to[<?=$i?>]" value="<?php ($slide_links_to[$i] !== '') ? print $slide_links_to[$i] : ''; ?>" /><span class="description"> (Optional)</span><br/>
+									</td>
+								</tr>
+								
+							</table>
+							<a class="repeatable-remove button" href="#">- Remove Slide</a>
+						</li>	
+						
 					<?php	
+						}
 					} else {
 						?>
 						<li class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
@@ -1155,6 +1215,7 @@ class Slider extends CustomPostType {
 							<a class="repeatable-remove button" href="#">- Remove Slide</a>
 						</li>
 						<?php
+						
 					}
 				?>
 						<a class="repeatable-add button" href="#">+ Add New Slide</a><br/>
