@@ -65,3 +65,4 @@ body.login #login h1 a .hide{display: block;}
 
 
 #ss_slides_all .custom_repeatable { display:block; background: #fff; border: 1px solid #ccc; padding: 15px 10px; margin: 0 0 15px 0; border-radius: 5px; }
+li.custom_repeatable:first-child a.repeatable-remove { display: none !important; }
