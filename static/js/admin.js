@@ -170,16 +170,10 @@ WebcomAdmin.themeOptions = function($){
 	// i.e. if we're on a slider edit screen:
 	if ($('#poststuff #slider-slides-settings-basic')) {
 		
-		var slide_count_widget 	 = $('#slider-slides-settings-count')/*,
-			slide_content_type_1 = $("input[name='ss_type_of_content-1']"),
-			slide_content_type_2 = $("input[name='ss_type_of_content-2']"),
-			slide_content_type_3 = $("input[name='ss_type_of_content-3']"),
-			slide_content_type_4 = $("input[name='ss_type_of_content-4']"),
-			slide_content_type_5 = $("input[name='ss_type_of_content-5']")*/;
+		var slide_count_widget 	 = $('#slider-slides-settings-count');
 		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
-		var displaySlideOptions = function() {
-			
+		var displaySlideOptions = function() {/*
 			var i = 0;
 			$('#ss_slides_all .custom_repeatable').each(function() {
 				// Create Content Type variable per generated widget:
@@ -206,15 +200,13 @@ WebcomAdmin.themeOptions = function($){
 					slide_video_field_tr.fadeIn();
 				}
 				i++;
-			});
-			
-			//alert(i);
+			});*/
 		}
 		
 		// Function that updates slide count value based on if a Slide's Content Type is selected:
 		var checkSlideCount = function() {
 			var slideCount = 0;
-			for (i = 0; i < 50; i++) {
+			for (i = 0; i < 50; i++) { // Arbitrary limit of 50
 				var slide_content_type = $('input[name="ss_type_of_content['+i+']"]');
 				
 				if (slide_content_type && slide_content_type.filter(':checked').length > 0) {
