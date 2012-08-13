@@ -1597,6 +1597,56 @@ function _save_meta_data($post_id, $meta_box){
 				}
 			}
 		}
+		if ($_POST['ss_type_of_content']) { // If a type of content is set for the slide, save its content:	
+		
+			$single_slide_meta = array(
+				array(
+					'id'	=> 'ss_type_of_content',
+					'val'	=> $_POST['ss_type_of_content'],
+				),
+				array(
+					'id'	=> 'ss_slide_image',
+					'val' 	=> $_POST['ss_slide_image'],
+				),
+				array(
+					'id' 	=> 'ss_slide_video',
+					'val' 	=> $_POST['ss_slide_video'],
+				),
+				array(
+					'id'	=> 'ss_button_type',
+					'val'	=> $_POST['ss_button_type'],
+				),
+				array(
+					'id'	=> 'ss_button_dropcap',
+					'val'	=> $_POST['ss_button_dropcap'],
+				),
+				array(
+					'id'	=> 'ss_button_title',
+					'val'	=> $_POST['ss_button_title'],
+				),
+				array(
+					'id'	=> 'ss_button_desc',
+					'val'	=> $_POST['ss_button_desc'],
+				),
+				array(
+					'id'	=> 'ss_slide_content',
+					'val'	=> $_POST['ss_slide_content'],
+				),
+				array(
+					'id'	=> 'ss_slide_links_to',
+					'val'	=> $_POST['ss_slide_links_to'],
+				),
+			);
+		
+			foreach ($single_slide_meta as $field) {
+				if ($field['id'] == 'ss_slide_image') {
+					save_file($post_id, $field);
+				}
+				else {
+					save_default($post_id, $field);
+				}
+			}
+		}
 	}
 	else {
 		foreach ($meta_box['fields'] as $field) {
