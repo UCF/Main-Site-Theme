@@ -673,6 +673,7 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')){	
 			$prefix = 'ss_';
 			// Generate $single_slide_content_[1-5] using variable variables:
+			/*
 			for ($i = 1; $i < 6; $i++) {
 				$suffix = '-'.$i;
 				$varname = 'single_slide_content_'.$i;
@@ -740,6 +741,17 @@ class Slider extends CustomPostType {
 						),
 					);
 			}
+			*/
+			
+			$all_slides = 
+				array(
+					'id'       => 'slider-slides',
+					'title'    => 'All Slides',
+					'page'    => 'slider',
+					'context'  => 'normal',
+					'priority' => 'default',
+				);
+			
 			$single_slide_count = 	
 				// Single Slide Count (and order):
 				array(
@@ -944,12 +956,13 @@ class Slider extends CustomPostType {
 						)
 					), // fields
 				);
-			$all_metaboxes = array(
+			$all_metaboxes = array(/*
 				'slider-slide-content-1' => $single_slide_content_1, 
 				'slider-slide-content-2' => $single_slide_content_2, 
 				'slider-slide-content-3' => $single_slide_content_3, 
 				'slider-slide-content-4' => $single_slide_content_4, 
-				'slider-slide-content-5' => $single_slide_content_5, 
+				'slider-slide-content-5' => $single_slide_content_5, */
+				'slider-all-slides' => $all_slides,
 				'slider-slides-settings-count' => $single_slide_count, 
 				'slider-slides-settings-basic' => $basic_slide_options, 
 				'slider-slides-settings-advanced' => $advanced_slide_options
@@ -962,7 +975,7 @@ class Slider extends CustomPostType {
 	
 	
 	/**
-	  * Show meta box fields for Slider post type
+	  * Show meta box fields for Slider post type (generic field loop-through)
 	  * Copied from _show_meta_boxes (functions/base.php)
 	 **/
 	public static function display_meta_fields($post, $field) { 
@@ -1024,6 +1037,134 @@ class Slider extends CustomPostType {
 			</tr>
 	<?php			
 	}
+	
+	
+	/**
+	 * Show fields for single slides:
+	 *
+	 **/
+	public static function display_slide_meta_fields($post) { 
+		
+		// Get any already-existing values for these fields:
+		$all_meta 					= get_post_custom($post_id);
+		$slide_content_type 		= $all_meta['ss_type_of_content'];
+		$slide_image				= $all_meta['ss_slide_image'];
+		$slide_video				= $all_meta['ss_slide_video'];
+		$slide_button_type			= $all_meta['ss_button_type'];
+		$slide_button_dropcap		= $all_meta['ss_button_dropcap'];
+		$slide_button_title			= $all_meta['ss_button_title'];
+		$slide_button_desc			= $all_meta['ss_button_desc'];
+		$slide_content				= $all_meta['ss_slide_content'];
+		$slide_links_to				= $all_meta['ss_slide_links_to'];
+		$slide_meta					= array(
+											$slide_content_type,
+											$slide_image,
+											$slide_video,
+											$slide_button_type,
+											$slide_button_dropcap,
+											$slide_button_title,
+											$slide_button_desc,
+											$slide_content,
+											$slide_links_to
+										);
+		
+		?>
+		<div id="ss_slides_wrapper">
+			<ul id="ss_slides_all">
+				<?php
+				
+				//var_dump($slide_meta);
+					
+					$i = 0;
+					
+					if ($slide_meta[0]) { // Foreach $slide_meta as $row => $val, print a <li> (per slide) ... ?>
+						<li id="slide-repeatable" class="custom_repeatable"><span class="sort hndle">Drag Meeeee</span>
+							<p>This is a test</p>
+						</li>
+						<a class="repeatable-remove button" href="#">-</a>
+					<?php	
+					} else {
+						?>
+						<li id="slide-repeatable[<?=$i?>]" class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
+							<table class="form-table">
+							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
+								<tr>
+									<th><label for="ss_type_of_content[<?=$i?>]">Type of Content</label></th>
+									<td>
+										<input type="radio" name="ss_type_of_content[<?=$i?>]" id="ss_type_of_content_image[<?=$i?>]" value="image" />
+											<label for="ss_type_of_content_image[<?=$i?>]">Image</label>
+										<input type="radio" name="ss_type_of_content[<?=$i?>]" id="ss_type_of_content_video[<?=$i?>]" value="video" />
+											<label for="ss_type_of_content_video[<?=$i?>]">Video</label>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_image[<?=$i?>]">Slide Image</label></th>
+									<td>
+										<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$i?>]"><br />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_video[<?=$i?>]">Slide Video</label></th>
+									<td>
+										<span class="description">Copy and paste your video embed code here.</span><br/>
+										<textarea name="ss_slide_video[<?=$i?>]" id="ss_slide_video[<?=$i?>]" cols="60" rows="4"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_type[<?=$i?>]">Button Type</label></th>
+									<td>
+										<input type="radio" name="ss_button_type[<?=$i?>]" id="ss_button_type_image[<?=$i?>]" value="image" />
+											<label for="ss_button_type_image[<?=$i?>]">Image</label>
+										<input type="radio" name="ss_button_type[<?=$i?>]" id="ss_button_type_text[<?=$i?>]" value="text" />
+											<label for="ss_button_type_text[<?=$i?>]">Text</label>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_dropcap[<?=$i?>]">Button Dropcap</label></th>
+									<td>
+										<input type="text" name="ss_button_dropcap[<?=$i?>]" id="ss_button_dropcap[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_title[<?=$i?>]">Button Title</label></th>
+									<td>
+										<input type="text" name="ss_button_title[<?=$i?>]" id="ss_button_title[<?=$i?>]" value="" />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_button_desc[<?=$i?>]">Button Description</label></th>
+									<td>
+										<input type="text" name="ss_button_desc[<?=$i?>]" id="ss_button_desc[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_content[<?=$i?>]">Slide Content</label></th>
+									<td>
+										<span class="description">(Optional) HTML tags and WordPress shortcodes are allowed.</span><br/>
+										<textarea name="ss_slide_content[<?=$i?>]" id="ss_slide_content[<?=$i?>]" cols="60" rows="4"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_links_to[<?=$i?>]">Slide Links To</label></th>
+									<td>
+										<input type="text" name="ss_slide_links_to[<?=$i?>]" id="ss_slide_links_to[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
+									</td>
+								</tr>
+								
+							</table>
+							<a class="repeatable-remove button" href="#">- Remove Slide</a>
+						</li>
+						<?php
+					}
+				?>
+						<a class="repeatable-add button" href="#">+ Add New Slide</a><br/>
+						
+				
+			</ul>
+			
+		</div>
+		<?php
+	}
  
 
 	/**
@@ -1032,6 +1173,7 @@ class Slider extends CustomPostType {
 	 **/
 	
 	// Slides 1-5: 
+	/*
 	public function show_meta_box_slide_1_content($post) {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
@@ -1107,6 +1249,18 @@ class Slider extends CustomPostType {
 		print "</table>";
 		
 	}
+	*/
+	
+	
+	//
+	public function show_meta_box_slide_all($post) {
+		if ($this->options('use_metabox')) {
+			$meta_box = $this->metabox();
+		}
+		$meta_box = $meta_box['slider-all-slides'];
+		$this->display_slide_meta_fields($post);
+	}
+	
 	
 	// Slide Count: 
 	public function show_meta_box_slide_count($post) {
@@ -1161,7 +1315,7 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
 			foreach ($metabox as $key => $single_metabox) {
-				switch ($key) {
+				switch ($key) {/*
 					case 'slider-slide-content-1':
 						$metabox_view_function = 'show_meta_box_slide_1_content';
 						break;
@@ -1176,7 +1330,12 @@ class Slider extends CustomPostType {
 						break;
 					case 'slider-slide-content-5':
 						$metabox_view_function = 'show_meta_box_slide_5_content';
-						break;				
+						break;			*/	
+						
+					case 'slider-all-slides':
+						$metabox_view_function = 'show_meta_box_slide_all';
+						break;	
+						
 					case 'slider-slides-settings-count':
 						$metabox_view_function = 'show_meta_box_slide_count';
 						break;
@@ -1203,5 +1362,8 @@ class Slider extends CustomPostType {
 	
 	
 }
+
+
+
 
 ?>

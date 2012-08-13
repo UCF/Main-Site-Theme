@@ -279,23 +279,6 @@ WebcomAdmin.themeOptions = function($){
 			
 		}
 		
-		// Hide any slides (except Slide 1) that don't have a Content Type assigned:
-		
-		// HOLD OFF ON USING THIS UNTIL AFTER DRAG+DROP SORTING IS DONE
-		
-		/*if (slide_content_type_2.filter(':checked').length == 0) {
-			$('#slider-slide-content-2').hide();
-		}
-		if (slide_content_type_3.filter(':checked').length == 0) {
-			$('#slider-slide-content-3').hide();
-		}
-		if (slide_content_type_4.filter(':checked').length == 0) {
-			$('#slider-slide-content-4').hide();
-		}
-		if (slide_content_type_5.filter(':checked').length == 0) {
-			$('#slider-slide-content-5').hide();
-		}*/
-		
 		// Function that updates slide count value based on if a Slide's Content Type is selected:
 		var checkSlideCount = function() {
 			var slideCount = 0;
@@ -317,6 +300,7 @@ WebcomAdmin.themeOptions = function($){
 			$("input#ss_slider_slidecount").val(slideCount);
 		}
 		
+		
 		// Update the slide sort order:
 		var updateSliderSortOrder = function() {
 			var sortOrder = [];
@@ -336,6 +320,30 @@ WebcomAdmin.themeOptions = function($){
 			$('#ss_slider_slideorder').attr('value', orderString);
 			slide_count_widget.hide();
 		}
+		
+		
+		// Add/remove Slide button functionality:
+		$('.repeatable-add').click(function() {
+			field = $(this).prev('li').clone(true);
+			fieldLocation = $(this).prev('li');
+			$('input, textarea', field).val('').attr('name', function(index, name) {
+				return name.replace(/(\d+)/, function(fullMatch, n) {
+					return Number(n) + 1;
+				});
+			});
+			$('label', field).val('').attr('for', function(index, forval) {
+				return forval.replace(/(\d+)/, function(fullMatch, n) {
+					return Number(n) + 1;
+				});
+			});
+			field.insertAfter(fieldLocation, $(this).prev('li'));
+			return false;
+		});
+		
+		$('.repeatable-remove').click(function(){
+			$(this).parent().remove();
+			return false;
+		});
 		
 		
 		// Admin onload:

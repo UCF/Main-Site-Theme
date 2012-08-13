@@ -60,3 +60,8 @@ body.login #login h1 a .hide{display: block;}
 #theme-help table {border-collapse:collapse;}
 #theme-help table th, #theme-help table td {border:1px solid #333;padding:5px;}
 #theme-help table th {background-color:#f1f1f1;}
+
+
+
+
+#ss_slides_all .custom_repeatable { display:block; background: #fff; border: 1px solid #ccc; padding: 15px 10px; margin: 0 0 15px 0; border-radius: 5px; }
