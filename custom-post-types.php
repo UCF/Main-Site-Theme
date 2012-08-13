@@ -1085,7 +1085,7 @@ class Slider extends CustomPostType {
 					<?php	
 					} else {
 						?>
-						<li id="slide-repeatable[<?=$i?>]" class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
+						<li class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
 							<table class="form-table">
 							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 								<tr>

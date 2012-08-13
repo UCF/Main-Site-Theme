@@ -265,12 +265,12 @@ WebcomAdmin.themeOptions = function($){
 				});
 			});
 			// Update 'id' attributes
-			$('textarea', field).val('').attr('id', function(index, val) {
+			$('textarea, input[type="text"], input[type="radio"], input[type="select"], input[type="checkbox"]', field).val('').attr('id', function(index, val) {
 				return val.replace(/(\d+)/, function(fullMatch, n) {
 					return Number(n) + 1;
 				});
 			});
-			alert($('.custom_repeatable .form-table tbody tr td input', field).attr('id'));
+			
 			field.insertAfter(fieldLocation, $(this).prev('li'));
 			return false;
 		});
