@@ -170,147 +170,73 @@ WebcomAdmin.themeOptions = function($){
 	// i.e. if we're on a slider edit screen:
 	if ($('#poststuff #slider-slides-settings-basic')) {
 		
-		var slide_count_widget 	 = $('#slider-slides-settings-count'),
+		var slide_count_widget 	 = $('#slider-slides-settings-count')/*,
 			slide_content_type_1 = $("input[name='ss_type_of_content-1']"),
 			slide_content_type_2 = $("input[name='ss_type_of_content-2']"),
 			slide_content_type_3 = $("input[name='ss_type_of_content-3']"),
 			slide_content_type_4 = $("input[name='ss_type_of_content-4']"),
-			slide_content_type_5 = $("input[name='ss_type_of_content-5']");
+			slide_content_type_5 = $("input[name='ss_type_of_content-5']")*/;
 		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
-		// Todo: simplify function to dynamically generate variables/values based on slide count range
 		var displaySlideOptions = function() {
 			
-			var image_field_tr_1 = 		$('label[for="ss_slide_image-1"]').closest('tr'),
-				video_field_tr_1 = 		$('label[for="ss_slide_video-1"]').closest('tr'),
-				links_to_field_tr_1 = 	$('label[for="ss_slide_links_to-1"]').closest('tr'),
-				image_field_tr_2 = 		$('label[for="ss_slide_image-2"]').closest('tr'),
-				video_field_tr_2 = 		$('label[for="ss_slide_video-2"]').closest('tr'),
-				links_to_field_tr_2 = 	$('label[for="ss_slide_links_to-2"]').closest('tr'),
-				image_field_tr_3 = 		$('label[for="ss_slide_image-3"]').closest('tr'),
-				video_field_tr_3 = 		$('label[for="ss_slide_video-3"]').closest('tr'),
-				links_to_field_tr_3 = 	$('label[for="ss_slide_links_to-3"]').closest('tr'),
-				image_field_tr_4 = 		$('label[for="ss_slide_image-4"]').closest('tr'),
-				video_field_tr_4 = 		$('label[for="ss_slide_video-4"]').closest('tr'),
-				links_to_field_tr_4 = 	$('label[for="ss_slide_links_to-4"]').closest('tr'),
-				image_field_tr_5 = 		$('label[for="ss_slide_image-5"]').closest('tr'),
-				video_field_tr_5 = 		$('label[for="ss_slide_video-5"]').closest('tr'),
-				links_to_field_tr_5 = 	$('label[for="ss_slide_links_to-5"]').closest('tr');
+			var i = 0;
+			$('#ss_slides_all .custom_repeatable').each(function() {
+				// Create Content Type variable per generated widget:
+				var slide_content_type 		= $('input[name="ss_type_of_content['+i+']"]');
+				var slide_image_field_tr 	= $('label[for="ss_slide_image['+i+']"]').closest('tr'); 
+				var slide_video_field_tr	= $('label[for="ss_slide_video['+i+']"]').closest('tr');
+				var slide_links_to_field_tr = $('label[for="ss_slide_links_to['+i+']"]').closest('tr');
+				
+				if (slide_content_type.filter(':checked').length == 0) {
+					//alert('nothing is checked');
+					slide_image_field_tr.hide();
+					slide_video_field_tr.hide();
+				}
+				else if (slide_content_type.filter(':checked').val() == 'image') {
+					//alert('image is checked');
+					slide_video_field_tr.hide();
+					slide_image_field_tr.fadeIn();
+					slide_links_to_field_tr.fadeIn();
+				}
+				else if (slide_content_type.filter(':checked').val() == 'video') {
+					//alert('video is checked');
+					slide_image_field_tr.hide();
+					slide_links_to_field_tr.hide();
+					slide_video_field_tr.fadeIn();
+				}
+				i++;
+			});
 			
-			// Slide 1:
-			if (slide_content_type_1.filter(':checked').length == 0) {
-				image_field_tr_1.hide();
-				video_field_tr_1.hide();
-			}
-			else if (slide_content_type_1.filter(':checked').val() == 'image') {
-				video_field_tr_1.hide();
-				image_field_tr_1.fadeIn();
-				links_to_field_tr_1.fadeIn();
-			}
-			else if (slide_content_type_1.filter(':checked').val() == 'video') {
-				image_field_tr_1.hide();
-				links_to_field_tr_1.hide();
-				video_field_tr_1.fadeIn();
-			}
-			
-			// Slide 2:
-			if (slide_content_type_2.filter(':checked').length == 0) {
-				image_field_tr_2.hide();
-				video_field_tr_2.hide();
-			}
-			else if (slide_content_type_2.filter(':checked').val() == 'image') {
-				video_field_tr_2.hide();
-				image_field_tr_2.fadeIn();
-				links_to_field_tr_2.fadeIn();
-			}
-			else if (slide_content_type_2.filter(':checked').val() == 'video') {
-				image_field_tr_2.hide();
-				links_to_field_tr_2.hide();
-				video_field_tr_2.fadeIn();
-			}
-			
-			// Slide 3:
-			if (slide_content_type_3.filter(':checked').length == 0) {
-				image_field_tr_3.hide();
-				video_field_tr_3.hide();
-			}
-			else if (slide_content_type_3.filter(':checked').val() == 'image') {
-				video_field_tr_3.hide();
-				image_field_tr_3.fadeIn();
-				links_to_field_tr_3.fadeIn();
-			}
-			else if (slide_content_type_3.filter(':checked').val() == 'video') {
-				image_field_tr_3.hide();
-				links_to_field_tr_3.hide();
-				video_field_tr_3.fadeIn();
-			}
-			
-			// Slide 4:
-			if (slide_content_type_4.filter(':checked').length == 0) {
-				image_field_tr_4.hide();
-				video_field_tr_4.hide();
-			}
-			else if (slide_content_type_4.filter(':checked').val() == 'image') {
-				video_field_tr_4.hide();
-				image_field_tr_4.fadeIn();
-				links_to_field_tr_4.fadeIn();
-			}
-			else if (slide_content_type_4.filter(':checked').val() == 'video') {
-				image_field_tr_4.hide();
-				links_to_field_tr_4.hide();
-				video_field_tr_4.fadeIn();
-			}
-			
-			// Slide 5:
-			if (slide_content_type_5.filter(':checked').length == 0) {
-				image_field_tr_5.hide();
-				video_field_tr_5.hide();
-			}
-			else if (slide_content_type_5.filter(':checked').val() == 'image') {
-				video_field_tr_5.hide();
-				image_field_tr_5.fadeIn();
-				links_to_field_tr_5.fadeIn();
-			}
-			else if (slide_content_type_5.filter(':checked').val() == 'video') {
-				image_field_tr_5.hide();
-				links_to_field_tr_5.hide();
-				video_field_tr_5.fadeIn();
-			}
-			
+			//alert(i);
 		}
 		
 		// Function that updates slide count value based on if a Slide's Content Type is selected:
 		var checkSlideCount = function() {
 			var slideCount = 0;
-			if (slide_content_type_1.filter(':checked').length > 0) {
-				slideCount = slideCount + 1;
+			for (i = 0; i < 50; i++) {
+				var slide_content_type = $('input[name="ss_type_of_content['+i+']"]');
+				
+				if (slide_content_type && slide_content_type.filter(':checked').length > 0) {
+					slideCount = slideCount + 1;
+				}
+				$("input#ss_slider_slidecount").val(slideCount);
 			}
-			if (slide_content_type_2.filter(':checked').length > 0) {
-				slideCount = slideCount + 1;
-			}
-			if (slide_content_type_3.filter(':checked').length > 0) {
-				slideCount = slideCount + 1;
-			}
-			if (slide_content_type_4.filter(':checked').length > 0) { 
-				slideCount = slideCount + 1;
-			}
-			if (slide_content_type_5.filter(':checked').length > 0) {
-				slideCount = slideCount + 1;
-			}
-			$("input#ss_slider_slidecount").val(slideCount);
 		}
 		
 		
 		// Update the slide sort order:
 		var updateSliderSortOrder = function() {
 			var sortOrder = [];
-			$('#normal-sortables .postbox').each(function() {
-				sortOrder[sortOrder.length] = $(this).attr('id');
+			i = 0;
+			$('#ss_slides_all .custom_repeatable').each(function() {
+				sortOrder[sortOrder.length] = i;
+				i++;
 			});
 			slide_count_widget.show();
 			var orderString = '';
 			$.each(sortOrder, function(index, value) {
-				value = parseInt(value.substr(value.length-1));
+				//value = parseInt(value.substr(value.length-2, value.length-1));
 				// make sure we only have number values (i.e. only slider widgets):
 				if (!isNaN(value)) {
 					orderString += value + ",";
@@ -326,16 +252,25 @@ WebcomAdmin.themeOptions = function($){
 		$('.repeatable-add').click(function() {
 			field = $(this).prev('li').clone(true);
 			fieldLocation = $(this).prev('li');
+			// Update 'name' attributes
 			$('input, textarea', field).val('').attr('name', function(index, name) {
 				return name.replace(/(\d+)/, function(fullMatch, n) {
 					return Number(n) + 1;
 				});
 			});
+			// Update 'for' attributes (in <label>)
 			$('label', field).val('').attr('for', function(index, forval) {
 				return forval.replace(/(\d+)/, function(fullMatch, n) {
 					return Number(n) + 1;
 				});
 			});
+			// Update 'id' attributes
+			$('textarea', field).val('').attr('id', function(index, val) {
+				return val.replace(/(\d+)/, function(fullMatch, n) {
+					return Number(n) + 1;
+				});
+			});
+			alert($('.custom_repeatable .form-table tbody tr td input', field).attr('id'));
 			field.insertAfter(fieldLocation, $(this).prev('li'));
 			return false;
 		});
@@ -352,7 +287,8 @@ WebcomAdmin.themeOptions = function($){
 		displaySlideOptions();
 		
 		// Content Type radio button onchange:
-		$("input[name='ss_type_of_content-1'], input[name='ss_type_of_content-2'], input[name='ss_type_of_content-3'], input[name='ss_type_of_content-4'], input[name='ss_type_of_content-5']").change(function() {
+		$('#ss_slides_all .custom_repeatable input[name^="ss_type_of_content["]').change(function() {
+			//alert('change');
 			// Re-show and hide the count widget div so we can affect its children:
 			slide_count_widget.show();
 			checkSlideCount();
