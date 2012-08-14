@@ -1511,7 +1511,7 @@ function save_file($post_id, $field){
 		$override['action'] = 'editpost';
 		$file               = $_FILES[$field['id']];
 		$uploaded_file      = wp_handle_upload($file, $override);
-		
+			
 		# TODO: Pass reason for error back to frontend
 		if ($uploaded_file['error']){return;}
 		
@@ -1562,7 +1562,6 @@ function _save_meta_data($post_id, $meta_box){
 			//var_dump(wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content'));
 			return $post_id;
 		}
-		
 	}
 	else {
 		if (!wp_verify_nonce($_POST['meta_box_nonce'], basename(__FILE__))) {
@@ -1584,7 +1583,10 @@ function _save_meta_data($post_id, $meta_box){
 		return $post_id;
 	}
 	
+	// Custom slider stuff:
 	if (post_type($post_id) == 'slider') {
+		
+		// All other meta box data for Sliders:		
 		foreach ($meta_box as $single_meta_box) {
 			foreach ($single_meta_box['fields'] as $field) {				
 				switch ($field['type']){
@@ -1597,6 +1599,7 @@ function _save_meta_data($post_id, $meta_box){
 				}
 			}
 		}
+		// Single slide meta data:
 		if ($_POST['ss_type_of_content']) { // If a type of content is set for the slide, save its content:	
 		
 			$single_slide_meta = array(
@@ -1639,9 +1642,83 @@ function _save_meta_data($post_id, $meta_box){
 			);
 		
 			foreach ($single_slide_meta as $field) {
+								
+				// File upload handling (for slide images):				
 				if ($field['id'] == 'ss_slide_image') {
-					save_file($post_id, $field);
+					
+					$files = $_FILES[$field['id']];
+					$file_uploaded = @!empty($files);
+					
+					$update_metadata_list = array();
+					
+					// Get the slide numbers for each uploaded file and unchanged file:
+					$new_slide_list = array();
+					$old_slide_list = array();
+					
+					foreach($files['name'] as $key => $val) {
+						if ($val !== '') {
+							$new_slide_list[] .= $key;
+						}
+						else {
+							$old_slide_list[] .= $key;
+						}
+					}
+					
+					// Handle newly uploaded files:
+					if ($file_uploaded){
+						require_once(ABSPATH.'wp-admin/includes/file.php');
+						$override = array(
+										'action' => 'editpost',
+										'test_form' => false,
+									);
+						
+						// Finally, process each image and its data:
+						
+						foreach ($new_slide_list as $i) {
+							$file = array(
+								'name' 		=> $files['name'][$i],
+								'type'		=> $files['type'][$i],
+								'tmp_name' 	=> $files['tmp_name'][$i],
+								'error' 	=> $files['error'][$i],
+								'size' 		=> $files['size'][$i]
+							);
+							
+							if ($file['name'] !== NULL && get_post_type($post_id) !== 'revision') {
+							
+								$uploaded_file 	= wp_handle_upload($file, $override);
+								
+								$attachment = array(
+									'post_title'     => $file['name'],
+									'post_content'   => '',
+									'post_type'      => 'attachment',
+									'post_parent'    => $post_id,
+									'post_mime_type' => $uploaded_file['type'],
+									'guid'           => $uploaded_file['url'],
+								);
+								
+								$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
+								
+								wp_update_attachment_metadata(
+									$id,
+									wp_generate_attachment_metadata($id, $uploaded_file['file'])
+								);
+
+								$update_metadata_list[$i] = $id;
+							}
+						}
+					}
+					// Handle existing files:
+					else {
+						foreach ($old_slide_list as $i) {
+							$old_attachment = get_post_meta($post_id, 'ss_slide_image', TRUE);
+							$old_attachment = $old_attachment[$i];
+							$update_metadata_list[$i] = wp_get_attachment_id($old_attachment);
+						}
+					}
+					update_post_meta($post_id, 'ss_slide_image', $update_metadata_list);
+
 				}
+				// All other single slide fields:
 				else {
 					save_default($post_id, $field);
 				}

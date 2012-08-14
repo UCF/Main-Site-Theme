@@ -672,78 +672,9 @@ class Slider extends CustomPostType {
 	public function metabox(){
 		if ($this->options('use_metabox')){	
 			$prefix = 'ss_';
-			// Generate $single_slide_content_[1-5] using variable variables:
-			/*
-			for ($i = 1; $i < 6; $i++) {
-				$suffix = '-'.$i;
-				$varname = 'single_slide_content_'.$i;
-				${$varname} =
-					array(
-						'id'       => 'slider-slide-content' . $suffix,
-						'title'    => 'Slide' . $suffix,
-						'page'     => 'slider',
-						'context'  => 'normal',
-						'priority' => 'high',
-						'fields'   => array(
-							array(
-								'name' => 'Type of Slider Content',
-								'desc' => 'Select what type of content will go in the slide.',
-								'id' => $prefix . 'type_of_content' . $suffix,
-								'type' => 'radio',
-								'options' => array('Image' => 'image', 'Video' => 'video'),
-							),
-							array(
-								'name' => 'Slide Image',
-								'id' => $prefix . 'slide_image' . $suffix,
-								'type' => 'file',
-							),
-							array(
-								'name' => 'Slide Video',
-								'desc' => 'Copy and paste your video embed code here.',
-								'id' => $prefix . 'slide_video' . $suffix,
-								'type' => 'textarea',
-							),
-							array(
-								'name' => 'Button Type',
-								'id' => $prefix . 'button_type' . $suffix,
-								'type' => 'radio',
-								'options' => array('Text' => 'text', 'Image' => 'image'),
-							),
-							array(
-								'name' => 'Dropcap',
-								'desc' => '(Optional)',
-								'id' => $prefix . 'button_dropcap' . $suffix,
-								'type' => 'text'
-							),
-							array(
-								'name' => 'Title',
-								'id' => $prefix . 'button_title' . $suffix,
-								'type' => 'text'
-							),
-							array(
-								'name' => 'Description',
-								'desc' => '(Optional)',
-								'id' => $prefix . 'button_desc' . $suffix,
-								'type' => 'text'
-							),
-							array(
-								'name' => 'Slide Content',
-								'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
-								'id' => $prefix . 'slide_content' . $suffix,
-								'type' => 'textarea',
-							),
-							array(
-								'name' => 'Slide Links To',
-								'desc' => '(Optional) Link slide image to an external URL.  Opens in a new tab.',
-								'id' => $prefix . 'slide_links_to' . $suffix,
-								'type' => 'text',
-							)
-						),
-					);
-			}
-			*/
-			
+					
 			$all_slides = 
+				// Container for individual slides:	
 				array(
 					'id'       => 'slider-slides',
 					'title'    => 'All Slides',
@@ -751,7 +682,6 @@ class Slider extends CustomPostType {
 					'context'  => 'normal',
 					'priority' => 'default',
 				);
-			
 			$single_slide_count = 	
 				// Single Slide Count (and order):
 				array(
@@ -772,7 +702,6 @@ class Slider extends CustomPostType {
 							'name' => __('Slide Order'),
 							'id'   => $prefix . 'slider_slideorder',
 							'type' => 'text',
-							'std'  => '1,2,3,4,5,',
 							'desc' => ''
 						)
 					), // fields
@@ -956,12 +885,7 @@ class Slider extends CustomPostType {
 						)
 					), // fields
 				);
-			$all_metaboxes = array(/*
-				'slider-slide-content-1' => $single_slide_content_1, 
-				'slider-slide-content-2' => $single_slide_content_2, 
-				'slider-slide-content-3' => $single_slide_content_3, 
-				'slider-slide-content-4' => $single_slide_content_4, 
-				'slider-slide-content-5' => $single_slide_content_5, */
+			$all_metaboxes = array(
 				'slider-all-slides' => $all_slides,
 				'slider-slides-settings-count' => $single_slide_count, 
 				'slider-slides-settings-basic' => $basic_slide_options, 
@@ -1063,18 +987,26 @@ class Slider extends CustomPostType {
 					
 					$i = 0;
 					$slides_all = array();
+					// Add any existing slides to slides_all:
 					for ($i = 0; $i < 50; $i++) { // Arbitrary limit of 50
 						if ($slide_content_type[$i] !== NULL) {
 							$slides_all[] .= $i;
 						}
 					}
+					// Loop through slides_all for existing slides
+					// TODO: Don't assume $slide_content_type has a value-- it could be dragged and removed later!
+					// TODO: Check for slide order values instead 
 					if ($slide_content_type[0] == ('image' || 'video')) {
-						//var_dump($slides_all);
-						foreach ($slides_all as $s) { 
-						
+						foreach ($slides_all as $s) { 						
 						
 					?>
-						<li class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
+						<li class="custom_repeatable">
+						
+							<div class="handlediv" title="Click to toggle"> </div>
+								<h3 class="hndle">
+								<span>Slide</span>
+							</h3>
+						
 							<table class="form-table">
 							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 								<tr>
@@ -1089,8 +1021,18 @@ class Slider extends CustomPostType {
 								<tr>
 									<th><label for="ss_slide_image[<?=$s?>]">Slide Image</label></th>
 									<td>
-										
-									
+										<?php
+											if ($slide_image){
+												$image = get_post($slide_image[$s]);
+												$url   = wp_get_attachment_url($image->ID);
+											}else{
+												$image= null;
+											}
+											//var_dump($image);
+										?>
+										<?php if($image):?>
+										<a href="<?=$url?>"><?=$image->post_title?></a><br /><br />
+										<?php endif;?>									
 										<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$s?>]"><br />
 									</td>
 								</tr>
@@ -1148,6 +1090,7 @@ class Slider extends CustomPostType {
 						
 					<?php	
 						}
+					
 					} else {
 						$i = 0;
 						?>
@@ -1233,93 +1176,7 @@ class Slider extends CustomPostType {
 		<?php
 	}
  
-
-	/**
-	 * Individual functions for showing metabox content
-	 *
-	 **/
-	
-	// Slides 1-5: 
-	/*
-	public function show_meta_box_slide_1_content($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		
-		$meta_box = $meta_box['slider-slide-content-1'];
-		?>
-		<table class="form-table">
-		<?php
-			foreach($meta_box['fields'] as $field):
-				$this->display_meta_fields($post, $field);
-			endforeach;
-		print "</table>";
-		
-	}
-	public function show_meta_box_slide_2_content($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		
-		$meta_box = $meta_box['slider-slide-content-2'];
-		?>
-		<table class="form-table">
-		<?php
-			foreach($meta_box['fields'] as $field):
-				$this->display_meta_fields($post, $field);
-			endforeach;
-		print "</table>";
-		
-	}
-	public function show_meta_box_slide_3_content($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		
-		$meta_box = $meta_box['slider-slide-content-3'];
-		?>
-		<table class="form-table">
-		<?php
-			foreach($meta_box['fields'] as $field):
-				$this->display_meta_fields($post, $field);
-			endforeach;
-		print "</table>";
-		
-	}
-	public function show_meta_box_slide_4_content($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		
-		$meta_box = $meta_box['slider-slide-content-4'];
-		?>
-		<table class="form-table">
-		<?php
-			foreach($meta_box['fields'] as $field):
-				$this->display_meta_fields($post, $field);
-			endforeach;
-		print "</table>";
-		
-	}
-	public function show_meta_box_slide_5_content($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		
-		$meta_box = $meta_box['slider-slide-content-5'];
-		?>
-		<table class="form-table">
-		<?php
-			foreach($meta_box['fields'] as $field):
-				$this->display_meta_fields($post, $field);
-			endforeach;
-		print "</table>";
-		
-	}
-	*/
-	
-	
-	//
+ 	// Individual slide container:
 	public function show_meta_box_slide_all($post) {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
@@ -1382,27 +1239,10 @@ class Slider extends CustomPostType {
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
 			foreach ($metabox as $key => $single_metabox) {
-				switch ($key) {/*
-					case 'slider-slide-content-1':
-						$metabox_view_function = 'show_meta_box_slide_1_content';
-						break;
-					case 'slider-slide-content-2':
-						$metabox_view_function = 'show_meta_box_slide_2_content';
-						break;
-					case 'slider-slide-content-3':
-						$metabox_view_function = 'show_meta_box_slide_3_content';
-						break;
-					case 'slider-slide-content-4':
-						$metabox_view_function = 'show_meta_box_slide_4_content';
-						break;
-					case 'slider-slide-content-5':
-						$metabox_view_function = 'show_meta_box_slide_5_content';
-						break;			*/	
-						
+				switch ($key) {						
 					case 'slider-all-slides':
 						$metabox_view_function = 'show_meta_box_slide_all';
 						break;	
-						
 					case 'slider-slides-settings-count':
 						$metabox_view_function = 'show_meta_box_slide_count';
 						break;
