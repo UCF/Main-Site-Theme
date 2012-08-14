@@ -1072,7 +1072,6 @@ class Slider extends CustomPostType {
 						//var_dump($slides_all);
 						foreach ($slides_all as $s) { 
 						
-						print $s;
 						
 					?>
 						<li class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
@@ -1099,9 +1098,7 @@ class Slider extends CustomPostType {
 									<th><label for="ss_slide_video[<?=$s?>]">Slide Video</label></th>
 									<td>
 										<span class="description">Copy and paste your video embed code here.</span><br/>
-										<textarea name="ss_slide_video[<?=$s?>]" id="ss_slide_video[<?=$s?>]" cols="60" rows="4">
-										<?php ($slide_video[$s] !== '') ? print $slide_video[$s] : ''; ?>
-										</textarea>
+										<textarea name="ss_slide_video[<?=$s?>]" id="ss_slide_video[<?=$s?>]" cols="60" rows="4"><?php ($slide_video[$s] !== '') ? print $slide_video[$s] : ''; ?></textarea>
 									</td>
 								</tr>
 								<tr>
@@ -1135,9 +1132,7 @@ class Slider extends CustomPostType {
 									<th><label for="ss_slide_content[<?=$s?>]">Slide Content</label></th>
 									<td>
 										<span class="description">(Optional) HTML tags and WordPress shortcodes are allowed.</span><br/>
-										<textarea name="ss_slide_content[<?=$s?>]" id="ss_slide_content[<?=$s?>]" cols="60" rows="4">
-										<?php ($slide_content[$s] !== '') ? print $slide_content[$s] : ''; ?>
-										</textarea>
+										<textarea name="ss_slide_content[<?=$s?>]" id="ss_slide_content[<?=$s?>]" cols="60" rows="4"><?php ($slide_content[$s] !== '') ? print $slide_content[$s] : ''; ?></textarea>
 									</td>
 								</tr>
 								<tr>
