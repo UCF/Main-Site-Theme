@@ -646,7 +646,7 @@ class Person extends CustomPostType
  * Describes a set of centerpiece slides
  *
  * @author Jo Greybill
- * borrowed from SmartStart theme
+ * pieces borrowed from SmartStart theme
  **/
 
 class Slider extends CustomPostType {
@@ -663,6 +663,7 @@ class Slider extends CustomPostType {
 		$use_order      = False,
 		$use_title      = True,
 		$use_metabox    = True,
+		$use_revisions	= False,
 		$taxonomies     = '';
 	
 	public function fields(){
@@ -1000,7 +1001,7 @@ class Slider extends CustomPostType {
 						foreach ($slides_all as $s) { 						
 						
 					?>
-						<li class="custom_repeatable">
+						<li class="custom_repeatable postbox">
 						
 							<div class="handlediv" title="Click to toggle"> </div>
 								<h3 class="hndle">
@@ -1085,7 +1086,7 @@ class Slider extends CustomPostType {
 								</tr>
 								
 							</table>
-							<a class="repeatable-remove button" href="#">- Remove Slide</a>
+							<a class="repeatable-remove button" href="#">Remove Slide</a>
 						</li>	
 						
 					<?php	
@@ -1094,7 +1095,7 @@ class Slider extends CustomPostType {
 					} else {
 						$i = 0;
 						?>
-						<li class="custom_repeatable"><span class="sort hndle">Drag Me!</span>
+						<li class="custom_repeatable postbox"><span class="sort hndle">Drag Me!</span>
 							<table class="form-table">
 							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 								<tr>
@@ -1161,13 +1162,13 @@ class Slider extends CustomPostType {
 								</tr>
 								
 							</table>
-							<a class="repeatable-remove button" href="#">- Remove Slide</a>
+							<a class="repeatable-remove button" href="#">Remove Slide</a>
 						</li>
 						<?php
 						
 					}
 				?>
-						<a class="repeatable-add button" href="#">+ Add New Slide</a><br/>
+						<a class="repeatable-add button-primary" href="#">Add New Slide</a><br/>
 						
 				
 			</ul>

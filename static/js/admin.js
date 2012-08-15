@@ -239,6 +239,55 @@ WebcomAdmin.themeOptions = function($){
 			slide_count_widget.hide();
 		}
 		
+		// If only one slide is available on the page, hide the 'Remove slide' button for that slide:
+		var hideOnlyRemoveBtn = function() {
+			if ($('#ss_slides_all li.custom_repeatable').length < 2) {
+				$('#ss_slides_all li.custom_repeatable:first-child a.repeatable-remove').hide();
+			}
+			else {
+				$('#ss_slides_all li.custom_repeatable a.repeatable-remove').show();
+			}
+		}
+		
+		// Sortable slides
+		$('#ss_slides_wrapper').sortable({
+			handle      : '.custom_repeatable .hndle',
+			placeholder : '#ss_slides_all',
+			sort        : function( event, ui ) {
+				$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
+			},
+			tolerance   :'pointer'
+		});
+	
+		// Toggle slide with header click
+		$('#slider_slides').delegate('.custom_repeatable .hndle', 'click', function() {
+			$(this).siblings('.inside').toggle().end().parent().toggleClass('closed');
+		});
+		
+		
+		// Admin onload:
+		slide_count_widget.hide();
+		updateSliderSortOrder();
+		displaySlideOptions();
+		hideOnlyRemoveBtn();
+		
+		// Content Type radio button onchange:
+		$('#ss_slides_all .custom_repeatable input[name^="ss_type_of_content["]').change(function() {
+			//alert('change');
+			// Re-show and hide the count widget div so we can affect its children:
+			slide_count_widget.show();
+			checkSlideCount();
+			slide_count_widget.hide();
+			displaySlideOptions();
+		});
+		
+		// Slide widget drag/drop on stop:
+		$('#slider-slide-content-1 .hndle, #slider-slide-content-2 .hndle, #slider-slide-content-3 .hndle, #slider-slide-content-4 .hndle, #slider-slide-content-5 .hndle')
+		.mousedown(function() {
+			$(window).mousemove(function() { // Not perfect but works:
+				updateSliderSortOrder();
+			});
+		});
 		
 		// Add/remove Slide button functionality:
 		$('.repeatable-add').click(function() {
@@ -257,43 +306,26 @@ WebcomAdmin.themeOptions = function($){
 				});
 			});
 			// Update 'id' attributes
-			$('textarea, input[type="text"], input[type="radio"], input[type="select"], input[type="checkbox"]', field).val('').attr('id', function(index, val) {
+			$('textarea, input[type="text"], input[type="select"], input[type="checkbox"], input[type="radio"], input[type="checkbox"]', field).val('').attr('id', function(index, val) {
 				return val.replace(/(\d+)/, function(fullMatch, n) {
 					return Number(n) + 1;
 				});
 			});
+			// Remove other existing data from previous slide:
+			$('input[type="radio"]', field).removeAttr('checked');
+			$('label[for^="ss_slide_image["]', field).parent('th').next('td').children('a, br:nth-child(2)').remove();
 			
 			field.insertAfter(fieldLocation, $(this).prev('li'));
+			
+			hideOnlyRemoveBtn();
+			
 			return false;
 		});
 		
 		$('.repeatable-remove').click(function(){
 			$(this).parent().remove();
+			hideOnlyRemoveBtn();
 			return false;
-		});
-		
-		
-		// Admin onload:
-		slide_count_widget.hide();
-		updateSliderSortOrder();
-		displaySlideOptions();
-		
-		// Content Type radio button onchange:
-		$('#ss_slides_all .custom_repeatable input[name^="ss_type_of_content["]').change(function() {
-			//alert('change');
-			// Re-show and hide the count widget div so we can affect its children:
-			slide_count_widget.show();
-			checkSlideCount();
-			slide_count_widget.hide();
-			displaySlideOptions();
-		});
-		
-		// Slide widget drag/drop on stop:
-		$('#slider-slide-content-1 .hndle, #slider-slide-content-2 .hndle, #slider-slide-content-3 .hndle, #slider-slide-content-4 .hndle, #slider-slide-content-5 .hndle')
-		.mousedown(function() {
-			$(window).mousemove(function() { // Not perfect but works:
-				updateSliderSortOrder();
-			});
 		});
 	}
 	
