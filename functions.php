@@ -32,12 +32,10 @@ function ss_framework_manage_slider_columns( $column, $post_id ) {
 	global $post;
 	switch ( $column ) {
 		case 'slide_count':
-			$slider_slides = get_post_meta( $post->ID, $id, true ) ? get_post_meta( $post->ID, $id, true ) : false;
-			$slide_count = count( unserialize( $slider_slides['ss_slider_slides'][0] ) );
-			echo $slide_count;
+			print get_post_meta( $post->ID, 'ss_slider_slidecount', true );
 			break;
 		case 'shortcode':
-			echo '<span class="shortcode-field">[slider id="'. $post->post_name . '"]</span>';
+			print '<span class="shortcode-field">[slider id="'. $post->post_name . '"]</span>';
 			break;
 		default:
 			break;
