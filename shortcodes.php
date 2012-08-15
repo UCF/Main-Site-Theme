@@ -175,7 +175,11 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 					$output .= '<li class="centerpiece_single" data-duration="'.$slide_duration.'">';
 					
 					if ($slide_content_type[$s] == 'image') {
-						$output .= '<img src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'" />';
+						$output .= '<img src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'"';
+						if ($rounded_corners == 'on') {
+							$output .= 'style="border-radius: 10px;"';
+						}
+						$output .= '/>';
 					}
 					else {
 						$output .= $slide_video[$s];

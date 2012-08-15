@@ -187,7 +187,7 @@ body { font-family: Georgia, serif; }
 #centerpiece_slider li img { width: 1084px; height: 531px; }
  
 /* The following code just sets the control button styling */
-#centerpiece_control { display: block; position: absolute; bottom: 10px; left: 10px; z-index: 5; }
+#centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 5; }
 #centerpiece_control a { 
 	text-indent: -9999px;
 	line-height: 1px;
