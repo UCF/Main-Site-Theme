@@ -966,8 +966,7 @@ class Slider extends CustomPostType {
 	
 	/**
 	 * Show fields for single slides:
-	 *
-	 **/
+	**/
 	public static function display_slide_meta_fields($post) { 
 		
 		// Get any already-existing values for these fields:
@@ -989,16 +988,18 @@ class Slider extends CustomPostType {
 					$i = 0;
 					$slides_all = array();
 					// Add any existing slides to slides_all:
-					for ($i = 0; $i < 50; $i++) { // Arbitrary limit of 50
-						if ($slide_content_type[$i] !== NULL) {
+					for ($i = 0; $i < 50; $i++) { // Arbitrary limit of 50					
+						if ($slide_content_type[$i] !== NULL && $slide_content_type[$i] !== '') {
 							$slides_all[] .= $i;
 						}
 					}
-					// Loop through slides_all for existing slides
-					// TODO: Don't assume $slide_content_type has a value-- it could be dragged and removed later!
-					// TODO: Check for slide order values instead 
-					if ($slide_content_type[0] == ('image' || 'video')) {
-						foreach ($slides_all as $s) { 						
+					
+					// Loop through slides_all for existing slides. If slides_all has some initial value,
+					// start displaying the existing contents per each value in slides_all.  Else, display
+					// a single empty slide 'widget'.
+					if ($slides_all[0] !== NULL) {
+						foreach ($slides_all as $s) { 	
+						
 						
 					?>
 						<li class="custom_repeatable postbox">
@@ -1095,7 +1096,12 @@ class Slider extends CustomPostType {
 					} else {
 						$i = 0;
 						?>
-						<li class="custom_repeatable postbox"><span class="sort hndle">Drag Me!</span>
+						<li class="custom_repeatable postbox">
+						
+							<div class="handlediv" title="Click to toggle"> </div>
+								<h3 class="hndle">
+								<span>Slide</span>
+							</h3>
 							<table class="form-table">
 							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 								<tr>
@@ -1169,8 +1175,6 @@ class Slider extends CustomPostType {
 					}
 				?>
 						<a class="repeatable-add button-primary" href="#">Add New Slide</a><br/>
-						
-				
 			</ul>
 			
 		</div>
@@ -1179,10 +1183,6 @@ class Slider extends CustomPostType {
  
  	// Individual slide container:
 	public function show_meta_box_slide_all($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		$meta_box = $meta_box['slider-all-slides'];
 		$this->display_slide_meta_fields($post);
 	}
 	
