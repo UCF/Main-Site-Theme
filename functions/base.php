@@ -1599,6 +1599,7 @@ function _save_meta_data($post_id, $meta_box){
 				}
 			}
 		}
+		
 		// Single slide meta data:
 		if ($_POST['ss_type_of_content']) { // If a type of content is set for the slide, save its content:	
 		
@@ -1638,6 +1639,10 @@ function _save_meta_data($post_id, $meta_box){
 				array(
 					'id'	=> 'ss_slide_links_to',
 					'val'	=> $_POST['ss_slide_links_to'],
+				),
+				array(
+					'id'	=> 'ss_slide_link_newtab',
+					'val'	=> $_POST['ss_slide_link_newtab'],
 				),
 			);
 		

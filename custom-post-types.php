@@ -979,6 +979,7 @@ class Slider extends CustomPostType {
 		$slide_button_desc			= get_post_meta($post->ID, 'ss_button_desc', TRUE);
 		$slide_content				= get_post_meta($post->ID, 'ss_slide_content', TRUE);
 		$slide_links_to				= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
+		$slide_link_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
 		$slide_order				= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
 		
 		?>
@@ -991,7 +992,7 @@ class Slider extends CustomPostType {
 					if ($slide_order) {
 						$slide_array = explode(",", $slide_order);
 						foreach ($slide_array as $s) {
-							if ($s !== '') {
+							if ($s !== '') {		
 					?>
 							<li class="custom_repeatable postbox">
 							
@@ -1076,6 +1077,12 @@ class Slider extends CustomPostType {
 											<input type="text" name="ss_slide_links_to[<?=$s?>]" id="ss_slide_links_to[<?=$s?>]" value="<?php ($slide_links_to[$s] !== '') ? print $slide_links_to[$s] : ''; ?>" /><span class="description"> (Optional)</span><br/>
 										</td>
 									</tr>
+									<tr>
+										<th><label for="ss_slide_link_newtab[<?=$s?>]">Open Link in a New Window</label></th>
+										<td>
+											<input type="checkbox" name="ss_slide_link_newtab[<?=$s?>]" id="ss_slide_link_newtab[<?=$s?>]"<?php ($slide_link_newtab[$s] == 'on') ? print 'checked="checked"' : ''; ?> /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
+										</td>
+									</tr>
 									
 								</table>
 								<a class="repeatable-remove button" href="#">Remove Slide</a>
@@ -1158,6 +1165,12 @@ class Slider extends CustomPostType {
 										<input type="text" name="ss_slide_links_to[<?=$i?>]" id="ss_slide_links_to[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
 									</td>
 								</tr>
+								<tr>
+										<th><label for="ss_slide_link_newtab[<?=$i?>]">Open Link in a New Window</label></th>
+										<td>
+											<input type="checkbox" name="ss_slide_link_newtab[<?=$i?>]" id="ss_slide_link_newtab[<?=$i?>]" /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
+										</td>
+									</tr>
 								
 							</table>
 							<a class="repeatable-remove button" href="#">Remove Slide</a>
