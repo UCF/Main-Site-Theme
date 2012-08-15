@@ -336,7 +336,7 @@ WebcomAdmin.themeOptions = function($){
 			$('input[type="radio"]', field).removeAttr('checked');
 			$('label[for^="ss_slide_image["]', field).parent('th').next('td').children('a, br:nth-child(2)').remove();
 			
-			field.insertAfter(fieldLocation, $(this).prev('li'));
+			field.fadeIn().insertAfter(fieldLocation, $(this).prev('li'));
 			
 			hideOnlyRemoveBtn();
 			return false;
