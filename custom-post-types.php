@@ -765,132 +765,10 @@ class Slider extends CustomPostType {
 						),		
 					), // fields
 				);
-			$advanced_slide_options = 	
-				// Advanced Slider Display Options:
-				array(
-					'id' => 'slider-slides-settings-advanced',
-					'title' => 'Advanced Slider Display Options',
-					'page' => 'slider',
-					'context' => 'side',
-					'priority' => 'default',
-					'fields' => array(
-						array(
-							'name'    => __('Easing type for the animation'),
-							'id'      => $prefix . 'slider_easing',
-							'type'    => 'select',
-							'std'     => 'easeInOutExpo',
-							'desc'    => '',
-							'options' => array(
-								'linear'           => 'linear',
-								'swing'            => 'swing',
-								'jswing'           => 'jswing',
-								'easeInQuad'       => 'easeInQuad',
-								'easeOutQuad'      => 'easeOutQuad',
-								'easeInOutQuad'    => 'easeInOutQuad',
-								'easeInCubic'      => 'easeInCubic',
-								'easeOutCubic'     => 'easeOutCubic',
-								'easeInOutCubic'   => 'easeInOutCubic',
-								'easeInQuart'      => 'easeInQuart',
-								'easeOutQuart'     => 'easeOutQuart',
-								'easeInOutQuart'   => 'easeInOutQuart',
-								'easeInQuint'      => 'easeInQuint',
-								'easeOutQuint'     => 'easeOutQuint',
-								'easeInOutQuint'   => 'easeInOutQuint',
-								'easeInSine'       => 'easeInSine',
-								'easeOutSine'      => 'easeOutSine',
-								'easeInOutSine'    => 'easeInOutSine',
-								'easeInExpo'       => 'easeInExpo',
-								'easeOutExpo'      => 'easeOutExpo',
-								'easeInOutExpo'    => 'easeInOutExpo',
-								'easeInCirc'       => 'easeInCirc',
-								'easeOutCirc'      => 'easeOutCirc',
-								'easeInOutCirc'    => 'easeInOutCirc',
-								'easeInElastic'    => 'easeInElastic',
-								'easeOutElastic'   => 'easeOutElastic',
-								'easeInOutElastic' => 'easeInOutElastic',
-								'easeInBack'       => 'easeInBack',
-								'easeOutBack'      => 'easeOutBack',
-								'easeInOutBack'    => 'easeInOutBack',
-								'easeInBounce'     => 'easeInBounce',
-								'easeOutBounce'    => 'easeOutBounce',
-								'easeInOutBounce'  => 'easeInOutBounce'
-							)
-						),
-						array(
-							'name' => __('Pause autoplay on mouseover'),
-							'id'   => $prefix . 'slider_pause_on_hover',
-							'type' => 'checkbox',
-							'std'  => '1',
-							'desc' => ''
-						),
-						array(
-							'name' => __('Stop autoplay on click'),
-							'id'   => $prefix . 'slider_stop_on_click',
-							'type' => 'checkbox',
-							'std'  => '0',
-							'desc' => ''
-						),
-						array(
-							'name'    => __('Content box position'),
-							'id'      => $prefix . 'slider_content_position',
-							'type'    => 'select',
-							'std'     => 'def',
-							'desc'    => '',
-							'options' => array(
-								''     => 'default',
-								'center' => 'center',
-								'bottom' => 'bottom'
-							)
-						),
-						array(
-							'name' => __('Speed of the content box transition'),
-							'id'   => $prefix . 'slider_content_speed',
-							'type' => 'text',
-							'std'  => '450',
-							'desc' => ''
-						),
-						array(
-							'name' => __('Show content box only on mouseover'),
-							'id'   => $prefix . 'slider_show_content_onhover',
-							'type' => 'checkbox',
-							'std'  => '1',
-							'desc' => ''
-						),
-						array(
-							'name' => __('Hide content box'),
-							'id'   => $prefix . 'slider_hide_content',
-							'type' => 'checkbox',
-							'std'  => '0',
-							'desc' => ''
-						),
-						array(
-							'name' => __('Hide bottom navigation buttons'),
-							'id'   => $prefix . 'slider_hide_bottom_buttons',
-							'type' => 'checkbox',
-							'std'  => '0',
-							'desc' => ''
-						),
-						array(
-							'name' => __('Slider container height'),
-							'id'   => $prefix . 'slider_height',
-							'type' => 'text',
-							'std'  => '380',
-							'desc' => ''
-						),
-						array(
-							'name' => __('Slider container width'),
-							'id'   => $prefix . 'slider_width',
-							'type' => 'text',
-							'std'  => '940',
-							'desc' => ''
-						)
-					), // fields
-				);
 			$all_metaboxes = array(
 				'slider-all-slides' => $all_slides,
 				'slider-slides-settings-count' => $single_slide_count, 
-				'slider-slides-settings-basic' => $basic_slide_options, 
-				'slider-slides-settings-advanced' => $advanced_slide_options
+				'slider-slides-settings-basic' => $basic_slide_options
 			);
 			return $all_metaboxes;
 		}
@@ -980,6 +858,7 @@ class Slider extends CustomPostType {
 		$slide_content				= get_post_meta($post->ID, 'ss_slide_content', TRUE);
 		$slide_links_to				= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
 		$slide_link_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
+		$slide_duration				= get_post_meta($post->ID, 'ss_slide_duration', TRUE);
 		$slide_order				= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
 		
 		?>
@@ -1083,6 +962,13 @@ class Slider extends CustomPostType {
 											<input type="checkbox" name="ss_slide_link_newtab[<?=$s?>]" id="ss_slide_link_newtab[<?=$s?>]"<?php ($slide_link_newtab[$s] == 'on') ? print 'checked="checked"' : ''; ?> /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
 										</td>
 									</tr>
+									<tr>
+										<th><label for="ss_slide_duration[<?=$s?>]">Slide Duration</label></th>
+										<td>
+											<span class="description"> (Optional) Specify how long, in seconds, the slide should appear before transitioning.  Default is 6 seconds.</span><br/>
+											<input type="text" name="ss_slide_duration[<?=$s?>]" id="ss_slide_duration[<?=$s?>]" value="<?php ($slide_duration[$s] !== '') ? print $slide_duration[$s] : ''; ?>" />
+										</td>
+									</tr>
 									
 								</table>
 								<a class="repeatable-remove button" href="#">Remove Slide</a>
@@ -1166,11 +1052,19 @@ class Slider extends CustomPostType {
 									</td>
 								</tr>
 								<tr>
-										<th><label for="ss_slide_link_newtab[<?=$i?>]">Open Link in a New Window</label></th>
-										<td>
-											<input type="checkbox" name="ss_slide_link_newtab[<?=$i?>]" id="ss_slide_link_newtab[<?=$i?>]" /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
-										</td>
-									</tr>
+									<th><label for="ss_slide_link_newtab[<?=$i?>]">Open Link in a New Window</label></th>
+									<td>
+									<input type="checkbox" name="ss_slide_link_newtab[<?=$i?>]" id="ss_slide_link_newtab[<?=$i?>]" /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_duration[<?=$i?>]">Slide Duration</label></th>
+									<td>
+										<span class="description"> (Optional) Specify how long, in seconds, the slide should appear before transitioning.  Default is 6 seconds.</span><br/>
+										<input type="text" name="ss_slide_duration[<?=$i?>]" id="ss_slide_duration[<?=$i?>]" value="" />
+									</td>
+								</tr>
+								
 								
 							</table>
 							<a class="repeatable-remove button" href="#">Remove Slide</a>
@@ -1222,23 +1116,7 @@ class Slider extends CustomPostType {
 				$this->display_meta_fields($post, $field);
 			endforeach;
 		print "</table>";
-	}
-	
-	// Advanced Slider Display Options:
-	public function show_meta_box_slide_advanced($post) {
-		if ($this->options('use_metabox')) {
-			$meta_box = $this->metabox();
-		}
-		$meta_box = $meta_box['slider-slides-settings-advanced'];
-		?>
-		<table class="form-table">
-		<?php
-			foreach($meta_box['fields'] as $field):
-				$this->display_meta_fields($post, $field);
-			endforeach;
-		print "</table>";
-	}
-	
+	}	
 	
 	
 	public function register_metaboxes(){
@@ -1254,9 +1132,6 @@ class Slider extends CustomPostType {
 						break;
 					case 'slider-slides-settings-basic':
 						$metabox_view_function = 'show_meta_box_slide_basic';
-						break;
-					case 'slider-slides-settings-advanced':
-						$metabox_view_function = 'show_meta_box_slide_advanced';
 						break;
 					default:
 						break;

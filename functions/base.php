@@ -1644,6 +1644,10 @@ function _save_meta_data($post_id, $meta_box){
 					'id'	=> 'ss_slide_link_newtab',
 					'val'	=> $_POST['ss_slide_link_newtab'],
 				),
+				array(
+					'id'	=> 'ss_slide_duration',
+					'val'	=> $_POST['ss_slide_duration'],
+				),
 			);
 		
 			foreach ($single_slide_meta as $field) {
