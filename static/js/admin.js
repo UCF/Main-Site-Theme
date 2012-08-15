@@ -225,10 +225,13 @@ WebcomAdmin.themeOptions = function($){
 		// Update the Slide Sort Order:
 		var updateSliderSortOrder = function() {
 			var sortOrder = [];
-			i = 0;
-			$('#ss_slides_all .custom_repeatable').each(function() {
-				sortOrder[sortOrder.length] = i;
-				i++;
+			
+			$('input[name^="ss_type_of_content["]:checked').each(function() {
+				// get number by trimming the input ID
+				var inputID =  ($(this).attr('name').split('ss_type_of_content[')[1])
+				var inputID = inputID.substr(0, inputID.length - 1);
+				
+				sortOrder[sortOrder.length] = inputID;
 			});
 			
 			if (slide_count_widget.is('hidden')) {
@@ -237,7 +240,6 @@ WebcomAdmin.themeOptions = function($){
 			
 			var orderString = '';
 			$.each(sortOrder, function(index, value) {
-				//value = parseInt(value.substr(value.length-2, value.length-1));
 				// make sure we only have number values (i.e. only slider widgets):
 				if (!isNaN(value)) {
 					orderString += value + ",";
@@ -270,6 +272,9 @@ WebcomAdmin.themeOptions = function($){
 			sort        : function( event, ui ) {
 				$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
 			},
+			update		: function( event, ui ) {
+				updateSliderSortOrder();
+			},
 			tolerance   :'pointer'
 		});
 	
@@ -292,38 +297,40 @@ WebcomAdmin.themeOptions = function($){
 		$('#ss_slides_all .custom_repeatable input[name^="ss_type_of_content["]').change(function() {
 			checkSlideCount();
 			displaySlideOptions();
+			updateSliderSortOrder();
 		});
-		
-		
-		// Slide widget drag/drop on stop:
-		$('#ss_slides_all .custom_repeatable .hndle').mousedown(function() {
-			$(window).mousemove(function() { // Not perfect but works:
-				updateSliderSortOrder();
-			});
-		});
-		
+				
 		
 		// Add/remove Slide button functionality:
 		$('.repeatable-add').click(function() {
 			field = $(this).prev('li').clone(true);
 			fieldLocation = $(this).prev('li');
+			
+			// Get the highest ID 'widget' number to prevent duplicate IDs after sorting:
+			var widget_numbers = new Array();
+			$('input[name^="ss_type_of_content["]').each(function() {
+				// get number by trimming the input ID
+				var inputID =  ($(this).attr('name').split('ss_type_of_content[')[1])
+				var inputID = inputID.substr(0, inputID.length - 1);
+				widget_numbers[widget_numbers.length] = inputID;
+			});
+			var highest_num = Math.max.apply(Math, widget_numbers);
+			
 			// Update 'name' attributes
 			$('input, textarea', field).val('').attr('name', function(index, name) {
+				/*
 				return name.replace(/(\d+)/, function(fullMatch, n) {
 					return Number(n) + 1;
-				});
+				});*/
+				return name.replace(/(\d+)/, highest_num + 1);
 			});
 			// Update 'for' attributes (in <label>)
 			$('label', field).val('').attr('for', function(index, forval) {
-				return forval.replace(/(\d+)/, function(fullMatch, n) {
-					return Number(n) + 1;
-				});
+				return forval.replace(/(\d+)/, highest_num + 1);
 			});
 			// Update 'id' attributes
-			$('textarea, input[type="text"], input[type="select"], input[type="checkbox"], input[type="radio"], input[type="checkbox"]', field).val('').attr('id', function(index, val) {
-				return val.replace(/(\d+)/, function(fullMatch, n) {
-					return Number(n) + 1;
-				});
+			$('textarea, input[type="text"], input[type="select"], input[type="checkbox"], input[type="radio"], input[type="checkbox"]', field).val('').attr('id', function(index, idval) {
+				return idval.replace(/(\d+)/, highest_num + 1);
 			});
 			// Remove other existing data from previous slide:
 			$('input[type="radio"]', field).removeAttr('checked');
@@ -338,6 +345,7 @@ WebcomAdmin.themeOptions = function($){
 			$(this).parent().remove();
 			hideOnlyRemoveBtn();
 			checkSlideCount();
+			updateSliderSortOrder();
 			return false;
 		});
 	}
