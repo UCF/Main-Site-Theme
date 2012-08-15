@@ -60,13 +60,4 @@ function ss_framework_change_slider_title( $title ){
 add_filter('enter_title_here', 'ss_framework_change_slider_title');
 
 
-
-// enqueue scripts and styles, but only if is_admin
-if(is_admin()) {
-	wp_enqueue_script('jquery-ui-datepicker');
-	wp_enqueue_script('jquery-ui-slider');
-	wp_enqueue_script('custom-js', get_template_directory_uri().'/static/js/custom-js.js');
-	wp_enqueue_style('jquery-ui-custom', get_template_directory_uri().'/static/css/jquery-ui-custom.css');
-}
-
 ?>
