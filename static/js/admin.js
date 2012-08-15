@@ -250,14 +250,14 @@ WebcomAdmin.themeOptions = function($){
 		}
 		
 		// Sortable slides
-		$('#ss_slides_wrapper').sortable({
-			handle      : '.custom_repeatable .hndle',
-			placeholder : '#ss_slides_all',
-			sort        : function( event, ui ) {
-				$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
-			},
-			tolerance   :'pointer'
-		});
+		$('#ss_slides_all').sortable({
+		handle      : 'h3.hndle',
+		placeholder : 'sortable-placeholder',
+		sort        : function( event, ui ) {
+			$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
+		},
+		tolerance   :'pointer'
+	});
 	
 		// Toggle slide with header click
 		$('#slider_slides').delegate('.custom_repeatable .hndle', 'click', function() {
