@@ -185,8 +185,20 @@ body { font-family: Georgia, serif; }
  
 #centerpiece_slider li {width: 1084px; height: 531px; float: left; list-style-type: none;}
 #centerpiece_slider li img { width: 1084px; height: 531px; }
+#centerpiece_slider li .slide_contents { 
+	position: absolute;
+	display: block;
+	z-index: 999;
+	top: 40%; 
+	right: 0;
+	color: #fff; 
+	font-family: 'Helvetica Neue', Helvetica, sans-serif; 
+	font-size: 16px; 
+	padding: 20px;
+	background: #000;
+	background: rgba(0,0,0,0.6);
+}
  
-/* The following code just sets the control button styling */
 #centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 5; }
 #centerpiece_control a { 
 	text-indent: -9999px;
