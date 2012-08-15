@@ -203,21 +203,26 @@ WebcomAdmin.themeOptions = function($){
 			});*/
 		}
 		
-		// Function that updates slide count value based on if a Slide's Content Type is selected:
+		
+		// Function that updates Slide Count value based on if a Slide's Content Type is selected:
 		var checkSlideCount = function() {
-			var slideCount = 0;
-			for (i = 0; i < 50; i++) { // Arbitrary limit of 50
-				var slide_content_type = $('input[name="ss_type_of_content['+i+']"]');
-				
-				if (slide_content_type && slide_content_type.filter(':checked').length > 0) {
-					slideCount = slideCount + 1;
-				}
-				$("input#ss_slider_slidecount").val(slideCount);
+			if (slide_count_widget.is('hidden')) {
+				slide_count_widget.show();
+			}
+			
+			var slideCount = $('input[name^="ss_type_of_content["]:checked').length;
+			
+			//alert('slideCount is: '+ slideCount + '; input value is: ' + $('input#ss_slider_slidecount').attr('value'));
+			
+			$("input#ss_slider_slidecount").attr('value', slideCount);
+			
+			if (slide_count_widget.is('visible')) {
+				slide_count_widget.hide();
 			}
 		}
 		
 		
-		// Update the slide sort order:
+		// Update the Slide Sort Order:
 		var updateSliderSortOrder = function() {
 			var sortOrder = [];
 			i = 0;
@@ -225,7 +230,11 @@ WebcomAdmin.themeOptions = function($){
 				sortOrder[sortOrder.length] = i;
 				i++;
 			});
-			slide_count_widget.show();
+			
+			if (slide_count_widget.is('hidden')) {
+				slide_count_widget.show();
+			}
+			
 			var orderString = '';
 			$.each(sortOrder, function(index, value) {
 				//value = parseInt(value.substr(value.length-2, value.length-1));
@@ -236,8 +245,12 @@ WebcomAdmin.themeOptions = function($){
 			});
 			// add each value to Slide Order field value:
 			$('#ss_slider_slideorder').attr('value', orderString);
-			slide_count_widget.hide();
+			
+			if (slide_count_widget.is('visible')) {
+				slide_count_widget.hide();
+			}
 		}
+		
 		
 		// If only one slide is available on the page, hide the 'Remove slide' button for that slide:
 		var hideOnlyRemoveBtn = function() {
@@ -249,15 +262,17 @@ WebcomAdmin.themeOptions = function($){
 			}
 		}
 		
+		
 		// Sortable slides
 		$('#ss_slides_all').sortable({
-		handle      : 'h3.hndle',
-		placeholder : 'sortable-placeholder',
-		sort        : function( event, ui ) {
-			$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
-		},
-		tolerance   :'pointer'
-	});
+			handle      : 'h3.hndle',
+			placeholder : 'sortable-placeholder',
+			sort        : function( event, ui ) {
+				$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
+			},
+			tolerance   :'pointer'
+		});
+	
 	
 		// Toggle slide with header click
 		$('#slider_slides').delegate('.custom_repeatable .hndle', 'click', function() {
@@ -267,27 +282,26 @@ WebcomAdmin.themeOptions = function($){
 		
 		// Admin onload:
 		slide_count_widget.hide();
+		checkSlideCount();
 		updateSliderSortOrder();
 		displaySlideOptions();
 		hideOnlyRemoveBtn();
 		
+		
 		// Content Type radio button onchange:
 		$('#ss_slides_all .custom_repeatable input[name^="ss_type_of_content["]').change(function() {
-			//alert('change');
-			// Re-show and hide the count widget div so we can affect its children:
-			slide_count_widget.show();
 			checkSlideCount();
-			slide_count_widget.hide();
 			displaySlideOptions();
 		});
 		
+		
 		// Slide widget drag/drop on stop:
-		$('#slider-slide-content-1 .hndle, #slider-slide-content-2 .hndle, #slider-slide-content-3 .hndle, #slider-slide-content-4 .hndle, #slider-slide-content-5 .hndle')
-		.mousedown(function() {
+		$('#ss_slides_all .custom_repeatable .hndle').mousedown(function() {
 			$(window).mousemove(function() { // Not perfect but works:
 				updateSliderSortOrder();
 			});
 		});
+		
 		
 		// Add/remove Slide button functionality:
 		$('.repeatable-add').click(function() {
@@ -318,13 +332,12 @@ WebcomAdmin.themeOptions = function($){
 			field.insertAfter(fieldLocation, $(this).prev('li'));
 			
 			hideOnlyRemoveBtn();
-			
 			return false;
 		});
-		
 		$('.repeatable-remove').click(function(){
 			$(this).parent().remove();
 			hideOnlyRemoveBtn();
+			checkSlideCount();
 			return false;
 		});
 	}
