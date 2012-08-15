@@ -172,7 +172,7 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 					$slide_image_url = wp_get_attachment_image_src($slide_image[$s], 'centerpiece-image');
 					$slide_duration  = ($slide_duration[$s] !== '' ? $slide_duration[$s] : 6);
 					
-					$output .= '<li class="centerpiece_single" data-duration="'.$slide_duration.'">';
+					$output .= '<li class="centerpiece_single" id="centerpiece_single_'.$s.'" data-duration="'.$slide_duration.'">';
 					
 					if ($slide_content_type[$s] == 'image') {
 						$output .= '<img src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'"';
@@ -180,6 +180,9 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 							$output .= 'style="border-radius: 10px;"';
 						}
 						$output .= '/>';
+						if ($slide_content[$s] !== '') {
+							$output .= '<div class="slide_contents">'.$slide_content[$s].'</div>';
+						}
 					}
 					else {
 						$output .= $slide_video[$s];
