@@ -1605,6 +1605,10 @@ function _save_meta_data($post_id, $meta_box){
 		
 			$single_slide_meta = array(
 				array(
+					'id'	=> 'ss_slide_title',
+					'val'	=> $_POST['ss_slide_title'],
+				),
+				array(
 					'id'	=> 'ss_type_of_content',
 					'val'	=> $_POST['ss_type_of_content'],
 				),

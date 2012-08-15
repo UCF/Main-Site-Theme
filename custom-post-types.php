@@ -711,58 +711,18 @@ class Slider extends CustomPostType {
 				// Basic Slider Display Options:
 				array(
 					'id' => 'slider-slides-settings-basic',
-					'title' => 'Basic Slider Display Options',
+					'title' => 'Slider Display Options',
 					'page' => 'slider',
 					'context' => 'side',
 					'priority' => 'default',
 					'fields' => array(
 						array(
-							'name'    => __('Transition type for the animation'),
-							'id'      => $prefix . 'slider_transition',
-							'type'    => 'select',
-							'std'     => 'random',
-							'desc'    => '',
-							'options' => array(
-								'def'                 => 'def',
-								'fade'                => 'fade',
-								'seqFade'             => 'seqFade',
-								'horizontalSlide'     => 'horizontalSlide',
-								'seqHorizontalSlide'  => 'seqHorizontalSlide',
-								'verticalSlide'       => 'verticalSlide',
-								'seqVerticalSlide'    => 'seqVerticalSlide',
-								'verticalSlideAlt'    => 'verticalSlideAlt',
-								'seqVerticalSlideAlt' => 'seqVerticalSlideAlt',
-								'random'              => 'random'
-							)
-						),	
-						array(
-							'name' => __('Speed of the animation transition'),
-							'id'   => $prefix . 'slider_speed',
-							'type' => 'text',
-							'std'  => '400',
+							'name' => __('Apply Rounded Corners'),
+							'id'   => $prefix . 'slider_rounded_corners',
+							'type' => 'checkbox',
+							'std'  => 'on',
 							'desc' => ''
 						),
-						array(
-							'name' => __('Time between slide transitions'),
-							'id'   => $prefix . 'slider_autoplay',
-							'type' => 'text',
-							'std'  => '3000',
-							'desc' => __('0 to disable autoplay.')
-						),
-						array(
-							'name' => __('Interval between each slide\'s animation'),
-							'id'   => $prefix . 'slider_seq_factor',
-							'type' => 'text',
-							'std'  => '100',
-							'desc' => __('Used for seqFade, seqHorizontalSlide, seqVerticalSlide &amp; seqVerticalSlideAlt.')
-						),
-						array(
-							'name' => __('First slide to be displayed'),
-							'id'   => $prefix . 'slider_first_slide',
-							'type' => 'text',
-							'std'  => '0',
-							'desc' => __('Zero-based index.')
-						),		
 					), // fields
 				);
 			$all_metaboxes = array(
@@ -848,6 +808,7 @@ class Slider extends CustomPostType {
 	public static function display_slide_meta_fields($post) { 
 		
 		// Get any already-existing values for these fields:
+		$slide_title		 		= get_post_meta($post->ID, 'ss_slide_title', TRUE);
 		$slide_content_type 		= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
 		$slide_image				= get_post_meta($post->ID, 'ss_slide_image', TRUE);
 		$slide_video				= get_post_meta($post->ID, 'ss_slide_video', TRUE);
@@ -878,6 +839,12 @@ class Slider extends CustomPostType {
 							
 								<table class="form-table">
 								<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
+									<tr>
+										<th><label for="ss_slide_title[<?=$i?>]">Slide Title</label></th>
+										<td>
+											<input type="text" name="ss_slide_title[<?=$i?>]" id="ss_slide_title[<?=$i?>]" value="<?php ($slide_title[$s] !== '') ? print $slide_title[$s] : ''; ?>" />
+										</td>
+									</tr>
 									<tr>
 										<th><label for="ss_type_of_content[<?=$s?>]">Type of Content</label></th>
 										<td>
@@ -958,6 +925,12 @@ class Slider extends CustomPostType {
 							</h3>
 							<table class="form-table">
 							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
+								<tr>
+									<th><label for="ss_slide_title[<?=$i?>]">Slide Title</label></th>
+									<td>
+										<input type="text" name="ss_slide_title[<?=$i?>]" id="ss_slide_title[<?=$i?>]" value="" />
+									</td>
+								</tr>
 								<tr>
 									<th><label for="ss_type_of_content[<?=$i?>]">Type of Content</label></th>
 									<td>
