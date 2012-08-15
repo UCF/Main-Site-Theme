@@ -1617,22 +1617,6 @@ function _save_meta_data($post_id, $meta_box){
 					'val' 	=> $_POST['ss_slide_video'],
 				),
 				array(
-					'id'	=> 'ss_button_type',
-					'val'	=> $_POST['ss_button_type'],
-				),
-				array(
-					'id'	=> 'ss_button_dropcap',
-					'val'	=> $_POST['ss_button_dropcap'],
-				),
-				array(
-					'id'	=> 'ss_button_title',
-					'val'	=> $_POST['ss_button_title'],
-				),
-				array(
-					'id'	=> 'ss_button_desc',
-					'val'	=> $_POST['ss_button_desc'],
-				),
-				array(
 					'id'	=> 'ss_slide_content',
 					'val'	=> $_POST['ss_slide_content'],
 				),

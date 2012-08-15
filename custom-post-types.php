@@ -851,10 +851,6 @@ class Slider extends CustomPostType {
 		$slide_content_type 		= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
 		$slide_image				= get_post_meta($post->ID, 'ss_slide_image', TRUE);
 		$slide_video				= get_post_meta($post->ID, 'ss_slide_video', TRUE);
-		$slide_button_type			= get_post_meta($post->ID, 'ss_button_type', TRUE);
-		$slide_button_dropcap		= get_post_meta($post->ID, 'ss_button_dropcap', TRUE);
-		$slide_button_title			= get_post_meta($post->ID, 'ss_button_title', TRUE);
-		$slide_button_desc			= get_post_meta($post->ID, 'ss_button_desc', TRUE);
 		$slide_content				= get_post_meta($post->ID, 'ss_slide_content', TRUE);
 		$slide_links_to				= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
 		$slide_link_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
@@ -914,33 +910,6 @@ class Slider extends CustomPostType {
 										<td>
 											<span class="description">Copy and paste your video embed code here.</span><br/>
 											<textarea name="ss_slide_video[<?=$s?>]" id="ss_slide_video[<?=$s?>]" cols="60" rows="4"><?php ($slide_video[$s] !== '') ? print $slide_video[$s] : ''; ?></textarea>
-										</td>
-									</tr>
-									<tr>
-										<th><label for="ss_button_type[<?=$s?>]">Button Type</label></th>
-										<td>
-											<input type="radio" name="ss_button_type[<?=$s?>]" id="ss_button_type_image[<?=$s?>]" <?php ($slide_button_type[$s] == 'image') ? print 'checked="checked"' : ''; ?> value="image" />
-												<label for="ss_button_type_image[<?=$s?>]">Image</label>
-											<input type="radio" name="ss_button_type[<?=$s?>]" id="ss_button_type_text[<?=$s?>]" <?php ($slide_button_type[$s] == 'text') ? print 'checked="checked"' : ''; ?> value="text" />
-												<label for="ss_button_type_text[<?=$s?>]">Text</label>
-										</td>
-									</tr>
-									<tr>
-										<th><label for="ss_button_dropcap[<?=$s?>]">Button Dropcap</label></th>
-										<td>
-											<input type="text" name="ss_button_dropcap[<?=$s?>]" id="ss_button_dropcap[<?=$s?>]" value="<?php ($slide_button_dropcap[$s] !== '') ? print $slide_button_dropcap[$s] : ''; ?>" /><span class="description"> (Optional)</span><br/>
-										</td>
-									</tr>
-									<tr>
-										<th><label for="ss_button_title[<?=$s?>]">Button Title</label></th>
-										<td>
-											<input type="text" name="ss_button_title[<?=$s?>]" id="ss_button_title[<?=$s?>]" value="<?php ($slide_button_title[$s] !== '') ? print $slide_button_title[$s] : ''; ?>" />
-										</td>
-									</tr>
-									<tr>
-										<th><label for="ss_button_desc[<?=$s?>]">Button Description</label></th>
-										<td>
-											<input type="text" name="ss_button_desc[<?=$s?>]" id="ss_button_desc[<?=$s?>]" value="<?php ($slide_button_desc[$s] !== '') ? print $slide_button_desc[$s] : ''; ?>" /><span class="description"> (Optional)</span><br/>
 										</td>
 									</tr>
 									<tr>
@@ -1009,33 +978,6 @@ class Slider extends CustomPostType {
 									<td>
 										<span class="description">Copy and paste your video embed code here.</span><br/>
 										<textarea name="ss_slide_video[<?=$i?>]" id="ss_slide_video[<?=$i?>]" cols="60" rows="4"></textarea>
-									</td>
-								</tr>
-								<tr>
-									<th><label for="ss_button_type[<?=$i?>]">Button Type</label></th>
-									<td>
-										<input type="radio" name="ss_button_type[<?=$i?>]" id="ss_button_type_image[<?=$i?>]" value="image" />
-											<label for="ss_button_type_image[<?=$i?>]">Image</label>
-										<input type="radio" name="ss_button_type[<?=$i?>]" id="ss_button_type_text[<?=$i?>]" value="text" />
-											<label for="ss_button_type_text[<?=$i?>]">Text</label>
-									</td>
-								</tr>
-								<tr>
-									<th><label for="ss_button_dropcap[<?=$i?>]">Button Dropcap</label></th>
-									<td>
-										<input type="text" name="ss_button_dropcap[<?=$i?>]" id="ss_button_dropcap[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
-									</td>
-								</tr>
-								<tr>
-									<th><label for="ss_button_title[<?=$i?>]">Button Title</label></th>
-									<td>
-										<input type="text" name="ss_button_title[<?=$i?>]" id="ss_button_title[<?=$i?>]" value="" />
-									</td>
-								</tr>
-								<tr>
-									<th><label for="ss_button_desc[<?=$i?>]">Button Description</label></th>
-									<td>
-										<input type="text" name="ss_button_desc[<?=$i?>]" id="ss_button_desc[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
 									</td>
 								</tr>
 								<tr>
