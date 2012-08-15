@@ -2,6 +2,10 @@
 	#UCFHBHeader div.UCFHBWrapper { width: 1200px; }
 	#UCFHBHeader #UCFHBSearch_and_links { margin-left: 750px; }
 }
+@media (min-width: 980px) and (max-width: 1199px) {
+	#centerpiece_slider, #centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img {width: 984px !important; height: 482px !important; }
+	#centerpiece_slider ul {height: 482px;}
+}
 @media (max-width: 979px) {
 	#UCFHBSearch_and_links { display: none; }
 	#UCFHBHeader div.UCFHBWrapper { width: 100%; }

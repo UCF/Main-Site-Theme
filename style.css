@@ -184,7 +184,7 @@ body { font-family: Georgia, serif; }
 #centerpiece_slider ul {height: 531px; position: absolute; top: 0; left: 0; margin-left: 0;}
  
 #centerpiece_slider li {width: 1084px; height: 531px; float: left; list-style-type: none;}
-#centerpiece_slider li img { width: 1084px; height: 531px; }
+#centerpiece_slider li img.centerpiece_single_img { width: 1084px; height: 531px; }
 #centerpiece_slider li .slide_contents { 
 	position: absolute;
 	display: block;
@@ -194,11 +194,11 @@ body { font-family: Georgia, serif; }
 	color: #fff; 
 	font-family: 'Helvetica Neue', Helvetica, sans-serif; 
 	font-size: 16px; 
-	padding: 20px;
+	padding: 10px 10px 0 10px;
 	background: #000;
 	background: rgba(0,0,0,0.6);
 }
- 
+
 #centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 5; }
 #centerpiece_control a { 
 	text-indent: -9999px;

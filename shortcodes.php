@@ -172,22 +172,42 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 					$slide_image_url = wp_get_attachment_image_src($slide_image[$s], 'centerpiece-image');
 					$slide_duration  = ($slide_duration[$s] !== '' ? $slide_duration[$s] : 6);
 					
+					// Start <li>
 					$output .= '<li class="centerpiece_single" id="centerpiece_single_'.$s.'" data-duration="'.$slide_duration.'">';
 					
+					// Add <a> tag and target="_blank" if applicable:
+					if ($slide_links_to[$s] !== '' && $slide_content_type[$s] == 'image') {
+						$output .= '<a href="'.$slide_links_to[$s];
+						if ($slide_newtab == 'on') {
+							$output .= ' target="_blank"';
+						}
+						$output .= '">';
+					}
+					
+					// Image output:
 					if ($slide_content_type[$s] == 'image') {
-						$output .= '<img src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'"';
+						$output .= '<img class="centerpiece_single_img" src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'"';
 						if ($rounded_corners == 'on') {
 							$output .= 'style="border-radius: 10px;"';
 						}
 						$output .= '/>';
+						
+						if ($slide_links_to[$s] !== '' && $slide_content_type[$s] == 'image') {
+							$output .= '</a>';
+						}
+						
 						if ($slide_content[$s] !== '') {
-							$output .= '<div class="slide_contents">'.$slide_content[$s].'</div>';
+							$output .= '<div class="slide_contents">'.apply_filters('the_content', $slide_content[$s]).'</div>';
 						}
 					}
-					else {
+										
+					
+					// Video output:
+					if ($slide_content_type[$s] == 'video') {
 						$output .= $slide_video[$s];
 					}
 					
+					// End <li>
 					$output .= '</li>';
 				}
 			}
