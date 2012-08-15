@@ -132,64 +132,39 @@ Generic.mobileNavBar = function($) {
 
 /* Slider init */
 
-ssSlider = function($) {
-
-	var slider = $('.ss-slider');
-
-	if( slider.length ) {
-
-		// Prevent multiple initialization
-		if( slider.data('init') === true )
-			return false;
+centerpieceSlider = function($) {
+	var slider = $('#centerpiece_slider');
+	if(slider.length) {
 		
-		slider.data( 'init', true )
-			   .smartStartSlider({
-				   width              : parseInt(slider.attr('data-slider_width')),
-				   height             : parseInt(slider.attr('data-slider_height')),
-				   contentSpeed       : parseInt(slider.attr('data-slider_contentspeed')),
-				   showContentOnhover : parseInt(slider.attr('data-slider_showcontentonhover')),
-				   hideContent        : parseInt(slider.attr('data-slider_hidecontent')),
-				   contentPosition    : slider.attr('data-slider_contentposition'),
-				   timeout            : parseInt(slider.attr('data-slider_timeout')),
-				   pause              : parseInt(slider.attr('data-slider_pause')),
-				   pauseOnHover       : parseInt(slider.attr('data-slider_pauseonhover')),
-				   hideBottomButtons  : parseInt(slider.attr('data-slider_hidebottombuttons')),
-				   type               : {
-					   mode           : parseInt(slider.attr('data-slider_mode')),
-					   speed          : parseInt(slider.attr('data-slider_speed')),
-					   easing         : parseInt(slider.attr('data-slider_easing')),
-					   seqfactor      : parseInt(slider.attr('data-slider_seqfactor'))
-				   }
-			   });
-
-/*
-		// Detect swipe gestures support
-		if( Modernizr.touch ) {
-
-			function swipeFunc( e, dir ) {
-			
-				var $slider = $( e.currentTarget );
-				
-				if( dir === 'left' ) {
-					$slider.find('.pagination-container .next').trigger('click');
-				}
-				
-				if( dir === 'right' ) {
-					$slider.find('.pagination-container .prev').trigger('click');
-				}
-				
+		// Get all duration values:
+		var timeouts = new Array();
+		$('#centerpiece_slider ul li').each(function() {
+			duration = $(this).attr('data-duration');
+			// Just in case it's not assigned through php somehow:
+			if (duration == '') {
+				duration = 6;
 			}
-			
-			slider.swipe({
-				swipeLeft       : swipeFunc,
-				swipeRight      : swipeFunc,
-				allowPageScroll : 'auto'
-			});
-			
-		}*/
-
+			timeouts.push(duration);
+		});
+		
+		// Initiate slider:		
+		$(function() { 
+			$('#centerpiece_slider ul').cycle({ 
+				delay:  -2000, 
+					fx:     'fade', 
+					speed:  'fast', 
+					pager:  '#centerpiece_control',
+					timeoutFn: calculateTimeout 
+			}); 
+		});     
+		
+			 
+		// timeouts per slide (in seconds) 
+		function calculateTimeout(currElement, nextElement, opts, isForward) { 
+			var index = opts.currSlide; 
+			return timeouts[index] * 1000; 
+		}
 	}
-
 }
 
 
@@ -211,7 +186,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.mobileNavBar($);
 		
 		
-		ssSlider($);
+		centerpieceSlider($);
 		
 	});
 }else{console.log('jQuery dependancy failed to load');}

@@ -4,7 +4,7 @@
 
 	<div class="row page-content nodescription">
 
-		<?php echo do_shortcode('[slider id="' . $post->post_name . '"]'); ?>
+		<?php echo do_shortcode('[centerpiece id="' . $post->post_name . '"]'); ?>
 		<div style="clear:both;"></div>
 		<p><?php edit_post_link(__('Edit', 'ss_framework'), '', ''); ?></p>
 	</div>
