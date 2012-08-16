@@ -158,11 +158,12 @@ body { font-family: Georgia, serif; }
 	top: 0px;
 }
 #header-menu li.last a:hover { text-decoration: none; }
+.no_nav_separator:after { content: '' !important; }
 
 #colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
 #colleges_wrap a:hover { color: #e50606; }
 #colleges_wrap .span2 { width: 100px; }
-#colleges_wrap h3 { font-family: Verdana, Geneva, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
+#colleges_wrap h3 { /*font-family: Verdana, Geneva, sans-serif;*/font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
 #menu-colleges-menu { list-style-type: none; }
 #menu-colleges-menu li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
 #menu-colleges-menu li:after { content: "|"; }
@@ -236,6 +237,7 @@ a.home_col_morelink:hover { text-decoration: none; color: #e50606 !important; bo
 .home_spotlight_single img { float: left; margin-right: 15px; border-radius: 10px; }
 .home_spotlight_title { line-height: 16px; padding-bottom: 5px; }
 .home_spotlight_title a { border-bottom: 1px solid #ccc; font-size: 14px; text-decoration: none; }
+.home_spotlight_title a:hover { border-bottom: 1px solid #e50606; }
 a.home_spotlight_readmore { 
 	font-family: 'Helvetica Neue', Helvetica, sans-serif; 
 	font-size: 12px; 
@@ -246,7 +248,7 @@ a.home_spotlight_readmore {
 #home_centercol a { color: #333; }
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-right: 1px dotted #333; border-left: 1px dotted #333; }
-#home_centercol h3.title { line-height: 14px; padding-bottom: 10px; }
+#home_centercol h3.title { line-height: 16px; }
 #home_centercol h3.title a { font-family: Georgia, serif; font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
 #home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; width: 65px; height: auto; }

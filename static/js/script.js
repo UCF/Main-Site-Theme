@@ -196,6 +196,13 @@ centerpieceResize = function($) {
 }
 
 
+/* Remove last dot separator between nav menu links: */
+removeNavSeparator = function($) {
+	var navcount = $('ul#header-menu li').length - 1;
+	$('ul#header-menu li:nth-child('+navcount+')').addClass('no_nav_separator');
+}
+
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -212,5 +219,6 @@ if (typeof jQuery != 'undefined'){
 		
 		centerpieceSlider($);
 		centerpieceResize($);
+		removeNavSeparator($);
 	});
 }else{console.log('jQuery dependancy failed to load');}

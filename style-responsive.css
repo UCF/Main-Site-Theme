@@ -19,10 +19,17 @@
 	#centerpiece_slider li embed {width: 974px !important; height: 477px !important; }
 	#centerpiece_slider { margin-left: -20px; }
 	#centerpiece_slider ul {height: 477px;}
+	
+	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
 }
 @media (max-width: 979px) {
 	#UCFHBSearch_and_links { display: none; }
 	#UCFHBHeader div.UCFHBWrapper { width: 100%; }
+	
+	#header-menu li a { font-size: 14.5px !important; }
+	#header-menu li.last a { font-size: 11px !important; }
+	#header-menu.menu.horizontal li { margin-right: 5px; }
+	.menu a { margin-right: 2px; }
 	
 	#centerpiece_slider, 
 	#centerpiece_slider li, 
@@ -32,6 +39,11 @@
 	#centerpiece_slider li embed {width: 771px !important; height: 377px !important; }
 	#centerpiece_slider { margin-left: -20px; }
 	#centerpiece_slider ul {height: 377px;}
+	
+	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
+	
+	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
+	.home_spotlight_title { line-height: 14px; }
 }
 
 @media (max-width: 767px) {
