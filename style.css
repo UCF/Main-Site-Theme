@@ -249,7 +249,10 @@ a.home_spotlight_readmore {
 #home_centercol h3.title { line-height: 14px; padding-bottom: 10px; }
 #home_centercol h3.title a { font-family: Georgia, serif; font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
-#home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; }
+#home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; width: 65px; height: auto; }
 
 
 #home_rightcol {  }
+
+
+.subpage article h1 { font-weight: normal; padding-bottom: 15px; border-bottom: 1px dotted #333; }
