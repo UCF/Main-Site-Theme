@@ -129,12 +129,87 @@ function sc_person_picture_list($atts) {
 add_shortcode('person-picture-list', 'sc_person_picture_list');
 
 
+/**
+ * Output Spotlights for front page.
+ *
+ * Note: this function assumes at least 2 spotlights already exist
+ * and that only 2 spotlights at a time should ever be displayed.
+ **/
+function sc_frontpage_spotlights() {
+	$args = array(
+		'numberposts' 	=> 2,
+		'post_type' 	=> 'spotlight',
+		'post_status'   => 'publish',
+	);
+	$spotlights = get_posts($args);
+	
+	$spotlight_one = $spotlights[0];
+	$spotlight_two = $spotlights[1];
+	
+	$position_one  = get_post_meta($spotlight_one->ID, 'spotlight_position', TRUE);
+	$position_two  = get_post_meta($spotlight_two->ID, 'spotlight_position', TRUE);
+	
+	function output_spotlight($spotlight) {
+		?>
+		<div class="home_spotlight_single">
+			<a href="<?=get_permalink($spotlight->ID)?>"><?=get_the_post_thumbnail($spotlight->ID, 'thumbnail')?></a>
+			<h3 class="home_spotlight_title"><?=$spotlight->post_title?></h3>
+			<?=$spotlight->post_content?>
+			<a class="home_spotlight_readmore" href="" target="_blank">Read More…</a>
+		</div>
+		<?
+	}
+	
+	// If neither positions are set, or the two positions conflict with each
+	// other, just display them in the order they were retrieved:
+	if (($position_one == '' && $position_two == '') || ($position_one == $position_two)) {
+		output_spotlight($spotlight_one);
+		output_spotlight($spotlight_two);
+	}
+	
+	// If one is set but not the other, respect the set spotlight's position
+	// and place the other one in the other slot:
+	else if ($position_one == '' && $position_two !== '') {
+		if ($position_two == 'top') {
+			output_spotlight($spotlight_two);
+			output_spotlight($spotlight_one);
+		}
+		else {
+			output_spotlight($spotlight_one);
+			output_spotlight($spotlight_two);
+		}
+	}
+	else if ($position_one !== '' && $position_two == '') {
+		if ($position_one == 'top') {
+			output_spotlight($spotlight_one);
+			output_spotlight($spotlight_two);
+		}
+		else {
+			output_spotlight($spotlight_two);
+			output_spotlight($spotlight_one);
+		}
+	}
+	
+	// Otherwise, display them in their designated positions:
+	else {
+		if ($position_one == 'top') { // we can assume position_two is the opposite
+			output_spotlight($spotlight_one);
+			output_spotlight($spotlight_two);
+		}
+		else {
+			output_spotlight($spotlight_two);
+			output_spotlight($spotlight_one);
+		}
+	}
+}
+add_shortcode('spotlights', 'sc_frontpage_spotlights');
 
-/* -------------------------------------------------- */
-/*	Centerpiece Slider
-/* -------------------------------------------------- */
 
-	function centerpiece_slider( $atts, $content = null ) {
+/**
+ * Centerpiece Slider
+ **/
+
+	function sc_centerpiece_slider( $atts, $content = null ) {
 		
 		extract( shortcode_atts( array(
 			'id' => ''
@@ -224,6 +299,6 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 		return $output;
 
 	}
-	add_shortcode('centerpiece', 'centerpiece_slider');
+	add_shortcode('centerpiece', 'sc_centerpiece_slider');
 
 ?>

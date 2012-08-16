@@ -6,7 +6,7 @@
 			<p><?php echo do_shortcode('[centerpiece id="front-page-test-slider"]'); ?></p>
 		</div>
 		<div class="span4" id="home_leftcol">	
-			<p>Spotlight column --  make this a widget?</p>
+			<p><?php echo do_shortcode('[spotlights]'); ?></p>
 		</div>
 		<div class="span4" id="home_centercol">
 			<p>News column -- make this a widget?</p>
