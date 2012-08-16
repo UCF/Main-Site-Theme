@@ -153,9 +153,9 @@ function sc_frontpage_spotlights() {
 		?>
 		<div class="home_spotlight_single">
 			<a href="<?=get_permalink($spotlight->ID)?>"><?=get_the_post_thumbnail($spotlight->ID, 'thumbnail')?></a>
-			<h3 class="home_spotlight_title"><?=$spotlight->post_title?></h3>
+			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
 			<?=$spotlight->post_content?>
-			<a class="home_spotlight_readmore" href="" target="_blank">Read More…</a>
+			<p><a class="home_spotlight_readmore" href="" target="_blank">Read More…</a></p>
 		</div>
 		<?
 	}

@@ -237,12 +237,11 @@ function display_flickr($header='h2'){
 }
 
 
-function display_events($header='h2'){?>
+function display_events(){?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $count   = $options['events_max_items']?>
 	<?php $events  = get_events(0, ($count) ? $count : 3);?>
 	<?php if(count($events)):?>
-		<<?=$header?>><a href="<?=$events[0]->get_feed()->get_link()?>"><?=$events[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<table class="events">
 			<?php foreach($events as $item):?>
 			<tr class="item">
@@ -275,17 +274,14 @@ function display_news(){?>
 		<ul class="news">
 			<?php foreach($news as $key=>$item): $image = get_article_image($item); $first = ($key == 0);?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
-				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
 				<p>
 					<a class="image ignore-external" href="<?=$item->get_link()?>">
 						<?php if($image):?>
 						<img src="<?=$image?>" alt="Feed image for <?=$item->get_title()?>" />
 						<?php endif;?>
 					</a>
-					<a class="description ignore-external"  href="<?=$item->get_link()?>">
-						<?= $item->get_description();?>
-					</a>
 				</p>
+				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
 				<div class="end"><!-- --></div>
 			</li>
 			<?php endforeach;?>

@@ -6,13 +6,21 @@
 			<p><?php echo do_shortcode('[centerpiece id="front-page-test-slider"]'); ?></p>
 		</div>
 		<div class="span4" id="home_leftcol">	
+			<h2>Spotlight</h2>
 			<p><?php echo do_shortcode('[spotlights]'); ?></p>
+			<p><a href="#" class="home_col_morelink">Spotlight Archive</a></p>
 		</div>
 		<div class="span4" id="home_centercol">
-			<p>News column -- make this a widget?</p>
+			<div class="col_padwrap">
+				<h2>News</h2>
+				<?php display_news(); ?>
+				<p><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
+			</div>
 		</div>
 		<div class="span4" id="home_rightcol">
-			<p>Events column -- make this a widget?</p>
+			<h2>Upcoming Events</h2>
+			<?php display_events(); ?>
+			<p><a href="http://events.ucf.edu/?upcoming=upcoming" class="home_col_morelink">More Events</a></p>
 		</div>
 	
 	</div>
