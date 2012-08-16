@@ -262,9 +262,6 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 					// Image output:
 					if ($slide_content_type[$s] == 'image') {
 						$output .= '<img class="centerpiece_single_img" src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'"';
-						if ($rounded_corners == 'on') {
-							$output .= 'style="border-radius: 10px;"';
-						}
 						$output .= '/>';
 						
 						if ($slide_links_to[$s] !== '' && $slide_content_type[$s] == 'image') {
@@ -288,7 +285,14 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 			}
 						  
 						  
-			$output .= '</ul>
+			$output .= '</ul>';
+			
+			// Apply rounded corners:
+			if ($rounded_corners == 'on') {
+				$output .= '<div id="centerpiece_corner_tl"></div><div id="centerpiece_corner_tr"></div><div id="centerpiece_corner_bl"></div><div id="centerpiece_corner_br"></div>';
+			}
+			
+			$output .= '
 						<div id="centerpiece_control"></div>
 					</div>';
 

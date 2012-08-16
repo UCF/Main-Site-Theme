@@ -203,6 +203,11 @@ body { font-family: Georgia, serif; }
 	background: rgba(0,0,0,0.6);
 }
 
+#centerpiece_corner_tl { width: 12px; height: 11px; background: url('static/img/slider_corner_topleft.png') no-repeat; position: absolute; top: 0; left: 0; z-index: 998; }
+#centerpiece_corner_tr { width: 11px; height: 12px; background: url('static/img/slider_corner_topright.png') no-repeat; position: absolute; top: 0; right: 0; z-index: 998; }
+#centerpiece_corner_bl { width: 11px; height: 12px; background: url('static/img/slider_corner_bottomleft.png') no-repeat; position: absolute; bottom: 0; left: 0; z-index: 998; }
+#centerpiece_corner_br { width: 12px; height: 11px; background: url('static/img/slider_corner_bottomright.png') no-repeat; position: absolute; bottom: 0; right: 0; z-index: 998; }
+
 #centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 5; }
 #centerpiece_control a { 
 	text-indent: -9999px;
