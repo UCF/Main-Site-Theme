@@ -152,18 +152,26 @@ centerpieceSlider = function($) {
 			$('#centerpiece_slider ul').cycle({ 
 				delay:  -2000, 
 					fx:     'fade', 
-					speed:  'fast', 
+					speed:  2000, 
 					pager:  '#centerpiece_control',
 					timeoutFn: calculateTimeout 
 			}); 
-		});     
-		
+		});
 			 
 		// timeouts per slide (in seconds) 
 		function calculateTimeout(currElement, nextElement, opts, isForward) { 
 			var index = opts.currSlide; 
 			return timeouts[index] * 1000; 
 		}
+		
+		// Pause slider on hover:
+		$('#centerpiece_slider').hover(function() {
+			$('#centerpiece_slider ul').cycle('pause'); 
+		},
+		function () {
+			$('#centerpiece_slider ul').cycle('resume');
+		}
+		);
 	}
 }
 
