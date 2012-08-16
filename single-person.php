@@ -27,6 +27,5 @@
 				<?=$content = str_replace(']]>', ']]>', apply_filters('the_content', $post->post_content))?>
 			</div>
 		</div>
-		<?php get_template_part('includes/below-the-fold'); ?>
 	</div>
 <?php get_footer();?>

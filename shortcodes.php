@@ -152,7 +152,7 @@ function sc_frontpage_spotlights() {
 	function output_spotlight($spotlight) {
 		?>
 		<div class="home_spotlight_single">
-			<a href="<?=get_permalink($spotlight->ID)?>"><?=get_the_post_thumbnail($spotlight->ID, 'thumbnail')?></a>
+			<a href="<?=get_permalink($spotlight->ID)?>"><?=get_the_post_thumbnail($spotlight->ID, 'home-thumb')?></a>
 			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
 			<?=$spotlight->post_content?>
 			<p><a class="home_spotlight_readmore" href="" target="_blank">Read More…</a></p>

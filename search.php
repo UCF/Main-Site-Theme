@@ -48,7 +48,6 @@
 			<?=get_sidebar();?>
 		</div>
 	</div>
-	<?php get_template_part('includes/below-the-fold'); ?>
 <?php get_footer();?>
 
 <?php else:?>
@@ -79,6 +78,5 @@
 			<?=get_sidebar();?>
 		</div>
 	</div>
-	<?php get_template_part('includes/below-the-fold'); ?>
 <?php get_footer();?>
 <?php endif;?>
