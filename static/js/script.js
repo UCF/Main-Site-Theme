@@ -215,7 +215,7 @@ if (typeof jQuery != 'undefined'){
 		//Generic.resizeSearch($);
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
-		Generic.mobileNavBar($);
+		//Generic.mobileNavBar($);
 		
 		centerpieceSlider($);
 		centerpieceResize($);

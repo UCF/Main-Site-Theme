@@ -61,6 +61,10 @@
 	#below-the-fold { margin-left: 0; }
 	#below-the-fold .span4 { width: 100%; margin-left: 0; margin-bottom: 20px; }
 	
+	#home_leftcol, #home_centercol { padding-bottom: 20px; border-bottom: 1px dotted #333 !important; margin-left: 0; }
+	#home_centercol, #home_rightcol { margin-top: 20px; margin-left: 0; }
+	#home_centercol { border: 0; }
+	#home_centercol .col_padwrap { margin: 0; }
 	.news .item { margin-bottom: 10px; }
 	
 	/* Shrinkable bootstrap tables for tablets/phones.
