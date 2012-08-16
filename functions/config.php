@@ -120,6 +120,7 @@ Config::$custom_post_types = array(
 	'Page',
 	'Person',
 	'Slider',
+	'Spotlight',
 );
 
 Config::$custom_taxonomies = array(

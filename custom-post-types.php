@@ -643,6 +643,43 @@ class Person extends CustomPostType
 
 
 /**
+ * Describes a spotlight feature
+ *
+ * @author Jo Greybill
+ **/
+ 
+class Spotlight extends CustomPostType {
+	public
+		$name           = 'spotlight',
+		$plural_name    = 'Spotlights',
+		$singular_name  = 'Spotlight',
+		$add_new_item   = 'Add New Spotlight',
+		$edit_item      = 'Edit Spotlight',
+		$new_item       = 'New Spotlight',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$use_shortcode	= True;
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'Spotlight Position',
+				'desc' => 'Specify whether the spotlight should be positioned in the top slot of the spotlights section or the bottom.',
+				'id'   => $prefix.'position',
+				'type' => 'radio',
+				'options' => array('Top' => 'top', 'Bottom' => 'bottom'),
+			),
+		);
+	}
+}
+
+
+
+/**
  * Describes a set of centerpiece slides
  *
  * @author Jo Greybill
@@ -999,7 +1036,6 @@ class Slider extends CustomPostType {
 	public function show_meta_box_slide_all($post) {
 		$this->display_slide_meta_fields($post);
 	}
-	
 	
 	// Slide Count: 
 	public function show_meta_box_slide_count($post) {
