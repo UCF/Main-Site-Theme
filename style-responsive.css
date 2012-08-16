@@ -7,7 +7,7 @@
 	#centerpiece_slider li img.centerpiece_single_img, 
 	#centerpiece_slider li object, 
 	#centerpiece_slider iframe, 
-	#centerpiece_slider li embed {width: 1084px !important; height: 531px !important; }
+	#centerpiece_slider li embed {width: 1084px; height: 531px; }
 	#centerpiece_slider ul {height: 531px;}
 }
 @media (min-width: 980px) and (max-width: 1199px) {
@@ -16,9 +16,9 @@
 	#centerpiece_slider li img.centerpiece_single_img, 
 	#centerpiece_slider li object, 
 	#centerpiece_slider iframe, 
-	#centerpiece_slider li embed {width: 974px !important; height: 477px !important; }
+	#centerpiece_slider li embed {width: 940px; height: 460px; }
 	#centerpiece_slider { margin-left: -20px; }
-	#centerpiece_slider ul {height: 477px;}
+	#centerpiece_slider ul {height: 460px;}
 	
 	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
 }
@@ -36,9 +36,9 @@
 	#centerpiece_slider li img.centerpiece_single_img, 
 	#centerpiece_slider li object, 
 	#centerpiece_slider iframe, 
-	#centerpiece_slider li embed {width: 771px !important; height: 377px !important; }
+	#centerpiece_slider li embed {width: 724px; height: 354px; }
 	#centerpiece_slider { margin-left: -20px; }
-	#centerpiece_slider ul {height: 377px;}
+	#centerpiece_slider ul {height: 354px;}
 	
 	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
 	
@@ -50,13 +50,13 @@
 	#header { margin-left: 0; }
 	
 	#home .description { margin-top: 10px; }
-	
+	/*
 	#centerpiece_slider { margin: 0 20px 0 -20px; }
 	.centerpiece_single, img.centerpiece_single_img, .centerpiece_single object, .centerpiece_single iframe, .centerpiece_single li embed {
 		width: 100% !important;
 		height: auto !important;
 	}
-	#centerpiece_slider ul { height: auto; }
+	#centerpiece_slider ul { height: auto; }*/
 	
 	#below-the-fold { margin-left: 0; }
 	#below-the-fold .span4 { width: 100%; margin-left: 0; margin-bottom: 20px; }
@@ -157,4 +157,8 @@
     	border-top-color: #fff;
 		margin-top: 4px;
 	}
+	
+	#header-menu { margin-top: -10px; }
+	
+	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
 }

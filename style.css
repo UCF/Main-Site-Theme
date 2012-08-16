@@ -185,7 +185,7 @@ body { font-family: Georgia, serif; }
 
 #home .span12 { margin-bottom: 20px; }
 #centerpiece_slider {overflow: hidden; position: relative; margin: auto; z-index: 1;}
-#centerpiece_slider ul {position: absolute; top: 0; left: 0; margin-left: 0;}
+#centerpiece_slider ul { margin-left: 0; }
 #centerpiece_slider li {float: left; list-style-type: none;}
 #centerpiece_slider li img.centerpiece_single_img { }
 #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed { }

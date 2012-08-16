@@ -183,9 +183,52 @@ centerpieceResize = function($) {
 	var addDimensions = function() {
 		if ($(window).width() < 768) {
 			var parentw = $('#centerpiece_slider').parent('.span12').width();
-			var parenth = $('#centerpiece_slider').parent('.span12').height();
+			// Slide height to width ratio is 0.49 (based on standard 984x482px slide dimensions):
+			/*$('div#centerpiece_slider').attr('style', 'width: '+ parentw +'px !important; height: '+ parentw * 0.49 +'px !important; margin: 0; z-index: 1;');
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.attr('style', 'width: '+ parentw +'px !important; height: '+ parentw * 0.49 +'px !important;');
+			$('#centerpiece_slider ul').height($('div#centerpiece_slider'));*/
 			
-			//$('div#centerpiece_slider').attr('style', 'width: '+ parentw +'px !important; height: '+ parenth +'px !important;');
+			$('div#centerpiece_slider').css({'width': parentw +'px', 'height' : parentw * 0.49 +'px', 'margin' : '0'});
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.css({'width': parentw +'px', 'height' : parentw * 0.49 +'px'});
+			$('#centerpiece_slider ul').height($('div#centerpiece_slider'));
+		}
+		else if ($(window).width() > 768 && $(window).width() < 978) {
+			/*
+			$('div#centerpiece_slider').attr('style', 'width: 771px; height: 377px; margin: auto; z-index: 1;');
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.attr('style', 'width: 768px; height: 377px;');
+			$('#centerpiece_slider ul').css('height', '377px');*/
+			
+			$('div#centerpiece_slider').css({'width': '724px', 'height' : '354px', 'margin' : 'auto'});
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.css({'width': '724px', 'height' : '354px', 'margin' : '0'});
+			$('#centerpiece_slider ul').css('height', '354px');
+		}
+		else if ($(window).width() > 978 && $(window).width() < 1199) {
+			/*
+			$('div#centerpiece_slider').attr('style', 'width: 974px; height: 477px; margin: auto; z-index: 1;');
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.attr('style', 'width: 974px; height: 477px;');
+			$('#centerpiece_slider ul').css('height', '477px');*/
+			
+			$('div#centerpiece_slider').css({'width': '940px', 'height' : '460px', 'margin' : 'auto'});
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.css({'width': '940px', 'height' : '460px', 'margin' : '0'});
+			$('#centerpiece_slider ul').css('height', '460px');
+		}
+		else if ($(window).width() > 1199) {
+			/*
+			$('div#centerpiece_slider').attr('style', 'width: 1084px; height: 531px; margin: auto; z-index: 1;');
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.attr('style', 'width: 1084px; height: 531px;');
+			$('#centerpiece_slider ul').css('height', '531px');
+			*/
+			$('div#centerpiece_slider').css({'width': '1084px', 'height' : '531px', 'margin' : 'auto'});
+			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+				.css({'width': '1084px', 'height' : '531px', 'margin' : '0'});
+			$('#centerpiece_slider ul').css('height', '531px');
 		}
 	}
 	
@@ -215,7 +258,7 @@ if (typeof jQuery != 'undefined'){
 		//Generic.resizeSearch($);
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
-		//Generic.mobileNavBar($);
+		Generic.mobileNavBar($);
 		
 		centerpieceSlider($);
 		centerpieceResize($);
