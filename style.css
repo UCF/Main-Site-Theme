@@ -180,11 +180,12 @@ body { font-family: Georgia, serif; }
 #footer-logo { text-align: center; margin-top: 25px; }
 
 
-#centerpiece_slider {width: 1084px; height: 531px; overflow: hidden; position: relative; margin: auto; z-index: 1;}
-#centerpiece_slider ul {height: 531px; position: absolute; top: 0; left: 0; margin-left: 0;}
+#centerpiece_slider {overflow: hidden; position: relative; margin: auto; z-index: 1;}
+#centerpiece_slider ul {position: absolute; top: 0; left: 0; margin-left: 0;}
  
-#centerpiece_slider li {width: 1084px; height: 531px; float: left; list-style-type: none;}
-#centerpiece_slider li img.centerpiece_single_img { width: 1084px; height: 531px; }
+#centerpiece_slider li {float: left; list-style-type: none;}
+#centerpiece_slider li img.centerpiece_single_img { }
+#centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed { }
 #centerpiece_slider li .slide_contents { 
 	position: absolute;
 	display: block;

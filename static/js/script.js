@@ -176,7 +176,24 @@ centerpieceSlider = function($) {
 }
 
 
+/* Adjust slider size on window resize (for less than 767px) */
 
+centerpieceResize = function($) {
+	
+	var addDimensions = function() {
+		if ($(window).width() < 768) {
+			var parentw = $('#centerpiece_slider').parent('.span12').width();
+			var parenth = $('#centerpiece_slider').parent('.span12').height();
+			
+			//$('div#centerpiece_slider').attr('style', 'width: '+ parentw +'px !important; height: '+ parenth +'px !important;');
+		}
+	}
+	
+	addDimensions();
+	$(window).resize(function() {
+		addDimensions();
+	});
+}
 
 
 if (typeof jQuery != 'undefined'){
@@ -193,8 +210,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
 		
-		
 		centerpieceSlider($);
-		
+		centerpieceResize($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
