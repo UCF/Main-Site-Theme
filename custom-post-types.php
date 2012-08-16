@@ -701,7 +701,7 @@ class Slider extends CustomPostType {
 		$use_title      = True,
 		$use_metabox    = True,
 		$use_revisions	= False,
-		$taxonomies     = '';
+		$taxonomies     = array('');
 	
 	public function fields(){
 	//
