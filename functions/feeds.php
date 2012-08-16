@@ -267,12 +267,11 @@ function display_events($header='h2'){?>
 }
 
 
-function display_news($header='h2'){?>
+function display_news(){?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $count   = $options['news_max_items'];?>
 	<?php $news    = get_news(0, ($count) ? $count : 2);?>
 	<?php if(count($news)):?>
-		<<?=$header?>><a href="<?=$news[0]->get_feed()->get_link()?>"><?=$news[0]->get_feed()->get_title()?></a></<?=$header?>>
 		<ul class="news">
 			<?php foreach($news as $key=>$item): $image = get_article_image($item); $first = ($key == 0);?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
