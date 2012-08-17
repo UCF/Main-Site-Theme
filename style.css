@@ -260,10 +260,10 @@ a.home_spotlight_readmore {
 #home_rightcol {  }
 
 
-.subpage .page-content h1 { font-weight: normal; padding-bottom: 15px; border-bottom: 1px dotted #333; }
+.subpage .page-content h1 { font-weight: normal; padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
 
 
-#subheader { margin-top: 7px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
+#subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
 #subheader .subheader_subimg { margin-left: 0; border: 0; }
 #subheader .subhead_quote { border-left: 0; padding-left: 0; }
 #subheader .subhead_author { float: right; font-weight: bold; padding-top: 20px; font-size: 14px; font-family: Georgia; serif; }
@@ -271,3 +271,22 @@ a.home_spotlight_readmore {
 #subheader .subhead_quotelink a { color: #660000 !important; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: normal; }
 #subheader .subhead_quotelink a:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
 .subheader_studentimg { float: right; margin-right: 20px; }
+
+
+.sidebar_title { 
+	font-family: 'Helvetica Neue', Helvetica, sans-serif; 
+	font-size: 11px; 
+	text-transform: uppercase; 
+	font-weight: bold; 
+	letter-spacing: 1.2px; 
+	line-height: 12px; 
+	padding-bottom: 5px; 
+}
+#sidebar_l_moreinfo { color: #B38C0B; }
+#sidebar_l_secinfo { color: #F5530C; }
+#sidebar_l_colleges { color: #777; padding-top: 40px; }
+.sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
+.sidebar_nav li { padding-bottom: 6px; }
+.sidebar_nav li a { color: #333; }
+.sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
+#sidebar_l_moreinfo { }

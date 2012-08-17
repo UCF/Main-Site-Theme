@@ -41,7 +41,7 @@
 			<?=get_sidebar('left');?>
 		</div>
 		
-		<div class="span7">
+		<div class="span7" id="contentcol">
 			<article>
 				<?php the_content();?>
 			</article>
