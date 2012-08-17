@@ -269,7 +269,7 @@ function display_events(){?>
 function display_news(){?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $count   = $options['news_max_items'];?>
-	<?php $news    = get_news(0, ($count) ? $count : 2);?>
+	<?php $news    = get_news(0, ($count) ? $count : 3);?>
 	<?php if(count($news)):?>
 		<ul class="news">
 			<?php foreach($news as $key=>$item): $image = get_article_image($item); $first = ($key == 0);?>
