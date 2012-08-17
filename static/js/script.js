@@ -232,10 +232,18 @@ centerpieceResize = function($) {
 		}
 	}
 	
-	addDimensions();
-	$(window).resize(function() {
+	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
 		addDimensions();
-	});
+		$(window).resize(function() {
+			addDimensions();
+		});
+	}
+	else {
+		$('div#centerpiece_slider').attr('style', 'width: 940px !important; height: 460px !important; margin: auto; z-index: 1;');
+		$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
+			.attr('style', 'width: 940px !important; height: 460px !important; zoom: 1;');
+		$('#centerpiece_slider ul').attr('style', 'height: 460px !important;');
+	}
 }
 
 
