@@ -479,13 +479,13 @@ class Page extends CustomPostType {
 
 	public function fields() {
 		$prefix = $this->options('name').'_';
-		return array(
+		return array(/*
 			array(
 				'name' => 'Hide Lower Section',
 				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
 				'id'   => $prefix.'hide_fold',
 				'type' => 'checkbox',
-			),
+			),*/
 				array(
 					'name' => 'Stylesheet',
 					'desc' => '',
@@ -672,6 +672,55 @@ class Spotlight extends CustomPostType {
 				'id'   => $prefix.'position',
 				'type' => 'radio',
 				'options' => array('Top' => 'top', 'Bottom' => 'bottom'),
+			),
+		);
+	}
+}
+
+
+
+/**
+ * Describes a sub header piece for secondary pages.
+ *
+ * @author Jo Greybill
+ **/
+ 
+class Subheader extends CustomPostType {
+	public
+		$name           = 'subheader',
+		$plural_name    = 'Subheaders',
+		$singular_name  = 'Subheader',
+		$add_new_item   = 'Add New Subheader',
+		$edit_item      = 'Edit Subheader',
+		$new_item       = 'New Subheader',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_title      = True,
+		$use_metabox    = True,
+		$use_shortcode	= False,
+		$taxonomies		= array('');
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+					'name' => 'Sub Image',
+					'desc' => 'Image to be displayed on the left-hand side of the subheader.  Image should ideally be square.',
+					'id' => $prefix.'sub_image',
+					'type' => 'file',
+			),
+			array(
+					'name' => 'Student Image',
+					'desc' => 'Image to be displayed on the right-hand side of the subheader.  Image should be a full body shot of the student.',
+					'id' => $prefix.'student_image',
+					'type' => 'file',
+			),
+			array(
+					'name' => 'Student Name',
+					'desc' => 'Name of the quoted student.',
+					'id' => $prefix.'student_name',
+					'type' => 'text',
 			),
 		);
 	}

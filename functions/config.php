@@ -15,7 +15,8 @@ function __init__(){
 	add_image_size('homepage-secondary', 540);
 	add_image_size('centerpiece-image', 1084, 531, true); 	// Crops!
 	add_image_size('home-thumb', 110, 110, true);			// Crops!
-	add_image_size('centerpiece-image', 1084, 531, true);
+	add_image_size('subpage-subimg', 160);
+	add_image_size('subpage-studentimg', 115, 280);
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('ucf-colleges', __('UCF Colleges'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
@@ -123,6 +124,7 @@ Config::$custom_post_types = array(
 	'Person',
 	'Slider',
 	'Spotlight',
+	'Subheader',
 );
 
 Config::$custom_taxonomies = array(
