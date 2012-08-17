@@ -218,7 +218,7 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 		global $post;
 
 		$args = array('name'           => esc_attr( $id ),
-					  'post_type'      => 'slider',
+					  'post_type'      => 'centerpiece',
 					  'posts_per_page' => '1'
 				  );
 

@@ -35,7 +35,7 @@ function ss_framework_manage_slider_columns( $column, $post_id ) {
 			print get_post_meta( $post->ID, 'ss_slider_slidecount', true );
 			break;
 		case 'shortcode':
-			print '<span class="shortcode-field">[slider id="'. $post->post_name . '"]</span>';
+			print '<span class="shortcode-field">[centerpiece id="'. $post->post_name . '"]</span>';
 			break;
 		default:
 			break;

@@ -3,7 +3,7 @@
 	<?php $page    = get_page_by_title('Home');?>
 	<div class="row page-content nodescription" id="home" data-template="home-nodescription">		
 		<div class="span12">
-			<p><?php echo do_shortcode('[centerpiece id="front-page-test-slider"]'); ?></p>
+			<p><?php echo do_shortcode('[centerpiece id="front-page-test-centerpiece"]'); ?></p>
 		</div>
 		<div class="span4" id="home_leftcol">	
 			<h2>Spotlight</h2>

@@ -795,12 +795,12 @@ class Subheader extends CustomPostType {
 
 class Slider extends CustomPostType {
 	public 
-		$name           = 'slider',
-		$plural_name    = 'Sliders',
-		$singular_name  = 'Slider',
-		$add_new_item   = 'Add New Slider',
-		$edit_item      = 'Edit Slider',
-		$new_item       = 'New Slider',
+		$name           = 'centerpiece',
+		$plural_name    = 'Centerpieces',
+		$singular_name  = 'Centerpiece',
+		$add_new_item   = 'Add New Centerpiece',
+		$edit_item      = 'Edit Centerpiece',
+		$new_item       = 'New Centerpiece',
 		$public         = True,
 		$use_editor     = False,
 		$use_thumbnails = False,
@@ -823,7 +823,7 @@ class Slider extends CustomPostType {
 				array(
 					'id'       => 'slider-slides',
 					'title'    => 'All Slides',
-					'page'    => 'slider',
+					'page'    => 'centerpiece',
 					'context'  => 'normal',
 					'priority' => 'default',
 				);
@@ -832,7 +832,7 @@ class Slider extends CustomPostType {
 				array(
 					'id'       => 'slider-slides-settings-count',
 					'title'    => 'Slides Count',
-					'page'    => 'slider',
+					'page'    => 'centerpiece',
 					'context'  => 'normal',
 					'priority' => 'default',
 					'fields'   => array(
@@ -856,7 +856,7 @@ class Slider extends CustomPostType {
 				array(
 					'id' => 'slider-slides-settings-basic',
 					'title' => 'Slider Display Options',
-					'page' => 'slider',
+					'page' => 'centerpiece',
 					'context' => 'side',
 					'priority' => 'default',
 					'fields' => array(

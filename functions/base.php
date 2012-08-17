@@ -1557,7 +1557,7 @@ function save_default($post_id, $field){
 function _save_meta_data($post_id, $meta_box){
 	
 	// verify nonce
-	if (post_type($post_id) == 'slider') {
+	if (post_type($post_id) == 'centerpiece') {
 		if (!wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content')) {
 			//var_dump(wp_verify_nonce($_POST['meta_box_nonce'], 'nonce-content'));
 			return $post_id;
@@ -1584,7 +1584,7 @@ function _save_meta_data($post_id, $meta_box){
 	}
 	
 	// Custom slider stuff:
-	if (post_type($post_id) == 'slider') {
+	if (post_type($post_id) == 'centerpiece') {
 		
 		// All other meta box data for Sliders:		
 		foreach ($meta_box as $single_meta_box) {
