@@ -855,7 +855,7 @@ class Slider extends CustomPostType {
 				// Basic Slider Display Options:
 				array(
 					'id' => 'slider-slides-settings-basic',
-					'title' => 'Slider Display Options',
+					'title' => 'Centerpiece Display Options',
 					'page' => 'centerpiece',
 					'context' => 'side',
 					'priority' => 'default',
