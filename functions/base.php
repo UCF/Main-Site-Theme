@@ -1648,16 +1648,22 @@ function _save_meta_data($post_id, $meta_box){
 					
 					$update_metadata_list = array();
 					
-					// Get the slide numbers for each uploaded file and unchanged file:
 					$new_slide_list = array();
-					$old_slide_list = array();
+					$unchanged_slide_list = array();
 					
+					// Get the slide numbers for each uploaded file:
 					foreach($files['name'] as $key => $val) {
 						if ($val !== '') {
 							$new_slide_list[] .= $key;
 						}
-						else {
-							$old_slide_list[] .= $key;
+					}
+					// Get any file numbers that are already set and compare them to the numbers
+					// in $new_slide_list[].  If the keys in $old_attachments aren't in
+					// $new_slide_list[], add them to $unchanged_slide_list[]:
+					$old_attachments = get_post_meta($post_id, 'ss_slide_image', TRUE);
+					foreach ($old_attachments as $key => $val) {
+						if (!(in_array($key, $new_slide_list))) {
+							$unchanged_slide_list[] .= $key;
 						}
 					}
 					
@@ -1670,7 +1676,6 @@ function _save_meta_data($post_id, $meta_box){
 									);
 						
 						// Finally, process each image and its data:
-						
 						foreach ($new_slide_list as $i) {
 							$file = array(
 								'name' 		=> $files['name'][$i],
@@ -1680,7 +1685,7 @@ function _save_meta_data($post_id, $meta_box){
 								'size' 		=> $files['size'][$i]
 							);
 							
-							if ($file['name'] !== NULL && get_post_type($post_id) !== 'revision') {
+							if ($file['name'] !== NULL /*&& get_post_type($post_id) !== 'revision'*/) {
 							
 								$uploaded_file 	= wp_handle_upload($file, $override);
 								
@@ -1703,15 +1708,12 @@ function _save_meta_data($post_id, $meta_box){
 								$update_metadata_list[$i] = $id;
 							}
 						}
-					}
-					// Handle existing files:
-					else {
-						foreach ($old_slide_list as $i) {
-							$old_attachment = get_post_meta($post_id, 'ss_slide_image', TRUE);
-							$old_attachment = $old_attachment[$i];
-							$update_metadata_list[$i] = wp_get_attachment_id($old_attachment);
+						
+						foreach ($unchanged_slide_list as $i) {
+							$update_metadata_list[$i] = $old_attachments[$i];
 						}
 					}
+					
 					update_post_meta($post_id, 'ss_slide_image', $update_metadata_list);
 
 				}
