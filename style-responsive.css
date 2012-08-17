@@ -10,7 +10,7 @@
 	#centerpiece_slider li embed {width: 1084px; height: 531px; }
 	#centerpiece_slider ul {height: 531px;}
 	
-	#subheader { height: 170px; }
+	#subheader { height: 170px; overflow: visible; }
 }
 @media (min-width: 980px) and (max-width: 1199px) {
 	#centerpiece_slider, 
@@ -24,7 +24,7 @@
 	
 	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
 	
-	#subheader { height: 140px; }
+	#subheader { height: 140px; overflow: visible; }
 }
 @media (max-width: 979px) {
 	#UCFHBSearch_and_links { display: none; }
@@ -49,10 +49,13 @@
 	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
 	.home_spotlight_title { line-height: 14px; }
 	
-	#subheader { height: 105px; }
+	#subheader { height: 105px; overflow: visible; }
 	#subheader blockquote { width: 450px; }
 	#subheader .subhead_author { font-size: 12px; }
 	#subheader .subheader_studentimg { margin-right: 10px; }
+	
+	#footer-menu li { margin-right: 5px; }
+	
 }
 
 @media (max-width: 767px) {
@@ -133,6 +136,8 @@
 	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
 	#subheader blockquote { margin-left: 0; width: 100%; }
 
+	#colleges_wrap ul#menu-ucf-colleges { margin-left: 0; }
+
 }
 
 @media (max-width: 480px) {
@@ -176,4 +181,13 @@
 	ul#header-menu li.last a { color: #333; text-align: center; }
 	
 	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
+	
+	#colleges_wrap { padding-bottom: 10px; }
+	#colleges_wrap ul { text-align: center; }
+	#colleges_wrap ul li { margin-right: 5px; float: none !important; display: inline-block; }
+	#colleges_wrap ul li:after { margin-left: 3px; }
+	
+	#footer-menu { text-align: center; margin-bottom: 20px; }
+	#footer-menu li { float: none !important; margin-bottom: 10px; }
+	#footer-menu li:after { margin-left: 5px; }
 }

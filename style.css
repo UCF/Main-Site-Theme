@@ -136,6 +136,7 @@ body { font-family: Georgia, serif; }
 #header-menu li:after { margin-left: 3px; }
 #header-menu li#menu-item-19:after { content: ""; } /* NEED TO CHANGE WITH NAV MENU UPDATES! (Next to last nav item) */
 #header-menu li a { color: #262626; }
+#header-menu li a:hover { color: #959491; text-decoration: none; }
 #header-menu li.last a {
 	display: block;
 	padding: 0 15px 2px 15px;
@@ -157,18 +158,26 @@ body { font-family: Georgia, serif; }
 	position: relative;
 	top: 0px;
 }
-#header-menu li.last a:hover { text-decoration: none; }
+#header-menu li.last a:hover { 
+	color: #262626;
+	background: -moz-linear-gradient(top, #f9bf1a 0%, #fdcf4a 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9bf1a), color-stop(100%,#fdcf4a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #f9bf1a 0%,#fdcf4a 100%); /* W3C */  
+}
 .no_nav_separator:after { content: '' !important; }
 
 #colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
 #colleges_wrap a:hover { color: #e50606; }
 #colleges_wrap .span2 { width: 100px; }
 #colleges_wrap h3 { /*font-family: Verdana, Geneva, sans-serif;*/font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
-#menu-ucf-colleges { list-style-type: none; }
-#menu-ucf-colleges li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
-#menu-ucf-colleges li:after { content: "|"; }
-#menu-ucf-colleges li:last-child:after { content: ""; }
-#menu-ucf-colleges li a { font-size: 11px; color: #262626; }
+#colleges_wrap #menu-ucf-colleges { list-style-type: none; }
+#colleges_wrap #menu-ucf-colleges li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+#colleges_wrap #menu-ucf-colleges li:after { content: "|"; }
+#colleges_wrap #menu-ucf-colleges li:last-child:after { content: ""; }
+#colleges_wrap #menu-ucf-colleges li a { font-size: 11px; color: #262626; }
 
 #footer { border-top: 0; margin: 20px 0; }
 #footer a:hover { color: #e50606; }
@@ -234,7 +243,13 @@ a.home_col_morelink:hover { text-decoration: none; color: #e50606 !important; bo
 }
 /* Bootstrap 30px margin pushes the right col off because of center col dashed border */
 #home_leftcol, #home_centercol, #home_rightcol { margin-left: 29px; }
+/* IE fixes */
+.ie7 #home_leftcol, .ie8 #home_leftcol { margin-left: 20px; }
+.ie7 #home_centercol, .ie8 #home_centercol { margin-left: 10px; }
+.ie7 #home_rightcol, .ie8 #home_rightcol { margin-left: 15px; }
+
 .col_padwrap { margin: 0 30px; }
+.ie7 .col_padwrap, .ie8 .col_padwrap { margin: 0 20px; }
 
 #home_leftcol {  }
 #home_leftcol a { color: #333; }
@@ -259,12 +274,14 @@ a.home_spotlight_readmore {
 #home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; width: 65px; height: auto; }
 
 #home_rightcol {  }
+.ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
 
 
 .subpage .page-content h1 { font-weight: normal; padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
 
-
 #subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
+/* For IE 7-8, which don't support media queries: */
+.ie7 #subheader, .ie8 #subheader { height: 140px; overflow: visible; }
 #subheader .subheader_subimg { margin-left: 0; border: 0; }
 #subheader .subhead_quote { border-left: 0; padding-left: 0; }
 #subheader .subhead_author { float: right; font-weight: bold; padding-top: 20px; font-size: 14px; font-family: Georgia; serif; }
