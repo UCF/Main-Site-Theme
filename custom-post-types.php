@@ -971,6 +971,7 @@ class Slider extends CustomPostType {
 					// a single empty slide 'widget'.
 					if ($slide_order) {
 						$slide_array = explode(",", $slide_order);
+						
 						foreach ($slide_array as $s) {
 							if ($s !== '') {		
 					?>
@@ -1002,13 +1003,12 @@ class Slider extends CustomPostType {
 										<th><label for="ss_slide_image[<?=$s?>]">Slide Image</label></th>
 										<td>
 											<?php
-												if ($slide_image){
+												if ($slide_image[$s]){
 													$image = get_post($slide_image[$s]);
 													$url   = wp_get_attachment_url($image->ID);
 												}else{
 													$image= null;
 												}
-												//var_dump($image);
 											?>
 											<?php if($image):?>
 											<a href="<?=$url?>"><?=$image->post_title?></a><br /><br />
