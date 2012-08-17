@@ -164,10 +164,11 @@ body { font-family: Georgia, serif; }
 #colleges_wrap a:hover { color: #e50606; }
 #colleges_wrap .span2 { width: 100px; }
 #colleges_wrap h3 { /*font-family: Verdana, Geneva, sans-serif;*/font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
-#menu-colleges-menu { list-style-type: none; }
-#menu-colleges-menu li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
-#menu-colleges-menu li:after { content: "|"; }
-#menu-colleges-menu li a { font-size: 11px; color: #262626; }
+#menu-ucf-colleges { list-style-type: none; }
+#menu-ucf-colleges li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+#menu-ucf-colleges li:after { content: "|"; }
+#menu-ucf-colleges li:last-child:after { content: ""; }
+#menu-ucf-colleges li a { font-size: 11px; color: #262626; }
 
 #footer { border-top: 0; margin: 20px 0; }
 #footer a:hover { color: #e50606; }
@@ -289,4 +290,10 @@ a.home_spotlight_readmore {
 .sidebar_nav li { padding-bottom: 6px; }
 .sidebar_nav li a { color: #333; }
 .sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
-#sidebar_l_moreinfo { }
+
+
+#contentcol, #contentcol p { color: #515050; font-family: Georgia, serif; font-size: 13px; line-height: 20px; }
+#contentcol p { margin-bottom: 20px; }
+#contentcol h3 { color: #515050; font-size: 15px; line-height: 20px; }
+#contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
+#contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }

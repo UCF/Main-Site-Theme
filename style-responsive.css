@@ -171,7 +171,9 @@
 		margin-top: 4px;
 	}
 	
-	#header-menu { margin-top: -10px; }
+	#header-nav-wrap { float: none; left: 0; margin-top: 10px; }
+	ul#header-menu { left: 0; margin-top: 0; }
+	ul#header-menu li.last a { color: #333; text-align: center; }
 	
 	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
 }
