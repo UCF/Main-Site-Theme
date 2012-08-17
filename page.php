@@ -38,7 +38,7 @@
 		} ?>
 		
 		<div id="sidebar_left" class="span2">
-			<?=get_sidebar();?>
+			<?=get_sidebar('left');?>
 		</div>
 		
 		<div class="span7">
@@ -48,7 +48,7 @@
 		</div>
 		
 		<div id="sidebar_right" class="span3">		
-			<?=get_sidebar();?>
+			<?=get_sidebar('right');?>
 		</div>
 	</div>
 <?php get_footer();?>
