@@ -477,6 +477,21 @@ class Page extends CustomPostType {
 		$use_metabox    = True,
 		$built_in       = True;
 
+	public static function get_subheaders() {
+		$args = array (
+			'numberposts' 	=> 20, // Arbitrary limit to prevent huge dropdowns
+			'post_type'		=> 'subheader',
+			'post_status'	=> 'publish'
+		);
+		$subheaders = get_posts($args);
+		
+		$subheader_array = array();
+		foreach ($subheaders as $subheader) {
+			$subheader_array[$subheader->post_title] .= $subheader->ID;
+		}
+		return $subheader_array;
+	}
+
 	public function fields() {
 		$prefix = $this->options('name').'_';
 		return array(/*
@@ -491,6 +506,13 @@ class Page extends CustomPostType {
 					'desc' => '',
 					'id' => $prefix.'stylesheet',
 					'type' => 'file',
+				),
+				array(
+					'name' => 'Subheader',
+					'desc' => '(Optional) Display a Subheader above the page\'s content.',
+					'id' => $prefix.'subheader',
+					'type' => 'select',
+					'options' => $this->get_subheaders(),
 				),
 		);
 	}
@@ -705,6 +727,12 @@ class Subheader extends CustomPostType {
 		$prefix = $this->options('name').'_';
 		return array(
 			array(
+					'name' => 'Student Name/Major',
+					'desc' => 'Name and discipline of the quoted student; e.g. "John Doe, Political Science".',
+					'id' => $prefix.'student_name',
+					'type' => 'text',
+			),
+			array(
 					'name' => 'Sub Image',
 					'desc' => 'Image to be displayed on the left-hand side of the subheader.  Image should ideally be square.',
 					'id' => $prefix.'sub_image',
@@ -715,12 +743,6 @@ class Subheader extends CustomPostType {
 					'desc' => 'Image to be displayed on the right-hand side of the subheader.  Image should be a full body shot of the student.',
 					'id' => $prefix.'student_image',
 					'type' => 'file',
-			),
-			array(
-					'name' => 'Student Name',
-					'desc' => 'Name of the quoted student.',
-					'id' => $prefix.'student_name',
-					'type' => 'text',
 			),
 		);
 	}
