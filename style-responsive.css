@@ -5,17 +5,21 @@
 	#centerpiece_slider, 
 	#centerpiece_slider li, 
 	#centerpiece_slider li img.centerpiece_single_img, 
+	#centerpiece_slider li img.centerpiece_single_vid_thumb,
 	#centerpiece_slider li object, 
 	#centerpiece_slider iframe, 
 	#centerpiece_slider li embed {width: 1084px; height: 531px; }
 	#centerpiece_slider ul {height: 531px;}
 	
 	#subheader { height: 170px; overflow: visible; }
+	
+	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 360px; margin: auto; }
 }
 @media (min-width: 980px) and (max-width: 1199px) {
 	#centerpiece_slider, 
 	#centerpiece_slider li, 
 	#centerpiece_slider li img.centerpiece_single_img, 
+	#centerpiece_slider li img.centerpiece_single_vid_thumb,
 	#centerpiece_slider li object, 
 	#centerpiece_slider iframe, 
 	#centerpiece_slider li embed {width: 940px; height: 460px; }
@@ -25,6 +29,8 @@
 	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
 	
 	#subheader { height: 140px; overflow: visible; }
+	
+	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
 }
 @media (max-width: 979px) {
 	#UCFHBSearch_and_links { display: none; }
@@ -38,6 +44,7 @@
 	#centerpiece_slider, 
 	#centerpiece_slider li, 
 	#centerpiece_slider li img.centerpiece_single_img, 
+	#centerpiece_slider li img.centerpiece_single_vid_thumb,
 	#centerpiece_slider li object, 
 	#centerpiece_slider iframe, 
 	#centerpiece_slider li embed {width: 724px; height: 354px; }
@@ -53,6 +60,8 @@
 	#subheader blockquote { width: 450px; }
 	#subheader .subhead_author { font-size: 12px; }
 	#subheader .subheader_studentimg { margin-right: 10px; }
+	
+	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 260px; }
 	
 	#footer-menu li { margin-right: 5px; }
 	
@@ -135,7 +144,9 @@
 	#subheader { height: auto; overflow: auto; }
 	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
 	#subheader blockquote { margin-left: 0; width: 100%; }
-
+	
+	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
+	
 	#colleges_wrap ul#menu-ucf-colleges { margin-left: 0; }
 
 }
@@ -181,6 +192,8 @@
 	ul#header-menu li.last a { color: #333; text-align: center; }
 	
 	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
+	
+	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 200px; }
 	
 	#colleges_wrap { padding-bottom: 10px; }
 	#colleges_wrap ul { text-align: center; }

@@ -232,6 +232,7 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 			$slide_content_type 	= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
 			$slide_image			= get_post_meta($post->ID, 'ss_slide_image', TRUE);
 			$slide_video			= get_post_meta($post->ID, 'ss_slide_video', TRUE);
+			$slide_video_thumb		= get_post_meta($post->ID, 'ss_slide_video_thumb', TRUE);
 			$slide_content			= get_post_meta($post->ID, 'ss_slide_content', TRUE);
 			$slide_links_to			= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
 			$slide_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
@@ -245,6 +246,7 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 				if ($s !== '') {
 					
 					$slide_image_url = wp_get_attachment_image_src($slide_image[$s], 'centerpiece-image');
+					$slide_video_thumb_url = wp_get_attachment_image_src($slide_video_thumb[$s], 'centerpiece-image');
 					$slide_duration  = ($slide_duration[$s] !== '' ? $slide_duration[$s] : 6);
 					
 					// Start <li>
@@ -276,7 +278,13 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 					
 					// Video output:
 					if ($slide_content_type[$s] == 'video') {
-						$output .= $slide_video[$s];
+						if ($slide_video_thumb[$s]) {
+							$output .= '<img class="centerpiece_single_vid_thumb" src="'.$slide_video_thumb_url[0].'" alt="Click to Watch" title="Click to Watch" />';
+							$output .= '<div class="centerpiece_single_vid_hidden">'.$slide_video[$s].'</div>';
+						}
+						else {
+							$output .= $slide_video[$s];
+						}
 					}
 					
 					// End <li>

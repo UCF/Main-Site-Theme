@@ -199,6 +199,8 @@ body { font-family: Georgia, serif; }
 #centerpiece_slider li {float: left; list-style-type: none;}
 #centerpiece_slider li img.centerpiece_single_img { }
 #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed { }
+#centerpiece_slider li .centerpiece_single_vid_thumb { cursor: pointer; }
+#centerpiece_slider li .centerpiece_single_vid_hidden { display: none; }
 #centerpiece_slider li .slide_contents { 
 	position: absolute;
 	display: block;
@@ -289,6 +291,14 @@ a.home_spotlight_readmore {
 #subheader .subhead_quotelink a { color: #660000 !important; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: normal; }
 #subheader .subhead_quotelink a:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
 .subheader_studentimg { float: right; margin-right: 20px; }
+
+
+.ie7 #contentcol iframe, 
+.ie7 #contentcol embed, 
+.ie7 #contentcol object,
+.ie8 #contentcol iframe, 
+.ie8 #contentcol embed, 
+.ie8 #contentcol object { width: 100%; height: 260px; }
 
 
 .sidebar_title { 
