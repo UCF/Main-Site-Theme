@@ -956,6 +956,7 @@ class Slider extends CustomPostType {
 		$slide_content_type 		= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
 		$slide_image				= get_post_meta($post->ID, 'ss_slide_image', TRUE);
 		$slide_video				= get_post_meta($post->ID, 'ss_slide_video', TRUE);
+		$slide_video_thumb			= get_post_meta($post->ID, 'ss_slide_video_thumb', TRUE);
 		$slide_content				= get_post_meta($post->ID, 'ss_slide_content', TRUE);
 		$slide_links_to				= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
 		$slide_link_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
@@ -1013,7 +1014,7 @@ class Slider extends CustomPostType {
 											<?php if($image):?>
 											<a href="<?=$url?>"><?=$image->post_title?></a><br /><br />
 											<?php endif;?>									
-											<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$s?>]"><br />
+											<input type="file" id="file_img_<?=$post->ID?>" name="ss_slide_image[<?=$s?>]"><br />
 										</td>
 									</tr>
 									<tr>
@@ -1021,6 +1022,24 @@ class Slider extends CustomPostType {
 										<td>
 											<span class="description">Copy and paste your video embed code here.</span><br/>
 											<textarea name="ss_slide_video[<?=$s?>]" id="ss_slide_video[<?=$s?>]" cols="60" rows="4"><?php ($slide_video[$s] !== '') ? print $slide_video[$s] : ''; ?></textarea>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_video_thumb[<?=$s?>]">Slide Video Thumbnail</label></th>
+										<td>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here.</span><br/>
+											<?php
+												if ($slide_video_thumb[$s]){
+													$image = get_post($slide_video_thumb[$s]);
+													$url   = wp_get_attachment_url($image->ID);
+												}else{
+													$image= null;
+												}
+											?>
+											<?php if($image):?>
+											<a href="<?=$url?>"><?=$image->post_title?></a><br /><br />
+											<?php endif;?>									
+											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$s?>]"><br />
 										</td>
 									</tr>
 									<tr>
@@ -1097,6 +1116,13 @@ class Slider extends CustomPostType {
 										<textarea name="ss_slide_video[<?=$i?>]" id="ss_slide_video[<?=$i?>]" cols="60" rows="4"></textarea>
 									</td>
 								</tr>
+								<tr>
+										<th><label for="ss_slide_video_thumb[<?=$i?>]">Slide Video Thumbnail</label></th>
+										<td>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here.</span><br/>
+											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$i?>]"><br />
+										</td>
+									</tr>
 								<tr>
 									<th><label for="ss_slide_content[<?=$i?>]">Slide Content</label></th>
 									<td>

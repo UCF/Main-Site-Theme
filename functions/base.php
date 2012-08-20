@@ -1606,34 +1606,47 @@ function _save_meta_data($post_id, $meta_box){
 			$single_slide_meta = array(
 				array(
 					'id'	=> 'ss_slide_title',
+					'type'	=> 'default',
 					'val'	=> $_POST['ss_slide_title'],
 				),
 				array(
 					'id'	=> 'ss_type_of_content',
+					'type'	=> 'default',
 					'val'	=> $_POST['ss_type_of_content'],
 				),
 				array(
 					'id'	=> 'ss_slide_image',
+					'type'	=> 'file',
 					'val' 	=> $_POST['ss_slide_image'],
 				),
 				array(
 					'id' 	=> 'ss_slide_video',
+					'type'	=> 'default',
 					'val' 	=> $_POST['ss_slide_video'],
 				),
 				array(
+					'id' 	=> 'ss_slide_video_thumb',
+					'type'	=> 'file',
+					'val' 	=> $_POST['ss_slide_video_thumb'],
+				),
+				array(
 					'id'	=> 'ss_slide_content',
+					'type'	=> 'default',
 					'val'	=> $_POST['ss_slide_content'],
 				),
 				array(
 					'id'	=> 'ss_slide_links_to',
+					'type'	=> 'default',
 					'val'	=> $_POST['ss_slide_links_to'],
 				),
 				array(
 					'id'	=> 'ss_slide_link_newtab',
+					'type'	=> 'default',
 					'val'	=> $_POST['ss_slide_link_newtab'],
 				),
 				array(
 					'id'	=> 'ss_slide_duration',
+					'type'	=> 'default',
 					'val'	=> $_POST['ss_slide_duration'],
 				),
 			);
@@ -1641,7 +1654,7 @@ function _save_meta_data($post_id, $meta_box){
 			foreach ($single_slide_meta as $field) {
 								
 				// File upload handling (for slide images):				
-				if ($field['id'] == 'ss_slide_image') {
+				if ($field['type'] == 'file') {
 					
 					$files = $_FILES[$field['id']];
 					$file_uploaded = @!empty($files);
@@ -1660,7 +1673,7 @@ function _save_meta_data($post_id, $meta_box){
 					// Get any file numbers that are already set and compare them to the numbers
 					// in $new_slide_list[].  If the keys in $old_attachments aren't in
 					// $new_slide_list[], add them to $unchanged_slide_list[]:
-					$old_attachments = get_post_meta($post_id, 'ss_slide_image', TRUE);
+					$old_attachments = get_post_meta($post_id, $field['id'], TRUE);
 					foreach ($old_attachments as $key => $val) {
 						if (!(in_array($key, $new_slide_list))) {
 							$unchanged_slide_list[] .= $key;
@@ -1714,7 +1727,7 @@ function _save_meta_data($post_id, $meta_box){
 						}
 					}
 					
-					update_post_meta($post_id, 'ss_slide_image', $update_metadata_list);
+					update_post_meta($post_id, $field['id'], $update_metadata_list);
 
 				}
 				// All other single slide fields:
