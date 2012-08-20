@@ -185,6 +185,9 @@ centerpieceSlider = function($) {
 				var oldsrc = $(this).attr('src');
 				$(this).attr('src', 'empty');
 				$(this).attr('src', oldsrc);
+				if ($(this).parent().prev('.centerpiece_single_vid_thumb')) {
+					$(this).parent().hide().prev('.centerpiece_single_vid_thumb').show();
+				}
 			});
 		});
 		
