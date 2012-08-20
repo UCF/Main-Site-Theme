@@ -21,6 +21,7 @@
 			<h2>Upcoming Events</h2>
 			<?php display_events(); ?>
 			<p><a href="http://events.ucf.edu/?upcoming=upcoming" class="home_col_morelink">More Events</a></p>
+			<?=output_weather_data()?>
 		</div>
 	
 	</div>

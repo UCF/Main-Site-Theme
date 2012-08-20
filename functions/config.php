@@ -84,6 +84,12 @@ define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 
+# Weather
+//define('WEATHER_URL', 'http://local.msn.com/weather.aspx?q=Orlando-FL&zip=32803');
+define('WEATHER_URL', 'http://www.msnbc.msn.com/databox/data.aspx?dbid=23301549');
+define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');
+define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
+
 $theme_options = get_option(THEME_OPTIONS_NAME);
 define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);

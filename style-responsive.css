@@ -68,6 +68,7 @@
 	#sidebar_right { padding-top: 175px; }
 	#sidebar_right .news .item { margin-bottom: 10px; }
 	#sidebar_right .news .item a { font-size: 12px; }
+	#sidebar_right #sidebar_r_facebook_wrap iframe { width: 166px !important; height: 74px !important; }
 	
 	#footer-menu li { margin-right: 5px; }
 	
@@ -75,6 +76,7 @@
 
 @media (max-width: 767px) {
 	#header { margin-left: 0; }
+	#page_title #weather_bug { display: none; }
 	
 	#home .description { margin-top: 10px; }
 	/*
@@ -146,6 +148,8 @@
 	.table.table-bordered tbody tr td {
 		border-left: 0;
 	}
+	
+	.subpage .page-content #page_title { overflow: hidden; }
 	
 	#subheader { height: auto; overflow: auto; }
 	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }

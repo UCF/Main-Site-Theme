@@ -170,6 +170,11 @@ body { font-family: Georgia, serif; }
 }
 .no_nav_separator:after { content: '' !important; }
 
+
+#weather_bug { height: 50px; background-position: left bottom; background-repeat: no-repeat !important; }
+#weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; }
+
+
 #colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
 #colleges_wrap a:hover { color: #e50606; }
 #colleges_wrap .span2 { width: 100px; }
@@ -278,9 +283,12 @@ a.home_spotlight_readmore {
 
 #home_rightcol {  }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
+#home_rightcol #weather_bug { background-position: right bottom !important; }
+#home_rightcol #weather_bug #wb_status_txt { text-align: left; }
 
 
-.subpage .page-content h1 { font-weight: normal; padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
+.subpage .page-content #page_title { padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
+.subpage .page-content #page_title h1 { font-weight: normal; display: block; margin-left: 0; }
 
 #subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
 /* For IE 7-8, which don't support media queries: */
@@ -316,10 +324,13 @@ a.home_spotlight_readmore {
 #sidebar_l_colleges { color: #777; padding-top: 40px; }
 
 #sidebar_right { padding-top: 115px; }
-#sidebar_right .sidebar_title { font-size: 14px; line-height: 16px; }
+#sidebar_right .sidebar_title { color: #777; }
+#sidebar_right #sidebar_r_today { font-size: 14px; line-height: 16px; color: #000; }
 #sidebar_right .news .item { margin-bottom: 15px; }
 #sidebar_right .news .item a { font-size: 14px; font-family: Georgia, serif; font-weight: normal; color: #000; border-bottom: 1px solid #ccc; }
 #sidebar_right .news .item a:hover { text-decoration: none; color: #e50506; border-bottom: 1px solid #e50506; }
+.sidebar_r_wrap { margin-bottom: 30px; }
+.sidebar_r_wrap p { font-family: Georgia, serif; } 
 
 .sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
 .sidebar_nav li { padding-bottom: 6px; }

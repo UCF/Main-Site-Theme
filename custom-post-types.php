@@ -577,16 +577,34 @@ class Page extends CustomPostType {
 					'std' => 'on',
 				),
 				array(
+					'name' => '<strong>Right Sidebar:</strong> Embed Widget 1 Title',
+					'desc' => '(Optional) Title for the embed widget below. Can be left blank.',
+					'id' => $prefix.'widget_r_embed1_title',
+					'type' => 'text',
+				),
+				array(
 					'name' => '<strong>Right Sidebar:</strong> Embed Widget 1',
 					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
 					'id' => $prefix.'widget_r_embed1',
 					'type' => 'textarea',
 				),
 				array(
+					'name' => '<strong>Right Sidebar:</strong> Embed Widget 2 Title',
+					'desc' => '(Optional) Title for the embed widget below. Can be left blank.',
+					'id' => $prefix.'widget_r_embed2_title',
+					'type' => 'text',
+				),
+				array(
 					'name' => '<strong>Right Sidebar:</strong> Embed Widget 2',
 					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
 					'id' => $prefix.'widget_r_embed2',
 					'type' => 'textarea',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> Embed Widget 3 Title',
+					'desc' => '(Optional) Title for the embed widget below. Can be left blank.',
+					'id' => $prefix.'widget_r_embed3_title',
+					'type' => 'text',
 				),
 				array(
 					'name' => '<strong>Right Sidebar:</strong> Embed Widget 3',

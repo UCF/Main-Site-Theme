@@ -98,4 +98,78 @@ function get_page_subheader($post) {
 	}
 }
 
+
+
+/**
+ * Pulls, parses and caches the weather.
+ *
+ * @return array
+ * @author Chris Conover
+ **/
+function get_weather_data()
+{
+	$cache_key = 'weather';
+	
+	if(($weather = get_transient($cache_key)) !== False) {
+		return $weather;
+	} else {
+		$weather = Array('condition' => 'fair', 'temp' => 80, 'img' => '34');
+		
+		// Cookies are needed for the service to work properly
+		$opts = Array('http' => Array(	'method'=>"GET",
+										'header'=>"Accept-language: en\r\n" .
+										"Cookie: P1=01||,USFL0372|1||WESH|||||||;\r\n",
+										'timeout' => 1
+									)
+					);
+		
+		$context = stream_context_create($opts);
+		
+		try {
+			$raw_weather = file_get_contents(WEATHER_URL, false, $context);
+			$json_weather = json_decode(str_replace("\'", "'", $raw_weather));
+
+			@$weather['condition']	= $json_weather->weather->conditions->text;
+			@$weather['temp']		= substr($json_weather->weather->conditions->temp, 0, strlen($json_weather->weather->conditions->temp) - 1);
+			@$weather['img']		= $json_weather->weather->conditions->cid;
+			
+			# Catch missing cid
+			if (!isset($weather['img']) or !intval($weather['img'])){
+				$weather['img'] = '34';
+			}
+			
+			# Catch missing condition
+			if (!is_string($weather['condition']) or !$weather['condition']){
+				$weather['condition'] = 'fair';
+			}
+		} catch (Exception $e) {
+			# pass
+		}
+
+		set_transient($cache_key, $weather, WEATHER_CACHE_DURATION);
+		
+		return $weather;
+	}
+	
+}
+
+
+/**
+ * Output weather data. Add an optional class for easy Bootstrap styling.
+ **/
+function output_weather_data($class=null) {
+	$weather 	= get_weather_data(); 
+	$condition 	= $weather['condition'];
+	$temp 		= $weather['temp'];
+	$img 		= $weather['img'];
+	if ($weather) { ?>
+		<div id="weather_bug" class="<?=$class?>" style="background:url('<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/WC<?=$img?>.png');">
+			<p id="wb_status_txt"><?=$temp?>, <?=$condition?></p>
+		</div>
+		<?php
+	} else { ?>
+		<div id="weather_bug" style="height: auto;" class="span4"></div>
+	<?php
+	}
+}
 ?>
