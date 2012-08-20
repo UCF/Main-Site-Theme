@@ -6,10 +6,14 @@
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="<?=$post->post_name?>">
 		<div class="span12">
+			<h1><?php the_title();?></h1>
+		</div>
+		
+		<?=get_page_subheader($post)?>
+		
+		<div class="span12" id="contentcol">
 			<article>
-				<? if(!is_front_page())	{ ?>
-						<h1><?php the_title();?></h1>
-				<? } ?>
+				<div class="rightcol_subheader_fix"></div>
 				<?php the_content();?>
 			</article>
 		</div>

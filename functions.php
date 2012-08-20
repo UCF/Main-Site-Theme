@@ -60,4 +60,42 @@ function ss_framework_change_slider_title( $title ){
 add_filter('enter_title_here', 'ss_framework_change_slider_title');
 
 
+
+/**
+ * Adds a subheader to a page (if one is set for the page.)
+ **/
+function get_page_subheader($post) {
+	if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') {
+		$subheader = get_post(get_post_meta($post->ID, 'page_subheader', TRUE));			
+		?>
+		<div class="span12" id="subheader">
+			<?php
+			$subimg = get_post_meta($subheader->ID, 'subheader_sub_image', TRUE);
+			$imgatts = array(
+				'class'	=> "subheader_subimg span2",
+				'alt'   => $post->post_title,
+				'title' => $post->post_title,
+			);
+			print wp_get_attachment_image($subimg, 'subpage-subimg', 0, $imgatts);
+			?>
+			<blockquote class="subhead_quote span8">
+				<?=$subheader->post_content?>
+				<p class="subhead_author"><?=get_post_meta($subheader->ID, 'subheader_student_name', TRUE)?></p>
+				<p class="subhead_quotelink"><a href="<?=get_permalink(get_page_by_title( 'Submit a Quote About UCF', OBJECT, 'page' )->ID)?>">Submit a quote &raquo;</a></p>
+			</blockquote>
+			
+			<?php
+			$studentimg = get_post_meta($subheader->ID, 'subheader_student_image', TRUE);
+			$imgatts = array(
+				'class'	=> "subheader_studentimg",
+				'alt'   => get_post_meta($subheader->ID, 'subheader_student_name', TRUE),
+				'title' => get_post_meta($subheader->ID, 'subheader_student_name', TRUE),
+			);
+			print wp_get_attachment_image($studentimg, 'subpage-studentimg', 0, $imgatts);
+			?>
+		</div>
+	<?php
+	}
+}
+
 ?>
