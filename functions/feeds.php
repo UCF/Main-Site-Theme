@@ -318,4 +318,12 @@ function get_news($start=null, $limit=null){
 }
 
 
+function get_sidebar_news($post, $start=null, $limit=null){
+	$options	 = get_option(THEME_OPTIONS_NAME);
+	$url      	 = get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) !== '' ? get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) : $options['news_url'];
+	$news     	 = FeedManager::get_items($url, $start, $limit);
+	return $news;
+}
+
+
 ?>

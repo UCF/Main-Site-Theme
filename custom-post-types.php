@@ -524,33 +524,83 @@ class Page extends CustomPostType {
 					'options' => $this->get_subheaders(),
 				),
 				array(
-					'name' => 'More Information Widget',
-					'desc' => 'Display a More Information widget in the <strong>left-hand sidebar</strong> that contains a given menu. Useful for adding links that are directly related to the page\'s content. Menus can be created in the <a href="'.get_admin_url().'nav-menus.php">menu editor</a>.',
+					'name' => '<strong>Left Sidebar:</strong> More Information Widget',
+					'desc' => '(Optional) Display a More Information widget in the <strong>left-hand sidebar</strong> that contains a given menu. Useful for adding links that are directly related to the page\'s content. Menus can be created in the <a href="'.get_admin_url().'nav-menus.php">menu editor</a>.',
 					'id' => $prefix.'widget_l_moreinfo',
 					'type' => 'select',
 					'options' => $this->get_menus(),
 				),
 				array(
-					'name' => 'Secondary Information Widget',
+					'name' => '<strong>Left Sidebar:</strong> Secondary Information Widget',
 					'desc' => '(Optional) Display a Secondary Information widget in the <strong>left-hand sidebar</strong> that contains a given menu. Useful for adding extra relevant links, student-related services, etc. Menus can be created in the <a href="'.get_admin_url().'nav-menus.php">menu editor</a>.',
 					'id' => $prefix.'widget_l_secinfo',
 					'type' => 'select',
 					'options' => $this->get_menus(),
 				),
 				array(
-					'name' => 'Secondary Information Widget Title',
-					'desc' => 'Title for the Secondary Information widget designated above.  Default is "Useful Links".',
+					'name' => '<strong>Left Sidebar:</strong> Secondary Information Widget Title',
+					'desc' => '(Optional) Title for the Secondary Information widget designated above.  Default is "Useful Links".',
 					'id' => $prefix.'widget_l_secinfo_title',
 					'type' => 'text',
 				),
 				array(
-					'name' => 'Show list of Colleges',
+					'name' => '<strong>Left Sidebar:</strong> Show list of Colleges',
 					'desc' => '(Optional) Check this box to display the UCF Colleges menu in the <strong>left-hand sidebar.</strong>',
 					'id' => $prefix.'widget_l_showcolleges',
 					'type' => 'checkbox',
 					'std' => 'on',
 				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> Show UCF Today Stories',
+					'desc' => '(Optional) Check this box to display the UCF Today feed in the <strong>right-hand sidebar.</strong>',
+					'id' => $prefix.'widget_r_showtoday',
+					'type' => 'checkbox',
+					'std' => 'on',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> UCF Today Widget Title',
+					'desc' => '(Optional) Designate the title of the UCF Today news feed for the widget; e.g. "College and Campus News". Default is just "UCF Today"',
+					'id' => $prefix.'widget_r_today_title',
+					'type' => 'text',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> UCF Today Feed Path',
+					'desc' => '(Optional) Designate the specific UCF Today feed to use for the UCF Today widget; e.g. "http://today.ucf.edu/tag/alumni/feed/"',
+					'id' => $prefix.'widget_r_today_feed',
+					'type' => 'text',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> Show Connect with UCF Facebook Link',
+					'desc' => '(Optional) Check this box to display the UCF on Facebook information in the <strong>right-hand sidebar.</strong>',
+					'id' => $prefix.'widget_r_showfacebook',
+					'type' => 'checkbox',
+					'std' => 'on',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> Embed Widget 1',
+					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
+					'id' => $prefix.'widget_r_embed1',
+					'type' => 'textarea',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> Embed Widget 2',
+					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
+					'id' => $prefix.'widget_r_embed2',
+					'type' => 'textarea',
+				),
+				array(
+					'name' => '<strong>Right Sidebar:</strong> Embed Widget 3',
+					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
+					'id' => $prefix.'widget_r_embed3',
+					'type' => 'textarea',
+				),
 		);
+	}
+	
+	public function metabox(){
+		$metabox = parent::metabox();
+		$metabox['helptxt'] = 'Note: Widgets designated above will only appear depending on the page template that is set. Setting a two-column layout will not show any right-hand sidebar options set above; setting a one-column layout will display no widgets.';
+		return $metabox;
 	}
 }
 
@@ -1003,6 +1053,7 @@ class Slider extends CustomPostType {
 									<tr>
 										<th><label for="ss_slide_image[<?=$s?>]">Slide Image</label></th>
 										<td>
+											<span class="description">Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
 											<?php
 												if ($slide_image[$s]){
 													$image = get_post($slide_image[$s]);
@@ -1027,7 +1078,7 @@ class Slider extends CustomPostType {
 									<tr>
 										<th><label for="ss_slide_video_thumb[<?=$s?>]">Slide Video Thumbnail</label></th>
 										<td>
-											<span class="description">If you're using a video embed, add a "click to play" thumbnail here.</span><br/>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
 											<?php
 												if ($slide_video_thumb[$s]){
 													$image = get_post($slide_video_thumb[$s]);
@@ -1106,6 +1157,7 @@ class Slider extends CustomPostType {
 								<tr>
 									<th><label for="ss_slide_image[<?=$i?>]">Slide Image</label></th>
 									<td>
+										<span class="description">Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
 										<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$i?>]"><br />
 									</td>
 								</tr>
@@ -1119,7 +1171,7 @@ class Slider extends CustomPostType {
 								<tr>
 										<th><label for="ss_slide_video_thumb[<?=$i?>]">Slide Video Thumbnail</label></th>
 										<td>
-											<span class="description">If you're using a video embed, add a "click to play" thumbnail here.</span><br/>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
 											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$i?>]"><br />
 										</td>
 									</tr>

@@ -125,6 +125,7 @@ select#UCFHBHeaderLinks {
 /* UCF.edu specific styles */
 
 body { font-family: Georgia, serif; }
+.rssbtn { width: 44px; height: 16px; display: block; background: url('static/img/rss.png') center center no-repeat; text-indent: -9999px; }
 
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
 #header h1 { text-indent: -9999px; }
@@ -313,6 +314,13 @@ a.home_spotlight_readmore {
 #sidebar_l_moreinfo { color: #B38C0B; }
 #sidebar_l_secinfo { color: #F5530C; }
 #sidebar_l_colleges { color: #777; padding-top: 40px; }
+
+#sidebar_right { padding-top: 115px; }
+#sidebar_right .sidebar_title { font-size: 14px; line-height: 16px; }
+#sidebar_right .news .item { margin-bottom: 15px; }
+#sidebar_right .news .item a { font-size: 14px; font-family: Georgia, serif; font-weight: normal; color: #000; border-bottom: 1px solid #ccc; }
+#sidebar_right .news .item a:hover { text-decoration: none; color: #e50506; border-bottom: 1px solid #e50506; }
+
 .sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
 .sidebar_nav li { padding-bottom: 6px; }
 .sidebar_nav li a { color: #333; }
