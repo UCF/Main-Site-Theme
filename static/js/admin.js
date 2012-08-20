@@ -351,6 +351,11 @@ WebcomAdmin.themeOptions = function($){
 	}
 	
 	
+	// Subheader character count message:
+	if ($('#spotlight_metabox').length > 0) {
+		$('<tr><td colspan="2" style="padding: 2px 10px;"><strong>Note: Max character count for Spotlights is 200. Going over this character limit will cause the subheader content to be cut short.</strong></td></tr>').appendTo('#post-status-info tbody');
+	}
+	
 };
 
 (function($){
