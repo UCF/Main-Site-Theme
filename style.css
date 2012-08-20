@@ -324,3 +324,5 @@ a.home_spotlight_readmore {
 #contentcol h3 { color: #515050; font-size: 15px; line-height: 20px; }
 #contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
 #contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }
+
+#contentcol .rightcol_subheader_fix { width: 150px; height: 150px; float: right; }

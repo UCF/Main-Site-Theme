@@ -146,6 +146,7 @@
 	#subheader blockquote { margin-left: 0; width: 100%; }
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
+	#contentcol .rightcol_subheader_fix { display: none; }
 	
 	#colleges_wrap ul#menu-ucf-colleges { margin-left: 0; }
 
