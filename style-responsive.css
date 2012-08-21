@@ -2,6 +2,9 @@
 	#UCFHBHeader div.UCFHBWrapper { width: 1200px; }
 	#UCFHBHeader #UCFHBSearch_and_links { margin-left: 750px; }
 	
+	#header-menu li a { font-size: 18px !important; }
+	#header-menu li.last a { font-size: 12px !important; }
+	
 	#centerpiece_slider, 
 	#centerpiece_slider li, 
 	#centerpiece_slider li img.centerpiece_single_img, 
