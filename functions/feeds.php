@@ -236,25 +236,47 @@ function display_flickr($header='h2'){
 <?php
 }
 
-
-function display_events(){?>
-	<?php $options = get_option(THEME_OPTIONS_NAME);?>
-	<?php $count   = $options['events_max_items']?>
-	<?php $events  = get_events(0, ($count) ? $count : 3);?>
-	<?php if(count($events)):?>
+/* Modified for main site theme (for JSON instead of RSS feed): */
+function display_events($start=null, $limit=null){?>
+	<?php 
+	$options = get_option(THEME_OPTIONS_NAME);
+	$qstring = (bool)strpos($options['events_url'], '?');
+	$url     = $options['events_url'];
+	if (!$qstring){
+		$url .= '?';
+	}else{
+		$url .= '&';
+	}
+	$start	 = ($start) ? $start : 0;
+	// Check for a given limit, then a set Options value, then if none exist, set to 4
+	if ($limit) {
+		$limit = intval($limit);
+	}
+	elseif ($options['events_max_items']) {
+		$limit = $options['events_max_items'];
+	}
+	else {
+		$limit = 4;
+	}
+	$events  = get_events($start, $limit);
+	if(count($events)): ?>
 		<table class="events">
-			<?php foreach($events as $item):?>
+			<?php foreach($events as $item):
+				$day  		= date('M d', strtotime($item['starts']));
+				$time 		= date('h:i a', strtotime($item['starts']));
+				$link 		= $url.'eventdatetime_id='.$item['id'];
+				$loc_link 	= $item['location_url'];
+				$location	= $item['location'];
+				$title		= $item['title'];				
+			?>
 			<tr class="item">
 				<td class="date">
-					<?php
-						$month = $item->get_date("M");
-						$day   = $item->get_date("j");
-					?>
-					<div class="month"><?=$month?></div>
 					<div class="day"><?=$day?></div>
+					<div class="time"><?=$time?></div>
 				</td>
 				<td class="title">
-					<a href="<?=$item->get_link()?>" class="wrap ignore-external"><?=$item->get_title()?></a>
+					<a href="<?=$link?>" class="wrap ignore-external"><?=$title?></a>
+					<a href="<?=$loc_link?>" class="wrap ignore-external"><?=$location?></a>
 				</td>
 			</tr>
 			<?php endforeach;?>
@@ -294,7 +316,8 @@ function display_news(){?>
 }
 
 
-function get_events($start=null, $limit=null){
+/* Modified function for main site theme: */
+function get_events($start, $limit){
 	$options = get_option(THEME_OPTIONS_NAME);
 	$qstring = (bool)strpos($options['events_url'], '?');
 	$url     = $options['events_url'];
@@ -303,9 +326,11 @@ function get_events($start=null, $limit=null){
 	}else{
 		$url .= '&';
 	}
-	$url    .= 'upcoming=upcoming&format=rss';
-	$events  = array_reverse(FeedManager::get_items($url));
-	$events  = array_slice($events, $start, $limit);
+	$url    .= 'upcoming=upcoming&format=json';
+	//$events  = array_reverse(FeedManager::get_items($url));
+	//$events  = array_slice($events, $start, $limit);
+	$events = json_decode(file_get_contents($url), TRUE);
+	$events = array_slice($events, $start, $limit);
 	return $events;
 }
 
@@ -318,6 +343,7 @@ function get_news($start=null, $limit=null){
 }
 
 
+/* Added function for main site theme: */
 function get_sidebar_news($post, $start=null, $limit=null){
 	$options	 = get_option(THEME_OPTIONS_NAME);
 	$url      	 = get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) !== '' ? get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) : $options['news_url'];
