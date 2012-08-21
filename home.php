@@ -41,7 +41,7 @@
 	</div>
 </div>
 	
-<div class="contaner-fullwidth" id="colleges_wrap">	
+<div class="container-fullwidth" id="colleges_wrap">	
 	<div class="container">
 		<div class="row">
 			<div class="span2">
