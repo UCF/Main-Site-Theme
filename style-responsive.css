@@ -15,7 +15,7 @@
 	
 	#sidebar_right iframe,
 	#sidebar_right embed,
-	#sidebar_object { width: 100%; height: 150px; }
+	#sidebar_right object { width: 270px !important; height:auto !important; }
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 360px; margin: auto; }
 }
@@ -36,7 +36,7 @@
 	
 	#sidebar_right iframe,
 	#sidebar_right embed,
-	#sidebar_object { width: 100%; height: 120px; }
+	#sidebar_right object { width: 220px !important; height:auto !important; }
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
 	
@@ -70,6 +70,7 @@
 	#subheader blockquote { width: 450px; }
 	#subheader .subhead_author { font-size: 12px; }
 	#subheader .subheader_studentimg { margin-right: 10px; }
+	#subheader .subhead_quotelink { padding-top: 9px; }
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 260px; }
 	
@@ -78,7 +79,7 @@
 	#sidebar_right .news .item a { font-size: 12px; }
 	#sidebar_right iframe,
 	#sidebar_right embed,
-	#sidebar_object { width: 100%; height: 95px; }
+	#sidebar_right object { width: 166px !important; height:auto !important; }
 	#sidebar_right #sidebar_r_facebook_wrap iframe { width: 166px !important; height: 74px !important; }
 	
 	#footer-menu li { margin-right: 5px; }
@@ -168,9 +169,14 @@
 	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
 	#subheader blockquote { margin-left: 0; width: 100%; }
 	
+	#sidebar_left { border-top: 1px dotted #333; margin-top: 10px; padding-top: 20px; }
+	
+	#sidebar_right { display: none; }
+	/*
 	#sidebar_right iframe,
 	#sidebar_right embed,
 	#sidebar_object { width: 100%; height: 300px; }
+	*/
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
 	#contentcol .rightcol_subheader_fix { display: none; }

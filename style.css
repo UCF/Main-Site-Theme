@@ -385,7 +385,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #sidebar_right .news .item { margin-bottom: 15px; }
 #sidebar_right .news .item a { font-size: 14px; font-family: Georgia, serif; font-weight: normal; color: #000; border-bottom: 1px solid #ccc; }
 #sidebar_right .news .item a:hover { text-decoration: none; color: #e50506; border-bottom: 1px solid #e50506; }
-.sidebar_r_wrap { margin-bottom: 30px; }
+.sidebar_r_wrap { margin-bottom: 30px; overflow: hidden; }
 .sidebar_r_wrap p { font-family: Georgia, serif; } 
 
 .ie7 #sidebar_right iframe, 
