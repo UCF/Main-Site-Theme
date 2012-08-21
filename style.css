@@ -87,7 +87,7 @@ select#UCFHBHeaderLinks {
 .flickr-stream li{list-style-type: none; float: left; margin: 1px; padding: 0;}
 .flickr-stream li a{display: block; height: 74px; width: 74px;}
 
-
+/*
 .events,
 .events .date,
 .events .title,
@@ -102,7 +102,7 @@ select#UCFHBHeaderLinks {
 .events .day{font-size: 16px;}
 .events .title{font-size: 14px; text-align: left; padding-left:10px;}
 .events .title .wrap{display: block; max-height: 50px; overflow: hidden;}
-
+*/
 .news,
 .news .item,
 .news .title,
@@ -122,10 +122,12 @@ select#UCFHBHeaderLinks {
 .person-picture-wrap { margin-bottom: 20px !important; }
 
 
+
 /* UCF.edu specific styles */
 
 body { font-family: Georgia, serif; }
 .rssbtn { width: 44px; height: 16px; display: block; background: url('static/img/rss.png') center center no-repeat; text-indent: -9999px; }
+.icsbtn { width: 35px; height: 16px; display: block; background: url('static/img/ics.gif') center center no-repeat; text-indent: -9999px; }
 
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
 #header h1 { text-indent: -9999px; }
@@ -273,6 +275,7 @@ a.home_spotlight_readmore {
 	font-weight: bold;
 }
 
+
 #home_centercol a { color: #333; }
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-right: 1px dotted #333; border-left: 1px dotted #333; }
@@ -281,8 +284,28 @@ a.home_spotlight_readmore {
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
 #home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; width: 65px; height: auto; }
 
+
 #home_rightcol {  }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
+
+table.events { font-family: 'Helvetica Neue', Helvetica, sans-serif; }
+table.events a { color: #000; }
+table.events a:hover { color: #990000; text-decoration: underline; }
+table.events thead { font-weight: bold; }
+table.events thead td { text-align: center; }
+/* Note: this is NOT a .table-striped table! */
+table.events tbody tr:nth-child(2n+1) td, table.events tbody tr:nth-child(2n+1) th { border-top: 1px solid #F9DD8C; background-color: #FFFDF4 !important; }
+table.events.table th, .table td { border-top: 1px solid #F9DD8C; }
+table.events .item .date { width: 70px; }
+table.events .item .eventdata .eventname,
+table.events .item .eventdata .location { width: 100%; }
+table.events .item .eventdata .eventname { padding-bottom: 2px; }
+table.events .item .eventdata .location { font-size: 10px; text-transform: uppercase; line-height: 14px; }
+table.events .item .eventdata .location a { color: #363636; }
+table.events .item .eventdata .location a:hover { color: #363636; }
+
+#home_rightcol .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
+#home_rightcol .rssbtn, #home_rightcol .icsbtn { float: left; margin-right: 5px; }
 #home_rightcol #weather_bug { background-position: right bottom !important; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }
 

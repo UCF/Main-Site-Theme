@@ -129,6 +129,24 @@ Generic.mobileNavBar = function($) {
 	}
 }
 
+Generic.mobileSidebar = function($) {
+	var moveSidebar = function() {
+		if ($(window).width() < 768) {
+			$('#sidebar_left').remove().insertAfter('#contentcol');
+		}
+		else {
+			$('#sidebar_left').remove().insertBefore('#contentcol');
+		}
+	}
+	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+		moveSidebar();
+		$(window).resize(function() {
+			moveSidebar();
+		});
+	}
+};
+
+
 
 /* Slider init */
 
@@ -262,6 +280,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
+		Generic.mobileSidebar($);
 		
 		centerpieceSlider($);
 		centerpieceResize($);

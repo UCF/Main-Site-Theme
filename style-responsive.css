@@ -109,6 +109,7 @@
 	
 	/* Shrinkable bootstrap tables for tablets/phones.
 	Responsive table guide via css-tricks.com/responsive-data-tables/ */
+	
 	table.table.table-striped, 
 	.table.table-striped thead, 
 	.table.table-striped tbody, 
@@ -159,6 +160,7 @@
 	.table.table-bordered tbody tr td {
 		border-left: 0;
 	}
+	
 	
 	.subpage .page-content #page_title { overflow: hidden; }
 	
@@ -216,6 +218,8 @@
 	#header-nav-wrap { float: none; left: 0; margin-top: 10px; }
 	ul#header-menu { left: 0; margin-top: 0; }
 	ul#header-menu li.last a { color: #333; text-align: center; }
+	
+	#subheader { display: none; }
 	
 	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
 	
