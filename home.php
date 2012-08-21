@@ -20,6 +20,10 @@
 		<div class="span4" id="home_rightcol">
 			<h2>Upcoming Events</h2>
 			<?php display_events(); ?>
+			<p class="events_icons">
+				<a class="icsbtn" href="http://events.ucf.edu/?upcoming=upcoming&format=ics">ICS Format for upcoming events</a>
+				<a class="rssbtn" href="http://events.ucf.edu/?upcoming=upcoming&format=rss">RSS Format for upcoming events</a>
+			</p>
 			<p><a href="http://events.ucf.edu/?upcoming=upcoming" class="home_col_morelink">More Events</a></p>
 			<?=output_weather_data()?>
 		</div>

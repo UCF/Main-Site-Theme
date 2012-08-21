@@ -260,26 +260,34 @@ function display_events($start=null, $limit=null){?>
 	}
 	$events  = get_events($start, $limit);
 	if(count($events)): ?>
-		<table class="events">
-			<?php foreach($events as $item):
-				$day  		= date('M d', strtotime($item['starts']));
-				$time 		= date('h:i a', strtotime($item['starts']));
-				$link 		= $url.'eventdatetime_id='.$item['id'];
-				$loc_link 	= $item['location_url'];
-				$location	= $item['location'];
-				$title		= $item['title'];				
-			?>
-			<tr class="item">
-				<td class="date">
-					<div class="day"><?=$day?></div>
-					<div class="time"><?=$time?></div>
-				</td>
-				<td class="title">
-					<a href="<?=$link?>" class="wrap ignore-external"><?=$title?></a>
-					<a href="<?=$loc_link?>" class="wrap ignore-external"><?=$location?></a>
-				</td>
-			</tr>
-			<?php endforeach;?>
+		<table class="events table">
+			<thead>
+				<td>Date</td>
+				<td>Description</td>
+			</thead>
+			<tbody>
+				<?php foreach($events as $item):
+					$day  		= date('M d', strtotime($item['starts']));
+					$time 		= date('h:i a', strtotime($item['starts']));
+					$link 		= $url.'eventdatetime_id='.$item['id'];
+					$loc_link 	= $item['location_url'];
+					$location	= $item['location'];
+					$title		= $item['title'];				
+				?>
+				<tr class="item">
+					<td class="date">
+						<div class="day"><?=$day?></div>
+						<div class="time"><?=$time?></div>
+					</td>
+					<td class="eventdata">
+						<div class="eventname"><a href="<?=$link?>" class="wrap ignore-external"><?=$title?></a></div>
+						<div class="location">
+							<?php if ($loc_link) { ?><a href="<?=$loc_link?>" class="wrap ignore-external"><?php } ?><?=$location?><?php if ($loc_link) { ?></a><?php } ?>
+						</div>
+					</td>
+				</tr>
+				<?php endforeach;?>
+			</tbody>
 		</table>
 	<?php else:?>
 		<p>Unable to fetch events</p>
