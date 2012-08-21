@@ -231,13 +231,13 @@ centerpieceResize = function($) {
 				.css({'width': '724px', 'height' : '354px', 'margin' : '0'});
 			$('#centerpiece_slider ul').css('height', '354px');
 		}
-		else if ($(window).width() >= 978 && $(window).width() < 1199) {
+		else if ($(window).width() >= 978 && $(window).width() <= 1199) {
 			$('div#centerpiece_slider').css({'width': '940px', 'height' : '460px', 'margin' : 'auto'});
 			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li img.centerpiece_single_vid_thumb, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
 				.css({'width': '940px', 'height' : '460px', 'margin' : '0'});
 			$('#centerpiece_slider ul').css('height', '460px');
 		}
-		else if ($(window).width() >= 1199) {
+		else if ($(window).width() > 1199) {
 			$('div#centerpiece_slider').css({'width': '1084px', 'height' : '531px', 'margin' : 'auto'});
 			$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li img.centerpiece_single_vid_thumb, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
 				.css({'width': '1084px', 'height' : '531px', 'margin' : '0'});
