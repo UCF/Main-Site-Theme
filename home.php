@@ -3,23 +3,33 @@
 	<?php $page    = get_page_by_title('Home');?>
 	<div class="row page-content nodescription" id="home" data-template="home-nodescription">		
 		<div class="span12">
-			<p><?php echo do_shortcode('[centerpiece id="front-page-test-centerpiece"]'); ?></p>
+			<p>
+				<?php
+					$args = array(
+						'numberposts' => 1,
+						'post_type' => 'centerpiece',
+					);
+					$latest_centerpiece = get_posts($args);
+					$latest_centerpiece_name = $latest_centerpiece->post_name;
+					echo do_shortcode('[centerpiece id="'.$latest_centerpiece_name.'"]'); 
+				?>
+			</p>
 		</div>
 		<div class="span4" id="home_leftcol">	
 			<h2>Spotlight</h2>
 			<p><?php echo do_shortcode('[spotlights]'); ?></p>
-			<p><a href="#" class="home_col_morelink">Spotlight Archive</a></p>
+			<p><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
 		</div>
 		<div class="span4" id="home_centercol">
 			<div class="col_padwrap">
 				<h2>News</h2>
-				<?php display_news(); ?>
+				<?=display_news()?>
 				<p><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
 			</div>
 		</div>
 		<div class="span4" id="home_rightcol">
 			<h2>Upcoming Events</h2>
-			<?php display_events(); ?>
+			<?=display_events()?>
 			<p class="events_icons">
 				<a class="icsbtn" href="http://events.ucf.edu/?upcoming=upcoming&format=ics">ICS Format for upcoming events</a>
 				<a class="rssbtn" href="http://events.ucf.edu/?upcoming=upcoming&format=rss">RSS Format for upcoming events</a>

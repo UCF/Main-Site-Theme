@@ -801,6 +801,7 @@ class Spotlight extends CustomPostType {
 			),
 		);
 	}
+	
 }
 
 
