@@ -1583,10 +1583,13 @@ function _save_meta_data($post_id, $meta_box){
 		return $post_id;
 	}
 	
-	// Custom slider stuff:
-	if (post_type($post_id) == 'centerpiece') {
+	/**
+	 * Special saving method for Centerpieces:
+	 *
+	 **/
+	if (post_type_exists('centerpiece') && post_type($post_id) == 'centerpiece') {
 		
-		// All other meta box data for Sliders:		
+		// All other standard meta box data for Sliders:		
 		foreach ($meta_box as $single_meta_box) {
 			foreach ($single_meta_box['fields'] as $field) {				
 				switch ($field['type']){
@@ -1603,53 +1606,7 @@ function _save_meta_data($post_id, $meta_box){
 		// Single slide meta data:
 		if ($_POST['ss_type_of_content']) { // If a type of content is set for the slide, save its content:	
 		
-			$single_slide_meta = array(
-				array(
-					'id'	=> 'ss_slide_title',
-					'type'	=> 'default',
-					'val'	=> $_POST['ss_slide_title'],
-				),
-				array(
-					'id'	=> 'ss_type_of_content',
-					'type'	=> 'default',
-					'val'	=> $_POST['ss_type_of_content'],
-				),
-				array(
-					'id'	=> 'ss_slide_image',
-					'type'	=> 'file',
-					'val' 	=> $_POST['ss_slide_image'],
-				),
-				array(
-					'id' 	=> 'ss_slide_video',
-					'type'	=> 'default',
-					'val' 	=> $_POST['ss_slide_video'],
-				),
-				array(
-					'id' 	=> 'ss_slide_video_thumb',
-					'type'	=> 'file',
-					'val' 	=> $_POST['ss_slide_video_thumb'],
-				),
-				array(
-					'id'	=> 'ss_slide_content',
-					'type'	=> 'default',
-					'val'	=> $_POST['ss_slide_content'],
-				),
-				array(
-					'id'	=> 'ss_slide_links_to',
-					'type'	=> 'default',
-					'val'	=> $_POST['ss_slide_links_to'],
-				),
-				array(
-					'id'	=> 'ss_slide_link_newtab',
-					'type'	=> 'default',
-					'val'	=> $_POST['ss_slide_link_newtab'],
-				),
-				array(
-					'id'	=> 'ss_slide_duration',
-					'type'	=> 'default',
-					'val'	=> $_POST['ss_slide_duration'],
-				),
-			);
+			$single_slide_meta = Slider::get_single_slide_meta();
 		
 			foreach ($single_slide_meta as $field) {
 								
@@ -1737,6 +1694,9 @@ function _save_meta_data($post_id, $meta_box){
 			}
 		}
 	}
+	/**
+	 * Standard meta field save (for all other post types):
+	 **/
 	else {
 		foreach ($meta_box['fields'] as $field) {
 			switch ($field['type']){

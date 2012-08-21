@@ -947,6 +947,63 @@ class Slider extends CustomPostType {
 		return null;
 	}	
 	
+	/** Function used for defining single slide meta values; primarily
+	  * for use in saving meta data (_save_meta_data(), functions/base.php).
+	  * The 'type' val is just for determining which fields are file fields;
+	  * 'default' is an arbitrary name for 'anything else' which gets saved
+	  * via the save_default() function in functions/base.php. File fields
+	  * need a type of 'file' to be saved properly.
+	  **/ 
+	public static function get_single_slide_meta() {
+		$single_slide_meta = array(
+				array(
+					'id'	=> 'ss_slide_title',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_title'],
+				),
+				array(
+					'id'	=> 'ss_type_of_content',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_type_of_content'],
+				),
+				array(
+					'id'	=> 'ss_slide_image',
+					'type'	=> 'file',
+					'val' 	=> $_POST['ss_slide_image'],
+				),
+				array(
+					'id' 	=> 'ss_slide_video',
+					'type'	=> 'default',
+					'val' 	=> $_POST['ss_slide_video'],
+				),
+				array(
+					'id' 	=> 'ss_slide_video_thumb',
+					'type'	=> 'file',
+					'val' 	=> $_POST['ss_slide_video_thumb'],
+				),
+				array(
+					'id'	=> 'ss_slide_content',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_content'],
+				),
+				array(
+					'id'	=> 'ss_slide_links_to',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_links_to'],
+				),
+				array(
+					'id'	=> 'ss_slide_link_newtab',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_link_newtab'],
+				),
+				array(
+					'id'	=> 'ss_slide_duration',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_duration'],
+				),
+			);
+		return $single_slide_meta;
+	}
 	
 	
 	/**
