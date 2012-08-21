@@ -20,6 +20,7 @@ function __init__(){
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('ucf-colleges', __('UCF Colleges'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
+	register_nav_menu('social-links', __('Social Links'));
 	register_sidebar(array(
 		'name'          => __('Left Sidebar'),
 		'id'            => 'sidebar-left',

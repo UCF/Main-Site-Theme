@@ -198,7 +198,40 @@ body { font-family: Georgia, serif; }
 #subfooter { clear: both; font-size: 10px; text-align: center; letter-spacing: 0.8px; }
 #subfooter a { color: #262626; }
 
-#footer-logo { text-align: center; margin-top: 25px; }
+#social-menu-wrap { float: right; position: relative; left: -50%; clear: right; margin-top: 10px; }
+#social-menu { position: relative; left: 50%; list-style-type: none; }
+#social-menu li { float: left; margin-right: 10px; }
+#social-menu li a { }
+#social-menu li a[href*="facebook"] { 
+	background: url('static/img/facebook.png') center center no-repeat; 
+	display: block; 
+	width: 35px; 
+	height: 32px; 
+	text-indent: -9999px; 
+}
+#social-menu li a[href*="twitter"] { 
+	background: url('static/img/twitter.png') center center no-repeat; 
+	display: block; 
+	width: 35px; 
+	height: 32px; 
+	text-indent: -9999px; 
+}
+#social-menu li a[href*="flickr"] { 
+	background: url('static/img/flickr.png') center center no-repeat; 
+	display: block; 
+	width: 35px; 
+	height: 32px; 
+	text-indent: -9999px; 
+}
+#social-menu li a[href*="youtube"] { 
+	background: url('static/img/youtube.png') center center no-repeat; 
+	display: block; 
+	width: 35px; 
+	height: 32px; 
+	text-indent: -9999px; 
+}
+
+#footer-logo { clear: both; text-align: center; margin-top: 65px; }
 
 
 #home .span12 { margin-bottom: 20px; }

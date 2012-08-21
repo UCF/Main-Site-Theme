@@ -18,7 +18,18 @@
 					<br/>
 					4000 Central Florida Blvd. Orlando, Florida, 32816 | 407.823.2000
 				</p>
-				<p id="footer-logo"><a href="<?=site_url()?>"><img src="<?=THEME_STATIC_URL?>/img/ucf_stands_for_opportunity.png" alt="UCF Stands For Opportunity" title="UCF Stands For Opportunity" /></a></p>
+				
+				<?=wp_nav_menu(array(
+					'theme_location' => 'social-links', 
+					'container' => 'div',
+					'container_id' => 'social-menu-wrap', 
+					'menu_class' => 'menu', 
+					'menu_id' => 'social-menu',
+					'depth' => 1,
+					));
+				?>
+				
+				<p id="footer-logo"><a href="<?=site_url()?>"><img src="<?=THEME_STATIC_URL?>/img/footer_logo.png" alt="University of Central Florida" title="University of Central Florida" /></a></p>
 				
 				
 			</div>
