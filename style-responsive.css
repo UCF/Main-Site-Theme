@@ -89,7 +89,6 @@
 
 /* Weird iPad fixes: */
 @media (width: 768px) {
-	
 	#header-menu li a { font-size: 14px !important; }
 	
 	#centerpiece_slider { margin-left: 20px !important; }
@@ -102,8 +101,22 @@
 	
 	#colleges_wrap .container .row { padding: 0 20px; }
 	
-	#footer { margin-left: 20px; }
+	#footer { margin-left: 0; }
 	#footer-menu li { letter-spacing: 0.7px; }
+	
+	
+	#page_title { overflow: hidden; margin-left: 20px; }
+	#subheader { height: auto; overflow: auto; margin-left: 20px; }
+	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
+	#subheader blockquote { margin-left: 0; width: 100%; }
+	
+	#contentcol { margin-left: 20px; overflow: hidden; }
+	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 340px; }
+	
+	#sidebar_left { border-top: 1px dotted #333; margin-top: 10px; margin-left: 20px; padding-top: 20px; }
+	#sidebar_l_colleges { padding-top: 0; }
+	
+	#sidebar_right { display: none; }
 }
 
 @media (max-width: 767px) {

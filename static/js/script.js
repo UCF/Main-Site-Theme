@@ -131,7 +131,7 @@ Generic.mobileNavBar = function($) {
 
 Generic.mobileSidebar = function($) {
 	var moveSidebar = function() {
-		if ($(window).width() < 768) {
+		if ($(window).width() < 769) {
 			$('#sidebar_left').remove().insertAfter('#contentcol');
 		}
 		else {
