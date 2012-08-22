@@ -126,8 +126,28 @@ select#UCFHBHeaderLinks {
 /* UCF.edu specific styles */
 
 body { font-family: Georgia, serif; }
+
+
+.events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
+.events_icons .rssbtn, .events_icons .icsbtn { float: left; margin-right: 5px; }
 .rssbtn { width: 44px; height: 16px; display: block; background: url('static/img/rss.png') center center no-repeat; text-indent: -9999px; }
 .icsbtn { width: 35px; height: 16px; display: block; background: url('static/img/ics.gif') center center no-repeat; text-indent: -9999px; }
+table.events { font-family: 'Helvetica Neue', Helvetica, sans-serif; }
+table.events a { color: #000; }
+table.events a:hover { color: #990000; text-decoration: underline; }
+table.events thead { font-weight: bold; }
+table.events thead td { text-align: center; }
+/* Note: this is NOT a .table-striped table! */
+table.events tbody tr:nth-child(2n+1) td, table.events tbody tr:nth-child(2n+1) th { border-top: 1px solid #F9DD8C; background-color: #FFFDF4 !important; }
+table.events.table th, .table td { border-top: 1px solid #F9DD8C; }
+table.events .item .date { width: 70px; }
+table.events .item .eventdata .eventname,
+table.events .item .eventdata .location { width: 100%; }
+table.events .item .eventdata .eventname { padding-bottom: 2px; }
+table.events .item .eventdata .location { font-size: 10px; text-transform: uppercase; line-height: 14px; }
+table.events .item .eventdata .location a { color: #363636; }
+table.events .item .eventdata .location a:hover { color: #363636; }
+
 
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
 #header h1 { text-indent: -9999px; }
@@ -235,6 +255,7 @@ body { font-family: Georgia, serif; }
 
 
 #home .span12 { margin-bottom: 20px; }
+
 #centerpiece_slider {overflow: hidden; position: relative; margin: auto; z-index: 1;}
 #centerpiece_slider ul { margin-left: 0; }
 li.centerpiece_single {float: left; list-style-type: none;}
@@ -296,8 +317,8 @@ li.centerpiece_single .slide_contents {
 #centerpiece_control a.activeSlide{ background:#fff; }
 
 
-a.home_col_morelink { color: #660000 !important; border-bottom: 1px solid #ccc; }
-a.home_col_morelink:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
+a.home_col_morelink, a.events_morelink { font-family: 'Helvetica Neue', Helvetica, sans-serif; color: #660000 !important; border-bottom: 1px solid #ccc; }
+a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
 #home_leftcol h2, #home_centercol h2, #home_rightcol h2 { 
 	font-family: 'Helvetica Neue', Helvetica, sans-serif; 
 	font-size: 14px; 
@@ -339,25 +360,6 @@ a.home_spotlight_readmore {
 
 #home_rightcol {  }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
-
-table.events { font-family: 'Helvetica Neue', Helvetica, sans-serif; }
-table.events a { color: #000; }
-table.events a:hover { color: #990000; text-decoration: underline; }
-table.events thead { font-weight: bold; }
-table.events thead td { text-align: center; }
-/* Note: this is NOT a .table-striped table! */
-table.events tbody tr:nth-child(2n+1) td, table.events tbody tr:nth-child(2n+1) th { border-top: 1px solid #F9DD8C; background-color: #FFFDF4 !important; }
-table.events.table th, .table td { border-top: 1px solid #F9DD8C; }
-table.events .item .date { width: 70px; }
-table.events .item .eventdata .eventname,
-table.events .item .eventdata .location { width: 100%; }
-table.events .item .eventdata .eventname { padding-bottom: 2px; }
-table.events .item .eventdata .location { font-size: 10px; text-transform: uppercase; line-height: 14px; }
-table.events .item .eventdata .location a { color: #363636; }
-table.events .item .eventdata .location a:hover { color: #363636; }
-
-#home_rightcol .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
-#home_rightcol .rssbtn, #home_rightcol .icsbtn { float: left; margin-right: 5px; }
 #home_rightcol #weather_bug { background-position: right bottom !important; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }
 
