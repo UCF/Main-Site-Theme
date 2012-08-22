@@ -10,8 +10,8 @@
 						'post_type' => 'centerpiece',
 					);
 					$latest_centerpiece = get_posts($args);
-					$latest_centerpiece_name = $latest_centerpiece->post_name;
-					echo do_shortcode('[centerpiece id="'.$latest_centerpiece_name.'"]'); 
+					
+					echo do_shortcode('[centerpiece id="'.$latest_centerpiece[0]->ID.'"]'); 
 				?>
 			</p>
 		</div>

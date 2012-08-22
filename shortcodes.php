@@ -212,12 +212,12 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 	function sc_centerpiece_slider( $atts, $content = null ) {
 		
 		extract( shortcode_atts( array(
-			'id' => ''
-			), $atts ) );
+			'id' => '',
+		), $atts ) );
 
 		global $post;
 
-		$args = array('name'           => esc_attr( $id ),
+		$args = array('p'              => esc_attr( $id ),
 					  'post_type'      => 'centerpiece',
 					  'posts_per_page' => '1'
 				  );
