@@ -1112,9 +1112,9 @@ class Slider extends CustomPostType {
 								<table class="form-table">
 								<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 									<tr>
-										<th><label for="ss_slide_title[<?=$i?>]">Slide Title</label></th>
+										<th><label for="ss_slide_title[<?=$s?>]">Slide Title</label></th>
 										<td>
-											<input type="text" name="ss_slide_title[<?=$i?>]" id="ss_slide_title[<?=$i?>]" value="<?php ($slide_title[$s] !== '') ? print $slide_title[$s] : ''; ?>" />
+											<input type="text" name="ss_slide_title[<?=$s?>]" id="ss_slide_title[<?=$s?>]" value="<?php ($slide_title[$s] !== '') ? print $slide_title[$s] : ''; ?>" />
 										</td>
 									</tr>
 									<tr>
