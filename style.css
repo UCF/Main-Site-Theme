@@ -399,6 +399,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #sidebar_l_colleges { color: #777; padding-top: 40px; }
 
 #sidebar_right { padding-top: 115px; }
+#sidebar_right.nosubheader { padding-top: 0 !important; }
 #sidebar_right .sidebar_title { color: #777; }
 #sidebar_right #sidebar_r_today { font-size: 14px; line-height: 16px; color: #000; }
 #sidebar_right .news .item { margin-bottom: 15px; }

@@ -17,7 +17,7 @@
 			</article>
 		</div>
 		
-		<div id="sidebar_right" class="span3">		
+		<div id="sidebar_right" class="span3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>nosubheader<?php } ?>">		
 			<?=get_sidebar('right');?>
 		</div>
 	</div>

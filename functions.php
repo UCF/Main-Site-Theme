@@ -95,7 +95,7 @@ function get_page_subheader($post) {
 			?>
 		</div>
 	<?php
-	}
+	} 
 }
 
 
