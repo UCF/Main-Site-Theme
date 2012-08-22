@@ -44,7 +44,7 @@
 		<div id="UCFHBHeader">
 				<div class="UCFHBWrapper">
 					<div id="UCFtitle">
-						<a href="http://www.ucf.edu/">
+						<a href="<?=get_site_url()?>">
 							<span class="UCFHBText">University of Central Florida</span>
 						</a>
 					</div>
