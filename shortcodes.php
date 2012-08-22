@@ -244,7 +244,7 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 			// http://www.bluebit.co.uk/blog/Using_jQuery_Cycle_in_a_Responsive_Layout
 			$output .= '<div id="centerpiece_slider">
 						  <ul>
-						  	<img src="http://placehold.it/1084x480" width="1084" style="max-width: 100%; height: auto; width: auto;">';
+						  	<img src="'.get_bloginfo('stylesheet_directory').'/static/img/centerpiece_placeholder.gif" width="1084" style="max-width: 100%; height: auto; width: auto;">';
 			
 			foreach ($slide_order as $s) {
 				if ($s !== '') {
