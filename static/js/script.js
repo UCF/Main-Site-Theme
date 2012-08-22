@@ -215,53 +215,22 @@ centerpieceSlider = function($) {
 }
 
 
-/* Adjust slider size on window resize (for less than 767px) */
+/* Adjust slider video/embed size on window resize (for less than 767px) */
 
-centerpieceResize = function($) {
+centerpieceVidResize = function($) {
 	
 	var addDimensions = function() {
 		
-		/*
 		var parentw = $('#centerpiece_slider').parent('.span12').width();
 		if ($(window).width() <= 767) {
-			$('#centerpiece_slider, li.centerpiece_single, li.centerpiece_single img.centerpiece_single_img, li.centerpiece_single img.centerpiece_single_vid_thumb, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
+			$('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
 				.css({'height' : parentw * 0.49 +'px'});
-			$('#centerpiece_slider ul').height($('#centerpiece_slider'));
 						
-		}/*
-		else if ($(window).width() > 767 && $(window).width() < 978) {
-			$('div#centerpiece_slider').css({'width': '724px', 'height' : '354px', 'margin' : 'auto'});
-			$('li.centerpiece_single, li.centerpiece_single img.centerpiece_single_img, li.centerpiece_single img.centerpiece_single_vid_thumb, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
-				.css({'width': '724px', 'height' : '354px', 'margin' : '0'});
-			$('#centerpiece_slider ul').css('height', '354px');
-			
-			console.log('addDimensions detected a resize at 768-977px wide');
-			
 		}
-		else if ($(window).width() >= 978 && $(window).width() <= 1199) {
-			$('div#centerpiece_slider').css({'width': '940px', 'height' : '460px', 'margin' : 'auto'});
-			$('li.centerpiece_single, li.centerpiece_single img.centerpiece_single_img, li.centerpiece_single img.centerpiece_single_vid_thumb, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
-				.css({'width': '940px', 'height' : '460px', 'margin' : '0'});
-			$('#centerpiece_slider ul').css('height', '460px');
-			
-			console.log('addDimensions detected a resize at 978-1199px wide');
-			
-		}
-		else if ($(window).width() > 1199) {
-			$('div#centerpiece_slider').css({'width': '1084px', 'height' : '531px', 'margin' : 'auto'});
-			$('li.centerpiece_single, li.centerpiece_single img.centerpiece_single_img, li.centerpiece_single img.centerpiece_single_vid_thumb, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
-				.css({'width': '1084px', 'height' : '531px', 'margin' : '0'});
-			$('#centerpiece_slider ul').css('height', '531px');
-			
-			console.log('addDimensions detected a resize at 1200 or greater px wide');
-			
-		}		
 		else if ($(window).width() > 767) {
-			$('#centerpiece_slider, li.centerpiece_single, li.centerpiece_single img.centerpiece_single_img, li.centerpiece_single img.centerpiece_single_vid_thumb, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
-				.css({'height' : '', 'width' : ''});
-			$('#centerpiece_slider ul').css('height', '');
-			
-		}*/
+			$('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
+				.css({'height' : ''});
+		}
 	}
 	
 	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
@@ -269,12 +238,6 @@ centerpieceResize = function($) {
 		$(window).resize(function() {
 			addDimensions();
 		});
-	}
-	else {
-		$('div#centerpiece_slider').attr('style', 'width: 940px !important; height: 460px !important; margin: auto; z-index: 1;');
-		$('#centerpiece_slider li, #centerpiece_slider li img.centerpiece_single_img, #centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed')
-			.attr('style', 'width: 940px !important; height: 460px !important; zoom: 1;');
-		$('#centerpiece_slider ul').attr('style', 'height: 460px !important;');
 	}
 }
 
@@ -302,7 +265,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.mobileSidebar($);
 		
 		centerpieceSlider($);
-		centerpieceResize($);
+		centerpieceVidResize($);
 		removeNavSeparator($);
 		
 	});
