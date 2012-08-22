@@ -237,12 +237,12 @@ body { font-family: Georgia, serif; }
 #home .span12 { margin-bottom: 20px; }
 #centerpiece_slider {overflow: hidden; position: relative; margin: auto; z-index: 1;}
 #centerpiece_slider ul { margin-left: 0; }
-#centerpiece_slider li {float: left; list-style-type: none;}
-#centerpiece_slider li img.centerpiece_single_img { }
-#centerpiece_slider li object, #centerpiece_slider iframe, #centerpiece_slider li embed { }
-#centerpiece_slider li .centerpiece_single_vid_thumb { cursor: pointer; }
-#centerpiece_slider li .centerpiece_single_vid_hidden { display: none; }
-#centerpiece_slider li .slide_contents { 
+li.centerpiece_single {float: left; list-style-type: none;}
+li.centerpiece_single img.centerpiece_single_img { }
+li.centerpiece_single object, #centerpiece_slider iframe, #centerpiece_slider li embed { }
+li.centerpiece_single .centerpiece_single_vid_thumb { cursor: pointer; }
+li.centerpiece_single .centerpiece_single_vid_hidden { display: none; }
+li.centerpiece_single .slide_contents { 
 	position: absolute;
 	display: block;
 	z-index: 999;
@@ -257,19 +257,23 @@ body { font-family: Georgia, serif; }
 }
 
 .ie7 #centerpiece_slider,
-.ie8 #centerpiece_slider { width: 940px !important; height: 460px !important; margin: auto; z-index: 1; }
+.ie8 #centerpiece_slider { width: 940px; height: 460px; margin: auto; z-index: 1; }
 
+.ie7 li.centerpiece_single,
+.ie7 li.centerpiece_single img.centerpiece_single_img,
 .ie7 li.centerpiece_single .centerpiece_single_vid_hidden, 
 .ie7 li.centerpiece_single object, 
 .ie7 li.centerpiece_single iframe, 
 .ie7 li.centerpiece_single embed,
+.ie8 li.centerpiece_single,
+.ie8 li.centerpiece_single img.centerpiece_single_img,
 .ie8 li.centerpiece_single .centerpiece_single_vid_hidden, 
 .ie8 li.centerpiece_single object, 
 .ie8 li.centerpiece_single iframe, 
-.ie8 li.centerpiece_single embed { width: 940px !important; height: 460px !important; zoom: 1; }
+.ie8 li.centerpiece_single embed { width: 940px; height: 460px; zoom: 1; }
 
 .ie7 #centerpiece_slider ul,
-.ie8 #centerpiece_slider ul { height: 460px !important; }
+.ie8 #centerpiece_slider ul { height: 460px; }
 
 #centerpiece_corner_tl { width: 12px; height: 11px; background: url('static/img/slider_corner_topleft.png') no-repeat; position: absolute; top: 0; left: 0; zoom: 1; z-index: 999; }
 #centerpiece_corner_tr { width: 11px; height: 12px; background: url('static/img/slider_corner_topright.png') no-repeat; position: absolute; top: 0; right: 0; zoom: 1; z-index: 999; }
