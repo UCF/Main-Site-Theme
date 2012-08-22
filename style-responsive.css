@@ -3,7 +3,7 @@
 	#UCFHBHeader #UCFHBSearch_and_links { margin-left: 750px; }
 	
 	#header-menu li a { font-size: 18px !important; }
-	#header-menu li.last a { font-size: 12px !important; }
+	#header-menu li.last a { font-size: 12px !important; padding-top: 2px; padding-bottom: 3px;}
 	
 	#centerpiece_slider, 
 	li.centerpiece_single, 
@@ -200,6 +200,8 @@
 	#sidebar_right embed,
 	#sidebar_object { width: 100%; height: 300px; }
 	*/
+	
+	.page-content #contentcol { overflow: auto; }
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
 	#contentcol .rightcol_subheader_fix { display: none; }
