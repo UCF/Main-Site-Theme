@@ -531,6 +531,12 @@ class Page extends CustomPostType {
 					'options' => $this->get_menus(),
 				),
 				array(
+					'name' => '<strong>Left Sidebar:</strong> More Information Widget Title',
+					'desc' => '(Optional) Title for the More Information widget designated above.  Default is "More Information".',
+					'id' => $prefix.'widget_l_moreinfo_title',
+					'type' => 'text',
+				),
+				array(
 					'name' => '<strong>Left Sidebar:</strong> Secondary Information Widget',
 					'desc' => '(Optional) Display a Secondary Information widget in the <strong>left-hand sidebar</strong> that contains a given menu. Useful for adding extra relevant links, student-related services, etc. Menus can be created in the <a href="'.get_admin_url().'nav-menus.php">menu editor</a>.',
 					'id' => $prefix.'widget_l_secinfo',
@@ -802,6 +808,25 @@ class Spotlight extends CustomPostType {
 		);
 	}
 	
+	// To-do: fix this:
+	public function get_objects($options=array()){
+		$options['orderby']  = 'post_date';
+		return parent::get_objects($options);
+	}
+	
+	public function objectsToHTML($objects, $css_classes) {
+		ob_start();?>
+		<ul class="spotlight-list">
+			<?php
+			foreach ($objects as $spotlight) { ?>
+				<li><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a> <?=$spotlight->post_date?></li>
+			<?php	
+			}
+			?>
+		</ul>
+	<?php
+	}
+		
 }
 
 
