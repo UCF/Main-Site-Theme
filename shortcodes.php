@@ -239,8 +239,12 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 			$slide_duration			= get_post_meta($post->ID, 'ss_slide_duration', TRUE);
 			$rounded_corners		= get_post_meta($post->ID, 'ss_slider_rounded_corners', TRUE);
 			
+			// #centerpiece_slider must contain an image placeholder set to the max
+			// slide width in order to trigger responsive styles properly--
+			// http://www.bluebit.co.uk/blog/Using_jQuery_Cycle_in_a_Responsive_Layout
 			$output .= '<div id="centerpiece_slider">
-						  <ul>';
+						  <ul>
+						  	<img src="http://placehold.it/1084x480" width="1084" style="max-width: 100%; height: auto; width: auto;">';
 			
 			foreach ($slide_order as $s) {
 				if ($s !== '') {
