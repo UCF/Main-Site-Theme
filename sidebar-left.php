@@ -8,12 +8,14 @@
 <?php
 	
 	$more_info_nav_val 			= get_post_meta($post->ID, 'page_widget_l_moreinfo', TRUE);
+	$more_info_nav_val_title 	= get_post_meta($post->ID, 'page_widget_l_moreinfo_title', TRUE);
 	$secondary_nav_val 			= get_post_meta($post->ID, 'page_widget_l_secinfo', TRUE);
 	$secondary_nav_val_title 	= get_post_meta($post->ID, 'page_widget_l_secinfo_title', TRUE);
 	$show_colleges_val 			= get_post_meta($post->ID, 'page_widget_l_showcolleges', TRUE);
 	
 	if ($more_info_nav_val) {	
-		print '<h3 id="sidebar_l_moreinfo" class="sidebar_title">More Information:</h3>';	
+		$moreinfo_title = $more_info_nav_val_title !== '' ? $more_info_nav_val_title : 'More Information';
+		print '<h3 id="sidebar_l_secinfo" class="sidebar_title">'.$moreinfo_title.':</h3>';
 		
 		$args = array(
 			'menu' => $more_info_nav_val,
