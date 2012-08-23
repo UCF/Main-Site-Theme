@@ -111,6 +111,7 @@ Config::$custom_post_types = array(
 	'Slider',
 	'Spotlight',
 	'Subheader',
+	'AZIndexLink',
 );
 
 Config::$custom_taxonomies = array(

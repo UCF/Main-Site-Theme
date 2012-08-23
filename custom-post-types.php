@@ -881,6 +881,42 @@ class Subheader extends CustomPostType {
 
 
 /**
+ * Describes a A-Z Index link.
+ *
+ * @author Jo Greybill
+ **/
+ 
+class AZIndexLink extends CustomPostType {
+	public
+		$name           = 'azindexlink',
+		$plural_name    = 'A-Z Index Links',
+		$singular_name  = 'A-Z Index Link',
+		$add_new_item   = 'Add New A-Z Index Link',
+		$edit_item      = 'Edit A-Z Index Link',
+		$new_item       = 'New A-Z Index Link',
+		$public         = True,
+		$use_editor     = False,
+		$use_thumbnails = False,
+		$use_title      = True,
+		$use_metabox    = True,
+		$use_shortcode	= True,
+		$taxonomies		= array('category', 'post_tag');
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+					'name' => 'URL',
+					'id' => $prefix.'url',
+					'type' => 'text',
+			),
+		);
+	}
+}
+
+
+
+/**
  * Describes a set of centerpiece slides
  *
  * @author Jo Greybill
