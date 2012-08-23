@@ -123,10 +123,15 @@ select#UCFHBHeaderLinks {
 
 
 
-/* UCF.edu specific styles */
+/**
+ * UCF.edu specific styles
+ **/
 
+/* General */
 body { font-family: Georgia, serif; }
 
+
+/* Events Widget */
 .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
 .events_icons .rssbtn, .events_icons .icsbtn { float: left; margin-right: 5px; }
 .rssbtn { width: 44px; height: 16px; display: block; background: url('static/img/rss.png') center center no-repeat; text-indent: -9999px; }
@@ -148,6 +153,12 @@ table.events .item .eventdata .location a { color: #363636; }
 table.events .item .eventdata .location a:hover { color: #363636; }
 
 
+/* Weather default styles */
+#weather_bug { height: 50px; background-position: left bottom; background-repeat: no-repeat !important; }
+#weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; }
+
+
+/* Header */
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
 #header h1 { text-indent: -9999px; }
 
@@ -202,20 +213,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 .no_nav_separator:after { content: '' !important; }
 
 
-#weather_bug { height: 50px; background-position: left bottom; background-repeat: no-repeat !important; }
-#weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; }
-
-
-#colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
-#colleges_wrap a:hover { color: #e50606; }
-#colleges_wrap .span2 { width: 100px; }
-#colleges_wrap h3 { /*font-family: Verdana, Geneva, sans-serif;*/font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
-#colleges_wrap #menu-ucf-colleges { list-style-type: none; }
-#colleges_wrap #menu-ucf-colleges li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
-#colleges_wrap #menu-ucf-colleges li:after { content: "|"; }
-#colleges_wrap #menu-ucf-colleges li:last-child:after { content: ""; }
-#colleges_wrap #menu-ucf-colleges li a { font-size: 11px; color: #262626; }
-
+/* Footer */
 #footer { border-top: 0; margin: 20px 0; }
 #footer a:hover { color: #e50606; }
 #footer-navwrap { float: right; position: relative; left: -50%; }
@@ -265,8 +263,11 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #footer-logo { clear: both; text-align: center; margin-top: 65px; }
 
 
+/* Home Page - General */
 #home .span12 { margin-bottom: 20px; }
 
+
+/* Home Page - Centerpiece */
 #centerpiece_slider {overflow: hidden; position: relative; margin: auto; z-index: 1;}
 #centerpiece_slider ul { margin-left: 0; }
 li.centerpiece_single {float: left; list-style-type: none;}
@@ -328,6 +329,7 @@ li.centerpiece_single .slide_contents {
 #centerpiece_control a.activeSlide{ background:#fff; }
 
 
+/* Home Page - Sub Columns - General Styles */
 a.home_col_morelink, a.events_morelink { font-family: 'Helvetica Neue', Helvetica, sans-serif; color: #660000 !important; border-bottom: 1px solid #ccc; }
 a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
 #home_leftcol h2, #home_centercol h2, #home_rightcol h2 { 
@@ -345,6 +347,8 @@ a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; colo
 .col_padwrap { margin: 0 30px; }
 .ie7 .col_padwrap, .ie8 .col_padwrap { margin: 0 20px; }
 
+
+/* Home Page - Left Column */
 #home_leftcol {  }
 #home_leftcol a { color: #333; }
 #home_leftcol a:hover { color: #e50606; }
@@ -360,6 +364,7 @@ a.home_spotlight_readmore {
 }
 
 
+/* Home Page - Center Column */
 #home_centercol a { color: #333; }
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-right: 1px dotted #333; border-left: 1px dotted #333; }
@@ -369,15 +374,31 @@ a.home_spotlight_readmore {
 #home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; width: 65px; height: auto; }
 
 
+/* Home Page - Right Column */
 #home_rightcol {  }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
 #home_rightcol #weather_bug { background-position: right bottom !important; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }
 
 
+/* Home Page - Colleges Nav */
+#colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
+#colleges_wrap a:hover { color: #e50606; }
+#colleges_wrap .span2 { width: 100px; }
+#colleges_wrap h3 { /*font-family: Verdana, Geneva, sans-serif;*/font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
+#colleges_wrap #menu-ucf-colleges { list-style-type: none; }
+#colleges_wrap #menu-ucf-colleges li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
+#colleges_wrap #menu-ucf-colleges li:after { content: "|"; }
+#colleges_wrap #menu-ucf-colleges li:last-child:after { content: ""; }
+#colleges_wrap #menu-ucf-colleges li a { font-size: 11px; color: #262626; }
+
+
+/* Subpages - Title */
 .subpage .page-content #page_title { padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
 .subpage .page-content #page_title h1 { font-weight: normal; display: block; margin-left: 0; }
 
+
+/* Subpages - Subheaders */
 #subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
 /* For IE 7-8, which don't support media queries: */
 .ie7 #subheader, .ie8 #subheader { height: 140px; overflow: visible; }
@@ -390,14 +411,7 @@ a.home_spotlight_readmore {
 .subheader_studentimg { float: right; margin-right: 20px; }
 
 
-.ie7 #contentcol iframe, 
-.ie7 #contentcol embed, 
-.ie7 #contentcol object,
-.ie8 #contentcol iframe, 
-.ie8 #contentcol embed, 
-.ie8 #contentcol object { width: 100%; height: 260px; }
-
-
+/* Subpages - Sidebars - General */
 .sidebar_title { 
 	font-family: 'Helvetica Neue', Helvetica, sans-serif; 
 	font-size: 11px; 
@@ -407,10 +421,37 @@ a.home_spotlight_readmore {
 	line-height: 12px; 
 	padding-bottom: 5px; 
 }
+
+.sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
+.sidebar_nav li { padding-bottom: 6px; }
+.sidebar_nav li a { color: #333; }
+.sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
+
+
+/* Subpages - Left Sidebar */
 #sidebar_l_moreinfo { color: #B38C0B; }
 #sidebar_l_secinfo { color: #F5530C; }
 #sidebar_l_colleges { color: #777; padding-top: 40px; }
 
+
+/* Subpages - Center Column (Content Column) */
+.ie7 #contentcol iframe, 
+.ie7 #contentcol embed, 
+.ie7 #contentcol object,
+.ie8 #contentcol iframe, 
+.ie8 #contentcol embed, 
+.ie8 #contentcol object { width: 100%; height: 260px; }
+
+#contentcol, #contentcol p { color: #515050; font-family: Georgia, serif; font-size: 13px; line-height: 20px; }
+#contentcol p { margin-bottom: 20px; }
+#contentcol h3 { color: #515050; font-size: 15px; line-height: 20px; }
+#contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
+#contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }
+
+#contentcol .rightcol_subheader_fix { width: 150px; height: 150px; float: right; }
+
+
+/* Subpages - Right Sidebar */
 #sidebar_right { padding-top: 115px; }
 #sidebar_right.nosubheader { padding-top: 0 !important; }
 #sidebar_right .sidebar_title { color: #777; }
@@ -430,17 +471,3 @@ a.home_spotlight_readmore {
 	width: 100%;
 	height: 140px;
 }
-
-.sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
-.sidebar_nav li { padding-bottom: 6px; }
-.sidebar_nav li a { color: #333; }
-.sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
-
-
-#contentcol, #contentcol p { color: #515050; font-family: Georgia, serif; font-size: 13px; line-height: 20px; }
-#contentcol p { margin-bottom: 20px; }
-#contentcol h3 { color: #515050; font-size: 15px; line-height: 20px; }
-#contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
-#contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }
-
-#contentcol .rightcol_subheader_fix { width: 150px; height: 150px; float: right; }
