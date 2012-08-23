@@ -14,7 +14,7 @@
 				</div>
 				
 				<p id="subfooter">
-					<a href="http://www.ucf.edu/feedback">Comments and Feedback</a> | <a href="<?=site_url()?>">&copy; University of Central Florida</a>
+					<a href="<?=site_url()?>/feedback">Comments and Feedback</a> | <a href="<?=site_url()?>">&copy; University of Central Florida</a>
 					<br/>
 					4000 Central Florida Blvd. Orlando, Florida, 32816 | 407.823.2000
 				</p>
