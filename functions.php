@@ -173,4 +173,15 @@ function output_weather_data($class=null) {
 	<?php
 	}
 }
+
+
+/**
+ * Hide unused admin tools (Links, Comments, etc)
+ **/
+function hide_admin_links() {
+	remove_menu_page('link-manager.php');
+	remove_menu_page('edit-comments.php');
+}
+add_action( 'admin_init', 'hide_admin_links' )
+
 ?>
