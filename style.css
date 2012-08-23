@@ -127,7 +127,6 @@ select#UCFHBHeaderLinks {
 
 body { font-family: Georgia, serif; }
 
-
 .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
 .events_icons .rssbtn, .events_icons .icsbtn { float: left; margin-right: 5px; }
 .rssbtn { width: 44px; height: 16px; display: block; background: url('static/img/rss.png') center center no-repeat; text-indent: -9999px; }
@@ -153,6 +152,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #header h1 { text-indent: -9999px; }
 
 #header-nav-wrap { float: right; position: relative; left: -50%; }
+.ie7 #header-nav-wrap { width: 768px; }
 #header-menu { margin: 15px 0 10px 0; position: relative; left: 50%; }
 #header-menu.menu.horizontal { color: #262626; }
 #header-menu.menu.horizontal li { margin-right: 9px; }
@@ -219,6 +219,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #footer { border-top: 0; margin: 20px 0; }
 #footer a:hover { color: #e50606; }
 #footer-navwrap { float: right; position: relative; left: -50%; }
+.ie7 #footer-navwrap { width: 670px; }
 #footer-menu { position: relative; left: 50%; }
 #footer-menu li { margin-right: 8px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 0.8px; }
 #footer-menu li:after { content: "|"; margin-left: 2px; }
@@ -228,6 +229,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #subfooter a { color: #262626; }
 
 #social-menu-wrap { float: right; position: relative; left: -50%; clear: right; margin-top: 10px; }
+.ie7 #social-menu-wrap { width: 230px; }
 #social-menu { position: relative; left: 50%; list-style-type: none; }
 #social-menu li { float: left; margin-right: 10px; }
 #social-menu li a { }
