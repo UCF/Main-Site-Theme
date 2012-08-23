@@ -471,3 +471,11 @@ a.home_spotlight_readmore {
 	width: 100%;
 	height: 140px;
 }
+
+a.college_portrait {
+	display: block;
+	width: 150px;
+	height: 80px;
+	text-indent: -9999px;
+	background: url('static/img/college_portrait.jpg') center center no-repeat;
+}
