@@ -6,7 +6,7 @@
 <?php
 	
 	$show_today				= get_post_meta($post->ID, 'page_widget_r_showtoday', TRUE);
-	$today_feed 			= get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE);
+	$today_feed 			= (get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) !== '') ? get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) : 'http://today.ucf.edu/feed/';
 	$today_feed_title 		= get_post_meta($post->ID, 'page_widget_r_today_title', TRUE);
 	$show_facebook	 		= get_post_meta($post->ID, 'page_widget_r_showfacebook', TRUE);
 	$embed1_title	 		= get_post_meta($post->ID, 'page_widget_r_embed1_title', TRUE);
