@@ -135,12 +135,17 @@ function get_weather_data()
 			
 			# Catch missing cid
 			if (!isset($weather['img']) or !intval($weather['img'])){
-				$weather['img'] = '34';
+				$weather['img'] = 'n/a';
 			}
 			
 			# Catch missing condition
 			if (!is_string($weather['condition']) or !$weather['condition']){
-				$weather['condition'] = 'fair';
+				$weather['condition'] = 'n/a';
+			}
+			
+			# Catch missing temp
+			if (!isset($weather['temp']) or !$weather['temp']){
+				$weather['temp'] = 'n/a';
 			}
 		} catch (Exception $e) {
 			# pass
@@ -162,9 +167,9 @@ function output_weather_data($class=null) {
 	$condition 	= $weather['condition'];
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img'];
-	if ($weather) { ?>
+	if ($condition !== 'n/a' && $temp !== 'n/a' && $img !== 'n/a') { ?>
 		<div id="weather_bug" class="<?=$class?>" style="background:url('<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/WC<?=$img?>.png');">
-			<p id="wb_status_txt"><?=$temp?>, <?=$condition?></p>
+			<p id="wb_status_txt"><?=$temp?>F, <?=$condition?></p>
 		</div>
 		<?php
 	} else { ?>
