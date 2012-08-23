@@ -4,6 +4,7 @@
 	
 	#header-menu li a { font-size: 18px !important; }
 	#header-menu li.last a { font-size: 12px !important; padding-top: 2px; padding-bottom: 3px;}
+	.ie9 #header-menu li.last a { top: -1px; }
 	
 	#centerpiece_slider, 
 	li.centerpiece_single, 
@@ -23,6 +24,8 @@
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 360px; margin: auto; }
 }
 @media (min-width: 980px) and (max-width: 1199px) {
+	.ie9 #header-menu li.last a { top: 1px; }
+	
 	#centerpiece_slider, 
 	li.centerpiece_single, 
 	li.centerpiece_single img.centerpiece_single_img, 

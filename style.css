@@ -190,6 +190,15 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 	background: -ms-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #f9bf1a 0%,#fdcf4a 100%); /* W3C */  
 }
+.ie7 #header-menu li.last a,
+.ie8 #header-menu li.last a {
+	background: #fff url('static/img/apply_now.png') center center no-repeat;
+	text-indent: -9999px;
+	display: block;
+	padding: 0;
+	width: 93px;
+	height: 24px;
+}
 .no_nav_separator:after { content: '' !important; }
 
 
