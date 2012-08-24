@@ -155,7 +155,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 
 /* Weather default styles */
 #weather_bug { height: 50px; background-position: left bottom; background-repeat: no-repeat !important; }
-#weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; }
+#weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; text-shadow: 1px 1px 0px #fff; }
 
 
 /* General - Reusable widget content to prevent absolute image URL usage */
