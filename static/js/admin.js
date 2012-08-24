@@ -168,7 +168,7 @@ WebcomAdmin.themeOptions = function($){
 	// Slider Meta Box Updates:
 	// (only run this code if we're on a screen with #slider-slides-settings-basic;
 	// i.e. if we're on a slider edit screen:
-	if ($('#poststuff #slider-slides-settings-basic')) {
+	if ($('#poststuff #slider-slides-settings-basic').length > 0) {
 		
 		var slide_count_widget 	 = $('#slider-slides-settings-count');
 		
