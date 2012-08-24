@@ -36,6 +36,7 @@
 	#centerpiece_slider ul {height: 460px;}
 	
 	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
+	.col_padwrap { margin: 0 20px; }
 	
 	#subheader { height: 140px; overflow: visible; }
 	
@@ -66,6 +67,7 @@
 	#centerpiece_slider ul {height: 354px;}
 	
 	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
+	.col_padwrap { margin: 0 20px; }
 	
 	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
 	.home_spotlight_title { line-height: 14px; }
