@@ -169,7 +169,7 @@ function output_weather_data($class=null) {
 		</div>
 		<?php
 	} else { ?>
-		<div id="weather_bug" style="height: auto;" class="span4"></div>
+		<div id="weather_bug" style="height: auto;" class="<?=$class?>"></div>
 	<?php
 	}
 }
