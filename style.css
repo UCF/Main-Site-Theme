@@ -470,6 +470,10 @@ a.home_spotlight_readmore {
 .ie8 #contentcol embed, 
 .ie8 #contentcol object { width: 100%; height: 260px; }
 
+#contentcol embed { 
+	background: #a3a3a3 url('static/img/mobile_notavailable.gif') center center no-repeat;
+}
+
 #contentcol, #contentcol p { color: #515050; font-family: Georgia, serif; font-size: 13px; line-height: 20px; }
 #contentcol p { margin-bottom: 20px; }
 #contentcol h3 { color: #515050; font-size: 15px; line-height: 20px; }
