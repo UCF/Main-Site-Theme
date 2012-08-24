@@ -164,7 +164,8 @@ function output_weather_data($class=null) {
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img'];
 	if ($condition !== 'n/a' && $temp !== 'n/a' && $img !== 'n/a') { ?>
-		<div id="weather_bug" class="<?=$class?>" style="background:url('<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/WC<?=$img?>.png');">
+		<div id="weather_bug" class="<?=$class?>">
+			<img src="<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.gif" alt="<?=$condition?>" />
 			<p id="wb_status_txt"><?=$temp?>F, <?=$condition?></p>
 		</div>
 		<?php
@@ -182,6 +183,10 @@ function hide_admin_links() {
 	remove_menu_page('link-manager.php');
 	remove_menu_page('edit-comments.php');
 }
-add_action( 'admin_init', 'hide_admin_links' )
+add_action( 'admin_init', 'hide_admin_links' );
+
+
+
+
 
 ?>

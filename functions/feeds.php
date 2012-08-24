@@ -308,13 +308,11 @@ function display_news(){?>
 				$first = ($key == 0);
 			?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
-				<p>
-					<a class="image ignore-external" href="<?=$item->get_link()?>">
-						<?php if($image):?>
-						<img src="<?=$image?>" alt="Feed image for <?=$item->get_title()?>" />
-						<?php endif;?>
-					</a>
-				</p>
+				<a class="image ignore-external" href="<?=$item->get_link()?>">
+					<?php if($image):?>
+					<div class="news-thumb" style="background-image:url('<?=$image?>');">Feed image for <?=$item->get_title()?></div>
+					<?php endif;?>
+				</a>
 				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
 				<div class="end"><!-- --></div>
 			</li>

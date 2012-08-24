@@ -77,6 +77,8 @@
 	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
 	.home_spotlight_title { line-height: 14px; }
 	
+	.page-content #page_title #wb_status_txt { font-size: 12px; }
+	
 	#subheader { height: 105px; overflow: visible; }
 	#subheader blockquote { width: 450px; }
 	#subheader .subheader_studentimg { margin-right: 10px; }

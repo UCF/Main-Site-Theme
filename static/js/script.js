@@ -276,6 +276,14 @@ fixSubheaderHeight = function($) {
 }
 
 
+
+/* IE 7-8 fix for News thumbnails-- requires jquery.backgroundSize.js */
+ieFixNewsThumbs = function($) {
+	$('#home_centercol .news .item .news-thumb').css( "background-size", "cover" );
+}
+
+
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -295,5 +303,7 @@ if (typeof jQuery != 'undefined'){
 		centerpieceVidResize($);
 		removeNavSeparator($);
 		fixSubheaderHeight($);
+		ieFixNewsThumbs($);
+		
 	});
 }else{console.log('jQuery dependancy failed to load');}

@@ -154,8 +154,17 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 
 
 /* Weather default styles */
-#weather_bug { height: 50px; background-position: left bottom; background-repeat: no-repeat !important; }
-#weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; text-shadow: 1px 1px 0px #fff; }
+#weather_bug { width: height: 36px; float: left; }
+#weather_bug img { width: 36px; height: 36px; float: left; }
+#weather_bug #wb_status_txt { 
+	display: block;
+	text-align: right; 
+	font-family: Georgia, serif; 
+	font-size: 17px; 
+	font-weight: bold; 
+	padding-top: 8px; 
+	/*text-shadow: 1px 1px 0px #fff; */
+}
 
 
 /* General - Reusable widget content to prevent absolute image URL usage */
@@ -390,13 +399,26 @@ a.home_spotlight_readmore {
 #home_centercol h3.title a { font-family: Georgia, serif; font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
 #home_centercol .news .item { margin-bottom: 20px; }
-#home_centercol .news .item img { border-radius: 10px; box-shadow: none; border: 0; float: left; margin-right: 15px; width: 65px; height: auto; }
+#home_centercol .news .item .news-thumb { 
+	border-radius: 10px; 
+	box-shadow: none; 
+	border: 0; 
+	float: left; 
+	margin-right: 15px; 
+	width: 65px; 
+	height: 65px; 
+	text-indent: -9999px; 
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
 
 
 /* Home Page - Right Column */
 #home_rightcol { margin-left: 0; border-left: 1px dotted #333; }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
-#home_rightcol #weather_bug { background-position: right bottom !important; }
+#home_rightcol #weather_bug { width: 100%; }
+#home_rightcol #weather_bug img { margin-right: 15px; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }
 
 
@@ -415,7 +437,6 @@ a.home_spotlight_readmore {
 /* Subpages - Title */
 .subpage .page-content #page_title { padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
 .subpage .page-content #page_title h1 { font-weight: normal; display: block; margin-left: 0; }
-
 
 /* Subpages - Subheaders */
 #subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
