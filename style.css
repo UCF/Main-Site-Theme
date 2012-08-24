@@ -158,6 +158,24 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #weather_bug #wb_status_txt { text-align: right; font-family: Georgia, serif; font-size: 17px; font-weight: bold; padding-top: 8px; }
 
 
+/* General - Reusable widget content to prevent absolute image URL usage */
+a.college_portrait {
+	display: block;
+	width: 150px;
+	height: 80px;
+	text-indent: -9999px;
+	background: url('static/img/college_portrait.jpg') center center no-repeat;
+}
+
+div.top_five_majors {
+	display: block;
+	width: 171px;
+	height: 63px;
+	text-indent: -9999px;
+	background: url('static/img/top_5_majors') center center no-repeat;
+}
+
+
 /* Header */
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
 #header h1 { text-indent: -9999px; }
@@ -472,10 +490,3 @@ a.home_spotlight_readmore {
 	height: 140px;
 }
 
-a.college_portrait {
-	display: block;
-	width: 150px;
-	height: 80px;
-	text-indent: -9999px;
-	background: url('static/img/college_portrait.jpg') center center no-repeat;
-}
