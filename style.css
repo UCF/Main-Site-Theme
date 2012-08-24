@@ -360,7 +360,7 @@ a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; colo
 /* IE fixes */
 .ie7 #home_leftcol, .ie8 #home_leftcol { margin-left: 20px; }
 .ie7 #home_centercol, .ie8 #home_centercol { margin-left: 10px; }
-.ie7 #home_rightcol, .ie8 #home_rightcol { margin-left: 15px; }
+.ie7 #home_rightcol, .ie8 #home_rightcol { padding-left: 15px; margin-left: 0; }
 
 .col_padwrap { margin: 0 30px; }
 .ie7 .col_padwrap, .ie8 .col_padwrap { margin: 0 20px; }
@@ -385,7 +385,7 @@ a.home_spotlight_readmore {
 /* Home Page - Center Column */
 #home_centercol a { color: #333; }
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
-#home_centercol { border-right: 1px dotted #333; border-left: 1px dotted #333; }
+#home_centercol { border-left: 1px dotted #333; }
 #home_centercol h3.title { line-height: 16px; }
 #home_centercol h3.title a { font-family: Georgia, serif; font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
@@ -394,7 +394,7 @@ a.home_spotlight_readmore {
 
 
 /* Home Page - Right Column */
-#home_rightcol {  }
+#home_rightcol { margin-left: 0; border-left: 1px dotted #333; }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
 #home_rightcol #weather_bug { background-position: right bottom !important; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }

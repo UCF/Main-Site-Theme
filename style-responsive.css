@@ -15,6 +15,8 @@
 	li.centerpiece_single embed {width: 1084px; height: 531px; }
 	#centerpiece_slider ul {height: 531px;}
 	
+	#home_rightcol { padding-left: 29px; }
+	
 	#subheader { height: 170px; overflow: visible; }
 	
 	#sidebar_right iframe,
@@ -35,7 +37,8 @@
 	li.centerpiece_single embed {width: 940px; height: 460px; }
 	#centerpiece_slider ul {height: 460px;}
 	
-	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
+	#home_leftcol, #home_centercol { margin-left: 19px;	}
+	#home_rightcol { padding-left: 19px; }
 	.col_padwrap { margin: 0 20px; }
 	
 	#subheader { height: 140px; overflow: visible; }
@@ -66,7 +69,8 @@
 	li.centerpiece_single embed {width: 724px; height: 354px; }
 	#centerpiece_slider ul {height: 354px;}
 	
-	#home_leftcol, #home_centercol, #home_rightcol { margin-left: 19px;	}
+	#home_leftcol, #home_centercol { margin-left: 19px;	}
+	#home_rightcol { padding-left: 19px; }
 	.col_padwrap { margin: 0 20px; }
 	
 	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
@@ -102,6 +106,7 @@
 	#home_centercol { border: 0; }
 	#home_centercol .col_padwrap { margin: 0; }
 	.news .item { margin-bottom: 10px; }
+	#home_rightcol { border-left: 0; padding-left: 0; }
 	
 	#colleges_wrap .container .row { padding: 0 20px; }
 	
@@ -146,6 +151,7 @@
 	#home_centercol { border: 0; }
 	#home_centercol .col_padwrap { margin: 0; }
 	.news .item { margin-bottom: 10px; }
+	#home_rightcol { border-left: 0; padding-left: 0; }
 	
 	/* Shrinkable bootstrap tables for tablets/phones.
 	Responsive table guide via css-tricks.com/responsive-data-tables/ */
