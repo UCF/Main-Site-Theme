@@ -1190,7 +1190,7 @@ class Slider extends CustomPostType {
 									<tr>
 										<th><label for="ss_slide_image[<?=$s?>]">Slide Image</label></th>
 										<td>
-											<span class="description">Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
+											<span class="description">Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
 											<?php
 												if ($slide_image[$s]){
 													$image = get_post($slide_image[$s]);
@@ -1215,7 +1215,7 @@ class Slider extends CustomPostType {
 									<tr>
 										<th><label for="ss_slide_video_thumb[<?=$s?>]">Slide Video Thumbnail</label></th>
 										<td>
-											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
 											<?php
 												if ($slide_video_thumb[$s]){
 													$image = get_post($slide_video_thumb[$s]);
@@ -1294,7 +1294,7 @@ class Slider extends CustomPostType {
 								<tr>
 									<th><label for="ss_slide_image[<?=$i?>]">Slide Image</label></th>
 									<td>
-										<span class="description">Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
+										<span class="description">Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
 										<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$i?>]"><br />
 									</td>
 								</tr>
@@ -1308,7 +1308,7 @@ class Slider extends CustomPostType {
 								<tr>
 										<th><label for="ss_slide_video_thumb[<?=$i?>]">Slide Video Thumbnail</label></th>
 										<td>
-											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 1084x531px. Larger images may be cropped.</span><br/>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
 											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$i?>]"><br />
 										</td>
 									</tr>

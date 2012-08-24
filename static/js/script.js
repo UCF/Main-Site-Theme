@@ -226,7 +226,7 @@ centerpieceVidResize = function($) {
 		var parentw = $('#centerpiece_slider').parent('.span12').width();
 		if ($(window).width() <= 767) {
 			$('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
-				.css({'height' : parentw * 0.49 +'px'});
+				.css({'height' : parentw * 0.36 +'px'});
 		}
 		else if ($(window).width() > 767) {
 			$('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
