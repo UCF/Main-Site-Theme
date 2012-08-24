@@ -251,6 +251,8 @@ fixSubheaderHeight = function($) {
 		if ($(window).width() > 768) { /* Subhead images hide below this size */
 			var subimgHeight = $('#subheader .subheader_subimg').height(),
 				quoteHeight = $('#subheader .subhead_quote').height();
+			console.log('subimg height is:' + subimgHeight);
+			console.log('quoteHeight is:' + quoteHeight);
 			if (quoteHeight > subimgHeight) {
 				$('#subheader').height(quoteHeight);
 			}
@@ -260,7 +262,9 @@ fixSubheaderHeight = function($) {
 		}
 	}
 	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
-		doSubheaderHeight();
+		$(window).load(function() {
+			doSubheaderHeight();
+		});
 		$(window).resize(function() {
 			doSubheaderHeight();
 		});
@@ -281,8 +285,8 @@ if (typeof jQuery != 'undefined'){
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
-		Generic.mobileSidebar($);
 		
+		Generic.mobileSidebar($);
 		centerpieceSlider($);
 		centerpieceVidResize($);
 		removeNavSeparator($);
