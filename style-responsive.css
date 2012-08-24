@@ -152,6 +152,8 @@
 	#centerpiece_control { bottom: 20px; left: 20px; }
 	#centerpiece_control a { width: 15px; height: 15px; margin-right: 10px; }
 	
+	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
+	
 	#below-the-fold { margin-left: 0; }
 	#below-the-fold .span4 { width: 100%; margin-left: 0; margin-bottom: 20px; }
 	
@@ -288,8 +290,6 @@
 	#subheader { display: none; }
 	
 	#home .span12 { margin-bottom: 10px; margin-top: 0; }
-	
-	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
 	
 	/*#sidebar_right iframe,
 	#sidebar_right embed,
