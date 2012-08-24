@@ -422,7 +422,16 @@ a.home_spotlight_readmore {
 .ie7 #subheader, .ie8 #subheader { height: 140px; overflow: visible; }
 #subheader .subheader_subimg { margin-left: 0; border: 0; }
 #subheader .subhead_quote { border-left: 0; padding-left: 0; }
-#subheader .subhead_author { float: right; font-weight: bold; padding-top: 20px; font-size: 12px; font-family: Georgia; serif; }
+#subheader .subhead_author { 
+	float: right; 
+	font-weight: bold; 
+	padding-top: 20px; 
+	font-size: 12px; 
+	font-family: Georgia, serif; 
+	line-height: 15px; 
+	width: 320px; 
+	text-align: right; 
+}
 #subheader .subhead_quotelink { padding-top: 20px; }
 #subheader .subhead_quotelink a { color: #660000 !important; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: normal; }
 #subheader .subhead_quotelink a:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }

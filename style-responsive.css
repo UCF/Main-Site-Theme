@@ -108,7 +108,7 @@
 	
 	
 	#page_title { overflow: hidden; margin-left: 20px; }
-	#subheader { height: auto; overflow: auto; margin-left: 20px; }
+	#subheader { height: auto; overflow: hidden; margin-left: 20px; }
 	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
 	#subheader blockquote { margin-left: 0; width: 100%; }
 	
@@ -202,7 +202,7 @@
 	
 	.subpage .page-content #page_title { overflow: hidden; }
 	
-	#subheader { height: auto; overflow: auto; }
+	#subheader { height: auto; overflow: hidden; }
 	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
 	#subheader blockquote { margin-left: 0; width: 100%; }
 	

@@ -218,21 +218,17 @@ centerpieceSlider = function($) {
 /* Adjust slider video/embed size on window resize (for less than 767px) */
 
 centerpieceVidResize = function($) {
-	
 	var addDimensions = function() {
-		
 		var parentw = $('#centerpiece_slider').parent('.span12').width();
 		if ($(window).width() <= 767) {
 			$('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
 				.css({'height' : parentw * 0.49 +'px'});
-						
 		}
 		else if ($(window).width() > 767) {
 			$('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
 				.css({'height' : ''});
 		}
 	}
-	
 	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
 		addDimensions();
 		$(window).resize(function() {
@@ -246,6 +242,29 @@ centerpieceVidResize = function($) {
 removeNavSeparator = function($) {
 	var navcount = $('ul#header-menu li').length - 1;
 	$('ul#header-menu li:nth-child('+navcount+')').addClass('no_nav_separator');
+}
+
+
+/* Fix subheader height to contain blockquote if it exceeds past its container: */
+fixSubheaderHeight = function($) {
+	var doSubheaderHeight = function() {
+		if ($(window).width() > 768) { /* Subhead images hide below this size */
+			var subimgHeight = $('#subheader .subheader_subimg').height(),
+				quoteHeight = $('#subheader .subhead_quote').height();
+			if (quoteHeight > subimgHeight) {
+				$('#subheader').height(quoteHeight);
+			}
+			else {
+				$('#subheader').height(subimgHeight);
+			}
+		}
+	}
+	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+		doSubheaderHeight();
+		$(window).resize(function() {
+			doSubheaderHeight();
+		});
+	}
 }
 
 
@@ -267,6 +286,6 @@ if (typeof jQuery != 'undefined'){
 		centerpieceSlider($);
 		centerpieceVidResize($);
 		removeNavSeparator($);
-		
+		fixSubheaderHeight($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
