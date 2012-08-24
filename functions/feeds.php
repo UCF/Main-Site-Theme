@@ -297,12 +297,16 @@ function display_events($start=null, $limit=null){?>
 
 
 function display_news(){?>
-	<?php $options = get_option(THEME_OPTIONS_NAME);?>
-	<?php $count   = $options['news_max_items'];?>
-	<?php $news    = get_news(0, ($count) ? $count : 3);?>
-	<?php if(count($news)):?>
+	<?php 
+	$options = get_option(THEME_OPTIONS_NAME);
+	$count   = $options['news_max_items'];
+	$news    = get_news(0, ($count) ? $count : 3);
+	if(count($news)):?>
 		<ul class="news">
-			<?php foreach($news as $key=>$item): $image = get_article_image($item); $first = ($key == 0);?>
+			<?php foreach($news as $key=>$item): 
+				$image = (get_article_image($item)) ? get_article_image($item) : 'http://today.ucf.edu/widget/thumbnail.png'; 
+				$first = ($key == 0);
+			?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
 				<p>
 					<a class="image ignore-external" href="<?=$item->get_link()?>">
