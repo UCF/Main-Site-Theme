@@ -282,7 +282,7 @@ div.top_five_majors {
 
 
 /* Home Page - General */
-#home .span12 { margin-bottom: 20px; }
+#home .span12 { margin-top: 10px; margin-bottom: 30px; overflow: hidden !important; }
 
 
 /* Home Page - Centerpiece */

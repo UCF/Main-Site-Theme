@@ -286,7 +286,7 @@
 	
 	#subheader { display: none; }
 	
-	#home .span12 { margin-bottom: 0; margin-top: -10px; }
+	#home .span12 { margin-bottom: 10px; margin-top: 0; }
 	
 	#centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
 	

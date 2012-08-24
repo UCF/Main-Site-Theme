@@ -3,17 +3,14 @@
 	<?php $page    = get_page_by_title('Home');?>
 	<div class="row page-content nodescription" id="home" data-template="home-nodescription">		
 		<div class="span12">
-			<p>
-				<?php
-					$args = array(
-						'numberposts' => 1,
-						'post_type' => 'centerpiece',
-					);
-					$latest_centerpiece = get_posts($args);
-					
-					echo do_shortcode('[centerpiece id="'.$latest_centerpiece[0]->ID.'"]'); 
+			<?php
+				$args = array(
+					'numberposts' => 1,
+					'post_type' => 'centerpiece',
+				);
+				$latest_centerpiece = get_posts($args);
+				echo do_shortcode('[centerpiece id="'.$latest_centerpiece[0]->ID.'"]'); 
 				?>
-			</p>
 		</div>
 		<div class="span4" id="home_leftcol">	
 			<h2>Spotlight</h2>
