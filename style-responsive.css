@@ -83,6 +83,10 @@
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 260px; }
 	
+	#sidebar_left .sidebar_title { margin-bottom: 5px; }
+	#sidebar_left ul { font-size: 12px; }
+	#sidebar_left ul li { padding-bottom: 8px; }
+	
 	#sidebar_right { padding-top: 175px; }
 	#sidebar_right .news .item { margin-bottom: 10px; }
 	#sidebar_right .news .item a { font-size: 12px; }
