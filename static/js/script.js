@@ -197,6 +197,10 @@ centerpieceSlider = function($) {
 		$('.centerpiece_single_vid_thumb').click(function() { 
 			$('#centerpiece_slider ul').cycle('pause');
 			$(this).hide().next().fadeIn(500);
+			// Also hide the centerpiece controls for mobile devices:
+			if ($(window).width() <= 768) {
+				$('#centerpiece_control').hide();
+			}
 		});
 		
 		// If a centerpiece control button is clicked, kill any videos and fix slide dimensions:
