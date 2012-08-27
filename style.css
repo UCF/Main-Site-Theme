@@ -382,7 +382,7 @@ a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; colo
 #home_leftcol a { color: #333; }
 #home_leftcol a:hover { color: #e50606; }
 .home_spotlight_single { overflow: auto; clear: both; width: 95%; margin-bottom: 20px; }
-.home_spotlight_single .spotlight_thumb { float: left; position: relative; margin-right: 15px; border-radius: 10px; width: 110px; height: 110px; cursor: pointer; text-indent: -9999px; }
+.home_spotlight_single .spotlight_thumb { background-position: center center; background-repeat: no-repeat; float: left; position: relative; margin-right: 15px; border-radius: 10px; width: 110px; height: 110px; cursor: pointer; text-indent: -9999px; }
 .home_spotlight_title { line-height: 16px; padding-bottom: 5px; }
 .home_spotlight_title a { border-bottom: 1px solid #ccc; font-size: 14px; text-decoration: none; }
 .home_spotlight_title a:hover { border-bottom: 1px solid #e50606; }

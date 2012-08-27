@@ -14,7 +14,7 @@
 		</div>
 		<div class="span4" id="home_leftcol">	
 			<h2>Spotlight</h2>
-			<p><?php echo do_shortcode('[spotlights]'); ?></p>
+			<p><?=frontpage_spotlights()?></p>
 			<p><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
 		</div>
 		<div class="span4" id="home_centercol">
