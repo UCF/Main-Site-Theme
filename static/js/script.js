@@ -274,6 +274,20 @@ fixSubheaderHeight = function($) {
 }
 
 
+/* Toggle chevron onclick for a-z index list menu links: */
+toggleAZChevrons = function($) {
+	if ($('.accordion').length > 0) {
+		$('.accordion-body.collapse').on('hide', function () {
+    		var i = $(this).prev().find('i');
+			i.removeClass('icon-chevron-down').addClass('icon-chevron-right');
+    	});
+		$('.accordion-body.collapse').on('show', function () {
+    		var i = $(this).prev().find('i');
+			i.removeClass('icon-chevron-right').addClass('icon-chevron-down');
+    	});
+	}
+}
+
 
 /* IE 7-8 fix for News thumbnails-- requires jquery.backgroundSize.js */
 ieFixNewsThumbs = function($) {
@@ -308,6 +322,7 @@ if (typeof jQuery != 'undefined'){
 		centerpieceVidResize($);
 		removeNavSeparator($);
 		fixSubheaderHeight($);
+		toggleAZChevrons($);
 		ieFixNewsThumbs($);
 		ieRoundedCornerThumbs($);
 		

@@ -135,6 +135,8 @@
 	#sidebar_l_colleges { padding-top: 0; }
 	
 	#sidebar_right { display: none; }
+	
+	.azindexlink-list li { padding-bottom: 10px; }
 }
 
 @media (max-width: 767px) {
@@ -243,6 +245,8 @@
 	#contentcol .rightcol_subheader_fix { display: none; }
 	
 	#colleges_wrap ul#menu-ucf-colleges { margin-left: 0; }
+	
+	.azindexlink-list li { padding-bottom: 10px; }
 
 }
 
@@ -310,5 +314,5 @@
 	
 	#footer-menu { text-align: center; margin-bottom: 20px; }
 	#footer-menu li { float: none !important; margin-bottom: 10px; }
-	#footer-menu li:after { margin-left: 5px; }
+	#footer-menu li:after { margin-left: 5px; }	
 }

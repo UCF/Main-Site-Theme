@@ -529,3 +529,22 @@ a.home_spotlight_readmore {
 	height: 140px;
 }
 
+
+/* A-Z Index */
+#alpha-index .accordion-toggle { 
+	color: #262626;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	font-weight: bold; 
+	background: #fdcf4a; /* Old browsers */
+	background: -moz-linear-gradient(top, #fdcf4a 0%, #fdcf4a 50%, #f9bf1a 51%, #f9bf1a 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdcf4a), color-stop(50%,#fdcf4a), color-stop(51%,#f9bf1a), color-stop(100%,#f9bf1a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* W3C */ 
+}
+#alpha-index .accordion-toggle:hover { border-bottom: 1px solid #ccc; }
+#alpha-index .icon-chevron-right, #alpha-index .icon-chevron-down { float: right !important; margin-top: 2px;}
+.azindexlink-list li { padding-bottom: 5px; }
+.azindexlink-list li:first-child { padding-top: 3px; }
+.azindexlink-list li:last-child { padding-bottom: 0; }
