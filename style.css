@@ -335,11 +335,6 @@ li.centerpiece_single .slide_contents {
 .ie7 #centerpiece_slider ul,
 .ie8 #centerpiece_slider ul { height: 338px; }
 
-#centerpiece_corner_tl { width: 12px; height: 11px; background: url('static/img/slider_corner_topleft.png') no-repeat; position: absolute; top: 0; left: 0; zoom: 1; z-index: 999; }
-#centerpiece_corner_tr { width: 11px; height: 12px; background: url('static/img/slider_corner_topright.png') no-repeat; position: absolute; top: 0; right: 0; zoom: 1; z-index: 999; }
-#centerpiece_corner_bl { width: 11px; height: 12px; background: url('static/img/slider_corner_bottomleft.png') no-repeat; position: absolute; bottom: 0; left: 0; zoom: 1; z-index: 999; }
-#centerpiece_corner_br { width: 12px; height: 11px; background: url('static/img/slider_corner_bottomright.png') no-repeat; position: absolute; bottom: 0; right: 0; zoom: 1; z-index: 999; }
-
 #centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 5; }
 #centerpiece_control a { 
 	text-indent: -9999px;
@@ -354,6 +349,13 @@ li.centerpiece_single .slide_contents {
 	margin-right:5px; 
 	border: 1px solid #fff; }
 #centerpiece_control a.activeSlide{ background:#fff; }
+
+
+/* IE 7+8 rounded corner fix for news, spotlight thumbnails; Standard rounded corners for centerpieces */
+.thumb_corner_tl { width: 10px; height: 10px; background: url('static/img/thumb_corner_topleft.png') no-repeat; position: absolute; top: 0; left: 0; zoom: 1; z-index: 999; }
+.thumb_corner_tr { width: 10px; height: 10px; background: url('static/img/thumb_corner_topright.png') no-repeat; position: absolute; top: 0; right: 0; zoom: 1; z-index: 999; }
+.thumb_corner_bl { width: 10px; height: 10px; background: url('static/img/thumb_corner_bottomleft.png') no-repeat; position: absolute; bottom: 0; left: 0; zoom: 1; z-index: 999; }
+.thumb_corner_br { width: 10px; height: 10px; background: url('static/img/thumb_corner_bottomright.png') no-repeat; position: absolute; bottom: 0; right: 0; zoom: 1; z-index: 999; }
 
 
 /* Home Page - Sub Columns - General Styles */
@@ -373,12 +375,6 @@ a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; colo
 
 .col_padwrap { margin: 0 30px; }
 .ie7 .col_padwrap, .ie8 .col_padwrap { margin: 0 20px; }
-
-/* IE 7+8 rounded corner fix for news, spotlight thumbnails */
-.thumb_corner_tl { width: 10px; height: 10px; background: url('static/img/thumb_corner_topleft.png') no-repeat; position: absolute; top: 0; left: 0; zoom: 1; z-index: 999; }
-.thumb_corner_tr { width: 10px; height: 10px; background: url('static/img/thumb_corner_topright.png') no-repeat; position: absolute; top: 0; right: 0; zoom: 1; z-index: 999; }
-.thumb_corner_bl { width: 10px; height: 10px; background: url('static/img/thumb_corner_bottomleft.png') no-repeat; position: absolute; bottom: 0; left: 0; zoom: 1; z-index: 999; }
-.thumb_corner_br { width: 10px; height: 10px; background: url('static/img/thumb_corner_bottomright.png') no-repeat; position: absolute; bottom: 0; right: 0; zoom: 1; z-index: 999; }
 
 
 /* Home Page - Left Column */

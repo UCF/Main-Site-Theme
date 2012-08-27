@@ -308,7 +308,7 @@ add_shortcode('spotlights', 'sc_frontpage_spotlights');
 			
 			// Apply rounded corners:
 			if ($rounded_corners == 'on') {
-				$output .= '<div id="centerpiece_corner_tl"></div><div id="centerpiece_corner_tr"></div><div id="centerpiece_corner_bl"></div><div id="centerpiece_corner_br"></div>';
+				$output .= '<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>';
 			}
 			
 			$output .= '
