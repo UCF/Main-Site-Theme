@@ -808,16 +808,11 @@ class Spotlight extends CustomPostType {
 		);
 	}
 	
-	// To-do: fix this:
-	public function get_objects($options=array()){
-		$options['orderby']  = 'post_date';
-		return parent::get_objects($options);
-	}
-	
 	public function objectsToHTML($objects, $css_classes) {
 		ob_start();?>
 		<ul class="spotlight-list">
-			<?php
+			<?php 
+			rsort($objects);
 			foreach ($objects as $spotlight) { ?>
 				<li><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a> <?=$spotlight->post_date?></li>
 			<?php	
