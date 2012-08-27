@@ -252,11 +252,9 @@ removeNavSeparator = function($) {
 /* Fix subheader height to contain blockquote if it exceeds past its container: */
 fixSubheaderHeight = function($) {
 	var doSubheaderHeight = function() {
-		if ($(window).width() > 768) { /* Subhead images hide below this size */
+		if ($(window).width() > 768 && $('#subheader').length > 0) { /* Subhead images hide below this size */
 			var subimgHeight = $('#subheader .subheader_subimg').height(),
 				quoteHeight = $('#subheader .subhead_quote').height();
-			console.log('subimg height is:' + subimgHeight);
-			console.log('quoteHeight is:' + quoteHeight);
 			if (quoteHeight > subimgHeight) {
 				$('#subheader').height(quoteHeight);
 			}
@@ -283,6 +281,13 @@ ieFixNewsThumbs = function($) {
 }
 
 
+/* IE 7-8 fix for rounded corners on spotlight, news thumbnails */
+ieRoundedCornerThumbs = function($) {
+	if ($.browser.msie && $.browser.version < 9) {
+		$('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>').appendTo('.spotlight_thumb, ul.news .item .news-thumb');
+	}
+}
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -304,6 +309,7 @@ if (typeof jQuery != 'undefined'){
 		removeNavSeparator($);
 		fixSubheaderHeight($);
 		ieFixNewsThumbs($);
+		ieRoundedCornerThumbs($);
 		
 	});
 }else{console.log('jQuery dependancy failed to load');}

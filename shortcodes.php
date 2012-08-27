@@ -152,7 +152,14 @@ function sc_frontpage_spotlights() {
 	function output_spotlight($spotlight) {
 		?>
 		<div class="home_spotlight_single">
-			<a href="<?=get_permalink($spotlight->ID)?>"><?=get_the_post_thumbnail($spotlight->ID, 'home-thumb')?></a>
+			<a href="<?=get_permalink($spotlight->ID)?>">
+				<?php
+					$thumb_id = get_post_thumbnail_id($spotlight->ID);
+					$thumb_src = wp_get_attachment_image_src( $thumb_id, 'home-thumb' );
+					$thumb_src = $thumb_src[0];
+				?>
+				<div class="spotlight_thumb" style="background:url('<?=$thumb_src?>');"><?=$spotlight->post_title?></div>
+			</a>
 			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
 			<?=$spotlight->post_content?>
 			<p><a class="home_spotlight_readmore" href="" target="_blank">Read More…</a></p>
