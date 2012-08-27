@@ -1,8 +1,12 @@
 <?php disallow_direct_load('single.php');?>
-<?php get_header(); the_post();?>
-	<div class="page-content person-profile">
-		<div class="row">
-			<div class="span2 details">
+<?php get_header(); the_post();?>	
+	
+	<div class="row page-content person-profile" id="<?=$post->post_name?>">
+		<div id="page_title" class="span12">
+			<h1 class="span9">Profile: <?php the_title();?></h1>
+			<?=output_weather_data('span3')?>
+		</div>
+		<div class="span2 details">
 			<?
 				$title = get_post_meta($post->ID, 'person_jobtitle', True);
 				$image_url = get_featured_image_url($post->ID);
@@ -21,11 +25,14 @@
 			<hr />
 			<a class="email" href="mailto:<?=$email?>"><?=$email?></a>
 			<? } ?>
-			</div>
-			<div class="span10">
+		</div>
+		<div class="span10">
+			<article>
 				<h2><?=$post->post_title?><?=($title == '') ?: ' - '.$title ?></h2>
 				<?=$content = str_replace(']]>', ']]>', apply_filters('the_content', $post->post_content))?>
-			</div>
+			</article>
 		</div>
 	</div>
+	
+	
 <?php get_footer();?>
