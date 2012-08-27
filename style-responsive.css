@@ -299,6 +299,8 @@
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 200px; }
 	
+	.gform_body input[type="text"], .gform_body textarea { width: 100% !important; }
+	
 	#colleges_wrap { padding-bottom: 10px; }
 	#colleges_wrap ul { text-align: center; }
 	#colleges_wrap ul li { margin-right: 5px; float: none !important; display: inline-block; }
