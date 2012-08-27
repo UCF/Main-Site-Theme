@@ -907,6 +907,12 @@ class AZIndexLink extends CustomPostType {
 			),
 		);
 	}
+	
+	public function toHTML($object){
+		$html = '<a href="'.get_post_meta($object->ID, 'azindexlink_url', TRUE).'">'.$object->post_title.'</a>';
+		return $html;
+	}
+	
 }
 
 
