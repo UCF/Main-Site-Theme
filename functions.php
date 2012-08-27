@@ -131,17 +131,17 @@ function get_weather_data()
 			
 			# Catch missing cid
 			if (!isset($weather['img']) or !intval($weather['img'])){
-				$weather['img'] = 'n/a';
+				$weather['img'] = '34';
 			}
 			
 			# Catch missing condition
 			if (!is_string($weather['condition']) or !$weather['condition']){
-				$weather['condition'] = 'n/a';
+				$weather['condition'] = 'fair';
 			}
 			
 			# Catch missing temp
 			if (!isset($weather['temp']) or !$weather['temp']){
-				$weather['temp'] = 'n/a';
+				$weather['temp'] = '80';
 			}
 		} catch (Exception $e) {
 			# pass
@@ -162,17 +162,12 @@ function output_weather_data($class=null) {
 	$weather 	= get_weather_data(); 
 	$condition 	= $weather['condition'];
 	$temp 		= $weather['temp'];
-	$img 		= $weather['img'];
-	if ($condition !== 'n/a' && $temp !== 'n/a' && $img !== 'n/a') { ?>
-		<div id="weather_bug" class="<?=$class?>">
-			<img src="<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.gif" alt="<?=$condition?>" />
-			<p id="wb_status_txt"><?=$temp?>F, <?=$condition?></p>
-		</div>
-		<?php
-	} else { ?>
-		<div id="weather_bug" style="height: auto;" class="<?=$class?>"></div>
+	$img 		= $weather['img']; ?>
+	<div id="weather_bug" class="<?=$class?>">
+		<img src="<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.gif" alt="<?=$condition?>" />
+		<p id="wb_status_txt"><?=$temp?>F, <?=$condition?></p>
+	</div>
 	<?php
-	}
 }
 
 
