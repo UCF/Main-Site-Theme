@@ -35,27 +35,6 @@ function __init__(){
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</div>',
 	));
-	register_sidebar(array(
-		'name'          => __('Below the Fold - Left'),
-		'id'            => 'bottom-left',
-		'description'   => 'Left column on the bottom of pages, after flickr images if enabled.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
-	register_sidebar(array(
-		'name'          => __('Below the Fold - Center'),
-		'id'            => 'bottom-center',
-		'description'   => 'Center column on the bottom of pages, after news if enabled.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
-	register_sidebar(array(
-		'name'          => __('Below the Fold - Right'),
-		'id'            => 'bottom-right',
-		'description'   => 'Right column on the bottom of pages, after events if enabled.',
-		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</div>',
-	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
@@ -142,28 +121,6 @@ Config::$theme_settings = array(
 		)),
 	),
 	'Events' => array(
-		new RadioField(array(
-			'name'        => 'Enable Events Below the Fold',
-			'id'          => THEME_OPTIONS_NAME.'[enable_events]',
-			'description' => 'Display events in the bottom page content, appearing on most pages.',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_events'],
-		)),
-		new RadioField(array(
-			'name'        => 'Enable Events on Search Page',
-			'id'          => THEME_OPTIONS_NAME.'[enable_search_events]',
-			'description' => 'Display events on the search results page.',
-			'value'       => $theme_options['enable_search_events'],
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-		)),
 		new SelectField(array(
 			'name'        => 'Events Max Items',
 			'id'          => THEME_OPTIONS_NAME.'[events_max_items]',
@@ -187,17 +144,6 @@ Config::$theme_settings = array(
 		)),
 	),
 	'News' => array(
-		new RadioField(array(
-			'name'        => 'Enable News Below the Fold',
-			'id'          => THEME_OPTIONS_NAME.'[enable_news]',
-			'description' => 'Display UCF Today news in the bottom page content, appearing on most pages.',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_news'],
-		)),
 		new SelectField(array(
 			'name'        => 'News Max Items',
 			'id'          => THEME_OPTIONS_NAME.'[news_max_items]',
@@ -307,36 +253,6 @@ Config::$theme_settings = array(
 			'description' => 'URL to the twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/csbrisketbus</em>',
 			'value'       => $theme_options['twitter_url'],
 		)),
-		new RadioField(array(
-			'name'        => 'Enable Flickr',
-			'id'          => THEME_OPTIONS_NAME.'[enable_flickr]',
-			'description' => 'Automatically display flickr images throughout the site',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_flickr'],
-		)),
-		new TextField(array(
-			'name'        => 'Flickr Photostream ID',
-			'id'          => THEME_OPTIONS_NAME.'[flickr_id]',
-			'description' => 'ID of the flickr photostream you would like to show pictures from.  Example: <em>65412398@N05</em>',
-			'default'     => '36226710@N08',
-			'value'       => $theme_options['flickr_id'],
-		)),
-		new SelectField(array(
-			'name'        => 'Flickr Max Images',
-			'id'          => THEME_OPTIONS_NAME.'[flickr_max_items]',
-			'description' => 'Maximum number of flickr images to display',
-			'value'       => $theme_options['flickr_max_items'],
-			'default'     => 12,
-			'choices'     => array(
-				'6'  => 6,
-				'12' => 12,
-				'18' => 18,
-			),
-		)),
 	),
 	'Styles' => array(
 		new RadioField(array(
@@ -353,7 +269,7 @@ Config::$theme_settings = array(
 		new SelectField(array(
 			'name'        => 'Header Menu Styles',
 			'id'          => THEME_OPTIONS_NAME.'[bootstrap_menu_styles]',
-			'description' => 'Adjust the styles that the header menu links will use.  Non-default options Twitter Bootstrap navigation components for sub-navigation support.',
+			'description' => 'Adjust the styles that the header menu links will use.  Non-default options use Twitter Bootstrap navigation components for sub-navigation support.',
 			'default'     => 'default',
 			'choices'     => array(
 				'Default (list of links with dropdowns)'  => 'default',
