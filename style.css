@@ -393,7 +393,8 @@ a.home_spotlight_readmore {
 /* Subpages - Right Sidebar */
 #sidebar_right { padding-top: 115px; }
 .ie7 #sidebar_right, .ie8 #sidebar_right { padding-top: 140px; }
-#sidebar_right.nosubheader { padding-top: 0 !important; }
+#sidebar_right.notoppad,
+#sidebar_left .notoppad { padding-top: 0 !important; }
 #sidebar_right .sidebar_title { color: #777; }
 #sidebar_right #sidebar_r_today { font-size: 14px; line-height: 16px; color: #000; padding-bottom: 15px; }
 #sidebar_right .news .item { margin-bottom: 10px; }

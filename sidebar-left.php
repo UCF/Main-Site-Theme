@@ -36,7 +36,10 @@
 		wp_nav_menu($args);
 	}
 	if ($show_colleges_val) {	
-		print '<h3 id="sidebar_l_colleges" class="sidebar_title">UCF Colleges</h3>';
+		echo sprintf(
+			'<h3 id="sidebar_l_colleges" class="sidebar_title%s">UCF Colleges</h3>',
+			($more_info_nav_val || $secondary_nav_val ? '' : ' notoppad')
+		);
 		
 		$args = array(
 			'theme_location' => 'ucf-colleges',

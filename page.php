@@ -18,7 +18,7 @@
 			</article>
 		</div>
 		
-		<div id="sidebar_right" class="span3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>nosubheader<?php } ?>">		
+		<div id="sidebar_right" class="span3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>notoppad<?php } ?>">		
 			<?=get_sidebar('right');?>
 		</div>
 	</div>
