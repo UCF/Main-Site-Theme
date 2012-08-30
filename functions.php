@@ -194,7 +194,7 @@ function get_weather_data()
 	if(($weather = get_transient($cache_key)) !== False) {
 		return $weather;
 	} else {
-		$weather = Array('condition' => 'fair', 'temp' => 80, 'img' => '34');
+		$weather = Array('condition' => 'Fair', 'temp' => '80&#186;', 'img' => '34');
 		
 		// Cookies are needed for the service to work properly
 		$opts = Array('http' => Array(	'method'=>"GET",
