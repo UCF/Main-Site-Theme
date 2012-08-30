@@ -247,7 +247,7 @@ li.centerpiece_single .slide_contents {
 .ie7 #centerpiece_slider ul,
 .ie8 #centerpiece_slider ul { height: 338px; }
 
-#centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 5; }
+#centerpiece_control { display: block; position: absolute; bottom: 25px; left: 25px; z-index: 999; }
 #centerpiece_control a { 
 	text-indent: -9999px;
 	line-height: 1px;
