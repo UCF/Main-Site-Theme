@@ -128,4 +128,62 @@ function sc_person_picture_list($atts) {
 }
 add_shortcode('person-picture-list', 'sc_person_picture_list');
 
+/**
+ * Post search
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function sc_post_type_search($params=array(), $content='') {
+	$defaults = array(
+		'post_type_name'      => 'post',
+		'taxonomy'            => 'category',
+		'show_empty_sections' => false
+	);
+
+	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
+
+	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
+
+	// Resolve the post type class
+	switch(strtolower($params['post_type_name'])) {
+		case 'post':
+			$post_type_class = Post;
+			break;
+		case 'page':
+			$post_type_class = Page;
+			break;
+		default:
+			$post_type_class = get_custom_post_type($params['post_type_name']);
+			if(is_null($post_type_class)) {
+				return '<p>Invalid post type.</p>';
+			}
+	}
+
+	$post_type = new $post_type_class;
+
+	// Split up this post type's posts by term
+	$by_term = array();
+	foreach(get_terms($params['taxonomy']) as $term) {
+		$posts = get_posts(array(
+			'numberposts' => -1,
+			'post_type'   => $params['post_type'],
+			'tax_query'   => array(
+				'taxonomy' => $params['taxonomy'],
+				'field'    => 'id',
+				'terms'    => $term->term_id
+			)
+		));
+
+		if(count($posts) == 0 && $params['show_empty_sections']) {
+			$by_term[$term->name] = array();
+		} else {
+			$by_term[$term->name] = $posts;
+		}
+	}
+
+	// Split up this post type's posts by the first alpha character
+
+}
+add_shortcode('post-type-search', 'sc_post_type_search');
 ?>
