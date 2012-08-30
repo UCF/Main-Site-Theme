@@ -146,18 +146,9 @@ function sc_post_type_search($params=array(), $content='') {
 	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
 
 	// Resolve the post type class
-	switch(strtolower($params['post_type_name'])) {
-		case 'post':
-			$post_type_class = Post;
-			break;
-		case 'page':
-			$post_type_class = Page;
-			break;
-		default:
-			$post_type_class = get_custom_post_type($params['post_type_name']);
-			if(is_null($post_type_class)) {
-				return '<p>Invalid post type.</p>';
-			}
+
+	if(is_null($post_type_class = get_post_type_object($params['post_type_name']))) {
+		return '<p>Invalid post type.</p>';
 	}
 
 	$post_type = new $post_type_class;
