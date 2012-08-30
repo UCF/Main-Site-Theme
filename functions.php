@@ -125,7 +125,9 @@ function frontpage_spotlights() {
 					$thumb_src = wp_get_attachment_image_src( $thumb_id, 'home-thumb' );
 					$thumb_src = $thumb_src[0];
 				?>
+				<?php if ($thumb_src) { ?>
 				<div class="spotlight_thumb" style="background-image:url('<?=$thumb_src?>');"><?=$spotlight->post_title?></div>
+				<?php } ?>
 			</a>
 			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
 			<?=truncateHtml($spotlight->post_content, 200)?>
