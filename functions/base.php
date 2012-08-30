@@ -958,10 +958,13 @@ function sc_object_list($attrs, $options = array()){
 	
 	# set defaults and combine with passed arguments
 	$default_attrs = array(
-		'type' => null,
-		'limit' => -1,
-		'join' => 'or',
-		'class' => '',
+		'type'    => null,
+		'limit'   => -1,
+		'join'    => 'or',
+		'class'   => '',
+		'orderby' => 'menu_order title',
+		'order'   => 'ASC',
+		'offset'  => 0
 	);
 	$params = array_merge($default_attrs, $attrs);
 	
@@ -979,6 +982,16 @@ function sc_object_list($attrs, $options = array()){
 		return '<p class="error">Invalid post type.</p>';
 	}
 	
+	$class = new $class;
+	
+	# Use post type specified ordering?
+	if(!isset($attrs['orderby']) && !is_null($class->default_orderby)) {
+		$params['orderby'] = $class->orderby;
+	}
+	if(!isset($attrs['order']) && !is_null($class->default_order)) {
+		$params['order'] = $class->default_order;
+	}
+
 	# get taxonomies and translation
 	$translate = array(
 		'tags' => 'post_tag',
@@ -1009,16 +1022,16 @@ function sc_object_list($attrs, $options = array()){
 	
 	# perform query
 	$query_array = array(
-		'tax_query' => $tax_queries,
-		'post_status' => 'publish',
-		'post_type' => $params['type'],
+		'tax_query'      => $tax_queries,
+		'post_status'    => 'publish',
+		'post_type'      => $params['type'],
 		'posts_per_page' => $params['limit'],
-		'orderby' => 'menu_order title',
-		'order' => 'ASC',
+		'orderby'        => $params['orderby'],
+		'order'          => $params['order'],
+		'offset'         => $params['offset']
 	);
 	
 	$query = new WP_Query($query_array);
-	$class = new $class;
 	
 	global $post;
 	$objects = array();
@@ -1519,13 +1532,13 @@ function save_file($post_id, $field){
 			'post_content'   => '',
 			'post_type'      => 'attachment',
 			'post_parent'    => $post_id,
-			'post_mime_type' => $uploaded_file['type'],
+			'post_mime_type' => $file['type'],
 			'guid'           => $uploaded_file['url'],
 		);
-		$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
+		$id = wp_insert_attachment($attachment, $file['file'], $post_id);
 		wp_update_attachment_metadata(
 			$id,
-			wp_generate_attachment_metadata($id, $uploaded_file['file'])
+			wp_generate_attachment_metadata($id, $file['file'])
 		);
 		update_post_meta($post_id, $field['id'], $id);
 	}
