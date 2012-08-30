@@ -463,3 +463,40 @@ a.home_spotlight_readmore {
 .azindexlink-list li { padding-bottom: 5px; }
 .azindexlink-list li:first-child { padding-top: 3px; }
 .azindexlink-list li:last-child { padding-bottom: 0; }
+
+
+
+
+/**
+ * UCF Main Site Bootstrap overrides
+ **/
+
+/* Font fixes - all */ 
+.accordion-heading, a.btn, button, .carousel-control, .dropdown-menu, .pagination, .pager, .label, .navbar, .nav-tabs { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; }
+
+/* Buttons */
+a.btn, a.btn:hover { color: #333 !important; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important; }
+a.btn.disabled { color: #333 !important; }
+a.btn-primary, a.btn-warning, a.btn-info, a.btn-success, a.btn-danger, a.btn-primary:hover, a.btn-warning:hover, a.btn-info:hover, a.btn-success:hover, a.btn-danger:hover {
+	color: #fff !important;
+}
+a.btn-primary.disabled { color: #fff !important; }
+
+/* Dropdown nav menus */
+.dropdown-menu li a, .dropdown-menu li a:hover { border-bottom: 0 !important; }
+.dropdown-menu li a { color: #333 !important; }
+.dropdown-menu li a:hover { color: #fff !important; }
+
+/* White button components (toggle tabs, accordion btns..) */
+.pagination a, .pagination a:hover, .pager a {
+	border-bottom: 1px solid #ddd !important;
+}
+.navbar .brand, .navbar .brand, .navbar ul.nav>li>a, .nav-tabs a, .accordion-heading a { border-bottom: 0 !important; }
+.pagination a, .pager a, .nav-tabs a, .accordion-heading a {
+	color: #515050 !important;
+}
+.navbar .brand, .navbar ul.nav>li>a { color: #fff !important; }
+
+/* Carousel fixes */
+.carousel-control { color: #fff !important; border-bottom: 3px solid #fff !important; text-decoration: none !important; }
+.carousel-caption p { color: #fff !important; }
