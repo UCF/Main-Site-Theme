@@ -131,7 +131,7 @@ function frontpage_spotlights() {
 			</a>
 			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
 			<?=truncateHtml($spotlight->post_content, 200)?>
-			<p><a class="home_spotlight_readmore" href="" target="_blank">Read More…</a></p>
+			<p><a class="home_spotlight_readmore" href="<?=get_permalink($spotlight->ID)?>" target="_blank">Read More…</a></p>
 		</div>
 		<?
 	}
