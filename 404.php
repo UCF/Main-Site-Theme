@@ -3,9 +3,12 @@
 
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="page-not-found">
-		<div class="span9">
+		<div id="page_title" class="span12">
+			<h1 class="span9">Page Not Found</h1>
+			<?=output_weather_data('span3')?>
+		</div>
+		<div id="contentcol" class="span12">
 			<article>
-				<h1>Page Not Found</h1>
 				<?php 
 					$page = get_page_by_title('404');
 					if($page){
@@ -20,10 +23,6 @@
 				<p>The page you requested doesn't exist.  Sorry about that.</p>
 				<?php endif;?>
 			</article>
-		</div>
-		
-		<div id="sidebar" class="span3">
-			<?=get_sidebar();?>
 		</div>
 	</div>
 <?php get_footer();?>
