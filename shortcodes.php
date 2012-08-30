@@ -254,4 +254,106 @@ function sc_events_widget() {
 }
 add_shortcode('events-widget', 'sc_events_widget');
 
+
+
+
+
+
+/** 
+ * TESTING -- pull recent GF entries from a given form
+ * Query assumes that feedback form has a hidden current date field
+ * in the 6th form position and that the site's multisite ID is 54.
+ * If no formid argument is provided, the function will pick the form
+ * with ID of 1 by default
+ **/
+function get_feedback_entries($atts) {
+	extract( shortcode_atts( array(
+		'formid' => 1,
+		'duration' => '7',
+	), $atts ) );
+	
+	// Define how far back to search for old entries
+	$dur_start_date = date('Y-m-d');
+	$dur_end_date 	= date('Y-m-d', strtotime($dur_start_date.' +'.$duration.' days'));
+	
+	// WPDB stuff
+	global $wpdb;
+	define( 'DIEONDBERROR', true );
+	$wpdb->show_errors();
+	
+	// Get all entry IDs
+	$entry_ids = $wpdb->get_results( 
+		"
+		SELECT 		lead_id
+		FROM 		wp_54_rg_lead_detail
+		WHERE		form_id = ".$formid
+	);
+	
+	// Eliminate any duplicate IDs
+	$unique_ids = array();
+	foreach ($entry_ids as $obj) {
+		foreach ($obj as $key=>$val) {			
+			if (!(in_array($val, $unique_ids))) {
+				$unique_ids[] .= $val;
+			}
+		}
+	}
+	
+	// Begin $output
+	$output = '<h3>Feedback Submissions for '.$dur_start_date.' to '.$dur_end_date.'</h3><br />';
+	
+	// Get field data for the IDs we filtered out
+	foreach ($unique_ids as $id) {
+		$entry = RGFormsModel::get_lead($id);
+		
+		$output .= '<ul>';
+		
+		foreach ($entry as $field=>$val) {
+			// Our form fields names are stored as numbers. The naming schema is as follows:
+			// 1 			- Name
+			// 2 			- E-mail
+			// 3.1 to 3.7 	- 'Tell Us About Yourself' values
+			// 4.1 to 4.7	- 'Routes to' values
+			// 5			- Comment
+			
+			// Trim off seconds from date_created
+			if ($field == 'date_created') {
+				$val = date('Y-m-d', strtotime($val));
+			}
+			
+			switch ($field) {
+				case 1:
+					$output .= '<li><strong>Name:</strong> '.$val.'</li>';
+					break;
+				case 2:
+					$output .= '<li><strong>E-mail:</strong> '.$val.'</li>';
+					$output .= '<li><strong>Tell Us About Yourself:</strong><br/><ul>';
+					break;
+				case 3.1:
+					if ($val) {
+						$output .= '<li>'.$val.'</li>';
+					}
+					break;
+				case 3.7:
+					if ($val) {
+						$output .= '<li>'.$val.'</li>';
+					}
+					$output .= '</ul>';
+					break;
+				default:
+					break;
+			}
+			
+			//$output .= "Field ID: ".$id."; Field Name: ".$field."; Value: ".$val."<br/>";
+		}
+		
+		$output .= '</ul><hr />';
+	}
+	
+	return $output;
+	
+}
+add_shortcode('feedback', 'get_feedback_entries');
+
+
 ?>
