@@ -55,7 +55,7 @@ table.events thead { font-weight: bold; }
 table.events thead td { text-align: center; }
 /* Note: this is NOT a .table-striped table! */
 table.events tbody tr:nth-child(2n+1) td, table.events tbody tr:nth-child(2n+1) th { border-top: 1px solid #F9DD8C; background-color: #FFFDF4 !important; }
-table.events.table th, .table td { border-top: 1px solid #F9DD8C; }
+table.events.table th, table.events.table td { border-top: 1px solid #F9DD8C; }
 table.events .item .date { width: 70px; }
 table.events .item .eventdata .eventname,
 table.events .item .eventdata .location { width: 100%; }
