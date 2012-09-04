@@ -135,6 +135,7 @@ Generic.PostTypeSearch = function($) {
 			var post_type_search = $(post_type_search),
 				header           = post_type_search.find('.post-type-search-header'),
 				form             = header.find('.post-type-search-form'),
+				working          = form.find('.working'),
 				results          = post_type_search.find('.post-type-search-results'),
 				by_term          = post_type_search.find('.post-type-search-term'),
 				by_alpha         = post_type_search.find('.post-type-search-alpha'),
@@ -159,13 +160,10 @@ Generic.PostTypeSearch = function($) {
 			if(typeof post_type_search_data == 'undefined') { // Search data missing
 				return false;
 			}
+
 			search_data_set = post_type_search_data.data;
 			column_count    = post_type_search_data.column_count;
 			column_width    = post_type_search_data.column_width;
-
-			// Get the dimensions for the results
-			column_count = by_term.find('ul').length;
-			column_width = by_term.find('.row > div:eq(0)').attr('class');
 
 			if(column_count == 0 || column_width == '') { // Invalid dimensions
 				return false;
@@ -211,11 +209,16 @@ Generic.PostTypeSearch = function($) {
 					elements_per_column = null,
 					columns             = [],
 					post_id_sum         = 0;
+
+				if(search_term.length < MINIMUM_SEARCH_MATCH_LENGTH) {
+					results.empty();
+					return;
+				}
 				
 				// Find the search matches
 				$.each(search_data_set, function(post_id, search_data) {
 					$.each(search_data, function(search_data_index, term) {
-						if(term.indexOf(search_term) != -1) {
+						if(term.toLowerCase().indexOf(search_term.toLowerCase()) != -1) {
 							matches.push(post_id);
 							return false;
 						}
@@ -223,53 +226,55 @@ Generic.PostTypeSearch = function($) {
 				});
 				if(matches.length == 0) {
 					results.empty();
-					return;
-				}
-
-				// Copy the associated elements
-				$.each(matches, function(match_index, post_id) {
-					var element     = by_term.find('li[data-post-id="' + post_id + '"]'),
-						post_id_int = parseInt(post_id, 10);
-					post_id_sum += post_id_int;
-					if(element.length > 1) {
-						elements.push(element[0].clone());
-					} else if(element.length == 1) {
-						elements.push(element.clone());
-					}
-				});
-				if(elements.length == 0) {
-					results.empty();
-					return;
-				}
-
-				// Are the results the same as last time?
-				if(post_id_sum == prev_post_id_sum) {
-					return;
 				} else {
-					prev_post_id_sum = post_id_sum;
-				}
 
-				// Slice the elements into their respective columns
-				elements_per_column = Math.ceil(elements.length / column_count);
-				for(var i = 0; i < column_count; i++) {
-					var start = i * elements_per_column,
-						end   = start + elements_per_column;
-					if(elements.length > start) {
-						columns[i] = elements.slice(start, end);
+					// Copy the associated elements
+					$.each(matches, function(match_index, post_id) {
+						console.log('li[data-post-id="' + post_id + '"]:eq(0)');
+						var element     = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)'),
+							post_id_int = parseInt(post_id, 10);
+						post_id_sum += post_id_int;
+						if(element.length == 1) {
+							elements.push(element.clone());
+						} else {
+							console.log(element.length);
+						}
+					});
+
+					if(elements.length == 0) {
+						results.empty();
+					} else {
+
+						// Are the results the same as last time?
+						if(post_id_sum != prev_post_id_sum) {
+							results.empty();
+							prev_post_id_sum = post_id_sum;
+							
+
+							// Slice the elements into their respective columns
+							elements_per_column = Math.ceil(elements.length / column_count);
+							for(var i = 0; i < column_count; i++) {
+								var start = i * elements_per_column,
+									end   = start + elements_per_column;
+								if(elements.length > start) {
+									columns[i] = elements.slice(start, end);
+								}
+							}
+
+							// Setup results HTML
+							results.append($('<div class="row"></div>'));
+							$.each(columns, function(column_index, column_elements) {
+								var column_wrap = $('<div class="' + column_width + '"><ul></ul></div>'),
+									column_list = column_wrap.find('ul');
+
+								$.each(column_elements, function(element_index, element) {
+									column_list.append($(element));
+								});
+								results.find('div[class="row"]').append(column_wrap);
+							});
+						}
 					}
 				}
-
-				// Setup results HTML
-				results.append($('<div class="row"></div>'));
-				$.each(columns, function(column_index, column_elements) {
-					var column_wrap = $('<div class="' + column_width + '"><ul></ul></div>'),
-						column_list = column_wrap.find('ul');
-
-					$.each(column_elements, function(element_index, element) {
-						column_list.append($(element));
-					});
-					results.find('div').append(column_wrap);
-				});
 			}
 		});
 }
