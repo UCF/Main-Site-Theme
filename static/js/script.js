@@ -129,6 +129,35 @@ Generic.mobileNavBar = function($) {
 	}
 }
 
+Generic.PostTypeSearch = function($) {
+	$('.post-type-search')
+		.each(function(index, post_type_search) {
+			var post_type_search = $(post_type_search),
+				header           = post_type_search.find('.post-type-search-header'),
+				results          = post_type_search.find('.post-type-search-results'),
+				by_term          = post_type_search.find('.post-type-search-term'),
+				by_alpha         = post_type_search.find('.post-type-search-alpha'),
+				sorting          = post_type_search.find('.post-type-search-sorting'),
+				sorting_by_term  = sorting.find('button:eq(0)'),
+				sorting_by_alpha = sorting.find('button:eq(1)');
+
+			// Sorting toggle
+			sorting_by_term.click(function() {
+				by_alpha.fadeOut('fast', function() {
+					by_term.fadeIn();
+					sorting_by_alpha.removeClass('active');
+					sorting_by_term.addClass('active');
+				});
+			});
+			sorting_by_alpha.click(function() {
+				by_term.fadeOut('fast', function() {
+					by_alpha.fadeIn();
+					sorting_by_term.removeClass('active');
+					sorting_by_alpha.addClass('active');
+				});
+			});
+		});
+}
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -143,5 +172,6 @@ if (typeof jQuery != 'undefined'){
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
+		Generic.PostTypeSearch($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
