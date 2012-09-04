@@ -120,3 +120,5 @@ select#UCFHBHeaderLinks {
 .news .item a:hover{text-decoration: underline; color: #ed1c24;}
 
 .person-picture-wrap { margin-bottom: 20px !important; }
+
+.post-type-search-result-highlight {background-color:yellow;border:1px solid #ddd;}
