@@ -643,4 +643,40 @@ class Person extends CustomPostType
 	return ob_get_clean();
 	}
 } // END class 
+
+class Post extends CustomPostType {
+	public
+		$name           = 'post',
+		$plural_name    = 'Posts',
+		$singular_name  = 'Post',
+		$add_new_item   = 'Add New Post',
+		$edit_item      = 'Edit Post',
+		$new_item       = 'New Post',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies     = array('post_tag', 'category'),
+		$built_in       = True;
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'Hide Lower Section',
+				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
+				'id'   => $prefix.'hide_fold',
+				'type' => 'checkbox',
+			),
+				array(
+					'name' => 'Stylesheet',
+					'desc' => '',
+					'id' => $prefix.'stylesheet',
+					'type' => 'file',
+				),
+		);
+	}
+}
 ?>
