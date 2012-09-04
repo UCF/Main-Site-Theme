@@ -284,10 +284,16 @@ function get_feedback_entries($atts) {
 	// Get all entry IDs
 	$entry_ids = $wpdb->get_results( 
 		"
-		SELECT 		lead_id
-		FROM 		wp_54_rg_lead_detail
-		WHERE		form_id = ".$formid
+		SELECT 		id
+		FROM 		wp_54_rg_lead
+		WHERE		form_id = ".$formid."
+		AND			date_created >= '".$dur_start_date." 00:00:00' 
+		AND			date_created <= '".$dur_end_date." 23:59:59'
+		ORDER BY	id ASC
+		"
 	);
+	
+	$output = var_dump($entry_ids);
 	
 	// Eliminate any duplicate IDs
 	$unique_ids = array();
@@ -300,13 +306,17 @@ function get_feedback_entries($atts) {
 	}
 	
 	// Begin $output
-	$output = '<h3>Feedback Submissions for '.$dur_start_date.' to '.$dur_end_date.'</h3><br />';
+	$output .= '<h3>Feedback Submissions for '.$dur_start_date.' to '.$dur_end_date.'</h3><br />';
 	
 	// Get field data for the IDs we filtered out
 	foreach ($unique_ids as $id) {
 		$entry = RGFormsModel::get_lead($id);
 		
 		$output .= '<ul>';
+		
+		$entry_output 	= array();
+		$about_array 	= array();
+		$routes_array 	= array();
 		
 		foreach ($entry as $field=>$val) {
 			// Our form fields names are stored as numbers. The naming schema is as follows:
@@ -316,36 +326,63 @@ function get_feedback_entries($atts) {
 			// 4.1 to 4.7	- 'Routes to' values
 			// 5			- Comment
 			
+			
+			$entry_output['id'] = $id;
+			
 			// Trim off seconds from date_created
 			if ($field == 'date_created') {
 				$val = date('Y-m-d', strtotime($val));
+				$entry_output['date'] .= $val;
 			}
 			
-			switch ($field) {
-				case 1:
-					$output .= '<li><strong>Name:</strong> '.$val.'</li>';
-					break;
-				case 2:
-					$output .= '<li><strong>E-mail:</strong> '.$val.'</li>';
-					$output .= '<li><strong>Tell Us About Yourself:</strong><br/><ul>';
-					break;
-				case 3.1:
-					if ($val) {
-						$output .= '<li>'.$val.'</li>';
-					}
-					break;
-				case 3.7:
-					if ($val) {
-						$output .= '<li>'.$val.'</li>';
-					}
-					$output .= '</ul>';
-					break;
-				default:
-					break;
+			if ($field == 1) {
+				if ($val) {
+					$entry_output['name'] .= $val;
+				}
 			}
+			if ($field == 2) {
+				if ($val) {
+					$entry_output['email'] .= $val;
+				}
+			}
+			if ($field >=3 && $field < 4) {
+				if ($val) {
+					$about_array[] .= $val;
+				}
+			}
+			if ($field >= 4 && $field < 5) {
+				if ($val) {
+					$routes_array[] .= $val;
+				}
+			}
+			if ($field == 5) {
+				if ($val) {
+					$entry_output['comment'] .= $val;
+				}
+			}
+			//$entry_output['about'] .= $about_array;
+			//$entry_output['routing'] .= $routes_array;
 			
 			//$output .= "Field ID: ".$id."; Field Name: ".$field."; Value: ".$val."<br/>";
 		}
+		
+		$output .= '<li><strong>Entry ID: </strong>'.$entry_output['id'].'</li>';
+		$output .= '<li><strong>Date Submitted: </strong>'.$entry_output['date'].'</li>';
+		$output .= '<li><strong>Name: </strong>'.$entry_output['name'].'</li>';
+		$output .= '<li><strong>E-mail: </strong>'.$entry_output['email'].'</li>';
+		$output .= '<li><strong>Tell Us About Yourself: </strong><br/><ul>';
+		foreach ($about_array as $about) {
+			$output .= '<li>'.$about.'</li>';
+		}
+		$output .= '</ul></li>';
+		
+		$output .= '<li><strong>Route To: </strong><br/><ul>';
+		foreach ($routes_array as $routes) {
+			$output .= '<li>'.$routes.'</li>';
+		}
+		$output .= '</ul></li>';
+		
+		$output .= '<li><strong>Comments: </strong><br/>'.$entry_output['comment'].'</li>';
 		
 		$output .= '</ul><hr />';
 	}
