@@ -941,10 +941,10 @@ class Announcement extends CustomPostType{
 		return array(
 			array(
 				'name'  => 'Announcement Duration',
-				'desc' => 'Amount of time, in days, that the announcement should remain active.',
+				'desc' => 'Amount of time, in days, that the announcement should remain active. Default is 1 day.',
 				'id'   => $prefix.'duration',
 				'type' => 'text',
-				'std'  => '',
+				'std'  => '1',
 			),
 		);
 	}
