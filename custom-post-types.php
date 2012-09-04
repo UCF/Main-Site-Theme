@@ -916,6 +916,40 @@ class AZIndexLink extends CustomPostType {
 }
 
 
+/**
+ * Describes an announcement.
+ *
+ * @author Jo Greybill
+ **/
+class Announcement extends CustomPostType{
+	public 
+		$name           = 'announcement',
+		$plural_name    = 'Announcements',
+		$singular_name  = 'Announcement',
+		$add_new_item   = 'Add New Announcement',
+		$edit_item      = 'Edit Announcement',
+		$new_item       = 'New Announcement',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True;
+	
+	public function fields(){
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name'  => 'Announcement Duration',
+				'desc' => 'Amount of time, in days, that the announcement should remain active.',
+				'id'   => $prefix.'duration',
+				'type' => 'text',
+				'std'  => '',
+			),
+		);
+	}
+}
+
 
 /**
  * Describes a set of centerpiece slides

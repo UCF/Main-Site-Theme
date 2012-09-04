@@ -91,6 +91,7 @@ Config::$custom_post_types = array(
 	'Spotlight',
 	'Subheader',
 	'AZIndexLink',
+	'Announcement',
 );
 
 Config::$custom_taxonomies = array(
