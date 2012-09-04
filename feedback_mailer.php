@@ -24,7 +24,7 @@ function get_feedback_entries($formid=1, $duration=7) {
 	global $wpdb;
 	global $blog_id;
 	define( 'DIEONDBERROR', true );
-	$wpdb->show_errors();
+	//$wpdb->show_errors();
 	
 	// Get all entry IDs
 	$entry_ids = $wpdb->get_results( 
