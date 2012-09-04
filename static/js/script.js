@@ -134,6 +134,7 @@ Generic.PostTypeSearch = function($) {
 		.each(function(index, post_type_search) {
 			var post_type_search = $(post_type_search),
 				header           = post_type_search.find('.post-type-search-header'),
+				form             = header.find('.post-type-search-form'),
 				results          = post_type_search.find('.post-type-search-results'),
 				by_term          = post_type_search.find('.post-type-search-term'),
 				by_alpha         = post_type_search.find('.post-type-search-alpha'),
@@ -141,6 +142,12 @@ Generic.PostTypeSearch = function($) {
 				sorting_by_term  = sorting.find('button:eq(0)'),
 				sorting_by_alpha = sorting.find('button:eq(1)');
 
+			// Get the post data for this search
+			search_data = PostTypeSearchDataManager.search_data_sets[index];
+			if(typeof search_data == 'undefined') { // Search data missing
+				return false;
+			}
+			console.log(search_data);
 			// Sorting toggle
 			sorting_by_term.click(function() {
 				by_alpha.fadeOut('fast', function() {
@@ -156,6 +163,17 @@ Generic.PostTypeSearch = function($) {
 					sorting_by_alpha.addClass('active');
 				});
 			});
+
+			// Search form
+			form
+				.submit(function() {
+					// Don't allow the form to be submitted
+					event.preventDefault();
+				})
+				.find('input[type="text"]')
+					.keyup(function() {
+						var val = $(this).val();
+					});
 		});
 }
 

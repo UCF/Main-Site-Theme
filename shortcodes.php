@@ -155,6 +155,27 @@ function sc_post_type_search($params=array(), $content='') {
 	}
 	$post_type = new $post_type_class;
 
+
+	// Register if the search data with the JS PostTypeSearchDataManager
+	// Format is array(permalink=>terms) where terms include the post title
+	// as well as all associated tag names
+	$search_data = array();
+	foreach(get_posts(array('numberposts' => -1)) as $post) {
+		// Permalink as key
+		$permalink               = get_permalink($post->ID);
+		$search_data[$permalink] = array($post->post_title);
+		foreach(wp_get_object_terms($post->ID, 'post_tag') as $term) {
+			$search_data[$permalink][] = $term->name;
+		}
+	}
+	?>
+	<script type="text/javascript">
+		if(typeof PostTypeSearchDataManager != 'undefined') {
+			PostTypeSearchDataManager.register(<?= json_encode($search_data) ?>);
+		}
+	</script>
+	<?
+
 	// Split up this post type's posts by term
 	$by_term = array();
 	foreach(get_terms($params['taxonomy']) as $term) {
@@ -205,7 +226,7 @@ function sc_post_type_search($params=array(), $content='') {
 				<button class="btn active">Categorical</button>
 				<button class="btn">Alphabetical</button>
 			</div>
-			<form id="search-form" class="form-horizontal" action="." method="get">
+			<form class="form-horizontal post-type-search-form" action="." method="get">
 				<input type="text" class="" />
 			</form>
 		</section>
