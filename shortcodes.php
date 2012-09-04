@@ -157,21 +157,23 @@ function sc_post_type_search($params=array(), $content='') {
 
 
 	// Register if the search data with the JS PostTypeSearchDataManager
-	// Format is array(permalink=>terms) where terms include the post title
+	// Format is array(post->ID=>terms) where terms include the post title
 	// as well as all associated tag names
 	$search_data = array();
 	foreach(get_posts(array('numberposts' => -1)) as $post) {
-		// Permalink as key
-		$permalink               = get_permalink($post->ID);
-		$search_data[$permalink] = array($post->post_title);
+		$search_data[$post->ID] = array($post->post_title);
 		foreach(wp_get_object_terms($post->ID, 'post_tag') as $term) {
-			$search_data[$permalink][] = $term->name;
+			$search_data[$post->ID][] = $term->name;
 		}
 	}
 	?>
 	<script type="text/javascript">
 		if(typeof PostTypeSearchDataManager != 'undefined') {
-			PostTypeSearchDataManager.register(<?= json_encode($search_data) ?>);
+			PostTypeSearchDataManager.register(new PostTypeSearchData(
+				<?=json_encode($column_count)?>,
+				<?=json_encode($column_width)?>,
+				<?=json_encode($search_data)?>
+			));
 		}
 	</script>
 	<?
@@ -230,9 +232,7 @@ function sc_post_type_search($params=array(), $content='') {
 				<input type="text" class="" />
 			</form>
 		</section>
-		<section class="post-type-search-results">
-
-		</section>
+		<section class="post-type-search-results"></section>
 	<?
 
 	foreach($sections as $id => $section) {
@@ -251,7 +251,7 @@ function sc_post_type_search($params=array(), $content='') {
 									<? $end   = $start + $posts_per_column; ?>
 									<? if(count($section_posts) > $start) { ?>
 										<? foreach(array_slice($section_posts, $start, $end) as $post) { ?>
-											<li><?=$post_type->toHTML($post)?></li>
+											<li data-post-id="<?=$post->ID?>"><?=$post_type->toHTML($post)?></li>
 										<? } ?>
 									<? } ?>
 								<? } ?>

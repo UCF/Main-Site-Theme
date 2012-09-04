@@ -36,10 +36,15 @@
 
 		<script type="text/javascript">
 			var PostTypeSearchDataManager = {
-				'search_data_sets' : [],
-				'register'         : function(search_data) {
-					this.search_data_sets.push(search_data);
+				'searches' : [],
+				'register' : function(search) {
+					this.searches.push(search);
 				}
+			}
+			var PostTypeSearchData = function(column_count, column_width, data) {
+				this.column_count = column_count;
+				this.column_width = column_width;
+				this.data         = data;
 			}
 		</script>
 		

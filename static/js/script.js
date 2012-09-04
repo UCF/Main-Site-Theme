@@ -131,7 +131,7 @@ Generic.mobileNavBar = function($) {
 
 Generic.PostTypeSearch = function($) {
 	$('.post-type-search')
-		.each(function(index, post_type_search) {
+		.each(function(post_type_search_index, post_type_search) {
 			var post_type_search = $(post_type_search),
 				header           = post_type_search.find('.post-type-search-header'),
 				form             = header.find('.post-type-search-form'),
@@ -140,14 +140,37 @@ Generic.PostTypeSearch = function($) {
 				by_alpha         = post_type_search.find('.post-type-search-alpha'),
 				sorting          = post_type_search.find('.post-type-search-sorting'),
 				sorting_by_term  = sorting.find('button:eq(0)'),
-				sorting_by_alpha = sorting.find('button:eq(1)');
+				sorting_by_alpha = sorting.find('button:eq(1)'),
+
+				post_type_search_data  = null,
+				search_data_set        = null,
+				column_count           = null,
+				column_width           = null,
+
+				typing_timer = null,
+				typing_delay = 300, // milliseconds
+
+				prev_post_id_sum = null, // Sum of result post IDs. Used to cache results 
+
+				MINIMUM_SEARCH_MATCH_LENGTH = 2;
 
 			// Get the post data for this search
-			search_data = PostTypeSearchDataManager.search_data_sets[index];
-			if(typeof search_data == 'undefined') { // Search data missing
+			post_type_search_data = PostTypeSearchDataManager.searches[post_type_search_index];
+			if(typeof post_type_search_data == 'undefined') { // Search data missing
 				return false;
 			}
-			console.log(search_data);
+			search_data_set = post_type_search_data.data;
+			column_count    = post_type_search_data.column_count;
+			column_width    = post_type_search_data.column_width;
+
+			// Get the dimensions for the results
+			column_count = by_term.find('ul').length;
+			column_width = by_term.find('.row > div:eq(0)').attr('class');
+
+			if(column_count == 0 || column_width == '') { // Invalid dimensions
+				return false;
+			}
+
 			// Sorting toggle
 			sorting_by_term.click(function() {
 				by_alpha.fadeOut('fast', function() {
@@ -173,7 +196,81 @@ Generic.PostTypeSearch = function($) {
 				.find('input[type="text"]')
 					.keyup(function() {
 						var val = $(this).val();
+						// Use a timer to determine when the user is done typing
+						if(typing_timer != null)  clearTimeout(typing_timer);
+						typing_timer = setTimeout(function() {perform_search(val);}, typing_delay);
 					});
+
+			function display_search_message(message) {
+
+			}
+
+			function perform_search(search_term) {
+				var matches             = [],
+					elements            = [],
+					elements_per_column = null,
+					columns             = [],
+					post_id_sum         = 0;
+				
+				// Find the search matches
+				$.each(search_data_set, function(post_id, search_data) {
+					$.each(search_data, function(search_data_index, term) {
+						if(term.indexOf(search_term) != -1) {
+							matches.push(post_id);
+							return false;
+						}
+					});
+				});
+				if(matches.length == 0) {
+					results.empty();
+					return;
+				}
+
+				// Copy the associated elements
+				$.each(matches, function(match_index, post_id) {
+					var element     = by_term.find('li[data-post-id="' + post_id + '"]'),
+						post_id_int = parseInt(post_id, 10);
+					post_id_sum += post_id_int;
+					if(element.length > 1) {
+						elements.push(element[0].clone());
+					} else if(element.length == 1) {
+						elements.push(element.clone());
+					}
+				});
+				if(elements.length == 0) {
+					results.empty();
+					return;
+				}
+
+				// Are the results the same as last time?
+				if(post_id_sum == prev_post_id_sum) {
+					return;
+				} else {
+					prev_post_id_sum = post_id_sum;
+				}
+
+				// Slice the elements into their respective columns
+				elements_per_column = Math.ceil(elements.length / column_count);
+				for(var i = 0; i < column_count; i++) {
+					var start = i * elements_per_column,
+						end   = start + elements_per_column;
+					if(elements.length > start) {
+						columns[i] = elements.slice(start, end);
+					}
+				}
+
+				// Setup results HTML
+				results.append($('<div class="row"></div>'));
+				$.each(columns, function(column_index, column_elements) {
+					var column_wrap = $('<div class="' + column_width + '"><ul></ul></div>'),
+						column_list = column_wrap.find('ul');
+
+					$.each(column_elements, function(element_index, element) {
+						column_list.append($(element));
+					});
+					results.find('div').append(column_wrap);
+				});
+			}
 		});
 }
 
