@@ -42,8 +42,8 @@ if ( isset($_GET['output']) ) {
 		case 'json':
 			print json_encode($announcements);
 			break;
-		case 'rss':
-			print "this is an rss feed";
+		case 'rss':		
+			announcements_to_rss($announcements);
 			break;
 		default:
 			break;

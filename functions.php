@@ -431,4 +431,57 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 }
 
 
+/**
+ * Takes an announcements array and outputs an RSS feed.
+ **/
+function announcements_to_rss($announcements) {
+	if (!($announcements)) { die('Error: no announcements feed provided.'); }
+	
+	header('Content-Type: application/rss+xml; charset=ISO-8859-1');
+	print '<?xml version="1.0" encoding="ISO-8859-1"?>';
+	print '<rss version="2.0">';
+	print '<channel>';
+	print '<title>University of Central Florida Announcements</title>';
+	print '<link>http://www.ucf.edu/</link>';
+	print '<language>en-us</language>';
+	print '<copyright>ucf.edu</copyright>';
+			
+	if ($announcements !== NULL) {
+		foreach ($announcements as $announcement) {
+			print '<item>';
+				print '<title>'.$announcement['post_title'].'</title>';
+				print '<description>'.$announcement['post_content'].'</description>';
+				print '<link>'.$announcement['post_permalink'].'</link>';
+						
+				print '<post_status>'.$announcement['post_status'].'</post_status>';
+				print '<post_modified>'.$announcement['post_modified'].'</post_modified>';
+				print '<post_published>'.$announcement['post_published'].'</post_published>';
+				print '<post_title>'.$announcement['post_title'].'</post_title>';
+				print '<post_name>'.$announcement['post_name'].'</post_name>';
+				print '<post_content>'.$announcement['post_content'].'</post_content>';
+				print '<start_date>'.$announcement['start_date'].'</start_date>';
+				print '<end_date>'.$announcement['end_date'].'</end_date>';
+				print '<url>'.$announcement['url'].'</url>';
+				print '<contact_person>'.$announcement['contact_person'].'</contact_person>';
+				print '<phone>'.$announcement['phone'].'</phone>';
+				print '<email>'.$announcement['email'].'</email>';
+				print '<posted_by>'.$announcement['posted_by'].'</posted_by>';
+				print '<roles>';
+					foreach ($announcement['roles'] as $role) {
+						print '<role>'.$role.'</role>';
+					}
+				print '</roles>';
+				print '<keywords>';
+					foreach ($announcement['keywords'] as $keyword) {
+						print '<keyword>'.$keyword.'</keyword>';
+					}
+				print '</keywords>';
+
+			print '</item>';
+		}
+	}
+	print '</channel></rss>';
+}
+
+
 ?>
