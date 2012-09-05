@@ -133,8 +133,7 @@ Generic.PostTypeSearch = function($) {
 	$('.post-type-search')
 		.each(function(post_type_search_index, post_type_search) {
 			var post_type_search = $(post_type_search),
-				header           = post_type_search.find('.post-type-search-header'),
-				form             = header.find('.post-type-search-form'),
+				form             = post_type_search.find('.post-type-search-form'),
 				working          = form.find('.working'),
 				results          = post_type_search.find('.post-type-search-results'),
 				by_term          = post_type_search.find('.post-type-search-term'),
@@ -187,7 +186,7 @@ Generic.PostTypeSearch = function($) {
 
 			// Search form
 			form
-				.submit(function() {
+				.submit(function(event) {
 					// Don't allow the form to be submitted
 					event.preventDefault();
 				})
@@ -214,7 +213,6 @@ Generic.PostTypeSearch = function($) {
 					results.empty();
 					return;
 				}
-				
 				// Find the search matches
 				$.each(search_data_set, function(post_id, search_data) {
 					$.each(search_data, function(search_data_index, term) {
@@ -230,14 +228,12 @@ Generic.PostTypeSearch = function($) {
 
 					// Copy the associated elements
 					$.each(matches, function(match_index, post_id) {
-						console.log('li[data-post-id="' + post_id + '"]:eq(0)');
+
 						var element     = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)'),
 							post_id_int = parseInt(post_id, 10);
 						post_id_sum += post_id_int;
 						if(element.length == 1) {
 							elements.push(element.clone());
-						} else {
-							console.log(element.length);
 						}
 					});
 

@@ -236,7 +236,7 @@ function sc_post_type_search($params=array(), $content='') {
 
 	?>
 	<div class="post-type-search">
-		<section class="post-type-search-header">
+		<div class="post-type-search-header">
 			<h2>Find a <?=$post_type->singular_name?></h2>
 			<div class="btn-group pull-right post-type-search-sorting">
 				<button class="btn active">Categorical</button>
@@ -245,8 +245,8 @@ function sc_post_type_search($params=array(), $content='') {
 			<form class="form-horizontal post-type-search-form" action="." method="get">
 				<input type="text" />
 			</form>
-		</section>
-		<section class="post-type-search-results"></section>
+		</div>
+		<div class="post-type-search-results"></div>
 	<?
 
 	foreach($sections as $id => $section) {
@@ -254,7 +254,7 @@ function sc_post_type_search($params=array(), $content='') {
 		<div class="<?=$id?>"<? if($id == 'post-type-search-alpha') echo ' style="display:none;"'; ?>>
 			<? foreach($section as $section_title => $section_posts) { ?>
 				<? if(count($section_posts) > 0 || $params['show_empty_sections']) { ?>
-					<section>
+					<div>
 						<h3><?=esc_html($section_title)?></h3>
 						<div class="row">
 							<div class="<?=$params['column_width']?>">
@@ -274,7 +274,7 @@ function sc_post_type_search($params=array(), $content='') {
 								<? } ?>
 							</div>
 						</div>
-					</section>
+					</div>
 				<? } ?>
 			<? } ?>
 		</div>
