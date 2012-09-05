@@ -406,6 +406,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		
 		foreach ($announcements as $announcement) {
 			$output[$announcement->ID] = array(
+				'post_id'			=> $announcement->ID,
 				'post_status' 		=> $announcement->post_status,
 				'post_modified' 	=> $announcement->post_modified,
 				'post_published' 	=> $announcement->post_date,
@@ -448,7 +449,7 @@ function announcements_to_rss($announcements) {
 			
 	if ($announcements !== NULL) {
 		foreach ($announcements as $announcement) {
-			print '<item>';
+			print '<item id="'.$announcement['id'].'">';
 				print '<title>'.$announcement['post_title'].'</title>';
 				print '<description>'.$announcement['post_content'].'</description>';
 				print '<link>'.$announcement['post_permalink'].'</link>';
