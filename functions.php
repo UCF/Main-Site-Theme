@@ -276,15 +276,6 @@ add_action( 'admin_menu', 'hide_admin_links' );
  **/
 function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	if ($role !== 'all') {
-		// Create a new filtering function that will add our where clause to the query
-		function filter_where( $where = '' ) {
-			$thismonday = date('Y-m-d', strtotime('monday this week'));
-			// posts with a start date ranging from this Monday to this Sunday
-			$where .= " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
-			return $where;
-		}
-		add_filter( 'posts_where', 'filter_where' );
-		
 		$args = array(
 			'numberposts' => -1,
 			'post_type' => 'announcement',
@@ -298,10 +289,9 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'terms' => $role,
 				)
 			),
-			
 		);
-	}
-	elseif ($keyword !== NULL) {
+		
+		// Create a new filtering function that will add our where clause to the query
 		function filter_where( $where = '' ) {
 			$thismonday = date('Y-m-d', strtotime('monday this week'));
 			// posts with a start date ranging from this Monday to this Sunday
@@ -309,7 +299,8 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			return $where;
 		}
 		add_filter( 'posts_where', 'filter_where' );
-		
+	}
+	elseif ($keyword !== NULL) {
 		$args = array(
 			'numberposts' => -1,
 			'post_type' => 'announcement',
@@ -324,9 +315,25 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				)
 			),
 		);
+		
+		function filter_where( $where = '' ) {
+			$thismonday = date('Y-m-d', strtotime('monday this week'));
+			// posts with a start date ranging from this Monday to this Sunday
+			$where .= " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
+			return $where;
+		}
+		add_filter( 'posts_where', 'filter_where' );
 	}
 	elseif ($time !== 'thisweek') {
+		$args = array(
+			'numberposts' => -1,
+			'post_type' => 'announcement',
+			'orderby' => 'modified',
+			'order' => 'DESC',
+			'meta_key' => 'announcement_start_date',
+		);
 		
+		// Assign $timequery for use in filter_where based on $time value
 		switch ($time) {
 			case 'nextweek':
 				$nextmonday = date('Y-m-d', strtotime('monday next week'));
@@ -360,7 +367,8 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			return $where;
 		}
 		add_filter( 'posts_where', 'filter_where' );
-		
+	}
+	else { // default retrieval args
 		$args = array(
 			'numberposts' => -1,
 			'post_type' => 'announcement',
@@ -368,30 +376,53 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			'order' => 'DESC',
 			'meta_key' => 'announcement_start_date',
 		);
-	}
-	else { // default retrieval args
+	
 		function filter_where( $where = '' ) {
+			global $wpdb;
+			
 			$thismonday = date('Y-m-d', strtotime('monday this week'));
+			
 			// posts with a start date ranging from this Monday to this Sunday
-			$where .= " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
+			$where .= " AND $wpdb->postmeta.meta_key = 'announcement_start_date' AND $wpdb->postmeta.meta_value >= '".$thismonday."' AND $wpdb->postmeta.meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
 			return $where;
 		}
 		add_filter( 'posts_where', 'filter_where' );
-		
-		$args = array(
-			'numberposts' => -1,
-			'post_type' => 'announcement',
-			'orderby' => 'modified',
-			'order' => 'DESC',
-			'meta_key' => 'announcement_start_date',
-		);
 	}
 	
 	// Fetch all announcements based on args given above:
 	$announcements = get_posts($args);
 	remove_filter( 'posts_where', 'filter_where' );
 	
-	return $announcements;
+	if (!($announcements)) {
+		return 'No announcements found.';
+	}
+	else {
+		// Set up an array that will contain the necessary output values
+		// (basically a combination of post data and metadata):
+		$output = array();
+		
+		foreach ($announcements as $announcement) {
+			$output[$announcement->ID] = array(
+				'post_status' 		=> $announcement->post_status,
+				'post_modified' 	=> $announcement->post_modified,
+				'post_published' 	=> $announcement->post_date,
+				'post_title' 		=> $announcement->post_title,
+				'post_name' 		=> $announcement->post_name,
+				'post_content' 		=> $announcement->post_content,
+				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
+				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
+				'url' 				=> get_post_meta($announcement->ID, 'announcement_url', TRUE),
+				'contact_person'	=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
+				'phone'				=> get_post_meta($announcement->ID, 'announcement_phone', TRUE),
+				'email'				=> get_post_meta($announcement->ID, 'announcement_email', TRUE),
+				'posted_by'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
+				'roles' 			=> wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")),
+				'keywords'			=> wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")),
+			);
+		}
+		
+		return $output;
+	}
 	
 }
 
