@@ -1,8 +1,3 @@
-<?php
-/**
- * Template Name: One Column
- **/
-?>
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="<?=$post->post_name?>">
 		<div class="span12" id="page_title">
@@ -71,7 +66,9 @@
 				
 				<?php
 					// default params: role='all', keyword=null, time='thisweek' 
+					
 					$announcements = get_announcements();
+					
 					foreach ($announcements as $announcement) {
 						print "<strong>Modified Date:</strong> ".$announcement->post_modified."<br/>";
 						print "<strong>Title:</strong> ".$announcement->post_title."<br/>";
