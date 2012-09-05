@@ -199,7 +199,9 @@ Generic.PostTypeSearch = function($) {
 					});
 
 			function display_search_message(message) {
-
+				results.empty();
+				results.append($('<p class="post-type-search-message"><big>' + message + '</big></p>'));
+				results.show();
 			}
 
 			function perform_search(search_term) {
@@ -211,6 +213,7 @@ Generic.PostTypeSearch = function($) {
 
 				if(search_term.length < MINIMUM_SEARCH_MATCH_LENGTH) {
 					results.empty();
+					results.hide();
 					return;
 				}
 				// Find the search matches
@@ -223,7 +226,7 @@ Generic.PostTypeSearch = function($) {
 					});
 				});
 				if(matches.length == 0) {
-					results.empty();
+					display_search_message('No results were found.');
 				} else {
 
 					// Copy the associated elements
@@ -238,7 +241,7 @@ Generic.PostTypeSearch = function($) {
 					});
 
 					if(elements.length == 0) {
-						results.empty();
+						display_search_message('No results were found.');
 					} else {
 
 						// Are the results the same as last time?
@@ -268,6 +271,7 @@ Generic.PostTypeSearch = function($) {
 								});
 								results.find('div[class="row"]').append(column_wrap);
 							});
+							results.show();
 						}
 					}
 				}

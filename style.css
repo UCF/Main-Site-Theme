@@ -122,3 +122,6 @@ select#UCFHBHeaderLinks {
 .person-picture-wrap { margin-bottom: 20px !important; }
 
 .post-type-search-result-highlight {background-color:yellow;border:1px solid #ddd;}
+.post-type-search-message {padding:0 10px 10px 10px;}
+.post-type-search-results {font-size:115%;background-color:#f1f1f1;padding-top:10px;display:none;}
+.post-type-search-results li {line-height:150%;}
