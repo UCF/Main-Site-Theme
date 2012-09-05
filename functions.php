@@ -411,6 +411,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				'post_published' 	=> $announcement->post_date,
 				'post_title' 		=> $announcement->post_title,
 				'post_name' 		=> $announcement->post_name,
+				'post_permalink'	=> get_permalink($announcement->ID),
 				'post_content' 		=> $announcement->post_content,
 				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
 				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
