@@ -370,11 +370,20 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		);
 	}
 	else { // default retrieval args
+		function filter_where( $where = '' ) {
+			$thismonday = date('Y-m-d', strtotime('monday this week'));
+			// posts with a start date ranging from this Monday to this Sunday
+			$where .= " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
+			return $where;
+		}
+		add_filter( 'posts_where', 'filter_where' );
+		
 		$args = array(
 			'numberposts' => -1,
 			'post_type' => 'announcement',
 			'orderby' => 'modified',
 			'order' => 'DESC',
+			'meta_key' => 'announcement_start_date',
 		);
 	}
 	
@@ -382,24 +391,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	$announcements = get_posts($args);
 	remove_filter( 'posts_where', 'filter_where' );
 	
-	var_dump($announcements);
-	
-	if ($role !== 'all') {
-		// If an audience role is defined, get the announcement roles
-		// for all announcements and narrow down the results to those
-		// that match the given role
-		
-	}
-	elseif ($keyword !== NULL) {
-		// If a keyword is provided, narrow down the announcements to
-		// those that include the given keyword
-	}
-	elseif ($time !== 'thisweek') {
-		// If a timeframe is given besides the default, retrieve the
-		// start date and end date values for all announcements and
-		// compare them to the given duration (based on the current 
-		// date/time)
-	}
+	return $announcements;
 	
 }
 
