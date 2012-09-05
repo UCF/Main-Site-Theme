@@ -27,12 +27,15 @@
 						<label for="f_role">Select an Audience</label>
 						<select name="f_role" class="span3">
 							<option selected="" value="all">All Roles</option>
-							<option value="alumni">Alumni</option>
-							<option value="faculty">Faculty</option>
-							<option value="prospective">Prospective Students</option>
-							<option value="gpublic">Public</option>
-							<option value="staff">Staff</option>
-							<option value="student">Students</option>
+							<?php
+								$args = array(
+									'hide_empty' => 0
+								);
+								$roles = get_terms('audienceroles', $args);
+								foreach ($roles as $role) {
+									print '<option value="'.$role->slug.'">'.$role->name.'</option>';
+								}
+							?>
 						</select>
 					</div>
 					<div class="span3">	
