@@ -275,6 +275,7 @@ add_action( 'admin_menu', 'hide_admin_links' );
  * (starting from Monday).
  **/
 function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
+	// Set up query args based on GET params:
 	if ($role !== 'all') {
 		$args = array(
 			'numberposts' => -1,
@@ -389,12 +390,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		add_filter( 'posts_where', 'filter_where' );
 	}
 	
+	
 	// Fetch all announcements based on args given above:
 	$announcements = get_posts($args);
 	remove_filter( 'posts_where', 'filter_where' );
 	
+	
 	if (!($announcements)) {
-		return 'No announcements found.';
+		return NULL;
 	}
 	else {
 		// Set up an array that will contain the necessary output values

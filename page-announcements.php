@@ -1,8 +1,42 @@
 <?php
 
-// default params: role='all', keyword=null, time='thisweek' 
-$announcements = get_announcements();
+// Set up get_announcements() args:
+// default args: role='all', keyword=null, time='thisweek'
 
+$error = '';
+ 
+if (isset($_GET['role'])) {
+	if (preg_match('/^[a-z][\-]*/', $_GET['role'])) { // should only be lowercase letters and dashes
+		$announcements = get_announcements($_GET['role']);
+	}
+	else {
+		$announcements = get_announcements();
+		$error = '<strong>Error:</strong> Invalid Role parameter given.';
+	}
+}
+elseif (isset($_GET['keyword'])) {
+	if (preg_match('/^[a-zA-Z0-9]/', $_GET['keyword'])) { // should only be letters & numbers
+		$announcements = get_announcements('all', $_GET['keyword']);
+	}
+	else {
+		$announcements = get_announcements();
+		$error = '<strong>Error:</strong> Keywords can only contain letters and numbers.';
+	}
+}
+elseif (isset($_GET['time'])) { 
+	if (preg_match('/^[a-z]/', $_GET['time'])) { // should only be lowercase letters
+		$announcements = get_announcements('all', NULL, $_GET['time']);
+	}
+	else {
+		$announcements = get_announcements();
+		$error = '<strong>Error:</strong> Invalid Time parameter given.';
+	}
+}
+else {
+	$announcements = get_announcements();
+}
+
+// Set up feed output:
 if ( isset($_GET['output']) ) {
 	switch ($_GET['output']) {
 		case 'json':
@@ -82,6 +116,10 @@ else {
 				</div>
 				
 				<?php the_content();?>
+				
+				<?php if ($error !== '') { print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
+				
+				<?php if ($announcements == NULL) { print "No announcements found."; } else { var_dump($announcements); } ?>
 				
 				
 			</article>
