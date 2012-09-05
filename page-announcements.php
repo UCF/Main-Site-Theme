@@ -71,7 +71,24 @@
 				
 				<?php
 					// default params: role='all', keyword=null, time='thisweek' 
-					get_announcements(); 
+					$announcements = get_announcements();
+					foreach ($announcements as $announcement) {
+						print "<strong>Modified Date:</strong> ".$announcement->post_modified."<br/>";
+						print "<strong>Title:</strong> ".$announcement->post_title."<br/>";
+						print "<strong>Start Date:</strong> ".get_post_meta($announcement->ID, 'announcement_start_date', TRUE)."<br/>";
+						print "<strong>End Date:</strong> ".get_post_meta($announcement->ID, 'announcement_end_date', TRUE)."<br/>";
+						print "<strong>Roles (Audience):</strong> ";
+						foreach ( wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")) as $term ) {
+							print $term.", ";
+						}
+						print "<br/>";
+						print "<strong>Keywords:</strong> ";
+						foreach ( wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")) as $term ) {
+							print $term.", ";
+						}
+						print "<br/>";
+						print "<hr />";
+					}
 				?>
 				
 				
