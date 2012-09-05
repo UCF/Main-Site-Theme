@@ -12,7 +12,12 @@
 		
 		<div class="span12" id="contentcol">
 			<article>
-				<h2 class="header_announcements">Announcements for this week | <a href="http://events.ucf.edu/">Go to Events &raquo;</a></h2>
+				<div class="row">
+					<h2 class="span9 header_announcements">Announcements for this week | <a href="http://events.ucf.edu/">Go to Events &raquo;</a></h2>
+					<div class="span3">
+						<p><a class="rssbtn" href="?feed=rss">RSS</a></p>
+					</div>
+				</div>
 				<div class="row" id="filters">
 					<div class="span4" id="filter_wrap">
 						<label for="filter">Filter Results by...</label>
@@ -63,7 +68,13 @@
 				</div>
 				
 				<?php the_content();?>
-				<p>Announcements will go here...</p>
+				
+				<?php
+					// default params: role='all', keyword=null, time='thisweek' 
+					get_announcements(); 
+				?>
+				
+				
 			</article>
 		</div>
 	</div>
