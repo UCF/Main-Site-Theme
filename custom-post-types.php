@@ -941,6 +941,18 @@ class Announcement extends CustomPostType{
 		$prefix = $this->options('name').'_';
 		return array(
 			array(
+				'name'  => 'Start Date',
+				'desc' => 'Date that the announcement should become active. Default is the post publish date.',
+				'id'   => $prefix.'start_date',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'End Date',
+				'desc' => 'Date that the announcement should become inactive. Default is 1 day from the given start date.',
+				'id'   => $prefix.'end_date',
+				'type' => 'text',
+			),
+			array(
 				'name'  => 'URL',
 				'desc' => 'Link to a relevant website pertaining to the announcement or the posting organization.',
 				'id'   => $prefix.'url',
@@ -966,13 +978,6 @@ class Announcement extends CustomPostType{
 				'desc' => 'Name of the person/organization posting the announcement.',
 				'id'   => $prefix.'posted_by',
 				'type' => 'text',
-			),
-			array(
-				'name'  => 'Duration',
-				'desc' => 'Length of time, in days, the announcement stays active. Default is one day (1).',
-				'id'   => $prefix.'duration',
-				'type' => 'text',
-				'std' => '1',
 			),
 		);
 	}
