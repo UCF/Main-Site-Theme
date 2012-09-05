@@ -940,11 +940,31 @@ class Announcement extends CustomPostType{
 		$prefix = $this->options('name').'_';
 		return array(
 			array(
-				'name'  => 'Announcement Duration',
-				'desc' => 'Amount of time, in days, that the announcement should remain active. Default is 1 day.',
-				'id'   => $prefix.'duration',
+				'name'  => 'URL',
+				'desc' => 'Link to a relevant website pertaining to the announcement or the posting organization.',
+				'id'   => $prefix.'url',
 				'type' => 'text',
-				'std'  => '1',
+			),
+			array(
+				'name'  => 'Contact Person',
+				'id'   => $prefix.'contact',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Phone',
+				'id'   => $prefix.'phone',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'E-mail',
+				'id'   => $prefix.'email',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Posted By',
+				'desc' => 'Name of the person/organization posting the announcement.',
+				'id'   => $prefix.'posted_by',
+				'type' => 'text',
 			),
 		);
 	}
