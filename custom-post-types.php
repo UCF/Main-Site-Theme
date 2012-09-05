@@ -934,7 +934,8 @@ class Announcement extends CustomPostType{
 		$use_thumbnails = False,
 		$use_order      = True,
 		$use_title      = True,
-		$use_metabox    = True;
+		$use_metabox    = True,
+		$taxonomies		= array('audienceroles', 'keywords');
 	
 	public function fields(){
 		$prefix = $this->options('name').'_';
@@ -965,6 +966,13 @@ class Announcement extends CustomPostType{
 				'desc' => 'Name of the person/organization posting the announcement.',
 				'id'   => $prefix.'posted_by',
 				'type' => 'text',
+			),
+			array(
+				'name'  => 'Duration',
+				'desc' => 'Length of time, in days, the announcement stays active. Default is one day (1).',
+				'id'   => $prefix.'duration',
+				'type' => 'text',
+				'std' => '1',
 			),
 		);
 	}

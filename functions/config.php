@@ -95,7 +95,9 @@ Config::$custom_post_types = array(
 );
 
 Config::$custom_taxonomies = array(
-	'OrganizationalGroups'
+	'OrganizationalGroups',
+	'Keywords',
+	'AudienceRoles'
 );
 
 Config::$body_classes = array('default',);

@@ -110,4 +110,54 @@ class OrganizationalGroups extends CustomTaxonomy
 		$hierarchical = True;
 } // END class 
 
+
+/**
+ * Describes keywords for announcements
+ *
+ * @author Jo Greybill
+ **/
+class Keywords extends CustomTaxonomy
+{
+	public
+		$name               = 'keywords',
+		$general_name       = 'Keywords',
+		$singular_name      = 'Keyword',
+		$search_items       = 'Search Keywords',
+		$popular_items      = 'Popular Keywords',
+		$all_times          = 'All Keywords',
+		$parent_item        = 'Parent Keyword',
+		$parent_item_colon  = 'Parent Keyword:',
+		$edit_item          = 'Edit Keyword',
+		$update_item        = 'Update Keyword',
+		$add_new_item       = 'Add New Keyword',
+		$new_item_name      = 'New Keyword',
+		
+		$hierarchical = False;
+} // END class 
+
+
+/**
+ * Describes keywords for announcements
+ *
+ * @author Jo Greybill
+ **/
+class AudienceRoles extends CustomTaxonomy
+{
+	public
+		$name               = 'audienceroles',
+		$general_name       = 'Audience Roles',
+		$singular_name      = 'Audience Role',
+		$search_items       = 'Search Audience Roles',
+		$popular_items      = 'Popular Audience Roles',
+		$all_times          = 'All Audience Roles',
+		$parent_item        = 'Parent Audience Role',
+		$parent_item_colon  = 'Parent Audience Role:',
+		$edit_item          = 'Edit Audience Role',
+		$update_item        = 'Update Audience Role',
+		$add_new_item       = 'Add New Audience Role',
+		$new_item_name      = 'New Audience Role',
+		
+		$hierarchical = True;
+} // END class 
+
 ?>
