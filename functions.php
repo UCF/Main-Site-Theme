@@ -267,7 +267,141 @@ function hide_admin_links() {
 add_action( 'admin_menu', 'hide_admin_links' );
 
 
-
+/**
+ * Get and display announcements.
+ * Note that, like the old Announcements advanced search, only one
+ * search parameter (role, keyword, or time) can be set at a time.
+ * Default (no args) returns all roles within the past week 
+ * (starting from Monday).
+ **/
+function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
+	if ($role !== 'all') {
+		// Create a new filtering function that will add our where clause to the query
+		function filter_where( $where = '' ) {
+			$thismonday = date('Y-m-d', strtotime('monday this week'));
+			// posts with a start date ranging from this Monday to this Sunday
+			$where .= " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
+			return $where;
+		}
+		add_filter( 'posts_where', 'filter_where' );
+		
+		$args = array(
+			'numberposts' => -1,
+			'post_type' => 'announcement',
+			'orderby' => 'modified',
+			'order' => 'DESC',
+			'meta_key' => 'announcement_start_date',
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'audienceroles',
+					'field' => 'slug',
+					'terms' => $role,
+				)
+			),
+			
+		);
+	}
+	elseif ($keyword !== NULL) {
+		function filter_where( $where = '' ) {
+			$thismonday = date('Y-m-d', strtotime('monday this week'));
+			// posts with a start date ranging from this Monday to this Sunday
+			$where .= " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
+			return $where;
+		}
+		add_filter( 'posts_where', 'filter_where' );
+		
+		$args = array(
+			'numberposts' => -1,
+			'post_type' => 'announcement',
+			'orderby' => 'modified',
+			'order' => 'DESC',
+			'meta_key' => 'announcement_start_date',
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'keywords',
+					'field' => 'slug',
+					'terms' => $keyword,
+				)
+			),
+		);
+	}
+	elseif ($time !== 'thisweek') {
+		
+		switch ($time) {
+			case 'nextweek':
+				$nextmonday = date('Y-m-d', strtotime('monday next week'));
+				// posts with a start date ranging from next Monday to next Sunday
+				$timequery = " AND meta_value >= '".$nextmonday."' AND meta_value <= '".date('Y-m-d', strtotime($nextmonday.' +6 days'))."'";
+				break;
+			case 'thismonth':
+				$firstday = date('Y-m-d', strtotime('first day of this month'));
+				$lastday = date('Y-m-d', strtotime('last day of this month'));
+				// posts with a start date within the first and last day of the current month
+				$timequery = " AND meta_value >= '".$firstday."' AND meta_value <= '".$lastday."'";
+				break;
+			case 'nextmonth':
+				$firstday = date('Y-m-d', strtotime('first day of next month'));
+				$lastday = date('Y-m-d', strtotime('last day of next month'));
+				// posts with a start date within the first and last day of next month
+				$timequery = " AND meta_value >= '".$firstday."' AND meta_value <= '".$lastday."'";
+				break;
+			case 'thissemester': // TODO: figure out how to handle this
+				break;
+			default: // fallback
+				$thismonday = date('Y-m-d', strtotime('monday this week'));
+				// posts with a start date ranging from this Monday to this Sunday
+				$timequery = " AND meta_value >= '".$thismonday."' AND meta_value <= '".date('Y-m-d', strtotime($thismonday.' +6 days'))."'";
+				break;
+		}
+		
+		function filter_where( $where = '' ) {
+			// posts in the last 7 days
+			$where .= $timequery;
+			return $where;
+		}
+		add_filter( 'posts_where', 'filter_where' );
+		
+		$args = array(
+			'numberposts' => -1,
+			'post_type' => 'announcement',
+			'orderby' => 'modified',
+			'order' => 'DESC',
+			'meta_key' => 'announcement_start_date',
+		);
+	}
+	else { // default retrieval args
+		$args = array(
+			'numberposts' => -1,
+			'post_type' => 'announcement',
+			'orderby' => 'modified',
+			'order' => 'DESC',
+		);
+	}
+	
+	// Fetch all announcements based on args given above:
+	$announcements = get_posts($args);
+	remove_filter( 'posts_where', 'filter_where' );
+	
+	var_dump($announcements);
+	
+	if ($role !== 'all') {
+		// If an audience role is defined, get the announcement roles
+		// for all announcements and narrow down the results to those
+		// that match the given role
+		
+	}
+	elseif ($keyword !== NULL) {
+		// If a keyword is provided, narrow down the announcements to
+		// those that include the given keyword
+	}
+	elseif ($time !== 'thisweek') {
+		// If a timeframe is given besides the default, retrieve the
+		// start date and end date values for all announcements and
+		// compare them to the given duration (based on the current 
+		// date/time)
+	}
+	
+}
 
 
 ?>
