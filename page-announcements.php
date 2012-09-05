@@ -63,7 +63,7 @@ else {
 				<div class="row">
 					<h2 class="span9 header_announcements">Announcements for this week | <a href="http://events.ucf.edu/">Go to Events &raquo;</a></h2>
 					<div class="span3">
-						<p><a class="rssbtn" href="?feed=rss">RSS</a></p>
+						<p><a class="rssbtn" href="?output=rss">RSS</a></p>
 					</div>
 				</div>
 				<div class="row" id="filters">
@@ -119,7 +119,27 @@ else {
 				
 				<?php if ($error !== '') { print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
 				
-				<?php if ($announcements == NULL) { print "No announcements found."; } else { var_dump($announcements); } ?>
+				<?php 
+					if ($announcements == NULL) { 
+						print 'No announcements found.'; 
+					} else { 
+						print '<div class="row">';
+						
+						foreach ($announcements as $announcement) {
+						?>
+							<div class="span4" id="announcement_<?=$announcement['post_id']?>">
+								<div class="announcement_wrap">
+									<div class="thumbtack"></div>
+									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
+									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
+								</div>
+							</div>	
+						<?php
+						}
+						
+						print '</div>';
+					} 
+				?>
 				
 				
 			</article>

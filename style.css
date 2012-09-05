@@ -484,6 +484,10 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_announcement { margin-top: 21px; }
 
 
+.announcement_wrap { height: 170px; background: #ddd; margin-bottom: 20px; padding: 15px; position: relative; }
+.thumbtack { width: 32px; height: 32px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -16px; left: 47%; }
+
+
 /**
  * UCF Main Site Bootstrap overrides
  **/
