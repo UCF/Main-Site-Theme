@@ -379,6 +379,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		}
 		
 		return $output;	
+	}
 }
 
 
