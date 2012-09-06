@@ -476,10 +476,15 @@ h2.header_announcements { font-size: 20px; }
 }
 .active_filter { display: visible; }
 
+#filters { margin-bottom: 15px; }
+#filter_form { margin: 0; }
+
 #filters #filter_wrap { width: 230px; }
 #filters #addnew_wrap {  }
 #filters #filter_update { margin-top: 23px; } 
-#filters #addnew_announcement { margin-top: 21px; }
+
+#filters #addnew_wrap { text-align: right; }
+#filters #addnew_wrap #addnew_announcement { margin-top: 21px; }
 
 
 .announcement_wrap { height: 180px; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }

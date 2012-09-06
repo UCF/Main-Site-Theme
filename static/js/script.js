@@ -295,6 +295,20 @@ toggleAnnouncementFilters = function($) {
 	keywordBtn = $('#filter_keyword');
 	timeBtn = $('#filter_time');
 	
+	// reset field values to default any time a new filter is selected
+	var resetVals = function() {
+		if ($('#filter_audience_wrap').hasClass('active_filter') == false) {
+			$(this).children('select option:selected').val("all");
+		}
+		if ($('#filter_keyword_wrap').hasClass('active_filter') == false) {
+			$(this).children('input').val("");
+		}
+		if ($('#filter_time_wrap').hasClass('active_filter') == false) {
+			$(this).children('select option:selected').val("thisweek");
+		}
+	}
+	
+	// on load
 	if (audienceBtn.hasClass('active')) {
 		$('#filter_audience_wrap').show().addClass('active_filter');
 	}
@@ -304,20 +318,25 @@ toggleAnnouncementFilters = function($) {
 	else if (timeBtn.hasClass('active')) {
 		$('#filter_time_wrap').show().addClass('active_filter');
 	}
+	resetVals();
 	
+	// on click
 	$(audienceBtn).click(function() {
 		$('.active_filter').removeClass('active_filter').hide();
 		$('#filter_audience_wrap').fadeIn().addClass('active_filter');
+		resetVals();
 	});
 	
 	$(keywordBtn).click(function() {
 		$('.active_filter').removeClass('active_filter').hide();
-		$('#filter_keyword_wrap').fadeIn().addClass('active_filter');	
+		$('#filter_keyword_wrap').fadeIn().addClass('active_filter');
+		resetVals();	
 	});
 	
 	$(timeBtn).click(function() {
 		$('.active_filter').removeClass('active_filter').hide();
 		$('#filter_time_wrap').fadeIn().addClass('active_filter');
+		resetVals();
 	});
 }
 
