@@ -30,6 +30,20 @@
 				&& ($stylesheet_url = wp_get_attachment_url($stylesheet_id)) !== False) { ?>
 				<link rel='stylesheet' href="<?=$stylesheet_url?>" type='text/css' media='all' />
 		<? } ?>
+
+		<script type="text/javascript">
+			var PostTypeSearchDataManager = {
+				'searches' : [],
+				'register' : function(search) {
+					this.searches.push(search);
+				}
+			}
+			var PostTypeSearchData = function(column_count, column_width, data) {
+				this.column_count = column_count;
+				this.column_width = column_width;
+				this.data         = data;
+			}
+		</script>
 		
 	</head>
 	<!--[if lt IE 7 ]>  <body class="ie ie6 <?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <![endif]-->

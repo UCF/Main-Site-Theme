@@ -92,6 +92,7 @@ Config::$custom_post_types = array(
 	'Subheader',
 	'AZIndexLink',
 	'Announcement',
+	'Post'
 );
 
 Config::$custom_taxonomies = array(

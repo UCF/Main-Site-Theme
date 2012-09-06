@@ -22,7 +22,11 @@ abstract class CustomPostType{
 		$use_shortcode  = False, # Auto generate a shortcode for the post type
 		                         # (see also objectsToHTML and toHTML methods)
 		$taxonomies     = array('post_tag'),
-		$built_in       = False;
+		$built_in       = False,
+
+		# Optional default ordering for generic shortcode if not specified by user.
+		$default_orderby = null,
+		$default_order   = null;
 	
 	
 	/**
@@ -824,7 +828,23 @@ class Spotlight extends CustomPostType {
 		
 }
 
-
+class Post extends CustomPostType {
+	public
+		$name           = 'post',
+		$plural_name    = 'Posts',
+		$singular_name  = 'Post',
+		$add_new_item   = 'Add New Post',
+		$edit_item      = 'Edit Post',
+		$new_item       = 'New Post',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies     = array('post_tag', 'category'),
+		$built_in       = True;
+}
 
 /**
  * Describes a sub header piece for secondary pages.
@@ -896,7 +916,6 @@ class AZIndexLink extends CustomPostType {
 		$use_metabox    = True,
 		$use_shortcode	= True,
 		$taxonomies		= array('category', 'post_tag');
-
 	public function fields() {
 		$prefix = $this->options('name').'_';
 		return array(
@@ -1491,8 +1510,4 @@ class Slider extends CustomPostType {
 	
 	
 }
-
-
-
-
 ?>

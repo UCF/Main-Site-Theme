@@ -374,7 +374,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				'posted_by'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
 				'roles' 			=> wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")),
 				'keywords'			=> wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")),
-				'debug'				=> $wp_query->request,
 			);
 		}
 		

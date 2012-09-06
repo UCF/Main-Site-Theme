@@ -128,9 +128,6 @@ function sc_person_picture_list($atts) {
 }
 add_shortcode('person-picture-list', 'sc_person_picture_list');
 
-
-
-
 /**
  * Centerpiece Slider
  **/
@@ -254,4 +251,160 @@ function sc_events_widget() {
 }
 add_shortcode('events-widget', 'sc_events_widget');
 
+/**
+ * Post search
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function sc_post_type_search($params=array(), $content='') {
+	$defaults = array(
+		'post_type_name'         => 'post',
+		'taxonomy'               => 'category',
+		'show_empty_sections'    => false,
+		'non_alpha_section_name' => 'Other',
+		'column_width'           => 'span4',
+		'column_count'           => '3',
+		'order_by'               => 'post_title',
+		'order'                  => 'ASC'
+	);
+
+	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
+
+	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
+	$params['column_count']        = is_numeric($params['column_count']) ? (int)$params['column_count'] : $defaults['column_count'];
+	
+	// Resolve the post type class
+	if(is_null($post_type_class = get_custom_post_type($params['post_type_name']))) {
+		return '<p>Invalid post type.</p>';
+	}
+	$post_type = new $post_type_class;
+
+
+	// Register if the search data with the JS PostTypeSearchDataManager
+	// Format is array(post->ID=>terms) where terms include the post title
+	// as well as all associated tag names
+	$search_data = array();
+	foreach(get_posts(array('numberposts' => -1, 'post_type' => $params['post_type_name'])) as $post) {
+		$search_data[$post->ID] = array($post->post_title);
+		foreach(wp_get_object_terms($post->ID, 'post_tag') as $term) {
+			$search_data[$post->ID][] = $term->name;
+		}
+	}
+	?>
+	<script type="text/javascript">
+		if(typeof PostTypeSearchDataManager != 'undefined') {
+			PostTypeSearchDataManager.register(new PostTypeSearchData(
+				<?=json_encode($params['column_count'])?>,
+				<?=json_encode($params['column_width'])?>,
+				<?=json_encode($search_data)?>
+			));
+		}
+	</script>
+	<?
+
+	// Split up this post type's posts by term
+	$by_term = array();
+	foreach(get_terms($params['taxonomy']) as $term) {
+		$posts = get_posts(array(
+			'numberposts' => -1,
+			'post_type'   => $params['post_type_name'],
+			'tax_query'   => array(
+				array(
+					'taxonomy' => $params['taxonomy'],
+					'field'    => 'id',
+					'terms'    => $term->term_id
+				)
+			),
+			'orderby'     => $params['order_by'],
+			'order'       => $params['order']
+		));
+
+		if(count($posts) == 0 && $params['show_empty_sections']) {
+			$by_term[$term->name] = array();
+		} else {
+			$by_term[$term->name] = $posts;
+		}
+	}
+
+	// Split up this post type's posts by the first alpha character
+	$by_alpha = array();
+	$by_alpha_posts = get_posts(array(
+		'numberposts' => -1,
+		'post_type'   => $params['post_type_name'],
+		'orderby'     => 'post_title',
+		'order'       => 'alpha'
+	));
+	foreach($by_alpha_posts as $post) {
+		if(preg_match('/([a-zA-Z])/', $post->post_title, $matches) == 1) {
+			$by_alpha[strtoupper($matches[1])][] = $post;
+		} else {
+			$by_alpha[$params['non_alpha_section_name']][] = $post;
+		}
+	}
+	ksort($by_alpha);
+
+	if($params['show_empty_sections']) {
+		foreach(range('a', 'z') as $letter) {
+			if(!isset($by_alpha[strtoupper($letter)])) {
+				$by_alpha[strtoupper($letter)] = array();
+			}
+		}
+	}
+
+	$sections = array(
+		'post-type-search-term'  => $by_term,
+		'post-type-search-alpha' => $by_alpha,
+	);
+
+	ob_start();
+	?>
+	<div class="post-type-search">
+		<div class="post-type-search-header">
+			<form class="post-type-search-form" action="." method="get">
+				<input type="text" class="span3" placeholder="Find a <?=$post_type->singular_name?>" /> 
+			</form>
+		</div>
+		<div class="post-type-search-results "></div>
+		<div class="btn-group post-type-search-sorting">
+			<button class="btn active"><i class="icon-list-alt"></i></button>
+			<button class="btn"><i class="icon-font"></i></button>
+		</div>
+	<?
+
+	foreach($sections as $id => $section) {
+		?>
+		<div class="<?=$id?>"<? if($id == 'post-type-search-alpha') echo ' style="display:none;"'; ?>>
+			<? foreach($section as $section_title => $section_posts) { ?>
+				<? if(count($section_posts) > 0 || $params['show_empty_sections']) { ?>
+					<div>
+						<h3><?=esc_html($section_title)?></h3>
+						<div class="row">
+							<div class="<?=$params['column_width']?>">
+								<? if(count($section_posts) > 0) { ?>
+									<ul>
+									<? $posts_per_column = ceil(count($section_posts) / $params['column_count']); ?>
+									<? foreach(range(0, $params['column_count'] - 1) as $column_index) { ?>
+										<? $start = $column_index * $posts_per_column; ?>
+										<? $end   = $start + $posts_per_column; ?>
+										<? if(count($section_posts) > $start) { ?>
+											<? foreach(array_slice($section_posts, $start, $end) as $post) { ?>
+												<li data-post-id="<?=$post->ID?>"><?=$post_type->toHTML($post)?></li>
+											<? } ?>
+										<? } ?>
+									<? } ?>
+									</ul>
+								<? } ?>
+							</div>
+						</div>
+					</div>
+				<? } ?>
+			<? } ?>
+		</div>
+		<?
+	}
+	?> </div> <?
+	return ob_get_clean();
+}
+add_shortcode('post-type-search', 'sc_post_type_search');
 ?>
