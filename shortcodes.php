@@ -233,13 +233,13 @@ function sc_post_type_search($params=array(), $content='') {
 		'post-type-search-term'  => $by_term,
 		'post-type-search-alpha' => $by_alpha,
 	);
-	
+
 	ob_start();
 	?>
 	<div class="post-type-search">
 		<div class="post-type-search-header row">
 			<form class="form-search post-type-search-form span3" action="." method="get">
-				<input type="text" class="span2 search-query" /> <button type="submit" class="btn"><i class="icon-search"></i></button>
+				<input type="text" class="span2 search-query" placeholder="Fina a <?=$post_type->singular_name?>" /> <button type="submit" class="btn"><i class="icon-search"></i></button>
 			</form>
 			<div class="btn-group post-type-search-sorting pull-right">
 				<button class="btn active">Categorical</button>
