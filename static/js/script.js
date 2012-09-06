@@ -298,13 +298,13 @@ toggleAnnouncementFilters = function($) {
 	// reset field values to default any time a new filter is selected
 	var resetVals = function() {
 		if ($('#filter_audience_wrap').hasClass('active_filter') == false) {
-			$(this).children('select option:selected').val("all");
+			$('#filter_audience_wrap select option:selected').val("all");
 		}
 		if ($('#filter_keyword_wrap').hasClass('active_filter') == false) {
 			$(this).children('input').val("");
 		}
 		if ($('#filter_time_wrap').hasClass('active_filter') == false) {
-			$(this).children('select option:selected').val("thisweek");
+			$('#filter_time_wrap select option:selected').val("thisweek");
 		}
 	}
 	

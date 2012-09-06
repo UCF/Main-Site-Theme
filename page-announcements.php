@@ -84,14 +84,18 @@ else {
 					<div class="span3 active_filter" id="filter_audience_wrap">	
 						<label for="role">Select an Audience</label>
 						<select name="role" class="span3">
-							<option selected="" value="all">All Roles</option>
+							<option value="all">All Roles</option>
 							<?php
 								$args = array(
 									'hide_empty' => 0
 								);
 								$roles = get_terms('audienceroles', $args);
 								foreach ($roles as $role) {
-									print '<option value="'.$role->slug.'">'.$role->name.'</option>';
+									print '<option ';
+									if ($role->slug == $roleval) {
+										print 'selected="" ';
+									}
+									print 'value="'.$role->slug.'">'.$role->name.'</option>';
 								}
 							?>
 						</select>
