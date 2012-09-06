@@ -234,6 +234,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'post-type-search-alpha' => $by_alpha,
 	);
 
+	ob_start();
 	?>
 	<div class="post-type-search">
 		<div class="post-type-search-header">
@@ -281,6 +282,7 @@ function sc_post_type_search($params=array(), $content='') {
 		<?
 	}
 	?> </div> <?
+	return ob_get_clean();
 }
 add_shortcode('post-type-search', 'sc_post_type_search');
 ?>
