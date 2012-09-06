@@ -76,7 +76,7 @@ else {
 						</div>
 					</div>
 					
-					<div class="span3">	
+					<div class="span3 active_filter" id="filter_audience_wrap">	
 						<label for="f_role">Select an Audience</label>
 						<select name="f_role" class="span3">
 							<option selected="" value="all">All Roles</option>
@@ -91,11 +91,11 @@ else {
 							?>
 						</select>
 					</div>
-					<div class="span3">	
+					<div class="span3" id="filter_keyword_wrap">	
 						<label for="f_keyword">Type a Keyword</label>
 						<input type="text" name="f_keyword" class="span3" />
 					</div>
-					<div class="span3">	
+					<div class="span3" id="filter_time_wrap">	
 						<label for="f_duration">Select a Time</label>
 						<select name="f_duration" class="span3">
 							<option selected="" value="thisweek">This Week</option>

@@ -289,6 +289,39 @@ toggleAZChevrons = function($) {
 }
 
 
+/* Show/hide announcement filter dropdowns */
+toggleAnnouncementFilters = function($) {
+	audienceBtn = $('#filter_audience');
+	keywordBtn = $('#filter_keyword');
+	timeBtn = $('#filter_time');
+	
+	if (audienceBtn.hasClass('active')) {
+		$('#filter_audience_wrap').show().addClass('active_filter');
+	}
+	else if (keywordBtn.hasClass('active')) {
+		$('#filter_keyword_wrap').show().addClass('active_filter');
+	}
+	else if (timeBtn.hasClass('active')) {
+		$('#filter_time_wrap').show().addClass('active_filter');
+	}
+	
+	$(audienceBtn).click(function() {
+		$('.active_filter').removeClass('active_filter').hide();
+		$('#filter_audience_wrap').fadeIn().addClass('active_filter');
+	});
+	
+	$(keywordBtn).click(function() {
+		$('.active_filter').removeClass('active_filter').hide();
+		$('#filter_keyword_wrap').fadeIn().addClass('active_filter');	
+	});
+	
+	$(timeBtn).click(function() {
+		$('.active_filter').removeClass('active_filter').hide();
+		$('#filter_time_wrap').fadeIn().addClass('active_filter');
+	});
+}
+
+
 /* IE 7-8 fix for News thumbnails-- requires jquery.backgroundSize.js */
 ieFixNewsThumbs = function($) {
 	$('#home_centercol .news .item .news-thumb').css( "background-size", "cover" );
@@ -323,6 +356,7 @@ if (typeof jQuery != 'undefined'){
 		removeNavSeparator($);
 		fixSubheaderHeight($);
 		toggleAZChevrons($);
+		toggleAnnouncementFilters($);
 		ieFixNewsThumbs($);
 		ieRoundedCornerThumbs($);
 		

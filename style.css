@@ -471,12 +471,10 @@ h2.header_announcements { font-size: 20px; }
 .page-content#announcements #filters label {  }
 .page-content#announcements #filters select, .page-content#announcements #filters input[type="text"] { margin-right: 15px; }
 
-.page-content#announcements #filters input[name="f_keyword"], 
-.page-content#announcements #filters select[name="f_duration"],
-.page-content#announcements #filters label[for="f_keyword"],
-.page-content#announcements #filters label[for="f_duration"] {
+#filter_audience_wrap, #filter_keyword_wrap, #filter_time_wrap {
 	display: none;
 }
+.active_filter { display: visible; }
 
 #filters #filter_wrap { width: 230px; }
 #filters #addnew_wrap {  }
@@ -484,7 +482,7 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_announcement { margin-top: 21px; }
 
 
-.announcement_wrap { height: 170px; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }
+.announcement_wrap { height: 180px; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }
 .announcement_wrap:before, .announcement_wrap:after {
 	z-index: -1; 
   	position: absolute; 
