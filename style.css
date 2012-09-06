@@ -484,7 +484,35 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_announcement { margin-top: 21px; }
 
 
-.announcement_wrap { height: 170px; background: #ddd; margin-bottom: 20px; padding: 15px; position: relative; }
+.announcement_wrap { height: 170px; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }
+.announcement_wrap:before, .announcement_wrap:after {
+	z-index: -1; 
+  	position: absolute; 
+  	content: "";
+  	bottom: 15px;
+  	left: 10px;
+ 	width: 50%; 
+  	top: 80%;
+  	max-width:300px;
+  	background: rgba(0, 0, 0, 0.7); 
+  	-webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);   
+  	-moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  	box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+  	-webkit-transform: rotate(-3deg);    
+  	-moz-transform: rotate(-3deg);   
+  	-o-transform: rotate(-3deg);
+  	-ms-transform: rotate(-3deg);
+  	transform: rotate(-3deg);
+}
+.announcement_wrap:after {
+	-webkit-transform: rotate(3deg);
+  	-moz-transform: rotate(3deg);
+  	-o-transform: rotate(3deg);
+  	-ms-transform: rotate(3deg);
+  	transform: rotate(3deg);
+  	right: 10px;
+  	left: auto;
+}
 .thumbtack { width: 32px; height: 32px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -16px; left: 47%; }
 
 
