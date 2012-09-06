@@ -278,18 +278,28 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	
 	// Get some dates for meta_query comparisons:
 	$thismonday = date('Y-m-d', strtotime('monday this week'));
+	$thissunday = date('Y-m-d', strtotime($thismonday.' + 6 days'));
+	
 	$nextmonday = date('Y-m-d', strtotime('monday next week'));
-	$firstdaymonth = date('Y-m-d', strtotime('first day of this month'));
-	$lastdaymonth = date('Y-m-d', strtotime('last day of this month'));
+	$nextsunday = date('Y-m-d', strtotime($nextmonday.' + 6 days'));
+	
+	$firstday_thismonth = date('Y-m-d', strtotime('first day of this month'));
+	$lastday_thismonth = date('Y-m-d', strtotime('last day of this month'));
+	
+	$firstday_nextmonth = date('Y-m-d', strtotime('first day of next month'));
+	$lastday_nextmonth = date('Y-m-d', strtotime('last day of next month'));
 	
 	// Set up query args based on GET params:
+	$args = array(
+		'numberposts' => -1,
+		'post_type' => 'announcement',
+		'orderby' => 'meta_value',
+		'order' => 'ASC',
+		'meta_key' => 'announcement_start_date',
+	);
+	
 	if ($role !== 'all') {
-		$args = array(
-			'numberposts' => -1,
-			'post_type' => 'announcement',
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => 'announcement_start_date',
+		$role_args = array(
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'audienceroles',
@@ -300,20 +310,30 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			'meta_query' => array(
         		array(
 					'key' => 'announcement_start_date',
-					'value' => $today,
+					'value' => $thismonday,
 					'compare' => '>='
 				)
 			),
-
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_start_date',
+					'value' => $thissunday,
+					'compare' => '<='
+				)
+			),
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_end_date',
+					'value' => $thismonday,
+					'compare' => '>='
+				)
+			),
 		);
+		$args = array_merge($args, $role_args);
 	}
+	
 	elseif ($keyword !== NULL) {
-		$args = array(
-			'numberposts' => -1,
-			'post_type' => 'announcement',
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => 'announcement_start_date',
+		$keyword_args = array(
 			'tax_query' => array(
 				array(
 					'taxonomy' => 'keywords',
@@ -321,26 +341,139 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'terms' => $keyword,
 				)
 			),
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_start_date',
+					'value' => $thismonday,
+					'compare' => '>='
+				)
+			),
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_start_date',
+					'value' => $thissunday,
+					'compare' => '<='
+				)
+			),
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_end_date',
+					'value' => $thismonday,
+					'compare' => '>='
+				)
+			),
 		);
+		$args = array_merge($args, $keyword_args);
 	}
+	
 	elseif ($time !== 'thisweek') {
-		$args = array(
-			'numberposts' => -1,
-			'post_type' => 'announcement',
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => 'announcement_start_date',
-		);
+		switch ($time) {
+			case 'nextweek':
+				$time_args = array(
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $nextmonday,
+							'compare' => '>='
+						)
+					),
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $nextsunday,
+							'compare' => '<='
+						)
+					),
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $nextmonday,
+							'compare' => '>='
+						)
+					),
+				);
+				$args = array_merge($args, $time_args);
+				break;
+			case 'thismonth':
+				$time_args = array(
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $firstday_thismonth,
+							'compare' => '>='
+						)
+					),
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $lastday_thismonth,
+							'compare' => '<='
+						)
+					),
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $firstday_thismonth,
+							'compare' => '>='
+						)
+					),
+				);
+				$args = array_merge($args, $time_args);
+				break;
+			case 'nextmonth':
+				$time_args = array(
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $firstday_nextmonth,
+							'compare' => '>='
+						)
+					),
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $lastday_nextmonth,
+							'compare' => '<='
+						)
+					),
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $firstday_nextmonth,
+							'compare' => '>='
+						)
+					),
+				);
+				$args = array_merge($args, $time_args);
+				break;
+			case 'thissemester':
+				break;
+			case 'all':
+				break;
+			default:
+				break;
+		}
 		
 	}
+	
 	else { // default retrieval args
-		$args = array(
-			'numberposts' => -1,
-			'post_type' => 'announcement',
-			'orderby' => 'meta_value',
-			'order' => 'ASC',
-			'meta_key' => 'announcement_start_date',
+		$fallback_args = array(
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_start_date',
+					'value' => $thismonday,
+					'compare' => '>='
+				)
+			),
+			'meta_query' => array(
+        		array(
+					'key' => 'announcement_start_date',
+					'value' => $thissunday,
+					'compare' => '<='
+				)
+			),
 		);
+		$args = array_merge($args, $fallback_args);
 	}
 	
 	

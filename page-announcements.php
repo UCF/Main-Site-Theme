@@ -103,12 +103,12 @@ else {
 					<div class="span3" id="filter_time_wrap">	
 						<label for="time">Select a Time</label>
 						<select name="time" class="span3">
-							<option selected="" value="thisweek">This Week</option>
-							<option value="nextweek">Next Week</option>
-							<option value="thismonth">This Month</option>
-							<option value="nextmonth">Next Month</option>
-							<option value="thissemester">This Semester</option>
-							<option value="all">All</option>
+							<option <?php if ($timeval == 'thisweek') { ?>selected=""<?php } ?>value="thisweek">This Week</option>
+							<option <?php if ($timeval == 'nextweek') { ?>selected=""<?php } ?>value="nextweek">Next Week</option>
+							<option <?php if ($timeval == 'thismonth') { ?>selected=""<?php } ?>value="thismonth">This Month</option>
+							<option <?php if ($timeval == 'nextmonth') { ?>selected=""<?php } ?>value="nextmonth">Next Month</option>
+							<option <?php if ($timeval == 'thissemester') { ?>selected=""<?php } ?>value="thissemester">This Semester</option>
+							<option <?php if ($timeval == 'all') { ?>selected=""<?php } ?>value="all">All</option>
 						</select>
 					</div>
 					
@@ -137,7 +137,7 @@ else {
 								<div class="announcement_wrap">
 									<div class="thumbtack"></div>
 									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
-									<p class="date"><?=date('M d', strtotime($announcement['start_date']))?></p>
+									<p class="date"><?=date('M d', strtotime($announcement['start_date']))?> - <?=date('M d', strtotime($announcement['end_date']))?></p>
 									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
 									<p class="audience"><strong>Audience:</strong> 
 									<?php 
@@ -200,6 +200,8 @@ else {
 					} 
 				?>
 				
+				
+				<?=date('Y-m-d', strtotime('last day of this month'))?>
 				
 			</article>
 		</div>
