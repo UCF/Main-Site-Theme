@@ -239,6 +239,7 @@ function sc_post_type_search($params=array(), $content='') {
 	<div class="post-type-search">
 		<div class="post-type-search-header">
 			<form class="post-type-search-form" action="." method="get">
+				<label style="display:none;">Search</label>
 				<input type="text" class="span3" placeholder="Find a <?=$post_type->singular_name?>" /> 
 			</form>
 		</div>
