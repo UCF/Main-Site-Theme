@@ -486,8 +486,8 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_wrap { text-align: right; }
 #filters #addnew_wrap #addnew_announcement { margin-top: 21px; }
 
-
-.announcement_wrap { height: 180px; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }
+div[id^="announcement_"] { height: 300px; }
+.announcement_wrap { height: auto; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }
 .announcement_wrap:before, .announcement_wrap:after {
 	z-index: -1; 
   	position: absolute; 
@@ -516,7 +516,9 @@ h2.header_announcements { font-size: 20px; }
   	right: 10px;
   	left: auto;
 }
-.thumbtack { width: 32px; height: 32px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -16px; left: 47%; }
+.announcement_wrap .thumbtack { width: 32px; height: 32px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -16px; left: 47%; }
+.announcement_wrap .date, .announcement_wrap .audience, .announcement_wrap .keywords { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important; }
+.announcement_wrap .audience, .announcement_wrap .keywords { margin-bottom: 0 !important; }
 
 
 /**
