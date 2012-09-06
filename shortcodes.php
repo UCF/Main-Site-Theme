@@ -233,21 +233,20 @@ function sc_post_type_search($params=array(), $content='') {
 		'post-type-search-term'  => $by_term,
 		'post-type-search-alpha' => $by_alpha,
 	);
-
+	
 	ob_start();
 	?>
 	<div class="post-type-search">
-		<div class="post-type-search-header">
-			<h2>Find a <?=$post_type->singular_name?></h2>
-			<div class="btn-group pull-right post-type-search-sorting">
+		<div class="post-type-search-header row">
+			<form class="form-search post-type-search-form span3" action="." method="get">
+				<input type="text" class="span2 search-query" /> <button type="submit" class="btn"><i class="icon-search"></i></button>
+			</form>
+			<div class="btn-group post-type-search-sorting pull-right">
 				<button class="btn active">Categorical</button>
 				<button class="btn">Alphabetical</button>
 			</div>
-			<form class="form-horizontal post-type-search-form" action="." method="get">
-				<input type="text" />
-			</form>
 		</div>
-		<div class="post-type-search-results"></div>
+		<div class="post-type-search-results "></div>
 	<?
 
 	foreach($sections as $id => $section) {
