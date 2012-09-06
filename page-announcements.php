@@ -171,6 +171,8 @@ else {
 									<div class="thumbtack"></div>
 									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
 									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
+									<p>Roles: <?php foreach ($announcement['roles'] as $role) { print $role.", "; } ?><br/>
+									Keywords: <?php foreach ($announcement['keywords'] as $keyword) { print $keyword.", "; } ?></p>
 								</div>
 							</div>	
 						<?php
