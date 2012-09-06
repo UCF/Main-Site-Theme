@@ -1,8 +1,6 @@
 <?php
 
-// Set up get_announcements() args:
-// default args: role='all', keyword=null, time='thisweek'
-
+// Assign GET variables
 if (isset($_GET['role']) && $_GET['role'] !== 'all') {
 	$roleval = $_GET['role'];
 }
@@ -14,7 +12,9 @@ if (isset($_GET['time']) && $_GET['time'] !== 'thisweek') {
 }
  
 $error = ''; 
- 
+
+// Set up get_announcements() args:
+// default args: role='all', keyword=null, time='thisweek' 
 if ($roleval) {
 	if (preg_match('/^[a-z][\-]*/', $roleval)) { // should only be lowercase letters and dashes
 		$announcements = get_announcements($roleval);
@@ -46,7 +46,7 @@ else {
 	$announcements = get_announcements();
 }
 
-// Set up feed output:
+// Set up feed output based on GET params:
 if ( isset($_GET['output']) ) {
 	switch ($_GET['output']) {
 		case 'json':
@@ -70,39 +70,6 @@ else {
 		
 		<div class="span12" id="contentcol">
 			<article>
-				<div class="row">
-					<h2 class="span9 header_announcements">
-					<?php
-						switch ($timeval) {
-							case 'thisweek':
-								$headertext = 'Announcements for this week';
-								break;
-							case 'nextweek':
-								$headertext = 'Announcements for next week';
-								break;
-							case 'thismonth':
-								$headertext = 'Announcements for this month';
-								break;
-							case 'nextmonth':
-								$headertext = 'Announcements for next month';
-								break;
-							case 'thissemester':
-								$headertext = 'Announcements for this semester';
-								break;
-							case 'all':
-								$headertext = 'All Announcements';
-								break;
-							default:
-								$headertext = 'Announcements for this week';
-								break;
-						}
-						print $headertext;
-					?> 
-						| <a href="http://events.ucf.edu/">Go to Events &raquo;</a></h2>
-					<div class="span3">
-						<p><a class="rssbtn" href="?output=rss">RSS</a></p>
-					</div>
-				</div>
 				<div class="row" id="filters">
 					<form id="filter_form" action="">
 					<div class="span4" id="filter_wrap">
@@ -170,9 +137,60 @@ else {
 								<div class="announcement_wrap">
 									<div class="thumbtack"></div>
 									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
+									<p class="date"><?=date('M d', strtotime($announcement['start_date']))?></p>
 									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
-									<p>Roles: <?php foreach ($announcement['roles'] as $role) { print $role.", "; } ?><br/>
-									Keywords: <?php foreach ($announcement['keywords'] as $keyword) { print $keyword.", "; } ?></p>
+									<p class="audience"><strong>Audience:</strong> 
+									<?php 
+										if ($announcement['roles']) {
+											$rolelist = '';
+											foreach ($announcement['roles'] as $role) {
+												switch ($role) {
+													case 'Alumni':
+														$link = '?role=alumni';
+														break;
+													case 'Faculty':
+														$link = '?role=faculty';
+														break;
+													case 'Prospective Students':
+														$link = '?role=prospective-students';
+														break;
+													case 'Public':
+														$link = '?role=public';
+														break;
+													case 'Staff':
+														$link = '?role=staff';
+														break;
+													case 'Students':
+														$link = '?role=students';
+														break;
+													default:
+														$link = '';
+														break;
+												}
+												$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
+											}
+											print substr($rolelist, 0, -2);
+										}
+										else { print 'n/a'; }
+									?>
+									</p>
+									<p class="keywords"><strong>Keywords:</strong> 
+									<?php 
+										if ($announcement['keywords']) {
+											$keywordlist = '';
+											foreach ($announcement['keywords'] as $keyword) {
+												$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
+											}
+											print substr($keywordlist, 0, -2);
+										}
+										else { print 'n/a'; }
+									?>
+									</p>
+									
+									
+									<p><?=$announcement['debug']?></p>
+									
+									
 								</div>
 							</div>	
 						<?php
