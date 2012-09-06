@@ -280,6 +280,10 @@ function sc_post_type_search($params=array(), $content='') {
 	}
 	$post_type = new $post_type_class;
 
+	// Set default search text if the user didn't
+	if(!isset($params['default_search_text'])) {
+		$params['default_search_text'] = 'Find a '.$post_type->singular_name;
+	}
 
 	// Register if the search data with the JS PostTypeSearchDataManager
 	// Format is array(post->ID=>terms) where terms include the post title
@@ -362,7 +366,7 @@ function sc_post_type_search($params=array(), $content='') {
 	<div class="post-type-search">
 		<div class="post-type-search-header">
 			<form class="post-type-search-form" action="." method="get">
-				<input type="text" class="span3" placeholder="Find a <?=$post_type->singular_name?>" /> 
+				<input type="text" class="span3" placeholder="<?=$params['default_search_text']?>" />
 			</form>
 		</div>
 		<div class="post-type-search-results "></div>
