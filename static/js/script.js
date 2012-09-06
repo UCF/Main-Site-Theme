@@ -134,6 +134,7 @@ Generic.PostTypeSearch = function($) {
 		.each(function(post_type_search_index, post_type_search) {
 			var post_type_search = $(post_type_search),
 				form             = post_type_search.find('.post-type-search-form'),
+				field            = form.find('input[type="text"]'),
 				working          = form.find('.working'),
 				results          = post_type_search.find('.post-type-search-results'),
 				by_term          = post_type_search.find('.post-type-search-term'),
@@ -189,14 +190,14 @@ Generic.PostTypeSearch = function($) {
 				.submit(function(event) {
 					// Don't allow the form to be submitted
 					event.preventDefault();
+					perform_search(field.val());
 				})
-				.find('input[type="text"]')
-					.keyup(function() {
-						var val = $(this).val();
-						// Use a timer to determine when the user is done typing
-						if(typing_timer != null)  clearTimeout(typing_timer);
-						typing_timer = setTimeout(function() {perform_search(val);}, typing_delay);
-					});
+			field
+				.keyup(function() {
+					// Use a timer to determine when the user is done typing
+					if(typing_timer != null)  clearTimeout(typing_timer);
+					typing_timer = setTimeout(function() {form.trigger('submit');}, typing_delay);
+				});
 
 			function display_search_message(message) {
 				results.empty();
