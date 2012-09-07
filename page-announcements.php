@@ -25,12 +25,12 @@ if ($roleval) {
 	}
 }
 elseif ($keywordval) {
-	if (preg_match('/^[a-zA-Z0-9]/', $keywordval)) { // should only be letters & numbers
+	if (ctype_alnum($keywordval) == true) { // should only be letters or numbers
 		$announcements = get_announcements('all', $keywordval);
 	}
 	else {
 		$announcements = get_announcements();
-		$error = '<strong>Error:</strong> Keywords can only contain letters and numbers.';
+		$error = '<strong>Error:</strong> Keywords can only contain letters and numbers. Please remove any special characters from your search and try again.';
 	}
 }
 elseif ($timeval) { 
@@ -203,9 +203,6 @@ else {
 						print '</div>';
 					} 
 				?>
-				
-				
-				<?=date('Y-m-d', strtotime('last day of this month'))?>
 				
 			</article>
 		</div>
