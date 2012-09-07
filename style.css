@@ -526,6 +526,8 @@ div[id^="announcement_"] { height: 300px; }
   	left: auto;
 }
 .announcement_wrap .thumbtack { width: 20px; height: 20px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -9px; left: 47%; }
+.announcement_wrap .new { width: 50px; height: 50px; background: url('static/img/announcement-new.png') center center no-repeat; position: absolute; top: -1px; right: -1px; text-indent: -9999px; }
+
 .announcement_wrap .date, .announcement_wrap .audience, .announcement_wrap .keywords { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important; }
 .announcement_wrap .audience, .announcement_wrap .keywords { margin-bottom: 0 !important; }
 

@@ -140,6 +140,7 @@ else {
 							<div class="span4" id="announcement_<?=$announcement['post_id']?>">
 								<div class="announcement_wrap">
 									<div class="thumbtack"></div>
+									<?php if ( date('Ymd') - date('Ymd', strtotime($announcement['post_published']) ) <= 2 ) { ?><div class="new">New Announcement</div><?php } ?>
 									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
 									<p class="date"><?=date('M d', strtotime($announcement['start_date']))?> - <?=date('M d', strtotime($announcement['end_date']))?></p>
 									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
