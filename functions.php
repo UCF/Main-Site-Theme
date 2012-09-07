@@ -427,6 +427,87 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				$args = array_merge($args, $time_args);
 				break;
 			case 'thissemester':
+				// Set up a generic timeframe for semester
+				// start/end times; compare the current month
+				// to these dates to pull announcements from
+				// the current semester:
+				$current_month = date('n');
+				$spring_month_start = 1; // Jan
+				$spring_month_end = 5; // May
+				$summer_month_start = 5; // May
+				$summer_month_end = 7; // Jul
+				$fall_month_start = 8; // Aug
+				$fall_month_end = 12; // Dec
+				
+				// Check for Spring Semester
+				if ($current_month >= $spring_month_start && $current_month <= $spring_month_end) {
+					$time_args = array(
+						'meta_query' => array(
+							array(
+								'key' => 'announcement_start_date',
+								'value' => date('Y-m-d', strtotime('First day of January this year')),
+								'compare' => '>='
+							),
+							array(
+								'key' => 'announcement_start_date',
+								'value' => date('Y-m-d', strtotime('Last day of May this year')),
+								'compare' => '<='
+							),
+							array(
+								'key' => 'announcement_end_date',
+								'value' => date('Y-m-d', strtotime('First day of January this year')),
+								'compare' => '>='
+							)
+						),
+					);
+					$args = array_merge($args, $time_args);
+				}
+				// Check for Summer Semester
+				elseif ($current_month >= $summer_month_start && $current_month <= $summer_month_end) {
+					$time_args = array(
+						'meta_query' => array(
+							array(
+								'key' => 'announcement_start_date',
+								'value' => date('Y-m-d', strtotime('First day of May this year')),
+								'compare' => '>='
+							),
+							array(
+								'key' => 'announcement_start_date',
+								'value' => date('Y-m-d', strtotime('Last day of July this year')),
+								'compare' => '<='
+							),
+							array(
+								'key' => 'announcement_end_date',
+								'value' => date('Y-m-d', strtotime('First day of May this year')),
+								'compare' => '>='
+							)
+						),
+					);
+					$args = array_merge($args, $time_args);
+				}
+				// else, it's the Fall Semester
+				else {
+					$time_args = array(
+						'meta_query' => array(
+							array(
+								'key' => 'announcement_start_date',
+								'value' => date('Y-m-d', strtotime('First day of August this year')),
+								'compare' => '>='
+							),
+							array(
+								'key' => 'announcement_start_date',
+								'value' => date('Y-m-d', strtotime('Last day of December this year')),
+								'compare' => '<='
+							),
+							array(
+								'key' => 'announcement_end_date',
+								'value' => date('Y-m-d', strtotime('First day of August this year')),
+								'compare' => '>='
+							)
+						),
+					);
+					$args = array_merge($args, $time_args);
+				}
 				break;
 			case 'all':
 				break;
