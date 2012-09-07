@@ -312,17 +312,13 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'key' => 'announcement_start_date',
 					'value' => $thismonday,
 					'compare' => '>='
-				)
-			),
-			'meta_query' => array(
-        		array(
+				),
+				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
 					'compare' => '<='
-				)
-			),
-			'meta_query' => array(
-        		array(
+				),
+				array(
 					'key' => 'announcement_end_date',
 					'value' => $thismonday,
 					'compare' => '>='
@@ -346,17 +342,13 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'key' => 'announcement_start_date',
 					'value' => $thismonday,
 					'compare' => '>='
-				)
-			),
-			'meta_query' => array(
-        		array(
+				),
+				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
 					'compare' => '<='
-				)
-			),
-			'meta_query' => array(
-        		array(
+				),
+				array(
 					'key' => 'announcement_end_date',
 					'value' => $thismonday,
 					'compare' => '>='
@@ -375,16 +367,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 							'key' => 'announcement_start_date',
 							'value' => $nextmonday,
 							'compare' => '>='
-						)
-					),
-					'meta_query' => array(
+						),
 						array(
 							'key' => 'announcement_start_date',
 							'value' => $nextsunday,
 							'compare' => '<='
-						)
-					),
-					'meta_query' => array(
+						),
 						array(
 							'key' => 'announcement_end_date',
 							'value' => $nextmonday,
@@ -401,16 +389,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 							'key' => 'announcement_start_date',
 							'value' => $firstday_thismonth,
 							'compare' => '>='
-						)
-					),
-					'meta_query' => array(
+						),
 						array(
 							'key' => 'announcement_start_date',
 							'value' => $lastday_thismonth,
 							'compare' => '<='
-						)
-					),
-					'meta_query' => array(
+						),
 						array(
 							'key' => 'announcement_end_date',
 							'value' => $firstday_thismonth,
@@ -427,16 +411,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 							'key' => 'announcement_start_date',
 							'value' => $firstday_nextmonth,
 							'compare' => '>='
-						)
-					),
-					'meta_query' => array(
+						),
 						array(
 							'key' => 'announcement_start_date',
 							'value' => $lastday_nextmonth,
 							'compare' => '<='
-						)
-					),
-					'meta_query' => array(
+						),
 						array(
 							'key' => 'announcement_end_date',
 							'value' => $firstday_nextmonth,
@@ -463,10 +443,8 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'key' => 'announcement_start_date',
 					'value' => $thismonday,
 					'compare' => '>='
-				)
-			),
-			'meta_query' => array(
-        		array(
+				),
+				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
 					'compare' => '<='
