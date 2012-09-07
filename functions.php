@@ -306,7 +306,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'field' => 'slug',
 					'terms' => $role,
 				)
-			),
+			),/*
 			'meta_query' => array(
         		array(
 					'key' => 'announcement_start_date',
@@ -323,7 +323,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'value' => $thismonday,
 					'compare' => '>='
 				)
-			),
+			),*/
 		);
 		$args = array_merge($args, $role_args);
 	}
@@ -336,7 +336,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'field' => 'slug',
 					'terms' => $keyword,
 				)
-			),
+			),/*
 			'meta_query' => array(
         		array(
 					'key' => 'announcement_start_date',
@@ -353,7 +353,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'value' => $thismonday,
 					'compare' => '>='
 				)
-			),
+			),*/
 		);
 		$args = array_merge($args, $keyword_args);
 	}
