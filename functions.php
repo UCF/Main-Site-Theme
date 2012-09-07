@@ -306,7 +306,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'field' => 'slug',
 					'terms' => $role,
 				)
-			),/*
+			),
 			'meta_query' => array(
         		array(
 					'key' => 'announcement_start_date',
@@ -323,7 +323,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'value' => $thismonday,
 					'compare' => '>='
 				)
-			),*/
+			),
 		);
 		$args = array_merge($args, $role_args);
 	}
@@ -336,7 +336,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'field' => 'slug',
 					'terms' => $keyword,
 				)
-			),/*
+			),
 			'meta_query' => array(
         		array(
 					'key' => 'announcement_start_date',
@@ -353,7 +353,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'value' => $thismonday,
 					'compare' => '>='
 				)
-			),*/
+			),
 		);
 		$args = array_merge($args, $keyword_args);
 	}
@@ -510,8 +510,33 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				}
 				break;
 			case 'all':
+				$time_args = array(
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $thismonday,
+							'compare' => '>='
+						),
+					),
+				);
+				$args = array_merge($args, $time_args);
 				break;
 			default:
+				$time_args = array(
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $thismonday,
+							'compare' => '>='
+						),
+						array(
+							'key' => 'announcement_start_date',
+							'value' => $thissunday,
+							'compare' => '<='
+						)
+					),
+				);
+				$args = array_merge($args, $time_args);
 				break;
 		}
 		
@@ -529,6 +554,11 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
 					'compare' => '<='
+				),
+				array(
+					'key' => 'announcement_end_date',
+					'value' => $thismonday,
+					'compare' => '>='
 				)
 			),
 		);
@@ -557,8 +587,8 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				'post_name' 		=> $announcement->post_name,
 				'post_permalink'	=> get_permalink($announcement->ID),
 				'post_content' 		=> $announcement->post_content,
-				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
-				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
+				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE) ? get_post_meta($announcement->ID, 'announcement_start_date', TRUE) : $announcement->post_date,
+				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE) ? get_post_meta($announcement->ID, 'announcement_end_date', TRUE) : date('Y-m-d', strtotime($announcement->post_date.' + 1 day')),
 				'url' 				=> get_post_meta($announcement->ID, 'announcement_url', TRUE),
 				'contact_person'	=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
 				'phone'				=> get_post_meta($announcement->ID, 'announcement_phone', TRUE),
