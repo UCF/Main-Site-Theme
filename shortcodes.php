@@ -99,8 +99,10 @@ function sc_publication($attr, $content=null){
 	
 	<div class="pub">
 		<a class="track pub-track" title="<?=$pub->post_title?>" data-toggle="modal" href="#pub-modal-<?=$pub->ID?>">
-			<?=$pub->thumb?><span><?=$pub->post_title?></span>
+			<?=$pub->thumb?>
+			<span><?=$pub->post_title?></span>
 		</a>
+		<p class="pub-desc"><?=$pub->post_content?></p>
 		<div class="modal hide fade" id="pub-modal-<?=$pub->ID?>" role="dialog" aria-labelledby="<?=$pub->post_title?>" aria-hidden="true">
 			<iframe src="<?=$pub->url?>" width="100%" height="100%" scrolling="no"></iframe>
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
