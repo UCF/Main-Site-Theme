@@ -75,6 +75,45 @@ function sc_search_form() {
 add_shortcode('search_form', 'sc_search_form');
 
 
+/**
+ * Include the defined publication, referenced by pub title:
+ *
+ *     [publication name="Where are the robots Magazine"]
+ **/
+function sc_publication($attr, $content=null){
+	$pub      = @$attr['pub'];
+	$pub_name = @$attr['name'];
+	$pub_id   = @$attr['id'];
+	
+	if (!$pub and is_numeric($pub_id)){
+		$pub = get_post($pub);
+	}
+	if (!$pub and $pub_name){
+		$pub = get_page_by_title($pub_name, OBJECT, 'publication');
+	}
+	
+	$pub->url   = get_post_meta($pub->ID, "publication_url", True);
+	$pub->thumb = get_the_post_thumbnail($pub->ID, 'publication-thumb');
+	
+	ob_start(); ?>
+	
+	<div class="pub">
+		<a class="track pub-track" title="<?=$pub->post_title?>" data-toggle="modal" href="#pub-modal-<?=$pub->ID?>">
+			<?=$pub->thumb?><span><?=$pub->post_title?></span>
+		</a>
+		<div class="modal hide fade" id="pub-modal-<?=$pub->ID?>" role="dialog" aria-labelledby="<?=$pub->post_title?>" aria-hidden="true">
+			<iframe src="<?=$pub->url?>" width="100%" height="100%" scrolling="no"></iframe>
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	
+	<?php
+	return ob_get_clean();
+}
+add_shortcode('publication', 'sc_publication');
+
+
+
 function sc_person_picture_list($atts) {
 	$atts['type']	= ($atts['type']) ? $atts['type'] : null;
 	$row_size 		= ($atts['row_size']) ? (intval($atts['row_size'])) : 5;
@@ -145,13 +184,16 @@ function sc_post_type_search($params=array(), $content='') {
 		'order_by'               => 'post_title',
 		'order'                  => 'ASC',
 		'show_sorting'           => True,
-		'default_sorting'        => 'term'
+		'default_sorting'        => 'term',
+		'show_sorting'           => True
 	);
 
 	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
 
 	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
 	$params['column_count']        = is_numeric($params['column_count']) ? (int)$params['column_count'] : $defaults['column_count'];
+	$params['show_sorting']        = (bool)$params['show_sorting'];
+
 	if(!in_array($params['default_sorting'], array('term', 'alpha'))) {
 		$params['default_sorting'] = $default['default_sorting'];
 	}
@@ -253,10 +295,12 @@ function sc_post_type_search($params=array(), $content='') {
 			</form>
 		</div>
 		<div class="post-type-search-results "></div>
+		<? if($params['show_sorting']) { ?>
 		<div class="btn-group post-type-search-sorting">
 			<button class="btn<?if($params['default_sorting'] == 'term') echo ' active';?>"><i class="icon-list-alt"></i></button>
 			<button class="btn<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><i class="icon-font"></i></button>
 		</div>
+		<? } ?>
 	<?
 
 	foreach($sections as $id => $section) {

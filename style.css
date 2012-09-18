@@ -128,3 +128,10 @@ select#UCFHBHeaderLinks {
 .post-type-search-results {font-size:115%;background-color:#f1f1f1;padding-top:10px;margin-bottom:10px;display:none;}
 .post-type-search-results li {line-height:150%;}
 .post-type-search-sorting {margin-bottom:5px;}
+
+.pub a img { float: left; margin-bottom: 10px; width: 153px; height: 198px; }
+.pub a span { display: block; float: left; clear: both; font-size: 16px; width: 153px; }
+.pub .modal { width: 95%; height: 80%; max-height: 95%; margin: 0 auto; top: 60px !important; left: 2.5% !important; overflow: hidden; }
+.pub .modal iframe { border: 0; overflow: hidden !important; }
+.pub .modal .btn { position: absolute; bottom:20px; right: 20px; z-index:9999; text-decoration: none; }
+.pub .modal .btn:hover { text-decoration: none; }
