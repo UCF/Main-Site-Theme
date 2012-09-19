@@ -104,6 +104,23 @@ Config::$custom_taxonomies = array(
 
 Config::$body_classes = array('default',);
 
+
+/*
+ * Edge Side Includes (ESI) are directives that tell Varnish to include some other
+ * content in the page. The primary use for use to assign another cache duration
+ * to the "other content". To add an ESI, first encapsulate your content in a PHP
+ * function such as output_weather_data(). Then in place of where you would call
+ * output_weather_data() in the content, call esi_include('output_weather_data();').
+ * In other words, pass the PHP statement that outputs the content as an argument
+ * to the esi_include function. 
+ *
+ * To avoid an arbitrary code execution exploit, every statement being called with
+ * esi_include must be registered in the Config::$esi_whitelist array below. If
+ * different function calls take different arguments, they must all be registered 
+ * (e.g. output_weather_data() and output_weather_data('span3')).
+ *
+ */
+
 Config::$esi_whitelist = array(
 	'output_weather_data();',
 	'output_weather_data(\'span3\');',
