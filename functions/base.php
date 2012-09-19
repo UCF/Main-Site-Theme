@@ -19,8 +19,10 @@ class Config{
 		$styles            = array(), # Stylesheets to register
 		$scripts           = array(), # Scripts to register
 		$links             = array(), # <link>s to include in <head>
-		$metas             = array(); # <meta>s to include in <head>
-	
+		$metas             = array(), # <meta>s to include in <head>
+
+		# List of PHP statements as strings that are valid ESI outputs.
+		$esi_whitelist     = array();
 	
 	/**
 	 * Creates and returns a normalized name for a resource url defined by $src.

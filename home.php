@@ -26,8 +26,8 @@
 		</div>
 		<div class="span4" id="home_rightcol">
 			<h2>Upcoming Events</h2>
-			<?=do_shortcode('[events-widget]')?>
-			<?=output_weather_data()?>
+			<?php esi_include('do_shortcode(\'[events-widget]\');'); ?>
+			<?php esi_include('output_weather_data();'); ?>
 		</div>
 	
 	</div>

@@ -656,5 +656,27 @@ function announcements_to_rss($announcements) {
 	print '</channel></rss>';
 }
 
+/*
+ * Returns a theme option value or NULL if it doesn't exist
+ */
+function get_theme_option($key) {
+	global $theme_options;
+	return isset($theme_options[$key]) ? $theme_options[$key] : NULL;
+}
 
+/*
+ * Wrap a statement in a ESI include tag with a specified duration in the 
+ * enable_esi theme option is enabled
+ */
+function esi_include($statement) {
+	$enable_esi = get_theme_option('enable_esi');
+
+	if(!is_null($enable_esi) && $enable_esi === '1') {
+		?>
+		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?php echo urlencode($statement); ?>" />
+		<?php
+	} else {
+		eval($statement);
+	}
+}
 ?>

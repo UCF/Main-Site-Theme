@@ -63,6 +63,7 @@ define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
 define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
+define('ESI_INCLUDE_URL', THEME_STATIC_URL.'/esi.php');
 
 # Weather
 //define('WEATHER_URL', 'http://local.msn.com/weather.aspx?q=Orlando-FL&zip=32803');
@@ -102,6 +103,11 @@ Config::$custom_taxonomies = array(
 );
 
 Config::$body_classes = array('default',);
+
+Config::$esi_whitelist = array(
+	'output_weather_data();',
+	'do_shortcode(\'[events-widget]\');'
+);
 
 /**
  * Configure theme settings, see abstract class Field's descendants for
@@ -224,6 +230,17 @@ Config::$theme_settings = array(
 			'default'     => 'This is the site\'s default description, change or remove it on the <a href="'.get_admin_url().'admin.php?page=theme-options#site">theme options page</a> in the admin site.',
 			'value'       => $theme_options['site_description'],
 		)),
+		new RadioField(array(
+			'name'        => 'Enable Edge Side Includes (ESI)',
+			'id'          => THEME_OPTIONS_NAME.'[enable_esi]',
+			'description' => 'Replace specified content with Edge Side Includes (ESI) to be processed by Varnish.',
+			'default'     => 0,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_esi'],
+	    )),
 	),
 	'Social' => array(
 		new RadioField(array(
