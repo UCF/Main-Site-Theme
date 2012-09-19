@@ -673,7 +673,7 @@ function esi_include($statement) {
 
 	if(!is_null($enable_esi) && $enable_esi === '1') {
 		?>
-		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?php echo urlencode($statement); ?>" />
+		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?php echo urlencode(base64_encode($statement)); ?>" />
 		<?php
 	} else {
 		eval($statement);
