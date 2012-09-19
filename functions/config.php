@@ -106,6 +106,7 @@ Config::$body_classes = array('default',);
 
 Config::$esi_whitelist = array(
 	'output_weather_data();',
+	'output_weather_data(\'span3\');',
 	'do_shortcode(\'[events-widget]\');'
 );
 

@@ -5,7 +5,7 @@
 	<div class="row page-content" id="page-not-found">
 		<div id="page_title" class="span12">
 			<h1 class="span9">Page Not Found</h1>
-			<?=output_weather_data('span3')?>
+			<?php esi_include('output_weather_data(\'span3\');'); ?>
 		</div>
 		<div id="contentcol" class="span12">
 			<article>

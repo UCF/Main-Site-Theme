@@ -65,7 +65,7 @@ else {
 	<div class="row page-content" id="<?=$post->post_name?>">
 		<div class="span12" id="page_title">
 			<h1 class="span9"><?php the_title();?></h1>
-			<?=output_weather_data('span3')?>
+			<?php esi_include('output_weather_data(\'span3\');'); ?>
 		</div>
 		
 		<div class="span12" id="contentcol">
