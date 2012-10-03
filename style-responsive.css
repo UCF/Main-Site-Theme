@@ -324,7 +324,7 @@
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 200px; }
 	
-	.gform_body input[type="text"], .gform_body textarea { width: 100% !important; }
+	.gform_body input[type="text"], .gform_body textarea { width: 99% !important; }
 	
 	#colleges_wrap { padding-bottom: 10px; }
 	#colleges_wrap ul { text-align: center; }
@@ -339,5 +339,5 @@
 	#filters #filter_keyword_wrap,
 	#filters #filter_time_wrap { margin-right: 0; }
 	
-	li.tagit-new { width: 100% !important; }
+	li.tagit-new { width: 99% !important; }
 }
