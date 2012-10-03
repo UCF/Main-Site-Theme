@@ -1,8 +1,8 @@
 <?php
 require('../../../wp-blog-header.php');
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-if (function_exists('disallow_direct_load')):
-disallow_direct_load('feedback_mailer.php');
+//if (function_exists('disallow_direct_load')):
+//disallow_direct_load('feedback_mailer.php');
 
 /** 
  * Pull recent Gravity Forms entries from a given form.
@@ -41,8 +41,8 @@ function get_feedback_entries($formid=1, $duration=7) {
 	// Begin $output
 	$output .= '<h3>Feedback Submissions for '.date('M. j, Y', strtotime($dur_start_date)).' to '.date('M. j, Y', strtotime($dur_end_date)).'</h3><br />';
 	
-	if ($entry_ids == NULL) {
-		$output .= 'No submissions found.';
+	if (count($entry_ids) == 0) {
+		$output .= 'No submissions found for this time period.';
 	}
 	else {
 		// Get field data for the entry IDs we got
@@ -126,28 +126,27 @@ function get_feedback_entries($formid=1, $duration=7) {
 			$output .= '</ul><hr />';
 		}
 		
-		// E-mail setup
-		$to = array('carolyn.greybill@ucf.edu');
-		$subject = 'UCF Comments and Feedback for '.date('M. j, Y', strtotime($dur_start_date)).' to '.date('M. j, Y', strtotime($dur_end_date));
-		$message = $output;
-		
-		// Change e-mail content type to HTML
-		add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
+	}	
+	// E-mail setup
+	$to = array('carolyn.greybill@ucf.edu');
+	$subject = 'UCF Comments and Feedback for '.date('M. j, Y', strtotime($dur_start_date)).' to '.date('M. j, Y', strtotime($dur_end_date));
+	$message = $output;
+	
+	// Change e-mail content type to HTML
+	add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
 
-		// Send e-mail; return success or error
-		$results = wp_mail( $to, $subject, $message );
+	// Send e-mail; return success or error
+	$results = wp_mail( $to, $subject, $message );
 		
-		if ($results == true) {
-			return 'Mail successfully sent at '.date('r');
-		}
-		else {
-			return 'wp_mail returned false; mail did not send.';
-		}
-		
+	if ($results == true) {
+		return 'Mail successfully sent at '.date('r');
+	}
+	else {
+		return 'wp_mail returned false; mail did not send.';
 	}
 	
 }
 
-get_feedback_entries(1, 7);
-endif;
+print get_feedback_entries(1, 7);
+//endif;
 ?>
