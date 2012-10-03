@@ -338,4 +338,6 @@
 	#filters #filter_audience_wrap,
 	#filters #filter_keyword_wrap,
 	#filters #filter_time_wrap { margin-right: 0; }
+	
+	li.tagit-new { width: 100% !important; }
 }
