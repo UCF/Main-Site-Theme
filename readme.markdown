@@ -1,40 +1,46 @@
-# Base Wordpress Theme for UCF Marketing
+# UCF.edu Theme
 
-Simple theme which includes some of the most common theme elements found in most
-of the wordpress sites we do.  Includes mechanisms to easily add styles and
-scripts through the built-in wordpress functions.
+Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPress site.
 
-Important files/folders:
+## Required Plugins
 
-* functions.php - Includes base code, custom post types, and shortcodes.  This
-should also be where Config::$links, Config::$scripts, Config::$styles, and
-Config::$metas should be defined.  See base theme's functions.php for examples.
-* functions-base.php - Where functions and classes used throughout the theme are
-defined.
-* shortcodes.php - Where wordpress shortcodes can be defined.  See example
-shortcode for more information.
-* custom-post-types.php - Where the abstract custom post type and all its
-descendants live.
-* static - where, aside from style.css in the root, all static content such as
-javascript, images, and css should live.
+* Gravity Forms
+* Gravity Forms + Custom Post Types
+* WordPress Editorial Calendar
 
-Since this theme wasn't really built to function like a separate library to use
-in future themes, and more of a starting point for those themes, the best usage
-of this repo might be to add it as a remote to new wordpress projects.  Then
-you can merge from that remote as you wish to keep the current theme up to date.
+## Installation Requirements
 
-So when setting up a new project, create an empty repo, setup the remote to this
-repo, and merge it into the new repo creating the base theme.  Then make your
-edits from there.
+* Add cron job for feedback_mailer.php to run weekly for feedback emails.
 
 ## Notes
 
-* None
+* The function _save_meta_data() in functions/base.php (line 1572) has been modified to properly handle Slider content.
+* Slider "slide" meta fields are not duplicate meta boxes, but are actually dynamically-generated duplicate field groups, whose field values are saved into a serialized array for the given field.
+* static/js/admin.js includes multiple required scripts for the Slider editor to save/load field values properly.
 
 ## Custom Post Types
 
-* None
+* Video
+* Document
+* Publication
+* Person
+* Slider (home page centerpieces)
+* Spotlight
+* Subheader
+* AZIndexLink
+* Announcement
 
-## Short Codes
+## Custom Taxonomies
 
-* Slideshow - All top level elements contained within will be displayed as a slideshow.  Arguments controlling transition timing and animations are available.
+* OrganizationalGroups (for 'Person' post type)
+* Keywords (for 'Announcement' post type)
+* AudienceRoles (for 'Announcement' post type)
+
+## Shortcodes
+
+* [slideshow] - All top level elements contained within will be displayed as a slideshow.  Arguments controlling transition timing and animations are available.
+* [search_form] - Displays a generic search form
+* [person-picture-list] - Outputs a list of People with thumbnails
+* [centerpiece] - Generates the home page centerpiece
+* [events-widget] - Outputs Upcoming Events
+* [post-type-search] - Generates a list of searchable posts
