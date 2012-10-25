@@ -242,6 +242,15 @@ centerpieceVidResize = function($) {
 }
 
 
+/* Hide the centerpiece placeholder for single-slide centerpieces
+ so that the slide displays properly */
+centerpieceSingleSlide = function($) {
+	if ( $('#centerpiece_slider > ul li').length < 2 ) {
+		$('#centerpiece_slider > ul > img').hide();
+	}
+}
+
+
 /* Remove last dot separator between nav menu links: */
 removeNavSeparator = function($) {
 	var navcount = $('ul#header-menu li').length - 1;
@@ -520,6 +529,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.mobileSidebar($);
 		centerpieceSlider($);
 		centerpieceVidResize($);
+		centerpieceSingleSlide($);
 		removeNavSeparator($);
 		fixSubheaderHeight($);
 		toggleAZChevrons($);
