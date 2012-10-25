@@ -52,66 +52,6 @@
 	<!--[if IE 9 ]>     <body class="ie ie9 <?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <![endif]-->
 	<!--[if (gt IE 9)|!(IE)]><!--> <body class="<?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <!--<![endif]-->
 	
-		<div id="UCFHBHeader">
-				<div class="UCFHBWrapper">
-					<div id="UCFtitle">
-						<a href="<?=get_site_url()?>">
-							<span class="UCFHBText">University of Central Florida</span>
-						</a>
-					</div>
-					<label for="UCFHeaderLinks">University Links</label>
-					<label for="q">Search UCF</label>
-					<div id="UCFHBSearch_and_links">
-						<form id="UCFHBUni_links" action="" target="_top">
-							<fieldset>
-								<select name="UniversityLinks" id="UCFHBHeaderLinks" onchange="quickLinks.quickLinksChanged()">
-									<option value="">Quicklinks:</option>
-									<option value="">- - - - - - - - - -</option>
-									<option value="http://library.ucf.edu">Libraries</option>
-									<option value="http://www.ucf.edu/directories/">Directories (A-Z Index)</option>
-									<option value="http://map.ucf.edu">Campus Map</option>
-									<option value="http://ucffoundation.org/">Giving to UCF</option>
-									<option value="http://ask.ucf.edu">Ask UCF</option>
-									<option value="http://finaid.ucf.edu/">Financial Aid</option>
-									<option value="http://today.ucf.edu/">UCF Today</option>
-									<option value="https://www.secure.net.ucf.edu/knightsmail/">Knight's Email</option>
-									<option value="http://events.ucf.edu/">Events at UCF</option>
-									<option value="">- - - - - - - - - -</option>
-									<option value="http://www.ucf.edu/academics">Academics</option>
-									<option value="http://www.ucf.edu/admissions">Admissions</option>
-									<option value="http://www.ucf.edu/research/">Research</option>
-									<option value="http://www.ucf.edu/locations/">Locations</option>
-									<option value="http://www.ucf.edu/campus_life/">Campus Life</option>
-									<option value="http://www.ucf.edu/alumni_and_friends/">Alumni &amp; Friends</option>
-									<option value="http://www.ucf.edu/athletics/">Athletics</option>
-									<option value="">- - - - - - - - - -</option>
-									<option value="+">+ Add This Page</option>
-									<option value="">- - - - - - - - - -</option>
-									<option value="&gt;">&gt; Customize This List</option>
-								</select>
-							</fieldset>
-						</form>
-					<div>
-					<a id="UCFHBMy_ucf" href="http://my.ucf.edu/">
-						<span class="text">myUCF</span>
-					</a>
-				</div>
-				<form id="UCFHBSearch_ucf" method="get" action="http://google.cc.ucf.edu/search" target="_top">
-					<fieldset>
-						<input type="hidden" name="output" value="xml_no_dtd">
-						<input type="hidden" name="proxystylesheet" value="UCF_Main">
-						<input type="hidden" name="client" value="UCF_Main">
-						<input type="hidden" name="site" value="UCF_Main">
-						<input class="text" type="text" name="q" id="q" value="Search UCF" title="Search UCF" onfocus="clearDefault(this);" onblur="clearDefault(this);">
-						<input id="UCFHBsubmit" type="submit" value="">
-					</fieldset>
-				</form>
-				<div id="UCFHBClearBoth"></div>			
-
-				</div>		
-			</div>
-		</div>
-	
 		<div class="container">
 			<div class="row" id="header_wrap">
 				<div id="header" class="row-border-bottom-top">
