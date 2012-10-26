@@ -172,6 +172,10 @@ WebcomAdmin.themeOptions = function($){
 		
 		var slide_count_widget 	 = $('#slider-slides-settings-count');
 		
+		// Hide Preview Changes button
+		// this is a temporary fix for an issue where previewing changes on a centerpiece deletes its uploaded media
+		$('#minor-publishing-actions').hide();
+		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
 		var displaySlideOptions = function() {/*
 			var i = 0;
