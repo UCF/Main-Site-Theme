@@ -69,7 +69,7 @@ class FeedManager{
 	 **/
 	static protected function __new_feed($url){
 		$timer = Timer::start();
-		require_once(THEME_DIR.'/third-party/simplepie.php');
+		require_once(ABSPATH . WPINC . '/class-feed.php');
 		
 		$simplepie = null;
 		$failed    = False;
