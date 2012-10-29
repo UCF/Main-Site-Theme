@@ -59,6 +59,11 @@ repo, and merge it into the new repo creating the base theme.  Then make your
 edits from there.
 
 
+The rgraph branch of this repo includes an extra custom post type for generating
+custom bar graphs, pie charts, etc. and their required javascript dependencies.
+For more information on rgraph, read the documentation at http://www.rgraph.net/
+
+
 ## Custom Post Types
 
 ### Document
