@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * Abstract class for defining custom taxonomies.  
+ * 
+ **/
 abstract class CustomTaxonomy {
 	public
 		$name			= 'custom_taxonomy',
@@ -79,6 +84,7 @@ abstract class CustomTaxonomy {
 		register_taxonomy($this->options('name'), $this->options('object_type'), $args);
 	}
 }
+
 
 /**
  * Describes organizational groups

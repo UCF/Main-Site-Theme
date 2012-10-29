@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Abstract class for defining custom post types.  
+ * 
+ **/
 abstract class CustomPostType{
 	public 
 		$name           = 'custom_post_type',
@@ -18,7 +22,11 @@ abstract class CustomPostType{
 		$use_shortcode  = False, # Auto generate a shortcode for the post type
 		                         # (see also objectsToHTML and toHTML methods)
 		$taxonomies     = array('post_tag'),
-		$built_in       = False;
+		$built_in       = False,
+
+		# Optional default ordering for generic shortcode if not specified by user.
+		$default_orderby = null,
+		$default_order   = null;
 	
 	
 	/**
@@ -418,7 +426,7 @@ class Publication extends CustomPostType{
 		$edit_item      = 'Edit Publication',
 		$new_item       = 'New Publication',
 		$public         = True,
-		$use_editor     = False,
+		$use_editor     = True,
 		$use_thumbnails = True,
 		$use_order      = True,
 		$use_title      = True,
@@ -441,7 +449,7 @@ class Publication extends CustomPostType{
 		return array(
 			array(
 				'name'  => 'Publication URL',
-				'desc' => 'Example: <span style="font-family:monospace;font-weight:bold;color:#21759B;">http://publications.smca.ucf.edu/admissions/viewbook.html</span>',
+				'desc' => 'Example: <span style="font-family:monospace;font-weight:bold;color:#21759B;">http://publications.ucf.edu/publications/admissions-viewbook/</span>',
 				'id'   => $prefix.'url',
 				'type' => 'text',
 				'std'  => '',
@@ -481,7 +489,13 @@ class Page extends CustomPostType {
 				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
 				'id'   => $prefix.'hide_fold',
 				'type' => 'checkbox',
-			)
+			),
+				array(
+					'name' => 'Stylesheet',
+					'desc' => '',
+					'id' => $prefix.'stylesheet',
+					'type' => 'file',
+				),
 		);
 	}
 }
@@ -510,7 +524,7 @@ class Person extends CustomPostType
 							WHERE post_id = posts.id AND
 										meta_key = 'person_orderby_name') IS NULL)
 	*/
-	
+
 	public
 		$name           = 'person',
 		$plural_name    = 'People',
@@ -524,7 +538,7 @@ class Person extends CustomPostType
 		$use_thumbnails = True,
 		$use_order      = True,
 		$taxonomies     = array('org_groups', 'category');
-		
+
 		public function fields(){
 			$fields = array(
 				array(
@@ -566,7 +580,7 @@ class Person extends CustomPostType
 			);
 			return $fields;
 		}
-	
+
 	public function get_objects($options=array()){
 		$options['order']    = 'ASC';
 		$options['orderby']  = 'person_orderby_name';
@@ -578,7 +592,7 @@ class Person extends CustomPostType
 		$prefix = get_post_meta($person->ID, 'person_title_prefix', True);
 		$suffix = get_post_meta($person->ID, 'person_title_suffix', True);
 		$name = $person->post_title;
-		return $prefix.' '.$name.$suffix;
+		return $prefix.' '.$name.' '.$suffix;
 	}
 
 	public static function get_phones($person) {
@@ -587,75 +601,82 @@ class Person extends CustomPostType
 	}
 
 	public function objectsToHTML($people, $css_classes) {
-		
-		# Separate the people into sections based on their
-		# organization group affiliation(s)
-		$sections = array();
-		foreach($people as $person) {
-			$terms = wp_get_post_terms($person->ID, 'org_groups');
-			if(count($terms) == 0) {
-				if(!isset($sections[''])) {
-					$sections[''] = array();
-				}
-				$terms[''][] = $person;
-			} else {
-				foreach($terms as $term) {
-					if(!isset($sections[$term->name])) {
-						$sections[$term->name] = array();
-					}
-					$sections[$term->name][] = $person;
-				}
-			}
-		}
-
-		# Display each section
-		ob_start();
-		foreach($sections as $name => $people) {
-		?>
-		<div class="dept clear">
-			<? if($name != ''): ?><h3><?=$name?></h3><? endif ?>
-			<table>
-				<thead class="sans">
-					<tr>
-						<th scope="col" class="name">Name</th>
-						<th scope="col" class="job_title">Title</th>
-						<th scope="col" class="phones">Phone(s)</th>
-						<th scope="col" class="email">E-Mail</th>
-					</tr>
-				</thead>
-				<tbody class="serif">
-					<?$count = 0;
-						foreach($people as $person) {
-							$count++;
-							$email     = get_post_meta($person->ID, 'person_email', True);
-						?>
-							<tr class="sans <?=((($count % 2) == 0) ? 'even' : 'odd')?>" data-profile-url="<?=get_permalink($person->ID);?>">
-								<td class="name">
-									<a href="<?=get_permalink($person->ID)?>"><?=$this->get_name($person)?></a>
-								</td>
-								<td class="job_title">
-									<a href="<?=get_permalink($person->ID)?>"><?=get_post_meta($person->ID, 'person_jobtitle', True)?></a>
-								</td> 
-								<td class="phones">
-									<a href="<?=get_permalink($person->ID)?>">
-										<ul>
-											<? foreach($this->get_phones($person) as $phone) { ?>
-											<li><?=$phone?></li>
-											<? } ?>
-										</ul>
-									</a>
-								</td>
-								<td class="email">
-									<?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?>
-								</td>
-							</tr>
-					<? } ?>
+		ob_start();?>
+		<div class="row">
+			<div class="span12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col" class="name">Name</th>
+							<th scope="col" class="job_title">Title</th>
+							<th scope="col" class="phones">Phone</th>
+							<th scope="col" class="email">Email</th>
+						</tr>
+					</thead>
+					<tbody>
+				<?
+				foreach($people as $person) { 
+					$email = get_post_meta($person->ID, 'person_email', True); 
+					$link = ($person->post_content == '') ? False : True; ?>
+						<tr>
+							<td class="name">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+									<?=$this->get_name($person)?>
+								<?if($link) {?></a><?}?>
+							</td>
+							<td class="job_title">
+								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
+								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
+								<?if($link) {?></a><?}?>
+							</td> 
+							<td class="phones"><?php if(($link) && ($this->get_phones($person))) {?><a href="<?=get_permalink($person->ID)?>">
+								<?php } if($this->get_phones($person)) {?>
+									<ul class="unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
+								<?php } if(($link) && ($this->get_phones($person))) {?></a><?php }?></td>
+							<td class="email"><?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?></td>
+						</tr>
+				<? } ?>
 				</tbody>
-			</table>
+			</table> 
 		</div>
-		<?
-		}
-		return ob_get_clean();
+	</div><?
+	return ob_get_clean();
 	}
 } // END class 
+
+class Post extends CustomPostType {
+	public
+		$name           = 'post',
+		$plural_name    = 'Posts',
+		$singular_name  = 'Post',
+		$add_new_item   = 'Add New Post',
+		$edit_item      = 'Edit Post',
+		$new_item       = 'New Post',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies     = array('post_tag', 'category'),
+		$built_in       = True;
+
+	public function fields() {
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name' => 'Hide Lower Section',
+				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
+				'id'   => $prefix.'hide_fold',
+				'type' => 'checkbox',
+			),
+				array(
+					'name' => 'Stylesheet',
+					'desc' => '',
+					'id' => $prefix.'stylesheet',
+					'type' => 'file',
+				),
+		);
+	}
+}
 ?>

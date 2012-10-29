@@ -2,7 +2,7 @@
 <?php disallow_direct_load('index.php');?>
 <?php get_header();?>
 <div class="page-content" id="post-list">
-	<div class="span-18">
+	<div class="span9">
 		<?php while(have_posts()): the_post();?>
 		<article class="<?=$post->post_status?>">
 			<h1><a href="<?php the_permalink();?>"><?php the_title();?></a></h1>

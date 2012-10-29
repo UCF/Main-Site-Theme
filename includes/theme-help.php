@@ -64,22 +64,100 @@
 &lt;p&gt;I'm a slide!&lt;/p&gt;
 [/slideshow]</code></pre>
 					
-					<h4>document-list</h4>
-					<p>Outputs a list of {$plural} filtered by arbitrary taxonomies, for example a tag
-					or category.  A default output for when no objects matching the criteria are
-					found.</p>
-					<p>Example:</p>
-<pre><code># Output a maximum of 5 items tagged foo or bar, with a default output.
-[{$scode} tags="foo bar" limit="5"]No {$plural} were found.[/{$scode}]
+					
+					
+					<h4>(post type)-list</h4>
+					<p>Outputs a list of a given post type filtered by arbitrary taxonomies, for 
+					example a tag or category.  A default output can be added for when no objects 
+					matching the criteria are found.  Available attributes:</p>
+					
+					<table>
+					<tr>
+						<th scope="col">Post Type</th>
+						<th scope="col">Shortcode Call</th>
+						<th scope="col">Available Taxonomy Filters</th>
+						<th scope="col">Additional Filters</th>
+					</tr>
+					
+						<?php 
+							$custom_post_types = installed_custom_post_types();
+							
+							foreach ($custom_post_types as $custom_post_type) {
+						?>
+					<tr>
+						<td><?=$custom_post_type->singular_name?></td>
+						<td><?=$custom_post_type->name?>-list</td>
+								
+						<td>
+							<ul>
+							<?php foreach ($custom_post_type->taxonomies as $tax) { 
+								switch ($tax) {
+									case 'post_tag':
+										$tax = 'tags';
+										break;
+									case 'category':
+										$tax = 'categories';
+										break;
+								}
+								
+							?>
+								<li style="list-style: disc; margin-left: 15px;"><?=$tax?></li>
+							</ul>
+							<?php } ?>
+						</td>
+						<td>
+							<ul>
+							<?php
+								// if more than 1 taxonomy is assigned to the post type, show 'join'
+								// as being an available filter:
+								if (count($custom_post_type->taxonomies) > 1) { 
+								?>
+									<li style="list-style: disc; margin-left: 15px;">join ('and', 'or')</li>
+								<?php
+								}
+								?>
+									<li style="list-style: disc; margin-left: 15px;">limit (number)</li>
+							</ul>
+						</td>
+					</tr>
+						<?php }	?>
+					
+						
+				</table>
+					
+					<p>Examples:</p>
+<pre><code># Output a maximum of 5 Documents tagged 'foo' or 'bar', with a default output.
+[document-list tags="foo bar" limit=5]No Documents were found.[/document-list]
 
-# Output all objects categorized as foo
-[{$scode} categories="foo"]
+# Output all People categorized as 'foo'
+[person-list categories="foo"]
 
-# Output all objects matching the terms in the custom taxonomy named foo
-[{$scode} foo="term list example"]
+# Output all People matching the terms in the custom taxonomy named 'org_groups'
+[person-list org_groups="term list example"]
 
-# Outputs all objects found categorized as staff and tagged as small.
-[{$scode} limit="5" join="and" categories="staff" tags="small"]</code></pre>
+# Outputs all People found categorized as 'staff' and in the org_group 'small'.
+[person-list limit=5 join="and" categories="staff" org_groups="small"]</code></pre>
+				
+				
+				<?php 
+				// As long as the Person post type is active, let's show info for person-picture-list:
+				if (post_type_exists('person')) { ?>
+				
+				<h4>person-picture-list</h4>
+				<p>Outputs a list of People with thumbnails, person names, and job titles.  If a person's description is available, a link to the person's profile will be outputted.  If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.  An optional <strong>row_size</strong> parameter is available to customize the number of rows that will display, in addition to the other filter parameters available to the <strong>person-list</strong> shortcode.</p>
+				
+				<p>Example:</p>
+<pre><code># Output all People (default to 5 columns.)
+[person-picture-list]
+
+# Output all People in 4 columns.
+[person-picture-list row_size=4]
+
+# Output People in org_group 'staff' in 6 columns.
+[person-picture-list org_groups="staff" row_size=6]
+</code></pre>
+
+				<?php } ?>
 				</li>
 				
 			</ul>
