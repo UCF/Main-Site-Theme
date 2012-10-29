@@ -11,9 +11,66 @@
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
+	add_image_size('homepage', 620);
+	add_image_size('homepage-secondary', 540);
 	register_nav_menu('header-menu', __('Header Menu'));
 	register_nav_menu('footer-menu', __('Footer Menu'));
-	
+	register_sidebar(array(
+		'name'          => __('Sidebar'),
+		'id'            => 'sidebar',
+		'description'   => 'Sidebar found on two column page templates and search pages',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
+	register_sidebar(array(
+		'name'          => __('Below the Fold - Left'),
+		'id'            => 'bottom-left',
+		'description'   => 'Left column on the bottom of pages, after flickr images if enabled.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
+	register_sidebar(array(
+		'name'          => __('Below the Fold - Center'),
+		'id'            => 'bottom-center',
+		'description'   => 'Center column on the bottom of pages, after news if enabled.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
+	register_sidebar(array(
+		'name'          => __('Below the Fold - Right'),
+		'id'            => 'bottom-right',
+		'description'   => 'Right column on the bottom of pages, after events if enabled.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</div>',
+	));
+	register_sidebar(array(
+		'name' => __('Footer - Column One'),
+		'id' => 'bottom-one',
+		'description' => 'Far left column in footer on the bottom of pages.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+	));
+	register_sidebar(array(
+		'name' => __('Footer - Column Two'),
+		'id' => 'bottom-two',
+		'description' => 'Second column from the left in footer, on the bottom of pages.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+	));
+	register_sidebar(array(
+		'name' => __('Footer - Column Three'),
+		'id' => 'bottom-three',
+		'description' => 'Third column from the left in footer, on the bottom of pages.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+	));
+	register_sidebar(array(
+		'name' => __('Footer - Column Four'),
+		'id' => 'bottom-four',
+		'description' => 'Far right in footer on the bottom of pages.',
+		'before_widget' => '<div id="%1$s" class="widget %2$s">',
+		'after_widget' => '</div>',
+	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
 	
