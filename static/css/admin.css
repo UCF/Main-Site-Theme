@@ -66,7 +66,8 @@ li.custom_repeatable h3.hndle { margin-bottom: 16px !important; }
 li.custom_repeatable table { margin-top: -16px; }
 li.custom_repeatable.closed table { display: none; }
 a.repeatable-remove { margin: 0 0 15px 10px; }
+#ss_slides_all { margin-left: 0; padding-left: 0; }
 #ss_slides_all .custom_repeatable { padding-bottom: 15px; margin: 0 0 15px 0; }
-#slider-slides { background: #fff; border-color: #fff; }
+#slider-slides { background: #fff; border-color: #fff !important; }
 #slider-slides .inside { margin: 0; padding: 0; }
 #slider-slides .handlediv, #slider-slides > h3.hndle { display: none;}

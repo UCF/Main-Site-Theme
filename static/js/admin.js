@@ -295,6 +295,9 @@ WebcomAdmin.themeOptions = function($){
 		updateSliderSortOrder();
 		displaySlideOptions();
 		hideOnlyRemoveBtn();
+		if ($.browser.msie && $.browser.version < 8) {
+			$('a.repeatable-add').remove().appendTo('#ss_slides_all');
+		}
 		
 		
 		// Content Type radio button onchange:
