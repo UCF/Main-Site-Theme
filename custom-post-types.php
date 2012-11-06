@@ -449,17 +449,10 @@ class Publication extends CustomPostType{
 		return array(
 			array(
 				'name'  => 'Publication URL',
-				'desc' => 'Example: <span style="font-family:monospace;font-weight:bold;color:#21759B;">http://publications.smca.ucf.edu/admissions/viewbook.html</span>',
+				'desc' => 'Example: <span style="font-family:monospace;font-weight:bold;color:#21759B;">http://publications.ucf.edu/publications/admissions-viewbook/</span>',
 				'id'   => $prefix.'url',
 				'type' => 'text',
 				'std'  => '',
-			),
-			array(
-				'name' => 'Shortcode',
-				'desc' => 'To include this publication in other posts, use the following shortcode: <input disabled="disabled" type="text" value="[publication name=]" />',
-				'id'   => 'publication_shortcode',
-				'type' => 'help',
-				'value' => '[publication name="TITLE"]',
 			),
 		);
 	}

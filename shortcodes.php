@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Create a javascript slideshow of each top level element in the
  * shortcode.  All attributes are optional, but may default to less than ideal
@@ -75,6 +74,59 @@ function sc_search_form() {
 add_shortcode('search_form', 'sc_search_form');
 
 
+/**
+ * Include the defined publication, referenced by pub title:
+ *
+ *     [publication name="Where are the robots Magazine"]
+ **/
+function sc_publication($attr, $content=null){
+	$pub      = @$attr['pub'];
+	$pub_name = @$attr['name'];
+	$pub_id   = @$attr['id'];
+	
+	// Get the post data
+	if (!$pub and is_numeric($pub_id)){
+		$pub = get_post($pub);
+	}
+	if (!$pub and $pub_name){
+		$pub = get_page_by_title($pub_name, OBJECT, 'publication');
+	}
+	
+	$url = get_post_meta($pub->ID, "publication_url", True);	
+	
+	// Get the Issuu DocumentID from the url provided
+	$docID = json_decode(file_get_contents($url.'?issuu-data=docID'));
+	$docID = $docID->docID;
+	
+	// If no docID is found, assume that the publication url is invalid
+	if ($docID == NULL) { return 'Invalid publication URL; please use URLs from http://publications.ucf.edu.'; }
+	
+	// Output for an Issuu thumbnail, based on docID
+	$issuu_thumb = "<img src='http://image.issuu.com/".$docID."/jpg/page_1_thumb_large.jpg' alt='".$pub->post_title."' title='".$pub->post_title."' />"; 
+	
+	// If a featured image is set, use it; otherwise, get the thumbnail from issuu
+	$thumb = (get_the_post_thumbnail($pub->ID, 'publication_thumb', TRUE) !== '') ? get_the_post_thumbnail($pub->ID, 'publication_thumb', TRUE) : $issuu_thumb;
+	
+	ob_start(); ?>
+	
+	<div class="pub">
+		<a class="track pub-track" title="<?=$pub->post_title?>" data-toggle="modal" href="#pub-modal-<?=$pub->ID?>">
+			<?=$thumb?>
+			<span><?=$pub->post_title?></span>
+		</a>
+		<p class="pub-desc"><?=$pub->post_content?></p>
+		<div class="modal hide fade" id="pub-modal-<?=$pub->ID?>" role="dialog" aria-labelledby="<?=$pub->post_title?>" aria-hidden="true">
+			<iframe src="<?=$url?>" style="width:100% !important; height:100% !important;" scrolling="no"></iframe>
+			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		</div>
+	</div>
+	
+	<?php
+	return ob_get_clean();
+}
+add_shortcode('publication', 'sc_publication');
+
+
 function sc_person_picture_list($atts) {
 	$atts['type']	= ($atts['type']) ? $atts['type'] : null;
 	$row_size 		= ($atts['row_size']) ? (intval($atts['row_size'])) : 5;
@@ -128,10 +180,10 @@ function sc_person_picture_list($atts) {
 }
 add_shortcode('person-picture-list', 'sc_person_picture_list');
 
+
 /**
  * Centerpiece Slider
  **/
-
 	function sc_centerpiece_slider( $atts, $content = null ) {
 		
 		extract( shortcode_atts( array(
@@ -250,6 +302,7 @@ function sc_events_widget() {
 	<p><a href="http://events.ucf.edu/?upcoming=upcoming" class="events_morelink">More Events</a></p>';
 }
 add_shortcode('events-widget', 'sc_events_widget');
+
 
 /**
  * Post search
