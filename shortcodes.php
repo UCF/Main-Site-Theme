@@ -126,6 +126,9 @@ function sc_publication($attr, $content=null){
 add_shortcode('publication', 'sc_publication');
 
 
+/**
+ * Person picture lists
+ **/
 function sc_person_picture_list($atts) {
 	$atts['type']	= ($atts['type']) ? $atts['type'] : null;
 	$row_size 		= ($atts['row_size']) ? (intval($atts['row_size'])) : 5;
