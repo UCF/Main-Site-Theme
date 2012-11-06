@@ -436,14 +436,6 @@ class Publication extends CustomPostType{
 		return sc_publication(array('pub' => $pub));
 	}
 	
-	public function metabox(){
-		$metabox = parent::metabox();
-		
-		$metabox['title']   = 'Publications on Media Page';
-		$metabox['helptxt'] = 'Publication cover icon will be resized to width 153px, height 198px.';
-		return $metabox;
-	}
-	
 	public function fields(){
 		$prefix = $this->options('name').'_';
 		return array(
