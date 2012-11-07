@@ -612,7 +612,7 @@ li.tagit-new input {
 #phonebook-search #phonebook-search-description {font-family:Helvetica,sans-serif;font-size:11px;margin-bottom:0;}
 #phonebook-search-results .row-fluid {padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid #f1f1f1;}
 #phonebook-search-results #additional_results {font-size:11px;margin-top:-10px;margin-bottom:5px;font-family:Helvetica,sans-serif;}
-#phonebook-search-results .show_staff {}
+#phonebook-search-results .division {font-size:12px;}
 #phonebook-search-results .show_staff .toggle {
 	font-family:Helvetica,sans-serif;
 	text-transform:uppercase;
@@ -621,7 +621,9 @@ li.tagit-new input {
 	border:none;
 	display:block;
 }
+#phonebook-search-results .show_staff .toggle:hover {cursor:pointer;}
 #phonebook-search-results .show_staff .toggle i {margin-top:-1px;}
+#phonebook-search-results .show_staff ul {display:none;}
 
 /**
  * UCF Main Site Bootstrap overrides

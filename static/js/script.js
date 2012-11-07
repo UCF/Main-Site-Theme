@@ -462,6 +462,32 @@ Generic.PostTypeSearch = function($) {
 			}
 		});
 }
+
+var phonebookStaffToggle = function($) {
+	$('#phonebook-search-results .show_staff')
+		.each(function(index, staff) {
+			var staff  = $(staff);
+
+			(function() {
+				var toggle = staff.find('.toggle'),
+					lists  = staff.find('ul');
+				toggle
+					.click(function() {
+						if(lists.is(':visible')) {
+							lists.fadeOut();
+							$(this).html('<i class="icon-plus"></i> Show Staff');
+						} else {
+							lists.fadeIn();
+							$(this).html('<i class="icon-minus"></i> Hide Staff');
+						}
+					});
+			})(staff)
+		});
+
+		 
+		
+}
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -485,5 +511,6 @@ if (typeof jQuery != 'undefined'){
 		ieFixNewsThumbs($);
 		ieRoundedCornerThumbs($);
 		Generic.PostTypeSearch($);
+		phonebookStaffToggle($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
