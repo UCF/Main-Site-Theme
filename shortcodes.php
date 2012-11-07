@@ -392,7 +392,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'numberposts' => -1,
 		'post_type'   => $params['post_type_name'],
 		'orderby'     => 'post_title',
-		'order'       => 'alpha'
+		'order'       => 'ASC'
 	));
 	foreach($by_alpha_posts as $post) {
 		if(preg_match('/([a-zA-Z])/', $post->post_title, $matches) == 1) {
