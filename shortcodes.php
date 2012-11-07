@@ -558,10 +558,14 @@ function sc_phonebook_search($attrs) {
 								<div class="span6">
 									<div class="name"><strong><?php echo $result->name; ?></strong></div>
 									<?php if($result->department) { ?>
-									<div class="department"><?php echo $result->department; ?></div>
+									<div class="department">
+										<a href="?phonebook-search-query=<?php echo urlencode($result->department); ?>"><?php echo $result->department; ?></a>
+									</div>
 									<?php } ?>
 									<?php if($result->organization) { ?>
-									<div class="organization"><?php echo $result->organization; ?></div>
+									<div class="organization">
+										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo $result->organization; ?></a>
+									</div>
 									<?php } ?>
 								</div>
 								<div class="span6">
@@ -598,7 +602,7 @@ function sc_phonebook_search($attrs) {
 								<div class="span6">
 									<div class="name"><strong><?php echo $result->name; ?></strong></div>
 									<?php if($result->from_table == 'departments' && $result->organization) { ?>
-									<div class="division">A division of: <?php echo $result->organization; ?></div>
+									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo $result->organization; ?></a></div>
 									<?php } ?>
 								</div>
 								<div class="span6">
