@@ -609,7 +609,9 @@ li.tagit-new input {
 .document {padding-left: 25px;margin-bottom:5px;width:100%;}
 
 /* Org and Person Phonebook Search */
-#phonebook-search #phonebook-search-description {font-family:Helvetica;font-size:11px;margin-bottom:0;}
+#phonebook-search #phonebook-search-description {font-family:Helvetica,sans-serif;font-size:11px;margin-bottom:0;}
+#phonebook-search-results .row-fluid {padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid #f1f1f1;}
+#phonebook-search-results #additional_results {font-size:11px;margin-top:-10px;margin-bottom:5px;font-family:Helvetica,sans-serif;}
 
 /**
  * UCF Main Site Bootstrap overrides

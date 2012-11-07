@@ -76,6 +76,8 @@ define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
+define('SEARCH_SERVICE_URL', 'http://webcom.dev.smca.ucf.edu/people/service.php');
+define('SEARCH_SERVICE_HTTP_TIMEOUT', 3); #seconds
 
 /**
  * Set config values including meta tags, registered custom post types, styles,

@@ -477,12 +477,32 @@ function sc_phonebook_search($attrs) {
 	$show_label = isset($attrs['show_label']) && (bool)$attrs['show_label'] ? '' : ' hidden';
 	$input_size = isset($attrs['input_size']) && $attrs['input_size'] != '' ? $attrs['input_size'] : 'input-xlarge';
 
+	# Looks up search term in the search service
+	$phonebook_search_query = '';
+	$results                = array();
+	if(isset($_GET['phonebook-search-query'])) {
+		$phonebook_search_query = $_GET['phonebook-search-query'];
+		$results                = query_search_service(array('search'=>$phonebook_search_query, 'limit'=>51));
+	}
+
+	# Filter out the result types that we don't understand
+	# We only understand organizations, departments, and staff
+	$results = array_filter(
+		$results,
+		create_function('$r', 'return in_array($r->from_table, array(\'organizations\', \'departments\', \'staff\'));')
+	);
+
+	$additional_results = (count($results) > 50);
+	if($additiona_results) {
+		$results = array_slice($result, 0, 49);
+	}
+
 	ob_start();?>
 	<form class="form-horizontal" id="phonebook-search">
 		<div class="control-group">
-			<label class="control-label<? echo $show_label ?>" for="phonebook-search-query">Search Term</label>
+			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<? echo $input_size; ?>">
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo $phonebook_search_query; ?>">
 				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 			</div>
 		</div>
@@ -491,9 +511,71 @@ function sc_phonebook_search($attrs) {
 				<button type="submit" class="btn">Search</button>
 			</div>
 		</div>
-
 	</form>
-	<? return ob_get_clean();
+	<?php 
+	if($phonebook_search_query != '') {
+		?>
+		<div id="phonebook-search-results">
+		<hr />
+		<?php if(count($results) == 0) { ?>
+			<p><strong><big>No results were found.</big></strong></p>
+		<?php } else { ?>
+			<?php if($additional_results) { ?>
+			<p id="additional_results">First 50 results returned. Try narrowing your search.</p>
+			<?php } ?>
+			<?php foreach($results as $i => $result) { ?>
+				<div class="row-fluid">
+					<?php
+						switch($result->from_table) {
+							case 'staff':
+								?>
+								<div class="span6">
+									<div class="name"><strong><?php echo $result->name; ?></strong></div>
+									<?php if($result->department) { ?>
+									<div class="department"><?php echo $result->department; ?></div>
+									<?php } ?>
+									<?php if($result->organization) { ?>
+									<div class="organization"><?php echo $result->organization; ?></div>
+									<?php } ?>
+								</div>
+								<div class="span6">
+
+									<div class="pull-left">
+										<?php if($result->email) { ?>
+										<div class="email">
+											<a href="mailto:<?php echo $result->email; ?>"><?php echo $result->email; ?></a>
+										</div>
+										<?php } ?>
+										<?php if ($result->building) { ?>
+										<div class="location">
+											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>"><?php echo $result->building.' '.$result->room; ?></a>
+										</div>
+										<?php } ?>
+									</div>
+									<div class="pull-right">
+										<?php if($result->phone) { ?>
+										<div class="phone">Phone: <?php echo $result->phone; ?></div>
+										<?php } ?>
+									</div>
+								</div>
+								<?php
+								break;
+							case 'departments':
+							case 'organizations':
+								?>
+								<div class="span7 phonebook-group">
+
+								</div>
+								<?php
+								break;
+						}
+					?>
+				</div>
+			<?php } ?>
+		<?php } ?>
+	</div>
+	<?php }
+	return ob_get_clean();
 }
 add_shortcode('phonebook-search', 'sc_phonebook_search');
 ?>

@@ -832,4 +832,27 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 	}
 	
 }
+
+/** 
+ * Query the search service with specified params
+ * @return array
+ * @author Chris Conover
+ **/
+function query_search_service($params) {
+	$results = array();
+	try {
+		$context = stream_context_create(array(
+			'http' => array(
+				'method'  => 'GET',
+				'timeout' => SEARCH_SERVICE_HTTP_TIMEOUT
+		)));
+		$search_url = implode(array(SEARCH_SERVICE_URL, '?', http_build_query($params)));
+		$response   = file_get_contents($search_url, false, $context);
+		$json       = json_decode($response);
+		if(isset($json->results)) $results = $json->results;
+	} catch (Exception $e) {
+		# pass
+	}
+	return $results;
+}
 ?>
