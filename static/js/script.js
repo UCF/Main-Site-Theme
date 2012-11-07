@@ -1,81 +1,5 @@
 var Generic = {};
 
-Generic.resizeSearch = function($){
-	var form          = $('.search-form');
-	var height        = form.height();
-	var search_field  = form.find('.search-field');
-	var search_button = form.find('.search-submit');
-	
-	var loops = 0;
-	
-	while (form.height() == height){
-		var width = search_field.width();
-		search_field.width(++width);
-		
-		loops++;
-		if (loops > 1024){break;}
-	}
-	search_field.width(search_field.width() + search_button.width() - 1);
-};
-
-Generic.homeDimensions = function($){
-	var cls = this;
-	cls.home_element = $('#home');
-	
-	cls.resizeToHeight = function(element, target_height){
-		if(element.length < 1){return;}
-		
-		var loops = 0;
-		
-		var difference = function(){
-			return Math.abs(element.height() - target_height);
-		};
-		
-		// Adjust smaller if the text is too large
-		while (element.height() > target_height){
-			var current_font_size = parseInt(element.css('font-size'));
-			element.css('font-size', --current_font_size + 'px');
-			if (current_font_size < 10){
-				break;
-			}
-			if (++loops > 1024){break;}
-		}
-		
-		
-		// Adjust larger if the text is too small
-		while (element.height() < target_height && difference() > 8){
-			var current_font_size = parseInt(element.css('font-size'));
-			element.css('font-size', ++current_font_size + 'px');
-			if (element.height() > target_height && difference() > 8){
-				element.css('font-size', --current_font_size + 'px');
-				break;
-			}
-			if (++loops > 1024){break;}
-			console.log(element.height(), target_height, current_font_size);
-		}
-		
-		element.height(target_height);
-	};
-	
-	cls.uniformHeight = function(){
-		var template = cls.home_element.data()['template'];
-		
-		if (template == "home-nodescription"){
-			cls.resizeToHeight($('.content'), $('.site-image').height());
-		}
-		
-		if (template == "home-description"){
-			cls.resizeToHeight($('.right-column .description'), $('.site-image').height() - $('.search').height());
-		}
-		return;
-	};
-	
-	if (cls.home_element.length < 1){return;}
-	
-	cls.uniformHeight();
-};
-
-
 Generic.defaultMenuSeparators = function($) {
 	// Because IE sucks, we're removing the last stray separator
 	// on default navigation menus for browsers that don't 
@@ -294,6 +218,31 @@ toggleAZChevrons = function($) {
     		var i = $(this).prev().find('i');
 			i.removeClass('icon-chevron-right').addClass('icon-chevron-down');
     	});
+	}
+}
+
+
+/* Call A-Z Index Scrollspy, organize post type search */
+azIndex = function($) {
+	if ($('.page-content#azindex').length > 0) {
+		$('body').attr('data-spy', 'scroll');
+		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
+		$('form.post-type-search-form')
+			.addClass('span7')
+			.prepend('<label>Quick Search:</label>')
+			.children('input')
+				.removeClass('span3')
+				.addClass('search-query');
+		
+		$('.post-type-search-alpha').show();
+		$('.post-type-search-term').hide();
+		
+		$('.post-type-search-alpha h3').each(function() {
+			$(this).attr('id', $(this).text().toLowerCase())
+				.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
+		});
+		
+		$('#azIndexList').scrollspy();
 	}
 }
 
@@ -521,8 +470,6 @@ if (typeof jQuery != 'undefined'){
 		Webcom.loadMoreSearchResults($);
 		
 		/* Theme Specific Code Here */
-		//Generic.homeDimensions($);
-		//Generic.resizeSearch($);
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
@@ -532,7 +479,8 @@ if (typeof jQuery != 'undefined'){
 		centerpieceSingleSlide($);
 		removeNavSeparator($);
 		fixSubheaderHeight($);
-		toggleAZChevrons($);
+		//toggleAZChevrons($);
+		azIndex($);
 		toggleAnnouncementFilters($);
 		ieFixNewsThumbs($);
 		ieRoundedCornerThumbs($);

@@ -455,23 +455,23 @@ a.home_spotlight_readmore {
 
 
 /* A-Z Index */
-#alpha-index .accordion-toggle { 
-	color: #262626;
-	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+#azindex .post-type-search-form label,
+#azindex .post-type-search-form input { display: block; float: left; }
+#azindex .post-type-search-form label { 
+	margin-right: 10px; 
 	font-weight: bold; 
-	background: #fdcf4a; /* Old browsers */
-	background: -moz-linear-gradient(top, #fdcf4a 0%, #fdcf4a 50%, #f9bf1a 51%, #f9bf1a 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdcf4a), color-stop(50%,#fdcf4a), color-stop(51%,#f9bf1a), color-stop(100%,#f9bf1a)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* W3C */ 
+	font-size: 11px; 
+	vertical-align: middle; 
+	text-transform: uppercase; 
+	line-height: 28px;
 }
-#alpha-index .accordion-toggle:hover { border-bottom: 1px solid #ccc; }
-#alpha-index .icon-chevron-right, #alpha-index .icon-chevron-down { float: right !important; margin-top: 2px;}
-.azindexlink-list li { padding-bottom: 5px; }
-.azindexlink-list li:first-child { padding-top: 3px; }
-.azindexlink-list li:last-child { padding-bottom: 0; }
+#azindex .post-type-search-sorting { display:none; }
+#azIndexList .btn-group .btn-small { padding: 4px 6px; }
+#azindex .post-type-search h3 { display: block; float: left; padding-top: 20px; }
+#azindex .post-type-search .backtotop { display: block; float: right; padding-top: 20px; }
+#azindex .post-type-search .backtotop + .row { clear:both; }
+#azindex .post-type-search ul li { padding: 3px 10px 3px 0; }
+.post-type-search-results { border-radius: 0 0 10px 10px; padding-bottom: 10px; margin-top: 10px; }
 
 
 /* Announcements Page */
