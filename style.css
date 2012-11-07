@@ -34,16 +34,6 @@ select#UCFHBHeaderLinks {
 	padding: 0;
 }
 
-#UCFHBHeader * {height:auto;}
-
-/* Post Type Search Styles */
-.post-type-search {margin-top:1em;}
-.post-type-search-result-highlight {background-color:yellow;border:1px solid #ddd;}
-.post-type-search-message {padding:0 10px 10px 10px;}
-.post-type-search-form {margin-bottom:0;}
-.post-type-search-results {font-size:115%;background-color:#f1f1f1;padding-top:10px;margin-bottom:10px;display:none;}
-.post-type-search-results li {line-height:150%;}
-.post-type-search-sorting {margin-bottom:5px;}
 
 /**
  * UCF.edu specific styles
@@ -643,4 +633,3 @@ a.btn-primary.disabled { color: #fff !important; }
 /* Carousel fixes */
 .carousel-control { color: #fff !important; border-bottom: 3px solid #fff !important; text-decoration: none !important; }
 .carousel-caption p { color: #fff !important; }
-

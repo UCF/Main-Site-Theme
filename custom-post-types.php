@@ -426,7 +426,7 @@ class Publication extends CustomPostType{
 		$edit_item      = 'Edit Publication',
 		$new_item       = 'New Publication',
 		$public         = True,
-		$use_editor     = False,
+		$use_editor     = True,
 		$use_thumbnails = True,
 		$use_order      = True,
 		$use_title      = True,

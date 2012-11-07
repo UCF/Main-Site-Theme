@@ -2,21 +2,24 @@
 
 Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPress site.
 
-## Required Plugins
 
+## Required Plugins
 * Gravity Forms
 * Gravity Forms + Custom Post Types
 * WordPress Editorial Calendar
 
+
 ## Installation Requirements
 
 * Add cron job for feedback_mailer.php to run weekly for feedback emails.
+
 
 ## Notes
 
 * The function _save_meta_data() in functions/base.php (line 1572) has been modified to properly handle Slider content.
 * Slider "slide" meta fields are not duplicate meta boxes, but are actually dynamically-generated duplicate field groups, whose field values are saved into a serialized array for the given field.
 * static/js/admin.js includes multiple required scripts for the Slider editor to save/load field values properly.
+
 
 ## Custom Post Types
 
@@ -30,11 +33,13 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 * AZIndexLink
 * Announcement
 
+
 ## Custom Taxonomies
 
 * OrganizationalGroups (for 'Person' post type)
 * Keywords (for 'Announcement' post type)
 * AudienceRoles (for 'Announcement' post type)
+
 
 ## Shortcodes
 
@@ -44,3 +49,43 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 * [centerpiece] - Generates the home page centerpiece
 * [events-widget] - Outputs Upcoming Events
 * [post-type-search] - Generates a list of searchable posts
+
+
+## Important files/folders:
+
+### functions/base.php
+Where functions and classes used throughout the theme are defined.
+
+### functions/config.php
+Where Config::$links, Config::$scripts, Config::$styles, and
+Config::$metas should be defined.  Custom post types and custom taxonomies should
+be set here via Config::$custom_post_types and Config::$custom_taxonomies.
+Custom thumbnail sizes, menus, and sidebars should also be defined here.
+
+### functions.php
+Theme-specific functions only should be defined here.  (Other required
+function files are also included at the top of this file.)
+
+### shortcodes.php
+Where Wordpress shortcodes can be defined.  See example shortcodes for more 
+information.
+
+### custom-post-types.php
+Where the abstract custom post type and all its descendants live.
+
+### static/
+Where, aside from style.css in the root, all static content such as
+javascript, images, and css should live.
+Bootstrap resources should also be located here.
+
+
+## Notes
+
+This theme utilizes Twitter Bootstrap as its front-end framework.  Bootstrap
+styles and javascript libraries can be utilized in theme templates and page/post
+content.  For more information, visit http://twitter.github.com/bootstrap/
+
+Note that this theme may not always be running the most up-to-date version of
+Bootstrap.  For the most accurate documentation on the theme's current
+Bootstrap version, visit http://bootstrapdocs.com/ and select the version number
+found at the top of static/bootstrap/build/css/bootstrap.css
