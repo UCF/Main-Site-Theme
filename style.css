@@ -445,6 +445,7 @@ a.home_spotlight_readmore {
 
 
 /* A-Z Index */
+#azindex .post-type-search-form { margin-bottom: 0; }
 #azindex .post-type-search-form label,
 #azindex .post-type-search-form input { display: block; float: left; }
 #azindex .post-type-search-form label { 
@@ -461,7 +462,8 @@ a.home_spotlight_readmore {
 #azindex .post-type-search .backtotop { display: block; float: right; padding-top: 20px; }
 #azindex .post-type-search .backtotop + .row { clear:both; }
 #azindex .post-type-search ul li { padding: 3px 10px 3px 0; }
-.post-type-search-results { border-radius: 0 0 10px 10px; padding-bottom: 10px; margin-top: 10px; }
+.post-type-search-results { border-radius: 0 0 10px 10px; padding-bottom: 10px; margin-top: 10px; background: #efefef; display: none; }
+.post-type-search-results > div { padding-top: 10px; }
 
 
 /* Announcements Page */

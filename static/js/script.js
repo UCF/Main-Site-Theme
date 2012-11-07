@@ -229,7 +229,10 @@ azIndex = function($) {
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
 			.addClass('span7')
-			.prepend('<label>Quick Search:</label>')
+			.children('label')
+				.text('Quick Search:')
+				.show();
+		$('form.post-type-search-form')
 			.children('input')
 				.removeClass('span3')
 				.addClass('search-query');
