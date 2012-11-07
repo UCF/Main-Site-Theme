@@ -525,11 +525,12 @@ function sc_phonebook_search($attrs) {
 
 	function fix_org_name($name) {
 		$name = ucwords(strtolower($name));
-		$name = str_replace(' Ucf ', ' UCF ', $name);
+		$name = str_replace('Ucf', 'UCF', $name);
 		$name = str_replace('dr.', 'Dr.', $name);
 		$name = str_replace(' And ', ' and ', $name);
-		$name = str_replace(' Of', ' of ', $name);
 		$name = str_replace('Cosas ', ' COSAS ', $name);
+		$name = str_replace(' Of ', ' of ', $name);
+		$name = preg_replace('/\sOf$/', ' of', $name);
 		$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
 		$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
 		return $name;
