@@ -523,18 +523,25 @@ function sc_phonebook_search($attrs) {
 		}
 	}
 
+	function fix_org_name($name) {
+		$name = ucwords(strtolower($name));
+		$name = str_replace(' Ucf ', ' UCF ', $name);
+		$name = str_replace('dr.', 'Dr.', $name);
+		$name = str_replace(' And ', ' and ', $name);
+		$name = str_replace(' Of', ' of ', $name);
+		$name = str_replace('Cosas ', ' COSAS ', $name);
+		$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+		$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+		return $name;
+	}
+
 	ob_start();?>
 	<form class="form-horizontal" id="phonebook-search">
 		<div class="control-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo $phonebook_search_query; ?>">
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo $phonebook_search_query; ?>"> <button type="submit" class="btn">Search</button>
 				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
-			</div>
-		</div>
-		<div class="control-group">
-			<div class="controls">
-				<button type="submit" class="btn">Search</button>
 			</div>
 		</div>
 	</form>
@@ -564,7 +571,7 @@ function sc_phonebook_search($attrs) {
 									<?php } ?>
 									<?php if($result->organization) { ?>
 									<div class="organization">
-										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo $result->organization; ?></a>
+										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_org_name($result->organization); ?></a>
 									</div>
 									<?php } ?>
 								</div>
@@ -600,9 +607,13 @@ function sc_phonebook_search($attrs) {
 							case 'organizations':
 								?>
 								<div class="span6">
-									<div class="name"><strong><?php echo $result->name; ?></strong></div>
+									<div class="name">
+										<strong>
+											<?php  echo ($result->from_table == 'organizations') ? fix_org_name($result->name) : $result->name; ?>
+										</strong>
+									</div>
 									<?php if($result->from_table == 'departments' && $result->organization) { ?>
-									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo $result->organization; ?></a></div>
+									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_org_name($result->organization); ?></a></div>
 									<?php } ?>
 								</div>
 								<div class="span6">
