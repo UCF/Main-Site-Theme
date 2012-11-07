@@ -466,4 +466,68 @@ function sc_post_type_search($params=array(), $content='') {
 	return ob_get_clean();
 }
 add_shortcode('post-type-search', 'sc_post_type_search');
+
+/**
+ * Handles the form output and input for the organization phonebook search.
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function sc_org_phonebook_search($attrs) {
+	ob_start();?>
+	<form class="form-horizontal" id="org-phonebook-search">
+		<div class="control-group">
+			<label class="control-label" for="org-phonebook-search-name">Name</label>
+			<div class="controls">
+				<input type="text" id="org-phonebook-search-name" name="org-phonebook-search-name">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn">Search</button>
+			</div>
+		</div>
+
+	</form>
+	<? return ob_get_clean();
+}
+add_shortcode('org-phonebook-search', 'sc_org_phonebook_search');
+
+/**
+ * Handles for the form output and input for the person phonebook search
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function sc_person_phonebook_serach($attrs) {
+	ob_start();?>
+	<form class="form-horizontal" id="person-phonebook-search">
+		<div class="control-group">
+			<label class="control-label" for="person-phonebook-search-first-name">First Name</label>
+			<div class="controls">
+				<input type="text" id="person-phonebook-search-first-name" name="person-phonebook-search-first-name">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="person-phonebook-search-last-name">Last Name</label>
+			<div class="controls">
+				<input type="text" id="person-phonebook-search-last-name" name="person-phonebook-search-last-name">
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="person-phonebook-search-phone">Phone #</label>
+			<div class="controls">
+				<input type="text" id="person-phonebook-search-phone" name="person-phonebook-search-phone">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">
+				<button type="submit" class="btn">Search</button>
+			</div>
+		</div>
+
+	</form>
+	<? return ob_get_clean();
+}
+add_shortcode('person-phonebook-search', 'sc_person_phonebook_serach');
 ?>

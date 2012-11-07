@@ -608,7 +608,9 @@ li.tagit-new input {
 
 .document {padding-left: 25px;margin-bottom:5px;width:100%;}
 
-
+/* Org and Person Phonebook Search */
+#org-phonebook-search,
+#person-phonebook-search {margin-top:20px;}
 
 /**
  * UCF Main Site Bootstrap overrides
