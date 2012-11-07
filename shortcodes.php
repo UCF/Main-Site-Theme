@@ -482,7 +482,7 @@ function sc_phonebook_search($attrs) {
 	$results                = array();
 	if(isset($_GET['phonebook-search-query'])) {
 		$phonebook_search_query = $_GET['phonebook-search-query'];
-		$results                = query_search_service(array('search'=>$phonebook_search_query, 'limit'=>51));
+		$results                = query_search_service(array('search'=>$phonebook_search_query));
 	}
 
 	# Filter out the result types that we don't understand
@@ -492,9 +492,35 @@ function sc_phonebook_search($attrs) {
 		create_function('$r', 'return in_array($r->from_table, array(\'organizations\', \'departments\', \'staff\'));')
 	);
 
+	# Filter out records with Fax in the name
+	$results = array_filter($results, create_function('$r', '
+			return (preg_match("/^fax\s/i", $r->name) || 
+						preg_match("/\sfax\s/i", $r->name) || 
+							preg_match("/\sfax$/i", $r->name)) ? False : True;')
+	);
+
+	# Limit results to 50 entries
 	$additional_results = (count($results) > 50);
-	if($additiona_results) {
-		$results = array_slice($result, 0, 49);
+	if($additional_results) {
+		$results = array_slice($results, 0, 49);
+	}
+
+	# Attach staff to organizations and departments
+	foreach($results as $result) {
+		$organization = ($result->from_table == 'organizations');
+		$department   = ($result->from_table == 'departments');
+		if($organization || $department) {
+			$result->staff = array();
+			foreach($results as $_result) {
+				if($_result->from_table == 'staff') {
+					if($organization && $result->name == $_result->organization) {
+						$result->staff[] = $_result;
+					} else if($department && $result->name == $_result->department) {
+						$result->staff[] = $_result;
+					}
+				}
+			}
+		}
 	}
 
 	ob_start();?>
@@ -569,8 +595,49 @@ function sc_phonebook_search($attrs) {
 							case 'departments':
 							case 'organizations':
 								?>
-								<div class="span7 phonebook-group">
+								<div class="span6">
+									<div class="name"><strong><?php echo $result->name; ?></strong></div>
+								</div>
+								<div class="span6">
+									<div class="pull-left">
+										<?php if ($result->building) { ?>
+										<div class="location">
+											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
+												<?php echo $result->building ?>
+												<?php if($result->room) {
+													echo ' - '.$result->room; 
 
+												} ?>
+											</a>
+										</div>
+										<?php } ?>
+									</div>
+									<div class="pull-right">
+										<?php if($result->phone) { ?>
+										<div class="phone">Phone: <?php echo $result->phone; ?></div>
+										<?php } ?>
+									</div>
+								</div>
+								<div class="show_staff" style="clear:both">
+									<?php if(count($result->staff) > 0) { ?>
+										<a href="#" class="toggle"><i class="icon-plus"></i> Show Staff</a>
+										<?php $staff_per_column = ceil(count($result->staff) / 3);?>
+										<ul class="span4 unstyled">
+											<?php foreach($result->staff as $j => $staff) { ?>
+												<?php if( (($j + 1) % $staff_per_column) == 0) { 
+													echo '</ul><ul class="span4 unstyled">';
+												} ?>
+												<li>
+													<?php if($staff->email) { ?>
+														<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
+													<?php } else { ?>
+														<?php echo $staff->name; ?>
+													<?php } ?>
+													<?php if($staff->phone) echo $staff->phone; ?>
+												</li>
+											<?php } ?>
+										</ul>
+									<?php } ?>
 								</div>
 								<?php
 								break;
