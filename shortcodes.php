@@ -523,12 +523,13 @@ function sc_phonebook_search($attrs) {
 		}
 	}
 
-	function fix_org_name($name) {
+	function fix_name_case($name) {
 		$name = ucwords(strtolower($name));
 		$name = str_replace('Ucf', 'UCF', $name);
 		$name = str_replace('dr.', 'Dr.', $name);
 		$name = str_replace(' And ', ' and ', $name);
 		$name = str_replace('Cosas ', ' COSAS ', $name);
+		$name = str_replace('Creol', 'CREOL', $name);
 		$name = str_replace(' Of ', ' of ', $name);
 		$name = preg_replace('/\sOf$/', ' of', $name);
 		$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
@@ -572,7 +573,7 @@ function sc_phonebook_search($attrs) {
 									<?php } ?>
 									<?php if($result->organization) { ?>
 									<div class="organization">
-										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_org_name($result->organization); ?></a>
+										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a>
 									</div>
 									<?php } ?>
 								</div>
@@ -587,7 +588,7 @@ function sc_phonebook_search($attrs) {
 										<?php if ($result->building) { ?>
 										<div class="location">
 											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
-												<?php echo $result->building ?>
+												<?php echo fix_name_case($result->building); ?>
 												<?php if($result->room) {
 													echo ' - '.$result->room; 
 
@@ -610,11 +611,11 @@ function sc_phonebook_search($attrs) {
 								<div class="span6">
 									<div class="name">
 										<strong>
-											<?php  echo ($result->from_table == 'organizations') ? fix_org_name($result->name) : $result->name; ?>
+											<?php  echo ($result->from_table == 'organizations') ? fix_name_case($result->name) : $result->name; ?>
 										</strong>
 									</div>
 									<?php if($result->from_table == 'departments' && $result->organization) { ?>
-									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_org_name($result->organization); ?></a></div>
+									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a></div>
 									<?php } ?>
 								</div>
 								<div class="span6">
@@ -622,7 +623,7 @@ function sc_phonebook_search($attrs) {
 										<?php if ($result->building) { ?>
 										<div class="location">
 											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
-												<?php echo $result->building ?>
+												<?php echo fix_name_case($result->building); ?>
 												<?php if($result->room) {
 													echo ' - '.$result->room; 
 												} ?>
