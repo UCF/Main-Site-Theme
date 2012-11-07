@@ -548,7 +548,13 @@ function sc_phonebook_search($attrs) {
 										<?php } ?>
 										<?php if ($result->building) { ?>
 										<div class="location">
-											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>"><?php echo $result->building.' '.$result->room; ?></a>
+											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
+												<?php echo $result->building ?>
+												<?php if($result->room) {
+													echo ' - '.$result->room; 
+
+												} ?>
+											</a>
 										</div>
 										<?php } ?>
 									</div>
