@@ -250,7 +250,7 @@ function output_weather_data($class=null) {
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img']; ?>
 	<div id="weather_bug" class="<?=$class?>">
-		<div id="wb_status_txt" style="background: url(<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.gif) left center no-repeat;"><span><?=$temp?>F, <?=$condition?></span></div>
+		<div id="wb_status_txt" style="background: url(<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.gif) left center no-repeat; background-size: 32px 32px"><span><?=$temp?>F, <?=$condition?></span></div>
 	</div>
 	<?php
 }

@@ -69,6 +69,7 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 #weather_bug #wb_status_txt { 
 	font-family: Georgia, serif; 
 	font-size: 17px; 
+	line-height: 28px;
 	font-weight: bold; 
 	margin-bottom: 0;
 	padding-left: 40px;
@@ -334,7 +335,6 @@ a.home_spotlight_readmore {
 #home_rightcol { margin-left: 0; border-left: 1px dotted #333; }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
 #home_rightcol #weather_bug { width: 100%; }
-#home_rightcol #weather_bug img { margin-right: 15px; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }
 
 

@@ -317,6 +317,12 @@ ieFixNewsThumbs = function($) {
 }
 
 
+/* IE 7-8 fix for Weather bug icon size-- requires jquery.backgroundSize.js */
+ieFixWeatherBug = function($) {
+	$('#wb_status_txt').css( "background-size", "32px 32px" );
+}
+
+
 /* IE 7-8 fix for rounded corners on spotlight, news thumbnails */
 ieRoundedCornerThumbs = function($) {
 	if ($.browser.msie && $.browser.version < 9) {
