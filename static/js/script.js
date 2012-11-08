@@ -249,6 +249,12 @@ azIndex = function($) {
 		// default to 'Z' for whatever reason
 		$('#azIndexList .nav li.active').removeClass('active');
 		$('#azIndexList .nav li:first-child').addClass('active');
+		
+		// Reset active letter link when 'Back to Top' is clicked
+		$('.backtotop a').click(function() {
+			$('#azIndexList .nav li.active').removeClass('active');
+			$('#azIndexList .nav li:first-child').addClass('active');
+		});
 	}
 }
 
