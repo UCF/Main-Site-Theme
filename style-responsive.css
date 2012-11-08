@@ -106,45 +106,12 @@
 	#azIndexList .btn-group .btn-small { padding: 3.5px; }
 }
 
-/* Weird iPad fixes: */
+/* iPad fixes: */
 @media (width: 768px) {
-	#header-menu li a { font-size: 14px !important; }
-	
-	#centerpiece_slider { margin-left: 20px !important; }
 	#centerpiece_control { bottom: 25px; left: 25px; }
 	#centerpiece_control a { width: 20px; height: 20px; margin-right: 15px; }
 	
-	#home_leftcol, #home_centercol { padding-bottom: 20px; border-bottom: 1px dotted #333 !important; }
-	#home_centercol, #home_rightcol { margin-top: 20px; }
-	#home_centercol { border: 0; }
-	#home_centercol .col_padwrap { margin: 0; }
-	.news .item { margin-bottom: 10px; }
-	#home_rightcol { border-left: 0; padding-left: 0; margin-left: 20px; }
-	
-	#colleges_wrap .container .row { padding: 0 20px; }
-	
-	#footer { margin-left: 0; }
 	#footer-menu li { letter-spacing: 0.7px; }
-	
-	
-	#page_title { overflow: hidden; margin-left: 20px; }
-	#subheader { height: auto; overflow: hidden; margin-left: 20px; }
-	#subheader .subheader_subimg, #subheader .subheader_studentimg { display: none; }
-	#subheader blockquote { margin-left: 0; width: 100%; }
-	
-	#contentcol { margin-left: 20px; overflow: hidden; }
-	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 340px; }
-	
-	#sidebar_left { border-top: 1px dotted #333; margin-top: 10px; margin-left: 20px; padding-top: 20px; }
-	#sidebar_l_colleges { padding-top: 0; }
-	
-	#sidebar_right { display: none; }
-	
-	#announcements div[id^="announcement_"] { height: auto; margin-left: 20px; }
-	
-	#azindex .post-type-search-header { margin-left: 0; }
-	#azindex .post-type-search ul { margin-left: 50px; }
-	#azIndexList .btn-group .btn-small { padding: 4px 6px; }
 }
 
 @media (max-width: 767px) {

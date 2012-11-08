@@ -55,7 +55,7 @@ Generic.mobileNavBar = function($) {
 
 Generic.mobileSidebar = function($) {
 	var moveSidebar = function() {
-		if ($(window).width() < 769) {
+		if ($(window).width() < 768) {
 			$('#sidebar_left').remove().insertAfter('#contentcol');
 		}
 		else {
@@ -185,7 +185,7 @@ removeNavSeparator = function($) {
 /* Fix subheader height to contain blockquote if it exceeds past its container: */
 fixSubheaderHeight = function($) {
 	var doSubheaderHeight = function() {
-		if ($(window).width() > 768 && $('#subheader').length > 0) { /* Subhead images hide below this size */
+		if ($(window).width() >= 768 && $('#subheader').length > 0) { /* Subhead images hide below this size */
 			var subimgHeight = $('#subheader .subheader_subimg').height(),
 				quoteHeight = $('#subheader .subhead_quote').height();
 			if (quoteHeight > subimgHeight) {
