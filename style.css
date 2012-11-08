@@ -500,8 +500,8 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_wrap { text-align: right; }
 #filters #addnew_wrap #addnew_announcement { margin-top: 24px; }
 
-#announcements div[id^="announcement_"] { height: 300px; }
-.announcement_wrap { height: auto; background: #fafafa; margin-bottom: 20px; padding: 15px; position: relative; }
+/*#announcements div[id^="announcement_"] { height: 300px; }*/
+.announcement_wrap { height: auto; background: #fafafa; margin-bottom: 40px; padding: 15px; position: relative; }
 .announcement_wrap:before, .announcement_wrap:after {
 	z-index: -1; 
   	position: absolute; 
@@ -530,7 +530,7 @@ h2.header_announcements { font-size: 20px; }
   	right: 10px;
   	left: auto;
 }
-.announcement_wrap .thumbtack { width: 20px; height: 20px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -9px; left: 47%; }
+.announcement_wrap .thumbtack { width: 20px; height: 20px; background: url('static/img/thumbtack-yellow.png') center center no-repeat; position: absolute; top: -9px; left: 50%; }
 .announcement_wrap .new { width: 50px; height: 50px; background: url('static/img/announcement-new.png') center center no-repeat; position: absolute; top: -1px; right: -1px; text-indent: -9999px; }
 
 .announcement_wrap .date, .announcement_wrap .audience, .announcement_wrap .keywords { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important; }

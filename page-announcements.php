@@ -121,7 +121,7 @@ else {
 					</div>
 					</form>
 					<div class="span3" id="addnew_wrap">
-						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement">Post an Announcement</a>
+						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><i class="icon-pencil icon-white"></i> Post an Announcement</a>
 					</div>
 				</div>
 				
@@ -135,7 +135,11 @@ else {
 					} else { 
 						print '<div class="row">';
 						
+						$count = 0;
 						foreach ($announcements as $announcement) {
+							if ($count % 3 == 0 && $count !== 0) { // 3 announcements per row
+								print '</div><div class="row">';
+							}
 						?>
 							<div class="span4" id="announcement_<?=$announcement['post_id']?>">
 								<div class="announcement_wrap">
@@ -199,10 +203,11 @@ else {
 								</div>
 							</div>	
 						<?php
-						}
+							$count++;
+						} // endforeach
 						
 						print '</div>';
-					} 
+					} // endif ($announcements == NULL)
 				?>
 				
 			</article>
