@@ -324,9 +324,8 @@ function sc_post_type_search($params=array(), $content='') {
 		'column_count'           => '3',
 		'order_by'               => 'post_title',
 		'order'                  => 'ASC',
-		'show_sorting'           => True,
+		'show_sorting'           => true,
 		'default_sorting'        => 'term',
-		'show_sorting'           => True
 	);
 
 	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
