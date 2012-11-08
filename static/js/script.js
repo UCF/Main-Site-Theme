@@ -225,7 +225,7 @@ toggleAZChevrons = function($) {
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
-		$('body').attr('data-spy', 'scroll');
+		$('body').attr({'data-spy' : 'scroll', 'data-target' : '#azIndexList'});
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
 			.addClass('span7')
@@ -238,11 +238,16 @@ azIndex = function($) {
 				.addClass('search-query');
 		
 		$('.post-type-search-alpha h3').each(function() {
-			$(this).attr('id', $(this).text().toLowerCase())
+			$(this).attr('id', 'az-' + $(this).text().toLowerCase())
 				.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
 		
 		$('#azIndexList').scrollspy();
+		
+		// Force 'A' as the active starting letter, since it likes to
+		// default to 'Z' for whatever reason
+		$('#azIndexList .nav li.active').removeClass('active');
+		$('#azIndexList .nav li:first-child').addClass('active');
 	}
 }
 

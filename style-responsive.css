@@ -103,7 +103,11 @@
 	#announcements div[id^="announcement_"] { height: 340px; }
 	#announcements #filters #addnew_announcement { font-size: 14px; }
 	
-	#azIndexList .btn-group .btn-small { padding: 3.5px; }
+	#azIndexList { width: 404px; }
+	#azIndexList .navbar-inner { border-right: 0; border-top: 0; border-radius: 0; }
+	#azIndexList .nav li { border-top: 1px solid #D4D4D4; }
+	#azIndexList .nav li:last-child { border-right: 1px solid #D4D4D4; }
+	#azIndexList .nav li a { width: 30px; }
 }
 
 /* iPad fixes: */
@@ -144,6 +148,8 @@
 	#home_centercol .col_padwrap { margin: 0; }
 	.news .item { margin-bottom: 10px; }
 	#home_rightcol { border-left: 0; padding-left: 0; }
+	
+	#colleges_wrap { margin-left: -20px; padding: 5px 20px; }
 	
 	/* Shrinkable bootstrap tables for tablets/phones.
 	Responsive table guide via css-tricks.com/responsive-data-tables/ */
@@ -237,8 +243,6 @@
 	#filters #addnew_wrap { text-align: center; clear: both; }
 	#filters #addnew_wrap #addnew_announcement { margin-top: 10px; }
 	#announcements div[id^="announcement_"] { height: auto; }
-	
-	#azIndexList .btn-group .btn-small { padding: 3.5px; margin-bottom: 10px; }
 }
 
 @media (max-width: 480px) {	
