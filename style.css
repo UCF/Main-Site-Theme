@@ -457,6 +457,7 @@ a.home_spotlight_readmore {
 	line-height: 28px;
 }
 #azindex .post-type-search-sorting { display:none; }
+#azIndexList.affix { top: 0; }
 #azIndexList .btn-group .btn-small { padding: 4px 6px; }
 #azindex .post-type-search h3 { display: block; float: left; padding-top: 20px; }
 #azindex .post-type-search .backtotop { display: block; float: right; padding-top: 20px; }
