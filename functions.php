@@ -511,16 +511,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				}
 				break;
 			case 'all':
-				$time_args = array(
-					'meta_query' => array(
-						array(
-							'key' => 'announcement_start_date',
-							'value' => $thismonday,
-							'compare' => '>='
-						),
-					),
-				);
-				$args = array_merge($args, $time_args);
+				$args['numberposts'] = 100;
 				break;
 			default:
 				$time_args = array(
