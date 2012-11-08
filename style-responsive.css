@@ -101,6 +101,7 @@
 	#footer-menu li { margin-right: 5px; }
 	
 	#announcements div[id^="announcement_"] { height: 340px; }
+	#announcements #filters #addnew_announcement { font-size: 14px; }
 	
 	#azIndexList .btn-group .btn-small { padding: 3.5px; }
 }
@@ -147,6 +148,8 @@
 }
 
 @media (max-width: 767px) {
+	#UCFHBHeader { margin-left: -20px; width: 100%; padding-right: 40px; }
+	
 	#header { margin-left: 0; }
 	#page_title #weather_bug { display: none; }
 	
@@ -271,7 +274,7 @@
 	#azIndexList .btn-group .btn-small { padding: 3.5px; margin-bottom: 10px; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) {	
 	.navbar .menu {
 		padding: 0;
 	}
@@ -344,6 +347,11 @@
 	#filters #filter_audience_wrap,
 	#filters #filter_keyword_wrap,
 	#filters #filter_time_wrap { margin-right: 0; }
+	#filters #filter_audience_wrap,
+	#filters #filter_audience_wrap select { width: 155px !important; }
+	#filters #filter_audience_wrap { margin-right: 10px; float: left; }
+	#filters #filter_form .span1 { width: 100px !important; float: left; padding-top: 2px; }
+	#filters #addnew_wrap { text-align: left; }
 	
 	li.tagit-new { width: 99% !important; }
 	

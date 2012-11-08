@@ -631,6 +631,7 @@ a.btn-primary.disabled { color: #fff !important; }
 	color: #515050 !important;
 }
 .navbar .brand, .navbar ul.nav>li>a { color: #fff !important; }
+.navbar .brand { position: absolute; left: 20px; }
 
 /* Carousel fixes */
 .carousel-control { color: #fff !important; border-bottom: 3px solid #fff !important; text-decoration: none !important; }

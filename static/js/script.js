@@ -19,7 +19,7 @@ Generic.mobileNavBar = function($) {
 	// Switch the navigation bar from standard horizontal nav to bootstrap mobile nav
 	// when the browser is at mobile size:
 	var mobile_wrap = function() {
-		$('#header-menu').wrap('<div class="navbar"><div class="navbar-inner"><div class="container" id="mobile_dropdown_container"><div class="nav-collapse"></div></div></div></div>');
+		$('#header-menu').wrap('<div class="navbar navbar-inverse"><div class="navbar-inner"><div class="container" id="mobile_dropdown_container"><div class="nav-collapse"></div></div></div></div>');
 		$('<a class="btn btn-navbar" id="mobile_dropdown_toggle" data-target=".nav-collapse" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="#">Navigation</a>').prependTo('#mobile_dropdown_container');
 		$('.current-menu-item, .current_page_item').addClass('active');
 	}
