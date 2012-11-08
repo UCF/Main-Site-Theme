@@ -492,4 +492,208 @@ function sc_post_type_search($params=array(), $content='') {
 	return ob_get_clean();
 }
 add_shortcode('post-type-search', 'sc_post_type_search');
+
+/**
+ * Handles the form output and input for the phonebook search.
+ *
+ * @return string
+ * @author Chris Conover
+ **/
+function sc_phonebook_search($attrs) {
+	$show_label = isset($attrs['show_label']) && (bool)$attrs['show_label'] ? '' : ' hidden';
+	$input_size = isset($attrs['input_size']) && $attrs['input_size'] != '' ? $attrs['input_size'] : 'input-xlarge';
+
+	# Looks up search term in the search service
+	$phonebook_search_query = '';
+	$results                = array();
+	if(isset($_GET['phonebook-search-query'])) {
+		$phonebook_search_query = $_GET['phonebook-search-query'];
+		$results                = query_search_service(array('search'=>$phonebook_search_query));
+	}
+
+	# Filter out the result types that we don't understand
+	# We only understand organizations, departments, and staff
+	$results = array_filter(
+		$results,
+		create_function('$r', 'return in_array($r->from_table, array(\'organizations\', \'departments\', \'staff\'));')
+	);
+
+	# Filter out records with Fax in the name
+	$results = array_filter($results, create_function('$r', '
+			return (preg_match("/^fax\s/i", $r->name) || 
+						preg_match("/\sfax\s/i", $r->name) || 
+							preg_match("/\sfax$/i", $r->name)) ? False : True;')
+	);
+
+	# Limit results to 50 entries
+	$additional_results = (count($results) > 50);
+	if($additional_results) {
+		$results = array_slice($results, 0, 49);
+	}
+
+	# Attach staff to organizations and departments
+	foreach($results as $result) {
+		$organization = ($result->from_table == 'organizations');
+		$department   = ($result->from_table == 'departments');
+		if($organization || $department) {
+			$result->staff = array();
+			foreach($results as $_result) {
+				if($_result->from_table == 'staff') {
+					if($organization && $result->name == $_result->organization) {
+						$result->staff[] = $_result;
+					} else if($department && $result->name == $_result->department) {
+						$result->staff[] = $_result;
+					}
+				}
+			}
+		}
+	}
+
+	function fix_name_case($name) {
+		$name = ucwords(strtolower($name));
+		$name = str_replace('Ucf', 'UCF', $name);
+		$name = str_replace('dr.', 'Dr.', $name);
+		$name = str_replace(' And ', ' and ', $name);
+		$name = str_replace('Cosas ', ' COSAS ', $name);
+		$name = str_replace('Creol', 'CREOL', $name);
+		$name = str_replace(' Of ', ' of ', $name);
+		$name = preg_replace('/\sOf$/', ' of', $name);
+		$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+		$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+		return $name;
+	}
+
+	ob_start();?>
+	<form class="form-horizontal" id="phonebook-search">
+		<div class="control-group">
+			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
+			<div class="controls">
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo $phonebook_search_query; ?>"> <button type="submit" class="btn">Search</button>
+				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
+			</div>
+		</div>
+	</form>
+	<?php 
+	if($phonebook_search_query != '') {
+		?>
+		<div id="phonebook-search-results">
+		<hr />
+		<?php if(count($results) == 0) { ?>
+			<p><strong><big>No results were found.</big></strong></p>
+		<?php } else { ?>
+			<?php if($additional_results) { ?>
+			<p id="additional_results">First 50 results returned. Try narrowing your search.</p>
+			<?php } ?>
+			<?php foreach($results as $i => $result) { ?>
+				<div class="row-fluid">
+					<?php
+						switch($result->from_table) {
+							case 'staff':
+								?>
+								<div class="span6">
+									<div class="name"><strong><?php echo $result->name; ?></strong></div>
+									<?php if($result->department) { ?>
+									<div class="department">
+										<a href="?phonebook-search-query=<?php echo urlencode($result->department); ?>"><?php echo $result->department; ?></a>
+									</div>
+									<?php } ?>
+									<?php if($result->organization) { ?>
+									<div class="organization">
+										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a>
+									</div>
+									<?php } ?>
+								</div>
+								<div class="span6">
+
+									<div class="pull-left">
+										<?php if($result->email) { ?>
+										<div class="email">
+											<a href="mailto:<?php echo $result->email; ?>"><?php echo $result->email; ?></a>
+										</div>
+										<?php } ?>
+										<?php if ($result->building) { ?>
+										<div class="location">
+											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
+												<?php echo fix_name_case($result->building); ?>
+												<?php if($result->room) {
+													echo ' - '.$result->room; 
+
+												} ?>
+											</a>
+										</div>
+										<?php } ?>
+									</div>
+									<div class="pull-right">
+										<?php if($result->phone) { ?>
+										<div class="phone">Phone: <?php echo $result->phone; ?></div>
+										<?php } ?>
+									</div>
+								</div>
+								<?php
+								break;
+							case 'departments':
+							case 'organizations':
+								?>
+								<div class="span6">
+									<div class="name">
+										<strong>
+											<?php  echo ($result->from_table == 'organizations') ? fix_name_case($result->name) : $result->name; ?>
+										</strong>
+									</div>
+									<?php if($result->from_table == 'departments' && $result->organization) { ?>
+									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a></div>
+									<?php } ?>
+								</div>
+								<div class="span6">
+									<div class="pull-left">
+										<?php if ($result->building) { ?>
+										<div class="location">
+											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
+												<?php echo fix_name_case($result->building); ?>
+												<?php if($result->room) {
+													echo ' - '.$result->room; 
+												} ?>
+											</a>
+										</div>
+										<?php } ?>
+									</div>
+									<div class="pull-right">
+										<?php if($result->phone) { ?>
+										<div class="phone">Phone: <?php echo $result->phone; ?></div>
+										<?php } ?>
+									</div>
+								</div>
+								<div class="show_staff" style="clear:both">
+									<?php if(count($result->staff) > 0) { ?>
+										<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
+										<?php $staff_per_column = ceil(count($result->staff) / 3);?>
+										<ul class="span4 unstyled">
+											<?php foreach($result->staff as $j => $staff) { ?>
+												<li>
+													<?php if($staff->email) { ?>
+														<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
+													<?php } else { ?>
+														<?php echo $staff->name; ?>
+													<?php } ?>
+													<?php if($staff->phone) echo $staff->phone; ?>
+												</li>
+												<?php if( (($j + 1) % $staff_per_column) == 0) { 
+													echo '</ul><ul class="span4 unstyled">';
+												} ?>
+											<?php } ?>
+										</ul>
+									<?php } ?>
+								</div>
+								<?php
+								break;
+						}
+					?>
+				</div>
+			<?php } ?>
+		<?php } ?>
+	</div>
+	<?php }
+	return ob_get_clean();
+}
+add_shortcode('phonebook-search', 'sc_phonebook_search');
 ?>
