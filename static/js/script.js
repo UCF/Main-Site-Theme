@@ -313,13 +313,7 @@ toggleAnnouncementFilters = function($) {
 
 /* IE 7-8 fix for News thumbnails-- requires jquery.backgroundSize.js */
 ieFixNewsThumbs = function($) {
-	$('.ie8 #home_centercol .news .item .news-thumb, .ie7 #home_centercol .news .item .news-thumb').css( "background-size", "cover" );
-}
-
-
-/* IE 7-8 fix for Weather bug icon size-- requires jquery.backgroundSize.js */
-ieFixWeatherBug = function($) {
-	$('.ie8 #wb_status_txt, .ie7 #wb_status_txt').css( "background-size", "32px 32px" );
+	$('body.ie8 #home_centercol .news .item .news-thumb, body.ie7 #home_centercol .news .item .news-thumb').css( "background-size", "cover" );
 }
 
 
@@ -527,7 +521,6 @@ if (typeof jQuery != 'undefined'){
 		azIndex($);
 		toggleAnnouncementFilters($);
 		ieFixNewsThumbs($);
-		ieFixWeatherBug($);
 		ieRoundedCornerThumbs($);
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
