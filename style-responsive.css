@@ -106,6 +106,7 @@
 	#azIndexList { width: 404px; }
 	#azIndexList .navbar-inner { border-right: 0; border-top: 0; border-radius: 0; }
 	#azIndexList .nav li { border-top: 1px solid #D4D4D4; }
+	#azIndexList .nav li:first-child { margin-left: 0; }
 	#azIndexList .nav li:last-child { border-right: 1px solid #D4D4D4; }
 	#azIndexList .nav li a { width: 30px; }
 }

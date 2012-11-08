@@ -225,7 +225,7 @@ toggleAZChevrons = function($) {
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
-		$('body').attr({'data-spy' : 'scroll', 'data-target' : '#azIndexList'});
+		$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
 			.addClass('span7')
@@ -238,7 +238,8 @@ azIndex = function($) {
 				.addClass('search-query');
 		
 		$('.post-type-search-alpha h3').each(function() {
-			$(this).attr('id', 'az-' + $(this).text().toLowerCase())
+			$(this)
+				.attr( {'id' : 'az-'+ $(this).text().toLowerCase() } )
 				.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
 		
