@@ -237,9 +237,6 @@ azIndex = function($) {
 				.removeClass('span3')
 				.addClass('search-query');
 		
-		$('.post-type-search-alpha').show();
-		$('.post-type-search-term').hide();
-		
 		$('.post-type-search-alpha h3').each(function() {
 			$(this).attr('id', $(this).text().toLowerCase())
 				.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
