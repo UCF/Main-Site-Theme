@@ -65,15 +65,15 @@ table.events .item .eventdata .location a:hover { color: #363636; }
 
 
 /* Weather default styles */
-#weather_bug { width: height: 36px; float: left; }
-#weather_bug img { width: 36px; height: 36px; float: left; }
+#weather_bug { float: left; margin-top: 8px; }
 #weather_bug #wb_status_txt { 
-	display: block;
-	text-align: right; 
 	font-family: Georgia, serif; 
 	font-size: 17px; 
 	font-weight: bold; 
-	padding-top: 8px; 
+	margin-bottom: 0;
+	padding-left: 40px;
+	float: right;
+	text-align: right;
 	/*text-shadow: 1px 1px 0px #fff; */
 }
 
