@@ -149,7 +149,7 @@ function theme_options_sanitize($input){
  **/
 function editor_styles($css){
 	$css   = array_map('trim', explode(',', $css));
-	$css[] = THEME_CSS_URL.'/formatting.css';
+	//$css[] = THEME_CSS_URL.'/formatting.css';
 	$css   = implode(',', $css);
 	return $css;
 }
