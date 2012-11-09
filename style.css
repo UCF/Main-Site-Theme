@@ -460,7 +460,7 @@ a.home_spotlight_readmore {
 #azindex .post-type-search-sorting { display:none; }
 
 #azIndexList.affix { top: 0; z-index: 999; }
-#azIndexList { width: 531px; margin-left: 25px; }
+#azIndexList { width: 532px; margin-left: 25px; }
 #azIndexList #azIndexList-label { font-family: Georgia, serif; color: #515050; margin-left: -5px; background: #fff; padding: 10px 10px 7px 0; }
 #azIndexList .navbar-inner { padding: 0; min-height: 0; }
 #azIndexList .nav { margin-right: 0; }
@@ -468,9 +468,12 @@ a.home_spotlight_readmore {
 #azIndexList .nav li:first-child { margin-left: 2px; }
 #azIndexList .nav li:last-child { border-right: 0; }
 #azIndexList .nav li a { width: 19.25px; padding: 4px 0; text-align:center; font-size: 11px; color: #333 !important; }
+#azIndexList .nav li a.disabled { background: #eee; color: #ccc !important; }
 
-#azindex .post-type-search h3 { display: block; float: left; height: 60px; line-height: 60px; }
-#azindex .post-type-search .backtotop { display: block; float: right; padding-top: 20px; }
+#azindex .az-jumpto-anchor { height: 70px; width: 100%; clear: both; }
+#azindex .az-jumpto-anchor#az-a { height: 20px; }
+#azindex .post-type-search h3 { display: block; float: left; /*height: 60px; line-height: 60px;*/ }
+#azindex .post-type-search .backtotop { display: block; float: right; /*padding-top: 20px;*/ }
 #azindex .post-type-search .backtotop + .row { clear:both; min-height: 100px; }
 #azindex .post-type-search-results ul li,
 #azindex .post-type-search-alpha ul li { padding: 3px 10px 3px 0; }

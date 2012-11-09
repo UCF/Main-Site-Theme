@@ -239,8 +239,10 @@ azIndex = function($) {
 		
 		$('.post-type-search-alpha h3').each(function() {
 			$(this)
-				.attr( {'id' : 'az-'+ $(this).text().toLowerCase() } )
-				.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
+				//.attr( {'id' : 'az-'+ $(this).text().toLowerCase() } )
+				.parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
+				//.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
+				.children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
 		
 		$('#azIndexList').scrollspy();
@@ -254,6 +256,17 @@ azIndex = function($) {
 		$('.backtotop a').click(function() {
 			$('#azIndexList .nav li.active').removeClass('active');
 			$('#azIndexList .nav li:first-child').addClass('active');
+		});
+		
+		// Set disabled letters for sections with no content
+		$('.az-jumpto-anchor').each(function() {
+			if ($(this).siblings('.row').children('div').length < 1) {
+				var href = '#' + $(this).attr('id');
+				$('#azIndexList .nav li a[href="'+ href +'"]').addClass('disabled');
+			}
+		});
+		$('#azIndexList .nav li a.disabled').click(function(e) {
+			e.preventDefault();
 		});
 	}
 }

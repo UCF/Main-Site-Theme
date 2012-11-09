@@ -111,6 +111,7 @@
 	#azIndexList .nav li:first-child { margin-left: 0; }
 	#azIndexList .nav li:last-child { border-right: 1px solid #D4D4D4; }
 	#azIndexList .nav li a { width: 30px; }
+	#azindex .az-jumpto-anchor { height: 100px; }
 }
 
 /* iPad fixes: */
@@ -331,5 +332,6 @@
 	li.tagit-new { width: 99% !important; }
 	
 	#azIndexList { display: none; }
+	#azindex .az-jumpto-anchor { height: 20px; }
 	#azindex .post-type-search ul li { font-size: 12px; padding: 3px 3px 3px 0; }
 }
