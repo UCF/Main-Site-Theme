@@ -291,6 +291,7 @@ a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; colo
 
 /* Home Page - Left Column */
 #home_leftcol {  }
+#home_leftcol h2 { color: #E26906; }
 #home_leftcol a { color: #333; }
 #home_leftcol a:hover { color: #e50606; }
 .home_spotlight_single { overflow: auto; clear: both; width: 95%; margin-bottom: 20px; }
@@ -306,6 +307,7 @@ a.home_spotlight_readmore {
 
 
 /* Home Page - Center Column */
+#home_centercol { }
 #home_centercol a { color: #333; }
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-left: 1px dotted #333; }
@@ -333,6 +335,7 @@ a.home_spotlight_readmore {
 
 /* Home Page - Right Column */
 #home_rightcol { margin-left: 0; border-left: 1px dotted #333; }
+#home_rightcol h2 { color: #B38C0B; }
 .ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
 #home_rightcol #weather_bug { width: 100%; }
 #home_rightcol #weather_bug #wb_status_txt { text-align: left; }
