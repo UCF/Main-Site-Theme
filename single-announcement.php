@@ -10,7 +10,13 @@
 			<article>
 				<div class="row" id="announcement_meta">
 					<div class="span7">
-						<p class="date"><?=date('M d, Y', strtotime(get_post_meta($post->ID, 'announcement_start_date', TRUE)))?> to <?=date('M d, Y', strtotime(get_post_meta($post->ID, 'announcement_end_date', TRUE)))?></p>
+						<p class="date">
+						<?php
+							$fromdate = get_post_meta($post->ID, 'announcement_start_date', TRUE) ? date('M d, Y', strtotime(get_post_meta($post->ID, 'announcement_start_date', TRUE))) : get_the_date('M d, Y', $post->ID);
+							$todate = get_post_meta($post->ID, 'announcement_end_date', TRUE) ? date('M d, Y', strtotime(get_post_meta($post->ID, 'announcement_end_date', TRUE))) : date('M d, Y', strtotime(get_the_date('M d, Y', $post->ID).' + 1 day'));
+						?>
+						<?=$fromdate?> to <?=$todate?>
+						</p>
 					</div>
 					<div class="span5">
 						<p class="audience"><strong>Audience:</strong> 
