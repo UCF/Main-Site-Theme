@@ -324,8 +324,14 @@
 	#filters #filter_keyword_wrap,
 	#filters #filter_time_wrap { margin-right: 0; }
 	#filters #filter_audience_wrap,
-	#filters #filter_audience_wrap select { width: 155px !important; }
-	#filters #filter_audience_wrap { margin-right: 10px; float: left; }
+	#filters #filter_audience_wrap select,
+	#filters #filter_keyword_wrap,
+	#filters #filter_keyword_wrap input, 
+	#filters #filter_time_wrap,
+	#filters #filter_time_wrap select { width: 155px !important; }
+	#filters #filter_audience_wrap,
+	#filters #filter_keyword_wrap,
+	#filters #filter_time_wrap { margin-right: 10px; float: left; }
 	#filters #filter_form .span1 { width: 100px !important; float: left; padding-top: 2px; }
 	#filters #addnew_wrap { text-align: left; }
 	
