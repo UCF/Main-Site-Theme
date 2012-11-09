@@ -208,7 +208,7 @@ fixSubheaderHeight = function($) {
 
 
 /* Toggle chevron onclick for a-z index list menu links: */
-toggleAZChevrons = function($) {
+/*toggleAZChevrons = function($) {
 	if ($('.accordion').length > 0) {
 		$('.accordion-body.collapse').on('hide', function () {
     		var i = $(this).prev().find('i');
@@ -219,7 +219,7 @@ toggleAZChevrons = function($) {
 			i.removeClass('icon-chevron-right').addClass('icon-chevron-down');
     	});
 	}
-}
+}*/
 
 
 /* Call A-Z Index Scrollspy, organize post type search */
