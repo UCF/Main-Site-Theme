@@ -460,7 +460,7 @@ a.home_spotlight_readmore {
 #azindex .post-type-search-sorting { display:none; }
 
 #azIndexList.affix { top: 0; z-index: 999; }
-#azIndexList { width: 532px; margin-left: 25px; }
+#azIndexList { width: 532px; margin-left: 24px; }
 #azIndexList #azIndexList-label { font-family: Georgia, serif; color: #515050; margin-left: -5px; background: #fff; padding: 10px 10px 7px 0; }
 #azIndexList .navbar-inner { padding: 0; min-height: 0; }
 #azIndexList .nav { margin-right: 0; }
@@ -478,8 +478,20 @@ a.home_spotlight_readmore {
 #azindex .post-type-search-results ul li,
 #azindex .post-type-search-alpha ul li { padding: 3px 10px 3px 0; }
 
-.post-type-search-results { border-radius: 0 0 10px 10px; padding-bottom: 10px; margin-top: 10px; background: #efefef; display: none; }
-.post-type-search-results > div { padding-top: 10px; }
+.post-type-search-results { 
+	border-radius: 0 0 10px 10px; 
+	padding-bottom: 10px; 
+	margin-top: 10px; 
+	background: #efefef; 
+	display: none; 
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1) inset;
+}
+.post-type-search-results .post-type-search-message { padding: 10px 10px 0 10px; }
+.post-type-search-results div[class*="span"] { 
+	padding-top: 10px;
+	max-height: 300px;
+	overflow: auto;
+}
 
 
 /* Announcements Page */

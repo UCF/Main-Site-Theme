@@ -334,4 +334,5 @@
 	#azIndexList { display: none; }
 	#azindex .az-jumpto-anchor { height: 20px; }
 	#azindex .post-type-search ul li { font-size: 12px; padding: 3px 3px 3px 0; }
+	.post-type-search-results div[class*="span"] { max-height: none; overflow: visible; }
 }
