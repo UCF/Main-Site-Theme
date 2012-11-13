@@ -658,7 +658,7 @@ li.tagit-new input {
 /* Buttons */
 a.btn, a.btn:hover { color: #333 !important; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important; }
 a.btn.disabled { color: #333 !important; }
-a.btn-primary, a.btn-warning, a.btn-info, a.btn-success, a.btn-danger, a.btn-primary:hover, a.btn-warning:hover, a.btn-info:hover, a.btn-success:hover, a.btn-danger:hover {
+a.btn-primary, a.btn-warning, a.btn-info, a.btn-success, a.btn-danger, a.btn-inverse, a.btn-primary:hover, a.btn-warning:hover, a.btn-info:hover, a.btn-success:hover, a.btn-danger:hover, a.btn-inverse:hover {
 	color: #fff !important;
 }
 a.btn-primary.disabled { color: #fff !important; }
@@ -672,12 +672,12 @@ a.btn-primary.disabled { color: #fff !important; }
 .pagination a, .pagination a:hover, .pager a {
 	border-bottom: 1px solid #ddd !important;
 }
-.navbar .brand, .navbar .brand, .navbar ul.nav>li>a, .nav-tabs a, .accordion-heading a { border-bottom: 0 !important; }
+.navbar .brand, .navbar ul.nav>li>a, .nav-tabs a, .accordion-heading a { border-bottom: 0 !important; }
 .pagination a, .pager a, .nav-tabs a, .accordion-heading a {
 	color: #515050 !important;
 }
-.navbar .brand, .navbar ul.nav>li>a { color: #fff !important; }
-.navbar .brand { position: absolute; left: 20px; }
+.navbar.navbar-inverse .brand, .navbar.navbar-inverse ul.nav>li>a { color: #fff !important; }
+.navbar .brand, .navbar ul.nav>li>a, .nav-tabs a { color: #777 !important; }
 
 /* Carousel fixes */
 .carousel-control { color: #fff !important; border-bottom: 3px solid #fff !important; text-decoration: none !important; }
