@@ -40,7 +40,6 @@ select#UCFHBHeaderLinks {
  **/
 
 /* General */
-body { font-family: Georgia, serif; }
 
 /* Events Widget */
 .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
@@ -312,7 +311,7 @@ a.home_spotlight_readmore {
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-left: 1px dotted #333; }
 #home_centercol h3.title { line-height: 16px; }
-#home_centercol h3.title a { font-family: Georgia, serif; font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
+#home_centercol h3.title a { font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
 #home_centercol .news {margin-left:0;}
 #home_centercol .news .item { margin-bottom: 20px; list-style-type:none;}
@@ -414,9 +413,7 @@ a.home_spotlight_readmore {
 	background: #a3a3a3 url('static/img/mobile_notavailable.gif') center center no-repeat;
 }
 
-#contentcol, #contentcol p { color: #515050; font-family: Georgia, serif; font-size: 13px; line-height: 20px; }
 #contentcol p { margin-bottom: 20px; }
-#contentcol h3 { color: #515050; font-size: 15px; line-height: 20px; }
 #contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
 #contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }
 
@@ -470,7 +467,16 @@ a.home_spotlight_readmore {
 #azIndexList .nav li { border-right: 1px solid #D4D4D4; }
 #azIndexList .nav li:first-child { margin-left: 2px; }
 #azIndexList .nav li:last-child { border-right: 0; }
-#azIndexList .nav li a { width: 19.25px; padding: 4px 0; text-align:center; font-size: 11px; color: #333 !important; }
+#azIndexList .nav li a { 
+	width: 19.25px; 
+	padding: 4px 0; 
+	text-align:center; 
+	font-size: 11px; 
+	color: #333 !important; 
+	border-bottom: 0; 
+	font-family: 'Helvetica-Neue', Helvetica, sans-serif;
+}
+#azIndexList .nav li a:hover { border-bottom: 0; }
 #azIndexList .nav li a.disabled { background: #eee; color: #ccc !important; }
 
 #azindex .az-jumpto-anchor { height: 70px; width: 100%; clear: both; }
@@ -648,37 +654,51 @@ li.tagit-new input {
 #phonebook-search-results .show_staff .toggle i {margin-top:-1px;}
 #phonebook-search-results .show_staff ul {display:none;}
 
+
+
+
 /**
- * UCF Main Site Bootstrap overrides
+ * Bootstrap Overrides
  **/
-
-/* Font fixes - all */ 
-.accordion-heading, a.btn, button, .carousel-control, .dropdown-menu, .pagination, .pager, .label, .navbar, .nav-tabs { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; }
-
-/* Buttons */
-a.btn, a.btn:hover { color: #333 !important; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important; }
-a.btn.disabled { color: #333 !important; }
-a.btn-primary, a.btn-warning, a.btn-info, a.btn-success, a.btn-danger, a.btn-inverse, a.btn-primary:hover, a.btn-warning:hover, a.btn-info:hover, a.btn-success:hover, a.btn-danger:hover, a.btn-inverse:hover {
-	color: #fff !important;
+a.btn, a.btn:hover, a.btn.disabled {
+    color: #333333 !important;
 }
-a.btn-primary.disabled { color: #fff !important; }
-
-/* Dropdown nav menus */
-.dropdown-menu li a, .dropdown-menu li a:hover { border-bottom: 0 !important; }
-.dropdown-menu li a { color: #333 !important; }
-.dropdown-menu li a:hover { color: #fff !important; }
-
-/* White button components (toggle tabs, accordion btns..) */
-.pagination a, .pagination a:hover, .pager a {
-	border-bottom: 1px solid #ddd !important;
+a.btn-primary, 
+a.btn-warning, 
+a.btn-info, 
+a.btn-success, 
+a.btn-danger, 
+a.btn-inverse,
+a.btn-primary:hover, 
+a.btn-warning:hover, 
+a.btn-info:hover, 
+a.btn-success:hover, 
+a.btn-danger:hover,
+a.btn-inverse:hover,
+a.btn-primary.disabled {
+    color: #FFFFFF !important;
 }
-.navbar .brand, .navbar ul.nav>li>a, .nav-tabs a, .accordion-heading a { border-bottom: 0 !important; }
-.pagination a, .pager a, .nav-tabs a, .accordion-heading a {
-	color: #515050 !important;
-}
-.navbar.navbar-inverse .brand, .navbar.navbar-inverse ul.nav>li>a { color: #fff !important; }
-.navbar .brand, .navbar ul.nav>li>a, .nav-tabs a { color: #777 !important; }
 
-/* Carousel fixes */
-.carousel-control { color: #fff !important; border-bottom: 3px solid #fff !important; text-decoration: none !important; }
-.carousel-caption p { color: #fff !important; }
+.dropdown-menu li a, .dropdown-menu li a:hover {
+    border-bottom: 0 none !important;
+}
+.dropdown-menu li a {
+    color: #333333 !important;
+}
+.dropdown-menu li a:hover {
+    color: #FFFFFF !important;
+}
+.navbar .brand, .navbar .brand, .navbar ul.nav > li > a, .nav-tabs a, .accordion-heading a {
+    border-bottom: 0 none !important;
+}
+.nav-tabs a, .accordion-heading a {
+    color: #515050 !important;
+}
+.carousel-control {
+    border-bottom: 3px solid #FFFFFF !important;
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+}
+.carousel-caption p {
+    color: #FFFFFF !important;
+}
