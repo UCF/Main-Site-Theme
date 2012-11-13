@@ -182,6 +182,12 @@ removeNavSeparator = function($) {
 }
 
 
+/* Add Bootstrap button styles for GravityForm submit buttons */
+styleGformButtons = function($) {
+	$('.gform_button').addClass('btn');
+}
+
+
 /* Fix subheader height to contain blockquote if it exceeds past its container: */
 fixSubheaderHeight = function($) {
 	var doSubheaderHeight = function() {
@@ -529,6 +535,7 @@ if (typeof jQuery != 'undefined'){
 		centerpieceVidResize($);
 		centerpieceSingleSlide($);
 		removeNavSeparator($);
+		styleGformButtons($);
 		fixSubheaderHeight($);
 		//toggleAZChevrons($);
 		azIndex($);
