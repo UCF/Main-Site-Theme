@@ -11,7 +11,32 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 
 ## Installation Requirements
 
+* Make sure that all two- and three-column pages are correctly assigned sidebar menu widgets when content is imported. Menus, when imported, should maintain a common naming schema ('More Information - Page Name', 'Secondary Nav - Page Name', etc.)
 * Add cron job for feedback_mailer.php to run weekly for feedback emails.
+
+
+## Deployment
+
+This theme relies on Twitter's Bootstrap framework. UCF's fork of the Bootstrap project (http://github.com/UCF/bootstrap/) is added as submodule in static/bootstrap. Bootstrap must be initialized as a submodule with every new clone of this theme repository.
+
+#### Initializing Bootstrap with a new clone:
+1. Pull/Clone the theme repo
+2. From the theme's root directory, run `git submodule update --init static/bootstrap`
+3. From the static/bootstrap directory, run `git checkout main-site`. Make sure a branch has been checked out for submodules as they will default to 'no branch' when cloned.
+
+#### Alternative method using Git v1.6.5+:
+1. Run `git clone` using the `--recursive` parameter to clone the repo with all of its submodules; e.g. `git clone --recursive https://github.com/UCF/Main-Site-Theme.git`
+2. From the static/bootstrap directory, run `git checkout main-site`. Make sure a branch has been checked out for submodules as they will default to 'no branch' when cloned.
+
+
+## Development
+
+This theme relies on Twitter's Bootstrap framework. UCF's fork of the Bootstrap project (http://github.com/UCF/bootstrap/) is added as submodule in static/bootstrap. To compile bootstrap:
+
+1. If this is a brand new clone, run `git submodule update --init static/bootstrap`
+2. If they are not already installed, install the dependencies in the Developers section of the Boostrap README
+3. Checkout the latest tag of Bootstrap
+4. Run `make bootstrap` from the static/bootstrap directory to compile the files into static/bootstrap/bootstrap.
 
 
 ## Notes
