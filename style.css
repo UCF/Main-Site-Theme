@@ -682,12 +682,6 @@ a.btn-primary.disabled {
 .dropdown-menu li a, .dropdown-menu li a:hover {
     border-bottom: 0 none !important;
 }
-.dropdown-menu li a {
-    color: #333333 !important;
-}
-.dropdown-menu li a:hover {
-    color: #FFFFFF !important;
-}
 .navbar .brand, .navbar .brand, .navbar ul.nav > li > a, .nav-tabs a, .accordion-heading a {
     border-bottom: 0 none !important;
 }
