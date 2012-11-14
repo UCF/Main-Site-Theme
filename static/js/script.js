@@ -527,6 +527,9 @@ var devBootstrap = function($) {
 	}); 
 }
 
+/* Bootstrap Dropdown fix for mobile devices */
+$(document).on('touchstart.dropdown', '.dropdown-menu', function(e) { e.stopPropagation(); });
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
