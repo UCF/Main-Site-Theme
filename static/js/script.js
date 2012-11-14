@@ -513,11 +513,20 @@ var phonebookStaffToggle = function($) {
 						}
 					});
 			})(staff)
-		});
-
-		 
-		
+		});		
 }
+
+/* Dev Bootstrap Element Testing-- this should not be running in prod!! */
+var devBootstrap = function($) {
+	$('#bootstrap-testing-tooltips').tooltip({
+		selector: "a[rel=tooltip]"
+	});
+	$('#bootstrap-testing-popovers').popover({
+		trigger: "hover",
+		selector: "a[rel=popover]"
+	}); 
+}
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -544,5 +553,8 @@ if (typeof jQuery != 'undefined'){
 		ieRoundedCornerThumbs($);
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
+		
+		// Disable me in Prod!!
+		devBootstrap($);
 	});
 }else{console.log('jQuery dependancy failed to load');}
