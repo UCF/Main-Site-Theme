@@ -659,6 +659,13 @@ li.tagit-new input {
 
 /**
  * Bootstrap Overrides
+ * 
+ * Unfortunately, adding the necessary <a> styles (color, border-bottom) to
+ * the main page content jacks up a lot of bootstrap components. Most of 
+ * them have been accounted for in .less files with yucky !important's but 
+ * some still need to be overridden here.
+ * If somebody can figure out where to add these styles in .less, please do
+ * so and recompile.
  **/
 a.btn, a.btn:hover, a.btn.disabled {
     color: #333333 !important;
@@ -676,23 +683,5 @@ a.btn-success:hover,
 a.btn-danger:hover,
 a.btn-inverse:hover,
 a.btn-primary.disabled {
-    color: #FFFFFF !important;
-}
-
-.dropdown-menu li a, .dropdown-menu li a:hover {
-    border-bottom: 0 none !important;
-}
-.navbar .brand, .navbar .brand, .navbar ul.nav > li > a, .nav-tabs a, .accordion-heading a {
-    border-bottom: 0 none !important;
-}
-.nav-tabs a, .accordion-heading a {
-    color: #515050 !important;
-}
-.carousel-control {
-    border-bottom: 3px solid #FFFFFF !important;
-    color: #FFFFFF !important;
-    text-decoration: none !important;
-}
-.carousel-caption p {
     color: #FFFFFF !important;
 }
