@@ -281,7 +281,7 @@ a.home_spotlight_readmore {
 #home_centercol a { color: #333; }
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-left: 1px dotted #333; }
-#home_centercol h3.title { line-height: 16px; }
+#home_centercol h3.title { line-height: 18px; }
 #home_centercol h3.title a { font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
 #home_centercol .news {margin-left:0;}
