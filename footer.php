@@ -52,6 +52,7 @@
 		$(document).ready(function() {	
 			initQuickLinks();
 			initQuickLinksManager();
+			$('#quicklinks-actions a').click(function(e) { e.preventDefault() });
 		});
 		</script>
 	<?php } ?>
