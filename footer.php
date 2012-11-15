@@ -39,4 +39,20 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<?="\n".footer_()."\n"?>
+	<?php if (!is_page(get_page_by_title('Customize Links')->ID)) { ?>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/university-header.js"></script>
+	<?php } else { ?>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/lowpro.jquery.js"></script>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/jquery.cookie.js"></script>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/jquery.cookiejar.js"></script>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/jquery.json.js"></script>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/quick_links.js"></script>
+		<script type="text/javascript" src="<?=THEME_JS_URL?>/quick_links_manager.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function() {	
+			initQuickLinks();
+			initQuickLinksManager();
+		});
+		</script>
+	<?php } ?>
 </html>
