@@ -516,12 +516,6 @@ var phonebookStaffToggle = function($) {
 		});		
 }
 
-/* */
-var getQuicklinksDependencies = function($) {
-	if ($('#customize-links').length > 0) {
-		//alert('test');
-	}
-}
 
 /* Dev Bootstrap Element Testing-- this should not be running in prod!! */
 var devBootstrap = function($) {
@@ -567,7 +561,6 @@ if (typeof jQuery != 'undefined'){
 		ieRoundedCornerThumbs($);
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
-		getQuicklinksDependencies($);
 		
 		// Disable me in Prod!!
 		devBootstrap($);

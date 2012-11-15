@@ -145,8 +145,8 @@
 				<?php the_content();?>
 				
 				<form>
-					<div id="quicklinks-panel">
-						<div class="quicklinks-column">
+					<div id="quicklinks-panel" class="row">
+						<div class="quicklinks-column span4">
 							<h3>Available Links</h3>
 							<select multiple id="sourceLinks" class="quicklinks-list">
 								<option value="http://advising.sdes.ucf.edu/offices">Academic Advising</option>
@@ -526,18 +526,18 @@
 							<!-- <OK /> --> 
 							</select>
 						</div>
-						<div id="quicklinks-actions">
-							<ul>
-								<li><a href="#" id="addLinks">&gt;&gt;</a></li>
-								<li><a href="#" id="removeLinks">&lt;&lt;</a></li>
-								<li><a href="#" id="clearLinks">Clear</a></li>
-							</ul>
+						<div id="quicklinks-actions" class="span2">
+							<a class="btn btn-block" href="#" id="addLinks"><i class="icon-forward"></i><span class="visible-phone"> Add Link</span></a>
+							<a class="btn btn-block" href="#" id="removeLinks"><i class="icon-backward"></i>&nbsp;<span class="visible-phone"> Remove Link</span></a>
+							<a class="btn btn-block btn-warning" href="#" id="clearLinks">Clear</a>
+							<br/>
 						</div>
-						<div class="quicklinks-column">
+						<div class="quicklinks-column span4">
 							<h3>Your Links</h3>
 							<select multiple class="quicklinks-list" id="destinationLinks">
 							</select>
 						</div>
+					</div>
 				</form>	
 			</article>
 		</div>

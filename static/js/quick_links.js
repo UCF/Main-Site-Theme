@@ -70,7 +70,7 @@ var QuickLinksRenderer = $.klass(QuickLinksPersistance,{
 	initialize: function($super, linksSelectId, linksDividerId, customizationURL, cookieDomain) 
 	{
 		$super(cookieDomain);
-		this.selectElement = $(linksSelectId)[0];
+		this.selectElement = $(linksSelectId);
 		this.listDividerElement = $(linksDividerId);
 		this.customizeURL = customizationURL;
 		this.addLinkDelegate = null;
@@ -179,7 +179,7 @@ function initQuickLinks()
 	
 //	quickLinks = new QuickLinksRenderer("#UCFHeaderLinks", "#UCFHeaderLinksStaticDivider", 
 // "http://www.ucf.edu/quicklinks/customizer.html",".ucf.edu");
-	quickLinks = new QuickLinksRenderer("#UCFHeaderLinks", "#UCFHeaderLinksStaticDivider", "http://www.ucf.edu/quicklinks/customizer.html",
+	quickLinks = new QuickLinksRenderer("#UCFHeaderLinks", "#UCFHBHeaderLinks", "http://www.ucf.edu/quicklinks/customizer.html",
 "cdws.devel");
 	quickLinks.populateQuicklinks();
 	return false;

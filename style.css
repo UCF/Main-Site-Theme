@@ -626,6 +626,11 @@ li.tagit-new input {
 #phonebook-search-results .show_staff ul {display:none;}
 
 
+/* Quicklink Customizer */
+#customize-links { }
+#customize-links .quicklinks-list { height: 250px; width: 100%; margin-top: 5px; }
+#customize-links .quicklinks-list option { padding: 3px 5px; }
+#customize-links #quicklinks-actions { padding-top: 30px; }
 
 
 /**
