@@ -1,0 +1,150 @@
+/*Header style*/
+#UCFHBHeader{
+	background-image: url("../img/header_border.png");
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	background-color: black;
+	height: 32px;
+	padding-top: 4px;
+	padding-bottom: 2px;	/* to treat the bg as a border +2px*/
+}
+
+#UCFHBHeader label {
+		color: #FFF;
+		text-indent: -10000px;
+		display:block;
+		float:left;
+	}
+	
+#UCFHBHeader #UCFHBSearch_and_links{
+	padding-top: 5px;
+	margin-left: 520px;
+	width: 450px;
+	text-align: right;
+}
+	
+#UCFHBClearBoth{
+	clear: both;
+}
+	
+#UCFHBHeader #UCFtitle{
+	float:left;
+	margin: 0;
+	padding: 0;
+}
+#UCFHBHeader #UCFtitle a{
+	margin: 0;
+	padding: 0;
+	background-image: url("../img/ucflogo.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+	/*background-color: black;*/
+	display: block;
+	height: 29px;
+	width: 318px;
+}
+#UCFHBHeader #UCFtitle a span.UCFHBText{
+	display: none;
+}
+#UCFHBHeader #UCFHBUni_links{
+	margin-left: 75px;
+	float: left;
+}
+#UCFHBHeader #UCFHBUni_links select{
+	width: 130px;
+	border: 1px solid #c0c0c0;
+	background-color: #FFF;
+}
+
+#UCFHBHeader #UCFHBMy_ucf{
+	display: block;
+	background-image: url("../img/myucf.png");
+	background-repeat: no-repeat;
+	background-position: top left;
+	margin-left: 25px;
+	margin-top: 3px;
+	height: 15px;
+	width: 58px;
+	float: left;
+}
+#UCFHBHeader #UCFHBMy_ucf span.text{
+	display: none;
+}
+
+
+#UCFHBsubmit {
+	width:16px;
+	height:17px;
+	overflow:hidden;
+	background-image: url("../img/arrow.png");
+	border:0; margin:0; padding:0;
+	text-indent:-500px;
+	color:black;
+	baseline:top;
+}
+
+#UCFHBHeader #UCFHBSearch_ucf{
+	font-family: Arial, sans-serif;
+	color: #333;
+}
+#UCFHBHeader #UCFHBSearch_ucf input.text{
+	border: 1px solid #c0c0c0;
+	width: 100px;
+	padding: 1px 10px;
+	color:#999;
+}
+#UCFHBHeader #UCFHBSearch_ucf input.submit{
+	vertical-align: top;
+	margin-top: 2px;
+}
+#UCFHBHeader #UCFHBSearch_ucf input.submit:hover{
+	cursor: pointer;
+}
+#UCFHBHeader form{
+	display: inline;
+	padding: 0; margin: 0;
+}
+#UCFHBHeader form fieldset{
+	padding: 0; margin: 0;
+	border: none;
+	display: inline;
+}
+#UCFHBHeader p{
+	padding: 0; margin: 0;
+	border: none;
+	display: inline;
+}
+#UCFHBHeader div.UCFHBWrapper{
+	width: 974px;
+	margin: 0 auto;
+}
+
+
+
+
+#UCFHBSearch_ucf fieldset #q {
+	line-height: 11px;
+	color: #000000;
+	padding: 2px!important;
+	font-size: 11px;
+	font-family: 'Lucida Grande',sans-serif;
+	height: 13px;
+	border-radius: 0;
+	webkit-border-radius: 0;
+	moz-border-radius: 0;
+	margin-bottom: 0;
+	margin-top: 1px;
+}
+
+select#UCFHBHeaderLinks {
+	height: 18px;
+	font-size: 11px;
+	color: #000000;
+	font-family: 'Lucida Grande', sans-serif;
+	border-radius: 0;
+	webkit-border-radius: 0;
+	moz-border-radius: 0;
+	margin-bottom: 0;
+	margin-top: 1px;
+	padding: 0;
+}
