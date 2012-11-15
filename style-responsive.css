@@ -233,6 +233,10 @@
 	
 	#colleges_wrap ul#menu-ucf-colleges { margin-left: 0; }
 	
+	#footer-menu { text-align: center; margin-bottom: 20px; }
+	#footer-menu li { float: none !important; margin-bottom: 10px; }
+	#footer-menu li:after { margin-left: 5px; }	
+	
 	#azIndexList { margin-left: 5px; }
 	.azindexlink-list li { padding-bottom: 10px; }
 
@@ -316,10 +320,6 @@
 	#colleges_wrap ul { text-align: center; }
 	#colleges_wrap ul li { margin-right: 5px; float: none !important; display: inline-block; }
 	#colleges_wrap ul li:after { margin-left: 3px; }
-	
-	#footer-menu { text-align: center; margin-bottom: 20px; }
-	#footer-menu li { float: none !important; margin-bottom: 10px; }
-	#footer-menu li:after { margin-left: 5px; }	
 	
 	#filters #filter_audience_wrap,
 	#filters #filter_keyword_wrap,
