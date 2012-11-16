@@ -511,7 +511,8 @@ h2.header_announcements { font-size: 20px; }
   	-webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);   
   	-moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
   	box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
-  	-webkit-transform: rotate(-3deg);    
+  	-webkit-transform: rotate(-3deg);
+	-webkit-backface-visibility: hidden;    
   	-moz-transform: rotate(-3deg);   
   	-o-transform: rotate(-3deg);
   	-ms-transform: rotate(-3deg);
