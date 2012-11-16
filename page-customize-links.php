@@ -109,11 +109,11 @@
 		
 		<div class="container">
 			<div class="row" id="header_wrap">
-				<div id="header" class="row-border-bottom-top">
+				<div id="header" class="row-border-bottom-top" role="banner">
 					<h1><?=bloginfo('name')?></h1>
 				</div>
 			</div>
-			<div id="header-nav-wrap">
+			<div id="header-nav-wrap" role="navigation">
 				<?=wp_nav_menu(array(
 					'theme_location' => 'header-menu', 
 					'container' => 'false', 
@@ -135,7 +135,7 @@
 		
 		<?=get_page_subheader($post)?>
 		
-		<div id="sidebar_left" class="span2">
+		<div id="sidebar_left" class="span2" role="navigation">
 			<?=get_sidebar('left');?>
 		</div>
 		
@@ -144,7 +144,7 @@
 				<?php if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') { ?><div class="rightcol_subheader_fix"></div><?php } ?>
 				<?php the_content();?>
 				
-				<form>
+				<form role="form">
 					<div id="quicklinks-panel" class="row">
 						<div class="quicklinks-column span4">
 							<h3>Available Links</h3>

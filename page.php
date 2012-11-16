@@ -7,7 +7,7 @@
 		
 		<?=get_page_subheader($post)?>
 		
-		<div id="sidebar_left" class="span2">
+		<div id="sidebar_left" class="span2" role="navigation">
 			<?=get_sidebar('left');?>
 		</div>
 		
@@ -18,7 +18,7 @@
 			</article>
 		</div>
 		
-		<div id="sidebar_right" class="span3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>notoppad<?php } ?>">		
+		<div id="sidebar_right" class="span3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>notoppad<?php } ?>" role="complementary">		
 			<?=get_sidebar('right');?>
 		</div>
 	</div>

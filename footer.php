@@ -1,6 +1,6 @@
 			<div id="footer">
 				
-				<div id="footer-navwrap">
+				<div id="footer-navwrap" role="navigation">
 					<?=wp_nav_menu(array(
 						'theme_location' => 'footer-menu', 
 						'container' => 'false', 
@@ -13,7 +13,7 @@
 					?>
 				</div>
 				
-				<p id="subfooter">
+				<p id="subfooter" role="contentinfo">
 					<a href="<?=site_url()?>/feedback">Comments and Feedback</a> | <a href="<?=site_url()?>">&copy; University of Central Florida</a>
 					<br/>
 					4000 Central Florida Blvd. Orlando, Florida, 32816 | 407.823.2000

@@ -12,7 +12,7 @@
 		
 		<?=get_page_subheader($post)?>
 		
-		<div id="sidebar_left" class="span2">
+		<div id="sidebar_left" class="span2" role="navigation">
 			<?=get_sidebar('left');?>
 		</div>
 		

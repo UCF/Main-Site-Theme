@@ -54,11 +54,11 @@
 		
 		<div class="container">
 			<div class="row" id="header_wrap">
-				<div id="header" class="row-border-bottom-top">
+				<div id="header" class="row-border-bottom-top" role="banner">
 					<h1><?=bloginfo('name')?></h1>
 				</div>
 			</div>
-			<div id="header-nav-wrap">
+			<div id="header-nav-wrap" role="navigation">
 				<?=wp_nav_menu(array(
 					'theme_location' => 'header-menu', 
 					'container' => 'false', 

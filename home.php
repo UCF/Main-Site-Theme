@@ -1,7 +1,7 @@
 <?php get_header();?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
-	<div class="row page-content nodescription" id="home" data-template="home-nodescription">		
+	<div class="row page-content nodescription" id="home" data-template="home-nodescription" role="main">		
 		<div class="span12">
 			<?php
 				$args = array(
@@ -35,7 +35,7 @@
 	
 <div class="container-fullwidth" id="colleges_wrap">	
 	<div class="container">
-		<div class="row">
+		<div class="row" role="navigation">
 			<div class="span2">
 				<h3>UCF Colleges</h3>
 			</div>
