@@ -108,15 +108,6 @@ centerpieceSlider = function($) {
 			return timeouts[index] * 1000; 
 		}
 		
-		// Pause slider on hover:
-		/*
-		$('#centerpiece_slider').hover(function() {
-			$('#centerpiece_slider ul').cycle('pause'); 
-		},
-		function () {
-			$('#centerpiece_slider ul').cycle('resume');
-		});*/
-		
 		// Stop slider when a video thumbnail is clicked:
 		$('.centerpiece_single_vid_thumb').click(function() { 
 			$('#centerpiece_slider ul').cycle('pause');
@@ -330,16 +321,10 @@ toggleAnnouncementFilters = function($) {
 }
 
 
-/* IE 7-8 fix for News thumbnails-- requires jquery.backgroundSize.js */
-ieFixNewsThumbs = function($) {
-	$('body.ie8 #home_centercol .news .item .news-thumb, body.ie7 #home_centercol .news .item .news-thumb').css( "background-size", "cover" );
-}
-
-
 /* IE 7-8 fix for rounded corners on spotlight, news thumbnails */
 ieRoundedCornerThumbs = function($) {
 	if ($.browser.msie && $.browser.version < 9) {
-		$('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>').appendTo('.spotlight_thumb, ul.news .item .news-thumb');
+		$('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>').appendTo('.spotlight_thumb, .news-thumb');
 	}
 }
 
@@ -557,7 +542,6 @@ if (typeof jQuery != 'undefined'){
 		//toggleAZChevrons($);
 		azIndex($);
 		toggleAnnouncementFilters($);
-		ieFixNewsThumbs($);
 		ieRoundedCornerThumbs($);
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);

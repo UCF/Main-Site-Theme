@@ -300,6 +300,7 @@ a.home_spotlight_readmore {
 	background-position: center center;
 	background-repeat: no-repeat;
 	cursor: pointer;
+	position: relative;
 }
 
 
