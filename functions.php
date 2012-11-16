@@ -65,7 +65,7 @@ function get_page_subheader($post) {
 	if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') {
 		$subheader = get_post(get_post_meta($post->ID, 'page_subheader', TRUE));			
 		?>
-		<div class="span12" id="subheader">
+		<div class="span12" id="subheader" role="complementary">
 			<?php
 			$subimg = get_post_meta($subheader->ID, 'subheader_sub_image', TRUE);
 			$imgatts = array(
@@ -249,7 +249,7 @@ function output_weather_data($class=null) {
 	$condition 	= $weather['condition'];
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img']; ?>
-	<div id="weather_bug" class="<?=$class?>">
+	<div id="weather_bug" class="<?=$class?>" role="complementary">
 		<div id="wb_status_txt" style="background: url(<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.png) left center no-repeat;"><span><?=$temp?>F, <?=$condition?></span></div>
 	</div>
 	<?php
@@ -596,7 +596,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 
 
 /**
- * Takes an announcements array and outputs an RSS feed.
+ * Takes an announcements array from get_announcements() and outputs an RSS feed.
  **/
 function announcements_to_rss($announcements) {
 	if (!($announcements)) { die('Error: no announcements feed provided.'); }
