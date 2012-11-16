@@ -12,7 +12,7 @@
 		</div>
 		
 		<div class="span7" id="contentcol">
-			<article>
+			<article role="main">
 				<?php the_content();?>
 				&nbsp;
 			</article>

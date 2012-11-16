@@ -8,7 +8,7 @@
 			<?php esi_include('output_weather_data(\'span3\');'); ?>
 		</div>
 		<div id="contentcol" class="span12">
-			<article>
+			<article role="main">
 				<?php 
 					$page = get_page_by_title('404');
 					if($page){

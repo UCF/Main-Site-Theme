@@ -17,7 +17,7 @@
 		</div>
 		
 		<div class="span10" id="contentcol">
-			<article>
+			<article role="main">
 				<?php if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') { ?><div class="rightcol_subheader_fix"></div><?php } ?>
 				<?php the_content();?>
 			</article>

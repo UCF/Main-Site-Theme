@@ -7,7 +7,7 @@
 			<?php esi_include('output_weather_data(\'span3\');'); ?>
 		</div>
 		<div id="contentcol" class="span12">
-			<article>
+			<article role="main">
 				<div class="row" id="announcement_meta">
 					<div class="span7">
 						<p class="date">

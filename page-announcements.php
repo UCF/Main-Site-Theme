@@ -69,7 +69,7 @@ else {
 		</div>
 		
 		<div class="span12" id="contentcol">
-			<article>
+			<article role="main">
 				<div class="row" id="filters">
 					<form id="filter_form" action="">
 					<div class="span4" id="filter_wrap">

@@ -27,7 +27,7 @@
 			<? } ?>
 		</div>
 		<div class="span10">
-			<article>
+			<article role="main">
 				<h2><?=$post->post_title?><?=($title == '') ?: ' - '.$title ?></h2>
 				<?=$content = str_replace(']]>', ']]>', apply_filters('the_content', $post->post_content))?>
 			</article>

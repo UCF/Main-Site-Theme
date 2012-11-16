@@ -13,7 +13,7 @@
 			<?php esi_include('output_weather_data(\'span3\');'); ?>
 		</div>
 		<div id="contentcol" class="span9">
-			<article>
+			<article role="main">
 				<?php if(count($results['items'])):?>
 				<ul class="result-list">
 					<?php foreach($results['items'] as $result):?>
@@ -60,7 +60,7 @@
 			<?php esi_include('output_weather_data(\'span3\');'); ?>
 		</div>
 		<div id="contentcol" class="span9">
-			<article>
+			<article role="main">
 				<?php if(have_posts()):?>
 					<ul class="result-list">
 					<?php while(have_posts()): the_post();?>
