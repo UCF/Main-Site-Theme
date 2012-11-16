@@ -332,7 +332,12 @@ toggleAnnouncementFilters = function($) {
 
 /* IE 7-8 fix for News thumbnails-- requires jquery.backgroundSize.js */
 ieFixNewsThumbs = function($) {
-	$('body.ie8 #home_centercol .news .item .news-thumb, body.ie7 #home_centercol .news .item .news-thumb').css( "background-size", "cover" );
+	//$('body.ie8 #home_centercol .news .item .news-thumb, body.ie7 #home_centercol .news .item .news-thumb').css( "background-size", "cover" );
+	$('body.ie8 #home_centercol .news .item .news-thumb, body.ie7 #home_centercol .news .item .news-thumb')
+		.css({
+			'filter' : 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src='+ $(this).css('background-image').replace(/^url|[\(\)]/g, '') +',sizingMethod="scale")',
+			'-ms-filter' : 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src='+ $(this).css('background-image').replace(/^url|[\(\)]/g, '') +',sizingMethod="scale")',
+		});
 }
 
 
