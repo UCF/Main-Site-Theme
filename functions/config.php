@@ -378,7 +378,7 @@ if ($theme_options['gw_verify']){
 
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.2.min.js');
+    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.1.min.js');
     wp_enqueue_script( 'jquery' );
 }    
  
