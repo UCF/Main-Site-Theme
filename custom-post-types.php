@@ -1272,7 +1272,7 @@ class Slider extends CustomPostType {
 												}
 											?>
 											<?php if($image):?>
-											<a href="<?=$url?>"><?=$image->post_title?></a><br /><br />
+											<a href="<?=$url?>" target="_blank"><img class="slide_image" src="<?=$url?>" style="width: 400px;" /><br/><?=$image->post_title?></a><br /><br />
 											<?php endif;?>									
 											<input type="file" id="file_img_<?=$post->ID?>" name="ss_slide_image[<?=$s?>]"><br />
 										</td>
@@ -1297,7 +1297,7 @@ class Slider extends CustomPostType {
 												}
 											?>
 											<?php if($image):?>
-											<a href="<?=$url?>"><?=$image->post_title?></a><br /><br />
+											<a href="<?=$url?>" target="_blank"><img class="slide_video_thumb" src="<?=$url?>" style="width: 400px;" /><br/><?=$image->post_title?></a><br /><br />
 											<?php endif;?>									
 											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$s?>]"><br />
 										</td>
