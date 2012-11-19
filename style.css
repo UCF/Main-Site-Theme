@@ -528,6 +528,7 @@ h2.header_announcements { font-size: 20px; }
   	right: 10px;
   	left: auto;
 }
+.announcement_wrap h3 { padding-right: 25px; }
 .announcement_wrap .thumbtack { width: 20px; height: 20px; background: url('static/img/spritesheet.png') -174px -36px no-repeat; position: absolute; top: -9px; left: 50%; }
 .announcement_wrap .new { width: 50px; height: 50px; background: url('static/img/spritesheet.png') -375px -46px no-repeat; position: absolute; top: -1px; right: -1px; text-indent: -9999px; }
 
