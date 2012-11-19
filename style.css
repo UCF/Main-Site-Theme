@@ -498,7 +498,7 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_wrap #addnew_announcement { margin-top: 24px; }
 
 /*#announcements div[id^="announcement_"] { height: 300px; }*/
-.announcement_wrap { height: auto; background: #fafafa; margin-bottom: 40px; padding: 15px; position: relative; }
+.announcement_wrap { height: auto; background: #ffffe2; margin-bottom: 40px; padding: 15px; position: relative; }
 .announcement_wrap:before, .announcement_wrap:after {
 	z-index: -1; 
   	position: absolute; 
