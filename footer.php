@@ -29,7 +29,7 @@
 					));
 				?>
 				
-				<p id="footer-logo"><a href="<?=site_url()?>"><img src="<?=THEME_STATIC_URL?>/img/footer_logo.png" alt="University of Central Florida" title="University of Central Florida" /></a></p>
+				<p id="footer-logo"><a href="<?=site_url()?>">University of Central Florida</a></p>
 				
 				
 			</div>
