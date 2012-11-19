@@ -59,6 +59,103 @@ add_filter('enter_title_here', 'change_centerpiece_title');
 
 
 /**
+ * Announcement custom columns
+ **/
+// Custom columns for 'Announcement' post type
+function edit_announcement_columns() {
+	$columns = array(
+		'cb'           => '<input type="checkbox" />',
+		'title'        => 'Name',
+		'start_date'   => 'Start Date',
+		'end_date'     => 'End Date',
+		'publish_date' => 'Publish Date'
+	);
+	return $columns;
+}
+add_action('manage_edit-announcement_columns', 'edit_announcement_columns');
+
+// Custom columns content for 'Announcement'
+function manage_announcement_columns( $column, $post_id ) {
+	global $post;
+	switch ( $column ) {
+		case 'start_date':
+			print date('Y/m/d', strtotime(get_post_meta( $post->ID, 'announcement_start_date', true )));
+			break;
+		case 'end_date':
+			print date('Y/m/d', strtotime(get_post_meta( $post->ID, 'announcement_end_date', true )));
+			break;
+		case 'publish_date':
+			print get_post_time('Y/m/d', true, $post->ID);
+			break;
+		default:
+			break;
+	}
+}
+add_action('manage_announcement_posts_custom_column', 'manage_announcement_columns', 10, 2);
+
+// Sortable custom columns for 'Announcement'
+function sortable_announcement_columns( $columns ) {
+	$columns['start_date'] 		= 'start_date';
+	$columns['end_date'] 		= 'end_date';
+	$columns['publish_date'] 	= 'publish_date';
+	return $columns;
+}
+add_action('manage_edit-announcement_sortable_columns', 'sortable_announcement_columns'); 
+
+
+/**
+ * Allow special tags in post bodies that would get stripped otherwise.
+ * Modifies $allowedposttags defined in wp-includes/kses.php
+ * http://wpquicktips.wordpress.com/2010/03/12/how-to-change-the-allowed-html-tags-for-wordpress/
+ **/
+$allowedposttags['input'] = array(
+	'type' => array(),
+	'value' => array(),
+	'id' => array(),
+	'name' => array(),
+	'class' => array()
+);
+$allowedposttags['select'] = array(
+	'id' => array(),
+	'name' => array()
+);
+$allowedposttags['option'] = array(
+	'id' => array(),
+	'name' => array(),
+	'value' => array()
+);
+$allowedposttags['iframe'] = array(
+	'type' => array(),
+	'value' => array(),
+	'id' => array(),
+	'name' => array(),
+	'class' => array(),
+	'src' => array(),
+	'height' => array(),
+	'width' => array()
+);
+$allowedposttags['object'] = array(
+	'height' => array(),
+	'width' => array()
+);
+
+$allowedposttags['param'] = array(
+	'name' => array(),
+	'value' => array()
+);
+
+$allowedposttags['embed'] = array(
+	'src' => array(),
+	'type' => array(),
+	'allowfullscreen' => array(),
+	'allowscriptaccess' => array(),
+	'height' => array(),
+	'width' => array()
+);
+
+
+
+/**
  * Adds a subheader to a page (if one is set for the page.)
  **/
 function get_page_subheader($post) {
@@ -277,6 +374,8 @@ add_action( 'admin_menu', 'hide_admin_links' );
 function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	
 	// Get some dates for meta_query comparisons:
+	$today = date('Y-m-d');
+	
 	$thismonday = date('Y-m-d', strtotime('monday this week'));
 	$thissunday = date('Y-m-d', strtotime($thismonday.' + 6 days'));
 	
@@ -298,6 +397,10 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		'meta_key' => 'announcement_start_date',
 	);
 	
+	// Announcement time queries should allow posts to fall within the week, even if
+	// their start and end dates do not fall immediately within the given time
+	// (allow for ongoing events that span during the given time, and then some).
+	// Announcements should, however, be excluded if their end date has already passed.
 	if ($role !== 'all') {
 		$role_args = array(
 			'tax_query' => array(
@@ -308,11 +411,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				)
 			),
 			'meta_query' => array(
-        		array(
-					'key' => 'announcement_start_date',
-					'value' => $thismonday,
-					'compare' => '>='
-				),
 				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
@@ -320,9 +418,9 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				),
 				array(
 					'key' => 'announcement_end_date',
-					'value' => $thismonday,
+					'value' => $today,
 					'compare' => '>='
-				)
+				),
 			),
 		);
 		$args = array_merge($args, $role_args);
@@ -338,11 +436,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				)
 			),
 			'meta_query' => array(
-        		array(
-					'key' => 'announcement_start_date',
-					'value' => $thismonday,
-					'compare' => '>='
-				),
 				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
@@ -350,9 +443,9 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				),
 				array(
 					'key' => 'announcement_end_date',
-					'value' => $thismonday,
+					'value' => $today,
 					'compare' => '>='
-				)
+				),
 			),
 		);
 		$args = array_merge($args, $keyword_args);
@@ -365,11 +458,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'meta_query' => array(
 						array(
 							'key' => 'announcement_start_date',
-							'value' => $nextmonday,
-							'compare' => '>='
-						),
-						array(
-							'key' => 'announcement_start_date',
 							'value' => $nextsunday,
 							'compare' => '<='
 						),
@@ -377,7 +465,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 							'key' => 'announcement_end_date',
 							'value' => $nextmonday,
 							'compare' => '>='
-						)
+						),
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $today,
+							'compare' => '>='
+						),
 					),
 				);
 				$args = array_merge($args, $time_args);
@@ -387,19 +480,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'meta_query' => array(
 						array(
 							'key' => 'announcement_start_date',
-							'value' => $firstday_thismonth,
-							'compare' => '>='
-						),
-						array(
-							'key' => 'announcement_start_date',
 							'value' => $lastday_thismonth,
 							'compare' => '<='
 						),
 						array(
 							'key' => 'announcement_end_date',
-							'value' => $firstday_thismonth,
+							'value' => $today,
 							'compare' => '>='
-						)
+						),
 					),
 				);
 				$args = array_merge($args, $time_args);
@@ -409,11 +497,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					'meta_query' => array(
 						array(
 							'key' => 'announcement_start_date',
-							'value' => $firstday_nextmonth,
-							'compare' => '>='
-						),
-						array(
-							'key' => 'announcement_start_date',
 							'value' => $lastday_nextmonth,
 							'compare' => '<='
 						),
@@ -421,7 +504,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 							'key' => 'announcement_end_date',
 							'value' => $firstday_nextmonth,
 							'compare' => '>='
-						)
+						),
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $today,
+							'compare' => '>='
+						),
 					),
 				);
 				$args = array_merge($args, $time_args);
@@ -445,19 +533,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 						'meta_query' => array(
 							array(
 								'key' => 'announcement_start_date',
-								'value' => date('Y-m-d', strtotime('First day of January this year')),
-								'compare' => '>='
-							),
-							array(
-								'key' => 'announcement_start_date',
 								'value' => date('Y-m-d', strtotime('Last day of May this year')),
 								'compare' => '<='
 							),
 							array(
 								'key' => 'announcement_end_date',
-								'value' => date('Y-m-d', strtotime('First day of January this year')),
+								'value' => $today,
 								'compare' => '>='
-							)
+							),
 						),
 					);
 					$args = array_merge($args, $time_args);
@@ -468,19 +551,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 						'meta_query' => array(
 							array(
 								'key' => 'announcement_start_date',
-								'value' => date('Y-m-d', strtotime('First day of May this year')),
-								'compare' => '>='
-							),
-							array(
-								'key' => 'announcement_start_date',
 								'value' => date('Y-m-d', strtotime('Last day of July this year')),
 								'compare' => '<='
 							),
 							array(
 								'key' => 'announcement_end_date',
-								'value' => date('Y-m-d', strtotime('First day of May this year')),
+								'value' => $today,
 								'compare' => '>='
-							)
+							),
 						),
 					);
 					$args = array_merge($args, $time_args);
@@ -491,19 +569,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 						'meta_query' => array(
 							array(
 								'key' => 'announcement_start_date',
-								'value' => date('Y-m-d', strtotime('First day of August this year')),
-								'compare' => '>='
-							),
-							array(
-								'key' => 'announcement_start_date',
 								'value' => date('Y-m-d', strtotime('Last day of December this year')),
 								'compare' => '<='
 							),
 							array(
 								'key' => 'announcement_end_date',
-								'value' => date('Y-m-d', strtotime('First day of August this year')),
+								'value' => $today,
 								'compare' => '>='
-							)
+							),
 						),
 					);
 					$args = array_merge($args, $time_args);
@@ -511,20 +584,30 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				break;
 			case 'all':
 				$args['numberposts'] = 100;
+				$time_args = array(
+					'meta_query' => array(
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $today,
+							'compare' => '>='
+						),
+					),
+				);
+				$args = array_merge($args, $time_args);
 				break;
 			default:
 				$time_args = array(
 					'meta_query' => array(
 						array(
 							'key' => 'announcement_start_date',
-							'value' => $thismonday,
-							'compare' => '>='
-						),
-						array(
-							'key' => 'announcement_start_date',
 							'value' => $thissunday,
 							'compare' => '<='
-						)
+						),
+						array(
+							'key' => 'announcement_end_date',
+							'value' => $today,
+							'compare' => '>='
+						),
 					),
 				);
 				$args = array_merge($args, $time_args);
@@ -548,9 +631,9 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				),
 				array(
 					'key' => 'announcement_end_date',
-					'value' => $thismonday,
+					'value' => $today,
 					'compare' => '>='
-				)
+				),
 			),
 		);
 		$args = array_merge($args, $fallback_args);
