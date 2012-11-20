@@ -649,10 +649,11 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	else {
 		// Set up an array that will contain the necessary output values
 		// (basically a combination of post data and metadata):
-		$output = array();
+		$allposts = array();
+		$newposts = array();
 		
 		foreach ($announcements as $announcement) {
-			$output[$announcement->ID] = array(
+			$allposts[$announcement->ID] = array(
 				'post_id'			=> $announcement->ID,
 				'post_status' 		=> $announcement->post_status,
 				'post_modified' 	=> $announcement->post_modified,
@@ -670,7 +671,25 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				'posted_by'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
 				'roles' 			=> wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")),
 				'keywords'			=> wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")),
+				'is_new'			=> ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false,
 			);
+		}
+		
+		// Remove posts that are 'new' from $allposts, add to $newposts and
+		// append $newposts to the top of $allposts
+		foreach ($allposts as $announcement) {
+			if ($announcement['is_new'] == true) {
+				$newposts[$announcement['post_id']] = $announcement;
+				unset($allposts[$announcement['post_id']]);
+			}
+		}
+		
+		if (!empty($allposts)) {
+			$allposts = $newposts + $allposts;
+			$output = $allposts;
+		}
+		else { 
+			$output = $newposts;
 		}
 		
 		return $output;	
