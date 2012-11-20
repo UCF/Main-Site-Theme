@@ -492,6 +492,7 @@ function sc_post_type_search($params=array(), $content='') {
 }
 add_shortcode('post-type-search', 'sc_post_type_search');
 
+
 /**
  * Handles the form output and input for the phonebook search.
  *
