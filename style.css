@@ -637,6 +637,18 @@ li.tagit-new input {
 #customize-links #quicklinks-actions { padding-top: 30px; }
 
 
+/* Academics Search */
+#academics-search { }
+#academics-search ul#results { list-style-type: none; margin-top: -10px; margin-left: -25px; }
+#academics-search ul#results .program { padding: 15px; }
+#academics-search ul#results .program:nth-child(2n) { background: #eee; }
+#academics-search ul#results .program .college,
+#academics-search ul#results .program .department,
+#academics-search ul#results .program .label { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
+#academics-search ul#results .program .college,
+#academics-search ul#results .program .department { display: block; float: left; clear: both; }
+
+
 /**
  * Bootstrap Overrides
  * 
