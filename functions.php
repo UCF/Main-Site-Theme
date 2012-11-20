@@ -742,6 +742,7 @@ function announcements_to_rss($announcements) {
 						print '<keyword>'.$keyword.'</keyword>';
 					}
 				print '</keywords>';
+				print '<is_new>'.$announcement['is_new'].'</is_new>';
 
 			print '</item>';
 		}
