@@ -646,7 +646,8 @@ li.tagit-new input {
 #academics-search ul#results .program .department,
 #academics-search ul#results .program .label { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
 #academics-search ul#results .program .college,
-#academics-search ul#results .program .department { display: block; float: left; clear: both; }
+#academics-search ul#results .program .department { display: block; float: left; clear: both; font-size: 12px; }
+#academics-search ul#results .program .name_label { font-size: 10px; color: #555; text-transform: uppercase; width: 90px; float: left; }
 
 
 /**

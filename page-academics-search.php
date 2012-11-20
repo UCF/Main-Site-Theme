@@ -167,10 +167,10 @@ if ($get_params_exist == true) {
 									<?php } ?>
 											<div class="span8">
 												<h4 class="name"><?=trim($program->name)?></h4>
-												<span class="college"><?=$program->college_name?></span>
-												<span class="department"><?=$program->department_name?></span>
+												<?php if ($program->college_name) { ?><span class="college"><span class="name_label">College</span><?=$program->college_name?></span><?php } ?>
+												<?php if ($program->department_name) { ?><span class="department"><span class="name_label">Department</span><?=$program->department_name?></span><?php } ?>
 											</div>
-											<div class="span2">
+											<div class="span2 credits_wrap">
 												<?php if ($program->required_hours) { 
 													if ($program->graduate) { ?>
 													<a href="http://www.graduatecatalog.ucf.edu/programs/program.aspx<?=$program->required_hours?>">

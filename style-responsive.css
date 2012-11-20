@@ -252,6 +252,10 @@
 	#filters #addnew_wrap { text-align: center; clear: both; margin-left: 0 !important; width: 100% !important; }
 	#filters #addnew_wrap #addnew_announcement { margin-top: 10px; }
 	/*#announcements div[id^="announcement_"] { height: auto; }*/
+	
+	#academics-search #course_search_form select { margin-bottom: 5px; }
+	#academics-search ul#results { margin-left: 0; }
+	#academics-search ul#results .program .credits_wrap { float: left; }
 }
 
 @media (max-width: 480px) {	
