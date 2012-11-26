@@ -642,18 +642,24 @@ li.tagit-new input {
 #academics-search #browse { padding-top: 15px; }
 #academics-search #browse #degree-type-header { display: block; float: left; padding-top: 6px; }
 #academics-search #browse #degree-type-header .browse-header-alt { font-style: italic; font-weight: normal; padding-left: 5px; font-size: 20px; }
-#academics-search #browse ul#degree-type-list { float: right; }
+#academics-search #browse ul#degree-type-list {  }
 #academics-search ul#results { list-style-type: none; margin-top: -10px; margin-left: -25px; }
 #academics-search ul#results .program { padding: 15px; width: 760px; }
 #academics-search ul#results .program:nth-child(2n) { background: #eee; }
 #academics-search ul#results .program .college,
 #academics-search ul#results .program .department,
 #academics-search ul#results .program .label,
-#academics-search ul#results .program .name_label { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
+#academics-search ul#results .program .name_label,
+#academics-search ul#results .program .name-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
 #academics-search ul#results .program .college,
 #academics-search ul#results .program .department { display: block; float: left; font-size: 12px; }
-#academics-search ul#results .program .name_label { font-size: 10px; color: #555; text-transform: uppercase; width: 90px; display: block; float: left; clear: both; }
-#academics-search ul#results .program .credits_wrap { float: right; margin-top: 4px; }
+#academics-search ul#results .program .name_label,
+#academics-search ul#results .program .name-alt { font-size: 10px; color: #555; text-transform: uppercase; }
+#academics-search ul#results .program .name_label { width: 90px; display: block; float: left; clear: both; }
+#academics-search ul#results .program .name-alt { display: block; margin: auto; } 
+#academics-search ul#results .program .credits_wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
+.ie7 #academics-search ul#results .program .credits_wrap,
+.ie8 #academics-search ul#results .program .credits_wrap { width: 140px; }
 
 
 /**

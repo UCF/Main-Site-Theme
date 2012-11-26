@@ -256,12 +256,27 @@
 	/*#announcements div[id^="announcement_"] { height: auto; }*/
 	
 	#academics-search #course_search_form select { margin-bottom: 5px; }
+	#academics-search #browse ul#degree-type-list { margin-top: 5px; }
 	#academics-search ul#results { margin-left: 0; }
 	#academics-search ul#results .program { width: 100%; }
+	#academics-search ul#results .program > .row > a > div { overflow: hidden; }
+	#academics-search ul#results .program .name { margin-bottom: 5px; }
 	#academics-search ul#results .program .college,
 	#academics-search ul#results .program .department,
 	#academics-search ul#results .program .name_label { display: table; } /* for browsers that can get a neater display */
-	#academics-search ul#results .program .credits_wrap { float: left; clear: both; }
+	#academics-search ul#results .program .name_label { width: 35%; }
+	#academics-search ul#results .program .college,
+	#academics-search ul#results .program .department { width: 60%; }
+	#academics-search ul#results .program .credits_wrap { 
+		float: none; 
+		margin: auto; 
+		clear: both; 
+		text-align: center; 
+		border-top: 1px dotted #ccc; 
+		padding-top: 5px; 
+		margin-top: 5px; 
+	}
+	#academics-search ul#results .program .name-alt { display: inline; padding-right: 10px; float: none; }
 }
 
 @media (max-width: 480px) {	
