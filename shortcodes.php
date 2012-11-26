@@ -696,23 +696,4 @@ function sc_phonebook_search($attrs) {
 	return ob_get_clean();
 }
 add_shortcode('phonebook-search', 'sc_phonebook_search');
-
-
-/**
- * Get a A-Z Index Link URL by title
- * @return string
- **/
-function sc_azindexlink($atts) {
-	$name 	= @$atts['name'];
-	$output = '';
-	if ($name) {
-		$azindexlink = get_page_by_title($name, OBJECT, 'azindexlink');
-		if ($azindexlink) {
-			$url = get_post_meta($azindexlink->ID, 'azindexlink_url', TRUE);
-			$output = $url;
-		}
-	}
-	return $output;
-}
-add_shortcode('azindexlink', 'sc_azindexlink');
 ?>
