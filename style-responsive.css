@@ -112,6 +112,8 @@
 	#azIndexList .nav li:last-child { border-right: 1px solid #D4D4D4; }
 	#azIndexList .nav li a { width: 30px; }
 	#azindex .az-jumpto-anchor { height: 100px; }
+	
+	#academics-search ul#results .program { width: 580px; }
 }
 
 /* iPad fixes: */
@@ -255,7 +257,11 @@
 	
 	#academics-search #course_search_form select { margin-bottom: 5px; }
 	#academics-search ul#results { margin-left: 0; }
-	#academics-search ul#results .program .credits_wrap { float: left; }
+	#academics-search ul#results .program { width: 100%; }
+	#academics-search ul#results .program .college,
+	#academics-search ul#results .program .department,
+	#academics-search ul#results .program .name_label { display: table; } /* for browsers that can get a neater display */
+	#academics-search ul#results .program .credits_wrap { float: left; clear: both; }
 }
 
 @media (max-width: 480px) {	

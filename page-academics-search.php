@@ -39,7 +39,7 @@ if ($get_params_exist == true) {
 		$query_array['order_by'] .= ', name ASC';
 	}	
 	if ($search_query)		{ $query_array['search'] 	= $search_query; }
-	if ($degree_type) 		{ $query_array['in'] 		= $degree_type; } 
+	if ($degree_type && $degree_type !== 'grad') { $query_array['in'] = $degree_type; }
 	
 	$query_array['graduate'] = 0;
 	if ( ($program_type == 'undergrad_grad') || ($program_type == 'grad') ) {
@@ -53,7 +53,17 @@ if ($get_params_exist == true) {
 	// Grab results
 	$results = query_search_service($query_array);
 	
-	//var_dump($query_array);
+	// Format degree type names for use in body content
+	switch ($degree_type) {
+		case 'grad':
+			$degree_type = 'Graduate Programs';
+			break;
+		default:
+			$degree_type = ucwords($degree_type).'s';
+			break;
+	}
+	
+	var_dump($query_array);
 	//var_dump($results);
 }
 
@@ -74,8 +84,6 @@ if ($get_params_exist == true) {
 				<p><a href="<?=get_site_url()?>/academics/">&laquo; Back to Academics</a></p>
 			
 				<?php the_content(); ?>
-				
-				<?php if ($error !== '') { print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
 			
 				<div id="filters">
 					<h3>Search:</h3>
@@ -95,13 +103,17 @@ if ($get_params_exist == true) {
 				</div>
 				
 				<div id="browse">
-					<h3>Browse: <?php if ($view == 'browse') { ?><span class="browse_header_alt"><?=$degree_type?></span><?php } ?></h3>
-					<ul>
-						<li><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a></li>
-						<li><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a></li>
-						<li><a href="<?=get_permalink()?>?program_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a></li>
-						<li><a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a></li>
-					</ul>
+					<div class="row">
+						<h3 id="degree-type-header" class="span4">Browse: <?php if ($view == 'browse') { ?><span class="browse-header-alt"><?=$degree_type?></span><?php } ?></h3>
+						<div class="span6">
+							<ul class="nav nav-pills" role="navigation" id="degree-type-list">
+								<li><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a></li>
+								<li><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a></li>
+								<li><a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a></li>
+								<li><a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a></li>
+							</ul>
+						</div>
+					</div>
 					
 					<?php if ($view !== NULL) { ?>
 					
@@ -131,7 +143,7 @@ if ($get_params_exist == true) {
 								if ($sortby == 'required_hours') 						{ $sort_hours_classes .= 'active'; }
 						?>
 						
-						<ul class="nav nav-tabs">
+						<ul class="nav nav-tabs" id="degree-type-sort">
 							<li style="padding:9px 15px 0 0;"><strong>Sort by: </strong></li>
 							<li class="dropdown <?=$sort_name_classes?>">
 								<a href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
@@ -151,7 +163,7 @@ if ($get_params_exist == true) {
 							<ul class="row" id="results">
 							<?php
 							// output data
-							foreach ($results as $program) { 
+							foreach ($results as $program) { 							
 								$website = '';
 								if ($program->graduate) {
 									$website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
@@ -167,10 +179,10 @@ if ($get_params_exist == true) {
 									<?php } ?>
 											<div class="span8">
 												<h4 class="name"><?=trim($program->name)?></h4>
-												<?php if ($program->college_name) { ?><span class="college"><span class="name_label">College</span><?=$program->college_name?></span><?php } ?>
-												<?php if ($program->department_name) { ?><span class="department"><span class="name_label">Department</span><?=$program->department_name?></span><?php } ?>
+												<?php if ($program->college_name) { ?><span class="name_label">College</span><span class="college"><?=$program->college_name?></span><?php } ?>
+												<?php if ($program->department_name) { ?><span class="name_label">Department</span><span class="department"><?=$program->department_name?></span><?php } ?>
 											</div>
-											<div class="span2 credits_wrap">
+											<div class="credits_wrap">
 												<?php if ($program->required_hours) { 
 													if ($program->graduate) { ?>
 													<a href="http://www.graduatecatalog.ucf.edu/programs/program.aspx<?=$program->required_hours?>">
