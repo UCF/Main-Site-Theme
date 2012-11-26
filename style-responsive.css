@@ -259,7 +259,7 @@
 	#academics-search #browse ul#degree-type-list { margin-top: 5px; }
 	#academics-search ul#results { margin-left: 0; }
 	#academics-search ul#results .program { width: 100%; }
-	#academics-search ul#results .program > .row > a > div { overflow: hidden; }
+	#academics-search ul#results .program > .row > div { overflow: hidden; }
 	#academics-search ul#results .program .name { margin-bottom: 5px; }
 	#academics-search ul#results .program .college,
 	#academics-search ul#results .program .department,

@@ -39,7 +39,7 @@ if ($get_params_exist == true) {
 	if ($degree_type && $degree_type !== 'grad') { $query_array['in'] = $degree_type; }
 	
 	$query_array['graduate'] = 0;
-	if ( ($program_type == 'undergrad_grad') || ($program_type == 'grad') ) {
+	if ($program_type == 'grad') {
 		$query_array['graduate'] = 1;
 	}	 
 	if ($college && $college == 'College of Graduate Studies') {
@@ -50,11 +50,45 @@ if ($get_params_exist == true) {
 	if ($is_search && $search_query == '') {
 		$error = '<strong>Error:</strong> Please enter a search term.';
 	}
+	elseif ($program_type == 'undergrad_grad') {
+		// Undergrad + Grad searches must query twice to get both 'graduate' value results
+		$undergrad_results = query_search_service($query_array);
+		$query_array['graduate'] = 1;
+		$grad_results = query_search_service($query_array);
+		$results = array_merge((array) $undergrad_results, (array) $grad_results);
+	}
 	else {
 		$results = query_search_service($query_array);
 	}
-	//var_dump($query_array);
-	//var_dump($results);
+	
+	// Sort results by degree type
+	$majors = array_filter($results, create_function('$p', '
+		return $p->type === "major" && $p->graduate === "0";
+	'));
+	$minors = array_filter($results, create_function('$p', '
+		return $p->type === "minor";
+	'));
+	$grad_programs = array_filter($results, create_function('$p', '
+		return $p->type === "major" && $p->graduate === "1";
+	'));
+	$certificates = array_filter($results, create_function('$p', '
+		return $p->type === "certificate";
+	'));
+	$articulated = array_filter($results, create_function('$p', '
+		return $p->type === "articulated";
+	'));
+	$accelerated = array_filter($results, create_function('$p', '
+		return $p->type === "accelerated";
+	'));
+	
+	$results_sorted = array(
+		'Undergraduate Degrees' => $majors,
+		'Graduate Degrees'		=> $grad_programs,
+		'Minors'       			=> $minors,
+		'Certificates' 			=> $certificates,
+		'Articulated'  			=> $articulated,
+		'Accelerated'  			=> $accelerated,
+	);
 	
 	
 	// Format degree type names from $_GET for use in body content
@@ -214,49 +248,69 @@ if ($get_params_exist == true) {
 						if ($results) { ?>
 							<ul class="row" id="results">
 							<?php
-							foreach ($results as $program) { 	
-								// Website link						
-								$website = '';
-								if ($program->graduate) {
-									$website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
-								}
-								elseif ($program->website) {
-									$website = $program->website;
-								}
-								// Format degree type values
-								switch ($program->type) {
-									case 'major':
-										$degree_type_val = 'Undergraduate Major';
-										break;
-									case 'minor':
-										$degree_type_val = 'Undergraduate Minor';
-										break;
-									case 'accelerated':
-										$degree_type_val = 'Accelerated Program';
-										break;
-									case 'articulated':
-										$degree_type_val = 'Articulated Program';
-										break;
-									default:
-										$degree_type_val = ucwords($program->type);
-										break;										
-								}
-								if ($program->graduate && $program->type !== 'certificate') {
-									$degree_type_val = 'Graduate Program';
-								}
-							?>
-								<li class="program span10">
-									<div class="row">
-									<?php if ($website !== '') { ?>
-										<a href="<?=$website?>">
-									<?php } ?>
+							foreach ($results_sorted as $program_type => $programs) { 	
+							
+								if ($program_type && count($programs) > 0) { ?>
+									<h3 class="span10 program-type"><?=$program_type?></h3>	
+								<?php }
+							
+								foreach ($programs as $program) {									
+							
+									// Dept Website link						
+									$dept_website = '';
+									if ($program->graduate) {
+										$dept_website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+									}
+									elseif ($program->website) {
+										$dept_website = $program->website;
+									}
+									// Format degree type values
+									switch ($program->type) {
+										case 'major':
+											$degree_type_val = 'Undergraduate Major';
+											break;
+										case 'minor':
+											$degree_type_val = 'Undergraduate Minor';
+											break;
+										case 'accelerated':
+											$degree_type_val = 'Accelerated Program';
+											break;
+										case 'articulated':
+											$degree_type_val = 'Articulated Program';
+											break;
+										default:
+											$degree_type_val = ucwords($program->type);
+											break;										
+									}
+									if ($program->graduate && $program->type !== 'certificate') {
+										$degree_type_val = 'Graduate Program';
+									}
+								?>
+									<li class="program span10">
+										<div class="row">
+																			
 											<div class="span7">
+											<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
 												<h4 class="name"><?=trim($program->name)?></h4>
-												<?php if ($program->college_name) { ?><span class="name_label">College</span><span class="college"><?=$program->college_name?></span><?php } ?>
-												<?php if ($program->department_name) { ?><span class="name_label">Department</span><span class="department"><?=$program->department_name?></span><?php } ?>
-											</div>
-											<div class="credits_wrap">
+											<?php if ($dept_website !== '') { ?></a><?php } ?>
 											
+											<?php if ($program->college_name) { ?>
+												<span class="name_label">College</span>
+												<span class="college"><?=$program->college_name?></span>
+											<?php } ?>
+											
+											<?php if ($program->department_name) { ?>
+												<span class="name_label">Department</span>
+												<span class="department">
+													<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
+													<?=$program->department_name?>
+													<?php if ($dept_website !== '') { ?></a><?php } ?>
+												</span>
+											<?php } ?>
+											
+											</div>
+												
+											<div class="credits_wrap">
 												<span class="name-alt"><?=$degree_type_val?></span>
 											
 												<?php if ($program->required_hours) { 
@@ -269,28 +323,32 @@ if ($get_params_exist == true) {
 													<?php } elseif ($program->required_hours > 1 && $program->required_hours < 100) { ?>
 													<span class="credits label label-success"><?=$program->required_hours?> credit hours</span>
 													
-												<?php } 
+												<?php }
 												} else { ?>
 													<span class="credits label">Credit hours n/a</span>
 												<?php } ?>
 											</div>
-										</a>
-									</div>
-								</li>
-							<?php
+											
+										</div>
+									</li>
+								<?php
+								} // endforeach
+								
 							}
 							?>
 							</ul>
 							<?php	
-						}
+						} // if ($results)
 						elseif (!$results && $view !== NULL) { ?>
-							<?php if ($error !== '') { print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
+							<?php if ($error !== '') { 
+								print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; 
+							} ?>
 							<p>No results found.</p>
-						<?php
-						}
-					?>
 					
-				<?php } // endif ?>
+					<?php 
+						} // end elseif (!$results && $view !== NULL)
+					} // endif ($view !== null) 
+					?>
 				
 			</article>
 		</div>
