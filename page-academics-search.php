@@ -210,7 +210,7 @@ if ($get_params_exist == true) {
 							<div class="input-append span3">
 								<input type="text" class="search-query" name="search_query" value="<?=$search_query_clean?>" />
 								<input type="hidden" name="is_search" value="true" />
-								<button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+								<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
 							</div>
 						</form>
 					</div>

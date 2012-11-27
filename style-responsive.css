@@ -255,7 +255,9 @@
 	#filters #addnew_wrap #addnew_announcement { margin-top: 10px; }
 	/*#announcements div[id^="announcement_"] { height: auto; }*/
 	
-	#academics-search #course_search_form select { margin-bottom: 5px; }
+	#academics-search #course_search_form select { margin-right: 10px; width: 48%; }
+	#academics-search #course_search_form .input-append { width: 46%; }
+	#academics-search #course_search_form .input-append input { width: 70%; }
 	#academics-search #browse ul#degree-type-list {  }
 	#academics-search ul.results-list { margin-left: 0; }
 	#academics-search ul.results-list .program { width: 100%; }
@@ -362,6 +364,7 @@
 	#azindex .post-type-search ul li { font-size: 12px; padding: 3px 3px 3px 0; }
 	.post-type-search-results div[class*="span"] { max-height: none; overflow: visible; }
 	
+	#academics-search #course_search_form select { width: 40%; }
 	#academics-search #browse ul#degree-type-list { margin-left: 0; }
 	#academics-search #results #degree-type-sort #degree-type-sort-header { font-size: 11px; }
 	#academics-search #browse ul#degree-type-list li,
