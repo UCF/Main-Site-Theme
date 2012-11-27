@@ -15,13 +15,14 @@ if ($get_params_exist == true) {
 	if ($get_params_exist == true && !$_GET['is_search']) { 
 		$view = 'browse';
 	}
-	$search_query 	= $_GET['search_query'] ? urlencode($_GET['search_query']) : '';
-	$program_type	= $_GET['program_type']; // undergrad/undergrad_grad/grad 
-	$degree_type	= $_GET['degree_type'];  // major/minor/grad/cert
-	$college		= $_GET['college'];
-	$sortby			= $_GET['sortby'] ? $_GET['sortby'] : 'name';
-	$sort			= $_GET['sort'] ? $_GET['sort'] : 'ASC';
-	$flip_sort		= ($sort == 'ASC') ? 'DESC' : 'ASC';
+	$search_query 		= $_GET['search_query'] ? urlencode($_GET['search_query']) : '';
+	$search_query_clean = $_GET['search_query'] ? $_GET['search_query'] : '';
+	$program_type		= $_GET['program_type']; // undergrad/undergrad_grad/grad 
+	$degree_type		= $_GET['degree_type'];  // major/minor/grad/cert
+	$college			= $_GET['college'];
+	$sortby				= $_GET['sortby'] ? $_GET['sortby'] : 'name';
+	$sort				= $_GET['sort'] ? $_GET['sort'] : 'ASC';
+	$flip_sort			= ($sort == 'ASC') ? 'DESC' : 'ASC';
 	
 	// Build an array of query params based on GET params passed
 	$query_array = array(
@@ -39,6 +40,7 @@ if ($get_params_exist == true) {
 	if ($degree_type && $degree_type !== 'grad') { $query_array['in'] = $degree_type; }
 	
 	$query_array['graduate'] = 0;
+	
 	if ($program_type == 'grad') {
 		$query_array['graduate'] = 1;
 	}	 
@@ -91,7 +93,7 @@ if ($get_params_exist == true) {
 	);
 	
 	
-	// Format degree type names from $_GET for use in body content
+	// Format Browse All degree type names from $_GET for use in body content
 	switch ($degree_type) {
 		case 'grad':
 			$degree_type_param = 'Graduate Programs';
@@ -206,7 +208,7 @@ if ($get_params_exist == true) {
 								<option value="grad" <?=$grad_sel?>>Graduate Programs Only</option>
 							</select>
 							<div class="input-append span3">
-								<input type="text" class="search-query" name="search_query" value="<?=$search_query?>" />
+								<input type="text" class="search-query" name="search_query" value="<?=$search_query_clean?>" />
 								<input type="hidden" name="is_search" value="true" />
 								<button type="submit" class="btn"><i class="icon-search"></i> Search</button>
 							</div>
@@ -216,8 +218,8 @@ if ($get_params_exist == true) {
 				
 				<div id="browse">
 					<div class="row">
-						<h3 id="degree-type-header" class="span4">Browse: <?php if ($view == 'browse') { ?><span class="browse-header-alt"><?=$degree_type_param?></span><?php } ?></h3>
-						<div class="span6">
+						<div class="span10">
+							<h3 id="degree-type-header">Browse All:</h3>
 							<ul class="nav nav-pills" role="navigation" id="degree-type-list">
 								<li class="<?=$majors_classes?>"><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a></li>
 								<li class="<?=$minors_classes?>"><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a></li>
@@ -226,33 +228,56 @@ if ($get_params_exist == true) {
 							</ul>
 						</div>
 					</div>
+				</div>
 					
-					<?php if ($view !== NULL) { ?>
-											
-						<ul class="nav nav-tabs" id="degree-type-sort">
-							<li style="padding:9px 15px 0 0;"><strong>Sort by: </strong></li>
-							<li class="dropdown <?=$sort_name_classes?>">
-								<a href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
-							</li>
-							<li class="dropdown <?=$sort_college_classes?>">
-								<a href="<?=$sort_college_url?>">College <b class="caret"></b></a>
-							</li>
-							<li class="dropdown <?=$sort_hours_classes?>">
-								<a href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
-							</li>
-						</ul>
+				<?php if ($view !== NULL) { ?>
+				<div id="results">
+					<div class="row">	
+						<h3 id="results-header" class="span10">Results For: <span class="results-header-alt">
+						<?php if ($view == 'browse') { ?>
+							All <?=$degree_type_param?>
+						<?php 
+						} else { ?>
+							<?=$search_query_clean?>
+						<?php } ?>
+						</span></h3>
 						
+						<div class="span10">						
+							<ul class="nav nav-tabs" id="degree-type-sort">
+								<li id="degree-type-sort-header">Sort by:</li>
+								<li class="dropdown <?=$sort_name_classes?>">
+									<a href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
+								</li>
+								<li class="dropdown <?=$sort_college_classes?>">
+									<a href="<?=$sort_college_url?>">College <b class="caret"></b></a>
+								</li>
+								<li class="dropdown <?=$sort_hours_classes?>">
+									<a href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
+								</li>
+							</ul>
+						</div>
+					</div>	
 				</div>					
 					
 					<?php 
 						if ($results) { ?>
-							<ul class="row" id="results">
+							<ul class="row" id="results-list">
 							<?php
 							foreach ($results_sorted as $program_type => $programs) { 	
 							
 								if ($program_type && count($programs) > 0) { ?>
 									<h3 class="span10 program-type"><?=$program_type?></h3>	
 								<?php }
+								
+								// Format program types to not use plural tense
+								switch ($program_type) {
+									case 'Accelerated':
+									case 'Articulated':
+										break;
+									default:
+										$program_type = substr($program_type, 0, (strlen($program_type) - 1));
+										break;
+								}
 							
 								foreach ($programs as $program) {									
 							
@@ -263,27 +288,6 @@ if ($get_params_exist == true) {
 									}
 									elseif ($program->website) {
 										$dept_website = $program->website;
-									}
-									// Format degree type values
-									switch ($program->type) {
-										case 'major':
-											$degree_type_val = 'Undergraduate Major';
-											break;
-										case 'minor':
-											$degree_type_val = 'Undergraduate Minor';
-											break;
-										case 'accelerated':
-											$degree_type_val = 'Accelerated Program';
-											break;
-										case 'articulated':
-											$degree_type_val = 'Articulated Program';
-											break;
-										default:
-											$degree_type_val = ucwords($program->type);
-											break;										
-									}
-									if ($program->graduate && $program->type !== 'certificate') {
-										$degree_type_val = 'Graduate Program';
 									}
 								?>
 									<li class="program span10">
@@ -311,7 +315,7 @@ if ($get_params_exist == true) {
 											</div>
 												
 											<div class="credits_wrap">
-												<span class="name-alt"><?=$degree_type_val?></span>
+												<span class="program-type-alt"><?=$program_type?></span>
 											
 												<?php if ($program->required_hours) { 
 													if ($program->graduate) { ?>
@@ -333,7 +337,6 @@ if ($get_params_exist == true) {
 									</li>
 								<?php
 								} // endforeach
-								
 							}
 							?>
 							</ul>

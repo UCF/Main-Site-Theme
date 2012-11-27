@@ -113,7 +113,7 @@
 	#azIndexList .nav li a { width: 30px; }
 	#azindex .az-jumpto-anchor { height: 100px; }
 	
-	#academics-search ul#results .program { width: 580px; }
+	#academics-search ul#results-list .program { width: 580px; }
 }
 
 /* iPad fixes: */
@@ -256,27 +256,21 @@
 	/*#announcements div[id^="announcement_"] { height: auto; }*/
 	
 	#academics-search #course_search_form select { margin-bottom: 5px; }
-	#academics-search #browse ul#degree-type-list { margin-top: 5px; }
-	#academics-search ul#results { margin-left: 0; }
-	#academics-search ul#results .program { width: 100%; }
-	#academics-search ul#results .program > .row > div { overflow: hidden; }
-	#academics-search ul#results .program .name { margin-bottom: 5px; }
-	#academics-search ul#results .program .college,
-	#academics-search ul#results .program .department,
-	#academics-search ul#results .program .name_label { display: table; } /* for browsers that can get a neater display */
-	#academics-search ul#results .program .name_label { width: 35%; }
-	#academics-search ul#results .program .college,
-	#academics-search ul#results .program .department { width: 60%; }
-	#academics-search ul#results .program .credits_wrap { 
+	#academics-search #browse ul#degree-type-list {  }
+	#academics-search ul#results-list { margin-left: 0; }
+	#academics-search ul#results-list .program { width: 100%; }
+	#academics-search ul#results-list .program > .row > div { overflow: hidden; }
+	#academics-search ul#results-list .program .name_label { width: 90px; }
+	#academics-search ul#results-list .program .credits_wrap { 
 		float: none; 
 		margin: auto; 
 		clear: both; 
 		text-align: center; 
 		border-top: 1px dotted #ccc; 
 		padding-top: 5px; 
-		margin-top: 5px; 
+		margin-top: 8px; 
 	}
-	#academics-search ul#results .program .name-alt { display: inline; padding-right: 10px; float: none; }
+	#academics-search ul#results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
 }
 
 @media (max-width: 480px) {	
@@ -367,4 +361,11 @@
 	#azindex .az-jumpto-anchor { height: 20px; }
 	#azindex .post-type-search ul li { font-size: 12px; padding: 3px 3px 3px 0; }
 	.post-type-search-results div[class*="span"] { max-height: none; overflow: visible; }
+	
+	#academics-search #browse ul#degree-type-list { margin-left: 0; }
+	#academics-search #results #degree-type-sort #degree-type-sort-header { font-size: 11px; }
+	#academics-search #browse ul#degree-type-list li,
+	#academics-search #results #degree-type-sort li { font-size: 11px; }
+	#academics-search ul#results-list .program .program-type-alt { display: none; }
+	
 }
