@@ -637,6 +637,66 @@ li.tagit-new input {
 #customize-links #quicklinks-actions { padding-top: 30px; }
 
 
+/* Academics Search */
+#academics-search { }
+#academics-search #browse { }
+#academics-search #browse #degree-type-header { display: block; float: left; padding-top: 8px; }
+#academics-search #browse ul#degree-type-list { float: left; margin-left: 15px; }
+
+#academics-search #results { margin-top: 20px; }
+#academics-search #results #results-header { margin-bottom: 10px; }
+#academics-search #results #results-header .results-header-alt { font-style: italic; font-weight: normal; padding-left: 5px; font-size: 20px; }
+#academics-search #results #degree-type-sort #degree-type-sort-header { padding: 9px 15px 0 0; font-weight: bold; }
+
+#academics-search ul#results-list { list-style-type: none; margin-top: 0; margin-left: -25px; }
+#academics-search ul#results-list .program-type { 
+	font-family: 'Helvetica-Neue', Helvetica, sans-serif; 
+	font-weight: 300; 
+	font-size: 22px; 
+	line-height: 32px; 
+	padding-top: 20px;
+	padding-bottom: 5px;
+	border-top: 1px solid #ccc;
+	margin-top: 30px;
+}
+#academics-search ul#results-list .program-type:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+#academics-search ul#results-list .program { padding: 15px; width: 760px; }
+#academics-search ul#results-list .program:nth-child(2n) { background: #eee; }
+
+#academics-search ul#results-list .program .name { margin-bottom: 4px; }
+#academics-search ul#results-list .program a .name { color: #660000; }
+#academics-search ul#results-list .program a .name:hover { color: #E50606; }
+
+#academics-search ul#results-list .program .college,
+#academics-search ul#results-list .program .department,
+#academics-search ul#results-list .program .label,
+#academics-search ul#results-list .program .name_label,
+#academics-search ul#results-list .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
+
+#academics-search ul#results-list .program .college,
+#academics-search ul#results-list .program .department { display: table; } /* for browsers that can get a neater display */
+
+#academics-search ul#results-list .program .college,
+#academics-search ul#results-list .program .department { font-size: 12px; }
+
+#academics-search ul#results-list .program .name_label,
+#academics-search ul#results-list .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
+
+#academics-search ul#results-list .program .name_label { width: 110px; display: block; float: left; clear: both; }
+#academics-search ul#results-list .program .program-type-alt { display: block; margin: auto; } 
+
+.ie7 #academics-search ul#results-list .program .college,
+.ie7 #academics-search ul#results-list .program .department,
+.ie8 #academics-search ul#results-list .program .college,
+.ie8 #academics-search ul#results-list .program .department { display: block; float: left; }
+
+#academics-search ul#results-list .program .credits_wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
+.ie7 #academics-search ul#results-list .program .credits_wrap,
+.ie8 #academics-search ul#results-list .program .credits_wrap { width: 140px; }
+
+#academics-search .more-details { text-align:center; }
+
+
 /**
  * Bootstrap Overrides
  * 

@@ -61,6 +61,7 @@ add_filter('enter_title_here', 'change_centerpiece_title');
 /**
  * Announcement custom columns
  **/
+ 
 // Custom columns for 'Announcement' post type
 function edit_announcement_columns() {
 	$columns = array(
@@ -356,7 +357,6 @@ function output_weather_data($class=null) {
 /**
  * Hide unused admin tools (Links, Comments, etc)
  **/
- 
 function hide_admin_links() {
 	remove_menu_page('link-manager.php');
 	remove_menu_page('edit-comments.php');
