@@ -15,14 +15,18 @@ if ($get_params_exist == true) {
 	if ($get_params_exist == true && !$_GET['is_search']) { 
 		$view = 'browse';
 	}
-	$search_query 		= $_GET['search_query'] ? urlencode($_GET['search_query']) : '';
-	$search_query_clean = $_GET['search_query'] ? $_GET['search_query'] : '';
-	$program_type		= $_GET['program_type']; // undergrad/undergrad_grad/grad 
-	$degree_type		= $_GET['degree_type'];  // major/minor/grad/cert
-	$college			= $_GET['college'];
-	$sortby				= $_GET['sortby'] ? $_GET['sortby'] : 'name';
-	$sort				= $_GET['sort'] ? $_GET['sort'] : 'ASC';
-	$flip_sort			= ($sort == 'ASC') ? 'DESC' : 'ASC';
+	if ($_GET['search_query']) {
+		if (ctype_alnum($_GET['search_query'])) {
+			$search_query 		 = urlencode($_GET['search_query']);
+			$search_query_pretty = $_GET['search_query'];
+		}
+	}
+	$program_type		 = $_GET['program_type']; // undergrad/undergrad_grad/grad 
+	$degree_type		 = $_GET['degree_type'];  // major/minor/grad/cert
+	$college			 = $_GET['college'];
+	$sortby				 = $_GET['sortby'] ? $_GET['sortby'] : 'name';
+	$sort				 = $_GET['sort'] ? $_GET['sort'] : 'ASC';
+	$flip_sort			 = ($sort == 'ASC') ? 'DESC' : 'ASC';
 	
 	// Build an array of query params based on GET params passed
 	$query_array = array(
@@ -50,7 +54,7 @@ if ($get_params_exist == true) {
 	
 	// Grab results
 	if ($is_search && $search_query == '') {
-		$error = '<strong>Error:</strong> Please enter a search term.';
+		$error = '<strong>Error:</strong> Please enter a valid search term (only letters and numbers are permitted.)';
 	}
 	elseif ($program_type == 'undergrad_grad') {
 		// Undergrad + Grad searches must query twice to get both 'graduate' value results
@@ -210,7 +214,7 @@ if ($get_params_exist == true) {
 								<option value="grad" <?=$grad_sel?>>Graduate Programs Only</option>
 							</select>
 							<div class="input-append span3">
-								<input type="text" class="search-query" name="search_query" value="<?=$search_query_clean?>" />
+								<input type="text" class="search-query" name="search_query" value="<?=$search_query_pretty?>" />
 								<input type="hidden" name="is_search" value="true" />
 								<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
 							</div>
@@ -248,7 +252,7 @@ if ($get_params_exist == true) {
 							All <?=$degree_type_param?>
 						<?php 
 						} else { ?>
-							<?=$search_query_clean?>
+							<?=$search_query_pretty?>
 						<?php } ?>
 						</span></h3>
 						
