@@ -663,9 +663,11 @@ li.tagit-new input {
 
 #academics-search ul.results-list { list-style-type: none; margin-top: 0; margin-left: -25px; }
 #academics-search ul.results-list .program { padding: 15px; width: 760px; }
-#academics-search ul.results-list .program:nth-child(2n) { background: #eee; }
+#academics-search ul.results-list .program:nth-child(2n+1) { background: #eee; }
 
 #academics-search ul.results-list .program .name { margin-bottom: 4px; }
+.ie7 #academics-search ul.results-list .program > .row > div > a,
+.ie8 #academics-search ul.results-list .program > .row > div > a { display: block; height: 22px; border-bottom: 0 !important; }
 #academics-search ul.results-list .program a .name { color: #660000; }
 #academics-search ul.results-list .program a .name:hover { color: #E50606; }
 
@@ -690,7 +692,7 @@ li.tagit-new input {
 .ie7 #academics-search ul.results-list .program .college,
 .ie7 #academics-search ul.results-list .program .department,
 .ie8 #academics-search ul.results-list .program .college,
-.ie8 #academics-search ul.results-list .program .department { display: block; float: left; }
+.ie8 #academics-search ul.results-list .program .department { display: block; float: none; }
 
 #academics-search ul.results-list .program .credits_wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
 .ie7 #academics-search ul.results-list .program .credits_wrap,

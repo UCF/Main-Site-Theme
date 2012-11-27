@@ -332,6 +332,18 @@ ieRoundedCornerThumbs = function($) {
 	}
 }
 
+
+/* IE 7-8 fix for Academics Search striped results */
+ieStripedAcademicsResults = function($) {
+	if ($('#academics-search').length > 0) {
+		if ($.browser.msie && $.browser.version < 9) {
+			$('.results-list .program:nth-child(2n+1)').css('background-color', '#eee');
+		}
+	}
+}
+
+
+
 Generic.PostTypeSearch = function($) {
 	$('.post-type-search')
 		.each(function(post_type_search_index, post_type_search) {
@@ -547,6 +559,7 @@ if (typeof jQuery != 'undefined'){
 		azIndex($);
 		toggleAnnouncementFilters($);
 		ieRoundedCornerThumbs($);
+		ieStripedAcademicsResults($);
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
 		
