@@ -68,6 +68,8 @@ if ($get_params_exist == true) {
 	}
 	
 	if ($results) {
+		$results_count = count($results);		
+		
 		// Sort results by degree type
 		$majors = array_filter($results, create_function('$p', '
 			return $p->type === "major" && $p->graduate === "0";
@@ -95,7 +97,7 @@ if ($get_params_exist == true) {
 			'Certificates' 			=> $certificates,
 			'Articulated Programs'	=> $articulated,
 			'Accelerated Programs'	=> $accelerated,
-		);
+		);		
 	}
 	
 	
@@ -247,7 +249,7 @@ if ($get_params_exist == true) {
 				<?php if ($view !== NULL) { ?>
 				<div id="results">
 					<div class="row">	
-						<h3 id="results-header" class="span10">Results For: <span class="results-header-alt">
+						<h3 id="results-header" class="span10"><?=$results_count?> Results For: <span class="results-header-alt">
 						<?php if ($view == 'browse') { ?>
 							All <?=$degree_type_param?>
 						<?php 
