@@ -63,34 +63,36 @@ if ($get_params_exist == true) {
 		$results = query_search_service($query_array);
 	}
 	
-	// Sort results by degree type
-	$majors = array_filter($results, create_function('$p', '
-		return $p->type === "major" && $p->graduate === "0";
-	'));
-	$minors = array_filter($results, create_function('$p', '
-		return $p->type === "minor";
-	'));
-	$grad_programs = array_filter($results, create_function('$p', '
-		return $p->type === "major" && $p->graduate === "1";
-	'));
-	$certificates = array_filter($results, create_function('$p', '
-		return $p->type === "certificate";
-	'));
-	$articulated = array_filter($results, create_function('$p', '
-		return $p->type === "articulated";
-	'));
-	$accelerated = array_filter($results, create_function('$p', '
-		return $p->type === "accelerated";
-	'));
-	
-	$results_sorted = array(
-		'Undergraduate Degrees' => $majors,
-		'Graduate Degrees'		=> $grad_programs,
-		'Minors'       			=> $minors,
-		'Certificates' 			=> $certificates,
-		'Articulated Programs'	=> $articulated,
-		'Accelerated Programs'	=> $accelerated,
-	);
+	if ($results) {
+		// Sort results by degree type
+		$majors = array_filter($results, create_function('$p', '
+			return $p->type === "major" && $p->graduate === "0";
+		'));
+		$minors = array_filter($results, create_function('$p', '
+			return $p->type === "minor";
+		'));
+		$grad_programs = array_filter($results, create_function('$p', '
+			return $p->type === "major" && $p->graduate === "1";
+		'));
+		$certificates = array_filter($results, create_function('$p', '
+			return $p->type === "certificate";
+		'));
+		$articulated = array_filter($results, create_function('$p', '
+			return $p->type === "articulated";
+		'));
+		$accelerated = array_filter($results, create_function('$p', '
+			return $p->type === "accelerated";
+		'));
+		
+		$results_sorted = array(
+			'Undergraduate Degrees' => $majors,
+			'Graduate Degrees'		=> $grad_programs,
+			'Minors'       			=> $minors,
+			'Certificates' 			=> $certificates,
+			'Articulated Programs'	=> $articulated,
+			'Accelerated Programs'	=> $accelerated,
+		);
+	}
 	
 	
 	// Format Browse All degree type names from $_GET for use in body content
