@@ -664,6 +664,8 @@ li.tagit-new input {
 #academics-search ul#results-list .program:nth-child(2n) { background: #eee; }
 
 #academics-search ul#results-list .program .name { margin-bottom: 4px; }
+#academics-search ul#results-list .program a .name { color: #660000; }
+#academics-search ul#results-list .program a .name:hover { color: #E50606; }
 
 #academics-search ul#results-list .program .college,
 #academics-search ul#results-list .program .department,
@@ -691,6 +693,8 @@ li.tagit-new input {
 #academics-search ul#results-list .program .credits_wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
 .ie7 #academics-search ul#results-list .program .credits_wrap,
 .ie8 #academics-search ul#results-list .program .credits_wrap { width: 140px; }
+
+#academics-search .more-details { text-align:center; }
 
 
 /**

@@ -88,8 +88,8 @@ if ($get_params_exist == true) {
 		'Graduate Degrees'		=> $grad_programs,
 		'Minors'       			=> $minors,
 		'Certificates' 			=> $certificates,
-		'Articulated'  			=> $articulated,
-		'Accelerated'  			=> $accelerated,
+		'Articulated Programs'	=> $articulated,
+		'Accelerated Programs'	=> $accelerated,
 	);
 	
 	
@@ -221,10 +221,18 @@ if ($get_params_exist == true) {
 						<div class="span10">
 							<h3 id="degree-type-header">Browse All:</h3>
 							<ul class="nav nav-pills" role="navigation" id="degree-type-list">
-								<li class="<?=$majors_classes?>"><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a></li>
-								<li class="<?=$minors_classes?>"><a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a></li>
-								<li class="<?=$grad_classes?>"><a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a></li>
-								<li class="<?=$cert_classes?>"><a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a></li>
+								<li class="<?=$majors_classes?>">
+									<a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a>
+								</li>
+								<li class="<?=$minors_classes?>">
+									<a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a>
+								</li>
+								<li class="<?=$grad_classes?>">
+									<a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a>
+								</li>
+								<li class="<?=$cert_classes?>">
+									<a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -270,14 +278,7 @@ if ($get_params_exist == true) {
 								<?php }
 								
 								// Format program types to not use plural tense
-								switch ($program_type) {
-									case 'Accelerated':
-									case 'Articulated':
-										break;
-									default:
-										$program_type = substr($program_type, 0, (strlen($program_type) - 1));
-										break;
-								}
+								$program_type = substr($program_type, 0, (strlen($program_type) - 1));
 							
 								foreach ($programs as $program) {									
 							
@@ -336,22 +337,28 @@ if ($get_params_exist == true) {
 										</div>
 									</li>
 								<?php
-								} // endforeach
+								}
 							}
 							?>
 							</ul>
 							<?php	
-						} // if ($results)
-						elseif (!$results && $view !== NULL) { ?>
+						} else { ?>
 							<?php if ($error !== '') { 
 								print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; 
 							} ?>
 							<p>No results found.</p>
 					
 					<?php 
-						} // end elseif (!$results && $view !== NULL)
-					} // endif ($view !== null) 
-					?>
+						}
+					} ?>
+					
+					<br/>
+					<p class="more-details">
+						For more details and the complete undergraduate catalog, visit: <a href="http://www.catalog.sdes.ucf.edu/">www.catalog.sdes.ucf.edu/</a>.
+					</p>
+					<p class="more-details">
+						For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/">www.graduatecatalog.ucf.edu/</a>.
+					</p>
 				
 			</article>
 		</div>
