@@ -648,7 +648,7 @@ li.tagit-new input {
 #academics-search #results #results-header .results-header-alt { font-style: italic; font-weight: normal; padding-left: 5px; font-size: 20px; }
 #academics-search #results #degree-type-sort #degree-type-sort-header { padding: 9px 15px 0 0; font-weight: bold; }
 
-#academics-search ul#results-list { list-style-type: none; margin-top: -10px; margin-left: -25px; }
+#academics-search ul#results-list { list-style-type: none; margin-top: 0; margin-left: -25px; }
 #academics-search ul#results-list .program-type { 
 	font-family: 'Helvetica-Neue', Helvetica, sans-serif; 
 	font-weight: 300; 
