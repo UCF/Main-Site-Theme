@@ -249,14 +249,16 @@ if ($get_params_exist == true) {
 				<?php if ($view !== NULL) { ?>
 				<div id="results">
 					<div class="row">	
-						<h3 id="results-header" class="span10"><?=$results_count?> Results For: <span class="results-header-alt">
-						<?php if ($view == 'browse') { ?>
-							All <?=$degree_type_param?>
-						<?php 
-						} else { ?>
-							<?=$search_query_pretty?>
-						<?php } ?>
-						</span></h3>
+						<h3 id="results-header" class="span10">
+							<?=$results_count?> Result<?php if ($results_count == 0 || $results_count > 1) { ?>s<?php } ?> For: <span class="results-header-alt">
+							<?php if ($view == 'browse') { ?>
+								All <?=$degree_type_param?>
+							<?php 
+							} else { ?>
+								<?=$search_query_pretty?>
+							<?php } ?>
+							</span>
+						</h3>
 						
 						<div class="span10">						
 							<ul class="nav nav-tabs" id="degree-type-sort">
