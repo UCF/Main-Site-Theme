@@ -113,7 +113,7 @@
 	#azIndexList .nav li a { width: 30px; }
 	#azindex .az-jumpto-anchor { height: 100px; }
 	
-	#academics-search ul#results-list .program { width: 580px; }
+	#academics-search ul.results-list .program { width: 580px; }
 }
 
 /* iPad fixes: */
@@ -257,11 +257,11 @@
 	
 	#academics-search #course_search_form select { margin-bottom: 5px; }
 	#academics-search #browse ul#degree-type-list {  }
-	#academics-search ul#results-list { margin-left: 0; }
-	#academics-search ul#results-list .program { width: 100%; }
-	#academics-search ul#results-list .program > .row > div { overflow: hidden; }
-	#academics-search ul#results-list .program .name_label { width: 90px; }
-	#academics-search ul#results-list .program .credits_wrap { 
+	#academics-search ul.results-list { margin-left: 0; }
+	#academics-search ul.results-list .program { width: 100%; }
+	#academics-search ul.results-list .program > .row > div { overflow: hidden; }
+	#academics-search ul.results-list .program .name_label { width: 90px; }
+	#academics-search ul.results-list .program .credits_wrap { 
 		float: none; 
 		margin: auto; 
 		clear: both; 
@@ -270,7 +270,7 @@
 		padding-top: 5px; 
 		margin-top: 8px; 
 	}
-	#academics-search ul#results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
+	#academics-search ul.results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
 }
 
 @media (max-width: 480px) {	
@@ -366,6 +366,6 @@
 	#academics-search #results #degree-type-sort #degree-type-sort-header { font-size: 11px; }
 	#academics-search #browse ul#degree-type-list li,
 	#academics-search #results #degree-type-sort li { font-size: 11px; }
-	#academics-search ul#results-list .program .program-type-alt { display: none; }
+	#academics-search ul.results-list .program .program-type-alt { display: none; }
 	
 }

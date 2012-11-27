@@ -268,86 +268,88 @@ if ($get_params_exist == true) {
 				</div>					
 					
 					<?php 
-						if ($results) { ?>
-							<ul class="row" id="results-list">
+					if ($results) { 
+						foreach ($results_sorted as $program_type => $programs) { ?>
+							
 							<?php
-							foreach ($results_sorted as $program_type => $programs) { 	
+							if ($program_type && count($programs) > 0) { ?>
+								<h3 class="program-type"><?=$program_type?></h3>	
 							
-								if ($program_type && count($programs) > 0) { ?>
-									<h3 class="span10 program-type"><?=$program_type?></h3>	
-								<?php }
+								<ul class="row results-list">
 								
-								// Format program types to not use plural tense
-								$program_type = substr($program_type, 0, (strlen($program_type) - 1));
-							
-								foreach ($programs as $program) {									
-							
-									// Dept Website link						
-									$dept_website = '';
-									if ($program->graduate) {
-										$dept_website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
-									}
-									elseif ($program->website) {
-										$dept_website = $program->website;
-									}
-								?>
-									<li class="program span10">
-										<div class="row">
-																			
-											<div class="span7">
-											<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
-												<h4 class="name"><?=trim($program->name)?></h4>
-											<?php if ($dept_website !== '') { ?></a><?php } ?>
-											
-											<?php if ($program->college_name) { ?>
-												<span class="name_label">College</span>
-												<span class="college"><?=$program->college_name?></span>
-											<?php } ?>
-											
-											<?php if ($program->department_name) { ?>
-												<span class="name_label">Department</span>
-												<span class="department">
-													<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
-													<?=$program->department_name?>
-													<?php if ($dept_website !== '') { ?></a><?php } ?>
-												</span>
-											<?php } ?>
-											
-											</div>
+									<?php
+									// Format program types to not use plural tense
+									$program_type = substr($program_type, 0, (strlen($program_type) - 1));
+								
+									foreach ($programs as $program) {									
+								
+										// Dept Website link						
+										$dept_website = '';
+										if ($program->graduate) {
+											$dept_website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+										}
+										elseif ($program->website) {
+											$dept_website = $program->website;
+										}
+									?>
+										<li class="program span10">
+											<div class="row">
+																				
+												<div class="span7">
+												<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
+													<h4 class="name"><?=trim($program->name)?></h4>
+												<?php if ($dept_website !== '') { ?></a><?php } ?>
 												
-											<div class="credits_wrap">
-												<span class="program-type-alt"><?=$program_type?></span>
-											
-												<?php if ($program->required_hours) { 
-													if ($program->graduate) { ?>
-													<a href="http://www.graduatecatalog.ucf.edu/programs/program.aspx<?=$program->required_hours?>">
-														<span class="credits label label-warning">Click for credit hours</span>
-													</a>
-													<?php } elseif ($program->required_hours >= 100) { ?>
-													<span class="credits label label-info"><?=$program->required_hours?> credit hours</span>
-													<?php } elseif ($program->required_hours > 1 && $program->required_hours < 100) { ?>
-													<span class="credits label label-success"><?=$program->required_hours?> credit hours</span>
-													
-												<?php }
-												} else { ?>
-													<span class="credits label">Credit hours n/a</span>
+												<?php if ($program->college_name) { ?>
+													<span class="name_label">College</span>
+													<span class="college"><?=$program->college_name?></span>
 												<?php } ?>
+												
+												<?php if ($program->department_name) { ?>
+													<span class="name_label">Department</span>
+													<span class="department">
+														<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
+														<?=$program->department_name?>
+														<?php if ($dept_website !== '') { ?></a><?php } ?>
+													</span>
+												<?php } ?>
+												
+												</div>
+													
+												<div class="credits_wrap">
+													<span class="program-type-alt"><?=$program_type?></span>
+												
+													<?php if ($program->required_hours) { 
+														if ($program->graduate) { ?>
+														<a href="http://www.graduatecatalog.ucf.edu/programs/program.aspx<?=$program->required_hours?>">
+															<span class="credits label label-warning">Click for credit hours</span>
+														</a>
+														<?php } elseif ($program->required_hours >= 100) { ?>
+														<span class="credits label label-info"><?=$program->required_hours?> credit hours</span>
+														<?php } elseif ($program->required_hours > 1 && $program->required_hours < 100) { ?>
+														<span class="credits label label-success"><?=$program->required_hours?> credit hours</span>
+														
+													<?php }
+													} else { ?>
+														<span class="credits label">Credit hours n/a</span>
+													<?php } ?>
+												</div>
+												
 											</div>
-											
-										</div>
-									</li>
+										</li>
+									<?php
+									}
+									?>
+									</ul>	
+									<hr />
 								<?php
 								}
-							}
-							?>
-							</ul>
-							<?php	
+							}	
 						} else { ?>
 							<?php if ($error !== '') { 
 								print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; 
 							} ?>
 							<p>No results found.</p>
-					
 					<?php 
 						}
 					} ?>
