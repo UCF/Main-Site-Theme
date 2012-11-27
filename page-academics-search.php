@@ -16,7 +16,7 @@ if ($get_params_exist == true) {
 		$view = 'browse';
 	}
 	if ($_GET['search_query']) {
-		if (ctype_alnum($_GET['search_query'])) {
+		if (preg_match('/^[a-zA-Z\s]+$/', $_GET['search_query'])) {
 			$search_query 		 = urlencode($_GET['search_query']);
 			$search_query_pretty = $_GET['search_query'];
 		}
@@ -54,7 +54,7 @@ if ($get_params_exist == true) {
 	
 	// Grab results
 	if ($is_search && $search_query == '') {
-		$error = '<strong>Error:</strong> Please enter a valid search term (only letters and numbers are permitted.)';
+		$error = '<strong>Error:</strong> Please enter a valid search term (numbers and special characters are not permitted.)';
 	}
 	elseif ($program_type == 'undergrad_grad') {
 		// Undergrad + Grad searches must query twice to get both 'graduate' value results
