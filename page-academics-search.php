@@ -279,9 +279,8 @@ if ($get_params_exist == true) {
 					
 					<?php 
 					if ($results) { 
-						foreach ($results_sorted as $program_type => $programs) { ?>
-							
-							<?php
+						foreach ($results_sorted as $program_type => $programs) { 
+						
 							if ($program_type && count($programs) > 0) { ?>
 								<h3 class="program-type"><?=$program_type?></h3>	
 							
