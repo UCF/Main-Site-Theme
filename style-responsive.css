@@ -139,7 +139,7 @@
 	li.centerpiece_single img.centerpiece_single_vid_thumb,
 	li.centerpiece_single object, 
 	li.centerpiece_single iframe, 
-	li.centerpiece_single embed { max-width: 100%; width: 100%; height: auto; margin: 0; }
+	li.centerpiece_single embed { max-width: 100%; width: 100%; height: auto; margin: 0; line-height: 0; }
 	#centerpiece_control { bottom: 25px; left: 25px; }
 	#centerpiece_control a { width: 20px; height: 20px; margin-right: 15px; }
 	

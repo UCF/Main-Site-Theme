@@ -179,7 +179,7 @@ div.top_five_majors {
 
 /* Home Page - Centerpiece */
 #centerpiece_slider {overflow: hidden; position: relative; margin: auto; z-index: 1;}
-#centerpiece_slider ul { margin-left: 0; }
+#centerpiece_slider ul { margin-left: 0; margin-bottom: 0; overflow: hidden; }
 li.centerpiece_single {float: left; list-style-type: none;}
 li.centerpiece_single img.centerpiece_single_img { }
 li.centerpiece_single object, #centerpiece_slider iframe, #centerpiece_slider li embed { }
