@@ -268,6 +268,9 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 		
 			$slide_order 			= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
 			$slide_order			= explode(",",$slide_order);
+			foreach ($slide_order as $key => $val) {
+				if ($val === '') { unset($slide_order[$key]); }
+			}
 			$slide_count			= count($slide_order);
 			$slide_title			= get_post_meta($post->ID, 'ss_slide_title', TRUE);
 			$slide_content_type 	= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
@@ -320,10 +323,9 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 							$output .= '<div class="slide_contents">'.apply_filters('the_content', $slide_content[$s]).'</div>';
 						}
 					}
-										
-					
+								
 					// Video output:
-					if ($slide_content_type[$s] == 'video') {
+					if ($slide_content_type[$s] == 'video') {						
 						
 						// if a video thumbnail is not set and this is not a
 						// single slide centerpiece, use the default video thumb
@@ -335,13 +337,14 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 							}
 						}
 						
-						if ($slide_video_thumb_url[0]) {
-							$filtered_video_metadata = strip_tags(apply_filters('the_content', $slide_video[$s]), '<iframe><object><embed>');
+						$filtered_video_metadata = strip_tags(apply_filters('the_content', $slide_video[$s]), '<iframe><object><embed>');
+						
+						if ($slide_video_thumb_url[0] !== NULL) {
 							$output .= '<img class="centerpiece_single_vid_thumb" src="'.$slide_video_thumb_url[0].'" alt="Click to Watch" title="Click to Watch" />';
 							$output .= '<div class="centerpiece_single_vid_hidden">'.$filtered_video_metadata.'</div>';
 						}
 						else {
-							$output .= $slide_video[$s];
+							$output .= $filtered_video_metadata;
 						}
 					}
 					
