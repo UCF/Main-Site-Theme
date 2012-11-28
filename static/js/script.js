@@ -161,7 +161,7 @@ centerpieceVidResize = function($) {
  so that the slide displays properly */
 centerpieceSingleSlide = function($) {
 	if ( $('#centerpiece_slider > ul li').length < 2 ) {
-		$('#centerpiece_slider > ul > img').hide();
+		$('#centerpiece_slider > ul > img, #centerpiece_control').hide();
 	}
 }
 

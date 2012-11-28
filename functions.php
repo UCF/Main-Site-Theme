@@ -133,7 +133,9 @@ $allowedposttags['iframe'] = array(
 	'class' => array(),
 	'src' => array(),
 	'height' => array(),
-	'width' => array()
+	'width' => array(),
+	'allowfullscreen' => array(),
+	'frameborder' => array()
 );
 $allowedposttags['object'] = array(
 	'height' => array(),

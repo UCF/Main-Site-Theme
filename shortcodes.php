@@ -207,10 +207,12 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 		
 			$slide_order 			= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
 			$slide_order			= explode(",",$slide_order);
+			$slide_count			= count($slide_order);
 			$slide_title			= get_post_meta($post->ID, 'ss_slide_title', TRUE);
 			$slide_content_type 	= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
 			$slide_image			= get_post_meta($post->ID, 'ss_slide_image', TRUE);
 			$slide_video			= get_post_meta($post->ID, 'ss_slide_video', TRUE);
+			$slide_video_thumb_def	= THEME_IMG_URL.'/video_thumb_default.jpg';
 			$slide_video_thumb		= get_post_meta($post->ID, 'ss_slide_video_thumb', TRUE);
 			$slide_content			= get_post_meta($post->ID, 'ss_slide_content', TRUE);
 			$slide_links_to			= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
@@ -261,9 +263,23 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 					
 					// Video output:
 					if ($slide_content_type[$s] == 'video') {
-						if ($slide_video_thumb[$s]) {
+						
+						// if a video thumbnail is not set and this is not a
+						// single slide centerpiece, use the default video thumb
+						// (single slide centerpieces w/video should have an
+						// optional thumbnail for autoplay purposes)
+						if ($slide_count > 1) {
+							if (!$slide_video_thumb[$s]) {
+								$slide_video_thumb_url[0] = $slide_video_thumb_def;	
+							}
+						}
+						
+						if ($slide_video_thumb_url[0]) {
+							$filtered_video_metadata = strip_tags(apply_filters('the_content', $slide_video[$s]), '<iframe><object><embed>');
+							//$filtered_video_metadata = preg_replace(array('/<p>/', '/<p style="display: none;">/', '/<\/p>/'), '', $filtered_video_metadata);
+							
 							$output .= '<img class="centerpiece_single_vid_thumb" src="'.$slide_video_thumb_url[0].'" alt="Click to Watch" title="Click to Watch" />';
-							$output .= '<div class="centerpiece_single_vid_hidden">'.$slide_video[$s].'</div>';
+							$output .= '<div class="centerpiece_single_vid_hidden">'.$filtered_video_metadata.'</div>';
 						}
 						else {
 							$output .= $slide_video[$s];
