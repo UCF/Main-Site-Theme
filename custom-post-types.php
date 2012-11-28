@@ -370,7 +370,7 @@ class Video extends CustomPostType{
 		$edit_item      = 'Edit Video',
 		$new_item       = 'New Video',
 		$public         = True,
-		$use_editor     = False,
+		$use_editor     = True,
 		$use_thumbnails = True,
 		$use_order      = True,
 		$use_title      = True,
@@ -383,8 +383,8 @@ class Video extends CustomPostType{
 	public function metabox(){
 		$metabox = parent::metabox();
 		
-		$metabox['title']   = 'Videos on Media Page';
-		$metabox['helptxt'] = 'Video icon will be resized to width 210px, height 118px.';
+		$metabox['title']   = 'Video Information';
+		$metabox['helptxt'] = '<strong>Note:</strong> this post type is designed to handle YouTube videos specifically. To embed videos from other services like Vimeo or Flickr, use their provided embed code within post/widget content instead of the [video] shortcode.';
 		return $metabox;
 	}
 	
@@ -397,20 +397,6 @@ class Video extends CustomPostType{
 				'id'   => $prefix.'url',
 				'type' => 'text',
 				'std'  => ''
-			),
-			array(
-				'name' => 'Video Description',
-				'desc' => 'Short description of the video.',
-				'id'   => $prefix.'description',
-				'type' => 'textarea',
-				'std'  => ''
-			),
-			array(
-				'name' => 'Shortcode',
-				'desc' => 'To include this video in other posts, use the following shortcode:',
-				'id'   => 'video_shortcode',
-				'type' => 'shortcode',
-				'value' => '[video name="TITLE"]',
 			),
 		);
 	}
@@ -1280,7 +1266,7 @@ class Slider extends CustomPostType {
 									<tr>
 										<th><label for="ss_slide_video[<?=$s?>]">Slide Video</label></th>
 										<td>
-											<span class="description">Copy and paste your video embed code here.</span><br/>
+											<span class="description">Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]</span><br/>
 											<textarea name="ss_slide_video[<?=$s?>]" id="ss_slide_video[<?=$s?>]" cols="60" rows="4"><?php ($slide_video[$s] !== '') ? print $slide_video[$s] : ''; ?></textarea>
 										</td>
 									</tr>
@@ -1373,7 +1359,7 @@ class Slider extends CustomPostType {
 								<tr>
 									<th><label for="ss_slide_video[<?=$i?>]">Slide Video</label></th>
 									<td>
-										<span class="description">Copy and paste your video embed code here.</span><br/>
+										<span class="description">Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]</span><br/>
 										<textarea name="ss_slide_video[<?=$i?>]" id="ss_slide_video[<?=$i?>]" cols="60" rows="4"></textarea>
 									</td>
 								</tr>

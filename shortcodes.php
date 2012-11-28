@@ -127,6 +127,67 @@ function sc_publication($attr, $content=null){
 add_shortcode('publication', 'sc_publication');
 
 
+/**
+ * Include the defined YouTube video, referenced by video title.
+ *
+ *     [video name="Where are the robots? (VIDEO!)"]
+ **/
+function sc_video($attr, $content=null){
+	$video_name = @$attr['name'];
+	$video_id   = @$attr['id'];
+	$display	= $attr['display'] ? $attr['display'] : 'modal';
+	
+	if (!$video and is_numeric($video_id)){
+		$video = get_post($video_id);
+	}
+	if (!$video and $video_name){
+		$video = get_page_by_title($video_name, 'OBJECT', 'video');
+	}
+	
+	$video_url   		= get_post_meta($video->ID, "video_url", true);
+	$video_yt_id		= get_youtube_id($video_url);
+	$video_description  = $video->post_content;
+	$video_thumbnail    = wp_get_attachment_image(get_post_thumbnail_id($video->ID, 'medium'));
+	$embed_url			= 'http://www.youtube.com/embed/'.$video_yt_id;
+	
+	switch ($display) {
+		default:
+			ob_start(); ?>
+			
+				<div class="video">
+					<div class="icon">
+						<a title="Watch <?=$video->post_title?>" alt="Watch <?=$video->post_title?>" data-toggle="modal" class="video-link" href="#modal-vid<?=$video->ID?>">
+							<?=$video_thumbnail?>
+						</a>
+					</div>
+					<div class="modal video-modal hide fade" id="modal-vid<?=$video->ID?>">
+						<div class="modal-header">
+							<a class="close" data-dismiss="modal">×</a>
+							<h3><?=$video->post_title?></h3>
+						</div>
+						<div class="modal-body" data-src="<?=$embed_url?>">
+						</div>
+					</div>
+					<h4>
+						<a title="Watch <?=$video->post_title?>" alt="Watch <?=$video->post_title?>" data-toggle="modal" class="video-link" href="#modal-vid<?=$video->ID?>">
+							<?=$video->post_title?>
+						</a>
+					</h4>
+					<div class="video-desc"><?=$video_description?></div>
+				</div>
+			<?php 
+			return ob_get_clean();
+			break;
+		case 'embed':
+			ob_start(); ?>
+				<iframe type="text/html" width="640" height="390" src="<?=$embed_url?>" frameborder="0"></iframe>
+			<?php
+			return ob_get_clean();
+			break;
+	}
+}
+add_shortcode('video', 'sc_video');
+
 
 /**
  * Person picture lists
@@ -276,8 +337,6 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 						
 						if ($slide_video_thumb_url[0]) {
 							$filtered_video_metadata = strip_tags(apply_filters('the_content', $slide_video[$s]), '<iframe><object><embed>');
-							//$filtered_video_metadata = preg_replace(array('/<p>/', '/<p style="display: none;">/', '/<\/p>/'), '', $filtered_video_metadata);
-							
 							$output .= '<img class="centerpiece_single_vid_thumb" src="'.$slide_video_thumb_url[0].'" alt="Click to Watch" title="Click to Watch" />';
 							$output .= '<div class="centerpiece_single_vid_hidden">'.$filtered_video_metadata.'</div>';
 						}

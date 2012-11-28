@@ -157,6 +157,23 @@ centerpieceVidResize = function($) {
 }
 
 
+/* Set/Unset iframe source on video modal open/close */
+videoModalSet = function($) {
+	$('.video-modal').on('show', function() {
+		var modalID = $(this).attr('id');
+		var src = $(this).children('.modal-body').attr('data-src');
+		
+		if ($(this).find('iframe').length < 1) {
+			$('#' + modalID + ' .modal-body').append('<iframe class="modal-video-player" type="text/html" width="640" height="390" src="'+ src +'" frameborder="0"/>');
+		}
+	});
+	
+	$('.video-modal').on('hide', function() {
+		$(this).find('iframe').remove();
+	});
+}
+
+
 /* Hide the centerpiece placeholder for single-slide centerpieces
  so that the slide displays properly */
 centerpieceSingleSlide = function($) {
@@ -551,6 +568,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.mobileSidebar($);
 		centerpieceSlider($);
 		centerpieceVidResize($);
+		videoModalSet($);
 		centerpieceSingleSlide($);
 		removeNavSeparator($);
 		styleGformButtons($);

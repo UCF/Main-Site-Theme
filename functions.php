@@ -157,6 +157,32 @@ $allowedposttags['embed'] = array(
 );
 
 
+/**
+ * Retrieve a YouTube ID from its URL
+ **/
+function get_youtube_id($url){
+	$parts = parse_url($url);
+	parse_str($parts['query'], $parts);
+	return $parts['v'];
+}
+
+
+/** 
+ * Allow shortcodes in widgets
+ **/
+add_filter('widget_text', 'do_shortcode');
+
+
+/**
+ * Hide unused admin tools (Links, Comments, etc)
+ **/
+function hide_admin_links() {
+	remove_menu_page('link-manager.php');
+	remove_menu_page('edit-comments.php');
+}
+add_action( 'admin_menu', 'hide_admin_links' );
+
+
 
 /**
  * Adds a subheader to a page (if one is set for the page.)
@@ -354,16 +380,6 @@ function output_weather_data($class=null) {
 	</div>
 	<?php
 }
-
-
-/**
- * Hide unused admin tools (Links, Comments, etc)
- **/
-function hide_admin_links() {
-	remove_menu_page('link-manager.php');
-	remove_menu_page('edit-comments.php');
-}
-add_action( 'admin_menu', 'hide_admin_links' );
 
 
 /**
