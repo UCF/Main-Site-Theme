@@ -442,7 +442,7 @@ a.home_spotlight_readmore {
 
 #azIndexList.affix { top: 0; z-index: 999; }
 #azIndexList { width: 532px; margin-left: 24px; }
-#azIndexList #azIndexList-label { font-family: Georgia, serif; color: #515050; margin-left: -5px; background: #fff; padding: 10px 10px 7px 0; }
+#azIndexList #azIndexList-label { font-family: Georgia, serif; color: #333; margin-left: -5px; background: #fff; padding: 10px 10px 7px 0; }
 #azIndexList .navbar-inner { padding: 0; min-height: 0; }
 #azIndexList .nav { margin-right: 0; }
 #azIndexList .nav li { border-right: 1px solid #D4D4D4; }
@@ -658,6 +658,9 @@ li.tagit-new input {
 #academics-search { }
 
 #academics-search #filters { }
+#academics-search #filters h3,
+#academics-search #browse #degree-type-header { font-size: 11px; text-transform: uppercase; }
+#academics-search #filters h3 { padding-bottom: 2px; }
 .ie #academics-search #filters input.search-query { text-indent: 8px; }
 
 #academics-search #browse { }
