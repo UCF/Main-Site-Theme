@@ -169,8 +169,16 @@ div.top_five_majors {
 	text-indent: -9999px; 
 }
 
-#footer-logo { clear: both; margin-top: 65px; }
-#footer-logo a { display: block; margin: auto; width: 123px; height: 45px; text-indent: -9999px; background: url('static/img/spritesheet.png') -246px -46px no-repeat; }
+#footer-logo { clear: both; padding-top: 20px; }
+#footer-logo a { 
+	display: block; 
+	margin: auto; 
+	width: 123px; 
+	height: 45px; 
+	text-indent: -9999px; 
+	/*background: url('static/img/spritesheet.png') -246px -46px no-repeat; */ /* Standard logo */
+	background: url('static/img/spritesheet.png') 0 -279px no-repeat;  /* 50th logo */
+}
 
 
 /* Home Page - General */

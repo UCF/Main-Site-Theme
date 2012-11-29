@@ -29,7 +29,7 @@
 					));
 				?>
 				
-				<p id="footer-logo"><a href="<?=site_url()?>">University of Central Florida</a></p>
+				<p id="footer-logo"><a target="_blank" href="http://www.ucf.edu/50/">University of Central Florida 50th Anniversary</a></p>
 				
 				
 			</div>
