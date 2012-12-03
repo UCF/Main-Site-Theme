@@ -99,7 +99,7 @@ function sc_publication($attr, $content=null){
 	$docID = $docID->docID;
 	
 	// If no docID is found, assume that the publication url is invalid
-	if ($docID == NULL) { return 'Invalid publication URL; please use URLs from http://publications.ucf.edu.'; }
+	if ($docID == NULL) { return 'DocID not found. Is the publication URL valid? Please use URLs from http://publications.ucf.edu.'; }
 	
 	// Output for an Issuu thumbnail, based on docID
 	$issuu_thumb = "<img src='http://image.issuu.com/".$docID."/jpg/page_1_thumb_large.jpg' alt='".$pub->post_title."' title='".$pub->post_title."' />"; 
