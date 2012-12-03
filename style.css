@@ -419,7 +419,13 @@ a.home_spotlight_readmore {
 .ie7 #sidebar_right .sidebar_r_wrap > object,
 .ie8 #sidebar_right .sidebar_r_wrap > iframe, 
 .ie8 #sidebar_right .sidebar_r_wrap > embed,
-.ie8 #sidebar_right .sidebar_r_wrap > object { 
+.ie8 #sidebar_right .sidebar_r_wrap > object,
+.ie7 #sidebar_right .sidebar_r_wrap > p iframe, 
+.ie7 #sidebar_right .sidebar_r_wrap > p embed,
+.ie7 #sidebar_right .sidebar_r_wrap > p object,
+.ie8 #sidebar_right .sidebar_r_wrap > p iframe, 
+.ie8 #sidebar_right .sidebar_r_wrap > p embed,
+.ie8 #sidebar_right .sidebar_r_wrap > p object { 
 	width: 100%;
 	height: 140px;
 }
