@@ -45,7 +45,7 @@ Generic.mobileNavBar = function($) {
 		}
 	}
 	
-	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+	if ( !($('body.ie7') || $('body.ie8')) ) { /* Don't resize in IE8 or older */
 		adjust_mobile_nav();
 		$(window).resize(function() {
 			adjust_mobile_nav();
@@ -62,7 +62,7 @@ Generic.mobileSidebar = function($) {
 			$('#sidebar_left').remove().insertBefore('#contentcol');
 		}
 	}
-	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+	if ( !($('body.ie7') || $('body.ie8')) ) { /* Don't resize in IE8 or older */
 		moveSidebar();
 		$(window).resize(function() {
 			moveSidebar();
@@ -148,7 +148,7 @@ centerpieceVidResize = function($) {
 				.css({'height' : ''});
 		}
 	}
-	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+	if ( !($('body.ie7') || $('body.ie8')) ) { /* Don't resize in IE8 or older */
 		addDimensions();
 		$(window).resize(function() {
 			addDimensions();
@@ -214,7 +214,7 @@ fixSubheaderHeight = function($) {
 			}
 		}
 	}
-	if ( !($.browser.msie && $.browser.version < 9) ) { /* Don't resize in IE8 or older */
+	if ( !($('body.ie7') || $('body.ie8')) ) { /* Don't resize in IE8 or older */
 		$(window).load(function() {
 			doSubheaderHeight();
 		});
@@ -264,6 +264,15 @@ azIndex = function($) {
 		});
 		
 		$('#azIndexList').scrollspy();
+		
+		// Fix positioning of navbar in IE7 + IE7 Standards Mode when affixing is activated
+		/*
+		if ( $('body.ie7') || ( $('body.ie') && document.documentMode && document.documentMode < 8 ) ) {
+			$('#contentcol').css({ 'position' : 'relative' });
+			$(window).scroll(function () { // Can't find a Bootstrap Affix callback...
+				$('#azIndexList').css({ 'position' : 'fixed', 'left' : '250px' });
+			});
+		}*/
 		
 		// Force 'A' as the active starting letter, since it likes to
 		// default to 'Z' for whatever reason
@@ -344,7 +353,7 @@ toggleAnnouncementFilters = function($) {
 
 /* IE 7-8 fix for rounded corners on spotlight, news thumbnails */
 ieRoundedCornerThumbs = function($) {
-	if ($.browser.msie && $.browser.version < 9) {
+	if ( $('body.ie7') || $('body.ie8') ) {
 		$('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>').appendTo('.spotlight_thumb, .news-thumb');
 	}
 }
@@ -353,7 +362,7 @@ ieRoundedCornerThumbs = function($) {
 /* IE 7-8 fix for Academics Search striped results */
 ieStripedAcademicsResults = function($) {
 	if ($('#academics-search').length > 0) {
-		if ($.browser.msie && $.browser.version < 9) {
+		if ( $('body.ie7') || $('body.ie8') ) {
 			$('.results-list .program:nth-child(2n+1)').css('background-color', '#eee');
 		}
 	}
