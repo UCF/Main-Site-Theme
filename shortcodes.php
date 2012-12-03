@@ -148,7 +148,7 @@ function sc_video($attr, $content=null){
 	$video_yt_id		= get_youtube_id($video_url);
 	$video_description  = $video->post_content;
 	$video_thumbnail    = wp_get_attachment_image(get_post_thumbnail_id($video->ID, 'medium'));
-	$embed_url			= 'http://www.youtube.com/embed/'.$video_yt_id;
+	$embed_url			= 'http://www.youtube.com/embed/'.$video_yt_id.'?wmode=transparent';
 	
 	switch ($display) {
 		default:
