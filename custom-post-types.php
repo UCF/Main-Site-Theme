@@ -393,7 +393,7 @@ class Video extends CustomPostType{
 		return array(
 			array(
 				'name' => 'URL',
-				'desc' => 'YouTube URL pointing to video.<br>  Example: http://www.youtube.com/watch?v=IrSeMg7iPbM',
+				'desc' => 'YouTube URL pointing to video.<br>Accepts "long links" (http://youtube.com/watch?v=...) or "short links" (http://youtu.be/...).<br>  Example: http://www.youtube.com/watch?v=IrSeMg7iPbM',
 				'id'   => $prefix.'url',
 				'type' => 'text',
 				'std'  => ''
