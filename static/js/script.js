@@ -45,7 +45,7 @@ Generic.mobileNavBar = function($) {
 		}
 	}
 	
-	if ( $('body').hasClass('ie7') == false || $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+	if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
 		adjust_mobile_nav();
 		$(window).resize(function() {
 			adjust_mobile_nav();
@@ -62,7 +62,7 @@ Generic.mobileSidebar = function($) {
 			$('#sidebar_left').remove().insertBefore('#contentcol');
 		}
 	}
-	if ( $('body').hasClass('ie7') == false || $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+	if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
 		moveSidebar();
 		$(window).resize(function() {
 			moveSidebar();
@@ -148,7 +148,7 @@ centerpieceVidResize = function($) {
 				.css({'height' : ''});
 		}
 	}
-	if ( $('body').hasClass('ie7') == false || $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+	if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
 		addDimensions();
 		$(window).resize(function() {
 			addDimensions();
@@ -214,7 +214,7 @@ fixSubheaderHeight = function($) {
 			}
 		}
 	}
-	if ( $('body').hasClass('ie7') == false || $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+	if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
 		$(window).load(function() {
 			doSubheaderHeight();
 		});
