@@ -161,9 +161,16 @@ $allowedposttags['embed'] = array(
  * Retrieve a YouTube ID from its URL
  **/
 function get_youtube_id($url){
-	$parts = parse_url($url);
-	parse_str($parts['query'], $parts);
-	return $parts['v'];
+	$shortlink_domain = '/^http\:\/\/(?:www.)?youtu.be/';
+	if (preg_match($shortlink_domain, $url)) {
+		$parts = parse_url($url);
+		return substr($parts['path'], 1, strlen($parts['path']) - 1);
+	}
+	else {
+		$parts = parse_url($url);
+		parse_str($parts['query'], $parts);
+		return $parts['v'];
+	}
 }
 
 
