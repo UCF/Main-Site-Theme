@@ -414,14 +414,29 @@ a.home_spotlight_readmore {
 .sidebar_r_wrap { margin-bottom: 30px; overflow: hidden; }
 .sidebar_r_wrap p { font-family: Georgia, serif; } 
 
-.ie7 #sidebar_right iframe, 
-.ie7 #sidebar_right embed,
-.ie7 #sidebar_object,
-.ie8 #sidebar_right iframe, 
-.ie8 #sidebar_right embed,
-.ie8 #sidebar_object { 
+.ie7 #sidebar_right .sidebar_r_wrap > iframe, 
+.ie7 #sidebar_right .sidebar_r_wrap > embed,
+.ie7 #sidebar_right .sidebar_r_wrap > object,
+.ie8 #sidebar_right .sidebar_r_wrap > iframe, 
+.ie8 #sidebar_right .sidebar_r_wrap > embed,
+.ie8 #sidebar_right .sidebar_r_wrap > object { 
 	width: 100%;
 	height: 140px;
+}
+
+#sidebar_right .modal-body iframe,
+#sidebar_right .modal-body embed,
+#sidebar_right .modal-body object {
+	width: 100%;
+	height: 338px;
+}
+.ie7 #sidebar_right .modal-body iframe, 
+.ie7 #sidebar_right .modal-body embed,
+.ie7 #sidebar_right .modal-body object,
+.ie8 #sidebar_right .modal-body iframe, 
+.ie8 #sidebar_right .modal-body embed,
+.ie8 #sidebar_right .modal-body object { 
+	width: 530px;
 }
 
 
