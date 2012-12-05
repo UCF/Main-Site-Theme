@@ -71,6 +71,19 @@ Generic.mobileSidebar = function($) {
 };
 
 
+/* Adjust iOS devices on rotate */
+iosRotateAdjust = function($) {
+	if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)) {
+		var viewportmeta = document.querySelector('meta[name="viewport"]');
+		if (viewportmeta) {
+			viewportmeta.content = 'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0';
+			document.body.addEventListener('gesturestart', function () {
+				viewportmeta.content = 'width=device-width, minimum-scale=0.25, maximum-scale=1.6';
+			}, false);
+		}
+	}
+}
+
 
 /* Slider init */
 
@@ -555,6 +568,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.removeExtraGformStyles($);
 		Generic.mobileNavBar($);
 		Generic.mobileSidebar($);
+		iosRotateAdjust($);
 		centerpieceSlider($);
 		centerpieceVidResize($);
 		videoModalSet($);
