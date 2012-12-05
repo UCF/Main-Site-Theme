@@ -225,21 +225,6 @@ fixSubheaderHeight = function($) {
 }
 
 
-/* Toggle chevron onclick for a-z index list menu links: */
-/*toggleAZChevrons = function($) {
-	if ($('.accordion').length > 0) {
-		$('.accordion-body.collapse').on('hide', function () {
-    		var i = $(this).prev().find('i');
-			i.removeClass('icon-chevron-down').addClass('icon-chevron-right');
-    	});
-		$('.accordion-body.collapse').on('show', function () {
-    		var i = $(this).prev().find('i');
-			i.removeClass('icon-chevron-right').addClass('icon-chevron-down');
-    	});
-	}
-}*/
-
-
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
@@ -265,9 +250,7 @@ azIndex = function($) {
 		
 		$('.post-type-search-alpha h3').each(function() {
 			$(this)
-				//.attr( {'id' : 'az-'+ $(this).text().toLowerCase() } )
 				.parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
-				//.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 				.children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
 		
@@ -579,7 +562,6 @@ if (typeof jQuery != 'undefined'){
 		removeNavSeparator($);
 		styleGformButtons($);
 		fixSubheaderHeight($);
-		//toggleAZChevrons($);
 		azIndex($);
 		toggleAnnouncementFilters($);
 		ieRoundedCornerThumbs($);
