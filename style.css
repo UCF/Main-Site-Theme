@@ -77,7 +77,6 @@ div.top_five_majors {
 #header-menu.menu.horizontal { color: #262626; }
 #header-menu.menu.horizontal li { margin-right: 9px; }
 #header-menu li:after { margin-left: 3px; }
-#header-menu li#menu-item-19:after { content: ""; } /* NEED TO CHANGE WITH NAV MENU UPDATES! (Next to last nav item) */
 #header-menu li a { color: #262626; }
 #header-menu li a:hover { color: #959491; text-decoration: none; }
 #header-menu li.last a {
@@ -119,7 +118,9 @@ div.top_five_majors {
 	width: 93px;
 	height: 24px;
 }
-.no_nav_separator:after { content: '' !important; }
+.no_nav_separator:after,
+#header-menu li.last:after,
+#header-menu li.last::after { content: "" !important; }
 
 
 /* Footer */

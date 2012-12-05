@@ -33,7 +33,7 @@ Generic.mobileNavBar = function($) {
 		$('#header-menu').unwrap();
 	}
 	var adjust_mobile_nav = function() {
-		if ($(window).width() < 480) {
+		if ($(window).width() <= 480) {
 			if ($('#mobile_dropdown_container').length < 1) {
 				mobile_wrap();
 			}
@@ -185,8 +185,8 @@ centerpieceSingleSlide = function($) {
 
 /* Remove last dot separator between nav menu links: */
 removeNavSeparator = function($) {
-	var navcount = $('ul#header-menu li').length - 1;
-	$('ul#header-menu li:nth-child('+navcount+')').addClass('no_nav_separator');
+	//var navcount = $('ul#header-menu li').length - 1;
+	$('ul#header-menu li.last').prev('li').addClass('no_nav_separator');
 }
 
 
