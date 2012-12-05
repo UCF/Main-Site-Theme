@@ -134,6 +134,11 @@
 	#UCFHBHeader { margin-left: -20px; width: 100%; padding-right: 40px; }
 	
 	#header { margin-left: 0; }
+	#header-menu { text-align: center; margin: 10px 0 5px 0; }
+	#header-menu li { float: none; margin-top: -5px; }
+	#header-menu li.last { vertical-align: bottom; }
+	#header-menu li.last a { margin-top: 5px; }
+	
 	#page_title #weather_bug { display: none; }
 	
 	#home .description { margin-top: 10px; }
@@ -319,6 +324,9 @@
     	border-top-color: #fff;
 		margin-top: 4px;
 	}
+	
+	#header-menu { text-align: left; }
+	#header-menu li { float: left; }
 	
 	#header-nav-wrap { float: none; left: 0; margin-top: 10px; }
 	#header-nav-wrap .brand { position: absolute; left: 20px; }
