@@ -243,7 +243,7 @@ fixSubheaderHeight = function($) {
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
-		$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
+		
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
 			.addClass('span7')
@@ -262,17 +262,6 @@ azIndex = function($) {
 				//.after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 				.children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
-		
-		$('#azIndexList').scrollspy();
-		
-		// Fix positioning of navbar in IE7 + IE7 Standards Mode when affixing is activated
-		/*
-		if ( $('body.ie7') || ( $('body.ie') && document.documentMode && document.documentMode < 8 ) ) {
-			$('#contentcol').css({ 'position' : 'relative' });
-			$(window).scroll(function () { // Can't find a Bootstrap Affix callback...
-				$('#azIndexList').css({ 'position' : 'fixed', 'left' : '250px' });
-			});
-		}*/		
 		
 		// Force 'A' as the active starting letter, since it likes to
 		// default to 'Z' for whatever reason
@@ -295,6 +284,15 @@ azIndex = function($) {
 		$('#azIndexList .nav li a.disabled').click(function(e) {
 			e.preventDefault();
 		});
+		
+		
+		if ($('body').hasClass('ie7') == false) {
+			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
+			$('#azIndexList').scrollspy();
+		}
+		else {
+			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
+		}
 	}
 }
 
