@@ -79,6 +79,7 @@ div.top_five_majors {
 #header-menu li:after { margin-left: 3px; }
 #header-menu li a { color: #262626; }
 #header-menu li a:hover { color: #959491; text-decoration: none; }
+#header-menu li.last { height: 25px; }
 #header-menu li.last a {
 	display: block;
 	padding: 0 15px 2px 15px;
@@ -118,9 +119,12 @@ div.top_five_majors {
 	width: 93px;
 	height: 24px;
 }
-.no_nav_separator:after,
+.no_nav_separator:after
+.no_nav_separator::after,
 #header-menu li.last:after,
 #header-menu li.last::after { content: "" !important; }
+.ie8 .no_nav_separator:after,
+.ie8 #header-menu li.last:after { content: "" !important; } /* IE8 hates the ::after selector */
 
 
 /* Footer */
