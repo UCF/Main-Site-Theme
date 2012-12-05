@@ -531,7 +531,6 @@ h2.header_announcements { font-size: 20px; }
 #filters #addnew_wrap { text-align: right; }
 #filters #addnew_wrap #addnew_announcement { margin-top: 24px; }
 
-/*#announcements div[id^="announcement_"] { height: 300px; }*/
 .announcement_wrap { height: auto; background: #ffffe2; margin-bottom: 40px; padding: 15px; position: relative; }
 .announcement_wrap:before, .announcement_wrap:after {
 	z-index: -1; 
@@ -688,6 +687,8 @@ li.tagit-new input {
 #academics-search #browse #degree-type-header { font-size: 11px; text-transform: uppercase; }
 #academics-search #filters h3 { padding-bottom: 2px; }
 .ie #academics-search #filters input.search-query { text-indent: 8px; }
+.ie7 #academics-search #filters .input-append .btn { margin-top: 1px; }
+.ie7 #academics-search #filters .input-append .btn .hidden-phone { padding-left: 5px; }
 
 #academics-search #browse { }
 #academics-search #browse #degree-type-header { display: block; float: left; padding-top: 8px; }
