@@ -119,8 +119,7 @@ div.top_five_majors {
 	width: 93px;
 	height: 24px;
 }
-.no_nav_separator:after
-.no_nav_separator::after,
+.no_nav_separator:after,
 #header-menu li.last:after,
 #header-menu li.last::after { content: "" !important; }
 .ie8 .no_nav_separator:after,
