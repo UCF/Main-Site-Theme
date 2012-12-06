@@ -1,37 +1,5 @@
 <?php
 
-/**
- * Using the user defined value for Flickr ID set in the admin, will return the 
- * photostream URL for that ID.  Will return null if no id is set.
- *
- * @return string
- * @author Jared Lang
- **/
-function get_flickr_feed_url(){
-	$rss_url = "http://api.flickr.com/services/feeds/photos_public.gne?id=%s&amp;lang=en-us&amp;format=rss_200";
-	$options = get_option(THEME_OPTIONS_NAME);
-	$id = $options['flickr_id'];
-	
-	if ($id){
-		return sprintf($rss_url, $id);
-	}else{
-		return null;
-	}
-}
-
-
-function get_flickr_stream_url(){
-	$rss_url = "http://flickr.com/photos/%s";
-	$options = get_option(THEME_OPTIONS_NAME);
-	$id = $options['flickr_id'];
-	
-	if ($id){
-		return sprintf($rss_url, $id);
-	}else{
-		return null;
-	}
-}
-
 function get_article_image($article){
 	$image = $article->get_enclosure();
 	if ($image){
@@ -173,69 +141,6 @@ class FeedManager{
 }
 
 
-class FlickrManager extends FeedManager{
-	static protected $sizes = array(
-		'large'     => 'b',
-		'medium'    => 'z',
-		'small'     => 'm',
-		'thumbnail' => 't',
-		'square'    => 's',
-	);
-	
-	static protected function __items_to_photos($items){
-		$photos = array();
-		
-		foreach($items as $item){
-			$title = $item->get_title();
-			$urls  = array();
-			try{
-				$url = $item->get_enclosure()->get_link();
-			}catch (Exception $e){
-				continue;
-			}
-			
-			foreach(FlickrManager::$sizes as $key=>$size){
-				$size             = "_{$size}.jpg";
-				$urls[$key]       = str_replace('_b.jpg', $size, $url);
-				$urls['original'] = $url;
-				$urls['title']    = $title;
-				$urls['page']     = $item->get_link();
-			}
-			$photos[] = $urls;
-		}
-		return $photos;
-	}
-	
-	
-	static public function get_photos($url, $start=null, $limit=null){
-		if ($start === null){$start = 0;}
-		
-		$items  = self::__get_items($url);
-		$photos = array_slice(self::__items_to_photos($items), $start, $limit);
-		return $photos;
-	}
-}
-
-
-function display_flickr($header='h2'){
-	$options  = get_option(THEME_OPTIONS_NAME);
-	$count    = $options['flickr_max_items'];
-	$feed_url = get_flickr_feed_url();
-	$photos   = FlickrManager::get_photos($feed_url, 0, $count);
-	
-	if(count($photos)):?>
-		<<?=$header?>><a href="<?=get_flickr_stream_url()?>">Flickr Stream</a></<?=$header?>>
-		<ul class="flickr-stream">
-			<?php foreach($photos as $photo):?>
-			<li><a class="ignore-external" href="<?=$photo['page']?>"><img height="75" width="75" src="<?=$photo['square']?>" title="<?=$photo['title']?>" /></a></li>
-			<?php endforeach;?>
-		</ul>
-	<?php else:?>
-		<p>Unable to fetch flickr feed.</p>
-	<?php endif;?>
-<?php
-}
-
 /* Modified for main site theme (for JSON instead of RSS feed): */
 function display_events($start=null, $limit=null){?>
 	<?php 
@@ -304,21 +209,7 @@ function display_news(){?>
 	if(count($news)):?>
 		<ul class="news">
 			<?php foreach($news as $key=>$item): 
-				$image = get_article_image($item);
-				if (!($image)) {
-					$image = 'http://today.ucf.edu/widget/thumbnail.png'; 
-				}
-				else {
-					if (preg_match('/\.jpeg$/i', $image)) {
-						$end_of_str_length = 5;
-					}
-					else { 
-						// assume .jpeg is the only potential 5-character file extension being used
-						$end_of_str_length = 4;
-					}
-					// Grab Today's 66x66px thumbnails to reduce load times
-					$image = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
-				}
+				$image = (get_article_image($item)) ? get_article_image($item) : 'http://today.ucf.edu/widget/thumbnail.png'; 
 				$first = ($key == 0);
 			?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
