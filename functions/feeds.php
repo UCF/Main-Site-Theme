@@ -209,7 +209,21 @@ function display_news(){?>
 	if(count($news)):?>
 		<ul class="news">
 			<?php foreach($news as $key=>$item): 
-				$image = (get_article_image($item)) ? get_article_image($item) : 'http://today.ucf.edu/widget/thumbnail.png'; 
+				$image = get_article_image($item);
+				if (!($image)) {
+					$image = 'http://today.ucf.edu/widget/thumbnail.png'; 
+				}
+				else {
+					if (preg_match('/\.jpeg$/i', $image)) {
+						$end_of_str_length = 5;
+					}
+					else { 
+						// assume .jpeg is the only potential 5-character file extension being used
+						$end_of_str_length = 4;
+					}
+					// Grab Today's 66x66px thumbnails to reduce load times
+					$image = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
+				}
 				$first = ($key == 0);
 			?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
