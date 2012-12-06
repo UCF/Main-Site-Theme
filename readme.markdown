@@ -13,6 +13,7 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 
 * Make sure that all two- and three-column pages are correctly assigned sidebar menu widgets when content is imported. Menus, when imported, should maintain a common naming schema ('More Information - Page Name', 'Secondary Nav - Page Name', etc.)
 * Add cron job for feedback_mailer.php to run weekly for feedback emails.
+* In Appearance > Widgets, remove any existing widgets from 'Left Sidebar' (or 'Right Sidebar', if there are any.)
 
 
 ## Deployment
