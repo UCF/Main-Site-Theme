@@ -563,6 +563,34 @@ var phonebookStaffToggle = function($) {
 }
 
 
+/* Android devices running v2.3 or lower tend to choke on modals :(
+	Try to find the src of whatever's contained within the modal
+	and set it as the href of the original modal open link
+*/
+var removeAndroidModals = function($) {
+	var ua = navigator.userAgent.toLowerCase();
+	if ( (ua.indexOf('android') > -1) && (parseFloat(ua.slice(ua.indexOf('android') + 8)) <= 2.3) ) {
+		$('a[data-toggle="modal"]').each(function() {
+			var modalLink = $(this);
+			var modalID   = modalLink.attr('href');
+			
+			// Check for videos whose URLs are contained in the data-src attr
+			if ($(modalID).find('[data-src^="http"]').length > 0) {
+				var href  = $(modalID).find('[data-src^="http"]').attr('data-src');
+			}
+			// Otherwise, try to find an element with a src value and grab its URL
+			else {
+				var href  = $(modalID).find('[src^="http"]').attr('src');
+			}
+			
+			if (href) {
+				modalLink.attr({ 'href' : href, 'data-toggle' : '', 'target' : '_blank' });
+			}
+		});
+	}
+}
+
+
 /* Dev Bootstrap Element Testing-- this should not be running in prod!! */
 var devBootstrap = function($) {
 	$('#bootstrap-testing-tooltips').tooltip({
@@ -608,6 +636,7 @@ if (typeof jQuery != 'undefined'){
 		ieStripedAcademicsResults($);
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
+		removeAndroidModals($);
 		
 		// Disable me in Prod!!
 		devBootstrap($);
