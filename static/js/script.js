@@ -528,7 +528,7 @@ Generic.PostTypeSearch = function($) {
 								results.find('div[class="row"]').append(column_wrap);								
 							});
 							results
-								.append('<a class="close" href="#">×</span>')
+								.append('<a class="close" href="#">×</a>')
 								.find('.close').click(function() {
 									$(this).parent('.post-type-search-results').hide();
 								});
