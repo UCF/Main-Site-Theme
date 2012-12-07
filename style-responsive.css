@@ -111,6 +111,7 @@
 	#announcements div[id^="announcement_"] { height: 340px; }
 	*/
 	
+	#azindex .post-type-search-header { height: 140px; }
 	#azIndexList { width: 404px; }
 	#azIndexList .navbar-inner { border-right: 0; border-top: 0; border-radius: 0; }
 	#azIndexList .nav li { border-top: 1px solid #D4D4D4; }
@@ -374,6 +375,7 @@
 	
 	li.tagit-new { width: 99% !important; }
 	
+	#azindex .post-type-search-header { height: auto; }
 	#azIndexList { display: none; }
 	#azindex .az-jumpto-anchor { height: 20px; }
 	#azindex .post-type-search ul li { font-size: 12px; padding: 3px 3px 3px 0; }

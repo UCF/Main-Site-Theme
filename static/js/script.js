@@ -266,10 +266,11 @@ azIndex = function($) {
 			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
 			$('#azIndexList').scrollspy();
 		}
-		else {
+		else { // Disable affixing/scrollspy in IE7
 			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
 		}
 		
+		// Post type search customizations
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
 			.addClass('span7')
@@ -524,8 +525,13 @@ Generic.PostTypeSearch = function($) {
 								$.each(column_elements, function(element_index, element) {
 									column_list.append($(element));
 								});
-								results.find('div[class="row"]').append(column_wrap);
+								results.find('div[class="row"]').append(column_wrap);								
 							});
+							results
+								.append('<a class="close" href="#">×</span>')
+								.find('.close').click(function() {
+									$(this).parent('.post-type-search-results').hide();
+								});
 							results.show();
 						}
 					}

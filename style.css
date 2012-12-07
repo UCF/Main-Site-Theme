@@ -451,6 +451,9 @@ a.home_spotlight_readmore {
 
 
 /* A-Z Index */
+#azindex { }
+
+#azindex .post-type-search-header { height: 110px; }
 #azindex .post-type-search-form { margin-bottom: 0; }
 #azindex .post-type-search-form label,
 #azindex .post-type-search-form input { display: block; float: left; }
@@ -481,7 +484,7 @@ a.home_spotlight_readmore {
 	font-size: 11px; 
 	color: #333 !important; 
 	border-bottom: 0; 
-	font-family: 'Helvetica-Neue', Helvetica, sans-serif;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
 }
 #azIndexList .nav li a:hover { border-bottom: 0; }
 #azIndexList .nav li a.disabled { background: #eee; color: #ccc !important; }
@@ -501,6 +504,7 @@ a.home_spotlight_readmore {
 	background: #efefef; 
 	display: none; 
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1) inset;
+	position: relative;
 }
 .post-type-search-results .post-type-search-message { padding: 10px 10px 0 10px; }
 .post-type-search-results div[class*="span"] { 
@@ -508,6 +512,16 @@ a.home_spotlight_readmore {
 	max-height: 300px;
 	overflow: auto;
 }
+.post-type-search-results .close {
+	position: absolute;
+	top: 10px;
+	right: 25px;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	border-bottom: 0 !important;
+	color: #000 !important;
+	opacity: 0.2;
+}
+.post-type-search-results .close:hover { border-bottom: 0 !important; color: #000 !important; opacity: 0.4; }
 
 
 /* Announcements Page */
