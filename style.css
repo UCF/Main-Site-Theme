@@ -75,8 +75,8 @@ div.top_five_majors {
 .ie7 #header-nav-wrap { width: 768px; }
 #header-menu { margin: 15px 0 10px 0; position: relative; left: 50%; }
 #header-menu.menu.horizontal { color: #262626; }
-#header-menu.menu.horizontal li { margin-right: 9px; }
-#header-menu li:after { margin-left: 3px; }
+#header-menu.menu.horizontal li { margin-right: 14px; margin-bottom: 11px; }
+#header-menu li:after { margin-left: 7px; }
 #header-menu li a { color: #262626; }
 #header-menu li a:hover { color: #959491; text-decoration: none; }
 #header-menu li.last { height: 25px; }

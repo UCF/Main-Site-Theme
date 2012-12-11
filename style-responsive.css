@@ -59,6 +59,7 @@
 	#UCFHBSearch_and_links { display: none; }
 	#UCFHBHeader div.UCFHBWrapper { width: 100%; }
 	
+	#header-menu li:after { margin-left: 3px; }
 	#header-menu li a { font-size: 14.25px !important; }
 	#header-menu li.last a { font-size: 11px !important; }
 	#header-menu.menu.horizontal li { margin-right: 5px; }
