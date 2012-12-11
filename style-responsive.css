@@ -333,7 +333,7 @@
 	#header-nav-wrap { float: none; left: 0; margin-top: 10px; }
 	#header-nav-wrap .brand { position: absolute; left: 20px; }
 	ul#header-menu { left: 0; margin-top: 0; }
-	ul#header-menu li { margin-right: 0 !important; }
+	ul#header-menu li { margin-right: 0 !important; margin-bottom: 0 !important; }
 	ul#header-menu li.last { padding-bottom: 10px; }
 	ul#header-menu li.last a { color: #333; text-align: center; }
 	
