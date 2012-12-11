@@ -609,6 +609,38 @@ $(document).on('touchstart.dropdown', '.dropdown-menu', function(e) { e.stopProp
 // Note that this assumes popover activators (buttons) won't have a real href value on this site.
 $('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(function(e) { e.preventDefault(); });
 
+/*
+ * Check the status site RSS feeds periodically and display an alert if necessary.
+ */
+var statusAlertCheck = function($) {
+	$.getFeed({
+		url     : 'http://webcom.dev.smca.ucf.edu/wp3/alert/feed/?post_type=alert',
+		success : function(feed) {
+			$.each(feed.items, function(index, item) {
+				// Check to see if this alert already exists
+				var existing_alert = $('.status-alert[data-alert-id="' + item.id + '"]');
+				if(existing_alert.length > 0) {
+					// Check the content and update if necessary
+					if(existing_alert.find('.title').text() != item.title) {
+						existing_alert.find('.title').text(item.title);
+					}
+					if(existing_alert.find('.content').text() != item.description) {
+						existing_alert.find('.content').text(item.description);
+					}
+				} else {
+					var alert_markup = $('#status-alert-template').clone();
+					alert_markup
+						.attr('id', '')
+						.attr('data-alert-id', item.id)
+						.find('.title').text(item.title).end()
+						.find('.content').text(item.description);
+					$('#header-nav-wrap').after(alert_markup);
+				}
+			})
+		}
+	});
+}
+
 
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
@@ -640,5 +672,8 @@ if (typeof jQuery != 'undefined'){
 		
 		// Disable me in Prod!!
 		devBootstrap($);
+
+		statusAlertCheck($);
+		setInterval(function() {statusAlertCheck($);}, 10000);
 	});
 }else{console.log('jQuery dependancy failed to load');}

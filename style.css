@@ -791,3 +791,8 @@ a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
 }
+
+/* Status Alert */
+#status-alert-template {display:none;}
+.status-alert {}
+.status-alert h2 {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#CC0000;}

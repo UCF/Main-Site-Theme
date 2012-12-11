@@ -68,3 +68,9 @@
 					));
 				?>
 			</div>
+			<div class="row status-alert" id="status-alert-template" data-alert-id="">
+				<div class="span12">
+					<h2><span class="title">TITLE</span></h2>
+					<p class="well content">CONTENT</p>
+				</div>
+			</div>
