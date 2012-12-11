@@ -634,7 +634,7 @@ var statusAlertCheck = function($) {
 						.attr('data-alert-id', item.id)
 						.find('.title').text(item.title).end()
 						.find('.content').text(item.description);
-					$('#header-nav-wrap').after(alert_markup);
+					$('.page-content').before(alert_markup);
 				}
 			})
 		}
