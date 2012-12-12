@@ -812,7 +812,7 @@ class Post extends CustomPostType {
 		$use_thumbnails = False,
 		$use_order      = True,
 		$use_title      = True,
-		$use_metabox    = True,
+		$use_metabox    = False,
 		$taxonomies     = array('post_tag', 'category'),
 		$built_in       = True;
 }
