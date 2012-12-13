@@ -8,9 +8,8 @@ require_once('functions/config.php');			# Where per theme settings are registere
 require_once('shortcodes.php');         		# Per theme shortcodes
 require_once('third-party/truncate-html.php');  # Includes truncateHtml function
 
-//Add theme-specific functions here.
-
-
+//Add theme-specific functions here. 
+ 
 /** 
  * Slider post type customizations 
  * Stolen from SmartStart theme
@@ -973,4 +972,18 @@ function query_search_service($params) {
 	}
 	return $results;
 }
+
+
+
+/**
+ * Make sure that administrators have the unfiltered_html capability
+ * so that editing post content isn't a pain.
+ * Should only be run when the theme is activated.
+ **/
+function administrator_unfiltered_html() {
+	$admin = get_role('administrator');
+	$admin->add_cap('unfiltered_html'); 	
+}
+add_action('switch_theme', 'administrator_unfiltered_html');
+
 ?>
