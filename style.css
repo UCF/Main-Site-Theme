@@ -413,6 +413,7 @@ a.home_spotlight_readmore {
 #sidebar_left .notoppad { padding-top: 0 !important; }
 #sidebar_right .sidebar_title { color: #777; }
 #sidebar_right #sidebar_r_today { font-size: 14px; line-height: 16px; color: #000; padding-bottom: 15px; }
+#sidebar_right .news { list-style-type: none; margin-left: 0; }
 #sidebar_right .news .item { margin-bottom: 10px; }
 #sidebar_right .news .item a { font-size: 12px; font-family: Georgia, serif; font-weight: normal; color: #000; border-bottom: 1px solid #ccc; }
 #sidebar_right .news .item a:hover { text-decoration: none; color: #e50506; border-bottom: 1px solid #e50506; }
@@ -668,6 +669,7 @@ li.tagit-new input {
 .html{background-position: 0 -126px;}
 
 .document {padding-left: 25px;margin-bottom:5px;width:100%;}
+
 
 /* Org and Person Phonebook Search */
 #phonebook-search #phonebook-search-description {font-family:Helvetica,sans-serif;font-size:11px;margin-bottom:0;}
