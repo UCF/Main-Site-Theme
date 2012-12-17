@@ -614,7 +614,7 @@ $('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(fun
  */
 var statusAlertCheck = function($) {
 	$.getFeed({
-		url     : 'http://webcom.dev.smca.ucf.edu/wp3/alert/feed/?post_type=alert',
+		url     : ALERT_RSS_URL,
 		success : function(feed) {
 			var visible_alerts = [];
 			$.each(feed.items, function(index, item) {
@@ -635,7 +635,8 @@ var statusAlertCheck = function($) {
 						.attr('id', '')
 						.attr('data-alert-id', item.id)
 						.find('.title').text(item.title).end()
-						.find('.content').text(item.description);
+						.find('.content').text(item.description).end()
+						.find('.more-information').attr('href', ALERT_MORE_INFORMATION_URL);
 					$('.page-content').before(alert_markup);
 				}
 			});

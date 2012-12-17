@@ -43,6 +43,11 @@
 				this.column_width = column_width;
 				this.data         = data;
 			}
+
+			var 
+				ALERT_RSS_URL              = '<?php echo get_theme_option('alert_feed_url'); ?>',
+				ALERT_MORE_INFORMATION_URL = '<?php echo get_theme_option('alert_more_information_url'); ?>';
+
 		</script>
 		
 	</head>
@@ -71,6 +76,10 @@
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
 				<div class="span12">
 					<h2><span class="title">TITLE</span></h2>
-					<p class="well content">CONTENT</p>
+					<p class="well">
+						<span class="content">CONTENT</span>
+						<a class="more-information" href="">Click Here For More Information</a>
+					</p>
+
 				</div>
 			</div>

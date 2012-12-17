@@ -320,6 +320,20 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['bootstrap_menu_styles'],
 	    )),
 	),
+	'Alerts' => array(
+		new TextField(array(
+			'name'        => 'Feed URL',
+			'id'          => THEME_OPTIONS_NAME.'[alert_feed_url]',
+			'description' => 'Alert theme alert post type RSS feed URL: http://www.ucf.edu/alert/feed?post_type=alert',
+			'value'       => $theme_options['alert_feed_url'],
+		)),
+		new TextField(array(
+			'name'        => 'More Information URL',
+			'id'          => THEME_OPTIONS_NAME.'[alert_more_information_url]',
+			'description' => 'URL of the More Information link appended to each alert: http://www.ucf.edu/alert/',
+			'value'       => $theme_options['alert_more_information_url'],
+		)),
+	)
 );
 
 Config::$links = array(
