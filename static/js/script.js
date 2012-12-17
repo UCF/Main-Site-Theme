@@ -615,6 +615,9 @@ $('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(fun
 var statusAlertCheck = function($) {
 	$.getFeed({
 		url     : ALERT_RSS_URL,
+		error   : function(feed) {
+			$('.status-alert[id!=status-alert-template]').remove();
+		},
 		success : function(feed) {
 			var visible_alerts = [];
 			$.each(feed.items, function(index, item) {
@@ -640,14 +643,18 @@ var statusAlertCheck = function($) {
 				}
 			});
 			// Remove alerts that no longer appear in the feed
-			$('.status-alert[id!=status-alert-template]')
-				.each(function(index, alert) {
-					var alert = $(alert),
-						id    = alert.attr('data-alert-id');
-					if($.inArray(id, visible_alerts) == -1) {
-						alert.remove();
-					}
-				});
+			if(visible_alerts.length == 0) {
+				$('.status-alert[id!=status-alert-template]').remove();
+			} else {
+				$('.status-alert[id!=status-alert-template]')
+					.each(function(index, alert) {
+						var alert = $(alert),
+							id    = alert.attr('data-alert-id');
+						if($.inArray(id, visible_alerts) == -1) {
+							alert.remove();
+						}
+					});
+			}
 		}
 	});
 }
