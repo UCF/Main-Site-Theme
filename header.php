@@ -44,9 +44,7 @@
 				this.data         = data;
 			}
 
-			var 
-				ALERT_RSS_URL              = '<?php echo get_theme_option('alert_feed_url'); ?>',
-				ALERT_MORE_INFORMATION_URL = '<?php echo get_theme_option('alert_more_information_url'); ?>';
+			var ALERT_RSS_URL              = '<?php echo get_theme_option('alert_feed_url'); ?>';
 
 		</script>
 		
@@ -75,10 +73,16 @@
 			</div>
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
 				<div class="span12">
-					<h2><span class="title">TITLE</span></h2>
+					<h2>
+						<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+							<span class="title">TITLE</span>
+						</a>
+					</h2>
 					<p class="well">
-						<span class="content">CONTENT</span>
-						<a class="more-information" href="">Click Here For More Information</a>
+						<a href="<?echo get_theme_option('alert_more_information_url');?>">
+							<span class="content">CONTENT</span>
+						</a>
+						<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>">Click Here For More Information</a>
 					</p>
 
 				</div>
