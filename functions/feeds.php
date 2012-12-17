@@ -221,8 +221,9 @@ function display_news(){?>
 						// assume .jpeg is the only potential 5-character file extension being used
 						$end_of_str_length = 4;
 					}
-					// Grab Today's 66x66px thumbnails to reduce load times
-					$image = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
+					// Grab Today's 66x66px thumbnails if they're available
+					$image_small = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
+					$image = @getimagesize($image_small) !== false ? $image_small : $image;
 				}
 				$first = ($key == 0);
 			?>

@@ -76,7 +76,7 @@ define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
-define('SEARCH_SERVICE_URL', 'http://webcom.dev.smca.ucf.edu/people/service.php');
+define('SEARCH_SERVICE_URL', 'http://search.smca.ucf.edu/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
 
 /**
@@ -330,13 +330,13 @@ Config::$links = array(
 
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
-	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.css',
+	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
 	THEME_STATIC_URL.'/css/university-header.css',
 );
 
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
-		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.css'
+		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.min.css'
 	);		
 }
 
@@ -354,7 +354,7 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 
 Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
-	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.js',
+	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
 	THEME_JS_URL.'/cycle.lite.js',
 	THEME_JS_URL.'/jFeed.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),

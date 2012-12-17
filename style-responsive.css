@@ -59,6 +59,7 @@
 	#UCFHBSearch_and_links { display: none; }
 	#UCFHBHeader div.UCFHBWrapper { width: 100%; }
 	
+	#header-menu li:after { margin-left: 3px; }
 	#header-menu li a { font-size: 14.25px !important; }
 	#header-menu li.last a { font-size: 11px !important; }
 	#header-menu.menu.horizontal li { margin-right: 5px; }
@@ -332,7 +333,7 @@
 	#header-nav-wrap { float: none; left: 0; margin-top: 10px; }
 	#header-nav-wrap .brand { position: absolute; left: 20px; }
 	ul#header-menu { left: 0; margin-top: 0; }
-	ul#header-menu li { margin-right: 0 !important; }
+	ul#header-menu li { margin-right: 0 !important; margin-bottom: 0 !important; }
 	ul#header-menu li.last { padding-bottom: 10px; }
 	ul#header-menu li.last a { color: #333; text-align: center; }
 	
