@@ -798,4 +798,5 @@ a.btn-primary.disabled {
 /* Status Alert */
 #status-alert-template {display:none;}
 .status-alert {}
-.status-alert h2 {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#CC0000;}
+.status-alert h2 {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#CC0000;line-height:1.1em;margin-bottom:10px;}
+.status-alert .content {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#333;font-size:120%;line-height:120%;}
