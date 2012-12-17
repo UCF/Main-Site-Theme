@@ -616,9 +616,11 @@ var statusAlertCheck = function($) {
 	$.getFeed({
 		url     : 'http://webcom.dev.smca.ucf.edu/wp3/alert/feed/?post_type=alert',
 		success : function(feed) {
+			var visible_alerts = [];
 			$.each(feed.items, function(index, item) {
 				// Check to see if this alert already exists
 				var existing_alert = $('.status-alert[data-alert-id="' + item.id + '"]');
+				visible_alerts.push(item.id);
 				if(existing_alert.length > 0) {
 					// Check the content and update if necessary
 					if(existing_alert.find('.title').text() != item.title) {
@@ -636,7 +638,16 @@ var statusAlertCheck = function($) {
 						.find('.content').text(item.description);
 					$('.page-content').before(alert_markup);
 				}
-			})
+			});
+			// Hide alerts that no longer appear in the feed
+			$('.status-alert[id!=status-alert-template]')
+				.each(function(index, alert) {
+					var alert = $(alert),
+						id    = alert.attr('data-alert-id');
+					if($.inArray(id, visible_alerts) == -1) {
+						alert.remove();
+					}
+				});
 		}
 	});
 }
@@ -674,6 +685,6 @@ if (typeof jQuery != 'undefined'){
 		devBootstrap($);
 
 		statusAlertCheck($);
-		setInterval(function() {statusAlertCheck($);}, 10000);
+		setInterval(function() {statusAlertCheck($);}, 3000);
 	});
 }else{console.log('jQuery dependancy failed to load');}
