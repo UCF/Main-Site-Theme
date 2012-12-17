@@ -639,7 +639,7 @@ var statusAlertCheck = function($) {
 					$('.page-content').before(alert_markup);
 				}
 			});
-			// Hide alerts that no longer appear in the feed
+			// Remove alerts that no longer appear in the feed
 			$('.status-alert[id!=status-alert-template]')
 				.each(function(index, alert) {
 					var alert = $(alert),
