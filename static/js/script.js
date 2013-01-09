@@ -602,12 +602,14 @@ var devBootstrap = function($) {
 	}); 
 }
 
+
 /* Bootstrap Dropdown fixes for mobile devices */
 // Fixes onclick event for mobile devices
 $(document).on('touchstart.dropdown', '.dropdown-menu', function(e) { e.stopPropagation(); });
 // Prevents page jump on click when activating hover-able elements (dropdowns, tooltips...)
 // Note that this assumes popover activators (buttons) won't have a real href value on this site.
 $('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(function(e) { e.preventDefault(); });
+
 
 /*
  * Check the status site RSS feeds periodically and display an alert if necessary.
@@ -619,42 +621,42 @@ var statusAlertCheck = function($) {
 			$('.status-alert[id!=status-alert-template]').remove();
 		},
 		success : function(feed) {
-			var visible_alerts = [];
-			$.each(feed.items, function(index, item) {
+			var visible_alert	= null;
+			var newest			= feed.items[0];
+			
+			if (newest) {
 				// Check to see if this alert already exists
-				var existing_alert = $('.status-alert[data-alert-id="' + item.id + '"]');
-				visible_alerts.push(item.id);
+				var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]');
+				visible_alert = newest.id;
+				
+				// Remove alerts that no longer appear in the feed
+				if( (visible_alert == null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
+					$('.status-alert[id!=status-alert-template]').remove();
+				}
+				
 				if(existing_alert.length > 0) {
 					// Check the content and update if necessary
-					if(existing_alert.find('.title').text() != item.title) {
-						existing_alert.find('.title').text(item.title);
+					var existing_title = existing_alert.find('.title'),
+						existing_content = existing_alert.find('.content');
+						
+					if(existing_title.text() != newest.title) {
+						existing_title.text(newest.title);
 					}
-					if(existing_alert.find('.content').text() != item.description) {
-						existing_alert.find('.content').text(item.description);
+					if(existing_content.text() != newest.description) {
+						existing_content.text(newest.description);
 					}
+				
 				} else {
 					var alert_markup = $('#status-alert-template').clone();
 					alert_markup
 						.attr('id', '')
-						.attr('data-alert-id', item.id)
-						.find('.title').text(item.title).end()
-						.find('.content').text(item.description);
+						.attr('data-alert-id', newest.id)
+						.find('.title').text(newest.title).end()
+						.find('.content').text(newest.description);
 					$('.page-content').before(alert_markup);
 				}
-			});
-			// Remove alerts that no longer appear in the feed
-			if(visible_alerts.length == 0) {
-				$('.status-alert[id!=status-alert-template]').remove();
-			} else {
-				$('.status-alert[id!=status-alert-template]')
-					.each(function(index, alert) {
-						var alert = $(alert),
-							id    = alert.attr('data-alert-id');
-						if($.inArray(id, visible_alerts) == -1) {
-							alert.remove();
-						}
-					});
 			}
+			
 		}
 	});
 }
@@ -692,6 +694,6 @@ if (typeof jQuery != 'undefined'){
 		devBootstrap($);
 
 		statusAlertCheck($);
-		setInterval(function() {statusAlertCheck($);}, 3000);
+		setInterval(function() {statusAlertCheck($);}, 30000);
 	});
 }else{console.log('jQuery dependancy failed to load');}
