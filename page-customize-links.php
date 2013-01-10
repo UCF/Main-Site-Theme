@@ -110,6 +110,27 @@
 		
 		
 		<div class="container">
+			<div class="row status-alert" id="status-alert-template" data-alert-id="">
+				<div class="span12">
+					<div class="alert alert-error alert-block">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<div class="alert-icon general"></div>
+						<h2>
+							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+								<span class="title"> </span>
+							</a>
+						</h2>
+						<p class="alert-body">
+							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+								<span class="content"> </span>
+							</a>
+						</p>
+						<p class="alert-action">
+							<a class="more-information btn btn-danger" href="<?php echo get_theme_option('alert_more_information_url'); ?>">Click Here for More Information</a>
+						</p>
+					</div>
+				</div>
+			</div>
 			<div class="row" id="header_wrap">
 				<div id="header" class="row-border-bottom-top" role="banner">
 					<h1><?=bloginfo('name')?></h1>
