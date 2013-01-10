@@ -162,6 +162,7 @@ JRss.prototype  = {
             item.description = jQuery(this).find('description').eq(0).text();
             item.updated = jQuery(this).find('pubDate').eq(0).text();
             item.id = jQuery(this).find('postID').eq(0).text();
+			item.type = jQuery(this).find('alertType').eq(0).text();
             
             feed.items.push(item);
         });

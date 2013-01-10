@@ -641,13 +641,17 @@ var statusAlertCheck = function($) {
 					// This will simply fail if the alert has already been closed
 					// by the user (alert element has been removed from the DOM)
 					var existing_title = existing_alert.find('.title'),
-						existing_content = existing_alert.find('.content');
+						existing_content = existing_alert.find('.content'),
+						existing_type = existing_alert.find('.alert-icon');
 						
 					if(existing_title.text() != newest.title) {
 						existing_title.text(newest.title);
 					}
 					if(existing_content.text() != newest.description) {
 						existing_content.text(newest.description);
+					}
+					if(existing_type.hasClass(newest.type) == false) {
+						existing_type.attr('class','alert-icon ' + newest.type);
 					}
 				
 				} else {
@@ -659,7 +663,9 @@ var statusAlertCheck = function($) {
 							.attr('id', '')
 							.attr('data-alert-id', newest.id)
 							.find('.title').text(newest.title).end()
-							.find('.content').text(newest.description);
+							.find('.content').text(newest.description).end()
+							.find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+							;
 						$('#header_wrap').before(alert_markup);
 					}
 				}
