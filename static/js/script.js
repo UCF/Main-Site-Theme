@@ -625,15 +625,17 @@ var statusAlertCheck = function($) {
 			var newest			= feed.items[0];
 			
 			if (newest) {
-				// Check to see if this alert already exists
-				var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]');
-				visible_alert = newest.id;
+				var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]'),
+					visible_alert = newest.id;
+				// Remove 'more info at...' from description
+				newest.description = newest.description.replace('More info at www.ucf.edu','');
 				
 				// Remove alerts that no longer appear in the feed
 				if( (visible_alert == null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
 					$('.status-alert[id!=status-alert-template]').remove();
 				}
 				
+				// Check to see if this alert already exists
 				if(existing_alert.length > 0) {
 					// Check the content and update if necessary
 					var existing_title = existing_alert.find('.title'),
@@ -647,13 +649,19 @@ var statusAlertCheck = function($) {
 					}
 				
 				} else {
+					// Create a new alert if an existing one isn't found
 					var alert_markup = $('#status-alert-template').clone();
 					alert_markup
 						.attr('id', '')
 						.attr('data-alert-id', newest.id)
 						.find('.title').text(newest.title).end()
 						.find('.content').text(newest.description);
-					$('.page-content').before(alert_markup);
+					$('#header_wrap').before(alert_markup);
+				}
+				
+				// Remove the template so we don't have unneccessary markup
+				if ($('#status-alert-template').length > 0) {
+					$('#status-alert-template').remove();
 				}
 			}
 			
