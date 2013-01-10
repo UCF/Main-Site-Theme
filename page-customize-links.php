@@ -43,6 +43,8 @@
 				this.column_width = column_width;
 				this.data         = data;
 			}
+			
+			var ALERT_RSS_URL              = '<?php echo get_theme_option('alert_feed_url'); ?>';
 		</script>
 		
 	</head>

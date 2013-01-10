@@ -75,7 +75,6 @@
 							<a class="more-information btn btn-danger" href="<?php echo get_theme_option('alert_more_information_url'); ?>">Click Here for More Information</a>
 						</p>
 					</div>
-
 				</div>
 			</div>
 			<div class="row" id="header_wrap">
