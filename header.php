@@ -56,6 +56,25 @@
 	<!--[if (gt IE 9)|!(IE)]><!--> <body class="<?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <!--<![endif]-->
 		
 		<div class="container">
+			<div class="row status-alert" id="status-alert-template" data-alert-id="">
+				<div class="span12">
+					<div class="alert alert-error alert-block">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<h2>
+							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+								<span class="title"> </span>
+							</a>
+						</h2>
+						<p>
+							<a href="<?echo get_theme_option('alert_more_information_url');?>">
+								<span class="content"> </span>
+							</a>
+							<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>">Click Here for More Information</a>
+						</p>
+					</div>
+
+				</div>
+			</div>
 			<div class="row" id="header_wrap">
 				<div id="header" class="row-border-bottom-top" role="banner">
 					<h1><?=bloginfo('name')?></h1>
@@ -70,20 +89,4 @@
 					'walker' => new Bootstrap_Walker_Nav_Menu()
 					));
 				?>
-			</div>
-			<div class="row status-alert" id="status-alert-template" data-alert-id="">
-				<div class="span12">
-					<h2>
-						<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-							<span class="title">TITLE</span>
-						</a>
-					</h2>
-					<p class="well">
-						<a href="<?echo get_theme_option('alert_more_information_url');?>">
-							<span class="content">CONTENT</span>
-						</a>
-						<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>">Click Here For More Information</a>
-					</p>
-
-				</div>
 			</div>
