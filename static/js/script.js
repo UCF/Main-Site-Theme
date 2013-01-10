@@ -637,7 +637,9 @@ var statusAlertCheck = function($) {
 				
 				// Check to see if this alert already exists
 				if(existing_alert.length > 0) {
-					// Check the content and update if necessary
+					// Check the content and update if necessary.
+					// This will simply fail if the alert has already been closed
+					// by the user (alert element has been removed from the DOM)
 					var existing_title = existing_alert.find('.title'),
 						existing_content = existing_alert.find('.content');
 						
@@ -649,23 +651,35 @@ var statusAlertCheck = function($) {
 					}
 				
 				} else {
-					// Create a new alert if an existing one isn't found
-					var alert_markup = $('#status-alert-template').clone();
-					alert_markup
-						.attr('id', '')
-						.attr('data-alert-id', newest.id)
-						.find('.title').text(newest.title).end()
-						.find('.content').text(newest.description);
-					$('#header_wrap').before(alert_markup);
-				}
-				
-				// Remove the template so we don't have unneccessary markup
-				if ($('#status-alert-template').length > 0) {
-					$('#status-alert-template').remove();
+					// Make sure this alert hasn't been closed by the user already
+					if ($.cookie('ucf_alert_display_' + newest.id) != 'hide') {
+						// Create a new alert if an existing one isn't found
+						var alert_markup = $('#status-alert-template').clone();
+						alert_markup
+							.attr('id', '')
+							.attr('data-alert-id', newest.id)
+							.find('.title').text(newest.title).end()
+							.find('.content').text(newest.description);
+						$('#header_wrap').before(alert_markup);
+					}
 				}
 			}
 			
+			// Set cookies for every iteration of new alerts, if necessary
+			statusAlertCookieSet($);
 		}
+	});
+}
+
+
+/*
+ * Handle cookies that determine whether an alert has been closed 
+ * by the user. (Requires jquery.cookie.js)
+ */
+var statusAlertCookieSet = function($) {
+	$('.status-alert .close').click(function() {
+		var alertID = $(this).parents('.status-alert').attr('data-alert-id');
+		$.cookie('ucf_alert_display_' + alertID, 'hide', {expires: 7, path: SITE_PATH, domain: SITE_DOMAIN});
 	});
 }
 

@@ -79,6 +79,14 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
 define('SEARCH_SERVICE_URL', 'http://search.smca.ucf.edu/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
 
+# Domain/path of site (for cookies)
+list($domain, $path) = explode('.edu', get_site_url()); 
+$domain = preg_replace('/^(http|https):\/\//','',$domain).'.edu';
+if (substr($path, strlen($path)-1) !== '/') { $path = $path.'/'; } // make sure path ends in /
+define('WP_SITE_DOMAIN', $domain);
+define('WP_SITE_PATH', $path);
+
+
 /**
  * Set config values including meta tags, registered custom post types, styles,
  * scripts, and any other statically defined assets that belong in the Config
@@ -324,7 +332,7 @@ Config::$theme_settings = array(
 		new TextField(array(
 			'name'        => 'Feed URL',
 			'id'          => THEME_OPTIONS_NAME.'[alert_feed_url]',
-			'description' => 'Alert theme alert post type RSS feed URL: http://www.ucf.edu/alert/feed?post_type=alert',
+			'description' => 'Alert theme alert post type RSS feed URL: http://www.ucf.edu/alert/feed/?post_type=alert',
 			'value'       => $theme_options['alert_feed_url'],
 		)),
 		new TextField(array(
@@ -371,6 +379,7 @@ Config::$scripts = array(
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
 	THEME_JS_URL.'/cycle.lite.js',
 	THEME_JS_URL.'/jFeed.js',
+	THEME_JS_URL.'/jquery.cookie.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
