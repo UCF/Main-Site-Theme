@@ -69,12 +69,21 @@ div.top_five_majors {
 
 /* Emergency Status Alerts styles */
 #status-alert-template {display:none;}
-.status-alert { margin-top: 15px; }
-.status-alert~#header-nav-wrap { margin-top: -20px; }
-.status-alert h2 {font-family:"Helvetica Neue",Helvetica,sans-serif;line-height:1.1em;margin-bottom:10px;}
+.status-alert { }
+.status-alert .alert { margin-bottom: 0; margin-top: 15px; }
+
+.status-alert .alert-icon { display: block; float: left; width: 30px; height: 30px; margin: 0 10px 5px 0; background-image: url('static/img/spritesheet.png'); background-repeat: no-repeat; }
+.status-alert .alert-icon.general { background-position: ; }
+.status-alert .alert-icon.weather { background-position: ; }
+.status-alert .alert-icon.police { background-position: ; }
+.status-alert .alert-icon.update { background-position: ; }
+
+.status-alert h2 { font-family:"Helvetica Neue",Helvetica,sans-serif;line-height:1.1em;margin-bottom:10px; display: block; font-size: 22px; }
 .status-alert h2 a {color:#CC0000;}
-.status-alert .content {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#333;font-size:120%;line-height:120%;}
-.status-alert .more-information {text-decoration:underline;display:block;font-family:"Helvetica Neue",Helvetica,sans-serif;margin-top:10px;font-size:120%;}
+.status-alert .alert-body { display: block; clear: both; margin-top: 20px; }
+.status-alert .alert-body .content {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#333;font-size: 14px;}
+.status-alert .alert-action { text-align:center; margin-top: 10px; }
+.status-alert .alert-action .more-information { }
 
 
 /* Header */
