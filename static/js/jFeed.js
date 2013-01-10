@@ -161,7 +161,7 @@ JRss.prototype  = {
             item.link = jQuery(this).find('link').eq(0).text();
             item.description = jQuery(this).find('description').eq(0).text();
             item.updated = jQuery(this).find('pubDate').eq(0).text();
-            item.id = jQuery(this).find('guid').eq(0).text();
+            item.id = jQuery(this).find('postID').eq(0).text();
             
             feed.items.push(item);
         });
