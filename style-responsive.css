@@ -59,6 +59,8 @@
 	#UCFHBSearch_and_links { display: none; }
 	#UCFHBHeader div.UCFHBWrapper { width: 100%; }
 	
+	.status-alert .alert-wrap { width: 624px; }
+	
 	#header-menu li:after { margin-left: 3px; }
 	#header-menu li a { font-size: 14.25px !important; }
 	#header-menu li.last a { font-size: 11px !important; }
@@ -134,6 +136,21 @@
 
 @media (max-width: 767px) {
 	#UCFHBHeader { margin-left: -20px; width: 100%; padding-right: 40px; }
+	
+	.status-alert .alert-wrap { width: 100%; }
+	.status-alert .alert-icon { 
+		width: 32px; 
+		height: 32px; 
+		background-size: 212px 175px;
+		margin: 15px 10px 0 15px; 
+	}
+	.status-alert .alert-icon.general { background-position: -64px -141px; }
+	.status-alert .alert-icon.weather { background-position: -97px -140px; }
+	.status-alert .alert-icon.police { background-position: -132px -142px; }
+	.status-alert .alert-icon.update { background-position: -64px -141px; } /* Using 'general' icon for now */
+	.status-alert .alert-icon.allclear { background-position: ; }
+	.status-alert h2 { font-size: 22px; line-height: 20px; }
+	.status-alert .alert-body .content { display: none; }
 	
 	#header { margin-left: 0; }
 	#header-menu { text-align: center; margin: 10px 0 5px 0; }
