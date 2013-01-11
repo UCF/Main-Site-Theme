@@ -28,3 +28,6 @@ Below are general issues with the UCF.edu theme or the WordPress installation (a
 
 #### v.??
 - Clickable elements within modals will stop returning a response after the first click or not at all.  Tends to occur primarily in v2.3 and lower, but higher versions are occasionally wonky in BrowserStack.  A modal link fallback script has been implemented for Android browsers running v2.3 or lower to help bypass this problem; if a `src` value is found within a modal's content, that value is set as the `href` value of the modal's open link and modal functionality is disabled.
+
+#### 1.5, 1.6
+- Emergency Alert icons do not render correctly (appears to be a bug with setting a background image to the icon div; probably a background-size imcompatibility.)  Most v1.5/1.6 users likely won't ever encounter this problem because of the m.ucf.edu redirect, however.  (Tested on Sony Xperia X10 running 1.6, HTC Hero running 1.5) 
