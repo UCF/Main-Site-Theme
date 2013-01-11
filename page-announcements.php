@@ -50,6 +50,7 @@ else {
 if ( isset($_GET['output']) ) {
 	switch ($_GET['output']) {
 		case 'json':
+			header('Content-Type: application/json');
 			print json_encode($announcements);
 			break;
 		case 'rss':		
