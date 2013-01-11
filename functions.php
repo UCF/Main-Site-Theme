@@ -797,7 +797,7 @@ function esi_include($statement) {
 
 
 /** 
- * Pull recent Gravity Forms entries from a given form.
+ * Pull recent Gravity Forms entries from a given form (intended for Feedback form.)
  * If no formid argument is provided, the function will pick the form
  * with ID of 1 by default.
  * Duration is specified in number of days.
