@@ -79,10 +79,12 @@ function manage_announcement_columns( $column, $post_id ) {
 	global $post;
 	switch ( $column ) {
 		case 'start_date':
-			print date('Y/m/d', strtotime(get_post_meta( $post->ID, 'announcement_start_date', true )));
+			$start_date = get_post_meta($post->ID, 'announcement_start_date', TRUE) ? date('Y/m/d', strtotime(get_post_meta($post->ID, 'announcement_start_date', TRUE))) : '<span style="font-weight:bold;color:#cc0000;">N/A</span>';
+			print $start_date;
 			break;
 		case 'end_date':
-			print date('Y/m/d', strtotime(get_post_meta( $post->ID, 'announcement_end_date', true )));
+			$end_date = get_post_meta($post->ID, 'announcement_end_date', TRUE) ? date('Y/m/d', strtotime(get_post_meta($post->ID, 'announcement_end_date', TRUE))) : '<span style="font-weight:bold;color:#cc0000;">N/A</span>';
+			print $end_date;
 			break;
 		case 'publish_date':
 			print get_post_time('Y/m/d', true, $post->ID);
@@ -681,8 +683,8 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				'post_name' 		=> $announcement->post_name,
 				'post_permalink'	=> get_permalink($announcement->ID),
 				'post_content' 		=> $announcement->post_content,
-				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE) ? get_post_meta($announcement->ID, 'announcement_start_date', TRUE) : $announcement->post_date,
-				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE) ? get_post_meta($announcement->ID, 'announcement_end_date', TRUE) : date('Y-m-d', strtotime($announcement->post_date.' + 1 day')),
+				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
+				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
 				'url' 				=> get_post_meta($announcement->ID, 'announcement_url', TRUE),
 				'contact_person'	=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
 				'phone'				=> get_post_meta($announcement->ID, 'announcement_phone', TRUE),
