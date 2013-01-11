@@ -617,6 +617,7 @@ $('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(fun
 var statusAlertCheck = function($) {
 	$.getFeed({
 		url     : ALERT_RSS_URL,
+		cache	: false,
 		error   : function(feed) {
 			$('.status-alert[id!=status-alert-template]').remove();
 		},
@@ -681,11 +682,15 @@ var statusAlertCheck = function($) {
 /*
  * Handle cookies that determine whether an alert has been closed 
  * by the user. (Requires jquery.cookie.js)
+ * Also adjusts styles as necessary on alert close
  */
 var statusAlertCookieSet = function($) {
 	$('.status-alert .close').click(function() {
 		var alertID = $(this).parents('.status-alert').attr('data-alert-id');
 		$.cookie('ucf_alert_display_' + alertID, 'hide', {expires: null, path: SITE_PATH, domain: SITE_DOMAIN});
+		$(this).parents('.status-alert')
+			.find('.alert-icon').hide().end()
+			.css('margin-top', '0');
 	});
 }
 
