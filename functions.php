@@ -643,11 +643,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	else { // default retrieval args
 		$fallback_args = array(
 			'meta_query' => array(
-        		array(
-					'key' => 'announcement_start_date',
-					'value' => $thismonday,
-					'compare' => '>='
-				),
 				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
