@@ -736,13 +736,20 @@ function announcements_to_rss($announcements) {
 	if ($announcements !== NULL) {
 		foreach ($announcements as $announcement) {
 			print '<item id="'.$announcement['id'].'">';
+				// Generic RSS story elements
 				print '<title>'.$announcement['title'].'</title>';
-				print '<description>'.$announcement['content'].'</description>';
-				print '<permalink>'.$announcement['permalink'].'</permalink>';
-						
+				print '<description><![CDATA['.$announcement['content'].']]></description>';
+				print '<link>'.$announcement['permalink'].'</link>';
+				print '<author>'.$announcement['postedBy'].'</author>';
+				print '<pubDate>'.$announcement['published'].'</pubDate>';
+				print '<guid isPermaLink="true">'.$announcement['permalink'].'</guid>'; // same as <link>
+				
+				// Announcement-specific stuff	
+				print '<id>'.$announcement['id'].'</id>';	
 				print '<postStatus>'.$announcement['postStatus'].'</postStatus>';
 				print '<postModified>'.$announcement['postModified'].'</postModified>';
-				print '<published>'.$announcement['published'].'</published>';
+				print '<published>'.$announcement['published'].'</published>'; // same as <pubDate>
+				print '<permalink>'.$announcement['permalink'].'</permalink>'; // same as <link>
 				print '<postName>'.$announcement['postName'].'</postName>';
 				print '<startDate>'.$announcement['startDate'].'</startDate>';
 				print '<endDate>'.$announcement['endDate'].'</endDate>';
@@ -750,7 +757,7 @@ function announcements_to_rss($announcements) {
 				print '<contactPerson>'.$announcement['contactPerson'].'</contactPerson>';
 				print '<phone>'.$announcement['phone'].'</phone>';
 				print '<email>'.$announcement['email'].'</email>';
-				print '<postedBy>'.$announcement['postedBy'].'</postedBy>';
+				print '<postedBy>'.$announcement['postedBy'].'</postedBy>'; // same as <author>
 				print '<roles>';
 					foreach ($announcement['roles'] as $role) {
 						print '<role>'.$role.'</role>';
