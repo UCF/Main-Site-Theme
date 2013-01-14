@@ -419,7 +419,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		'numberposts' => -1,
 		'post_type' => 'announcement',
 		'orderby' => 'meta_value',
-		'order' => 'ASC',
+		'order' => 'DESC',
 		'meta_key' => 'announcement_start_date',
 	);
 	
@@ -696,15 +696,23 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			);
 		}
 		
-		// Remove posts that are 'new' from $allposts, add to $newposts and
-		// append $newposts to the top of $allposts
+		// Remove posts that are 'new' from $allposts so we can sort them 
+		// in ascending order and append them to the front of $allposts
 		foreach ($allposts as $announcement) {
-			if ($announcement['is_new'] == true) {
-				$newposts[$announcement['post_id']] = $announcement;
-				unset($allposts[$announcement['post_id']]);
+			if ($announcement['isNew'] == true) {
+				$newposts[$announcement['id']] = $announcement;
+				unset($allposts[$announcement['id']]);
 			}
 		}
 		
+		// Sort the new posts in ascending order
+		$startdates = array();
+		foreach ($newposts as $key => $row) {
+			$new_startdates[$key] = $row['startDate'];
+		}
+		array_multisort($new_startdates, SORT_ASC, $newposts);
+		
+		// Append $newposts to front of $allposts
 		if (!empty($allposts)) {
 			$allposts = $newposts + $allposts;
 			$output = $allposts;
