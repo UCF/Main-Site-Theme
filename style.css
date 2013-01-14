@@ -528,6 +528,7 @@ a.home_spotlight_readmore {
 
 /* Announcements Page */
 h2.header_announcements { font-size: 20px; }
+h2#ongoing-header { font-family: 'HelveticaNeue', Helvetica, sans-serif; font-weight: 200; margin-bottom: 15px; }
 .page-content#announcements #filters { margin-top: 10px; }
 .page-content#announcements #filters label {  }
 .page-content#announcements #filters select, .page-content#announcements #filters input[type="text"] { margin-right: 15px; }
