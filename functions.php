@@ -87,7 +87,9 @@ function manage_announcement_columns( $column, $post_id ) {
 			print $end_date;
 			break;
 		case 'publish_date':
-			print get_post_time('Y/m/d', true, $post->ID);
+			if ($post->post_status == 'publish') {
+				print get_post_time('Y/m/d', true, $post->ID);
+			}
 			break;
 		default:
 			break;
