@@ -738,7 +738,7 @@ function announcements_to_rss($announcements) {
 			print '<item id="'.$announcement['id'].'">';
 				print '<title>'.$announcement['post_title'].'</title>';
 				print '<description>'.$announcement['post_content'].'</description>';
-				print '<permalink>'.$announcement['post_permalink'].'</link>';
+				print '<permalink>'.$announcement['post_permalink'].'</permalink>';
 						
 				print '<postStatus>'.$announcement['post_status'].'</postStatus>';
 				print '<postModified>'.$announcement['post_modified'].'</postModified>';
