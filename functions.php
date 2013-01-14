@@ -799,7 +799,6 @@ function announcements_to_rss($announcements) {
 				print '<link>'.$announcement['permalink'].'</link>';
 				print '<author>'.$announcement['postedBy'].'</author>';
 				print '<pubDate>'.$announcement['published'].'</pubDate>';
-				print '<guid isPermaLink="true">'.$announcement['permalink'].'</guid>'; // same as <link>
 				
 				// Announcement-specific stuff	
 				print '<id>'.$announcement['id'].'</id>';	
@@ -826,7 +825,6 @@ function announcements_to_rss($announcements) {
 					}
 				print '</keywords>';
 				print '<isNew>'.$announcement['isNew'].'</isNew>';
-				print '<isUpcoming>'.$announcement['isNew'].'</isUpcoming>';
 
 			print '</item>';
 		}
