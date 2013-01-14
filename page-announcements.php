@@ -142,13 +142,13 @@ else {
 								print '</div><div class="row">';
 							}
 						?>
-							<div class="span4" id="announcement_<?=$announcement['post_id']?>">
+							<div class="span4" id="announcement_<?=$announcement['id']?>">
 								<div class="announcement_wrap">
 									<div class="thumbtack"></div>
-									<?php if ($announcement['is_new'] == true) { ?><div class="new">New Announcement</div><?php } ?>
-									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
-									<p class="date"><?=date('M d', strtotime($announcement['start_date']))?> - <?=date('M d', strtotime($announcement['end_date']))?></p>
-									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
+									<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
+									<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
+									<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
+									<p><?=truncateHtml($announcement['content'], 200)?></p>
 									<p class="audience"><strong>Audience:</strong> 
 									<?php 
 										if ($announcement['roles']) {
@@ -196,9 +196,6 @@ else {
 										else { print 'n/a'; }
 									?>
 									</p>
-									
-									
-									<p><?=$announcement['debug']?></p>
 									
 									
 								</div>

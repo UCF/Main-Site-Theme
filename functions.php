@@ -675,24 +675,24 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		
 		foreach ($announcements as $announcement) {
 			$allposts[$announcement->ID] = array(
-				'post_id'			=> $announcement->ID,
-				'post_status' 		=> $announcement->post_status,
-				'post_modified' 	=> $announcement->post_modified,
-				'post_published' 	=> $announcement->post_date,
-				'post_title' 		=> $announcement->post_title,
-				'post_name' 		=> $announcement->post_name,
-				'post_permalink'	=> get_permalink($announcement->ID),
-				'post_content' 		=> $announcement->post_content,
-				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
-				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
+				'id'				=> $announcement->ID,
+				'postStatus' 		=> $announcement->post_status,
+				'postModified'	 	=> $announcement->post_modified,
+				'published'		 	=> $announcement->post_date,
+				'title'		 		=> $announcement->post_title,
+				'postName'	 		=> $announcement->post_name,
+				'permalink'			=> get_permalink($announcement->ID),
+				'content'	 		=> $announcement->post_content,
+				'startDate'			=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
+				'endDate' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
 				'url' 				=> get_post_meta($announcement->ID, 'announcement_url', TRUE),
-				'contact_person'	=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
+				'contactPerson'		=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
 				'phone'				=> get_post_meta($announcement->ID, 'announcement_phone', TRUE),
 				'email'				=> get_post_meta($announcement->ID, 'announcement_email', TRUE),
-				'posted_by'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
+				'postedBy'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
 				'roles' 			=> wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")),
 				'keywords'			=> wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")),
-				'is_new'			=> ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false,
+				'isNew'				=> ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false,
 			);
 		}
 		
@@ -736,21 +736,21 @@ function announcements_to_rss($announcements) {
 	if ($announcements !== NULL) {
 		foreach ($announcements as $announcement) {
 			print '<item id="'.$announcement['id'].'">';
-				print '<title>'.$announcement['post_title'].'</title>';
-				print '<description>'.$announcement['post_content'].'</description>';
-				print '<permalink>'.$announcement['post_permalink'].'</permalink>';
+				print '<title>'.$announcement['title'].'</title>';
+				print '<description>'.$announcement['content'].'</description>';
+				print '<permalink>'.$announcement['permalink'].'</permalink>';
 						
-				print '<postStatus>'.$announcement['post_status'].'</postStatus>';
-				print '<postModified>'.$announcement['post_modified'].'</postModified>';
-				print '<published>'.$announcement['post_published'].'</published>';
-				print '<postName>'.$announcement['post_name'].'</postName>';
-				print '<startDate>'.$announcement['start_date'].'</startDate>';
-				print '<endDate>'.$announcement['end_date'].'</endDate>';
+				print '<postStatus>'.$announcement['postStatus'].'</postStatus>';
+				print '<postModified>'.$announcement['postModified'].'</postModified>';
+				print '<published>'.$announcement['published'].'</published>';
+				print '<postName>'.$announcement['postName'].'</postName>';
+				print '<startDate>'.$announcement['startDate'].'</startDate>';
+				print '<endDate>'.$announcement['endDate'].'</endDate>';
 				print '<url>'.$announcement['url'].'</url>';
-				print '<contactPerson>'.$announcement['contact_person'].'</contactPerson>';
+				print '<contactPerson>'.$announcement['contactPerson'].'</contactPerson>';
 				print '<phone>'.$announcement['phone'].'</phone>';
 				print '<email>'.$announcement['email'].'</email>';
-				print '<postedBy>'.$announcement['posted_by'].'</postedBy>';
+				print '<postedBy>'.$announcement['postedBy'].'</postedBy>';
 				print '<roles>';
 					foreach ($announcement['roles'] as $role) {
 						print '<role>'.$role.'</role>';
@@ -761,7 +761,7 @@ function announcements_to_rss($announcements) {
 						print '<keyword>'.$keyword.'</keyword>';
 					}
 				print '</keywords>';
-				print '<isNew>'.$announcement['is_new'].'</isNew>';
+				print '<isNew>'.$announcement['isNew'].'</isNew>';
 
 			print '</item>';
 		}
