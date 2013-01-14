@@ -740,19 +740,17 @@ function announcements_to_rss($announcements) {
 				print '<description>'.$announcement['post_content'].'</description>';
 				print '<permalink>'.$announcement['post_permalink'].'</link>';
 						
-				print '<post_status>'.$announcement['post_status'].'</post_status>';
-				print '<post_modified>'.$announcement['post_modified'].'</post_modified>';
-				print '<post_published>'.$announcement['post_published'].'</post_published>';
-				print '<post_title>'.$announcement['post_title'].'</post_title>';
-				print '<post_name>'.$announcement['post_name'].'</post_name>';
-				print '<post_content>'.$announcement['post_content'].'</post_content>';
-				print '<start_date>'.$announcement['start_date'].'</start_date>';
-				print '<end_date>'.$announcement['end_date'].'</end_date>';
+				print '<postStatus>'.$announcement['post_status'].'</postStatus>';
+				print '<postModified>'.$announcement['post_modified'].'</postModified>';
+				print '<published>'.$announcement['post_published'].'</published>';
+				print '<postName>'.$announcement['post_name'].'</postName>';
+				print '<startDate>'.$announcement['start_date'].'</startDate>';
+				print '<endDate>'.$announcement['end_date'].'</endDate>';
 				print '<url>'.$announcement['url'].'</url>';
-				print '<contact_person>'.$announcement['contact_person'].'</contact_person>';
+				print '<contactPerson>'.$announcement['contact_person'].'</contactPerson>';
 				print '<phone>'.$announcement['phone'].'</phone>';
 				print '<email>'.$announcement['email'].'</email>';
-				print '<posted_by>'.$announcement['posted_by'].'</posted_by>';
+				print '<postedBy>'.$announcement['posted_by'].'</postedBy>';
 				print '<roles>';
 					foreach ($announcement['roles'] as $role) {
 						print '<role>'.$role.'</role>';
@@ -763,7 +761,7 @@ function announcements_to_rss($announcements) {
 						print '<keyword>'.$keyword.'</keyword>';
 					}
 				print '</keywords>';
-				print '<is_new>'.$announcement['is_new'].'</is_new>';
+				print '<isNew>'.$announcement['is_new'].'</isNew>';
 
 			print '</item>';
 		}
