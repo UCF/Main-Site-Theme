@@ -705,12 +705,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			}
 		}
 		
-		// Sort the new posts in ascending order
-		$startdates = array();
-		foreach ($newposts as $key => $row) {
-			$new_startdates[$key] = $row['startDate'];
+		// Sort the new posts in ascending order (maintain key associations)
+		function sort_new($a, $b) {
+			if ($a['startDate'] == $b['startDate']) {
+				return 0;
+			}
+			return ($a['startDate'] < $b['startDate']) ? -1 : 1;
 		}
-		array_multisort($new_startdates, SORT_ASC, $newposts);
+		uasort($newposts, 'sort_new');
 		
 		// Append $newposts to front of $allposts
 		if (!empty($allposts)) {
