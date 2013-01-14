@@ -134,77 +134,80 @@ else {
 					if ($announcements == NULL) { 
 						print 'No announcements found.'; 
 					} else { 
-						print '<div class="row">';
-						
-						$count = 0;
-						foreach ($announcements as $announcement) {
-							if ($count % 3 == 0 && $count !== 0) { // 3 announcements per row
-								print '</div><div class="row">';
+						$start_date_comparison 	= '';
+						$end_date_comparison	= '';
+						// We want to compare each announcement start date and end
+						// date with some date in the past and some date in the future, 
+						// respectively, to see if the announcement's time span
+						// continues before and after those past and future dates.
+						// If both of these requirements are met, the announcement
+						// is deemed 'ongoing'.
+						//
+						// Determine what we need to compare each announcement start/
+						// end date against:
+						if ($timeval) {
+							switch ($timeval) {
+								case 'nextweek':
+									// Compare to this Monday and next Sunday
+									$start_date_comparison 	= date('Ymd', strtotime('next monday'));
+									$end_date_comparison	= date('Ymd', strtotime('next sunday')); 
+									break;
+								case 'thismonth':
+									// Compare to last day of last month and first day
+									// of next month
+									$start_date_comparison 	= date('Ymd', strtotime('last day last month'));
+									$end_date_comparison	= date('Ymd', strtotime('first day next month'));
+									break;
+								case 'nextmonth':
+									// Compare to last day of this month and first day
+									// of two months from now
+									$start_date_comparison	= date('Ymd', strtotime('last day this month'));
+									$end_date_comparison	= date('Ymd', strtotime('first day of +2 months'));
+									break;
+								case 'thissemester':
+								case 'all':
+									// Don't compare anything; assume all are 'upcoming'
+									break;
+								default: // 'thisweek'
+									// Compare to last Monday and this Sunday
+									$start_date_comparison	= date('Ymd', strtotime('this monday'));
+									$end_date_comparison	= date('Ymd', strtotime('this sunday'));
+									break;
 							}
-						?>
-							<div class="span4" id="announcement_<?=$announcement['id']?>">
-								<div class="announcement_wrap">
-									<div class="thumbtack"></div>
-									<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
-									<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
-									<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
-									<p><?=truncateHtml($announcement['content'], 200)?></p>
-									<p class="audience"><strong>Audience:</strong> 
-									<?php 
-										if ($announcement['roles']) {
-											$rolelist = '';
-											foreach ($announcement['roles'] as $role) {
-												switch ($role) {
-													case 'Alumni':
-														$link = '?role=alumni';
-														break;
-													case 'Faculty':
-														$link = '?role=faculty';
-														break;
-													case 'Prospective Students':
-														$link = '?role=prospective-students';
-														break;
-													case 'Public':
-														$link = '?role=public';
-														break;
-													case 'Staff':
-														$link = '?role=staff';
-														break;
-													case 'Students':
-														$link = '?role=students';
-														break;
-													default:
-														$link = '';
-														break;
-												}
-												$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
-											}
-											print substr($rolelist, 0, -2);
-										}
-										else { print 'n/a'; }
-									?>
-									</p>
-									<p class="keywords"><strong>Keywords:</strong> 
-									<?php 
-										if ($announcement['keywords']) {
-											$keywordlist = '';
-											foreach ($announcement['keywords'] as $keyword) {
-												$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
-											}
-											print substr($keywordlist, 0, -2);
-										}
-										else { print 'n/a'; }
-									?>
-									</p>
-									
-									
-								</div>
-							</div>	
-						<?php
-							$count++;
+						}
+						else { // assume default 'thisweek'
+							$start_date_comparison	= date('Ymd', strtotime('this monday'));
+							$end_date_comparison	= date('Ymd', strtotime('this sunday'));						
+						}
+						
+						$ongoing = array();	
+						foreach ($announcements as $announcement) {
+							// Make sure we need to compare start/end dates
+							if ($start_date_comparison && $end_date_comparison) {
+								// If the post start date is before the start date comparison AND continues 
+								// through the end date comparison, add it to the ongoing array and remove
+								// from the main array of announcement results (it is 'ongoing').
+								// This allows an announcement to be 'upcoming' as it approaches its start
+								// and end date.
+								if ( 
+									(date('Ymd', strtotime($announcement['startDate'])) < $start_date_comparison) && 
+									(date('Ymd', strtotime($announcement['endDate'])) 	> $end_date_comparison)
+								) {
+									$ongoing[$announcement['id']] = $announcement;
+									unset($announcements[$announcement['id']]);
+								}
+							}
 						} // endforeach
 						
-						print '</div>';
+						// Output upcoming and ongoing events separately
+						if (!empty($announcements)) { 
+							print_announcements($announcements);
+						}
+						if (!empty($ongoing)) { ?>
+							<h2 id="ongoing-header">Ongoing Announcements</h2>
+							<?php	
+							print_announcements($ongoing);
+						}
 					} // endif ($announcements == NULL)
 				?>
 				

@@ -406,7 +406,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	
 	$thismonday = date('Y-m-d', strtotime('monday this week'));
 	$thissunday = date('Y-m-d', strtotime($thismonday.' + 6 days'));
-	
+		
 	$nextmonday = date('Y-m-d', strtotime('monday next week'));
 	$nextsunday = date('Y-m-d', strtotime($nextmonday.' + 6 days'));
 	
@@ -421,7 +421,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		'numberposts' => -1,
 		'post_type' => 'announcement',
 		'orderby' => 'meta_value',
-		'order' => 'DESC',
+		'order' => 'ASC',
 		'meta_key' => 'announcement_start_date',
 	);
 	
@@ -543,20 +543,11 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				$args = array_merge($args, $time_args);
 				break;
 			case 'thissemester':
-				// Set up a generic timeframe for semester
-				// start/end times; compare the current month
-				// to these dates to pull announcements from
-				// the current semester:
-				$current_month = date('n');
-				$spring_month_start = 1; // Jan
-				$spring_month_end = 5; // May
-				$summer_month_start = 5; // May
-				$summer_month_end = 7; // Jul
-				$fall_month_start = 8; // Aug
-				$fall_month_end = 12; // Dec
+				// Compare the current month to predefined month values
+				// to pull announcements from the current semester
 				
 				// Check for Spring Semester
-				if ($current_month >= $spring_month_start && $current_month <= $spring_month_end) {
+				if ($current_month >= SPRING_MONTH_START && $current_month <= SPRING_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
@@ -574,7 +565,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					$args = array_merge($args, $time_args);
 				}
 				// Check for Summer Semester
-				elseif ($current_month >= $summer_month_start && $current_month <= $summer_month_end) {
+				elseif ($current_month >= SUMMER_MONTH_START && $current_month <= SUMMER_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
@@ -675,7 +666,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		$allposts = array();
 		$newposts = array();
 		
-		foreach ($announcements as $announcement) {
+		foreach ($announcements as $announcement) {			
 			$allposts[$announcement->ID] = array(
 				'id'				=> $announcement->ID,
 				'postStatus' 		=> $announcement->post_status,
@@ -698,35 +689,89 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			);
 		}
 		
-		// Remove posts that are 'new' from $allposts so we can sort them 
-		// in ascending order and append them to the front of $allposts
-		foreach ($allposts as $announcement) {
-			if ($announcement['isNew'] == true) {
-				$newposts[$announcement['id']] = $announcement;
-				unset($allposts[$announcement['id']]);
-			}
-		}
-		
-		// Sort the new posts in ascending order (maintain key associations)
-		function sort_new($a, $b) {
-			if ($a['startDate'] == $b['startDate']) {
-				return 0;
-			}
-			return ($a['startDate'] < $b['startDate']) ? -1 : 1;
-		}
-		uasort($newposts, 'sort_new');
-		
-		// Append $newposts to front of $allposts
-		if (!empty($allposts)) {
-			$allposts = $newposts + $allposts;
-			$output = $allposts;
-		}
-		else { 
-			$output = $newposts;
-		}
+		$output = $allposts;
 		
 		return $output;	
 	}
+}
+
+
+/**
+ * Prints a set of announcements, given an announcements array
+ * returned from get_announcements().
+ **/
+function print_announcements($announcements) {
+	print '<div class="row">';
+	$count = 0;
+	foreach ($announcements as $announcement) {
+		if ($count % 3 == 0 && $count !== 0) { // 3 announcements per row
+			print '</div><div class="row">';
+		}
+		ob_start();
+		?>
+		<div class="span4" id="announcement_<?=$announcement['id']?>">
+			<div class="announcement_wrap">
+				<div class="thumbtack"></div>
+				<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
+				<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
+				<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
+				<p><?=truncateHtml(strip_tags($announcement['content'], 200))?></p>
+				<p class="audience"><strong>Audience:</strong> 
+				<?php 
+					if ($announcement['roles']) {
+						$rolelist = '';
+						foreach ($announcement['roles'] as $role) {
+							switch ($role) {
+								case 'Alumni':
+									$link = '?role=alumni';
+									break;
+								case 'Faculty':
+									$link = '?role=faculty';
+									break;
+								case 'Prospective Students':
+									$link = '?role=prospective-students';
+									break;
+								case 'Public':
+									$link = '?role=public';
+									break;
+								case 'Staff':
+									$link = '?role=staff';
+									break;
+								case 'Students':
+									$link = '?role=students';
+									break;
+								default:
+									$link = '';
+									break;
+							}
+							$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
+						}
+						print substr($rolelist, 0, -2);
+					}
+					else { print 'n/a'; }
+				?>
+				</p>
+				<p class="keywords"><strong>Keywords:</strong> 
+				<?php 
+					if ($announcement['keywords']) {
+						$keywordlist = '';
+						foreach ($announcement['keywords'] as $keyword) {
+							$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
+						}
+						print substr($keywordlist, 0, -2);
+					}
+					else { print 'n/a'; }
+				?>
+				</p>
+								
+									
+			</div>
+		</div>	
+	<?php
+		print ob_get_clean();
+		$count++;
+	} // endforeach
+	print '</div>';
 }
 
 
@@ -781,6 +826,7 @@ function announcements_to_rss($announcements) {
 					}
 				print '</keywords>';
 				print '<isNew>'.$announcement['isNew'].'</isNew>';
+				print '<isUpcoming>'.$announcement['isNew'].'</isUpcoming>';
 
 			print '</item>';
 		}
@@ -999,5 +1045,4 @@ function administrator_unfiltered_html() {
 	$admin->add_cap('unfiltered_html'); 	
 }
 add_action('switch_theme', 'administrator_unfiltered_html');
-
 ?>

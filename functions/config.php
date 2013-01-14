@@ -79,6 +79,16 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
 define('SEARCH_SERVICE_URL', 'http://search.smca.ucf.edu/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
 
+# Estimated start/end months of semesters; used for announcements
+define('CURRENT_MONTH', date('n'));
+define('SPRING_MONTH_START', 1); 	// Jan
+define('SPRING_MONTH_END', 5);		// May
+define('SUMMER_MONTH_START', 5); 	// May
+define('SUMMER_MONTH_END', 7);		// Jul
+define('FALL_MONTH_START', 8);		// Aug
+define('FALL_MONTH_END', 12); 		// Dec
+
+
 /**
  * Set config values including meta tags, registered custom post types, styles,
  * scripts, and any other statically defined assets that belong in the Config
