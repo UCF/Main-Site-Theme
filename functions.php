@@ -602,7 +602,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				}
 				break;
 			case 'all':
-				$args['numberposts'] = 100;
 				$time_args = array(
 					'meta_query' => array(
 						array(
