@@ -230,8 +230,6 @@ else {
 					if ($announcements == NULL) { 
 						print 'No announcements found.'; 
 					} else { 
-						
-						
 						// Output upcoming and ongoing events separately
 						if (!empty($upcoming)) { 
 							print_announcements($upcoming);
@@ -241,7 +239,7 @@ else {
 							<?php	
 							print_announcements($ongoing);
 						}
-					} // endif ($announcements == NULL)
+					}
 				?>
 				
 			</article>
