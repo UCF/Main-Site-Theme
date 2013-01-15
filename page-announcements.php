@@ -104,16 +104,15 @@ $upcoming	 	= array();
 if ($start_date_comparison && $end_date_comparison) {
 	foreach ($announcements as $announcement) {
 		// If the post start date is before the start date comparison AND continues 
-		// through the end date comparison, add it to the ongoing array and remove
-		// from the main array of announcement results (it is 'ongoing').
+		// through the end date comparison, add it to the ongoing array. Otherwise,
+		// add it to the upcoming array.
 		// This allows an announcement to be 'upcoming' as it approaches its start
-		// and end date.
+		// and end date (when, theoretically, it would be most relevant.)
 		if ( 
 			(date('Ymd', strtotime($announcement['startDate'])) < $start_date_comparison) && 
 			(date('Ymd', strtotime($announcement['endDate'])) 	> $end_date_comparison)
 		) {
 			$ongoing[$announcement['id']] = $announcement;
-			//unset($announcements[$announcement['id']]);
 		}
 		else {
 			$upcoming[$announcement['id']] = $announcement;
