@@ -66,9 +66,9 @@ $end_date_comparison	= '';
 if ($timeval) {
 	switch ($timeval) {
 		case 'nextweek':
-			// Compare to this Monday and next Sunday
-			$start_date_comparison 	= date('Ymd', strtotime('next monday'));
-			$end_date_comparison	= date('Ymd', strtotime('next sunday')); 
+			// Compare to next Monday and next Sunday
+			$start_date_comparison 	= date('Ymd', strtotime('monday next week'));
+			$end_date_comparison	= date('Ymd', strtotime('sunday next week')); 
 			break;
 		case 'thismonth':
 			// Compare to last day of last month and first day
@@ -87,20 +87,19 @@ if ($timeval) {
 			// Don't compare anything; assume all are 'upcoming'
 			break;
 		default: // 'thisweek'
-			// Compare to last Monday and this Sunday
-			$start_date_comparison	= date('Ymd', strtotime('this monday'));
-			$end_date_comparison	= date('Ymd', strtotime('this sunday'));
+			// Compare to this Monday and this Sunday
+			$start_date_comparison	= date('Ymd', strtotime('monday this week'));
+			$end_date_comparison	= date('Ymd', strtotime('sunday this week'));
 			break;
 	}
 }
 else { // assume default 'thisweek'
-	$start_date_comparison	= date('Ymd', strtotime('this monday'));
-	$end_date_comparison	= date('Ymd', strtotime('this sunday'));						
+	$start_date_comparison	= date('Ymd', strtotime('monday this week'));
+	$end_date_comparison	= date('Ymd', strtotime('sunday this week'));						
 }
 
 $ongoing 		= array();	
-$upcoming	 	= array(); // everything that is not 'ongoing'
-
+$upcoming	 	= array();
 // Make sure we need to compare start/end dates
 if ($start_date_comparison && $end_date_comparison) {
 	foreach ($announcements as $announcement) {
@@ -122,9 +121,9 @@ if ($start_date_comparison && $end_date_comparison) {
 	}
 }
 else {
-	// Make sure that we have a fallback for $timevals that don't separate
-	// ongoing/upcoming announcements combined with a $include_ongoing
-	// val of 0
+	// Make sure that we have a fallback for queries with a $timeval that
+	// doesn't separate ongoing/upcoming announcements (thissemester, all)
+	// combined with a $include_ongoing val of 0
 	$upcoming = $announcements;
 }
 
