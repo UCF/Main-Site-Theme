@@ -10,6 +10,11 @@ if (isset($_GET['keyword']) && $_GET['keyword'] !== '') {
 if (isset($_GET['time']) && $_GET['time'] !== 'thisweek') {
 	$timeval = $_GET['time'];
 }
+
+$include_ongoing = 1;
+if (isset($_GET['include_ongoing'])) {
+	$include_ongoing = (int)$_GET['include_ongoing'];
+}
  
 $error = ''; 
 
@@ -46,18 +51,111 @@ else {
 	$announcements = get_announcements();
 }
 
+
+// We want to compare each announcement start date and end
+// date with some date in the past and some date in the future, 
+// respectively, to see if the announcement's time span
+// continues before and after those past and future dates.
+// If both of these requirements are met, the announcement
+// is deemed 'ongoing'.
+//
+// Determine what we need to compare each announcement start/
+// end date against:
+$start_date_comparison 	= '';
+$end_date_comparison	= '';
+if ($timeval) {
+	switch ($timeval) {
+		case 'nextweek':
+			// Compare to this Monday and next Sunday
+			$start_date_comparison 	= date('Ymd', strtotime('next monday'));
+			$end_date_comparison	= date('Ymd', strtotime('next sunday')); 
+			break;
+		case 'thismonth':
+			// Compare to last day of last month and first day
+			// of next month
+			$start_date_comparison 	= date('Ymd', strtotime('last day last month'));
+			$end_date_comparison	= date('Ymd', strtotime('first day next month'));
+			break;
+		case 'nextmonth':
+			// Compare to last day of this month and first day
+			// of two months from now
+			$start_date_comparison	= date('Ymd', strtotime('last day this month'));
+			$end_date_comparison	= date('Ymd', strtotime('first day of +2 months'));
+			break;
+		case 'thissemester':
+		case 'all':
+			// Don't compare anything; assume all are 'upcoming'
+			break;
+		default: // 'thisweek'
+			// Compare to last Monday and this Sunday
+			$start_date_comparison	= date('Ymd', strtotime('this monday'));
+			$end_date_comparison	= date('Ymd', strtotime('this sunday'));
+			break;
+	}
+}
+else { // assume default 'thisweek'
+	$start_date_comparison	= date('Ymd', strtotime('this monday'));
+	$end_date_comparison	= date('Ymd', strtotime('this sunday'));						
+}
+
+$ongoing 		= array();	
+$upcoming	 	= array(); // everything that is not 'ongoing'
+
+// Make sure we need to compare start/end dates
+if ($start_date_comparison && $end_date_comparison) {
+	foreach ($announcements as $announcement) {
+		// If the post start date is before the start date comparison AND continues 
+		// through the end date comparison, add it to the ongoing array and remove
+		// from the main array of announcement results (it is 'ongoing').
+		// This allows an announcement to be 'upcoming' as it approaches its start
+		// and end date.
+		if ( 
+			(date('Ymd', strtotime($announcement['startDate'])) < $start_date_comparison) && 
+			(date('Ymd', strtotime($announcement['endDate'])) 	> $end_date_comparison)
+		) {
+			$ongoing[$announcement['id']] = $announcement;
+			//unset($announcements[$announcement['id']]);
+		}
+		else {
+			$upcoming[$announcement['id']] = $announcement;
+		}
+	}
+}
+else {
+	// Make sure that we have a fallback for $timevals that don't separate
+	// ongoing/upcoming announcements combined with a $include_ongoing
+	// val of 0
+	$upcoming = $announcements;
+}
+
+
 // Set up feed output based on GET params:
 if ( isset($_GET['output']) ) {
-	switch ($_GET['output']) {
-		case 'json':
-			header('Content-Type: application/json');
-			print json_encode($announcements);
-			break;
-		case 'rss':		
-			announcements_to_rss($announcements);
-			break;
-		default:
-			break;
+	if ($include_ongoing == 1) {
+		switch ($_GET['output']) {
+			case 'json':
+				header('Content-Type: application/json');
+				print json_encode($announcements);
+				break;
+			case 'rss':		
+				announcements_to_rss($announcements);
+				break;
+			default:
+				break;
+		}
+	}
+	else {
+		switch ($_GET['output']) {
+			case 'json':
+				header('Content-Type: application/json');
+				print json_encode($upcoming);
+				break;
+			case 'rss':		
+				announcements_to_rss($upcoming);
+				break;
+			default:
+				break;
+		}
 	}
 }
 else {
@@ -134,74 +232,11 @@ else {
 					if ($announcements == NULL) { 
 						print 'No announcements found.'; 
 					} else { 
-						$start_date_comparison 	= '';
-						$end_date_comparison	= '';
-						// We want to compare each announcement start date and end
-						// date with some date in the past and some date in the future, 
-						// respectively, to see if the announcement's time span
-						// continues before and after those past and future dates.
-						// If both of these requirements are met, the announcement
-						// is deemed 'ongoing'.
-						//
-						// Determine what we need to compare each announcement start/
-						// end date against:
-						if ($timeval) {
-							switch ($timeval) {
-								case 'nextweek':
-									// Compare to this Monday and next Sunday
-									$start_date_comparison 	= date('Ymd', strtotime('next monday'));
-									$end_date_comparison	= date('Ymd', strtotime('next sunday')); 
-									break;
-								case 'thismonth':
-									// Compare to last day of last month and first day
-									// of next month
-									$start_date_comparison 	= date('Ymd', strtotime('last day last month'));
-									$end_date_comparison	= date('Ymd', strtotime('first day next month'));
-									break;
-								case 'nextmonth':
-									// Compare to last day of this month and first day
-									// of two months from now
-									$start_date_comparison	= date('Ymd', strtotime('last day this month'));
-									$end_date_comparison	= date('Ymd', strtotime('first day of +2 months'));
-									break;
-								case 'thissemester':
-								case 'all':
-									// Don't compare anything; assume all are 'upcoming'
-									break;
-								default: // 'thisweek'
-									// Compare to last Monday and this Sunday
-									$start_date_comparison	= date('Ymd', strtotime('this monday'));
-									$end_date_comparison	= date('Ymd', strtotime('this sunday'));
-									break;
-							}
-						}
-						else { // assume default 'thisweek'
-							$start_date_comparison	= date('Ymd', strtotime('this monday'));
-							$end_date_comparison	= date('Ymd', strtotime('this sunday'));						
-						}
 						
-						$ongoing = array();	
-						foreach ($announcements as $announcement) {
-							// Make sure we need to compare start/end dates
-							if ($start_date_comparison && $end_date_comparison) {
-								// If the post start date is before the start date comparison AND continues 
-								// through the end date comparison, add it to the ongoing array and remove
-								// from the main array of announcement results (it is 'ongoing').
-								// This allows an announcement to be 'upcoming' as it approaches its start
-								// and end date.
-								if ( 
-									(date('Ymd', strtotime($announcement['startDate'])) < $start_date_comparison) && 
-									(date('Ymd', strtotime($announcement['endDate'])) 	> $end_date_comparison)
-								) {
-									$ongoing[$announcement['id']] = $announcement;
-									unset($announcements[$announcement['id']]);
-								}
-							}
-						} // endforeach
 						
 						// Output upcoming and ongoing events separately
-						if (!empty($announcements)) { 
-							print_announcements($announcements);
+						if (!empty($upcoming)) { 
+							print_announcements($upcoming);
 						}
 						if (!empty($ongoing)) { ?>
 							<h2 id="ongoing-header">Ongoing Announcements</h2>
