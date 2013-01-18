@@ -337,7 +337,7 @@ function get_weather_data()
 		$opts = Array('http' => Array(	'method'=>"GET",
 										'header'=>"Accept-language: en\r\n" .
 										"Cookie: P1=01||,USFL0372|1||WESH|||||||;\r\n",
-										'timeout' => 1
+										'timeout' => 8
 									)
 					);
 		
@@ -358,12 +358,12 @@ function get_weather_data()
 			
 			# Catch missing condition
 			if (!is_string($weather['condition']) or !$weather['condition']){
-				$weather['condition'] = 'fair';
+				$weather['condition'] = 'Fair';
 			}
 			
 			# Catch missing temp
 			if (!isset($weather['temp']) or !$weather['temp']){
-				$weather['temp'] = '80';
+				$weather['temp'] = '80&#186;';
 			}
 		} catch (Exception $e) {
 			# pass
@@ -373,7 +373,6 @@ function get_weather_data()
 		
 		return $weather;
 	}
-	
 }
 
 
