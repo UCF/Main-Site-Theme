@@ -699,78 +699,99 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
  * Prints a set of announcements, given an announcements array
  * returned from get_announcements().
  **/
-function print_announcements($announcements) {
-	print '<div class="row">';
-	$count = 0;
-	foreach ($announcements as $announcement) {
-		if ($count % 3 == 0 && $count !== 0) { // 3 announcements per row
-			print '</div><div class="row">';
-		}
-		ob_start();
-		?>
-		<div class="span4" id="announcement_<?=$announcement['id']?>">
-			<div class="announcement_wrap">
-				<div class="thumbtack"></div>
-				<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
-				<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
-				<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
-				<p><?=truncateHtml(strip_tags($announcement['content'], 200))?></p>
-				<p class="audience"><strong>Audience:</strong> 
-				<?php 
-					if ($announcement['roles']) {
-						$rolelist = '';
-						foreach ($announcement['roles'] as $role) {
-							switch ($role) {
-								case 'Alumni':
-									$link = '?role=alumni';
-									break;
-								case 'Faculty':
-									$link = '?role=faculty';
-									break;
-								case 'Prospective Students':
-									$link = '?role=prospective-students';
-									break;
-								case 'Public':
-									$link = '?role=public';
-									break;
-								case 'Staff':
-									$link = '?role=staff';
-									break;
-								case 'Students':
-									$link = '?role=students';
-									break;
-								default:
-									$link = '';
-									break;
+function print_announcements($announcements, $liststyle='thumbtacks', $spantype='span4', $perrow=3) {
+	switch ($liststyle) {
+		case 'list':
+			print '<ul class="announcement_list unstyled">';
+			// Simple list of announcements; no descriptions.
+			// $spantype and $perrow are not used here.
+			foreach ($announcements as $announcement) {
+				ob_start(); ?>
+				<li><h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3></li>
+			<?php
+				print ob_get_clean();
+			}
+			print '</ul>';
+			break;	
+				
+		case 'thumbtacks':
+			// Grid of thumbtack-styled announcements
+			print '<div class="row">';
+			$count = 0;
+			foreach ($announcements as $announcement) {
+				if ($count % $perrow == 0 && $count !== 0) {
+					print '</div><div class="row">';
+				}
+				ob_start();
+				?>
+				<div class="<?=$spantype?>" id="announcement_<?=$announcement['id']?>">
+					<div class="announcement_wrap">
+						<div class="thumbtack"></div>
+						<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
+						<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
+						<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
+						<p><?=truncateHtml(strip_tags($announcement['content'], 200))?></p>
+						<p class="audience"><strong>Audience:</strong> 
+						<?php 
+							if ($announcement['roles']) {
+								$rolelist = '';
+								foreach ($announcement['roles'] as $role) {
+									switch ($role) {
+										case 'Alumni':
+											$link = '?role=alumni';
+											break;
+										case 'Faculty':
+											$link = '?role=faculty';
+											break;
+										case 'Prospective Students':
+											$link = '?role=prospective-students';
+											break;
+										case 'Public':
+											$link = '?role=public';
+											break;
+										case 'Staff':
+											$link = '?role=staff';
+											break;
+										case 'Students':
+											$link = '?role=students';
+											break;
+										default:
+											$link = '';
+											break;
+									}
+									$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
+								}
+								print substr($rolelist, 0, -2);
 							}
-							$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
-						}
-						print substr($rolelist, 0, -2);
-					}
-					else { print 'n/a'; }
-				?>
-				</p>
-				<p class="keywords"><strong>Keywords:</strong> 
-				<?php 
-					if ($announcement['keywords']) {
-						$keywordlist = '';
-						foreach ($announcement['keywords'] as $keyword) {
-							$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
-						}
-						print substr($keywordlist, 0, -2);
-					}
-					else { print 'n/a'; }
-				?>
-				</p>
-								
-									
-			</div>
-		</div>	
-	<?php
-		print ob_get_clean();
-		$count++;
-	} // endforeach
-	print '</div>';
+							else { print 'n/a'; }
+						?>
+						</p>
+						<p class="keywords"><strong>Keywords:</strong> 
+						<?php 
+							if ($announcement['keywords']) {
+								$keywordlist = '';
+								foreach ($announcement['keywords'] as $keyword) {
+									$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
+								}
+								print substr($keywordlist, 0, -2);
+							}
+							else { print 'n/a'; }
+						?>
+						</p>
+										
+											
+					</div>
+				</div>	
+			<?php
+				print ob_get_clean();
+				$count++;
+			} // endforeach
+			print '</div>';
+			break;
+			
+		default:
+			break;
+	}
 }
 
 

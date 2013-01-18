@@ -231,14 +231,45 @@ else {
 						print 'No announcements found.'; 
 					} else { 
 						// Output upcoming and ongoing events separately
+					?>
+					<div class="row">
+					<?php
 						if (!empty($upcoming)) { 
-							print_announcements($upcoming);
+							if (!empty($ongoing)) {
+								print '<div class="span8" id="upcoming-twocol">';
+								print_announcements($upcoming, 'thumbtacks', 'span4', 2);
+								print '</div>';
+							}
+							// Don't show sidebar when no upcoming announcements exist
+							else {
+								print '<div class="span12" id="upcoming-body">';
+								print_announcements($upcoming);
+								print '</div>';
+							}
+						} 
+						else {
+							print '<div class="span12" id="upcoming-body">';
+							print '<p>No upcoming announcements found.</p>';
+							print '</div>';
 						}
-						if (!empty($ongoing)) { ?>
-							<h2 id="ongoing-header">Ongoing Announcements</h2>
-							<?php	
-							print_announcements($ongoing);
-						}
+						
+						if (!empty($ongoing)) {
+							if (!empty($upcoming)) {
+								print '<div class="span3 offset1" id="ongoing-twocol">';
+								print '<h2 id="ongoing-header">Ongoing Announcements</h2>';
+								print_announcements($ongoing, 'list');
+								print '</div>';
+							}
+							// When there are only ongoing announcements, have them fill the page
+							else {
+								print '<div class="span12" id="ongoing-body">';
+								print '<h2 id="ongoing-header">Ongoing Announcements</h2>';
+								print_announcements($ongoing, 'list');
+								print '</div>';
+							}
+						} ?>
+					</div>
+					<?php
 					}
 				?>
 				

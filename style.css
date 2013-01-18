@@ -585,6 +585,12 @@ h2#ongoing-header { font-family: 'HelveticaNeue', Helvetica, sans-serif; font-we
 .announcement_wrap .date, .announcement_wrap .audience, .announcement_wrap .keywords { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important; }
 .announcement_wrap .audience, .announcement_wrap .keywords { margin-bottom: 0 !important; }
 
+#ongoing-twocol { margin-left: 80px; border-left: 1px dotted #333; padding-left: 19px; }
+#ongoing-twocol #ongoing-header { font-size: 12px; line-height: 16px; text-transform: uppercase; font-weight: bold; font-family: Georgia, serif; }
+.announcement_list { }
+.announcement_list li { margin-bottom: 12px; }
+.announcement_list li h3 { font-size: 13px; line-height: 18px; font-family: Helvetica, sans-serif; font-weight: normal; }
+
 
 /* Single Announcements */
 #announcement_meta { margin-bottom: 15px; }
