@@ -488,8 +488,16 @@ Generic.PostTypeSearch = function($) {
 					// Copy the associated elements
 					$.each(matches, function(match_index, post_id) {
 
-						var element     = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)'),
-							post_id_int = parseInt(post_id, 10);
+						// If we're only displaying an alphabetical list, be sure to use its
+						// elements instead of by_term's elements
+						if (by_term.css('display','none')) {
+							var element = by_alpha.find('li[data-post-id="' + post_id + '"]:eq(0)');
+						}
+						else {
+							var element = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)');
+						}
+						
+						var post_id_int = parseInt(post_id, 10);
 						post_id_sum += post_id_int;
 						if(element.length == 1) {
 							elements.push(element.clone());
@@ -505,7 +513,7 @@ Generic.PostTypeSearch = function($) {
 							results.empty();
 							prev_post_id_sum = post_id_sum;
 							
-
+							
 							// Slice the elements into their respective columns
 							elements_per_column = Math.ceil(elements.length / column_count);
 							for(var i = 0; i < column_count; i++) {
