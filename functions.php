@@ -1073,4 +1073,20 @@ function administrator_unfiltered_html() {
 	$admin->add_cap('unfiltered_html'); 	
 }
 add_action('switch_theme', 'administrator_unfiltered_html');
+
+
+/**
+ * Prevent Wordpress from trying to redirect to a "loose match" post when
+ * an invalid URL is requested.  WordPress will redirect to 404.php instead.
+ *
+ * See http://wordpress.stackexchange.com/questions/3326/301-redirect-instead-of-404-when-url-is-a-prefix-of-a-post-or-page-name
+ **/ 
+function no_redirect_on_404($redirect_url) {
+    if (is_404()) {
+        return false;
+    }
+    return $redirect_url;
+}
+add_filter('redirect_canonical', 'no_redirect_on_404');
+
 ?>
