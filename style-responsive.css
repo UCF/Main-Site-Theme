@@ -78,8 +78,9 @@
 	#home_rightcol { padding-left: 19px; }
 	.col_padwrap { margin: 0 20px; }
 	
+	.home_spotlight_single { line-height: 18px; }
 	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
-	.home_spotlight_title { line-height: 14px; }
+	
 	
 	.page-content #page_title #wb_status_txt { font-size: 12px; }
 	
