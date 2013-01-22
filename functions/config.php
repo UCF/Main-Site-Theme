@@ -14,7 +14,7 @@ function __init__(){
 	add_image_size('homepage', 620);
 	add_image_size('homepage-secondary', 540);
 	add_image_size('centerpiece-image', 940, 338, true); 	// Crops!
-	add_image_size('home-thumb', 110, 110, true);			// Crops!
+	add_image_size('home-thumb', 115, 115);
 	add_image_size('subpage-subimg', 160);
 	add_image_size('subpage-studentimg', 115, 280);
 	register_nav_menu('header-menu', __('Header Menu'));
