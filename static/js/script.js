@@ -262,14 +262,6 @@ fixSubheaderHeight = function($) {
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
 		
-		if ($('body').hasClass('ie7') == false) {
-			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
-			$('#azIndexList').scrollspy();
-		}
-		else { // Disable affixing/scrollspy in IE7
-			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
-		}
-		
 		// Post type search customizations
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
@@ -287,6 +279,15 @@ azIndex = function($) {
 				.parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
 				.children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
+		
+		// Activate Scrollspy
+		if ($('body').hasClass('ie7') == false) {
+			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
+			$('#azIndexList').scrollspy();
+		}
+		else { // Disable affixing/scrollspy in IE7
+			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
+		}
 		
 		// Force 'A' as the active starting letter, since it likes to
 		// default to 'Z' for whatever reason
