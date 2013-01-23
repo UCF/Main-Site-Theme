@@ -388,7 +388,7 @@ a.home_spotlight_readmore {
 }
 
 .sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
-.sidebar_nav li { padding-bottom: 6px; }
+.sidebar_nav li { padding-bottom: 8px; line-height: 17px; }
 .sidebar_nav li a { color: #333; }
 .sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
 
