@@ -322,34 +322,137 @@ function frontpage_spotlights() {
  * Pulls, parses and caches the weather.
  *
  * @return array
- * @author Chris Conover
+ * @author Chris Conover, Jo Greybill
  **/
-function get_weather_data()
-{
+function get_weather_data() {
 	$cache_key = 'weather';
 	
+	// Check if cached weather data already exists
 	if(($weather = get_transient($cache_key)) !== False) {
 		return $weather;
 	} else {
-		$weather = Array('condition' => 'Fair', 'temp' => '80&#186;', 'img' => '34');
+		$weather = array('condition' => 'Fair', 'temp' => '80&#186;', 'img' => '34');
 		
-		// Cookies are needed for the service to work properly
-		$opts = Array('http' => Array(	'method'=>"GET",
-										'header'=>"Accept-language: en\r\n" .
-										"Cookie: P1=01||,USFL0372|1||WESH|||||||;\r\n",
-										'timeout' => 8
-									)
-					);
-		
+		// Set a timeout
+		$opts = array('http' => array(
+								'method'  => 'GET',
+								'timeout' => 8
+		));
 		$context = stream_context_create($opts);
 		
-		try {
-			$raw_weather = file_get_contents(WEATHER_URL, false, $context);
-			$json_weather = json_decode(str_replace("\'", "'", $raw_weather));
-
-			@$weather['condition']	= $json_weather->weather->conditions->text;
-			@$weather['temp']		= substr($json_weather->weather->conditions->temp, 0, strlen($json_weather->weather->conditions->temp) - 1);
-			@$weather['img']		= $json_weather->weather->conditions->cid;
+		// Grab the weather feed
+		$raw_weather = file_get_contents(WEATHER_URL, false, $context);
+		if ($raw_weather) {
+			$xml = simplexml_load_string($raw_weather);
+			
+			$weather['condition'] 	= (string)$xml->weather;
+			$weather['temp']		= number_format((string)$xml->temp_f).'&#186;'; // strip decimal place
+			$weather['img']			= (string)$xml->icon_url_name;
+			
+			// Convert NOAA's weather icon names to standard weather codes
+			// See http://w1.weather.gov/xml/current_obs/weather.php
+			list($weather_img_name, $ext) = explode('.', $weather['img']);
+			switch ($weather_img_name) {
+				case 'bkn':
+					$weather_code = '28'; // Mostly Cloudy
+					break;
+				case 'nbkn':
+					$weather_code = '27'; // Mostly Cloudy (night)
+					break;
+				case 'skc':
+					$weather_code = '32'; // Fair, Clear
+					break;
+				case 'nskc':
+					$weather_code = '31'; // Fair, Clear (night)
+					break;
+				case 'few':
+					$weather_code = '34'; // Few Clouds
+					break;
+				case 'nfew':
+					$weather_code = '29'; // Few Clouds (night)
+					break;
+				case 'sct':
+					$weather_code = '30'; // Partly Cloudy
+					break;
+				case 'nsct':
+					$weather_code = '27'; // Partly Cloudy (night)
+					break;
+				case 'ovc':
+				case 'novc':
+					$weather_code = '26'; // Overcast (day, night)
+					break;
+				case 'fg':
+				case 'nfg':
+					$weather_code = '20'; // Foggy
+					break;
+				case 'smoke':
+					$weather_code = '22'; // Smoke
+					break;
+				case 'fzra':
+					$weather_code = '8';  // Freezing drizzle
+					break;
+				case 'ip':
+					$weather_code = '18'; // Hail
+					break;
+				case 'mix':
+				case 'nmix':
+					$weather_code = '7';  // Mixed snow and sleet (day, night)
+					break;	
+				case 'raip':
+					$weather_code = '35'; // Mixed rain and hail
+					break;	
+				case 'rasn':
+				case 'nrasn':
+					$weather_code = '6';  // Mixed rain and sleet
+					break;	
+				case 'shra':
+					$weather_code = '11'; // Light Showers
+					break;
+				case 'tsra':
+					$weather_code = '3';  // Severe Thunderstorms
+					break;	
+				case 'ntrsa':
+				case 'hi_ntrsa':
+					$weather_code = '47'; // Thunderstorms, Thunderstorm in vicinity (night)
+					break;
+				case 'sn':
+					$weather_code = '16'; // Snow
+					break;	
+				case 'nsn':
+					$weather_code = '46'; // Snow (night)
+					break;
+				case 'wind':
+				case 'nwind':
+				case 'nsvrtsra':
+					$weather_code = '23'; // Windy (and funnel spout/tornado)
+					break;
+				case 'hi_shwrs':
+					$weather_code = '40'; // Showers in Vicinity
+					break;
+				case 'hi_nshwrs':
+				case 'nra':
+					$weather_code = '45'; // Showers, Showers in Vicinity (night)
+					break;
+				case 'fzrara':
+					$weather_code = '10'; // Freezing Rain
+					break;	
+				case 'hi_tsra':
+					$weather_code = '38'; // Thunderstorm in vicinity (day)
+					break;	
+				case 'ra1':
+					$weather_code = '9';  // Drizzle 
+					break;
+				case 'ra':
+					$weather_code = '12'; // Showers 
+					break;	
+				case 'dust':
+					$weather_code = '19'; // Dust
+					break;
+				case 'mist':
+					$weather_code = '21'; // Haze
+					break;					
+			}
+			$weather['img'] = $weather_code;
 			
 			# Catch missing cid
 			if (!isset($weather['img']) or !intval($weather['img'])){
@@ -365,10 +468,9 @@ function get_weather_data()
 			if (!isset($weather['temp']) or !$weather['temp']){
 				$weather['temp'] = '80&#186;';
 			}
-		} catch (Exception $e) {
-			# pass
 		}
-
+		
+		// Cache the new weather data
 		set_transient($cache_key, $weather, WEATHER_CACHE_DURATION);
 		
 		return $weather;
