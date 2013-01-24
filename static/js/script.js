@@ -631,7 +631,7 @@ var statusAlertCheck = function($) {
 				// Remove 'more info at...' from description
 				newest.description = newest.description.replace('More info at www.ucf.edu','');
 				
-				// Remove alerts that no longer appear in the feed
+				// Remove old alerts that no longer appear in the feed
 				if( (visible_alert == null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
 					$('.status-alert[id!=status-alert-template]').remove();
 				}
@@ -669,6 +669,13 @@ var statusAlertCheck = function($) {
 							;
 						$('#header_wrap').before(alert_markup);
 					}
+				}
+			}
+			else {
+				// If the feed is empty (all-clear), hide the currently visible
+				// alert, if it exists
+				if ($('.status-alert').length > 0) {
+					$('.status-alert').remove();
 				}
 			}
 			
