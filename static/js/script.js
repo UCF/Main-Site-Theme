@@ -674,8 +674,8 @@ var statusAlertCheck = function($) {
 			else {
 				// If the feed is empty (all-clear), hide the currently visible
 				// alert, if it exists
-				if ($('.status-alert').length > 0) {
-					$('.status-alert').remove();
+				if ($('.status-alert[id!=status-alert-template]').length > 0) {
+					$('.status-alert[id!=status-alert-template]').remove();
 				}
 			}
 			
