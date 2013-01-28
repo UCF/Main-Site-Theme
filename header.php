@@ -30,7 +30,11 @@
 				&& ($stylesheet_url = wp_get_attachment_url($stylesheet_id)) !== False) { ?>
 				<link rel='stylesheet' href="<?=$stylesheet_url?>" type='text/css' media='all' />
 		<? } ?>
-
+		
+		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
+			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>
+		<?php } ?>
+		
 		<script type="text/javascript">
 			var PostTypeSearchDataManager = {
 				'searches' : [],
