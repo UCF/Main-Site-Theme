@@ -173,9 +173,13 @@ WebcomAdmin.centerpieceAdmin = function($){
 		
 		var slide_count_widget 	 = $('#slider-slides-settings-count');
 		
-		// Hide Preview Changes button
-		// this is a temporary fix for an issue where previewing changes on a centerpiece deletes its uploaded media
-		//$('#minor-publishing-actions').hide();
+		// Admin panel adjustments for Centerpiece previews
+		// Autosaving Centerpieces kills serialized data (which we use for slide images/
+		// video thumbnails), so autosaving is disabled for this post type.
+		// This adds a helpful message for users to avoid confusion.
+		if ($('#post-status-display').text().indexOf('Published') < 1) {
+			$('#save-action').prepend('<p style="text-align:left;"><strong>NOTE:</strong> To preview an unpublished Centerpiece before publishing it, make sure to save any changes as a Draft, <em>then</em> click "Preview".</p>');
+		}
 		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
 		var displaySlideOptions = function() {/*
@@ -358,17 +362,21 @@ WebcomAdmin.centerpieceAdmin = function($){
 		});
 	}
 	
-	
+};
+
+
+WebcomAdmin.subheaderAdmin = function($) {
 	// Subheader character count message:
 	if ($('#spotlight_metabox').length > 0) {
 		$('<tr><td colspan="2" style="padding: 2px 10px;"><strong>Note: Max character count for Spotlights is 200. Going over this character limit will cause the subheader content to be cut short.</strong></td></tr>').appendTo('#post-status-info tbody');
 	}
-	
-};
+}
+
 
 (function($){
 	WebcomAdmin.__init__($);
 	WebcomAdmin.themeOptions($);
 	WebcomAdmin.shortcodeTool($);
 	WebcomAdmin.centerpieceAdmin($);
+	WebcomAdmin.subheaderAdmin($);
 })(jQuery);
