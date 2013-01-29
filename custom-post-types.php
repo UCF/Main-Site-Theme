@@ -1298,7 +1298,8 @@ class Slider extends CustomPostType {
 									<tr>
 										<th><label for="ss_slide_links_to[<?=$s?>]">Slide Links To</label></th>
 										<td>
-											<input type="text" name="ss_slide_links_to[<?=$s?>]" id="ss_slide_links_to[<?=$s?>]" value="<?php ($slide_links_to[$s] !== '') ? print $slide_links_to[$s] : ''; ?>" /><span class="description"> (Optional)</span><br/>
+											<span class="description"> (Optional)</span>
+											<input type="text" name="ss_slide_links_to[<?=$s?>]" id="ss_slide_links_to[<?=$s?>]" value="<?php ($slide_links_to[$s] !== '') ? print $slide_links_to[$s] : ''; ?>" />
 										</td>
 									</tr>
 									<tr>
@@ -1380,7 +1381,8 @@ class Slider extends CustomPostType {
 								<tr>
 									<th><label for="ss_slide_links_to[<?=$i?>]">Slide Links To</label></th>
 									<td>
-										<input type="text" name="ss_slide_links_to[<?=$i?>]" id="ss_slide_links_to[<?=$i?>]" value="" /><span class="description"> (Optional)</span><br/>
+										<span class="description"> (Optional)</span>
+										<input type="text" name="ss_slide_links_to[<?=$i?>]" id="ss_slide_links_to[<?=$i?>]" value="" />
 									</td>
 								</tr>
 								<tr>

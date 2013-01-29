@@ -71,3 +71,20 @@ a.repeatable-remove { margin-bottom: 15px !important; margin-left: 10px !importa
 #slider-slides { background: #fff; border-color: #fff !important; }
 #slider-slides .inside { margin: 0; padding: 0; }
 #slider-slides .handlediv, #slider-slides > h3.hndle { display: none;}
+
+
+
+.postbox-container textarea, 
+.postbox-container input[type="text"], 
+.postbox-container input[type="password"], 
+.postbox-container input[type="file"], 
+.postbox-container input[type="email"], 
+.postbox-container input[type="number"], 
+.postbox-container input[type="search"], 
+.postbox-container input[type="tel"],
+.postbox-container input[type="url"], 
+.postbox-container input[type="checkbox"], 
+.postbox-container select { float: left; clear: both; }
+.postbox-container input[type="checkbox"] { margin-right: 5px; }
+
+.postbox-container .description { float: left; }
