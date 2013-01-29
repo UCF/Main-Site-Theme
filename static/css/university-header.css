@@ -139,6 +139,7 @@
 
 select#UCFHBHeaderLinks {
 	height: 18px;
+	line-height: 18px;
 	font-size: 11px;
 	color: #000000;
 	font-family: 'Lucida Grande', sans-serif;

@@ -262,14 +262,6 @@ fixSubheaderHeight = function($) {
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
 		
-		if ($('body').hasClass('ie7') == false) {
-			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
-			$('#azIndexList').scrollspy();
-		}
-		else { // Disable affixing/scrollspy in IE7
-			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
-		}
-		
 		// Post type search customizations
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
@@ -287,6 +279,15 @@ azIndex = function($) {
 				.parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
 				.children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
+		
+		// Activate Scrollspy
+		if ($('body').hasClass('ie7') == false) {
+			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
+			$('#azIndexList').scrollspy();
+		}
+		else { // Disable affixing/scrollspy in IE7
+			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
+		}
 		
 		// Force 'A' as the active starting letter, since it likes to
 		// default to 'Z' for whatever reason
@@ -365,10 +366,15 @@ toggleAnnouncementFilters = function($) {
 }
 
 
-/* IE 7-8 fix for rounded corners on spotlight, news thumbnails */
+/* IE 7-9 fix for rounded corners on spotlight, news thumbnails */
 ieRoundedCornerThumbs = function($) {
+	var corners = $('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>');
 	if ( $('body').hasClass('ie7') || $('body').hasClass('ie8') ) {
-		$('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>').appendTo('.spotlight_thumb, .news-thumb');
+		corners.appendTo('.spotlight_thumb, .news-thumb');
+	}
+	// IE9 border-radius combined with filter attribute don't play nicely together
+	if ( $('body').hasClass('ie9') ) {
+		corners.appendTo('.news-thumb');
 	}
 }
 
@@ -488,8 +494,16 @@ Generic.PostTypeSearch = function($) {
 					// Copy the associated elements
 					$.each(matches, function(match_index, post_id) {
 
-						var element     = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)'),
-							post_id_int = parseInt(post_id, 10);
+						// If we're only displaying an alphabetical list, be sure to use its
+						// elements instead of by_term's elements
+						if (by_term.css('display','none')) {
+							var element = by_alpha.find('li[data-post-id="' + post_id + '"]:eq(0)');
+						}
+						else {
+							var element = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)');
+						}
+						
+						var post_id_int = parseInt(post_id, 10);
 						post_id_sum += post_id_int;
 						if(element.length == 1) {
 							elements.push(element.clone());
@@ -505,7 +519,7 @@ Generic.PostTypeSearch = function($) {
 							results.empty();
 							prev_post_id_sum = post_id_sum;
 							
-
+							
 							// Slice the elements into their respective columns
 							elements_per_column = Math.ceil(elements.length / column_count);
 							for(var i = 0; i < column_count; i++) {

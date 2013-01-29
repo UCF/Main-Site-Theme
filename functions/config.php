@@ -14,7 +14,7 @@ function __init__(){
 	add_image_size('homepage', 620);
 	add_image_size('homepage-secondary', 540);
 	add_image_size('centerpiece-image', 940, 338, true); 	// Crops!
-	add_image_size('home-thumb', 110, 110, true);			// Crops!
+	add_image_size('home-thumb', 110, 110);	
 	add_image_size('subpage-subimg', 160);
 	add_image_size('subpage-studentimg', 115, 280);
 	register_nav_menu('header-menu', __('Header Menu'));
@@ -66,8 +66,7 @@ define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('ESI_INCLUDE_URL', THEME_STATIC_URL.'/esi.php');
 
 # Weather
-//define('WEATHER_URL', 'http://local.msn.com/weather.aspx?q=Orlando-FL&zip=32803');
-define('WEATHER_URL', 'http://www.msnbc.msn.com/databox/data.aspx?dbid=23301549');
+define('WEATHER_URL', 'http://w1.weather.gov/xml/current_obs/KORL.xml');
 define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');
 define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
 

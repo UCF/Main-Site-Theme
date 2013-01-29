@@ -65,7 +65,7 @@ body.login #login h1 a .hide{display: block;}
 li.custom_repeatable h3.hndle { margin-bottom: 16px !important; }
 li.custom_repeatable table { margin-top: -16px; }
 li.custom_repeatable.closed table { display: none; }
-a.repeatable-remove { margin: 0 0 15px 10px; }
+a.repeatable-remove { margin-bottom: 15px !important; margin-left: 10px !important; }
 #ss_slides_all { margin-left: 0; padding-left: 0; }
 #ss_slides_all .custom_repeatable { padding-bottom: 15px; margin: 0 0 15px 0; }
 #slider-slides { background: #fff; border-color: #fff !important; }

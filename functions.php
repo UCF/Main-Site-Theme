@@ -79,13 +79,17 @@ function manage_announcement_columns( $column, $post_id ) {
 	global $post;
 	switch ( $column ) {
 		case 'start_date':
-			print date('Y/m/d', strtotime(get_post_meta( $post->ID, 'announcement_start_date', true )));
+			$start_date = get_post_meta($post->ID, 'announcement_start_date', TRUE) ? date('Y/m/d', strtotime(get_post_meta($post->ID, 'announcement_start_date', TRUE))) : '<span style="font-weight:bold;color:#cc0000;">N/A</span>';
+			print $start_date;
 			break;
 		case 'end_date':
-			print date('Y/m/d', strtotime(get_post_meta( $post->ID, 'announcement_end_date', true )));
+			$end_date = get_post_meta($post->ID, 'announcement_end_date', TRUE) ? date('Y/m/d', strtotime(get_post_meta($post->ID, 'announcement_end_date', TRUE))) : '<span style="font-weight:bold;color:#cc0000;">N/A</span>';
+			print $end_date;
 			break;
 		case 'publish_date':
-			print get_post_time('Y/m/d', true, $post->ID);
+			if ($post->post_status == 'publish') {
+				print get_post_time('Y/m/d', true, $post->ID);
+			}
 			break;
 		default:
 			break;
@@ -318,34 +322,137 @@ function frontpage_spotlights() {
  * Pulls, parses and caches the weather.
  *
  * @return array
- * @author Chris Conover
+ * @author Chris Conover, Jo Greybill
  **/
-function get_weather_data()
-{
+function get_weather_data() {
 	$cache_key = 'weather';
 	
+	// Check if cached weather data already exists
 	if(($weather = get_transient($cache_key)) !== False) {
 		return $weather;
 	} else {
-		$weather = Array('condition' => 'Fair', 'temp' => '80&#186;', 'img' => '34');
+		$weather = array('condition' => 'Fair', 'temp' => '80&#186;', 'img' => '34');
 		
-		// Cookies are needed for the service to work properly
-		$opts = Array('http' => Array(	'method'=>"GET",
-										'header'=>"Accept-language: en\r\n" .
-										"Cookie: P1=01||,USFL0372|1||WESH|||||||;\r\n",
-										'timeout' => 1
-									)
-					);
-		
+		// Set a timeout
+		$opts = array('http' => array(
+								'method'  => 'GET',
+								'timeout' => 8
+		));
 		$context = stream_context_create($opts);
 		
-		try {
-			$raw_weather = file_get_contents(WEATHER_URL, false, $context);
-			$json_weather = json_decode(str_replace("\'", "'", $raw_weather));
-
-			@$weather['condition']	= $json_weather->weather->conditions->text;
-			@$weather['temp']		= substr($json_weather->weather->conditions->temp, 0, strlen($json_weather->weather->conditions->temp) - 1);
-			@$weather['img']		= $json_weather->weather->conditions->cid;
+		// Grab the weather feed
+		$raw_weather = file_get_contents(WEATHER_URL, false, $context);
+		if ($raw_weather) {
+			$xml = simplexml_load_string($raw_weather);
+			
+			$weather['condition'] 	= (string)$xml->weather;
+			$weather['temp']		= number_format((string)$xml->temp_f).'&#186;'; // strip decimal place
+			$weather['img']			= (string)$xml->icon_url_name;
+			
+			// Convert NOAA's weather icon names to standard weather codes
+			// See http://w1.weather.gov/xml/current_obs/weather.php
+			list($weather_img_name, $ext) = explode('.', $weather['img']);
+			switch ($weather_img_name) {
+				case 'bkn':
+					$weather_code = '28'; // Mostly Cloudy
+					break;
+				case 'nbkn':
+					$weather_code = '27'; // Mostly Cloudy (night)
+					break;
+				case 'skc':
+					$weather_code = '32'; // Fair, Clear
+					break;
+				case 'nskc':
+					$weather_code = '31'; // Fair, Clear (night)
+					break;
+				case 'few':
+					$weather_code = '34'; // Few Clouds
+					break;
+				case 'nfew':
+					$weather_code = '29'; // Few Clouds (night)
+					break;
+				case 'sct':
+					$weather_code = '30'; // Partly Cloudy
+					break;
+				case 'nsct':
+					$weather_code = '27'; // Partly Cloudy (night)
+					break;
+				case 'ovc':
+				case 'novc':
+					$weather_code = '26'; // Overcast (day, night)
+					break;
+				case 'fg':
+				case 'nfg':
+					$weather_code = '20'; // Foggy
+					break;
+				case 'smoke':
+					$weather_code = '22'; // Smoke
+					break;
+				case 'fzra':
+					$weather_code = '8';  // Freezing drizzle
+					break;
+				case 'ip':
+					$weather_code = '18'; // Hail
+					break;
+				case 'mix':
+				case 'nmix':
+					$weather_code = '7';  // Mixed snow and sleet (day, night)
+					break;	
+				case 'raip':
+					$weather_code = '35'; // Mixed rain and hail
+					break;	
+				case 'rasn':
+				case 'nrasn':
+					$weather_code = '6';  // Mixed rain and sleet
+					break;	
+				case 'shra':
+					$weather_code = '11'; // Light Showers
+					break;
+				case 'tsra':
+					$weather_code = '3';  // Severe Thunderstorms
+					break;	
+				case 'ntrsa':
+				case 'hi_ntrsa':
+					$weather_code = '47'; // Thunderstorms, Thunderstorm in vicinity (night)
+					break;
+				case 'sn':
+					$weather_code = '16'; // Snow
+					break;	
+				case 'nsn':
+					$weather_code = '46'; // Snow (night)
+					break;
+				case 'wind':
+				case 'nwind':
+				case 'nsvrtsra':
+					$weather_code = '23'; // Windy (and funnel spout/tornado)
+					break;
+				case 'hi_shwrs':
+					$weather_code = '40'; // Showers in Vicinity
+					break;
+				case 'hi_nshwrs':
+				case 'nra':
+					$weather_code = '45'; // Showers, Showers in Vicinity (night)
+					break;
+				case 'fzrara':
+					$weather_code = '10'; // Freezing Rain
+					break;	
+				case 'hi_tsra':
+					$weather_code = '38'; // Thunderstorm in vicinity (day)
+					break;	
+				case 'ra1':
+					$weather_code = '9';  // Drizzle 
+					break;
+				case 'ra':
+					$weather_code = '12'; // Showers 
+					break;	
+				case 'dust':
+					$weather_code = '19'; // Dust
+					break;
+				case 'mist':
+					$weather_code = '21'; // Haze
+					break;					
+			}
+			$weather['img'] = $weather_code;
 			
 			# Catch missing cid
 			if (!isset($weather['img']) or !intval($weather['img'])){
@@ -354,22 +461,20 @@ function get_weather_data()
 			
 			# Catch missing condition
 			if (!is_string($weather['condition']) or !$weather['condition']){
-				$weather['condition'] = 'fair';
+				$weather['condition'] = 'Fair';
 			}
 			
 			# Catch missing temp
 			if (!isset($weather['temp']) or !$weather['temp']){
-				$weather['temp'] = '80';
+				$weather['temp'] = '80&#186;';
 			}
-		} catch (Exception $e) {
-			# pass
 		}
-
+		
+		// Cache the new weather data
 		set_transient($cache_key, $weather, WEATHER_CACHE_DURATION);
 		
 		return $weather;
 	}
-	
 }
 
 
@@ -402,7 +507,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	
 	$thismonday = date('Y-m-d', strtotime('monday this week'));
 	$thissunday = date('Y-m-d', strtotime($thismonday.' + 6 days'));
-	
+		
 	$nextmonday = date('Y-m-d', strtotime('monday next week'));
 	$nextsunday = date('Y-m-d', strtotime($nextmonday.' + 6 days'));
 	
@@ -539,20 +644,11 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				$args = array_merge($args, $time_args);
 				break;
 			case 'thissemester':
-				// Set up a generic timeframe for semester
-				// start/end times; compare the current month
-				// to these dates to pull announcements from
-				// the current semester:
-				$current_month = date('n');
-				$spring_month_start = 1; // Jan
-				$spring_month_end = 5; // May
-				$summer_month_start = 5; // May
-				$summer_month_end = 7; // Jul
-				$fall_month_start = 8; // Aug
-				$fall_month_end = 12; // Dec
+				// Compare the current month to predefined month values
+				// to pull announcements from the current semester
 				
 				// Check for Spring Semester
-				if ($current_month >= $spring_month_start && $current_month <= $spring_month_end) {
+				if ($current_month >= SPRING_MONTH_START && $current_month <= SPRING_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
@@ -570,7 +666,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					$args = array_merge($args, $time_args);
 				}
 				// Check for Summer Semester
-				elseif ($current_month >= $summer_month_start && $current_month <= $summer_month_end) {
+				elseif ($current_month >= SUMMER_MONTH_START && $current_month <= SUMMER_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
@@ -607,7 +703,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				}
 				break;
 			case 'all':
-				$args['numberposts'] = 100;
 				$time_args = array(
 					'meta_query' => array(
 						array(
@@ -643,11 +738,6 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	else { // default retrieval args
 		$fallback_args = array(
 			'meta_query' => array(
-        		array(
-					'key' => 'announcement_start_date',
-					'value' => $thismonday,
-					'compare' => '>='
-				),
 				array(
 					'key' => 'announcement_start_date',
 					'value' => $thissunday,
@@ -676,47 +766,132 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		$allposts = array();
 		$newposts = array();
 		
-		foreach ($announcements as $announcement) {
+		foreach ($announcements as $announcement) {			
 			$allposts[$announcement->ID] = array(
-				'post_id'			=> $announcement->ID,
-				'post_status' 		=> $announcement->post_status,
-				'post_modified' 	=> $announcement->post_modified,
-				'post_published' 	=> $announcement->post_date,
-				'post_title' 		=> $announcement->post_title,
-				'post_name' 		=> $announcement->post_name,
-				'post_permalink'	=> get_permalink($announcement->ID),
-				'post_content' 		=> $announcement->post_content,
-				'start_date'		=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE) ? get_post_meta($announcement->ID, 'announcement_start_date', TRUE) : $announcement->post_date,
-				'end_date' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE) ? get_post_meta($announcement->ID, 'announcement_end_date', TRUE) : date('Y-m-d', strtotime($announcement->post_date.' + 1 day')),
+				'id'				=> $announcement->ID,
+				'postStatus' 		=> $announcement->post_status,
+				'postModified'	 	=> $announcement->post_modified,
+				'published'		 	=> $announcement->post_date,
+				'title'		 		=> $announcement->post_title,
+				'postName'	 		=> $announcement->post_name,
+				'permalink'			=> get_permalink($announcement->ID),
+				'content'	 		=> $announcement->post_content,
+				'startDate'			=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
+				'endDate' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
 				'url' 				=> get_post_meta($announcement->ID, 'announcement_url', TRUE),
-				'contact_person'	=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
+				'contactPerson'		=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
 				'phone'				=> get_post_meta($announcement->ID, 'announcement_phone', TRUE),
 				'email'				=> get_post_meta($announcement->ID, 'announcement_email', TRUE),
-				'posted_by'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
+				'postedBy'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
 				'roles' 			=> wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")),
 				'keywords'			=> wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")),
-				'is_new'			=> ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false,
+				'isNew'				=> ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false,
 			);
 		}
 		
-		// Remove posts that are 'new' from $allposts, add to $newposts and
-		// append $newposts to the top of $allposts
-		foreach ($allposts as $announcement) {
-			if ($announcement['is_new'] == true) {
-				$newposts[$announcement['post_id']] = $announcement;
-				unset($allposts[$announcement['post_id']]);
-			}
-		}
-		
-		if (!empty($allposts)) {
-			$allposts = $newposts + $allposts;
-			$output = $allposts;
-		}
-		else { 
-			$output = $newposts;
-		}
+		$output = $allposts;
 		
 		return $output;	
+	}
+}
+
+
+/**
+ * Prints a set of announcements, given an announcements array
+ * returned from get_announcements().
+ **/
+function print_announcements($announcements, $liststyle='thumbtacks', $spantype='span4', $perrow=3) {
+	switch ($liststyle) {
+		case 'list':
+			print '<ul class="announcement_list unstyled">';
+			// Simple list of announcements; no descriptions.
+			// $spantype and $perrow are not used here.
+			foreach ($announcements as $announcement) {
+				ob_start(); ?>
+				<li><h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3></li>
+			<?php
+				print ob_get_clean();
+			}
+			print '</ul>';
+			break;	
+				
+		case 'thumbtacks':
+			// Grid of thumbtack-styled announcements
+			print '<div class="row">';
+			$count = 0;
+			foreach ($announcements as $announcement) {
+				if ($count % $perrow == 0 && $count !== 0) {
+					print '</div><div class="row">';
+				}
+				ob_start();
+				?>
+				<div class="<?=$spantype?>" id="announcement_<?=$announcement['id']?>">
+					<div class="announcement_wrap">
+						<div class="thumbtack"></div>
+						<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
+						<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
+						<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
+						<p><?=truncateHtml(strip_tags($announcement['content'], 200))?></p>
+						<p class="audience"><strong>Audience:</strong> 
+						<?php 
+							if ($announcement['roles']) {
+								$rolelist = '';
+								foreach ($announcement['roles'] as $role) {
+									switch ($role) {
+										case 'Alumni':
+											$link = '?role=alumni';
+											break;
+										case 'Faculty':
+											$link = '?role=faculty';
+											break;
+										case 'Prospective Students':
+											$link = '?role=prospective-students';
+											break;
+										case 'Public':
+											$link = '?role=public';
+											break;
+										case 'Staff':
+											$link = '?role=staff';
+											break;
+										case 'Students':
+											$link = '?role=students';
+											break;
+										default:
+											$link = '';
+											break;
+									}
+									$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
+								}
+								print substr($rolelist, 0, -2);
+							}
+							else { print 'n/a'; }
+						?>
+						</p>
+						<p class="keywords"><strong>Keywords:</strong> 
+						<?php 
+							if ($announcement['keywords']) {
+								$keywordlist = '';
+								foreach ($announcement['keywords'] as $keyword) {
+									$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
+								}
+								print substr($keywordlist, 0, -2);
+							}
+							else { print 'n/a'; }
+						?>
+						</p>
+										
+											
+					</div>
+				</div>	
+			<?php
+				print ob_get_clean();
+				$count++;
+			} // endforeach
+			print '</div>';
+			break;
+			
+		default:
+			break;
 	}
 }
 
@@ -729,46 +904,61 @@ function announcements_to_rss($announcements) {
 	
 	header('Content-Type: application/rss+xml; charset=ISO-8859-1');
 	print '<?xml version="1.0" encoding="ISO-8859-1"?>';
-	print '<rss version="2.0">';
+	print '<rss version="2.0" xmlns:announcement="'.get_site_url().'/announcements/">';
 	print '<channel>';
 	print '<title>University of Central Florida Announcements</title>';
 	print '<link>http://www.ucf.edu/</link>';
 	print '<language>en-us</language>';
 	print '<copyright>ucf.edu</copyright>';
+	print '<ttl>30</ttl>'; // Time to live (in minutes); force a cache refresh after this time
+	print '<description>Feed for UCF Announcements.</description>';
 			
 	if ($announcements !== NULL) {
 		foreach ($announcements as $announcement) {
-			print '<item id="'.$announcement['id'].'">';
-				print '<title>'.$announcement['post_title'].'</title>';
-				print '<description>'.$announcement['post_content'].'</description>';
-				print '<link>'.$announcement['post_permalink'].'</link>';
-						
-				print '<post_status>'.$announcement['post_status'].'</post_status>';
-				print '<post_modified>'.$announcement['post_modified'].'</post_modified>';
-				print '<post_published>'.$announcement['post_published'].'</post_published>';
-				print '<post_title>'.$announcement['post_title'].'</post_title>';
-				print '<post_name>'.$announcement['post_name'].'</post_name>';
-				print '<post_content>'.$announcement['post_content'].'</post_content>';
-				print '<start_date>'.$announcement['start_date'].'</start_date>';
-				print '<end_date>'.$announcement['end_date'].'</end_date>';
-				print '<url>'.$announcement['url'].'</url>';
-				print '<contact_person>'.$announcement['contact_person'].'</contact_person>';
-				print '<phone>'.$announcement['phone'].'</phone>';
-				print '<email>'.$announcement['email'].'</email>';
-				print '<posted_by>'.$announcement['posted_by'].'</posted_by>';
-				print '<roles>';
+			print '<item>';
+				// Generic RSS story elements
+				print '<title>'.$announcement['title'].'</title>';
+				print '<description><![CDATA['.htmlentities(strip_tags($announcement['content'])).']]></description>';
+				if ($announcement['url']) { print '<link>'.htmlentities($announcement['url']).'</link>'; }
+				print '<guid>'.$announcement['permalink'].'</guid>';
+				print '<pubDate>'.date('r', strtotime($announcement['published'])).'</pubDate>';
+				
+				// Announcement-specific stuff	
+				print '<announcement:id>'.$announcement['id'].'</announcement:id>';	
+				print '<announcement:postStatus>'.$announcement['postStatus'].'</announcement:postStatus>';
+				print '<announcement:postModified>'.$announcement['postModified'].'</announcement:postModified>';
+				print '<announcement:published>'.$announcement['published'].'</announcement:published>'; // same as <pubDate>
+				print '<announcement:permalink>'.$announcement['permalink'].'</announcement:permalink>'; // same as <guid>
+				print '<announcement:postName>'.$announcement['postName'].'</announcement:postName>';
+				print '<announcement:startDate>'.$announcement['startDate'].'</announcement:startDate>';
+				print '<announcement:endDate>'.$announcement['endDate'].'</announcement:endDate>';
+				print '<announcement:url>'.htmlentities($announcement['url']).'</announcement:url>'; // same as <link>
+				print '<announcement:contactPerson>'.htmlentities($announcement['contactPerson']).'</announcement:contactPerson>';
+				print '<announcement:phone>'.$announcement['phone'].'</announcement:phone>';
+				print '<announcement:email>'.htmlentities($announcement['email']).'</announcement:email>'; // need to account for special chars
+				print '<announcement:postedBy>'.htmlentities($announcement['postedBy']).'</announcement:postedBy>';
+				print '<announcement:roles>';
 					foreach ($announcement['roles'] as $role) {
-						print '<role>'.$role.'</role>';
+						$roles .= $role.', '; 
 					}
-				print '</roles>';
-				print '<keywords>';
+					$roles = substr($roles, 0, -2);
+					print $roles;	
+				print '</announcement:roles>';
+				print '<announcement:keywords>';
 					foreach ($announcement['keywords'] as $keyword) {
-						print '<keyword>'.$keyword.'</keyword>';
+						$keywords .= $keyword.', '; 
 					}
-				print '</keywords>';
-				print '<is_new>'.$announcement['is_new'].'</is_new>';
+					$keywords = substr($keywords, 0, -2);
+					print $keywords;	
+				print '</announcement:keywords>';
+				print '<announcement:isNew>';
+					$announcement['isNew'] == true ? print 'true' : print 'false';
+				print '</announcement:isNew>';
 
 			print '</item>';
+			
+			$roles = '';
+			$keywords = '';
 		}
 	}
 	print '</channel></rss>';
@@ -800,7 +990,7 @@ function esi_include($statement) {
 
 
 /** 
- * Pull recent Gravity Forms entries from a given form.
+ * Pull recent Gravity Forms entries from a given form (intended for Feedback form.)
  * If no formid argument is provided, the function will pick the form
  * with ID of 1 by default.
  * Duration is specified in number of days.
@@ -985,5 +1175,20 @@ function administrator_unfiltered_html() {
 	$admin->add_cap('unfiltered_html'); 	
 }
 add_action('switch_theme', 'administrator_unfiltered_html');
+
+
+/**
+ * Prevent Wordpress from trying to redirect to a "loose match" post when
+ * an invalid URL is requested.  WordPress will redirect to 404.php instead.
+ *
+ * See http://wordpress.stackexchange.com/questions/3326/301-redirect-instead-of-404-when-url-is-a-prefix-of-a-post-or-page-name
+ **/ 
+function no_redirect_on_404($redirect_url) {
+    if (is_404()) {
+        return false;
+    }
+    return $redirect_url;
+}
+add_filter('redirect_canonical', 'no_redirect_on_404');
 
 ?>

@@ -80,8 +80,8 @@
 	#home_rightcol { padding-left: 19px; }
 	.col_padwrap { margin: 0 20px; }
 	
+	.home_spotlight_single { line-height: 18px; }
 	.home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
-	.home_spotlight_title { line-height: 14px; }
 	
 	.page-content #page_title #wb_status_txt { font-size: 12px; }
 	
@@ -110,9 +110,7 @@
 	#footer-menu li { margin-right: 5px; }
 	
 	#announcements #filters #addnew_wrap { width: 216px; margin-left: 30px; }
-	/*
-	#announcements div[id^="announcement_"] { height: 340px; }
-	*/
+	#ongoing-twocol { margin-left: 62px; border-left: 1px dotted #000; padding-left: 19px; }
 	
 	#azindex .post-type-search-header { height: 140px; }
 	#azIndexList { width: 404px; }
@@ -268,6 +266,8 @@
 	#footer-menu { text-align: center; margin-bottom: 20px; }
 	#footer-menu li { float: none !important; margin-bottom: 10px; }
 	#footer-menu li:after { margin-left: 5px; }	
+	
+	#ongoing-twocol { margin-left: 0; border-left: 0; padding-left: 0; margin-top: 30px; margin-bottom: 20px; }
 	
 	#azIndexList { margin-left: 5px; }
 	.azindexlink-list li { padding-bottom: 10px; }

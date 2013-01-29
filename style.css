@@ -340,7 +340,19 @@ a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; colo
 #home_leftcol a { color: #333; }
 #home_leftcol a:hover { color: #e50606; }
 .home_spotlight_single { overflow: auto; clear: both; width: 95%; margin-bottom: 20px; }
-.home_spotlight_single .spotlight_thumb { background-position: center center; background-repeat: no-repeat; float: left; position: relative; margin-right: 15px; border-radius: 10px; width: 110px; height: 110px; cursor: pointer; text-indent: -9999px; }
+.home_spotlight_single .spotlight_thumb { 
+	background-position: center center; 
+	background-repeat: no-repeat; 
+	float: left; 
+	position: relative; 
+	margin-right: 15px; 
+	margin-bottom: 15px;
+	border-radius: 10px; 
+	width: 110px; 
+	height: 110px; 
+	cursor: pointer; 
+	text-indent: -9999px; 
+}
 .home_spotlight_title { line-height: 16px; padding-bottom: 5px; }
 .home_spotlight_title a { border-bottom: 1px solid #ccc; font-size: 14px; text-decoration: none; }
 .home_spotlight_title a:hover { border-bottom: 1px solid #e50606; }
@@ -437,7 +449,7 @@ a.home_spotlight_readmore {
 }
 
 .sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
-.sidebar_nav li { padding-bottom: 6px; }
+.sidebar_nav li { padding-bottom: 8px; line-height: 17px; }
 .sidebar_nav li a { color: #333; }
 .sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
 
@@ -589,6 +601,7 @@ a.home_spotlight_readmore {
 
 /* Announcements Page */
 h2.header_announcements { font-size: 20px; }
+h2#ongoing-header { font-family: 'HelveticaNeue', Helvetica, sans-serif; font-weight: 200; margin-bottom: 15px; }
 .page-content#announcements #filters { margin-top: 10px; }
 .page-content#announcements #filters label {  }
 .page-content#announcements #filters select, .page-content#announcements #filters input[type="text"] { margin-right: 15px; }
@@ -644,6 +657,12 @@ h2.header_announcements { font-size: 20px; }
 
 .announcement_wrap .date, .announcement_wrap .audience, .announcement_wrap .keywords { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important; }
 .announcement_wrap .audience, .announcement_wrap .keywords { margin-bottom: 0 !important; }
+
+#ongoing-twocol { margin-left: 80px; border-left: 1px dotted #333; padding-left: 19px; }
+#ongoing-twocol #ongoing-header { font-size: 12px; line-height: 16px; text-transform: uppercase; font-weight: bold; font-family: Georgia, serif; }
+.announcement_list { }
+.announcement_list li { margin-bottom: 12px; }
+.announcement_list li h3 { font-size: 13px; line-height: 18px; font-family: Helvetica, sans-serif; font-weight: normal; }
 
 
 /* Single Announcements */

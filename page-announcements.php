@@ -10,6 +10,11 @@ if (isset($_GET['keyword']) && $_GET['keyword'] !== '') {
 if (isset($_GET['time']) && $_GET['time'] !== 'thisweek') {
 	$timeval = $_GET['time'];
 }
+
+$include_ongoing = 1;
+if (isset($_GET['include_ongoing'])) {
+	$include_ongoing = (int)$_GET['include_ongoing'];
+}
  
 $error = ''; 
 
@@ -46,17 +51,111 @@ else {
 	$announcements = get_announcements();
 }
 
+
+// We want to compare each announcement start date and end
+// date with some date in the past and some date in the future, 
+// respectively, to see if the announcement's time span
+// continues before and after those past and future dates.
+// If both of these requirements are met, the announcement
+// is deemed 'ongoing'.
+//
+// Determine what we need to compare each announcement start/
+// end date against:
+$start_date_comparison 	= '';
+$end_date_comparison	= '';
+if ($timeval) {
+	switch ($timeval) {
+		case 'nextweek':
+			// Compare to next Monday and next Sunday
+			$start_date_comparison 	= date('Ymd', strtotime('monday next week'));
+			$end_date_comparison	= date('Ymd', strtotime('sunday next week')); 
+			break;
+		case 'thismonth':
+			// Compare to last day of last month and first day
+			// of next month
+			$start_date_comparison 	= date('Ymd', strtotime('last day last month'));
+			$end_date_comparison	= date('Ymd', strtotime('first day next month'));
+			break;
+		case 'nextmonth':
+			// Compare to last day of this month and first day
+			// of two months from now
+			$start_date_comparison	= date('Ymd', strtotime('last day this month'));
+			$end_date_comparison	= date('Ymd', strtotime('first day of +2 months'));
+			break;
+		case 'thissemester':
+		case 'all':
+			// Don't compare anything; assume all are 'upcoming'
+			break;
+		default: // 'thisweek'
+			// Compare to this Monday and this Sunday
+			$start_date_comparison	= date('Ymd', strtotime('monday this week'));
+			$end_date_comparison	= date('Ymd', strtotime('sunday this week'));
+			break;
+	}
+}
+else { // assume default 'thisweek'
+	$start_date_comparison	= date('Ymd', strtotime('monday this week'));
+	$end_date_comparison	= date('Ymd', strtotime('sunday this week'));						
+}
+
+$ongoing 		= array();	
+$upcoming	 	= array();
+// Make sure we need to compare start/end dates
+if ($start_date_comparison && $end_date_comparison) {
+	if ($announcements) {
+		foreach ($announcements as $announcement) {
+			// If the post start date is before the start date comparison AND continues 
+			// through the end date comparison, add it to the ongoing array. Otherwise,
+			// add it to the upcoming array.
+			// This allows an announcement to be 'upcoming' as it approaches its start
+			// and end date (when, theoretically, it would be most relevant.)
+			if ( 
+				(date('Ymd', strtotime($announcement['startDate'])) < $start_date_comparison) && 
+				(date('Ymd', strtotime($announcement['endDate'])) 	> $end_date_comparison)
+			) {
+				$ongoing[$announcement['id']] = $announcement;
+			}
+			else {
+				$upcoming[$announcement['id']] = $announcement;
+			}
+		}
+	}
+}
+else {
+	// Make sure that we have a fallback for queries with a $timeval that
+	// doesn't separate ongoing/upcoming announcements (thissemester, all)
+	// combined with a $include_ongoing val of 0
+	$upcoming = $announcements;
+}
+
+
 // Set up feed output based on GET params:
 if ( isset($_GET['output']) ) {
-	switch ($_GET['output']) {
-		case 'json':
-			print json_encode($announcements);
-			break;
-		case 'rss':		
-			announcements_to_rss($announcements);
-			break;
-		default:
-			break;
+	if ($include_ongoing == 1) {
+		switch ($_GET['output']) {
+			case 'json':
+				header('Content-Type: application/json');
+				print json_encode($announcements);
+				break;
+			case 'rss':		
+				announcements_to_rss($announcements);
+				break;
+			default:
+				break;
+		}
+	}
+	else {
+		switch ($_GET['output']) {
+			case 'json':
+				header('Content-Type: application/json');
+				print json_encode($upcoming);
+				break;
+			case 'rss':		
+				announcements_to_rss($upcoming);
+				break;
+			default:
+				break;
+		}
 	}
 }
 else {
@@ -133,81 +232,47 @@ else {
 					if ($announcements == NULL) { 
 						print 'No announcements found.'; 
 					} else { 
-						print '<div class="row">';
-						
-						$count = 0;
-						foreach ($announcements as $announcement) {
-							if ($count % 3 == 0 && $count !== 0) { // 3 announcements per row
-								print '</div><div class="row">';
+						// Output upcoming and ongoing events separately
+					?>
+					<div class="row">
+					<?php
+						if (!empty($upcoming)) { 
+							if (!empty($ongoing)) {
+								print '<div class="span8" id="upcoming-twocol">';
+								print_announcements($upcoming, 'thumbtacks', 'span4', 2);
+								print '</div>';
 							}
-						?>
-							<div class="span4" id="announcement_<?=$announcement['post_id']?>">
-								<div class="announcement_wrap">
-									<div class="thumbtack"></div>
-									<?php if ($announcement['is_new'] == true) { ?><div class="new">New Announcement</div><?php } ?>
-									<h3><a href="<?=$announcement['post_permalink']?>"><?=$announcement['post_title']?></a></h3>
-									<p class="date"><?=date('M d', strtotime($announcement['start_date']))?> - <?=date('M d', strtotime($announcement['end_date']))?></p>
-									<p><?=truncateHtml($announcement['post_content'], 200)?></p>
-									<p class="audience"><strong>Audience:</strong> 
-									<?php 
-										if ($announcement['roles']) {
-											$rolelist = '';
-											foreach ($announcement['roles'] as $role) {
-												switch ($role) {
-													case 'Alumni':
-														$link = '?role=alumni';
-														break;
-													case 'Faculty':
-														$link = '?role=faculty';
-														break;
-													case 'Prospective Students':
-														$link = '?role=prospective-students';
-														break;
-													case 'Public':
-														$link = '?role=public';
-														break;
-													case 'Staff':
-														$link = '?role=staff';
-														break;
-													case 'Students':
-														$link = '?role=students';
-														break;
-													default:
-														$link = '';
-														break;
-												}
-												$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
-											}
-											print substr($rolelist, 0, -2);
-										}
-										else { print 'n/a'; }
-									?>
-									</p>
-									<p class="keywords"><strong>Keywords:</strong> 
-									<?php 
-										if ($announcement['keywords']) {
-											$keywordlist = '';
-											foreach ($announcement['keywords'] as $keyword) {
-												$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
-											}
-											print substr($keywordlist, 0, -2);
-										}
-										else { print 'n/a'; }
-									?>
-									</p>
-									
-									
-									<p><?=$announcement['debug']?></p>
-									
-									
-								</div>
-							</div>	
-						<?php
-							$count++;
-						} // endforeach
+							// Don't show sidebar when no upcoming announcements exist
+							else {
+								print '<div class="span12" id="upcoming-body">';
+								print_announcements($upcoming);
+								print '</div>';
+							}
+						} 
+						else {
+							print '<div class="span12" id="upcoming-body">';
+							print '<p>No upcoming announcements found.</p>';
+							print '</div>';
+						}
 						
-						print '</div>';
-					} // endif ($announcements == NULL)
+						if (!empty($ongoing)) {
+							if (!empty($upcoming)) {
+								print '<div class="span3 offset1" id="ongoing-twocol">';
+								print '<h2 id="ongoing-header">Ongoing Announcements</h2>';
+								print_announcements($ongoing, 'list');
+								print '</div>';
+							}
+							// When there are only ongoing announcements, have them fill the page
+							else {
+								print '<div class="span12" id="ongoing-body">';
+								print '<h2 id="ongoing-header">Ongoing Announcements</h2>';
+								print_announcements($ongoing, 'list');
+								print '</div>';
+							}
+						} ?>
+					</div>
+					<?php
+					}
 				?>
 				
 			</article>

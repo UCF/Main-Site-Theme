@@ -932,13 +932,13 @@ class Announcement extends CustomPostType{
 		return array(
 			array(
 				'name'  => 'Start Date',
-				'desc' => 'Date that the announcement should become active. Default (fallback) is the post publish date. Use format yyyy-mm-dd.',
+				'desc' => 'Date that the announcement should become active. Use format yyyy-mm-dd.<br /><strong>Note that announcements with no start date or end date will not appear in any announcement feeds.</strong>',
 				'id'   => $prefix.'start_date',
 				'type' => 'text',
 			),
 			array(
 				'name'  => 'End Date',
-				'desc' => 'Date that the announcement should become inactive. Default (fallback) is 1 day from the given start date. Use format yyyy-mm-dd.',
+				'desc' => 'Date that the announcement should become inactive. Use format yyyy-mm-dd.<br /><strong>Note that announcements with no start date or end date will not appear in any announcement feeds.</strong>',
 				'id'   => $prefix.'end_date',
 				'type' => 'text',
 			),
