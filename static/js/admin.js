@@ -162,9 +162,10 @@ WebcomAdmin.themeOptions = function($){
 	if (cls.parent.length > 0){
 		cls.__init__();
 	}
-	
-	
-	
+}
+
+
+WebcomAdmin.centerpieceAdmin = function($){	
 	// Slider Meta Box Updates:
 	// (only run this code if we're on a screen with #slider-slides-settings-basic;
 	// i.e. if we're on a slider edit screen:
@@ -174,7 +175,7 @@ WebcomAdmin.themeOptions = function($){
 		
 		// Hide Preview Changes button
 		// this is a temporary fix for an issue where previewing changes on a centerpiece deletes its uploaded media
-		$('#minor-publishing-actions').hide();
+		//$('#minor-publishing-actions').hide();
 		
 		// Function that shows/hides Slide widget options based on the Content Type selected:
 		var displaySlideOptions = function() {/*
@@ -369,4 +370,5 @@ WebcomAdmin.themeOptions = function($){
 	WebcomAdmin.__init__($);
 	WebcomAdmin.themeOptions($);
 	WebcomAdmin.shortcodeTool($);
+	WebcomAdmin.centerpieceAdmin($);
 })(jQuery);
