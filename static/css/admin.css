@@ -74,17 +74,17 @@ a.repeatable-remove { margin-bottom: 15px !important; margin-left: 10px !importa
 
 
 
-.postbox-container textarea, 
-.postbox-container input[type="text"], 
-.postbox-container input[type="password"], 
-.postbox-container input[type="file"], 
-.postbox-container input[type="email"], 
-.postbox-container input[type="number"], 
-.postbox-container input[type="search"], 
-.postbox-container input[type="tel"],
-.postbox-container input[type="url"], 
-.postbox-container input[type="checkbox"], 
-.postbox-container select { float: left; clear: both; }
-.postbox-container input[type="checkbox"] { margin-right: 5px; }
+.postbox-container#postbox-container-2 textarea, 
+.postbox-container#postbox-container-2 input[type="text"], 
+.postbox-container#postbox-container-2 input[type="password"], 
+.postbox-container#postbox-container-2 input[type="file"], 
+.postbox-container#postbox-container-2 input[type="email"], 
+.postbox-container#postbox-container-2 input[type="number"], 
+.postbox-container#postbox-container-2 input[type="search"], 
+.postbox-container#postbox-container-2 input[type="tel"],
+.postbox-containe#postbox-container-2r input[type="url"], 
+.postbox-container#postbox-container-2 input[type="checkbox"], 
+.postbox-containe#postbox-container-2r select { float: left; clear: both; }
+.postbox-container#postbox-container-2 input[type="checkbox"] { margin-right: 5px; }
 
-.postbox-container .description { float: left; }
+.postbox-container#postbox-container-2 .description { float: left; }
