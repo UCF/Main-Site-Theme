@@ -22,40 +22,33 @@ $error = '';
 // default args: role='all', keyword=null, time='thisweek' 
 if ($roleval) {
 	if (preg_match('/^[a-z][\-]*/', $roleval)) { // should only be lowercase letters and dashes
-		$announcements = get_posts(build_announcement_query_args($roleval));
-		//$announcements = get_announcements($roleval);
+		$announcements = get_announcements($roleval);
 	}
 	else {
-		$announcements = get_posts(build_announcement_query_args());
-		//$announcements = get_announcements();
+		$announcements = get_announcements();
 		$error = '<strong>Error:</strong> Invalid Role parameter given.';
 	}
 }
 elseif ($keywordval) {
 	if (ctype_alnum($keywordval) == true) { // should only be letters or numbers
-		$announcements = get_posts(build_announcement_query_args('all', $keywordval));
-		//$announcements = get_announcements('all', $keywordval);
+		$announcements = get_announcements('all', $keywordval);
 	}
 	else {
-		//$announcements = get_announcements();
-		$announcements = get_posts(build_announcement_query_args());
+		$announcements = get_announcements();
 		$error = '<strong>Error:</strong> Keywords can only contain letters and numbers. Please remove any special characters from your search and try again.';
 	}
 }
 elseif ($timeval) { 
 	if (preg_match('/^[a-z]/', $timeval)) { // should only be lowercase letters
-		$announcements = get_posts(build_announcement_query_args('all', NULL, $timeval));
-		//$announcements = get_announcements('all', NULL, $timeval);
+		$announcements = get_announcements('all', NULL, $timeval);
 	}
 	else {
-		//$announcements = get_announcements();
-		$announcements = get_posts(build_announcement_query_args());
+		$announcements = get_announcements();
 		$error = '<strong>Error:</strong> Invalid Time parameter given.';
 	}
 }
 else {
-	//$announcements = get_announcements();
-	$announcements = get_posts(build_announcement_query_args());
+	$announcements = get_announcements();
 }
 
 
@@ -117,10 +110,8 @@ if ($start_date_comparison && $end_date_comparison) {
 			// This allows an announcement to be 'upcoming' as it approaches its start
 			// and end date (when, theoretically, it would be most relevant.)
 			if ( 
-				//(date('Ymd', strtotime($announcement['startDate'])) < $start_date_comparison) && 
-				//(date('Ymd', strtotime($announcement['endDate'])) 	> $end_date_comparison)
-				(date('Ymd', strtotime(get_post_meta($announcement->ID, 'announcement_start_date', TRUE))) < $start_date_comparison) && 
-				(date('Ymd', strtotime(get_post_meta($announcement->ID, 'announcement_end_date', TRUE)))   > $end_date_comparison)
+				(date('Ymd', strtotime($announcement->announcementStartDate)) < $start_date_comparison) && 
+				(date('Ymd', strtotime($announcement->announcementEndDate))   > $end_date_comparison)
 			) {
 				$ongoing[$announcement->ID] = $announcement;
 			}
@@ -146,7 +137,7 @@ if ( isset($_GET['output']) ) {
 				header('Content-Type: application/json');
 				print json_encode($announcements);
 				break;
-			case 'rss':		
+			case 'rss':
 				announcements_to_rss($announcements);
 				break;
 			default:

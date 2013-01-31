@@ -494,16 +494,13 @@ function output_weather_data($class=null) {
 
 
 /**
- * Sets up an array of arguments for get_posts for grabbing announcements.
- * We want to set this up and grab announcements on the page that they will 
- * be displayed on so that the results are added to $wpdb.
- *
+ * Get and display announcements.
  * Note that, like the old Announcements advanced search, only one
  * search parameter (role, keyword, or time) can be set at a time.
  * Default (no args) returns all roles within the past week 
  * (starting from Monday).
  **/
-function build_announcement_query_args($role='all', $keyword=NULL, $time='thisweek') {
+function get_announcements($role='all', $keyword=NULL, $time='thisweek') {	
 	// Get some dates for meta_query comparisons:
 	$today = date('Y-m-d');
 	
@@ -755,19 +752,7 @@ function build_announcement_query_args($role='all', $keyword=NULL, $time='thiswe
 		$args = array_merge($args, $fallback_args);
 	}
 	
-	return $args;
-}
 
-
-
-/**
- * Get and display announcements.
- * Note that, like the old Announcements advanced search, only one
- * search parameter (role, keyword, or time) can be set at a time.
- * Default (no args) returns all roles within the past week 
- * (starting from Monday).
- **/
-function get_announcements($role='all', $keyword=NULL, $time='thisweek') {	
 	// Fetch all announcements based on args given above:
 	$announcements = get_posts($args);
 	
@@ -775,37 +760,22 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		return NULL;
 	}
 	else {
-		// Set up an array that will contain the necessary output values
-		// (basically a combination of post data and metadata):
-		$allposts = array();
-		$newposts = array();
-		
-		foreach ($announcements as $announcement) {			
-			$allposts[$announcement->ID] = array(
-				'id'				=> $announcement->ID,
-				'postStatus' 		=> $announcement->post_status,
-				'postModified'	 	=> $announcement->post_modified,
-				'published'		 	=> $announcement->post_date,
-				'title'		 		=> $announcement->post_title,
-				'postName'	 		=> $announcement->post_name,
-				'permalink'			=> get_permalink($announcement->ID),
-				'content'	 		=> $announcement->post_content,
-				'startDate'			=> get_post_meta($announcement->ID, 'announcement_start_date', TRUE),
-				'endDate' 			=> get_post_meta($announcement->ID, 'announcement_end_date', TRUE),
-				'url' 				=> get_post_meta($announcement->ID, 'announcement_url', TRUE),
-				'contactPerson'		=> get_post_meta($announcement->ID, 'announcement_contact', TRUE),
-				'phone'				=> get_post_meta($announcement->ID, 'announcement_phone', TRUE),
-				'email'				=> get_post_meta($announcement->ID, 'announcement_email', TRUE),
-				'postedBy'			=> get_post_meta($announcement->ID, 'announcement_posted_by', TRUE),
-				'roles' 			=> wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names")),
-				'keywords'			=> wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names")),
-				'isNew'				=> ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false,
-			);
+		// Add relevant metadata to each post object so they
+		// can be more easily accessed:
+		foreach ($announcements as $announcement) {	
+			$announcement->announcementStartDate 	 = get_post_meta($announcement->ID, 'announcement_start_date', TRUE);	
+			$announcement->announcementEndDate		 = get_post_meta($announcement->ID, 'announcement_end_date', TRUE);
+			$announcement->announcementURL			 = get_post_meta($announcement->ID, 'announcement_url', TRUE);
+			$announcement->announcementContactPerson = get_post_meta($announcement->ID, 'announcement_contact', TRUE);
+			$announcement->announcementPhone		 = get_post_meta($announcement->ID, 'announcement_phone', TRUE);
+			$announcement->announcementEmail		 = get_post_meta($announcement->ID, 'announcement_email', TRUE);
+			$announcement->announcementPostedBy		 = get_post_meta($announcement->ID, 'announcement_posted_by', TRUE);
+			$announcement->announcementRoles		 = wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names"));
+			$announcement->announcementKeywords		 = wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names"));
+			$announcement->announcementIsNew		 = ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false;
 		}
 		
-		$output = $allposts;
-		
-		return $output;	
+		return $announcements;
 	}
 }
 
@@ -822,7 +792,7 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 			// $spantype and $perrow are not used here.
 			foreach ($announcements as $announcement) {
 				ob_start(); ?>
-				<li><h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3></li>
+				<li><h3><a href="<?=get_permalink($announcement->ID)?>"><?=$announcement->post_title?></a></h3></li>
 			<?php
 				print ob_get_clean();
 			}
@@ -839,18 +809,18 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 				}
 				ob_start();
 				?>
-				<div class="<?=$spantype?>" id="announcement_<?=$announcement['id']?>">
+				<div class="<?=$spantype?>" id="announcement_<?=$announcement->ID?>">
 					<div class="announcement_wrap">
 						<div class="thumbtack"></div>
-						<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
-						<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
-						<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
-						<p><?=truncateHtml(strip_tags($announcement['content'], 200))?></p>
+						<?php if ($announcement->announcementIsNew == true) { ?><div class="new">New Announcement</div><?php } ?>
+						<h3><a href="<?=get_permalink($announcement->ID)?>"><?=$announcement->post_title?></a></h3>
+						<p class="date"><?=date('M d', strtotime($announcement->announcementStartDate))?> - <?=date('M d', strtotime($announcement->announcementEndDate))?></p>
+						<p><?=truncateHtml(strip_tags($announcement->post_content, 200))?></p>
 						<p class="audience"><strong>Audience:</strong> 
 						<?php 
-							if ($announcement['roles']) {
+							if ($announcement->announcementRoles) {
 								$rolelist = '';
-								foreach ($announcement['roles'] as $role) {
+								foreach ($announcement->announcementRoles as $role) {
 									switch ($role) {
 										case 'Alumni':
 											$link = '?role=alumni';
@@ -883,9 +853,9 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 						</p>
 						<p class="keywords"><strong>Keywords:</strong> 
 						<?php 
-							if ($announcement['keywords']) {
+							if ($announcement->announcementKeywords) {
 								$keywordlist = '';
-								foreach ($announcement['keywords'] as $keyword) {
+								foreach ($announcement->announcementKeywords as $keyword) {
 									$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
 								}
 								print substr($keywordlist, 0, -2);
@@ -915,7 +885,6 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
  **/
 function announcements_to_rss($announcements) {
 	if (!($announcements)) { die('Error: no announcements feed provided, or no results were found.'); }
-	
 	header('Content-Type: application/rss+xml; charset=ISO-8859-1');
 	print '<?xml version="1.0" encoding="ISO-8859-1"?>';
 	print '<rss version="2.0" xmlns:announcement="'.get_site_url().'/announcements/">';
@@ -926,53 +895,65 @@ function announcements_to_rss($announcements) {
 	print '<copyright>ucf.edu</copyright>';
 	print '<ttl>30</ttl>'; // Time to live (in minutes); force a cache refresh after this time
 	print '<description>Feed for UCF Announcements.</description>';
+
+	function print_item($announcement) {
+		$output = '';
+		$output .= '<item>';
+			// Generic RSS story elements
+			$output .= '<title>'.$announcement->post_title.'</title>';
+			$output .= '<description><![CDATA['.htmlentities(strip_tags($announcement->post_content)).']]></description>';
+			if ($announcement->announcementURL) { $output .= '<link>'.htmlentities($announcement->announcementURL).'</link>'; }
+			$output .= '<guid>'.get_permalink($announcement->ID).'</guid>';
+			$output .= '<pubDate>'.date('r', strtotime($announcement->post_date)).'</pubDate>';
 			
-	if ($announcements !== NULL) {
-		foreach ($announcements as $announcement) {
-			print '<item>';
-				// Generic RSS story elements
-				print '<title>'.$announcement['title'].'</title>';
-				print '<description><![CDATA['.htmlentities(strip_tags($announcement['content'])).']]></description>';
-				if ($announcement['url']) { print '<link>'.htmlentities($announcement['url']).'</link>'; }
-				print '<guid>'.$announcement['permalink'].'</guid>';
-				print '<pubDate>'.date('r', strtotime($announcement['published'])).'</pubDate>';
-				
-				// Announcement-specific stuff	
-				print '<announcement:id>'.$announcement['id'].'</announcement:id>';	
-				print '<announcement:postStatus>'.$announcement['postStatus'].'</announcement:postStatus>';
-				print '<announcement:postModified>'.$announcement['postModified'].'</announcement:postModified>';
-				print '<announcement:published>'.$announcement['published'].'</announcement:published>'; // same as <pubDate>
-				print '<announcement:permalink>'.$announcement['permalink'].'</announcement:permalink>'; // same as <guid>
-				print '<announcement:postName>'.$announcement['postName'].'</announcement:postName>';
-				print '<announcement:startDate>'.$announcement['startDate'].'</announcement:startDate>';
-				print '<announcement:endDate>'.$announcement['endDate'].'</announcement:endDate>';
-				print '<announcement:url>'.htmlentities($announcement['url']).'</announcement:url>'; // same as <link>
-				print '<announcement:contactPerson>'.htmlentities($announcement['contactPerson']).'</announcement:contactPerson>';
-				print '<announcement:phone>'.$announcement['phone'].'</announcement:phone>';
-				print '<announcement:email>'.htmlentities($announcement['email']).'</announcement:email>'; // need to account for special chars
-				print '<announcement:postedBy>'.htmlentities($announcement['postedBy']).'</announcement:postedBy>';
-				print '<announcement:roles>';
-					foreach ($announcement['roles'] as $role) {
+			// Announcement-specific stuff	
+			$output .= '<announcement:id>'.$announcement->ID.'</announcement:id>';	
+			$output .= '<announcement:postStatus>'.$announcement->post_status.'</announcement:postStatus>';
+			$output .= '<announcement:postModified>'.$announcement->post_modified.'</announcement:postModified>';
+			$output .= '<announcement:published>'.$announcement->post_date.'</announcement:published>'; // same as <pubDate>
+			$output .= '<announcement:permalink>'.get_permalink($announcement->ID).'</announcement:permalink>'; // same as <guid>
+			$output .= '<announcement:postName>'.$announcement->post_name.'</announcement:postName>';
+			$output .= '<announcement:startDate>'.$announcement->announcementStartDate.'</announcement:startDate>';
+			$output .= '<announcement:endDate>'.$announcement->announcementEndDate.'</announcement:endDate>';
+			$output .= '<announcement:url>'.htmlentities($announcement->announcementURL).'</announcement:url>'; // same as <link>
+			$output .= '<announcement:contactPerson>'.htmlentities($announcement->announcementContactPerson).'</announcement:contactPerson>';
+			$output .= '<announcement:phone>'.$announcement->announcementPhone.'</announcement:phone>';
+			$output .= '<announcement:email>'.htmlentities($announcement->announcementEmail).'</announcement:email>'; // need to account for special chars
+			$output .= '<announcement:postedBy>'.htmlentities($announcement->announcementPostedBy).'</announcement:postedBy>';
+			$output .= '<announcement:roles>';
+				if (!empty($announcement->announcementRoles)) {
+					foreach ($announcement->announcementRoles as $role) {
 						$roles .= $role.', '; 
 					}
 					$roles = substr($roles, 0, -2);
-					print $roles;	
-				print '</announcement:roles>';
-				print '<announcement:keywords>';
-					foreach ($announcement['keywords'] as $keyword) {
+					$output .= $roles;	
+				}
+			$output .= '</announcement:roles>';
+			$output .= '<announcement:keywords>';
+				if (!empty($announcement->announcementKeywords)) {
+					foreach ($announcement->announcementKeywords as $keyword) {
 						$keywords .= $keyword.', '; 
 					}
 					$keywords = substr($keywords, 0, -2);
-					print $keywords;	
-				print '</announcement:keywords>';
-				print '<announcement:isNew>';
-					$announcement['isNew'] == true ? print 'true' : print 'false';
-				print '</announcement:isNew>';
-
-			print '</item>';
+					$output .= $keywords;	
+				}
+			$output .= '</announcement:keywords>';
+			$output .= '<announcement:isNew>';
+				$announcement->announcementIsNew == true ? $output .= 'true' : $output .= 'false';
+			$output .= '</announcement:isNew>';
+	
+		$output .= '</item>';
+		
+		$roles = '';
+		$keywords = '';
+		
+		print $output;
+	}
 			
-			$roles = '';
-			$keywords = '';
+	if ($announcements !== NULL) {
+		// $announcements will always be an array of objects
+		foreach ($announcements as $announcement) {
+			print_item($announcement);
 		}
 	}
 	print '</channel></rss>';
