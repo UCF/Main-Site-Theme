@@ -94,6 +94,7 @@ if (substr($path, strlen($path)-1) !== '/') { $path = $path.'/'; } // make sure 
 define('WP_SITE_DOMAIN', $domain);
 define('WP_SITE_PATH', $path);
 
+define('LDAP_HOST', 'net.ucf.edu');
 
 /**
  * Set config values including meta tags, registered custom post types, styles,

@@ -775,4 +775,125 @@ function sc_phonebook_search($attrs) {
 	return ob_get_clean();
 }
 add_shortcode('phonebook-search', 'sc_phonebook_search');
+
+/**
+ * Authenticates the username/password combination with LDAP.
+ *
+ * @param string $username The username to authenticate.
+ * @param string $password The password to authenticate.
+ * @return bool True if username/password was authenticated, otherwise false
+ *
+ * @author Brandon T. Groves
+ */
+function ldap_auth($username, $password) {
+	$ldapbind = false;
+	$ldap = ldap_connect(LDAP_HOST);
+	if ($ldap) {
+		$ldapbind = ldap_bind($ldap, $username . '@' . LDAP_HOST, $password);
+	} else {
+		echo "could not connect.";
+	}
+
+	return $ldapbind;
+}
+
+/**
+ * Sets the session data for gravity forms authentication.
+ *
+ * @author Brandon T. Groves
+ */
+function gf_set_session_data($user) {
+	$timeout = 15 * 60;
+	$_SESSION['timeout'] = time() + $timeout;
+	$_SESSION['user'] = $user;
+	$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+}
+
+/**
+ * Destroys the session data for gravity forms authentication.
+ *
+ * @author Brandon T. Groves
+ */
+function gf_destroy_session() {
+	$_SESSION = array();
+	session_destroy();
+}
+
+/**
+ * Retrieves the login HTML.
+ *
+ * @error bool display error message
+ * @return string html login
+ *
+ * @author Brandon T. Groves
+ */
+function gf_login_html($error = false) {
+	ob_start();
+	gf_destroy_session();
+	$pageURL = 'http';
+	if ($_SERVER["HTTPS"] == "on") {
+		$pageURL .= "s";
+	}
+	$pageURL .= "://";
+	?>
+
+	<div id="ann-login-wrapper">
+		<h2>Login</h2>
+		<form method="post" id="auth-form" action="<?=$_SERVER["REQUEST_URI"]; ?>">
+			<div class="wrapper">
+				<?php if ($error):?>
+				<div id="login_error">
+					<strong>Error:</strong>
+					<p>Oops! Your NID or password is invalid or the authentication service was unavailable.</p>
+					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"</p>
+					<p>To reset your password, go to the <a href="http://mynid.ucf.edu/">Change Your NID Password</a> page.</p>
+					<p>For further help, contact the Service Desk at 407-823-5117, Monday-Friday 8am-5pm.</p>
+				</div>
+				<?php endif; ?>
+				<div>
+					<p><label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input></p>
+					<p><label for="password">Password</label><input name="password" id="password" type="password"></input></p>
+					<p><input name="submit-auth" id="submit-auth" type="submit" value="Submit" /></p>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<?php
+	return ob_get_clean();
+}
+
+/**
+ * Displays LDAP authentication unless already authenicated, 
+ * which displays the gravity form.
+ *
+ * @param array $username .
+ * @param string $password The password to authenticate.
+ * @return bool True if username/password was authenticated, otherwise false
+ *
+ * @author Brandon T. Groves
+ */
+function gravity_ldap($attr, $content = null) {
+
+	if (isset($_SESSION['timeout']) && $_SESSION['timeout'] < time()) {
+		gf_destroy_session();
+	}
+
+	require_once(WP_CONTENT_DIR . '/plugins/gravityforms/gravityforms.php');
+
+	if (isset($_SESSION['user']) && isset($_SESSION['ip']) && $_SESSION['ip'] == $_SERVER['REMOTE_ADDR']) {
+		gf_set_session_data($_SESSION['user']);
+		return RGForms::parse_shortcode($attr, $content);
+	} elseif (isset($_POST["submit-auth"]) && isset($_POST['username']) && strlen($_POST['username']) != 0 && isset($_POST['password']) && strlen($_POST['password']) != 0) {
+		if (ldap_auth($_POST['username'], $_POST['password'])) {
+			gf_set_session_data($_POST['username']);
+			return RGForms::parse_shortcode($attr, $content);
+		} else {
+			return gf_login_html(True);
+		}
+	} else {
+		return gf_login_html();
+	}
+}
+add_shortcode('gravity-with-ldap', 'gravity_ldap');
 ?>
