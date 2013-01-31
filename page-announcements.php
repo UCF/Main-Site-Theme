@@ -135,14 +135,7 @@ if ( isset($_GET['output']) ) {
 		switch ($_GET['output']) {
 			case 'json':
 				header('Content-Type: application/json');
-				if (is_array($announcements)) {
-					foreach ($announcements as $announcement) {
-						print json_encode($announcement);
-					}
-				}
-				else {
-					print json_encode($announcements);
-				}
+				print json_encode($announcements);
 				break;
 			case 'rss':
 				announcements_to_rss($announcements);
@@ -155,14 +148,7 @@ if ( isset($_GET['output']) ) {
 		switch ($_GET['output']) {
 			case 'json':
 				header('Content-Type: application/json');
-				if (is_array($upcoming)) {
-					foreach ($upcoming as $announcement) {
-						print json_encode($announcement);
-					}
-				}
-				else {
-					print json_encode($upcoming);
-				}
+				print json_encode($upcoming);
 				break;
 			case 'rss':		
 				announcements_to_rss($upcoming);
