@@ -900,7 +900,7 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
  * Takes an announcements array from get_announcements() and outputs an RSS feed.
  **/
 function announcements_to_rss($announcements) {
-	if (!($announcements)) { die('Error: no announcements feed provided.'); }
+	if (!($announcements)) { die('Error: no announcements feed provided, or no results were found.'); }
 	
 	header('Content-Type: application/rss+xml; charset=ISO-8859-1');
 	print '<?xml version="1.0" encoding="ISO-8859-1"?>';
