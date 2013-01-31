@@ -1803,4 +1803,13 @@ function _show_meta_boxes($post, $meta_box) {
 	<?php
 }
 
+function init_sessions() {
+	// If there is no 'session_id' (if a PHP Session not already started)
+	if (!session_id()) {
+		// Start the PHP Session
+		session_start();
+	}
+}
+add_action('init', 'init_sessions');
+
 ?>

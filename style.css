@@ -874,3 +874,20 @@ a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
 }
+
+#ann-login-wrapper label {
+	font-weight: bold;
+}
+
+#ann-login-wrapper p {
+	margin-bottom: 0;
+}
+
+#ann-login-wrapper h2 {
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+#login_error {
+	float: right;
+}
