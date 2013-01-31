@@ -875,6 +875,13 @@ a.btn-primary.disabled {
     color: #FFFFFF !important;
 }
 
+#ann-login-wrapper {
+	background: #fff6d4;
+	border: 1px solid #dad1ac;
+	padding: 12px;
+	width: 560px;
+}
+
 #ann-login-wrapper label {
 	font-weight: bold;
 }
@@ -890,4 +897,9 @@ a.btn-primary.disabled {
 
 #login_error {
 	float: right;
+	width: 55%;
+}
+
+#auth-form-items {
+	width: 45%;
 }

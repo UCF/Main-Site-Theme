@@ -850,7 +850,7 @@ function gf_login_html($error = false) {
 					<p>For further help, contact the Service Desk at 407-823-5117, Monday-Friday 8am-5pm.</p>
 				</div>
 				<?php endif; ?>
-				<div>
+				<div id="auth-form-items">
 					<p><label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input></p>
 					<p><label for="password">Password</label><input name="password" id="password" type="password"></input></p>
 					<p><input name="submit-auth" id="submit-auth" type="submit" value="Submit" /></p>
