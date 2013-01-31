@@ -494,14 +494,16 @@ function output_weather_data($class=null) {
 
 
 /**
- * Get and display announcements.
+ * Sets up an array of arguments for get_posts for grabbing announcements.
+ * We want to set this up and grab announcements on the page that they will 
+ * be displayed on so that the results are added to $wpdb.
+ *
  * Note that, like the old Announcements advanced search, only one
  * search parameter (role, keyword, or time) can be set at a time.
  * Default (no args) returns all roles within the past week 
  * (starting from Monday).
  **/
-function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
-	
+function build_announcement_query_args($role='all', $keyword=NULL, $time='thisweek') {
 	// Get some dates for meta_query comparisons:
 	$today = date('Y-m-d');
 	
@@ -753,7 +755,19 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		$args = array_merge($args, $fallback_args);
 	}
 	
-	
+	return $args;
+}
+
+
+
+/**
+ * Get and display announcements.
+ * Note that, like the old Announcements advanced search, only one
+ * search parameter (role, keyword, or time) can be set at a time.
+ * Default (no args) returns all roles within the past week 
+ * (starting from Monday).
+ **/
+function get_announcements($role='all', $keyword=NULL, $time='thisweek') {	
 	// Fetch all announcements based on args given above:
 	$announcements = get_posts($args);
 	
