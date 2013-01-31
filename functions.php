@@ -792,7 +792,7 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 			// $spantype and $perrow are not used here.
 			foreach ($announcements as $announcement) {
 				ob_start(); ?>
-				<li><h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3></li>
+				<li><h3><a href="<?=get_permalink($announcement->ID)?>"><?=$announcement->post_title?></a></h3></li>
 			<?php
 				print ob_get_clean();
 			}
@@ -809,18 +809,18 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 				}
 				ob_start();
 				?>
-				<div class="<?=$spantype?>" id="announcement_<?=$announcement['id']?>">
+				<div class="<?=$spantype?>" id="announcement_<?=$announcement->ID?>">
 					<div class="announcement_wrap">
 						<div class="thumbtack"></div>
-						<?php if ($announcement['isNew'] == true) { ?><div class="new">New Announcement</div><?php } ?>
-						<h3><a href="<?=$announcement['permalink']?>"><?=$announcement['title']?></a></h3>
-						<p class="date"><?=date('M d', strtotime($announcement['startDate']))?> - <?=date('M d', strtotime($announcement['endDate']))?></p>
-						<p><?=truncateHtml(strip_tags($announcement['content'], 200))?></p>
+						<?php if ($announcement->announcementIsNew == true) { ?><div class="new">New Announcement</div><?php } ?>
+						<h3><a href="<?=get_permalink($announcement->ID)?>"><?=$announcement->post_title?></a></h3>
+						<p class="date"><?=date('M d', strtotime($announcement->announcementStartDate))?> - <?=date('M d', strtotime($announcement->announcementEndDate))?></p>
+						<p><?=truncateHtml(strip_tags($announcement->post_content, 200))?></p>
 						<p class="audience"><strong>Audience:</strong> 
 						<?php 
-							if ($announcement['roles']) {
+							if ($announcement->announcementRoles) {
 								$rolelist = '';
-								foreach ($announcement['roles'] as $role) {
+								foreach ($announcement->announcementRoles as $role) {
 									switch ($role) {
 										case 'Alumni':
 											$link = '?role=alumni';
@@ -853,9 +853,9 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 						</p>
 						<p class="keywords"><strong>Keywords:</strong> 
 						<?php 
-							if ($announcement['keywords']) {
+							if ($announcement->announcementKeywords) {
 								$keywordlist = '';
-								foreach ($announcement['keywords'] as $keyword) {
+								foreach ($announcement->announcementKeywords as $keyword) {
 									$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
 								}
 								print substr($keywordlist, 0, -2);
