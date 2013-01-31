@@ -108,8 +108,10 @@ add_action('manage_edit-announcement_sortable_columns', 'sortable_announcement_c
 
 
 /**
- * Allow special tags in post bodies that would get stripped otherwise.
+ * Allow special tags in post bodies that would get stripped otherwise for most users.
  * Modifies $allowedposttags defined in wp-includes/kses.php
+ *
+ * http://wordpress.org/support/topic/div-ids-being-stripped-out
  * http://wpquicktips.wordpress.com/2010/03/12/how-to-change-the-allowed-html-tags-for-wordpress/
  **/
 $allowedposttags['input'] = array(
@@ -157,6 +159,62 @@ $allowedposttags['embed'] = array(
 	'allowscriptaccess' => array(),
 	'height' => array(),
 	'width' => array()
+);
+// Most of these attributes aren't actually valid for some of 
+// the tags they're assigned to, but whatever:
+$allowedposttags['div'] =
+$allowedposttags['a'] = 
+$allowedposttags['button'] = array(
+	'id' => array(),
+	'class' => array(),
+	'style' => array(),
+	'width' => array(),
+	'height' => array(),
+	
+	'align' => array(),
+	'aria-hidden' => array(),
+	'aria-labelledby' => array(),
+	'autofocus' => array(),
+	'dir' => array(),
+	'disabled' => array(),
+	'form' => array(),
+	'formaction' => array(),
+	'formenctype' => array(),
+	'formmethod' => array(),
+	'formonvalidate' => array(),
+	'formtarget' => array(),
+	'hidden' => array(),
+	'href' => array(),
+	'name' => array(),
+	'rel' => array(),
+	'rev' => array(),
+	'role' => array(),
+	'target' => array(),
+	'type' => array(),
+	'title' => array(),
+	'value' => array(),
+	
+	// Bootstrap JS stuff:
+	'data-dismiss' => array(),
+	'data-toggle' => array(),
+	'data-target' => array(),
+	'data-backdrop' => array(),
+	'data-spy' => array(),
+	'data-offset' => array(),
+	'data-animation' => array(),
+	'data-html' => array(),
+	'data-placement' => array(),
+	'data-selector' => array(),
+	'data-title' => array(),
+	'data-trigger' => array(),
+	'data-delay' => array(),
+	'data-content' => array(),
+	'data-offset' => array(),
+	'data-offset-top' => array(),
+	'data-loading-text' => array(),
+	'data-complete-text' => array(),
+	'autocomplete' => array(),
+	'data-parent' => array(),
 );
 
 
@@ -1157,19 +1215,6 @@ function query_search_service($params) {
 	}
 	return $results;
 }
-
-
-
-/**
- * Make sure that administrators have the unfiltered_html capability
- * so that editing post content isn't a pain.
- * Should only be run when the theme is activated.
- **/
-function administrator_unfiltered_html() {
-	$admin = get_role('administrator');
-	$admin->add_cap('unfiltered_html'); 	
-}
-add_action('switch_theme', 'administrator_unfiltered_html');
 
 
 /**
