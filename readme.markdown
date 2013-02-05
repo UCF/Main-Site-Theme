@@ -6,13 +6,18 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 ## Required Plugins
 * Gravity Forms
 * Gravity Forms + Custom Post Types
-* WordPress Editorial Calendar
+* Varnish Dependency Purger
 
 
 ## Installation Requirements
 
 * Make sure that all two- and three-column pages are correctly assigned sidebar menu widgets when content is imported. Menus, when imported, should maintain a common naming schema ('More Information - Page Name', 'Secondary Nav - Page Name', etc.)
-* Add cron job for feedback_mailer.php to run weekly for feedback emails.
+* Add cron job for jobs/feedback-mailer.php to run weekly for feedback emails. The job should use wget to request the file, and the URL should have a 'secret' param with a value that is identical to the value set for the 'Weekly Feedback Email Key' Theme Options setting.
+* Make sure that the 'Weekly Feedback Email Key' Theme Options setting is set and that Email Recipients have been specified.
+* Make sure that the 'Enable Edge Side Includes (ESI)' Theme Options setting is set to 'On'.
+* In Theme Options > News, 'News Max Items' should be set to '3'.
+* In Theme Options > Search, 'Enable Google Search' should be set to 'Off'.
+* Make sure that the 'Feed URL' and 'More Information URL' Theme Options are set.
 * In Appearance > Widgets, remove any existing widgets from 'Left Sidebar' (or 'Right Sidebar', if there are any.)
 
 
