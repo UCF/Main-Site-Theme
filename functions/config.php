@@ -278,6 +278,22 @@ Config::$theme_settings = array(
 			),
 			'value'       => $theme_options['enable_esi'],
 	    )),
+		new TextField(array(
+			'name'        => 'Weekly Feedback Email Key',
+			'id'          => THEME_OPTIONS_NAME.'[feedback_email_key]',
+			'description' => 'Secret key that allows for weekly feedback emails to be sent via cron job.
+							 The cron job\'s passed argument must be the same as this value; do not modify 
+							 this value unless you can edit the server cron tab!',
+			'default'     => '',
+			'value'       => $theme_options['feedback_email_key'],
+	    )),
+		new TextareaField(array(
+			'name'        => 'Weekly Feedback Email Recipients',
+			'id'          => THEME_OPTIONS_NAME.'[feedback_email_recipients]',
+			'description' => 'List of recipients for the weekly feedback email. Separate addresses with commas.',
+			'default'     => '',
+			'value'       => $theme_options['feedback_email_recipients'],
+	    )),
 	),
 	'Social' => array(
 		new RadioField(array(
