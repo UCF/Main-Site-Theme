@@ -2,13 +2,13 @@
 
 // Assign GET variables
 if (isset($_GET['role']) && $_GET['role'] !== 'all') {
-	$roleval = $_GET['role'];
+	$roleval = filter_var($_GET['role'], FILTER_SANITIZE_STRING);
 }
 if (isset($_GET['keyword']) && $_GET['keyword'] !== '') {
-	$keywordval = $_GET['keyword'];
+	$keywordval = filter_var($_GET['keyword'], FILTER_SANITIZE_STRING);
 }
 if (isset($_GET['time']) && $_GET['time'] !== 'thisweek') {
-	$timeval = $_GET['time'];
+	$timeval = filter_var($_GET['time'], FILTER_SANITIZE_STRING);
 }
 
 $include_ongoing = 1;
@@ -20,6 +20,10 @@ $error = '';
 
 // Set up get_announcements() args:
 // default args: role='all', keyword=null, time='thisweek' 
+//
+// (Note: sanitization is handled via Wordpress's WP_Query,
+// but we're checking values here first to generate errors if
+// the user enters something stupid or malicious)
 if ($roleval) {
 	if (preg_match('/^[a-z][\-]*/', $roleval)) { // should only be lowercase letters and dashes
 		$announcements = get_announcements($roleval);
@@ -27,15 +31,17 @@ if ($roleval) {
 	else {
 		$announcements = get_announcements();
 		$error = '<strong>Error:</strong> Invalid Role parameter given.';
+		$roleval = NULL;
 	}
 }
 elseif ($keywordval) {
-	if (ctype_alnum($keywordval) == true) { // should only be letters or numbers
+	if (preg_match('/[^a-zA-Z0-9 ]*/', $keywordval)) { // should only be letters, numbers or spaces (case insensitive)
 		$announcements = get_announcements('all', $keywordval);
 	}
 	else {
 		$announcements = get_announcements();
-		$error = '<strong>Error:</strong> Keywords can only contain letters and numbers. Please remove any special characters from your search and try again.';
+		$error = '<strong>Error:</strong> Keywords can only contain letters, numbers and spaces. Please remove any special characters from your search and try again.';
+		$keywordval = NULL;
 	}
 }
 elseif ($timeval) { 
@@ -45,6 +51,7 @@ elseif ($timeval) {
 	else {
 		$announcements = get_announcements();
 		$error = '<strong>Error:</strong> Invalid Time parameter given.';
+		$timeval = NULL;
 	}
 }
 else {
