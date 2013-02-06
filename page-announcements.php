@@ -2,13 +2,13 @@
 
 // Assign GET variables
 if (isset($_GET['role']) && $_GET['role'] !== 'all') {
-	$roleval = filter_var($_GET['role'], FILTER_SANITIZE_STRING);
+	$roleval = filter_var($_GET['role'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 }
 if (isset($_GET['keyword']) && $_GET['keyword'] !== '') {
-	$keywordval = filter_var($_GET['keyword'], FILTER_SANITIZE_STRING);
+	$keywordval = filter_var($_GET['keyword'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 }
 if (isset($_GET['time']) && $_GET['time'] !== 'thisweek') {
-	$timeval = filter_var($_GET['time'], FILTER_SANITIZE_STRING);
+	$timeval = filter_var($_GET['time'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
 }
 
 $include_ongoing = 1;
