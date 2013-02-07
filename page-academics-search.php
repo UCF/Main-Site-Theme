@@ -23,9 +23,9 @@ if ($get_params_exist == true) {
 		}
 	}
 	$program_type	= preg_match('/^[_a-z]+$/', $_GET['program_type']) 		? $_GET['program_type'] : 'undergrad'; // undergrad/undergrad_grad/grad 
-	$degree_type	= preg_match('/^[a-z]+$/', $_GET['degree_type']) 		? $_GET['degree_type']	: NULL;  // major/minor/grad/cert
-	$college		= preg_match('/^[-a-zA-Z]+$/', $_GET['college'])		? $_GET['college'] 		: NULL;
-	$sortby			= preg_match('/^[a-z]+$/', $_GET['sortby']) 			? $_GET['sortby'] 		: 'name';
+	$degree_type	= preg_match('/^[_a-z]+$/', $_GET['degree_type']) 		? $_GET['degree_type']	: NULL;  // major/minor/grad/cert
+	$college		= preg_match('/^[_-a-zA-Z]+$/', $_GET['college'])		? $_GET['college'] 		: NULL;
+	$sortby			= preg_match('/^[_a-z]+$/', $_GET['sortby']) 			? $_GET['sortby'] 		: 'name';
 	$sort			= ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC') 	? $_GET['sort'] 		: 'ASC';
 	$flip_sort		= ($sort == 'ASC') 										? 'DESC' 				: 'ASC';
 	
