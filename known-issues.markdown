@@ -4,9 +4,8 @@ Below are general issues with the UCF.edu theme or the WordPress installation (a
 
 
 ## General
-- Academics Search can occasionally chug, depending on the search query.  This is an issue on the search service's end.
-- Transparent .gif images uploaded through the WordPress media library (as of WP 3.4) will generate thumbnails with black backgrounds, on what appears to be specific server configurations (this does not occur on Webcom, but occurs on Dev + QA.)  This appears to be a limitation with WordPress's image processing library.  To counteract this, upload transparent .gif images at the exact size of the thumbnail you wish to resize to, or use an alternative file format, such as .png.
-- Centerpiece post previews have been disabled due to a bug with saving centerpiece media; if the 'Preview' button was clicked, any uploaded slide images would be wiped.  To preview centerpieces before they go live, publish the centerpiece with a non-immediate scheduled date (allow at least enough time to review your changes.)  If the centerpiece is good to be published, re-set the publish date to the current day/time.
+- Transparent .gif images uploaded through the WordPress media library (as of WP 3.4) will generate thumbnails with black backgrounds, on what appears to be specific server configurations (this does not occur on Webcom, but occurs on Dev + QA.)  To counteract this, upload transparent .gif images at the exact size of the thumbnail you wish to resize to (i.e., Spotlight images should be uploaded at exactly 110x110px), or use an alternative file format, such as .png.
+- Due to the way that post previews and autosaving works and the way that we are saving Centerpiece image data, whenever a Centerpiece is previewed before its content is saved as a draft or is published, the Centerpiece's saved images (slides and video thumbnails) will get wiped.  To counteract this, new Centerpieces will display a note at the top of the editor's Publish box with instructions for saving and previewing Centerpieces (the user should save any changes as a Draft before clicking the 'Preview' button.)
 
 
 ## Browser-Specific
