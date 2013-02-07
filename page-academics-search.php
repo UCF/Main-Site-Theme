@@ -6,7 +6,8 @@ $get_params_exist = ($query_string !== '') ? true : false;
 
 if ($get_params_exist == true) {
 	
-	// Assign GET params to variables, as well as other variables for the search/browse interface
+	// Assign GET params to variables and sanitize, as well as setting 
+	// other variables for the search/browse interface
 	$view 			= NULL;
 	$is_search		= $_GET['is_search'];
 	if ($is_search == true) { 
@@ -18,33 +19,40 @@ if ($get_params_exist == true) {
 	if ($_GET['search_query']) {
 		if (preg_match('/^[-a-zA-Z\s]+$/', $_GET['search_query'])) {
 			$search_query 		 = urlencode($_GET['search_query']);
-			$search_query_pretty = $_GET['search_query'];
+			$search_query_pretty = htmlentities($_GET['search_query']);
 		}
 	}
-	$program_type		 = $_GET['program_type']; // undergrad/undergrad_grad/grad 
-	$degree_type		 = $_GET['degree_type'];  // major/minor/grad/cert
-	$college			 = $_GET['college'];
-	$sortby				 = $_GET['sortby'] ? $_GET['sortby'] : 'name';
-	$sort				 = $_GET['sort'] ? $_GET['sort'] : 'ASC';
-	$flip_sort			 = ($sort == 'ASC') ? 'DESC' : 'ASC';
+	$program_type	= preg_match('/^[_a-z]+$/', $_GET['program_type']) 		? $_GET['program_type'] : 'undergrad'; // undergrad/undergrad_grad/grad 
+	$degree_type	= preg_match('/^[a-z]+$/', $_GET['degree_type']) 		? $_GET['degree_type']	: NULL;  // major/minor/grad/cert
+	$college		= preg_match('/^[-a-zA-Z]+$/', $_GET['college'])		? $_GET['college'] 		: NULL;
+	$sortby			= preg_match('/^[a-z]+$/', $_GET['sortby']) 			? $_GET['sortby'] 		: 'name';
+	$sort			= ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC') 	? $_GET['sort'] 		: 'ASC';
+	$flip_sort		= ($sort == 'ASC') 										? 'DESC' 				: 'ASC';
 	
 	// Build an array of query params based on GET params passed
 	$query_array = array(
-		'use'	=> 'programSearch',
+		'use'		=> 'programSearch',
+		'graduate' 	=> 0,
+		'order_by' 	=> $sortby.' '.$sort,
 	);	
 	
-	if ($college)			{ $query_array['college'] = $college; }
-	
-	$query_array['order_by'] = $sortby.' '.$sort;
-	
-	if ($sortby != 'name') 	{
+	// If a college is specified, add it
+	if ($college) { 
+		$query_array['college'] = $college; 
+	}
+	// If we're not sorting by just name, update 'order_by'
+	if ($sortby !== 'name')	{
 		$query_array['order_by'] .= ', name ASC';
 	}	
-	if ($search_query)		{ $query_array['search'] 	= $search_query; }
-	if ($degree_type && $degree_type !== 'grad') { $query_array['in'] = $degree_type; }
-	
-	$query_array['graduate'] = 0;
-	
+	// If there's a search query, add it
+	if ($search_query) { 
+		$query_array['search'] 	= $search_query; 
+	}
+	// Non-graduate degree results
+	if ($degree_type && $degree_type !== 'grad') { 
+		$query_array['in'] = $degree_type; 
+	}
+	// Update 'graduate' if necessary
 	if ($program_type == 'grad') {
 		$query_array['graduate'] = 1;
 	}	 
