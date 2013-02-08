@@ -895,6 +895,12 @@ class AZIndexLink extends CustomPostType {
 					'id' => $prefix.'url',
 					'type' => 'text',
 			),
+			array(
+				'name' => 'Web Administrators',
+				'desc' => 'Add web administrator information here.  Accepts HTML content.',
+				'id' => $prefix.'webadmins',
+				'type' => 'textarea',
+			),
 		);
 	}
 	

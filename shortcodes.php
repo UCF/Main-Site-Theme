@@ -896,4 +896,39 @@ function gravity_ldap($attr, $content = null) {
 	}
 }
 add_shortcode('gravity-with-ldap', 'gravity_ldap');
+
+
+/**
+ * Output a list of A-Z Index Links with their Web Administrator
+ * information.
+ * (This is a separate shortcode only so that we aren't
+ * modifying the azindexlink objectsToHtml or toHTML methods.)
+ **/
+function azindexlink_webadmins($attr) {
+	$args = array(
+		'post_type' => 'azindexlink',
+		'numberposts' => -1,
+		'orderby' => 'meta_value',
+		'order' => 'ASC',
+		'meta_key' => 'azindexlink_url',
+	);
+	$links = get_posts($args);
+	
+	$output = '<ul id="azindexlink-webadmins">';
+	
+	foreach ($links as $link) {
+		$url = get_post_meta($link->ID, 'azindexlink_url', true);
+		$webadmins = apply_filters('the_content', get_post_meta($link->ID, 'azindexlink_webadmins', true));
+		$output .= '<li><a href="'.$url.'">'.$url.'</a>';
+		if ($webadmins) {
+			$output .= '<br/><p>'.$webadmins.'</p>';
+		}
+		$output .= '</li>';
+	}
+	
+	$output .= '</ul>';
+	return $output;
+}
+add_shortcode('azindexlinks-webadmins', 'azindexlink_webadmins');
+
 ?>
