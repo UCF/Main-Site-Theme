@@ -1,13 +1,28 @@
 @media print {
 	
 	.print-only { display: block; }
+	a.print-noexpand:after { content: ""; }
 	.screen-only { display: none; }
 	
-	/* Home Page Overrides */
+	
+	/* Header/Footer Overrides */
 	#header-menu a[href]:after {
 		content: "";
 	}
 	
+	/* Home Page Overrides */
+	#centerpiece_slider .thumb_corner_tl,
+	#centerpiece_slider .thumb_corner_tr,
+	#centerpiece_slider .thumb_corner_bl,
+	#centerpiece_slider .thumb_corner_br,
+	#centerpiece_control { 
+		display: none;
+	}
+	
+	.home_spotlight_single > a[href]:after,
+	.home_spotlight_single .home_spotlight_title a[href]:after,
+	ul.news li.item > a.image:after { content: ""; }
+		
 	/* Subpage Overrides */
 	
 	

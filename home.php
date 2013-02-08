@@ -15,13 +15,13 @@
 		<div class="span4" id="home_leftcol">	
 			<h2>Spotlight</h2>
 			<?=frontpage_spotlights()?>
-			<p><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
+			<p class="screen-only"><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
 		</div>
 		<div class="span4" id="home_centercol">
 			<div class="col_padwrap">
 				<h2>News</h2>
 				<?=display_news()?>
-				<p><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
+				<p class="screen-only"><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
 			</div>
 		</div>
 		<div class="span4" id="home_rightcol">
@@ -33,7 +33,7 @@
 	</div>
 </div>
 	
-<div class="container-fullwidth" id="colleges_wrap">	
+<div class="container-fullwidth screen-only" id="colleges_wrap">	
 	<div class="container">
 		<div class="row" role="navigation">
 			<div class="span2">

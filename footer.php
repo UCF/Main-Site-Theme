@@ -1,6 +1,6 @@
 			<div id="footer">
 				
-				<div id="footer-navwrap" role="navigation">
+				<div id="footer-navwrap" role="navigation" class="screen-only">
 					<?=wp_nav_menu(array(
 						'theme_location' => 'footer-menu', 
 						'container' => 'false', 
@@ -14,7 +14,7 @@
 				</div>
 				
 				<p id="subfooter" role="contentinfo">
-					<a href="<?=site_url()?>/feedback">Comments and Feedback</a> | <a href="<?=site_url()?>">&copy; University of Central Florida</a>
+					<a href="<?=site_url()?>/feedback">Comments and Feedback</a> | <a href="<?=site_url()?>" class="print-noexpand">&copy; University of Central Florida</a>
 					<br/>
 					4000 Central Florida Blvd. Orlando, Florida, 32816 | 407.823.2000
 				</p>
@@ -23,13 +23,13 @@
 					'theme_location' => 'social-links', 
 					'container' => 'div',
 					'container_id' => 'social-menu-wrap', 
-					'menu_class' => 'menu', 
+					'menu_class' => 'menu screen-only', 
 					'menu_id' => 'social-menu',
 					'depth' => 1,
 					));
 				?>
 				
-				<p id="footer-logo"><a target="_blank" href="http://www.ucf.edu/50/">University of Central Florida 50th Anniversary</a></p>
+				<p id="footer-logo" class="screen-only"><a target="_blank" href="http://www.ucf.edu/50/">University of Central Florida 50th Anniversary</a></p>
 				
 				
 			</div>

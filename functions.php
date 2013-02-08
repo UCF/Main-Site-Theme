@@ -443,7 +443,7 @@ function output_weather_data($class=null) {
 	$condition 	= $weather['condition'];
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img']; ?>
-	<div id="weather_bug" class="<?=$class?>" role="complementary">
+	<div id="weather_bug" class="<?=$class?> screen-only" role="complementary">
 		<div id="wb_status_txt" style="background: url(<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.png) left center no-repeat;"><span><?=$temp?>F, <?=$condition?></span></div>
 	</div>
 	<?php

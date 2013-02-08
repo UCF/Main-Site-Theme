@@ -382,7 +382,7 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 function sc_events_widget() {
 	display_events();
 	print '<p class="events_icons"><a class="icsbtn" href="http://events.ucf.edu/?upcoming=upcoming&format=ics">ICS Format for upcoming events</a><a class="rssbtn" href="http://events.ucf.edu/?upcoming=upcoming&format=rss">RSS Format for upcoming events</a></p>
-	<p><a href="http://events.ucf.edu/?upcoming=upcoming" class="events_morelink">More Events</a></p>';
+	<p class="screen-only"><a href="http://events.ucf.edu/?upcoming=upcoming" class="events_morelink">More Events</a></p>';
 }
 add_shortcode('events-widget', 'sc_events_widget');
 

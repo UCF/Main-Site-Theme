@@ -90,7 +90,7 @@
 					<h1><?=bloginfo('name')?></h1>
 				</div>
 			</div>
-			<div id="header-nav-wrap" role="navigation">
+			<div id="header-nav-wrap" role="navigation" class="screen-only">
 				<?=wp_nav_menu(array(
 					'theme_location' => 'header-menu', 
 					'container' => 'false', 
