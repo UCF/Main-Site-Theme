@@ -11,6 +11,7 @@ Version: v0.0.0
  **/
 
 /* General */
+.print-only { display: none; }
 
 /* Events Widget */
 .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }

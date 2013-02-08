@@ -1,0 +1,14 @@
+@media print {
+	
+	.print-only { display: block; }
+	.screen-only { display: none; }
+	
+	/* Home Page Overrides */
+	#header-menu a[href]:after {
+		content: "";
+	}
+	
+	/* Subpage Overrides */
+	
+	
+}

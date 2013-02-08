@@ -230,7 +230,8 @@ function display_news(){?>
 			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
 				<a class="image ignore-external" href="<?=$item->get_link()?>">
 					<?php if($image):?>
-					<div class="news-thumb" style="background-image:url('<?=$image?>'); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?=$image?>',sizingMethod='scale');">Feed image for <?=$item->get_title()?></div>
+					<img class="print-only news-thumb" src="<?=$image?>" />
+					<div class="screen-only news-thumb" style="background-image:url('<?=$image?>'); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?=$image?>',sizingMethod='scale');">Feed image for <?=$item->get_title()?></div>
 					<?php endif;?>
 				</a>
 				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
