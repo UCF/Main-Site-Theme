@@ -1161,8 +1161,6 @@ function remove_yoast_meta_boxes() {
 		remove_meta_box('wpseo_meta', $post_type, 'normal');
     }
 }
-if (is_plugin_active('wordpress-seo/wp-seo.php')) {
-	add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
-}
+add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
  
 ?>
