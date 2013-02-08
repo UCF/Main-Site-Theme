@@ -1163,5 +1163,20 @@ function remove_yoast_meta_boxes() {
     }
 }
 add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
- 
+
+
+/**
+ * Output a page-specific stylesheet, if one exists.
+ * Intended for use in header.php (in edge-side include)
+ **/
+function page_specific_stylesheet() {
+	global $post;
+	$post_type = get_post_type($post->ID);
+	if(($stylesheet_id = get_post_meta($post->ID, $post_type.'_stylesheet', True)) !== False
+		&& ($stylesheet_url = wp_get_attachment_url($stylesheet_id)) !== False) {
+		print '<link rel="stylesheet" href="'.$stylesheet_url.'" type="text/css" media="all" />';
+	}	
+	else { return NULL; }
+}
+
 ?>

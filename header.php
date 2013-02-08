@@ -25,11 +25,7 @@
 		</script>
 		<?php endif;?>
 		
-		<?  $post_type = get_post_type($post->ID);
-			if(($stylesheet_id = get_post_meta($post->ID, $post_type.'_stylesheet', True)) !== False
-				&& ($stylesheet_url = wp_get_attachment_url($stylesheet_id)) !== False) { ?>
-				<link rel='stylesheet' href="<?=$stylesheet_url?>" type='text/css' media='all' />
-		<? } ?>
+		<?php esi_include('page_specific_stylesheet();'); ?>
 		
 		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
 			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>
