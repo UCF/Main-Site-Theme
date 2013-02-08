@@ -885,7 +885,7 @@ class AZIndexLink extends CustomPostType {
 		$use_thumbnails = False,
 		$use_title      = True,
 		$use_metabox    = True,
-		$use_shortcode	= True,
+		$use_shortcode	= False,
 		$taxonomies		= array('category', 'post_tag');
 	public function fields() {
 		$prefix = $this->options('name').'_';
