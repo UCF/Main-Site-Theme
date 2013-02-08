@@ -272,7 +272,7 @@ function get_page_subheader($post) {
 			<blockquote class="subhead_quote span8">
 				<?=$subheader->post_content?>
 				<p class="subhead_author"><?=get_post_meta($subheader->ID, 'subheader_student_name', TRUE)?></p>
-				<p class="subhead_quotelink"><a href="<?=get_permalink(get_page_by_title( 'Submit a Quote About UCF', OBJECT, 'page' )->ID)?>">Submit a quote &raquo;</a></p>
+				<p class="subhead_quotelink screen-only"><a href="<?=get_permalink(get_page_by_title( 'Submit a Quote About UCF', OBJECT, 'page' )->ID)?>">Submit a quote &raquo;</a></p>
 			</blockquote>
 			
 			<?php

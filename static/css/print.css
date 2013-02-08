@@ -3,6 +3,8 @@
 	.print-only { display: block; }
 	a.print-noexpand:after { content: ""; }
 	.screen-only { display: none; }
+	pre,
+	blockquote { border: 0; }
 	
 	
 	/* Header/Footer Overrides */
@@ -24,6 +26,6 @@
 	ul.news li.item > a.image:after { content: ""; }
 		
 	/* Subpage Overrides */
-	
+	#sidebar_left, #sidebar_right { display: none; }
 	
 }
