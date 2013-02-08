@@ -8,6 +8,7 @@
 		</div>
 		<div id="contentcol" class="span12">
 			<article role="main">
+				<p><a href="<?=get_permalink(get_page_by_title('Announcements', OBJECT, 'page')->ID)?>">&laquo; Back to Announcements</a></p>
 				<div class="row" id="announcement_meta">
 					<div class="span7">
 						<p class="date">
@@ -116,9 +117,6 @@
 						</tr>
 					</tbody>
 				</table>
-				
-				
-				<p><a href="<?=get_permalink(get_page_by_title('Announcements', OBJECT, 'page')->ID)?>">&laquo; Back to Announcements</a></p>
 				
 			</article>
 		</div>
