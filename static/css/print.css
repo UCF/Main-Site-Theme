@@ -28,4 +28,32 @@
 	/* Subpage Overrides */
 	#sidebar_left, #sidebar_right { display: none; }
 	
+	/* Academics Search */
+	#academics-search #filters,
+	#academics-search #browse { display: none; }
+	#academics-search ul.results-list .program .credits_wrap { border-top: 0px; padding-top: 0; text-align: left; }
+	
+	/* Announcements */
+	#announcements #filters { display: none; }
+	.announcement_wrap { margin-bottom: 20px; }
+	.announcement_wrap:before, .announcement_wrap:after {
+		background: transparent); 
+		-webkit-box-shadow: none;   
+		-moz-box-shadow: none;
+		box-shadow: none;
+		-webkit-transform: none;
+		-webkit-backface-visibility: hidden;    
+		-moz-transform: none;  
+		-o-transform: none;
+		-ms-transform: none;
+		transform: none;
+	}
+	.announcement_wrap:after {
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+		-ms-transform: none;
+		transform: none;
+	}
+	
 }

@@ -801,7 +801,7 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 											$link = '';
 											break;
 									}
-									$rolelist .= '<a href="'.get_permalink().$link.'">'.$role.'</a>, ';
+									$rolelist .= '<a class="print-noexpand" href="'.get_permalink().$link.'">'.$role.'</a>, ';
 								}
 								print substr($rolelist, 0, -2);
 							}
@@ -813,7 +813,7 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 							if ($announcement->announcementKeywords) {
 								$keywordlist = '';
 								foreach ($announcement->announcementKeywords as $keyword) {
-									$keywordlist .= '<a href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
+									$keywordlist .= '<a class="print-noexpand" href="'.get_permalink().'?keyword='.$keyword.'">'.$keyword.'</a>, ';
 								}
 								print substr($keywordlist, 0, -2);
 							}

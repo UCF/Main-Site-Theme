@@ -613,7 +613,7 @@ h2#ongoing-header { font-family: 'HelveticaNeue', Helvetica, sans-serif; font-we
 }
 .active_filter { display: visible; }
 
-#filters { margin-bottom: 15px; }
+#filters { margin-bottom: 20px; }
 #filter_form { margin: 0; }
 
 #filters #filter_wrap { width: 230px; }
@@ -622,6 +622,9 @@ h2#ongoing-header { font-family: 'HelveticaNeue', Helvetica, sans-serif; font-we
 
 #filters #addnew_wrap { text-align: right; }
 #filters #addnew_wrap #addnew_announcement { margin-top: 24px; }
+
+#announcements #upcoming-header { margin-bottom: 25px; font-size: 15px; line-height: 20px; }
+#announcements #upcoming-header .upcoming-header-alt { font-style: italic; font-weight: normal; padding-left: 5px; font-size: 20px; }
 
 .announcement_wrap { height: auto; background: #ffffe2; margin-bottom: 40px; padding: 15px; position: relative; }
 .announcement_wrap:before, .announcement_wrap:after {

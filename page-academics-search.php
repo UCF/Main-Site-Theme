@@ -210,7 +210,7 @@ if ($get_params_exist == true) {
 		
 		<div class="span10" id="contentcol">
 			<article role="main">
-				<p><a href="<?=get_site_url()?>/academics/">&laquo; Back to Academics</a></p>
+				<p class="screen-only"><a href="<?=get_site_url()?>/academics/">&laquo; Back to Academics</a></p>
 				
 				<?php the_content(); ?>
 			
@@ -238,16 +238,16 @@ if ($get_params_exist == true) {
 							<h3 id="degree-type-header">Browse All:</h3>
 							<ul class="nav nav-pills" role="navigation" id="degree-type-list">
 								<li class="<?=$majors_classes?>">
-									<a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a>
+									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a>
 								</li>
 								<li class="<?=$minors_classes?>">
-									<a href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a>
+									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a>
 								</li>
 								<li class="<?=$grad_classes?>">
-									<a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a>
+									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=grad&amp;degree_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a>
 								</li>
 								<li class="<?=$cert_classes?>">
-									<a href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a>
+									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a>
 								</li>
 							</ul>
 						</div>
@@ -272,13 +272,13 @@ if ($get_params_exist == true) {
 							<ul class="nav nav-tabs" id="degree-type-sort">
 								<li id="degree-type-sort-header">Sort by:</li>
 								<li class="dropdown <?=$sort_name_classes?>">
-									<a href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
+									<a class="print-noexpand" href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
 								</li>
 								<li class="dropdown <?=$sort_college_classes?>">
-									<a href="<?=$sort_college_url?>">College <b class="caret"></b></a>
+									<a class="print-noexpand" href="<?=$sort_college_url?>">College <b class="caret"></b></a>
 								</li>
 								<li class="dropdown <?=$sort_hours_classes?>">
-									<a href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
+									<a class="print-noexpand" href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
 								</li>
 							</ul>
 						</div>

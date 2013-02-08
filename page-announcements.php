@@ -136,6 +136,40 @@ else {
 }
 
 
+// Set up a human-readable 'results for' line at the top of the page:
+$resultsfor_timespan = 'this week';
+$resultsfor_subject = '';
+if ($roleval && $roleval !== 'all') {
+	$resultsfor_subject = ucfirst($roleval).' ';
+	$resultsfor_timespan = '(this week)';
+}
+elseif ($keywordval) {
+	$resultsfor_subject = '&ldquo;'.$keywordval.'&rdquo; ';
+	$resultsfor_timespan = '(this week)';
+}
+elseif ($timeval && $timeval !== 'thisweek') {
+	switch ($timeval) {
+		case 'nextweek':
+			$resultsfor_timespan = 'next week';
+			break;
+		case 'thismonth':
+			$resultsfor_timespan = 'this month';
+			break;
+		case 'nextmonth':
+			$resultsfor_timespan = 'next month';
+			break;
+		case 'thissemester':
+			$resultsfor_timespan = 'this semester';
+			break;
+		case 'all':
+			$resultsfor_timespan = '(all results)';
+			break;
+	}
+}
+$resultsfor = 'Results for: <span class="upcoming-header-alt">'.$resultsfor_subject.$resultsfor_timespan.'</span>';
+
+
+
 // Set up feed output based on GET params:
 if ( isset($_GET['output']) ) {
 	if ($include_ongoing == 1) {
@@ -237,48 +271,31 @@ else {
 				
 				<?php 
 					if ($announcements == NULL) { 
+						print '<h2 id="upcoming-header">'.$resultsfor.'</h2>';
 						print 'No announcements found.'; 
 					} else { 
 						// Output upcoming and ongoing events separately
+						if (!empty($upcoming) && empty($ongoing)) {
 					?>
-					<div class="row">
+						<div class="row">
+							<div class="span12" id="upcoming-onecol">
+								<h2 id="upcoming-header"><?=$resultsfor?></h2>
+								<?=print_announcements($upcoming, 'thumbtacks', 'span4', 3);?>
+						</div>
 					<?php
-						if (!empty($upcoming)) { 
-							if (!empty($ongoing)) {
-								print '<div class="span8" id="upcoming-twocol">';
-								print_announcements($upcoming, 'thumbtacks', 'span4', 2);
-								print '</div>';
-							}
-							// Don't show sidebar when no upcoming announcements exist
-							else {
-								print '<div class="span12" id="upcoming-body">';
-								print_announcements($upcoming);
-								print '</div>';
-							}
-						} 
-						else {
-							print '<div class="span12" id="upcoming-body">';
-							print '<p>No upcoming announcements found.</p>';
-							print '</div>';
+						} else { ?>
+						<div class="row">
+							<div class="span8" id="upcoming-twocol">
+								<h2 id="upcoming-header"><?=$resultsfor?></h2>
+								<?php (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'span4', 2) : print '<p>No upcoming announcements found.</p>'; ?>
+						</div>
+							
+						<div class="span3 offset1" id="ongoing-twocol">
+							<h2 id="ongoing-header">Ongoing Announcements</h2>
+							<?php (!empty($ongoing)) ? print_announcements($ongoing, 'list') : print '<p>No ongoing announcements found.</p>'; ?>
+						</div>
+					<?php
 						}
-						
-						if (!empty($ongoing)) {
-							if (!empty($upcoming)) {
-								print '<div class="span3 offset1" id="ongoing-twocol">';
-								print '<h2 id="ongoing-header">Ongoing Announcements</h2>';
-								print_announcements($ongoing, 'list');
-								print '</div>';
-							}
-							// When there are only ongoing announcements, have them fill the page
-							else {
-								print '<div class="span12" id="ongoing-body">';
-								print '<h2 id="ongoing-header">Ongoing Announcements</h2>';
-								print_announcements($ongoing, 'list');
-								print '</div>';
-							}
-						} ?>
-					</div>
-					<?php
 					}
 				?>
 				
