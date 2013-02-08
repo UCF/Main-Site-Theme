@@ -355,18 +355,24 @@ Config::$theme_settings = array(
 	)
 );
 
+/**
+ * Favicon, RSS url for header
+ **/
 Config::$links = array(
 	array('rel' => 'shortcut icon', 'href' => THEME_IMG_URL.'/favicon.ico',),
 	array('rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => get_bloginfo('rss_url'),),
 );
 
-
+/**
+ * Add css files to the list of stylesheet references in the header
+ **/
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
 	THEME_STATIC_URL.'/css/university-header.css',
 );
 
+// Default bootstrap responsive styles
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
 		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.min.css'
@@ -374,17 +380,27 @@ if ($theme_options['bootstrap_enable_responsive'] == 1) {
 }
 
 array_push(Config::$styles,	
+	// Force GravityForms styles here so we can override them
 	plugins_url( 'gravityforms/css/forms.css' ),
 	THEME_CSS_URL.'/webcom-base.css', 
 	get_bloginfo('stylesheet_url')
 );
 
+// Custom responsive styles
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
 	array_push(Config::$styles, 
 		THEME_URL.'/style-responsive.css'
 	);	
 }
 
+array_push(Config::$styles,	
+	array('src' => THEME_CSS_URL.'/print.css', 'media' => 'print')
+);
+
+
+/**
+ * Add javascript to the list of javascript references in the header + footer
+ **/
 Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
@@ -394,6 +410,17 @@ Config::$scripts = array(
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
 
+function jquery_in_header() {
+    wp_deregister_script( 'jquery' );
+    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.1.min.js');
+    wp_enqueue_script( 'jquery' );
+}    
+ 
+add_action('wp_enqueue_scripts', 'jquery_in_header');
+
+/**
+ * Meta content for header
+ **/
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
@@ -403,13 +430,3 @@ if ($theme_options['gw_verify']){
 		'content' => htmlentities($theme_options['gw_verify']),
 	);
 }
-
-
-
-function jquery_in_header() {
-    wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.1.min.js');
-    wp_enqueue_script( 'jquery' );
-}    
- 
-add_action('wp_enqueue_scripts', 'jquery_in_header');
