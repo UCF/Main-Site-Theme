@@ -908,9 +908,8 @@ function azindexlink_webadmins($attr) {
 	$args = array(
 		'post_type' => 'azindexlink',
 		'numberposts' => -1,
-		'orderby' => 'meta_value',
+		'orderby' => 'post_title',
 		'order' => 'ASC',
-		'meta_key' => 'azindexlink_url',
 	);
 	$links = get_posts($args);
 	
@@ -919,7 +918,7 @@ function azindexlink_webadmins($attr) {
 	foreach ($links as $link) {
 		$url = get_post_meta($link->ID, 'azindexlink_url', true);
 		$webadmins = apply_filters('the_content', get_post_meta($link->ID, 'azindexlink_webadmins', true));
-		$output .= '<li><a href="'.$url.'">'.$url.'</a>';
+		$output .= '<li><a href="'.$url.'">'.$link->post_title.'</a>';
 		if ($webadmins) {
 			$output .= '<br/><p>'.$webadmins.'</p>';
 		}
