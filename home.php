@@ -50,7 +50,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container" id="home-footerwrap">
 	<div class="row">
 
 		<?php get_footer();?>

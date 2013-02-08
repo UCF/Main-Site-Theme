@@ -190,6 +190,7 @@ div.top_five_majors {
 
 /* Footer */
 #footer { border-top: 0; margin: 20px 0; }
+#home-footerwrap #footer { margin: 20px 0 20px 20px; }
 #footer a:hover { color: #e50606; }
 #footer-navwrap { float: right; position: relative; left: -50%; }
 .ie7 #footer-navwrap { width: 670px; }
