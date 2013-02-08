@@ -1142,5 +1142,27 @@ function admin_centerpiece_enqueue_scripts() {
 	}
 }
 add_action('admin_enqueue_scripts', 'admin_centerpiece_enqueue_scripts');
+
+
+/**
+ * Disable the Yoast SEO meta box on post types that we don't need it on
+ * (non-public-facing posts, i.e. Centerpieces, Subheaders...)
+ **/
+function remove_yoast_meta_boxes() {
+	$post_types = array(
+		'centerpiece',
+        'subheader',
+        'azindexlink',
+        'video',
+        'document',
+        'publication',
+	);
+    foreach ($post_types as $post_type) {
+		remove_meta_box('wpseo_meta', $post_type, 'normal');
+    }
+}
+if (is_plugin_active('wordpress-seo/wp-seo.php')) {
+	add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
+}
  
 ?>
