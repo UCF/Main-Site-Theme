@@ -47,6 +47,7 @@
 			var ALERT_RSS_URL				= '<?php echo get_theme_option('alert_feed_url'); ?>';
 			var SITE_DOMAIN					= '<?php echo WP_SITE_DOMAIN; ?>';
 			var SITE_PATH					= '<?php echo WP_SITE_PATH; ?>';
+			var PRINT_HEADER_IMG			= '<?php echo THEME_IMG_URL.'/ucflogo-print.png'; ?>';
 
 		</script>
 		

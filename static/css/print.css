@@ -6,6 +6,8 @@
 	pre,
 	blockquote { border: 0; }
 	
+	/* UCF Header (black bar) Overrides */
+	#UCFtitle a:after { content: ""; }
 	
 	/* Header/Footer Overrides */
 	#header-menu a[href]:after {
@@ -27,15 +29,18 @@
 		
 	/* Subpage Overrides */
 	#sidebar_left, #sidebar_right { display: none; }
+	iframe, object, embed { display: none; }
 	
 	/* Academics Search */
 	#academics-search #filters,
 	#academics-search #browse { display: none; }
+	#academics-search ul.results-list .program { border-bottom: 1px solid #ddd; }
+	#academics-search ul.results-list .program:last-child { border-bottom: 0; }
 	#academics-search ul.results-list .program .credits_wrap { border-top: 0px; padding-top: 0; text-align: left; }
 	
 	/* Announcements */
 	#announcements #filters { display: none; }
-	.announcement_wrap { margin-bottom: 20px; }
+	.announcement_wrap { margin-bottom: 20px; border-bottom: 1px solid #ddd; }
 	.announcement_wrap:before, .announcement_wrap:after {
 		background: transparent); 
 		-webkit-box-shadow: none;   

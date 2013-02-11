@@ -28,7 +28,8 @@
 		}
 		
 		// create contents
-		var elementContent='    	<div class="UCFHBWrapper">'+
+		var elementContent='<img class="print-only" src="' + PRINT_HEADER_IMG + '" style="width: 100%;" />'+    	
+		'		<div class="UCFHBWrapper">'+
 		'			<div id="UCFtitle">'+
 		'				<a href="http:\/\/www.ucf.edu\/">'+
 		'				<span class="UCFHBText">University of Central Florida<\/span>'+
