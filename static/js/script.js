@@ -370,11 +370,11 @@ toggleAnnouncementFilters = function($) {
 ieRoundedCornerThumbs = function($) {
 	var corners = $('<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>');
 	if ( $('body').hasClass('ie7') || $('body').hasClass('ie8') ) {
-		corners.appendTo('.spotlight_thumb, .news-thumb');
+		corners.appendTo('.screen-only.spotlight_thumb, .screen-only.news-thumb');
 	}
 	// IE9 border-radius combined with filter attribute don't play nicely together
 	if ( $('body').hasClass('ie9') ) {
-		corners.appendTo('.news-thumb');
+		corners.appendTo('.screen-only.news-thumb');
 	}
 }
 
