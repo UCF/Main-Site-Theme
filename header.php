@@ -32,6 +32,19 @@
 		<?php } ?>
 		
 		<script type="text/javascript">
+			<?php if (is_page('Post An Announcement')) { 
+				$keywords = '';
+				foreach (get_terms(array('keywords')) as $term) {
+					$keywords .= '"'.$term->name.'", ';
+				}
+				$keywords = substr($keywords, 0, -2);
+			?>
+			/* Todo: actually figure out why these vars don't print to the page with RGForms::parse_shortcode() */
+				var gfcpt_tag_inputs = {"tag_inputs": [{input: "#input_4_9", taxonomy: "keywords"}]};
+				var gfcpt_tag_taxonomies = [];
+				gfcpt_tag_taxonomies["keywords"] = [<?=$keywords?>];
+			<?php } ?>
+		
 			var PostTypeSearchDataManager = {
 				'searches' : [],
 				'register' : function(search) {
