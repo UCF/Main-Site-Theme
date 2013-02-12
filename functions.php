@@ -513,13 +513,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	
 	elseif ($keyword !== NULL) {
 		$keyword_args = array(
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'keywords',
-					'field' => 'slug',
-					'terms' => $keyword,
-				)
-			),
+			's' => $keyword,
 			'meta_query' => array(
 				array(
 					'key' => 'announcement_start_date',
