@@ -121,7 +121,18 @@ Config::$custom_taxonomies = array(
 	'AudienceRoles'
 );
 
-Config::$body_classes = array('default',);
+Config::$body_classes = array('default');
+# Set some helper body classes for Android/iPhone overrides
+$ua = $_SERVER['HTTP_USER_AGENT'];
+if (stripos(strtolower($ua), 'android') !== false) {
+	array_push(Config::$body_classes, 'android');
+}
+if ( (strstr($ua, 'iPod')) || (strstr($ua, 'iPhone')) ) {
+	array_push(Config::$body_classes, 'iphone');
+}
+if (strstr($ua, 'iPad')) {
+	array_push(Config::$body_classes, 'ipad');
+}
 
 
 /*
