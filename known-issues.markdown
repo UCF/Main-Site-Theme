@@ -30,3 +30,8 @@ Below are general issues with the UCF.edu theme or the WordPress installation (a
 
 #### 1.5, 1.6
 - Emergency Alert icons do not render correctly (appears to be a bug with setting a background image to the icon div; probably a background-size imcompatibility.)  Most v1.5/1.6 users likely won't ever encounter this problem because of the m.ucf.edu redirect, however.  (Tested on Sony Xperia X10 running 1.6, HTC Hero running 1.5) 
+
+#### 4.1, 4.2
+- Dropdown `<select>` boxes render incorrectly, depending on the device.
+	* Motorola Razr Maxx HD, Samsung Galaxy Nexus III, Samsung Galaxy Note II (all 4.1): no select arrow is rendered; styles have been modified to an extent to look acceptable.
+	* Google Nexus 7 (4.1), LG Nexus 4 (4.2): select box has no padding (so the height of the select box is incorrect); no select arrow is rendered. Style modifications are ignored and there is not currently a known fix for this.
