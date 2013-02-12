@@ -135,7 +135,7 @@
 @media (max-width: 767px) {
 	#UCFHBHeader { margin-left: -20px; width: 100%; padding-right: 40px; }
 	
-	.android select { -webkit-appearance: menulist-button !important; }
+	.android select { -webkit-appearance: listbox !important; line-height: 10px !important; }
 	
 	.status-alert .alert-wrap { width: 100%; }
 	.status-alert .alert-icon { 
