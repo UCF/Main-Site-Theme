@@ -66,7 +66,7 @@ define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('ESI_INCLUDE_URL', THEME_STATIC_URL.'/esi.php');
 
 # Weather
-define('WEATHER_URL', 'http://webcom.dev.smca.ucf.edu/sandbox/weather-data/');
+define('WEATHER_URL', 'http://weather.smca.ucf.edu/');
 define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');
 define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
 
