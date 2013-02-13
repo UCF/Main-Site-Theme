@@ -744,8 +744,7 @@ if (typeof jQuery != 'undefined'){
 		phonebookStaffToggle($);
 		removeAndroidModals($);
 		
-		// Disable me in Prod!!
-		devBootstrap($);
+		//devBootstrap($);
 
 		statusAlertCheck($);
 		setInterval(function() {statusAlertCheck($);}, 30000);
