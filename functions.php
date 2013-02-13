@@ -724,6 +724,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			$announcement->announcementRoles		 = wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names"));
 			$announcement->announcementKeywords		 = wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names"));
 			$announcement->announcementIsNew		 = ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false;
+			
+			// Fallback for bad date ranges--force the start date to equal
+			// the end date if the start date is later than the end date
+			if ( date('Ymd', strtotime($announcement->announcementStartDate)) > date('Ymd', strtotime($announcement->announcementEndDate)) ) {
+				$announcement->announcementStartDate = $announcement->announcementEndDate;
+			}
 		}
 		
 		return $announcements;
@@ -765,7 +771,14 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 						<div class="thumbtack"></div>
 						<?php if ($announcement->announcementIsNew == true) { ?><div class="new">New Announcement</div><?php } ?>
 						<h3><a href="<?=get_permalink($announcement->ID)?>"><?=$announcement->post_title?></a></h3>
-						<p class="date"><?=date('M d', strtotime($announcement->announcementStartDate))?> - <?=date('M d', strtotime($announcement->announcementEndDate))?></p>
+						<p class="date">
+							<?php if ($announcement->announcementStartDate == $announcement->announcementEndDate) {
+								print date('M d', strtotime($announcement->announcementEndDate));
+							} else {
+								print date('M d', strtotime($announcement->announcementStartDate)) .' - '. date('M d', strtotime($announcement->announcementEndDate));
+							}
+							?>
+						</p>
 						<p><?=truncateHtml(strip_tags($announcement->post_content, 200))?></p>
 						<p class="audience"><strong>Audience:</strong> 
 						<?php 
