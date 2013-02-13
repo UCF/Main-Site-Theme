@@ -853,7 +853,7 @@ function gf_login_html($error = false) {
 				<div id="auth-form-items">
 					<p><label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input></p>
 					<p><label for="password">Password</label><input name="password" id="password" type="password"></input></p>
-					<p><input name="submit-auth" id="submit-auth" type="submit" value="Submit" /></p>
+					<p><input name="submit-auth" class="btn" id="submit-auth" type="submit" value="Submit" /></p>
 				</div>
 			</div>
 		</form>
