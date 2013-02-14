@@ -976,19 +976,20 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 	// WPDB stuff
 	global $wpdb;
 	global $blog_id;
-	define( 'DIEONDBERROR', true );
-	//$wpdb->show_errors();
+	$blog_id == 1 ? $gf_table = 'wp_rg_lead' : $gf_table = 'wp_'.$blog_id.'_rg_lead'; # Y U NO USE CONSISTENT NAMING SCHEMA??
+	define( 'DIEONDBERROR', true ); 
+	$wpdb->show_errors();
 	
 	// Get all entry IDs
 	$entry_ids = $wpdb->get_results( 
-		"
-		SELECT 		id
-		FROM 		wp_".$blog_id."_rg_lead
-		WHERE		form_id = ".$formid."
-		AND			date_created >= '".$dur_start_date." 00:00:00' 
-		AND			date_created <= '".$dur_end_date." 23:59:59'
-		ORDER BY	date_created ASC
-		"
+			"
+			SELECT          id
+			FROM            ".$gf_table."
+			WHERE           form_id = ".$formid."
+			AND                     date_created >= '".$dur_start_date." 00:00:00' 
+			AND                     date_created <= '".$dur_end_date." 23:59:59'
+			ORDER BY        date_created ASC
+			"
 	);
 	
 	// Begin $output
