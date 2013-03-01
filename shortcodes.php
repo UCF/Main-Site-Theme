@@ -267,11 +267,8 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 
 		if( have_posts() ) while ( have_posts() ) : the_post();
 		
-			$slide_order 			= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
-			$slide_order			= explode(",",$slide_order);
-			foreach ($slide_order as $key => $val) {
-				if ($val === '') { unset($slide_order[$key]); }
-			}
+			$slide_order 			= trim(get_post_meta($post->ID, 'ss_slider_slideorder', TRUE), ',');
+			$slide_order			= explode("," , $slide_order);			
 			$slide_count			= count($slide_order);
 			$slide_title			= get_post_meta($post->ID, 'ss_slide_title', TRUE);
 			$slide_content_type 	= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
@@ -284,6 +281,7 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 			$slide_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
 			$slide_duration			= get_post_meta($post->ID, 'ss_slide_duration', TRUE);
 			$rounded_corners		= get_post_meta($post->ID, 'ss_slider_rounded_corners', TRUE);
+						
 			
 			// #centerpiece_slider must contain an image placeholder set to the max
 			// slide width in order to trigger responsive styles properly--
@@ -292,15 +290,19 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 						  <ul>
 						  	<img src="'.get_bloginfo('stylesheet_directory').'/static/img/centerpiece_placeholder.gif" width="940" style="max-width: 100%; height: auto;">';
 			
+			
 			foreach ($slide_order as $s) {
-				if ($s !== '') {
+				
+				if ( ($s !== '') && ($s !== NULL) ) {
+					$s = (int)$s;
 					
 					$slide_image_url = wp_get_attachment_image_src($slide_image[$s], 'centerpiece-image');
-					$slide_video_thumb_url = wp_get_attachment_image_src($slide_video_thumb[$s], 'centerpiece-image');
-					$slide_duration  = ($slide_duration[$s] !== '' ? $slide_duration[$s] : 6);
+					$slide_video_thumb_url = wp_get_attachment_image_src($slide_video_thumb[$s], 'centerpiece-image');			
+					
+					$slide_single_duration = (!empty($slide_duration[$s]) ? $slide_duration[$s] : '6');
 					
 					// Start <li>
-					$output .= '<li class="centerpiece_single" id="centerpiece_single_'.$s.'" data-duration="'.$slide_duration.'">';
+					$output .= '<li class="centerpiece_single" id="centerpiece_single_'.$s.'" data-duration="'.$slide_single_duration.'">';
 					
 					// Add <a> tag and target="_blank" if applicable:
 					if ($slide_links_to[$s] !== '' && $slide_content_type[$s] == 'image') {
