@@ -188,6 +188,8 @@
 	
 	#colleges_wrap { margin-left: -20px; padding: 5px 20px; }
 	
+	#home-footerwrap #footer { margin: 20px 0; }
+	
 	/* Shrinkable bootstrap tables for tablets/phones.
 	Responsive table guide via css-tricks.com/responsive-data-tables/ */
 	
