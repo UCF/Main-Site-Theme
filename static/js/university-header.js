@@ -540,7 +540,7 @@
 			selectEl.options.add(new Option("Ask UCF", "http://ask.ucf.edu"));
 			selectEl.options.add(new Option("Financial Aid", "http://finaid.ucf.edu/"));
 			selectEl.options.add(new Option("UCF Today", "http://today.ucf.edu/"));
-			selectEl.options.add(new Option("Knight's Email", "https://www.secure.net.ucf.edu/knightsmail/"));
+			selectEl.options.add(new Option("Knights Email", "https://www.secure.net.ucf.edu/knightsmail/"));
 			selectEl.options.add(new Option("Events at UCF", "http://events.ucf.edu/"));
 			selectEl.options.add(new Option("UCF 50th Anniversary", "http://www.ucf.edu/50/"));
 			selectEl.options.add(new Option("- - - - - - - - - -", ""));
