@@ -857,7 +857,7 @@ function announcements_to_rss($announcements) {
 	print '<link>http://www.ucf.edu/</link>';
 	print '<language>en-us</language>';
 	print '<copyright>ucf.edu</copyright>';
-	print '<ttl>30</ttl>'; // Time to live (in minutes); force a cache refresh after this time
+	print '<ttl>1</ttl>'; // Time to live (in minutes); force a cache refresh after this time
 	print '<description>Feed for UCF Announcements.</description>';
 
 	function print_item($announcement) {
