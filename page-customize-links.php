@@ -78,7 +78,7 @@
 								<option value="http://ask.ucf.edu">Ask UCF</option>
 								<option value="http://finaid.ucf.edu/">Financial Aid</option>
 								<option value="http://today.ucf.edu/">UCF Today</option>
-								<option value="https://www.secure.net.ucf.edu/knightsmail/">Knight's Email</option>
+								<option value="https://www.secure.net.ucf.edu/knightsmail/">Knights Email</option>
 								<option value="http://events.ucf.edu/">Events at UCF</option>
 								<option value="">- - - - - - - - - -</option>
 								<option value="+">+ Add This Page</option>
