@@ -45,13 +45,11 @@
 	
 	// Facebook Link
 	if ($show_facebook == 'on') {	
-		
 		print '<h3 id="sidebar_r_facebook" class="sidebar_title">Connect With UCF</h3>';
 		print '<div id="sidebar_r_facebook_wrap" class="sidebar_r_wrap">';
-		print '<iframe scrolling="no" frameborder="0" src="http://www.facebook.com/connect/connect.php?id=35078114590&connections=0&stream=0&css=PATH_TO_STYLE_SHEET" allowtransparency="true" style="border: medium none; width: 225px; height: 100px;"></iframe>';
+		print '<iframe src="//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fucf&amp;width=292&amp;height=62&amp;show_faces=false&amp;colorscheme=light&amp;stream=false&amp;border_color&amp;header=false" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:292px; height:62px;" allowTransparency="true"></iframe>';
 		print '</div>';
-		
-	}
+	}	
 	
 	// Embed Widget 1
 	if ($embed1) {	
