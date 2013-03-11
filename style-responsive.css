@@ -50,6 +50,7 @@
 	#sidebar_right .sidebar_r_wrap > p iframe,
 	#sidebar_right .sidebar_r_wrap > p embed,
 	#sidebar_right .sidebar_r_wrap > p object { width: 220px; height:auto; }
+	#sidebar_right #sidebar_r_facebook_wrap > iframe { margin-left: -10px; width: 230px !important; height: 80px !important; }
 	
 	#contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 300px; }
 	
