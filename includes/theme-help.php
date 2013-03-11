@@ -224,7 +224,7 @@
 						<tr>
 							<td>order_by</td>
 							<td>How to order results by term.  Note that this does not affect alphabetical results.  See <a href="http://codex.wordpress.org/Class_Reference/WP_Query#Order_.26_Orderby_Parameters">WP Query Orderby params</a> in the Wordpress Codex for more information.</td>
-							<td>post_title</td>
+							<td>title</td>
 							<td>
 								<ul>
 									<li style="list-style: disc; margin-left: 15px;">none</li>
