@@ -487,7 +487,7 @@ a.home_spotlight_readmore {
 #sidebar_right.notoppad,
 #sidebar_left .notoppad { padding-top: 0 !important; }
 #sidebar_right .sidebar_title { color: #777; }
-#sidebar_right #sidebar_r_facebook_wrap iframe { margin-left: -10px; width: 230px !important; height: 80px !important; }
+#sidebar_right > .sidebar_r_wrap#sidebar_r_facebook_wrap > iframe { margin-left: -10px; width: 230px !important; height: 80px !important; }
 #sidebar_right #sidebar_r_today { font-size: 14px; line-height: 16px; color: #000; padding-bottom: 15px; }
 #sidebar_right .news { list-style-type: none; margin-left: 0; }
 #sidebar_right .news .item { margin-bottom: 10px; }
