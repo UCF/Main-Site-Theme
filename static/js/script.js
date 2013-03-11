@@ -536,6 +536,9 @@ Generic.PostTypeSearch = function($) {
 								var column_wrap = $('<div class="' + column_width + '"><ul></ul></div>'),
 									column_list = column_wrap.find('ul');
 
+								// Alphabetize search results
+								column_elements.reverse();
+
 								$.each(column_elements, function(element_index, element) {
 									column_list.append($(element));
 								});
