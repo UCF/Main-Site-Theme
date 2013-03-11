@@ -676,7 +676,33 @@ h2#ongoing-header { font-family: 'HelveticaNeue', Helvetica, sans-serif; font-we
 #announcement_meta p { margin-bottom: 2px; }
 
 
-/* Post an Announcement */
+/* Post an Announcement Login */
+#ann-login-wrapper {
+	background: #fff6d4;
+	border: 1px solid #dad1ac;
+	padding: 12px;
+	max-width: 560px;
+}
+
+#ann-login-wrapper label {
+	font-weight: bold;
+}
+
+#ann-login-wrapper h2 {
+	font-weight: normal;
+	margin-bottom: 10px;
+}
+
+#login_error p { margin-bottom: 5px; }
+
+#auth-form .wrapper { overflow: auto; }
+
+#auth-form-items {
+	max-width: 280px;
+}
+
+
+/* Post an Announcement Form */
 ul.tagit { width: 100% !important; border: 0 !important; padding: 0 !important; overflow: visible !important; }
 li.tagit-choice {  }
 li.tagit-choice .tagit-label { font-family: 'Helvetica Neue', Helvetica, sans-serif !important; }
@@ -879,33 +905,4 @@ a.btn-danger:hover,
 a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
-}
-
-#ann-login-wrapper {
-	background: #fff6d4;
-	border: 1px solid #dad1ac;
-	padding: 12px;
-	width: 560px;
-}
-
-#ann-login-wrapper label {
-	font-weight: bold;
-}
-
-#ann-login-wrapper p {
-	margin-bottom: 0;
-}
-
-#ann-login-wrapper h2 {
-	font-weight: normal;
-	margin-bottom: 10px;
-}
-
-#login_error {
-	float: right;
-	width: 55%;
-}
-
-#auth-form-items {
-	width: 45%;
 }

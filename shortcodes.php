@@ -841,21 +841,22 @@ function gf_login_html($error = false) {
 
 	<div id="ann-login-wrapper">
 		<h2>Login</h2>
+		<p>To post a new announcement, please log in using your NID and NID password below.<br/></p>
 		<form method="post" id="auth-form" action="<?=$_SERVER["REQUEST_URI"]; ?>">
 			<div class="wrapper">
 				<?php if ($error):?>
-				<div id="login_error">
+				<div class="alert alert-error" id="login_error">
 					<strong>Error:</strong>
 					<p>Oops! Your NID or password is invalid or the authentication service was unavailable.</p>
-					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"</p>
-					<p>To reset your password, go to the <a href="http://mynid.ucf.edu/">Change Your NID Password</a> page.</p>
-					<p>For further help, contact the Service Desk at 407-823-5117, Monday-Friday 8am-5pm.</p>
+					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"<br/>
+					To reset your password, go to the <a href="http://mynid.ucf.edu/">Change Your NID Password</a> page.<br/>
+					For further help, contact the Service Desk at 407-823-5117, Monday-Friday 8am-5pm.</p>
 				</div>
 				<?php endif; ?>
 				<div id="auth-form-items">
-					<p><label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input></p>
-					<p><label for="password">Password</label><input name="password" id="password" type="password"></input></p>
-					<p><input name="submit-auth" class="btn" id="submit-auth" type="submit" value="Submit" /></p>
+					<label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input>
+					<label for="password">Password</label><input name="password" id="password" type="password"></input>
+					<input name="submit-auth" class="btn" id="submit-auth" type="submit" value="Submit" />
 				</div>
 			</div>
 		</form>
