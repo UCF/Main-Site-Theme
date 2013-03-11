@@ -1060,9 +1060,8 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 			}
 			
 			$output .= '<li><strong>Entry ID: </strong>'.$entry_output['id'].'</li>';
+			$output .= '<li><strong>From: </strong>'.$entry_output['name'].' < '.$entry_output['email'].' ></li>';
 			$output .= '<li><strong>Date Submitted: </strong>'.$entry_output['date'].'</li>';
-			$output .= '<li><strong>Name: </strong>'.$entry_output['name'].'</li>';
-			$output .= '<li><strong>E-mail: </strong>'.$entry_output['email'].'</li>';
 			$output .= '<li><strong>Tell Us About Yourself: </strong><br/><ul>';
 			foreach ($about_array as $about) {
 				$output .= '<li>'.$about.'</li>';
