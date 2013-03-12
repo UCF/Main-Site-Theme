@@ -1009,74 +1009,77 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 			$about_array 	= array();
 			$routes_array 	= array();
 			
-			foreach ($entry as $field=>$val) {
-				// Our form fields names are stored as numbers. The naming schema is as follows:
-				// 1 			- Name
-				// 2 			- E-mail
-				// 3.1 to 3.7 	- 'Tell Us About Yourself' values
-				// 4.1 to 4.7	- 'Routes to' values
-				// 5			- Comment
+			// Only setup email for active entries (not trash/spam)
+			if ($entry['status'] == 'Active') { 
+				foreach ($entry as $field=>$val) {
+					// Our form fields names are stored as numbers. The naming schema is as follows:
+					// 1 			- Name
+					// 2 			- E-mail
+					// 3.1 to 3.7 	- 'Tell Us About Yourself' values
+					// 4.1 to 4.7	- 'Routes to' values
+					// 5			- Comment
+					
+					// Entry ID
+					$entry_output['id'] = $obj->id;
+					
+					// Date
+					if ($field == 'date_created') {
+						// Trim off seconds from date_created
+						$val = date('M. j, Y', strtotime($val));
+						$entry_output['date'] .= $val;
+					}
+					
+					// Name
+					if ($field == 1) {
+						if ($val) {
+							$entry_output['name'] .= $val;
+						}
+					}
+					// E-mail
+					if ($field == 2) {
+						if ($val) {
+							$entry_output['email'] .= $val;
+						}
+					}
+					// Tell Us About Yourself
+					if ($field >=3 && $field < 4) {
+						if ($val) {
+							$about_array[] .= $val;
+						}
+					}
+					// Route To
+					if ($field >= 4 && $field < 5) {
+						if ($val) {
+							$routes_array[] .= $val;
+						}
+					}
+					// Comments
+					if ($field == 5) {
+						if ($val) {
+							$entry_output['comment'] .= $val;
+						}
+					}
+				}
+			
+				$output .= '<li><strong>Entry: </strong>#'.$entry_output['id'].'</li>';
+				$output .= '<li><strong>From: </strong>'.$entry_output['name'].' < '.$entry_output['email'].' ></li>';
+				$output .= '<li><strong>Date Submitted: </strong>'.$entry_output['date'].'</li>';
+				$output .= '<li><strong>Tell Us About Yourself: </strong><br/><ul>';
+				foreach ($about_array as $about) {
+					$output .= '<li>'.$about.'</li>';
+				}
+				$output .= '</ul></li>';
 				
-				// Entry ID
-				$entry_output['id'] = $obj->id;
+				$output .= '<li><strong>Route To: </strong><br/><ul>';
+				foreach ($routes_array as $routes) {
+					$output .= '<li>'.$routes.'</li>';
+				}
+				$output .= '</ul></li>';
 				
-				// Date
-				if ($field == 'date_created') {
-					// Trim off seconds from date_created
-					$val = date('M. j, Y', strtotime($val));
-					$entry_output['date'] .= $val;
-				}
+				$output .= '<li><strong>Comments: </strong><br/>'.$entry_output['comment'].'</li>';
 				
-				// Name
-				if ($field == 1) {
-					if ($val) {
-						$entry_output['name'] .= $val;
-					}
-				}
-				// E-mail
-				if ($field == 2) {
-					if ($val) {
-						$entry_output['email'] .= $val;
-					}
-				}
-				// Tell Us About Yourself
-				if ($field >=3 && $field < 4) {
-					if ($val) {
-						$about_array[] .= $val;
-					}
-				}
-				// Route To
-				if ($field >= 4 && $field < 5) {
-					if ($val) {
-						$routes_array[] .= $val;
-					}
-				}
-				// Comments
-				if ($field == 5) {
-					if ($val) {
-						$entry_output['comment'] .= $val;
-					}
-				}
+				$output .= '</ul><hr />';
 			}
-			
-			$output .= '<li><strong>Entry ID: </strong>'.$entry_output['id'].'</li>';
-			$output .= '<li><strong>From: </strong>'.$entry_output['name'].' < '.$entry_output['email'].' ></li>';
-			$output .= '<li><strong>Date Submitted: </strong>'.$entry_output['date'].'</li>';
-			$output .= '<li><strong>Tell Us About Yourself: </strong><br/><ul>';
-			foreach ($about_array as $about) {
-				$output .= '<li>'.$about.'</li>';
-			}
-			$output .= '</ul></li>';
-			
-			$output .= '<li><strong>Route To: </strong><br/><ul>';
-			foreach ($routes_array as $routes) {
-				$output .= '<li>'.$routes.'</li>';
-			}
-			$output .= '</ul></li>';
-			
-			$output .= '<li><strong>Comments: </strong><br/>'.$entry_output['comment'].'</li>';
-			
-			$output .= '</ul><hr />';
 		}
 		
 	}	
