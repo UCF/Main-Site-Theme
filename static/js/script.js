@@ -634,7 +634,7 @@ $('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(fun
 var statusAlertCheck = function($) {
 	$.getFeed({
 		url     : ALERT_RSS_URL,
-		cache	: false,
+		cache	: true,
 		error   : function(feed) {
 			$('.status-alert[id!=status-alert-template]').remove();
 		},
