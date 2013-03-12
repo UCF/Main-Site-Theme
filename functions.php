@@ -1010,7 +1010,7 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 			$routes_array 	= array();
 			
 			// Only setup email for active entries (not trash/spam)
-			if ($entry['status'] == 'Active') { 
+			if ($entry['status'] == 'active') { 
 				foreach ($entry as $field=>$val) {
 					// Our form fields names are stored as numbers. The naming schema is as follows:
 					// 1 			- Name
