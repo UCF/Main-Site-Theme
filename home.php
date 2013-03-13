@@ -20,7 +20,7 @@
 		<div class="span4" id="home_centercol">
 			<div class="col_padwrap">
 				<h2>News</h2>
-				<?=display_news()?>
+				<?php esi_include('display_news();'); ?>
 				<p class="screen-only"><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
 			</div>
 		</div>

@@ -25,7 +25,7 @@ function get_article_image($article){
 class FeedManager{
 	static private
 		$feeds        = array(),
-		$cache_length = 0xD2F0;
+		$cache_length = 60; // 1 minute
 	
 	/**
 	 * Provided a URL, will return an array representing the feed item for that
