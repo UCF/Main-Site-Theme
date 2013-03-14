@@ -703,6 +703,9 @@ function sc_phonebook_search($attrs) {
 											</a>
 										</div>
 										<?php } ?>
+										<?php if ($result->postal): ?>
+											<div class="postal">Zip: <?=$result->postal; ?></div>
+										<?php endif; ?>
 									</div>
 									<div class="pull-right">
 										<?php if($result->phone) { ?>
@@ -737,11 +740,17 @@ function sc_phonebook_search($attrs) {
 											</a>
 										</div>
 										<?php } ?>
+										<?php if ($result->postal): ?>
+											<div class="postal">Zip: <?=$result->postal; ?></div>
+										<?php endif; ?>
 									</div>
 									<div class="pull-right">
 										<?php if($result->phone) { ?>
 										<div class="phone">Phone: <?php echo $result->phone; ?></div>
 										<?php } ?>
+										<?php if($result->fax): ?>
+										<div class="fax">Fax: <?=$result->fax; ?></div>
+										<?php endif; ?>
 									</div>
 								</div>
 								<div class="show_staff" style="clear:both">

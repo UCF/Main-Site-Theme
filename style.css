@@ -800,6 +800,11 @@ li.tagit-new input {
 #phonebook-search-results .show_staff .toggle i {margin-top:-1px;}
 #phonebook-search-results .show_staff ul {display:none;}
 
+.postal {
+	color: #666;
+	font-size: 12px;
+}
+
 
 /* Quicklink Customizer */
 #customize-links { }
