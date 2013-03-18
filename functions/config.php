@@ -65,6 +65,9 @@ define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
 define('ESI_INCLUDE_URL', THEME_STATIC_URL.'/esi.php');
 
+# Timeout for data grabbed from feeds
+define('FEED_FETCH_TIMEOUT', 8); // seconds
+
 # Weather
 define('WEATHER_URL', 'http://weather.smca.ucf.edu/');
 define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');

@@ -58,6 +58,7 @@ class FeedManager{
 		if ($content){
 			$simplepie = new SimplePie();
 			$simplepie->set_raw_data($content);
+			$simplepie->set_timeout(FEED_FETCH_TIMEOUT); // seconds
 			$simplepie->init();
 			$simplepie->handle_content_type();
 			
@@ -164,7 +165,7 @@ function display_events($start=null, $limit=null){?>
 		$limit = 4;
 	}
 	$events  = get_events($start, $limit);
-	if(count($events)): ?>
+	if($events !== NULL && count($events)): ?>
 		<table class="events table">
 			<thead>
 				<td>Date</td>
@@ -206,7 +207,7 @@ function display_news(){?>
 	$options = get_option(THEME_OPTIONS_NAME);
 	$count   = $options['news_max_items'];
 	$news    = get_news(0, ($count) ? $count : 3);
-	if(count($news)):?>
+	if($news !== NULL && count($news)):?>
 		<ul class="news">
 			<?php foreach($news as $key=>$item): 
 				$image = get_article_image($item);
@@ -258,11 +259,22 @@ function get_events($start, $limit){
 		$url .= '&';
 	}
 	$url    .= 'upcoming=upcoming&format=json';
-	//$events  = array_reverse(FeedManager::get_items($url));
-	//$events  = array_slice($events, $start, $limit);
-	$events = json_decode(file_get_contents($url), TRUE);
-	$events = array_slice($events, $start, $limit);
-	return $events;
+	
+	// Set a timeout
+	$opts = array('http' => array(
+						'method'  => 'GET',
+						'timeout' => FEED_FETCH_TIMEOUT
+	));
+	$context = stream_context_create($opts);
+	
+	// Grab the weather feed
+	$raw_events = file_get_contents($url, false, $context);
+	if ($raw_events) {	
+		$events = json_decode($raw_events, TRUE);
+		$events = array_slice($events, $start, $limit);
+		return $events;
+	}
+	else { return NULL; }
 }
 
 
