@@ -723,6 +723,7 @@ if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
 		Webcom.analytics($);
+		Webcom.chartbeat($);
 		Webcom.handleExternalLinks($);
 		Webcom.loadMoreSearchResults($);
 		
