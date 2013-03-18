@@ -75,7 +75,7 @@ define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
-define('SEARCH_SERVICE_URL', 'http://search.smca.ucf.edu/service.php');
+define('SEARCH_SERVICE_URL', 'http://webcom.dev.smca.ucf.edu/search/webroot/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
 
 # Estimated start/end months of semesters; used for announcements
@@ -178,6 +178,20 @@ Config::$theme_settings = array(
 			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
 			'default'     => null,
 			'value'       => $theme_options['ga_account'],
+		)),
+		new TextField(array(
+			'name'        => 'Chartbeat UID',
+			'id'          => THEME_OPTIONS_NAME.'[cb_uid]',
+			'description' => 'Example: <em>1842</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_uid'],
+		)),
+		new TextField(array(
+			'name'        => 'Chartbeat Domain',
+			'id'          => THEME_OPTIONS_NAME.'[cb_domain]',
+			'description' => 'Example: <em>some.domain.com</em>',
+			'default'     => null,
+			'value'       => $theme_options['cb_domain'],
 		)),
 	),
 	'Events' => array(
