@@ -395,7 +395,7 @@ function get_weather_data() {
 		// Set a timeout
 		$opts = array('http' => array(
 								'method'  => 'GET',
-								'timeout' => 8
+								'timeout' => FETCH_FEED_TIMEOUT,
 		));
 		$context = stream_context_create($opts);
 		
@@ -942,8 +942,10 @@ function esi_include($statement) {
 		?>
 		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?php echo urlencode(base64_encode($statement)); ?>" />
 		<?php
-	} else {
+	} elseif (in_array($statement, Config::$esi_whitelist)) {
 		eval($statement);
+	} else { 
+		return NULL;
 	}
 }
 
