@@ -395,7 +395,7 @@ function get_weather_data() {
 		// Set a timeout
 		$opts = array('http' => array(
 								'method'  => 'GET',
-								'timeout' => FETCH_FEED_TIMEOUT,
+								'timeout' => WEATHER_FETCH_TIMEOUT,
 		));
 		$context = stream_context_create($opts);
 		

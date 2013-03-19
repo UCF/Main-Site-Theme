@@ -72,6 +72,7 @@ define('FEED_FETCH_TIMEOUT', 5); // seconds
 define('WEATHER_URL', 'http://weather.smca.ucf.edu/');
 define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');
 define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
+define('WEATHER_FETCH_TIMEOUT', 8); //seconds
 
 $theme_options = get_option(THEME_OPTIONS_NAME);
 define('GA_ACCOUNT', $theme_options['ga_account']);
