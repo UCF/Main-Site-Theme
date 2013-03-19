@@ -1191,4 +1191,32 @@ function page_specific_stylesheet() {
 	else { return NULL; }
 }
 
+
+/**
+ * Kill attachment, author, and daily archive pages.
+ *
+ * http://betterwp.net/wordpress-tips/disable-some-wordpress-pages/
+ **/
+function kill_unused_templates() {
+	global $wp_query, $post;
+ 
+	if (is_author() || is_attachment() || is_day() || is_search()) {
+		wp_redirect(home_url());
+	}
+ 
+	if (is_feed()) {
+		$author     = get_query_var('author_name');
+		$attachment = get_query_var('attachment');
+		$attachment = (empty($attachment)) ? get_query_var('attachment_id') : $attachment;
+		$day        = get_query_var('day');
+		$search     = get_query_var('s');
+ 
+		if (!empty($author) || !empty($attachment) || !empty($day) || !empty($search)) {
+			wp_redirect(home_url());
+			$wp_query->is_feed = false;
+		}
+	}
+}
+add_action('template_redirect', 'kill_unused_templates');
+
 ?>
