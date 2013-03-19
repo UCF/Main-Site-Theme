@@ -196,7 +196,7 @@ function display_events($start=null, $limit=null){?>
 			</tbody>
 		</table>
 	<?php else:?>
-		<p>Unable to fetch events</p>
+		<p>Events could not be retrieved at this time.  Please try again later.</p>
 	<?php endif;?>
 <?php
 }
@@ -242,7 +242,7 @@ function display_news(){?>
 		</ul>
 		<div class="end"><!-- --></div>
 	<?php else:?>
-		<p>Unable to fetch news.</p>
+		<p>News items could not be retrieved at this time.  Please try again later.</p>
 	<?php endif;?>
 <?php
 }
