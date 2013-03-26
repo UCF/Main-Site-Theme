@@ -866,6 +866,7 @@ function announcements_to_rss($announcements) {
 			// Generic RSS story elements
 			$output .= '<title>'.$announcement->post_title.'</title>';
 			$output .= '<description><![CDATA['.htmlentities(strip_tags($announcement->post_content)).']]></description>';
+			$output .= '<link>'.get_permalink($announcement->ID).'</link>';
 			$output .= '<guid>'.get_permalink($announcement->ID).'</guid>';
 			$output .= '<pubDate>'.date('r', strtotime($announcement->post_date)).'</pubDate>';
 			
@@ -878,7 +879,7 @@ function announcements_to_rss($announcements) {
 			$output .= '<announcement:postName>'.$announcement->post_name.'</announcement:postName>';
 			$output .= '<announcement:startDate>'.$announcement->announcementStartDate.'</announcement:startDate>';
 			$output .= '<announcement:endDate>'.$announcement->announcementEndDate.'</announcement:endDate>';
-			$output .= '<announcement:url>'.htmlentities($announcement->announcementURL).'</announcement:url>'; // same as <link>
+			$output .= '<announcement:url>'.htmlentities($announcement->announcementURL).'</announcement:url>';
 			$output .= '<announcement:contactPerson>'.htmlentities($announcement->announcementContactPerson).'</announcement:contactPerson>';
 			$output .= '<announcement:phone>'.$announcement->announcementPhone.'</announcement:phone>';
 			$output .= '<announcement:email>'.htmlentities($announcement->announcementEmail).'</announcement:email>'; // need to account for special chars
