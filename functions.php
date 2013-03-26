@@ -866,7 +866,6 @@ function announcements_to_rss($announcements) {
 			// Generic RSS story elements
 			$output .= '<title>'.$announcement->post_title.'</title>';
 			$output .= '<description><![CDATA['.htmlentities(strip_tags($announcement->post_content)).']]></description>';
-			if ($announcement->announcementURL) { $output .= '<link>'.htmlentities($announcement->announcementURL).'</link>'; }
 			$output .= '<guid>'.get_permalink($announcement->ID).'</guid>';
 			$output .= '<pubDate>'.date('r', strtotime($announcement->post_date)).'</pubDate>';
 			
