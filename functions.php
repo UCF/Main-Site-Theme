@@ -932,23 +932,23 @@ function get_theme_option($key) {
 }
 
 /*
- * Wrap a statement in a ESI include tag with a specified duration in the 
+ * Wrap a statement in a ESI include tag with a specified duration if the 
  * enable_esi theme option is enabled
  */
-function esi_include($statement) {
+function esi_include($statement) {	
 	$enable_esi = get_theme_option('enable_esi');
-
-	if(!is_null($enable_esi) && $enable_esi === '1') {
+	// Never include ESI over HTTPS
+	if(!is_null($enable_esi) && $enable_esi === '1' && is_ssl() == false) {
 		?>
 		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?php echo urlencode(base64_encode($statement)); ?>" />
-		<?php
+		<?php 
 	} elseif (in_array($statement, Config::$esi_whitelist)) {
 		eval($statement);
-	} else { 
+	}
+	else {
 		return NULL;
 	}
 }
-
 
 /** 
  * Pull recent Gravity Forms entries from a given form (intended for Feedback form.)
