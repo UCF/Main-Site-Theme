@@ -100,6 +100,12 @@ define('WP_SITE_PATH', $path);
 
 define('LDAP_HOST', 'net.ucf.edu');
 
+# Protocol-agnostic URL schemes aren't supported before WP 3.5,
+# so we have to determine the protocol before registering
+# any non-relative resources.
+define('CURRENT_PROTOCOL', is_ssl() ? 'https://' : 'http://');
+
+
 /**
  * Set config values including meta tags, registered custom post types, styles,
  * scripts, and any other statically defined assets that belong in the Config
@@ -126,17 +132,6 @@ Config::$custom_taxonomies = array(
 );
 
 Config::$body_classes = array('default');
-# Set some helper body classes for Android/iPhone overrides
-$ua = $_SERVER['HTTP_USER_AGENT'];
-if (stripos(strtolower($ua), 'android') !== false) {
-	array_push(Config::$body_classes, 'android');
-}
-if ( (strstr($ua, 'iPod')) || (strstr($ua, 'iPhone')) ) {
-	array_push(Config::$body_classes, 'iphone');
-}
-if (strstr($ua, 'iPad')) {
-	array_push(Config::$body_classes, 'ipad');
-}
 
 
 /*
@@ -386,6 +381,7 @@ Config::$theme_settings = array(
 	)
 );
 
+
 /**
  * Favicon, RSS url for header
  **/
@@ -443,7 +439,7 @@ Config::$scripts = array(
 
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://code.jquery.com/jquery-1.7.1.min.js');
+    wp_register_script( 'jquery', CURRENT_PROTOCOL.'code.jquery.com/jquery-1.7.1.min.js');
     wp_enqueue_script( 'jquery' );
 }    
  

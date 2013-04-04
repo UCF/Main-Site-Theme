@@ -65,10 +65,7 @@
 		</script>
 		
 	</head>
-	<!--[if IE 7 ]>     <body class="ie ie7 <?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <![endif]-->
-	<!--[if IE 8 ]>     <body class="ie ie8 <?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <![endif]-->
-	<!--[if IE 9 ]>     <body class="ie ie9 <?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <![endif]-->
-	<!--[if (gt IE 9)|!(IE)]><!--> <body class="<?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>"> <!--<![endif]-->
+	<body class="<?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>">
 		
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
