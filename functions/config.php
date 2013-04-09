@@ -439,7 +439,7 @@ Config::$scripts = array(
 
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', CURRENT_PROTOCOL.'code.jquery.com/jquery-1.7.1.min.js');
+    wp_register_script( 'jquery', CURRENT_PROTOCOL.'ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
     wp_enqueue_script( 'jquery' );
 }    
  
