@@ -753,25 +753,27 @@ function sc_phonebook_search($attrs) {
 										<?php endif; ?>
 									</div>
 								</div>
-								<div class="show_staff" style="clear:both">
+								<div class="show_staff span12" style="clear:both">
 									<?php if(count($result->staff) > 0) { ?>
 										<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
-										<?php $staff_per_column = ceil(count($result->staff) / 3);?>
-										<ul class="span4 unstyled">
-											<?php foreach($result->staff as $j => $staff) { ?>
-												<li>
-													<?php if($staff->email) { ?>
-														<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
-													<?php } else { ?>
-														<?php echo $staff->name; ?>
-													<?php } ?>
-													<?php if($staff->phone) echo $staff->phone; ?>
-												</li>
-												<?php if( (($j + 1) % $staff_per_column) == 0) { 
-													echo '</ul><ul class="span4 unstyled">';
-												} ?>
-											<?php } ?>
-										</ul>
+										<div class="row">
+											<?php $staff_per_column = ceil(count($result->staff) / 3);?>
+											<ul class="span4 unstyled">
+												<?php foreach($result->staff as $j => $staff) { ?>
+													<li>
+														<?php if($staff->email) { ?>
+															<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
+														<?php } else { ?>
+															<?php echo $staff->name; ?>
+														<?php } ?>
+														<?php if($staff->phone) echo $staff->phone; ?>
+													</li>
+													<?php if( (($j + 1) % $staff_per_column) == 0) { 
+														echo '</ul><ul class="span4 unstyled">';
+													} ?>
+												<?php } ?>
+											</ul>
+										</div>
 									<?php } ?>
 								</div>
 								<?php

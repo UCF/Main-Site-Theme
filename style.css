@@ -795,6 +795,7 @@ li.tagit-new input {
 	text-decoration:none;
 	border:none;
 	display:block;
+	margin-left: -20px;
 }
 #phonebook-search-results .show_staff .toggle:hover {cursor:pointer;}
 #phonebook-search-results .show_staff .toggle i {margin-top:-1px;}
