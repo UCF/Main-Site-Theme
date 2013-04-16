@@ -606,10 +606,10 @@ function sc_phonebook_search($attrs) {
 							preg_match("/\sfax$/i", $r->name)) ? False : True;')
 	);
 
-	# Limit results to 100 entries
-	$additional_results = (count($results) > 100);
+	# Limit results to 300 entries
+	$additional_results = (count($results) > 300);
 	if($additional_results) {
-		$results = array_slice($results, 0, 99);
+		$results = array_slice($results, 0, 299);
 	}
 
 	# Attach staff to organizations and departments
@@ -663,7 +663,7 @@ function sc_phonebook_search($attrs) {
 			<p><strong><big>No results were found.</big></strong></p>
 		<?php } else { ?>
 			<?php if($additional_results) { ?>
-			<p id="additional_results">First 100 results returned. Try narrowing your search.</p>
+			<p id="additional_results">First 300 results returned. Try narrowing your search.</p>
 			<?php } ?>
 			<?php foreach($results as $i => $result) { ?>
 				<div class="row-fluid">
