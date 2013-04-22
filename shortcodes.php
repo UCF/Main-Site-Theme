@@ -491,7 +491,6 @@ function sc_post_type_search($params=array(), $content='') {
 			$by_alpha[$params['non_alpha_section_name']][] = $post;
 		}
 	}
-	ksort($by_alpha);
 
 	if($params['show_empty_sections']) {
 		foreach(range('a', 'z') as $letter) {
@@ -500,6 +499,7 @@ function sc_post_type_search($params=array(), $content='') {
 			}
 		}
 	}
+	ksort($by_alpha);
 
 	$sections = array(
 		'post-type-search-term'  => $by_term,
