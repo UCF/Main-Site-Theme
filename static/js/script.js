@@ -558,7 +558,9 @@ Generic.PostTypeSearch = function($) {
 									column_list = column_wrap.find('ul');
 
 								// Alphabetize search results
-								column_elements.reverse();
+								if (navigator.userAgent.toLowerCase().indexOf('chrome') < 0) {
+									column_elements.reverse();
+								}
 
 								$.each(column_elements, function(element_index, element) {
 									column_list.append($(element));
