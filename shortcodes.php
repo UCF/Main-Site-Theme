@@ -671,6 +671,7 @@ function sc_phonebook_search($attrs) {
 		$name = str_replace('Creol', 'CREOL', $name);
 		$name = str_replace(' Of ', ' of ', $name);
 		$name = preg_replace('/\sOf$/', ' of', $name);
+		$name = str_replace('&public', '&amp; Public', $name);
 		$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
 		$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
 		return $name;
