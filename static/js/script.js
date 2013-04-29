@@ -581,25 +581,11 @@ Generic.PostTypeSearch = function($) {
 }
 
 var phonebookStaffToggle = function($) {
-	$('#phonebook-search-results .show_staff')
-		.each(function(index, staff) {
-			var staff  = $(staff);
-
-			(function() {
-				var toggle = staff.find('.toggle'),
-					lists  = staff.find('ul');
-				toggle
-					.click(function() {
-						if(lists.is(':visible')) {
-							lists.fadeOut();
-							$(this).html('<i class="icon-plus"></i> Show Staff');
-						} else {
-							lists.fadeIn();
-							$(this).html('<i class="icon-minus"></i> Hide Staff');
-						}
-					});
-			})(staff)
-		});		
+	$('#phonebook-search-results a.toggle').click(function() {
+		$(this)
+			.children('i').toggleClass('icon-plus icon-minus').end()
+			.next().fadeToggle();
+	});
 }
 
 

@@ -629,6 +629,27 @@ function sc_phonebook_search($attrs) {
 			}
 		}
 	}
+	
+	# Lump duplicate person data under that person's alpha info
+	foreach($results as $key => $result) {
+		$staff = ($result->from_table == 'staff');
+		if($staff && (int)$result->alpha == 0) {
+			foreach ($results as $_result) {
+				# If two email addresses match and are not null,
+				# lump the secondary listing under the alpha listing
+				# array (generated on the fly)
+				if ( 
+					($result->email !== null) && 
+					($_result->email !== null) && 
+					($result->email == $_result->email) && 
+					($_result->alpha == 1) ) 
+					{
+					$_result->secondary[] = $result;
+				}
+			}
+			unset($results[$key]);
+		}
+	}
 
 	function fix_name_case($name) {
 		$name = ucwords(strtolower($name));
@@ -666,7 +687,7 @@ function sc_phonebook_search($attrs) {
 			<p id="additional_results">First 300 results returned. Try narrowing your search.</p>
 			<?php } ?>
 			<?php foreach($results as $i => $result) { ?>
-				<div class="row-fluid">
+				<div class="row">
 					<?php
 						switch($result->from_table) {
 							case 'staff':
@@ -685,7 +706,6 @@ function sc_phonebook_search($attrs) {
 									<?php } ?>
 								</div>
 								<div class="span6">
-
 									<div class="pull-left">
 										<?php if($result->email) { ?>
 										<div class="email">
@@ -713,6 +733,59 @@ function sc_phonebook_search($attrs) {
 										<?php } ?>
 									</div>
 								</div>
+								<?php if (!empty($result->secondary)) { ?>
+								<div class="span12 person-secondary-list">
+									<a class="toggle person-secondary"><i class="icon-plus"></i> More Results</a>
+									<ul>
+										<?php foreach ($result->secondary as $secondary) { ?>
+										<li class="row">
+											<div class="span6">
+												<div class="name"><strong><?php echo $secondary->name; ?></strong></div>
+												<?php if($secondary->department) { ?>
+												<div class="department">
+													<a href="?phonebook-search-query=<?php echo urlencode($secondary->department); ?>"><?php echo $secondary->department; ?></a>
+												</div>
+												<?php } ?>
+												<?php if($secondary->organization) { ?>
+												<div class="organization">
+													<a href="?phonebook-search-query=<?php echo urlencode($secondary->organization); ?>"><?php echo fix_name_case($secondary->organization); ?></a>
+												</div>
+												<?php } ?>
+											</div>
+											<div class="span6">
+												<div class="pull-left">
+													<?php if($secondary->email) { ?>
+													<div class="email">
+														<a href="mailto:<?php echo $secondary->email; ?>"><?php echo $secondary->email; ?></a>
+													</div>
+													<?php } ?>
+													<?php if ($secondary->building) { ?>
+													<div class="location">
+														<a href="http://map.ucf.edu/?show=<?php echo $secondary->bldg_id ?>">
+															<?php echo fix_name_case($secondary->building); ?>
+															<?php if($secondary->room) {
+																echo ' - '.$secondary->room; 
+			
+															} ?>
+														</a>
+													</div>
+													<?php } ?>
+													<?php if ($secondary->postal): ?>
+														<div class="postal">Zip: <?=$secondary->postal; ?></div>
+													<?php endif; ?>
+												</div>
+												<div class="pull-right">
+													<?php if($secondary->phone) { ?>
+													<div class="phone">Phone: <?php echo $secondary->phone; ?></div>
+													<?php } ?>
+												</div>
+											</div>
+										</li>
+										<?php } ?>
+									</ul>
+								</div>
+								<?php } ?>
+								<hr class="span12" />
 								<?php
 								break;
 							case 'departments':
@@ -758,7 +831,7 @@ function sc_phonebook_search($attrs) {
 										<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
 										<div class="row">
 											<?php $staff_per_column = ceil(count($result->staff) / 3);?>
-											<ul class="span4 unstyled">
+											<ul class="span4">
 												<?php foreach($result->staff as $j => $staff) { ?>
 													<li>
 														<?php if($staff->email) { ?>
@@ -776,6 +849,7 @@ function sc_phonebook_search($attrs) {
 										</div>
 									<?php } ?>
 								</div>
+								<hr class="span12" />
 								<?php
 								break;
 						}
