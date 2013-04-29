@@ -633,7 +633,7 @@ function sc_phonebook_search($attrs) {
 	# Lump duplicate person data under that person's alpha info
 	foreach($results as $key => $result) {
 		$staff = ($result->from_table == 'staff');
-		if($staff && (int)$result->alpha == 0) {
+		if( ($staff) && ($result->alpha !== null) && ((int)$result->alpha == 0) ) {
 			foreach ($results as $_result) {
 				# If two email addresses match and are not null,
 				# lump the secondary listing under the alpha listing
