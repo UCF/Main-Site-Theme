@@ -706,6 +706,9 @@ function sc_phonebook_search($attrs) {
 								?>
 								<div class="span6">
 									<div class="name"><strong><?php echo $result->name; ?></strong></div>
+									<?php if ($result->job_position) { ?>
+									<div class="job-title"><?php echo $result->job_position; ?></div>
+									<?php } ?>
 									<?php if($result->department) { ?>
 									<div class="department">
 										<a href="?phonebook-search-query=<?php echo urlencode($result->department); ?>"><?php echo $result->department; ?></a>
@@ -753,6 +756,9 @@ function sc_phonebook_search($attrs) {
 										<li class="row">
 											<div class="span6">
 												<div class="name"><strong><?php echo $secondary->name; ?></strong></div>
+												<?php if ($secondary->job_position) { ?>
+												<div class="job-title"><?php echo $secondary->job_position; ?></div>
+												<?php } ?>
 												<?php if($secondary->department) { ?>
 												<div class="department">
 													<a href="?phonebook-search-query=<?php echo urlencode($secondary->department); ?>"><?php echo $secondary->department; ?></a>
@@ -842,22 +848,26 @@ function sc_phonebook_search($attrs) {
 									<?php if(count($result->staff) > 0) { ?>
 										<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
 										<div class="row">
-											<?php $staff_per_column = ceil(count($result->staff) / 3);?>
-											<ul class="span4">
-												<?php foreach($result->staff as $j => $staff) { ?>
-													<li>
-														<?php if($staff->email) { ?>
-															<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
-														<?php } else { ?>
-															<?php echo $staff->name; ?>
+											<div class="span12 show-staff-wrap">
+												<div class="row">
+													<?php $staff_per_column = ceil(count($result->staff) / 3);?>
+													<ul class="span4">
+														<?php foreach($result->staff as $j => $staff) { ?>
+															<li>
+																<?php if($staff->email) { ?>
+																	<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
+																<?php } else { ?>
+																	<?php echo $staff->name; ?>
+																<?php } ?>
+																<?php if($staff->phone) echo $staff->phone; ?>
+															</li>
+															<?php if( (($j + 1) % $staff_per_column) == 0) { 
+																echo '</ul><ul class="span4 unstyled">';
+															} ?>
 														<?php } ?>
-														<?php if($staff->phone) echo $staff->phone; ?>
-													</li>
-													<?php if( (($j + 1) % $staff_per_column) == 0) { 
-														echo '</ul><ul class="span4 unstyled">';
-													} ?>
-												<?php } ?>
-											</ul>
+													</ul>
+												</div>
+											</div>
 										</div>
 									<?php } ?>
 								</div>
