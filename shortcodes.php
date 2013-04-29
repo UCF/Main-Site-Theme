@@ -612,7 +612,8 @@ function sc_phonebook_search($attrs) {
 		$results = array_slice($results, 0, 299);
 	}
 
-	# Attach staff to organizations and departments
+	# Attach staff to organizations and departments;
+	# Only use alpha person results to avoid duplicates
 	foreach($results as $result) {
 		$organization = ($result->from_table == 'organizations');
 		$department   = ($result->from_table == 'departments');
@@ -620,9 +621,19 @@ function sc_phonebook_search($attrs) {
 			$result->staff = array();
 			foreach($results as $_result) {
 				if($_result->from_table == 'staff') {
-					if($organization && $result->name == $_result->organization) {
+					if( 
+						($organization) && 
+						($result->name == $_result->organization) && 
+						($_result->alpha !== null) && 
+						($_result->alpha == 1) ) 
+						{
 						$result->staff[] = $_result;
-					} else if($department && $result->name == $_result->department) {
+					} else if( 
+						($department) && 
+						($result->name == $_result->department) && 
+						($_result->alpha !== null) &&
+						($_result->alpha == 1) ) 
+						{
 						$result->staff[] = $_result;
 					}
 				}
