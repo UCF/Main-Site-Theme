@@ -83,7 +83,7 @@ define('SEARCH_SERVICE_URL', 'http://search.smca.ucf.edu/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
 
 # Estimated start/end months of semesters; used for announcements
-define('CURRENT_MONTH', date('n'));
+define('CURRENT_MONTH', (int)date('n'));
 define('SPRING_MONTH_START', 1); 	// Jan
 define('SPRING_MONTH_END', 5);		// May
 define('SUMMER_MONTH_START', 5); 	// May

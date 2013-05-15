@@ -594,11 +594,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				$args = array_merge($args, $time_args);
 				break;
 			case 'thissemester':
+			
 				// Compare the current month to predefined month values
 				// to pull announcements from the current semester
 				
 				// Check for Spring Semester
-				if ($current_month >= SPRING_MONTH_START && $current_month <= SPRING_MONTH_END) {
+				if (CURRENT_MONTH >= SPRING_MONTH_START && CURRENT_MONTH <= SPRING_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
@@ -616,7 +617,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 					$args = array_merge($args, $time_args);
 				}
 				// Check for Summer Semester
-				elseif ($current_month >= SUMMER_MONTH_START && $current_month <= SUMMER_MONTH_END) {
+				elseif (CURRENT_MONTH >= SUMMER_MONTH_START && CURRENT_MONTH <= SUMMER_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
