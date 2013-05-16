@@ -599,12 +599,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				// to pull announcements from the current semester
 				
 				// Check for Spring Semester
-				if (CURRENT_MONTH >= SPRING_MONTH_START && CURRENT_MONTH <= SPRING_MONTH_END) {
+				if (CURRENT_MONTH >= SPRING_MONTH_START && CURRENT_MONTH <= SPRING_MONTH_END) {					
 					$time_args = array(
 						'meta_query' => array(
 							array(
 								'key' => 'announcement_start_date',
-								'value' => date('Y-m-d', strtotime('Last day of May this year')),
+								'value' => date('Y-m-t', strtotime('May')),
 								'compare' => '<='
 							),
 							array(
@@ -622,7 +622,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 						'meta_query' => array(
 							array(
 								'key' => 'announcement_start_date',
-								'value' => date('Y-m-d', strtotime('Last day of July this year')),
+								'value' => date('Y-m-t', strtotime('July')),
 								'compare' => '<='
 							),
 							array(
@@ -640,7 +640,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 						'meta_query' => array(
 							array(
 								'key' => 'announcement_start_date',
-								'value' => date('Y-m-d', strtotime('Last day of December this year')),
+								'value' => date('Y-m-t', strtotime('December')),
 								'compare' => '<='
 							),
 							array(
