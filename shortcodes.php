@@ -682,7 +682,7 @@ function sc_phonebook_search($attrs) {
 		<div class="control-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo stripslashes(strip_tags($phonebook_search_query)); ?>"> <button type="submit" class="btn">Search</button>
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn">Search</button>
 				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 			</div>
 		</div>
