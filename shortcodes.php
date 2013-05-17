@@ -613,23 +613,23 @@ function sc_phonebook_search($attrs) {
 	}
 
 	# Attach staff to organizations and departments;
-	# Only use alpha person results to avoid duplicates
-	foreach($results as $result) {
-		$organization = ($result->from_table == 'organizations');
-		$department   = ($result->from_table == 'departments');
-		if($organization || $department) {
+	# only use alpha person results to avoid duplicates
+	foreach($results as $key => $result) {
+		$is_organization = ($result->from_table == 'organizations');
+		$is_department   = ($result->from_table == 'departments');
+		if($is_organization || $is_department) {
 			$result->staff = array();
 			foreach($results as $_result) {
 				if($_result->from_table == 'staff') {
 					if( 
-						($organization) && 
+						($is_organization) && 
 						($result->name == $_result->organization) && 
 						($_result->alpha !== null) && 
 						($_result->alpha == 1) ) 
 						{
 						$result->staff[] = $_result;
 					} else if( 
-						($department) && 
+						($is_department) && 
 						($result->name == $_result->department) && 
 						($_result->alpha !== null) &&
 						($_result->alpha == 1) ) 
@@ -662,16 +662,28 @@ function sc_phonebook_search($attrs) {
 		}
 	}
 
+	
+	# Helper function for naming consistencies
 	function fix_name_case($name) {
 		$name = ucwords(strtolower($name));
 		$name = str_replace('Ucf', 'UCF', $name);
 		$name = str_replace('dr.', 'Dr.', $name);
+		$name = str_replace('alumni', 'Alumni', $name);
 		$name = str_replace(' And ', ' and ', $name);
 		$name = str_replace('Cosas ', ' COSAS ', $name);
 		$name = str_replace('Creol', 'CREOL', $name);
+		$name = str_replace('Lead Scholars', 'LEAD Scholars', $name);
+		$name = str_replace('Rotc', 'ROTC', $name);
+		$name = preg_replace('/\bSdes\b/', 'SDES', $name);
 		$name = str_replace(' Of ', ' of ', $name);
 		$name = preg_replace('/\sOf$/', ' of', $name);
+		$name = str_replace(' For ', ' for ', $name);
+		$name = preg_replace('/\sFor$/', ' for', $name);
 		$name = str_replace('&public', '&amp; Public', $name);
+		$name = str_replace('Student-athletes', 'Student Athletes', $name);
+		$name = str_replace('Wucf', 'WUCF', $name);
+		$name = str_replace('WUCF Tv', 'WUCF TV', $name);
+		$name = str_replace('WUCF-fm', 'WUCF-FM', $name);
 		$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
 		$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
 		return $name;
