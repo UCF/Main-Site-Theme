@@ -612,6 +612,9 @@ function sc_phonebook_search($attrs) {
 		$results = array_slice($results, 0, 299);
 	}
 
+	$organizations = array();
+	$departments   = array();
+	
 	# Attach staff to organizations and departments;
 	# only use alpha person results to avoid duplicates
 	foreach($results as $key => $result) {
@@ -639,6 +642,16 @@ function sc_phonebook_search($attrs) {
 				}
 			}
 		}
+		# Separate organizations and departments so we can 
+		# reorder them later
+		if ($is_organization) {
+			$organizations[] = $result;
+			unset($results[$key]);
+		}
+		if ($is_department) {
+			$departments[] = $result;
+			unset($results[$key]);
+		}
 	}
 	
 	# Lump duplicate person data under that person's alpha info
@@ -661,6 +674,9 @@ function sc_phonebook_search($attrs) {
 			unset($results[$key]);
 		}
 	}
+	
+	# Reorder results: Organizations, then Departments, then Staff
+	$results = $organizations + $departments + $results;
 
 	
 	# Helper function for naming consistencies
