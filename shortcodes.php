@@ -868,36 +868,26 @@ function sc_phonebook_search($attrs) {
 										<td colspan="3" class="show_staff span12">
 											<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
 											<div class="show-staff-wrap">
-												<table class="table table-striped table-bordered">
-													<tbody>
-														<?php	
-															$count = 0;	
-															$cols_per_row = 3;
-															$staff_per_column = ceil(count($result->staff) / $cols_per_row);
-														?>
-														<?php foreach($result->staff as $j => $staff) { ?>
-															<?php
-																if( ($count % $cols_per_row) == 0) {
-																	if($count > 0) {
-																		?></tr><?
-																	}
-																	?><tr><?
-																}
-															?>
-															<td class="span4">
-																<?php if($staff->email) { ?>
-																	<span class="email pull-left"><a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a></span>
-																<?php } else { ?>
-																	<span class="name pull-left"><?php echo $staff->name; ?></span>
-																<?php } ?>
-																<?php if($staff->phone) {?>
-																	<span class="phone pull-right"><?php echo $staff->phone; ?></span>
-																<?php } ?>
-															</td>
-															<?php $count++; ?>
-														<?php } ?>
-													</tbody>
-												</table>	
+												<ul class="staff-list">
+													<?php 
+														$staff_per_column = ceil(count($result->staff) / 3); 
+														$count = 0;
+													?>
+													<?php foreach($result->staff as $person) { ?>
+														<li>
+															<?php if($person->email) { ?>
+																<a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a>
+															<?php } else { ?>
+																<?php echo $person->name; ?>
+															<?php } ?>
+															<?php if($person->phone) echo $person->phone; ?>
+														</li>
+														<?php if( ((($count + 1) % $staff_per_column) == 0) && ($count + 1 !== count($result->staff))) { 
+															echo '</ul><ul class="staff-list">';
+														} 
+														$count++;
+													} ?>
+												</ul>
 											</div>
 										</td>
 										<?php } ?>
