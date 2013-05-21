@@ -630,16 +630,18 @@ function sc_phonebook_search($attrs) {
 						($_result->alpha !== null) && 
 						($_result->alpha == 1) ) 
 						{
-						$result->staff[] = $_result;
+						$result->staff[$_result->name] = $_result;
 					} else if( 
 						($is_department) && 
 						($result->name == $_result->department) && 
 						($_result->alpha !== null) &&
 						($_result->alpha == 1) ) 
 						{
-						$result->staff[] = $_result;
+						$result->staff[$_result->name] = $_result;
 					}
 				}
+				# Make sure that $result->staff[] is alphabetized
+				ksort($result->staff);
 			}
 		}
 		# Separate organizations and departments so we can 
@@ -705,6 +707,78 @@ function sc_phonebook_search($attrs) {
 		return $name;
 	}
 
+	# Display single result name, position, dept, and org
+	function display_primary_info($result) {
+		ob_start(); ?>
+		
+		<span class="name">
+			<strong><?php echo ($result->from_table == 'organizations') ? fix_name_case($result->name) : $result->name; ?></strong>
+		</span>
+		<?php if ($result->from_table == 'staff' && $result->job_position) { ?>
+		<span class="job-title">
+			<?php echo $result->job_position; ?>
+		</span>
+		<?php } ?>
+		<?php if($result->from_table == 'departments' && $result->organization) { ?>
+		<span class="division">
+			A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a>
+		</span>
+		<?php } ?>
+		<?php if($result->from_table == 'staff' && $result->department) { ?>
+		<span class="department">
+			<a href="?phonebook-search-query=<?php echo urlencode($result->department); ?>"><?php echo $result->department; ?></a>
+		</span>
+		<?php } ?>
+		<?php if($result->from_table == 'staff' && $result->organization) { ?>
+		<span class="organization">
+			<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a>
+		</span>
+		<?php } 
+		
+		return ob_get_clean();
+	}
+	
+	# Display single result location information
+	function display_location_info($result) {
+		ob_start(); ?>
+		
+		<?php if($result->from_table == 'staff' && $result->email) { ?>
+		<span class="email">
+			<a href="mailto:<?php echo $result->email; ?>"><?php echo $result->email; ?></a>
+		</span>
+		<?php } ?>
+		<?php if ($result->building) { ?>
+		<span class="location">
+			<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
+				<?php echo fix_name_case($result->building); ?>
+				<?php if($result->room) {
+					echo ' - '.$result->room; 
+				} ?>
+			</a>
+		</span>
+		<?php } ?>
+		<?php if ($result->postal) { ?>
+			<span class="postal">Zip: <?=$result->postal; ?></span>
+		<?php }
+		
+		return ob_get_clean();
+	}
+	
+	# Display single result phone/fax information
+	function display_contact_info($result) {
+		ob_start(); ?>
+		
+		<?php if($result->phone) { ?>
+		<span class="phone">Phone: <?php echo $result->phone; ?></span>
+		<?php } ?>
+		<?php if($result->from_table !== 'staff' && $result->fax) { ?>
+		<span class="fax">Fax: <?=$result->fax; ?></span>
+		<?php }
+		
+		return ob_get_clean();
+	}
+	
+
 	ob_start();?>
 	<form class="form-horizontal" id="phonebook-search">
 		<div class="control-group">
@@ -718,8 +792,7 @@ function sc_phonebook_search($attrs) {
 	<?php 
 	if($phonebook_search_query != '') {
 		?>
-		<div id="phonebook-search-results">
-		<hr />
+		<ul id="phonebook-search-results">
 		<?php if(count($results) == 0) { ?>
 			<p><strong><big>No results were found.</big></strong></p>
 		<?php } else { ?>
@@ -727,187 +800,118 @@ function sc_phonebook_search($attrs) {
 			<p id="additional_results">First 300 results returned. Try narrowing your search.</p>
 			<?php } ?>
 			<?php foreach($results as $i => $result) { ?>
-				<div class="row">
-					<?php
-						switch($result->from_table) {
-							case 'staff':
-								?>
-								<div class="span6">
-									<div class="name"><strong><?php echo $result->name; ?></strong></div>
-									<?php if ($result->job_position) { ?>
-									<div class="job-title"><?php echo $result->job_position; ?></div>
-									<?php } ?>
-									<?php if($result->department) { ?>
-									<div class="department">
-										<a href="?phonebook-search-query=<?php echo urlencode($result->department); ?>"><?php echo $result->department; ?></a>
-									</div>
-									<?php } ?>
-									<?php if($result->organization) { ?>
-									<div class="organization">
-										<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a>
-									</div>
-									<?php } ?>
-								</div>
-								<div class="span6">
-									<div class="pull-left">
-										<?php if($result->email) { ?>
-										<div class="email">
-											<a href="mailto:<?php echo $result->email; ?>"><?php echo $result->email; ?></a>
-										</div>
-										<?php } ?>
-										<?php if ($result->building) { ?>
-										<div class="location">
-											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
-												<?php echo fix_name_case($result->building); ?>
-												<?php if($result->room) {
-													echo ' - '.$result->room; 
-
-												} ?>
-											</a>
-										</div>
-										<?php } ?>
-										<?php if ($result->postal): ?>
-											<div class="postal">Zip: <?=$result->postal; ?></div>
-										<?php endif; ?>
-									</div>
-									<div class="pull-right">
-										<?php if($result->phone) { ?>
-										<div class="phone">Phone: <?php echo $result->phone; ?></div>
-										<?php } ?>
-									</div>
-								</div>
-								<?php if (!empty($result->secondary)) { ?>
-								<div class="span12 person-secondary-list">
-									<a class="toggle person-secondary"><i class="icon-plus"></i> More Results</a>
-									<ul>
-										<?php foreach ($result->secondary as $secondary) { ?>
-										<li class="row">
-											<div class="span6">
-												<div class="name"><strong><?php echo $secondary->name; ?></strong></div>
-												<?php if ($secondary->job_position) { ?>
-												<div class="job-title"><?php echo $secondary->job_position; ?></div>
-												<?php } ?>
-												<?php if($secondary->department) { ?>
-												<div class="department">
-													<a href="?phonebook-search-query=<?php echo urlencode($secondary->department); ?>"><?php echo $secondary->department; ?></a>
-												</div>
-												<?php } ?>
-												<?php if($secondary->organization) { ?>
-												<div class="organization">
-													<a href="?phonebook-search-query=<?php echo urlencode($secondary->organization); ?>"><?php echo fix_name_case($secondary->organization); ?></a>
-												</div>
-												<?php } ?>
-											</div>
-											<div class="span6">
-												<div class="pull-left">
-													<?php if($secondary->email) { ?>
-													<div class="email">
-														<a href="mailto:<?php echo $secondary->email; ?>"><?php echo $secondary->email; ?></a>
-													</div>
+				<li class="result">
+					<table class="table">
+						<tbody>
+							<?php
+								switch($result->from_table) {
+									case 'staff':
+										?>
+										<tr>
+											<td class="span6">
+												<?=display_primary_info($result);?>
+											</td>
+											<td class="span3">
+												<?=display_location_info($result);?>
+											</td>
+											<td class="span3">
+												<?=display_contact_info($result);?>
+											</td>
+										<?php if (!empty($result->secondary)) { ?>
+										</tr>
+										<tr class="person-secondary-list">
+											<td class="span12" colspan="3">
+												<a class="toggle person-secondary"><i class="icon-plus"></i> More Results</a>
+												<ul>
+													<?php foreach ($result->secondary as $secondary) { ?>
+													<li>
+														<table class="table">
+															<tbody>
+																<tr>
+																	<td class="span6">
+																		<?=display_primary_info($secondary);?>
+																	</td>
+																	<td class="span3">
+																		<?=display_location_info($secondary);?>
+																	</td>
+																	<td class="span3">
+																		<?=display_contact_info($secondary);?>
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</li>
 													<?php } ?>
-													<?php if ($secondary->building) { ?>
-													<div class="location">
-														<a href="http://map.ucf.edu/?show=<?php echo $secondary->bldg_id ?>">
-															<?php echo fix_name_case($secondary->building); ?>
-															<?php if($secondary->room) {
-																echo ' - '.$secondary->room; 
-			
-															} ?>
-														</a>
-													</div>
-													<?php } ?>
-													<?php if ($secondary->postal): ?>
-														<div class="postal">Zip: <?=$secondary->postal; ?></div>
-													<?php endif; ?>
-												</div>
-												<div class="pull-right">
-													<?php if($secondary->phone) { ?>
-													<div class="phone">Phone: <?php echo $secondary->phone; ?></div>
-													<?php } ?>
-												</div>
-											</div>
-										</li>
+												</ul>
+											</td>
 										<?php } ?>
-									</ul>
-								</div>
-								<?php } ?>
-								<hr class="span12" />
-								<?php
+										</tr>
+									
+							<?php
 								break;
-							case 'departments':
-							case 'organizations':
-								?>
-								<div class="span6">
-									<div class="name">
-										<strong>
-											<?php  echo ($result->from_table == 'organizations') ? fix_name_case($result->name) : $result->name; ?>
-										</strong>
-									</div>
-									<?php if($result->from_table == 'departments' && $result->organization) { ?>
-									<div class="division">A division of: <a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a></div>
-									<?php } ?>
-								</div>
-								<div class="span6">
-									<div class="pull-left">
-										<?php if ($result->building) { ?>
-										<div class="location">
-											<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
-												<?php echo fix_name_case($result->building); ?>
-												<?php if($result->room) {
-													echo ' - '.$result->room; 
-												} ?>
-											</a>
-										</div>
-										<?php } ?>
-										<?php if ($result->postal): ?>
-											<div class="postal">Zip: <?=$result->postal; ?></div>
-										<?php endif; ?>
-									</div>
-									<div class="pull-right">
-										<?php if($result->phone) { ?>
-										<div class="phone">Phone: <?php echo $result->phone; ?></div>
-										<?php } ?>
-										<?php if($result->fax): ?>
-										<div class="fax">Fax: <?=$result->fax; ?></div>
-										<?php endif; ?>
-									</div>
-								</div>
-								<div class="show_staff span12" style="clear:both">
+								case 'departments':
+								case 'organizations':
+									?>
+									<tr>
+										<td class="span6">
+											<?=display_primary_info($result);?>
+										</td>
+										<td class="span3">
+											<?=display_location_info($result);?>
+										</td>
+										<td class="span3">
+											<?=display_contact_info($result);?>
+										</td>
 									<?php if(count($result->staff) > 0) { ?>
-										<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
-										<div class="row">
-											<div class="span12 show-staff-wrap">
-												<div class="row">
-													<?php $staff_per_column = ceil(count($result->staff) / 3);?>
-													<ul class="span4">
+									</tr>
+									<tr>
+										<td colspan="3" class="show_staff span12">
+											<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
+											<div class="show-staff-wrap">
+												<table class="table table-striped table-bordered">
+													<tbody>
+														<?php	
+															$count = 0;	
+															$cols_per_row = 3;
+															$staff_per_column = ceil(count($result->staff) / $cols_per_row);
+														?>
 														<?php foreach($result->staff as $j => $staff) { ?>
-															<li>
+															<?php
+																if( ($count % $cols_per_row) == 0) {
+																	if($count > 0) {
+																		?></tr><?
+																	}
+																	?><tr><?
+																}
+															?>
+															<td class="span4">
 																<?php if($staff->email) { ?>
-																	<a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a>
+																	<span class="email pull-left"><a href="mailto:<?php echo $staff->email; ?>"><?php echo $staff->name; ?></a></span>
 																<?php } else { ?>
-																	<?php echo $staff->name; ?>
+																	<span class="name pull-left"><?php echo $staff->name; ?></span>
 																<?php } ?>
-																<?php if($staff->phone) echo $staff->phone; ?>
-															</li>
-															<?php if( (($j + 1) % $staff_per_column) == 0) { 
-																echo '</ul><ul class="span4 unstyled">';
-															} ?>
+																<?php if($staff->phone) {?>
+																	<span class="phone pull-right"><?php echo $staff->phone; ?></span>
+																<?php } ?>
+															</td>
+															<?php $count++; ?>
 														<?php } ?>
-													</ul>
-												</div>
+													</tbody>
+												</table>	
 											</div>
-										</div>
-									<?php } ?>
-								</div>
-								<hr class="span12" />
-								<?php
+										</td>
+										<?php } ?>
+									</tr>
+							<?php
 								break;
-						}
-					?>
-				</div>
+							}
+							?>
+							</tbody>
+						</table>
+				</li>
 			<?php } ?>
 		<?php } ?>
-	</div>
+	</ul>
 	<?php }
 	return ob_get_clean();
 }
