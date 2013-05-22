@@ -791,6 +791,14 @@ li.tagit-new input {
 #phonebook-search-results .table th, 
 #phonebook-search-results .table td { border-top: 0; }
 
+#phonebook-search-results .result.group-result { background: #FCF8E3; }
+#phonebook-search-results .result.group-result .table { background: #FCF8E3; border-bottom: 1px solid #fff; }
+#phonebook-search-results .result.group-result a.toggle,
+#phonebook-search-results .result.group-result .show-staff-wrap { background: #fff; }
+#phonebook-search-results .result.group-result a.toggle {
+	border-color: #E5DAC5;
+}
+
 #phonebook-search-results #additional_results {font-size:11px;margin-top:-10px;margin-bottom:5px;font-family:Helvetica,sans-serif;}
 #phonebook-search-results .name,
 #phonebook-search-results .job-title,
@@ -816,11 +824,13 @@ li.tagit-new input {
 	border:none;
 	display:block;
 	padding: 3px 0;
-	margin: 8px 0 0 0;
+	margin: 0;
 	background: #f1f1f1;
+	border: 1px solid #E5DAC5;
 }
 #phonebook-search-results a.toggle:hover {cursor:pointer;}
 #phonebook-search-results a.toggle i {margin-top:-2px; margin-left: 5px;}
+#phonebook-search-results a.toggle.person-secondary { border: 1px solid #ccc; }
 
 #phonebook-search-results .show_staff > div,
 #phonebook-search-results .person-secondary-list ul {display:none;}
@@ -828,11 +838,15 @@ li.tagit-new input {
 #phonebook-search-results .person-secondary-list td ul,
 #phonebook-search-results .person-secondary-list td ul li table {
 	background: #f1f1f1; /* bg of table must be overridden */
-	border-bottom:0;
 	border-top: 0;
-	border-right: 0;
+	border-right: 1px solid #E5DAC5;
+	border-bottom: 1px solid #E5DAC5;
+	border-left: 1px solid #E5DAC5;
 	border-radius: 0;
+	margin-top: -1px;
 }
+#phonebook-search-results .person-secondary-list td ul li table { border: 0; }
+#phonebook-search-results .person-secondary-list td ul { border: 1px solid #ccc; }
 #phonebook-search-results .show_staff { padding-bottom: 10px; padding-top: 0; }
 
 #phonebook-search-results .show_staff .show-staff-wrap { padding-top: 5px; overflow: auto; }
@@ -846,6 +860,7 @@ li.tagit-new input {
 
 #phonebook-search-results ul { list-style-type: none; }
 #phonebook-search-results .person-secondary-list { clear: both; }
+#phonebook-search-results .person-secondary-list td { padding-top: 0; }
 #phonebook-search-results .person-secondary-list td ul { 
 	margin-left: 0; 
 	padding-bottom: 5px; 
