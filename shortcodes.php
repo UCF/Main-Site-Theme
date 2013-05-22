@@ -813,10 +813,10 @@ function sc_phonebook_search($attrs) {
 												<?=display_primary_info($result);?>
 											</td>
 											<td class="span3">
-												<?=display_location_info($result);?>
+												<?=display_contact_info($result);?>
 											</td>
 											<td class="span3">
-												<?=display_contact_info($result);?>
+												<?=display_location_info($result);?>
 											</td>
 										<?php if (!empty($result->secondary)) { ?>
 										</tr>
@@ -833,10 +833,10 @@ function sc_phonebook_search($attrs) {
 																		<?=display_primary_info($secondary);?>
 																	</td>
 																	<td class="span3">
-																		<?=display_location_info($secondary);?>
+																		<?=display_contact_info($secondary);?>
 																	</td>
 																	<td class="span3">
-																		<?=display_contact_info($secondary);?>
+																		<?=display_location_info($secondary);?>
 																	</td>
 																</tr>
 															</tbody>
@@ -858,10 +858,10 @@ function sc_phonebook_search($attrs) {
 											<?=display_primary_info($result);?>
 										</td>
 										<td class="span3">
-											<?=display_location_info($result);?>
+											<?=display_contact_info($result);?>
 										</td>
 										<td class="span3">
-											<?=display_contact_info($result);?>
+											<?=display_location_info($result);?>
 										</td>
 									<?php if(count($result->staff) > 0) { ?>
 									</tr>
@@ -877,11 +877,13 @@ function sc_phonebook_search($attrs) {
 													<?php foreach($result->staff as $person) { ?>
 														<li>
 															<?php if($person->email) { ?>
-																<a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a>
+																<span class="email"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
 															<?php } else { ?>
-																<?php echo $person->name; ?>
+																<span class="name"><?php echo $person->name; ?></span>
 															<?php } ?>
-															<?php if($person->phone) echo $person->phone; ?>
+															<?php if($person->phone) { ?>
+																<span class="phone"><?php echo $person->phone; ?></span>
+															<?php } ?>
 														</li>
 														<?php if( ((($count + 1) % $staff_per_column) == 0) && ($count + 1 !== count($result->staff))) { 
 															echo '</ul><ul class="staff-list">';
