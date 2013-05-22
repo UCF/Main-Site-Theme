@@ -675,11 +675,11 @@ function sc_phonebook_search($attrs) {
 			}
 			unset($results[$key]);
 		}
-	}
+	}	
 	
 	# Reorder results: Organizations, then Departments, then Staff
-	$results = $organizations + $departments + $results;
-
+	$results = array_merge($organizations, $departments, $results);
+	
 	
 	# Helper function for naming consistencies
 	function fix_name_case($name) {
@@ -792,15 +792,16 @@ function sc_phonebook_search($attrs) {
 	<?php 
 	if($phonebook_search_query != '') {
 		?>
-		<ul id="phonebook-search-results">
 		<?php if(count($results) == 0) { ?>
-			<p><strong><big>No results were found.</big></strong></p>
-		<?php } else { ?>
-			<?php if($additional_results) { ?>
-			<p id="additional_results">First 300 results returned. Try narrowing your search.</p>
+		<p><strong><big>No results were found.</big></strong></p>
+		<?php 
+		} else { 
+			if($additional_results) { ?>
+				<p id="additional_results">First 300 results returned. Try narrowing your search.</p>
 			<?php } ?>
+		<ul id="phonebook-search-results">
 			<?php foreach($results as $i => $result) { ?>
-				<li class="result">
+				<li class="result<?php if ($result->from_table == 'departments' || $result->from_table == 'organizations') { ?> group-result<?php } ?>">
 					<table class="table">
 						<tbody>
 							<?php
