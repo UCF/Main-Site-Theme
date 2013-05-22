@@ -113,6 +113,10 @@
 	#announcements #filters #addnew_wrap { width: 216px; margin-left: 30px; }
 	#ongoing-twocol { margin-left: 62px; border-left: 1px dotted #000; padding-left: 19px; }
 	
+	#phonebook-search-results .show_staff .name,
+	#phonebook-search-results .show_staff .phone,
+	#phonebook-search-results .show_staff .email { display: block; float: none; }
+	
 	#azindex .post-type-search-header { height: 140px; }
 	#azIndexList { width: 404px; }
 	#azIndexList .navbar-inner { border-right: 0; border-top: 0; border-radius: 0; }
