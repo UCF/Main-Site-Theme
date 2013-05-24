@@ -630,14 +630,14 @@ function sc_phonebook_search($attrs) {
 						($_result->alpha !== null) && 
 						($_result->alpha == 1) ) 
 						{
-						$result->staff[$_result->name] = $_result;
+						$result->staff[$_result->last_name.'-'.$result->first_name.'-'.$_result->id] = $_result;
 					} else if( 
 						($is_department) && 
 						($result->name == $_result->department) && 
 						($_result->alpha !== null) &&
 						($_result->alpha == 1) ) 
 						{
-						$result->staff[$_result->name] = $_result;
+						$result->staff[$_result->last_name.'-'.$result->first_name.'-'.$_result->id] = $_result;
 					}
 				}
 				# Make sure that $result->staff[] is alphabetized
