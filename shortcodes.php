@@ -591,7 +591,7 @@ function sc_phonebook_search($attrs) {
 		$phonebook_search_query = $_GET['phonebook-search-query'];
 		$results                = query_search_service(array('search'=>$phonebook_search_query));
 	}
-
+	
 	# Filter out the result types that we don't understand
 	# We only understand organizations, departments, and staff
 	$results = array_filter(
@@ -780,11 +780,11 @@ function sc_phonebook_search($attrs) {
 	
 
 	ob_start();?>
-	<form class="form-horizontal" id="phonebook-search">
+	<form class="form-horizontal form-search" id="phonebook-search">
 		<div class="control-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?>" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn">Search</button>
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
 				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 			</div>
 		</div>

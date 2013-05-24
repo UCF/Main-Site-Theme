@@ -784,7 +784,7 @@ li.tagit-new input {
 
 
 /* Org and Person Phonebook Search */
-#phonebook-search #phonebook-search-description {font-family:Helvetica,sans-serif;font-size:11px;margin-bottom:0;}
+#phonebook-search #phonebook-search-description {font-family:Helvetica,sans-serif;font-size:11px;margin-bottom:0;padding-left:4px;}
 
 #phonebook-search-results { margin-left: 0; list-style-type: none; border-top: 1px solid #e5e5e5; }
 #phonebook-search-results .table { margin-bottom: 0; border-bottom: 1px solid #e5e5e5; }
