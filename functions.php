@@ -438,7 +438,7 @@ function get_weather_data() {
 /**
  * Output weather data. Add an optional class for easy Bootstrap styling.
  **/
-function output_weather_data($class=null) {
+function output_weather_data($cssclass=null) {
 	$cssclass	= is_string($cssclass) ? strip_tags($cssclass) : (string)strip_tags($cssclass);
 	$weather 	= get_weather_data(); 
 	$condition 	= $weather['condition'];
@@ -939,7 +939,7 @@ function get_theme_option($key) {
  */
 function esi_include($statementname, $argset=null) {	
 	if (!$statementname) { return null; }
-	
+
 	// Get the statement key
 	$statementkey = null;
 	foreach (Config::$esi_whitelist as $key=>$function) {
