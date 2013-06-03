@@ -25,7 +25,7 @@
 		</script>
 		<?php endif;?>
 		
-		<?php esi_include('page_specific_stylesheet'); ?>
+		<?php if (is_page()) { esi_include('page_specific_stylesheet', $post->ID); } ?>
 		
 		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
 			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>

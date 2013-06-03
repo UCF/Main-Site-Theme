@@ -165,7 +165,7 @@ Config::$esi_whitelist = array(
 		),
 	4 => array(
 		'name' => 'page_specific_stylesheet',
-		'safe_args' => null,
+		'safe_args' => get_all_page_ids(),
 		),
 );
 
