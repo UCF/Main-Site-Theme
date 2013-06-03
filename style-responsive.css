@@ -296,6 +296,12 @@
 	}
 	#phonebook-search-results .show_staff .show-staff-wrap ul { float: left; width: 100%; }
 	#phonebook-search-results .show_staff .show-staff-wrap ul li { border: 0; padding-right: 0; }
+	#phonebook-search-results .person-secondary-list .phone,
+	#phonebook-search-results .person-secondary-list .fax,
+	#phonebook-search-results .person-secondary-list .email,
+	#phonebook-search-results .person-secondary-list .location,
+	#phonebook-search-results .person-secondary-list .postal { padding-left: 8px; }
+	#phonebook-search-results .person-secondary-list .organization { padding-left: 2px; }
 	
 	#azIndexList { margin-left: 5px; }
 	.azindexlink-list li { padding-bottom: 10px; }
