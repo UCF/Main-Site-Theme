@@ -439,11 +439,12 @@ function get_weather_data() {
  * Output weather data. Add an optional class for easy Bootstrap styling.
  **/
 function output_weather_data($class=null) {
+	$cssclass	= is_string($cssclass) ? strip_tags($cssclass) : (string)strip_tags($cssclass);
 	$weather 	= get_weather_data(); 
 	$condition 	= $weather['condition'];
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img']; ?>
-	<div id="weather_bug" class="<?=$class?> screen-only" role="complementary">
+	<div id="weather_bug" class="<?=$cssclass?> screen-only" role="complementary">
 		<div id="wb_status_txt" style="background: url(<?php bloginfo('stylesheet_directory'); ?>/static/img/weather/<?=$img?>.png) left center no-repeat;"><span><?=$temp?>F, <?=$condition?></span></div>
 	</div>
 	<?php
@@ -934,17 +935,41 @@ function get_theme_option($key) {
 
 /*
  * Wrap a statement in a ESI include tag with a specified duration if the 
- * enable_esi theme option is enabled
+ * enable_esi theme option is enabled.
  */
-function esi_include($statement) {	
-	$enable_esi = get_theme_option('enable_esi');
+function esi_include($statementname, $argset=null) {	
+	if (!$statementname) { return null; }
+	
+	// Get the statement key
+	$statementkey = null;
+	foreach (Config::$esi_whitelist as $key=>$function) {
+		if ($function['name'] == $statementname) { $statementkey = $key;}
+	}
+	if (!$statementkey) { return null; }
+
 	// Never include ESI over HTTPS
+	$enable_esi = get_theme_option('enable_esi');
 	if(!is_null($enable_esi) && $enable_esi === '1' && is_ssl() == false) {
+		$argset = ($argset !== null) ? $argset = '&args='.urlencode(base64_encode($argset)) : '';
 		?>
-		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?php echo urlencode(base64_encode($statement)); ?>" />
+		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?=$statementkey?><?=$argset?>" />
 		<?php 
-	} elseif (in_array($statement, Config::$esi_whitelist)) {
-		eval($statement);
+	} elseif (array_key_exists($statementkey, Config::$esi_whitelist)) {
+		$statementname = Config::$esi_whitelist[$statementkey]['name'];
+		$statementargs = Config::$esi_whitelist[$statementkey]['safe_args'];
+		// If no safe arguments are defined in the whitelist for this statement,
+		// run call_user_func(); otherwise check arguments and run call_user_func_array()
+		if (!is_array($statementargs) || $argset == null) {
+			return call_user_func($statementname);
+		}
+		else {
+			// Convert argset arrays to strings for easy comparison with our whitelist
+			$argset = is_array($argset) ? serialize($argset) : $argset;
+			if ($argset !== null && in_array($argset, $statementargs)) { 
+				$argset = (unserialize($argset) !== false) ? unserialize($argset) : array($argset);
+				return call_user_func_array($statementname, $argset);
+			}
+		}
 	}
 	else {
 		return NULL;

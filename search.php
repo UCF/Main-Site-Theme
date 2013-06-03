@@ -10,7 +10,7 @@
 	<div class="row page-content" id="search-results">
 		<div id="page_title" class="span12">
 			<h1 class="span9">Search Results</h1>
-			<?php esi_include('output_weather_data(\'span3\');'); ?>
+			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 		<div id="contentcol" class="span9">
 			<article role="main">
@@ -57,7 +57,7 @@
 	<div class="row page-content" id="search-results">
 		<div id="page_title" class="span12">
 			<h1 class="span9">Search Results</h1>
-			<?php esi_include('output_weather_data(\'span3\');'); ?>
+			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 		<div id="contentcol" class="span9">
 			<article role="main">

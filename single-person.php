@@ -4,7 +4,7 @@
 	<div class="row page-content person-profile" id="<?=$post->post_name?>">
 		<div id="page_title" class="span12">
 			<h1 class="span9">Profile: <?php the_title();?></h1>
-			<?php esi_include('output_weather_data(\'span3\');'); ?>
+			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 		<div class="span2 details">
 			<?

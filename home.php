@@ -20,14 +20,14 @@
 		<div class="span4" id="home_centercol">
 			<div class="col_padwrap">
 				<h2>News</h2>
-				<?php esi_include('display_news();'); ?>
+				<?php esi_include('display_news'); ?>
 				<p class="screen-only"><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
 			</div>
 		</div>
 		<div class="span4" id="home_rightcol">
 			<h2>Upcoming Events</h2>
-			<?php esi_include('do_shortcode(\'[events-widget]\');'); ?>
-			<?php esi_include('output_weather_data();'); ?>
+			<?php esi_include('do_shortcode','[events-widget]'); ?>
+			<?php esi_include('output_weather_data'); ?>
 		</div>
 	
 	</div>

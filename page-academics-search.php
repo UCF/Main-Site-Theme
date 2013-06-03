@@ -201,7 +201,7 @@ if ($get_params_exist == true) {
 	<div class="row page-content" id="<?=$post->post_name?>">
 		<div class="span12" id="page_title">
 			<h1 class="span9"><?php the_title();?></h1>
-			<?php esi_include('output_weather_data(\'span3\');'); ?>
+			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 		
 		<div id="sidebar_left" class="span2" role="navigation">

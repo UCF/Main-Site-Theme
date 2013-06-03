@@ -137,25 +137,36 @@ Config::$body_classes = array('default');
 /*
  * Edge Side Includes (ESI) are directives that tell Varnish to include some other
  * content in the page. The primary use for use to assign another cache duration
- * to the "other content". To add an ESI, first encapsulate your content in a PHP
- * function such as output_weather_data(). Then in place of where you would call
- * output_weather_data() in the content, call esi_include('output_weather_data();').
- * In other words, pass the PHP statement that outputs the content as an argument
- * to the esi_include function. 
- *
- * To avoid an arbitrary code execution exploit, every statement being called with
- * esi_include must be registered in the Config::$esi_whitelist array below. If
- * different function calls take different arguments, they must all be registered 
- * (e.g. output_weather_data() and output_weather_data('span3')).
- *
+ * to the "other content". 
+ * To add an ESI, first add some function and any safe-to-use arguments to the ESI 
+ * whitelist below, then call that function by referencing its key in the whitelist 
+ * and any arguments using esi_include($key, $args).
+ * Functions that accept/require multiple arguments should be listed here with
+ * serialized set(s) of arguments (so that they can be compared as a single string).
+ * Example:
+ * $key => array(
+ * 		'name' => $functionname,
+ * 		'safe_args' => array('somearg', 'anotherarg', serialize($arrayofargs),
+ * )
  */
 
 Config::$esi_whitelist = array(
-	'output_weather_data();',
-	'output_weather_data(\'span3\');',
-	'do_shortcode(\'[events-widget]\');',
-	'display_news();',
-	'page_specific_stylesheet();'
+	1 => array(
+		'name' => 'output_weather_data',
+		'safe_args' => array('span3'),
+		),
+	2 => array(
+		'name' => 'do_shortcode',
+		'safe_args' => array('[events-widget]'),
+		),
+	3 => array(
+		'name' => 'display_news',
+		'safe_args' => null,
+		),
+	4 => array(
+		'name' => 'page_specific_stylesheet',
+		'safe_args' => null,
+		),
 );
 
 /**
