@@ -31,6 +31,7 @@
 	float:left;
 	margin: 0;
 	padding: 0;
+	display: block !important;
 }
 #UCFHBHeader #UCFtitle a{
 	margin: 0;
@@ -42,9 +43,10 @@
 	display: block;
 	height: 29px;
 	width: 318px;
+	text-indent: -9999px;
 }
 #UCFHBHeader #UCFtitle a span.UCFHBText{
-	display: none;
+	
 }
 #UCFHBHeader #UCFHBUni_links{
 	margin-left: 75px;
