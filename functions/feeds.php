@@ -199,7 +199,7 @@ function display_events($start=null, $limit=null){?>
 				<td>Date</td>
 				<td>Description</td>
 			</thead>
-			<tbody>
+			<tbody class="vcalendar">
 				<?php foreach($events as $item):
 					$day  		= date('M d', strtotime($item['starts']));
 					$time 		= date('h:i a', strtotime($item['starts']));
@@ -208,15 +208,17 @@ function display_events($start=null, $limit=null){?>
 					$location	= $item['location'];
 					$title		= $item['title'];				
 				?>
-				<tr class="item">
+				<tr class="item vevent">
 					<td class="date">
 						<div class="day"><?=$day?></div>
-						<div class="time"><?=$time?></div>
+						<div class="dtstart">
+							<abbr class="dtstart" title="<?=date('c', strtotime($time))?>"><?=$time?></abbr>
+						</div>
 					</td>
 					<td class="eventdata">
-						<div class="eventname"><a href="<?=$link?>" class="wrap ignore-external"><?=$title?></a></div>
+						<div class="summary"><a href="<?=$link?>" class="wrap url"><?=$title?></a></div>
 						<div class="location">
-							<?php if ($loc_link) { ?><a href="<?=$loc_link?>" class="wrap ignore-external"><?php } ?><?=$location?><?php if ($loc_link) { ?></a><?php } ?>
+							<?php if ($loc_link) { ?><a href="<?=$loc_link?>" class="wrap"><?php } ?><?=$location?><?php if ($loc_link) { ?></a><?php } ?>
 						</div>
 					</td>
 				</tr>

@@ -27,9 +27,9 @@ table.events thead td { text-align: center; }
 table.events tbody tr:nth-child(2n+1) td, table.events tbody tr:nth-child(2n+1) th { border-top: 1px solid #F9DD8C; background-color: #FFFDF4 !important; }
 table.events.table th, table.events.table td { border-top: 1px solid #F9DD8C; }
 table.events .item .date { width: 70px; }
-table.events .item .eventdata .eventname,
+table.events .item .eventdata .summary,
 table.events .item .eventdata .location { width: 100%; }
-table.events .item .eventdata .eventname { padding-bottom: 2px; }
+table.events .item .eventdata .summary { padding-bottom: 2px; }
 table.events .item .eventdata .location { font-size: 10px; text-transform: uppercase; line-height: 14px; }
 table.events .item .eventdata .location a { color: #363636; }
 table.events .item .eventdata .location a:hover { color: #363636; }
