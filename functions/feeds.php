@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Return the URL of a feed item's thumbnail, or the first image in the item's content
+ * if a thumbnail doesn't exist.
+ **/
 function get_article_image($article){
 	$image = $article->get_enclosure();
 	if ($image){
@@ -14,6 +17,25 @@ function get_article_image($article){
 	return null;
 }
 
+/**
+ * Check to see if an external image exists (via curl.)
+ * Alternative to getimagesize() that allows us to specify a timeout.
+ * via http://stackoverflow.com/questions/1363925/check-whether-image-exists-on-remote-url
+ *
+ * @return bool
+ **/
+function check_remote_file($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url); // specify URL
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, FEED_FETCH_TIMEOUT); // specify timeout
+    curl_setopt($ch, CURLOPT_NOBODY, 1); // don't download content
+    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    if(curl_exec($ch) !== FALSE) {
+        return true;
+    }
+    return false;
+}
 
 
 /**
@@ -45,8 +67,14 @@ class FeedManager{
 		$content   = get_site_transient($cache_key);
 		
 		if ($content === False){
-			$content = @file_get_contents($url);
-			if ($content === False){
+			// Set a timeout
+			$opts = array('http' => array(
+									'method'  => 'GET',
+									'timeout' => FEED_FETCH_TIMEOUT,
+			));
+			$context = stream_context_create($opts);
+			$content = file_get_contents($url, false, $context);
+			if ($content === False || empty($content)){
 				$failed  = True;
 				$content = null;
 				error_log('FeedManager failed to fetch data using url of '.$url);
@@ -224,7 +252,7 @@ function display_news(){?>
 					}
 					// Grab Today's 66x66px thumbnails if they're available
 					$image_small = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
-					$image = @getimagesize($image_small) !== false ? $image_small : $image;
+					$image = check_remote_file($image_small) !== false ? $image_small : $image;
 				}
 				$first = ($key == 0);
 			?>
