@@ -203,10 +203,12 @@ div.top_five_majors {
 #subfooter { clear: both; font-size: 10px; text-align: center; letter-spacing: 0.8px; }
 #subfooter a { color: #262626; }
 
-#social-menu-wrap { float: right; position: relative; left: -50%; clear: right; margin-top: 10px; }
-.ie7 #social-menu-wrap { width: 230px; }
+#social-menu-wrap { float: right; position: relative; left: -50%; clear: right; margin: 0; padding: 10px 0 15px 0; }
+.ie7 #social-menu-wrap { width: 252px; }
 #social-menu { position: relative; left: 50%; list-style-type: none; }
 #social-menu li { float: left; margin-right: 5px; }
+#social-menu li:first-child { margin-left: -18px; }
+.ie7 #social-menu li:first-child { margin-left: 0; }
 #social-menu li a { }
 #social-menu li a[href*="facebook"] { 
 	background: url('static/img/spritesheet.png') -1px -35px no-repeat; 
@@ -241,10 +243,10 @@ div.top_five_majors {
 	display: block; 
 	width: 35px; 
 	height: 32px; 
-	text-indent: -9999px; 
+	text-indent: -9999px;
 }
 
-#footer-logo { clear: both; padding-top: 20px; }
+#footer-logo { clear: both; padding-top: 10px; }
 #footer-logo a { 
 	display: block; 
 	margin: auto; 
@@ -378,6 +380,7 @@ a.home_spotlight_readmore {
 #home_centercol a:hover { color: #e50606; text-decoration: none; }
 #home_centercol { border-left: 1px dotted #333; }
 #home_centercol h3.title { line-height: 18px; }
+.ie7 #home_centercol h3.title { margin-top: -20px; } /* wat. */
 #home_centercol h3.title a { font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
 #home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
 #home_centercol .news {margin-left:0;}
@@ -409,15 +412,25 @@ a.home_spotlight_readmore {
 
 
 /* Home Page - Colleges Nav */
-#colleges_wrap { width: 100%; background: #FFEFB3; padding: 5px 0; margin-top: 30px; }
-#colleges_wrap a:hover { color: #e50606; }
-#colleges_wrap .span2 { width: 100px; }
-#colleges_wrap h3 { /*font-family: Verdana, Geneva, sans-serif;*/font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-top: 5px;}
-#colleges_wrap #menu-ucf-colleges { list-style-type: none; }
-#colleges_wrap #menu-ucf-colleges li { float: left; margin-right: 4px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;}
-#colleges_wrap #menu-ucf-colleges li:after { content: "|"; }
-#colleges_wrap #menu-ucf-colleges li:last-child:after { content: ""; }
-#colleges_wrap #menu-ucf-colleges li a { font-size: 11px; color: #262626; }
+#home-supplemental { width: 100%; background: #FFEFB3; padding: 15px 0; margin-top: 30px; font-size: 12px; }
+#home-supplemental a:hover { color: #e50606; }
+#home-supplemental .span2 { width: 100px; }
+#home-supplemental h3 { 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	font-size: 12px; 
+	font-weight: bold; 
+	text-transform: uppercase;
+}
+#home-supplemental aside { overflow: auto; } /* Make sure floated content doesn't overflow out of the aside */
+#home-supplemental #menu-ucf-colleges { list-style-type: none; margin-left: 0; }
+#home-supplemental #menu-ucf-colleges li { 
+	float: left; 
+	width: 50%; 
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	padding: 4px 0;
+	line-height: 15px;
+}
+#home-supplemental #menu-ucf-colleges li a { font-size: 12px; color: #262626; line-height: 15px; }
 
 
 /* Subpages - Title */

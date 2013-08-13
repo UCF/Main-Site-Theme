@@ -13,12 +13,6 @@
 					?>
 				</div>
 				
-				<p id="subfooter" role="contentinfo">
-					<a href="<?=site_url()?>/feedback/">Comments and Feedback</a> | <a href="<?=site_url()?>" class="print-noexpand">&copy; University of Central Florida</a>
-					<br/>
-					4000 Central Florida Blvd. Orlando, Florida, 32816 | 407.823.2000
-				</p>
-				
 				<?=wp_nav_menu(array(
 					'theme_location' => 'social-links', 
 					'container' => 'div',
@@ -28,9 +22,21 @@
 					'depth' => 1,
 					));
 				?>
-				
-				<p id="footer-logo" class="screen-only"><a target="_blank" href="http://www.ucf.edu/50/">University of Central Florida 50th Anniversary</a></p>
-				
+
+				<p id="subfooter" role="contentinfo" class="vcard">
+					<span class="adr">
+						<span class="street-address">4000 Central Florida Blvd. </span>
+						<span class="locality">Orlando</span>, 
+						<span class="region">Florida</span>, 
+						<span class="postal-code">32816</span> | 
+						<span class="tel"><a href="tel:4078232000">407.823.2000</a></span>
+					</span>
+					<br/>
+					<a href="<?=site_url()?>/feedback/">Comments and Feedback</a> | &copy; 
+					<a href="<?=site_url()?>" class="print-noexpand fn org url">
+						<span class="organization-name">University of Central Florida</span>
+					</a>
+				</p>
 				
 			</div>
 		</div><!-- .container -->

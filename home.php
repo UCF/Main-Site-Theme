@@ -33,13 +33,16 @@
 	</div>
 </div>
 	
-<div class="container-fullwidth screen-only" id="colleges_wrap">	
+<div class="container-fullwidth screen-only" id="home-supplemental">	
 	<div class="container">
-		<div class="row" role="navigation">
-			<div class="span2">
-				<h3>UCF Colleges</h3>
+		<div class="row">
+			<div class="span5">
+				<aside>
+					<?=apply_filters('the_content', get_theme_option('home_desc'))?>
+				</aside>
 			</div>
-			<div class="span10">
+			<div class="span6 offset1" role="navigation">
+				<h3>Colleges</h3>
 				<?=wp_nav_menu(array(
 					'theme_location' => 'ucf-colleges', 
 					'container' => 'false',

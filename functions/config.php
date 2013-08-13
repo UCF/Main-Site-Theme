@@ -174,6 +174,20 @@ Config::$esi_whitelist = array(
  * available fields. -- functions/base.php
  **/
 Config::$theme_settings = array(
+	'Alerts' => array(
+		new TextField(array(
+			'name'        => 'Feed URL',
+			'id'          => THEME_OPTIONS_NAME.'[alert_feed_url]',
+			'description' => 'Alert theme alert post type RSS feed URL: http://www.ucf.edu/alert/feed/?post_type=alert',
+			'value'       => $theme_options['alert_feed_url'],
+		)),
+		new TextField(array(
+			'name'        => 'More Information URL',
+			'id'          => THEME_OPTIONS_NAME.'[alert_more_information_url]',
+			'description' => 'URL of the More Information link appended to each alert: http://www.ucf.edu/alert/',
+			'value'       => $theme_options['alert_more_information_url'],
+		)),
+	),
 	'Analytics' => array(
 		new TextField(array(
 			'name'        => 'Google WebMaster Verification',
@@ -227,6 +241,14 @@ Config::$theme_settings = array(
 			'default'     => 'http://events.ucf.edu',
 		)),
 	),
+	'Home Page' => array(
+		new TextareaField(array(
+			'name'        => 'Home Page Description',
+			'id'          => THEME_OPTIONS_NAME.'[home_desc]',
+			'description' => 'Descriptive text that appears below the primary home page features (spotlights, news, events.) Allows for HTML and shortcode markup.',
+			'value'       => $theme_options['home_desc'],
+		)),
+	),
 	'News' => array(
 		new SelectField(array(
 			'name'        => 'News Max Items',
@@ -278,18 +300,6 @@ Config::$theme_settings = array(
 		)),
 	),
 	'Site' => array(
-		new TextField(array(
-			'name'        => 'Contact Email',
-			'id'          => THEME_OPTIONS_NAME.'[site_contact]',
-			'description' => 'Contact email address that visitors to your site can use to contact you.',
-			'value'       => $theme_options['site_contact'],
-		)),
-		new TextField(array(
-			'name'        => 'Organization Name',
-			'id'          => THEME_OPTIONS_NAME.'[organization_name]',
-			'description' => 'Your organization\'s name',
-			'value'       => $theme_options['organization_name'],
-		)),
 		new RadioField(array(
 			'name'        => 'Enable Edge Side Includes (ESI)',
 			'id'          => THEME_OPTIONS_NAME.'[enable_esi]',
@@ -375,20 +385,6 @@ Config::$theme_settings = array(
 			),
 			'value'       => $theme_options['bootstrap_menu_styles'],
 	    )),
-	),
-	'Alerts' => array(
-		new TextField(array(
-			'name'        => 'Feed URL',
-			'id'          => THEME_OPTIONS_NAME.'[alert_feed_url]',
-			'description' => 'Alert theme alert post type RSS feed URL: http://www.ucf.edu/alert/feed/?post_type=alert',
-			'value'       => $theme_options['alert_feed_url'],
-		)),
-		new TextField(array(
-			'name'        => 'More Information URL',
-			'id'          => THEME_OPTIONS_NAME.'[alert_more_information_url]',
-			'description' => 'URL of the More Information link appended to each alert: http://www.ucf.edu/alert/',
-			'value'       => $theme_options['alert_more_information_url'],
-		)),
 	)
 );
 
