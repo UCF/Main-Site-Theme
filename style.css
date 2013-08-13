@@ -206,31 +206,38 @@ div.top_five_majors {
 #social-menu-wrap { float: right; position: relative; left: -50%; clear: right; margin-top: 10px; }
 .ie7 #social-menu-wrap { width: 230px; }
 #social-menu { position: relative; left: 50%; list-style-type: none; }
-#social-menu li { float: left; margin-right: 10px; }
+#social-menu li { float: left; margin-right: 5px; }
 #social-menu li a { }
 #social-menu li a[href*="facebook"] { 
-	background: url('static/img/spritesheet.png') -2px -35px no-repeat; 
+	background: url('static/img/spritesheet.png') -1px -35px no-repeat; 
 	display: block; 
 	width: 35px; 
 	height: 32px; 
 	text-indent: -9999px; 
 }
 #social-menu li a[href*="twitter"] { 
-	background: url('static/img/spritesheet.png') -92px -34px no-repeat; 
+	background: url('static/img/spritesheet.png') -68px -34px no-repeat; 
 	display: block; 
 	width: 35px; 
 	height: 32px; 
 	text-indent: -9999px; 
 }
 #social-menu li a[href*="flickr"] { 
-	background: url('static/img/spritesheet.png') -48px -37px no-repeat; 
+	background: url('static/img/spritesheet.png') -32px -35px no-repeat; 
 	display: block; 
 	width: 35px; 
 	height: 32px; 
 	text-indent: -9999px; 
 }
 #social-menu li a[href*="youtube"] { 
-	background: url('static/img/spritesheet.png') -133px -35px no-repeat; 
+	background: url('static/img/spritesheet.png') -101px -35px no-repeat; 
+	display: block; 
+	width: 35px; 
+	height: 32px; 
+	text-indent: -9999px; 
+}
+#social-menu li a[href*="google"] { 
+	background: url('static/img/spritesheet.png') -134px -35px no-repeat; 
 	display: block; 
 	width: 35px; 
 	height: 32px; 
@@ -244,8 +251,8 @@ div.top_five_majors {
 	width: 123px; 
 	height: 45px; 
 	text-indent: -9999px; 
-	/*background: url('static/img/spritesheet.png') -246px -46px no-repeat; */ /* Standard logo */
-	background: url('static/img/spritesheet.png') 0 -279px no-repeat;  /* 50th logo */
+	background: url('static/img/spritesheet.png') -246px -46px no-repeat; /* Standard logo */
+	/*background: url('static/img/spritesheet.png') 0 -279px no-repeat; */ /* 50th logo */
 }
 
 
