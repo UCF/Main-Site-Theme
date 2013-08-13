@@ -1306,8 +1306,15 @@ function header_title(){
 	elseif ( is_home() || is_front_page() ) { 
 		$content = get_bloginfo('description');
 	}
-	elseif ( is_page() ) { 
-		$content = single_post_title('', FALSE); 
+	elseif ( is_page() ) {
+
+		$subsitute_title = get_post_meta(get_the_ID(), 'page_title', true);
+		if (!empty($subsitute_title)) {
+			$content = $subsitute_title;
+		} else {
+			$content = single_post_title('', FALSE);
+		}
+
 	}
 	elseif ( is_search() ) { 
 		$content = __('Search Results for:'); 
