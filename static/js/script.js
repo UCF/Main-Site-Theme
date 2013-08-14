@@ -685,15 +685,20 @@ var statusAlertCheck = function($) {
 					// Make sure this alert hasn't been closed by the user already
 					if ($.cookie('ucf_alert_display_' + newest.id) != 'hide') {
 						// Create a new alert if an existing one isn't found
-						var alert_markup = $('#status-alert-template').clone();
+						
+						var alert_markup = $('#status-alert-template').clone(true);
 						alert_markup
 							.attr('id', '')
-							.attr('data-alert-id', newest.id)
+							.attr('data-alert-id', newest.id);
+						$('#header-nav-wrap').before(alert_markup);
+
+						// Apparently IE7 doesn't like to append text to elements
+						// that haven't been inserted into the dom yet. THANKS IE.
+						$('.status-alert[data-alert-id="' + newest.id + '"]')
 							.find('.title').text(newest.title).end()
 							.find('.content').text(newest.description).end()
+							.find('.more-information').text('Click Here for More Information').end()
 							.find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
-							;
-						$('#header_wrap').before(alert_markup);
 					}
 				}
 			}

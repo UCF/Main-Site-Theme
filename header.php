@@ -77,16 +77,16 @@
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h2>
 							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-								<span class="title">TITLE</span>
+								<span class="title"></span>
 							</a>
 						</h2>
 						<p class="alert-body">
 							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-								<span class="content">CONTENT</span>
+								<span class="content"></span>
 							</a>
 						</p>
 						<p class="alert-action">
-							<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>">Click Here for More Information</a>
+							<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>"></a>
 						</p>
 					</div>
 				</div>
