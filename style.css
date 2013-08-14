@@ -494,6 +494,7 @@ a.home_spotlight_readmore {
 	background: #a3a3a3 url('static/img/mobile_notavailable.gif') center center no-repeat;
 }
 
+#contentcol h2 { font-size: 18px; line-height: 28px; }
 #contentcol p { margin-bottom: 20px; }
 #contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
 #contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }
