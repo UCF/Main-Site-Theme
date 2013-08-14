@@ -104,7 +104,9 @@
 					'container' => 'false', 
 					'menu_class' => 'menu '.get_header_styles(), 
 					'menu_id' => 'header-menu', 
-					'walker' => new Bootstrap_Walker_Nav_Menu()
+					'walker' => new Bootstrap_Walker_Nav_Menu(),
+					'before' => '<strong>',
+					'after' => '</strong>',
 					));
 				?>
 			</div>

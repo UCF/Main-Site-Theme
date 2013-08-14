@@ -194,7 +194,7 @@ div.top_five_majors {
 #home-footerwrap #footer { margin: 20px 0 20px 20px; }
 #footer a:hover { color: #e50606; }
 #footer-navwrap { float: right; position: relative; left: -50%; }
-.ie7 #footer-navwrap { width: 670px; }
+.ie7 #footer-navwrap { width: 625px; }
 #footer-menu { position: relative; left: 50%; }
 #footer-menu li { margin-right: 8px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 0.8px; }
 #footer-menu li:after { content: "|"; margin-left: 2px; }
@@ -472,7 +472,7 @@ a.home_spotlight_readmore {
 
 .sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
 .sidebar_nav li { padding-bottom: 8px; line-height: 17px; }
-.sidebar_nav li a { color: #333; }
+.sidebar_nav li a { color: #333; font-weight: normal; }
 .sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
 
 

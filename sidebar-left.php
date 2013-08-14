@@ -20,7 +20,9 @@
 		$args = array(
 			'menu' => $more_info_nav_val,
 			'container' => 'false',
-			'menu_class' => 'sidebar_nav'
+			'menu_class' => 'sidebar_nav',
+			'before' => '<strong>',
+			'after' => '</strong>'
 		);
 		wp_nav_menu($args);
 	}
@@ -31,7 +33,9 @@
 		$args = array(
 			'menu' => $secondary_nav_val,
 			'container' => 'false',
-			'menu_class' => 'sidebar_nav'
+			'menu_class' => 'sidebar_nav',
+			'before' => '<strong>',
+			'after' => '</strong>'
 		);
 		wp_nav_menu($args);
 	}
@@ -44,7 +48,9 @@
 		$args = array(
 			'theme_location' => 'ucf-colleges',
 			'container' => 'false',
-			'menu_class' => 'sidebar_nav'
+			'menu_class' => 'sidebar_nav',
+			'before' => '<strong>',
+			'after' => '</strong>'
 		);
 		wp_nav_menu($args);
 	}
