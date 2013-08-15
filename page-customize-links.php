@@ -173,7 +173,7 @@
 							<h3>Available Links</h3>
 							<select multiple id="sourceLinks" class="quicklinks-list">
 								<option value="http://advising.sdes.ucf.edu/offices">Academic Advising</option>
-								<option value="http://registrar.sdes.ucf.edu/calendar">Academic Calendar</option>
+								<option value="http://calendar.ucf.edu">Academic Calendar</option>
 								<option value="http://www.aep.sdes.ucf.edu/">Academic Exploration Program (A.E.P.)</option>
 								<option value="http://z.ucf.edu">Academic Integrity</option>
 								<option value="http://www.ucf.edu/academics/">Academic Programs</option>
