@@ -1613,14 +1613,16 @@ function _save_meta_data($post_id, $meta_box){
 		
 		// All other standard meta box data for Sliders:		
 		foreach ($meta_box as $single_meta_box) {
-			foreach ($single_meta_box['fields'] as $field) {				
-				switch ($field['type']){
-					case 'file':
-						save_file($post_id, $field);
-						break;
-					default:
-						save_default($post_id, $field);
-						break;
+			if ($single_meta_box['fields']) {
+				foreach ($single_meta_box['fields'] as $field) {				
+					switch ($field['type']){
+						case 'file':
+							save_file($post_id, $field);
+							break;
+						default:
+							save_default($post_id, $field);
+							break;
+					}
 				}
 			}
 		}
@@ -1653,9 +1655,11 @@ function _save_meta_data($post_id, $meta_box){
 					// in $new_slide_list[].  If the keys in $old_attachments aren't in
 					// $new_slide_list[], add them to $unchanged_slide_list[]:
 					$old_attachments = get_post_meta($post_id, $field['id'], TRUE);
-					foreach ($old_attachments as $key => $val) {
-						if (!(in_array($key, $new_slide_list))) {
-							$unchanged_slide_list[] .= $key;
+					if ($old_attachments) {
+						foreach ($old_attachments as $key => $val) {
+							if (!(in_array($key, $new_slide_list))) {
+								$unchanged_slide_list[] .= $key;
+							}
 						}
 					}
 					
