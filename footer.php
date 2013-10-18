@@ -46,7 +46,7 @@
 	<![endif]-->
 	<?="\n".footer_()."\n"?>
 	<?php if (!is_page(get_page_by_title('Customize Links')->ID)) { ?>
-		<script type="text/javascript" src="//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1"></script>
+		<script type="text/javascript" id="ucfhb-script" src="//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1"></script>
 	<?php } else { ?>
 		<script type="text/javascript" src="<?=THEME_JS_URL?>/lowpro.jquery.js"></script>
 		<script type="text/javascript" src="<?=THEME_JS_URL?>/jquery.cookiejar.js"></script>
