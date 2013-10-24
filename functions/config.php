@@ -68,19 +68,20 @@ define('ESI_INCLUDE_URL', THEME_STATIC_URL.'/esi.php');
 # Timeout for data grabbed from feeds
 define('FEED_FETCH_TIMEOUT', 10); // seconds
 
+$theme_options = get_option(THEME_OPTIONS_NAME);
+
 # Weather
-define('WEATHER_URL', 'http://weather.smca.ucf.edu/');
+define('WEATHER_URL', !empty($theme_options['weather_service_url']) ? $theme_options['weather_service_url'] : 'http://weather.smca.ucf.edu/');
 define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');
 define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
-define('WEATHER_FETCH_TIMEOUT', 8); //seconds
+define('WEATHER_FETCH_TIMEOUT', !empty($theme_options['weather_service_timeout']) ? (int)$theme_options['weather_service_timeout'] : 8); //seconds
 
-$theme_options = get_option(THEME_OPTIONS_NAME);
 define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
-define('SEARCH_SERVICE_URL', 'http://webcom.dev.smca.ucf.edu/search/webroot/service.php');
-define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
+define('SEARCH_SERVICE_URL', !empty($theme_options['search_service_url']) ? $theme_options['search_service_url'] : 'http://search.smca.ucf.edu/service.php');
+define('SEARCH_SERVICE_HTTP_TIMEOUT', !empty($theme_options['search_service_timeout']) ? (int)$theme_options['search_service_timeout'] : 10); #seconds
 
 # Estimated start/end months of semesters; used for announcements
 define('CURRENT_MONTH', (int)date('n'));
@@ -327,6 +328,34 @@ Config::$theme_settings = array(
 			'default'     => '',
 			'value'       => $theme_options['feedback_email_recipients'],
 	    )),
+    	new TextField(array(
+    		'name'        => 'Weather Service URL',
+    		'id'          => THEME_OPTIONS_NAME.'[weather_service_url]',
+    		'description' => 'URL to the SMCA weather service used to grab weather data.  Useful for development when testing the weather service on different environments.',
+    		'default'     => 'http://weather.smca.ucf.edu/',
+    		'value'       => $theme_options['weather_service_url'],
+        )),
+        	new TextField(array(
+        		'name'        => 'Weather Service Timeout',
+        		'id'          => THEME_OPTIONS_NAME.'[weather_service_timeout]',
+        		'description' => 'Number of seconds to wait before timing out a weather service request.  Default is 8 seconds.',
+        		'default'     => 8,
+        		'value'       => $theme_options['weather_service_timeout'],
+            )),
+    	new TextField(array(
+    		'name'        => 'Search Service URL',
+    		'id'          => THEME_OPTIONS_NAME.'[search_service_url]',
+    		'description' => 'URL to the SMCA search service used to grab Academics and Phonebook Search data.  Useful for development when testing the search service on different environments.',
+    		'default'     => 'http://search.smca.ucf.edu/service.php',
+    		'value'       => $theme_options['search_service_url'],
+        )),
+        	new TextField(array(
+        		'name'        => 'Search Service Timeout',
+        		'id'          => THEME_OPTIONS_NAME.'[search_service_timeout]',
+        		'description' => 'Number of seconds to wait before timing out a search service request.  Default is 10 seconds.',
+        		'default'     => 10,
+        		'value'       => $theme_options['search_service_timeout'],
+            )),
 	),
 	'Social' => array(
 		new RadioField(array(
