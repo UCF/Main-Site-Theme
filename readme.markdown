@@ -50,8 +50,6 @@ This theme relies on Twitter's Bootstrap framework. UCF's fork of the Bootstrap 
 * The function _save_meta_data() in functions/base.php (line 1572) has been modified to properly handle Slider content.
 * Slider "slide" meta fields are not duplicate meta boxes, but are actually dynamically-generated duplicate field groups, whose field values are saved into a serialized array for the given field.
 * static/js/admin.js includes multiple required scripts for the Slider editor to save/load field values properly.
-* Any updates to header.php must be copied to page-customize-links.php manually. The Customize Links page needs to output the university header without using the default university-header.js, which is included in header.php, so page-customize-links.php cannot include header.php.
-* The Customize Links page requires multiple extra javascript libraries to function properly; these are included at the bottom of footer.php.
 
 
 This theme utilizes Twitter Bootstrap as its front-end framework.  Bootstrap
