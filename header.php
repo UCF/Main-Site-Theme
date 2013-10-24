@@ -24,6 +24,10 @@
 			
 		</script>
 		<?php endif;?>
+
+		<!--[if IE]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 		
 		<?php if (is_page()) { esi_include('page_specific_stylesheet', $post->ID); } ?>
 		

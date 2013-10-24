@@ -29,11 +29,14 @@ if ($get_params_exist == true) {
 	$sort			= ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC') 	? $_GET['sort'] 		: 'ASC';
 	$flip_sort		= ($sort == 'ASC') 										? 'DESC' 				: 'ASC';
 	
-	// Build an array of query params based on GET params passed
+	// Build an array of query params
 	$query_array = array(
 		'use'		=> 'programSearch',
 		'graduate' 	=> 0,
 		'order_by' 	=> $sortby.' '.$sort,
+		'college'	=> '',
+		'search'	=> '',
+		'in'		=> '',
 	);	
 	
 	// If a college is specified, add it
@@ -59,7 +62,7 @@ if ($get_params_exist == true) {
 	if ($college && $college == 'College of Graduate Studies') {
 		$query_array['graduate'] = 1;
 	}
-	
+
 	// Grab results
 	if ($is_search && $search_query == '') {
 		$error = '<strong>Error:</strong> Please enter a valid search term (letters, spaces, and dashes "-" are permitted.)';
@@ -80,13 +83,13 @@ if ($get_params_exist == true) {
 		
 		// Sort results by degree type
 		$majors = array_filter($results, create_function('$p', '
-			return $p->type === "major" && $p->graduate === "0";
+			return $p->type === "major" && $p->graduate === 0;
 		'));
 		$minors = array_filter($results, create_function('$p', '
 			return $p->type === "minor";
 		'));
 		$grad_programs = array_filter($results, create_function('$p', '
-			return $p->type === "major" && $p->graduate === "1";
+			return $p->type === "major" && $p->graduate === 1;
 		'));
 		$certificates = array_filter($results, create_function('$p', '
 			return $p->type === "certificate";

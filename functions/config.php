@@ -79,7 +79,7 @@ define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
-define('SEARCH_SERVICE_URL', 'http://search.smca.ucf.edu/service.php');
+define('SEARCH_SERVICE_URL', 'http://webcom.dev.smca.ucf.edu/search/webroot/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', 10); #seconds
 
 # Estimated start/end months of semesters; used for announcements
@@ -403,7 +403,6 @@ Config::$links = array(
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
-	THEME_STATIC_URL.'/css/university-header.css',
 );
 
 // Default bootstrap responsive styles
@@ -437,6 +436,7 @@ array_push(Config::$styles,
  **/
 Config::$scripts = array(
 	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
+	array('name' => 'ucfhb-script',  'src' => CURRENT_PROTOCOL.'universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
 	THEME_JS_URL.'/jFeed.js',
 	THEME_JS_URL.'/jquery.cookie.js',

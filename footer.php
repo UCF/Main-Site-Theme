@@ -41,24 +41,5 @@
 			</div>
 		</div><!-- .container -->
 	</body>
-	<!--[if IE]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
 	<?="\n".footer_()."\n"?>
-	<?php if (!is_page(get_page_by_title('Customize Links')->ID)) { ?>
-		<script type="text/javascript" id="ucfhb-script" src="//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1"></script>
-	<?php } else { ?>
-		<script type="text/javascript" src="<?=THEME_JS_URL?>/lowpro.jquery.js"></script>
-		<script type="text/javascript" src="<?=THEME_JS_URL?>/jquery.cookiejar.js"></script>
-		<script type="text/javascript" src="<?=THEME_JS_URL?>/jquery.json.js"></script>
-		<script type="text/javascript" src="<?=THEME_JS_URL?>/quick_links.js"></script>
-		<script type="text/javascript" src="<?=THEME_JS_URL?>/quick_links_manager.js"></script>
-		<script type="text/javascript">
-		$(document).ready(function() {	
-			initQuickLinks();
-			initQuickLinksManager();
-			$('#quicklinks-actions a').click(function(e) { e.preventDefault() });
-		});
-		</script>
-	<?php } ?>
 </html>
