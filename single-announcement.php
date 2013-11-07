@@ -1,4 +1,4 @@
-<?php disallow_direct_load('single.php');?>
+<?php disallow_direct_load('single-announcement.php');?>
 <?php get_header(); the_post();?>
 	
 	<div class="row page-content" id="<?=$post->post_name?>">
