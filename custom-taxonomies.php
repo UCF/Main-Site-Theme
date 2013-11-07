@@ -137,7 +137,7 @@ class Keywords extends CustomTaxonomy
 
 
 /**
- * Describes keywords for announcements
+ * Describes audience types for announcements
  *
  * @author Jo Greybill
  **/
@@ -160,4 +160,28 @@ class AudienceRoles extends CustomTaxonomy
 		$hierarchical = True;
 } // END class 
 
+
+/**
+ * Describes Program categorizations for Degree Programs
+ *
+ * @author Jo Dickson
+ **/
+class ProgramTypes extends CustomTaxonomy
+{
+	public
+		$name               = 'program_types',
+		$general_name       = 'Program Types',
+		$singular_name      = 'Program Type',
+		$search_items       = 'Search Program Types',
+		$popular_items      = 'Popular Program Types',
+		$all_times          = 'All Program Types',
+		$parent_item        = 'Parent Program Type',
+		$parent_item_colon  = 'Parent Program Type:',
+		$edit_item          = 'Edit Program Type',
+		$update_item        = 'Update Program Type',
+		$add_new_item       = 'Add New Program Type',
+		$new_item_name      = 'New Program Type',
+		
+		$hierarchical = True;
+} // END class 
 ?>

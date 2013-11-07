@@ -1492,7 +1492,46 @@ class Slider extends CustomPostType {
 			}			
 		}
 	}
+}
+
+
+/**
+ * Describes an undergraduate/graduate program.
+ *
+ * @author Jo Dickson
+ **/
+class Degree extends CustomPostType{
+	public 
+		$name           = 'degree',
+		$plural_name    = 'Degree Programs',
+		$singular_name  = 'Degree Program',
+		$add_new_item   = 'Add New Degree Program',
+		$edit_item      = 'Edit Degree Program',
+		$new_item       = 'New Degree Program',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies		= array('program_types');
 	
-	
+	public function fields(){
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name'  => 'College Name',
+				'desc' => 'Name of the associated college for this degree.',
+				'id'   => $prefix.'college_name',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Department Name',
+				'desc' => 'Name of the associated department for this degree.',
+				'id'   => $prefix.'department_name',
+				'type' => 'text',
+			),
+		);
+	}
 }
 ?>
