@@ -184,4 +184,54 @@ class ProgramTypes extends CustomTaxonomy
 		
 		$hierarchical = True;
 } // END class 
+
+
+/**
+ * Describes university colleges.
+ *
+ * @author Jo Dickson
+ **/
+class Colleges extends CustomTaxonomy
+{
+	public
+		$name               = 'colleges',
+		$general_name       = 'Colleges',
+		$singular_name      = 'College',
+		$search_items       = 'Search Colleges',
+		$popular_items      = 'Popular Colleges',
+		$all_times          = 'All Colleges',
+		$parent_item        = 'Parent College',
+		$parent_item_colon  = 'Parent College:',
+		$edit_item          = 'Edit College',
+		$update_item        = 'Update College',
+		$add_new_item       = 'Add New College',
+		$new_item_name      = 'New College',
+		
+		$hierarchical = True;
+} // END class 
+
+
+/**
+ * Describes university departments.
+ *
+ * @author Jo Dickson
+ **/
+class Departments extends CustomTaxonomy
+{
+	public
+		$name               = 'departments',
+		$general_name       = 'Departments',
+		$singular_name      = 'Department',
+		$search_items       = 'Search Departments',
+		$popular_items      = 'Popular Departments',
+		$all_times          = 'All Departments',
+		$parent_item        = 'Parent Department',
+		$parent_item_colon  = 'Parent Department:',
+		$edit_item          = 'Edit Department',
+		$update_item        = 'Update Department',
+		$add_new_item       = 'Add New Department',
+		$new_item_name      = 'New Department',
+		
+		$hierarchical = True;
+} // END class 
 ?>

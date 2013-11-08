@@ -1514,21 +1514,26 @@ class Degree extends CustomPostType{
 		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True,
-		$taxonomies		= array('program_types');
+		$taxonomies		= array('program_types', 'colleges', 'departments');
 	
 	public function fields(){
 		$prefix = $this->options('name').'_';
 		return array(
 			array(
-				'name'  => 'College Name',
-				'desc' => 'Name of the associated college for this degree.',
-				'id'   => $prefix.'college_name',
+				'name'  => 'Required Hours',
+				'id'   => $prefix.'hours',
 				'type' => 'text',
 			),
 			array(
-				'name'  => 'Department Name',
-				'desc' => 'Name of the associated department for this degree.',
-				'id'   => $prefix.'department_name',
+				'name'  => 'Degree ID',
+				'desc' => 'degree_id in database. Do not modify this value.',
+				'id'   => $prefix.'id',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Degree Type ID',
+				'desc' => 'type_id in database. Do not modify this value.',
+				'id'   => $prefix.'type_id',
 				'type' => 'text',
 			),
 		);

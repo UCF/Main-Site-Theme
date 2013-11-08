@@ -132,6 +132,8 @@ Config::$custom_taxonomies = array(
 	'Keywords',
 	'AudienceRoles',
 	'ProgramTypes',
+	'Colleges',
+	'Departments'
 );
 
 Config::$body_classes = array('default');

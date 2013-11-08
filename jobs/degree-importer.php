@@ -2,16 +2,34 @@
 require('../../../../wp-blog-header.php');
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
-// Grab a json feed (currently using search service)
-$json = json_decode(file_get_contents('http://search.smca.ucf.edu/service.php?search=Digital+Media&use=programSearch'));
-
-$results = $json->results;
+// Grab the search service JSON feed for all programs
+$results = query_search_service(array('use' => 'programSearch', 'search' => 'Digital Media'));
 
 
 $program_postdata = array();
 $count = 0;
 
 foreach ($results as $program) {
+	// Update program type degree names.
+	switch ($program->type) {
+		case 'major':
+			if ($program->graduate == 0) {
+				$program->type = 'Undergraduate Degree';
+			}
+			else {
+				$program->type = 'Graduate Degree';
+			}
+			break;
+		case 'articulated':
+			$program->type = ucwords($program->type).' Program';
+			break;
+		case 'accelerated':
+			$program->type = ucwords($program->type).' Program';
+			break;
+		default:
+			$program->type = ucwords($program->type);
+			break;
+	}
 	$program = array(
 		'post_data' => array(
 			'post_title' 	=> $program->name,
@@ -29,7 +47,11 @@ foreach ($results as $program) {
 			'degree_college_name' 	 => $program->college_name,
 			'degree_department_name' => $program->department_name,
 		),
-		'degree_type' => $program->type,
+		'post_terms' => array(
+			'program_types' => $program->type,
+			'colleges' => $program->college_name,
+			'departments' => $program->department_name,
+		),
 	);
 
 	$program_postdata[] = $program;
@@ -38,7 +60,7 @@ foreach ($results as $program) {
 foreach ($program_postdata as $post) {
 	$post_data = $post['post_data'];
 	$post_meta = $post['post_meta'];
-	$post_degree_type = $post['degree_type']; 
+	$post_terms = $post['post_terms']; 
 	$post_id = null;
 
 	// Attempt to fetch an existing post to compare against.
@@ -80,24 +102,30 @@ foreach ($program_postdata as $post) {
 			print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'<br/>';
 		}
 	}
-	// Set/update degree type taxonomy term.
-	$term = term_exists($post_degree_type, 'program_types');
-	$term_id = null;
-	if (!empty($term) && is_array($term)) {
-		$term_id = $term['term_id'];
-	}
-	else {
-		$term = wp_insert_term($post_degree_type, 'program_types');
-		if (gettype($term) == 'array') { // Make sure we don't get WP error object
-			$term_id = $term['term_id'];
+
+	// Set/update taxonomy terms.
+	// NOTE: These do NOT account for parent/child relationships!
+	foreach ($post_terms as $tax=>$term) {
+		// Check for existing. Make a new term if necessary.
+		// Return a term_id.
+		$existing_term = term_exists($term, $tax);
+		if (!empty($existing_term) && is_array($existing_term)) {
+			$term_id = $existing_term['term_id'];
 		}
-	}
-	if ($term_id) {
-		wp_set_post_terms($post_id, $term_id, 'program_types');
-		print 'Set post\'s program type to type '.$post_degree_type.'<br/>';
-	}
-	else {
-		print 'Failed to set program type '.$post_degree_type.' for this post.<br/>';
+		else {
+			$new_term = wp_insert_term($term, $tax);
+			if (gettype($new_term) == 'array') { // Make sure we don't get WP error object
+				$term_id = $new_term['term_id'];
+			}
+		}
+		// Actually set the term for the post.
+		if ($term_id) {
+			wp_set_post_terms($post_id, $term_id, $tax);
+			print 'Set post\'s taxonomy '.$tax.' to type '.$term.'<br/>';
+		}
+		else {
+			print 'Failed to set taxonomy '.$tax.' to type '.$term.' for this post.<br/>';
+		}
 	}
 
 	// Done.
