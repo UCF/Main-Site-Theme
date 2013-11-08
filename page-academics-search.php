@@ -336,7 +336,7 @@ if ($get_params_exist == true) {
 												
 												</div>
 													
-												<div class="credits_wrap">
+												<div class="credits-wrap">
 													<span class="program-type-alt"><?=$program_type?></span>
 												
 													<?php if ($program->required_hours) { 

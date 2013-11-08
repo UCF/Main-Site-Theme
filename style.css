@@ -918,7 +918,7 @@ li.tagit-new input {
 #phonebook-search-results hr { margin-top: 10px; margin-bottom: 10px; clear: both; }
 
 
-/* Academics Search */
+/* Academics Search, Single Degree Programs */
 #academics-search { }
 
 #academics-search #filters { }
@@ -957,35 +957,40 @@ li.tagit-new input {
 #academics-search ul.results-list .program a .name { color: #660000; }
 #academics-search ul.results-list .program a .name:hover { color: #E50606; }
 
-#academics-search ul.results-list .program .college,
-#academics-search ul.results-list .program .department,
-#academics-search ul.results-list .program .label,
-#academics-search ul.results-list .program .name_label,
-#academics-search ul.results-list .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
+#academics-search .program .college,
+#academics-search .program .department,
+#academics-search .program .label,
+#academics-search .program .name_label,
+#academics-search .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
 
 #academics-search ul.results-list .program .college,
 #academics-search ul.results-list .program .department { display: table; } /* for browsers that can get a neater display */
 
-#academics-search ul.results-list .program .college,
-#academics-search ul.results-list .program .department { font-size: 12px; }
+#academics-search .program .college,
+#academics-search .program .department { font-size: 12px; }
 
-#academics-search ul.results-list .program .name_label,
-#academics-search ul.results-list .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
+#academics-search .program .name_label,
+#academics-search .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
 
-#academics-search ul.results-list .program .name_label { width: 110px; display: block; float: left; clear: both; }
-#academics-search ul.results-list .program .program-type-alt { display: block; margin: auto; } 
+#academics-search .program .name_label { width: 110px; display: block; float: left; clear: both; }
+#academics-search .program .program-type-alt { display: block; margin: auto; } 
 
 .ie7 #academics-search ul.results-list .program .college,
 .ie7 #academics-search ul.results-list .program .department,
 .ie8 #academics-search ul.results-list .program .college,
 .ie8 #academics-search ul.results-list .program .department { display: block; float: none; }
 
-#academics-search ul.results-list .program .credits_wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
-.ie7 #academics-search ul.results-list .program .credits_wrap,
-.ie8 #academics-search ul.results-list .program .credits_wrap { width: 140px; }
-#academics-search ul.results-list .program .credits_wrap a { border-bottom: 0; cursor: pointer; }
+#academics-search ul.results-list .program .credits-wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
+.ie7 #academics-search ul.results-list .program .credits-wrap,
+.ie8 #academics-search ul.results-list .program .credits-wrap { width: 140px; }
+#academics-search ul.results-list .program .credits-wrap a { border-bottom: 0; cursor: pointer; }
 
 #academics-search .more-details { text-align:center; }
+
+
+/* Single Degree Pages */
+#degree-single { }
+
 
 
 /**
