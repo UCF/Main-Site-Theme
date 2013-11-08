@@ -30,10 +30,14 @@ foreach ($results as $program) {
 			$program->type = ucwords($program->type);
 			break;
 	}
+
+	// Modify contacts data for insertion into WP text field.
+	// TODO...
+
 	$program = array(
 		'post_data' => array(
 			'post_title' 	=> $program->name,
-			'post_content' 	=> 'Hey look a new description',
+			'post_content' 	=> @$program->description,
 			'post_status' 	=> 'publish',
 			'post_date' 	=> date('Y-m-d H:i:s'),
 			'post_author' 	=> 1,
@@ -42,10 +46,13 @@ foreach ($results as $program) {
 		'post_meta' => array(
 			// Programs can have similar degree_id's, so we need
 			// type_id to further distinguish unique programs
-			'degree_id'				 => $program->degree_id,
-			'degree_type_id'		 => $program->type_id,
-			'degree_college_name' 	 => $program->college_name,
-			'degree_department_name' => $program->department_name,
+			'degree_id'			=> $program->degree_id,
+			'degree_type_id'	=> $program->type_id,
+			'degree_hours'		=> $program->required_hours,
+			'degree_website'	=> $program->website,
+			'degree_phone'		=> @$program->phone,
+			'degree_email'		=> @$program->email,
+			'degree_contacts'	=> @$program->contacts, // comma-separated name/bldg/phone, semicolon-separated by person
 		),
 		'post_terms' => array(
 			'program_types' => $program->type,

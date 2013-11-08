@@ -1525,6 +1525,29 @@ class Degree extends CustomPostType{
 				'type' => 'text',
 			),
 			array(
+				'name'  => 'Website',
+				'id'   => $prefix.'website',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Phone Number',
+				'id'   => $prefix.'phone',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Email',
+				'id'   => $prefix.'email',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Contacts',
+				'desc' => 'Individual contacts are semicolon-separated. Contact values, 
+							like name, email, and phone number, are comma-separated.<br/>
+							e.g. "Jane Doe,407-123-4567;John Doe,john@ucf.edu,407-987-6543"',
+				'id'   => $prefix.'contacts',
+				'type' => 'text',
+			),
+			array(
 				'name'  => 'Degree ID',
 				'desc' => 'degree_id in database. Do not modify this value.',
 				'id'   => $prefix.'id',
@@ -1537,6 +1560,33 @@ class Degree extends CustomPostType{
 				'type' => 'text',
 			),
 		);
+	}
+
+	/**
+	 * Registers the custom post type and any other ancillary actions that are
+	 * required for the post to function properly.
+	 **/
+	public function register(){
+		$registration = array(
+			'labels'     => $this->labels(),
+			'supports'   => $this->supports(),
+			'public'     => $this->options('public'),
+			'taxonomies' => $this->options('taxonomies'),
+			'_builtin'   => $this->options('built_in'),
+			'rewrite' => array(
+				'slug' => 'academics'
+			),
+		);
+		
+		if ($this->options('use_order')){
+			$registration = array_merge($registration, array('hierarchical' => True,));
+		}
+		
+		register_post_type($this->options('name'), $registration);
+		
+		if ($this->options('use_shortcode')){
+			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
+		}
 	}
 }
 ?>
