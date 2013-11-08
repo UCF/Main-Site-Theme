@@ -1,4 +1,4 @@
-<?php disallow_direct_load('sidebar.php');?>
+<?php disallow_direct_load('sidebar-right.php');?>
 
 <?php if(!function_exists('dynamic_sidebar') or !dynamic_sidebar('Right Sidebar')):?>
 <?php endif;?>
