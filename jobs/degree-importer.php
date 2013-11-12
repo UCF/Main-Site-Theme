@@ -3,7 +3,7 @@ require('../../../../wp-blog-header.php');
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
 // Grab the search service JSON feed for all programs
-$results = query_search_service(array('use' => 'programSearch', 'search' => 'Digital Media'));
+$results = query_search_service(array('use' => 'programSearch', 'search' => 'Engineering'));
 
 
 $program_postdata = array();

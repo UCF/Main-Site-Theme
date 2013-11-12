@@ -1,4 +1,5 @@
 <?php
+/* TODO: REWRITE THIS.  We need to search by wordpress posts instead of querying the search service. */
 
 // Are any GET params set? If so, build a query for the search service
 $query_string	  = $_SERVER['QUERY_STRING'];
@@ -316,9 +317,65 @@ if ($get_params_exist == true) {
 											<div class="row">
 																				
 												<div class="span7">
-												<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
+												<?php
+													$website = null;
+													if ($program->graduate) {
+														$website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+													}
+													else {
+														// Update program type degree names.
+														switch ($program->type) {
+															case 'major':
+																if ($program->graduate == 0) {
+																	$program->type = 'Undergraduate Degree';
+																}
+																else {
+																	$program->type = 'Graduate Degree';
+																}
+																break;
+															case 'articulated':
+																$program->type = ucwords($program->type).' Program';
+																break;
+															case 'accelerated':
+																$program->type = ucwords($program->type).' Program';
+																break;
+															default:
+																$program->type = ucwords($program->type);
+																break;
+														}
+														$args = array(
+															'post_type' => 'degree',
+															'posts_per_page' => 1,
+															'meta_query' => array(
+																array(
+																	'key' => 'degree_id',
+																	'value' => $program->id,
+																),
+																array(
+																	'key' => 'degree_type_id',
+																	'value' => $program->type_id,
+																),
+															),
+															'tax_query' => array(
+																array(
+																	'taxonomy' => 'program_types',
+																	'field' => 'slug',
+																	'terms' => sanitize_title($program->type),
+																),
+															),
+														);
+														$post = get_posts($args);
+														if ($post) {
+															$post = $post[0];
+															$website = get_permalink($post->ID);
+														}
+													}
+													
+
+												?>
+												<?php if ($website) { ?><a href="<?=$website?>"><?php } ?>
 													<h4 class="name"><?=trim($program->name)?></h4>
-												<?php if ($dept_website !== '') { ?></a><?php } ?>
+												<?php if ($website) { ?></a><?php } ?>
 												
 												<?php if ($program->college_name) { ?>
 													<span class="name_label">College</span>

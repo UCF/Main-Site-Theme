@@ -338,6 +338,8 @@
 		margin-top: 8px; 
 	}
 	#academics-search ul.results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
+
+	#program-meta p { padding-left: 0; }
 }
 
 @media (max-width: 480px) {	

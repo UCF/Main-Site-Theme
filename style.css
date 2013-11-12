@@ -961,7 +961,10 @@ li.tagit-new input {
 #academics-search .program .department,
 #academics-search .program .label,
 #academics-search .program .name_label,
-#academics-search .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
+#academics-search .program .program-type-alt,
+#degree-single .program .label,
+#degree-single .program .name_label,
+#degree-single .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
 
 #academics-search ul.results-list .program .college,
 #academics-search ul.results-list .program .department { display: table; } /* for browsers that can get a neater display */
@@ -970,7 +973,9 @@ li.tagit-new input {
 #academics-search .program .department { font-size: 12px; }
 
 #academics-search .program .name_label,
-#academics-search .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
+#academics-search .program .program-type-alt,
+#degree-single .program .name_label,
+#degree-single .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
 
 #academics-search .program .name_label { width: 110px; display: block; float: left; clear: both; }
 #academics-search .program .program-type-alt { display: block; margin: auto; } 
@@ -990,6 +995,19 @@ li.tagit-new input {
 
 /* Single Degree Pages */
 #degree-single { }
+#degree-single .program-details { margin-bottom: 20px; }
+#degree-single .program-details h2 { font-size: 24px; }
+#degree-single .program-details #program-title .credits { margin-bottom: 5px; }
+#degree-single .program-details #program-title p { margin: 5px 0; font-style: italic; }
+#degree-single .program-details #program-title .program-type-alt {
+	font-size: 14.5px;
+	line-height: 28px;
+	margin-bottom: 5px;
+	margin-top: 2px;
+	font-style: normal;
+	font-weight: 300;
+}
+#program-meta p { margin: 10px 0; padding-left: 10px; }
 
 
 
