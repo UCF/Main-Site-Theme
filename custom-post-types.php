@@ -1541,11 +1541,9 @@ class Degree extends CustomPostType{
 			),
 			array(
 				'name'  => 'Contacts',
-				'desc' => 'Individual contacts are semicolon-separated. Contact values, 
-							like name, email, and phone number, are comma-separated.<br/>
-							e.g. "Jane Doe,407-123-4567;John Doe,john@ucf.edu,407-987-6543"',
+				'desc' => 'Individual contacts are stored as a semicolon-delimited string. Individual fields for each contact are comma-separated.',
 				'id'   => $prefix.'contacts',
-				'type' => 'text',
+				'type' => 'textarea',
 			),
 			array(
 				'name'  => 'Degree ID',

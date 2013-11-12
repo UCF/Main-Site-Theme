@@ -31,13 +31,25 @@ foreach ($results as $program) {
 			break;
 	}
 
-	// Modify contacts data for insertion into WP text field.
-	// TODO...
+	// Prepare contacts data for insertion as a delimited string:
+	if ($program->contacts) {
+		$string = '';
+		foreach ($program->contacts as $contact) {
+			foreach ($contact as $field=>$val) {
+				if ($val) {
+					$string .= $field.':'.$val.',';
+				}
+			}
+			$string = substr($string, 0, -1).';';
+		}
+		$program->contacts = $string;
+	}
+
 
 	$program = array(
 		'post_data' => array(
 			'post_title' 	=> $program->name,
-			'post_content' 	=> @$program->description,
+			'post_content' 	=> html_entity_decode($program->description),
 			'post_status' 	=> 'publish',
 			'post_date' 	=> date('Y-m-d H:i:s'),
 			'post_author' 	=> 1,
@@ -50,9 +62,9 @@ foreach ($results as $program) {
 			'degree_type_id'	=> $program->type_id,
 			'degree_hours'		=> $program->required_hours,
 			'degree_website'	=> $program->website,
-			'degree_phone'		=> @$program->phone,
-			'degree_email'		=> @$program->email,
-			'degree_contacts'	=> @$program->contacts, // comma-separated name/bldg/phone, semicolon-separated by person
+			'degree_phone'		=> $program->phone,
+			'degree_email'		=> $program->email,
+			'degree_contacts'	=> $program->contacts, // semicolon-separated contact lists; fields are comma-separated
 		),
 		'post_terms' => array(
 			'program_types' => $program->type,
@@ -71,6 +83,7 @@ foreach ($program_postdata as $post) {
 	$post_id = null;
 
 	// Attempt to fetch an existing post to compare against.
+	// Check against post type, degree_id, type_id, and program_type.
 	$existing_post = get_posts(
 		array(
 			'post_type' => $post_data['post_type'],
@@ -85,14 +98,21 @@ foreach ($program_postdata as $post) {
 					'value' => $post_meta['degree_type_id'],
 				),
 			),
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'program_types',
+					'field' => 'slug',
+					'terms' => sanitize_title($post_terms['program_types']),
+				),
+			),
 		)
 	);
-	$existing_post = empty($existing_post) ? false : $existing_post[0];
-	$existing_post = $existing_post->post_title == $post_data['post_title'] ? $existing_post : false;
+	$existing_post = empty($existing_post) ? false : $existing_post[0]; // Get 1st array value
+	
 
 	// Check for existing content; if it exists, update it.
 	// Otherwise, create a new post.
-	if ($existing_post) {
+	if ($existing_post !== false) {
 		$post_id = $existing_post->ID;
 		$post_data['ID'] = $post_id;
 		wp_update_post($post_data);
@@ -106,7 +126,12 @@ foreach ($program_postdata as $post) {
 	if (is_array($post_meta)) {
 		foreach ($post_meta as $meta_key=>$meta_val) {
 			update_post_meta($post_id, $meta_key, $meta_val);
-			print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'<br/>';
+			if ($meta_val) {
+				print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'<br/>';
+			}
+			else {
+				print 'Post meta field '.$meta_key.' was set to an empty value<br/>';
+			}
 		}
 	}
 
