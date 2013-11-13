@@ -50,7 +50,7 @@
 
 		<div id="contentcol" class="span9 program">
 			<article role="main">
-				<p class="screen-only"><a href="<?=get_site_url()?>/academics/">&laquo; Back to Academics Search</a></p>
+				<p class="screen-only"><a href="<?=get_site_url()?>/degree-search/">&laquo; Back to Degree Search</a></p>
 				<div class="row program-details">
 					<div class="span6" id="program-title">
 						<h2><?php the_title(); ?></h2>

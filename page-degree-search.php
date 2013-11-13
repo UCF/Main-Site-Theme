@@ -5,7 +5,7 @@
 $query_string	  = $_SERVER['QUERY_STRING'];
 $get_params_exist = ($query_string !== '') ? true : false;
 
-if ($get_params_exist == true) {
+//if ($get_params_exist == true) {
 	
 	// Assign GET params to variables and sanitize, as well as setting 
 	// other variables for the search/browse interface
@@ -24,7 +24,7 @@ if ($get_params_exist == true) {
 		}
 	}
 	$program_type	= preg_match('/^[_a-z]+$/', $_GET['program_type']) 		? $_GET['program_type'] : 'undergrad'; // undergrad/undergrad_grad/grad 
-	$degree_type	= preg_match('/^[_a-z]+$/', $_GET['degree_type']) 		? $_GET['degree_type']	: NULL;  // major/minor/grad/cert
+	$degree_type	= preg_match('/^[_a-z]+$/', $_GET['degree_type']) 		? $_GET['degree_type']	: 'major';  // major/minor/grad/cert
 	$college		= preg_match('/^[_-a-zA-Z]+$/', $_GET['college'])		? $_GET['college'] 		: NULL;
 	$sortby			= preg_match('/^[_a-z]+$/', $_GET['sortby']) 			? $_GET['sortby'] 		: 'name';
 	$sort			= ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC') 	? $_GET['sort'] 		: 'ASC';
@@ -78,7 +78,7 @@ if ($get_params_exist == true) {
 	else {
 		$results = query_search_service($query_array);
 	}
-	
+
 	if ($results) {
 		$results_count = count($results);		
 		
@@ -197,12 +197,12 @@ if ($get_params_exist == true) {
 	if ($flip_sort == 'ASC' && $sortby == 'required_hours') { $sort_hours_classes .= 'dropup '; }
 	if ($sortby == 'required_hours') 						{ $sort_hours_classes .= 'active'; }
 	
-}
+//}
 ?>
 
 
 <?php get_header(); the_post();?>
-	<div class="row page-content" id="<?=$post->post_name?>">
+	<div class="row page-content" id="academics-search">
 		<div class="span12" id="page_title">
 			<h1 class="span9"><?php the_title();?></h1>
 			<?php esi_include('output_weather_data','span3'); ?>
@@ -258,7 +258,7 @@ if ($get_params_exist == true) {
 					</div>
 				</div>
 					
-				<?php if ($view !== NULL) { ?>
+				<?php //if ($view !== NULL) { ?>
 				<div id="results">
 					<div class="row">	
 						<h3 id="results-header" class="span10">
@@ -429,7 +429,7 @@ if ($get_params_exist == true) {
 							<p>No results found.</p>
 					<?php 
 						}
-					} ?>
+					//} ?>
 					
 					<br/>
 					<p class="more-details">
