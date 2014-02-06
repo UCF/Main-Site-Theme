@@ -103,7 +103,7 @@
 							<td class="email_head"><strong>E-mail: </strong></td>
 							<td class="email">
 								<?php if (get_post_meta($post->ID, 'announcement_email', TRUE)) { ?>
-								<a href="<?=get_post_meta($post->ID, 'announcement_email', TRUE)?>"><?=get_post_meta($post->ID, 'announcement_email', TRUE)?></a>
+								<a href="mailto:<?=get_post_meta($post->ID, 'announcement_email', TRUE)?>"><?=get_post_meta($post->ID, 'announcement_email', TRUE)?></a>
 								<?php } else { ?>
 								n/a
 								<?php } ?>
