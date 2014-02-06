@@ -1303,7 +1303,7 @@ function header_title(){
 
 	if ( is_single() ) {
 		if ($post->post_type == 'degree') {
-			$content = 'Degree Program: '.single_post_title('', FALSE);
+			$content = 'Degree Program | '.single_post_title('', FALSE);
 		}
 		else {
 			$content = single_post_title('', FALSE);

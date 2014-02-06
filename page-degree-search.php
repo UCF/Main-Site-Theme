@@ -266,9 +266,14 @@ $get_params_exist = ($query_string !== '') ? true : false;
 							<?php if ($view == 'browse') { ?>
 								All <?=$degree_type_param?>
 							<?php 
-							} else { ?>
+							} else if ($search_query_pretty) { ?>
 								<?=$search_query_pretty?>
-							<?php } ?>
+							<?php 
+							}
+							else { ?>
+								All Majors
+							<?php
+							} ?>
 							</span>
 						</h3>
 						
