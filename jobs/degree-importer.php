@@ -5,13 +5,44 @@
 
 	//if ($_GET['secret'] == get_theme_option('feedback_email_key')) {
 
-		// Grab the search service JSON feed for all programs
+		/**
+		 * Grab the search service JSON feed for all programs
+		 **/
 		$results = query_search_service(array('use' => 'programSearch'));
 
+		/**
+		 * Grab all existing Degree Program posts.  Store IDs in an array ($existing_posts_array).
+		 *
+		 * We use the IDs in this array later to determine what posts should be deleted
+		 * once the import has finished.
+		 **/
+		$existing_posts_array = get_posts(array(
+			'post_type' => 'degree',
+			'posts_per_page' => -1,
+			'post_status' => 'publish',
+			'fields' => 'ids'
+		));
+		foreach ($existing_posts_array as $key=>$val) {
+			// Give us data that is easier to work with.
+			$existing_posts_array[intval($val)] = intval($val);
+			unset($existing_posts_array[$key]);
+		}
 
+
+		/**
+		 * Set up an empty array that will contain sets of structured post data
+		 * for each new and updated Degree Program post.
+		 *
+		 * Start a counter (used for convenience to track # of created/updated posts.)
+		 **/
 		$program_postdata = array();
 		$count = 0;
 
+
+		/**
+		 * Loop through each search service result.  Create a structured set of post data 
+		 * for each.
+		 **/
 		foreach ($results as $program) {
 			// Update program type degree names.
 			switch ($program->type) {
@@ -52,7 +83,6 @@
 			$program = array(
 				'post_data' => array(
 					'post_title' 	=> $program->name,
-					'post_content' 	=> html_entity_decode($program->description),
 					'post_status' 	=> 'publish',
 					'post_date' 	=> date('Y-m-d H:i:s'),
 					'post_author' 	=> 1,
@@ -64,6 +94,7 @@
 					'degree_id'			=> $program->degree_id,
 					'degree_type_id'	=> $program->type_id,
 					'degree_hours'		=> $program->required_hours,
+					'degree_description'=> html_entity_decode($program->description),
 					'degree_website'	=> $program->website,
 					'degree_phone'		=> $program->phone,
 					'degree_email'		=> $program->email,
@@ -79,6 +110,11 @@
 			$program_postdata[] = $program;
 		}
 
+
+		/**
+		 * Loop through our results, which are now structured for insertion into WordPress.
+		 * Try to update existing posts.  If no existing post is found, create a new one.
+		 **/
 		foreach ($program_postdata as $post) {
 			$post_data = $post['post_data'];
 			$post_meta = $post['post_meta'];
@@ -113,17 +149,23 @@
 			$existing_post = empty($existing_post) ? false : $existing_post[0]; // Get 1st array value
 			
 
-			// Check for existing content; if it exists, update it.
+			// Check for existing content; if it exists, update the post and remove the post ID
+			// from $existing_posts_array.
 			// Otherwise, create a new post.
 			if ($existing_post !== false) {
 				$post_id = $existing_post->ID;
 				$post_data['ID'] = $post_id;
 				wp_update_post($post_data);
+				unset($existing_posts_array[$post_data['ID']]);
+
 				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'<br/>';
+				$count++;
 			}
 			else {
 				$post_id = wp_insert_post($post['post_data']);
+
 				print 'Saved new post '.$post_data['post_title'].'<br/>';
+				$count++;
 			}
 			// Create/update meta field values.
 			if (is_array($post_meta)) {
@@ -165,10 +207,21 @@
 
 			// Done.
 			print 'Finished processing post '.$post_data['post_title'].'<br/><br/>';
-
-			$count++;
 		}
-		print '<br/>Processed '.$count.' posts.';
+		print '<br/>Created/Updated '.$count.' posts.<br/><br/>';
+
+
+		/**
+		 * Delete any of the remaining posts in $existing_posts_array.  These posts were not 
+		 * updated and were not new posts, so we assume that they were deleted from the search 
+		 * service data, and should therefore be deleted from WordPress.
+		 **/
+		foreach ($existing_posts_array as $post_id) {
+			$post_title = get_post($post_id)->post_title;
+			wp_delete_post($post_id);
+			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br/><br/>';
+		}
+		print '<br/>Deleted '.count($existing_posts_array).' existing posts.';
 	//}
 	//else { die('Incorrect Key.'); }
 //}

@@ -1525,6 +1525,13 @@ class Degree extends CustomPostType{
 				'type' => 'text',
 			),
 			array(
+				'name'  => 'Description',
+				'desc' => 'Description provided for the degree.  This value should not be modified as it can be overridden upon degree import from the 
+							search service.  Modify the post content instead to override this value.',
+				'id'   => $prefix.'description',
+				'type' => 'textarea',
+			),
+			array(
 				'name'  => 'Website',
 				'id'   => $prefix.'website',
 				'type' => 'text',

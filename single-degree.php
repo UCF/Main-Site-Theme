@@ -2,6 +2,7 @@
 <?php get_header(); the_post();?>
 <?php
 	$required_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
+	$description = get_post_meta($post->ID, 'degree_description', TRUE);
 	$phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
 	$email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';					
 	$website = get_post_meta($post->ID, 'degree_website', TRUE) ? get_post_meta($post->ID, 'degree_website', TRUE) : 'n/a';
@@ -101,7 +102,7 @@
 					</div>
 				</div>
 
-				<?=the_content();?>
+				<?php if ($post->post_content) { the_content(); } else { echo apply_filters('the_content', $description); }?>
 
 				<?php
 				if (!empty($contact_array)) {
