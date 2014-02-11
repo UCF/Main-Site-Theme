@@ -34,7 +34,8 @@ abstract class CustomTaxonomy {
 		$update_count_callback = '',
 		$rewrite               = True,
 		$query_var             = NULL,
-		$capabilities          = Array();
+		$capabilities          = Array(),
+		$show_admin_column     = False;
 	
 	function __construct() {
 		if(is_null($this->show_in_name_menus)) $this->show_in_name_menus = $this->public;
@@ -79,7 +80,8 @@ abstract class CustomTaxonomy {
 				'update_count_callback' => $this->options('update_count_callback'),
 				'rewrite'               => $this->options('rewrite'),
 				'query_var'             => $this->options('query_var'),
-				'capabilities'          => $this->options('capabilities')
+				'capabilities'          => $this->options('capabilities'),
+				'show_admin_column' 	=> $this->options('show_admin_column'),
 			);
 		register_taxonomy($this->options('name'), $this->options('object_type'), $args);
 	}
@@ -182,7 +184,8 @@ class ProgramTypes extends CustomTaxonomy
 		$add_new_item       = 'Add New Program Type',
 		$new_item_name      = 'New Program Type',
 		
-		$hierarchical = True;
+		$hierarchical = True,
+		$show_admin_column = True;
 } // END class 
 
 
@@ -207,7 +210,8 @@ class Colleges extends CustomTaxonomy
 		$add_new_item       = 'Add New College',
 		$new_item_name      = 'New College',
 		
-		$hierarchical = True;
+		$hierarchical = True,
+		$show_admin_column = True;
 } // END class 
 
 
@@ -232,6 +236,7 @@ class Departments extends CustomTaxonomy
 		$add_new_item       = 'Add New Department',
 		$new_item_name      = 'New Department',
 		
-		$hierarchical = True;
+		$hierarchical = True,
+		$show_admin_column = True;
 } // END class 
 ?>
