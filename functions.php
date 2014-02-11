@@ -108,6 +108,56 @@ add_action('manage_edit-announcement_sortable_columns', 'sortable_announcement_c
 
 
 /**
+ * Degree custom columns
+ **/
+// Custom columns
+function edit_degree_columns() {
+	$columns = array(
+		'cb'            => '<input type="checkbox" />',
+		'title'         => 'Title',
+		'program_types' => 'Program Type',
+		'colleges'	    => 'College',
+		'departments'   => 'Department',
+		'published'     => 'Published On',
+		'updated'	    => 'Last Synced On'
+	);
+	return $columns;
+}
+add_action('manage_edit-degree_columns', 'edit_degree_columns');
+
+// Custom columns content
+function manage_degree_columns( $column, $post_id ) {
+	global $post;
+	switch ( $column ) {
+		case 'program_types':
+		case 'colleges':
+		case 'departments':
+			$taxonomy = $column;
+			$output = '';
+			$terms = wp_get_post_terms( $post_id, $taxonomy );
+			if (!is_wp_error($terms)) {
+				$output .= '<a href="'.admin_url('edit-tags.php?action=edit&taxonomy='.$taxonomy.'&post_type=degree&tag_ID='.$terms[0]->term_id).'">'.$terms[0]->name.'</a> ';
+			}
+			print $output;
+			break;
+		case 'published':
+			$college = 'originally published on';
+			print $college;
+			break;
+		case 'updated':
+			$department = 'last synced with search service';
+			print $department;
+			break;
+		default:
+			break;
+	}
+}
+add_action('manage_degree_posts_custom_column', 'manage_degree_columns', 10, 2);
+
+
+
+
+/**
  * Allow special tags in post bodies that would get stripped otherwise for most users.
  * Modifies $allowedposttags defined in wp-includes/kses.php
  *
