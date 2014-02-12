@@ -1,207 +1,5 @@
-<?php
-/* TODO: REWRITE THIS.  We need to search by wordpress posts instead of querying the search service. */
-
-// Are any GET params set? If so, build a query for the search service
-$query_string	  = $_SERVER['QUERY_STRING'];
-$get_params_exist = ($query_string !== '') ? true : false;
-
-//if ($get_params_exist == true) {
-	
-	// Assign GET params to variables and sanitize, as well as setting 
-	// other variables for the search/browse interface
-	$view 			= NULL;
-	$is_search		= $_GET['is_search'];
-	if ($is_search == true) { 
-		$view = 'search'; 
-	}
-	if ($get_params_exist == true && !$_GET['is_search']) { 
-		$view = 'browse';
-	}
-	if ($_GET['search_query']) {
-		if (preg_match('/^[-a-zA-Z\s]+$/', $_GET['search_query'])) {
-			$search_query 		 = urlencode($_GET['search_query']);
-			$search_query_pretty = htmlentities($_GET['search_query']);
-		}
-	}
-	$program_type	= preg_match('/^[_a-z]+$/', $_GET['program_type']) 		? $_GET['program_type'] : 'undergrad'; // undergrad/undergrad_grad/grad 
-	$degree_type	= preg_match('/^[_a-z]+$/', $_GET['degree_type']) 		? $_GET['degree_type']	: 'major';  // major/minor/grad/cert
-	$college		= preg_match('/^[_-a-zA-Z]+$/', $_GET['college'])		? $_GET['college'] 		: NULL;
-	$sortby			= preg_match('/^[_a-z]+$/', $_GET['sortby']) 			? $_GET['sortby'] 		: 'name';
-	$sort			= ($_GET['sort'] == 'ASC' || $_GET['sort'] == 'DESC') 	? $_GET['sort'] 		: 'ASC';
-	$flip_sort		= ($sort == 'ASC') 										? 'DESC' 				: 'ASC';
-	
-	// Build an array of query params
-	$query_array = array(
-		'use'		=> 'programSearch',
-		'graduate' 	=> 0,
-		'order_by' 	=> $sortby.' '.$sort,
-		'college'	=> '',
-		'search'	=> '',
-		'in'		=> '',
-	);	
-	
-	// If a college is specified, add it
-	if ($college) { 
-		$query_array['college'] = $college; 
-	}
-	// If we're not sorting by just name, update 'order_by'
-	if ($sortby !== 'name')	{
-		$query_array['order_by'] .= ', name ASC';
-	}	
-	// If there's a search query, add it
-	if ($search_query) { 
-		$query_array['search'] 	= $search_query; 
-	}
-	// Non-graduate degree results
-	if ($degree_type && $degree_type !== 'grad') { 
-		$query_array['in'] = $degree_type; 
-	}
-	// Update 'graduate' if necessary
-	if ($program_type == 'grad') {
-		$query_array['graduate'] = 1;
-	}	 
-	if ($college && $college == 'College of Graduate Studies') {
-		$query_array['graduate'] = 1;
-	}
-
-	// Grab results
-	if ($is_search && $search_query == '') {
-		$error = '<strong>Error:</strong> Please enter a valid search term (letters, spaces, and dashes "-" are permitted.)';
-	}
-	elseif ($program_type == 'undergrad_grad') {
-		// Undergrad + Grad searches must query twice to get both 'graduate' value results
-		$undergrad_results = query_search_service($query_array);
-		$query_array['graduate'] = 1;
-		$grad_results = query_search_service($query_array);
-		$results = array_merge((array) $undergrad_results, (array) $grad_results);
-	}
-	else {
-		$results = query_search_service($query_array);
-	}
-
-	if ($results) {
-		$results_count = count($results);		
-		
-		// Sort results by degree type
-		$majors = array_filter($results, create_function('$p', '
-			return $p->type === "major" && $p->graduate === 0;
-		'));
-		$minors = array_filter($results, create_function('$p', '
-			return $p->type === "minor";
-		'));
-		$grad_programs = array_filter($results, create_function('$p', '
-			return $p->type === "major" && $p->graduate === 1;
-		'));
-		$certificates = array_filter($results, create_function('$p', '
-			return $p->type === "certificate";
-		'));
-		$articulated = array_filter($results, create_function('$p', '
-			return $p->type === "articulated";
-		'));
-		$accelerated = array_filter($results, create_function('$p', '
-			return $p->type === "accelerated";
-		'));
-		
-		$results_sorted = array(
-			'Undergraduate Degrees' => $majors,
-			'Graduate Degrees'		=> $grad_programs,
-			'Minors'       			=> $minors,
-			'Certificates' 			=> $certificates,
-			'Articulated Programs'	=> $articulated,
-			'Accelerated Programs'	=> $accelerated,
-		);		
-	}
-	
-	
-	// Format Browse All degree type names from $_GET for use in body content
-	switch ($degree_type) {
-		case 'grad':
-			$degree_type_param = 'Graduate Programs';
-			break;
-		case 'major':
-			$degree_type_param = 'Majors';
-			break;
-		case 'minor':
-			$degree_type_param = 'Minors';
-			break;
-		case 'certificate':
-			$degree_type_param = 'Certificates';
-			break;
-		default:
-			break;
-	}
-	
-	// Add selected state to program type dropdown
-	$undergrad_sel = $undergrad_grad_sel = $grad_sel = '';
-	$selected_val = 'selected="selected"';
-	switch ($program_type) {
-		case 'undergrad':
-			$undergrad_sel = $selected_val;
-			break;
-		case 'undergrad_grad':
-			$undergrad_grad_sel = $selected_val;
-			break;
-		case 'grad':
-			$grad_sel = $selected_val;
-			break;
-		default:
-			break;
-	}
-	
-	// Add active state class to degree type navigation links
-	$majors_classes = $minors_classes = $grad_classes = $cert_classes = '';
-	$active_val = 'active';
-	switch ($degree_type) {
-		case 'major':
-			$majors_classes = $active_val;
-			break;
-		case 'minor':
-			$minors_classes = $active_val;
-			break;
-		case 'grad':
-			$grad_classes = $active_val;
-			break;
-		case 'certificate':
-			$cert_classes = $active_val;
-			break;
-		default:
-			break;					
-	}
-	
-	// Create links per sort option (Name/College/Hours)
-	if (strpos($query_string, 'sortby=').count < 1) {
-		$query_string = $query_string.'&amp;sortby='.$sortby;
-	}
-	if (strpos($query_string, 'sort=').count < 1) {
-		$query_string = $query_string.'&amp;sort='.$sort;
-	}
-	if (strpos($query_string, 'degree_type=').count < 1) {
-		$query_string = $query_string.'&amp;degree_type='.$degree_type;
-	}
-								
-	$flip_url 				= get_permalink().'?'.str_replace('sort='.$sort, 'sort='.$flip_sort, $query_string);
-		
-	$sort_name_url 			= ($sortby == 'name') ? $flip_url : get_permalink().'?'.str_replace('sortby='.$sortby, 'sortby=name', $query_string);
-	$sort_college_url 		= ($sortby == 'college_name') ? $flip_url : get_permalink().'?'.str_replace('sortby='.$sortby, 'sortby=college_name', $query_string);
-	$sort_hours_url 		= ($sortby == 'required_hours') ? $flip_url : get_permalink().'?'.str_replace('sortby='.$sortby, 'sortby=required_hours', $query_string);
-								
-	$sort_name_classes		= '';
-	if ($flip_sort == 'ASC' && $sortby == 'name') 			{ $sort_name_classes .= 'dropup '; }
-	if ($sortby == 'name') 									{ $sort_name_classes .= 'active'; }
-	
-	$sort_college_classes 	= '';
-	if ($flip_sort == 'ASC' && $sortby == 'college_name') 	{ $sort_college_classes .= 'dropup '; }
-	if ($sortby == 'college_name') 							{ $sort_college_classes .= 'active'; }
-	
-	$sort_hours_classes		= '';
-	if ($flip_sort == 'ASC' && $sortby == 'required_hours') { $sort_hours_classes .= 'dropup '; }
-	if ($sortby == 'required_hours') 						{ $sort_hours_classes .= 'active'; }
-	
-//}
-?>
-
-
 <?php get_header(); the_post();?>
+	<?php $degrees = get_degrees(); ?>
 	<div class="row page-content" id="academics-search">
 		<div class="span12" id="page_title">
 			<h1 class="span9"><?php the_title();?></h1>
@@ -218,46 +16,14 @@ $get_params_exist = ($query_string !== '') ? true : false;
 				
 				<?php the_content(); ?>
 			
-				<div id="filters">
-					<h3>Search:</h3>
-					<div class="controls controls-row">
-						<form id="course_search_form" action="<?=get_permalink()?>" class="form-search">
-							<select name="program_type" class="span4">
-								<option value="undergrad" <?=$undergrad_sel?>>Undergraduate Programs Only</option>
-								<option value="undergrad_grad" <?=$undergrad_grad_sel?>>Undergraduate and Graduate Programs</option>
-								<option value="grad" <?=$grad_sel?>>Graduate Programs Only</option>
-							</select>
-							<div class="input-append span3">
-								<input type="text" class="search-query" name="search_query" value="<?=$search_query_pretty?>" />
-								<input type="hidden" name="is_search" value="true" />
-								<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
-							</div>
-						</form>
-					</div>
-				</div>
 				
-				<div id="browse">
-					<div class="row">
-						<div class="span10">
-							<h3 id="degree-type-header">Browse All:</h3>
-							<ul class="nav nav-pills" role="navigation" id="degree-type-list">
-								<li class="<?=$majors_classes?>">
-									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=major&amp;sortby=name&amp;sort=ASC">Majors</a>
-								</li>
-								<li class="<?=$minors_classes?>">
-									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=undergrad&amp;degree_type=minor&amp;sortby=name&amp;sort=ASC">Minors</a>
-								</li>
-								<li class="<?=$grad_classes?>">
-									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=grad&amp;degree_type=grad&amp;sortby=name&amp;sort=ASC">Graduate Programs</a>
-								</li>
-								<li class="<?=$cert_classes?>">
-									<a class="print-noexpand" href="<?=get_permalink()?>?program_type=grad&amp;degree_type=certificate&amp;sortby=name&amp;sort=ASC">Certificates</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-					
+
+
+				<?=display_degrees($degrees);?>
+
+
+
+		<!--			
 				<?php //if ($view !== NULL) { ?>
 				<div id="results">
 					<div class="row">	
@@ -435,7 +201,7 @@ $get_params_exist = ($query_string !== '') ? true : false;
 					<?php 
 						}
 					//} ?>
-					
+		-->			
 					<br/>
 					<p class="more-details">
 						For more details and the complete undergraduate catalog, visit: <a href="http://www.catalog.sdes.ucf.edu/">www.catalog.sdes.ucf.edu/</a>.

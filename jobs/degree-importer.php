@@ -79,6 +79,12 @@
 				$program->contacts = $string;
 			}
 
+			// Massage website URLs for graduate programs because they're stored in the
+			// search service db strangely:
+			if ($program->graduate == 1) {
+				$program->website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+			}
+
 
 			$program = array(
 				'post_data' => array(
