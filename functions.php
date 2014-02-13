@@ -1260,22 +1260,27 @@ add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
  * Returns an array of post groups, grouped by a specified taxonomy's terms.
  * Each key is a taxonomy term ID; each value is an array of post objects.
  **/
-function group_posts_by_tax_terms($tax, $posts, $specific_terms) {
+function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
 	$groups = array();
 
 	// Get all taxonomy terms.
-	$args = array(
-		'fields' => 'ids',
-	);
-	if (is_array($specific_terms)) {
-		$args['include'] = $specific_terms;
-	}
+	$args = array('fields' => 'ids');
 	$terms = get_terms($tax, $args);
 
 	if ($terms) {
+		// 'include' get_terms arg is not working. Filter here instead:
 		foreach ($terms as $term) {
-			$groups[intval($term)] = array();
+			$term = intval($term);
+			if (is_array($specific_terms)) {
+				if (in_array($term, $specific_terms)) {
+					$groups[intval($term)] = array();
+				}
+			}
+			else {
+				$groups[intval($term)] = array();
+			}
 		}
+
 		// Loop through each returned post and get its term(s).
 		// Group the post in the $groups array.
 		if ($posts) {
@@ -1289,10 +1294,16 @@ function group_posts_by_tax_terms($tax, $posts, $specific_terms) {
 						}
 						else {
 							$groups[$t] = array($post);
-						}						
+						}
 					}
 				}
 			}
+
+			// Remove any terms with no posts. 
+			foreach ($groups as $term=>$posts) {
+				if (empty($groups[$term])) { unset($groups[$term]); }
+			}
+
 			return $groups;
 		}
 		else { return null; }
@@ -1322,12 +1333,11 @@ function get_degrees() {
 	// Determine some variables based on query args.  Set defaults if no values are set.
 	$program_type	     = in_array($_GET['program_type'], $all_program_type_parents) ? $_GET['program_type'] : null;
 	$degree_type	     = in_array($_GET['degree_type'], $all_degree_types) ? $_GET['degree_type'] : 'undergraduate-degree';
-	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'post_title';
+	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'title';
 	$order			     = ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC') ? $_GET['order'] : 'ASC';
 	$flip_order		     = ($order == 'ASC') ? 'DESC' : 'ASC'; // opposite of $order
 
 	$s                   = $_GET['search']       ? $_GET['search']        : null;
-	$search_query        = !empty($s)            ? urlencode($s)          : null;
 	$search_query_pretty = !empty($s)            ? htmlentities($s)       : null;
 
 	// Define a default list of get_posts() args.
@@ -1347,31 +1357,13 @@ function get_degrees() {
 		),
 	);
 
-	// View-specific variable overrides
-	if ($view == 'search') {
-		if (!empty($s)) {
-			if (empty($program_type)) {
-				$program_type = $all_program_type_parents;
-			}
-		}
-		else {
-			return 'No search term specified.';
-		}
+	// Search-specific variable overrides
+	if (!empty($s)) {
+		$program_type = empty($program_type) ? $all_program_type_parents : $program_type;
 	}
 
 	// Define per-view get_posts() args.
 	$all_views = array(
-		'search' => array_merge($default_view_params, array(
-			's' => $s,
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'program_types',
-					'field' => 'slug',
-					'terms' => $program_type,
-					'include_children' => true,
-				)
-			),
-		)),
 		'browse_by_name' => $default_view_params,
 		'browse_by_college' => $default_view_params, // Needs to be sorted later
 		'browse_by_hours' => array_merge($default_view_params, array(
@@ -1380,14 +1372,46 @@ function get_degrees() {
 		)),
 	);
 
-	// Get the posts.
+	// Get the posts.  Override any set view with search-specific args, if this is a 
+	// set of search results.
 	if (isset($all_views[$view])) {
+		if ($s) {
+			$all_views[$view] = array_merge($all_views[$view], array(
+				's' => $s,
+				'tax_query' => array(
+					// Overrides existing tax_query.
+					array(
+						'taxonomy' => 'program_types',
+						'field' => 'slug',
+						'terms' => $program_type,
+						'include_children' => true,
+					)
+				),
+			));
+		}
 		$posts = get_posts($all_views[$view]);
 	}
 	else { return 'Invalid view type.'; }
 
 	
 	// Process the returned posts.
+	$data = array(
+		'view-info' => array(
+			'view' => $view,
+			'all-program_type-parents' => $all_program_type_parents,
+			'all-degree-types' => $all_degree_types,
+			'program_type' => $program_type,
+			'degree_type' => $degree_type,
+			'orderby' => $orderby,
+			'order' => $order,
+			'flip-order' => $flip_order,
+			's' => $s,
+			'search-query-pretty' => $search_query_pretty,
+			'grouping-tax' => null,
+		),
+		'posts' => null,
+	);
+
 	if ($posts) {
 		// Assign post meta data we need as properties of each post object for easy access later.
 		foreach ($posts as $post) {
@@ -1409,44 +1433,28 @@ function get_degrees() {
 				break;
 			default:
 				$grouping_tax = 'program_types';
-				$include_terms = ($view == 'search') ? $program_type : $degree_type;
+				$include_terms = (empty($s)) ? $degree_type : $program_type;
 
 				// Get Program Type term ID(s) to pass to group_posts_by_tax_terms()
 				$term_ids = array();
 				if (is_array($include_terms)) {
 					foreach ($include_terms as $slug) {
-						$term_ids[] = get_term_by('slug', $slug, $grouping_tax)->term_id;
+						$term_ids[] = intval(get_term_by('slug', $slug, $grouping_tax)->term_id);
 					}
 				}
 				else {
-					$term_ids[] = get_term_by('slug', $include_terms, $grouping_tax)->term_id;
+					$term_ids[] = intval(get_term_by('slug', $include_terms, $grouping_tax)->term_id);
 				}
 
 				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts, $term_ids);
 				break;
 		}
-
-		// Return the grouped posts and view-related variables.
-		$data = array(
-			'view-info' => array(
-				'view' => $view,
-				'all-program_type-parents' => $all_program_type_parents,
-				'all-degree-types' => $all_degree_types,
-				'program_type' => $program_type,
-				'degree_type' => $degree_type,
-				'orderby' => $orderby,
-				'order' => $order,
-				'flip-order' => $flip_order,
-				's' => $s,
-				'search-query' => $search_query,
-				'search-query-pretty' => $search_query_pretty,
-				'grouping-tax' => $grouping_tax,
-			),
-			'posts' => $grouped_posts,
-		);
-		return $data;
+		$data['view-info']['grouping-tax'] = $grouping_tax;
+		$data['posts'] = $grouped_posts;
 	}
-	else { return 'No posts matched specified query.'; }
+
+	// Return the grouped posts and view-related variables.
+	return $data;
 }
 
 
@@ -1454,10 +1462,85 @@ function get_degrees() {
  * Display a list of degrees with posts returned from get_degrees().
  **/
 function display_degrees($data) {
+	// Add selected state to Search form program type dropdown
+	$search_program_undergrad_sel = $search_program_all_sel = $search_program_grad_sel = '';
+	$search_program_active_sel = 'selected="selected"';
 
-	// TODO: SET VARIABLES THAT ADD ACTIVE CLASSES TO GUI ELEMENTS
-	// TODO: REPLACE SEARCH SERVICE DATA VALUES WITH POST RESULT VALUES
+	if (isset($data['view-info']['program_type'])) {
+		if (is_array($data['view-info']['program_type'])) {
+			$search_program_all_sel = $search_program_active_sel;
+		}
+		else {
+			switch ($data['view-info']['program_type']) {
+				case 'undergraduate-program':
+					$search_program_undergrad_sel = $search_program_active_sel;
+					break;
+				case 'graduate-program':
+					$search_program_grad_sel = $search_program_active_sel;
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	else {
+		$search_program_all_sel = $search_program_active_sel;
+	}
 
+	// Add active state class to Browse All degree type navigation links.
+	// Do not apply class if search results are returned.
+	$browse_majors_class = $browse_minors_class = $browse_grad_class = $browse_cert_class = '';
+	$browse_active_class = 'active';
+	if (empty($data['view-info']['s'])) {
+		if (isset($data['view-info']['degree_type'])) {
+			switch ($data['view-info']['degree_type']) {
+				case 'minor':
+					$browse_minors_class = $browse_active_class;
+					break;
+				case 'graduate-degree':
+					$browse_grad_class = $browse_active_class;
+					break;
+				case 'certificate':
+					$browse_cert_class = $browse_active_class;
+					break;
+				default:
+					$browse_majors_class = $browse_active_class;
+					break;
+			}
+		}
+	}
+
+	if (is_array($data)) {
+		// Create links per sort option (Name/College/Hours)
+		$permalink = $_SERVER[REQUEST_URI];
+		if (strpos($permalink, 'order=').count < 1) {
+			add_query_arg(array('order' => $data['view-info']['order']), $permalink);
+		}
+		$reverse_order_url = add_query_arg(array('order' => $data['view-info']['flip-order']), $permalink);
+
+		$sort_name_url    = ($data['view-info']['view'] == 'browse_by_name') ? $reverse_order_url : add_query_arg(array('view' => 'browse_by_name'), $permalink);
+		$sort_college_url = add_query_arg(array('view' => 'browse_by_college'), $permalink);
+		$sort_hours_url   = ($data['view-info']['view'] == 'browse_by_hours') ? $reverse_order_url : add_query_arg(array('view' => 'browse_by_hours'), $permalink);
+
+		$sort_name_classes = $sort_college_classes = $sort_hours_classes = '';
+
+		if ($data['view-info']['view'] == 'browse_by_college') {
+			$sort_college_classes .= 'active';
+		}
+		else if ($data['view-info']['view'] == 'browse_by_hours') {
+			$sort_hours_classes .= 'active';
+			if ($data['view-info']['flip-order'] == 'ASC') {
+				$sort_hours_classes .= ' dropup';
+			}
+		}
+		else { // 'search' AND 'browse_by_name'
+			$sort_name_classes .= 'active';
+			if ($data['view-info']['flip-order'] == 'ASC') {
+				$sort_name_classes .= ' dropup';
+			}
+		}
+	}
+	
 	ob_start(); ?>
 
 	<div id="filters">
@@ -1465,13 +1548,13 @@ function display_degrees($data) {
 		<div class="controls controls-row">
 			<form id="course_search_form" action="<?=get_permalink()?>" class="form-search">
 				<select name="program_type" class="span4">
-					<option value="undergraduate-program" <?=$undergrad_sel?>>Undergraduate Programs Only</option>
-					<option value="" <?=$undergrad_grad_sel?>>Undergraduate and Graduate Programs</option>
-					<option value="graduate-program" <?=$grad_sel?>>Graduate Programs Only</option>
+					<option <?=$search_program_undergrad_sel?> value="undergraduate-program">Undergraduate Programs Only</option>
+					<option <?=$search_program_all_sel?> value="">Undergraduate and Graduate Programs</option>
+					<option <?=$search_program_grad_sel?> value="graduate-program">Graduate Programs Only</option>
 				</select>
 				<div class="input-append span3">
-					<input type="text" class="search-query" name="search" value="<?=$search_query_pretty?>" />
-					<input type="hidden" name="view" value="search" />
+					<?php $search_query = isset($data['view-info']['search-query-pretty']) ? $data['view-info']['search-query-pretty'] : ''; ?>
+					<input type="text" class="search-query" name="search" value="<?=$search_query?>" />
 					<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
 				</div>
 			</form>
@@ -1483,16 +1566,16 @@ function display_degrees($data) {
 			<div class="span10">
 				<span class="degree-search-label">Browse All:</span>
 				<ul class="nav nav-pills" role="navigation" id="degree-type-list">
-					<li class="<?=$majors_classes?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=undergraduate-degree">Majors</a>
+					<li class="<?=$browse_majors_class?>">
+						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=undergraduate-degree">Undergraduate Degrees</a>
 					</li>
-					<li class="<?=$minors_classes?>">
+					<li class="<?=$browse_minors_class?>">
 						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=minor">Minors</a>
 					</li>
-					<li class="<?=$grad_classes?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=graduate-degree">Graduate Programs</a>
+					<li class="<?=$browse_grad_class?>">
+						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=graduate-degree">Graduate Degrees</a>
 					</li>
-					<li class="<?=$cert_classes?>">
+					<li class="<?=$browse_cert_class?>">
 						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=certificate">Certificates</a>
 					</li>
 				</ul>
@@ -1501,17 +1584,29 @@ function display_degrees($data) {
 	</div>
 
 		<?php
-		if (is_array($data)) { ?>
+		if (is_array($data)) {
+			// Get total number of posts.
+			$results_count = 0;
+			if ($data['posts']) {
+				foreach ($data['posts'] as $group) {
+					foreach ($group as $post) {
+						$results_count++;
+					}
+				}
+			} ?>
 
 		<div id="results">
 			<div class="row">	
 				<h2 id="results-header" class="span10">
 					<?=$results_count?> Result<?php if ($results_count == 0 || $results_count > 1) { ?>s<?php } ?> For: <span class="results-header-alt">
-					<?php if ($view == 'browse') { ?>
-						All <?=$degree_type_param?>
+					<?php
+					if (empty($data['view-info']['s'])) {
+						$degree_type = get_term_by('slug', $data['view-info']['degree_type'], 'program_types')->name;
+					?>
+						All <?=$degree_type?>s
 					<?php 
-					} else if ($search_query_pretty) { ?>
-						<?=$search_query_pretty?>
+					} else { ?>
+						&ldquo;<?=$data['view-info']['search-query-pretty']?>&rdquo;
 					<?php 
 					} ?>
 					</span>
@@ -1524,7 +1619,7 @@ function display_degrees($data) {
 							<a class="print-noexpand" href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
 						</li>
 						<li class="dropdown <?=$sort_college_classes?>">
-							<a class="print-noexpand" href="<?=$sort_college_url?>">College <b class="caret"></b></a>
+							<a class="print-noexpand" href="<?=$sort_college_url?>">College</a>
 						</li>
 						<li class="dropdown <?=$sort_hours_classes?>">
 							<a class="print-noexpand" href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
@@ -1537,119 +1632,72 @@ function display_degrees($data) {
 			<?php
 			if (!empty($data['posts'])) {
 				foreach ($data['posts'] as $group=>$posts) {
-					$term = get_term($group, $data['view-info']['grouping-tax'])->name; ?>
+					$term = get_term($group, $data['view-info']['grouping-tax']);
 
-					<h2><?=$term?></h2>
+					// Pluralize term if the grouping taxonomy is not by College
+					if ($data['view-info']['grouping-tax'] !== 'colleges') {
+						$term = $term->name.'s';
+					}
+					else { $term = $term->name; }
+					?>
 
+					<h3 class="program-type"><?=$term?></h3>
 					<ul class="row results-list">
-
 					<?php
-					foreach ($posts as $post) { ?>
-							<?php
-							// Format program types to not use plural tense
-							$program_type = substr($program_type, 0, (strlen($program_type) - 1)); ?>
-
-								<li class="program span10">
-									<div class="row">
-																		
-										<div class="span7">
-										<?php
-											$website = null;
-											if ($program->graduate) {
-												$website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
-											}
-											else {
-												// Update program type degree names.
-												switch ($program->type) {
-													case 'major':
-														if ($program->graduate == 0) {
-															$program->type = 'Undergraduate Degree';
-														}
-														else {
-															$program->type = 'Graduate Degree';
-														}
-														break;
-													case 'articulated':
-														$program->type = ucwords($program->type).' Program';
-														break;
-													case 'accelerated':
-														$program->type = ucwords($program->type).' Program';
-														break;
-													default:
-														$program->type = ucwords($program->type);
-														break;
-												}
-												$args = array(
-													'post_type' => 'degree',
-													'posts_per_page' => 1,
-													'meta_query' => array(
-														array(
-															'key' => 'degree_id',
-															'value' => $program->id,
-														),
-														array(
-															'key' => 'degree_type_id',
-															'value' => $program->type_id,
-														),
-													),
-													'tax_query' => array(
-														array(
-															'taxonomy' => 'program_types',
-															'field' => 'slug',
-															'terms' => sanitize_title($program->type),
-														),
-													),
-												);
-												$post = get_posts($args);
-												if ($post) {
-													$post = $post[0];
-													$website = get_permalink($post->ID);
-												}
-											}
-											
-
-										?>
-										<?php if ($website) { ?><a href="<?=$website?>"><?php } ?>
-											<h4 class="name"><?=trim($program->name)?></h4>
-										<?php if ($website) { ?></a><?php } ?>
-										
-										<?php if ($program->college_name) { ?>
-											<span class="name_label">College</span>
-											<span class="college"><?=$program->college_name?></span>
-										<?php } ?>
-										
-										<?php if ($program->department_name) { ?>
-											<span class="name_label">Department</span>
-											<span class="department">
-												<?php if ($dept_website !== '') { ?><a href="<?=$dept_website?>"><?php } ?>
-												<?=$program->department_name?>
-												<?php if ($dept_website !== '') { ?></a><?php } ?>
-											</span>
-										<?php } ?>
-										
-										</div>
-											
-										<div class="credits-wrap">
-											<span class="program-type-alt"><?=$program_type?></span>
-										
-											<?php if ($program->required_hours) { 
-												if ($program->graduate) { ?>
-												<a href="http://www.graduatecatalog.ucf.edu/programs/program.aspx<?=$program->required_hours?>">
-													<span class="credits label label-warning">Click for credit hours</span>
-												</a>
-												<?php } elseif ($program->required_hours >= 100) { ?>
-												<span class="credits label label-info"><?=$program->required_hours?> credit hours</span>
-												<?php } elseif ($program->required_hours > 1 && $program->required_hours < 100) { ?>
-												<span class="credits label label-success"><?=$program->required_hours?> credit hours</span>
-												
-											<?php }
-											} else { ?>
-												<span class="credits label">Credit hours n/a</span>
-											<?php } ?>
-										</div>
-										
-									</div>
-								</li>
+					foreach ($posts as $post) {
+						// Get permalink to landing page for a single degree program.
+						// Graduate programs should link to the degree_website meta value.
+						$single_url = '';
+						if ($post->tax_program_type[0] !== 'Graduate Degree') {
+							$single_url = get_permalink($post->ID);
+						}
+						else {
+							$single_url = $post->degree_website;
+						}
+						?>
+						<li class="program span10">
+							<div class="row">					
+								<div class="span7">
+									<a href="<?=$single_url?>">
+										<h4 class="name"><?=$post->post_title?></h4>
+									</a>
+								
+								<?php if ($post->tax_college[0]) { ?>
+									<span class="name_label">College</span>
+									<span class="college"><?=$post->tax_college[0]?></span>
+								<?php } ?>
+								
+								<?php if ($post->tax_department[0]) { ?>
+									<span class="name_label">Department</span>
+									<span class="department">
+										<?php if ($post->degree_website) { ?><a href="<?=$post->degree_website?>"><?php } ?>
+										<?=$post->tax_department[0]?>
+										<?php if ($post->degree_website) { ?></a><?php } ?>
+									</span>
+								<?php } ?>
+								
+								</div>
+									
+								<div class="credits-wrap">
+									<span class="program-type-alt"><?=$post->tax_program_type[0]?></span>
+								
+									<?php if ($post->degree_hours) { 
+										if ($post->tax_program_type[0] == 'Graduate Degree' || $post->tax_program_type[0] == 'Certificate') { ?>
+										<a href="<?=$post->degree_website?>">
+											<span class="credits label label-warning">Click for credit hours</span>
+										</a>
+										<?php } elseif (intval($post->degree_hours) >= 100) { ?>
+										<span class="credits label label-info"><?=intval($post->degree_hours)?> credit hours</span>
+										<?php } elseif (intval($post->degree_hours) > 1 && intval($post->degree_hours) < 100) { ?>
+										<span class="credits label label-success"><?=intval($post->degree_hours)?> credit hours</span>
+									<?php }
+									} else { ?>
+										<span class="credits label">Credit hours n/a</span>
+									<?php } ?>
+								</div>
+								
+							</div>
+						</li>
 					<?php
 					}
 					?>
@@ -1657,16 +1705,20 @@ function display_degrees($data) {
 					<hr />
 				<?php
 				}
+			} else { ?>
+			<p class="error">No results found.</p>
+			<?php
 			}
 			?>
 
-	<?php	
-	}
-	else { ?> 
-	<p class="error">
-		<?=$data?>
-	</p>
-	<?php } ?>
+		<?php	
+		}
+		else { ?> 
+		<p class="error">
+			<strong>ERROR:</strong> <?=$data?>
+		</p>
+		<?php
+		} ?>
 
 	<?php
 	print ob_get_clean();
