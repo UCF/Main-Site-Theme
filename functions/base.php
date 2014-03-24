@@ -1155,10 +1155,10 @@ function header_($tabs=2){
 	remove_action('wp_head', 'rsd_link');
 	
 	ob_start();
+	print header_title()."\n";
 	print header_meta()."\n";
 	wp_head();
 	print header_links()."\n";
-	print header_title()."\n";
 	
 	return indent(ob_get_clean(), $tabs);
 }
