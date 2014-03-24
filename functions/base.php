@@ -1155,10 +1155,10 @@ function header_($tabs=2){
 	remove_action('wp_head', 'rsd_link');
 	
 	ob_start();
+	print header_title()."\n";
 	print header_meta()."\n";
 	wp_head();
 	print header_links()."\n";
-	print header_title()."\n";
 	
 	return indent(ob_get_clean(), $tabs);
 }
@@ -1297,11 +1297,17 @@ function header_links(){
  * Generates a title based on context page is viewed.  Stolen from Thematic
  **/
 function header_title(){
+	global $post;
 	$site_name = get_bloginfo('name');
 	$separator = '|';
 
 	if ( is_single() ) {
-		$content = single_post_title('', FALSE);
+		if ($post->post_type == 'degree') {
+			$content = 'Degree Program | '.single_post_title('', FALSE);
+		}
+		else {
+			$content = single_post_title('', FALSE);
+		}
 	}
 	elseif ( is_home() || is_front_page() ) { 
 		$content = get_bloginfo('description');
