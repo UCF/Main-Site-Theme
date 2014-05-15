@@ -1510,6 +1510,16 @@ function display_degrees($data) {
 		}
 	}
 
+	// Generate $results_title string based on current view for <h2> ("Results For:" heading)
+	$results_title = '';
+	if (empty($data['view-info']['s'])) {
+		$degree_type = get_term_by('slug', $data['view-info']['degree_type'], 'program_types')->name;
+		$results_title = 'All '.$degree_type.'s';
+	}
+	else {
+		$results_title = '&ldquo;'.$data['view-info']['search-query-pretty'].'&rdquo;'; 
+	}
+
 	if (is_array($data)) {
 		// Create links per sort option (Name/College/Hours)
 		$permalink = $_SERVER[REQUEST_URI];
@@ -1539,8 +1549,8 @@ function display_degrees($data) {
 				$sort_name_classes .= ' dropup';
 			}
 		}
-	}
-	
+	}	
+
 	ob_start(); ?>
 
 	<div id="filters">
@@ -1598,17 +1608,9 @@ function display_degrees($data) {
 		<div id="results">
 			<div class="row">	
 				<h2 id="results-header" class="span10">
-					<?=$results_count?> Result<?php if ($results_count == 0 || $results_count > 1) { ?>s<?php } ?> For: <span class="results-header-alt">
-					<?php
-					if (empty($data['view-info']['s'])) {
-						$degree_type = get_term_by('slug', $data['view-info']['degree_type'], 'program_types')->name;
-					?>
-						All <?=$degree_type?>s
-					<?php 
-					} else { ?>
-						&ldquo;<?=$data['view-info']['search-query-pretty']?>&rdquo;
-					<?php 
-					} ?>
+					<?=$results_count?> Result<?php if ($results_count == 0 || $results_count > 1) { ?>s<?php } ?> For:
+					<span class="results-header-alt">
+						<?=$results_title?>
 					</span>
 				</h2>
 				
@@ -1723,5 +1725,136 @@ function display_degrees($data) {
 	<?php
 	print ob_get_clean();
 }
+
+
+/**
+ * Generates a title based on context page is viewed.  Stolen from Thematic
+ **/
+function header_title($title){
+	global $post;
+	$site_name = get_bloginfo('name');
+	$separator = '|';
+
+	if ( is_single() ) {
+		// Custom post type overrides here (necessary for single Degree Programs)
+		if ($post->post_type == 'degree') {
+			$content = 'Degree Program | '.single_post_title('', FALSE);
+		}
+		else {
+			$content = single_post_title('', FALSE);
+		}
+	}
+	elseif ( is_home() || is_front_page() ) { 
+		$content = get_bloginfo('description');
+	}
+	elseif ( is_page() ) {
+		$substitute_title = get_post_meta(get_the_ID(), 'page_title', true);
+		if (!empty($substitute_title)) {
+			$content = $substitute_title;
+		}
+		else {
+			// Custom page overrides here (necessary for Degree Search)
+			if ($post->ID == get_page_by_title('Degree Search')->ID) {
+				$content = 'Degree Search';
+				$degree_type = $_GET['degree_type'];
+				$browse_by = $_GET['view'];
+				$degree_title = null;
+				$degree_subtitle = null;
+
+				if ($degree_type) {
+					switch ($degree_type) {
+						case 'undergraduate-degree':
+							$degree_title = 'All Majors';
+							break;
+						case 'minor':
+							$degree_title = 'All Minors';
+							break;
+						case 'graduate-degree':
+							$degree_title = 'All Graduate Degrees';
+							break;
+						case 'certificate':
+							$degree_title = 'All Certificates';
+							break;
+						default:
+							break;
+					}
+					if ($degree_title) {
+						$content .= ' | '.$degree_title;
+					}
+				}
+				if ($browse_by) {
+					switch ($browse_by) {
+						case 'browse_by_college':
+							$degree_subtitle = 'by College';
+							break;
+						case 'browse_by_hours':
+							$degree_subtitle = 'by Hours';
+							break;
+						default:
+							break;
+					}
+					if ($degree_subtitle) {
+						$content .= ' '.$degree_subtitle;
+					}
+				}
+			}
+			else {
+				$content = single_post_title('', FALSE);
+			}
+		}
+	}
+	elseif ( is_search() ) { 
+		$content = __('Search Results for:'); 
+		$content .= ' ' . esc_html(stripslashes(get_search_query()));
+	}
+	elseif ( is_category() ) {
+		$content = __('Category Archives:');
+		$content .= ' ' . single_cat_title("", false);;
+	}
+	elseif ( is_404() ) { 
+		$content = __('Not Found'); 
+	}
+	else { 
+		$content = get_bloginfo('description');
+	}
+
+	if (get_query_var('paged')) {
+		$content .= ' ' .$separator. ' ';
+		$content .= 'Page';
+		$content .= ' ';
+		$content .= get_query_var('paged');
+	}
+
+	if($content) {
+		if (is_home() || is_front_page()) {
+			$elements = array(
+				'site_name' => $site_name,
+				'separator' => $separator,
+				'content' => $content,
+			);
+		} else {
+			$elements = array(
+				'content' => $content,
+			);
+		}  
+	} else {
+		$elements = array(
+			'site_name' => $site_name,
+		);
+	}
+	
+	// But if they don't, it won't try to implode
+	if(is_array($elements)) {
+		$doctitle = implode(' ', $elements);
+	}
+	else {
+		$doctitle = $elements;
+	}
+
+	$doctitle = '<title>'.$doctitle.'</title>';
+
+	return $doctitle;
+}
+add_filter('wp_title', 'header_title', 10, 2);
 
 ?>
