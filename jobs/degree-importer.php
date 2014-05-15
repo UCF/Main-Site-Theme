@@ -1,10 +1,8 @@
 <?php 
-//if (preg_match('/wget/i', $_SERVER['HTTP_USER_AGENT']) && isset($_GET['secret'])) {
+if (preg_match('/wget/i', $_SERVER['HTTP_USER_AGENT']) && isset($_GET['secret'])) {
 	require('../../../../wp-blog-header.php');
-	require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
-	//if ($_GET['secret'] == get_theme_option('feedback_email_key')) {
-
+	if ($_GET['secret'] == get_theme_option('feedback_email_key')) {
 		/**
 		 * Grab the search service JSON feed for all programs
 		 **/
@@ -228,10 +226,10 @@
 			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br/><br/>';
 		}
 		print '<br/>Deleted '.count($existing_posts_array).' existing posts.';
-	//}
-	//else { die('Incorrect Key.'); }
-//}
-//else {
-//	header('HTTP/1.0 404 Not Found');
-//}
+	}
+	else { die('Incorrect Key.'); }
+}
+else {
+	header('HTTP/1.0 404 Not Found');
+}
 ?>
