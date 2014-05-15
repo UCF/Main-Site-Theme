@@ -12,7 +12,6 @@
 		
 		<div class="span10" id="contentcol">
 			<article role="main">
-				<p class="screen-only"><a href="<?=get_site_url()?>/academics/">&laquo; Back to Academics</a></p>
 				<?php the_content(); ?>
 				<?=display_degrees($degrees);?>
 				<br/>
