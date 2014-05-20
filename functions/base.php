@@ -1155,7 +1155,7 @@ function header_($tabs=2){
 	remove_action('wp_head', 'rsd_link');
 	
 	ob_start();
-	wp_title('');
+	wp_title('|');
 	print "\n";
 	print header_meta()."\n";
 	wp_head();

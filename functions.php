@@ -1821,7 +1821,7 @@ function header_title_degree_programs($title, $separator) {
 
 	return '<title>'.$title.'</title>';
 }
-add_filter('wp_title', 'header_title', 11, 2); // Allow overriding by SEO plugins
+add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
 
 
 /**
