@@ -1649,8 +1649,8 @@ function display_degrees($data) {
 					foreach ($posts as $post) {
 						// Get permalink to landing page for a single degree program.
 						// Graduate programs should link to the degree_website meta value.
-						$single_url = '';
-						if ($post->tax_program_type[0] !== 'Graduate Degree') {
+						$single_url = null;
+						if (get_permalink($post->ID) && $post->tax_program_type[0] !== 'Graduate Degree' && $post->tax_program_type[0] !== 'Certificate') {
 							$single_url = get_permalink($post->ID);
 						}
 						else {
@@ -1660,9 +1660,13 @@ function display_degrees($data) {
 						<li class="program span10">
 							<div class="row">					
 								<div class="span7">
+									<?php if ($single_url) { ?>
 									<a href="<?=$single_url?>">
+									<?php } ?>
 										<h4 class="name"><?=$post->post_title?></h4>
+									<?php if ($single_url) { ?>
 									</a>
+									<?php } ?>
 								
 								<?php if ($post->tax_college[0]) { ?>
 									<span class="name_label">College</span>
@@ -1683,8 +1687,8 @@ function display_degrees($data) {
 								<div class="credits-wrap">
 									<span class="program-type-alt"><?=$post->tax_program_type[0]?></span>
 								
-									<?php if ($post->degree_hours) { 
-										if ($post->tax_program_type[0] == 'Graduate Degree' || $post->tax_program_type[0] == 'Certificate') { ?>
+									<?php if (!empty($post->degree_hours)) {
+										if (!empty($post->degree_website) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
 										<a href="<?=$post->degree_website?>">
 											<span class="credits label label-warning">Click for credit hours</span>
 										</a>
