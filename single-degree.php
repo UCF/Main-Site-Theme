@@ -45,17 +45,15 @@
 	
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
-			<h1 class="span9">Degree Program</h1>
+			<h1 class="span9"><?php the_title(); ?></h1>
 			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 
 		<div id="contentcol" class="span9 program">
 			<article role="main">
-				<p class="screen-only"><a href="<?=get_site_url()?>/degree-search/">&laquo; Back to Degree Search</a></p>
 				<div class="row program-details">
 					<div class="span6" id="program-title">
-						<h2><?php the_title(); ?></h2>
-						<p class="program-type-alt"><?=$program_type?></p>
+						<h2 class="program-type-alt"><?=$program_type?></h2>
 
 						<?php 
 						if ($required_hours && intval($required_hours) > 0) { 
@@ -78,9 +76,7 @@
 						<p class="program-dept"><?=$department?></p>
 					</div>
 					<div class="span3" id="program-meta">
-						
 
-						
 						<p class="program-phone">
 							<strong>Phone:</strong> 
 							<?php if ($phone !== 'n/a') { ?><a href="tel:<?=$phone?>"><?php } ?>
@@ -102,7 +98,16 @@
 					</div>
 				</div>
 
-				<?php if ($post->post_content) { the_content(); } else { echo apply_filters('the_content', $description); }?>
+				<h3>Program Information:</h3>
+				<p class="catalog-link">
+					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank">undergraduate catalog</a></em>.
+				</p>
+				<?=apply_filters('the_content', $description)?>
+
+				<?php if ($post->post_content) { ?>
+				<h3>About This Degree:</h3>
+				<?php the_content(); ?>
+				<?php } ?>
 
 				<?php
 				if (!empty($contact_array)) {
@@ -138,6 +143,7 @@
 				<?php
 				}
 				?>
+				<p class="screen-only"><a href="<?=get_site_url()?>/degree-search/">&laquo; Back to Degree Search</a></p>
 			</article>
 		</div>
 		<div id="sidebar_right" class="span3 notoppad" role="complementary">		
