@@ -7,6 +7,7 @@ require_once('functions/admin.php');  			# Admin/login functions
 require_once('functions/config.php');			# Where per theme settings are registered
 require_once('shortcodes.php');         		# Per theme shortcodes
 require_once('third-party/truncate-html.php');  # Includes truncateHtml function
+require_once(ABSPATH.'wp-admin/includes/plugin.php'); # Include plugin.php to check if various plugins are active
 
 //Add theme-specific functions here. 
  
@@ -1734,19 +1735,12 @@ function display_degrees($data) {
 /**
  * Generates a title based on context page is viewed.  Stolen from Thematic
  **/
-function header_title($title){
+function header_title($title, $separator){
 	global $post;
 	$site_name = get_bloginfo('name');
-	$separator = '|';
 
 	if ( is_single() ) {
-		// Custom post type overrides here (necessary for single Degree Programs)
-		if ($post->post_type == 'degree') {
-			$content = 'Degree Program | '.single_post_title('', FALSE);
-		}
-		else {
-			$content = single_post_title('', FALSE);
-		}
+		$content = single_post_title('', FALSE);
 	}
 	elseif ( is_home() || is_front_page() ) { 
 		$content = get_bloginfo('description');
@@ -1757,54 +1751,7 @@ function header_title($title){
 			$content = $substitute_title;
 		}
 		else {
-			// Custom page overrides here (necessary for Degree Search)
-			if ($post->ID == get_page_by_title('Degree Search')->ID) {
-				$content = 'Degree Search';
-				$degree_type = $_GET['degree_type'];
-				$browse_by = $_GET['view'];
-				$degree_title = null;
-				$degree_subtitle = null;
-
-				if ($degree_type) {
-					switch ($degree_type) {
-						case 'undergraduate-degree':
-							$degree_title = 'All Majors';
-							break;
-						case 'minor':
-							$degree_title = 'All Minors';
-							break;
-						case 'graduate-degree':
-							$degree_title = 'All Graduate Degrees';
-							break;
-						case 'certificate':
-							$degree_title = 'All Certificates';
-							break;
-						default:
-							break;
-					}
-					if ($degree_title) {
-						$content .= ' | '.$degree_title;
-					}
-				}
-				if ($browse_by) {
-					switch ($browse_by) {
-						case 'browse_by_college':
-							$degree_subtitle = 'by College';
-							break;
-						case 'browse_by_hours':
-							$degree_subtitle = 'by Hours';
-							break;
-						default:
-							break;
-					}
-					if ($degree_subtitle) {
-						$content .= ' '.$degree_subtitle;
-					}
-				}
-			}
-			else {
-				$content = single_post_title('', FALSE);
-			}
+			$content = single_post_title('', FALSE);
 		}
 	}
 	elseif ( is_search() ) { 
@@ -1859,6 +1806,79 @@ function header_title($title){
 
 	return $doctitle;
 }
-add_filter('wp_title', 'header_title', 10, 2);
+add_filter('wp_title', 'header_title', 10, 2); // Allow overriding by SEO plugins
+
+
+/**
+ * Generates page <title> tag for Degree Program post type.
+ **/
+function header_title_degree_programs($title, $separator) {
+	global $post;
+
+	if ($post->post_type == 'degree') {
+		$title = 'Degree Program '.$separator.' '.single_post_title('', FALSE);
+	}
+
+	return '<title>'.$title.'</title>';
+}
+add_filter('wp_title', 'header_title', 11, 2); // Allow overriding by SEO plugins
+
+
+/**
+ * Generates page <title> tag for Degree Search views.
+ **/
+function header_title_degree_search($title, $separator) {
+	global $post;
+
+	// Custom page overrides here (necessary for Degree Search)
+	if ($post->ID == get_page_by_title('Degree Search')->ID) {
+		$content = 'Degree Search';
+		$degree_type = $_GET['degree_type'];
+		$browse_by = $_GET['view'];
+		$degree_title = null;
+		$degree_subtitle = null;
+
+		if ($degree_type) {
+			switch ($degree_type) {
+				case 'undergraduate-degree':
+					$degree_title = 'All Majors';
+					break;
+				case 'minor':
+					$degree_title = 'All Minors';
+					break;
+				case 'graduate-degree':
+					$degree_title = 'All Graduate Degrees';
+					break;
+				case 'certificate':
+					$degree_title = 'All Certificates';
+					break;
+				default:
+					break;
+			}
+			if ($degree_title) {
+				$content .= ' '.$separator.' '.$degree_title;
+			}
+		}
+		if ($browse_by) {
+			switch ($browse_by) {
+				case 'browse_by_college':
+					$degree_subtitle = 'by College';
+					break;
+				case 'browse_by_hours':
+					$degree_subtitle = 'by Hours';
+					break;
+				default:
+					break;
+			}
+			if ($degree_subtitle) {
+				$content .= ' '.$degree_subtitle;
+			}
+		}
+
+		$title = $content;
+	}
+	return '<title>'.$title.'</title>';
+}
+add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
 
 ?>
