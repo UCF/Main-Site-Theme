@@ -1661,7 +1661,7 @@ function display_degrees($data) {
 							<div class="row">					
 								<div class="span7">
 									<?php if ($single_url) { ?>
-									<a href="<?=$single_url?>">
+									<a href="<?=$single_url?>" <?php if ($single_url == $post->degree_website) { ?> class="ga-outbound" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 									<?php } ?>
 										<h4 class="name"><?=$post->post_title?></h4>
 									<?php if ($single_url) { ?>
@@ -1689,7 +1689,7 @@ function display_degrees($data) {
 								
 									<?php if (!empty($post->degree_hours)) {
 										if (!empty($post->degree_website) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
-										<a href="<?=$post->degree_website?>">
+										<a href="<?=$post->degree_website?>" <?php if ($single_url == $post->degree_website) { ?>class="ga-outbound" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 											<span class="credits label label-warning">Click for credit hours</span>
 										</a>
 										<?php } elseif (intval($post->degree_hours) >= 100) { ?>

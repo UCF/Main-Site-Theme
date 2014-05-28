@@ -733,6 +733,28 @@ var statusAlertCookieSet = function($) {
 }
 
 
+/* GA tracking for outbound clicks */
+var gaOutboundTracking = function($) {
+	$('ga-outbound').on('click', function(e) {
+		e.preventDefault();
+
+		var link = $(this),
+			url = link.attr('href'),
+			category = 'Outbound Links',
+			action = link.attr('data-ga-action'), // link name + action; e.g. "Apply to UCF btn click"
+			label = link.attr('data-ga-label');  // the page the user is leaving
+
+		if (typeof _gaq !== 'undefined' && action !== null && label !== null) {
+			_gaq.push('_trackEvent', category, action, label);
+			window.setTimeout(function(){ document.location = url; }, 200);
+		}
+		else {
+			document.location = url;
+		}
+	});
+}
+
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -762,6 +784,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
 		removeAndroidModals($);
+		gaOutboundTracking($);
 		
 		//devBootstrap($);
 
