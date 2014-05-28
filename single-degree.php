@@ -100,7 +100,7 @@
 
 				<h3>Program Information:</h3>
 				<p class="catalog-link">
-					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank"  data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$program_type?>)">undergraduate catalog</a></em>.
+					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank" class="ga-outbound" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$program_type?>)">undergraduate catalog</a></em>.
 				</p>
 				<?=apply_filters('the_content', $description)?>
 

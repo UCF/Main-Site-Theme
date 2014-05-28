@@ -735,7 +735,7 @@ var statusAlertCookieSet = function($) {
 
 /* GA tracking for outbound clicks */
 var gaOutboundTracking = function($) {
-	$('ga-outbound').on('click', function(e) {
+	$('.ga-outbound').on('click', function(e) {
 		e.preventDefault();
 
 		var link = $(this),
