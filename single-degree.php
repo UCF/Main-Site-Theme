@@ -4,7 +4,7 @@
 	$required_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
 	$description = get_post_meta($post->ID, 'degree_description', TRUE);
 	$phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
-	$email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';					
+	$email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';
 	$website = get_post_meta($post->ID, 'degree_website', TRUE) ? get_post_meta($post->ID, 'degree_website', TRUE) : 'n/a';
 
 	$contact_info = get_post_meta($post->ID, 'degree_contacts', TRUE);
@@ -42,7 +42,7 @@
 		$website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$required_hours;
 	}
 ?>
-	
+
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
 			<h1 class="span9"><?php the_title(); ?></h1>
@@ -55,8 +55,8 @@
 					<div class="span6" id="program-title">
 						<h2 class="program-type-alt"><?=$program_type?></h2>
 
-						<?php 
-						if ($required_hours && intval($required_hours) > 0) { 
+						<?php
+						if ($required_hours && intval($required_hours) > 0) {
 							if ($required_hours >= 100) {
 						?>
 							<span class="credits label label-info"><?=$required_hours?> credit hours</span>
@@ -78,19 +78,19 @@
 					<div class="span3" id="program-meta">
 
 						<p class="program-phone">
-							<strong>Phone:</strong> 
+							<strong>Phone:</strong>
 							<?php if ($phone !== 'n/a') { ?><a href="tel:<?=$phone?>"><?php } ?>
 								<?=$phone?>
 							<?php if ($phone !== 'n/a') { ?></a><?php } ?>
 						</p>
 						<p class="program-email">
-							<strong>E-mail:</strong> 
+							<strong>E-mail:</strong>
 							<?php if ($email !== 'n/a') { ?><a href="mailto:<?=$email?>"><?php } ?>
 								<?=$email?>
 							<?php if ($email !== 'n/a') { ?></a><?php } ?>
 						</p>
 						<p class="program-website">
-							<strong>Website:</strong> 
+							<strong>Website:</strong>
 							<?php if ($website !== 'n/a') { ?><a target="_blank" href="<?=$website?>"><?php } ?>
 								<?=$website?>
 							<?php if ($website !== 'n/a') { ?></a><?php } ?>
@@ -100,7 +100,7 @@
 
 				<h3>Program Information:</h3>
 				<p class="catalog-link">
-					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank" class="ga-outbound" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$program_type?>)">undergraduate catalog</a></em>.
+					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$program_type?>)">undergraduate catalog</a></em>.
 				</p>
 				<?=apply_filters('the_content', $description)?>
 
@@ -146,7 +146,7 @@
 				<p class="screen-only"><a href="<?=get_site_url()?>/degree-search/">&laquo; Back to Degree Search</a></p>
 			</article>
 		</div>
-		<div id="sidebar_right" class="span3 notoppad" role="complementary">		
+		<div id="sidebar_right" class="span3 notoppad" role="complementary">
 			<?=get_sidebar('right');?>
 		</div>
 	</div>

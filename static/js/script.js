@@ -734,8 +734,8 @@ var statusAlertCookieSet = function($) {
 
 
 /* GA tracking for outbound clicks */
-var gaOutboundTracking = function($) {
-	$('.ga-outbound').on('click', function(e) {
+var gaEventTracking = function($) {
+	$('.ga-event').on('click', function(e) {
 		e.preventDefault();
 
 		var link = $(this),
@@ -784,7 +784,7 @@ if (typeof jQuery != 'undefined'){
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
 		removeAndroidModals($);
-		gaOutboundTracking($);
+		gaEventTracking($);
 
 		//devBootstrap($);
 

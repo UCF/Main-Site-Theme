@@ -5,21 +5,21 @@
 			<h1 class="span9"><?php the_title();?></h1>
 			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
-		
+
 		<div id="sidebar_left" class="span2" role="navigation">
 			<?=get_sidebar('left');?>
 		</div>
-		
+
 		<div class="span10" id="contentcol">
 			<article role="main">
 				<?php the_content(); ?>
 				<?=display_degrees($degrees);?>
 				<br/>
 				<p class="more-details">
-					For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-outbound" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
+					For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
 				</p>
 				<p class="more-details">
-					For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-outbound" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
+					For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
 				</p>
 			</article>
 		</div>

@@ -313,7 +313,7 @@ function frontpage_spotlights() {
 	function output_spotlight($spotlight) {
 		?>
 		<div class="home_spotlight_single">
-			<a href="<?=get_permalink($spotlight->ID)?>" class="ga-outbound" data-ga-category="spotlight" data-ga-action="click" data-ga-label="<?=$spotlight->post_title?>">
+			<a href="<?=get_permalink($spotlight->ID)?>" class="ga-event" data-ga-action="Spotlight Link" data-ga-label="<?=$spotlight->post_title?>">
 				<?php
 					$thumb_id = get_post_thumbnail_id($spotlight->ID);
 					$thumb_src = wp_get_attachment_image_src( $thumb_id, 'home-thumb' );
@@ -324,9 +324,9 @@ function frontpage_spotlights() {
 				<div class="screen-only spotlight_thumb" style="background-image:url('<?=$thumb_src?>');"><?=$spotlight->post_title?></div>
 				<?php } ?>
 			</a>
-			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>" class="ga-outbound" data-ga-category="spotlight" data-ga-action="click" data-ga-label="<?=$spotlight->post_title?>"><?=$spotlight->post_title?></a></h3>
+			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>" class="ga-event" data-ga-action="Spotlight Link" data-ga-label="<?=$spotlight->post_title?>"><?=$spotlight->post_title?></a></h3>
 			<?=truncateHtml($spotlight->post_content, 200)?>
-			<p><a class="home_spotlight_readmore ga-outbound" href="<?=get_permalink($spotlight->ID)?>" target="_blank" data-ga-category="spotlight" data-ga-action="click" data-ga-label="<?=$spotlight->post_title?>">Read More…</a></p>
+			<p><a class="home_spotlight_readmore ga-event" href="<?=get_permalink($spotlight->ID)?>" target="_blank" data-ga-action="Spotlight Link" data-ga-label="<?=$spotlight->post_title?>">Read More…</a></p>
 		</div>
 		<?
 	}
@@ -1661,7 +1661,7 @@ function display_degrees($data) {
 							<div class="row">
 								<div class="span7">
 									<?php if ($single_url) { ?>
-									<a href="<?=$single_url?>" <?php if ($single_url == $post->degree_website) { ?> class="ga-outbound" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+									<a href="<?=$single_url?>" <?php if ($single_url == $post->degree_website) { ?> class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 									<?php } ?>
 										<h4 class="name"><?=$post->post_title?></h4>
 									<?php if ($single_url) { ?>
@@ -1689,7 +1689,7 @@ function display_degrees($data) {
 
 									<?php if (!empty($post->degree_hours)) {
 										if (!empty($post->degree_website) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
-										<a href="<?=$post->degree_website?>" <?php if ($single_url == $post->degree_website) { ?>class="ga-outbound" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+										<a href="<?=$post->degree_website?>" <?php if ($single_url == $post->degree_website) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 											<span class="credits label label-warning">Click for credit hours</span>
 										</a>
 										<?php } elseif (intval($post->degree_hours) >= 100) { ?>

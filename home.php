@@ -1,7 +1,7 @@
 <?php get_header();?>
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
-	<div class="row page-content nodescription" id="home" data-template="home-nodescription" role="main">		
+	<div class="row page-content nodescription" id="home" data-template="home-nodescription" role="main">
 		<div class="span12">
 			<?php
 				$args = array(
@@ -9,10 +9,10 @@
 					'post_type' => 'centerpiece',
 				);
 				$latest_centerpiece = get_posts($args);
-				echo do_shortcode('[centerpiece id="'.$latest_centerpiece[0]->ID.'"]'); 
+				echo do_shortcode('[centerpiece id="'.$latest_centerpiece[0]->ID.'"]');
 				?>
 		</div>
-		<div class="span4" id="home_leftcol">	
+		<div class="span4" id="home_leftcol">
 			<h2>Spotlight</h2>
 			<?=frontpage_spotlights()?>
 			<p class="screen-only"><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
@@ -29,11 +29,11 @@
 			<?php esi_include('do_shortcode','[events-widget]'); ?>
 			<?php esi_include('output_weather_data'); ?>
 		</div>
-	
+
 	</div>
 </div>
-	
-<div class="container-fullwidth screen-only" id="home-supplemental">	
+
+<div class="container-fullwidth screen-only" id="home-supplemental">
 	<div class="container">
 		<div class="row">
 			<div class="span5">
@@ -44,7 +44,7 @@
 			<div class="span6 offset1" role="navigation">
 				<h3>Colleges</h3>
 				<?=wp_nav_menu(array(
-					'theme_location' => 'ucf-colleges', 
+					'theme_location' => 'ucf-colleges',
 					'container' => 'false',
 					));
 				?>
