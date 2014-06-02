@@ -744,8 +744,8 @@ var gaOutboundTracking = function($) {
 			action = link.attr('data-ga-action'), // link name + action; e.g. "Apply to UCF btn click"
 			label = link.attr('data-ga-label');  // the page the user is leaving
 
-		if (typeof _gaq !== 'undefined' && action !== null && label !== null) {
-			_gaq.push('_trackEvent', category, action, label);
+		if (action !== null && label !== null) {
+			ga('send', 'event', category, action, label);
 			window.setTimeout(function(){ document.location = url; }, 200);
 		}
 		else {

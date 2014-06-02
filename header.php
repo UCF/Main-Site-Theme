@@ -8,13 +8,7 @@
 		<script type="text/javascript">
 			var _sf_startpt = (new Date()).getTime();
 			<?php if(GA_ACCOUNT):?>
-			
 			var GA_ACCOUNT  = '<?=GA_ACCOUNT?>';
-			var _gaq        = _gaq || [];
-			_gaq.push(['_setAccount', GA_ACCOUNT]);
-			_gaq.push(['_setDomainName', 'none']);
-			_gaq.push(['_setAllowLinker', true]);
-			_gaq.push(['_trackPageview']);
 			<?php endif;?>
 			<?php if(CB_UID):?>
 			
