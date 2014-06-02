@@ -313,7 +313,7 @@ function frontpage_spotlights() {
 	function output_spotlight($spotlight) {
 		?>
 		<div class="home_spotlight_single">
-			<a href="<?=get_permalink($spotlight->ID)?>">
+			<a href="<?=get_permalink($spotlight->ID)?>" class="ga-outbound" data-ga-category="spotlight" data-ga-action="click" data-ga-label="<?=$spotlight->post_title?>">
 				<?php
 					$thumb_id = get_post_thumbnail_id($spotlight->ID);
 					$thumb_src = wp_get_attachment_image_src( $thumb_id, 'home-thumb' );
@@ -324,9 +324,9 @@ function frontpage_spotlights() {
 				<div class="screen-only spotlight_thumb" style="background-image:url('<?=$thumb_src?>');"><?=$spotlight->post_title?></div>
 				<?php } ?>
 			</a>
-			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
+			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>" class="ga-outbound" data-ga-category="spotlight" data-ga-action="click" data-ga-label="<?=$spotlight->post_title?>"><?=$spotlight->post_title?></a></h3>
 			<?=truncateHtml($spotlight->post_content, 200)?>
-			<p><a class="home_spotlight_readmore" href="<?=get_permalink($spotlight->ID)?>" target="_blank">Read More…</a></p>
+			<p><a class="home_spotlight_readmore ga-outbound" href="<?=get_permalink($spotlight->ID)?>" target="_blank" data-ga-category="spotlight" data-ga-action="click" data-ga-label="<?=$spotlight->post_title?>">Read More…</a></p>
 		</div>
 		<?
 	}

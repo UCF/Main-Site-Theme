@@ -740,7 +740,7 @@ var gaOutboundTracking = function($) {
 
 		var link = $(this),
 			url = link.attr('href'),
-			category = 'Outbound Links',
+			category = link.attr('data-ga-category') ? link.attr('data-ga-category') : 'Outbound Links',
 			action = link.attr('data-ga-action'), // link name + action; e.g. "Apply to UCF btn click"
 			label = link.attr('data-ga-label');  // the page the user is leaving
 
