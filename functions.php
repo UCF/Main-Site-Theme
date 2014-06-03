@@ -1801,8 +1801,6 @@ function header_title($title, $separator){
 		$doctitle = $elements;
 	}
 
-	$doctitle = '<title>'.$doctitle.'</title>';
-
 	return $doctitle;
 }
 add_filter('wp_title', 'header_title', 10, 2); // Allow overriding by SEO plugins
@@ -1876,7 +1874,7 @@ function header_title_degree_search($title, $separator) {
 
 		$title = $content;
 	}
-	return '<title>'.$title.'</title>';
+	return '<title>'.$title.'</title>'; // Why is this necessary???
 }
 add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
 
