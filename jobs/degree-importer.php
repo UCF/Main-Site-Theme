@@ -184,8 +184,25 @@ if (preg_match('/wget/i', $_SERVER['HTTP_USER_AGENT']) && isset($_GET['secret'])
 				}
 			}
 
+			// Create base program types, if they don't already exist.
+			if (!term_exists('Undergraduate Program', 'program_types') || !term_exists('Graduate Program', 'program_types')) {
+				$undergraduate_program_term = wp_insert_term('Undergraduate Program', 'program_types');
+				$graduate_program_term = wp_insert_term('Graduate Program', 'program_types');
+
+				wp_insert_term('Undergraduate Degree', 'program_types', array('parent' => $undergraduate_program_term['term_id']));
+				wp_insert_term('Minor', 'program_types', array('parent' => $undergraduate_program_term['term_id']));
+				wp_insert_term('Articulated Program', 'program_types', array('parent' => $undergraduate_program_term['term_id']));
+				wp_insert_term('Accelerated Program', 'program_types', array('parent' => $undergraduate_program_term['term_id']));
+
+				wp_insert_term('Graduate Degree', 'program_types', array('parent' => $graduate_program_term['term_id']));
+				wp_insert_term('Certificate', 'program_types', array('parent' => $graduate_program_term['term_id']));
+
+				// Force a purge of any cached hierarchy so that parent/child relationships are
+				// properly saved: http://wordpress.stackexchange.com/a/8921
+				delete_option('program_types_children');
+			}
 			// Set/update taxonomy terms.
-			// NOTE: These do NOT account for parent/child relationships!
+			// NOTE: These do NOT account for parent/child relationships! Terms not defined above will be created at the root level.
 			foreach ($post_terms as $tax=>$term) {
 				// Check for existing. Make a new term if necessary.
 				// Return a term_id.
