@@ -1156,10 +1156,10 @@ function header_($tabs=2){
 	
 	ob_start();
 	wp_title('|');
-	print '\n';
-	print header_meta().'\n';
+	print "\n";
+	print header_meta()."\n";
 	wp_head();
-	print header_links().'\n';
+	print header_links()."\n";
 	
 	return indent(ob_get_clean(), $tabs);
 }
