@@ -12,17 +12,17 @@
 	$contact_array = array();
 
 	// Split single contacts
-	$contacts = explode(';', $contact_info);
+	$contacts = explode('@@;@@', $contact_info);
 	foreach ($contacts as $key=>$contact) {
 		if ($contact) {
 			// Split individual fields
-			$contact = explode(',', $contact);
+			$contact = explode('@@,@@', $contact);
 
 			$newcontact = array();
 
 			foreach ($contact as $fieldset) {
 				// Split out field key/values
-				$fields = explode(':', $fieldset);
+				$fields = explode('@@:@@', $fieldset);
 				$newcontact[$fields[0]] = $fields[1];
 			}
 

@@ -69,10 +69,10 @@ if (preg_match('/wget/i', $_SERVER['HTTP_USER_AGENT']) && isset($_GET['secret'])
 				foreach ($program->contacts as $contact) {
 					foreach ($contact as $field=>$val) {
 						if ($val) {
-							$string .= $field.':'.$val.',';
+							$string .= $field.'@@:@@'.$val.'@@,@@';
 						}
 					}
-					$string = substr($string, 0, -1).';';
+					$string = substr($string, 0, -1).'@@;@@';
 				}
 				$program->contacts = $string;
 			}

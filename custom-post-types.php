@@ -1548,7 +1548,7 @@ class Degree extends CustomPostType{
 			),
 			array(
 				'name'  => 'Contacts',
-				'desc' => 'Individual contacts are stored as a semicolon-delimited string. Individual fields for each contact are comma-separated.',
+				'desc' => 'Individual contacts are stored delimited by "@@;@@". Individual fields for each contact are delimited by "@@,@@".',
 				'id'   => $prefix.'contacts',
 				'type' => 'textarea',
 			),
