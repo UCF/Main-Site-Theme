@@ -1692,9 +1692,9 @@ function display_degrees($data) {
 										<a href="<?=$post->degree_website?>" <?php if ($single_url == $post->degree_website) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 											<span class="credits label label-warning">Click for credit hours</span>
 										</a>
-										<?php } elseif (intval($post->degree_hours) >= 100) { ?>
+										<?php } elseif (intval($post->degree_hours) >= 90) { ?>
 										<span class="credits label label-info"><?=intval($post->degree_hours)?> credit hours</span>
-										<?php } elseif (intval($post->degree_hours) > 1 && intval($post->degree_hours) < 100) { ?>
+										<?php } elseif (intval($post->degree_hours) > 1 && intval($post->degree_hours) < 90) { ?>
 										<span class="credits label label-success"><?=intval($post->degree_hours)?> credit hours</span>
 									<?php }
 									} else { ?>
@@ -1818,7 +1818,7 @@ function header_title_degree_programs($title, $separator) {
 		$title = 'Degree Program '.$separator.' '.single_post_title('', FALSE);
 	}
 
-	return '<title>'.$title.'</title>';
+	return $title;
 }
 add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
 
