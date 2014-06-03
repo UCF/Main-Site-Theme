@@ -744,7 +744,7 @@ var gaEventTracking = function($) {
 			action = link.attr('data-ga-action'), // link name + action; e.g. "Apply to UCF btn click"
 			label = link.attr('data-ga-label');  // the page the user is leaving
 
-		if (action !== null && label !== null) {
+		if (typeof ga !== 'undefined' && action !== null && label !== null) {
 			ga('send', 'event', category, action, label);
 			window.setTimeout(function(){ document.location = url; }, 200);
 		}
