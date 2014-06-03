@@ -1155,10 +1155,11 @@ function header_($tabs=2){
 	remove_action('wp_head', 'rsd_link');
 	
 	ob_start();
-	print header_title()."\n";
-	print header_meta()."\n";
+	wp_title('|');
+	print '\n';
+	print header_meta().'\n';
 	wp_head();
-	print header_links()."\n";
+	print header_links().'\n';
 	
 	return indent(ob_get_clean(), $tabs);
 }
@@ -1290,83 +1291,6 @@ function header_links(){
 	
 	$links_html = implode("\n", $links_html);
 	return $links_html;
-}
-
-
-/**
- * Generates a title based on context page is viewed.  Stolen from Thematic
- **/
-function header_title(){
-	$site_name = get_bloginfo('name');
-	$separator = '|';
-
-	if ( is_single() ) {
-		$content = single_post_title('', FALSE);
-	}
-	elseif ( is_home() || is_front_page() ) { 
-		$content = get_bloginfo('description');
-	}
-	elseif ( is_page() ) {
-
-		$subsitute_title = get_post_meta(get_the_ID(), 'page_title', true);
-		if (!empty($subsitute_title)) {
-			$content = $subsitute_title;
-		} else {
-			$content = single_post_title('', FALSE);
-		}
-
-	}
-	elseif ( is_search() ) { 
-		$content = __('Search Results for:'); 
-		$content .= ' ' . esc_html(stripslashes(get_search_query()));
-	}
-	elseif ( is_category() ) {
-		$content = __('Category Archives:');
-		$content .= ' ' . single_cat_title("", false);;
-	}
-	elseif ( is_404() ) { 
-		$content = __('Not Found'); 
-	}
-	else { 
-		$content = get_bloginfo('description');
-	}
-
-	if (get_query_var('paged')) {
-		$content .= ' ' .$separator. ' ';
-		$content .= 'Page';
-		$content .= ' ';
-		$content .= get_query_var('paged');
-	}
-
-	if($content) {
-		if (is_home() || is_front_page()) {
-			$elements = array(
-				'site_name' => $site_name,
-				'separator' => $separator,
-				'content' => $content,
-			);
-		} else {
-			$elements = array(
-				'content' => $content,
-			);
-		}  
-	} else {
-		$elements = array(
-			'site_name' => $site_name,
-		);
-	}
-	
-	// But if they don't, it won't try to implode
-	if(is_array($elements)) {
-	$doctitle = implode(' ', $elements);
-	}
-	else {
-	$doctitle = $elements;
-	}
-
-	$doctitle = "<title>". $doctitle ."</title>";
-
-	return $doctitle;
 }
 
 

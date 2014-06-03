@@ -338,6 +338,8 @@
 		margin-top: 8px; 
 	}
 	#academics-search ul.results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
+
+	#program-meta p { padding-left: 0; }
 }
 
 @media (max-width: 480px) {	
@@ -437,5 +439,6 @@
 	#academics-search #browse ul#degree-type-list li,
 	#academics-search #results #degree-type-sort li { font-size: 11px; }
 	#academics-search ul.results-list .program .program-type-alt { display: none; }
+	#academics-search ul.results-list .program .credits-wrap { text-align: right; margin-top: 5px; }
 	
 }

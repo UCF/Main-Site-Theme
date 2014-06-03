@@ -7,14 +7,14 @@ getRealWindowWidth = function($) {
 	$('body').css('overflow', 'hidden');
 	var realWidth = $(window).width();
 	$('body').css('overflow', 'auto');
-	
+
 	return realWidth;
 }
 
 
 Generic.defaultMenuSeparators = function($) {
 	// Because IE sucks, we're removing the last stray separator
-	// on default navigation menus for browsers that don't 
+	// on default navigation menus for browsers that don't
 	// support the :last-child CSS property
 	$('.menu.horizontal li:last-child').addClass('last');
 };
@@ -56,7 +56,7 @@ Generic.mobileNavBar = function($) {
 			}
 		}
 	}
-	
+
 	if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
 		adjust_mobile_nav();
 		$(window).resize(function() {
@@ -101,7 +101,7 @@ addBodyClasses = function($) {
 	else if (navigator.userAgent.match(/iPod/i)) 	{ bodyClass = 'ipod'; }
 	// Android:
 	else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
-	
+
 	$('body').addClass(bodyClass);
 }
 
@@ -125,7 +125,7 @@ iosRotateAdjust = function($) {
 centerpieceSlider = function($) {
 	var slider = $('#centerpiece_slider');
 	if(slider.length > 0) {
-		
+
 		// Get all duration values:
 		var timeouts = new Array();
 		$('#centerpiece_slider ul li').each(function() {
@@ -136,28 +136,28 @@ centerpieceSlider = function($) {
 			}
 			timeouts.push(duration);
 		});
-		
-		// Initiate slider:		
-		$(function() { 
-			$('#centerpiece_slider ul').cycle({ 
-				delay:  -2000, 
-				fx:     'fade', 
-				speed:  2000, 
+
+		// Initiate slider:
+		$(function() {
+			$('#centerpiece_slider ul').cycle({
+				delay:  -2000,
+				fx:     'fade',
+				speed:  2000,
 				pager:  '#centerpiece_control',
 				slideExpr: '.centerpiece_single',
 				slideResize: 0,
-				timeoutFn: calculateTimeout 
-			}); 
+				timeoutFn: calculateTimeout
+			});
 		});
-			 
-		// timeouts per slide (in seconds) 
-		function calculateTimeout(currElement, nextElement, opts, isForward) { 
-			var index = opts.currSlide; 
-			return timeouts[index] * 1000; 
+
+		// timeouts per slide (in seconds)
+		function calculateTimeout(currElement, nextElement, opts, isForward) {
+			var index = opts.currSlide;
+			return timeouts[index] * 1000;
 		}
-		
+
 		// Stop slider when a video thumbnail is clicked:
-		$('.centerpiece_single_vid_thumb').click(function() { 
+		$('.centerpiece_single_vid_thumb').click(function() {
 			$('#centerpiece_slider ul').cycle('pause');
 			$(this).hide().next().fadeIn(500);
 			// Also hide the centerpiece controls for mobile devices:
@@ -165,7 +165,7 @@ centerpieceSlider = function($) {
 				$('#centerpiece_control').hide();
 			}
 		});
-		
+
 		// If a centerpiece control button is clicked, kill any videos and fix slide dimensions:
 		$('#centerpiece_control').click(function() {
 			$('#centerpiece_slider li iframe, #centerpiece_slider li object, #centerpiece_slider li embed').each(function() {
@@ -177,7 +177,7 @@ centerpieceSlider = function($) {
 				}
 			});
 		});
-		
+
 	}
 }
 
@@ -213,12 +213,12 @@ videoModalSet = function($) {
 		$('.video-modal').on('show', function() {
 			var modalID = $(this).attr('id');
 			var src = $(this).children('.modal-body').attr('data-src');
-			
+
 			if ($(this).find('iframe').length < 1) {
 				$('#' + modalID + ' .modal-body').append('<iframe class="modal-video-player" type="text/html" width="640" height="390" src="'+ src +'" frameborder="0"/>');
 			}
 		});
-		
+
 		$('.video-modal').on('hide', function() {
 			$(this).find('iframe').remove();
 		});
@@ -282,7 +282,7 @@ fixSubheaderHeight = function($) {
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
 	if ($('.page-content#azindex').length > 0) {
-		
+
 		// Post type search customizations
 		$('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
 		$('form.post-type-search-form')
@@ -294,13 +294,13 @@ azIndex = function($) {
 			.children('input')
 				.removeClass('span3')
 				.addClass('search-query');
-		
+
 		$('.post-type-search-alpha h3').each(function() {
 			$(this)
 				.parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
 				.children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
 		});
-		
+
 		// Activate Scrollspy
 		if ($('body').hasClass('ie7') == false) {
 			$('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
@@ -309,18 +309,18 @@ azIndex = function($) {
 		else { // Disable affixing/scrollspy in IE7
 			$('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
 		}
-		
+
 		// Force 'A' as the active starting letter, since it likes to
 		// default to 'Z' for whatever reason
 		$('#azIndexList .nav li.active').removeClass('active');
 		$('#azIndexList .nav li:first-child').addClass('active');
-		
+
 		// Reset active letter link when 'Back to Top' is clicked
 		$('.backtotop a').click(function() {
 			$('#azIndexList .nav li.active').removeClass('active');
 			$('#azIndexList .nav li:first-child').addClass('active');
 		});
-		
+
 		// Set disabled letters for sections with no content
 		$('.az-jumpto-anchor').each(function() {
 			if ($(this).siblings('.row').children('div').length < 1) {
@@ -330,7 +330,7 @@ azIndex = function($) {
 		});
 		$('#azIndexList .nav li a.disabled').click(function(e) {
 			e.preventDefault();
-		});		
+		});
 	}
 }
 
@@ -340,7 +340,7 @@ toggleAnnouncementFilters = function($) {
 	audienceBtn = $('#filter_audience');
 	keywordBtn = $('#filter_keyword');
 	timeBtn = $('#filter_time');
-	
+
 	// reset field values to default any time a new filter is selected
 	var resetVals = function() {
 		if ($('#filter_audience_wrap').hasClass('active_filter') == false) {
@@ -353,7 +353,7 @@ toggleAnnouncementFilters = function($) {
 			$('#filter_time_wrap select option:selected').val("thisweek");
 		}
 	}
-	
+
 	// on load
 	if (audienceBtn.hasClass('active')) {
 		$('#filter_audience_wrap').show().addClass('active_filter');
@@ -365,20 +365,20 @@ toggleAnnouncementFilters = function($) {
 		$('#filter_time_wrap').show().addClass('active_filter');
 	}
 	resetVals();
-	
+
 	// on click
 	$(audienceBtn).click(function() {
 		$('.active_filter').removeClass('active_filter').hide();
 		$('#filter_audience_wrap').fadeIn().addClass('active_filter');
 		resetVals();
 	});
-	
+
 	$(keywordBtn).click(function() {
 		$('.active_filter').removeClass('active_filter').hide();
 		$('#filter_keyword_wrap').fadeIn().addClass('active_filter');
-		resetVals();	
+		resetVals();
 	});
-	
+
 	$(timeBtn).click(function() {
 		$('.active_filter').removeClass('active_filter').hide();
 		$('#filter_time_wrap').fadeIn().addClass('active_filter');
@@ -433,7 +433,7 @@ Generic.PostTypeSearch = function($) {
 				typing_timer = null,
 				typing_delay = 300, // milliseconds
 
-				prev_post_id_sum = null, // Sum of result post IDs. Used to cache results 
+				prev_post_id_sum = null, // Sum of result post IDs. Used to cache results
 
 				MINIMUM_SEARCH_MATCH_LENGTH = 2;
 
@@ -523,7 +523,7 @@ Generic.PostTypeSearch = function($) {
 						else {
 							var element = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)');
 						}
-						
+
 						var post_id_int = parseInt(post_id, 10);
 						post_id_sum += post_id_int;
 						if(element.length == 1) {
@@ -539,8 +539,8 @@ Generic.PostTypeSearch = function($) {
 						if(post_id_sum != prev_post_id_sum) {
 							results.empty();
 							prev_post_id_sum = post_id_sum;
-							
-							
+
+
 							// Slice the elements into their respective columns
 							elements_per_column = Math.ceil(elements.length / column_count);
 							for(var i = 0; i < column_count; i++) {
@@ -565,7 +565,7 @@ Generic.PostTypeSearch = function($) {
 								$.each(column_elements, function(element_index, element) {
 									column_list.append($(element));
 								});
-								results.find('div[class="row"]').append(column_wrap);								
+								results.find('div[class="row"]').append(column_wrap);
 							});
 							results
 								.append('<a class="close" href="#">×</a>')
@@ -599,7 +599,7 @@ var removeAndroidModals = function($) {
 		$('a[data-toggle="modal"]').each(function() {
 			var modalLink = $(this);
 			var modalID   = modalLink.attr('href');
-			
+
 			// Check for videos whose URLs are contained in the data-src attr
 			if ($(modalID).find('[data-src^="http"]').length > 0) {
 				var href  = $(modalID).find('[data-src^="http"]').attr('data-src');
@@ -608,7 +608,7 @@ var removeAndroidModals = function($) {
 			else {
 				var href  = $(modalID).find('[src^="http"]').attr('src');
 			}
-			
+
 			if (href) {
 				modalLink.attr({ 'href' : href, 'data-toggle' : '', 'target' : '_blank' });
 			}
@@ -625,7 +625,7 @@ var devBootstrap = function($) {
 	$('#bootstrap-testing-popovers').popover({
 		trigger: "hover",
 		selector: "a[rel=popover]"
-	}); 
+	});
 }
 
 
@@ -650,18 +650,18 @@ var statusAlertCheck = function($) {
 		success : function(feed) {
 			var visible_alert	= null;
 			var newest			= feed.items[0];
-			
+
 			if (newest) {
 				var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]'),
 					visible_alert = newest.id;
 				// Remove 'more info at...' from description
 				newest.description = newest.description.replace('More info at www.ucf.edu','');
-				
+
 				// Remove old alerts that no longer appear in the feed
 				if( (visible_alert == null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
 					$('.status-alert[id!=status-alert-template]').remove();
 				}
-				
+
 				// Check to see if this alert already exists
 				if(existing_alert.length > 0) {
 					// Check the content and update if necessary.
@@ -670,7 +670,7 @@ var statusAlertCheck = function($) {
 					var existing_title = existing_alert.find('.title'),
 						existing_content = existing_alert.find('.content'),
 						existing_type = existing_alert.find('.alert-icon');
-						
+
 					if(existing_title.text() != newest.title) {
 						existing_title.text(newest.title);
 					}
@@ -680,12 +680,12 @@ var statusAlertCheck = function($) {
 					if(existing_type.hasClass(newest.type) == false) {
 						existing_type.attr('class','alert-icon ' + newest.type);
 					}
-				
+
 				} else {
 					// Make sure this alert hasn't been closed by the user already
 					if ($.cookie('ucf_alert_display_' + newest.id) != 'hide') {
 						// Create a new alert if an existing one isn't found
-						
+
 						var alert_markup = $('#status-alert-template').clone(true);
 						alert_markup
 							.attr('id', '')
@@ -709,7 +709,7 @@ var statusAlertCheck = function($) {
 					$('.status-alert[id!=status-alert-template]').remove();
 				}
 			}
-			
+
 			// Set cookies for every iteration of new alerts, if necessary
 			statusAlertCookieSet($);
 		}
@@ -718,7 +718,7 @@ var statusAlertCheck = function($) {
 
 
 /*
- * Handle cookies that determine whether an alert has been closed 
+ * Handle cookies that determine whether an alert has been closed
  * by the user. (Requires jquery.cookie.js)
  * Also adjusts styles as necessary on alert close
  */
@@ -733,6 +733,28 @@ var statusAlertCookieSet = function($) {
 }
 
 
+/* GA tracking for outbound clicks */
+var gaEventTracking = function($) {
+	$('.ga-event').on('click', function(e) {
+		e.preventDefault();
+
+		var link = $(this),
+			url = link.attr('href'),
+			category = link.attr('data-ga-category') ? link.attr('data-ga-category') : 'Outbound Links',
+			action = link.attr('data-ga-action'), // link name + action; e.g. "Apply to UCF btn click"
+			label = link.attr('data-ga-label');  // the page the user is leaving
+
+		if (action !== null && label !== null) {
+			ga('send', 'event', category, action, label);
+			window.setTimeout(function(){ document.location = url; }, 200);
+		}
+		else {
+			document.location = url;
+		}
+	});
+}
+
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -740,7 +762,7 @@ if (typeof jQuery != 'undefined'){
 		Webcom.chartbeat($);
 		Webcom.handleExternalLinks($);
 		Webcom.loadMoreSearchResults($);
-		
+
 		/* Theme Specific Code Here */
 		Generic.defaultMenuSeparators($);
 		Generic.removeExtraGformStyles($);
@@ -762,7 +784,8 @@ if (typeof jQuery != 'undefined'){
 		Generic.PostTypeSearch($);
 		phonebookStaffToggle($);
 		removeAndroidModals($);
-		
+		gaEventTracking($);
+
 		//devBootstrap($);
 
 		statusAlertCheck($);

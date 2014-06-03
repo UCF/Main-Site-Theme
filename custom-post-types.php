@@ -1492,7 +1492,106 @@ class Slider extends CustomPostType {
 			}			
 		}
 	}
+}
+
+
+/**
+ * Describes an undergraduate/graduate program.
+ *
+ * @author Jo Dickson
+ **/
+class Degree extends CustomPostType{
+	public 
+		$name           = 'degree',
+		$plural_name    = 'Degree Programs',
+		$singular_name  = 'Degree Program',
+		$add_new_item   = 'Add New Degree Program',
+		$edit_item      = 'Edit Degree Program',
+		$new_item       = 'New Degree Program',
+		$public         = True,
+		$use_editor     = True,
+		$use_thumbnails = False,
+		$use_order      = True,
+		$use_title      = True,
+		$use_metabox    = True,
+		$taxonomies		= array('program_types', 'colleges', 'departments');
 	
-	
+	public function fields(){
+		$prefix = $this->options('name').'_';
+		return array(
+			array(
+				'name'  => 'Required Hours',
+				'id'   => $prefix.'hours',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Description',
+				'desc' => 'Description provided for the degree.  This value should not be modified as it can be overridden upon degree import from the 
+							search service.  Modify the post content instead to add additional degree information.',
+				'id'   => $prefix.'description',
+				'type' => 'textarea',
+			),
+			array(
+				'name'  => 'Website',
+				'id'   => $prefix.'website',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Phone Number',
+				'id'   => $prefix.'phone',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Email',
+				'id'   => $prefix.'email',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Contacts',
+				'desc' => 'Individual contacts are stored as a semicolon-delimited string. Individual fields for each contact are comma-separated.',
+				'id'   => $prefix.'contacts',
+				'type' => 'textarea',
+			),
+			array(
+				'name'  => 'Degree ID',
+				'desc' => 'degree_id in database. Do not modify this value.',
+				'id'   => $prefix.'id',
+				'type' => 'text',
+			),
+			array(
+				'name'  => 'Degree Type ID',
+				'desc' => 'type_id in database. Do not modify this value.',
+				'id'   => $prefix.'type_id',
+				'type' => 'text',
+			),
+		);
+	}
+
+	/**
+	 * Registers the custom post type and any other ancillary actions that are
+	 * required for the post to function properly.
+	 **/
+	public function register(){
+		$registration = array(
+			'labels'     => $this->labels(),
+			'supports'   => $this->supports(),
+			'public'     => $this->options('public'),
+			'taxonomies' => $this->options('taxonomies'),
+			'_builtin'   => $this->options('built_in'),
+			'rewrite' => array(
+				'slug' => 'academics'
+			),
+		);
+		
+		if ($this->options('use_order')){
+			$registration = array_merge($registration, array('hierarchical' => True,));
+		}
+		
+		register_post_type($this->options('name'), $registration);
+		
+		if ($this->options('use_shortcode')){
+			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
+		}
+	}
 }
 ?>

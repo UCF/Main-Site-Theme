@@ -8,10 +8,10 @@ require_once('functions/config.php');			# Where per theme settings are registere
 require_once('shortcodes.php');         		# Per theme shortcodes
 require_once('third-party/truncate-html.php');  # Includes truncateHtml function
 
-//Add theme-specific functions here. 
- 
-/** 
- * Slider post type customizations 
+//Add theme-specific functions here.
+
+/**
+ * Slider post type customizations
  * Stolen from SmartStart theme
  **/
 
@@ -60,7 +60,7 @@ add_filter('enter_title_here', 'change_centerpiece_title');
 /**
  * Announcement custom columns
  **/
- 
+
 // Custom columns for 'Announcement' post type
 function edit_announcement_columns() {
 	$columns = array(
@@ -104,7 +104,7 @@ function sortable_announcement_columns( $columns ) {
 	$columns['publish_date'] 	= 'publish_date';
 	return $columns;
 }
-add_action('manage_edit-announcement_sortable_columns', 'sortable_announcement_columns'); 
+add_action('manage_edit-announcement_sortable_columns', 'sortable_announcement_columns');
 
 
 /**
@@ -160,17 +160,17 @@ $allowedposttags['embed'] = array(
 	'height' => array(),
 	'width' => array()
 );
-// Most of these attributes aren't actually valid for some of 
+// Most of these attributes aren't actually valid for some of
 // the tags they're assigned to, but whatever:
 $allowedposttags['div'] =
-$allowedposttags['a'] = 
+$allowedposttags['a'] =
 $allowedposttags['button'] = array(
 	'id' => array(),
 	'class' => array(),
 	'style' => array(),
 	'width' => array(),
 	'height' => array(),
-	
+
 	'align' => array(),
 	'aria-hidden' => array(),
 	'aria-labelledby' => array(),
@@ -193,7 +193,7 @@ $allowedposttags['button'] = array(
 	'type' => array(),
 	'title' => array(),
 	'value' => array(),
-	
+
 	// Bootstrap JS stuff:
 	'data-dismiss' => array(),
 	'data-toggle' => array(),
@@ -235,7 +235,7 @@ function get_youtube_id($url){
 }
 
 
-/** 
+/**
  * Allow shortcodes in widgets
  **/
 add_filter('widget_text', 'do_shortcode');
@@ -257,7 +257,7 @@ add_action( 'admin_menu', 'hide_admin_links' );
  **/
 function get_page_subheader($post) {
 	if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') {
-		$subheader = get_post(get_post_meta($post->ID, 'page_subheader', TRUE));			
+		$subheader = get_post(get_post_meta($post->ID, 'page_subheader', TRUE));
 		?>
 		<div class="span12" id="subheader" role="complementary">
 			<?php
@@ -273,7 +273,7 @@ function get_page_subheader($post) {
 				<?=$subheader->post_content?>
 				<p class="subhead_author"><?=get_post_meta($subheader->ID, 'subheader_student_name', TRUE)?></p>
 			</blockquote>
-			
+
 			<?php
 			$studentimg = get_post_meta($subheader->ID, 'subheader_student_image', TRUE);
 			$imgatts = array(
@@ -285,7 +285,7 @@ function get_page_subheader($post) {
 			?>
 		</div>
 	<?php
-	} 
+	}
 }
 
 
@@ -303,17 +303,17 @@ function frontpage_spotlights() {
 		'post_status'   => 'publish',
 	);
 	$spotlights = get_posts($args);
-	
+
 	$spotlight_one = $spotlights[0];
 	$spotlight_two = $spotlights[1];
-	
+
 	$position_one  = get_post_meta($spotlight_one->ID, 'spotlight_position', TRUE);
 	$position_two  = get_post_meta($spotlight_two->ID, 'spotlight_position', TRUE);
-	
+
 	function output_spotlight($spotlight) {
 		?>
 		<div class="home_spotlight_single">
-			<a href="<?=get_permalink($spotlight->ID)?>">
+			<a href="<?=get_permalink($spotlight->ID)?>" class="ga-event" data-ga-action="Spotlight Link" data-ga-label="<?=$spotlight->post_title?>">
 				<?php
 					$thumb_id = get_post_thumbnail_id($spotlight->ID);
 					$thumb_src = wp_get_attachment_image_src( $thumb_id, 'home-thumb' );
@@ -324,20 +324,20 @@ function frontpage_spotlights() {
 				<div class="screen-only spotlight_thumb" style="background-image:url('<?=$thumb_src?>');"><?=$spotlight->post_title?></div>
 				<?php } ?>
 			</a>
-			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></h3>
+			<h3 class="home_spotlight_title"><a href="<?=get_permalink($spotlight->ID)?>" class="ga-event" data-ga-action="Spotlight Link" data-ga-label="<?=$spotlight->post_title?>"><?=$spotlight->post_title?></a></h3>
 			<?=truncateHtml($spotlight->post_content, 200)?>
-			<p><a class="home_spotlight_readmore" href="<?=get_permalink($spotlight->ID)?>" target="_blank">Read More…</a></p>
+			<p><a class="home_spotlight_readmore ga-event" href="<?=get_permalink($spotlight->ID)?>" target="_blank" data-ga-action="Spotlight Link" data-ga-label="<?=$spotlight->post_title?>">Read More…</a></p>
 		</div>
 		<?
 	}
-	
+
 	// If neither positions are set, or the two positions conflict with each
 	// other, just display them in the order they were retrieved:
 	if (($position_one == '' && $position_two == '') || ($position_one == $position_two)) {
 		output_spotlight($spotlight_one);
 		output_spotlight($spotlight_two);
 	}
-	
+
 	// If one is set but not the other, respect the set spotlight's position
 	// and place the other one in the other slot:
 	else if ($position_one == '' && $position_two !== '') {
@@ -360,7 +360,7 @@ function frontpage_spotlights() {
 			output_spotlight($spotlight_one);
 		}
 	}
-	
+
 	// Otherwise, display them in their designated positions:
 	else {
 		if ($position_one == 'top') { // we can assume position_two is the opposite
@@ -384,51 +384,51 @@ function frontpage_spotlights() {
  **/
 function get_weather_data() {
 	$cache_key = 'weather';
-	
+
 	// Check if cached weather data already exists
 	if(($weather = get_transient($cache_key)) !== False) {
 		return $weather;
 	} else {
 		$weather = array('condition' => 'Fair', 'temp' => '80&#186;', 'img' => '34');
-		
+
 		// Set a timeout
 		$opts = array('http' => array(
 								'method'  => 'GET',
 								'timeout' => WEATHER_FETCH_TIMEOUT,
 		));
 		$context = stream_context_create($opts);
-		
+
 		// Grab the weather feed
 		$raw_weather = file_get_contents(WEATHER_URL, false, $context);
 		if ($raw_weather) {
 			$json = json_decode($raw_weather);
-			
+
 			$weather['condition'] 	= $json->condition;
 			$weather['temp']		= $json->temp;
 			$weather['img']			= (string)$json->imgCode;
-			
+
 			// The temp, condition and image code should always be set,
 			// but in case they're not, we catch them here:
-			
+
 			# Catch missing cid
 			if (!isset($weather['img']) or !$weather['img']){
 				$weather['img'] = '34';
 			}
-			
+
 			# Catch missing condition
 			if (!is_string($weather['condition']) or !$weather['condition']){
 				$weather['condition'] = 'Fair';
 			}
-			
+
 			# Catch missing temp
 			if (!isset($weather['temp']) or !$weather['temp']){
 				$weather['temp'] = '80&#186;';
 			}
 		}
-		
+
 		// Cache the new weather data
 		set_transient($cache_key, $weather, WEATHER_CACHE_DURATION);
-		
+
 		return $weather;
 	}
 }
@@ -439,7 +439,7 @@ function get_weather_data() {
  **/
 function output_weather_data($cssclass=null) {
 	$cssclass	= is_string($cssclass) ? strip_tags($cssclass) : (string)strip_tags($cssclass);
-	$weather 	= get_weather_data(); 
+	$weather 	= get_weather_data();
 	$condition 	= $weather['condition'];
 	$temp 		= $weather['temp'];
 	$img 		= $weather['img']; ?>
@@ -454,25 +454,25 @@ function output_weather_data($cssclass=null) {
  * Get and display announcements.
  * Note that, like the old Announcements advanced search, only one
  * search parameter (role, keyword, or time) can be set at a time.
- * Default (no args) returns all roles within the past week 
+ * Default (no args) returns all roles within the past week
  * (starting from Monday).
  **/
-function get_announcements($role='all', $keyword=NULL, $time='thisweek') {	
+function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	// Get some dates for meta_query comparisons:
 	$today = date('Y-m-d');
-	
+
 	$thismonday = date('Y-m-d', strtotime('monday this week'));
 	$thissunday = date('Y-m-d', strtotime($thismonday.' + 6 days'));
-		
+
 	$nextmonday = date('Y-m-d', strtotime('monday next week'));
 	$nextsunday = date('Y-m-d', strtotime($nextmonday.' + 6 days'));
-	
+
 	$firstday_thismonth = date('Y-m-d', strtotime('first day of this month'));
 	$lastday_thismonth = date('Y-m-d', strtotime('last day of this month'));
-	
+
 	$firstday_nextmonth = date('Y-m-d', strtotime('first day of next month'));
 	$lastday_nextmonth = date('Y-m-d', strtotime('last day of next month'));
-	
+
 	// Set up query args based on GET params:
 	$args = array(
 		'numberposts' => -1,
@@ -481,7 +481,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		'order' => 'ASC',
 		'meta_key' => 'announcement_start_date',
 	);
-	
+
 	// Announcement time queries should allow posts to fall within the week, even if
 	// their start and end dates do not fall immediately within the given time
 	// (allow for ongoing events that span during the given time, and then some).
@@ -510,7 +510,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		);
 		$args = array_merge($args, $role_args);
 	}
-	
+
 	elseif ($keyword !== NULL) {
 		$keyword_args = array(
 			's' => $keyword,
@@ -529,7 +529,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		);
 		$args = array_merge($args, $keyword_args);
 	}
-	
+
 	elseif ($time !== 'thisweek') {
 		switch ($time) {
 			case 'nextweek':
@@ -594,12 +594,12 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				$args = array_merge($args, $time_args);
 				break;
 			case 'thissemester':
-			
+
 				// Compare the current month to predefined month values
 				// to pull announcements from the current semester
-				
+
 				// Check for Spring Semester
-				if (CURRENT_MONTH >= SPRING_MONTH_START && CURRENT_MONTH <= SPRING_MONTH_END) {					
+				if (CURRENT_MONTH >= SPRING_MONTH_START && CURRENT_MONTH <= SPRING_MONTH_END) {
 					$time_args = array(
 						'meta_query' => array(
 							array(
@@ -683,9 +683,9 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 				$args = array_merge($args, $time_args);
 				break;
 		}
-		
+
 	}
-	
+
 	else { // default retrieval args
 		$fallback_args = array(
 			'meta_query' => array(
@@ -703,19 +703,19 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 		);
 		$args = array_merge($args, $fallback_args);
 	}
-	
+
 
 	// Fetch all announcements based on args given above:
 	$announcements = get_posts($args);
-	
+
 	if (!($announcements)) {
 		return NULL;
 	}
 	else {
 		// Add relevant metadata to each post object so they
 		// can be more easily accessed:
-		foreach ($announcements as $announcement) {	
-			$announcement->announcementStartDate 	 = get_post_meta($announcement->ID, 'announcement_start_date', TRUE);	
+		foreach ($announcements as $announcement) {
+			$announcement->announcementStartDate 	 = get_post_meta($announcement->ID, 'announcement_start_date', TRUE);
 			$announcement->announcementEndDate		 = get_post_meta($announcement->ID, 'announcement_end_date', TRUE);
 			$announcement->announcementURL			 = get_post_meta($announcement->ID, 'announcement_url', TRUE);
 			$announcement->announcementContactPerson = get_post_meta($announcement->ID, 'announcement_contact', TRUE);
@@ -725,14 +725,14 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 			$announcement->announcementRoles		 = wp_get_post_terms($announcement->ID, 'audienceroles', array("fields" => "names"));
 			$announcement->announcementKeywords		 = wp_get_post_terms($announcement->ID, 'keywords', array("fields" => "names"));
 			$announcement->announcementIsNew		 = ( date('Ymd') - date('Ymd', strtotime($announcement->post_date) ) <= 2 ) ? true : false;
-			
+
 			// Fallback for bad date ranges--force the start date to equal
 			// the end date if the start date is later than the end date
 			if ( date('Ymd', strtotime($announcement->announcementStartDate)) > date('Ymd', strtotime($announcement->announcementEndDate)) ) {
 				$announcement->announcementStartDate = $announcement->announcementEndDate;
 			}
 		}
-		
+
 		return $announcements;
 	}
 }
@@ -755,8 +755,8 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 				print ob_get_clean();
 			}
 			print '</ul>';
-			break;	
-				
+			break;
+
 		case 'thumbtacks':
 			// Grid of thumbtack-styled announcements
 			print '<div class="row">';
@@ -781,8 +781,8 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 							?>
 						</p>
 						<p><?=truncateHtml(strip_tags($announcement->post_content, 200))?></p>
-						<p class="audience"><strong>Audience:</strong> 
-						<?php 
+						<p class="audience"><strong>Audience:</strong>
+						<?php
 							if ($announcement->announcementRoles) {
 								$rolelist = '';
 								foreach ($announcement->announcementRoles as $role) {
@@ -816,8 +816,8 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 							else { print 'n/a'; }
 						?>
 						</p>
-						<p class="keywords"><strong>Keywords:</strong> 
-						<?php 
+						<p class="keywords"><strong>Keywords:</strong>
+						<?php
 							if ($announcement->announcementKeywords) {
 								$keywordlist = '';
 								foreach ($announcement->announcementKeywords as $keyword) {
@@ -828,17 +828,17 @@ function print_announcements($announcements, $liststyle='thumbtacks', $spantype=
 							else { print 'n/a'; }
 						?>
 						</p>
-										
-											
+
+
 					</div>
-				</div>	
+				</div>
 			<?php
 				print ob_get_clean();
 				$count++;
 			} // endforeach
 			print '</div>';
 			break;
-			
+
 		default:
 			break;
 	}
@@ -870,9 +870,9 @@ function announcements_to_rss($announcements) {
 			$output .= '<link>'.get_permalink($announcement->ID).'</link>';
 			$output .= '<guid>'.get_permalink($announcement->ID).'</guid>';
 			$output .= '<pubDate>'.date('r', strtotime($announcement->post_date)).'</pubDate>';
-			
-			// Announcement-specific stuff	
-			$output .= '<announcement:id>'.$announcement->ID.'</announcement:id>';	
+
+			// Announcement-specific stuff
+			$output .= '<announcement:id>'.$announcement->ID.'</announcement:id>';
 			$output .= '<announcement:postStatus>'.$announcement->post_status.'</announcement:postStatus>';
 			$output .= '<announcement:postModified>'.$announcement->post_modified.'</announcement:postModified>';
 			$output .= '<announcement:published>'.$announcement->post_date.'</announcement:published>'; // same as <pubDate>
@@ -888,33 +888,33 @@ function announcements_to_rss($announcements) {
 			$output .= '<announcement:roles>';
 				if (!empty($announcement->announcementRoles)) {
 					foreach ($announcement->announcementRoles as $role) {
-						$roles .= $role.', '; 
+						$roles .= $role.', ';
 					}
 					$roles = substr($roles, 0, -2);
-					$output .= $roles;	
+					$output .= $roles;
 				}
 			$output .= '</announcement:roles>';
 			$output .= '<announcement:keywords>';
 				if (!empty($announcement->announcementKeywords)) {
 					foreach ($announcement->announcementKeywords as $keyword) {
-						$keywords .= $keyword.', '; 
+						$keywords .= $keyword.', ';
 					}
 					$keywords = substr($keywords, 0, -2);
-					$output .= $keywords;	
+					$output .= $keywords;
 				}
 			$output .= '</announcement:keywords>';
 			$output .= '<announcement:isNew>';
 				$announcement->announcementIsNew == true ? $output .= 'true' : $output .= 'false';
 			$output .= '</announcement:isNew>';
-	
+
 		$output .= '</item>';
-		
+
 		$roles = '';
 		$keywords = '';
-		
+
 		print $output;
 	}
-			
+
 	if ($announcements !== NULL) {
 		// $announcements will always be an array of objects
 		foreach ($announcements as $announcement) {
@@ -933,10 +933,10 @@ function get_theme_option($key) {
 }
 
 /*
- * Wrap a statement in a ESI include tag with a specified duration if the 
+ * Wrap a statement in a ESI include tag with a specified duration if the
  * enable_esi theme option is enabled.
  */
-function esi_include($statementname, $argset=null) {	
+function esi_include($statementname, $argset=null) {
 	if (!$statementname) { return null; }
 
 	// Get the statement key
@@ -952,7 +952,7 @@ function esi_include($statementname, $argset=null) {
 		$argset = ($argset !== null) ? $argset = '&args='.urlencode(base64_encode($argset)) : '';
 		?>
 		<esi:include src="<?php echo ESI_INCLUDE_URL?>?statement=<?=$statementkey?><?=$argset?>" />
-		<?php 
+		<?php
 	} elseif (array_key_exists($statementkey, Config::$esi_whitelist)) {
 		$statementname = Config::$esi_whitelist[$statementkey]['name'];
 		$statementargs = Config::$esi_whitelist[$statementkey]['safe_args'];
@@ -964,7 +964,7 @@ function esi_include($statementname, $argset=null) {
 		else {
 			// Convert argset arrays to strings for easy comparison with our whitelist
 			$argset = is_array($argset) ? serialize($argset) : $argset;
-			if ($argset !== null && in_array($argset, $statementargs)) { 
+			if ($argset !== null && in_array($argset, $statementargs)) {
 				$argset = (unserialize($argset) !== false) ? unserialize($argset) : array($argset);
 				return call_user_func_array($statementname, $argset);
 			}
@@ -975,19 +975,19 @@ function esi_include($statementname, $argset=null) {
 	}
 }
 
-/** 
+/**
  * Pull recent Gravity Forms entries from a given form (intended for Feedback form.)
  * If no formid argument is provided, the function will pick the form
  * with ID of 1 by default.
  * Duration is specified in number of days.
  **/
 function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu')) {
-	
+
 	// Check that GF is actually installed
 	if (is_plugin_inactive('gravityforms/gravityforms.php')) {
 		die('Error: Gravity Forms is not activated. Please install/activate Gravity Forms and try again.');
 	}
-	
+
 	// Make sure a valid email address to send to is set
 	if (empty($to)) {
 		die('Error: No email address specified to mail to.');
@@ -995,33 +995,33 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 	if (!is_array($to)) {
 		die('Error: $to expects an array value.');
 	}
-	
+
 	// Define how far back to search for old entries
 	$dur_end_date 	= date('Y-m-d');
 	$dur_start_date = date('Y-m-d', strtotime($dur_end_date.' -'.$duration.' days'));
-	
+
 	// WPDB stuff
 	global $wpdb;
 	global $blog_id;
 	$blog_id == 1 ? $gf_table = 'wp_rg_lead' : $gf_table = 'wp_'.$blog_id.'_rg_lead'; # Y U NO USE CONSISTENT NAMING SCHEMA??
-	define( 'DIEONDBERROR', true ); 
+	define( 'DIEONDBERROR', true );
 	$wpdb->show_errors();
-	
+
 	// Get all entry IDs
-	$entry_ids = $wpdb->get_results( 
+	$entry_ids = $wpdb->get_results(
 			"
 			SELECT          id
 			FROM            ".$gf_table."
 			WHERE           form_id = ".$formid."
-			AND                     date_created >= '".$dur_start_date." 00:00:00' 
+			AND                     date_created >= '".$dur_start_date." 00:00:00'
 			AND                     date_created <= '".$dur_end_date." 23:59:59'
 			ORDER BY        date_created ASC
 			"
 	);
-	
+
 	// Begin $output
 	$output .= '<h3>Feedback Submissions for '.date('M. j, Y', strtotime($dur_start_date)).' to '.date('M. j, Y', strtotime($dur_end_date)).'</h3><br />';
-	
+
 	if (count($entry_ids) == 0) {
 		$output .= 'No submissions found for this time period.';
 	}
@@ -1029,15 +1029,15 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 		// Get field data for the entry IDs we got
 		foreach ($entry_ids as $obj) {
 			$entry = RGFormsModel::get_lead($obj->id);
-			
+
 			$output .= '<ul>';
-			
+
 			$entry_output 	= array();
 			$about_array 	= array();
 			$routes_array 	= array();
-			
+
 			// Only setup email for active entries (not trash/spam)
-			if ($entry['status'] == 'active') { 
+			if ($entry['status'] == 'active') {
 				foreach ($entry as $field=>$val) {
 					// Our form fields names are stored as numbers. The naming schema is as follows:
 					// 1 			- Name
@@ -1045,17 +1045,17 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 					// 3.1 to 3.7 	- 'Tell Us About Yourself' values
 					// 4.1 to 4.7	- 'Routes to' values
 					// 5			- Comment
-					
+
 					// Entry ID
 					$entry_output['id'] = $obj->id;
-					
+
 					// Date
 					if ($field == 'date_created') {
 						// Trim off seconds from date_created
 						$val = date('M. j, Y', strtotime($val));
 						$entry_output['date'] .= $val;
 					}
-					
+
 					// Name
 					if ($field == 1) {
 						if ($val) {
@@ -1087,7 +1087,7 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 						}
 					}
 				}
-			
+
 				$output .= '<li><strong>Entry: </strong>#'.$entry_output['id'].'</li>';
 				$output .= '<li><strong>From: </strong>'.$entry_output['name'].' < '.$entry_output['email'].' ></li>';
 				$output .= '<li><strong>Date Submitted: </strong>'.$entry_output['date'].'</li>';
@@ -1096,40 +1096,40 @@ function get_feedback_entries($formid=1, $duration=7, $to=array('webcom@ucf.edu'
 					$output .= '<li>'.$about.'</li>';
 				}
 				$output .= '</ul></li>';
-				
+
 				$output .= '<li><strong>Route To: </strong><br/><ul>';
 				foreach ($routes_array as $routes) {
 					$output .= '<li>'.$routes.'</li>';
 				}
 				$output .= '</ul></li>';
-				
+
 				$output .= '<li><strong>Comments: </strong><br/>'.$entry_output['comment'].'</li>';
-				
+
 				$output .= '</ul><hr />';
 			}
 		}
-		
-	}	
+
+	}
 	// E-mail setup
 	$subject = 'UCF Comments and Feedback for '.date('M. j, Y', strtotime($dur_start_date)).' to '.date('M. j, Y', strtotime($dur_end_date));
 	$message = $output;
-	
+
 	// Change e-mail content type to HTML
 	add_filter('wp_mail_content_type', create_function('', 'return "text/html"; '));
 
 	// Send e-mail; return success or error
 	$results = wp_mail( $to, $subject, $message );
-		
+
 	if ($results == true) {
 		return 'Mail successfully sent at '.date('r');
 	}
 	else {
 		return 'wp_mail returned false; mail did not send.';
 	}
-	
+
 }
 
-/** 
+/**
  * Query the search service with specified params
  * @return array
  * @author Chris Conover
@@ -1158,7 +1158,7 @@ function query_search_service($params) {
  * an invalid URL is requested.  WordPress will redirect to 404.php instead.
  *
  * See http://wordpress.stackexchange.com/questions/3326/301-redirect-instead-of-404-when-url-is-a-prefix-of-a-post-or-page-name
- **/ 
+ **/
 function no_redirect_on_404($redirect_url) {
     if (is_404()) {
         return false;
@@ -1168,10 +1168,10 @@ function no_redirect_on_404($redirect_url) {
 add_filter('redirect_canonical', 'no_redirect_on_404');
 
 
-/** 
+/**
  * Because autosaving is handled differently than standard post saving,
- * our serialized file metadata for centerpiece images gets totally lost 
- * when trying to preview drafts.  We're going to disable autosaving on 
+ * our serialized file metadata for centerpiece images gets totally lost
+ * when trying to preview drafts.  We're going to disable autosaving on
  * centerpieces only to allow for previews that don't wipe this data.
  **/
 function admin_centerpiece_enqueue_scripts() {
@@ -1222,18 +1222,18 @@ function page_specific_stylesheet($pageid) {
  **/
 function kill_unused_templates() {
 	global $wp_query, $post;
- 
+
 	if (is_author() || is_attachment() || is_day() || is_search()) {
 		wp_redirect(home_url());
 	}
- 
+
 	if (is_feed()) {
 		$author     = get_query_var('author_name');
 		$attachment = get_query_var('attachment');
 		$attachment = (empty($attachment)) ? get_query_var('attachment_id') : $attachment;
 		$day        = get_query_var('day');
 		$search     = get_query_var('s');
- 
+
 		if (!empty($author) || !empty($attachment) || !empty($day) || !empty($search)) {
 			wp_redirect(home_url());
 			$wp_query->is_feed = false;
@@ -1254,5 +1254,630 @@ function add_id_to_ucfhb($url) {
     return $url;
 }
 add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+
+
+/**
+ * Returns an array of post groups, grouped by a specified taxonomy's terms.
+ * Each key is a taxonomy term ID; each value is an array of post objects.
+ **/
+function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
+	$groups = array();
+
+	// Get all taxonomy terms.
+	$args = array('fields' => 'ids');
+	$terms = get_terms($tax, $args);
+
+	if ($terms) {
+		// 'include' get_terms arg is not working. Filter here instead:
+		foreach ($terms as $term) {
+			$term = intval($term);
+			if (is_array($specific_terms)) {
+				if (in_array($term, $specific_terms)) {
+					$groups[intval($term)] = array();
+				}
+			}
+			else {
+				$groups[intval($term)] = array();
+			}
+		}
+
+		// Loop through each returned post and get its term(s).
+		// Group the post in the $groups array.
+		if ($posts) {
+			foreach ($posts as $post) {
+				$post_terms = wp_get_post_terms($post->ID, $tax, array('fields' => 'ids'));
+				if ($post_terms) {
+					foreach ($post_terms as $t) {
+						$t = intval($t);
+						if (isset($groups[$t])) {
+							array_push($groups[$t], $post);
+						}
+						else {
+							$groups[$t] = array($post);
+						}
+					}
+				}
+			}
+
+			// Remove any terms with no posts.
+			foreach ($groups as $term=>$posts) {
+				if (empty($groups[$term])) { unset($groups[$term]); }
+			}
+
+			return $groups;
+		}
+		else { return null; }
+	}
+	else { return null; }
+}
+
+
+/**
+ * Fetch a set of Degree Programs.
+ **/
+function get_degrees() {
+	// Set the view.  The view determines what set of data needs to be returned
+	// and how that data should be grouped/ordered.
+	// Available views are defined in $all_views.
+	$view = $_GET['view'] ? $_GET['view'] : 'browse_by_name';
+
+	// Define which of our Program types are valid.  (These are highest-level parent terms
+	// of the Program Type taxonomy.)
+	$all_program_type_parents = array('undergraduate-program', 'graduate-program');
+
+	// Define which of our Degree types are valid.  (These are the 2nd level terms of
+	// the Program Type taxonomy.)
+	$all_degree_types = array('undergraduate-degree', 'minor', 'graduate-degree', 'certificate');
+
+
+	// Determine some variables based on query args.  Set defaults if no values are set.
+	$program_type	     = in_array($_GET['program_type'], $all_program_type_parents) ? $_GET['program_type'] : null;
+	$degree_type	     = in_array($_GET['degree_type'], $all_degree_types) ? $_GET['degree_type'] : 'undergraduate-degree';
+	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'title';
+	$order			     = ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC') ? $_GET['order'] : 'ASC';
+	$flip_order		     = ($order == 'ASC') ? 'DESC' : 'ASC'; // opposite of $order
+
+	$s                   = $_GET['search']       ? $_GET['search']        : null;
+	$search_query_pretty = !empty($s)            ? htmlentities($s)       : null;
+
+	// Define a default list of get_posts() args.
+	$default_view_params = array(
+		'post_type' => 'degree',
+		'post_status' => 'publish',
+		'numberposts' => -1,
+		'orderby' => $orderby,
+		'order' => $order,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'program_types',
+				'field' => 'slug',
+				'terms' => $degree_type,
+				'include_children' => true // Make sure we get Undergraduate Degree children (Articulated/Accelerated)
+			),
+		),
+	);
+
+	// Search-specific variable overrides
+	if (!empty($s)) {
+		$program_type = empty($program_type) ? $all_program_type_parents : $program_type;
+	}
+
+	// Define per-view get_posts() args.
+	$all_views = array(
+		'browse_by_name' => $default_view_params,
+		'browse_by_college' => $default_view_params, // Needs to be sorted later
+		'browse_by_hours' => array_merge($default_view_params, array(
+			'meta_key' => 'degree_hours',
+			'orderby' => 'meta_value'
+		)),
+	);
+
+	// Get the posts.  Override any set view with search-specific args, if this is a
+	// set of search results.
+	if (isset($all_views[$view])) {
+		if ($s) {
+			$all_views[$view] = array_merge($all_views[$view], array(
+				's' => $s,
+				'tax_query' => array(
+					// Overrides existing tax_query.
+					array(
+						'taxonomy' => 'program_types',
+						'field' => 'slug',
+						'terms' => $program_type,
+						'include_children' => true,
+					)
+				),
+			));
+		}
+		$posts = get_posts($all_views[$view]);
+	}
+	else { return 'Invalid view type.'; }
+
+
+	// Process the returned posts.
+	$data = array(
+		'view-info' => array(
+			'view' => $view,
+			'all-program_type-parents' => $all_program_type_parents,
+			'all-degree-types' => $all_degree_types,
+			'program_type' => $program_type,
+			'degree_type' => $degree_type,
+			'orderby' => $orderby,
+			'order' => $order,
+			'flip-order' => $flip_order,
+			's' => $s,
+			'search-query-pretty' => $search_query_pretty,
+			'grouping-tax' => null,
+		),
+		'posts' => null,
+	);
+
+	if ($posts) {
+		// Assign post meta data we need as properties of each post object for easy access later.
+		foreach ($posts as $post) {
+			$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
+			$post->degree_description = get_post_meta($post->ID, 'degree_description', TRUE);
+			$post->degree_website = get_post_meta($post->ID, 'degree_website', TRUE);
+			$post->tax_college = wp_get_post_terms($post->ID, 'colleges', array('fields' => 'names'));
+			$post->tax_department = wp_get_post_terms($post->ID, 'departments', array('fields' => 'names'));
+			$post->tax_program_type = wp_get_post_terms($post->ID, 'program_types', array('fields' => 'names'));
+		}
+
+		// Further group our returned posts.
+		$grouped_posts = null;
+		$grouping_tax = null; // The type of taxonomy by which posts are grouped.
+		switch ($view) {
+			case 'browse_by_college':
+				$grouping_tax = 'colleges';
+				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts);
+				break;
+			default:
+				$grouping_tax = 'program_types';
+				$include_terms = (empty($s)) ? $degree_type : $program_type;
+
+				// Get Program Type term ID(s) to pass to group_posts_by_tax_terms()
+				$term_ids = array();
+				if (is_array($include_terms)) {
+					foreach ($include_terms as $slug) {
+						$term_ids[] = intval(get_term_by('slug', $slug, $grouping_tax)->term_id);
+					}
+				}
+				else {
+					$term_ids[] = intval(get_term_by('slug', $include_terms, $grouping_tax)->term_id);
+				}
+
+				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts, $term_ids);
+				break;
+		}
+		$data['view-info']['grouping-tax'] = $grouping_tax;
+		$data['posts'] = $grouped_posts;
+	}
+
+	// Return the grouped posts and view-related variables.
+	return $data;
+}
+
+
+/**
+ * Display a list of degrees with posts returned from get_degrees().
+ **/
+function display_degrees($data) {
+	// Add selected state to Search form program type dropdown
+	$search_program_undergrad_sel = $search_program_all_sel = $search_program_grad_sel = '';
+	$search_program_active_sel = 'selected="selected"';
+
+	if (isset($data['view-info']['program_type'])) {
+		if (is_array($data['view-info']['program_type'])) {
+			$search_program_all_sel = $search_program_active_sel;
+		}
+		else {
+			switch ($data['view-info']['program_type']) {
+				case 'undergraduate-program':
+					$search_program_undergrad_sel = $search_program_active_sel;
+					break;
+				case 'graduate-program':
+					$search_program_grad_sel = $search_program_active_sel;
+					break;
+				default:
+					break;
+			}
+		}
+	}
+	else {
+		$search_program_all_sel = $search_program_active_sel;
+	}
+
+	// Add active state class to Browse All degree type navigation links.
+	// Do not apply class if search results are returned.
+	$browse_majors_class = $browse_minors_class = $browse_grad_class = $browse_cert_class = '';
+	$browse_active_class = 'active';
+	if (empty($data['view-info']['s'])) {
+		if (isset($data['view-info']['degree_type'])) {
+			switch ($data['view-info']['degree_type']) {
+				case 'minor':
+					$browse_minors_class = $browse_active_class;
+					break;
+				case 'graduate-degree':
+					$browse_grad_class = $browse_active_class;
+					break;
+				case 'certificate':
+					$browse_cert_class = $browse_active_class;
+					break;
+				default:
+					$browse_majors_class = $browse_active_class;
+					break;
+			}
+		}
+	}
+
+	// Generate $results_title string based on current view for <h2> ("Results For:" heading)
+	$results_title = '';
+	if (empty($data['view-info']['s'])) {
+		$degree_type = get_term_by('slug', $data['view-info']['degree_type'], 'program_types')->name;
+		$results_title = 'All '.$degree_type.'s';
+	}
+	else {
+		$results_title = '&ldquo;'.$data['view-info']['search-query-pretty'].'&rdquo;';
+	}
+
+	if (is_array($data)) {
+		// Create links per sort option (Name/College/Hours)
+		$permalink = $_SERVER[REQUEST_URI];
+		if (strpos($permalink, 'order=').count < 1) {
+			add_query_arg(array('order' => $data['view-info']['order']), $permalink);
+		}
+		$reverse_order_url = add_query_arg(array('order' => $data['view-info']['flip-order']), $permalink);
+
+		$sort_name_url    = ($data['view-info']['view'] == 'browse_by_name') ? $reverse_order_url : add_query_arg(array('view' => 'browse_by_name'), $permalink);
+		$sort_college_url = add_query_arg(array('view' => 'browse_by_college'), $permalink);
+		$sort_hours_url   = ($data['view-info']['view'] == 'browse_by_hours') ? $reverse_order_url : add_query_arg(array('view' => 'browse_by_hours'), $permalink);
+
+		$sort_name_classes = $sort_college_classes = $sort_hours_classes = '';
+
+		if ($data['view-info']['view'] == 'browse_by_college') {
+			$sort_college_classes .= 'active';
+		}
+		else if ($data['view-info']['view'] == 'browse_by_hours') {
+			$sort_hours_classes .= 'active';
+			if ($data['view-info']['flip-order'] == 'ASC') {
+				$sort_hours_classes .= ' dropup';
+			}
+		}
+		else { // 'search' AND 'browse_by_name'
+			$sort_name_classes .= 'active';
+			if ($data['view-info']['flip-order'] == 'ASC') {
+				$sort_name_classes .= ' dropup';
+			}
+		}
+	}
+
+	ob_start(); ?>
+
+	<div id="filters">
+		<span class="degree-search-label">Search:</span>
+		<div class="controls controls-row">
+			<form id="course_search_form" action="<?=get_permalink()?>" class="form-search">
+				<select name="program_type" class="span4">
+					<option <?=$search_program_undergrad_sel?> value="undergraduate-program">Undergraduate Programs Only</option>
+					<option <?=$search_program_all_sel?> value="">Undergraduate and Graduate Programs</option>
+					<option <?=$search_program_grad_sel?> value="graduate-program">Graduate Programs Only</option>
+				</select>
+				<div class="input-append span3">
+					<?php $search_query = isset($data['view-info']['search-query-pretty']) ? $data['view-info']['search-query-pretty'] : ''; ?>
+					<input type="text" class="search-query" name="search" value="<?=$search_query?>" />
+					<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="browse">
+		<div class="row">
+			<div class="span10">
+				<span class="degree-search-label">Browse All:</span>
+				<ul class="nav nav-pills" role="navigation" id="degree-type-list">
+					<li class="<?=$browse_majors_class?>">
+						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=undergraduate-degree">Undergraduate Degrees</a>
+					</li>
+					<li class="<?=$browse_minors_class?>">
+						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=minor">Minors</a>
+					</li>
+					<li class="<?=$browse_grad_class?>">
+						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=graduate-degree">Graduate Degrees</a>
+					</li>
+					<li class="<?=$browse_cert_class?>">
+						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=certificate">Certificates</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+		<?php
+		if (is_array($data)) {
+			// Get total number of posts.
+			$results_count = 0;
+			if ($data['posts']) {
+				foreach ($data['posts'] as $group) {
+					foreach ($group as $post) {
+						$results_count++;
+					}
+				}
+			} ?>
+
+		<div id="results">
+			<div class="row">
+				<h2 id="results-header" class="span10">
+					<?=$results_count?> Result<?php if ($results_count == 0 || $results_count > 1) { ?>s<?php } ?> For:
+					<span class="results-header-alt">
+						<?=$results_title?>
+					</span>
+				</h2>
+
+				<div class="span10">
+					<ul class="nav nav-tabs" id="degree-type-sort">
+						<li id="degree-type-sort-header">Sort by:</li>
+						<li class="dropdown <?=$sort_name_classes?>">
+							<a class="print-noexpand" href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
+						</li>
+						<li class="dropdown <?=$sort_college_classes?>">
+							<a class="print-noexpand" href="<?=$sort_college_url?>">College</a>
+						</li>
+						<li class="dropdown <?=$sort_hours_classes?>">
+							<a class="print-noexpand" href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+			<?php
+			if (!empty($data['posts'])) {
+				foreach ($data['posts'] as $group=>$posts) {
+					$term = get_term($group, $data['view-info']['grouping-tax']);
+
+					// Pluralize term if the grouping taxonomy is not by College
+					if ($data['view-info']['grouping-tax'] !== 'colleges') {
+						$term = $term->name.'s';
+					}
+					else { $term = $term->name; }
+					?>
+
+					<h3 class="program-type"><?=$term?></h3>
+					<ul class="row results-list">
+					<?php
+					foreach ($posts as $post) {
+						// Get permalink to landing page for a single degree program.
+						// Graduate programs should link to the degree_website meta value.
+						$single_url = null;
+						if (get_permalink($post->ID) && $post->tax_program_type[0] !== 'Graduate Degree' && $post->tax_program_type[0] !== 'Certificate') {
+							$single_url = get_permalink($post->ID);
+						}
+						else {
+							$single_url = $post->degree_website;
+						}
+						?>
+						<li class="program span10">
+							<div class="row">
+								<div class="span7">
+									<?php if ($single_url) { ?>
+									<a href="<?=$single_url?>" <?php if ($single_url == $post->degree_website) { ?> class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+									<?php } ?>
+										<h4 class="name"><?=$post->post_title?></h4>
+									<?php if ($single_url) { ?>
+									</a>
+									<?php } ?>
+
+								<?php if ($post->tax_college[0]) { ?>
+									<span class="name_label">College</span>
+									<span class="college"><?=$post->tax_college[0]?></span>
+								<?php } ?>
+
+								<?php if ($post->tax_department[0]) { ?>
+									<span class="name_label">Department</span>
+									<span class="department">
+										<?php if ($post->degree_website) { ?><a href="<?=$post->degree_website?>"><?php } ?>
+										<?=$post->tax_department[0]?>
+										<?php if ($post->degree_website) { ?></a><?php } ?>
+									</span>
+								<?php } ?>
+
+								</div>
+
+								<div class="credits-wrap">
+									<span class="program-type-alt"><?=$post->tax_program_type[0]?></span>
+
+									<?php if (!empty($post->degree_hours)) {
+										if (!empty($post->degree_website) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
+										<a href="<?=$post->degree_website?>" <?php if ($single_url == $post->degree_website) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+											<span class="credits label label-warning">Click for credit hours</span>
+										</a>
+										<?php } elseif (intval($post->degree_hours) >= 100) { ?>
+										<span class="credits label label-info"><?=intval($post->degree_hours)?> credit hours</span>
+										<?php } elseif (intval($post->degree_hours) > 1 && intval($post->degree_hours) < 100) { ?>
+										<span class="credits label label-success"><?=intval($post->degree_hours)?> credit hours</span>
+									<?php }
+									} else { ?>
+										<span class="credits label">Credit hours n/a</span>
+									<?php } ?>
+								</div>
+
+							</div>
+						</li>
+					<?php
+					}
+					?>
+					</ul>
+					<hr />
+				<?php
+				}
+			} else { ?>
+			<p class="error">No results found.</p>
+			<?php
+			}
+			?>
+
+		<?php
+		}
+		else { ?>
+		<p class="error">
+			<strong>ERROR:</strong> <?=$data?>
+		</p>
+		<?php
+		} ?>
+
+	<?php
+	print ob_get_clean();
+}
+
+
+/**
+ * Generates a title based on context page is viewed.  Stolen from Thematic
+ **/
+function header_title($title, $separator){
+	global $post;
+	$site_name = get_bloginfo('name');
+
+	if ( is_single() ) {
+		$content = single_post_title('', FALSE);
+	}
+	elseif ( is_home() || is_front_page() ) {
+		$content = get_bloginfo('description');
+	}
+	elseif ( is_page() ) {
+		$substitute_title = get_post_meta(get_the_ID(), 'page_title', true);
+		if (!empty($substitute_title)) {
+			$content = $substitute_title;
+		}
+		else {
+			$content = single_post_title('', FALSE);
+		}
+	}
+	elseif ( is_search() ) {
+		$content = __('Search Results for:');
+		$content .= ' ' . esc_html(stripslashes(get_search_query()));
+	}
+	elseif ( is_category() ) {
+		$content = __('Category Archives:');
+		$content .= ' ' . single_cat_title("", false);;
+	}
+	elseif ( is_404() ) {
+		$content = __('Not Found');
+	}
+	else {
+		$content = get_bloginfo('description');
+	}
+
+	if (get_query_var('paged')) {
+		$content .= ' ' .$separator. ' ';
+		$content .= 'Page';
+		$content .= ' ';
+		$content .= get_query_var('paged');
+	}
+
+	if($content) {
+		if (is_home() || is_front_page()) {
+			$elements = array(
+				'site_name' => $site_name,
+				'separator' => $separator,
+				'content' => $content,
+			);
+		} else {
+			$elements = array(
+				'content' => $content,
+			);
+		}
+	} else {
+		$elements = array(
+			'site_name' => $site_name,
+		);
+	}
+
+	// But if they don't, it won't try to implode
+	if(is_array($elements)) {
+		$doctitle = implode(' ', $elements);
+	}
+	else {
+		$doctitle = $elements;
+	}
+
+	$doctitle = '<title>'.$doctitle.'</title>';
+
+	return $doctitle;
+}
+add_filter('wp_title', 'header_title', 10, 2); // Allow overriding by SEO plugins
+
+
+/**
+ * Generates page <title> tag for Degree Program post type.
+ **/
+function header_title_degree_programs($title, $separator) {
+	global $post;
+
+	if ($post->post_type == 'degree') {
+		$title = 'Degree Program '.$separator.' '.single_post_title('', FALSE);
+	}
+
+	return '<title>'.$title.'</title>';
+}
+add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
+
+
+/**
+ * Generates page <title> tag for Degree Search views.
+ **/
+function header_title_degree_search($title, $separator) {
+	global $post;
+
+	// Custom page overrides here (necessary for Degree Search)
+	if ($post->ID == get_page_by_title('Degree Search')->ID) {
+		$content = 'Degree Search';
+		$degree_type = $_GET['degree_type'];
+		$browse_by = $_GET['view'];
+		$degree_title = null;
+		$degree_subtitle = null;
+
+		if ($degree_type) {
+			switch ($degree_type) {
+				case 'undergraduate-degree':
+					$degree_title = 'All Majors';
+					break;
+				case 'minor':
+					$degree_title = 'All Minors';
+					break;
+				case 'graduate-degree':
+					$degree_title = 'All Graduate Degrees';
+					break;
+				case 'certificate':
+					$degree_title = 'All Certificates';
+					break;
+				default:
+					break;
+			}
+			if ($degree_title) {
+				$content .= ' '.$separator.' '.$degree_title;
+			}
+		}
+		if ($browse_by) {
+			switch ($browse_by) {
+				case 'browse_by_college':
+					$degree_subtitle = 'by College';
+					break;
+				case 'browse_by_hours':
+					$degree_subtitle = 'by Hours';
+					break;
+				default:
+					break;
+			}
+			if ($degree_subtitle) {
+				$content .= ' '.$degree_subtitle;
+			}
+		}
+
+		$title = $content;
+	}
+	return '<title>'.$title.'</title>';
+}
+add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
 
 ?>

@@ -34,7 +34,8 @@ abstract class CustomTaxonomy {
 		$update_count_callback = '',
 		$rewrite               = True,
 		$query_var             = NULL,
-		$capabilities          = Array();
+		$capabilities          = Array(),
+		$show_admin_column     = False;
 	
 	function __construct() {
 		if(is_null($this->show_in_name_menus)) $this->show_in_name_menus = $this->public;
@@ -79,7 +80,8 @@ abstract class CustomTaxonomy {
 				'update_count_callback' => $this->options('update_count_callback'),
 				'rewrite'               => $this->options('rewrite'),
 				'query_var'             => $this->options('query_var'),
-				'capabilities'          => $this->options('capabilities')
+				'capabilities'          => $this->options('capabilities'),
+				'show_admin_column' 	=> $this->options('show_admin_column'),
 			);
 		register_taxonomy($this->options('name'), $this->options('object_type'), $args);
 	}
@@ -137,7 +139,7 @@ class Keywords extends CustomTaxonomy
 
 
 /**
- * Describes keywords for announcements
+ * Describes audience types for announcements
  *
  * @author Jo Greybill
  **/
@@ -160,4 +162,81 @@ class AudienceRoles extends CustomTaxonomy
 		$hierarchical = True;
 } // END class 
 
+
+/**
+ * Describes Program categorizations for Degree Programs
+ *
+ * @author Jo Dickson
+ **/
+class ProgramTypes extends CustomTaxonomy
+{
+	public
+		$name               = 'program_types',
+		$general_name       = 'Program Types',
+		$singular_name      = 'Program Type',
+		$search_items       = 'Search Program Types',
+		$popular_items      = 'Popular Program Types',
+		$all_times          = 'All Program Types',
+		$parent_item        = 'Parent Program Type',
+		$parent_item_colon  = 'Parent Program Type:',
+		$edit_item          = 'Edit Program Type',
+		$update_item        = 'Update Program Type',
+		$add_new_item       = 'Add New Program Type',
+		$new_item_name      = 'New Program Type',
+		
+		$hierarchical = True,
+		$show_admin_column = True;
+} // END class 
+
+
+/**
+ * Describes university colleges.
+ *
+ * @author Jo Dickson
+ **/
+class Colleges extends CustomTaxonomy
+{
+	public
+		$name               = 'colleges',
+		$general_name       = 'Colleges',
+		$singular_name      = 'College',
+		$search_items       = 'Search Colleges',
+		$popular_items      = 'Popular Colleges',
+		$all_times          = 'All Colleges',
+		$parent_item        = 'Parent College',
+		$parent_item_colon  = 'Parent College:',
+		$edit_item          = 'Edit College',
+		$update_item        = 'Update College',
+		$add_new_item       = 'Add New College',
+		$new_item_name      = 'New College',
+		
+		$hierarchical = True,
+		$show_admin_column = True;
+} // END class 
+
+
+/**
+ * Describes university departments.
+ *
+ * @author Jo Dickson
+ **/
+class Departments extends CustomTaxonomy
+{
+	public
+		$name               = 'departments',
+		$general_name       = 'Departments',
+		$singular_name      = 'Department',
+		$search_items       = 'Search Departments',
+		$popular_items      = 'Popular Departments',
+		$all_times          = 'All Departments',
+		$parent_item        = 'Parent Department',
+		$parent_item_colon  = 'Parent Department:',
+		$edit_item          = 'Edit Department',
+		$update_item        = 'Update Department',
+		$add_new_item       = 'Add New Department',
+		$new_item_name      = 'New Department',
+		
+		$hierarchical = True,
+		$show_admin_column = True;
+} // END class 
 ?>

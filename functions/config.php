@@ -123,13 +123,17 @@ Config::$custom_post_types = array(
 	'Subheader',
 	'AZIndexLink',
 	'Announcement',
-	'Post'
+	'Post',
+	'Degree'
 );
 
 Config::$custom_taxonomies = array(
 	'OrganizationalGroups',
 	'Keywords',
-	'AudienceRoles'
+	'AudienceRoles',
+	'ProgramTypes',
+	'Colleges',
+	'Departments'
 );
 
 Config::$body_classes = array('default');

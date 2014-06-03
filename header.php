@@ -4,39 +4,33 @@
 		<?="\n".header_()."\n"?>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<?php if(GA_ACCOUNT or CB_UID):?>
-		
+
 		<script type="text/javascript">
 			var _sf_startpt = (new Date()).getTime();
 			<?php if(GA_ACCOUNT):?>
-			
 			var GA_ACCOUNT  = '<?=GA_ACCOUNT?>';
-			var _gaq        = _gaq || [];
-			_gaq.push(['_setAccount', GA_ACCOUNT]);
-			_gaq.push(['_setDomainName', 'none']);
-			_gaq.push(['_setAllowLinker', true]);
-			_gaq.push(['_trackPageview']);
 			<?php endif;?>
 			<?php if(CB_UID):?>
-			
+
 			var CB_UID      = '<?=CB_UID?>';
 			var CB_DOMAIN   = '<?=CB_DOMAIN?>';
 			<?php endif?>
-			
+
 		</script>
 		<?php endif;?>
 
 		<!--[if IE]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
+
 		<?php if (is_page()) { esi_include('page_specific_stylesheet', $post->ID); } ?>
-		
+
 		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
 			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>
 		<?php } ?>
-		
+
 		<script type="text/javascript">
-			<?php if (is_page('Post An Announcement')) { 
+			<?php if (is_page('Post An Announcement')) {
 				$keywords = '';
 				foreach (get_terms(array('keywords')) as $term) {
 					$keywords .= '"'.$term->name.'", ';
@@ -48,7 +42,7 @@
 				var gfcpt_tag_taxonomies = [];
 				gfcpt_tag_taxonomies["keywords"] = [<?=$keywords?>];
 			<?php } ?>
-		
+
 			var PostTypeSearchDataManager = {
 				'searches' : [],
 				'register' : function(search) {
@@ -67,10 +61,10 @@
 			var PRINT_HEADER_IMG			= '<?php echo THEME_IMG_URL.'/ucflogo-print.png'; ?>';
 
 		</script>
-		
+
 	</head>
 	<body class="<?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>">
-		
+
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
 				<div class="span2 alert-icon-wrap">
@@ -104,10 +98,10 @@
 			<?php } ?>
 			<div id="header-nav-wrap" role="navigation" class="screen-only">
 				<?=wp_nav_menu(array(
-					'theme_location' => 'header-menu', 
-					'container' => 'false', 
-					'menu_class' => 'menu '.get_header_styles(), 
-					'menu_id' => 'header-menu', 
+					'theme_location' => 'header-menu',
+					'container' => 'false',
+					'menu_class' => 'menu '.get_header_styles(),
+					'menu_id' => 'header-menu',
 					'walker' => new Bootstrap_Walker_Nav_Menu(),
 					'before' => '<strong>',
 					'after' => '</strong>',
