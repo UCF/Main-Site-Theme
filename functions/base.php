@@ -994,11 +994,10 @@ function sc_object_list($attrs, $options = array()){
 		$params['order'] = $class->default_order;
 	}
 
-	# get taxonomies and translation
+	# get taxonomies and translation, if necessary
 	$translate = array(
 		'tags' => 'post_tag',
-		'categories' => 'category',
-		'org_groups' => 'org_groups'
+		'categories' => 'category'
 	);
 	$taxonomies = array_diff(array_keys($attrs), array_keys($default_attrs));
 	
