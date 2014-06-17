@@ -1319,7 +1319,7 @@ function get_degrees() {
 	// Set the view.  The view determines what set of data needs to be returned
 	// and how that data should be grouped/ordered.
 	// Available views are defined in $all_views.
-	$view = $_GET['view'] ? $_GET['view'] : 'browse_by_name';
+	$current_view = $_GET['current_view'] ? $_GET['current_view'] : 'browse_by_name';
 
 	// Define which of our Program types are valid.  (These are highest-level parent terms
 	// of the Program Type taxonomy.)
@@ -1374,9 +1374,9 @@ function get_degrees() {
 
 	// Get the posts.  Override any set view with search-specific args, if this is a
 	// set of search results.
-	if (isset($all_views[$view])) {
+	if (isset($all_views[$current_view])) {
 		if ($s) {
-			$all_views[$view] = array_merge($all_views[$view], array(
+			$all_views[$current_view] = array_merge($all_views[$current_view], array(
 				's' => $s,
 				'tax_query' => array(
 					// Overrides existing tax_query.
@@ -1389,7 +1389,7 @@ function get_degrees() {
 				),
 			));
 		}
-		$posts = get_posts($all_views[$view]);
+		$posts = get_posts($all_views[$current_view]);
 	}
 	else { return 'Invalid view type.'; }
 
@@ -1397,7 +1397,7 @@ function get_degrees() {
 	// Process the returned posts.
 	$data = array(
 		'view-info' => array(
-			'view' => $view,
+			'current_view' => $current_view,
 			'all-program_type-parents' => $all_program_type_parents,
 			'all-degree-types' => $all_degree_types,
 			'program_type' => $program_type,
@@ -1426,7 +1426,7 @@ function get_degrees() {
 		// Further group our returned posts.
 		$grouped_posts = null;
 		$grouping_tax = null; // The type of taxonomy by which posts are grouped.
-		switch ($view) {
+		switch ($current_view) {
 			case 'browse_by_college':
 				$grouping_tax = 'colleges';
 				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts);
@@ -1528,16 +1528,16 @@ function display_degrees($data) {
 		}
 		$reverse_order_url = add_query_arg(array('order' => $data['view-info']['flip-order']), $permalink);
 
-		$sort_name_url    = ($data['view-info']['view'] == 'browse_by_name') ? $reverse_order_url : add_query_arg(array('view' => 'browse_by_name'), $permalink);
-		$sort_college_url = add_query_arg(array('view' => 'browse_by_college'), $permalink);
-		$sort_hours_url   = ($data['view-info']['view'] == 'browse_by_hours') ? $reverse_order_url : add_query_arg(array('view' => 'browse_by_hours'), $permalink);
+		$sort_name_url    = ($data['view-info']['current_view'] == 'browse_by_name') ? $reverse_order_url : add_query_arg(array('current_view' => 'browse_by_name'), $permalink);
+		$sort_college_url = add_query_arg(array('current_view' => 'browse_by_college'), $permalink);
+		$sort_hours_url   = ($data['view-info']['current_view'] == 'browse_by_hours') ? $reverse_order_url : add_query_arg(array('current_view' => 'browse_by_hours'), $permalink);
 
 		$sort_name_classes = $sort_college_classes = $sort_hours_classes = '';
 
-		if ($data['view-info']['view'] == 'browse_by_college') {
+		if ($data['view-info']['current_view'] == 'browse_by_college') {
 			$sort_college_classes .= 'active';
 		}
-		else if ($data['view-info']['view'] == 'browse_by_hours') {
+		else if ($data['view-info']['current_view'] == 'browse_by_hours') {
 			$sort_hours_classes .= 'active';
 			if ($data['view-info']['flip-order'] == 'ASC') {
 				$sort_hours_classes .= ' dropup';

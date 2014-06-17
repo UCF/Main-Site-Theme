@@ -1514,6 +1514,7 @@ class Degree extends CustomPostType{
 		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True,
+		$use_shortcode  = True,
 		$taxonomies		= array('program_types', 'colleges', 'departments');
 	
 	public function fields(){
