@@ -934,7 +934,6 @@ li.tagit-new input {
 .ie7 #academics-search #filters .input-append .btn { margin-top: 1px; }
 .ie7 #academics-search #filters .input-append .btn .hidden-phone { padding-left: 5px; }
 
-#academics-search #browse { }
 #academics-search #browse #degree-type-header { display: block; float: left; padding-top: 8px; }
 #academics-search #browse ul#degree-type-list { float: left; margin-left: 15px; }
 
@@ -943,7 +942,9 @@ li.tagit-new input {
 #academics-search #results #results-header .results-header-alt { font-style: italic; font-weight: normal; padding-left: 5px; font-size: 20px; }
 #academics-search #results #degree-type-sort #degree-type-sort-header { padding: 9px 15px 0 0; font-weight: bold; }
 
-#academics-search .program-type { 
+#academics-search .more-details { text-align:center; }
+
+.degree-list-heading { 
 	font-family: 'Helvetica-Neue', Helvetica, sans-serif; 
 	font-weight: 300; 
 	font-size: 22px; 
@@ -952,50 +953,48 @@ li.tagit-new input {
 	margin-top: 15px;
 }
 
-#academics-search ul.results-list { list-style-type: none; margin-top: 0; margin-left: -25px; }
-#academics-search ul.results-list .program { padding: 15px; width: 760px; }
-#academics-search ul.results-list .program:nth-child(2n+1) { background: #eee; }
+ul.degree-results-list { list-style-type: none; margin-top: 0; margin-left: -25px; }
+ul.degree-results-list .program { padding: 15px; width: 760px; }
+ul.degree-results-list .program:nth-child(2n+1) { background: #eee; }
 
-#academics-search ul.results-list .program .name { margin-bottom: 4px; }
-.ie7 #academics-search ul.results-list .program > .row > div > a,
-.ie8 #academics-search ul.results-list .program > .row > div > a { display: block; height: 22px; border-bottom: 0 !important; }
-#academics-search ul.results-list .program a .name { color: #660000; }
-#academics-search ul.results-list .program a .name:hover { color: #E50606; }
+ul.degree-results-list .program .name { margin-bottom: 4px; }
+.ie7 ul.degree-results-list .program > .row > div > a,
+.ie8 ul.degree-results-list .program > .row > div > a { display: block; height: 22px; border-bottom: 0 !important; }
+ul.degree-results-list .program a .name { color: #660000; }
+ul.degree-results-list .program a .name:hover { color: #E50606; }
 
-#academics-search .program .college,
-#academics-search .program .department,
-#academics-search .program .label,
-#academics-search .program .name_label,
-#academics-search .program .program-type-alt,
+ul.degree-results-list .program .college,
+ul.degree-results-list .program .department,
+ul.degree-results-list .program .label,
+ul.degree-results-list .program .name_label,
+ul.degree-results-list .program .program-type-alt,
 #degree-single .program .label,
 #degree-single .program .name_label,
 #degree-single .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
 
-#academics-search ul.results-list .program .college,
-#academics-search ul.results-list .program .department { display: table; } /* for browsers that can get a neater display */
+ul.degree-results-list .program .college,
+ul.degree-results-list .program .department { display: table; } /* for browsers that can get a neater display */
 
-#academics-search .program .college,
-#academics-search .program .department { font-size: 12px; }
+ul.degree-results-list .program .college,
+ul.degree-results-list .program .department { font-size: 12px; }
 
-#academics-search .program .name_label,
-#academics-search .program .program-type-alt,
+ul.degree-results-list .program .name_label,
+ul.degree-results-list .program .program-type-alt,
 #degree-single .program .name_label,
 #degree-single .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
 
-#academics-search .program .name_label { width: 110px; display: block; float: left; clear: both; }
-#academics-search .program .program-type-alt { display: block; margin: auto; } 
+ul.degree-results-list .program .name_label { width: 110px; display: block; float: left; clear: both; }
+ul.degree-results-list .program .program-type-alt { display: block; margin: auto; } 
 
-.ie7 #academics-search ul.results-list .program .college,
-.ie7 #academics-search ul.results-list .program .department,
-.ie8 #academics-search ul.results-list .program .college,
-.ie8 #academics-search ul.results-list .program .department { display: block; float: none; }
+.ie7 ul.degree-results-list .program .college,
+.ie7 ul.degree-results-list .program .department,
+.ie8 ul.degree-results-list .program .college,
+.ie8 ul.degree-results-list .program .department { display: block; float: none; }
 
-#academics-search ul.results-list .program .credits-wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
-.ie7 #academics-search ul.results-list .program .credits-wrap,
-.ie8 #academics-search ul.results-list .program .credits-wrap { width: 140px; }
-#academics-search ul.results-list .program .credits-wrap a { border-bottom: 0; cursor: pointer; }
-
-#academics-search .more-details { text-align:center; }
+ul.degree-results-list .program .credits-wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
+.ie7 ul.degree-results-list .program .credits-wrap,
+.ie8 ul.degree-results-list .program .credits-wrap { width: 140px; }
+ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: pointer; }
 
 
 /* Single Degree Pages */

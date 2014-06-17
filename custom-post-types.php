@@ -1568,6 +1568,28 @@ class Degree extends CustomPostType{
 		);
 	}
 
+	public static function is_graduate_program($degree) {
+		$program_types = wp_get_post_terms($degree->ID, 'program_types', array('fields' => 'ids'));
+		$program_group = end(get_ancestors(intval($program_types[0]), 'program_types'));
+		if (get_term($program_group, 'program_types')->name == 'Graduate Program') {
+			return true;
+		}
+		return false;
+	}
+
+	public static function get_degree_profile_link($degree) {
+		// Get permalink to landing page for a single degree program.
+		// Graduate programs should link to the degree_website meta value.
+		$single_url = null;
+		if (get_permalink($degree->ID) && !Degree::is_graduate_program($degree)) {
+			$single_url = get_permalink($degree->ID);
+		}
+		else {
+			$single_url = get_post_meta($degree->ID, 'degree_website', TRUE);
+		}
+		return $single_url;
+	}
+
 	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
@@ -1593,6 +1615,31 @@ class Degree extends CustomPostType{
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
 		}
+	}
+
+	/**
+	 * Handles output for a list of objects, can be overridden for descendants.
+	 * If you want to override how a list of objects are outputted, override
+	 * this, if you just want to override how a single object is outputted, see
+	 * the toHTML method.
+	 **/
+	public function objectsToHTML($degrees, $css_classes){
+		if (count($degrees) < 1){ return '';}
+
+		// Group the degrees by program type (undergraduate/minor/graduate/cert).
+		$degrees = array_reverse(group_posts_by_tax_terms('program_types', $degrees), true);
+		ob_start();
+		foreach ($degrees as $group=>$posts) {
+			$term = get_term($group, 'program_types')->name.'s';
+		?>
+		<h3 class="degree-list-heading"><?=$term?></h3>
+		<?php
+		print display_degree_list($posts, false); ?>
+		<hr />
+		<?php
+		}
+		$html = ob_get_clean();
+		return $html;
 	}
 }
 ?>

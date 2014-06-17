@@ -1,47 +1,6 @@
 <?php disallow_direct_load('single-degree.php');?>
 <?php get_header(); the_post();?>
-<?php
-	$required_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
-	$description = get_post_meta($post->ID, 'degree_description', TRUE);
-	$phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
-	$email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';
-	$website = get_post_meta($post->ID, 'degree_website', TRUE) ? get_post_meta($post->ID, 'degree_website', TRUE) : 'n/a';
-
-	$contact_info = get_post_meta($post->ID, 'degree_contacts', TRUE);
-
-	$contact_array = array();
-
-	// Split single contacts
-	$contacts = explode('@@;@@', $contact_info);
-	foreach ($contacts as $key=>$contact) {
-		if ($contact) {
-			// Split individual fields
-			$contact = explode('@@,@@', $contact);
-
-			$newcontact = array();
-
-			foreach ($contact as $fieldset) {
-				// Split out field key/values
-				$fields = explode('@@:@@', $fieldset);
-				$newcontact[$fields[0]] = $fields[1];
-			}
-
-			array_push($contact_array, $newcontact);
-		}
-	}
-
-	$programs = wp_get_post_terms($post->ID, 'program_types');
-	$program_type = $programs[0]->name;
-	$college = wp_get_post_terms($post->ID, 'colleges');
-	$college = $college[0]->name;
-	$department = wp_get_post_terms($post->ID, 'departments');
-	$department = $department[0]->name;
-
-	// Update website for graduate programs
-	if (get_term($programs[0]->parent, 'program_types')->name == 'Graduate Program') {
-		$website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$required_hours;
-	}
-?>
+<?php $post = append_degree_profile_metadata($post); ?>
 
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
@@ -53,15 +12,15 @@
 			<article role="main">
 				<div class="row program-details">
 					<div class="span6" id="program-title">
-						<h2 class="program-type-alt"><?=$program_type?></h2>
+						<h2 class="program-type-alt"><?=$post->tax_program_type[0]?></h2>
 
 						<?php
-						if ($required_hours && intval($required_hours) > 0) {
-							if ($required_hours >= 100) {
+						if ($post->degree_hours && intval($post->degree_hours) > 0) {
+							if ($post->degree_hours >= 100) {
 						?>
-							<span class="credits label label-info"><?=$required_hours?> credit hours</span>
-							<?php } elseif ($required_hours > 1 && $required_hours < 100) { ?>
-							<span class="credits label label-success"><?=$required_hours?> credit hours</span>
+							<span class="credits label label-info"><?=$post->degree_hours?> credit hours</span>
+							<?php } elseif ($post->degree_hours > 1 && $post->degree_hours < 100) { ?>
+							<span class="credits label label-success"><?=$post->degree_hours?> credit hours</span>
 						<?php
 							}
 						}
@@ -72,37 +31,37 @@
 						}
 						?>
 
-						<p class="program-college"><?=$college?></p>
-						<p class="program-dept"><?=$department?></p>
+						<p class="program-college"><?=$post->tax_college[0]?></p>
+						<p class="program-dept"><?=$post->tax_department[0]?></p>
 					</div>
 					<div class="span3" id="program-meta">
 
 						<p class="program-phone">
 							<strong>Phone:</strong>
-							<?php if ($phone !== 'n/a') { ?><a href="tel:<?=$phone?>"><?php } ?>
-								<?=$phone?>
-							<?php if ($phone !== 'n/a') { ?></a><?php } ?>
+							<?php if ($post->degree_phone !== 'n/a') { ?><a href="tel:<?=$post->degree_phone?>"><?php } ?>
+								<?=$post->degree_phone?>
+							<?php if ($post->degree_phone !== 'n/a') { ?></a><?php } ?>
 						</p>
 						<p class="program-email">
 							<strong>E-mail:</strong>
-							<?php if ($email !== 'n/a') { ?><a href="mailto:<?=$email?>"><?php } ?>
-								<?=$email?>
-							<?php if ($email !== 'n/a') { ?></a><?php } ?>
+							<?php if ($post->degree_email !== 'n/a') { ?><a href="mailto:<?=$post->degree_email?>"><?php } ?>
+								<?=$post->degree_email?>
+							<?php if ($post->degree_email !== 'n/a') { ?></a><?php } ?>
 						</p>
 						<p class="program-website">
 							<strong>Website:</strong>
-							<?php if ($website !== 'n/a') { ?><a target="_blank" href="<?=$website?>"><?php } ?>
-								<?=$website?>
-							<?php if ($website !== 'n/a') { ?></a><?php } ?>
+							<?php if ($post->degree_website !== 'n/a') { ?><a target="_blank" href="<?=$post->degree_website?>"><?php } ?>
+								<?=$post->degree_website?>
+							<?php if ($post->degree_website !== 'n/a') { ?></a><?php } ?>
 						</p>
 					</div>
 				</div>
 
 				<h3>Program Information:</h3>
 				<p class="catalog-link">
-					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$program_type?>)">undergraduate catalog</a></em>.
+					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$post->tax_program_type[0]?>)">undergraduate catalog</a></em>.
 				</p>
-				<?=apply_filters('the_content', $description)?>
+				<?=apply_filters('the_content', $post->degree_description)?>
 
 				<?php if ($post->post_content) { ?>
 				<h3>About This Degree:</h3>
@@ -110,13 +69,13 @@
 				<?php } ?>
 
 				<?php
-				if (!empty($contact_array)) {
+				if (!empty($post->degree_contacts)) {
 				?>
 				<div class="well program-advisor-contact">
 					<h3>Contact Information:</h3>
 					<p class="program-contact">
 					<?php
-						foreach ($contact_array as $contact) {
+						foreach ($post->degree_contacts as $contact) {
 					?>
 						<?php if ($contact['contact_name']) { ?>
 							<br/>

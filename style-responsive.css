@@ -126,7 +126,7 @@
 	#azIndexList .nav li a { width: 30px; }
 	#azindex .az-jumpto-anchor { height: 100px; }
 	
-	#academics-search ul.results-list .program { width: 580px; }
+	ul.degree-results-list .program { width: 580px; }
 }
 
 /* iPad fixes: */
@@ -323,12 +323,11 @@
 	#academics-search #course_search_form select { margin-right: 10px; width: 48%; }
 	#academics-search #course_search_form .input-append { width: 46%; }
 	#academics-search #course_search_form .input-append input { width: 70%; }
-	#academics-search #browse ul#degree-type-list {  }
-	#academics-search ul.results-list { margin-left: 0; }
-	#academics-search ul.results-list .program { width: 100%; }
-	#academics-search ul.results-list .program > .row > div { overflow: hidden; }
-	#academics-search ul.results-list .program .name_label { width: 90px; }
-	#academics-search ul.results-list .program .credits_wrap { 
+	ul.degree-results-list { margin-left: 0; }
+	ul.degree-results-list .program { width: 100%; }
+	ul.degree-results-list .program > .row > div { overflow: hidden; }
+	ul.degree-results-list .program .name_label { width: 90px; }
+	ul.degree-results-list .program .credits_wrap { 
 		float: none; 
 		margin: auto; 
 		clear: both; 
@@ -337,7 +336,7 @@
 		padding-top: 5px; 
 		margin-top: 8px; 
 	}
-	#academics-search ul.results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
+	ul.degree-results-list .program .program-type-alt { display: inline; padding-right: 10px; float: none; }
 
 	#program-meta p { padding-left: 0; }
 }
@@ -438,7 +437,7 @@
 	#academics-search #results #degree-type-sort #degree-type-sort-header { font-size: 11px; }
 	#academics-search #browse ul#degree-type-list li,
 	#academics-search #results #degree-type-sort li { font-size: 11px; }
-	#academics-search ul.results-list .program .program-type-alt { display: none; }
-	#academics-search ul.results-list .program .credits-wrap { text-align: right; margin-top: 5px; }
+	ul.degree-results-list .program .program-type-alt { display: none; }
+	ul.degree-results-list .program .credits-wrap { text-align: right; margin-top: 5px; }
 	
 }
