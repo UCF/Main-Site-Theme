@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Two Column, Left Sidebar
+ * Template Name: Two Column, Right Sidebar
  **/
 ?>
 <?php get_header(); the_post();?>
@@ -12,15 +12,15 @@
 		
 		<?=get_page_subheader($post)?>
 		
-		<div id="sidebar_left" class="span2" role="navigation">
-			<?=get_sidebar('left');?>
-		</div>
-		
-		<div class="span10" id="contentcol">
+		<div class="span9" id="contentcol">
 			<article role="main">
 				<?php if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') { ?><div class="rightcol_subheader_fix"></div><?php } ?>
 				<?php the_content();?>
 			</article>
+		</div>
+
+		<div id="sidebar_right" class="span3 notoppad" role="navigation">
+			<?=get_sidebar('right');?>
 		</div>
 	</div>
 <?php get_footer();?>
