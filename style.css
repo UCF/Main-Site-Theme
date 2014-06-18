@@ -1023,7 +1023,7 @@ ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: poin
 	-moz-column-gap: 20px; /* Firefox */
 	column-gap: 20px;
 }
-.degree-list li { overflow: hidden; }
+.degree-list li { overflow: hidden; margin-bottom: 5px; }
 
 
 /**
