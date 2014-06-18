@@ -919,9 +919,6 @@ li.tagit-new input {
 
 
 /* Academics Search, Single Degree Programs */
-#academics-search { }
-
-#academics-search #filters { }
 #academics-search .degree-search-label {
 	display: block;
 	font-size: 11px;
@@ -1013,6 +1010,19 @@ ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: poin
 }
 #program-meta p { margin: 10px 0; padding-left: 10px; }
 
+
+/* College Profile Pages */
+.degree-list {
+	list-style-type: none;
+	margin-left: 0;
+	/* IE9 and 8 fall back gracefully to a single column. */
+	-webkit-column-count: 2; /* Chrome, Safari, Opera */
+	-moz-column-count: 2; /* Firefox */
+	column-count: 2;
+	-webkit-column-gap: 20px; /* Chrome, Safari, Opera */
+	-moz-column-gap: 20px; /* Firefox */
+	column-gap: 20px;
+}
 
 
 /**

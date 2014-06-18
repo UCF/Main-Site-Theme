@@ -92,6 +92,16 @@ define('SUMMER_MONTH_END', 7);		// Jul
 define('FALL_MONTH_START', 8);		// Aug
 define('FALL_MONTH_END', 12); 		// Dec
 
+# Desired order of degree program types in degree lists, by program slug
+define('DEGREE_PROGRAM_ORDER', serialize(array(
+	'undergraduate-degree',
+	'articulated-program',
+	'accelerated-program',
+	'minor',
+	'graduate-degree',
+	'certificate',
+)));
+
 # Domain/path of site (for cookies)
 list($domain, $path) = explode('.edu', get_site_url()); 
 $domain = preg_replace('/^(http|https):\/\//','',$domain).'.edu';

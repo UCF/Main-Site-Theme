@@ -439,5 +439,11 @@
 	#academics-search #results #degree-type-sort li { font-size: 11px; }
 	ul.degree-results-list .program .program-type-alt { display: none; }
 	ul.degree-results-list .program .credits-wrap { text-align: right; margin-top: 5px; }
+
+	.degree-list {
+		-webkit-column-count: 1; /* Chrome, Safari, Opera */
+		-moz-column-count: 1; /* Firefox */
+		column-count: 1;
+	}
 	
 }

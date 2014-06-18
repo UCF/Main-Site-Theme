@@ -1627,14 +1627,27 @@ class Degree extends CustomPostType{
 		if (count($degrees) < 1){ return '';}
 
 		// Group the degrees by program type (undergraduate/minor/graduate/cert).
-		$degrees = array_reverse(group_posts_by_tax_terms('program_types', $degrees), true);
+		$degrees = sort_grouped_degree_programs(group_posts_by_tax_terms('program_types', $degrees));
 		ob_start();
 		foreach ($degrees as $group=>$posts) {
 			$term = get_term($group, 'program_types')->name.'s';
+			$term_slug = get_term($group, 'program_types')->slug.'s';
 		?>
-		<h3 class="degree-list-heading"><?=$term?></h3>
-		<?php
-		print display_degree_list($posts, false); ?>
+		<h3 class="degree-list-heading" id="<?=$term_slug?>"><?=$term?></h3>
+		<?php if ($posts) { ?>
+		<ul class="degree-list">
+			<?php
+			foreach ($posts as $post) {
+				$post = append_degree_list_metadata($post);
+			?>
+			<li class="program">
+				<?php if (!empty($post->degree_profile_link)) { ?><a href="<?=$post->degree_profile_link?>"><?php } ?>
+					<?=$post->post_title?>
+				<?php if (!empty($post->degree_profile_link)) { ?></a><?php } ?>
+			</li>
+			<?php } ?>
+		</ul>
+		<?php } ?>
 		<hr />
 		<?php
 		}

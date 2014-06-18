@@ -1313,6 +1313,27 @@ function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
 
 
 /**
+ * Returns a sorted array of grouped degrees by program (grouped by group_posts_by_tax_terms().)
+ * Uses the order defined by DEGREE_PROGRAM_ORDER in functions/config.php.
+ **/
+function sort_grouped_degree_programs($posts) {
+	$slugs = unserialize(DEGREE_PROGRAM_ORDER);
+	$ids = array();
+	foreach ($slugs as $slug) {
+		$term = get_term_by('slug', $slug, 'program_types');
+		if ($term) {
+			$ids[] = intval($term->term_id);
+		}
+	}
+
+	uksort($posts, function($a, $b) use ($ids) {
+		return array_search($a, $ids) < array_search($b, $ids) ? -1 : 1;
+	});
+	return $posts;
+}
+
+
+/**
  * Fetch a set of Degree Programs for the Degree Search page.
  **/
 function get_degree_search_data() {
@@ -1619,16 +1640,21 @@ function display_degree_search($data) {
 
 			<?php
 			if (!empty($data['posts'])) {
+				if ($data['view-info']['grouping-tax'] !== 'colleges') {
+					// For grouped degrees by name or hours, make sure program types are
+					// displayed in the correct order
+					$data['posts'] = sort_grouped_degree_programs($data['posts']);
+				}
 				foreach ($data['posts'] as $group=>$posts) {
 					$term = get_term($group, $data['view-info']['grouping-tax']);
-
-					// Pluralize term if the grouping taxonomy is not by College
 					if ($data['view-info']['grouping-tax'] !== 'colleges') {
+						// Pluralize term if necessary
 						$term = $term->name.'s';
 					}
-					else { $term = $term->name; }
-					?>
-
+					else {
+						$term = $term->name;
+					}
+				?>
 					<h3 class="degree-list-heading"><?=$term?></h3>
 					<?=display_degree_list($posts)?>
 					<hr />
@@ -1710,9 +1736,9 @@ function append_degree_profile_metadata($post) {
 
 
 /**
- * Display a list of Degrees.
+ * Display a list of Degrees (for use in Degree Search page.)
  **/
-function display_degree_list($posts, $show_college=true) {
+function display_degree_list($posts) {
 	ob_start(); ?>
 	<ul class="row degree-results-list">
 	<?php
@@ -1730,7 +1756,7 @@ function display_degree_list($posts, $show_college=true) {
 					</a>
 					<?php } ?>
 
-				<?php if ($post->tax_college[0] && $show_college) { ?>
+				<?php if ($post->tax_college[0]) { ?>
 					<span class="name_label">College</span>
 					<span class="college"><?=$post->tax_college[0]?></span>
 				<?php } ?>
