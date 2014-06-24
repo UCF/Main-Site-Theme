@@ -1777,7 +1777,7 @@ function display_degree_list($posts) {
 
 					<?php if (!empty($post->degree_hours)) {
 						if (!empty($post->degree_profile_link) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
-						<a href="<?=$post->degree_profile_link?>" <?php if (Degree::is_graduate_program($post)) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+						<a target="_blank" href="<?=$post->degree_profile_link?>" <?php if (Degree::is_graduate_program($post)) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 							<span class="credits label label-warning">Click for credit hours</span>
 						</a>
 						<?php } elseif (intval($post->degree_hours) >= 90) { ?>
