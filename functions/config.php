@@ -56,6 +56,7 @@ define('THEME_URL', get_stylesheet_directory_uri());
 define('THEME_ADMIN_URL', get_admin_url());
 define('THEME_DIR', get_stylesheet_directory());
 define('THEME_INCLUDES_DIR', THEME_DIR.'/includes');
+define('THEME_JOBS_DIR', THEME_DIR.'/jobs');
 define('THEME_STATIC_URL', THEME_URL.'/static');
 define('THEME_IMG_URL', THEME_STATIC_URL.'/img');
 define('THEME_JS_URL', THEME_STATIC_URL.'/js');
