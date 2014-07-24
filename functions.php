@@ -1891,6 +1891,58 @@ add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overridi
 
 
 /**
+ * Returns the combined name of the current Degree Search view
+ * with any Sort By options, if available.
+ **/
+function get_degree_search_view_title() {
+	$content = '';
+	$degree_type = $_GET['degree_type'];
+	$sort_by = $_GET['current_view'];
+	$degree_title = null;
+	$degree_subtitle = null;
+
+	if ($degree_type) {
+		switch ($degree_type) {
+			case 'undergraduate-degree':
+				$degree_title = 'All Majors';
+				break;
+			case 'minor':
+				$degree_title = 'All Minors';
+				break;
+			case 'graduate-degree':
+				$degree_title = 'All Graduate Degrees';
+				break;
+			case 'certificate':
+				$degree_title = 'All Certificates';
+				break;
+			default:
+				break;
+		}
+		if ($degree_title) {
+			$content .= $degree_title;
+		}
+	}
+	if ($sort_by) {
+		switch ($sort_by) {
+			case 'browse_by_college':
+				$degree_subtitle = 'by College';
+				break;
+			case 'browse_by_hours':
+				$degree_subtitle = 'by Hours';
+				break;
+			default:
+				break;
+		}
+		if ($degree_subtitle) {
+			$content .= ' '.$degree_subtitle;
+		}
+	}
+
+	return trim($content);
+}
+
+
+/**
  * Generates page <title> tag for Degree Search views.
  **/
 function header_title_degree_search($title, $separator) {
@@ -1898,53 +1950,29 @@ function header_title_degree_search($title, $separator) {
 
 	// Custom page overrides here (necessary for Degree Search)
 	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$content = 'Degree Search';
-		$degree_type = $_GET['degree_type'];
-		$browse_by = $_GET['view'];
-		$degree_title = null;
-		$degree_subtitle = null;
-
-		if ($degree_type) {
-			switch ($degree_type) {
-				case 'undergraduate-degree':
-					$degree_title = 'All Majors';
-					break;
-				case 'minor':
-					$degree_title = 'All Minors';
-					break;
-				case 'graduate-degree':
-					$degree_title = 'All Graduate Degrees';
-					break;
-				case 'certificate':
-					$degree_title = 'All Certificates';
-					break;
-				default:
-					break;
-			}
-			if ($degree_title) {
-				$content .= ' '.$separator.' '.$degree_title;
-			}
+		$view_title = get_degree_search_view_title();
+		if ($view_title !== '') {
+			$view_title = ' '.$separator.' '.$view_title;
 		}
-		if ($browse_by) {
-			switch ($browse_by) {
-				case 'browse_by_college':
-					$degree_subtitle = 'by College';
-					break;
-				case 'browse_by_hours':
-					$degree_subtitle = 'by Hours';
-					break;
-				default:
-					break;
-			}
-			if ($degree_subtitle) {
-				$content .= ' '.$degree_subtitle;
-			}
-		}
-
-		$title = $content;
+		$title = 'Degree Search'.$view_title;
 	}
 	return '<title>'.$title.'</title>'; // Why is this necessary???
 }
 add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
+
+
+/**
+ * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
+ **/
+function header_meta_degree_search($str) {
+	global $post;
+
+	if ($post->ID == get_page_by_title('Degree Search')->ID) {
+		$view_title = strtolower(get_degree_search_view_title()).' ';
+		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
+	}
+	return $str;
+}
+add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
 ?>
