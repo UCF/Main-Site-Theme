@@ -105,6 +105,13 @@ function create_utility_pages() {
 		'theme_help_page',
 		THEME_IMG_URL.'/help.png'
 	);
+	add_management_page(
+		__('Import Degree Data'),
+		__('Import Degree Data'),
+		'manage_options',
+		'import-degrees',
+		'theme_degree_importer_page'
+	);
 }
 
 
@@ -127,6 +134,14 @@ function theme_help_page(){
  **/
 function theme_options_page(){
 	include(THEME_INCLUDES_DIR.'/theme-options.php');
+}
+
+
+/**
+ * Outputs theme degree importer page html
+ **/
+function theme_degree_importer_page() {
+	include(THEME_INCLUDES_DIR.'/theme-degree-importer.php');
 }
 
 
