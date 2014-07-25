@@ -14,6 +14,13 @@
 			Click the button below to import degree data from the UCF Search Service.  Existing degree posts will be updated as necessary, 
 			and any existing degrees that have been removed from the search service data since the last import will be deleted from WordPress.
 		</p>
+		<p>
+			Degree post content and taxonomy terms (program types, colleges, and departments) are always replaced completely.
+		</p>
+		<p>
+			If degree post meta data has been updated, the updates will be listed in the script output.  If the value in the database is unchanged, 
+			no changes will be listed.
+		</p>
 		<p><strong>Don't navigate away from this page after clicking the Import button.</strong>  The import process may take a few minutes.</p>
 
 		<div class="submit">

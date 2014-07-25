@@ -4,6 +4,11 @@ if (DEGREE_SECRET_KEY !== get_theme_option('feedback_email_key')) {
 	die('You do not have access to this page.');
 }
 else {
+	// Progressively show script progress. Increase max execution time.
+	ob_implicit_flush(true);
+	ob_end_flush();
+	ini_set('max_execution_time', 180); // Allow up to 3 minutes for execution
+
 	/**
 	 * Grab the search service JSON feed for all programs and undergraduate
 	 * catalog data
@@ -48,6 +53,11 @@ else {
 			// Force a purge of any cached hierarchy so that parent/child relationships are
 			// properly saved: http://wordpress.stackexchange.com/a/8921
 			delete_option('program_types_children');
+
+			print 'New base program taxonomy terms created.<br/><br/>';
+		}
+		else {
+			print 'Existing base program taxonomy terms found.<br/><br/>';
 		}
 
 		/**
@@ -196,7 +206,7 @@ else {
 		foreach ($program_postdata as $post) {
 			$post_data = $post['post_data'];
 			$post_meta = $post['post_meta'];
-			$post_terms = $post['post_terms']; 
+			$post_terms = $post['post_terms'];
 			$post_id = null;
 
 			// Attempt to fetch an existing post to compare against.
@@ -235,24 +245,30 @@ else {
 				wp_update_post($post_data);
 				unset($existing_posts_array[$post_data['ID']]);
 
-				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'<br/>';
+				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'.<br/>';
 				$count++;
 			}
 			else {
 				$post_id = wp_insert_post($post['post_data']);
 
-				print 'Saved new post '.$post_data['post_title'].'<br/>';
+				print 'Saved new post '.$post_data['post_title'].'.<br/>';
 				$count++;
 			}
 			// Create/update meta field values.
 			if (is_array($post_meta)) {
 				foreach ($post_meta as $meta_key=>$meta_val) {
-					update_post_meta($post_id, $meta_key, $meta_val);
-					if ($meta_val) {
-						print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'<br/>';
+					$updated = update_post_meta($post_id, $meta_key, $meta_val);
+					// update_post_meta will return false if $meta_val is the same as the db val
+					if ($updated == true) {
+						if ($meta_val) {
+							print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'.<br/>';
+						}
+						else {
+							print 'Post meta field '.$meta_key.' was set to an empty value.<br/>';
+						}
 					}
-					else {
-						print 'Post meta field '.$meta_key.' was set to an empty value<br/>';
+					else if (is_numeric($updated) && $updated > 1) {
+						print 'Meta with ID '.$updated.' does not exist.';
 					}
 				}
 			}
@@ -260,30 +276,37 @@ else {
 			// Set/update taxonomy terms.
 			// NOTE: These do NOT account for parent/child relationships! Terms not defined previously will be created at the root level.
 			foreach ($post_terms as $tax=>$term) {
-				// Check for existing. Make a new term if necessary.
-				// Return a term_id.
-				$existing_term = term_exists($term, $tax);
-				if (!empty($existing_term) && is_array($existing_term)) {
-					$term_id = $existing_term['term_id'];
-				}
-				else {
-					$new_term = wp_insert_term($term, $tax);
-					if (gettype($new_term) == 'array') { // Make sure we don't get WP error object
-						$term_id = $new_term['term_id'];
+				if (!empty($term)) {
+					// Check for existing. Make a new term if necessary.
+					// Return a term_id.
+					$existing_term = term_exists($term, $tax);
+					if (!empty($existing_term) && is_array($existing_term)) {
+						$term_id = $existing_term['term_id'];
+					}
+					else {
+						$new_term = wp_insert_term($term, $tax);
+						if (gettype($new_term) == 'array') { // Make sure we don't get WP error object
+							$term_id = $new_term['term_id'];
+						}
 					}
 				}
-				// Actually set the term for the post.
+				else {
+					$term_id = NULL;
+				}
+				
+				// Actually set the term for the post. Unset existing term if $term_id is null.
 				if ($term_id) {
-					wp_set_post_terms($post_id, $term_id, $tax);
-					print 'Set post\'s taxonomy '.$tax.' to type '.$term.'<br/>';
+					wp_set_post_terms($post_id, $term_id, $tax); // replaces existing terms
+					print 'Set post\'s taxonomy '.$tax.' to type '.$term.'.<br/>';
 				}
 				else {
-					print 'Failed to set taxonomy '.$tax.' to type '.$term.' for this post.<br/>';
+					wp_delete_object_term_relationships($post_id, $tax);
+					print 'Unset existing post\'s taxonomy '.$tax.' terms (degree has no '.$tax.' value.)<br/>';
 				}
 			}
 
 			// Done.
-			print 'Finished processing post '.$post_data['post_title'].'<br/><br/>';
+			print 'Finished processing post '.$post_data['post_title'].'.<br/><br/>';
 		}
 		print '<br/>Created/Updated '.$count.' posts.<br/>';
 
