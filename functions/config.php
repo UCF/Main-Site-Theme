@@ -84,6 +84,9 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
 define('SEARCH_SERVICE_URL', !empty($theme_options['search_service_url']) ? $theme_options['search_service_url'] : 'http://search.smca.ucf.edu/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', !empty($theme_options['search_service_timeout']) ? (int)$theme_options['search_service_timeout'] : 10); #seconds
 
+define('UNDERGRADUATE_CATALOG_FEED_URL', !empty($theme_options['undergraduate_catalog_feed_url']) ? $theme_options['undergraduate_catalog_feed_url'] : 'http://catalog.ucf.edu/feed');
+define('UNDERGRADUATE_CATALOG_FEED_HTTP_TIMEOUT', !empty($theme_options['undergraduate_catalog_feed_timeout']) ? (int)$theme_options['undergraduate_catalog_feed_timeout'] : 10); #seconds
+
 # Estimated start/end months of semesters; used for announcements
 define('CURRENT_MONTH', (int)date('n'));
 define('SPRING_MONTH_START', 1); 	// Jan
@@ -350,13 +353,13 @@ Config::$theme_settings = array(
     		'default'     => 'http://weather.smca.ucf.edu/',
     		'value'       => $theme_options['weather_service_url'],
         )),
-        	new TextField(array(
-        		'name'        => 'Weather Service Timeout',
-        		'id'          => THEME_OPTIONS_NAME.'[weather_service_timeout]',
-        		'description' => 'Number of seconds to wait before timing out a weather service request.  Default is 8 seconds.',
-        		'default'     => 8,
-        		'value'       => $theme_options['weather_service_timeout'],
-            )),
+    	new TextField(array(
+    		'name'        => 'Weather Service Timeout',
+    		'id'          => THEME_OPTIONS_NAME.'[weather_service_timeout]',
+    		'description' => 'Number of seconds to wait before timing out a weather service request.  Default is 8 seconds.',
+    		'default'     => 8,
+    		'value'       => $theme_options['weather_service_timeout'],
+        )),
     	new TextField(array(
     		'name'        => 'Search Service URL',
     		'id'          => THEME_OPTIONS_NAME.'[search_service_url]',
@@ -364,13 +367,27 @@ Config::$theme_settings = array(
     		'default'     => 'http://search.smca.ucf.edu/service.php',
     		'value'       => $theme_options['search_service_url'],
         )),
-        	new TextField(array(
-        		'name'        => 'Search Service Timeout',
-        		'id'          => THEME_OPTIONS_NAME.'[search_service_timeout]',
-        		'description' => 'Number of seconds to wait before timing out a search service request.  Default is 10 seconds.',
-        		'default'     => 10,
-        		'value'       => $theme_options['search_service_timeout'],
-            )),
+    	new TextField(array(
+    		'name'        => 'Search Service Timeout',
+    		'id'          => THEME_OPTIONS_NAME.'[search_service_timeout]',
+    		'description' => 'Number of seconds to wait before timing out a search service request.  Default is 10 seconds.',
+    		'default'     => 10,
+    		'value'       => $theme_options['search_service_timeout'],
+        )),
+    	new TextField(array(
+    		'name'        => 'Undergraduate Catalog Feed URL',
+    		'id'          => THEME_OPTIONS_NAME.'[undergraduate_catalog_feed_url]',
+    		'description' => 'URL to the Undergraduate Catalog data feed.',
+    		'default'     => 'http://catalog.ucf.edu/feed',
+    		'value'       => $theme_options['undergraduate_catalog_feed_url'],
+        )),
+    	new TextField(array(
+    		'name'        => 'Undergraduate Catalog Feed Timeout',
+    		'id'          => THEME_OPTIONS_NAME.'[undergraduate_catalog_feed_timeout]',
+    		'description' => 'Number of seconds to wait before timing out a catalog feed request.  Default is 10 seconds.',
+    		'default'     => 10,
+    		'value'       => $theme_options['undergraduate_catalog_feed_timeout'],
+        )),
 	),
 	'Social' => array(
 		new RadioField(array(

@@ -1538,6 +1538,11 @@ class Degree extends CustomPostType{
 				'type' => 'text',
 			),
 			array(
+				'name'  => 'Catalog PDF',
+				'id'   => $prefix.'pdf',
+				'type' => 'text',
+			),
+			array(
 				'name'  => 'Phone Number',
 				'id'   => $prefix.'phone',
 				'type' => 'text',

@@ -59,7 +59,7 @@
 
 				<h3>Program Information:</h3>
 				<p class="catalog-link">
-					<em>Find complete details and requirements in the <a href="http://catalog.ucf.edu/" target="_blank" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$post->tax_program_type[0]?>)">undergraduate catalog</a></em>.
+					<em>Find complete details and requirements in the <a href="<?=$post->degree_pdf?>" target="_blank" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="Degree Profile: <?=addslashes($post->post_title)?> (<?=$post->tax_program_type[0]?>)">undergraduate catalog</a></em>.
 				</p>
 				<?=apply_filters('the_content', $post->degree_description)?>
 

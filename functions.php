@@ -1154,6 +1154,30 @@ function query_search_service($params) {
 
 
 /**
+ * Query the undergraduate catalog feed
+ * @return array
+ * @author Jo Dickson
+ **/
+function query_undergraduate_catalog() {
+	$results = array();
+	try {
+		$context = stream_context_create(array(
+			'http' => array(
+				'method'  => 'GET',
+				'timeout' => UNDERGRADUATE_CATALOG_FEED_HTTP_TIMEOUT
+		)));
+		$feed_url = UNDERGRADUATE_CATALOG_FEED_URL;
+		$response   = file_get_contents($feed_url, false, $context);
+		$json       = json_decode($response);
+		if(isset($json->programs)) $results = $json->programs;
+	} catch (Exception $e) {
+		#pass
+	}
+	return $results;
+}
+
+
+/**
  * Prevent Wordpress from trying to redirect to a "loose match" post when
  * an invalid URL is requested.  WordPress will redirect to 404.php instead.
  *
@@ -1703,6 +1727,7 @@ function append_degree_profile_metadata($post) {
 	$post->degree_phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
 	$post->degree_email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';
 	$post->degree_website = get_post_meta($post->ID, 'degree_website', TRUE) ? get_post_meta($post->ID, 'degree_website', TRUE) : 'n/a';
+	$post->degree_pdf = get_post_meta($post->ID, 'degree_pdf', TRUE) ? get_post_meta($post->ID, 'degree_pdf', TRUE) : 'http://catalog.ucf.edu/';
 	$post->tax_college = wp_get_post_terms($post->ID, 'colleges', array('fields' => 'names'));
 	$post->tax_department = wp_get_post_terms($post->ID, 'departments', array('fields' => 'names'));
 	$post->tax_program_type = wp_get_post_terms($post->ID, 'program_types', array('fields' => 'names'));
@@ -1755,7 +1780,6 @@ function display_degree_list($posts) {
 					<?php if ($post->degree_profile_link) { ?>
 					</a>
 					<?php } ?>
-
 				<?php if ($post->tax_college[0]) { ?>
 					<span class="name_label">College</span>
 					<span class="college"><?=$post->tax_college[0]?></span>
