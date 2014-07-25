@@ -268,7 +268,15 @@ else {
 						}
 					}
 					else if (is_numeric($updated) && $updated > 1) {
-						print 'Meta with ID '.$updated.' does not exist.';
+						print 'Meta with ID '.$updated.' does not exist.<br/>';
+					}
+					else if ($updated == false) {
+						if ($meta_val) {
+							print 'Post meta field '.$meta_key.' with value '.$meta_val.' left unchanged.<br/>';
+						}
+						else {
+							print 'Post meta field '.$meta_key.' with empty value left unchanged.<br/>';
+						}
 					}
 				}
 			}
