@@ -204,10 +204,10 @@ function display_events($start=null, $limit=null){?>
 					$start 		= new DateTime($item['starts']);
 					$day 		= $start->format('M d');
 					$time 		= $start->format('h:i a');
-					$link 		= $url.'eventdatetime_id='.$item['id'];
+					$link 		= $url.'eventdatetime_id='.$item['id']; // TODO: use 'url' after unify-events launches
 					$loc_link 	= $item['location_url'];
 					$location	= $item['location'];
-					$title		= $item['title'];				
+					$title		= $item['title'];
 				?>
 				<tr class="item vevent">
 					<td class="date">
