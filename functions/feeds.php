@@ -201,8 +201,9 @@ function display_events($start=null, $limit=null){?>
 			</thead>
 			<tbody class="vcalendar">
 				<?php foreach($events as $item):
-					$day  		= date('M d', strtotime($item['starts']));
-					$time 		= date('h:i a', strtotime($item['starts']));
+					$start 		= new DateTime($item['starts']);
+					$day 		= $start->format('M d');
+					$time 		= $start->format('h:i a');
 					$link 		= $url.'eventdatetime_id='.$item['id'];
 					$loc_link 	= $item['location_url'];
 					$location	= $item['location'];
@@ -212,7 +213,7 @@ function display_events($start=null, $limit=null){?>
 					<td class="date">
 						<div class="day"><?=$day?></div>
 						<div class="dtstart">
-							<abbr class="dtstart" title="<?=date('c', strtotime($time))?>"><?=$time?></abbr>
+							<abbr class="dtstart" title="<?=$start->format('c')?>"><?=$time?></abbr>
 						</div>
 					</td>
 					<td class="eventdata">
