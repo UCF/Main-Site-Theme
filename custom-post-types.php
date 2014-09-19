@@ -492,6 +492,13 @@ class Page extends CustomPostType {
 					'type' => 'file',
 				),
 				array(
+					'name' => 'Use Webfonts On This Page',
+					'desc' => '(Optional) Check this box to include webfonts from Cloud.Typography.  Requires a Cloud.Typography CSS key to be set in Theme Options.',
+					'id' => $prefix.'use_webfonts',
+					'type' => 'checkbox',
+					'std' => 'off',
+				),
+				array(
 					'name' => 'Title',
 					'desc' => '(Optional) Substitue the page\'s title tag text. (Page title will be used if it is left blank)',
 					'id' => $prefix.'title',

@@ -446,7 +446,20 @@ Config::$theme_settings = array(
 			),
 			'value'       => $theme_options['bootstrap_menu_styles'],
 	    )),
-	)
+	),
+	'Web Fonts' => array(
+		/* This theme uses the webfonts published to ucf.edu/partnerships. The hosted font files are within that theme. */
+		new TextField(array(
+			'name'        => 'Cloud.Typography CSS Key URL',
+			'id'          => THEME_OPTIONS_NAME.'[cloud_font_key]',
+			'description' => 'The CSS Key provided by Cloud.Typography for this project. <strong>Only include the value in the "href" portion of the link
+								tag provided; e.g. "//cloud.typography.com/000000/000000/css/fonts.css".</strong><br/><br/>NOTE: Make sure the Cloud.Typography
+								project has been configured to deliver fonts to this site\'s domain.<br/>
+								See the <a target="_blank" href="http://www.typography.com/cloud/user-guide/managing-domains">Cloud.Typography docs on managing domains</a> for more info.',
+			'default'     => '//cloud.typography.com/730568/675644/css/fonts.css', /* CSS Key relative to PROD project */
+			'value'       => $theme_options['cloud_font_key'],
+		)),
+	),
 );
 
 
