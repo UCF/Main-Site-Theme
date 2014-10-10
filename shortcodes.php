@@ -964,17 +964,14 @@ function gf_destroy_session() {
 function gf_login_html($error = false) {
 	ob_start();
 	gf_destroy_session();
-	$pageURL = 'http';
-	if ($_SERVER["HTTPS"] == "on") {
-		$pageURL .= "s";
-	}
-	$pageURL .= "://";
+	// Force HTTPS
+	$pageURL = "https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 	?>
 
 	<div id="ann-login-wrapper">
 		<h2>Login</h2>
 		<p>To post a new announcement, please log in using your NID and NID password below.<br/></p>
-		<form method="post" id="auth-form" action="<?=$_SERVER["REQUEST_URI"]; ?>">
+		<form method="post" id="auth-form" action="<?=$pageURL; ?>">
 			<div class="wrapper">
 				<?php if ($error):?>
 				<div class="alert alert-error" id="login_error">
