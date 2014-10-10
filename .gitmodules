@@ -1,4 +1,4 @@
 [submodule "static/bootstrap"]
 	path = static/bootstrap
-	url = https://github.com/UCF/bootstrap.git
+	url = git@github.com:UCF/bootstrap.git
 	ignore = dirty
