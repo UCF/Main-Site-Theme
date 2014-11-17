@@ -769,7 +769,7 @@ function sc_phonebook_search($attrs) {
 		ob_start(); ?>
 		
 		<?php if($result->phone) { ?>
-		<span class="phone">Phone: <?php echo $result->phone; ?></span>
+		<span class="phone">Phone: <a href="tel:<?= str_replace("-", "", $result->phone); ?>"><?php echo $result->phone; ?></a></span>
 		<?php } ?>
 		<?php if($result->from_table !== 'staff' && $result->fax) { ?>
 		<span class="fax">Fax: <?=$result->fax; ?></span>
