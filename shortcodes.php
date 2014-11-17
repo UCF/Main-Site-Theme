@@ -4,7 +4,7 @@
  * Create a javascript slideshow of each top level element in the
  * shortcode.  All attributes are optional, but may default to less than ideal
  * values.  Available attributes:
- * 
+ *
  * height     => css height of the outputted slideshow, ex. height="100px"
  * width      => css width of the outputted slideshow, ex. width="100%"
  * transition => length of transition in milliseconds, ex. transition="1000"
@@ -24,7 +24,7 @@ function sc_slideshow($attr, $content=null){
 	$html    = $content->childNodes->item(1);
 	$body    = $html->childNodes->item(0);
 	$content = $body->childNodes;
-	
+
 	# Find top level elements and add appropriate class
 	$items = array();
 	foreach($content as $item){
@@ -35,16 +35,16 @@ function sc_slideshow($attr, $content=null){
 			$items[] = $item->ownerDocument->saveXML($item);
 		}
 	}
-	
+
 	$animation = ($attr['animation']) ? $attr['animation'] : 'slide';
 	$height    = ($attr['height']) ? $attr['height'] : '100px';
 	$width     = ($attr['width']) ? $attr['width'] : '100%';
 	$tran_len  = ($attr['transition']) ? $attr['transition'] : 1000;
 	$cycle_len = ($attr['cycle']) ? $attr['cycle'] : 5000;
-	
+
 	ob_start();
 	?>
-	<div 
+	<div
 		class="slideshow <?=$animation?>"
 		data-tranlen="<?=$tran_len?>"
 		data-cyclelen="<?=$cycle_len?>"
@@ -56,7 +56,7 @@ function sc_slideshow($attr, $content=null){
 	</div>
 	<?php
 	$html = ob_get_clean();
-	
+
 	return $html;
 }
 add_shortcode('slideshow', 'sc_slideshow');
@@ -83,7 +83,7 @@ function sc_publication($attr, $content=null){
 	$pub      = @$attr['pub'];
 	$pub_name = @$attr['name'];
 	$pub_id   = @$attr['id'];
-	
+
 	// Get the post data
 	if (!$pub and is_numeric($pub_id)){
 		$pub = get_post($pub);
@@ -91,25 +91,25 @@ function sc_publication($attr, $content=null){
 	if (!$pub and $pub_name){
 		$pub = get_page_by_title($pub_name, OBJECT, 'publication');
 	}
-	
+
 	$url = get_post_meta($pub->ID, "publication_url", True);
 	$url = str_replace('https:', 'http:', $url); // Force http
-	
+
 	// Get the Issuu DocumentID from the url provided
 	$docID = json_decode(file_get_contents($url.'?issuu-data=docID'));
 	$docID = $docID->docID;
-	
+
 	// If no docID is found, assume that the publication url is invalid
 	if ($docID == NULL) { return 'DocID not found. Is the publication URL valid? Please use URLs from http://publications.ucf.edu.'; }
-	
+
 	// Output for an Issuu thumbnail, based on docID
-	$issuu_thumb = "<img src='http://image.issuu.com/".$docID."/jpg/page_1_thumb_large.jpg' alt='".$pub->post_title."' title='".$pub->post_title."' />"; 
-	
+	$issuu_thumb = "<img src='http://image.issuu.com/".$docID."/jpg/page_1_thumb_large.jpg' alt='".$pub->post_title."' title='".$pub->post_title."' />";
+
 	// If a featured image is set, use it; otherwise, get the thumbnail from issuu
 	$thumb = (get_the_post_thumbnail($pub->ID, 'publication_thumb', TRUE) !== '') ? get_the_post_thumbnail($pub->ID, 'publication_thumb', TRUE) : $issuu_thumb;
-	
+
 	ob_start(); ?>
-	
+
 	<div class="pub">
 		<a class="track pub-track" title="<?=$pub->post_title?>" data-toggle="modal" href="#pub-modal-<?=$pub->ID?>">
 
@@ -121,7 +121,7 @@ function sc_publication($attr, $content=null){
 			<a href="#" class="btn" data-dismiss="modal">Close</a>
 		</div>
 	</div>
-	
+
 	<?php
 	return ob_get_clean();
 }
@@ -137,24 +137,24 @@ function sc_video($attr, $content=null){
 	$video_name = @$attr['name'];
 	$video_id   = @$attr['id'];
 	$display	= $attr['display'] ? $attr['display'] : 'modal';
-	
+
 	if (!$video and is_numeric($video_id)){
 		$video = get_post($video_id);
 	}
 	if (!$video and $video_name){
 		$video = get_page_by_title($video_name, 'OBJECT', 'video');
 	}
-	
+
 	$video_url   		= get_post_meta($video->ID, "video_url", true);
 	$video_yt_id		= get_youtube_id($video_url);
 	$video_description  = $video->post_content;
 	$video_thumbnail    = wp_get_attachment_image(get_post_thumbnail_id($video->ID, 'medium'));
 	$embed_url			= 'http://www.youtube.com/embed/'.$video_yt_id.'?wmode=transparent';
-	
+
 	switch ($display) {
 		default:
 			ob_start(); ?>
-			
+
 				<div class="video">
 					<div class="icon">
 						<a title="Watch <?=$video->post_title?>" alt="Watch <?=$video->post_title?>" data-toggle="modal" class="video-link" href="#modal-vid<?=$video->ID?>">
@@ -176,7 +176,7 @@ function sc_video($attr, $content=null){
 					</h4>
 					<div class="video-desc"><?=$video_description?></div>
 				</div>
-			<?php 
+			<?php
 			return ob_get_clean();
 			break;
 		case 'embed':
@@ -202,24 +202,24 @@ function sc_person_picture_list($atts) {
 	$join			= ($atts['join']) ? $atts['join'] : 'or';
 	$people 		= sc_object_list(
 						array(
-							'type' => 'person', 
+							'type' => 'person',
 							'limit' => $limit,
 							'join' => $join,
-							'categories' => $categories, 
+							'categories' => $categories,
 							'org_groups' => $org_groups
-						), 
+						),
 						array(
 							'objects_only' => True,
 						));
-	
+
 	ob_start();
-	
+
 	?><div class="person-picture-list"><?
 	$count = 0;
 	foreach($people as $person) {
-		
+
 		$image_url = get_featured_image_url($person->ID);
-		
+
 		$link = ($person->post_content != '') ? True : False;
 		if( ($count % $row_size) == 0) {
 			if($count > 0) {
@@ -227,7 +227,7 @@ function sc_person_picture_list($atts) {
 			}
 			?><div class="row"><?
 		}
-		
+
 		?>
 		<div class="span2 person-picture-wrap">
 			<? if($link) {?><a href="<?=get_permalink($person->ID)?>"><? } ?>
@@ -251,7 +251,7 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
  * Centerpiece Slider
  **/
 	function sc_centerpiece_slider( $atts, $content = null ) {
-		
+
 		extract( shortcode_atts( array(
 			'id' => '',
 		), $atts ) );
@@ -266,9 +266,9 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 		query_posts( $args );
 
 		if( have_posts() ) while ( have_posts() ) : the_post();
-		
+
 			$slide_order 			= trim(get_post_meta($post->ID, 'ss_slider_slideorder', TRUE), ',');
-			$slide_order			= explode("," , $slide_order);			
+			$slide_order			= explode("," , $slide_order);
 			$slide_count			= count($slide_order);
 			$slide_title			= get_post_meta($post->ID, 'ss_slide_title', TRUE);
 			$slide_content_type 	= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
@@ -281,29 +281,29 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 			$slide_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
 			$slide_duration			= get_post_meta($post->ID, 'ss_slide_duration', TRUE);
 			$rounded_corners		= get_post_meta($post->ID, 'ss_slider_rounded_corners', TRUE);
-						
-			
+
+
 			// #centerpiece_slider must contain an image placeholder set to the max
 			// slide width in order to trigger responsive styles properly--
 			// http://www.bluebit.co.uk/blog/Using_jQuery_Cycle_in_a_Responsive_Layout
 			$output .= '<div id="centerpiece_slider">
 						  <ul>
 						  	<img src="'.get_bloginfo('stylesheet_directory').'/static/img/centerpiece_placeholder.gif" width="940" style="max-width: 100%; height: auto;">';
-			
-			
+
+
 			foreach ($slide_order as $s) {
-				
+
 				if ( ($s !== '') && ($s !== NULL) ) {
 					$s = (int)$s;
-					
+
 					$slide_image_url = wp_get_attachment_image_src($slide_image[$s], 'centerpiece-image');
-					$slide_video_thumb_url = wp_get_attachment_image_src($slide_video_thumb[$s], 'centerpiece-image');			
-					
+					$slide_video_thumb_url = wp_get_attachment_image_src($slide_video_thumb[$s], 'centerpiece-image');
+
 					$slide_single_duration = (!empty($slide_duration[$s]) ? $slide_duration[$s] : '6');
-					
+
 					// Start <li>
 					$output .= '<li class="centerpiece_single" id="centerpiece_single_'.$s.'" data-duration="'.$slide_single_duration.'">';
-					
+
 					// Add <a> tag and target="_blank" if applicable:
 					if ($slide_links_to[$s] !== '' && $slide_content_type[$s] == 'image') {
 						$output .= '<a href="'.$slide_links_to[$s];
@@ -312,36 +312,36 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 						}
 						$output .= '">';
 					}
-					
+
 					// Image output:
 					if ($slide_content_type[$s] == 'image') {
 						$output .= '<img class="centerpiece_single_img" src="'.$slide_image_url[0].'" title="'.$slide_title[$s].'" alt="'.$slide_title[$s].'"';
 						$output .= '/>';
-						
+
 						if ($slide_links_to[$s] !== '' && $slide_content_type[$s] == 'image') {
 							$output .= '</a>';
 						}
-						
+
 						if ($slide_content[$s] !== '') {
 							$output .= '<div class="slide_contents">'.apply_filters('the_content', $slide_content[$s]).'</div>';
 						}
 					}
-								
+
 					// Video output:
-					if ($slide_content_type[$s] == 'video') {						
-						
+					if ($slide_content_type[$s] == 'video') {
+
 						// if a video thumbnail is not set and this is not a
 						// single slide centerpiece, use the default video thumb
 						// (single slide centerpieces w/video should have an
 						// optional thumbnail for autoplay purposes)
 						if ($slide_count > 1) {
 							if (!$slide_video_thumb[$s]) {
-								$slide_video_thumb_url[0] = $slide_video_thumb_def;	
+								$slide_video_thumb_url[0] = $slide_video_thumb_def;
 							}
 						}
-						
+
 						$filtered_video_metadata = strip_tags(apply_filters('the_content', $slide_video[$s]), '<iframe><object><embed>');
-						
+
 						if ($slide_video_thumb_url[0] !== NULL) {
 							$output .= '<img class="centerpiece_single_vid_thumb" src="'.$slide_video_thumb_url[0].'" alt="Click to Watch" title="Click to Watch" />';
 							$output .= '<div class="centerpiece_single_vid_hidden">'.$filtered_video_metadata.'</div>';
@@ -350,20 +350,20 @@ add_shortcode('person-picture-list', 'sc_person_picture_list');
 							$output .= $filtered_video_metadata;
 						}
 					}
-					
+
 					// End <li>
 					$output .= '</li>';
 				}
 			}
-						  
-						  
+
+
 			$output .= '</ul>';
-			
+
 			// Apply rounded corners:
 			if ($rounded_corners == 'on') {
 				$output .= '<div class="thumb_corner_tl"></div><div class="thumb_corner_tr"></div><div class="thumb_corner_bl"></div><div class="thumb_corner_br"></div>';
 			}
-			
+
 			$output .= '
 						<div id="centerpiece_control"></div>
 					</div>';
@@ -591,7 +591,7 @@ function sc_phonebook_search($attrs) {
 		$phonebook_search_query = $_GET['phonebook-search-query'];
 		$results                = query_search_service(array('search'=>$phonebook_search_query));
 	}
-	
+
 	# Filter out the result types that we don't understand
 	# We only understand organizations, departments, and staff
 	$results = array_filter(
@@ -601,8 +601,8 @@ function sc_phonebook_search($attrs) {
 
 	# Filter out records with Fax in the name
 	$results = array_filter($results, create_function('$r', '
-			return (preg_match("/^fax\s/i", $r->name) || 
-						preg_match("/\sfax\s/i", $r->name) || 
+			return (preg_match("/^fax\s/i", $r->name) ||
+						preg_match("/\sfax\s/i", $r->name) ||
 							preg_match("/\sfax$/i", $r->name)) ? False : True;')
 	);
 
@@ -614,7 +614,7 @@ function sc_phonebook_search($attrs) {
 
 	$organizations = array();
 	$departments   = array();
-	
+
 	# Attach staff to organizations and departments;
 	# only use alpha person results to avoid duplicates
 	foreach($results as $key => $result) {
@@ -624,18 +624,18 @@ function sc_phonebook_search($attrs) {
 			$result->staff = array();
 			foreach($results as $_result) {
 				if($_result->from_table == 'staff') {
-					if( 
-						($is_organization) && 
-						($result->name == $_result->organization) && 
-						($_result->alpha !== null) && 
-						($_result->alpha == 1) ) 
+					if(
+						($is_organization) &&
+						($result->name == $_result->organization) &&
+						($_result->alpha !== null) &&
+						($_result->alpha == 1) )
 						{
 						$result->staff[$_result->last_name.'-'.$result->first_name.'-'.$_result->id] = $_result;
-					} else if( 
-						($is_department) && 
-						($result->name == $_result->department) && 
+					} else if(
+						($is_department) &&
+						($result->name == $_result->department) &&
 						($_result->alpha !== null) &&
-						($_result->alpha == 1) ) 
+						($_result->alpha == 1) )
 						{
 						$result->staff[$_result->last_name.'-'.$result->first_name.'-'.$_result->id] = $_result;
 					}
@@ -644,7 +644,7 @@ function sc_phonebook_search($attrs) {
 				ksort($result->staff);
 			}
 		}
-		# Separate organizations and departments so we can 
+		# Separate organizations and departments so we can
 		# reorder them later
 		if ($is_organization) {
 			$organizations[] = $result;
@@ -655,7 +655,7 @@ function sc_phonebook_search($attrs) {
 			unset($results[$key]);
 		}
 	}
-	
+
 	# Lump duplicate person data under that person's alpha info
 	foreach($results as $key => $result) {
 		$staff = ($result->from_table == 'staff');
@@ -664,23 +664,23 @@ function sc_phonebook_search($attrs) {
 				# If two email addresses match and are not null,
 				# lump the secondary listing under the alpha listing
 				# array (generated on the fly)
-				if ( 
-					($result->email !== null) && 
-					($_result->email !== null) && 
-					($result->email == $_result->email) && 
-					($_result->alpha == 1) ) 
+				if (
+					($result->email !== null) &&
+					($_result->email !== null) &&
+					($result->email == $_result->email) &&
+					($_result->alpha == 1) )
 					{
 					$_result->secondary[] = $result;
 				}
 			}
 			unset($results[$key]);
 		}
-	}	
-	
+	}
+
 	# Reorder results: Organizations, then Departments, then Staff
 	$results = array_merge($organizations, $departments, $results);
-	
-	
+
+
 	# Helper function for naming consistencies
 	function fix_name_case($name) {
 		$name = ucwords(strtolower($name));
@@ -710,7 +710,7 @@ function sc_phonebook_search($attrs) {
 	# Display single result name, position, dept, and org
 	function display_primary_info($result) {
 		ob_start(); ?>
-		
+
 		<span class="name">
 			<strong><?php echo ($result->from_table == 'organizations') ? fix_name_case($result->name) : $result->name; ?></strong>
 		</span>
@@ -733,15 +733,15 @@ function sc_phonebook_search($attrs) {
 		<span class="organization">
 			<a href="?phonebook-search-query=<?php echo urlencode($result->organization); ?>"><?php echo fix_name_case($result->organization); ?></a>
 		</span>
-		<?php } 
-		
+		<?php }
+
 		return ob_get_clean();
 	}
-	
+
 	# Display single result location information
 	function display_location_info($result) {
 		ob_start(); ?>
-		
+
 		<?php if($result->from_table == 'staff' && $result->email) { ?>
 		<span class="email">
 			<a href="mailto:<?php echo $result->email; ?>"><?php echo $result->email; ?></a>
@@ -752,7 +752,7 @@ function sc_phonebook_search($attrs) {
 			<a href="http://map.ucf.edu/?show=<?php echo $result->bldg_id ?>">
 				<?php echo fix_name_case($result->building); ?>
 				<?php if($result->room) {
-					echo ' - '.$result->room; 
+					echo ' - '.$result->room;
 				} ?>
 			</a>
 		</span>
@@ -760,24 +760,24 @@ function sc_phonebook_search($attrs) {
 		<?php if ($result->postal) { ?>
 			<span class="postal">Zip: <?=$result->postal; ?></span>
 		<?php }
-		
+
 		return ob_get_clean();
 	}
-	
+
 	# Display single result phone/fax information
 	function display_contact_info($result) {
 		ob_start(); ?>
-		
+
 		<?php if($result->phone) { ?>
 		<span class="phone">Phone: <a href="tel:<?= str_replace("-", "", $result->phone); ?>"><?php echo $result->phone; ?></a></span>
 		<?php } ?>
 		<?php if($result->from_table !== 'staff' && $result->fax) { ?>
 		<span class="fax">Fax: <?=$result->fax; ?></span>
 		<?php }
-		
+
 		return ob_get_clean();
 	}
-	
+
 
 	ob_start();?>
 	<form class="form-horizontal form-search" id="phonebook-search">
@@ -789,13 +789,13 @@ function sc_phonebook_search($attrs) {
 			</div>
 		</div>
 	</form>
-	<?php 
+	<?php
 	if($phonebook_search_query != '') {
 		?>
 		<?php if(count($results) == 0) { ?>
 		<p><strong><big>No results were found.</big></strong></p>
-		<?php 
-		} else { 
+		<?php
+		} else {
 			if($additional_results) { ?>
 				<p id="additional_results">First 300 results returned. Try narrowing your search.</p>
 			<?php } ?>
@@ -847,7 +847,7 @@ function sc_phonebook_search($attrs) {
 											</td>
 										<?php } ?>
 										</tr>
-									
+
 							<?php
 								break;
 								case 'departments':
@@ -870,8 +870,8 @@ function sc_phonebook_search($attrs) {
 											<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
 											<div class="show-staff-wrap">
 												<ul class="staff-list">
-													<?php 
-														$staff_per_column = ceil(count($result->staff) / 3); 
+													<?php
+														$staff_per_column = ceil(count($result->staff) / 3);
 														$count = 0;
 													?>
 													<?php foreach($result->staff as $person) { ?>
@@ -885,9 +885,9 @@ function sc_phonebook_search($attrs) {
 																<span class="phone"><?php echo $person->phone; ?></span>
 															<?php } ?>
 														</li>
-														<?php if( ((($count + 1) % $staff_per_column) == 0) && ($count + 1 !== count($result->staff))) { 
+														<?php if( ((($count + 1) % $staff_per_column) == 0) && ($count + 1 !== count($result->staff))) {
 															echo '</ul><ul class="staff-list">';
-														} 
+														}
 														$count++;
 													} ?>
 												</ul>
@@ -996,7 +996,7 @@ function gf_login_html($error = false) {
 }
 
 /**
- * Displays LDAP authentication unless already authenicated, 
+ * Displays LDAP authentication unless already authenicated,
  * which displays the gravity form.
  *
  * @param array $username .
@@ -1044,9 +1044,9 @@ function azindexlink_webadmins($attr) {
 		'order' => 'ASC',
 	);
 	$links = get_posts($args);
-	
+
 	$output = '<ul id="azindexlink-webadmins">';
-	
+
 	foreach ($links as $link) {
 		$url = get_post_meta($link->ID, 'azindexlink_url', true);
 		$webadmins = apply_filters('the_content', get_post_meta($link->ID, 'azindexlink_webadmins', true));
@@ -1056,7 +1056,7 @@ function azindexlink_webadmins($attr) {
 		}
 		$output .= '</li>';
 	}
-	
+
 	$output .= '</ul>';
 	return $output;
 }
