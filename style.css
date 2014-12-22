@@ -1060,3 +1060,11 @@ a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
 }
+
+/**
+ * Overriding default 300px height on iframes to keep the google_conversion_frame
+ * from adding 300px of whitespace.
+ */
+#contentcol iframe[name="google_conversion_frame"] {
+	height: 0;
+}
