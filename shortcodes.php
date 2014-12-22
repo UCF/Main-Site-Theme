@@ -1062,4 +1062,44 @@ function azindexlink_webadmins($attr) {
 }
 add_shortcode('azindexlinks-webadmins', 'azindexlink_webadmins');
 
+function sc_remarketing_tag($attr) {
+	$conversion_id = '';
+	$img_src = '';
+
+	if ( isset( $attr[ 'conversion_id' ] ) ) {
+		$conversion_id = $attr[ 'conversion_id' ];
+	} else {
+		return '';
+	}
+
+	if ( isset( $attr[ 'img_src' ] ) ) {
+		$img_src = $attr[ 'img_src' ];
+	} else {
+		return '';
+	}
+
+	ob_start();
+
+	?>
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = <?php echo $conversion_id; ?>;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]] > */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="<?php echo $img_src; ?>" />
+		</div>
+	</noscript>
+	<?php
+
+	return ob_get_clean();
+}
+
+add_shortcode( 'google-remarketing', 'sc_remarketing_tag' );
+
 ?>

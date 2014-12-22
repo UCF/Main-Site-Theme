@@ -283,6 +283,19 @@
 				</li>
 				
 			</ul>
+			<h4>google-remarketing</h4>
+			<p>Inserts Google Ads Remarketing javascript.</p>
+			<p><strong>Available Attributes:</strong></p>
+			<dl>
+				<dt>conversion_id</dt>
+				<dd>The conversion id to be tracked.</dd>
+				<dt>img_src</dt>
+				<dd>The image source to be used to track conversion if javascript is disabled.</dd>
+			</dl>
+			<p><strong>Example:</strong></p>
+			<code>
+[google-remarketing conversion_id='1234567890' img_src="//googleads.g.doubleclick.net/pagead/1234567890/?params=param" ]
+			</code>
 		</div>
 	</div>
 </div>
