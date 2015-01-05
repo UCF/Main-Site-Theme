@@ -1067,17 +1067,13 @@ function sc_remarketing_tag($attr) {
 	$img_src = '';
 
 	if ( isset( $attr[ 'conversion_id' ] ) ) {
-		$conversion_id = $attr[ 'conversion_id' ];
-		$conversion_id = str_replace('"', "", $conversion_id);
-		$conversion_id = str_replace("'", "", $conversion_id);
+		$conversion_id = str_replace( array( '"', "'" ), '', $attr[ 'conversion_id' ] );
 	} else {
 		return '';
 	}
 
 	if ( isset( $attr[ 'img_src' ] ) ) {
-		$img_src = $attr[ 'img_src' ];
-		$img_src = str_replace('"', "", $img_src);
-		$img_src = str_replace("'", "", $img_src);
+		$img_src = str_replace( array( '"', "'" ), '', $attr[ 'img_src' ] );
 	} else {
 		return '';
 	}
