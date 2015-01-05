@@ -1068,12 +1068,16 @@ function sc_remarketing_tag($attr) {
 
 	if ( isset( $attr[ 'conversion_id' ] ) ) {
 		$conversion_id = $attr[ 'conversion_id' ];
+		$conversion_id = str_replace('"', "", $conversion_id);
+		$conversion_id = str_replace("'", "", $conversion_id);
 	} else {
 		return '';
 	}
 
 	if ( isset( $attr[ 'img_src' ] ) ) {
 		$img_src = $attr[ 'img_src' ];
+		$img_src = str_replace('"', "", $img_src);
+		$img_src = str_replace("'", "", $img_src);
 	} else {
 		return '';
 	}

@@ -294,7 +294,7 @@
 			</dl>
 			<p><strong>Example:</strong></p>
 			<code>
-[google-remarketing conversion_id='1234567890' img_src="//googleads.g.doubleclick.net/pagead/1234567890/?params=param" ]
+[google-remarketing conversion_id=1234567890 img_src=//googleads.g.doubleclick.net/pagead/1234567890/?params=param ]
 			</code>
 		</div>
 	</div>
