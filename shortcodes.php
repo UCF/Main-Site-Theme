@@ -1082,14 +1082,13 @@ function sc_remarketing_tag($attr) {
 
 	?>
 	<script type="text/javascript">
-		/* <![CDATA[ */
+		// <![CDATA[
 		var google_conversion_id = <?php echo $conversion_id; ?>;
 		var google_custom_params = window.google_tag_params;
 		var google_remarketing_only = true;
-		/* ]] > */
+		// ]]>
 	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
-	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
 	<noscript>
 		<div style="display:inline;">
 			<img height="1" width="1" style="border-style:none;" alt="" src="<?php echo $img_src; ?>" />
