@@ -9,6 +9,25 @@
 		border-top-left-radius: 0;
 	}
 
+	.dropdown-menu-form .radio,
+	.dropdown-menu-form .checkbox {
+		padding-left: 30px;
+		padding-right: 15px;
+	}
+	.dropdown-menu-heading {
+		display: block;
+		font-size: 12px;
+		font-weight: bold;
+		color: #888;
+		padding-bottom: 6px;
+		padding-left: 10px;
+		padding-top: 6px;
+		text-transform: uppercase;
+	}
+	.dropdown-menu-heading:first-child {
+		padding-top: 0;
+	}
+
 
 	#sidebar_left,
 	#contentcol,
@@ -24,23 +43,17 @@
 		font-size: 18px;
 		font-weight: 500;
 	}
-	#sidebar_left ul {
+	.degree-search-filters ul {
 		list-style-type: none;
 		margin-bottom: 15px;
 		margin-left: 0;
 	}
-	#sidebar_left ul li {
+	.degree-search-filters ul li {
 		padding-bottom: 6px;
 	}
-	#sidebar_left label {
+	.degree-search-filters label {
 		font-size: 14px;
 	}
-
-
-/*	#contentcol .degree-img-container {
-		margin-top: 30px;
-		margin-bottom: 20px;
-	}*/
 
 
 	#contentcol .degree-search-form {
@@ -51,7 +64,7 @@
 	#contentcol .degree-search-header {
 		color: #888;
 		font-size: 24px;
-		line-height: 1.4;
+		line-height: 1.25;
 		margin-top: 25px;
 		margin-bottom: 10px;
 	}
@@ -67,6 +80,38 @@
 
 	#contentcol .degree-search-sort-label {
 		padding-left: 0;
+	}
+
+
+/*	#contentcol .degree-mobile-controls {
+		text-align: center;
+	}*/
+
+	#contentcol .degree-mobile-controls {
+		border-bottom: 1px solid #e5e5e5;
+	}
+	#contentcol .degree-mobile-control {
+		border: 0;
+		display: inline-block;
+		padding: 0;
+		text-align: left;
+	}
+	#contentcol .degree-mobile-control .btn {
+		border: 0;
+		font-size: 14px;
+		padding: 5px 20px 10px;
+	}
+	#contentcol .degree-mobile-control.degree-search-filters .btn {
+		border-left: 1px solid #e5e5e5;
+	}
+	#contentcol .degree-mobile-control.degree-search-filters ul {
+		margin-bottom: 0;
+	}
+	#contentcol .degree-mobile-control.degree-search-filters ul li {
+		padding-bottom: 2px;
+	}
+	#contentcol .degree-mobile-control label {
+		font-size: 12px;
 	}
 
 
@@ -136,7 +181,9 @@
 			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 
-		<div id="sidebar_left" class="span3" role="navigation">
+		<!-- Sidebar (Desktop only) -->
+
+		<div id="sidebar_left" class="span3 degree-search-filters hidden-phone">
 			<h2>Program Types</h2>
 			<ul>
 				<li class="checkbox">
@@ -229,60 +276,6 @@
 		<div class="span9" id="contentcol">
 			<article role="main">
 
-
-				<!-- Degree image row -->
-<!--
-				<div class="row degree-img-container">
-					<div class="span2">
-						<a href="#">
-							<img src="img/undergraduate.jpg">
-							<div class="degree-heading">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" checked> Undergraduate
-									</label>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="span2">
-						<a href="#">
-							<img src="img/graduate.jpg" class="unselected">
-							<div class="degree-heading">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Graduate
-									</label>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="span2">
-						<a href="#">
-							<img src="img/minor.jpg" class="unselected">
-							<div class="degree-heading">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Minor
-									</label>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="span2">
-						<a href="#">
-							<img src="img/certificate.jpg" class="unselected">
-							<div class="degree-heading">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox"> Certificate
-									</label>
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
--->
 				<!-- Search input -->
 
 				<div class="degree-search-form form-search">
@@ -292,11 +285,11 @@
 					</div>
 				</div>
 
-				<!-- Search Results -->
+				<!-- Search Result Header: Desktop -->
 
 				<h2 class="degree-search-header">234 Results for: <em>Undergraduate</em></h2>
 
-				<div class="degree-search-sort">
+				<div class="degree-search-sort hidden-phone">
 					<strong class="degree-search-sort-label radio inline">Sort results by:</strong>
 					<label class="radio inline">
 						<input type="radio" name="sortby"> Name
@@ -305,6 +298,122 @@
 						<input type="radio" name="sortby"> Credit Hours
 					</label>
 				</div>
+
+				<!-- Search Result Header: Mobile -->
+
+				<div class="degree-mobile-controls visible-phone">
+					<div class="dropdown degree-search-sort degree-mobile-control">
+						<a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+							Sort By <span class="caret"></span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-form pull-left">
+							<label class="radio">
+								<input type="radio" name="sortby"> Name
+							</label>
+							<label class="radio">
+								<input type="radio" name="sortby"> Credit Hours
+							</label>
+						</div>
+					</div>
+
+					<div class="dropdown degree-search-filters degree-mobile-control">
+						<a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
+							Filter Results <span class="caret"></span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-form pull-right">
+							<span class="dropdown-menu-heading">Program Types</span>
+							<ul>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox" checked> Undergraduate
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Graduate
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Minor
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Certificate
+									</label>
+								</li>
+							</ul>
+
+							<span class="dropdown-menu-heading">Colleges</span>
+							<ul>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Arts &amp; Humanities
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox" checked> Business Administration
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Education &amp; Human Performance
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Engineering &amp; Computer Science
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Graduate Studies
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Health &amp; Public Affairs
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Honors
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Hospitality Management
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Medicine
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Nursing
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Optics &amp; Photonics
+									</label>
+								</li>
+								<li class="checkbox">
+									<label>
+										<input type="checkbox"> Sciences
+									</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- Search Results -->
 
 				<ul class="degree-search-results">
 					<li class="degree-search-result">
@@ -338,6 +447,8 @@
 					</li>
 				</ul>
 
+				<!-- Page Bottom -->
+
 				<hr>
 
 				<?php the_content(); ?>
@@ -348,6 +459,7 @@
 				<p class="more-details">
 					For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
 				</p>
+
 			</article>
 		</div>
 	</div>
@@ -356,30 +468,11 @@
 		/**
 		 * TODO: move to script.js when design drafting is finished!
 		 **/
-		// (function() {
-		// var $degreeImgContainer = $('.degree-img-container');
 
-		// function degreeImageClickHandler( e ) {
-
-		// 	var $target = $(this),
-		// 		$img = $target.find('img'),
-		// 		$checkbox = $target.find('input');
-
-		// 	if($target !== $checkbox) {
-		// 	e.preventDefault();
-		// 	}
-
-		// 	$img.toggleClass('unselected');
-
-		// 	$checkbox.prop( 'checked', !$img.hasClass('unselected') );
-
-		// }
-
-		// function initDegreePage() {
-		// 	$degreeImgContainer.on('click', 'a', degreeImageClickHandler);
-		// }
-
-		// $(initDegreePage);
-		// }());
+		// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
+		// and when clicking on a dropdown item, the menu doesn't disappear.
+		$(document).on('click', '.dropdown-menu-form', function(e) {
+			e.stopPropagation();
+		});
 	</script>
 <?php get_footer(); ?>
