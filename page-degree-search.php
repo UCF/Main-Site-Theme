@@ -4,9 +4,17 @@
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
 
+	.input-append .btn-group > .btn:first-child {
+		border-bottom-left-radius: 0;
+		border-top-left-radius: 0;
+	}
+
+
 	#sidebar_left,
 	#contentcol,
-	#contentcol input {
+	#contentcol input,
+	#contentcol select,
+	#contentcol option {
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
 	}
@@ -18,19 +26,25 @@
 	}
 	#sidebar_left ul {
 		list-style-type: none;
+		margin-bottom: 15px;
 		margin-left: 0;
 	}
-	#sidebar_left li {
-		margin-bottom: 8px;
+	#sidebar_left ul li {
+		padding-bottom: 6px;
 	}
 	#sidebar_left label {
 		font-size: 14px;
 	}
 
 
-	#contentcol .degree-img-container {
+/*	#contentcol .degree-img-container {
 		margin-top: 30px;
 		margin-bottom: 20px;
+	}*/
+
+
+	#contentcol .degree-search-form {
+		margin-top: 10px;
 	}
 
 
@@ -38,22 +52,33 @@
 		color: #888;
 		font-size: 24px;
 		line-height: 1.4;
-		margin-top: 30px;
-		margin-bottom: 30px;
+		margin-top: 25px;
+		margin-bottom: 10px;
 	}
 	#contentcol .degree-search-header em {
 		font-weight: 500;
 	}
 
 
+	#contentcol .degree-search-sort {
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 15px;
+	}
+
+	#contentcol .degree-search-sort-label {
+		padding-left: 0;
+	}
+
+
 	#contentcol .degree-search-results {
 		list-style-type: none;
-		margin-left: -20px;
+		margin-left: 0;
+		margin-top: 15px;
 	}
 	#contentcol .degree-search-result {
-		border-bottom: 1px solid #e5e5e5;
-		margin-bottom: 20px;
-		padding: 10px 20px;
+		/*border-bottom: 1px solid #e5e5e5;*/
+		margin-bottom: 0;
+		padding: 12px 15px 8px;
 		position: relative;
 	}
 	#contentcol .degree-search-result:hover,
@@ -81,6 +106,9 @@
 	#contentcol .degree-dept {
 		display: block;
 	}
+	#contentcol .degree-detail-label {
+		font-weight: 500;
+	}
 
 	#contentcol .degree-desc {
 		margin-top: 10px;
@@ -90,6 +118,7 @@
 	#contentcol .degree-search-result-link {
 		border: 0 solid transparent !important;
 		display: block;
+		outline: 0;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -108,38 +137,101 @@
 		</div>
 
 		<div id="sidebar_left" class="span3" role="navigation">
-			<h2>Filter by College</h2>
+			<h2>Program Types</h2>
 			<ul>
 				<li class="checkbox">
-				<label>
-					<input type="checkbox"> Arts and Humanities
-				</label>
+					<label>
+						<input type="checkbox" checked> Undergraduate
+					</label>
 				</li>
 				<li class="checkbox">
-				<label>
-					<input type="checkbox" checked> Business Administration
-				</label>
+					<label>
+						<input type="checkbox"> Graduate
+					</label>
 				</li>
 				<li class="checkbox">
-				<label>
-					<input type="checkbox"> Education and Human Performance
-				</label>
+					<label>
+						<input type="checkbox"> Minor
+					</label>
 				</li>
 				<li class="checkbox">
-				<label>
-					<input type="checkbox"> Engineering and Computer Science
-				</label>
+					<label>
+						<input type="checkbox"> Certificate
+					</label>
+				</li>
+			</ul>
+
+			<h2>Colleges</h2>
+			<ul>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Arts &amp; Humanities
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox" checked> Business Administration
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Education &amp; Human Performance
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Engineering &amp; Computer Science
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Graduate Studies
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Health &amp; Public Affairs
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Honors
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Hospitality Management
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Medicine
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Nursing
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Optics &amp; Photonics
+					</label>
+				</li>
+				<li class="checkbox">
+					<label>
+						<input type="checkbox"> Sciences
+					</label>
 				</li>
 			</ul>
 		</div>
 
 		<div class="span9" id="contentcol">
 			<article role="main">
-				<?php the_content(); ?>
 
 
 				<!-- Degree image row -->
-
+<!--
 				<div class="row degree-img-container">
 					<div class="span2">
 						<a href="#">
@@ -190,37 +282,29 @@
 						</a>
 					</div>
 				</div>
-
+-->
 				<!-- Search input -->
 
-				<div class="degree-search-form">
+				<div class="degree-search-form form-search">
 					<div class="input-append">
-
-						<input type="text" class="span5" placeholder="Enter search term">
-
-						<div class="btn-group" role="group">
-							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-								Sort: Name
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#">Name</a>
-								</li>
-								<li>
-									<a href="#">Hours</a>
-								</li>
-							</ul>
-						</div>
-
-						<button class="btn btn-primary" type="button"><i class="icon-white icon-search"></i></button>
-
+						<input type="text" class="span6 search-query" placeholder="Find programs by name or keyword...">
+						<button class="btn btn-primary" type="button">Search</button>
 					</div>
 				</div>
 
 				<!-- Search Results -->
 
 				<h2 class="degree-search-header">234 Results for: <em>Undergraduate</em></h2>
+
+				<div class="degree-search-sort">
+					<strong class="degree-search-sort-label radio inline">Sort results by:</strong>
+					<label class="radio inline">
+						<input type="radio" name="sortby"> Name
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="sortby"> Credit Hours
+					</label>
+				</div>
 
 				<ul class="degree-search-results">
 					<li class="degree-search-result">
@@ -230,7 +314,7 @@
 						</h3>
 						<span class="degree-college">College of Business Administration</span>
 						<span class="degree-dept">
-							<strong>Department:</strong> Kenneth G. Dixon School of Accounting
+							<span class="degree-detail-label">Department:</span> Kenneth G. Dixon School of Accounting
 						</span>
 						<p class="degree-desc">
 							The objective of the Accounting track in the Business Administration PhD program is to prepare students for academic careers in higher education and management careers within profit and nonprofit organizations. Success in the program is judged by the student’s understanding of the issues and methodologies essential to the advancement of knowledge.
@@ -245,7 +329,7 @@
 						</h3>
 						<span class="degree-college">College of Business Administration</span>
 						<span class="degree-dept">
-							<strong>Department:</strong> Finance
+							<span class="degree-detail-label">Department:</span> Finance
 						</span>
 						<p class="degree-desc">
 							The objective of the Finance track in the Business Administration PhD program is to prepare students for academic careers in higher education and management careers within profit and nonprofit organizations. Success in the program is judged by the student’s understanding of the issues and methodologies essential to the advancement of knowledge.
@@ -254,7 +338,9 @@
 					</li>
 				</ul>
 
-				<br>
+				<hr>
+
+				<?php the_content(); ?>
 
 				<p class="more-details">
 					For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
@@ -270,30 +356,30 @@
 		/**
 		 * TODO: move to script.js when design drafting is finished!
 		 **/
-		(function() {
-		var $degreeImgContainer = $('.degree-img-container');
+		// (function() {
+		// var $degreeImgContainer = $('.degree-img-container');
 
-		function degreeImageClickHandler( e ) {
+		// function degreeImageClickHandler( e ) {
 
-			var $target = $(this),
-				$img = $target.find('img'),
-				$checkbox = $target.find('input');
+		// 	var $target = $(this),
+		// 		$img = $target.find('img'),
+		// 		$checkbox = $target.find('input');
 
-			if($target !== $checkbox) {
-			e.preventDefault();
-			}
+		// 	if($target !== $checkbox) {
+		// 	e.preventDefault();
+		// 	}
 
-			$img.toggleClass('unselected');
+		// 	$img.toggleClass('unselected');
 
-			$checkbox.prop( 'checked', !$img.hasClass('unselected') );
+		// 	$checkbox.prop( 'checked', !$img.hasClass('unselected') );
 
-		}
+		// }
 
-		function initDegreePage() {
-			$degreeImgContainer.on('click', 'a', degreeImageClickHandler);
-		}
+		// function initDegreePage() {
+		// 	$degreeImgContainer.on('click', 'a', degreeImageClickHandler);
+		// }
 
-		$(initDegreePage);
-		}());
+		// $(initDegreePage);
+		// }());
 	</script>
 <?php get_footer(); ?>
