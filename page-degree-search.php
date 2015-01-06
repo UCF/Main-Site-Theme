@@ -3,108 +3,99 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
-	.degree-container .degree-header-img {
-		margin: 20px 0;
-	}
-	.degree-container a {
-		color: #08c;
-	}
-	.degree-container .overview-table {
-		margin-top: 10px;
-		width: 100%;
-	}
-	.degree-container .overview-table td {
-		padding: 5px 0;
-	}
-	.degree-container .degree-sm-column .apply-button {
-		font-size: 18px;
-		font-weight: bold;
-		margin-top: 20px;
-		padding: 10px 15px;
-		width: 100%;
-	}
-	.degree-container .degree-sm-column ul {
-		padding-left: 0;
-	}
-	.degree-container .degree-sm-column ul li {
-		list-style: none;
-		margin-bottom: 5px;
-	}
-	.degree-container .degree-overview {
-		margin-bottom: 30px;
-		margin-top: 20px;
-	}
-	.degree-container h4.header {
-		color: gray;
-		margin-top: 30px;
-	}
-	.degree-container .deadline-comments {
-		color: #999999;
-	}
-	.degree-container #contact h5 {
-		margin-bottom: 7px;
-		margin-top: 20px;
-	}
-	.degree-container .no-wrap {
-		white-space: nowrap;
+
+	#sidebar_left,
+	#contentcol,
+	#contentcol input {
+		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		font-size: 14px;
 	}
 
-	.degree-search .degree-sm-column .checkbox {
-		margin: 10px 0;
+	#sidebar_left h2 {
+		color: #888;
+		font-size: 18px;
+		font-weight: 500;
 	}
-	.degree-search .degree-search-results {
+	#sidebar_left ul {
+		list-style-type: none;
+		margin-left: 0;
+	}
+	#sidebar_left li {
+		margin-bottom: 8px;
+	}
+	#sidebar_left label {
+		font-size: 14px;
+	}
+
+
+	#contentcol .degree-img-container {
 		margin-top: 30px;
+		margin-bottom: 20px;
 	}
-	.degree-search .degree-search-result {
-		border-bottom: 1px #ccc solid;
-		margin-top: 20px;
+
+
+	#contentcol .degree-search-header {
+		color: #888;
+		font-size: 24px;
+		line-height: 1.4;
+		margin-top: 30px;
+		margin-bottom: 30px;
 	}
-	.degree-search .degree-search-result:hover {
+	#contentcol .degree-search-header em {
+		font-weight: 500;
+	}
+
+
+	#contentcol .degree-search-results {
+		list-style-type: none;
+		margin-left: -20px;
+	}
+	#contentcol .degree-search-result {
+		border-bottom: 1px solid #e5e5e5;
+		margin-bottom: 20px;
+		padding: 10px 20px;
+		position: relative;
+	}
+	#contentcol .degree-search-result:hover,
+	#contentcol .degree-search-result:active,
+	#contentcol .degree-search-result:focus {
 		background-color: #eee;
-		cursor: pointer;
 	}
-	.degree-search .degree-search-result label {
-		font-weight: normal;
-		margin-bottom: 0;
+
+	#contentcol .degree-title {
+		font-size: 18px;
+		margin-bottom: 8px;
 	}
-	.degree-search .degree-search-result p {
-		margin-top: 8px;
+	#contentcol .degree-title a {
+		border: 0 solid transparent;
+		color: #08c;
+		font-weight: 500;
 	}
-	.degree-search .degree-search-results-count {
-		margin-top: 5px;
-		text-align: right;
-	}
-	.degree-search .degree-search-credits-count {
-		color: gray;
+	#contentcol .degree-credits-count {
+		color: #888;
 		font-size: 14px;
 		font-weight: normal;
+	}
+
+	#contentcol .degree-college,
+	#contentcol .degree-dept {
+		display: block;
+	}
+
+	#contentcol .degree-desc {
 		margin-top: 10px;
-		text-align: right;
+		margin-bottom: 5px;
 	}
-	.degree-search .degree-search-header {
-		color: gray;
-		margin: 0;
-	}
-	.degree-search .degree-img-container {
-		margin: 40px 0;
-	}
-	.degree-search .degree-img-container a {
-		color: #000;
-		text-decoration: underline;
-	}
-	.degree-search .degree-img-container .unselected {
-		opacity: .7;
-	}
-	.degree-search .degree-img-container .checkbox {
-		margin: 0;
-	}
-	.degree-search .degree-heading {
+
+	#contentcol .degree-search-result-link {
+		border: 0 solid transparent !important;
+		display: block;
 		position: absolute;
-		top: 80%;
-		padding-left: 5%;
-		background: white;
-		width: 100%;
-		opacity: 0.8;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		text-indent: -9999px;
 	}
 	</style>
 
@@ -202,30 +193,28 @@
 
 				<!-- Search input -->
 
-				<div class="row">
-					<div class="span9">
-						<div class="input-append">
+				<div class="degree-search-form">
+					<div class="input-append">
 
-							<input type="text" class="span5" placeholder="Enter search term">
+						<input type="text" class="span5" placeholder="Enter search term">
 
-							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									Sort: Name
-									<span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" role="menu">
-									<li>
-										<a href="#">Name</a>
-									</li>
-									<li>
-										<a href="#">Hours</a>
-									</li>
-								</ul>
-							</div>
-
-							<button class="btn btn-primary" type="button"><i class="icon-white icon-search"></i></button>
-
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								Sort: Name
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#">Name</a>
+								</li>
+								<li>
+									<a href="#">Hours</a>
+								</li>
+							</ul>
 						</div>
+
+						<button class="btn btn-primary" type="button"><i class="icon-white icon-search"></i></button>
+
 					</div>
 				</div>
 
@@ -233,10 +222,10 @@
 
 				<h2 class="degree-search-header">234 Results for: <em>Undergraduate</em></h2>
 
-				<div class="row degree-search-result">
-					<div class="span9">
+				<ul class="degree-search-results">
+					<li class="degree-search-result">
 						<h3 class="degree-title">
-							<a href="degree.html">Accounting</a>
+							<a href="#">Accounting</a>
 							<span class="degree-credits-count">&mdash; 140 credit hours</span>
 						</h3>
 						<span class="degree-college">College of Business Administration</span>
@@ -246,13 +235,12 @@
 						<p class="degree-desc">
 							The objective of the Accounting track in the Business Administration PhD program is to prepare students for academic careers in higher education and management careers within profit and nonprofit organizations. Success in the program is judged by the student’s understanding of the issues and methodologies essential to the advancement of knowledge.
 						</p>
-					</div>
-				</div>
+						<a class="degree-search-result-link" href="#">Read more about the Accounting degree.</a>
+					</li>
 
-				<div class="row degree-search-result">
-					<div class="span9">
+					<li class="degree-search-result">
 						<h3 class="degree-title">
-							<a href="degree.html">Finance</a>
+							<a href="#">Finance</a>
 							<span class="degree-credits-count">&mdash; 140 credit hours</span>
 						</h3>
 						<span class="degree-college">College of Business Administration</span>
@@ -262,11 +250,11 @@
 						<p class="degree-desc">
 							The objective of the Finance track in the Business Administration PhD program is to prepare students for academic careers in higher education and management careers within profit and nonprofit organizations. Success in the program is judged by the student’s understanding of the issues and methodologies essential to the advancement of knowledge.
 						</p>
-					</div>
-				</div>
+						<a class="degree-search-result-link" href="#">Read more about the Finance degree.</a>
+					</li>
+				</ul>
 
-
-				<hr>
+				<br>
 
 				<p class="more-details">
 					For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
