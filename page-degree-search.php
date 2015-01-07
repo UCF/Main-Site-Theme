@@ -9,22 +9,31 @@
 		border-top-left-radius: 0;
 	}
 
+	.dropdown-menu-form {
+		max-height: 250px;
+		min-width: 225px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
 	.dropdown-menu-form .radio,
 	.dropdown-menu-form .checkbox {
 		padding-left: 30px;
 		padding-right: 15px;
 	}
 	.dropdown-menu-heading {
+		border-top: 1px solid #e5e5e5;
 		display: block;
 		font-size: 12px;
 		font-weight: bold;
 		color: #888;
 		padding-bottom: 6px;
 		padding-left: 10px;
-		padding-top: 6px;
+		padding-top: 8px;
 		text-transform: uppercase;
 	}
 	.dropdown-menu-heading:first-child {
+		border-top: 0 solid transparent;
 		padding-top: 0;
 	}
 
@@ -68,6 +77,13 @@
 		margin-top: 25px;
 		margin-bottom: 10px;
 	}
+	@media (max-width: 767px) {
+		#contentcol .degree-search-header {
+			font-size: 22px;
+			line-height: 1.2;
+			margin-top: 15px;
+		}
+	}
 	#contentcol .degree-search-header em {
 		font-weight: 500;
 	}
@@ -101,17 +117,24 @@
 		font-size: 14px;
 		padding: 5px 20px 10px;
 	}
+	#contentcol .degree-mobile-control.open .btn {
+		color: #08c !important;
+		outline: 0;
+	}
+	#contentcol .degree-mobile-control .btn .caret {
+		margin-left: 3px;
+	}
 	#contentcol .degree-mobile-control.degree-search-filters .btn {
 		border-left: 1px solid #e5e5e5;
 	}
 	#contentcol .degree-mobile-control.degree-search-filters ul {
-		margin-bottom: 0;
+		margin-bottom: 5px;
 	}
 	#contentcol .degree-mobile-control.degree-search-filters ul li {
 		padding-bottom: 2px;
 	}
 	#contentcol .degree-mobile-control label {
-		font-size: 12px;
+		font-size: 13px;
 	}
 
 
@@ -130,6 +153,17 @@
 	#contentcol .degree-search-result:active,
 	#contentcol .degree-search-result:focus {
 		background-color: #eee;
+	}
+	@media (max-width: 767px) {
+		#contentcol .degree-search-result {
+			margin-bottom: 20px;
+			padding: 0;
+		}
+		#contentcol .degree-search-result:hover,
+		#contentcol .degree-search-result:active,
+		#contentcol .degree-search-result:focus {
+			background-color: transparent;
+		}
 	}
 
 	#contentcol .degree-title {
@@ -151,6 +185,14 @@
 	#contentcol .degree-dept {
 		display: block;
 	}
+	@media (max-width: 768px) {
+		#contentcol .degree-college,
+		#contentcol .degree-dept {
+			font-size: 12px;
+			line-height: 1.25;
+			margin-bottom: 4px;
+		}
+	}
 	#contentcol .degree-detail-label {
 		font-weight: 500;
 	}
@@ -158,6 +200,11 @@
 	#contentcol .degree-desc {
 		margin-top: 10px;
 		margin-bottom: 5px;
+	}
+	@media (max-width: 767px) {
+		#contentcol .degree-desc {
+			font-size: 13px;
+		}
 	}
 
 	#contentcol .degree-search-result-link {
@@ -425,8 +472,16 @@
 						<span class="degree-dept">
 							<span class="degree-detail-label">Department:</span> Kenneth G. Dixon School of Accounting
 						</span>
-						<p class="degree-desc">
-							The objective of the Accounting track in the Business Administration PhD program is to prepare students for academic careers in higher education and management careers within profit and nonprofit organizations. Success in the program is judged by the student’s understanding of the issues and methodologies essential to the advancement of knowledge.
+						<p class="degree-desc hidden-phone">
+							The objective of the Accounting track in the Business Administration PhD program is to prepare
+							students for academic careers in higher education and management careers within profit and
+							nonprofit organizations. Success in the program is judged by the student’s understanding of
+							the issues and methodologies essential to the advancement of knowledge.
+						</p>
+						<p class="degree-desc visible-phone">
+							The objective of the Accounting track in the Business Administration PhD program is to prepare
+							students for academic careers in higher education and management careers within profit and
+							nonprofit organizations.&hellip;
 						</p>
 						<a class="degree-search-result-link" href="#">Read more about the Accounting degree.</a>
 					</li>
@@ -440,8 +495,16 @@
 						<span class="degree-dept">
 							<span class="degree-detail-label">Department:</span> Finance
 						</span>
-						<p class="degree-desc">
-							The objective of the Finance track in the Business Administration PhD program is to prepare students for academic careers in higher education and management careers within profit and nonprofit organizations. Success in the program is judged by the student’s understanding of the issues and methodologies essential to the advancement of knowledge.
+						<p class="degree-desc hidden-phone">
+							The objective of the Finance track in the Business Administration PhD program is to prepare
+							students for academic careers in higher education and management careers within profit and
+							nonprofit organizations. Success in the program is judged by the student’s understanding of
+							the issues and methodologies essential to the advancement of knowledge.
+						</p>
+						<p class="degree-desc visible-phone">
+							The objective of the Finance track in the Business Administration PhD program is to prepare
+							students for academic careers in higher education and management careers within profit and
+							nonprofit organizations.&hellip;
 						</p>
 						<a class="degree-search-result-link" href="#">Read more about the Finance degree.</a>
 					</li>
@@ -468,11 +531,24 @@
 		/**
 		 * TODO: move to script.js when design drafting is finished!
 		 **/
+		$(document).ready(function() {
+			// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
+			// and when clicking on a dropdown item, the menu doesn't disappear.
+			$(document).on('click', '.dropdown-menu-form', function(e) {
+				e.stopPropagation();
+			});
 
-		// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
-		// and when clicking on a dropdown item, the menu doesn't disappear.
-		$(document).on('click', '.dropdown-menu-form', function(e) {
-			e.stopPropagation();
+			// Make sure mobile users don't have to scroll down to view
+			// .dropdown-menu-form contents (and subsequently close the dropdown)
+			// TODO: fix clickable box area bugginess in iOS
+			var $mobileControlBtn = $('.degree-mobile-control > .dropdown-toggle');
+			$mobileControlBtn.on('click', function(e) {
+				if ($(window).width() < 768) {
+					$('html, body').animate({
+						scrollTop: $(this).offset().top,
+					}, 200);
+				}
+			});
 		});
 	</script>
 <?php get_footer(); ?>
