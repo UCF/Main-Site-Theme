@@ -3,6 +3,77 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
+
+	#contentcol {
+		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		font-size: 14px;
+	}
+
+
+	.prereqs {
+		/*padding-left: 15px;*/
+		margin-left: 15px;
+	}
+	@media (max-width: 480px) {
+		.prereqs {
+			margin-left: 5px;
+		}
+	}
+
+
+	#comparison-chart-head-phone {
+		background-color: #fff;
+		margin-left: -20px; /* force push past body margin-left */
+		width: 100%;
+	}
+	#comparison-chart-head-phone.affix {
+		top: 0;
+	}
+
+	#comparison-chart-head-phone .table {
+		border-bottom: 2px solid #e5e5e5;
+		margin-bottom: 0;
+		margin-left: 20px;
+	}
+	#comparison-chart-head-phone.affix .table {
+		margin-left: 0;
+	}
+	#comparison-chart-head-phone .table th {
+		text-align: center;
+		width: 50%;
+	}
+
+
+	.comparison-chart > tbody > tr > th {
+		width: 20%;
+	}
+	.comparison-chart > tbody > tr > td {
+		width: 40%;
+	}
+
+	@media (max-width: 767px) {
+		.comparison-chart > thead > th {
+			width: 50%;
+		}
+		.comparison-chart > tbody > tr > th,
+		.comparison-chart > tbody > tr > td {
+			box-sizing: border-box;
+			padding: 8px 15px;
+		}
+		.comparison-chart > tbody > tr > th {
+			background-color: #fafafa;
+			border-top: 0;
+			display: block !important;
+			margin-top: 10px;
+			width: 100%;
+		}
+		.comparison-chart > tbody > tr > td {
+			border-top: 0;
+			display: block !important;
+			float: left;
+			width: 50%;
+		}
+	}
 	</style>
 
 
@@ -16,7 +87,7 @@
 		<div class="span12" id="contentcol">
 			<article role="main">
 
-					<div class="comparison-chart-head-phone visible-phone" data-spy="affix" data-offset-top="115">
+					<div class="visible-phone" id="comparison-chart-head-phone">
 						<table class="table">
 							<thead>
 								<tr>
@@ -121,7 +192,15 @@
 		 * TODO: move to script.js when design drafting is finished!
 		 **/
 		$(document).ready(function() {
+			// Affix .comparison-chart-head-phone
+			$comparisonChartHead = $('#comparison-chart-head-phone');
+			$comparisonChart = $comparisonChartHead.next('.comparison-chart');
 
+			$comparisonChartHead.affix({
+				offset: {
+					top: $comparisonChart.offset().top + $comparisonChartHead.height()
+				}
+			});
 		});
 	</script>
 <?php get_footer(); ?>
