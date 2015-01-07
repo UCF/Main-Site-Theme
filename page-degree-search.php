@@ -220,311 +220,152 @@
 	}
 	</style>
 
-
 	<?php $degrees = get_degree_search_data(); ?>
 	<div class="row page-content" id="academics-search">
-		<div class="span12" id="page_title">
-			<h1 class="span9"><?php the_title();?></h1>
-			<?php esi_include('output_weather_data','span3'); ?>
-		</div>
 
-		<!-- Sidebar (Desktop only) -->
+		<form>
 
-		<div id="sidebar_left" class="span3 degree-search-filters hidden-phone">
-			<h2>Program Types</h2>
-			<ul>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox" checked> Undergraduate
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Graduate
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Minor
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Certificate
-					</label>
-				</li>
-			</ul>
+			<div class="span12" id="page_title">
+				<h1 class="span9"><?php the_title();?></h1>
+				<?php esi_include('output_weather_data','span3'); ?>
+			</div>
 
-			<h2>Colleges</h2>
-			<ul>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Arts &amp; Humanities
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox" checked> Business Administration
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Education &amp; Human Performance
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Engineering &amp; Computer Science
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Graduate Studies
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Health &amp; Public Affairs
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Honors
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Hospitality Management
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Medicine
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Nursing
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Optics &amp; Photonics
-					</label>
-				</li>
-				<li class="checkbox">
-					<label>
-						<input type="checkbox"> Sciences
-					</label>
-				</li>
-			</ul>
-		</div>
+			<!-- Sidebar (Desktop only) -->
 
-		<div class="span9" id="contentcol">
-			<article role="main">
-
-				<!-- Search input -->
-
-				<div class="degree-search-form form-search">
-					<div class="input-append">
-						<input type="text" class="span6 search-query" placeholder="Find programs by name or keyword...">
-						<button class="btn btn-primary" type="button">Search</button>
-					</div>
-				</div>
-
-				<!-- Search Result Header: Desktop -->
-
-				<h2 class="degree-search-header">234 Results for: <em>Undergraduate</em></h2>
-
-				<div class="degree-search-sort hidden-phone">
-					<strong class="degree-search-sort-label radio inline">Sort results by:</strong>
-					<label class="radio inline">
-						<input type="radio" name="sortby"> Name
-					</label>
-					<label class="radio inline">
-						<input type="radio" name="sortby"> Credit Hours
-					</label>
-				</div>
-
-				<!-- Search Result Header: Mobile -->
-
-				<div class="degree-mobile-controls visible-phone">
-					<div class="dropdown degree-search-sort degree-mobile-control">
-						<a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
-							Sort By <span class="caret"></span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-form pull-left">
-							<label class="radio">
-								<input type="radio" name="sortby"> Name
-							</label>
-							<label class="radio">
-								<input type="radio" name="sortby"> Credit Hours
-							</label>
-						</div>
-					</div>
-
-					<div class="dropdown degree-search-filters degree-mobile-control">
-						<a class="btn btn-link dropdown-toggle" data-toggle="dropdown" href="#">
-							Filter Results <span class="caret"></span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-form pull-right">
-							<span class="dropdown-menu-heading">Program Types</span>
-							<ul>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox" checked> Undergraduate
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Graduate
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Minor
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Certificate
-									</label>
-								</li>
-							</ul>
-
-							<span class="dropdown-menu-heading">Colleges</span>
-							<ul>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Arts &amp; Humanities
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox" checked> Business Administration
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Education &amp; Human Performance
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Engineering &amp; Computer Science
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Graduate Studies
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Health &amp; Public Affairs
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Honors
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Hospitality Management
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Medicine
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Nursing
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Optics &amp; Photonics
-									</label>
-								</li>
-								<li class="checkbox">
-									<label>
-										<input type="checkbox"> Sciences
-									</label>
-								</li>
-							</ul>
-						</div>
-					</div>
-
-				</div>
-
-				<!-- Search Results -->
-
-				<ul class="degree-search-results">
-					<li class="degree-search-result">
-						<h3 class="degree-title">
-							<a href="#">Accounting</a>
-							<span class="degree-credits-count">&mdash; 140 credit hours</span>
-						</h3>
-						<span class="degree-college">College of Business Administration</span>
-						<span class="degree-dept">
-							<span class="degree-detail-label">Department:</span> Kenneth G. Dixon School of Accounting
-						</span>
-						<p class="degree-desc hidden-phone">
-							The objective of the Accounting track in the Business Administration PhD program is to prepare
-							students for academic careers in higher education and management careers within profit and
-							nonprofit organizations. Success in the program is judged by the student’s understanding of
-							the issues and methodologies essential to the advancement of knowledge.
-						</p>
-						<p class="degree-desc visible-phone">
-							The objective of the Accounting track in the Business Administration PhD program is to prepare
-							students for academic careers in higher education and management careers within profit and
-							nonprofit organizations.&hellip;
-						</p>
-						<a class="degree-search-result-link" href="#">Read more about the Accounting degree.</a>
+			<div id="sidebar_left" class="span3 degree-search-filters hidden-phone">
+				<h2>Program Types</h2>
+				<ul>
+					<li class="checkbox">
+						<label>
+							<input name="programType[]" id="programType" value="undergraduate" type="checkbox" <?php if (isset($programType) && $programType=="undergraduate") echo "checked";?>> Undergraduate
+						</label>
 					</li>
-
-					<li class="degree-search-result">
-						<h3 class="degree-title">
-							<a href="#">Finance</a>
-							<span class="degree-credits-count">&mdash; 140 credit hours</span>
-						</h3>
-						<span class="degree-college">College of Business Administration</span>
-						<span class="degree-dept">
-							<span class="degree-detail-label">Department:</span> Finance
-						</span>
-						<p class="degree-desc hidden-phone">
-							The objective of the Finance track in the Business Administration PhD program is to prepare
-							students for academic careers in higher education and management careers within profit and
-							nonprofit organizations. Success in the program is judged by the student’s understanding of
-							the issues and methodologies essential to the advancement of knowledge.
-						</p>
-						<p class="degree-desc visible-phone">
-							The objective of the Finance track in the Business Administration PhD program is to prepare
-							students for academic careers in higher education and management careers within profit and
-							nonprofit organizations.&hellip;
-						</p>
-						<a class="degree-search-result-link" href="#">Read more about the Finance degree.</a>
+					<li class="checkbox">
+						<label>
+							<input name="programType[]" id="programType" value="graduate" type="checkbox" <?php if (isset($programType) && $programType=="graduate") echo "checked";?>> Graduate
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="programType[]" id="programType" value="minor" type="checkbox"> Minor
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="programType[]" id="programType" value="certificate" type="checkbox"> Certificate
+						</label>
 					</li>
 				</ul>
 
-				<!-- Page Bottom -->
+				<h2>Colleges</h2>
+				<ul>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Arts &amp; Humanities
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox" checked> Business Administration
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Education &amp; Human Performance
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Engineering &amp; Computer Science
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Graduate Studies
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Health &amp; Public Affairs
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Honors
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Hospitality Management
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Medicine
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Nursing
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Optics &amp; Photonics
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input type="checkbox"> Sciences
+						</label>
+					</li>
+				</ul>
+			</div>
 
-				<hr>
+			<div class="span9" id="contentcol">
+				<article role="main">
 
-				<?php the_content(); ?>
+					<!-- Search input -->
 
-				<p class="more-details">
-					For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
-				</p>
-				<p class="more-details">
-					For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
-				</p>
+					<div class="degree-search-form form-search">
+						<div class="input-append">
+							<input type="text" name="search-query" class="span6 search-query" placeholder="Find programs by name or keyword...">
+							<button class="btn btn-primary" type="button">Search</button>
+						</div>
+					</div>
 
-			</article>
-		</div>
+					<!-- Search Result Header: Desktop -->
+
+					<div class="degree-search-sort">
+						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
+						<label class="radio inline">
+							<input type="radio" name="sortby" value="degree-name" checked> Name
+						</label>
+						<label class="radio inline">
+							<input type="radio" name="sortby" value="credit-hours"> Credit Hours
+						</label>
+					</div>
+
+					<?php include 'page-degree-search-results.php'; ?>
+
+					<!-- Page Bottom -->
+
+					<hr>
+
+					<?php the_content(); ?>
+
+					<p class="more-details">
+						For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
+					</p>
+					<p class="more-details">
+						For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
+					</p>
+
+				</article>
+			</div>
+
+		</form>
+
 	</div>
 
 	<script>
@@ -532,6 +373,9 @@
 		 * TODO: move to script.js when design drafting is finished!
 		 **/
 		$(document).ready(function() {
+
+			var searchResultsURI = '<?php echo get_stylesheet_directory_uri(); ?>';
+
 			// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
 			// and when clicking on a dropdown item, the menu doesn't disappear.
 			$(document).on('click', '.dropdown-menu-form', function(e) {
