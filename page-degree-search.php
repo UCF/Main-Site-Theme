@@ -185,7 +185,7 @@
 	#contentcol .degree-dept {
 		display: block;
 	}
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		#contentcol .degree-college,
 		#contentcol .degree-dept {
 			font-size: 12px;
