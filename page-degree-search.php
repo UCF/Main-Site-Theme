@@ -220,6 +220,21 @@
 	}
 	</style>
 
+	<?php
+		$program_type = "undergraduate";
+
+		if(!empty($_GET['program-type'])){
+			$arraySize = count($_GET['program-type']);
+
+			foreach($_GET['program-type'] as $key=>$value){
+				$program_type = $program_type . $value;
+				if($key > -1 && $key < $arraySize-1) {
+					$program_type = $program_type . ' and ';
+				}
+			}
+		}
+	?>
+
 	<?php $degrees = get_degree_search_data(); ?>
 	<div class="row page-content" id="academics-search">
 
@@ -237,22 +252,26 @@
 				<ul>
 					<li class="checkbox">
 						<label>
-							<input name="programType[]" id="programType" value="undergraduate" type="checkbox" <?php if (isset($programType) && $programType=="undergraduate") echo "checked";?>> Undergraduate
+							<input name="program-type[]" class="program-type" value="undergraduate" type="checkbox"
+								<?php if (!isset($_GET['program-type']) || (isset($_GET['program-type']) && in_array("undergraduate", $_GET['program-type']))) echo "checked";?>> Undergraduate
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="programType[]" id="programType" value="graduate" type="checkbox" <?php if (isset($programType) && $programType=="graduate") echo "checked";?>> Graduate
+							<input name="program-type[]" class="program-type" value="graduate" type="checkbox"
+								<?php if (isset($_GET['program-type']) && in_array("graduate", $_GET['program-type'])) echo "checked";?>> Graduate
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="programType[]" id="programType" value="minor" type="checkbox"> Minor
+							<input name="program-type[]" class="program-type" value="minor" type="checkbox"
+								<?php if (isset($_GET['program-type']) && in_array("minor", $_GET['program-type'])) echo "checked";?>> Minor
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="programType[]" id="programType" value="certificate" type="checkbox"> Certificate
+							<input name="program-type[]" class="program-type" value="certificate" type="checkbox"
+								<?php if (isset($_GET['program-type']) && in_array("certificate", $_GET['program-type'])) echo "checked";?>> Certificate
 						</label>
 					</li>
 				</ul>
@@ -329,24 +348,15 @@
 
 					<div class="degree-search-form form-search">
 						<div class="input-append">
-							<input type="text" name="search-query" class="span6 search-query" placeholder="Find programs by name or keyword...">
-							<button class="btn btn-primary" type="button">Search</button>
+							<input type="text" name="search-query" class="span6 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+							<button class="btn visible-phone" type="button"><i class="icon-filter"></i></button>
+							<button class="btn btn-primary" type="button"><i class="icon-search icon-white"></i></button>
 						</div>
 					</div>
 
-					<!-- Search Result Header: Desktop -->
-
-					<div class="degree-search-sort">
-						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
-						<label class="radio inline">
-							<input type="radio" name="sortby" value="degree-name" checked> Name
-						</label>
-						<label class="radio inline">
-							<input type="radio" name="sortby" value="credit-hours"> Credit Hours
-						</label>
+					<div class="degree-search-results-container">
+						<?php include 'page-degree-search-results.php'; ?>
 					</div>
-
-					<?php include 'page-degree-search-results.php'; ?>
 
 					<!-- Page Bottom -->
 
@@ -369,30 +379,68 @@
 	</div>
 
 	<script>
-		/**
-		 * TODO: move to script.js when design drafting is finished!
-		 **/
-		$(document).ready(function() {
 
-			var searchResultsURI = '<?php echo get_stylesheet_directory_uri(); ?>';
+		(function() {
 
-			// Allow Bootstrap dropdown menus to have forms/checkboxes inside,
-			// and when clicking on a dropdown item, the menu doesn't disappear.
-			$(document).on('click', '.dropdown-menu-form', function(e) {
-				e.stopPropagation();
-			});
+			var $academicsSearch,
+				$degreeSearchResultsContainer;
 
-			// Make sure mobile users don't have to scroll down to view
-			// .dropdown-menu-form contents (and subsequently close the dropdown)
-			// TODO: fix clickable box area bugginess in iOS
-			var $mobileControlBtn = $('.degree-mobile-control > .dropdown-toggle');
-			$mobileControlBtn.on('click', function(e) {
-				if ($(window).width() < 768) {
-					$('html, body').animate({
-						scrollTop: $(this).offset().top,
-					}, 200);
+			function degreeSearchSuccessHandler( data ) {
+				$degreeSearchResultsContainer.html(data);
+			}
+
+			function degreeSearchFailureHandler( data ) {
+				$degreeSearchResultsContainer.html('Error loading degree data.');
+			}
+
+			function loadDegreeSearchResults() {
+
+				var programType = [];
+				    $academicsSearch.find('.program-type:checked').each(function() {
+				        programType.push($(this).val());
+				    });
+
+				var jqxhr = $.ajax({
+				    url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results.php',
+				    type: "GET",
+				    cache: false,
+				    data: {
+				    	'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
+				    	'sort-by': $academicsSearch.find('.sort-by:checked').val(),
+				    	'program-type': programType
+				    },
+				    dataType: "html"
+				});
+				$degreeSearchResultsContainer.html('<img src="//universityheader.ucf.edu/bar/img/ajax-loader.gif" width="16" height="16" /> Loading search results...');
+				jqxhr.done(degreeSearchSuccessHandler);
+				jqxhr.fail(degreeSearchFailureHandler);
+			}
+
+			function degreeSearchChangeHandler() {
+				loadDegreeSearchResults();
+			}
+
+			function searchQueryKeyUpHandler(e) {
+				//TODO: wait till user stops typing before firing
+				if($(e.target).val().length > 2) {
+					loadDegreeSearchResults();
 				}
-			});
-		});
+			}
+
+			function setupEventHandlers() {
+				$academicsSearch.on('change', '.program-type, .sort-by', degreeSearchChangeHandler);
+				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
+			}
+
+			function initPage() {
+				$academicsSearch = $('#academics-search');
+				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
+				setupEventHandlers();
+			}
+
+			$(initPage);
+
+		})();
 	</script>
+
 <?php get_footer(); ?>
