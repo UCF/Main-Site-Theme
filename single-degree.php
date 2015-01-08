@@ -6,7 +6,6 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
-
 	#contentcol,
 	#sidebar_right {
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
@@ -48,6 +47,8 @@
 		color: #888;
 		font-size: 18px;
 		font-weight: 500;
+		line-height: 1.2;
+		margin-bottom: 5px;
 		margin-top: 20px;
 	}
 	#sidebar_right ul {
@@ -66,7 +67,6 @@
 			<article role="main">
 
 				<!-- Degree meta details -->
-
 				<div class="row degree-details">
 					<div class="span5">
 						<dl>
@@ -109,6 +109,25 @@
 					Complete details and requirements available in the <a href="#">undergraduate catalog</a>.
 				</div>
 
+				<!-- For root programs ONLY (programs that have a academicSubPlanList)
+
+				<h2>Program Tracks</h2>
+				<ul>
+					<li>
+						<a href="#">Accounting</a>
+					</li>
+					<li>
+						<a href="#">Finance</a>
+					</li>
+					<li>
+						<a href="#">Marketing</a>
+					</li>
+					<li>
+						<a href="#">Management</a>
+					</li>
+				</ul>
+				-->
+
 			</article>
 		</div>
 		<div id="sidebar_right" class="span4 notoppad" role="complementary">
@@ -118,28 +137,26 @@
 			<a class="btn btn-large btn-block btn-success">Apply Now</a>
 			<a class="btn btn-large btn-block">View Catalog</a>
 
-			<h2>Program Tracks</h2>
+			<h2>Resources</h2>
 			<ul>
 				<li>
-					<a href="#">Accounting</a>
-				</li>
-				<li>
-					<a href="#">Finance</a>
-				</li>
-				<li>
-					<a href="#">Marketing</a>
-				</li>
-				<li>
-					<a href="#">Management</a>
+					<a href="#">Accounting Handbook</a>
 				</li>
 			</ul>
-
-			<h2>Graduate Handbook</h2>
-			<a href="#">Accounting Handbook</a>
 
 			<h2>Related Programs</h2>
 			<ul>
 				<li>
+					<a href="#">Accounting MSA</a>
+				</li>
+			</ul>
+
+			<h2>More Business Administration PhD Tracks</h2>
+			<ul>
+				<li>
+					<a href="#">Finance</a>
+				</li>
+				<li>
 					<a href="#">Management</a>
 				</li>
 				<li>
@@ -147,6 +164,8 @@
 				</li>
 			</ul>
 
+<!--
+Is this what will become "keyword" matches?
 			<h2>Subplan Disciplines</h2>
 			<p>This track belongs to the following disciplines:</p>
 			<ul>
@@ -156,7 +175,7 @@
 				<li>
 					<a href="#">Accounting</a>
 				</li>
-			</ul>
+			</ul> -->
 
 		</div>
 	</div>
