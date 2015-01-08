@@ -3,7 +3,6 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
-
 	#contentcol {
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
@@ -157,6 +156,22 @@
 		padding-bottom: 3px;
 		border-bottom: 1px dotted #999;
 	}
+	.comparison-chart .popover-title {
+		display: none; /* hide empty titles */
+	}
+	.comparison-chart .popover {
+		font-size: 12px;
+		line-height: 1.4;
+		font-weight: normal;
+	}
+	@media (max-width: 767px) {
+		.comparison-chart .popover-content {
+			max-height: 250px;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			-webkit-overflow-scrolling: touch;
+		}
+	}
 	</style>
 
 
@@ -217,20 +232,15 @@
 							</td>
 						</tr> -->
 						<tr>
-							<th>
-								Degree
-								<a class="degree-infobox-toggle" href="#more-info-degree" data-toggle="modal">
-									<span class="icon icon-info-sign tooltip-toggle" data-toggle="tooltip" title="More Information"></span>
-								</a>
-							</th>
+							<th>Degree</th>
 							<td>PHD</td>
 							<td>PHD</td>
 						</tr>
 						<tr>
 							<th>
 								Option
-								<a class="degree-infobox-toggle" href="#more-info-option" data-toggle="modal">
-									<span class="icon icon-info-sign tooltip-toggle" data-toggle="tooltip" title="More Information"></span>
+								<a class="degree-infobox-toggle" data-content="More Information" href="#">
+									<span class="icon icon-info-sign"></span>
 								</a>
 							</th>
 							<td>Dissertation</td>
@@ -239,8 +249,8 @@
 						<tr>
 							<th>
 								Core Credit Hours
-								<a class="degree-infobox-toggle" href="#more-info-core-credit-hours" data-toggle="modal">
-									<span class="icon icon-info-sign tooltip-toggle" data-toggle="tooltip" title="More Information"></span>
+								<a class="degree-infobox-toggle" data-content="More Information" href="#">
+									<span class="icon icon-info-sign"></span>
 								</a>
 							</th>
 							<td>18</td>
@@ -249,28 +259,23 @@
 						<tr>
 							<th>
 								Required Courses Credit Hours
-								<a class="degree-infobox-toggle" href="#more-info-required-credit-hours" data-toggle="modal">
-									<span class="icon icon-info-sign tooltip-toggle" data-toggle="tooltip" title="More Information"></span>
+								<a class="degree-infobox-toggle" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis accumsan velit, vitae tempor lorem. Aenean libero tortor, auctor ac sem non, finibus condimentum leo. In nulla risus, sagittis consequat risus eu, maximus lobortis mauris. Sed turpis tellus, ultrices ut mi a, luctus laoreet justo. Vestibulum et sapien vel arcu vehicula vestibulum convallis id sapien. In hac habitasse platea dictumst. Etiam nec justo ante. Ut a feugiat ligula, vel volutpat diam." href="#">
+									<span class="icon icon-info-sign"></span>
 								</a>
 							</th>
 							<td>30</td>
 							<td>39</td>
 						</tr>
 						<tr>
-							<th>
-								Total Credit Hours
-								<a class="degree-infobox-toggle" href="#more-info-total-credit-hours" data-toggle="modal">
-									<span class="icon icon-info-sign tooltip-toggle" data-toggle="tooltip" title="More Information"></span>
-								</a>
-							</th>
+							<th>Total Credit Hours</th>
 							<td>84</td>
 							<td>84</td>
 						</tr>
 						<tr>
 							<th>
 								Prerequisites
-								<a class="degree-infobox-toggle" href="#more-info-prereqs" data-toggle="modal">
-									<span class="icon icon-info-sign tooltip-toggle" data-toggle="tooltip" title="More Information"></span>
+								<a class="degree-infobox-toggle" data-content="More Information" href="#">
+									<span class="icon icon-info-sign"></span>
 								</a>
 							</th>
 							<td class="align-top">
@@ -297,68 +302,6 @@
 
 			</article>
 
-			<!-- Help Modals Content -->
-
-			<div id="more-info-degree" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="more-info-degree-label" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h2 id="more-info-degree-label">Degrees</h2>
-				</div>
-				<div class="modal-body">
-					<p>Information about degree types here...</p>
-				</div>
-			</div>
-
-			<div id="more-info-option" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="more-info-option-label" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h2 id="more-info-option-label">Options</h2>
-				</div>
-				<div class="modal-body">
-					<p>Information about degree options here...</p>
-				</div>
-			</div>
-
-			<div id="more-info-core-credit-hours" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="more-info-core-credit-hours-label" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h2 id="more-info-core-credit-hours-label">Core Credit Hours</h2>
-				</div>
-				<div class="modal-body">
-					<p>Information about core credit hours here...</p>
-				</div>
-			</div>
-
-			<div id="more-info-required-credit-hours" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="more-info-required-credit-hours-label" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h2 id="more-info-required-credit-hours-label">Required Courses Credit Hours</h2>
-				</div>
-				<div class="modal-body">
-					<p>Information about required courses credit hours here...</p>
-				</div>
-			</div>
-
-			<div id="more-info-total-credit-hours" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="more-info-total-credit-hours-label" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h2 id="more-info-total-credit-hours-label">Total Credit Hours</h2>
-				</div>
-				<div class="modal-body">
-					<p>Information about total courses credit hours here...</p>
-				</div>
-			</div>
-
-			<div id="more-info-prereqs" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="more-info-prereqs" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h2 id="more-info-prereqs">Prerequisites</h2>
-				</div>
-				<div class="modal-body">
-					<p>Information about prerequisites here...</p>
-				</div>
-			</div>
-
 		</div>
 	</div>
 
@@ -377,12 +320,35 @@
 				}
 			});
 
-			// Tooltips
+			// Popovers
+			var $toggle = $('.degree-infobox-toggle');
+			var triggerVal = 'click';
+			var placementVal = 'left';
+
 			if ($(window).width() > 767) {
-				$('.tooltip-toggle').tooltip({
-					placement: 'right'
-				});
+				triggerVal = 'hover';
+				placementVal = 'right';
 			}
+
+			$toggle
+				.popover({
+					'placement': placementVal,
+					'trigger': triggerVal
+				})
+				.on('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+
+					if (triggerVal == 'click') {
+						$toggle.not(this).popover('hide');
+					}
+				});
+
+			$('body').on('click', function(e) {
+				if (triggerVal == 'click') {
+					$toggle.popover('hide');
+				}
+			});
 		});
 	</script>
 <?php get_footer(); ?>
