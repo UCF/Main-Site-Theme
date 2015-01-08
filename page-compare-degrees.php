@@ -337,18 +337,11 @@
 				})
 				.on('click', function(e) {
 					e.preventDefault();
-					e.stopPropagation();
 
 					if (triggerVal == 'click') {
 						$toggle.not(this).popover('hide');
 					}
 				});
-
-			$('body').on('click', function(e) {
-				if (triggerVal == 'click') {
-					$toggle.popover('hide');
-				}
-			});
 		});
 	</script>
 <?php get_footer(); ?>
