@@ -1,22 +1,27 @@
 
 <?php
-	$programType = "";
+	$sort_by = "degree-name";
 
-	if(!empty($_GET['programType'])){
-		$arraySize = count($_GET['programType']);
-
-		foreach($_GET['programType'] as $key=>$value){
-			$programType = $programType . $value;
-			if($key > -1 && $key < $arraySize-1) {
-				$programType = $programType . ' and ';
-			}
-		}
+	if (isset($_GET['sort-by']) && $_GET['sort-by'] == "credit-hours") {
+		$sort_by = "credit-hours";
 	}
+
+	// var_dump($_GET['program-type']);
 ?>
 
-<!-- Search Result Header: Desktop -->
+<!-- Search Result Header -->
 
-<h2 class="degree-search-header">234 Results for: <em><?php echo $programType ?> <?php echo $_GET['search-query']; ?></em></h2>
+<h2 class="degree-search-header">234 Results for: <?php echo urldecode($_GET['search-query']); ?></em></h2>
+
+<div class="degree-search-sort">
+	<strong class="degree-search-sort-label radio inline">Sort by:</strong>
+	<label class="radio inline">
+		<input type="radio" name="sort-by" class="sort-by" value="degree-name" <?php if ($sort_by == "degree-name") echo "checked";?>> Name
+	</label>
+	<label class="radio inline">
+		<input type="radio" name="sort-by" class="sort-by" value="credit-hours" <?php if ($sort_by == "credit-hours") echo "checked";?>> Credit Hours
+	</label>
+</div>
 
 <!-- Search Results -->
 
