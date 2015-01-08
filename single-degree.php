@@ -39,6 +39,11 @@
 	}
 
 
+	#contentcol .degree-application-info {
+		margin-top: 20px;
+	}
+
+
 	#sidebar_right h2 {
 		color: #888;
 		font-size: 18px;
@@ -95,15 +100,13 @@
 				<!-- Degree description -->
 
 				<div class="degree-desc">
-					<p>
-						The objective of the Accounting track in the Business Administration PhD program is to prepare students
-						for academic careers in higher education and management careers within profit and nonprofit
-						organizations. Success in the program is judged by the student’s understanding of the issues and
-						methodologies essential to the advancement of knowledge.
-					</p>
-					<p>
-						Complete details and requirements available in the <a href="#">undergraduate catalog</a>.
-					</p>
+					The objective of the Accounting track in the Business Administration PhD program is to prepare students
+					for academic careers in higher education and management careers within profit and nonprofit
+					organizations. Success in the program is judged by the student’s understanding of the issues and
+					methodologies essential to the advancement of knowledge.
+				</div>
+				<div class="degree-application-info">
+					Complete details and requirements available in the <a href="#">undergraduate catalog</a>.
 				</div>
 
 			</article>
