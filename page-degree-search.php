@@ -76,10 +76,13 @@
 		#sidebar_left .close {
 			display: block;
 			font-weight: normal;
-			padding: 10px;
 			position: absolute;
 			right: 0;
 			top: 0;
+		}
+		#sidebar_left .close a {
+			display: inline-block;
+			padding: 10px;
 		}
 	}
 
@@ -111,9 +114,13 @@
 		-webkit-border-radius: 0;
 		-moz-border-radius: 0;
 		border-radius: 0;
+		padding: 0;
 	}
+
 	#contentcol .filter-button a {
 		border-bottom: none;
+		display: inline-block;
+		padding: 4px 10px;
 	}
 
 	#contentcol .filter-button a:hover {
