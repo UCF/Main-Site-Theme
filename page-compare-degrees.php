@@ -3,6 +3,27 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
+	#breadcrumbs {
+		border-bottom: 2px solid #eee;
+		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		font-size: 12.5px;
+		margin-bottom: 10px;
+	}
+	#breadcrumbs .breadcrumb-search {
+		display: block;
+		float: left;
+		font-weight: 500;
+		padding: 8px 0; /* match .breadcrumb top/bottom padding */
+		width: 20%;
+	}
+	@media (max-width: 767px) {
+		/* Hiding breadcrumbs at mobile size seems to be a standard convention--not sure if I agree, but sticking with this for now */
+		#breadcrumbs {
+			display: none;
+		}
+	}
+
+
 	#contentcol {
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
@@ -180,6 +201,11 @@
 		<div class="span12" id="page_title">
 			<h1 class="span9"><?php the_title(); ?>: Accounting &amp; Finance</h1>
 			<?php esi_include('output_weather_data','span3'); ?>
+		</div>
+
+		<div id="breadcrumbs" class="span12 clearfix">
+			<!-- Display .breadcrumb-search only if the user came from the degree search (check for GET param) -->
+			<a class="breadcrumb-search" href="#">&laquo; Back to Search Results</a>
 		</div>
 
 		<div class="span12" id="contentcol">
