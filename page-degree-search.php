@@ -47,40 +47,48 @@
 		font-size: 14px;
 	}
 
-	#sidebar_left .close {
-		display:none;
-	}
-
 	@media (max-width: 767px) {
 
 		#sidebar_left {
+			box-sizing: border-box;
 			-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.3);
 			box-shadow: 0 6px 12px rgba(0,0,0,.3);
 			background: #fff;
-			border: 1px solid #ccc;
 			padding: 10px;
-		    position: absolute;
-		    top: 0;
-		    left: 0;
-		    width: 300px;
-		    transform: scaleX(0.00001);
-		    transform-origin: 0% 100% ;
-		    transition: transform 0.5s ease-in-out;
-		    z-index: 15000;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 300px;
+
+			-webkit-transform: scaleX(0.00001);
+			transform: scaleX(0.00001);
+
+			-webkit-transform-origin: 0% 100%;
+			transform-origin: 0% 100%;
+
+			-webkit-transition-duration: 0.5s;
+			transition-duration: 0.5s;
+
+			z-index: 15000;
 		}
 
 		#sidebar_left:target {
-		    transform: scaleX(1);
+			transform: scaleX(1);
+			-webkit-transform: scaleX(1);
+		}
+
+		#sidebar_left .header {
+			background-color: #888;
+			color: #fff;
+			margin: -10px -10px 25px;
+			padding-left: 10px;
 		}
 
 		#sidebar_left .close {
-			display: block;
 			font-weight: normal;
-			position: absolute;
-			right: 0;
-			top: 0;
 		}
-		#sidebar_left .close a {
+		#sidebar_left .close a, #sidebar_left .close a:hover {
+			color: #000;
 			display: inline-block;
 			padding: 10px;
 		}
@@ -318,7 +326,9 @@
 			<!-- Sidebar (Desktop only) -->
 
 			<div id="sidebar_left" class="span3 degree-search-filters">
-				<div class="close"><a href="#">X</a></div>
+				<h2 class="header visible-phone">
+					Filter By <div class="close"><a href="#">X</a></div>
+				</h2>
 				<h2>Program Types</h2>
 				<ul>
 					<li class="checkbox">
@@ -505,6 +515,7 @@
 				$degreeSearchResultsContainer.html('<img src="//universityheader.ucf.edu/bar/img/ajax-loader.gif" width="16" height="16" /> Loading search results...');
 				jqxhr.done(degreeSearchSuccessHandler);
 				jqxhr.fail(degreeSearchFailureHandler);
+
 			}
 
 			// Handler Methods
@@ -515,6 +526,7 @@
 			var timer = null;
 			function searchQueryKeyUpHandler(e) {
 				if($(e.target).val().length > 2) {
+					// prevent action until user is done typing
 					if(timer) {
 						clearTimeout(timer);
 					}
@@ -539,8 +551,8 @@
 			function setupEventHandlers() {
 				$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
-				$academicsSearch.one('click', '.filter-button', filterClickHandler);
-				$(document).on('click', closeMenuHandler);
+				$academicsSearch.one('mouseover touchstart', '.filter-button', filterClickHandler);
+				$(document).on('click touchstart', closeMenuHandler);
 			}
 
 			function initPage() {
