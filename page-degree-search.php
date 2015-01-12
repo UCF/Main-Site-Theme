@@ -50,6 +50,7 @@
 	@media (max-width: 767px) {
 
 		#sidebar_left {
+			box-sizing: border-box;
 			-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.3);
 			box-shadow: 0 6px 12px rgba(0,0,0,.3);
 			background: #fff;
@@ -550,8 +551,8 @@
 			function setupEventHandlers() {
 				$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
-				$academicsSearch.one('mouseover', '.filter-button', filterClickHandler);
-				$(document).on('click', closeMenuHandler);
+				$academicsSearch.one('mouseover touchstart', '.filter-button', filterClickHandler);
+				$(document).on('click touchstart', closeMenuHandler);
 			}
 
 			function initPage() {
