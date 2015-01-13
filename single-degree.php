@@ -6,20 +6,6 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
-	#page_title .label {
-		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
-		font-size: 13px;
-		margin-left: 8px;
-		padding: 6px;
-		text-shadow: 0 0 0 transparent;
-		vertical-align: middle;
-	}
-	#page_title .label a {
-		color: #fff !important;
-		text-decoration: underline;
-	}
-
-
 	#breadcrumbs {
 		border-bottom: 2px solid #eee;
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
@@ -66,9 +52,18 @@
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
 	}
+	#sidebar_right {
+		box-sizing: border-box;
+		padding-left: 15px;
+	}
+	.ie7 #sidebar_right {
+		padding-left: 0;
+	}
 	@media (max-width: 767px) {
 		#sidebar_right {
-			display: block;
+			display: block; /* unset display: none; */
+			margin-top: 30px;
+			padding-left: 0;
 		}
 	}
 /*	#contentcol a,
@@ -87,14 +82,45 @@
 	}*/
 
 
+	#contentcol p {
+		margin: 0 0 10px;
+	}
 	#contentcol dt,
 	#contentcol dd,
 	#sidebar_right dt,
 	#sidebar_right dd {
 		display: inline;
 	}
+	#contentcol h2,
+	#contentcol h3,
+	#contentcol h4,
+	#contentcol h5,
+	#contentcol h6 {
+		font-weight: 500;
+		margin-bottom: 5px;
+	}
 	#contentcol h2 {
-		margin-top: 20px;
+		font-size: 24px;
+		line-height: 26px;
+		margin-bottom: 8px;
+		margin-top: 40px;
+	}
+	@media (max-width: 767px) {
+		#contentcol h2 {
+			font-size: 23px;
+			line-height: 25px;
+		}
+	}
+	#contentcol h3 {
+		border-bottom: 1px solid #eee;
+		font-size: 18.5px;
+		line-height: 21px;
+		margin-top: 30px;
+	}
+	#contentcol h4 {
+		font-size: 15.5px;
+		line-height: 18px;
+		margin-top: 25px;
 	}
 
 
@@ -110,6 +136,33 @@
 	#contentcol .degree-details dl {
 		margin-bottom: 0;
 		margin-top: 0;
+	}
+
+
+	#contentcol .degree-desc {
+		margin-top: 20px;
+	}
+
+
+	#contentcol .degree-courses h3 {
+		border-bottom: 1px solid #eee;
+		padding-bottom: 5px;
+	}
+
+
+	#contentcol .degree-courses .degree-courses-credits {
+		display: block;
+		float: right;
+		font-weight: 500;
+	}
+	@media (max-width: 767px) {
+		#contentcol .degree-courses .degree-courses-credits {
+			float: none;
+			margin-top: 5px;
+		}
+	}
+	#contentcol .degree-courses h3 .degree-courses-credits {
+		font-size: 15px;
 	}
 
 
@@ -174,11 +227,21 @@
 			</ul>
 		</div>
 
-		<div id="contentcol" class="span8 program">
+		<div id="contentcol" class="span8 degree">
 			<article role="main">
 
 				<!-- Degree meta details -->
 				<div class="row degree-details">
+					<div class="span3">
+						<dl>
+							<dt>Degree:</dt>
+							<dd>Ph.D.<br></dd>
+							<dt>Option:</dt>
+							<dd>Dissertation<br></dd>
+							<dt>Online Program:</dt>
+							<dd>No</dd>
+						</dl>
+					</div>
 					<div class="span5">
 						<dl>
 							<dt>College:</dt>
@@ -192,14 +255,6 @@
 							</dd>
 						</dl>
 					</div>
-					<div class="span3">
-						<dl>
-							<dt>Degree:</dt>
-							<dd>Ph.D.<br></dd>
-							<dt>Option:</dt>
-							<dd>Dissertation</dd>
-						</dl>
-					</div>
 				</div>
 
 				<div class="visible-phone">
@@ -210,7 +265,6 @@
 				<!-- Degree description -->
 
 				<div class="degree-desc">
-					<h2>Program Description</h2>
 					The objective of the Accounting track in the Business Administration PhD program is to prepare students
 					for academic careers in higher education and management careers within profit and nonprofit
 					organizations. Success in the program is judged by the student’s understanding of the issues and
@@ -220,7 +274,7 @@
 				<!-- Application Info -->
 
 				<div class="degree-application-info">
-					<h2>Application Requirements</h2>
+					<h2>Admission &amp; Application Requirements</h2>
 					<p>
 						For information on general UCF graduate admissions requirements that apply to all prospective
 						students, please visit the
@@ -251,6 +305,91 @@
 						for their track for information about applying to this program.  The college strongly encourages
 						applications from minority and diverse populations. Race, national origin, and gender are not used
 						in the evaluation of students for admission into graduate and professional programs.
+					</p>
+				</div>
+
+				<div class="degree-courses">
+					<h2 class="clearfix">Degree Requirements <small class="degree-courses-credits">84 Credit Hours total</small></h2>
+					<p>
+						The Accounting Ph.D. requires <strong>84</strong> Credit Hours Minimum beyond the Bachelor's Degree.
+					</p>
+
+					<h3>1. Prerequisites &mdash; Foundation Body of Knowledge <small class="degree-courses-credits">30 Credit Hours</small></h3>
+					<p>
+						In the Accounting track of the Business Administration PhD program, the foundation body of knowledge may be satisfied
+						with a master’s degree in Accounting, Business Administration, Taxation or its equivalent from an Association to Advance
+						Collegiate Schools of Business (AACSB) accredited school that includes certain accounting courses deemed essential by
+						the Accounting PhD director. Alternatively, this requirement may be satisfied by courses approved by the School of
+						Accounting’s doctoral advisory committee.
+					</p>
+
+					<h3 class="clearfix">2. Required Courses <small class="degree-courses-credits">30 Credit Hours</small></h3>
+
+					<h4 class="clearfix">Accounting Core <small class="degree-courses-credits">18 Credit Hours</small></h4>
+					<ul type="disc">
+						<li><a rel="/Programs/Courses.aspx?Course=ACG 7157" class="CourseClassHover" title="">ACG 7157</a> Seminar in Archival Research in Accounting (3 credit hours)</li>
+						<li><a rel="/Programs/Courses.aspx?Course=ACG 7399" class="CourseClassHover">ACG 7399</a> Seminar in Behavioral Accounting Research (3 credit hours)</li>
+						<li><a rel="/Programs/Courses.aspx?Course=ACG 7826" class="CourseClassHover" title="">ACG 7826</a> Seminar in the Social and Organizational Context of Accounting (3 credit hours)</li>
+						<li><a rel="/Programs/Courses.aspx?Course=ACG 7885" class="CourseClassHover" title="">ACG 7885</a> Research Foundations in Accounting (3 credit hours)</li>
+						<li><a rel="/Programs/Courses.aspx?Course=ACG 7887" class="CourseClassHover" title="">ACG 7887</a> Accounting Research Forum (6 credit hours) (Workshop, 1 credit hour per semester)</li>
+					</ul>
+
+					<h4 class="clearfix">Research Methods/Tools <small class="degree-courses-credits">12 Credit Hours</small></h4>
+					<p>
+						The research tools requirement is intended to ensure a thorough exposure to research methods. All candidates are expected
+						 to demonstrate knowledge of statistical methods as well as usage of statistical packages, including design, analysis,
+						 and interpretation of results.
+					</p>
+					<ul>
+						<li><a rel="/Programs/Courses.aspx?Course=ECO 7423" class="CourseClassHover">ECO 7423</a> Applied Models I (3 credit hours, required course)</li>
+						<li>Additional 9 credit hours of research tools courses approved by the student’s advisory committee. Examples of courses that will satisfy this requirement include <a rel="/Programs/Courses.aspx?Course=ACG 7837" class="CourseClassHover">ACG 7837</a>, <a rel="/Programs/Courses.aspx?Course=GEB 7910" class="CourseClassHover">GEB 7910</a>, <a rel="/Programs/Courses.aspx?Course=STA 5205" class="CourseClassHover">STA 5205</a>, <a rel="/Programs/Courses.aspx?Course=PSY 6216C" class="CourseClassHover">PSY 6216C</a>, <a rel="/Programs/Courses.aspx?Course=PSY 6308C" class="CourseClassHover">PSY 6308C</a>, <a rel="/Programs/Courses.aspx?Course=PSY 7218C" class="CourseClassHover">PSY 7218C</a>, <a rel="/Programs/Courses.aspx?Course=ECO 6424" class="CourseClassHover">ECO 6424</a>, and <a rel="/Programs/Courses.aspx?Course=ISM 7029" class="CourseClassHover">ISM 7029</a>.</li>
+					</ul>
+
+					<h3 class="clearfix">3. Elective Courses <small class="degree-courses-credits">9 Credit Hours</small></h3>
+
+					<h4 class="clearfix">Restricted <small class="degree-courses-credits">3 Credit Hours</small></h4>
+					<p>
+						Choose one of the following accounting courses:
+					</p>
+					<ul type="disc"><li><a rel="/Programs/Courses.aspx?Course=ACG 7888" class="CourseClassHover">ACG 7888</a> Seminar in Critical Accounting and AIS (3 credit hours)</li><li><a rel="/Programs/Courses.aspx?Course=ACG 7917" class="CourseClassHover">ACG 7917</a> Advanced Research Methods in Accounting and Accounting Information Systems Research (3 credit hours)</li><li>Other accounting electives as they are developed for the program</li></ul>
+
+					<h4 class="clearfix">Unrestricted <small class="degree-courses-credits">6 Credit Hours</small></h4>
+					<p>
+						Students must take 6 credit hours in a minor/support area. Students must select a minimum of six credit hours in a unified area approved by the student’s doctoral study advisory committee. Each student’s program of study is individually tailored to accommodate interests whenever possible. This course work may be developed from offerings in the following areas with the advice and consent of the respective departments and the advisory committee:
+					</p>
+					<ul type="disc"><li>Marketing</li><li>Economics</li><li>Political Science</li><li>Psychology</li><li>Gender Studies</li><li>Management</li><li>Sociology</li><li>Environmental Studies</li><li>Communication</li><li>Philosophy</li><li>Public Affairs</li></ul>
+
+					<h3 class="clearfix">4. Dissertation <small class="degree-courses-credits">15 Credit Hours</small></h3>
+					<ul>
+						<li>ACG 7980 Dissertation (15 credit hours minimum)</li>
+					</ul>
+
+					<h3>5. Admission to Candidacy</h3>
+					<p>
+						Students must complete a comprehensive candidacy examination that includes written and oral portions. Students must defend a written dissertation proposal in an oral examination conducted by the student’s advisory/dissertation committee. The final defense of the dissertation will also require an oral examination.
+					</p>
+					<p>
+						Students officially enter candidacy when the following has been accomplished:
+					</p>
+					<ul type="disc">
+						<li>Completion of all course work, except for dissertation hours. </li>
+						<li>Successful completion of the&nbsp;comprehensive candidacy&nbsp;examination. </li>
+						<li>Successful defense of the written dissertation proposal. </li>
+						<li>The dissertation advisory committee is formed, consisting of approved graduate faculty and graduate faculty scholars.</li>
+						<li>Submittal of an approved program of study.</li>
+					</ul>
+
+					<h3>6. Teaching Requirement</h3>
+					<p>
+						The requirements for the teaching component of the degree will be developed with the doctoral program director based
+						on the student’s experience. Normally, this requirement will be satisfied through teaching a minimum of three credit
+						hours of class instruction under the direct supervision of a faculty member. As appropriate, students will also be
+						required to attend teaching development workshops and seminars.
+					</p>
+
+					<h3>7. Independent Learning</h3>
+					<p>
+						The dissertation serves as the independent learning experience.
 					</p>
 				</div>
 
