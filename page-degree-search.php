@@ -73,7 +73,7 @@
 			z-index: 15000;
 		}
 
-		#sidebar_left:target {
+		#sidebar_left.open {
 			transform: scaleX(1);
 			-webkit-transform: scaleX(1);
 		}
@@ -125,17 +125,6 @@
 		-webkit-border-radius: 0;
 		-moz-border-radius: 0;
 		border-radius: 0;
-		padding: 0;
-	}
-
-	#contentcol .filter-button a {
-		border-bottom: none;
-		display: inline-block;
-		padding: 4px 10px;
-	}
-
-	#contentcol .filter-button a:hover {
-		border-bottom: none;
 	}
 
 	#contentcol .degree-search-header {
@@ -165,11 +154,6 @@
 	#contentcol .degree-search-sort-label {
 		padding-left: 0;
 	}
-
-
-/*	#contentcol .degree-mobile-controls {
-		text-align: center;
-	}*/
 
 	#contentcol .degree-mobile-controls {
 		border-bottom: 1px solid #e5e5e5;
@@ -330,7 +314,7 @@
 
 			<div id="sidebar_left" class="span3 degree-search-filters">
 				<h2 class="header visible-phone">
-					Filter By <a href="#sidebar_left_close" class="close">X</a>
+					Filter By <a href="#" class="close">X</a>
 				</h2>
 				<div class="content">
 					<h2>Program Types</h2>
@@ -447,7 +431,7 @@
 					<div class="degree-search-form form-search">
 						<div class="input-append">
 							<input type="text" name="search-query" class="span6 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
-							<button class="btn visible-phone filter-button" type="button"><a href="#sidebar_left"><i class="icon-filter"></i></a></button>
+							<button class="btn visible-phone filter-button" type="button"><i class="icon-filter"></i></button>
 							<button class="btn btn-primary" type="button"><i class="icon-search icon-white"></i></button>
 						</div>
 					</div>
@@ -493,7 +477,6 @@
 			}
 
 			function loadDegreeSearchResults() {
-				console.log('loadDegreeSearchResults');
 				var programType = [];
 				$academicsSearch.find('.program-type:checked').each(function() {
 					programType.push($(this).val());
@@ -539,35 +522,47 @@
 				}
 			}
 
-			function filterClickHandler() {
-				// resize the panel to be full screen and align it
+			function closeButtonClickHandler(e) {
+				alert('close');
+				e.preventDefault();
+				$sidebarLeft.removeClass('open');
+				degreeSearchChangeHandler();
+			}
+
+			function initFilterClickHandler(e) {
+				e.preventDefault();
+				// resize the panel to be full screen and align it, doesn't resize properly on page load
 				$sidebarLeft
 					.height($(document).height())
-					.offset({ top: 0, right: 0 });
-				// setting the click handler on page load fails
-				$sidebarLeft.find('a.close').on('click', degreeSearchChangeHandler);
+					.offset({ top: 0, right: 0 })
+					// setting the click handler on page load fails
+					.find('a.close').on('click', closeButtonClickHandler);
+				$(document).on('click touchstart', closeMenuHandler);
+			}
+
+			function filterClickHandler(e) {
+				e.preventDefault();
+				// resize the panel to be full screen and align it
+				$sidebarLeft.addClass('open');
 			}
 
 			function closeMenuHandler(e) {
-				if(!$(e.target).closest('#sidebar_left').length) {
-					if(location.hash === '#sidebar_left') {
-						location.hash = '#sidebar_left_close';
-						loadDegreeSearchResults();
-					}
+				if(!$(e.target).closest('.filter-button').length && !$(e.target).closest('#sidebar_left').length) {
+					$sidebarLeft.removeClass('open');
+					loadDegreeSearchResults();
 				}
 			}
 
 			function setupEventHandlers() {
 				if($academicsSearch.find('.filter-button').is(':visible')) {
 					// mobile
-					$academicsSearch.one('mouseover touchstart', '.filter-button', filterClickHandler);
-					$(document).on('click touchstart', closeMenuHandler);
+					$academicsSearch.one('click', '.filter-button', initFilterClickHandler);
+					$academicsSearch.on('click', '.filter-button', filterClickHandler);
 				} else {
 					// desktop
 					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
 				}
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
-				// $(window).hashchange();
 			}
 
 			function initPage() {
