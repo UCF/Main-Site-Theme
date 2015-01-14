@@ -436,6 +436,29 @@
 						</div>
 					</div>
 
+					<?php
+						$sort_by = "degree-name";
+
+						if (isset($_GET['sort-by']) && $_GET['sort-by'] == "credit-hours") {
+							$sort_by = "credit-hours";
+						}
+					?>
+
+					<!-- Search Result Header -->
+
+					<h2 class="degree-search-header">234 Results for: <?php echo urldecode($_GET['search-query']); ?></em></h2>
+					<div class="degree-search-sort">
+						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
+						<label class="radio inline">
+							<input type="radio" name="sort-by" class="sort-by" value="degree-name" <?php if ($sort_by == "degree-name") echo "checked";?>> Name
+						</label>
+						<label class="radio inline">
+							<input type="radio" name="sort-by" class="sort-by" value="credit-hours" <?php if ($sort_by == "credit-hours") echo "checked";?>> Credit Hours
+						</label>
+					</div>
+
+					<!-- Search Results -->
+
 					<div class="degree-search-results-container">
 						<?php include 'page-degree-search-results.php'; ?>
 					</div>

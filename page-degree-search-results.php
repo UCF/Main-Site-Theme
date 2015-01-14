@@ -1,5 +1,3 @@
-<!-- Search Results -->
-
 <ul class="degree-search-results">
 	<li class="degree-search-result">
 		<h3 class="degree-title">
