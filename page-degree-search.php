@@ -430,7 +430,8 @@
 
 					<div class="degree-search-form form-search">
 						<div class="input-append">
-							<input type="text" name="search-query" class="span6 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+							<input type="text" name="search-query" class="span6 search-query" autocomplete="off" data-provide="typeahead"
+								placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
 							<button class="btn visible-phone filter-button" type="button"><i class="icon-filter"></i></button>
 							<button class="btn btn-primary" type="button"><i class="icon-search icon-white"></i></button>
 						</div>
@@ -467,6 +468,20 @@
 			var $academicsSearch,
 				$degreeSearchResultsContainer,
 				$sidebarLeft;
+
+			function initAutoComplete() {
+				// Workaround for bug in mouse item selection
+				$.fn.typeahead.Constructor.prototype.blur = function() {
+				    var that = this;
+				    setTimeout(function () { that.hide() }, 250);
+				};
+
+				$academicsSearch.find('.search-query').typeahead({
+				    source: function(query, process) {
+				        return ["Arts & Humanities", "Business Administration", "Education & Human Performance", "Engineering & Computer Science", "Graduate Studies", "Health & Public Affairs", "Honors", "Hospitality Management", "Medicine", "Nursing", "Optics & Photonics", "Sciences"];
+				    }
+				});
+			}
 
 			function degreeSearchSuccessHandler( data ) {
 				$degreeSearchResultsContainer.html(data);
@@ -570,6 +585,7 @@
 				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
 				$sidebarLeft = $academicsSearch.find("#sidebar_left");
 				setupEventHandlers();
+				initAutoComplete();
 			}
 
 			$(initPage);
