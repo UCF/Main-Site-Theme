@@ -538,7 +538,6 @@
 			}
 
 			function closeButtonClickHandler(e) {
-				alert('close');
 				e.preventDefault();
 				$sidebarLeft.removeClass('open');
 				degreeSearchChangeHandler();
