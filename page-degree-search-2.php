@@ -12,39 +12,6 @@
 		}
 	}
 
-/*	.input-append .btn-group > .btn:first-child {
-		border-bottom-left-radius: 0;
-		border-top-left-radius: 0;
-	}
-
-	.dropdown-menu-form {
-		max-height: 250px;
-		min-width: 225px;
-		overflow-x: hidden;
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
-	}
-	.dropdown-menu-form .radio,
-	.dropdown-menu-form .checkbox {
-		padding-left: 30px;
-		padding-right: 15px;
-	}
-	.dropdown-menu-heading {
-		border-top: 1px solid #e5e5e5;
-		display: block;
-		font-size: 12px;
-		font-weight: bold;
-		color: #888;
-		padding-bottom: 6px;
-		padding-left: 10px;
-		padding-top: 8px;
-		text-transform: uppercase;
-	}
-	.dropdown-menu-heading:first-child {
-		border-top: 0 solid transparent;
-		padding-top: 0;
-	}*/
-
 
 	/* General content/sidebar styles */
 	#sidebar_left,
@@ -85,6 +52,7 @@
 			box-sizing: border-box;
 			box-shadow: 0 0 5px rgba(0, 0, 0, .4);
 			margin-top: 0;
+			max-height: 0; /* TODO: pointer-events:none is not perfect; fix ios bugginess */
 			opacity: 0;
 			overflow-y: scroll;
 			padding: 0;
@@ -98,17 +66,6 @@
 			width: calc(100% - 30px);
 			z-index: 999;
 		}
-
-/*		#sidebar_left.degree-search-filters:before {
-			border-color: transparent transparent #fff;
-			border-style: solid;
-			border-width: 0 10px 10px 10px;
-			content: '';
-			display: block;
-			position: absolute;
-			top: -10px;
-			right: 20px;
-		}*/
 
 		#sidebar_left.active {
 			opacity: 1;
@@ -269,41 +226,6 @@
 	#contentcol .degree-search-sort-label {
 		padding-left: 0;
 	}
-
-
-/*	#contentcol .degree-mobile-controls {
-		border-bottom: 1px solid #e5e5e5;
-	}
-	#contentcol .degree-mobile-control {
-		border: 0;
-		display: inline-block;
-		padding: 0;
-		text-align: left;
-	}
-	#contentcol .degree-mobile-control .btn {
-		border: 0;
-		font-size: 14px;
-		padding: 5px 20px 10px;
-	}
-	#contentcol .degree-mobile-control.open .btn {
-		color: #08c !important;
-		outline: 0;
-	}
-	#contentcol .degree-mobile-control .btn .caret {
-		margin-left: 3px;
-	}
-	#contentcol .degree-mobile-control.degree-search-filters .btn {
-		border-left: 1px solid #e5e5e5;
-	}
-	#contentcol .degree-mobile-control.degree-search-filters ul {
-		margin-bottom: 5px;
-	}
-	#contentcol .degree-mobile-control.degree-search-filters ul li {
-		padding-bottom: 2px;
-	}
-	#contentcol .degree-mobile-control label {
-		font-size: 13px;
-	}*/
 
 
 	#contentcol .degree-search-results {
@@ -619,132 +541,130 @@
 
 	<script>
 
-		$(document).ready(function() {
+		(function() {
 
-			var $mobileFilterBtn = $('#mobile-filter');
-			var $filterSidebar = $('#sidebar_left');
+			var $academicsSearch,
+				$degreeSearchResultsContainer,
+				$sidebarLeft;
 
-			// Position + set size of sidebar
-			if ($(window).width() < 768) {
-				$filterSidebar.css({
-					'top': $mobileFilterBtn.offset().top + $mobileFilterBtn.outerHeight() + 40,
-					'max-height': $(window).height() - 40
-				});
+			function degreeSearchSuccessHandler( data ) {
+				$degreeSearchResultsContainer.html(data);
 			}
 
-			// Scroll to sidebar on filter btn click
-			$mobileFilterBtn.on('click', function(e) {
+			function degreeSearchFailureHandler( data ) {
+				$degreeSearchResultsContainer.html('Error loading degree data.');
+			}
+
+			function loadDegreeSearchResults() {
+				var programType = [];
+				$academicsSearch.find('.program-type:checked').each(function() {
+					programType.push($(this).val());
+				});
+
+				var college = [];
+				$academicsSearch.find('.college:checked').each(function() {
+					college.push($(this).val());
+				});
+
+				var jqxhr = $.ajax({
+					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results.php',
+					type: 'GET',
+					cache: false,
+					data: {
+						'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
+						'sort-by': $academicsSearch.find('.sort-by:checked').val(),
+						'program-type': programType,
+						'college': college
+					},
+					dataType: "html"
+				});
+
+				$degreeSearchResultsContainer.html('<img src="//universityheader.ucf.edu/bar/img/ajax-loader.gif" width="16" height="16" /> Loading search results...');
+				jqxhr.done(degreeSearchSuccessHandler);
+				jqxhr.fail(degreeSearchFailureHandler);
+
+			}
+
+			// Handler Methods
+			function degreeSearchChangeHandler() {
+				loadDegreeSearchResults();
+			}
+
+			var timer = null;
+			function searchQueryKeyUpHandler(e) {
+				if($(e.target).val().length > 2) {
+					// prevent action until user is done typing
+					if(timer) {
+						clearTimeout(timer);
+					}
+					timer = setTimeout(loadDegreeSearchResults, 250);
+				}
+			}
+
+			function initFilterClickHandler(e) {
+				// Resize, position sidebar
+				$sidebarLeft.css({
+					'top': $('#mobile-filter').offset().top + ( $('#mobile-filter').outerHeight() / 2 ),
+					'max-height': $(window).height() - 40
+				});
+
+				$(document).on('click touchstart', function(e) {
+					if(!$(e.target).closest('#mobile-filter').length && !$(e.target).closest('#sidebar_left').length) {
+						closeMenuHandler(e);
+					}
+				});
+				$('body').on('click', '#mobile-filter-done', closeMenuHandler);
+				$('body').on('click', '#mobile-filter-reset', resetFilterClickHandler);
+			}
+
+			function filterClickHandler(e) {
+				e.preventDefault();
+				// resize the panel to be full screen and align it
 				$('html, body').animate({
 					scrollTop: $(this).offset().top,
 				}, 200);
-				$(this).add($filterSidebar).toggleClass('active');
-			});
+				$sidebarLeft
+					.add($(this))
+					.toggleClass('active');
+			}
 
-			// Close sidebar on 'Done' btn click.
-			// Must add click event to body due to BS2 btn event delegation
-			$('body').on('click', '#mobile-filter-done', function(e) {
+			function resetFilterClickHandler(e) {
 				e.preventDefault();
-				$mobileFilterBtn
-					.add($filterSidebar)
+				$sidebarLeft
+					.find('.checkbox input')
+					.prop('checked', false);
+			}
+
+			function closeMenuHandler(e) {
+				e.preventDefault();
+				$sidebarLeft
+					.add('#mobile-filter')
 					.removeClass('active');
-			});
+				loadDegreeSearchResults();
+			}
 
-			// Highlight mobile filters
+			function setupEventHandlers() {
+				if($academicsSearch.find('#mobile-filter').is(':visible')) {
+					// mobile
+					$academicsSearch.one('click', '#mobile-filter', initFilterClickHandler);
+					$academicsSearch.on('click', '#mobile-filter', filterClickHandler);
+				} else {
+					// desktop
+					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
+				}
+				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
+			}
 
-		});
+			function initPage() {
+				$academicsSearch = $('#academics_search');
+				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
+				$sidebarLeft = $academicsSearch.find('#sidebar_left');
+				setupEventHandlers();
+			}
 
-		// (function() {
+			$(initPage);
 
-			// var $academicsSearch,
-			// 	$degreeSearchResultsContainer,
-			// 	$sidebarLeft;
-
-			// function degreeSearchSuccessHandler( data ) {
-			// 	$degreeSearchResultsContainer.html(data);
-			// }
-
-			// function degreeSearchFailureHandler( data ) {
-			// 	$degreeSearchResultsContainer.html('Error loading degree data.');
-			// }
-
-			// function loadDegreeSearchResults() {
-
-			// 	var programType = [];
-			// 	$academicsSearch.find('.program-type:checked').each(function() {
-			// 		programType.push($(this).val());
-			// 	});
-
-			// 	var college = [];
-			// 	$academicsSearch.find('.college:checked').each(function() {
-			// 		college.push($(this).val());
-			// 	});
-
-			// 	var jqxhr = $.ajax({
-			// 		url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results.php',
-			// 		type: "GET",
-			// 		cache: false,
-			// 		data: {
-			// 			'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
-			// 			'sort-by': $academicsSearch.find('.sort-by:checked').val(),
-			// 			'program-type': programType,
-			// 			'college': college
-			// 		},
-			// 		dataType: "html"
-			// 	});
-
-			// 	$degreeSearchResultsContainer.html('<img src="//universityheader.ucf.edu/bar/img/ajax-loader.gif" width="16" height="16" /> Loading search results...');
-			// 	jqxhr.done(degreeSearchSuccessHandler);
-			// 	jqxhr.fail(degreeSearchFailureHandler);
-
-			// }
-
-			// // Handler Methods
-			// function degreeSearchChangeHandler() {
-			// 	loadDegreeSearchResults();
-			// }
-
-			// var timer = null;
-			// function searchQueryKeyUpHandler(e) {
-			// 	if($(e.target).val().length > 2) {
-			// 		// prevent action until user is done typing
-			// 		if(timer) {
-			// 			clearTimeout(timer);
-			// 		}
-			// 		timer = setTimeout(loadDegreeSearchResults, 250);
-			// 	}
-			// }
-
-			// function filterClickHandler() {
-			// 	$sidebarLeft
-			// 		.height($(document).height())
-			// 		.offset({ top: 0, left: 0 });
-			// }
-
-			// function closeMenuHandler(e) {
-			// 	if(!$(e.target).closest('#sidebar_left').length) {
-			// 		if(location.hash === '#sidebar_left') {
-			// 			location.hash = '#';
-			// 		}
-			// 	}
-			// }
-
-			// function setupEventHandlers() {
-			// 	$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
-			// 	$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
-			// 	$academicsSearch.one('mouseover touchstart', '.filter-button', filterClickHandler);
-			// 	$(document).on('click touchstart', closeMenuHandler);
-			// }
-
-			// function initPage() {
-			// 	$academicsSearch = $('#academics_search');
-			// 	$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
-			// 	$sidebarLeft = $academicsSearch.find("#sidebar_left");
-			// 	setupEventHandlers();
-			// }
-
-			// $(initPage);
-
-		// })();
+		})();
 	</script>
 
 <?php get_footer(); ?>
