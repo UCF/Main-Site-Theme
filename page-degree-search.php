@@ -123,10 +123,23 @@
 		margin-top: 10px;
 	}
 
-	#contentcol .filter-button {
-		-webkit-border-radius: 0;
-		-moz-border-radius: 0;
-		border-radius: 0;
+	.filter-tab {
+		background-color: #999;
+		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		line-height: 16px;
+		right: 0;
+		cursor: pointer;
+		position: fixed;
+		top: 205px;
+		width: 9px;
+		color: white;
+		padding: 6px;
+	}
+
+	.filter-tab .icon-filter {
+		position: absolute;
+		left: 7px;
+		top: 18px;
 	}
 
 	#contentcol .degree-search-header {
@@ -332,6 +345,7 @@
 
 	<?php $degrees = get_degree_search_data(); ?>
 	<div class="row page-content" id="academics_search">
+		<div class="filter-tab visible-phone">F<br>I<br>L<br>T<br>E<br>R<br></div>
 
 		<form>
 
@@ -462,7 +476,6 @@
 						<div class="input-append">
 							<input type="text" name="search-query" class="span6 search-query" autocomplete="off" data-provide="typeahead"
 								placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
-							<button class="btn visible-phone filter-button" type="button"><i class="icon-filter"></i></button>
 							<button class="btn btn-primary" type="button"><i class="icon-search icon-white"></i></button>
 						</div>
 					</div>
@@ -613,23 +626,25 @@
 			}
 
 			function filterClickHandler(e) {
-				e.preventDefault();
+				$(window).scrollTop(0);
 				// resize the panel to be full screen and align it
 				$sidebarLeft.addClass('open');
 			}
 
 			function closeMenuHandler(e) {
-				if(!$(e.target).closest('.filter-button').length && !$(e.target).closest('#sidebar_left').length) {
+				if(!$(e.target).closest('.filter-tab').length && !$(e.target).closest('#sidebar_left').length
+					&& $sidebarLeft.hasClass('open')) {
 					$sidebarLeft.removeClass('open');
 					loadDegreeSearchResults();
 				}
 			}
 
 			function setupEventHandlers() {
-				if($academicsSearch.find('.filter-button').is(':visible')) {
+				if($academicsSearch.find('.filter-tab').is(':visible')) {
 					// mobile
-					$academicsSearch.one('click', '.filter-button', initFilterClickHandler);
-					$academicsSearch.on('click', '.filter-button', filterClickHandler);
+					$academicsSearch.one('click', '.filter-tab', initFilterClickHandler);
+					$academicsSearch.on('click', '.filter-tab', filterClickHandler);
+					$academicsSearch.on('change', '.sort-by', degreeSearchChangeHandler);
 				} else {
 					// desktop
 					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
