@@ -110,7 +110,9 @@
 	}
 
 	.degree-search-filters ul li {
-		padding-bottom: 6px;
+		padding-top: 5px;
+		padding-bottom: 1px;
+		padding-left: 28px;
 	}
 
 	.degree-search-filters label {
@@ -188,33 +190,22 @@
 	#contentcol .degree-mobile-control label {
 		font-size: 13px;
 	}
-
-
 	#contentcol .degree-search-results {
 		list-style-type: none;
 		margin-left: 0;
 		margin-top: 15px;
 	}
 	#contentcol .degree-search-result {
-		/*border-bottom: 1px solid #e5e5e5;*/
 		margin-bottom: 0;
-		padding: 12px 15px 8px;
 		position: relative;
 	}
-	#contentcol .degree-search-result:hover,
-	#contentcol .degree-search-result:active,
-	#contentcol .degree-search-result:focus {
-		background-color: #eee;
+	#contentcol .degree-search-result div {
+		padding: 12px 15px 8px;
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-search-result {
 			margin-bottom: 20px;
 			padding: 0;
-		}
-		#contentcol .degree-search-result:hover,
-		#contentcol .degree-search-result:active,
-		#contentcol .degree-search-result:focus {
-			background-color: transparent;
 		}
 	}
 
@@ -270,6 +261,45 @@
 		left: 0;
 		text-indent: -9999px;
 	}
+
+	.background-hover-fade-in {
+        color:#000;
+
+        -webkit-transition: background 0.5s linear;
+        -moz-transition: background 0.5s linear;
+        -ms-transition: background 0.5s linear;
+        -o-transition: background 0.5s linear;
+        transition: background 0.5s linear;
+    }
+
+	.background-hover-fade-in:hover,
+	.background-hover-fade-in:active,
+	.background-hover-fade-in:focus {
+        background-color:#eee;
+    }
+
+	.fade {
+		opacity: 0;
+
+		-webkit-transition: opacity .5s ease-in-out;
+		-moz-transition: opacity .5s ease-in-out;
+		-ms-transition: opacity .5s ease-in-out;
+		-o-transition: opacity .5s ease-in-out;
+		transition: opacity .5s ease-in-out;
+	}
+
+	.fade-in {
+		opacity: 1;
+	}
+
+	@media (max-width: 767px) {
+		.background-hover-fade-in:hover,
+		.background-hover-fade-in:active,
+		.background-hover-fade-in:focus {
+			background-color: transparent;
+		}
+	}
+
 	</style>
 
 	<?php
@@ -319,25 +349,25 @@
 				<div class="content">
 					<h2>Program Types</h2>
 					<ul>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="program-type[]" class="program-type" value="undergraduate" type="checkbox"
 									<?php if (!isset($_GET['program-type']) || (isset($_GET['program-type']) && in_array("undergraduate", $_GET['program-type']))) echo "checked";?>> Undergraduate
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="program-type[]" class="program-type" value="graduate" type="checkbox"
 									<?php if (isset($_GET['program-type']) && in_array("graduate", $_GET['program-type'])) echo "checked";?>> Graduate
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="program-type[]" class="program-type" value="minor" type="checkbox"
 									<?php if (isset($_GET['program-type']) && in_array("minor", $_GET['program-type'])) echo "checked";?>> Minor
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="program-type[]" class="program-type" value="certificate" type="checkbox"
 									<?php if (isset($_GET['program-type']) && in_array("certificate", $_GET['program-type'])) echo "checked";?>> Certificate
@@ -347,73 +377,73 @@
 
 					<h2>Colleges</h2>
 					<ul>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Arts_Humanities" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Arts_Humanities", $_GET['college'])) echo "checked";?>> Arts &amp; Humanities
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Business_Administration" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Business_Administration", $_GET['college'])) echo "checked";?>> Business Administration
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Education_Human_Performance" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Education_Human_Performance", $_GET['college'])) echo "checked";?>> Education &amp; Human Performance
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Engineering_Computer_Science" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Engineering_Computer_Science", $_GET['college'])) echo "checked";?>> Engineering &amp; Computer Science
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Graduate_Studies" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Graduate_Studies", $_GET['college'])) echo "checked";?>> Graduate Studies
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Health_Public_Affairs" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Health_Public_Affairs", $_GET['college'])) echo "checked";?>> Health &amp; Public Affairs
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Honors" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Honors", $_GET['college'])) echo "checked";?>> Honors
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Hospitality_Management" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Hospitality_Management", $_GET['college'])) echo "checked";?>> Hospitality Management
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Medicine" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Medicine", $_GET['college'])) echo "checked";?>> Medicine
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Nursing" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Nursing", $_GET['college'])) echo "checked";?>> Nursing
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Optics_Photonics" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Optics_Photonics", $_GET['college'])) echo "checked";?>> Optics &amp; Photonics
 							</label>
 						</li>
-						<li class="checkbox">
+						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="college[]" class="college" value="Sciences" type="checkbox"
 								<?php if (isset($_GET['college']) && in_array("Sciences", $_GET['college'])) echo "checked";?>> Sciences
@@ -507,7 +537,12 @@
 			}
 
 			function degreeSearchSuccessHandler( data ) {
+				$degreeSearchResultsContainer.find('li').removeClass('fade-in');
 				$degreeSearchResultsContainer.html(data);
+				$degreeSearchResultsContainer.find('li').addClass('fade');
+				setTimeout(function() {
+					$degreeSearchResultsContainer.find('li').addClass('fade-in');
+				},200);
 			}
 
 			function degreeSearchFailureHandler( data ) {
@@ -599,7 +634,7 @@
 					// desktop
 					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
 				}
-				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
+				$academicsSearch.on('change', '.search-query', searchQueryKeyUpHandler);
 			}
 
 			function initPage() {
