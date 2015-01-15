@@ -621,7 +621,7 @@
 					.height($(document).height())
 					.offset({ top: 0, right: 0 })
 					// setting the click handler on page load fails
-					.find('a.close').on('click', closeButtonClickHandler);
+					.find('a.close').on('click touchstart', closeButtonClickHandler);
 				$(document).on('click touchstart', closeMenuHandler);
 			}
 
