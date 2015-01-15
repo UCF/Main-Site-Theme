@@ -52,13 +52,13 @@
 			box-sizing: border-box;
 			box-shadow: 0 0 5px rgba(0, 0, 0, .4);
 			margin-top: 0;
-			max-height: 0; /* TODO: pointer-events:none is not perfect; fix ios bugginess */
+			max-height: 0; /* set via js when active */
 			opacity: 0;
 			overflow-y: scroll;
 			padding: 0;
 			pointer-events: none;
 			position: absolute;
-			top: 50px; /* UCF Header height */
+			top: 50px; /* is overridden via JS */
 			-webkit-overflow-scrolling: touch;
 			-webkit-transition: opacity .2s ease-in-out;
 			transition: opacity .2s ease-in-out;
@@ -614,19 +614,21 @@
 			}
 
 			function initFilterClickHandler(e) {
-				// Resize, position sidebar
+				// Position sidebar
 				$sidebarLeft.css({
-					'top': $('#mobile-filter').offset().top + ( $('#mobile-filter').outerHeight() / 2 ),
-					'max-height': $(window).height() - 40
+					'top': $('#mobile-filter').offset().top + ( $('#mobile-filter').outerHeight() / 2 )
 				});
 
-				$(document).on('click touchstart', function(e) {
-					if(!$(e.target).closest('#mobile-filter').length && !$(e.target).closest('#sidebar_left').length) {
+				$(document).on('click', function(e) {
+					// Allow a click anywhere within the document
+					// to close the sidebar, except for in/on the sidebar itself
+					// or on its toggle button
+					if($sidebarLeft.hasClass('active') && !$(e.target).is('#sidebar_left') && !$sidebarLeft.find(e.target).length && !$(e.target).is('#mobile-filter')) {
 						closeMenuHandler(e);
 					}
 				});
-				$('body').on('click', '#mobile-filter-done', closeMenuHandler);
-				$('body').on('click', '#mobile-filter-reset', resetFilterClickHandler);
+				$academicsSearch.on('click', '#mobile-filter-done', closeMenuHandler);
+				$academicsSearch.on('click', '#mobile-filter-reset', resetFilterClickHandler);
 			}
 
 			function filterClickHandler(e) {
@@ -636,6 +638,9 @@
 					scrollTop: $(this).offset().top,
 				}, 200);
 				$sidebarLeft
+					.css({
+						'max-height': $(window).height() - 40
+					})
 					.add($(this))
 					.toggleClass('active');
 			}
@@ -651,7 +656,11 @@
 				e.preventDefault();
 				$sidebarLeft
 					.add('#mobile-filter')
-					.removeClass('active');
+					.removeClass('active')
+					.end()
+					.css({
+						'max-height': 0
+					});
 				loadDegreeSearchResults();
 			}
 
