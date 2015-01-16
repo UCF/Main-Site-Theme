@@ -1,8 +1,11 @@
 <ul class="degree-search-results">
 	<li class="degree-search-result">
 		<div class="background-hover-fade-in">
+			<span class="pull-right"><input type="checkbox">
+				<a href="/compare-degrees/">compare</a>
+			</span>
 			<h3 class="degree-title">
-				<a href="#">Accounting Ph.D.</a>
+				<a href="/blog/academics/accounting-2/">Accounting Ph.D.</a>
 				<span class="degree-credits-count">&mdash; 140 credit hours</span>
 			</h3>
 			<span class="degree-college">College of Business Administration</span>
@@ -14,15 +17,19 @@
 				students for academic careers in higher education and management careers within profit and
 				nonprofit organizations. Success in the program is judged by the student’s understanding of
 				the issues and methodologies essential to the advancement of knowledge.
+				<br>
+				<a class="degree-search-result-link" href="/blog/academics/accounting-2/">Read more about the Accounting degree.</a>
 			</p>
-			<a class="degree-search-result-link" href="#">Read more about the Accounting degree.</a>
 		</div>
 	</li>
 
 	<li class="degree-search-result">
 		<div class="background-hover-fade-in">
+			<span class="pull-right"><input type="checkbox">
+				<a href="/compare-degrees/">compare</a>
+			</span>
 			<h3 class="degree-title">
-				<a href="#">Finance Ph.D.</a>
+				<a href="/blog/academics/accounting-2/">Finance Ph.D.</a>
 				<span class="degree-credits-count">&mdash; 140 credit hours</span>
 			</h3>
 			<span class="degree-college">College of Business Administration</span>
@@ -35,7 +42,7 @@
 				nonprofit organizations. Success in the program is judged by the student’s understanding of
 				the issues and methodologies essential to the advancement of knowledge.
 			</p>
-			<a class="degree-search-result-link" href="#">Read more about the Finance degree.</a>
+			<a class="degree-search-result-link" href="/blog/academics/accounting-2/">Read more about the Finance degree.</a>
 		</div>
 	</li>
 </ul>
