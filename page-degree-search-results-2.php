@@ -4,6 +4,10 @@ if ( !defined( 'WP_USE_THEMES' ) ) {
 	require('../../../wp-load.php');
 }
 
+function get_first_result( $array_result ) {
+	return $array_result[0];
+}
+
 function fetch_degree_data() {
 	// For demo purposes, we're just using existing WP post data.
 	// A final product would be querying a search service directly.
@@ -64,17 +68,17 @@ function fetch_degree_data() {
 				),
 				'name' => $post->post_title,
 				'abbreviation' => '',
-				'degree' => wp_get_post_terms( $post->ID, 'program_types', array( 'fields' => 'names' ) )[0],
+				'degree' => get_first_result( wp_get_post_terms( $post->ID, 'program_types', array( 'fields' => 'names' ) ) ),
 				'creditHours' => intval( get_post_meta( $post->ID, 'degree_hours', TRUE ) ),
 				'thesis' => '',
 				'nonThesis' => '',
 				'dissertation' => '',
 				'college' => array(
-					'name' => wp_get_post_terms( $post->ID, 'colleges', array( 'fields' => 'names' ) )[0],
+					'name' => get_first_result( wp_get_post_terms( $post->ID, 'colleges', array( 'fields' => 'names' ) ) ),
 					'url' => '',
 				),
 				'department' => array(
-					'name' => wp_get_post_terms( $post->ID, 'departments', array( 'fields' => 'names' ) )[0],
+					'name' => get_first_result( wp_get_post_terms( $post->ID, 'departments', array( 'fields' => 'names' ) ) ),
 					'url' => '',
 				),
 				'online' => '',
