@@ -121,6 +121,7 @@ if ( $results ) {
 					<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 				</a>
 				<span class="degree-credits-count">
+				<?php echo $result['degree']; ?> &mdash;
 				<?php if ( $result['creditHours'] > 0 ): ?>
 					<?php echo $result['creditHours']; ?> Credit Hours
 				<?php else: ?>

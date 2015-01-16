@@ -342,8 +342,10 @@
 	@media (max-width: 767px) {
 		#contentcol .degree-title {
 			display: block;
-			float: left;
-			width: 70%;
+			font-size: 16.5px;
+			line-height: 1.1;
+			margin-bottom: 0;
+			width: 100%;
 		}
 	}
 	#contentcol .degree-title a {
@@ -353,9 +355,11 @@
 	}
 	#contentcol .degree-credits-count {
 		color: #888;
-		font-size: 14px;
+		font-size: 13px;
 		font-weight: normal;
 		display: block;
+		line-height: 1.2;
+		margin-top: 4px;
 	}
 
 	#contentcol .degree-online {
@@ -375,8 +379,9 @@
 	@media (max-width: 767px) {
 		#contentcol .degree-online {
 			display: block;
-			float: left;
-			width: 30%;
+			margin-top: 8px;
+			padding: 0;
+			width: 100%;
 		}
 	}
 
@@ -390,6 +395,7 @@
 		#contentcol .degree-college-dept {
 			clear: both;
 			display: block;
+			margin-top: 8px;
 			width: 100%;
 		}
 	}
