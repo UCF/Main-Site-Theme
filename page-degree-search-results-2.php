@@ -121,7 +121,7 @@ if ( $results ) {
 		?>
 		<li class="degree-search-result">
 			<h3 class="degree-title">
-				<a href="<?php echo get_permalink( $post->ID ); ?>"> <!-- TODO: link generation -->
+				<a href="<?php echo get_permalink( $result['academicPlanId'] ); ?>"> <!-- TODO: link generation -->
 					<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 				</a>
 				<span class="degree-credits-count">
@@ -144,7 +144,7 @@ if ( $results ) {
 					<span class="degree-detail-label">Department:</span> <?php echo $result['department']['name']; ?>
 				</span>
 			</div>
-			<a class="degree-search-result-link" href="<?php echo get_permalink( $post->ID ); ?>"> <!-- TODO: link generation -->
+			<a class="degree-search-result-link" href="<?php echo get_permalink( $result['academicPlanId'] ); ?>"> <!-- TODO: link generation -->
 				Read more about the <?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>.
 			</a>
 		</li>
