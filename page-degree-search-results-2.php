@@ -140,7 +140,7 @@ if ( $results ) {
 			</div>
 			<div class="degree-compare">
 				<label class="checkbox degree-compare-label">
-					<input type="checkbox" value="<?php echo $result['academicPlanId']; ?>"> Compare
+					<input type="checkbox" name="compare[]" class="degree-compare-input" value="<?php echo $result['academicPlanId']; ?>"> Compare
 				</label>
 			</div>
 		</li>

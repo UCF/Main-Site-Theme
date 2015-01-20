@@ -405,7 +405,7 @@
 	@media (max-width: 767px) {
 		#contentcol .degree-compare {
 			box-sizing: border-box;
-			padding-left: 10px;
+			padding-left: 12px;
 			width: 12%;
 		}
 	}
@@ -670,7 +670,6 @@
 					<!-- Search Results -->
 
 					<div class="degree-search-results-container">
-						<?php //include THEME_DIR . '/page-degree-search-results-2.php'; ?>
 						<?php echo $data['markup']; ?>
 						<div id="ajax-loading" class="hidden"></div>
 					</div>
@@ -723,7 +722,7 @@
 			}
 
 			function degreeSearchSuccessHandler( data ) {
-				console.log(data);
+				// console.log(data);
 				$loaderScreen = $academicsSearch.find('#ajax-loading');
 
 				// Make sure the spinner actually gets displayed
@@ -852,6 +851,63 @@
 				loadDegreeSearchResults();
 			}
 
+			function activateCompareMode() {
+				$comparisonAlert.removeClass('hidden');
+			}
+
+			function deactivateCompareMode() {
+				$comparisonAlert.addClass('hidden');
+			}
+
+			function highlightCompareableDegree($checkedDegreeInput) {
+				$checkedDegreeInput.each(function() {
+					$(this)
+						.parents('.degree-search-result')
+							.addClass('compare-active');
+				});
+			}
+
+			function unhighlightCompareableDegrees() {
+				$academicsSearch.find('.compare-active').removeClass('compare-active');
+			}
+
+			function performComparison() {
+				var $checked = $academicsSearch.find('.degree-compare-input:checked');
+				var compareables = [];
+
+				$checked.each(function() {
+					compareables.push($(this).val());
+				});
+
+				var compareParams = $.param({
+					academicPlanIds: compareables,
+				});
+
+				// perform request, passing compareables as GET params...
+				window.location = '<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>?' + compareParams;
+			}
+
+			function degreeCompareChangeHandler() {
+				var $checked = $academicsSearch.find('.degree-compare-input:checked');
+
+				// If no other Compare boxes are checked, activate 'compare mode'
+				// (allow one other checkbox to be checked)
+				if ($checked.length === 1) {
+					activateCompareMode();
+					highlightCompareableDegree($checked);
+				}
+				// If a first checkbox was unchecked, deactivate 'compare mode'
+				else if ($checked.length === 0) {
+					deactivateCompareMode();
+					unhighlightCompareableDegrees();
+				}
+				// If two checkboxes are now checked, go to comparison page
+				else {
+					highlightCompareableDegree($checked);
+					performComparison();
+				}
+			}
+
 			function setupEventHandlers() {
 				if($academicsSearch.find('#mobile-filter').is(':visible')) {
 					// mobile
@@ -862,12 +918,14 @@
 					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
 				}
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
+				$academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
 			}
 
 			function initPage() {
 				$academicsSearch = $('#academics_search');
 				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
 				$sidebarLeft = $academicsSearch.find('#sidebar_left');
+
 				setupEventHandlers();
 				initAutoComplete();
 			}
