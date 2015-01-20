@@ -138,15 +138,11 @@ if ( $results ) {
 				<span class="icon-globe"></span> Online
 				<?php endif; ?>
 			</div>
-			<div class="degree-college-dept">
-				<span class="degree-college"><?php echo $result['college']['name']; ?></span>
-				<span class="degree-dept">
-					<span class="degree-detail-label">Department:</span> <?php echo $result['department']['name']; ?>
-				</span>
+			<div class="degree-compare">
+				<label class="checkbox degree-compare-label">
+					<input type="checkbox" value="<?php echo $result['academicPlanId']; ?>"> Compare
+				</label>
 			</div>
-			<a class="degree-search-result-link" href="<?php echo get_permalink( $result['academicPlanId'] ); ?>"> <!-- TODO: link generation -->
-				Read more about the <?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>.
-			</a>
 		</li>
 		<?php
 		$result_markup = ob_get_clean();

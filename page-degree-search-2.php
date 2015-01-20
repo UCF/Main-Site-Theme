@@ -220,7 +220,7 @@
 		line-height: 20px;
 		padding-right: 15px;
 		padding-top: 5px;
-		width: 60%;
+		width: 45%;
 	}
 	#contentcol .degree-result-count .result {
 		font-style: italic;
@@ -234,7 +234,7 @@
 	}
 	#contentcol .degree-search-sort-options {
 		padding-left: 15px;
-		width: 35%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
+		width: 28%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
 	}
 	@media (max-width: 979px) {
 		#contentcol .degree-result-count {
@@ -243,6 +243,9 @@
 		#contentcol .degree-search-sort-options {
 			width: 45%;
 		}
+	}
+	#contentcol #desktop-compare {
+		margin-right: 15px;
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-result-count {
@@ -330,21 +333,24 @@
 	#contentcol .degree-title {
 		display: table-cell;
 		vertical-align: middle;
-		width: 50%;
+		/*width: 50%;*/
 		font-size: 18px;
 		margin-bottom: 8px;
+
+		width: 62%;
 	}
 	@media (min-width: 768px) and (max-width: 979px) {
 		#contentcol .degree-title {
-			width: 46%;
+			width: 60%;
 		}
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-title {
 			display: block;
-			font-size: 16.5px;
+			float: left;
+			font-size: 15px;
 			line-height: 1.1;
-			margin-bottom: 0;
+			margin-bottom: 4px;
 			width: 100%;
 		}
 	}
@@ -360,6 +366,11 @@
 		display: block;
 		line-height: 1.2;
 		margin-top: 4px;
+	}
+	@media (max-width: 767px) {
+		#contentcol .degree-credits-count {
+			font-size: 11.5px;
+		}
 	}
 
 	#contentcol .degree-online {
@@ -378,6 +389,7 @@
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-online {
+			clear: both;
 			display: block;
 			margin-top: 8px;
 			padding: 0;
@@ -385,61 +397,51 @@
 		}
 	}
 
-
-	#contentcol .degree-college-dept {
+	#contentcol .degree-compare {
 		display: table-cell;
 		vertical-align: middle;
-		width: 36%;
+		width: 12%;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-college-dept {
-			clear: both;
-			display: block;
-			margin-top: 8px;
-			width: 100%;
+		#contentcol .degree-compare {
+			box-sizing: border-box;
+			padding-left: 10px;
+			width: 12%;
 		}
 	}
-
-	#contentcol .degree-college,
-	#contentcol .degree-dept {
-		display: block;
-		font-size: 11.5px;
-		line-height: 1.4;
-	}
-	@media (max-width: 767px) {
-		#contentcol .degree-college,
-		#contentcol .degree-dept {
-			line-height: 1.25;
-			margin-bottom: 4px;
-		}
-	}
-	#contentcol .degree-detail-label {
+	#contentcol .degree-compare-label {
+		padding: 3px 3px 3px 25px;
+		background-color: #fff;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		color: #555;
+		font-size: 12px;
 		font-weight: 500;
 	}
-
-	#contentcol .degree-desc {
-		display: none;
-
-		margin-top: 10px;
-		margin-bottom: 5px;
-	}
 	@media (max-width: 767px) {
-		#contentcol .degree-desc {
-			font-size: 13px;
+		#contentcol .degree-compare-label {
+			font-size: 11px;
+			padding-right: 7px;
 		}
 	}
-
-	#contentcol .degree-search-result-link {
-		border: 0 solid transparent !important;
-		display: block;
-		outline: 0;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		text-indent: -9999px;
+	#contentcol .degree-compare-label:hover,
+	#contentcol .degree-compare-label:active,
+	#contentcol .degree-compare-label:focus {
+		color: #08c;
 	}
+	#contentcol .degree-search-result.compare-active {
+		background-color: #d9edf7;
+	}
+	@media (max-width: 767px) {
+		#contentcol .degree-search-result.compare-active {
+			background-color: transparent;
+		}
+	}
+	#contentcol .degree-search-result.compare-active .degree-compare-label {
+		border-color: #08c;
+		color: #08c;
+	}
+
 	</style>
 
 	<?php
@@ -649,6 +651,7 @@
 						</h2>
 
 						<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
+							<!-- <a class="btn" id="desktop-compare" href="#">Compare Degrees</a> -->
 							<strong class="degree-search-sort-label radio inline">Sort by:</strong>
 							<label class="radio inline">
 								<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') echo 'checked'; ?>> Name
@@ -658,8 +661,9 @@
 							</label>
 						</div>
 
-						<div class="degree-search-sort-inner degree-search-sort-options visible-phone">
-							<a class="btn" id="mobile-filter" href="#">Filter Results</a>
+						<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
+							<!-- <a class="btn" id="mobile-compare" href="#">Compare</a> -->
+							<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
 						</div>
 					</div>
 
