@@ -81,7 +81,7 @@ function fetch_degree_data() {
 					'name' => get_first_result( wp_get_post_terms( $post->ID, 'departments', array( 'fields' => 'names' ) ) ),
 					'url' => '',
 				),
-				'online' => '',
+				'online' => get_post_meta( $post->ID, 'degree_online', TRUE ),
 				'description' => get_post_meta( $post->ID, 'degree_description', TRUE ),
 				'prerequisite' => '',
 				'applicationInfoDescription' => '',
@@ -134,7 +134,7 @@ if ( $results ) {
 				</span>
 			</h3>
 			<div class="degree-online">
-				<?php if ( $result['online'] ): ?>
+				<?php if ( $result['online'] == 'on' ): ?>
 				<span class="icon-globe"></span> Online
 				<?php endif; ?>
 			</div>
