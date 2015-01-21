@@ -851,14 +851,6 @@
 				loadDegreeSearchResults();
 			}
 
-			function activateCompareMode() {
-				$comparisonAlert.removeClass('hidden');
-			}
-
-			function deactivateCompareMode() {
-				$comparisonAlert.addClass('hidden');
-			}
-
 			function highlightCompareableDegree($checkedDegreeInput) {
 				$checkedDegreeInput.each(function() {
 					$(this)
@@ -885,6 +877,13 @@
 
 				// perform request, passing compareables as GET params...
 				window.location = '<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>?' + compareParams;
+
+				// Uncheck selected degrees, in case the user hits the back btn in their browser.
+				// Works due to back-forward cache magic. (TODO: test in IE)
+				window.setTimeout(function() {
+					unhighlightCompareableDegrees();
+					$academicsSearch.find('.degree-compare-input:checked').removeProp('checked');
+				}, 150);
 			}
 
 			function degreeCompareChangeHandler() {
@@ -893,12 +892,10 @@
 				// If no other Compare boxes are checked, activate 'compare mode'
 				// (allow one other checkbox to be checked)
 				if ($checked.length === 1) {
-					activateCompareMode();
 					highlightCompareableDegree($checked);
 				}
 				// If a first checkbox was unchecked, deactivate 'compare mode'
 				else if ($checked.length === 0) {
-					deactivateCompareMode();
 					unhighlightCompareableDegrees();
 				}
 				// If two checkboxes are now checked, go to comparison page
