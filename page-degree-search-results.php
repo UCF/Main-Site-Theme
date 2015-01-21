@@ -143,7 +143,7 @@ if ( $results ) {
 				<span class="compare pull-right"><input type="checkbox" value="<?php echo $result['academicPlanId']; ?>">
 					<a href="/compare-degrees/">compare</a>
 				</span>
-				<a class="degree-search-result-link" href="/blog/academics/accounting-2/">
+				<a class="degree-search-result-link" href="/academics/accounting-5/">
 					<h3 class="degree-title">
 						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 					</h3>

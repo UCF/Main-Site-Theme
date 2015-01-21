@@ -4,6 +4,14 @@
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
 
+	 .input-append {
+	 	width: 80%;
+	 }
+
+	 .form-search .input-append .search-query {
+	 	width: 100%;
+	 }
+
 	.input-append .btn-group > .btn:first-child {
 		border-bottom-left-radius: 0;
 		border-top-left-radius: 0;
@@ -47,13 +55,16 @@
 		font-size: 14px;
 	}
 
+	#sidebar_left {
+		background-color: #eee;
+	}
+
 	@media (max-width: 767px) {
 
 		#sidebar_left {
 			border-top: none;
 			box-sizing: border-box;
 			box-shadow: 0 6px 12px rgba(0,0,0,.3);
-			background: #fff;
 			margin-top: 0;
 			padding: 0;
 			position: absolute;
@@ -101,6 +112,7 @@
 		color: #888;
 		font-size: 18px;
 		font-weight: 500;
+		padding-left: 10px;
 	}
 
 	.degree-search-filters ul {
@@ -112,7 +124,7 @@
 	.degree-search-filters ul li {
 		padding-top: 5px;
 		padding-bottom: 1px;
-		padding-left: 28px;
+		padding-left: 40px;
 	}
 
 	.degree-search-filters label {
@@ -144,7 +156,7 @@
 
 	#contentcol .degree-search-header {
 		color: #888;
-		font-size: 24px;
+		font-size: 18px;
 		line-height: 1.25;
 		margin-top: 25px;
 		margin-bottom: 10px;
@@ -218,13 +230,15 @@
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-search-result {
+			border-bottom: solid 1px #e5e5e5;
 			margin-bottom: 20px;
-			padding: 0;
+			padding: 0 0 20px;
 		}
 	}
 
 	#contentcol .degree-search-result .compare {
 		margin-left: 20px;
+		margin-bottom: 20px;
 	}
 
 	#contentcol .degree-title {
@@ -485,6 +499,8 @@
 			<div class="span9" id="contentcol">
 				<article role="main">
 
+					<?php the_content(); ?>
+
 					<!-- Search input -->
 
 					<div class="degree-search-form form-search">
@@ -497,7 +513,7 @@
 
 					<!-- Search Result Header -->
 
-					<h2 class="degree-search-header">234 Results for: <?php echo urldecode($_GET['search-query']); ?></em></h2>
+					<h2 class="degree-search-header">234 Results for: <?php echo htmlspecialchars($_GET['search-query']); ?></em></h2>
 					<div class="degree-search-sort">
 						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
 						<label class="radio inline">
@@ -519,11 +535,10 @@
 
 					<hr>
 
-					<?php the_content(); ?>
-
 					<p class="more-details">
 						For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
 					</p>
+
 					<p class="more-details">
 						For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
 					</p>
@@ -560,7 +575,7 @@
 			function degreeSearchSuccessHandler( data ) {
 				$degreeSearchResultsContainer.find('li').removeClass('fade-in');
 				$degreeSearchResultsContainer.html(data.markup);
-				$('#contentcol').find('.degree-search-header').text(data.count + " Results for:");
+				$academicsSearch.find('.degree-search-header').text(data.count + " Results for: " + $academicsSearch.find('.search-query').val());
 				$degreeSearchResultsContainer.find('li').addClass('fade');
 				setTimeout(function() {
 					$degreeSearchResultsContainer.find('li').addClass('fade-in');
