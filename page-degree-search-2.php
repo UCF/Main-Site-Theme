@@ -883,7 +883,7 @@
 				window.setTimeout(function() {
 					unhighlightCompareableDegrees();
 					$academicsSearch.find('.degree-compare-input:checked').removeProp('checked');
-				}, 150);
+				}, 200);
 			}
 
 			function degreeCompareChangeHandler() {
