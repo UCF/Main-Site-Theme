@@ -547,7 +547,7 @@
 				// Workaround for bug in mouse item selection
 				$.fn.typeahead.Constructor.prototype.blur = function() {
 				    var that = this;
-				    setTimeout(function () { that.hide() }, 250);
+				    setTimeout(function () { that.hide(); }, 250);
 				};
 
 				$academicsSearch.find('.search-query').typeahead({
@@ -559,7 +559,8 @@
 
 			function degreeSearchSuccessHandler( data ) {
 				$degreeSearchResultsContainer.find('li').removeClass('fade-in');
-				$degreeSearchResultsContainer.html(data);
+				$degreeSearchResultsContainer.html(data.markup);
+				$('#contentcol').find('.degree-search-header').text(data.count + " Results for:");
 				$degreeSearchResultsContainer.find('li').addClass('fade');
 				setTimeout(function() {
 					$degreeSearchResultsContainer.find('li').addClass('fade-in');
@@ -582,16 +583,16 @@
 				});
 
 				var jqxhr = $.ajax({
-					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search.php',
+					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results.php',
 					type: "GET",
 					cache: false,
 					data: {
 						'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
-						'sort-by': $academicsSearch.find('.sort-by:checked').val(),
+						// 'sort-by': $academicsSearch.find('.sort-by:checked').val(),
 						'program-type': programType,
 						'college': college
 					},
-					dataType: "html"
+					dataType: "json"
 				});
 
 				$degreeSearchResultsContainer.html('<img src="//universityheader.ucf.edu/bar/img/ajax-loader.gif" width="16" height="16" /> Loading search results...');
@@ -640,8 +641,9 @@
 			}
 
 			function closeMenuHandler(e) {
-				if(!$(e.target).closest('.filter-tab').length && !$(e.target).closest('#sidebar_left').length
-					&& $sidebarLeft.hasClass('open')) {
+				if(!$(e.target).closest('.filter-tab').length &&
+					!$(e.target).closest('#sidebar_left').length &&
+					$sidebarLeft.hasClass('open')) {
 					$sidebarLeft.removeClass('open');
 					loadDegreeSearchResults();
 				}
