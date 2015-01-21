@@ -209,10 +209,11 @@
 		margin-top: 15px;
 	}
 	#contentcol .degree-search-result {
-		margin-bottom: 0;
+		display: block;
+		margin-bottom: 20px;
 		position: relative;
 	}
-	#contentcol .degree-search-result div {
+	#contentcol .degree-search-result > div {
 		padding: 12px 15px 8px;
 	}
 	@media (max-width: 767px) {
@@ -222,14 +223,23 @@
 		}
 	}
 
+	#contentcol .degree-search-result .compare {
+		margin-left: 20px;
+	}
+
 	#contentcol .degree-title {
 		font-size: 18px;
 		margin-bottom: 8px;
-	}
-	#contentcol .degree-title a {
-		border: 0 solid transparent;
 		color: #08c;
-		font-weight: 500;
+	}
+	#contentcol a {
+		color: #000;
+		border: 0 solid transparent;
+	}
+
+	#contentcol a:hover {
+		color: #666;
+		border-bottom: none !important;
 	}
 	#contentcol .degree-credits-count {
 		color: #888;
@@ -261,18 +271,6 @@
 		#contentcol .degree-desc {
 			font-size: 13px;
 		}
-	}
-
-	#contentcol .degree-search-result-link {
-		border: 0 solid transparent !important;
-		display: block;
-		outline: 0;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		text-indent: -9999px;
 	}
 
 	.background-hover-fade-in {
@@ -316,34 +314,51 @@
 	</style>
 
 	<?php
-		$program_type = "undergraduate";
+		$default_params = array(
+			'program-type' => array('undergraduate-degree'),
+			'college' => array(),
+			'sort-by' => 'title',
+			'search-query' => ''
+		);
 
-		if(!empty($_GET['program-type'])){
-			$arraySize = count($_GET['program-type']);
+		$params = array_merge( $default_params, $_GET );
 
-			foreach($_GET['program-type'] as $key=>$value){
-				$program_type = $program_type . $value;
-				if($key > -1 && $key < $arraySize-1) {
-					$program_type = $program_type . ' and ';
-				}
-			}
-		}
+		// $params_pretty = array(
+		// 	'program-type' => '',
+		// 	'college' => ''
+		// );
 
-		$college = "";
+		// if( !empty( $params['program-type'] ) ) {
+		// 	$array_size = count( $params['program-type'] );
 
-		if(!empty($_GET['college'])){
-			$arraySize = count($_GET['college']);
+		// 	foreach( $params['program-type'] as $key => $value ) {
+		// 		$program_type = $program_type . $value;
+		// 		if( $key > -1 && $key < $array_size - 1 ) {
+		// 			$program_type = $program_type . ' and ';
+		// 		}
+		// 	}
 
-			foreach($_GET['college'] as $key=>$value){
-				$college = $college . $value;
-				if($key > -1 && $key < $arraySize-1) {
-					$college = $college . ' and ';
-				}
-			}
-		}
+		// 	$params_pretty['program-type'] = $program_type;
+		// }
+
+		// if( !empty( $params_pretty['college'] ) ) {
+		// 	$array_size = count( $params_pretty['college'] );
+
+		// 	foreach( $params_pretty['college'] as $key => $value ) {
+		// 		$college = $college . $value;
+		// 		if( $key > -1 && $key < $array_size - 1 ) {
+		// 			$college = $college . ' and ';
+		// 		}
+		// 	}
+
+		// 	$params_pretty['college'] = $college;
+		// }
+
+
+		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results.php?' . http_build_query($params) ), true );
+		// var_dump($data);
 	?>
 
-	<?php $degrees = get_degree_search_data(); ?>
 	<div class="row page-content" id="academics_search">
 		<div class="filter-tab visible-phone">F<br>I<br>L<br>T<br>E<br>R<br></div>
 
@@ -365,26 +380,26 @@
 					<ul>
 						<li class="checkbox background-hover-fade-in">
 							<label>
-								<input name="program-type[]" class="program-type" value="undergraduate" type="checkbox"
-									<?php if (!isset($_GET['program-type']) || (isset($_GET['program-type']) && in_array("undergraduate", $_GET['program-type']))) echo "checked";?>> Undergraduate
+								<input name="program-type[]" class="program-type" value="undergraduate-degree" type="checkbox"
+									<?php if( empty( $params['program-type'] ) || in_array( 'undergraduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>> Undergraduate
 							</label>
 						</li>
 						<li class="checkbox background-hover-fade-in">
 							<label>
-								<input name="program-type[]" class="program-type" value="graduate" type="checkbox"
-									<?php if (isset($_GET['program-type']) && in_array("graduate", $_GET['program-type'])) echo "checked";?>> Graduate
+								<input name="program-type[]" class="program-type" value="graduate-degree" type="checkbox"
+									<?php if( in_array( 'graduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>> Graduate
 							</label>
 						</li>
 						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="program-type[]" class="program-type" value="minor" type="checkbox"
-									<?php if (isset($_GET['program-type']) && in_array("minor", $_GET['program-type'])) echo "checked";?>> Minor
+									<?php if( in_array( 'minor', $params['program-type'] ) ) { echo 'checked'; } ?>> Minor
 							</label>
 						</li>
 						<li class="checkbox background-hover-fade-in">
 							<label>
 								<input name="program-type[]" class="program-type" value="certificate" type="checkbox"
-									<?php if (isset($_GET['program-type']) && in_array("certificate", $_GET['program-type'])) echo "checked";?>> Certificate
+									<?php if( in_array( 'certificate', $params['program-type'] ) ) { echo 'checked'; } ?>> Certificate
 							</label>
 						</li>
 					</ul>
@@ -475,18 +490,10 @@
 					<div class="degree-search-form form-search">
 						<div class="input-append">
 							<input type="text" name="search-query" class="span6 search-query" autocomplete="off" data-provide="typeahead"
-								placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+								placeholder="Find programs by name or keyword..." value="<?php echo htmlspecialchars($_GET['search-query']); ?>">
 							<button class="btn btn-primary" type="button"><i class="icon-search icon-white"></i></button>
 						</div>
 					</div>
-
-					<?php
-						$sort_by = "degree-name";
-
-						if (isset($_GET['sort-by']) && $_GET['sort-by'] == "credit-hours") {
-							$sort_by = "credit-hours";
-						}
-					?>
 
 					<!-- Search Result Header -->
 
@@ -494,7 +501,7 @@
 					<div class="degree-search-sort">
 						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
 						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="degree-name" <?php if ($sort_by == "degree-name") echo "checked";?>> Name
+							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ($sort_by == "title" || empty($sort_by)) echo "checked";?>> Name
 						</label>
 						<label class="radio inline">
 							<input type="radio" name="sort-by" class="sort-by" value="credit-hours" <?php if ($sort_by == "credit-hours") echo "checked";?>> Credit Hours
@@ -504,7 +511,8 @@
 					<!-- Search Results -->
 
 					<div class="degree-search-results-container">
-						<?php include 'page-degree-search-results.php'; ?>
+						<?php echo $data['markup']; ?>
+						<div id="ajax-loading" class="hidden"></div>
 					</div>
 
 					<!-- Page Bottom -->
@@ -574,7 +582,7 @@
 				});
 
 				var jqxhr = $.ajax({
-					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results.php',
+					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search.php',
 					type: "GET",
 					cache: false,
 					data: {
