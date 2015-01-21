@@ -122,6 +122,7 @@
 		}
 	}
 	.comparison-chart > tbody > tr > td {
+		border-left: 1px solid #eee;
 		text-align: center;
 		vertical-align: middle;
 		width: 40%;
@@ -158,6 +159,7 @@
 			width: 100%;
 		}
 		.comparison-chart > tbody > tr > td {
+			border-left: 0;
 			border-top: 0;
 			display: block !important;
 			float: left;
