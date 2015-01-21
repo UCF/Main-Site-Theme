@@ -24,9 +24,13 @@
 	/* Reset this template's fonts to Helvetica */
 	#sidebar_left,
 	#contentcol,
+	#degree-search-top,
 	#contentcol input,
 	#contentcol select,
-	#contentcol option {
+	#contentcol option,
+	#degree-search-top input,
+	#degree-search-top select,
+	#degree-search-top option {
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
 	}
@@ -185,70 +189,76 @@
 	 * Page content page-specific styles
 	 */
 
+	#degree-search-top {
+		margin-bottom: 10px;
+	}
+	@media (max-width: 767px) {
+		#degree-search-top {
+			margin-bottom: 0;
+		}
+	}
+
 	/* Search field wrapper */
-	#contentcol .degree-search-form {
-		margin-top: 10px;
+	#degree-search-top .degree-search-form {
+		margin-top: 20px;
 	}
 
 	/* Search Result Title + Sorting (desktop) */
-	#contentcol .degree-search-sort {
+	#degree-search-top .degree-search-sort {
 		border-bottom: 1px solid #e5e5e5;
 		margin-top: 20px;
 		width: 100%;
 	}
-	#contentcol .degree-search-sort-inner {
+	#degree-search-top .degree-search-sort-inner {
 		display: table-cell;
 		padding-bottom: 10px;
 		vertical-align: middle;
 	}
 	@media (max-width: 979px) {
 		/* We assume that browsers that support media queries can support box-sizing */
-		#contentcol .degree-search-sort-inner {
+		#degree-search-top .degree-search-sort-inner {
 			box-sizing: border-box;
 		}
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-search-sort-inner {
+		#degree-search-top .degree-search-sort-inner {
 			display: block;
 		}
 	}
 
-	#contentcol .degree-result-count {
+	#degree-search-top .degree-result-count {
 		border-right: 1px solid #eee;
 		font-size: 16px;
 		font-weight: bold;
 		line-height: 20px;
 		padding-right: 15px;
 		padding-top: 5px;
-		width: 45%;
+		width: 70%;
 	}
-	#contentcol .degree-result-count .result {
+	#degree-search-top .degree-result-count .result {
 		font-style: italic;
 		font-weight: 400;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-result-count .for,
-		#contentcol .degree-result-count .result {
+		#degree-search-top .degree-result-count .for,
+		#degree-search-top .degree-result-count .result {
 			display: none;
 		}
 	}
-	#contentcol .degree-search-sort-options {
+	#degree-search-top .degree-search-sort-options {
 		padding-left: 15px;
-		width: 28%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
+		width: 26%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
 	}
 	@media (max-width: 979px) {
-		#contentcol .degree-result-count {
-			width: 50%;
+		#degree-search-top .degree-result-count {
+			width: 62%;
 		}
-		#contentcol .degree-search-sort-options {
-			width: 45%;
+		#degree-search-top .degree-search-sort-options {
+			width: 34%;
 		}
-	}
-	#contentcol #desktop-compare {
-		margin-right: 15px;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-result-count {
+		#degree-search-top .degree-result-count {
 			border-right: 0 solid transparent;
 			font-style: italic;
 			font-weight: normal;
@@ -256,14 +266,14 @@
 			padding-right: 0;
 			width: auto;
 		}
-		#contentcol .degree-search-sort-options {
+		#degree-search-top .degree-search-sort-options {
 			border-left: 1px solid #eee;
 			float: right;
 			width: auto;
 			padding-bottom: 5px;
 		}
 	}
-	#contentcol .degree-search-sort-label {
+	#degree-search-top .degree-search-sort-label {
 		padding-left: 0;
 	}
 
@@ -309,8 +319,11 @@
 		display: table;
 		width: 100%;
 		margin-bottom: 0;
-		padding: 12px 15px 8px;
+		padding: 12px 15px;
 		position: relative;
+	}
+	#contentcol .degree-search-result:nth-child(2n) {
+		background-color: #fafafa;
 	}
 	#contentcol .degree-search-result:hover,
 	#contentcol .degree-search-result:active,
@@ -319,12 +332,19 @@
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-search-result {
-			margin-bottom: 20px;
-			padding: 0;
+			border-top: 1px solid #eee;
+			margin-top: 10px;
+			padding: 10px 0 0 0;
 		}
 		#contentcol .degree-search-result:hover,
 		#contentcol .degree-search-result:active,
 		#contentcol .degree-search-result:focus {
+			background-color: transparent;
+		}
+		#contentcol .degree-search-result:first-child {
+			border-top: 0 solid transparent;
+		}
+		#contentcol .degree-search-result:nth-child(2n) {
 			background-color: transparent;
 		}
 	}
@@ -499,6 +519,45 @@
 				<?php esi_include('output_weather_data','span3'); ?>
 			</div>
 
+			<div class="span12" id="degree-search-top">
+
+				<?php the_content(); ?>
+
+				<!-- Search input -->
+
+				<div class="degree-search-form form-search">
+					<div class="input-append">
+						<input type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span7 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+						<button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
+					</div>
+				</div>
+
+				<!-- Search Result Header -->
+
+				<div class="degree-search-sort clearfix">
+					<h2 class="degree-search-sort-inner degree-result-count">
+						<span class="degree-result-count-num"><?php echo $data['count']; ?></span> results
+						<?php if ( $params['search-query'] ): ?>
+						<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $params['search-query'] ); ?></span>
+						<?php endif; ?>
+					</h2>
+
+					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
+						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
+						<label class="radio inline">
+							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') echo 'checked'; ?>> Name
+						</label>
+						<label class="radio inline">
+							<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) echo 'checked'; ?>> Credit Hours
+						</label>
+					</div>
+
+					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
+						<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
+					</div>
+				</div>
+			</div>
+
 			<!-- Sidebar (Desktop only) -->
 
 			<div id="sidebar_left" class="span3 degree-search-filters">
@@ -631,42 +690,6 @@
 			<div class="span9" id="contentcol">
 				<article role="main">
 
-					<!-- Search input -->
-
-					<div class="degree-search-form form-search">
-						<div class="input-append">
-							<input type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span6 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
-							<button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
-						</div>
-					</div>
-
-					<!-- Search Result Header -->
-
-					<div class="degree-search-sort clearfix">
-						<h2 class="degree-search-sort-inner degree-result-count">
-							<span class="degree-result-count-num"><?php echo $data['count']; ?></span> results
-							<?php if ( $params['search-query'] ): ?>
-							<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $params['search-query'] ); ?></span>
-							<?php endif; ?>
-						</h2>
-
-						<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
-							<!-- <a class="btn" id="desktop-compare" href="#">Compare Degrees</a> -->
-							<strong class="degree-search-sort-label radio inline">Sort by:</strong>
-							<label class="radio inline">
-								<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') echo 'checked'; ?>> Name
-							</label>
-							<label class="radio inline">
-								<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) echo 'checked'; ?>> Credit Hours
-							</label>
-						</div>
-
-						<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
-							<!-- <a class="btn" id="mobile-compare" href="#">Compare</a> -->
-							<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
-						</div>
-					</div>
-
 					<!-- Search Results -->
 
 					<div class="degree-search-results-container">
@@ -677,8 +700,6 @@
 					<!-- Page Bottom -->
 
 					<hr>
-
-					<?php the_content(); ?>
 
 					<p class="more-details">
 						For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
