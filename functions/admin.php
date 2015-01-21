@@ -26,10 +26,10 @@ function shortcode_interface_html(){
 	<input type="hidden" name="shortcode-text" id="shortcode-text" value="<?=THEME_URL."/includes/shortcode-text.php"?>" />
 	<input type="text" name="shortcode-search" id="shortcode-search" placeholder="Find shortcodes..."/>
 	<button type="button">Search</button>
-		
+
 	<ul id="shortcode-results" class="empty">
 	</ul>
-		
+
 	<p>Or select:</p>
 	<select name="shortcode-select" id="shortcode-select">
 		<option value="">--Choose Shortcode--</option>
@@ -37,7 +37,7 @@ function shortcode_interface_html(){
 		<option class="shortcode" value="<?=$name?>"><?=$name?></option>
 		<?php endforeach;?>
 	</select>
-	
+
 	<p>For more information about available shortcodes, please see the <a href="<?=get_admin_url()?>admin.php?page=theme-help#shortcodes">help documentation for shortcodes</a>.</p>
 	<?php
 }
@@ -65,7 +65,7 @@ add_action('add_meta_boxes', 'shortcode_interface');
 function login_scripts(){
 	ob_start();?>
 	<link rel="stylesheet" href="<?=THEME_CSS_URL?>/admin.css" type="text/css" media="screen" charset="utf-8" />
-	<?php 
+	<?php
 	$out = ob_get_clean();
 	print $out;
 }
@@ -95,7 +95,7 @@ function create_utility_pages() {
 		'edit_theme_options',
 		'theme-options',
 		'theme_options_page',
-		THEME_IMG_URL.'/pegasus.png'
+		'dashicons-admin-generic'
 	);
 	add_utility_page(
 		__('Help'),
@@ -103,7 +103,7 @@ function create_utility_pages() {
 		'edit_posts',
 		'theme-help',
 		'theme_help_page',
-		THEME_IMG_URL.'/help.png'
+		'dashicons-editor-help'
 	);
 	add_management_page(
 		__('Import Degree Data'),
@@ -158,7 +158,7 @@ function theme_options_sanitize($input){
 
 /**
  * Modifies the default stylesheets associated with the TinyMCE editor.
- * 
+ *
  * @return string
  * @author Jared Lang
  **/
