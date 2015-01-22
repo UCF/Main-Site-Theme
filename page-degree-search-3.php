@@ -205,9 +205,16 @@
 
 	/* Search Result Title + Sorting (desktop) */
 	#degree-search-top .degree-search-sort {
+		background-color: #fff;
 		border-bottom: 1px solid #e5e5e5;
 		margin-top: 20px;
 		width: 100%;
+	}
+	#degree-search-top .degree-search-sort.affix {
+		margin-top: 0;
+		padding-top: 8px;
+		top: 0;
+		z-index: 999;
 	}
 	#degree-search-top .degree-search-sort-inner {
 		display: table-cell;
@@ -233,7 +240,7 @@
 		line-height: 20px;
 		padding-right: 15px;
 		padding-top: 5px;
-		width: 70%;
+		width: 57%;
 	}
 	#degree-search-top .degree-result-count .result {
 		font-style: italic;
@@ -247,19 +254,20 @@
 	}
 	#degree-search-top .degree-search-sort-options {
 		padding-left: 15px;
-		width: 26%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
+		width: 38%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
 	}
 	@media (max-width: 979px) {
 		#degree-search-top .degree-result-count {
-			width: 62%;
+			width: 48%;
 		}
 		#degree-search-top .degree-search-sort-options {
-			width: 34%;
+			width: 52%;
 		}
 	}
 	@media (max-width: 767px) {
 		#degree-search-top .degree-result-count {
 			border-right: 0 solid transparent;
+			font-size: 13px;
 			font-style: italic;
 			font-weight: normal;
 			float: left;
@@ -273,8 +281,13 @@
 			padding-bottom: 5px;
 		}
 	}
-	#degree-search-top .degree-search-sort-label {
-		padding-left: 0;
+	#degree-search-top .degree-search-sort-options label {
+		font-weight: 500;
+		margin-right: 6px;
+	}
+	#desktop-compare,
+	#desktop-compare-submit {
+		margin-right: 15px;
 	}
 
 	/* Results wrapper */
@@ -418,9 +431,12 @@
 	}
 
 	#contentcol .degree-compare {
-		display: table-cell;
+		display: none;
 		vertical-align: middle;
 		width: 12%;
+	}
+	#contentcol .compare-mode-active .degree-compare {
+		display: table-cell;
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-compare {
@@ -430,11 +446,9 @@
 		}
 	}
 	#contentcol .degree-compare-label {
+		margin-bottom: 0;
 		padding: 3px 3px 3px 25px;
-		background-color: #fff;
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		color: #555;
+		color: #000;
 		font-size: 12px;
 		font-weight: 500;
 	}
@@ -536,24 +550,36 @@
 
 				<div class="degree-search-sort clearfix">
 					<h2 class="degree-search-sort-inner degree-result-count">
-						<span class="degree-result-count-num"><?php echo $data['count']; ?></span> results
+						<span class="degree-result-count-num">
+							<?php echo $data['count']; ?>
+						</span>
+
+						<?php if ( $data['count'] === 1 ): ?>
+							&nbsp;result
+						<?php else: ?>
+							&nbsp;results
+						<?php endif; ?>
+
 						<?php if ( $params['search-query'] ): ?>
 						<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $params['search-query'] ); ?></span>
 						<?php endif; ?>
 					</h2>
 
-					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
-						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
-						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') echo 'checked'; ?>> Name
-						</label>
-						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) echo 'checked'; ?>> Credit Hours
-						</label>
+					<div class="degree-search-sort-inner degree-search-sort-options form-inline hidden-phone">
+						<button class="btn" id="desktop-compare">Compare Degrees</button>
+						<button class="btn btn-primary hidden" id="desktop-compare-submit" data-url="<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>">View Comparison</button>
+
+						<label for="sort-by">Sort by:</label>
+						<select id="sort-by" class="input-medium">
+							<option value="title" class="sort-by" <?php if ( $params['sort-by'] == 'title') echo 'selected'; ?>> Name</option>
+							<option value="degree_hours" class="sort-by" <?php if ( $params['sort-by'] == 'degree_hours') echo 'selected'; ?>>Degree Hours</option>
+						</select>
 					</div>
 
-					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
-						<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
+					<div class="degree-search-sort-inner degree-search-sort-options visible-phone">
+						<button class="btn" id="mobile-compare" href="#">Compare</button>
+						<button class="btn btn-primary hidden" id="mobile-compare-submit" data-url="<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>">Show Compare</button>
+						<button class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></button>
 					</div>
 				</div>
 			</div>
@@ -721,7 +747,9 @@
 
 			var $academicsSearch,
 				$degreeSearchResultsContainer,
-				$sidebarLeft;
+				$sidebarLeft,
+				$compareBtn,
+				$compareSubmitBtn;
 
 
 			function initAutoComplete() {
@@ -799,7 +827,12 @@
 					dataType: "json"
 				});
 
+				// Show ajax loading screen
 				$academicsSearch.find('#ajax-loading').removeClass('hidden');
+
+				// If the Submit Comparison btn was active, deactivate it
+				disableComparisonSubmit();
+
 				jqxhr.done(degreeSearchSuccessHandler);
 				jqxhr.fail(degreeSearchFailureHandler);
 
@@ -872,7 +905,39 @@
 				loadDegreeSearchResults();
 			}
 
+
+			function enableCompareMode() {
+				// Add active state to Compare btn;
+				// display checkboxes for each degree item
+				$compareBtn.button('toggle');
+				$degreeSearchResultsContainer.addClass('compare-mode-active');
+			}
+
+			function disableCompareMode() {
+				// Remove active state class from Compare btn;
+				// hide all checkboxes and uncheck all selected items
+				$compareBtn.button('toggle');
+				$degreeSearchResultsContainer.removeClass('compare-mode-active');
+
+				unhighlightCompareableDegrees();
+				uncheckCompareableDegrees();
+			}
+
+			function degreeCompareModeHandler(e) {
+				e.preventDefault();
+
+				if ($(this).hasClass('active')) {
+					disableCompareMode();
+				}
+				else {
+					enableCompareMode();
+				}
+			}
+
 			function highlightCompareableDegree($checkedDegreeInput) {
+				unhighlightCompareableDegrees();
+
+				// Apply styling to a checked input's parent list item.
 				$checkedDegreeInput.each(function() {
 					$(this)
 						.parents('.degree-search-result')
@@ -881,10 +946,19 @@
 			}
 
 			function unhighlightCompareableDegrees() {
+				// Remove styling on parent list items that have previously been
+				// marked as active.
 				$academicsSearch.find('.compare-active').removeClass('compare-active');
 			}
 
-			function performComparison() {
+			function uncheckCompareableDegrees() {
+				// Uncheck any checked degrees.
+				$academicsSearch.find('.degree-compare-input:checked').removeProp('checked');
+			}
+
+			function submitComparison(e) {
+				e.preventDefault();
+
 				var $checked = $academicsSearch.find('.degree-compare-input:checked');
 				var compareables = [];
 
@@ -897,32 +971,46 @@
 				});
 
 				// perform request, passing compareables as GET params...
-				window.location = '<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>?' + compareParams;
+				window.location = $compareSubmitBtn.attr('data-url') + '?' + compareParams;
 
-				// Uncheck selected degrees, in case the user hits the back btn in their browser.
-				// Works due to back-forward cache magic. (TODO: test in IE)
+				// Uncheck selected degrees and disable the Comparison Submit btn, in case
+				// the user hits the back btn in their browser.
+				// Works due to back-forward cache magic.
 				window.setTimeout(function() {
 					unhighlightCompareableDegrees();
-					$academicsSearch.find('.degree-compare-input:checked').removeProp('checked');
+					uncheckCompareableDegrees();
+					disableComparisonSubmit();
 				}, 200);
+			}
+
+			function enableComparisonSubmit() {
+				// When checkbox requirements are met, show the Compare Submit btn
+				$compareBtn.addClass('hidden');
+				$compareSubmitBtn.removeClass('hidden');
+			}
+
+			function disableComparisonSubmit() {
+				// If two checkboxes were checked, then one was unchecked,
+				// redisplay the Compare Btn and hide the Compare Submit btn
+				$compareBtn.removeClass('hidden');
+				$compareSubmitBtn.addClass('hidden');
 			}
 
 			function degreeCompareChangeHandler() {
 				var $checked = $academicsSearch.find('.degree-compare-input:checked');
 
-				// If no other Compare boxes are checked, activate 'compare mode'
-				// (allow one other checkbox to be checked)
-				if ($checked.length === 1) {
+				// If no other Compare boxes are checked, just highlight the
+				// selected checkbox's parent list item
+				if ($checked.length < 2) {
 					highlightCompareableDegree($checked);
+
+					// Disable the Comparison Submit btn if it was enabled
+					disableComparisonSubmit();
 				}
-				// If a first checkbox was unchecked, deactivate 'compare mode'
-				else if ($checked.length === 0) {
-					unhighlightCompareableDegrees();
-				}
-				// If two checkboxes are now checked, go to comparison page
+				// If two checkboxes are now checked, enable Submit btn click
 				else {
 					highlightCompareableDegree($checked);
-					performComparison();
+					enableComparisonSubmit();
 				}
 			}
 
@@ -936,16 +1024,27 @@
 					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
 				}
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
+				$academicsSearch.on('click', '#mobile-compare, #desktop-compare', degreeCompareModeHandler);
 				$academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
+				$academicsSearch.on('click', '#mobile-compare-submit, #desktop-compare-submit', submitComparison);
 			}
 
 			function initPage() {
 				$academicsSearch = $('#academics_search');
 				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
 				$sidebarLeft = $academicsSearch.find('#sidebar_left');
+				$compareBtn = $academicsSearch.find('#mobile-compare, #desktop-compare');
+				$compareSubmitBtn = $academicsSearch.find('#mobile-compare-submit, #desktop-compare-submit');
 
 				setupEventHandlers();
 				initAutoComplete();
+
+				var $sortbar = $academicsSearch.find('.degree-search-sort');
+				$sortbar
+					.css('width', $sortbar.innerWidth())
+					.affix({
+					offset: $sortbar.offset().top
+				});
 			}
 
 			$(initPage);
