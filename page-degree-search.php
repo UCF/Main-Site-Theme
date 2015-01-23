@@ -594,18 +594,14 @@
 
 					<?php the_content(); ?>
 
-					<div class="row">
-						<div class="span2">
-							<a href="http://regionalcampuses.ucf.edu/directconnect/">
-								<img src="http://net1.valenciacollege.edu/future-students/wp-content/uploads/sites/2/2013/08/directconnect-to-ucf-300x199.png" width="180" height="119"></a>
-						</div>
-						<div class="span3" style="margin-top: 5px; font-size: 24px; line-height: 25px; text-align: center">
-							2nd-largest university<br> in the nation
-						</div>
-						<div class="span3" style="margin-top: 10px; font-size: 20px; line-height: 22px; text-align: center">
-							2nd-highest<br> National Merit Scholars in the state of Florida
-						</div>
-					</div>
+					<h3 style="margin-bottom: 15px;">See what people are saying about UCF</h3>
+
+					<p><i>A &quot;Best Value&quot; by Kiplinger’s Personal Finance</i></p>
+
+					<p>
+						<i>A &quot;School to Watch&quot; and a &quot;Top Tier National University&quot;
+						by U.S. News &amp; World Report School to Watch&quot; and a &quot;Top Tier National University&quot; by U.S. News &amp; World Report</i>
+					</p>
 
 					<!-- Search input -->
 
