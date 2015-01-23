@@ -121,7 +121,7 @@ if ( $results ) {
 		?>
 		<li class="degree-search-result">
 			<h3 class="degree-title">
-				<a href="<?php echo get_permalink( $result['academicPlanId'] ); ?>"> <!-- TODO: link generation -->
+				<a href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
 					<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 				</a>
 				<span class="degree-credits-count">
@@ -140,8 +140,12 @@ if ( $results ) {
 			</div>
 			<div class="degree-compare">
 				<label class="checkbox degree-compare-label">
-					<input type="checkbox" name="compare[]" class="degree-compare-input" value="<?php echo $result['academicPlanId']; ?>"> Compare
+					<input type="checkbox" name="compare[]" class="degree-compare-input" value="<?php echo $result['academicPlanId']; ?>"> <span>Add To Compare</span>
 				</label>
+				<a class="degree-compare-submit btn btn-small disabled" href="#">
+					<span class="hidden-phone">Compare</span>
+					<span class="visible-phone">Go</span>
+				</a>
 			</div>
 		</li>
 		<?php
