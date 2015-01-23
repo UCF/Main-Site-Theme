@@ -140,30 +140,24 @@ if ( $results ) {
 		?>
 		<li class="degree-search-result">
 			<div class="background-hover-fade-in">
-				<span class="compare pull-right"><input type="checkbox" value="<?php echo $result['academicPlanId']; ?>">
-					<a href="/compare-degrees/">compare</a>
+				<span class="compare pull-right">
+					<label class="checkbox">
+						<input type="checkbox" class="compareCheckbox" value="<?php echo $result['academicPlanId']; ?>">
+						<span>compare</span>
+					</label>
 				</span>
 				<a class="degree-search-result-link" href="/academics/accounting-5/">
 					<h3 class="degree-title">
 						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 					</h3>
 					<div class="degree-credits-count">
+						<?php echo $result['degree']; ?> &mdash;
 						<?php if ( $result['creditHours'] > 0 ): ?>
 							<?php echo $result['creditHours']; ?> Credit Hours
 						<?php else: ?>
 							Credit Hours n/a
 						<?php endif; ?>
 					</div>
-					<div class="degree-college"><?php echo $result['college']['name']; ?></div>
-					<div class="degree-dept">
-						<?php echo $result['department']['name']; ?>
-					</div>
-					<?php if ( !empty($result['description']) ) { ?>
-					<p class="degree-desc hidden-phone">
-						<?php echo tokenTruncate($result['description'], 285); ?>
-						<br>
-					</p>
-					<?php } ?>
 				</a>
 			</div>
 		</li>
