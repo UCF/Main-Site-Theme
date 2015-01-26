@@ -14,6 +14,12 @@
 			margin-bottom: 15px;
 			padding-bottom: 5px;
 		}
+
+		#academics-search input[type="checkbox"] {
+			/* Help mobile users and provide larger checkboxes when possible */
+			transform: scale(1.25);
+			-webkit-transform: scale(1.25);
+		}
 	}
 
 
