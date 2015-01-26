@@ -579,7 +579,7 @@
 					</select>
 				</div>
 
-				<h2 class="degree-filter-title">Program Types</h2>
+				<h2 class="degree-filter-title">Degrees</h2>
 				<ul class="degree-filter-list">
 					<li class="checkbox">
 						<label>
