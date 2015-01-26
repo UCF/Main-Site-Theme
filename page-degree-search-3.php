@@ -22,15 +22,18 @@
 	 */
 
 	/* Reset this template's fonts to Helvetica */
-	#sidebar_left,
-	#contentcol,
 	#degree-search-top,
-	#contentcol input,
-	#contentcol select,
-	#contentcol option,
 	#degree-search-top input,
 	#degree-search-top select,
-	#degree-search-top option {
+	#degree-search-top option,
+	#degree-search-sidebar,
+	#degree-search-sidebar input,
+	#degree-search-sidebar select,
+	#degree-search-sidebar option,
+	#degree-search-content,
+	#degree-search-content input,
+	#degree-search-content select,
+	#degree-search-content option {
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
 	}
@@ -41,53 +44,53 @@
 	 */
 
 	/* Sidebar headings */
-	#sidebar_left.degree-search-filters .degree-filter-title {
+	#degree-search-sidebar .degree-filter-title {
 		color: #888;
 		font-size: 18px;
 		font-weight: 500;
 	}
 
 	/* Sidebar filter lists */
-	#sidebar_left.degree-search-filters .degree-filter-list {
+	#degree-search-sidebar .degree-filter-list {
 		list-style-type: none;
 		margin-bottom: 15px;
 		margin-left: 0;
 	}
-	#sidebar_left.degree-search-filters .degree-filter-list li {
+	#degree-search-sidebar .degree-filter-list li {
 		padding-bottom: 6px;
 	}
-	#sidebar_left.degree-search-filters label {
+	#degree-search-sidebar label {
 		font-size: 14px;
 	}
-	#sidebar_left.degree-search-filters input:checked + span,
-	#sidebar_left.degree-search-filters input:checked ~ .filter-result-count {
+	#degree-search-sidebar input:checked + span,
+	#degree-search-sidebar input:checked ~ .filter-result-count {
 		font-weight: bold;
 	}
-	#sidebar_left.degree-search-filters .filter-result-count {
+	#degree-search-sidebar .filter-result-count {
 		color: #888;
 	}
 
-	#sidebar_left.degree-search-filters .degree-infobox-toggle {
+	#degree-search-sidebar .degree-infobox-toggle {
 		border-bottom: 0 solid transparent !important;
 		display: block;
 		float: right;
 		margin-right: 15px;
 		padding-left: 5px;
 	}
-	#sidebar_left.degree-search-filters .degree-infobox-toggle .icon {
+	#degree-search-sidebar .degree-infobox-toggle .icon {
 		padding-bottom: 3px;
 		border-bottom: 1px dotted #999;
 	}
-	#sidebar_left.degree-search-filters .popover-title {
+	#degree-search-sidebar .popover-title {
 		display: none; /* hide empty titles */
 	}
-	#sidebar_left.degree-search-filters .popover {
+	#degree-search-sidebar .popover {
 		font-size: 12px;
 		line-height: 1.4;
 		font-weight: normal;
 	}
 	@media (max-width: 767px) {
-		#sidebar_left.degree-search-filters .popover-content {
+		#degree-search-sidebar .popover-content {
 			max-height: 250px;
 			overflow-x: hidden;
 			overflow-y: scroll;
@@ -98,7 +101,7 @@
 	@media (max-width: 767px) {
 
 		/* Mobile sidebar filter "modal" */
-		#sidebar_left.degree-search-filters {
+		#degree-search-sidebar {
 			background-color: #fff;
 			border-radius: 5px;
 			box-sizing: border-box;
@@ -118,17 +121,17 @@
 			width: calc(100% - 30px);
 			z-index: 999;
 		}
-		#sidebar_left.degree-search-filters.active {
+		#degree-search-sidebar.active {
 			opacity: 1;
 			pointer-events: all;
 		}
 
 		/* Modal - General */
-		#sidebar_left.degree-search-filters select {
+		#degree-search-sidebar select {
 			margin-bottom: 0;
 			width: 55%;
 		}
-		#sidebar_left.degree-search-filters label {
+		#degree-search-sidebar label {
 			font-size: 12.5px;
 			line-height: 1.2;
 			margin: 0;
@@ -136,56 +139,56 @@
 		}
 
 		/* Modal head */
-		#sidebar_left.degree-search-filters .degree-mobile-actions {
+		#degree-search-sidebar .degree-mobile-actions {
 			background: #eee;
 			border-radius: 5px 5px 0 0;
 			padding: 8px;
 			position: relative;
 			position: -webkit-sticky; /* we can at least give ios users a fixed top bar */
-			top: -1px; /* Hide un-styleable outline on #sidebar_left:target */
+			top: -1px; /* Hide un-styleable outline on #degree-search-sidebar:target */
 		}
 
 		/* Modal sorting */
-		#sidebar_left.degree-search-filters .degree-search-sort {
+		#degree-search-sidebar .degree-search-sort {
 			border-bottom: 1px solid #eee;
 			margin-bottom: 5px;
 			padding: 10px;
 		}
-		#sidebar_left.degree-search-filters .degree-search-sort select {
+		#degree-search-sidebar .degree-search-sort select {
 			font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		}
 
 		/* Modal filters */
-		#sidebar_left.degree-search-filters .degree-filter-list,
-		#sidebar_left.degree-search-filters .degree-filter-title {
+		#degree-search-sidebar .degree-filter-list,
+		#degree-search-sidebar .degree-filter-title {
 			padding-left: 10px;
 			padding-right: 10px;
 		}
-		#sidebar_left.degree-search-filters .degree-filter-list {
+		#degree-search-sidebar .degree-filter-list {
 			margin-bottom: 10px;
 		}
-		#sidebar_left.degree-search-filters .degree-filter-list li {
+		#degree-search-sidebar .degree-filter-list li {
 			border-top: 1px solid #eee;
 			box-sizing: border-box;
 			margin: 0 4px;
 			padding: 4px 0;
 			text-align: left;
 		}
-		#sidebar_left.degree-search-filters .degree-filter-list li:first-child {
+		#degree-search-sidebar .degree-filter-list li:first-child {
 			border-top: 0 solid transparent;
 		}
 
-		#sidebar_left.degree-search-filters .degree-filter-title {
+		#degree-search-sidebar .degree-filter-title {
 			font-size: 14px;
 			line-height: 1.4;
 			margin: 15px 0 5px;
 		}
-		#sidebar_left.degree-search-filters .degree-search-sort .degree-filter-title {
+		#degree-search-sidebar .degree-search-sort .degree-filter-title {
 			margin-top: 6px;
 			padding: 0;
 		}
 
-		#sidebar_left.degree-search-filters .checkbox input[type="checkbox"] {
+		#degree-search-sidebar .checkbox input[type="checkbox"] {
 			margin-right: 10px;
 			margin-top: 0;
 		}
@@ -293,7 +296,7 @@
 	}
 
 	/* Results wrapper */
-	#contentcol .degree-search-results-container {
+	#degree-search-content .degree-search-results-container {
 		position: relative;
 	}
 
@@ -319,17 +322,17 @@
 	}
 
 	/* No results found */
-	#contentcol .degree-search-results-container .no-results {
+	#degree-search-content .degree-search-results-container .no-results {
 		margin-top: 20px;
 	}
 
 	/* Results list */
-	#contentcol .degree-search-results {
+	#degree-search-content .degree-search-results {
 		list-style-type: none;
 		margin-left: 0;
 		margin-top: 15px;
 	}
-	#contentcol .degree-search-result {
+	#degree-search-content .degree-search-result {
 		box-sizing: border-box;
 		display: table;
 		width: 100%;
@@ -337,35 +340,35 @@
 		padding: 12px 15px;
 		position: relative;
 	}
-	#contentcol .degree-search-result:nth-child(2n) {
+	#degree-search-content .degree-search-result:nth-child(2n) {
 		background-color: #fafafa;
 	}
-	#contentcol .degree-search-result:hover,
-	#contentcol .degree-search-result:active,
-	#contentcol .degree-search-result:focus {
+	#degree-search-content .degree-search-result:hover,
+	#degree-search-content .degree-search-result:active,
+	#degree-search-content .degree-search-result:focus {
 		background-color: #eee;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-search-result {
+		#degree-search-content .degree-search-result {
 			border-top: 1px solid #eee;
 			margin-top: 10px;
 			padding: 10px 0 0 0;
 		}
-		#contentcol .degree-search-result:hover,
-		#contentcol .degree-search-result:active,
-		#contentcol .degree-search-result:focus {
+		#degree-search-content .degree-search-result:hover,
+		#degree-search-content .degree-search-result:active,
+		#degree-search-content .degree-search-result:focus {
 			background-color: transparent;
 		}
-		#contentcol .degree-search-result:first-child {
+		#degree-search-content .degree-search-result:first-child {
 			border-top: 0 solid transparent;
 		}
-		#contentcol .degree-search-result:nth-child(2n) {
+		#degree-search-content .degree-search-result:nth-child(2n) {
 			background-color: transparent;
 		}
 	}
 
 	/* Single result elements */
-	#contentcol .degree-title {
+	#degree-search-content .degree-title {
 		display: table-cell;
 		vertical-align: middle;
 		font-size: 18px;
@@ -373,12 +376,12 @@
 		width: 57%;
 	}
 	@media (min-width: 768px) and (max-width: 979px) {
-		#contentcol .degree-title {
+		#degree-search-content .degree-title {
 			width: 60%;
 		}
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-title {
+		#degree-search-content .degree-title {
 			display: block;
 			float: left;
 			font-size: 15px;
@@ -387,12 +390,12 @@
 			width: 100%;
 		}
 	}
-	#contentcol .degree-title a {
+	#degree-search-content .degree-title a {
 		border: 0 solid transparent;
 		color: #08c;
 		font-weight: 500;
 	}
-	#contentcol .degree-credits-count {
+	#degree-search-content .degree-credits-count {
 		color: #888;
 		font-size: 13px;
 		font-weight: normal;
@@ -401,12 +404,12 @@
 		margin-top: 4px;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-credits-count {
+		#degree-search-content .degree-credits-count {
 			font-size: 11.5px;
 		}
 	}
 
-	#contentcol .degree-online {
+	#degree-search-content .degree-online {
 		box-sizing: border-box;
 		display: table-cell;
 		font-size: 11.5px;
@@ -416,12 +419,12 @@
 		width: 12%;
 	}
 	@media (min-width: 768px) and (max-width: 979px) {
-		#contentcol .degree-online {
+		#degree-search-content .degree-online {
 			width: 16%;
 		}
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-online {
+		#degree-search-content .degree-online {
 			clear: both;
 			display: block;
 			margin-top: 8px;
@@ -430,24 +433,24 @@
 		}
 	}
 
-	#contentcol .degree-compare {
+	#degree-search-content .degree-compare {
 		display: table-cell;
 		vertical-align: middle;
 		width: 14%;
 	}
 	@media (min-width: 768px) and (max-width: 979px) {
-		#contentcol .degree-compare {
+		#degree-search-content .degree-compare {
 			width: 20%;
 		}
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-compare {
+		#degree-search-content .degree-compare {
 			box-sizing: border-box;
 			padding-left: 12px;
 			width: 22%;
 		}
 	}
-	#contentcol .degree-compare-label {
+	#degree-search-content .degree-compare-label {
 		color: #888;
 		display: inline-block;
 		font-size: 11px;
@@ -455,44 +458,44 @@
 		vertical-align: middle;
 	}
 	@media (max-width: 979px) {
-		#contentcol .degree-compare-label {
+		#degree-search-content .degree-compare-label {
 			font-size: 10px;
 		}
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-compare-label {
+		#degree-search-content .degree-compare-label {
 			line-height: 1.2;
 			text-align: center;
 		}
 	}
-	#contentcol .degree-compare-label:hover,
-	#contentcol .degree-compare-label:active,
-	#contentcol .degree-compare-label:focus {
+	#degree-search-content .degree-compare-label:hover,
+	#degree-search-content .degree-compare-label:active,
+	#degree-search-content .degree-compare-label:focus {
 		color: #08c;
 	}
-	#contentcol .degree-search-result.compare-active {
+	#degree-search-content .degree-search-result.compare-active {
 		background-color: #d9edf7;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-search-result.compare-active {
+		#degree-search-content .degree-search-result.compare-active {
 			background-color: transparent;
 		}
 	}
-	#contentcol .degree-search-result.compare-active .degree-compare-label span {
+	#degree-search-content .degree-search-result.compare-active .degree-compare-label span {
 		display: none;
 	}
-	#contentcol .degree-compare-input:disabled + span,
-	#contentcol .degree-compare-input:disabled + span:hover,
-	#contentcol .degree-compare-input:disabled + span:active,
-	#contentcol .degree-compare-input:disabled + span:focus {
+	#degree-search-content .degree-compare-input:disabled + span,
+	#degree-search-content .degree-compare-input:disabled + span:hover,
+	#degree-search-content .degree-compare-input:disabled + span:active,
+	#degree-search-content .degree-compare-input:disabled + span:focus {
 		color: #ccc;
 		cursor: not-allowed;
 	}
 
-	#contentcol .degree-compare-submit {
+	#degree-search-content .degree-compare-submit {
 		display: none;
 	}
-	#contentcol .degree-search-result.compare-active .degree-compare-submit {
+	#degree-search-content .degree-search-result.compare-active .degree-compare-submit {
 		display: inline-block;
 		vertical-align: middle;
 	}
@@ -513,7 +516,7 @@
 		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results-2.php?' . http_build_query( $params ) ), true );
 	?>
 
-	<div class="row page-content" id="academics_search">
+	<div class="row page-content" id="academics-search">
 
 		<form>
 
@@ -563,7 +566,7 @@
 
 			<!-- Sidebar (Desktop only) -->
 
-			<div id="sidebar_left" class="span3 degree-search-filters">
+			<div id="degree-search-sidebar" class="span3">
 				<div class="visible-phone clearfix degree-mobile-actions">
 					<a class="btn btn-default pull-left" id="mobile-filter-reset">Reset All</a>
 					<a class="btn btn-primary pull-right" id="mobile-filter-done" href="#">Done</a>
@@ -781,7 +784,9 @@
 				</ul>
 			</div>
 
-			<div class="span9" id="contentcol">
+			<!-- Main content col -->
+
+			<div class="span9" id="degree-search-content">
 				<article role="main">
 
 					<!-- Search Results -->
@@ -925,7 +930,7 @@
 					// Allow a click anywhere within the document
 					// to close the sidebar, except for in/on the sidebar itself
 					// or on its toggle button
-					if($sidebarLeft.hasClass('active') && !$(e.target).is('#sidebar_left') && !$sidebarLeft.find(e.target).length && !$(e.target).is('#mobile-filter')) {
+					if($sidebarLeft.hasClass('active') && !$(e.target).is('#degree-search-sidebar') && !$sidebarLeft.find(e.target).length && !$(e.target).is('#mobile-filter')) {
 						closeMenuHandler(e);
 					}
 				});
@@ -1072,9 +1077,9 @@
 			}
 
 			function initPage() {
-				$academicsSearch = $('#academics_search');
+				$academicsSearch = $('#academics-search');
 				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
-				$sidebarLeft = $academicsSearch.find('#sidebar_left');
+				$sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
 
 				setupEventHandlers();
 				initAutoComplete();
