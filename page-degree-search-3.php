@@ -59,6 +59,13 @@
 	#sidebar_left.degree-search-filters label {
 		font-size: 14px;
 	}
+	#sidebar_left.degree-search-filters input:checked + span,
+	#sidebar_left.degree-search-filters input:checked ~ .filter-result-count {
+		font-weight: bold;
+	}
+	#sidebar_left.degree-search-filters .filter-result-count {
+		color: #888;
+	}
 
 	#sidebar_left.degree-search-filters .degree-infobox-toggle {
 		border-bottom: 0 solid transparent !important;
@@ -201,6 +208,14 @@
 	/* Search field wrapper */
 	#degree-search-top .degree-search-form {
 		margin-top: 20px;
+	}
+	@media (max-width: 767px) {
+		#degree-search-top .degree-search-form .input-append {
+			width: 100%;
+		}
+		#degree-search-top .degree-search-form .search-query {
+			width: calc(100% - 40px);
+		}
 	}
 
 	/* Search Result Title + Sorting (desktop) */
@@ -487,6 +502,7 @@
 	<?php
 		$default_params = array(
 			'program-type' => array('undergraduate-degree'),
+			'location' => array('main-campus'),
 			'college' => array(),
 			'sort-by' => 'title',
 			'search-query' => ''
@@ -494,40 +510,7 @@
 
 		$params = array_merge( $default_params, $_GET );
 
-		// $params_pretty = array(
-		// 	'program-type' => '',
-		// 	'college' => ''
-		// );
-
-		// if( !empty( $params['program-type'] ) ) {
-		// 	$array_size = count( $params['program-type'] );
-
-		// 	foreach( $params['program-type'] as $key => $value ) {
-		// 		$program_type = $program_type . $value;
-		// 		if( $key > -1 && $key < $array_size - 1 ) {
-		// 			$program_type = $program_type . ' and ';
-		// 		}
-		// 	}
-
-		// 	$params_pretty['program-type'] = $program_type;
-		// }
-
-		// if( !empty( $params_pretty['college'] ) ) {
-		// 	$array_size = count( $params_pretty['college'] );
-
-		// 	foreach( $params_pretty['college'] as $key => $value ) {
-		// 		$college = $college . $value;
-		// 		if( $key > -1 && $key < $array_size - 1 ) {
-		// 			$college = $college . ' and ';
-		// 		}
-		// 	}
-
-		// 	$params_pretty['college'] = $college;
-		// }
-
-
-		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results-2.php?' . http_build_query($params) ), true );
-		// var_dump($data);
+		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results-2.php?' . http_build_query( $params ) ), true );
 	?>
 
 	<div class="row page-content" id="academics_search">
@@ -565,10 +548,10 @@
 					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
 						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
 						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') echo 'checked'; ?>> Name
+							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') { echo 'checked'; } ?>> Name
 						</label>
 						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) echo 'checked'; ?>> Credit Hours
+							<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) { echo 'checked'; } ?>> Credit Hours
 						</label>
 					</div>
 
@@ -588,8 +571,8 @@
 				<div class="degree-search-sort visible-phone clearfix">
 					<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
 					<select id="sort-by" class="pull-right">
-						<option value="degree-name" <?php if ($sort_by == 'degree-name') echo 'selected';?>>Name</option>
-						<option value="credit-hours" <?php if ($sort_by == 'credit-hours') echo 'selected';?>>Credit Hours</option>
+						<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
+						<option value="credit-hours" <?php if ( $sort_by == 'credit-hours' ) { echo 'selected'; } ?>>Credit Hours</option>
 					</select>
 				</div>
 
@@ -597,41 +580,110 @@
 				<ul class="degree-filter-list">
 					<li class="checkbox">
 						<label>
-							<input name="program-type[]" class="program-type" value="undergraduate-degree" type="checkbox" <?php if( empty( $params['program-type'] ) || in_array( 'undergraduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>> Bachelor
+							<input name="program-type[]" class="program-type" value="undergraduate-degree" type="checkbox"
+							<?php if ( empty( $params['program-type'] ) || in_array( 'undergraduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>>
+							<span>Bachelor</span>
+							<small class="filter-result-count">(135)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="program-type[]" class="program-type" value="minor" type="checkbox" <?php if( in_array( 'minor', $params['program-type'] ) ) { echo 'checked'; } ?>> Minor
+							<input name="program-type[]" class="program-type" value="minor" type="checkbox"
+							<?php if ( in_array( 'minor', $params['program-type'] ) ) { echo 'checked'; } ?>>
+							<span>Minor</span>
+							<small class="filter-result-count">(128)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="program-type[]" class="program-type" value="graduate-degree" type="checkbox" <?php if( in_array( 'graduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>> Master
+							<input name="program-type[]" class="program-type" value="graduate-degree" type="checkbox"
+							<?php if ( in_array( 'graduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>>
+							<span>Master</span>
+							<small class="filter-result-count">(104)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="program-type[]" class="program-type" value="graduate-degree" type="checkbox" <?php if( in_array( 'graduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>> Doctoral
+							<input name="program-type[]" class="program-type" value="graduate-degree" type="checkbox"
+							<?php if ( in_array( 'graduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>>
+							<span>Doctoral</span>
+							<small class="filter-result-count">(37)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
-							<input name="program-type[]" class="program-type" value="certificate" type="checkbox" <?php if( in_array( 'certificate', $params['program-type'] ) ) { echo 'checked'; } ?>> Certificate
-						</label>
-					</li>
-					<li class="checkbox">
-						<label>
-							<input name="program-type[]" class="program-type" value="nondegree" type="checkbox" <?php if( in_array( 'nodegree', $params['program-type'] ) ) { echo 'checked'; } ?>> Nondegree
+							<input name="program-type[]" class="program-type" value="certificate" type="checkbox"
+							<?php if ( in_array( 'certificate', $params['program-type'] ) ) { echo 'checked'; } ?>>
+							<span>Certificate</span>
+							<small class="filter-result-count">(92)</small>
 						</label>
 					</li>
 				</ul>
 
-				<h2 class="degree-filter-title">Degree Options</h2>
+				<h2 class="degree-filter-title">Locations</h2>
 				<ul class="degree-filter-list">
 					<li class="checkbox">
 						<label>
-							<input name="online_all" class="online" value="online_all" type="checkbox"> Online Courses Available
+							<input name="location[]" class="location" value="main-campus" type="checkbox"
+							<?php if ( empty( $params['location'] ) || in_array( 'main-campus', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Main Campus</span>
+							<span class="degree-count">(143)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="online" type="checkbox"
+							<?php if ( in_array( 'online', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Online</span>
+							<span class="degree-count">(120)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="altamonte-springs" type="checkbox"
+							<?php if ( in_array( 'altamonte-springs', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Altamonte Springs</span>
+							<span class="degree-count">(45)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="cocoa" type="checkbox"
+							<?php if ( in_array( 'cocoa', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Cocoa</span>
+							<span class="degree-count">(34)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="daytona-beach" type="checkbox"
+							<?php if ( in_array( 'daytona-beach', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Daytona Beach</span>
+							<span class="degree-count">(15)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="leesburg" type="checkbox"
+							<?php if ( in_array( 'leesburg', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Leesburg</span>
+							<span class="degree-count">(12)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="ocala" type="checkbox"
+							<?php if ( in_array( 'ocala', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Ocala</span>
+							<span class="degree-count">(56)</span>
+						</label>
+					</li>
+					<li class="checkbox">
+						<label>
+							<input name="location[]" class="location" value="palm-bay" type="checkbox"
+							<?php if ( in_array( 'palm-bay', $params['location'] ) ) { echo 'checked'; } ?>>
+							<span>Palm Bay</span>
+							<span class="degree-count">(23)</span>
 						</label>
 					</li>
 				</ul>
@@ -641,67 +693,89 @@
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-arts-and-humanities" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-arts-and-humanities", $_GET['college'])) echo "checked";?>> Arts &amp; Humanities
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-arts-and-humanities', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Arts &amp; Humanities</span>
+							<small class="filter-result-count">(82)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-business-administration" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-business-administration", $_GET['college'])) echo "checked";?>> Business Administration
+								<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-business-administration', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Business Administration</span>
+							<small class="filter-result-count">(43)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-education-and-human-performance" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-education-and-human-performance", $_GET['college'])) echo "checked";?>> Education &amp; Human Performance
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-education-and-human-performance', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Education &amp; Human Performance</span>
+							<small class="filter-result-count">(100)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-engineering-and-computer-science" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-engineering-and-computer-science", $_GET['college'])) echo "checked";?>> Engineering &amp; Computer Science
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-engineering-and-computer-science', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Engineering &amp; Computer Science</span>
+							<small class="filter-result-count">(72)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-graduate-studies" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-graduate-studies", $_GET['college'])) echo "checked";?>> Graduate Studies
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-graduate-studies', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Graduate Studies</span>
+							<small class="filter-result-count">(10)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-health-and-public-affairs" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-health-and-public-affairs", $_GET['college'])) echo "checked";?>> Health &amp; Public Affairs
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-health-and-public-affairs', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Health &amp; Public Affairs</span>
+							<small class="filter-result-count">(71)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="rosen-college-of-hospitality-management" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("rosen-college-of-hospitality-management", $_GET['college'])) echo "checked";?>> Hospitality Management
+							<?php if ( isset( $_GET['college'] ) && in_array( 'rosen-college-of-hospitality-management', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Hospitality Management</span>
+							<small class="filter-result-count">(7)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-medicine" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-medicine", $_GET['college'])) echo "checked";?>> Medicine
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-medicine', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Medicine</span>
+							<small class="filter-result-count">(6)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-nursing" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-nursing", $_GET['college'])) echo "checked";?>> Nursing
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-nursing', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Nursing</span>
+							<small class="filter-result-count">(21)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-optics-and-photonics" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-optics-and-photonics", $_GET['college'])) echo "checked";?>> Optics &amp; Photonics
+							<?php if ( isset( $_GET['college'] ) && in_array( 'college-of-optics-and-photonics', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Optics &amp; Photonics</span>
+							<small class="filter-result-count">(6)</small>
 						</label>
 					</li>
 					<li class="checkbox">
 						<label>
 							<input name="college[]" class="college" value="college-of-sciences" type="checkbox"
-							<?php if (isset($_GET['college']) && in_array("college-of-sciences", $_GET['college'])) echo "checked";?>> Sciences
+							<?php if ( isset($_GET['college'] ) && in_array( 'college-of-sciences', $_GET['college'] ) ) { echo 'checked'; } ?>>
+							<span>Sciences</span>
+							<small class="filter-result-count">(76)</small>
 						</label>
 					</li>
 				</ul>
@@ -990,7 +1064,7 @@
 					$academicsSearch.on('click', '#mobile-filter', filterClickHandler);
 				} else {
 					// desktop
-					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
+					$academicsSearch.on('change', '.program-type, .college, .location, .sort-by', degreeSearchChangeHandler);
 				}
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
 				$academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
