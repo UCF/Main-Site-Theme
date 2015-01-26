@@ -8,8 +8,8 @@
 	 * General Site Styles
 	 */
 
-	/* Reduce whitespace between page title and content */
 	@media (max-width: 767px) {
+		/* Reduce whitespace between page title and content */
 		.subpage .page-content #page_title {
 			margin-bottom: 15px;
 			padding-bottom: 5px;
@@ -20,6 +20,14 @@
 			transform: scale(1.25);
 			-webkit-transform: scale(1.25);
 		}
+	}
+
+	/* Make disabled buttons look more disabled */
+	#academics-search a.btn.disabled,
+	#academics-search a.btn.disabled:hover,
+	#academics-search a.btn.disabled:active,
+	#academics-search a.btn.disabled:focus {
+		color: #888 !important;
 	}
 
 
@@ -124,6 +132,7 @@
 			-webkit-transition: opacity .2s ease-in-out;
 			transition: opacity .2s ease-in-out;
 			left: 15px;
+			width: 92%; /* pre android v4.4 :( */
 			width: calc(100% - 30px);
 			z-index: 999;
 		}
@@ -223,6 +232,7 @@
 			width: 100%;
 		}
 		#degree-search-top .degree-search-form .search-query {
+			width: 80%;
 			width: calc(100% - 40px);
 		}
 	}
@@ -510,10 +520,11 @@
 
 	#degree-search-content .degree-compare-submit {
 		display: none;
+		margin-left: 5px;
+		vertical-align: middle;
 	}
 	#degree-search-content .degree-search-result.compare-active .degree-compare-submit {
 		display: inline-block;
-		vertical-align: middle;
 	}
 
 	#degree-search-content .degree-compare-selected-count {
