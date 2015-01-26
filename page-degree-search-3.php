@@ -447,7 +447,7 @@
 		#degree-search-content .degree-compare {
 			box-sizing: border-box;
 			padding-left: 12px;
-			width: 22%;
+			width: 12%;
 		}
 	}
 	#degree-search-content .degree-compare-label {
@@ -503,6 +503,7 @@
 	</style>
 
 	<?php
+		// Fetch data based on default params + anything set by the user
 		$default_params = array(
 			'program-type' => array('undergraduate-degree'),
 			'location' => array('main-campus'),
@@ -516,7 +517,7 @@
 		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results-2.php?' . http_build_query( $params ) ), true );
 	?>
 
-	<div class="row page-content" id="academics-search">
+	<div class="row page-content" id="academics-search" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
 
 		<form>
 
@@ -1076,11 +1077,25 @@
 				$academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
 			}
 
+			function scrollToResults() {
+				// Scroll past top page content if the page loaded with GET params set
+				// (assume the user submitted a search or something and has already seen
+				// the page content)
+				$(document).on('ready', function() {
+					if ($academicsSearch.attr('data-params-onload') && $academicsSearch.attr('data-params-onload') === 'true') {
+						$('html, body').animate({
+							scrollTop: $academicsSearch.find('.degree-search-sort').offset().top - 20,
+						}, 200);
+					}
+				});
+			}
+
 			function initPage() {
 				$academicsSearch = $('#academics-search');
 				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
 				$sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
 
+				scrollToResults();
 				setupEventHandlers();
 				initAutoComplete();
 			}
