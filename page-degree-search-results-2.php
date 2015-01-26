@@ -146,6 +146,7 @@ if ( $results ) {
 					<span class="hidden-phone">Compare</span>
 					<span class="visible-phone">Go</span>
 				</a>
+				<span class="degree-compare-selected-count"></span>
 			</div>
 		</li>
 		<?php

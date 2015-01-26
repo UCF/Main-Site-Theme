@@ -447,7 +447,17 @@
 		#degree-search-content .degree-compare {
 			box-sizing: border-box;
 			padding-left: 12px;
-			width: 12%;
+			width: 17%;
+		}
+	}
+	@media (max-width: 480px) {
+		#degree-search-content .degree-compare {
+			width: 22%;
+		}
+	}
+	@media (max-width: 380px) {
+		#degree-search-content .degree-compare {
+			width: 28%;
 		}
 	}
 	#degree-search-content .degree-compare-label {
@@ -473,14 +483,14 @@
 	#degree-search-content .degree-compare-label:focus {
 		color: #08c;
 	}
-	#degree-search-content .degree-search-result.compare-active {
+/*	#degree-search-content .degree-search-result.compare-active {
 		background-color: #d9edf7;
 	}
 	@media (max-width: 767px) {
 		#degree-search-content .degree-search-result.compare-active {
 			background-color: transparent;
 		}
-	}
+	}*/
 	#degree-search-content .degree-search-result.compare-active .degree-compare-label span {
 		display: none;
 	}
@@ -498,6 +508,17 @@
 	#degree-search-content .degree-search-result.compare-active .degree-compare-submit {
 		display: inline-block;
 		vertical-align: middle;
+	}
+
+	#degree-search-content .degree-compare-selected-count {
+		color: #888;
+		display: none;
+		font-size: 10px;
+		font-style: italic;
+		text-align: center;
+	}
+	#degree-search-content .degree-search-result.compare-active .degree-compare-selected-count {
+		display: block;
 	}
 
 	</style>
@@ -631,7 +652,7 @@
 							<input name="location[]" class="location" value="main-campus" type="checkbox"
 							<?php if ( empty( $params['location'] ) || in_array( 'main-campus', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Main Campus</span>
-							<span class="degree-count">(143)</span>
+							<small class="filter-result-count">(143)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -639,7 +660,7 @@
 							<input name="location[]" class="location" value="online" type="checkbox"
 							<?php if ( in_array( 'online', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Online</span>
-							<span class="degree-count">(120)</span>
+							<small class="filter-result-count">(120)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -647,7 +668,7 @@
 							<input name="location[]" class="location" value="altamonte-springs" type="checkbox"
 							<?php if ( in_array( 'altamonte-springs', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Altamonte Springs</span>
-							<span class="degree-count">(45)</span>
+							<small class="filter-result-count">(45)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -655,7 +676,7 @@
 							<input name="location[]" class="location" value="cocoa" type="checkbox"
 							<?php if ( in_array( 'cocoa', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Cocoa</span>
-							<span class="degree-count">(34)</span>
+							<small class="filter-result-count">(34)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -663,7 +684,7 @@
 							<input name="location[]" class="location" value="daytona-beach" type="checkbox"
 							<?php if ( in_array( 'daytona-beach', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Daytona Beach</span>
-							<span class="degree-count">(15)</span>
+							<small class="filter-result-count">(15)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -671,7 +692,7 @@
 							<input name="location[]" class="location" value="leesburg" type="checkbox"
 							<?php if ( in_array( 'leesburg', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Leesburg</span>
-							<span class="degree-count">(12)</span>
+							<small class="filter-result-count">(12)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -679,7 +700,7 @@
 							<input name="location[]" class="location" value="ocala" type="checkbox"
 							<?php if ( in_array( 'ocala', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Ocala</span>
-							<span class="degree-count">(56)</span>
+							<small class="filter-result-count">(56)</small>
 						</label>
 					</li>
 					<li class="checkbox">
@@ -687,7 +708,7 @@
 							<input name="location[]" class="location" value="palm-bay" type="checkbox"
 							<?php if ( in_array( 'palm-bay', $params['location'] ) ) { echo 'checked'; } ?>>
 							<span>Palm Bay</span>
-							<span class="degree-count">(23)</span>
+							<small class="filter-result-count">(23)</small>
 						</label>
 					</li>
 				</ul>
@@ -821,7 +842,8 @@
 
 			var $academicsSearch,
 				$degreeSearchResultsContainer,
-				$sidebarLeft;
+				$sidebarLeft,
+				degreeCompareLimit;
 
 
 			function initAutoComplete() {
@@ -978,14 +1000,20 @@
 				$checkedDegreeInput.each(function() {
 					$(this)
 						.parents('.degree-search-result')
-							.addClass('compare-active');
+							.addClass('compare-active')
+							.find('.degree-compare-selected-count')
+								.text('(added ' + $checkedDegreeInput.length + ' of ' + degreeCompareLimit + ')');
 				});
 			}
 
 			function unhighlightCompareableDegrees() {
 				// Remove styling on parent list items that have previously been
 				// marked as active.
-				$academicsSearch.find('.compare-active').removeClass('compare-active');
+				$academicsSearch
+					.find('.compare-active')
+						.removeClass('compare-active')
+						.find('.degree-compare-selected-count')
+							.text('');
 			}
 
 			function uncheckCompareableDegrees() {
@@ -1031,7 +1059,7 @@
 				window.location = '<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>?' + compareParams;
 
 				// Uncheck selected degrees, in case the user hits the back btn in their browser.
-				// Works due to back-forward cache magic. (TODO: test in IE)
+				// Works due to back-forward cache magic.
 				window.setTimeout(function() {
 					unhighlightCompareableDegrees();
 					uncheckCompareableDegrees();
@@ -1052,7 +1080,7 @@
 
 				// If no other Compare boxes are checked, activate 'compare mode'
 				// (allow one other checkbox to be checked)
-				if ($checked.length < 2) {
+				if ($checked.length < degreeCompareLimit) {
 					highlightCompareableDegree($checked);
 					deactivateCompareBtns();
 				}
@@ -1074,6 +1102,7 @@
 				}
 				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
 				$academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
+				$(document).on('ready', degreeCompareChangeHandler); // activate compare btns if user refreshed with degrees checked
 				$academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
 			}
 
@@ -1094,6 +1123,7 @@
 				$academicsSearch = $('#academics-search');
 				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
 				$sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
+				degreeCompareLimit = 2;
 
 				scrollToResults();
 				setupEventHandlers();
