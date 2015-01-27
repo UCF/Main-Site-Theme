@@ -29,179 +29,256 @@
 		font-size: 14px;
 	}
 
-
-	.prereqs {
+	#contentcol .list-unstyled {
 		list-style-type: none;
 		margin-left: 0;
 	}
-	.prereqs li {
-		margin-bottom: 8px;
+	#contentcol .list-twocol {
+		-moz-column-count: 2;
+		-moz-column-gap: 20px;
+		-webkit-column-count: 2;
+		-webkit-column-gap: 20px;
+		column-count: 2;
+		column-gap: 20px;
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		#contentcol .list-twocol {
+			-moz-column-count: 1;
+			-moz-column-gap: 0;
+			-webkit-column-count: 1;
+			-webkit-column-gap: 0;
+			column-count: 1;
+			column-gap: 0;
+		}
 	}
 	@media (max-width: 767px) {
-		.prereqs li {
-			font-size: 12px;
-			line-height: 1.3;
+		#contentcol .list-twocol {
+			-moz-column-gap: 10px;
+			-webkit-column-gap: 10px;
+			column-gap: 10px;
 		}
 	}
 
 
-	#comparison-chart-head-phone {
-		background-color: #fff;
-		margin-left: -20px; /* force push past body margin-left */
-		width: 100%;
-	}
-	#comparison-chart-head-phone.affix {
-		top: 0;
-	}
-
-	#comparison-chart-head-phone .table {
-		border-bottom: 2px solid #e5e5e5;
-		margin-bottom: 0;
-		margin-left: 20px;
-	}
-	#comparison-chart-head-phone.affix .table {
-		margin-left: 0;
-	}
-	#comparison-chart-head-phone .table th {
+	#contentcol .comparison-col {
+		margin-top: 20px;
 		text-align: center;
-		width: 50%;
 	}
 	@media (max-width: 767px) {
-		#comparison-chart-head-phone .table th {
-			font-size: 18px;
-			font-weight: 500;
-			line-height: 1.1;
+		#contentcol .comparison-col {
+			font-size: 13px;
 		}
+	}
+	#contentcol .comparison-col a {
+		border-bottom: 0 solid transparent;
+		color: #000;
+		text-decoration: underline;
 	}
 
-	#comparison-chart-head-phone thead th a,
-	.comparison-chart thead th a {
-		border-bottom: 0 solid transparent !important;
-		color: #08c !important;
+	#contentcol .comparison-header {
+		background-color: #337AB7;
+		/*border: 1px solid #f1f1f1;*/
+		border-radius: 6px 6px 0 0;
+		color: #fff;
+		padding: 20px;
 	}
-	#comparison-chart-head-phone thead th a:hover,
-	#comparison-chart-head-phone thead th a:active,
-	#comparison-chart-head-phone thead th a:focus,
-	.comparison-chart thead th a:hover,
-	.comparison-chart thead th a:active,
-	.comparison-chart thead th a:focus {
-		text-decoration: underline !important;
-	}
-
-	.comparison-chart th,
-	.comparison-chart td {
-		border-top: 1px solid #eee;
-		padding: 10px 15px;
-	}
-	.comparison-chart tbody tr:hover th,
-	.comparison-chart tbody tr:hover td {
-		background-color: #fcf8e3;
-	}
-	@media (max-width: 767px) {
-		.comparison-chart tbody tr:hover th {
-			background-color: #eee;
-		}
-		.comparison-chart tbody tr:hover td {
-			background-color: #fff;
-		}
-	}
-	.comparison-chart > thead > tr > th {
-		font-size: 21px;
+	#contentcol .comparison-header h2 {
+		font-size: 24px;
 		font-weight: 500;
 		line-height: 1.2;
-		padding-bottom: 10px;
-		text-align: center;
+		margin-top: 0;
 	}
-	.comparison-chart > tbody > tr > th {
-		background-color: #eee;
-		width: 20%;
+	#contentcol .comparison-header span {
+		display: block;
+		font-size: 13px;
+		line-height: 1.1;
+		margin-top: 10px;
 	}
-	@media (min-width: 768px) and (max-width: 979px) {
-		.comparison-chart > tbody > tr > th {
-			width: 24%;
-		}
+	#contentcol .comparison-header a {
+		color: #fff;
+		text-decoration: none;
 	}
-	.comparison-chart > tbody > tr > td {
-		border-left: 1px solid #eee;
-		text-align: center;
+	#contentcol .comparison-header a:hover,
+	#contentcol .comparison-header a:active,
+	#contentcol .comparison-header a:focus {
+		text-decoration: underline;
+	}
+
+	#contentcol .comparison-row {
+		background-color: #f5f5f5;
+		padding: 15px 20px;
+	}
+	#contentcol .comparison-row.alt {
+		background-color: #e1e1e1;
+	}
+
+	#contentcol .comparison-row dl {
+		margin: 0;
+	}
+	#contentcol .comparison-row dt,
+	#contentcol .comparison-row dd {
+		display: inline;
+	}
+	#contentcol .comparison-row dt:first-child,
+	#contentcol .comparison-row dt:first-child + dd {
+		margin-top: 0;
+	}
+	#contentcol .comparison-row dl.aligned dt,
+	#contentcol .comparison-row dl.aligned dd {
+		display: inline-block;
+		margin-top: 5px;
 		vertical-align: middle;
-		width: 40%;
+	}
+	#contentcol .comparison-row dl.aligned dt {
+		width: 25%;
+		text-align: right;
+	}
+	#contentcol .comparison-row dl.aligned dd {
+		width: 70%;
+		text-align: left;
 	}
 	@media (min-width: 768px) and (max-width: 979px) {
-		.comparison-chart > tbody > tr > td {
-			width: 38%;
+		#contentcol .comparison-row dl.aligned dt {
+			width: 34%;
+		}
+		#contentcol .comparison-row dl.aligned dd {
+			width: 60%;
 		}
 	}
-	.comparison-chart > tbody > tr > td.align-top {
-		vertical-align: top;
+	@media (max-width: 767px) {
+		#contentcol .comparison-row dl.aligned dt,
+		#contentcol .comparison-row dl.aligned dd {
+			display: block;
+			text-align: center;
+			margin-left: 0;
+			width: 100%;
+		}
+		#contentcol .comparison-row dl.aligned dt {
+			margin-top: 10px;
+		}
+		#contentcol .comparison-row dl.aligned dt:first-child {
+			margin-top: 0;
+		}
+		#contentcol .comparison-row dl.aligned dd {
+			margin-top: 0;
+		}
 	}
-	.comparison-chart > tbody > tr > td ol,
-	.comparison-chart > tbody > tr > td ul,
-	.comparison-chart > tbody > tr > td dl {
+
+	#contentcol .comparison-fineprint {
+		color: #555;
+		font-size: 11px;
+		font-style: italic;
+		line-height: 1.4;
+		margin: 0;
 		text-align: left;
 	}
 
-	@media (max-width: 767px) {
-		.comparison-chart > thead > th {
-			width: 50%;
-		}
-		.comparison-chart > tbody > tr > th,
-		.comparison-chart > tbody > tr > td {
-			box-sizing: border-box;
-			padding: 6px 10px;
-		}
-		.comparison-chart > tbody > tr > th {
-			background-color: #eee;
-			border-top: 0;
-			display: block !important;
-			font-size: 13px;
-			margin-top: 10px;
-			width: 100%;
-		}
-		.comparison-chart > tbody > tr > td {
-			border-left: 0;
-			border-top: 0;
-			display: block !important;
-			float: left;
-			font-size: 12px;
-			line-height: 1.4;
-			width: 50%;
-		}
-	}
-
-
-	.comparison-chart .degree-infobox-toggle {
+	#contentcol .degree-infobox-toggle {
 		border-bottom: 0 solid transparent !important;
-		display: block;
-		float: right;
+		padding-left: 6px;
 	}
-	.comparison-chart .degree-infobox-toggle .icon {
+	#contentcol .degree-infobox-toggle .icon {
 		padding-bottom: 3px;
 		border-bottom: 1px dotted #999;
 	}
-	.comparison-chart .popover-title {
+	#contentcol .popover-title {
 		display: none; /* hide empty titles */
 	}
-	.comparison-chart .popover {
+	#contentcol .popover {
 		font-size: 12px;
 		line-height: 1.4;
 		font-weight: normal;
 	}
 	@media (max-width: 767px) {
-		.comparison-chart .popover-content {
+		#contentcol .popover-content {
 			max-height: 250px;
 			overflow-x: hidden;
 			overflow-y: scroll;
 			-webkit-overflow-scrolling: touch;
 		}
 	}
+
+
+	#contentcol .comparison-credit-hours {
+		display: block;
+		line-height: 1.2;
+		font-size: 30px;
+	}
+
+
+	#contentcol .comparison-careers,
+	#contentcol .comparison-prereqs {
+		margin-bottom: 0;
+		margin-top: 15px;
+	}
+	#contentcol .comparison-careers li {
+		font-size: 16px;
+		margin-bottom: 6px;
+	}
+
+
+	#contentcol .comparison-salary {
+		display: table;
+		margin-top: 10px;
+		width: 100%;
+	}
+	#contentcol .comparison-salary li {
+		display: table-cell;
+		height: 100px;
+		vertical-align: middle;
+		width: 50%;
+	}
+	#contentcol .comparison-salary .locally {
+		background: url('<?php echo THEME_IMG_URL; ?>/degree-compare-local.png') center center no-repeat;
+		background-size: contain;
+	}
+	#contentcol .comparison-salary .nationally {
+		background: url('<?php echo THEME_IMG_URL; ?>/degree-compare-national.png') center center no-repeat;
+		background-size: contain;
+	}
+	#contentcol .comparison-salary span {
+		border-left: 1px solid #999;
+		display: block;
+		padding: 0 10px;
+	}
+	#contentcol .comparison-salary li:first-child span {
+		border-left: 1px solid transparent;
+	}
+	@media (max-width: 979px) {
+		#contentcol .comparison-salary span {
+			border-left: 1px solid transparent;
+		}
+	}
+	#contentcol .comparison-salary .comparison-salary-value {
+		font-size: 30px;
+		line-height: 1.2;
+	}
+	@media (max-width: 979px) {
+		#contentcol .comparison-salary .comparison-salary-value {
+			font-size: 25px;
+		}
+	}
+	#contentcol .comparison-salary .comparison-salary-label {
+		font-size: 11px;
+		line-height: 1.1;
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		#contentcol .comparison-salary .comparison-salary-label {
+			padding: 2px 10px 0 10px;
+		}
+	}
+
+	#contentcol .comparison-prereqs li {
+		margin-bottom: 12px;
+		line-height: 1.2;
+		text-align: left;
+	}
 	</style>
 
 
-	<?php $degrees = get_degree_search_data(); ?>
 	<div class="row page-content" id="academics-search">
 		<div class="span12" id="page_title">
-			<h1 class="span9"><?php the_title(); ?>: Accounting &amp; Finance</h1>
+			<h1 class="span9"><?php the_title(); ?>: Accounting vs. Finance</h1>
 			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 
@@ -213,120 +290,146 @@
 		<div class="span12" id="contentcol">
 			<article role="main">
 
-				<div class="visible-phone" id="comparison-chart-head-phone">
-					<table class="table">
-						<thead>
-							<tr>
-								<th><a href="#">Accounting</a></th>
-								<th><a href="#">Finance</a></th>
-							</tr>
-						</thead>
-					</table>
-				</div>
-				<table class="table table-hover comparison-chart">
-					<thead class="hidden-phone" colspan="3">
-						<tr>
-							<th></th>
-							<th><a href="#">Accounting</a></th>
-							<th><a href="#">Finance</a></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th>College</th>
-							<td>
-								<a href="http://www.bus.ucf.edu/" target="_blank">Business Administration</a>
-							</td>
-							<td>
-								<a href="http://www.bus.ucf.edu/" target="_blank">Business Administration</a>
-							</td>
-						</tr>
-						<tr>
-							<th>Department</th>
-							<td>
-								<a href="http://www.bus.ucf.edu/accounting/" target="_blank">Kenneth G. Dixon School of Accounting</a>
-							</td>
-							<td>
-								<a href="http://www.bus.ucf.edu/finance/" target="_blank">Finance</a>
-							</td>
-						</tr>
-<!-- 							<tr>
-							<th>Phone</th>
-							<td>
-								<a href="tel:4078232184">407-823-2184</a>
-							</td>
-							<td>
-								<a href="tel:4078232184">407-823-1127</a>
-							</td>
-						</tr> -->
-						<tr>
-							<th>Degree</th>
-							<td>PHD</td>
-							<td>PHD</td>
-						</tr>
-						<tr>
-							<th>
-								Option
-								<a class="degree-infobox-toggle" data-content="More Information" href="#">
-									<span class="icon icon-info-sign"></span>
-								</a>
-							</th>
-							<td>Dissertation</td>
-							<td>Dissertation</td>
-						</tr>
-						<tr>
-							<th>
-								Core Credit Hours
-								<a class="degree-infobox-toggle" data-content="More Information" href="#">
-									<span class="icon icon-info-sign"></span>
-								</a>
-							</th>
-							<td>18</td>
-							<td>18</td>
-						</tr>
-						<tr>
-							<th>
-								Required Courses Credit Hours
-								<a class="degree-infobox-toggle" data-content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis accumsan velit, vitae tempor lorem. Aenean libero tortor, auctor ac sem non, finibus condimentum leo. In nulla risus, sagittis consequat risus eu, maximus lobortis mauris. Sed turpis tellus, ultrices ut mi a, luctus laoreet justo. Vestibulum et sapien vel arcu vehicula vestibulum convallis id sapien. In hac habitasse platea dictumst. Etiam nec justo ante. Ut a feugiat ligula, vel volutpat diam." href="#">
-									<span class="icon icon-info-sign"></span>
-								</a>
-							</th>
-							<td>30</td>
-							<td>39</td>
-						</tr>
-						<tr>
-							<th>Total Credit Hours</th>
-							<td>84</td>
-							<td>84</td>
-						</tr>
-						<tr>
-							<th>
-								Prerequisites
-								<a class="degree-infobox-toggle" data-content="More Information" href="#">
-									<span class="icon icon-info-sign"></span>
-								</a>
-							</th>
-							<td class="align-top">
-								<ul class="prereqs">
+				<div class="row">
+					<div class="span5 offset1">
+						<div class="comparison-col">
+							<div class="comparison-header">
+								<h2><a href="#">Accounting Ph.D.</a></h2>
+								<span>a <a href="#">Business Administration Ph.D.</a> track</span>
+							</div>
+							<div class="comparison-row">
+								<span class="comparison-credit-hours">84</span>
+								Total Credit Hours
+							</div>
+							<div class="comparison-row alt">
+								<dl class="aligned">
+									<dt>College:</dt>
+									<dd><a href="#">College of Business Administration</a></dd>
+									<dt>Department:</dt>
+									<dd><a href="#">Kenneth G. Dixon School of Accounting</a></dd>
+								</dl>
+							</div>
+							<div class="comparison-row">
+								<strong>Dissertation</strong> Option
+								<a class="degree-infobox-toggle" href="#" data-content="info here..."><span class="icon icon-info-sign"></span></a>
+							</div>
+							<div class="comparison-row alt">
+								<dl>
+									<dt>Location:</dt>
+									<dd><a href="#">UCF Main Campus</a></dd>
+								</dl>
+							</div>
+							<div class="comparison-row">
+								<strong>Potential careers include:</strong>
+								<ul class="list-twocol list-unstyled comparison-careers">
+									<li>Auditor</li>
+									<li>Bookkeeper</li>
+									<li>Tax Examiner</li>
+									<li>Tax Preparer</li>
+									<li>Forensic Accountant</li>
+									<li>Public Accountant</li>
+									<li>Nonprofit Accountant</li>
+								</ul>
+							</div>
+							<div class="comparison-row alt">
+								<strong>Average starting salary:*</strong>
+								<ul class="list-unstyled comparison-salary">
+									<li class="locally">
+										<span class="comparison-salary-value">$44,985</span>
+										<span class="comparison-salary-label">Orlando area, annually</span>
+									</li>
+									<li class="nationally">
+										<span class="comparison-salary-value">$47,164</span>
+										<span class="comparison-salary-label">national average, annually</span>
+									</li>
+								</ul>
+								<p class="comparison-fineprint">
+									* Statistics credits and legal jargon or whatever goes here, because we can’t
+									guarantee starting salaries and whatnot
+								</p>
+							</div>
+							<div class="comparison-row">
+								<strong>Prerequisites:</strong>
+								<ul class="list-unstyled comparison-prereqs">
 									<li><strong>ACG 7157</strong> Seminar in Archival Research in Accounting</li>
 									<li><strong>ACG 7399</strong> Seminar in Behavioral Accounting Research</li>
 									<li><strong>ACG 7826</strong> Seminar in the Social and Organizational Context of Accounting</li>
 									<li><strong>ACG 7885</strong> Research Foundations in Accounting</li>
 									<li><strong>ACG 7887</strong> Accounting Research Forum</li>
 								</ul>
-							</td>
-							<td class="align-top">
-								<ul class="prereqs">
+							</div>
+						</div>
+					</div>
+					<div class="span5">
+						<div class="comparison-col">
+							<div class="comparison-header">
+								<h2><a href="#">Finance Ph.D.</a></h2>
+								<span>a <a href="#">Business Administration Ph.D.</a> track</span>
+							</div>
+							<div class="comparison-row">
+								<span class="comparison-credit-hours">84</span>
+								Total Credit Hours
+							</div>
+							<div class="comparison-row alt">
+								<dl class="aligned">
+									<dt>College:</dt>
+									<dd><a href="#">College of Business Administration</a></dd>
+									<dt>Department:</dt>
+									<dd><a href="#">Finance</a></dd>
+								</dl>
+							</div>
+							<div class="comparison-row">
+								<strong>Dissertation</strong> Option
+								<a class="degree-infobox-toggle" href="#" data-content="info here..."><span class="icon icon-info-sign"></span></a>
+							</div>
+							<div class="comparison-row alt">
+								<dl>
+									<dt>Location:</dt>
+									<dd><a href="#">UCF Main Campus</a></dd>
+								</dl>
+							</div>
+							<div class="comparison-row">
+								<strong>Potential careers include:</strong>
+								<ul class="list-twocol list-unstyled comparison-careers">
+									<li>Actuary</li>
+									<li>Financial Manager</li>
+									<li>Financial Advisor</li>
+									<li>Investment Banker</li>
+									<li>Financial Analyst</li>
+									<li>Controller</li>
+									<li>Tax Manager</li>
+								</ul>
+							</div>
+							<div class="comparison-row alt">
+								<strong>Average starting salary:*</strong>
+								<ul class="list-unstyled comparison-salary">
+									<li class="locally">
+										<span class="comparison-salary-value">$49,286</span>
+										<span class="comparison-salary-label">Orlando area, annually</span>
+									</li>
+									<li class="nationally">
+										<span class="comparison-salary-value">$51,673</span>
+										<span class="comparison-salary-label">national average, annually</span>
+									</li>
+								</ul>
+								<p class="comparison-fineprint">
+									* Statistics credits and legal jargon or whatever goes here, because we can’t
+									guarantee starting salaries and whatnot
+								</p>
+							</div>
+							<div class="comparison-row">
+								<strong>Prerequisites:</strong>
+								<ul class="list-unstyled comparison-prereqs">
 									<li><strong>FIN 7935</strong> Finance Research Forum</li>
 									<li><strong>FIN 7808</strong> Introduction to the Theory of Finance</li>
 									<li><strong>FIN 7807</strong> Corporate Finance Theory</li>
 									<li><strong>FIN 7816</strong> Investment Theory</li>
 									<li><strong>FIN 7930</strong> Seminar in Market Microstructure</li>
 								</ul>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			</article>
 
@@ -338,16 +441,6 @@
 		 * TODO: move to script.js when design drafting is finished!
 		 **/
 		$(document).ready(function() {
-			// Affix .comparison-chart-head-phone
-			$comparisonChartHead = $('#comparison-chart-head-phone');
-			$comparisonChart = $comparisonChartHead.next('.comparison-chart');
-
-			$comparisonChartHead.affix({
-				offset: {
-					top: $comparisonChart.offset().top
-				}
-			});
-
 			// Popovers
 			var $toggle = $('.degree-infobox-toggle');
 			var triggerVal = 'click';
@@ -355,7 +448,7 @@
 
 			if ($(window).width() > 767) {
 				triggerVal = 'hover';
-				placementVal = 'right';
+				placementVal = 'top';
 			}
 
 			$toggle
