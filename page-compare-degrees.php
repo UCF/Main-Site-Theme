@@ -146,6 +146,43 @@
 		}
 	}
 	@media (max-width: 767px) {
+		#contentcol .comparison-header {
+			border-radius: 0;
+		}
+		#contentcol .comparison-header h2 {
+			font-size: 16px;
+		}
+		#contentcol .list-twocol {
+			-webkit-column-count: 1;
+			-moz-column-count: 1;
+			-o-column-count: 1;
+			column-count: 1;
+
+			-webkit-column-gap: 0;
+			-moz-column-gap: 0;
+			-o-column-gap: 0;
+			column-gap: 0;
+
+			-webkit-column-count: 1;
+			-moz-column-count: 1;
+			-o-column-count: 1;
+			column-count: 1;
+		}
+
+		#contentcol .comparison-salary li {
+			display: block !important;
+			width: 100% !important;
+		}
+
+		#contentcol .comparison-header, #contentcol .comparison-row {
+			border-right: solid 1px #fff;
+		}
+
+		#contentcol .comparison-careers li {
+			font-size: 13px !important;
+			margin-bottom: 6px;
+		}
+
 		#contentcol .comparison-row dl.aligned dt,
 		#contentcol .comparison-row dl.aligned dd {
 			display: block;
@@ -273,6 +310,14 @@
 		line-height: 1.2;
 		text-align: left;
 	}
+
+	@media all and (max-width: 767px) {
+	    .half {
+	        float: left !important;
+	        width: 50% !important;
+	    }
+	}
+
 	</style>
 
 
@@ -291,17 +336,17 @@
 			<article role="main">
 
 				<div class="row">
-					<div class="span5 offset1">
+					<div class="span5 offset1 half">
 						<div class="comparison-col">
 							<div class="comparison-header">
 								<h2><a href="#">Accounting Ph.D.</a></h2>
 								<span>a <a href="#">Business Administration Ph.D.</a> track</span>
 							</div>
-							<div class="comparison-row">
+							<div class="comparison-row" data-mh="compare-row-1">
 								<span class="comparison-credit-hours">84</span>
 								Total Credit Hours
 							</div>
-							<div class="comparison-row alt">
+							<div class="college comparison-row alt compare-row-2">
 								<dl class="aligned">
 									<dt>College:</dt>
 									<dd><a href="#">College of Business Administration</a></dd>
@@ -309,11 +354,11 @@
 									<dd><a href="#">Kenneth G. Dixon School of Accounting</a></dd>
 								</dl>
 							</div>
-							<div class="comparison-row">
+							<div class="comparison-row" data-mh="compare-row-3">
 								<strong>Dissertation</strong> Option
 								<a class="degree-infobox-toggle" href="#" data-content="info here..."><span class="icon icon-info-sign"></span></a>
 							</div>
-							<div class="comparison-row alt">
+							<div class="comparison-row alt" data-mh="compare-row-4">
 								<dl>
 									<dt>Location:</dt>
 									<dd><a href="#">UCF Main Campus</a></dd>
@@ -360,17 +405,17 @@
 							</div>
 						</div>
 					</div>
-					<div class="span5">
+					<div class="span5 half">
 						<div class="comparison-col">
 							<div class="comparison-header">
 								<h2><a href="#">Finance Ph.D.</a></h2>
 								<span>a <a href="#">Business Administration Ph.D.</a> track</span>
 							</div>
-							<div class="comparison-row">
+							<div class="comparison-row" data-mh="compare-row-1">
 								<span class="comparison-credit-hours">84</span>
 								Total Credit Hours
 							</div>
-							<div class="comparison-row alt">
+							<div class="college comparison-row alt compare-row-2">
 								<dl class="aligned">
 									<dt>College:</dt>
 									<dd><a href="#">College of Business Administration</a></dd>
@@ -378,11 +423,11 @@
 									<dd><a href="#">Finance</a></dd>
 								</dl>
 							</div>
-							<div class="comparison-row">
+							<div class="comparison-row" data-mh="compare-row-3">
 								<strong>Dissertation</strong> Option
 								<a class="degree-infobox-toggle" href="#" data-content="info here..."><span class="icon icon-info-sign"></span></a>
 							</div>
-							<div class="comparison-row alt">
+							<div class="comparison-row alt" data-mh="compare-row-4">
 								<dl>
 									<dt>Location:</dt>
 									<dd><a href="#">UCF Main Campus</a></dd>
@@ -436,6 +481,8 @@
 		</div>
 	</div>
 
+	<script src="<?php bloginfo('template_url'); ?>/static/js/jquery.matchHeight.js"></script>
+
 	<script>
 		/**
 		 * TODO: move to script.js when design drafting is finished!
@@ -463,6 +510,13 @@
 						$toggle.not(this).popover('hide');
 					}
 				});
+			$('.comparison-header').matchHeight();
+
+			// apply matchHeight to each item container's items
+			$('.comparison-col:eq(0) .comparison-row').each(function(index) {
+				var ei = index+2;
+				$( '.comparison-col .comparison-row:nth-child(' + ei  + ')' ).matchHeight();
+			});
 		});
 	</script>
 <?php get_footer(); ?>
