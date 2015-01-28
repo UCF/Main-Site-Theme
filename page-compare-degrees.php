@@ -94,7 +94,7 @@
 		width: 50%;
 	}
 	#comparison-chart-head-phone .table th:first-child {
-		border-left: 0 solid transparent;
+		border-left: 1px solid #fff;
 	}
 	#comparison-chart-head-phone.affix .table th {
 		border-radius: 0;
@@ -122,6 +122,8 @@
 	}
 	@media (max-width: 767px) {
 		#degree-comparison .comparison-chart {
+			border-left: 1px solid #fff;
+			border-right: 1px solid #fff;
 			margin-top: 0;
 		}
 	}
@@ -159,6 +161,9 @@
 			border-left: 1px solid #fff;
 			border-right: 1px solid #fff;
 			padding: 12px;
+		}
+		#degree-comparison .comparison-chart tbody th + td {
+			border-left: 0 solid transparent;
 		}
 	}
 
