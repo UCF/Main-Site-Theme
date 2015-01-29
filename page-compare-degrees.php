@@ -84,7 +84,7 @@
 	#comparison-chart-head-phone .table th {
 		background-color: #337ab7;
 		border-left: 1px solid #fff;
-		border-radius: 8px 8px 0 0;
+		border-radius: 0;
 		font-size: 16px;
 		font-weight: 500;
 		line-height: 1.1;
@@ -98,9 +98,7 @@
 	}
 	#comparison-chart-head-phone.affix .table th {
 		border-radius: 0;
-	}
-	#comparison-chart-head-phone.affix .table th:first-child {
-		border-left: 1px solid #337ab7;
+		border-left: 0 solid transparent;
 	}
 	#comparison-chart-head-phone .table th p {
 		color: #fff;
