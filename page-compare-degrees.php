@@ -3,6 +3,14 @@
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
+	#degree-comparison .text-left {
+		text-align: left;
+	}
+	#degree-comparison .muted {
+		font-style: italic;
+	}
+
+
 	#breadcrumbs {
 		border-bottom: 2px solid #eee;
 		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
@@ -55,6 +63,26 @@
 			column-count: 1;
 			column-gap: 0;
 		}
+	}
+
+
+	#degree-comparison .comparison-bignumber {
+		display: block;
+		font-size: 30px;
+		font-weight: 400;
+		line-height: 1.2;
+	}
+	@media (max-width: 767px) {
+		#degree-comparison .comparison-bignumber {
+			font-size: 24px;
+		}
+	}
+
+
+	#degree-comparison .column-heading-inner {
+		color: #666;
+		font-size: 11.5px;
+		text-transform: uppercase;
 	}
 
 
@@ -115,6 +143,7 @@
 
 
 	#degree-comparison .comparison-chart {
+		height: 100%; /* stupid but necessary for table heading .cell-content-outer height to calculate correctly */
 		margin-top: 20px;
 		width: 100%;
 	}
@@ -132,7 +161,8 @@
 		text-decoration: underline;
 	}
 
-	#degree-comparison .comparison-chart th.column-heading {
+	#degree-comparison .comparison-chart > thead > tr > th.column-heading,
+	#degree-comparison .comparison-chart > tbody > tr > th.column-heading {
 		border: 0 none;
 		clip: rect(0px, 0px, 0px, 0px);
 		height: 1px;
@@ -143,8 +173,8 @@
 		width: 1px;
 	}
 
-	#degree-comparison .comparison-chart thead th,
-	#degree-comparison .comparison-chart tbody td {
+	#degree-comparison .comparison-chart > thead > tr > th,
+	#degree-comparison .comparison-chart > tbody > tr > td {
 		border-left: 30px solid #fff; /* simulate border-spacing */
 		border-right: 30px solid #fff; /* simulate border-spacing */
 		line-height: 1.4;
@@ -153,26 +183,63 @@
 		vertical-align: top;
 		width: 50%;
 	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		#degree-comparison .comparison-chart > thead > tr > th,
+		#degree-comparison .comparison-chart > tbody > tr > td {
+			border-left: 14px solid #fff;
+			border-right: 14px solid #fff;
+		}
+	}
 	@media (max-width: 767px) {
-		#degree-comparison .comparison-chart thead th,
-		#degree-comparison .comparison-chart tbody td {
+		#degree-comparison .comparison-chart > thead > tr > th,
+		#degree-comparison .comparison-chart > tbody > tr > td {
 			border-left: 1px solid #fff;
 			border-right: 1px solid #fff;
 			padding: 12px;
 		}
-		#degree-comparison .comparison-chart tbody th + td {
+		#degree-comparison .comparison-chart > tbody > tr > th + td {
 			border-left: 0 solid transparent;
 		}
 	}
-
-	#degree-comparison .comparison-chart thead th {
-		color: #fff;
-		padding: 0;
+	#degree-comparison .comparison-chart > tbody > tr > td.align-middle {
+		vertical-align: middle;
 	}
-	#degree-comparison .comparison-chart thead th .column-content {
+
+	#degree-comparison .comparison-chart > thead > tr > th {
 		background-color: #337ab7;
-		border-radius: 6px 6px 0 0;
+		color: #fff;
+		height: 100%;
+		padding: 0;
+		vertical-align: top; /* MUST be top because ie can't calculate 100% height for the child divs correctly :( */
+	}
+	#degree-comparison .comparison-chart > thead > tr > th .cell-content-outer {
+		display: table;
+		height: 100%;
+		position: relative;
+		width: 100%;
+	}
+	#degree-comparison .comparison-chart > thead > tr > th .cell-content-outer:before,
+	#degree-comparison .comparison-chart > thead > tr > th .cell-content-outer:after {
+		content: '';
+		display: block;
+		height: 15px;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	#degree-comparison .comparison-chart > thead > tr > th .cell-content-outer:before {
+		background-color: #fff;
+	}
+	#degree-comparison .comparison-chart > thead > tr > th .cell-content-outer:after {
+		background-color: #337ab7;
+		border-radius: 15px 15px 0 0;
+	}
+	#degree-comparison .comparison-chart > thead > tr > th .cell-content-inner {
+		display: table-cell;
+		height: 100%;
 		padding: 20px;
+		vertical-align: middle;
 	}
 	#degree-comparison .comparison-header h2 {
 		font-size: 24px;
@@ -185,7 +252,6 @@
 		font-size: 13px;
 		font-weight: normal;
 		line-height: 1.1;
-		margin-top: 10px;
 	}
 	#degree-comparison .comparison-header a {
 		color: #fff;
@@ -220,7 +286,11 @@
 	#degree-comparison dl.aligned dd {
 		display: inline-block;
 		margin-top: 5px;
-		vertical-align: middle;
+		vertical-align: top;
+	}
+	#degree-comparison dl.aligned dt:first-child,
+	#degree-comparison dl.aligned dt:first-child + dd {
+		margin-top: 0;
 	}
 	#degree-comparison dl.aligned dt {
 		width: 25%;
@@ -251,7 +321,7 @@
 		}
 		#degree-comparison dl dt,
 		#degree-comparison dl.aligned dt {
-			margin-top: 12px;
+			margin-top: 15px;
 		}
 		#degree-comparison dl dt:first-child,
 		#degree-comparison dl.aligned dt:first-child {
@@ -259,25 +329,36 @@
 		}
 		#degree-comparison dl dd,
 		#degree-comparison dl.aligned dd,
-		#degree-comparison dt:first-child + dd {
+		#degree-comparison dt:first-child + dd,
+		#degree-comparison dl.aligned dt:first-child + dd {
 			margin-top: 6px;
 		}
 	}
 
 
+	#degree-comparison .comparison-smalltext,
+	#degree-comparison .comparison-fineprint {
+		font-size: 11px;
+		line-height: 1.4;
+		margin-top: 20px;
+		margin-bottom: 0;
+		text-align: left;
+	}
 	#degree-comparison .comparison-fineprint {
 		color: #555;
-		font-size: 11px;
 		font-style: italic;
-		line-height: 1.4;
-		margin: 0;
-		text-align: left;
+		margin-top: 10px;
 	}
 
 
 	#degree-comparison .degree-infobox-toggle {
 		border-bottom: 0 solid transparent !important;
 		padding-left: 6px;
+	}
+	@media (max-width: 767px) {
+		#degree-comparison .degree-infobox-toggle {
+			display: none;
+		}
 	}
 	#degree-comparison .degree-infobox-toggle .icon {
 		padding-bottom: 3px;
@@ -301,14 +382,29 @@
 	}
 
 
-	#degree-comparison .comparison-credit-hours {
-		display: block;
-		line-height: 1.2;
-		font-size: 30px;
+	#degree-comparison .comparison-location {
+		font-size: 20px;
+		line-height: 1.3;
+		margin-bottom: 0;
+		margin-top: 10px;
 	}
 	@media (max-width: 767px) {
-		#degree-comparison .comparison-credit-hours {
-			font-size: 24px;
+		#degree-comparison .comparison-location {
+			font-size: 16px;
+		}
+	}
+	#degree-comparison .comparison-location a {
+		text-decoration: none;
+	}
+	#degree-comparison .comparison-location .comparison-smalltext {
+		display: block;
+		margin-top: 10px;
+		text-align: center;
+		text-decoration: underline;
+	}
+	@media (max-width: 767px) {
+		#degree-comparison .comparison-location .comparison-smalltext {
+			margin-top: 6px;
 		}
 	}
 
@@ -370,15 +466,6 @@
 	@media (max-width: 979px) {
 		#degree-comparison .comparison-salary span {
 			border-left: 1px solid transparent;
-		}
-	}
-	#degree-comparison .comparison-salary .comparison-salary-value {
-		font-size: 30px;
-		line-height: 1.2;
-	}
-	@media (max-width: 979px) {
-		#degree-comparison .comparison-salary .comparison-salary-value {
-			font-size: 25px;
 		}
 	}
 	@media (max-width: 767px) {
@@ -444,54 +531,58 @@
 				<table class="comparison-chart">
 					<thead class="hidden-phone" colspan="3">
 						<tr>
-							<th class="column-heading" tabindex="0">Program Name</th>
-							<th class="comparison-header" tabindex="0">
-								<div class="column-content">
-									<h2><a href="#">Accounting Ph.D.</a></h2>
-									<span>a <a href="#">Business Administration Ph.D.</a> track</span>
+							<th class="column-heading"></th>
+							<th class="comparison-header" scope="col" tabindex="0">
+								<div class="cell-content-outer">
+									<div class="cell-content-inner">
+										<h2><a href="#">Accounting Ph.D.</a></h2>
+										<span>a <a href="#">Business Administration Ph.D.</a> track</span>
+									</div>
 								</div>
 							</th>
-							<th class="comparison-header" tabindex="0">
-								<div class="column-content">
-									<h2><a href="#">Finance Ph.D.</a></h2>
-									<span>a <a href="#">Business Administration Ph.D.</a> track</span>
+							<th class="comparison-header" scope="col" tabindex="0">
+								<div class="cell-content-outer">
+									<div class="cell-content-inner">
+										<h2><a href="#">Finance Ph.D.</a></h2>
+										<span>a <a href="#">Business Administration Ph.D.</a> track</span>
+									</div>
 								</div>
 							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="comparison-row">
-							<th class="column-heading" tabindex="0">Total Credit Hours</th>
+							<th class="column-heading" scope="row" tabindex="0">Total Credit Hours</th>
 							<td tabindex="0">
-								<span class="comparison-credit-hours">84</span>
+								<span class="comparison-bignumber">84</span>
 								Total Credit Hours
 							</td>
 							<td tabindex="0">
-								<span class="comparison-credit-hours">84</span>
+								<span class="comparison-bignumber">84</span>
 								Total Credit Hours
 							</td>
 						</tr>
 						<tr class="comparison-row alt">
-							<th class="column-heading" tabindex="0">College and Department</th>
+							<th class="column-heading" scope="row" tabindex="0">College and Department</th>
 							<td tabindex="0">
 								<dl class="aligned">
-									<dt>College:</dt>
+									<dt class="column-heading-inner">College:</dt>
 									<dd><a href="#">College of Business Administration</a></dd>
-									<dt>Department:</dt>
+									<dt class="column-heading-inner">Department:</dt>
 									<dd><a href="#">Kenneth G. Dixon School of Accounting</a></dd>
 								</dl>
 							</td>
 							<td tabindex="0">
 								<dl class="aligned">
-									<dt>College:</dt>
+									<dt class="column-heading-inner">College:</dt>
 									<dd><a href="#">College of Business Administration</a></dd>
-									<dt>Department:</dt>
+									<dt class="column-heading-inner">Department:</dt>
 									<dd><a href="#">Financing</a></dd>
 								</dl>
 							</td>
 						</tr>
 						<tr class="comparison-row">
-							<th class="column-heading" tabindex="0">Option</th>
+							<th class="column-heading" scope="row" tabindex="0">Option</th>
 							<td tabindex="0">
 								<strong>Dissertation</strong> Option
 								<a class="degree-infobox-toggle" href="#" data-content="info here..."><span class="icon icon-info-sign"></span></a>
@@ -502,24 +593,34 @@
 							</td>
 						</tr>
 						<tr class="comparison-row alt">
-							<th class="column-heading" tabindex="0">Location</th>
+							<th class="column-heading" scope="row" tabindex="0">Location</th>
 							<td tabindex="0">
-								<dl>
-									<dt>Location:</dt>
-									<dd><a href="#">UCF Main Campus</a></dd>
-								</dl>
+								<strong class="column-heading-inner">Location:</strong>
+								<p class="comparison-location">
+									<a href="#">
+										UCF Main Campus
+										<span class="comparison-smalltext">
+											<span class="icon icon-map-marker"></span>View on map
+										</span>
+									</a>
+								</p>
 							</td>
 							<td tabindex="0">
-								<dl>
-									<dt>Location:</dt>
-									<dd><a href="#">UCF Main Campus</a></dd>
-								</dl>
+								<strong class="column-heading-inner">Location:</strong>
+								<p class="comparison-location">
+									<a href="#">
+										UCF Main Campus
+										<span class="comparison-smalltext">
+											<span class="icon icon-map-marker"></span>View on map
+										</span>
+									</a>
+								</p>
 							</td>
 						</tr>
 						<tr class="comparison-row">
-							<th class="column-heading" tabindex="0">Potential Careers</th>
+							<th class="column-heading" scope="row" tabindex="0">Potential Careers</th>
 							<td tabindex="0">
-								<strong>Potential careers include:</strong>
+								<strong class="column-heading-inner">Potential careers include:</strong>
 								<ul class="list-twocol list-unstyled comparison-careers">
 									<li>Auditor</li>
 									<li>Bookkeeper</li>
@@ -531,7 +632,7 @@
 								</ul>
 							</td>
 							<td tabindex="0">
-								<strong>Potential careers include:</strong>
+								<strong class="column-heading-inner">Potential careers include:</strong>
 								<ul class="list-twocol list-unstyled comparison-careers">
 									<li>Actuary</li>
 									<li>Financial Manager</li>
@@ -544,16 +645,16 @@
 							</td>
 						</tr>
 						<tr class="comparison-row alt">
-							<th class="column-heading" tabindex="0">Average Starting Salaries</th>
+							<th class="column-heading" scope="row" tabindex="0">Average Starting Salaries</th>
 							<td tabindex="0">
-								<strong>Average starting salary:*</strong>
+								<strong class="column-heading-inner">Average starting salary:*</strong>
 								<ul class="list-unstyled comparison-salary">
 									<li class="locally">
-										<span class="comparison-salary-value">$44,985</span>
+										<span class="comparison-salary-value comparison-bignumber">$44,985</span>
 										<span class="comparison-salary-label">Orlando area, annually</span>
 									</li>
 									<li class="nationally">
-										<span class="comparison-salary-value">$47,164</span>
+										<span class="comparison-salary-value comparison-bignumber">$47,164</span>
 										<span class="comparison-salary-label">national average, annually</span>
 									</li>
 								</ul>
@@ -563,14 +664,14 @@
 								</p>
 							</td>
 							<td tabindex="0">
-								<strong>Average starting salary:*</strong>
+								<strong class="column-heading-inner">Average starting salary:*</strong>
 								<ul class="list-unstyled comparison-salary">
 									<li class="locally">
-										<span class="comparison-salary-value">$49,286</span>
+										<span class="comparison-salary-value comparison-bignumber">$49,286</span>
 										<span class="comparison-salary-label">Orlando area, annually</span>
 									</li>
 									<li class="nationally">
-										<span class="comparison-salary-value">$51,673</span>
+										<span class="comparison-salary-value comparison-bignumber">$51,673</span>
 										<span class="comparison-salary-label">national average, annually</span>
 									</li>
 								</ul>
@@ -581,9 +682,20 @@
 							</td>
 						</tr>
 						<tr class="comparison-row">
-							<th class="column-heading" tabindex="0">Prerequisites</th>
+							<th class="column-heading" scope="row" tabindex="0">Program Admission Rate</th>
+							<td class="align-middle" tabindex="0">
+								<span class="comparison-bignumber">7.8%</span>
+								Program Admission Rate
+								<small>(Fall 2013 semester)</small>
+							</td>
+							<td class="align-middle" tabindex="0">
+								<span class="muted">Program Admission Rate n/a</span>
+							</td>
+						</tr>
+						<tr class="comparison-row alt">
+							<th class="column-heading" scope="row" tabindex="0">Prerequisites</th>
 							<td tabindex="0">
-								<strong>Prerequisites:</strong>
+								<strong class="column-heading-inner">Prerequisites:</strong>
 								<ul class="list-unstyled comparison-prereqs">
 									<li><strong>ACG 7157</strong> Seminar in Archival Research in Accounting</li>
 									<li><strong>ACG 7399</strong> Seminar in Behavioral Accounting Research</li>
@@ -593,7 +705,7 @@
 								</ul>
 							</td>
 							<td tabindex="0">
-								<strong>Prerequisites:</strong>
+								<strong class="column-heading-inner">Prerequisites:</strong>
 								<ul class="list-unstyled comparison-prereqs">
 									<li><strong>FIN 7935</strong> Finance Research Forum</li>
 									<li><strong>FIN 7808</strong> Introduction to the Theory of Finance</li>
@@ -628,24 +740,13 @@
 
 			// Popovers
 			var $toggle = $('.degree-infobox-toggle');
-			var triggerVal = 'click';
+			var triggerVal = 'hover';
 			var placementVal = 'top';
-
-			if ($(window).width() > 767) {
-				triggerVal = 'hover';
-			}
 
 			$toggle
 				.popover({
 					'placement': placementVal,
 					'trigger': triggerVal
-				})
-				.on('click', function(e) {
-					e.preventDefault();
-
-					if (triggerVal == 'click') {
-						$toggle.not(this).popover('hide');
-					}
 				});
 		});
 	</script>
