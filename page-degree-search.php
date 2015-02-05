@@ -376,13 +376,6 @@
 
 			<div class="span12 intro">
 				<?php the_content(); ?>
-
-				<h2>See what people are saying about UCF</h2>
-
-				<blockquote><i>A &quot;Best Value&quot;</i> &nbsp; &mdash; by Kiblockquotelinger’s Personal Finance<br>
-					<i>A &quot;School to Watch&quot;</i> &nbsp; &mdash; by U.S. News &amp; World Report School to Watch&quot;<br>
-					<i>A &quot;Top Tier National University&quot;</i> &nbsp; &mdash; by U.S. News &amp; World Report
-				</blockquote>
 			</div>
 
 			<!-- Sidebar (Desktop only) -->

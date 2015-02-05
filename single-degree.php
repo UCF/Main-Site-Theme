@@ -2,13 +2,21 @@
 <?php get_header(); the_post();?>
 <?php $post = append_degree_profile_metadata($post); ?>
 
+<?php
+	$css_key = get_theme_option('cloud_font_key');
+	if ($css_key) {
+		print '<link rel="stylesheet" href="'.$css_key.'" type="text/css" media="all" />';
+	}
+
+?>
+
 	<style>
 	/**
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
 	#breadcrumbs {
 		border-bottom: 2px solid #eee;
-		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
 		font-size: 12.5px;
 		margin-bottom: 25px;
 	}
@@ -49,7 +57,7 @@
 
 	#contentcol,
 	#sidebar_right {
-		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
 		font-size: 14px;
 	}
 	#sidebar_right {
@@ -140,7 +148,7 @@
 
 
 	#contentcol .degree-desc {
-		margin-top: 20px;
+		margin-bottom: 30px;
 	}
 
 
@@ -175,7 +183,7 @@
 	#sidebar_right h2 {
 		color: #888;
 		font-size: 18px;
-		font-weight: 500;
+		font-weight: normal;
 		line-height: 1.2;
 		margin-bottom: 5px;
 		margin-top: 20px;
@@ -230,7 +238,17 @@
 		<div id="contentcol" class="span8 degree">
 			<article role="main">
 
+				<!-- Degree description -->
+
+				<p class="degree-desc">
+					The objective of the Accounting track in the Business Administration PhD program is to prepare students
+					for academic careers in higher education and management careers within profit and nonprofit
+					organizations. Success in the program is judged by the student’s understanding of the issues and
+					methodologies essential to the advancement of knowledge.
+				</p>
+
 				<!-- Degree meta details -->
+
 				<div class="row degree-details">
 					<div class="span3">
 						<dl>
@@ -260,15 +278,6 @@
 				<div class="visible-phone">
 					<a class="btn btn-large btn-block btn-success">View Catalog</a>
 					<a class="btn btn-large btn-block">Visit Program Website</a>
-				</div>
-
-				<!-- Degree description -->
-
-				<div class="degree-desc">
-					The objective of the Accounting track in the Business Administration PhD program is to prepare students
-					for academic careers in higher education and management careers within profit and nonprofit
-					organizations. Success in the program is judged by the student’s understanding of the issues and
-					methodologies essential to the advancement of knowledge.
 				</div>
 
 				<!-- Application Info -->
