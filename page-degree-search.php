@@ -689,7 +689,7 @@
 			var timer = null;
 			function searchQueryKeyUpHandler(e) {
 				if($(e.target).val().length > 2) {
-					// prevent action until user is done typing
+					// prevent action until user is done typing (debounce)
 					if(timer) {
 						clearTimeout(timer);
 					}
@@ -697,46 +697,24 @@
 				}
 			}
 
-			function closeButtonClickHandler(e) {
-				e.preventDefault();
-				$sidebarLeft.removeClass('open');
-				degreeSearchChangeHandler();
-			}
-
-			function initFilterClickHandler(e) {
-				console.log('initFilterClickHandler');
+			function onPanelOpen() {
 				// resize the panel to be full screen and align it, doesn't resize properly on page load
 				$sidebarLeft
 					.height($(document).height())
 					// setting the click handler on page load fails
-					.on('click', '.close', closePanel);
-			}
-
-			function filterClickHandler(e) {
-				console.log('filterClickHandler');
+					.one('click', '.close', closePanel);
 				$(window).scrollTop(0);
 			}
 
-			function closeMenuHandler(e) {
-				if(!$(e.target).closest('.filter-tab').length &&
-					!$(e.target).closest('#sidebar_left').length &&
-					$sidebarLeft.hasClass('open')) {
-					$sidebarLeft.removeClass('open');
-					loadDegreeSearchResults();
-				}
-			}
-
 			function closePanel() {
-				console.log('click');
 				$.panelslider.close();
+				loadDegreeSearchResults();
 			}
 
 			function setupEventHandlers() {
 				if($academicsSearch.find('.filter-tab').is(':visible')) {
 					// mobile
-					$academicsSearch.one('click', '.filter-tab', initFilterClickHandler);
-					$academicsSearch.on('click', '.filter-tab', filterClickHandler);
-					$academicsSearch.find('.filter-tab').panelslider({'side': 'right'});
+					$academicsSearch.find('.filter-tab').panelslider({'side': 'right', onOpen: onPanelOpen });
 					$academicsSearch.on('change', '.sort-by', degreeSearchChangeHandler);
 				} else {
 					// desktop
