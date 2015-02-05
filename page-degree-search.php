@@ -50,9 +50,26 @@
 	#contentcol,
 	#contentcol input,
 	#contentcol select,
-	#contentcol option {
-		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+	#contentcol option,
+	.page-content {
+		font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
 		font-size: 14px;
+	}
+
+	.page-content .intro h2 {
+		font-weight: 400;
+	}
+
+	.page-content .intro p {
+		font-size: 16px;
+		line-height: 24px;
+		font-weight: 400;
+	}
+
+	.page-content .intro blockquote {
+		font-size: 16px;
+		color: #888;
+		line-height: 30px;
 	}
 
 	#sidebar_left {
@@ -62,26 +79,17 @@
 	@media (max-width: 767px) {
 
 		#sidebar_left {
-			border-top: none;
-			box-sizing: border-box;
-			box-shadow: 0 6px 12px rgba(0,0,0,.3);
-			margin-top: 0;
-			padding: 0;
-			position: absolute;
-			top: 0;
-			right: 0;
+			font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+			display: none;
 			width: 300px;
-
-			-webkit-transform: scaleX(0.00001);
-			transform: scaleX(0.00001);
-
-			-webkit-transform-origin: 100% 0%;
-			transform-origin: 100% 0%;
-
-			-webkit-transition-duration: 0.5s;
-			transition-duration: 0.5s;
-
-			z-index: 15000;
+			background-color: #eee;
+			-webkit-box-shadow: 5px 0px 20px -5px rgba(0,0,0,0.30);
+			-moz-box-shadow: 5px 0px 20px -5px rgba(0,0,0,0.30);
+			box-shadow: 5px 0px 20px -5px rgba(0,0,0,0.30);
+			border-right: 1px solid #ccc;
+			border-top: none;
+			margin-top: 0;
+			padding-top: 0;
 		}
 
 		#sidebar_left.open {
@@ -92,6 +100,7 @@
 		#sidebar_left .header {
 			background-color: #888;
 			color: #fff;
+			font-weight: normal;
 			margin: 0 0 25px;
 			padding-left: 10px;
 		}
@@ -111,7 +120,7 @@
 	#sidebar_left h2 {
 		color: #888;
 		font-size: 18px;
-		font-weight: 500;
+		font-weight: normal;
 		padding-left: 10px;
 	}
 
@@ -142,7 +151,7 @@
 
 	.filter-tab {
 		background-color: #666;
-		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
 		line-height: 16px;
 		right: 0;
 		cursor: pointer;
@@ -151,6 +160,10 @@
 		width: 9px;
 		color: white;
 		padding: 6px;
+	}
+
+	.filter-tab:hover {
+		color: white;
 	}
 
 	.filter-tab .icon-filter {
@@ -347,50 +360,29 @@
 
 		$params = array_merge( $default_params, $_GET );
 
-		// $params_pretty = array(
-		// 	'program-type' => '',
-		// 	'college' => ''
-		// );
-
-		// if( !empty( $params['program-type'] ) ) {
-		// 	$array_size = count( $params['program-type'] );
-
-		// 	foreach( $params['program-type'] as $key => $value ) {
-		// 		$program_type = $program_type . $value;
-		// 		if( $key > -1 && $key < $array_size - 1 ) {
-		// 			$program_type = $program_type . ' and ';
-		// 		}
-		// 	}
-
-		// 	$params_pretty['program-type'] = $program_type;
-		// }
-
-		// if( !empty( $params_pretty['college'] ) ) {
-		// 	$array_size = count( $params_pretty['college'] );
-
-		// 	foreach( $params_pretty['college'] as $key => $value ) {
-		// 		$college = $college . $value;
-		// 		if( $key > -1 && $key < $array_size - 1 ) {
-		// 			$college = $college . ' and ';
-		// 		}
-		// 	}
-
-		// 	$params_pretty['college'] = $college;
-		// }
-
-
 		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results.php?' . http_build_query($params) ), true );
 		// var_dump($data);
 	?>
 
 	<div class="row page-content" id="academics_search">
-		<div class="filter-tab visible-phone">F<br>I<br>L<br>T<br>E<br>R<br></div>
+		<a class="filter-tab visible-phone" href="#sidebar_left">F<br>I<br>L<br>T<br>E<br>R<br></a>
 
 		<form>
 
 			<div class="span12" id="page_title">
 				<h1 class="span8"><?php the_title();?></h1>
 				<?php esi_include('output_weather_data','span4'); ?>
+			</div>
+
+			<div class="span12 intro">
+				<?php the_content(); ?>
+
+				<h2>See what people are saying about UCF</h2>
+
+				<blockquote><i>A &quot;Best Value&quot;</i> &nbsp; &mdash; by Kiblockquotelinger’s Personal Finance<br>
+					<i>A &quot;School to Watch&quot;</i> &nbsp; &mdash; by U.S. News &amp; World Report School to Watch&quot;<br>
+					<i>A &quot;Top Tier National University&quot;</i> &nbsp; &mdash; by U.S. News &amp; World Report
+				</blockquote>
 			</div>
 
 			<!-- Sidebar (Desktop only) -->
@@ -592,17 +584,6 @@
 			<div class="span8" id="contentcol">
 				<article role="main">
 
-					<?php the_content(); ?>
-
-					<h3 style="margin-bottom: 15px;">See what people are saying about UCF</h3>
-
-					<p><i>A &quot;Best Value&quot; by Kiplinger’s Personal Finance</i></p>
-
-					<p>
-						<i>A &quot;School to Watch&quot; and a &quot;Top Tier National University&quot;
-						by U.S. News &amp; World Report School to Watch&quot; and a &quot;Top Tier National University&quot; by U.S. News &amp; World Report</i>
-					</p>
-
 					<!-- Search input -->
 
 					<div class="degree-search-form form-search">
@@ -652,6 +633,8 @@
 		</form>
 
 	</div>
+
+	<script src="<?php bloginfo('template_url'); ?>/static/js/jquery.panelslider.js"></script>
 
 	<script>
 
@@ -728,20 +711,17 @@
 			}
 
 			function initFilterClickHandler(e) {
-				e.preventDefault();
+				console.log('initFilterClickHandler');
 				// resize the panel to be full screen and align it, doesn't resize properly on page load
 				$sidebarLeft
 					.height($(document).height())
-					.offset({ top: 0, right: 0 })
 					// setting the click handler on page load fails
-					.find('a.close').on('click touchstart', closeButtonClickHandler);
-				$(document).on('click touchstart', closeMenuHandler);
+					.on('click', '.close', closePanel);
 			}
 
 			function filterClickHandler(e) {
+				console.log('filterClickHandler');
 				$(window).scrollTop(0);
-				// resize the panel to be full screen and align it
-				$sidebarLeft.addClass('open');
 			}
 
 			function closeMenuHandler(e) {
@@ -753,11 +733,17 @@
 				}
 			}
 
+			function closePanel() {
+				console.log('click');
+				$.panelslider.close();
+			}
+
 			function setupEventHandlers() {
 				if($academicsSearch.find('.filter-tab').is(':visible')) {
 					// mobile
 					$academicsSearch.one('click', '.filter-tab', initFilterClickHandler);
 					$academicsSearch.on('click', '.filter-tab', filterClickHandler);
+					$academicsSearch.find('.filter-tab').panelslider({'side': 'right'});
 					$academicsSearch.on('change', '.sort-by', degreeSearchChangeHandler);
 				} else {
 					// desktop
