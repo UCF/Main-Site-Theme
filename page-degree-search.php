@@ -4,6 +4,11 @@
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
 
+
+	 body {
+	 	margin-left:0 !important;
+	 }
+
 	 .input-append {
 	 	width: 80%;
 	 }
@@ -717,7 +722,12 @@
 			function setupEventHandlers() {
 				if($academicsSearch.find('.filter-tab').is(':visible')) {
 					// mobile
-					$academicsSearch.find('.filter-tab').panelslider({'side': 'right', onOpen: onPanelOpen, onClose: onPanelClose });
+					$academicsSearch.find('.filter-tab').panelslider({
+						'slideType': 'push',
+						'side': 'right',
+						onOpen: onPanelOpen,
+						onClose: onPanelClose
+					});
 					$academicsSearch.on('change', '.sort-by', degreeSearchChangeHandler);
 				} else {
 					// desktop

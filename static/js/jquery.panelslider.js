@@ -1,18 +1,17 @@
 /*
  * jQuery Panel Slider plugin v0.1.1
  * https://github.com/eduardomb/jquery-panelslider
- * MODIFIED to open as overlay rather than pushing content
 */
 (function($) {
   'use strict';
 
-  var // $body = $('body'),
+  var $body = $('body'),
       _sliding = false,
       _options;
 
   function _slideIn(panel, options) {
     var panelWidth = panel.outerWidth(true),
-        // bodyAnimation = {},
+        bodyAnimation = {},
         panelAnimation = {};
 
     if(panel.is(':visible') || _sliding) {
@@ -21,7 +20,7 @@
 
     _sliding = true;
     panel.addClass('ps-active-panel').css({
-      position: 'absolute',
+      position: 'fixed',
       top: 0,
       height: '100%',
       'z-index': 999999
@@ -35,7 +34,7 @@
           left: '-' + panelWidth + 'px',
           right: 'auto'
         });
-        // bodyAnimation['margin-left'] = '+=' + panelWidth;
+        bodyAnimation['margin-left'] = '+=' + panelWidth;
         panelAnimation.left = '+=' + panelWidth;
         break;
 
@@ -44,12 +43,12 @@
           left: 'auto',
           right: '-' + panelWidth + 'px'
         });
-        // bodyAnimation['margin-left'] = '-=' + panelWidth;
+        bodyAnimation['margin-left'] = '-=' + panelWidth;
         panelAnimation.right = '+=' + panelWidth;
         break;
     }
 
-    // $body.animate(bodyAnimation, options.duration);
+    $body.animate(bodyAnimation, options.duration);
     panel.show().animate(panelAnimation, options.duration, function() {
       _sliding = false;
 
@@ -62,11 +61,11 @@
   $.panelslider = function(element, options) {
     var active = $('.ps-active-panel');
     var defaults = {
-      side: 'left',     // panel side: left or right
-      duration: 200,    // Transition duration in miliseconds
-      clickClose: true, // If true closes panel when clicking outside it
-      onOpen: null,      // When supplied, function is called after the panel opens
-      onClose: null      // When supplied, function is called after the panel closes
+      side: 'left',        // panel side: left or right
+      duration: 200,       // Transition duration in miliseconds
+      clickClose: true,    // If true closes panel when clicking outside it
+      onOpen: null,        // When supplied, function is called after the panel opens
+      onClose: null        // When supplied, function is called after the panel closes
     };
 
     options = $.extend({}, defaults, options);
@@ -85,7 +84,7 @@
     var active = $('.ps-active-panel'),
         duration = active.data('duration'),
         panelWidth = active.outerWidth(true),
-        // bodyAnimation = {},
+        bodyAnimation = {},
         panelAnimation = {};
 
     if(!active.length || active.is(':hidden') || _sliding) {
@@ -96,17 +95,18 @@
 
     switch(active.data('side')) {
       case 'left':
-        // bodyAnimation['margin-left'] = '-=' + panelWidth;
+        bodyAnimation['margin-left'] = '-=' + panelWidth;
         panelAnimation.left = '-=' + panelWidth;
         break;
 
       case 'right':
-        // bodyAnimation['margin-left'] = '+=' + panelWidth;
+        bodyAnimation['margin-left'] = '+=' + panelWidth;
         panelAnimation.right = '-=' + panelWidth;
         break;
     }
 
-    active.animate(panelAnimation, duration, function() {
+    active.animate(panelAnimation, duration);
+    $body.animate(bodyAnimation, duration, function() {
       active.hide();
       active.removeClass('ps-active-panel');
       _sliding = false;
