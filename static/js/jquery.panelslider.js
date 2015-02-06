@@ -7,7 +7,8 @@
   'use strict';
 
   var // $body = $('body'),
-      _sliding = false;
+      _sliding = false,
+      _options;
 
   function _slideIn(panel, options) {
     var panelWidth = panel.outerWidth(true),
@@ -26,6 +27,7 @@
       'z-index': 999999
     });
     panel.data(options);
+    _options = options;
 
     switch (options.side) {
       case 'left':
@@ -63,7 +65,8 @@
       side: 'left',     // panel side: left or right
       duration: 200,    // Transition duration in miliseconds
       clickClose: true, // If true closes panel when clicking outside it
-      onOpen: null      // When supplied, function is called after the panel opens
+      onOpen: null,      // When supplied, function is called after the panel opens
+      onClose: null      // When supplied, function is called after the panel closes
     };
 
     options = $.extend({}, defaults, options);
@@ -112,6 +115,11 @@
         callback();
       }
     });
+
+    if(typeof _options.onClose === 'function') {
+      _options.onClose();
+    }
+
   };
 
   // Bind click outside panel and ESC key to close panel if clickClose is true

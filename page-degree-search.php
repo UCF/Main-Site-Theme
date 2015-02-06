@@ -706,15 +706,18 @@
 				$(window).scrollTop(0);
 			}
 
+			function onPanelClose() {
+				loadDegreeSearchResults();
+			}
+
 			function closePanel() {
 				$.panelslider.close();
-				loadDegreeSearchResults();
 			}
 
 			function setupEventHandlers() {
 				if($academicsSearch.find('.filter-tab').is(':visible')) {
 					// mobile
-					$academicsSearch.find('.filter-tab').panelslider({'side': 'right', onOpen: onPanelOpen });
+					$academicsSearch.find('.filter-tab').panelslider({'side': 'right', onOpen: onPanelOpen, onClose: onPanelClose });
 					$academicsSearch.on('change', '.sort-by', degreeSearchChangeHandler);
 				} else {
 					// desktop
