@@ -137,7 +137,7 @@
 	}
 
 	.degree-search-filters label {
-		font-size: 14px;
+		font-size: 12px;
 	}
 
 	.degree-search-filters .degree-count {
@@ -380,7 +380,7 @@
 
 			<!-- Sidebar (Desktop only) -->
 
-			<div id="sidebar_left" class="span4 degree-search-filters">
+			<div id="sidebar_left" class="span3 degree-search-filters">
 				<h2 class="header visible-phone">
 					Filter By <a href="#" class="close">X</a>
 				</h2>
