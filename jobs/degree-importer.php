@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Require DEGREE_SECRET_KEY const
 if (DEGREE_SECRET_KEY !== get_theme_option('feedback_email_key')) {
 	die('You do not have access to this page.');
@@ -83,7 +83,7 @@ else {
 
 
 		/**
-		 * Loop through each search service result.  Create a structured set of post data 
+		 * Loop through each search service result.  Create a structured set of post data
 		 * for each.
 		 **/
 		foreach ($results as $program) {
@@ -125,13 +125,20 @@ else {
 
 			// Massage website URLs for graduate programs because they're stored in the
 			// search service db strangely:
-			if ($program->graduate == 1) {
+			if ( $program->graduate == 1 ) {
 				// Old data previously returned a query param as the 'required_hours' val.
-				if ($program->required_hours[0] == '?') {
-					$program->website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+				if ( $program->required_hours[0] == '?' ) {
+					$program->profile_url = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+					$program->required_hours = null;
 				}
-				else {
-					$program->website = $program->required_hours;
+				// If required_hours val is a full catalog url
+				else if ( filter_var( $program->required_hours, FILTER_VALIDATE_URL ) ) {
+					$program->profile_url = $program->required_hours;
+					$program->required_hours = null;
+				}
+				// If it's something else that doesn't look like a number, get rid of it
+				else if ( !is_numeric( $program->required_hours ) ) {
+					$program->required_hours = null;
 				}
 			}
 
@@ -178,15 +185,16 @@ else {
 				'post_meta' => array(
 					// Programs can have similar degree_id's, so we need
 					// type_id to further distinguish unique programs
-					'degree_id'			=> $program->degree_id,
-					'degree_type_id'	=> $program->type_id,
-					'degree_hours'		=> $program->required_hours,
-					'degree_description'=> html_entity_decode($program->description),
-					'degree_website'	=> $program->website,
-					'degree_phone'		=> $program->phone,
-					'degree_email'		=> $program->email,
-					'degree_contacts'	=> $program->contacts, // semicolon-separated contact lists; fields are comma-separated
-					'degree_pdf'		=> $program->pdf,
+					'degree_id'			 => $program->degree_id,
+					'degree_type_id'	 => $program->type_id,
+					'degree_hours'		 => $program->required_hours,
+					'degree_description' => html_entity_decode($program->description),
+					'degree_website'	 => $program->website,
+					'degree_phone'		 => $program->phone,
+					'degree_email'		 => $program->email,
+					'degree_contacts'	 => $program->contacts, // semicolon-separated contact lists; fields are comma-separated
+					'degree_pdf'		 => $program->pdf,
+					'degree_profile_url' => $program->profile_url,
 				),
 				'post_terms' => array(
 					'program_types' => $program->type,
@@ -301,7 +309,7 @@ else {
 				else {
 					$term_id = NULL;
 				}
-				
+
 				// Actually set the term for the post. Unset existing term if $term_id is null.
 				if ($term_id) {
 					wp_set_post_terms($post_id, $term_id, $tax); // replaces existing terms
@@ -320,8 +328,8 @@ else {
 
 
 		/**
-		 * Delete any of the remaining posts in $existing_posts_array.  These posts were not 
-		 * updated and were not new posts, so we assume that they were deleted from the search 
+		 * Delete any of the remaining posts in $existing_posts_array.  These posts were not
+		 * updated and were not new posts, so we assume that they were deleted from the search
 		 * service data, and should therefore be deleted from WordPress.
 		 **/
 		foreach ($existing_posts_array as $post_id) {

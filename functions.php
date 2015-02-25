@@ -1738,7 +1738,8 @@ function append_degree_list_metadata($post) {
  * Append Degree meta data to a Degree post object (for use in single Degree profile.)
  **/
 function append_degree_profile_metadata($post) {
-	$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
+	// Non-numeric degree_hours vals will be translated to 0 by intval():
+	$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE) ? intval( get_post_meta($post->ID, 'degree_hours', TRUE) ) : 0;
 	$post->degree_description = get_post_meta($post->ID, 'degree_description', TRUE);
 	$post->degree_phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
 	$post->degree_email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';
@@ -1815,19 +1816,35 @@ function display_degree_list($posts) {
 				<div class="credits-wrap">
 					<span class="program-type-alt"><?=$post->tax_program_type[0]?></span>
 
-					<?php if (!empty($post->degree_hours)) {
-						if (!empty($post->degree_profile_link) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
-						<a target="_blank" href="<?=$post->degree_profile_link?>" <?php if (Degree::is_graduate_program($post)) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+					<?php
+					// If this is any program type with valid degree hours,
+					// just print a label with the credit hours inside
+					if ( $post->degree_hours > 0 ) {
+						$label_class = 'label-info';
+						if ( $post->degree_hours < 90 ) {
+							$label_class = 'label-success';
+						}
+						?>
+						<span class="credits label <?php echo $label_class; ?>"><?php echo $post->degree_hours; ?> credit hours</span>
+					<?php
+					}
+					// If this is a graduate program with a profile url set but
+					// no valid degree hours, print a 'click for hours' label
+					else if ( Degree::is_graduate_program( $post ) && !empty( $post->degree_profile_link ) ) {
+					?>
+						<a target="_blank" href="<?php echo $post->degree_profile_link; ?>" class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?php echo addslashes( $post->post_title ); ?> (<?php echo addslashes( $post->tax_program_type[0] ); ?>)">
 							<span class="credits label label-warning">Click for credit hours</span>
 						</a>
-						<?php } elseif (intval($post->degree_hours) >= 90) { ?>
-						<span class="credits label label-info"><?=intval($post->degree_hours)?> credit hours</span>
-						<?php } elseif (intval($post->degree_hours) > 1 && intval($post->degree_hours) < 90) { ?>
-						<span class="credits label label-success"><?=intval($post->degree_hours)?> credit hours</span>
-					<?php }
-					} else { ?>
+					<?php
+					}
+					// If we have no external source for hours and no valid
+					// degree hours value, print a 'n/a' label
+					else {
+					?>
 						<span class="credits label">Credit hours n/a</span>
-					<?php } ?>
+					<?php
+					}
+					?>
 				</div>
 
 			</div>

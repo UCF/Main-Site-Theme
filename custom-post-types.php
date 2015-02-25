@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Abstract class for defining custom post types.  
- * 
+ * Abstract class for defining custom post types.
+ *
  **/
 abstract class CustomPostType{
-	public 
+	public
 		$name           = 'custom_post_type',
 		$plural_name    = 'Custom Posts',
 		$singular_name  = 'Custom Post',
@@ -27,8 +27,8 @@ abstract class CustomPostType{
 		# Optional default ordering for generic shortcode if not specified by user.
 		$default_orderby = null,
 		$default_order   = null;
-	
-	
+
+
 	/**
 	 * Wrapper for get_posts function, that predefines post_type for this
 	 * custom post type.  Any options valid in get_posts can be passed as an
@@ -46,8 +46,8 @@ abstract class CustomPostType{
 		$objects = get_posts($options);
 		return $objects;
 	}
-	
-	
+
+
 	/**
 	 * Similar to get_objects, but returns array of key values mapping post
 	 * title to id if available, otherwise it defaults to id=>id.
@@ -67,8 +67,8 @@ abstract class CustomPostType{
 		}
 		return $opt;
 	}
-	
-	
+
+
 	/**
 	 * Return the instances values defined by $key.
 	 **/
@@ -76,8 +76,8 @@ abstract class CustomPostType{
 		$vars = get_object_vars($this);
 		return $vars[$key];
 	}
-	
-	
+
+
 	/**
 	 * Additional fields on a custom post type may be defined by overriding this
 	 * method on an descendant object.
@@ -85,8 +85,8 @@ abstract class CustomPostType{
 	public function fields(){
 		return array();
 	}
-	
-	
+
+
 	/**
 	 * Using instance variables defined, returns an array defining what this
 	 * custom post type supports.
@@ -111,8 +111,8 @@ abstract class CustomPostType{
 		}
 		return $supports;
 	}
-	
-	
+
+
 	/**
 	 * Creates labels array, defining names for admin panel.
 	 **/
@@ -125,8 +125,8 @@ abstract class CustomPostType{
 			'new_item'      => __($this->options('new_item')),
 		);
 	}
-	
-	
+
+
 	/**
 	 * Creates metabox array for custom post type. Override method in
 	 * descendants to add or modify metaboxes.
@@ -144,8 +144,8 @@ abstract class CustomPostType{
 		}
 		return null;
 	}
-	
-	
+
+
 	/**
 	 * Registers metaboxes defined for custom post type.
 	 **/
@@ -162,8 +162,8 @@ abstract class CustomPostType{
 			);
 		}
 	}
-	
-	
+
+
 	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
@@ -176,19 +176,19 @@ abstract class CustomPostType{
 			'taxonomies' => $this->options('taxonomies'),
 			'_builtin'   => $this->options('built_in')
 		);
-		
+
 		if ($this->options('use_order')){
 			$registration = array_merge($registration, array('hierarchical' => True,));
 		}
-		
+
 		register_post_type($this->options('name'), $registration);
-		
+
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
 		}
 	}
-	
-	
+
+
 	/**
 	 * Shortcode for this custom post type.  Can be overridden for descendants.
 	 * Defaults to just outputting a list of objects outputted as defined by
@@ -205,8 +205,8 @@ abstract class CustomPostType{
 		}
 		return sc_object_list($attr);
 	}
-	
-	
+
+
 	/**
 	 * Handles output for a list of objects, can be overridden for descendants.
 	 * If you want to override how a list of objects are outputted, override
@@ -215,10 +215,10 @@ abstract class CustomPostType{
 	 **/
 	public function objectsToHTML($objects, $css_classes){
 		if (count($objects) < 1){ return '';}
-		
+
 		$class = get_custom_post_type($objects[0]->post_type);
 		$class = new $class;
-		
+
 		ob_start();
 		?>
 		<ul class="<?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
@@ -232,8 +232,8 @@ abstract class CustomPostType{
 		$html = ob_get_clean();
 		return $html;
 	}
-	
-	
+
+
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
 	 **/
@@ -256,7 +256,7 @@ class Document extends CustomPostType{
 		$use_editor     = False,
 		$use_shortcode  = True,
 		$use_metabox    = True;
-	
+
 	public function fields(){
 		$fields   = parent::fields();
 		$fields[] = array(
@@ -273,55 +273,55 @@ class Document extends CustomPostType{
 		);
 		return $fields;
 	}
-	
-	
+
+
 	static function get_document_application($form){
 		return mimetype_to_application(self::get_mimetype($form));
 	}
-	
-	
+
+
 	static function get_mimetype($form){
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
+
 		$prefix   = post_type($form);
 		$document = get_post(get_post_meta($form->ID, $prefix.'_file', True));
-		
+
 		$is_url = get_post_meta($form->ID, $prefix.'_url', True);
-		
+
 		return ($is_url) ? "text/html" : $document->post_mime_type;
 	}
-	
-	
+
+
 	static function get_title($form){
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
+
 		$prefix = post_type($form);
-		
+
 		return $form->post_title;
 	}
-	
+
 	static function get_url($form){
 		if (is_numeric($form)){
 			$form = get_post($form);
 		}
-		
+
 		$prefix = post_type($form);
-		
+
 		$x = get_post_meta($form->ID, $prefix.'_url', True);
 		$y = wp_get_attachment_url(get_post_meta($form->ID, $prefix.'_file', True));
-		
+
 		if (!$x and !$y){
 			return '#';
 		}
-		
+
 		return ($x) ? $x : $y;
 	}
-	
-	
+
+
 	/**
 	 * Handles output for a list of objects, can be overridden for descendants.
 	 * If you want to override how a list of objects are outputted, override
@@ -330,10 +330,10 @@ class Document extends CustomPostType{
 	 **/
 	public function objectsToHTML($objects, $css_classes){
 		if (count($objects) < 1){ return '';}
-		
+
 		$class_name = get_custom_post_type($objects[0]->post_type);
 		$class      = new $class_name;
-		
+
 		ob_start();
 		?>
 		<ul class="nobullet <?php if($css_classes):?><?=$css_classes?><?php else:?><?=$class->options('name')?>-list<?php endif;?>">
@@ -347,8 +347,8 @@ class Document extends CustomPostType{
 		$html = ob_get_clean();
 		return $html;
 	}
-	
-	
+
+
 	/**
 	 * Outputs this item in HTML.  Can be overridden for descendants.
 	 **/
@@ -362,7 +362,7 @@ class Document extends CustomPostType{
 
 
 class Video extends CustomPostType{
-	public 
+	public
 		$name           = 'video',
 		$plural_name    = 'Videos',
 		$singular_name  = 'Video',
@@ -375,19 +375,19 @@ class Video extends CustomPostType{
 		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True;
-	
+
 	public function get_player_html($video){
 		return sc_video(array('video' => $video));
 	}
-	
+
 	public function metabox(){
 		$metabox = parent::metabox();
-		
+
 		$metabox['title']   = 'Video Information';
 		$metabox['helptxt'] = '<strong>Note:</strong> this post type is designed to handle YouTube videos specifically. To embed videos from other services like Vimeo or Flickr, use their provided embed code within post/widget content instead of the [video] shortcode.';
 		return $metabox;
 	}
-	
+
 	public function fields(){
 		$prefix = $this->options('name').'_';
 		return array(
@@ -404,7 +404,7 @@ class Video extends CustomPostType{
 
 
 class Publication extends CustomPostType{
-	public 
+	public
 		$name           = 'publication',
 		$plural_name    = 'Publications',
 		$singular_name  = 'Publication',
@@ -417,11 +417,11 @@ class Publication extends CustomPostType{
 		$use_order      = True,
 		$use_title      = True,
 		$use_metabox    = True;
-	
+
 	public function toHTML($pub){
 		return sc_publication(array('pub' => $pub));
 	}
-	
+
 	public function fields(){
 		$prefix = $this->options('name').'_';
 		return array(
@@ -459,14 +459,14 @@ class Page extends CustomPostType {
 			'post_status'	=> 'publish'
 		);
 		$subheaders = get_posts($args);
-		
+
 		$subheader_array = array();
 		foreach ($subheaders as $subheader) {
 			$subheader_array[$subheader->post_title] = $subheader->ID;
 		}
 		return $subheader_array;
 	}
-	
+
 	public static function get_menus() {
 		$menus = get_terms( 'nav_menu', array( 'hide_empty' => false ) );
 		$menu_array = array();
@@ -608,7 +608,7 @@ class Page extends CustomPostType {
 				),
 		);
 	}
-	
+
 	public function metabox(){
 		$metabox = parent::metabox();
 		$metabox['helptxt'] = 'Note: Widgets designated above will only appear depending on the page template that is set. Setting a two-column layout will not show any right-hand sidebar options set above; setting a one-column layout will display no widgets.';
@@ -626,17 +626,17 @@ class Person extends CustomPostType
 	/*
 	The following query will pre-populate the person_orderby_name
 	meta field with a guess of the last name extracted from the post title.
-	
+
 	>>>BE SURE TO REPLACE wp_<number>_... WITH THE APPROPRIATE SITE ID<<<
-	
-	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value) 
-	(	SELECT	id AS post_id, 
-						'person_orderby_name' AS meta_key, 
+
+	INSERT INTO wp_29_postmeta(post_id, meta_key, meta_value)
+	(	SELECT	id AS post_id,
+						'person_orderby_name' AS meta_key,
 						REVERSE(SUBSTR(REVERSE(post_title), 1, LOCATE(' ', REVERSE(post_title)))) AS meta_value
 		FROM		wp_29_posts AS posts
 		WHERE		post_type = 'person' AND
-						(	SELECT meta_id 
-							FROM wp_29_postmeta 
+						(	SELECT meta_id
+							FROM wp_29_postmeta
 							WHERE post_id = posts.id AND
 										meta_key = 'person_orderby_name') IS NULL)
 	*/
@@ -731,8 +731,8 @@ class Person extends CustomPostType
 					</thead>
 					<tbody>
 				<?
-				foreach($people as $person) { 
-					$email = get_post_meta($person->ID, 'person_email', True); 
+				foreach($people as $person) {
+					$email = get_post_meta($person->ID, 'person_email', True);
 					$link = ($person->post_content == '') ? False : True; ?>
 						<tr>
 							<td class="name">
@@ -744,7 +744,7 @@ class Person extends CustomPostType
 								<?if($link) {?><a href="<?=get_permalink($person->ID)?>"><?}?>
 								<?=get_post_meta($person->ID, 'person_jobtitle', True)?>
 								<?if($link) {?></a><?}?>
-							</td> 
+							</td>
 							<td class="phones"><?php if(($link) && ($this->get_phones($person))) {?><a href="<?=get_permalink($person->ID)?>">
 								<?php } if($this->get_phones($person)) {?>
 									<ul class="unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
@@ -753,12 +753,12 @@ class Person extends CustomPostType
 						</tr>
 				<? } ?>
 				</tbody>
-			</table> 
+			</table>
 		</div>
 	</div><?
 	return ob_get_clean();
 	}
-} // END class 
+} // END class
 
 
 
@@ -767,7 +767,7 @@ class Person extends CustomPostType
  *
  * @author Jo Greybill
  **/
- 
+
 class Spotlight extends CustomPostType {
 	public
 		$name           = 'spotlight',
@@ -795,21 +795,21 @@ class Spotlight extends CustomPostType {
 			),
 		);
 	}
-	
+
 	public function objectsToHTML($objects, $css_classes) {
 		ob_start();?>
 		<ul class="spotlight-list">
-			<?php 
+			<?php
 			rsort($objects);
 			foreach ($objects as $spotlight) { ?>
 				<li><a href="<?=get_permalink($spotlight->ID)?>"><?=$spotlight->post_title?></a></li>
-			<?php	
+			<?php
 			}
 			?>
 		</ul>
 	<?php
 	}
-		
+
 }
 
 class Post extends CustomPostType {
@@ -835,7 +835,7 @@ class Post extends CustomPostType {
  *
  * @author Jo Greybill
  **/
- 
+
 class Subheader extends CustomPostType {
 	public
 		$name           = 'subheader',
@@ -884,7 +884,7 @@ class Subheader extends CustomPostType {
  *
  * @author Jo Greybill
  **/
- 
+
 class AZIndexLink extends CustomPostType {
 	public
 		$name           = 'azindexlink',
@@ -916,12 +916,12 @@ class AZIndexLink extends CustomPostType {
 			),
 		);
 	}
-	
+
 	public function toHTML($object){
 		$html = '<a href="'.get_post_meta($object->ID, 'azindexlink_url', TRUE).'">'.$object->post_title.'</a>';
 		return $html;
 	}
-	
+
 }
 
 
@@ -931,7 +931,7 @@ class AZIndexLink extends CustomPostType {
  * @author Jo Greybill
  **/
 class Announcement extends CustomPostType{
-	public 
+	public
 		$name           = 'announcement',
 		$plural_name    = 'Announcements',
 		$singular_name  = 'Announcement',
@@ -945,7 +945,7 @@ class Announcement extends CustomPostType{
 		$use_title      = True,
 		$use_metabox    = True,
 		$taxonomies		= array('audienceroles', 'keywords');
-	
+
 	public function fields(){
 		$prefix = $this->options('name').'_';
 		return array(
@@ -1001,7 +1001,7 @@ class Announcement extends CustomPostType{
  **/
 
 class Slider extends CustomPostType {
-	public 
+	public
 		$name           = 'centerpiece',
 		$plural_name    = 'Centerpieces',
 		$singular_name  = 'Centerpiece',
@@ -1016,17 +1016,17 @@ class Slider extends CustomPostType {
 		$use_metabox    = True,
 		$use_revisions	= False,
 		$taxonomies     = array('');
-	
+
 	public function fields(){
 	//
 	}
-	
+
 	public function metabox(){
-		if ($this->options('use_metabox')){	
+		if ($this->options('use_metabox')){
 			$prefix = 'ss_';
-					
-			$all_slides = 
-				// Container for individual slides:	
+
+			$all_slides =
+				// Container for individual slides:
 				array(
 					'id'       => 'slider-slides',
 					'title'    => 'All Slides',
@@ -1034,7 +1034,7 @@ class Slider extends CustomPostType {
 					'context'  => 'normal',
 					'priority' => 'default',
 				);
-			$single_slide_count = 	
+			$single_slide_count =
 				// Single Slide Count (and order):
 				array(
 					'id'       => 'slider-slides-settings-count',
@@ -1058,7 +1058,7 @@ class Slider extends CustomPostType {
 						)
 					), // fields
 				);
-			$basic_slide_options = 
+			$basic_slide_options =
 				// Basic Slider Display Options:
 				array(
 					'id' => 'slider-slides-settings-basic',
@@ -1078,21 +1078,21 @@ class Slider extends CustomPostType {
 				);
 			$all_metaboxes = array(
 				'slider-all-slides' => $all_slides,
-				'slider-slides-settings-count' => $single_slide_count, 
+				'slider-slides-settings-count' => $single_slide_count,
 				'slider-slides-settings-basic' => $basic_slide_options
 			);
 			return $all_metaboxes;
 		}
 		return null;
-	}	
-	
+	}
+
 	/** Function used for defining single slide meta values; primarily
 	  * for use in saving meta data (_save_meta_data(), functions/base.php).
 	  * The 'type' val is just for determining which fields are file fields;
 	  * 'default' is an arbitrary name for 'anything else' which gets saved
 	  * via the save_default() function in functions/base.php. File fields
 	  * need a type of 'file' to be saved properly.
-	  **/ 
+	  **/
 	public static function get_single_slide_meta() {
 		$single_slide_meta = array(
 				array(
@@ -1143,13 +1143,13 @@ class Slider extends CustomPostType {
 			);
 		return $single_slide_meta;
 	}
-	
-	
+
+
 	/**
 	  * Show meta box fields for Slider post type (generic field loop-through)
 	  * Copied from _show_meta_boxes (functions/base.php)
 	 **/
-	public static function display_meta_fields($post, $field) { 
+	public static function display_meta_fields($post, $field) {
 	$current_value = get_post_meta($post->ID, $field['id'], true);
 	?>
 		<tr>
@@ -1160,14 +1160,14 @@ class Slider extends CustomPostType {
 						<?=$field['desc']?>
 					</div>
 				<?php endif;?>
-					
-				<?php switch ($field['type']): 
+
+				<?php switch ($field['type']):
 					case 'text':?>
 					<input type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : $field['std']?>" />
-				
+
 				<?php break; case 'textarea':?>
 					<textarea name="<?=$field['id']?>" id="<?=$field['id']?>" cols="60" rows="4"><?=($current_value) ? htmlentities($current_value) : $field['std']?></textarea>
-				
+
 				<?php break; case 'select':?>
 					<select name="<?=$field['id']?>" id="<?=$field['id']?>">
 						<option value=""><?=($field['default']) ? $field['default'] : '--'?></option>
@@ -1175,16 +1175,16 @@ class Slider extends CustomPostType {
 						<option <?=($current_value == $v) ? ' selected="selected"' : ''?> value="<?=$v?>"><?=$k?></option>
 					<?php endforeach;?>
 					</select>
-					
+
 				<?php break; case 'radio':?>
 					<?php foreach ($field['options'] as $k=>$v):?>
 					<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
 					<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
 					<?php endforeach;?>
-					
+
 				<?php break; case 'checkbox':?>
 					<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
-					
+
 				<?php break; case 'file':?>
 					<?php
 						$document_id = get_post_meta($post->ID, $field['id'], True);
@@ -1199,22 +1199,22 @@ class Slider extends CustomPostType {
 					<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
 					<?php endif;?>
 					<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
-				
+
 				<?php break; case 'help':?><!-- Do nothing for help -->
 				<?php break; default:?>
 					<p class="error">Don't know how to handle field of type '<?=$field['type']?>'</p>
 				<?php break; endswitch;?>
 				<td>
 			</tr>
-	<?php			
+	<?php
 	}
-	
-	
+
+
 	/**
 	 * Show fields for single slides:
 	**/
-	public static function display_slide_meta_fields($post) { 
-		
+	public static function display_slide_meta_fields($post) {
+
 		// Get any already-existing values for these fields:
 		$slide_title		 		= get_post_meta($post->ID, 'ss_slide_title', TRUE);
 		$slide_content_type 		= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
@@ -1226,27 +1226,27 @@ class Slider extends CustomPostType {
 		$slide_link_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
 		$slide_duration				= get_post_meta($post->ID, 'ss_slide_duration', TRUE);
 		$slide_order				= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
-		
+
 		?>
 		<div id="ss_slides_wrapper">
 			<ul id="ss_slides_all">
 				<?php
-					
+
 					// Loop through slides_array for existing slides. Else, display
 					// a single empty slide 'widget'.
 					if ($slide_order) {
 						$slide_array = explode(",", $slide_order);
-						
+
 						foreach ($slide_array as $s) {
-							if ($s !== '') {		
+							if ($s !== '') {
 					?>
 							<li class="custom_repeatable postbox">
-							
+
 								<div class="handlediv" title="Click to toggle"> </div>
 									<h3 class="hndle">
 									<span>Slide</span>
 								</h3>
-							
+
 								<table class="form-table">
 								<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 									<tr>
@@ -1278,7 +1278,7 @@ class Slider extends CustomPostType {
 											?>
 											<?php if($image):?>
 											<a href="<?=$url?>" target="_blank"><img class="slide_image" src="<?=$url?>" style="width: 400px;" /><br/><?=$image->post_title?></a><br /><br />
-											<?php endif;?>									
+											<?php endif;?>
 											<input type="file" id="file_img_<?=$post->ID?>" name="ss_slide_image[<?=$s?>]"><br />
 										</td>
 									</tr>
@@ -1303,7 +1303,7 @@ class Slider extends CustomPostType {
 											?>
 											<?php if($image):?>
 											<a href="<?=$url?>" target="_blank"><img class="slide_video_thumb" src="<?=$url?>" style="width: 400px;" /><br/><?=$image->post_title?></a><br /><br />
-											<?php endif;?>									
+											<?php endif;?>
 											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$s?>]"><br />
 										</td>
 									</tr>
@@ -1334,20 +1334,20 @@ class Slider extends CustomPostType {
 											<input type="text" name="ss_slide_duration[<?=$s?>]" id="ss_slide_duration[<?=$s?>]" value="<?php ($slide_duration[$s] !== '') ? print $slide_duration[$s] : ''; ?>" />
 										</td>
 									</tr>
-									
+
 								</table>
 								<a class="repeatable-remove button" href="#">Remove Slide</a>
-							</li>	
-						
-					<?php	
+							</li>
+
+					<?php
 							}
 						}
-					
+
 					} else {
 						$i = 0;
 						?>
 						<li class="custom_repeatable postbox">
-						
+
 							<div class="handlediv" title="Click to toggle"> </div>
 								<h3 class="hndle">
 								<span>Slide</span>
@@ -1417,28 +1417,28 @@ class Slider extends CustomPostType {
 										<input type="text" name="ss_slide_duration[<?=$i?>]" id="ss_slide_duration[<?=$i?>]" value="" />
 									</td>
 								</tr>
-								
-								
+
+
 							</table>
 							<a class="repeatable-remove button" href="#">Remove Slide</a>
 						</li>
 						<?php
-						
+
 					}
 				?>
 						<a class="repeatable-add button-primary" href="#">Add New Slide</a><br/>
 			</ul>
-			
+
 		</div>
 		<?php
 	}
- 
+
  	// Individual slide container:
 	public function show_meta_box_slide_all($post) {
 		$this->display_slide_meta_fields($post);
 	}
-	
-	// Slide Count: 
+
+	// Slide Count:
 	public function show_meta_box_slide_count($post) {
 		if ($this->options('use_metabox')) {
 			$meta_box = $this->metabox();
@@ -1454,7 +1454,7 @@ class Slider extends CustomPostType {
 			endforeach;
 		print "</table>";
 	}
-	
+
 	// Basic Slider Display Options:
 	public function show_meta_box_slide_basic($post) {
 		if ($this->options('use_metabox')) {
@@ -1468,17 +1468,17 @@ class Slider extends CustomPostType {
 				$this->display_meta_fields($post, $field);
 			endforeach;
 		print "</table>";
-	}	
-	
-	
+	}
+
+
 	public function register_metaboxes(){
 		if ($this->options('use_metabox')){
 			$metabox = $this->metabox();
 			foreach ($metabox as $key => $single_metabox) {
-				switch ($key) {						
+				switch ($key) {
 					case 'slider-all-slides':
 						$metabox_view_function = 'show_meta_box_slide_all';
-						break;	
+						break;
 					case 'slider-slides-settings-count':
 						$metabox_view_function = 'show_meta_box_slide_count';
 						break;
@@ -1496,7 +1496,7 @@ class Slider extends CustomPostType {
 					$single_metabox['context'],
 					$single_metabox['priority']
 				);
-			}			
+			}
 		}
 	}
 }
@@ -1508,7 +1508,7 @@ class Slider extends CustomPostType {
  * @author Jo Dickson
  **/
 class Degree extends CustomPostType{
-	public 
+	public
 		$name           = 'degree',
 		$plural_name    = 'Degree Programs',
 		$singular_name  = 'Degree Program',
@@ -1523,7 +1523,7 @@ class Degree extends CustomPostType{
 		$use_metabox    = True,
 		$use_shortcode  = True,
 		$taxonomies		= array('program_types', 'colleges', 'departments');
-	
+
 	public function fields(){
 		$prefix = $this->options('name').'_';
 		return array(
@@ -1534,7 +1534,7 @@ class Degree extends CustomPostType{
 			),
 			array(
 				'name'  => 'Description',
-				'desc' => 'Description provided for the degree.  This value should not be modified as it can be overridden upon degree import from the 
+				'desc' => 'Description provided for the degree.  This value should not be modified as it can be overridden upon degree import from the
 							search service.  Modify the post content instead to add additional degree information.',
 				'id'   => $prefix.'description',
 				'type' => 'textarea',
@@ -1589,15 +1589,19 @@ class Degree extends CustomPostType{
 		return false;
 	}
 
-	public static function get_degree_profile_link($degree) {
+	public static function get_degree_profile_link( $degree ) {
 		// Get permalink to landing page for a single degree program.
-		// Graduate programs should link to the degree_website meta value.
+		// Graduate programs should link out to the Graduate Catalog's profile.
+
+		$profile_url = get_post_meta( $degree->ID, 'degree_profile_url', TRUE );
+		$permalink = get_permalink( $degree->ID );
 		$single_url = null;
-		if (get_permalink($degree->ID) && !Degree::is_graduate_program($degree)) {
-			$single_url = get_permalink($degree->ID);
+
+		if ( $permalink && !Degree::is_graduate_program( $degree ) ) {
+			$single_url = $permalink;
 		}
-		else {
-			$single_url = get_post_meta($degree->ID, 'degree_website', TRUE);
+		else if ( Degree::is_graduate_program( $degree ) && !empty( $profile_url ) ) {
+			$single_url = $profile_url;
 		}
 		return $single_url;
 	}
@@ -1617,13 +1621,13 @@ class Degree extends CustomPostType{
 				'slug' => 'academics'
 			),
 		);
-		
+
 		if ($this->options('use_order')){
 			$registration = array_merge($registration, array('hierarchical' => True,));
 		}
-		
+
 		register_post_type($this->options('name'), $registration);
-		
+
 		if ($this->options('use_shortcode')){
 			add_shortcode($this->options('name').'-list', array($this, 'shortcode'));
 		}
