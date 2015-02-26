@@ -1791,7 +1791,7 @@ function display_degree_list($posts) {
 			<div class="row">
 				<div class="span7">
 					<?php if (!empty($post->degree_profile_link)) { ?>
-					<a href="<?=$post->degree_profile_link?>" <?php if (Degree::is_graduate_program($post)) { ?> class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
+					<a href="<?=$post->degree_profile_link?>" <?php if ( Degree::is_graduate_program( $post ) && $post->degree_profile_link !== get_permalink( $post->ID ) ) { ?> class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
 					<?php } ?>
 						<h4 class="name"><?=$post->post_title?></h4>
 					<?php if ($post->degree_profile_link) { ?>
@@ -1830,7 +1830,11 @@ function display_degree_list($posts) {
 					}
 					// If this is a graduate program with a profile url set but
 					// no valid degree hours, print a 'click for hours' label
-					else if ( Degree::is_graduate_program( $post ) && !empty( $post->degree_profile_link ) ) {
+					else if (
+						Degree::is_graduate_program( $post )
+						&& !empty( $post->degree_profile_link )
+						&& $post->degree_profile_link !== get_permalink( $post->ID )
+					) {
 					?>
 						<a target="_blank" href="<?php echo $post->degree_profile_link; ?>" class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?php echo addslashes( $post->post_title ); ?> (<?php echo addslashes( $post->tax_program_type[0] ); ?>)">
 							<span class="credits label label-warning">Click for credit hours</span>
