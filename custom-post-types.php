@@ -1550,6 +1550,11 @@ class Degree extends CustomPostType{
 				'type' => 'text',
 			),
 			array(
+				'name'  => 'Profile URL',
+				'id'   => $prefix.'profile_url',
+				'type' => 'text',
+			),
+			array(
 				'name'  => 'Phone Number',
 				'id'   => $prefix.'phone',
 				'type' => 'text',
@@ -1591,18 +1596,16 @@ class Degree extends CustomPostType{
 
 	public static function get_degree_profile_link( $degree ) {
 		// Get permalink to landing page for a single degree program.
-		// Graduate programs should link out to the Graduate Catalog's profile.
-
+		// Programs with a set profile_url (graduate programs) should use
+		// that url instead of the post's permalink.
 		$profile_url = get_post_meta( $degree->ID, 'degree_profile_url', TRUE );
 		$permalink = get_permalink( $degree->ID );
-		$single_url = null;
 
-		if ( $permalink && !Degree::is_graduate_program( $degree ) ) {
-			$single_url = $permalink;
-		}
-		else if ( Degree::is_graduate_program( $degree ) && !empty( $profile_url ) ) {
+		$single_url = $permalink;
+		if ( !empty( $profile_url ) ) {
 			$single_url = $profile_url;
 		}
+
 		return $single_url;
 	}
 
