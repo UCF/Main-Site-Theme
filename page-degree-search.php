@@ -1,4 +1,27 @@
-<?php get_header(); the_post();?>
+<?php 
+if (isset($_GET["json"])) :
+
+	$degree = get_degree_search_data();
+
+	$to_json = array();
+
+	foreach ($degree['posts'] as $degreeType) {
+		foreach($degreeType as $degree) {
+			$to_json[] = array(
+				'degree_name' => $degree->post_title,
+				'degree_permalink' => $degree->guid
+			);
+		}
+	}
+
+	header('Content-Type:application/json');
+
+	echo json_encode($to_json);
+
+else :
+
+
+get_header(); the_post();?>
 	<?php $degrees = get_degree_search_data(); ?>
 	<div class="row page-content" id="academics-search">
 		<div class="span12" id="page_title">
@@ -24,4 +47,4 @@
 			</article>
 		</div>
 	</div>
-<?php get_footer(); ?>
+<?php get_footer(); endif; ?>
