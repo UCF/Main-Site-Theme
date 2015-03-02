@@ -1,12 +1,12 @@
 <?php 
-if (isset($_GET["json"])) :
+if (isset($_GET['json'])) :
 
-	$degree = get_degree_search_data();
+	$degrees = get_degree_search_data();
 
 	$to_json = array();
 
-	foreach ($degree['posts'] as $degreeType) {
-		foreach($degreeType as $degree) {
+	foreach ($degrees['posts'] as $degree_type) {
+		foreach($degree_type as $degree) {
 			$to_json[] = array(
 				'degree_name' => $degree->post_title,
 				'degree_permalink' => $degree->guid
