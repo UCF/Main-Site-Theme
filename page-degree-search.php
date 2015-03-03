@@ -5,9 +5,18 @@ if (isset($_GET['json'])) :
 
 	$to_json = array();
 
-	foreach ($degrees['posts'] as $degree_type) {
-		foreach($degree_type as $degree) {
-			$to_json[] = array(
+	foreach ($degrees['posts'] as $program_type_id=>$program_type) {
+
+		$program_type_data = get_term($program_type_id, "program_types");
+
+		$to_json[$program_type_data->slug] = array(
+			'program_type_id' => $program_type_data->term_id,
+			'program_type_name' => $program_type_data->name,
+			'program_type_slug' => $program_type_data->slug
+		);
+
+		foreach($program_type as $degree) {
+			$to_json[$program_type_data->slug]['posts'][] = array(
 				'degree_name' => $degree->post_title,
 				'degree_permalink' => $degree->guid
 			);
