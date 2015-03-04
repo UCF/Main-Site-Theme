@@ -146,7 +146,7 @@ if ( $results ) {
 						<span>compare</span>
 					</label>
 				</span>
-				<a class="degree-search-result-link" href="/academics/accounting-5/">
+				<a class="degree-search-result-link" href="<?php echo get_permalink( $result['academicPlanId'] );?>">
 					<h3 class="degree-title">
 						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 					</h3>

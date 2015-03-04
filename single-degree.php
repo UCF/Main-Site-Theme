@@ -162,6 +162,7 @@
 		display: block;
 		float: right;
 		font-weight: 500;
+		white-space: nowrap;
 	}
 	@media (max-width: 767px) {
 		#contentcol .degree-courses .degree-courses-credits {
@@ -213,47 +214,42 @@
 
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
-			<h1 class="span9">Accounting Ph.D.</h1>
+			<h1 class="span9"><?php the_title(); ?></h1>
 			<?php esi_include('output_weather_data','span3'); ?>
 		</div>
 
 		<div id="breadcrumbs" class="span12 clearfix">
 			<!-- Display .breadcrumb-search only if the user came from the degree search (check for GET param) -->
-			<a class="breadcrumb-search" href="#">&laquo; Back to Search Results</a>
+			<a class="breadcrumb-search" href="javascript:window.history.back();">&laquo; Back to Search Results</a>
 
 			<!-- Always display hierarchy-based breadcrumbs-it also helps designate tracks/subplans -->
 			<ul class="breadcrumb-hierarchy breadcrumb">
 				<li>
-					<a href="#">Graduate Programs</a> <span class="divider">></span>
+					<a href="#"><?=$post->tax_program_type[0]?> Programs</a> <span class="divider">&gt;</span>
 				</li>
 				<li>
-					<a href="#">Business Administration Ph.D.</a> <span class="divider">></span>
+					<a href="#"><?=$post->tax_college[0]?></a> <span class="divider">&gt;</span>
 				</li>
 				<li class="active">
-					Accounting Ph.D. track
+					<?php the_title(); ?>
 				</li>
 			</ul>
 		</div>
 
 		<div id="contentcol" class="span8 degree">
 			<article role="main">
-
 				<!-- Degree description -->
-
-				<p class="degree-desc">
-					The objective of the Accounting track in the Business Administration PhD program is to prepare students
-					for academic careers in higher education and management careers within profit and nonprofit
-					organizations. Success in the program is judged by the student’s understanding of the issues and
-					methodologies essential to the advancement of knowledge.
-				</p>
-
+				<?php if ($post->degree_description) { ?>
+					<?php echo apply_filters('the_content', $post->degree_description)?>
+				<?php } else { ?>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus quod ad suscipit, necessitatibus deleniti temporibus similique exercitationem itaque officia molestias quos adipisci doloribus, aliquam qui! Repudiandae aliquam sequi accusantium culpa.</p>
+				<?php } ?>
 				<!-- Degree meta details -->
-
 				<div class="row degree-details">
 					<div class="span3">
 						<dl>
 							<dt>Degree:</dt>
-							<dd>Ph.D.<br></dd>
+							<dd><?=$post->tax_program_type[0]?><br></dd>
 							<dt>Option:</dt>
 							<dd>Dissertation<br></dd>
 							<dt>Online Program:</dt>
@@ -265,11 +261,11 @@
 							<dt>College:</dt>
 							<dd>
 								<!-- TODO: better way of forcing linebreak after inline <dd>'s that is IE friendly? -->
-								<a href="#">Business Administration</a><br>
+								<a href="#"><?=$post->tax_college[0]?></a><br>
 							</dd>
 							<dt>Department:</dt>
 							<dd>
-								<a href="#">Kenneth G. Dixon School of Accounting</a>
+								<a href="#"><?=$post->tax_department[0]?></a>
 							</dd>
 						</dl>
 					</div>
@@ -318,7 +314,19 @@
 				</div>
 
 				<div class="degree-courses">
-					<h2 class="clearfix">Degree Requirements <small class="degree-courses-credits">84 Credit Hours total</small></h2>
+					<h2 class="clearfix">Degree Requirements <small class="degree-courses-credits"><?php
+						if ($post->degree_hours && intval($post->degree_hours) > 0) {
+							if ($post->degree_hours >= 100) {
+						?>
+							<?=$post->degree_hours?> total credit hours
+							<?php } elseif ($post->degree_hours > 1 && $post->degree_hours < 100) { ?>
+							<?=$post->degree_hours?> total credit hours
+						<?php
+							}
+						}
+						?></small>
+
+					</h2>
 					<p>
 						The Accounting Ph.D. requires <strong>84</strong> Credit Hours Minimum beyond the Bachelor's Degree.
 					</p>
@@ -428,8 +436,8 @@
 			<!-- Sidebar content -->
 
 			<div class="hidden-phone">
-				<a class="btn btn-large btn-block btn-success">View Catalog</a>
-				<a class="btn btn-large btn-block">Visit Program Website</a>
+				<a href="<?=$post->degree_pdf?>" target="_blank" class="btn btn-large btn-block btn-success">View Catalog</a>
+				<a href="<?=$post->degree_website?>" class="btn btn-large btn-block">Visit Program Website</a>
 			</div>
 
 			<h2>Contact</h2>
@@ -439,21 +447,27 @@
 				<dt>Email:</dt>
 				<dd>
 					<span class="contact-email">
-						<a href="mailto:steve.sutton@ucf.edu">steve.sutton@ucf.edu</a>
+						<?php if ($post->degree_email !== 'n/a') { ?><a href="mailto:<?=$post->degree_email?>"><?php } ?>
+							<?=$post->degree_email?>
+						<?php if ($post->degree_email !== 'n/a') { ?></a><?php } ?>
 					</span>
 					<br>
 				</dd>
 				<dt>Phone:</dt>
 				<dd>
 					<span class="contact-phone">
-						<a href="#">407-823-5857</a>
+						<?php if ($post->degree_phone !== 'n/a') { ?><a href="tel:<?=$post->degree_phone?>"><?php } ?>
+							<?=$post->degree_phone?>
+						<?php if ($post->degree_phone !== 'n/a') { ?></a><?php } ?>
 					</span>
 					<br>
 				</dd>
 				<dt>Office:</dt>
 				<dd>
 					<span class="contact-office">
-						<a target="_blank" href="http://map.ucf.edu">Business Administration 436</a>
+						<?php if ($post->degree_website !== 'n/a') { ?><a target="_blank" href="<?=$post->degree_website?>"><?php } ?>
+							<?=$post->tax_college[0]?>
+						<?php if ($post->degree_website !== 'n/a') { ?></a><?php } ?>
 					</span>
 				</dd>
 			</dl>
@@ -472,7 +486,7 @@
 				</li>
 			</ul>
 
-			<h2>More Business Administration PhD Tracks</h2>
+			<h2>More <?=$post->tax_college[0]?> Tracks</h2>
 			<ul>
 				<li>
 					<a href="#">Finance</a>
