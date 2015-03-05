@@ -2051,7 +2051,7 @@ function get_hiearchical_degree_search_data_json() {
 	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'title';
 	$order			     = ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC') ? $_GET['order'] : 'ASC';
 	$flip_order		     = ($order == 'ASC') ? 'DESC' : 'ASC'; // opposite of $order
-	$get_child_programs  = $_GET['get_child_programs'] ? (boolean)$_GET['get_child_programs'] : false;
+	$get_child_programs  = $_GET['get_child_programs'] ? (boolean)$_GET['get_child_programs'] : true;
 
 	/*
 	 * Get Taxonomy term(s) based on get_child_programs
@@ -2087,8 +2087,14 @@ function get_hiearchical_degree_search_data_json() {
 	foreach($posts as $post) {
 		$to_json[$degree_type]['posts'][] = array(
 			'degree_name' => $post->post_title,
-			'degree_short_description' => $post->post_excerpt,
-			'degree_description' => $post->post_content,
+			'degree_description' => get_post_meta($post->ID, 'degree_description', true),
+			'degree_content' => $post->post_content,
+			'degree_required_hours' => get_post_meta($post->ID, 'degree_required_hours', true),
+			'degree_website' => get_post_meta($post->ID, 'degree_website', true),
+			'degree_pdf' => get_post_meta($post->ID, 'degree_pdf', true),
+			'degree_phone' => get_post_meta($post->ID, 'degree_phone', true),
+			'degree_email' => get_post_meta($post->ID, 'degree_email', true),
+			'degree_content' => $post->post_content,
 			'degree_permalink' => $post->guid
 		); 
 	}
@@ -2123,8 +2129,14 @@ function get_hiearchical_degree_search_data_json() {
 			foreach($child_posts as $post) {
 				$to_json[$degree_type]['children'][$child_obj->slug]['posts'][] = array(
 					'degree_name' => $post->post_title,
-					'degree_short_description' => $post->post_excerpt,
-					'degree_description' => $post->post_content,
+					'degree_description' => get_post_meta($post->ID, 'degree_description', true),
+					'degree_content' => $post->post_content,
+					'degree_required_hours' => get_post_meta($post->ID, 'degree_required_hours', true),
+					'degree_website' => get_post_meta($post->ID, 'degree_website', true),
+					'degree_pdf' => get_post_meta($post->ID, 'degree_pdf', true),
+					'degree_phone' => get_post_meta($post->ID, 'degree_phone', true),
+					'degree_email' => get_post_meta($post->ID, 'degree_email', true),
+					'degree_content' => $post->post_content,
 					'degree_permalink' => $post->guid
 				);
 			}
