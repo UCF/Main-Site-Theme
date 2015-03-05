@@ -2080,7 +2080,7 @@ function get_hiearchical_degree_search_data_json() {
 
 	$to_json[$degree_type] = array(
 		'program_type_id' => $degree->term_id,
-		'program_type_name' => $degree->term_name,
+		'program_type_name' => $degree->name,
 		'program_type_slug' => $degree->slug
 	);
 
@@ -2122,7 +2122,7 @@ function get_hiearchical_degree_search_data_json() {
 
 			$to_json[$degree_type]['children'][$child_obj->slug] = array(
 				'program_type_id' => $child_obj->term_id,
-				'program_type_name' => $child_obj->term_name,
+				'program_type_name' => $child_obj->name,
 				'program_type_slug' => $child_obj->slug
 			);
 
