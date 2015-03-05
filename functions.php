@@ -2036,4 +2036,103 @@ function header_meta_degree_search($str) {
 }
 add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
+function get_hiearchical_degree_search_data_json() {
+	// Define which of our Program types are valid.  (These are highest-level parent terms
+	// of the Program Type taxonomy.)
+	$all_program_type_parents = array('undergraduate-program', 'graduate-program');
+
+	// Define which of our Degree types are valid.  (These are the 2nd level terms of
+	// the Program Type taxonomy.)
+	$all_degree_types = array('undergraduate-degree', 'minor', 'graduate-degree', 'certificate');
+
+	// Determine some variables based on query args.  Set defaults if no values are set.
+	$program_type	     = in_array($_GET['program_type'], $all_program_type_parents) ? $_GET['program_type'] : 'undergraduate-program';
+	$degree_type	     = in_array($_GET['degree_type'], $all_degree_types) ? $_GET['degree_type'] : 'undergraduate-degree';
+	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'title';
+	$order			     = ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC') ? $_GET['order'] : 'ASC';
+	$flip_order		     = ($order == 'ASC') ? 'DESC' : 'ASC'; // opposite of $order
+	$get_child_programs  = $_GET['get_child_programs'] ? (boolean)$_GET['get_child_programs'] : false;
+
+	/*
+	 * Get Taxonomy term(s) based on get_child_programs
+	*/
+
+	$to_json = array();
+
+	$default_args = array(
+		'post_type' => 'degree',
+		'post_status' => 'publish',
+		'numberposts' => -1,
+		'orderby' => $orderby,
+		'order' => $order,
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'program_types',
+				'field' => 'slug',
+				'terms' => $degree_type,
+				'include_children' => false // Make sure we get Undergraduate Degree children (Articulated/Accelerated)
+			),
+		),
+	);
+
+	$degree = get_term_by('slug', $degree_type, 'program_types');
+	$posts = get_posts($default_args);
+
+	$to_json[$degree_type] = array(
+		'program_type_id' => $degree->term_id,
+		'program_type_name' => $degree->term_name,
+		'program_type_slug' => $degree->slug
+	);
+
+	foreach($posts as $post) {
+		$to_json[$degree_type]['posts'][] = array(
+			'degree_name' => $post->post_title,
+			'degree_short_description' => $post->post_excerpt,
+			'degree_description' => $post->post_content,
+			'degree_permalink' => $post->guid
+		); 
+	}
+
+	if ($get_child_programs) {
+		$children = get_term_children($degree->term_id, 'program_types');
+
+		foreach($children as $child) {
+			$args = array(
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'program_types',
+						'field' => 'id',
+						'terms' => $child,
+						'include_children' => false
+					)
+				)
+			);
+
+			$args = array_merge($default_args, $args);
+
+			$child_posts = get_posts($args);
+
+			$child_obj = get_term($child, 'program_types');
+
+			$to_json[$degree_type]['children'][$child_obj->slug] = array(
+				'program_type_id' => $child_obj->term_id,
+				'program_type_name' => $child_obj->term_name,
+				'program_type_slug' => $child_obj->slug
+			);
+
+			foreach($child_posts as $post) {
+				$to_json[$degree_type]['children'][$child_obj->slug]['posts'][] = array(
+					'degree_name' => $post->post_title,
+					'degree_short_description' => $post->post_excerpt,
+					'degree_description' => $post->post_content,
+					'degree_permalink' => $post->guid
+				);
+			}
+		}
+	}
+
+	return $to_json;
+
+}
+
 ?>
