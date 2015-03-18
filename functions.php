@@ -2095,8 +2095,8 @@ function get_hiearchical_degree_search_data_json() {
 			'degree_phone' => get_post_meta($post->ID, 'degree_phone', true),
 			'degree_email' => get_post_meta($post->ID, 'degree_email', true),
 			'degree_content' => $post->post_content,
-			'degree_permalink' => $post->guid
-		); 
+			'degree_permalink' => get_permalink($post->ID)
+		);
 	}
 
 	if ($get_child_programs) {
@@ -2137,7 +2137,7 @@ function get_hiearchical_degree_search_data_json() {
 					'degree_phone' => get_post_meta($post->ID, 'degree_phone', true),
 					'degree_email' => get_post_meta($post->ID, 'degree_email', true),
 					'degree_content' => $post->post_content,
-					'degree_permalink' => $post->guid
+					'degree_permalink' => get_permalink($post->ID)
 				);
 			}
 		}
