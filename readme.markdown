@@ -1,4 +1,4 @@
-# UCF.edu Theme
+# UCF.edu Theme - [The Main Website for the University of Central Florida in Orlando, FL](http://www.ucf.edu)
 
 Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPress site.
 
