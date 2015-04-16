@@ -9,13 +9,10 @@ function get_first_result( $array_result ) {
 }
 
 function fetch_degree_data() {
-	// For demo purposes, we're just using existing WP post data.
-	// A final product would be querying a search service directly.
 	$args = array(
 		'numberposts' => -1,
 		'post_type' => 'degree',
-		'meta_key' => $_GET['sort-by'],
-		'orderby' => 'meta_value title',
+		'orderby' => 'title', // default sort by title
 		'order' => 'ASC',
 		'tax_query' => array(),
 		's' => ''
@@ -25,9 +22,9 @@ function fetch_degree_data() {
 		$args['s'] = $_GET['search-query'];
 	}
 
-	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'title' ) {
-		$args['meta_key'] = '';
-		$args['orderby'] = 'title';
+	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'degree_hours' ) {
+		$args['meta_key'] = 'degree_hours';
+		$args['orderby'] = 'meta_value_num title';
 	}
 
 	if ( $_GET['college'] ) {
@@ -60,19 +57,19 @@ function fetch_degree_data() {
 			// Example of a format we might be working with
 			$degree = array(
 				'academicPlanId' => $post->ID,
-				'academicSubPlan' => array(
-					'id' => '',
-					'type' => '',
-					'name' => '',
-					'description' => ''
-				),
+				// 'academicSubPlan' => array(
+				// 	'id' => '',
+				// 	'type' => '',
+				// 	'name' => '',
+				// 	'description' => ''
+				// ),
 				'name' => $post->post_title,
 				'abbreviation' => '',
 				'degree' => get_first_result( wp_get_post_terms( $post->ID, 'program_types', array( 'fields' => 'names' ) ) ),
 				'creditHours' => intval( get_post_meta( $post->ID, 'degree_hours', TRUE ) ),
-				'thesis' => '',
-				'nonThesis' => '',
-				'dissertation' => '',
+				// 'thesis' => '',
+				// 'nonThesis' => '',
+				// 'dissertation' => '',
 				'college' => array(
 					'name' => get_first_result( wp_get_post_terms( $post->ID, 'colleges', array( 'fields' => 'names' ) ) ),
 					'url' => '',
@@ -81,23 +78,23 @@ function fetch_degree_data() {
 					'name' => get_first_result( wp_get_post_terms( $post->ID, 'departments', array( 'fields' => 'names' ) ) ),
 					'url' => '',
 				),
-				'online' => get_post_meta( $post->ID, 'degree_online', TRUE ),
+				// 'online' => get_post_meta( $post->ID, 'degree_online', TRUE ),
 				'description' => get_post_meta( $post->ID, 'degree_description', TRUE ),
-				'prerequisite' => '',
-				'applicationInfoDescription' => '',
-				'applicationInfo' => array(
-					'deadline' => '',
-					'description' => ''
-				),
+				// 'prerequisite' => '',
+				// 'applicationInfoDescription' => '',
+				// 'applicationInfo' => array(
+				// 	'deadline' => '',
+				// 	'description' => ''
+				// ),
 				'contact' => array(
 					'name' => '', // currently split into an array in WP; leave blank for now.
 					'email' => get_post_meta( $post->ID, 'degree_email', TRUE ),
 					'phoneNumber' => get_post_meta( $post->ID, 'degree_phone', TRUE )
 				),
 				'keywordList' => wp_get_post_terms( $post->ID, 'post_tag', array( 'fields', 'names' ) ),
-				'relatedProgramList' => array(),
-				'semesterOffered' => '',
-				'dateLastModified' => ''
+				// 'relatedProgramList' => array(),
+				// 'semesterOffered' => '',
+				// 'dateLastModified' => ''
 			);
 
 			$data[] = $degree;
