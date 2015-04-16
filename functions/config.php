@@ -4,7 +4,7 @@
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,
  * etc.
- * 
+ *
  * @return void
  * @author Jared Lang
  **/
@@ -14,7 +14,7 @@ function __init__(){
 	add_image_size('homepage', 620);
 	add_image_size('homepage-secondary', 540);
 	add_image_size('centerpiece-image', 940, 338, true); 	// Crops!
-	add_image_size('home-thumb', 110, 110);	
+	add_image_size('home-thumb', 110, 110);
 	add_image_size('subpage-subimg', 160);
 	add_image_size('subpage-studentimg', 115, 280);
 	register_nav_menu('header-menu', __('Header Menu'));
@@ -37,10 +37,10 @@ function __init__(){
 	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
-	
+
 	global $timer;
 	$timer = Timer::start();
-	
+
 	wp_deregister_script('l10n');
 	set_defaults_for_options();
 }
@@ -107,7 +107,7 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
 )));
 
 # Domain/path of site (for cookies)
-list($domain, $path) = explode('.edu', get_site_url()); 
+list($domain, $path) = explode('.edu', get_site_url());
 $domain = preg_replace('/^(http|https):\/\//','',$domain).'.edu';
 if (substr($path, strlen($path)-1) !== '/') { $path = $path.'/'; } // make sure path ends in /
 define('WP_SITE_DOMAIN', $domain);
@@ -156,9 +156,9 @@ Config::$body_classes = array('default');
 /*
  * Edge Side Includes (ESI) are directives that tell Varnish to include some other
  * content in the page. The primary use for use to assign another cache duration
- * to the "other content". 
- * To add an ESI, first add some function and any safe-to-use arguments to the ESI 
- * whitelist below, then call that function by referencing its key in the whitelist 
+ * to the "other content".
+ * To add an ESI, first add some function and any safe-to-use arguments to the ESI
+ * whitelist below, then call that function by referencing its key in the whitelist
  * and any arguments using esi_include($key, $args).
  * Functions that accept/require multiple arguments should be listed here with
  * serialized set(s) of arguments (so that they can be compared as a single string).
@@ -334,7 +334,7 @@ Config::$theme_settings = array(
 			'name'        => 'Weekly Feedback Email Key',
 			'id'          => THEME_OPTIONS_NAME.'[feedback_email_key]',
 			'description' => 'Secret key that allows for weekly feedback emails to be sent via cron job.
-							 The cron job\'s passed argument must be the same as this value; do not modify 
+							 The cron job\'s passed argument must be the same as this value; do not modify
 							 this value unless you can edit the server cron tab!',
 			'default'     => '',
 			'value'       => $theme_options['feedback_email_key'],
@@ -477,30 +477,31 @@ Config::$links = array(
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
+	THEME_STATIC_URL.'/fonts/font-awesome/css/font-awesome.min.css',
 );
 
 // Default bootstrap responsive styles
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles, 
+	array_push(Config::$styles,
 		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.min.css'
-	);		
+	);
 }
 
-array_push(Config::$styles,	
+array_push(Config::$styles,
 	// Force GravityForms styles here so we can override them
 	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css', 
+	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url')
 );
 
 // Custom responsive styles
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles, 
+	array_push(Config::$styles,
 		THEME_URL.'/style-responsive.css'
-	);	
+	);
 }
 
-array_push(Config::$styles,	
+array_push(Config::$styles,
 	array('src' => THEME_CSS_URL.'/print.css', 'media' => 'print')
 );
 
@@ -522,8 +523,8 @@ function jquery_in_header() {
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', CURRENT_PROTOCOL.'ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
     wp_enqueue_script( 'jquery' );
-}    
- 
+}
+
 add_action('wp_enqueue_scripts', 'jquery_in_header');
 
 /**
