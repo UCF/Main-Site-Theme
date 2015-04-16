@@ -130,21 +130,6 @@ if ( $results ) {
 				<?php endif; ?>
 				</span>
 			</h3>
-			<div class="degree-online">
-				<?php if ( $result['online'] == 'on' ): ?>
-				<span class="icon-globe"></span> Online
-				<?php endif; ?>
-			</div>
-			<div class="degree-compare">
-				<label class="checkbox degree-compare-label">
-					<input type="checkbox" name="compare[]" class="degree-compare-input" value="<?php echo $result['academicPlanId']; ?>"> <span>Add To Compare</span>
-				</label>
-				<a class="degree-compare-submit btn btn-small disabled" href="#">
-					<span class="hidden-phone">Compare</span>
-					<span class="visible-phone">Go</span>
-				</a>
-				<span class="degree-compare-selected-count"></span>
-			</div>
 		</li>
 		<?php
 		$result_markup = ob_get_clean();

@@ -548,23 +548,18 @@
 				'has_default' => true,
 				'options' => array(
 					'undergraduate-degree' => array(
-						'name' => 'Bachelor',
+						'name' => 'Undergraduate Degrees',
 						'count' => '135',
 						'default' => true
 					),
 					'minor' => array(
-						'name' => 'Minor',
+						'name' => 'Minors',
 						'count' => '128',
 						'default' => false
 					),
 					'graduate-degree' => array(
-						'name' => 'Master',
+						'name' => 'Graduate Degrees',
 						'count' => '104',
-						'default' => false
-					),
-					'graduate-degree' => array(
-						'name' => 'Doctoral',
-						'count' => '37',
 						'default' => false
 					),
 					'certificate' => array(
@@ -574,111 +569,70 @@
 					)
 				),
 			),
-			'location' => array(
-				'name' => 'Locations',
-				'has_default' => true,
-				'options' => array(
-					'main-campus' => array(
-						'name' => 'Main Campus',
-						'count' => '143',
-						'default' => true
-					),
-					'online' => array(
-						'name' => 'Online',
-						'count' => '120',
-						'default' => false
-					),
-					'altamonte-springs' => array(
-						'name' => 'Altamonte Springs',
-						'count' => '45',
-						'default' => false
-					),
-					'cocoa' => array(
-						'name' => 'Cocoa',
-						'count' => '34',
-						'default' => false
-					),
-					'daytona-beach' => array(
-						'name' => 'Daytona Beach',
-						'count' => '15',
-						'default' => false
-					),
-					'leesburg' => array(
-						'name' => 'Leesburg',
-						'count' => '12',
-						'default' => false
-					),
-					'ocala' => array(
-						'name' => 'Ocala',
-						'count' => '56',
-						'default' => false
-					),
-					'palm-bay' => array(
-						'name' => 'Palm Bay',
-						'count' => '23',
-						'default' => false
-					)
-				),
-			),
 			'college' => array(
 				'name' => 'Colleges',
 				'has_default' => false,
 				'options' => array(
 					'college-of-arts-and-humanities' => array(
-						'name' => 'Arts &amp; Humanities',
+						'name' => 'College of Arts and Humanities',
 						'count' => '82',
 						'default' => false
 					),
 					'college-of-business-administration' => array(
-						'name' => 'Business Administration',
+						'name' => 'College of Business Administration',
 						'count' => '43',
 						'default' => false
 					),
 					'college-of-education-and-human-performance' => array(
-						'name' => 'Education &amp; Human Performance',
+						'name' => 'College of Education and Human Performance',
 						'count' => '100',
 						'default' => false
 					),
 					'college-of-engineering-and-computer-science' => array(
-						'name' => 'Engineering &amp; Computer Science',
+						'name' => 'College of Engineering and Computer Science',
 						'count' => '72',
 						'default' => false
 					),
 					'college-of-graduate-studies' => array(
-						'name' => 'Graduate Studies',
+						'name' => 'College of Graduate Studies',
 						'count' => '65',
 						'default' => false
 					),
 					'college-of-health-and-public-affairs' => array(
-						'name' => 'Health &amp; Public Affairs',
+						'name' => 'College of Health and Public Affairs',
 						'count' => '65',
 						'default' => false
 					),
-					'rosen-college-of-hospitality-management' => array(
-						'name' => 'Hospitality Management',
-						'count' => '13',
-						'default' => false
-					),
 					'college-of-medicine' => array(
-						'name' => 'Medicine',
+						'name' => 'College of Medicine',
 						'count' => '15',
 						'default' => false
 					),
 					'college-of-nursing' => array(
-						'name' => 'Nursing',
+						'name' => 'College of Nursing',
 						'count' => '11',
 						'default' => false
 					),
 					'college-of-optics-and-photonics' => array(
-						'name' => 'Optics &amp; Photonics',
+						'name' => 'College of Optics and Photonics',
 						'count' => '35',
 						'default' => false
 					),
 					'college-of-sciences' => array(
-						'name' => 'Sciences',
+						'name' => 'College of Sciences',
 						'count' => '45',
 						'default' => false
-					)
+					),
+					'office-of-undergraduate-studies' => array(
+						'name' => 'Office of Undergraduate Studies',
+						'count' => '10',
+						'default' => false
+					),
+					'rosen-college-of-hospitality-management' => array(
+						'name' => 'Rosen College of Hospitality Management',
+						'count' => '13',
+						'default' => false
+					),
 				),
 			)
 		);

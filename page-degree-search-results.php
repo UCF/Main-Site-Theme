@@ -140,12 +140,6 @@ if ( $results ) {
 		?>
 		<li class="degree-search-result">
 			<div class="background-hover-fade-in">
-				<span class="compare pull-right">
-					<label class="checkbox">
-						<input type="checkbox" class="compareCheckbox" value="<?php echo $result['academicPlanId']; ?>">
-						<span>compare</span>
-					</label>
-				</span>
 				<a class="degree-search-result-link" href="<?php echo get_permalink( $result['academicPlanId'] );?>">
 					<h3 class="degree-title">
 						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
