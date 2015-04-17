@@ -5,7 +5,8 @@
 		$filters = array();
 		$filters['program-type']['name'] = 'Degrees';
 		$filters['college']['name'] = 'Colleges';
-		$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'count', 'order' => 'desc' ) );
+		// Pass orderby degree_program_order to ensure our custom filter is used.
+		$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
 		$filters['college']['terms'] = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
 
 		// Fetch data based on default params + anything set by the user

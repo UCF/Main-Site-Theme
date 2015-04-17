@@ -2246,4 +2246,25 @@ function get_degree_search_markup($return=false, $params=null) {
 add_action( 'wp_ajax_degree_search', 'get_degree_search_markup' );
 add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_markup' );
 
+/**
+ * Orders program_types based on the DEGREE_PROGRAM_ORDER
+ * setting found in functions/config.php.
+ * NOTE: For this filter to be applied, get_terms must 
+ * include the taxonomy 'program_types' and an orderby
+ * of degree_program_order.
+ * @return array
+ * @author Jim Barnes
+ **/
+function order_program_types( $clauses, $taxonomies, $args ) {
+	if ( in_array('program_types', $taxonomies ) 
+		&& $args['orderby'] == 'degree_program_order' ) {
+		$slugs = implode('", "', unserialize(DEGREE_PROGRAM_ORDER));
+		$clauses['orderby'] = 'ORDER BY FIELD("slug",' . '"' . $slugs . '")';
+	}
+
+	return $clauses;
+}
+
+add_filter( 'terms_clauses', 'order_program_types', 1, 3);
+
 ?>
