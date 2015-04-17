@@ -92,7 +92,7 @@
 						<?php if ( $term->count > 0 ): ?>
 						<li class="checkbox">
 							<label>
-								<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox">
+								<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
 								<span><?php echo $term->name; ?></span>
 								<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
 							</label>
