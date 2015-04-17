@@ -2259,9 +2259,8 @@ function order_program_types( $clauses, $taxonomies, $args ) {
 	if ( in_array('program_types', $taxonomies ) 
 		&& $args['orderby'] == 'degree_program_order' ) {
 		$slugs = implode('", "', unserialize(DEGREE_PROGRAM_ORDER));
-		$clauses['orderby'] = 'ORDER BY FIELD("slug",' . '"' . $slugs . '")';
+		$clauses['orderby'] = 'ORDER BY FIELD (t.slug,' . '"' . $slugs . '")';
 	}
-
 	return $clauses;
 }
 
