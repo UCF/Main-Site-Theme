@@ -578,7 +578,7 @@
 
 				<div class="degree-search-form form-search">
 					<div class="input-append">
-						<input type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span7 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+						<input id="#search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span7 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
 						<button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
 					</div>
 				</div>
@@ -742,9 +742,6 @@
 				$academicsSearch.find('.college:checked').each(function() {
 					college.push($(this).val());
 				});
-
-				console.log(programType);
-				console.log(college);
 
 				var jqxhr = $.ajax({
 					url: '<?php echo admin_url( "admin-ajax.php" ); ?>',
