@@ -743,6 +743,9 @@
 					college.push($(this).val());
 				});
 
+				console.log(programType);
+				console.log(college);
+
 				var jqxhr = $.ajax({
 					url: '<?php echo admin_url( "admin-ajax.php" ); ?>',
 					//url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results-2.php',
@@ -750,7 +753,7 @@
 					cache: false,
 					data: {
 						'action': 'degree_search',
-						'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
+						'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
 						'sort-by': $academicsSearch.find('.sort-by:checked').val(),
 						'program-type': programType,
 						'college': college

@@ -640,105 +640,15 @@
 
 	<?php
 		// Available filters + filter values
-		$filters = array(
-			'program-type' => array(
-				'name' => 'Degrees',
-				'has_default' => true,
-				'options' => array(
-					'undergraduate-degree' => array(
-						'name' => 'Undergraduate Degrees',
-						'count' => '135',
-						'default' => true
-					),
-					'minor' => array(
-						'name' => 'Minors',
-						'count' => '128',
-						'default' => false
-					),
-					'graduate-degree' => array(
-						'name' => 'Graduate Degrees',
-						'count' => '104',
-						'default' => false
-					),
-					'certificate' => array(
-						'name' => 'Certificate',
-						'count' => '92',
-						'default' => false
-					)
-				),
-			),
-			'college' => array(
-				'name' => 'Colleges',
-				'has_default' => false,
-				'options' => array(
-					'college-of-arts-and-humanities' => array(
-						'name' => 'College of Arts and Humanities',
-						'count' => '82',
-						'default' => false
-					),
-					'college-of-business-administration' => array(
-						'name' => 'College of Business Administration',
-						'count' => '43',
-						'default' => false
-					),
-					'college-of-education-and-human-performance' => array(
-						'name' => 'College of Education and Human Performance',
-						'count' => '100',
-						'default' => false
-					),
-					'college-of-engineering-and-computer-science' => array(
-						'name' => 'College of Engineering and Computer Science',
-						'count' => '72',
-						'default' => false
-					),
-					'college-of-graduate-studies' => array(
-						'name' => 'College of Graduate Studies',
-						'count' => '65',
-						'default' => false
-					),
-					'college-of-health-and-public-affairs' => array(
-						'name' => 'College of Health and Public Affairs',
-						'count' => '65',
-						'default' => false
-					),
-					'college-of-medicine' => array(
-						'name' => 'College of Medicine',
-						'count' => '15',
-						'default' => false
-					),
-					'college-of-nursing' => array(
-						'name' => 'College of Nursing',
-						'count' => '11',
-						'default' => false
-					),
-					'college-of-optics-and-photonics' => array(
-						'name' => 'College of Optics and Photonics',
-						'count' => '35',
-						'default' => false
-					),
-					'college-of-sciences' => array(
-						'name' => 'College of Sciences',
-						'count' => '45',
-						'default' => false
-					),
-					'office-of-undergraduate-studies' => array(
-						'name' => 'Office of Undergraduate Studies',
-						'count' => '10',
-						'default' => false
-					),
-					'rosen-college-of-hospitality-management' => array(
-						'name' => 'Rosen College of Hospitality Management',
-						'count' => '13',
-						'default' => false
-					),
-				),
-			)
-		);
+		$filters = array();
+		$filters['program-type']['name'] = 'Degrees';
+		$filters['college']['name'] = 'Colleges';
+		$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'count', 'order' => 'desc' ) );
+		$filters['college']['terms'] = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
 
 		// Fetch data based on default params + anything set by the user
 		$default_params = array(
 			'program-type' => array('undergraduate-degree'),
-			'location' => array('main-campus'),
 			'college' => array(),
 			'sort-by' => 'title',
 			'search-query' => ''
@@ -746,7 +656,7 @@
 
 		$params = array_merge( $default_params, $_GET );
 
-		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results-2.php?' . http_build_query( $params ) ), true );
+		$data = get_degree_search_markup(true, $params);
 	?>
 
 	<div class="row page-content" id="academics-search" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
@@ -766,7 +676,7 @@
 
 				<div class="degree-search-form">
 					<div class="degree-search-form-inner">
-						<input type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php echo $_GET['search-query']; ?>">
+						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php echo $_GET['search-query']; ?>">
 						<button class="btn btn-link" type="submit">Search</button>
 					</div>
 				</div>
@@ -812,24 +722,19 @@
 					</select>
 				</div>
 
-				<?php foreach ( $filters as $filter_value => $filter_details ): ?>
-				<h2 class="degree-filter-title"><?php echo $filter_details['name']; ?></h2>
+				<?php foreach ( $filters as $key=>$filter ): ?>
+				<h2 class="degree-filter-title"><?php echo $filter['name']; ?></h2>
 				<ul class="degree-filter-list">
-					<?php foreach ( $filter_details['options'] as $option_value => $option_details ): ?>
-					<li class="checkbox">
-						<label>
-							<input name="<?php echo $filter_value; ?>[]" class="<?php echo $filter_value; ?>" value="<?php echo $option_value; ?>" type="checkbox"
-							<?php
-							if (
-								( $filter_details['has_default'] === true && empty( $params[$filter_value] ) ) ||
-								( in_array( $option_value, $params[$filter_value] ) && $option_details['default'] === true )
-							) {
-								echo 'checked';
-							} ?>>
-							<span><?php echo $option_details['name']; ?></span>
-							<small class="filter-result-count">(<?php echo $option_details['count']; ?>)</small>
-						</label>
-					</li>
+					<?php foreach ( $filter['terms'] as $term ): ?>
+						<?php if ( $term->count > 0 ): ?>
+						<li class="checkbox">
+							<label>
+								<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox">
+								<span><?php echo $term->name; ?></span>
+								<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
+							</label>
+						</li>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				</ul>
 				<?php endforeach; ?>
@@ -938,11 +843,13 @@
 				});
 
 				var jqxhr = $.ajax({
-					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results-2.php',
+					url: '<?php echo admin_url( "admin-ajax.php" ); ?>',
+					//url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results-2.php',
 					type: 'GET',
 					cache: false,
 					data: {
-						'search-query': encodeURIComponent($academicsSearch.find('.search-field').val()),
+						'action': 'degree_search',
+						'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
 						'sort-by': $academicsSearch.find('.sort-by:checked').val(),
 						'program-type': programType,
 						'college': college

@@ -2098,9 +2098,9 @@ function fetch_degree_data( $params ) {
 		$args['s'] = $_GET['search-query'];
 	}
 
-	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'title' ) {
-		$args['meta_key'] = '';
-		$args['orderby'] = 'title';
+	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'degree_hours' ) {
+		$args['meta_key'] = 'degree_hours';
+		$args['orderby'] = 'meta_value_num title';
 	}
 
 	if ( $_GET['college'] ) {
