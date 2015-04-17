@@ -2146,7 +2146,7 @@ function fetch_degree_data( $params ) {
 				'name' => $post->post_title,
 				'abbreviation' => '',
 				'degree' => get_first_result( $terms['program_types'] )->name,
-				'creditHours' => intval( $meta['degree_hours'][0] ) ? $meta['degree_hours'] : 0,
+				'creditHours' => intval( $meta['degree_hours'][0] ) ? $meta['degree_hours'][0] : 0,
 				'thesis' => '',
 				'nonThesis' => '',
 				'dissertation' => '',
