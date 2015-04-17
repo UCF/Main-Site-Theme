@@ -578,7 +578,7 @@
 
 				<div class="degree-search-form form-search">
 					<div class="input-append">
-						<input type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span7 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+						<input id="#search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span7 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
 						<button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
 					</div>
 				</div>
@@ -750,7 +750,7 @@
 					cache: false,
 					data: {
 						'action': 'degree_search',
-						'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
+						'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
 						'sort-by': $academicsSearch.find('.sort-by:checked').val(),
 						'program-type': programType,
 						'college': college
