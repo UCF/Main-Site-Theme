@@ -4,360 +4,553 @@
 	 * TODO: Move to style.css/style-responsive.css when design drafting is done
 	 **/
 
+	/*
+	 * General Site Styles
+	 */
 
-	 body {
-	 	margin-left:0 !important;
-	 }
+	@media (max-width: 767px) {
+		/* Reduce whitespace between page title and content */
+		.subpage .page-content #page_title {
+			margin-bottom: 15px;
+			padding-bottom: 5px;
+		}
 
-	 .input-append {
-	 	width: 80%;
-	 }
-
-	 .form-search .input-append .search-query {
-	 	width: 100%;
-	 }
-
-	.input-append .btn-group > .btn:first-child {
-		border-bottom-left-radius: 0;
-		border-top-left-radius: 0;
+		#academics-search input[type="checkbox"] {
+			/* Help mobile users and provide larger checkboxes when possible */
+			transform: scale(1.25);
+			-webkit-transform: scale(1.25);
+		}
 	}
 
-	.dropdown-menu-form {
-		max-height: 250px;
-		min-width: 225px;
-		overflow-x: hidden;
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
-	}
-	.dropdown-menu-form .radio,
-	.dropdown-menu-form .checkbox {
-		padding-left: 30px;
-		padding-right: 15px;
-	}
-	.dropdown-menu-heading {
-		border-top: 1px solid #e5e5e5;
-		display: block;
-		font-size: 12px;
-		font-weight: bold;
-		color: #888;
-		padding-bottom: 6px;
-		padding-left: 10px;
-		padding-top: 8px;
-		text-transform: uppercase;
-	}
-	.dropdown-menu-heading:first-child {
-		border-top: 0 solid transparent;
-		padding-top: 0;
+	/* Make disabled buttons look more disabled */
+	#academics-search a.btn.disabled,
+	#academics-search a.btn.disabled:hover,
+	#academics-search a.btn.disabled:active,
+	#academics-search a.btn.disabled:focus {
+		color: #888 !important;
 	}
 
 
-	#sidebar_left,
-	#contentcol,
-	#contentcol input,
-	#contentcol select,
-	#contentcol option,
-	.page-content {
-		font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+	/*
+	 * General content/sidebar styles
+	 */
+
+	/* Reset this template's fonts to Helvetica */
+	#degree-search-top,
+	#degree-search-top input,
+	#degree-search-top select,
+	#degree-search-top option,
+	#degree-search-sidebar,
+	#degree-search-sidebar input,
+	#degree-search-sidebar select,
+	#degree-search-sidebar option,
+	#degree-search-content,
+	#degree-search-content input,
+	#degree-search-content select,
+	#degree-search-content option {
+		font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
 		font-size: 14px;
 	}
 
-	.page-content .intro h2 {
-		font-weight: 400;
-	}
 
-	.page-content .intro p {
-		font-size: 16px;
-		line-height: 24px;
-		font-weight: 400;
-	}
+	/*
+	 * Sidebar page-specific styles
+	 */
 
-	.page-content .intro blockquote {
-		font-size: 16px;
-		color: #888;
-		line-height: 30px;
-	}
-
-	#sidebar_left {
-		background-color: #eee;
-	}
-
-	@media (max-width: 767px) {
-
-		#sidebar_left {
-			font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
-			display: none;
-			width: 300px;
-			background-color: #eee;
-			-webkit-box-shadow: 5px 0px 20px -5px rgba(0,0,0,0.30);
-			-moz-box-shadow: 5px 0px 20px -5px rgba(0,0,0,0.30);
-			box-shadow: 5px 0px 20px -5px rgba(0,0,0,0.30);
-			border-right: 1px solid #ccc;
-			border-top: none;
-			margin-top: 0;
-			padding-top: 0;
-		}
-
-		#sidebar_left.open {
-			transform: scaleX(1);
-			-webkit-transform: scaleX(1);
-		}
-
-		#sidebar_left .header {
-			background-color: #888;
-			color: #fff;
-			font-weight: normal;
-			margin: 0 0 25px;
-			padding-left: 10px;
-		}
-
-		#sidebar_left a.close, #sidebar_left a.close:hover {
-			color: #000;
-			display: inline-block;
-			font-weight: normal;
-			padding: 10px;
-		}
-
-		#sidebar_left .content {
-			margin: 10px;
-		}
-	}
-
-	#sidebar_left h2 {
+	/* Sidebar headings */
+	#degree-search-sidebar .degree-filter-title {
 		color: #888;
 		font-size: 18px;
-		font-weight: normal;
-		padding-left: 10px;
+		font-weight: 500;
 	}
 
-	.degree-search-filters ul {
+	/* Sidebar filter lists */
+	#degree-search-sidebar .degree-filter-list {
 		list-style-type: none;
 		margin-bottom: 15px;
 		margin-left: 0;
 	}
-
-	.degree-search-filters ul li {
-		padding-top: 5px;
-		padding-bottom: 1px;
-		padding-left: 40px;
+	#degree-search-sidebar .degree-filter-list li {
+		padding-bottom: 6px;
 	}
-
-	.degree-search-filters label {
-		font-size: 12px;
-	}
-
-	.degree-search-filters .degree-count {
-		color: #888;
-		font-size: 12px;
-	}
-
-	#contentcol .degree-search-form {
-		margin-top: 10px;
-	}
-
-	.filter-tab {
-		background-color: #666;
-		font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
-		line-height: 16px;
-		right: 0;
-		cursor: pointer;
-		position: fixed;
-		top: 205px;
-		width: 9px;
-		color: white;
-		padding: 6px;
-	}
-
-	.filter-tab:hover {
-		color: white;
-	}
-
-	.filter-tab .icon-filter {
-		position: absolute;
-		left: 7px;
-		top: 18px;
-	}
-
-	#contentcol .degree-search-results-header {
-		border-bottom: 1px solid #e5e5e5;
-		margin-top: 25px;
-		margin-bottom: 10px;
-		padding: 0 5px 5px;
-	}
-
-
-	#contentcol .degree-search-results-header label {
-		padding-top: 0;
-	}
-
-	#contentcol .degree-search-header {
-		color: #888;
+	#degree-search-sidebar label {
 		font-size: 14px;
 	}
-	@media (max-width: 767px) {
-		#contentcol .degree-search-header {
-		}
+	#degree-search-sidebar input:checked + span,
+	#degree-search-sidebar input:checked ~ .filter-result-count {
+		font-weight: bold;
 	}
-	#contentcol .degree-search-header em {
-		font-weight: 500;
+	#degree-search-sidebar .filter-result-count {
+		color: #888;
 	}
 
-	#contentcol .degree-search-sort-label {
+	#degree-search-sidebar .degree-infobox-toggle {
+		border-bottom: 0 solid transparent !important;
+		display: block;
+		float: right;
+		margin-right: 15px;
+		padding-left: 5px;
+	}
+	#degree-search-sidebar .degree-infobox-toggle .icon {
+		padding-bottom: 3px;
+		border-bottom: 1px dotted #999;
+	}
+	#degree-search-sidebar .popover-title {
+		display: none; /* hide empty titles */
+	}
+	#degree-search-sidebar .popover {
+		font-size: 12px;
+		line-height: 1.4;
+		font-weight: normal;
+	}
+	@media (max-width: 767px) {
+		#degree-search-sidebar .popover-content {
+			max-height: 250px;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			-webkit-overflow-scrolling: touch;
+		}
+	}
+
+	@media (max-width: 767px) {
+
+		/* Mobile sidebar filter "modal" */
+		#degree-search-sidebar {
+			background-color: #fff;
+			border-radius: 5px;
+			box-sizing: border-box;
+			box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+			margin-top: 0;
+			max-height: 0; /* set via js when active */
+			opacity: 0;
+			overflow-y: scroll;
+			padding: 0;
+			pointer-events: none;
+			position: absolute;
+			top: 50px; /* is overridden via JS */
+			-webkit-overflow-scrolling: touch;
+			-webkit-transition: opacity .2s ease-in-out;
+			transition: opacity .2s ease-in-out;
+			left: 15px;
+			width: 92%; /* pre android v4.4 :( */
+			width: calc(100% - 30px);
+			z-index: 999;
+		}
+		#degree-search-sidebar.active {
+			opacity: 1;
+			pointer-events: all;
+		}
+
+		/* Modal - General */
+		#degree-search-sidebar select {
+			margin-bottom: 0;
+			width: 55%;
+		}
+		#degree-search-sidebar label {
+			font-size: 12.5px;
+			line-height: 1.2;
+			margin: 0;
+			padding: 5px 5px 5px 25px;
+		}
+
+		/* Modal head */
+		#degree-search-sidebar .degree-mobile-actions {
+			background: #eee;
+			border-radius: 5px 5px 0 0;
+			padding: 8px;
+			position: relative;
+			position: -webkit-sticky; /* we can at least give ios users a fixed top bar */
+			top: -1px; /* Hide un-styleable outline on #degree-search-sidebar:target */
+		}
+
+		/* Modal sorting */
+		#degree-search-sidebar .degree-search-sort {
+			border-bottom: 1px solid #eee;
+			margin-bottom: 5px;
+			padding: 10px;
+		}
+		#degree-search-sidebar .degree-search-sort select {
+			font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+		}
+
+		/* Modal filters */
+		#degree-search-sidebar .degree-filter-list,
+		#degree-search-sidebar .degree-filter-title {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+		#degree-search-sidebar .degree-filter-list {
+			margin-bottom: 10px;
+		}
+		#degree-search-sidebar .degree-filter-list li {
+			border-top: 1px solid #eee;
+			box-sizing: border-box;
+			margin: 0 4px;
+			padding: 4px 0;
+			text-align: left;
+		}
+		#degree-search-sidebar .degree-filter-list li:first-child {
+			border-top: 0 solid transparent;
+		}
+
+		#degree-search-sidebar .degree-filter-title {
+			font-size: 14px;
+			line-height: 1.4;
+			margin: 15px 0 5px;
+		}
+		#degree-search-sidebar .degree-search-sort .degree-filter-title {
+			margin-top: 6px;
+			padding: 0;
+		}
+
+		#degree-search-sidebar .checkbox input[type="checkbox"] {
+			margin-right: 10px;
+			margin-top: 0;
+		}
+	}
+
+
+	/*
+	 * Page content page-specific styles
+	 */
+
+	#degree-search-top {
+		margin-bottom: 10px;
+	}
+	@media (max-width: 767px) {
+		#degree-search-top {
+			margin-bottom: 0;
+		}
+	}
+
+	/* Search field wrapper */
+	#degree-search-top .degree-search-form {
+		margin-top: 20px;
+	}
+	@media (max-width: 767px) {
+		#degree-search-top .degree-search-form .input-append {
+			width: 100%;
+		}
+		#degree-search-top .degree-search-form .search-query {
+			width: 80%;
+			width: calc(100% - 40px);
+		}
+	}
+
+	/* Search Result Title + Sorting (desktop) */
+	#degree-search-top .degree-search-sort {
+		border-bottom: 1px solid #e5e5e5;
+		margin-top: 20px;
+		width: 100%;
+	}
+	#degree-search-top .degree-search-sort-inner {
+		display: table-cell;
+		padding-bottom: 10px;
+		vertical-align: middle;
+	}
+	@media (max-width: 979px) {
+		/* We assume that browsers that support media queries can support box-sizing */
+		#degree-search-top .degree-search-sort-inner {
+			box-sizing: border-box;
+		}
+	}
+	@media (max-width: 767px) {
+		#degree-search-top .degree-search-sort-inner {
+			display: block;
+		}
+	}
+
+	#degree-search-top .degree-result-count {
+		border-right: 1px solid #eee;
+		font-size: 16px;
+		font-weight: bold;
+		line-height: 20px;
+		padding-right: 15px;
+		padding-top: 5px;
+		width: 70%;
+	}
+	#degree-search-top .degree-result-count .result {
+		font-style: italic;
+		font-weight: 400;
+	}
+	@media (max-width: 767px) {
+		#degree-search-top .degree-result-count .for,
+		#degree-search-top .degree-result-count .result {
+			display: none;
+		}
+	}
+	#degree-search-top .degree-search-sort-options {
+		padding-left: 15px;
+		width: 26%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
+	}
+	@media (max-width: 979px) {
+		#degree-search-top .degree-result-count {
+			width: 62%;
+		}
+		#degree-search-top .degree-search-sort-options {
+			width: 34%;
+		}
+	}
+	@media (max-width: 767px) {
+		#degree-search-top .degree-result-count {
+			border-right: 0 solid transparent;
+			font-style: italic;
+			font-weight: normal;
+			float: left;
+			padding-right: 0;
+			width: auto;
+		}
+		#degree-search-top .degree-search-sort-options {
+			border-left: 1px solid #eee;
+			float: right;
+			width: auto;
+			padding-bottom: 5px;
+		}
+	}
+	#degree-search-top .degree-search-sort-label {
 		padding-left: 0;
 	}
 
-	#contentcol .degree-mobile-controls {
-		border-bottom: 1px solid #e5e5e5;
+	/* Results wrapper */
+	#degree-search-content .degree-search-results-container {
+		position: relative;
 	}
-	#contentcol .degree-mobile-control {
-		border: 0;
-		display: inline-block;
-		padding: 0;
-		text-align: left;
+
+	/* Ajax load overlay (over results) */
+	#ajax-loading {
+		background-color: rgba(255, 255, 255, .75);
+		background-image: url('<?php echo THEME_IMG_URL; ?>/ajax.gif');
+		background-repeat: no-repeat;
+		background-position: top center;
+		box-sizing: border-box;
+		display: block;
+		padding: 10px;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		text-align: center;
+		transition: background-color .1s ease-in-out;
 	}
-	#contentcol .degree-mobile-control .btn {
-		border: 0;
-		font-size: 14px;
-		padding: 5px 20px 10px;
+	#ajax-loading.hidden {
+		background-color: rgba(255, 255, 255, 0);
 	}
-	#contentcol .degree-mobile-control.open .btn {
-		color: #08c !important;
-		outline: 0;
+
+	/* No results found */
+	#degree-search-content .degree-search-results-container .no-results {
+		margin-top: 20px;
 	}
-	#contentcol .degree-mobile-control .btn .caret {
-		margin-left: 3px;
-	}
-	#contentcol .degree-mobile-control.degree-search-filters .btn {
-		border-left: 1px solid #e5e5e5;
-	}
-	#contentcol .degree-mobile-control.degree-search-filters ul {
-		margin-bottom: 5px;
-	}
-	#contentcol .degree-mobile-control.degree-search-filters ul li {
-		padding-bottom: 2px;
-	}
-	#contentcol .degree-mobile-control label {
-		font-size: 13px;
-	}
-	#contentcol .degree-search-results {
+
+	/* Results list */
+	#degree-search-content .degree-search-results {
 		list-style-type: none;
 		margin-left: 0;
 		margin-top: 15px;
 	}
-	#contentcol .degree-search-result {
-		display: block;
-		margin-bottom: 20px;
+	#degree-search-content .degree-search-result {
+		box-sizing: border-box;
+		display: table;
+		width: 100%;
+		margin-bottom: 0;
+		padding: 12px 15px;
 		position: relative;
 	}
-	#contentcol .degree-search-result > div {
-		padding: 12px 15px 8px;
+	#degree-search-content .degree-search-result:nth-child(2n) {
+		background-color: #fafafa;
+	}
+	#degree-search-content .degree-search-result:hover,
+	#degree-search-content .degree-search-result:active,
+	#degree-search-content .degree-search-result:focus {
+		background-color: #eee;
 	}
 	@media (max-width: 767px) {
-		#contentcol .degree-search-result {
-			border-bottom: solid 1px #e5e5e5;
-			margin-bottom: 20px;
-			padding: 0 0 20px;
+		#degree-search-content .degree-search-result {
+			border-top: 1px solid #eee;
+			margin-top: 10px;
+			padding: 10px 0 0 0;
 		}
-	}
-
-	#contentcol .degree-search-result .compare {
-		margin-left: 20px;
-		margin-bottom: 20px;
-	}
-
-	:checked + span {
-	  font-weight: bold;
-	}
-
-	#contentcol .degree-title {
-		font-size: 18px;
-		margin-bottom: 2px;
-		color: #08c;
-	}
-	#contentcol a {
-		color: #000;
-		border: 0 solid transparent;
-	}
-
-	#contentcol a:hover {
-		color: #666;
-		border-bottom: none !important;
-	}
-	#contentcol .degree-credits-count {
-		color: #888;
-		font-size: 14px;
-		font-weight: normal;
-	}
-
-	#contentcol .degree-college,
-	#contentcol .degree-dept {
-		display: block;
-	}
-	@media (max-width: 767px) {
-		#contentcol .degree-college,
-		#contentcol .degree-dept {
-			font-size: 12px;
-			line-height: 1.25;
-			margin-bottom: 4px;
-		}
-	}
-	#contentcol .degree-detail-label {
-		font-weight: 500;
-	}
-
-	#contentcol .degree-desc {
-		margin-top: 10px;
-		margin-bottom: 5px;
-	}
-	@media (max-width: 767px) {
-		#contentcol .degree-desc {
-			font-size: 13px;
-		}
-	}
-
-	.background-hover-fade-in {
-        color:#000;
-
-        -webkit-transition: background 0.3s linear;
-        -moz-transition: background 0.3s linear;
-        -ms-transition: background 0.3s linear;
-        -o-transition: background 0.3s linear;
-        transition: background 0.3s linear;
-    }
-
-	.background-hover-fade-in:hover,
-	.background-hover-fade-in:active,
-	.background-hover-fade-in:focus {
-        background-color:#ddd;
-    }
-
-	.fade {
-		opacity: 0;
-
-		-webkit-transition: opacity .3s ease-in-out;
-		-moz-transition: opacity .3s ease-in-out;
-		-ms-transition: opacity .3s ease-in-out;
-		-o-transition: opacity .3s ease-in-out;
-		transition: opacity .3s ease-in-out;
-	}
-
-	.fade-in {
-		opacity: 1;
-	}
-
-	@media (max-width: 767px) {
-		.background-hover-fade-in:hover,
-		.background-hover-fade-in:active,
-		.background-hover-fade-in:focus {
+		#degree-search-content .degree-search-result:hover,
+		#degree-search-content .degree-search-result:active,
+		#degree-search-content .degree-search-result:focus {
 			background-color: transparent;
 		}
+		#degree-search-content .degree-search-result:first-child {
+			border-top: 0 solid transparent;
+		}
+		#degree-search-content .degree-search-result:nth-child(2n) {
+			background-color: transparent;
+		}
+	}
+
+	/* Single result elements */
+	#degree-search-content .degree-title {
+		display: table-cell;
+		vertical-align: middle;
+		font-size: 18px;
+		margin-bottom: 8px;
+		width: 57%;
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		#degree-search-content .degree-title {
+			width: 60%;
+		}
+	}
+	@media (max-width: 767px) {
+		#degree-search-content .degree-title {
+			display: block;
+			float: left;
+			font-size: 15px;
+			line-height: 1.1;
+			margin-bottom: 4px;
+			width: 100%;
+		}
+	}
+	#degree-search-content .degree-title a {
+		border: 0 solid transparent;
+		color: #08c;
+		font-weight: 500;
+	}
+	#degree-search-content .degree-credits-count {
+		color: #888;
+		font-size: 13px;
+		font-weight: normal;
+		display: block;
+		line-height: 1.2;
+		margin-top: 4px;
+	}
+	@media (max-width: 767px) {
+		#degree-search-content .degree-credits-count {
+			font-size: 11.5px;
+		}
+	}
+
+	#degree-search-content .degree-online {
+		box-sizing: border-box;
+		display: table-cell;
+		font-size: 11.5px;
+		font-weight: 500;
+		padding: 0 10px;
+		vertical-align: middle;
+		width: 12%;
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		#degree-search-content .degree-online {
+			width: 16%;
+		}
+	}
+	@media (max-width: 767px) {
+		#degree-search-content .degree-online {
+			clear: both;
+			display: block;
+			margin-top: 8px;
+			padding: 0;
+			width: 100%;
+		}
+	}
+
+	#degree-search-content .degree-compare {
+		display: table-cell;
+		vertical-align: middle;
+		width: 14%;
+	}
+	@media (min-width: 768px) and (max-width: 979px) {
+		#degree-search-content .degree-compare {
+			width: 20%;
+		}
+	}
+	@media (max-width: 767px) {
+		#degree-search-content .degree-compare {
+			box-sizing: border-box;
+			padding-left: 12px;
+			width: 17%;
+		}
+	}
+	@media (max-width: 480px) {
+		#degree-search-content .degree-compare {
+			width: 22%;
+		}
+	}
+	@media (max-width: 380px) {
+		#degree-search-content .degree-compare {
+			width: 28%;
+		}
+	}
+	#degree-search-content .degree-compare-label {
+		color: #888;
+		display: inline-block;
+		font-size: 11px;
+		margin-bottom: 0;
+		vertical-align: middle;
+	}
+	@media (max-width: 979px) {
+		#degree-search-content .degree-compare-label {
+			font-size: 10px;
+		}
+	}
+	@media (max-width: 767px) {
+		#degree-search-content .degree-compare-label {
+			line-height: 1.2;
+			text-align: center;
+		}
+	}
+	#degree-search-content .degree-compare-label:hover,
+	#degree-search-content .degree-compare-label:active,
+	#degree-search-content .degree-compare-label:focus {
+		color: #08c;
+	}
+/*	#degree-search-content .degree-search-result.compare-active {
+		background-color: #d9edf7;
+	}
+	@media (max-width: 767px) {
+		#degree-search-content .degree-search-result.compare-active {
+			background-color: transparent;
+		}
+	}*/
+	#degree-search-content .degree-search-result.compare-active .degree-compare-label span {
+		display: none;
+	}
+	#degree-search-content .degree-compare-input:disabled + span,
+	#degree-search-content .degree-compare-input:disabled + span:hover,
+	#degree-search-content .degree-compare-input:disabled + span:active,
+	#degree-search-content .degree-compare-input:disabled + span:focus {
+		color: #ccc;
+		cursor: not-allowed;
+	}
+
+	#degree-search-content .degree-compare-submit {
+		display: none;
+		margin-left: 5px;
+		vertical-align: middle;
+	}
+	#degree-search-content .degree-search-result.compare-active .degree-compare-submit {
+		display: inline-block;
+	}
+
+	#degree-search-content .degree-compare-selected-count {
+		color: #888;
+		display: none;
+		font-size: 10px;
+		font-style: italic;
+		text-align: center;
+	}
+	#degree-search-content .degree-search-result.compare-active .degree-compare-selected-count {
+		display: block;
 	}
 
 	</style>
 
 	<?php
+
+		$filters = array();
+		$filters['program-type']['name'] = 'Degrees';
+		$filters['college']['name'] = 'Colleges';
+		$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'count', 'order' => 'desc' ) );
+		$filters['college']['terms'] = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
+
+		// Fetch data based on default params + anything set by the user
 		$default_params = array(
 			'program-type' => array('undergraduate-degree'),
-			'main-campus' => array('main-campus'),
 			'college' => array(),
 			'sort-by' => 'title',
 			'search-query' => ''
@@ -365,246 +558,94 @@
 
 		$params = array_merge( $default_params, $_GET );
 
-		$data = json_decode( file_get_contents( THEME_URL . '/page-degree-search-results.php?' . http_build_query($params) ), true );
-		// var_dump($data);
+		$data = get_degree_search_markup(true, $params);
 	?>
 
-	<div class="row page-content" id="academics_search">
-		<a class="filter-tab visible-phone" href="#sidebar_left">F<br>I<br>L<br>T<br>E<br>R<br></a>
+	<div class="row page-content" id="academics-search" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
 
 		<form>
 
 			<div class="span12" id="page_title">
-				<h1 class="span8"><?php the_title();?></h1>
-				<?php esi_include('output_weather_data','span4'); ?>
+				<h1 class="span9"><?php the_title();?></h1>
+				<?php esi_include('output_weather_data','span3'); ?>
 			</div>
 
-			<div class="span12 intro">
+			<div class="span12" id="degree-search-top">
+
 				<?php the_content(); ?>
+
+				<!-- Search input -->
+
+				<div class="degree-search-form form-search">
+					<div class="input-append">
+						<input type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span7 search-query" placeholder="Find programs by name or keyword..." value="<?php echo $_GET['search-query']; ?>">
+						<button class="btn btn-primary" type="submit"><i class="icon-search icon-white"></i></button>
+					</div>
+				</div>
+
+				<!-- Search Result Header -->
+
+				<div class="degree-search-sort clearfix">
+					<h2 class="degree-search-sort-inner degree-result-count">
+						<span class="degree-result-count-num"><?php echo $data['count']; ?></span> results
+						<?php if ( $params['search-query'] ): ?>
+						<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $params['search-query'] ); ?></span>
+						<?php endif; ?>
+					</h2>
+
+					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
+						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
+						<label class="radio inline">
+							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') { echo 'checked'; } ?>> Name
+						</label>
+						<label class="radio inline">
+							<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) { echo 'checked'; } ?>> Credit Hours
+						</label>
+					</div>
+
+					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
+						<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
+					</div>
+				</div>
 			</div>
 
 			<!-- Sidebar (Desktop only) -->
 
-			<div id="sidebar_left" class="span3 degree-search-filters">
-				<h2 class="header visible-phone">
-					Filter By <a href="#" class="close">X</a>
-				</h2>
-				<div class="content">
-					<h2>Degree Type</h2>
-					<ul>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="program-type[]" class="program-type" value="undergraduate-degree" type="checkbox"
-									<?php if( empty( $params['program-type'] ) || in_array( 'undergraduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>>
-									<span>Bachelor</span> <span class="degree-count">(181)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="program-type[]" class="program-type" value="graduate-degree" type="checkbox"
-									<?php if( in_array( 'graduate-degree', $params['program-type'] ) ) { echo 'checked'; } ?>>
-									<span>Master</span> <span class="degree-count">(85)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="program-type[]" class="program-type" value="minor" type="checkbox"
-									<?php if( in_array( 'minor', $params['program-type'] ) ) { echo 'checked'; } ?>>
-									<span>Doctorate</span> <span class="degree-count">(53)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="program-type[]" class="program-type" value="minor" type="checkbox"
-									<?php if( in_array( 'minor', $params['program-type'] ) ) { echo 'checked'; } ?>>
-									<span>Minor</span> <span class="degree-count">(125)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="program-type[]" class="program-type" value="certificate" type="checkbox"
-									<?php if( in_array( 'certificate', $params['program-type'] ) ) { echo 'checked'; } ?>>
-									<span>Certificate</span> <span class="degree-count">(45)</span>
-							</label>
-						</li>
-					</ul>
-
-					<h2>Location</h2>
-					<ul>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="main-campus" type="checkbox"
-									<?php if( empty( $params['location'] ) || in_array( 'main-campus', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Main Campus</span> <span class="degree-count">(143)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="online" type="checkbox"
-									<?php if( in_array( 'online', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Online Courses Available</span> <span class="degree-count">(120)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="altamonte-springs" type="checkbox"
-									<?php if( in_array( 'certificate', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Altamonte Springs</span> <span class="degree-count">(45)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="cocoa" type="checkbox"
-									<?php if( in_array( 'cocoa', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Cocoa</span> <span class="degree-count">(34)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="daytona-beach" type="checkbox"
-									<?php if( in_array( 'daytona-beach', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Daytona Beach</span> <span class="degree-count">(15)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="leesburg" type="checkbox"
-									<?php if( in_array( 'leesburg', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Leesburg</span> <span class="degree-count">(12)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="ocala" type="checkbox"
-									<?php if( in_array( 'ocala', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Ocala</span> <span class="degree-count">(56)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="location[]" class="location" value="palm-bay" type="checkbox"
-									<?php if( in_array( 'palm-bay', $params['location'] ) ) { echo 'checked'; } ?>>
-									<span>Palm Bay</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-					</ul>
-
-					<h2>Colleges</h2>
-					<ul>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Arts_Humanities" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Arts_Humanities", $_GET['college'])) echo "checked";?>>
-								<span>Arts &amp; Humanities</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Business_Administration" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Business_Administration", $_GET['college'])) echo "checked";?>>
-								<span>Business Administration</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Education_Human_Performance" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Education_Human_Performance", $_GET['college'])) echo "checked";?>>
-								<span>Education &amp; Human Performance</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Engineering_Computer_Science" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Engineering_Computer_Science", $_GET['college'])) echo "checked";?>>
-								<span>Engineering &amp; Computer Science</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Graduate_Studies" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Graduate_Studies", $_GET['college'])) echo "checked";?>>
-								<span>Graduate Studies</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Health_Public_Affairs" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Health_Public_Affairs", $_GET['college'])) echo "checked";?>>
-								<span>Health &amp; Public Affairs</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Honors" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Honors", $_GET['college'])) echo "checked";?>>
-								<span>Honors</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Hospitality_Management" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Hospitality_Management", $_GET['college'])) echo "checked";?>>
-								<span>Hospitality Management</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Medicine" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Medicine", $_GET['college'])) echo "checked";?>>
-								<span>Medicine</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Nursing" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Nursing", $_GET['college'])) echo "checked";?>>
-								<span>Nursing</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Optics_Photonics" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Optics_Photonics", $_GET['college'])) echo "checked";?>>
-								<span>Optics &amp; Photonics</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-						<li class="checkbox background-hover-fade-in">
-							<label>
-								<input name="college[]" class="college" value="Sciences" type="checkbox"
-								<?php if (isset($_GET['college']) && in_array("Sciences", $_GET['college'])) echo "checked";?>>
-								<span>Sciences</span> <span class="degree-count">(23)</span>
-							</label>
-						</li>
-					</ul>
+			<div id="degree-search-sidebar" class="span3">
+				<div class="visible-phone clearfix degree-mobile-actions">
+					<a class="btn btn-default pull-left" id="mobile-filter-reset">Reset All</a>
+					<a class="btn btn-primary pull-right" id="mobile-filter-done" href="#">Done</a>
 				</div>
+				<div class="degree-search-sort visible-phone clearfix">
+					<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
+					<select id="sort-by" class="pull-right">
+						<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
+						<option value="credit-hours" <?php if ( $sort_by == 'credit-hours' ) { echo 'selected'; } ?>>Credit Hours</option>
+					</select>
+				</div>
+
+				<?php foreach ( $filters as $key=>$filter ): ?>
+				<h2 class="degree-filter-title"><?php echo $filter['name']; ?></h2>
+				<ul class="degree-filter-list">
+					<?php foreach ( $filter['terms'] as $term ): ?>
+						<?php if ( $term->count > 0 ): ?>
+						<li class="checkbox">
+							<label>
+								<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox">
+								<span><?php echo $term->name; ?></span>
+								<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
+							</label>
+						</li>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				</ul>
+				<?php endforeach; ?>
 			</div>
 
-			<div class="span8" id="contentcol">
+			<!-- Main content col -->
+
+			<div class="span9" id="degree-search-content">
 				<article role="main">
-
-					<!-- Search input -->
-
-					<div class="degree-search-form form-search">
-						<div class="input-append">
-							<input type="text" name="search-query" class="span6 search-query" autocomplete="off" data-provide="typeahead"
-								placeholder="Find programs by name or keyword..." value="<?php echo htmlspecialchars($_GET['search-query']); ?>">
-							<button class="btn btn-primary" type="button"><i class="icon-search icon-white"></i></button>
-						</div>
-					</div>
-
-					<!-- Search Result Header -->
-					<div class="degree-search-results-header">
-						<div class="degree-search-header pull-right">181 results</div>
-						<div class="degree-search-sort">
-							Sort by:
-							<label class="radio inline">
-								<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ($sort_by == "title" || empty($sort_by)) echo "checked";?>> Name
-							</label>
-							<label class="radio inline">
-								<input type="radio" name="sort-by" class="sort-by" value="credit-hours" <?php if ($sort_by == "credit-hours") echo "checked";?>> Credit Hours
-							</label>
-						</div>
-					</div>
 
 					<!-- Search Results -->
 
@@ -620,7 +661,6 @@
 					<p class="more-details">
 						For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
 					</p>
-
 					<p class="more-details">
 						For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
 					</p>
@@ -632,28 +672,64 @@
 
 	</div>
 
-	<script src="<?php bloginfo('template_url'); ?>/static/js/jquery.panelslider.js"></script>
-
 	<script>
 
 		(function() {
 
 			var $academicsSearch,
 				$degreeSearchResultsContainer,
-				$sidebarLeft;
+				$sidebarLeft,
+				degreeCompareLimit;
+
+
+			function initAutoComplete() {
+				// Workaround for bug in mouse item selection
+				$.fn.typeahead.Constructor.prototype.blur = function() {
+					var that = this;
+					setTimeout(function () { that.hide(); }, 250);
+				};
+				$academicsSearch.find('.search-query').typeahead({
+					source: function(query, process) {
+						return ["Arts & Humanities", "Business Administration", "Education & Human Performance", "Engineering & Computer Science", "Graduate Studies", "Health & Public Affairs", "Honors", "Hospitality Management", "Medicine", "Nursing", "Optics & Photonics", "Sciences"];
+					},
+					updater: function(item) {
+						this.$element[0].value = item;
+						this.$element[0].form.submit();
+						return item;
+					}
+				});
+			}
 
 			function degreeSearchSuccessHandler( data ) {
-				$degreeSearchResultsContainer.find('li').removeClass('fade-in');
-				$degreeSearchResultsContainer.html(data.markup);
-				$academicsSearch.find('.degree-search-header').text(data.count + " results");
-				$degreeSearchResultsContainer.find('li').addClass('fade');
-				setTimeout(function() {
-					$degreeSearchResultsContainer.find('li').addClass('fade-in');
-				},200);
+				$loaderScreen = $academicsSearch.find('#ajax-loading');
+
+				// Make sure the spinner actually gets displayed
+				// so the user knows the page changed
+				window.setTimeout(function() {
+					$loaderScreen.addClass('hidden');
+
+					$degreeSearchResultsContainer
+						.html(data.markup)
+						.append($loaderScreen);
+
+					$academicsSearch
+						.find('.degree-result-count-num')
+							.html(data.count);
+				}, 200);
 			}
 
 			function degreeSearchFailureHandler( data ) {
-				$degreeSearchResultsContainer.html('Error loading degree data.');
+				$loaderScreen = $academicsSearch.find('#ajax-loading');
+
+				// Make sure the spinner actually gets displayed
+				// so the user knows the page changed
+				window.setTimeout(function() {
+					$loaderScreen.addClass('hidden');
+
+					$degreeSearchResultsContainer
+						.html('Error loading degree data.')
+						.append($loaderScreen);
+				}, 200);
 			}
 
 			function loadDegreeSearchResults() {
@@ -668,19 +744,21 @@
 				});
 
 				var jqxhr = $.ajax({
-					url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results.php',
-					type: "GET",
+					url: '<?php echo admin_url( "admin-ajax.php" ); ?>',
+					//url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results-2.php',
+					type: 'GET',
 					cache: false,
 					data: {
+						'action': 'degree_search',
 						'search-query': encodeURIComponent($academicsSearch.find('.search-query').val()),
-						// 'sort-by': $academicsSearch.find('.sort-by:checked').val(),
+						'sort-by': $academicsSearch.find('.sort-by:checked').val(),
 						'program-type': programType,
 						'college': college
 					},
 					dataType: "json"
 				});
 
-				$degreeSearchResultsContainer.html('<img src="//universityheader.ucf.edu/bar/img/ajax-loader.gif" width="16" height="16" /> Loading search results...');
+				$academicsSearch.find('#ajax-loading').removeClass('hidden');
 				jqxhr.done(degreeSearchSuccessHandler);
 				jqxhr.fail(degreeSearchFailureHandler);
 
@@ -694,7 +772,7 @@
 			var timer = null;
 			function searchQueryKeyUpHandler(e) {
 				if($(e.target).val().length > 2) {
-					// prevent action until user is done typing (debounce)
+					// prevent action until user is done typing
 					if(timer) {
 						clearTimeout(timer);
 					}
@@ -702,82 +780,196 @@
 				}
 			}
 
-			function onPanelOpen() {
-				// resize the panel to be full screen and align it, doesn't resize properly on page load
-				$sidebarLeft
-					.height($(document).height())
-					// setting the click handler on page load fails
-					.one('click', '.close', closePanel);
-				$(window).scrollTop(0);
+			function initFilterClickHandler(e) {
+				// Position sidebar
+				$sidebarLeft.css({
+					'top': $('#mobile-filter').offset().top + ( $('#mobile-filter').outerHeight() / 2 )
+				});
+
+				$(document).on('click', function(e) {
+					// Allow a click anywhere within the document
+					// to close the sidebar, except for in/on the sidebar itself
+					// or on its toggle button
+					if($sidebarLeft.hasClass('active') && !$(e.target).is('#degree-search-sidebar') && !$sidebarLeft.find(e.target).length && !$(e.target).is('#mobile-filter')) {
+						closeMenuHandler(e);
+					}
+				});
+				$academicsSearch.on('click', '#mobile-filter-done', closeMenuHandler);
+				$academicsSearch.on('click', '#mobile-filter-reset', resetFilterClickHandler);
 			}
 
-			function onPanelClose() {
+			function filterClickHandler(e) {
+				e.preventDefault();
+				// resize the panel to be full screen and align it
+				$('html, body').animate({
+					scrollTop: $(this).offset().top,
+				}, 200);
+				$sidebarLeft
+					.css({
+						'max-height': $(window).height() - 40
+					})
+					.add($(this))
+					.toggleClass('active');
+			}
+
+			function resetFilterClickHandler(e) {
+				e.preventDefault();
+				$sidebarLeft
+					.find('.checkbox input')
+					.prop('checked', false);
+			}
+
+			function closeMenuHandler(e) {
+				e.preventDefault();
+				$sidebarLeft
+					.add('#mobile-filter')
+					.removeClass('active')
+					.end()
+					.css({
+						'max-height': 0
+					});
 				loadDegreeSearchResults();
 			}
 
-			function closePanel() {
-				$.panelslider.close();
-			}
+			function highlightCompareableDegree($checkedDegreeInput) {
+				unhighlightCompareableDegrees();
 
-			function setupEventHandlers() {
-				if($academicsSearch.find('.filter-tab').is(':visible')) {
-					// mobile
-					$academicsSearch.find('.filter-tab').panelslider({
-						'slideType': 'push',
-						'side': 'right',
-						onOpen: onPanelOpen,
-						onClose: onPanelClose
-					});
-					$academicsSearch.on('change', '.sort-by', degreeSearchChangeHandler);
-				} else {
-					// desktop
-					$academicsSearch.on('change', '.program-type, .location, .college, .sort-by', degreeSearchChangeHandler);
-				}
-				$academicsSearch.on('change', '.search-query', searchQueryKeyUpHandler);
-			}
-
-			function initPage() {
-				$academicsSearch = $('#academics_search');
-				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
-				$sidebarLeft = $academicsSearch.find("#sidebar_left");
-				setupEventHandlers();
-			}
-
-			$(initPage);
-
-			function initAutoComplete() {
-				// Workaround for bug in mouse item selection
-				$.fn.typeahead.Constructor.prototype.blur = function() {
-				    var that = this;
-				    setTimeout(function () { that.hide(); }, 250);
-				};
-
-				$academicsSearch.find('.search-query').typeahead({
-				    source: function(query, process) {
-				        return ["Arts & Humanities", "Business Administration", "Education & Human Performance", "Engineering & Computer Science", "Graduate Studies", "Health & Public Affairs", "Honors", "Hospitality Management", "Medicine", "Nursing", "Optics & Photonics", "Sciences"];
-				    }
+				$checkedDegreeInput.each(function() {
+					$(this)
+						.parents('.degree-search-result')
+							.addClass('compare-active')
+							.find('.degree-compare-selected-count')
+								.text('(added ' + $checkedDegreeInput.length + ' of ' + degreeCompareLimit + ')');
 				});
 			}
 
-			$(initAutoComplete);
-
-			function initCompare() {
-				$academicsSearch.on('change', '.compareCheckbox', compareChangeHandler);
+			function unhighlightCompareableDegrees() {
+				// Remove styling on parent list items that have previously been
+				// marked as active.
+				$academicsSearch
+					.find('.compare-active')
+						.removeClass('compare-active')
+						.find('.degree-compare-selected-count')
+							.text('');
 			}
 
-			function compareChangeHandler(e) {
-				if($(e.target).is(':checked') && $academicsSearch.find('.compareCheckbox:checked').length > 1) {
-					$(e.target).next().html('<a href="/compare-degrees/">compare now</a>');
-				} else {
-					$academicsSearch.find('.compareCheckbox').each(function() {
-						$(this).next().text('compare');
-					});
+			function uncheckCompareableDegrees() {
+				// Uncheck any checked degrees.
+				$academicsSearch.find('.degree-compare-input:checked').removeProp('checked');
+			}
+
+			function activateCompareBtns() {
+				// Restore functionality to disabled Compare btns.
+				// Disable any unchecked degree checkboxes (set a max #.)
+				$academicsSearch
+					.find('.compare-active .degree-compare-submit')
+						.removeClass('disabled')
+						.addClass('btn-primary')
+						.end()
+					.find('.degree-compare-input:not(:checked)')
+						.attr('disabled', 'disabled');
+			}
+
+			function deactivateCompareBtns() {
+				$academicsSearch
+					.find('.degree-compare-submit.btn-primary')
+						.removeClass('btn-primary')
+						.addClass('disabled')
+						.end()
+					.find('.degree-compare-input:disabled')
+						.removeAttr('disabled');
+			}
+
+			function submitComparison() {
+				var $checked = $academicsSearch.find('.degree-compare-input:checked');
+				var compareables = [];
+
+				$checked.each(function() {
+					compareables.push($(this).val());
+				});
+
+				var compareParams = $.param({
+					academicPlanIds: compareables,
+				});
+
+				// perform request, passing compareables as GET params...
+				window.location = '<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>?' + compareParams;
+
+				// Uncheck selected degrees, in case the user hits the back btn in their browser.
+				// Works due to back-forward cache magic.
+				window.setTimeout(function() {
+					unhighlightCompareableDegrees();
+					uncheckCompareableDegrees();
+					deactivateCompareBtns();
+				}, 200);
+			}
+
+			function degreeCompareBtnClickHandler(e) {
+				e.preventDefault();
+
+				if (!$(this).hasClass('disabled')) {
+					submitComparison();
 				}
 			}
 
-			$(initCompare);
+			function degreeCompareChangeHandler() {
+				var $checked = $academicsSearch.find('.degree-compare-input:checked');
 
+				// If no other Compare boxes are checked, activate 'compare mode'
+				// (allow one other checkbox to be checked)
+				if ($checked.length < degreeCompareLimit) {
+					highlightCompareableDegree($checked);
+					deactivateCompareBtns();
+				}
+				// If two checkboxes are now checked, go to comparison page
+				else {
+					highlightCompareableDegree($checked);
+					activateCompareBtns();
+				}
+			}
+
+			function setupEventHandlers() {
+				if($academicsSearch.find('#mobile-filter').is(':visible')) {
+					// mobile
+					$academicsSearch.one('click', '#mobile-filter', initFilterClickHandler);
+					$academicsSearch.on('click', '#mobile-filter', filterClickHandler);
+				} else {
+					// desktop
+					$academicsSearch.on('change', '.program-type, .college, .sort-by', degreeSearchChangeHandler);
+				}
+				$academicsSearch.on('keyup', '.search-query', searchQueryKeyUpHandler);
+				$academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
+				$(document).on('ready', degreeCompareChangeHandler); // activate compare btns if user refreshed with degrees checked
+				$academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
+			}
+
+			function scrollToResults() {
+				// Scroll past top page content if the page loaded with GET params set
+				// (assume the user submitted a search or something and has already seen
+				// the page content)
+				$(document).on('ready', function() {
+					if ($academicsSearch.attr('data-params-onload') && $academicsSearch.attr('data-params-onload') === 'true') {
+						$('html, body').animate({
+							scrollTop: $academicsSearch.find('.degree-search-sort').offset().top - 20,
+						}, 200);
+					}
+				});
+			}
+
+			function initPage() {
+				$academicsSearch = $('#academics-search');
+				$degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
+				$sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
+				degreeCompareLimit = 2;
+
+				scrollToResults();
+				setupEventHandlers();
+				initAutoComplete();
+			}
+
+			$(initPage);
 		})();
+
 	</script>
 
 <?php get_footer(); ?>

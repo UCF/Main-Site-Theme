@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Abstract class for defining custom post types.
  *

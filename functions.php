@@ -2015,4 +2015,250 @@ function header_meta_degree_search($str) {
 }
 add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
+
+/**
+ * Returns an multidimensional array of taxonomies with
+ * terms for a post.
+ * @return array
+ * @author Jim Barnes
+ **/
+function get_post_tax_term_array( 
+	$post_id, 
+	$taxonomies=array( 'post_tag' ), 
+	$scalars=false 
+) {
+
+	$unordered_taxonomies = wp_get_post_terms(
+		$post_id,
+		$taxonomies
+	);
+
+	$retval = array();
+
+	foreach ( $unordered_taxonomies as $tax ) {
+		// Get the taxonomy type
+		$tax_name = $tax->taxonomy;
+		if ( $scalars ) {
+			$retval[$tax_name] = $tax;
+		} else {
+			$retval[$tax_name][] = $tax;
+		}
+		
+	}
+
+	return $retval;
+}
+
+function get_first_result( $array_result ) {
+	return $array_result[0];
+}
+
+function fetch_degree_data( $params ) {
+
+
+	$args = array(
+		'numberposts' => -1,
+		'post_type' => 'degree',
+		'orderby' => 'title', // default sort by title
+		'order' => 'ASC',
+		'tax_query' => array(),
+		's' => ''
+	);
+
+	if ( $params ) {
+		if ( $params['search-query'] ) {
+			$args['s'] = $params['search-query'];
+		}
+
+		if ( $params['sort-by'] && $params['sort-by'] == 'degree_hours' ) {
+			$args['meta_key'] = 'degree_hours';
+			$args['orderby'] = 'meta_value_num title';
+		}
+
+		if ( $params['college'] ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'colleges',
+				'field' => 'slug',
+				'terms' => $params['college']
+			);
+		}
+		if ( $params['program-type'] ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'program_types',
+				'field' => 'slug',
+				'terms' => $params['program-type']
+			);
+		}
+		if ( count( $params['tax_query'] ) > 1 ) {
+			$params['tax_query']['relation'] = 'AND';
+		}
+	}
+
+	if ( $_GET['search-query'] ) {
+		$args['s'] = $_GET['search-query'];
+	}
+
+	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'title' ) {
+		$args['meta_key'] = '';
+		$args['orderby'] = 'title';
+	}
+
+	if ( $_GET['college'] ) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'colleges',
+			'field' => 'slug',
+			'terms' => $_GET['college']
+		);
+	}
+	if ( $_GET['program-type'] ) {
+		$args['tax_query'][] = array(
+			'taxonomy' => 'program_types',
+			'field' => 'slug',
+			'terms' => $_GET['program-type']
+		);
+	}
+	if ( count( $args['tax_query'] ) > 1 ) {
+		$args['tax_query']['relation'] = 'AND';
+	}
+
+	$posts = get_posts( $args );
+
+	$data = array();
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			// Example of a format we might be working with
+			// Get all post meta
+			$unmatched_meta = get_post_meta($post->ID);
+
+			// Get only keys that start with degree_
+			$meta = array_intersect_key($unmatched_meta, array_flip(preg_grep('/^degree_/', array_keys($unmatched_meta))));
+
+			$terms = get_post_tax_term_array( $post->ID, array( 'program_types', 'colleges', 'departments' ) );
+
+			$degree = array(
+				'academicPlanId' => $post->ID,
+				'academicSubPlan' => array(
+					'id' => '',
+					'type' => '',
+					'name' => '',
+					'description' => ''
+				),
+				'name' => $post->post_title,
+				'abbreviation' => '',
+				'degree' => get_first_result( $terms['program_types'] )->name,
+				'creditHours' => intval( $meta['degree_hours'][0] ) ? $meta['degree_hours'] : 0,
+				'thesis' => '',
+				'nonThesis' => '',
+				'dissertation' => '',
+				'college' => array(
+					'name' => get_first_result( $terms['colleges'] )->name,
+					'url' => '',
+				),
+				'department' => array(
+					'name' => get_first_result( $terms['departments'] )->name,
+					'url' => '',
+				),
+				'online' => $meta['degree_online'][0] ? $meta['degree_online'] : '',
+				'description' => $meta['degree_description'][0] ? $meta['degree_description'] : '',
+				'prerequisite' => '',
+				'applicationInfoDescription' => '',
+				'applicationInfo' => array(
+					'deadline' => '',
+					'description' => ''
+				),
+				'contact' => array(
+					'name' => '', // currently split into an array in WP; leave blank for now.
+					'email' => $meta['degree_email'][0] ? $meta['degree_email'] : '',
+					'phoneNumber' => $meta['degree_phone'][0] ? $meta['degree_phone'] : ''
+				),
+				'keywordList' => $terms['post_tag']->name,
+				'relatedProgramList' => array(),
+				'semesterOffered' => '',
+				'dateLastModified' => ''
+			);
+
+			$data[] = $degree;
+		}
+	}
+
+	return $data;
+}
+
+function get_degree_search_markup($return=false, $params=null) {
+	if ( !defined( 'WP_USE_THEMES' ) ) {
+		define( 'WP_USE_THEMES', false );
+	}
+
+	// Dummy data
+	$results = fetch_degree_data($params);
+
+	$markup = '<div class="no-results">No results found.</div>';
+
+	if ( $results ) {
+		$markup = '<ul class="degree-search-results">';
+
+		foreach ( $results as $result ) {
+			$result_markup = '';
+			ob_start();
+			?>
+			<li class="degree-search-result">
+				<h3 class="degree-title">
+					<a href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
+						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
+					</a>
+					<span class="degree-credits-count">
+					<?php echo $result['degree']; ?> &mdash;
+					<?php if ( $result['creditHours'] > 0 ): ?>
+						<?php echo $result['creditHours']; ?> Credit Hours
+					<?php else: ?>
+						Credit Hours n/a
+					<?php endif; ?>
+					</span>
+				</h3>
+				<div class="degree-online">
+					<?php if ( $result['online'] == 'on' ): ?>
+					<span class="icon-globe"></span> Online
+					<?php endif; ?>
+				</div>
+				<div class="degree-compare">
+					<label class="checkbox degree-compare-label">
+						<input type="checkbox" name="compare[]" class="degree-compare-input" value="<?php echo $result['academicPlanId']; ?>"> <span>Add To Compare</span>
+					</label>
+					<a class="degree-compare-submit btn btn-small disabled" href="#">
+						<span class="hidden-phone">Compare</span>
+						<span class="visible-phone">Go</span>
+					</a>
+					<span class="degree-compare-selected-count"></span>
+				</div>
+			</li>
+			<?php
+			$result_markup = ob_get_contents();
+			$markup .= $result_markup;
+			ob_end_clean();
+		}
+
+		$markup .= '</ul>';
+	}
+
+	$markup = preg_replace("@[\\r|\\n|\\t]+@", "", $markup);
+
+	// Print results
+	if ($return) {
+		return array (
+			'count' => count( $results ),
+			'markup' => $markup
+		);
+	} else {
+		wp_send_json(
+			array(
+				'count' => count ( $results ),
+				'markup' => $markup
+			)
+		);
+	}
+}
+
+add_action( 'wp_ajax_degree_search', 'get_degree_search_markup' );
+add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_markup' );
+
 ?>

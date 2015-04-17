@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Create a javascript slideshow of each top level element in the
  * shortcode.  All attributes are optional, but may default to less than ideal
