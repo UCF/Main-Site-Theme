@@ -2054,8 +2054,6 @@ function get_first_result( $array_result ) {
 }
 
 function fetch_degree_data( $params ) {
-
-
 	$args = array(
 		'numberposts' => -1,
 		'post_type' => 'degree',

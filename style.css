@@ -964,6 +964,16 @@ li.tagit-new input {
   font-size: 14px;
 }
 
+#degree-search-sidebar.affix {
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  top: 0;
+  z-index: 999;
+}
+#degree-search-sidebar.affix-bottom {
+  position: absolute;
+}
 #degree-search-sidebar .degree-filter-title {
   color: #999;
   font-family: 'Gotham SSm 7r', 'Gotham SSm A', 'Gotham SSm B';
@@ -1036,6 +1046,12 @@ li.tagit-new input {
   position: relative;
   z-index: 2;
 }
+.ie8 #degree-search-top .search-field {
+  /* Move out of the field in ie8 because right padding isn't applied properly to push text */
+  box-sizing: content-box;
+  margin-right: 60px;
+  padding-right: 0;
+}
 #degree-search-top .degree-search-form button {
   background-color: transparent;
   border: 0 solid transparent;
@@ -1065,6 +1081,9 @@ li.tagit-new input {
   top: 0;
   width: 60px;
   z-index: 4;
+}
+#degree-search-top .degree-search-form button:hover {
+  text-decoration: none;
 }
 #degree-search-top .degree-search-form button:hover:before {
   color: #08C;
@@ -1110,7 +1129,10 @@ li.tagit-new input {
 
 #degree-search-top .degree-search-sort-options {
   padding-left: 15px;
-  width: 26%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
+  width: 27%;
+}
+.ie8 #degree-search-top .degree-search-sort-options {
+  width: 28%;
 }
 #degree-search-top .degree-search-sort-label {
   font-family: 'Gotham SSm 6r', 'Gotham SSm A', 'Gotham SSm B';

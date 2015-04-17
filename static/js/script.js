@@ -762,6 +762,7 @@ var degreeSearch = function($) {
   var $academicsSearch,
     $degreeSearchResultsContainer,
     $sidebarLeft,
+    $degreeSearchContent,
     degreeCompareLimit,
     ajaxURL;
 
@@ -839,13 +840,13 @@ var degreeSearch = function($) {
         'college': college
       },
       dataType: "json"
-  });
+    });
 
-  $academicsSearch.find('#ajax-loading').removeClass('hidden');
-  jqxhr.done(degreeSearchSuccessHandler);
-  jqxhr.fail(degreeSearchFailureHandler);
+    $academicsSearch.find('#ajax-loading').removeClass('hidden');
+    jqxhr.done(degreeSearchSuccessHandler);
+    jqxhr.fail(degreeSearchFailureHandler);
 
-}
+  }
 
   // Handler Methods
   function degreeSearchChangeHandler() {
@@ -1012,6 +1013,27 @@ var degreeSearch = function($) {
     }
   }
 
+  function toggleSidebarAffix() {
+    if ($(window).width() > 767) {
+      $sidebarLeft
+        .affix({
+          offset: {
+            top: $sidebarLeft.offset().top,
+            bottom: $('#footer').outerHeight() + 100
+          }
+        })
+        .on('affixed.bs.affix affixed-bottom.bs.affix', function() {
+          $degreeSearchContent.addClass('offset3');
+        })
+        .on('affixed-top.bs.affix', function() {
+          $degreeSearchContent.removeClass('offset3');
+        });
+    }
+    else {
+      $degreeSearchContent.removeClass('offset3');
+    }
+  }
+
   function setupEventHandlers() {
     if($academicsSearch.find('#mobile-filter').is(':visible')) {
       // mobile
@@ -1025,6 +1047,7 @@ var degreeSearch = function($) {
     // $academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
     // $(document).on('ready', degreeCompareChangeHandler); // activate compare btns if user refreshed with degrees checked
     // $academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
+    $(window).on('load resize', toggleSidebarAffix);
   }
 
   function scrollToResults() {
@@ -1046,6 +1069,7 @@ var degreeSearch = function($) {
     if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
       $sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
+      $degreeSearchContent = $academicsSearch.find('#degree-search-content');
       degreeCompareLimit = 2;
       ajaxURL = $academicsSearch.attr('data-ajax-url');
 
