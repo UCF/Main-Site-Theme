@@ -800,6 +800,8 @@ var degreeSearch = function($) {
       $academicsSearch
         .find('.degree-result-count-num')
           .html(data.count);
+
+      toggleSidebarAffix();
     }, 200);
   }
 
@@ -814,6 +816,8 @@ var degreeSearch = function($) {
       $degreeSearchResultsContainer
         .html('Error loading degree data.')
         .append($loaderScreen);
+
+        toggleSidebarAffix();
     }, 200);
   }
 
@@ -845,7 +849,6 @@ var degreeSearch = function($) {
     $academicsSearch.find('#ajax-loading').removeClass('hidden');
     jqxhr.done(degreeSearchSuccessHandler);
     jqxhr.fail(degreeSearchFailureHandler);
-
   }
 
   // Handler Methods
@@ -1014,7 +1017,7 @@ var degreeSearch = function($) {
   }
 
   function toggleSidebarAffix() {
-    if ($(window).width() > 767) {
+    if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
         .affix({
           offset: {
@@ -1031,6 +1034,10 @@ var degreeSearch = function($) {
     }
     else {
       $degreeSearchContent.removeClass('offset3');
+      $(window).off('.affix');
+      $sidebarLeft
+        .removeClass('affix affix-top affix-bottom')
+        .removeData('bs.affix');
     }
   }
 
