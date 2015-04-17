@@ -21,7 +21,7 @@
 		$data = get_degree_search_markup(true, $params);
 	?>
 
-	<div class="row page-content" id="academics-search" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
+	<div class="row page-content" id="academics-search" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
 
 		<form>
 

@@ -1125,7 +1125,7 @@ li.tagit-new input {
 
 #ajax-loading {
   background-color: rgba(255, 255, 255, .75);
-  background-image: url('<?php echo THEME_IMG_URL; ?>/ajax.gif');
+  background-image: url('static/img/ajax.gif');
   background-repeat: no-repeat;
   background-position: top center;
   box-sizing: border-box;

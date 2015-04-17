@@ -762,7 +762,8 @@ var degreeSearch = function($) {
   var $academicsSearch,
     $degreeSearchResultsContainer,
     $sidebarLeft,
-    degreeCompareLimit;
+    degreeCompareLimit,
+    ajaxURL;
 
   function initAutoComplete() {
     // Workaround for bug in mouse item selection
@@ -827,8 +828,7 @@ var degreeSearch = function($) {
     });
 
     var jqxhr = $.ajax({
-      url: '<?php echo admin_url( "admin-ajax.php" ); ?>',
-      //url: '<?php echo get_stylesheet_directory_uri(); ?>/page-degree-search-results-2.php',
+      url: ajaxURL,
       type: 'GET',
       cache: false,
       data: {
@@ -1043,10 +1043,11 @@ var degreeSearch = function($) {
   function initPage() {
     $academicsSearch = $('#academics-search');
 
-    if ($academicSearch.length > 0) {
+    if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
       $sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
       degreeCompareLimit = 2;
+      ajaxURL = $academicsSearch.attr('data-ajax-url');
 
       scrollToResults();
       setupEventHandlers();
