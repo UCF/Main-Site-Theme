@@ -922,82 +922,338 @@ li.tagit-new input {
 #phonebook-search-results hr { margin-top: 10px; margin-bottom: 10px; clear: both; }
 
 
+
+
 /* Academics Search, Single Degree Programs */
-#academics-search .degree-search-label {
-	display: block;
-	font-size: 11px;
-	text-transform: uppercase;
-	padding-bottom: 2px;
-	font-weight: bold;
+#academics-search .lead {
+  font-family: 'Gotham SSm 2r', 'Gotham SSm A', 'Gotham SSm B';
+  font-style: normal;
+  font-weight: 200;
+  letter-spacing: -.012em;
+  margin: 10px 0;
+  text-align: center;
 }
-#academics-search #browse .degree-search-label { float: left; padding-top: 8px; }
-.ie #academics-search #filters input.search-query { text-indent: 8px; }
-.ie7 #academics-search #filters .input-append .btn { margin-top: 1px; }
-.ie7 #academics-search #filters .input-append .btn .hidden-phone { padding-left: 5px; }
-
-#academics-search #browse #degree-type-header { display: block; float: left; padding-top: 8px; }
-#academics-search #browse ul#degree-type-list { float: left; margin-left: 15px; }
-
-#academics-search #results { margin-top: 20px; }
-#academics-search #results #results-header { margin-bottom: 10px; }
-#academics-search #results #results-header .results-header-alt { font-style: italic; font-weight: normal; padding-left: 5px; font-size: 20px; }
-#academics-search #results #degree-type-sort #degree-type-sort-header { padding: 9px 15px 0 0; font-weight: bold; }
-#academics-search #results #degree-type-sort li.dropdown.active a:hover b.caret { border-top: 0; border-bottom: 4px solid #000; }
-#academics-search #results #degree-type-sort li.dropup.active a:hover b.caret { border-top: 4px solid #000; border-bottom: 0; }
-
-#academics-search .more-details { text-align:center; }
-
-.degree-list-heading {
-	font-family: 'Helvetica-Neue', Helvetica, sans-serif;
-	font-weight: 300;
-	font-size: 22px;
-	line-height: 32px;
-	padding-bottom: 5px;
-	margin-top: 15px;
+#academics-search .lead strong,
+#academics-search .lead b {
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-weight: 400;
 }
 
-ul.degree-results-list { list-style-type: none; margin-top: 0; margin-left: -25px; }
-ul.degree-results-list .program { padding: 15px; width: 760px; }
-ul.degree-results-list .program:nth-child(2n+1) { background: #eee; }
+#academics-search a.btn.disabled,
+#academics-search a.btn.disabled:hover,
+#academics-search a.btn.disabled:active,
+#academics-search a.btn.disabled:focus {
+  /* Make disabled buttons look more disabled */
+  color: #888 !important;
+}
 
-ul.degree-results-list .program .name { margin-bottom: 4px; }
-.ie7 ul.degree-results-list .program > .row > div > a,
-.ie8 ul.degree-results-list .program > .row > div > a { display: block; height: 22px; border-bottom: 0 !important; }
-ul.degree-results-list .program a .name { color: #660000; }
-ul.degree-results-list .program a .name:hover { color: #E50606; }
+#degree-search-top,
+#degree-search-top input,
+#degree-search-top select,
+#degree-search-top option,
+#degree-search-sidebar,
+#degree-search-sidebar input,
+#degree-search-sidebar select,
+#degree-search-sidebar option,
+#degree-search-content,
+#degree-search-content input,
+#degree-search-content select,
+#degree-search-content option {
+  /* Reset to Helvetica */
+  font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+  font-size: 14px;
+}
 
-ul.degree-results-list .program .college,
-ul.degree-results-list .program .department,
-ul.degree-results-list .program .label,
-ul.degree-results-list .program .name_label,
-ul.degree-results-list .program .program-type-alt,
-#degree-single .program .label,
-#degree-single .program .name_label,
-#degree-single .program .program-type-alt { font-family: 'Helvetica-Neue', Helvetica, sans-serif; }
+#degree-search-sidebar .degree-filter-title {
+  color: #999;
+  font-family: 'Gotham SSm 7r', 'Gotham SSm A', 'Gotham SSm B';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: -.012em;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
 
-ul.degree-results-list .program .college,
-ul.degree-results-list .program .department { display: table; } /* for browsers that can get a neater display */
+#degree-search-sidebar .degree-filter-list {
+  list-style-type: none;
+  margin-bottom: 15px;
+  margin-left: 0;
+}
+#degree-search-sidebar .degree-filter-list li {
+  padding-bottom: 6px;
+}
+#degree-search-sidebar label {
+  font-size: 14px;
+}
+#degree-search-sidebar input:checked + span,
+#degree-search-sidebar input:checked ~ .filter-result-count {
+  font-weight: bold;
+}
+#degree-search-sidebar .filter-result-count {
+  color: #888;
+}
 
-ul.degree-results-list .program .college,
-ul.degree-results-list .program .department { font-size: 12px; }
+#degree-search-sidebar .degree-infobox-toggle {
+  border-bottom: 0 solid transparent !important;
+  display: block;
+  float: right;
+  margin-right: 15px;
+  padding-left: 5px;
+}
+#degree-search-sidebar .degree-infobox-toggle .icon {
+  padding-bottom: 3px;
+  border-bottom: 1px dotted #999;
+}
+#degree-search-sidebar .popover-title {
+  display: none; /* hide empty titles */
+}
+#degree-search-sidebar .popover {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: normal;
+}
 
-ul.degree-results-list .program .name_label,
-ul.degree-results-list .program .program-type-alt,
-#degree-single .program .name_label,
-#degree-single .program .program-type-alt { font-size: 10px; color: #555; text-transform: uppercase; }
+#degree-search-top {
+  margin-bottom: 10px;
+}
 
-ul.degree-results-list .program .name_label { width: 110px; display: block; float: left; clear: both; }
-ul.degree-results-list .program .program-type-alt { display: block; margin: auto; }
+#degree-search-top .degree-search-form {
+  margin-top: 20px;
+  text-align: center;
+}
+#degree-search-top .degree-search-form-inner {
+  display: inline-block;
+  position: relative;
+}
+#degree-search-top .search-field {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 50px;
+  line-height: 50px;
+  text-indent: 10px;
+  padding-right: 60px;
+  position: relative;
+  z-index: 2;
+}
+#degree-search-top .degree-search-form button {
+  background-color: transparent;
+  border: 0 solid transparent;
+  bottom: 0;
+  box-sizing: border-box;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  text-indent: 70px;
+  top: 0;
+  width: 60px;
+  z-index: 3;
+}
+#degree-search-top .degree-search-form button:before {
+  color: #999;
+  content: '';
+  display: block;
+  font-family: 'FontAwesome';
+  font-size: 28px;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  text-align: center;
+  text-indent: 0;
+  top: 0;
+  width: 60px;
+  z-index: 4;
+}
+#degree-search-top .degree-search-form button:hover:before {
+  color: #08C;
+}
 
-.ie7 ul.degree-results-list .program .college,
-.ie7 ul.degree-results-list .program .department,
-.ie8 ul.degree-results-list .program .college,
-.ie8 ul.degree-results-list .program .department { display: block; float: none; }
+#degree-search-top .degree-search-sort {
+  border-bottom: 1px solid #e5e5e5;
+  margin-top: 35px;
+  width: 100%;
+}
+#degree-search-top .degree-search-sort-inner {
+  display: table-cell;
+  padding-bottom: 10px;
+  vertical-align: middle;
+}
 
-ul.degree-results-list .program .credits-wrap { float: right; margin-top: 2px; text-align: center; min-width: 140px; }
-.ie7 ul.degree-results-list .program .credits-wrap,
-.ie8 ul.degree-results-list .program .credits-wrap { width: 140px; }
-ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: pointer; }
+#degree-search-top .degree-result-count {
+  border-right: 1px solid #eee;
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  line-height: 24px;
+  padding-right: 15px;
+  padding-top: 5px;
+  width: 70%;
+}
+#degree-search-top .degree-result-count-num,
+#degree-search-top .degree-result-count .result {
+  font-style: normal;
+  font-weight: bold;
+}
+#degree-search-top .degree-result-count .result {
+  display: block;
+  font-size: 21px;
+}
+
+#degree-search-top .degree-result-phrase-phone {
+  display: none;
+}
+
+#degree-search-top .degree-search-sort-options {
+  padding-left: 15px;
+  width: 26%; /* widths don't add up to 100% here to avoid ie7-specific overrides (which doesn't support box-sizing) */
+}
+#degree-search-top .degree-search-sort-label {
+  font-family: 'Gotham SSm 6r', 'Gotham SSm A', 'Gotham SSm B';
+  font-weight: 600;
+  font-style: normal;
+  padding-left: 0;
+}
+
+#degree-search-content .degree-search-results-container {
+  position: relative;
+}
+
+#ajax-loading {
+  background-color: rgba(255, 255, 255, .75);
+  background-image: url('<?php echo THEME_IMG_URL; ?>/ajax.gif');
+  background-repeat: no-repeat;
+  background-position: top center;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  transition: background-color .1s ease-in-out;
+}
+#ajax-loading.hidden {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#degree-search-content .degree-search-results-container .no-results {
+  margin-top: 20px;
+}
+
+#degree-search-content .degree-search-results {
+  list-style-type: none;
+  margin-left: 0;
+  margin-top: 15px;
+}
+#degree-search-content .degree-search-result {
+  box-sizing: border-box;
+  display: table;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 12px 15px;
+  position: relative;
+}
+#degree-search-content .degree-search-result:nth-child(2n) {
+  background-color: #fafafa;
+}
+#degree-search-content .degree-search-result:hover,
+#degree-search-content .degree-search-result:active,
+#degree-search-content .degree-search-result:focus {
+  background-color: #eee;
+}
+
+#degree-search-content .degree-title {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 16.5px;
+  margin-bottom: 8px;
+  width: 57%;
+}
+
+#degree-search-content .degree-title a {
+  border: 0 solid transparent;
+  color: #08c;
+  display: block;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-weight: 400;
+  font-style: normal;
+}
+#degree-search-content .degree-credits-count {
+  color: #888;
+  font-size: 13px;
+  font-weight: normal;
+  display: block;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+#degree-search-content .degree-online {
+  box-sizing: border-box;
+  display: table-cell;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 0 10px;
+  vertical-align: middle;
+  width: 12%;
+}
+
+#degree-search-content .degree-compare {
+  display: table-cell;
+  vertical-align: middle;
+  width: 14%;
+}
+
+#degree-search-content .degree-compare-label {
+  color: #888;
+  display: inline-block;
+  font-size: 11px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+#degree-search-content .degree-compare-label:hover,
+#degree-search-content .degree-compare-label:active,
+#degree-search-content .degree-compare-label:focus {
+  color: #08c;
+}
+
+#degree-search-content .degree-search-result.compare-active .degree-compare-label span {
+  display: none;
+}
+#degree-search-content .degree-compare-input:disabled + span,
+#degree-search-content .degree-compare-input:disabled + span:hover,
+#degree-search-content .degree-compare-input:disabled + span:active,
+#degree-search-content .degree-compare-input:disabled + span:focus {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+#degree-search-content .degree-compare-submit {
+  display: none;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+#degree-search-content .degree-search-result.compare-active .degree-compare-submit {
+  display: inline-block;
+}
+
+#degree-search-content .degree-compare-selected-count {
+  color: #888;
+  display: none;
+  font-size: 10px;
+  font-style: italic;
+  text-align: center;
+}
+#degree-search-content .degree-search-result.compare-active .degree-compare-selected-count {
+  display: block;
+}
+
 
 
 /* Single Degree Pages */
