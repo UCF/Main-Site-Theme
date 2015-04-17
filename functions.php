@@ -2022,10 +2022,10 @@ add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
  * @return array
  * @author Jim Barnes
  **/
-function get_post_tax_term_array( 
-	$post_id, 
-	$taxonomies=array( 'post_tag' ), 
-	$scalars=false 
+function get_post_tax_term_array(
+	$post_id,
+	$taxonomies=array( 'post_tag' ),
+	$scalars=false
 ) {
 
 	$unordered_taxonomies = wp_get_post_terms(
@@ -2043,7 +2043,7 @@ function get_post_tax_term_array(
 		} else {
 			$retval[$tax_name][] = $tax;
 		}
-		
+
 	}
 
 	return $retval;
@@ -2215,21 +2215,6 @@ function get_degree_search_markup($return=false, $params=null) {
 					<?php endif; ?>
 					</span>
 				</h3>
-				<div class="degree-online">
-					<?php if ( $result['online'] == 'on' ): ?>
-					<span class="icon-globe"></span> Online
-					<?php endif; ?>
-				</div>
-				<div class="degree-compare">
-					<label class="checkbox degree-compare-label">
-						<input type="checkbox" name="compare[]" class="degree-compare-input" value="<?php echo $result['academicPlanId']; ?>"> <span>Add To Compare</span>
-					</label>
-					<a class="degree-compare-submit btn btn-small disabled" href="#">
-						<span class="hidden-phone">Compare</span>
-						<span class="visible-phone">Go</span>
-					</a>
-					<span class="degree-compare-selected-count"></span>
-				</div>
 			</li>
 			<?php
 			$result_markup = ob_get_contents();
