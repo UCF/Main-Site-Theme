@@ -1841,81 +1841,6 @@ function display_degree_list($posts) {
 
 
 /**
- * Generates a title based on context page is viewed.  Stolen from Thematic
- **/
-function header_title($title, $separator){
-	global $post;
-	$site_name = get_bloginfo('name');
-
-	if ( is_single() ) {
-		$content = single_post_title('', FALSE);
-	}
-	elseif ( is_home() || is_front_page() ) {
-		$content = get_bloginfo('description');
-	}
-	elseif ( is_page() ) {
-		$substitute_title = get_post_meta(get_the_ID(), 'page_title', true);
-		if (!empty($substitute_title)) {
-			$content = $substitute_title;
-		}
-		else {
-			$content = single_post_title('', FALSE);
-		}
-	}
-	elseif ( is_search() ) {
-		$content = __('Search Results for:');
-		$content .= ' ' . esc_html(stripslashes(get_search_query()));
-	}
-	elseif ( is_category() ) {
-		$content = __('Category Archives:');
-		$content .= ' ' . single_cat_title("", false);;
-	}
-	elseif ( is_404() ) {
-		$content = __('Not Found');
-	}
-	else {
-		$content = get_bloginfo('description');
-	}
-
-	if (get_query_var('paged')) {
-		$content .= ' ' .$separator. ' ';
-		$content .= 'Page';
-		$content .= ' ';
-		$content .= get_query_var('paged');
-	}
-
-	if($content) {
-		if (is_home() || is_front_page()) {
-			$elements = array(
-				'site_name' => $site_name,
-				'separator' => $separator,
-				'content' => $content,
-			);
-		} else {
-			$elements = array(
-				'content' => $content,
-			);
-		}
-	} else {
-		$elements = array(
-			'site_name' => $site_name,
-		);
-	}
-
-	// But if they don't, it won't try to implode
-	if(is_array($elements)) {
-		$doctitle = implode(' ', $elements);
-	}
-	else {
-		$doctitle = $elements;
-	}
-
-	return $doctitle;
-}
-add_filter('wp_title', 'header_title', 10, 2); // Allow overriding by SEO plugins
-
-
-/**
  * Generates page <title> tag for Degree Program post type.
  **/
 function header_title_degree_programs($title, $separator) {
@@ -1931,74 +1856,71 @@ add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overridi
 
 
 /**
- * Returns the combined name of the current Degree Search view
- * with any Sort By options, if available.
+ * Generates page <title> value for Degree Search based on current filters/search val.
  **/
-function get_degree_search_view_title() {
-	$content = '';
-	$degree_type = $_GET['degree_type'];
-	$sort_by = $_GET['current_view'];
-	$degree_title = null;
-	$degree_subtitle = null;
+function get_degree_search_title( $separator='|', $params=null ) {
+	$title = 'Degree Search';
 
-	if ($degree_type) {
-		switch ($degree_type) {
-			case 'undergraduate-degree':
-				$degree_title = 'All Majors';
-				break;
-			case 'minor':
-				$degree_title = 'All Minors';
-				break;
-			case 'graduate-degree':
-				$degree_title = 'All Graduate Degrees';
-				break;
-			case 'certificate':
-				$degree_title = 'All Certificates';
-				break;
-			default:
-				break;
+	$params = degree_search_params_or_fallback( $params );
+
+	if ( !empty( $params ) ) {
+		$title .= ' '. $separator .' results ';
+
+		if ( isset( $params['search-query'] ) ) {
+			$title .= 'for "'. $params['search-query'] .'" ';
 		}
-		if ($degree_title) {
-			$content .= $degree_title;
+
+		if ( isset( $params['college'] ) ) {
+			$title .= 'by colleges: ';
+
+			$count = 1;
+			foreach ( $params['college'] as $college_slug ) {
+				$college = get_term_by( 'slug', $college_slug, 'colleges' );
+				$college_name = $college->name;
+				$count++;
+
+				$title .= $college_name . ', ';
+			}
+		}
+
+		if ( isset( $params['program-type'] ) ) {
+			$title .= 'by program types: ';
+
+			$count = 1;
+			foreach ( $params['program-type'] as $program_slug ) {
+				$program = get_term_by( 'slug', $program_slug, 'program_types' );
+				$program_name = $program->name;
+				$count++;
+
+				$title .= $program_name . ', ';
+			}
+
+		}
+
+		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
+			$title .= 'sorted by total credit hours';
+		}
+
+		if ( substr( $title, -2 ) == ', ' ) {
+			$title = substr_replace( $title, '', -2 );
 		}
 	}
-	if ($sort_by) {
-		switch ($sort_by) {
-			case 'browse_by_college':
-				$degree_subtitle = 'by College';
-				break;
-			case 'browse_by_hours':
-				$degree_subtitle = 'by Hours';
-				break;
-			default:
-				break;
-		}
-		if ($degree_subtitle) {
-			$content .= ' '.$degree_subtitle;
-		}
-	}
 
-	return trim($content);
+	return $title;
 }
 
 
 /**
- * Generates page <title> tag for Degree Search views.
+ * Generates title tag text for Degree Search.
  **/
-function header_title_degree_search($title, $separator) {
+function wp_title_degree_search( $title, $separator ) {
 	global $post;
-
-	// Custom page overrides here (necessary for Degree Search)
-	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$view_title = get_degree_search_view_title();
-		if ($view_title !== '') {
-			$view_title = ' '.$separator.' '.$view_title;
-		}
-		$title = 'Degree Search'.$view_title;
+	if ( $post->ID == get_page_by_title( 'Degree Search' )->ID ) {
+		$custom_title = get_degree_search_title( $separator );
+		return $custom_title;
 	}
-	return '<title>'.$title.'</title>'; // Why is this necessary???
 }
-add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
+add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page titles (SEO plugins can't overwrite them.)
 
 
 /**
@@ -2158,72 +2080,6 @@ function fetch_degree_data( $params ) {
 
 	return $data;
 }
-
-
-/**
- * Generates page <title> value for Degree Search based on current filters/search val.
- **/
-function get_degree_search_title( $params=null ) {
-	$title = 'Degree Search';
-
-	$params = degree_search_params_or_fallback( $params );
-
-	if ( !empty( $params ) ) {
-		$title .= ' | Results ';
-
-		if ( isset( $params['search-query'] ) ) {
-			$title .= 'for "'. $params['search-query'] .'" ';
-		}
-
-		if ( isset( $params['college'] ) ) {
-			$title .= 'by colleges: ';
-
-			$count = 1;
-			foreach ( $params['college'] as $college_slug ) {
-				$college = get_term_by( 'slug', $college_slug, 'colleges' );
-				$college_name = $college->name;
-				$count++;
-
-				$title .= $college_name . ', ';
-			}
-		}
-
-		if ( isset( $params['program-type'] ) ) {
-			$title .= 'by program types: ';
-
-			$count = 1;
-			foreach ( $params['program-type'] as $program_slug ) {
-				$program = get_term_by( 'slug', $program_slug, 'program_types' );
-				$program_name = $program->name;
-				$count++;
-
-				$title .= $program_name . ', ';
-			}
-
-		}
-
-		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
-			$title .= 'sorted by total credit hours';
-		}
-
-		if ( substr( $title, -2 ) == ', ' ) {
-			$title = substr_replace( $title, '', -2 );
-		}
-	}
-
-	return $title;
-}
-
-
-// TODO: fix and update all wp_title hooks (see Pegasus)
-function wp_title_degree_search( $title, $separator ) {
-	global $post;
-	if ( $post->post_title == 'Degree Search' ) {
-		$custom_title = get_degree_search_title();
-		return '<title>'. $custom_title .'</title>';
-	}
-}
-add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page titles (SEO plugins can't overwrite them.)
 
 
 /**
