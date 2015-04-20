@@ -2195,4 +2195,21 @@ function order_program_types( $clauses, $taxonomies, $args ) {
 
 add_filter( 'terms_clauses', 'order_program_types', 1, 3 );
 
+
+function get_degree_search_suggestions() {
+	$suggestions = array();
+	$posts = get_posts( array(
+		'numberposts' => -1,
+		'post_type' => 'degree'
+	) );
+
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$suggestions[] = $post->post_title;
+		}
+	}
+
+	return array_values( array_unique( $suggestions ) );
+}
+
 ?>

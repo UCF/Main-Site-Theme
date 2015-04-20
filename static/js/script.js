@@ -774,7 +774,7 @@ var degreeSearch = function($) {
     };
     $academicsSearch.find('.search-field').typeahead({
       source: function(query, process) {
-        return ["Arts & Humanities", "Business Administration", "Education & Human Performance", "Engineering & Computer Science", "Graduate Studies", "Health & Public Affairs", "Honors", "Hospitality Management", "Medicine", "Nursing", "Optics & Photonics", "Sciences"];
+        return searchSuggestions; // searchSuggestions defined in page-degree-search.php
       },
       updater: function(item) {
         this.$element[0].value = item;

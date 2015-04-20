@@ -16,6 +16,10 @@
 		$data = get_degree_search_contents( true, $params );
 	?>
 
+	<script>
+		var searchSuggestions = <?php echo json_encode( get_degree_search_suggestions() ); ?>;
+	</script>
+
 	<div class="row page-content" id="academics-search">
 
 		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
