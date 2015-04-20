@@ -2049,9 +2049,11 @@ function get_post_tax_term_array(
 	return $retval;
 }
 
+
 function get_first_result( $array_result ) {
 	return $array_result[0];
 }
+
 
 function fetch_degree_data( $params ) {
 	$args = array(
@@ -2077,46 +2079,21 @@ function fetch_degree_data( $params ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'colleges',
 				'field' => 'slug',
-				'terms' => $params['college']
+				'terms' => $params['college'],
+				'include_children' => false
 			);
 		}
 		if ( $params['program-type'] ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'program_types',
 				'field' => 'slug',
-				'terms' => $params['program-type']
+				'terms' => $params['program-type'],
+				'include_children' => false
 			);
 		}
 		if ( count( $params['tax_query'] ) > 1 ) {
 			$params['tax_query']['relation'] = 'AND';
 		}
-	}
-
-	if ( $_GET['search-query'] ) {
-		$args['s'] = $_GET['search-query'];
-	}
-
-	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'degree_hours' ) {
-		$args['meta_key'] = 'degree_hours';
-		$args['orderby'] = 'meta_value_num title';
-	}
-
-	if ( $_GET['college'] ) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'colleges',
-			'field' => 'slug',
-			'terms' => $_GET['college']
-		);
-	}
-	if ( $_GET['program-type'] ) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'program_types',
-			'field' => 'slug',
-			'terms' => $_GET['program-type']
-		);
-	}
-	if ( count( $args['tax_query'] ) > 1 ) {
-		$args['tax_query']['relation'] = 'AND';
 	}
 
 	$posts = get_posts( $args );
@@ -2182,13 +2159,106 @@ function fetch_degree_data( $params ) {
 	return $data;
 }
 
-function get_degree_search_markup($return=false, $params=null) {
+
+/**
+ * Generates page <title> value for Degree Search based on current filters/search val.
+ **/
+function get_degree_search_title( $params=null ) {
+	$title = 'Degree Search';
+
+	$params = degree_search_params_or_fallback( $params );
+
+	if ( !empty( $params ) ) {
+		$title .= ' | Results ';
+
+		if ( isset( $params['search-query'] ) ) {
+			$title .= 'for "'. $params['search-query'] .'" ';
+		}
+
+		if ( isset( $params['college'] ) ) {
+			$title .= 'by colleges: ';
+
+			$count = 1;
+			foreach ( $params['college'] as $college_slug ) {
+				$college = get_term_by( 'slug', $college_slug, 'colleges' );
+				$college_name = $college->name;
+				$count++;
+
+				$title .= $college_name . ', ';
+			}
+		}
+
+		if ( isset( $params['program-type'] ) ) {
+			$title .= 'by program types: ';
+
+			$count = 1;
+			foreach ( $params['program-type'] as $program_slug ) {
+				$program = get_term_by( 'slug', $program_slug, 'program_types' );
+				$program_name = $program->name;
+				$count++;
+
+				$title .= $program_name . ', ';
+			}
+
+		}
+
+		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
+			$title .= 'sorted by total credit hours';
+		}
+
+		if ( substr( $title, -2 ) == ', ' ) {
+			$title = substr_replace( $title, '', -2 );
+		}
+	}
+
+	return $title;
+}
+
+
+// TODO: fix and update all wp_title hooks (see Pegasus)
+function wp_title_degree_search( $title, $separator ) {
+	global $post;
+	if ( $post->post_title == 'Degree Search' ) {
+		$custom_title = get_degree_search_title();
+		return '<title>'. $custom_title .'</title>';
+	}
+}
+add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page titles (SEO plugins can't overwrite them.)
+
+
+/**
+ * Returns relevant params passed in, or available relevant $_GET params.
+ * Initial backend requests should pass in $params; ajax requests for
+ * degree search data will not (use $_GET).
+ *
+ * Removes empty parameters.
+ **/
+function degree_search_params_or_fallback( $params ) {
+	if ( empty( $params ) ) {
+		$params = $_GET;
+	}
+
+	$defaults = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
+	$filtered_params = array();
+
+	// Eliminate any parameters not listed in the set of default params
+	foreach ( $defaults as $key => $val ) {
+		$filtered_params[$key] = $params[$key];
+	}
+
+	return array_filter( $filtered_params );
+}
+
+
+function get_degree_search_contents( $return=false, $params=null ) {
 	if ( !defined( 'WP_USE_THEMES' ) ) {
 		define( 'WP_USE_THEMES', false );
 	}
 
-	// Dummy data
-	$results = fetch_degree_data($params);
+	$params = degree_search_params_or_fallback( $params );
+	$query_params = http_build_query( $params );
+
+	$results = fetch_degree_data( $params );
 
 	$markup = '<div class="no-results">No results found.</div>';
 
@@ -2226,7 +2296,7 @@ function get_degree_search_markup($return=false, $params=null) {
 	$markup = preg_replace("@[\\r|\\n|\\t]+@", "", $markup);
 
 	// Print results
-	if ($return) {
+	if ( $return ) {
 		return array (
 			'count' => count( $results ),
 			'markup' => $markup
@@ -2234,27 +2304,32 @@ function get_degree_search_markup($return=false, $params=null) {
 	} else {
 		wp_send_json(
 			array(
-				'count' => count ( $results ),
-				'markup' => $markup
+				'querystring' => $query_params,
+				'count' => count( $results ),
+				'markup' => $markup,
+				'title' => get_degree_search_title( $params ),
+				'description' => '', // TODO
+				'canonical' => '' // TODO
 			)
 		);
 	}
 }
 
-add_action( 'wp_ajax_degree_search', 'get_degree_search_markup' );
-add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_markup' );
+add_action( 'wp_ajax_degree_search', 'get_degree_search_contents' );
+add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_contents' );
+
 
 /**
  * Orders program_types based on the DEGREE_PROGRAM_ORDER
  * setting found in functions/config.php.
- * NOTE: For this filter to be applied, get_terms must 
+ * NOTE: For this filter to be applied, get_terms must
  * include the taxonomy 'program_types' and an orderby
  * of degree_program_order.
  * @return array
  * @author Jim Barnes
  **/
 function order_program_types( $clauses, $taxonomies, $args ) {
-	if ( in_array('program_types', $taxonomies ) 
+	if ( in_array('program_types', $taxonomies )
 		&& $args['orderby'] == 'degree_program_order' ) {
 		$slugs = implode('", "', unserialize(DEGREE_PROGRAM_ORDER));
 		$clauses['orderby'] = 'ORDER BY FIELD (t.slug,' . '"' . $slugs . '")';
@@ -2262,6 +2337,6 @@ function order_program_types( $clauses, $taxonomies, $args ) {
 	return $clauses;
 }
 
-add_filter( 'terms_clauses', 'order_program_types', 1, 3);
+add_filter( 'terms_clauses', 'order_program_types', 1, 3 );
 
 ?>

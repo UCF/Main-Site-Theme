@@ -784,8 +784,25 @@ var degreeSearch = function($) {
     });
   }
 
-  function degreeSearchSuccessHandler( data ) {
-    // console.log(data);
+  function updateDocumentHead(data) {
+    // replaceState (on-the-fly url update)
+    var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href;
+    var newURL = baseURL + '?' + data.querystring;
+    window.history.replaceState(data, data.title, newURL);
+
+    // <head> updates
+    $(document)
+      .find('title')
+        .text(data.title)
+        .end()
+      .find('meta[name="description"]')
+        .attr('content', data.description)
+        .end()
+      .find('link[rel="canonical"]')
+        .attr('href', data.canonical);
+  }
+
+  function degreeSearchSuccessHandler(data) {
     $loaderScreen = $academicsSearch.find('#ajax-loading');
 
     // Make sure the spinner actually gets displayed
@@ -802,10 +819,12 @@ var degreeSearch = function($) {
           .html(data.count);
 
       toggleSidebarAffix();
+
+      updateDocumentHead(data);
     }, 200);
   }
 
-  function degreeSearchFailureHandler( data ) {
+  function degreeSearchFailureHandler(data) {
     $loaderScreen = $academicsSearch.find('#ajax-loading');
 
     // Make sure the spinner actually gets displayed
@@ -818,6 +837,8 @@ var degreeSearch = function($) {
         .append($loaderScreen);
 
         toggleSidebarAffix();
+
+       updateDocumentHead(data);
     }, 200);
   }
 
@@ -832,10 +853,10 @@ var degreeSearch = function($) {
       college.push($(this).val());
     });
 
-    var jqxhr = $.ajax({
+    $.ajax({
       url: ajaxURL,
       type: 'GET',
-      cache: false,
+      // cache: false,
       data: {
         'action': 'degree_search',
         'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
@@ -843,12 +864,16 @@ var degreeSearch = function($) {
         'program-type': programType,
         'college': college
       },
-      dataType: "json"
-    });
+      dataType: 'json'
+    })
+      .done(function(data) {
+        degreeSearchSuccessHandler(data);
+      })
+      .fail(function(data) {
+        degreeSearchFailureHandler(data);
+      });
 
     $academicsSearch.find('#ajax-loading').removeClass('hidden');
-    jqxhr.done(degreeSearchSuccessHandler);
-    jqxhr.fail(degreeSearchFailureHandler);
   }
 
   // Handler Methods
@@ -1071,7 +1096,7 @@ var degreeSearch = function($) {
   }
 
   function initPage() {
-    $academicsSearch = $('#academics-search');
+    $academicsSearch = $('#academics-search-form');
 
     if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');

@@ -105,6 +105,15 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
 	'certificate',
 )));
 
+# Default degree search parameters.  Include all available parameters, even
+# if they are empty.
+define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
+	'program-type' => array('undergraduate-degree'),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => ''
+) ) );
+
 # Domain/path of site (for cookies)
 list($domain, $path) = explode('.edu', get_site_url());
 $domain = preg_replace('/^(http|https):\/\//','',$domain).'.edu';
@@ -514,6 +523,7 @@ Config::$scripts = array(
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
 	THEME_JS_URL.'/jFeed.js',
 	THEME_JS_URL.'/jquery.cookie.js',
+	THEME_JS_URL.'/history.min.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
