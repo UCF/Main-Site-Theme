@@ -1926,16 +1926,16 @@ add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page t
 /**
  * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
  **/
-function header_meta_degree_search($str) {
-	global $post;
+// function header_meta_degree_search($str) {
+// 	global $post;
 
-	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$view_title = strtolower(get_degree_search_view_title()).' ';
-		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
-	}
-	return $str;
-}
-add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
+// 	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
+// 		$view_title = strtolower( get_degree_search_view_title() ).' ';
+// 		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
+// 	}
+// 	return $str;
+// }
+// add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
 
 /**
@@ -2085,7 +2085,7 @@ function fetch_degree_data( $params ) {
 /**
  * Returns relevant params passed in, or available relevant $_GET params.
  * Initial backend requests should pass in $params; ajax requests for
- * degree search data will not (use $_GET).
+ * degree search data will not (use $_GET instead).
  *
  * Removes empty parameters.
  **/
