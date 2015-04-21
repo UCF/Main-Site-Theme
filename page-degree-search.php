@@ -10,21 +10,19 @@
 		$filters['college']['terms'] = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
 
 		// Fetch data based on default params + anything set by the user
-		$default_params = array(
-			'program-type' => array('undergraduate-degree'),
-			'college' => array(),
-			'sort-by' => 'title',
-			'search-query' => ''
-		);
-
+		$default_params = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
 		$params = array_merge( $default_params, $_GET );
 
-		$data = get_degree_search_markup(true, $params);
+		$data = get_degree_search_contents( true, $params );
 	?>
 
-	<div class="row page-content" id="academics-search" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
+	<script>
+		var searchSuggestions = <?php echo json_encode( get_degree_search_suggestions() ); ?>;
+	</script>
 
-		<form>
+	<div class="row page-content" id="academics-search">
+
+		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 
 			<div class="span12" id="page_title">
 				<h1 class="span9"><?php the_title();?></h1>
@@ -48,10 +46,7 @@
 
 				<div class="degree-search-sort clearfix">
 					<h2 class="degree-search-sort-inner degree-result-count">
-						<span class="degree-result-count-num"><?php echo $data['count']; ?></span> <span class="degree-result-phrase-desktop">degree programs found</span><span class="degree-result-phrase-phone">results</span>
-						<?php if ( $params['search-query'] ): ?>
-						<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $params['search-query'] ); ?></span>
-						<?php endif; ?>
+						<?php echo get_degree_search_result_phrase( $data['count'], $params['search-query'] ); ?>
 					</h2>
 
 					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">

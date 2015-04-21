@@ -1841,81 +1841,6 @@ function display_degree_list($posts) {
 
 
 /**
- * Generates a title based on context page is viewed.  Stolen from Thematic
- **/
-function header_title($title, $separator){
-	global $post;
-	$site_name = get_bloginfo('name');
-
-	if ( is_single() ) {
-		$content = single_post_title('', FALSE);
-	}
-	elseif ( is_home() || is_front_page() ) {
-		$content = get_bloginfo('description');
-	}
-	elseif ( is_page() ) {
-		$substitute_title = get_post_meta(get_the_ID(), 'page_title', true);
-		if (!empty($substitute_title)) {
-			$content = $substitute_title;
-		}
-		else {
-			$content = single_post_title('', FALSE);
-		}
-	}
-	elseif ( is_search() ) {
-		$content = __('Search Results for:');
-		$content .= ' ' . esc_html(stripslashes(get_search_query()));
-	}
-	elseif ( is_category() ) {
-		$content = __('Category Archives:');
-		$content .= ' ' . single_cat_title("", false);;
-	}
-	elseif ( is_404() ) {
-		$content = __('Not Found');
-	}
-	else {
-		$content = get_bloginfo('description');
-	}
-
-	if (get_query_var('paged')) {
-		$content .= ' ' .$separator. ' ';
-		$content .= 'Page';
-		$content .= ' ';
-		$content .= get_query_var('paged');
-	}
-
-	if($content) {
-		if (is_home() || is_front_page()) {
-			$elements = array(
-				'site_name' => $site_name,
-				'separator' => $separator,
-				'content' => $content,
-			);
-		} else {
-			$elements = array(
-				'content' => $content,
-			);
-		}
-	} else {
-		$elements = array(
-			'site_name' => $site_name,
-		);
-	}
-
-	// But if they don't, it won't try to implode
-	if(is_array($elements)) {
-		$doctitle = implode(' ', $elements);
-	}
-	else {
-		$doctitle = $elements;
-	}
-
-	return $doctitle;
-}
-add_filter('wp_title', 'header_title', 10, 2); // Allow overriding by SEO plugins
-
-
-/**
  * Generates page <title> tag for Degree Program post type.
  **/
 function header_title_degree_programs($title, $separator) {
@@ -1931,89 +1856,86 @@ add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overridi
 
 
 /**
- * Returns the combined name of the current Degree Search view
- * with any Sort By options, if available.
+ * Generates page <title> value for Degree Search based on current filters/search val.
  **/
-function get_degree_search_view_title() {
-	$content = '';
-	$degree_type = $_GET['degree_type'];
-	$sort_by = $_GET['current_view'];
-	$degree_title = null;
-	$degree_subtitle = null;
+function get_degree_search_title( $separator='|', $params=null ) {
+	$title = 'Degree Search';
 
-	if ($degree_type) {
-		switch ($degree_type) {
-			case 'undergraduate-degree':
-				$degree_title = 'All Majors';
-				break;
-			case 'minor':
-				$degree_title = 'All Minors';
-				break;
-			case 'graduate-degree':
-				$degree_title = 'All Graduate Degrees';
-				break;
-			case 'certificate':
-				$degree_title = 'All Certificates';
-				break;
-			default:
-				break;
+	$params = degree_search_params_or_fallback( $params );
+
+	if ( !empty( $params ) ) {
+		$title .= ' '. $separator .' results ';
+
+		if ( isset( $params['search-query'] ) ) {
+			$title .= 'for "'. $params['search-query'] .'" ';
 		}
-		if ($degree_title) {
-			$content .= $degree_title;
+
+		if ( isset( $params['college'] ) ) {
+			$title .= 'by colleges: ';
+
+			$count = 1;
+			foreach ( $params['college'] as $college_slug ) {
+				$college = get_term_by( 'slug', $college_slug, 'colleges' );
+				$college_name = $college->name;
+				$count++;
+
+				$title .= $college_name . ', ';
+			}
+		}
+
+		if ( isset( $params['program-type'] ) ) {
+			$title .= 'by program types: ';
+
+			$count = 1;
+			foreach ( $params['program-type'] as $program_slug ) {
+				$program = get_term_by( 'slug', $program_slug, 'program_types' );
+				$program_name = $program->name;
+				$count++;
+
+				$title .= $program_name . ', ';
+			}
+
+		}
+
+		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
+			$title .= 'sorted by total credit hours';
+		}
+
+		if ( substr( $title, -2 ) == ', ' ) {
+			$title = substr_replace( $title, '', -2 );
 		}
 	}
-	if ($sort_by) {
-		switch ($sort_by) {
-			case 'browse_by_college':
-				$degree_subtitle = 'by College';
-				break;
-			case 'browse_by_hours':
-				$degree_subtitle = 'by Hours';
-				break;
-			default:
-				break;
-		}
-		if ($degree_subtitle) {
-			$content .= ' '.$degree_subtitle;
-		}
-	}
 
-	return trim($content);
+	return $title;
 }
 
 
 /**
- * Generates page <title> tag for Degree Search views.
+ * Generates title tag text for Degree Search.
  **/
-function header_title_degree_search($title, $separator) {
+function wp_title_degree_search( $title, $separator ) {
 	global $post;
-
-	// Custom page overrides here (necessary for Degree Search)
-	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$view_title = get_degree_search_view_title();
-		if ($view_title !== '') {
-			$view_title = ' '.$separator.' '.$view_title;
-		}
-		$title = 'Degree Search'.$view_title;
+	if ( $post->ID == get_page_by_title( 'Degree Search' )->ID ) {
+		$custom_title = get_degree_search_title( $separator );
+		return $custom_title;
 	}
-	return '<title>'.$title.'</title>'; // Why is this necessary???
 }
-add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
+add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page titles (SEO plugins can't overwrite them.)
 
 
 /**
  * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
  **/
-function header_meta_degree_search($str) {
-	global $post;
+// function header_meta_degree_search($str) {
+// 	global $post;
 
-	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$view_title = strtolower(get_degree_search_view_title()).' ';
-		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
-	}
-	return $str;
-}
-add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
+// 	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
+// 		$view_title = strtolower( get_degree_search_view_title() ).' ';
+// 		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
+// 	}
+// 	return $str;
+// }
+// add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
 
 /**
@@ -2049,13 +1971,13 @@ function get_post_tax_term_array(
 	return $retval;
 }
 
+
 function get_first_result( $array_result ) {
 	return $array_result[0];
 }
 
+
 function fetch_degree_data( $params ) {
-
-
 	$args = array(
 		'numberposts' => -1,
 		'post_type' => 'degree',
@@ -2079,46 +2001,21 @@ function fetch_degree_data( $params ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'colleges',
 				'field' => 'slug',
-				'terms' => $params['college']
+				'terms' => $params['college'],
+				'include_children' => false
 			);
 		}
 		if ( $params['program-type'] ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'program_types',
 				'field' => 'slug',
-				'terms' => $params['program-type']
+				'terms' => $params['program-type'],
+				'include_children' => false
 			);
 		}
 		if ( count( $params['tax_query'] ) > 1 ) {
 			$params['tax_query']['relation'] = 'AND';
 		}
-	}
-
-	if ( $_GET['search-query'] ) {
-		$args['s'] = $_GET['search-query'];
-	}
-
-	if ( $_GET['sort-by'] && $_GET['sort-by'] == 'degree_hours' ) {
-		$args['meta_key'] = 'degree_hours';
-		$args['orderby'] = 'meta_value_num title';
-	}
-
-	if ( $_GET['college'] ) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'colleges',
-			'field' => 'slug',
-			'terms' => $_GET['college']
-		);
-	}
-	if ( $_GET['program-type'] ) {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'program_types',
-			'field' => 'slug',
-			'terms' => $_GET['program-type']
-		);
-	}
-	if ( count( $args['tax_query'] ) > 1 ) {
-		$args['tax_query']['relation'] = 'AND';
 	}
 
 	$posts = get_posts( $args );
@@ -2184,13 +2081,55 @@ function fetch_degree_data( $params ) {
 	return $data;
 }
 
-function get_degree_search_markup($return=false, $params=null) {
+
+/**
+ * Returns markup for "x results found" at top of Degree Search results.
+ **/
+function get_degree_search_result_phrase( $result_count, $result_query ) {
+	ob_start();
+?>
+	<span class="degree-result-count-num"><?php echo $result_count; ?></span> <span class="degree-result-phrase-desktop">degree programs found</span><span class="degree-result-phrase-phone">results</span>
+	<?php if ( $result_query ): ?>
+	<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $result_query ); ?></span>
+	<?php endif; ?>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns relevant params passed in, or available relevant $_GET params.
+ * Initial backend requests should pass in $params; ajax requests for
+ * degree search data will not (use $_GET instead).
+ *
+ * Removes empty parameters.
+ **/
+function degree_search_params_or_fallback( $params ) {
+	if ( empty( $params ) ) {
+		$params = $_GET;
+	}
+
+	$defaults = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
+	$filtered_params = array();
+
+	// Eliminate any parameters not listed in the set of default params
+	foreach ( $defaults as $key => $val ) {
+		$filtered_params[$key] = $params[$key];
+	}
+
+	return array_filter( $filtered_params );
+}
+
+
+function get_degree_search_contents( $return=false, $params=null ) {
 	if ( !defined( 'WP_USE_THEMES' ) ) {
 		define( 'WP_USE_THEMES', false );
 	}
 
-	// Dummy data
-	$results = fetch_degree_data($params);
+	$params = degree_search_params_or_fallback( $params );
+	$query_params = http_build_query( $params );
+
+	$results = fetch_degree_data( $params );
 
 	$markup = '<div class="no-results">No results found.</div>';
 
@@ -2228,35 +2167,44 @@ function get_degree_search_markup($return=false, $params=null) {
 	$markup = preg_replace("@[\\r|\\n|\\t]+@", "", $markup);
 
 	// Print results
-	if ($return) {
+	if ( $return ) {
 		return array (
 			'count' => count( $results ),
 			'markup' => $markup
 		);
 	} else {
+		$result_count = count( $results );
+		$result_title = get_degree_search_title( $params );
+		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params['search-query'] );
+
 		wp_send_json(
 			array(
-				'count' => count ( $results ),
-				'markup' => $markup
+				'querystring' => $query_params,
+				'count' => $result_phrase_markup,
+				'markup' => $markup,
+				'title' => $result_title,
+				'description' => '', // TODO
+				'canonical' => '', // TODO
 			)
 		);
 	}
 }
 
-add_action( 'wp_ajax_degree_search', 'get_degree_search_markup' );
-add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_markup' );
+add_action( 'wp_ajax_degree_search', 'get_degree_search_contents' );
+add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_contents' );
+
 
 /**
  * Orders program_types based on the DEGREE_PROGRAM_ORDER
  * setting found in functions/config.php.
- * NOTE: For this filter to be applied, get_terms must 
+ * NOTE: For this filter to be applied, get_terms must
  * include the taxonomy 'program_types' and an orderby
  * of degree_program_order.
  * @return array
  * @author Jim Barnes
  **/
 function order_program_types( $clauses, $taxonomies, $args ) {
-	if ( in_array('program_types', $taxonomies ) 
+	if ( in_array('program_types', $taxonomies )
 		&& $args['orderby'] == 'degree_program_order' ) {
 		$slugs = implode('", "', unserialize(DEGREE_PROGRAM_ORDER));
 		$clauses['orderby'] = 'ORDER BY FIELD (t.slug,' . '"' . $slugs . '")';
@@ -2264,6 +2212,23 @@ function order_program_types( $clauses, $taxonomies, $args ) {
 	return $clauses;
 }
 
-add_filter( 'terms_clauses', 'order_program_types', 1, 3);
+add_filter( 'terms_clauses', 'order_program_types', 1, 3 );
+
+
+function get_degree_search_suggestions() {
+	$suggestions = array();
+	$posts = get_posts( array(
+		'numberposts' => -1,
+		'post_type' => 'degree'
+	) );
+
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$suggestions[] = $post->post_title;
+		}
+	}
+
+	return array_values( array_unique( $suggestions ) );
+}
 
 ?>

@@ -10,6 +10,7 @@
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
+	add_theme_support( 'title-tag' );
 	add_image_size('homepage', 620);
 	add_image_size('homepage-secondary', 540);
 	add_image_size('centerpiece-image', 940, 338, true); 	// Crops!
@@ -104,6 +105,15 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
 	'graduate-degree',
 	'certificate',
 )));
+
+# Default degree search parameters.  Include all available parameters, even
+# if they are empty.
+define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
+	'program-type' => array('undergraduate-degree'),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => ''
+) ) );
 
 # Domain/path of site (for cookies)
 list($domain, $path) = explode('.edu', get_site_url());
@@ -514,6 +524,7 @@ Config::$scripts = array(
 	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
 	THEME_JS_URL.'/jFeed.js',
 	THEME_JS_URL.'/jquery.cookie.js',
+	THEME_JS_URL.'/history.min.js',
 	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
