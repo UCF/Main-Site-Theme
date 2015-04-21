@@ -43,7 +43,7 @@
 
 				<div class="degree-search-form">
 					<div class="degree-search-form-inner">
-						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php echo $_GET['search-query']; ?>">
+						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
 						<button class="btn btn-link" type="submit">Search</button>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 
 				<div class="degree-search-sort clearfix">
 					<h2 class="degree-search-sort-inner degree-result-count">
-						<?php echo get_degree_search_result_phrase( $data['count'], $params['search-query'] ); ?>
+						<?php echo get_degree_search_result_phrase( $data['count'], $params ); ?>
 					</h2>
 
 					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
