@@ -430,6 +430,12 @@ Config::$theme_settings = array(
 			'description' => 'URL to the twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/csbrisketbus</em>',
 			'value'       => $theme_options['twitter_url'],
 		)),
+		new TextField(array(
+			'name'        => 'Shareaholic Below Post ID',
+			'id'          => THEME_OPTIONS_NAME.'[shareaholic_below_post_id]',
+			'description' => 'The id found in the shortcode for Shareaholic\'s below post share buttons.',
+			'value'       => $theme_options['shareaholic_below_post_id'],
+		)),
 	),
 	'Styles' => array(
 		new RadioField(array(
