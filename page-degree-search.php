@@ -9,9 +9,17 @@
 		$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
 		$filters['college']['terms'] = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
 
-		// Fetch data based on default params + anything set by the user
-		$default_params = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
-		$params = array_merge( $default_params, $_GET );
+		// Fetch data based on default params + anything set by the user.
+		// Set default parameters for when no GET params are available (default
+		// view).
+		if ( empty( $_GET ) ) {
+			$params = degree_search_params_or_fallback( array(
+				'program-type' => array('undergraduate-degree'),
+			) );
+		}
+		else {
+			$params = degree_search_params_or_fallback( $_GET );
+		}
 
 		$data = get_degree_search_contents( true, $params );
 	?>

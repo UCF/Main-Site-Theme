@@ -106,10 +106,17 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
 	'certificate',
 )));
 
-# Default degree search parameters.  Include all available parameters, even
-# if they are empty.
-define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
-	'program-type' => array('undergraduate-degree'),
+/**
+ * All valid degree search parameters.  Any GET params passed to the degree
+ * search that aren't in this array are ignored.
+ *
+ * If a param must *always* have some fallback value (e.g. a param for radio
+ * buttons), set it below.
+ * Otherwise, each value below should be empty (e.g. an empty string '' or
+ * array() ).
+ **/
+define( 'DEGREE_SEARCH_PARAMS', serialize( array(
+	'program-type' => array(),
 	'college' => array(),
 	'sort-by' => 'title',
 	'search-query' => ''

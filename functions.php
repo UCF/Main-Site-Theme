@@ -2109,14 +2109,21 @@ function degree_search_params_or_fallback( $params ) {
 		$params = $_GET;
 	}
 
-	$defaults = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
+	$valid_params = unserialize( DEGREE_SEARCH_PARAMS );
 	$filtered_params = array();
 
-	// Eliminate any parameters not listed in the set of default params
-	foreach ( $defaults as $key => $val ) {
-		$filtered_params[$key] = $params[$key];
+	// Eliminate any parameters not listed in the set of valid params.
+	// Set defaults if some passed param value isn't set.
+	foreach ( $valid_params as $key => $val ) {
+		if ( isset( $params[$key] ) ) {
+			$filtered_params[$key] = $params[$key];
+		}
+		else {
+			$filtered_params[$key] = $valid_params[$key];
+		}
 	}
 
+	// Return params with any empty values removed.
 	return array_filter( $filtered_params );
 }
 
