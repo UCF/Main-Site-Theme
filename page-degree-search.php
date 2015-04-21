@@ -22,7 +22,7 @@
 
 	<div class="row page-content" id="academics-search">
 
-		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>" <?php if ( !empty( $_GET ) ) { echo 'data-params-onload="true"'; } ?>>
+		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 
 			<div class="span12" id="page_title">
 				<h1 class="span9"><?php the_title();?></h1>

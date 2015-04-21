@@ -794,10 +794,7 @@ var degreeSearch = function($) {
           return item;
         }
       });
-
-    $
   }
-
 
 
   function updateDocumentHead(data) {
@@ -834,8 +831,8 @@ var degreeSearch = function($) {
         .find('.degree-result-count')
           .html(data.count);
 
+      scrollToResults();
       toggleSidebarAffix();
-
       updateDocumentHead(data);
     }, 200);
   }
@@ -852,9 +849,9 @@ var degreeSearch = function($) {
         .html('Error loading degree data.')
         .append($loaderScreen);
 
-        toggleSidebarAffix();
-
-       updateDocumentHead(data);
+      scrollToResults();
+      toggleSidebarAffix();
+      updateDocumentHead(data);
     }, 200);
   }
 
@@ -1095,20 +1092,23 @@ var degreeSearch = function($) {
     // $academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
     // $(document).on('ready', degreeCompareChangeHandler); // activate compare btns if user refreshed with degrees checked
     // $academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
+    $(window).on('load', scrollToResults); // must run before affixing is toggled
     $(window).on('load resize', toggleSidebarAffix);
   }
 
   function scrollToResults() {
     // Scroll past top page content if the page loaded with GET params set
     // (assume the user submitted a search or something and has already seen
-    // the page content)
-    $(document).on('ready', function() {
-      if ($academicsSearch.attr('data-params-onload') && $academicsSearch.attr('data-params-onload') === 'true') {
-        $('html, body').animate({
-          scrollTop: $academicsSearch.find('.degree-search-sort').offset().top - 20,
-        }, 200);
-      }
-    });
+    // the page content); else, scroll to the very top of the page (prevents
+    // affixing bugs)
+    if (window.location.search !== '') {
+      $('html, body').animate({
+        scrollTop: $academicsSearch.find('#search-query').offset().top - 20,
+      }, 200);
+    }
+    else {
+      $(document).scrollTop(0);
+    }
   }
 
   function initPage() {
@@ -1121,7 +1121,6 @@ var degreeSearch = function($) {
       degreeCompareLimit = 2;
       ajaxURL = $academicsSearch.attr('data-ajax-url');
 
-      scrollToResults();
       setupEventHandlers();
       initAutoComplete();
     }
@@ -1168,4 +1167,4 @@ if (typeof jQuery != 'undefined'){
     statusAlertCheck($);
     setInterval(function() {statusAlertCheck($);}, 30000);
   });
-}else{console.log('jQuery dependancy failed to load');}
+}else{console.log('jQuery dependency failed to load');}
