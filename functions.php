@@ -2083,6 +2083,21 @@ function fetch_degree_data( $params ) {
 
 
 /**
+ * Returns markup for "x results found" at top of Degree Search results.
+ **/
+function get_degree_search_result_phrase( $result_count, $result_query ) {
+	ob_start();
+?>
+	<span class="degree-result-count-num"><?php echo $result_count; ?></span> <span class="degree-result-phrase-desktop">degree programs found</span><span class="degree-result-phrase-phone">results</span>
+	<?php if ( $result_query ): ?>
+	<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $result_query ); ?></span>
+	<?php endif; ?>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
  * Returns relevant params passed in, or available relevant $_GET params.
  * Initial backend requests should pass in $params; ajax requests for
  * degree search data will not (use $_GET instead).
@@ -2158,14 +2173,18 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			'markup' => $markup
 		);
 	} else {
+		$result_count = count( $results );
+		$result_title = get_degree_search_title( $params );
+		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params['search-query'] );
+
 		wp_send_json(
 			array(
 				'querystring' => $query_params,
-				'count' => count( $results ),
+				'count' => $result_phrase_markup,
 				'markup' => $markup,
-				'title' => get_degree_search_title( $params ),
+				'title' => $result_title,
 				'description' => '', // TODO
-				'canonical' => '' // TODO
+				'canonical' => '', // TODO
 			)
 		);
 	}

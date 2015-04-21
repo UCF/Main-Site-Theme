@@ -772,17 +772,33 @@ var degreeSearch = function($) {
       var that = this;
       setTimeout(function () { that.hide(); }, 250);
     };
-    $academicsSearch.find('.search-field').typeahead({
-      source: function(query, process) {
-        return searchSuggestions; // searchSuggestions defined in page-degree-search.php
-      },
-      updater: function(item) {
-        this.$element[0].value = item;
-        this.$element[0].form.submit();
-        return item;
-      }
-    });
+
+    $academicsSearch.find('.search-field')
+      .on('submit', function(e) {
+        e.preventDefault;
+      })
+      .on('keyup', function() {
+        setTimeout(function() {
+          loadDegreeSearchResults();
+        }, 250);
+      })
+      .typeahead({
+        source: function(query, process) {
+          return searchSuggestions; // searchSuggestions defined in page-degree-search.php
+        },
+        updater: function(item) {
+          this.$element[0].value = item;
+          // this.$element[0].form.submit();
+          loadDegreeSearchResults();
+
+          return item;
+        }
+      });
+
+    $
   }
+
+
 
   function updateDocumentHead(data) {
     // replaceState (on-the-fly url update)
@@ -815,7 +831,7 @@ var degreeSearch = function($) {
         .append($loaderScreen);
 
       $academicsSearch
-        .find('.degree-result-count-num')
+        .find('.degree-result-count')
           .html(data.count);
 
       toggleSidebarAffix();

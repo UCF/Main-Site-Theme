@@ -46,10 +46,7 @@
 
 				<div class="degree-search-sort clearfix">
 					<h2 class="degree-search-sort-inner degree-result-count">
-						<span class="degree-result-count-num"><?php echo $data['count']; ?></span> <span class="degree-result-phrase-desktop">degree programs found</span><span class="degree-result-phrase-phone">results</span>
-						<?php if ( $params['search-query'] ): ?>
-						<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $params['search-query'] ); ?></span>
-						<?php endif; ?>
+						<?php echo get_degree_search_result_phrase( $data['count'], $params['search-query'] ); ?>
 					</h2>
 
 					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
