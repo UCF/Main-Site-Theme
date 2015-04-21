@@ -1254,7 +1254,139 @@ li.tagit-new input {
   display: block;
 }
 
+#degree-single #breadcrumbs {
+	border-bottom: 2px solid #eee;
+	font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+	font-size: 12.5px;
+	margin-bottom: 25px;
+}
+#degree-single #breadcrumbs .breadcrumb-search {
+	display: block;
+	float: left;
+	font-weight: 500;
+	padding: 8px 0; /* match .breadcrumb top/bottom padding */
+	width: 20%;
+}
+#degree-single #breadcrumbs .breadcrumb-hierarchy {
+	background: #fff;
+	display: block;
+	float: left;
+	list-style-type: none;
+	margin-bottom: 0;
+}
+#degree-single #breadcrumbs .breadcrumb-search + .breadcrumb-hierarchy {
+	padding-left: 0;
+	padding-right: 0;
+	width: 80%;
+}
 
+#degree-single #contentcol,
+#degree-single #sidebar_right {
+	font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+	font-size: 14px;
+}
+#degree-single #sidebar_right {
+	box-sizing: border-box;
+	padding-left: 15px;
+}
+#degree-single .ie7 #sidebar_right {
+	padding-left: 0;
+}
+
+#degree-single #contentcol p {
+	margin: 0 0 10px;
+}
+#degree-single #contentcol dt,
+#degree-single #contentcol dd,
+#degree-single #sidebar_right dt,
+#degree-single #sidebar_right dd {
+	display: inline;
+}
+#degree-single #contentcol h2,
+#degree-single #contentcol h3,
+#degree-single #contentcol h4,
+#degree-single #contentcol h5,
+#degree-single #contentcol h6 {
+	font-weight: 500;
+	margin-bottom: 5px;
+}
+#degree-single #contentcol h2 {
+	font-size: 24px;
+	line-height: 26px;
+	margin-bottom: 8px;
+	margin-top: 40px;
+}
+
+#degree-single #contentcol h3 {
+	border-bottom: 1px solid #eee;
+	font-size: 18.5px;
+	line-height: 21px;
+	margin-top: 30px;
+}
+#degree-single #contentcol h4 {
+	font-size: 15.5px;
+	line-height: 18px;
+	margin-top: 25px;
+}
+
+#degree-single #contentcol .degree-details {
+	margin-bottom: 30px;
+}
+
+#degree-single #contentcol .degree-details dl {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+
+#degree-single #contentcol .degree-desc {
+	margin-bottom: 30px;
+}
+
+
+#degree-single #contentcol .degree-courses h3 {
+	border-bottom: 1px solid #eee;
+	padding-bottom: 5px;
+}
+
+
+#degree-single #contentcol .degree-courses .degree-courses-credits {
+	display: block;
+	float: right;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+#degree-single #contentcol .degree-courses h3 .degree-courses-credits {
+	font-size: 15px;
+}
+#degree-single #sidebar_right h2 {
+	color: #888;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 1.2;
+	margin-bottom: 5px;
+	margin-top: 20px;
+}
+#degree-single #sidebar_right ul {
+	list-style-type: none;
+	margin-left: 0;
+}
+
+#degree-single #sidebar_right .contact-name,
+#degree-single #sidebar_right .contact-title
+{
+	display: block;
+}
+#degree-single #sidebar_right .contact-name {
+	font-weight: bold;
+}
+#degree-single #sidebar_right .contact-title {
+	font-style: italic;
+}
+#degree-single #sidebar_right .contact-info-dl {
+	margin-top: 5px;
+}
 
 /* Single Degree Pages */
 #degree-single { }

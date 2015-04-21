@@ -155,6 +155,13 @@
   #degree-search-content .degree-compare-label {
     font-size: 10px;
   }
+
+  #degree-single #breadcrumbs .breadcrumb-search {
+		width: 24%;
+	}
+	#degree-single #breadcrumbs .breadcrumb-search + .breadcrumb-hierarchy {
+		width: 76%;
+	}
 }
 
 /* iPad fixes: */
@@ -546,6 +553,33 @@
 
 
 	#program-meta p { padding-left: 0; }
+
+	#degree-single #breadcrumbs {
+		display: none;
+	}
+
+	#degree-single #sidebar_right {
+		display: block; /* unset display: none; */
+		margin-top: 30px;
+		padding-left: 0;
+		border-top: 2px solid #eee;
+		padding-top: 20px;
+	}
+
+	#degree-single #contentcol h2 {
+		font-size: 23px;
+		line-height: 25px;
+	}
+
+	#degree-single #contentcol .degree-details {
+		font-size: 12.5px;
+		margin-bottom: 20px;
+	}
+
+	#degree-single #contentcol .degree-courses .degree-courses-credits {
+		float: none;
+		margin-top: 5px;
+	}
 }
 
 @media (max-width: 480px) {
