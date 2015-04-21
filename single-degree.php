@@ -16,7 +16,6 @@
 	}
 	$search_page = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
-
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
 			<h1 class="span9"><?php the_title(); ?></h1>
@@ -87,6 +86,7 @@
 					<a class="btn btn-large btn-block">Visit Program Website</a>
 				</div>
 			</article>
+			<?php echo do_shortcode('[shareaholic app="share_buttons" id="' . $theme_options['shareaholic_below_post_id'] . '"]'); ?>
 		</div>
 		<div id="sidebar_right" class="span4 notoppad" role="complementary">
 
