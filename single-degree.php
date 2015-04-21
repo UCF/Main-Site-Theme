@@ -104,7 +104,7 @@
 				<dt>Email:</dt>
 				<dd>
 					<span class="contact-email">
-						<?php if ( count( $meta['degree_email'] ) > 0 && $meta['degree_email'][0] !== 'n/a' ) : ?>
+						<?php if ( count( $meta['degree_email'] ) > 0 && ! empty( $meta['degree_email'][0] ) ) : ?>
 							<a href="mailto:<?php echo $meta['degree_email'][0]; ?>">
 								<?php echo $meta['degree_email'][0]; ?>
 							</a>
@@ -117,7 +117,7 @@
 				<dt>Phone:</dt>
 				<dd>
 					<span class="contact-phone">
-						<?php if ( count( $meta['degree_phone'] ) > 0 && $meta['degree_phone'][0] !== 'n/a' ) : ?>
+						<?php if ( count( $meta['degree_phone'] ) > 0 && ! empty( $meta['degree_phone'][0] ) ) : ?>
 							<a href="tel:<?php $meta['degree_phone'][0]; ?>">
 								<?php echo $meta['degree_phone'][0]; ?>
 							</a>
@@ -130,7 +130,7 @@
 				<dt>Office:</dt>
 				<dd>
 					<span class="contact-office">
-						<?php if ( count( $meta['degree_website'] ) > 0 && $meta['degree_website'][0] !== 'n/a' ) : ?>
+						<?php if ( count( $meta['degree_website'] ) > 0 && ! empty( $meta['degree_website'][0] ) ) : ?>
 							<a target="_blank" href="<?php echo $meta['degree_website'][0]; ?>">
 								<?php echo $terms['colleges'][0]->name; ?>
 							</a>
