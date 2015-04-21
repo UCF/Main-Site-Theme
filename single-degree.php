@@ -34,8 +34,8 @@
 					<a href="<?php echo $programs_url; ?>"><?php echo $terms['program_types'][0]->name; ?> Programs</a> <span class="divider">&gt;</span>
 				</li>
 				<li>
-					<?php $college_url = $search_page . '?' . http_build_query( array( 'program_type' => array( $terms['program_types'][0]->slug ), 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
-					<a href="<?php echo $college_url; ?>"><?php echo $terms['colleges'][0]->name; ?></a> <span class="divider">&gt;</span>
+					<?php $college_programs_url = $search_page . '?' . http_build_query( array( 'program_type' => array( $terms['program_types'][0]->slug ), 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
+					<a href="<?php echo $college_programs_url; ?>"><?php echo $terms['colleges'][0]->name; ?></a> <span class="divider">&gt;</span>
 				</li>
 				<li class="active">
 					<?php the_title(); ?>
@@ -56,21 +56,27 @@
 					<div class="span3">
 						<dl>
 							<dt>Degree:</dt>
-							<dd><?=$post->tax_program_type[0]?><br></dd>
+							<dd><?php echo $terms['program_types'][0]->name; ?><br></dd>
 							<dt>Total Credit Hours:</dt>
-							<dd><?php echo $post->degree_hours; ?></dd>
+							<dd><?php echo $meta['degree_hours'][0]; ?></dd>
 						</dl>
 					</div>
 					<div class="span5">
 						<dl>
 							<dt>College:</dt>
 							<dd>
-								<!-- TODO: better way of forcing linebreak after inline <dd>'s that is IE friendly? -->
-								<a href="#"><?=$post->tax_college[0]?></a><br>
+								<?php $college_url = $search_page . '?' . http_build_query( array( 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
+								<a href="<?php echo $college_url; ?>"><?php echo $terms['colleges'][0]->name; ?></a><br>
 							</dd>
 							<dt>Department:</dt>
 							<dd>
-								<a href="#"><?=$post->tax_department[0]?></a><br>
+								<?php if ( count( $meta['degree_website'] ) > 0 && $meta['degree_website'][0] !== 'n/a' ): ?>
+									<a href="<?php echo $meta['degree_website'][0]; ?>">
+										<?php echo $terms['departments'][0]->name; ?>
+									</a>
+								<?php else: ?>
+									<?php echo $terms['departments'][0]->name ?>
+								<?php endif; ?>
 							</dd>
 						</dl>
 					</div>
@@ -87,8 +93,8 @@
 			<!-- Sidebar content -->
 
 			<div class="hidden-phone">
-				<a href="<?=$post->degree_pdf?>" target="_blank" class="btn btn-large btn-block btn-success">View Catalog</a>
-				<a href="<?=$post->degree_website?>" class="btn btn-large btn-block">Visit Program Website</a>
+				<a href="<?php echo $meta['degree_pdf'][0]; ?>" target="_blank" class="btn btn-large btn-block btn-success">View Catalog</a>
+				<a href="<?php echo $meta['degree_website'][0]; ?>" class="btn btn-large btn-block">Visit Program Website</a>
 			</div>
 
 			<h2>Contact</h2>
@@ -98,27 +104,39 @@
 				<dt>Email:</dt>
 				<dd>
 					<span class="contact-email">
-						<?php if ($post->degree_email !== 'n/a') { ?><a href="mailto:<?=$post->degree_email?>"><?php } ?>
-							<?=$post->degree_email?>
-						<?php if ($post->degree_email !== 'n/a') { ?></a><?php } ?>
+						<?php if ( count( $meta['degree_email'] ) > 0 && $meta['degree_email'][0] !== 'n/a' ) : ?>
+							<a href="mailto:<?php echo $meta['degree_email'][0]; ?>">
+								<?php echo $meta['degree_email'][0]; ?>
+							</a>
+						<?php else: ?>
+							n/a
+						<?php endif; ?>
 					</span>
 					<br>
 				</dd>
 				<dt>Phone:</dt>
 				<dd>
 					<span class="contact-phone">
-						<?php if ($post->degree_phone !== 'n/a') { ?><a href="tel:<?=$post->degree_phone?>"><?php } ?>
-							<?=$post->degree_phone?>
-						<?php if ($post->degree_phone !== 'n/a') { ?></a><?php } ?>
+						<?php if ( count( $meta['degree_phone'] ) > 0 && $meta['degree_phone'][0] !== 'n/a' ) : ?>
+							<a href="tel:<?php $meta['degree_phone'][0]; ?>">
+								<?php echo $meta['degree_phone'][0]; ?>
+							</a>
+						<?php else: ?>
+							n/a
+						<?php endif; ?>
 					</span>
 					<br>
 				</dd>
 				<dt>Office:</dt>
 				<dd>
 					<span class="contact-office">
-						<?php if ($post->degree_website !== 'n/a') { ?><a target="_blank" href="<?=$post->degree_website?>"><?php } ?>
-							<?=$post->tax_college[0]?>
-						<?php if ($post->degree_website !== 'n/a') { ?></a><?php } ?>
+						<?php if ( count( $meta['degree_website'] ) > 0 && $meta['degree_website'][0] !== 'n/a' ) : ?>
+							<a target="_blank" href="<?php echo $meta['degree_website'][0]; ?>">
+								<?php echo $terms['colleges'][0]->name; ?>
+							</a>
+						<?php else: ?>
+							n/a
+						<?php endif; ?>
 					</span>
 				</dd>
 			</dl>
