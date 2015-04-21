@@ -13,9 +13,7 @@
 		// Set default parameters for when no GET params are available (default
 		// view).
 		if ( empty( $_GET ) ) {
-			$params = degree_search_params_or_fallback( array(
-				'program-type' => array('undergraduate-degree'),
-			) );
+			$params = degree_search_params_or_fallback( unserialize( DEGREE_SEARCH_DEFAULT_PARAMS ) );
 		}
 		else {
 			$params = degree_search_params_or_fallback( $_GET );

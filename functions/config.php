@@ -119,7 +119,17 @@ define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'program-type' => array(),
 	'college' => array(),
 	'sort-by' => 'title',
-	'search-query' => ''
+	'search-query' => '',
+	'default' => 0
+) ) );
+
+# Params specifically for the default view.
+define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
+	'program-type' => array('undergraduate-degree'),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => '',
+	'default' => 1
 ) ) );
 
 # Domain/path of site (for cookies)
