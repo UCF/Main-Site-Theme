@@ -773,14 +773,21 @@ var degreeSearch = function($) {
       setTimeout(function () { that.hide(); }, 250);
     };
 
-    $academicsSearch.find('.search-field')
-      .on('submit', function(e) {
-        e.preventDefault;
-      })
-      .on('keyup', function() {
-        setTimeout(function() {
-          loadDegreeSearchResults();
-        }, 250);
+    var timer = null;
+
+    $academicsSearch.find('#search-query')
+      .on({
+        'submit': function(e) {
+          e.preventDefault();
+        },
+        'keyup': function() {
+          if (timer) {
+            clearTimeout(timer);
+          }
+          timer = setTimeout(function() {
+            loadDegreeSearchResults();
+          }, 300);
+        }
       })
       .typeahead({
         source: function(query, process) {
@@ -887,22 +894,6 @@ var degreeSearch = function($) {
       });
 
     $academicsSearch.find('#ajax-loading').removeClass('hidden');
-  }
-
-  // Handler Methods
-  function degreeSearchChangeHandler() {
-    loadDegreeSearchResults();
-  }
-
-  var timer = null;
-  function searchQueryKeyUpHandler(e) {
-    if($(e.target).val().length > 2) {
-      // prevent action until user is done typing
-      if(timer) {
-        clearTimeout(timer);
-      }
-      timer = setTimeout(loadDegreeSearchResults, 250);
-    }
   }
 
   function initFilterClickHandler(e) {
@@ -1086,14 +1077,19 @@ var degreeSearch = function($) {
       $academicsSearch.on('click', '#mobile-filter', filterClickHandler);
     } else {
       // desktop
-      $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', degreeSearchChangeHandler);
+      $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     }
-    $academicsSearch.on('keyup', '.search-field', searchQueryKeyUpHandler);
+    // $academicsSearch.on('keyup', '#search-query', function(e) {
+    //   console.log('test');
+    //   searchQueryKeyUpHandler(e);
+    // });
     // $academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
     // $(document).on('ready', degreeCompareChangeHandler); // activate compare btns if user refreshed with degrees checked
     // $academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
     $(window).on('load', scrollToResults); // must run before affixing is toggled
     $(window).on('load resize', toggleSidebarAffix);
+
+    initAutoComplete();
   }
 
   function scrollToResults() {
@@ -1122,7 +1118,6 @@ var degreeSearch = function($) {
       ajaxURL = $academicsSearch.attr('data-ajax-url');
 
       setupEventHandlers();
-      initAutoComplete();
     }
   }
 
