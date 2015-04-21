@@ -1864,38 +1864,47 @@ function get_degree_search_title( $separator='|', $params=null ) {
 	$params = degree_search_params_or_fallback( $params );
 
 	if ( !empty( $params ) ) {
-		$title .= ' '. $separator .' results ';
-
 		if ( isset( $params['search-query'] ) ) {
-			$title .= 'for "'. $params['search-query'] .'" ';
+			$title = html_entity_decode( $params['search-query'] ) . ' ' . $title;
+		}
+
+		$title .= ' '. $separator . ' Top ';
+
+		if ( isset( $params['program-type'] ) ) {
+			$count = count( $params['program-type'] );
+			foreach ( $params['program-type'] as $index=>$program_slug ) {
+				$program = get_term_by( 'slug', $program_slug, 'program_types' );
+				$program_name = str_replace( ' Degree', '', $program->name );
+				if ( $count == 1 ) {
+					$title .= $program_name;
+				} else if ( $index == ( $count - 1 ) ) {
+					$title = substr_replace( $title, '', -2 );
+					$title .= ' and ' . $program_name;
+				} else {
+					$title .= $program_name . ', ';
+				}
+			}
+
+			$title .= ', ';
 		}
 
 		if ( isset( $params['college'] ) ) {
-			$title .= 'by colleges: ';
 
-			$count = 1;
-			foreach ( $params['college'] as $college_slug ) {
+			$count = count( $params['college'] );
+			foreach ( $params['college'] as $index=>$college_slug ) {
 				$college = get_term_by( 'slug', $college_slug, 'colleges' );
-				$college_name = $college->name;
-				$count++;
-
-				$title .= $college_name . ', ';
+				$college_name = str_replace( 'College of ', '', $college->name );
+				if ( $count == 1 ) {
+					$title .= $college_name . ' ';
+				} else if ( $index == ( $count - 1 ) ) {
+					$title .= 'and ' . $college_name . ' ';
+				} else {
+					$title .= $college_name . ', ';
+				}
 			}
 		}
 
-		if ( isset( $params['program-type'] ) ) {
-			$title .= 'by program types: ';
-
-			$count = 1;
-			foreach ( $params['program-type'] as $program_slug ) {
-				$program = get_term_by( 'slug', $program_slug, 'program_types' );
-				$program_name = $program->name;
-				$count++;
-
-				$title .= $program_name . ', ';
-			}
-
-		}
+		$title .= 'Degrees ';
 
 		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
 			$title .= 'sorted by total credit hours';
@@ -2231,7 +2240,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 		);
 	} else {
 		$result_count = count( $results );
-		$result_title = get_degree_search_title( $params );
+		$result_title = get_degree_search_title( '|', $params );
 		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params );
 
 		wp_send_json(
