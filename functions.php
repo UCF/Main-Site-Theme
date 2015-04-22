@@ -2353,4 +2353,184 @@ function get_degree_search_suggestions() {
 	return array_values( array_unique( $suggestions ) );
 }
 
+
+/**
+ * Return's a term's custom meta value by key name.
+ * Assumes that term data are saved as options using the naming schema
+ * 'tax_TAXONOMY-SLUG_TERMID'
+ **/
+function get_term_custom_meta( $term_id, $taxonomy, $key ) {
+	if ( empty( $term_id ) || empty( $taxonomy ) || empty( $key ) ) {
+		return false;
+	}
+
+	$term_meta = get_option( 'tax_' + $taxonomy + '_' + $term_id );
+	if ( $term_meta && isset( $term_meta[$key] ) ) {
+		$val = $term_meta[$key];
+	}
+	else {
+		$val = false;
+	}
+	return $val;
+}
+
+
+/**
+ * Adds custom "meta fields" for College taxonomy terms.
+ **/
+
+// Prints label for college shortname field.
+function colleges_shortname_label() {
+	ob_start();
+?>
+	<label for="term_meta[college_shortname]"><?php echo __( 'Short Name' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for college shortname.
+function colleges_shortname_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[college_shortname]" id="term_meta[college_shortname]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify a shorter name for this college; used in Degree Search filters.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds shortname field to Add College form.
+function colleges_add_shortname_field() {
+?>
+	<div class="form-field">
+		<?php echo colleges_shortname_label(); ?>
+		<?php echo colleges_shortname_field(); ?>
+	</div>
+<?php
+}
+add_action( 'colleges_add_form_fields', 'colleges_add_shortname_field', 10, 2 );
+
+// Adds shortname field to Edit College form.
+function colleges_edit_shortfield_field( $term ) {
+	$term_id = $term->term_id;
+	$shortname = get_term_custom_meta( $term_id, 'colleges', 'college_shortname' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo colleges_shortname_label(); ?>
+		</th>
+		<td>
+			<?php echo colleges_shortname_field( $shortname ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'colleges_edit_form_fields', 'colleges_edit_shortfield_field', 10, 2 );
+
+// Prints label for college url field.
+function colleges_url_label() {
+	ob_start();
+?>
+	<label for="term_meta[college_url]"><?php echo __( 'URL' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for college url.
+function colleges_url_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[college_url]" id="term_meta[college_url]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify where this college should link out to.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds url field to Add College form.
+function colleges_add_url_field() {
+?>
+	<div class="form-field">
+		<?php echo colleges_url_label(); ?>
+		<?php echo colleges_url_field(); ?>
+	</div>
+<?php
+}
+add_action( 'colleges_add_form_fields', 'colleges_add_url_field', 10, 2 );
+
+// Adds url field to Edit College form.
+function colleges_edit_url_field( $term ) {
+	$term_id = $term->term_id;
+	$url = get_term_custom_meta( $term_id, 'colleges', 'college_url' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo colleges_url_label(); ?>
+		</th>
+		<td>
+			<?php echo colleges_url_field( $url ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'colleges_edit_form_fields', 'colleges_edit_url_field', 10, 2 );
+
+// Saves College url field value.
+function colleges_save_custom_meta( $term_id ) {
+	if ( isset( $_POST['term_meta'] ) ) {
+		$term_id = $term_id;
+		$term_meta = get_option( 'tax_colleges_' + $term_id );
+		$term_keys = array_keys( $_POST['term_meta'] );
+		foreach ( $term_keys as $key ) {
+			if ( isset( $_POST['term_meta'][$key] ) ) {
+				$term_meta[$key] = $_POST['term_meta'][$key];
+			}
+		}
+		// Save the option array.
+		update_option( 'tax_colleges_' + $term_id, $term_meta );
+	}
+}
+add_action( 'edited_colleges', 'colleges_save_custom_meta', 10, 2 );
+add_action( 'create_colleges', 'colleges_save_custom_meta', 10, 2 );
+
+// Adds columns to existing Colleges term list.
+function colleges_add_columns( $columns ) {
+	$new_columns = array(
+	    'cb' => '<input type="checkbox" />',
+	    'name' => __('Name'),
+	    'shortname' => __('Short Name'),
+	    'description' => __('Description'),
+	    'slug' => __('Slug'),
+	    'url' => __('URL'),
+	    'posts' => __('Posts')
+	);
+	return $new_columns;
+}
+add_filter( 'manage_edit-colleges_columns', 'colleges_add_columns' );
+
+// Adds content to Colleges columns
+function colleges_render_columns( $out, $name, $term_id ) {
+    switch ( $name ) {
+        case 'shortname':
+        	$shortname = get_term_custom_meta( $term_id, 'colleges', 'college_shortname' );
+        	if ( $shortname ) {
+        		$out .= $shortname;
+        	}
+        	else {
+        		$out .= '&mdash;';
+        	}
+            break;
+        case 'url':
+        	$url = get_term_custom_meta( $term_id, 'colleges', 'college_url' );
+        	if ( $url ) {
+        		$out .= '<a target="_blank" href="'. $url .'">'. $url .'</a>';
+        	}
+        	else {
+        		$out .= '&mdash;';
+        	}
+            break;
+        default:
+            break;
+    }
+    return $out;
+}
+add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 ?>
