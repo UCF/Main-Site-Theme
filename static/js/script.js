@@ -803,7 +803,6 @@ var degreeSearch = function($) {
       });
   }
 
-
   function updateDocumentHead(data) {
     // replaceState (on-the-fly url update)
     var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href;
@@ -1070,6 +1069,18 @@ var degreeSearch = function($) {
     }
   }
 
+  function resultPhraseClickHandler(e) {
+    var $target = $(e.target),
+        $filterCheckbox = $('.' + $target.attr('data-filter-class') + '[value="'+ $target.attr('data-filter-value') + '"]');
+
+    if ($filterCheckbox) {
+      $filterCheckbox
+        .prop('checked', false)
+        .removeAttr('checked')
+        .trigger('change');
+    }
+  }
+
   function setupEventHandlers() {
     if($academicsSearch.find('#mobile-filter').is(':visible')) {
       // mobile
@@ -1088,6 +1099,8 @@ var degreeSearch = function($) {
     // $academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
     $(window).on('load', scrollToResults); // must run before affixing is toggled
     $(window).on('load resize', toggleSidebarAffix);
+
+    $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
 
     initAutoComplete();
   }

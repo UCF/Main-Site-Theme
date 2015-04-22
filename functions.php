@@ -2102,7 +2102,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<?php
 	// Search query phrasing
 	if ( isset( $params['search-query'] ) ): ?>
-	<span class="result">&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</span>
+	<span class="search-result">&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</span>
 	<?php endif; ?>
 
 	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count !== 1 ): ?>s<?php endif; ?> found</span>
@@ -2118,9 +2118,12 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 		foreach ( $params['program-type'] as $program ):
 			$program_name = get_term_by( 'slug', $program, 'program_types' )->name . 's'; // TODO: create meta option for pluralized term name and use it instead
 		?>
-			<span class="result"><?php echo $program_name; ?> </span>
+			<span class="result">
+				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program; ?>"></span>
+				<?php echo $program_name; ?>
+			</span>
 			<?php if ( $count < count( $params['program-type'] ) ): ?>
-				<span class="for">and </span>
+				<span class="for"> and </span>
 			<?php
 			endif;
 			$count++;
@@ -2138,9 +2141,12 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 		foreach ( $params['college'] as $college ):
 			$college_name = 'the ' . get_term_by( 'slug', $college, 'colleges' )->name; // TODO: better way of designating "the" prefix?
 		?>
-			<span class="result"><?php echo $college_name; ?> </span>
+			<span class="result">
+				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college; ?>"></span>
+				<?php echo $college_name; ?>
+			</span>
 			<?php if ( $count < count( $params['college'] ) ): ?>
-				<span class="for">and </span>
+				<span class="for"> and </span>
 			<?php
 			endif;
 			$count++;
