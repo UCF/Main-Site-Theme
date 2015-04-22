@@ -1865,7 +1865,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 
 	if ( !empty( $params ) ) {
 		if ( isset( $params['search-query'] ) ) {
-			$title = html_entity_decode( $params['search-query'] ) . ' ' . $title;
+			$title = '"'. htmlspecialchars( urldecode( $params['search-query'] ) ) . '" ' . $title;
 		}
 
 		$title .= ' '. $separator . ' Top ';
@@ -2048,7 +2048,7 @@ function fetch_degree_data( $params ) {
 
 	if ( $params ) {
 		if ( $params['search-query'] ) {
-			$args['s'] = $params['search-query'];
+			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
 		}
 
 		if ( $params['sort-by'] && $params['sort-by'] == 'degree_hours' ) {
@@ -2144,12 +2144,66 @@ function fetch_degree_data( $params ) {
 /**
  * Returns markup for "x results found" at top of Degree Search results.
  **/
-function get_degree_search_result_phrase( $result_count, $result_query ) {
+function get_degree_search_result_phrase( $result_count, $params ) {
 	ob_start();
 ?>
-	<span class="degree-result-count-num"><?php echo $result_count; ?></span> <span class="degree-result-phrase-desktop">degree programs found</span><span class="degree-result-phrase-phone">results</span>
-	<?php if ( $result_query ): ?>
-	<span class="for">for:</span> <span class="result"><?php echo htmlspecialchars( $result_query ); ?></span>
+	<span class="degree-result-count-num"><?php echo $result_count; ?></span>
+
+	<?php
+	// Search query phrasing
+	if ( isset( $params['search-query'] ) ): ?>
+	<span class="search-result">&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</span>
+	<?php endif; ?>
+
+	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count !== 1 ): ?>s<?php endif; ?> found</span>
+	<span class="degree-result-phrase-phone">result<?php if ( $result_count !== 1 ): ?>s<?php endif; ?></span>
+
+	<?php
+	// Program Type phrasing
+	if ( isset( $params['program-type'] ) ):
+	?>
+	<span class="for">in </span>
+		<?php
+		$count = 1;
+		foreach ( $params['program-type'] as $program ):
+			$program_name = get_term_by( 'slug', $program, 'program_types' )->name . 's'; // TODO: create meta option for pluralized term name and use it instead
+		?>
+			<span class="result">
+				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program; ?>"></span>
+				<?php echo $program_name; ?>
+			</span>
+			<?php if ( $count < count( $params['program-type'] ) ): ?>
+				<span class="for"> and </span>
+			<?php
+			endif;
+			$count++;
+			?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+
+	<?php
+	// Colleges phrasing
+	if ( isset( $params['college'] ) ):
+	?>
+	<span class="for">at </span>
+		<?php
+		$count = 1;
+		foreach ( $params['college'] as $college ):
+			$college_name = 'the ' . get_term_by( 'slug', $college, 'colleges' )->name; // TODO: better way of designating "the" prefix?
+		?>
+			<span class="result">
+				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college; ?>"></span>
+				<?php echo $college_name; ?>
+			</span>
+			<?php if ( $count < count( $params['college'] ) ): ?>
+				<span class="for"> and </span>
+			<?php
+			endif;
+			$count++;
+			?>
+		<?php endforeach; ?>
+	<?php else: ?>
+		<span class="for">at UCF</span>
 	<?php endif; ?>
 <?php
 	return ob_get_clean();
@@ -2243,7 +2297,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	} else {
 		$result_count = count( $results );
 		$result_title = get_degree_search_title( '|', $params );
-		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params['search-query'] );
+		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params );
 
 		wp_send_json(
 			array(
