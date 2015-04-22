@@ -1865,7 +1865,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 
 	if ( !empty( $params ) ) {
 		if ( isset( $params['search-query'] ) ) {
-			$title = '"'. htmlspecialchars( urldecode( $params['search-query'] ) ) . '" ' . $title;
+			$title = htmlspecialchars( urldecode( $params['search-query'] ) ) . ' ' . $title;
 		}
 
 		$title .= ' '. $separator . ' Top ';
@@ -1878,18 +1878,16 @@ function get_degree_search_title( $separator='|', $params=null ) {
 				if ( $count == 1 ) {
 					$title .= $program_name;
 				} else if ( $index == ( $count - 1 ) ) {
-					$title = substr_replace( $title, '', -2 );
+					$title = substr_replace( $title, '', -1 );
 					$title .= ' and ' . $program_name;
 				} else {
-					$title .= $program_name . ', ';
+					$title .= $program_name . ',';
 				}
 			}
-
-			$title .= ', ';
 		}
 
 		if ( isset( $params['college'] ) ) {
-
+			$title .= ', ';
 			$count = count( $params['college'] );
 			foreach ( $params['college'] as $index=>$college_slug ) {
 				$college = get_term_by( 'slug', $college_slug, 'colleges' );
@@ -1897,14 +1895,15 @@ function get_degree_search_title( $separator='|', $params=null ) {
 				if ( $count == 1 ) {
 					$title .= $college_name . ' ';
 				} else if ( $index == ( $count - 1 ) ) {
-					$title .= 'and ' . $college_name . ' ';
+					$title = substr_replace( $title, '', -2 );
+					$title .= ' and ' . $college_name;
 				} else {
 					$title .= $college_name . ', ';
 				}
 			}
 		}
 
-		$title .= 'Degrees ';
+		$title .= ' Degrees';
 
 		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
 			$title .= 'sorted by total credit hours';
@@ -1930,8 +1929,9 @@ function get_degree_search_meta_description( $params=null ) {
 
 	if ( isset( $params['program-type'] ) ) {
 		$retval .= ' and many other';
-		$count = count( $params['program-type'] );
-		foreach( $params['program-type'] as $index=>$program_slug ) {
+		$programs = array_intersect( $params['program-type'], array( 'undergraduate-degree', 'graduate-degree' ) );
+		$count = count( $programs );
+		foreach( $programs as $index=>$program_slug ) {
 			$program = get_term_by( 'slug', $program_slug, 'program_types' );
 			$program = str_replace( ' Degree', '', $program->name );
 			if ( $count == 1 ) {
@@ -1963,7 +1963,7 @@ function get_degree_search_meta_description( $params=null ) {
 
 	$retval .= ' Degrees';
 
-	$retval .= ' | Campuses Located in Orlando, Florida Universities and Colleges';
+	$retval .= ' | Major, Minor, Masters, Certificate and PhD Programs | Campuses Located in Orlando, Florida Universities and Colleges';
 
 	return $retval;
 }
@@ -2297,6 +2297,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	} else {
 		$result_count = count( $results );
 		$result_title = get_degree_search_title( '|', $params );
+		$result_meta = get_degree_search_meta_description( $params );
 		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params );
 
 		wp_send_json(
@@ -2305,7 +2306,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 				'count' => $result_phrase_markup,
 				'markup' => $markup,
 				'title' => $result_title,
-				'description' => '', // TODO
+				'description' => $result_meta,
 			)
 		);
 	}
