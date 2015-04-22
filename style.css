@@ -1372,7 +1372,16 @@ li.tagit-new input {
 }
 
 #degree-single #contentcol .degree-details {
-	margin-bottom: 30px;
+	padding: 15px 25px;
+	margin-bottom: 15px;
+	background: #fafafa;
+	border: 1px #acacac solid;
+	border-radius: 4px;
+}
+
+#degree-single #contentcol a {
+	color: #08c;
+	border-bottom: 0;
 }
 
 #degree-single #contentcol .degree-details dl {
