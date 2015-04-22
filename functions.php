@@ -1963,7 +1963,7 @@ function get_degree_search_meta_description( $params=null ) {
 
 	$retval .= ' Degrees';
 
-	$retval .= ' | Campuses Located in Orlando, Florida Universities and Colleges';
+	$retval .= ' | Major, Minor, Masters, Certificate and PhD Programs | Campuses Located in Orlando, Florida Universities and Colleges';
 
 	return $retval;
 }
