@@ -895,46 +895,14 @@ var degreeSearch = function($) {
     $academicsSearch.find('#ajax-loading').removeClass('hidden');
   }
 
-  function initFilterClickHandler(e) {
-    // Position sidebar
-    $sidebarLeft.css({
-      'top': $('#mobile-filter').offset().top + ( $('#mobile-filter').outerHeight() / 2 )
-    });
-
-    $(document).on('click', function(e) {
-      // Allow a click anywhere within the document
-      // to close the sidebar, except for in/on the sidebar itself
-      // or on its toggle button
-      if($sidebarLeft.hasClass('active') && !$(e.target).is('#degree-search-sidebar') && !$sidebarLeft.find(e.target).length && !$(e.target).is('#mobile-filter')) {
-        closeMenuHandler(e);
-      }
-    });
-    $academicsSearch.on('click', '#mobile-filter-done', closeMenuHandler);
-    $academicsSearch.on('click', '#mobile-filter-reset', resetFilterClickHandler);
-  }
-
-  function filterClickHandler(e) {
-    e.preventDefault();
-    // resize the panel to be full screen and align it
-    $('html, body').animate({
-      scrollTop: $(this).offset().top,
-    }, 200);
-    $sidebarLeft
-      .css({
-        'max-height': $(window).height() - 40
-      })
-      .add($(this))
-      .toggleClass('active');
-  }
-
-  function resetFilterClickHandler(e) {
+  function resetFilterBtnHandler(e) {
     e.preventDefault();
     $sidebarLeft
       .find('.checkbox input')
       .prop('checked', false);
   }
 
-  function closeMenuHandler(e) {
+  function closeMenu(e) {
     e.preventDefault();
     $sidebarLeft
       .add('#mobile-filter')
@@ -944,6 +912,63 @@ var degreeSearch = function($) {
         'max-height': 0
       });
     loadDegreeSearchResults();
+
+    $(document).off('click', closeMenuOnTargetClick);
+
+    // Filter checkbox changes were turned off when the mobile sidebar was activated.
+    // Reactivate the event when the mobile sidebar is closed (to allow .close btns in
+    // .degree-result-count to trigger loadDegreeSearchResults() on click).
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+  }
+
+  function closeMenuOnTargetClick(e) {
+    if ($sidebarLeft.hasClass('active') && !$(e.target).is('#degree-search-sidebar') && !$sidebarLeft.find(e.target).length && !$(e.target).is('#mobile-filter')) {
+      closeMenu(e);
+    }
+  }
+
+  function openMenu(e) {
+    var $filterBtn = $('#mobile-filter');
+
+    $(document).on('click', closeMenuOnTargetClick);
+    // We only want to trigger loadDegreeSearchResults() when the user closes
+    // the sidebar modal (don't run it in the background with every checkbox change)
+    $academicsSearch.off('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+
+    // resize the panel to be full screen and align it
+    $('html, body').animate({
+      scrollTop: $filterBtn.offset().top,
+    }, 200);
+
+    // Position sidebar
+    $sidebarLeft
+      .css({
+        'max-height': $(window).height() - 40,
+        'top': $filterBtn.offset().top + ( $filterBtn.outerHeight() / 2 )
+      })
+      .add($filterBtn)
+      .addClass('active');
+  }
+
+  function initFilterBtnHandler(e) {
+    $academicsSearch.on('click', '#mobile-filter', filterBtnHandler);
+    $academicsSearch.on('click', '#mobile-filter-done', closeMenu);
+    $academicsSearch.on('click', '#mobile-filter-reset', resetFilterBtnHandler);
+  }
+
+  function filterBtnHandler(e) {
+    e.preventDefault();
+
+    var $filterBtn = $('#mobile-filter');
+
+    if ($sidebarLeft.hasClass('active')) {
+      closeMenu(e);
+      $filterBtn.removeClass('active');
+    }
+    else {
+      openMenu(e);
+      $filterBtn.addClass('active');
+    }
   }
 
   function highlightCompareableDegree($checkedDegreeInput) {
@@ -1097,27 +1122,21 @@ var degreeSearch = function($) {
   }
 
   function setupEventHandlers() {
-    if($academicsSearch.find('#mobile-filter').is(':visible')) {
-      // mobile
-      $academicsSearch.one('click', '#mobile-filter', initFilterClickHandler);
-      $academicsSearch.on('click', '#mobile-filter', filterClickHandler);
-    } else {
-      // desktop
-      $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
-    }
-    // $academicsSearch.on('keyup', '#search-query', function(e) {
-    //   console.log('test');
-    //   searchQueryKeyUpHandler(e);
-    // });
-    // $academicsSearch.on('change', '.degree-compare-input', degreeCompareChangeHandler);
-    // $(document).on('ready', degreeCompareChangeHandler); // activate compare btns if user refreshed with degrees checked
-    // $academicsSearch.on('click', '.degree-compare-submit', degreeCompareBtnClickHandler);
-    $(window).on('load', scrollToResults); // must run before affixing is toggled
-    $(window).on('load resize', toggleSidebarAffix);
+    $(window).on('load', function() {
+      scrollToResults(); // must run before affixing is toggled
+    });
+    $(window).on('load resize', function() {
+      toggleSidebarAffix();
 
+      if (!$academicsSearch.find('#mobile-filter').is(':visible')) {
+        $(document).off('click', closeMenuOnTargetClick);
+      }
+    });
+
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
-
     initAutoComplete();
+    initFilterBtnHandler();
   }
 
   function initPage() {

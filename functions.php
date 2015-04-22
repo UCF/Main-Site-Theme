@@ -2158,7 +2158,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<?php endif; ?>
 
 	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count !== 1 ): ?>s<?php endif; ?> found</span>
-	<span class="degree-result-phrase-phone">result<?php if ( $result_count !== 1 ): ?>s<?php endif; ?></span>
+	<span class="degree-result-phrase-phone">result<?php if ( $result_count !== 1 ): ?>s<?php endif; ?>:</span>
 
 	<?php
 	// Program Type phrasing
