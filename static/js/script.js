@@ -815,10 +815,7 @@ var degreeSearch = function($) {
         .text(data.title)
         .end()
       .find('meta[name="description"]')
-        .attr('content', data.description)
-        .end()
-      .find('link[rel="canonical"]')
-        .attr('href', data.canonical);
+        .attr('content', data.description);
   }
 
   function degreeSearchSuccessHandler(data) {

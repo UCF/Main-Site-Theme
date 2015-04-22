@@ -2306,7 +2306,6 @@ function get_degree_search_contents( $return=false, $params=null ) {
 				'markup' => $markup,
 				'title' => $result_title,
 				'description' => '', // TODO
-				'canonical' => '', // TODO
 			)
 		);
 	}
