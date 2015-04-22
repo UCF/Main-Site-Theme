@@ -1,6 +1,6 @@
 <?php disallow_direct_load('single-degree.php');?>
 <?php get_header(); the_post();?>
-<?php 
+<?php
 	$unmatched_meta = get_post_meta($post->ID);
 
 	// Get only keys that start with degree_
@@ -54,8 +54,15 @@
 							<dd><?php echo $meta['degree_hours'][0]; ?><br></dd>
 							<dt>College:</dt>
 							<dd>
-								<?php $college_url = $search_page . '?' . http_build_query( array( 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
-								<a href="<?php echo $college_url; ?>"><?php echo $terms['colleges'][0]->name; ?></a><br>
+								<?php
+								$college_url = get_term_custom_meta( $terms['colleges'][0]->term_id, 'colleges', 'college_url' );
+								if ( $college_url ):
+								?>
+								<a target="_blank" href="<?php echo $college_url; ?>"><?php echo $terms['colleges'][0]->name; ?></a>
+								<?php else: ?>
+								<?php echo $terms['colleges'][0]->name; ?>
+								<?php endif;?>
+								<br>
 							</dd>
 							<dt>Department:</dt>
 							<dd>

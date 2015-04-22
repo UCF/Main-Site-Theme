@@ -2114,7 +2114,7 @@ function fetch_degree_data( $params ) {
 					'name' => get_first_result( $terms['departments'] )->name,
 					'url' => '',
 				),
-				'online' => $meta['degree_online'][0] ? $meta['degree_online'] : '',
+				'online' => '',
 				'description' => $meta['degree_description'][0] ? $meta['degree_description'] : '',
 				'prerequisite' => '',
 				'applicationInfoDescription' => '',
@@ -2127,7 +2127,7 @@ function fetch_degree_data( $params ) {
 					'email' => $meta['degree_email'][0] ? $meta['degree_email'] : '',
 					'phoneNumber' => $meta['degree_phone'][0] ? $meta['degree_phone'] : ''
 				),
-				'keywordList' => $terms['post_tag']->name,
+				'keywordList' => $terms['post_tag']->name, // TODO--tags do not exist on degrees
 				'relatedProgramList' => array(),
 				'semesterOffered' => '',
 				'dateLastModified' => ''
@@ -2533,4 +2533,5 @@ function colleges_render_columns( $out, $name, $term_id ) {
     return $out;
 }
 add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
+
 ?>

@@ -5,9 +5,17 @@
 		$filters = array();
 		$filters['program-type']['name'] = 'Degrees';
 		$filters['college']['name'] = 'Colleges';
+
 		// Pass orderby degree_program_order to ensure our custom filter is used.
+		$colleges = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
+		foreach ( $colleges as $college ) {
+			$shortname = get_term_custom_meta( $college->term_id, 'colleges', 'college_shortname' );
+			if ( $shortname ) {
+				$college->shortname = $shortname;
+			}
+		}
 		$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
-		$filters['college']['terms'] = get_terms( 'colleges', array( 'orderby' => 'count', 'order' => 'desc' ) );
+		$filters['college']['terms'] = $colleges;
 
 		// Fetch data based on default params + anything set by the user.
 		// Set default parameters for when no GET params are available (default
@@ -94,7 +102,7 @@
 						<li class="checkbox">
 							<label>
 								<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
-								<span><?php echo $term->name; ?></span>
+								<span><?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></span>
 								<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
 							</label>
 						</li>
