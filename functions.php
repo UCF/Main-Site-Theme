@@ -1865,7 +1865,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 
 	if ( !empty( $params ) ) {
 		if ( isset( $params['search-query'] ) ) {
-			$title = html_entity_decode( $params['search-query'] ) . ' ' . $title;
+			$title = '"'. htmlspecialchars( urldecode( $params['search-query'] ) ) . '" ' . $title;
 		}
 
 		$title .= ' '. $separator . ' Top ';
