@@ -1302,12 +1302,15 @@ li.tagit-new input {
 	font-size: 12.5px;
 	margin-bottom: 25px;
 }
-#degree-single #breadcrumbs .breadcrumb-search {
-	display: block;
+#degree-single #breadcrumbs #breadcrumb-search {
+	display: none;
 	float: left;
 	font-weight: 500;
 	padding: 8px 0; /* match .breadcrumb top/bottom padding */
 	width: 20%;
+}
+#degree-single #breadcrumbs #breadcrumb-search.visible {
+  display: block !important;
 }
 #degree-single #breadcrumbs .breadcrumb-hierarchy {
 	background: #fff;
@@ -1316,9 +1319,12 @@ li.tagit-new input {
 	list-style-type: none;
 	margin-bottom: 0;
 }
-#degree-single #breadcrumbs .breadcrumb-search + .breadcrumb-hierarchy {
-	padding-left: 0;
-	padding-right: 0;
+#degree-single #breadcrumbs #breadcrumb-search + .breadcrumb-hierarchy {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+#degree-single #breadcrumbs #breadcrumb-search.visible + .breadcrumb-hierarchy {
 	width: 80%;
 }
 

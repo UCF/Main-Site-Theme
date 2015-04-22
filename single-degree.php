@@ -1,30 +1,30 @@
 <?php disallow_direct_load('single-degree.php');?>
 <?php get_header(); the_post();?>
 <?php
-	$unmatched_meta = get_post_meta($post->ID);
+	$unmatched_meta = get_post_meta( $post->ID );
 
 	// Get only keys that start with degree_
-	$meta = array_intersect_key($unmatched_meta, array_flip(preg_grep('/^degree_/', array_keys($unmatched_meta))));
+	$meta = array_intersect_key( $unmatched_meta, array_flip( preg_grep( '/^degree_/', array_keys( $unmatched_meta ) ) ) );
 
 	$terms = get_post_tax_term_array( $post->ID, array( 'program_types', 'colleges', 'departments' ) );
 ?>
 
 <?php
-	$css_key = get_theme_option('cloud_font_key');
-	if ($css_key) {
-		print '<link rel="stylesheet" href="'.$css_key.'" type="text/css" media="all" />';
+	$css_key = get_theme_option( 'cloud_font_key' );
+	if ( $css_key ) {
+		echo '<link rel="stylesheet" href="'.$css_key.'" type="text/css" media="all" />';
 	}
 	$search_page = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
 			<h1 class="span9"><?php the_title(); ?></h1>
-			<?php esi_include('output_weather_data','span3'); ?>
+			<?php esi_include( 'output_weather_data','span3' ); ?>
 		</div>
 
 		<div id="breadcrumbs" class="span12 clearfix">
-			<!-- Display .breadcrumb-search only if the user came from the degree search (check for GET param) -->
-			<a class="breadcrumb-search" href="javascript:window.history.back();">&laquo; Back to Search Results</a>
+			<!-- Display .breadcrumb-search only if the user came from the degree search (js check) -->
+			<a id="breadcrumb-search" href="<?php echo preg_replace( '/^http(s)?:/', '', get_permalink( get_page_by_title( 'Degree Search' ) ) ); ?>">&laquo; Back to Degree Search</a>
 
 			<!-- Always display hierarchy-based breadcrumbs-it also helps designate tracks/subplans -->
 			<ul class="breadcrumb-hierarchy breadcrumb">

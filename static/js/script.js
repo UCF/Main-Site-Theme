@@ -1081,6 +1081,21 @@ var degreeSearch = function($) {
     }
   }
 
+  function scrollToResults() {
+    // Scroll past top page content if the page loaded with GET params set
+    // (assume the user submitted a search or something and has already seen
+    // the page content); else, scroll to the very top of the page (prevents
+    // affixing bugs)
+    if (window.location.search !== '') {
+      $('html, body').animate({
+        scrollTop: $academicsSearch.find('#search-query').offset().top - 20,
+      }, 200);
+    }
+    else {
+      $(document).scrollTop(0);
+    }
+  }
+
   function setupEventHandlers() {
     if($academicsSearch.find('#mobile-filter').is(':visible')) {
       // mobile
@@ -1105,21 +1120,6 @@ var degreeSearch = function($) {
     initAutoComplete();
   }
 
-  function scrollToResults() {
-    // Scroll past top page content if the page loaded with GET params set
-    // (assume the user submitted a search or something and has already seen
-    // the page content); else, scroll to the very top of the page (prevents
-    // affixing bugs)
-    if (window.location.search !== '') {
-      $('html, body').animate({
-        scrollTop: $academicsSearch.find('#search-query').offset().top - 20,
-      }, 200);
-    }
-    else {
-      $(document).scrollTop(0);
-    }
-  }
-
   function initPage() {
     $academicsSearch = $('#academics-search-form');
 
@@ -1135,6 +1135,29 @@ var degreeSearch = function($) {
   }
 
   $(initPage);
+}
+
+
+/**
+ * Scripts for single degree profile templates
+ **/
+var degreeProfile = function($) {
+  var $degreeSingle = $('#degree-single');
+
+  if ($degreeSingle.length > 0) {
+    var prevPage = document.referrer,
+        $breadcrumbSearch = $degreeSingle.find('#breadcrumb-search'),
+        degreeSearchURL = $breadcrumbSearch.attr('href');
+
+    if (prevPage !== '' && prevPage.indexOf(degreeSearchURL) > -1) {
+      $breadcrumbSearch
+        .addClass('visible')
+        .on('click', function(e) {
+          e.preventDefault();
+          window.history.go(-1);
+        });
+    }
+  }
 }
 
 
@@ -1169,6 +1192,7 @@ if (typeof jQuery != 'undefined'){
     removeAndroidModals($);
     gaEventTracking($);
     degreeSearch($);
+    degreeProfile($);
 
     //devBootstrap($);
 

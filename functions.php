@@ -1856,7 +1856,7 @@ add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overridi
 
 
 /**
- * Generates page <title> value for Degree Search based on current filters/search val.
+ * Generates page <title> text for Degree Search based on current filters/search val.
  **/
 function get_degree_search_title( $separator='|', $params=null ) {
 	$title = 'Degree Search';
@@ -1917,6 +1917,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 	return $title;
 }
 
+
 function get_degree_search_meta_description( $params=null ) {
 	// Opening
 	$retval  = 'The University of Central Florida offers';
@@ -1968,8 +1969,9 @@ function get_degree_search_meta_description( $params=null ) {
 	return $retval;
 }
 
+
 /**
- * Generates title tag text for Degree Search.
+ * Generates <title> tag for Degree Search page.
  **/
 function wp_title_degree_search( $title, $separator ) {
 	global $post;
@@ -2166,7 +2168,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 		<?php
 		$count = 1;
 		foreach ( $params['program-type'] as $program ):
-			$program_name = get_term_by( 'slug', $program, 'program_types' )->name . 's'; // TODO: create meta option for pluralized term name and use it instead
+			$program_name = get_term_by( 'slug', $program, 'program_types' )->name . 's';
 		?>
 			<span class="result">
 				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program; ?>"></span>
@@ -2189,7 +2191,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 		<?php
 		$count = 1;
 		foreach ( $params['college'] as $college ):
-			$college_name = 'the ' . get_term_by( 'slug', $college, 'colleges' )->name; // TODO: better way of designating "the" prefix?
+			$college_name = 'the ' . get_term_by( 'slug', $college, 'colleges' )->name;
 		?>
 			<span class="result">
 				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college; ?>"></span>
@@ -2337,6 +2339,10 @@ function order_program_types( $clauses, $taxonomies, $args ) {
 add_filter( 'terms_clauses', 'order_program_types', 1, 3 );
 
 
+/**
+ * Returns an array of degree titles, for use by the degree search
+ * autocomplete field.
+ **/
 function get_degree_search_suggestions() {
 	$suggestions = array();
 	$posts = get_posts( array(
