@@ -814,16 +814,10 @@ var degreeSearch = function($) {
       .find('title')
         .text(data.title)
         .end()
-      .find('meta[name="description"]')
-        .attr('content', data.description)
-        .end()
-      .find('link[rel="canonical"]')
-        .attr('href', data.canonical)
-        .end()
       .find('meta[property="og:title"]')
         .attr('content', data.title)
         .end()
-      .find('meta[property="og:description"]')
+      .find('meta[name="description"], meta[property="og:description"]')
         .attr('content', data.description);
   }
 

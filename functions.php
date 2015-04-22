@@ -2306,8 +2306,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 				'count' => $result_phrase_markup,
 				'markup' => $markup,
 				'title' => $result_title,
-				'description' => $result_meta, 
-				'canonical' => '', // TODO
+				'description' => $result_meta,
 			)
 		);
 	}
