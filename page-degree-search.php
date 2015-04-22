@@ -100,11 +100,14 @@
 					<?php foreach ( $filter['terms'] as $term ): ?>
 						<?php if ( $term->count > 0 ): ?>
 						<li class="checkbox">
-							<label>
-								<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
-								<span><?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></span>
-								<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
-							</label>
+							<a href="/degree-search/?<?php echo $key; ?>[]=<?php echo $term->slug; ?>" class="seo-li">
+								<label>
+									<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
+									<span><?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></span>
+									<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
+								</label>
+							</a>
+>>>>>>> 78ae21d3cb80333a29e76cb2443fd106769fc84f
 						</li>
 						<?php endif; ?>
 					<?php endforeach; ?>
