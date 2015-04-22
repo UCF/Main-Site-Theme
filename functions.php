@@ -1918,6 +1918,55 @@ function get_degree_search_title( $separator='|', $params=null ) {
 	return $title;
 }
 
+function get_degree_search_meta_description( $params=null ) {
+	// Opening
+	$retval  = 'The University of Central Florida offers';
+
+	$params = degree_search_params_or_fallback( $params );
+
+	if ( isset( $params['search-query'] ) ) {
+		$retval .= ' ' . html_entity_decode( $params['search-query'] ) . ' Degrees';
+	}
+
+	if ( isset( $params['program-type'] ) ) {
+		$retval .= ' and many other';
+		$count = count( $params['program-type'] );
+		foreach( $params['program-type'] as $index=>$program_slug ) {
+			$program = get_term_by( 'slug', $program_slug, 'program_types' );
+			$program = str_replace( ' Degree', '', $program->name );
+			if ( $count == 1 ) {
+				$retval .= ' ' . $program;
+			} else if ( $index == ( $count - 1 ) ) {
+				$retval = substr_replace( $retval, '', -1 );
+				$retval .= ' and ' . $program;
+			} else {
+				$retval .= ' ' . $program . ',';
+			}
+		}
+	}
+
+	if ( isset( $params['college'] ) ) {
+		$count = count ( $params['college'] );
+		foreach( $params['college'] as $index=>$college_slug ) {
+			$college = get_term_by( 'slug', $college_slug, 'colleges' );
+			$college = str_replace( 'College of ', '', $college->name );
+			if ( $count == 1 ) {
+				$retval .= ' ' . $college;
+			} else if ( $index == ( $count - 1 ) ) {
+				$retval = substr_replace( $retval, '', -1 );
+				$retval .= ' and ' . $college;
+			} else {
+				$retval .= ' ' . $college . ',';
+			}
+		}
+	}
+
+	$retval .= ' Degrees';
+
+	$retval .= ' | Campuses Located in Orlando, Florida Universities and Colleges';
+
+	return $retval;
+}
 
 /**
  * Generates title tag text for Degree Search.
@@ -1928,6 +1977,7 @@ function wp_title_degree_search( $title, $separator ) {
 		$custom_title = get_degree_search_title( $separator );
 		return $custom_title;
 	}
+	return $title;
 }
 add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page titles (SEO plugins can't overwrite them.)
 
@@ -1935,16 +1985,16 @@ add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page t
 /**
  * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
  **/
-// function header_meta_degree_search($str) {
-// 	global $post;
+function header_meta_degree_search($str) {
+ 	global $post;
 
-// 	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
-// 		$view_title = strtolower( get_degree_search_view_title() ).' ';
-// 		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
-// 	}
-// 	return $str;
-// }
-// add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
+ 	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
+ 		$custom_meta = get_degree_search_meta_description();
+ 		return $custom_meta;
+ 	}
+ 	return $str;
+}
+add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
 
 /**
