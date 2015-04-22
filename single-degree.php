@@ -44,24 +44,14 @@
 
 		<div id="contentcol" class="span8 degree">
 			<article role="main">
-				<!-- Degree description -->
-				<?php if ($post->degree_description) { ?>
-					<?php echo apply_filters('the_content', $post->degree_description)?>
-				<?php } else { ?>
-					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
-				<?php } ?>
 				<!-- Degree meta details -->
-				<div class="row degree-details">
-					<div class="span3">
-						<dl>
+				<div class="row">
+					<div class="span8">
+						<dl class="degree-details">
 							<dt>Degree:</dt>
 							<dd><?php echo $terms['program_types'][0]->name; ?><br></dd>
 							<dt>Total Credit Hours:</dt>
-							<dd><?php echo $meta['degree_hours'][0]; ?></dd>
-						</dl>
-					</div>
-					<div class="span5">
-						<dl>
+							<dd><?php echo $meta['degree_hours'][0]; ?><br></dd>
 							<dt>College:</dt>
 							<dd>
 								<?php $college_url = $search_page . '?' . http_build_query( array( 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
@@ -75,12 +65,17 @@
 									</a>
 								<?php else: ?>
 									<?php echo $terms['departments'][0]->name ?>
-								<?php endif; ?>
+								<?php endif; ?><br>
 							</dd>
 						</dl>
+						<!-- Degree description -->
 					</div>
 				</div>
-
+				<?php if ($post->degree_description) { ?>
+					<p><?php echo apply_filters('the_content', $post->degree_description)?></p>
+				<?php } else { ?>
+					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
+				<?php } ?>
 				<div class="visible-phone">
 					<a class="btn btn-large btn-block btn-success">View Catalog</a>
 					<a class="btn btn-large btn-block">Visit Program Website</a>
