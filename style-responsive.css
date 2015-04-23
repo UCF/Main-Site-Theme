@@ -420,6 +420,7 @@
 
   #degree-search-sidebar .degree-search-sort {
     border-bottom: 1px solid #eee;
+    display: table;
     margin-bottom: 5px;
     padding: 10px;
   }
@@ -473,31 +474,44 @@
     display: block;
   }
 
-  #degree-search-top .degree-result-count .for,
-  #degree-search-top .degree-result-count .result {
-    display: none;
-  }
-
   #degree-search-top .degree-result-phrase-desktop {
     display: none;
   }
   #degree-search-top .degree-result-phrase-phone {
     display: inline;
   }
-
   #degree-search-top .degree-result-count {
     border-right: 0 solid transparent;
     font-style: italic;
     font-weight: normal;
     float: left;
-    padding-right: 0;
-    width: auto;
+    padding-right: 10px;
   }
+  #degree-search-top .degree-result-count .for {
+    display: none;
+  }
+  #degree-search-top .degree-result-count .result {
+    font-size: 12px;
+    line-height: 1.2;
+    padding: 4px 8px;
+  }
+  #degree-search-top .degree-result-count .result .close {
+    line-height: 0.5;
+  }
+
   #degree-search-top .degree-search-sort-options {
-    border-left: 1px solid #eee;
-    float: right;
-    width: auto;
+    /*border-left: 1px solid #eee;*/
     padding-bottom: 5px;
+    text-align: right;
+  }
+
+  #degree-search-top .degree-result-count,
+  #degree-search-top .degree-search-sort-options.visible-phone {
+    box-sizing: border-box;
+    display: table-cell !important;
+    float: none;
+    vertical-align: bottom;
+    width: 100%;
   }
 
   #degree-search-content .degree-search-result {

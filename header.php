@@ -24,9 +24,12 @@
 		<![endif]-->
 
 		<?php
-		if (is_page()) {
-			page_specific_webfonts($post->ID);
-			esi_include('page_specific_stylesheet', $post->ID); // Wrap in ESI to prevent caching of .css file
+		if ( $post->post_type == 'degree' ) {
+			webfont_stylesheet();
+		}
+		if ( is_page() ) {
+			page_specific_webfonts( $post->ID );
+			esi_include(' page_specific_stylesheet', $post->ID ); // Wrap in ESI to prevent caching of .css file
 		}
 		?>
 

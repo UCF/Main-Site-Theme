@@ -7,15 +7,10 @@
 	$meta = array_intersect_key( $unmatched_meta, array_flip( preg_grep( '/^degree_/', array_keys( $unmatched_meta ) ) ) );
 
 	$terms = get_post_tax_term_array( $post->ID, array( 'program_types', 'colleges', 'departments' ) );
-?>
 
-<?php
-	$css_key = get_theme_option( 'cloud_font_key' );
-	if ( $css_key ) {
-		echo '<link rel="stylesheet" href="'.$css_key.'" type="text/css" media="all" />';
-	}
 	$search_page = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
+
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
 			<h1 class="span9"><?php the_title(); ?></h1>
