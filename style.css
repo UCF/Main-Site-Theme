@@ -993,6 +993,9 @@ li.tagit-new input {
 #degree-search-sidebar .degree-filter-list li {
   padding-bottom: 6px;
 }
+#degree-search-sidebar .degree-filter-list li a {
+  color: #000;
+}
 #degree-search-sidebar label {
   font-size: 14px;
 }
