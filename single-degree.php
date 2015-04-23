@@ -42,11 +42,11 @@
 				<!-- Degree meta details -->
 				<div class="row">
 					<div class="span8">
-						<dl class="degree-details">
+						<dl class="degree-details clearfix">
 							<dt>Degree:</dt>
-							<dd><?php echo $terms['program_types'][0]->name; ?><br></dd>
+							<dd><?php echo $terms['program_types'][0]->name; ?></dd>
 							<dt>Total Credit Hours:</dt>
-							<dd><?php echo $meta['degree_hours'][0]; ?><br></dd>
+							<dd><?php echo $meta['degree_hours'][0]; ?></dd>
 							<dt>College:</dt>
 							<dd>
 								<?php
@@ -57,7 +57,6 @@
 								<?php else: ?>
 								<?php echo $terms['colleges'][0]->name; ?>
 								<?php endif;?>
-								<br>
 							</dd>
 							<dt>Department:</dt>
 							<dd>
@@ -67,21 +66,23 @@
 									</a>
 								<?php else: ?>
 									<?php echo $terms['departments'][0]->name ?>
-								<?php endif; ?><br>
+								<?php endif; ?>
 							</dd>
 						</dl>
 						<!-- Degree description -->
 					</div>
 				</div>
+
+				<div class="mobile-degree-cta visible-phone">
+					<a class="btn btn-large btn-block btn-success">View Catalog</a>
+					<a class="btn btn-large btn-block">Visit Program Website</a>
+				</div>
+
 				<?php if ($post->degree_description) { ?>
 					<p><?php echo apply_filters('the_content', $post->degree_description)?></p>
 				<?php } else { ?>
 					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
 				<?php } ?>
-				<div class="visible-phone">
-					<a class="btn btn-large btn-block btn-success">View Catalog</a>
-					<a class="btn btn-large btn-block">Visit Program Website</a>
-				</div>
 			</article>
 			<?php echo do_shortcode('[shareaholic app="share_buttons" id="' . $theme_options['shareaholic_below_post_id'] . '"]'); ?>
 		</div>
@@ -109,7 +110,6 @@
 							n/a
 						<?php endif; ?>
 					</span>
-					<br>
 				</dd>
 				<dt>Phone:</dt>
 				<dd>
@@ -122,7 +122,6 @@
 							n/a
 						<?php endif; ?>
 					</span>
-					<br>
 				</dd>
 				<dt>Office:</dt>
 				<dd>

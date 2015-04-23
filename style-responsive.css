@@ -156,12 +156,32 @@
     font-size: 10px;
   }
 
-  #degree-single #breadcrumbs .breadcrumb-search {
-		width: 24%;
+  #degree-single #breadcrumbs {
+    font-size: 12px;
+  }
+  #degree-single #breadcrumb-search {
+		width: 25%;
 	}
-	#degree-single #breadcrumbs .breadcrumb-search + .breadcrumb-hierarchy {
-		width: 76%;
+	#degree-single #breadcrumb-search.visible + .breadcrumb-hierarchy {
+		width: 75%;
 	}
+
+  #degree-single #sidebar_right .btn-large {
+    font-size: 14px;
+  }
+  #degree-single #sidebar_right .contact-info-dl dt {
+    width: 28%;
+  }
+  #degree-single #sidebar_right .contact-info-dl dd {
+    width: 72%;
+  }
+
+  #degree-single #contentcol .degree-details dt {
+    width: 35%;
+  }
+  #degree-single #contentcol .degree-details dd {
+    width: 65%;
+  }
 }
 
 /* iPad fixes: */
@@ -564,8 +584,6 @@
   }
 
 
-
-
 	#program-meta p { padding-left: 0; }
 
 	#degree-single #breadcrumbs {
@@ -579,16 +597,37 @@
 		border-top: 2px solid #eee;
 		padding-top: 20px;
 	}
+  #degree-single .btn-large {
+    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B' !important;
+    font-size: 14px;
+    font-weight: 400;
+  }
 
 	#degree-single #contentcol h2 {
 		font-size: 23px;
 		line-height: 25px;
 	}
 
-	#degree-single #contentcol .degree-details {
-		font-size: 12.5px;
-		margin-bottom: 20px;
-	}
+	#degree-single #contentcol .degree-details,
+  #degree-single #sidebar_right .contact-info-dl {
+    margin-bottom: 15px;
+    padding: 0 0 7px; /* 7px + dd margin-bottom:8px = 15px */
+  }
+  #degree-single #contentcol .degree-details dt,
+  #degree-single #contentcol .degree-details dd,
+  #degree-single #sidebar_right .contact-info-dl dt,
+  #degree-single #sidebar_right .contact-info-dl dd {
+    width: 100%;
+    clear: both;
+  }
+  #degree-single #contentcol .degree-details dt,
+  #degree-single #sidebar_right .contact-info-dl dt {
+    margin-bottom: 2px;
+  }
+  #degree-single #contentcol .degree-details dd,
+  #degree-single #sidebar_right .contact-info-dl dd {
+    margin-bottom: 8px;
+  }
 
 	#degree-single #contentcol .degree-courses .degree-courses-credits {
 		float: none;
