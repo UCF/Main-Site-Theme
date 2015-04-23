@@ -1239,19 +1239,26 @@ function page_specific_stylesheet($pageid) {
 
 
 /**
+ * Prints the Cloud.Typography font stylesheet <link> tag.
+ **/
+function webfont_stylesheet() {
+	$css_key = get_theme_option( 'cloud_font_key' );
+	if ( $css_key ) {
+		echo '<link rel="stylesheet" href="'. $css_key .'" type="text/css" media="all" />';
+	}
+}
+
+
+/**
  * Output the CSS key for Cloud.Typography web fonts if a CSS key is set in
  * Theme Options.
  * Is included conditionally per-page to prevent excessive hits on our Cloud.Typography
  * page view limit per month.
  **/
-function page_specific_webfonts($pageid) {
-	if(get_post_meta($pageid, 'page_use_webfonts', True) == 'on') {
-		$css_key = get_theme_option('cloud_font_key');
-		if ($css_key) {
-			print '<link rel="stylesheet" href="'.$css_key.'" type="text/css" media="all" />';
-		}
+function page_specific_webfonts( $pageid ) {
+	if ( get_post_meta( $pageid, 'page_use_webfonts', True ) == 'on' ) {
+		webfont_stylesheet();
 	}
-	else { return NULL; }
 }
 
 
