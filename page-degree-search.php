@@ -107,7 +107,6 @@
 									<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
 								</label>
 							</a>
->>>>>>> 78ae21d3cb80333a29e76cb2443fd106769fc84f
 						</li>
 						<?php endif; ?>
 					<?php endforeach; ?>
