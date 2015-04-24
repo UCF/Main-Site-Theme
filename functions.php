@@ -1782,6 +1782,31 @@ function append_degree_profile_metadata($post) {
 	return $post;
 }
 
+function get_degree_contacts($postId) {
+	$contact_info = get_post_meta($postId, 'degree_contacts', true);
+	$contact_array = array();
+
+	// Split single contacts
+	$contacts = explode('@@;@@', $contact_info);
+	foreach ($contacts as $key=>$contact) {
+		if ($contact) {
+			// Split individual fields
+			$contact = explode('@@,@@', $contact);
+
+			$newcontact = array();
+
+			foreach ($contact as $fieldset) {
+				// Split out field key/values
+				$fields = explode('@@:@@', $fieldset);
+				$newcontact[$fields[0]] = $fields[1];
+			}
+
+			array_push($contact_array, $newcontact);
+		}
+	}
+
+	return $contact_array;
+}
 
 /**
  * Display a list of Degrees (for use in Degree Search page.)
@@ -2131,11 +2156,7 @@ function fetch_degree_data( $params ) {
 					'deadline' => '',
 					'description' => ''
 				),
-				'contact' => array(
-					'name' => '', // currently split into an array in WP; leave blank for now.
-					'email' => $meta['degree_email'][0] ? $meta['degree_email'] : '',
-					'phoneNumber' => $meta['degree_phone'][0] ? $meta['degree_phone'] : ''
-				),
+				'contacts' => get_degree_contacts($post->ID),
 				'keywordList' => $terms['post_tag']->name, // TODO--tags do not exist on degrees
 				'relatedProgramList' => array(),
 				'semesterOffered' => '',

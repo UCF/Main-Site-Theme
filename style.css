@@ -1472,6 +1472,15 @@ li.tagit-new input {
 	margin-left: 0;
 }
 
+#degree-single #sidebar_right .contact-info {
+	padding-bottom: 12px;
+	border-bottom: 1px #efefef solid;
+}
+
+#degree-single #sidebar_right .contact-info:last-child {
+	border-bottom: 0;
+}
+
 #degree-single #sidebar_right .contact-name,
 #degree-single #sidebar_right .contact-title
 {
