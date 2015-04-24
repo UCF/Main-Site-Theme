@@ -1726,21 +1726,6 @@ function display_degree_search($data) {
 	print ob_get_clean();
 }
 
-
-/**
- * Append Degree meta data to a Degree post object (for use in Degree lists.)
- **/
-function append_degree_list_metadata($post) {
-	$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
-	$post->degree_website = get_post_meta($post->ID, 'degree_website', TRUE);
-	$post->degree_profile_link = Degree::get_degree_profile_link($post);
-	$post->tax_college = wp_get_post_terms($post->ID, 'colleges', array('fields' => 'names'));
-	$post->tax_department = wp_get_post_terms($post->ID, 'departments', array('fields' => 'names'));
-	$post->tax_program_type = wp_get_post_terms($post->ID, 'program_types', array('fields' => 'names'));
-	return $post;
-}
-
-
 /**
  * Append Degree meta data to a Degree post object (for use in single Degree profile.)
  **/
@@ -1782,70 +1767,31 @@ function append_degree_profile_metadata($post) {
 	return $post;
 }
 
+function get_degree_contacts($postId) {
+	$contact_info = get_post_meta($postId, 'degree_contacts', true);
+	$contact_array = array();
 
-/**
- * Display a list of Degrees (for use in Degree Search page.)
- **/
-function display_degree_list($posts) {
-	ob_start(); ?>
-	<ul class="row degree-results-list">
-	<?php
-	foreach ($posts as $post) {
-		$post = append_degree_list_metadata($post);
-	?>
-		<li class="program span10">
-			<div class="row">
-				<div class="span7">
-					<?php if (!empty($post->degree_profile_link)) { ?>
-					<a href="<?=$post->degree_profile_link?>" <?php if (Degree::is_graduate_program($post)) { ?> class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
-					<?php } ?>
-						<h4 class="name"><?=$post->post_title?></h4>
-					<?php if ($post->degree_profile_link) { ?>
-					</a>
-					<?php } ?>
-				<?php if ($post->tax_college[0]) { ?>
-					<span class="name_label">College</span>
-					<span class="college"><?=$post->tax_college[0]?></span>
-				<?php } ?>
+	// Split single contacts
+	$contacts = explode('@@;@@', $contact_info);
+	foreach ($contacts as $key=>$contact) {
+		if ($contact) {
+			// Split individual fields
+			$contact = explode('@@,@@', $contact);
 
-				<?php if ($post->tax_department[0]) { ?>
-					<span class="name_label">Department</span>
-					<span class="department">
-						<?php if ($post->degree_website) { ?><a href="<?=$post->degree_website?>"><?php } ?>
-						<?=$post->tax_department[0]?>
-						<?php if ($post->degree_website) { ?></a><?php } ?>
-					</span>
-				<?php } ?>
+			$newcontact = array();
 
-				</div>
+			foreach ($contact as $fieldset) {
+				// Split out field key/values
+				$fields = explode('@@:@@', $fieldset);
+				$newcontact[$fields[0]] = $fields[1];
+			}
 
-				<div class="credits-wrap">
-					<span class="program-type-alt"><?=$post->tax_program_type[0]?></span>
-
-					<?php if (!empty($post->degree_hours)) {
-						if (!empty($post->degree_profile_link) && ($post->tax_program_type[0] == 'Graduate Degree') || !is_numeric(substr($post->degree_hours, 0, 1))) { ?>
-						<a target="_blank" href="<?=$post->degree_profile_link?>" <?php if (Degree::is_graduate_program($post)) { ?>class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
-							<span class="credits label label-warning">Click for credit hours</span>
-						</a>
-						<?php } elseif (intval($post->degree_hours) >= 90) { ?>
-						<span class="credits label label-info"><?=intval($post->degree_hours)?> credit hours</span>
-						<?php } elseif (intval($post->degree_hours) > 1 && intval($post->degree_hours) < 90) { ?>
-						<span class="credits label label-success"><?=intval($post->degree_hours)?> credit hours</span>
-					<?php }
-					} else { ?>
-						<span class="credits label">Credit hours n/a</span>
-					<?php } ?>
-				</div>
-
-			</div>
-		</li>
-	<?php
+			array_push($contact_array, $newcontact);
+		}
 	}
-	?>
-	</ul>
-	<?php return ob_get_clean();
-}
 
+	return $contact_array;
+}
 
 /**
  * Generates page <title> tag for Degree Program post type.
@@ -2131,11 +2077,7 @@ function fetch_degree_data( $params ) {
 					'deadline' => '',
 					'description' => ''
 				),
-				'contact' => array(
-					'name' => '', // currently split into an array in WP; leave blank for now.
-					'email' => $meta['degree_email'][0] ? $meta['degree_email'] : '',
-					'phoneNumber' => $meta['degree_phone'][0] ? $meta['degree_phone'] : ''
-				),
+				'contacts' => get_degree_contacts($post->ID),
 				'keywordList' => $terms['post_tag']->name, // TODO--tags do not exist on degrees
 				'relatedProgramList' => array(),
 				'semesterOffered' => '',

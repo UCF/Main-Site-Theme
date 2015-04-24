@@ -94,49 +94,40 @@
 				<a href="<?php echo $meta['degree_pdf'][0]; ?>" target="_blank" class="btn btn-large btn-block btn-success">View Catalog</a>
 				<a href="<?php echo $meta['degree_website'][0]; ?>" class="btn btn-large btn-block">Visit Program Website</a>
 			</div>
-
-			<h2>Contact</h2>
-			<h3 class="contact-name">Steve Sutton Ph.D.</h3>
-			<span class="contact-title">Professor</span>
-			<dl class="contact-info-dl">
-				<dt>Email:</dt>
-				<dd>
-					<span class="contact-email">
-						<?php if ( count( $meta['degree_email'] ) > 0 && ! empty( $meta['degree_email'][0] ) ) : ?>
-							<a href="mailto:<?php echo $meta['degree_email'][0]; ?>">
-								<?php echo $meta['degree_email'][0]; ?>
-							</a>
-						<?php else: ?>
-							n/a
+			<?php 
+				$contacts = get_degree_contacts($post->ID);
+				if ( count( $contacts ) > 1 ) : ?>
+				<h2>Contacts</h2>
+			<?php else: ?>
+				<h2>Contact</h2>
+			<?php endif; ?>
+			<?php foreach ( $contacts as $contact ) : ?>
+				<div class="contact-info">
+					<h3 class="contact-name"><?php echo $contact['contact_name']; ?></h3>
+					<dl class="contact-info-dl clearfix">
+						<?php if ( ! empty( $contact['contact_email'] ) ) : ?>
+							<dt>Email:</dt>
+							<dd>
+								<span class="contact-email">
+									<a href="mailto:<?php echo $contact['contact_email']; ?>">
+										<?php echo $contact['contact_email']; ?>
+									</a>
+								</span>
+							</dd>
 						<?php endif; ?>
-					</span>
-				</dd>
-				<dt>Phone:</dt>
-				<dd>
-					<span class="contact-phone">
-						<?php if ( count( $meta['degree_phone'] ) > 0 && ! empty( $meta['degree_phone'][0] ) ) : ?>
-							<a href="tel:<?php $meta['degree_phone'][0]; ?>">
-								<?php echo $meta['degree_phone'][0]; ?>
-							</a>
-						<?php else: ?>
-							n/a
+						<?php if ( ! empty( $contact['contact_phone'] ) ) : ?>
+							<dt>Phone:</dt>
+							<dd>
+								<span class="contact-phone">
+									<a href="tel:<?php echo $contact['contact_phone']; ?>">
+										<?php echo $contact['contact_phone']; ?>
+									</a>
+								</span>
+							</dd>
 						<?php endif; ?>
-					</span>
-				</dd>
-				<dt>Office:</dt>
-				<dd>
-					<span class="contact-office">
-						<?php if ( count( $meta['degree_website'] ) > 0 && ! empty( $meta['degree_website'][0] ) ) : ?>
-							<a target="_blank" href="<?php echo $meta['degree_website'][0]; ?>">
-								<?php echo $terms['colleges'][0]->name; ?>
-							</a>
-						<?php else: ?>
-							n/a
-						<?php endif; ?>
-					</span>
-				</dd>
-			</dl>
-
+					</dl>
+				</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 
