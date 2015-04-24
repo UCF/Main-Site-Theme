@@ -948,23 +948,15 @@ var degreeSearch = function($) {
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
     if ( typeof ga !== 'undefined' ) {
 
-      ga('set', {
-        'dimension1': searchTerm
-      });
-
-      ga('set', {
-        'dimension2': programTypes.join()
-      });
-
-      ga('set', {
-        'dimension3': colleges.join()
-      });
-
       var category = 'Degree Search Filters',
         action = 'Filters Selected',
         label = 'Filters Selected';
 
-      ga('send', 'event', category, action, label);
+      ga('send', 'event', category, action, label, {
+        'dimension1': searchTerm,
+        'dimension2': programTypes.join(),
+        'dimension3': colleges.join()
+      });
     }
   }
 
