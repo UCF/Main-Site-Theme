@@ -1575,14 +1575,7 @@ class Degree extends CustomPostType{
 				'desc' => 'type_id in database. Do not modify this value.',
 				'id'   => $prefix.'type_id',
 				'type' => 'text',
-			),
-			array(
-				'name'  => 'Is Online',
-				'desc' => 'ONLY FOR DEGREE SEARCH DEMO PURPOSES',
-				'id'   => $prefix.'online',
-				'type' => 'checkbox',
-				'std'  => 'off'
-			),
+			)
 		);
 	}
 

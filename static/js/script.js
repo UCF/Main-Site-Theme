@@ -886,7 +886,7 @@ var degreeSearch = function($) {
       dataType: 'json'
     })
       .done(function(data) {
-        trackFilterForGoogle(programType, college);
+        trackFilterForGoogle(programType, college, $academicsSearch.find('#search-query').val());
         degreeSearchSuccessHandler(data);
       })
       .fail(function(data) {
@@ -896,38 +896,26 @@ var degreeSearch = function($) {
     $academicsSearch.find('#ajax-loading').removeClass('hidden');
   }
 
-  function trackFilterForGoogle(programTypes, colleges) {
-    var degreeFilterStr = 'Degree Filters: ';
+  function trackFilterForGoogle(programTypes, colleges, searchTerm) {
+    if ( typeof ga !== 'undefined' ) {
 
-    if (programTypes.length > 0) {
-      degreeFilterStr += 'Program Types: ';
-      $.each(programTypes, function(index, program) {
-        if ( index == ( programTypes.length - 1 ) ) {
-          degreeFilterStr += program + ' ';
-        } else {
-          degreeFilterStr += program + ', ';
-        }
+      ga('set', {
+        'dimension1': searchTerm
       });
-    }
 
-    if (colleges.length > 0) {
-      degreeFilterStr += 'Colleges: ';
-      $.each(colleges, function(index, college) {
-        if ( index == ( colleges.length -1 ) ) {
-          degreeFilterStr += college + ' ';
-        } else {
-          degreeFilterStr += college + ', '
-        }
+      ga('set', {
+        'dimension2': programTypes.join()
       });
-    }
 
-    var category = 'Degree Filters',
-      action = 'Degree Filters Selected',
-      label = degreeFilterStr;
+      ga('set', {
+        'dimension3': colleges.join()
+      });
 
-    if (typeof ga !== 'undefined' && action !== null && label !== null) {
+      var category = 'Degree Search Filters',
+        action = 'Filters Selected',
+        label = 'Filters Selected';
+
       ga('send', 'event', category, action, label);
-      window.setTimeout(function(){ document.location = url; }, 200);
     }
   }
 
