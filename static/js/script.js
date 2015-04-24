@@ -1235,6 +1235,7 @@ var degreeSearch = function($) {
     $academicsSearch = $('#academics-search-form');
 
     if ($academicsSearch.length > 0) {
+      var location = window.history.location || window.location;
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
       $sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
       $degreeSearchContent = $academicsSearch.find('#degree-search-content');
