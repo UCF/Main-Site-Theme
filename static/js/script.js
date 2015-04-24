@@ -1225,7 +1225,7 @@ var degreeSearch = function($) {
     // TODO: fails in IE8!
     $academicsSearch.on('click', '.seo-li', function(e) {
       e.preventDefault();
-      $(this).siblings('input').trigger('change');
+      $(this).parent('label').trigger('click');
     });
     initAutoComplete();
     initFilterBtnHandler();
