@@ -1656,12 +1656,16 @@ class Degree extends CustomPostType{
 		<ul class="degree-list">
 			<?php
 			foreach ($posts as $post) {
-				$post = append_degree_list_metadata($post);
+				$profile_link = Degree::get_degree_profile_link($post);
 			?>
 			<li class="program">
-				<?php if (!empty($post->degree_profile_link)) { ?><a href="<?=$post->degree_profile_link?>"><?php } ?>
-					<?=$post->post_title?>
-				<?php if (!empty($post->degree_profile_link)) { ?></a><?php } ?>
+				<?php if ( ! empty( $profile_link ) ) : ?>
+					<a href="<?php echo $profile_link; ?>">
+				<?php endif; ?>
+						<?php echo $post->post_title; ?>
+				<?php if ( ! empty( $profile_link ) ) : ?>
+					</a>
+				<?php endif; ?>
 			</li>
 			<?php } ?>
 		</ul>

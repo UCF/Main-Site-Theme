@@ -886,6 +886,7 @@ var degreeSearch = function($) {
       dataType: 'json'
     })
       .done(function(data) {
+        trackFilterForGoogle(programType, college);
         degreeSearchSuccessHandler(data);
       })
       .fail(function(data) {
@@ -893,6 +894,41 @@ var degreeSearch = function($) {
       });
 
     $academicsSearch.find('#ajax-loading').removeClass('hidden');
+  }
+
+  function trackFilterForGoogle(programTypes, colleges) {
+    var degreeFilterStr = 'Degree Filters: ';
+
+    if (programTypes.length > 0) {
+      degreeFilterStr += 'Program Types: ';
+      $.each(programTypes, function(index, program) {
+        if ( index == ( programTypes.length - 1 ) ) {
+          degreeFilterStr += program + ' ';
+        } else {
+          degreeFilterStr += program + ', ';
+        }
+      });
+    }
+
+    if (colleges.length > 0) {
+      degreeFilterStr += 'Colleges: ';
+      $.each(colleges, function(index, college) {
+        if ( index == ( colleges.length -1 ) ) {
+          degreeFilterStr += college + ' ';
+        } else {
+          degreeFilterStr += college + ', '
+        }
+      });
+    }
+
+    var category = 'Degree Filters',
+      action = 'Degree Filters Selected',
+      label = degreeFilterStr;
+
+    if (typeof ga !== 'undefined' && action !== null && label !== null) {
+      ga('send', 'event', category, action, label);
+      window.setTimeout(function(){ document.location = url; }, 200);
+    }
   }
 
   function resetFilterBtnHandler(e) {
