@@ -12,6 +12,16 @@ Version: v1.0.40
 
 /* General */
 .print-only { display: none; }
+.sr-only {
+  border: 0 none;
+  clip: rect(0px, 0px, 0px, 0px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
 
 /* Events Widget */
 .events_icons { width: 100%; overflow: hidden; margin-bottom: 20px; }
@@ -1000,6 +1010,7 @@ li.tagit-new input {
   font-size: 14px;
 }
 #degree-search-sidebar input:checked + span,
+#degree-search-sidebar input:checked + .seo-li span,
 #degree-search-sidebar input:checked ~ .filter-result-count {
   font-weight: bold;
 }

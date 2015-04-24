@@ -552,13 +552,17 @@ Config::$scripts = array(
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
 
+function enqueue_wpa11y() {
+	wp_enqueue_script( 'wp-a11y' );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_wpa11y' );
+
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', CURRENT_PROTOCOL.'ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
     wp_enqueue_script( 'jquery' );
 }
-
-add_action('wp_enqueue_scripts', 'jquery_in_header');
+add_action( 'wp_enqueue_scripts', 'jquery_in_header' );
 
 /**
  * Meta content for header

@@ -11,6 +11,8 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 
 ## Installation Requirements
 
+WordPress 4.2 is required (primarly for access to wp-a11y accessibility script).
+
 * Make sure that all two- and three-column pages are correctly assigned sidebar menu widgets when content is imported. Menus, when imported, should maintain a common naming schema ('More Information - Page Name', 'Secondary Nav - Page Name', etc.)
 * Add cron job for jobs/feedback-mailer.php to run weekly for feedback emails. The job should use wget to request the file, and the URL should have a 'secret' param with a value that is identical to the value set for the 'Weekly Feedback Email Key' Theme Options setting.
 * Make sure that the 'Weekly Feedback Email Key' Theme Options setting is set and that Email Recipients have been specified.
@@ -108,7 +110,7 @@ Theme-specific functions only should be defined here.  (Other required
 function files are also included at the top of this file.)
 
 ### shortcodes.php
-Where Wordpress shortcodes can be defined.  See example shortcodes for more 
+Where Wordpress shortcodes can be defined.  See example shortcodes for more
 information.
 
 ### custom-post-types.php
