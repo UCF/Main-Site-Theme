@@ -854,10 +854,7 @@ var degreeSearch = function($) {
   }
 
   function updateDocumentHead(data) {
-    // replaceState (on-the-fly url update)
-    var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href;
-    var newURL = baseURL + '?' + data.querystring;
-    window.history.replaceState(data, data.title, newURL);
+    History.replaceState(null, null, '?' + data.querystring);
 
     // <head> updates
     $(document)
@@ -1235,7 +1232,6 @@ var degreeSearch = function($) {
     $academicsSearch = $('#academics-search-form');
 
     if ($academicsSearch.length > 0) {
-      var location = window.history.location || window.location;
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
       $sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
       $degreeSearchContent = $academicsSearch.find('#degree-search-content');
@@ -1266,7 +1262,7 @@ var degreeProfile = function($) {
         .addClass('visible')
         .on('click', function(e) {
           e.preventDefault();
-          window.history.go(-1);
+          History.go(-1);
         });
     }
   }
