@@ -104,7 +104,7 @@
 			<?php foreach ( $contacts as $contact ) : ?>
 				<div class="contact-info">
 					<h3 class="contact-name"><?php echo $contact['contact_name']; ?></h3>
-					<dl class="contact-info-dl">
+					<dl class="contact-info-dl clearfix">
 						<?php if ( ! empty( $contact['contact_email'] ) ) : ?>
 							<dt>Email:</dt>
 							<dd>
