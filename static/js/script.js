@@ -979,7 +979,6 @@ var degreeSearch = function($) {
 
     if (typeof ga !== 'undefined' && action !== null && label !== null) {
       ga('send', 'event', category, action, label);
-      window.setTimeout(function(){ document.location = url; }, 200);
     }
   }
 
