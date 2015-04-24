@@ -47,14 +47,22 @@
 
 				<?php the_content(); ?>
 
+				<noscript>
+					<div class="alert alert-error">
+						<strong>Heads up:</strong> This page requires JavaScript to be enabled to work properly.  Please re-enable JavaScript in your browser and reload the page.
+					</div>
+				</noscript>
+
 				<!-- Search input -->
 
-				<div class="degree-search-form">
+				<fieldset class="degree-search-form" role="search">
+					<legend class="sr-only">Search</legend>
 					<div class="degree-search-form-inner">
+						<label for="search-query" class="sr-only">Search for a degree program</label>
 						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
 						<button class="btn btn-link" type="submit">Search</button>
 					</div>
-				</div>
+				</fieldset>
 
 				<!-- Search Result Header -->
 
@@ -64,13 +72,16 @@
 					</h2>
 
 					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
-						<strong class="degree-search-sort-label radio inline">Sort by:</strong>
-						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') { echo 'checked'; } ?>> Name
-						</label>
-						<label class="radio inline">
-							<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) { echo 'checked'; } ?>> Credit Hours
-						</label>
+						<fieldset>
+							<legend class="sr-only">Sort Results</legend>
+							<strong class="degree-search-sort-label radio inline">Sort by:</strong>
+							<label class="radio inline">
+								<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') { echo 'checked'; } ?>> <span class="sr-only">Sort by </span>Name
+							</label>
+							<label class="radio inline">
+								<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) { echo 'checked'; } ?>> <span class="sr-only">Sort by </span>Credit Hours
+							</label>
+						</fieldset>
 					</div>
 
 					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
@@ -79,44 +90,9 @@
 				</div>
 			</div>
 
-			<!-- Sidebar (Desktop only) -->
-
-			<div id="degree-search-sidebar" class="span3">
-				<div class="visible-phone clearfix degree-mobile-actions">
-					<a class="btn btn-default pull-left" id="mobile-filter-reset">Reset All</a>
-					<a class="btn btn-primary pull-right" id="mobile-filter-done" href="#">Done</a>
-				</div>
-				<div class="degree-search-sort visible-phone clearfix">
-					<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
-					<select id="sort-by" class="pull-right">
-						<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
-						<option value="credit-hours" <?php if ( $sort_by == 'credit-hours' ) { echo 'selected'; } ?>>Credit Hours</option>
-					</select>
-				</div>
-
-				<?php foreach ( $filters as $key=>$filter ): ?>
-				<h2 class="degree-filter-title"><?php echo $filter['name']; ?></h2>
-				<ul class="degree-filter-list">
-					<?php foreach ( $filter['terms'] as $term ): ?>
-						<?php if ( $term->count > 0 ): ?>
-						<li class="checkbox">
-							<a href="/degree-search/?<?php echo $key; ?>[]=<?php echo $term->slug; ?>" class="seo-li">
-								<label>
-									<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
-									<span><?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></span>
-									<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
-								</label>
-							</a>
-						</li>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				</ul>
-				<?php endforeach; ?>
-			</div>
-
 			<!-- Main content col -->
 
-			<div class="span9" id="degree-search-content">
+			<div class="span9 pull-right" id="degree-search-content">
 				<article role="main">
 
 					<!-- Search Results -->
@@ -138,6 +114,45 @@
 					</p>
 
 				</article>
+			</div>
+
+			<!-- Sidebar (Desktop only) -->
+
+			<div id="degree-search-sidebar" class="span3 pull-left">
+				<fieldset>
+					<legend class="sr-only">Filter Results</legend>
+
+					<div class="visible-phone clearfix degree-mobile-actions">
+						<a class="btn btn-default pull-left" id="mobile-filter-reset">Reset All</a>
+						<a class="btn btn-primary pull-right" id="mobile-filter-done" href="#">Done</a>
+					</div>
+					<div class="degree-search-sort visible-phone clearfix">
+						<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
+						<select id="sort-by" class="pull-right">
+							<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
+							<option value="credit-hours" <?php if ( $sort_by == 'credit-hours' ) { echo 'selected'; } ?>>Credit Hours</option>
+						</select>
+					</div>
+
+					<?php foreach ( $filters as $key=>$filter ): ?>
+					<h2 class="degree-filter-title"><?php echo $filter['name']; ?></h2>
+					<ul class="degree-filter-list">
+						<?php foreach ( $filter['terms'] as $term ): ?>
+							<?php if ( $term->count > 0 ): ?>
+							<li class="checkbox">
+								<label>
+									<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
+									<a href="<?php echo get_permalink(); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>" class="seo-li" tabindex="-1">
+										<span><?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></span>
+										<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
+									</a>
+								</label>
+							</li>
+							<?php endif; ?>
+						<?php endforeach; ?>
+					</ul>
+					<?php endforeach; ?>
+				</fieldset>
 			</div>
 
 		</form>

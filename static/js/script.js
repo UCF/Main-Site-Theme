@@ -772,6 +772,56 @@ var degreeSearch = function($) {
       var that = this;
       setTimeout(function () { that.hide(); }, 250);
     };
+    // Prevent tabbing from filling the autocomplete field with the selection
+    $.fn.typeahead.Constructor.prototype.keyup = function(e) {
+      switch(e.keyCode) {
+        case 40: // down arrow
+        case 38: // up arrow
+        case 16: // shift
+        case 17: // ctrl
+        case 18: // alt
+        case 9:  // tab
+          break
+
+        // case 9: // tab
+        case 13: // enter
+          if (!this.shown) return
+          this.select()
+          break
+
+        case 27: // escape
+          if (!this.shown) return
+          this.hide()
+          break
+
+        default:
+          this.lookup()
+      }
+
+      e.stopPropagation()
+      e.preventDefault()
+    }
+    $.fn.typeahead.Constructor.prototype.move = function(e) {
+      switch(e.keyCode) {
+        // case 9: // tab
+        case 13: // enter
+        case 27: // escape
+          e.preventDefault()
+          break
+
+        case 38: // up arrow
+          e.preventDefault()
+          this.prev()
+          break
+
+        case 40: // down arrow
+          e.preventDefault()
+          this.next()
+          break
+      }
+
+      e.stopPropagation()
+    }
 
     var timer = null;
 
@@ -779,14 +829,17 @@ var degreeSearch = function($) {
       .on({
         'submit': function(e) {
           e.preventDefault();
+          loadDegreeSearchResults();
         },
-        'keyup': function() {
-          if (timer) {
-            clearTimeout(timer);
+        'keyup': function(e) {
+          if ($.inArray(e.keyCode, [9, 16, 37, 38, 39, 40]) === -1) {
+            if (timer) {
+              clearTimeout(timer);
+            }
+            timer = setTimeout(function() {
+              loadDegreeSearchResults();
+            }, 300);
           }
-          timer = setTimeout(function() {
-            loadDegreeSearchResults();
-          }, 300);
         }
       })
       .typeahead({
@@ -794,20 +847,14 @@ var degreeSearch = function($) {
           return searchSuggestions; // searchSuggestions defined in page-degree-search.php
         },
         updater: function(item) {
-          this.$element[0].value = item;
-          // this.$element[0].form.submit();
-          loadDegreeSearchResults();
-
+          $(this).val(item);
           return item;
         }
       });
   }
 
   function updateDocumentHead(data) {
-    // replaceState (on-the-fly url update)
-    var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href;
-    var newURL = baseURL + '?' + data.querystring;
-    window.history.replaceState(data, data.title, newURL);
+    History.replaceState(null, null, '?' + data.querystring);
 
     // <head> updates
     $(document)
@@ -840,6 +887,8 @@ var degreeSearch = function($) {
       scrollToResults();
       toggleSidebarAffix();
       updateDocumentHead(data);
+
+      wp.a11y.speak($(data.count).text());
     }, 200);
   }
 
@@ -961,7 +1010,7 @@ var degreeSearch = function($) {
 
     // resize the panel to be full screen and align it
     $('html, body').animate({
-      scrollTop: $filterBtn.offset().top,
+      scrollTop: $filterBtn.offset().top
     }, 200);
 
     // Position sidebar
@@ -1159,6 +1208,11 @@ var degreeSearch = function($) {
 
     $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
+    // TODO: fails in IE8!
+    $academicsSearch.on('click', '.seo-li', function(e) {
+      e.preventDefault();
+      $(this).parent('label').trigger('click');
+    });
     initAutoComplete();
     initFilterBtnHandler();
   }
@@ -1197,7 +1251,7 @@ var degreeProfile = function($) {
         .addClass('visible')
         .on('click', function(e) {
           e.preventDefault();
-          window.history.go(-1);
+          History.go(-1);
         });
     }
   }
