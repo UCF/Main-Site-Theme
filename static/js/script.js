@@ -767,12 +767,29 @@ var degreeSearch = function($) {
     ajaxURL;
 
   function initAutoComplete() {
-    // Workaround for bug in mouse item selection
+    /**
+     * Bootstrap typeahead overrides, for general fixes and usability improvements
+     **/
     $.fn.typeahead.Constructor.prototype.blur = function() {
+      // Workaround for bug in mouse item selection
       var that = this;
       setTimeout(function () { that.hide(); }, 250);
     };
-    // Prevent tabbing from filling the autocomplete field with the selection
+
+    $.fn.typeahead.Constructor.prototype.select = function(e) {
+      var val = this.$menu.find('.active').attr('data-value');
+      this.$element
+        .val(this.updater(val))
+        .change();
+
+      // Submit the form on select
+      if (this.$element.parents('form').length) {
+        this.$element.parents('form').eq(0).submit();
+      }
+
+      return this.hide();
+    };
+
     $.fn.typeahead.Constructor.prototype.keyup = function(e) {
       switch(e.keyCode) {
         case 40: // down arrow
@@ -781,67 +798,71 @@ var degreeSearch = function($) {
         case 17: // ctrl
         case 18: // alt
         case 9:  // tab
-          break
+          break;
 
-        // case 9: // tab
+        // case 9: // Prevent tabbing from filling the autocomplete field with the selection
         case 13: // enter
-          if (!this.shown) return
-          this.select()
-          break
+          if (!this.shown) { return; }
+          this.select();
+          break;
 
         case 27: // escape
-          if (!this.shown) return
-          this.hide()
-          break
+          if (!this.shown) { return; }
+          this.hide();
+          break;
+
+        case 39: // right arrow
+          if (!this.shown) { return; }
+          this.select();
+          break;
 
         default:
-          this.lookup()
+          this.lookup();
       }
 
-      e.stopPropagation()
-      e.preventDefault()
+      e.stopPropagation();
+      e.preventDefault();
     }
+
+    $.fn.typeahead.Constructor.prototype.keydown = function(e) {
+      this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40,38,9,27]); // remove 13 (enter)
+      this.move(e);
+    }
+
     $.fn.typeahead.Constructor.prototype.move = function(e) {
       switch(e.keyCode) {
-        // case 9: // tab
+        // case 9: // Remove tab overrides
         case 13: // enter
+          if (this.shown) { // Allow enter key to submit form when no suggestions are available
+            e.preventDefault();
+          }
+          break;
+
         case 27: // escape
-          e.preventDefault()
-          break
+          e.preventDefault();
+          break;
 
         case 38: // up arrow
-          e.preventDefault()
-          this.prev()
-          break
+          e.preventDefault();
+          this.prev();
+          break;
 
         case 40: // down arrow
-          e.preventDefault()
-          this.next()
-          break
+          e.preventDefault();
+          this.next();
+          break;
       }
 
-      e.stopPropagation()
+      e.stopPropagation();
     }
 
-    var timer = null;
+    /**
+     * #search-query specific typeahead init, event handlers
+     **/
+    var $searchQuery = $academicsSearch.find('#search-query');
 
-    $academicsSearch.find('#search-query')
-      .on({
-        'submit': function(e) {
-          e.preventDefault();
-          loadDegreeSearchResults();
-        },
-        'keyup': function(e) {
-          if ($.inArray(e.keyCode, [9, 16, 37, 38, 39, 40]) === -1) {
-            if (timer) {
-              clearTimeout(timer);
-            }
-            timer = setTimeout(function() {
-              loadDegreeSearchResults();
-            }, 300);
-          }
-        }
-      })
+    // Typeahead init
+    $searchQuery
       .typeahead({
         source: function(query, process) {
           return searchSuggestions; // searchSuggestions defined in page-degree-search.php
@@ -851,10 +872,58 @@ var degreeSearch = function($) {
           return item;
         }
       });
+
+    // Dynamic content reloading for browsers that support history api
+    if (supportsHistory()) {
+      var timer = null;
+
+      $academicsSearch.on('submit', function(e) {
+        e.preventDefault();
+        loadDegreeSearchResults();
+      });
+
+      $searchQuery
+        .on({
+          'keyup': function(e) {
+            if (e.keyCode === 13) {
+              // Don't trigger a submit here (prevent loadDegreeSearchResults from firing twice)
+              e.preventDefault();
+            }
+            else if ($.inArray(e.keyCode, [9, 16, 37, 38, 39, 40]) === -1) {
+              if (timer) {
+                clearTimeout(timer);
+              }
+              timer = setTimeout(function() {
+                loadDegreeSearchResults();
+              }, 300);
+            }
+          },
+          'mouseup': function(e) {
+            // Force detection of IE10+ 'x' button click on input field.
+            // If the input value is cleared by button press, simulate a keyup
+            // event, which will trigger loadDegreeSearchResults() (see above).
+            var oldValue = $searchQuery.val();
+
+            if (oldValue == '') {
+              return;
+            }
+
+            setTimeout(function() {
+              var newValue = $searchQuery.val();
+              if (newValue == '') {
+                $searchQuery.trigger('keyup');
+              }
+            });
+          }
+        });
+    }
   }
 
   function updateDocumentHead(data) {
-    History.replaceState(null, null, '?' + data.querystring);
+    var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href;
+    var newURL = baseURL + '?' + data.querystring;
+
+    window.history.replaceState(null, null, newURL);
 
     // <head> updates
     $(document)
@@ -910,39 +979,63 @@ var degreeSearch = function($) {
     }, 200);
   }
 
+  function supportsHistory() {
+    // Determine if the browser supports the history API.
+    // Copied from Modernizr
+    var ua = navigator.userAgent;
+
+    // We only want Android 2 and 4.0, stock browser, and not Chrome which identifies
+    // itself as 'Mobile Safari' as well, nor Windows Phone (issue #1471).
+    if ((ua.indexOf('Android 2.') !== -1 ||
+        (ua.indexOf('Android 4.0') !== -1)) &&
+        ua.indexOf('Mobile Safari') !== -1 &&
+        ua.indexOf('Chrome') === -1 &&
+        ua.indexOf('Windows Phone') === -1) {
+      return false;
+    }
+
+    // Return the regular check
+    return (window.history && 'pushState' in window.history);
+  }
+
   function loadDegreeSearchResults() {
-    var programType = [];
-    $academicsSearch.find('.program-type:checked').each(function() {
-      programType.push($(this).val());
-    });
-
-    var college = [];
-    $academicsSearch.find('.college:checked').each(function() {
-      college.push($(this).val());
-    });
-
-    $.ajax({
-      url: ajaxURL,
-      type: 'GET',
-      // cache: false,
-      data: {
-        'action': 'degree_search',
-        'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
-        'sort-by': $academicsSearch.find('.sort-by:checked').val(),
-        'program-type': programType,
-        'college': college
-      },
-      dataType: 'json'
-    })
-      .done(function(data) {
-        trackFilterForGoogle(programType, college, $academicsSearch.find('#search-query').val());
-        degreeSearchSuccessHandler(data);
-      })
-      .fail(function(data) {
-        degreeSearchFailureHandler(data);
+    if (supportsHistory()) {
+      var programType = [];
+      $academicsSearch.find('.program-type:checked').each(function() {
+        programType.push($(this).val());
       });
 
-    $academicsSearch.find('#ajax-loading').removeClass('hidden');
+      var college = [];
+      $academicsSearch.find('.college:checked').each(function() {
+        college.push($(this).val());
+      });
+
+      $.ajax({
+        url: ajaxURL,
+        type: 'GET',
+        // cache: false,
+        data: {
+          'action': 'degree_search',
+          'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
+          'sort-by': $academicsSearch.find('.sort-by:checked').val(),
+          'program-type': programType,
+          'college': college
+        },
+        dataType: 'json'
+      })
+        .done(function(data) {
+          trackFilterForGoogle(programType, college, $academicsSearch.find('#search-query').val());
+          degreeSearchSuccessHandler(data);
+        })
+        .fail(function(data) {
+          degreeSearchFailureHandler(data);
+        });
+
+      $academicsSearch.find('#ajax-loading').removeClass('hidden');
+    }
+    else {
+      $academicsSearch.submit();
+    }
   }
 
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
@@ -1251,7 +1344,7 @@ var degreeProfile = function($) {
         .addClass('visible')
         .on('click', function(e) {
           e.preventDefault();
-          History.go(-1);
+          window.history.go(-1);
         });
     }
   }
