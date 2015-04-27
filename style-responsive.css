@@ -742,3 +742,12 @@
     width: 28%;
   }
 }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	#degree-single .social .share-twitter,
+	#degree-single .social .share-facebook,
+	#degree-single .social .share-googleplus {
+		background-image: url('static/img/social-share-extended-r.png');
+		background-size: 212px 62px;
+	}
+}

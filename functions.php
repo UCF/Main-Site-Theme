@@ -2215,7 +2215,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			?>
 			<li class="degree-search-result">
 				<h3 class="degree-title">
-					<a href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
+					<a class="ga-event" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $result['name']; ?>" href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
 						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 					</a>
 					<span class="degree-credits-count">
@@ -2488,5 +2488,36 @@ function colleges_render_columns( $out, $name, $term_id ) {
     return $out;
 }
 add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
+
+/**
+* Displays social buttons (Facebook, Twitter, G+) for a post.
+* Accepts a post URL and title as arguments.
+*
+* @return string
+* @author Jo Dickson
+**/
+function display_social($url, $title) {
+    $tweet_title = urlencode('UCF Degree: '.$title);
+    ob_start(); ?>
+    <aside class="social">
+        <a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this story on Facebook">
+            Like "<?php echo $title; ?>" on Facebook
+        </a>
+        <a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
+            Tweet "<?php echo $title; ?>" on Twitter
+        </a>
+        <a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
+            Share "<?php echo $title; ?>" on Google+
+        </a>
+        <a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
+        	Share "<?php echo $title; ?>" on Linkedin
+        </a>
+        <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
+        	Sahre "<?php echo $title; ?>" in an email
+        </a> 
+    </aside>
+    <?php
+    return ob_get_clean();
+}
 
 ?>

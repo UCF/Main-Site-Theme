@@ -745,6 +745,7 @@ var gaEventTracking = function($) {
       label = link.attr('data-ga-label');  // the page the user is leaving
 
     if (typeof ga !== 'undefined' && action !== null && label !== null) {
+      console.log("Sending event");
       ga('send', 'event', category, action, label);
       window.setTimeout(function(){ document.location = url; }, 200);
     }
@@ -1041,23 +1042,15 @@ var degreeSearch = function($) {
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
     if ( typeof ga !== 'undefined' ) {
 
-      ga('set', {
-        'dimension1': searchTerm
-      });
-
-      ga('set', {
-        'dimension2': programTypes.join()
-      });
-
-      ga('set', {
-        'dimension3': colleges.join()
-      });
-
-      var category = 'Degree Search Filters',
-        action = 'Filters Selected',
+      var category = 'Degree Search',
+        action = 'Filters Updated',
         label = 'Filters Selected';
 
-      ga('send', 'event', category, action, label);
+      ga('send', 'event', category, action, label, {
+        'dimension1': searchTerm,
+        'dimension2': programTypes.join(),
+        'dimension3': colleges.join()
+      });
     }
   }
 
@@ -1350,6 +1343,32 @@ var degreeProfile = function($) {
   }
 }
 
+var socialButtonTracking = function($) {
+    // Track social media button clicks, using GA's integrated
+    // _trackSocial method.
+    $('#degree-single .social a').click(function() {
+        var link = $(this),
+            target = link.attr('data-button-target'),
+            network = '',
+            socialAction = '';
+
+        if (link.hasClass('share-facebook')) {
+            network = 'Facebook';
+            socialAction = 'Like';
+        }
+        else if (link.hasClass('share-twitter')) {
+            network = 'Twitter';
+            socialAction = 'Tweet';
+        }
+        else if (link.hasClass('share-googleplus')) {
+            network = 'Google+';
+            socialAction = 'Share';
+        }
+
+        _gaq.push(['_trackSocial', network, socialAction, target]);
+    });
+}
+
 
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
@@ -1383,6 +1402,7 @@ if (typeof jQuery != 'undefined'){
     gaEventTracking($);
     degreeSearch($);
     degreeProfile($);
+    socialButtonTracking($);
 
     //devBootstrap($);
 

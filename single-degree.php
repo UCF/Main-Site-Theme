@@ -69,7 +69,6 @@
 								<?php endif; ?>
 							</dd>
 						</dl>
-						<!-- Degree description -->
 					</div>
 				</div>
 
@@ -77,22 +76,29 @@
 					<a class="btn btn-large btn-block btn-success">View Catalog</a>
 					<a class="btn btn-large btn-block">Visit Program Website</a>
 				</div>
-
+				<!-- Degree description -->
 				<?php if ($post->degree_description) { ?>
 					<p><?php echo apply_filters('the_content', $post->degree_description)?></p>
 				<?php } else { ?>
 					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
 				<?php } ?>
 			</article>
-			<?php echo do_shortcode('[shareaholic app="share_buttons" id="' . $theme_options['shareaholic_below_post_id'] . '"]'); ?>
+			<!--<?php echo do_shortcode('[shareaholic app="share_buttons" id="' . $theme_options['shareaholic_below_post_id'] . '"]'); ?>-->
+			<div class="social-wrap">
+				<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
+			</div>
 		</div>
 		<div id="sidebar_right" class="span4 notoppad" role="complementary">
 
 			<!-- Sidebar content -->
 
 			<div class="hidden-phone">
-				<a href="<?php echo $meta['degree_pdf'][0]; ?>" target="_blank" class="btn btn-large btn-block btn-success">View Catalog</a>
-				<a href="<?php echo $meta['degree_website'][0]; ?>" class="btn btn-large btn-block">Visit Program Website</a>
+				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $meta['degree_pdf'][0]; ?>" target="_blank" class="ga-event btn btn-large btn-block btn-success">
+						View Catalog
+				</a>
+				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $meta['degree_website'][0]; ?>" class="ga-event btn btn-large btn-block">
+						Visit Program Website
+				</a>
 			</div>
 			<?php 
 				$contacts = get_degree_contacts($post->ID);
