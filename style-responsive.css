@@ -436,6 +436,7 @@
     position: relative;
     position: -webkit-sticky; /* we can at least give ios users a fixed top bar */
     top: -1px; /* Hide un-styleable outline on #degree-search-sidebar:target */
+    z-index: 999;
   }
 
   #degree-search-sidebar .degree-search-sort {
