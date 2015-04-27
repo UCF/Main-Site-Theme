@@ -69,7 +69,6 @@
 								<?php endif; ?>
 							</dd>
 						</dl>
-						<!-- Degree description -->
 					</div>
 				</div>
 
@@ -77,14 +76,17 @@
 					<a class="btn btn-large btn-block btn-success">View Catalog</a>
 					<a class="btn btn-large btn-block">Visit Program Website</a>
 				</div>
-
+				<!-- Degree description -->
 				<?php if ($post->degree_description) { ?>
 					<p><?php echo apply_filters('the_content', $post->degree_description)?></p>
 				<?php } else { ?>
 					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
 				<?php } ?>
 			</article>
-			<?php echo do_shortcode('[shareaholic app="share_buttons" id="' . $theme_options['shareaholic_below_post_id'] . '"]'); ?>
+			<!--<?php echo do_shortcode('[shareaholic app="share_buttons" id="' . $theme_options['shareaholic_below_post_id'] . '"]'); ?>-->
+			<div class="social-wrap">
+				<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
+			</div>
 		</div>
 		<div id="sidebar_right" class="span4 notoppad" role="complementary">
 

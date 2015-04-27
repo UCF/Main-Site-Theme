@@ -1529,6 +1529,36 @@ li.tagit-new input {
   margin-left: 0;
   width: 80%;
 }
+
+/* Social buttons */
+#degree-single .social .share-twitter,
+#degree-single .social .share-facebook,
+#degree-single .social .share-googleplus,
+#degree-single .social .share-linkedin,
+#degree-single .social .share-email {
+    background-image: url('static/img/social-share-extended.png');
+    background-repeat: no-repeat;
+    text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+    display: block;
+    float: left;
+    height: 20px;
+    margin-right: 4px;
+    width: 70px;
+    height: 31px;
+}
+#degree-single .social .share-twitter { background-position: -71px 0; }
+#degree-single .social .share-twitter:hover { background-position: -71px -31px; }
+#degree-single .social .share-facebook { background-position: 0 0; }
+#degree-single .social .share-facebook:hover { background-position: 0 -31px; }
+#degree-single .social .share-googleplus { background-position: -142px 0; }
+#degree-single .social .share-googleplus:hover { background-position: -142px -31px; }
+#degree-single .social .share-linkedin { background-position: -213px 0; }
+#degree-single .social .share-linkedin:hover { background-position: -213px -31px; }
+#degree-single .social .share-email { background-position: -284px 0; margin-right: 0; }
+#degree-single .social .share-email:hover { background-position: -284px -31px; }
+
 .ie8 #degree-single #sidebar_right .contact-info-dl dd {
   width: 75%;
 }
