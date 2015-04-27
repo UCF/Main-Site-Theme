@@ -2215,7 +2215,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			?>
 			<li class="degree-search-result">
 				<h3 class="degree-title">
-					<a href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
+					<a class="ga-event" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $result['name']; ?>" href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
 						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
 					</a>
 					<span class="degree-credits-count">

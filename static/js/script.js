@@ -745,6 +745,7 @@ var gaEventTracking = function($) {
       label = link.attr('data-ga-label');  // the page the user is leaving
 
     if (typeof ga !== 'undefined' && action !== null && label !== null) {
+      console.log("Sending event");
       ga('send', 'event', category, action, label);
       window.setTimeout(function(){ document.location = url; }, 200);
     }
@@ -948,8 +949,8 @@ var degreeSearch = function($) {
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
     if ( typeof ga !== 'undefined' ) {
 
-      var category = 'Degree Search Filters',
-        action = 'Filters Selected',
+      var category = 'Degree Search',
+        action = 'Filters Updated',
         label = 'Filters Selected';
 
       ga('send', 'event', category, action, label, {

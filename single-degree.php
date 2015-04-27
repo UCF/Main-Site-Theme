@@ -91,8 +91,12 @@
 			<!-- Sidebar content -->
 
 			<div class="hidden-phone">
-				<a href="<?php echo $meta['degree_pdf'][0]; ?>" target="_blank" class="btn btn-large btn-block btn-success">View Catalog</a>
-				<a href="<?php echo $meta['degree_website'][0]; ?>" class="btn btn-large btn-block">Visit Program Website</a>
+				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $meta['degree_pdf'][0]; ?>" target="_blank" class="ga-event btn btn-large btn-block btn-success">
+						View Catalog
+				</a>
+				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $meta['degree_website'][0]; ?>" class="ga-event btn btn-large btn-block">
+						Visit Program Website
+				</a>
 			</div>
 			<?php 
 				$contacts = get_degree_contacts($post->ID);
