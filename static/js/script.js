@@ -958,7 +958,8 @@ var degreeSearch = function($) {
       toggleSidebarAffix();
       updateDocumentHead(data);
 
-      wp.a11y.speak($(data.count).text());
+      var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
+      wp.a11y.speak(assistiveText);
     }, 200);
   }
 

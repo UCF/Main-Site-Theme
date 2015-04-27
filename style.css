@@ -12,7 +12,8 @@ Version: v1.0.40
 
 /* General */
 .print-only { display: none; }
-.sr-only {
+.sr-only,
+#wp-a11y-speak {
   border: 0 none;
   clip: rect(0px, 0px, 0px, 0px);
   height: 1px;
