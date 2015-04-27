@@ -1532,22 +1532,26 @@ li.tagit-new input {
 }
 
 /* Social buttons */
+#degree-single .social {
+  margin-top: 20px;
+}
 #degree-single .social .share-twitter,
 #degree-single .social .share-facebook,
 #degree-single .social .share-googleplus,
 #degree-single .social .share-linkedin,
 #degree-single .social .share-email {
-    background-image: url('static/img/social-share-extended.png');
-    background-repeat: no-repeat;
-    text-indent: 100%;
+  background-image: url('static/img/social-share-extended.png');
+  background-repeat: no-repeat;
+  text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
-    display: block;
-    float: left;
-    height: 20px;
-    margin-right: 4px;
-    width: 70px;
-    height: 31px;
+  display: block;
+  float: left;
+  height: 20px;
+  margin-right: 4px;
+  margin-top: 4px;
+  width: 70px;
+  height: 31px;
 }
 #degree-single .social .share-twitter { background-position: -71px 0; }
 #degree-single .social .share-twitter:hover { background-position: -71px -31px; }

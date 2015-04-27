@@ -2499,7 +2499,7 @@ add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 function display_social($url, $title) {
     $tweet_title = urlencode('UCF Degree: '.$title);
     ob_start(); ?>
-    <aside class="social">
+    <aside class="social clearfix">
         <a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this story on Facebook">
             Like "<?php echo $title; ?>" on Facebook
         </a>
@@ -2514,7 +2514,7 @@ function display_social($url, $title) {
         </a>
         <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
         	Sahre "<?php echo $title; ?>" in an email
-        </a> 
+        </a>
     </aside>
     <?php
     return ob_get_clean();
