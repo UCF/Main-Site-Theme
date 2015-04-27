@@ -747,7 +747,9 @@
 @media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
 	#degree-single .social .share-twitter,
 	#degree-single .social .share-facebook,
-	#degree-single .social .share-googleplus {
+	#degree-single .social .share-googleplus,
+  #degree-single .social .share-linkedin,
+  #degree-single .social .share-email {
 		background-image: url('static/img/social-share-extended-r.png');
 		background-size: 354px 62px;
 	}
