@@ -1859,7 +1859,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 		$title .= ' Degrees';
 
 		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
-			$title .= 'sorted by total credit hours';
+			$title .= ', sorted by total credit hours';
 		}
 
 		if ( substr( $title, -2 ) == ', ' ) {
