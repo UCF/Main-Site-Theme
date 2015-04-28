@@ -1306,6 +1306,9 @@ add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 /**
  * Returns an array of post groups, grouped by a specified taxonomy's terms.
  * Each key is a taxonomy term ID; each value is an array of post objects.
+ *
+ * TODO consider moving to functions/base.php
+ * Used by degree-list shortcode (Degree::objectsToHTML)
  **/
 function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
 	$groups = array();
@@ -1362,6 +1365,9 @@ function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
 /**
  * Returns a sorted array of grouped degrees by program (grouped by group_posts_by_tax_terms().)
  * Uses the order defined by DEGREE_PROGRAM_ORDER in functions/config.php.
+ *
+ * TODO consider making this a Degree object static method
+ * Used by degree-list shortcode (Degree::objectsToHTML)
  **/
 function sort_grouped_degree_programs($posts) {
 	$slugs = unserialize(DEGREE_PROGRAM_ORDER);
@@ -1381,392 +1387,11 @@ function sort_grouped_degree_programs($posts) {
 
 
 /**
- * Fetch a set of Degree Programs for the Degree Search page.
+ * Returns a degree's contacts and their phone/email info
+ * in an array of arrays.
+ *
+ * TODO consider making this a Degree object static method
  **/
-function get_degree_search_data() {
-	// Set the view.  The view determines what set of data needs to be returned
-	// and how that data should be grouped/ordered.
-	// Available views are defined in $all_views.
-	$current_view = $_GET['current_view'] ? $_GET['current_view'] : 'browse_by_name';
-
-	// Define which of our Program types are valid.  (These are highest-level parent terms
-	// of the Program Type taxonomy.)
-	$all_program_type_parents = array('undergraduate-program', 'graduate-program');
-
-	// Define which of our Degree types are valid.  (These are the 2nd level terms of
-	// the Program Type taxonomy.)
-	$all_degree_types = array('undergraduate-degree', 'minor', 'graduate-degree', 'certificate');
-
-
-	// Determine some variables based on query args.  Set defaults if no values are set.
-	$program_type	     = in_array($_GET['program_type'], $all_program_type_parents) ? $_GET['program_type'] : null;
-	$degree_type	     = in_array($_GET['degree_type'], $all_degree_types) ? $_GET['degree_type'] : 'undergraduate-degree';
-	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'title';
-	$order			     = ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC') ? $_GET['order'] : 'ASC';
-	$flip_order		     = ($order == 'ASC') ? 'DESC' : 'ASC'; // opposite of $order
-
-	$s                   = $_GET['search']       ? $_GET['search']        : null;
-	$search_query_pretty = !empty($s)            ? htmlentities($s)       : null;
-
-	// Define a default list of get_posts() args.
-	$default_view_params = array(
-		'post_type' => 'degree',
-		'post_status' => 'publish',
-		'numberposts' => -1,
-		'orderby' => $orderby,
-		'order' => $order,
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'program_types',
-				'field' => 'slug',
-				'terms' => $degree_type,
-				'include_children' => true // Make sure we get Undergraduate Degree children (Articulated/Accelerated)
-			),
-		),
-	);
-
-	// Search-specific variable overrides
-	if (!empty($s)) {
-		$program_type = empty($program_type) ? $all_program_type_parents : $program_type;
-	}
-
-	// Define per-view get_posts() args.
-	$all_views = array(
-		'browse_by_name' => $default_view_params,
-		'browse_by_college' => $default_view_params, // Needs to be sorted later
-		'browse_by_hours' => array_merge($default_view_params, array(
-			'meta_key' => 'degree_hours',
-			'orderby' => 'meta_value'
-		)),
-	);
-
-	// Get the posts.  Override any set view with search-specific args, if this is a
-	// set of search results.
-	if (isset($all_views[$current_view])) {
-		if ($s) {
-			$all_views[$current_view] = array_merge($all_views[$current_view], array(
-				's' => $s,
-				'tax_query' => array(
-					// Overrides existing tax_query.
-					array(
-						'taxonomy' => 'program_types',
-						'field' => 'slug',
-						'terms' => $program_type,
-						'include_children' => true,
-					)
-				),
-			));
-		}
-		$posts = get_posts($all_views[$current_view]);
-	}
-	else { return 'Invalid view type.'; }
-
-
-	// Process the returned posts.
-	$data = array(
-		'view-info' => array(
-			'current_view' => $current_view,
-			'all-program_type-parents' => $all_program_type_parents,
-			'all-degree-types' => $all_degree_types,
-			'program_type' => $program_type,
-			'degree_type' => $degree_type,
-			'orderby' => $orderby,
-			'order' => $order,
-			'flip-order' => $flip_order,
-			's' => $s,
-			'search-query-pretty' => $search_query_pretty,
-			'grouping-tax' => null,
-			'result-count' => 0,
-		),
-		'posts' => null,
-	);
-
-	if ($posts) {
-		foreach ($posts as $post) {
-			// Increment the result count.
-			$data['view-info']['result-count']++;
-		}
-
-		// Further group our returned posts.
-		$grouped_posts = null;
-		$grouping_tax = null; // The type of taxonomy by which posts are grouped.
-		switch ($current_view) {
-			case 'browse_by_college':
-				$grouping_tax = 'colleges';
-				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts);
-				break;
-			default:
-				$grouping_tax = 'program_types';
-				$include_terms = (empty($s)) ? $degree_type : $program_type;
-
-				// Get Program Type term ID(s) to pass to group_posts_by_tax_terms()
-				$term_ids = array();
-				if (is_array($include_terms)) {
-					foreach ($include_terms as $slug) {
-						$term_ids[] = intval(get_term_by('slug', $slug, $grouping_tax)->term_id);
-					}
-				}
-				else {
-					$term_ids[] = intval(get_term_by('slug', $include_terms, $grouping_tax)->term_id);
-				}
-
-				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts, $term_ids);
-				break;
-		}
-		$data['view-info']['grouping-tax'] = $grouping_tax;
-		$data['posts'] = $grouped_posts;
-	}
-
-	// Return the grouped posts and view-related variables.
-	return $data;
-}
-
-
-/**
- * Display a list of degrees with posts returned from get_degree_search_data().
- **/
-function display_degree_search($data) {
-	// Add selected state to Search form program type dropdown
-	$search_program_undergrad_sel = $search_program_all_sel = $search_program_grad_sel = '';
-	$search_program_active_sel = 'selected="selected"';
-
-	if (isset($data['view-info']['program_type'])) {
-		if (is_array($data['view-info']['program_type'])) {
-			$search_program_all_sel = $search_program_active_sel;
-		}
-		else {
-			switch ($data['view-info']['program_type']) {
-				case 'undergraduate-program':
-					$search_program_undergrad_sel = $search_program_active_sel;
-					break;
-				case 'graduate-program':
-					$search_program_grad_sel = $search_program_active_sel;
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	else {
-		$search_program_all_sel = $search_program_active_sel;
-	}
-
-	// Add active state class to Browse All degree type navigation links.
-	// Do not apply class if search results are returned.
-	$browse_majors_class = $browse_minors_class = $browse_grad_class = $browse_cert_class = '';
-	$browse_active_class = 'active';
-	if (empty($data['view-info']['s'])) {
-		if (isset($data['view-info']['degree_type'])) {
-			switch ($data['view-info']['degree_type']) {
-				case 'minor':
-					$browse_minors_class = $browse_active_class;
-					break;
-				case 'graduate-degree':
-					$browse_grad_class = $browse_active_class;
-					break;
-				case 'certificate':
-					$browse_cert_class = $browse_active_class;
-					break;
-				default:
-					$browse_majors_class = $browse_active_class;
-					break;
-			}
-		}
-	}
-
-	// Generate $results_title string based on current view for <h2> ("Results For:" heading)
-	$results_title = '';
-	if (empty($data['view-info']['s'])) {
-		$degree_type = get_term_by('slug', $data['view-info']['degree_type'], 'program_types')->name;
-		$results_title = 'All '.$degree_type.'s';
-	}
-	else {
-		$results_title = '&ldquo;'.$data['view-info']['search-query-pretty'].'&rdquo;';
-	}
-
-	if (is_array($data)) {
-		// Create links per sort option (Name/College/Hours)
-		$permalink = $_SERVER[REQUEST_URI];
-		if (strpos($permalink, 'order=').count < 1) {
-			add_query_arg(array('order' => $data['view-info']['order']), $permalink);
-		}
-		$reverse_order_url = add_query_arg(array('order' => $data['view-info']['flip-order']), $permalink);
-
-		$sort_name_url    = ($data['view-info']['current_view'] == 'browse_by_name') ? $reverse_order_url : add_query_arg(array('current_view' => 'browse_by_name'), $permalink);
-		$sort_college_url = add_query_arg(array('current_view' => 'browse_by_college'), $permalink);
-		$sort_hours_url   = ($data['view-info']['current_view'] == 'browse_by_hours') ? $reverse_order_url : add_query_arg(array('current_view' => 'browse_by_hours'), $permalink);
-
-		$sort_name_classes = $sort_college_classes = $sort_hours_classes = '';
-
-		if ($data['view-info']['current_view'] == 'browse_by_college') {
-			$sort_college_classes .= 'active';
-		}
-		else if ($data['view-info']['current_view'] == 'browse_by_hours') {
-			$sort_hours_classes .= 'active';
-			if ($data['view-info']['flip-order'] == 'ASC') {
-				$sort_hours_classes .= ' dropup';
-			}
-		}
-		else { // 'search' AND 'browse_by_name'
-			$sort_name_classes .= 'active';
-			if ($data['view-info']['flip-order'] == 'ASC') {
-				$sort_name_classes .= ' dropup';
-			}
-		}
-	}
-
-	ob_start(); ?>
-
-	<div id="filters">
-		<span class="degree-search-label">Search:</span>
-		<div class="controls controls-row">
-			<form id="course_search_form" action="<?=get_permalink()?>" class="form-search">
-				<select name="program_type" class="span4">
-					<option <?=$search_program_undergrad_sel?> value="undergraduate-program">Undergraduate Programs Only</option>
-					<option <?=$search_program_all_sel?> value="">Undergraduate and Graduate Programs</option>
-					<option <?=$search_program_grad_sel?> value="graduate-program">Graduate Programs Only</option>
-				</select>
-				<div class="input-append span3">
-					<?php $search_query = isset($data['view-info']['search-query-pretty']) ? $data['view-info']['search-query-pretty'] : ''; ?>
-					<input type="text" class="search-query" name="search" value="<?=$search_query?>" />
-					<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<div id="browse">
-		<div class="row">
-			<div class="span10">
-				<span class="degree-search-label">Browse All:</span>
-				<ul class="nav nav-pills" role="navigation" id="degree-type-list">
-					<li class="<?=$browse_majors_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=undergraduate-degree">Undergraduate Degrees</a>
-					</li>
-					<li class="<?=$browse_minors_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=minor">Minors</a>
-					</li>
-					<li class="<?=$browse_grad_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=graduate-degree">Graduate Degrees</a>
-					</li>
-					<li class="<?=$browse_cert_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=certificate">Certificates</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
-		<?php if (is_array($data)) { ?>
-
-		<div id="results">
-			<div class="row">
-				<h2 id="results-header" class="span10">
-					<?=$data['view-info']['result-count']?> Result<?php if ($data['view-info']['result-count'] == 0 || $data['view-info']['result-count'] > 1) { ?>s<?php } ?> For:
-					<span class="results-header-alt">
-						<?=$results_title?>
-					</span>
-				</h2>
-
-				<div class="span10">
-					<ul class="nav nav-tabs" id="degree-type-sort">
-						<li id="degree-type-sort-header">Sort by:</li>
-						<li class="dropdown <?=$sort_name_classes?>">
-							<a class="print-noexpand" href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
-						</li>
-						<li class="dropdown <?=$sort_college_classes?>">
-							<a class="print-noexpand" href="<?=$sort_college_url?>">College</a>
-						</li>
-						<li class="dropdown <?=$sort_hours_classes?>">
-							<a class="print-noexpand" href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-			<?php
-			if (!empty($data['posts'])) {
-				if ($data['view-info']['grouping-tax'] !== 'colleges') {
-					// For grouped degrees by name or hours, make sure program types are
-					// displayed in the correct order
-					$data['posts'] = sort_grouped_degree_programs($data['posts']);
-				}
-				foreach ($data['posts'] as $group=>$posts) {
-					$term = get_term($group, $data['view-info']['grouping-tax']);
-					if ($data['view-info']['grouping-tax'] !== 'colleges') {
-						// Pluralize term if necessary
-						$term = $term->name.'s';
-					}
-					else {
-						$term = $term->name;
-					}
-				?>
-					<h3 class="degree-list-heading"><?=$term?></h3>
-					<?=display_degree_list($posts)?>
-					<hr />
-				<?php
-				}
-			} else { ?>
-			<p class="error">No results found.</p>
-			<?php
-			}
-			?>
-
-		<?php
-		}
-		else { ?>
-		<p class="error">
-			<strong>ERROR:</strong> <?=$data?>
-		</p>
-		<?php
-		} ?>
-
-	<?php
-	print ob_get_clean();
-}
-
-/**
- * Append Degree meta data to a Degree post object (for use in single Degree profile.)
- **/
-function append_degree_profile_metadata($post) {
-	$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
-	$post->degree_description = get_post_meta($post->ID, 'degree_description', TRUE);
-	$post->degree_phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
-	$post->degree_email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';
-	$post->degree_website = get_post_meta($post->ID, 'degree_website', TRUE) ? get_post_meta($post->ID, 'degree_website', TRUE) : 'n/a';
-	$post->degree_pdf = get_post_meta($post->ID, 'degree_pdf', TRUE) ? get_post_meta($post->ID, 'degree_pdf', TRUE) : 'http://catalog.ucf.edu/';
-	$post->tax_college = wp_get_post_terms($post->ID, 'colleges', array('fields' => 'names'));
-	$post->tax_department = wp_get_post_terms($post->ID, 'departments', array('fields' => 'names'));
-	$post->tax_program_type = wp_get_post_terms($post->ID, 'program_types', array('fields' => 'names'));
-
-	$contact_info = get_post_meta($post->ID, 'degree_contacts', TRUE);
-	$contact_array = array();
-
-	// Split single contacts
-	$contacts = explode('@@;@@', $contact_info);
-	foreach ($contacts as $key=>$contact) {
-		if ($contact) {
-			// Split individual fields
-			$contact = explode('@@,@@', $contact);
-
-			$newcontact = array();
-
-			foreach ($contact as $fieldset) {
-				// Split out field key/values
-				$fields = explode('@@:@@', $fieldset);
-				$newcontact[$fields[0]] = $fields[1];
-			}
-
-			array_push($contact_array, $newcontact);
-		}
-	}
-
-	$post->degree_contacts = $contact_array;
-
-	return $post;
-}
-
 function get_degree_contacts($postId) {
 	$contact_info = get_post_meta($postId, 'degree_contacts', true);
 	$contact_array = array();
@@ -1793,10 +1418,11 @@ function get_degree_contacts($postId) {
 	return $contact_array;
 }
 
+
 /**
  * Generates page <title> tag for Degree Program post type.
  **/
-function header_title_degree_programs($title, $separator) {
+function wp_title_degree_programs($title, $separator) {
 	global $post;
 
 	if ($post->post_type == 'degree') {
@@ -1805,11 +1431,11 @@ function header_title_degree_programs($title, $separator) {
 
 	return $title;
 }
-add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
+add_filter('wp_title', 'wp_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
 
 
 /**
- * Generates page <title> text for Degree Search based on current filters/search val.
+ * Generates text used in page <title> for Degree Search based on current filters/search val.
  **/
 function get_degree_search_title( $separator='|', $params=null ) {
 	$title = 'Degree Search';
@@ -1871,6 +1497,10 @@ function get_degree_search_title( $separator='|', $params=null ) {
 }
 
 
+/**
+ * Generates text used in page meta description for Degree Search based on
+ * current filters/search val.
+ **/
 function get_degree_search_meta_description( $params=null ) {
 	// Opening
 	$retval  = 'The University of Central Florida offers';
@@ -1986,11 +1616,17 @@ function get_post_tax_term_array(
 }
 
 
+/**
+ * Helper function that returns the first item in an array.
+ **/
 function get_first_result( $array_result ) {
 	return $array_result[0];
 }
 
 
+/**
+ * Handles the retrieval of Degree posts from WordPress for the Degree Search.
+ **/
 function fetch_degree_data( $params ) {
 	$args = array(
 		'numberposts' => -1,
@@ -2194,6 +1830,10 @@ function degree_search_params_or_fallback( $params ) {
 }
 
 
+/**
+ * Returns all data and markup necessary for the Degree Search.  Used via
+ * both ajax requests and on initial page load in page-degree-search.php.
+ **/
 function get_degree_search_contents( $return=false, $params=null ) {
 	if ( !defined( 'WP_USE_THEMES' ) ) {
 		define( 'WP_USE_THEMES', false );
@@ -2306,6 +1946,40 @@ function get_degree_search_suggestions() {
 	}
 
 	return array_values( array_unique( $suggestions ) );
+}
+
+
+/**
+ * Returns an array containing arrays of term objects, for use in
+ * Degree Search filter lists.
+ **/
+function get_degree_search_filters() {
+	$filters = array();
+
+	$filters['program-type']['name'] = 'Degrees';
+	$filters['college']['name'] = 'Colleges';
+
+	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
+	if ( $colleges ) {
+		foreach ( $colleges as $college ) {
+			$shortname = get_term_custom_meta( $college->term_id, 'colleges', 'college_shortname' );
+			if ( $shortname ) {
+				$college->shortname = $shortname;
+			}
+		}
+		// If shortnames are available, alphabetize by them
+		usort( $colleges, function( $a, $b ) {
+			$a_name = isset( $a->shortname ) ? $a->shortname : $a->name;
+			$b_name = isset( $b->shortname ) ? $b->shortname : $b->name;
+			return strcmp( $a_name, $b_name );
+		} );
+	}
+
+	// Pass orderby degree_program_order to ensure our custom filter is used.
+	$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+	$filters['college']['terms'] = $colleges;
+
+	return $filters;
 }
 
 
@@ -2488,6 +2162,7 @@ function colleges_render_columns( $out, $name, $term_id ) {
     return $out;
 }
 add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
+
 
 /**
 * Displays social buttons (Facebook, Twitter, G+) for a post.
