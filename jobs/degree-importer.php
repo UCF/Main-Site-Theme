@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Require DEGREE_SECRET_KEY const
 if (DEGREE_SECRET_KEY !== get_theme_option('feedback_email_key')) {
 	die('You do not have access to this page.');
@@ -54,10 +54,10 @@ else {
 			// properly saved: http://wordpress.stackexchange.com/a/8921
 			delete_option('program_types_children');
 
-			print 'New base program taxonomy terms created.<br/><br/>';
+			print 'New base program taxonomy terms created.<br><br>';
 		}
 		else {
-			print 'Existing base program taxonomy terms found.<br/><br/>';
+			print 'Existing base program taxonomy terms found.<br><br>';
 		}
 
 		/**
@@ -83,7 +83,7 @@ else {
 
 
 		/**
-		 * Loop through each search service result.  Create a structured set of post data 
+		 * Loop through each search service result.  Create a structured set of post data
 		 * for each.
 		 **/
 		foreach ($results as $program) {
@@ -245,13 +245,13 @@ else {
 				wp_update_post($post_data);
 				unset($existing_posts_array[$post_data['ID']]);
 
-				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'.<br/>';
+				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'.<br>';
 				$count++;
 			}
 			else {
 				$post_id = wp_insert_post($post['post_data']);
 
-				print 'Saved new post '.$post_data['post_title'].'.<br/>';
+				print 'Saved new post '.$post_data['post_title'].'.<br>';
 				$count++;
 			}
 			// Create/update meta field values.
@@ -261,21 +261,21 @@ else {
 					// update_post_meta will return false if $meta_val is the same as the db val
 					if ($updated == true) {
 						if ($meta_val) {
-							print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'.<br/>';
+							print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'.<br>';
 						}
 						else {
-							print 'Post meta field '.$meta_key.' was set to an empty value.<br/>';
+							print 'Post meta field '.$meta_key.' was set to an empty value.<br>';
 						}
 					}
 					else if (is_numeric($updated) && $updated > 1) {
-						print 'Meta with ID '.$updated.' does not exist.<br/>';
+						print 'Meta with ID '.$updated.' does not exist.<br>';
 					}
 					else if ($updated == false) {
 						if ($meta_val) {
-							print 'Post meta field '.$meta_key.' with value '.$meta_val.' left unchanged.<br/>';
+							print 'Post meta field '.$meta_key.' with value '.$meta_val.' left unchanged.<br>';
 						}
 						else {
-							print 'Post meta field '.$meta_key.' with empty value left unchanged.<br/>';
+							print 'Post meta field '.$meta_key.' with empty value left unchanged.<br>';
 						}
 					}
 				}
@@ -301,35 +301,37 @@ else {
 				else {
 					$term_id = NULL;
 				}
-				
+
 				// Actually set the term for the post. Unset existing term if $term_id is null.
 				if ($term_id) {
 					wp_set_post_terms($post_id, $term_id, $tax); // replaces existing terms
-					print 'Set post\'s taxonomy '.$tax.' to type '.$term.'.<br/>';
+					print 'Set post\'s taxonomy '.$tax.' to type '.$term.'.<br>';
 				}
 				else {
 					wp_delete_object_term_relationships($post_id, $tax);
-					print 'Unset existing post\'s taxonomy '.$tax.' terms (degree has no '.$tax.' value.)<br/>';
+					print 'Unset existing post\'s taxonomy '.$tax.' terms (degree has no '.$tax.' value.)<br>';
 				}
 			}
 
 			// Done.
-			print 'Finished processing post '.$post_data['post_title'].'.<br/><br/>';
+			print 'Finished processing post '.$post_data['post_title'].'.<br><br>';
 		}
-		print '<br/>Created/Updated '.$count.' posts.<br/>';
+		print '<br>Created/Updated '.$count.' posts.<br>';
 
 
 		/**
-		 * Delete any of the remaining posts in $existing_posts_array.  These posts were not 
-		 * updated and were not new posts, so we assume that they were deleted from the search 
+		 * Delete any of the remaining posts in $existing_posts_array.  These posts were not
+		 * updated and were not new posts, so we assume that they were deleted from the search
 		 * service data, and should therefore be deleted from WordPress.
 		 **/
 		foreach ($existing_posts_array as $post_id) {
 			$post_title = get_post($post_id)->post_title;
 			wp_delete_post($post_id);
-			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br/>';
+			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br>';
 		}
-		print '<br/>Deleted '.count($existing_posts_array).' existing posts.';
+		print '<br>Deleted '.count($existing_posts_array).' existing posts.';
+
+		print '<br><br><strong>Finished running degree import.</strong>  Make sure to check the newly imported degree data, including program type, college terms, and departments, look okay.';
 	}
 	else {
 		print 'Query to the search service either failed, or no search results were found.  Is the Search Service URL set in Theme Options valid?';
