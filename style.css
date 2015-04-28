@@ -1534,6 +1534,10 @@ li.tagit-new input {
   width: 80%;
 }
 
+#degree-single .social {
+	padding-top: 30px;
+}
+
 /* Social buttons */
 #degree-single .social {
   margin-top: 20px;
