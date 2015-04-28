@@ -1486,6 +1486,7 @@ li.tagit-new input {
 
 #degree-single #sidebar_right .contact-info {
 	border-bottom: 1px #efefef solid;
+  padding-bottom: 4px;
 }
 
 #degree-single #sidebar_right .contact-info:last-child {
@@ -1498,14 +1499,16 @@ li.tagit-new input {
 	display: block;
 }
 #degree-single #sidebar_right .contact-name {
-	margin-top: 10px;
+  margin-bottom: 8px;
+	margin-top: 12px;
 }
 #degree-single #sidebar_right .contact-title {
 	font-style: italic;
 }
 #degree-single #sidebar_right .contact-info-dl {
   font-size: 13px;
-	margin-top: 8px;
+  margin-bottom: 0;
+	margin-top: 0;
 }
 #degree-single #sidebar_right .contact-info-dl a {
   color: #08c;
