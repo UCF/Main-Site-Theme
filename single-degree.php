@@ -24,11 +24,11 @@
 			<!-- Always display hierarchy-based breadcrumbs-it also helps designate tracks/subplans -->
 			<ul class="breadcrumb-hierarchy breadcrumb">
 				<li>
-					<?php $programs_url = $search_page . '?' . http_build_query( array( 'program_type' => array( $terms['program_types'][0]->slug ) ) ); ?>
+					<?php $programs_url = $search_page . '?' . http_build_query( array( 'program-type' => array( $terms['program_types'][0]->slug ) ) ); ?>
 					<a href="<?php echo $programs_url; ?>"><?php echo $terms['program_types'][0]->name; ?> Programs</a> <span class="divider">&gt;</span>
 				</li>
 				<li>
-					<?php $college_programs_url = $search_page . '?' . http_build_query( array( 'program_type' => array( $terms['program_types'][0]->slug ), 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
+					<?php $college_programs_url = $search_page . '?' . http_build_query( array( 'program-type' => array( $terms['program_types'][0]->slug ), 'college' => array( $terms['colleges'][0]->slug ) ) ); ?>
 					<a href="<?php echo $college_programs_url; ?>"><?php echo $terms['colleges'][0]->name; ?></a> <span class="divider">&gt;</span>
 				</li>
 				<li class="active">
