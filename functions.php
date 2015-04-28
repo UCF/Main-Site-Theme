@@ -1460,7 +1460,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 					$title = substr_replace( $title, '', -1 );
 					$title .= ' and ' . $program_name;
 				} else {
-					$title .= $program_name . ',';
+					$title .= $program_name . ', ';
 				}
 			}
 		}
