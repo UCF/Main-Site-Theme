@@ -416,24 +416,6 @@ Config::$theme_settings = array(
         )),
 	),
 	'Social' => array(
-		new RadioField(array(
-			'name'        => 'Enable OpenGraph',
-			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
-			'description' => 'Turn on the opengraph meta information used by Facebook.',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_og'],
-	    )),
-		new TextField(array(
-			'name'        => 'Facebook Admins',
-			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
-			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
-			'default'     => null,
-			'value'       => $theme_options['fb_admins'],
-		)),
 		new TextField(array(
 			'name'        => 'Facebook URL',
 			'id'          => THEME_OPTIONS_NAME.'[facebook_url]',
@@ -446,12 +428,6 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[twitter_url]',
 			'description' => 'URL to the twitter user account you would like to direct visitors to.  Example: <em>http://twitter.com/csbrisketbus</em>',
 			'value'       => $theme_options['twitter_url'],
-		)),
-		new TextField(array(
-			'name'        => 'Shareaholic Below Post ID',
-			'id'          => THEME_OPTIONS_NAME.'[shareaholic_below_post_id]',
-			'description' => 'The id found in the shortcode for Shareaholic\'s below post share buttons.',
-			'value'       => $theme_options['shareaholic_below_post_id'],
 		)),
 	),
 	'Styles' => array(
@@ -493,6 +469,36 @@ Config::$theme_settings = array(
 		)),
 	),
 );
+
+/**
+ * If Yoast SEO is activated, assume we're handling ALL SEO/meta-related
+ * modifications with it.  Don't add Facebook Opengraph theme options.
+ **/
+if ( !is_admin() ) {
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+}
+if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+	array_unshift( Config::$theme_settings['Social'],
+		new RadioField(array(
+			'name'        => 'Enable OpenGraph',
+			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
+			'description' => 'Turn on the opengraph meta information used by Facebook.',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_og'],
+	    )),
+		new TextField(array(
+			'name'        => 'Facebook Admins',
+			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
+			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
+			'default'     => null,
+			'value'       => $theme_options['fb_admins'],
+		))
+	);
+}
 
 
 /**

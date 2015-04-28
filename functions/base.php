@@ -1144,7 +1144,6 @@ function slug($s, $spaces='-'){
  * @author Jared Lang
  **/
 function header_( $tabs=2 ) {
-	opengraph_setup();
 	remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head' );
 	remove_action( 'wp_head', 'index_rel_link' );
 	remove_action( 'wp_head', 'rel_canonical' );
@@ -1152,7 +1151,16 @@ function header_( $tabs=2 ) {
 	remove_action( 'wp_head', 'wlwmanifest_link' );
 	remove_action( 'wp_head', 'rsd_link' );
 
-	add_action( 'wp_head', 'header_meta', 1 );
+	// If Yoast SEO is activated, assume we're handling ALL SEO/meta-related
+	// modifications with it.  Don't use header_meta().
+	if ( !is_admin() ) {
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	}
+	if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+		opengraph_setup();
+		add_action( 'wp_head', 'header_meta', 1 );
+	}
+
 	add_action( 'wp_head', 'header_links', 10 );
 
 	ob_start();
