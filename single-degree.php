@@ -100,14 +100,20 @@
 						Visit Program Website
 				</a>
 			</div>
-			<?php 
-				$contacts = get_degree_contacts($post->ID);
+			<?php
+			$contacts = get_degree_contacts($post->ID);
+			if ( $contacts ):
 				if ( count( $contacts ) > 1 ) : ?>
-				<h2>Contacts</h2>
-			<?php else: ?>
-				<h2>Contact</h2>
-			<?php endif; ?>
-			<?php foreach ( $contacts as $contact ) : ?>
+					<h2>Contacts</h2>
+				<?php else: ?>
+					<h2>Contact</h2>
+			<?php
+				endif;
+			endif;
+
+			if ( $contacts ):
+				foreach ( $contacts as $contact ) :
+			?>
 				<div class="contact-info">
 					<h3 class="contact-name"><?php echo $contact['contact_name']; ?></h3>
 					<dl class="contact-info-dl clearfix">
@@ -133,7 +139,10 @@
 						<?php endif; ?>
 					</dl>
 				</div>
-			<?php endforeach; ?>
+			<?php
+				endforeach;
+			endif;
+			?>
 		</div>
 	</div>
 
