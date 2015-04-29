@@ -29,7 +29,7 @@
 		}
 		if ( is_page() ) {
 			page_specific_webfonts( $post->ID );
-			esi_include(' page_specific_stylesheet', $post->ID ); // Wrap in ESI to prevent caching of .css file
+			esi_include('page_specific_stylesheet', $post->ID ); // Wrap in ESI to prevent caching of .css file
 		}
 		?>
 
