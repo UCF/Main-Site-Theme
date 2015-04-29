@@ -959,7 +959,7 @@ var degreeSearch = function($) {
       updateDocumentHead(data);
 
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
-      wp.a11y.speak(assistiveText);
+      // wp.a11y.speak(assistiveText);
     }, 200);
   }
 
@@ -1295,10 +1295,14 @@ var degreeSearch = function($) {
 
     $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
-    // TODO: fails in IE8!
     $academicsSearch.on('click', '.seo-li', function(e) {
       e.preventDefault();
-      $(this).parent('label').trigger('click');
+      if ($('body').hasClass('ie8')) {
+        // In IE8 trigger doesn't fire correctly
+        $(this).closest('li').find('input').trigger('click').trigger('change');
+      } else {
+        $(this).parent('label').trigger('click');
+      }
     });
     initAutoComplete();
     initFilterBtnHandler();
