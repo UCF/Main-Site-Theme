@@ -1153,9 +1153,7 @@ function header_( $tabs=2 ) {
 
 	// If Yoast SEO is activated, assume we're handling ALL SEO/meta-related
 	// modifications with it.  Don't use header_meta().
-	if ( !is_admin() ) {
-		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-	}
+	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 	if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 		opengraph_setup();
 		add_action( 'wp_head', 'header_meta', 1 );
