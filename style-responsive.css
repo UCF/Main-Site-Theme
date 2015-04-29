@@ -611,8 +611,7 @@
 
 	#degree-single #contentcol .degree-details,
   #degree-single #sidebar_right .contact-info-dl {
-    margin-bottom: 15px;
-    padding: 0 0 7px; /* 7px + dd margin-bottom:8px = 15px */
+    padding: 0;
   }
   #degree-single #contentcol .degree-details dt,
   #degree-single #contentcol .degree-details dd,

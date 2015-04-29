@@ -1392,30 +1392,38 @@ function sort_grouped_degree_programs($posts) {
  *
  * TODO consider making this a Degree object static method
  **/
-function get_degree_contacts($postId) {
-	$contact_info = get_post_meta($postId, 'degree_contacts', true);
+function get_degree_contacts( $postid ) {
+	$contact_info = get_post_meta( $postid, 'degree_contacts', true );
 	$contact_array = array();
 
 	// Split single contacts
-	$contacts = explode('@@;@@', $contact_info);
-	foreach ($contacts as $key=>$contact) {
-		if ($contact) {
+	$contacts = explode( '@@;@@', $contact_info );
+	foreach ( $contacts as $key=>$contact ) {
+		if ( $contact ) {
 			// Split individual fields
-			$contact = explode('@@,@@', $contact);
+			$contact = explode( '@@,@@', $contact );
 
 			$newcontact = array();
 
-			foreach ($contact as $fieldset) {
+			foreach ( $contact as $fieldset ) {
 				// Split out field key/values
-				$fields = explode('@@:@@', $fieldset);
-				$newcontact[$fields[0]] = $fields[1];
+				$fields = explode( '@@:@@', $fieldset );
+				// Only get fields we need. Don't include fields that can result in
+				// duplicate contacts after sorting uniques (e.g. contact_id).
+				if ( $fields[0] == 'contact_name' || $fields[0] == 'contact_phone' || $fields[0] == 'contact_email' ) {
+					$newcontact[$fields[0]] = str_replace( '@@,@', '', $fields[1] );
+				}
 			}
 
-			array_push($contact_array, $newcontact);
+			// Only add the contact to the list if there are at least 2 pieces of info available
+			// e.g. don't add just a person's name to the list
+			if ( count( $newcontact ) > 1 ) {
+				array_push( $contact_array, $newcontact );
+			}
 		}
 	}
 
-	return $contact_array;
+	return array_map( 'array_filter', array_unique( $contact_array, SORT_REGULAR ) );
 }
 
 
@@ -1585,6 +1593,10 @@ add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 /**
  * Returns an multidimensional array of taxonomies with
  * terms for a post.
+ *
+ * TODO no longer being used anywhere after implementing append_degree_metadata().
+ * Should this be removed?
+ *
  * @return array
  * @author Jim Barnes
  **/
@@ -1620,7 +1632,31 @@ function get_post_tax_term_array(
  * Helper function that returns the first item in an array.
  **/
 function get_first_result( $array_result ) {
-	return $array_result[0];
+	if ( is_array( $array_result ) && count( $array_result ) > 0 ) {
+		return $array_result[0];
+	}
+	return $array_result;
+}
+
+
+/**
+ * Appends degree metadata to a post object.
+ **/
+function append_degree_metadata( $post ) {
+	if ( $post && $post->post_type == 'degree' ) {
+		$post->degree_hours       = get_post_meta( $post->ID, 'degree_hours', TRUE );
+		$post->degree_description = get_post_meta( $post->ID, 'degree_description', TRUE );
+		$post->degree_phone       = get_post_meta( $post->ID, 'degree_phone', TRUE );
+		$post->degree_email       = get_post_meta( $post->ID, 'degree_email', TRUE );
+		$post->degree_website     = get_post_meta( $post->ID, 'degree_website', TRUE );
+		$post->degree_pdf         = get_post_meta( $post->ID, 'degree_pdf', TRUE ) ? get_post_meta( $post->ID, 'degree_pdf', TRUE ) : 'http://catalog.ucf.edu/'; // TODO: graduate programs are being redirected to the undergraduate catalog
+		$post->degree_contacts    = get_degree_contacts( $post->ID );
+		$post->tax_college        = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
+		$post->tax_department     = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
+		$post->tax_program_type   = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
+	}
+
+	return $post;
 }
 
 
@@ -1673,53 +1709,7 @@ function fetch_degree_data( $params ) {
 	$data = array();
 	if ( $posts ) {
 		foreach ( $posts as $post ) {
-			// Example of a format we might be working with
-			// Get all post meta
-			$unmatched_meta = get_post_meta($post->ID);
-
-			// Get only keys that start with degree_
-			$meta = array_intersect_key($unmatched_meta, array_flip(preg_grep('/^degree_/', array_keys($unmatched_meta))));
-
-			$terms = get_post_tax_term_array( $post->ID, array( 'program_types', 'colleges', 'departments' ) );
-
-			$degree = array(
-				'academicPlanId' => $post->ID,
-				'academicSubPlan' => array(
-					'id' => '',
-					'type' => '',
-					'name' => '',
-					'description' => ''
-				),
-				'name' => $post->post_title,
-				'abbreviation' => '',
-				'degree' => get_first_result( $terms['program_types'] )->name,
-				'creditHours' => intval( $meta['degree_hours'][0] ) ? $meta['degree_hours'][0] : 0,
-				'thesis' => '',
-				'nonThesis' => '',
-				'dissertation' => '',
-				'college' => array(
-					'name' => get_first_result( $terms['colleges'] )->name,
-					'url' => '',
-				),
-				'department' => array(
-					'name' => get_first_result( $terms['departments'] )->name,
-					'url' => '',
-				),
-				'online' => '',
-				'description' => $meta['degree_description'][0] ? $meta['degree_description'] : '',
-				'prerequisite' => '',
-				'applicationInfoDescription' => '',
-				'applicationInfo' => array(
-					'deadline' => '',
-					'description' => ''
-				),
-				'contacts' => get_degree_contacts($post->ID),
-				'keywordList' => $terms['post_tag']->name, // TODO--tags do not exist on degrees
-				'relatedProgramList' => array(),
-				'semesterOffered' => '',
-				'dateLastModified' => ''
-			);
-
+			$degree = append_degree_metadata( $post );
 			$data[] = $degree;
 		}
 	}
@@ -1849,19 +1839,19 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	if ( $results ) {
 		$markup = '<ul class="degree-search-results">';
 
-		foreach ( $results as $result ) {
+		foreach ( $results as $degree ) {
 			$result_markup = '';
 			ob_start();
 			?>
 			<li class="degree-search-result">
 				<h3 class="degree-title">
-					<a class="ga-event" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $result['name']; ?>" href="<?php echo get_permalink( $result['academicPlanId'] ); ?>">
-						<?php echo $result['name']; ?> <?php echo $result['abbreviation']; ?>
+					<a class="ga-event" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+						<?php echo $degree->post_title; ?>
 					</a>
 					<span class="degree-credits-count">
-					<?php echo $result['degree']; ?> &mdash;
-					<?php if ( $result['creditHours'] > 0 ): ?>
-						<?php echo $result['creditHours']; ?> Credit Hours
+					<?php echo $degree->tax_program_type->name; ?> &mdash;
+					<?php if ( $degree->degree_hours > 0 ): ?>
+						<?php echo $degree->degree_hours; ?> Credit Hours
 					<?php else: ?>
 						Credit Hours n/a
 					<?php endif; ?>

@@ -1476,8 +1476,8 @@ li.tagit-new input {
 	font-size: 18px;
 	font-weight: normal;
 	line-height: 1.2;
-	margin-bottom: 5px;
-	margin-top: 20px;
+	margin-bottom: 15px;
+	margin-top: 25px;
 }
 #degree-single #sidebar_right ul {
 	list-style-type: none;
@@ -1486,7 +1486,8 @@ li.tagit-new input {
 
 #degree-single #sidebar_right .contact-info {
 	border-bottom: 1px #efefef solid;
-  padding-bottom: 4px;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
 }
 
 #degree-single #sidebar_right .contact-info:last-child {
