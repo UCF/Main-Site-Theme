@@ -1976,14 +1976,14 @@ function get_degree_search_filters() {
 /**
  * Return's a term's custom meta value by key name.
  * Assumes that term data are saved as options using the naming schema
- * 'tax_TAXONOMY-SLUG_TERMID'
+ * 'tax_<taxonomy slug>_<term id>'
  **/
 function get_term_custom_meta( $term_id, $taxonomy, $key ) {
 	if ( empty( $term_id ) || empty( $taxonomy ) || empty( $key ) ) {
 		return false;
 	}
 
-	$term_meta = get_option( 'tax_' + $taxonomy + '_' + $term_id );
+	$term_meta = get_option( 'tax_' . $taxonomy . '_' . $term_id );
 	if ( $term_meta && isset( $term_meta[$key] ) ) {
 		$val = $term_meta[$key];
 	}
@@ -1991,6 +1991,35 @@ function get_term_custom_meta( $term_id, $taxonomy, $key ) {
 		$val = false;
 	}
 	return $val;
+}
+
+
+/**
+ * Saves a term's custom meta data.
+ *
+ * Assumes that term data are saved as options using the naming schema
+ * 'tax_<taxonomy slug>_<term id>', and that term data is included in
+ * Add New/Update <taxonomy> forms with inputs that have a name and ID
+ * of 'term_meta[]'; e.g. '<input name="term_meta[my_custom_meta]" ..>'
+ *
+ * This function should be called on edited_<taxonomy> and create_<taxonomy>.
+ * It saves all metadata following the term_meta[...] naming structure, so it
+ * should only be hooked into edited_<taxonomy> and create_<taxonomy> once per
+ * taxonomy.
+ **/
+function save_term_custom_meta( $term_id, $taxonomy ) {
+	if ( isset( $_POST['term_meta'] ) ) {
+		$option_name = 'tax_' . $taxonomy . '_' . strval( $term_id );
+		$term_meta = get_option( $option_name );
+		$term_keys = array_keys( $_POST['term_meta'] );
+		foreach ( $term_keys as $key ) {
+			if ( isset( $_POST['term_meta'][$key] ) ) {
+				$term_meta[$key] = $_POST['term_meta'][$key];
+			}
+		}
+		// Save the option array.
+		update_option( $option_name, $term_meta );
+	}
 }
 
 
@@ -2093,22 +2122,11 @@ function colleges_edit_url_field( $term ) {
 add_action( 'colleges_edit_form_fields', 'colleges_edit_url_field', 10, 2 );
 
 // Saves College url field value.
-function colleges_save_custom_meta( $term_id ) {
-	if ( isset( $_POST['term_meta'] ) ) {
-		$term_id = $term_id;
-		$term_meta = get_option( 'tax_colleges_' + $term_id );
-		$term_keys = array_keys( $_POST['term_meta'] );
-		foreach ( $term_keys as $key ) {
-			if ( isset( $_POST['term_meta'][$key] ) ) {
-				$term_meta[$key] = $_POST['term_meta'][$key];
-			}
-		}
-		// Save the option array.
-		update_option( 'tax_colleges_' + $term_id, $term_meta );
-	}
+function save_colleges_custom_meta( $term_id ) {
+	save_term_custom_meta( $term_id, 'colleges' );
 }
-add_action( 'edited_colleges', 'colleges_save_custom_meta', 10, 2 );
-add_action( 'create_colleges', 'colleges_save_custom_meta', 10, 2 );
+add_action( 'edited_colleges', 'save_colleges_custom_meta', 10, 2 );
+add_action( 'create_colleges', 'save_colleges_custom_meta', 10, 2 );
 
 // Adds columns to existing Colleges term list.
 function colleges_add_columns( $columns ) {
@@ -2155,6 +2173,97 @@ add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 
 
 /**
+ * Adds custom "meta fields" for Program Types terms.
+ **/
+
+// Prints label for program type CTA field.
+function program_types_cta_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_cta]"><?php echo __( 'Call to Action box content' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type CTA.
+function program_types_cta_field( $value=null ) {
+	ob_start();
+?>
+	<textarea name="term_meta[program_type_cta]" class="large-text" cols="50" rows="5" id="term_meta[program_type_cta]"><?php if ( $value ) { echo $value; } ?></textarea>
+	<p class="description"><?php echo __( 'Content that should be displayed in the Call to Action box, at the bottom of a program\'s description on its profile page.  HTML and shortcodes are permitted.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds CTA field to Add Program Type form.
+function program_types_add_cta_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_cta_label(); ?>
+		<?php echo program_types_cta_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_cta_field', 10, 2 );
+
+// Adds CTA field to Edit Program Type form.
+function program_types_edit_cta_field( $term ) {
+	$term_id = $term->term_id;
+	$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_cta_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_cta_field( $cta ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_cta_field', 10, 2 );
+
+// Saves Program Type CTA field value.
+function save_program_types_custom_meta( $term_id ) {
+	save_term_custom_meta( $term_id, 'program_types' );
+}
+add_action( 'edited_program_types', 'save_program_types_custom_meta', 10, 2 );
+add_action( 'create_program_types', 'save_program_types_custom_meta', 10, 2 );
+
+// Adds columns to existing Program Type term list.
+function program_types_add_columns( $columns ) {
+	$new_columns = array(
+	    'cb' => '<input type="checkbox" />',
+	    'name' => __('Name'),
+	    'cta' => __('Call to Action box'),
+	    'description' => __('Description'),
+	    'slug' => __('Slug'),
+	    'url' => __('URL'),
+	    'posts' => __('Posts')
+	);
+	return $new_columns;
+}
+add_filter( 'manage_edit-program_types_columns', 'program_types_add_columns' );
+
+// Adds content to Program Type columns
+function program_types_render_columns( $out, $name, $term_id ) {
+    switch ( $name ) {
+        case 'cta':
+        	$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+        	if ( $cta ) {
+        		$out .= '<textarea disabled>' . $cta . '</textarea>';
+        	}
+        	else {
+        		$out .= '&mdash;';
+        	}
+            break;
+    }
+    return $out;
+}
+add_filter( 'manage_program_types_custom_column', 'program_types_render_columns', 10, 3);
+
+
+/**
 * Displays social buttons (Facebook, Twitter, G+) for a post.
 * Accepts a post URL and title as arguments.
 *
@@ -2185,4 +2294,21 @@ function display_social($url, $title) {
     return ob_get_clean();
 }
 
+
+/**
+ * Displays a "Apply to <Degree Name>" Call to Action box.  For use at the
+ * bottom of single Degree profiles.  Uses CTA box contents from the degree's
+ * assigned Program Type, or that Program Type's parent(s) if one isn't
+ * available.
+ **/
+function display_degree_callout( $degree_id ) {
+	$program_type = get_first_result( wp_get_post_terms( $degree_id, 'program_types' ) );
+	$cta_content = get_term_custom_meta( $program_type->term_id, 'program_types', 'program_type_cta' );
+
+	// TODO: if not CTA content found, check for parent term CTAs until one is found; use it instead
+
+	ob_start();
+	echo $cta_content;
+	return ob_get_clean();
+}
 ?>

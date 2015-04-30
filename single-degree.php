@@ -85,6 +85,12 @@
 				<?php } else { ?>
 					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
 				<?php } ?>
+
+				<div class="cta-wrap">
+					<div class="well">
+						<?php echo display_degree_callout( $post->ID ); ?>
+					</div>
+				</div>
 			</article>
 			<div class="social-wrap">
 				<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
