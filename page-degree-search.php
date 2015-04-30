@@ -91,6 +91,10 @@
 
 					<!-- Page Bottom -->
 
+					<div class="degree-search-again-container">
+						<?php echo get_degree_search_search_again( $filters, $params ); ?>
+					</div>
+
 					<hr>
 
 					<p class="more-details">
