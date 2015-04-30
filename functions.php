@@ -1788,6 +1788,31 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 
 
 /**
+ * Returns markup for "search again" at the bottom of Degree Search results.
+ **/
+function get_degree_search_search_again( $filters, $params ) {
+	ob_start();
+	if ( isset( $params['search-query'] ) ): ?>
+		<hr>
+		<p>
+			Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:<br>
+			<?php foreach ( $filters as $key=>$filter ): ?>
+				<?php if ( $filter['name'] == 'Degrees'): ?>
+					<?php foreach ( $filter['terms'] as $term ): ?>
+						<?php if ( $term->count > 0 ): ?>
+							<a href="<?php echo get_permalink(); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>&search-query=<?php echo urlencode($params['search-query']) ?>">
+								<?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></a>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</p>
+	<?php endif;
+	return ob_get_clean();
+}
+
+
+/**
  * Returns relevant params passed in, or available relevant $_GET params.
  * Initial backend requests should pass in $params; ajax requests for
  * degree search data will not (use $_GET instead).
@@ -1880,11 +1905,13 @@ function get_degree_search_contents( $return=false, $params=null ) {
 		$result_title = get_degree_search_title( '|', $params );
 		$result_meta = get_degree_search_meta_description( $params );
 		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params );
+		$result_search_again_markup = get_degree_search_search_again( get_degree_search_filters(), $params );
 
 		wp_send_json(
 			array(
 				'querystring' => $query_params,
 				'count' => $result_phrase_markup,
+				'searchagain' => $result_search_again_markup,
 				'markup' => $markup,
 				'title' => $result_title,
 				'description' => $result_meta,

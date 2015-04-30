@@ -954,6 +954,8 @@ var degreeSearch = function($) {
         .find('.degree-result-count')
           .html(data.count);
 
+      $degreeSearchAgainContainer.html(data.searchagain);
+
       scrollToResults();
       toggleSidebarAffix();
       updateDocumentHead(data);
@@ -1315,6 +1317,7 @@ var degreeSearch = function($) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
       $sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
       $degreeSearchContent = $academicsSearch.find('#degree-search-content');
+      $degreeSearchAgainContainer = $academicsSearch.find('.degree-search-again-container');
       // degreeCompareLimit = 2;
       ajaxURL = $academicsSearch.attr('data-ajax-url');
 
