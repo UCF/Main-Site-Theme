@@ -1347,6 +1347,7 @@ li.tagit-new input {
 }
 
 #degree-single #contentcol .degree-details,
+#degree-single #contentcol .cta-wrap,
 #degree-single #sidebar_right {
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
   font-size: 14px;
@@ -1358,7 +1359,7 @@ li.tagit-new input {
 #degree-single .ie7 #sidebar_right {
   padding-left: 0;
 }
-#degree-single #sidebar_right .btn-large {
+#degree-single .btn-large {
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B' !important;
   font-size: 15px;
   font-weight: 400;
@@ -1536,13 +1537,19 @@ li.tagit-new input {
   width: 80%;
 }
 
-#degree-single .social {
-  padding-top: 30px;
+/* Apply to Program CTA */
+#degree-single .cta-wrap {
+
+}
+#degree-single .cta-wrap > h2:first-child,
+#degree-single .cta-wrap > h3:first-child {
+  margin-top: 10px !important;
 }
 
 /* Social buttons */
 #degree-single .social {
   margin-top: 20px;
+  padding-top: 30px;
 }
 #degree-single .social .share-twitter,
 #degree-single .social .share-facebook,

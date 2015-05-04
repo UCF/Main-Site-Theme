@@ -2017,7 +2017,7 @@ function get_term_custom_meta( $term_id, $taxonomy, $key ) {
 	else {
 		$val = false;
 	}
-	return $val;
+	return stripslashes( $val );
 }
 
 
@@ -2041,7 +2041,7 @@ function save_term_custom_meta( $term_id, $taxonomy ) {
 		$term_keys = array_keys( $_POST['term_meta'] );
 		foreach ( $term_keys as $key ) {
 			if ( isset( $_POST['term_meta'][$key] ) ) {
-				$term_meta[$key] = $_POST['term_meta'][$key];
+				$term_meta[$key] = stripslashes( wp_filter_post_kses( addslashes( $_POST['term_meta'][$key] ) ) );
 			}
 		}
 		// Save the option array.
@@ -2216,7 +2216,7 @@ function program_types_cta_label() {
 function program_types_cta_field( $value=null ) {
 	ob_start();
 ?>
-	<textarea name="term_meta[program_type_cta]" class="large-text" cols="50" rows="5" id="term_meta[program_type_cta]"><?php if ( $value ) { echo $value; } ?></textarea>
+	<textarea name="term_meta[program_type_cta]" class="large-text" cols="50" rows="5" id="term_meta[program_type_cta]"><?php if ( $value ) { echo esc_textarea( $value ); } ?></textarea>
 	<p class="description"><?php echo __( 'Content that should be displayed in the Call to Action box, at the bottom of a program\'s description on its profile page.  HTML and shortcodes are permitted.' ); ?></p>
 <?php
 	return ob_get_clean();
@@ -2278,7 +2278,7 @@ function program_types_render_columns( $out, $name, $term_id ) {
         case 'cta':
         	$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
         	if ( $cta ) {
-        		$out .= '<textarea disabled>' . $cta . '</textarea>';
+        		$out .= '<textarea disabled>' . esc_textarea( $cta ) . '</textarea>';
         	}
         	else {
         		$out .= '&mdash;';
@@ -2323,6 +2323,21 @@ function display_social($url, $title) {
 
 
 /**
+ * Recursively looks for a Program Type term's Call to Action text value.
+ * If the provided term doesn't have one assigned, its parents are checked
+ * until either a CTA value is found, or no more parents exist.
+ **/
+function get_program_type_cta( $term_id ) {
+	$term = get_term( $term_id, 'program_types' );
+	$cta_content = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+	if ( empty( $cta_content ) && $term->parent !== 0 ) {
+		return get_program_type_cta( $term->parent );
+	}
+	return stripslashes( $cta_content );
+}
+
+
+/**
  * Displays a "Apply to <Degree Name>" Call to Action box.  For use at the
  * bottom of single Degree profiles.  Uses CTA box contents from the degree's
  * assigned Program Type, or that Program Type's parent(s) if one isn't
@@ -2330,12 +2345,18 @@ function display_social($url, $title) {
  **/
 function display_degree_callout( $degree_id ) {
 	$program_type = get_first_result( wp_get_post_terms( $degree_id, 'program_types' ) );
-	$cta_content = get_term_custom_meta( $program_type->term_id, 'program_types', 'program_type_cta' );
+	$cta_content = get_program_type_cta( $program_type->term_id );
 
-	// TODO: if not CTA content found, check for parent term CTAs until one is found; use it instead
+	if ( empty( $cta_content ) ) {
+		return;
+	}
 
 	ob_start();
-	echo $cta_content;
+?>
+	<div class="cta-wrap well">
+		<?php echo apply_filters( 'the_content', $cta_content ); ?>
+	</div>
+<?php
 	return ob_get_clean();
 }
 ?>
