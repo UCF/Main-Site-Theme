@@ -957,7 +957,12 @@ var degreeSearch = function($) {
 
       $degreeSearchAgainContainer.html(data.searchagain);
 
-      scrollToResults();
+      // Only scroll to results if the user's focus is not on the search field
+      // (if a filter/sort option was clicked, and the user is *not* typing a
+      // search query). Makes searching on touch devices less of a pain.
+      if (!$academicsSearch.find('#search-query').is(':focus')) {
+        scrollToResults();
+      }
       toggleSidebarAffix();
       updateDocumentHead(data);
 
@@ -978,7 +983,9 @@ var degreeSearch = function($) {
         .html('Error loading degree data.')
         .append($loaderScreen);
 
-      scrollToResults();
+      if (!$academicsSearch.find('#search-query').is(':focus')) {
+        scrollToResults();
+      }
       toggleSidebarAffix();
       updateDocumentHead(data);
     }, 200);
