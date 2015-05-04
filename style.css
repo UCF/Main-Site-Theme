@@ -1539,7 +1539,10 @@ li.tagit-new input {
 
 /* Apply to Program CTA */
 #degree-single .cta-wrap {
-
+  margin-top: 30px;
+}
+#degree-single .cta-wrap h3 {
+  border-bottom: 0 solid transparent !important;
 }
 #degree-single .cta-wrap > h2:first-child,
 #degree-single .cta-wrap > h3:first-child {
@@ -1548,8 +1551,7 @@ li.tagit-new input {
 
 /* Social buttons */
 #degree-single .social {
-  margin-top: 20px;
-  padding-top: 30px;
+  margin-top: 30px;
 }
 #degree-single .social .share-twitter,
 #degree-single .social .share-facebook,
