@@ -1142,6 +1142,7 @@ li.tagit-new input {
   background-color: #eee;
   border: 1px solid #ddd;
   border-radius: 20px;
+  color: #000;
   display: inline-block;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 13.5px;

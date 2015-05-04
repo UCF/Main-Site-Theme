@@ -1793,20 +1793,21 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 function get_degree_search_search_again( $filters, $params ) {
 	ob_start();
 	if ( isset( $params['search-query'] ) ): ?>
-		<hr>
 		<p>
-			Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:<br>
-			<?php foreach ( $filters as $key=>$filter ): ?>
-				<?php if ( $filter['name'] == 'Degrees'): ?>
-					<?php foreach ( $filter['terms'] as $term ): ?>
-						<?php if ( $term->count > 0 ): ?>
-							<a href="<?php echo get_permalink(); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>&search-query=<?php echo urlencode($params['search-query']) ?>">
-								<?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></a>
-						<?php endif; ?>
-					<?php endforeach; ?>
-				<?php endif; ?>
-			<?php endforeach; ?>
+			<br>
+			Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:
 		</p>
+		<?php foreach ( $filters as $key=>$filter ): ?>
+			<?php if ( $filter['name'] == 'Degrees'): ?>
+				<?php foreach ( $filter['terms'] as $term ): ?>
+					<?php if ( $term->count > 0 ): ?>
+						<a href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>&search-query=<?php echo urlencode($params['search-query']) ?>">
+							<?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?>s
+						</a>
+					<?php endif; ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		<?php endforeach; ?>
 	<?php endif;
 	return ob_get_clean();
 }
