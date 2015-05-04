@@ -125,13 +125,15 @@ else {
 
 			// Massage website URLs for graduate programs because they're stored in the
 			// search service db strangely:
-			if ($program->graduate == 1) {
+			if ( $program->graduate == 1 ) {
 				// Old data previously returned a query param as the 'required_hours' val.
-				if ($program->required_hours[0] == '?') {
-					$program->website = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+				if ( $program->required_hours[0] == '?' ) {
+					$program->pdf = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+					$program->required_hours = null;
 				}
-				else {
-					$program->website = $program->required_hours;
+				elseif ( substr( $program->required_hours, 0, 4 ) == 'http' ) {
+					$program->pdf = $program->required_hours;
+					$program->required_hours = null;
 				}
 			}
 
