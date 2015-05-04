@@ -1640,17 +1640,6 @@ function get_first_result( $array_result ) {
 
 
 /**
- * Helper function that returns the last item in a numeric array.
- **/
-function get_last_result( $array_result ) {
-	if ( is_array( $array_result ) && count( $array_result ) > 0 ) {
-		return end( $array_result );
-	}
-	return $array_result;
-}
-
-
-/**
  * Appends degree metadata to a post object.
  **/
 function append_degree_metadata( $post ) {
@@ -1667,9 +1656,7 @@ function append_degree_metadata( $post ) {
 		$post->tax_program_type   = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
 
 		if ( empty( $post->degree_pdf ) ) {
-			$parent_program_type_id = get_last_result( get_ancestors( $post->tax_program_type->term_id, 'program_types' ) );
-			$parent_program_type = get_term( intval( $parent_program_type_id ), 'program_types' );
-			if ( $parent_program_type && $parent_program_type->name == 'Graduate Program' ) {
+			if ( Degree::is_graduate_program( $post ) ) {
 				$post->degree_pdf = 'http://graduatecatalog.ucf.edu';
 			}
 			else {
