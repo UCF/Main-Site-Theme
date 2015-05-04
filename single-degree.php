@@ -42,7 +42,13 @@
 							<dd><?php echo $post->tax_program_type->name; ?></dd>
 
 							<dt>Total Credit Hours:</dt>
-							<dd><?php if ( $post->degree_hours ) { echo $post->degree_hours; } else { echo 'n/a'; } ?></dd>
+							<dd>
+							<?php if ( $post->degree_hours ): ?>
+									<?php echo $post->degree_hours; ?> credit hours
+								<?php else: ?>
+									<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+								<?php endif; ?>
+							</dd>
 
 							<?php if ( $post->tax_college ): ?>
 							<dt>College:</dt>

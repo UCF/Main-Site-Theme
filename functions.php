@@ -1629,11 +1629,22 @@ function get_post_tax_term_array(
 
 
 /**
- * Helper function that returns the first item in an array.
+ * Helper function that returns the first item in a numeric array.
  **/
 function get_first_result( $array_result ) {
 	if ( is_array( $array_result ) && count( $array_result ) > 0 ) {
 		return $array_result[0];
+	}
+	return $array_result;
+}
+
+
+/**
+ * Helper function that returns the last item in a numeric array.
+ **/
+function get_last_result( $array_result ) {
+	if ( is_array( $array_result ) && count( $array_result ) > 0 ) {
+		return end( $array_result );
 	}
 	return $array_result;
 }
@@ -1649,11 +1660,22 @@ function append_degree_metadata( $post ) {
 		$post->degree_phone       = get_post_meta( $post->ID, 'degree_phone', TRUE );
 		$post->degree_email       = get_post_meta( $post->ID, 'degree_email', TRUE );
 		$post->degree_website     = get_post_meta( $post->ID, 'degree_website', TRUE );
-		$post->degree_pdf         = get_post_meta( $post->ID, 'degree_pdf', TRUE ) ? get_post_meta( $post->ID, 'degree_pdf', TRUE ) : 'http://catalog.ucf.edu/'; // TODO: graduate programs are being redirected to the undergraduate catalog
+		$post->degree_pdf         = get_post_meta( $post->ID, 'degree_pdf', TRUE );
 		$post->degree_contacts    = get_degree_contacts( $post->ID );
 		$post->tax_college        = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
 		$post->tax_department     = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
 		$post->tax_program_type   = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
+
+		if ( empty( $post->degree_pdf ) ) {
+			$parent_program_type_id = get_last_result( get_ancestors( $post->tax_program_type->term_id, 'program_types' ) );
+			$parent_program_type = get_term( intval( $parent_program_type_id ), 'program_types' );
+			if ( $parent_program_type && $parent_program_type->name == 'Graduate Program' ) {
+				$post->degree_pdf = 'http://graduatecatalog.ucf.edu';
+			}
+			else {
+				$post->degree_pdf = 'http://catalog.ucf.edu';
+			}
+		}
 	}
 
 	return $post;
@@ -1875,11 +1897,11 @@ function get_degree_search_contents( $return=false, $params=null ) {
 						<?php echo $degree->post_title; ?>
 					</a>
 					<span class="degree-credits-count">
-					<?php echo $degree->tax_program_type->name; ?> &mdash;
-					<?php if ( $degree->degree_hours > 0 ): ?>
-						<?php echo $degree->degree_hours; ?> Credit Hours
+					<?php echo $degree->tax_program_type->name; ?> &mdash;&nbsp;
+					<?php if ( $degree->degree_hours ): ?>
+						<?php echo $degree->degree_hours; ?> credit hours
 					<?php else: ?>
-						Credit Hours n/a
+						See catalog for credit hours
 					<?php endif; ?>
 					</span>
 				</h3>
