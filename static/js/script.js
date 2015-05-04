@@ -765,7 +765,8 @@ var degreeSearch = function($) {
     $sidebarLeft,
     $degreeSearchContent,
     // degreeCompareLimit,
-    ajaxURL;
+    ajaxURL,
+    filterTimer;
 
   function initAutoComplete() {
     /**
@@ -1004,6 +1005,8 @@ var degreeSearch = function($) {
 
   function loadDegreeSearchResults() {
     if (supportsHistory()) {
+      $academicsSearch.find('#ajax-loading').removeClass('hidden');
+
       var programType = [];
       $academicsSearch.find('.program-type:checked').each(function() {
         programType.push($(this).val());
@@ -1034,11 +1037,27 @@ var degreeSearch = function($) {
         .fail(function(data) {
           degreeSearchFailureHandler(data);
         });
-
-      $academicsSearch.find('#ajax-loading').removeClass('hidden');
     }
     else {
       $academicsSearch.submit();
+    }
+  }
+
+  function filterChangeHandler() {
+    if (supportsHistory()) {
+      // This will fire again in loadDegreeSearchResults(), but we want to display a
+      // loading spinner as soon as possible
+      $academicsSearch.find('#ajax-loading').removeClass('hidden');
+
+      if (filterTimer) {
+        clearTimeout(filterTimer);
+      }
+      filterTimer = setTimeout(function() {
+        loadDegreeSearchResults();
+      }, 450);
+    }
+    else {
+      loadDegreeSearchResults();
     }
   }
 
@@ -1080,7 +1099,7 @@ var degreeSearch = function($) {
     // Filter checkbox changes were turned off when the mobile sidebar was activated.
     // Reactivate the event when the mobile sidebar is closed (to allow .close btns in
     // .degree-result-count to trigger loadDegreeSearchResults() on click).
-    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', filterChangeHandler);
   }
 
   function closeMenuOnTargetClick(e) {
@@ -1095,7 +1114,7 @@ var degreeSearch = function($) {
     $(document).on('click', closeMenuOnTargetClick);
     // We only want to trigger loadDegreeSearchResults() when the user closes
     // the sidebar modal (don't run it in the background with every checkbox change)
-    $academicsSearch.off('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+    $academicsSearch.off('change', '.program-type, .college, .location, .sort-by', filterChangeHandler);
 
     // resize the panel to be full screen and align it
     $('html, body').animate({
@@ -1295,7 +1314,7 @@ var degreeSearch = function($) {
       }
     });
 
-    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', filterChangeHandler);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
     $academicsSearch.on('click', '.seo-li', function(e) {
       e.preventDefault();
