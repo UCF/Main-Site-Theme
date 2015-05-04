@@ -1588,19 +1588,6 @@ class Degree extends CustomPostType{
 		return false;
 	}
 
-	public static function get_degree_profile_link($degree) {
-		// Get permalink to landing page for a single degree program.
-		// Graduate programs should link to the degree_website meta value.
-		$single_url = null;
-		if (get_permalink($degree->ID) && !Degree::is_graduate_program($degree)) {
-			$single_url = get_permalink($degree->ID);
-		}
-		else {
-			$single_url = get_post_meta($degree->ID, 'degree_website', TRUE);
-		}
-		return $single_url;
-	}
-
 	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
@@ -1647,20 +1634,13 @@ class Degree extends CustomPostType{
 		<h3 class="degree-list-heading" id="<?=$term_slug?>"><?=$term?></h3>
 		<?php if ($posts) { ?>
 		<ul class="degree-list">
-			<?php
-			foreach ($posts as $post) {
-				$profile_link = Degree::get_degree_profile_link($post);
-			?>
+			<?php foreach ( $posts as $post ): ?>
 			<li class="program">
-				<?php if ( ! empty( $profile_link ) ) : ?>
-					<a href="<?php echo $profile_link; ?>">
-				<?php endif; ?>
-						<?php echo $post->post_title; ?>
-				<?php if ( ! empty( $profile_link ) ) : ?>
-					</a>
-				<?php endif; ?>
+				<a href="<?php echo get_permalink( $post->ID ); ?>">
+					<?php echo $post->post_title; ?>
+				</a>
 			</li>
-			<?php } ?>
+			<?php endforeach; ?>
 		</ul>
 		<?php } ?>
 		<hr />
