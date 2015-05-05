@@ -968,7 +968,7 @@ var degreeSearch = function($) {
 
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
       wp.a11y.speak(assistiveText);
-    }, 200);
+    }, 150);
   }
 
   function degreeSearchFailureHandler(data) {
@@ -988,7 +988,10 @@ var degreeSearch = function($) {
       }
       toggleSidebarAffix();
       updateDocumentHead(data);
-    }, 200);
+
+      var assistiveText = 'Error loading degree data.';
+      wp.a11y.speak(assistiveText);
+    }, 150);
   }
 
   function supportsHistory() {
