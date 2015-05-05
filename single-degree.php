@@ -89,7 +89,13 @@
 				<?php if ( $post->degree_description ) { ?>
 					<p><?php echo apply_filters( 'the_content', $post->degree_description ); ?></p>
 				<?php } else { ?>
-					<p>You can find a full description of this degree in the <a href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
+					<p>You can find a full description of this degree in the <a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
+				<?php } ?>
+
+				<?php if ( $post->post_content ) { ?>
+					<hr>
+					<h2>About This Degree</h2>
+					<?php the_content(); ?>
 				<?php } ?>
 
 				<?php echo display_degree_callout( $post->ID ); ?>
