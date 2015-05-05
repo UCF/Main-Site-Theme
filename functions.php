@@ -1153,30 +1153,6 @@ function query_search_service($params) {
 
 
 /**
- * Query the undergraduate catalog feed
- * @return array
- * @author Jo Dickson
- **/
-function query_undergraduate_catalog() {
-	$results = array();
-	try {
-		$context = stream_context_create(array(
-			'http' => array(
-				'method'  => 'GET',
-				'timeout' => UNDERGRADUATE_CATALOG_FEED_HTTP_TIMEOUT
-		)));
-		$feed_url = UNDERGRADUATE_CATALOG_FEED_URL;
-		$response   = file_get_contents($feed_url, false, $context);
-		$json       = json_decode($response);
-		if(isset($json->programs)) $results = $json->programs;
-	} catch (Exception $e) {
-		#pass
-	}
-	return $results;
-}
-
-
-/**
  * Prevent Wordpress from trying to redirect to a "loose match" post when
  * an invalid URL is requested.  WordPress will redirect to 404.php instead.
  *

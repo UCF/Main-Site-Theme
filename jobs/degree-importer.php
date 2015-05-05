@@ -14,7 +14,6 @@ else {
 	 * catalog data
 	 **/
 	$results = query_search_service(array('use' => 'programSearch'));
-	$ucatalog_data = query_undergraduate_catalog();
 
 	if ($results) {
 		/**
@@ -123,50 +122,19 @@ else {
 				$program->contacts = $string;
 			}
 
-			// Massage website URLs for graduate programs because they're stored in the
+			// Massage website URLs for graduate programs if they're stored in the
 			// search service db strangely:
 			if ( $program->graduate == 1 ) {
 				// Old data previously returned a query param as the 'required_hours' val.
 				if ( $program->required_hours[0] == '?' ) {
-					$program->pdf = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
+					$program->catalog_url = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
 					$program->required_hours = null;
 				}
 				elseif ( substr( $program->required_hours, 0, 4 ) == 'http' ) {
-					$program->pdf = $program->required_hours;
+					$program->catalog_url = $program->required_hours;
 					$program->required_hours = null;
 				}
 			}
-
-			// Assign catalog pdf links to undergraduate degrees.
-			// Check against undergraduate catalog's provided degree name, type,
-			// and college for a match.
-			foreach ($ucatalog_data as $key=>$uc_program) {
-				// Check if our program type string is a substring of the catalog's program type;
-				// if both program names match, or the program is accelerated and the name is a substring of the catalog's program name or name + type;
-				// and if the college name either matches or if one college name is a substring of the other
-				if (
-					stripos($uc_program->type, $program->type_ucmatch) !== false &&
-					(
-						clean_name($program->name) == clean_name($uc_program->name) ||
-						(
-							$program->type_ucmatch == 'accelerated' &&
-							(
-								stripos(clean_name($program->name), clean_name($uc_program->name)) !== false ||
-								stripos(clean_name($uc_program->name.$uc_program->type), clean_name($program->name)) !== false
-							)
-						)
-					) &&
-					(
-						clean_name($program->college_name) == clean_name($uc_program->college) ||
-						stripos(clean_name($program->college_name), clean_name($uc_program->college)) !== false ||
-						stripos(clean_name($uc_program->college), clean_name($program->college_name)) !== false
-					)
-				) {
-					$program->pdf = $uc_program->pdf;
-					break;
-				}
-			}
-			if (!$program->pdf) { $program->pdf = ''; }
 
 
 			$program = array(
@@ -188,7 +156,7 @@ else {
 					'degree_phone'		=> $program->phone,
 					'degree_email'		=> $program->email,
 					'degree_contacts'	=> $program->contacts, // semicolon-separated contact lists; fields are comma-separated
-					'degree_pdf'		=> $program->pdf,
+					'degree_pdf'		=> $program->catalog_url,
 				),
 				'post_terms' => array(
 					'program_types' => $program->type,
