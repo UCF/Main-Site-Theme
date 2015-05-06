@@ -122,20 +122,6 @@ else {
 				$program->contacts = $string;
 			}
 
-			// Massage website URLs for graduate programs if they're stored in the
-			// search service db strangely:
-			if ( $program->graduate == 1 ) {
-				// Old data previously returned a query param as the 'required_hours' val.
-				if ( $program->required_hours[0] == '?' ) {
-					$program->catalog_url = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
-					$program->required_hours = null;
-				}
-				elseif ( substr( $program->required_hours, 0, 4 ) == 'http' ) {
-					$program->catalog_url = $program->required_hours;
-					$program->required_hours = null;
-				}
-			}
-
 
 			$program = array(
 				'post_data' => array(

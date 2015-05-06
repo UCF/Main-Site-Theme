@@ -1633,10 +1633,10 @@ function append_degree_metadata( $post ) {
 
 		if ( empty( $post->degree_pdf ) ) {
 			if ( Degree::is_graduate_program( $post ) ) {
-				$post->degree_pdf = 'http://graduatecatalog.ucf.edu';
+				$post->degree_pdf = GRAD_CATALOG_URL;
 			}
 			else {
-				$post->degree_pdf = 'http://catalog.ucf.edu';
+				$post->degree_pdf = UNDERGRAD_CATALOG_URL;
 			}
 		}
 	}
