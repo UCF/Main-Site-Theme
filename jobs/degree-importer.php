@@ -134,15 +134,16 @@ else {
 				'post_meta' => array(
 					// Programs can have similar degree_id's, so we need
 					// type_id to further distinguish unique programs
-					'degree_id'			=> $program->degree_id,
-					'degree_type_id'	=> $program->type_id,
-					'degree_hours'		=> $program->required_hours,
-					'degree_description'=> html_entity_decode($program->description),
-					'degree_website'	=> $program->website,
-					'degree_phone'		=> $program->phone,
-					'degree_email'		=> $program->email,
-					'degree_contacts'	=> $program->contacts, // semicolon-separated contact lists; fields are comma-separated
-					'degree_pdf'		=> $program->catalog_url,
+					'degree_id'			 => $program->degree_id,
+					'degree_type_id'	 => $program->type_id,
+					'degree_hours'		 => $program->required_hours,
+					'degree_description' => html_entity_decode($program->description),
+					'degree_website'	 => $program->website,
+					'degree_phone'		 => $program->phone,
+					'degree_email'		 => $program->email,
+					'degree_contacts'	 => $program->contacts, // semicolon-separated contact lists; fields are comma-separated
+					'degree_pdf'		 => $program->catalog_url,
+					'degree_is_graduate' => $program->graduate, // Note: 'Certificates' can be undergraduate or graduate, even though our grouping logic puts them under Graduate Programs
 				),
 				'post_terms' => array(
 					'program_types' => $program->type,
