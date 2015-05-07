@@ -1,4 +1,10 @@
-<?php get_header(); the_post();?>
+<?php 
+if (isset($_GET['json'])) :
+	$to_json = get_hiearchical_degree_search_data_json();
+	header('Content-Type:application/json');
+	echo json_encode($to_json);
+else :
+get_header(); the_post(); ?>
 
 	<?php
 		// Available filters + filter values
@@ -150,4 +156,4 @@
 
 	</div>
 
-<?php get_footer(); ?>
+<?php get_footer(); endif;?>
