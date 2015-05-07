@@ -81,8 +81,14 @@
 				</div>
 
 				<div class="mobile-degree-cta visible-phone">
-					<a class="btn btn-large btn-block btn-success">View Catalog</a>
-					<a class="btn btn-large btn-block">Visit Program Website</a>
+					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-large btn-block btn-success">
+						View Catalog
+					</a>
+					<?php if ( $post->degree_website ): ?>
+					<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-large btn-block">
+						Visit Program Website
+					</a>
+					<?php endif; ?>
 				</div>
 
 				<!-- Degree description -->

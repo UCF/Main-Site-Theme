@@ -104,10 +104,10 @@ get_header(); the_post(); ?>
 					<hr>
 
 					<p class="more-details">
-						For more details and the complete undergraduate catalog, visit: <a href="http://catalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">catalog.ucf.edu</a>.
+						For more details and the complete undergraduate catalog, visit: <a href="<?php echo UNDERGRAD_CATALOG_URL; ?>" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)"><?php echo UNDERGRAD_CATALOG_URL; ?></a>.
 					</p>
 					<p class="more-details">
-						For graduate programs and courses, visit: <a href="http://www.graduatecatalog.ucf.edu/" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)">www.graduatecatalog.ucf.edu</a>.
+						For graduate programs and courses, visit: <a href="<?php echo GRAD_CATALOG_URL; ?>" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)"><?php echo GRAD_CATALOG_URL; ?></a>.
 					</p>
 
 				</article>

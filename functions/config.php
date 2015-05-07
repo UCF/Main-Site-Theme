@@ -84,9 +84,6 @@ define('CB_DOMAIN', $theme_options['cb_domain']);
 define('SEARCH_SERVICE_URL', !empty($theme_options['search_service_url']) ? $theme_options['search_service_url'] : 'http://search.smca.ucf.edu/service.php');
 define('SEARCH_SERVICE_HTTP_TIMEOUT', !empty($theme_options['search_service_timeout']) ? (int)$theme_options['search_service_timeout'] : 10); #seconds
 
-define('UNDERGRADUATE_CATALOG_FEED_URL', !empty($theme_options['undergraduate_catalog_feed_url']) ? $theme_options['undergraduate_catalog_feed_url'] : 'http://catalog.ucf.edu/feed');
-define('UNDERGRADUATE_CATALOG_FEED_HTTP_TIMEOUT', !empty($theme_options['undergraduate_catalog_feed_timeout']) ? (int)$theme_options['undergraduate_catalog_feed_timeout'] : 10); #seconds
-
 # Estimated start/end months of semesters; used for announcements
 define('CURRENT_MONTH', (int)date('n'));
 define('SPRING_MONTH_START', 1); 	// Jan
@@ -95,6 +92,10 @@ define('SUMMER_MONTH_START', 5); 	// May
 define('SUMMER_MONTH_END', 7);		// Jul
 define('FALL_MONTH_START', 8);		// Aug
 define('FALL_MONTH_END', 12); 		// Dec
+
+# Fallback undergraduate and graduate catalog urls
+define('UNDERGRAD_CATALOG_URL', !empty( $theme_options['undergrad_catalog_url'] ) ? $theme_options['undergrad_catalog_url'] : 'http://catalog.ucf.edu');
+define('GRAD_CATALOG_URL', !empty( $theme_options['grad_catalog_url'] ) ? $theme_options['grad_catalog_url'] : 'http://graduatecatalog.ucf.edu');
 
 # Desired order of degree program types in degree lists, by program slug
 define('DEGREE_PROGRAM_ORDER', serialize(array(
@@ -263,6 +264,22 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['cb_domain'],
 		)),
 	),
+	'Degrees' => array(
+		new TextField(array(
+			'name'        => 'Undergraduate catalog URL',
+			'id'          => THEME_OPTIONS_NAME.'[undergrad_catalog_url]',
+			'description' => 'URL for the undergraduate degree catalog website.',
+			'default'     => 'http://catalog.ucf.edu',
+			'value'       => $theme_options['undergrad_catalog_url'],
+		)),
+		new TextField(array(
+			'name'        => 'Graduate catalog URL',
+			'id'          => THEME_OPTIONS_NAME.'[grad_catalog_url]',
+			'description' => 'URL for the graduate degree catalog website.',
+			'default'     => 'http://graduatecatalog.ucf.edu',
+			'value'       => $theme_options['grad_catalog_url'],
+		)),
+	),
 	'Events' => array(
 		new SelectField(array(
 			'name'        => 'Events Max Items',
@@ -399,20 +416,6 @@ Config::$theme_settings = array(
     		'description' => 'Number of seconds to wait before timing out a search service request.  Default is 10 seconds.',
     		'default'     => 10,
     		'value'       => $theme_options['search_service_timeout'],
-        )),
-    	new TextField(array(
-    		'name'        => 'Undergraduate Catalog Feed URL',
-    		'id'          => THEME_OPTIONS_NAME.'[undergraduate_catalog_feed_url]',
-    		'description' => 'URL to the Undergraduate Catalog data feed.',
-    		'default'     => 'http://catalog.ucf.edu/feed',
-    		'value'       => $theme_options['undergraduate_catalog_feed_url'],
-        )),
-    	new TextField(array(
-    		'name'        => 'Undergraduate Catalog Feed Timeout',
-    		'id'          => THEME_OPTIONS_NAME.'[undergraduate_catalog_feed_timeout]',
-    		'description' => 'Number of seconds to wait before timing out a catalog feed request.  Default is 10 seconds.',
-    		'default'     => 10,
-    		'value'       => $theme_options['undergraduate_catalog_feed_timeout'],
         )),
 	),
 	'Social' => array(

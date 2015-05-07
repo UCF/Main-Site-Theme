@@ -1575,14 +1575,19 @@ class Degree extends CustomPostType{
 				'desc' => 'type_id in database. Do not modify this value.',
 				'id'   => $prefix.'type_id',
 				'type' => 'text',
+			),
+			array(
+				'name'  => 'Is Graduate Program',
+				'desc' => 'graduate value in database. Do not modify this value.',
+				'id'   => $prefix.'is_graduate',
+				'type' => 'text',
 			)
 		);
 	}
 
 	public static function is_graduate_program($degree) {
-		$program_types = wp_get_post_terms($degree->ID, 'program_types', array('fields' => 'ids'));
-		$program_group = end(get_ancestors(intval($program_types[0]), 'program_types'));
-		if (get_term($program_group, 'program_types')->name == 'Graduate Program') {
+		$is_graduate = get_post_meta( $degree->ID, 'degree_is_graduate', true );
+		if ( $is_graduate && intval( $is_graduate ) === 1 ) {
 			return true;
 		}
 		return false;
