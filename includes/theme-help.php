@@ -2,11 +2,11 @@
 <div id="theme-help" class="i-am-a-fancy-admin">
 	<div class="container">
 		<h2>Help</h2>
-		
+
 		<?php if ($updated):?>
 		<div class="updated fade"><p><strong><?=__( 'Options saved' ); ?></strong></p></div>
 		<?php endif; ?>
-		
+
 		<div class="sections">
 			<ul>
 				<li class="section"><a href="#posting">Posting</a></li>
@@ -15,17 +15,17 @@
 		</div>
 		<div class="fields">
 			<ul>
-				
+
 				<li class="section" id="posting">
 					<h3>Posting</h3>
 					<p>Posting is fun, do it.</p>
 				</li>
-				
+
 				<li class="section" id="shortcodes">
 					<h3>Shortcodes</h3>
-					
+
 					<?php if (isset($shortcode_tags['slideshow'])) { ?>
-						
+
 					<h4>slideshow</h4>
 					<p>Create a javascript slideshow of each top level element in the shortcode.  All attributes are optional, but may default to less than ideal values.  Available attributes:</p>
 					<table>
@@ -68,14 +68,14 @@
 [/slideshow]</code></pre>
 
 					<?php } ?>
-					
-					
-					
+
+
+
 					<h4>(post type)-list</h4>
-					<p>Outputs a list of a given post type filtered by arbitrary taxonomies, for 
-					example a tag or category.  A default output can be added for when no objects 
+					<p>Outputs a list of a given post type filtered by arbitrary taxonomies, for
+					example a tag or category.  A default output can be added for when no objects
 					matching the criteria are found.  Available attributes:</p>
-					
+
 					<table>
 					<tr>
 						<th scope="col">Post Type</th>
@@ -83,20 +83,20 @@
 						<th scope="col">Available Taxonomy Filters</th>
 						<th scope="col">Additional Filters</th>
 					</tr>
-					
-						<?php 
+
+						<?php
 							$custom_post_types = installed_custom_post_types();
-							
+
 							foreach ($custom_post_types as $custom_post_type) {
-								if (isset($shortcode_tags[$custom_post_type->name.'-list'])) { 
+								if (isset($shortcode_tags[$custom_post_type->name.'-list'])) {
 						?>
 					<tr>
 						<td><?=$custom_post_type->singular_name?></td>
 						<td><?=$custom_post_type->name?>-list</td>
-								
+
 						<td>
 							<ul>
-							<?php foreach ($custom_post_type->taxonomies as $tax) { 
+							<?php foreach ($custom_post_type->taxonomies as $tax) {
 								switch ($tax) {
 									case 'post_tag':
 										$tax = 'tags';
@@ -105,7 +105,7 @@
 										$tax = 'categories';
 										break;
 								}
-								
+
 							?>
 								<li style="list-style: disc; margin-left: 15px;"><?=$tax?></li>
 							</ul>
@@ -116,7 +116,7 @@
 							<?php
 								// if more than 1 taxonomy is assigned to the post type, show 'join'
 								// as being an available filter:
-								if (count($custom_post_type->taxonomies) > 1) { 
+								if (count($custom_post_type->taxonomies) > 1) {
 								?>
 									<li style="list-style: disc; margin-left: 15px;">join ('and', 'or')</li>
 								<?php
@@ -128,10 +128,10 @@
 					</tr>
 						<?php }
 						}	?>
-					
-						
+
+
 				</table>
-					
+
 					<p>Examples:</p>
 <pre><code># Output a maximum of 5 Documents tagged 'foo' or 'bar', with a default output.
 [document-list tags="foo bar" limit=5]No Documents were found.[/document-list]
@@ -144,14 +144,14 @@
 
 # Outputs all People found categorized as 'staff' and in the org_group 'small'.
 [person-list limit=5 join="and" categories="staff" org_groups="small"]</code></pre>
-				
-				
-				<?php 
+
+
+				<?php
 				if (isset($shortcode_tags['person-picture-list'])) { ?>
-				
+
 				<h4>person-picture-list</h4>
 				<p>Outputs a list of People with thumbnails, person names, and job titles.  If a person's description is available, a link to the person's profile will be outputted.  If a thumbnail for the person does not exist, a default 'No Photo Available' thumbnail will display.  An optional <strong>row_size</strong> parameter is available to customize the number of rows that will display, in addition to the other filter parameters available to the <strong>person-list</strong> shortcode.</p>
-				
+
 				<p>Example:</p>
 <pre><code># Output all People (default to 5 columns.)
 [person-picture-list]
@@ -164,12 +164,12 @@
 </code></pre>
 
 				<?php } ?>
-				
-				
+
+
 				<?php if (isset($shortcode_tags['post-type-search'])) { ?>
 				<h4>post-type-search</h4>
 				<p>Returns a list of posts of a given post type that are searchable through a generated search field.  Posts are searchable by post title and any associated tags.  Available attributes:</p>
-					
+
 					<table>
 						<tr>
 							<th>Name</th>
@@ -183,7 +183,7 @@
 							<td>post</td>
 							<td>
 								<ul>
-								<?php 
+								<?php
 									foreach ($custom_post_types as $custom_post_type) {
 										print '<li style="list-style: disc; margin-left: 15px;">'.$custom_post_type->name.'</li>';
 									}
@@ -270,7 +270,7 @@
 							<td></td>
 						</tr>
 					</table>
-					
+
 					<p>Examples:</p>
 <pre style="white-space: pre-line;"><code># Generate a Post search, organized by category, with empty sections visible.  Generates one column of results with CSS class .span3.
 [post-type-search column_width="span3" column_count="1" show_empty_sections=true default_search_text="Find Something"]
@@ -278,24 +278,35 @@
 # Generate a Person search, organized by Organizational Groups (that have People assigned to them.)
 [post-type-search post_type_name="person" taxonomy="org_groups"]
 </code></pre>
-				<?php } ?>	
-				
-				</li>
-				
-			</ul>
-			<h4>google-remarketing</h4>
-			<p>Inserts Google Ads Remarketing javascript.</p>
-			<p><strong>Available Attributes:</strong></p>
-			<dl>
-				<dt>conversion_id</dt>
-				<dd>The conversion id to be tracked.</dd>
-				<dt>img_src</dt>
-				<dd>The image source to be used to track conversion if javascript is disabled.</dd>
-			</dl>
-			<p><strong>Example:</strong></p>
-			<code>
+				<?php } ?>
+
+					<h4>google-remarketing</h4>
+					<p>Inserts Google Ads Remarketing javascript.</p>
+					<p><strong>Available Attributes:</strong></p>
+					<dl>
+						<dt>conversion_id</dt>
+						<dd>The conversion id to be tracked.</dd>
+						<dt>img_src</dt>
+						<dd>The image source to be used to track conversion if javascript is disabled.</dd>
+					</dl>
+					<p>Example:</p>
+					<code>
 [google-remarketing conversion_id=1234567890 img_src=//googleads.g.doubleclick.net/pagead/1234567890/?params=param ]
-			</code>
+					</code>
+
+					<h4>undergraduate-catalog-url, graduate-catalog-url</h4>
+					<p>Prints the URLs defined in Theme Options for the Undergraduate Catalog URL or Graduate Catalog URL.  Accepts no attributes.</p>
+					<p>Examples:</p>
+<pre style="white-space: pre-line;"><code># Displays the Undergraduate Catalog URL.
+[undergraduate-catalog-url]
+
+# Displays a link to the Graduate Catalog URL.
+&lt;a href="[graduate-catalog-url]"&gt;[graduate-catalog-url]&lt;/a&gt;
+</code></pre>
+
+				</li>
+
+			</ul>
 		</div>
 	</div>
 </div>
