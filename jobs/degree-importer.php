@@ -14,6 +14,7 @@ else {
 	 * catalog data
 	 **/
 	$results = query_search_service(array('use' => 'programSearch'));
+	$ucatalog_data = query_undergraduate_catalog();
 
 	if ($results) {
 		/**
@@ -120,6 +121,39 @@ else {
 					$string = substr($string, 0, -1).'@@;@@';
 				}
 				$program->contacts = $string;
+			}
+
+			// Assign catalog pdf links to undergraduate degrees.
+			// Check against undergraduate catalog's provided degree name, type,
+			// and college for a match.
+			if ( $ucatalog_data ) {
+				foreach ($ucatalog_data as $key=>$uc_program) {
+					// Check if our program type string is a substring of the catalog's program type;
+					// if both program names match, or the program is accelerated and the name is a substring of the catalog's program name or name + type;
+					// and if the college name either matches or if one college name is a substring of the other
+					if (
+						stripos($uc_program->type, $program->type_ucmatch) !== false &&
+						(
+							clean_name($program->name) == clean_name($uc_program->name) ||
+							(
+								$program->type_ucmatch == 'accelerated' &&
+								(
+									stripos(clean_name($program->name), clean_name($uc_program->name)) !== false ||
+									stripos(clean_name($uc_program->name.$uc_program->type), clean_name($program->name)) !== false
+								)
+							)
+						) &&
+						(
+							clean_name($program->college_name) == clean_name($uc_program->college) ||
+							stripos(clean_name($program->college_name), clean_name($uc_program->college)) !== false ||
+							stripos(clean_name($uc_program->college), clean_name($program->college_name)) !== false
+						)
+					) {
+						$program->catalog_url = $uc_program->pdf;
+						break;
+					}
+				}
+				if (!$program->catalog_url) { $program->catalog_url = ''; }
 			}
 
 
