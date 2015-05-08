@@ -1578,16 +1578,16 @@ function fetch_degree_data( $params ) {
 	);
 
 	if ( $params ) {
-		if ( $params['search-query'] ) {
+		if ( isset( $params['search-query'] ) ) {
 			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
 		}
 
-		if ( $params['sort-by'] && $params['sort-by'] == 'degree_hours' ) {
+		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
 			$args['meta_key'] = 'degree_hours';
 			$args['orderby'] = 'meta_value_num title';
 		}
 
-		if ( $params['college'] ) {
+		if ( isset( $params['college'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'colleges',
 				'field' => 'slug',
@@ -1595,7 +1595,7 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
-		if ( $params['program-type'] ) {
+		if ( isset( $params['program-type'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'program_types',
 				'field' => 'slug',
@@ -1603,7 +1603,7 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
-		if ( count( $params['tax_query'] ) > 1 ) {
+		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
 			$params['tax_query']['relation'] = 'AND';
 		}
 	}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 if (isset($_GET['json'])) :
 	$to_json = get_hiearchical_degree_search_data_json();
 	header('Content-Type:application/json');
@@ -52,7 +52,7 @@ get_header(); the_post(); ?>
 					<legend class="sr-only">Search</legend>
 					<div class="degree-search-form-inner">
 						<label for="search-query" class="sr-only">Search for a degree program</label>
-						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
+						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
 						<button class="btn btn-link" type="submit">Search</button>
 					</div>
 				</fieldset>
@@ -138,7 +138,7 @@ get_header(); the_post(); ?>
 							<?php if ( $term->count > 0 ): ?>
 							<li class="checkbox">
 								<label>
-									<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
+									<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="checkbox" <?php if ( isset( $params[$key] ) && in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
 									<a href="<?php echo get_permalink(); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>" class="seo-li" tabindex="-1">
 										<span><?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?></span>
 										<small class="filter-result-count">(<?php echo $term->count; ?>)</small>
