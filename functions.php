@@ -2312,7 +2312,7 @@ function display_social($url, $title) {
         	Share "<?php echo $title; ?>" on Linkedin
         </a>
         <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
-        	Sahre "<?php echo $title; ?>" in an email
+        	Share "<?php echo $title; ?>" in an email
         </a>
     </aside>
     <?php
