@@ -1253,66 +1253,6 @@ li.tagit-new input {
   margin-top: 4px;
 }
 
-#degree-search-content .degree-online {
-  box-sizing: border-box;
-  display: table-cell;
-  font-size: 11.5px;
-  font-weight: 500;
-  padding: 0 10px;
-  vertical-align: middle;
-  width: 12%;
-}
-
-#degree-search-content .degree-compare {
-  display: table-cell;
-  vertical-align: middle;
-  width: 14%;
-}
-
-#degree-search-content .degree-compare-label {
-  color: #888;
-  display: inline-block;
-  font-size: 11px;
-  margin-bottom: 0;
-  vertical-align: middle;
-}
-#degree-search-content .degree-compare-label:hover,
-#degree-search-content .degree-compare-label:active,
-#degree-search-content .degree-compare-label:focus {
-  color: #08c;
-}
-
-#degree-search-content .degree-search-result.compare-active .degree-compare-label span {
-  display: none;
-}
-#degree-search-content .degree-compare-input:disabled + span,
-#degree-search-content .degree-compare-input:disabled + span:hover,
-#degree-search-content .degree-compare-input:disabled + span:active,
-#degree-search-content .degree-compare-input:disabled + span:focus {
-  color: #ccc;
-  cursor: not-allowed;
-}
-
-#degree-search-content .degree-compare-submit {
-  display: none;
-  margin-left: 5px;
-  vertical-align: middle;
-}
-#degree-search-content .degree-search-result.compare-active .degree-compare-submit {
-  display: inline-block;
-}
-
-#degree-search-content .degree-compare-selected-count {
-  color: #888;
-  display: none;
-  font-size: 10px;
-  font-style: italic;
-  text-align: center;
-}
-#degree-search-content .degree-search-result.compare-active .degree-compare-selected-count {
-  display: block;
-}
-
 
 /* Single Degree profiles */
 #degree-single #breadcrumbs {

@@ -148,14 +148,6 @@
     width: 16%;
   }
 
-  #degree-search-content .degree-compare {
-    width: 20%;
-  }
-
-  #degree-search-content .degree-compare-label {
-    font-size: 10px;
-  }
-
   #degree-single #breadcrumbs {
     font-size: 12px;
   }
@@ -573,17 +565,6 @@
     width: 100%;
   }
 
-  #degree-search-content .degree-compare {
-    box-sizing: border-box;
-    padding-left: 12px;
-    width: 17%;
-  }
-
-  #degree-search-content .degree-compare-label {
-    line-height: 1.2;
-    text-align: center;
-  }
-
 
 	#program-meta p { padding-left: 0; }
 
@@ -726,21 +707,11 @@
 	#azindex .post-type-search ul li { font-size: 12px; padding: 3px 3px 3px 0; }
 	.post-type-search-results div[class*="span"] { max-height: none; overflow: visible; }
 
-	#degree-search-content .degree-compare {
-    width: 22%;
-  }
-
 	.degree-list {
 		-webkit-column-count: 1; /* Chrome, Safari, Opera */
 		-moz-column-count: 1; /* Firefox */
 		column-count: 1;
 	}
-}
-
-@media (max-width: 380px) {
-  #degree-search-content .degree-compare {
-    width: 28%;
-  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {

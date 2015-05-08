@@ -763,7 +763,6 @@ var degreeSearch = function($) {
     $degreeSearchResultsContainer,
     $sidebarLeft,
     $degreeSearchContent,
-    // degreeCompareLimit,
     ajaxURL;
 
   function initAutoComplete() {
@@ -1142,104 +1141,6 @@ var degreeSearch = function($) {
     }
   }
 
-  // function highlightCompareableDegree($checkedDegreeInput) {
-  //   unhighlightCompareableDegrees();
-
-  //   $checkedDegreeInput.each(function() {
-  //     $(this)
-  //       .parents('.degree-search-result')
-  //         .addClass('compare-active')
-  //         .find('.degree-compare-selected-count')
-  //           .text('(added ' + $checkedDegreeInput.length + ' of ' + degreeCompareLimit + ')');
-  //   });
-  // }
-
-  // function unhighlightCompareableDegrees() {
-  //   // Remove styling on parent list items that have previously been
-  //   // marked as active.
-  //   $academicsSearch
-  //     .find('.compare-active')
-  //       .removeClass('compare-active')
-  //       .find('.degree-compare-selected-count')
-  //         .text('');
-  // }
-
-  // function uncheckCompareableDegrees() {
-  //   // Uncheck any checked degrees.
-  //   $academicsSearch.find('.degree-compare-input:checked').removeProp('checked');
-  // }
-
-  // function activateCompareBtns() {
-  //   // Restore functionality to disabled Compare btns.
-  //   // Disable any unchecked degree checkboxes (set a max #.)
-  //   $academicsSearch
-  //     .find('.compare-active .degree-compare-submit')
-  //       .removeClass('disabled')
-  //       .addClass('btn-primary')
-  //       .end()
-  //     .find('.degree-compare-input:not(:checked)')
-  //       .attr('disabled', 'disabled');
-  // }
-
-  // function deactivateCompareBtns() {
-  //   $academicsSearch
-  //     .find('.degree-compare-submit.btn-primary')
-  //       .removeClass('btn-primary')
-  //       .addClass('disabled')
-  //       .end()
-  //     .find('.degree-compare-input:disabled')
-  //       .removeAttr('disabled');
-  // }
-
-  // function submitComparison() {
-  //   var $checked = $academicsSearch.find('.degree-compare-input:checked');
-  //   var compareables = [];
-
-  //   $checked.each(function() {
-  //     compareables.push($(this).val());
-  //   });
-
-  //   var compareParams = $.param({
-  //     academicPlanIds: compareables,
-  //   });
-
-  //   // perform request, passing compareables as GET params...
-  //   // TODO: fetch url from data param somewhere in the template
-    // window.location = '<?php echo get_permalink(get_page_by_title("Compare Degrees")->ID); ?>?' + compareParams;
-
-  //   // Uncheck selected degrees, in case the user hits the back btn in their browser.
-  //   // Works due to back-forward cache magic.
-  //   window.setTimeout(function() {
-  //     unhighlightCompareableDegrees();
-  //     uncheckCompareableDegrees();
-  //     deactivateCompareBtns();
-  //   }, 200);
-  // }
-
-  // function degreeCompareBtnClickHandler(e) {
-  //   e.preventDefault();
-
-  //   if (!$(this).hasClass('disabled')) {
-  //     submitComparison();
-  //   }
-  // }
-
-  // function degreeCompareChangeHandler() {
-  //   var $checked = $academicsSearch.find('.degree-compare-input:checked');
-
-  //   // If no other Compare boxes are checked, activate 'compare mode'
-  //   // (allow one other checkbox to be checked)
-  //   if ($checked.length < degreeCompareLimit) {
-  //     highlightCompareableDegree($checked);
-  //     deactivateCompareBtns();
-  //   }
-  //   // If two checkboxes are now checked, go to comparison page
-  //   else {
-  //     highlightCompareableDegree($checked);
-  //     activateCompareBtns();
-  //   }
-  // }
-
   function toggleSidebarAffix() {
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
@@ -1340,7 +1241,6 @@ var degreeSearch = function($) {
       $sidebarLeft = $academicsSearch.find('#degree-search-sidebar');
       $degreeSearchContent = $academicsSearch.find('#degree-search-content');
       $degreeSearchAgainContainer = $academicsSearch.find('.degree-search-again-container');
-      // degreeCompareLimit = 2;
       ajaxURL = $academicsSearch.attr('data-ajax-url');
 
       setupEventHandlers();
