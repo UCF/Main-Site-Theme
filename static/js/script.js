@@ -1277,6 +1277,18 @@ var degreeSearch = function($) {
     }
   }
 
+  function searchAgainClickHandler(e) {
+    e.preventDefault();
+
+    var $target = $(e.target),
+        programType = $target.attr('data-program-type'),
+        searchTerm = $target.attr('data-search-term');
+
+    trackFilterForGoogle([programType], [], searchTerm);
+
+    window.location.href = $target.attr('href');
+  }
+
   function scrollToResults() {
     // Scroll past top page content if the page loaded with GET params set
     // (assume the user submitted a search or something and has already seen
@@ -1306,6 +1318,7 @@ var degreeSearch = function($) {
 
     $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
+    $academicsSearch.on('click', '.search-again-link', searchAgainClickHandler);
     $academicsSearch.on('click', '.seo-li', function(e) {
       e.preventDefault();
       if ($('body').hasClass('ie8')) {

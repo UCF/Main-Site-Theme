@@ -1704,8 +1704,14 @@ function get_degree_search_search_again( $filters, $params ) {
 		<?php foreach ( $filters as $key=>$filter ): ?>
 			<?php if ( $filter['name'] == 'Degrees'): ?>
 				<?php foreach ( $filter['terms'] as $term ): ?>
-					<?php if ( $term->count > 0 ): ?>
-						<a href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>&search-query=<?php echo urlencode($params['search-query']) ?>">
+					<?php
+					if ( $term->count > 0 ):
+						$query = http_build_query( array(
+							$key . '[]' => $term->slug,
+							'search-query' => $params['search-query']
+						) );
+					?>
+						<a class="search-again-link" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
 							<?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?>s
 						</a>
 					<?php endif; ?>
