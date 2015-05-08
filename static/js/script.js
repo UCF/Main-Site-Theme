@@ -920,8 +920,8 @@ var degreeSearch = function($) {
   }
 
   function updateDocumentHead(data) {
-    var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href;
-    var newURL = baseURL + '?' + data.querystring;
+    var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href,
+        newURL = baseURL + '?' + data.querystring;
 
     window.history.replaceState(null, null, newURL);
 
