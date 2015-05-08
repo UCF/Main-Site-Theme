@@ -2363,4 +2363,28 @@ function display_degree_callout( $degree_id ) {
 <?php
 	return ob_get_clean();
 }
+
+
+/**
+ * Redirect invalid requests related to Degree Search.
+ * This redirect should only ever get hit if the user manually entered an
+ * invalid URL, since all custom search views are generated via query params.
+ **/
+function degree_search_404_redirect() {
+	$path = $_SERVER['REQUEST_URI'];
+	$degree_search_page = get_page_by_title( 'Degree Search' );
+	$degree_search_path = wp_make_link_relative( get_permalink( $degree_search_page ) );
+
+	// Remove trailing slash
+	if ( substr( $degree_search_path, -1 ) == '/' ) {
+		$degree_search_path = substr( $degree_search_path, 0, -1 );
+	}
+
+	if ( is_404() && substr( $path, 0, strlen( $degree_search_path ) ) == $degree_search_path ) {
+		wp_redirect( get_permalink( $degree_search_page ), 301 );
+		exit();
+	}
+}
+add_action( 'template_redirect', 'degree_search_404_redirect' );
+
 ?>

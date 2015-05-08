@@ -1,12 +1,3 @@
-<?php
-	$path = $Path=$_SERVER['REQUEST_URI'];
-
-	if(substr($path,0,14) == '/degree-search') {
-		wp_redirect( '/degree-search/', 301 );
-		exit;
-	}
-?>
-
 <?php @header("HTTP/1.1 404 Not found", true, 404);?>
 <?php disallow_direct_load('404.php');?>
 
@@ -32,7 +23,7 @@
 					<div class="row">
 						<div class="span12">
 							<p>&nbsp;</p>
-							<p class="lead">The page you were looking for appears to have been moved, deleted or does not exist. Try using the navigation or search above or browse to the <a href="/">home page</a>.</p>
+							<p class="lead">The page you were looking for appears to have been moved, deleted or does not exist. Try using the navigation or search above or browse to the <a href="<?php echo get_home_url(); ?>">home page</a>.</p>
 						</div>
 					</div>
 				</div>
