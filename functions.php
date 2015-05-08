@@ -1283,7 +1283,6 @@ add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
  * Returns an array of post groups, grouped by a specified taxonomy's terms.
  * Each key is a taxonomy term ID; each value is an array of post objects.
  *
- * TODO consider moving to functions/base.php
  * Used by degree-list shortcode (Degree::objectsToHTML)
  **/
 function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
@@ -1342,7 +1341,6 @@ function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
  * Returns a sorted array of grouped degrees by program (grouped by group_posts_by_tax_terms().)
  * Uses the order defined by DEGREE_PROGRAM_ORDER in functions/config.php.
  *
- * TODO consider making this a Degree object static method
  * Used by degree-list shortcode (Degree::objectsToHTML)
  **/
 function sort_grouped_degree_programs($posts) {
@@ -1359,47 +1357,6 @@ function sort_grouped_degree_programs($posts) {
 		return array_search($a, $ids) < array_search($b, $ids) ? -1 : 1;
 	});
 	return $posts;
-}
-
-
-/**
- * Returns a degree's contacts and their phone/email info
- * in an array of arrays.
- *
- * TODO consider making this a Degree object static method
- **/
-function get_degree_contacts( $postid ) {
-	$contact_info = get_post_meta( $postid, 'degree_contacts', true );
-	$contact_array = array();
-
-	// Split single contacts
-	$contacts = explode( '@@;@@', $contact_info );
-	foreach ( $contacts as $key=>$contact ) {
-		if ( $contact ) {
-			// Split individual fields
-			$contact = explode( '@@,@@', $contact );
-
-			$newcontact = array();
-
-			foreach ( $contact as $fieldset ) {
-				// Split out field key/values
-				$fields = explode( '@@:@@', $fieldset );
-				// Only get fields we need. Don't include fields that can result in
-				// duplicate contacts after sorting uniques (e.g. contact_id).
-				if ( $fields[0] == 'contact_name' || $fields[0] == 'contact_phone' || $fields[0] == 'contact_email' ) {
-					$newcontact[$fields[0]] = str_replace( '@@,@', '', $fields[1] );
-				}
-			}
-
-			// Only add the contact to the list if there are at least 2 pieces of info available
-			// e.g. don't add just a person's name to the list
-			if ( count( $newcontact ) > 1 ) {
-				array_push( $contact_array, $newcontact );
-			}
-		}
-	}
-
-	return array_map( 'array_filter', array_unique( $contact_array, SORT_REGULAR ) );
 }
 
 
@@ -1567,44 +1524,6 @@ add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
 
 /**
- * Returns an multidimensional array of taxonomies with
- * terms for a post.
- *
- * TODO no longer being used anywhere after implementing append_degree_metadata().
- * Should this be removed?
- *
- * @return array
- * @author Jim Barnes
- **/
-function get_post_tax_term_array(
-	$post_id,
-	$taxonomies=array( 'post_tag' ),
-	$scalars=false
-) {
-
-	$unordered_taxonomies = wp_get_post_terms(
-		$post_id,
-		$taxonomies
-	);
-
-	$retval = array();
-
-	foreach ( $unordered_taxonomies as $tax ) {
-		// Get the taxonomy type
-		$tax_name = $tax->taxonomy;
-		if ( $scalars ) {
-			$retval[$tax_name] = $tax;
-		} else {
-			$retval[$tax_name][] = $tax;
-		}
-
-	}
-
-	return $retval;
-}
-
-
-/**
  * Helper function that returns the first item in a numeric array.
  **/
 function get_first_result( $array_result ) {
@@ -1626,7 +1545,7 @@ function append_degree_metadata( $post ) {
 		$post->degree_email       = get_post_meta( $post->ID, 'degree_email', TRUE );
 		$post->degree_website     = get_post_meta( $post->ID, 'degree_website', TRUE );
 		$post->degree_pdf         = get_post_meta( $post->ID, 'degree_pdf', TRUE );
-		$post->degree_contacts    = get_degree_contacts( $post->ID );
+		$post->degree_contacts    = Degree::get_degree_contacts( $post );
 		$post->tax_college        = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
 		$post->tax_department     = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
 		$post->tax_program_type   = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );

@@ -1594,6 +1594,44 @@ class Degree extends CustomPostType{
 	}
 
 	/**
+	 * Returns a degree's contacts and their phone/email info
+	 * in an array of arrays.
+	 **/
+	public static function get_degree_contacts( $degree ) {
+		$contact_info = get_post_meta( $degree->ID, 'degree_contacts', true );
+		$contact_array = array();
+
+		// Split single contacts
+		$contacts = explode( '@@;@@', $contact_info );
+		foreach ( $contacts as $key=>$contact ) {
+			if ( $contact ) {
+				// Split individual fields
+				$contact = explode( '@@,@@', $contact );
+
+				$newcontact = array();
+
+				foreach ( $contact as $fieldset ) {
+					// Split out field key/values
+					$fields = explode( '@@:@@', $fieldset );
+					// Only get fields we need. Don't include fields that can result in
+					// duplicate contacts after sorting uniques (e.g. contact_id).
+					if ( $fields[0] == 'contact_name' || $fields[0] == 'contact_phone' || $fields[0] == 'contact_email' ) {
+						$newcontact[$fields[0]] = str_replace( '@@,@', '', $fields[1] );
+					}
+				}
+
+				// Only add the contact to the list if there are at least 2 pieces of info available
+				// e.g. don't add just a person's name to the list
+				if ( count( $newcontact ) > 1 ) {
+					array_push( $contact_array, $newcontact );
+				}
+			}
+		}
+
+		return array_map( 'array_filter', array_unique( $contact_array, SORT_REGULAR ) );
+	}
+
+	/**
 	 * Registers the custom post type and any other ancillary actions that are
 	 * required for the post to function properly.
 	 **/
