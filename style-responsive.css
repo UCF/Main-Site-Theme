@@ -544,25 +544,33 @@
     background-color: transparent;
   }
 
-  #degree-search-content .degree-title {
+  #degree-search-content .degree-title-wrap {
+    padding: 2px 0;
+  }
+  #degree-search-content .degree-title,
+  #degree-search-content .degree-details {
     display: block;
     float: left;
+    width: 100%;
+  }
+  #degree-search-content .degree-title {
     font-size: 15px;
     line-height: 1.1;
     margin-bottom: 4px;
-    width: 100%;
   }
-
+  #degree-search-content .degree-details {
+    text-align: left;
+  }
+  #degree-search-content .degree-details span {
+    display: inline !important; /* !important necessary to override visible-phone 'inherit' */
+  }
+  #degree-search-content .degree-program-type,
   #degree-search-content .degree-credits-count {
+    display: inline;
     font-size: 11.5px;
   }
-
-  #degree-search-content .degree-online {
-    clear: both;
-    display: block;
-    margin-top: 8px;
-    padding: 0;
-    width: 100%;
+  #degree-search-content .degree-program-type {
+    margin-bottom: 0;
   }
 
 

@@ -1216,7 +1216,7 @@ li.tagit-new input {
   display: table;
   width: 100%;
   margin-bottom: 0;
-  padding: 12px 15px;
+  padding: 0;
   position: relative;
 }
 #degree-search-content .degree-search-result:nth-child(2n) {
@@ -1228,29 +1228,46 @@ li.tagit-new input {
   background-color: #eee;
 }
 
-#degree-search-content .degree-title {
-  display: table-cell;
-  vertical-align: middle;
-  font-size: 16.5px;
-  margin-bottom: 8px;
-  width: 57%;
+#degree-search-content .degree-title-heading {
+  margin-bottom: 0;
+  width: 100%;
 }
-
-#degree-search-content .degree-title a {
+#degree-search-content .degree-title-wrap {
+  box-sizing: border-box;
+  display: table;
+  font-size: 16.5px;
+  margin-bottom: 0;
+  padding: 12px 15px;
+  width: 100%;
+}
+#degree-search-content .degree-title {
   border: 0 solid transparent;
+  box-sizing: border-box;
   color: #08c;
-  display: block;
+  display: table-cell;
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
   font-weight: 400;
   font-style: normal;
+  margin-bottom: 5px;
+  padding-right: 20px;
+  vertical-align: middle;
+  width: 75%;
 }
-#degree-search-content .degree-credits-count {
+#degree-search-content .degree-details {
+  box-sizing: border-box;
   color: #888;
-  font-size: 13px;
+  display: table-cell;
+  font-size: 12px;
   font-weight: normal;
-  display: block;
   line-height: 1.2;
-  margin-top: 4px;
+  text-align: right;
+  vertical-align: middle;
+}
+#degree-search-content .degree-details span {
+  display: block;
+}
+#degree-search-content .degree-program-type {
+  margin-bottom: 3px;
 }
 
 

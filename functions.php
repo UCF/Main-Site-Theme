@@ -1897,18 +1897,25 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			ob_start();
 			?>
 			<li class="degree-search-result">
-				<h3 class="degree-title">
-					<a class="ga-event" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
-						<?php echo $degree->post_title; ?>
+				<h3 class="degree-title-heading">
+					<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+						<span class="degree-title">
+							<?php echo $degree->post_title; ?>
+						</span>
+						<span class="degree-details">
+							<span class="degree-program-type">
+								<?php echo $degree->tax_program_type->name; ?>
+							</span>
+							<span class="visible-phone">&nbsp;&nbsp;&verbar;&nbsp;&nbsp;</span>
+							<span class="degree-credits-count">
+							<?php if ( $degree->degree_hours ): ?>
+								<?php echo $degree->degree_hours; ?> credit hours
+							<?php else: ?>
+								See catalog for credit hours
+							<?php endif; ?>
+							</span>
+						</span>
 					</a>
-					<span class="degree-credits-count">
-					<?php echo $degree->tax_program_type->name; ?> &mdash;&nbsp;
-					<?php if ( $degree->degree_hours ): ?>
-						<?php echo $degree->degree_hours; ?> credit hours
-					<?php else: ?>
-						See catalog for credit hours
-					<?php endif; ?>
-					</span>
 				</h3>
 			</li>
 			<?php
