@@ -777,9 +777,11 @@ var degreeSearch = function($) {
 
     $.fn.typeahead.Constructor.prototype.select = function(e) {
       var val = this.$menu.find('.active').attr('data-value');
-      this.$element
-        .val(this.updater(val))
-        .change();
+      if (val) {
+        this.$element
+          .val(this.updater(val))
+          .change();
+      }
 
       // Submit the form on select
       if (this.$element.parents('form').length) {
@@ -854,6 +856,20 @@ var degreeSearch = function($) {
 
       e.stopPropagation();
     }
+
+    $.fn.typeahead.Constructor.prototype.render = function(items) {
+      var that = this;
+
+      // Don't autoselect 1st suggestion
+      items = $(items).map(function (i, item) {
+        i = $(that.options.item).attr('data-value', item);
+        i.find('a').html(that.highlighter(item));
+        return i[0];
+      });
+
+      this.$menu.html(items);
+      return this;
+    };
 
     /**
      * #search-query specific typeahead init, event handlers
