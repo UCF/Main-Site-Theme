@@ -1279,14 +1279,11 @@ li.tagit-new input {
   margin-bottom: 25px;
 }
 #degree-single #breadcrumb-search {
-  display: none;
+  display: block;
   float: left;
   font-weight: 500;
   padding: 8px 0; /* match .breadcrumb top/bottom padding */
   width: 20%;
-}
-#degree-single #breadcrumb-search.visible {
-  display: block !important;
 }
 #degree-single #breadcrumbs .breadcrumb-hierarchy {
   background: #fff;
@@ -1298,9 +1295,6 @@ li.tagit-new input {
 #degree-single #breadcrumb-search + .breadcrumb-hierarchy {
   padding-left: 0;
   padding-right: 0;
-  width: 100%;
-}
-#degree-single #breadcrumb-search.visible + .breadcrumb-hierarchy {
   width: 80%;
 }
 

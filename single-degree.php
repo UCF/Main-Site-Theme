@@ -12,8 +12,8 @@
 		</div>
 
 		<div id="breadcrumbs" class="span12 clearfix">
-			<!-- Display .breadcrumb-search only if the user came from the degree search (js check) -->
-			<a id="breadcrumb-search" href="<?php echo preg_replace( '/^http(s)?:/', '', $search_page_url ); ?>">&laquo; Back to Degree Search</a>
+			<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
+			<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
 
 			<ul class="breadcrumb-hierarchy breadcrumb">
 				<li>

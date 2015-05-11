@@ -141,11 +141,7 @@
   }
 
   #degree-search-content .degree-title {
-    width: 60%;
-  }
-
-  #degree-search-content .degree-online {
-    width: 16%;
+    width: 72%;
   }
 
   #degree-single #breadcrumbs {
@@ -154,7 +150,7 @@
   #degree-single #breadcrumb-search {
 		width: 25%;
 	}
-	#degree-single #breadcrumb-search.visible + .breadcrumb-hierarchy {
+	#degree-single #breadcrumb-search + .breadcrumb-hierarchy {
 		width: 75%;
 	}
 

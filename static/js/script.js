@@ -1280,7 +1280,6 @@ var degreeProfile = function($) {
 
     if (prevPage !== '' && prevPage.indexOf(degreeSearchURL) > -1) {
       $breadcrumbSearch
-        .addClass('visible')
         .on('click', function(e) {
           e.preventDefault();
           window.history.go(-1);
