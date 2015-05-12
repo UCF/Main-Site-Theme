@@ -128,6 +128,21 @@
 	#azIndexList .nav li a { width: 30px; }
 	#azindex .az-jumpto-anchor { height: 100px; }
 
+  #degree-search-top,
+  #degree-search-top input,
+  #degree-search-top select,
+  #degree-search-top option,
+  #degree-search-sidebar,
+  #degree-search-sidebar input,
+  #degree-search-sidebar select,
+  #degree-search-sidebar option,
+  #degree-search-content,
+  #degree-search-content input,
+  #degree-search-content select,
+  #degree-search-content option {
+    font-size: 13px;
+  }
+
   #degree-search-top .degree-search-sort-inner {
     /* We assume that browsers that support media queries can support box-sizing */
     box-sizing: border-box;
@@ -140,8 +155,15 @@
     width: 34%;
   }
 
+  #degree-search-content .degree-title-wrap {
+    font-size: 15.5px;
+  }
   #degree-search-content .degree-title {
     width: 72%;
+  }
+
+  #degree-search-sidebar label {
+    font-size: 13px;
   }
 
   #degree-single #breadcrumbs {
@@ -373,6 +395,10 @@
     -webkit-transform: scale(1.25);
   }
 
+  #degree-search-content {
+    padding-left: 0;
+  }
+
   #degree-search-sidebar .popover-content {
     max-height: 250px;
     overflow-x: hidden;
@@ -596,7 +622,7 @@
 
 	#degree-single #contentcol .degree-details,
   #degree-single #sidebar_right .contact-info-dl {
-    padding: 0;
+    padding: 0 0 10px 0;
   }
   #degree-single #contentcol .degree-details dt,
   #degree-single #contentcol .degree-details dd,
