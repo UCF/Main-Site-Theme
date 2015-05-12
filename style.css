@@ -1498,6 +1498,8 @@ li.tagit-new input {
 #degree-single #sidebar_right .contact-info-dl dd {
   clear: right;
   margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 80%;
 }
 
