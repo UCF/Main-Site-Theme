@@ -1601,9 +1601,12 @@ function fetch_degree_data( $params ) {
 		's' => ''
 	);
 
+	$search_query = false;
+
 	if ( $params ) {
 		if ( isset( $params['search-query'] ) ) {
 			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
+			$search_query = true;
 		}
 
 		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
@@ -1627,12 +1630,32 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
+
 		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
-			$params['tax_query']['relation'] = 'AND';
+			$args['tax_query']['relation'] = 'AND';
 		}
 	}
 
 	$posts = get_posts( $args );
+
+	if ( $search_query ) {
+		$args['s'] = '';
+		$args['tax_query'][] = array(
+			'taxonomy' => 'degree_keywords',
+			'field' => 'name',
+			'terms' => htmlspecialchars( urlencode( $params['search-query'] ) ),
+		);
+
+		$keyword_posts = get_posts( $args );
+
+		$merged_posts = array_merge( $posts, $keyword_posts );
+
+		unset( $posts );
+
+		foreach( $merged_posts as $post ) {
+			$posts[$post->ID] = $post;
+		}
+	}
 
 	$data = array();
 	if ( $posts ) {

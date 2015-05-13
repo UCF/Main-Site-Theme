@@ -238,4 +238,24 @@ class Departments extends CustomTaxonomy
 		$hierarchical = True,
 		$show_admin_column = True;
 } // END class 
+
+class DegreeKeywords extends CustomTaxonomy
+{
+	public
+		$name               = 'degree_keywords',
+		$general_name       = 'Degree Keywords',
+		$singular           = 'Degree Keyword',
+		$search_items       = 'Search Degree Keywords',
+		$popular_items      = 'Popular Degree Keywords',
+		$all_items          = 'All Degree Keywords',
+		$parent_item        = 'Parent Degree Keyword',
+		$parent_item_colon  = 'Parent Degree Keyword:',
+		$edit_item          = 'Edit Degree Keyword',
+		$update_item        = 'Update Degree Keyword',
+		$add_new_item       = 'Add New Degree Keyword',
+		$new_item_name      = 'New Degree Keyword',
+
+		$hierarchical       = False,
+		$show_admin_coumn   = True;
+}
 ?>
