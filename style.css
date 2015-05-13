@@ -939,10 +939,12 @@ li.tagit-new input {
 #academics-search .lead {
   font-family: 'Gotham SSm 2r', 'Gotham SSm A', 'Gotham SSm B';
   font-style: normal;
+  font-size:33px;
   font-weight: 200;
   letter-spacing: -.012em;
   margin: 10px 0;
   text-align: center;
+  line-height:56px;
 }
 #academics-search .lead strong,
 #academics-search .lead b {
