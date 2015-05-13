@@ -177,7 +177,8 @@ Config::$custom_taxonomies = array(
 	'AudienceRoles',
 	'ProgramTypes',
 	'Colleges',
-	'Departments'
+	'Departments',
+	'DegreeKeywords'
 );
 
 Config::$body_classes = array('default');

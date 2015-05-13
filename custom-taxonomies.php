@@ -1,17 +1,17 @@
 <?php
 /**
- * Abstract class for defining custom taxonomies.  
- * 
+ * Abstract class for defining custom taxonomies.
+ *
  **/
 abstract class CustomTaxonomy {
 	public
 		$name			= 'custom_taxonomy',
-		
+
 		// Do not register the taxonomy with the post type here.
 		// Register it on the `taxonomies` attribute of the post type in
 		// custom-post-types.php
-		$object_type	= Array(), 
-		
+		$object_type	= Array(),
+
 		$general_name		    = 'Post Tags',
 		$singular_name      = 'Post Tag',
 		$search_items       = 'Search Tags',
@@ -24,7 +24,7 @@ abstract class CustomTaxonomy {
 		$add_new_item       = 'Add New Tag',
 		$new_item_name      = 'New Tag Name',
 		$menu_name          = NULL,
-		
+
 		$public                = True,
 		$show_in_name_menus    = NULL,
 		$show_ui               = NULL,
@@ -35,19 +35,19 @@ abstract class CustomTaxonomy {
 		$query_var             = NULL,
 		$capabilities          = Array(),
 		$show_admin_column     = False;
-	
+
 	function __construct() {
 		if(is_null($this->show_in_name_menus)) $this->show_in_name_menus = $this->public;
 		if(is_null($this->show_ui)) $this->show_ui = $this->public;
 		if(is_null($this->show_tagcloud)) $this->show_tagcloud = $this->show_ui;
 		if(is_null($this->menu_name)) $this->menu_name = $this->general_name;
 	}
-	
+
 	public function options($key){
 		$vars = get_object_vars($this);
 		return $vars[$key];
 	}
-	
+
 	public function labels() {
 		return Array(
 				'name'                       => _x($this->options('general_name'), 'taxonomy general name'),
@@ -67,7 +67,7 @@ abstract class CustomTaxonomy {
 				'menu_name'                  => __($this->options('menu_name'))
 				);
 	}
-	
+
 	public function register() {
 		$args = Array(
 				'labels'                => $this->labels(),
@@ -107,9 +107,9 @@ class OrganizationalGroups extends CustomTaxonomy
 		$update_item        = 'Update Organizational Group',
 		$add_new_item       = 'Add New Organizational Group',
 		$new_item_name      = 'New Tag Organizational Group',
-		
+
 		$hierarchical = True;
-} // END class 
+} // END class
 
 
 /**
@@ -132,9 +132,9 @@ class Keywords extends CustomTaxonomy
 		$update_item        = 'Update Keyword',
 		$add_new_item       = 'Add New Keyword',
 		$new_item_name      = 'New Keyword',
-		
+
 		$hierarchical = False;
-} // END class 
+} // END class
 
 
 /**
@@ -157,9 +157,9 @@ class AudienceRoles extends CustomTaxonomy
 		$update_item        = 'Update Audience Role',
 		$add_new_item       = 'Add New Audience Role',
 		$new_item_name      = 'New Audience Role',
-		
+
 		$hierarchical = True;
-} // END class 
+} // END class
 
 
 /**
@@ -182,10 +182,10 @@ class ProgramTypes extends CustomTaxonomy
 		$update_item        = 'Update Program Type',
 		$add_new_item       = 'Add New Program Type',
 		$new_item_name      = 'New Program Type',
-		
+
 		$hierarchical = True,
 		$show_admin_column = True;
-} // END class 
+} // END class
 
 
 /**
@@ -208,10 +208,10 @@ class Colleges extends CustomTaxonomy
 		$update_item        = 'Update College',
 		$add_new_item       = 'Add New College',
 		$new_item_name      = 'New College',
-		
+
 		$hierarchical = True,
 		$show_admin_column = True;
-} // END class 
+} // END class
 
 
 /**
@@ -234,8 +234,28 @@ class Departments extends CustomTaxonomy
 		$update_item        = 'Update Department',
 		$add_new_item       = 'Add New Department',
 		$new_item_name      = 'New Department',
-		
+
 		$hierarchical = True,
 		$show_admin_column = True;
-} // END class 
+} // END class
+
+
+class DegreeKeywords extends CustomTaxonomy
+{
+	public
+		$name               = 'degree_keywords',
+		$general_name       = 'Degree Keywords',
+		$singular           = 'Degree Keyword',
+		$search_items       = 'Search Degree Keywords',
+		$popular_items      = 'Popular Degree Keywords',
+		$all_items          = 'All Degree Keywords',
+		$parent_item        = 'Parent Degree Keyword',
+		$parent_item_colon  = 'Parent Degree Keyword:',
+		$edit_item          = 'Edit Degree Keyword',
+		$update_item        = 'Update Degree Keyword',
+		$add_new_item       = 'Add New Degree Keyword',
+		$new_item_name      = 'New Degree Keyword',
+		$hierarchical       = False,
+		$show_admin_coumn   = True;
+}
 ?>

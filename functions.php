@@ -1588,6 +1588,44 @@ function append_degree_metadata( $post ) {
 }
 
 
+function degree_search_with_keywords( $search, &$wp_query ) {
+	if (
+		isset( $wp_query->query_vars['s'] )
+		&& !empty( $wp_query->query_vars['s'] )
+		&& isset( $wp_query->query_vars['post_type'] )
+		&& $wp_query->query_vars['post_type'] == 'degree'
+	) {
+	    global $wpdb;
+
+	    if ( empty( $search ) ) {
+	        return $search;
+	    }
+
+	    $search_term = $wp_query->query_vars[ 's' ];
+
+	    $search = " AND (
+	        ($wpdb->posts.post_title LIKE '%$search_term%')
+	        OR ($wpdb->posts.post_content LIKE '%$search_term%')
+	        OR EXISTS
+	        (
+	            SELECT * FROM $wpdb->terms
+	            INNER JOIN $wpdb->term_taxonomy
+	                ON $wpdb->term_taxonomy.term_id = $wpdb->terms.term_id
+	            INNER JOIN $wpdb->term_relationships
+	                ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id
+	            WHERE taxonomy = 'degree_keywords'
+	                AND object_id = $wpdb->posts.ID
+	                AND $wpdb->terms.name LIKE '%$search_term%'
+	        )
+	    )";
+	}
+
+    return $search;
+}
+
+add_filter( 'posts_search', 'degree_search_with_keywords', 500, 2 );
+
+
 /**
  * Handles the retrieval of Degree posts from WordPress for the Degree Search.
  **/
@@ -1628,7 +1666,7 @@ function fetch_degree_data( $params ) {
 			);
 		}
 		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
-			$params['tax_query']['relation'] = 'AND';
+			$args['tax_query']['relation'] = 'AND';
 		}
 	}
 

@@ -1521,7 +1521,7 @@ class Degree extends CustomPostType{
 		$use_title      = True,
 		$use_metabox    = True,
 		$use_shortcode  = True,
-		$taxonomies		= array('program_types', 'colleges', 'departments');
+		$taxonomies		= array('program_types', 'colleges', 'departments', 'degree_keywords');
 
 	public function fields(){
 		$prefix = $this->options('name').'_';
