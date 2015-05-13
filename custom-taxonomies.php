@@ -237,9 +237,14 @@ class Departments extends CustomTaxonomy
 
 		$hierarchical = True,
 		$show_admin_column = True;
-} // END class
+}
 
 
+/**
+ * Describes keywords for Degrees.
+ *
+ * @author Jim Barnes
+ **/
 class DegreeKeywords extends CustomTaxonomy
 {
 	public
@@ -255,6 +260,7 @@ class DegreeKeywords extends CustomTaxonomy
 		$update_item        = 'Update Degree Keyword',
 		$add_new_item       = 'Add New Degree Keyword',
 		$new_item_name      = 'New Degree Keyword',
+
 		$hierarchical       = False,
 		$show_admin_coumn   = True;
 }
