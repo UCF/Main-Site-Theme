@@ -1708,11 +1708,12 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<span class="for">in </span>
 		<?php
 		$count = 1;
-		foreach ( $params['program-type'] as $program ):
-			$program_name = get_term_by( 'slug', $program, 'program_types' )->name . 's';
+		foreach ( $params['program-type'] as $program_slug ):
+			$program = get_term_by( 'slug', $program_slug, 'program_types' );
+			$program_name = $program->name;
 		?>
-			<span class="result">
-				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program; ?>"></span>
+			<span class="result <?php echo $program_slug; ?>">
+				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program_slug; ?>"></span>
 				<?php echo $program_name; ?>
 			</span>
 			<?php if ( $count < count( $params['program-type'] ) ): ?>
@@ -1731,11 +1732,11 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<span class="for">at </span>
 		<?php
 		$count = 1;
-		foreach ( $params['college'] as $college ):
-			$college_name = 'the ' . get_term_by( 'slug', $college, 'colleges' )->name;
+		foreach ( $params['college'] as $college_slug ):
+			$college_name = 'the ' . get_term_by( 'slug', $college_slug, 'colleges' )->name;
 		?>
 			<span class="result">
-				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college; ?>"></span>
+				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college_slug; ?>"></span>
 				<?php echo $college_name; ?>
 			</span>
 			<?php if ( $count < count( $params['college'] ) ): ?>
@@ -1773,8 +1774,8 @@ function get_degree_search_search_again( $filters, $params ) {
 							'search-query' => $params['search-query']
 						) );
 					?>
-						<a class="search-again-link" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
-							<?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?>s
+						<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
+							<?php if ( isset( $term->alias ) ) { echo $term->alias; } else { echo $term->name; } ?>s
 						</a>
 					<?php endif; ?>
 				<?php endforeach; ?>
@@ -1939,7 +1940,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 					<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
 						<span class="degree-title">
 							<?php echo $degree->post_title; ?>
-							<span class="degree-program-type hidden-phone">
+							<span class="degree-program-type hidden-phone <?php echo $degree->tax_program_type->slug; ?>">
 								<?php echo $degree->tax_program_type->name; ?>
 							</span>
 						</span>
@@ -2055,21 +2056,31 @@ function get_degree_search_filters() {
 	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
 	if ( $colleges ) {
 		foreach ( $colleges as $college ) {
-			$shortname = get_term_custom_meta( $college->term_id, 'colleges', 'college_shortname' );
-			if ( $shortname ) {
-				$college->shortname = $shortname;
+			$alias = get_term_custom_meta( $college->term_id, 'colleges', 'college_alias' );
+			if ( $alias ) {
+				$college->alias = $alias;
 			}
 		}
-		// If shortnames are available, alphabetize by them
+		// If aliases are available, alphabetize by them
 		usort( $colleges, function( $a, $b ) {
-			$a_name = isset( $a->shortname ) ? $a->shortname : $a->name;
-			$b_name = isset( $b->shortname ) ? $b->shortname : $b->name;
+			$a_name = isset( $a->alias ) ? $a->alias : $a->name;
+			$b_name = isset( $b->alias ) ? $b->alias : $b->name;
 			return strcmp( $a_name, $b_name );
 		} );
 	}
 
+	$program_types = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+	if ( $program_types ) {
+		foreach ( $program_types as $program ) {
+			$alias = get_term_custom_meta( $program->term_id, 'program_types', 'program_type_alias' );
+			if ( $alias ) {
+				$program->alias = $alias;
+			}
+		}
+	}
+
 	// Pass orderby degree_program_order to ensure our custom filter is used.
-	$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+	$filters['program-type']['terms'] = $program_types;
 	$filters['college']['terms'] = $colleges;
 
 	return $filters;
@@ -2130,52 +2141,52 @@ function save_term_custom_meta( $term_id, $taxonomy ) {
  * Adds custom "meta fields" for College taxonomy terms.
  **/
 
-// Prints label for college shortname field.
-function colleges_shortname_label() {
+// Prints label for college alias field.
+function colleges_alias_label() {
 	ob_start();
 ?>
-	<label for="term_meta[college_shortname]"><?php echo __( 'Short Name' ); ?></label>
+	<label for="term_meta[college_alias]"><?php echo __( 'Alias' ); ?></label>
 <?php
 	return ob_get_clean();
 }
 
-// Prints field for college shortname.
-function colleges_shortname_field( $value=null ) {
+// Prints field for college alias.
+function colleges_alias_field( $value=null ) {
 	ob_start();
 ?>
-	<input type="text" name="term_meta[college_shortname]" id="term_meta[college_shortname]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
+	<input type="text" name="term_meta[college_alias]" id="term_meta[college_alias]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
 	<p class="description"><?php echo __( 'Specify a shorter name for this college; used in Degree Search filters.' ); ?></p>
 <?php
 	return ob_get_clean();
 }
 
-// Adds shortname field to Add College form.
-function colleges_add_shortname_field() {
+// Adds alias field to Add College form.
+function colleges_add_alias_field() {
 ?>
 	<div class="form-field">
-		<?php echo colleges_shortname_label(); ?>
-		<?php echo colleges_shortname_field(); ?>
+		<?php echo colleges_alias_label(); ?>
+		<?php echo colleges_alias_field(); ?>
 	</div>
 <?php
 }
-add_action( 'colleges_add_form_fields', 'colleges_add_shortname_field', 10, 2 );
+add_action( 'colleges_add_form_fields', 'colleges_add_alias_field', 10, 2 );
 
-// Adds shortname field to Edit College form.
-function colleges_edit_shortfield_field( $term ) {
+// Adds alias field to Edit College form.
+function colleges_edit_alias_field( $term ) {
 	$term_id = $term->term_id;
-	$shortname = get_term_custom_meta( $term_id, 'colleges', 'college_shortname' );
+	$alias = get_term_custom_meta( $term_id, 'colleges', 'college_alias' );
 ?>
 	<tr class="form-field">
 		<th scope="row" valign="top">
-			<?php echo colleges_shortname_label(); ?>
+			<?php echo colleges_alias_label(); ?>
 		</th>
 		<td>
-			<?php echo colleges_shortname_field( $shortname ); ?>
+			<?php echo colleges_alias_field( $alias ); ?>
 		</td>
 	</tr>
 <?php
 }
-add_action( 'colleges_edit_form_fields', 'colleges_edit_shortfield_field', 10, 2 );
+add_action( 'colleges_edit_form_fields', 'colleges_edit_alias_field', 10, 2 );
 
 // Prints label for college url field.
 function colleges_url_label() {
@@ -2236,7 +2247,7 @@ function colleges_add_columns( $columns ) {
 	$new_columns = array(
 	    'cb' => '<input type="checkbox" />',
 	    'name' => __('Name'),
-	    'shortname' => __('Short Name'),
+	    'alias' => __('Alias'),
 	    'description' => __('Description'),
 	    'slug' => __('Slug'),
 	    'url' => __('URL'),
@@ -2249,10 +2260,10 @@ add_filter( 'manage_edit-colleges_columns', 'colleges_add_columns' );
 // Adds content to Colleges columns
 function colleges_render_columns( $out, $name, $term_id ) {
     switch ( $name ) {
-        case 'shortname':
-        	$shortname = get_term_custom_meta( $term_id, 'colleges', 'college_shortname' );
-        	if ( $shortname ) {
-        		$out .= $shortname;
+        case 'alias':
+        	$alias = get_term_custom_meta( $term_id, 'colleges', 'college_alias' );
+        	if ( $alias ) {
+        		$out .= $alias;
         	}
         	else {
         		$out .= '&mdash;';
@@ -2326,7 +2337,56 @@ function program_types_edit_cta_field( $term ) {
 }
 add_action( 'program_types_edit_form_fields', 'program_types_edit_cta_field', 10, 2 );
 
-// Saves Program Type CTA field value.
+
+// Prints label for program type color field.
+function program_types_color_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_color]"><?php echo __( 'Color' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type alias.
+function program_types_color_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[program_type_color]" id="term_meta[program_type_color]"<?php if ( $value ) { ?> value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify a color that should represent this program type.  Avoid shades of blue, which is used in primary links in the Degree Search.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds color field to Add Program Type form.
+function program_types_add_color_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_color_label(); ?>
+		<?php echo program_types_color_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_color_field', 10, 2 );
+
+// Adds color field to Edit Program Type form.
+function program_types_edit_color_field( $term ) {
+	$term_id = $term->term_id;
+	$color = get_term_custom_meta( $term_id, 'program_types', 'program_type_color' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_color_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_color_field( $color ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_color_field', 10, 2 );
+
+
+// Saves Program Type custom field values.
 function save_program_types_custom_meta( $term_id ) {
 	save_term_custom_meta( $term_id, 'program_types' );
 }
@@ -2337,12 +2397,13 @@ add_action( 'create_program_types', 'save_program_types_custom_meta', 10, 2 );
 function program_types_add_columns( $columns ) {
 	$new_columns = array(
 	    'cb' => '<input type="checkbox" />',
-	    'name' => __('Name'),
-	    'cta' => __('Call to Action box'),
-	    'description' => __('Description'),
-	    'slug' => __('Slug'),
-	    'url' => __('URL'),
-	    'posts' => __('Posts')
+	    'name' => __( 'Name' ),
+	    'color' => __( 'Color' ),
+	    'cta' => __( 'Call to Action box' ),
+	    'description' => __( 'Description' ),
+	    'slug' => __( 'Slug' ),
+	    'url' => __( 'URL' ),
+	    'posts' => __( 'Posts' )
 	);
 	return $new_columns;
 }
@@ -2351,6 +2412,15 @@ add_filter( 'manage_edit-program_types_columns', 'program_types_add_columns' );
 // Adds content to Program Type columns
 function program_types_render_columns( $out, $name, $term_id ) {
     switch ( $name ) {
+    	case 'color':
+			$color = get_term_custom_meta( $term_id, 'program_types', 'program_type_color' );
+			if ( $color ) {
+				$out .= '<span style="color: ' . $color . ';">' . $color . '</span>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+		    break;
         case 'cta':
         	$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
         	if ( $cta ) {
@@ -2458,5 +2528,6 @@ function degree_search_404_redirect() {
 	}
 }
 add_action( 'template_redirect', 'degree_search_404_redirect' );
+
 
 ?>
