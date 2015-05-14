@@ -938,13 +938,13 @@ li.tagit-new input {
 /* Academics Search, Single Degree Programs */
 #academics-search .lead {
   font-family: 'Gotham SSm 2r', 'Gotham SSm A', 'Gotham SSm B';
+  font-size: 30px;
   font-style: normal;
-  font-size:33px;
   font-weight: 200;
   letter-spacing: -.012em;
+  line-height: 1.4;
   margin: 10px 0;
   text-align: center;
-  line-height:56px;
 }
 #academics-search .lead strong,
 #academics-search .lead b {
@@ -1059,7 +1059,7 @@ li.tagit-new input {
 }
 
 #degree-search-top .degree-search-form {
-  margin-top: 20px;
+  margin-top: 25px;
   text-align: center;
 }
 #degree-search-top .degree-search-form-inner {
@@ -1121,7 +1121,7 @@ li.tagit-new input {
 
 #degree-search-top .degree-search-sort {
   border-bottom: 1px solid #e5e5e5;
-  margin-top: 25px;
+  margin-top: 30px;
   width: 100%;
 }
 #degree-search-top .degree-search-sort-inner {
@@ -1154,16 +1154,13 @@ li.tagit-new input {
 }
 #degree-search-top .degree-result-count .result,
 #degree-search-content .degree-search-again-container a {
-  background-color: #eee;
-  border: 1px solid #ddd;
-  border-radius: 20px;
   color: #000;
   display: inline-block;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 500;
   margin: 2px 0;
-  padding: 0 8px 2px 8px;
+  padding: 0 8px;
 }
 #degree-search-top .degree-result-count .result .close {
   display: block;
