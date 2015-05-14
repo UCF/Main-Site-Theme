@@ -85,9 +85,6 @@
 							</dd>
 							<?php endif; ?>
 						</dl>
-						<?php if ( $post->tuition_estimates ) : ?>
-							<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
-						<?php endif; ?>
 					</div>
 				</div>
 
@@ -118,7 +115,9 @@
 					<h2>About This Degree</h2>
 					<?php the_content(); ?>
 				<?php } ?>		
-								
+				<?php if ( $post->tuition_estimates ) : ?>
+					<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
+				<?php endif; ?>		
 				<div class="social-wrap">
 					<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
 				</div>

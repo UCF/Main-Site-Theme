@@ -1621,8 +1621,6 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 
 		$feed_url .= '/?' . $query_string;
 
-		var_dump( $feed_url );
-
 		$opts = array(
 			'http' => array(
 				'method' => 'GET',
