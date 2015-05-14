@@ -1939,15 +1939,18 @@ function get_degree_search_contents( $return=false, $params=null ) {
 					<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
 						<span class="degree-title">
 							<?php echo $degree->post_title; ?>
-						</span>
-						<span class="degree-details">
-							<span class="degree-program-type">
+							<span class="degree-program-type hidden-phone">
 								<?php echo $degree->tax_program_type->name; ?>
 							</span>
-							<span class="visible-phone">&nbsp;&nbsp;&verbar;&nbsp;&nbsp;</span>
+						</span>
+						<span class="degree-details">
+							<span class="degree-program-type visible-phone">
+								<?php echo $degree->tax_program_type->name; ?>
+							</span>
+							<span class="visible-phone degree-details-separator">&verbar;</span>
 							<span class="degree-credits-count">
 							<?php if ( $degree->degree_hours ): ?>
-								<?php echo $degree->degree_hours; ?> credit hours
+								<span class="number"><?php echo $degree->degree_hours; ?></span> credit hours
 							<?php else: ?>
 								See catalog for credit hours
 							<?php endif; ?>
