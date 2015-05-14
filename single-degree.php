@@ -41,15 +41,6 @@
 							<dt>Degree:</dt>
 							<dd><?php echo $post->tax_program_type->name; ?></dd>
 
-							<dt>Total Credit Hours:</dt>
-							<dd>
-								<?php if ( $post->degree_hours ): ?>
-									<?php echo $post->degree_hours; ?> credit hours
-								<?php else: ?>
-									<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
-								<?php endif; ?>
-							</dd>
-
 							<?php if ( $post->tax_college ): ?>
 							<dt>College:</dt>
 							<dd>
@@ -76,6 +67,15 @@
 								<?php endif; ?>
 							</dd>
 							<?php endif; ?>
+
+							<dt>Total Credit Hours:</dt>
+							<dd>
+								<?php if ( $post->degree_hours ): ?>
+									<?php echo $post->degree_hours; ?> credit hours
+								<?php else: ?>
+									<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+								<?php endif; ?>
+							</dd>
 						</dl>
 					</div>
 				</div>
@@ -89,26 +89,31 @@
 						Visit Program Website
 					</a>
 					<?php endif; ?>
-				</div>
+				</div>	
 
 				<!-- Degree description -->
-				<?php if ( $post->degree_description ) { ?>
-					<p><?php echo apply_filters( 'the_content', $post->degree_description ); ?></p>
-				<?php } else { ?>
-					<p>You can find a full description of this degree in the <a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
-				<?php } ?>
+				<div class="degree-description">
+					<?php if ( $post->degree_description ) { ?>
+						<?php echo apply_filters( 'the_content', $post->degree_description ); ?>
+					<?php } else { ?>
+							You can find a full description of this degree in the 
+							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" 
+								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
+					<?php } ?>
+				</div>	
 
 				<?php if ( $post->post_content ) { ?>
 					<hr>
 					<h2>About This Degree</h2>
 					<?php the_content(); ?>
-				<?php } ?>
+				<?php } ?>		
+								
+				<div class="social-wrap">
+					<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
+				</div>
 
 				<?php echo display_degree_callout( $post->ID ); ?>
 			</article>
-			<div class="social-wrap">
-				<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
-			</div>
 		</div>
 		<div id="sidebar_right" class="span4 notoppad" role="complementary">
 
@@ -124,6 +129,7 @@
 				</a>
 				<?php endif; ?>
 			</div>
+			
 			<?php
 			if ( $post->degree_phone || $post->degree_email || $post->degree_contacts ) : ?>
 				<h2>Contact</h2>
