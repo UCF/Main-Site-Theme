@@ -1523,9 +1523,15 @@ li.tagit-new input {
 #degree-single .cta-wrap > h3:first-child {
   margin-top: 10px !important;
 }
-#degree-single .cta-wrap .btn {
+#degree-single .cta-wrap a.btn {
+  background-color: #ffc904;
+  color: #000 !important;
   max-width: 240px;
   margin-top: 10px;
+}
+
+#degree-single .cta-wrap a.btn:hover {
+  background-color: #f9c404;
 }
 
 /* Social buttons */
