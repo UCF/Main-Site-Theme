@@ -1033,6 +1033,42 @@ ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: poin
 
 
 /**
+ * jQuery UI Overrides
+ *
+ * Bootstrap and jQuery UI don't play nicely together.  GravityForms
+ * datepicker fields implement the jQuery UI datepicker plugin.
+ **/
+.ui-datepicker {
+  width: 230px !important;
+}
+
+.ui-datepicker-month,
+.ui-datepicker-year {
+  width: auto !important;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.ui-datepicker-prev .ui-icon,
+.ui-datepicker-next .ui-icon {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.ui-datepicker th {
+  text-shadow: 0 0 0 transparent !important;
+}
+
+
+/**
  * Bootstrap Overrides
  *
  * Unfortunately, adding the necessary <a> styles (color, border-bottom) to
