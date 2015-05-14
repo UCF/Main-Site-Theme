@@ -74,16 +74,6 @@
 									<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
 								<?php endif; ?>
 							</dd>
-							<?php if ( $post->tuition_estimates ) : ?>
-							<dt>In State Tuition:</dt>
-							<dd>
-								$<?php echo number_format( $post->tuition_estimates['in_state_rate'] ); ?>*
-							</dd>
-							<dt>Out of State Tuition:</dt>
-							<dd>
-								$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'] ); ?>*
-							</dd>
-							<?php endif; ?>
 						</dl>
 					</div>
 				</div>
@@ -114,10 +104,7 @@
 					<hr>
 					<h2>About This Degree</h2>
 					<?php the_content(); ?>
-				<?php } ?>		
-				<?php if ( $post->tuition_estimates ) : ?>
-					<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
-				<?php endif; ?>		
+				<?php } ?>			
 				<div class="social-wrap">
 					<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
 				</div>
@@ -206,6 +193,74 @@
 				endif;
 			endif
 			?>
+		<?php if ( $post->tuition_estimates ) : ?>
+			<div class="tuition-info">
+			<h2>Tuition and Fees</h2>
+				<ul class="nav nav-tabs" id="tuition-tabs">
+					<li class="active"><a href="#in-state" data-toggle="tab">In State Tuition</a></li>
+					<li><a href="#out-of-state" data-toggle="tab">Out of State Tuition</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="in-state">
+						<dl class="tuition-info-dl">
+							<dt>National Average</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php 
+								echo number_format(
+									($post->tuition_estimates['in_state_national_rate'] - $post->tuition_estimates['in_state_rate'] ),
+									2
+								);
+								?>
+							</dd>
+							<dt>National Average Program</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php 
+								echo number_format(
+									( $post->tuition_estimates['in_state_program_national_rate'] - $post->tuition_estimates['in_state_program_rate'] ),
+									2
+								);
+								?>
+							</dd>
+						</dl>
+					</div>
+					<div class="tab-pane" id="out-of-state">
+						<dl class="tuition-info-dl">
+							<dt>National Average</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php 
+								echo number_format(
+									($post->tuition_estimates['out_of_state_national_rate'] - $post->tuition_estimates['out_of_state_rate'] ),
+									2
+								);
+								?>
+							</dd>
+							<dt>National Average Program</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php 
+								echo number_format(
+									( $post->tuition_estimates['out_of_state_program_national_rate'] - $post->tuition_estimates['out_of_state_program_rate'] ),
+									2
+								);
+								?>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<!--<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>-->
+			</div>
+		<?php endif; ?>
 		</div>
 	</div>
 	<input type="hidden" id="program_type" value="<?php echo $post->tax_program_type->slug; ?>" />

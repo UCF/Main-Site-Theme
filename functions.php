@@ -1593,20 +1593,31 @@ function append_degree_metadata( $post, $tuition_data ) {
 
 function get_tuition_estimate( $program_type, $credit_hours ) {
 	$theme_options = get_option(THEME_OPTIONS_NAME);
+	// Documentation for this feed can be found at http://tuitionfees.ikm.ucf.edu/feed/
 	$feed_url = $theme_options['tuition_fee_url'];
+	$national_average = 0;
 
 	if ( $program_type && $credit_hours ) {
 		$program = '';
 		switch( $program_type->slug ) {
 			case 'undergraduate-degree':
 			case 'minor':
+			case 'articulated-program':
 				$program = 'UnderGrad';
+				$national_in_state_average = $theme_options['national_undergraduate_in_state_average'];
+				$national_out_of_state_average = $theme_options['national_undergraduate_out_of_state_average'];
 				break;
 			case 'graduate-degree':
 				$program = 'Grad';
+				$national_in_state_average = $theme_options['national_graduate_in_state_average'];
+				$national_out_of_state_average = $theme_options['national_graduate_out_of_state_average'];
 				break;
+			case 'accelerated-program':
+				return null;
 			default:
 				$program = 'UnderGrad';
+				$national_in_state_average = $theme_options['national_undergraduate_in_state_average'];
+				$national_out_of_state_average = $theme_options['national_undergraduate_out_of_state_average'];
 				break;
 		}
 
@@ -1645,12 +1656,21 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 				}
 			}
 
-			$in_state_rate = $in_state_estimated_fees * $credit_hours;
-			$out_of_state_rate = $out_of_state_estimated_fees * $credit_hours;
+			$in_state_program_rate = $in_state_estimated_fees * $credit_hours;
+			$out_of_state_program_rate = $out_of_state_estimated_fees * $credit_hours;
+
+			$in_state_program_national_rate = $national_in_state_average * $credit_hours;
+			$out_of_state_program_national_rate = $national_out_of_state_average * $credit_hours;
 
 			return array(
-				'in_state_rate' => $in_state_rate,
-				'out_of_state_rate' => $out_of_state_rate
+				'in_state_rate' => $in_state_estimated_fees,
+				'out_of_state_rate' => $out_of_state_estimated_fees,
+				'in_state_program_rate' => $in_state_program_rate,
+				'out_of_state_program_rate' => $out_of_state_program_rate,
+				'in_state_national_rate' => $national_in_state_average,
+				'out_of_state_national_rate' => $national_out_of_state_average,
+				'in_state_program_national_rate' => $in_state_program_national_rate,
+				'out_of_state_program_national_rate' => $out_of_state_program_national_rate
 			);
 		} else {
 			return null;

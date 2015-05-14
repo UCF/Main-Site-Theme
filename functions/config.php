@@ -290,6 +290,30 @@ Config::$theme_settings = array(
 			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
 			'value'       => $theme_options['tuition_fee_url'],
 		)),
+		new TextField(array(
+			'name'        => 'National Undergraduate Tuition Average (In State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_undergraduate_in_state_average]',
+			'description' => 'The average cost per credit hours nationally for undergraduate courses',
+			'value'       => $theme_options['national_undergraduate_in_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'National Undergraduate Tuition Average (Out of State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_undergraduate_out_of_state_average]',
+			'description' => 'The average cost per credit hours nationally for undergraduate courses',
+			'value'       => $theme_options['national_undergraduate_out_of_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'National Graduate Tuition Average (In State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_graduate_in_state_average]',
+			'description' => 'The average cost per credit hours nationally for graduate courses',
+			'value'       => $theme_options['national_graduate_in_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'National Graduate Tuition Average (Out of State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_graduate_out_of_state_average]',
+			'description' => 'The average cost per credit hours nationally for graduate courses',
+			'value'       => $theme_options['national_graduate_out_of_state_average'],
+		)),
 	),
 	'Events' => array(
 		new SelectField(array(
