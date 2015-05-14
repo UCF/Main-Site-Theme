@@ -1069,6 +1069,14 @@ ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: poin
 
 
 /**
+ * Bootstrap Tags Input js plugin overrides
+ **/
+.bootstrap-tagsinput .tag {
+  font-family: "Helvetica Neue", "Helvetica-Neue", "Helvetica", sans-serif;
+}
+
+
+/**
  * Bootstrap Overrides
  *
  * Unfortunately, adding the necessary <a> styles (color, border-bottom) to

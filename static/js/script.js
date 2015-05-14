@@ -755,6 +755,16 @@ var gaEventTracking = function($) {
 }
 
 
+var announcementKeywordAutocomplete = function($) {
+  $('.announcement-tag-autocomplete input')
+    .tagsinput({
+      typeahead: {
+        source: announcementKeywords // defined in header.php
+      }
+    });
+}
+
+
 if (typeof jQuery != 'undefined'){
 	jQuery(document).ready(function($) {
 		Webcom.slideshow($);
@@ -785,6 +795,7 @@ if (typeof jQuery != 'undefined'){
 		phonebookStaffToggle($);
 		removeAndroidModals($);
 		gaEventTracking($);
+    announcementKeywordAutocomplete($);
 
 		//devBootstrap($);
 

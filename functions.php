@@ -2147,46 +2147,4 @@ function get_hiearchical_degree_search_data_json() {
 
 }
 
-
-/**
- * Override script insertion via GF + CPT plugin (that provides autocomplete
- * suggestions for the Post an Announcement form Keywords field), which is
- * not written to properly encode strings used for the tagit js library.
- **/
-function fixed_gfcpt_announcement_scripts() {
-	if ( is_page( 'Post An Announcement' ) ) {
-			$keywords = json_encode( get_terms( 'keywords', array( 'fields' => 'names' ) ) );
-			ob_start();
-		?>
-		<script>
-			var gfcpt_tag_inputs = {"tag_inputs": [{input: "#input_4_9", taxonomy: "keywords"}]};
-			var gfcpt_tag_taxonomies = [];
-			gfcpt_tag_taxonomies["keywords"] = <?php echo $keywords; ?>;
-
-			// Fix GF+CPT tag autocomplete js bug: http://stackoverflow.com/a/10548162
-			jQuery.fn.extend({
-			  propAttr: $.fn.prop || $.fn.attr
-			});
-		</script>
-		<?php
-		echo ob_get_clean();
-	}
-}
-
-include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
-if ( is_plugin_active( 'gravity-forms-custom-post-types/gfcptaddon.php' ) ) {
-	/**
-	 * I can't find any way to de-register the enqueue_scripts action from
-	 * the GF+CPT plugin that adds the badly formatted <script> to the doc <head>.
-	 * https://github.com/bradvin/gravity-forms-custom-post-types/blob/master/gfcptaddon.php#L52
-	 *
-	 * This will result in the <script> tag being printed twice in the <head>.  Console errors
-	 * won't be suppressed with this, but the form will at least function like it's supposed to.
-	 *
-	 * https://github.com/bradvin/gravity-forms-custom-post-types/blob/master/gfcptaddonbase.php#L39
-	 **/
-	add_action( 'wp_enqueue_scripts', 'fixed_gfcpt_announcement_scripts', 11, 2 );
-}
-
 ?>
