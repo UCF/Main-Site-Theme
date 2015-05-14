@@ -283,6 +283,13 @@ Config::$theme_settings = array(
 			'default'     => 'http://graduatecatalog.ucf.edu',
 			'value'       => $theme_options['grad_catalog_url'],
 		)),
+		new TextField(array(
+			'name'        => 'Tuition and Feed URL',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',
+			'description' => 'URL for the tuition and fee feed.',
+			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
+			'value'       => $theme_options['tuition_fee_url'],
+		)),
 	),
 	'Events' => array(
 		new SelectField(array(

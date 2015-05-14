@@ -1,10 +1,9 @@
 <?php disallow_direct_load('single-degree.php');?>
 <?php get_header(); the_post();?>
 <?php
-	$post = append_degree_metadata( $post );
+	$post = append_degree_metadata( $post, true );
 	$search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
-
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
 			<h1 class="span9"><?php the_title(); ?></h1>
@@ -76,7 +75,20 @@
 								<?php endif; ?>
 							</dd>
 							<?php endif; ?>
+							<?php if ( $post->tuition_estimates ) : ?>
+							<dt>In State Tuition:</dt>
+							<dd>
+								$<?php echo number_format( $post->tuition_estimates['in_state_rate'] ); ?>*
+							</dd>
+							<dt>Out of State Tuition:</dt>
+							<dd>
+								$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'] ); ?>*
+							</dd>
+							<?php endif; ?>
 						</dl>
+						<?php if ( $post->tuition_estimates ) : ?>
+							<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
+						<?php endif; ?>
 					</div>
 				</div>
 
@@ -192,5 +204,6 @@
 			?>
 		</div>
 	</div>
-
+	<input type="hidden" id="program_type" value="<?php echo $post->tax_program_type->slug; ?>" />
+	<input type="hidden" id="credit_hours" value="<?php echo $post->degree_hours; ?>" />
 <?php get_footer();?>

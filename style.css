@@ -1332,6 +1332,11 @@ li.tagit-new input {
   font-weight: 400;
 }
 
+#degree-single p.disclaimer {
+  font-size: 10px;
+  color: #acacac;
+}
+
 #degree-single #contentcol {
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 15px;
