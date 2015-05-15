@@ -1621,9 +1621,17 @@ li.tagit-new input {
 }
 
 #degree-single .degree-description {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
+#degree-single #sidebar_right .tuition-total {
+  padding: 25px 0;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #c90;
+  text-shadow: 0 1px 1px #cacaca;
+}
 
 /* College Profile Pages */
 .degree-list {

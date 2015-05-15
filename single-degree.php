@@ -200,10 +200,32 @@
 				<?php if ( $post->tuition_value_message ) : ?>
 				<div class="tuition-value-message">
 					<?php echo $post->tuition_value_message; ?>
+					<p>The tuition cost of a 
+					<?php 
+						switch( $post->tax_program_type->slug ) {
+							case 'undergraduate-degree':
+								echo 'Bachelors of ';
+								break;
+							case 'minor':
+								echo 'minor in ';
+								break;
+							case 'graduate-degree':
+								echo 'Masters of ';
+								break;
+							default:
+								echo '';
+								break;
+						}
+						echo $post->post_title . ' at UCF is:';
+					?> 
+					<div class="tuition-total">
+						<p id="in-state-amount">$<?php echo number_format( $post->tuition_estimates['in_state_rate'] * 30, 0 ); ?></p>
+						<p id="out-of-state-amount">$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?></p>
+					</div>
 				</div>
 				<?php endif; ?>
 				<ul class="nav nav-tabs" id="tuition-tabs">
-					<li class="active"><a href="#in-state" data-toggle="tab">In State</a></li>
+					<li class="active"><a href="#in-state">In State</a></li>
 					<li><a href="#out-of-state" data-toggle="tab">Out of State</a></li>
 				</ul>
 				<div class="tab-content">
@@ -234,6 +256,7 @@
 								?>
 							</dd>
 						</dl>
+						<input type="hidden" id="in-state-rate" value="<?php echo $post->tuition_estimates['in_state_rate']; ?>" />
 					</div>
 					<div class="tab-pane" id="out-of-state">
 						<dl class="tuition-info-dl">
@@ -262,6 +285,7 @@
 								?>
 							</dd>
 						</dl>
+						<input type="hidden" id="out-of-state-rate" value="<?php $post->tuition_estimates['out_of_state_rate']; ?>" />
 					</div>
 				</div>
 				<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees. 
