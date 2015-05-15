@@ -283,6 +283,13 @@ Config::$theme_settings = array(
 			'default'     => 'http://graduatecatalog.ucf.edu',
 			'value'       => $theme_options['grad_catalog_url'],
 		)),
+		new TextareaField(array(
+			'name'        => 'Tution Value Message',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_value_message]',
+			'description' => 'HTML formatted message that will appear below the Tuition and Fees header on the degree profile page',
+			'default'     => '',
+			'value'       => $theme_options['tuition_value_message'],
+		)),
 		new TextField(array(
 			'name'        => 'Tuition and Feed URL',
 			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',

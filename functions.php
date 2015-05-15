@@ -1562,6 +1562,7 @@ function get_first_result( $array_result ) {
  * Appends degree metadata to a post object.
  **/
 function append_degree_metadata( $post, $tuition_data ) {
+	$theme_options = get_option(THEME_OPTIONS_NAME);
 	if ( $post && $post->post_type == 'degree' ) {
 		$post->degree_hours                = get_post_meta( $post->ID, 'degree_hours', TRUE );
 		$post->degree_description          = get_post_meta( $post->ID, 'degree_description', TRUE );
@@ -1576,6 +1577,7 @@ function append_degree_metadata( $post, $tuition_data ) {
 
 		if ( $tuition_data ) {
 			$post->tuition_estimates = get_tuition_estimate( $post->tax_program_type, $post->degree_hours );
+			$post->tuition_value_message = $theme_options['tuition_value_message'];
 		}
 
 		if ( empty( $post->degree_pdf ) ) {

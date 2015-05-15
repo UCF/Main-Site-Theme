@@ -197,9 +197,14 @@
 		<?php if ( $post->tuition_estimates ) : ?>
 			<div class="tuition-info">
 			<h2>Tuition and Fees</h2>
+				<?php if ( $post->tuition_value_message ) : ?>
+				<div class="tuition-value-message">
+					<?php echo $post->tuition_value_message; ?>
+				</div>
+				<?php endif; ?>
 				<ul class="nav nav-tabs" id="tuition-tabs">
-					<li class="active"><a href="#in-state" data-toggle="tab">In State Tuition</a></li>
-					<li><a href="#out-of-state" data-toggle="tab">Out of State Tuition</a></li>
+					<li class="active"><a href="#in-state" data-toggle="tab">In State</a></li>
+					<li><a href="#out-of-state" data-toggle="tab">Out of State</a></li>
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane active" id="in-state">
