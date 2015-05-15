@@ -1513,7 +1513,11 @@ li.tagit-new input {
   margin-top: 0;
 }
 #degree-single .tuition-value-message {
-  margin-bottom: 14px;
+  font-size: 0.85em;
+  margin-bottom: 18px;
+}
+#degree-single .tuition-value-message a.external {
+  color: #08c;
 }
 #degree-single #sidebar_right dt,
 #degree-single #sidebar_right dd {
