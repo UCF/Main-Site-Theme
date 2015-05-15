@@ -212,7 +212,7 @@
 							<dt>National Average</dt>
 							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_national_rate'], 2 ); ?></dd>
 							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_rate'], 2 ); ?>*</dd>
 							<dt>Less than national average</dt>
 							<dd>$<?php
 								echo number_format(
@@ -224,7 +224,7 @@
 							<dt>National Average Program</dt>
 							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_national_rate'], 2 ); ?></dd>
 							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_rate'], 2 ); ?>*</dd>
 							<dt>Less than national average</dt>
 							<dd>$<?php
 								echo number_format(
@@ -264,7 +264,10 @@
 						</dl>
 					</div>
 				</div>
-				<!--<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>-->
+				<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees. 
+				Program cost is calculated by multiplying this year's tuition and fees by the number of credit hours required to complete the program. 
+				Program costs do not include cost of living or any additional fees that may apply.
+				For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
 			</div>
 		<?php endif; ?>
 		</div>
