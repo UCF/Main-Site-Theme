@@ -1815,7 +1815,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 		?>
 			<span class="result <?php echo $program_slug; ?>">
 				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program_slug; ?>"></span>
-				<?php echo $program_name; ?>
+				<?php echo $program_name; ?>s
 			</span>
 			<?php if ( $count < count( $params['program-type'] ) ): ?>
 				<span class="for"> and </span>
