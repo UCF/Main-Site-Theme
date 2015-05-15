@@ -2056,7 +2056,14 @@ function get_degree_search_contents( $return=false, $params=null ) {
 						</span>
 						<span class="degree-details">
 							<span class="degree-program-type visible-phone">
-								<?php echo $degree->tax_program_type->name; ?>
+								<?php
+								if ( $degree->tax_program_type->alias ) {
+									echo $degree->tax_program_type->alias;
+								}
+								else {
+									echo $degree->tax_program_type->name;
+								}
+								?>
 							</span>
 							<span class="visible-phone degree-details-separator">&verbar;</span>
 							<span class="degree-credits-count">
