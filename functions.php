@@ -2348,7 +2348,7 @@ function colleges_add_columns( $columns ) {
 		'cb' => '<input type="checkbox" />',
 		'name' => __('Name'),
 		'alias' => __('Alias'),
-		'description' => __('Description'),
+		// 'description' => __('Description'),
 		'slug' => __('Slug'),
 		'url' => __('URL'),
 		'posts' => __('Posts')
@@ -2551,7 +2551,7 @@ function program_types_add_columns( $columns ) {
 		'cta' => __( 'Call to Action box' ),
 		// 'description' => __( 'Description' ),
 		'slug' => __( 'Slug' ),
-		'url' => __( 'URL' ),
+		// 'url' => __( 'URL' ),
 		'posts' => __( 'Posts' )
 	);
 	return $new_columns;
