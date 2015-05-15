@@ -29,24 +29,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/dev\/page-compare-degrees-2.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/dev\/page-compare-degrees-2.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/dev\/page-compare-degrees.php": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/dev\/page-compare-degrees.php",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/footer.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -65,6 +47,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/functions\/base.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/functions\/base.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/functions\/config.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -79,6 +70,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/functions\/feeds.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/header.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/header.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -2708,28 +2708,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/static\/img\/degree-compare-local.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 8752,
-		"inputAbbreviatedPath": "\/static\/img\/degree-compare-local.png",
-		"outputAbbreviatedPath": "\/static\/img\/degree-compare-local.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
-	"\/static\/img\/degree-compare-national.png": {
-		"fileType": 32768,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"initialSize": 10057,
-		"inputAbbreviatedPath": "\/static\/img\/degree-compare-national.png",
-		"outputAbbreviatedPath": "\/static\/img\/degree-compare-national.png",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"processed": 0
-		},
 	"\/static\/img\/documents.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -3610,12 +3588,12 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 1
 		},
-	"\/static\/js\/jquery.matchHeight.js": {
+	"\/static\/js\/script.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/static\/js\/jquery.matchHeight.js",
-		"outputAbbreviatedPath": "\/static\/js\/min\/jquery.matchHeight-min.js",
+		"inputAbbreviatedPath": "\/static\/js\/script.js",
+		"outputAbbreviatedPath": "\/static\/js\/min\/script-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
@@ -3631,6 +3609,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 1
+		},
+	"\/style-responsive.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/style-responsive.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/template-one-column.php": {
 		"fileType": 8192,

@@ -1,10 +1,9 @@
 <?php disallow_direct_load('single-degree.php');?>
 <?php get_header(); the_post();?>
 <?php
-	$post = append_degree_metadata( $post );
+	$post = append_degree_metadata( $post, true );
 	$search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
-
 	<div class="row page-content" id="degree-single">
 		<div id="page_title" class="span12">
 			<h1 class="span9"><?php the_title(); ?></h1>
@@ -41,15 +40,6 @@
 							<dt>Degree:</dt>
 							<dd><?php echo $post->tax_program_type->name; ?></dd>
 
-							<dt>Total Credit Hours:</dt>
-							<dd>
-								<?php if ( $post->degree_hours ): ?>
-									<?php echo $post->degree_hours; ?> credit hours
-								<?php else: ?>
-									<a class="<?php echo $post->tax_program_type->slug; ?>" href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
-								<?php endif; ?>
-							</dd>
-
 							<?php if ( $post->tax_college ): ?>
 							<dt>College:</dt>
 							<dd>
@@ -76,6 +66,15 @@
 								<?php endif; ?>
 							</dd>
 							<?php endif; ?>
+
+							<dt>Total Credit Hours:</dt>
+							<dd>
+								<?php if ( $post->degree_hours ): ?>
+									<?php echo $post->degree_hours; ?> credit hours
+								<?php else: ?>
+									<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+								<?php endif; ?>
+							</dd>
 						</dl>
 					</div>
 				</div>
@@ -92,23 +91,27 @@
 				</div>
 
 				<!-- Degree description -->
-				<?php if ( $post->degree_description ) { ?>
-					<p><?php echo apply_filters( 'the_content', $post->degree_description ); ?></p>
-				<?php } else { ?>
-					<p>You can find a full description of this degree in the <a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.</p>
-				<?php } ?>
+				<div class="degree-description">
+					<?php if ( $post->degree_description ) { ?>
+						<?php echo apply_filters( 'the_content', $post->degree_description ); ?>
+					<?php } else { ?>
+							You can find a full description of this degree in the
+							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>"
+								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
+					<?php } ?>
+				</div>
 
 				<?php if ( $post->post_content ) { ?>
 					<hr>
 					<h2>About This Degree</h2>
 					<?php the_content(); ?>
 				<?php } ?>
+				<div class="social-wrap">
+					<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
+				</div>
 
 				<?php echo display_degree_callout( $post->ID ); ?>
 			</article>
-			<div class="social-wrap">
-				<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
-			</div>
 		</div>
 		<div id="sidebar_right" class="span4 notoppad" role="complementary">
 
@@ -124,6 +127,7 @@
 				</a>
 				<?php endif; ?>
 			</div>
+
 			<?php
 			if ( $post->degree_phone || $post->degree_email || $post->degree_contacts ) : ?>
 				<h2>Contact</h2>
@@ -190,7 +194,77 @@
 				endif;
 			endif
 			?>
+		<?php if ( $post->tuition_estimates ) : ?>
+			<div class="tuition-info">
+			<h2>Tuition and Fees</h2>
+				<ul class="nav nav-tabs" id="tuition-tabs">
+					<li class="active"><a href="#in-state" data-toggle="tab">In State Tuition</a></li>
+					<li><a href="#out-of-state" data-toggle="tab">Out of State Tuition</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="in-state">
+						<dl class="tuition-info-dl">
+							<dt>National Average</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php
+								echo number_format(
+									($post->tuition_estimates['in_state_national_rate'] - $post->tuition_estimates['in_state_rate'] ),
+									2
+								);
+								?>
+							</dd>
+							<dt>National Average Program</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php
+								echo number_format(
+									( $post->tuition_estimates['in_state_program_national_rate'] - $post->tuition_estimates['in_state_program_rate'] ),
+									2
+								);
+								?>
+							</dd>
+						</dl>
+					</div>
+					<div class="tab-pane" id="out-of-state">
+						<dl class="tuition-info-dl">
+							<dt>National Average</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php
+								echo number_format(
+									($post->tuition_estimates['out_of_state_national_rate'] - $post->tuition_estimates['out_of_state_rate'] ),
+									2
+								);
+								?>
+							</dd>
+							<dt>National Average Program</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_national_rate'], 2 ); ?></dd>
+							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
+							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_rate'], 2 ); ?></dd>
+							<dt>Less than national average</dt>
+							<dd>$<?php
+								echo number_format(
+									( $post->tuition_estimates['out_of_state_program_national_rate'] - $post->tuition_estimates['out_of_state_program_rate'] ),
+									2
+								);
+								?>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<!--<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees mulitplied by the number of credit hours required for the degree. For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>-->
+			</div>
+		<?php endif; ?>
 		</div>
 	</div>
+	<input type="hidden" id="program_type" value="<?php echo $post->tax_program_type->slug; ?>" />
+	<input type="hidden" id="credit_hours" value="<?php echo $post->degree_hours; ?>" />
 
 <?php get_footer();?>

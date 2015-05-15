@@ -1561,18 +1561,22 @@ function get_first_result( $array_result ) {
 /**
  * Appends degree metadata to a post object.
  **/
-function append_degree_metadata( $post ) {
+function append_degree_metadata( $post, $tuition_data ) {
 	if ( $post && $post->post_type == 'degree' ) {
-		$post->degree_hours       = get_post_meta( $post->ID, 'degree_hours', TRUE );
-		$post->degree_description = get_post_meta( $post->ID, 'degree_description', TRUE );
-		$post->degree_phone       = get_post_meta( $post->ID, 'degree_phone', TRUE );
-		$post->degree_email       = get_post_meta( $post->ID, 'degree_email', TRUE );
-		$post->degree_website     = get_post_meta( $post->ID, 'degree_website', TRUE );
-		$post->degree_pdf         = get_post_meta( $post->ID, 'degree_pdf', TRUE );
-		$post->degree_contacts    = Degree::get_degree_contacts( $post );
-		$post->tax_college        = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
-		$post->tax_department     = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
-		$post->tax_program_type   = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
+		$post->degree_hours                = get_post_meta( $post->ID, 'degree_hours', TRUE );
+		$post->degree_description          = get_post_meta( $post->ID, 'degree_description', TRUE );
+		$post->degree_phone                = get_post_meta( $post->ID, 'degree_phone', TRUE );
+		$post->degree_email                = get_post_meta( $post->ID, 'degree_email', TRUE );
+		$post->degree_website              = get_post_meta( $post->ID, 'degree_website', TRUE );
+		$post->degree_pdf                  = get_post_meta( $post->ID, 'degree_pdf', TRUE );
+		$post->degree_contacts             = Degree::get_degree_contacts( $post );
+		$post->tax_college                 = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
+		$post->tax_department              = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
+		$post->tax_program_type            = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
+
+		if ( $tuition_data ) {
+			$post->tuition_estimates = get_tuition_estimate( $post->tax_program_type, $post->degree_hours );
+		}
 
 		if ( empty( $post->degree_pdf ) ) {
 			if ( Degree::is_graduate_program( $post ) ) {
@@ -1595,6 +1599,93 @@ function append_degree_metadata( $post ) {
 	}
 
 	return $post;
+}
+
+function get_tuition_estimate( $program_type, $credit_hours ) {
+	$theme_options = get_option(THEME_OPTIONS_NAME);
+	// Documentation for this feed can be found at http://tuitionfees.ikm.ucf.edu/feed/
+	$feed_url = $theme_options['tuition_fee_url'];
+	$national_average = 0;
+
+	if ( $program_type && $credit_hours ) {
+		$program = '';
+		switch( $program_type->slug ) {
+			case 'undergraduate-degree':
+			case 'minor':
+			case 'articulated-program':
+				$program = 'UnderGrad';
+				$national_in_state_average = $theme_options['national_undergraduate_in_state_average'];
+				$national_out_of_state_average = $theme_options['national_undergraduate_out_of_state_average'];
+				break;
+			case 'graduate-degree':
+				$program = 'Grad';
+				$national_in_state_average = $theme_options['national_graduate_in_state_average'];
+				$national_out_of_state_average = $theme_options['national_graduate_out_of_state_average'];
+				break;
+			case 'accelerated-program':
+				return null;
+			default:
+				$program = 'UnderGrad';
+				$national_in_state_average = $theme_options['national_undergraduate_in_state_average'];
+				$national_out_of_state_average = $theme_options['national_undergraduate_out_of_state_average'];
+				break;
+		}
+
+		$query_string = http_build_query(
+			array(
+				'format' => 'json',
+				'schoolYear' => 'current',
+				'feeType' => 'SCH',
+				'program' => $program
+			)
+		);
+
+		$feed_url .= '/?' . $query_string;
+
+		$opts = array(
+			'http' => array(
+				'method' => 'GET',
+				'timeout' => 5
+			)
+		);
+
+		$context = stream_context_create( $opts );
+
+		$json = file_get_contents( $feed_url, false, $context );
+
+		if ( $json ) {
+			$fees = json_decode( $json );
+
+			$in_state_estimated_fees = 0;
+			$out_of_state_estimated_fees = 0;
+
+			foreach ( $fees as $fee ) {
+				if ( strpos($fee->FeeName, '(Per Hour)' ) == false ) {
+					$in_state_estimated_fees += $fee->ResidentFee;
+					$out_of_state_estimated_fees += $fee->NonResidentFee;
+				}
+			}
+
+			$in_state_program_rate = $in_state_estimated_fees * $credit_hours;
+			$out_of_state_program_rate = $out_of_state_estimated_fees * $credit_hours;
+
+			$in_state_program_national_rate = $national_in_state_average * $credit_hours;
+			$out_of_state_program_national_rate = $national_out_of_state_average * $credit_hours;
+
+			return array(
+				'in_state_rate' => $in_state_estimated_fees,
+				'out_of_state_rate' => $out_of_state_estimated_fees,
+				'in_state_program_rate' => $in_state_program_rate,
+				'out_of_state_program_rate' => $out_of_state_program_rate,
+				'in_state_national_rate' => $national_in_state_average,
+				'out_of_state_national_rate' => $national_out_of_state_average,
+				'in_state_program_national_rate' => $in_state_program_national_rate,
+				'out_of_state_program_national_rate' => $out_of_state_program_national_rate
+			);
+		} else {
+			return null;
+		}
+	}
 }
 
 
@@ -1685,7 +1776,7 @@ function fetch_degree_data( $params ) {
 	$data = array();
 	if ( $posts ) {
 		foreach ( $posts as $post ) {
-			$degree = append_degree_metadata( $post );
+			$degree = append_degree_metadata( $post, false );
 			$data[] = $degree;
 		}
 	}

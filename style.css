@@ -1297,10 +1297,12 @@ li.tagit-new input {
 
 /* Single Degree profiles */
 #degree-single #breadcrumbs {
-  border-bottom: 2px solid #eee;
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
   font-size: 12.5px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+}
+#degree-single #breadcrumbs a {
+  color: #999;
 }
 #degree-single #breadcrumb-search {
   display: block;
@@ -1339,6 +1341,11 @@ li.tagit-new input {
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B' !important;
   font-size: 15px;
   font-weight: 400;
+}
+
+#degree-single p.disclaimer {
+  font-size: 10px;
+  color: #757575;
 }
 
 #degree-single #contentcol {
@@ -1394,24 +1401,19 @@ li.tagit-new input {
 #degree-single #contentcol .degree-details dd {
   display: block;
   float: left;
+  font-size: 16px;
   line-height: 1.3;
-  margin-bottom: 4px;
+  margin-bottom: 15px;
 }
 #degree-single #contentcol .degree-details dt {
   clear: left;
   text-align: left;
-  width: 25%;
+  width: 33%;
 }
 #degree-single #contentcol .degree-details dd {
   clear: right;
   margin-left: 0;
-  width: 75%;
-}
-.ie8 #degree-single #contentcol .degree-details dt {
-  width: 30%;
-}
-.ie8 #degree-single #contentcol .degree-details dd {
-  width: 70%;
+  width: 66%;
 }
 
 #degree-single #contentcol a {
@@ -1461,10 +1463,17 @@ li.tagit-new input {
   margin-left: 0;
 }
 
+#degree-single .btn {
+  margin: 0 0 15px;
+  max-width: 240px;
+}
+
+#degree-single #sidebar_right h2 {
+  margin-top: 50px;
+}
+
 #degree-single #sidebar_right .contact-info {
-  border-bottom: 1px #efefef solid;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
+  margin-bottom: 25px;
 }
 
 #degree-single #sidebar_right .contact-info:last-child {
@@ -1477,29 +1486,30 @@ li.tagit-new input {
   display: block;
 }
 #degree-single #sidebar_right .contact-name {
-  margin-bottom: 8px;
-  margin-top: 12px;
+  font-weight: normal;
+  margin-bottom: 3px;
 }
 #degree-single #sidebar_right .contact-title {
   font-style: italic;
 }
-#degree-single #sidebar_right .contact-info-dl {
+#degree-single #sidebar_right dl {
   font-size: 13px;
   margin-bottom: 0;
   margin-top: 0;
 }
+#degree-single #sidebar_right dt,
+#degree-single #sidebar_right dd {
+  display: block;
+  float: left;
+  line-height: 1.3em;
+  margin-bottom: 4px;
+}
 #degree-single #sidebar_right .contact-info-dl a {
   color: #08c;
 }
-#degree-single #sidebar_right .contact-info-dl dt,
-#degree-single #sidebar_right .contact-info-dl dd {
-  display: block;
-  float: left;
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
 #degree-single #sidebar_right .contact-info-dl dt {
-  clear: left;
+  clear: left;  
+  font-weight: normal;
   text-align: left;
   width: 20%;
 }
@@ -1513,10 +1523,25 @@ li.tagit-new input {
   text-overflow: ellipsis;
   width: 80%;
 }
+#degree-single #sidebar_right .tuition-info-dl dt {
+  clear: left;
+  font-weight: normal;
+  text-align: left;
+  margin-bottom: 1.0em;
+  width: 65%;
+}
+#degree-single #sidebar_right .tuition-info-dl dd {
+  clear: right;
+  text-align: right;
+  margin-left: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 35%;
+}
 
 /* Apply to Program CTA */
 #degree-single .cta-wrap {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 #degree-single .cta-wrap h3 {
   border-bottom: 0 solid transparent !important;
@@ -1525,10 +1550,20 @@ li.tagit-new input {
 #degree-single .cta-wrap > h3:first-child {
   margin-top: 10px !important;
 }
+#degree-single .cta-wrap a.btn {
+  background-color: #ffc904;
+  color: #000 !important;
+  max-width: 240px;
+  margin-top: 10px;
+}
+
+#degree-single .cta-wrap a.btn:hover {
+  background-color: #f9c404;
+}
 
 /* Social buttons */
 #degree-single .social {
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 #degree-single .social .share-twitter,
 #degree-single .social .share-facebook,
@@ -1561,6 +1596,10 @@ li.tagit-new input {
 
 .ie8 #degree-single #sidebar_right .contact-info-dl dd {
   width: 75%;
+}
+
+#degree-single .degree-description {
+    margin: 20px 0;
 }
 
 
