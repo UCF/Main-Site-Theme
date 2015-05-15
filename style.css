@@ -1163,9 +1163,24 @@ li.tagit-new input {
   padding: 0 8px;
 }
 #degree-search-top .degree-result-count .result .close {
+  border: 1px solid #666;
+  border-radius: 20px;
+  color: #666;
   display: block;
-  float: left;
-  margin-right: 4px;
+  font-size: 16px;
+  line-height: 14px;
+  float: right;
+  margin-left: 4px;
+  margin-top: 3px;
+  opacity: .3;
+  padding: 0 3px 2px;
+  position: relative;
+  top: -5px;
+}
+#degree-search-top .degree-result-count .result .close:hover,
+#degree-search-top .degree-result-count .result .close:active,
+#degree-search-top .degree-result-count .result .close:focus {
+  opacity: .8;
 }
 #degree-search-top .degree-result-count .result .close:before {
   content: '×';
@@ -1508,7 +1523,7 @@ li.tagit-new input {
   color: #08c;
 }
 #degree-single #sidebar_right .contact-info-dl dt {
-  clear: left;  
+  clear: left;
   font-weight: normal;
   text-align: left;
   width: 20%;
