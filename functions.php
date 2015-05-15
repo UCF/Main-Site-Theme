@@ -2509,8 +2509,8 @@ function program_types_alias_field( $value=null ) {
 function program_types_add_alias_field() {
 ?>
 	<div class="form-field">
-		<?php echo program_types_color_label(); ?>
-		<?php echo program_types_color_field(); ?>
+		<?php echo program_types_alias_label(); ?>
+		<?php echo program_types_alias_field(); ?>
 	</div>
 <?php
 }
