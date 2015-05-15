@@ -66,6 +66,7 @@
 								<?php endif; ?>
 							</dd>
 							<?php endif; ?>
+
 							<dt>Total Credit Hours:</dt>
 							<dd>
 								<?php if ( $post->degree_hours ): ?>
@@ -87,24 +88,24 @@
 						Visit Program Website
 					</a>
 					<?php endif; ?>
-				</div>	
+				</div>
 
 				<!-- Degree description -->
 				<div class="degree-description">
 					<?php if ( $post->degree_description ) { ?>
 						<?php echo apply_filters( 'the_content', $post->degree_description ); ?>
 					<?php } else { ?>
-							You can find a full description of this degree in the 
-							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" 
+							You can find a full description of this degree in the
+							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>"
 								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
 					<?php } ?>
-				</div>	
+				</div>
 
 				<?php if ( $post->post_content ) { ?>
 					<hr>
 					<h2>About This Degree</h2>
 					<?php the_content(); ?>
-				<?php } ?>			
+				<?php } ?>
 				<div class="social-wrap">
 					<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
 				</div>
@@ -126,7 +127,7 @@
 				</a>
 				<?php endif; ?>
 			</div>
-			
+
 			<?php
 			if ( $post->degree_phone || $post->degree_email || $post->degree_contacts ) : ?>
 				<h2>Contact</h2>
@@ -213,7 +214,7 @@
 							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
 							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_rate'], 2 ); ?></dd>
 							<dt>Less than national average</dt>
-							<dd>$<?php 
+							<dd>$<?php
 								echo number_format(
 									($post->tuition_estimates['in_state_national_rate'] - $post->tuition_estimates['in_state_rate'] ),
 									2
@@ -225,7 +226,7 @@
 							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
 							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_rate'], 2 ); ?></dd>
 							<dt>Less than national average</dt>
-							<dd>$<?php 
+							<dd>$<?php
 								echo number_format(
 									( $post->tuition_estimates['in_state_program_national_rate'] - $post->tuition_estimates['in_state_program_rate'] ),
 									2
@@ -241,7 +242,7 @@
 							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
 							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'], 2 ); ?></dd>
 							<dt>Less than national average</dt>
-							<dd>$<?php 
+							<dd>$<?php
 								echo number_format(
 									($post->tuition_estimates['out_of_state_national_rate'] - $post->tuition_estimates['out_of_state_rate'] ),
 									2
@@ -253,7 +254,7 @@
 							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
 							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_rate'], 2 ); ?></dd>
 							<dt>Less than national average</dt>
-							<dd>$<?php 
+							<dd>$<?php
 								echo number_format(
 									( $post->tuition_estimates['out_of_state_program_national_rate'] - $post->tuition_estimates['out_of_state_program_rate'] ),
 									2
@@ -270,4 +271,5 @@
 	</div>
 	<input type="hidden" id="program_type" value="<?php echo $post->tax_program_type->slug; ?>" />
 	<input type="hidden" id="credit_hours" value="<?php echo $post->degree_hours; ?>" />
+
 <?php get_footer();?>

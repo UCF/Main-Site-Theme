@@ -1183,10 +1183,10 @@ function query_undergraduate_catalog() {
  * See http://wordpress.stackexchange.com/questions/3326/301-redirect-instead-of-404-when-url-is-a-prefix-of-a-post-or-page-name
  **/
 function no_redirect_on_404($redirect_url) {
-    if (is_404()) {
-        return false;
-    }
-    return $redirect_url;
+	if (is_404()) {
+		return false;
+	}
+	return $redirect_url;
 }
 add_filter('redirect_canonical', 'no_redirect_on_404');
 
@@ -1198,8 +1198,8 @@ add_filter('redirect_canonical', 'no_redirect_on_404');
  * centerpieces only to allow for previews that don't wipe this data.
  **/
 function admin_centerpiece_enqueue_scripts() {
-    if (get_post_type() == 'centerpiece') {
-        wp_dequeue_script('autosave');
+	if (get_post_type() == 'centerpiece') {
+		wp_dequeue_script('autosave');
 	}
 }
 add_action('admin_enqueue_scripts', 'admin_centerpiece_enqueue_scripts');
@@ -1212,15 +1212,15 @@ add_action('admin_enqueue_scripts', 'admin_centerpiece_enqueue_scripts');
 function remove_yoast_meta_boxes() {
 	$post_types = array(
 		'centerpiece',
-        'subheader',
-        'azindexlink',
-        'video',
-        'document',
-        'publication',
+		'subheader',
+		'azindexlink',
+		'video',
+		'document',
+		'publication',
 	);
-    foreach ($post_types as $post_type) {
+	foreach ($post_types as $post_type) {
 		remove_meta_box('wpseo_meta', $post_type, 'normal');
-    }
+	}
 }
 add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
 
@@ -1294,11 +1294,11 @@ add_action('template_redirect', 'kill_unused_templates');
 * Add ID attribute to registered University Header script.
 **/
 function add_id_to_ucfhb($url) {
-    if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
-      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
-      return "$url' id='ucfhb-script";
-    }
-    return $url;
+	if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
+	  remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+	  return "$url' id='ucfhb-script";
+	}
+	return $url;
 }
 add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 
@@ -1536,13 +1536,13 @@ add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page t
  * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
  **/
 function header_meta_degree_search($str) {
- 	global $post;
+	global $post;
 
- 	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
- 		$custom_meta = get_degree_search_meta_description();
- 		return $custom_meta;
- 	}
- 	return $str;
+	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
+		$custom_meta = get_degree_search_meta_description();
+		return $custom_meta;
+	}
+	return $str;
 }
 add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
 
@@ -1587,6 +1587,16 @@ function append_degree_metadata( $post, $tuition_data ) {
 			else {
 				$post->degree_pdf = UNDERGRAD_CATALOG_URL;
 			}
+		}
+
+		// Append taxonomy term "meta"
+		if ( isset( $post->tax_college ) ) {
+			$post->tax_college->alias = get_term_custom_meta( $post->tax_college->term_id, 'colleges', 'college_alias' );
+		}
+
+		if ( isset( $post->tax_program_type ) ) {
+			$post->tax_program_type->alias = get_term_custom_meta( $post->tax_program_type->term_id, 'program_types', 'program_type_alias' );
+			$post->tax_program_type->color = get_term_custom_meta( $post->tax_program_type->term_id, 'program_types', 'program_type_color' );
 		}
 	}
 
@@ -1688,32 +1698,32 @@ function degree_search_with_keywords( $search, &$wp_query ) {
 		&& isset( $wp_query->query_vars['post_type'] )
 		&& $wp_query->query_vars['post_type'] == 'degree'
 	) {
-	    global $wpdb;
+		global $wpdb;
 
-	    if ( empty( $search ) ) {
-	        return $search;
-	    }
+		if ( empty( $search ) ) {
+			return $search;
+		}
 
-	    $search_term = $wp_query->query_vars[ 's' ];
+		$search_term = $wp_query->query_vars[ 's' ];
 
-	    $search = " AND (
-	        ($wpdb->posts.post_title LIKE '%$search_term%')
-	        OR ($wpdb->posts.post_content LIKE '%$search_term%')
-	        OR EXISTS
-	        (
-	            SELECT * FROM $wpdb->terms
-	            INNER JOIN $wpdb->term_taxonomy
-	                ON $wpdb->term_taxonomy.term_id = $wpdb->terms.term_id
-	            INNER JOIN $wpdb->term_relationships
-	                ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id
-	            WHERE taxonomy = 'degree_keywords'
-	                AND object_id = $wpdb->posts.ID
-	                AND $wpdb->terms.name LIKE '%$search_term%'
-	        )
-	    )";
+		$search = " AND (
+			($wpdb->posts.post_title LIKE '%$search_term%')
+			OR ($wpdb->posts.post_content LIKE '%$search_term%')
+			OR EXISTS
+			(
+				SELECT * FROM $wpdb->terms
+				INNER JOIN $wpdb->term_taxonomy
+					ON $wpdb->term_taxonomy.term_id = $wpdb->terms.term_id
+				INNER JOIN $wpdb->term_relationships
+					ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id
+				WHERE taxonomy = 'degree_keywords'
+					AND object_id = $wpdb->posts.ID
+					AND $wpdb->terms.name LIKE '%$search_term%'
+			)
+		)";
 	}
 
-    return $search;
+	return $search;
 }
 
 add_filter( 'posts_search', 'degree_search_with_keywords', 500, 2 );
@@ -1801,11 +1811,12 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<span class="for">in </span>
 		<?php
 		$count = 1;
-		foreach ( $params['program-type'] as $program ):
-			$program_name = get_term_by( 'slug', $program, 'program_types' )->name . 's';
+		foreach ( $params['program-type'] as $program_slug ):
+			$program = get_term_by( 'slug', $program_slug, 'program_types' );
+			$program_name = $program->name;
 		?>
-			<span class="result">
-				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program; ?>"></span>
+			<span class="result <?php echo $program_slug; ?>">
+				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program_slug; ?>"></span>
 				<?php echo $program_name; ?>
 			</span>
 			<?php if ( $count < count( $params['program-type'] ) ): ?>
@@ -1824,11 +1835,11 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<span class="for">at </span>
 		<?php
 		$count = 1;
-		foreach ( $params['college'] as $college ):
-			$college_name = 'the ' . get_term_by( 'slug', $college, 'colleges' )->name;
+		foreach ( $params['college'] as $college_slug ):
+			$college_name = 'the ' . get_term_by( 'slug', $college_slug, 'colleges' )->name;
 		?>
 			<span class="result">
-				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college; ?>"></span>
+				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college_slug; ?>"></span>
 				<?php echo $college_name; ?>
 			</span>
 			<?php if ( $count < count( $params['college'] ) ): ?>
@@ -1866,8 +1877,8 @@ function get_degree_search_search_again( $filters, $params ) {
 							'search-query' => $params['search-query']
 						) );
 					?>
-						<a class="search-again-link" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
-							<?php if ( isset( $term->shortname ) ) { echo $term->shortname; } else { echo $term->name; } ?>s
+						<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
+							<?php echo $term->name; ?>s
 						</a>
 					<?php endif; ?>
 				<?php endforeach; ?>
@@ -2032,15 +2043,25 @@ function get_degree_search_contents( $return=false, $params=null ) {
 					<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
 						<span class="degree-title">
 							<?php echo $degree->post_title; ?>
+							<span class="degree-program-type hidden-phone <?php echo $degree->tax_program_type->slug; ?>">
+								<?php
+								if ( $degree->tax_program_type->alias ) {
+									echo $degree->tax_program_type->alias;
+								}
+								else {
+									echo $degree->tax_program_type->name;
+								}
+								?>
+							</span>
 						</span>
 						<span class="degree-details">
-							<span class="degree-program-type">
+							<span class="degree-program-type visible-phone">
 								<?php echo $degree->tax_program_type->name; ?>
 							</span>
-							<span class="visible-phone">&nbsp;&nbsp;&verbar;&nbsp;&nbsp;</span>
+							<span class="visible-phone degree-details-separator">&verbar;</span>
 							<span class="degree-credits-count">
 							<?php if ( $degree->degree_hours ): ?>
-								<?php echo $degree->degree_hours; ?> credit hours
+								<span class="number"><?php echo $degree->degree_hours; ?></span> credit hours
 							<?php else: ?>
 								See catalog for credit hours
 							<?php endif; ?>
@@ -2145,21 +2166,23 @@ function get_degree_search_filters() {
 	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
 	if ( $colleges ) {
 		foreach ( $colleges as $college ) {
-			$shortname = get_term_custom_meta( $college->term_id, 'colleges', 'college_shortname' );
-			if ( $shortname ) {
-				$college->shortname = $shortname;
+			$alias = get_term_custom_meta( $college->term_id, 'colleges', 'college_alias' );
+			if ( $alias ) {
+				$college->alias = $alias;
 			}
 		}
-		// If shortnames are available, alphabetize by them
+		// If aliases are available, alphabetize by them
 		usort( $colleges, function( $a, $b ) {
-			$a_name = isset( $a->shortname ) ? $a->shortname : $a->name;
-			$b_name = isset( $b->shortname ) ? $b->shortname : $b->name;
+			$a_name = isset( $a->alias ) ? $a->alias : $a->name;
+			$b_name = isset( $b->alias ) ? $b->alias : $b->name;
 			return strcmp( $a_name, $b_name );
 		} );
 	}
 
+	$program_types = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+
 	// Pass orderby degree_program_order to ensure our custom filter is used.
-	$filters['program-type']['terms'] = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+	$filters['program-type']['terms'] = $program_types;
 	$filters['college']['terms'] = $colleges;
 
 	return $filters;
@@ -2220,52 +2243,52 @@ function save_term_custom_meta( $term_id, $taxonomy ) {
  * Adds custom "meta fields" for College taxonomy terms.
  **/
 
-// Prints label for college shortname field.
-function colleges_shortname_label() {
+// Prints label for college alias field.
+function colleges_alias_label() {
 	ob_start();
 ?>
-	<label for="term_meta[college_shortname]"><?php echo __( 'Short Name' ); ?></label>
+	<label for="term_meta[college_alias]"><?php echo __( 'Alias' ); ?></label>
 <?php
 	return ob_get_clean();
 }
 
-// Prints field for college shortname.
-function colleges_shortname_field( $value=null ) {
+// Prints field for college alias.
+function colleges_alias_field( $value=null ) {
 	ob_start();
 ?>
-	<input type="text" name="term_meta[college_shortname]" id="term_meta[college_shortname]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
+	<input type="text" name="term_meta[college_alias]" id="term_meta[college_alias]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
 	<p class="description"><?php echo __( 'Specify a shorter name for this college; used in Degree Search filters.' ); ?></p>
 <?php
 	return ob_get_clean();
 }
 
-// Adds shortname field to Add College form.
-function colleges_add_shortname_field() {
+// Adds alias field to Add College form.
+function colleges_add_alias_field() {
 ?>
 	<div class="form-field">
-		<?php echo colleges_shortname_label(); ?>
-		<?php echo colleges_shortname_field(); ?>
+		<?php echo colleges_alias_label(); ?>
+		<?php echo colleges_alias_field(); ?>
 	</div>
 <?php
 }
-add_action( 'colleges_add_form_fields', 'colleges_add_shortname_field', 10, 2 );
+add_action( 'colleges_add_form_fields', 'colleges_add_alias_field', 10, 2 );
 
-// Adds shortname field to Edit College form.
-function colleges_edit_shortfield_field( $term ) {
+// Adds alias field to Edit College form.
+function colleges_edit_alias_field( $term ) {
 	$term_id = $term->term_id;
-	$shortname = get_term_custom_meta( $term_id, 'colleges', 'college_shortname' );
+	$alias = get_term_custom_meta( $term_id, 'colleges', 'college_alias' );
 ?>
 	<tr class="form-field">
 		<th scope="row" valign="top">
-			<?php echo colleges_shortname_label(); ?>
+			<?php echo colleges_alias_label(); ?>
 		</th>
 		<td>
-			<?php echo colleges_shortname_field( $shortname ); ?>
+			<?php echo colleges_alias_field( $alias ); ?>
 		</td>
 	</tr>
 <?php
 }
-add_action( 'colleges_edit_form_fields', 'colleges_edit_shortfield_field', 10, 2 );
+add_action( 'colleges_edit_form_fields', 'colleges_edit_alias_field', 10, 2 );
 
 // Prints label for college url field.
 function colleges_url_label() {
@@ -2324,13 +2347,13 @@ add_action( 'create_colleges', 'save_colleges_custom_meta', 10, 2 );
 // Adds columns to existing Colleges term list.
 function colleges_add_columns( $columns ) {
 	$new_columns = array(
-	    'cb' => '<input type="checkbox" />',
-	    'name' => __('Name'),
-	    'shortname' => __('Short Name'),
-	    'description' => __('Description'),
-	    'slug' => __('Slug'),
-	    'url' => __('URL'),
-	    'posts' => __('Posts')
+		'cb' => '<input type="checkbox" />',
+		'name' => __('Name'),
+		'alias' => __('Alias'),
+		// 'description' => __('Description'),
+		'slug' => __('Slug'),
+		'url' => __('URL'),
+		'posts' => __('Posts')
 	);
 	return $new_columns;
 }
@@ -2338,29 +2361,29 @@ add_filter( 'manage_edit-colleges_columns', 'colleges_add_columns' );
 
 // Adds content to Colleges columns
 function colleges_render_columns( $out, $name, $term_id ) {
-    switch ( $name ) {
-        case 'shortname':
-        	$shortname = get_term_custom_meta( $term_id, 'colleges', 'college_shortname' );
-        	if ( $shortname ) {
-        		$out .= $shortname;
-        	}
-        	else {
-        		$out .= '&mdash;';
-        	}
-            break;
-        case 'url':
-        	$url = get_term_custom_meta( $term_id, 'colleges', 'college_url' );
-        	if ( $url ) {
-        		$out .= '<a target="_blank" href="'. $url .'">'. $url .'</a>';
-        	}
-        	else {
-        		$out .= '&mdash;';
-        	}
-            break;
-        default:
-            break;
-    }
-    return $out;
+	switch ( $name ) {
+		case 'alias':
+			$alias = get_term_custom_meta( $term_id, 'colleges', 'college_alias' );
+			if ( $alias ) {
+				$out .= $alias;
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		case 'url':
+			$url = get_term_custom_meta( $term_id, 'colleges', 'college_url' );
+			if ( $url ) {
+				$out .= '<a target="_blank" href="'. $url .'">'. $url .'</a>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		default:
+			break;
+	}
+	return $out;
 }
 add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 
@@ -2416,7 +2439,104 @@ function program_types_edit_cta_field( $term ) {
 }
 add_action( 'program_types_edit_form_fields', 'program_types_edit_cta_field', 10, 2 );
 
-// Saves Program Type CTA field value.
+
+// Prints label for program type color field.
+function program_types_color_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_color]"><?php echo __( 'Color' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type color.
+function program_types_color_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[program_type_color]" id="term_meta[program_type_color]"<?php if ( $value ) { ?> value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify a color that should represent this program type.  Avoid shades of blue, which is used in primary links in the Degree Search.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds color field to Add Program Type form.
+function program_types_add_color_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_color_label(); ?>
+		<?php echo program_types_color_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_color_field', 10, 2 );
+
+// Adds color field to Edit Program Type form.
+function program_types_edit_color_field( $term ) {
+	$term_id = $term->term_id;
+	$color = get_term_custom_meta( $term_id, 'program_types', 'program_type_color' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_color_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_color_field( $color ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_color_field', 10, 2 );
+
+
+// Prints label for program type alias field.
+function program_types_alias_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_alias]"><?php echo __( 'Alias' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type alias.
+function program_types_alias_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[program_type_alias]" id="term_meta[program_type_alias]"<?php if ( $value ) { ?> value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify an alternate name for this program type.  Used in Degree Search result list items.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds alias field to Add Program Type form.
+function program_types_add_alias_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_alias_label(); ?>
+		<?php echo program_types_alias_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_alias_field', 10, 2 );
+
+// Adds alias field to Edit Program Type form.
+function program_types_edit_alias_field( $term ) {
+	$term_id = $term->term_id;
+	$alias = get_term_custom_meta( $term_id, 'program_types', 'program_type_alias' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_alias_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_alias_field( $alias ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_alias_field', 10, 2 );
+
+
+// Saves Program Type custom field values.
 function save_program_types_custom_meta( $term_id ) {
 	save_term_custom_meta( $term_id, 'program_types' );
 }
@@ -2426,13 +2546,15 @@ add_action( 'create_program_types', 'save_program_types_custom_meta', 10, 2 );
 // Adds columns to existing Program Type term list.
 function program_types_add_columns( $columns ) {
 	$new_columns = array(
-	    'cb' => '<input type="checkbox" />',
-	    'name' => __('Name'),
-	    'cta' => __('Call to Action box'),
-	    'description' => __('Description'),
-	    'slug' => __('Slug'),
-	    'url' => __('URL'),
-	    'posts' => __('Posts')
+		'cb' => '<input type="checkbox" />',
+		'name' => __( 'Name' ),
+		'alias' => __( 'Alias' ),
+		'color' => __( 'Color' ),
+		'cta' => __( 'Call to Action box' ),
+		// 'description' => __( 'Description' ),
+		'slug' => __( 'Slug' ),
+		// 'url' => __( 'URL' ),
+		'posts' => __( 'Posts' )
 	);
 	return $new_columns;
 }
@@ -2440,18 +2562,36 @@ add_filter( 'manage_edit-program_types_columns', 'program_types_add_columns' );
 
 // Adds content to Program Type columns
 function program_types_render_columns( $out, $name, $term_id ) {
-    switch ( $name ) {
-        case 'cta':
-        	$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
-        	if ( $cta ) {
-        		$out .= '<textarea disabled>' . esc_textarea( $cta ) . '</textarea>';
-        	}
-        	else {
-        		$out .= '&mdash;';
-        	}
-            break;
-    }
-    return $out;
+	switch ( $name ) {
+		case 'alias':
+			$alias = get_term_custom_meta( $term_id, 'program_types', 'program_type_alias' );
+			if ( $alias ) {
+				$out .= $alias;
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		case 'color':
+			$color = get_term_custom_meta( $term_id, 'program_types', 'program_type_color' );
+			if ( $color ) {
+				$out .= '<span style="color: ' . $color . ';">' . $color . '</span>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		case 'cta':
+			$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+			if ( $cta ) {
+				$out .= '<textarea disabled>' . esc_textarea( $cta ) . '</textarea>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+	}
+	return $out;
 }
 add_filter( 'manage_program_types_custom_column', 'program_types_render_columns', 10, 3);
 
@@ -2464,27 +2604,27 @@ add_filter( 'manage_program_types_custom_column', 'program_types_render_columns'
 * @author Jo Dickson
 **/
 function display_social($url, $title) {
-    $tweet_title = urlencode('UCF Degree: '.$title);
-    ob_start(); ?>
-    <aside class="social clearfix">
-        <a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this story on Facebook">
-            Like "<?php echo $title; ?>" on Facebook
-        </a>
-        <a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
-            Tweet "<?php echo $title; ?>" on Twitter
-        </a>
-        <a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
-            Share "<?php echo $title; ?>" on Google+
-        </a>
-        <a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
-        	Share "<?php echo $title; ?>" on Linkedin
-        </a>
-        <a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
-        	Share "<?php echo $title; ?>" in an email
-        </a>
-    </aside>
-    <?php
-    return ob_get_clean();
+	$tweet_title = urlencode('UCF Degree: '.$title);
+	ob_start(); ?>
+	<aside class="social clearfix">
+		<a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this story on Facebook">
+			Like "<?php echo $title; ?>" on Facebook
+		</a>
+		<a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
+			Tweet "<?php echo $title; ?>" on Twitter
+		</a>
+		<a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
+			Share "<?php echo $title; ?>" on Google+
+		</a>
+		<a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
+			Share "<?php echo $title; ?>" on Linkedin
+		</a>
+		<a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
+			Share "<?php echo $title; ?>" in an email
+		</a>
+	</aside>
+	<?php
+	return ob_get_clean();
 }
 
 
@@ -2548,5 +2688,6 @@ function degree_search_404_redirect() {
 	}
 }
 add_action( 'template_redirect', 'degree_search_404_redirect' );
+
 
 ?>

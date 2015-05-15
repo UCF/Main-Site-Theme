@@ -161,10 +161,13 @@
   }
 
   #degree-search-content .degree-title-wrap {
-    font-size: 15.5px;
+    font-size: 16px;
   }
   #degree-search-content .degree-title {
-    width: 72%;
+    width: 79%;
+  }
+  #degree-search-content .degree-credits-count .number {
+    font-size: 18px;
   }
 
   #degree-search-sidebar label {
@@ -601,6 +604,9 @@
   #degree-search-content .degree-program-type {
     margin-bottom: 0;
   }
+  #degree-search-content .degree-credits-count .number {
+    font-size: inherit;
+  }
 
 
 	#program-meta p { padding-left: 0; }
@@ -699,7 +705,7 @@
 	}
 	.navbar ul#header-menu b.caret {
 		border-bottom-color: #fff;
-    	border-top-color: #fff;
+    border-top-color: #fff;
 		margin-top: 4px;
 	}
 

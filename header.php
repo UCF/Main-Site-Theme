@@ -33,6 +33,26 @@
 		}
 		?>
 
+		<?php
+		if ( is_page( 'Degree Search' ) || $post->post_type == 'degree' ) {
+			$styles = '<style>';
+			$program_types = get_terms( 'program_types', array( 'fields' => 'id=>slug' ) );
+			if ( $program_types ) {
+				foreach ( $program_types as $id => $slug ) {
+					$color = get_term_custom_meta( $id, 'program_types', 'program_type_color' );
+						if ( $color ) {
+							$styles .= '.' . $slug . '{ color: ' . $color . ' !important; }' . "\n";
+					}
+				}
+			}
+			$styles .= '</style>';
+
+			if ( $styles !== '<style></style>' ) {
+				echo $styles;
+			}
+		}
+		?>
+
 		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
 			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>
 		<?php } ?>
