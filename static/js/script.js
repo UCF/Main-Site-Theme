@@ -1285,22 +1285,6 @@ var degreeProfile = function($) {
           window.history.go(-1);
         });
     }
-
-    $('#out-of-state-amount').hide();
-
-    $('#tuition-tabs a[href="#in-state"]').click(function(e) {
-      e.preventDefault();
-      $('#in-state-amount').show();
-      $('#out-of-state-amount').hide();
-      $(this).tab('show');
-    });
-
-    $('#tuition-tabs a[href="#out-of-state"]').click(function(e) {
-      e.preventDefault();
-      $('#in-state-amount').hide();
-      $('#out-of-state-amount').show();
-      $(this).tab('show');
-    });
   }
 }
 

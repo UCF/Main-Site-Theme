@@ -256,6 +256,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/single-degree.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/single-degree.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/single-person.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -3619,6 +3628,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/style.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/style.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/template-one-column.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -3667,7 +3685,7 @@
 	},
 "hooks": [
 	],
-"lastSavedByUser": "RJ Bruneel",
+"lastSavedByUser": "James Barnes",
 "manualImportLinks": {
 	},
 "projectAttributes": {

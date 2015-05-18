@@ -1633,6 +1633,17 @@ li.tagit-new input {
   text-shadow: 0 1px 1px #cacaca;
 }
 
+#degree-single #sidebar_right .tuition-total .tuition-period {
+  font-size: 18px;
+}
+
+#degree-single #sidebar_right .tuition-description {
+  font-size: 12px;
+  font-weight: 300;
+  color: #222;
+  padding: 0 12px;
+}
+
 /* College Profile Pages */
 .degree-list {
   list-style-type: none;
