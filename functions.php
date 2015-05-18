@@ -1603,6 +1603,7 @@ function append_degree_metadata( $post, $tuition_data ) {
 	return $post;
 }
 
+
 function get_tuition_estimate( $program_type, $credit_hours ) {
 	$theme_options = get_option(THEME_OPTIONS_NAME);
 	// Documentation for this feed can be found at http://tuitionfees.ikm.ucf.edu/feed/
@@ -1779,8 +1780,20 @@ function fetch_degree_data( $params ) {
 	if ( $posts ) {
 		foreach ( $posts as $post ) {
 			$degree = append_degree_metadata( $post, false );
-			$data[] = $degree;
 		}
+
+		$groupable_types_slugs = unserialize( DEGREE_PROGRAM_ORDER );
+		$groupable_types = array();
+		if ( $groupable_types_slugs ) {
+			foreach ( $groupable_types_slugs as $slug ) {
+				$term = get_term_by( 'slug', $slug, 'program_types' );
+				$groupable_types[] = $term->term_id;
+			}
+		}
+		else {
+			$groupable_types = null;
+		}
+		$data = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
 	}
 
 	return $data;
@@ -2026,64 +2039,61 @@ function get_degree_search_contents( $return=false, $params=null ) {
 
 	$params = degree_search_params_or_fallback( $params );
 	$query_params = http_build_query( $params );
+	$result_count = 0;
 
 	$results = fetch_degree_data( $params );
 
 	$markup = '<div class="no-results">No results found.</div>';
 
 	if ( $results ) {
-		$markup = '<ul class="degree-search-results">';
+		$markup = '';
 
-		foreach ( $results as $degree ) {
-			$result_markup = '';
-			ob_start();
-			?>
-			<li class="degree-search-result">
-				<h3 class="degree-title-heading">
-					<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
-						<span class="degree-title">
-							<?php echo $degree->post_title; ?>
-							<span class="degree-program-type hidden-phone <?php echo $degree->tax_program_type->slug; ?>">
-								<?php
-								if ( $degree->tax_program_type->alias ) {
-									echo $degree->tax_program_type->alias;
-								}
-								else {
-									echo $degree->tax_program_type->name;
-								}
-								?>
+		foreach ( $results as $program_type_id => $degrees ) {
+			$program_name = get_term( $program_type_id, 'program_types' )->name;
+			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
+			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
+
+			$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+			$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+
+			$markup .= '<ul class="degree-search-results">';
+
+			foreach ( $degrees as $degree ) {
+				$result_markup = '';
+				ob_start();
+				?>
+				<li class="degree-search-result">
+					<h3 class="degree-title-heading">
+						<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+							<span class="degree-title">
+								<?php echo $degree->post_title; ?>
 							</span>
-						</span>
-						<span class="degree-details">
-							<span class="degree-program-type visible-phone">
-								<?php
-								if ( $degree->tax_program_type->alias ) {
-									echo $degree->tax_program_type->alias;
-								}
-								else {
-									echo $degree->tax_program_type->name;
-								}
-								?>
+							<span class="degree-details">
+								<span class="degree-program-type visible-phone">
+									<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+								</span>
+								<span class="visible-phone degree-details-separator">&verbar;</span>
+								<span class="degree-credits-count">
+								<?php if ( $degree->degree_hours ): ?>
+									<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
+								<?php else: ?>
+									See catalog for credit hours
+								<?php endif; ?>
+								</span>
 							</span>
-							<span class="visible-phone degree-details-separator">&verbar;</span>
-							<span class="degree-credits-count">
-							<?php if ( $degree->degree_hours ): ?>
-								<span class="number"><?php echo $degree->degree_hours; ?></span> credit hours
-							<?php else: ?>
-								See catalog for credit hours
-							<?php endif; ?>
-							</span>
-						</span>
-					</a>
-				</h3>
-			</li>
-			<?php
-			$result_markup = ob_get_contents();
-			$markup .= $result_markup;
-			ob_end_clean();
+						</a>
+					</h3>
+				</li>
+				<?php
+				$result_markup = ob_get_contents();
+				$markup .= $result_markup;
+				ob_end_clean();
+
+				$result_count++;
+			}
+
+			$markup .= '</ul>';
 		}
-
-		$markup .= '</ul>';
 	}
 
 	$markup = preg_replace("@[\\r|\\n|\\t]+@", "", $markup);
@@ -2091,11 +2101,10 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	// Print results
 	if ( $return ) {
 		return array (
-			'count' => count( $results ),
+			'count' => $result_count,
 			'markup' => $markup
 		);
 	} else {
-		$result_count = count( $results );
 		$result_title = get_degree_search_title( '|', $params );
 		$result_meta = get_degree_search_meta_description( $params );
 		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params );

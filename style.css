@@ -1001,11 +1001,11 @@ li.tagit-new input {
   position: absolute;
 }
 #degree-search-sidebar .degree-filter-title {
-  color: #999;
-  font-family: 'Gotham SSm 7r', 'Gotham SSm A', 'Gotham SSm B';
+  color: #888;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
   font-size: 18px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -.012em;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -1199,8 +1199,8 @@ li.tagit-new input {
   width: 28%;
 }
 #degree-search-top .degree-search-sort-label {
-  font-family: 'Gotham SSm 6r', 'Gotham SSm A', 'Gotham SSm B';
-  font-weight: 600;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-weight: 400;
   font-style: normal;
   padding-left: 0;
 }
@@ -1233,10 +1233,23 @@ li.tagit-new input {
   margin-top: 20px;
 }
 
+#degree-search-content .degree-search-group-title {
+  border-bottom: 1px solid #eee;
+  color: #222;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  margin: 15px 0;
+  padding-bottom: 5px;
+}
+
 #degree-search-content .degree-search-results {
   list-style-type: none;
   margin-left: 0;
-  margin-top: 15px;
+  margin-bottom: 30px;
 }
 #degree-search-content .degree-search-result {
   box-sizing: border-box;
