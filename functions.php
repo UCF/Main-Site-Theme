@@ -2147,4 +2147,81 @@ function get_hiearchical_degree_search_data_json() {
 
 }
 
+
+/**
+ * Creates an Announcement when a new Post An Announcement form entry is
+ * submitted.
+ *
+ * This function assumes a form with ID of 4 already exists and has all form
+ * fields/values configured already.
+ **/
+function announcement_post_save( $post_data, $form, $entry ) {
+	if ( $form['id'] != 4 ) {
+		return $post_data;
+	}
+
+	$post_data['post_type'] = 'announcement';
+	return $post_data;
+}
+add_action( 'gform_post_data', 'announcement_post_save', 10, 3 );
+
+
+/**
+ * Adds keywords and audience roles to a newly-created Announcement from the
+ * Post an Announcement forn.
+ *
+ * This function assumes a form with ID of 4 already exists and has all form
+ * fields/values configured already, and that desired Audience Role term values
+ * have already been created.
+ **/
+function announcement_post_tax_save( $entry, $form ) {
+	if( isset( $entry['post_id'] ) ) {
+		$post = get_post( $entry['post_id'] );
+
+		if ( $post ) {
+			$keywords = $audience_roles = $entry_keywords = $entry_audience_roles = array();
+
+			foreach ( $entry as $key => $val ) {
+				if ( substr( $key, 0, 1 ) == '8.' && !empty( $val ) ) {
+					$entry_audience_roles[] = trim( $val );
+				}
+				else if ( $key == '9' ) {
+					$entry_keywords = explode( ',', $val );
+				}
+			}
+
+			if ( !empty( $entry_audience_roles ) ) {
+				foreach ( $entry_audience_roles as $role ) {
+					// Check for an existing term.  If it doesn't already
+					// exist, don't create a new one
+					$role_term = get_term_by( 'name', $role, 'audienceroles', 'ARRAY_A' );
+					if ( is_array( $role_term ) ) { // make sure we get a successful return
+						$audience_roles[] = intval( $role_term['term_id'] );
+					}
+				}
+			}
+			if ( !empty( $entry_keywords ) ) {
+				foreach ( $entry_keywords as $keyword ) {
+					// Check for an existing term
+					$keyword_term = get_term_by( 'name', $keyword, 'keywords', 'ARRAY_A' );
+					if ( !$keyword_term ) {
+						$keyword_term = wp_insert_term( $keyword, 'keywords' );
+					}
+					if ( is_array( $keyword_term ) ) { // make sure we get a successful return (not WP Error obj)
+						$keywords[] = intval( $keyword_term['term_id'] );
+					}
+				}
+			}
+
+			if ( !empty( $audience_roles ) ) {
+				wp_set_object_terms( $post->ID, $audience_roles, 'audienceroles' );
+			}
+			if ( !empty( $keywords ) ) {
+				wp_set_object_terms( $post->ID, $keywords, 'keywords' );
+			}
+		}
+	}
+}
+add_action( 'gform_after_submission_4', 'announcement_post_tax_save', 10, 2 );
+
 ?>
