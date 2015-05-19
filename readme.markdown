@@ -5,7 +5,6 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 
 ## Required Plugins
 * Gravity Forms
-* Gravity Forms + Custom Post Types
 * Varnish Dependency Purger
 
 
@@ -108,7 +107,7 @@ Theme-specific functions only should be defined here.  (Other required
 function files are also included at the top of this file.)
 
 ### shortcodes.php
-Where Wordpress shortcodes can be defined.  See example shortcodes for more 
+Where Wordpress shortcodes can be defined.  See example shortcodes for more
 information.
 
 ### custom-post-types.php
