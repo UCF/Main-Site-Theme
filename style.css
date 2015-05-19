@@ -1044,13 +1044,44 @@ ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: poin
 
 .ui-datepicker-month,
 .ui-datepicker-year {
+  font-family: Helvetica, sans-serif;
+  margin: 5px 2px;
   width: auto !important;
 }
 
 .ui-datepicker-prev,
 .ui-datepicker-next {
+  background-image: none !important;
   box-sizing: border-box;
+  margin-top: 5px;
   position: relative;
+}
+
+.ui-datepicker-prev:before,
+.ui-datepicker-next:before {
+  color: #fff;
+  display: block;
+  font-size: 30px;
+  font-weight: 200;
+  height: 100%;
+  line-height: 25px;
+  text-align: center !important;
+  text-shadow: 0 0 0 transparent;
+  width: 100%;
+}
+
+.ui-datepicker-prev:before {
+  content: '‹';
+}
+
+.ui-datepicker-next:before {
+  content: '›';
+}
+
+.ui-datepicker-prev.ui-state-hover,
+.ui-datepicker-next.ui-state-hover {
+  background: #444 !important;
+  border: 0 solid transparent !important;
 }
 
 .ui-datepicker-prev .ui-icon,
@@ -1064,13 +1095,27 @@ ul.degree-results-list .program .credits-wrap a { border-bottom: 0; cursor: poin
 }
 
 .ui-datepicker th {
+  filter: none !important;
   text-shadow: 0 0 0 transparent !important;
+}
+
+.ui-datepicker-calendar .ui-state-default {
+  box-sizing: border-box;
+  width: 32px;
+}
+
+.ui-datepicker-calendar .ui-state-highlight {
+  color: #000;
+  text-decoration: underline;
 }
 
 
 /**
  * Bootstrap Tags Input js plugin overrides
  **/
+.bootstrap-tagsinput {
+  width: 96%;
+}
 .bootstrap-tagsinput .tag {
   font-family: "Helvetica Neue", "Helvetica-Neue", "Helvetica", sans-serif;
 }
