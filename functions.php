@@ -2156,11 +2156,10 @@ function get_hiearchical_degree_search_data_json() {
  * fields/values configured already.
  **/
 function announcement_post_save( $post_data, $form, $entry ) {
-	if ( $form['id'] != 4 ) {
-		return $post_data;
+	if ( intval( $form['id'] ) == 4 ) {
+		$post_data['post_type'] = 'announcement';
 	}
 
-	$post_data['post_type'] = 'announcement';
 	return $post_data;
 }
 add_action( 'gform_post_data', 'announcement_post_save', 10, 3 );
