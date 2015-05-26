@@ -756,12 +756,14 @@ var gaEventTracking = function($) {
 
 
 var announcementKeywordAutocomplete = function($) {
-  $('.announcement-tag-autocomplete input')
-    .tagsinput({
-      typeahead: {
-        source: announcementKeywords // defined in header.php
-      }
-    });
+  if ($('.announcement-tag-autocomplete input').length) {
+    $('.announcement-tag-autocomplete input')
+      .tagsinput({
+        typeahead: {
+          source: announcementKeywords // defined in header.php
+        }
+      });
+  }
 }
 
 
