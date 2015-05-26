@@ -864,7 +864,7 @@ function announcements_to_rss($announcements) {
 		$output = '';
 		$output .= '<item>';
 			// Generic RSS story elements
-			$output .= '<title>'.$announcement->post_title.'</title>';
+			$output .= '<title>'.htmlentities($announcement->post_title).'</title>';
 			$output .= '<description><![CDATA['.htmlentities(strip_tags($announcement->post_content)).']]></description>';
 			$output .= '<link>'.get_permalink($announcement->ID).'</link>';
 			$output .= '<guid>'.get_permalink($announcement->ID).'</guid>';
@@ -896,7 +896,7 @@ function announcements_to_rss($announcements) {
 			$output .= '<announcement:keywords>';
 				if (!empty($announcement->announcementKeywords)) {
 					foreach ($announcement->announcementKeywords as $keyword) {
-						$keywords .= $keyword.', ';
+						$keywords .= htmlentities($keyword).', ';
 					}
 					$keywords = substr($keywords, 0, -2);
 					$output .= $keywords;
