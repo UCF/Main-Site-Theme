@@ -207,10 +207,10 @@
 							<div class="tuition-value-message">
 								<?php echo $post->tuition_value_message; ?>
 								<div class="tuition-total">
-									<p id="in-state-amount">$<?php echo number_format( $post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The tuition cost of a 
-								<?php 
+								<p class="tuition-description">The tuition cost of a
+								<?php
 									switch( $post->tax_program_type->slug ) {
 										case 'undergraduate-degree':
 											echo 'Bachelors of ';
@@ -226,30 +226,30 @@
 											break;
 									}
 									echo $post->post_title . ' at UCF based on a full time schedule (30 credit hours per year)';
-								?> 
+								?>
 							</div>
 						<?php endif; ?>
 						<dl class="tuition-info-dl">
 							<dt>National Average</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_national_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_national_rate'], 2 ); ?></dd>
 							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_rate'], 2 ); ?>*</dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'], 2 ); ?>*</dd>
 							<dt>Less than national average</dt>
 							<dd>$<?php
 								echo number_format(
-									($post->tuition_estimates['in_state_national_rate'] - $post->tuition_estimates['in_state_rate'] ),
+									(float)($post->tuition_estimates['in_state_national_rate'] - $post->tuition_estimates['in_state_rate'] ),
 									2
 								);
 								?>
 							</dd>
 							<dt>National Average Program</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_national_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_program_national_rate'], 2 ); ?></dd>
 							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['in_state_program_rate'], 2 ); ?>*</dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_program_rate'], 2 ); ?>*</dd>
 							<dt>Less than national average</dt>
 							<dd>$<?php
 								echo number_format(
-									( $post->tuition_estimates['in_state_program_national_rate'] - $post->tuition_estimates['in_state_program_rate'] ),
+									( (float)$post->tuition_estimates['in_state_program_national_rate'] - $post->tuition_estimates['in_state_program_rate'] ),
 									2
 								);
 								?>
@@ -261,10 +261,10 @@
 							<div class="tuition-value-message">
 								<?php echo $post->tuition_value_message; ?>
 								<div class="tuition-total">
-									<p id="out-of-state-amount">$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The tuition cost of a 
-								<?php 
+								<p class="tuition-description">The tuition cost of a
+								<?php
 									switch( $post->tax_program_type->slug ) {
 										case 'undergraduate-degree':
 											echo 'Bachelors of ';
@@ -280,30 +280,30 @@
 											break;
 									}
 									echo $post->post_title . ' at UCF based on a full time schedule (30 credit hours per year)';
-								?> 
+								?>
 							</div>
 						<?php endif; ?>
 						<dl class="tuition-info-dl">
 							<dt>National Average</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_national_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_national_rate'], 2 ); ?></dd>
 							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'], 2 ); ?></dd>
 							<dt>Less than national average</dt>
 							<dd>$<?php
 								echo number_format(
-									($post->tuition_estimates['out_of_state_national_rate'] - $post->tuition_estimates['out_of_state_rate'] ),
+									(float)($post->tuition_estimates['out_of_state_national_rate'] - $post->tuition_estimates['out_of_state_rate'] ),
 									2
 								);
 								?>
 							</dd>
 							<dt>National Average Program</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_national_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_program_national_rate'], 2 ); ?></dd>
 							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
-							<dd>$<?php echo number_format( $post->tuition_estimates['out_of_state_program_rate'], 2 ); ?></dd>
+							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_program_rate'], 2 ); ?></dd>
 							<dt>Less than national average</dt>
 							<dd>$<?php
 								echo number_format(
-									( $post->tuition_estimates['out_of_state_program_national_rate'] - $post->tuition_estimates['out_of_state_program_rate'] ),
+									(float)( $post->tuition_estimates['out_of_state_program_national_rate'] - $post->tuition_estimates['out_of_state_program_rate'] ),
 									2
 								);
 								?>
@@ -311,8 +311,8 @@
 						</dl>
 					</div>
 				</div>
-				<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees. 
-				Program cost is calculated by multiplying this year's tuition and fees by the number of credit hours required to complete the program. 
+				<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees.
+				Program cost is calculated by multiplying this year's tuition and fees by the number of credit hours required to complete the program.
 				Program costs do not include cost of living or any additional fees that may apply.
 				For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
 			</div>
