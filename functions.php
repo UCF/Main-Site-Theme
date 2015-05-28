@@ -1590,7 +1590,7 @@ function append_degree_metadata( $post, $tuition_data ) {
 		}
 
 		// Append taxonomy term "meta"
-		if ( isset( $post->tax_college ) ) {
+		if ( isset( $post->tax_college ) && !empty( $post->tax_college ) && !is_wp_error( $post->tax_college ) ) {
 			$post->tax_college->alias = get_term_custom_meta( $post->tax_college->term_id, 'colleges', 'college_alias' );
 		}
 
