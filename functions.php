@@ -1617,13 +1617,9 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 			case 'minor':
 			case 'articulated-program':
 				$program = 'UnderGrad';
-				$national_in_state_average = $theme_options['national_undergraduate_in_state_average'];
-				$national_out_of_state_average = $theme_options['national_undergraduate_out_of_state_average'];
 				break;
 			case 'graduate-degree':
 				$program = 'Grad';
-				$national_in_state_average = $theme_options['national_graduate_in_state_average'];
-				$national_out_of_state_average = $theme_options['national_graduate_out_of_state_average'];
 				break;
 			default:
 				return null;
@@ -1664,21 +1660,9 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 				}
 			}
 
-			$in_state_program_rate = $in_state_estimated_fees * $credit_hours;
-			$out_of_state_program_rate = $out_of_state_estimated_fees * $credit_hours;
-
-			$in_state_program_national_rate = $national_in_state_average * $credit_hours;
-			$out_of_state_program_national_rate = $national_out_of_state_average * $credit_hours;
-
 			return array(
 				'in_state_rate' => $in_state_estimated_fees,
-				'out_of_state_rate' => $out_of_state_estimated_fees,
-				'in_state_program_rate' => $in_state_program_rate,
-				'out_of_state_program_rate' => $out_of_state_program_rate,
-				'in_state_national_rate' => $national_in_state_average,
-				'out_of_state_national_rate' => $national_out_of_state_average,
-				'in_state_program_national_rate' => $in_state_program_national_rate,
-				'out_of_state_program_national_rate' => $out_of_state_program_national_rate
+				'out_of_state_rate' => $out_of_state_estimated_fees
 			);
 		} else {
 			return null;

@@ -229,32 +229,6 @@
 								?>
 							</div>
 						<?php endif; ?>
-						<dl class="tuition-info-dl">
-							<dt>National Average</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_national_rate'], 2 ); ?></dd>
-							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'], 2 ); ?>*</dd>
-							<dt>Less than national average</dt>
-							<dd>$<?php
-								echo number_format(
-									(float)($post->tuition_estimates['in_state_national_rate'] - $post->tuition_estimates['in_state_rate'] ),
-									2
-								);
-								?>
-							</dd>
-							<dt>National Average Program</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_program_national_rate'], 2 ); ?></dd>
-							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['in_state_program_rate'], 2 ); ?>*</dd>
-							<dt>Less than national average</dt>
-							<dd>$<?php
-								echo number_format(
-									( (float)$post->tuition_estimates['in_state_program_national_rate'] - $post->tuition_estimates['in_state_program_rate'] ),
-									2
-								);
-								?>
-							</dd>
-						</dl>
 					</div>
 					<div class="tab-pane" id="out-of-state">
 						<?php if ( $post->tuition_value_message ) : ?>
@@ -283,38 +257,8 @@
 								?>
 							</div>
 						<?php endif; ?>
-						<dl class="tuition-info-dl">
-							<dt>National Average</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_national_rate'], 2 ); ?></dd>
-							<dt><span style="color: #c90;">UCF</span> Tuition</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'], 2 ); ?></dd>
-							<dt>Less than national average</dt>
-							<dd>$<?php
-								echo number_format(
-									(float)($post->tuition_estimates['out_of_state_national_rate'] - $post->tuition_estimates['out_of_state_rate'] ),
-									2
-								);
-								?>
-							</dd>
-							<dt>National Average Program</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_program_national_rate'], 2 ); ?></dd>
-							<dt><span style="color: #c90;">UCF</span> Program Tuition</dt>
-							<dd>$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_program_rate'], 2 ); ?></dd>
-							<dt>Less than national average</dt>
-							<dd>$<?php
-								echo number_format(
-									(float)( $post->tuition_estimates['out_of_state_program_national_rate'] - $post->tuition_estimates['out_of_state_program_rate'] ),
-									2
-								);
-								?>
-							</dd>
-						</dl>
 					</div>
 				</div>
-				<p class="disclaimer">*All tuition figures given are estimates based on the current tuition and fees.
-				Program cost is calculated by multiplying this year's tuition and fees by the number of credit hours required to complete the program.
-				Program costs do not include cost of living or any additional fees that may apply.
-				For more information please see the <a href="http://tuitionfees.smca.ucf.edu">Tuition and Fees</a> page.</p>
 			</div>
 		<?php endif; ?>
 		</div>
