@@ -160,6 +160,10 @@
     width: 34%;
   }
 
+  #degree-search-content .degree-search-group-title {
+    font-size: 22px;
+  }
+
   #degree-search-content .degree-title-wrap {
     font-size: 16px;
   }
@@ -556,6 +560,17 @@
     width: 100%;
   }
 
+  #degree-search-content .degree-search-group-title {
+    border-bottom: 0 solid transparent;
+    font-size: 21px;
+    line-height: 1.2;
+    margin: 25px 0 0 0;
+  }
+
+  #degree-search-content .degree-search-results {
+    margin-bottom: 35px;
+  }
+
   #degree-search-content .degree-search-result {
     border-top: 1px solid #eee;
     margin-top: 10px;
@@ -568,6 +583,7 @@
   }
   #degree-search-content .degree-search-result:first-child {
     border-top: 0 solid transparent;
+    margin-top: 0;
   }
   #degree-search-content .degree-search-result:nth-child(2n) {
     background-color: transparent;
