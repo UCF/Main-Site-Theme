@@ -1625,13 +1625,8 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 				$national_in_state_average = $theme_options['national_graduate_in_state_average'];
 				$national_out_of_state_average = $theme_options['national_graduate_out_of_state_average'];
 				break;
-			case 'accelerated-program':
-				return null;
 			default:
-				$program = 'UnderGrad';
-				$national_in_state_average = $theme_options['national_undergraduate_in_state_average'];
-				$national_out_of_state_average = $theme_options['national_undergraduate_out_of_state_average'];
-				break;
+				return null;
 		}
 
 		$query_string = http_build_query(
