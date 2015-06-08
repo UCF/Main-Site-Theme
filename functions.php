@@ -1842,7 +1842,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 			?>
 		<?php endforeach; ?>
 	<?php else: ?>
-		<span class="for">at UCF</span>
+		<span class="for">in all at UCF</span>
 	<?php endif; ?>
 <?php
 	return ob_get_clean();
