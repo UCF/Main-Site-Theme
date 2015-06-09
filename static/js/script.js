@@ -761,6 +761,7 @@ var gaEventTracking = function($) {
 var degreeSearch = function($) {
   var $academicsSearch,
     $degreeSearchResultsContainer,
+    $degreeSearchAgainContainer,
     $sidebarLeft,
     $degreeSearchContent,
     ajaxURL;

@@ -1715,6 +1715,7 @@ add_filter( 'posts_search', 'degree_search_with_keywords', 500, 2 );
 function fetch_degree_data( $params ) {
 	$args = array(
 		'numberposts' => -1,
+		'offset' => 0,
 		'post_type' => 'degree',
 		'orderby' => 'title', // default sort by title
 		'order' => 'ASC',
@@ -1722,7 +1723,7 @@ function fetch_degree_data( $params ) {
 		's' => ''
 	);
 
-	if ( $params ) {
+	if ( $params ) {		
 		if ( isset( $params['search-query'] ) ) {
 			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
 		}
@@ -1740,6 +1741,7 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
+		
 		if ( isset( $params['program-type'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'program_types',
@@ -1748,9 +1750,21 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
+		
 		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
 			$args['tax_query']['relation'] = 'AND';
+		}	
+	
+		$result_count = count(get_posts( $args ));
+
+		if ( isset( $params['numberposts'] ) ) {
+			$args['numberposts'] = $params['numberposts'];
 		}
+		
+		if ( isset( $params['offset'] ) ) {
+			$args['offset'] = $params['offset'];
+		}		
+		
 	}
 
 	$posts = get_posts( $args );
@@ -1774,6 +1788,8 @@ function fetch_degree_data( $params ) {
 		}
 		$data = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
 	}
+	
+	array_push($data, $result_count);
 
 	return $data;
 }
@@ -2018,9 +2034,11 @@ function get_degree_search_contents( $return=false, $params=null ) {
 
 	$params = degree_search_params_or_fallback( $params );
 	$query_params = http_build_query( $params );
-	$result_count = 0;
+	// $result_count = 0;
 
 	$results = fetch_degree_data( $params );
+	
+	$result_count = array_pop($results);
 
 	$markup = '<div class="no-results">No results found.</div>';
 
@@ -2068,14 +2086,43 @@ function get_degree_search_contents( $return=false, $params=null ) {
 				$markup .= $result_markup;
 				ob_end_clean();
 
-				$result_count++;
+				// $result_count++;
 			}
 
 			$markup .= '</ul>';
 		}
+		
+		// Add Pagination		
+
+		$disabled = '';
+		$link = 'javascript:;';
+				
+		if($params['offset'] > 0) {
+			$prevParams = $params;
+			$prevParams['offset'] = $prevParams['offset'] - 50;
+			$link = '?'.http_build_query( $prevParams );
+		} else {
+			$disabled = 'disabled';
+		}
+		
+		$markup .= '<ul class="pager"><li class="previous '.$disabled.'"><a href="'.$link.'">&larr; Previous</a></li>';		
+
+		$disabled = '';
+		$link = 'javascript:;';
+		
+		if( ( $params['offset'] + 50 ) < $result_count ) {
+			$nextParams = $params;
+			$nextParams['offset'] = $nextParams['offset'] + 50;	
+			$link = '?'.http_build_query( $nextParams );
+		} else {
+			$disabled = 'disabled';
+		}
+		
+		$markup .= '<li class="next '.$disabled.'"><a href="'.$link.'">Next &rarr;</a></li></ul>';
+		
 	}
 
-	$markup = preg_replace("@[\\r|\\n|\\t]+@", "", $markup);
+	$markup = preg_replace( "@[\\r|\\n|\\t]+@", "", $markup );
 
 	// Print results
 	if ( $return ) {

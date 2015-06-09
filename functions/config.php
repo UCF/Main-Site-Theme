@@ -124,7 +124,9 @@ define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'college' => array(),
 	'sort-by' => 'title',
 	'search-query' => '',
-	'default' => 0
+	'default' => 0,
+	'numberposts' => 50,
+	'offset' => 0
 ) ) );
 
 # Params specifically for the default view.
