@@ -1143,6 +1143,9 @@ li.tagit-new input {
   padding-top: 5px;
   width: 70%;
 }
+#degree-search-top .degree-result-count .for {
+  padding-right: 8px;
+}
 #degree-search-top .degree-result-count-num,
 #degree-search-top .degree-result-count .result,
 #degree-search-top .degree-result-count .search-result {
@@ -1157,10 +1160,10 @@ li.tagit-new input {
   color: #000;
   display: inline-block;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   margin: 2px 0;
-  padding: 0 8px;
+  padding: 0 8px 0 0;
 }
 #degree-search-top .degree-result-count .result .close {
   border: 1px solid #666;

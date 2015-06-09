@@ -1828,7 +1828,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 				<?php echo $program_name; ?>s
 			</span>
 			<?php if ( $count < count( $params['program-type'] ) ): ?>
-				<span class="for"> and </span>
+				<span class="for"> | </span>
 			<?php
 			endif;
 			$count++;
@@ -1851,14 +1851,14 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 				<?php echo $college_name; ?>
 			</span>
 			<?php if ( $count < count( $params['college'] ) ): ?>
-				<span class="for"> and </span>
+				<span class="for"> | </span>
 			<?php
 			endif;
 			$count++;
 			?>
 		<?php endforeach; ?>
 	<?php else: ?>
-		<span class="for">in all at UCF</span>
+		<span class="for">at UCF</span>
 	<?php endif; ?>
 <?php
 	return ob_get_clean();
