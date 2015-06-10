@@ -119,6 +119,8 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
  * Otherwise, each value below should be empty (e.g. an empty string '' or
  * array() ).
  **/
+define( 'DEGREE_SEARCH_PAGE_COUNT', 50 );
+
 define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'program-type' => array(),
 	'college' => array(),
