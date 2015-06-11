@@ -1782,7 +1782,7 @@ function fetch_degree_data( $params ) {
 		$data = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
 	}
 		
-	array_push($data, $result_count);
+	array_push( $data, $result_count );
 
 	return $data;
 }
@@ -2038,11 +2038,10 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	
 	$params = degree_search_params_or_fallback( $params );
 	$query_params = http_build_query( $params );
-	// $result_count = 0;
 
 	$results = fetch_degree_data( $params );
 	
-	$result_count = array_pop($results);
+	$result_count = array_pop( $results );
 
 	$markup = '<div class="no-results">No results found.</div>';
 

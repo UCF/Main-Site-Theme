@@ -983,7 +983,7 @@ var degreeSearch = function($) {
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
       wp.a11y.speak(assistiveText);
       
-      resetSidbarAffix();
+      resetSidebarAffix();
     }, 100);
   }
 
@@ -1007,7 +1007,7 @@ var degreeSearch = function($) {
       var assistiveText = 'Error loading degree data.';
       wp.a11y.speak(assistiveText);
       
-      resetSidbarAffix();
+      resetSidebarAffix();
     }, 100);
   }
 
@@ -1186,7 +1186,7 @@ var degreeSearch = function($) {
     }
   }
   
-  function resetSidbarAffix () {    
+  function resetSidebarAffix () {    
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft.data('bs.affix').options.offset.top = $sidebarLeft.offset().top;
       $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
@@ -1225,11 +1225,11 @@ var degreeSearch = function($) {
     if (window.location.search !== '') {
       $('html, body').animate({
         scrollTop: $academicsSearch.find('#search-query').offset().top - 20
-      }, 200, resetSidbarAffix);
+      }, 200, resetSidebarAffix);
     }
     else {
       $(document).scrollTop(0);
-      setTimeout(resetSidbarAffix, 200);
+      setTimeout(resetSidebarAffix, 200);
     }
   }
 
@@ -1241,7 +1241,7 @@ var degreeSearch = function($) {
     
     $(window).on('resize', function () {
       $(document).scrollTop(0);
-      setTimeout(resetSidbarAffix, 200);
+      setTimeout(resetSidebarAffix, 200);
     });
       
     $(window).on('load resize', function () {
