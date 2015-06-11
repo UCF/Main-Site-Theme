@@ -38,6 +38,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/functions.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/functions.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/functions\/admin.php": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -3597,17 +3606,6 @@
 		"outputStyle": 0,
 		"syntaxCheckerStyle": 1
 		},
-	"\/static\/js\/script.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/static\/js\/script.js",
-		"outputAbbreviatedPath": "\/static\/js\/min\/script-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 0,
-		"syntaxCheckerStyle": 1
-		},
 	"\/static\/js\/webcom-base.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -3685,7 +3683,7 @@
 	},
 "hooks": [
 	],
-"lastSavedByUser": "James Barnes",
+"lastSavedByUser": "RJ Bruneel",
 "manualImportLinks": {
 	},
 "projectAttributes": {

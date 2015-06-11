@@ -991,15 +991,14 @@ li.tagit-new input {
 }
 
 #degree-search-sidebar.affix {
-  height: 100%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
   top: 0;
   z-index: 999;
 }
+
 #degree-search-sidebar.affix-bottom {
   position: absolute;
 }
+
 #degree-search-sidebar .degree-filter-title {
   color: #888;
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
