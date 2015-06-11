@@ -127,7 +127,6 @@ define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'sort-by' => 'title',
 	'search-query' => '',
 	'default' => 0,
-	'numberposts' => 50,
 	'offset' => 0
 ) ) );
 

@@ -1753,24 +1753,17 @@ function fetch_degree_data( $params ) {
 		
 		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
 			$args['tax_query']['relation'] = 'AND';
-		}	
-	
-		$result_count = count(get_posts( $args ));
-
-		if ( isset( $params['numberposts'] ) ) {
-			$args['numberposts'] = $params['numberposts'];
-		}
-		
-		if ( isset( $params['offset'] ) ) {
-			$args['offset'] = $params['offset'];
 		}		
 		
 	}
+	
+	$result_count = count( get_posts( $args ) );
 
 	$posts = get_posts( $args );
-
+	
 	$data = array();
 	if ( $posts ) {
+		
 		foreach ( $posts as $post ) {
 			$degree = append_degree_metadata( $post, false );
 		}
@@ -1788,7 +1781,7 @@ function fetch_degree_data( $params ) {
 		}
 		$data = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
 	}
-	
+		
 	array_push($data, $result_count);
 
 	return $data;
@@ -2055,49 +2048,53 @@ function get_degree_search_contents( $return=false, $params=null ) {
 
 	if ( $results ) {
 		$markup = '';
+		$count = 0;
 
 		foreach ( $results as $program_type_id => $degrees ) {
 			$program_name = get_term( $program_type_id, 'program_types' )->name;
 			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
 			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
-
-			$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
-			$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+			
+			if( $count >= $params['offset'] && $count < ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) ) {				
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+			}
 
 			$markup .= '<ul class="degree-search-results">';
 
 			foreach ( $degrees as $degree ) {
-				$result_markup = '';
-				ob_start();
-				?>
-				<li class="degree-search-result">
-					<h3 class="degree-title-heading">
-						<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
-							<span class="degree-title">
-								<?php echo $degree->post_title; ?>
-							</span>
-							<span class="degree-details">
-								<span class="degree-program-type visible-phone">
-									<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+				$count++;
+				if( $count >= $params['offset'] && $count < ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) ) {
+					$result_markup = '';
+					ob_start();
+					?>
+					<li class="degree-search-result">
+						<h3 class="degree-title-heading">
+							<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+								<span class="degree-title">
+									<?php echo $degree->post_title; ?>
 								</span>
-								<span class="visible-phone degree-details-separator">&verbar;</span>
-								<span class="degree-credits-count">
-								<?php if ( $degree->degree_hours ): ?>
-									<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
-								<?php else: ?>
-									See catalog for credit hours
-								<?php endif; ?>
+								<span class="degree-details">
+									<span class="degree-program-type visible-phone">
+										<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+									</span>
+									<span class="visible-phone degree-details-separator">&verbar;</span>
+									<span class="degree-credits-count">
+									<?php if ( $degree->degree_hours ): ?>
+										<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
+									<?php else: ?>
+										See catalog for credit hours
+									<?php endif; ?>
+									</span>
 								</span>
-							</span>
-						</a>
-					</h3>
-				</li>
-				<?php
-				$result_markup = ob_get_contents();
-				$markup .= $result_markup;
-				ob_end_clean();
-
-				// $result_count++;
+							</a>
+						</h3>
+					</li>
+					<?php
+					$result_markup = ob_get_contents();
+					$markup .= $result_markup;
+					ob_end_clean();
+				}
 			}
 
 			$markup .= '</ul>';
