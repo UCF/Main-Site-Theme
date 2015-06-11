@@ -976,12 +976,14 @@ var degreeSearch = function($) {
       // search query). Makes searching on touch devices less of a pain.
       if (!$academicsSearch.find('#search-query').is(':focus')) {
         scrollToResults();
-      }
-      toggleSidebarAffix();
+      }      
+      
       updateDocumentHead(data);
 
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
       wp.a11y.speak(assistiveText);
+      
+      resetSidbarAffix();
     }, 100);
   }
 
@@ -1000,11 +1002,12 @@ var degreeSearch = function($) {
       if (!$academicsSearch.find('#search-query').is(':focus')) {
         scrollToResults();
       }
-      toggleSidebarAffix();
       updateDocumentHead(data);
 
       var assistiveText = 'Error loading degree data.';
       wp.a11y.speak(assistiveText);
+      
+      resetSidbarAffix();
     }, 100);
   }
 
@@ -1158,7 +1161,7 @@ var degreeSearch = function($) {
     }
   }
 
-  function toggleSidebarAffix() {
+  function initSidebarAffix() {
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
         .affix({
@@ -1180,6 +1183,13 @@ var degreeSearch = function($) {
       $sidebarLeft
         .removeClass('affix affix-top affix-bottom')
         .removeData('bs.affix');
+    }
+  }
+  
+  function resetSidbarAffix () {    
+    if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
+      $sidebarLeft.data('bs.affix').options.offset.top = $sidebarLeft.offset().top;
+      $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
     }
   }
 
@@ -1214,21 +1224,27 @@ var degreeSearch = function($) {
     // affixing bugs)
     if (window.location.search !== '') {
       $('html, body').animate({
-        scrollTop: $academicsSearch.find('#search-query').offset().top - 20,
-      }, 200);
+        scrollTop: $academicsSearch.find('#search-query').offset().top - 20
+      }, 200, resetSidbarAffix);
     }
     else {
       $(document).scrollTop(0);
+      setTimeout(resetSidbarAffix, 200);
     }
   }
 
   function setupEventHandlers() {
-    $(window).on('load', function() {
-      scrollToResults(); // must run before affixing is toggled
+    $(window).on('load', function () {
+      initSidebarAffix();
+      scrollToResults();
     });
-    $(window).on('load resize', function() {
-      toggleSidebarAffix();
-
+    
+    $(window).on('resize', function () {
+      $(document).scrollTop(0);
+      setTimeout(resetSidbarAffix, 200);
+    });
+      
+    $(window).on('load resize', function () {
       if (!$academicsSearch.find('#mobile-filter').is(':visible')) {
         $(document).off('click', closeMenuOnTargetClick);
       }
