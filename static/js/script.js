@@ -758,25 +758,26 @@ var gaEventTracking = function($) {
 /**
  * Handles the Degree search page
  **/
-var degreeSearch = function($) {
+var degreeSearch = function ($) {
   var $academicsSearch,
     $degreeSearchResultsContainer,
     $degreeSearchAgainContainer,
     $sidebarLeft,
     $degreeSearchContent,
-    ajaxURL;
+    ajaxURL,
+    pageCount;
 
   function initAutoComplete() {
     /**
      * Bootstrap typeahead overrides, for general fixes and usability improvements
      **/
-    $.fn.typeahead.Constructor.prototype.blur = function() {
+    $.fn.typeahead.Constructor.prototype.blur = function () {
       // Workaround for bug in mouse item selection
       var that = this;
       setTimeout(function () { that.hide(); }, 250);
     };
 
-    $.fn.typeahead.Constructor.prototype.select = function(e) {
+    $.fn.typeahead.Constructor.prototype.select = function (e) {
       var val = this.$menu.find('.active').attr('data-value');
       if (val) {
         this.$element
@@ -792,8 +793,8 @@ var degreeSearch = function($) {
       return this.hide();
     };
 
-    $.fn.typeahead.Constructor.prototype.keyup = function(e) {
-      switch(e.keyCode) {
+    $.fn.typeahead.Constructor.prototype.keyup = function (e) {
+      switch (e.keyCode) {
         case 40: // down arrow
         case 38: // up arrow
         case 16: // shift
@@ -826,13 +827,13 @@ var degreeSearch = function($) {
       e.preventDefault();
     }
 
-    $.fn.typeahead.Constructor.prototype.keydown = function(e) {
-      this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40,38,9,27]); // remove 13 (enter)
+    $.fn.typeahead.Constructor.prototype.keydown = function (e) {
+      this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40, 38, 9, 27]); // remove 13 (enter)
       this.move(e);
     }
 
-    $.fn.typeahead.Constructor.prototype.move = function(e) {
-      switch(e.keyCode) {
+    $.fn.typeahead.Constructor.prototype.move = function (e) {
+      switch (e.keyCode) {
         // case 9: // Remove tab overrides
         case 13: // enter
           if (this.shown) { // Allow enter key to submit form when no suggestions are available
@@ -858,7 +859,7 @@ var degreeSearch = function($) {
       e.stopPropagation();
     }
 
-    $.fn.typeahead.Constructor.prototype.render = function(items) {
+    $.fn.typeahead.Constructor.prototype.render = function (items) {
       var that = this;
 
       // Don't autoselect 1st suggestion
@@ -880,77 +881,77 @@ var degreeSearch = function($) {
     // Typeahead init
     $searchQuery
       .typeahead({
-        source: function(query, process) {
-          return searchSuggestions; // searchSuggestions defined in page-degree-search.php
-        },
-        updater: function(item) {
-          $(this).val(item);
-          return item;
-        }
-      });
+      source: function (query, process) {
+        return searchSuggestions; // searchSuggestions defined in page-degree-search.php
+      },
+      updater: function (item) {
+        $(this).val(item);
+        return item;
+      }
+    });
 
     // Dynamic content reloading for browsers that support history api
     if (supportsHistory()) {
       var timer = null;
 
-      $academicsSearch.on('submit', function(e) {
+      $academicsSearch.on('submit', function (e) {
         e.preventDefault();
         loadDegreeSearchResults();
       });
 
       $searchQuery
         .on({
-          'keyup': function(e) {
-            if (e.keyCode === 13) {
-              // Don't trigger a submit here (prevent loadDegreeSearchResults from firing twice)
-              e.preventDefault();
-            }
-            else if ($.inArray(e.keyCode, [9, 16, 37, 38, 39, 40]) === -1) {
-              if (timer) {
-                clearTimeout(timer);
-              }
-              timer = setTimeout(function() {
-                loadDegreeSearchResults();
-              }, 300);
-            }
-          },
-          'mouseup': function(e) {
-            // Force detection of IE10+ 'x' button click on input field.
-            // If the input value is cleared by button press, simulate a keyup
-            // event, which will trigger loadDegreeSearchResults() (see above).
-            var oldValue = $searchQuery.val();
-
-            if (oldValue == '') {
-              return;
-            }
-
-            setTimeout(function() {
-              var newValue = $searchQuery.val();
-              if (newValue == '') {
-                $searchQuery.trigger('keyup');
-              }
-            });
+        'keyup': function (e) {
+          if (e.keyCode === 13) {
+            // Don't trigger a submit here (prevent loadDegreeSearchResults from firing twice)
+            e.preventDefault();
           }
-        });
+          else if ($.inArray(e.keyCode, [9, 16, 37, 38, 39, 40]) === -1) {
+            if (timer) {
+              clearTimeout(timer);
+            }
+            timer = setTimeout(function () {
+              loadDegreeSearchResults();
+            }, 300);
+          }
+        },
+        'mouseup': function (e) {
+          // Force detection of IE10+ 'x' button click on input field.
+          // If the input value is cleared by button press, simulate a keyup
+          // event, which will trigger loadDegreeSearchResults() (see above).
+          var oldValue = $searchQuery.val();
+
+          if (oldValue == '') {
+            return;
+          }
+
+          setTimeout(function () {
+            var newValue = $searchQuery.val();
+            if (newValue == '') {
+              $searchQuery.trigger('keyup');
+            }
+          });
+        }
+      });
     }
   }
 
   function updateDocumentHead(data) {
     var baseURL = window.location.href.indexOf('?') > -1 ? window.location.href.split('?')[0] : window.location.href,
-        newURL = baseURL + '?' + data.querystring;
+      newURL = baseURL + '?' + data.querystring;
 
     window.history.replaceState(null, null, newURL);
 
     // <head> updates
     $(document)
       .find('title')
-        .text(data.title)
-        .end()
+      .text(data.title)
+      .end()
       .find('meta[property="og:title"]')
-        .attr('content', data.title)
-        .end()
+      .attr('content', data.title)
+      .end()
       .find('meta[name="description"], meta[property="og:description"]')
-        .attr('content', data.description);
+      .attr('content', data.description);
   }
 
   function degreeSearchSuccessHandler(data) {
@@ -958,7 +959,7 @@ var degreeSearch = function($) {
 
     // Make sure the spinner actually gets displayed
     // so the user knows the page changed
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       $loaderScreen.addClass('hidden');
 
       $degreeSearchResultsContainer
@@ -967,7 +968,7 @@ var degreeSearch = function($) {
 
       $academicsSearch
         .find('.degree-result-count')
-          .html(data.count);
+        .html(data.count);
 
       $degreeSearchAgainContainer.html(data.searchagain);
 
@@ -976,13 +977,13 @@ var degreeSearch = function($) {
       // search query). Makes searching on touch devices less of a pain.
       if (!$academicsSearch.find('#search-query').is(':focus')) {
         scrollToResults();
-      }      
-      
+      }
+
       updateDocumentHead(data);
 
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
       wp.a11y.speak(assistiveText);
-      
+
       resetSidebarAffix();
     }, 100);
   }
@@ -992,7 +993,7 @@ var degreeSearch = function($) {
 
     // Make sure the spinner actually gets displayed
     // so the user knows the page changed
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       $loaderScreen.addClass('hidden');
 
       $degreeSearchResultsContainer
@@ -1006,7 +1007,7 @@ var degreeSearch = function($) {
 
       var assistiveText = 'Error loading degree data.';
       wp.a11y.speak(assistiveText);
-      
+
       resetSidebarAffix();
     }, 100);
   }
@@ -1019,10 +1020,10 @@ var degreeSearch = function($) {
     // We only want Android 2 and 4.0, stock browser, and not Chrome which identifies
     // itself as 'Mobile Safari' as well, nor Windows Phone (issue #1471).
     if ((ua.indexOf('Android 2.') !== -1 ||
-        (ua.indexOf('Android 4.0') !== -1)) &&
-        ua.indexOf('Mobile Safari') !== -1 &&
-        ua.indexOf('Chrome') === -1 &&
-        ua.indexOf('Windows Phone') === -1) {
+      (ua.indexOf('Android 4.0') !== -1)) &&
+      ua.indexOf('Mobile Safari') !== -1 &&
+      ua.indexOf('Chrome') === -1 &&
+      ua.indexOf('Windows Phone') === -1) {
       return false;
     }
 
@@ -1030,19 +1031,26 @@ var degreeSearch = function($) {
     return (window.history && 'pushState' in window.history);
   }
 
-  function loadDegreeSearchResults() {
+  function loadDegreeSearchResults(isPaging) {
     if (supportsHistory()) {
       $academicsSearch.find('#ajax-loading').removeClass('hidden');
 
       var programType = [];
-      $academicsSearch.find('.program-type:checked').each(function() {
+      $academicsSearch.find('.program-type:checked').each(function () {
         programType.push($(this).val());
       });
 
       var college = [];
-      $academicsSearch.find('.college:checked').each(function() {
+      $academicsSearch.find('.college:checked').each(function () {
         college.push($(this).val());
       });
+      var offset;
+      if (isPaging === true) {
+        offset = $academicsSearch.find('#offset').val();
+      } else {
+        offset = 0;
+        $academicsSearch.find('#offset').val(0);
+      }
 
       $.ajax({
         url: ajaxURL,
@@ -1053,17 +1061,18 @@ var degreeSearch = function($) {
           'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
           'sort-by': $academicsSearch.find('.sort-by:checked').val(),
           'program-type': programType,
-          'college': college
+          'college': college,
+          'offset': offset
         },
         dataType: 'json'
       })
-        .done(function(data) {
-          trackFilterForGoogle(programType, college, $academicsSearch.find('#search-query').val());
-          degreeSearchSuccessHandler(data);
-        })
-        .fail(function(data) {
-          degreeSearchFailureHandler(data);
-        });
+        .done(function (data) {
+        trackFilterForGoogle(programType, college, $academicsSearch.find('#search-query').val());
+        degreeSearchSuccessHandler(data);
+      })
+        .fail(function (data) {
+        degreeSearchFailureHandler(data);
+      });
     }
     else {
       $academicsSearch.submit();
@@ -1071,7 +1080,7 @@ var degreeSearch = function($) {
   }
 
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
-    if ( typeof ga !== 'undefined' ) {
+    if (typeof ga !== 'undefined') {
 
       var category = 'Degree Search',
         action = 'Filters Updated',
@@ -1099,8 +1108,8 @@ var degreeSearch = function($) {
       .removeClass('active')
       .end()
       .css({
-        'max-height': 0
-      });
+      'max-height': 0
+    });
     loadDegreeSearchResults();
 
     $(document).off('click', closeMenuOnTargetClick);
@@ -1133,9 +1142,9 @@ var degreeSearch = function($) {
     // Position sidebar
     $sidebarLeft
       .css({
-        'max-height': $(window).height() - 40,
-        'top': $filterBtn.offset().top + ( $filterBtn.outerHeight() / 2 )
-      })
+      'max-height': $(window).height() - 40,
+      'top': $filterBtn.offset().top + ($filterBtn.outerHeight() / 2)
+    })
       .add($filterBtn)
       .addClass('active');
   }
@@ -1165,17 +1174,17 @@ var degreeSearch = function($) {
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
         .affix({
-          offset: {
-            top: $sidebarLeft.offset().top,
-            bottom: $('#footer').outerHeight() + 100
-          }
-        })
-        .on('affixed.bs.affix affixed-bottom.bs.affix', function() {
-          $degreeSearchContent.addClass('offset3');
-        })
-        .on('affixed-top.bs.affix', function() {
-          $degreeSearchContent.removeClass('offset3');
-        });
+        offset: {
+          top: $sidebarLeft.offset().top,
+          bottom: $('#footer').outerHeight() + 100
+        }
+      })
+        .on('affixed.bs.affix affixed-bottom.bs.affix', function () {
+        $degreeSearchContent.addClass('offset3');
+      })
+        .on('affixed-top.bs.affix', function () {
+        $degreeSearchContent.removeClass('offset3');
+      });
     }
     else {
       $degreeSearchContent.removeClass('offset3');
@@ -1185,8 +1194,8 @@ var degreeSearch = function($) {
         .removeData('bs.affix');
     }
   }
-  
-  function resetSidebarAffix () {    
+
+  function resetSidebarAffix() {
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft.data('bs.affix').options.offset.top = $sidebarLeft.offset().top;
       $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
@@ -1195,7 +1204,7 @@ var degreeSearch = function($) {
 
   function resultPhraseClickHandler(e) {
     var $target = $(e.target),
-        $filterCheckbox = $('.' + $target.attr('data-filter-class') + '[value="'+ $target.attr('data-filter-value') + '"]');
+      $filterCheckbox = $('.' + $target.attr('data-filter-class') + '[value="' + $target.attr('data-filter-value') + '"]');
 
     if ($filterCheckbox) {
       $filterCheckbox
@@ -1209,8 +1218,8 @@ var degreeSearch = function($) {
     e.preventDefault();
 
     var $target = $(e.target),
-        programType = $target.attr('data-program-type'),
-        searchTerm = $target.attr('data-search-term');
+      programType = $target.attr('data-program-type'),
+      searchTerm = $target.attr('data-search-term');
 
     trackFilterForGoogle([programType], [], searchTerm);
 
@@ -1238,12 +1247,12 @@ var degreeSearch = function($) {
       initSidebarAffix();
       scrollToResults();
     });
-    
+
     $(window).on('resize', function () {
       $(document).scrollTop(0);
       setTimeout(resetSidebarAffix, 200);
     });
-      
+
     $(window).on('load resize', function () {
       if (!$academicsSearch.find('#mobile-filter').is(':visible')) {
         $(document).off('click', closeMenuOnTargetClick);
@@ -1253,7 +1262,18 @@ var degreeSearch = function($) {
     $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
     $academicsSearch.on('click', '.search-again-link', searchAgainClickHandler);
-    $academicsSearch.on('click', '.seo-li', function(e) {
+    $academicsSearch.on('click', '.pager a', function (e) {
+      e.preventDefault();
+      var $offset = $academicsSearch.find('#offset'),
+          offsetValue  = parseInt($academicsSearch.find('#offset').val());
+      if ($(e.target).parent().hasClass('next')) {
+        $offset.val(offsetValue + pageCount);
+      } else {
+        $offset.val(offsetValue - pageCount);
+      }
+      loadDegreeSearchResults(true);
+    });
+    $academicsSearch.on('click', '.seo-li', function (e) {
       e.preventDefault();
       if ($('body').hasClass('ie8')) {
         // In IE8 trigger doesn't fire correctly
@@ -1268,6 +1288,7 @@ var degreeSearch = function($) {
 
   function initPage() {
     $academicsSearch = $('#academics-search-form');
+    pageCount = parseInt($academicsSearch.find('#offset').attr('data-offset-count'));
 
     if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
@@ -1281,29 +1302,29 @@ var degreeSearch = function($) {
   }
 
   $(initPage);
-}
+};
 
 
 /**
  * Scripts for single degree profile templates
  **/
-var degreeProfile = function($) {
+var degreeProfile = function ($) {
   var $degreeSingle = $('#degree-single');
 
   if ($degreeSingle.length > 0) {
     var prevPage = document.referrer,
-        $breadcrumbSearch = $degreeSingle.find('#breadcrumb-search'),
-        degreeSearchURL = $breadcrumbSearch.attr('href');
+      $breadcrumbSearch = $degreeSingle.find('#breadcrumb-search'),
+      degreeSearchURL = $breadcrumbSearch.attr('href');
 
     if (prevPage !== '' && prevPage.indexOf(degreeSearchURL) > -1) {
       $breadcrumbSearch
-        .on('click', function(e) {
-          e.preventDefault();
-          window.history.go(-1);
-        });
+        .on('click', function (e) {
+        e.preventDefault();
+        window.history.go(-1);
+      });
     }
   }
-}
+};
 
 var socialButtonTracking = function($) {
   $('.social a').click(function() {
@@ -1379,4 +1400,6 @@ if (typeof jQuery != 'undefined'){
     statusAlertCheck($);
     setInterval(function() {statusAlertCheck($);}, 30000);
   });
-}else{console.log('jQuery dependency failed to load');}
+} else {
+  console.log('jQuery dependency failed to load');
+}
