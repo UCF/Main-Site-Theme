@@ -2101,23 +2101,25 @@ function get_degree_search_contents( $return=false, $params=null ) {
 		
 		// Add Pagination		
 		if( $result_count > DEGREE_SEARCH_PAGE_COUNT ) {
-			
-			$prev_link = '';					
+			$markup .= '<ul class="pager">';
+				
+			$prev_link = '';				
 			if( $params['offset'] > 0 ) {
 				$prev_params = $params;
 				$prev_params['offset'] = $prev_params['offset'] - DEGREE_SEARCH_PAGE_COUNT;
 				$prev_link = '?'.http_build_query( $prev_params );
-				$markup .= '<ul class="pager"><li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li></ul>';	
-			}
-				
-			$next_link = '';			
+				$markup .= '<li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li>';
+			}	
+			
+			$next_link = '';							
 			if( ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) < $result_count ) {
 				$next_params = $params;
 				$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;	
 				$next_link = '?'.http_build_query( $next_params );
-				$markup .= '<ul class="pager"><li class="next"><a href="'.$next_link.'">Next &rarr;</a></li></ul>';
+				$markup .= '<li class="next"><a href="'.$next_link.'">Next &rarr;</a></li>';
 			}
 			
+			$markup .= '</ul>';			
 		}
 		
 	}

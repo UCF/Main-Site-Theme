@@ -53,6 +53,8 @@ get_header(); the_post(); ?>
 					<div class="degree-search-form-inner">
 						<label for="search-query" class="sr-only">Search for a degree program</label>
 						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
+						<input id="offset" type="hidden"  value="<?php if ( isset( $params['offset'] ) ) { echo $params['offset']; } ?>"
+							data-offset-count="<?php echo DEGREE_SEARCH_PAGE_COUNT ?>">
 						<button class="btn btn-link" type="submit">Search</button>
 					</div>
 				</fieldset>
