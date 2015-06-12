@@ -765,7 +765,8 @@ var degreeSearch = function ($) {
     $sidebarLeft,
     $degreeSearchContent,
     ajaxURL,
-    pageCount;
+    pageCount,
+    headerHeight;
 
   function initAutoComplete() {
     /**
@@ -1175,7 +1176,7 @@ var degreeSearch = function ($) {
       $sidebarLeft
         .affix({
         offset: {
-          top: $sidebarLeft.offset().top,
+          top: headerHeight + $academicsSearch.find('#degree-search-top').outerHeight(),
           bottom: $('#footer').outerHeight() + 100
         }
       })
@@ -1197,7 +1198,7 @@ var degreeSearch = function ($) {
 
   function resetSidebarAffix() {
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
-      $sidebarLeft.data('bs.affix').options.offset.top = $sidebarLeft.offset().top;
+      $sidebarLeft.data('bs.affix').options.offset.top = headerHeight + $academicsSearch.find('#degree-search-top').outerHeight();
       $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
     }
   }
@@ -1236,9 +1237,9 @@ var degreeSearch = function ($) {
         scrollTop: $academicsSearch.find('#search-query').offset().top - 20
       }, 200, resetSidebarAffix);
     }
-    else {
+    else {      
       $(document).scrollTop(0);
-      setTimeout(resetSidebarAffix, 200);
+      resetSidebarAffix();
     }
   }
 
@@ -1249,8 +1250,7 @@ var degreeSearch = function ($) {
     });
 
     $(window).on('resize', function () {
-      $(document).scrollTop(0);
-      setTimeout(resetSidebarAffix, 200);
+      resetSidebarAffix();
     });
 
     $(window).on('load resize', function () {
@@ -1289,6 +1289,8 @@ var degreeSearch = function ($) {
   function initPage() {
     $academicsSearch = $('#academics-search-form');
     pageCount = parseInt($academicsSearch.find('#offset').attr('data-offset-count'));
+    // The extra 70 pixels is for the ucf header that loads in late and some other unaccounted for pixels.
+    headerHeight = 70 + $('#header-nav-wrap').outerHeight() + $('#page_title').outerHeight();
 
     if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
