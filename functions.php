@@ -2054,12 +2054,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
 			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
 			
-			if( $count >= $params['offset'] && $count < ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) ) {				
-				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
-				$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
-			}
-
-			$markup .= '<ul class="degree-search-results">';
+			$degree_markup = '';
 
 			foreach ( $degrees as $degree ) {
 				$count++;
@@ -2091,12 +2086,17 @@ function get_degree_search_contents( $return=false, $params=null ) {
 					</li>
 					<?php
 					$result_markup = ob_get_contents();
-					$markup .= $result_markup;
+					$degree_markup .= $result_markup;
 					ob_end_clean();
 				}
+			}			
+			
+			if ( !empty( $degree_markup ) ) {				
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
 			}
 
-			$markup .= '</ul>';
+			$markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
 		}
 		
 		// Add Pagination		
