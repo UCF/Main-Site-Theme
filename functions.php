@@ -1757,9 +1757,9 @@ function fetch_degree_data( $params ) {
 		
 	}
 	
-	$result_count = count( get_posts( $args ) );
-
 	$posts = get_posts( $args );
+	
+	$result_count = count( $posts );
 	
 	$data = array();
 	if ( $posts ) {
@@ -1836,12 +1836,12 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<span class="for">at </span>
 		<?php
 		$count = 1;		
-		$isAllCollegesSelected = false;
+		$is_all_colleges_selected = false;
 		if( count( $params['college'] ) === count( get_terms ('colleges') ) ) {
-			$isAllCollegesSelected = true;
+			$is_all_colleges_selected = true;
 		}		
 		foreach ( $params['college'] as $college_slug ):			
-			if( $isAllCollegesSelected ) {
+			if( $is_all_colleges_selected ) {
 				$college_name = str_replace( "College of ", "", get_term_by( 'slug', $college_slug, 'colleges' )->name );
 			} else {
 				$college_name = 'the ' . get_term_by( 'slug', $college_slug, 'colleges' )->name;
@@ -1860,7 +1860,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 			$count++;
 			?>
 		<?php endforeach; ?>
-		<a href="/degree-search/" class="reset-search">Clear All</a>
+		<a href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>" class="reset-search">Clear All</a>
 	<?php else: ?>
 		<span class="for">at UCF</span>
 	<?php endif; ?>
@@ -2101,31 +2101,23 @@ function get_degree_search_contents( $return=false, $params=null ) {
 		
 		// Add Pagination		
 		if( $result_count > DEGREE_SEARCH_PAGE_COUNT ) {
-			$disabled = '';
-			$link = 'javascript:;';
-					
+			
+			$prev_link = '';					
 			if( $params['offset'] > 0 ) {
-				$prevParams = $params;
-				$prevParams['offset'] = $prevParams['offset'] - DEGREE_SEARCH_PAGE_COUNT;
-				$link = '?'.http_build_query( $prevParams );
-			} else {
-				$disabled = 'disabled';
+				$prev_params = $params;
+				$prev_params['offset'] = $prev_params['offset'] - DEGREE_SEARCH_PAGE_COUNT;
+				$prev_link = '?'.http_build_query( $prev_params );
+				$markup .= '<ul class="pager"><li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li></ul>';	
 			}
-			
-			$markup .= '<ul class="pager"><li class="previous '.$disabled.'"><a href="'.$link.'">&larr; Previous</a></li>';		
-	
-			$disabled = '';
-			$link = 'javascript:;';
-			
+				
+			$next_link = '';			
 			if( ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) < $result_count ) {
-				$nextParams = $params;
-				$nextParams['offset'] = $nextParams['offset'] + DEGREE_SEARCH_PAGE_COUNT;	
-				$link = '?'.http_build_query( $nextParams );
-			} else {
-				$disabled = 'disabled';
+				$next_params = $params;
+				$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;	
+				$next_link = '?'.http_build_query( $next_params );
+				$markup .= '<ul class="pager"><li class="next"><a href="'.$next_link.'">Next &rarr;</a></li></ul>';
 			}
 			
-			$markup .= '<li class="next '.$disabled.'"><a href="'.$link.'">Next &rarr;</a></li></ul>';
 		}
 		
 	}
