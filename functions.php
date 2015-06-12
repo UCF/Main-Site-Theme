@@ -1710,9 +1710,20 @@ add_filter( 'posts_search', 'degree_search_with_keywords', 500, 2 );
 
 
 /**
+ * Helper udiff function for returning the difference between two arrays of
+ * post objects
+ **/
+function posts_array_diff( $post_1, $post_2 ) {
+	return $post_1->ID - $post_2->ID;
+}
+
+
+/**
  * Handles the retrieval of Degree posts from WordPress for the Degree Search.
  **/
 function fetch_degree_data( $params ) {
+	$use_suggestions = false;
+	$posts_all = $posts_suggested = array();
 	$args = array(
 		'numberposts' => -1,
 		'offset' => 0,
@@ -1723,16 +1734,24 @@ function fetch_degree_data( $params ) {
 		's' => ''
 	);
 
-	if ( $params ) {		
+	if ( $params ) {
 		if ( isset( $params['search-query'] ) ) {
 			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
+			$use_suggestions = true;
 		}
 
 		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
 			$args['meta_key'] = 'degree_hours';
 			$args['orderby'] = 'meta_value_num title';
 		}
+	}
 
+	// Fetch all posts to compare and create diff for suggested posts later
+	if ( $use_suggestions ) {
+		$posts_all = get_posts( $args );
+	}
+
+	if ( $params ) {
 		if ( isset( $params['college'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'colleges',
@@ -1741,7 +1760,7 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
-		
+
 		if ( isset( $params['program-type'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'program_types',
@@ -1750,41 +1769,61 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
-		
+
 		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
 			$args['tax_query']['relation'] = 'AND';
-		}		
-		
+		}
+
 	}
-	
+
 	$posts = get_posts( $args );
-	
+	if ( $use_suggestions ) {
+		$posts_suggested = array_udiff( $posts_all, $posts, 'posts_array_diff' );
+	}
+
 	$result_count = count( $posts );
-	
-	$data = array();
+	$suggestion_count = count( $posts_suggested );
+
+	$posts_grouped = $suggestions_grouped = array();
+
+	// Get array of IDs of groupable program types
+	$groupable_types_slugs = unserialize( DEGREE_PROGRAM_ORDER );
+	$groupable_types = array();
+	if ( $groupable_types_slugs ) {
+		foreach ( $groupable_types_slugs as $slug ) {
+			$term = get_term_by( 'slug', $slug, 'program_types' );
+			$groupable_types[] = $term->term_id;
+		}
+	}
+	else {
+		$groupable_types = null;
+	}
+
+	// Group posts
 	if ( $posts ) {
-		
 		foreach ( $posts as $post ) {
 			$degree = append_degree_metadata( $post, false );
 		}
 
-		$groupable_types_slugs = unserialize( DEGREE_PROGRAM_ORDER );
-		$groupable_types = array();
-		if ( $groupable_types_slugs ) {
-			foreach ( $groupable_types_slugs as $slug ) {
-				$term = get_term_by( 'slug', $slug, 'program_types' );
-				$groupable_types[] = $term->term_id;
-			}
-		}
-		else {
-			$groupable_types = null;
-		}
-		$data = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
+		$posts_grouped = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
 	}
-		
-	array_push( $data, $result_count );
 
-	return $data;
+	// Group suggested
+	if ( $posts_suggested ) {
+		foreach ( $posts_suggested as $post ) {
+			$degree = append_degree_metadata( $post, false );
+		}
+
+		$suggestions_grouped = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts_suggested, $groupable_types ) );
+	}
+
+
+	return array(
+		'results' => $posts_grouped,
+		'suggestions' => $suggestions_grouped,
+		'result_count' => $result_count,
+		'suggestion_count' => $suggestion_count
+	);
 }
 
 
@@ -1835,12 +1874,12 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	?>
 	<span class="for">at </span>
 		<?php
-		$count = 1;		
+		$count = 1;
 		$is_all_colleges_selected = false;
 		if( count( $params['college'] ) === count( get_terms ('colleges') ) ) {
 			$is_all_colleges_selected = true;
-		}		
-		foreach ( $params['college'] as $college_slug ):			
+		}
+		foreach ( $params['college'] as $college_slug ):
 			if( $is_all_colleges_selected ) {
 				$college_name = str_replace( "College of ", "", get_term_by( 'slug', $college_slug, 'colleges' )->name );
 			} else {
@@ -1849,7 +1888,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 		?>
 			<span class="result">
 				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college_slug; ?>"></span>
-				<?php 
+				<?php
 					echo $college_name;
 				?>
 			</span>
@@ -2028,6 +2067,42 @@ function get_hiearchical_degree_search_data_json() {
 }
 
 /**
+ * Returns markup for a degree list item in Degree Search results.
+ * Assumes $degree objects have already been passed through append_degree_metadata()
+ * (via fetch_degree_data()).
+ * Intended for use in get_degree_search_contents().
+ **/
+function get_degree_search_listitem_markup( $degree, $program_alias, $program_name ) {
+	ob_start();
+?>
+	<li class="degree-search-result">
+		<h3 class="degree-title-heading">
+			<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+				<span class="degree-title">
+					<?php echo $degree->post_title; ?>
+				</span>
+				<span class="degree-details">
+					<span class="degree-program-type visible-phone">
+						<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+					</span>
+					<span class="visible-phone degree-details-separator">&verbar;</span>
+					<span class="degree-credits-count">
+					<?php if ( $degree->degree_hours ): ?>
+						<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
+					<?php else: ?>
+						See catalog for credit hours
+					<?php endif; ?>
+					</span>
+				</span>
+			</a>
+		</h3>
+	</li>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
  * Returns all data and markup necessary for the Degree Search.  Used via
  * both ajax requests and on initial page load in page-degree-search.php.
  **/
@@ -2035,93 +2110,106 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	if ( !defined( 'WP_USE_THEMES' ) ) {
 		define( 'WP_USE_THEMES', false );
 	}
-	
+
 	$params = degree_search_params_or_fallback( $params );
 	$query_params = http_build_query( $params );
 
-	$results = fetch_degree_data( $params );
-	
-	$result_count = array_pop( $results );
+	$data = fetch_degree_data( $params );
+	extract( $data ); // import $results, $suggestions, $result_count and $suggestion_count
 
 	$markup = '<div class="no-results">No results found.</div>';
+	$offset_start = intval( $params['offset'] );
+	$offset_end = $offset_start + DEGREE_SEARCH_PAGE_COUNT;
+	$count_all = $result_count + $suggestion_count;
+	$count = 0;
 
 	if ( $results ) {
 		$markup = '';
-		$count = 0;
+
+		$degree_list_markup = '';
 
 		foreach ( $results as $program_type_id => $degrees ) {
 			$program_name = get_term( $program_type_id, 'program_types' )->name;
 			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
 			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
-			
+
 			$degree_markup = '';
 
 			foreach ( $degrees as $degree ) {
-				$count++;
-				if( $count >= $params['offset'] && $count < ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) ) {
-					$result_markup = '';
-					ob_start();
-					?>
-					<li class="degree-search-result">
-						<h3 class="degree-title-heading">
-							<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
-								<span class="degree-title">
-									<?php echo $degree->post_title; ?>
-								</span>
-								<span class="degree-details">
-									<span class="degree-program-type visible-phone">
-										<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
-									</span>
-									<span class="visible-phone degree-details-separator">&verbar;</span>
-									<span class="degree-credits-count">
-									<?php if ( $degree->degree_hours ): ?>
-										<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
-									<?php else: ?>
-										See catalog for credit hours
-									<?php endif; ?>
-									</span>
-								</span>
-							</a>
-						</h3>
-					</li>
-					<?php
-					$result_markup = ob_get_contents();
-					$degree_markup .= $result_markup;
-					ob_end_clean();
+				if( $count >= $offset_start && $count < $offset_end ) {
+					$degree_markup .= get_degree_search_listitem_markup( $degree, $program_alias, $program_name );
 				}
-			}			
-			
-			if ( !empty( $degree_markup ) ) {				
-				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
-				$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+				$count++;
 			}
 
-			$markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
-		}
-		
-		// Add Pagination		
-		if( $result_count > DEGREE_SEARCH_PAGE_COUNT ) {
-			$markup .= '<ul class="pager">';
-				
-			$prev_link = '';				
-			if( $params['offset'] > 0 ) {
-				$prev_params = $params;
-				$prev_params['offset'] = $prev_params['offset'] - DEGREE_SEARCH_PAGE_COUNT;
-				$prev_link = '?'.http_build_query( $prev_params );
-				$markup .= '<li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li>';
-			}	
-			
-			$next_link = '';							
-			if( ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) < $result_count ) {
-				$next_params = $params;
-				$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;	
-				$next_link = '?'.http_build_query( $next_params );
-				$markup .= '<li class="next"><a href="'.$next_link.'">Next &rarr;</a></li>';
+			if ( !empty( $degree_markup ) ) {
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				$degree_list_markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+				$degree_list_markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
 			}
-			
-			$markup .= '</ul>';			
 		}
-		
+
+		if ( !empty( $degree_list_markup ) ) {
+			$markup .= $degree_list_markup;
+		}
+	}
+
+	// Add suggestions
+	if ( $suggestions && $count < $offset_end ) {
+
+		$suggestion_markup = '';
+
+		foreach ( $suggestions as $program_type_id => $degrees ) {
+			$program_name = get_term( $program_type_id, 'program_types' )->name;
+			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
+			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
+
+			$degree_markup = '';
+			foreach ( $degrees as $degree ) {
+				if( $count >= $offset_start && $count < $offset_end ) {
+					$degree_markup .= get_degree_search_listitem_markup( $degree, $program_alias, $program_name );
+				}
+				$count++;
+			}
+
+			if ( !empty( $degree_markup ) ) {
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				$suggestion_markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+				$suggestion_markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
+			}
+		}
+
+		if ( !empty( $suggestion_markup ) ) {
+			$markup .= '<div class="degree-search-suggestions">';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $suggestion_count .' more similar results found for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>:</p>';
+			$markup .= $suggestion_markup;
+			$markup .= '</div>';
+		}
+	}
+
+	// Add Pagination
+	if( $count_all > DEGREE_SEARCH_PAGE_COUNT ) {
+
+		$markup .= '<ul class="pager">';
+
+		$prev_link = '';
+		if( $offset_start > 0 ) {
+			$prev_params = $params;
+			$prev_params['offset'] = $prev_params['offset'] - DEGREE_SEARCH_PAGE_COUNT;
+			$prev_link = '?'.http_build_query( $prev_params );
+			$markup .= '<li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li>';
+		}
+
+		$next_link = '';
+		if( $offset_end < $count_all && $count <= $count_all ) {
+			$next_params = $params;
+			$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;
+			$next_link = '?'.http_build_query( $next_params );
+			$markup .= '<li class="next"><a href="'.$next_link.'">Next &rarr;</a></li>';
+		}
+
+		$markup .= '</ul>';
+
 	}
 
 	$markup = preg_replace( "@[\\r|\\n|\\t]+@", "", $markup );

@@ -1329,6 +1329,24 @@ li.tagit-new input {
   margin: auto;
 }
 
+#degree-search-content .degree-search-suggestions {
+  margin-top: 20px;
+}
+#degree-search-content .degree-search-results + .degree-search-suggestions {
+  border-top: 1px solid #eee;
+  margin-top: 30px;
+  padding-top: 35px;
+}
+#degree-search-content .degree-search-suggestions-phrase {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: italic;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
 
 /* Single Degree profiles */
 #degree-single #breadcrumbs {
