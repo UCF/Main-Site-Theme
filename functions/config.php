@@ -132,7 +132,7 @@ define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 
 # Params specifically for the default view.
 define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
-	'program-type' => array(),
+	'program-type' => array('undergraduate-degree'),
 	'college' => array(),
 	'sort-by' => 'title',
 	'search-query' => '',
