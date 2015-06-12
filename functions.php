@@ -2117,6 +2117,11 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	$data = fetch_degree_data( $params );
 	extract( $data ); // import $results, $suggestions, $result_count and $suggestion_count
 
+	$college_name = null;
+	if ( isset( $params['college'] ) && count( $params['college'] ) == 1 ) {
+		$college_name = get_term_by( 'slug', $params['college'][0], 'colleges' )->name;
+	}
+
 	$markup = '<div class="no-results">No results found.</div>';
 	$offset_start = intval( $params['offset'] );
 	$offset_end = $offset_start + DEGREE_SEARCH_PAGE_COUNT;
@@ -2144,6 +2149,9 @@ function get_degree_search_contents( $return=false, $params=null ) {
 
 			if ( !empty( $degree_markup ) ) {
 				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				if ( $college_name ) {
+					$group_name = $group_name . ' <small>at the ' . $college_name .'</small>';
+				}
 				$degree_list_markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
 				$degree_list_markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
 			}
@@ -2302,6 +2310,7 @@ function get_degree_search_filters() {
 			if ( $alias ) {
 				$college->alias = $alias;
 			}
+			$college->field_type = 'radio';
 		}
 		// If aliases are available, alphabetize by them
 		usort( $colleges, function( $a, $b ) {
@@ -2312,6 +2321,9 @@ function get_degree_search_filters() {
 	}
 
 	$program_types = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+	foreach ( $program_types as $program ) {
+		$program->field_type = 'checkbox';
+	}
 
 	// Pass orderby degree_program_order to ensure our custom filter is used.
 	$filters['program-type']['terms'] = $program_types;
