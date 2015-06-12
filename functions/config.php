@@ -119,12 +119,15 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
  * Otherwise, each value below should be empty (e.g. an empty string '' or
  * array() ).
  **/
+define( 'DEGREE_SEARCH_PAGE_COUNT', 100 );
+
 define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'program-type' => array(),
 	'college' => array(),
 	'sort-by' => 'title',
 	'search-query' => '',
-	'default' => 0
+	'default' => 0,
+	'offset' => 0
 ) ) );
 
 # Params specifically for the default view.

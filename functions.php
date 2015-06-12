@@ -1715,6 +1715,7 @@ add_filter( 'posts_search', 'degree_search_with_keywords', 500, 2 );
 function fetch_degree_data( $params ) {
 	$args = array(
 		'numberposts' => -1,
+		'offset' => 0,
 		'post_type' => 'degree',
 		'orderby' => 'title', // default sort by title
 		'order' => 'ASC',
@@ -1722,7 +1723,7 @@ function fetch_degree_data( $params ) {
 		's' => ''
 	);
 
-	if ( $params ) {
+	if ( $params ) {		
 		if ( isset( $params['search-query'] ) ) {
 			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
 		}
@@ -1740,6 +1741,7 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
+		
 		if ( isset( $params['program-type'] ) ) {
 			$args['tax_query'][] = array(
 				'taxonomy' => 'program_types',
@@ -1748,15 +1750,20 @@ function fetch_degree_data( $params ) {
 				'include_children' => false
 			);
 		}
+		
 		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
 			$args['tax_query']['relation'] = 'AND';
-		}
+		}		
+		
 	}
-
+	
 	$posts = get_posts( $args );
-
+	
+	$result_count = count( $posts );
+	
 	$data = array();
 	if ( $posts ) {
+		
 		foreach ( $posts as $post ) {
 			$degree = append_degree_metadata( $post, false );
 		}
@@ -1774,6 +1781,8 @@ function fetch_degree_data( $params ) {
 		}
 		$data = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
 	}
+		
+	array_push( $data, $result_count );
 
 	return $data;
 }
@@ -1812,7 +1821,7 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 				<?php echo $program_name; ?>s
 			</span>
 			<?php if ( $count < count( $params['program-type'] ) ): ?>
-				<span class="for"> and </span>
+				<span class="for"> | </span>
 			<?php
 			endif;
 			$count++;
@@ -1826,23 +1835,34 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	?>
 	<span class="for">at </span>
 		<?php
-		$count = 1;
-		foreach ( $params['college'] as $college_slug ):
-			$college_name = 'the ' . get_term_by( 'slug', $college_slug, 'colleges' )->name;
+		$count = 1;		
+		$is_all_colleges_selected = false;
+		if( count( $params['college'] ) === count( get_terms ('colleges') ) ) {
+			$is_all_colleges_selected = true;
+		}		
+		foreach ( $params['college'] as $college_slug ):			
+			if( $is_all_colleges_selected ) {
+				$college_name = str_replace( "College of ", "", get_term_by( 'slug', $college_slug, 'colleges' )->name );
+			} else {
+				$college_name = 'the ' . get_term_by( 'slug', $college_slug, 'colleges' )->name;
+			}
 		?>
 			<span class="result">
 				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college_slug; ?>"></span>
-				<?php echo $college_name; ?>
+				<?php 
+					echo $college_name;
+				?>
 			</span>
 			<?php if ( $count < count( $params['college'] ) ): ?>
-				<span class="for"> and </span>
+				<span class="for"> | </span>
 			<?php
 			endif;
 			$count++;
 			?>
 		<?php endforeach; ?>
+		<a href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>" class="reset-search">Clear All</a>
 	<?php else: ?>
-		<span class="for">in all at UCF</span>
+		<span class="for">at UCF</span>
 	<?php endif; ?>
 <?php
 	return ob_get_clean();
@@ -2015,67 +2035,94 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	if ( !defined( 'WP_USE_THEMES' ) ) {
 		define( 'WP_USE_THEMES', false );
 	}
-
+	
 	$params = degree_search_params_or_fallback( $params );
 	$query_params = http_build_query( $params );
-	$result_count = 0;
 
 	$results = fetch_degree_data( $params );
+	
+	$result_count = array_pop( $results );
 
 	$markup = '<div class="no-results">No results found.</div>';
 
 	if ( $results ) {
 		$markup = '';
+		$count = 0;
 
 		foreach ( $results as $program_type_id => $degrees ) {
 			$program_name = get_term( $program_type_id, 'program_types' )->name;
 			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
 			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
-
-			$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
-			$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+			
+			if( $count >= $params['offset'] && $count < ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) ) {				
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				$markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+			}
 
 			$markup .= '<ul class="degree-search-results">';
 
 			foreach ( $degrees as $degree ) {
-				$result_markup = '';
-				ob_start();
-				?>
-				<li class="degree-search-result">
-					<h3 class="degree-title-heading">
-						<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
-							<span class="degree-title">
-								<?php echo $degree->post_title; ?>
-							</span>
-							<span class="degree-details">
-								<span class="degree-program-type visible-phone">
-									<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+				$count++;
+				if( $count >= $params['offset'] && $count < ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) ) {
+					$result_markup = '';
+					ob_start();
+					?>
+					<li class="degree-search-result">
+						<h3 class="degree-title-heading">
+							<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+								<span class="degree-title">
+									<?php echo $degree->post_title; ?>
 								</span>
-								<span class="visible-phone degree-details-separator">&verbar;</span>
-								<span class="degree-credits-count">
-								<?php if ( $degree->degree_hours ): ?>
-									<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
-								<?php else: ?>
-									See catalog for credit hours
-								<?php endif; ?>
+								<span class="degree-details">
+									<span class="degree-program-type visible-phone">
+										<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+									</span>
+									<span class="visible-phone degree-details-separator">&verbar;</span>
+									<span class="degree-credits-count">
+									<?php if ( $degree->degree_hours ): ?>
+										<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
+									<?php else: ?>
+										See catalog for credit hours
+									<?php endif; ?>
+									</span>
 								</span>
-							</span>
-						</a>
-					</h3>
-				</li>
-				<?php
-				$result_markup = ob_get_contents();
-				$markup .= $result_markup;
-				ob_end_clean();
-
-				$result_count++;
+							</a>
+						</h3>
+					</li>
+					<?php
+					$result_markup = ob_get_contents();
+					$markup .= $result_markup;
+					ob_end_clean();
+				}
 			}
 
 			$markup .= '</ul>';
 		}
+		
+		// Add Pagination		
+		if( $result_count > DEGREE_SEARCH_PAGE_COUNT ) {
+			
+			$prev_link = '';					
+			if( $params['offset'] > 0 ) {
+				$prev_params = $params;
+				$prev_params['offset'] = $prev_params['offset'] - DEGREE_SEARCH_PAGE_COUNT;
+				$prev_link = '?'.http_build_query( $prev_params );
+				$markup .= '<ul class="pager"><li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li></ul>';	
+			}
+				
+			$next_link = '';			
+			if( ( $params['offset'] + DEGREE_SEARCH_PAGE_COUNT ) < $result_count ) {
+				$next_params = $params;
+				$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;	
+				$next_link = '?'.http_build_query( $next_params );
+				$markup .= '<ul class="pager"><li class="next"><a href="'.$next_link.'">Next &rarr;</a></li></ul>';
+			}
+			
+		}
+		
 	}
 
-	$markup = preg_replace("@[\\r|\\n|\\t]+@", "", $markup);
+	$markup = preg_replace( "@[\\r|\\n|\\t]+@", "", $markup );
 
 	// Print results
 	if ( $return ) {

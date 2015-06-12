@@ -991,15 +991,14 @@ li.tagit-new input {
 }
 
 #degree-search-sidebar.affix {
-  height: 100%;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
   top: 0;
   z-index: 999;
 }
+
 #degree-search-sidebar.affix-bottom {
   position: absolute;
 }
+
 #degree-search-sidebar .degree-filter-title {
   color: #888;
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
@@ -1133,7 +1132,7 @@ li.tagit-new input {
 #degree-search-top .degree-result-count {
   border-right: 1px solid #eee;
   font-family: Georgia, serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -1142,6 +1141,9 @@ li.tagit-new input {
   padding-right: 15px;
   padding-top: 5px;
   width: 70%;
+}
+#degree-search-top .degree-result-count .for {
+  padding-right: 8px;
 }
 #degree-search-top .degree-result-count-num,
 #degree-search-top .degree-result-count .result,
@@ -1157,18 +1159,18 @@ li.tagit-new input {
   color: #000;
   display: inline-block;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   margin: 2px 0;
-  padding: 0 8px;
+  padding: 0 8px 0 0;
 }
 #degree-search-top .degree-result-count .result .close {
   border: 1px solid #666;
   border-radius: 20px;
   color: #666;
   display: block;
-  font-size: 16px;
-  line-height: 14px;
+  font-size: 14px;
+  line-height: 12px;
   float: right;
   margin-left: 4px;
   margin-top: 3px;
@@ -1185,6 +1187,11 @@ li.tagit-new input {
 #degree-search-top .degree-result-count .result .close:before {
   content: '×';
   display: block;
+}
+
+#degree-search-top  .reset-search {
+  color: #e50606;
+  font-style: normal;
 }
 
 #degree-search-top .degree-result-phrase-phone {
