@@ -135,6 +135,20 @@ get_header(); the_post(); ?>
 
 					<?php foreach ( $filters as $key=>$filter ): ?>
 					<h2 class="degree-filter-title"><?php echo $filter['name']; ?></h2>
+
+					<?php
+					$filter_clear_class = 'hidden';
+					$params_copy = $params;
+					if ( isset( $params_copy[$key] ) ) {
+						unset( $params_copy[$key] );
+						$filter_clear_class = '';
+					}
+					$params_copy['default'] = 0;
+					$filter_clear_url = get_permalink() . '?' . http_build_query( $params_copy );
+					?>
+					<a class="degree-filter-clear <?php echo $filter_clear_class; ?>" data-filter-name="<?php echo $key; ?>" data-url-base="<?php echo get_permalink(); ?>" href="<?php echo $filter_clear_url; ?>">Clear All</a>
+
+
 					<ul class="degree-filter-list">
 						<?php foreach ( $filter['terms'] as $term ): ?>
 							<?php if ( $term->count > 0 ): ?>

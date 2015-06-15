@@ -1967,7 +1967,7 @@ function degree_search_params_or_fallback( $params ) {
 	}
 
 	// Return params with any empty values removed (maintain 0).
-	return array_filter( $filtered_params, function($val) {
+	return array_filter( $filtered_params, function( $val ) {
 		return ( $val || is_numeric( $val ) );
 	} );
 }

@@ -506,6 +506,10 @@
     padding: 0;
   }
 
+  #degree-search-sidebar .degree-filter-clear {
+    display: none; /* These buttons aren't necessary with the Reset All btn being present */
+  }
+
   #degree-search-sidebar .checkbox input[type="checkbox"] {
     margin-right: 10px;
     margin-top: 0;

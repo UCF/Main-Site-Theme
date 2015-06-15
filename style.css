@@ -1001,6 +1001,8 @@ li.tagit-new input {
 
 #degree-search-sidebar .degree-filter-title {
   color: #888;
+  display: block;
+  float: left;
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
   font-size: 18px;
   font-style: normal;
@@ -1010,7 +1012,17 @@ li.tagit-new input {
   -webkit-font-smoothing: antialiased;
 }
 
+#degree-search-sidebar .degree-filter-clear {
+  clear: right;
+  color: #999 !important;
+  float: right;
+  font-size: 12px;
+  line-height: 40px; /* match .degree-filter-title */
+  text-decoration: underline;
+}
+
 #degree-search-sidebar .degree-filter-list {
+  clear: both;
   list-style-type: none;
   margin-bottom: 15px;
   margin-left: 0;

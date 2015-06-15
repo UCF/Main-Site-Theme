@@ -1045,6 +1045,7 @@ var degreeSearch = function ($) {
       $academicsSearch.find('.college:checked').each(function () {
         college.push($(this).val());
       });
+
       var offset;
       if (isPaging === true) {
         offset = $academicsSearch.find('#offset').val();
@@ -1053,26 +1054,30 @@ var degreeSearch = function ($) {
         $academicsSearch.find('#offset').val(0);
       }
 
+      var params = {
+        'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
+        'sort-by': $academicsSearch.find('.sort-by:checked').val(),
+        'program-type': programType,
+        'college': college,
+        'offset': offset
+      };
+      var ajaxParams = $.extend({'action': 'degree_search'}, params); // Copy without reference
+
       $.ajax({
         url: ajaxURL,
         type: 'GET',
         // cache: false,
-        data: {
-          'action': 'degree_search',
-          'search-query': encodeURIComponent($academicsSearch.find('#search-query').val()),
-          'sort-by': $academicsSearch.find('.sort-by:checked').val(),
-          'program-type': programType,
-          'college': college,
-          'offset': offset
-        },
+        data: ajaxParams,
         dataType: 'json'
       })
         .done(function (data) {
         trackFilterForGoogle(programType, college, $academicsSearch.find('#search-query').val());
         degreeSearchSuccessHandler(data);
+        toggleDegreeFilterClear(params);
       })
         .fail(function (data) {
         degreeSearchFailureHandler(data);
+        toggleDegreeFilterClear(params);
       });
     }
     else {
@@ -1098,7 +1103,7 @@ var degreeSearch = function ($) {
   function resetFilterBtnHandler(e) {
     e.preventDefault();
     $sidebarLeft
-      .find('.checkbox input')
+      .find('.checkbox input, .radio input')
       .prop('checked', false);
   }
 
@@ -1227,6 +1232,69 @@ var degreeSearch = function ($) {
     window.location.href = $target.attr('href');
   }
 
+  function pagerClickHandler(e) {
+    e.preventDefault();
+    var $offset = $academicsSearch.find('#offset'),
+        offsetValue  = parseInt($academicsSearch.find('#offset').val());
+    if ($(e.target).parent().hasClass('next')) {
+      $offset.val(offsetValue + pageCount);
+    } else {
+      $offset.val(offsetValue - pageCount);
+    }
+    loadDegreeSearchResults(true);
+  }
+
+  function degreeFilterClearHandler(e) {
+    e.preventDefault();
+
+    var $clearLink = $(e.target),
+        $filterCheckboxes = $sidebarLeft.find('.' + $clearLink.attr('data-filter-name'));
+
+    if ($filterCheckboxes) {
+      $filterCheckboxes.each(function(index) {
+        $(this)
+          .prop('checked', false)
+          .removeAttr('checked');
+
+        // Only trigger change once
+        if (index === $filterCheckboxes.length - 1) {
+          $(this).trigger('change');
+        }
+      });
+    }
+
+    $clearLink.addClass('hidden');
+  }
+
+  function toggleDegreeFilterClear(params) {
+    var $clearLinks = $sidebarLeft.find('.degree-filter-clear');
+
+    $clearLinks.each(function() {
+      var $clearLink = $(this),
+          filterName = $clearLink.attr('data-filter-name'),
+          $filterCheckboxes = $sidebarLeft.find('.' + filterName),
+          hasChecked = false,
+          paramsForFilter = $.extend({}, params); // clone + modify per filter
+
+      $filterCheckboxes.each(function() {
+        if ($(this).is(':checked')) {
+          hasChecked = true;
+          return false;
+        }
+      });
+
+      if (hasChecked) {
+        $clearLink.removeClass('hidden');
+      }
+      else {
+        $clearLink.addClass('hidden');
+      }
+
+      paramsForFilter[filterName] = [];
+      $clearLink.attr('href', $clearLink.attr('data-url-base') + '?' + $.param(paramsForFilter));
+    });
+  }
+
   function scrollToResults() {
     // Scroll past top page content if the page loaded with GET params set
     // (assume the user submitted a search or something and has already seen
@@ -1237,7 +1305,7 @@ var degreeSearch = function ($) {
         scrollTop: $academicsSearch.find('#search-query').offset().top - 20
       }, 200, resetSidebarAffix);
     }
-    else {      
+    else {
       $(document).scrollTop(0);
       resetSidebarAffix();
     }
@@ -1262,17 +1330,8 @@ var degreeSearch = function ($) {
     $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
     $academicsSearch.on('click', '.search-again-link', searchAgainClickHandler);
-    $academicsSearch.on('click', '.pager a', function (e) {
-      e.preventDefault();
-      var $offset = $academicsSearch.find('#offset'),
-          offsetValue  = parseInt($academicsSearch.find('#offset').val());
-      if ($(e.target).parent().hasClass('next')) {
-        $offset.val(offsetValue + pageCount);
-      } else {
-        $offset.val(offsetValue - pageCount);
-      }
-      loadDegreeSearchResults(true);
-    });
+    $academicsSearch.on('click', '.pager a', pagerClickHandler);
+    $academicsSearch.on('click', '.degree-filter-clear', degreeFilterClearHandler);
     $academicsSearch.on('click', '.seo-li', function (e) {
       e.preventDefault();
       if ($('body').hasClass('ie8')) {
