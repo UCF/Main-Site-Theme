@@ -1781,8 +1781,8 @@ function fetch_degree_data( $params ) {
 		$posts_suggested = array_udiff( $posts_all, $posts, 'posts_array_diff' );
 	}
 
-	$result_count = count( $posts );
-	$suggestion_count = count( $posts_suggested );
+	$result_count_total = count( $posts );
+	$suggestion_count_total = count( $posts_suggested );
 
 	$posts_grouped = $suggestions_grouped = array();
 
@@ -1821,8 +1821,8 @@ function fetch_degree_data( $params ) {
 	return array(
 		'results' => $posts_grouped,
 		'suggestions' => $suggestions_grouped,
-		'result_count' => $result_count,
-		'suggestion_count' => $suggestion_count
+		'result_count_total' => $result_count_total,
+		'suggestion_count_total' => $suggestion_count_total
 	);
 }
 
@@ -1830,10 +1830,10 @@ function fetch_degree_data( $params ) {
 /**
  * Returns markup for "x results found" at top of Degree Search results.
  **/
-function get_degree_search_result_phrase( $result_count, $params ) {
+function get_degree_search_result_phrase( $result_count_total, $params ) {
 	ob_start();
 ?>
-	<span class="degree-result-count-num"><?php echo $result_count; ?></span>
+	<span class="degree-result-count-num"><?php echo $result_count_total; ?></span>
 
 	<?php
 	// Search query phrasing
@@ -1841,8 +1841,8 @@ function get_degree_search_result_phrase( $result_count, $params ) {
 	<span class="search-result">&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</span>
 	<?php endif; ?>
 
-	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count !== 1 ): ?>s<?php endif; ?> found</span>
-	<span class="degree-result-phrase-phone">result<?php if ( $result_count !== 1 ): ?>s<?php endif; ?>:</span>
+	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count_total !== 1 ): ?>s<?php endif; ?> found</span>
+	<span class="degree-result-phrase-phone">result<?php if ( $result_count_total !== 1 ): ?>s<?php endif; ?>:</span>
 
 	<?php
 	// Program Type phrasing
@@ -2115,7 +2115,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	$query_params = http_build_query( $params );
 
 	$data = fetch_degree_data( $params );
-	extract( $data ); // import $results, $suggestions, $result_count and $suggestion_count
+	extract( $data ); // import $results, $suggestions, $result_count_total and $suggestion_count_total
 
 	$college_name = null;
 	if ( isset( $params['college'] ) && count( $params['college'] ) == 1 ) {
@@ -2123,16 +2123,20 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	}
 
 	$markup = '<div class="no-results">No results found.</div>';
-	$offset_start = intval( $params['offset'] );
-	$offset_end = $offset_start + DEGREE_SEARCH_PAGE_COUNT;
-	$count_all = $result_count + $suggestion_count;
-	$count = 0;
+	$offset_start = intval( $params['offset'] ); // Pagination offset start
+	$offset_end = $offset_start + DEGREE_SEARCH_PAGE_COUNT; // Pagination offset end
+	$result_count_start = $offset_start + 1; // Results per page start
+	$result_count_end = $offset_start; // Results per page end (will increment when results are looped through.)
+	$count_all = $result_count_total + $suggestion_count_total; // Totals of results and suggestions combined. Used for showing pagination
+	$count = 0; // Internal counter used in degree result loops and for handling display of suggestions
 
 	if ( $results ) {
 		$markup = '';
 
 		$degree_list_markup = '';
 
+		// This loop will always loop through *all* results.  $count is NOT
+		// representative of the result count per page.
 		foreach ( $results as $program_type_id => $degrees ) {
 			$program_name = get_term( $program_type_id, 'program_types' )->name;
 			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
@@ -2143,6 +2147,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			foreach ( $degrees as $degree ) {
 				if( $count >= $offset_start && $count < $offset_end ) {
 					$degree_markup .= get_degree_search_listitem_markup( $degree, $program_alias, $program_name );
+					$result_count_end++;
 				}
 				$count++;
 			}
@@ -2159,6 +2164,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 
 		if ( !empty( $degree_list_markup ) ) {
 			$markup .= $degree_list_markup;
+			$markup .= '<p class="degree-search-result-showing">Showing ' . $result_count_start . '&mdash;' . $result_count_end . ' of ' . $result_count_total . ' results.</p>';
 		}
 	}
 
@@ -2189,7 +2195,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 
 		if ( !empty( $suggestion_markup ) ) {
 			$markup .= '<div class="degree-search-suggestions">';
-			$markup .= '<p class="degree-search-suggestions-phrase">'. $suggestion_count .' more similar results found for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>:</p>';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $suggestion_count_total .' more similar results found for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>:</p>';
 			$markup .= $suggestion_markup;
 			$markup .= '</div>';
 		}
@@ -2207,6 +2213,9 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$prev_link = '?'.http_build_query( $prev_params );
 			$markup .= '<li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li>';
 		}
+		else {
+			$markup .= '<li class="previous disabled"><span>&larr; Previous</span></li>';
+		}
 
 		$next_link = '';
 		if( $offset_end < $count_all && $count <= $count_all ) {
@@ -2214,6 +2223,9 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;
 			$next_link = '?'.http_build_query( $next_params );
 			$markup .= '<li class="next"><a href="'.$next_link.'">Next &rarr;</a></li>';
+		}
+		else {
+			$markup .= '<li class="next disabled"><span>Next &rarr;</span></li>';
 		}
 
 		$markup .= '</ul>';
@@ -2225,13 +2237,13 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	// Print results
 	if ( $return ) {
 		return array (
-			'count' => $result_count,
+			'count' => $result_count_total,
 			'markup' => $markup
 		);
 	} else {
 		$result_title = get_degree_search_title( '|', $params );
 		$result_meta = get_degree_search_meta_description( $params );
-		$result_phrase_markup = get_degree_search_result_phrase( $result_count, $params );
+		$result_phrase_markup = get_degree_search_result_phrase( $result_count_total, $params );
 		$result_search_again_markup = get_degree_search_search_again( get_degree_search_filters(), $params );
 
 		wp_send_json(

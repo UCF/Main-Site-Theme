@@ -1347,6 +1347,10 @@ li.tagit-new input {
     text-align: center;
 }
 
+#degree-search-content .degree-search-result-showing {
+  text-align: center;
+}
+
 
 /* Single Degree profiles */
 #degree-single #breadcrumbs {
@@ -1724,6 +1728,16 @@ a.btn-danger:hover,
 a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
+}
+
+.pager li > a,
+.pager li > span {
+  font-weight: 500;
+}
+.pager .disabled > a,
+.pager .disabled > a:hover,
+.pager .disabled > span {
+  color: #ccc !important;
 }
 
 /**
