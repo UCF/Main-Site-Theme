@@ -1033,19 +1033,19 @@ var degreeSearch = function ($) {
   }
 
   function loadDegreeSearchResults(isPaging, breakDefaultSearch) {
+    var searchDefault = $academicsSearch.find('#search-default').val();
+    if (breakDefaultSearch === true && parseInt(searchDefault, 10) === 1) {
+      searchDefault = 0;
+      $academicsSearch.find('#search-default').val(searchDefault);
+    }
+    else if (parseInt(searchDefault, 10) === 1) {
+      // If Default Search is still enabled, make sure no filters are selected
+      $academicsSearch.find('.program-type:checked').prop('checked', false);
+      $academicsSearch.find('.college:checked').prop('checked', false);
+    }
+
     if (supportsHistory()) {
       $academicsSearch.find('#ajax-loading').removeClass('hidden');
-
-      var searchDefault = $academicsSearch.find('#search-default').val();
-      if (breakDefaultSearch === true && parseInt(searchDefault, 10) === 1) {
-        searchDefault = 0;
-        $academicsSearch.find('#search-default').val(searchDefault);
-      }
-      else if (parseInt(searchDefault, 10) === 1) {
-        // If Default Search is still enabled, make sure no filters are selected
-        $academicsSearch.find('.program-type:checked').prop('checked', false);
-        $academicsSearch.find('.college:checked').prop('checked', false);
-      }
 
       var programType = [];
       $academicsSearch.find('.program-type:checked').each(function () {
@@ -1189,9 +1189,9 @@ var degreeSearch = function ($) {
       $filterBtn.addClass('active');
     }
   }
-  
-  function resizeSidbarContent() {   
-    // Make sidebar scrollable on small screens 
+
+  function resizeSidbarContent() {
+    // Make sidebar scrollable on small screens
     var windowHeight = $(window).height();
     if ($sidebarLeft.outerHeight() > windowHeight) {
       $sidebarLeft.css('max-height', windowHeight).css('overflow-y', 'scroll');
