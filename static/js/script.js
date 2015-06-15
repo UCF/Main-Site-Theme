@@ -1189,8 +1189,21 @@ var degreeSearch = function ($) {
       $filterBtn.addClass('active');
     }
   }
+  
+  function resizeSidbarContent() {   
+    // Make sidebar scrollable on small screens 
+    var windowHeight = $(window).height();
+    if ($sidebarLeft.outerHeight() > windowHeight) {
+      $sidebarLeft.css('max-height', windowHeight).css('overflow-y', 'scroll');
+    } else {
+      $sidebarLeft.css('max-height', 'none').css('overflow-y', 'auto');
+    }
+    // Fixes an issue with scrolling on small screens
+    $degreeSearchContent.css('min-height', $sidebarLeft.outerHeight() + 100);
+  }
 
   function initSidebarAffix() {
+    resizeSidbarContent();
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
         .affix({
@@ -1217,8 +1230,12 @@ var degreeSearch = function ($) {
 
   function resetSidebarAffix() {
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
-      $sidebarLeft.data('bs.affix').options.offset.top = headerHeight + $academicsSearch.find('#degree-search-top').outerHeight();
-      $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
+      if ($sidebarLeft.data('bs.affix')) {
+        $sidebarLeft.data('bs.affix').options.offset.top = headerHeight + $academicsSearch.find('#degree-search-top').outerHeight();
+        $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
+      } else {
+        initSidebarAffix();
+      }
     }
   }
 
@@ -1332,6 +1349,7 @@ var degreeSearch = function ($) {
     });
 
     $(window).on('resize', function () {
+      resizeSidbarContent();
       resetSidebarAffix();
     });
 

@@ -999,6 +999,10 @@ li.tagit-new input {
   position: absolute;
 }
 
+#degree-search-sidebar .radio {
+  padding-left: 21px;
+}
+
 #degree-search-sidebar .degree-filter-title {
   color: #888;
   display: block;
