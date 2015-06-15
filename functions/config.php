@@ -127,7 +127,8 @@ define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'sort-by' => 'title',
 	'search-query' => '',
 	'default' => 0,
-	'offset' => 0
+	'offset' => 0,
+	'search-default' => 0
 ) ) );
 
 # Params specifically for the default view.
@@ -136,7 +137,23 @@ define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
 	'college' => array(),
 	'sort-by' => 'title',
 	'search-query' => '',
-	'default' => 1
+	'default' => 1,
+	'offset' => 0,
+	'search-default' => 0
+) ) );
+
+# Params specifically for the default search view (view that should used
+# immediately following the default view, if a user performs a search without
+# modifying any filters beforehand.  Added to force program type options from
+# the default view off, and to search all program types instead.)
+define( 'DEGREE_SEARCH_S_DEFAULT_PARAMS', serialize( array(
+	'program-type' => array(),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => '',
+	'default' => 1,
+	'offset' => 0,
+	'search-default' => 1
 ) ) );
 
 # Domain/path of site (for cookies)

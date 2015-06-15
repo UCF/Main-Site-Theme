@@ -1949,7 +1949,18 @@ function get_degree_search_search_again( $filters, $params ) {
  **/
 function degree_search_params_or_fallback( $params ) {
 	if ( empty( $params ) ) {
-		$params = $_GET;
+		// Force default view params
+		if ( empty( $_GET ) ) {
+			$params = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
+		}
+		// Force default search view params (search results triggered immediately from the default view)
+		else if ( isset( $_GET['search-default'] ) && intval( $_GET['search-default'] ) === 1 ) {
+			$params = unserialize( DEGREE_SEARCH_S_DEFAULT_PARAMS );
+			$params['search-query'] = $_GET['search-query'];
+		}
+		else {
+			$params = $_GET;
+		}
 	}
 
 	$valid_params = unserialize( DEGREE_SEARCH_PARAMS );

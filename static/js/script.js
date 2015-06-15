@@ -1032,9 +1032,20 @@ var degreeSearch = function ($) {
     return (window.history && 'pushState' in window.history);
   }
 
-  function loadDegreeSearchResults(isPaging) {
+  function loadDegreeSearchResults(isPaging, breakDefaultSearch) {
     if (supportsHistory()) {
       $academicsSearch.find('#ajax-loading').removeClass('hidden');
+
+      var searchDefault = $academicsSearch.find('#search-default').val();
+      if (breakDefaultSearch === true && parseInt(searchDefault, 10) === 1) {
+        searchDefault = 0;
+        $academicsSearch.find('#search-default').val(searchDefault);
+      }
+      else if (parseInt(searchDefault, 10) === 1) {
+        // If Default Search is still enabled, make sure no filters are selected
+        $academicsSearch.find('.program-type:checked').prop('checked', false);
+        $academicsSearch.find('.college:checked').prop('checked', false);
+      }
 
       var programType = [];
       $academicsSearch.find('.program-type:checked').each(function () {
@@ -1059,7 +1070,8 @@ var degreeSearch = function ($) {
         'sort-by': $academicsSearch.find('.sort-by:checked').val(),
         'program-type': programType,
         'college': college,
-        'offset': offset
+        'offset': offset,
+        'search-default': searchDefault
       };
       var ajaxParams = $.extend({'action': 'degree_search'}, params); // Copy without reference
 
@@ -1116,14 +1128,16 @@ var degreeSearch = function ($) {
       .css({
       'max-height': 0
     });
-    loadDegreeSearchResults();
+    loadDegreeSearchResults(false, true);
 
     $(document).off('click', closeMenuOnTargetClick);
 
     // Filter checkbox changes were turned off when the mobile sidebar was activated.
     // Reactivate the event when the mobile sidebar is closed (to allow .close btns in
     // .degree-result-count to trigger loadDegreeSearchResults() on click).
-    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', function() {
+      loadDegreeSearchResults(false, true);
+    });
   }
 
   function closeMenuOnTargetClick(e) {
@@ -1327,7 +1341,9 @@ var degreeSearch = function ($) {
       }
     });
 
-    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', function() {
+      loadDegreeSearchResults(false, true);
+    });
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
     $academicsSearch.on('click', '.search-again-link', searchAgainClickHandler);
     $academicsSearch.on('click', '.pager a', pagerClickHandler);

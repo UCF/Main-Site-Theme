@@ -9,16 +9,7 @@ get_header(); the_post(); ?>
 	<?php
 		// Available filters + filter values
 		$filters = get_degree_search_filters();
-
-		// Fetch data based on default params + anything set by the user.
-		// Set default parameters for when no GET params are available (default
-		// view).
-		if ( empty( $_GET ) ) {
-			$params = degree_search_params_or_fallback( unserialize( DEGREE_SEARCH_DEFAULT_PARAMS ) );
-		}
-		else {
-			$params = degree_search_params_or_fallback( $_GET );
-		}
+		$params = degree_search_params_or_fallback( null );
 
 		$data = get_degree_search_contents( true, $params );
 	?>
@@ -55,6 +46,7 @@ get_header(); the_post(); ?>
 						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
 						<input id="offset" type="hidden"  value="<?php if ( isset( $params['offset'] ) ) { echo $params['offset']; } ?>"
 							data-offset-count="<?php echo DEGREE_SEARCH_PAGE_COUNT ?>">
+						<input id="search-default" name="search-default" type="hidden" value="<?php if ( $params['default'] == 1 ) { ?>1<?php } else { ?>0<?php } ?>">
 						<button class="btn btn-link" type="submit">Search</button>
 					</div>
 				</fieldset>
