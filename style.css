@@ -1207,7 +1207,9 @@ li.tagit-new input {
 
 #degree-search-top  .reset-search {
   color: #e50606;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-style: normal;
+  text-decoration: underline;
 }
 
 #degree-search-top .degree-result-phrase-phone {
@@ -1346,7 +1348,9 @@ li.tagit-new input {
 }
 
 #degree-search-content .degree-search-suggestions {
+  border-top: 1px solid #eee;
   margin-top: 50px;
+  padding-top: 50px;
 }
 #degree-search-content .degree-search-results + .degree-search-suggestions {
   border-top: 1px solid #eee;

@@ -625,6 +625,16 @@
     font-size: inherit;
   }
 
+  #degree-search-content .degree-search-suggestions,
+  #degree-search-content .degree-search-results + .degree-search-suggestions {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  #degree-search-content .degree-search-suggestions-phrase {
+      font-size: 16px;
+      margin-bottom: 20px;
+  }
+
 
 	#program-meta p { padding-left: 0; }
 
