@@ -151,7 +151,7 @@ define( 'DEGREE_SEARCH_S_DEFAULT_PARAMS', serialize( array(
 	'college' => array(),
 	'sort-by' => 'title',
 	'search-query' => '',
-	'default' => 1,
+	'default' => 0,
 	'offset' => 0,
 	'search-default' => 1
 ) ) );

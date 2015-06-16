@@ -984,8 +984,6 @@ var degreeSearch = function ($) {
 
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
       wp.a11y.speak(assistiveText);
-
-      resetSidebarAffix();
     }, 100);
   }
 
@@ -1008,8 +1006,6 @@ var degreeSearch = function ($) {
 
       var assistiveText = 'Error loading degree data.';
       wp.a11y.speak(assistiveText);
-
-      resetSidebarAffix();
     }, 100);
   }
 
@@ -1070,6 +1066,7 @@ var degreeSearch = function ($) {
         'sort-by': $academicsSearch.find('.sort-by:checked').val(),
         'program-type': programType,
         'college': college,
+        'default': 0, // force turn off default view any time content is ajaxed in
         'offset': offset,
         'search-default': searchDefault
       };
@@ -1251,6 +1248,10 @@ var degreeSearch = function ($) {
         initSidebarAffix();
       }
     }
+    else {
+      initSidebarAffix();
+    }
+    $(document).scroll(); // trigger scroll event to ensure new offsets are painted to screen
   }
 
   function resultPhraseClickHandler(e) {
@@ -1286,7 +1287,9 @@ var degreeSearch = function ($) {
     } else {
       $offset.val(offsetValue - pageCount);
     }
-    loadDegreeSearchResults(true);
+
+    loadDegreeSearchResults(true, true); // force default search view off
+    resetSidebarAffix();
   }
 
   function degreeFilterClearHandler(e) {
