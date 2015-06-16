@@ -1190,20 +1190,26 @@ var degreeSearch = function ($) {
     }
   }
 
-  function resizeSidbarContent() {
+  function resizeSidebarContent() {
     // Make sidebar scrollable on small screens
     var windowHeight = $(window).height();
     if ($sidebarLeft.outerHeight() > windowHeight) {
-      $sidebarLeft.css('max-height', windowHeight).css('overflow-y', 'scroll');
+      $sidebarLeft.css({
+        'max-height': windowHeight,
+        'overflow-y': 'scroll'
+      });
     } else {
-      $sidebarLeft.css('max-height', '100%').css('overflow-y', 'auto');
+      $sidebarLeft.css({
+        'max-height': '100%',
+        'overflow-y': 'auto'
+      });
     }
     // Fixes an issue with scrolling on small screens
     $degreeSearchContent.css('min-height', $sidebarLeft.outerHeight() + 100);
   }
 
   function initSidebarAffix() {
-    resizeSidbarContent();
+    resizeSidebarContent();
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
         .affix({
@@ -1349,7 +1355,7 @@ var degreeSearch = function ($) {
     });
 
     $(window).on('resize', function () {
-      resizeSidbarContent();
+      resizeSidebarContent();
       resetSidebarAffix();
     });
 
