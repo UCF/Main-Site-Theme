@@ -1097,6 +1097,10 @@ var degreeSearch = function ($) {
     }
   }
 
+  var filterChangeEventHandler = function() {
+    loadDegreeSearchResults(false, true);
+  };
+
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
     if (typeof ga !== 'undefined') {
 
@@ -1135,9 +1139,7 @@ var degreeSearch = function ($) {
     // Filter checkbox changes were turned off when the mobile sidebar was activated.
     // Reactivate the event when the mobile sidebar is closed (to allow .close btns in
     // .degree-result-count to trigger loadDegreeSearchResults() on click).
-    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', function() {
-      loadDegreeSearchResults(false, true);
-    });
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', filterChangeEventHandler);
   }
 
   function closeMenuOnTargetClick(e) {
@@ -1152,7 +1154,7 @@ var degreeSearch = function ($) {
     $(document).on('click', closeMenuOnTargetClick);
     // We only want to trigger loadDegreeSearchResults() when the user closes
     // the sidebar modal (don't run it in the background with every checkbox change)
-    $academicsSearch.off('change', '.program-type, .college, .location, .sort-by', loadDegreeSearchResults);
+    $academicsSearch.off('change', '.program-type, .college, .location, .sort-by', filterChangeEventHandler);
 
     // resize the panel to be full screen and align it
     $('html, body').animate({
@@ -1193,19 +1195,25 @@ var degreeSearch = function ($) {
   function resizeSidebarContent() {
     // Make sidebar scrollable on small screens
     var windowHeight = $(window).height();
-    if ($sidebarLeft.outerHeight() > windowHeight) {
+    if ($(window).width() > 767) {
+      if ($sidebarLeft.outerHeight() > windowHeight) {
+        $sidebarLeft.css({
+          'max-height': windowHeight,
+          'overflow-y': 'scroll'
+        });
+      } else {
+        $sidebarLeft.css({
+          'max-height': '100%',
+          'overflow-y': 'auto'
+        });
+      }
+    }
+    else {
       $sidebarLeft.css({
-        'max-height': windowHeight,
+        'max-height': '0',
         'overflow-y': 'scroll'
       });
-    } else {
-      $sidebarLeft.css({
-        'max-height': '100%',
-        'overflow-y': 'auto'
-      });
     }
-    // Fixes an issue with scrolling on small screens
-    $degreeSearchContent.css('min-height', $sidebarLeft.outerHeight() + 100);
   }
 
   function initSidebarAffix() {
@@ -1365,9 +1373,7 @@ var degreeSearch = function ($) {
       }
     });
 
-    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', function() {
-      loadDegreeSearchResults(false, true);
-    });
+    $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', filterChangeEventHandler);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
     $academicsSearch.on('click', '.search-again-link', searchAgainClickHandler);
     $academicsSearch.on('click', '.pager a', pagerClickHandler);
