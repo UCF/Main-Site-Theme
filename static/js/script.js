@@ -1190,6 +1190,8 @@ var degreeSearch = function ($) {
   }
 
   function resizeSidebarContent() {
+    $sidebarLeft.attr('style', ''); // clear existing overrides
+
     // Make sidebar scrollable on small screens
     var windowHeight = $(window).height();
     if ($(window).width() > 767) {
@@ -1368,6 +1370,9 @@ var degreeSearch = function ($) {
     $(window).on('resize', function () {
       resizeSidebarContent();
       resetSidebarAffix();
+      // Force turn off mobile filter btn and sidebar
+      $sidebarLeft.removeClass('active');
+      $academicsSearch.find('#mobile-filter').removeClass('active');
     });
 
     $(window).on('load resize', function () {
