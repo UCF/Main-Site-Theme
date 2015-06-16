@@ -1196,7 +1196,7 @@ var degreeSearch = function ($) {
     if ($sidebarLeft.outerHeight() > windowHeight) {
       $sidebarLeft.css('max-height', windowHeight).css('overflow-y', 'scroll');
     } else {
-      $sidebarLeft.css('max-height', 'none').css('overflow-y', 'auto');
+      $sidebarLeft.css('max-height', '100%').css('overflow-y', 'auto');
     }
     // Fixes an issue with scrolling on small screens
     $degreeSearchContent.css('min-height', $sidebarLeft.outerHeight() + 100);
