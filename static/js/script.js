@@ -973,14 +973,14 @@ var degreeSearch = function ($) {
 
       $degreeSearchAgainContainer.html(data.searchagain);
 
+      updateDocumentHead(data);
+
       // Only scroll to results if the user's focus is not on the search field
       // (if a filter/sort option was clicked, and the user is *not* typing a
       // search query). Makes searching on touch devices less of a pain.
       if (!$academicsSearch.find('#search-query').is(':focus')) {
         scrollToResults();
       }
-
-      updateDocumentHead(data);
 
       var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
       wp.a11y.speak(assistiveText);
@@ -999,10 +999,11 @@ var degreeSearch = function ($) {
         .html('Error loading degree data.')
         .append($loaderScreen);
 
+      updateDocumentHead(data);
+
       if (!$academicsSearch.find('#search-query').is(':focus')) {
         scrollToResults();
       }
-      updateDocumentHead(data);
 
       var assistiveText = 'Error loading degree data.';
       wp.a11y.speak(assistiveText);
@@ -1253,7 +1254,6 @@ var degreeSearch = function ($) {
     else {
       initSidebarAffix();
     }
-    $(document).scroll(); // trigger scroll event to ensure new offsets are painted to screen
   }
 
   function resultPhraseClickHandler(e) {
