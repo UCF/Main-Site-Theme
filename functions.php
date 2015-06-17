@@ -1872,24 +1872,15 @@ function get_degree_search_result_phrase( $result_count_total, $params ) {
 	// Colleges phrasing
 	if ( isset( $params['college'] ) ):
 	?>
-	<span class="for">at </span>
+	<span class="for">at the </span>
 		<?php
 		$count = 1;
-		$is_all_colleges_selected = false;
-		if( count( $params['college'] ) === count( get_terms ('colleges') ) ) {
-			$is_all_colleges_selected = true;
-		}
 		foreach ( $params['college'] as $college_slug ):
-			if( $is_all_colleges_selected ) {
-				$college_name = str_replace( "College of ", "", get_term_by( 'slug', $college_slug, 'colleges' )->name );
-			} else {
-				$college_name = 'the ' . get_term_by( 'slug', $college_slug, 'colleges' )->name;
-			}
 		?>
 			<span class="result">
 				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college_slug; ?>"></span>
 				<?php
-					echo $college_name;
+					echo get_term_by( 'slug', $college_slug, 'colleges' )->name;
 				?>
 			</span>
 			<?php if ( $count < count( $params['college'] ) ): ?>

@@ -1161,11 +1161,12 @@ li.tagit-new input {
 #degree-search-top .degree-result-count .for {
   padding-right: 8px;
 }
-#degree-search-top .degree-result-count-num,
 #degree-search-top .degree-result-count .result,
 #degree-search-top .degree-result-count .search-result {
   font-style: normal;
 }
+
+#degree-search-top .degree-result-count-num,
 #degree-search-top .degree-result-count .result,
 #degree-search-top .degree-result-count .search-result {
   font-weight: bold;
