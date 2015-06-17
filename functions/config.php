@@ -119,7 +119,7 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
  * Otherwise, each value below should be empty (e.g. an empty string '' or
  * array() ).
  **/
-define( 'DEGREE_SEARCH_PAGE_COUNT', 100 );
+define( 'DEGREE_SEARCH_PAGE_COUNT', !empty( $theme_options['degrees_per_page'] ) ? $theme_options['degrees_per_page'] : 100 );
 
 define( 'DEGREE_SEARCH_PARAMS', serialize( array(
 	'program-type' => array(),
@@ -304,11 +304,18 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['grad_catalog_url'],
 		)),
 		new TextareaField(array(
-			'name'        => 'Tution Value Message',
+			'name'        => 'Tuition Value Message',
 			'id'          => THEME_OPTIONS_NAME.'[tuition_value_message]',
 			'description' => 'HTML formatted message that will appear below the Tuition and Fees header on the degree profile page',
 			'default'     => '',
 			'value'       => $theme_options['tuition_value_message'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Financial Aid Message',
+			'id'          => THEME_OPTIONS_NAME.'[financial_aid_message]',
+			'description' => 'HTML formatted message that will appear below the Tuition and Fees content on the degree profile page',
+			'default'     => '',
+			'value'       => $theme_options['financial_aid_message'],
 		)),
 		new TextField(array(
 			'name'        => 'Tuition and Feed URL',
@@ -340,6 +347,12 @@ Config::$theme_settings = array(
 			'id'          => THEME_OPTIONS_NAME.'[national_graduate_out_of_state_average]',
 			'description' => 'The average cost per credit hours nationally for graduate courses',
 			'value'       => $theme_options['national_graduate_out_of_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'Degrees per page',
+			'id'          => THEME_OPTIONS_NAME.'[degrees_per_page]',
+			'description' => 'The number of degrees to display per page on the degee search page',
+			'value'       => $theme_options['degrees_per_page'],
 		)),
 	),
 	'Events' => array(

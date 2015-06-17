@@ -258,7 +258,10 @@
 							</div>
 						<?php endif; ?>
 					</div>
-				</div>
+				</div>				
+				<?php if ( $post->financial_aid_message ) : ?>
+					<p class="financial-aid-message"><?php echo $post->financial_aid_message; ?><p/>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 		</div>

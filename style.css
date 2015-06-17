@@ -1579,10 +1579,12 @@ li.tagit-new input {
   margin-bottom: 0;
   margin-top: 0;
 }
+#degree-single .financial-aid-message,
 #degree-single .tuition-value-message {
   font-size: 0.85em;
   margin-bottom: 18px;
 }
+#degree-single .financial-aid-message a,
 #degree-single .tuition-value-message a.external {
   color: #08c;
 }

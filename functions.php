@@ -1578,6 +1578,7 @@ function append_degree_metadata( $post, $tuition_data ) {
 		if ( $tuition_data ) {
 			$post->tuition_estimates = get_tuition_estimate( $post->tax_program_type, $post->degree_hours );
 			$post->tuition_value_message = $theme_options['tuition_value_message'];
+			$post->financial_aid_message = $theme_options['financial_aid_message'];
 		}
 
 		if ( empty( $post->degree_pdf ) ) {
@@ -2315,7 +2316,7 @@ function get_degree_search_filters() {
 	$filters = array();
 
 	$filters['program-type']['name'] = 'Degrees';
-	$filters['college']['name'] = 'Colleges';
+	$filters['college']['name'] = 'Sort by College';
 
 	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
 	if ( $colleges ) {
