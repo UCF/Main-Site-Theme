@@ -1267,8 +1267,12 @@ li.tagit-new input {
   font-style: normal;
   font-weight: 400;
   letter-spacing: -0.012em;
+  line-height: 30px;
   margin: 15px 0;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
+}
+#degree-search-content .degree-search-group-title small {
+  display: inline-block;
 }
 
 #degree-search-content .degree-search-results {
