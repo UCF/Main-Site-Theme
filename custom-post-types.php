@@ -1565,6 +1565,12 @@ class Degree extends CustomPostType{
 				'type' => 'textarea',
 			),
 			array(
+				'name'  => 'Hide Tuition Information',
+				'desc' => 'If checked tuition information will be hidden for this degree',
+				'id'   => $prefix.'hide_tuition',
+				'type' => 'checkbox'
+			),
+			array(
 				'name'  => 'Degree ID',
 				'desc' => 'degree_id in database. Do not modify this value.',
 				'id'   => $prefix.'id',

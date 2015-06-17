@@ -194,7 +194,7 @@
 				endif;
 			endif
 			?>
-		<?php if ( $post->tuition_estimates ) : ?>
+		<?php if ( $post->tuition_estimates && $post->degree_hide_tuition != 'on' ) : ?>
 			<div class="tuition-info">
 			<h2>Tuition and Fees</h2>
 				<ul class="nav nav-tabs" id="tuition-tabs">

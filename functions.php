@@ -1570,6 +1570,7 @@ function append_degree_metadata( $post, $tuition_data ) {
 		$post->degree_email                = get_post_meta( $post->ID, 'degree_email', TRUE );
 		$post->degree_website              = get_post_meta( $post->ID, 'degree_website', TRUE );
 		$post->degree_pdf                  = get_post_meta( $post->ID, 'degree_pdf', TRUE );
+		$post->degree_hide_tuition		   = get_post_meta( $post->ID, 'degree_hide_tuition', TRUE );
 		$post->degree_contacts             = Degree::get_degree_contacts( $post );
 		$post->tax_college                 = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
 		$post->tax_department              = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
