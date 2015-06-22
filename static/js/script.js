@@ -982,7 +982,7 @@ var degreeSearch = function ($) {
         scrollToResults();
       }
 
-      var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone').remove().end().text();
+      var assistiveText = $('<div>').html(data.count).find('.degree-result-phrase-phone, .reset-search').remove().end().text();
       wp.a11y.speak(assistiveText);
     }, 100);
   }
@@ -1476,6 +1476,12 @@ var socialButtonTracking = function($) {
 };
 
 
+var ariaSilenceNoscripts = function($) {
+  // Prevent text in <noscript> tags from being read aloud by screenreaders.
+  $('noscript').attr('aria-hidden', 'true');
+}
+
+
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
     Webcom.slideshow($);
@@ -1509,6 +1515,7 @@ if (typeof jQuery != 'undefined'){
     degreeSearch($);
     degreeProfile($);
     socialButtonTracking($);
+    ariaSilenceNoscripts($);
 
     //devBootstrap($);
 
