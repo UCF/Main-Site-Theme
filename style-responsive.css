@@ -663,6 +663,12 @@
 	#degree-single #contentcol .degree-details {
     padding: 20px 0 10px 0;
   }
+  .ie #degree-search-content .degree-details-separator {
+    display: none !important; /* IE doesn't understand what "&verbar;" is for whatever reason */
+  }
+  .ie #degree-search-content .degree-credits-count {
+    padding-left: 15px;
+  }
 
   #degree-single .degree-description {
 	margin: 30px 0;
