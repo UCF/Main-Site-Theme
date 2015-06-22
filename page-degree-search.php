@@ -145,7 +145,7 @@ get_header(); the_post(); ?>
 									<input name="<?php echo $key; ?>[]" class="<?php echo $key; ?>" value="<?php echo $term->slug; ?>" type="<?php echo $term->field_type; ?>" <?php if ( isset( $params[$key] ) && in_array( $term->slug, $params[$key] ) ) { ?>checked<?php } ?>>
 									<a href="<?php echo get_permalink(); ?>?<?php echo http_build_query( array( $key . '[]' => $term->slug ) ); ?>" class="seo-li" tabindex="-1">
 										<span><?php if ( isset( $term->alias ) ) { echo $term->alias; } else { echo $term->name; } ?></span>
-										<small class="filter-result-count <?php echo $term->slug; ?>">(<?php echo $term->count; ?>)</small>
+										<small class="filter-result-count <?php echo $term->slug; ?>">(<?php echo $term->count; ?><span class="sr-only"> total results</span>)</small>
 									</a>
 								</label>
 							</li>
