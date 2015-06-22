@@ -2170,7 +2170,11 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$markup .= '<p class="degree-search-result-showing">Showing ' . $result_count_start . '&mdash;' . $result_count_end . ' of ' . $result_count_total . ' results.</p>';
 		}
 	} else {
-		$no_results = 'No results found for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>. ';
+		$no_results = 'No results found';
+		if ( isset( $params['search-query'] ) ) {
+			$no_results .= ' for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>';
+		}
+		$no_results .= '.';
 	}
 
 	// Add suggestions
@@ -2202,7 +2206,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$plural = '';
 			if( $suggestion_count_total > 1 ) {
 				$plural = 's';
-			} 
+			}
 			$markup .= '<div class="degree-search-suggestions">';
 			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . $suggestion_count_total .' similar result' . $plural . ' found:</p>';
 			$markup .= $suggestion_markup;
