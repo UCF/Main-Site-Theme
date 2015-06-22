@@ -2208,12 +2208,10 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$markup .= $suggestion_markup;
 			$markup .= '</div>';
 		}
-	} else {
-		if(!empty($no_results)) {
+	} elseif ( !empty( $no_results ) ) {
 			$markup .= '<div class="degree-search-no-results">';
 			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . '</p>';
 			$markup .= '</div>';
-		}
 	}
 
 	// Add Pagination

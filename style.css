@@ -1255,11 +1255,6 @@ li.tagit-new input {
   background-color: rgba(255, 255, 255, 0);
 }
 
-#degree-search-content .degree-search-results-container .no-results {  
-  font-size: 20px;
-  margin-top: 20px;
-}
-
 #degree-search-content .degree-search-similar {
   margin-top: 25px;
 }
