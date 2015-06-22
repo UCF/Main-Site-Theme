@@ -1,20 +1,20 @@
 <?php
-
 /**
  * Responsible for running code that needs to be executed as wordpress is
  * initializing.  Good place to register scripts, stylesheets, theme elements,
  * etc.
- * 
+ *
  * @return void
  * @author Jared Lang
  **/
 function __init__(){
 	add_theme_support('menus');
 	add_theme_support('post-thumbnails');
+	add_theme_support( 'title-tag' );
 	add_image_size('homepage', 620);
 	add_image_size('homepage-secondary', 540);
 	add_image_size('centerpiece-image', 940, 338, true); 	// Crops!
-	add_image_size('home-thumb', 110, 110);	
+	add_image_size('home-thumb', 110, 110);
 	add_image_size('subpage-subimg', 160);
 	add_image_size('subpage-studentimg', 115, 280);
 	register_nav_menu('header-menu', __('Header Menu'));
@@ -37,10 +37,10 @@ function __init__(){
 	));
 	foreach(Config::$styles as $style){Config::add_css($style);}
 	foreach(Config::$scripts as $script){Config::add_script($script);}
-	
+
 	global $timer;
 	$timer = Timer::start();
-	
+
 	wp_deregister_script('l10n');
 	set_defaults_for_options();
 }
@@ -96,6 +96,10 @@ define('SUMMER_MONTH_END', 7);		// Jul
 define('FALL_MONTH_START', 8);		// Aug
 define('FALL_MONTH_END', 12); 		// Dec
 
+# Fallback undergraduate and graduate catalog urls
+define('UNDERGRAD_CATALOG_URL', !empty( $theme_options['undergrad_catalog_url'] ) ? $theme_options['undergrad_catalog_url'] : 'http://catalog.ucf.edu');
+define('GRAD_CATALOG_URL', !empty( $theme_options['grad_catalog_url'] ) ? $theme_options['grad_catalog_url'] : 'http://graduatecatalog.ucf.edu');
+
 # Desired order of degree program types in degree lists, by program slug
 define('DEGREE_PROGRAM_ORDER', serialize(array(
 	'undergraduate-degree',
@@ -106,8 +110,54 @@ define('DEGREE_PROGRAM_ORDER', serialize(array(
 	'certificate',
 )));
 
+/**
+ * All valid degree search parameters.  Any GET params passed to the degree
+ * search that aren't in this array are ignored.
+ *
+ * If a param must *always* have some fallback value (e.g. a param for radio
+ * buttons), set it below.
+ * Otherwise, each value below should be empty (e.g. an empty string '' or
+ * array() ).
+ **/
+define( 'DEGREE_SEARCH_PAGE_COUNT', !empty( $theme_options['degrees_per_page'] ) ? $theme_options['degrees_per_page'] : 100 );
+
+define( 'DEGREE_SEARCH_PARAMS', serialize( array(
+	'program-type' => array(),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => '',
+	'default' => 0,
+	'offset' => 0,
+	'search-default' => 0
+) ) );
+
+# Params specifically for the default view.
+define( 'DEGREE_SEARCH_DEFAULT_PARAMS', serialize( array(
+	'program-type' => array(),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => '',
+	'default' => 1,
+	'offset' => 0,
+	'search-default' => 0
+) ) );
+
+# Params specifically for the default search view (view that should used
+# immediately following the default view, if a user performs a search without
+# modifying any filters beforehand.  Added to force program type options from
+# the default view off, and to search all program types instead.)
+define( 'DEGREE_SEARCH_S_DEFAULT_PARAMS', serialize( array(
+	'program-type' => array(),
+	'college' => array(),
+	'sort-by' => 'title',
+	'search-query' => '',
+	'default' => 0,
+	'offset' => 0,
+	'search-default' => 1
+) ) );
+
 # Domain/path of site (for cookies)
-list($domain, $path) = explode('.edu', get_site_url()); 
+list($domain, $path) = explode('.edu', get_site_url());
 $domain = preg_replace('/^(http|https):\/\//','',$domain).'.edu';
 if (substr($path, strlen($path)-1) !== '/') { $path = $path.'/'; } // make sure path ends in /
 define('WP_SITE_DOMAIN', $domain);
@@ -147,7 +197,8 @@ Config::$custom_taxonomies = array(
 	'AudienceRoles',
 	'ProgramTypes',
 	'Colleges',
-	'Departments'
+	'Departments',
+	'DegreeKeywords'
 );
 
 Config::$body_classes = array('default');
@@ -156,9 +207,9 @@ Config::$body_classes = array('default');
 /*
  * Edge Side Includes (ESI) are directives that tell Varnish to include some other
  * content in the page. The primary use for use to assign another cache duration
- * to the "other content". 
- * To add an ESI, first add some function and any safe-to-use arguments to the ESI 
- * whitelist below, then call that function by referencing its key in the whitelist 
+ * to the "other content".
+ * To add an ESI, first add some function and any safe-to-use arguments to the ESI
+ * whitelist below, then call that function by referencing its key in the whitelist
  * and any arguments using esi_include($key, $args).
  * Functions that accept/require multiple arguments should be listed here with
  * serialized set(s) of arguments (so that they can be compared as a single string).
@@ -235,6 +286,73 @@ Config::$theme_settings = array(
 			'description' => 'Example: <em>some.domain.com</em>',
 			'default'     => null,
 			'value'       => $theme_options['cb_domain'],
+		)),
+	),
+	'Degrees' => array(
+		new TextField(array(
+			'name'        => 'Undergraduate catalog URL',
+			'id'          => THEME_OPTIONS_NAME.'[undergrad_catalog_url]',
+			'description' => 'URL for the undergraduate degree catalog website.',
+			'default'     => 'http://catalog.ucf.edu',
+			'value'       => $theme_options['undergrad_catalog_url'],
+		)),
+		new TextField(array(
+			'name'        => 'Graduate catalog URL',
+			'id'          => THEME_OPTIONS_NAME.'[grad_catalog_url]',
+			'description' => 'URL for the graduate degree catalog website.',
+			'default'     => 'http://graduatecatalog.ucf.edu',
+			'value'       => $theme_options['grad_catalog_url'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Tuition Value Message',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_value_message]',
+			'description' => 'HTML formatted message that will appear below the Tuition and Fees header on the degree profile page',
+			'default'     => '',
+			'value'       => $theme_options['tuition_value_message'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Financial Aid Message',
+			'id'          => THEME_OPTIONS_NAME.'[financial_aid_message]',
+			'description' => 'HTML formatted message that will appear below the Tuition and Fees content on the degree profile page',
+			'default'     => '',
+			'value'       => $theme_options['financial_aid_message'],
+		)),
+		new TextField(array(
+			'name'        => 'Tuition and Feed URL',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',
+			'description' => 'URL for the tuition and fee feed.',
+			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
+			'value'       => $theme_options['tuition_fee_url'],
+		)),
+		new TextField(array(
+			'name'        => 'National Undergraduate Tuition Average (In State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_undergraduate_in_state_average]',
+			'description' => 'The average cost per credit hours nationally for undergraduate courses',
+			'value'       => $theme_options['national_undergraduate_in_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'National Undergraduate Tuition Average (Out of State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_undergraduate_out_of_state_average]',
+			'description' => 'The average cost per credit hours nationally for undergraduate courses',
+			'value'       => $theme_options['national_undergraduate_out_of_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'National Graduate Tuition Average (In State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_graduate_in_state_average]',
+			'description' => 'The average cost per credit hours nationally for graduate courses',
+			'value'       => $theme_options['national_graduate_in_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'National Graduate Tuition Average (Out of State)',
+			'id'          => THEME_OPTIONS_NAME.'[national_graduate_out_of_state_average]',
+			'description' => 'The average cost per credit hours nationally for graduate courses',
+			'value'       => $theme_options['national_graduate_out_of_state_average'],
+		)),
+		new TextField(array(
+			'name'        => 'Degrees per page',
+			'id'          => THEME_OPTIONS_NAME.'[degrees_per_page]',
+			'description' => 'The number of degrees to display per page on the degee search page',
+			'value'       => $theme_options['degrees_per_page'],
 		)),
 	),
 	'Events' => array(
@@ -334,7 +452,7 @@ Config::$theme_settings = array(
 			'name'        => 'Weekly Feedback Email Key',
 			'id'          => THEME_OPTIONS_NAME.'[feedback_email_key]',
 			'description' => 'Secret key that allows for weekly feedback emails to be sent via cron job.
-							 The cron job\'s passed argument must be the same as this value; do not modify 
+							 The cron job\'s passed argument must be the same as this value; do not modify
 							 this value unless you can edit the server cron tab!',
 			'default'     => '',
 			'value'       => $theme_options['feedback_email_key'],
@@ -390,24 +508,6 @@ Config::$theme_settings = array(
         )),
 	),
 	'Social' => array(
-		new RadioField(array(
-			'name'        => 'Enable OpenGraph',
-			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
-			'description' => 'Turn on the opengraph meta information used by Facebook.',
-			'default'     => 1,
-			'choices'     => array(
-				'On'  => 1,
-				'Off' => 0,
-			),
-			'value'       => $theme_options['enable_og'],
-	    )),
-		new TextField(array(
-			'name'        => 'Facebook Admins',
-			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
-			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
-			'default'     => null,
-			'value'       => $theme_options['fb_admins'],
-		)),
 		new TextField(array(
 			'name'        => 'Facebook URL',
 			'id'          => THEME_OPTIONS_NAME.'[facebook_url]',
@@ -462,6 +562,35 @@ Config::$theme_settings = array(
 	),
 );
 
+/**
+ * If Yoast SEO is activated, assume we're handling ALL SEO/meta-related
+ * modifications with it.  Don't add Facebook Opengraph theme options.
+ **/
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+	array_unshift( Config::$theme_settings['Social'],
+		new RadioField(array(
+			'name'        => 'Enable OpenGraph',
+			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
+			'description' => 'Turn on the opengraph meta information used by Facebook.',
+			'default'     => 1,
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['enable_og'],
+	    )),
+		new TextField(array(
+			'name'        => 'Facebook Admins',
+			'id'          => THEME_OPTIONS_NAME.'[fb_admins]',
+			'description' => 'Comma seperated facebook usernames or user ids of those responsible for administrating any facebook pages created from pages on this site. Example: <em>592952074, abe.lincoln</em>',
+			'default'     => null,
+			'value'       => $theme_options['fb_admins'],
+		))
+	);
+}
+
 
 /**
  * Favicon, RSS url for header
@@ -477,30 +606,31 @@ Config::$links = array(
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
+	THEME_STATIC_URL.'/fonts/font-awesome/css/font-awesome.min.css',
 );
 
 // Default bootstrap responsive styles
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles, 
+	array_push(Config::$styles,
 		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.min.css'
-	);		
+	);
 }
 
-array_push(Config::$styles,	
+array_push(Config::$styles,
 	// Force GravityForms styles here so we can override them
 	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css', 
+	THEME_CSS_URL.'/webcom-base.css',
 	get_bloginfo('stylesheet_url')
 );
 
 // Custom responsive styles
 if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles, 
+	array_push(Config::$styles,
 		THEME_URL.'/style-responsive.css'
-	);	
+	);
 }
 
-array_push(Config::$styles,	
+array_push(Config::$styles,
 	array('src' => THEME_CSS_URL.'/print.css', 'media' => 'print')
 );
 
@@ -518,13 +648,17 @@ Config::$scripts = array(
 	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
 );
 
+function enqueue_wpa11y() {
+	wp_enqueue_script( 'wp-a11y' );
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_wpa11y' );
+
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
     wp_register_script( 'jquery', CURRENT_PROTOCOL.'ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
     wp_enqueue_script( 'jquery' );
-}    
- 
-add_action('wp_enqueue_scripts', 'jquery_in_header');
+}
+add_action( 'wp_enqueue_scripts', 'jquery_in_header' );
 
 /**
  * Meta content for header

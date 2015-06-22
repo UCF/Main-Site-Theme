@@ -54,10 +54,10 @@ else {
 			// properly saved: http://wordpress.stackexchange.com/a/8921
 			delete_option('program_types_children');
 
-			print 'New base program taxonomy terms created.<br/><br/>';
+			print 'New base program taxonomy terms created.<br><br>';
 		}
 		else {
-			print 'Existing base program taxonomy terms found.<br/><br/>';
+			print 'Existing base program taxonomy terms found.<br><br>';
 		}
 
 		/**
@@ -123,55 +123,38 @@ else {
 				$program->contacts = $string;
 			}
 
-			// Massage website URLs for graduate programs because they're stored in the
-			// search service db strangely:
-			if ( $program->graduate == 1 ) {
-				// Old data previously returned a query param as the 'required_hours' val.
-				if ( $program->required_hours[0] == '?' ) {
-					$program->profile_url = 'http://www.graduatecatalog.ucf.edu/programs/program.aspx'.$program->required_hours;
-					$program->required_hours = null;
-				}
-				// If required_hours val is a full catalog url
-				else if ( filter_var( $program->required_hours, FILTER_VALIDATE_URL ) ) {
-					$program->profile_url = $program->required_hours;
-					$program->required_hours = null;
-				}
-				// If it's something else that doesn't look like a number, get rid of it
-				else if ( !is_numeric( $program->required_hours ) ) {
-					$program->required_hours = null;
-				}
-			}
-
 			// Assign catalog pdf links to undergraduate degrees.
 			// Check against undergraduate catalog's provided degree name, type,
 			// and college for a match.
-			foreach ($ucatalog_data as $key=>$uc_program) {
-				// Check if our program type string is a substring of the catalog's program type;
-				// if both program names match, or the program is accelerated and the name is a substring of the catalog's program name or name + type;
-				// and if the college name either matches or if one college name is a substring of the other
-				if (
-					stripos($uc_program->type, $program->type_ucmatch) !== false &&
-					(
-						clean_name($program->name) == clean_name($uc_program->name) ||
+			if ( $ucatalog_data ) {
+				foreach ($ucatalog_data as $key=>$uc_program) {
+					// Check if our program type string is a substring of the catalog's program type;
+					// if both program names match, or the program is accelerated and the name is a substring of the catalog's program name or name + type;
+					// and if the college name either matches or if one college name is a substring of the other
+					if (
+						stripos($uc_program->type, $program->type_ucmatch) !== false &&
 						(
-							$program->type_ucmatch == 'accelerated' &&
+							clean_name($program->name) == clean_name($uc_program->name) ||
 							(
-								stripos(clean_name($program->name), clean_name($uc_program->name)) !== false ||
-								stripos(clean_name($uc_program->name.$uc_program->type), clean_name($program->name)) !== false
+								$program->type_ucmatch == 'accelerated' &&
+								(
+									stripos(clean_name($program->name), clean_name($uc_program->name)) !== false ||
+									stripos(clean_name($uc_program->name.$uc_program->type), clean_name($program->name)) !== false
+								)
 							)
+						) &&
+						(
+							clean_name($program->college_name) == clean_name($uc_program->college) ||
+							stripos(clean_name($program->college_name), clean_name($uc_program->college)) !== false ||
+							stripos(clean_name($uc_program->college), clean_name($program->college_name)) !== false
 						)
-					) &&
-					(
-						clean_name($program->college_name) == clean_name($uc_program->college) ||
-						stripos(clean_name($program->college_name), clean_name($uc_program->college)) !== false ||
-						stripos(clean_name($uc_program->college), clean_name($program->college_name)) !== false
-					)
-				) {
-					$program->pdf = $uc_program->pdf;
-					break;
+					) {
+						$program->catalog_url = $uc_program->pdf;
+						break;
+					}
 				}
+				if (!$program->catalog_url) { $program->catalog_url = ''; }
 			}
-			if (!$program->pdf) { $program->pdf = ''; }
 
 
 			$program = array(
@@ -193,8 +176,8 @@ else {
 					'degree_phone'		 => $program->phone,
 					'degree_email'		 => $program->email,
 					'degree_contacts'	 => $program->contacts, // semicolon-separated contact lists; fields are comma-separated
-					'degree_pdf'		 => $program->pdf,
-					'degree_profile_url' => $program->profile_url,
+					'degree_pdf'		 => $program->catalog_url,
+					'degree_is_graduate' => $program->graduate, // Note: 'Certificates' can be undergraduate or graduate, even though our grouping logic puts them under Graduate Programs
 				),
 				'post_terms' => array(
 					'program_types' => $program->type,
@@ -253,13 +236,13 @@ else {
 				wp_update_post($post_data);
 				unset($existing_posts_array[$post_data['ID']]);
 
-				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'.<br/>';
+				print 'Updated content of existing post '.$post_data['post_title'].' with ID '.$post_data['ID'].'.<br>';
 				$count++;
 			}
 			else {
 				$post_id = wp_insert_post($post['post_data']);
 
-				print 'Saved new post '.$post_data['post_title'].'.<br/>';
+				print 'Saved new post '.$post_data['post_title'].'.<br>';
 				$count++;
 			}
 			// Create/update meta field values.
@@ -269,21 +252,21 @@ else {
 					// update_post_meta will return false if $meta_val is the same as the db val
 					if ($updated == true) {
 						if ($meta_val) {
-							print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'.<br/>';
+							print 'Updated post meta field '.$meta_key.' with value '.$meta_val.'.<br>';
 						}
 						else {
-							print 'Post meta field '.$meta_key.' was set to an empty value.<br/>';
+							print 'Post meta field '.$meta_key.' was set to an empty value.<br>';
 						}
 					}
 					else if (is_numeric($updated) && $updated > 1) {
-						print 'Meta with ID '.$updated.' does not exist.<br/>';
+						print 'Meta with ID '.$updated.' does not exist.<br>';
 					}
 					else if ($updated == false) {
 						if ($meta_val) {
-							print 'Post meta field '.$meta_key.' with value '.$meta_val.' left unchanged.<br/>';
+							print 'Post meta field '.$meta_key.' with value '.$meta_val.' left unchanged.<br>';
 						}
 						else {
-							print 'Post meta field '.$meta_key.' with empty value left unchanged.<br/>';
+							print 'Post meta field '.$meta_key.' with empty value left unchanged.<br>';
 						}
 					}
 				}
@@ -313,18 +296,18 @@ else {
 				// Actually set the term for the post. Unset existing term if $term_id is null.
 				if ($term_id) {
 					wp_set_post_terms($post_id, $term_id, $tax); // replaces existing terms
-					print 'Set post\'s taxonomy '.$tax.' to type '.$term.'.<br/>';
+					print 'Set post\'s taxonomy '.$tax.' to type '.$term.'.<br>';
 				}
 				else {
 					wp_delete_object_term_relationships($post_id, $tax);
-					print 'Unset existing post\'s taxonomy '.$tax.' terms (degree has no '.$tax.' value.)<br/>';
+					print 'Unset existing post\'s taxonomy '.$tax.' terms (degree has no '.$tax.' value.)<br>';
 				}
 			}
 
 			// Done.
-			print 'Finished processing post '.$post_data['post_title'].'.<br/><br/>';
+			print 'Finished processing post '.$post_data['post_title'].'.<br><br>';
 		}
-		print '<br/>Created/Updated '.$count.' posts.<br/>';
+		print '<br>Created/Updated '.$count.' posts.<br>';
 
 
 		/**
@@ -335,9 +318,11 @@ else {
 		foreach ($existing_posts_array as $post_id) {
 			$post_title = get_post($post_id)->post_title;
 			wp_delete_post($post_id);
-			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br/>';
+			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br>';
 		}
-		print '<br/>Deleted '.count($existing_posts_array).' existing posts.';
+		print '<br>Deleted '.count($existing_posts_array).' existing posts.';
+
+		print '<br><br><strong>Finished running degree import.</strong>  Make sure to check the newly imported degree data, including program type, college terms, and departments, look okay.';
 	}
 	else {
 		print 'Query to the search service either failed, or no search results were found.  Is the Search Service URL set in Theme Options valid?';

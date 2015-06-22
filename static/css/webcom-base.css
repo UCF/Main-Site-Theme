@@ -39,16 +39,6 @@ h4 > a,
 h5 > a,
 h6 > a {color:#333;}
 
-/**
- * Form styles
- **/
-input,
-textarea{padding: 4px; color: #333; border: 1px solid #ccc; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px;}
-.msie input,
-.msie textarea{padding: 4px 3px 4px 3px;}
-.firefox input,
-.firefox textarea{padding: 5px;}
-
 
 /**
  * Location specific styles

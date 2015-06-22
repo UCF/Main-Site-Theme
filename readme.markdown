@@ -7,8 +7,13 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 * Gravity Forms
 * Varnish Dependency Purger
 
+## Recommended Plugins
+* WordPress SEO
+
 
 ## Installation Requirements
+
+WordPress 4.2 is required (primarly for access to wp-a11y accessibility script).
 
 * Make sure that all two- and three-column pages are correctly assigned sidebar menu widgets when content is imported. Menus, when imported, should maintain a common naming schema ('More Information - Page Name', 'Secondary Nav - Page Name', etc.)
 * Add cron job for jobs/feedback-mailer.php to run weekly for feedback emails. The job should use wget to request the file, and the URL should have a 'secret' param with a value that is identical to the value set for the 'Weekly Feedback Email Key' Theme Options setting.
@@ -49,6 +54,7 @@ This theme relies on Twitter's Bootstrap framework. UCF's fork of the Bootstrap 
 * The function _save_meta_data() in functions/base.php (line 1572) has been modified to properly handle Slider content.
 * Slider "slide" meta fields are not duplicate meta boxes, but are actually dynamically-generated duplicate field groups, whose field values are saved into a serialized array for the given field.
 * static/js/admin.js includes multiple required scripts for the Slider editor to save/load field values properly.
+* This theme comes with pre-built SEO options, such as page title generation and OpenGraph settings.  However, if WordPress SEO is enabled, the built-in theme options will no longer be used (WordPress SEO should be used exclusively to handle these settings.)
 
 
 This theme utilizes Twitter Bootstrap as its front-end framework.  Bootstrap
@@ -72,6 +78,7 @@ found at the top of static/bootstrap/build/css/bootstrap.css
 * Subheader
 * AZIndexLink
 * Announcement
+* Degree
 
 
 ## Custom Taxonomies
@@ -79,6 +86,9 @@ found at the top of static/bootstrap/build/css/bootstrap.css
 * OrganizationalGroups (for 'Person' post type)
 * Keywords (for 'Announcement' post type)
 * AudienceRoles (for 'Announcement' post type)
+* ProgramTypes (for 'Degree' post type)
+* Colleges (for 'Degree' post type)
+* Departments (for 'Degree' post type)
 
 
 ## Shortcodes
@@ -89,6 +99,12 @@ found at the top of static/bootstrap/build/css/bootstrap.css
 * [centerpiece] - Generates the home page centerpiece
 * [events-widget] - Outputs Upcoming Events
 * [post-type-search] - Generates a list of searchable posts
+* [phonebook-search] - Generates the Phonebook Search page's contents
+* [gravity-with-ldap] - Displays LDAP authentication unless already authenicated, which displays the gravity form (for Create Announcement form).
+* [azindexlinks-webadmins] - Output a list of A-Z Index Links with their Web Administrator information.
+* [google-remarketing] - Outputs Google Remarketing javascript code.
+* [undergraduate-catalog-url] - Outputs the Undergraduate catalog URL in Theme Options.
+* [graduate-catalog-url] - Outputs the Graduate catalog URL in Theme Options.
 
 
 ## Important files/folders:

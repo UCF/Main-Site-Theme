@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Abstract class for defining custom post types.
  *
@@ -1522,7 +1521,7 @@ class Degree extends CustomPostType{
 		$use_title      = True,
 		$use_metabox    = True,
 		$use_shortcode  = True,
-		$taxonomies		= array('program_types', 'colleges', 'departments');
+		$taxonomies     = array( 'program_types', 'colleges', 'departments', 'degree_keywords' );
 
 	public function fields(){
 		$prefix = $this->options('name').'_';
@@ -1571,6 +1570,12 @@ class Degree extends CustomPostType{
 				'type' => 'textarea',
 			),
 			array(
+				'name'  => 'Hide Tuition Information',
+				'desc' => 'If checked tuition information will be hidden for this degree',
+				'id'   => $prefix.'hide_tuition',
+				'type' => 'checkbox'
+			),
+			array(
 				'name'  => 'Degree ID',
 				'desc' => 'degree_id in database. Do not modify this value.',
 				'id'   => $prefix.'id',
@@ -1582,31 +1587,59 @@ class Degree extends CustomPostType{
 				'id'   => $prefix.'type_id',
 				'type' => 'text',
 			),
+			array(
+				'name'  => 'Is Graduate Program',
+				'desc' => 'graduate value in database. Do not modify this value.',
+				'id'   => $prefix.'is_graduate',
+				'type' => 'text',
+			)
 		);
 	}
 
 	public static function is_graduate_program($degree) {
-		$program_types = wp_get_post_terms($degree->ID, 'program_types', array('fields' => 'ids'));
-		$program_group = end(get_ancestors(intval($program_types[0]), 'program_types'));
-		if (get_term($program_group, 'program_types')->name == 'Graduate Program') {
+		$is_graduate = get_post_meta( $degree->ID, 'degree_is_graduate', true );
+		if ( $is_graduate && intval( $is_graduate ) === 1 ) {
 			return true;
 		}
 		return false;
 	}
 
-	public static function get_degree_profile_link( $degree ) {
-		// Get permalink to landing page for a single degree program.
-		// Programs with a set profile_url (graduate programs) should use
-		// that url instead of the post's permalink.
-		$profile_url = get_post_meta( $degree->ID, 'degree_profile_url', TRUE );
-		$permalink = get_permalink( $degree->ID );
+	/**
+	 * Returns a degree's contacts and their phone/email info
+	 * in an array of arrays.
+	 **/
+	public static function get_degree_contacts( $degree ) {
+		$contact_info = get_post_meta( $degree->ID, 'degree_contacts', true );
+		$contact_array = array();
 
-		$single_url = $permalink;
-		if ( !empty( $profile_url ) ) {
-			$single_url = $profile_url;
+		// Split single contacts
+		$contacts = explode( '@@;@@', $contact_info );
+		foreach ( $contacts as $key=>$contact ) {
+			if ( $contact ) {
+				// Split individual fields
+				$contact = explode( '@@,@@', $contact );
+
+				$newcontact = array();
+
+				foreach ( $contact as $fieldset ) {
+					// Split out field key/values
+					$fields = explode( '@@:@@', $fieldset );
+					// Only get fields we need. Don't include fields that can result in
+					// duplicate contacts after sorting uniques (e.g. contact_id).
+					if ( $fields[0] == 'contact_name' || $fields[0] == 'contact_phone' || $fields[0] == 'contact_email' ) {
+						$newcontact[$fields[0]] = str_replace( '@@,@', '', $fields[1] );
+					}
+				}
+
+				// Only add the contact to the list if there are at least 2 pieces of info available
+				// e.g. don't add just a person's name to the list
+				if ( count( $newcontact ) > 1 ) {
+					array_push( $contact_array, $newcontact );
+				}
+			}
 		}
 
-		return $single_url;
+		return array_map( 'array_filter', array_unique( $contact_array, SORT_REGULAR ) );
 	}
 
 	/**
@@ -1655,16 +1688,13 @@ class Degree extends CustomPostType{
 		<h3 class="degree-list-heading" id="<?=$term_slug?>"><?=$term?></h3>
 		<?php if ($posts) { ?>
 		<ul class="degree-list">
-			<?php
-			foreach ($posts as $post) {
-				$post = append_degree_list_metadata($post);
-			?>
+			<?php foreach ( $posts as $post ): ?>
 			<li class="program">
-				<?php if (!empty($post->degree_profile_link)) { ?><a href="<?=$post->degree_profile_link?>"><?php } ?>
-					<?=$post->post_title?>
-				<?php if (!empty($post->degree_profile_link)) { ?></a><?php } ?>
+				<a href="<?php echo get_permalink( $post->ID ); ?>">
+					<?php echo $post->post_title; ?>
+				</a>
 			</li>
-			<?php } ?>
+			<?php endforeach; ?>
 		</ul>
 		<?php } ?>
 		<hr />

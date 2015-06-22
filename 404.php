@@ -9,7 +9,7 @@
 		</div>
 		<div id="contentcol" class="span12">
 			<article role="main">
-				<?php 
+				<?php
 					$page = get_page_by_title('404');
 					if($page){
 						$content = $page->post_content;
@@ -20,7 +20,14 @@
 				<?php if($content):?>
 				<?=$content?>
 				<?php else:?>
-				<p>The page you requested doesn't exist.  Sorry about that.</p>
+					<div class="row">
+						<div class="span12">
+							<p>&nbsp;</p>
+							<p class="lead">The page you were looking for appears to have been moved, deleted or does not exist. Try using the navigation or search above or browse to the <a href="<?php echo get_home_url(); ?>">home page</a>.</p>
+						</div>
+					</div>
+				</div>
+
 				<?php endif;?>
 			</article>
 		</div>

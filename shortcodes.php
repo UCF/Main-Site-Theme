@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Create a javascript slideshow of each top level element in the
  * shortcode.  All attributes are optional, but may default to less than ideal
@@ -1100,5 +1099,17 @@ function sc_remarketing_tag($attr) {
 }
 
 add_shortcode( 'google-remarketing', 'sc_remarketing_tag' );
+
+
+function sc_undergrad_catalog_url( $attr ) {
+	return UNDERGRAD_CATALOG_URL;
+}
+add_shortcode( 'undergraduate-catalog-url', 'sc_undergrad_catalog_url' );
+
+
+function sc_grad_catalog_url( $attr ) {
+	return GRAD_CATALOG_URL;
+}
+add_shortcode( 'graduate-catalog-url', 'sc_grad_catalog_url' );
 
 ?>

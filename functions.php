@@ -1183,10 +1183,10 @@ function query_undergraduate_catalog() {
  * See http://wordpress.stackexchange.com/questions/3326/301-redirect-instead-of-404-when-url-is-a-prefix-of-a-post-or-page-name
  **/
 function no_redirect_on_404($redirect_url) {
-    if (is_404()) {
-        return false;
-    }
-    return $redirect_url;
+	if (is_404()) {
+		return false;
+	}
+	return $redirect_url;
 }
 add_filter('redirect_canonical', 'no_redirect_on_404');
 
@@ -1198,8 +1198,8 @@ add_filter('redirect_canonical', 'no_redirect_on_404');
  * centerpieces only to allow for previews that don't wipe this data.
  **/
 function admin_centerpiece_enqueue_scripts() {
-    if (get_post_type() == 'centerpiece') {
-        wp_dequeue_script('autosave');
+	if (get_post_type() == 'centerpiece') {
+		wp_dequeue_script('autosave');
 	}
 }
 add_action('admin_enqueue_scripts', 'admin_centerpiece_enqueue_scripts');
@@ -1212,15 +1212,15 @@ add_action('admin_enqueue_scripts', 'admin_centerpiece_enqueue_scripts');
 function remove_yoast_meta_boxes() {
 	$post_types = array(
 		'centerpiece',
-        'subheader',
-        'azindexlink',
-        'video',
-        'document',
-        'publication',
+		'subheader',
+		'azindexlink',
+		'video',
+		'document',
+		'publication',
 	);
-    foreach ($post_types as $post_type) {
+	foreach ($post_types as $post_type) {
 		remove_meta_box('wpseo_meta', $post_type, 'normal');
-    }
+	}
 }
 add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
 
@@ -1239,19 +1239,26 @@ function page_specific_stylesheet($pageid) {
 
 
 /**
+ * Prints the Cloud.Typography font stylesheet <link> tag.
+ **/
+function webfont_stylesheet() {
+	$css_key = get_theme_option( 'cloud_font_key' );
+	if ( $css_key ) {
+		echo '<link rel="stylesheet" href="'. $css_key .'" type="text/css" media="all" />';
+	}
+}
+
+
+/**
  * Output the CSS key for Cloud.Typography web fonts if a CSS key is set in
  * Theme Options.
  * Is included conditionally per-page to prevent excessive hits on our Cloud.Typography
  * page view limit per month.
  **/
-function page_specific_webfonts($pageid) {
-	if(get_post_meta($pageid, 'page_use_webfonts', True) == 'on') {
-		$css_key = get_theme_option('cloud_font_key');
-		if ($css_key) {
-			print '<link rel="stylesheet" href="'.$css_key.'" type="text/css" media="all" />';
-		}
+function page_specific_webfonts( $pageid ) {
+	if ( get_post_meta( $pageid, 'page_use_webfonts', True ) == 'on' ) {
+		webfont_stylesheet();
 	}
-	else { return NULL; }
 }
 
 
@@ -1287,11 +1294,11 @@ add_action('template_redirect', 'kill_unused_templates');
 * Add ID attribute to registered University Header script.
 **/
 function add_id_to_ucfhb($url) {
-    if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
-      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
-      return "$url' id='ucfhb-script";
-    }
-    return $url;
+	if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
+	  remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+	  return "$url' id='ucfhb-script";
+	}
+	return $url;
 }
 add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 
@@ -1299,6 +1306,8 @@ add_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
 /**
  * Returns an array of post groups, grouped by a specified taxonomy's terms.
  * Each key is a taxonomy term ID; each value is an array of post objects.
+ *
+ * Used by degree-list shortcode (Degree::objectsToHTML)
  **/
 function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
 	$groups = array();
@@ -1355,6 +1364,8 @@ function group_posts_by_tax_terms($tax, $posts, $specific_terms=null) {
 /**
  * Returns a sorted array of grouped degrees by program (grouped by group_posts_by_tax_terms().)
  * Uses the order defined by DEGREE_PROGRAM_ORDER in functions/config.php.
+ *
+ * Used by degree-list shortcode (Degree::objectsToHTML)
  **/
 function sort_grouped_degree_programs($posts) {
 	$slugs = unserialize(DEGREE_PROGRAM_ORDER);
@@ -1374,35 +1385,618 @@ function sort_grouped_degree_programs($posts) {
 
 
 /**
- * Fetch a set of Degree Programs for the Degree Search page.
+ * Generates page <title> tag for Degree Program post type.
  **/
-function get_degree_search_data() {
-	// Set the view.  The view determines what set of data needs to be returned
-	// and how that data should be grouped/ordered.
-	// Available views are defined in $all_views.
-	$current_view = $_GET['current_view'] ? $_GET['current_view'] : 'browse_by_name';
+function wp_title_degree_programs($title, $separator) {
+	global $post;
 
+	if ($post->post_type == 'degree') {
+		$title = 'Degree Program '.$separator.' '.single_post_title('', FALSE);
+	}
+
+	return $title;
+}
+add_filter('wp_title', 'wp_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
+
+
+/**
+ * Generates text used in page <title> for Degree Search based on current filters/search val.
+ **/
+function get_degree_search_title( $separator='|', $params=null ) {
+	$title = 'Degree Search';
+
+	$params = degree_search_params_or_fallback( $params );
+
+	if ( !empty( $params ) ) {
+		if ( isset( $params['search-query'] ) ) {
+			$title = htmlspecialchars( urldecode( $params['search-query'] ) ) . ' ' . $title;
+		}
+
+		$title .= ' '. $separator . ' Top ';
+
+		if ( isset( $params['program-type'] ) ) {
+			$count = count( $params['program-type'] );
+			foreach ( $params['program-type'] as $index=>$program_slug ) {
+				$program = get_term_by( 'slug', $program_slug, 'program_types' );
+				$program_name = str_replace( ' Degree', '', $program->name );
+				if ( $count == 1 ) {
+					$title .= $program_name;
+				} else if ( $index == ( $count - 1 ) ) {
+					$title = substr_replace( $title, '', -1 );
+					$title .= ' and ' . $program_name;
+				} else {
+					$title .= $program_name . ', ';
+				}
+			}
+		}
+
+		if ( isset( $params['college'] ) ) {
+			$title .= ', ';
+			$count = count( $params['college'] );
+			foreach ( $params['college'] as $index=>$college_slug ) {
+				$college = get_term_by( 'slug', $college_slug, 'colleges' );
+				$college_name = str_replace( 'College of ', '', $college->name );
+				if ( $count == 1 ) {
+					$title .= $college_name . ' ';
+				} else if ( $index == ( $count - 1 ) ) {
+					$title = substr_replace( $title, '', -2 );
+					$title .= ' and ' . $college_name;
+				} else {
+					$title .= $college_name . ', ';
+				}
+			}
+		}
+
+		$title .= ' Degrees';
+
+		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
+			$title .= ', sorted by total credit hours';
+		}
+
+		if ( substr( $title, -2 ) == ', ' ) {
+			$title = substr_replace( $title, '', -2 );
+		}
+	}
+
+	return $title;
+}
+
+
+/**
+ * Generates text used in page meta description for Degree Search based on
+ * current filters/search val.
+ **/
+function get_degree_search_meta_description( $params=null ) {
+	// Opening
+	$retval  = 'The University of Central Florida offers';
+
+	$params = degree_search_params_or_fallback( $params );
+
+	if ( isset( $params['search-query'] ) ) {
+		$retval .= ' ' . html_entity_decode( $params['search-query'] ) . ' Degrees';
+	}
+
+	if ( isset( $params['program-type'] ) ) {
+		$retval .= ' and many other';
+		$programs = array_intersect( $params['program-type'], array( 'undergraduate-degree', 'graduate-degree' ) );
+		$count = count( $programs );
+		foreach( $programs as $index=>$program_slug ) {
+			$program = get_term_by( 'slug', $program_slug, 'program_types' );
+			$program = str_replace( ' Degree', '', $program->name );
+			if ( $count == 1 ) {
+				$retval .= ' ' . $program;
+			} else if ( $index == ( $count - 1 ) ) {
+				$retval = substr_replace( $retval, '', -1 );
+				$retval .= ' and ' . $program;
+			} else {
+				$retval .= ' ' . $program . ',';
+			}
+		}
+	}
+
+	if ( isset( $params['college'] ) ) {
+		$count = count ( $params['college'] );
+		foreach( $params['college'] as $index=>$college_slug ) {
+			$college = get_term_by( 'slug', $college_slug, 'colleges' );
+			$college = str_replace( 'College of ', '', $college->name );
+			if ( $count == 1 ) {
+				$retval .= ' ' . $college;
+			} else if ( $index == ( $count - 1 ) ) {
+				$retval = substr_replace( $retval, '', -1 );
+				$retval .= ' and ' . $college;
+			} else {
+				$retval .= ' ' . $college . ',';
+			}
+		}
+	}
+
+	$retval .= ' Degrees';
+
+	$retval .= ' | Major, Minor, Masters, Certificate and PhD Programs | Campuses Located in Orlando, Florida Universities and Colleges';
+
+	return $retval;
+}
+
+
+/**
+ * Generates <title> tag for Degree Search page.
+ **/
+function wp_title_degree_search( $title, $separator ) {
+	global $post;
+	if ( $post->ID == get_page_by_title( 'Degree Search' )->ID ) {
+		$custom_title = get_degree_search_title( $separator );
+		return $custom_title;
+	}
+	return $title;
+}
+add_filter( 'wp_title', 'wp_title_degree_search', 99, 2 ); // Force these page titles (SEO plugins can't overwrite them.)
+
+
+/**
+ * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
+ **/
+function header_meta_degree_search($str) {
+	global $post;
+
+	if ( $post->ID == get_page_by_title('Degree Search')->ID ) {
+		$custom_meta = get_degree_search_meta_description();
+		return $custom_meta;
+	}
+	return $str;
+}
+add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
+
+
+/**
+ * Helper function that returns the first item in a numeric array.
+ **/
+function get_first_result( $array_result ) {
+	if ( is_array( $array_result ) && count( $array_result ) > 0 ) {
+		return $array_result[0];
+	}
+	return $array_result;
+}
+
+
+/**
+ * Appends degree metadata to a post object.
+ **/
+function append_degree_metadata( $post, $tuition_data ) {
+	$theme_options = get_option(THEME_OPTIONS_NAME);
+	if ( $post && $post->post_type == 'degree' ) {
+		$post->degree_hours                = get_post_meta( $post->ID, 'degree_hours', TRUE );
+		$post->degree_description          = get_post_meta( $post->ID, 'degree_description', TRUE );
+		$post->degree_phone                = get_post_meta( $post->ID, 'degree_phone', TRUE );
+		$post->degree_email                = get_post_meta( $post->ID, 'degree_email', TRUE );
+		$post->degree_website              = get_post_meta( $post->ID, 'degree_website', TRUE );
+		$post->degree_pdf                  = get_post_meta( $post->ID, 'degree_pdf', TRUE );
+		$post->degree_hide_tuition         = get_post_meta( $post->ID, 'degree_hide_tuition', TRUE );
+		$post->degree_contacts             = Degree::get_degree_contacts( $post );
+		$post->tax_college                 = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
+		$post->tax_department              = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
+		$post->tax_program_type            = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
+
+		if ( $tuition_data ) {
+			$post->tuition_estimates = get_tuition_estimate( $post->tax_program_type, $post->degree_hours );
+			$post->tuition_value_message = $theme_options['tuition_value_message'];
+			$post->financial_aid_message = $theme_options['financial_aid_message'];
+		}
+
+		if ( empty( $post->degree_pdf ) ) {
+			if ( Degree::is_graduate_program( $post ) ) {
+				$post->degree_pdf = GRAD_CATALOG_URL;
+			}
+			else {
+				$post->degree_pdf = UNDERGRAD_CATALOG_URL;
+			}
+		}
+
+		// Append taxonomy term "meta"
+		if ( isset( $post->tax_college ) && !empty( $post->tax_college ) && !is_wp_error( $post->tax_college ) ) {
+			$post->tax_college->alias = get_term_custom_meta( $post->tax_college->term_id, 'colleges', 'college_alias' );
+		}
+
+		if ( isset( $post->tax_program_type ) ) {
+			$post->tax_program_type->alias = get_term_custom_meta( $post->tax_program_type->term_id, 'program_types', 'program_type_alias' );
+			$post->tax_program_type->color = get_term_custom_meta( $post->tax_program_type->term_id, 'program_types', 'program_type_color' );
+		}
+	}
+
+	return $post;
+}
+
+
+
+function get_tuition_estimate( $program_type, $credit_hours ) {
+	$theme_options = get_option(THEME_OPTIONS_NAME);
+	// Documentation for this feed can be found at http://tuitionfees.ikm.ucf.edu/feed/
+	$feed_url = $theme_options['tuition_fee_url'];
+	$national_average = 0;
+
+	if ( $program_type && $credit_hours ) {
+		$program = '';
+		switch( $program_type->slug ) {
+			case 'undergraduate-degree':
+			case 'minor':
+			case 'articulated-program':
+				$program = 'UnderGrad';
+				break;
+			case 'graduate-degree':
+				$program = 'Grad';
+				break;
+			default:
+				return null;
+		}
+
+		$query_string = http_build_query(
+			array(
+				'format' => 'json',
+				'schoolYear' => 'current',
+				'feeType' => 'SCH',
+				'program' => $program
+			)
+		);
+
+		$feed_url .= '/?' . $query_string;
+
+		$opts = array(
+			'http' => array(
+				'method' => 'GET',
+				'timeout' => 5
+			)
+		);
+
+		$context = stream_context_create( $opts );
+
+		$json = file_get_contents( $feed_url, false, $context );
+
+		if ( $json ) {
+			$fees = json_decode( $json );
+
+			$in_state_estimated_fees = 0;
+			$out_of_state_estimated_fees = 0;
+
+			foreach ( $fees as $fee ) {
+				if ( strpos($fee->FeeName, '(Per Hour)' ) == false ) {
+					$in_state_estimated_fees += $fee->ResidentFee;
+					$out_of_state_estimated_fees += $fee->NonResidentFee;
+				}
+			}
+
+			return array(
+				'in_state_rate' => $in_state_estimated_fees,
+				'out_of_state_rate' => $out_of_state_estimated_fees
+			);
+		} else {
+			return null;
+		}
+	}
+}
+
+
+function degree_search_with_keywords( $search, &$wp_query ) {
+	if (
+		isset( $wp_query->query_vars['s'] )
+		&& !empty( $wp_query->query_vars['s'] )
+		&& isset( $wp_query->query_vars['post_type'] )
+		&& $wp_query->query_vars['post_type'] == 'degree'
+	) {
+		global $wpdb;
+
+		if ( empty( $search ) ) {
+			return $search;
+		}
+
+		$search_term = $wp_query->query_vars[ 's' ];
+
+		$search = " AND (
+			($wpdb->posts.post_title LIKE '%$search_term%')
+			OR ($wpdb->posts.post_content LIKE '%$search_term%')
+			OR EXISTS
+			(
+				SELECT * FROM $wpdb->terms
+				INNER JOIN $wpdb->term_taxonomy
+					ON $wpdb->term_taxonomy.term_id = $wpdb->terms.term_id
+				INNER JOIN $wpdb->term_relationships
+					ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id
+				WHERE taxonomy = 'degree_keywords'
+					AND object_id = $wpdb->posts.ID
+					AND $wpdb->terms.name LIKE '%$search_term%'
+			)
+		)";
+	}
+
+	return $search;
+}
+
+add_filter( 'posts_search', 'degree_search_with_keywords', 500, 2 );
+
+
+/**
+ * Helper udiff function for returning the difference between two arrays of
+ * post objects
+ **/
+function posts_array_diff( $post_1, $post_2 ) {
+	return $post_1->ID - $post_2->ID;
+}
+
+
+/**
+ * Handles the retrieval of Degree posts from WordPress for the Degree Search.
+ **/
+function fetch_degree_data( $params ) {
+	$use_suggestions = false;
+	$posts_all = $posts_suggested = array();
+	$args = array(
+		'numberposts' => -1,
+		'offset' => 0,
+		'post_type' => 'degree',
+		'orderby' => 'title', // default sort by title
+		'order' => 'ASC',
+		'tax_query' => array(),
+		's' => ''
+	);
+
+	if ( $params ) {
+		if ( isset( $params['search-query'] ) ) {
+			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
+			$use_suggestions = true;
+		}
+
+		if ( isset( $params['sort-by'] ) && $params['sort-by'] == 'degree_hours' ) {
+			$args['meta_key'] = 'degree_hours';
+			$args['orderby'] = 'meta_value_num title';
+		}
+	}
+
+	// Fetch all posts to compare and create diff for suggested posts later
+	if ( $use_suggestions ) {
+		$posts_all = get_posts( $args );
+	}
+
+	if ( $params ) {
+		if ( isset( $params['college'] ) ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'colleges',
+				'field' => 'slug',
+				'terms' => $params['college'],
+				'include_children' => false
+			);
+		}
+
+		if ( isset( $params['program-type'] ) ) {
+			$args['tax_query'][] = array(
+				'taxonomy' => 'program_types',
+				'field' => 'slug',
+				'terms' => $params['program-type'],
+				'include_children' => false
+			);
+		}
+
+		if ( isset( $params['tax_query'] ) && count( $params['tax_query'] ) > 1 ) {
+			$args['tax_query']['relation'] = 'AND';
+		}
+
+	}
+
+	$posts = get_posts( $args );
+	if ( $use_suggestions ) {
+		$posts_suggested = array_udiff( $posts_all, $posts, 'posts_array_diff' );
+	}
+
+	$result_count_total = count( $posts );
+	$suggestion_count_total = count( $posts_suggested );
+
+	$posts_grouped = $suggestions_grouped = array();
+
+	// Get array of IDs of groupable program types
+	$groupable_types_slugs = unserialize( DEGREE_PROGRAM_ORDER );
+	$groupable_types = array();
+	if ( $groupable_types_slugs ) {
+		foreach ( $groupable_types_slugs as $slug ) {
+			$term = get_term_by( 'slug', $slug, 'program_types' );
+			$groupable_types[] = $term->term_id;
+		}
+	}
+	else {
+		$groupable_types = null;
+	}
+
+	// Group posts
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$degree = append_degree_metadata( $post, false );
+		}
+
+		$posts_grouped = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts, $groupable_types ) );
+	}
+
+	// Group suggested
+	if ( $posts_suggested ) {
+		foreach ( $posts_suggested as $post ) {
+			$degree = append_degree_metadata( $post, false );
+		}
+
+		$suggestions_grouped = sort_grouped_degree_programs( group_posts_by_tax_terms( 'program_types', $posts_suggested, $groupable_types ) );
+	}
+
+
+	return array(
+		'results' => $posts_grouped,
+		'suggestions' => $suggestions_grouped,
+		'result_count_total' => $result_count_total,
+		'suggestion_count_total' => $suggestion_count_total
+	);
+}
+
+
+/**
+ * Returns markup for "x results found" at top of Degree Search results.
+ **/
+function get_degree_search_result_phrase( $result_count_total, $params ) {
+	ob_start();
+?>
+	<span class="degree-result-count-num"><?php echo $result_count_total; ?></span>
+
+	<?php
+	// Search query phrasing
+	if ( isset( $params['search-query'] ) ): ?>
+	<span class="search-result">&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</span>
+	<?php endif; ?>
+
+	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count_total !== 1 ): ?>s<?php endif; ?> found</span>
+	<span class="degree-result-phrase-phone">result<?php if ( $result_count_total !== 1 ): ?>s<?php endif; ?>:</span>
+
+	<?php
+	// Program Type phrasing
+	if ( isset( $params['program-type'] ) ):
+	?>
+	<span class="for">in </span>
+		<?php
+		$count = 1;
+		foreach ( $params['program-type'] as $program_slug ):
+			$program = get_term_by( 'slug', $program_slug, 'program_types' );
+			$program_name = $program->name;
+		?>
+			<span class="result <?php echo $program_slug; ?>">
+				<span class="close" data-filter-class="program-type" data-filter-value="<?php echo $program_slug; ?>"></span>
+				<?php echo $program_name; ?>s
+			</span>
+			<?php if ( $count < count( $params['program-type'] ) ): ?>
+				<span class="for"> | </span>
+			<?php
+			endif;
+			$count++;
+			?>
+		<?php endforeach; ?>
+	<?php endif; ?>
+
+	<?php
+	// Colleges phrasing
+	if ( isset( $params['college'] ) ):
+	?>
+	<span class="for">at the </span>
+		<?php
+		$count = 1;
+		foreach ( $params['college'] as $college_slug ):
+		?>
+			<span class="result">
+				<span class="close" data-filter-class="college" data-filter-value="<?php echo $college_slug; ?>"></span>
+				<?php
+					echo get_term_by( 'slug', $college_slug, 'colleges' )->name;
+				?>
+			</span>
+			<?php if ( $count < count( $params['college'] ) ): ?>
+				<span class="for"> | </span>
+			<?php
+			endif;
+			$count++;
+			?>
+		<?php endforeach; ?>
+		<a href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>" class="reset-search">Clear All</a>
+	<?php else: ?>
+		<span class="for">at UCF</span>
+	<?php endif; ?>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns markup for "search again" at the bottom of Degree Search results.
+ **/
+function get_degree_search_search_again( $filters, $params ) {
+	ob_start();
+	if ( isset( $params['search-query'] ) ): ?>
+		<div class="degree-search-again-container">
+			<p class="degree-search-similar">
+				Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:
+			</p>
+			<?php foreach ( $filters as $key=>$filter ): ?>
+				<?php if ( $filter['name'] == 'Degrees'): ?>
+					<?php foreach ( $filter['terms'] as $term ): ?>
+						<?php
+						if ( $term->count > 0 ):
+							$query = http_build_query( array(
+								$key . '[]' => $term->slug,
+								'search-query' => $params['search-query']
+							) );
+						?>
+							<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
+								<?php echo $term->name; ?>s
+							</a>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</div>
+	<?php endif;
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns relevant params passed in, or available relevant $_GET params.
+ * Initial backend requests should pass in $params; ajax requests for
+ * degree search data will not (use $_GET instead).
+ *
+ * Removes empty parameters.
+ **/
+function degree_search_params_or_fallback( $params ) {
+	if ( empty( $params ) ) {
+		// Force default view params
+		if ( empty( $_GET ) ) {
+			$params = unserialize( DEGREE_SEARCH_DEFAULT_PARAMS );
+		}
+		// Force default search view params (search results triggered immediately from the default view)
+		else if ( isset( $_GET['search-default'] ) && intval( $_GET['search-default'] ) === 1 ) {
+			$params = unserialize( DEGREE_SEARCH_S_DEFAULT_PARAMS );
+			$params['search-query'] = $_GET['search-query'];
+		}
+		else {
+			$params = $_GET;
+		}
+	}
+
+	$valid_params = unserialize( DEGREE_SEARCH_PARAMS );
+	$filtered_params = array();
+
+	// Eliminate any parameters not listed in the set of valid params.
+	// Set defaults if some passed param value isn't set.
+	foreach ( $valid_params as $key => $val ) {
+		if ( isset( $params[$key] ) ) {
+			$filtered_params[$key] = $params[$key];
+		}
+		else {
+			$filtered_params[$key] = $valid_params[$key];
+		}
+	}
+
+	// Return params with any empty values removed (maintain 0).
+	return array_filter( $filtered_params, function( $val ) {
+		return ( $val || is_numeric( $val ) );
+	} );
+}
+
+function get_hiearchical_degree_search_data_json() {
 	// Define which of our Program types are valid.  (These are highest-level parent terms
 	// of the Program Type taxonomy.)
 	$all_program_type_parents = array('undergraduate-program', 'graduate-program');
-
 	// Define which of our Degree types are valid.  (These are the 2nd level terms of
 	// the Program Type taxonomy.)
 	$all_degree_types = array('undergraduate-degree', 'minor', 'graduate-degree', 'certificate');
-
-
 	// Determine some variables based on query args.  Set defaults if no values are set.
-	$program_type	     = in_array($_GET['program_type'], $all_program_type_parents) ? $_GET['program_type'] : null;
+	$program_type	     = in_array($_GET['program_type'], $all_program_type_parents) ? $_GET['program_type'] : 'undergraduate-program';
 	$degree_type	     = in_array($_GET['degree_type'], $all_degree_types) ? $_GET['degree_type'] : 'undergraduate-degree';
 	$orderby		     = $_GET['orderby'] ? $_GET['orderby'] : 'title';
 	$order			     = ($_GET['order'] == 'ASC' || $_GET['order'] == 'DESC') ? $_GET['order'] : 'ASC';
 	$flip_order		     = ($order == 'ASC') ? 'DESC' : 'ASC'; // opposite of $order
-
-	$s                   = $_GET['search']       ? $_GET['search']        : null;
-	$search_query_pretty = !empty($s)            ? htmlentities($s)       : null;
-
-	// Define a default list of get_posts() args.
-	$default_view_params = array(
+	$get_child_programs  = $_GET['get_child_programs'] ? (boolean)$_GET['get_child_programs'] : true;
+	/*
+	 * Get Taxonomy term(s) based on get_child_programs
+	*/
+	$to_json = array();
+	$default_args = array(
 		'post_type' => 'degree',
 		'post_status' => 'publish',
 		'numberposts' => -1,
@@ -1413,628 +2007,864 @@ function get_degree_search_data() {
 				'taxonomy' => 'program_types',
 				'field' => 'slug',
 				'terms' => $degree_type,
-				'include_children' => true // Make sure we get Undergraduate Degree children (Articulated/Accelerated)
+				'include_children' => false // Make sure we get Undergraduate Degree children (Articulated/Accelerated)
 			),
 		),
 	);
-
-	// Search-specific variable overrides
-	if (!empty($s)) {
-		$program_type = empty($program_type) ? $all_program_type_parents : $program_type;
-	}
-
-	// Define per-view get_posts() args.
-	$all_views = array(
-		'browse_by_name' => $default_view_params,
-		'browse_by_college' => $default_view_params, // Needs to be sorted later
-		'browse_by_hours' => array_merge($default_view_params, array(
-			'meta_key' => 'degree_hours',
-			'orderby' => 'meta_value'
-		)),
+	$degree = get_term_by('slug', $degree_type, 'program_types');
+	$posts = get_posts($default_args);
+	$to_json[$degree_type] = array(
+		'program_type_id' => $degree->term_id,
+		'program_type_name' => $degree->name,
+		'program_type_slug' => $degree->slug
 	);
-
-	// Get the posts.  Override any set view with search-specific args, if this is a
-	// set of search results.
-	if (isset($all_views[$current_view])) {
-		if ($s) {
-			$all_views[$current_view] = array_merge($all_views[$current_view], array(
-				's' => $s,
-				'tax_query' => array(
-					// Overrides existing tax_query.
-					array(
-						'taxonomy' => 'program_types',
-						'field' => 'slug',
-						'terms' => $program_type,
-						'include_children' => true,
-					)
-				),
-			));
-		}
-		$posts = get_posts($all_views[$current_view]);
-	}
-	else { return 'Invalid view type.'; }
-
-
-	// Process the returned posts.
-	$data = array(
-		'view-info' => array(
-			'current_view' => $current_view,
-			'all-program_type-parents' => $all_program_type_parents,
-			'all-degree-types' => $all_degree_types,
-			'program_type' => $program_type,
-			'degree_type' => $degree_type,
-			'orderby' => $orderby,
-			'order' => $order,
-			'flip-order' => $flip_order,
-			's' => $s,
-			'search-query-pretty' => $search_query_pretty,
-			'grouping-tax' => null,
-			'result-count' => 0,
-		),
-		'posts' => null,
-	);
-
-	if ($posts) {
-		foreach ($posts as $post) {
-			// Increment the result count.
-			$data['view-info']['result-count']++;
-		}
-
-		// Further group our returned posts.
-		$grouped_posts = null;
-		$grouping_tax = null; // The type of taxonomy by which posts are grouped.
-		switch ($current_view) {
-			case 'browse_by_college':
-				$grouping_tax = 'colleges';
-				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts);
-				break;
-			default:
-				$grouping_tax = 'program_types';
-				$include_terms = (empty($s)) ? $degree_type : $program_type;
-
-				// Get Program Type term ID(s) to pass to group_posts_by_tax_terms()
-				$term_ids = array();
-				if (is_array($include_terms)) {
-					foreach ($include_terms as $slug) {
-						$term_ids[] = intval(get_term_by('slug', $slug, $grouping_tax)->term_id);
-					}
-				}
-				else {
-					$term_ids[] = intval(get_term_by('slug', $include_terms, $grouping_tax)->term_id);
-				}
-
-				$grouped_posts = group_posts_by_tax_terms($grouping_tax, $posts, $term_ids);
-				break;
-		}
-		$data['view-info']['grouping-tax'] = $grouping_tax;
-		$data['posts'] = $grouped_posts;
-	}
-
-	// Return the grouped posts and view-related variables.
-	return $data;
-}
-
-
-/**
- * Display a list of degrees with posts returned from get_degree_search_data().
- **/
-function display_degree_search($data) {
-	// Add selected state to Search form program type dropdown
-	$search_program_undergrad_sel = $search_program_all_sel = $search_program_grad_sel = '';
-	$search_program_active_sel = 'selected="selected"';
-
-	if (isset($data['view-info']['program_type'])) {
-		if (is_array($data['view-info']['program_type'])) {
-			$search_program_all_sel = $search_program_active_sel;
-		}
-		else {
-			switch ($data['view-info']['program_type']) {
-				case 'undergraduate-program':
-					$search_program_undergrad_sel = $search_program_active_sel;
-					break;
-				case 'graduate-program':
-					$search_program_grad_sel = $search_program_active_sel;
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	else {
-		$search_program_all_sel = $search_program_active_sel;
-	}
-
-	// Add active state class to Browse All degree type navigation links.
-	// Do not apply class if search results are returned.
-	$browse_majors_class = $browse_minors_class = $browse_grad_class = $browse_cert_class = '';
-	$browse_active_class = 'active';
-	if (empty($data['view-info']['s'])) {
-		if (isset($data['view-info']['degree_type'])) {
-			switch ($data['view-info']['degree_type']) {
-				case 'minor':
-					$browse_minors_class = $browse_active_class;
-					break;
-				case 'graduate-degree':
-					$browse_grad_class = $browse_active_class;
-					break;
-				case 'certificate':
-					$browse_cert_class = $browse_active_class;
-					break;
-				default:
-					$browse_majors_class = $browse_active_class;
-					break;
-			}
-		}
-	}
-
-	// Generate $results_title string based on current view for <h2> ("Results For:" heading)
-	$results_title = '';
-	if (empty($data['view-info']['s'])) {
-		$degree_type = get_term_by('slug', $data['view-info']['degree_type'], 'program_types')->name;
-		$results_title = 'All '.$degree_type.'s';
-	}
-	else {
-		$results_title = '&ldquo;'.$data['view-info']['search-query-pretty'].'&rdquo;';
-	}
-
-	if (is_array($data)) {
-		// Create links per sort option (Name/College/Hours)
-		$permalink = $_SERVER[REQUEST_URI];
-		if (strpos($permalink, 'order=').count < 1) {
-			add_query_arg(array('order' => $data['view-info']['order']), $permalink);
-		}
-		$reverse_order_url = add_query_arg(array('order' => $data['view-info']['flip-order']), $permalink);
-
-		$sort_name_url    = ($data['view-info']['current_view'] == 'browse_by_name') ? $reverse_order_url : add_query_arg(array('current_view' => 'browse_by_name'), $permalink);
-		$sort_college_url = add_query_arg(array('current_view' => 'browse_by_college'), $permalink);
-		$sort_hours_url   = ($data['view-info']['current_view'] == 'browse_by_hours') ? $reverse_order_url : add_query_arg(array('current_view' => 'browse_by_hours'), $permalink);
-
-		$sort_name_classes = $sort_college_classes = $sort_hours_classes = '';
-
-		if ($data['view-info']['current_view'] == 'browse_by_college') {
-			$sort_college_classes .= 'active';
-		}
-		else if ($data['view-info']['current_view'] == 'browse_by_hours') {
-			$sort_hours_classes .= 'active';
-			if ($data['view-info']['flip-order'] == 'ASC') {
-				$sort_hours_classes .= ' dropup';
-			}
-		}
-		else { // 'search' AND 'browse_by_name'
-			$sort_name_classes .= 'active';
-			if ($data['view-info']['flip-order'] == 'ASC') {
-				$sort_name_classes .= ' dropup';
-			}
-		}
-	}
-
-	ob_start(); ?>
-
-	<div id="filters">
-		<span class="degree-search-label">Search:</span>
-		<div class="controls controls-row">
-			<form id="course_search_form" action="<?=get_permalink()?>" class="form-search">
-				<select name="program_type" class="span4">
-					<option <?=$search_program_undergrad_sel?> value="undergraduate-program">Undergraduate Programs Only</option>
-					<option <?=$search_program_all_sel?> value="">Undergraduate and Graduate Programs</option>
-					<option <?=$search_program_grad_sel?> value="graduate-program">Graduate Programs Only</option>
-				</select>
-				<div class="input-append span3">
-					<?php $search_query = isset($data['view-info']['search-query-pretty']) ? $data['view-info']['search-query-pretty'] : ''; ?>
-					<input type="text" class="search-query" name="search" value="<?=$search_query?>" />
-					<button type="submit" class="btn"><i class="icon-search"></i><span class="hidden-phone"> Search</span></button>
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<div id="browse">
-		<div class="row">
-			<div class="span10">
-				<span class="degree-search-label">Browse All:</span>
-				<ul class="nav nav-pills" role="navigation" id="degree-type-list">
-					<li class="<?=$browse_majors_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=undergraduate-degree">Undergraduate Degrees</a>
-					</li>
-					<li class="<?=$browse_minors_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=minor">Minors</a>
-					</li>
-					<li class="<?=$browse_grad_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=graduate-degree">Graduate Degrees</a>
-					</li>
-					<li class="<?=$browse_cert_class?>">
-						<a class="print-noexpand" href="<?=get_permalink()?>?degree_type=certificate">Certificates</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
-		<?php if (is_array($data)) { ?>
-
-		<div id="results">
-			<div class="row">
-				<h2 id="results-header" class="span10">
-					<?=$data['view-info']['result-count']?> Result<?php if ($data['view-info']['result-count'] == 0 || $data['view-info']['result-count'] > 1) { ?>s<?php } ?> For:
-					<span class="results-header-alt">
-						<?=$results_title?>
-					</span>
-				</h2>
-
-				<div class="span10">
-					<ul class="nav nav-tabs" id="degree-type-sort">
-						<li id="degree-type-sort-header">Sort by:</li>
-						<li class="dropdown <?=$sort_name_classes?>">
-							<a class="print-noexpand" href="<?=$sort_name_url?>">Name <b class="caret"></b></a>
-						</li>
-						<li class="dropdown <?=$sort_college_classes?>">
-							<a class="print-noexpand" href="<?=$sort_college_url?>">College</a>
-						</li>
-						<li class="dropdown <?=$sort_hours_classes?>">
-							<a class="print-noexpand" href="<?=$sort_hours_url?>">Hours <b class="caret"></b></a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-			<?php
-			if (!empty($data['posts'])) {
-				if ($data['view-info']['grouping-tax'] !== 'colleges') {
-					// For grouped degrees by name or hours, make sure program types are
-					// displayed in the correct order
-					$data['posts'] = sort_grouped_degree_programs($data['posts']);
-				}
-				foreach ($data['posts'] as $group=>$posts) {
-					$term = get_term($group, $data['view-info']['grouping-tax']);
-					if ($data['view-info']['grouping-tax'] !== 'colleges') {
-						// Pluralize term if necessary
-						$term = $term->name.'s';
-					}
-					else {
-						$term = $term->name;
-					}
-				?>
-					<h3 class="degree-list-heading"><?=$term?></h3>
-					<?=display_degree_list($posts)?>
-					<hr />
-				<?php
-				}
-			} else { ?>
-			<p class="error">No results found.</p>
-			<?php
-			}
-			?>
-
-		<?php
-		}
-		else { ?>
-		<p class="error">
-			<strong>ERROR:</strong> <?=$data?>
-		</p>
-		<?php
-		} ?>
-
-	<?php
-	print ob_get_clean();
-}
-
-
-/**
- * Append Degree meta data to a Degree post object (for use in Degree lists.)
- **/
-function append_degree_list_metadata($post) {
-	$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE);
-	$post->degree_website = get_post_meta($post->ID, 'degree_website', TRUE);
-	$post->degree_profile_link = Degree::get_degree_profile_link($post);
-	$post->tax_college = wp_get_post_terms($post->ID, 'colleges', array('fields' => 'names'));
-	$post->tax_department = wp_get_post_terms($post->ID, 'departments', array('fields' => 'names'));
-	$post->tax_program_type = wp_get_post_terms($post->ID, 'program_types', array('fields' => 'names'));
-	return $post;
-}
-
-
-/**
- * Append Degree meta data to a Degree post object (for use in single Degree profile.)
- **/
-function append_degree_profile_metadata($post) {
-	// Non-numeric degree_hours vals will be translated to 0 by intval():
-	$post->degree_hours = get_post_meta($post->ID, 'degree_hours', TRUE) ? intval( get_post_meta($post->ID, 'degree_hours', TRUE) ) : 0;
-	$post->degree_description = get_post_meta($post->ID, 'degree_description', TRUE);
-	$post->degree_phone = get_post_meta($post->ID, 'degree_phone', TRUE) ? get_post_meta($post->ID, 'degree_phone', TRUE) : 'n/a';
-	$post->degree_email = get_post_meta($post->ID, 'degree_email', TRUE) ? get_post_meta($post->ID, 'degree_email', TRUE) : 'n/a';
-	$post->degree_website = get_post_meta($post->ID, 'degree_website', TRUE) ? get_post_meta($post->ID, 'degree_website', TRUE) : 'n/a';
-	$post->degree_pdf = get_post_meta($post->ID, 'degree_pdf', TRUE) ? get_post_meta($post->ID, 'degree_pdf', TRUE) : 'http://catalog.ucf.edu/';
-	$post->tax_college = wp_get_post_terms($post->ID, 'colleges', array('fields' => 'names'));
-	$post->tax_department = wp_get_post_terms($post->ID, 'departments', array('fields' => 'names'));
-	$post->tax_program_type = wp_get_post_terms($post->ID, 'program_types', array('fields' => 'names'));
-
-	$contact_info = get_post_meta($post->ID, 'degree_contacts', TRUE);
-	$contact_array = array();
-
-	// Split single contacts
-	$contacts = explode('@@;@@', $contact_info);
-	foreach ($contacts as $key=>$contact) {
-		if ($contact) {
-			// Split individual fields
-			$contact = explode('@@,@@', $contact);
-
-			$newcontact = array();
-
-			foreach ($contact as $fieldset) {
-				// Split out field key/values
-				$fields = explode('@@:@@', $fieldset);
-				$newcontact[$fields[0]] = $fields[1];
-			}
-
-			array_push($contact_array, $newcontact);
-		}
-	}
-
-	$post->degree_contacts = $contact_array;
-
-	return $post;
-}
-
-
-/**
- * Display a list of Degrees (for use in Degree Search page.)
- **/
-function display_degree_list($posts) {
-	ob_start(); ?>
-	<ul class="row degree-results-list">
-	<?php
-	foreach ($posts as $post) {
-		$post = append_degree_list_metadata($post);
-	?>
-		<li class="program span10">
-			<div class="row">
-				<div class="span7">
-					<?php if (!empty($post->degree_profile_link)) { ?>
-					<a href="<?=$post->degree_profile_link?>" <?php if ( Degree::is_graduate_program( $post ) && $post->degree_profile_link !== get_permalink( $post->ID ) ) { ?> class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?=addslashes($post->post_title)?> (<?=addslashes($post->tax_program_type[0])?>)"<?php } ?>>
-					<?php } ?>
-						<h4 class="name"><?=$post->post_title?></h4>
-					<?php if ($post->degree_profile_link) { ?>
-					</a>
-					<?php } ?>
-				<?php if ($post->tax_college[0]) { ?>
-					<span class="name_label">College</span>
-					<span class="college"><?=$post->tax_college[0]?></span>
-				<?php } ?>
-
-				<?php if ($post->tax_department[0]) { ?>
-					<span class="name_label">Department</span>
-					<span class="department">
-						<?php if ($post->degree_website) { ?><a href="<?=$post->degree_website?>"><?php } ?>
-						<?=$post->tax_department[0]?>
-						<?php if ($post->degree_website) { ?></a><?php } ?>
-					</span>
-				<?php } ?>
-
-				</div>
-
-				<div class="credits-wrap">
-					<span class="program-type-alt"><?=$post->tax_program_type[0]?></span>
-
-					<?php
-					// If this is any program type with valid degree hours,
-					// just print a label with the credit hours inside
-					if ( $post->degree_hours > 0 ) {
-						$label_class = 'label-info';
-						if ( $post->degree_hours < 90 ) {
-							$label_class = 'label-success';
-						}
-						?>
-						<span class="credits label <?php echo $label_class; ?>"><?php echo $post->degree_hours; ?> credit hours</span>
-					<?php
-					}
-					// If this is a graduate program with a profile url set but
-					// no valid degree hours, print a 'click for hours' label
-					else if (
-						Degree::is_graduate_program( $post )
-						&& !empty( $post->degree_profile_link )
-						&& $post->degree_profile_link !== get_permalink( $post->ID )
-					) {
-					?>
-						<a target="_blank" href="<?php echo $post->degree_profile_link; ?>" class="ga-event" data-ga-action="Graduate Catalog link" data-ga-label="Degree List Item: <?php echo addslashes( $post->post_title ); ?> (<?php echo addslashes( $post->tax_program_type[0] ); ?>)">
-							<span class="credits label label-warning">Click for credit hours</span>
-						</a>
-					<?php
-					}
-					// If we have no external source for hours and no valid
-					// degree hours value, print a 'n/a' label
-					else {
-					?>
-						<span class="credits label">Credit hours n/a</span>
-					<?php
-					}
-					?>
-				</div>
-
-			</div>
-		</li>
-	<?php
-	}
-	?>
-	</ul>
-	<?php return ob_get_clean();
-}
-
-
-/**
- * Generates a title based on context page is viewed.  Stolen from Thematic
- **/
-function header_title($title, $separator){
-	global $post;
-	$site_name = get_bloginfo('name');
-
-	if ( is_single() ) {
-		$content = single_post_title('', FALSE);
-	}
-	elseif ( is_home() || is_front_page() ) {
-		$content = get_bloginfo('description');
-	}
-	elseif ( is_page() ) {
-		$substitute_title = get_post_meta(get_the_ID(), 'page_title', true);
-		if (!empty($substitute_title)) {
-			$content = $substitute_title;
-		}
-		else {
-			$content = single_post_title('', FALSE);
-		}
-	}
-	elseif ( is_search() ) {
-		$content = __('Search Results for:');
-		$content .= ' ' . esc_html(stripslashes(get_search_query()));
-	}
-	elseif ( is_category() ) {
-		$content = __('Category Archives:');
-		$content .= ' ' . single_cat_title("", false);;
-	}
-	elseif ( is_404() ) {
-		$content = __('Not Found');
-	}
-	else {
-		$content = get_bloginfo('description');
-	}
-
-	if (get_query_var('paged')) {
-		$content .= ' ' .$separator. ' ';
-		$content .= 'Page';
-		$content .= ' ';
-		$content .= get_query_var('paged');
-	}
-
-	if($content) {
-		if (is_home() || is_front_page()) {
-			$elements = array(
-				'site_name' => $site_name,
-				'separator' => $separator,
-				'content' => $content,
-			);
-		} else {
-			$elements = array(
-				'content' => $content,
-			);
-		}
-	} else {
-		$elements = array(
-			'site_name' => $site_name,
+	foreach($posts as $post) {
+		$to_json[$degree_type]['posts'][] = array(
+			'degree_name' => $post->post_title,
+			'degree_description' => get_post_meta($post->ID, 'degree_description', true),
+			'degree_content' => $post->post_content,
+			'degree_required_hours' => get_post_meta($post->ID, 'degree_hours', true),
+			'degree_website' => get_post_meta($post->ID, 'degree_website', true),
+			'degree_pdf' => get_post_meta($post->ID, 'degree_pdf', true),
+			'degree_phone' => get_post_meta($post->ID, 'degree_phone', true),
+			'degree_email' => get_post_meta($post->ID, 'degree_email', true),
+			'degree_content' => $post->post_content,
+			'degree_permalink' => get_permalink($post->ID)
 		);
 	}
+	if ($get_child_programs) {
+		$children = get_term_children($degree->term_id, 'program_types');
+		foreach($children as $child) {
+			$args = array(
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'program_types',
+						'field' => 'id',
+						'terms' => $child,
+						'include_children' => false
+					)
+				)
+			);
+			$args = array_merge($default_args, $args);
+			$child_posts = get_posts($args);
+			$child_obj = get_term($child, 'program_types');
+			$to_json[$degree_type]['children'][$child_obj->slug] = array(
+				'program_type_id' => $child_obj->term_id,
+				'program_type_name' => $child_obj->name,
+				'program_type_slug' => $child_obj->slug
+			);
+			foreach($child_posts as $post) {
+				$to_json[$degree_type]['children'][$child_obj->slug]['posts'][] = array(
+					'degree_name' => $post->post_title,
+					'degree_description' => get_post_meta($post->ID, 'degree_description', true),
+					'degree_content' => $post->post_content,
+					'degree_required_hours' => get_post_meta($post->ID, 'degree_hours', true),
+					'degree_website' => get_post_meta($post->ID, 'degree_website', true),
+					'degree_pdf' => get_post_meta($post->ID, 'degree_pdf', true),
+					'degree_phone' => get_post_meta($post->ID, 'degree_phone', true),
+					'degree_email' => get_post_meta($post->ID, 'degree_email', true),
+					'degree_content' => $post->post_content,
+					'degree_permalink' => get_permalink($post->ID)
+				);
+			}
+		}
+	}
+	return $to_json;
+}
 
-	// But if they don't, it won't try to implode
-	if(is_array($elements)) {
-		$doctitle = implode(' ', $elements);
+/**
+ * Returns markup for a degree list item in Degree Search results.
+ * Assumes $degree objects have already been passed through append_degree_metadata()
+ * (via fetch_degree_data()).
+ * Intended for use in get_degree_search_contents().
+ **/
+function get_degree_search_listitem_markup( $degree, $program_alias, $program_name ) {
+	ob_start();
+?>
+	<li class="degree-search-result">
+		<h3 class="degree-title-heading">
+			<a class="ga-event clearfix degree-title-wrap" data-ga-category="Degree Search" data-ga-action="Search Result Clicked" data-ga-label="<?php echo $degree->post_title; ?>" href="<?php echo get_permalink( $degree ); ?>">
+				<span class="degree-title">
+					<?php echo $degree->post_title; ?>
+				</span>
+				<span class="degree-details">
+					<span class="degree-program-type visible-phone">
+						<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
+					</span>
+					<span class="visible-phone degree-details-separator">&verbar;</span>
+					<span class="degree-credits-count">
+					<?php if ( $degree->degree_hours ): ?>
+						<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours
+					<?php else: ?>
+						See catalog for credit hours
+					<?php endif; ?>
+					</span>
+				</span>
+			</a>
+		</h3>
+	</li>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns all data and markup necessary for the Degree Search.  Used via
+ * both ajax requests and on initial page load in page-degree-search.php.
+ **/
+function get_degree_search_contents( $return=false, $params=null ) {
+	if ( !defined( 'WP_USE_THEMES' ) ) {
+		define( 'WP_USE_THEMES', false );
+	}
+
+	$params = degree_search_params_or_fallback( $params );
+	$query_params = http_build_query( $params );
+
+	$data = fetch_degree_data( $params );
+	extract( $data ); // import $results, $suggestions, $result_count_total and $suggestion_count_total
+
+	$college_name = null;
+	if ( isset( $params['college'] ) && count( $params['college'] ) == 1 ) {
+		$college_name = get_term_by( 'slug', $params['college'][0], 'colleges' )->name;
+	}
+
+	$no_results = '';
+	$offset_start = intval( $params['offset'] ); // Pagination offset start
+	$offset_end = $offset_start + DEGREE_SEARCH_PAGE_COUNT; // Pagination offset end
+	$result_count_start = $offset_start + 1; // Results per page start
+	$result_count_end = $offset_start; // Results per page end (will increment when results are looped through.)
+	$count_all = $result_count_total + $suggestion_count_total; // Totals of results and suggestions combined. Used for showing pagination
+	$count = 0; // Internal counter used in degree result loops and for handling display of suggestions
+
+	if ( $results ) {
+		$markup = '';
+
+		$degree_list_markup = '';
+
+		// This loop will always loop through *all* results.  $count is NOT
+		// representative of the result count per page.
+		foreach ( $results as $program_type_id => $degrees ) {
+			$program_name = get_term( $program_type_id, 'program_types' )->name;
+			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
+			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
+
+			$degree_markup = '';
+
+			foreach ( $degrees as $degree ) {
+				if( $count >= $offset_start && $count < $offset_end ) {
+					$degree_markup .= get_degree_search_listitem_markup( $degree, $program_alias, $program_name );
+					$result_count_end++;
+				}
+				$count++;
+			}
+
+			if ( !empty( $degree_markup ) ) {
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				if ( $college_name ) {
+					$group_name = $group_name . ' <small>at the ' . $college_name .'</small>';
+				}
+				$degree_list_markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+				$degree_list_markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
+			}
+		}
+
+		if ( !empty( $degree_list_markup ) ) {
+			$markup .= $degree_list_markup;
+			$markup .= '<p class="degree-search-result-showing">Showing ' . $result_count_start . '&mdash;' . $result_count_end . ' of ' . $result_count_total . ' results.</p>';
+		}
+	} else {
+		$no_results = 'No results found';
+		if ( isset( $params['search-query'] ) ) {
+			$no_results .= ' for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>';
+		}
+		$no_results .= '.';
+	}
+
+	// Add suggestions
+	if ( $suggestions && $count < $offset_end ) {
+
+		$suggestion_markup = '';
+
+		foreach ( $suggestions as $program_type_id => $degrees ) {
+			$program_name = get_term( $program_type_id, 'program_types' )->name;
+			$program_slug = get_term( $program_type_id, 'program_types' )->slug;
+			$program_alias = get_term_custom_meta( $program_type_id, 'program_types', 'program_type_alias' );
+
+			$degree_markup = '';
+			foreach ( $degrees as $degree ) {
+				if( $count >= $offset_start && $count < $offset_end ) {
+					$degree_markup .= get_degree_search_listitem_markup( $degree, $program_alias, $program_name );
+				}
+				$count++;
+			}
+
+			if ( !empty( $degree_markup ) ) {
+				$group_name = !empty( $program_alias ) ? $program_alias . 's' : $program_name . 's';
+				$suggestion_markup .= '<h2 class="degree-search-group-title">' . $group_name . '</h2>';
+				$suggestion_markup .= '<ul class="degree-search-results">'.$degree_markup.'</ul>';
+			}
+		}
+
+		if ( !empty( $suggestion_markup ) ) {
+			$plural = '';
+			if( $suggestion_count_total > 1 ) {
+				$plural = 's';
+			}
+			$markup .= '<div class="degree-search-suggestions">';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . '&nbsp;&nbsp;' . $suggestion_count_total .' similar result' . $plural . ' found:</p>';
+			$markup .= $suggestion_markup;
+			$markup .= '</div>';
+		}
+	} elseif ( !empty( $no_results ) ) {
+			$markup .= '<div class="degree-search-no-results">';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . '</p>';
+			$markup .= '</div>';
+	}
+
+	// Add Pagination
+	if( $count_all > DEGREE_SEARCH_PAGE_COUNT ) {
+
+		$markup .= '<ul class="pager">';
+
+		$prev_link = '';
+		if( $offset_start > 0 ) {
+			$prev_params = $params;
+			$prev_params['offset'] = $prev_params['offset'] - DEGREE_SEARCH_PAGE_COUNT;
+			$prev_link = '?'.http_build_query( $prev_params );
+			$markup .= '<li class="previous"><a href="'.$prev_link.'">&larr; Previous</a></li>';
+		}
+		else {
+			$markup .= '<li class="previous disabled"><span>&larr; Previous</span></li>';
+		}
+
+		$next_link = '';
+		if( $offset_end < $count_all && $count <= $count_all ) {
+			$next_params = $params;
+			$next_params['offset'] = $next_params['offset'] + DEGREE_SEARCH_PAGE_COUNT;
+			$next_link = '?'.http_build_query( $next_params );
+			$markup .= '<li class="next"><a href="'.$next_link.'">Next &rarr;</a></li>';
+		}
+		else {
+			$markup .= '<li class="next disabled"><span>Next &rarr;</span></li>';
+		}
+
+		$markup .= '</ul>';
+
+	}
+
+	$markup = preg_replace( "@[\\r|\\n|\\t]+@", "", $markup );
+
+	// Print results
+	if ( $return ) {
+		return array (
+			'count' => $result_count_total,
+			'markup' => $markup
+		);
+	} else {
+		$result_title = get_degree_search_title( '|', $params );
+		$result_meta = get_degree_search_meta_description( $params );
+		$result_phrase_markup = get_degree_search_result_phrase( $result_count_total, $params );
+		$result_search_again_markup = get_degree_search_search_again( get_degree_search_filters(), $params );
+
+		wp_send_json(
+			array(
+				'querystring' => $query_params,
+				'count' => $result_phrase_markup,
+				'searchagain' => $result_search_again_markup,
+				'markup' => $markup,
+				'title' => $result_title,
+				'description' => $result_meta,
+			)
+		);
+	}
+}
+
+add_action( 'wp_ajax_degree_search', 'get_degree_search_contents' );
+add_action( 'wp_ajax_nopriv_degree_search', 'get_degree_search_contents' );
+
+
+/**
+ * Orders program_types based on the DEGREE_PROGRAM_ORDER
+ * setting found in functions/config.php.
+ * NOTE: For this filter to be applied, get_terms must
+ * include the taxonomy 'program_types' and an orderby
+ * of degree_program_order.
+ * @return array
+ * @author Jim Barnes
+ **/
+function order_program_types( $clauses, $taxonomies, $args ) {
+	if ( in_array('program_types', $taxonomies )
+		&& $args['orderby'] == 'degree_program_order' ) {
+		$slugs = implode('", "', unserialize(DEGREE_PROGRAM_ORDER));
+		$clauses['orderby'] = 'ORDER BY FIELD (t.slug,' . '"' . $slugs . '")';
+	}
+	return $clauses;
+}
+
+add_filter( 'terms_clauses', 'order_program_types', 1, 3 );
+
+
+/**
+ * Returns an array of degree titles, for use by the degree search
+ * autocomplete field.
+ **/
+function get_degree_search_suggestions() {
+	$suggestions = array();
+	$posts = get_posts( array(
+		'numberposts' => -1,
+		'post_type' => 'degree'
+	) );
+
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$suggestions[] = $post->post_title;
+		}
+	}
+
+	return array_values( array_unique( $suggestions ) );
+}
+
+
+/**
+ * Returns an array containing arrays of term objects, for use in
+ * Degree Search filter lists.
+ **/
+function get_degree_search_filters() {
+	$filters = array();
+
+	$filters['program-type']['name'] = 'Degrees';
+	$filters['college']['name'] = 'Sort by College';
+
+	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
+	if ( $colleges ) {
+		foreach ( $colleges as $college ) {
+			$alias = get_term_custom_meta( $college->term_id, 'colleges', 'college_alias' );
+			if ( $alias ) {
+				$college->alias = $alias;
+			}
+			$college->field_type = 'radio';
+		}
+		// If aliases are available, alphabetize by them
+		usort( $colleges, function( $a, $b ) {
+			$a_name = isset( $a->alias ) ? $a->alias : $a->name;
+			$b_name = isset( $b->alias ) ? $b->alias : $b->name;
+			return strcmp( $a_name, $b_name );
+		} );
+	}
+
+	$program_types = get_terms( 'program_types', array( 'orderby' => 'degree_program_order' ) );
+	foreach ( $program_types as $program ) {
+		$program->field_type = 'checkbox';
+	}
+
+	// Pass orderby degree_program_order to ensure our custom filter is used.
+	$filters['program-type']['terms'] = $program_types;
+	$filters['college']['terms'] = $colleges;
+
+	return $filters;
+}
+
+
+/**
+ * Return's a term's custom meta value by key name.
+ * Assumes that term data are saved as options using the naming schema
+ * 'tax_<taxonomy slug>_<term id>'
+ **/
+function get_term_custom_meta( $term_id, $taxonomy, $key ) {
+	if ( empty( $term_id ) || empty( $taxonomy ) || empty( $key ) ) {
+		return false;
+	}
+
+	$term_meta = get_option( 'tax_' . $taxonomy . '_' . $term_id );
+	if ( $term_meta && isset( $term_meta[$key] ) ) {
+		$val = $term_meta[$key];
 	}
 	else {
-		$doctitle = $elements;
+		$val = false;
 	}
-
-	return $doctitle;
-}
-add_filter('wp_title', 'header_title', 10, 2); // Allow overriding by SEO plugins
-
-
-/**
- * Generates page <title> tag for Degree Program post type.
- **/
-function header_title_degree_programs($title, $separator) {
-	global $post;
-
-	if ($post->post_type == 'degree') {
-		$title = 'Degree Program '.$separator.' '.single_post_title('', FALSE);
-	}
-
-	return $title;
-}
-add_filter('wp_title', 'header_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
-
-
-/**
- * Returns the combined name of the current Degree Search view
- * with any Sort By options, if available.
- **/
-function get_degree_search_view_title() {
-	$content = '';
-	$degree_type = $_GET['degree_type'];
-	$sort_by = $_GET['current_view'];
-	$degree_title = null;
-	$degree_subtitle = null;
-
-	if ($degree_type) {
-		switch ($degree_type) {
-			case 'undergraduate-degree':
-				$degree_title = 'All Majors';
-				break;
-			case 'minor':
-				$degree_title = 'All Minors';
-				break;
-			case 'graduate-degree':
-				$degree_title = 'All Graduate Degrees';
-				break;
-			case 'certificate':
-				$degree_title = 'All Certificates';
-				break;
-			default:
-				break;
-		}
-		if ($degree_title) {
-			$content .= $degree_title;
-		}
-	}
-	if ($sort_by) {
-		switch ($sort_by) {
-			case 'browse_by_college':
-				$degree_subtitle = 'by College';
-				break;
-			case 'browse_by_hours':
-				$degree_subtitle = 'by Hours';
-				break;
-			default:
-				break;
-		}
-		if ($degree_subtitle) {
-			$content .= ' '.$degree_subtitle;
-		}
-	}
-
-	return trim($content);
+	return stripslashes( $val );
 }
 
 
 /**
- * Generates page <title> tag for Degree Search views.
+ * Saves a term's custom meta data.
+ *
+ * Assumes that term data are saved as options using the naming schema
+ * 'tax_<taxonomy slug>_<term id>', and that term data is included in
+ * Add New/Update <taxonomy> forms with inputs that have a name and ID
+ * of 'term_meta[]'; e.g. '<input name="term_meta[my_custom_meta]" ..>'
+ *
+ * This function should be called on edited_<taxonomy> and create_<taxonomy>.
+ * It saves all metadata following the term_meta[...] naming structure, so it
+ * should only be hooked into edited_<taxonomy> and create_<taxonomy> once per
+ * taxonomy.
  **/
-function header_title_degree_search($title, $separator) {
-	global $post;
-
-	// Custom page overrides here (necessary for Degree Search)
-	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$view_title = get_degree_search_view_title();
-		if ($view_title !== '') {
-			$view_title = ' '.$separator.' '.$view_title;
+function save_term_custom_meta( $term_id, $taxonomy ) {
+	if ( isset( $_POST['term_meta'] ) ) {
+		$option_name = 'tax_' . $taxonomy . '_' . strval( $term_id );
+		$term_meta = get_option( $option_name );
+		$term_keys = array_keys( $_POST['term_meta'] );
+		foreach ( $term_keys as $key ) {
+			if ( isset( $_POST['term_meta'][$key] ) ) {
+				$term_meta[$key] = stripslashes( wp_filter_post_kses( addslashes( $_POST['term_meta'][$key] ) ) );
+			}
 		}
-		$title = 'Degree Search'.$view_title;
+		// Save the option array.
+		update_option( $option_name, $term_meta );
 	}
-	return '<title>'.$title.'</title>'; // Why is this necessary???
 }
-add_filter('wp_title', 'header_title_degree_search', 99, 2); // Force these page titles (SEO plugins can't overwrite them.)
 
 
 /**
- * Generates page <meta name="description"> tag for Degree Search Views. Hooks into Yoast SEO api.
+ * Adds custom "meta fields" for College taxonomy terms.
  **/
-function header_meta_degree_search($str) {
-	global $post;
 
-	if ($post->ID == get_page_by_title('Degree Search')->ID) {
-		$view_title = strtolower(get_degree_search_view_title()).' ';
-		$str = str_replace('@!@VIEW@!@ ', $view_title, $str);
-	}
-	return $str;
+// Prints label for college alias field.
+function colleges_alias_label() {
+	ob_start();
+?>
+	<label for="term_meta[college_alias]"><?php echo __( 'Alias' ); ?></label>
+<?php
+	return ob_get_clean();
 }
-add_filter('wpseo_metadesc', 'header_meta_degree_search', 10, 1);
+
+// Prints field for college alias.
+function colleges_alias_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[college_alias]" id="term_meta[college_alias]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify a shorter name for this college; used in Degree Search filters.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds alias field to Add College form.
+function colleges_add_alias_field() {
+?>
+	<div class="form-field">
+		<?php echo colleges_alias_label(); ?>
+		<?php echo colleges_alias_field(); ?>
+	</div>
+<?php
+}
+add_action( 'colleges_add_form_fields', 'colleges_add_alias_field', 10, 2 );
+
+// Adds alias field to Edit College form.
+function colleges_edit_alias_field( $term ) {
+	$term_id = $term->term_id;
+	$alias = get_term_custom_meta( $term_id, 'colleges', 'college_alias' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo colleges_alias_label(); ?>
+		</th>
+		<td>
+			<?php echo colleges_alias_field( $alias ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'colleges_edit_form_fields', 'colleges_edit_alias_field', 10, 2 );
+
+// Prints label for college url field.
+function colleges_url_label() {
+	ob_start();
+?>
+	<label for="term_meta[college_url]"><?php echo __( 'URL' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for college url.
+function colleges_url_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[college_url]" id="term_meta[college_url]" <?php if ( $value ) { ?>value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify where this college should link out to.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds url field to Add College form.
+function colleges_add_url_field() {
+?>
+	<div class="form-field">
+		<?php echo colleges_url_label(); ?>
+		<?php echo colleges_url_field(); ?>
+	</div>
+<?php
+}
+add_action( 'colleges_add_form_fields', 'colleges_add_url_field', 10, 2 );
+
+// Adds url field to Edit College form.
+function colleges_edit_url_field( $term ) {
+	$term_id = $term->term_id;
+	$url = get_term_custom_meta( $term_id, 'colleges', 'college_url' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo colleges_url_label(); ?>
+		</th>
+		<td>
+			<?php echo colleges_url_field( $url ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'colleges_edit_form_fields', 'colleges_edit_url_field', 10, 2 );
+
+// Saves College url field value.
+function save_colleges_custom_meta( $term_id ) {
+	save_term_custom_meta( $term_id, 'colleges' );
+}
+add_action( 'edited_colleges', 'save_colleges_custom_meta', 10, 2 );
+add_action( 'create_colleges', 'save_colleges_custom_meta', 10, 2 );
+
+// Adds columns to existing Colleges term list.
+function colleges_add_columns( $columns ) {
+	$new_columns = array(
+		'cb' => '<input type="checkbox" />',
+		'name' => __('Name'),
+		'alias' => __('Alias'),
+		// 'description' => __('Description'),
+		'slug' => __('Slug'),
+		'url' => __('URL'),
+		'posts' => __('Posts')
+	);
+	return $new_columns;
+}
+add_filter( 'manage_edit-colleges_columns', 'colleges_add_columns' );
+
+// Adds content to Colleges columns
+function colleges_render_columns( $out, $name, $term_id ) {
+	switch ( $name ) {
+		case 'alias':
+			$alias = get_term_custom_meta( $term_id, 'colleges', 'college_alias' );
+			if ( $alias ) {
+				$out .= $alias;
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		case 'url':
+			$url = get_term_custom_meta( $term_id, 'colleges', 'college_url' );
+			if ( $url ) {
+				$out .= '<a target="_blank" href="'. $url .'">'. $url .'</a>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		default:
+			break;
+	}
+	return $out;
+}
+add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
+
+
+/**
+ * Adds custom "meta fields" for Program Types terms.
+ **/
+
+// Prints label for program type CTA field.
+function program_types_cta_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_cta]"><?php echo __( 'Call to Action box content' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type CTA.
+function program_types_cta_field( $value=null ) {
+	ob_start();
+?>
+	<textarea name="term_meta[program_type_cta]" class="large-text" cols="50" rows="5" id="term_meta[program_type_cta]"><?php if ( $value ) { echo esc_textarea( $value ); } ?></textarea>
+	<p class="description"><?php echo __( 'Content that should be displayed in the Call to Action box, at the bottom of a program\'s description on its profile page.  HTML and shortcodes are permitted.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds CTA field to Add Program Type form.
+function program_types_add_cta_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_cta_label(); ?>
+		<?php echo program_types_cta_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_cta_field', 10, 2 );
+
+// Adds CTA field to Edit Program Type form.
+function program_types_edit_cta_field( $term ) {
+	$term_id = $term->term_id;
+	$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_cta_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_cta_field( $cta ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_cta_field', 10, 2 );
+
+
+// Prints label for program type color field.
+function program_types_color_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_color]"><?php echo __( 'Color' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type color.
+function program_types_color_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[program_type_color]" id="term_meta[program_type_color]"<?php if ( $value ) { ?> value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify a color that should represent this program type.  Avoid shades of blue, which is used in primary links in the Degree Search.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds color field to Add Program Type form.
+function program_types_add_color_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_color_label(); ?>
+		<?php echo program_types_color_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_color_field', 10, 2 );
+
+// Adds color field to Edit Program Type form.
+function program_types_edit_color_field( $term ) {
+	$term_id = $term->term_id;
+	$color = get_term_custom_meta( $term_id, 'program_types', 'program_type_color' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_color_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_color_field( $color ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_color_field', 10, 2 );
+
+
+// Prints label for program type alias field.
+function program_types_alias_label() {
+	ob_start();
+?>
+	<label for="term_meta[program_type_alias]"><?php echo __( 'Alias' ); ?></label>
+<?php
+	return ob_get_clean();
+}
+
+// Prints field for program type alias.
+function program_types_alias_field( $value=null ) {
+	ob_start();
+?>
+	<input type="text" name="term_meta[program_type_alias]" id="term_meta[program_type_alias]"<?php if ( $value ) { ?> value="<?php echo $value; ?>"<?php } ?>>
+	<p class="description"><?php echo __( 'Specify an alternate name for this program type.  Used in Degree Search result list items.' ); ?></p>
+<?php
+	return ob_get_clean();
+}
+
+// Adds alias field to Add Program Type form.
+function program_types_add_alias_field() {
+?>
+	<div class="form-field">
+		<?php echo program_types_alias_label(); ?>
+		<?php echo program_types_alias_field(); ?>
+	</div>
+<?php
+}
+add_action( 'program_types_add_form_fields', 'program_types_add_alias_field', 10, 2 );
+
+// Adds alias field to Edit Program Type form.
+function program_types_edit_alias_field( $term ) {
+	$term_id = $term->term_id;
+	$alias = get_term_custom_meta( $term_id, 'program_types', 'program_type_alias' );
+?>
+	<tr class="form-field">
+		<th scope="row" valign="top">
+			<?php echo program_types_alias_label(); ?>
+		</th>
+		<td>
+			<?php echo program_types_alias_field( $alias ); ?>
+		</td>
+	</tr>
+<?php
+}
+add_action( 'program_types_edit_form_fields', 'program_types_edit_alias_field', 10, 2 );
+
+
+// Saves Program Type custom field values.
+function save_program_types_custom_meta( $term_id ) {
+	save_term_custom_meta( $term_id, 'program_types' );
+}
+add_action( 'edited_program_types', 'save_program_types_custom_meta', 10, 2 );
+add_action( 'create_program_types', 'save_program_types_custom_meta', 10, 2 );
+
+// Adds columns to existing Program Type term list.
+function program_types_add_columns( $columns ) {
+	$new_columns = array(
+		'cb' => '<input type="checkbox" />',
+		'name' => __( 'Name' ),
+		'alias' => __( 'Alias' ),
+		'color' => __( 'Color' ),
+		'cta' => __( 'Call to Action box' ),
+		// 'description' => __( 'Description' ),
+		'slug' => __( 'Slug' ),
+		// 'url' => __( 'URL' ),
+		'posts' => __( 'Posts' )
+	);
+	return $new_columns;
+}
+add_filter( 'manage_edit-program_types_columns', 'program_types_add_columns' );
+
+// Adds content to Program Type columns
+function program_types_render_columns( $out, $name, $term_id ) {
+	switch ( $name ) {
+		case 'alias':
+			$alias = get_term_custom_meta( $term_id, 'program_types', 'program_type_alias' );
+			if ( $alias ) {
+				$out .= $alias;
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		case 'color':
+			$color = get_term_custom_meta( $term_id, 'program_types', 'program_type_color' );
+			if ( $color ) {
+				$out .= '<span style="color: ' . $color . ';">' . $color . '</span>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+		case 'cta':
+			$cta = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+			if ( $cta ) {
+				$out .= '<textarea disabled>' . esc_textarea( $cta ) . '</textarea>';
+			}
+			else {
+				$out .= '&mdash;';
+			}
+			break;
+	}
+	return $out;
+}
+add_filter( 'manage_program_types_custom_column', 'program_types_render_columns', 10, 3);
+
+
+/**
+* Displays social buttons (Facebook, Twitter, G+) for a post.
+* Accepts a post URL and title as arguments.
+*
+* @return string
+* @author Jo Dickson
+**/
+function display_social($url, $title) {
+	$tweet_title = urlencode('UCF Degree: '.$title);
+	ob_start(); ?>
+	<aside class="social clearfix">
+		<a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this story on Facebook">
+			Like "<?php echo $title; ?>" on Facebook
+		</a>
+		<a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
+			Tweet "<?php echo $title; ?>" on Twitter
+		</a>
+		<a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
+			Share "<?php echo $title; ?>" on Google+
+		</a>
+		<a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
+			Share "<?php echo $title; ?>" on Linkedin
+		</a>
+		<a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
+			Share "<?php echo $title; ?>" in an email
+		</a>
+	</aside>
+	<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Recursively looks for a Program Type term's Call to Action text value.
+ * If the provided term doesn't have one assigned, its parents are checked
+ * until either a CTA value is found, or no more parents exist.
+ **/
+function get_program_type_cta( $term_id ) {
+	$term = get_term( $term_id, 'program_types' );
+	$cta_content = get_term_custom_meta( $term_id, 'program_types', 'program_type_cta' );
+	if ( empty( $cta_content ) && $term->parent !== 0 ) {
+		return get_program_type_cta( $term->parent );
+	}
+	return stripslashes( $cta_content );
+}
+
+
+/**
+ * Displays a "Apply to <Degree Name>" Call to Action box.  For use at the
+ * bottom of single Degree profiles.  Uses CTA box contents from the degree's
+ * assigned Program Type, or that Program Type's parent(s) if one isn't
+ * available.
+ **/
+function display_degree_callout( $degree_id ) {
+	$program_type = get_first_result( wp_get_post_terms( $degree_id, 'program_types' ) );
+	$cta_content = get_program_type_cta( $program_type->term_id );
+
+	if ( empty( $cta_content ) ) {
+		return;
+	}
+
+	ob_start();
+?>
+	<div class="cta-wrap well">
+		<?php echo apply_filters( 'the_content', $cta_content ); ?>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Redirect invalid requests related to Degree Search.
+ * This redirect should only ever get hit if the user manually entered an
+ * invalid URL, since all custom search views are generated via query params.
+ **/
+function degree_search_404_redirect() {
+	$path = $_SERVER['REQUEST_URI'];
+	$degree_search_page = get_page_by_title( 'Degree Search' );
+	$degree_search_path = wp_make_link_relative( get_permalink( $degree_search_page ) );
+
+	// Remove trailing slash
+	if ( substr( $degree_search_path, -1 ) == '/' ) {
+		$degree_search_path = substr( $degree_search_path, 0, -1 );
+	}
+
+	if ( is_404() && substr( $path, 0, strlen( $degree_search_path ) ) == $degree_search_path ) {
+		wp_redirect( get_permalink( $degree_search_page ), 301 );
+		exit();
+	}
+}
+add_action( 'template_redirect', 'degree_search_404_redirect' );
+
 
 function get_hiearchical_degree_search_data_json() {
 	// Define which of our Program types are valid.  (These are highest-level parent terms
