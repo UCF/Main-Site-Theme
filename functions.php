@@ -1907,26 +1907,28 @@ function get_degree_search_result_phrase( $result_count_total, $params ) {
 function get_degree_search_search_again( $filters, $params ) {
 	ob_start();
 	if ( isset( $params['search-query'] ) ): ?>
+		<div class="degree-search-again-container">
 			<p class="degree-search-similar">
 				Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:
 			</p>
-		<?php foreach ( $filters as $key=>$filter ): ?>
-			<?php if ( $filter['name'] == 'Degrees'): ?>
-				<?php foreach ( $filter['terms'] as $term ): ?>
-					<?php
-					if ( $term->count > 0 ):
-						$query = http_build_query( array(
-							$key . '[]' => $term->slug,
-							'search-query' => $params['search-query']
-						) );
-					?>
-						<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
-							<?php echo $term->name; ?>s
-						</a>
-					<?php endif; ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
-		<?php endforeach; ?>
+			<?php foreach ( $filters as $key=>$filter ): ?>
+				<?php if ( $filter['name'] == 'Degrees'): ?>
+					<?php foreach ( $filter['terms'] as $term ): ?>
+						<?php
+						if ( $term->count > 0 ):
+							$query = http_build_query( array(
+								$key . '[]' => $term->slug,
+								'search-query' => $params['search-query']
+							) );
+						?>
+							<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
+								<?php echo $term->name; ?>s
+							</a>
+						<?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</div>
 	<?php endif;
 	return ob_get_clean();
 }
@@ -2208,7 +2210,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 				$plural = 's';
 			}
 			$markup .= '<div class="degree-search-suggestions">';
-			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . $suggestion_count_total .' similar result' . $plural . ' found:</p>';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . '&nbsp;&nbsp;' . $suggestion_count_total .' similar result' . $plural . ' found:</p>';
 			$markup .= $suggestion_markup;
 			$markup .= '</div>';
 		}

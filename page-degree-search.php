@@ -91,11 +91,7 @@ get_header(); the_post(); ?>
 
 					<!-- Page Bottom -->
 
-					<div class="degree-search-again-container">
-						<?php echo get_degree_search_search_again( $filters, $params ); ?>
-					</div>
-
-					<hr>
+					<?php echo get_degree_search_search_again( $filters, $params ); ?>
 
 					<p class="more-details">
 						For more details and the complete undergraduate catalog, visit: <a href="<?php echo UNDERGRAD_CATALOG_URL; ?>" class="ga-event" data-ga-action="Undergraduate Catalog link" data-ga-label="<?=addslashes(the_title())?> (footer)"><?php echo UNDERGRAD_CATALOG_URL; ?></a>.

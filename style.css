@@ -1232,6 +1232,7 @@ li.tagit-new input {
 }
 
 #degree-search-content .degree-search-results-container {
+  padding-bottom: 30px;
   position: relative;
 }
 
@@ -1353,9 +1354,7 @@ li.tagit-new input {
 }
 
 #degree-search-content .degree-search-suggestions {
-  border-top: 1px solid #eee;
-  margin-top: 50px;
-  padding-top: 50px;
+  padding-top: 30px;
 }
 #degree-search-content .degree-search-results + .degree-search-suggestions {
   border-top: 1px solid #eee;
@@ -1369,12 +1368,12 @@ li.tagit-new input {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-style: italic;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 #degree-search-content .degree-search-no-results {
   border-bottom: 1px solid #eee;
-  padding-top: 50px;
+  padding-top: 30px;
 }
 
 #degree-search-content .degree-search-no-results-phrase {
@@ -1387,6 +1386,12 @@ li.tagit-new input {
 
 #degree-search-content .degree-search-result-showing {
   text-align: center;
+}
+
+#degree-search-content .degree-search-again-container {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 
