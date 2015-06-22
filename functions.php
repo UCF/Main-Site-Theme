@@ -1907,10 +1907,9 @@ function get_degree_search_result_phrase( $result_count_total, $params ) {
 function get_degree_search_search_again( $filters, $params ) {
 	ob_start();
 	if ( isset( $params['search-query'] ) ): ?>
-		<p>
-			<br>
-			Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:
-		</p>
+			<p class="degree-search-similar">
+				Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:
+			</p>
 		<?php foreach ( $filters as $key=>$filter ): ?>
 			<?php if ( $filter['name'] == 'Degrees'): ?>
 				<?php foreach ( $filter['terms'] as $term ): ?>
@@ -2126,7 +2125,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 		$college_name = get_term_by( 'slug', $params['college'][0], 'colleges' )->name;
 	}
 
-	$markup = '<div class="no-results">No results found.</div>';
+	$no_results = '';
 	$offset_start = intval( $params['offset'] ); // Pagination offset start
 	$offset_end = $offset_start + DEGREE_SEARCH_PAGE_COUNT; // Pagination offset end
 	$result_count_start = $offset_start + 1; // Results per page start
@@ -2170,6 +2169,8 @@ function get_degree_search_contents( $return=false, $params=null ) {
 			$markup .= $degree_list_markup;
 			$markup .= '<p class="degree-search-result-showing">Showing ' . $result_count_start . '&mdash;' . $result_count_end . ' of ' . $result_count_total . ' results.</p>';
 		}
+	} else {
+		$no_results = 'No results found for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>. ';
 	}
 
 	// Add suggestions
@@ -2198,9 +2199,19 @@ function get_degree_search_contents( $return=false, $params=null ) {
 		}
 
 		if ( !empty( $suggestion_markup ) ) {
+			$plural = '';
+			if( $suggestion_count_total > 1 ) {
+				$plural = 's';
+			} 
 			$markup .= '<div class="degree-search-suggestions">';
-			$markup .= '<p class="degree-search-suggestions-phrase">'. $suggestion_count_total .' more similar results found for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>:</p>';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . $suggestion_count_total .' similar result' . $plural . ' found:</p>';
 			$markup .= $suggestion_markup;
+			$markup .= '</div>';
+		}
+	} else {
+		if(!empty($no_results)) {
+			$markup .= '<div class="degree-search-no-results">';
+			$markup .= '<p class="degree-search-suggestions-phrase">'. $no_results . '</p>';
 			$markup .= '</div>';
 		}
 	}

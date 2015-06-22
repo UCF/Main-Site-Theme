@@ -1255,8 +1255,13 @@ li.tagit-new input {
   background-color: rgba(255, 255, 255, 0);
 }
 
-#degree-search-content .degree-search-results-container .no-results {
+#degree-search-content .degree-search-results-container .no-results {  
+  font-size: 20px;
   margin-top: 20px;
+}
+
+#degree-search-content .degree-search-similar {
+  margin-top: 25px;
 }
 
 #degree-search-content .degree-search-group-title {
@@ -1365,11 +1370,24 @@ li.tagit-new input {
 #degree-search-content .degree-search-suggestions-phrase {
     font-family: Georgia, serif;
     font-size: 18px;
+    line-height: 25px;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-style: italic;
     margin-bottom: 40px;
-    text-align: center;
+}
+
+#degree-search-content .degree-search-no-results {
+  border-bottom: 1px solid #eee;
+  padding-top: 50px;
+}
+
+#degree-search-content .degree-search-no-results-phrase {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: italic;
 }
 
 #degree-search-content .degree-search-result-showing {
