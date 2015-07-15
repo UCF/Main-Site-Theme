@@ -2949,6 +2949,6 @@ function uploads_allow_json( $mimes ) {
 	$mimes['json'] = 'application/json';
 	return $mimes;
 }
-add_filter( 'upload_mimes', 'custom_upload_mimes' );
+add_filter( 'upload_mimes', 'uploads_allow_json' );
 
 ?>
