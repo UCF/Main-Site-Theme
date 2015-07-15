@@ -1117,6 +1117,7 @@ function sc_chart( $attr ) {
 	$id = $attr['id'] ? $attr['id'] : 'custom-chart';
 	$type = $attr['type'] ? $attr['type'] : 'bar';
 	$json = $attr['json'] ? $attr['json'] : '';
+	$options = $attr['options'] ? $attr['options'] : '';
 
 	if ( empty( $json ) ) {
 		return;
@@ -1129,7 +1130,7 @@ function sc_chart( $attr ) {
 	ob_start();
 
 	?>
-		<div id="<?php echo $id; ?>" class="<?php echo $class; ?>" data-chart-type="<?php echo $type; ?>" data-chart-data="<?php echo $json; ?>"></div>
+		<div id="<?php echo $id; ?>" class="<?php echo $class; ?>" data-chart-type="<?php echo $type; ?>" data-chart-data="<?php echo $json; ?>" <?php echo $options ? 'data-chart-options="' . $options . '"' : ''; ?>></div>
 	<?php
 
 	return ob_get_clean();
