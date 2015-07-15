@@ -1493,6 +1493,57 @@ var announcementKeywordAutocomplete = function($) {
   }
 }
 
+var customChart = function($) {
+  if ($('.custom-chart').length) {
+    $.each($('.custom-chart'), function() {
+      // Update id of chart if it is set to default.
+      if ($(this).attr('id') == 'custom-chart') {
+        $(this).attr('id', 'custom-chart-' + idx);
+      }
+      var type = $(this).attr('data-chart-type');
+      var jsonPath = $(this).attr('data-chart-data');
+      var canvas = document.createElement('canvas');
+      var ctx = canvas.getContext('2d');
+
+      // Set default options for charts
+      var options = {
+        responsive: true,
+        scaleShowGridLines: false,
+        pointHitDetectionRadius: 5
+      };
+
+      $(this).append(canvas);
+      var data = {};
+
+      $.getJSON(jsonPath, function(json) {
+        data = json;
+      }).complete(function() {
+        switch(type.toLowerCase()) {
+          case 'bar':
+            var barChart = new Chart(ctx).Bar(data, options);
+            break;
+          case 'line':
+            var lineChart = new Chart(ctx).Line(data, options);
+            break;
+          case 'radar':
+            var radarChart = new Chart(ctx).Radar(data, options);
+            break;
+          case 'polar-area':
+            var polarAreaChart = new Chart(ctx).PolarArea(data, options);
+            break;
+          case 'pie':
+            var pieChart = new Chart(ctx).Pie(data, options);
+            break;
+          case 'doughnut':
+            var doughnutChart = new Chart(ctx).Doughnut(data, options);
+            break;
+          default:
+            break;
+        }
+      });
+    });
+  }
+};
 
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
@@ -1528,6 +1579,7 @@ if (typeof jQuery != 'undefined'){
     degreeProfile($);
     socialButtonTracking($);
     ariaSilenceNoscripts($);
+    customChart($);
 
     //devBootstrap($);
 
