@@ -1112,4 +1112,22 @@ function sc_grad_catalog_url( $attr ) {
 }
 add_shortcode( 'graduate-catalog-url', 'sc_grad_catalog_url' );
 
+function sc_chart( $attr ) {
+	$js_path = $attr['js'] ? $attr['js'] : '';
+	$div_id = $attr['id'] ? $attr['id'] : 'custom-chart';
+	$class = $attr['class'] ? 'custom-chart ' . $attr['class'] : 'custom-chart';
+
+	wp_enqueue_script( 'chart-js', THEME_JS_URL.'/Chart.min.js', null, null, True );
+	wp_enqueue_script( $id.'-script', $js_path, 'chart-js', null, True );
+
+	ob_start();
+
+	?>
+		<div id="<?php echo $div_id; ?>" <?php echo $class ? 'class ="' . $class . '"' : '' ?>></div>
+	<?php
+
+	return ob_get_clean();
+}
+add_shortcode( 'chart', 'sc_chart' );
+
 ?>
