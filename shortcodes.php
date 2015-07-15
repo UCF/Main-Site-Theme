@@ -1112,10 +1112,15 @@ function sc_grad_catalog_url( $attr ) {
 }
 add_shortcode( 'graduate-catalog-url', 'sc_grad_catalog_url' );
 
+
 function sc_chart( $attr ) {
 	$id = $attr['id'] ? $attr['id'] : 'custom-chart';
 	$type = $attr['type'] ? $attr['type'] : 'bar';
 	$json = $attr['json'] ? $attr['json'] : '';
+
+	if ( empty( $json ) ) {
+		return;
+	}
 
 	$class = $attr['class'] ? 'custom-chart ' . $class : 'custom-chart';
 
