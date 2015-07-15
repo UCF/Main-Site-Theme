@@ -1496,14 +1496,15 @@ var announcementKeywordAutocomplete = function($) {
 var customChart = function($) {
   if ($('.custom-chart').length) {
     $.each($('.custom-chart'), function() {
+      var $chart = $(this);
       // Update id of chart if it is set to default.
-      if ($(this).attr('id') == 'custom-chart') {
-        $(this).attr('id', 'custom-chart-' + idx);
+      if ($chart.attr('id') == 'custom-chart') {
+        $chart.attr('id', 'custom-chart-' + idx);
       }
-      var type = $(this).attr('data-chart-type');
-      var jsonPath = $(this).attr('data-chart-data');
-      var canvas = document.createElement('canvas');
-      var ctx = canvas.getContext('2d');
+      var type = $chart.attr('data-chart-type'),
+          jsonPath = $chart.attr('data-chart-data'),
+          canvas = document.createElement('canvas'),
+          ctx = canvas.getContext('2d');
 
       // Set default options for charts
       var options = {
@@ -1512,7 +1513,7 @@ var customChart = function($) {
         pointHitDetectionRadius: 5
       };
 
-      $(this).append(canvas);
+      $chart.append(canvas);
       var data = {};
 
       $.getJSON(jsonPath, function(json) {
