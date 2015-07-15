@@ -2941,4 +2941,14 @@ function announcement_post_tax_save( $entry, $form ) {
 }
 add_action( 'gform_after_submission_4', 'announcement_post_tax_save', 10, 2 );
 
+
+/**
+ * Allow json files to be uploaded to the media library.
+ **/
+function uploads_allow_json( $mimes ) {
+	$mimes['json'] = 'application/json';
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'custom_upload_mimes' );
+
 ?>
