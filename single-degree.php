@@ -209,24 +209,7 @@
 								<div class="tuition-total">
 									<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The tuition cost of a
-								<?php
-									switch( $post->tax_program_type->slug ) {
-										case 'undergraduate-degree':
-											echo 'Bachelors of ';
-											break;
-										case 'minor':
-											echo 'minor in ';
-											break;
-										case 'graduate-degree':
-											echo 'Masters of ';
-											break;
-										default:
-											echo '';
-											break;
-									}
-									echo $post->post_title . ' at UCF based on a full time schedule (30 credit hours per year)';
-								?>
+								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -237,27 +220,11 @@
 								<div class="tuition-total">
 									<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The tuition cost of a
-								<?php
-									switch( $post->tax_program_type->slug ) {
-										case 'undergraduate-degree':
-											echo 'Bachelors of ';
-											break;
-										case 'minor':
-											echo 'minor in ';
-											break;
-										case 'graduate-degree':
-											echo 'Masters of ';
-											break;
-										default:
-											echo '';
-											break;
-									}
-									echo $post->post_title . ' at UCF based on a full time schedule (30 credit hours per year)';
-								?>
+								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
 							</div>
 						<?php endif; ?>
 					</div>
+					<p><small>*Visit our <a href="http://tuitionfees.ikm.ucf.edu/" target="blank">Tuition and Fees Website</a> for more information on the cost of this degree.</small></p>
 				</div>				
 				<?php if ( $post->financial_aid_message ) : ?>
 					<p class="financial-aid-message"><?php echo $post->financial_aid_message; ?><p/>
