@@ -1125,11 +1125,6 @@ function sc_chart( $attr ) {
 
 	$class = $attr['class'] ? 'custom-chart ' . $class : 'custom-chart';
 
-	// Load excanvas is canvas is not supported.
-	if ( is_ie_8_or_older() ) {
-		wp_enqueue_script( 'excanvas-js', THEME_JS_URL.'/excanvas.js', null, null, True );
-	}
-
 	wp_enqueue_script('chart-js', THEME_JS_URL.'/Chart.min.js', null, null, True);
 
 	ob_start();

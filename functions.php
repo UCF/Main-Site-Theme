@@ -2951,15 +2951,4 @@ function uploads_allow_json( $mimes ) {
 }
 add_filter( 'upload_mimes', 'uploads_allow_json' );
 
-/**
- * Detects if user agent is IE8 or older.
- **/
-function is_ie_8_or_older() {
-	if ( preg_match('/(?i)msie [1-8]/', $_SERVER['HTTP_USER_AGENT'] ) ) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
 ?>
