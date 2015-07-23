@@ -303,9 +303,83 @@
 # Displays a link to the Graduate Catalog URL.
 &lt;a href="[graduate-catalog-url]"&gt;[graduate-catalog-url]&lt;/a&gt;
 </code></pre>
-
+		<h4>chart</h4>
+		<p>Inserts a chart (graph) using json data and option files.</p>
+		<p><strong>Required Attributes</strong></p>
+		<dl>
+			<dt>type</dt>
+			<dd>The type of chart/graph to display</dd>
+			<dt>json</dt>
+			<dd>The path of the json file containing the chart data</dd>
+		</dl>
+		<p><strong>Optional Attributes</strong></p>
+		<dl>
+			<dt>id</dt>
+			<dd>The id of the chart canvas container. Defaults to custom-chart. This should be set if multiple charts are on the page.</dd>
+			<dt>options</dt>
+			<dd>The path of json file containing the chart options</dd>
+		</dl>
+		<p><strong>Chart Types</strong></p>
+		<p>All chart types available with the <a href="http://www.chartjs.org/docs/" target="_blank">Chartjs library</a> are available with this shortcode.</p>
+		<dl>
+			<dt>bar</dt>
+			<dd>Inserts a <a href="http://www.chartjs.org/docs/#bar-chart" target="_blank">bar chart</a></dd>
+			<dt>line</dt>
+			<dd>Inserts a <a href="http://www.chartjs.org/docs/#line-chart" target="_blank">line chart</a></dd>
+			<dt>radar</dt>
+			<dd>Inserts a <a href="http://www.chartjs.org/docs/#radar-chart" target="_blank">radar chart</a></dd>
+			<dt>polar-area</dt>
+			<dd>Inserts a <a href="http://www.chartjs.org/docs/#polar-area-chart" target="_blank">polar area chart</a></dd>
+			<dt>pie</dt>
+			<dd>Inserts a <a href="http://www.chartjs.org/docs/#doughnut-pie-chart" target="_blank">pie chart</a></dd>
+			<dt>doughnut</dt>
+			<dd>Inserts a <a href="http://www.chartjs.org/docs/#doughnut-pie-chart" target="_blank">doughnut</a></dd>
+		</dl>
+		<p><strong>Examples:</strong></p>
+		<p><em>Shortcode</em></p>
+<pre><code>
+[chart id="population-chart" type="bar" json="http://localhost/wordpress/wp-content/uploads/population.json" 
+	options="http://localhost/wordpress/wp-content/uploads/population-options.json"]
+</code></pre>
+		<p><em>Data File</em></p>
+		<p>Review the data structure for bar charts <a href="http://www.chartjs.org/docs/#bar-chart" target="_blank">here</a>.</p>
+<pre><code>
+{
+	"labels": {
+		"2000",
+		"2001",
+	},
+	"datasets": [
+		{
+			"label": "Florida",
+			"fillColor": "rgba(255,0,0,1)",
+			"strokeColor": "rgba(0,0,0,1)",
+			"data": [
+				3000000,
+				3200000
+			]
+		},
+		{
+			"label": "Georgia",
+			"fillColor": "rgba(0,255,0,1)",
+			"strokeColor": "rgba(0,0,0,1)",
+			"data": [
+				1500000,
+				1620000
+			]
+		}
+	]
+}
+</code></pre>
+		<p><em>Options File</em></p>
+		<p>Find a list of options <a href="http://www.chartjs.org/docs/#getting-started-global-chart-configuration" target="_blank">here</a>.</p>
+<pre><code>
+{
+	"scaleShowGridLines": false,
+	"responsive": true
+}
+</code></pre>
 				</li>
-
 			</ul>
 		</div>
 	</div>
