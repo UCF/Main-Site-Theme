@@ -2,5 +2,9 @@
 	"scaleShowGridLines": false,
 	"pointHitDetectionRadius": 3,
 	"responsive": true,
-	"toolTipPadding": 10
+	"toolTipPadding": 10,
+	"scaleOverride": true,
+	"scaleSteps": 7,
+	"scaleStepWidth": 6000,
+	"scaleStartValue": 20000
 }
