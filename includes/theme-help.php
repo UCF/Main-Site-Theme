@@ -309,7 +309,7 @@
 		<dl>
 			<dt>type</dt>
 			<dd>The type of chart/graph to display</dd>
-			<dt>json</dt>
+			<dt>data</dt>
 			<dd>The path of the json file containing the chart data</dd>
 		</dl>
 		<p><strong>Optional Attributes</strong></p>
@@ -338,7 +338,7 @@
 		<p><strong>Examples:</strong></p>
 		<p><em>Shortcode</em></p>
 <pre><code>
-[chart id="population-chart" type="bar" json="http://localhost/wordpress/wp-content/uploads/population.json" 
+[chart id="population-chart" type="bar" data="http://localhost/wordpress/wp-content/uploads/population.json" 
 	options="http://localhost/wordpress/wp-content/uploads/population-options.json"]
 </code></pre>
 		<p><em>Data File</em></p>
