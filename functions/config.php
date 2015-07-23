@@ -318,7 +318,7 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['financial_aid_message'],
 		)),
 		new TextField(array(
-			'name'        => 'Tuition and Feed URL',
+			'name'        => 'Tuition and Fees Feed URL',
 			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',
 			'description' => 'URL for the tuition and fee feed.',
 			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
