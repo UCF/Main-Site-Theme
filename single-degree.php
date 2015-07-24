@@ -225,7 +225,7 @@
 						<?php endif; ?>
 					</div>
 					<p><small>*Visit our <a href="http://tuitionfees.ikm.ucf.edu/" target="blank">Tuition and Fees Website</a> for more information on the cost of this degree.</small></p>
-				</div>				
+				</div>
 				<?php if ( $post->financial_aid_message ) : ?>
 					<p class="financial-aid-message"><?php echo $post->financial_aid_message; ?><p/>
 				<?php endif; ?>

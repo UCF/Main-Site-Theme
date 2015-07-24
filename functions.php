@@ -1653,20 +1653,22 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 		if ( $json ) {
 			$fees = json_decode( $json );
 
-			$in_state_estimated_fees = 0;
-			$out_of_state_estimated_fees = 0;
+			if ( !empty( $fees ) ) {
+				$in_state_estimated_fees = 0;
+				$out_of_state_estimated_fees = 0;
 
-			foreach ( $fees as $fee ) {
-				if ( strpos($fee->FeeName, '(Per Hour)' ) == false ) {
-					$in_state_estimated_fees += $fee->ResidentFee;
-					$out_of_state_estimated_fees += $fee->NonResidentFee;
+				foreach ( $fees as $fee ) {
+					if ( strpos($fee->FeeName, '(Per Hour)' ) == false ) {
+						$in_state_estimated_fees += $fee->ResidentFee;
+						$out_of_state_estimated_fees += $fee->NonResidentFee;
+					}
 				}
-			}
 
-			return array(
-				'in_state_rate' => $in_state_estimated_fees,
-				'out_of_state_rate' => $out_of_state_estimated_fees
-			);
+				return array(
+					'in_state_rate' => $in_state_estimated_fees,
+					'out_of_state_rate' => $out_of_state_estimated_fees
+				);
+			}
 		} else {
 			return null;
 		}
