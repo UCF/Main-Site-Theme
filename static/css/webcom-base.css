@@ -6,7 +6,11 @@
 /**
  * Element styles (No font-family)
  **/
-body{color: #333;background: #fff;}
+body{color: #333; background: url("../img/background-lg.png") repeat-x top left #fff;}
+
+@media (max-width: 767px) {
+	body { background-image: url("../img/background-md.png"); }
+}
 
 .menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
 .menu a:hover{text-decoration: underline;}
