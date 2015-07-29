@@ -236,7 +236,7 @@
 
 	#header { margin-left: 0; }
 	.android #header h1 { display: none; }
-	#header-menu { text-align: center; margin: 10px 0 5px 0; }
+	#header-menu { text-align: center; padding: 10px 0 5px 0; }
 	#header-menu li { float: none; margin-top: -5px; }
 	#header-menu li.last { vertical-align: bottom; }
 	#header-menu li.last a { margin-top: 5px; }
