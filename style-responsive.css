@@ -697,7 +697,6 @@
 }
 
 @media (max-width: 480px) {
-	body { background-image: none; }
 	.navbar .menu {
 		padding: 0;
 	}

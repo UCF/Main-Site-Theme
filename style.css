@@ -144,11 +144,10 @@ div.top_five_majors {
 #header h1 { text-indent: -9999px; }
 
 #header-nav-wrap { float: right; position: relative; left: -50%; }
-.ie7 #header-nav-wrap { width: 768px; }
 #header-menu { padding: 24px 0 30px; position: relative; left: 50%; }
 #header-menu.menu.horizontal { color: #262626; }
 #header-menu.menu.horizontal li { margin-right: 0; margin-bottom: 10px; }
-.ie7 #header-menu.menu.horizontal { width: 855px; }
+.ie7 #header-menu.menu.horizontal { width: 900px; }
 #header-menu li:after { margin-left: 7px; }
 #header-menu li a {
   color: #262626;
