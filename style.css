@@ -152,7 +152,7 @@ div.top_five_majors {
 #header-menu li:after { margin-left: 7px; }
 #header-menu li a {
   color: #262626;
-  padding: 5px 5px;
+  padding: 7px;
 }
 #header-menu li a:hover {
   background-color: #000;
@@ -264,7 +264,7 @@ div.top_five_majors {
 
 
 /* Home Page - General */
-#home .span12 { margin-top: 10px; margin-bottom: 30px; overflow: hidden !important; }
+#home .span12 { margin-bottom: 30px; overflow: hidden !important; }
 
 
 /* Home Page - Centerpiece */
