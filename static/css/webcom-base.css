@@ -6,19 +6,13 @@
 /**
  * Element styles (No font-family)
  **/
-body{color: #333; background: url("../img/background-lg.png") repeat-x top left #fff;}
+body{color: #333;}
 
-@media (max-width: 767px) {
-	body { background-image: url("../img/background-md.png"); }
-}
 
-.menu a{font-weight: normal; text-decoration: none; font-size: 16px; margin-right: 5px;}
-.menu a:hover{text-decoration: underline;}
+.menu a{font-weight: normal; text-decoration: none; font-size: 18px; margin-right: 10px;}
 .menu.horizontal{list-style: none; margin: 0; color: #6d6e71; padding: 10px 0 0 0; clear: right;}
 .menu.horizontal li{display: inline-block; margin: 0 6px 16px 0; padding: 0; float: left;}
-.ie .menu.horizontal li{/*display: block;*/ float: left; margin-right: 6px;}
-.menu.horizontal li:after{content: "\2022"; margin-left: 1px;}
-.menu.horizontal .last:after {content: none !important;}
+.ie .menu.horizontal li{float: left; margin-right: 6px;}
 
 .menu.nav-tabs, .menu.nav-pills { margin-left: 0; }
 ul.dropdown-menu li { width: 100%; margin-bottom: 0 !important; }

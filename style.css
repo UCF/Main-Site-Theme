@@ -136,7 +136,6 @@ div.top_five_majors {
 .status-alert .alert-body { display: block; clear: both; margin-top: 20px; }
 .status-alert .alert-body .content,
 .status-alert .alert-action {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#fff;font-size: 14px;}
-.status-alert .alert-action {  }
 .status-alert .alert-action .more-information { color: #fff; text-decoration: underline; }
 
 
@@ -146,14 +145,19 @@ div.top_five_majors {
 
 #header-nav-wrap { float: right; position: relative; left: -50%; }
 .ie7 #header-nav-wrap { width: 768px; }
-#header-menu { padding: 24px 0 40px 0; position: relative; left: 50%; }
+#header-menu { padding: 24px 0 30px; position: relative; left: 50%; }
 #header-menu.menu.horizontal { color: #262626; }
-#header-menu.menu.horizontal li { margin-right: 17px; margin-bottom: 11px; }
+#header-menu.menu.horizontal li { margin-right: 0; margin-bottom: 10px; }
 .ie7 #header-menu.menu.horizontal { width: 855px; }
 #header-menu li:after { margin-left: 7px; }
-#header-menu li a { color: #262626; }
-#header-menu li a:hover { color: #959491; text-decoration: none; }
-#header-menu li:first-child { margin-left: 17px; }
+#header-menu li a {
+  color: #262626;
+  padding: 5px 5px;
+}
+#header-menu li a:hover {
+  background-color: #000;
+  color: #ffcc00;
+}
 #header-menu li.last { height: 25px; margin-right: 0 !important; }
 #header-menu li.last a {
   background-color: #ffcc00;
