@@ -136,7 +136,6 @@ div.top_five_majors {
 .status-alert .alert-body { display: block; clear: both; margin-top: 20px; }
 .status-alert .alert-body .content,
 .status-alert .alert-action {font-family:"Helvetica Neue",Helvetica,sans-serif;color:#fff;font-size: 14px;}
-.status-alert .alert-action {  }
 .status-alert .alert-action .more-information { color: #fff; text-decoration: underline; }
 
 
@@ -145,53 +144,47 @@ div.top_five_majors {
 #header h1 { text-indent: -9999px; }
 
 #header-nav-wrap { float: right; position: relative; left: -50%; }
-.ie7 #header-nav-wrap { width: 768px; }
-#header-menu { margin: 15px 0 10px 0; position: relative; left: 50%; }
+#header-menu { padding: 24px 0 30px; position: relative; left: 50%; }
 #header-menu.menu.horizontal { color: #262626; }
-#header-menu.menu.horizontal li { margin-right: 14px; margin-bottom: 11px; }
-.ie7 #header-menu.menu.horizontal { width: 855px; }
+#header-menu.menu.horizontal li { margin-right: 0; margin-bottom: 10px; }
+.ie7 #header-menu.menu.horizontal { width: 900px; }
 #header-menu li:after { margin-left: 7px; }
-#header-menu li a { color: #262626; }
-#header-menu li a:hover { color: #959491; text-decoration: none; }
-#header-menu li.last { height: 25px; }
+#header-menu li a {
+  color: #262626;
+  padding: 7px;
+}
+#header-menu li a:hover {
+  background-color: #000;
+  color: #ffcc00;
+}
+#header-menu li.last { height: 25px; margin-right: 0 !important; }
 #header-menu li.last a {
-  display: block;
-  padding: 0 15px 2px 15px;
-  -webkit-border-radius: 15px;
-  border-radius: 15px;
-  -webkit-box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.3);
+  background-color: #ffcc00;
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 0;
   font-family: Verdana, Geneva, sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: -0.4px;
-  background: #fdcf4a; /* Old browsers */
-  background: -moz-linear-gradient(top, #fdcf4a 0%, #fdcf4a 50%, #f9bf1a 51%, #f9bf1a 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdcf4a), color-stop(50%,#fdcf4a), color-stop(51%,#f9bf1a), color-stop(100%,#f9bf1a)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #fdcf4a 0%,#fdcf4a 50%,#f9bf1a 51%,#f9bf1a 100%); /* W3C */
-  position: relative;
-  top: 0px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.42857143;
+  margin-top: -5px;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 #header-menu li.last a:hover {
-  color: #262626;
-  background: -moz-linear-gradient(top, #f9bf1a 0%, #fdcf4a 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9bf1a), color-stop(100%,#fdcf4a)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top, #f9bf1a 0%,#fdcf4a 100%); /* IE10+ */
-  background: linear-gradient(to bottom, #f9bf1a 0%,#fdcf4a 100%); /* W3C */
-}
-.ie7 #header-menu li.last a,
-.ie8 #header-menu li.last a {
-  background: transparent url('static/img/spritesheet.png') -322px -20px no-repeat;
-  text-indent: -9999px;
-  display: block;
-  padding: 0;
-  width: 93px;
-  height: 24px;
+  color: #fff;
+  background-color: #000;
 }
 .no_nav_separator:after,
 #header-menu li.last:after,
@@ -270,7 +263,7 @@ div.top_five_majors {
 
 
 /* Home Page - General */
-#home .span12 { margin-top: 10px; margin-bottom: 30px; overflow: hidden !important; }
+#home .span12 { margin-bottom: 30px; overflow: hidden !important; }
 
 
 /* Home Page - Centerpiece */
