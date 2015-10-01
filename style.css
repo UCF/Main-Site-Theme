@@ -202,6 +202,7 @@ div.top_five_majors {
 #footer-menu { position: relative; left: 50%; }
 #footer-menu li { margin-right: 8px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; letter-spacing: 0.8px; }
 #footer-menu li:after { content: "|"; margin-left: 2px; }
+#footer-menu .last:after { content: none; }
 #footer-menu li a { font-size: 10px; color: #262626; }
 
 #subfooter { clear: both; font-size: 10px; text-align: center; letter-spacing: 0.8px; }
