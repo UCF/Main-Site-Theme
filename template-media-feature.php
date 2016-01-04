@@ -83,7 +83,7 @@
 		}
 
 		.page-media-header {
-			background: url('//placehold.it/1600x900') center center no-repeat;
+			background: url('//placehold.it/1600x550') center center no-repeat;
 			background-size: cover;
 		}
 
