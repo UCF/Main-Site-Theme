@@ -9,24 +9,25 @@
 
 #contentcol {
   margin-bottom: 40px;
+  text-align: center;
 }
 
 #contentcol h1 {
-  font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
-  font-size: 70px;
+/*  font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
+  font-size: 350px;
   font-style: normal;
   font-weight: 800;
-  letter-spacing: -.02em;
-  line-height: .9;
-  margin-bottom: 20px;
+  letter-spacing: -.04em;
+  line-height: .9;*/
+  margin-bottom: 35px;
   margin-top: 10px;
 }
 
-@media (max-width: 767px) {
+/*@media (max-width: 767px) {
   #contentcol h1 {
-    font-size: 45px;
+    font-size: 30vw;
   }
-}
+}*/
 
 #contentcol p {
   font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B";
@@ -50,11 +51,11 @@
 #contentcol .search-field {
   box-sizing: border-box;
   font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B";
-  font-size: 18px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
-  height: 55px;
-  line-height: 55px;
+  height: 65px;
+  line-height: 65px;
   padding-right: 60px;
   position: relative;
   text-indent: 10px;
@@ -64,7 +65,7 @@
 
 @media (max-width: 767px) {
   #contentcol .search-field {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -73,7 +74,7 @@
   border: 0 solid transparent;
   bottom: 0;
   box-sizing: border-box;
-  height: 55px;
+  height: 65px;
   overflow: hidden;
   position: absolute;
   right: 0;
@@ -89,9 +90,9 @@
   display: block;
   font-family: "FontAwesome";
   font-size: 28px;
-  height: 55px;
+  height: 65px;
   left: 0;
-  line-height: 55px;
+  line-height: 65px;
   position: absolute;
   text-align: center;
   text-indent: 0;
@@ -102,10 +103,4 @@
 
 #contentcol .search-submit:hover:before {
   color: #08c;
-}
-
-#contentcol .img-knightro {
-  box-sizing: border-box;
-  padding-left: 60px;
-  padding-top: 55px;
 }

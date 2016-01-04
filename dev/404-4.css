@@ -3,29 +3,36 @@
   padding-top: 15px;
 }
 
-.subpage .page-content #page_title {
+.subpage .page-content #page_title h1 {
+  color: #fc0;
+  font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
+  font-size: 110px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  line-height: .85;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+@media (max-width: 979px) {
+  .subpage .page-content #page_title h1 {
+    font-size: 90px;
+  }
+}
+
+@media (max-width: 767px) {
+  .subpage .page-content #page_title h1 {
+    font-size: 38px;
+  }
+}
+
+#weather_bug {
   display: none;
 }
 
 #contentcol {
   margin-bottom: 40px;
-}
-
-#contentcol h1 {
-  font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
-  font-size: 70px;
-  font-style: normal;
-  font-weight: 800;
-  letter-spacing: -.02em;
-  line-height: .9;
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
-
-@media (max-width: 767px) {
-  #contentcol h1 {
-    font-size: 45px;
-  }
 }
 
 #contentcol p {
@@ -104,8 +111,7 @@
   color: #08c;
 }
 
-#contentcol .img-knightro {
+#contentcol .img-pegasus {
   box-sizing: border-box;
   padding-left: 60px;
-  padding-top: 55px;
 }

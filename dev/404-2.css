@@ -1,3 +1,16 @@
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+#header-menu li a {
+  color: #fff;
+}
+
+#header-menu li.last a {
+  color: #000;
+}
+
 .subpage .page-content #page_title {
   border-bottom: 0 solid transparent;
   padding-top: 15px;
@@ -12,6 +25,7 @@
 }
 
 #contentcol h1 {
+  color: #fff;
   font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
   font-size: 70px;
   font-style: normal;
@@ -104,8 +118,7 @@
   color: #08c;
 }
 
-#contentcol .img-knightro {
+#contentcol .img-rocket {
   box-sizing: border-box;
-  padding-left: 60px;
-  padding-top: 55px;
+  padding-left: 90px;
 }

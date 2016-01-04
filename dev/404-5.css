@@ -11,7 +11,28 @@
   margin-bottom: 40px;
 }
 
+#contentcol .knightro-bg {
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  min-height: 450px;
+  padding-bottom: 30px;
+}
+
+@media (max-width: 979px) {
+  #contentcol .knightro-bg {
+    background-size: 370px auto;
+  }
+}
+
+@media (max-width: 767px) {
+  #contentcol .knightro-bg {
+    background-image: none !important;
+    min-height: 0;
+  }
+}
+
 #contentcol h1 {
+  color: #fc0;
   font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
   font-size: 70px;
   font-style: normal;
@@ -24,7 +45,7 @@
 
 @media (max-width: 767px) {
   #contentcol h1 {
-    font-size: 45px;
+    font-size: 36px;
   }
 }
 
