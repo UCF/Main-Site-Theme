@@ -7,7 +7,7 @@ else {
 	// Progressively show script progress. Increase max execution time.
 	ob_implicit_flush(true);
 	ob_end_flush();
-	ini_set('max_execution_time', 180); // Allow up to 3 minutes for execution
+	ini_set('max_execution_time', 240); // Allow up to 4 minutes for execution
 
 	/**
 	 * Grab the search service JSON feed for all programs and undergraduate
@@ -81,6 +81,21 @@ else {
 			return $str;
 		}
 
+		/**
+		 * Replaces a string with a given replacement in $replacement_list.
+		 * $replacement_list is expected to be an associative array with simple
+		 * string key/value pairs, e.g.:
+		 *
+		 * $replacement_list = array( 'Wrong name' => 'Correct name', ... );
+		 **/
+		function replace_name( $str, $replacement_list ) {
+			$val = $str;
+			if ( isset( $replacement_list[$str] ) ) {
+				$val = $replacement_list[$str];
+			}
+			return $val;
+		}
+
 
 		/**
 		 * Loop through each search service result.  Create a structured set of post data
@@ -108,6 +123,13 @@ else {
 					$program->type = ucwords($program->type);
 					break;
 			}
+
+			// Fix known college name anomalies.
+			$program->college_name = replace_name( $program->college_name, array(
+				'College of Hospitality Management' => 'Rosen College of Hospitality Management',
+				'Office of Undergraduate Studies' => 'College of Undergraduate Studies',
+				'College of Nondegree' => ''
+			) );
 
 			// Prepare contacts data for insertion as a delimited string:
 			if ($program->contacts) {
