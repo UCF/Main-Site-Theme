@@ -1,6 +1,6 @@
 <?php
-// Require DEGREE_SECRET_KEY const
-if (DEGREE_SECRET_KEY !== get_theme_option('feedback_email_key')) {
+// Require DEGREE_SECRET_KEY const and admin level capabilities
+if ( DEGREE_SECRET_KEY !== get_theme_option( 'feedback_email_key' ) || !current_user_can( 'manage_options' ) ) {
 	die('You do not have access to this page.');
 }
 else {
