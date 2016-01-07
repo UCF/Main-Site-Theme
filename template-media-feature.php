@@ -102,7 +102,7 @@
 }
 
 .page-media-header {
-	background: url('http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2015/12/Screen-Shot-2016-01-07-at-11.00.12-AM.png') center center no-repeat;
+	background: url('http://www.ucf.edu/impact/files/2015/09/impact-video-still.jpg') center center no-repeat;
 	background-size: cover;
 }
 
