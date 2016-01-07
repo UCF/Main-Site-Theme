@@ -184,13 +184,13 @@
 
 			// triggered if autoplay fails
 			var removeVideoTimeout = setTimeout(function () {
-				body.removeChild(v);
+				$(v).remove();
 			}, 50);
 
 			// triggered if autoplay works
 			v.addEventListener('play', function () {
 				clearTimeout(removeVideoTimeout);
-				body.removeChild(v);
+				$(v).remove();
 				createHeaderVideo();
 			}, false);
 		}
