@@ -139,23 +139,28 @@
 			var mp4 = $videoPlaceholder.attr('data-mp4'),
 				webm = $videoPlaceholder.attr('data-webm'),
 				ogg = $videoPlaceholder.attr('data-ogg'),
-				$video = $('<video autoplay preload muted class="fade"></video>');
+				video = '<video autoplay muted class="fade">';
 
 			// Stop now/display nothing if no video sources are provided
 			if (!mp4 && !webm && !ogg) {
 				return;
 			}
 
+			// Concatenate html strings instead of using append--IE9 has issues
+			// with this for whatever reason
 			if (mp4) {
-				$video.append('<source src="'+ mp4 +'" type="video/mp4">');
+				video += '<source src="'+ mp4 +'" type="video/mp4">';
 			}
 			if (webm) {
-				$video.append('<source src="'+ webm +'" type="video/webm">');
+				video += '<source src="'+ webm +'" type="video/webm">';
 			}
 			if (ogg) {
-				$video.append('<source src="'+ ogg +'" type="video/ogg">');
+				video += '<source src="'+ ogg +'" type="video/ogg">';
 			}
 
+			video += '</video>';
+
+			$video = $(video);
 			$videoPlaceholder.replaceWith($video);
 
 			// Fade in video when it's ready to play
@@ -195,7 +200,7 @@
 			}, false);
 		}
 
-		autoPlayOrBust();
+		$(document).ready(autoPlayOrBust);
 	</script>
 </div>
 <div class="container">
