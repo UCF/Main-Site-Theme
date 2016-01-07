@@ -113,7 +113,7 @@
 	<div class="page-media-header">
 
 		<video autoplay preload muted>
-			<source src="http://www.quirksmode.org/html5/videos/big_buck_bunny.mp4" type="video/mp4">
+			<source src="http://www.ucf.edu/impact/files/2015/12/impact-video-mp4.mp4" type="video/mp4">
 		</video>
 
 		<div class="page-media-container">
