@@ -102,7 +102,7 @@
 }
 
 .page-media-header {
-	background: url('http://www.ucf.edu/impact/files/2015/09/impact-video-still.jpg') center center no-repeat;
+	background: url('http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2015/12/Screen-Shot-2016-01-07-at-11.00.12-AM.png') center center no-repeat;
 	background-size: cover;
 }
 
@@ -139,7 +139,7 @@
 			var mp4 = $videoPlaceholder.attr('data-mp4'),
 				webm = $videoPlaceholder.attr('data-webm'),
 				ogg = $videoPlaceholder.attr('data-ogg'),
-				video = '<video autoplay muted class="fade">';
+				video = '<video autoplay muted>';
 
 			// Stop now/display nothing if no video sources are provided
 			if (!mp4 && !webm && !ogg) {
@@ -162,11 +162,6 @@
 
 			$video = $(video);
 			$videoPlaceholder.replaceWith($video);
-
-			// Fade in video when it's ready to play
-			$video.on('play', function() {
-				$video.addClass('in');
-			});
 		}
 
 		// Test if video auto plays
