@@ -201,8 +201,6 @@ Config::$custom_taxonomies = array(
 	'DegreeKeywords'
 );
 
-Config::$body_classes = array('default');
-
 
 /*
  * Edge Side Includes (ESI) are directives that tell Varnish to include some other

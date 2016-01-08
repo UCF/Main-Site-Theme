@@ -89,7 +89,7 @@
 		</script>
 
 	</head>
-	<body class="<?=body_classes()?><?=!is_front_page() ? ' subpage': ''?>">
+	<body <?php echo body_class(); ?>>
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">

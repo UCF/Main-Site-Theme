@@ -1550,6 +1550,75 @@ var customChart = function($) {
   }
 };
 
+var mediaTemplateVideo = function($) {
+  var $videoPlaceholder = $('#header-video-placeholder');
+
+  // Generate a video tag for the header background
+  function createHeaderVideo() {
+    var mp4 = $videoPlaceholder.attr('data-mp4'),
+      webm = $videoPlaceholder.attr('data-webm'),
+      ogg = $videoPlaceholder.attr('data-ogg'),
+      video = '<video autoplay muted>';
+
+    // Stop now/display nothing if no video sources are provided
+    if (!mp4 && !webm && !ogg) {
+      return;
+    }
+
+    // Concatenate html strings instead of using append--IE9 has issues
+    // with this for whatever reason
+    if (mp4) {
+      video += '<source src="'+ mp4 +'" type="video/mp4">';
+    }
+    if (webm) {
+      video += '<source src="'+ webm +'" type="video/webm">';
+    }
+    if (ogg) {
+      video += '<source src="'+ ogg +'" type="video/ogg">';
+    }
+
+    video += '</video>';
+
+    $video = $(video);
+    $videoPlaceholder.replaceWith($video);
+  }
+
+  // Test if video auto plays
+  function autoPlayOrBust() {
+
+    var mp4 = 'data:video/mp4;base64,AAAAFGZ0eXBNU05WAAACAE1TTlYAAAOUbW9vdgAAAGxtdmhkAAAAAM9ghv7PYIb+AAACWAAACu8AAQAAAQAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAnh0cmFrAAAAXHRraGQAAAAHz2CG/s9ghv4AAAABAAAAAAAACu8AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAABAAAAAAFAAAAA4AAAAAAHgbWRpYQAAACBtZGhkAAAAAM9ghv7PYIb+AAALuAAANq8AAAAAAAAAIWhkbHIAAAAAbWhscnZpZGVBVlMgAAAAAAABAB4AAAABl21pbmYAAAAUdm1oZAAAAAAAAAAAAAAAAAAAACRkaW5mAAAAHGRyZWYAAAAAAAAAAQAAAAx1cmwgAAAAAQAAAVdzdGJsAAAAp3N0c2QAAAAAAAAAAQAAAJdhdmMxAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAFAAOABIAAAASAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGP//AAAAEmNvbHJuY2xjAAEAAQABAAAAL2F2Y0MBTUAz/+EAGGdNQDOadCk/LgIgAAADACAAAAMA0eMGVAEABGjuPIAAAAAYc3R0cwAAAAAAAAABAAAADgAAA+gAAAAUc3RzcwAAAAAAAAABAAAAAQAAABxzdHNjAAAAAAAAAAEAAAABAAAADgAAAAEAAABMc3RzegAAAAAAAAAAAAAADgAAAE8AAAAOAAAADQAAAA0AAAANAAAADQAAAA0AAAANAAAADQAAAA0AAAANAAAADQAAAA4AAAAOAAAAFHN0Y28AAAAAAAAAAQAAA7AAAAA0dXVpZFVTTVQh0k/Ou4hpXPrJx0AAAAAcTVREVAABABIAAAAKVcQAAAAAAAEAAAAAAAAAqHV1aWRVU01UIdJPzruIaVz6ycdAAAAAkE1URFQABAAMAAAAC1XEAAACHAAeAAAABBXHAAEAQQBWAFMAIABNAGUAZABpAGEAAAAqAAAAASoOAAEAZABlAHQAZQBjAHQAXwBhAHUAdABvAHAAbABhAHkAAAAyAAAAA1XEAAEAMgAwADAANQBtAGUALwAwADcALwAwADYAMAA2ACAAMwA6ADUAOgAwAAABA21kYXQAAAAYZ01AM5p0KT8uAiAAAAMAIAAAAwDR4wZUAAAABGjuPIAAAAAnZYiAIAAR//eBLT+oL1eA2Nlb/edvwWZflzEVLlhlXtJvSAEGRA3ZAAAACkGaAQCyJ/8AFBAAAAAJQZoCATP/AOmBAAAACUGaAwGz/wDpgAAAAAlBmgQCM/8A6YEAAAAJQZoFArP/AOmBAAAACUGaBgMz/wDpgQAAAAlBmgcDs/8A6YEAAAAJQZoIBDP/AOmAAAAACUGaCQSz/wDpgAAAAAlBmgoFM/8A6YEAAAAJQZoLBbP/AOmAAAAACkGaDAYyJ/8AFBAAAAAKQZoNBrIv/4cMeQ==',
+      body = document.getElementsByTagName('body')[0];
+
+    var v = document.createElement('video');
+    v.src = mp4;
+    v.autoplay = true;
+    v.volume = 0;
+    v.style.visibility = 'hidden';
+
+    body.appendChild(v);
+
+    // video.play() seems to be required for it to work,
+    // despite the video having an autoplay attribute.
+    v.play();
+
+    // triggered if autoplay fails
+    var removeVideoTimeout = setTimeout(function () {
+      $(v).remove();
+    }, 50);
+
+    // triggered if autoplay works
+    v.addEventListener('play', function () {
+      clearTimeout(removeVideoTimeout);
+      $(v).remove();
+      createHeaderVideo();
+    }, false);
+  }
+
+  if ($videoPlaceholder.length()) {
+    autoPlayOrBust();
+  }
+}
+
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
     Webcom.slideshow($);
@@ -1585,6 +1654,7 @@ if (typeof jQuery != 'undefined'){
     socialButtonTracking($);
     ariaSilenceNoscripts($);
     customChart($);
+    mediaTemplateVideo($);
 
     //devBootstrap($);
 

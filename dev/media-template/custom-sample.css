@@ -1,0 +1,19 @@
+/**
+ * Inverts the primary site nav's link color to white.
+ **/
+#header-menu li a {
+  color: #fff;
+}
+
+#header-menu li.last a {
+  color: #000;
+}
+
+/**
+ * Uncomment for full-width inner contents in the media header.
+ * 20px left/right spacing is added to emulate Bootstrap gutters by default.
+ **/
+/*.page-media-container {
+  left: 0;
+  right: 0;
+}*/

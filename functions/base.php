@@ -11,7 +11,6 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
-		$body_classes      = array(), # Body classes
 		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
 		$custom_taxonomies = array(), # Custom taxonomies to register
@@ -1132,7 +1131,7 @@ function slug($s, $spaces='-'){
  * HEADER AND FOOTER FUNCTIONS
  *
  * Functions that generate output for the header and footer, including
- * <meta>, <link>, page titles, body classes and Facebook OpenGraph
+ * <meta>, <link>, page titles, and Facebook OpenGraph
  * stuff.
  *
  ***************************************************************************/
@@ -1362,15 +1361,6 @@ function header_title( $title, $separator ) {
 	return $doctitle;
 }
 add_filter( 'wp_title', 'header_title', 10, 2 );
-
-
-/**
- * Returns string to use for value of class attribute on body tag
- **/
-function body_classes(){
-	$classes = Config::$body_classes;
-	return implode(' ', $classes);
-}
 
 
 
