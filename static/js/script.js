@@ -1614,7 +1614,7 @@ var mediaTemplateVideo = function($) {
     }, false);
   }
 
-  if ($videoPlaceholder.length()) {
+  if ($videoPlaceholder.length) {
     autoPlayOrBust();
   }
 }

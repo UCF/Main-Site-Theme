@@ -99,8 +99,21 @@ a.repeatable-remove { margin-left: 10px !important; }
 .postbox-container#postbox-container-2 #slider-slides select { float: left; clear: both; }
 .postbox-container#postbox-container-2 #slider-slides input[type="checkbox"] { margin-right: 5px; }
 
-.postbox-container#postbox-container-2 #slider-slides .description { float: left; }
+/*.postbox-container#postbox-container-2 #slider-slides .description { float: left; }*/
 
 th#cta {
   width: 20%;
+}
+
+
+.meta-file-preview img {
+  max-width: 100%;
+}
+
+.meta-file-edit {
+  margin-top: 10px !important;
+}
+
+.meta-file-edit.hidden {
+  display: none !important;
 }
