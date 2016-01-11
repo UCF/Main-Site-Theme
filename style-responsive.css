@@ -717,8 +717,10 @@
 
   /* 404 template */
   #page-not-found #contentcol .knightro-bg {
-    background-image: none;
+    background-size: 100px auto;
+    box-sizing: border-box;
     min-height: 0;
+    padding-right: 120px;
   }
 
   #page-not-found #contentcol h1 {
@@ -826,6 +828,13 @@
 		-moz-column-count: 1; /* Firefox */
 		column-count: 1;
 	}
+
+
+  /* 404 template */
+  #page-not-found #contentcol .knightro-bg {
+    background-image: none;
+    padding-right: 0;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {

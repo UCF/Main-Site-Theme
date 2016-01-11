@@ -35,7 +35,6 @@
 							</div>
 						</div>
 					</div>
-					<img class="visible-phone" src="<?php echo THEME_IMG_URL; ?>/knightro-searching.jpg">
 				</div>
 				<?php endif; ?>
 			</article>
