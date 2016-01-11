@@ -1056,6 +1056,66 @@ class Slider extends CustomPostType {
 					'page'    => 'centerpiece',
 					'context'  => 'normal',
 					'priority' => 'default',
+					'fields' => array(
+						array(
+							'name' => __('Slide Title'),
+							'id'   => $prefix . 'slide_title',
+							'type' => 'text',
+							'desc' => '',
+						),
+						array(
+							'name' => __('Type of Content'),
+							'id'   => $prefix . 'type_of_content',
+							'type' => 'radio',
+							'desc' => '',
+							'choices' => array(
+								'Image' => 'image',
+								'Video' => 'video'
+							),
+						),
+						array(
+							'name' => __('Slide Image'),
+							'id' => $prefix . 'slide_image',
+							'desc' => 'Recommended image size is 940x338px. Larger images may be cropped.',
+							'type' => 'file'
+						),
+						array(
+							'name' => __('Slide Video'),
+							'id'   => $prefix . 'slide_video',
+							'type' => 'textarea',
+							'desc' => 'Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]',
+						),
+						array(
+							'name' => __('Slide Video Thumbnail'),
+							'id' => $prefix . 'slide_video_thumb',
+							'desc' => 'If you\'re using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.',
+							'type' => 'file'
+						),
+						array(
+							'name' => __('Slide Content'),
+							'id'   => $prefix . 'slide_content',
+							'type' => 'textarea',
+							'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
+						),
+						array(
+							'name' => __('Slide Links To'),
+							'id'   => $prefix . 'slide_links_to',
+							'type' => 'text',
+							'desc' => '(Optional)',
+						),
+						array(
+							'name' => __('Open Link in a New Window'),
+							'id'   => $prefix . 'slide_link_newtab',
+							'type' => 'checkbox',
+							'desc' => 'Check this box if you want the slide link to open in a new window or tab. To open the link within the same window, leave this unchecked.',
+						),
+						array(
+							'name' => __('Slide Duration'),
+							'id'   => $prefix . 'slide_duration',
+							'type' => 'text',
+							'desc' => '(Optional) Specify how long, in seconds, the slide should appear before transitioning. Default is 6 seconds.',
+						),
+					)
 				);
 			$single_slide_count =
 				// Single Slide Count (and order):
@@ -1110,142 +1170,16 @@ class Slider extends CustomPostType {
 	}
 
 	/**
-	 * Function used for defining single slide meta values; primarily
-	 * for use in saving meta data (_save_meta_data(), functions/base.php).
-	 **/
-	public static function get_single_slide_meta() {
-		$single_slide_meta = array(
-				array(
-					'id'  => 'ss_slide_title',
-					'val' => $_POST['ss_slide_title'],
-				),
-				array(
-					'id'  => 'ss_type_of_content',
-					'val' => $_POST['ss_type_of_content'],
-				),
-				array(
-					'id'  => 'ss_slide_image',
-					'val' => $_POST['ss_slide_image'],
-				),
-				array(
-					'id'  => 'ss_slide_video',
-					'val' => $_POST['ss_slide_video'],
-				),
-				array(
-					'id'  => 'ss_slide_video_thumb',
-					'val' => $_POST['ss_slide_video_thumb'],
-				),
-				array(
-					'id'  => 'ss_slide_content',
-					'val' => $_POST['ss_slide_content'],
-				),
-				array(
-					'id'  => 'ss_slide_links_to',
-					'val' => $_POST['ss_slide_links_to'],
-				),
-				array(
-					'id'  => 'ss_slide_link_newtab',
-					'val' => $_POST['ss_slide_link_newtab'],
-				),
-				array(
-					'id'  => 'ss_slide_duration',
-					'val' => $_POST['ss_slide_duration'],
-				),
-			);
-		return $single_slide_meta;
-	}
-
-
-	/**
 	 * Display fields for single slides:
 	 **/
 	public function display_slide_meta_fields( $post, $s ) {
-		$slide_title		 		= get_post_meta( $post->ID, 'ss_slide_title', TRUE );
-		$slide_content_type 		= get_post_meta( $post->ID, 'ss_type_of_content', TRUE );
-		$slide_image				= get_post_meta( $post->ID, 'ss_slide_image', TRUE );
-		$slide_video				= get_post_meta( $post->ID, 'ss_slide_video', TRUE );
-		$slide_video_thumb			= get_post_meta( $post->ID, 'ss_slide_video_thumb', TRUE );
-		$slide_content				= get_post_meta( $post->ID, 'ss_slide_content', TRUE );
-		$slide_links_to				= get_post_meta( $post->ID, 'ss_slide_links_to', TRUE );
-		$slide_link_newtab			= get_post_meta( $post->ID, 'ss_slide_link_newtab', TRUE );
-		$slide_duration				= get_post_meta( $post->ID, 'ss_slide_duration', TRUE );
-
-		$fields = array(
-			array(
-				'name' => __('Slide Title'),
-				'id'   => 'ss_slide_title['. $s .']',
-				'type' => 'text',
-				'desc' => '',
-				'value' => $slide_title[$s]
-			),
-			array(
-				'name' => __('Type of Content'),
-				'id'   => 'ss_type_of_content['. $s .']',
-				'type' => 'radio',
-				'desc' => '',
-				'choices' => array(
-					'Image' => 'image',
-					'Video' => 'video'
-				),
-				'value' => $slide_content_type[$s]
-			),
-			array(
-				'post_id' => $post->ID,
-				'name' => __('Slide Image'),
-				'id' => 'ss_slide_image['. $s .']',
-				'value' => $slide_image[$s],
-				'desc' => 'Recommended image size is 940x338px. Larger images may be cropped.',
-				'type' => 'file'
-			),
-			array(
-				'name' => __('Slide Video'),
-				'id'   => 'ss_slide_video['. $s .']',
-				'type' => 'textarea',
-				'desc' => 'Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]',
-				'value' => $slide_video[$s]
-			),
-			array(
-				'post_id' => $post->ID,
-				'name' => __('Slide Video Thumbnail'),
-				'id' => 'ss_slide_video_thumb['. $s .']',
-				'value' => $slide_video_thumb[$s],
-				'desc' => 'If you\'re using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.',
-				'type' => 'file'
-			),
-			array(
-				'name' => __('Slide Content'),
-				'id'   => 'ss_slide_content['. $s .']',
-				'type' => 'textarea',
-				'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
-				'value' => $slide_content[$s]
-			),
-			array(
-				'name' => __('Slide Links To'),
-				'id'   => 'ss_slide_links_to['. $s .']',
-				'type' => 'text',
-				'desc' => '(Optional)',
-				'value' => $slide_links_to[$s]
-			),
-			array(
-				'name' => __('Open Link in a New Window'),
-				'id'   => 'ss_slide_link_newtab['. $s .']',
-				'type' => 'checkbox',
-				'desc' => 'Check this box if you want the slide link to open in a new window or tab. To open the link within the same window, leave this unchecked.',
-				'value' => $slide_link_newtab[$s]
-			),
-			array(
-				'name' => __('Slide Duration'),
-				'id'   => 'ss_slide_duration['. $s .']',
-				'type' => 'text',
-				'desc' => '(Optional) Specify how long, in seconds, the slide should appear before transitioning. Default is 6 seconds.',
-				'value' => $slide_duration[$s]
-			),
-		);
+		$all_fields = $this->metabox();
+		$fields = $all_fields['slider-all-slides']['fields'];
 
 		ob_start();
 	?>
 
-	<li class="custom_repeatable postbox">
+	<li class="custom_repeatable postbox" id="custom_repeatable_ss_<?php echo $s; ?>">
 
 		<div class="handlediv" title="Click to toggle"> </div>
 			<h3 class="hndle">
@@ -1256,6 +1190,19 @@ class Slider extends CustomPostType {
 			<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce('nonce-content'); ?>">
 			<?php
 			foreach ( $fields as $field ) {
+				// Massage serialized data: Add post_id for 'file' fields
+				if ( $field['type'] == 'file' ) {
+					$field['post_id'] = $post->ID;
+				}
+
+				// Massage serialized data: Update 'value' to reference value at index
+				$meta = get_post_meta( $post->ID, $field['id'], true );
+				$field['value'] = $meta[$s];
+
+				// Massage serialized data: Update 'id' to reference data by index
+				$field['id'] = $field['id'] . '['. $s .']';
+
+				// Finally, display the field
 				display_meta_box_field( $post->ID, $field );
 			}
 			?>
@@ -1294,6 +1241,9 @@ class Slider extends CustomPostType {
 					$i = 0;
 					echo $this->display_slide_meta_fields( $post, $i );
 				}
+
+				// Create a cloning template
+				echo $this->display_slide_meta_fields( $post, 99999 );
 				?>
 				<a class="repeatable-add button-primary" href="#">Add New Slide</a><br>
 			</ul>

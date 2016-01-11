@@ -171,7 +171,10 @@ WebcomAdmin.centerpieceAdmin = function($){
 	// i.e. if we're on a slider edit screen:
 	if ($('#poststuff #slider-slides-settings-basic').length > 0) {
 
-		var slide_count_widget 	 = $('#slider-slides-settings-count');
+		var slide_count_widget 	 = $('#slider-slides-settings-count'),
+        clonePlaceholderID = '99999',
+        clonePlaceholderRegex = new RegExp(clonePlaceholderID),
+        $cloneTemplate = $('#custom_repeatable_ss_' + clonePlaceholderID).detach();
 
 		// Admin panel adjustments for Centerpiece previews
 		// Autosaving Centerpieces kills serialized data (which we use for slide images/
@@ -316,43 +319,51 @@ WebcomAdmin.centerpieceAdmin = function($){
 
 		// Add/remove Slide button functionality:
 		$('.repeatable-add').click(function() {
-			field = $(this).prev('li').clone(true);
-			fieldLocation = $(this).prev('li');
+      var field = $cloneTemplate.clone(true),
+			    fieldLocation = $(this).prev('li');
 
 			// Get the highest ID 'widget' number to prevent duplicate IDs after sorting:
 			var widget_numbers = new Array();
 			$('input[name^="ss_type_of_content["]').each(function() {
 				// get number by trimming the input ID
-				var inputID =  ($(this).attr('name').split('ss_type_of_content[')[1])
-				var inputID = inputID.substr(0, inputID.length - 1);
-				widget_numbers[widget_numbers.length] = inputID;
+				var inputID = ($(this).attr('name').split('ss_type_of_content[')[1]);
+				inputID = inputID.substr(0, inputID.length - 1);
+        if (inputID !== clonePlaceholderID) {
+          widget_numbers[widget_numbers.length] = inputID;
+        }
 			});
 			var highest_num = Math.max.apply(Math, widget_numbers);
 
 			// Update 'name' attributes
-			$('textarea, input[type="text"], input[type="select"], input[type="file"]', field).val('').attr('name', function(index, name) {
-				return name.replace(/(\d+)/, highest_num + 1);
-			});
-			$('input[type="checkbox"], input[type="radio"]', field).attr('name', function(index, name) {
-				return name.replace(/(\d+)/, highest_num + 1);
-			});
+			$('textarea, input[type="text"], input[type="select"]', field)
+        .val('')
+        .attr('name', function(index, name) {
+				  return name.replace(clonePlaceholderRegex, highest_num + 1);
+			  });
+			$('input[type="checkbox"], input[type="radio"]', field)
+        .attr('name', function(index, name) {
+				  return name.replace(clonePlaceholderRegex, highest_num + 1);
+			  });
 			// Update 'for' attributes (in <label>)
 			$('label', field).val('').attr('for', function(index, forval) {
-				return forval.replace(/(\d+)/, highest_num + 1);
+				return forval.replace(clonePlaceholderRegex, highest_num + 1);
 			});
 			// Update 'id' attributes
-			$('textarea, input[type="text"], input[type="select"], input[type="checkbox"], input[type="radio"]', field).attr('id', function(index, idval) {
-				return idval.replace(/(\d+)/, highest_num + 1);
-			});
+			$('textarea, input[type="text"], input[type="select"], input[type="checkbox"], input[type="radio"]', field)
+        .add(field)
+        .attr('id', function(index, idval) {
+				  return idval.replace(clonePlaceholderRegex, highest_num + 1);
+			  });
 			// Remove other existing data from previous slide:
-			$('input[type="radio"]', field).removeAttr('checked');
-			$('label[for^="ss_slide_image["]', field).parent('th').next('td').children('a, br:nth-child(2)').remove();
+			// $('input[type="radio"]', field).removeAttr('checked');
+			// $('label[for^="ss_slide_image["]', field).parent('th').next('td').children('a, br:nth-child(2)').remove();
 
-			field.fadeIn().insertAfter(fieldLocation, $(this).prev('li'));
+			field.insertAfter(fieldLocation);
 
 			hideOnlyRemoveBtn();
 			return false;
 		});
+
 		$('.repeatable-remove').click(function(){
 			$(this).parent().remove();
 			hideOnlyRemoveBtn();

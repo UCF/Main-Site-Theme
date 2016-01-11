@@ -1655,22 +1655,12 @@ function _save_meta_data($post_id, $meta_box){
 	 **/
 	if (post_type_exists('centerpiece') && post_type($post_id) == 'centerpiece') {
 
-		// All other standard meta box data for Sliders:
+		// All meta box data for Sliders:
 		foreach ( $meta_box as $single_meta_box ) {
 			if ( $single_meta_box['fields'] ) {
 				foreach ( $single_meta_box['fields'] as $field ) {
 					save_default( $post_id, $field );
 				}
-			}
-		}
-
-		// Single slide meta data:
-		if ( $_POST['ss_type_of_content'] ) { // If a type of content is set for the slide, save its content:
-
-			$single_slide_meta = Slider::get_single_slide_meta();
-
-			foreach ( $single_slide_meta as $field ) {
-				save_default( $post_id, $field );
 			}
 		}
 	}

@@ -101,6 +101,8 @@ a.repeatable-remove { margin-left: 10px !important; }
 
 /*.postbox-container#postbox-container-2 #slider-slides .description { float: left; }*/
 
+#custom_repeatable_ss_99999 { display: none; }
+
 th#cta {
   width: 20%;
 }
