@@ -3,32 +3,41 @@
 
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="page-not-found">
-		<div id="page_title" class="span12">
-			<h1 class="span9">Page Not Found</h1>
-			<?php esi_include('output_weather_data','span3'); ?>
-		</div>
 		<div id="contentcol" class="span12">
 			<article role="main">
 				<?php
-					$page = get_page_by_title('404');
-					if($page){
-						$content = $page->post_content;
-						$content = apply_filters('the_content', $content);
-						$content = str_replace(']]>', ']]>', $content);
-					}
+				$page = get_page_by_title( '404' );
+				if ( $page ){
+					$content = trim( apply_filters( 'the_content', $page->post_content ) );
+				}
 				?>
-				<?php if($content):?>
-				<?=$content?>
-				<?php else:?>
-					<div class="row">
-						<div class="span12">
-							<p>&nbsp;</p>
-							<p class="lead">The page you were looking for appears to have been moved, deleted or does not exist. Try using the navigation or search above or browse to the <a href="<?php echo get_home_url(); ?>">home page</a>.</p>
+				<?php if ( $content ): ?>
+					<?php echo $content; ?>
+				<?php else: ?>
+					<div class="knightro-bg" style="background-image: url('<?php echo THEME_IMG_URL; ?>/knightro-searching.jpg');">
+						<div class="row">
+							<div class="span8">
+								<h1>Page Not Found</h1>
+								<p class="lead">Don't give in to despair, your quest continues here...</p>
+								<p>Try double-checking the spelling of the address you requested, or search using the field below:</p>
+								<form class="search-form" action="https://google.cc.ucf.edu/search">
+									<label class="sr-only" for="q">Search UCF</label>
+									<input id="q-404" class="search-field" name="q" type="text" placeholder="Tell us more about what you're looking for...">
+									<input name="client" type="hidden" value="UCF_Main">
+									<input name="proxystylesheet" type="hidden" value="UCF_Main">
+									<button class="search-submit">Search</button>
+								</form>
+								<p>
+									<small>
+										If you feel you've reached this page in error, please let us know: <a href="http://www.ucf.edu/feedback">www.ucf.edu/feedback</a>.
+									</small>
+								</p>
+							</div>
 						</div>
 					</div>
+					<img class="visible-phone" src="<?php echo THEME_IMG_URL; ?>/knightro-searching.jpg">
 				</div>
-
-				<?php endif;?>
+				<?php endif; ?>
 			</article>
 		</div>
 	</div>
