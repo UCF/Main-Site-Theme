@@ -1748,8 +1748,7 @@ li.tagit-new input {
 }
 
 #page-not-found #contentcol .knightro-bg {
-  background-position: top right;
-  background-repeat: no-repeat;
+  background: url('static/img/knightro-searching.jpg') top right no-repeat;
   min-height: 470px;
 }
 

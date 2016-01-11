@@ -14,7 +14,7 @@
 				<?php if ( $content ): ?>
 					<?php echo $content; ?>
 				<?php else: ?>
-					<div class="knightro-bg" style="background-image: url('<?php echo THEME_IMG_URL; ?>/knightro-searching.jpg');">
+					<div class="knightro-bg">
 						<div class="row">
 							<div class="span8">
 								<h1>Page Not Found</h1>

@@ -717,7 +717,7 @@
 
   /* 404 template */
   #page-not-found #contentcol .knightro-bg {
-    background-image: none !important;
+    background-image: none;
     min-height: 0;
   }
 
