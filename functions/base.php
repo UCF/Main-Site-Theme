@@ -1797,14 +1797,8 @@ function _save_meta_data($post_id, $meta_box){
 	 **/
 	else {
 		foreach ($meta_box['fields'] as $field) {
-			switch ($field['type']){
-				case 'file':
-					save_file($post_id, $field);
-					break;
-				default:
-					save_default($post_id, $field);
-					break;
-			}
+			save_default($post_id, $field);
+			break;
 		}
 	}
 }
