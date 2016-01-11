@@ -1606,6 +1606,7 @@ function save_file($post_id, $field){
 		$file               = $_FILES[$field['id']];
 		$uploaded_file      = wp_handle_upload($file, $override);
 
+
 		# TODO: Pass reason for error back to frontend
 		if ($uploaded_file['error']){return;}
 
@@ -1682,7 +1683,6 @@ function _save_meta_data($post_id, $meta_box){
 	 *
 	 **/
 	if (post_type_exists('centerpiece') && post_type($post_id) == 'centerpiece') {
-
 		// All other standard meta box data for Sliders:
 		foreach ($meta_box as $single_meta_box) {
 			if ($single_meta_box['fields']) {
@@ -1698,7 +1698,6 @@ function _save_meta_data($post_id, $meta_box){
 				}
 			}
 		}
-
 		// Single slide meta data:
 		if ($_POST['ss_type_of_content']) { // If a type of content is set for the slide, save its content:
 
@@ -1796,9 +1795,8 @@ function _save_meta_data($post_id, $meta_box){
 	 * Standard meta field save (for all other post types):
 	 **/
 	else {
-		foreach ($meta_box['fields'] as $field) {
-			save_default($post_id, $field);
-			break;
+		foreach ( $meta_box['fields'] as $field ) {
+			save_default( $post_id, $field );
 		}
 	}
 }
