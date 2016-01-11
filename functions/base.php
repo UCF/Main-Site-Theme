@@ -1598,6 +1598,32 @@ function show_meta_boxes($post){
 	return _show_meta_boxes($post, $meta_box);
 }
 
+function save_file($post_id, $field){
+	$file_uploaded = @!empty($_FILES[$field['id']]);
+	if ($file_uploaded){
+		require_once(ABSPATH.'wp-admin/includes/file.php');
+		$override['action'] = 'editpost';
+		$file               = $_FILES[$field['id']];
+		$uploaded_file      = wp_handle_upload($file, $override);
+		# TODO: Pass reason for error back to frontend
+		if ($uploaded_file['error']){return;}
+		$attachment = array(
+			'post_title'     => $file['name'],
+			'post_content'   => '',
+			'post_type'      => 'attachment',
+			'post_parent'    => $post_id,
+			'post_mime_type' => $uploaded_file['type'],
+			'guid'           => $uploaded_file['url'],
+		);
+		$id = wp_insert_attachment($attachment, $uploaded_file['file'], $post_id);
+		wp_update_attachment_metadata(
+			$id,
+			wp_generate_attachment_metadata($id, $uploaded_file['file'])
+		);
+		update_post_meta($post_id, $field['id'], $id);
+	}
+}
+
 function save_default($post_id, $field){
 	$old = get_post_meta($post_id, $field['id'], true);
 	$new = $_POST[$field['id']];
