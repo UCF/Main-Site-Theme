@@ -477,7 +477,13 @@ class Page extends CustomPostType {
 
 	public function fields() {
 		$prefix = $this->options('name').'_';
-		return array(
+		return array(/*
+			array(
+				'name' => 'Hide Lower Section',
+				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
+				'id'   => $prefix.'hide_fold',
+				'type' => 'checkbox',
+			),*/
 				array(
 					'name' => 'Stylesheet',
 					'desc' => '',
@@ -597,36 +603,6 @@ class Page extends CustomPostType {
 					'name' => '<strong>Right Sidebar:</strong> Embed Widget 3',
 					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
 					'id' => $prefix.'widget_r_embed3',
-					'type' => 'textarea',
-				),
-				array(
-					'name' => '<strong>Media Template:</strong> Header Background Image',
-					'desc' => '(Required) Image to use at the top of pages using the media template.  Used when no header videos are specified, or as a fallback for browsers that don\'t support video playback.',
-					'id' => $prefix.'media_img',
-					'type' => 'file',
-				),
-				array(
-					'name' => '<strong>Media Template:</strong> Header Video - MP4',
-					'desc' => 'Video to use at the top of pages using the media template.',
-					'id' => $prefix.'media_mp4',
-					'type' => 'file',
-				),
-				array(
-					'name' => '<strong>Media Template:</strong> Header Video - WebM',
-					'desc' => 'Video to use at the top of pages using the media template.',
-					'id' => $prefix.'media_webm',
-					'type' => 'file',
-				),
-				array(
-					'name' => '<strong>Media Template:</strong> Header Video - OGG',
-					'desc' => 'Video to use at the top of pages using the media template.',
-					'id' => $prefix.'media_ogg',
-					'type' => 'file',
-				),
-				array(
-					'name' => '<strong>Media Template:</strong> Header Contents',
-					'desc' => '(Optional) Content displayed over the header section on pages using the media template.  Accepts HTML and shortcode content.',
-					'id' => $prefix.'media_header_content',
 					'type' => 'textarea',
 				),
 		);
@@ -1109,47 +1085,59 @@ class Slider extends CustomPostType {
 		return null;
 	}
 
-	/**
-	 * Function used for defining single slide meta values; primarily
-	 * for use in saving meta data (_save_meta_data(), functions/base.php).
-	 **/
+	/** Function used for defining single slide meta values; primarily
+	  * for use in saving meta data (_save_meta_data(), functions/base.php).
+	  * The 'type' val is just for determining which fields are file fields;
+	  * 'default' is an arbitrary name for 'anything else' which gets saved
+	  * via the save_default() function in functions/base.php. File fields
+	  * need a type of 'file' to be saved properly.
+	  **/
 	public static function get_single_slide_meta() {
 		$single_slide_meta = array(
 				array(
-					'id'  => 'ss_slide_title',
-					'val' => $_POST['ss_slide_title'],
+					'id'	=> 'ss_slide_title',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_title'],
 				),
 				array(
-					'id'  => 'ss_type_of_content',
-					'val' => $_POST['ss_type_of_content'],
+					'id'	=> 'ss_type_of_content',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_type_of_content'],
 				),
 				array(
-					'id'  => 'ss_slide_image',
-					'val' => $_POST['ss_slide_image'],
+					'id'	=> 'ss_slide_image',
+					'type'	=> 'file',
+					'val' 	=> $_POST['ss_slide_image'],
 				),
 				array(
-					'id'  => 'ss_slide_video',
-					'val' => $_POST['ss_slide_video'],
+					'id' 	=> 'ss_slide_video',
+					'type'	=> 'default',
+					'val' 	=> $_POST['ss_slide_video'],
 				),
 				array(
-					'id'  => 'ss_slide_video_thumb',
-					'val' => $_POST['ss_slide_video_thumb'],
+					'id' 	=> 'ss_slide_video_thumb',
+					'type'	=> 'file',
+					'val' 	=> $_POST['ss_slide_video_thumb'],
 				),
 				array(
-					'id'  => 'ss_slide_content',
-					'val' => $_POST['ss_slide_content'],
+					'id'	=> 'ss_slide_content',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_content'],
 				),
 				array(
-					'id'  => 'ss_slide_links_to',
-					'val' => $_POST['ss_slide_links_to'],
+					'id'	=> 'ss_slide_links_to',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_links_to'],
 				),
 				array(
-					'id'  => 'ss_slide_link_newtab',
-					'val' => $_POST['ss_slide_link_newtab'],
+					'id'	=> 'ss_slide_link_newtab',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_link_newtab'],
 				),
 				array(
-					'id'  => 'ss_slide_duration',
-					'val' => $_POST['ss_slide_duration'],
+					'id'	=> 'ss_slide_duration',
+					'type'	=> 'default',
+					'val'	=> $_POST['ss_slide_duration'],
 				),
 			);
 		return $single_slide_meta;
@@ -1157,154 +1145,296 @@ class Slider extends CustomPostType {
 
 
 	/**
-	 * Display fields for single slides:
+	  * Show meta box fields for Slider post type (generic field loop-through)
+	  * Copied from _show_meta_boxes (functions/base.php)
 	 **/
-	public function display_slide_meta_fields( $post, $s ) {
-		$slide_title		 		= get_post_meta( $post->ID, 'ss_slide_title', TRUE );
-		$slide_content_type 		= get_post_meta( $post->ID, 'ss_type_of_content', TRUE );
-		$slide_image				= get_post_meta( $post->ID, 'ss_slide_image', TRUE );
-		$slide_video				= get_post_meta( $post->ID, 'ss_slide_video', TRUE );
-		$slide_video_thumb			= get_post_meta( $post->ID, 'ss_slide_video_thumb', TRUE );
-		$slide_content				= get_post_meta( $post->ID, 'ss_slide_content', TRUE );
-		$slide_links_to				= get_post_meta( $post->ID, 'ss_slide_links_to', TRUE );
-		$slide_link_newtab			= get_post_meta( $post->ID, 'ss_slide_link_newtab', TRUE );
-		$slide_duration				= get_post_meta( $post->ID, 'ss_slide_duration', TRUE );
-
-		$fields = array(
-			array(
-				'name' => __('Slide Title'),
-				'id'   => 'ss_slide_title['. $s .']',
-				'type' => 'text',
-				'desc' => '',
-				'value' => $slide_title[$s]
-			),
-			array(
-				'name' => __('Type of Content'),
-				'id'   => 'ss_type_of_content['. $s .']',
-				'type' => 'radio',
-				'desc' => '',
-				'choices' => array(
-					'Image' => 'image',
-					'Video' => 'video'
-				),
-				'value' => $slide_content_type[$s]
-			),
-			array(
-				'post_id' => $post->ID,
-				'name' => __('Slide Image'),
-				'id' => 'ss_slide_image['. $s .']',
-				'value' => $slide_image[$s],
-				'desc' => 'Recommended image size is 940x338px. Larger images may be cropped.',
-				'type' => 'file'
-			),
-			array(
-				'name' => __('Slide Video'),
-				'id'   => 'ss_slide_video['. $s .']',
-				'type' => 'textarea',
-				'desc' => 'Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]',
-				'value' => $slide_video[$s]
-			),
-			array(
-				'post_id' => $post->ID,
-				'name' => __('Slide Video Thumbnail'),
-				'id' => 'ss_slide_video_thumb['. $s .']',
-				'value' => $slide_video_thumb[$s],
-				'desc' => 'If you\'re using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.',
-				'type' => 'file'
-			),
-			array(
-				'name' => __('Slide Content'),
-				'id'   => 'ss_slide_content['. $s .']',
-				'type' => 'textarea',
-				'desc' => '(Optional) HTML tags and WordPress shortcodes are allowed.',
-				'value' => $slide_content[$s]
-			),
-			array(
-				'name' => __('Slide Links To'),
-				'id'   => 'ss_slide_links_to['. $s .']',
-				'type' => 'text',
-				'desc' => '(Optional)',
-				'value' => $slide_links_to[$s]
-			),
-			array(
-				'name' => __('Open Link in a New Window'),
-				'id'   => 'ss_slide_link_newtab['. $s .']',
-				'type' => 'checkbox',
-				'desc' => 'Check this box if you want the slide link to open in a new window or tab. To open the link within the same window, leave this unchecked.',
-				'value' => $slide_link_newtab[$s]
-			),
-			array(
-				'name' => __('Slide Duration'),
-				'id'   => 'ss_slide_duration['. $s .']',
-				'type' => 'text',
-				'desc' => '(Optional) Specify how long, in seconds, the slide should appear before transitioning. Default is 6 seconds.',
-				'value' => $slide_duration[$s]
-			),
-		);
-
-		ob_start();
+	public static function display_meta_fields($post, $field) {
+	$current_value = get_post_meta($post->ID, $field['id'], true);
 	?>
+		<tr>
+			<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
+				<td>
+				<?php if($field['desc']):?>
+					<div class="description">
+						<?=$field['desc']?>
+					</div>
+				<?php endif;?>
 
-	<li class="custom_repeatable postbox">
+				<?php switch ($field['type']):
+					case 'text':?>
+					<input type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : $field['std']?>" />
 
-		<div class="handlediv" title="Click to toggle"> </div>
-			<h3 class="hndle">
-			<span>Slide</span>
-		</h3>
+				<?php break; case 'textarea':?>
+					<textarea name="<?=$field['id']?>" id="<?=$field['id']?>" cols="60" rows="4"><?=($current_value) ? htmlentities($current_value) : $field['std']?></textarea>
 
-		<table class="form-table">
-			<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce('nonce-content'); ?>">
-			<?php
-			foreach ( $fields as $field ) {
-				display_meta_box_field( $post->ID, $field );
-			}
-			?>
+				<?php break; case 'select':?>
+					<select name="<?=$field['id']?>" id="<?=$field['id']?>">
+						<option value=""><?=($field['default']) ? $field['default'] : '--'?></option>
+					<?php foreach ($field['options'] as $k=>$v):?>
+						<option <?=($current_value == $v) ? ' selected="selected"' : ''?> value="<?=$v?>"><?=$k?></option>
+					<?php endforeach;?>
+					</select>
 
-		</table>
-		<a class="repeatable-remove button" href="#">Remove Slide</a>
-	</li>
+				<?php break; case 'radio':?>
+					<?php foreach ($field['options'] as $k=>$v):?>
+					<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
+					<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
+					<?php endforeach;?>
 
+				<?php break; case 'checkbox':?>
+					<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
+
+				<?php break; case 'file':?>
+					<?php
+						$document_id = get_post_meta($post->ID, $field['id'], True);
+						if ($document_id){
+							$document = get_post($document_id);
+							$url      = wp_get_attachment_url($document->ID);
+						}else{
+							$document = null;
+						}
+					?>
+					<?php if($document):?>
+					<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
+					<?php endif;?>
+					<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
+
+				<?php break; case 'help':?><!-- Do nothing for help -->
+				<?php break; default:?>
+					<p class="error">Don't know how to handle field of type '<?=$field['type']?>'</p>
+				<?php break; endswitch;?>
+				<td>
+			</tr>
 	<?php
-		return ob_get_clean();
 	}
 
 
 	/**
-	 * Display all slides:
+	 * Show fields for single slides:
 	**/
-	public function display_slides( $post ) {
-		$slide_order = get_post_meta( $post->ID, 'ss_slider_slideorder', TRUE );
-		$slide_array = array();
+	public static function display_slide_meta_fields($post) {
 
-		ob_start();
-	?>
+		// Get any already-existing values for these fields:
+		$slide_title		 		= get_post_meta($post->ID, 'ss_slide_title', TRUE);
+		$slide_content_type 		= get_post_meta($post->ID, 'ss_type_of_content', TRUE);
+		$slide_image				= get_post_meta($post->ID, 'ss_slide_image', TRUE);
+		$slide_video				= get_post_meta($post->ID, 'ss_slide_video', TRUE);
+		$slide_video_thumb			= get_post_meta($post->ID, 'ss_slide_video_thumb', TRUE);
+		$slide_content				= get_post_meta($post->ID, 'ss_slide_content', TRUE);
+		$slide_links_to				= get_post_meta($post->ID, 'ss_slide_links_to', TRUE);
+		$slide_link_newtab			= get_post_meta($post->ID, 'ss_slide_link_newtab', TRUE);
+		$slide_duration				= get_post_meta($post->ID, 'ss_slide_duration', TRUE);
+		$slide_order				= get_post_meta($post->ID, 'ss_slider_slideorder', TRUE);
+
+		?>
 		<div id="ss_slides_wrapper">
 			<ul id="ss_slides_all">
 				<?php
-				// Loop through slides_array for existing slides. Else, display
-				// a single empty slide 'widget'.
-				if ( $slide_order ) {
-					$slide_array = explode( ',', $slide_order );
-					foreach ( $slide_array as $key => $s ) {
-						if ( $s !== '' ) {
-							echo $this->display_slide_meta_fields( $post, $s );
+
+					// Loop through slides_array for existing slides. Else, display
+					// a single empty slide 'widget'.
+					if ($slide_order) {
+						$slide_array = explode(",", $slide_order);
+
+						foreach ($slide_array as $s) {
+							if ($s !== '') {
+					?>
+							<li class="custom_repeatable postbox">
+
+								<div class="handlediv" title="Click to toggle"> </div>
+									<h3 class="hndle">
+									<span>Slide</span>
+								</h3>
+
+								<table class="form-table">
+								<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
+									<tr>
+										<th><label for="ss_slide_title[<?=$s?>]">Slide Title</label></th>
+										<td>
+											<input type="text" name="ss_slide_title[<?=$s?>]" id="ss_slide_title[<?=$s?>]" value="<?php ($slide_title[$s] !== '') ? print $slide_title[$s] : ''; ?>" />
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_type_of_content[<?=$s?>]">Type of Content</label></th>
+										<td>
+											<input type="radio" name="ss_type_of_content[<?=$s?>]" id="ss_type_of_content_image[<?=$s?>]" <?php ($slide_content_type[$s] == 'image') ? print 'checked="checked"' : ''; ?> value="image" />
+												<label for="ss_type_of_content_image[<?=$s?>]">Image</label>
+											<input type="radio" name="ss_type_of_content[<?=$s?>]" id="ss_type_of_content_video[<?=$s?>]" <?php ($slide_content_type[$s] == 'video') ? print 'checked="checked"' : ''; ?> value="video" />
+												<label for="ss_type_of_content_video[<?=$s?>]">Video</label>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_image[<?=$s?>]">Slide Image</label></th>
+										<td>
+											<span class="description">Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
+											<?php
+												if ($slide_image[$s]){
+													$image = get_post($slide_image[$s]);
+													$url   = wp_get_attachment_url($image->ID);
+												}else{
+													$image= null;
+												}
+											?>
+											<?php if($image):?>
+											<a href="<?=$url?>" target="_blank"><img class="slide_image" src="<?=$url?>" style="width: 400px;" /><br/><?=$image->post_title?></a><br /><br />
+											<?php endif;?>
+											<input type="file" id="file_img_<?=$post->ID?>" name="ss_slide_image[<?=$s?>]"><br />
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_video[<?=$s?>]">Slide Video</label></th>
+										<td>
+											<span class="description">Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]</span><br/>
+											<textarea name="ss_slide_video[<?=$s?>]" id="ss_slide_video[<?=$s?>]" cols="60" rows="4"><?php ($slide_video[$s] !== '') ? print $slide_video[$s] : ''; ?></textarea>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_video_thumb[<?=$s?>]">Slide Video Thumbnail</label></th>
+										<td>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
+											<?php
+												if ($slide_video_thumb[$s]){
+													$image = get_post($slide_video_thumb[$s]);
+													$url   = wp_get_attachment_url($image->ID);
+												}else{
+													$image= null;
+												}
+											?>
+											<?php if($image):?>
+											<a href="<?=$url?>" target="_blank"><img class="slide_video_thumb" src="<?=$url?>" style="width: 400px;" /><br/><?=$image->post_title?></a><br /><br />
+											<?php endif;?>
+											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$s?>]"><br />
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_content[<?=$s?>]">Slide Content</label></th>
+										<td>
+											<span class="description">(Optional) HTML tags and WordPress shortcodes are allowed.</span><br/>
+											<textarea name="ss_slide_content[<?=$s?>]" id="ss_slide_content[<?=$s?>]" cols="60" rows="4"><?php ($slide_content[$s] !== '') ? print $slide_content[$s] : ''; ?></textarea>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_links_to[<?=$s?>]">Slide Links To</label></th>
+										<td>
+											<span class="description"> (Optional)</span>
+											<input type="text" name="ss_slide_links_to[<?=$s?>]" id="ss_slide_links_to[<?=$s?>]" value="<?php ($slide_links_to[$s] !== '') ? print $slide_links_to[$s] : ''; ?>" />
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_link_newtab[<?=$s?>]">Open Link in a New Window</label></th>
+										<td>
+											<input type="checkbox" name="ss_slide_link_newtab[<?=$s?>]" id="ss_slide_link_newtab[<?=$s?>]"<?php ($slide_link_newtab[$s] == 'on') ? print 'checked="checked"' : ''; ?> /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
+										</td>
+									</tr>
+									<tr>
+										<th><label for="ss_slide_duration[<?=$s?>]">Slide Duration</label></th>
+										<td>
+											<span class="description"> (Optional) Specify how long, in seconds, the slide should appear before transitioning.  Default is 6 seconds.</span><br/>
+											<input type="text" name="ss_slide_duration[<?=$s?>]" id="ss_slide_duration[<?=$s?>]" value="<?php ($slide_duration[$s] !== '') ? print $slide_duration[$s] : ''; ?>" />
+										</td>
+									</tr>
+
+								</table>
+								<a class="repeatable-remove button" href="#">Remove Slide</a>
+							</li>
+
+					<?php
+							}
 						}
+
+					} else {
+						$i = 0;
+						?>
+						<li class="custom_repeatable postbox">
+
+							<div class="handlediv" title="Click to toggle"> </div>
+								<h3 class="hndle">
+								<span>Slide</span>
+							</h3>
+							<table class="form-table">
+							<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
+								<tr>
+									<th><label for="ss_slide_title[<?=$i?>]">Slide Title</label></th>
+									<td>
+										<input type="text" name="ss_slide_title[<?=$i?>]" id="ss_slide_title[<?=$i?>]" value="" />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_type_of_content[<?=$i?>]">Type of Content</label></th>
+									<td>
+										<input type="radio" name="ss_type_of_content[<?=$i?>]" id="ss_type_of_content_image[<?=$i?>]" value="image" />
+											<label for="ss_type_of_content_image[<?=$i?>]">Image</label>
+										<input type="radio" name="ss_type_of_content[<?=$i?>]" id="ss_type_of_content_video[<?=$i?>]" value="video" />
+											<label for="ss_type_of_content_video[<?=$i?>]">Video</label>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_image[<?=$i?>]">Slide Image</label></th>
+									<td>
+										<span class="description">Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
+										<input type="file" id="file_<?=$post->ID?>" name="ss_slide_image[<?=$i?>]"><br />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_video[<?=$i?>]">Slide Video</label></th>
+									<td>
+										<span class="description">Copy and paste your video embed code here. [video] shortcodes are also allowed, but require the parameter display="embed" in order to not use a modal window; e.g. [video name="My Video" display="embed"]</span><br/>
+										<textarea name="ss_slide_video[<?=$i?>]" id="ss_slide_video[<?=$i?>]" cols="60" rows="4"></textarea>
+									</td>
+								</tr>
+								<tr>
+										<th><label for="ss_slide_video_thumb[<?=$i?>]">Slide Video Thumbnail</label></th>
+										<td>
+											<span class="description">If you're using a video embed, add a "click to play" thumbnail here. Recommended image size is 940x338px. Larger images may be cropped.</span><br/>
+											<input type="file" id="file_vidthumb_<?=$post->ID?>" name="ss_slide_video_thumb[<?=$i?>]"><br />
+										</td>
+									</tr>
+								<tr>
+									<th><label for="ss_slide_content[<?=$i?>]">Slide Content</label></th>
+									<td>
+										<span class="description">(Optional) HTML tags and WordPress shortcodes are allowed.</span><br/>
+										<textarea name="ss_slide_content[<?=$i?>]" id="ss_slide_content[<?=$i?>]" cols="60" rows="4"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_links_to[<?=$i?>]">Slide Links To</label></th>
+									<td>
+										<span class="description"> (Optional)</span>
+										<input type="text" name="ss_slide_links_to[<?=$i?>]" id="ss_slide_links_to[<?=$i?>]" value="" />
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_link_newtab[<?=$i?>]">Open Link in a New Window</label></th>
+									<td>
+									<input type="checkbox" name="ss_slide_link_newtab[<?=$i?>]" id="ss_slide_link_newtab[<?=$i?>]" /><span class="description"> Check this box if you want the slide link to open in a new window or tab.  To open the link within the same window, leave this unchecked.</span><br/>
+									</td>
+								</tr>
+								<tr>
+									<th><label for="ss_slide_duration[<?=$i?>]">Slide Duration</label></th>
+									<td>
+										<span class="description"> (Optional) Specify how long, in seconds, the slide should appear before transitioning.  Default is 6 seconds.</span><br/>
+										<input type="text" name="ss_slide_duration[<?=$i?>]" id="ss_slide_duration[<?=$i?>]" value="" />
+									</td>
+								</tr>
+
+
+							</table>
+							<a class="repeatable-remove button" href="#">Remove Slide</a>
+						</li>
+						<?php
+
 					}
-				} else {
-					$i = 0;
-					echo $this->display_slide_meta_fields( $post, $i );
-				}
 				?>
-				<a class="repeatable-add button-primary" href="#">Add New Slide</a><br>
+						<a class="repeatable-add button-primary" href="#">Add New Slide</a><br/>
 			</ul>
+
 		</div>
-	<?php
-		return ob_get_clean();
+		<?php
 	}
 
  	// Individual slide container:
-	public function show_meta_box_slide_all( $post ) {
-		echo $this->display_slides( $post );
+	public function show_meta_box_slide_all($post) {
+		$this->display_slide_meta_fields($post);
 	}
 
 	// Slide Count:
@@ -1316,11 +1446,11 @@ class Slider extends CustomPostType {
 		// Use one nonce for Slider post:
 		?>
 		<table class="form-table">
-		<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce('nonce-content'); ?>">
+		<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce('nonce-content')?>"/>
 		<?php
-			foreach( $meta_box['fields'] as $field ) {
-				display_meta_box_field( $post->ID, $field );
-			}
+			foreach($meta_box['fields'] as $field):
+				$this->display_meta_fields($post, $field);
+			endforeach;
 		print "</table>";
 	}
 
@@ -1333,9 +1463,9 @@ class Slider extends CustomPostType {
 		?>
 		<table class="form-table">
 		<?php
-			foreach( $meta_box['fields'] as $field ) {
-				display_meta_box_field( $post->ID, $field );
-			}
+			foreach($meta_box['fields'] as $field):
+				$this->display_meta_fields($post, $field);
+			endforeach;
 		print "</table>";
 	}
 
