@@ -203,6 +203,19 @@
   #degree-single #contentcol .degree-details dd {
     width: 65%;
   }
+
+
+  /* 404 template */
+  #page-not-found #contentcol .knightro-bg {
+    background-position: center right;
+    background-size: 230px auto;
+    min-height: 450px;
+  }
+
+  #page-not-found #contentcol h1 {
+    font-size: 55px;
+  }
+
 }
 
 /* iPad fixes: */
@@ -700,6 +713,21 @@
 		float: none;
 		margin-top: 5px;
 	}
+
+
+  /* 404 template */
+  #page-not-found #contentcol .knightro-bg {
+    background-image: none;
+    min-height: 0;
+  }
+
+  #page-not-found #contentcol h1 {
+    font-size: 36px;
+  }
+
+  #page-not-found #contentcol .search-field {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 480px) {
