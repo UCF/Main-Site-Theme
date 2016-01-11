@@ -254,6 +254,14 @@ class TextareaField extends Field{
  * @author Jared Lang
  **/
 class SelectField extends ChoicesField{
+	function __construct($attr) {
+		parent::__construct( $attr );
+		if ( !isset( $this->default ) ) {
+			$this->default = '';
+		}
+		$this->choices = array( '--' => $this->default ) + $this->choices;
+	}
+
 	function input_html(){
 		ob_start();
 		?>
