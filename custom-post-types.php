@@ -477,13 +477,7 @@ class Page extends CustomPostType {
 
 	public function fields() {
 		$prefix = $this->options('name').'_';
-		return array(/*
-			array(
-				'name' => 'Hide Lower Section',
-				'desc' => 'This section normally contains the Flickr, News and Events widgets. The footer will not be hidden',
-				'id'   => $prefix.'hide_fold',
-				'type' => 'checkbox',
-			),*/
+		return array(
 				array(
 					'name' => 'Stylesheet',
 					'desc' => '',
@@ -603,6 +597,36 @@ class Page extends CustomPostType {
 					'name' => '<strong>Right Sidebar:</strong> Embed Widget 3',
 					'desc' => '(Optional) Add a custom widget in the <strong>right-hand sidebar</strong>; useful for video and publication embeds.',
 					'id' => $prefix.'widget_r_embed3',
+					'type' => 'textarea',
+				),
+				array(
+					'name' => '<strong>Media Template:</strong> Header Background Image',
+					'desc' => '(Required) Image to use at the top of pages using the media template.  Used when no header videos are specified, or as a fallback for browsers that don\'t support video playback.',
+					'id' => $prefix.'media_img',
+					'type' => 'file',
+				),
+				array(
+					'name' => '<strong>Media Template:</strong> Header Video - MP4',
+					'desc' => 'Video to use at the top of pages using the media template.',
+					'id' => $prefix.'media_mp4',
+					'type' => 'file',
+				),
+				array(
+					'name' => '<strong>Media Template:</strong> Header Video - WebM',
+					'desc' => 'Video to use at the top of pages using the media template.',
+					'id' => $prefix.'media_webm',
+					'type' => 'file',
+				),
+				array(
+					'name' => '<strong>Media Template:</strong> Header Video - OGG',
+					'desc' => 'Video to use at the top of pages using the media template.',
+					'id' => $prefix.'media_ogg',
+					'type' => 'file',
+				),
+				array(
+					'name' => '<strong>Media Template:</strong> Header Contents',
+					'desc' => '(Optional) Content displayed over the header section on pages using the media template.  Accepts HTML and shortcode content.',
+					'id' => $prefix.'media_header_content',
 					'type' => 'textarea',
 				),
 		);
