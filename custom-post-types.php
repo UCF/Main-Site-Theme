@@ -492,12 +492,6 @@ class Page extends CustomPostType {
 					'std' => 'off',
 				),
 				array(
-					'name' => 'Title',
-					'desc' => '(Optional) Substitue the page\'s title tag text. (Page title will be used if it is left blank)',
-					'id' => $prefix.'title',
-					'type' => 'text',
-				),
-				array(
 					'name' => 'Subheader',
 					'desc' => '(Optional) Display a Subheader above the page\'s content.',
 					'id' => $prefix.'subheader',
