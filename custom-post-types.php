@@ -492,12 +492,6 @@ class Page extends CustomPostType {
 					'std' => 'off',
 				),
 				array(
-					'name' => 'Title',
-					'desc' => '(Optional) Substitue the page\'s title tag text. (Page title will be used if it is left blank)',
-					'id' => $prefix.'title',
-					'type' => 'text',
-				),
-				array(
 					'name' => 'Subheader',
 					'desc' => '(Optional) Display a Subheader above the page\'s content.',
 					'id' => $prefix.'subheader',
@@ -1169,6 +1163,7 @@ class Slider extends CustomPostType {
 		return null;
 	}
 
+
 	/**
 	 * Display fields for single slides:
 	 **/
@@ -1252,7 +1247,7 @@ class Slider extends CustomPostType {
 		return ob_get_clean();
 	}
 
- 	// Individual slide container:
+	// Individual slide container:
 	public function show_meta_box_slide_all( $post ) {
 		echo $this->display_slides( $post );
 	}

@@ -254,6 +254,14 @@ class TextareaField extends Field{
  * @author Jared Lang
  **/
 class SelectField extends ChoicesField{
+	function __construct($attr) {
+		parent::__construct( $attr );
+		if ( !isset( $this->default ) ) {
+			$this->default = '';
+		}
+		$this->choices = array( '--' => $this->default ) + $this->choices;
+	}
+
 	function input_html(){
 		ob_start();
 		?>
@@ -1654,7 +1662,6 @@ function _save_meta_data($post_id, $meta_box){
 	 *
 	 **/
 	if (post_type_exists('centerpiece') && post_type($post_id) == 'centerpiece') {
-
 		// All meta box data for Sliders:
 		foreach ( $meta_box as $single_meta_box ) {
 			if ( $single_meta_box['fields'] ) {

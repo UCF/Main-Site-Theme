@@ -24,12 +24,19 @@
 		<![endif]-->
 
 		<?php
-		if ( $post->post_type == 'degree' ) {
+		// Always load webfont css for Degree posts and the 404 template.
+		if ( $post->post_type == 'degree' || is_404() ) {
 			webfont_stylesheet();
 		}
+
+		// Load webfonts if enabled by page.
 		if ( is_page() ) {
 			page_specific_webfonts( $post->ID );
-			esi_include('page_specific_stylesheet', $post->ID ); // Wrap in ESI to prevent caching of .css file
+		}
+
+		// Load page-specific css.
+		if ( is_page() || ( is_404() && $post = get_page_by_title( '404' ) ) ) {
+			esi_include( 'page_specific_stylesheet', $post->ID ); // Wrap in ESI to prevent caching of .css file
 		}
 		?>
 

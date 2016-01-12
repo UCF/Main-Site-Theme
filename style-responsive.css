@@ -203,6 +203,19 @@
   #degree-single #contentcol .degree-details dd {
     width: 65%;
   }
+
+
+  /* 404 template */
+  #page-not-found #contentcol .knightro-bg {
+    background-position: center right;
+    background-size: 230px auto;
+    min-height: 450px;
+  }
+
+  #page-not-found #contentcol h1 {
+    font-size: 55px;
+  }
+
 }
 
 /* iPad fixes: */
@@ -716,6 +729,23 @@
   .page-media-container {
     padding-top: 90px;
   }
+
+
+  /* 404 template */
+  #page-not-found #contentcol .knightro-bg {
+    background-size: 100px auto;
+    box-sizing: border-box;
+    min-height: 0;
+    padding-right: 120px;
+  }
+
+  #page-not-found #contentcol h1 {
+    font-size: 36px;
+  }
+
+  #page-not-found #contentcol .search-field {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -815,6 +845,7 @@
 		column-count: 1;
 	}
 
+
   /* Media Header Template Pages */
   .page-template-template-media-feature #header-nav-wrap {
     left: 20px; /* gutter width */
@@ -828,6 +859,13 @@
 
   .page-media-container {
     padding-top: 134px;
+  }
+
+
+  /* 404 template */
+  #page-not-found #contentcol .knightro-bg {
+    background-image: none;
+    padding-right: 0;
   }
 }
 
