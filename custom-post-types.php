@@ -1035,7 +1035,8 @@ class Slider extends CustomPostType {
 		$taxonomies     = array('');
 
 	public function fields(){
-	//
+		// define fields in metabox() method instead
+		return;
 	}
 
 	public function metabox(){
