@@ -10,10 +10,14 @@
 }
 
 /**
- * Uncomment for full-width inner contents in the media header.
- * 20px left/right spacing is added to emulate Bootstrap gutters by default.
+ * Uncomment for left/right gutters on the media header contents.
+ * By default, contents span the full width of the container.
+ *
+ * Wrap inside of a media query for mobile-specific gutter fixes.
  **/
-/*.page-media-container {
-  left: 0;
-  right: 0;
-}*/
+/*
+.page-media-container {
+  left: 20px;
+  right: 20px;
+}
+*/

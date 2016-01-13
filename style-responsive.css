@@ -717,9 +717,12 @@
 
   /* Media Header Template Pages */
   .page-media {
+    top: -96px;
+  }
+
+  .page-media-header {
     margin-left: -20px;
     margin-right: -20px;
-    top: -96px;
   }
 
   .page-media-header video {
