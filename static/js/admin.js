@@ -165,213 +165,184 @@ WebcomAdmin.themeOptions = function($){
 }
 
 
-WebcomAdmin.centerpieceAdmin = function($){
-	// Slider Meta Box Updates:
-	// (only run this code if we're on a screen with #slider-slides-settings-basic;
-	// i.e. if we're on a slider edit screen:
-	if ($('#poststuff #slider-slides-settings-basic').length > 0) {
+WebcomAdmin.centerpieceAdmin = function($) {
 
-		var slide_count_widget 	 = $('#slider-slides-settings-count'),
-        clonePlaceholderID = '99999',
-        clonePlaceholderRegex = new RegExp(clonePlaceholderID),
-        $cloneTemplate = $('#custom_repeatable_ss_' + clonePlaceholderID).detach();
+  var $slideCountWidget,
+      $slideCountInput,
+      clonePlaceholderIndex,
+      clonePlaceholderRegex,
+      $cloneTemplate,
+      $slideWrapper;
 
-		// Admin panel adjustments for Centerpiece previews
-		// Autosaving Centerpieces kills serialized data (which we use for slide images/
-		// video thumbnails), so autosaving is disabled for this post type.
-		// This adds a helpful message for users to avoid confusion.
-		if ($('#post-status-display').text().indexOf('Published') < 1) {
-			$('#save-action').prepend('<p style="text-align:left;"><strong>NOTE:</strong> To preview an unpublished Centerpiece before publishing it, make sure to save any changes as a Draft, <em>then</em> click "Preview".</p>');
-		}
+  // Get inputs whose 'type_of_content' is checked (slides with these inputs
+  // checked are considered "valid" and are the minimum requirement for saving
+  // a slide.)
+  function getValidContentTypeInputs() {
+    return $(checkedContentTypeSelector + ':checked');
+  }
 
-		// Function that shows/hides Slide widget options based on the Content Type selected:
-		var displaySlideOptions = function() {/*
-			var i = 0;
-			$('#ss_slides_all .custom_repeatable').each(function() {
-				// Create Content Type variable per generated widget:
-				var slide_content_type 		= $('input[name="ss_type_of_content['+i+']"]');
-				var slide_image_field_tr 	= $('label[for="ss_slide_image['+i+']"]').closest('tr');
-				var slide_video_field_tr	= $('label[for="ss_slide_video['+i+']"]').closest('tr');
-				var slide_links_to_field_tr = $('label[for="ss_slide_links_to['+i+']"]').closest('tr');
+  // Given an input name/CSS ID with format "ss_INPUT-NAME[INDEX]", returns the
+  // index of the slide.
+  function getIndex(attributeVal) {
+    var index = 0,
+        found = attributeVal.match(/^ss_[\w-]+\[(\d)\][\w-]*$/i);
 
-				if (slide_content_type.filter(':checked').length == 0) {
-					//alert('nothing is checked');
-					slide_image_field_tr.hide();
-					slide_video_field_tr.hide();
-				}
-				else if (slide_content_type.filter(':checked').val() == 'image') {
-					//alert('image is checked');
-					slide_video_field_tr.hide();
-					slide_image_field_tr.fadeIn();
-					slide_links_to_field_tr.fadeIn();
-				}
-				else if (slide_content_type.filter(':checked').val() == 'video') {
-					//alert('video is checked');
-					slide_image_field_tr.hide();
-					slide_links_to_field_tr.hide();
-					slide_video_field_tr.fadeIn();
-				}
-				i++;
-			});*/
-		}
+    if (found && found[1] !== 'undefined') {
+      index = found[1];
+    }
+    return parseInt(index, 10);
+  }
 
+  // Function that updates Slide Count meta value.  Based on if a Slide's
+  // Content Type is selected.
+  function updateSlideCount() {
+    var $checkedContentTypeInputs = getValidContentTypeInputs();
+    $slideCountInput.val($checkedContentTypeInputs.length);
+  }
 
-		// Function that updates Slide Count value based on if a Slide's Content Type is selected:
-		var checkSlideCount = function() {
-			if (slide_count_widget.is('hidden')) {
-				slide_count_widget.show();
-			}
+  // Update the Slide Sort Order:
+  function updateSortOrder() {
+    var sortOrder = [],
+        $checkedContentTypeInputs = getValidContentTypeInputs();
 
-			var slideCount = $('input[name^="ss_type_of_content["]:checked').length;
+    for (var i = 0; i < $checkedContentTypeInputs.length; i++) {
+      var $input = $($checkedContentTypeInputs[i]),
+          index = getIndex($input.attr('name'));
 
-			//alert('slideCount is: '+ slideCount + '; input value is: ' + $('input#ss_slider_slidecount').attr('value'));
+      sortOrder.push(index);
+    }
 
-			$("input#ss_slider_slidecount").attr('value', slideCount);
+    var orderString = sortOrder.join(',');
+    $slideOrderInput.val(orderString);
+  }
 
-			if (slide_count_widget.is('visible')) {
-				slide_count_widget.hide();
-			}
-		}
+  // If only one slide is available on the page, hide any 'Remove slide' buttons
+  function hideOnlyRemoveBtn() {
+    var $slides = $slideWrapper.find('.custom_repeatable'),
+        $removeBtns = $slides.find('.repeatable-remove');
 
+    if ($slides.length < 2) {
+      $removeBtns.hide();
+    }
+    else {
+      $removeBtns.show();
+    }
+  }
 
-		// Update the Slide Sort Order:
-		var updateSliderSortOrder = function() {
-			var sortOrder = [];
+  // Adds sorting/drag+drop functionality to individual slides.
+  function initSortableSlides() {
+    $slideWrapper
+      .sortable({
+        handle: '.hndle',
+        placeholder: 'sortable-placeholder',
+        sort: function( event, ui ) {
+          $('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
+        },
+        update: function( event, ui ) {
+          updateSortOrder();
+        },
+        tolerance: 'pointer'
+      });
+  }
 
-			$('input[name^="ss_type_of_content["]:checked').each(function() {
-				// get number by trimming the input ID
-				var inputID =  ($(this).attr('name').split('ss_type_of_content[')[1])
-				var inputID = inputID.substr(0, inputID.length - 1);
+  function slideHandleToggle(e) {
+    var $handle = $(e.target);
+    $handle
+      .siblings('.inside')
+        .toggle()
+        .end()
+      .parent()
+        .toggleClass('closed');
+  }
 
-				sortOrder[sortOrder.length] = inputID;
-			});
+  function addSlide(e) {
+    e.preventDefault();
 
-			if (slide_count_widget.is('hidden')) {
-				slide_count_widget.show();
-			}
+    var $addBtn = $(e.target),
+        $contentTypeInputs = $(checkedContentTypeSelector), // fetch ALL type_of_content inputs here, not just :checked
+        $slide = $cloneTemplate.clone(),
+        slideIndex,
+        allIndexes = [],
+        highestIndex;
 
-			var orderString = '';
-			$.each(sortOrder, function(index, value) {
-				// make sure we only have number values (i.e. only slider widgets):
-				if (!isNaN(value)) {
-					orderString += value + ",";
-				}
-			});
-			// add each value to Slide Order field value:
-			$('#ss_slider_slideorder').attr('value', orderString);
+    for (var i = 0; i < $contentTypeInputs.length; i++) {
+      var $input = $($contentTypeInputs[i]),
+          index = getIndex($input.attr('name'));
 
-			if (slide_count_widget.is('visible')) {
-				slide_count_widget.hide();
-			}
-		}
+      allIndexes.push(index);
+    }
+    highestIndex = Math.max.apply(Math, allIndexes);
+    slideIndex = highestIndex + 1;
 
-
-		// If only one slide is available on the page, hide the 'Remove slide' button for that slide:
-		var hideOnlyRemoveBtn = function() {
-			if ($('#ss_slides_all li.custom_repeatable').length < 2) {
-				$('#ss_slides_all li.custom_repeatable:first-child a.repeatable-remove').hide();
-			}
-			else {
-				$('#ss_slides_all li.custom_repeatable a.repeatable-remove').show();
-			}
-		}
-
-
-		// Sortable slides
-		$('#ss_slides_all').sortable({
-			handle      : 'h3.hndle',
-			placeholder : 'sortable-placeholder',
-			sort        : function( event, ui ) {
-				$('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
-			},
-			update		: function( event, ui ) {
-				updateSliderSortOrder();
-			},
-			tolerance   :'pointer'
-		});
-
-
-		// Toggle slide with header click
-		$('#slider_slides').delegate('.custom_repeatable .hndle', 'click', function() {
-			$(this).siblings('.inside').toggle().end().parent().toggleClass('closed');
-		});
-
-
-		// Admin onload:
-		slide_count_widget.hide();
-		checkSlideCount();
-		updateSliderSortOrder();
-		displaySlideOptions();
-		hideOnlyRemoveBtn();
-		if ($.browser.msie && $.browser.version < 8) {
-			$('a.repeatable-add').remove().appendTo('#ss_slides_all');
-		}
-
-
-		// Content Type radio button onchange:
-		$('#ss_slides_all .custom_repeatable input[name^="ss_type_of_content["]').change(function() {
-			checkSlideCount();
-			displaySlideOptions();
-			updateSliderSortOrder();
-			//alert($('input[name="ss_type_of_content[1]"]:checked').attr('value'));
-		});
-
-
-		// Add/remove Slide button functionality:
-		$('.repeatable-add').click(function() {
-      var field = $cloneTemplate.clone(true),
-			    fieldLocation = $(this).prev('li');
-
-			// Get the highest ID 'widget' number to prevent duplicate IDs after sorting:
-			var widget_numbers = new Array();
-			$('input[name^="ss_type_of_content["]').each(function() {
-				// get number by trimming the input ID
-				var inputID = ($(this).attr('name').split('ss_type_of_content[')[1]);
-				inputID = inputID.substr(0, inputID.length - 1);
-        if (inputID !== clonePlaceholderID) {
-          widget_numbers[widget_numbers.length] = inputID;
-        }
-			});
-			var highest_num = Math.max.apply(Math, widget_numbers);
-
-			// Update 'name' attributes
-			$('textarea, input[type="text"], input[type="select"]', field)
-        .val('')
-        .attr('name', function(index, name) {
-				  return name.replace(clonePlaceholderRegex, highest_num + 1);
-			  });
-			$('input[type="checkbox"], input[type="radio"]', field)
-        .attr('name', function(index, name) {
-				  return name.replace(clonePlaceholderRegex, highest_num + 1);
-			  });
-			// Update 'for' attributes (in <label>)
-			$('label', field).val('').attr('for', function(index, forval) {
-				return forval.replace(clonePlaceholderRegex, highest_num + 1);
-			});
-			// Update 'id' attributes
-			$('textarea, input[type="text"], input[type="select"], input[type="checkbox"], input[type="radio"]', field)
-        .add(field)
+    // Update slide's field attributes with new slideIndex value
+    $slide
+      .find('textarea, input')
+        .attr('name', function(index, nameval) {
+          if (nameval) {
+            return nameval.replace(clonePlaceholderRegex, slideIndex);
+          }
+        })
+        .end()
+      .find('label')
+        .attr('for', function(index, forval) {
+          if (forval) {
+            return forval.replace(clonePlaceholderRegex, slideIndex);
+          }
+        })
+        .end()
+      .find('textarea, input')
+        .addBack()
         .attr('id', function(index, idval) {
-				  return idval.replace(clonePlaceholderRegex, highest_num + 1);
-			  });
-			// Remove other existing data from previous slide:
-			// $('input[type="radio"]', field).removeAttr('checked');
-			// $('label[for^="ss_slide_image["]', field).parent('th').next('td').children('a, br:nth-child(2)').remove();
+          if (idval) {
+            return idval.replace(clonePlaceholderRegex, slideIndex);
+          }
+        });
 
-			field.insertAfter(fieldLocation);
+    // Insert the new slide
+    $slide.insertAfter($addBtn.prev('.custom_repeatable'));
 
-			hideOnlyRemoveBtn();
-			return false;
-		});
+    slideChangeEvents();
+  }
 
-		$('.repeatable-remove').click(function(){
-			$(this).parent().remove();
-			hideOnlyRemoveBtn();
-			checkSlideCount();
-			updateSliderSortOrder();
-			return false;
-		});
-	}
+  function removeSlide(e) {
+    e.preventDefault();
+
+    var $removeBtn = $(e.target);
+    $removeBtn.parent().remove();
+    slideChangeEvents();
+  }
+
+  function slideChangeEvents() {
+    updateSlideCount();
+    updateSortOrder();
+    hideOnlyRemoveBtn();
+  }
+
+  function onloadEvents() {
+    initSortableSlides();
+    $slideCountWidget.hide();
+    slideChangeEvents();
+  }
+
+  function init() {
+    $slideCountWidget = $('#slider-slides-settings-count');
+    $slideCountInput = $('#ss_slider_slidecount');
+    $slideOrderInput = $('#ss_slider_slideorder');
+    clonePlaceholderIndex = '99999';
+    clonePlaceholderRegex = new RegExp(clonePlaceholderIndex);
+    $cloneTemplate = $('#custom_repeatable_ss_' + clonePlaceholderIndex).detach();
+    $slideWrapper = $('#ss_slides_all');
+    checkedContentTypeSelector = 'input[name^="ss_type_of_content["]';
+
+    onloadEvents();
+    $slideWrapper
+      .on('click', '.custom_repeatable .hndle', slideHandleToggle)
+      .on('change', checkedContentTypeSelector, slideChangeEvents)
+      .on('click', '.repeatable-add', addSlide)
+      .on('click', '.repeatable-remove', removeSlide);
+  }
+
+  init();
 
 };
 
@@ -389,73 +360,75 @@ WebcomAdmin.subheaderAdmin = function($){
  * Mostly copied from https://codex.wordpress.org/Javascript_Reference/wp.media
  **/
 WebcomAdmin.fileUploader = function($) {
-  $('.meta-file-wrap').each(function() {
-    var frame,
-        $container = $(this),
+  var $metaBody = $('#post-body');
+
+  function addFile(e) {
+    e.preventDefault();
+
+    var $uploadBtn = $(e.target),
+        $container = $uploadBtn.parents('.meta-file-wrap'),
+        $field = $container.find('.meta-file-field'),
+        $deleteBtn = $container.find('.meta-file-delete'),
+        $previewContainer = $container.find('.meta-file-preview'),
+        frame;
+
+    // Create a new media frame
+    frame = wp.media({
+      title: 'Select or Upload a File',
+      button: {
+        text: 'Use this file'
+      },
+      multiple: false  // Set to true to allow multiple files to be selected
+    });
+
+    // When an image is selected in the media frame...
+    frame.on('select', function() {
+
+      // Get media attachment details from the frame state
+      var attachment = frame.state().get('selection').first().toJSON();
+
+      // Send the attachment URL to our custom image input field.
+      $previewContainer.html( '<img src="' + attachment.iconOrThumb + '"><br>' + attachment.filename );
+
+      // Send the attachment id to our hidden input
+      $field.val(attachment.id);
+
+      // Hide the add image link
+      $uploadBtn.addClass('hidden');
+
+      // Unhide the remove image link
+      $deleteBtn.removeClass('hidden');
+    });
+
+    // Finally, open the modal on click
+    frame.open();
+  }
+
+  function removeFile(e) {
+    e.preventDefault();
+
+    var $deleteBtn = $(e.target),
+        $container = $deleteBtn.parents('.meta-file-wrap'),
         $field = $container.find('.meta-file-field'),
         $uploadBtn = $container.find('.meta-file-upload'),
-        $deleteBtn = $container.find('.meta-file-delete'),
         $previewContainer = $container.find('.meta-file-preview');
 
-    // Add new btn click
-    $uploadBtn.on('click', function(e) {
-      e.preventDefault();
+    // Clear out the preview image
+    $previewContainer.html('No file selected.');
 
-      // If the media frame already exists, reopen it.
-      if (frame) {
-        frame.open();
-        return;
-      }
+    // Un-hide the add image link
+    $uploadBtn.removeClass('hidden');
 
-      // Create a new media frame
-      frame = wp.media({
-        title: 'Select or Upload a File',
-        button: {
-          text: 'Use this file'
-        },
-        multiple: false  // Set to true to allow multiple files to be selected
-      });
+    // Hide the delete image link
+    $deleteBtn.addClass('hidden');
 
-      // When an image is selected in the media frame...
-      frame.on('select', function() {
+    // Delete the image id from the hidden input
+    $field.val('');
+  }
 
-        // Get media attachment details from the frame state
-        var attachment = frame.state().get('selection').first().toJSON();
-
-        // Send the attachment URL to our custom image input field.
-        $previewContainer.html( '<img src="' + attachment.iconOrThumb + '"><br>' + attachment.filename );
-
-        // Send the attachment id to our hidden input
-        $field.val(attachment.id);
-
-        // Hide the add image link
-        $uploadBtn.addClass('hidden');
-
-        // Unhide the remove image link
-        $deleteBtn.removeClass('hidden');
-      });
-
-      // Finally, open the modal on click
-      frame.open();
-    });
-
-    // Delete selected btn click
-    $deleteBtn.on('click', function(e) {
-      e.preventDefault();
-
-      // Clear out the preview image
-      $previewContainer.html('No file selected.');
-
-      // Un-hide the add image link
-      $uploadBtn.removeClass('hidden');
-
-      // Hide the delete image link
-      $deleteBtn.addClass('hidden');
-
-      // Delete the image id from the hidden input
-      $field.val('');
-    });
-  });
+  $metaBody
+    .on('click', '.meta-file-upload', addFile)
+    .on('click', '.meta-file-delete', removeFile);
 };
 
 

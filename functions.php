@@ -1192,20 +1192,6 @@ add_filter('redirect_canonical', 'no_redirect_on_404');
 
 
 /**
- * Because autosaving is handled differently than standard post saving,
- * our serialized file metadata for centerpiece images gets totally lost
- * when trying to preview drafts.  We're going to disable autosaving on
- * centerpieces only to allow for previews that don't wipe this data.
- **/
-function admin_centerpiece_enqueue_scripts() {
-	if (get_post_type() == 'centerpiece') {
-		wp_dequeue_script('autosave');
-	}
-}
-add_action('admin_enqueue_scripts', 'admin_centerpiece_enqueue_scripts');
-
-
-/**
  * Disable the Yoast SEO meta box on post types that we don't need it on
  * (non-public-facing posts, i.e. Centerpieces, Subheaders...)
  **/
