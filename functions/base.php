@@ -11,7 +11,6 @@
 class ArgumentException extends Exception{}
 class Config{
 	static
-		$body_classes      = array(), # Body classes
 		$theme_settings    = array(), # Theme settings
 		$custom_post_types = array(), # Custom post types to register
 		$custom_taxonomies = array(), # Custom taxonomies to register
@@ -130,7 +129,7 @@ class Config{
  **/
 abstract class Field{
 	protected function check_for_default(){
-		if ($this->value === null){
+		if ( ( $this->value === null || $this->value === '' ) && isset( $this->default ) ) {
 			$this->value = $this->default;
 		}
 	}
@@ -184,10 +183,18 @@ abstract class Field{
  * @package default
  * @author Jared Lang
  **/
-abstract class ChoicesField extends Field{
+abstract class ChoicesField extends Field {
+	// Ensure 'default' value is added to choices if it isn't already
+	protected function add_default_to_choices() {
+		if ( isset( $this->default ) && !array_key_exists( $this->default, $this->choices ) ) {
+			$this->choices = array( $this->default => '' ) + $this->choices;
+		}
+	}
+
 	function __construct($attr){
 		$this->choices = @$attr['choices'];
-		parent::__construct($attr);
+		parent::__construct( $attr );
+		$this->add_default_to_choices();
 	}
 }
 
@@ -247,6 +254,14 @@ class TextareaField extends Field{
  * @author Jared Lang
  **/
 class SelectField extends ChoicesField{
+	function __construct($attr) {
+		parent::__construct( $attr );
+		if ( !isset( $this->default ) ) {
+			$this->default = '';
+		}
+		$this->choices = array( '--' => $this->default ) + $this->choices;
+	}
+
 	function input_html(){
 		ob_start();
 		?>
@@ -296,13 +311,75 @@ class CheckboxField extends ChoicesField{
 		ob_start();
 		?>
 		<ul class="checkbox-list">
-			<?php $i = 0; foreach($this->choices as $key=>$value): $id = htmlentities($this->id).'_'.$i++;?>
+		<?php if ( $this->choices ): ?>
+			<?php
+			$i = 0;
+			foreach( $this->choices as $key => $value ):
+				$id = htmlentities( $this->id ) . '_' . $i++;
+			?>
 			<li>
-				<input<?php if(is_array($this->value) and in_array($value, $this->value)):?> checked="checked"<?php endif;?> type="checkbox" name="<?=htmlentities($this->id)?>[]" id="<?=$id?>" value="<?=htmlentities($value)?>" />
-				<label for="<?=$id?>"><?=htmlentities($key)?></label>
+				<input <?php if ( is_array( $this->value ) and in_array( $value, $this->value ) ): ?> checked="checked"<?php endif; ?> type="checkbox" name="<?php echo htmlentities( $this->id ); ?>[]" id="<?php echo $id; ?>" value="<?php echo htmlentities( $value ); ?>">
+				<label for="<?php echo $id; ?>"><?php echo htmlentities( $key ); ?></label>
 			</li>
 			<?php endforeach;?>
+		<?php else: ?>
+			<li>
+				<input <?php if ( $this->value ): ?> checked="checked"<?php endif; ?> type="checkbox" name="<?php echo htmlentities( $this->id ); ?>" id="<?php echo $this->id; ?>">
+			</li>
+		<?php endif; ?>
 		</ul>
+		<?php
+		return ob_get_clean();
+	}
+}
+
+
+class FileField extends Field {
+	function __construct( $attr ) {
+		parent::__construct( $attr );
+		$this->post_id = isset( $attr['post_id'] ) ? $attr['post_id'] : 0;
+		$this->thumbnail = $this->get_attachment_thumbnail_src();
+	}
+
+	function get_attachment_thumbnail_src() {
+		if ( !empty( $this->value ) ) {
+			$attachment = get_post( $this->value );
+			$use_icon = wp_attachment_is_image( $this->value ) ? false : true;
+			if ( $attachment ) {
+				$src = wp_get_attachment_image_src( $this->value, 'thumbnail', $use_icon );
+				return $src[0];
+			}
+		}
+		else {
+			return false;
+		}
+	}
+
+	function input_html() {
+		$upload_link = esc_url( get_upload_iframe_src( null, $this->post_id ) );
+		ob_start();
+?>
+		<div class="meta-file-wrap">
+			<div class="meta-file-preview">
+				<?php if ( $this->thumbnail ): ?>
+					<img src="<?php echo $this->thumbnail; ?>" alt="File thumbnail"><br>
+					<?php echo basename( wp_get_attachment_url( $this->value ) ); ?>
+				<?php else: ?>
+					No file selected.
+				<?php endif; ?>
+			</div>
+
+			<p class="hide-if-no-js">
+				<a class="meta-file-upload <?php if ( !empty( $this->value ) ) { echo 'hidden'; } ?>" href="<?php echo $upload_link; ?>">
+					Add File
+				</a>
+				<a class="meta-file-delete <?php if ( empty( $this->value ) ) { echo 'hidden'; } ?>" href="#">
+					Remove File
+				</a>
+			</p>
+
+			<input class="meta-file-field" id="<?php echo htmlentities( $this->id ); ?>" name="<?php echo htmlentities( $this->id ); ?>" type="hidden" value="<?php echo htmlentities( $this->value ); ?>">
+		</div>
 		<?php
 		return ob_get_clean();
 	}
@@ -1132,7 +1209,7 @@ function slug($s, $spaces='-'){
  * HEADER AND FOOTER FUNCTIONS
  *
  * Functions that generate output for the header and footer, including
- * <meta>, <link>, page titles, body classes and Facebook OpenGraph
+ * <meta>, <link>, page titles, and Facebook OpenGraph
  * stuff.
  *
  ***************************************************************************/
@@ -1364,15 +1441,6 @@ function header_title( $title, $separator ) {
 add_filter( 'wp_title', 'header_title', 10, 2 );
 
 
-/**
- * Returns string to use for value of class attribute on body tag
- **/
-function body_classes(){
-	$classes = Config::$body_classes;
-	return implode(' ', $classes);
-}
-
-
 
 
 /***************************************************************************
@@ -1528,6 +1596,7 @@ function save_file($post_id, $field){
 		$file               = $_FILES[$field['id']];
 		$uploaded_file      = wp_handle_upload($file, $override);
 
+
 		# TODO: Pass reason for error back to frontend
 		if ($uploaded_file['error']){return;}
 
@@ -1586,7 +1655,7 @@ function _save_meta_data($post_id, $meta_box){
 	}
 
 	// check autosave
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || isset( $_REQUEST['bulk_edit'] ) ) {
 		return $post_id;
 	}
 
@@ -1604,7 +1673,6 @@ function _save_meta_data($post_id, $meta_box){
 	 *
 	 **/
 	if (post_type_exists('centerpiece') && post_type($post_id) == 'centerpiece') {
-
 		// All other standard meta box data for Sliders:
 		foreach ($meta_box as $single_meta_box) {
 			if ($single_meta_box['fields']) {
@@ -1620,7 +1688,6 @@ function _save_meta_data($post_id, $meta_box){
 				}
 			}
 		}
-
 		// Single slide meta data:
 		if ($_POST['ss_type_of_content']) { // If a type of content is set for the slide, save its content:
 
@@ -1718,95 +1785,100 @@ function _save_meta_data($post_id, $meta_box){
 	 * Standard meta field save (for all other post types):
 	 **/
 	else {
-		foreach ($meta_box['fields'] as $field) {
-			switch ($field['type']){
-				case 'file':
-					save_file($post_id, $field);
-					break;
-				default:
-					save_default($post_id, $field);
-					break;
-			}
+		foreach ( $meta_box['fields'] as $field ) {
+			save_default( $post_id, $field );
 		}
 	}
 }
+
+/**
+ * Displays meta box fields with current or default values.
+ * */
+function display_meta_box_field( $post_id, $field ) {
+	$field_obj = null;
+	if ( !isset( $field['value'] ) ) {
+		$field['value'] = get_post_meta( $post_id, $field['id'], true );
+	}
+
+	// Fix inconsistencies between CPT field array keys and Field obj property names
+	if ( isset( $field['desc'] ) ) {
+		$field['description'] = $field['desc'];
+		unset( $field['desc'] );
+	}
+	if ( isset( $field['options'] ) ) {
+		$field['choices'] = $field['options'];
+		unset( $field['options'] );
+	}
+
+	switch ( $field['type'] ) {
+	case 'text':
+		$field_obj = new TextField( $field );
+		break;
+	case 'textarea':
+		$field_obj = new TextareaField( $field );
+		break;
+	case 'select':
+		$field_obj = new SelectField( $field );
+		break;
+	case 'multiselect':
+		$field_obj = new MultiselectField( $field );
+		break;
+	case 'radio':
+		$field_obj = new RadioField( $field );
+		break;
+	case 'checkbox':
+		$field_obj = new CheckboxField( $field );
+		break;
+	case 'file':
+		$field['post_id'] = $post_id;
+		$field_obj = new FileField( $field );
+		break;
+	default:
+		break;
+	}
+
+	$markup = '';
+
+	if ( $field_obj ) {
+		ob_start();
+?>
+		<tr>
+			<th><?php echo $field_obj->label_html(); ?></th>
+			<td>
+				<?php echo $field_obj->description_html(); ?>
+				<?php echo $field_obj->input_html(); ?>
+			</td>
+		</tr>
+	<?php
+		$markup = ob_get_clean();
+	}
+	else {
+		$markup = '<tr><th></th><td>Don\'t know how to handle field of type '. $field_type .'</td></tr>';
+	}
+
+	echo $markup;
+}
+
 
 /**
  * Outputs the html for the fields defined for a given post and metabox.
  *
  * @return void
  * @author Jared Lang
- **/
-function _show_meta_boxes($post, $meta_box) {
-	?>
-	<input type="hidden" name="meta_box_nonce" value="<?=wp_create_nonce(basename(__FILE__))?>"/>
+ * */
+function _show_meta_boxes( $post, $meta_box ) {
+?>
+	<input type="hidden" name="meta_box_nonce" value="<?php echo wp_create_nonce( basename( __FILE__ ) )?>">
 	<table class="form-table">
-	<?php
-	foreach($meta_box['fields'] as $field):
-
-		$current_value = get_post_meta($post->ID, $field['id'], true);?>
-		<tr>
-			<th><label for="<?=$field['id']?>"><?=$field['name']?></label></th>
-			<td>
-			<?php if($field['desc']):?>
-				<div class="description">
-					<?=$field['desc']?>
-				</div>
-			<?php endif;?>
-
-			<?php switch ($field['type']):
-				case 'text':?>
-				<input type="text" name="<?=$field['id']?>" id="<?=$field['id']?>" value="<?=($current_value) ? htmlentities($current_value) : $field['std']?>" />
-
-			<?php break; case 'textarea':?>
-				<textarea name="<?=$field['id']?>" id="<?=$field['id']?>" cols="60" rows="4"><?=($current_value) ? esc_textarea($current_value) : esc_textarea($field['std'])?></textarea>
-
-			<?php break; case 'select':?>
-				<select name="<?=$field['id']?>" id="<?=$field['id']?>">
-					<option value=""><?=($field['default']) ? $field['default'] : '--'?></option>
-				<?php foreach ($field['options'] as $k=>$v):?>
-					<option <?=($current_value == $v) ? ' selected="selected"' : ''?> value="<?=$v?>"><?=$k?></option>
-				<?php endforeach;?>
-				</select>
-
-			<?php break; case 'radio':?>
-				<?php foreach ($field['options'] as $k=>$v):?>
-				<label for="<?=$field['id']?>_<?=slug($k, '_')?>"><?=$k?></label>
-				<input type="radio" name="<?=$field['id']?>" id="<?=$field['id']?>_<?=slug($k, '_')?>" value="<?=$v?>"<?=($current_value == $v) ? ' checked="checked"' : ''?> />
-				<?php endforeach;?>
-
-			<?php break; case 'checkbox':?>
-				<input type="checkbox" name="<?=$field['id']?>" id="<?=$field['id']?>"<?=($current_value) ? ' checked="checked"' : ''?> />
-
-			<?php break; case 'file':?>
-				<?php
-					$document_id = get_post_meta($post->ID, $field['id'], True);
-					if ($document_id){
-						$document = get_post($document_id);
-						$url      = wp_get_attachment_url($document->ID);
-					}else{
-						$document = null;
-					}
-				?>
-				<?php if($document):?>
-				<a href="<?=$url?>"><?=$document->post_title?></a><br /><br />
-				<?php endif;?>
-				<input type="file" id="file_<?=$post->ID?>" name="<?=$field['id']?>"><br />
-
-			<?php break; case 'help':?><!-- Do nothing for help -->
-			<?php break; default:?>
-				<p class="error">Don't know how to handle field of type '<?=$field['type']?>'</p>
-			<?php break; endswitch;?>
-			<td>
-		</tr>
-	<?php endforeach; ?>
+<?php
+	foreach ( $meta_box['fields'] as $field ) {
+		display_meta_box_field( $post->ID, $field );
+	}
+?>
 	</table>
-
-	<?php if($meta_box['helptxt']):?>
-	<p><?=$meta_box['helptxt']?></p>
-	<?php endif;?>
-	<?php
+<?php
 }
+
 
 function init_sessions() {
 	// If there is no 'session_id' (if a PHP Session not already started)

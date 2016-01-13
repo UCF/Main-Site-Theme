@@ -104,3 +104,16 @@ a.repeatable-remove { margin-left: 10px !important; }
 th#cta {
   width: 20%;
 }
+
+
+.meta-file-preview img {
+  max-width: 100%;
+}
+
+.meta-file-edit {
+  margin-top: 10px !important;
+}
+
+.meta-file-edit.hidden {
+  display: none !important;
+}

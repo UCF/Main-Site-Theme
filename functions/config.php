@@ -201,8 +201,6 @@ Config::$custom_taxonomies = array(
 	'DegreeKeywords'
 );
 
-Config::$body_classes = array('default');
-
 
 /*
  * Edge Side Includes (ESI) are directives that tell Varnish to include some other
@@ -414,7 +412,7 @@ Config::$theme_settings = array(
 			'name'        => 'Enable Google Search',
 			'id'          => THEME_OPTIONS_NAME.'[enable_google]',
 			'description' => 'Enable to use the google search appliance to power the search functionality.',
-			'default'     => 1,
+			'default'     => 'On',
 			'choices'     => array(
 				'On'  => 1,
 				'Off' => 0,
@@ -441,7 +439,7 @@ Config::$theme_settings = array(
 			'name'        => 'Enable Edge Side Includes (ESI)',
 			'id'          => THEME_OPTIONS_NAME.'[enable_esi]',
 			'description' => 'Replace specified content with Edge Side Includes (ESI) to be processed by Varnish.',
-			'default'     => 0,
+			'default'     => 'Off',
 			'choices'     => array(
 				'On'  => 1,
 				'Off' => 0,
@@ -527,7 +525,7 @@ Config::$theme_settings = array(
 			'name'        => 'Enable Responsiveness',
 			'id'          => THEME_OPTIONS_NAME.'[bootstrap_enable_responsive]',
 			'description' => 'Turn on responsive styles provided by the Twitter Bootstrap framework.  This setting should be decided upon before building out subpages, etc. to ensure content is designed to shrink down appropriately.  Turning this off will enable the single 940px-wide Bootstrap layout.  Note that turning this option off does NOT disable Javascript that performs actions based on the current browser width.',
-			'default'     => 1,
+			'default'     => 'On',
 			'choices'     => array(
 				'On'  => 1,
 				'Off' => 0,
@@ -574,7 +572,7 @@ if ( !is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
 			'name'        => 'Enable OpenGraph',
 			'id'          => THEME_OPTIONS_NAME.'[enable_og]',
 			'description' => 'Turn on the opengraph meta information used by Facebook.',
-			'default'     => 1,
+			'default'     => 'On',
 			'choices'     => array(
 				'On'  => 1,
 				'Off' => 0,

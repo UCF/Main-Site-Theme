@@ -189,3 +189,24 @@ add_filter('mce_buttons_2', 'editor_format_options');
  * Remove paragraph tag from excerpts
  **/
 remove_filter('the_excerpt', 'wpautop');
+
+
+/**
+ * Enqueue the scripts and css necessary for the WP Media Uploader on
+ * all admin pages
+ * */
+function enqueue_wpmedia_throughout_admin() {
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_media();
+}
+add_action( 'admin_enqueue_scripts', 'enqueue_wpmedia_throughout_admin' );
+
+
+/**
+ * Add 'iconOrThumb' value to js-based attachment objects (for wp.media)
+ * */
+function add_icon_or_thumb_to_attachmentjs( $response, $attachment, $meta ) {
+	$response['iconOrThumb'] = wp_attachment_is_image( $attachment->ID ) ? $response['sizes']['thumbnail']['url'] : $response['icon'];
+	return $response;
+}
+add_filter( 'wp_prepare_attachment_for_js', 'add_icon_or_thumb_to_attachmentjs', 10, 3 );
