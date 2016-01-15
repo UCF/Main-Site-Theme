@@ -233,7 +233,7 @@ WebcomAdmin.centerpieceAdmin = function($) {
   function initSortableSlides() {
     $slideWrapper
       .sortable({
-        handle: '.hndle',
+        handle: '.meta-handle',
         placeholder: 'sortable-placeholder',
         sort: function( event, ui ) {
           $('.sortable-placeholder').height( $(this).find('.ui-sortable-helper').height() );
@@ -246,13 +246,12 @@ WebcomAdmin.centerpieceAdmin = function($) {
   }
 
   function slideHandleToggle(e) {
-    var $handle = $(e.target);
-    $handle
-      .siblings('.inside')
-        .toggle()
-        .end()
-      .parent()
-        .toggleClass('closed');
+    e.preventDefault();
+
+    var $handle = $(e.target),
+        $parent = $handle.parent('.custom_repeatable');
+
+    $parent.toggleClass('closed');
   }
 
   function addSlide(e) {
@@ -336,7 +335,7 @@ WebcomAdmin.centerpieceAdmin = function($) {
 
     onloadEvents();
     $slideWrapper
-      .on('click', '.custom_repeatable .hndle', slideHandleToggle)
+      .on('click', '.custom_repeatable .meta-handle', slideHandleToggle)
       .on('change', checkedContentTypeSelector, slideChangeEvents)
       .on('click', '.repeatable-add', addSlide)
       .on('click', '.repeatable-remove', removeSlide);

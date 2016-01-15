@@ -1176,10 +1176,9 @@ class Slider extends CustomPostType {
 	?>
 
 	<li class="custom_repeatable postbox" id="custom_repeatable_ss_<?php echo $s; ?>">
-
-		<div class="handlediv" title="Click to toggle"> </div>
-			<h3 class="hndle">
+		<h3 class="meta-handle ui-sortable-handle">
 			<span>Slide</span>
+			<span class="toggle-indicator"></span>
 		</h3>
 
 		<table class="form-table">
