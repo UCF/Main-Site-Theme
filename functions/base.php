@@ -344,9 +344,9 @@ class FileField extends Field {
 	function get_attachment_thumbnail_src() {
 		if ( !empty( $this->value ) ) {
 			$attachment = get_post( $this->value );
-			$use_thumb = wp_attachment_is_image( $this->value ) ? false : true;
+			$use_icon = wp_attachment_is_image( $this->value ) ? false : true;
 			if ( $attachment ) {
-				$src = wp_get_attachment_image_src( $this->value, 'thumbnail', $use_thumb );
+				$src = wp_get_attachment_image_src( $this->value, 'thumbnail', $use_icon );
 				return $src[0];
 			}
 		}
