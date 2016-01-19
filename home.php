@@ -41,7 +41,7 @@
 					<?=apply_filters('the_content', get_theme_option('home_desc'))?>
 				</aside>
 			</div>
-			<div class="col-md-6 col-sm-6 offset1" role="navigation">
+			<div class="col-md-6 col-sm-6 col-md-offset-1 col-sm-offset-1" role="navigation">
 				<h3>Colleges</h3>
 				<?=wp_nav_menu(array(
 					'theme_location' => 'ucf-colleges',

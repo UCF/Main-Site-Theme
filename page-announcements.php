@@ -290,7 +290,7 @@ else {
 								<?php (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'col-md-4 col-sm-4', 2) : print '<p>No upcoming announcements found.</p>'; ?>
 						</div>
 
-						<div class="col-md-3 col-sm-3 offset1" id="ongoing-twocol">
+						<div class="col-md-3 col-sm-3 col-md-offset-1 col-sm-offset-1" id="ongoing-twocol">
 							<h2 id="ongoing-header">Ongoing Announcements</h2>
 							<?php (!empty($ongoing)) ? print_announcements($ongoing, 'list') : print '<p>No ongoing announcements found.</p>'; ?>
 						</div>
