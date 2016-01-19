@@ -1,0 +1,18 @@
+{
+  "name": "UCF-Main-Site-Theme",
+  "version": "2.0.0",
+  "homepage": "https://github.com/UCF/Main-Site-Theme",
+  "authors": [
+    "UCF Web Communications"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "static/components"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.6"
+  }
+}

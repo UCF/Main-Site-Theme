@@ -603,8 +603,9 @@ Config::$links = array(
  **/
 Config::$styles = array(
 	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
+	THEME_CSS_URL.'/style.min.css',
 	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
-	THEME_STATIC_URL.'/fonts/font-awesome/css/font-awesome.min.css',
+	THEME_STATIC_URL.'/fonts/font-awesome/css/font-awesome.min.css'
 );
 
 // Default bootstrap responsive styles
