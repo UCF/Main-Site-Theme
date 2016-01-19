@@ -72,7 +72,7 @@ get_header(); the_post(); ?>
 					</div>
 
 					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
-						<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
+						<a class="btn btn-default" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
 					</div>
 				</div>
 			</div>

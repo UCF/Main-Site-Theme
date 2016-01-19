@@ -117,7 +117,7 @@ function sc_publication($attr, $content=null){
 		<p class="pub-desc"><?=$pub->post_content?></p>
 		<div class="modal hide fade" id="pub-modal-<?=$pub->ID?>" role="dialog" aria-labelledby="<?=$pub->post_title?>" aria-hidden="true">
 			<iframe src="<?=$url?>" style="width:100% !important; height:100% !important;" scrolling="no"></iframe>
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
+			<a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
 		</div>
 	</div>
 
@@ -517,8 +517,8 @@ function sc_post_type_search($params=array(), $content='') {
 		<div class="post-type-search-results "></div>
 		<? if($params['show_sorting']) { ?>
 		<div class="btn-group post-type-search-sorting">
-			<button class="btn<?if($params['default_sorting'] == 'term') echo ' active';?>"><span class="glyphicon glyphicon-list-alt"></span></button>
-			<button class="btn<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><span class="glyphicon glyphicon-font"></span></button>
+			<button class="btn btn-default<?if($params['default_sorting'] == 'term') echo ' active';?>"><span class="glyphicon glyphicon-list-alt"></span></button>
+			<button class="btn btn-default<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><span class="glyphicon glyphicon-font"></span></button>
 		</div>
 		<? } ?>
 	<?
@@ -783,7 +783,7 @@ function sc_phonebook_search($attrs) {
 		<div class="control-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span> Search</button>
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
 				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 			</div>
 		</div>
@@ -984,7 +984,7 @@ function gf_login_html($error = false) {
 				<div id="auth-form-items">
 					<label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input>
 					<label for="password">Password</label><input name="password" id="password" type="password"></input>
-					<input name="submit-auth" class="btn" id="submit-auth" type="submit" value="Submit" />
+					<input name="submit-auth" class="btn btn-default" id="submit-auth" type="submit" value="Submit" />
 				</div>
 			</div>
 		</form>

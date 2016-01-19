@@ -215,9 +215,9 @@ else {
 					<div class="col-md-4 col-sm-4" id="filter_wrap">
 						<label for="filter">Filter Results by...</label>
 						<div class="btn-group" id="filter" data-toggle="buttons-radio">
-							<button type="button" id="filter_audience" class="btn <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">Audience</button>
-							<button type="button" id="filter_keyword" class="btn <?php if ($keywordval) { ?>active<?php } ?>">Keyword</button>
-							<button type="button" id="filter_time" class="btn <?php if ($timeval) { ?>active<?php } ?>">Time</button>
+							<button type="button" id="filter_audience" class="btn btn-default <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">Audience</button>
+							<button type="button" id="filter_keyword" class="btn btn-default <?php if ($keywordval) { ?>active<?php } ?>">Keyword</button>
+							<button type="button" id="filter_time" class="btn btn-default <?php if ($timeval) { ?>active<?php } ?>">Time</button>
 						</div>
 					</div>
 
@@ -257,7 +257,7 @@ else {
 					</div>
 
 					<div class="col-md-1">
-						<input type="submit" class="btn" value="View" id="filter_update">
+						<input type="submit" class="btn btn-default" value="View" id="filter_update">
 					</div>
 					</form>
 					<div class="col-md-3 col-sm-3" id="addnew_wrap">
