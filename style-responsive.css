@@ -567,7 +567,7 @@
   }
 
   #degree-search-top .degree-result-count,
-  #degree-search-top .degree-search-sort-options.visible-phone {
+  #degree-search-top .degree-search-sort-options.visible-xs {
     box-sizing: border-box;
     display: table-cell !important;
     float: none;
@@ -622,7 +622,7 @@
     text-align: left;
   }
   #degree-search-content .degree-details span {
-    display: inline !important; /* !important necessary to override visible-phone 'inherit' */
+    display: inline !important; /* !important necessary to override visible-xs 'inherit' */
   }
   #degree-search-content .degree-program-type,
   #degree-search-content .degree-credits-count {

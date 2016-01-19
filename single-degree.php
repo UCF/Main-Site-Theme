@@ -79,7 +79,7 @@
 					</div>
 				</div>
 
-				<div class="mobile-degree-cta visible-phone">
+				<div class="mobile-degree-cta visible-xs">
 					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-success">
 						View Catalog
 					</a>
@@ -117,7 +117,7 @@
 
 			<!-- Sidebar content -->
 
-			<div class="hidden-phone">
+			<div class="hidden-xs">
 				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-success">
 					View Catalog
 				</a>

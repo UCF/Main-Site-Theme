@@ -2076,10 +2076,10 @@ function get_degree_search_listitem_markup( $degree, $program_alias, $program_na
 					<?php echo $degree->post_title; ?>
 				</span>
 				<span class="degree-details">
-					<span class="degree-program-type visible-phone">
+					<span class="degree-program-type visible-xs">
 						<?php echo ( !empty( $program_alias ) ) ? $program_alias : $program_name; ?>
 					</span>
-					<span class="visible-phone degree-details-separator">&verbar;</span>
+					<span class="visible-xs degree-details-separator">&verbar;</span>
 					<span class="degree-credits-count">
 					<?php if ( $degree->degree_hours ): ?>
 						<span class="number <?php echo $program_slug; ?>"><?php echo $degree->degree_hours; ?></span> credit hours

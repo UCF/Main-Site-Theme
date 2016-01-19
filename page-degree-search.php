@@ -58,7 +58,7 @@ get_header(); the_post(); ?>
 						<?php echo get_degree_search_result_phrase( $data['count'], $params ); ?>
 					</h2>
 
-					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
+					<div class="degree-search-sort-inner degree-search-sort-options hidden-xs">
 						<fieldset>
 							<legend class="sr-only">Sort Results</legend>
 							<strong class="degree-search-sort-label radio inline">Sort by:</strong>
@@ -71,7 +71,7 @@ get_header(); the_post(); ?>
 						</fieldset>
 					</div>
 
-					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
+					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-xs">
 						<a class="btn btn-default" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
 					</div>
 				</div>
@@ -109,11 +109,11 @@ get_header(); the_post(); ?>
 				<fieldset>
 					<legend class="sr-only">Filter Results</legend>
 
-					<div class="visible-phone clearfix degree-mobile-actions">
+					<div class="visible-xs clearfix degree-mobile-actions">
 						<a class="btn btn-default pull-left" id="mobile-filter-reset">Reset All</a>
 						<a class="btn btn-primary pull-right" id="mobile-filter-done" href="#">Done</a>
 					</div>
-					<div class="degree-search-sort visible-phone clearfix">
+					<div class="degree-search-sort visible-xs clearfix">
 						<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
 						<select id="sort-by" class="pull-right">
 							<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
