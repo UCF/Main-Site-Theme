@@ -32,7 +32,7 @@ get_header(); the_post(); ?>
 				<?php the_content(); ?>
 
 				<noscript>
-					<div class="alert alert-error">
+					<div class="alert alert-danger">
 						<strong>Heads up:</strong> This page requires JavaScript to be enabled to work properly.  Please re-enable JavaScript in your browser and reload the page.
 					</div>
 				</noscript>

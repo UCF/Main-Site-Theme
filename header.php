@@ -104,7 +104,7 @@
 					<div class="alert-icon general"></div>
 				</div>
 				<div class="col-md-10 col-sm-10 alert-wrap">
-					<div class="alert alert-error alert-block">
+					<div class="alert alert-danger alert-block">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h2>
 							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">

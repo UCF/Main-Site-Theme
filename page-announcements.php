@@ -267,7 +267,7 @@ else {
 
 				<?php the_content();?>
 
-				<?php if ($error !== '') { print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
+				<?php if ($error !== '') { print '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
 
 				<?php
 					if ($announcements == NULL) {

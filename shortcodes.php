@@ -973,7 +973,7 @@ function gf_login_html($error = false) {
 		<form method="post" id="auth-form" action="<?=$pageURL; ?>">
 			<div class="wrapper">
 				<?php if ($error):?>
-				<div class="alert alert-error" id="login_error">
+				<div class="alert alert-danger" id="login_error">
 					<strong>Error:</strong>
 					<p>Oops! Your NID or password is invalid or the authentication service was unavailable.</p>
 					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"<br/>
