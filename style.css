@@ -576,7 +576,6 @@ a.home_spotlight_readmore {
 #azIndexList { width: 532px; margin-left: 24px; }
 #azIndexList #azIndexList-label { font-family: Georgia, serif; color: #333; margin-left: -5px; background: #fff; padding: 10px 10px 7px 0; }
 .ie7 #azIndexList #azIndexList-label { padding: 10px 0 7px 4px; }
-#azIndexList .navbar-inner { padding: 0; min-height: 0; }
 #azIndexList .nav { margin-right: 0; }
 #azIndexList .nav li { border-right: 1px solid #D4D4D4; }
 #azIndexList .nav li:first-child { margin-left: 2px; }
