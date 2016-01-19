@@ -261,7 +261,7 @@ else {
 					</div>
 					</form>
 					<div class="col-md-3 col-sm-3" id="addnew_wrap">
-						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><i class="icon-pencil icon-white"></i> Post an Announcement</a>
+						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><span class="glyphicon glyphicon-pencil glyphicon-white"></span> Post an Announcement</a>
 					</div>
 				</div>
 

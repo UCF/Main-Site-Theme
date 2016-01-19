@@ -298,7 +298,7 @@ azIndex = function($) {
     $('.post-type-search-alpha h3').each(function() {
       $(this)
         .parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
-        .children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
+        .children('h3').after('<span class="backtotop"><span class="glyphicon glyphicon-arrow-up"></span> <a href="#top">Back to Top</a></span>');
     });
 
     // Activate Scrollspy
@@ -583,7 +583,7 @@ Generic.PostTypeSearch = function($) {
 var phonebookStaffToggle = function($) {
   $('#phonebook-search-results a.toggle').click(function() {
     $(this)
-      .children('i').toggleClass('icon-plus icon-minus').end()
+      .children('span').toggleClass('glyphiicon-plus glyphicon-minus').end()
       .next().fadeToggle();
   });
 }

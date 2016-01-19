@@ -517,8 +517,8 @@ function sc_post_type_search($params=array(), $content='') {
 		<div class="post-type-search-results "></div>
 		<? if($params['show_sorting']) { ?>
 		<div class="btn-group post-type-search-sorting">
-			<button class="btn<?if($params['default_sorting'] == 'term') echo ' active';?>"><i class="icon-list-alt"></i></button>
-			<button class="btn<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><i class="icon-font"></i></button>
+			<button class="btn<?if($params['default_sorting'] == 'term') echo ' active';?>"><span class="glyphicon glyphicon-list-alt"></span></button>
+			<button class="btn<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><span class="glyphicon glyphicon-font"></span></button>
 		</div>
 		<? } ?>
 	<?
@@ -783,7 +783,7 @@ function sc_phonebook_search($attrs) {
 		<div class="control-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
+				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span> Search</button>
 				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 			</div>
 		</div>
@@ -821,7 +821,7 @@ function sc_phonebook_search($attrs) {
 										</tr>
 										<tr class="person-secondary-list">
 											<td class="col-md-12 col-sm-12" colspan="3">
-												<a class="toggle person-secondary"><i class="icon-plus"></i> More Results</a>
+												<a class="toggle person-secondary"><span class="glyphicon glyphicon-plus"></span> More Results</a>
 												<ul>
 													<?php foreach ($result->secondary as $secondary) { ?>
 													<li>
@@ -866,7 +866,7 @@ function sc_phonebook_search($attrs) {
 									</tr>
 									<tr>
 										<td colspan="3" class="show_staff col-md-12 col-sm-12">
-											<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
+											<a class="toggle"><span class="glyphicon glyphicon-plus"></span> Show Staff</a>
 											<div class="show-staff-wrap">
 												<ul class="staff-list">
 													<?php
