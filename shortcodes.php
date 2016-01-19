@@ -115,9 +115,15 @@ function sc_publication($attr, $content=null){
 			<?=$thumb?>
 		</a>
 		<p class="pub-desc"><?=$pub->post_content?></p>
-		<div class="modal hide fade" id="pub-modal-<?=$pub->ID?>" role="dialog" aria-labelledby="<?=$pub->post_title?>" aria-hidden="true">
-			<iframe src="<?=$url?>" style="width:100% !important; height:100% !important;" scrolling="no"></iframe>
-			<a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+		<div class="modal fade" id="pub-modal-<?php echo $pub->ID; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $pub->post_title; ?>" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<iframe src="<?php echo $url; ?>" style="width:100% !important; height:100% !important;" scrolling="no"></iframe>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
