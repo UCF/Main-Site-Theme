@@ -187,7 +187,7 @@ centerpieceSlider = function($) {
 centerpieceVidResize = function($) {
   if ($('#centerpiece_slider').length > 0) {
     var addDimensions = function() {
-      var parentw = $('#centerpiece_slider').parent('.span12').width();
+      var parentw = $('#centerpiece_slider').parent('.col-md-12').width();
       if (getRealWindowWidth($) <= 767) {
         $('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
           .css({'height' : parentw * 0.36 +'px'});
@@ -286,13 +286,13 @@ azIndex = function($) {
     // Post type search customizations
     $('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
     $('form.post-type-search-form')
-      .addClass('span7')
+      .addClass('col-md-7')
       .children('label')
         .text('Quick Search:')
         .show();
     $('form.post-type-search-form')
       .children('input')
-        .removeClass('span3')
+        .removeClass('col-md-3')
         .addClass('search-query');
 
     $('.post-type-search-alpha h3').each(function() {

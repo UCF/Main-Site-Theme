@@ -1,16 +1,16 @@
 <?php disallow_direct_load('single-announcement.php');?>
 <?php get_header(); the_post();?>
-	
+
 	<div class="row page-content" id="<?=$post->post_name?>">
-		<div id="page_title" class="span12">
-			<h1 class="span9"><?php the_title();?></h1>
-			<?php esi_include('output_weather_data','span3'); ?>
+		<div id="page_title" class="col-md-12">
+			<h1 class="col-md-9"><?php the_title();?></h1>
+			<?php esi_include('output_weather_data','col-md-3'); ?>
 		</div>
-		<div id="contentcol" class="span12">
+		<div id="contentcol" class="col-md-12">
 			<article role="main">
 				<p><a href="<?=get_permalink(get_page_by_title('Announcements', OBJECT, 'page')->ID)?>">&laquo; Back to Announcements</a></p>
 				<div class="row" id="announcement_meta">
-					<div class="span7">
+					<div class="col-md-7">
 						<p class="date">
 						<?php
 							$fromdate = get_post_meta($post->ID, 'announcement_start_date', TRUE) ? date('M d, Y', strtotime(get_post_meta($post->ID, 'announcement_start_date', TRUE))) : get_the_date('M d, Y', $post->ID);
@@ -19,9 +19,9 @@
 						<?=$fromdate?> to <?=$todate?>
 						</p>
 					</div>
-					<div class="span5">
-						<p class="audience"><strong>Audience:</strong> 
-						<?php 
+					<div class="col-md-5">
+						<p class="audience"><strong>Audience:</strong>
+						<?php
 							$roles = wp_get_post_terms($post->ID, 'audienceroles', array("fields" => "names"));
 							if ($roles) {
 								$rolelist = '';
@@ -56,8 +56,8 @@
 							else { print 'n/a'; }
 						?>
 						</p>
-						<p class="keywords"><strong>Keywords:</strong> 
-						<?php 
+						<p class="keywords"><strong>Keywords:</strong>
+						<?php
 							$keywords = wp_get_post_terms($post->ID, 'keywords', array("fields" => "names"));
 							if ($keywords) {
 								$keywordlist = '';
@@ -71,10 +71,10 @@
 						</p>
 					</div>
 				</div>
-				
+
 				<strong>Description: </strong>
 				<?=the_content();?>
-				
+
 				<table class="table">
 					<tbody>
 						<tr>
@@ -117,7 +117,7 @@
 						</tr>
 					</tbody>
 				</table>
-				
+
 			</article>
 		</div>
 	</div>

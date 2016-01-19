@@ -212,7 +212,7 @@
 						<tr>
 							<td>column_width</td>
 							<td>Determines the width of the columns of results.  Intended for use with Bootstrap scaffolding (<a href="http://twitter.github.com/bootstrap/scaffolding.html">see here</a>), but will accept any CSS class name.</td>
-							<td>span4</td>
+							<td>col-md-4</td>
 							<td></td>
 						</tr>
 						<tr>
@@ -272,8 +272,8 @@
 					</table>
 
 					<p>Examples:</p>
-<pre style="white-space: pre-line;"><code># Generate a Post search, organized by category, with empty sections visible.  Generates one column of results with CSS class .span3.
-[post-type-search column_width="span3" column_count="1" show_empty_sections=true default_search_text="Find Something"]
+<pre style="white-space: pre-line;"><code># Generate a Post search, organized by category, with empty sections visible.  Generates one column of results with CSS class .col-md-3.
+[post-type-search column_width="col-md-3" column_count="1" show_empty_sections=true default_search_text="Find Something"]
 
 # Generate a Person search, organized by Organizational Groups (that have People assigned to them.)
 [post-type-search post_type_name="person" taxonomy="org_groups"]
@@ -338,7 +338,7 @@
 		<p><strong>Examples:</strong></p>
 		<p><em>Shortcode</em></p>
 <pre><code>
-[chart id="population-chart" type="bar" data="http://localhost/wordpress/wp-content/uploads/population.json" 
+[chart id="population-chart" type="bar" data="http://localhost/wordpress/wp-content/uploads/population.json"
 	options="http://localhost/wordpress/wp-content/uploads/population-options.json"]
 </code></pre>
 		<p><em>Data File</em></p>
