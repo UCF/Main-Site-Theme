@@ -15,7 +15,7 @@
 			?>
 			<img src="<?=$image_url ? $image_url : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
 			<? if(count($phones)) { ?>
-			<ul class="phones unstyled">
+			<ul class="phones list-unstyled">
 				<? foreach($phones as $phone) { ?>
 				<li><?=$phone?></li>
 				<? } ?>

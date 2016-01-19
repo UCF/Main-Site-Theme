@@ -632,9 +632,6 @@ var devBootstrap = function($) {
 /* Bootstrap Dropdown fixes for mobile devices */
 // Fixes onclick event for mobile devices
 $(document).on('touchstart.dropdown', '.dropdown-menu', function(e) { e.stopPropagation(); });
-// Prevents page jump on click when activating hover-able elements (dropdowns, tooltips...)
-// Note that this assumes popover activators (buttons) won't have a real href value on this site.
-$('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(function(e) { e.preventDefault(); });
 
 
 /*

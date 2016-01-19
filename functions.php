@@ -745,7 +745,7 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 function print_announcements($announcements, $liststyle='thumbtacks', $spantype='col-md-4 col-sm-4', $perrow=3) {
 	switch ($liststyle) {
 		case 'list':
-			print '<ul class="announcement_list unstyled">';
+			print '<ul class="announcement_list list-unstyled">';
 			// Simple list of announcements; no descriptions.
 			// $spantype and $perrow are not used here.
 			foreach ($announcements as $announcement) {

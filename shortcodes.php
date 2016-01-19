@@ -581,7 +581,7 @@ add_shortcode('post-type-search', 'sc_post_type_search');
  **/
 function sc_phonebook_search($attrs) {
 	$show_label = isset($attrs['show_label']) && (bool)$attrs['show_label'] ? '' : ' hidden';
-	$input_size = isset($attrs['input_size']) && $attrs['input_size'] != '' ? $attrs['input_size'] : 'input-xlarge';
+	$input_size = isset($attrs['input_size']) && $attrs['input_size'] != '' ? $attrs['input_size'] : 'col-md-9 col-sm-9';
 
 	# Looks up search term in the search service
 	$phonebook_search_query = '';
@@ -779,13 +779,11 @@ function sc_phonebook_search($attrs) {
 
 
 	ob_start();?>
-	<form class="form-horizontal form-search" id="phonebook-search">
+	<form class="form-horizontal" id="phonebook-search">
 		<div class="form-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
-			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
-				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
-			</div>
+			<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
+			<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 		</div>
 	</form>
 	<?php

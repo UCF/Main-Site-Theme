@@ -1999,13 +1999,11 @@ a.btn-warning,
 a.btn-info,
 a.btn-success,
 a.btn-danger,
-a.btn-inverse,
 a.btn-primary:hover,
 a.btn-warning:hover,
 a.btn-info:hover,
 a.btn-success:hover,
 a.btn-danger:hover,
-a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
 }
