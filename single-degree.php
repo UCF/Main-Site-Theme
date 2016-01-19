@@ -5,12 +5,12 @@
 	$search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
 	<div class="row page-content" id="degree-single">
-		<div id="page_title" class="col-md-12">
-			<h1 class="col-md-9"><?php the_title(); ?></h1>
-			<?php esi_include( 'output_weather_data', 'col-md-3' ); ?>
+		<div id="page_title" class="col-md-12 col-sm-12">
+			<h1 class="col-md-9 col-sm-9"><?php the_title(); ?></h1>
+			<?php esi_include( 'output_weather_data', 'col-md-3 col-sm-3' ); ?>
 		</div>
 
-		<div id="breadcrumbs" class="col-md-12 clearfix">
+		<div id="breadcrumbs" class="col-md-12 col-sm-12 clearfix">
 			<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
 			<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
 
@@ -31,11 +31,11 @@
 			</ul>
 		</div>
 
-		<div id="contentcol" class="col-md-8 degree">
+		<div id="contentcol" class="col-md-8 col-sm-8 degree">
 			<article role="main">
 				<!-- Degree meta details -->
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-8 col-sm-8">
 						<dl class="degree-details clearfix">
 							<dt>Degree:</dt>
 							<dd><?php echo $post->tax_program_type->name; ?></dd>
@@ -113,7 +113,7 @@
 				<?php echo display_degree_callout( $post->ID ); ?>
 			</article>
 		</div>
-		<div id="sidebar_right" class="col-md-4 notoppad" role="complementary">
+		<div id="sidebar_right" class="col-md-4 col-sm-4 notoppad" role="complementary">
 
 			<!-- Sidebar content -->
 

@@ -100,10 +100,10 @@
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
-				<div class="col-md-2 alert-icon-wrap">
+				<div class="col-md-2 col-sm-2 alert-icon-wrap">
 					<div class="alert-icon general"></div>
 				</div>
-				<div class="col-md-10 alert-wrap">
+				<div class="col-md-10 col-sm-10 alert-wrap">
 					<div class="alert alert-error alert-block">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h2>

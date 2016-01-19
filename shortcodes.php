@@ -228,7 +228,7 @@ function sc_person_picture_list($atts) {
 		}
 
 		?>
-		<div class="col-md-2 person-picture-wrap">
+		<div class="col-md-2 col-sm-2 person-picture-wrap">
 			<? if($link) {?><a href="<?=get_permalink($person->ID)?>"><? } ?>
 				<img src="<?=$image_url ? $image_url : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
 				<div class="name"><?=Person::get_name($person)?></div>
@@ -400,7 +400,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'taxonomy'               => 'category',
 		'show_empty_sections'    => false,
 		'non_alpha_section_name' => 'Other',
-		'column_width'           => 'col-md-4',
+		'column_width'           => 'col-md-4 col-sm-4',
 		'column_count'           => '3',
 		'order_by'               => 'title',
 		'order'                  => 'ASC',
@@ -511,7 +511,7 @@ function sc_post_type_search($params=array(), $content='') {
 		<div class="post-type-search-header">
 			<form class="post-type-search-form" action="." method="get">
 				<label style="display:none;">Search</label>
-				<input type="text" class="col-md-3" placeholder="<?=$params['default_search_text']?>" />
+				<input type="text" class="col-md-3 col-sm-3" placeholder="<?=$params['default_search_text']?>" />
 			</form>
 		</div>
 		<div class="post-type-search-results "></div>
@@ -808,19 +808,19 @@ function sc_phonebook_search($attrs) {
 									case 'staff':
 										?>
 										<tr>
-											<td class="col-md-6">
+											<td class="col-md-6 col-sm-6">
 												<?=display_primary_info($result);?>
 											</td>
-											<td class="col-md-3">
+											<td class="col-md-3 col-sm-3">
 												<?=display_contact_info($result);?>
 											</td>
-											<td class="col-md-3">
+											<td class="col-md-3 col-sm-3">
 												<?=display_location_info($result);?>
 											</td>
 										<?php if (!empty($result->secondary)) { ?>
 										</tr>
 										<tr class="person-secondary-list">
-											<td class="col-md-12" colspan="3">
+											<td class="col-md-12 col-sm-12" colspan="3">
 												<a class="toggle person-secondary"><i class="icon-plus"></i> More Results</a>
 												<ul>
 													<?php foreach ($result->secondary as $secondary) { ?>
@@ -828,13 +828,13 @@ function sc_phonebook_search($attrs) {
 														<table class="table">
 															<tbody>
 																<tr>
-																	<td class="col-md-6">
+																	<td class="col-md-6 col-sm-6">
 																		<?=display_primary_info($secondary);?>
 																	</td>
-																	<td class="col-md-3">
+																	<td class="col-md-3 col-sm-3">
 																		<?=display_contact_info($secondary);?>
 																	</td>
-																	<td class="col-md-3">
+																	<td class="col-md-3 col-sm-3">
 																		<?=display_location_info($secondary);?>
 																	</td>
 																</tr>
@@ -853,19 +853,19 @@ function sc_phonebook_search($attrs) {
 								case 'organizations':
 									?>
 									<tr>
-										<td class="col-md-6">
+										<td class="col-md-6 col-sm-6">
 											<?=display_primary_info($result);?>
 										</td>
-										<td class="col-md-3">
+										<td class="col-md-3 col-sm-3">
 											<?=display_contact_info($result);?>
 										</td>
-										<td class="col-md-3">
+										<td class="col-md-3 col-sm-3">
 											<?=display_location_info($result);?>
 										</td>
 									<?php if(count($result->staff) > 0) { ?>
 									</tr>
 									<tr>
-										<td colspan="3" class="show_staff col-md-12">
+										<td colspan="3" class="show_staff col-md-12 col-sm-12">
 											<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
 											<div class="show-staff-wrap">
 												<ul class="staff-list">

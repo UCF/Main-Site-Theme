@@ -736,7 +736,7 @@ class Person extends CustomPostType
 	public function objectsToHTML($people, $css_classes) {
 		ob_start();?>
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-12 col-sm-12">
 				<table class="table table-striped">
 					<thead>
 						<tr>

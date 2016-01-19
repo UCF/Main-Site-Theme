@@ -2,15 +2,15 @@
 <?php get_header(); the_post();?>
 
 	<div class="row page-content" id="<?=$post->post_name?>">
-		<div id="page_title" class="col-md-12">
-			<h1 class="col-md-9"><?php the_title();?></h1>
-			<?php esi_include('output_weather_data','col-md-3'); ?>
+		<div id="page_title" class="col-md-12 col-sm-12">
+			<h1 class="col-md-9 col-sm-9"><?php the_title();?></h1>
+			<?php esi_include('output_weather_data','col-md-3 col-sm-3'); ?>
 		</div>
-		<div id="contentcol" class="col-md-12">
+		<div id="contentcol" class="col-md-12 col-sm-12">
 			<article role="main">
 				<p><a href="<?=get_permalink(get_page_by_title('Announcements', OBJECT, 'page')->ID)?>">&laquo; Back to Announcements</a></p>
 				<div class="row" id="announcement_meta">
-					<div class="col-md-7">
+					<div class="col-md-7 col-sm-7">
 						<p class="date">
 						<?php
 							$fromdate = get_post_meta($post->ID, 'announcement_start_date', TRUE) ? date('M d, Y', strtotime(get_post_meta($post->ID, 'announcement_start_date', TRUE))) : get_the_date('M d, Y', $post->ID);
@@ -19,7 +19,7 @@
 						<?=$fromdate?> to <?=$todate?>
 						</p>
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-5 col-sm-5">
 						<p class="audience"><strong>Audience:</strong>
 						<?php
 							$roles = wp_get_post_terms($post->ID, 'audienceroles', array("fields" => "names"));

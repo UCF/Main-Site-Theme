@@ -212,7 +212,7 @@
 						<tr>
 							<td>column_width</td>
 							<td>Determines the width of the columns of results.  Intended for use with Bootstrap scaffolding (<a href="http://twitter.github.com/bootstrap/scaffolding.html">see here</a>), but will accept any CSS class name.</td>
-							<td>col-md-4</td>
+							<td>col-md-4 col-sm-4</td>
 							<td></td>
 						</tr>
 						<tr>
@@ -272,8 +272,8 @@
 					</table>
 
 					<p>Examples:</p>
-<pre style="white-space: pre-line;"><code># Generate a Post search, organized by category, with empty sections visible.  Generates one column of results with CSS class .col-md-3.
-[post-type-search column_width="col-md-3" column_count="1" show_empty_sections=true default_search_text="Find Something"]
+<pre style="white-space: pre-line;"><code># Generate a Post search, organized by category, with empty sections visible.  Generates one column of results with CSS class .col-md-3 col-sm-3.
+[post-type-search column_width="col-md-3 col-sm-3" column_count="1" show_empty_sections=true default_search_text="Find Something"]
 
 # Generate a Person search, organized by Organizational Groups (that have People assigned to them.)
 [post-type-search post_type_name="person" taxonomy="org_groups"]

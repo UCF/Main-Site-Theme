@@ -4,7 +4,7 @@
 	<?php $options = get_option(THEME_OPTIONS_NAME);?>
 	<?php $page    = get_page_by_title('Home');?>
 	<div class="row page-content nodescription" id="home" data-template="home-nodescription" role="main">
-		<div class="col-md-12">
+		<div class="col-md-12 col-sm-12">
 			<p>
 				<?php $centerpiece_id = $wp_query->get_queried_object_id(); ?>
 				<?php echo do_shortcode('[centerpiece id="' . $centerpiece_id . '"]'); ?>
