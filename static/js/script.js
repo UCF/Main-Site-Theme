@@ -210,7 +210,7 @@ centerpieceVidResize = function($) {
 /* Set/Unset iframe source on video modal open/close */
 videoModalSet = function($) {
   if ($('.video-modal').length > 0) {
-    $('.video-modal').on('show', function() {
+    $('.video-modal').on('show.bs.modal', function() {
       var modalID = $(this).attr('id');
       var src = $(this).children('.modal-body').attr('data-src');
 
@@ -219,7 +219,7 @@ videoModalSet = function($) {
       }
     });
 
-    $('.video-modal').on('hide', function() {
+    $('.video-modal').on('hide.bs.modal', function() {
       $(this).find('iframe').remove();
     });
   }
