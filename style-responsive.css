@@ -369,9 +369,9 @@
 
     #ongoing-twocol { margin-left: 0; border-left: 0; padding-left: 0; margin-top: 30px; margin-bottom: 20px; }
 
-    #phonebook-search .control-group .controls #phonebook-search-query { width: 64%; float: left; }
-    #phonebook-search .control-group .controls button { width: 33%; float: right; clear: right; }
-    #phonebook-search .control-group .controls #phonebook-search-description { display: block; float: left; line-height: 15px; margin-top: 4px; padding-left: 0; }
+    #phonebook-search .form-group .controls #phonebook-search-query { width: 64%; float: left; }
+    #phonebook-search .form-group .controls button { width: 33%; float: right; clear: right; }
+    #phonebook-search .form-group .controls #phonebook-search-description { display: block; float: left; line-height: 15px; margin-top: 4px; padding-left: 0; }
     #phonebook-search-results .result table tr td { width: 100%; display: block; float: left; padding: 4px 8px; }
     #phonebook-search-results .result table tr:first-child td:first-child { padding-top: 8px; }
     #phonebook-search-results .result table tr:last-child td:last-child { padding-bottom: 8px; }
@@ -530,7 +530,7 @@
     margin-bottom: 0;
   }
 
-  #degree-search-top .degree-search-form .input-append,
+  #degree-search-top .degree-search-form .input-group,
   #degree-search-top .degree-search-form .search-field {
     width: 100%;
   }

@@ -780,7 +780,7 @@ function sc_phonebook_search($attrs) {
 
 	ob_start();?>
 	<form class="form-horizontal form-search" id="phonebook-search">
-		<div class="control-group">
+		<div class="form-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
 			<div class="controls">
 				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>

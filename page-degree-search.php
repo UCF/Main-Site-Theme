@@ -61,11 +61,11 @@ get_header(); the_post(); ?>
 					<div class="degree-search-sort-inner degree-search-sort-options hidden-xs">
 						<fieldset>
 							<legend class="sr-only">Sort Results</legend>
-							<strong class="degree-search-sort-label radio inline">Sort by:</strong>
-							<label class="radio inline">
+							<strong class="degree-search-sort-label radio-inline">Sort by:</strong>
+							<label class="radio-inline">
 								<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') { echo 'checked'; } ?>> <span class="sr-only">Sort by </span>Name
 							</label>
-							<label class="radio inline">
+							<label class="radio-inline">
 								<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) { echo 'checked'; } ?>> <span class="sr-only">Sort by </span>Credit Hours
 							</label>
 						</fieldset>
