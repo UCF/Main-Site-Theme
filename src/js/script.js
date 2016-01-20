@@ -1,5 +1,13 @@
 var Generic = {};
 
+// A fast and short piece of code you can use before deciding how to procede without .browser in jquery:
+// http://pupunzi.open-lab.com/2013/01/16/jquery-1-9-is-out-and-browser-has-been-removed-a-fast-workaround
+jQuery.browser = {};
+jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+
 // Helper function to get the actual window width in all browsers
 // (Firefox and IE like to include the width of vertical scrollbars
 // while Webkit doesn't, causing some inconsistencies.)
