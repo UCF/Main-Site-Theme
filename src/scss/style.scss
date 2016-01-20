@@ -15,7 +15,7 @@
 
 // Base styles for typography, tables, forms, and images
 // @import 'type';
-// @import 'tables';
+@import 'tables';
 // @import 'forms';
 
 // Styles for custom components and Bootstrap component overrides
@@ -24,6 +24,10 @@
 // Styles for our base header/footer templates
 // @import 'header';
 // @import 'footer';
+
+// Styles for widgets, which are more specific than components and may appear
+// on multiple pages/templates
+@import 'widgets';
 
 // Add more view-specific overrides here.  Try to follow WordPress template
 // naming conventions as closely as possible--e.g. home.php styles should go in
