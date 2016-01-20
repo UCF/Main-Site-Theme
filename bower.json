@@ -10,7 +10,7 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "srv/components"
+    "src/components"
   ],
   "dependencies": {
     "bootstrap-sass-official": "~3.3.6",
