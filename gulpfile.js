@@ -1,96 +1,139 @@
 var gulp = require('gulp'),
+    configLocal = require('./gulp-config.json'),
+    merge = require('merge'),
     sass = require('gulp-sass'),
     minifyCss = require('gulp-minify-css'),
-    concatCss = require('gulp-concat-css'),
     bless = require('gulp-bless'),
-    notify = require('gulp-notify'),
     bower = require('gulp-bower'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
     jshint = require('gulp-jshint'),
     jshintStylish = require('jshint-stylish'),
-    scsslint = require('gulp-scss-lint');
-    // browserSync = require('browser-sync').create(),
-    // reload = browserSync.reload;
+    scsslint = require('gulp-scss-lint'),
+    autoprefixer = require('gulp-autoprefixer'),
+    browserSync = require('browser-sync').create();
 
-var config = {
-  sassPath: './static/scss',
-  cssPath: './static/css',
-  jsPath: './static/js',
-  fontPath: './static/fonts',
-  // phpPath: './',
-  bowerDir: './static/components'
-};
+var configDefault = {
+      scssPath: './src/scss',
+      cssPath: './static/css',
+      jsPath: './src/js',
+      jsMinPath: './static/js',
+      fontPath: './static/fonts',
+      componentsPath: './src/components',
+      sync: false,
+      syncTarget: 'http://localhost/'
+    },
+    config = merge(configDefault, configLocal);
 
 
 // Run Bower
 gulp.task('bower', function() {
-  return bower()
-    .pipe(gulp.dest(config.bowerDir))
+  bower()
+    .pipe(gulp.dest(config.componentsPath))
     .on('end', function() {
 
       // Add Glyphicons to fonts dir
-      gulp.src(config.bowerDir + '/bootstrap-sass-official/assets/fonts/*/*')
+      gulp.src(config.componentsPath + '/bootstrap-sass-official/assets/fonts/*/*')
         .pipe(gulp.dest(config.fontPath));
 
     });
 });
 
+// Lint all scss files
+gulp.task('scss-lint', function() {
+  gulp.src(config.scssPath + '/*.scss')
+    .pipe(scsslint());
+});
 
-// Compile scss files
-gulp.task('css', function() {
-  return gulp.src(config.sassPath + '/*.scss')
-    .pipe(scsslint())
+
+// Compile + bless primary scss files
+gulp.task('css-main', function() {
+  gulp.src(config.scssPath + '/style.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(rename('style.min.css'))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions', 'ie >= 8'],
+      cascade: false
+    }))
     .pipe(bless())
-    .pipe(gulp.dest(config.cssPath));
-    // .pipe(browserSync.stream());
+    .pipe(gulp.dest(config.cssPath))
+    .pipe(browserSync.stream());
 });
 
 
-// Lint, concat and uglify js files.
-gulp.task('js', function() {
+// Compile + bless admin scss
+gulp.task('css-admin', function() {
+  gulp.src(config.scssPath + '/admin.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(minifyCss({compatibility: '*'}))
+    .pipe(rename('admin.min.css'))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions', 'ie >= 8'],
+      cascade: false
+    }))
+    .pipe(bless())
+    .pipe(gulp.dest(config.cssPath))
+    .pipe(browserSync.stream());
+});
 
-  // Run jshint on all js files in jsPath (except already minified files.)
-  return gulp.src([config.jsPath + '/*.js', '!' + config.jsPath + '/*.min.js'])
+
+// All css-related tasks
+gulp.task('css', ['scss-lint', 'css-main', 'css-admin']);
+
+
+// Run jshint on all js files in jsPath (except already minified files.)
+gulp.task('js-lint', function() {
+  gulp.src([config.jsPath + '/*.js', '!' + config.jsPath + '/*.min.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'))
-    .on('end', function() {
-
-      // Combine and uglify js files to create script.min.js.
-      var minified = [
-        config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-        config.jsPath + '/generic-base.js',
-        config.jsPath + '/script.js'
-      ];
-
-      gulp.src(minified)
-        .pipe(concat('script.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(config.jsPath));
-
-    });
-
+    .pipe(jshint.reporter('fail'));
 });
+
+
+// Concat and uglify primary js files.
+gulp.task('js-main', function() {
+  var minified = [
+    config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+    config.jsPath + '/generic-base.js',
+    config.jsPath + '/script.js'
+  ];
+
+  gulp.src(minified)
+    .pipe(concat('script.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(config.jsMinPath))
+    .pipe(browserSync.stream());
+});
+
+
+// Uglify admin js
+gulp.task('js-admin', function() {
+  gulp.src(config.jsPath + '/admin.js')
+    .pipe(concat('admin.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(config.jsMinPath))
+    .pipe(browserSync.stream());
+});
+
+
+// All js-related tasks
+gulp.task('js', ['js-lint', 'js-main', 'js-admin']);
 
 
 // Rerun tasks when files change
 gulp.task('watch', function() {
-  // browserSync.init({
-  //     proxy: {
-  //       target: "localhost/wordpress/faculty"
-  //     }
-  // });
-  // gulp.watch(config.jsPath + '/*.js', ['js']).on('change', reload);
-  // gulp.watch(config.phpPath + '/*.php').on('change', reload);
-  // gulp.watch(config.phpPath + '/*.php');
+  if (config.sync) {
+    browserSync.init({
+        proxy: {
+          target: config.syncTarget
+        }
+    });
+  }
 
-  gulp.watch(config.sassPath + '/*.scss', ['css']);
-  gulp.watch(config.jsPath + '/*.js', ['js']);
+  gulp.watch(config.scssPath + '/*.scss', ['css']).on('change', browserSync.reload);
+  gulp.watch(config.jsPath + '/*.js', ['js']).on('change', browserSync.reload);
 });
 
 
