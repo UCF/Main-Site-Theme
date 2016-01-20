@@ -60,16 +60,10 @@
 		}
 		?>
 
-		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
-			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>
-		<?php } ?>
-
 		<?php
 		if ( is_page( 'Post An Announcement' ) ) {
 			$keywords = json_encode( get_terms( 'keywords', array( 'fields' => 'names' ) ) );
 		?>
-		<link href="<?php echo THEME_CSS_URL; ?>/bootstrap-tagsinput.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="<?php echo THEME_JS_URL; ?>/bootstrap-tagsinput.min.js"></script>
 		<script>
 			var announcementKeywords = <?php echo $keywords; ?>;
 		</script>
