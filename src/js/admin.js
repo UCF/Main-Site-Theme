@@ -28,7 +28,7 @@ WebcomAdmin.shortcodeTool = function($){
 	cls.text_url = cls.metabox.find("#shortcode-text").val();
 
 	cls.shortcodes = (function(){
-		var shortcodes = new Array();
+		var shortcodes = [];
 		cls.select.children('.shortcode').each(function(){
 			shortcodes.push($(this).val());
 		});
@@ -36,7 +36,7 @@ WebcomAdmin.shortcodeTool = function($){
 	})();
 
 	cls.shortcodeAction = function(shortcode){
-		var text = "[" + shortcode + "]"
+		var text = "[" + shortcode + "]";
 		send_to_editor(text);
 	};
 
@@ -141,7 +141,7 @@ WebcomAdmin.themeOptions = function($){
 		var http_referrer = cls.parent.find('input[name="_wp_http_referer"]');
 		http_referrer.val(window.location);
 		return false;
-	}
+	};
 
 	this.__init__ = function(){
 		cls.active = cls.sections.first();
@@ -162,7 +162,7 @@ WebcomAdmin.themeOptions = function($){
 	if (cls.parent.length > 0){
 		cls.__init__();
 	}
-}
+};
 
 
 WebcomAdmin.centerpieceAdmin = function($) {

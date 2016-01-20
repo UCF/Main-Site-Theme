@@ -57,7 +57,7 @@ Generic.mobileNavBar = function($) {
     }
   };
 
-  if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+  if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
     adjust_mobile_nav();
     $(window).resize(function() {
       adjust_mobile_nav();
@@ -75,7 +75,7 @@ Generic.mobileSidebar = function($) {
         $('#sidebar_left').remove().insertBefore('#contentcol');
       }
     };
-    if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+    if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
       moveSidebar();
       $(window).resize(function() {
         moveSidebar();
@@ -131,7 +131,7 @@ centerpieceSlider = function($) {
     $('#centerpiece_slider ul li').each(function() {
       duration = $(this).attr('data-duration');
       // Just in case it's not assigned through php somehow:
-      if (duration == '') {
+      if (duration === '') {
         duration = 6;
       }
       timeouts.push(duration);
@@ -197,7 +197,7 @@ centerpieceVidResize = function($) {
           .css({'height' : ''});
       }
     };
-    if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+    if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
       addDimensions();
       $(window).resize(function() {
         addDimensions();
@@ -267,7 +267,7 @@ fixSubheaderHeight = function($) {
         }
       }
     };
-    if ( $('body').hasClass('ie7') == false && $('body').hasClass('ie8') == false ) { /* Don't resize in IE8 or older */
+    if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
       $(window).load(function() {
         doSubheaderHeight();
       });
@@ -302,7 +302,7 @@ azIndex = function($) {
     });
 
     // Activate Scrollspy
-    if ($('body').hasClass('ie7') == false) {
+    if ($('body').hasClass('ie7') === false) {
       $('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
       $('#azIndexList').scrollspy();
     }
@@ -343,16 +343,16 @@ toggleAnnouncementFilters = function($) {
 
   // reset field values to default any time a new filter is selected
   var resetVals = function() {
-    if ($('#filter_audience_wrap').hasClass('active_filter') == false) {
+    if ($('#filter_audience_wrap').hasClass('active_filter') === false) {
       $('#filter_audience_wrap select option:selected').val("all");
     }
-    if ($('#filter_keyword_wrap').hasClass('active_filter') == false) {
+    if ($('#filter_keyword_wrap').hasClass('active_filter') === false) {
       $(this).children('input').val("");
     }
-    if ($('#filter_time_wrap').hasClass('active_filter') == false) {
+    if ($('#filter_time_wrap').hasClass('active_filter') === false) {
       $('#filter_time_wrap select option:selected').val("thisweek");
     }
-  }
+  };
 
   // on load
   if (audienceBtn.hasClass('active')) {
@@ -414,7 +414,7 @@ ieStripedAcademicsResults = function($) {
 Generic.PostTypeSearch = function($) {
   $('.post-type-search')
     .each(function(post_type_search_index, post_type_search) {
-      var post_type_search = $(post_type_search),
+      post_type_search = $(post_type_search),
         form             = post_type_search.find('.post-type-search-form'),
         field            = form.find('input[type="text"]'),
         working          = form.find('.working'),
@@ -447,7 +447,7 @@ Generic.PostTypeSearch = function($) {
       column_count    = post_type_search_data.column_count;
       column_width    = post_type_search_data.column_width;
 
-      if(column_count == 0 || column_width == '') { // Invalid dimensions
+      if(column_count === 0 || column_width === '') { // Invalid dimensions
         return false;
       }
 
@@ -473,11 +473,11 @@ Generic.PostTypeSearch = function($) {
           // Don't allow the form to be submitted
           event.preventDefault();
           perform_search(field.val());
-        })
+        });
       field
         .keyup(function() {
           // Use a timer to determine when the user is done typing
-          if(typing_timer != null)  clearTimeout(typing_timer);
+          if(typing_timer !== null)  clearTimeout(typing_timer);
           typing_timer = setTimeout(function() {form.trigger('submit');}, typing_delay);
         });
 
@@ -508,20 +508,21 @@ Generic.PostTypeSearch = function($) {
             }
           });
         });
-        if(matches.length == 0) {
+        if(matches.length === 0) {
           display_search_message('No results were found.');
         } else {
 
           // Copy the associated elements
           $.each(matches, function(match_index, post_id) {
+            var element;
 
             // If we're only displaying an alphabetical list, be sure to use its
             // elements instead of by_term's elements
             if (by_term.css('display','none')) {
-              var element = by_alpha.find('li[data-post-id="' + post_id + '"]:eq(0)');
+              element = by_alpha.find('li[data-post-id="' + post_id + '"]:eq(0)');
             }
             else {
-              var element = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)');
+              element = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)');
             }
 
             var post_id_int = parseInt(post_id, 10);
@@ -531,7 +532,7 @@ Generic.PostTypeSearch = function($) {
             }
           });
 
-          if(elements.length == 0) {
+          if(elements.length === 0) {
             display_search_message('No results were found.');
           } else {
 
@@ -578,7 +579,7 @@ Generic.PostTypeSearch = function($) {
         }
       }
     });
-}
+};
 
 var phonebookStaffToggle = function($) {
   $('#phonebook-search-results a.toggle').click(function() {
@@ -586,7 +587,7 @@ var phonebookStaffToggle = function($) {
       .children('span').toggleClass('glyphiicon-plus glyphicon-minus').end()
       .next().fadeToggle();
   });
-}
+};
 
 
 /* Android devices running v2.3 or lower tend to choke on modals :(
@@ -599,14 +600,15 @@ var removeAndroidModals = function($) {
     $('a[data-toggle="modal"]').each(function() {
       var modalLink = $(this);
       var modalID   = modalLink.attr('href');
+      var href = '';
 
       // Check for videos whose URLs are contained in the data-src attr
       if ($(modalID).find('[data-src^="http"]').length > 0) {
-        var href  = $(modalID).find('[data-src^="http"]').attr('data-src');
+        href  = $(modalID).find('[data-src^="http"]').attr('data-src');
       }
       // Otherwise, try to find an element with a src value and grab its URL
       else {
-        var href  = $(modalID).find('[src^="http"]').attr('src');
+        href  = $(modalID).find('[src^="http"]').attr('src');
       }
 
       if (href) {
@@ -614,7 +616,7 @@ var removeAndroidModals = function($) {
       }
     });
   }
-}
+};
 
 
 /* Dev Bootstrap Element Testing-- this should not be running in prod!! */
@@ -626,7 +628,7 @@ var devBootstrap = function($) {
     trigger: "hover",
     selector: "a[rel=popover]"
   });
-}
+};
 
 
 /* Bootstrap Dropdown fixes for mobile devices */
@@ -649,13 +651,13 @@ var statusAlertCheck = function($) {
       var newest      = feed.items[0];
 
       if (newest) {
-        var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]'),
-          visible_alert = newest.id;
+        var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]');
+        visible_alert = newest.id;
         // Remove 'more info at...' from description
         newest.description = newest.description.replace('More info at www.ucf.edu','');
 
         // Remove old alerts that no longer appear in the feed
-        if( (visible_alert == null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
+        if( (visible_alert === null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
           $('.status-alert[id!=status-alert-template]').remove();
         }
 
@@ -674,7 +676,7 @@ var statusAlertCheck = function($) {
           if(existing_content.text() != newest.description) {
             existing_content.text(newest.description);
           }
-          if(existing_type.hasClass(newest.type) == false) {
+          if(existing_type.hasClass(newest.type) === false) {
             existing_type.attr('class','alert-icon ' + newest.type);
           }
 
@@ -711,7 +713,7 @@ var statusAlertCheck = function($) {
       statusAlertCookieSet($);
     }
   });
-}
+};
 
 
 /*
@@ -727,7 +729,7 @@ var statusAlertCookieSet = function($) {
       .find('.alert-icon').hide().end()
       .css('margin-top', '0');
   });
-}
+};
 
 
 /* GA tracking for outbound clicks */
@@ -749,7 +751,7 @@ var gaEventTracking = function($) {
       document.location = url;
     }
   });
-}
+};
 
 
 /**
@@ -823,12 +825,12 @@ var degreeSearch = function ($) {
 
       e.stopPropagation();
       e.preventDefault();
-    }
+    };
 
     $.fn.typeahead.Constructor.prototype.keydown = function (e) {
       this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40, 38, 9, 27]); // remove 13 (enter)
       this.move(e);
-    }
+    };
 
     $.fn.typeahead.Constructor.prototype.move = function (e) {
       switch (e.keyCode) {
@@ -855,7 +857,7 @@ var degreeSearch = function ($) {
       }
 
       e.stopPropagation();
-    }
+    };
 
     $.fn.typeahead.Constructor.prototype.render = function (items) {
       var that = this;
@@ -919,13 +921,13 @@ var degreeSearch = function ($) {
           // event, which will trigger loadDegreeSearchResults() (see above).
           var oldValue = $searchQuery.val();
 
-          if (oldValue == '') {
+          if (oldValue === '') {
             return;
           }
 
           setTimeout(function () {
             var newValue = $searchQuery.val();
-            if (newValue == '') {
+            if (newValue === '') {
               $searchQuery.trigger('keyup');
             }
           });
@@ -1476,7 +1478,7 @@ var socialButtonTracking = function($) {
 var ariaSilenceNoscripts = function($) {
   // Prevent text in <noscript> tags from being read aloud by screenreaders.
   $('noscript').attr('aria-hidden', 'true');
-}
+};
 
 
 var announcementKeywordAutocomplete = function($) {
@@ -1488,7 +1490,7 @@ var announcementKeywordAutocomplete = function($) {
         }
       });
   }
-}
+};
 
 var customChart = function($) {
   if ($('.custom-chart').length) {
@@ -1614,7 +1616,7 @@ var mediaTemplateVideo = function($) {
   if ($videoPlaceholder.length) {
     autoPlayOrBust();
   }
-}
+};
 
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {

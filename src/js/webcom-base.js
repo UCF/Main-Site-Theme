@@ -12,8 +12,8 @@ if(!window.console ) { window.console = { log: function() { return; } }; }
 Webcom.analytics = function($){
 	if ((typeof GA_ACCOUNT !== 'undefined') && Boolean(GA_ACCOUNT)){
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        (i[r].q=i[r].q||[]).push(arguments);},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
         ga('create', GA_ACCOUNT, 'ucf.edu');
@@ -76,7 +76,7 @@ Webcom.loadMoreSearchResults = function($){
 			return;
 		}
 
-		if (next == null){return;}
+		if (next === null){return;}
 
 		// Grab results content and append to current results
 		var results = $(next).find(items);
@@ -197,7 +197,7 @@ Webcom.slideshow = function($){
 				next.css({'right' : 0});
 				complete_callback();
 			});
-		}
+		};
 		slideAnimation.init = function(container, items){
 			var first = $(items[0]);
 
@@ -218,12 +218,12 @@ Webcom.slideshow = function($){
 			active.animate({'opacity' : '0.0'}, options.transition_length, function(){
 				active.css({'display' : 'none', 'opacity' : '1.0'});
 			});
-			next.css({'display' : 'block', 'opacity' : '0.0'})
+			next.css({'display' : 'block', 'opacity' : '0.0'});
 			next.animate({'opacity' : '1.0'}, options.transition_length, function(){
 				next.css({'display' : 'block', 'opacity' : '1.0'});
 				complete_callback();
 			});
-		}
+		};
 		fadeAnimation.init = function(container, items){
 			var first = $(items[0]);
 
