@@ -1,0 +1,33 @@
+// scss-lint:disable ImportantRule
+
+// Disable responsiveness in IE8:
+.ie8 {
+  // Create grid for IE8 because it doesn't understand media queries
+  @include make-grid(md);
+
+  // Fix .visible-, .hidden- classes
+  .hidden-md {
+    display: none !important;
+  }
+
+  .visible-md-block {
+    display: block !important;
+  }
+
+  .visible-md-inline {
+    display: inline !important;
+  }
+
+  .visible-md-inline-block {
+    display: inline-block !important;
+  }
+
+  // Disable responsiveness in IE8:
+  // Force fixed width for containers
+  .container {
+    max-width: none !important;
+    width: $container-md;
+  }
+}
+
+// scss-lint:enable ImportantRule
