@@ -3,47 +3,6 @@
 
 
 
-
-// style.css
-
-
-/**
- * UCF.edu specific styles
- **/
-
-/* General */
-.print-only { display: none; }
-.sr-only,
-#wp-a11y-speak {
-  border: 0 none;
-  clip: rect(0px, 0px, 0px, 0px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-}
-
-
-
-/**
- * Overriding default 300px height on iframes to keep the google_conversion_frame
- * from adding 300px of whitespace.
- */
-#contentcol iframe[name="google_conversion_frame"] {
-  height: 0;
-}
-
-
-
-
-
-
-
-
-
-
 // style-responsive.css:
 
 
