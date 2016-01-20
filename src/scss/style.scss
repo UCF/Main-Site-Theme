@@ -16,17 +16,16 @@
 // Base styles for typography, tables, forms, and images
 // @import 'type';
 @import 'tables';
-// @import 'forms';
+@import 'forms';
 
 // Styles for custom components and Bootstrap component overrides
-// @import 'components';
+@import 'components';
 
 // Styles for our base header/footer templates
 @import 'header';
 @import 'footer';
 
-// Styles for widgets, which are more specific than components and may appear
-// on multiple pages/templates
+// Styles for WordPress widgets
 @import 'widgets';
 
 // Add more view-specific overrides here.  Try to follow WordPress template
@@ -40,4 +39,3 @@
 @import 'document';
 @import 'publication';
 @import 'video';
-

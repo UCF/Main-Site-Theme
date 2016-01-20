@@ -99,3 +99,44 @@
     }
   }
 }
+
+
+
+@media (max-width: 979px) {
+
+  #page-not-found #contentcol .knightro-bg {
+    background-position: center right;
+    background-size: 230px auto;
+    min-height: 450px;
+  }
+
+  #page-not-found #contentcol h1 {
+    font-size: 55px;
+  }
+
+}
+
+@media (max-width: 767px) {
+  #page-not-found #contentcol .knightro-bg {
+    background-size: 100px auto;
+    box-sizing: border-box;
+    min-height: 0;
+    padding-right: 120px;
+  }
+
+  #page-not-found #contentcol h1 {
+    font-size: 36px;
+  }
+
+  #page-not-found #contentcol .search-field {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  #page-not-found #contentcol .knightro-bg {
+    background-image: none;
+    padding-right: 0;
+  }
+}
+

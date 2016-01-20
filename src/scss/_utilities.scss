@@ -33,6 +33,40 @@
 // scss-lint:enable ImportantRule
 
 
+// Content hiding helpers
+.print-only {
+  display: none;
+
+  @media print {
+    display: block;
+  }
+}
+
+.screen-only {
+  @media print {
+    display: none;
+  }
+}
+
+.sr-only,
+#wp-a11y-speak {
+  border: 0 none;
+  clip: rect(0px, 0px, 0px, 0px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+a.print-noexpand:after {
+  @media print {
+    content: '';
+  }
+}
+
+
 // IE8 rounded corner fix for news, spotlight thumbnails; Standard rounded corners for centerpieces
 .thumb_corner_tl,
 .thumb_corner_tr,
@@ -68,4 +102,10 @@
   background-position: -413px 3px;
   bottom: 0;
   right: 0;
+}
+
+
+// Fix to unset Google conversion iframe heights
+iframe[name="google_conversion_frame"] {
+  height: 0;
 }

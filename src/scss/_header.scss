@@ -49,3 +49,82 @@
 #header-menu li.last::after { content: "" !important; }
 .ie8 .no_nav_separator:after,
 .ie8 #header-menu li.last:after { content: "" !important; } /* IE8 hates the ::after selector */
+
+
+@media (min-width: 980px) {
+  .ie9 #header-menu li.last a { top: 1px; }
+}
+
+@media (max-width: 979px) {
+  .status-alert .alert-wrap { width: 624px; }
+
+  #header-menu li:after { margin-left: 3px; }
+  #header-menu li a { font-size: 14.25px !important; }
+  #header-menu li.last a { font-size: 11px !important; }
+  .menu a { margin-right: 2px; }
+}
+
+@media (max-width: 767px) {
+  #header { margin-left: 0; }
+  .android #header h1 { display: none; }
+  #header-menu { text-align: center; padding: 15px 0 5px 0; }
+  #header-menu li { float: none; margin-top: -5px; }
+  #header-menu li.last { vertical-align: bottom; }
+  #header-menu li.last a { margin-top: 5px; }
+}
+
+@media (max-width: 480px) {
+    .navbar .menu {
+        padding: 0;
+    }
+    .navbar ul#header-menu li:after {
+        content: "";
+    }
+    .navbar ul#header-menu li, .navbar ul#header-menu ul.dropdown-menu li {
+        display: block;
+        float: none;
+        margin: 0;
+        line-height: 13px;
+    }
+    .navbar ul#header-menu li a {
+        display: block;
+        color: #999;
+        font-weight: bold;
+        font-size: 13px;
+        padding: 10px 15px;
+        border-radius: 3px 3px 3px 3px;
+    }
+        .navbar ul#header-menu li.active a {
+            color: #fff;
+            background-color: #222;
+        }
+    .navbar ul#header-menu li a:hover {
+        background-color: #222;
+        text-decoration: none;
+        color: #fff;
+    }
+    .navbar ul#header-menu li,last a {
+        margin-top: 5px;
+    }
+    .navbar ul#header-menu b.caret {
+        border-bottom-color: #fff;
+    border-top-color: #fff;
+        margin-top: 4px;
+    }
+
+    #header-menu { text-align: left; }
+    #header-menu li { float: left; }
+
+    #header-nav-wrap { float: none; left: 0; margin-top: 10px; }
+    #header-nav-wrap .brand { position: absolute; left: 20px; }
+    ul#header-menu { left: 0; margin-top: 0; }
+    ul#header-menu li { margin-right: 0 !important; margin-bottom: 0 !important; }
+    ul#header-menu li.last { padding-bottom: 10px; }
+    ul#header-menu li.last a { color: #333; text-align: center; }
+}
+
+@media print {
+  #header-menu a[href]:after {
+    content: "";
+  }
+}
