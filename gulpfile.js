@@ -139,4 +139,4 @@ gulp.task('watch', function() {
 
 
 // Default task
-gulp.task('default', ['bower', 'css'/*, 'js'*/]);
+gulp.task('default', ['bower', 'css', 'js']);
