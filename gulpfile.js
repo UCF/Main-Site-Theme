@@ -37,6 +37,10 @@ gulp.task('bower', function() {
       gulp.src(config.componentsPath + '/bootstrap-sass-official/assets/fonts/*/*')
         .pipe(gulp.dest(config.fontPath));
 
+      // Move Font Awesome assets
+      gulp.src(config.componentsPath + '/font-awesome/*/*')
+        .pipe(gulp.dest(config.fontPath + '/font-awesome/'));
+
     });
 });
 
@@ -96,7 +100,11 @@ gulp.task('js-lint', function() {
 gulp.task('js-main', function() {
   var minified = [
     config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-    config.jsPath + '/generic-base.js',
+    config.componentsPath + '/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
+    config.componentsPath + '/Chart.js/Chart.js',
+    config.componentsPath + '/jfeed/build/dist/jquery.jfeed.js',
+    config.componentsPath + '/jquery.cookie/jquery.cookie.js',
+    config.componentsPath + '/jquery.cycle.all/index.js',
     config.jsPath + '/webcom-base.js',
     config.jsPath + '/script.js'
   ];
