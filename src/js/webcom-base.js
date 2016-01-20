@@ -9,6 +9,7 @@ if(!window.console ) { window.console = { log: function() { return; } }; }
 // for jslint validation
 /*global window, document, Image, google, $, jQuery */
 
+/* jshint ignore:start */
 Webcom.analytics = function($){
 	if ((typeof GA_ACCOUNT !== 'undefined') && Boolean(GA_ACCOUNT)){
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -20,6 +21,7 @@ Webcom.analytics = function($){
         ga('send', 'pageview');
 	}
 };
+/* jshint ignore:end */
 
 Webcom.chartbeat = function($){
 	if ((typeof CB_UID !== 'undefined') && Boolean(CB_UID)){

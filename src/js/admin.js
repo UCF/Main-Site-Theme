@@ -1,8 +1,10 @@
 // Adds filter method to array objects
 // https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter
+/* jshint ignore:start */
 if(!Array.prototype.filter){
 	Array.prototype.filter=function(a){"use strict";if(this===void 0||this===null)throw new TypeError;var b=Object(this);var c=b.length>>>0;if(typeof a!=="function")throw new TypeError;var d=[];var e=arguments[1];for(var f=0;f<c;f++){if(f in b){var g=b[f];if(a.call(e,g,f,b))d.push(g)}}return d}
 }
+/* jshint ignore:end */
 
 var WebcomAdmin = {};
 
