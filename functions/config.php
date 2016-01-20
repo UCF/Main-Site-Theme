@@ -598,39 +598,13 @@ Config::$links = array(
 	array('rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => get_bloginfo('rss_url'),),
 );
 
+
 /**
  * Add css files to the list of stylesheet references in the header
  **/
 Config::$styles = array(
-	array('admin' => True, 'src' => THEME_CSS_URL.'/admin.css',),
-	THEME_CSS_URL.'/style.min.css',
-	THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap.min.css',
-	THEME_STATIC_URL.'/fonts/font-awesome/css/font-awesome.min.css'
-);
-
-// Default bootstrap responsive styles
-if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles,
-		THEME_STATIC_URL.'/bootstrap/bootstrap/css/bootstrap-responsive.min.css'
-	);
-}
-
-array_push(Config::$styles,
-	// Force GravityForms styles here so we can override them
-	plugins_url( 'gravityforms/css/forms.css' ),
-	THEME_CSS_URL.'/webcom-base.css',
-	get_bloginfo('stylesheet_url')
-);
-
-// Custom responsive styles
-if ($theme_options['bootstrap_enable_responsive'] == 1) {
-	array_push(Config::$styles,
-		THEME_URL.'/style-responsive.css'
-	);
-}
-
-array_push(Config::$styles,
-	array('src' => THEME_CSS_URL.'/print.css', 'media' => 'print')
+	array( 'admin' => True, 'src' => THEME_CSS_URL.'/admin.css' ),
+	THEME_CSS_URL . '/style.min.css',
 );
 
 
@@ -638,14 +612,11 @@ array_push(Config::$styles,
  * Add javascript to the list of javascript references in the header + footer
  **/
 Config::$scripts = array(
-	array('admin' => True, 'src' => THEME_JS_URL.'/admin.js',),
-	array('name' => 'ucfhb-script',  'src' => CURRENT_PROTOCOL.'universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1',),
-	THEME_STATIC_URL.'/bootstrap/bootstrap/js/bootstrap.min.js',
-	THEME_JS_URL.'/jFeed.js',
-	THEME_JS_URL.'/jquery.cookie.js',
-	array('name' => 'base-script',  'src' => THEME_JS_URL.'/webcom-base.js',),
-	array('name' => 'theme-script', 'src' => THEME_JS_URL.'/script.js',),
+	array( 'admin' => True, 'src' => THEME_JS_URL.'/admin.js' ),
+	array( 'name' => 'ucfhb-script', 'src' => CURRENT_PROTOCOL . 'universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1' ),
+	array( 'name' => 'theme-script', 'src' => THEME_JS_URL . '/script.js' ),
 );
+
 
 function enqueue_wpa11y() {
 	wp_enqueue_script( 'wp-a11y' );
@@ -659,15 +630,17 @@ function jquery_in_header() {
 }
 add_action( 'wp_enqueue_scripts', 'jquery_in_header' );
 
+
 /**
  * Meta content for header
  **/
 Config::$metas = array(
 	array('charset' => 'utf-8',),
 );
-if ($theme_options['gw_verify']){
+
+if ( $theme_options['gw_verify'] ) {
 	Config::$metas[] = array(
 		'name'    => 'google-site-verification',
-		'content' => htmlentities($theme_options['gw_verify']),
+		'content' => htmlentities( $theme_options['gw_verify'] ),
 	);
 }
