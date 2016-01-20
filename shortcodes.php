@@ -115,9 +115,15 @@ function sc_publication($attr, $content=null){
 			<?=$thumb?>
 		</a>
 		<p class="pub-desc"><?=$pub->post_content?></p>
-		<div class="modal hide fade" id="pub-modal-<?=$pub->ID?>" role="dialog" aria-labelledby="<?=$pub->post_title?>" aria-hidden="true">
-			<iframe src="<?=$url?>" style="width:100% !important; height:100% !important;" scrolling="no"></iframe>
-			<a href="#" class="btn" data-dismiss="modal">Close</a>
+		<div class="modal fade" id="pub-modal-<?php echo $pub->ID; ?>" tabindex="-1" role="dialog" aria-labelledby="<?php echo $pub->post_title; ?>" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<iframe src="<?php echo $url; ?>" style="width:100% !important; height:100% !important;" scrolling="no"></iframe>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -228,7 +234,7 @@ function sc_person_picture_list($atts) {
 		}
 
 		?>
-		<div class="span2 person-picture-wrap">
+		<div class="col-md-2 col-sm-2 person-picture-wrap">
 			<? if($link) {?><a href="<?=get_permalink($person->ID)?>"><? } ?>
 				<img src="<?=$image_url ? $image_url : get_bloginfo('stylesheet_directory').'/static/img/no-photo.jpg'?>" />
 				<div class="name"><?=Person::get_name($person)?></div>
@@ -400,7 +406,7 @@ function sc_post_type_search($params=array(), $content='') {
 		'taxonomy'               => 'category',
 		'show_empty_sections'    => false,
 		'non_alpha_section_name' => 'Other',
-		'column_width'           => 'span4',
+		'column_width'           => 'col-md-4 col-sm-4',
 		'column_count'           => '3',
 		'order_by'               => 'title',
 		'order'                  => 'ASC',
@@ -511,14 +517,14 @@ function sc_post_type_search($params=array(), $content='') {
 		<div class="post-type-search-header">
 			<form class="post-type-search-form" action="." method="get">
 				<label style="display:none;">Search</label>
-				<input type="text" class="span3" placeholder="<?=$params['default_search_text']?>" />
+				<input type="text" class="col-md-3 col-sm-3" placeholder="<?=$params['default_search_text']?>" />
 			</form>
 		</div>
 		<div class="post-type-search-results "></div>
 		<? if($params['show_sorting']) { ?>
 		<div class="btn-group post-type-search-sorting">
-			<button class="btn<?if($params['default_sorting'] == 'term') echo ' active';?>"><i class="icon-list-alt"></i></button>
-			<button class="btn<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><i class="icon-font"></i></button>
+			<button class="btn btn-default<?if($params['default_sorting'] == 'term') echo ' active';?>"><span class="glyphicon glyphicon-list-alt"></span></button>
+			<button class="btn btn-default<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><span class="glyphicon glyphicon-font"></span></button>
 		</div>
 		<? } ?>
 	<?
@@ -581,7 +587,7 @@ add_shortcode('post-type-search', 'sc_post_type_search');
  **/
 function sc_phonebook_search($attrs) {
 	$show_label = isset($attrs['show_label']) && (bool)$attrs['show_label'] ? '' : ' hidden';
-	$input_size = isset($attrs['input_size']) && $attrs['input_size'] != '' ? $attrs['input_size'] : 'input-xlarge';
+	$input_size = isset($attrs['input_size']) && $attrs['input_size'] != '' ? $attrs['input_size'] : 'col-md-9 col-sm-9';
 
 	# Looks up search term in the search service
 	$phonebook_search_query = '';
@@ -779,13 +785,11 @@ function sc_phonebook_search($attrs) {
 
 
 	ob_start();?>
-	<form class="form-horizontal form-search" id="phonebook-search">
-		<div class="control-group">
+	<form class="form-horizontal" id="phonebook-search">
+		<div class="form-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
-			<div class="controls">
-				<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn"><i class="icon-search"></i> Search</button>
-				<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
-			</div>
+			<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
+			<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 		</div>
 	</form>
 	<?php
@@ -808,33 +812,33 @@ function sc_phonebook_search($attrs) {
 									case 'staff':
 										?>
 										<tr>
-											<td class="span6">
+											<td class="col-md-6 col-sm-6">
 												<?=display_primary_info($result);?>
 											</td>
-											<td class="span3">
+											<td class="col-md-3 col-sm-3">
 												<?=display_contact_info($result);?>
 											</td>
-											<td class="span3">
+											<td class="col-md-3 col-sm-3">
 												<?=display_location_info($result);?>
 											</td>
 										<?php if (!empty($result->secondary)) { ?>
 										</tr>
 										<tr class="person-secondary-list">
-											<td class="span12" colspan="3">
-												<a class="toggle person-secondary"><i class="icon-plus"></i> More Results</a>
+											<td class="col-md-12 col-sm-12" colspan="3">
+												<a class="toggle person-secondary"><span class="glyphicon glyphicon-plus"></span> More Results</a>
 												<ul>
 													<?php foreach ($result->secondary as $secondary) { ?>
 													<li>
 														<table class="table">
 															<tbody>
 																<tr>
-																	<td class="span6">
+																	<td class="col-md-6 col-sm-6">
 																		<?=display_primary_info($secondary);?>
 																	</td>
-																	<td class="span3">
+																	<td class="col-md-3 col-sm-3">
 																		<?=display_contact_info($secondary);?>
 																	</td>
-																	<td class="span3">
+																	<td class="col-md-3 col-sm-3">
 																		<?=display_location_info($secondary);?>
 																	</td>
 																</tr>
@@ -853,20 +857,20 @@ function sc_phonebook_search($attrs) {
 								case 'organizations':
 									?>
 									<tr>
-										<td class="span6">
+										<td class="col-md-6 col-sm-6">
 											<?=display_primary_info($result);?>
 										</td>
-										<td class="span3">
+										<td class="col-md-3 col-sm-3">
 											<?=display_contact_info($result);?>
 										</td>
-										<td class="span3">
+										<td class="col-md-3 col-sm-3">
 											<?=display_location_info($result);?>
 										</td>
 									<?php if(count($result->staff) > 0) { ?>
 									</tr>
 									<tr>
-										<td colspan="3" class="show_staff span12">
-											<a class="toggle"><i class="icon-plus"></i> Show Staff</a>
+										<td colspan="3" class="show_staff col-md-12 col-sm-12">
+											<a class="toggle"><span class="glyphicon glyphicon-plus"></span> Show Staff</a>
 											<div class="show-staff-wrap">
 												<ul class="staff-list">
 													<?php
@@ -973,7 +977,7 @@ function gf_login_html($error = false) {
 		<form method="post" id="auth-form" action="<?=$pageURL; ?>">
 			<div class="wrapper">
 				<?php if ($error):?>
-				<div class="alert alert-error" id="login_error">
+				<div class="alert alert-danger" id="login_error">
 					<strong>Error:</strong>
 					<p>Oops! Your NID or password is invalid or the authentication service was unavailable.</p>
 					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"<br/>
@@ -984,7 +988,7 @@ function gf_login_html($error = false) {
 				<div id="auth-form-items">
 					<label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input>
 					<label for="password">Password</label><input name="password" id="password" type="password"></input>
-					<input name="submit-auth" class="btn" id="submit-auth" type="submit" value="Submit" />
+					<input name="submit-auth" class="btn btn-default" id="submit-auth" type="submit" value="Submit" />
 				</div>
 			</div>
 		</form>

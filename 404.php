@@ -3,7 +3,7 @@
 
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="page-not-found">
-		<div id="contentcol" class="span12">
+		<div id="contentcol" class="col-md-12 col-sm-12">
 			<article role="main">
 				<?php
 				$page = get_page_by_title( '404' );
@@ -16,7 +16,7 @@
 				<?php else: ?>
 					<div class="knightro-bg">
 						<div class="row">
-							<div class="span8">
+							<div class="col-md-8 col-sm-8">
 								<h1>Page Not Found</h1>
 								<p class="lead">Don't give in to despair, your quest continues here...</p>
 								<p>Try double-checking the spelling of the address you requested, or search using the field below:</p>

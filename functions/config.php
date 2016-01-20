@@ -216,7 +216,7 @@ Config::$custom_taxonomies = array(
 Config::$esi_whitelist = array(
 	1 => array(
 		'name' => 'output_weather_data',
-		'safe_args' => array('span3'),
+		'safe_args' => array('col-md-3 col-sm-3'),
 		),
 	2 => array(
 		'name' => 'do_shortcode',
