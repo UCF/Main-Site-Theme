@@ -1,0 +1,213 @@
+// Force sans-serif font on common components
+.alert,
+.badge,
+.breadcrumb,
+.btn,
+.carousel,
+.collapse,
+.dropdown,
+.jumbotron,
+.label,
+.list-group,
+.media,
+.modal,
+.nav,
+.navbar,
+.pagination,
+.panel,
+.well {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif;
+}
+
+
+// Modals
+.modal-dialog {
+  margin-top: 75px; // UCF Header height + 25px pad
+}
+
+
+// Social Buttons
+.share-twitter,
+.share-facebook,
+.share-googleplus,
+.share-linkedin,
+.share-email {
+  @include sprite('../img/social-share-extended.png', '../img/social-share-extended-r.png', 354px, 62px);
+  display: inline-block;
+  height: 31px;
+  margin-top: 5px;
+  width: 70px;
+}
+
+.share-twitter {
+  background-position: -71px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -71px -31px;
+  }
+}
+
+.share-facebook {
+  background-position: 0 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: 0 -31px;
+  }
+}
+
+.share-googleplus {
+  background-position: -142px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -142px -31px;
+  }
+}
+
+.share-linkedin {
+  background-position: -213px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -213px -31px;
+  }
+}
+
+.share-email {
+  background-position: -284px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -284px -31px;
+  }
+}
+
+
+// jQuery UI Overrides
+// Bootstrap and jQuery UI don't play nicely together.  GravityForms
+// datepicker fields implement the jQuery UI datepicker plugin.
+.ui-datepicker {
+  width: 230px !important;
+}
+
+.ui-datepicker-month,
+.ui-datepicker-year {
+  font-family: Helvetica, sans-serif;
+  margin: 5px 2px;
+  width: auto !important;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+  background-image: none !important;
+  box-sizing: border-box;
+  margin-top: 5px;
+  position: relative;
+}
+
+.ui-datepicker-prev:before,
+.ui-datepicker-next:before {
+  color: #fff;
+  display: block;
+  font-size: 30px;
+  font-weight: 200;
+  height: 100%;
+  line-height: 25px;
+  text-align: center !important;
+  text-shadow: 0 0 0 transparent;
+  width: 100%;
+}
+
+.ui-datepicker-prev:before {
+  content: '‹';
+}
+
+.ui-datepicker-next:before {
+  content: '›';
+}
+
+.ui-datepicker-prev.ui-state-hover,
+.ui-datepicker-next.ui-state-hover {
+  background: #444 !important;
+  border: 0 solid transparent !important;
+}
+
+.ui-datepicker-prev .ui-icon,
+.ui-datepicker-next .ui-icon {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.ui-datepicker th {
+  filter: none !important;
+  text-shadow: 0 0 0 transparent !important;
+}
+
+.ui-datepicker-calendar .ui-state-default {
+  box-sizing: border-box;
+  width: 32px;
+}
+
+.ui-datepicker-calendar .ui-state-highlight {
+  color: #000;
+  text-decoration: underline;
+}
+
+
+// Bootstrap Tags Input js plugin overrides
+.announcement-tag-autocomplete {
+  margin-bottom: 10px;
+}
+
+.bootstrap-tagsinput {
+  width: 96%;
+}
+
+.bootstrap-tagsinput .tag {
+  font-family: "Helvetica Neue", "Helvetica-Neue", "Helvetica", sans-serif;
+}
+
+
+// Bootstrap btn overrides
+// TODO: see if any of these can be overridden via variables
+a.btn, a.btn:hover, a.btn.disabled {
+    color: #333333 !important;
+}
+a.btn-primary,
+a.btn-warning,
+a.btn-info,
+a.btn-success,
+a.btn-danger,
+a.btn-primary:hover,
+a.btn-warning:hover,
+a.btn-info:hover,
+a.btn-success:hover,
+a.btn-danger:hover,
+a.btn-primary.disabled {
+    color: #FFFFFF !important;
+}
+
+
+// Bootstrap pager overrides
+// TODO: see if any of these can be overridden via variables
+.pager li > a,
+.pager li > span {
+  font-weight: 500;
+}
+.pager .disabled > a,
+.pager .disabled > a:hover,
+.pager .disabled > span {
+  color: #ccc !important;
+}
