@@ -1,5 +1,13 @@
 var Generic = {};
 
+// A fast and short piece of code you can use before deciding how to procede without .browser in jquery:
+// http://pupunzi.open-lab.com/2013/01/16/jquery-1-9-is-out-and-browser-has-been-removed-a-fast-workaround
+jQuery.browser = {};
+jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+
 // Helper function to get the actual window width in all browsers
 // (Firefox and IE like to include the width of vertical scrollbars
 // while Webkit doesn't, causing some inconsistencies.)
@@ -85,6 +93,7 @@ Generic.mobileSidebar = function($) {
 };
 
 
+/* jshint ignore:start */
 /* Assign browser-specific body classes on page load */
 addBodyClasses = function($) {
   var bodyClass = '';
@@ -104,7 +113,7 @@ addBodyClasses = function($) {
 
   $('body').addClass(bodyClass);
 };
-
+/* jshint ignore:end */
 
 /* Adjust iOS devices on rotate */
 iosRotateAdjust = function($) {
@@ -127,7 +136,7 @@ centerpieceSlider = function($) {
   if(slider.length > 0) {
 
     // Get all duration values:
-    var timeouts = new Array();
+    var timeouts = [];
     $('#centerpiece_slider ul li').each(function() {
       duration = $(this).attr('data-duration');
       // Just in case it's not assigned through php somehow:
@@ -151,10 +160,10 @@ centerpieceSlider = function($) {
     });
 
     // timeouts per slide (in seconds)
-    function calculateTimeout(currElement, nextElement, opts, isForward) {
+    var calculateTimeout = function(currElement, nextElement, opts, isForward) {
       var index = opts.currSlide;
       return timeouts[index] * 1000;
-    }
+    };
 
     // Stop slider when a video thumbnail is clicked:
     $('.centerpiece_single_vid_thumb').click(function() {
@@ -414,8 +423,9 @@ ieStripedAcademicsResults = function($) {
 Generic.PostTypeSearch = function($) {
   $('.post-type-search')
     .each(function(post_type_search_index, post_type_search) {
-      post_type_search = $(post_type_search),
-        form             = post_type_search.find('.post-type-search-form'),
+      post_type_search = $(post_type_search);
+
+      var form             = post_type_search.find('.post-type-search-form'),
         field            = form.find('input[type="text"]'),
         working          = form.find('.working'),
         results          = post_type_search.find('.post-type-search-results'),

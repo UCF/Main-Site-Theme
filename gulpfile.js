@@ -14,6 +14,8 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     browserSync = require('browser-sync').create();
 
+var gutil = require('gulp-util');
+
 var configDefault = {
       scssPath: './src/scss',
       cssPath: './static/css',
@@ -25,7 +27,6 @@ var configDefault = {
       syncTarget: 'http://localhost/'
     },
     config = merge(configDefault, configLocal);
-
 
 // Run Bower
 gulp.task('bower', function() {
@@ -99,7 +100,7 @@ gulp.task('js-lint', function() {
 // Concat and uglify primary js files.
 gulp.task('js-main', function() {
   var minified = [
-    config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+    //config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
     config.componentsPath + '/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
     config.componentsPath + '/Chart.js/Chart.js',
     config.componentsPath + '/jfeed/build/dist/jquery.jfeed.js',
