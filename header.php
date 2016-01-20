@@ -100,11 +100,11 @@
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
-				<div class="span2 alert-icon-wrap">
+				<div class="col-md-2 col-sm-2 alert-icon-wrap">
 					<div class="alert-icon general"></div>
 				</div>
-				<div class="span10 alert-wrap">
-					<div class="alert alert-error alert-block">
+				<div class="col-md-10 col-sm-10 alert-wrap">
+					<div class="alert alert-danger alert-block">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h2>
 							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">

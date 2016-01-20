@@ -15,11 +15,11 @@ $include_ongoing = 1;
 if (isset($_GET['include_ongoing'])) {
 	$include_ongoing = (int)$_GET['include_ongoing'];
 }
- 
-$error = ''; 
+
+$error = '';
 
 // Set up get_announcements() args:
-// default args: role='all', keyword=null, time='thisweek' 
+// default args: role='all', keyword=null, time='thisweek'
 //
 // (Note: sanitization is handled via Wordpress's WP_Query,
 // but we're checking values here first to generate errors if
@@ -44,7 +44,7 @@ elseif ($keywordval) {
 		$keywordval = NULL;
 	}
 }
-elseif ($timeval) { 
+elseif ($timeval) {
 	if (preg_match('/^[a-z]/', $timeval)) { // should only be lowercase letters
 		$announcements = get_announcements('all', NULL, $timeval);
 	}
@@ -60,7 +60,7 @@ else {
 
 
 // We want to compare each announcement start date and end
-// date with some date in the past and some date in the future, 
+// date with some date in the past and some date in the future,
 // respectively, to see if the announcement's time span
 // continues before and after those past and future dates.
 // If both of these requirements are met, the announcement
@@ -75,7 +75,7 @@ if ($timeval) {
 		case 'nextweek':
 			// Compare to next Monday and next Sunday
 			$start_date_comparison 	= date('Ymd', strtotime('monday next week'));
-			$end_date_comparison	= date('Ymd', strtotime('sunday next week')); 
+			$end_date_comparison	= date('Ymd', strtotime('sunday next week'));
 			break;
 		case 'thismonth':
 			// Compare to last day of last month and first day
@@ -102,22 +102,22 @@ if ($timeval) {
 }
 else { // assume default 'thisweek'
 	$start_date_comparison	= date('Ymd', strtotime('monday this week'));
-	$end_date_comparison	= date('Ymd', strtotime('sunday this week'));						
+	$end_date_comparison	= date('Ymd', strtotime('sunday this week'));
 }
 
-$ongoing 		= array();	
+$ongoing 		= array();
 $upcoming	 	= array();
 // Make sure we need to compare start/end dates
 if ($start_date_comparison && $end_date_comparison) {
 	if ($announcements) {
 		foreach ($announcements as $announcement) {
-			// If the post start date is before the start date comparison AND continues 
+			// If the post start date is before the start date comparison AND continues
 			// through the end date comparison, add it to the ongoing array. Otherwise,
 			// add it to the upcoming array.
 			// This allows an announcement to be 'upcoming' as it approaches its start
 			// and end date (when, theoretically, it would be most relevant.)
-			if ( 
-				(date('Ymd', strtotime($announcement->announcementStartDate)) < $start_date_comparison) && 
+			if (
+				(date('Ymd', strtotime($announcement->announcementStartDate)) < $start_date_comparison) &&
 				(date('Ymd', strtotime($announcement->announcementEndDate))   > $end_date_comparison)
 			) {
 				$ongoing[$announcement->ID] = $announcement;
@@ -191,7 +191,7 @@ if ( isset($_GET['output']) ) {
 				header('Content-Type: application/json');
 				print json_encode($upcoming);
 				break;
-			case 'rss':		
+			case 'rss':
 				announcements_to_rss($upcoming);
 				break;
 			default:
@@ -203,27 +203,27 @@ else {
 ?>
 <?php get_header(); the_post();?>
 	<div class="row page-content" id="<?=$post->post_name?>">
-		<div class="span12" id="page_title">
-			<h1 class="span9"><?php the_title();?></h1>
-			<?php esi_include('output_weather_data','span3'); ?>
+		<div class="col-md-12 col-sm-12" id="page_title">
+			<h1 class="col-md-9 col-sm-9"><?php the_title();?></h1>
+			<?php esi_include('output_weather_data','col-md-3 col-sm-3'); ?>
 		</div>
-		
-		<div class="span12" id="contentcol">
+
+		<div class="col-md-12 col-sm-12" id="contentcol">
 			<article role="main">
 				<div class="row" id="filters">
 					<form id="filter_form" action="">
-					<div class="span4" id="filter_wrap">
+					<div class="col-md-4 col-sm-4" id="filter_wrap">
 						<label for="filter">Filter Results by...</label>
 						<div class="btn-group" id="filter" data-toggle="buttons-radio">
-							<button type="button" id="filter_audience" class="btn <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">Audience</button>
-							<button type="button" id="filter_keyword" class="btn <?php if ($keywordval) { ?>active<?php } ?>">Keyword</button>
-							<button type="button" id="filter_time" class="btn <?php if ($timeval) { ?>active<?php } ?>">Time</button>
+							<button type="button" id="filter_audience" class="btn btn-default <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">Audience</button>
+							<button type="button" id="filter_keyword" class="btn btn-default <?php if ($keywordval) { ?>active<?php } ?>">Keyword</button>
+							<button type="button" id="filter_time" class="btn btn-default <?php if ($timeval) { ?>active<?php } ?>">Time</button>
 						</div>
 					</div>
-					
-					<div class="span3 active_filter" id="filter_audience_wrap">	
+
+					<div class="col-md-3 col-sm-3 active_filter" id="filter_audience_wrap">
 						<label for="role">Select an Audience</label>
-						<select name="role" class="span3">
+						<select name="role" class="col-md-3 col-sm-3">
 							<option value="all">All Roles</option>
 							<?php
 								$args = array(
@@ -240,13 +240,13 @@ else {
 							?>
 						</select>
 					</div>
-					<div class="span3" id="filter_keyword_wrap">	
+					<div class="col-md-3 col-sm-3" id="filter_keyword_wrap">
 						<label for="keyword">Type a Keyword</label>
-						<input type="text" name="keyword" class="span3" <?php if ($keywordval) { ?>placeholder="<?=$keywordval?>"<?php } ?> />
+						<input type="text" name="keyword" class="col-md-3 col-sm-3" <?php if ($keywordval) { ?>placeholder="<?=$keywordval?>"<?php } ?> />
 					</div>
-					<div class="span3" id="filter_time_wrap">	
+					<div class="col-md-3 col-sm-3" id="filter_time_wrap">
 						<label for="time">Select a Time</label>
-						<select name="time" class="span3">
+						<select name="time" class="col-md-3 col-sm-3">
 							<option <?php if ($timeval == 'thisweek') { ?>selected=""<?php } ?>value="thisweek">This Week</option>
 							<option <?php if ($timeval == 'nextweek') { ?>selected=""<?php } ?>value="nextweek">Next Week</option>
 							<option <?php if ($timeval == 'thismonth') { ?>selected=""<?php } ?>value="thismonth">This Month</option>
@@ -255,42 +255,42 @@ else {
 							<option <?php if ($timeval == 'all') { ?>selected=""<?php } ?>value="all">All</option>
 						</select>
 					</div>
-					
-					<div class="span1">	
-						<input type="submit" class="btn" value="View" id="filter_update">
+
+					<div class="col-md-1">
+						<input type="submit" class="btn btn-default" value="View" id="filter_update">
 					</div>
 					</form>
-					<div class="span3" id="addnew_wrap">
-						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><i class="icon-pencil icon-white"></i> Post an Announcement</a>
+					<div class="col-md-3 col-sm-3" id="addnew_wrap">
+						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><span class="glyphicon glyphicon-pencil glyphicon-white"></span> Post an Announcement</a>
 					</div>
 				</div>
-				
+
 				<?php the_content();?>
-				
-				<?php if ($error !== '') { print '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
-				
-				<?php 
-					if ($announcements == NULL) { 
+
+				<?php if ($error !== '') { print '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
+
+				<?php
+					if ($announcements == NULL) {
 						print '<h2 id="upcoming-header">'.$resultsfor.'</h2>';
-						print 'No announcements found.'; 
-					} else { 
+						print 'No announcements found.';
+					} else {
 						// Output upcoming and ongoing events separately
 						if (!empty($upcoming) && empty($ongoing)) {
 					?>
 						<div class="row">
-							<div class="span12" id="upcoming-onecol">
+							<div class="col-md-12 col-sm-12" id="upcoming-onecol">
 								<h2 id="upcoming-header"><?=$resultsfor?></h2>
-								<?=print_announcements($upcoming, 'thumbtacks', 'span4', 3);?>
+								<?=print_announcements($upcoming, 'thumbtacks', 'col-md-4 col-sm-4', 3);?>
 						</div>
 					<?php
 						} else { ?>
 						<div class="row">
-							<div class="span8" id="upcoming-twocol">
+							<div class="col-md-8 col-sm-8" id="upcoming-twocol">
 								<h2 id="upcoming-header"><?=$resultsfor?></h2>
-								<?php (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'span4', 2) : print '<p>No upcoming announcements found.</p>'; ?>
+								<?php (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'col-md-4 col-sm-4', 2) : print '<p>No upcoming announcements found.</p>'; ?>
 						</div>
-							
-						<div class="span3 offset1" id="ongoing-twocol">
+
+						<div class="col-md-3 col-sm-3 col-md-offset-1 col-sm-offset-1" id="ongoing-twocol">
 							<h2 id="ongoing-header">Ongoing Announcements</h2>
 							<?php (!empty($ongoing)) ? print_announcements($ongoing, 'list') : print '<p>No ongoing announcements found.</p>'; ?>
 						</div>
@@ -298,10 +298,10 @@ else {
 						}
 					}
 				?>
-				
+
 			</article>
 		</div>
 	</div>
 <?php get_footer();
-} 
+}
 ?>

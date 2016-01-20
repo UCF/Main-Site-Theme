@@ -264,7 +264,7 @@ div.top_five_majors {
 
 
 /* Home Page - General */
-#home .span12 { margin-bottom: 30px; overflow: hidden !important; }
+#home .col-md-12 { margin-bottom: 30px; overflow: hidden !important; }
 
 
 /* Home Page - Centerpiece */
@@ -419,7 +419,7 @@ a.home_spotlight_readmore {
 /* Home Page - Colleges Nav */
 #home-supplemental { width: 100%; background: #FFEFB3; padding: 15px 0; margin-top: 30px; font-size: 12px; }
 #home-supplemental a:hover { color: #e50606; }
-#home-supplemental .span2 { width: 100px; }
+#home-supplemental .col-md-2 { width: 100px; }
 #home-supplemental h3 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
@@ -576,7 +576,6 @@ a.home_spotlight_readmore {
 #azIndexList { width: 532px; margin-left: 24px; }
 #azIndexList #azIndexList-label { font-family: Georgia, serif; color: #333; margin-left: -5px; background: #fff; padding: 10px 10px 7px 0; }
 .ie7 #azIndexList #azIndexList-label { padding: 10px 0 7px 4px; }
-#azIndexList .navbar-inner { padding: 0; min-height: 0; }
 #azIndexList .nav { margin-right: 0; }
 #azIndexList .nav li { border-right: 1px solid #D4D4D4; }
 #azIndexList .nav li:first-child { margin-left: 2px; }
@@ -1431,7 +1430,7 @@ li.tagit-new input {
 #degree-single .ie7 #sidebar_right {
   padding-left: 0;
 }
-#degree-single .btn-large {
+#degree-single .btn-lg {
   font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B' !important;
   font-size: 15px;
   font-weight: 400;
@@ -2000,13 +1999,11 @@ a.btn-warning,
 a.btn-info,
 a.btn-success,
 a.btn-danger,
-a.btn-inverse,
 a.btn-primary:hover,
 a.btn-warning:hover,
 a.btn-info:hover,
 a.btn-success:hover,
 a.btn-danger:hover,
-a.btn-inverse:hover,
 a.btn-primary.disabled {
     color: #FFFFFF !important;
 }

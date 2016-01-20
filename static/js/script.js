@@ -31,8 +31,8 @@ Generic.mobileNavBar = function($) {
   // Switch the navigation bar from standard horizontal nav to bootstrap mobile nav
   // when the browser is at mobile size:
   var mobile_wrap = function() {
-    $('#header-menu').wrap('<div class="navbar navbar-inverse"><div class="navbar-inner"><div class="container" id="mobile_dropdown_container"><div class="nav-collapse"></div></div></div></div>');
-    $('<a class="btn btn-navbar" id="mobile_dropdown_toggle" data-target=".nav-collapse" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="#">Navigation</a>').prependTo('#mobile_dropdown_container');
+    $('#header-menu').wrap('<div class="navbar navbar-inverse"><div class="container" id="mobile_dropdown_container"><div class="navbar-collapse"></div></div></div>');
+    $('<a class="btn navbar-btn" id="mobile_dropdown_toggle" data-target=".navbar-collapse" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="#">Navigation</a>').prependTo('#mobile_dropdown_container');
     $('.current-menu-item, .current_page_item').addClass('active');
   }
   var mobile_unwrap = function() {
@@ -187,7 +187,7 @@ centerpieceSlider = function($) {
 centerpieceVidResize = function($) {
   if ($('#centerpiece_slider').length > 0) {
     var addDimensions = function() {
-      var parentw = $('#centerpiece_slider').parent('.span12').width();
+      var parentw = $('#centerpiece_slider').parent('.col-md-12').width();
       if (getRealWindowWidth($) <= 767) {
         $('li.centerpiece_single .centerpiece_single_vid_hidden, li.centerpiece_single object, li.centerpiece_single iframe, li.centerpiece_single embed')
           .css({'height' : parentw * 0.36 +'px'});
@@ -210,7 +210,7 @@ centerpieceVidResize = function($) {
 /* Set/Unset iframe source on video modal open/close */
 videoModalSet = function($) {
   if ($('.video-modal').length > 0) {
-    $('.video-modal').on('show', function() {
+    $('.video-modal').on('show.bs.modal', function() {
       var modalID = $(this).attr('id');
       var src = $(this).children('.modal-body').attr('data-src');
 
@@ -219,7 +219,7 @@ videoModalSet = function($) {
       }
     });
 
-    $('.video-modal').on('hide', function() {
+    $('.video-modal').on('hide.bs.modal', function() {
       $(this).find('iframe').remove();
     });
   }
@@ -244,10 +244,10 @@ removeNavSeparator = function($) {
 
 /* Add Bootstrap button styles for GravityForm submit buttons */
 styleGformButtons = function($) {
-  $('.gform_button').addClass('btn');
+  $('.gform_button').addClass('btn btn-default');
   $(document).bind('gform_post_render', function(){
     // Handle buttons generated with ajax
-      $('.gform_button').addClass('btn');
+      $('.gform_button').addClass('btn btn-default');
   });
 }
 
@@ -286,19 +286,19 @@ azIndex = function($) {
     // Post type search customizations
     $('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
     $('form.post-type-search-form')
-      .addClass('span7')
+      .addClass('col-md-7')
       .children('label')
         .text('Quick Search:')
         .show();
     $('form.post-type-search-form')
       .children('input')
-        .removeClass('span3')
+        .removeClass('col-md-3')
         .addClass('search-query');
 
     $('.post-type-search-alpha h3').each(function() {
       $(this)
         .parent('div').prepend('<div class="az-jumpto-anchor" id="az-' + $(this).text().toLowerCase() + '" />')
-        .children('h3').after('<span class="backtotop"><i class="icon-arrow-up"></i> <a href="#top">Back to Top</a></span>');
+        .children('h3').after('<span class="backtotop"><span class="glyphicon glyphicon-arrow-up"></span> <a href="#top">Back to Top</a></span>');
     });
 
     // Activate Scrollspy
@@ -583,7 +583,7 @@ Generic.PostTypeSearch = function($) {
 var phonebookStaffToggle = function($) {
   $('#phonebook-search-results a.toggle').click(function() {
     $(this)
-      .children('i').toggleClass('icon-plus icon-minus').end()
+      .children('span').toggleClass('glyphiicon-plus glyphicon-minus').end()
       .next().fadeToggle();
   });
 }
@@ -632,9 +632,6 @@ var devBootstrap = function($) {
 /* Bootstrap Dropdown fixes for mobile devices */
 // Fixes onclick event for mobile devices
 $(document).on('touchstart.dropdown', '.dropdown-menu', function(e) { e.stopPropagation(); });
-// Prevents page jump on click when activating hover-able elements (dropdowns, tooltips...)
-// Note that this assumes popover activators (buttons) won't have a real href value on this site.
-$('.dropdown-submenu a[href="#"], a[rel="popover"], a[rel="tooltip"]').click(function(e) { e.preventDefault(); });
 
 
 /*

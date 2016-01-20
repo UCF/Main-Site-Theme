@@ -6,13 +6,13 @@
 	$start   = (is_numeric($_GET['start'])) ? (int)$_GET['start'] : 0;
 	$results = get_search_results($_GET['s'], $start, $limit, $domain);
 ?>
-<?php get_header(); ?>	
+<?php get_header(); ?>
 	<div class="row page-content" id="search-results">
-		<div id="page_title" class="span12">
-			<h1 class="span9">Search Results</h1>
-			<?php esi_include('output_weather_data','span3'); ?>
+		<div id="page_title" class="col-md-12 col-sm-12">
+			<h1 class="col-md-9 col-sm-9">Search Results</h1>
+			<?php esi_include('output_weather_data','col-md-3 col-sm-3'); ?>
 		</div>
-		<div id="contentcol" class="span9">
+		<div id="contentcol" class="col-md-9 col-sm-9">
 			<article role="main">
 				<?php if(count($results['items'])):?>
 				<ul class="result-list">
@@ -34,32 +34,32 @@
 					</li>
 				<?php endforeach;?>
 				</ul>
-			
+
 				<?php if($start + $limit < $results['number']):?>
 				<a class="button more" href="./?s=<?=$_GET['s']?>&amp;start=<?=$start + $limit?>">More Results</a>
 				<?php endif;?>
-				
+
 				<?php else:?>
-					
+
 				<p>No results found for "<?=htmlentities($_GET['s'])?>".</p>
-				
+
 				<?php endif;?>
 			</article>
 		</div>
-		<div id="sidebar" class="span3">
+		<div id="sidebar" class="col-md-3 col-sm-3">
 			<?=get_sidebar('sidebar-right');?>
 		</div>
 	</div>
 <?php get_footer();?>
 
 <?php else:?>
-<?php get_header(); the_post();?>	
+<?php get_header(); the_post();?>
 	<div class="row page-content" id="search-results">
-		<div id="page_title" class="span12">
-			<h1 class="span9">Search Results</h1>
-			<?php esi_include('output_weather_data','span3'); ?>
+		<div id="page_title" class="col-md-12 col-sm-12">
+			<h1 class="col-md-9 col-sm-9">Search Results</h1>
+			<?php esi_include('output_weather_data','col-md-3 col-sm-3'); ?>
 		</div>
-		<div id="contentcol" class="span9">
+		<div id="contentcol" class="col-md-9 col-sm-9">
 			<article role="main">
 				<?php if(have_posts()):?>
 					<ul class="result-list">
@@ -73,12 +73,12 @@
 						</li>
 					<?php endwhile;?>
 					</ul>
-				<?php else:?>		
+				<?php else:?>
 					<p>No results found for "<?=htmlentities($_GET['s'])?>".</p>
 				<?php endif;?>
 			</article>
 		</div>
-		<div id="sidebar" class="span3">
+		<div id="sidebar" class="col-md-3 col-sm-3">
 			<?=get_sidebar('sidebar-right');?>
 		</div>
 	</div>

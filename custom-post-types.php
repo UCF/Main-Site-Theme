@@ -736,7 +736,7 @@ class Person extends CustomPostType
 	public function objectsToHTML($people, $css_classes) {
 		ob_start();?>
 		<div class="row">
-			<div class="span12">
+			<div class="col-md-12 col-sm-12">
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -764,7 +764,7 @@ class Person extends CustomPostType
 							</td>
 							<td class="phones"><?php if(($link) && ($this->get_phones($person))) {?><a href="<?=get_permalink($person->ID)?>">
 								<?php } if($this->get_phones($person)) {?>
-									<ul class="unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
+									<ul class="list-unstyled"><?php foreach($this->get_phones($person) as $phone) { ?><li><?=$phone?></li><?php } ?></ul>
 								<?php } if(($link) && ($this->get_phones($person))) {?></a><?php }?></td>
 							<td class="email"><?=(($email != '') ? '<a href="mailto:'.$email.'">'.$email.'</a>' : '')?></td>
 						</tr>
