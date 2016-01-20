@@ -1,0 +1,458 @@
+/* Academics Search, Single Degree Programs */
+#academics-search .lead {
+  font-family: 'Gotham SSm 2r', 'Gotham SSm A', 'Gotham SSm B';
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 200;
+  letter-spacing: -.012em;
+  line-height: 1.4;
+  margin: 10px 0;
+  text-align: center;
+}
+#academics-search .lead strong,
+#academics-search .lead b {
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-weight: 400;
+}
+
+#academics-search a.btn.disabled,
+#academics-search a.btn.disabled:hover,
+#academics-search a.btn.disabled:active,
+#academics-search a.btn.disabled:focus {
+  /* Make disabled buttons look more disabled */
+  color: #888 !important;
+}
+
+#academics-search a.btn,
+#degree-single a.btn {
+  /* Make degree search, single degree buttons flat */
+  background-image: none;
+  text-shadow: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+#degree-search-top,
+#degree-search-top input,
+#degree-search-top select,
+#degree-search-top option,
+#degree-search-sidebar,
+#degree-search-sidebar input,
+#degree-search-sidebar select,
+#degree-search-sidebar option,
+#degree-search-content,
+#degree-search-content input,
+#degree-search-content select,
+#degree-search-content option {
+  /* Reset to Helvetica */
+  font-family: "Helvetica Neue", "Helvetica-Neue", Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+#degree-search-content {
+  box-sizing: border-box;
+  padding-left: 15px;
+}
+
+#degree-search-sidebar.affix {
+  top: 0;
+  z-index: 999;
+}
+
+#degree-search-sidebar.affix-bottom {
+  position: absolute;
+}
+
+#degree-search-sidebar .radio {
+  padding-left: 21px;
+}
+
+#degree-search-sidebar .degree-filter-title {
+  color: #888;
+  display: block;
+  float: left;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -.012em;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+#degree-search-sidebar .degree-filter-clear {
+  clear: right;
+  color: #999 !important;
+  float: right;
+  font-size: 12px;
+  line-height: 40px; /* match .degree-filter-title */
+  text-decoration: underline;
+}
+
+#degree-search-sidebar .degree-filter-list {
+  clear: both;
+  list-style-type: none;
+  margin-bottom: 15px;
+  margin-left: 0;
+}
+#degree-search-sidebar .degree-filter-list li {
+  padding-bottom: 6px;
+}
+#degree-search-sidebar .degree-filter-list li a {
+  color: #000;
+}
+#degree-search-sidebar label {
+  font-size: 14px;
+}
+#degree-search-sidebar input:checked + span,
+#degree-search-sidebar input:checked + .seo-li span,
+#degree-search-sidebar input:checked ~ .filter-result-count {
+  font-weight: bold;
+}
+#degree-search-sidebar .filter-result-count {
+  color: #888;
+}
+
+#degree-search-sidebar .degree-infobox-toggle {
+  border-bottom: 0 solid transparent !important;
+  display: block;
+  float: right;
+  margin-right: 15px;
+  padding-left: 5px;
+}
+#degree-search-sidebar .degree-infobox-toggle .icon {
+  padding-bottom: 3px;
+  border-bottom: 1px dotted #999;
+}
+#degree-search-sidebar .popover-title {
+  display: none; /* hide empty titles */
+}
+#degree-search-sidebar .popover {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: normal;
+}
+
+#degree-search-top {
+  margin-bottom: 10px;
+}
+
+#degree-search-top .degree-search-form {
+  margin-top: 25px;
+  text-align: center;
+}
+#degree-search-top .degree-search-form-inner {
+  display: inline-block;
+  position: relative;
+}
+#degree-search-top .search-field {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 50px;
+  line-height: 50px;
+  text-indent: 10px;
+  padding-right: 60px;
+  position: relative;
+  z-index: 2;
+}
+.ie8 #degree-search-top .search-field {
+  /* Move out of the field in ie8 because right padding isn't applied properly to push text */
+  box-sizing: content-box;
+  margin-right: 60px;
+  padding-right: 0;
+}
+#degree-search-top .degree-search-form button {
+  background-color: transparent;
+  border: 0 solid transparent;
+  bottom: 0;
+  box-sizing: border-box;
+  height: 50px;
+  overflow: hidden;
+  position: absolute;
+  right: 0;
+  text-indent: 70px;
+  top: 0;
+  width: 60px;
+  z-index: 3;
+}
+#degree-search-top .degree-search-form button:before {
+  color: #999;
+  content: '';
+  display: block;
+  font-family: 'FontAwesome';
+  font-size: 28px;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+  position: absolute;
+  text-align: center;
+  text-indent: 0;
+  top: 0;
+  width: 60px;
+  z-index: 4;
+}
+#degree-search-top .degree-search-form button:hover {
+  text-decoration: none;
+}
+#degree-search-top .degree-search-form button:hover:before {
+  color: #08C;
+}
+
+#degree-search-top .degree-search-sort {
+  border-bottom: 1px solid #e5e5e5;
+  margin-top: 30px;
+  width: 100%;
+}
+#degree-search-top .degree-search-sort-inner {
+  display: table-cell;
+  padding-bottom: 10px;
+  vertical-align: middle;
+}
+
+#degree-search-top .degree-result-count {
+  border-right: 1px solid #eee;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  font-style: italic;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal;
+  line-height: 22px;
+  padding-right: 15px;
+  padding-top: 5px;
+  width: 70%;
+}
+#degree-search-top .degree-result-count .for {
+  padding-right: 8px;
+}
+#degree-search-top .degree-result-count .result,
+#degree-search-top .degree-result-count .search-result {
+  font-style: normal;
+}
+
+#degree-search-top .degree-result-count-num,
+#degree-search-top .degree-result-count .result,
+#degree-search-top .degree-result-count .search-result {
+  font-weight: bold;
+}
+#degree-search-top .degree-result-count .result,
+#degree-search-content .degree-search-again-container a {
+  color: #000;
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 2px 0;
+  padding: 0 8px 0 0;
+}
+#degree-search-top .degree-result-count .result .close {
+  border: 1px solid #666;
+  border-radius: 20px;
+  color: #666;
+  display: block;
+  font-size: 14px;
+  line-height: 12px;
+  float: right;
+  margin-left: 4px;
+  margin-top: 3px;
+  opacity: .3;
+  padding: 0 3px 2px;
+  position: relative;
+  top: -5px;
+}
+#degree-search-top .degree-result-count .result .close:hover,
+#degree-search-top .degree-result-count .result .close:active,
+#degree-search-top .degree-result-count .result .close:focus {
+  opacity: .8;
+}
+#degree-search-top .degree-result-count .result .close:before {
+  content: '×';
+  display: block;
+}
+
+#degree-search-top  .reset-search {
+  color: #e50606;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-style: normal;
+  text-decoration: underline;
+}
+
+#degree-search-top .degree-result-phrase-phone {
+  display: none;
+}
+
+#degree-search-top .degree-search-sort-options {
+  padding-left: 15px;
+  width: 27%;
+}
+.ie8 #degree-search-top .degree-search-sort-options {
+  width: 28%;
+}
+#degree-search-top .degree-search-sort-label {
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-weight: 400;
+  font-style: normal;
+  padding-left: 0;
+}
+
+#degree-search-content .degree-search-results-container {
+  padding-bottom: 30px;
+  position: relative;
+}
+
+#ajax-loading {
+  background-color: rgba(255, 255, 255, .75);
+  background-image: url('static/img/ajax.gif');
+  background-repeat: no-repeat;
+  background-position: top center;
+  box-sizing: border-box;
+  display: block;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  transition: background-color .1s ease-in-out;
+}
+#ajax-loading.hidden {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#degree-search-content .degree-search-similar {
+  margin-top: 25px;
+}
+
+#degree-search-content .degree-search-group-title {
+  border-bottom: 1px solid #eee;
+  color: #222;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+  line-height: 30px;
+  margin: 15px 0;
+  padding-bottom: 10px;
+}
+#degree-search-content .degree-search-group-title small {
+  display: inline-block;
+}
+
+#degree-search-content .degree-search-results {
+  list-style-type: none;
+  margin-left: 0;
+  margin-bottom: 30px;
+}
+#degree-search-content .degree-search-result {
+  box-sizing: border-box;
+  display: table;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 0;
+  position: relative;
+}
+#degree-search-content .degree-search-result:nth-child(2n) {
+  background-color: #fafafa;
+}
+#degree-search-content .degree-search-result:hover,
+#degree-search-content .degree-search-result:active,
+#degree-search-content .degree-search-result:focus {
+  background-color: #eee;
+}
+
+#degree-search-content .degree-title-heading {
+  margin-bottom: 0;
+  width: 100%;
+}
+#degree-search-content .degree-title-wrap {
+  box-sizing: border-box;
+  display: table;
+  font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 0;
+  padding: 15px;
+  width: 100%;
+}
+#degree-search-content .degree-title {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  color: #08c;
+  display: table-cell;
+  margin-bottom: 5px;
+  padding-right: 20px;
+  vertical-align: middle;
+  width: 85%;
+}
+#degree-search-content .degree-program-type,
+#degree-search-content .degree-credits-count,
+#degree-search-content .degree-details-separator {
+  color: #888;
+  font-size: 11.5px;
+  font-weight: normal;
+  line-height: 1.1;
+}
+#degree-search-content .degree-title .degree-program-type {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+}
+#degree-search-content .degree-details {
+  box-sizing: border-box;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+#degree-search-content .degree-details-separator {
+  display: block;
+  margin: 0 6px;
+}
+#degree-search-content .degree-credits-count .number {
+  font-size: 22px;
+  display: block;
+  margin: auto;
+}
+
+#degree-search-content .degree-search-suggestions {
+  padding-top: 30px;
+}
+#degree-search-content .degree-search-results + .degree-search-suggestions {
+  border-top: 1px solid #eee;
+  margin-top: 30px;
+  padding-top: 35px;
+}
+#degree-search-content .degree-search-suggestions-phrase {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 25px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: italic;
+    margin-bottom: 50px;
+}
+
+#degree-search-content .degree-search-no-results {
+  border-bottom: 1px solid #eee;
+  padding-top: 30px;
+}
+
+#degree-search-content .degree-search-no-results-phrase {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: italic;
+}
+
+#degree-search-content .degree-search-result-showing {
+  text-align: center;
+}
+
+#degree-search-content .degree-search-again-container {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+}

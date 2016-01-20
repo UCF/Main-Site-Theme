@@ -1,0 +1,114 @@
+/* Subpages - Title */
+.subpage .page-content #page_title { padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
+.subpage .page-content #page_title h1 { font-weight: normal; display: block; margin-left: 0; }
+
+/* Subpages - Subheaders */
+#subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
+/* For IE 7-8, which don't support media queries: */
+.ie7 #subheader, .ie8 #subheader { height: 140px; overflow: visible; }
+#subheader .subheader_subimg { margin-left: 0; border: 0; }
+#subheader .subhead_quote { border-left: 0; padding-left: 0; }
+#subheader .subhead_author {
+  float: right;
+  font-weight: bold;
+  padding-top: 20px;
+  font-size: 12px;
+  font-family: Georgia, serif;
+  line-height: 15px;
+  width: 320px;
+  text-align: right;
+}
+#subheader .subhead_quotelink { padding-top: 20px; }
+#subheader .subhead_quotelink a { color: #660000 !important; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: normal; }
+#subheader .subhead_quotelink a:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
+.subheader_studentimg { float: right; margin-right: 20px; }
+
+
+/* Subpages - Sidebars - General */
+.sidebar_title {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.2px;
+  line-height: 12px;
+  padding-bottom: 5px;
+}
+
+.sidebar_nav { list-style-type: none; font-family: 'Helvetica Neue', Helvetica, sans-serif; font-size: 13px; margin-left: 0; margin-bottom: 20px; }
+.sidebar_nav li { padding-bottom: 8px; line-height: 17px; }
+.sidebar_nav li a { color: #333; font-weight: normal; }
+.sidebar_nav li a:hover { color: #e50606; text-decoration: underline; }
+
+
+/* Subpages - Left Sidebar */
+#sidebar_l_moreinfo { color: #B38C0B; }
+#sidebar_l_secinfo { color: #F5530C; }
+#sidebar_l_colleges { color: #777; padding-top: 40px; }
+
+
+/* Subpages - Center Column (Content Column) */
+.ie7 #contentcol iframe,
+.ie7 #contentcol embed,
+.ie7 #contentcol object,
+.ie8 #contentcol iframe,
+.ie8 #contentcol embed,
+.ie8 #contentcol object { width: 100%; height: 260px; }
+
+#contentcol embed {
+  background: #a3a3a3 url('static/img/mobile_notavailable.gif') center center no-repeat;
+}
+
+#contentcol h2 { font-size: 18px; line-height: 28px; }
+#contentcol p { margin-bottom: 20px; }
+#contentcol a { color: #660000; border-bottom: 1px solid #ccc; }
+#contentcol a:hover { color: #e50606; border-bottom: 1px solid #e50606; text-decoration: none; }
+
+#contentcol .rightcol_subheader_fix { width: 150px; height: 150px; float: right; }
+
+
+/* Subpages - Right Sidebar */
+#sidebar_right { padding-top: 115px; }
+.ie7 #sidebar_right, .ie8 #sidebar_right { padding-top: 140px; }
+#sidebar_right.notoppad,
+#sidebar_left .notoppad { padding-top: 0 !important; }
+#sidebar_right .sidebar_title { color: #777; }
+#sidebar_right #sidebar_r_facebook_wrap > iframe { margin-left: -10px; width: 230px !important; height: 80px !important; }
+#sidebar_right #sidebar_r_today { font-size: 14px; line-height: 16px; color: #000; padding-bottom: 15px; }
+#sidebar_right .news { list-style-type: none; margin-left: 0; }
+#sidebar_right .news .item { margin-bottom: 10px; }
+#sidebar_right .news .item a { font-size: 12px; font-family: Georgia, serif; font-weight: normal; color: #000; border-bottom: 1px solid #ccc; }
+#sidebar_right .news .item a:hover { text-decoration: none; color: #e50506; border-bottom: 1px solid #e50506; }
+.sidebar_r_wrap { margin-bottom: 30px; overflow: hidden; }
+.sidebar_r_wrap p { font-family: Georgia, serif; }
+
+.ie7 #sidebar_right .sidebar_r_wrap > iframe,
+.ie7 #sidebar_right .sidebar_r_wrap > embed,
+.ie7 #sidebar_right .sidebar_r_wrap > object,
+.ie8 #sidebar_right .sidebar_r_wrap > iframe,
+.ie8 #sidebar_right .sidebar_r_wrap > embed,
+.ie8 #sidebar_right .sidebar_r_wrap > object,
+.ie7 #sidebar_right .sidebar_r_wrap > p iframe,
+.ie7 #sidebar_right .sidebar_r_wrap > p embed,
+.ie7 #sidebar_right .sidebar_r_wrap > p object,
+.ie8 #sidebar_right .sidebar_r_wrap > p iframe,
+.ie8 #sidebar_right .sidebar_r_wrap > p embed,
+.ie8 #sidebar_right .sidebar_r_wrap > p object {
+  width: 100%;
+  height: 140px;
+}
+
+#sidebar_right .modal-body iframe,
+#sidebar_right .modal-body embed,
+#sidebar_right .modal-body object {
+  width: 100%;
+  height: 338px;
+}
+.ie7 #sidebar_right .modal-body iframe,
+.ie7 #sidebar_right .modal-body embed,
+.ie7 #sidebar_right .modal-body object,
+.ie8 #sidebar_right .modal-body iframe,
+.ie8 #sidebar_right .modal-body embed,
+.ie8 #sidebar_right .modal-body object {
+  width: 530px;
+}

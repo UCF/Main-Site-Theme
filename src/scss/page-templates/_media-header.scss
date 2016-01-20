@@ -1,0 +1,45 @@
+/* Media Header Template Pages */
+.page-template-template-media-feature #header-nav-wrap {
+  z-index: 2;
+}
+
+.page-media {
+  position: relative;
+  top: -70px;
+  z-index: 1;
+}
+
+.page-media-header {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+}
+
+/* CSS-only full-width bg video. IE9+ */
+.page-media-header video {
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: auto;
+  z-index: -1000;
+}
+
+.page-media-container {
+  left: 0;
+  padding-top: 70px;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+}

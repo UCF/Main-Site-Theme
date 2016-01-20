@@ -22,8 +22,8 @@
 // @import 'components';
 
 // Styles for our base header/footer templates
-// @import 'header';
-// @import 'footer';
+@import 'header';
+@import 'footer';
 
 // Styles for widgets, which are more specific than components and may appear
 // on multiple pages/templates
@@ -32,5 +32,12 @@
 // Add more view-specific overrides here.  Try to follow WordPress template
 // naming conventions as closely as possible--e.g. home.php styles should go in
 // a file named _home.scss.
-// @import 'home';
-// @import 'page';
+@import 'home';
+@import 'page';
+@import 'announcement';
+@import 'az-index-link';
+@import 'centerpiece';
+@import 'document';
+@import 'publication';
+@import 'video';
+

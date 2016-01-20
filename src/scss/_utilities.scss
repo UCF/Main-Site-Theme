@@ -31,3 +31,41 @@
 }
 
 // scss-lint:enable ImportantRule
+
+
+// IE8 rounded corner fix for news, spotlight thumbnails; Standard rounded corners for centerpieces
+.thumb_corner_tl,
+.thumb_corner_tr,
+.thumb_corner_bl,
+.thumb_corner_br {
+  @include sprite();
+  height: 10px;
+  position: absolute;
+  width: 10px;
+  z-index: 999;
+  zoom: 1;
+}
+
+.thumb_corner_tl {
+  background-position: -416px -10px;
+  left: 0;
+  top: 0;
+}
+
+.thumb_corner_tr {
+  background-position: -402px 0;
+  right: 0;
+  top: 0;
+}
+
+.thumb_corner_bl {
+  background-position: -404px -8px;
+  bottom: 0;
+  left: 0;
+}
+
+.thumb_corner_br {
+  background-position: -413px 3px;
+  bottom: 0;
+  right: 0;
+}

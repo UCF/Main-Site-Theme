@@ -1,0 +1,108 @@
+/* Home Page - General */
+#home .col-md-12 { margin-bottom: 30px; overflow: hidden !important; }
+
+/* Home Page - Sub Columns - General Styles */
+a.home_col_morelink, a.events_morelink { font-family: 'Helvetica Neue', Helvetica, sans-serif; color: #660000 !important; border-bottom: 1px solid #ccc; }
+a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
+#home_leftcol h2, #home_centercol h2, #home_rightcol h2 {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+/* Bootstrap 30px margin pushes the right col off because of center col dashed border */
+#home_leftcol, #home_centercol, #home_rightcol { margin-left: 29px; }
+/* IE fixes */
+.ie7 #home_leftcol, .ie8 #home_leftcol { margin-left: 20px; }
+.ie7 #home_centercol, .ie8 #home_centercol { margin-left: 10px; }
+.ie7 #home_rightcol, .ie8 #home_rightcol { padding-left: 15px; margin-left: 0; }
+
+.col_padwrap { margin: 0 30px; }
+.ie7 .col_padwrap, .ie8 .col_padwrap { margin: 0 20px; }
+
+
+/* Home Page - Left Column */
+#home_leftcol {  }
+#home_leftcol h2 { color: #E26906; }
+#home_leftcol a { color: #333; }
+#home_leftcol a:hover { color: #e50606; }
+.home_spotlight_single { overflow: auto; clear: both; width: 95%; margin-bottom: 20px; }
+.home_spotlight_single .spotlight_thumb {
+  background-position: center center;
+  background-repeat: no-repeat;
+  float: left;
+  position: relative;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+  text-indent: -9999px;
+}
+.home_spotlight_title { line-height: 16px; padding-bottom: 5px; }
+.home_spotlight_title a { border-bottom: 1px solid #ccc; font-size: 14px; text-decoration: none; }
+.home_spotlight_title a:hover { border-bottom: 1px solid #e50606; }
+a.home_spotlight_readmore {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+/* Home Page - Center Column */
+#home_centercol { }
+#home_centercol a { color: #333; }
+#home_centercol a:hover { color: #e50606; text-decoration: none; }
+#home_centercol { border-left: 1px dotted #333; }
+#home_centercol h3.title { line-height: 18px; }
+.ie7 #home_centercol h3.title { margin-top: -20px; } /* wat. */
+#home_centercol h3.title a { font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
+#home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
+#home_centercol .news {margin-left:0;}
+#home_centercol .news .item { margin-bottom: 20px; list-style-type:none;}
+#home_centercol .news .item .end {clear:left;}
+#home_centercol .news .item .news-thumb {
+  border-radius: 10px;
+  box-shadow: none;
+  border: 0;
+  float: left;
+  margin-right: 15px;
+  width: 66px;
+  height: 66px;
+  text-indent: -9999px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  position: relative;
+}
+
+
+/* Home Page - Right Column */
+#home_rightcol { margin-left: 0; border-left: 1px dotted #333; }
+#home_rightcol h2 { color: #B38C0B; }
+.ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
+#home_rightcol #weather_bug { width: 100%; }
+#home_rightcol #weather_bug #wb_status_txt { text-align: left; }
+
+
+/* Home Page - Colleges Nav */
+#home-supplemental { width: 100%; background: #FFEFB3; padding: 15px 0; margin-top: 30px; font-size: 12px; }
+#home-supplemental a:hover { color: #e50606; }
+#home-supplemental .col-md-2 { width: 100px; }
+#home-supplemental h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#home-supplemental aside { overflow: auto; } /* Make sure floated content doesn't overflow out of the aside */
+#home-supplemental #menu-ucf-colleges { list-style-type: none; margin-left: 0; }
+#home-supplemental #menu-ucf-colleges li {
+  float: left;
+  width: 50%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 4px 0;
+  line-height: 15px;
+}
+#home-supplemental #menu-ucf-colleges li a { font-size: 12px; color: #262626; line-height: 15px; }

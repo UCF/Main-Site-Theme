@@ -1,0 +1,20 @@
+/* Documents */
+.nobullet { margin-left: 0; margin-bottom: 10px; }
+
+.powerpoint,
+.missing,
+.excel,
+.word,
+.zip,
+.pdf,
+.html,
+.document{background: url('static/img/documents.png') no-repeat; margin: 0 5px 0 0; height: 18px; width: 18px; content: ''; display: inline-block; position: relative; top: 3px;}
+.powerpoint{background-position: 0 -18px;}
+.pdf{background-position: 0 -36px;}
+.missing{background-position: 0 -54px;}
+.excel{background-position: 0 -72px;}
+.zip{background-position: 0 -90px;}
+.word{background-position: 0 -108px;}
+.html{background-position: 0 -126px;}
+
+.document {padding-left: 25px;margin-bottom:5px;width:100%;}
