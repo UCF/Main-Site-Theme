@@ -43,3 +43,40 @@
   right: 0;
   z-index: 2;
 }
+
+
+
+@media (max-width: 767px) {
+  .page-media {
+    top: -96px;
+  }
+
+  .page-media-header {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .page-media-header video {
+    display: none;
+  }
+
+  .page-media-container {
+    padding-top: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-template-template-media-feature #header-nav-wrap {
+    left: 20px; /* gutter width */
+    position: absolute;
+    right: 20px;
+  }
+
+  .page-media {
+    top: -72px;
+  }
+
+  .page-media-container {
+    padding-top: 134px;
+  }
+}

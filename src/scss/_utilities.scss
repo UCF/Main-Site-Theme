@@ -36,6 +36,16 @@
 // Content hiding helpers
 .print-only {
   display: none;
+
+  @media print {
+    display: block;
+  }
+}
+
+.screen-only {
+  @media print {
+    display: none;
+  }
 }
 
 .sr-only,
@@ -48,6 +58,12 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+a.print-noexpand:after {
+  @media print {
+    content: '';
+  }
 }
 
 

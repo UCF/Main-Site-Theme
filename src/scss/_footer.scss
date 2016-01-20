@@ -65,3 +65,22 @@
   background: url('static/img/spritesheet.png') -246px -46px no-repeat; /* Standard logo */
   /*background: url('static/img/spritesheet.png') 0 -279px no-repeat; */ /* 50th logo */
 }
+
+
+
+@media (max-width: 979px) {
+    #footer-menu li { margin-right: 5px; }
+}
+
+@media (width: 768px) {
+    #footer-menu li { letter-spacing: 0.7px; }
+}
+
+@media (max-width: 767px) {
+  #footer-menu { text-align: center; margin-bottom: 20px; }
+  #footer-menu li { float: none !important; margin-bottom: 10px; }
+  #footer-menu li:after { margin-left: 5px; }
+}
+
+
+

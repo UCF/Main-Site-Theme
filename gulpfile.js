@@ -48,7 +48,9 @@ gulp.task('bower', function() {
 // Lint all scss files
 gulp.task('scss-lint', function() {
   gulp.src(config.scssPath + '/*.scss')
-    .pipe(scsslint());
+    .pipe(scsslint({
+      'maxBuffer': 400 * 1024  // default: 300 * 1024
+    }));
 });
 
 

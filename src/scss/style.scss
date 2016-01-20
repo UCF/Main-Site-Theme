@@ -16,7 +16,7 @@
 // Base styles for typography, tables, forms, and images
 // @import 'type';
 @import 'tables';
-// @import 'forms';
+@import 'forms';
 
 // Styles for custom components and Bootstrap component overrides
 @import 'components';
@@ -39,4 +39,3 @@
 @import 'document';
 @import 'publication';
 @import 'video';
-

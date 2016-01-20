@@ -52,3 +52,63 @@ li.centerpiece_single .slide_contents {
   margin-right:5px;
   border: 1px solid #fff; }
 #centerpiece_control a.activeSlide{ background:#fff; }
+
+
+
+@media (min-width: 980px) {
+  #centerpiece_slider,
+  li.centerpiece_single,
+  li.centerpiece_single img.centerpiece_single_img,
+  li.centerpiece_single img.centerpiece_single_vid_thumb,
+  li.centerpiece_single object,
+  li.centerpiece_single iframe,
+  li.centerpiece_single embed {width: 940px; height: 338px; }
+  #centerpiece_slider ul {height: 338px;}
+}
+
+@media (max-width: 979px) {
+  #centerpiece_slider,
+  li.centerpiece_single,
+  li.centerpiece_single img.centerpiece_single_img,
+  li.centerpiece_single img.centerpiece_single_vid_thumb,
+  li.centerpiece_single object,
+  li.centerpiece_single iframe,
+  li.centerpiece_single embed {width: 724px; height: 260px; }
+  #centerpiece_slider ul {height: 260px;}
+}
+
+@media (width: 768px) {
+    #centerpiece_control { bottom: 25px; left: 25px; }
+    #centerpiece_control a { width: 20px; height: 20px; margin-right: 15px; }
+}
+
+@media (max-width: 767px) {
+  #centerpiece_slider { width: 100%; margin: 0; }
+  #centerpiece_slider, #centerpiece_slider ul { height: auto; }
+  li.centerpiece_single,
+  li.centerpiece_single img.centerpiece_single_img,
+  li.centerpiece_single img.centerpiece_single_vid_thumb,
+  li.centerpiece_single object,
+  li.centerpiece_single iframe,
+  li.centerpiece_single embed { max-width: 100%; width: 100%; height: auto; margin: 0; line-height: 0; }
+  #centerpiece_control { bottom: 25px; left: 25px; }
+  #centerpiece_control a { width: 20px; height: 20px; margin-right: 15px; }
+
+  #centerpiece_slider li .slide_contents { display: none !important; } /* Prevent mobile weirdness */
+}
+
+@media (max-width: 480px) {
+
+    #centerpiece_control { bottom: 10px; left: 10px; }
+    #centerpiece_control a { width: 15px; height: 15px; margin-right: 10px; }
+}
+
+@media print {
+  #centerpiece_slider .thumb_corner_tl,
+  #centerpiece_slider .thumb_corner_tr,
+  #centerpiece_slider .thumb_corner_bl,
+  #centerpiece_slider .thumb_corner_br,
+  #centerpiece_control {
+    display: none;
+  }
+}

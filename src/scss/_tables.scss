@@ -4,3 +4,60 @@
   font-family: $font-family-sans-serif;
   font-size: $font-size-base;
 }
+
+
+@media (max-width: 767px) {
+  /* Shrinkable bootstrap tables for tablets/phones.
+  Responsive table guide via css-tricks.com/responsive-data-tables/ */
+
+  table.table.table-striped,
+  .table.table-striped thead,
+  .table.table-striped tbody,
+  .table.table-striped th,
+  .table.table-striped td,
+  .table.table-striped tr {
+      display: block;
+  }
+  .table.table-striped tbody {
+      width: 100%;
+  }
+  .table.table-striped thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  .table.table-striped tr {
+      margin: 10px 0 0 0;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+  }
+  .table.table-striped tbody tr td:empty {
+      display: none;
+  }
+  .table.table-striped td,
+  .table.table-striped td.name,
+  .table.table-striped td.email,
+  .table.table-striped td.job_title,
+  .table.table-striped td.phones {
+      width: auto;
+  }
+  .table.table-striped td.name {
+      font-size: 14px;
+  }
+  .table.table-striped td.job_title {
+      border-top: 0;
+  }
+  .table.table-striped tbody tr td ul {
+      margin-bottom: 0;
+  }
+  .table.table-striped td.phones ul li {
+      line-height: 16px;
+  }
+  .table.table-bordered {
+      border: 0;
+  }
+  .table.table-bordered tbody tr td {
+      border-left: 0;
+  }
+}
