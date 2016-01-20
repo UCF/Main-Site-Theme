@@ -39,7 +39,7 @@ gulp.task('bower', function() {
 
       // Move Font Awesome assets
       gulp.src(config.componentsPath + '/font-awesome/*/*')
-        .pipe(gulp.dest(config.fontPath));
+        .pipe(gulp.dest(config.fontPath + '/font-awesome/'));
 
     });
 });

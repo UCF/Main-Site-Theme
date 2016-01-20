@@ -165,11 +165,6 @@ define('WP_SITE_PATH', $path);
 
 define('LDAP_HOST', 'net.ucf.edu');
 
-# Protocol-agnostic URL schemes aren't supported before WP 3.5,
-# so we have to determine the protocol before registering
-# any non-relative resources.
-define('CURRENT_PROTOCOL', is_ssl() ? 'https://' : 'http://');
-
 
 /**
  * Set config values including meta tags, registered custom post types, styles,
@@ -603,7 +598,7 @@ Config::$links = array(
  * Add css files to the list of stylesheet references in the header
  **/
 Config::$styles = array(
-	array( 'admin' => True, 'src' => THEME_CSS_URL.'/admin.css' ),
+	array( 'admin' => True, 'src' => THEME_CSS_URL.'/admin.min.css' ),
 	THEME_CSS_URL . '/style.min.css',
 );
 
@@ -612,9 +607,9 @@ Config::$styles = array(
  * Add javascript to the list of javascript references in the header + footer
  **/
 Config::$scripts = array(
-	array( 'admin' => True, 'src' => THEME_JS_URL.'/admin.js' ),
-	array( 'name' => 'ucfhb-script', 'src' => CURRENT_PROTOCOL . 'universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1' ),
-	array( 'name' => 'theme-script', 'src' => THEME_JS_URL . '/script.js' ),
+	array( 'admin' => True, 'src' => THEME_JS_URL.'/admin.min.js' ),
+	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1' ),
+	array( 'name' => 'theme-script', 'src' => THEME_JS_URL . '/script.min.js' ),
 );
 
 
@@ -625,7 +620,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_wpa11y' );
 
 function jquery_in_header() {
     wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', CURRENT_PROTOCOL.'ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
+    wp_register_script( 'jquery', '//code.jquery.com/jquery-1.11.0.min.js' );
     wp_enqueue_script( 'jquery' );
 }
 add_action( 'wp_enqueue_scripts', 'jquery_in_header' );
