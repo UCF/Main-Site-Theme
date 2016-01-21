@@ -263,14 +263,8 @@
   background: #FFEFB3;
   font-size: 12px;
   margin-top: 30px;
-  padding: 15px 0;
+  padding: 0 0 15px;
   width: 100%;
-
-  @media (max-width: $screen-xs-max) {
-    margin-left: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
 
   a:hover {
     color: #e50606;
@@ -294,41 +288,28 @@
   .col-md-2 {
     width: 100px;
   }
-}
 
-#home #menu-ucf-colleges {
-  list-style-type: none;
-  margin-left: 0;
+  #menu-ucf-colleges {
+    li {
+      float: left;
+      font-family: $font-family-sans-serif;
+      line-height: 15px;
+      padding: 4px 0;
+      width: 50%;
 
-  li {
-    float: left;
-    font-family: $font-family-sans-serif;
-    line-height: 15px;
-    padding: 4px 0;
-    width: 50%;
-
-    @media (max-width: 480px) {
-      display: inline-block;
-      float: none !important;
-      margin-right: 5px;
-      width: 100%;
+      @media (max-width: 480px) {
+        display: inline-block;
+        float: none !important;
+        margin-right: 5px;
+        width: 100%;
+      }
     }
-  }
 
-  a {
-    color: #262626;
-    font-size: 12px;
-    line-height: 15px;
-  }
-}
-
-
-// Footer overrides
-#home-footerwrap #footer {
-  margin: 20px 0 20px 20px;
-
-  @media (max-width: $screen-xs-max) {
-    margin: 20px 0;
+    a {
+      color: #262626;
+      font-size: 12px;
+      line-height: 15px;
+    }
   }
 }
 

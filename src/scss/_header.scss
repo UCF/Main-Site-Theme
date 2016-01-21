@@ -1,7 +1,7 @@
 #header-menu {
   @include center-block();
   margin-bottom: 20px;
-  margin-top: 22px;
+  margin-top: 20px;
 
   li {
     @media (max-width: $screen-sm-max) {

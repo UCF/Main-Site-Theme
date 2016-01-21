@@ -46,6 +46,7 @@
 				<?=wp_nav_menu(array(
 					'theme_location' => 'ucf-colleges',
 					'container' => 'false',
+					'menu_class' => 'list-unstyled',
 					));
 				?>
 			</div>

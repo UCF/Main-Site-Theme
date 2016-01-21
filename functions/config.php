@@ -608,7 +608,7 @@ Config::$styles = array(
  **/
 Config::$scripts = array(
 	array( 'admin' => True, 'src' => THEME_JS_URL.'/admin.min.js' ),
-	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js?use-bootstrap-overrides=1' ),
+	array( 'name' => 'ucfhb-script', 'src' => '//universityheader.ucf.edu/bar/js/university-header.js' ),
 	array( 'name' => 'theme-script', 'src' => THEME_JS_URL . '/script.min.js' ),
 );
 

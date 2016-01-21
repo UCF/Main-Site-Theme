@@ -116,13 +116,11 @@
 					</div>
 				</div>
 			</div>
-			<?php if (is_front_page()) { ?>
-			<div class="row" id="header_wrap">
-				<div id="header" class="row-border-bottom-top" role="banner">
-					<h1><?=bloginfo('name')?></h1>
-				</div>
+			<?php if ( is_front_page() ): ?>
+			<div id="header" class="sr-only" role="banner">
+				<h1><?php echo bloginfo( 'name' ); ?></h1>
 			</div>
-			<?php } ?>
+			<?php endif; ?>
 			<div id="header-nav-wrap" role="navigation" class="screen-only">
 				<?=wp_nav_menu(array(
 					'theme_location' => 'header-menu',
