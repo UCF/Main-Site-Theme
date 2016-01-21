@@ -242,33 +242,6 @@ styleGformButtons = function($) {
 };
 
 
-/* Fix subheader height to contain blockquote if it exceeds past its container: */
-fixSubheaderHeight = function($) {
-  if ($('#subheader').length > 0) {
-    var doSubheaderHeight = function() {
-      if (getRealWindowWidth($) >= 768) { /* Subhead images hide below this size */
-        var subimgHeight = $('#subheader .subheader_subimg').height(),
-          quoteHeight = $('#subheader .subhead_quote').height();
-        if (quoteHeight > subimgHeight) {
-          $('#subheader').height(quoteHeight);
-        }
-        else {
-          $('#subheader').height(subimgHeight);
-        }
-      }
-    };
-    if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
-      $(window).load(function() {
-        doSubheaderHeight();
-      });
-      $(window).resize(function() {
-        doSubheaderHeight();
-      });
-    }
-  }
-};
-
-
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
   if ($('.page-content#azindex').length > 0) {
@@ -1629,7 +1602,6 @@ if (typeof jQuery != 'undefined'){
     centerpieceSingleSlide($);
     removeNavSeparator($);
     styleGformButtons($);
-    fixSubheaderHeight($);
     azIndex($);
     toggleAnnouncementFilters($);
     ieRoundedCornerThumbs($);
