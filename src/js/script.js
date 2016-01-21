@@ -73,25 +73,6 @@ Generic.mobileNavBar = function($) {
   }
 };
 
-Generic.mobileSidebar = function($) {
-  if ($('#sidebar_left').length > 0) {
-    var moveSidebar = function() {
-      if (getRealWindowWidth($) < 768) {
-        $('#sidebar_left').remove().insertAfter('#contentcol');
-      }
-      else {
-        $('#sidebar_left').remove().insertBefore('#contentcol');
-      }
-    };
-    if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
-      moveSidebar();
-      $(window).resize(function() {
-        moveSidebar();
-      });
-    }
-  }
-};
-
 
 /* jshint ignore:start */
 /* Assign browser-specific body classes on page load */
@@ -1640,7 +1621,6 @@ if (typeof jQuery != 'undefined'){
     Generic.defaultMenuSeparators($);
     Generic.removeExtraGformStyles($);
     Generic.mobileNavBar($);
-    Generic.mobileSidebar($);
     addBodyClasses($);
     iosRotateAdjust($);
     centerpieceSlider($);

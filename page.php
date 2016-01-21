@@ -7,15 +7,15 @@
 
 		<?=get_page_subheader($post)?>
 
-		<div id="sidebar_left" class="col-md-2 col-sm-2" role="navigation">
-			<?=get_sidebar('left');?>
-		</div>
-
-		<div class="col-md-7 col-sm-7" id="contentcol">
+		<div class="col-md-7 col-sm-7 col-md-push-2 col-sm-push-2" id="contentcol">
 			<article role="main">
 				<?php the_content();?>
 				&nbsp;
 			</article>
+		</div>
+
+		<div id="sidebar_left" class="col-md-2 col-sm-2 col-md-pull-7 col-sm-pull-7" role="navigation">
+			<?=get_sidebar('left');?>
 		</div>
 
 		<div id="sidebar_right" class="col-md-3 col-sm-3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>notoppad<?php } ?>" role="complementary">
