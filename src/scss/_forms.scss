@@ -1,14 +1,14 @@
-@media (max-width: 767px) {
-  .android select {
+.android select {
+  @media (max-width: $screen-xs-max) {
     -webkit-appearance: listbox !important;
     line-height: 10px !important;
   }
 }
 
-@media (max-width: 480px) {
-  .gform_body input[type="text"],
-  .gform_body textarea,
-  li.tagit-new {
+.gform_body input[type="text"],
+.gform_body textarea,
+li.tagit-new {
+  @media (max-width: 480px) {
     width: 99% !important;
   }
 }
