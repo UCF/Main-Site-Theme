@@ -26,7 +26,12 @@
 }
 
 /* Org and Person Phonebook Search */
-#phonebook-search #phonebook-search-description {font-family:Helvetica,sans-serif;font-size:11px;margin-bottom:0;padding-left:4px;}
+#phonebook-search #phonebook-search-description {
+  font-family: Helvetica,sans-serif;
+  font-size:11px;
+  margin-bottom:0;
+  padding-left:4px;
+}
 
 #phonebook-search-results {
   margin-left: 0;
@@ -197,7 +202,9 @@
   }
 
   hr {
-    margin-top: 10px; margin-bottom: 10px; clear: both;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
   }
 
 }
@@ -351,36 +358,6 @@ a.btn-primary.disabled {
 
 
 // style-responsive.css:
-
-
-@media (min-width: 1200px) {
-    /*
-    #UCFHBHeader div.UCFHBWrapper { width: 1200px; }
-    #UCFHBHeader #UCFHBSearch_and_links { margin-left: 750px; }
-
-    #header-menu li a { font-size: 18px !important; }
-    #header-menu li.last a { font-size: 12px !important; padding-top: 2px; padding-bottom: 3px;}
-    .ie9 #header-menu li.last a { top: -1px; }
-
-    #centerpiece_slider,
-    li.centerpiece_single,
-    li.centerpiece_single img.centerpiece_single_img,
-    li.centerpiece_single img.centerpiece_single_vid_thumb,
-    li.centerpiece_single object,
-    li.centerpiece_single iframe,
-    li.centerpiece_single embed {width: 940px; height: 338px; }
-    #centerpiece_slider ul {height: 531px;}
-
-    #home_rightcol { padding-left: 29px; }
-
-    #subheader { height: 170px; overflow: visible; }
-
-    #sidebar_right iframe,
-    #sidebar_right embed,
-    #sidebar_right object { width: 270px !important; height:auto !important; }
-
-    #contentcol iframe, #contentcol embed, #contentcol object { width: 100%; height: 360px; margin: auto; }*/
-}
 
 @media (min-width: 980px) {
     .ie9 #header-menu li.last a { top: 1px; }
