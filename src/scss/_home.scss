@@ -1,155 +1,343 @@
-/* Home Page - General */
-#home .col-md-12 { margin-bottom: 30px; overflow: hidden !important; }
+// Home Page - General
+#home {
+  .col-md-12 {
+    margin-bottom: 30px;
+    overflow: hidden !important;
 
-/* Home Page - Sub Columns - General Styles */
-a.home_col_morelink, a.events_morelink { font-family: 'Helvetica Neue', Helvetica, sans-serif; color: #660000 !important; border-bottom: 1px solid #ccc; }
-a.home_col_morelink:hover, a.events_morelink:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
-#home_leftcol h2, #home_centercol h2, #home_rightcol h2 {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 14px;
-  text-transform: uppercase;
+    @media (max-width: 480px) {
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+  }
+
+  .description {
+    @media (max-width: $screen-xs-max) {
+      margin-top: 10px;
+    }
+  }
 }
-/* Bootstrap 30px margin pushes the right col off because of center col dashed border */
-#home_leftcol, #home_centercol, #home_rightcol { margin-left: 29px; }
-/* IE fixes */
-.ie7 #home_leftcol, .ie8 #home_leftcol { margin-left: 20px; }
-.ie7 #home_centercol, .ie8 #home_centercol { margin-left: 10px; }
-.ie7 #home_rightcol, .ie8 #home_rightcol { padding-left: 15px; margin-left: 0; }
-
-.col_padwrap { margin: 0 30px; }
-.ie7 .col_padwrap, .ie8 .col_padwrap { margin: 0 20px; }
 
 
-/* Home Page - Left Column */
-#home_leftcol {  }
-#home_leftcol h2 { color: #E26906; }
-#home_leftcol a { color: #333; }
-#home_leftcol a:hover { color: #e50606; }
-.home_spotlight_single { overflow: auto; clear: both; width: 95%; margin-bottom: 20px; }
-.home_spotlight_single .spotlight_thumb {
-  background-position: center center;
-  background-repeat: no-repeat;
-  float: left;
-  position: relative;
-  margin-right: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  width: 110px;
-  height: 110px;
-  cursor: pointer;
-  text-indent: -9999px;
+// Home Page - Sub Columns - General Styles
+.home_col_morelink,
+.events_morelink {
+  border-bottom: 1px solid #ccc;
+  color: #600 !important;
+  font-family: $font-family-sans-serif;
+
+  &:hover {
+    border-bottom: 1px solid #e50606;
+    color: #e50606 !important;
+    text-decoration: none;
+  }
 }
-.home_spotlight_title { line-height: 16px; padding-bottom: 5px; }
-.home_spotlight_title a { border-bottom: 1px solid #ccc; font-size: 14px; text-decoration: none; }
-.home_spotlight_title a:hover { border-bottom: 1px solid #e50606; }
-a.home_spotlight_readmore {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+
+.col_padwrap {
+  margin: 0 30px;
+
+  @media (min-width: $screen-md-min) {
+    margin: 0 20px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin: 0;
+  }
+
+  @include body-prefix('.ie8') {
+    margin: 0 20px;
+  }
+}
+
+#home_leftcol,
+#home_centercol,
+#home_rightcol {
+  @media (max-width: $screen-xs-max) {
+    margin-left: 0;
+  }
+
+  h2 {
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+}
+
+#home_leftcol,
+#home_centercol {
+  margin-left: 19px;
+
+  @media (max-width: $screen-xs-max) {
+    border-bottom: 1px dotted #333 !important;
+    padding-bottom: 20px;
+  }
+}
+
+#home_centercol,
+#home_rightcol {
+  @media (max-width: $screen-xs-max) {
+    margin-top: 20px;
+  }
+}
+
+
+// Home page - left column
+#home_leftcol {
+  @include body-prefix('.ie8') {
+    margin-left: 20px;
+  }
+
+  h2 {
+    color: #E26906;
+  }
+
+  a {
+    color: #333;
+
+    &:hover {
+      color: #e50606;
+    }
+  }
+}
+
+.home_spotlight_single {
+  clear: both;
+  margin-bottom: 20px;
+  overflow: auto;
+  width: 95%;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .spotlight_thumb {
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    cursor: pointer;
+    float: left;
+    height: 110px;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    position: relative;
+    text-indent: -9999px;
+    width: 110px;
+  }
+}
+
+.home_spotlight_title {
+  line-height: 16px;
+  padding-bottom: 5px;
+
+  a {
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    text-decoration: none;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 12px;
+    }
+
+    &:hover {
+      border-bottom: 1px solid #e50606;
+    }
+  }
+}
+
+.home_spotlight_readmore {
+  font-family: $font-family-sans-serif;
   font-size: 12px;
   font-weight: bold;
 }
 
 
-/* Home Page - Center Column */
-#home_centercol { }
-#home_centercol a { color: #333; }
-#home_centercol a:hover { color: #e50606; text-decoration: none; }
-#home_centercol { border-left: 1px dotted #333; }
-#home_centercol h3.title { line-height: 18px; }
-.ie7 #home_centercol h3.title { margin-top: -20px; } /* wat. */
-#home_centercol h3.title a { font-size: 14px; border-bottom: 1px solid #ccc; font-weight: normal; }
-#home_centercol h3.title a:hover { border-bottom: 1px solid #e50606; }
-#home_centercol .news {margin-left:0;}
-#home_centercol .news .item { margin-bottom: 20px; list-style-type:none;}
-#home_centercol .news .item .end {clear:left;}
-#home_centercol .news .item .news-thumb {
-  border-radius: 10px;
-  box-shadow: none;
-  border: 0;
-  float: left;
-  margin-right: 15px;
-  width: 66px;
-  height: 66px;
-  text-indent: -9999px;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  position: relative;
+// Home page - center column
+#home_centercol {
+  border-left: 1px dotted #333;
+
+  @media (max-width: $screen-xs-max) {
+    border: 0;
+  }
+
+  @include body-prefix('.ie8') {
+    margin-left: 10px;
+  }
+
+  a {
+    color: #333;
+
+    &:hover {
+      color: #e50606;
+      text-decoration: none;
+    }
+  }
+
+  .title {
+    line-height: 18px;
+
+    a {
+      border-bottom: 1px solid #ccc;
+      font-size: 14px;
+      font-weight: normal;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 12px;
+      }
+
+      &:hover {
+        border-bottom: 1px solid #e50606;
+      }
+    }
+  }
+
+  .news {
+    margin-left: 0;
+  }
+
+  .item {
+    list-style-type: none;
+    margin-bottom: 20px;
+
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 10px;
+    }
+  }
+
+  .end {
+    clear: left;
+  }
+
+  .news-thumb {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: none;
+    cursor: pointer;
+    float: left;
+    height: 66px;
+    margin-right: 15px;
+    position: relative;
+    text-indent: -9999px;
+    width: 66px;
+  }
 }
 
 
-/* Home Page - Right Column */
-#home_rightcol { margin-left: 0; border-left: 1px dotted #333; }
-#home_rightcol h2 { color: #B38C0B; }
-.ie7 #home_rightcol h2, .ie8 #home_rightcol h2 { padding-bottom: 15px; }
-#home_rightcol #weather_bug { width: 100%; }
-#home_rightcol #weather_bug #wb_status_txt { text-align: left; }
+// Home page - right column
+#home_rightcol {
+  border-left: 1px dotted #333;
+  margin-left: 0;
+  padding-left: 19px;
+
+  @media (max-width: $screen-xs-max) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  @include body-prefix('.ie8') {
+    padding-left: 15px;
+  }
+
+  h2 {
+    color: #B38C0B;
+
+    @include body-prefix('.ie8') {
+      padding-bottom: 15px;
+    }
+  }
+
+  #weather_bug {
+    width: 100%;
+  }
+
+  #wb_status_text {
+    text-align: left;
+  }
+}
 
 
-/* Home Page - Colleges Nav */
-#home-supplemental { width: 100%; background: #FFEFB3; padding: 15px 0; margin-top: 30px; font-size: 12px; }
-#home-supplemental a:hover { color: #e50606; }
-#home-supplemental .col-md-2 { width: 100px; }
-#home-supplemental h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+// Home Page - Colleges Nav
+#home-supplemental {
+  background: #FFEFB3;
   font-size: 12px;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-#home-supplemental aside { overflow: auto; } /* Make sure floated content doesn't overflow out of the aside */
-#home-supplemental #menu-ucf-colleges { list-style-type: none; margin-left: 0; }
-#home-supplemental #menu-ucf-colleges li {
-  float: left;
-  width: 50%;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  padding: 4px 0;
-  line-height: 15px;
-}
-#home-supplemental #menu-ucf-colleges li a { font-size: 12px; color: #262626; line-height: 15px; }
+  margin-top: 30px;
+  padding: 15px 0;
+  width: 100%;
 
+  @media (max-width: $screen-xs-max) {
+    margin-left: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
+  a:hover {
+    color: #e50606;
+  }
 
-@media (min-width: 980px) {
-    #home_leftcol, #home_centercol { margin-left: 19px; }
-    #home_rightcol { padding-left: 19px; }
-    .col_padwrap { margin: 0 20px; }
-}
+  h3 {
+    font-family: $font-family-sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
 
-@media (max-width: 979px) {
-    #home_leftcol, #home_centercol { margin-left: 19px; }
-    #home_rightcol { padding-left: 19px; }
-    .col_padwrap { margin: 0 20px; }
+    @media (max-width: $screen-xs-max) {
+      margin-top: 20px;
+    }
+  }
 
-    .home_spotlight_single { line-height: 18px; }
-    .home_spotlight_title a, #home_centercol h3.title a, .home_spotlight_single { font-size: 12px; }
-}
+  aside {
+    overflow: auto; // Make sure floated content doesn't overflow out of the aside
+  }
 
-@media (max-width: 767px) {
-  #home .description { margin-top: 10px; }
-
-  #home_leftcol, #home_centercol { padding-bottom: 20px; border-bottom: 1px dotted #333 !important; margin-left: 0; }
-  #home_centercol, #home_rightcol { margin-top: 20px; margin-left: 0; }
-  #home_centercol { border: 0; }
-  #home_centercol .col_padwrap { margin: 0; }
-  .news .item { margin-bottom: 10px; }
-  #home_rightcol { border-left: 0; padding-left: 0; }
-
-  #home-supplemental { margin-left: -20px; padding-left: 20px; padding-right: 20px; }
-  #home-supplemental h3 { margin-top: 20px; }
-
-  #home-footerwrap #footer { margin: 20px 0; }
+  .col-md-2 {
+    width: 100px;
+  }
 }
 
+#home #menu-ucf-colleges {
+  list-style-type: none;
+  margin-left: 0;
 
-@media (max-width: 480px) {
-  #home .col-md-12 { margin-bottom: 10px; margin-top: 0; }
+  li {
+    float: left;
+    font-family: $font-family-sans-serif;
+    line-height: 15px;
+    padding: 4px 0;
+    width: 50%;
 
-  #home-supplemental #menu-ucf-colleges li { margin-right: 5px; float: none !important; display: inline-block; width: 100%; }
+    @media (max-width: 480px) {
+      display: inline-block;
+      float: none !important;
+      margin-right: 5px;
+      width: 100%;
+    }
+  }
+
+  a {
+    color: #262626;
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
 
-@media print {
-  .home_spotlight_single > a[href]:after,
-  .home_spotlight_single .home_spotlight_title a[href]:after,
-  ul.news li.item > a.image:after { content: ""; }
+
+// Footer overrides
+#home-footerwrap #footer {
+  margin: 20px 0 20px 20px;
+
+  @media (max-width: $screen-xs-max) {
+    margin: 20px 0;
+  }
 }
 
+
+// Misc. print overrides
+.home_spotlight_single > a[href]:after,
+.home_spotlight_title a[href]:after,
+.news .item > .image:after {
+  @media print {
+    content: '';
+  }
+}
