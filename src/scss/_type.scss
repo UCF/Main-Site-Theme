@@ -4,3 +4,12 @@ blockquote {
     border: 0;
   }
 }
+
+h6 {
+  color: $gray-light;
+  text-transform: uppercase;
+}
+
+.lead {
+  font-size: 20px;
+}

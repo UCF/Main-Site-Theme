@@ -33,6 +33,14 @@
 // scss-lint:enable ImportantRule
 
 
+// Disable -lg breakpoint
+.container {
+  @media (min-width: $screen-lg-min) {
+    width: $container-md;
+  }
+}
+
+
 // Content hiding helpers
 .print-only {
   display: none;
