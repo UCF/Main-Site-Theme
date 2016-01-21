@@ -8,6 +8,24 @@
     .knightro-bg {
       background: url('static/img/knightro-searching.jpg') top right no-repeat;
       min-height: 470px;
+
+      @media (max-width: $screen-md-max) {
+        background-position: center right;
+        background-size: 230px auto;
+        min-height: 450px;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        background-size: 100px auto;
+        box-sizing: border-box;
+        min-height: 0;
+        padding-right: 120px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        background-image: none;
+        padding-right: 0;
+      }
     }
 
     h1 {
@@ -20,6 +38,14 @@
       line-height: .9;
       margin-bottom: 20px;
       margin-top: 10px;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 55px;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 36px;
+      }
     }
 
     p {
@@ -54,6 +80,10 @@
       text-indent: 10px;
       width: 100%;
       z-index: 2;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 16px;
+      }
     }
 
     .search-submit {
@@ -99,44 +129,3 @@
     }
   }
 }
-
-
-
-@media (max-width: 979px) {
-
-  #page-not-found #contentcol .knightro-bg {
-    background-position: center right;
-    background-size: 230px auto;
-    min-height: 450px;
-  }
-
-  #page-not-found #contentcol h1 {
-    font-size: 55px;
-  }
-
-}
-
-@media (max-width: 767px) {
-  #page-not-found #contentcol .knightro-bg {
-    background-size: 100px auto;
-    box-sizing: border-box;
-    min-height: 0;
-    padding-right: 120px;
-  }
-
-  #page-not-found #contentcol h1 {
-    font-size: 36px;
-  }
-
-  #page-not-found #contentcol .search-field {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  #page-not-found #contentcol .knightro-bg {
-    background-image: none;
-    padding-right: 0;
-  }
-}
-
