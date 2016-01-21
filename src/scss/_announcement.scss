@@ -16,7 +16,9 @@ h2#ongoing-header {
   }
 }
 
-#filter_audience_wrap, #filter_keyword_wrap, #filter_time_wrap {
+#filter_audience_wrap,
+#filter_keyword_wrap,
+#filter_time_wrap {
   display: none;
 }
 .active_filter {
@@ -41,7 +43,81 @@ h2#ongoing-header {
 
   #addnew_wrap {
     text-align: right;
+
+    @media (max-width: $screen-md-max) {
+      width: 216px;
+      margin-left: 30px;
+    }
   }
+
+  @media (max-width: $screen-sm-max) {
+
+    #filter_wrap,
+    #filter_audience_wrap,
+    #filter_keyword_wrap,
+    #filter_time_wrap {
+      margin-left: 0;
+    }
+
+    #filter_audience_wrap,
+    #filter_keyword_wrap,
+    #filter_time_wrap {
+      width: 200px;
+      margin-right: 15px;
+      float:left;
+    }
+
+    #filter_wrap {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    #addnew_wrap {
+      text-align: center;
+      clear: both;
+      margin-left: 0 !important;
+      width: 100% !important;
+
+      #addnew_announcement {
+        margin-top: 10px;
+      }
+    }
+
+    #announcements.page-content #filters select {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    #filter_audience_wrap,
+    #filter_keyword_wrap,
+    #filter_time_wrap {
+      margin-right: 0;
+    }
+    #filter_audience_wrap,
+    #filter_audience_wrap select,
+    #filter_keyword_wrap,
+    #filter_keyword_wrap input,
+    #filter_time_wrap,
+    #filter_time_wrap select {
+      width: 155px !important;
+    }
+    #filter_audience_wrap,
+    #filter_keyword_wrap,
+    #filter_time_wrap {
+      margin-right: 10px;
+      float: left;
+    }
+    #filter_form .col-md-1 {
+      width: 100px !important;
+      float: left;
+      padding-top: 2px;
+    }
+    #addnew_wrap {
+      text-align: left;
+    }
+  }
+
   #addnew_wrap #addnew_announcement {
     margin-top: 24px;
   }
@@ -137,6 +213,20 @@ h2#ongoing-header {
   margin-left: 80px;
   border-left: 1px dotted #333;
   padding-left: 19px;
+
+  @media (max-width: $screen-md-max) {
+    margin-left: 62px;
+    border-left: 1px dotted #000;
+    padding-left: 19px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    margin-left: 0;
+    border-left: 0;
+    padding-left: 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
 
   #ongoing-header {
     font-size: 12px;
@@ -243,98 +333,6 @@ li.tagit-new {
   background: #eee !important; border: 1px solid #D3D3D3 !important;
 }
 
-
-
-
-@media (max-width: 979px) {
-    #announcements #filters #addnew_wrap {
-      width: 216px;
-      margin-left: 30px;
-    }
-
-    #ongoing-twocol {
-      margin-left: 62px;
-      border-left: 1px dotted #000;
-      padding-left: 19px;
-    }
-}
-
-@media (max-width: 767px) {
-  #ongoing-twocol { margin-left: 0;
-    border-left: 0;
-    padding-left: 0;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  #filters {
-    #filter_wrap,
-    #filter_audience_wrap,
-    #filter_keyword_wrap,
-    #filter_time_wrap {
-       margin-left: 0;
-     }
-
-    #filter_wrap {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    #filter_audience_wrap,
-    #filter_keyword_wrap,
-    #filter_time_wrap {
-      width: 200px;
-      margin-right: 15px;
-      float:left;
-    }
-
-    #addnew_wrap {
-      text-align: center;
-      clear: both;
-      margin-left: 0 !important;
-      width: 100% !important;
-    }
-
-    #addnew_wrap #addnew_announcement {
-      margin-top: 10px;
-    }
-  }
-  #announcements.page-content #filters select {
-    margin-right: 0;
-  }
-}
-
-@media (max-width: 480px) {
-  #filters {
-    #filter_audience_wrap,
-    #filter_keyword_wrap,
-    #filter_time_wrap {
-      margin-right: 0;
-    }
-    #filter_audience_wrap,
-    #filter_audience_wrap select,
-    #filter_keyword_wrap,
-    #filter_keyword_wrap input,
-    #filter_time_wrap,
-    #filter_time_wrap select {
-      width: 155px !important;
-    }
-    #filter_audience_wrap,
-    #filter_keyword_wrap,
-    #filter_time_wrap {
-      margin-right: 10px;
-      float: left;
-    }
-    #filter_form .col-md-1 {
-      width: 100px !important;
-      float: left;
-      padding-top: 2px;
-    }
-    #addnew_wrap {
-      text-align: left;
-    }
-  }
-}
 
 @media print {
   #announcements #filters {
