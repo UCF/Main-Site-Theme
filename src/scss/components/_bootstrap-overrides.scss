@@ -14,8 +14,7 @@
 .nav,
 .navbar,
 .pagination,
-.panel,
-.well {
+.panel {
   @include no-font-smoothing();
   font-family: $font-family-sans-serif;
 }
