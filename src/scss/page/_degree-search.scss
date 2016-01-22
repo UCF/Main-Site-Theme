@@ -97,6 +97,7 @@
     font-style: normal;
     font-weight: 400;
     letter-spacing: -.012em;
+    line-height: 2.3;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
   }
@@ -106,7 +107,7 @@
     color: #999 !important;
     float: right;
     font-size: 12px;
-    line-height: 40px; /* match .degree-filter-title */
+    line-height: 2.3;
     text-decoration: underline;
   }
 
@@ -115,9 +116,11 @@
     list-style-type: none;
     margin-bottom: 15px;
     margin-left: 0;
+    padding-left: 0;
   }
   .degree-filter-list li {
     padding-bottom: 6px;
+    padding-left: 0;
   }
   .degree-filter-list li a {
     color: #000;
@@ -551,6 +554,7 @@
     list-style-type: none;
     margin-left: 0;
     margin-bottom: 30px;
+    padding-left: 0;
   }
   .degree-search-result {
     box-sizing: border-box;
