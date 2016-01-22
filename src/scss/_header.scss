@@ -1,3 +1,4 @@
+// Desktop nav
 #header-menu {
   @include center-block();
   margin-bottom: 20px;
@@ -9,16 +10,6 @@
     }
   }
 
-  li,
-  .dropdown-menu li {
-    @media (max-width: 480px) {
-      display: block;
-      float: none;
-      line-height: 13px;
-      margin: 0;
-    }
-  }
-
   a {
     color: #262626;
     font-size: 17px;
@@ -27,15 +18,6 @@
 
     @media (max-width: $screen-sm-max) {
       font-size: 14.25px !important;
-    }
-
-    @media (max-width: 480px) {
-      border-radius: 3px;
-      color: #999;
-      display: block;
-      font-size: 13px;
-      font-weight: bold;
-      padding: 10px 15px;
     }
 
     &:hover {
@@ -53,14 +35,6 @@
 
   .last {
     height: 25px;
-
-    @media (max-width: $screen-xs-max) {
-      vertical-align: bottom;
-    }
-
-    @media (max-width: 480px) {
-      margin-bottom: 10px;
-    }
 
     &:after {
       content: '' !important;
@@ -100,38 +74,54 @@
         font-size: 11px !important;
       }
 
-      @media (max-width: $screen-xs-max) {
-        margin-top: 5px;
-      }
-
-      @media (max-width: 480px) {
-        background-color: #222;
-        color: #333;
-        margin-top: 5px;
-        text-align: center;
-      }
-
       &:hover {
         background-color: #000;
         color: #fff;
-
-        @media (max-width: 480px) {
-          background-color: #222;
-          color: #fff;
-        }
       }
-    }
-  }
-
-  .caret {
-    @media (max-width: 480px) {
-      border-bottom-color: #fff;
-      border-top-color: #fff;
-      margin-top: 4px;
     }
   }
 }
 
 .no_nav_separator:after {
   content: '' !important;
+}
+
+
+// Mobile nav
+#site-nav-xs {
+  border-radius: 4px;
+  margin: 10px 0 20px;
+
+  .navbar-brand {
+    color: #fff;
+    font-family: $font-family-serif, serif;
+    font-size: 20px;
+  }
+}
+
+#header-menu-xs {
+  font-family: $font-family-serif, serif;
+
+  li {
+    margin-bottom: 0;
+  }
+
+  a {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .last {
+    text-align: center;
+
+    a {
+      background-color: #fc0;
+      border-radius: 4px;
+      color: #000;
+      font-family: Verdana, Geneva, sans-serif;
+      font-size: 11px;
+      margin: 10px 15px;
+      padding: 6px 15px;
+    }
+  }
 }

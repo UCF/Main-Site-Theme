@@ -35,44 +35,6 @@ Generic.removeExtraGformStyles = function($) {
   $('link#gforms_css-css').remove();
 };
 
-Generic.mobileNavBar = function($) {
-  // Switch the navigation bar from standard horizontal nav to bootstrap mobile nav
-  // when the browser is at mobile size:
-  var mobile_wrap = function() {
-    $('#header-menu').wrap('<div class="navbar navbar-inverse"><div class="container" id="mobile_dropdown_container"><div class="navbar-collapse"></div></div></div>');
-    $('<a class="btn navbar-btn" id="mobile_dropdown_toggle" data-target=".navbar-collapse" data-toggle="collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="#">Navigation</a>').prependTo('#mobile_dropdown_container');
-    $('.current-menu-item, .current_page_item').addClass('active');
-  };
-  var mobile_unwrap = function() {
-    $('#mobile_dropdown_toggle .icon-bar').remove();
-    $('#mobile_dropdown_toggle').remove();
-    $('#mobile_dropdown_container a.brand').remove();
-    $('#header-menu').unwrap();
-    $('#header-menu').unwrap();
-    $('#header-menu').unwrap();
-    $('#header-menu').unwrap();
-  };
-  var adjust_mobile_nav = function() {
-    if (getRealWindowWidth($) <= 480) {
-      if ($('#mobile_dropdown_container').length < 1) {
-        mobile_wrap();
-      }
-    }
-    else {
-      if ($('#mobile_dropdown_container').length > 0) {
-        mobile_unwrap();
-      }
-    }
-  };
-
-  if ( $('body').hasClass('ie7') === false && $('body').hasClass('ie8') === false ) { /* Don't resize in IE8 or older */
-    adjust_mobile_nav();
-    $(window).resize(function() {
-      adjust_mobile_nav();
-    });
-  }
-};
-
 
 /* jshint ignore:start */
 /* Assign browser-specific body classes on page load */
@@ -1593,7 +1555,6 @@ if (typeof jQuery != 'undefined'){
     /* Theme Specific Code Here */
     Generic.defaultMenuSeparators($);
     Generic.removeExtraGformStyles($);
-    Generic.mobileNavBar($);
     addBodyClasses($);
     iosRotateAdjust($);
     centerpieceSlider($);
