@@ -41,6 +41,27 @@
 }
 
 
+// Columns with modified gutter width
+.col-md-xpad {
+  @media (min-width: $screen-md-min) { // Note: no max-width set because -lg breakpoint is disabled
+    padding-left: ($grid-gutter-width / 2) + 5;
+    padding-right: ($grid-gutter-width / 2) + 5;
+  }
+
+  @include body-prefix('.ie8') {
+    padding-left: ($grid-gutter-width / 2) + 5;
+    padding-right: ($grid-gutter-width / 2) + 5;
+  }
+}
+
+.col-sm-xpad {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    padding-left: ($grid-gutter-width / 2) + 5;
+    padding-right: ($grid-gutter-width / 2) + 5;
+  }
+}
+
+
 // Content hiding helpers
 .print-only {
   display: none;
