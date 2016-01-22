@@ -1,20 +1,51 @@
 // Subheaders
-#subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
-/* For IE 7-8, which don't support media queries: */
-.ie7 #subheader, .ie8 #subheader { height: 140px; overflow: visible; }
-#subheader .subheader_subimg { margin-left: 0; border: 0; }
-#subheader .subhead_quote { border-left: 0; padding-left: 0; }
-#subheader .subhead_author {
-  float: right;
-  font-weight: bold;
-  padding-top: 20px;
-  font-size: 12px;
-  font-family: Georgia, serif;
-  line-height: 15px;
-  width: 320px;
-  text-align: right;
+#subheader {
+  border-bottom: 1px dotted #333;
+  margin-bottom: 10px;
+  margin-top: -3px;
+  padding-bottom: 7px;
+  position: relative;
 }
-#subheader .subhead_quotelink { padding-top: 20px; }
-#subheader .subhead_quotelink a { color: #660000 !important; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: normal; }
-#subheader .subhead_quotelink a:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
-.subheader_studentimg { float: right; margin-right: 20px; }
+
+.subheader-subimg {
+  height: auto;
+  max-width: 100%;
+
+  @media (max-width: $screen-sm-max) {
+    max-width: 110px; // intentionally overflows out of .col
+  }
+
+  @media (max-width: $screen-xs-max) {
+    display: none;
+  }
+}
+
+.subheader-studentimg {
+  position: absolute;
+  right: 20px;
+  top: 0;
+
+  @media (max-width: $screen-sm-max) {
+    right: 10px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    display: none;
+  }
+}
+
+.subheader-quote {
+  border-left: 0;
+  line-height: 1.3;
+  padding: 0 20px 0 0;
+
+  @media (max-width: $screen-xs-max) {
+    padding: 0;
+  }
+}
+
+.subheader-author {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 20px;
+}
