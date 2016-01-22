@@ -1,0 +1,62 @@
+// Social Buttons
+.share-twitter,
+.share-facebook,
+.share-googleplus,
+.share-linkedin,
+.share-email {
+  @include sprite('../img/social-share-extended.png', '../img/social-share-extended-r.png', 354px, 62px);
+  display: inline-block;
+  height: 31px;
+  margin-top: 5px;
+  width: 70px;
+}
+
+.share-twitter {
+  background-position: -71px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -71px -31px;
+  }
+}
+
+.share-facebook {
+  background-position: 0 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: 0 -31px;
+  }
+}
+
+.share-googleplus {
+  background-position: -142px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -142px -31px;
+  }
+}
+
+.share-linkedin {
+  background-position: -213px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -213px -31px;
+  }
+}
+
+.share-email {
+  background-position: -284px 0;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-position: -284px -31px;
+  }
+}

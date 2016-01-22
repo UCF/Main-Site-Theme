@@ -25,5 +25,5 @@ Thumbs.db
 # npm, bower, and other dependencies
 node_modules
 bower_components
-components
+src/components/*
 gulp-config.json
