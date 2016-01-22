@@ -47,9 +47,9 @@ get_header(); the_post(); ?>
 
 				<fieldset class="degree-search-form" role="search">
 					<legend class="sr-only">Search</legend>
-					<div class="degree-search-form-inner">
+					<div class="degree-search-form-inner col-md-9 col-sm-9">
 						<label for="search-query" class="sr-only">Search for a degree program</label>
-						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="col-md-9 col-sm-9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
+						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
 						<input id="offset" type="hidden"  value="<?php if ( isset( $params['offset'] ) ) { echo $params['offset']; } ?>"
 							data-offset-count="<?php echo DEGREE_SEARCH_PAGE_COUNT ?>">
 						<input id="search-default" name="search-default" type="hidden" value="<?php if ( $params['default'] == 1 ) { ?>1<?php } else { ?>0<?php } ?>">
