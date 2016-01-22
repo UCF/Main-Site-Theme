@@ -1,5 +1,5 @@
 #centerpiece_slider {
-  margin: auto;
+  margin: 0 auto 30px;
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -16,7 +16,7 @@
 
   @media (max-width: $screen-xs-max) {
     height: auto;
-    margin: 0;
+    margin: 0 0 10px;
     width: 100%;
   }
 
