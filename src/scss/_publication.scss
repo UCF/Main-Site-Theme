@@ -39,7 +39,6 @@
 
   .modal {
     height: 80%;
-    left: 2.5% !important;
     margin: 0 auto;
     max-height: 95%;
     overflow: hidden;
@@ -49,6 +48,21 @@
     iframe {
       border: 0;
       overflow: hidden !important;
+    }
+
+    .modal-dialog {
+      height: 100%;
+      margin: 0;
+      width: 100%;
+    }
+
+    .modal-content,
+    .modal-body {
+      height: 100%;
+    }
+
+    .modal-body {
+      padding: 0;
     }
 
     .btn {
