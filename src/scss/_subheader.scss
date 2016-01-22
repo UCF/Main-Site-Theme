@@ -5,6 +5,10 @@
   margin-top: -3px;
   padding-bottom: 7px;
   position: relative;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 }
 
 .subheader-subimg {

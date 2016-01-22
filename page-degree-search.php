@@ -22,9 +22,15 @@ get_header(); the_post(); ?>
 
 		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 
-			<div class="col-md-12 col-sm-12" id="page_title">
-				<h1 class="col-md-9 col-sm-9"><?php the_title();?></h1>
-				<?php esi_include('output_weather_data','col-md-3 col-sm-3'); ?>
+			<div class="col-md-12 col-sm-12">
+				<div id="page-title">
+					<div class="row">
+						<div class="col-md-9 col-sm-9">
+							<h1><?php the_title(); ?></h1>
+						</div>
+						<?php esi_include( 'output_weather_data', 'col-md-3 col-sm-3' ); ?>
+					</div>
+				</div>
 			</div>
 
 			<div class="col-md-12 col-sm-12" id="degree-search-top">
