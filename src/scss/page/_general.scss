@@ -2,27 +2,6 @@
 .subpage .page-content #page_title { padding-bottom: 15px; border-bottom: 1px dotted #333; margin-bottom: 10px; }
 .subpage .page-content #page_title h1 { font-weight: normal; display: block; margin-left: 0; }
 
-/* Subpages - Subheaders */
-#subheader { margin-top: -3px; margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px dotted #333; }
-/* For IE 7-8, which don't support media queries: */
-.ie7 #subheader, .ie8 #subheader { height: 140px; overflow: visible; }
-#subheader .subheader_subimg { margin-left: 0; border: 0; }
-#subheader .subhead_quote { border-left: 0; padding-left: 0; }
-#subheader .subhead_author {
-  float: right;
-  font-weight: bold;
-  padding-top: 20px;
-  font-size: 12px;
-  font-family: Georgia, serif;
-  line-height: 15px;
-  width: 320px;
-  text-align: right;
-}
-#subheader .subhead_quotelink { padding-top: 20px; }
-#subheader .subhead_quotelink a { color: #660000 !important; border-bottom: 1px solid #ccc; font-size: 12px; font-weight: normal; }
-#subheader .subhead_quotelink a:hover { text-decoration: none; color: #e50606 !important; border-bottom: 1px solid #e50606; }
-.subheader_studentimg { float: right; margin-right: 20px; }
-
 
 /* Subpages - Sidebars - General */
 .sidebar_title {
