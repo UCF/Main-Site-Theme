@@ -14,12 +14,3 @@
   padding: 5px 0 5px 40px;
   text-align: right;
 }
-
-
-@media (max-width: 979px) {
-    .page-content #page-title #wb_status_txt { font-size: 12px; }
-}
-
-@media (max-width: 767px) {
-    #page-title #weather_bug { display: none; }
-}
