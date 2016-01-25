@@ -36,7 +36,7 @@ h2#ongoing-header {
         text-align: right;
         margin-top: 26px;
 
-        @media (max-width: $screen-sm-max) {
+        @media (max-width: $screen-xs-max) {
             text-align: left;
             margin-top: 0;
         }

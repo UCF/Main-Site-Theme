@@ -110,7 +110,6 @@ get_header(); the_post(); ?>
 			</div>
 
 			<!-- Sidebar (Desktop only) -->
-
 			<div id="degree-search-sidebar" class="col-md-3 col-sm-3 pull-left">
 				<fieldset>
 					<legend class="sr-only">Filter Results</legend>
