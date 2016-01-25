@@ -77,12 +77,20 @@
 }
 
 #degree-search-sidebar {
-  .affix {
+  &.affix {
     top: 0;
     z-index: 999;
+    max-width: 243px;
+    &.active {
+      max-width: none;
+    }
   }
-  .affix-bottom {
+  &.affix-bottom {
     position: absolute;
+    max-width: 243px;
+    &.active {
+      max-width: none;
+    }
   }
   .radio {
     padding-left: 21px;
@@ -117,13 +125,14 @@
     margin-bottom: 15px;
     margin-left: 0;
     padding-left: 0;
-  }
-  .degree-filter-list li {
-    padding-bottom: 6px;
-    padding-left: 0;
-  }
-  .degree-filter-list li a {
-    color: #000;
+
+    li {
+      padding-bottom: 6px;
+      padding-left: 0;
+    }
+    li a {
+      color: #000;
+    }
   }
   label {
     font-size: 14px;
@@ -147,10 +156,11 @@
     float: right;
     margin-right: 15px;
     padding-left: 5px;
-  }
-  .degree-infobox-toggle .icon {
-    padding-bottom: 3px;
-    border-bottom: 1px dotted #999;
+
+    .icon {
+      padding-bottom: 3px;
+      border-bottom: 1px dotted #999;
+    }
   }
   .popover-title {
     display: none; /* hide empty titles */
