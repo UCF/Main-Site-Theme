@@ -77,16 +77,8 @@
   }
 }
 
-.sr-only,
-#wp-a11y-speak {
-  border: 0 none;
-  clip: rect(0px, 0px, 0px, 0px);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+.screen-reader-text {
+  @extend .sr-only;
 }
 
 a.print-noexpand:after {

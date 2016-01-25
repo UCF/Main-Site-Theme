@@ -218,67 +218,89 @@ else {
 			<article role="main">
 				<div class="row" id="filters">
 					<form id="filter_form" action="">
-					<div class="col-md-4 col-sm-4" id="filter_wrap">
-						<label for="filter">Filter Results by...</label>
-						<div class="btn-group" id="filter" data-toggle="buttons-radio">
-							<button type="button" id="filter_audience" class="btn btn-default <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">Audience</button>
-							<button type="button" id="filter_keyword" class="btn btn-default <?php if ($keywordval) { ?>active<?php } ?>">Keyword</button>
-							<button type="button" id="filter_time" class="btn btn-default <?php if ($timeval) { ?>active<?php } ?>">Time</button>
+
+						<div class="col-md-4 col-sm-4" id="filter_wrap">
+							<label for="filter">Filter Results by...</label>
+							<div class="btn-group" id="filter" data-toggle="buttons">
+								<label class="btn btn-default <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">
+									<input type="radio" id="filter_audience" name="filter" <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>checked<?php } ?>>Audience</button>
+								</label>
+								<label class="btn btn-default  <?php if ($keywordval) { ?>active<?php } ?>">
+									<input type="radio" id="filter_keyword" name="filter" <?php if ($keywordval) { ?>checked<?php } ?>>Keyword</button>
+								</label>
+								<label class="btn btn-default <?php if ($timeval) { ?>active<?php } ?>">
+									<input type="radio" id="filter_time" name="filter" <?php if ($timeval) { ?>checked<?php } ?>>Time</button>
+								</label>
+							</div>
 						</div>
-					</div>
 
-					<div class="col-md-3 col-sm-3 active_filter" id="filter_audience_wrap">
-						<label for="role">Select an Audience</label>
-						<select name="role" class="col-md-3 col-sm-3">
-							<option value="all">All Roles</option>
-							<?php
-								$args = array(
-									'hide_empty' => 0
-								);
-								$roles = get_terms('audienceroles', $args);
-								foreach ($roles as $role) {
-									print '<option ';
-									if ($role->slug == $roleval) {
-										print 'selected="" ';
-									}
-									print 'value="'.$role->slug.'">'.$role->name.'</option>';
-								}
-							?>
-						</select>
-					</div>
-					<div class="col-md-3 col-sm-3" id="filter_keyword_wrap">
-						<label for="keyword">Type a Keyword</label>
-						<input type="text" name="keyword" class="col-md-3 col-sm-3" <?php if ($keywordval) { ?>placeholder="<?=$keywordval?>"<?php } ?> />
-					</div>
-					<div class="col-md-3 col-sm-3" id="filter_time_wrap">
-						<label for="time">Select a Time</label>
-						<select name="time" class="col-md-3 col-sm-3">
-							<option <?php if ($timeval == 'thisweek') { ?>selected=""<?php } ?>value="thisweek">This Week</option>
-							<option <?php if ($timeval == 'nextweek') { ?>selected=""<?php } ?>value="nextweek">Next Week</option>
-							<option <?php if ($timeval == 'thismonth') { ?>selected=""<?php } ?>value="thismonth">This Month</option>
-							<option <?php if ($timeval == 'nextmonth') { ?>selected=""<?php } ?>value="nextmonth">Next Month</option>
-							<option <?php if ($timeval == 'thissemester') { ?>selected=""<?php } ?>value="thissemester">This Semester</option>
-							<option <?php if ($timeval == 'all') { ?>selected=""<?php } ?>value="all">All</option>
-						</select>
-					</div>
+						<div class="col-md-5 col-sm-5">
 
-					<div class="col-md-1">
-						<input type="submit" class="btn btn-default" value="View" id="filter_update">
-					</div>
+							<div class="row">
+
+								<div class="col-md-9 col-xs-9 active_filter" id="filter_audience_wrap">
+									<div class="form-group">
+										<label for="role">Select an Audience</label>
+										<select name="role" class="form-control">
+											<option value="all">All Roles</option>
+											<?php
+												$args = array(
+													'hide_empty' => 0
+												);
+												$roles = get_terms('audienceroles', $args);
+												foreach ($roles as $role) {
+													print '<option ';
+													if ($role->slug == $roleval) {
+														print 'selected="" ';
+													}
+													print 'value="'.$role->slug.'">'.$role->name.'</option>';
+												}
+											?>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-9 col-xs-9" id="filter_keyword_wrap">
+									<div class="form-group">
+										<label for="keyword">Type a Keyword</label>
+										<input type="text" name="keyword" class="form-control" <?php if ($keywordval) { ?>placeholder="<?=$keywordval?>"<?php } ?> >
+									</div>
+								</div>
+								<div class="col-md-9 col-xs-9" id="filter_time_wrap">
+									<div class="form-group">
+										<label for="time">Select a Time</label>
+										<select name="time" class="form-control">
+											<option <?php if ($timeval == 'thisweek') { ?>selected=""<?php } ?>value="thisweek">This Week</option>
+											<option <?php if ($timeval == 'nextweek') { ?>selected=""<?php } ?>value="nextweek">Next Week</option>
+											<option <?php if ($timeval == 'thismonth') { ?>selected=""<?php } ?>value="thismonth">This Month</option>
+											<option <?php if ($timeval == 'nextmonth') { ?>selected=""<?php } ?>value="nextmonth">Next Month</option>
+											<option <?php if ($timeval == 'thissemester') { ?>selected=""<?php } ?>value="thissemester">This Semester</option>
+											<option <?php if ($timeval == 'all') { ?>selected=""<?php } ?>value="all">All</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-3 col-xs-3">
+									<input type="submit" class="btn btn-default" value="View" id="filter_update">
+								</div>
+
+							</div>
+
+						</div>
+						<div class="col-md-3 col-sm-3" id="addnew_wrap">
+							<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><span class="glyphicon glyphicon-pencil glyphicon-white"></span> Post an Announcement</a>
+						</div>
+
 					</form>
-					<div class="col-md-3 col-sm-3" id="addnew_wrap">
-						<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><span class="glyphicon glyphicon-pencil glyphicon-white"></span> Post an Announcement</a>
-					</div>
 				</div>
 
 				<?php the_content();?>
 
-				<?php if ($error !== '') { print '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
+				<?php if ($error !== '') { echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
 
 				<?php
 					if ($announcements == NULL) {
-						print '<h2 id="upcoming-header">'.$resultsfor.'</h2>';
-						print 'No announcements found.';
+						echo '<h2 id="upcoming-header">'.$resultsfor.'</h2>';
+						echo 'No announcements found.';
 					} else {
 						// Output upcoming and ongoing events separately
 						if (!empty($upcoming) && empty($ongoing)) {
@@ -286,19 +308,19 @@ else {
 						<div class="row">
 							<div class="col-md-12 col-sm-12" id="upcoming-onecol">
 								<h2 id="upcoming-header"><?=$resultsfor?></h2>
-								<?=print_announcements($upcoming, 'thumbtacks', 'col-md-4 col-sm-4', 3);?>
+								<? echo print_announcements($upcoming, 'thumbtacks', 'col-md-6 col-sm-6', 3);?>
 						</div>
 					<?php
 						} else { ?>
 						<div class="row">
 							<div class="col-md-8 col-sm-8" id="upcoming-twocol">
 								<h2 id="upcoming-header"><?=$resultsfor?></h2>
-								<?php (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'col-md-4 col-sm-4', 2) : print '<p>No upcoming announcements found.</p>'; ?>
+								<?php echo (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'col-md-6 col-sm-6', 2) : '<p>No upcoming announcements found.</p>'; ?>
 						</div>
 
 						<div class="col-md-3 col-sm-3 col-md-offset-1 col-sm-offset-1" id="ongoing-twocol">
 							<h2 id="ongoing-header">Ongoing Announcements</h2>
-							<?php (!empty($ongoing)) ? print_announcements($ongoing, 'list') : print '<p>No ongoing announcements found.</p>'; ?>
+							<?php echo (!empty($ongoing)) ? print_announcements($ongoing, 'list') : '<p>No ongoing announcements found.</p>'; ?>
 						</div>
 					<?php
 						}

@@ -399,112 +399,141 @@ add_shortcode('events-widget', 'sc_events_widget');
  *
  * @return string
  * @author Chris Conover
- **/
-function sc_post_type_search($params=array(), $content='') {
+ * */
+function sc_post_type_search( $params=array(), $content='' ) {
 	$defaults = array(
-		'post_type_name'         => 'post',
-		'taxonomy'               => 'category',
-		'show_empty_sections'    => false,
-		'non_alpha_section_name' => 'Other',
-		'column_width'           => 'col-md-4 col-sm-4',
-		'column_count'           => '3',
-		'order_by'               => 'title',
-		'order'                  => 'ASC',
-		'show_sorting'           => true,
-		'default_sorting'        => 'term',
+		'post_type_name'          => 'post',
+		'taxonomy'                => 'category',
+		'meta_key'                => '',
+		'meta_value'              => '',
+		'show_empty_sections'     => false,
+		'non_alpha_section_name'  => 'Other',
+		'column_width'            => 'col-md-4 col-sm-4',
+		'column_count'            => '3',
+		'order_by'                => 'title',
+		'order'                   => 'ASC',
+		'show_sorting'            => true,
+		'default_sorting'         => 'term',
+		'show_sorting'            => true,
+		'show_uncategorized'      => false,
+		'uncategorized_term_name' => 'Uncategorized'
 	);
 
-	$params = ($params === '') ? $defaults : array_merge($defaults, $params);
+	$params = ( $params === '' ) ? $defaults : array_merge( $defaults, $params );
 
-	$params['show_empty_sections'] = (bool)$params['show_empty_sections'];
-	$params['column_count']        = is_numeric($params['column_count']) ? (int)$params['column_count'] : $defaults['column_count'];
-	$params['show_sorting']        = (bool)$params['show_sorting'];
+	$params['show_empty_sections'] = filter_var( $params['show_empty_sections'], FILTER_VALIDATE_BOOLEAN );
+	$params['column_count']        = is_numeric( $params['column_count'] ) ? (int)$params['column_count'] : $defaults['column_count'];
+	$params['show_sorting']        = filter_var( $params['show_sorting'], FILTER_VALIDATE_BOOLEAN );
 
-	if(!in_array($params['default_sorting'], array('term', 'alpha'))) {
+	if ( !in_array( $params['default_sorting'], array( 'term', 'alpha' ) ) ) {
 		$params['default_sorting'] = $default['default_sorting'];
 	}
 
 	// Resolve the post type class
-	if(is_null($post_type_class = get_custom_post_type($params['post_type_name']))) {
+	if ( is_null( $post_type_class = get_custom_post_type( $params['post_type_name'] ) ) ) {
 		return '<p>Invalid post type.</p>';
 	}
 	$post_type = new $post_type_class;
 
 	// Set default search text if the user didn't
-	if(!isset($params['default_search_text'])) {
+	if ( !isset( $params['default_search_text'] ) ) {
 		$params['default_search_text'] = 'Find a '.$post_type->singular_name;
 	}
 
-	// Register if the search data with the JS PostTypeSearchDataManager
+	// Set default search label if the user didn't
+	if ( !isset( $params['default_search_label'] ) ) {
+		$params['default_search_label'] = 'Find a '.$post_type->singular_name;
+	}
+
+	// Register the search data with the JS PostTypeSearchDataManager.
 	// Format is array(post->ID=>terms) where terms include the post title
 	// as well as all associated tag names
 	$search_data = array();
-	foreach(get_posts(array('numberposts' => -1, 'post_type' => $params['post_type_name'])) as $post) {
-		$search_data[$post->ID] = array($post->post_title);
-		foreach(wp_get_object_terms($post->ID, 'post_tag') as $term) {
+	foreach ( get_posts( array( 'numberposts' => -1, 'post_type' => $params['post_type_name'] ) ) as $post ) {
+		$search_data[$post->ID] = array( $post->post_title );
+		foreach ( wp_get_object_terms( $post->ID, 'post_tag' ) as $term ) {
 			$search_data[$post->ID][] = $term->name;
 		}
 	}
-	?>
+?>
 	<script type="text/javascript">
 		if(typeof PostTypeSearchDataManager != 'undefined') {
 			PostTypeSearchDataManager.register(new PostTypeSearchData(
-				<?=json_encode($params['column_count'])?>,
-				<?=json_encode($params['column_width'])?>,
-				<?=json_encode($search_data)?>
+				<?php echo json_encode( $params['column_count'] ); ?>,
+				<?php echo json_encode( $params['column_width'] ); ?>,
+				<?php echo json_encode( $search_data ); ?>
 			));
 		}
 	</script>
-	<?
+	<?php
+
+	// Set up a post query
+	$args = array(
+		'numberposts' => -1,
+		'post_type'   => $params['post_type_name'],
+		'tax_query'   => array(
+			array(
+				'taxonomy' => $params['taxonomy'],
+				'field'    => 'id',
+				'terms'    => '',
+			)
+		),
+		'orderby'     => $params['order_by'],
+		'order'       => $params['order'],
+	);
+
+	// Handle meta key and value query
+	if ($params['meta_key'] && $params['meta_value']) {
+		$args['meta_key'] = $params['meta_key'];
+		$args['meta_value'] = $params['meta_value'];
+	}
 
 	// Split up this post type's posts by term
 	$by_term = array();
-	foreach(get_terms($params['taxonomy']) as $term) {
-		$posts = get_posts(array(
-			'numberposts' => -1,
-			'post_type'   => $params['post_type_name'],
-			'tax_query'   => array(
-				array(
-					'taxonomy' => $params['taxonomy'],
-					'field'    => 'id',
-					'terms'    => $term->term_id
-				)
-			),
-			'orderby'     => $params['order_by'],
-			'order'       => $params['order']
-		));
+	foreach ( get_terms( $params['taxonomy'] ) as $term ) { // get_terms defaults to an orderby=name, order=asc value
+		$args['tax_query'][0]['terms'] = $term->term_id;
+		$posts = get_posts( $args );
 
-		if(count($posts) == 0 && $params['show_empty_sections']) {
+		if ( count( $posts ) == 0 && $params['show_empty_sections'] ) {
 			$by_term[$term->name] = array();
 		} else {
 			$by_term[$term->name] = $posts;
 		}
 	}
 
+	// Add uncategorized items to posts by term if parameter is set.
+	if ( $params['show_uncategorized'] ) {
+		$terms = get_terms( $params['taxonomy'], array( 'fields' => 'ids', 'hide_empty' => false ) );
+		$args['tax_query'][0]['terms'] = $terms;
+		$args['tax_query'][0]['operator'] = 'NOT IN';
+		$uncat_posts = get_posts( $args );
+		if ( count( $uncat_posts == 0 ) && $params['show_empty_sections'] ) {
+			$by_term[$params['uncategorized_term_name']] = array();
+		} else {
+			$by_term[$params['uncategorized_term_name']] = $uncat_posts;
+		}
+	}
+
 	// Split up this post type's posts by the first alpha character
-	$by_alpha = array();
-	$by_alpha_posts = get_posts(array(
-		'numberposts' => -1,
-		'post_type'   => $params['post_type_name'],
-		'orderby'     => 'title',
-		'order'       => 'ASC'
-	));
-	foreach($by_alpha_posts as $post) {
-		if(preg_match('/([a-zA-Z])/', $post->post_title, $matches) == 1) {
+	$args['orderby'] = 'title';
+	$args['order'] = 'ASC';
+	$args['tax_query'] = '';
+	$by_alpha_posts = get_posts( $args );
+	foreach( $by_alpha_posts as $post ) {
+		if ( preg_match( '/([a-zA-Z])/', $post->post_title, $matches ) == 1 ) {
 			$by_alpha[strtoupper($matches[1])][] = $post;
 		} else {
 			$by_alpha[$params['non_alpha_section_name']][] = $post;
 		}
 	}
-
-	if($params['show_empty_sections']) {
-		foreach(range('a', 'z') as $letter) {
-			if(!isset($by_alpha[strtoupper($letter)])) {
-				$by_alpha[strtoupper($letter)] = array();
+	if( $params['show_empty_sections'] ) {
+		foreach( range( 'a', 'z' ) as $letter ) {
+			if ( !isset( $by_alpha[strtoupper( $letter )] ) ) {
+				$by_alpha[strtoupper( $letter )] = array();
 			}
 		}
 	}
-	ksort($by_alpha);
+	ksort( $by_alpha );
 
 	$sections = array(
 		'post-type-search-term'  => $by_term,
@@ -512,71 +541,113 @@ function sc_post_type_search($params=array(), $content='') {
 	);
 
 	ob_start();
-	?>
+?>
 	<div class="post-type-search">
 		<div class="post-type-search-header">
-			<form class="post-type-search-form" action="." method="get">
-				<label style="display:none;">Search</label>
-				<input type="text" class="col-md-3 col-sm-3" placeholder="<?=$params['default_search_text']?>" />
+			<form class="post-type-search-form form-inline" action="." method="get">
+				<label><?php echo $params['default_search_label']; ?></label>
+				<input type="text" class="form-control" placeholder="<?php echo $params['default_search_text']; ?>">
 			</form>
 		</div>
-		<div class="post-type-search-results "></div>
-		<? if($params['show_sorting']) { ?>
+		<div class="post-type-search-results"></div>
+		<?php if ( $params['show_sorting'] ) { ?>
 		<div class="btn-group post-type-search-sorting">
-			<button class="btn btn-default<?if($params['default_sorting'] == 'term') echo ' active';?>"><span class="glyphicon glyphicon-list-alt"></span></button>
-			<button class="btn btn-default<?if($params['default_sorting'] == 'alpha') echo ' active';?>"><span class="glyphicon glyphicon-font"></span></button>
+			<button class="btn btn-default<?php if ( $params['default_sorting'] == 'term' ) echo ' active'; ?>">
+				<span class="glyphicon glyphicon-list-alt"></span>
+			</button>
+			<button class="btn btn-default<?php if ( $params['default_sorting'] == 'alpha' ) echo ' active'; ?>">
+				<span class="glyphicon glyphicon-font"></span>
+			</button>
 		</div>
-		<? } ?>
-	<?
+		<?php } ?>
+	<?php
 
-	foreach($sections as $id => $section) {
+	foreach ( $sections as $id => $section ):
 		$hide = false;
-		switch($id) {
+		switch ( $id ) {
 			case 'post-type-search-alpha':
-				if($params['default_sorting'] == 'term') {
+				if ( $params['default_sorting'] == 'term' ) {
 					$hide = True;
 				}
 				break;
 			case 'post-type-search-term':
-				if($params['default_sorting'] == 'alpha') {
+				if ( $params['default_sorting'] == 'alpha' ) {
 					$hide = True;
 				}
 				break;
 		}
-		?>
-		<div class="<?=$id?>"<? if($hide) echo ' style="display:none;"'; ?>>
-			<? foreach($section as $section_title => $section_posts) { ?>
-				<? if(count($section_posts) > 0 || $params['show_empty_sections']) { ?>
-					<div>
-						<h3><?=esc_html($section_title)?></h3>
-						<div class="row">
-							<? if(count($section_posts) > 0) { ?>
-								<? $posts_per_column = ceil(count($section_posts) / $params['column_count']); ?>
-								<? foreach(range(0, $params['column_count'] - 1) as $column_index) { ?>
-									<? $start = $column_index * $posts_per_column; ?>
-									<? $end   = $start + $posts_per_column; ?>
-									<? if(count($section_posts) > $start) { ?>
-									<div class="<?=$params['column_width']?>">
-										<ul>
-										<? foreach(array_slice($section_posts, $start, $end) as $post) { ?>
-											<li data-post-id="<?=$post->ID?>"><?=$post_type->toHTML($post)?></li>
-										<? } ?>
-										</ul>
-									</div>
-									<? } ?>
-								<? } ?>
-							<? } ?>
-						</div>
+?>
+		<div class="<?php echo $id; ?>"<?php if ( $hide ) { echo ' style="display:none;"'; } ?>>
+			<div class="row">
+			<?php
+			$count = 0;
+			foreach ( $section as $section_title => $section_posts ):
+				if ( count( $section_posts ) > 0 || $params['show_empty_sections'] ):
+			?>
+
+				<?php if ( $section_title == $params['uncategorized_term_name'] ): ?>
 					</div>
-				<? } ?>
-			<? } ?>
-		</div>
-		<?
-	}
-	?> </div> <?
+						<div class="row">
+							<div class="<?php echo $params['column_width']; ?>">
+								<h3><?php echo esc_html( $section_title ); ?></h3>
+							</div>
+						</div>
+
+						<div class="row">
+						<?php
+						// $split_size must be at least 1
+						$split_size = max( floor( count( $section_posts ) / $params['column_count'] ), 1 );
+						$split_posts = array_chunk( $section_posts, $split_size );
+						foreach ( $split_posts as $index => $column_posts ):
+						?>
+							<div class="<?php echo $params['column_width']; ?>">
+								<ul>
+								<?php foreach( $column_posts as $key => $post ): ?>
+									<li data-post-id="<?php echo $post->ID; ?>">
+										<?php echo $post_type->toHTML( $post ); ?><span class="search-post-pgsection"><?php echo $section_title; ?></span>
+									</li>
+								<?php endforeach; ?>
+								</ul>
+							</div>
+						<?php endforeach; ?>
+
+				<?php else: ?>
+
+					<?php if ( $count % $params['column_count'] == 0 && $count !== 0 ): ?>
+						</div><div class="row">
+					<?php endif; ?>
+
+					<div class="<?php echo $params['column_width']; ?>">
+						<h3><?php echo esc_html( $section_title ); ?></h3>
+						<ul>
+						<?php foreach( $section_posts as $post ):  ?>
+							<li data-post-id="<?php echo $post->ID; ?>">
+								<?php echo $post_type->toHTML( $post ); ?><span class="search-post-pgsection"><?php echo $section_title; ?></span>
+							</li>
+						<?php endforeach; ?>
+						</ul>
+					</div>
+
+			<?php
+					endif;
+
+				$count++;
+				endif;
+
+			endforeach;
+			?>
+			</div><!-- .row -->
+		</div><!-- term/alpha section -->
+
+	<?php endforeach; ?>
+
+	</div><!-- .post-type-search -->
+
+<?php
 	return ob_get_clean();
 }
-add_shortcode('post-type-search', 'sc_post_type_search');
+add_shortcode( 'post-type-search', 'sc_post_type_search' );
+
 
 
 /**
@@ -788,7 +859,7 @@ function sc_phonebook_search($attrs) {
 	<form class="form-horizontal" id="phonebook-search">
 		<div class="form-group">
 			<label class="control-label<?php echo $show_label ?>" for="phonebook-search-query">Search Term</label>
-			<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
+			<input type="text" id="phonebook-search-query" name="phonebook-search-query" class="<?php echo $input_size; ?> search-query form-control" value="<?php echo stripslashes(htmlentities($phonebook_search_query)); ?>"> <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> Search</button>
 			<p id="phonebook-search-description">Organization, Department, or Person (Name, Email, Phone)</p>
 		</div>
 	</form>
@@ -1141,4 +1212,50 @@ function sc_chart( $attr ) {
 }
 add_shortcode( 'chart', 'sc_chart' );
 
+
+/**
+ * Displays affixed navigation for the A-Z Index.
+ **/
+function sc_azindex_navbar( $attr ) {
+	ob_start();
+?>
+	<div id="top"></div>
+
+	<div id="azIndexList" data-spy="affix" data-offset-top="200">
+		<span id="azIndexList-label">Jump To:</span>
+		<div class="navbar navbar-default">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#az-a">A</a></li>
+				<li><a href="#az-b">B</a></li>
+				<li><a href="#az-c">C</a></li>
+				<li><a href="#az-d">D</a></li>
+				<li><a href="#az-e">E</a></li>
+				<li><a href="#az-f">F</a></li>
+				<li><a href="#az-g">G</a></li>
+				<li><a href="#az-h">H</a></li>
+				<li><a href="#az-i">I</a></li>
+				<li><a href="#az-j">J</a></li>
+				<li><a href="#az-k">K</a></li>
+				<li><a href="#az-l">L</a></li>
+				<li><a href="#az-m">M</a></li>
+				<li><a href="#az-n">N</a></li>
+				<li><a href="#az-o">O</a></li>
+				<li><a href="#az-p">P</a></li>
+				<li><a href="#az-q">Q</a></li>
+				<li><a href="#az-r">R</a></li>
+				<li><a href="#az-s">S</a></li>
+				<li><a href="#az-t">T</a></li>
+				<li><a href="#az-u">U</a></li>
+				<li><a href="#az-v">V</a></li>
+				<li><a href="#az-w">W</a></li>
+				<li><a href="#az-x">X</a></li>
+				<li><a href="#az-y">Y</a></li>
+				<li><a href="#az-z">Z</a></li>
+			</ul>
+		</div>
+	</div>
+<?php
+	return ob_get_clean();
+}
+add_shortcode( 'azindex-navbar', 'sc_azindex_navbar' );
 ?>

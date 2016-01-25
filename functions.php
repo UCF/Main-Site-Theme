@@ -296,38 +296,6 @@ function get_page_subheader( $post ) {
 	}
 
 	return ob_get_clean();
-
-
-	if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') {
-		$subheader = get_post(get_post_meta($post->ID, 'page_subheader', TRUE));
-		?>
-		<div class="col-md-12 col-sm-12" id="subheader" role="complementary">
-			<?php
-			$subimg = get_post_meta($subheader->ID, 'subheader_sub_image', TRUE);
-			$imgatts = array(
-				'class'	=> "subheader_subimg col-md-2 col-sm-2",
-				'alt'   => $post->post_title,
-				'title' => $post->post_title,
-			);
-			print wp_get_attachment_image($subimg, 'subpage-subimg', 0, $imgatts);
-			?>
-			<blockquote class="subhead_quote col-md-8 col-sm-8">
-				<?=$subheader->post_content?>
-				<p class="subhead_author"><?=get_post_meta($subheader->ID, 'subheader_student_name', TRUE)?></p>
-			</blockquote>
-
-			<?php
-			$studentimg = get_post_meta($subheader->ID, 'subheader_student_image', TRUE);
-			$imgatts = array(
-				'class'	=> "subheader_studentimg",
-				'alt'   => get_post_meta($subheader->ID, 'subheader_student_name', TRUE),
-				'title' => get_post_meta($subheader->ID, 'subheader_student_name', TRUE),
-			);
-			print wp_get_attachment_image($studentimg, 'subpage-studentimg', 0, $imgatts);
-			?>
-		</div>
-	<?php
-	}
 }
 
 
