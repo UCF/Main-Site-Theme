@@ -206,19 +206,10 @@ styleGformButtons = function($) {
 
 /* Call A-Z Index Scrollspy, organize post type search */
 azIndex = function($) {
-  if ($('.page-content#azindex').length > 0) {
+  if ($('#azindex').length > 0) {
 
     // Post type search customizations
-    $('.post-type-search-header').addClass('row').prepend($('#azIndexList'));
-    $('form.post-type-search-form')
-      .addClass('col-md-7')
-      .children('label')
-        .text('Quick Search:')
-        .show();
-    $('form.post-type-search-form')
-      .children('input')
-        .removeClass('col-md-3')
-        .addClass('search-query');
+    $('.post-type-search-header').prepend($('#azIndexList'));
 
     $('.post-type-search-alpha h3').each(function() {
       $(this)
@@ -227,13 +218,8 @@ azIndex = function($) {
     });
 
     // Activate Scrollspy
-    if ($('body').hasClass('ie7') === false) {
-      $('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
-      $('#azIndexList').scrollspy();
-    }
-    else { // Disable affixing/scrollspy in IE7
-      $('#azIndexList').attr('data-offset-top', '').attr('data-spy', '');
-    }
+    $('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
+    $('#azIndexList').scrollspy();
 
     // Force 'A' as the active starting letter, since it likes to
     // default to 'Z' for whatever reason
@@ -248,7 +234,7 @@ azIndex = function($) {
 
     // Set disabled letters for sections with no content
     $('.az-jumpto-anchor').each(function() {
-      if ($(this).siblings('.row').children('div').length < 1) {
+      if ($(this).siblings('ul').children().length < 1) {
         var href = '#' + $(this).attr('id');
         $('#azIndexList .nav li a[href="'+ href +'"]').addClass('disabled');
       }
@@ -339,15 +325,14 @@ ieStripedAcademicsResults = function($) {
 Generic.PostTypeSearch = function($) {
   $('.post-type-search')
     .each(function(post_type_search_index, post_type_search) {
-      post_type_search = $(post_type_search);
-
-      var form             = post_type_search.find('.post-type-search-form'),
+      var $post_type_search = $(post_type_search),
+        form             = $post_type_search.find('.post-type-search-form'),
         field            = form.find('input[type="text"]'),
         working          = form.find('.working'),
-        results          = post_type_search.find('.post-type-search-results'),
-        by_term          = post_type_search.find('.post-type-search-term'),
-        by_alpha         = post_type_search.find('.post-type-search-alpha'),
-        sorting          = post_type_search.find('.post-type-search-sorting'),
+        results          = $post_type_search.find('.post-type-search-results'),
+        by_term          = $post_type_search.find('.post-type-search-term'),
+        by_alpha         = $post_type_search.find('.post-type-search-alpha'),
+        sorting          = $post_type_search.find('.post-type-search-sorting'),
         sorting_by_term  = sorting.find('button:eq(0)'),
         sorting_by_alpha = sorting.find('button:eq(1)'),
 
@@ -365,7 +350,7 @@ Generic.PostTypeSearch = function($) {
 
       // Get the post data for this search
       post_type_search_data = PostTypeSearchDataManager.searches[post_type_search_index];
-      if(typeof post_type_search_data == 'undefined') { // Search data missing
+      if(typeof post_type_search_data === 'undefined') { // Search data missing
         return false;
       }
 
@@ -403,7 +388,7 @@ Generic.PostTypeSearch = function($) {
       field
         .keyup(function() {
           // Use a timer to determine when the user is done typing
-          if(typing_timer !== null)  clearTimeout(typing_timer);
+          if(typing_timer !== null) { clearTimeout(typing_timer); }
           typing_timer = setTimeout(function() {form.trigger('submit');}, typing_delay);
         });
 
@@ -428,7 +413,7 @@ Generic.PostTypeSearch = function($) {
         // Find the search matches
         $.each(search_data_set, function(post_id, search_data) {
           $.each(search_data, function(search_data_index, term) {
-            if(term.toLowerCase().indexOf(search_term.toLowerCase()) != -1) {
+            if(term.toLowerCase().indexOf(search_term.toLowerCase()) !== -1) {
               matches.push(post_id);
               return false;
             }
@@ -440,20 +425,11 @@ Generic.PostTypeSearch = function($) {
 
           // Copy the associated elements
           $.each(matches, function(match_index, post_id) {
-            var element;
 
-            // If we're only displaying an alphabetical list, be sure to use its
-            // elements instead of by_term's elements
-            if (by_term.css('display','none')) {
-              element = by_alpha.find('li[data-post-id="' + post_id + '"]:eq(0)');
-            }
-            else {
-              element = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)');
-            }
-
-            var post_id_int = parseInt(post_id, 10);
+            var element     = by_term.find('li[data-post-id="' + post_id + '"]:eq(0)'),
+              post_id_int = parseInt(post_id, 10);
             post_id_sum += post_id_int;
-            if(element.length == 1) {
+            if(element.length === 1) {
               elements.push(element.clone());
             }
           });
@@ -463,7 +439,7 @@ Generic.PostTypeSearch = function($) {
           } else {
 
             // Are the results the same as last time?
-            if(post_id_sum != prev_post_id_sum) {
+            if(post_id_sum !== prev_post_id_sum) {
               results.empty();
               prev_post_id_sum = post_id_sum;
 
@@ -484,21 +460,11 @@ Generic.PostTypeSearch = function($) {
                 var column_wrap = $('<div class="' + column_width + '"><ul></ul></div>'),
                   column_list = column_wrap.find('ul');
 
-                // Alphabetize search results
-                if (navigator.userAgent.toLowerCase().indexOf('chrome') < 0) {
-                  column_elements.reverse();
-                }
-
                 $.each(column_elements, function(element_index, element) {
                   column_list.append($(element));
                 });
                 results.find('div[class="row"]').append(column_wrap);
               });
-              results
-                .append('<a class="close" href="#">×</a>')
-                .find('.close').click(function() {
-                  $(this).parent('.post-type-search-results').hide();
-                });
               results.show();
             }
           }
@@ -506,6 +472,7 @@ Generic.PostTypeSearch = function($) {
       }
     });
 };
+
 
 var phonebookStaffToggle = function($) {
   $('#phonebook-search-results a.toggle').click(function() {
