@@ -1225,32 +1225,13 @@ function sc_azindex_navbar( $attr ) {
 		<span id="azIndexList-label">Jump To:</span>
 		<div class="navbar navbar-default">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#az-a">A</a></li>
-				<li><a href="#az-b">B</a></li>
-				<li><a href="#az-c">C</a></li>
-				<li><a href="#az-d">D</a></li>
-				<li><a href="#az-e">E</a></li>
-				<li><a href="#az-f">F</a></li>
-				<li><a href="#az-g">G</a></li>
-				<li><a href="#az-h">H</a></li>
-				<li><a href="#az-i">I</a></li>
-				<li><a href="#az-j">J</a></li>
-				<li><a href="#az-k">K</a></li>
-				<li><a href="#az-l">L</a></li>
-				<li><a href="#az-m">M</a></li>
-				<li><a href="#az-n">N</a></li>
-				<li><a href="#az-o">O</a></li>
-				<li><a href="#az-p">P</a></li>
-				<li><a href="#az-q">Q</a></li>
-				<li><a href="#az-r">R</a></li>
-				<li><a href="#az-s">S</a></li>
-				<li><a href="#az-t">T</a></li>
-				<li><a href="#az-u">U</a></li>
-				<li><a href="#az-v">V</a></li>
-				<li><a href="#az-w">W</a></li>
-				<li><a href="#az-x">X</a></li>
-				<li><a href="#az-y">Y</a></li>
-				<li><a href="#az-z">Z</a></li>
+			<?php foreach ( range( 'A', 'Z' ) as $index=>$alpha ): ?>
+				<li <?php echo $index === 0 ? 'class="active"' : ''; ?>>
+					<a href="#az-<?php echo strtolower( $alpha ); ?>">
+						<?php echo $alpha; ?>
+					</a>
+				</li>
+			<?php endforeach; ?>
 			</ul>
 		</div>
 	</div>
