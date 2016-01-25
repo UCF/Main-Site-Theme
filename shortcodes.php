@@ -1213,7 +1213,9 @@ function sc_chart( $attr ) {
 add_shortcode( 'chart', 'sc_chart' );
 
 
-
+/**
+ * Displays affixed navigation for the A-Z Index.
+ **/
 function sc_azindex_navbar( $attr ) {
 	ob_start();
 ?>
