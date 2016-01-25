@@ -1328,7 +1328,7 @@ var degreeSearch = function ($) {
     $academicsSearch = $('#academics-search-form');
     pageCount = parseInt($academicsSearch.find('#offset').attr('data-offset-count'));
     // The extra 70 pixels is for the ucf header that loads in late and some other unaccounted for pixels.
-    headerHeight = 70 + $('#header-nav-wrap').outerHeight() + $('#page_title').outerHeight();
+    headerHeight = 70 + $('#header-nav-wrap').outerHeight() + $('#page-title').outerHeight();
 
     if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');

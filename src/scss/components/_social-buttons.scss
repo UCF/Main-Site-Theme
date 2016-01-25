@@ -60,3 +60,23 @@
     background-position: -284px -31px;
   }
 }
+
+.rssbtn,
+.icsbtn {
+  float: left;
+  margin-right: 5px;
+}
+
+.rssbtn {
+  @include sprite();
+  background-position: -196px -37px;
+  height: 16px;
+  width: 44px;
+}
+
+.icsbtn {
+  @include sprite();
+  background-position: -196px -55px;
+  height: 16px;
+  width: 35px;
+}

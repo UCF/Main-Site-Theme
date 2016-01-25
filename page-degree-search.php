@@ -22,9 +22,15 @@ get_header(); the_post(); ?>
 
 		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 
-			<div class="col-md-12 col-sm-12" id="page_title">
-				<h1 class="col-md-9 col-sm-9"><?php the_title();?></h1>
-				<?php esi_include('output_weather_data','col-md-3 col-sm-3'); ?>
+			<div class="col-md-12 col-sm-12">
+				<div id="page-title">
+					<div class="row">
+						<div class="col-md-9 col-sm-9">
+							<h1><?php the_title(); ?></h1>
+						</div>
+						<?php esi_include( 'output_weather_data', 'col-md-3 col-sm-3' ); ?>
+					</div>
+				</div>
 			</div>
 
 			<div class="col-md-12 col-sm-12" id="degree-search-top">
@@ -41,9 +47,9 @@ get_header(); the_post(); ?>
 
 				<fieldset class="degree-search-form" role="search">
 					<legend class="sr-only">Search</legend>
-					<div class="degree-search-form-inner">
+					<div class="degree-search-form-inner col-md-9 col-sm-9">
 						<label for="search-query" class="sr-only">Search for a degree program</label>
-						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="col-md-9 col-sm-9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
+						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
 						<input id="offset" type="hidden"  value="<?php if ( isset( $params['offset'] ) ) { echo $params['offset']; } ?>"
 							data-offset-count="<?php echo DEGREE_SEARCH_PAGE_COUNT ?>">
 						<input id="search-default" name="search-default" type="hidden" value="<?php if ( $params['default'] == 1 ) { ?>1<?php } else { ?>0<?php } ?>">

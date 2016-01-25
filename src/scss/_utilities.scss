@@ -95,6 +95,14 @@ a.print-noexpand:after {
   }
 }
 
+iframe,
+object,
+embed {
+  @media print {
+    display: none;
+  }
+}
+
 
 // IE8 rounded corner fix for news, spotlight thumbnails; Standard rounded corners for centerpieces
 .thumb_corner_tl,

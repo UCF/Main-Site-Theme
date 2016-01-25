@@ -3,26 +3,6 @@
   margin-bottom: 20px;
   overflow: hidden;
   width: 100%;
-
-  .rssbtn,
-  .icsbtn {
-    float: left;
-    margin-right: 5px;
-  }
-
-  .rssbtn {
-    @include sprite();
-    background-position: -196px -37px;
-    height: 16px;
-    width: 44px;
-  }
-
-  .icsbtn {
-    @include sprite();
-    background-position: -196px -55px;
-    height: 16px;
-    width: 35px;
-  }
 }
 
 .events {
