@@ -7,6 +7,7 @@
 *.swo
 *.swp
 *.vi
+*.d.ts
 *~
 *.sass-cache
 
@@ -31,3 +32,4 @@ nbproject
 .svn
 .CVS
 .idea
+typings

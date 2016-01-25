@@ -261,10 +261,10 @@ azIndex = function($) {
 
 
 /* Show/hide announcement filter dropdowns */
-toggleAnnouncementFilters = function($) {
-  audienceBtn = $('#filter_audience');
-  keywordBtn = $('#filter_keyword');
-  timeBtn = $('#filter_time');
+var toggleAnnouncementFilters = function($) {
+  var audienceBtn = $('#filter_audience'),
+    keywordBtn = $('#filter_keyword'),
+    timeBtn = $('#filter_time');
 
   // reset field values to default any time a new filter is selected
   var resetVals = function() {
@@ -280,31 +280,31 @@ toggleAnnouncementFilters = function($) {
   };
 
   // on load
-  if (audienceBtn.hasClass('active')) {
+  if (audienceBtn.parent().hasClass('active')) {
     $('#filter_audience_wrap').show().addClass('active_filter');
   }
-  else if (keywordBtn.hasClass('active')) {
+  else if (keywordBtn.parent().hasClass('active')) {
     $('#filter_keyword_wrap').show().addClass('active_filter');
   }
-  else if (timeBtn.hasClass('active')) {
+  else if (timeBtn.parent().hasClass('active')) {
     $('#filter_time_wrap').show().addClass('active_filter');
   }
   resetVals();
 
   // on click
-  $(audienceBtn).click(function() {
+  $(audienceBtn).change(function() {
     $('.active_filter').removeClass('active_filter').hide();
     $('#filter_audience_wrap').fadeIn().addClass('active_filter');
     resetVals();
   });
 
-  $(keywordBtn).click(function() {
+  $(keywordBtn).change(function() {
     $('.active_filter').removeClass('active_filter').hide();
     $('#filter_keyword_wrap').fadeIn().addClass('active_filter');
     resetVals();
   });
 
-  $(timeBtn).click(function() {
+  $(timeBtn).change(function() {
     $('.active_filter').removeClass('active_filter').hide();
     $('#filter_time_wrap').fadeIn().addClass('active_filter');
     resetVals();
