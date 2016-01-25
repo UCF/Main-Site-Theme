@@ -27,6 +27,7 @@ node_modules
 bower_components
 src/components/*
 gulp-config.json
+typings
 
 # debug files
 npm-debug.log
