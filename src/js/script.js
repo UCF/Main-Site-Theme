@@ -1119,14 +1119,14 @@ var degreeSearch = function ($) {
         }
       })
         .on('affixed.bs.affix affixed-bottom.bs.affix', function () {
-        $degreeSearchContent.addClass('offset3');
-      })
+          $degreeSearchContent.addClass('col-md-offset-3 col-sm-offset-3');
+        })
         .on('affixed-top.bs.affix', function () {
-        $degreeSearchContent.removeClass('offset3');
-      });
+          $degreeSearchContent.removeClass('col-md-offset-3 col-sm-offset-3');
+        });
     }
     else {
-      $degreeSearchContent.removeClass('offset3');
+      $degreeSearchContent.removeClass('col-md-offset-3 col-sm-offset-3');
       $(window).off('.affix');
       $sidebarLeft
         .removeClass('affix affix-top affix-bottom')
@@ -1139,7 +1139,8 @@ var degreeSearch = function ($) {
       if ($sidebarLeft.data('bs.affix')) {
         $sidebarLeft.data('bs.affix').options.offset.top = headerHeight + $academicsSearch.find('#degree-search-top').outerHeight();
         $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
-      } else {
+      }
+      else {
         initSidebarAffix();
       }
     }
