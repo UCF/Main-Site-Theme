@@ -77,12 +77,14 @@
 }
 
 #degree-search-sidebar {
-  .affix {
+  &.affix {
     top: 0;
     z-index: 999;
+    max-width: 243px;
   }
-  .affix-bottom {
+  &.affix-bottom {
     position: absolute;
+    max-width: 243px;
   }
   .radio {
     padding-left: 21px;
