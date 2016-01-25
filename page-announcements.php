@@ -219,7 +219,7 @@ else {
 				<div class="row" id="filters">
 					<form id="filter_form" action="">
 
-						<div class="col-md-4" id="filter_wrap">
+						<div class="col-md-4 col-sm-4" id="filter_wrap">
 							<label for="filter">Filter Results by...</label>
 							<div class="btn-group" id="filter" data-toggle="buttons">
 								<label class="btn btn-default <?php if ($roleval || (!($roleval) && !($keywordval) && !($timeval))) { ?>active<?php } ?>">
@@ -234,11 +234,11 @@ else {
 							</div>
 						</div>
 
-						<div class="col-md-5">
+						<div class="col-md-5 col-sm-5">
 
 							<div class="row">
 
-								<div class="col-xs-9 active_filter" id="filter_audience_wrap">
+								<div class="col-md-9 col-xs-9 active_filter" id="filter_audience_wrap">
 									<div class="form-group">
 										<label for="role">Select an Audience</label>
 										<select name="role" class="form-control">
@@ -259,13 +259,13 @@ else {
 										</select>
 									</div>
 								</div>
-								<div class="col-xs-9" id="filter_keyword_wrap">
+								<div class="col-md-9 col-xs-9" id="filter_keyword_wrap">
 									<div class="form-group">
 										<label for="keyword">Type a Keyword</label>
 										<input type="text" name="keyword" class="form-control" <?php if ($keywordval) { ?>placeholder="<?=$keywordval?>"<?php } ?> >
 									</div>
 								</div>
-								<div class="col-xs-9" id="filter_time_wrap">
+								<div class="col-md-9 col-xs-9" id="filter_time_wrap">
 									<div class="form-group">
 										<label for="time">Select a Time</label>
 										<select name="time" class="form-control">
@@ -279,14 +279,14 @@ else {
 									</div>
 								</div>
 
-								<div class="col-xs-3">
+								<div class="col-md-3 col-xs-3">
 									<input type="submit" class="btn btn-default" value="View" id="filter_update">
 								</div>
 
 							</div>
 
 						</div>
-						<div class="col-md-3" id="addnew_wrap">
+						<div class="col-md-3 col-sm-3" id="addnew_wrap">
 							<a class="btn btn-primary" id="addnew_announcement" href="post-an-announcement"><span class="glyphicon glyphicon-pencil glyphicon-white"></span> Post an Announcement</a>
 						</div>
 
@@ -295,12 +295,12 @@ else {
 
 				<?php the_content();?>
 
-				<?php if ($error !== '') { print '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
+				<?php if ($error !== '') { echo '<div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>'.$error.'</div>'; } ?>
 
 				<?php
 					if ($announcements == NULL) {
-						print '<h2 id="upcoming-header">'.$resultsfor.'</h2>';
-						print 'No announcements found.';
+						echo '<h2 id="upcoming-header">'.$resultsfor.'</h2>';
+						echo 'No announcements found.';
 					} else {
 						// Output upcoming and ongoing events separately
 						if (!empty($upcoming) && empty($ongoing)) {
@@ -308,19 +308,19 @@ else {
 						<div class="row">
 							<div class="col-md-12 col-sm-12" id="upcoming-onecol">
 								<h2 id="upcoming-header"><?=$resultsfor?></h2>
-								<?=print_announcements($upcoming, 'thumbtacks', 'col-md-6 col-sm-6', 3);?>
+								<? echo print_announcements($upcoming, 'thumbtacks', 'col-md-6 col-sm-6', 3);?>
 						</div>
 					<?php
 						} else { ?>
 						<div class="row">
 							<div class="col-md-8 col-sm-8" id="upcoming-twocol">
 								<h2 id="upcoming-header"><?=$resultsfor?></h2>
-								<?php (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'col-md-6 col-sm-6', 2) : print '<p>No upcoming announcements found.</p>'; ?>
+								<?php echo (!empty($upcoming)) ? print_announcements($upcoming, 'thumbtacks', 'col-md-6 col-sm-6', 2) : '<p>No upcoming announcements found.</p>'; ?>
 						</div>
 
 						<div class="col-md-3 col-sm-3 col-md-offset-1 col-sm-offset-1" id="ongoing-twocol">
 							<h2 id="ongoing-header">Ongoing Announcements</h2>
-							<?php (!empty($ongoing)) ? print_announcements($ongoing, 'list') : print '<p>No ongoing announcements found.</p>'; ?>
+							<?php echo (!empty($ongoing)) ? print_announcements($ongoing, 'list') : '<p>No ongoing announcements found.</p>'; ?>
 						</div>
 					<?php
 						}
