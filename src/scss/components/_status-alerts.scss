@@ -1,0 +1,124 @@
+// Emergency Status Alerts styles
+#status-alert-template {
+  display: none;
+}
+
+.status-alert {
+  margin-top: 20px;
+
+  h2 {
+    display: block;
+    font-family: $font-family-sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: .9;
+    margin-bottom: 10px;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  .close {
+    background: #8e0001;
+    border-bottom: 1px solid #dd5758;
+    border-radius: 15px;
+    border-top: 1px solid #222;
+    color: #ba2d2e;
+    filter: alpha(opacity=100);
+    padding: 0px 5px 4px 6px;
+    opacity: 1;
+    right: -26px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+    top: -10px;
+
+    @include body-prefix('.ie8') {
+      padding: 0 6px 4px 6px;
+    }
+  }
+
+  .alert-icon-wrap {
+    width: 100px;
+  }
+
+  .alert-icon {
+    @include sprite();
+    float: left;
+    height: 64px;
+    width: 64px;
+
+    &.general {
+      background-position: -128px -283px;
+    }
+
+    &.weather {
+      background-position: -194px -281px;
+    }
+
+    &.police {
+      background-position: -264px -282px;
+    }
+
+    &.update {
+      background-position: -128px -283px;  // Using 'general' icon for now
+    }
+  }
+
+  .alert-wrap {
+    margin-left: 0px;
+    width: 840px;
+  }
+
+  .alert {
+    background: #ba2d2e;
+    border-color: #8e0001;
+    -webkit-box-shadow:  0px 3px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow:  0px 3px 5px 1px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    margin-bottom: 0;
+    padding: 20px 35px 20px 22px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .alert-body {
+    clear: both;
+    display: block;
+    margin-top: 20px;
+  }
+
+  .content,
+  .alert-action {
+    color: #fff;
+    font-family: $font-family-sans-serif;
+    font-size: 14px;
+  }
+
+  .more-information {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+
+
+@media (max-width: 979px) {
+    .status-alert .alert-wrap { width: 624px; }
+}
+
+@media (max-width: 767px) {
+  .status-alert .alert-wrap { width: 100%; }
+  .status-alert .alert-icon {
+      width: 32px;
+      height: 32px;
+      background-size: 212px 175px;
+      margin: 15px 10px 0 15px;
+  }
+  .status-alert .alert-icon.general { background-position: -64px -141px; }
+  .status-alert .alert-icon.weather { background-position: -97px -140px; }
+  .status-alert .alert-icon.police { background-position: -132px -142px; }
+  .status-alert .alert-icon.update { background-position: -64px -141px; } /* Using 'general' icon for now */
+  .status-alert h2 { font-size: 22px; line-height: 20px; }
+  .status-alert .alert-body .content { display: none; }
+}
+
+

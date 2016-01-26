@@ -12,19 +12,17 @@
 				echo do_shortcode('[centerpiece id="'.$latest_centerpiece[0]->ID.'"]');
 				?>
 		</div>
-		<div class="col-md-4 col-sm-4" id="home_leftcol">
+		<div class="col-md-4 col-sm-4 col-md-xpad col-sm-xpad" id="home_leftcol">
 			<h2>Spotlight</h2>
 			<?=frontpage_spotlights()?>
 			<p class="screen-only"><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
 		</div>
-		<div class="col-md-4 col-sm-4" id="home_centercol">
-			<div class="col_padwrap">
-				<h2>News</h2>
-				<?php esi_include('display_news'); ?>
-				<p class="screen-only"><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
-			</div>
+		<div class="col-md-4 col-sm-4 col-md-xpad col-sm-xpad" id="home_centercol">
+			<h2>News</h2>
+			<?php esi_include('display_news'); ?>
+			<p class="screen-only"><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
 		</div>
-		<div class="col-md-4 col-sm-4" id="home_rightcol">
+		<div class="col-md-4 col-sm-4 col-md-xpad col-sm-xpad" id="home_rightcol">
 			<h2>Upcoming Events</h2>
 			<?php esi_include('do_shortcode','[events-widget]'); ?>
 			<?php esi_include('output_weather_data'); ?>
@@ -46,6 +44,7 @@
 				<?=wp_nav_menu(array(
 					'theme_location' => 'ucf-colleges',
 					'container' => 'false',
+					'menu_class' => 'list-unstyled',
 					));
 				?>
 			</div>

@@ -1,0 +1,38 @@
+// Post-type Search
+.post-type-search {
+  margin-top: 1em;
+}
+
+.post-type-search-result-highlight {
+  background-color: #ff0;
+  border: 1px solid #ddd;
+}
+
+.post-type-search-message {
+  padding: 0 10px 10px;
+}
+
+.post-type-search-results {
+  background-color: #f1f1f1;
+  display: none;
+  font-size: 115%;
+  margin-bottom: 10px;
+  padding-top: 10px;
+
+  ul {
+    padding-top: 10px;
+  }
+
+  li {
+    line-height: 1.5;
+  }
+}
+
+.post-type-search-sorting {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.search-post-pgsection {
+  display: none;
+}

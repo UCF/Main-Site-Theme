@@ -1,0 +1,16 @@
+// Weather default styles
+#weather_bug {
+  float: left;
+  margin-top: 8px;
+}
+
+#wb_status_txt {
+  float: right;
+  font-family: $font-family-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: 0;
+  padding: 5px 0 5px 40px;
+  text-align: right;
+}

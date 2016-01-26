@@ -255,37 +255,47 @@ add_action( 'admin_menu', 'hide_admin_links' );
 /**
  * Adds a subheader to a page (if one is set for the page.)
  **/
-function get_page_subheader($post) {
-	if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') {
-		$subheader = get_post(get_post_meta($post->ID, 'page_subheader', TRUE));
-		?>
-		<div class="col-md-12 col-sm-12" id="subheader" role="complementary">
-			<?php
-			$subimg = get_post_meta($subheader->ID, 'subheader_sub_image', TRUE);
-			$imgatts = array(
-				'class'	=> "subheader_subimg col-md-2 col-sm-2",
-				'alt'   => $post->post_title,
-				'title' => $post->post_title,
-			);
-			print wp_get_attachment_image($subimg, 'subpage-subimg', 0, $imgatts);
-			?>
-			<blockquote class="subhead_quote col-md-8 col-sm-8">
-				<?=$subheader->post_content?>
-				<p class="subhead_author"><?=get_post_meta($subheader->ID, 'subheader_student_name', TRUE)?></p>
-			</blockquote>
+function get_page_subheader( $post ) {
+	ob_start();
 
-			<?php
-			$studentimg = get_post_meta($subheader->ID, 'subheader_student_image', TRUE);
-			$imgatts = array(
-				'class'	=> "subheader_studentimg",
-				'alt'   => get_post_meta($subheader->ID, 'subheader_student_name', TRUE),
-				'title' => get_post_meta($subheader->ID, 'subheader_student_name', TRUE),
-			);
-			print wp_get_attachment_image($studentimg, 'subpage-studentimg', 0, $imgatts);
-			?>
+	$subheader = get_post_meta( $post->ID, 'page_subheader', true );
+
+	if ( $subheader ) {
+		$subheader_post = get_post( $subheader );
+		$sub_img = get_post_meta( $subheader, 'subheader_sub_image', true );
+		$sub_img_atts = array(
+			'class'	=> 'subheader-subimg',
+			'alt'   => $post->post_title,
+			'title' => $post->post_title,
+		);
+		$student_name = get_post_meta( $subheader, 'subheader_student_name', true );
+		$student_img = get_post_meta( $subheader, 'subheader_student_image', true );
+		$student_img_atts = array(
+			'class'	=> 'subheader-studentimg',
+			'alt'   => get_post_meta( $subheader, 'subheader_student_name', true ),
+			'title' => get_post_meta( $subheader, 'subheader_student_name', true ),
+		);
+	?>
+		<div class="col-md-12 col-sm-12">
+			<div id="subheader" role="complementary">
+				<div class="row">
+					<div class="col-md-2 col-sm-2">
+						<?php echo wp_get_attachment_image( $sub_img, 'subpage-subimg', 0, $sub_img_atts ); ?>
+					</div>
+					<div class="col-md-8 col-sm-8">
+						<blockquote class="subheader-quote">
+							<?php echo $subheader_post->post_content; ?>
+							<p class="subheader-author text-right"><?php echo $student_name; ?></p>
+						</blockquote>
+					</div>
+				</div>
+				<?php echo wp_get_attachment_image( $student_img, 'subpage-studentimg', 0, $student_img_atts ); ?>
+			</div>
 		</div>
 	<?php
 	}
+
+	return ob_get_clean();
 }
 
 

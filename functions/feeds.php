@@ -10,7 +10,7 @@ function get_article_image($article){
 	}else{
 		$matches = array();
 		$found   = preg_match('/<img[^>]+src=[\'\"]([^\'\"]+)[\'\"][^>]+>/i',  $article->get_content(), $matches);
-		if($found){ 
+		if($found){
 			return $matches[1];
 		}
 	}
@@ -48,7 +48,7 @@ class FeedManager{
 	static private
 		$feeds        = array(),
 		$cache_length = 60; // 1 minute
-	
+
 	/**
 	 * Provided a URL, will return an array representing the feed item for that
 	 * URL.  A feed item contains the content, url, simplepie object, and failure
@@ -60,12 +60,12 @@ class FeedManager{
 	static protected function __new_feed($url){
 		$timer = Timer::start();
 		require_once(THEME_DIR.'/third-party/simplepie.php');
-		
+
 		$simplepie = null;
 		$failed    = False;
 		$cache_key = 'feedmanager-'.md5($url);
 		$content   = get_site_transient($cache_key);
-		
+
 		if ($content === False){
 			// Set a timeout
 			$opts = array('http' => array(
@@ -82,14 +82,14 @@ class FeedManager{
 				set_site_transient($cache_key, $content, self::$cache_length);
 			}
 		}
-		
+
 		if ($content){
 			$simplepie = new SimplePie();
 			$simplepie->set_raw_data($content);
 			$simplepie->set_timeout(FEED_FETCH_TIMEOUT); // seconds
 			$simplepie->init();
 			$simplepie->handle_content_type();
-			
+
 			if ($simplepie->error){
 				error_log($simplepie->error);
 				$simplepie = null;
@@ -98,7 +98,7 @@ class FeedManager{
 		}else{
 			$failed = True;
 		}
-		
+
 		$elapsed = round($timer->elapsed() * 1000);
 		debug("__new_feed: {$elapsed} milliseconds");
 		return array(
@@ -108,8 +108,8 @@ class FeedManager{
 			'failed'    => $failed,
 		);
 	}
-	
-	
+
+
 	/**
 	 * Returns all the items for a given feed defined by URL
 	 *
@@ -125,10 +125,10 @@ class FeedManager{
 		}else{
 			return array();
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Retrieve the current cache expiration value.
 	 *
@@ -138,8 +138,8 @@ class FeedManager{
 	static public function get_cache_expiration(){
 		return self::$cache_length;
 	}
-	
-	
+
+
 	/**
 	 * Set the cache expiration length for all feeds from this manager.
 	 *
@@ -151,8 +151,8 @@ class FeedManager{
 			self::$cache_length = (int)$expire;
 		}
 	}
-	
-	
+
+
 	/**
 	 * Returns all items from the feed defined by URL and limited by the start
 	 * and limit arguments.
@@ -162,7 +162,7 @@ class FeedManager{
 	 **/
 	static public function get_items($url, $start=null, $limit=null){
 		if ($start === null){$start = 0;}
-		
+
 		$items = self::__get_items($url);
 		$items = array_slice($items, $start, $limit);
 		return $items;
@@ -172,7 +172,7 @@ class FeedManager{
 
 /* Modified for main site theme (for JSON instead of RSS feed): */
 function display_events($start=null, $limit=null){?>
-	<?php 
+	<?php
 	$options = get_option(THEME_OPTIONS_NAME);
 	$qstring = (bool)strpos($options['events_url'], '?');
 	$url     = $options['events_url'];
@@ -234,22 +234,22 @@ function display_events($start=null, $limit=null){?>
 
 
 function display_news(){?>
-	<?php 
+	<?php
 	$options = get_option(THEME_OPTIONS_NAME);
 	$count   = $options['news_max_items'];
 	$news    = get_news(0, ($count) ? $count : 3);
 	if($news !== NULL && count($news)):?>
 		<ul class="news">
-			<?php foreach($news as $key=>$item): 
+			<?php foreach($news as $key=>$item):
 				$image = get_article_image($item);
 				if (!($image)) {
-					$image = 'http://today.ucf.edu/widget/thumbnail.png'; 
+					$image = 'http://today.ucf.edu/widget/thumbnail.png';
 				}
 				else {
 					if (preg_match('/\.jpeg$/i', $image)) {
 						$end_of_str_length = 5;
 					}
-					else { 
+					else {
 						// assume .jpeg is the only potential 5-character file extension being used
 						$end_of_str_length = 4;
 					}
@@ -267,11 +267,11 @@ function display_news(){?>
 					<?php endif;?>
 				</a>
 				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
-				<div class="end"><!-- --></div>
+				<div class="clearfix"></div>
 			</li>
 			<?php endforeach;?>
 		</ul>
-		<div class="end"><!-- --></div>
+		<div class="clearfix"></div>
 	<?php else:?>
 		<p>News items could not be retrieved at this time.  Please try again later.</p>
 	<?php endif;?>
@@ -290,17 +290,17 @@ function get_events($start, $limit){
 		$url .= '&';
 	}
 	$url    .= 'upcoming=upcoming&format=json';
-	
+
 	// Set a timeout
 	$opts = array('http' => array(
 						'method'  => 'GET',
 						'timeout' => FEED_FETCH_TIMEOUT
 	));
 	$context = stream_context_create($opts);
-	
+
 	// Grab the weather feed
 	$raw_events = file_get_contents($url, false, $context);
-	if ($raw_events) {	
+	if ($raw_events) {
 		$events = json_decode($raw_events, TRUE);
 		$events = array_slice($events, $start, $limit);
 		return $events;

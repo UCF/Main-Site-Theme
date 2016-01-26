@@ -1,0 +1,310 @@
+/* Announcements Page */
+h2.header_announcements {
+  font-size: 20px;
+}
+
+h2#ongoing-header {
+  font-family: 'HelveticaNeue', Helvetica, sans-serif;
+  font-weight: 200;
+  margin-bottom: 15px;
+}
+
+.page-content#announcements #filters {
+  margin-top: 10px;
+  select, input[type="text"] {
+    margin-right: 15px;
+  }
+}
+
+#filters {
+  margin-bottom: 20px;
+
+    #filter_audience_wrap,
+    #filter_keyword_wrap,
+    #filter_time_wrap {
+        display: none;
+    }
+    .active_filter {
+        display: visible;
+    }
+
+    #filter_form {
+        margin: 0;
+    }
+
+    #addnew_wrap {
+        text-align: right;
+        margin-top: 26px;
+
+        @media (max-width: $screen-xs-max) {
+            text-align: left;
+            margin-top: 0;
+        }
+    }
+
+    #filter_update {
+        margin-top: 25px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+        label {
+            display: block;
+        }
+
+        #filter_wrap {
+            margin-bottom: 10px;
+        }
+    }
+
+    a {
+        border-color: #2e6da4;
+    }
+
+    a:hover {
+        border-color: #204d74;
+    }
+}
+
+
+#announcements {
+  #upcoming-header {
+    margin-bottom: 25px;
+    font-size: 15px;
+    line-height: 20px;
+
+    .upcoming-header-alt {
+      font-style: italic;
+      font-weight: normal;
+      padding-left: 5px;
+      font-size: 20px;
+    }
+  }
+}
+
+.announcement_wrap {
+  height: auto;
+  background: #ffffe2;
+  margin-bottom: 40px;
+  padding: 15px;
+  position: relative;
+
+  &:before, .announcement_wrap:after {
+    z-index: -1;
+      position: absolute;
+      content: "";
+      bottom: 15px;
+      left: 10px;
+    width: 50%;
+      top: 80%;
+      max-width:300px;
+      background: rgba(0, 0, 0, 0.7);
+      -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);
+      -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+      -webkit-transform: rotate(-3deg);
+    -webkit-backface-visibility: hidden;
+      -moz-transform: rotate(-3deg);
+      -o-transform: rotate(-3deg);
+      -ms-transform: rotate(-3deg);
+      transform: rotate(-3deg);
+  }
+
+  &:after {
+    -webkit-transform: rotate(3deg);
+      -moz-transform: rotate(3deg);
+      -o-transform: rotate(3deg);
+      -ms-transform: rotate(3deg);
+      transform: rotate(3deg);
+      right: 10px;
+      left: auto;
+  }
+
+  h3 {
+    padding-right: 25px;
+  }
+
+  .thumbtack {
+    width: 20px;
+    height: 20px;
+    background: url('../../static/img/spritesheet.png') -174px -36px no-repeat;
+    position: absolute;
+    top: -9px;
+    left: 50%;
+  }
+
+  .new {
+    width: 50px;
+    height: 50px;
+    background: url('../../static/img/spritesheet.png') -375px -46px no-repeat;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    text-indent: -9999px;
+  }
+
+  .date, .announcement_wrap .audience, .announcement_wrap .keywords {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif !important;
+    font-size: 12px !important;
+  }
+
+  .audience, .announcement_wrap .keywords {
+    margin-bottom: 0 !important;
+  }
+}
+
+#ongoing-twocol {
+  margin-left: 80px;
+  border-left: 1px dotted #333;
+  padding-left: 19px;
+
+  @media (max-width: $screen-md-max) {
+    margin-left: 62px;
+    border-left: 1px dotted #000;
+    padding-left: 19px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    margin-left: 0;
+    border-left: 0;
+    padding-left: 0;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+
+  #ongoing-header {
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: Georgia, serif;
+  }
+}
+
+.announcement_list {
+  li {
+    margin-bottom: 12px;
+  }
+  li h3 {
+    font-size: 13px;
+    line-height: 18px;
+    font-family: Helvetica, sans-serif;
+    font-weight: normal;
+  }
+}
+
+/* Single Announcements */
+#announcement_meta {
+  margin-bottom: 15px;
+}
+
+#announcement_meta p {
+  margin-bottom: 2px;
+}
+
+/* Post an Announcement Login */
+#ann-login-wrapper {
+  background: #fff6d4;
+  border: 1px solid #dad1ac;
+  padding: 12px;
+  max-width: 560px;
+
+  label {
+    font-weight: bold;
+  }
+
+  h2 {
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+}
+
+#login_error p {
+  margin-bottom: 5px;
+}
+
+#auth-form .wrapper {
+  overflow: auto;
+}
+
+#auth-form-items {
+  max-width: 280px;
+}
+
+
+/* Post an Announcement Form */
+ul.tagit {
+  width: 100% !important;
+  border: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+li.tagit-choice {
+  .tagit-label {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif !important;
+  }
+  a.tagit-close, li.tagit-choice a.tagit-close:hover {
+    border-bottom: 0 !important;
+  }
+}
+
+li.tagit-new {
+  clear: both; float: left; width: 47% !important;
+
+  input {
+    border: 1px solid #ccc !important;
+    border-radius: 2px 2px 2px 2px;
+    color: #333;
+    box-sizing: inherit !important;
+    -moz-box-sizing: inherit !important;
+    -webkit-box-sizing: inherit !important;
+    padding: 2px 0 !important;
+    width: 100% !important;
+  }
+}
+
+.ui-widget {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important;
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  background: #eee !important; border: 1px solid #D3D3D3 !important;
+}
+
+
+@media print {
+  #announcements #filters {
+    display: none;
+  }
+
+  .announcement_wrap {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+
+    &:before, &:after {
+      background: transparent;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+      -webkit-transform: none;
+      -webkit-backface-visibility: hidden;
+      -moz-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+    }
+    &:after {
+      -webkit-transform: none;
+      -moz-transform: none;
+      -o-transform: none;
+      -ms-transform: none;
+      transform: none;
+    }
+  }
+}
+
