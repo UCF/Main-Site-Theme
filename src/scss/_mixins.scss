@@ -41,3 +41,13 @@
     background-size: $width $height;
   }
 }
+
+// Adds Gotham font family styles to an element (using backward-compatible
+// font-family declarations for IE8 support.)
+// $weight should be a number from 1-9, which references the desired font
+// weight (100-900).  Default is 4 (400) or 'Book'.
+@mixin gotham($weight: 4, $font-style: normal) {
+  font-family: 'Gotham SSm #{$weight}r', 'Gotham SSm A', 'Gotham SSm B';
+  font-style: $font-style;
+  font-weight: #{$weight}00;
+}
