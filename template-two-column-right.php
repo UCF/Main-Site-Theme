@@ -25,7 +25,7 @@
 			</article>
 		</div>
 
-		<div id="sidebar_right" class="col-md-3 col-sm-3 notoppad" role="navigation">
+		<div id="sidebar_right" class="col-md-3 col-sm-3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>notoppad<?php } ?>" role="navigation">
 			<?=get_sidebar('right');?>
 		</div>
 	</div>

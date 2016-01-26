@@ -34,6 +34,7 @@
 // Add more view-specific overrides here.  Try to follow WordPress template
 // naming conventions as closely as possible--e.g. home.php styles should go in
 // a file named _home.scss.
+@import 'page-templates';
 @import 'home';
 @import 'page';
 @import '404';
