@@ -4,15 +4,12 @@
     @media (max-width: $screen-xs-max) {
       // Help mobile users and provide larger checkboxes when possible
       transform: scale(1.25);
-      -webkit-transform: scale(1.25);
     }
   }
 
   .lead {
-    font-family: 'Gotham SSm 2r', 'Gotham SSm A', 'Gotham SSm B';
+    @include gotham(2);
     font-size: 30px;
-    font-style: normal;
-    font-weight: 200;
     letter-spacing: -.012em;
     line-height: 1.4;
     margin: 10px 0;
@@ -28,8 +25,7 @@
 
     strong,
     b {
-      font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
-      font-weight: 400;
+      @include gotham();
     }
   }
 
@@ -71,21 +67,20 @@
   @media (max-width: $screen-xs-max) {
     background-color: #fff;
     border-radius: 5px;
-    box-sizing: border-box;
     box-shadow: 0 0 5px rgba(0, 0, 0, .4);
+    box-sizing: border-box;
+    left: 15px;
     margin-top: 0;
-    max-height: 0; /* set via js when active */
+    max-height: 0; // set via js when active
     opacity: 0;
+    -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
     padding: 0;
     pointer-events: none;
     position: absolute;
-    top: 50px; /* is overridden via JS */
-    -webkit-overflow-scrolling: touch;
-    -webkit-transition: opacity .2s ease-in-out;
+    top: 50px; // is overridden via JS
     transition: opacity .2s ease-in-out;
-    left: 15px;
-    width: 92%; /* pre android v4.4 :( */
+    width: 92%; // pre android v4.4 :(
     width: calc(100% - 30px);
     z-index: 999;
   }
@@ -164,13 +159,11 @@
 
   .degree-filter-title {
     @include font-smoothing();
+    @include gotham();
     color: #888;
     display: block;
     float: left;
-    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
     font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
     letter-spacing: -.012em;
     line-height: 2.3;
 
@@ -537,9 +530,7 @@
   }
 
   .degree-search-sort-label {
-    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
-    font-style: normal;
-    font-weight: 400;
+    @include gotham();
     padding-left: 0;
   }
 
@@ -597,11 +588,9 @@
 
   .degree-search-group-title {
     @include font-smoothing();
+    @include gotham();
     border-bottom: 1px solid #eee;
     color: #222;
-    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
-    font-style: normal;
-    font-weight: 400;
     letter-spacing: -.012em;
     line-height: 30px;
     margin: 15px 0;
@@ -690,12 +679,10 @@
   }
 
   .degree-title-wrap {
+    @include gotham();
     box-sizing: border-box;
     display: table;
-    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
     font-size: 17px;
-    font-style: normal;
-    font-weight: 400;
     margin-bottom: 0;
     padding: 15px;
     width: 100%;
