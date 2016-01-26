@@ -120,7 +120,7 @@ get_header(); the_post(); ?>
 					</div>
 					<div class="degree-search-sort visible-xs clearfix">
 						<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
-						<select id="sort-by" class="pull-right">
+						<select id="sort-by" class="pull-right form-control">
 							<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
 							<option value="credit-hours" <?php if ( $sort_by == 'credit-hours' ) { echo 'selected'; } ?>>Credit Hours</option>
 						</select>
