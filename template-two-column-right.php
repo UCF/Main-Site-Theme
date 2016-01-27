@@ -20,12 +20,11 @@
 
 		<div class="col-md-9 col-sm-9" id="contentcol">
 			<article role="main">
-				<?php if (get_post_meta($post->ID, 'page_subheader', TRUE) !== '') { ?><div class="rightcol_subheader_fix"></div><?php } ?>
 				<?php the_content();?>
 			</article>
 		</div>
 
-		<div id="sidebar_right" class="col-md-3 col-sm-3 notoppad" role="navigation">
+		<div id="sidebar_right" class="col-md-3 col-sm-3 <?php if (get_post_meta($post->ID, 'page_subheader', TRUE) == '') { ?>notoppad<?php } ?>" role="navigation">
 			<?=get_sidebar('right');?>
 		</div>
 	</div>
