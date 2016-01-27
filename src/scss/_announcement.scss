@@ -1,72 +1,75 @@
-/* Announcements Page */
-h2.header_announcements {
-  font-size: 20px;
-}
-
-h2#ongoing-header {
-  font-family: 'HelveticaNeue', Helvetica, sans-serif;
-  font-weight: 200;
-  margin-bottom: 15px;
-}
-
-.page-content#announcements #filters {
-  margin-top: 10px;
-  select, input[type="text"] {
-    margin-right: 15px;
+// Announcements Page
+#announcements {
+  label {
+    @media (max-width: $screen-xs-max) {
+      display: block;
+    }
   }
-}
 
-#filters {
-  margin-bottom: 20px;
+  .btn-primary {
+    border-color: #2e6da4;
 
-    #filter_audience_wrap,
-    #filter_keyword_wrap,
-    #filter_time_wrap {
-        display: none;
+    &:hover,
+    &:active,
+    &:focus {
+      border-color: #204d74;
     }
-    .active_filter {
-        display: visible;
-    }
+  }
 
-    #filter_form {
-        margin: 0;
-    }
+  #filters {
+    margin-bottom: 25px;
+    margin-top: 10px;
 
-    #addnew_wrap {
-        text-align: right;
-        margin-top: 26px;
-
-        @media (max-width: $screen-xs-max) {
-            text-align: left;
-            margin-top: 0;
-        }
+    @media print {
+      display: none;
     }
 
-    #filter_update {
-        margin-top: 25px;
+    select,
+    input[type="text"] {
+      margin-right: 15px;
     }
+  }
+
+  #filter_audience_wrap,
+  #filter_keyword_wrap,
+  #filter_time_wrap {
+      display: none;
+  }
+
+  .active_filter {
+      display: visible;
+  }
+
+  #filter_form {
+      margin: 0;
+  }
+
+  #addnew_wrap {
+    text-align: right;
+    margin-top: 26px;
 
     @media (max-width: $screen-xs-max) {
-        label {
-            display: block;
-        }
-
-        #filter_wrap {
-            margin-bottom: 10px;
-        }
+      text-align: left;
+      margin-top: 0;
     }
+  }
 
-    a {
-        border-color: #2e6da4;
+  #filter_update {
+      margin-top: 25px;
+  }
+
+  #filter_wrap {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 10px;
     }
+  }
 
-    a:hover {
-        border-color: #204d74;
-    }
-}
+  #ongoing-header {
+    font-family: $font-family-sans-serif;
+    font-weight: 200;
+    margin-bottom: 15px;
+  }
 
-
-#announcements {
   #upcoming-header {
     margin-bottom: 25px;
     font-size: 15px;
@@ -79,6 +82,28 @@ h2#ongoing-header {
       font-size: 20px;
     }
   }
+
+  #ongoing-twocol {
+    border-left: 1px dotted #333;
+
+    @media (max-width: $screen-sm-max) {
+      border-left: 1px dotted #000;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      border-left: 0;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    #ongoing-header {
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-family: $font-family-serif;
+    }
+  }
 }
 
 .announcement_wrap {
@@ -88,35 +113,42 @@ h2#ongoing-header {
   padding: 15px;
   position: relative;
 
-  &:before, .announcement_wrap:after {
-    z-index: -1;
-      position: absolute;
-      content: "";
-      bottom: 15px;
-      left: 10px;
-    width: 50%;
-      top: 80%;
-      max-width:300px;
-      background: rgba(0, 0, 0, 0.7);
-      -webkit-box-shadow: 0 15px 10px rgba(0,0,0, 0.7);
-      -moz-box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
-      box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
-      -webkit-transform: rotate(-3deg);
+  @media print {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
+  &:before,
+  &:after {
     -webkit-backface-visibility: hidden;
-      -moz-transform: rotate(-3deg);
-      -o-transform: rotate(-3deg);
-      -ms-transform: rotate(-3deg);
-      transform: rotate(-3deg);
+    background: rgba(0, 0, 0, .7);
+    bottom: 15px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, .7);
+    content: '';
+    left: 10px;
+    max-width: 300px;
+    position: absolute;
+    transform: rotate(-3deg);
+    top: 80%;
+    width: 50%;
+    z-index: -1;
+
+    @media print {
+      -webkit-backface-visibility: hidden;
+      background: transparent;
+      box-shadow: none;
+      transform: none;
+    }
   }
 
   &:after {
-    -webkit-transform: rotate(3deg);
-      -moz-transform: rotate(3deg);
-      -o-transform: rotate(3deg);
-      -ms-transform: rotate(3deg);
-      transform: rotate(3deg);
-      right: 10px;
-      left: auto;
+    left: auto;
+    right: 10px;
+    transform: rotate(3deg);
+
+    @media print {
+      transform: none;
+    }
   }
 
   h3 {
@@ -142,66 +174,44 @@ h2#ongoing-header {
     text-indent: -9999px;
   }
 
-  .date, .announcement_wrap .audience, .announcement_wrap .keywords {
-    font-family: 'Helvetica Neue', Helvetica, sans-serif !important;
-    font-size: 12px !important;
-  }
-
-  .audience, .announcement_wrap .keywords {
-    margin-bottom: 0 !important;
-  }
-}
-
-#ongoing-twocol {
-  margin-left: 80px;
-  border-left: 1px dotted #333;
-  padding-left: 19px;
-
-  @media (max-width: $screen-md-max) {
-    margin-left: 62px;
-    border-left: 1px dotted #000;
-    padding-left: 19px;
-  }
-
-  @media (max-width: $screen-sm-max) {
-    margin-left: 0;
-    border-left: 0;
-    padding-left: 0;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-
-  #ongoing-header {
+  .date,
+  .audience,
+  .keywords {
+    font-family: $font-family-sans-serif;
     font-size: 12px;
-    line-height: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-family: Georgia, serif;
+  }
+
+  .audience,
+  .keywords {
+    margin-bottom: 0 !important;
   }
 }
 
 .announcement_list {
   li {
     margin-bottom: 12px;
-  }
-  li h3 {
-    font-size: 13px;
-    line-height: 18px;
-    font-family: Helvetica, sans-serif;
-    font-weight: normal;
+
+    h3 {
+      font-size: 13px;
+      line-height: 18px;
+      font-family: $font-family-sans-serif;
+      font-weight: normal;
+    }
   }
 }
 
-/* Single Announcements */
+
+// Single Announcements
 #announcement_meta {
   margin-bottom: 15px;
+
+  p {
+    margin-bottom: 2px;
+  }
 }
 
-#announcement_meta p {
-  margin-bottom: 2px;
-}
 
-/* Post an Announcement Login */
+// Post an Announcement Login
 #ann-login-wrapper {
   background: #fff6d4;
   border: 1px solid #dad1ac;
@@ -229,29 +239,3 @@ h2#ongoing-header {
 #auth-form-items {
   max-width: 280px;
 }
-
-
-// Print overrides
-@media print {
-  #announcements #filters {
-    display: none;
-  }
-
-  .announcement_wrap {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-
-    &:before,
-    &:after {
-      background: transparent;
-      box-shadow: none;
-      -webkit-backface-visibility: hidden;
-      transform: none;
-    }
-
-    &:after {
-      transform: none;
-    }
-  }
-}
-
