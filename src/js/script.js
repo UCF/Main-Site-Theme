@@ -532,41 +532,47 @@ $(document).on('touchstart.dropdown', '.dropdown-menu', function(e) { e.stopProp
 /*
  * Check the status site RSS feeds periodically and display an alert if necessary.
  */
-var statusAlertCheck = function($) {
-  $.getFeed({
-    url     : ALERT_RSS_URL,
-    cache : false,
-    error   : function(feed) {
-      $('.status-alert[id!=status-alert-template]').remove();
-    },
-    success : function(feed) {
-      var visible_alert = null;
-      var newest      = feed.items[0];
+var statusAlertCheck = function ($) {
+  var $statusAlert = $('.status-alert[id!=status-alert-template]');
+
+  function errorHandler() {
+      $statusAlert.remove();
+  }
+
+  function successHandler(feed) {
+      var visible_alert = null,
+        $newest = $($(feed).find('item')[0]),
+        newest = {
+          id: $newest.find('postID').text(),
+          title: $newest.find('title').text(),
+          description: $newest.find('description').text(),
+          type: $newest.find('alertType').text()
+      };
 
       if (newest) {
-        var existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]');
+        var $existing_alert = $('.status-alert[data-alert-id="' + newest.id + '"]');
         visible_alert = newest.id;
         // Remove 'more info at...' from description
         newest.description = newest.description.replace('More info at www.ucf.edu','');
 
         // Remove old alerts that no longer appear in the feed
-        if( (visible_alert === null) || (visible_alert != $('.status-alert[id!=status-alert-template]').attr('data-alert-id')) ) {
-          $('.status-alert[id!=status-alert-template]').remove();
+        if( (visible_alert === null) || (visible_alert !== $statusAlert.attr('data-alert-id')) ) {
+          $statusAlert.remove();
         }
 
         // Check to see if this alert already exists
-        if(existing_alert.length > 0) {
+        if($existing_alert.length > 0) {
           // Check the content and update if necessary.
           // This will simply fail if the alert has already been closed
           // by the user (alert element has been removed from the DOM)
-          var existing_title = existing_alert.find('.title'),
-            existing_content = existing_alert.find('.content'),
-            existing_type = existing_alert.find('.alert-icon');
+          var existing_title = $existing_alert.find('.title'),
+            existing_content = $existing_alert.find('.content'),
+            existing_type = $existing_alert.find('.alert-icon');
 
-          if(existing_title.text() != newest.title) {
+          if(existing_title.text() !== newest.title) {
             existing_title.text(newest.title);
           }
-          if(existing_content.text() != newest.description) {
+          if(existing_content.text() !== newest.description) {
             existing_content.text(newest.description);
           }
           if(existing_type.hasClass(newest.type) === false) {
@@ -575,7 +581,7 @@ var statusAlertCheck = function($) {
 
         } else {
           // Make sure this alert hasn't been closed by the user already
-          if ($.cookie('ucf_alert_display_' + newest.id) != 'hide') {
+          if ($.cookie('ucf_alert_display_' + newest.id) !== 'hide') {
             // Create a new alert if an existing one isn't found
 
             var alert_markup = $('#status-alert-template').clone(true);
@@ -584,8 +590,6 @@ var statusAlertCheck = function($) {
               .attr('data-alert-id', newest.id);
             $('#header-nav-wrap').before(alert_markup);
 
-            // Apparently IE7 doesn't like to append text to elements
-            // that haven't been inserted into the dom yet. THANKS IE.
             $('.status-alert[data-alert-id="' + newest.id + '"]')
               .find('.title').text(newest.title).end()
               .find('.content').text(newest.description).end()
@@ -595,16 +599,23 @@ var statusAlertCheck = function($) {
         }
       }
       else {
-        // If the feed is empty (all-clear), hide the currently visible
+        // If the feed i  s empty (all-clear), hide the currently visible
         // alert, if it exists
-        if ($('.status-alert[id!=status-alert-template]').length > 0) {
-          $('.status-alert[id!=status-alert-template]').remove();
+        if ($statusAlert.length > 0) {
+          $statusAlert.remove();
         }
       }
 
       // Set cookies for every iteration of new alerts, if necessary
       statusAlertCookieSet($);
-    }
+  }
+
+  $.ajax({
+        url: ALERT_RSS_URL,
+        cache: false,
+        dataType: "xml",
+        success: successHandler,
+        error: errorHandler
   });
 };
 
@@ -1377,12 +1388,7 @@ var ariaSilenceNoscripts = function($) {
 
 var announcementKeywordAutocomplete = function($) {
   if ($('.announcement-tag-autocomplete input').length) {
-    $('.announcement-tag-autocomplete input')
-      .tagsinput({
-        typeahead: {
-          source: announcementKeywords // defined in header.php
-        }
-      });
+    $('.announcement-tag-autocomplete input').tagsinput();
   }
 };
 
@@ -1543,6 +1549,7 @@ if (typeof jQuery != 'undefined'){
     degreeProfile($);
     socialButtonTracking($);
     ariaSilenceNoscripts($);
+    announcementKeywordAutocomplete($);
     customChart($);
     mediaTemplateVideo($);
 
