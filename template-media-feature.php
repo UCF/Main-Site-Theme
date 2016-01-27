@@ -37,18 +37,17 @@ if ( $use_video ) {
 
 	</div>
 </div>
-
-<div class="page-content">
-	<div class="container">
-		<div class="col-md-12 col-sm-12">
-
-			<article role="main">
-				<?php the_content(); ?>
-			</article>
-
+<article role="main">
+	<div class="page-content">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<?php the_content(); ?>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+</article>
 
 </div>
 <div class="container">
