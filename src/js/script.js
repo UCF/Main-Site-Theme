@@ -1377,12 +1377,7 @@ var ariaSilenceNoscripts = function($) {
 
 var announcementKeywordAutocomplete = function($) {
   if ($('.announcement-tag-autocomplete input').length) {
-    $('.announcement-tag-autocomplete input')
-      .tagsinput({
-        typeahead: {
-          source: announcementKeywords // defined in header.php
-        }
-      });
+    $('.announcement-tag-autocomplete input').tagsinput();
   }
 };
 
@@ -1543,6 +1538,7 @@ if (typeof jQuery != 'undefined'){
     degreeProfile($);
     socialButtonTracking($);
     ariaSilenceNoscripts($);
+    announcementKeywordAutocomplete($);
     customChart($);
     mediaTemplateVideo($);
 

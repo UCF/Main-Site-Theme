@@ -231,52 +231,7 @@ h2#ongoing-header {
 }
 
 
-/* Post an Announcement Form */
-ul.tagit {
-  width: 100% !important;
-  border: 0 !important;
-  padding: 0 !important;
-  overflow: visible !important;
-}
-
-li.tagit-choice {
-  .tagit-label {
-    font-family: 'Helvetica Neue', Helvetica, sans-serif !important;
-  }
-  a.tagit-close, li.tagit-choice a.tagit-close:hover {
-    border-bottom: 0 !important;
-  }
-}
-
-li.tagit-new {
-  clear: both; float: left; width: 47% !important;
-
-  input {
-    border: 1px solid #ccc !important;
-    border-radius: 2px 2px 2px 2px;
-    color: #333;
-    box-sizing: inherit !important;
-    -moz-box-sizing: inherit !important;
-    -webkit-box-sizing: inherit !important;
-    padding: 2px 0 !important;
-    width: 100% !important;
-  }
-}
-
-.ui-widget {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif !important; font-size: 12px !important;
-}
-
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
-  background: #eee !important; border: 1px solid #D3D3D3 !important;
-}
-
-
+// Print overrides
 @media print {
   #announcements #filters {
     display: none;
@@ -286,23 +241,15 @@ li.tagit-new {
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
 
-    &:before, &:after {
+    &:before,
+    &:after {
       background: transparent;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
       box-shadow: none;
-      -webkit-transform: none;
       -webkit-backface-visibility: hidden;
-      -moz-transform: none;
-      -o-transform: none;
-      -ms-transform: none;
       transform: none;
     }
+
     &:after {
-      -webkit-transform: none;
-      -moz-transform: none;
-      -o-transform: none;
-      -ms-transform: none;
       transform: none;
     }
   }
