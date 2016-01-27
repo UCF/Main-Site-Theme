@@ -16,7 +16,7 @@
 				<?php else: ?>
 					<div class="knightro-bg">
 						<div class="row">
-							<div class="col-md-8">
+							<div class="col-md-8 col-sm-8">
 								<h1>Page Not Found</h1>
 								<p class="lead">Don't give in to despair, your quest continues here...</p>
 								<p>Try double-checking the spelling of the address you requested, or search using the field below:</p>
