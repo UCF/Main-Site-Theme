@@ -37,8 +37,8 @@ if ( $use_video ) {
 
 	</div>
 </div>
-<article role="main">
-	<div class="page-content">
+<div class="page-content">
+	<article role="main">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
@@ -46,8 +46,8 @@ if ( $use_video ) {
 				</div>
 			</div>
 		</div>
-	</div>
-</article>
+	</article>
+</div>
 
 </div>
 <div class="container">
