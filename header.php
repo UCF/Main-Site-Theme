@@ -60,15 +60,6 @@
 		}
 		?>
 
-		<?php
-		if ( is_page( 'Post An Announcement' ) ) {
-			$keywords = json_encode( get_terms( 'keywords', array( 'fields' => 'names' ) ) );
-		?>
-		<script>
-			var announcementKeywords = <?php echo $keywords; ?>;
-		</script>
-		<?php } ?>
-
 		<script type="text/javascript">
 			var PostTypeSearchDataManager = {
 				'searches' : [],
