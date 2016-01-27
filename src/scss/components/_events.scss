@@ -1,0 +1,65 @@
+// Events Widget
+.events_icons {
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.events {
+  a {
+    color: #000;
+
+    &:hover {
+      color: #990000;
+      text-decoration: underline;
+    }
+  }
+
+  thead {
+    font-weight: bold;
+
+    td {
+      text-align: center;
+    }
+  }
+
+  tbody {
+    tr:nth-child(2n+1) td,
+    tr:nth-child(2n+1) th {
+      background-color: #FFFDF4 !important;
+      border-top: 1px solid #F9DD8C;
+    }
+  }
+
+  &.table th,
+  &.table td {
+    border-top: 1px solid #F9DD8C;
+  }
+
+  .date {
+    width: 70px;
+  }
+
+  .dtstart {
+    border-bottom: 0 solid transparent;
+    font-size: 12px;
+  }
+
+  .summary,
+  .location {
+    width: 100%;
+  }
+
+  .summary {
+    padding-bottom: 2px;
+  }
+
+  .location a,
+  .location a:hover {
+    border-bottom: 0 solid transparent;
+    color: #363636;
+    font-size: 10px;
+    line-height: 14px;
+    text-transform: uppercase;
+  }
+}

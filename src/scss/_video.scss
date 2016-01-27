@@ -1,0 +1,21 @@
+// Videos
+.video {
+  overflow: hidden;
+
+  a {
+    border-bottom: 0 !important;
+  }
+
+  h4,
+  .video-desc p {
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 0;
+    line-height: 0;
+    margin-bottom: 10px;
+    overflow: hidden;
+    position: relative;
+  }
+}

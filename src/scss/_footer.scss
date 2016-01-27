@@ -1,0 +1,111 @@
+#footer {
+  border-top: 0;
+  margin: 35px 0 20px;
+
+  a:hover {
+    color: #e50606;
+  }
+}
+
+#footer-navwrap,
+#subfooter {
+  @media (max-width: $screen-xs-max) {
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
+  }
+}
+
+#footer-menu {
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 20px;
+  }
+
+  li {
+    border-right: 1px solid #262626;
+    font-family: $font-family-sans-serif;
+    letter-spacing: .8px;
+    line-height: 1;
+    margin-bottom: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    @media (max-width: $screen-sm-max) {
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      letter-spacing: .7px;
+    }
+
+    &.last {
+      border-right: 0 solid transparent;
+    }
+  }
+
+  a {
+    color: #262626;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+}
+
+#subfooter {
+  font-size: 10px;
+  letter-spacing: .8px;
+  line-height: 2;
+  text-align: center;
+
+  a {
+    color: #262626;
+  }
+}
+
+#social-menu-wrap {
+  margin: 0;
+  padding: 10px 0 15px;
+}
+
+#social-menu {
+  a[href*="facebook"],
+  a[href*="twitter"],
+  a[href*="flickr"],
+  a[href*="youtube"],
+  a[href*="google"] {
+    @include sprite();
+    height: 32px;
+    width: 35px;
+  }
+
+  a[href*="facebook"] {
+    background-position: -1px -35px;
+  }
+
+  a[href*="twitter"] {
+    background-position: -67px -34px;
+  }
+
+  a[href*="flickr"] {
+    background-position: -32px -35px;
+  }
+
+  a[href*="youtube"] {
+    background-position: -101px -35px;
+  }
+
+  a[href*="google"] {
+    background-position: -134px -35px;
+  }
+}
+
+#footer-logo {
+  padding-top: 10px;
+
+  a {
+    @include sprite();
+    background-position: -246px -46px;
+    height: 45px;
+    margin: auto;
+    width: 123px;
+  }
+}

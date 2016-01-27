@@ -1,0 +1,56 @@
+// Documents
+
+.nobullet {
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+
+.powerpoint,
+.missing,
+.excel,
+.word,
+.zip,
+.pdf,
+.html,
+.document {
+  @include sprite('static/img/documents.png', 'static/img/documents.png', 144px, 18px);
+  height: 18px;
+  margin: 0 5px 0 0;
+  position: relative;
+  top: 3px;
+  width: 18px;
+}
+
+.powerpoint {
+  background-position: 0 -18px;
+}
+
+.pdf {
+  background-position: 0 -36px;
+}
+
+.missing {
+  background-position: 0 -54px;
+}
+
+.excel {
+  background-position: 0 -72px;
+}
+
+.zip {
+  background-position: 0 -90px;
+}
+
+.word {
+  background-position: 0 -108px;
+}
+
+.html {
+  background-position: 0 -126px;
+}
+
+.document {
+  margin-bottom: 5px;
+  padding-left: 25px;
+  width: 100%;
+}

@@ -1,0 +1,6 @@
+// Force sans-serif font on tables
+.table {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+}

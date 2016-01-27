@@ -60,21 +60,6 @@
 		}
 		?>
 
-		<?php if (is_front_page() || get_post_type($post) == 'centerpiece') { ?>
-			<script type="text/javascript" src="<?=THEME_JS_URL?>/cycle.min.js"></script>
-		<?php } ?>
-
-		<?php
-		if ( is_page( 'Post An Announcement' ) ) {
-			$keywords = json_encode( get_terms( 'keywords', array( 'fields' => 'names' ) ) );
-		?>
-		<link href="<?php echo THEME_CSS_URL; ?>/bootstrap-tagsinput.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="<?php echo THEME_JS_URL; ?>/bootstrap-tagsinput.min.js"></script>
-		<script>
-			var announcementKeywords = <?php echo $keywords; ?>;
-		</script>
-		<?php } ?>
-
 		<script type="text/javascript">
 			var PostTypeSearchDataManager = {
 				'searches' : [],
@@ -100,11 +85,11 @@
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
-				<div class="span2 alert-icon-wrap">
+				<div class="col-md-2 col-sm-2 alert-icon-wrap">
 					<div class="alert-icon general"></div>
 				</div>
-				<div class="span10 alert-wrap">
-					<div class="alert alert-error alert-block">
+				<div class="col-md-10 col-sm-10 alert-wrap">
+					<div class="alert alert-danger alert-block">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<h2>
 							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
@@ -122,22 +107,42 @@
 					</div>
 				</div>
 			</div>
-			<?php if (is_front_page()) { ?>
-			<div class="row" id="header_wrap">
-				<div id="header" class="row-border-bottom-top" role="banner">
-					<h1><?=bloginfo('name')?></h1>
-				</div>
+			<?php if ( is_front_page() ): ?>
+			<div id="header" class="sr-only" role="banner">
+				<h1><?php echo bloginfo( 'name' ); ?></h1>
 			</div>
-			<?php } ?>
-			<div id="header-nav-wrap" role="navigation" class="screen-only">
+			<?php endif; ?>
+			<nav id="header-nav-wrap" role="navigation" class="screen-only hidden-xs">
 				<?=wp_nav_menu(array(
 					'theme_location' => 'header-menu',
 					'container' => 'false',
-					'menu_class' => 'menu '.get_header_styles(),
+					'menu_class' => 'menu list-unstyled list-inline text-center '.get_header_styles(),
 					'menu_id' => 'header-menu',
 					'walker' => new Bootstrap_Walker_Nav_Menu(),
 					'before' => '<strong>',
 					'after' => '</strong>',
 					));
 				?>
-			</div>
+			</nav>
+			<nav id="site-nav-xs" class="visible-xs-block navbar navbar-inverse">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu-xs-collapse" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<span class="navbar-brand">Navigation</span>
+				</div>
+				<div class="collapse navbar-collapse" id="header-menu-xs-collapse">
+					<?php
+					wp_nav_menu( array(
+						'theme_location' => 'header-menu',
+						'container' => false,
+						'menu_class' => 'menu nav navbar-nav',
+						'menu_id' => 'header-menu-xs',
+						'walker' => new Bootstrap_Walker_Nav_Menu()
+					) );
+					?>
+				</div>
+			</nav>

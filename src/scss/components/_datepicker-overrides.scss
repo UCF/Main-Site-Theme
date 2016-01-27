@@ -1,0 +1,12 @@
+// jQuery UI datepicker overrides
+.ui-datepicker-title select {
+  @extend .form-control;
+  display: inline-block;
+  margin-bottom: 2.5%;
+  padding: 6px;
+  width: auto;
+}
+
+.ui-datepicker-month {
+  margin-right: 2.5%;
+}

@@ -1,0 +1,14 @@
+// Bootstrap Tags Input js plugin overrides
+.announcement-tag-autocomplete {
+  margin-bottom: 10px;
+}
+
+.bootstrap-tagsinput {
+  width: 96%;
+
+  .tag {
+    font-family: $font-family-sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+  }
+}

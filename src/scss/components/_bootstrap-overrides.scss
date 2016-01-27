@@ -1,0 +1,65 @@
+// Force sans-serif font on common components
+.alert,
+.badge,
+.breadcrumb,
+.btn,
+.carousel,
+.collapse,
+.dropdown,
+.jumbotron,
+.label,
+.list-group,
+.media,
+.modal,
+.nav,
+.navbar,
+.pagination,
+.panel {
+  @include no-font-smoothing();
+  font-family: $font-family-sans-serif;
+}
+
+
+// Modals
+.modal-dialog {
+  margin-top: 75px; // UCF Header height + 25px pad
+}
+
+
+// Bootstrap btn overrides
+// TODO: see if any of these can be overridden via variables
+a.btn, a.btn:hover, a.btn.disabled {
+    color: #333333 !important;
+}
+a.btn-primary,
+a.btn-warning,
+a.btn-info,
+a.btn-success,
+a.btn-danger,
+a.btn-primary:hover,
+a.btn-warning:hover,
+a.btn-info:hover,
+a.btn-success:hover,
+a.btn-danger:hover,
+a.btn-primary.disabled {
+    color: #FFFFFF !important;
+}
+
+
+// Bootstrap pager overrides
+// TODO: see if any of these can be overridden via variables
+.pager li > a,
+.pager li > span {
+  font-weight: 500;
+}
+.pager .disabled > a,
+.pager .disabled > a:hover,
+.pager .disabled > span {
+  color: #ccc !important;
+}
+
+
+// Line-height override for mobile navbars (for consistency with BS2)
+.navbar-nav > li > a {
+  line-height: 27px;
+}
