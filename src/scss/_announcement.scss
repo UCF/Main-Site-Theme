@@ -20,6 +20,10 @@
     margin-bottom: 25px;
     margin-top: 10px;
 
+    @media print {
+      display: none;
+    }
+
     select,
     input[type="text"] {
       margin-right: 15px;
@@ -109,6 +113,11 @@
   padding: 15px;
   position: relative;
 
+  @media print {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
   &:before,
   &:after {
     -webkit-backface-visibility: hidden;
@@ -123,12 +132,23 @@
     top: 80%;
     width: 50%;
     z-index: -1;
+
+    @media print {
+      -webkit-backface-visibility: hidden;
+      background: transparent;
+      box-shadow: none;
+      transform: none;
+    }
   }
 
   &:after {
     left: auto;
     right: 10px;
     transform: rotate(3deg);
+
+    @media print {
+      transform: none;
+    }
   }
 
   h3 {
@@ -271,28 +291,3 @@ li.tagit-new {
   background: #eee !important;
   border: 1px solid #D3D3D3 !important;
 }
-
-
-@media print {
-  #announcements #filters {
-    display: none;
-  }
-
-  .announcement_wrap {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-
-    &:before,
-    &:after {
-      background: transparent;
-      box-shadow: none;
-      -webkit-backface-visibility: hidden;
-      transform: none;
-    }
-
-    &:after {
-      transform: none;
-    }
-  }
-}
-
