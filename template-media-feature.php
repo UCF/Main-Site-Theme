@@ -27,20 +27,27 @@ if ( $use_video ) {
 <div class="container-fullwidth page-media" id="<?php echo $post->post_name; ?>">
 	<div class="page-media-header" style="background-image: url('<?php echo $header_img; ?>');">
 
-		<?php if ( $use_video ): ?>
-		<div id="header-video-placeholder" <?php echo $placeholder_attrs; ?>></div>
-		<?php endif; ?>
+	<?php if ( $use_video ): ?>
+	<div id="header-video-placeholder" <?php echo $placeholder_attrs; ?>></div>
+	<?php endif; ?>
 
-		<div class="page-media-container">
-			<?php echo $header_content; ?>
+	<div class="page-media-container">
+		<?php echo $header_content; ?>
+	</div>
+
+	</div>
+</div>
+<div class="page-content">
+	<article role="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<?php the_content(); ?>
+				</div>
+			</div>
 		</div>
-
-	</div>
-	<div class="page-content">
-		<article role="main">
-			<?php the_content(); ?>
-		</article>
-	</div>
+	</article>
+</div>
 
 </div>
 <div class="container">

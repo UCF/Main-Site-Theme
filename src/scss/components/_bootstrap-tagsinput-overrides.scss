@@ -5,8 +5,10 @@
 
 .bootstrap-tagsinput {
   width: 96%;
-}
 
-.bootstrap-tagsinput .tag {
-  font-family: "Helvetica Neue", "Helvetica-Neue", "Helvetica", sans-serif;
+  .tag {
+    font-family: $font-family-sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+  }
 }
