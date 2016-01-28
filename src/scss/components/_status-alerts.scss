@@ -14,6 +14,11 @@
     line-height: .9;
     margin-bottom: 10px;
 
+    @media (max-width: $screen-xs-max) {
+      font-size: 22px;
+      line-height: 20px;
+    }
+
     a {
       color: #fff;
     }
@@ -39,6 +44,11 @@
 
   .alert-icon-wrap {
     width: 100px;
+
+    @media (max-width: $screen-xs-max) {
+      position: relative;
+      z-index: 2;
+    }
   }
 
   .alert-icon {
@@ -47,26 +57,59 @@
     height: 64px;
     width: 64px;
 
+    @media (max-width: $screen-xs-max) {
+      width: 32px;
+      height: 32px;
+      background-size: 212px 175px;
+      margin: 15px 10px 0 15px;
+    }
+
     &.general {
       background-position: -128px -283px;
+
+      @media (max-width: $screen-xs-max) {
+        background-position: -64px -141px;
+      }
     }
 
     &.weather {
       background-position: -194px -281px;
+
+      @media (max-width: $screen-xs-max) {
+        background-position: -97px -140px;
+      }
     }
 
     &.police {
       background-position: -264px -282px;
+
+      @media (max-width: $screen-xs-max) {
+        background-position: -132px -142px;
+      }
     }
 
     &.update {
       background-position: -128px -283px;  // Using 'general' icon for now
+
+      @media (max-width: $screen-xs-max) {
+        background-position: -64px -141px;
+      }
     }
   }
 
   .alert-wrap {
-    margin-left: 0px;
+    margin-left: 0;
     width: 840px;
+
+    @media (max-width: $screen-sm-max) {
+      width: 624px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      position: relative;
+      width: 100%;
+      z-index: 1;
+    }
   }
 
   .alert {
@@ -84,6 +127,18 @@
     clear: both;
     display: block;
     margin-top: 20px;
+
+    a:hover,
+    a:active,
+    a:focus {
+      color: #fff;
+    }
+  }
+
+  .content {
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
   }
 
   .content,
@@ -98,27 +153,3 @@
     text-decoration: underline;
   }
 }
-
-
-
-@media (max-width: 979px) {
-    .status-alert .alert-wrap { width: 624px; }
-}
-
-@media (max-width: 767px) {
-  .status-alert .alert-wrap { width: 100%; }
-  .status-alert .alert-icon {
-      width: 32px;
-      height: 32px;
-      background-size: 212px 175px;
-      margin: 15px 10px 0 15px;
-  }
-  .status-alert .alert-icon.general { background-position: -64px -141px; }
-  .status-alert .alert-icon.weather { background-position: -97px -140px; }
-  .status-alert .alert-icon.police { background-position: -132px -142px; }
-  .status-alert .alert-icon.update { background-position: -64px -141px; } /* Using 'general' icon for now */
-  .status-alert h2 { font-size: 22px; line-height: 20px; }
-  .status-alert .alert-body .content { display: none; }
-}
-
-
