@@ -63,3 +63,12 @@ a.btn-primary.disabled {
 .navbar-nav > li > a {
   line-height: 27px;
 }
+
+
+// Nav-tab color overrides
+.nav-tabs > li > a,
+.nav-tabs > li > a:hover,
+.nav-tabs > li > a:active,
+.nav-tabs > li > a:focus {
+  color: #515050;
+}

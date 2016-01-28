@@ -15,7 +15,7 @@
   "dependencies": {
     "bootstrap-sass-official": "~3.3.6",
     "bootstrap-tagsinput": "~0.7.1",
-    "bootstrap3-typeahead": "~3.1.1",
+    "bootstrap3-typeahead": "f872060054864bfa7feba6f8b045feee9bcf5f5a",
     "Chart.js": "~1.0.2",
     "jquery.cycle.all": "http://malsup.github.io/jquery.cycle.all.js",
     "jquery.cookie": "jquery-cookie#~1.4.1",

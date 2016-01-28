@@ -23,12 +23,12 @@
 			<ul class="breadcrumb-hierarchy breadcrumb">
 				<li>
 					<?php $programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ) ) ); ?>
-					<a href="<?php echo $programs_url; ?>"><?php echo $post->tax_program_type->name; ?>s</a> <span class="divider">&gt;</span>
+					<a href="<?php echo $programs_url; ?>"><?php echo $post->tax_program_type->name; ?>s</a>
 				</li>
 				<?php if ( $post->tax_college ): // Some programs may have been imported with colleges that were later deleted ?>
 				<li>
 					<?php $college_programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ), 'college' => array( $post->tax_college->slug ) ) ); ?>
-					<a href="<?php echo $college_programs_url; ?>"><?php echo $post->tax_college->name; ?></a> <span class="divider">&gt;</span>
+					<a href="<?php echo $college_programs_url; ?>"><?php echo $post->tax_college->name; ?></a>
 				</li>
 				<?php endif; ?>
 				<li class="active">
@@ -41,7 +41,7 @@
 			<article role="main">
 				<!-- Degree meta details -->
 				<div class="row">
-					<div class="col-md-8 col-sm-8">
+					<div class="col-md-12 col-sm-12">
 						<dl class="degree-details clearfix">
 							<dt>Degree:</dt>
 							<dd><?php echo $post->tax_program_type->name; ?></dd>
