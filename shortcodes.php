@@ -1057,9 +1057,15 @@ function gf_login_html($error = false) {
 				</div>
 				<?php endif; ?>
 				<div id="auth-form-items">
-					<label for="username">NID (Network ID)</label><input name="username" id="username" type="text"></input>
-					<label for="password">Password</label><input name="password" id="password" type="password"></input>
-					<input name="submit-auth" class="btn btn-default" id="submit-auth" type="submit" value="Submit" />
+					<div class="form-group">
+						<label for="username">NID (Network ID)</label>
+						<input name="username" class="form-control" id="username" type="text">
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input name="password" id="password" class="form-control" type="password">
+					</div>
+					<input name="submit-auth" class="btn btn-default" id="submit-auth" type="submit" value="Submit">
 				</div>
 			</div>
 		</form>

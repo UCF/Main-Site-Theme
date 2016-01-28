@@ -1,73 +1,12 @@
-// jQuery UI Overrides
-// Bootstrap and jQuery UI don't play nicely together.  GravityForms
-// datepicker fields implement the jQuery UI datepicker plugin.
-.ui-datepicker {
-  width: 230px !important;
+// jQuery UI datepicker overrides
+.ui-datepicker-title select {
+  @extend .form-control;
+  display: inline-block;
+  margin-bottom: 2.5%;
+  padding: 6px;
+  width: auto;
 }
 
-.ui-datepicker-month,
-.ui-datepicker-year {
-  font-family: Helvetica, sans-serif;
-  margin: 5px 2px;
-  width: auto !important;
-}
-
-.ui-datepicker-prev,
-.ui-datepicker-next {
-  background-image: none !important;
-  box-sizing: border-box;
-  margin-top: 5px;
-  position: relative;
-}
-
-.ui-datepicker-prev:before,
-.ui-datepicker-next:before {
-  color: #fff;
-  display: block;
-  font-size: 30px;
-  font-weight: 200;
-  height: 100%;
-  line-height: 25px;
-  text-align: center !important;
-  text-shadow: 0 0 0 transparent;
-  width: 100%;
-}
-
-.ui-datepicker-prev:before {
-  content: '‹';
-}
-
-.ui-datepicker-next:before {
-  content: '›';
-}
-
-.ui-datepicker-prev.ui-state-hover,
-.ui-datepicker-next.ui-state-hover {
-  background: #444 !important;
-  border: 0 solid transparent !important;
-}
-
-.ui-datepicker-prev .ui-icon,
-.ui-datepicker-next .ui-icon {
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.ui-datepicker th {
-  filter: none !important;
-  text-shadow: 0 0 0 transparent !important;
-}
-
-.ui-datepicker-calendar .ui-state-default {
-  box-sizing: border-box;
-  width: 32px;
-}
-
-.ui-datepicker-calendar .ui-state-highlight {
-  color: #000;
-  text-decoration: underline;
+.ui-datepicker-month {
+  margin-right: 2.5%;
 }

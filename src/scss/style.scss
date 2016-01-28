@@ -5,6 +5,7 @@
 // Import vendor assets
 @import '../components/bootstrap-sass-official/assets/stylesheets/bootstrap';
 @import '../components/font-awesome/scss/font-awesome';
+@import '../components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 
 
 // Import individual components for our theme here:
@@ -36,6 +37,7 @@
 // a file named _home.scss.
 @import 'home';
 @import 'page';
+@import 'page-templates';
 @import '404';
 @import 'announcement';
 @import 'az-index-link';
@@ -43,6 +45,5 @@
 @import 'degree';
 @import 'document';
 @import 'publication';
-@import 'shortcodes';
 @import 'subheader';
 @import 'video';
