@@ -1056,7 +1056,7 @@ function gf_login_html($error = false) {
 				<?php if ($error):?>
 				<div class="alert alert-danger" id="login_error">
 					<strong>Error:</strong>
-					<p>Oops! Your NID or password is invalid or the authentication service was unavailable.</p>
+					<p>Your NID or password is invalid or the authentication service was unavailable.</p>
 					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"<br/>
 					To reset your password, go to the <a href="http://mynid.ucf.edu/">Change Your NID Password</a> page.<br/>
 					For further help, contact the Service Desk at 407-823-5117, Monday-Friday 8am-5pm.</p>
