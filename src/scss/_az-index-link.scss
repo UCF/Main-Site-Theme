@@ -13,6 +13,10 @@
   .post-type-search-header {
     height: 125px;
 
+    @include body-prefix('.ie8') {
+      height: 150px;
+    }
+
     @media (max-width: $screen-sm-max) {
       height: 160px;
     }
@@ -118,6 +122,10 @@
   }
 
   .navbar-nav {
+    @include body-prefix('.ie8') {
+      margin: 0;
+    }
+
     @media (max-width: $screen-xs-max) {
       margin: 0;
     }

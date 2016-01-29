@@ -309,6 +309,7 @@
       bottom: 0;
       box-sizing: border-box;
       height: 50px;
+      line-height: 50px;
       overflow: hidden;
       position: absolute;
       right: 16px;
@@ -393,6 +394,11 @@
     display: table-cell;
     padding-bottom: 10px;
     vertical-align: middle;
+
+    @include body-prefix('.ie8') {
+      display: block;
+      float: left;
+    }
 
     @media (max-width: $screen-sm-max) {
       // We assume that browsers that support media queries can support box-sizing
