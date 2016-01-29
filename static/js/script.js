@@ -754,7 +754,7 @@ var statusAlertCookieSet = function($) {
     var alertID = $(this).parents('.status-alert').attr('data-alert-id');
     $.cookie('ucf_alert_display_' + alertID, 'hide', {expires: null, path: SITE_PATH, domain: SITE_DOMAIN});
     $(this).parents('.status-alert')
-      .find('.alert-icon').hide().end()
+      .find('.alert').hide().end()
       .css('margin-top', '0');
   });
 }
