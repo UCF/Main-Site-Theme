@@ -669,7 +669,8 @@ var statusAlertCheck = function($) {
           // by the user (alert element has been removed from the DOM)
           var existing_title = existing_alert.find('.title'),
             existing_content = existing_alert.find('.content'),
-            existing_type = existing_alert.find('.alert-icon');
+            existing_icon = existing_alert.find('.alert-icon'),
+            existing_type = existing_alert.find('.alert');
 
           if(existing_title.text() != newest.title) {
             existing_title.text(newest.title);
@@ -677,8 +678,19 @@ var statusAlertCheck = function($) {
           if(existing_content.text() != newest.description) {
             existing_content.text(newest.description);
           }
-          if(existing_type.hasClass(newest.type) == false) {
-            existing_type.attr('class','alert-icon ' + newest.type);
+          if(existing_icon.hasClass(newest.type) == false) {
+            existing_icon.attr('class','alert-icon ' + newest.type);
+            switch (newest.type) {
+              case 'alert':
+              case 'weather':
+              case 'general':
+              case 'police':
+                existing_type.attr('class', 'alert alert-danger');
+                break;
+              case 'message':
+                existing_type.attr('class', 'alert alert-info');
+                break;
+            }
           }
 
         } else {
@@ -694,11 +706,26 @@ var statusAlertCheck = function($) {
 
             // Apparently IE7 doesn't like to append text to elements
             // that haven't been inserted into the dom yet. THANKS IE.
-            $('.status-alert[data-alert-id="' + newest.id + '"]')
-              .find('.title').text(newest.title).end()
+            var $markup = $('.status-alert[data-alert-id="' + newest.id + '"]');
+            $markup.find('.title').text(newest.title).end()
               .find('.content').text(newest.description).end()
               .find('.more-information').text('Click Here for More Information').end()
               .find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+
+            switch(newest.type) {
+              case 'alert':
+              case 'weather':
+              case 'general':
+              case 'police':
+                $markup.find('.alert').attr('class', 'alert alert-error alert-block');
+                break;
+              case 'message':
+                $markup.find('.alert').attr('class', 'alert alert-info alert-block');
+                $markup.find('.content, .alert-icon').hide();
+                $markup.find('.alert-icon-wrap').hide();
+                $markup.find('.alert-inner-wrap').attr('class', 'span11 alert-inner-wrap');
+                break;
+            }
           }
         }
       }
