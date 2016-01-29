@@ -33,7 +33,6 @@
 
   .alert-icon {
     @include sprite();
-    display: table-cell;
     float: left;
     height: 64px;
     width: 64px;
