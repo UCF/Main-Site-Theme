@@ -1216,8 +1216,6 @@ function sc_chart( $attr ) {
 
 	$class = $attr['class'] ? 'custom-chart ' . $class : 'custom-chart';
 
-	wp_enqueue_script('chart-js', THEME_JS_URL.'/Chart.min.js', null, null, True);
-
 	ob_start();
 
 	?>
