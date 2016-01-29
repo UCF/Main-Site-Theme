@@ -42,7 +42,7 @@
       width: 32px;
       height: 32px;
       background-size: 212px 175px;
-      margin: 15px 10px 0 15px;
+      margin: 0 10px 0 0;
     }
 
     &.general {
@@ -106,7 +106,7 @@
     }
   }
 
-  .alert-error {
+  .alert-danger {
     background: #ba2d2e;
 
     a {
@@ -124,13 +124,11 @@
     border-color: #1478C6;
 
     a {
-      a {
-        &,
-        &:hover,
-        &:active,
-        &:focus {
-          color: #fff;
-        }
+      &,
+      &:hover,
+      &:active,
+      &:focus {
+        color: #fff;
       }
 
       &.more-information {

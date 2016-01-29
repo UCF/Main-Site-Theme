@@ -86,12 +86,12 @@
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
 				<div class="col-md-12 col-sm-12 alert-wrap">
-					<div class="alert alert-error alert-block">
+					<div class="alert alert-danger alert-block">
 						<div class="row">
 							<div class="col-md-2 col-sm-2 alert-icon-wrap">
 								<div class="alert-icon general"></div>
 							</div>
-							<div class="col-md-9 col-sm-9 alert-inner-wrap">
+							<div class="col-md-10 col-sm-10 alert-inner-wrap">
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<h2>
 									<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">

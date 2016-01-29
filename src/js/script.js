@@ -635,13 +635,13 @@ var statusAlertCheck = function ($) {
               case 'weather':
               case 'general':
               case 'police':
-                $markup.find('.alert').attr('class', 'alert alert-error alert-block');
+                $markup.find('.alert').attr('class', 'alert alert-danger alert-block');
                 break;
               case 'message':
                 $markup.find('.alert').attr('class', 'alert alert-info alert-block');
                 $markup.find('.content, .alert-icon').hide();
                 $markup.find('.alert-icon-wrap').hide();
-                $markup.find('.alert-inner-wrap').attr('class', 'span11 alert-inner-wrap');
+                $markup.find('.alert-inner-wrap').attr('class', 'col-md-12 col-sm-12 alert-inner-wrap');
                 break;
             }
 
