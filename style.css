@@ -125,6 +125,8 @@ div.top_five_majors {
 .status-alert .alert-info { background: #167ac6; border-color: #1478C6; }
 .status-alert .alert-info a { color: #fff; }
 .status-alert .alert-info h2 { font-size: 14px; }
+.status-alert .alert-info a.more-information { font-size: 12px; text-decoration: none; }
+.status-alert .alert-info a.more-information:hover { text-decoration: underline; }
 
 /* Header */
 #header_wrap, #header { height: 0; border-bottom: 0; padding: 0; margin: 0; }
