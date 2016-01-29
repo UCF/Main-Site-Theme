@@ -163,11 +163,13 @@ centerpieceVidResize = function($) {
 videoModalSet = function($) {
   if ($('.video-modal').length > 0) {
     $('.video-modal').on('show.bs.modal', function() {
-      var modalID = $(this).attr('id');
-      var src = $(this).children('.modal-body').attr('data-src');
+      var $modal = $(this),
+          modalID = $modal.attr('id'),
+          $modalBody = $modal.find('.modal-body'),
+          src = $modalBody.attr('data-src');
 
-      if ($(this).find('iframe').length < 1) {
-        $('#' + modalID + ' .modal-body').append('<iframe class="modal-video-player" type="text/html" width="640" height="390" src="'+ src +'" frameborder="0"/>');
+      if ($modal.find('iframe').length < 1) {
+        $modalBody.html('<iframe class="modal-video-player" type="text/html" width="640" height="390" src="'+ src +'" frameborder="0">');
       }
     });
 
