@@ -395,6 +395,11 @@
     padding-bottom: 10px;
     vertical-align: middle;
 
+    @include body-prefix('.ie8') {
+      display: block;
+      float: left;
+    }
+
     @media (max-width: $screen-sm-max) {
       // We assume that browsers that support media queries can support box-sizing
       box-sizing: border-box;
