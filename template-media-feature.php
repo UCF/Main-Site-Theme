@@ -37,7 +37,7 @@ if ( $use_video ) {
 
 	</div>
 </div>
-<div class="page-content">
+<div class="page-content" id="contentcol">
 	<article role="main">
 		<div class="container">
 			<div class="row">

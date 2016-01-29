@@ -1,13 +1,29 @@
-/* Media Header Template Pages */
-.page-template-template-media-feature #header-nav-wrap {
+// Media Header Template Pages
+.page-template-template-media-feature #header-nav-wrap,
+.page-template-template-media-feature #site-nav-xs {
   z-index: 2;
+}
+
+.page-template-template-media-feature #header-nav-wrap {
   position: relative;
 }
 
+.page-template-template-media-feature #site-nav-xs {
+  left: $grid-gutter-width / 2;
+  position: absolute;
+  right: $grid-gutter-width / 2;
+}
+
 .page-media {
+  margin-bottom: -50px;  // 'top' value, + 20px for whitespace
   position: relative;
   top: -70px;
   z-index: 1;
+
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: -52px;  // 'top' value, + 20px for whitespace
+    top: -72px;
+  }
 }
 
 .page-media-header {
@@ -19,23 +35,28 @@
   overflow: hidden;
   position: relative;
   z-index: -1;
+
+  // CSS-only full-width bg video. IE9+
+  video {
+    height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    left: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: auto;
+    z-index: -1000;
+
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
 }
 
-/* CSS-only full-width bg video. IE9+ */
-.page-media-header video {
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  left: 50%;
-  overflow: hidden;
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  width: auto;
-  z-index: -1000;
-}
 
 .page-media-container {
   left: 0;
@@ -43,41 +64,8 @@
   position: absolute;
   right: 0;
   z-index: 2;
-}
 
-
-
-@media (max-width: 767px) {
-  .page-media {
-    top: -96px;
-  }
-
-  .page-media-header {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-
-  .page-media-header video {
-    display: none;
-  }
-
-  .page-media-container {
-    padding-top: 90px;
-  }
-}
-
-@media (max-width: 480px) {
-  .page-template-template-media-feature #header-nav-wrap {
-    left: 20px; /* gutter width */
-    position: absolute;
-    right: 20px;
-  }
-
-  .page-media {
-    top: -72px;
-  }
-
-  .page-media-container {
-    padding-top: 134px;
+  @media (max-width: $screen-xs-max) {
+    padding-top: 154px;
   }
 }
