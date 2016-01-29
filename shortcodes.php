@@ -162,31 +162,35 @@ function sc_video($attr, $content=null){
 
 				<div class="video">
 					<div class="icon">
-						<a title="Watch <?=$video->post_title?>" alt="Watch <?=$video->post_title?>" data-toggle="modal" class="video-link" href="#modal-vid<?=$video->ID?>">
-							<?=$video_thumbnail?>
+						<a title="Watch <?php echo $video->post_title; ?>" alt="Watch <?php echo $video->post_title; ?>" data-toggle="modal" class="video-link" href="#modal-vid<?php echo $video->ID; ?>">
+							<?php echo $video_thumbnail; ?>
 						</a>
 					</div>
-					<div class="modal video-modal hide fade" id="modal-vid<?=$video->ID?>">
-						<div class="modal-header">
-							<a class="close" data-dismiss="modal">×</a>
-							<h3><?=$video->post_title?></h3>
-						</div>
-						<div class="modal-body" data-src="<?=$embed_url?>">
+					<div class="modal video-modal fade" id="modal-vid<?php echo $video->ID; ?>" tabindex="-1" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<a class="close" data-dismiss="modal">×</a>
+									<h3><?php echo $video->post_title; ?></h3>
+								</div>
+								<div class="modal-body" data-src="<?php echo $embed_url; ?>">
+								</div>
+							</div>
 						</div>
 					</div>
 					<h4>
-						<a title="Watch <?=$video->post_title?>" alt="Watch <?=$video->post_title?>" data-toggle="modal" class="video-link" href="#modal-vid<?=$video->ID?>">
-							<?=$video->post_title?>
+						<a title="Watch <?php echo $video->post_title; ?>" alt="Watch <?php echo $video->post_title; ?>" data-toggle="modal" class="video-link" href="#modal-vid<?php echo $video->ID; ?>">
+							<?php echo $video->post_title; ?>
 						</a>
 					</h4>
-					<div class="video-desc"><?=$video_description?></div>
+					<div class="video-desc"><?php echo $video_description; ?></div>
 				</div>
 			<?php
 			return ob_get_clean();
 			break;
 		case 'embed':
 			ob_start(); ?>
-				<iframe type="text/html" width="640" height="390" src="<?=$embed_url?>" frameborder="0"></iframe>
+				<iframe type="text/html" width="640" height="390" src="<?php echo $embed_url; ?>" frameborder="0"></iframe>
 			<?php
 			return ob_get_clean();
 			break;
@@ -1211,8 +1215,6 @@ function sc_chart( $attr ) {
 	}
 
 	$class = $attr['class'] ? 'custom-chart ' . $class : 'custom-chart';
-
-	wp_enqueue_script('chart-js', THEME_JS_URL.'/Chart.min.js', null, null, True);
 
 	ob_start();
 

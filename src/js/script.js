@@ -7,6 +7,7 @@ jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/
 jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
 jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
 jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.safari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
 
 // Helper function to get the actual window width in all browsers
 // (Firefox and IE like to include the width of vertical scrollbars
@@ -39,24 +40,29 @@ Generic.removeExtraGformStyles = function($) {
 /* jshint ignore:start */
 /* Assign browser-specific body classes on page load */
 addBodyClasses = function($) {
-  var bodyClass = '';
-  // Old IE:
-  if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
-    var ieversion = new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion >= 9)    { bodyClass = 'ie ie9'; }
-    else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
-    else if (ieversion >= 7) { bodyClass = 'ie ie7'; }
-  }
-  // iOS:
-  else if (navigator.userAgent.match(/iPhone/i))  { bodyClass = 'iphone'; }
-  else if (navigator.userAgent.match(/iPad/i))  { bodyClass = 'ipad'; }
-  else if (navigator.userAgent.match(/iPod/i))  { bodyClass = 'ipod'; }
-  // Android:
-  else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
+    var bodyClass = '';
+    // Old IE:
+    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
+            var ieversion = Number(RegExp.$1); // capture x.x portion and store as a number
 
-  $('body').addClass(bodyClass);
+            if (ieversion >= 10)     { bodyClass = 'ie ie10'; }
+            else if (ieversion >= 9) { bodyClass = 'ie ie9'; }
+            else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
+            else if (ieversion >= 7) { bodyClass = 'ie ie7'; }
+    }
+     // IE11+:
+    else if (navigator.appName === 'Netscape' && !!navigator.userAgent.match(/Trident\/7.0/)) { bodyClass = 'ie ie11'; }
+    // iOS:
+    else if (navigator.userAgent.match(/iPhone/i)) { bodyClass = 'iphone'; }
+    else if (navigator.userAgent.match(/iPad/i))   { bodyClass = 'ipad'; }
+    else if (navigator.userAgent.match(/iPod/i))   { bodyClass = 'ipod'; }
+    // Android:
+    else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
+
+    $('body').addClass(bodyClass);
 };
 /* jshint ignore:end */
+
 
 /* Adjust iOS devices on rotate */
 iosRotateAdjust = function($) {
@@ -163,11 +169,13 @@ centerpieceVidResize = function($) {
 videoModalSet = function($) {
   if ($('.video-modal').length > 0) {
     $('.video-modal').on('show.bs.modal', function() {
-      var modalID = $(this).attr('id');
-      var src = $(this).children('.modal-body').attr('data-src');
+      var $modal = $(this),
+          modalID = $modal.attr('id'),
+          $modalBody = $modal.find('.modal-body'),
+          src = $modalBody.attr('data-src');
 
-      if ($(this).find('iframe').length < 1) {
-        $('#' + modalID + ' .modal-body').append('<iframe class="modal-video-player" type="text/html" width="640" height="390" src="'+ src +'" frameborder="0"/>');
+      if ($modal.find('iframe').length < 1) {
+        $modalBody.html('<iframe class="modal-video-player" type="text/html" width="640" height="390" src="'+ src +'" frameborder="0">');
       }
     });
 
@@ -220,6 +228,10 @@ azIndex = function($) {
     // Activate Scrollspy
     $('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
     $('#azIndexList').scrollspy();
+
+    if (jQuery.browser.safari) {
+      $('#azIndexList').attr('data-spy', '');
+    }
 
     // Force 'A' as the active starting letter, since it likes to
     // default to 'Z' for whatever reason
@@ -537,6 +549,7 @@ var statusAlertCheck = function ($) {
 
   function errorHandler() {
       $statusAlert.remove();
+      $(document).trigger('ucfalert.removed');
   }
 
   function successHandler(feed) {
@@ -558,6 +571,7 @@ var statusAlertCheck = function ($) {
         // Remove old alerts that no longer appear in the feed
         if( (visible_alert === null) || (visible_alert !== $statusAlert.attr('data-alert-id')) ) {
           $statusAlert.remove();
+          $(document).trigger('ucfalert.removed');
         }
 
         // Check to see if this alert already exists
@@ -567,16 +581,24 @@ var statusAlertCheck = function ($) {
           // by the user (alert element has been removed from the DOM)
           var existing_title = $existing_alert.find('.title'),
             existing_content = $existing_alert.find('.content'),
-            existing_type = $existing_alert.find('.alert-icon');
+            existing_type = $existing_alert.find('.alert-icon'),
+            contentChanged = false;
 
           if(existing_title.text() !== newest.title) {
             existing_title.text(newest.title);
+            contentChanged = true;
           }
           if(existing_content.text() !== newest.description) {
             existing_content.text(newest.description);
+            contentChanged = true;
           }
           if(existing_type.hasClass(newest.type) === false) {
             existing_type.attr('class','alert-icon ' + newest.type);
+            contentChanged = true;
+          }
+
+          if (contentChanged) {
+            $(document).trigger('ucfalert.changed');
           }
 
         } else {
@@ -595,14 +617,17 @@ var statusAlertCheck = function ($) {
               .find('.content').text(newest.description).end()
               .find('.more-information').text('Click Here for More Information').end()
               .find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+
+            $(document).trigger('ucfalert.added');
           }
         }
       }
       else {
-        // If the feed i  s empty (all-clear), hide the currently visible
+        // If the feed is empty (all-clear), hide the currently visible
         // alert, if it exists
         if ($statusAlert.length > 0) {
           $statusAlert.remove();
+          $(document).trigger('ucfalert.removed');
         }
       }
 
@@ -631,7 +656,9 @@ var statusAlertCookieSet = function($) {
     $.cookie('ucf_alert_display_' + alertID, 'hide', {expires: null, path: SITE_PATH, domain: SITE_DOMAIN});
     $(this).parents('.status-alert')
       .find('.alert-icon').hide().end()
-      .css('margin-top', '0');
+      .css('margin-top', '0')
+      .addClass('hidden-by-user');
+    $(document).trigger('ucfalert.removed');
   });
 };
 
@@ -1121,11 +1148,15 @@ var degreeSearch = function ($) {
 
   function initSidebarAffix() {
     resizeSidebarContent();
+
+    // Make sure headerHeight is up to date
+    setHeaderHeight();
+
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       $sidebarLeft
         .affix({
         offset: {
-          top: headerHeight + $academicsSearch.find('#degree-search-top').outerHeight(),
+          top: headerHeight,
           bottom: $('#footer').outerHeight() + 100
         }
       })
@@ -1146,9 +1177,12 @@ var degreeSearch = function ($) {
   }
 
   function resetSidebarAffix() {
+    // Make sure headerHeight is up to date
+    setHeaderHeight();
+
     if ($(window).width() > 767 && $sidebarLeft.outerHeight() < $degreeSearchContent.outerHeight()) {
       if ($sidebarLeft.data('bs.affix')) {
-        $sidebarLeft.data('bs.affix').options.offset.top = headerHeight + $academicsSearch.find('#degree-search-top').outerHeight();
+        $sidebarLeft.data('bs.affix').options.offset.top = headerHeight;
         $sidebarLeft.data('bs.affix').options.offset.bottom = $('#footer').outerHeight() + 100;
       }
       else {
@@ -1265,6 +1299,15 @@ var degreeSearch = function ($) {
     }
   }
 
+  function setHeaderHeight() {
+    // The extra 70 pixels is for the ucf header that loads in late and some other unaccounted for pixels.
+    headerHeight = 70 + $('#header-nav-wrap').outerHeight(true) + $('#page-title').outerHeight(true) + $('#degree-search-top').outerHeight(true);
+    $alert = $('.status-alert:not(#status-alert-template)');
+    if ($alert.length && !$alert.hasClass('hidden-by-user')) {
+      headerHeight = headerHeight + $alert.outerHeight(true);
+    }
+  }
+
   function setupEventHandlers() {
     $(window).on('load', function () {
       initSidebarAffix();
@@ -1284,6 +1327,9 @@ var degreeSearch = function ($) {
         $(document).off('click', closeMenuOnTargetClick);
       }
     });
+
+    // Account for DOM changes when a status alert is populated/deleted
+    $(document).on('ucfalert.removed ucfalert.added ucfalert.changed', resetSidebarAffix);
 
     $academicsSearch.on('change', '.program-type, .college, .location, .sort-by', filterChangeEventHandler);
     $academicsSearch.on('click', '.degree-result-count .close', resultPhraseClickHandler);
@@ -1306,8 +1352,6 @@ var degreeSearch = function ($) {
   function initPage() {
     $academicsSearch = $('#academics-search-form');
     pageCount = parseInt($academicsSearch.find('#offset').attr('data-offset-count'));
-    // The extra 70 pixels is for the ucf header that loads in late and some other unaccounted for pixels.
-    headerHeight = 70 + $('#header-nav-wrap').outerHeight() + $('#page-title').outerHeight();
 
     if ($academicsSearch.length > 0) {
       $degreeSearchResultsContainer = $academicsSearch.find('.degree-search-results-container');
@@ -1315,6 +1359,8 @@ var degreeSearch = function ($) {
       $degreeSearchContent = $academicsSearch.find('#degree-search-content');
       $degreeSearchAgainContainer = $academicsSearch.find('.degree-search-again-container');
       ajaxURL = $academicsSearch.attr('data-ajax-url');
+
+      setHeaderHeight();
 
       setupEventHandlers();
     }

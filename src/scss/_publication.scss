@@ -63,6 +63,10 @@
 
     .modal-body {
       padding: 0;
+
+      @include body-prefix('.ie') {
+        padding-bottom: 50px;
+      }
     }
 
     .btn {
