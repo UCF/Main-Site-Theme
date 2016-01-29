@@ -7,6 +7,7 @@ jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/
 jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
 jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
 jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.safari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
 
 // Helper function to get the actual window width in all browsers
 // (Firefox and IE like to include the width of vertical scrollbars
@@ -222,6 +223,10 @@ azIndex = function($) {
     // Activate Scrollspy
     $('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
     $('#azIndexList').scrollspy();
+
+    if (jQuery.browser.safari) {
+      $('#azIndexList').attr('data-spy', '');
+    }
 
     // Force 'A' as the active starting letter, since it likes to
     // default to 'Z' for whatever reason
