@@ -579,9 +579,10 @@ var statusAlertCheck = function ($) {
           // Check the content and update if necessary.
           // This will simply fail if the alert has already been closed
           // by the user (alert element has been removed from the DOM)
-          var existing_title = $existing_alert.find('.title'),
-            existing_content = $existing_alert.find('.content'),
-            existing_type = $existing_alert.find('.alert-icon'),
+          var existing_title = existing_alert.find('.title'),
+            existing_content = existing_alert.find('.content'),
+            existing_icon = existing_alert.find('.alert-icon'),
+            existing_type = existing_alert.find('.alert'),
             contentChanged = false;
 
           if(existing_title.text() !== newest.title) {
@@ -594,6 +595,21 @@ var statusAlertCheck = function ($) {
           }
           if(existing_type.hasClass(newest.type) === false) {
             existing_type.attr('class','alert-icon ' + newest.type);
+            contentChanged = true;
+          }
+          if(existing_icon.hasClass(newest.type) === false) {
+            existing_icon.attr('class','alert-icon ' + newest.type);
+            switch (newest.type) {
+              case 'alert':
+              case 'weather':
+              case 'general':
+              case 'police':
+                existing_type.attr('class', 'alert alert-danger');
+                break;
+              case 'message':
+                existing_type.attr('class', 'alert alert-info');
+                break;
+            }
             contentChanged = true;
           }
 
@@ -612,11 +628,27 @@ var statusAlertCheck = function ($) {
               .attr('data-alert-id', newest.id);
             $('#header-nav-wrap').before(alert_markup);
 
-            $('.status-alert[data-alert-id="' + newest.id + '"]')
-              .find('.title').text(newest.title).end()
+
+            var $markup = $('.status-alert[data-alert-id="' + newest.id + '"]');
+            $markup.find('.title').text(newest.title).end()
               .find('.content').text(newest.description).end()
               .find('.more-information').text('Click Here for More Information').end()
               .find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+
+            switch(newest.type) {
+              case 'alert':
+              case 'weather':
+              case 'general':
+              case 'police':
+                $markup.find('.alert').attr('class', 'alert alert-danger alert-block');
+                break;
+              case 'message':
+                $markup.find('.alert').attr('class', 'alert alert-info alert-block');
+                $markup.find('.content, .alert-icon').hide();
+                $markup.find('.alert-icon-wrap').hide();
+                $markup.find('.alert-inner-wrap').attr('class', 'col-md-12 col-sm-12 alert-inner-wrap');
+                break;
+            }
 
             $(document).trigger('ucfalert.added');
           }
@@ -655,7 +687,7 @@ var statusAlertCookieSet = function($) {
     var alertID = $(this).parents('.status-alert').attr('data-alert-id');
     $.cookie('ucf_alert_display_' + alertID, 'hide', {expires: null, path: SITE_PATH, domain: SITE_DOMAIN});
     $(this).parents('.status-alert')
-      .find('.alert-icon').hide().end()
+      .find('.alert').hide().end()
       .css('margin-top', '0')
       .addClass('hidden-by-user');
     $(document).trigger('ucfalert.removed');
