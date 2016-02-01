@@ -40,24 +40,29 @@ Generic.removeExtraGformStyles = function($) {
 /* jshint ignore:start */
 /* Assign browser-specific body classes on page load */
 addBodyClasses = function($) {
-  var bodyClass = '';
-  // Old IE:
-  if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
-    var ieversion = new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion >= 9)    { bodyClass = 'ie ie9'; }
-    else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
-    else if (ieversion >= 7) { bodyClass = 'ie ie7'; }
-  }
-  // iOS:
-  else if (navigator.userAgent.match(/iPhone/i))  { bodyClass = 'iphone'; }
-  else if (navigator.userAgent.match(/iPad/i))  { bodyClass = 'ipad'; }
-  else if (navigator.userAgent.match(/iPod/i))  { bodyClass = 'ipod'; }
-  // Android:
-  else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
+    var bodyClass = '';
+    // Old IE:
+    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
+            var ieversion = Number(RegExp.$1); // capture x.x portion and store as a number
 
-  $('body').addClass(bodyClass);
+            if (ieversion >= 10)     { bodyClass = 'ie ie10'; }
+            else if (ieversion >= 9) { bodyClass = 'ie ie9'; }
+            else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
+            else if (ieversion >= 7) { bodyClass = 'ie ie7'; }
+    }
+     // IE11+:
+    else if (navigator.appName === 'Netscape' && !!navigator.userAgent.match(/Trident\/7.0/)) { bodyClass = 'ie ie11'; }
+    // iOS:
+    else if (navigator.userAgent.match(/iPhone/i)) { bodyClass = 'iphone'; }
+    else if (navigator.userAgent.match(/iPad/i))   { bodyClass = 'ipad'; }
+    else if (navigator.userAgent.match(/iPod/i))   { bodyClass = 'ipod'; }
+    // Android:
+    else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
+
+    $('body').addClass(bodyClass);
 };
 /* jshint ignore:end */
+
 
 /* Adjust iOS devices on rotate */
 iosRotateAdjust = function($) {
