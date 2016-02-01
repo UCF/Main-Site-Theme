@@ -7,6 +7,7 @@ jQuery.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/
 jQuery.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
 jQuery.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
 jQuery.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+jQuery.browser.safari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
 
 // Helper function to get the actual window width in all browsers
 // (Firefox and IE like to include the width of vertical scrollbars
@@ -39,24 +40,29 @@ Generic.removeExtraGformStyles = function($) {
 /* jshint ignore:start */
 /* Assign browser-specific body classes on page load */
 addBodyClasses = function($) {
-  var bodyClass = '';
-  // Old IE:
-  if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
-    var ieversion = new Number(RegExp.$1); // capture x.x portion and store as a number
-    if (ieversion >= 9)    { bodyClass = 'ie ie9'; }
-    else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
-    else if (ieversion >= 7) { bodyClass = 'ie ie7'; }
-  }
-  // iOS:
-  else if (navigator.userAgent.match(/iPhone/i))  { bodyClass = 'iphone'; }
-  else if (navigator.userAgent.match(/iPad/i))  { bodyClass = 'ipad'; }
-  else if (navigator.userAgent.match(/iPod/i))  { bodyClass = 'ipod'; }
-  // Android:
-  else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
+    var bodyClass = '';
+    // Old IE:
+    if (/MSIE (\d+\.\d+);/.test(navigator.userAgent)) { //test for MSIE x.x;
+            var ieversion = Number(RegExp.$1); // capture x.x portion and store as a number
 
-  $('body').addClass(bodyClass);
+            if (ieversion >= 10)     { bodyClass = 'ie ie10'; }
+            else if (ieversion >= 9) { bodyClass = 'ie ie9'; }
+            else if (ieversion >= 8) { bodyClass = 'ie ie8'; }
+            else if (ieversion >= 7) { bodyClass = 'ie ie7'; }
+    }
+     // IE11+:
+    else if (navigator.appName === 'Netscape' && !!navigator.userAgent.match(/Trident\/7.0/)) { bodyClass = 'ie ie11'; }
+    // iOS:
+    else if (navigator.userAgent.match(/iPhone/i)) { bodyClass = 'iphone'; }
+    else if (navigator.userAgent.match(/iPad/i))   { bodyClass = 'ipad'; }
+    else if (navigator.userAgent.match(/iPod/i))   { bodyClass = 'ipod'; }
+    // Android:
+    else if (navigator.userAgent.match(/Android/i)) { bodyClass = 'android'; }
+
+    $('body').addClass(bodyClass);
 };
 /* jshint ignore:end */
+
 
 /* Adjust iOS devices on rotate */
 iosRotateAdjust = function($) {
@@ -222,6 +228,10 @@ azIndex = function($) {
     // Activate Scrollspy
     $('body').attr({'data-spy' : 'scroll', 'data-offset' : 80, 'data-target' : '#azIndexList'});
     $('#azIndexList').scrollspy();
+
+    if (jQuery.browser.safari) {
+      $('#azIndexList').attr('data-spy', '');
+    }
 
     // Force 'A' as the active starting letter, since it likes to
     // default to 'Z' for whatever reason
