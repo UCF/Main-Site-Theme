@@ -100,25 +100,29 @@
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
-				<div class="span2 alert-icon-wrap">
-					<div class="alert-icon general"></div>
-				</div>
-				<div class="span10 alert-wrap">
+				<div class="span12 alert-wrap">
 					<div class="alert alert-error alert-block">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<h2>
-							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-								<span class="title"></span>
-							</a>
-						</h2>
-						<p class="alert-body">
-							<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-								<span class="content"></span>
-							</a>
-						</p>
-						<p class="alert-action">
-							<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>"></a>
-						</p>
+						<div class="row">
+							<div class="span2 alert-icon-wrap">
+								<div class="alert-icon general"></div>
+							</div>
+							<div class="span9 alert-inner-wrap">
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<h2>
+									<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+										<span class="title"></span>
+									</a>
+								</h2>
+								<p class="alert-body">
+									<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+										<span class="content"></span>
+									</a>
+								</p>
+								<p class="alert-action">
+									<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>"></a>
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
