@@ -72,7 +72,37 @@ body.login #login h1 a .hide{display: block;}
 #theme-help table th {background-color:#f1f1f1;}
 
 
-li.custom_repeatable h3.hndle { margin-bottom: 16px !important; }
+li.custom_repeatable .meta-handle {
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 16px !important;
+  padding: 8px 12px;
+}
+
+li.custom_repeatable .toggle-indicator {
+  display: none;
+}
+
+/* Not compatible with WP < 4.4 -- uncomment after upgrade */
+
+/*li.custom_repeatable .toggle-indicator {
+  color: #a0a5aa;
+  float: right;
+  pointer-events: none;
+}
+
+li.custom_repeatable:hover .toggle-indicator,
+li.custom_repeatable:active .toggle-indicator,
+li.custom_repeatable:focus .toggle-indicator {
+  color: #777;
+}
+
+li.custom_repeatable.closed .toggle-indicator:before {
+  content: "" !important;
+}*/
+
 li.custom_repeatable table { margin-top: -16px; }
 li.custom_repeatable.closed table { display: none; }
 a.repeatable-remove { margin-left: 10px !important; }
@@ -80,27 +110,27 @@ a.repeatable-remove { margin-left: 10px !important; }
 #ss_slides_all .custom_repeatable { padding-bottom: 15px; margin: 0 0 15px 0; }
 #slider-slides { background: transparent !important; border-color: transparent !important; box-shadow: 0 0 0 transparent !important; }
 #slider-slides .inside { margin: 0; padding: 0; }
-#slider-slides > h3.hndle { display: none; }
-#slider-slides .handlediv { position: absolute; top: 0; right: 0; }
+#slider-slides > h2.hndle,
+#slider-slides > h3.hndle,
+#slider-slides > .handlediv {
+  display: none;
+}
 #slider-slides .form-table th { padding-left: 10px; }
 
 
-
-.postbox-container#postbox-container-2 #slider-slides textarea,
-.postbox-container#postbox-container-2 #slider-slides input[type="text"],
-.postbox-container#postbox-container-2 #slider-slides input[type="password"],
-.postbox-container#postbox-container-2 #slider-slides input[type="file"],
-.postbox-container#postbox-container-2 #slider-slides input[type="email"],
-.postbox-container#postbox-container-2 #slider-slides input[type="number"],
-.postbox-container#postbox-container-2 #slider-slides input[type="search"],
-.postbox-container#postbox-container-2 #slider-slides input[type="tel"],
-.postbox-container#postbox-container-2 #slider-slides input[type="url"],
-.postbox-container#postbox-container-2 #slider-slides input[type="checkbox"],
-.postbox-container#postbox-container-2 #slider-slides select { float: left; clear: both; }
-.postbox-container#postbox-container-2 #slider-slides input[type="checkbox"] { margin-right: 5px; }
-
-.postbox-container#postbox-container-2 #slider-slides .description { float: left; }
-
 th#cta {
   width: 20%;
+}
+
+
+.meta-file-preview img {
+  max-width: 100%;
+}
+
+.meta-file-edit {
+  margin-top: 10px !important;
+}
+
+.meta-file-edit.hidden {
+  display: none !important;
 }

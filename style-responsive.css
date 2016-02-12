@@ -715,6 +715,25 @@
 	}
 
 
+  /* Media Header Template Pages */
+  .page-media {
+    top: -96px;
+  }
+
+  .page-media-header {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .page-media-header video {
+    display: none;
+  }
+
+  .page-media-container {
+    padding-top: 90px;
+  }
+
+
   /* 404 template */
   #page-not-found #contentcol .knightro-bg {
     background-size: 100px auto;
@@ -828,6 +847,22 @@
 		-moz-column-count: 1; /* Firefox */
 		column-count: 1;
 	}
+
+
+  /* Media Header Template Pages */
+  .page-template-template-media-feature #header-nav-wrap {
+    left: 20px; /* gutter width */
+    position: absolute;
+    right: 20px;
+  }
+
+  .page-media {
+    top: -72px;
+  }
+
+  .page-media-container {
+    padding-top: 134px;
+  }
 
 
   /* 404 template */

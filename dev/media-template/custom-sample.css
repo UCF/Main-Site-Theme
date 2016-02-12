@@ -1,0 +1,23 @@
+/**
+ * Inverts the primary site nav's link color to white.
+ **/
+#header-menu li a {
+  color: #fff;
+}
+
+#header-menu li.last a {
+  color: #000;
+}
+
+/**
+ * Uncomment for left/right gutters on the media header contents.
+ * By default, contents span the full width of the container.
+ *
+ * Wrap inside of a media query for mobile-specific gutter fixes.
+ **/
+/*
+.page-media-container {
+  left: 20px;
+  right: 20px;
+}
+*/
