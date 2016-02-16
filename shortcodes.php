@@ -665,7 +665,6 @@ function sc_phonebook_search($attrs) {
 		$staff = ($result->from_table == 'staff');
 		if( $staff ) {
 			foreach ($results as $_key=>$_result) {
-				$pass = "Pass ".$key."-".$_key;
 				# If two email addresses match and are not null,
 				# lump the secondary listing under the alpha listing
 				# array (generated on the fly)
