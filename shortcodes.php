@@ -598,6 +598,10 @@ function sc_phonebook_search($attrs) {
 		create_function('$r', 'return in_array($r->from_table, array(\'organizations\', \'departments\', \'staff\'));')
 	);
 
+	foreach ( $results as $result ) {
+		$result->email = trim( $result->email );
+	}
+
 	# Filter out records with Fax in the name
 	$results = array_filter($results, create_function('$r', '
 			return (preg_match("/^fax\s/i", $r->name) ||
@@ -621,21 +625,22 @@ function sc_phonebook_search($attrs) {
 		$is_department   = ($result->from_table == 'departments');
 		if($is_organization || $is_department) {
 			$result->staff = array();
+			$emails = array();
 			foreach($results as $_result) {
 				if($_result->from_table == 'staff') {
 					if(
-						($is_organization) &&
-						($result->name == $_result->organization) &&
-						($_result->alpha !== null) &&
-						($_result->alpha == 1) )
+						( $is_organization ) &&
+						( $result->name == $_result->organization ) &&
+						( ! in_array( $_result->email, $emails ) ) )
 						{
+						$emails[] = $_result->email;
 						$result->staff[$_result->last_name.'-'.$result->first_name.'-'.$_result->id] = $_result;
 					} else if(
-						($is_department) &&
-						($result->name == $_result->department) &&
-						($_result->alpha !== null) &&
-						($_result->alpha == 1) )
+						( $is_department ) &&
+						( $result->name == $_result->department ) &&
+						( ! in_array( $_result->email, $emails ) ) )
 						{
+						$emails[] = $_result->email;
 						$result->staff[$_result->last_name.'-'.$result->first_name.'-'.$_result->id] = $_result;
 					}
 				}
@@ -658,21 +663,21 @@ function sc_phonebook_search($attrs) {
 	# Lump duplicate person data under that person's alpha info
 	foreach($results as $key => $result) {
 		$staff = ($result->from_table == 'staff');
-		if( ($staff) && ($result->alpha !== null) && ((int)$result->alpha == 0) ) {
-			foreach ($results as $_result) {
+		if( $staff ) {
+			foreach ($results as $_key=>$_result) {
 				# If two email addresses match and are not null,
 				# lump the secondary listing under the alpha listing
 				# array (generated on the fly)
 				if (
-					($result->email !== null) &&
-					($_result->email !== null) &&
-					($result->email == $_result->email) &&
-					($_result->alpha == 1) )
+					( $result->email !== null ) &&
+					( $_result->email !== null ) &&
+					( $result != $_result ) && 
+					( $_result->email == $result->email ) )
 					{
 					$_result->secondary[] = $result;
+					unset($results[$key]);
 				}
 			}
-			unset($results[$key]);
 		}
 	}
 
