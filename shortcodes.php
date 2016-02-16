@@ -598,6 +598,10 @@ function sc_phonebook_search($attrs) {
 		create_function('$r', 'return in_array($r->from_table, array(\'organizations\', \'departments\', \'staff\'));')
 	);
 
+	foreach ( $results as $result ) {
+		$result->email = trim( $result->email );
+	}
+
 	# Filter out records with Fax in the name
 	$results = array_filter($results, create_function('$r', '
 			return (preg_match("/^fax\s/i", $r->name) ||
@@ -660,14 +664,16 @@ function sc_phonebook_search($attrs) {
 	foreach($results as $key => $result) {
 		$staff = ($result->from_table == 'staff');
 		if( $staff ) {
-			foreach ($results as $_result) {
+			foreach ($results as $_key=>$_result) {
+				$pass = "Pass ".$key."-".$_key;
 				# If two email addresses match and are not null,
 				# lump the secondary listing under the alpha listing
 				# array (generated on the fly)
 				if (
-					($result->email !== null) &&
-					($_result->email !== null) &&
-					($result != $_result) )
+					( $result->email !== null ) &&
+					( $_result->email !== null ) &&
+					( $result != $_result ) && 
+					( $_result->email == $result->email ) )
 					{
 					$_result->secondary[] = $result;
 					unset($results[$key]);
