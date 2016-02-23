@@ -22,17 +22,23 @@ get_header(); the_post(); ?>
 
 		<form method="GET" id="academics-search-form" action="<?php echo get_permalink( $post->ID ); ?>" data-ajax-url="<?php echo admin_url( 'admin-ajax.php' ); ?>">
 
-			<div class="span12" id="page_title">
-				<h1 class="span9"><?php the_title();?></h1>
-				<?php esi_include('output_weather_data','span3'); ?>
+			<div class="col-md-12 col-sm-12">
+				<div id="page-title">
+					<div class="row">
+						<div class="col-md-9 col-sm-9">
+							<h1><?php the_title(); ?></h1>
+						</div>
+						<?php esi_include( 'output_weather_data', 'col-md-3 col-sm-3' ); ?>
+					</div>
+				</div>
 			</div>
 
-			<div class="span12" id="degree-search-top">
+			<div class="col-md-12 col-sm-12" id="degree-search-top">
 
 				<?php the_content(); ?>
 
 				<noscript>
-					<div class="alert alert-error">
+					<div class="alert alert-danger">
 						<strong>Heads up:</strong> This page requires JavaScript to be enabled to work properly.  Please re-enable JavaScript in your browser and reload the page.
 					</div>
 				</noscript>
@@ -41,9 +47,9 @@ get_header(); the_post(); ?>
 
 				<fieldset class="degree-search-form" role="search">
 					<legend class="sr-only">Search</legend>
-					<div class="degree-search-form-inner">
+					<div class="degree-search-form-inner col-md-9 col-sm-9">
 						<label for="search-query" class="sr-only">Search for a degree program</label>
-						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="span9 search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
+						<input id="search-query" type="text" autocomplete="off" data-provide="typeahead" name="search-query" class="search-field" placeholder="Enter a program name or keywords, like 'Aerospace Engineering' or 'Psychology'" value="<?php if ( isset( $params['search-query'] ) ) { echo htmlspecialchars( urldecode( $params['search-query'] ) ); } ?>">
 						<input id="offset" type="hidden"  value="<?php if ( isset( $params['offset'] ) ) { echo $params['offset']; } ?>"
 							data-offset-count="<?php echo DEGREE_SEARCH_PAGE_COUNT ?>">
 						<input id="search-default" name="search-default" type="hidden" value="<?php if ( $params['default'] == 1 ) { ?>1<?php } else { ?>0<?php } ?>">
@@ -58,28 +64,28 @@ get_header(); the_post(); ?>
 						<?php echo get_degree_search_result_phrase( $data['count'], $params ); ?>
 					</h2>
 
-					<div class="degree-search-sort-inner degree-search-sort-options hidden-phone">
+					<div class="degree-search-sort-inner degree-search-sort-options hidden-xs">
 						<fieldset>
 							<legend class="sr-only">Sort Results</legend>
-							<strong class="degree-search-sort-label radio inline">Sort by:</strong>
-							<label class="radio inline">
+							<strong class="degree-search-sort-label radio-inline">Sort by:</strong>
+							<label class="radio-inline">
 								<input type="radio" name="sort-by" class="sort-by" value="title" <?php if ( $params['sort-by'] == 'title') { echo 'checked'; } ?>> <span class="sr-only">Sort by </span>Name
 							</label>
-							<label class="radio inline">
+							<label class="radio-inline">
 								<input type="radio" name="sort-by" class="sort-by" value="degree_hours" <?php if ( $params['sort-by'] == 'degree_hours' ) { echo 'checked'; } ?>> <span class="sr-only">Sort by </span>Credit Hours
 							</label>
 						</fieldset>
 					</div>
 
-					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-phone">
-						<a class="btn" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
+					<div class="degree-search-sort-inner degree-search-sort-options btn-group visible-xs">
+						<a class="btn btn-default" id="mobile-filter" href="#">Filter <span class="caret"></span></a>
 					</div>
 				</div>
 			</div>
 
 			<!-- Main content col -->
 
-			<div class="span9 pull-right" id="degree-search-content">
+			<div class="col-md-9 col-sm-9 pull-right" id="degree-search-content">
 				<article role="main">
 
 					<!-- Search Results -->
@@ -104,18 +110,17 @@ get_header(); the_post(); ?>
 			</div>
 
 			<!-- Sidebar (Desktop only) -->
-
-			<div id="degree-search-sidebar" class="span3 pull-left">
+			<div id="degree-search-sidebar" class="col-md-3 col-sm-3 pull-left">
 				<fieldset>
 					<legend class="sr-only">Filter Results</legend>
 
-					<div class="visible-phone clearfix degree-mobile-actions">
+					<div class="visible-xs clearfix degree-mobile-actions">
 						<a class="btn btn-default pull-left" id="mobile-filter-reset">Reset All</a>
 						<a class="btn btn-primary pull-right" id="mobile-filter-done" href="#">Done</a>
 					</div>
-					<div class="degree-search-sort visible-phone clearfix">
+					<div class="degree-search-sort visible-xs clearfix">
 						<label for="sort-by" class="degree-search-sort-label degree-filter-title pull-left">Sort By</label>
-						<select id="sort-by" class="pull-right">
+						<select id="sort-by" class="pull-right form-control">
 							<option value="degree-name" <?php if ( $sort_by == 'degree-name' ) { echo 'selected'; } ?>>Name</option>
 							<option value="credit-hours" <?php if ( $sort_by == 'credit-hours' ) { echo 'selected'; } ?>>Credit Hours</option>
 						</select>

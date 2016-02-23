@@ -1,0 +1,85 @@
+// Media Header Template Pages
+.page-template-template-media-feature {
+  .status-alert {
+    margin-bottom: 40px;
+
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 5px;
+      position: relative;
+      z-index: 3;
+    }
+
+    &.hidden-by-user {
+      margin-bottom: 0;
+    }
+  }
+
+  #header-nav-wrap,
+  #site-nav-xs {
+    z-index: 2;
+  }
+
+  #header-nav-wrap {
+    position: relative;
+  }
+
+  #site-nav-xs {
+    left: $grid-gutter-width / 2;
+    position: absolute;
+    right: $grid-gutter-width / 2;
+  }
+}
+
+.page-media {
+  margin-bottom: -50px;  // 'top' value, + 20px for whitespace
+  position: relative;
+  top: -70px;
+  z-index: 1;
+
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: -52px;  // 'top' value, + 20px for whitespace
+    top: -72px;
+  }
+}
+
+.page-media-header {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  height: 500px;
+  overflow: hidden;
+  position: relative;
+  z-index: -1;
+
+  // CSS-only full-width bg video. IE9+
+  video {
+    height: auto;
+    left: 50%;
+    min-height: 100%;
+    min-width: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: auto;
+    z-index: -1000;
+
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+  }
+}
+
+
+.page-media-container {
+  left: 0;
+  padding-top: 70px;
+  position: absolute;
+  right: 0;
+  z-index: 2;
+
+  @media (max-width: $screen-xs-max) {
+    padding-top: 154px;
+  }
+}

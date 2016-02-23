@@ -1,0 +1,315 @@
+// scss-lint:disable all
+
+
+// WordPress Login screen
+.login {
+  #nav,
+  #backtoblog {
+    padding: 0;
+
+    a {
+      color: #666 !important;
+      font-size: 14px;
+      padding: 10px;
+      text-decoration: none;
+
+      &:hover {
+        color: #000 !important;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  #nav {
+    float: left;
+    width: 50%;
+  }
+
+  #backtoblog {
+    margin-left: 50%;
+  }
+
+  #lostpasswordform,
+  #loginform {
+    margin-bottom: 20px;
+  }
+
+  #login h1 {
+    background: transparent url('../img/login-logo.png') no-repeat 50% 0;
+
+    a {
+      background-image: none;
+      color: #333;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      height: inherit;
+      line-height: 24px;
+      padding-top: 92px;
+      text-align: center;
+      text-decoration: none;
+      text-indent: 0;
+
+      &:hover {
+        color: #555;
+      }
+
+      .hide {
+        display: block;
+      }
+    }
+  }
+}
+
+
+// Custom Admin Pages
+.i-am-a-fancy-admin {
+  code {
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    display: block;
+    padding: 10px;
+  }
+
+  textarea {
+    height: 10em;
+    width: 70%;
+  }
+
+  .updated {
+    left: 50%;
+    margin: 0 0 20px;
+    position: absolute;
+    text-align: center;
+    top: 40px;
+    z-index: 100;
+  }
+
+  .sections {
+    float: left;
+    width: 200px;
+
+    a {
+      background-color: #fafafa;
+      border: 1px solid #f0f0f0;
+      color: #aaa;
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px;
+      text-decoration: none;
+
+      &:hover,
+      &.active {
+        background-color: #fff;
+        border: 1px solid #f0f0f0;
+        color: #21759B;
+      }
+    }
+
+    .section {
+      box-shadow: rgba(160, 160, 160, .1) 0 0 12px;
+      margin: 0 0 8px;
+    }
+  }
+
+  .container {
+    margin: 0 19px 0 0;
+    padding: 0;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .checkbox-list,
+  .radio-list {
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline;
+      list-style-type: none;
+      margin-right: 20px;
+    }
+  }
+
+  .description em {
+    color: #21759B;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  .field li label {
+    display: inherit;
+  }
+
+  .fields {
+    background-color: #fefefe;
+    border: 1px solid #f0f0f0;
+    box-shadow: rgba(160, 160, 160, .1) 0 0 12px;
+    margin-left: 215px;
+    padding: 20px;
+
+    .section {
+      h3 {
+        padding: 0 0 10px 0;
+        margin: 0;
+        color: #21759B;
+        font-size: 20px;
+        border-bottom: 1px solid #E1E5EB;
+      }
+
+      table {
+        padding: 0;
+        margin: 20px 0 20px 0;
+        clear: none;
+      }
+    }
+
+    .submit {
+      text-align: right;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+
+#page-help {
+  .shortcode {
+    background-color: #fcfcfc;
+    border: 1px solid #e0e0e0;
+  }
+
+  .name {
+    background-color: #eaeaea;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 18px;
+    margin: 0 0 1em;
+    padding: 10px;
+  }
+
+  .documentation {
+    line-height: 1.5em;
+    padding: 10px;
+  }
+}
+
+
+#theme-help table {
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 1px solid #333;
+    padding: 5px;
+  }
+
+  th {
+    background-color: #f1f1f1;
+  }
+}
+
+
+// Misc.
+.description code {
+  background: none;
+  color: #21759B;
+  font-weight: bold;
+  padding: 0;
+}
+
+
+// Centerpiece Admin Interface
+.custom_repeatable {
+  // NOTE: Not compatible with WP < 4.4 -- uncomment after upgrade
+  // &:hover,
+  // &:active,
+  // &:focus {
+  //   .toggle-indicator {
+  //     color: #777;
+  //   }
+  // }
+
+  &.closed {
+    table {
+      display: none;
+    }
+
+    // NOTE: Not compatible with WP < 4.4 -- uncomment after upgrade
+    // .toggle-indicator:before {
+    //   content: "" !important;
+    // }
+  }
+
+  table {
+    margin-top: -16px;
+  }
+
+  .meta-handle {
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 16px !important;
+    padding: 8px 12px;
+  }
+
+  .toggle-indicator {
+    display: none;
+    // NOTE: Not compatible with WP < 4.4 -- uncomment after upgrade
+    // color: #a0a5aa;
+    // float: right;
+    // pointer-events: none;
+  }
+}
+
+.repeatable-remove {
+  margin-left: 10px !important;
+}
+
+#ss_slides_all {
+  margin-left: 0;
+  padding-left: 0;
+
+  .custom_repeatable {
+    margin: 0 0 15px 0;
+    padding-bottom: 15px;
+  }
+}
+
+#slider-slides {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: 0 0 0 transparent !important;
+
+  .inside {
+    margin: 0;
+    padding: 0;
+  }
+
+  .form-table th {
+    padding-left: 10px;
+  }
+
+  > h2.hndle,
+  > h3.hndle,
+  > .handlediv {
+    display: none;
+  }
+}
+
+
+// Degree Programs -> Program Type tax admin interface
+th#cta {
+  // Sets width of "Call to Action box" column in Program Types admin table
+  width: 20%;
+}
+
+
+// File upload fields
+.meta-file-preview img {
+  max-width: 100%;
+}
+
+
+// scss-lint:enable all

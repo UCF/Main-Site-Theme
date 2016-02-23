@@ -5,24 +5,30 @@
 	$search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
 	<div class="row page-content" id="degree-single">
-		<div id="page_title" class="span12">
-			<h1 class="span9"><?php the_title(); ?></h1>
-			<?php esi_include( 'output_weather_data', 'span3' ); ?>
+		<div class="col-md-12 col-sm-12">
+			<div id="page-title">
+				<div class="row">
+					<div class="col-md-9 col-sm-9">
+						<h1><?php the_title(); ?></h1>
+					</div>
+					<?php esi_include( 'output_weather_data', 'col-md-3 col-sm-3' ); ?>
+				</div>
+			</div>
 		</div>
 
-		<div id="breadcrumbs" class="span12 clearfix">
+		<div id="breadcrumbs" class="col-md-12 col-sm-12 clearfix">
 			<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
 			<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
 
 			<ul class="breadcrumb-hierarchy breadcrumb">
 				<li>
 					<?php $programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ) ) ); ?>
-					<a href="<?php echo $programs_url; ?>"><?php echo $post->tax_program_type->name; ?>s</a> <span class="divider">&gt;</span>
+					<a href="<?php echo $programs_url; ?>"><?php echo $post->tax_program_type->name; ?>s</a>
 				</li>
 				<?php if ( $post->tax_college ): // Some programs may have been imported with colleges that were later deleted ?>
 				<li>
 					<?php $college_programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ), 'college' => array( $post->tax_college->slug ) ) ); ?>
-					<a href="<?php echo $college_programs_url; ?>"><?php echo $post->tax_college->name; ?></a> <span class="divider">&gt;</span>
+					<a href="<?php echo $college_programs_url; ?>"><?php echo $post->tax_college->name; ?></a>
 				</li>
 				<?php endif; ?>
 				<li class="active">
@@ -31,11 +37,11 @@
 			</ul>
 		</div>
 
-		<div id="contentcol" class="span8 degree">
+		<div id="contentcol" class="col-md-8 col-sm-8 degree">
 			<article role="main">
 				<!-- Degree meta details -->
 				<div class="row">
-					<div class="span8">
+					<div class="col-md-12 col-sm-12">
 						<dl class="degree-details clearfix">
 							<dt>Degree:</dt>
 							<dd><?php echo $post->tax_program_type->name; ?></dd>
@@ -79,12 +85,12 @@
 					</div>
 				</div>
 
-				<div class="mobile-degree-cta visible-phone">
-					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-large btn-block btn-success">
+				<div class="mobile-degree-cta visible-xs">
+					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-success">
 						View Catalog
 					</a>
 					<?php if ( $post->degree_website ): ?>
-					<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-large btn-block">
+					<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 						Visit Program Website
 					</a>
 					<?php endif; ?>
@@ -113,16 +119,16 @@
 				<?php echo display_degree_callout( $post->ID ); ?>
 			</article>
 		</div>
-		<div id="sidebar_right" class="span4 notoppad" role="complementary">
+		<div id="sidebar_right" class="col-md-4 col-sm-4 notoppad" role="complementary">
 
 			<!-- Sidebar content -->
 
-			<div class="hidden-phone">
-				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-large btn-block btn-success">
+			<div class="hidden-xs">
+				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-success">
 					View Catalog
 				</a>
 				<?php if ( $post->degree_website ): ?>
-				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-large btn-block">
+				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 					Visit Program Website
 				</a>
 				<?php endif; ?>

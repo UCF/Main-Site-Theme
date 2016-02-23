@@ -1,0 +1,241 @@
+// Announcements Page
+#announcements {
+  label {
+    @media (max-width: $screen-xs-max) {
+      display: block;
+    }
+  }
+
+  .btn-primary {
+    border-color: #2e6da4;
+
+    &:hover,
+    &:active,
+    &:focus {
+      border-color: #204d74;
+    }
+  }
+
+  #filters {
+    margin-bottom: 25px;
+    margin-top: 10px;
+
+    @media print {
+      display: none;
+    }
+
+    select,
+    input[type="text"] {
+      margin-right: 15px;
+    }
+  }
+
+  #filter_audience_wrap,
+  #filter_keyword_wrap,
+  #filter_time_wrap {
+      display: none;
+  }
+
+  .active_filter {
+      display: visible;
+  }
+
+  #filter_form {
+      margin: 0;
+  }
+
+  #addnew_wrap {
+    text-align: right;
+    margin-top: 26px;
+
+    @media (max-width: $screen-xs-max) {
+      text-align: left;
+      margin-top: 0;
+    }
+  }
+
+  #filter_update {
+      margin-top: 25px;
+  }
+
+  #filter_wrap {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 10px;
+    }
+  }
+
+  #ongoing-header {
+    font-family: $font-family-sans-serif;
+    font-weight: 200;
+    margin-bottom: 15px;
+  }
+
+  #upcoming-header {
+    margin-bottom: 25px;
+    font-size: 15px;
+    line-height: 20px;
+
+    .upcoming-header-alt {
+      font-style: italic;
+      font-weight: normal;
+      padding-left: 5px;
+      font-size: 20px;
+    }
+  }
+
+  #ongoing-twocol {
+    border-left: 1px dotted #333;
+
+    @media (max-width: $screen-sm-max) {
+      border-left: 1px dotted #000;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      border-left: 0;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    #ongoing-header {
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-family: $font-family-serif;
+    }
+  }
+}
+
+.announcement_wrap {
+  height: auto;
+  background: #ffffe2;
+  margin-bottom: 40px;
+  padding: 15px;
+  position: relative;
+
+  @media print {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+  }
+
+  &:before,
+  &:after {
+    -webkit-backface-visibility: hidden;
+    background: rgba(0, 0, 0, .7);
+    bottom: 15px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, .7);
+    content: '';
+    left: 10px;
+    max-width: 300px;
+    position: absolute;
+    transform: rotate(-3deg);
+    top: 80%;
+    width: 50%;
+    z-index: -1;
+
+    @media print {
+      -webkit-backface-visibility: hidden;
+      background: transparent;
+      box-shadow: none;
+      transform: none;
+    }
+  }
+
+  &:after {
+    left: auto;
+    right: 10px;
+    transform: rotate(3deg);
+
+    @media print {
+      transform: none;
+    }
+  }
+
+  h3 {
+    padding-right: 25px;
+  }
+
+  .thumbtack {
+    width: 20px;
+    height: 20px;
+    background: url('../../static/img/spritesheet.png') -174px -36px no-repeat;
+    position: absolute;
+    top: -9px;
+    left: 50%;
+  }
+
+  .new {
+    width: 50px;
+    height: 50px;
+    background: url('../../static/img/spritesheet.png') -375px -46px no-repeat;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    text-indent: -9999px;
+  }
+
+  .date,
+  .audience,
+  .keywords {
+    font-family: $font-family-sans-serif;
+    font-size: 12px;
+  }
+
+  .audience,
+  .keywords {
+    margin-bottom: 0 !important;
+  }
+}
+
+.announcement_list {
+  li {
+    margin-bottom: 12px;
+
+    h3 {
+      font-size: 13px;
+      line-height: 18px;
+      font-family: $font-family-sans-serif;
+      font-weight: normal;
+    }
+  }
+}
+
+
+// Single Announcements
+#announcement_meta {
+  margin-bottom: 15px;
+
+  p {
+    margin-bottom: 2px;
+  }
+}
+
+
+// Post an Announcement Login
+#ann-login-wrapper {
+  background: #fff6d4;
+  border: 1px solid #dad1ac;
+  padding: 12px;
+  max-width: 560px;
+
+  label {
+    font-weight: bold;
+  }
+
+  h2 {
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+}
+
+#login_error p {
+  margin-bottom: 5px;
+}
+
+#auth-form .wrapper {
+  overflow: auto;
+}
+
+#auth-form-items {
+  max-width: 280px;
+}

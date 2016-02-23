@@ -1,0 +1,513 @@
+// Single Degree profiles
+#degree-single {
+  #breadcrumbs a {
+    color: #999;
+  }
+
+  .breadcrumb {
+    background-color: #fff;
+    margin-bottom: 30px;
+
+    @media (max-width: $screen-xs-max) {
+      display: none;
+    }
+
+    > li + li:before {
+      padding: 0 4px;
+
+      @include body-prefix('.ie8') {
+        // IE8 has issues with spaces in the 'content' val
+        content: '/';
+      }
+    }
+  }
+
+  .breadcrumb,
+  #breadcrumb-search {
+    @include gotham();
+    font-size: 12.5px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 12px;
+    }
+  }
+
+  #breadcrumb-search {
+    display: block;
+    float: left;
+    font-weight: 500;
+    padding: 8px 25px 8px 0; // match .breadcrumb top/bottom padding
+
+    @media (max-width: $screen-sm-max) {
+    }
+
+    .breadcrumb-hierarchy {
+      background: #fff;
+      display: block;
+      float: left;
+      list-style-type: none;
+      margin-bottom: 0;
+    }
+
+    + .breadcrumb-hierarchy {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  #contentcol .degree-details,
+  #contentcol .cta-wrap,
+  #sidebar_right {
+    @include gotham();
+    font-size: 14px;
+  }
+
+  #contentcol dt,
+  #contentcol dd,
+  #sidebar_right dt,
+  #sidebar_right dd {
+    display: inline;
+  }
+
+  #contentcol {
+    font-family: $font-family-sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+
+    p {
+      margin: 0 0 10px;
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    h2,
+    h3 {
+      @include gotham();
+      line-height: 1.3;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 22px;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 23px;
+        line-height: 25px;
+      }
+    }
+
+    h3 {
+      font-size: 18.5px;
+    }
+
+    h4,
+    h5,
+    h6 {
+      @include gotham(6);
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+
+    h4 {
+      font-size: 15.5px;
+    }
+
+    a {
+      border-bottom: 0;
+      color: #08c;
+    }
+
+    .btn-default {
+      // replace the removed border-bottom
+      border-bottom: 1px solid $btn-default-border;
+    }
+
+    .degree-details {
+      border-bottom: 1px solid #eee;
+      font-size: 13px;
+      padding: 0 0 20px;
+      margin-top: 0;
+
+      @media (max-width: $screen-xs-max) {
+        padding: 20px 0 10px;
+      }
+
+      dl {
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+
+      dt,
+      dd {
+        display: block;
+        float: left;
+        font-size: 16px;
+        line-height: 1.3;
+        margin-bottom: 15px;
+
+        @media (max-width: $screen-sm-max) {
+          font-size: 14px;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          clear: both;
+        }
+      }
+
+      dt {
+        clear: left;
+        text-align: left;
+        width: 33%;
+
+        @media (max-width: $screen-sm-max) {
+          width: 35%;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          margin-bottom: 2px;
+          width: 100%;
+        }
+      }
+
+      dd {
+        clear: right;
+        margin-left: 0;
+        width: 66%;
+
+        @media (max-width: $screen-sm-max) {
+          width: 65%;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          margin-bottom: 20px;
+          width: 100%;
+        }
+      }
+    }
+
+    .degree-desc {
+      margin-bottom: 30px;
+    }
+
+    .degree-courses {
+      h3 {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+
+        .degree-courses-credits {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .degree-courses-credits {
+      display: block;
+      float: right;
+      font-weight: 500;
+      white-space: nowrap;
+
+      @media (max-width: $screen-xs-max) {
+        float: none;
+        margin-top: 5px;
+      }
+    }
+
+    .mobile-degree-cta {
+      margin-bottom: 20px;
+    }
+  }
+
+  #sidebar_right {
+    box-sizing: border-box;
+    padding-left: $grid-gutter-width;
+    padding-top: 50px;
+
+    @media (max-width: $screen-sm-max) {
+      padding-left: $grid-gutter-width - 5;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      border-top: 2px solid #eee;
+      display: block;  // unset display: none;
+      padding-left: $grid-gutter-width / 2;  // reset
+    }
+
+    h2 {
+      color: #888;
+      font-size: 18px;
+      font-weight: normal;
+      line-height: 1.2;
+      margin-bottom: 15px;
+      margin-top: 50px;
+
+      @media (max-width: $screen-xs-max) {
+        margin-top: 30px;
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      margin-left: 0;
+    }
+
+    dl {
+      font-size: 13px;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    dt,
+    dd {
+      display: block;
+      float: left;
+      line-height: 1.3em;
+      margin-bottom: 4px;
+    }
+
+    .btn-lg {
+      @media (max-width: $screen-sm-max) {
+        font-size: 14px;
+      }
+    }
+
+    .contact-info {
+      margin-bottom: 25px;
+
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: 0;
+      }
+
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    .contact-name,
+    .contact-title {
+      display: block;
+    }
+
+    .contact-name {
+      font-weight: normal;
+      margin-bottom: 3px;
+
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: 10px;
+      }
+    }
+
+    .contact-title {
+      font-style: italic;
+    }
+
+    .contact-info-dl {
+      @media (max-width: $screen-xs-max) {
+        padding: 0 0 10px;
+      }
+
+      a {
+        color: #08c;
+      }
+
+      dt,
+      dd {
+        @media (max-width: $screen-xs-max) {
+          clear: both;
+        }
+      }
+
+      dt {
+        clear: left;
+        font-weight: normal;
+        text-align: left;
+        width: 20%;
+
+        @media (max-width: $screen-sm-max) {
+          width: 28%;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          margin-bottom: 2px;
+          width: 100%;
+        }
+
+        @include body-prefix('.ie8') {
+          width: 25%;
+        }
+      }
+
+      dd {
+        clear: right;
+        margin-left: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 80%;
+
+        @media (max-width: $screen-sm-max) {
+          width: 72%;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          margin-bottom: 10px;
+          width: 100%;
+        }
+
+        @include body-prefix('.ie8') {
+          width: 75%;
+        }
+      }
+    }
+
+    .tuition-info-dl {
+      dt {
+        clear: left;
+        font-weight: normal;
+        text-align: left;
+        margin-bottom: 1.0em;
+        width: 65%;
+      }
+
+      dd {
+        clear: right;
+        text-align: right;
+        margin-left: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 35%;
+      }
+    }
+
+    .tuition-total {
+      color: #c90;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: .8;
+      padding: 20px 0;
+      text-align: center;
+      text-shadow: 0 1px 1px #cacaca;
+    }
+
+    .tuition-period {
+      font-size: 18px;
+    }
+
+    .tuition-description {
+      color: #222;
+      font-size: 12px;
+      font-weight: 300;
+      padding: 0 12px;
+    }
+  }
+
+  .btn {
+    @include gotham();
+    margin: 0 0 15px;
+  }
+
+  .btn-lg {
+    font-size: 15px;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 14px;
+    }
+  }
+
+  .disclaimer {
+    color: #757575;
+    font-size: 10px;
+  }
+
+  .financial-aid-message,
+  .tuition-value-message {
+    font-size: .85em;
+    margin-bottom: 18px;
+  }
+
+  .financial-aid-message {
+    a {
+      color: #08c;
+    }
+  }
+
+  .tuition-value-message {
+    .external {
+      color: #08c;
+    }
+  }
+
+  .degree-description {
+    margin: 20px 0;
+
+    @media (max-width: $screen-xs-max) {
+      margin: 30px 0;
+    }
+  }
+
+  // Apply to Program CTA
+  .cta-wrap {
+    margin-top: 50px;
+
+    h3 {
+      border-bottom: 0 solid transparent !important;
+    }
+
+    > h2:first-child,
+    > h3:first-child {
+      margin-top: 10px !important;
+    }
+
+    .btn {
+      background-color: #ffc904;
+      color: #000 !important;
+      margin-top: 10px;
+      padding-left: 45px;
+      padding-right: 45px;
+
+      &:hover {
+        background-color: #f9c404;
+      }
+    }
+  }
+
+  // Social buttons
+  .social {
+    margin-bottom: 30px;
+  }
+}
+
+#tuition-tabs {
+  margin-bottom: 20px;
+}
+
+#program-meta p {
+  @media (max-width: $screen-xs-max) {
+    padding-left: 0;
+  }
+}
+
+
+// [degree-list] shortcode
+.degree-list {
+  list-style-type: none;
+  margin-left: 0;
+  // IE9 and 8 fall back gracefully to a single column.
+  -webkit-column-count: 2; // Chrome, Safari, Opera
+  -moz-column-count: 2; // Firefox
+  column-count: 2;
+  -webkit-column-gap: 20px; // Chrome, Safari, Opera
+  -moz-column-gap: 20px; // Firefox
+  column-gap: 20px;
+
+  @media (max-width: 480px) {
+    -webkit-column-count: 1; // Chrome, Safari, Opera
+    -moz-column-count: 1; // Firefox
+    column-count: 1;
+  }
+
+  li {
+    overflow: hidden;
+    margin-bottom: 5px;
+  }
+}

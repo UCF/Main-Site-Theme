@@ -1,0 +1,17 @@
+// General - Reusable widget content to prevent absolute image URL usage
+.college_portrait {
+  @include sprite('../../static/img/college_portrait.jpg', '../../static/img/college_portrait.jpg', 150px, 80px);
+  height: 80px;
+  width: 150px;
+}
+
+.top_five_majors {
+  @include sprite('../../static/img/top_5_majors.png', '../../static/img/top_5_majors.png', 166px, 63px);
+  height: 63px;
+  margin-top: 5px;
+  width: 166px;
+
+  + ol {
+    @extend .list-unstyled;
+  }
+}

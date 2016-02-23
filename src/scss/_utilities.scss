@@ -1,0 +1,140 @@
+// scss-lint:disable ImportantRule
+
+// Disable responsiveness in IE8:
+.ie8 {
+  // Create grid for IE8 because it doesn't understand media queries
+  @include make-grid(md);
+
+  // Fix .visible-, .hidden- classes
+  .hidden-md {
+    display: none !important;
+  }
+
+  .visible-md-block {
+    display: block !important;
+  }
+
+  .visible-md-inline {
+    display: inline !important;
+  }
+
+  .visible-md-inline-block {
+    display: inline-block !important;
+  }
+
+  // Disable responsiveness in IE8:
+  // Force fixed width for containers
+  .container {
+    max-width: none !important;
+    width: $container-md;
+  }
+}
+
+// scss-lint:enable ImportantRule
+
+
+// Disable -lg breakpoint
+.container {
+  @media (min-width: $screen-lg-min) {
+    width: $container-md;
+  }
+}
+
+
+// Columns with modified gutter width
+.col-md-xpad {
+  @media (min-width: $screen-md-min) { // Note: no max-width set because -lg breakpoint is disabled
+    padding-left: ($grid-gutter-width / 2) + 5;
+    padding-right: ($grid-gutter-width / 2) + 5;
+  }
+
+  @include body-prefix('.ie8') {
+    padding-left: ($grid-gutter-width / 2) + 5;
+    padding-right: ($grid-gutter-width / 2) + 5;
+  }
+}
+
+.col-sm-xpad {
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    padding-left: ($grid-gutter-width / 2) + 5;
+    padding-right: ($grid-gutter-width / 2) + 5;
+  }
+}
+
+
+// Content hiding helpers
+.print-only {
+  display: none;
+
+  @media print {
+    display: block;
+  }
+}
+
+.screen-only {
+  @media print {
+    display: none;
+  }
+}
+
+.screen-reader-text {
+  @extend .sr-only;
+}
+
+a.print-noexpand:after {
+  @media print {
+    content: '';
+  }
+}
+
+iframe,
+object,
+embed {
+  @media print {
+    display: none;
+  }
+}
+
+
+// IE8 rounded corner fix for news, spotlight thumbnails; Standard rounded corners for centerpieces
+.thumb_corner_tl,
+.thumb_corner_tr,
+.thumb_corner_bl,
+.thumb_corner_br {
+  @include sprite();
+  height: 10px;
+  position: absolute;
+  width: 10px;
+  z-index: 999;
+  zoom: 1;
+}
+
+.thumb_corner_tl {
+  background-position: -416px -10px;
+  left: 0;
+  top: 0;
+}
+
+.thumb_corner_tr {
+  background-position: -402px 0;
+  right: 0;
+  top: 0;
+}
+
+.thumb_corner_bl {
+  background-position: -404px -8px;
+  bottom: 0;
+  left: 0;
+}
+
+.thumb_corner_br {
+  background-position: -413px 3px;
+  bottom: 0;
+  right: 0;
+}
+
+
+// Fix to unset Google conversion iframe heights
+iframe[name="google_conversion_frame"] {
+  height: 0;
+}

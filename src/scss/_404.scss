@@ -1,0 +1,126 @@
+/**
+ * 404 template
+ **/
+#page-not-found {
+  margin-bottom: 40px;
+
+  .knightro-bg {
+    background: url('../img/knightro-searching.jpg') top right no-repeat;
+    min-height: 470px;
+
+    @media (max-width: $screen-sm-max) {
+      background-position: center right;
+      background-size: 230px auto;
+      min-height: 450px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      background-size: 100px auto;
+      box-sizing: border-box;
+      min-height: 0;
+      padding-right: 120px;
+    }
+
+    @media (max-width: 480px) {
+      background-image: none;
+      padding-right: 0;
+    }
+  }
+
+  h1 {
+    @include gotham(8);
+    color: #fc0;
+    font-size: 70px;
+    letter-spacing: -.02em;
+    line-height: .9;
+    margin-bottom: 20px;
+    margin-top: 10px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 55px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 36px;
+    }
+  }
+
+  p {
+    @include gotham();
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .lead {
+    @include font-smoothing();
+    font-size: 24px;
+    letter-spacing: -.02em;
+  }
+
+  .search-form {
+    margin: 0 0 30px;
+    position: relative;
+  }
+
+  .search-field {
+    @include gotham();
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 18px;
+    height: 55px;
+    line-height: 55px;
+    padding-right: 60px;
+    position: relative;
+    text-indent: 10px;
+    width: 100%;
+    z-index: 2;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 16px;
+    }
+  }
+
+  .search-submit {
+    background-color: transparent;
+    border: 0 solid transparent;
+    bottom: 0;
+    box-sizing: border-box;
+    height: 55px;
+    line-height: 55px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    text-indent: 70px;
+    top: 0;
+    width: 60px;
+    z-index: 3;
+
+    &:before {
+      color: #999;
+      content: '';
+      display: block;
+      font-family: 'FontAwesome';
+      font-size: 28px;
+      height: 55px;
+      left: 0;
+      line-height: 55px;
+      position: absolute;
+      text-align: center;
+      text-indent: 0;
+      top: 0;
+      width: 60px;
+      z-index: 4;
+    }
+
+    &:hover:before {
+      color: #08c;
+    }
+  }
+
+  .img-knightro {
+    box-sizing: border-box;
+    padding-left: 60px;
+    padding-top: 55px;
+  }
+}

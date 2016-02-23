@@ -21,3 +21,14 @@ CVS
 ._*
 .DS_Store
 Thumbs.db
+
+# npm, bower, and other dependencies
+node_modules
+bower_components
+src/components/*
+gulp-config.json
+typings
+
+# debug files
+npm-debug.log
+
