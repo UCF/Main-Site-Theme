@@ -127,11 +127,9 @@
 
   a {
     border-bottom: 1px solid #ccc;
-    color: #600;
 
     &:hover {
       border-bottom: 1px solid #e50606;
-      color: #e50606;
       text-decoration: none;
     }
   }
@@ -165,7 +163,7 @@
   }
 
 
-  // Bootstrap component overrides - reset color and border overrides to `#contentcol a`
+  // Bootstrap component overrides - reset border overrides to `#contentcol a`
 
   .btn-default {
     @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
@@ -191,79 +189,6 @@
     @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
   }
 
-  .btn-link {
-    padding: 0;
-  }
-
-  // Dropdown text color fixes
-  .dropdown-menu,
-  .dropdown {
-    > li > a {
-      color: $dropdown-link-color;
-
-      &:hover,
-      &:active,
-      &:focus {
-        color: $dropdown-link-hover-color;
-      }
-    }
-
-    > li.disabled > a,
-    a.disabled {
-      &,
-      &:hover,
-      &:active,
-      &:focus {
-        color: $dropdown-link-disabled-color;
-      }
-    }
-  }
-
-  // Breadcrumb, pagination, and pager text color fixes
-  .breadcrumb,
-  .pagination,
-  .pager {
-    a {
-      color: $link-color;
-    }
-
-    a:hover,
-    a:active,
-    a:focus {
-      color: $link-hover-color;
-    }
-
-    > li.disabled > a {
-      // pagers, paginations and breadcrumbs actually have different disabled
-      // color variables, but these are close and consistent enough
-      &,
-      &:hover,
-      &:active,
-      &:focus {
-        color: $pagination-disabled-color;
-      }
-    }
-  }
-
-  // Generic nav text color fixes
-  .nav {
-    a,
-    a:hover,
-    a:active,
-    a:focus {
-      color: $link-color;
-    }
-
-    > li.disabled > a {
-      color: $nav-disabled-link-color;
-
-      &:hover,
-      &:active,
-      &:focus {
-        color: $nav-disabled-link-hover-color;
-      }
-    }
-  }
 
   // Remove border-bottom for breadcrumbs, dropdown links, and nav pills
   .breadcrumb a,
@@ -278,50 +203,23 @@
     }
   }
 
-  // Color and border fixes for list-group-item links
+  // Border fixes for list-group-item links
   a.list-group-item {
     &,
     &:hover,
     &:active,
     &:focus {
       border-bottom: 1px solid $list-group-border;
-      color: $list-group-link-color;
-    }
-
-    &.active,
-    &.active:hover,
-    &.active:active,
-    &.active:focus {
-      color: $list-group-active-color;
     }
   }
 
-  // Active nav pill color override (force white text)
-  .nav-pills > li.active > a {
-    &,
-    &:hover,
-    &:active,
-    &:focus {
-      color: $nav-pills-active-link-hover-color;
-    }
-  }
-
-  // Border and color fixes for tab navs
+  // Border fixes for tab navs
   .nav-tabs {
     a,
     a:hover,
     a:active,
     a:focus {
       border-bottom: 1px solid transparent;
-    }
-
-    > li.active a {
-      &,
-      &:hover,
-      &:active,
-      &:focus {
-        color: $nav-tabs-active-link-hover-color;
-      }
     }
   }
 
@@ -344,14 +242,13 @@
     }
   }
 
-  // Carousel nav link color, border fixes
+  // Carousel nav link border fixes
   .carousel-control {
     &,
     &:hover,
     &:active,
     &:focus {
       border-bottom: 0 solid transparent;
-      color: $carousel-control-color;
     }
   }
 
