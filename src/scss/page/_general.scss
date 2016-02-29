@@ -195,6 +195,7 @@
     padding: 0;
   }
 
+  // Dropdown text color fixes
   .dropdown-menu,
   .dropdown {
     > li > a {
@@ -218,8 +219,33 @@
     }
   }
 
+  // Breadcrumb, pagination, and pager text color fixes
+  .breadcrumb,
   .pagination,
-  .pager,
+  .pager {
+    a {
+      color: $link-color;
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+      color: $link-hover-color;
+    }
+
+    > li.disabled > a {
+      // pagers, paginations and breadcrumbs actually have different disabled
+      // color variables, but these are close and consistent enough
+      &,
+      &:hover,
+      &:active,
+      &:focus {
+        color: $pagination-disabled-color;
+      }
+    }
+  }
+
+  // Generic nav text color fixes
   .nav {
     a,
     a:hover,
@@ -229,8 +255,6 @@
     }
 
     > li.disabled > a {
-      // pagers and paginations actually have different disabled
-      // color variables, but these are close and consistent enough
       color: $nav-disabled-link-color;
 
       &:hover,
@@ -241,6 +265,8 @@
     }
   }
 
+  // Remove border-bottom for breadcrumbs, dropdown links, and nav pills
+  .breadcrumb a,
   .dropdown a,
   .dropdown-menu a,
   .nav-pills a {
@@ -252,6 +278,7 @@
     }
   }
 
+  // Color and border fixes for list-group-item links
   a.list-group-item {
     &,
     &:hover,
@@ -269,6 +296,7 @@
     }
   }
 
+  // Active nav pill color override (force white text)
   .nav-pills > li.active > a {
     &,
     &:hover,
@@ -278,6 +306,7 @@
     }
   }
 
+  // Border and color fixes for tab navs
   .nav-tabs {
     a,
     a:hover,
@@ -296,6 +325,7 @@
     }
   }
 
+  // Pager, pagination border fixes
   .pager a {
     &,
     &:hover,
@@ -314,6 +344,7 @@
     }
   }
 
+  // Carousel nav link color, border fixes
   .carousel-control {
     &,
     &:hover,
