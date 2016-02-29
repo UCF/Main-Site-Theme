@@ -196,20 +196,41 @@
   }
 
   .dropdown-menu,
-  .dropdown,
-  .pagination,
-  .pager,
-  .nav,
-  .list-group {
-    a,
-    a:hover,
-    a:active,
-    a:focus {
-      color: $text-color;
+  .dropdown {
+    > li > a {
+      color: $dropdown-link-color;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: $dropdown-link-hover-color;
+      }
     }
 
     > li.disabled > a,
     a.disabled {
+      &,
+      &:hover,
+      &:active,
+      &:focus {
+        color: $dropdown-link-disabled-color;
+      }
+    }
+  }
+
+  .pagination,
+  .pager,
+  .nav {
+    a,
+    a:hover,
+    a:active,
+    a:focus {
+      color: $link-color;
+    }
+
+    > li.disabled > a {
+      // pagers and paginations actually have different disabled
+      // color variables, but these are close and consistent enough
       color: $nav-disabled-link-color;
 
       &:hover,
@@ -222,7 +243,6 @@
 
   .dropdown a,
   .dropdown-menu a,
-  .nav-list a,
   .nav-pills a {
     &,
     &:hover,
@@ -232,16 +252,18 @@
     }
   }
 
-  .list-group-item {
+  a.list-group-item {
     &,
     &:hover,
     &:active,
     &:focus {
       border-bottom: 1px solid $list-group-border;
+      color: $list-group-link-color;
     }
 
     &.active,
     &.active:hover,
+    &.active:active,
     &.active:focus {
       color: $list-group-active-color;
     }
@@ -256,12 +278,21 @@
     }
   }
 
-  .nav-tabs a {
-    &,
-    &:hover,
-    &:active,
-    &:focus {
+  .nav-tabs {
+    a,
+    a:hover,
+    a:active,
+    a:focus {
       border-bottom: 1px solid transparent;
+    }
+
+    > li.active a {
+      &,
+      &:hover,
+      &:active,
+      &:focus {
+        color: $nav-tabs-active-link-hover-color;
+      }
     }
   }
 
