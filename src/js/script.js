@@ -579,10 +579,10 @@ var statusAlertCheck = function ($) {
           // Check the content and update if necessary.
           // This will simply fail if the alert has already been closed
           // by the user (alert element has been removed from the DOM)
-          var existing_title = existing_alert.find('.title'),
-            existing_content = existing_alert.find('.content'),
-            existing_icon = existing_alert.find('.alert-icon'),
-            existing_type = existing_alert.find('.alert'),
+          var existing_title = $existing_alert.find('.title'),
+            existing_content = $existing_alert.find('.content'),
+            existing_icon = $existing_alert.find('.alert-icon'),
+            existing_type = $existing_alert.find('.alert'),
             contentChanged = false;
 
           if(existing_title.text() !== newest.title) {
