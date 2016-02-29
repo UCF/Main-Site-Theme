@@ -314,6 +314,16 @@
     }
   }
 
+  .carousel-control {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 0 solid transparent;
+      color: $carousel-control-color;
+    }
+  }
+
 
   // Content column specific overrides
 
