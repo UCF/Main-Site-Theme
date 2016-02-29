@@ -62,6 +62,10 @@
     margin-top: 30px;
 }
 
+#contentcol .call-out.gold {
+    background-color: #fef7e1;
+}
+
 #contentcol .call-out h3 {
     margin-top: 20px;
 }
@@ -114,11 +118,11 @@
     padding: 26px;
 }
 
-#contentcol .icon-feature.icon-usd {
+#contentcol .icon-feature.fa-usd {
     padding: 26px 38px;
 }
 
-#contentcol .icon-feature.icon-exclamation {
+#contentcol .icon-feature.fa-exclamation {
     padding: 20px 38px;
 }
 
@@ -128,11 +132,11 @@
         margin-top: 20px;
     }
 
-    #contentcol .icon-feature.icon-usd {
+    #contentcol .icon-feature.fa-usd {
         padding: 20px 33px;
     }
 
-    #contentcol .icon-feature.icon-exclamation {
+    #contentcol .icon-feature.fa-exclamation {
         padding: 20px 38px;
     }
 }
@@ -150,18 +154,6 @@
 #contentcol h2 span {
     color: #ffc904;
     margin-right: 5px;
-}
-
-#contentcol ol.ucf-goals {
-    color: #ffc904;
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 20px;
-}
-#contentcol ol.ucf-goals span {
-    color: #000;
-    font-size: 14px;
-    font-weight: normal;
 }
 
 #contentcol .number {
@@ -233,6 +225,11 @@
     margin-bottom: 20px;
     margin-left: 0;
     margin-top: 5px;
+    padding-left: 0;
+}
+
+#contentcol ol {
+    margin-left: 20px;
 }
 
 #contentcol ul li,
@@ -242,7 +239,7 @@
 }
 
 #contentcol ol li {
-    margin-left: 30px;
+    margin-left: 0;
 }
 
 #contentcol .unstyled li {
@@ -264,9 +261,23 @@
     font-size: 21px;
     margin-bottom: 20px;
 }
+#contentcol .ucfacts-sidebar ol {
+    color: #ffc904;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 0;
+}
 
 #contentcol .ucfacts-sidebar li {
-    margin-left: 19px;
+    margin-left: 28px;
+    line-height: normal;
+    margin-bottom: 21px;
+}
+
+#contentcol .ucfacts-sidebar ol span {
+    color: #000;
+    font-size: 14px;
+    font-weight: normal;
 }
 
 #contentcol .ucfacts-sidebar .ucfacts-goldbg {
@@ -301,6 +312,10 @@
     margin-top: 40px;
 }
 
+#contentcol .student-profile .top-margin {
+    margin-top: 70px;
+}
+
 /* icons */
 
 #contentcol [class$="male"] {
@@ -312,10 +327,6 @@
 
 #contentcol .cta {
     margin-top: 50px;
-}
-
-#contentcol .cta [class^="icon"] {
-    color: white;
 }
 
 #contentcol .cta-button {
@@ -333,6 +344,10 @@
     -ms-user-select: none;
     user-select: none;
     border-radius: 4px;
+}
+
+#contentcol .cta-button span {
+    color: white;
 }
 
 #contentcol a.cta-button:hover {
