@@ -48,7 +48,6 @@
     font-size: 20px;
     line-height: normal;
     margin-bottom: 12px;
-    margin-top: 30px;
 }
 
 #contentcol .campus-map {
@@ -74,6 +73,10 @@
     list-style-type: square;
 }
 
+#contentcol .margin-auto {
+    margin: 0 auto;
+}
+
 #contentcol .vcenter {
     display: inline-block;
     vertical-align: middle;
@@ -87,7 +90,7 @@
 
 @media (max-width: 768px) {
     #contentcol .vcenter {
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     #contentcol .financial-aid {
@@ -148,6 +151,12 @@
 
     #contentcol .call-out .col-md-2 {
         width: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    #contentcol .icon-feature {
+        margin: 0;
     }
 }
 
@@ -270,7 +279,7 @@
 
 #contentcol .ucfacts-sidebar li {
     margin-left: 28px;
-    line-height: normal;
+    line-height: 18px;
     margin-bottom: 21px;
 }
 
@@ -316,6 +325,12 @@
     margin-top: 70px;
 }
 
+@media (max-width: 768px) {
+    #contentcol .diverse-header {
+        margin-top: 70px;
+    }
+}
+
 /* icons */
 
 #contentcol [class$="male"] {
@@ -346,6 +361,13 @@
     border-radius: 4px;
 }
 
+
+@media (max-width: 979px) {
+    #contentcol .cta-button {
+        font-size: 16px;
+    }
+}
+
 #contentcol .cta-button span {
     color: white;
 }
@@ -354,4 +376,8 @@
     background-color: #000;
     color: #fff;
     border-bottom: 1px solid #ccc;
+}
+
+#contentcol .campus-map {
+    margin-bottom: 20px;
 }
