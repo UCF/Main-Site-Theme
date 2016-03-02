@@ -381,3 +381,7 @@
 #contentcol .campus-map {
     margin-bottom: 20px;
 }
+
+body.ie8 #contentcol .campus-map {
+    display: none;
+}
