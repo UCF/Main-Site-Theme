@@ -4,6 +4,10 @@ body {
 
 a {
   color: #600;
+
+  &:hover {
+    color: #e50606;
+  }
 }
 
 pre,

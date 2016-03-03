@@ -165,7 +165,10 @@
     text-decoration: none;
     text-transform: uppercase;
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 0 solid transparent;
       cursor: pointer;
     }
 
