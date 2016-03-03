@@ -1,0 +1,15 @@
+.chart-legend ul {
+    list-style: none;
+
+    li {
+        font-size: 12px;
+        margin-left: 0;
+
+        span {
+            display: inline-block;
+            height: 12px;
+            margin-right: 5px;
+            width: 12px;
+        }
+    }
+}
