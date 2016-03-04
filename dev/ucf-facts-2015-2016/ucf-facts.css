@@ -57,12 +57,15 @@
 
 #contentcol .call-out {
     background-color: #eee;
-    margin-left: 0;
     margin-top: 30px;
 }
 
 #contentcol .call-out.gold {
     background-color: #fef7e1;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px;
 }
 
 #contentcol .call-out h3 {
@@ -175,6 +178,61 @@
 
 #contentcol .number-desc {
     font-weight: bold;
+}
+
+/* call out quote */
+
+#contentcol .call-out-quote {
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+#contentcol blockquote {
+    border-left: 0;
+}
+
+#contentcol blockquote.quote {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-style: italic;
+    padding-left: 0;
+}
+
+#contentcol blockquote.quote:before {
+    display: block;
+    float: left;
+    font-size: 28px;
+    left: -5px;
+    line-height: 38px;
+    position: relative;
+    top: 0;
+}
+
+@media (max-width: 767px) {
+    #contentcol blockquote.quote:before {
+        font-size: 26px;
+        line-height: 36px;
+
+    }
+}
+
+#contentcol blockquote.quote p {
+    font-size: 28px;
+    line-height: 38px;
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    #contentcol blockquote.quote p {
+        font-size: 20px;
+        line-height: 36px;
+    }
+}
+
+#contentcol blockquote.quote small {
+    color: #000;
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 10px;
 }
 
 /* Tables */
