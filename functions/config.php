@@ -296,6 +296,20 @@ Config::$theme_settings = array(
 			'default'     => 'http://graduatecatalog.ucf.edu',
 			'value'       => $theme_options['grad_catalog_url'],
 		)),
+		new TextField(array(
+			'name'        => 'Graduate Request Degree Info Button Copy',
+			'id'          => THEME_OPTIONS_NAME.'[grad_degree_info_copy]',
+			'description' => 'Copy for the graduate request degree info button.',
+			'default'     => 'Request Degree Info',
+			'value'       => $theme_options['grad_degree_info_copy'],
+		)),
+		new TextField(array(
+			'name'        => 'Graduate Request Degree Info Button URL',
+			'id'          => THEME_OPTIONS_NAME.'[grad_degree_info_url]',
+			'description' => 'URL for the graduate request degree info website.',
+			'default'     => 'https://ww2.graduate.ucf.edu/inquiry/',
+			'value'       => $theme_options['grad_degree_info_url'],
+		)),
 		new TextareaField(array(
 			'name'        => 'Tuition Value Message',
 			'id'          => THEME_OPTIONS_NAME.'[tuition_value_message]',

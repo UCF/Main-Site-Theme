@@ -94,6 +94,11 @@
 						Visit Program Website
 					</a>
 					<?php endif; ?>
+					<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
+					<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-default btn-degree-info">
+						<?php echo $theme_options['grad_degree_info_copy'] ?>
+					</a>
+					<?php endif; ?>
 				</div>
 
 				<!-- Degree description -->
@@ -130,6 +135,11 @@
 				<?php if ( $post->degree_website ): ?>
 				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 					Visit Program Website
+				</a>
+				<?php endif; ?>
+				<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
+				<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-default btn-degree-info">
+					<?php echo $theme_options['grad_degree_info_copy'] ?>
 				</a>
 				<?php endif; ?>
 			</div>
