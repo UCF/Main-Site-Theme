@@ -594,22 +594,23 @@ var statusAlertCheck = function ($) {
             contentChanged = true;
           }
           if(existing_type.hasClass(newest.type) === false) {
-            existing_type.attr('class','alert-icon ' + newest.type);
-            contentChanged = true;
-          }
-          if(existing_icon.hasClass(newest.type) === false) {
-            existing_icon.attr('class','alert-icon ' + newest.type);
             switch (newest.type) {
               case 'alert':
               case 'weather':
               case 'general':
               case 'police':
-                existing_type.attr('class', 'alert alert-danger');
+                existing_type.attr('class', 'alert alert-danger alert-block');
                 break;
               case 'message':
-                existing_type.attr('class', 'alert alert-info');
+                existing_type.attr('class', 'alert alert-info alert-block');
                 break;
             }
+            contentChanged = true;
+            contentChanged = true;
+          }
+
+          if(existing_icon.hasClass(newest.type) === false) {
+            existing_icon.attr('class','alert-icon ' + newest.type);
             contentChanged = true;
           }
 
