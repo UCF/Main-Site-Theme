@@ -86,17 +86,17 @@
 				</div>
 
 				<div class="mobile-degree-cta visible-xs">
-					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-success">
+					<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
+					<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-success btn-degree-info">
+						<?php echo $theme_options['grad_degree_info_copy'] ?>
+					</a>
+					<?php endif; ?>
+					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-primary">
 						View Catalog
 					</a>
 					<?php if ( $post->degree_website ): ?>
 					<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 						Visit Program Website
-					</a>
-					<?php endif; ?>
-					<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
-					<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-default btn-degree-info">
-						<?php echo $theme_options['grad_degree_info_copy'] ?>
 					</a>
 					<?php endif; ?>
 				</div>
@@ -129,17 +129,17 @@
 			<!-- Sidebar content -->
 
 			<div class="hidden-xs">
-				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-success">
+				<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
+				<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-success btn-degree-info">
+					<?php echo $theme_options['grad_degree_info_copy'] ?>
+				</a>
+				<?php endif; ?>
+				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-primary">
 					View Catalog
 				</a>
 				<?php if ( $post->degree_website ): ?>
 				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 					Visit Program Website
-				</a>
-				<?php endif; ?>
-				<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
-				<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-default btn-degree-info">
-					<?php echo $theme_options['grad_degree_info_copy'] ?>
 				</a>
 				<?php endif; ?>
 			</div>
