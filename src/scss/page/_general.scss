@@ -301,6 +301,17 @@
       width: 530px;
     }
   }
+
+  .btn-default.btn-degree-info {
+      background-color: #ffc900;
+      color: #000;
+
+      &:hover {
+        background-color: #000;
+        color: #fff;
+      }
+  }
+
 }
 
 #sidebar_r_facebook_wrap > iframe {
