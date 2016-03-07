@@ -108,20 +108,15 @@
 
 // Overide mobile colors to match desktop
 #degree-single {
-    #contentcol .mobile-degree-cta a.btn-success {
+    #contentcol .mobile-degree-cta a.btn-success,
+    #contentcol .mobile-degree-cta a.btn-primary {
         color: #fff;
     }
 
     #contentcol .mobile-degree-cta a.btn-default {
         color: #000;
     }
-
-    #contentcol .mobile-degree-cta a.btn-degree-info,
-    #sidebar_right .btn-degree-info {
-        @include gold-button;
-    }
 }
-
 
 // Subpages - Center Column (Content Column)
 #contentcol {
@@ -281,20 +276,6 @@
     }
   }
 
-  // Mobile button styles
-  .mobile-degree-cta {
-    a.btn-success {
-        color: #fff;
-    }
-
-    a.btn-default {
-        color: #000;
-    }
-
-    a.btn-degree-info {
-        @include gold-button;
-    }
-  }
 
 }
 
@@ -321,10 +302,6 @@
 
   .sidebar_title {
     color: #777;
-  }
-
-  .btn-degree-info {
-    @include gold-button;
   }
 
   .modal-body iframe,
