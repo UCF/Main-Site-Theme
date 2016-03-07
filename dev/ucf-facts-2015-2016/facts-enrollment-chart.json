@@ -1,0 +1,32 @@
+[
+    {
+        "value": 54513,
+        "color": "#ffc904",
+        "highlight": "#ffdd18",
+        "label": "Undergraduate"
+    },
+    {
+        "value": 8031,
+        "color": "#80be1f",
+        "highlight": "#94d233",
+        "label": "Graduate"
+    },
+    {
+        "value": 7981,
+        "color": "#7560a3",
+        "highlight": "#8974b7",
+        "label": "Transfer"
+    },
+    {
+        "value": 6618,
+        "color": "#42758a",
+        "highlight": "#56899e",
+        "label": "Freshman"
+    },
+    {
+        "value": 458,
+        "color": "#eb595c",
+        "highlight": "#ff6d70",
+        "label": "Medical Professional"
+    }
+]

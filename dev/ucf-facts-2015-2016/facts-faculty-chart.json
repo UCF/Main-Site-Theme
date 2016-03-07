@@ -1,0 +1,26 @@
+[
+    {
+        "value": 78,
+        "color": "#ffc904",
+        "highlight": "#ffdd18",
+        "label": "Faculty with Doctoral Degrees"
+    },
+    {
+        "value": 44,
+        "color": "#80BE1F",
+        "highlight": "#94d233",
+        "label": "Faculty Tenured "
+    },
+    {
+        "value": 40,
+        "color": "#7560A3",
+        "highlight": "#8974b7",
+        "label": "Faculty Non-Tenured Track"
+    },
+    {
+        "value": 16,
+        "color": "#42758A",
+        "highlight": "#56899e",
+        "label": "Faculty Non-Tenured on Track"
+    }
+]
