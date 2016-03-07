@@ -106,6 +106,22 @@
   }
 }
 
+// Overide mobile colors to match desktop
+#degree-single {
+    #contentcol .mobile-degree-cta a.btn-success {
+        color: #fff;
+    }
+
+    #contentcol .mobile-degree-cta a.btn-default {
+        color: #000;
+    }
+
+    #contentcol .mobile-degree-cta a.btn-degree-info,
+    #sidebar_right .btn-degree-info {
+        @include gold-button;
+    }
+}
+
 
 // Subpages - Center Column (Content Column)
 #contentcol {
@@ -264,6 +280,22 @@
       display: none;
     }
   }
+
+  // Mobile button styles
+  .mobile-degree-cta {
+    a.btn-success {
+        color: #fff;
+    }
+
+    a.btn-default {
+        color: #000;
+    }
+
+    a.btn-degree-info {
+        @include gold-button;
+    }
+  }
+
 }
 
 
@@ -291,6 +323,10 @@
     color: #777;
   }
 
+  .btn-degree-info {
+    @include gold-button;
+  }
+
   .modal-body iframe,
   .modal-body embed,
   .modal-body object {
@@ -300,16 +336,6 @@
     @include body-prefix('.ie8') {
       width: 530px;
     }
-  }
-
-  .btn-default.btn-degree-info {
-      background-color: #ffc900;
-      color: #000;
-
-      &:hover {
-        background-color: #000;
-        color: #fff;
-      }
   }
 
 }

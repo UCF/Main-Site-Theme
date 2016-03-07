@@ -51,3 +51,16 @@
   font-style: $font-style;
   font-weight: #{$weight}00;
 }
+
+// Gold Button Style
+@mixin gold-button {
+        background-color: #ffc900;
+        color: #000;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: #000;
+            color: #fff;
+        }
+}
