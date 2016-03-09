@@ -25,10 +25,15 @@ h1 {
  */
 
 #contentcol {
+  color: #000;
   font-size: 16px;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   line-height: 1.4;
+}
+
+#contentcol a {
+  border-bottom: 0 solid transparent;
 }
 
 #contentcol p {
@@ -40,7 +45,7 @@ h1 {
   font-weight: normal;
   line-height: 1.1;
   margin-bottom: 10px;
-  margin-top: 15px;
+  margin-top: 0;
 }
 
 #contentcol blockquote {
@@ -52,7 +57,9 @@ h1 {
   padding: 0;
 }
 
-#contentcol blockquote small {
+#contentcol blockquote footer,
+#contentcol blockquote small,
+#contentcol blockquote cite {
   color: #000;
   font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B";
   font-style: italic;
@@ -115,7 +122,7 @@ body.ie8 #contentcol object {
 }
 
 #contentcol .text-bigger {
-  font-size: 46px;
+  font-size: 42px;
   line-height: 1;
 }
 
@@ -192,6 +199,32 @@ body.ie8 #contentcol object {
   font-size: 14px;
 }
 
+#contentcol .border-left {
+  border-left: 2px dotted #000;
+  padding-left: 30px;
+}
+
+#contentcol .border-right {
+  border-right: 2px dotted #000;
+  padding-right: 30px;
+}
+
+#contentcol .border-bottom {
+  border-bottom: 2px dotted #000;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+}
+
+#contentcol .border-bottom-short {
+  border-bottom: 2px dotted #000;
+  margin-bottom: 22px;
+  padding-bottom: 15px;
+}
+
+#contentcol .heading-mtop {
+  margin-top: 15px;
+}
+
 
 /*
  * Article-specific overrides
@@ -209,8 +242,8 @@ body.ie8 #contentcol object {
 
 #big-debt-free .debt-chart-outer {
   display: table;
-  height: 300px;
-  margin: 20px auto 0;
+  height: 265px;
+  margin: 20px auto 10px;
   max-width: 400px;
   width: 100%;
 }
@@ -286,7 +319,7 @@ body.ie8 #contentcol object {
 }
 
 #big-value .big-value-inner {
-  padding: 20% 30% 0 0;
+  padding: 30% 30% 0 0;
 }
 
 
@@ -326,8 +359,36 @@ body.ie8 #contentcol object {
   border-top: 0 solid transparent;
 }
 
+#big-quality .laptop {
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 180px;
+  padding: 25px 0 0;
+}
+
+
+/* World-Class Faculty */
+
+#big-faculty {
+  margin-top: -95px;
+}
+
 
 /* Washington Post quote */
+
+#big-wp-quote {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 40px;
+}
+
+#big-wp-quote blockquote footer {
+  margin-top: 20px;
+}
 
 #big-wp-quote blockquote footer::before {
   content: '';
@@ -353,6 +414,19 @@ body.ie8 #contentcol object {
 
 /* Student-Athlete Success */
 
+#big-athlete-success {
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  min-height: 340px;
+}
+
+#big-athlete-success .article-inner {
+  float: right;
+  padding-bottom: 18%;
+  width: 50%;
+}
+
 #big-athlete-success .feature-desc {
   letter-spacing: .04em !important;
 }
@@ -364,3 +438,30 @@ body.ie8 #contentcol object {
   line-height: 1.2;
   margin-bottom: 15px;
 }
+
+
+/* Mentor Magnetism */
+
+#big-mentor-magnetism {
+  background-color: #DBBE9C;
+  font-size: 18px;
+  line-height: 1.65;
+  margin-top: 30px;
+}
+
+#big-mentor-magnetism h2 {
+  margin-bottom: 25px;
+}
+
+#big-mentor-magnetism blockquote {
+  margin-top: 25px;
+}
+
+#big-mentor-magnetism .small {
+  font-size: 18px;
+}
+
+#big-mentor-magnetism .article-inner {
+  padding: 50px 70px;
+}
+
