@@ -11,12 +11,30 @@ h1 {
   margin-bottom: 8px;
 }
 
+@media (max-width: 991px) {
+  h1 {
+    font-size: 84px;
+  }
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 11vw;
+  }
+}
+
 .page-media-header .subtitle {
   font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B";
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
   letter-spacing: .25em;
+}
+
+@media (max-width: 767px) {
+  .page-media-header .subtitle {
+    font-size: 3vw;
+  }
 }
 
 
@@ -30,6 +48,12 @@ h1 {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   line-height: 1.4;
+}
+
+@media (max-width: 767px) {
+  #contentcol {
+    font-size: 14px;
+  }
 }
 
 #contentcol a {
@@ -48,6 +72,13 @@ h1 {
   margin-top: 0;
 }
 
+@media (max-width: 767px) {
+  #contentcol h2 {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+}
+
 #contentcol blockquote {
   color: #000;
   border: 0;
@@ -55,6 +86,12 @@ h1 {
   font-style: italic;
   line-height: 1.2;
   padding: 0;
+}
+
+@media (max-width: 767px) {
+  #contentcol blockquote {
+    font-size: 24px;
+  }
 }
 
 #contentcol blockquote footer,
@@ -140,6 +177,12 @@ body.ie8 #contentcol object {
   font-size: 20px;
 }
 
+@media (max-width: 767px) {
+  #contentcol .lead {
+    font-size: 18px;
+  }
+}
+
 #contentcol .lead-endcap {
   display: block;
   font-size: 250%;
@@ -199,26 +242,76 @@ body.ie8 #contentcol object {
   font-size: 14px;
 }
 
-#contentcol .border-left {
+.ie8 #contentcol .md-border-left {
   border-left: 2px dotted #000;
   padding-left: 30px;
 }
 
-#contentcol .border-right {
+.ie8 #contentcol .md-border-right {
   border-right: 2px dotted #000;
   padding-right: 30px;
 }
 
-#contentcol .border-bottom {
+.ie8 #contentcol .md-border-bottom {
   border-bottom: 2px dotted #000;
   margin-bottom: 20px;
   padding-bottom: 15px;
 }
 
-#contentcol .border-bottom-short {
-  border-bottom: 2px dotted #000;
-  margin-bottom: 22px;
-  padding-bottom: 15px;
+@media (min-width: 992px) {
+  #contentcol .md-border-left {
+    border-left: 2px dotted #000;
+    padding-left: 30px;
+  }
+
+  #contentcol .md-border-right {
+    border-right: 2px dotted #000;
+    padding-right: 30px;
+  }
+
+  #contentcol .md-border-bottom {
+    border-bottom: 2px dotted #000;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #contentcol .sm-border-left {
+    border-left: 2px dotted #000;
+    padding-left: 30px;
+  }
+
+  #contentcol .sm-border-right {
+    border-right: 2px dotted #000;
+    padding-right: 30px;
+  }
+
+  #contentcol .sm-border-bottom {
+    border-bottom: 2px dotted #000;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+
+  #contentcol .sm-border-top {
+    border-top: 2px dotted #000;
+    margin-top: 20px;
+    padding-top: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  #contentcol .xs-border-bottom {
+    border-bottom: 2px dotted #000;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+
+  #contentcol .xs-border-top {
+    border-top: 2px dotted #000;
+    margin-top: 20px;
+    padding-top: 15px;
+  }
 }
 
 #contentcol .heading-mtop {
@@ -318,8 +411,20 @@ body.ie8 #contentcol object {
   min-height: 350px;
 }
 
-#big-value .big-value-inner {
+#big-value .article-inner {
   padding: 30% 30% 0 0;
+}
+
+@media (max-width: 767px) {
+  #big-value .article-inner {
+    padding: 20% 32% 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  #big-value .article-inner {
+    padding: 30% 38% 0 0;
+  }
 }
 
 
@@ -368,13 +473,6 @@ body.ie8 #contentcol object {
 }
 
 
-/* World-Class Faculty */
-
-#big-faculty {
-  margin-top: -95px;
-}
-
-
 /* Washington Post quote */
 
 #big-wp-quote {
@@ -386,8 +484,20 @@ body.ie8 #contentcol object {
   padding: 40px;
 }
 
+@media (max-width: 767px) {
+  #big-wp-quote {
+    padding: 30px 30px 50px;
+  }
+}
+
 #big-wp-quote blockquote footer {
   margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+  #big-wp-quote blockquote footer {
+    margin-top: 10px;
+  }
 }
 
 #big-wp-quote blockquote footer::before {
@@ -411,6 +521,36 @@ body.ie8 #contentcol object {
   width: 250px;
 }
 
+@media (max-width: 767px) {
+  #big-wp-quote .washington-post-logo {
+    margin-bottom: 0;
+    width: 200px;
+  }
+}
+
+
+/* World-Class Faculty */
+
+#big-faculty {
+  margin-top: -95px;
+}
+
+@media (max-width: 991px) {
+  #big-faculty .heading-mtop {
+    margin-top: 90px;
+  }
+}
+
+@media (max-width: 767px) {
+  #big-faculty {
+    margin-top: 0;
+  }
+
+  #big-faculty .heading-mtop {
+    margin-top: 15px;
+  }
+}
+
 
 /* Student-Athlete Success */
 
@@ -421,10 +561,37 @@ body.ie8 #contentcol object {
   min-height: 340px;
 }
 
+@media (max-width: 991px) {
+  #big-athlete-success {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 767px) {
+  #big-athlete-success {
+    background-image: none !important;  /* necessary to override inline css */
+    min-height: none;
+  }
+}
+
 #big-athlete-success .article-inner {
   float: right;
-  padding-bottom: 18%;
+  padding-bottom: 22%;
   width: 50%;
+}
+
+@media (max-width: 991px) {
+  #big-athlete-success .article-inner {
+    padding-top: 3%;
+  }
+}
+
+@media (max-width: 767px) {
+  #big-athlete-success .article-inner {
+    padding-bottom: 0;
+    padding-top: 0;
+    width: 100%;
+  }
 }
 
 #big-athlete-success .feature-desc {
@@ -439,6 +606,16 @@ body.ie8 #contentcol object {
   margin-bottom: 15px;
 }
 
+@media (max-width: 991px) {
+  #big-this-is-ucf {
+    text-align: center;
+  }
+
+  #big-this-is-ucf li span {
+    display: block;
+  }
+}
+
 
 /* Mentor Magnetism */
 
@@ -449,8 +626,28 @@ body.ie8 #contentcol object {
   margin-top: 30px;
 }
 
-#big-mentor-magnetism h2 {
+@media (max-width: 991px) {
+  #big-mentor-magnetism {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  #big-mentor-magnetism {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+}
+
+#big-mentor-magnetism .text-biggest {
   margin-bottom: 25px;
+}
+
+@media (max-width: 767px) {
+  #big-mentor-magnetism .text-biggest {
+    font-size: 42px !important;
+    margin-bottom: 15px;
+  }
 }
 
 #big-mentor-magnetism blockquote {
@@ -461,7 +658,25 @@ body.ie8 #contentcol object {
   font-size: 18px;
 }
 
+@media (max-width: 767px) {
+  #big-mentor-magnetism .small {
+    font-size: 14px;
+  }
+}
+
 #big-mentor-magnetism .article-inner {
   padding: 50px 70px;
+}
+
+@media (max-width: 767px) {
+  #big-mentor-magnetism .article-inner {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 767px) {
+  #big-mentor-magnetism .text-big {
+    font-size: 22px;
+  }
 }
 
