@@ -118,7 +118,7 @@
 					<?php the_content(); ?>
 				<?php } ?>
 				<div class="social-wrap">
-					<?php echo display_social( get_permalink( $post->ID ), $post->post_title ); ?>
+					<?php echo display_social( get_permalink( $post->ID ), $post->post_title, 'UCF Degree: ' . $post->post_title, 'Check out this degree at the University of Central Florida.' ); ?>
 				</div>
 
 				<?php echo display_degree_callout( $post->ID ); ?>
