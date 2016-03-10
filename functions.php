@@ -2968,4 +2968,16 @@ function custom_body_classes( $classes ) {
 }
 add_filter( 'body_class', 'custom_body_classes' );
 
+
+/**
+ * Enqueues page-specific javascript files.
+ **/
+function enqueue_page_js() {
+	global $post;
+	if ( $post && $post->post_type == 'page' && $js = get_post_meta( $post->ID, 'page_javascript', true ) ) {
+		Config::add_script( wp_get_attachment_url( $js ) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_page_js' );
+
 ?>
