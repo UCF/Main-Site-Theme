@@ -74,4 +74,9 @@
         $(this).addClass('inview');
       });
   }
+  else {
+    // Applying this class to the markup without js will result in the fade effect
+    // not executing soon enough--so we always add it via js.
+    $('.embed-fadein').addClass('inview');
+  }
 })();
