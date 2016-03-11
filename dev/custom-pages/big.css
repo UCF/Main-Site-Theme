@@ -15,6 +15,7 @@ h1 {
 @media (max-width: 991px) {
   h1 {
     font-size: 84px;
+    margin-top: 20px;
   }
 }
 
@@ -25,7 +26,19 @@ h1 {
 }
 
 .page-media-header {
-  height: 370px;
+  height: auto;
+}
+
+@media (max-width: 991px) {
+  .page-media-header {
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-media-header {
+    height: auto;
+  }
 }
 
 .page-media-header .subtitle {
@@ -34,11 +47,30 @@ h1 {
   font-style: normal;
   font-weight: 700;
   letter-spacing: .25em;
+  margin-bottom: 25px;
 }
 
 @media (max-width: 767px) {
   .page-media-header .subtitle {
     font-size: 3vw;
+    margin-bottom: 15px;
+  }
+}
+
+.page-media-container {
+  padding-bottom: 50px;
+  position: static;
+}
+
+@media (max-width: 991px) {
+  .page-media-container {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .page-media-container {
+    padding-bottom: 20px;
   }
 }
 
@@ -64,6 +96,13 @@ h1 {
 
 #contentcol a {
   border-bottom: 0 solid transparent;
+}
+
+#contentcol a:hover,
+#contentcol a:active,
+#contentcol a:focus {
+  border-bottom: 0 solid transparent;
+  text-decoration: underline;
 }
 
 #contentcol p {
@@ -575,12 +614,12 @@ body.ie8 #contentcol object {
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  min-height: 340px;
+  min-height: 485px;
 }
 
 @media (max-width: 991px) {
   #big-athlete-success {
-    min-height: 400px;
+    min-height: 555px;
   }
 }
 
@@ -594,7 +633,7 @@ body.ie8 #contentcol object {
 #big-athlete-success .article-inner {
   float: right;
   padding-bottom: 22%;
-  width: 50%;
+  width: 45%;
 }
 
 @media (max-width: 991px) {
@@ -638,8 +677,6 @@ body.ie8 #contentcol object {
 
 #big-mentor-magnetism {
   background-color: #DBBE9C;
-  font-size: 18px;
-  line-height: 1.65;
   margin-top: 30px;
 }
 
@@ -649,30 +686,12 @@ body.ie8 #contentcol object {
   }
 }
 
-@media (max-width: 767px) {
-  #big-mentor-magnetism {
-    font-size: 15px;
-    line-height: 1.5;
-  }
-}
-
-#big-mentor-magnetism .text-biggest {
-  margin-bottom: 25px;
-}
-
-@media (max-width: 767px) {
-  #big-mentor-magnetism .text-biggest {
-    font-size: 42px !important;
-    margin-bottom: 15px;
-  }
-}
-
 #big-mentor-magnetism blockquote {
   margin-top: 25px;
 }
 
 #big-mentor-magnetism .small {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 @media (max-width: 767px) {
