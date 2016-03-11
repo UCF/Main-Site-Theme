@@ -67,5 +67,11 @@
             }
       });
     });
+
+    $('.embed-fadein')
+      .removeClass('inview')
+      .one('inview', function() {
+        $(this).addClass('inview');
+      });
   }
 })();
