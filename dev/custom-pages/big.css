@@ -96,12 +96,16 @@ h1 {
 
 #contentcol a {
   border-bottom: 0 solid transparent;
+  color: #08c;
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
 }
 
 #contentcol a:hover,
 #contentcol a:active,
 #contentcol a:focus {
   border-bottom: 0 solid transparent;
+  color: #08c;
   text-decoration: underline;
 }
 
@@ -243,7 +247,10 @@ body.ie8 #contentcol object {
   color: #aaa;
 }
 
-#contentcol .text-lightest {
+#contentcol .text-lightest,
+#contentcol a.text-lightest:hover,
+#contentcol a.text-lightest:active,
+#contentcol a.text-lightest:focus {
   color: #fff;
 }
 
@@ -437,18 +444,10 @@ body.ie8 #contentcol object {
   height: 48%;
 }
 
-/*#big-debt-free .debt-chart-bar-primary.inview {
-  height: 48%;
-}*/
-
 #big-debt-free .debt-chart-bar-secondary {
   background-color: #777;
   height: 33%;
 }
-
-// #big-debt-free .debt-chart-bar-secondary.inview {
-//   height: 33%;
-// }
 
 
 /* U.S. News Most Innovative */
@@ -686,6 +685,13 @@ body.ie8 #contentcol object {
   }
 }
 
+#big-mentor-magnetism h2 a,
+#big-mentor-magnetism h2 a:hover,
+#big-mentor-magnetism h2 a:active,
+#big-mentor-magnetism h2 a:focus {
+  color: #000;
+}
+
 #big-mentor-magnetism blockquote {
   margin-top: 25px;
 }
@@ -713,6 +719,16 @@ body.ie8 #contentcol object {
 @media (max-width: 767px) {
   #big-mentor-magnetism .text-big {
     font-size: 22px;
+  }
+}
+
+#big-mentor-magnetism .text-bigger {
+  font-size: 36px;
+}
+
+@media (max-width: 767px) {
+  #big-mentor-magnetism .text-bigger {
+    font-size: 26px;
   }
 }
 
