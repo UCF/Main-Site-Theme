@@ -752,7 +752,7 @@ function sc_phonebook_search($attrs) {
 				if (
 					( $result->email !== null ) &&
 					( $_result->email !== null ) &&
-					( $result != $_result ) && 
+					( $result != $_result ) &&
 					( $_result->email == $result->email ) )
 					{
 					$_result->secondary[] = $result;
@@ -1258,4 +1258,28 @@ function sc_azindex_navbar( $attr ) {
 	return ob_get_clean();
 }
 add_shortcode( 'azindex-navbar', 'sc_azindex_navbar' );
+
+
+/**
+ * Displays social media buttons for sharing a post.
+ **/
+function sc_social_share_buttons( $atts, $content='' ) {
+	global $post;
+	$url = get_permalink( $post->ID );
+	$title = $post->post_title;
+
+	$atts = shortcode_atts(
+		array(
+			'subject_line' => '',
+			'email_body' => ''
+		),
+		$atts,
+		'social-share-buttons'
+	);
+
+	return display_social( $url, $title, $atts['subject_line'], $atts['email_body'] );
+}
+
+add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
+
 ?>

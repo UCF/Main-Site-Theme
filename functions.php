@@ -2777,27 +2777,34 @@ add_filter( 'manage_program_types_custom_column', 'program_types_render_columns'
 * @return string
 * @author Jo Dickson
 **/
-function display_social($url, $title) {
-	$tweet_title = urlencode('UCF Degree: '.$title);
-	ob_start(); ?>
+function display_social( $url, $title, $subject_line='', $email_body='' ) {
+	if ( !$subject_line ) {
+		$subject_line = 'ucf.edu: ' . $title;
+	}
+	if ( !$email_body ) {
+		$email_body = 'Check out this page on ucf.edu.';
+	}
+
+	ob_start();
+?>
 	<aside class="social clearfix">
-		<a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this story on Facebook">
+		<a class="share-facebook" target="_blank" data-button-target="<?php echo $url; ?>" href="http://www.facebook.com/sharer.php?u=<?php echo $url; ?>" title="Like this on Facebook">
 			Like "<?php echo $title; ?>" on Facebook
 		</a>
-		<a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $tweet_title; ?>&url=<?php echo $url; ?>" title="Tweet this story">
+		<a class="share-twitter" target="_blank" data-button-target="<?php echo $url; ?>" href="https://twitter.com/intent/tweet?text=<?php echo $subject_line; ?>&url=<?php echo $url; ?>" title="Tweet this">
 			Tweet "<?php echo $title; ?>" on Twitter
 		</a>
-		<a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this story on Google+">
+		<a class="share-googleplus" target="_blank" data-button-target="<?php echo $url; ?>" href="https://plus.google.com/share?url=<?php echo $url; ?>" title="Share this on Google+">
 			Share "<?php echo $title; ?>" on Google+
 		</a>
-		<a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $tweet_title; ?>" title="Share this story on Linkedin">
+		<a class="share-linkedin" target="_blank" data-button-target="<?php echo $url; ?>" href="https://www.linkedin.com/shareArticle?mini=true&url=<?php echo $url; ?>&title=<?php echo $subject_line; ?>" title="Share this on Linkedin">
 			Share "<?php echo $title; ?>" on Linkedin
 		</a>
-		<a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=UCF Degree: <?php echo $title; ?>&amp;body=Check out this degree at the University of Central Florida.%0A%0A<?php echo $url; ?>" title="Share this story in an email">
+		<a class="share-email" target="_blank" data-button-target="<?php echo $url; ?>" href="mailto:?subject=<?php echo $subject_line; ?>&amp;body=<?php echo $email_body; ?>%0A%0A<?php echo $url; ?>" title="Share this in an email">
 			Share "<?php echo $title; ?>" in an email
 		</a>
 	</aside>
-	<?php
+<?php
 	return ob_get_clean();
 }
 
@@ -2960,5 +2967,17 @@ function custom_body_classes( $classes ) {
 	return $classes;
 }
 add_filter( 'body_class', 'custom_body_classes' );
+
+
+/**
+ * Enqueues page-specific javascript files.
+ **/
+function enqueue_page_js() {
+	global $post;
+	if ( $post && $post->post_type == 'page' && $js = get_post_meta( $post->ID, 'page_javascript', true ) ) {
+		Config::add_script( wp_get_attachment_url( $js ) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_page_js' );
 
 ?>

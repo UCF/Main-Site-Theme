@@ -485,6 +485,12 @@ class Page extends CustomPostType {
 					'type' => 'file',
 				),
 				array(
+					'name' => 'JavaScript File',
+					'desc' => '',
+					'id' => $prefix.'javascript',
+					'type' => 'file',
+				),
+				array(
 					'name' => 'Use Webfonts On This Page',
 					'desc' => '(Optional) Check this box to include webfonts from Cloud.Typography.  Requires a Cloud.Typography CSS key to be set in Theme Options.',
 					'id' => $prefix.'use_webfonts',
