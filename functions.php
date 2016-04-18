@@ -1685,11 +1685,11 @@ function degree_search_with_keywords( $search, &$wp_query ) {
 			return $search;
 		}
 
-		$search_term = $wp_query->query_vars[ 's' ];
+		$search_term = $wpdb->esc_like( $wp_query->query_vars[ 's' ] );
 
-		$search = " AND (
-			($wpdb->posts.post_title LIKE '%$search_term%')
-			OR ($wpdb->posts.post_content LIKE '%$search_term%')
+		$search = $wpdb->prepare( " AND (
+			($wpdb->posts.post_title LIKE %s)
+			OR ($wpdb->posts.post_content LIKE %s)
 			OR EXISTS
 			(
 				SELECT * FROM $wpdb->terms
@@ -1699,9 +1699,9 @@ function degree_search_with_keywords( $search, &$wp_query ) {
 					ON $wpdb->term_relationships.term_taxonomy_id = $wpdb->term_taxonomy.term_taxonomy_id
 				WHERE taxonomy = 'degree_keywords'
 					AND object_id = $wpdb->posts.ID
-					AND $wpdb->terms.name LIKE '%$search_term%'
+					AND $wpdb->terms.name LIKE %s
 			)
-		)";
+		)", $search_term, $search_term, $search_term);
 	}
 
 	return $search;
@@ -1723,8 +1723,6 @@ function posts_array_diff( $post_1, $post_2 ) {
  * Handles the retrieval of Degree posts from WordPress for the Degree Search.
  **/
 function fetch_degree_data( $params ) {
-	global $wpdb;
-
 	$use_suggestions = false;
 	$posts_all = $posts_suggested = array();
 	$args = array(
@@ -1739,7 +1737,7 @@ function fetch_degree_data( $params ) {
 
 	if ( $params ) {
 		if ( isset( $params['search-query'] ) ) {
-			$args['s'] = $wpdb->esc_like( htmlspecialchars( urldecode( $params['search-query'] ) ) );
+			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
 			$use_suggestions = true;
 		}
 
