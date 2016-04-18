@@ -1723,6 +1723,8 @@ function posts_array_diff( $post_1, $post_2 ) {
  * Handles the retrieval of Degree posts from WordPress for the Degree Search.
  **/
 function fetch_degree_data( $params ) {
+	global $wpdb;
+
 	$use_suggestions = false;
 	$posts_all = $posts_suggested = array();
 	$args = array(
@@ -1737,7 +1739,7 @@ function fetch_degree_data( $params ) {
 
 	if ( $params ) {
 		if ( isset( $params['search-query'] ) ) {
-			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
+			$args['s'] = $wpdb->esc_like( htmlspecialchars( urldecode( $params['search-query'] ) ) );
 			$use_suggestions = true;
 		}
 
