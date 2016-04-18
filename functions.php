@@ -1685,7 +1685,7 @@ function degree_search_with_keywords( $search, &$wp_query ) {
 			return $search;
 		}
 
-		$search_term = $wpdb->esc_like( $wp_query->query_vars[ 's' ] );
+		$search_term = '%'.$wpdb->esc_like( $wp_query->query_vars[ 's' ] ).'%';
 
 		$search = $wpdb->prepare( " AND (
 			($wpdb->posts.post_title LIKE %s)
