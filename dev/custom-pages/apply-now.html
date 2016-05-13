@@ -5,24 +5,43 @@
   <div class="row">
     <div class="col-sm-7 col-md-8">
 
-      <div class="panel-group application-pulldowns" id="js-application-pulldowns" role="tablist" aria-multiselectable="true">
+      <div class="panel-group" id="js-application-pulldowns" role="tablist" aria-multiselectable="true">
         <div class="panel">
           <div class="panel-heading" role="tab" id="js-pulldown-undergraduate-toggle">
-              <a class="application-pulldown-toggle" role="button" data-toggle="collapse" data-parent="#js-application-pulldowns" href="#js-pulldown-undergraduate-panel" aria-expanded="true" aria-controls="js-pulldown-undergraduate-panel">
-                <span class="application-pulldown-title">Undergraduate Applications</span>
-                <ul class="application-pulldown-students list-inline">
-                  <li>Freshmen/First Time in College</li>
-                  <li>Transfers</li>
-                  <li>International</li>
-                  <li>UCF Online</li>
-                </ul>
+              <a class="panel-heading-link collapsed" role="button" data-toggle="collapse" data-parent="#js-application-pulldowns" href="#js-pulldown-undergraduate-panel" aria-expanded="true" aria-controls="js-pulldown-undergraduate-panel">
+                <span class="panel-heading-content">
+                  <span class="application-pulldown-title">Undergraduate Applications</span>
+                  <ul class="application-pulldown-students list-inline hidden-xs">
+                    <li>Freshmen/First Time in College</li>
+                    <li>Transfers</li>
+                    <li>International</li>
+                    <li>UCF Online</li>
+                  </ul>
+                </span>
+                <span class="panel-heading-control">
+                  <span class="panel-heading-control-icon"></span>
+                </span>
               </a>
           </div>
-          <div id="js-pulldown-undergraduate-panel" class="panel-collapse collapse application-pulldown-panel" role="tabpanel" aria-labelledby="js-pulldown-undergraduate-toggle">
+          <div id="js-pulldown-undergraduate-panel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="js-pulldown-undergraduate-toggle">
             <div class="panel-body">
+              <ul class="application-pulldown-students list-inline visible-xs">
+                <li>Freshmen/First Time in College</li>
+                <li>Transfers</li>
+                <li>International</li>
+                <li>UCF Online</li>
+              </ul>
               <div class="row">
-                <div class="col-md-6">
-                  <ul class="list-navigation">
+                <div class="col-md-6 col-md-push-6">
+                  <a class="btn btn-block btn-lg btn-pulldown-primary" href="https://apply.ucf.edu/application/login.aspx?ReturnUrl=%2fapplication%2f%3f%26promo_id%3dUndergradApp_ApplyNow&&promo_id=UndergradApp_ApplyNow">
+                    Start Application <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                  </a>
+                  <a class="btn btn-block btn-lg btn-pulldown-secondary" href="#undergraduate-applications">
+                    More Information
+                  </a>
+                </div>
+                <div class="col-md-6 col-md-pull-6">
+                  <ul class="list-navigation application-pulldown-quicklinks">
                     <li>
                       <a href="http://admissions.ucf.edu/">Undergraduate Admissions</a>
                     </li>
@@ -40,35 +59,46 @@
                     </li>
                   </ul>
                 </div>
-                <div class="col-md-6">
-                  <a class="btn-pulldown-primary" href="https://apply.ucf.edu/application/login.aspx?ReturnUrl=%2fapplication%2f%3f%26promo_id%3dUndergradApp_ApplyNow&&promo_id=UndergradApp_ApplyNow">
-                    Start Application
-                  </a>
-                  <a class="btn-pulldown-secondary" href="#undergraduate-applications">
-                    More Information
-                  </a>
-                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="panel">
           <div class="panel-heading" role="tab" id="js-pulldown-graduate-toggle">
-              <a class="application-pulldown-toggle" role="button" data-toggle="collapse" data-parent="#js-application-pulldowns" href="#js-pulldown-graduate-panel" aria-expanded="false" aria-controls="js-pulldown-graduate-panel">
-                <span class="application-pulldown-title">Graduate Applications</span>
-                <ul class="application-pulldown-students list-inline">
-                  <li>General Admissions</li>
-                  <li>Nondegree</li>
-                  <li>International</li>
-                  <li>UCF Online</li>
-                </ul>
+              <a class="panel-heading-link collapsed" role="button" data-toggle="collapse" data-parent="#js-application-pulldowns" href="#js-pulldown-graduate-panel" aria-expanded="false" aria-controls="js-pulldown-graduate-panel">
+                <span class="panel-heading-content">
+                  <span class="application-pulldown-title">Graduate Applications</span>
+                  <ul class="application-pulldown-students list-inline hidden-xs">
+                    <li>General Admissions</li>
+                    <li>Nondegree</li>
+                    <li>International</li>
+                    <li>UCF Online</li>
+                  </ul>
+                </span>
+                <span class="panel-heading-control">
+                  <span class="panel-heading-control-icon"></span>
+                </span>
               </a>
           </div>
-          <div id="js-pulldown-graduate-panel" class="panel-collapse collapse application-pulldown-panel" role="tabpanel" aria-labelledby="js-pulldown-graduate-toggle">
+          <div id="js-pulldown-graduate-panel" class="panel-collapse collapse" role="tabpanel" aria-labelledby="js-pulldown-graduate-toggle">
             <div class="panel-body">
+              <ul class="application-pulldown-students list-inline visible-xs">
+                <li>General Admissions</li>
+                <li>Nondegree</li>
+                <li>International</li>
+                <li>UCF Online</li>
+              </ul>
               <div class="row">
-                <div class="col-md-6">
-                  <ul class="list-navigation">
+                <div class="col-md-6 col-md-push-6">
+                  <a class="btn btn-block btn-lg btn-pulldown-primary" href="https://application.graduate.ucf.edu/">
+                    Start Application <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                  </a>
+                  <a class="btn btn-block btn-lg btn-pulldown-secondary" href="#graduate-applications">
+                    More Information
+                  </a>
+                </div>
+                <div class="col-md-6 col-md-pull-6">
+                  <ul class="list-navigation application-pulldown-quicklinks">
                     <li>
                       <a href="http://www.admissions.graduate.ucf.edu/">Graduate Admissions</a>
                     </li>
@@ -82,14 +112,6 @@
                       <a href="https://my.ucf.edu/">Check Application Status</a>
                     </li>
                   </ul>
-                </div>
-                <div class="col-md-6">
-                  <a class="btn-pulldown-primary" href="https://application.graduate.ucf.edu/">
-                    Start Application
-                  </a>
-                  <a class="btn-pulldown-secondary" href="#graduate-applications">
-                    More Information
-                  </a>
                 </div>
               </div>
             </div>

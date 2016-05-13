@@ -15,13 +15,17 @@
 
 
 $ucf-header-height: 50px;
-$header-media-desktop-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/04/Apply-Header-Image.jpg';
+$header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/04/Apply-Header-Image-xs.jpg';
+$panel-control-width: 40px;
 
 $black: #000;
 $white: #fff;
 $ucf-gold: #fc0;
 $ucf-gold-light: #ffeb9b;
 $ucf-gold-lighter: #fdf9e8;
+$ucf-gold-dark: #b18e00;
+$ucf-gold-darker: #a68500;
+$ucf-gold-darkest: #786000;
 
 
 
@@ -62,6 +66,29 @@ $ucf-gold-lighter: #fdf9e8;
     line-height: 1.5;
   }
 
+  // Gotham-ize all the things
+  .alert,
+  .badge,
+  .breadcrumb,
+  .btn,
+  .carousel,
+  .collapse,
+  .dropdown,
+  .dropdown-menu,
+  .jumbotron,
+  .label,
+  .list-group,
+  .media,
+  .modal,
+  .nav,
+  .navbar,
+  .pager,
+  .pagination,
+  .panel,
+  .table {
+    @include gotham(4);
+  }
+
   h2,
   .h2,
   h3,
@@ -84,22 +111,42 @@ $ucf-gold-lighter: #fdf9e8;
 
   h3,
   .h3 {
-    font-size: 16px;
+    font-size: 15px;
     margin: 1em 0;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
   }
 
   .text-untransform {
     text-transform: none;
   }
+
+  .list-navigation {
+    line-height: 1.375;
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: .8em;
+    }
+  }
 }
 
 
 .page-media {
+  // Non-mobile-first theme override
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 0;
+    position: static;
+  }
+
   h1 {
     @include archer(8);
     font-size: 15vw;
     line-height: 1;
-    margin: 0.15em 0 0.5em;
+    margin: .15em 0 .5em;
 
     @media (min-width: 480px) {
       font-size: 11vw;
@@ -118,36 +165,221 @@ $ucf-gold-lighter: #fdf9e8;
     color: $black;
   }
 
-  .application-pulldowns {
+  .panel {
+    @include gotham(4);
+    background-color: $ucf-gold;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .panel-heading {
+    padding: 0;
+  }
+
+  .panel-heading-link,
+  .panel-body {
+    padding: 15px 22px;
+  }
+
+  .panel-heading-link {
+    display: block;
+    white-space: nowrap;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &.collapsed {
+      &:hover,
+      &:active,
+      &:focus {
+        .panel-heading-control-icon {
+          border-color: $white;
+          color: $white;
+        }
+      }
+
+      .panel-heading-control-icon {
+        border-color: $ucf-gold-dark;
+        color: $ucf-gold-dark;
+      }
+
+      .panel-heading-control-icon:before {
+        content: "\e252";
+      }
+    }
+  }
+
+  .panel-heading-content,
+  .panel-heading-control {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .panel-heading-content {
+    white-space: normal;
+    width: calc(100% - #{$panel-control-width});
+  }
+
+  .panel-heading-control {
+    text-align: right;
+    width: $panel-control-width;
+  }
+
+  .panel-heading-control-icon {
+    border: 3px solid $white;
+    border-radius: 100%;
+    color: $white;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding: 4px;
+    position: relative;
+    top: 1px;
+
+    &:before {
+      content: "\e253";
+    }
+  }
+
+  .panel-group .panel-heading + .panel-collapse > .list-group,
+  .panel-group .panel-heading + .panel-collapse > .panel-body {
+    border-top: 0 solid transparent;
+  }
+
+  .panel-body {
+    padding-top: 5px;
+  }
+
+  .application-pulldown-title {
+    @include gotham(9);
+    display: block;
+    font-size: 15px;
+    letter-spacing: .05em;
+    line-height: 1.25;
+    text-transform: uppercase;
   }
 
   .application-pulldown-students {
-    display: none;
+    color: $ucf-gold-darkest;
+    font-size: 11px;
+    margin-bottom: 25px;
+    margin-left: -8px;
+
+    @media (min-width: 480px) {
+      font-size: 12px;
+    }
 
     @media (min-width: $screen-sm-min) {
-      display: block;
+      margin-bottom: 0;
+    }
+
+    li {
+      padding-left: 8px;
+      padding-right: 8px;
+      position: relative;
+
+      &:after {
+        content: '•';
+        display: block;
+        right: -5px;
+        position: absolute;
+        top: 0;
+      }
+
+      &:last-child:after {
+        display: none;
+      }
+    }
+  }
+
+  .application-pulldown-quicklinks {
+    @include gotham(7);
+    margin-top: 20px;
+  }
+
+  .btn-pulldown-primary,
+  .btn-pulldown-secondary {
+    @include gotham(7);
+    border-radius: 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    padding: 16px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+
+    &:active {
+      box-shadow: 0;
+    }
+
+    .glyphicon,
+    .fa {
+      font-size: 1.25em;
+      top: .195em;
+    }
+  }
+
+  .btn-pulldown-primary {
+    background-color: $ucf-gold-darker;
+    color: $white;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-darkest;
+    }
+  }
+
+  .btn-pulldown-secondary {
+    border: 2px solid $ucf-gold-darker;
+    color: $ucf-gold-darkest;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-darkest;
+      border-color: $ucf-gold-darkest;
+      color: $white;
     }
   }
 }
 
 .page-media-header {
-  background-position: right top;
-  height: 675px;
-  overflow: visible;
+  height: auto;
+  min-height: 767px;  // allow enough space for pulldown content by default
 
-  @media (min-width: 480px) {
-    height: 767px;
+  // Bg replacement is not written mobile-first because the meta field for
+  // header background images implies/assumes a desktop-size image:
+  @media (max-width: $screen-xs-max) {
+    // scss-lint:disable ImportantRule
+    background-image: url(#{$header-media-xs-url}) !important;
+    // scss-lint:enable ImportantRule
+    background-position: right top;
+    overflow: visible;
+    position: static;
   }
 
-  // scss-lint:disable ImportantRule
   @media (min-width: $screen-sm-min) {
-    background-image: url(#{$header-media-desktop-url}) !important;
-    background-position: center center;
     height: calc(100vh - #{$ucf-header-height});
-    min-height: 600px;  // allow enough space for pulldown content by default
-    overflow: hidden;
   }
-  // scss-lint:enable ImportantRule
+}
+
+.page-media-container {
+  // Non-mobile-first theme override
+  @media (max-width: $screen-xs-max) {
+    padding-top: 74px;
+    position: static;
+  }
 }
 
 
@@ -157,7 +389,7 @@ $ucf-gold-lighter: #fdf9e8;
   }
 
   .section-heading {
-    margin: 1.7em 0;
+    margin: 2.5em 0 1.7em;
     padding-bottom: 14px;
     position: relative;
 
