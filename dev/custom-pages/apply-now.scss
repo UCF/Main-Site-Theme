@@ -16,7 +16,6 @@
 
 $ucf-header-height: 50px;
 $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/04/Apply-Header-Image-xs.jpg';
-$panel-control-width: 40px;
 
 $black: #000;
 $white: #fff;
@@ -179,6 +178,14 @@ $ucf-gold-darkest: #786000;
   .panel-heading-link,
   .panel-body {
     padding: 15px 22px;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 20px 22px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      padding: 26px 22px;
+    }
   }
 
   .panel-heading-link {
@@ -204,6 +211,10 @@ $ucf-gold-darkest: #786000;
       .panel-heading-control-icon {
         border-color: $ucf-gold-dark;
         color: $ucf-gold-dark;
+
+        @media (min-width: $screen-sm-min) {
+          padding: 8px 6px 4px;
+        }
       }
 
       .panel-heading-control-icon:before {
@@ -220,12 +231,28 @@ $ucf-gold-darkest: #786000;
 
   .panel-heading-content {
     white-space: normal;
-    width: calc(100% - #{$panel-control-width});
+    width: calc(100% - 40px);
+
+    @media (min-width: $screen-sm-min) {
+      width: calc(100% - 50px);
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: calc(100% - 60px);
+    }
   }
 
   .panel-heading-control {
     text-align: right;
-    width: $panel-control-width;
+    width: 40px;
+
+    @media (min-width: $screen-sm-min) {
+      width: 50px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: 60px;
+    }
   }
 
   .panel-heading-control-icon {
@@ -243,6 +270,15 @@ $ucf-gold-darkest: #786000;
     position: relative;
     top: 1px;
 
+    @media (min-width: $screen-sm-min) {
+      font-size: 21px;
+      padding: 5px 6px 7px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 26px;
+    }
+
     &:before {
       content: "\e253";
     }
@@ -255,6 +291,10 @@ $ucf-gold-darkest: #786000;
 
   .panel-body {
     padding-top: 5px;
+
+    @media (min-width: $screen-sm-min) {
+      padding-top: 10px;
+    }
   }
 
   .application-pulldown-title {
@@ -264,6 +304,17 @@ $ucf-gold-darkest: #786000;
     letter-spacing: .05em;
     line-height: 1.25;
     text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 18px;
+      line-height: 1.15;
+      margin-bottom: .3em;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 22px;
+      letter-spacing: .1em;
+    }
   }
 
   .application-pulldown-students {
@@ -302,6 +353,10 @@ $ucf-gold-darkest: #786000;
   .application-pulldown-quicklinks {
     @include gotham(7);
     margin-top: 20px;
+
+    @media (min-width: $screen-md-min) {
+      margin-top: 0;
+    }
   }
 
   .btn-pulldown-primary,
@@ -314,7 +369,7 @@ $ucf-gold-darkest: #786000;
     padding: 16px;
     text-transform: uppercase;
 
-    @media (min-width: $screen-sm-min) {
+    @media (min-width: $screen-md-min) {
       font-size: 16px;
     }
 
