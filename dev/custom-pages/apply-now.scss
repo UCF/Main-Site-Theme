@@ -25,6 +25,7 @@ $ucf-gold-lighter: #fdf9e8;
 $ucf-gold-dark: #b18e00;
 $ucf-gold-darker: #a68500;
 $ucf-gold-darkest: #786000;
+$cta-primary-icon-bg: linear-gradient(to bottom, rgba(58, 219, 116, 1) 50%, rgba(57, 209, 109, 1) 51%, rgba(58, 219, 116, 1) 100%);
 
 
 
@@ -46,8 +47,28 @@ $ucf-gold-darkest: #786000;
     line-height: 1.25;
   }
 
+  p {
+    margin-bottom: 1.5em;
+  }
+
   .lead {
     margin: 1em 0 1.7em;
+  }
+
+  .btn-cta-primary {
+    border-bottom: 0;
+
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+
+  .btn-cta-secondary {
+    border-bottom: 3px solid $ucf-gold;
+
+    &:hover {
+      border-bottom: 3px solid $ucf-gold;
+    }
   }
 }
 // scss-lint:enable IdSelector
@@ -118,6 +139,25 @@ $ucf-gold-darkest: #786000;
     }
   }
 
+  h4,
+  .h4 {
+    margin: 1em 0 1.2em;
+  }
+
+  a {
+    transition: color .25s ease-in-out, background-color .25s ease-in-out;
+  }
+
+  ol,
+  ul {
+    margin-bottom: 2em;
+  }
+
+  li {
+    line-height: 1.3;
+    margin-bottom: .8em;
+  }
+
   .text-untransform {
     text-transform: none;
   }
@@ -163,6 +203,7 @@ $ucf-gold-darkest: #786000;
   a:not(.btn) {
     color: $black;
   }
+
 
   .panel {
     @include gotham(4);
@@ -297,6 +338,7 @@ $ucf-gold-darkest: #786000;
     }
   }
 
+
   .application-pulldown-title {
     @include gotham(9);
     display: block;
@@ -332,6 +374,7 @@ $ucf-gold-darkest: #786000;
     }
 
     li {
+      margin-bottom: 2px;
       padding-left: 8px;
       padding-right: 8px;
       position: relative;
@@ -351,7 +394,8 @@ $ucf-gold-darkest: #786000;
   }
 
   .application-pulldown-quicklinks {
-    @include gotham(7);
+    font-weight: 700;
+    margin-bottom: 0;
     margin-top: 20px;
 
     @media (min-width: $screen-md-min) {
@@ -359,11 +403,12 @@ $ucf-gold-darkest: #786000;
     }
   }
 
+
   .btn-pulldown-primary,
   .btn-pulldown-secondary {
-    @include gotham(7);
     border-radius: 0;
     font-size: 14px;
+    font-weight: 700;
     letter-spacing: 1px;
     line-height: 1.2;
     padding: 16px;
@@ -509,6 +554,304 @@ $ucf-gold-darkest: #786000;
 
     @media (min-width: $screen-md-min) {
       font-size: 90px;
+    }
+  }
+
+
+  .table {
+    @media (min-width: $screen-md-min) {
+      font-size: 16px;
+    }
+
+    caption {
+      @include archer(7);
+      color: $black;
+      font-size: 18px;
+      padding-left: 8px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 21px;
+      }
+    }
+
+    > tbody > tr > td,
+    > tbody > tr > th,
+    > tfoot > tr > td,
+    > tfoot > tr > th,
+    > thead > tr > td,
+    > thead > tr > th {
+      border-top: 0 solid transparent;
+    }
+  }
+
+  .table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: $ucf-gold-lighter;
+  }
+
+
+  .deadline-table-key {
+    &:after {
+      content: ':';
+    }
+  }
+
+  .deadline-table-val {
+    @include font-smoothing();
+    font-weight: 600;
+  }
+
+
+  .btn-cta-primary,
+  .btn-cta-secondary {
+    border-radius: 0;
+    display: block;
+    margin: 0 0 3em;
+    padding: 0;
+    white-space: normal;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: 0;
+    }
+  }
+
+  .btn-cta-primary {
+    background-color: $ucf-gold;
+    border: 0;
+
+    @media (min-width: $screen-sm-min) {
+      display: table;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-dark;
+
+      .btn-cta-text {
+        color: $white;
+      }
+    }
+
+    .btn-cta-icon {
+      color: $white;
+      padding: 20px 0 0;
+
+      @media (min-width: $screen-sm-min) {
+        background: $cta-primary-icon-bg;
+        display: table-cell;
+        padding: 15px;
+        vertical-align: middle;
+      }
+    }
+
+    .btn-cta-text {
+      padding: 15px;
+
+      @media (min-width: $screen-sm-min) {
+        display: table-cell;
+        padding: 15px 30px;
+        vertical-align: middle;
+      }
+
+      @media (min-width: $screen-md-min) {
+        padding: 15px 25px;
+      }
+    }
+  }
+
+  .btn-cta-secondary {
+    background-color: transparent;
+    border: 3px solid $ucf-gold;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold;
+
+      .btn-cta-icon {
+        color: $white;
+      }
+    }
+
+    .btn-cta-icon {
+      color: $ucf-gold;
+      padding: 25px 0 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 60px;
+        padding: 35px 0 0;
+      }
+    }
+
+    .btn-cta-text {
+      padding: 15px 45px 25px;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 15px 25px 35px;
+      }
+    }
+  }
+
+  .btn-cta-icon {
+    display: block;
+    font-size: 44px;
+    text-align: center;
+    top: 0;
+  }
+
+  .btn-cta-text {
+    color: $black;
+    display: block;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+  }
+
+
+  .application-step {
+    margin: .6em 0 2em;
+
+    @media (min-width: $screen-md-min) {
+      margin: .6em 0 3.5em;
+    }
+  }
+
+  .application-step-left {
+    @media (min-width: $screen-md-min) {
+      padding-right: $grid-gutter-width / 2;
+    }
+  }
+
+  .application-step-right {
+    @media (min-width: $screen-md-min) {
+      padding-left: $grid-gutter-width / 2;
+    }
+  }
+
+  .application-step-title {
+    @include archer(7);
+    margin-bottom: 20px;
+    white-space: nowrap;
+  }
+
+  .application-step-title-text,
+  .application-step-number {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .application-step-number {
+    background-color: $ucf-gold;
+    border-radius: 100%;
+    color: $white;
+    display: inline-block;
+    font-size: 26px;
+    font-weight: 800;
+    height: 45px;
+    line-height: 1;
+    padding: 8px 8px 12px 12px;
+    text-align: center;
+    width: 45px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 32px;
+      height: 50px;
+      padding: 6px 8px 14px 12px;
+      width: 50px;
+    }
+  }
+
+  .application-step-title-text {
+    font-size: 20px;
+    line-height: 1.15;
+    padding-left: 10px;
+    white-space: normal;
+    width: calc(100% - 45px);
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 28px;
+      line-height: 1;
+      padding-left: 15px;
+      width: calc(100% - 50px);
+    }
+  }
+
+
+  .callout {
+    h2,
+    .h2 {
+      font-size: 18px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 20px;
+      }
+    }
+
+    h3,
+    .h3 {
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px;
+      }
+    }
+
+    h4,
+    .h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+      }
+    }
+
+    .side-supplement {
+      font-size: 14px;
+    }
+
+    .side-supplement-title {
+      @include archer(4, italic);
+      font-size: 26px;
+      margin-top: .6em;
+
+      a {
+        font-weight: 400;
+        text-decoration: none;
+      }
+
+      .fa,
+      .glyphicon {
+        color: $ucf-gold;
+        font-size: 1.4em;
+        margin-right: 6px;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .callout-dark {
+    background-color: $black;
+    color: $white;
+
+    a {
+      color: $white;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    h4,
+    .h4 {
+      color: $ucf-gold;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+      text-decoration: none;
     }
   }
 }
