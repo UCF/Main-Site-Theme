@@ -25,7 +25,8 @@ $ucf-gold-lighter: #fdf9e8;
 $ucf-gold-dark: #b18e00;
 $ucf-gold-darker: #a68500;
 $ucf-gold-darkest: #786000;
-$cta-primary-icon-bg: linear-gradient(to bottom, rgba(58, 219, 116, 1) 50%, rgba(57, 209, 109, 1) 51%, rgba(58, 219, 116, 1) 100%);
+$cta-primary-icon-bgcolor: rgba(58, 219, 116, 1);
+$cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, rgba(57, 209, 109, 1) 51%, $cta-primary-icon-bgcolor 100%);
 
 
 
@@ -639,6 +640,7 @@ $cta-primary-icon-bg: linear-gradient(to bottom, rgba(58, 219, 116, 1) 50%, rgba
       padding: 20px 0 0;
 
       @media (min-width: $screen-sm-min) {
+        background: $cta-primary-icon-bgcolor;  // ie9
         background: $cta-primary-icon-bg;
         display: table-cell;
         padding: 15px;
@@ -853,5 +855,13 @@ $cta-primary-icon-bg: linear-gradient(to bottom, rgba(58, 219, 116, 1) 50%, rgba
       font-weight: 400;
       text-decoration: none;
     }
+  }
+
+
+  .vertical-divider {
+    background-color: $gray-dark;
+    height: calc(100% - 2.4em);
+    margin: 1em auto 1.2em;
+    width: 3px;
   }
 }
