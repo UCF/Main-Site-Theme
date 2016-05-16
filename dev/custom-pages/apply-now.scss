@@ -15,7 +15,7 @@
 
 
 $ucf-header-height: 50px;
-$header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/04/Apply-Header-Image-xs.jpg';
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/05/Apply-Header-Image-xs.jpg';
 
 $black: #000;
 $white: #fff;
@@ -145,7 +145,7 @@ $cta-primary-icon-bg: linear-gradient(to bottom, rgba(58, 219, 116, 1) 50%, rgba
   }
 
   a {
-    transition: color .25s ease-in-out, background-color .25s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out;
   }
 
   ol,
