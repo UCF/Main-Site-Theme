@@ -195,10 +195,6 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     @media (min-width: $screen-sm-min) {
       font-size: 80px;
     }
-
-    @media (min-width: $screen-md-min) {
-      font-size: 90px;
-    }
   }
 
   a:not(.btn) {

@@ -18,7 +18,6 @@ this},r._applyDataApi=function(){var e={};t("[data-match-height], [data-mh]").ea
   var $equalHeightCols = $('.js-equal-height-row').find('div[class^="col-"]');
 
   $(window).on('load resize', function() {
-    console.log($(window).width);
     if ($(window).width() > 991) {
       $equalHeightCols.matchHeight();
     }
