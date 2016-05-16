@@ -25,8 +25,8 @@ $ucf-gold-lighter: #fdf9e8;
 $ucf-gold-dark: #b18e00;
 $ucf-gold-darker: #a68500;
 $ucf-gold-darkest: #786000;
-$cta-primary-icon-bgcolor: rgba(58, 219, 116, 1);
-$cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, rgba(57, 209, 109, 1) 51%, $cta-primary-icon-bgcolor 100%);
+$cta-primary-icon-bgcolor: $brand-success;
+$cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, darken($cta-primary-icon-bgcolor, 5%) 51%, $cta-primary-icon-bgcolor 100%);
 
 
 
