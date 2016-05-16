@@ -240,6 +240,10 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
       text-decoration: none;
     }
 
+    &:focus {
+      outline: 0;
+    }
+
     &.collapsed {
       &:hover,
       &:active,
@@ -420,7 +424,7 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     }
 
     &:active {
-      box-shadow: 0;
+      box-shadow: none;
     }
 
     .glyphicon,
@@ -528,7 +532,7 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     background-color: $ucf-gold-light;
     border: 0;
     border-radius: 0;
-    box-shadow: 0;
+    box-shadow: none;
     line-height: 1.5;
 
     @media (min-width: $screen-sm-min) {
@@ -613,7 +617,7 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     &:hover,
     &:active,
     &:focus {
-      box-shadow: 0;
+      box-shadow: none;
     }
   }
 
