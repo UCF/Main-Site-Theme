@@ -2980,4 +2980,44 @@ function enqueue_page_js() {
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_page_js' );
 
+
+/**
+ * Prints the Google Tag Manager snippet using the GTM ID in Theme Options.
+ **/
+function google_tag_manager() {
+	ob_start();
+	$gtm_id = get_theme_option( 'gtm_id' );
+	if ( $gtm_id ) :
+?>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm_id; ?>"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','<?php echo $gtm_id; ?>');</script>
+<!-- End Google Tag Manager -->
+<?php
+	endif;
+	return ob_get_clean();
+}
+
+
+/**
+ * Prints the Google Tag Manager data layer snippet.
+ **/
+function google_tag_manager_dl() {
+	ob_start();
+	$gtm_id = get_theme_option( 'gtm_id' );
+	if ( $gtm_id ) :
+?>
+	<script>
+	  dataLayer = [];
+	</script>
+<?php
+	endif;
+	return ob_get_clean();
+}
+
 ?>

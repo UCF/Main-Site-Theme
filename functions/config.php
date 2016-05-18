@@ -77,7 +77,6 @@ define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+328
 define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
 define('WEATHER_FETCH_TIMEOUT', !empty($theme_options['weather_service_timeout']) ? (int)$theme_options['weather_service_timeout'] : 8); //seconds
 
-define('GA_ACCOUNT', $theme_options['ga_account']);
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
@@ -260,11 +259,11 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['gw_verify'],
 		)),
 		new TextField(array(
-			'name'        => 'Google Analytics Account',
-			'id'          => THEME_OPTIONS_NAME.'[ga_account]',
-			'description' => 'Example: <em>UA-9876543-21</em>. Leave blank for development.',
+			'name'        => 'Google Tag Manager Container ID',
+			'id'          => THEME_OPTIONS_NAME.'[gtm_id]',
+			'description' => 'The ID for the container in Google Tag Manager that represents this site.',
 			'default'     => null,
-			'value'       => $theme_options['ga_account'],
+			'value'       => $theme_options['gtm_id'],
 		)),
 		new TextField(array(
 			'name'        => 'Chartbeat UID',
