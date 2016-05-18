@@ -1041,16 +1041,12 @@ var degreeSearch = function ($) {
   };
 
   function trackFilterForGoogle(programTypes, colleges, searchTerm) {
-    if (typeof ga !== 'undefined') {
-
-      var category = 'Degree Search',
-        action = 'Filters Updated',
-        label = 'Filters Selected';
-
-      ga('send', 'event', category, action, label, {
-        'dimension1': searchTerm,
-        'dimension2': programTypes.join(),
-        'dimension3': colleges.join()
+    if (typeof dataLayer !== 'undefined') {
+      dataLayer.push({
+        'event': 'degreeSearchFilterChange',
+        'degreeSearchTerm': searchTerm,
+        'degreeSearchProgramTypes': programTypes.join(),
+        'degreeSearchCollege': colleges.join()
       });
     }
   }
