@@ -77,7 +77,6 @@ define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+328
 define('WEATHER_CACHE_DURATION', 60 * 5); //seconds
 define('WEATHER_FETCH_TIMEOUT', !empty($theme_options['weather_service_timeout']) ? (int)$theme_options['weather_service_timeout'] : 8); //seconds
 
-define( 'GTM_ID', $theme_options['gtm_id'] );
 define('CB_UID', $theme_options['cb_uid']);
 define('CB_DOMAIN', $theme_options['cb_domain']);
 
