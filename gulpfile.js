@@ -17,6 +17,7 @@ var gulp = require('gulp'),
 var gutil = require('gulp-util');
 
 var configDefault = {
+      devPath: './dev',
       scssPath: './src/scss',
       cssPath: './static/css',
       jsPath: './src/js',
@@ -48,6 +49,15 @@ gulp.task('bower', function() {
 // Lint all scss files
 gulp.task('scss-lint', function() {
   gulp.src(config.scssPath + '/*.scss')
+    .pipe(scsslint({
+      'maxBuffer': 400 * 1024  // default: 300 * 1024
+    }));
+});
+
+
+// Lint dev scss files
+gulp.task('scss-lint-dev', function() {
+  gulp.src(config.devPath + '/**/*.scss')
     .pipe(scsslint({
       'maxBuffer': 400 * 1024  // default: 300 * 1024
     }));
@@ -86,8 +96,29 @@ gulp.task('css-admin', function() {
 });
 
 
+// Compile css in /dev/
+gulp.task('css-dev-compile', function() {
+  gulp.src(config.devPath + '/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(minifyCss({compatibility: '*'}))
+    .pipe(rename({
+      extname: '.min.css'
+    }))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions', 'ie >= 8'],
+      cascade: false
+    }))
+    .pipe(gulp.dest(config.devPath))
+    .pipe(browserSync.stream());
+});
+
+
 // All css-related tasks
 gulp.task('css', ['scss-lint', 'css-main', 'css-admin']);
+
+
+// All css-related dev tasks
+gulp.task('css-dev', ['scss-lint-dev', 'css-dev-compile']);
 
 
 // Run jshint on all js files in jsPath (except already minified files.)
@@ -145,6 +176,7 @@ gulp.task('watch', function() {
     });
   }
 
+  gulp.watch(config.devPath + '/**/*.scss', ['css-dev']).on('change', browserSync.reload);
   gulp.watch(config.scssPath + '/**/*.scss', ['css']).on('change', browserSync.reload);
   gulp.watch(config.jsPath + '/**/*.js', ['js']).on('change', browserSync.reload);
 });

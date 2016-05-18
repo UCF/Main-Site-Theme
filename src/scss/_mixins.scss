@@ -54,13 +54,13 @@
 
 // Gold Button Style
 @mixin gold-button {
-        background-color: #ffc900;
-        color: #000;
+  background-color: #ffc900;
+  color: #000;
 
-        &:hover,
-        &:active,
-        &:focus {
-            background-color: #000;
-            color: #fff;
-        }
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #000;
+    color: #fff;
+  }
 }
