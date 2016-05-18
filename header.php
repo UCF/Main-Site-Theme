@@ -4,11 +4,7 @@
 		<?="\n".header_()."\n"?>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<?php if ( GTM_CONTAINER ): ?>
-		<script>
-		  dataLayer = [];
-		</script>
-		<?php endif; ?>
+		<?php echo google_tag_manager_dl(); ?>
 
 		<?php if ( CB_UID ): ?>
 		<script type="text/javascript">
@@ -83,7 +79,7 @@
 	</head>
 	<body <?php echo body_class(); ?>>
 
-		<?php if ( GTM_CONTAINER ) { echo GTM_CONTAINER; } ?>
+		<?php echo google_tag_manager(); ?>
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">
