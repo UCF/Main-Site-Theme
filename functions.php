@@ -1256,18 +1256,20 @@ function page_specific_files_local($pageid) {
 	$page_slug = get_post( $pageid, ARRAY_A )['post_name'];
 
 	if ( DEV_MODE == 1 ) {
-		$page_dev_filenames = THEME_DEV_URL.'/custom-pages/'.$page_slug;
-		$page_dev_stylesheet_url = $page_dev_filenames.'.css';
-		$page_dev_js_url = $page_dev_filenames.'.js';
+		$page_dev_filenames = THEME_DEV_URL.'/custom-pages/' . $page_slug;
+		$page_dev_stylesheet_url = $page_dev_filenames . '.css';
+		$page_dev_js_url = $page_dev_filenames . '.js';
 
-		if (curl_exists($page_dev_stylesheet_url)) {
-			print '<link rel="stylesheet" href="'.$page_dev_stylesheet_url.'" type="text/css" media="all" />';
+		if ( curl_exists( $page_dev_stylesheet_url ) ) {
+			print '<link rel="stylesheet" href="' . $page_dev_stylesheet_url . '" type="text/css" media="all" />';
 		}
-		if (curl_exists($page_dev_js_url)) {
+		if ( curl_exists( $page_dev_js_url ) ) {
 			Config::add_script( $page_dev_js_url );
 		}
 	}
-	else { return NULL; }
+	else {
+		return NULL;
+	}
 }
 
 /**
