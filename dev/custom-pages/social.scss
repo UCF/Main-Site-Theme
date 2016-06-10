@@ -1,0 +1,141 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/scss/variables';
+@import '../../src/scss/mixins';
+
+
+// TODO: remove when header img is done
+.page-media-header {
+  background-color: #666;
+}
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: #fff;
+
+    &:hover {
+      color: #fc0;
+    }
+  }
+}
+
+
+
+.affix-cancel {
+  position: static !important;
+  z-index: 1;
+}
+
+.twitter-widget-wrapper {
+  height: 300px;
+  width: 100%;
+
+  @media (min-width: $screen-sm-min) {
+    height: 600px;
+    height: 100vh;
+  }
+
+  &.affix {
+    position: fixed !important;
+    top: 0;
+    width: calc(33.3333% - #{$grid-gutter-width});
+
+    @media (min-width: $screen-md-min) {
+      width: calc(25% - #{$grid-gutter-width});
+    }
+
+    &.affix-cancel {
+      position: static !important;
+      width: 100% !important;
+    }
+  }
+}
+
+.twitter-timeline {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+
+#ff-stream-1 {
+  @include gotham();
+
+  .ff-stream-wrapper {
+    margin: 0 5px;
+    padding: 5px 0 0;
+
+    @media (min-width: $screen-sm-min) {
+      margin: 0 15px;
+      padding: 15px 0;
+    }
+  }
+
+  .ff-item,
+  .shuffle__sizer {
+    width: 270px !important;
+
+    // Try to make cards fit comfortably at various breakpoints:
+    @media (min-width: 415px) {
+      width: 300px !important;
+    }
+
+    @media (min-width: 500px) {
+      width: 215px !important;
+    }
+
+    @media (min-width: 625px) {
+      width: 270px !important;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      width: 400px !important;
+    }
+
+    @media (min-width: 875px) {
+      width: 250px !important;
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: 320px !important;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: 250px !important;
+    }
+
+    @media (min-width: 1300px) {
+      width: 270px !important;
+    }
+  }
+
+  .ff-theme-classic .picture-item__inner,
+  .ff-theme-classic .shuffle__sizer {
+    padding: 0 0 15px;
+  }
+
+  .ff-content,
+  .ff-item-meta {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .ff-content {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .ff-item-meta {
+    padding-bottom: 0;
+    padding-top: 10px;
+  }
+}
+
+#ff-stream-1,
+#ff-stream-1 .ff-search input,
+#ff-stream-1.ff-layout-compact .picture-item__inner {
+  background-color: transparent !important;
+
+  @media (min-width: $screen-sm-min) {
+    background-color: #eee !important;
+  }
+}
