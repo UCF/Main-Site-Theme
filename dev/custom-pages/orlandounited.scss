@@ -39,7 +39,7 @@ $ucf-gold: #fc0;
 }
 
 .page-media-container {
-  padding-top: 0;
+  padding-top: $grid-gutter-width * 2;
 }
 
 #contentcol a:not(.btn) {
@@ -163,6 +163,17 @@ $ucf-gold: #fc0;
     }
   }
 
+  .topline {
+    @include gotham();
+    color: $white;
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
   .lead {
     @include font-smoothing();
     color: $white;
@@ -180,18 +191,12 @@ $ucf-gold: #fc0;
       text-decoration: underline;
     }
   }
-
-  .content-wrap {
-    background: rgba(0, 0, 0, .35);
-    padding: 95px 35px;
-  }
 }
 
 .page-media-header,
 .page-media-container {
   position: static;
 }
-
 
 .page-content {
   h2,
