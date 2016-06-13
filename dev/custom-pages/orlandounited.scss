@@ -153,22 +153,10 @@ $ucf-gold: #fc0;
 
 .page-media {
   h1 {
-    color: $ucf-gold;
-    font-size: 30px;
-    margin-top: $grid-gutter-width / 2;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 40px;
-      margin-top: $grid-gutter-width * 1.5;
-    }
-  }
-
-  .topline {
-    @include gotham();
+    @include gotham(7);
     color: $white;
     display: block;
     font-size: 15px;
-    font-weight: 600;
     line-height: 1.5;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -189,6 +177,18 @@ $ucf-gold: #fc0;
       color: $white !important;
       font-style: italic;
       text-decoration: underline;
+    }
+  }
+
+  .hashtag {
+    @include gotham(7);
+    color: $ucf-gold;
+    font-size: 30px;
+    margin-top: $grid-gutter-width / 2;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+      margin-top: $grid-gutter-width * 1.5;
     }
   }
 }
