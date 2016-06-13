@@ -13,6 +13,12 @@
   font-weight: #{$weight}00;
 }
 
+.content-wrap {
+  background: rgba(0,0,0,.35);
+  border-radius: 0 0 4px;
+  padding: 95px 35px;
+  margin-top: -60px;
+}
 
 $black: #000;
 $white: #fff;
