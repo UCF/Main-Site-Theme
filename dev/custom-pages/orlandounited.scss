@@ -205,6 +205,7 @@ $ucf-gold: #fc0;
 }
 
 .page-content {
+
   h2,
   .h2 {
     display: inline-block;
@@ -263,6 +264,27 @@ $ucf-gold: #fc0;
     margin-top: $grid-gutter-width;
   }
 
+
+  // Quotes
+  blockquote {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  blockquote, blockquote p {
+
+    @include archer(4, italic);
+    color: #222;
+    font-size: 32px;
+    font-weight: 200;
+    line-height: 1.3em;
+  }
+
+  // Horizontal Rules
+  hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
 
   // Callouts
   .callout {
