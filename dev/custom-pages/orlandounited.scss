@@ -13,16 +13,11 @@
   font-weight: #{$weight}00;
 }
 
-.content-wrap {
-  background: rgba(0,0,0,.35);
-  border-radius: 0 0 4px;
-  padding: 95px 35px;
-  margin-top: -60px;
-}
 
 $black: #000;
 $white: #fff;
 $ucf-gold: #fc0;
+$ucf-gold-dark: #e4b20c;
 
 
 // Resets
@@ -37,15 +32,16 @@ $ucf-gold: #fc0;
 }
 
 .page-media-header {
-  height: 450px;
+  height: 500px;
 
   @media (min-width: $screen-sm-min) {
     height: 100vh;
+    min-height: 600px;
   }
 }
 
 .page-media-container {
-  padding-top: 60px;
+  padding-top: $grid-gutter-width * 2;
 }
 
 #contentcol a:not(.btn) {
@@ -140,6 +136,10 @@ $ucf-gold: #fc0;
     margin-bottom: .8em;
   }
 
+  hr {
+    border-top: 2px solid #eee;
+  }
+
   .text-untransform {
     text-transform: none;
   }
@@ -159,22 +159,10 @@ $ucf-gold: #fc0;
 
 .page-media {
   h1 {
-    color: $ucf-gold;
-    font-size: 30px;
-    margin-top: $grid-gutter-width / 2;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 40px;
-      margin-top: $grid-gutter-width * 1.5;
-    }
-  }
-
-  .topline {
-    @include gotham();
+    @include gotham(7);
     color: $white;
     display: block;
     font-size: 15px;
-    font-weight: 600;
     line-height: 1.5;
     margin-bottom: 30px;
     text-transform: uppercase;
@@ -197,12 +185,25 @@ $ucf-gold: #fc0;
       text-decoration: underline;
     }
   }
+
+  .hashtag {
+    @include gotham(7);
+    color: $ucf-gold;
+    font-size: 30px;
+    margin-top: $grid-gutter-width / 2;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+      margin-top: $grid-gutter-width * 1.5;
+    }
+  }
 }
 
 .page-media-header,
 .page-media-container {
   position: static;
 }
+
 
 .page-content {
 
@@ -223,6 +224,10 @@ $ucf-gold: #fc0;
       font-size: 24px;
       padding-bottom: 20px;
     }
+  }
+
+  .icon {
+    color: $ucf-gold;
   }
 
 
@@ -263,7 +268,6 @@ $ucf-gold: #fc0;
   .section-menu-wrapper {
     margin-top: $grid-gutter-width;
   }
-
 
   // Quotes
   blockquote {
@@ -306,11 +310,11 @@ $ucf-gold: #fc0;
 
     h4,
     .h4 {
-      font-size: 13px;
+      font-size: 13px !important;
       text-transform: uppercase;
 
       @media (min-width: $screen-sm-min) {
-        font-size: 16px;
+        font-size: 16px !important;
       }
     }
 
@@ -375,14 +379,6 @@ $ucf-gold: #fc0;
     }
   }
 
-  .callout-light {
-    background-color: #eee;
-
-    .section-content {
-      border-color: #ccc;
-    }
-  }
-
 
   // Events
   .calendar-events {
@@ -402,10 +398,75 @@ $ucf-gold: #fc0;
       color: $white;
     }
 
+    .desc {
+      @include gotham(4);
+    }
+
     .all-link {
-      color: $white;
+      color: $white !important;
       margin-bottom: $grid-gutter-width;
     }
+  }
+
+
+  // In Memoriam
+  .in-memoriam {
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+      @include gotham(8);
+    }
+
+    .lead {
+      @include gotham(4);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+  }
+
+  .memorial {
+    margin-bottom: $grid-gutter-width;
+  }
+
+  .memorial-name {
+    margin-bottom: 0;
+  }
+
+  .memorial-title {
+    color: $ucf-gold-dark;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 12px !important;
+
+    &:after {
+      background: $ucf-gold;
+      content: ' ';
+      display: block;
+      height: 2px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 8px;
+      width: 35px;
+    }
+  }
+
+  .memorial-subtitle,
+  .memorial-desc {
+    font-size: 14px;
+    margin-bottom: 0 !important;
+  }
+
+  .memorial-subtitle {
+    @include gotham(7);
+    font-style: italic;
   }
 
 }
