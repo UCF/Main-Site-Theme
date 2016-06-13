@@ -284,6 +284,10 @@ $ucf-gold-dark: #e4b20c;
     line-height: 1.3em;
   }
 
+  blockquote.quote {
+    padding-bottom: 0;
+  }
+
   // Horizontal Rules
   hr {
     margin-top: 35px;
