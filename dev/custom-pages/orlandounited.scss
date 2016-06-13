@@ -168,6 +168,7 @@ $ucf-gold: #fc0;
     color: $white;
     font-family: Georgia, serif;
     font-size: 16px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .75);
 
     @media (min-width: $screen-sm-min) {
       font-size: 30px;
@@ -179,6 +180,11 @@ $ucf-gold: #fc0;
       text-decoration: underline;
     }
   }
+}
+
+.page-media-header,
+.page-media-container {
+  position: static;
 }
 
 
