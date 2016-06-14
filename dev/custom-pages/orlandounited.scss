@@ -279,9 +279,13 @@ $ucf-gold-dark: #e4b20c;
 
     @include archer(4, italic);
     color: #222;
-    font-size: 32px;
+    font-size: 22px;
     font-weight: 200;
-    line-height: 1.3em;
+    line-height: 27px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 30px;
+    }
   }
 
   blockquote.quote {
