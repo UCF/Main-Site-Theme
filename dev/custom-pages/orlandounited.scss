@@ -214,6 +214,7 @@ $ucf-gold-dark: #e4b20c;
 
 
 .page-content {
+
   h2,
   .h2 {
     display: inline-block;
@@ -276,6 +277,35 @@ $ucf-gold-dark: #e4b20c;
     margin-top: $grid-gutter-width;
   }
 
+  // Quotes
+  blockquote {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  blockquote, blockquote p {
+
+    @include archer(4, italic);
+    color: #222;
+    font-size: 22px;
+    font-weight: 200;
+    line-height: 27px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 32px;
+      line-height: 41px;
+    }
+  }
+
+  blockquote.quote {
+    padding-bottom: 0;
+  }
+
+  // Horizontal Rules
+  hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
 
   // Callouts
   .callout {
