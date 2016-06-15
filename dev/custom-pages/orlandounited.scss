@@ -49,6 +49,14 @@ $ucf-gold-dark: #e4b20c;
   color: $brand-primary;
 }
 
+#contentcol embed,
+#contentcol iframe,
+#contentcol object {
+  @media (min-width: $screen-md-min) {
+    height: 500px;
+  }
+}
+
 
 
 .page-media,
