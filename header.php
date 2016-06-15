@@ -3,19 +3,15 @@
 	<head>
 		<?="\n".header_()."\n"?>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<?php if(GA_ACCOUNT or CB_UID):?>
 
+		<?php echo google_tag_manager_dl(); ?>
+
+		<?php if ( CB_UID ): ?>
 		<script type="text/javascript">
 			var _sf_startpt = (new Date()).getTime();
-			<?php if(GA_ACCOUNT):?>
-			var GA_ACCOUNT  = '<?=GA_ACCOUNT?>';
-			<?php endif;?>
-			<?php if(CB_UID):?>
 
-			var CB_UID      = '<?=CB_UID?>';
-			var CB_DOMAIN   = '<?=CB_DOMAIN?>';
-			<?php endif?>
-
+			var CB_UID      = '<?php echo CB_UID; ?>';
+			var CB_DOMAIN   = '<?php echo CB_DOMAIN; ?>';
 		</script>
 		<?php endif;?>
 
@@ -82,6 +78,8 @@
 
 	</head>
 	<body <?php echo body_class(); ?>>
+
+		<?php echo google_tag_manager(); ?>
 
 		<div class="container">
 			<div class="row status-alert" id="status-alert-template" data-alert-id="">

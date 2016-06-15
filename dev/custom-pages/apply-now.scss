@@ -1,0 +1,867 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/scss/variables';
+@import '../../src/scss/mixins';
+
+
+// Adds Archer font family styles to an element.
+// $weight should be a number from 1-9, which references the desired font
+// weight (100-900).  Default is 4 (400) or 'Book'.
+@mixin archer($weight: 4, $font-style: normal) {
+  font-family: 'Archer A', 'Archer B';
+  font-style: $font-style;
+  font-weight: #{$weight}00;
+}
+
+
+$ucf-header-height: 50px;
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/05/Apply-Header-Image-xs.jpg';
+
+$black: #000;
+$white: #fff;
+$ucf-gold: #fc0;
+$ucf-gold-light: #ffeb9b;
+$ucf-gold-lighter: #fdf9e8;
+$ucf-gold-dark: #b18e00;
+$ucf-gold-darker: #a68500;
+$ucf-gold-darkest: #786000;
+$cta-primary-icon-bgcolor: $brand-success;
+$cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, darken($cta-primary-icon-bgcolor, 5%) 51%, $cta-primary-icon-bgcolor 100%);
+
+
+
+// scss-lint:disable IdSelector
+#contentcol {
+  a:not(.btn) {
+    border-bottom: 0 solid transparent;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  h2,
+  .h2 {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  p {
+    margin-bottom: 1.5em;
+  }
+
+  .lead {
+    margin: 1em 0 1.7em;
+  }
+
+  .btn-cta-primary {
+    border-bottom: 0;
+
+    &:hover {
+      border-bottom: 0;
+    }
+  }
+
+  .btn-cta-secondary {
+    border-bottom: 3px solid $ucf-gold;
+
+    &:hover {
+      border-bottom: 3px solid $ucf-gold;
+    }
+  }
+}
+// scss-lint:enable IdSelector
+
+
+.page-media,
+.page-content {
+  @include gotham();
+  color: $black;
+  font-size: 14px;
+  line-height: 1.4;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  // Gotham-ize all the things
+  .alert,
+  .badge,
+  .breadcrumb,
+  .btn,
+  .carousel,
+  .collapse,
+  .dropdown,
+  .dropdown-menu,
+  .jumbotron,
+  .label,
+  .list-group,
+  .media,
+  .modal,
+  .nav,
+  .navbar,
+  .pager,
+  .pagination,
+  .panel,
+  .table {
+    @include gotham(4);
+  }
+
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    @include gotham(7);
+  }
+
+  h2,
+  .h2,
+  h3,
+  .h3 {
+    text-transform: uppercase;
+  }
+
+  h3,
+  .h3 {
+    font-size: 15px;
+    margin: 1em 0;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+  }
+
+  h4,
+  .h4 {
+    margin: 1em 0 1.2em;
+  }
+
+  a {
+    transition: color .15s ease-in-out, background-color .15s ease-in-out;
+  }
+
+  ol,
+  ul {
+    margin-bottom: 2em;
+  }
+
+  li {
+    line-height: 1.3;
+    margin-bottom: .8em;
+  }
+
+  .text-untransform {
+    text-transform: none;
+  }
+
+  .list-navigation {
+    line-height: 1.375;
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: .8em;
+    }
+  }
+}
+
+
+.page-media {
+  // Non-mobile-first theme override
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 0;
+    position: static;
+  }
+
+  h1 {
+    @include archer(8);
+    font-size: 15vw;
+    line-height: 1;
+    margin: .15em 0 .5em;
+
+    @media (min-width: 480px) {
+      font-size: 11vw;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 80px;
+    }
+  }
+
+  a:not(.btn) {
+    color: $black;
+  }
+
+
+  .panel {
+    @include gotham(4);
+    background-color: $ucf-gold;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .panel-heading {
+    padding: 0;
+  }
+
+  .panel-heading-link,
+  .panel-body {
+    padding: 15px 22px;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 20px 22px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      padding: 26px 22px;
+    }
+  }
+
+  .panel-heading-link {
+    display: block;
+    white-space: nowrap;
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+
+    &.collapsed {
+      &:hover,
+      &:active,
+      &:focus {
+        .panel-heading-control-icon {
+          border-color: $white;
+          color: $white;
+        }
+      }
+
+      .panel-heading-control-icon {
+        border-color: $ucf-gold-dark;
+        color: $ucf-gold-dark;
+
+        @media (min-width: $screen-sm-min) {
+          padding: 8px 6px 4px;
+        }
+      }
+
+      .panel-heading-control-icon:before {
+        content: "\e252";
+      }
+    }
+  }
+
+  .panel-heading-content,
+  .panel-heading-control {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .panel-heading-content {
+    white-space: normal;
+    width: calc(100% - 40px);
+
+    @media (min-width: $screen-sm-min) {
+      width: calc(100% - 50px);
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: calc(100% - 60px);
+    }
+  }
+
+  .panel-heading-control {
+    text-align: right;
+    width: 40px;
+
+    @media (min-width: $screen-sm-min) {
+      width: 50px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: 60px;
+    }
+  }
+
+  .panel-heading-control-icon {
+    border: 3px solid $white;
+    border-radius: 100%;
+    color: $white;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding: 4px;
+    position: relative;
+    top: 1px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 21px;
+      padding: 5px 6px 7px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 26px;
+    }
+
+    &:before {
+      content: "\e253";
+    }
+  }
+
+  .panel-group .panel-heading + .panel-collapse > .list-group,
+  .panel-group .panel-heading + .panel-collapse > .panel-body {
+    border-top: 0 solid transparent;
+  }
+
+  .panel-body {
+    padding-top: 5px;
+
+    @media (min-width: $screen-sm-min) {
+      padding-top: 10px;
+    }
+  }
+
+
+  .application-pulldown-title {
+    @include gotham(9);
+    display: block;
+    font-size: 15px;
+    letter-spacing: .05em;
+    line-height: 1.25;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 18px;
+      line-height: 1.15;
+      margin-bottom: .3em;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 22px;
+      letter-spacing: .1em;
+    }
+  }
+
+  .application-pulldown-students {
+    color: $ucf-gold-darkest;
+    font-size: 11px;
+    margin-bottom: 25px;
+    margin-left: -8px;
+
+    @media (min-width: 480px) {
+      font-size: 12px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 0;
+    }
+
+    li {
+      margin-bottom: 2px;
+      padding-left: 8px;
+      padding-right: 8px;
+      position: relative;
+
+      &:after {
+        content: '•';
+        display: block;
+        right: -5px;
+        position: absolute;
+        top: 0;
+      }
+
+      &:last-child:after {
+        display: none;
+      }
+    }
+  }
+
+  .application-pulldown-quicklinks {
+    font-weight: 700;
+    margin-bottom: 0;
+    margin-top: 20px;
+
+    @media (min-width: $screen-md-min) {
+      margin-top: 0;
+    }
+  }
+
+
+  .btn-pulldown-primary,
+  .btn-pulldown-secondary {
+    border-radius: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    padding: 16px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 16px;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+
+    .glyphicon,
+    .fa {
+      font-size: 1.25em;
+      top: .195em;
+    }
+  }
+
+  .btn-pulldown-primary {
+    background-color: $ucf-gold-darker;
+    color: $white;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-darkest;
+    }
+  }
+
+  .btn-pulldown-secondary {
+    border: 2px solid $ucf-gold-darker;
+    color: $ucf-gold-darkest;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-darkest;
+      border-color: $ucf-gold-darkest;
+      color: $white;
+    }
+  }
+}
+
+.page-media-header {
+  height: auto;
+  min-height: 767px;  // allow enough space for pulldown content by default
+
+  // Bg replacement is not written mobile-first because the meta field for
+  // header background images implies/assumes a desktop-size image:
+  @media (max-width: $screen-xs-max) {
+    // scss-lint:disable ImportantRule
+    background-image: url(#{$header-media-xs-url}) !important;
+    // scss-lint:enable ImportantRule
+    background-position: right top;
+    overflow: visible;
+    position: static;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    height: calc(100vh - #{$ucf-header-height});
+  }
+}
+
+.page-media-container {
+  // Non-mobile-first theme override
+  @media (max-width: $screen-xs-max) {
+    padding-top: 74px;
+    position: static;
+  }
+}
+
+
+.page-content {
+  a:not(.btn) {
+    color: $brand-primary;
+  }
+
+  .section-heading {
+    margin: 2.5em 0 1.7em;
+    padding-bottom: 14px;
+    position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      margin: 3em 0 1.7em;
+    }
+
+    &:after {
+      background-color: $ucf-gold;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 3px;
+      left: 0;
+      position: absolute;
+      width: 50px;
+    }
+  }
+
+  .section-subheading {
+    margin: 3.5em 0 1.7em;
+  }
+
+  .lead {
+    @include archer();
+    line-height: 1.3;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 24px;
+      line-height: 1.4;
+    }
+  }
+
+  .well {
+    background-color: $ucf-gold-light;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    line-height: 1.5;
+
+    @media (min-width: $screen-sm-min) {
+      line-height: 1.4;
+    }
+
+    a:not(.btn) {
+      @include gotham(6);
+      color: $black;
+      text-decoration: underline;
+    }
+  }
+
+  .well-icon {
+    color: $ucf-gold;
+    display: block;
+    font-size: 60px;
+    margin: .2em 0;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 80px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 90px;
+    }
+  }
+
+
+  .table {
+    @media (min-width: $screen-md-min) {
+      font-size: 16px;
+    }
+
+    caption {
+      @include archer(7);
+      color: $black;
+      font-size: 18px;
+      padding-left: 8px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 21px;
+      }
+    }
+
+    > tbody > tr > td,
+    > tbody > tr > th,
+    > tfoot > tr > td,
+    > tfoot > tr > th,
+    > thead > tr > td,
+    > thead > tr > th {
+      border-top: 0 solid transparent;
+    }
+  }
+
+  .table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: $ucf-gold-lighter;
+  }
+
+
+  .deadline-table-key {
+    &:after {
+      content: ':';
+    }
+  }
+
+  .deadline-table-val {
+    @include font-smoothing();
+    font-weight: 600;
+  }
+
+
+  .btn-cta-primary,
+  .btn-cta-secondary {
+    border-radius: 0;
+    display: block;
+    margin: 0 0 3em;
+    padding: 0;
+    white-space: normal;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn-cta-primary {
+    background-color: $ucf-gold;
+    border: 0;
+
+    @media (min-width: $screen-sm-min) {
+      display: table;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-dark;
+
+      .btn-cta-text {
+        color: $white;
+      }
+    }
+
+    .btn-cta-icon {
+      color: $white;
+      padding: 20px 0 0;
+
+      @media (min-width: $screen-sm-min) {
+        background: $cta-primary-icon-bgcolor;  // ie9
+        background: $cta-primary-icon-bg;
+        display: table-cell;
+        padding: 15px;
+        vertical-align: middle;
+      }
+    }
+
+    .btn-cta-text {
+      padding: 15px;
+
+      @media (min-width: $screen-sm-min) {
+        display: table-cell;
+        padding: 15px 30px;
+        vertical-align: middle;
+      }
+
+      @media (min-width: $screen-md-min) {
+        padding: 15px 25px;
+      }
+    }
+  }
+
+  .btn-cta-secondary {
+    background-color: transparent;
+    border: 3px solid $ucf-gold;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold;
+
+      .btn-cta-icon {
+        color: $white;
+      }
+    }
+
+    .btn-cta-icon {
+      color: $ucf-gold;
+      padding: 25px 0 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 60px;
+        padding: 35px 0 0;
+      }
+    }
+
+    .btn-cta-text {
+      padding: 15px 45px 25px;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 15px 25px 35px;
+      }
+    }
+  }
+
+  .btn-cta-icon {
+    display: block;
+    font-size: 44px;
+    text-align: center;
+    top: 0;
+  }
+
+  .btn-cta-text {
+    color: $black;
+    display: block;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+  }
+
+
+  .application-step {
+    margin: .6em 0 2em;
+
+    @media (min-width: $screen-md-min) {
+      margin: .6em 0 3.5em;
+    }
+  }
+
+  .application-step-left {
+    @media (min-width: $screen-md-min) {
+      padding-right: $grid-gutter-width / 2;
+    }
+  }
+
+  .application-step-right {
+    @media (min-width: $screen-md-min) {
+      padding-left: $grid-gutter-width / 2;
+    }
+  }
+
+  .application-step-title {
+    @include archer(7);
+    margin-bottom: 20px;
+    white-space: nowrap;
+  }
+
+  .application-step-title-text,
+  .application-step-number {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .application-step-number {
+    background-color: $ucf-gold;
+    border-radius: 100%;
+    color: $white;
+    display: inline-block;
+    font-size: 26px;
+    font-weight: 800;
+    height: 45px;
+    line-height: 1;
+    padding: 8px 8px 12px 12px;
+    text-align: center;
+    width: 45px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 32px;
+      height: 50px;
+      padding: 6px 8px 14px 12px;
+      width: 50px;
+    }
+  }
+
+  .application-step-title-text {
+    font-size: 20px;
+    line-height: 1.15;
+    padding-left: 10px;
+    white-space: normal;
+    width: calc(100% - 45px);
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 28px;
+      line-height: 1;
+      padding-left: 15px;
+      width: calc(100% - 50px);
+    }
+  }
+
+
+  .callout {
+    h2,
+    .h2 {
+      font-size: 18px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 20px;
+      }
+    }
+
+    h3,
+    .h3 {
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px;
+      }
+    }
+
+    h4,
+    .h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+      }
+    }
+
+    .side-supplement {
+      font-size: 14px;
+    }
+
+    .side-supplement-title {
+      @include archer(4, italic);
+      font-size: 26px;
+      margin-top: .6em;
+
+      a {
+        font-weight: 400;
+        text-decoration: none;
+      }
+
+      .fa,
+      .glyphicon {
+        color: $ucf-gold;
+        font-size: 1.4em;
+        margin-right: 6px;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .callout-dark {
+    background-color: $black;
+    color: $white;
+
+    a {
+      color: $white;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    h4,
+    .h4 {
+      color: $ucf-gold;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
+
+  .vertical-divider {
+    background-color: $gray-dark;
+    height: calc(100% - 2.4em);
+    margin: 1em auto 1.2em;
+    width: 3px;
+  }
+}
