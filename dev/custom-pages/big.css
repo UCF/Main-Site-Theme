@@ -574,8 +574,8 @@ body.ie8 #contentcol object {
 
 @media (max-width: 991px) {
   #orlando-rising .florida-state {
-    top: -7px;
-    right: 10px;
+    top: 0;
+    right: 0;
   }
 }
 
@@ -709,7 +709,7 @@ body.ie8 #contentcol object {
   margin: 0 auto;
   max-width: 140px;
   text-transform: uppercase;
-  white-space: initial;
+  white-space: normal;
   word-wrap: normal;
 }
 
@@ -736,14 +736,33 @@ body.ie8 #contentcol object {
 }
 
 #economic-impact .text-biggest {
-  color: white;
+  color: #fff;
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
   font-size: 80px;
-  left: -26px;
+  left: -25px;
   position: absolute;
   text-shadow: -1px -1px 0 #fc0, 1px -1px 0 #fc0, -1px 1px 0 #fc0, 1px 1px 0 #fc0;
-  top: 80px;
+  top: 120px;
   transform: rotate(-90deg);
+  line-height: 0;
+}
+
+.ie8 #economic-impact .text-biggest,
+.ie9 #economic-impact .text-biggest {
+  color: #fc0;
+  filter: none;
+  left: auto;
+  line-height: 1;
+  margin-bottom: -15px;
+  position: relative;
+  text-shadow: 0;
+  top: auto;
+  transform: none;
+}
+
+.ie8 #economic-impact .article-inner,
+.ie9 #economic-impact .article-inner {
+  padding-left: 0;
 }
 
 @media (max-width: 991px) {
@@ -753,6 +772,7 @@ body.ie8 #contentcol object {
     left: auto;
     position: relative;
     margin-bottom: -15px;
+    line-height: 1;
   }
 
   #economic-impact .article-inner {
