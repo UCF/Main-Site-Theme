@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+
 /*
  * Header
  */
@@ -203,7 +205,7 @@ body.ie8 #contentcol object {
 }
 
 #contentcol .sans-serif-condensed {
-  font-family: "Gotham Cond A", "Gotham Cond B";
+  font-family: 'Open Sans Condensed', sans-serif;
   font-style: normal;
   font-weight: 600;
   letter-spacing: -.02em;
@@ -590,7 +592,7 @@ body.ie8 #contentcol object {
 
 
 #contentcol #orlando-rising h2 {
-  font-size: 100px;
+  font-size: 85px;
   line-height: .85;
   text-transform: uppercase;
   margin-bottom: 25px;
@@ -617,7 +619,7 @@ body.ie8 #contentcol object {
 
 @media (max-width: 767px) {
   #contentcol #orlando-rising h2 {
-    font-size: 55px;
+    font-size: 43px;
     margin-bottom: 8px;
   }
 
