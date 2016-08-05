@@ -647,11 +647,6 @@ body.ie8 #contentcol object {
   margin-bottom: 20px;
 }
 
-/*@media (max-width: 991px) {
-  #big-athlete-success {
-  }
-}*/
-
 @media (max-width: 767px) {
   #big-athlete-success {
     background-image: none !important;  /* necessary to override inline css */
@@ -733,6 +728,11 @@ body.ie8 #contentcol object {
 }
 
 /* Serious Talent */
+
+#economic-impact {
+  position: relative;
+}
+
 #economic-impact .article-inner {
   padding-left: 29%;
 }
@@ -799,11 +799,6 @@ body.ie8 #contentcol object {
     margin-top: auto;
   }
 }
-
-
-/*    color: white;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-*/
 
 /* Our Promise */
 
