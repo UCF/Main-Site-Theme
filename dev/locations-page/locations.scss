@@ -1,5 +1,6 @@
 .locations-section {
   font-family: Gotham;
+  margin-bottom: 24px;
 
   .section-header {
     height: 500px;
@@ -17,7 +18,8 @@
     .section-title {
       bottom: 18px;
       position: absolute;
-      font-size: 32px;
+      font-size: 48px;
+      max-width: 600px
     }
 
     .section-link {
@@ -28,20 +30,49 @@
   }
 
   .content-title {
-      color: #333;
-      font-family: Gotham;
-      margin: 24px 12px;
-      padding: 12px 0;
-      text-transform: uppercase;
+    color: #333;
+    font-family: Gotham;
+    margin: 24px 0;
+    padding: 12px 0;
+    text-transform: uppercase;
 
-      &::after {
-          background: #ffc904;
-          content: " ";
-          display: block;
-          height: 2px;
-          margin-top: 15px;
-          width: 25px;
-      }
+    &::after {
+        background: #ffc904;
+        content: " ";
+        display: block;
+        height: 2px;
+        margin-top: 15px;
+        width: 25px;
     }
+  }
+}
 
+.header-title {
+  font-family: Archer;
+  margin-top: 34px;
+
+  .header-main-title {
+    background: #fc0;
+    font-size: 48px;
+    padding: 18px 12px;
+  }
+
+  .header-subtitle {
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    font-weight: 300;
+    font-size: 24px;
+    margin-top: 7px;
+    padding: 18px 12px;
+  }
+}
+
+ul>li>a {
+  color: #428bca;
+
+  &:hover {
+    color: #3c5f7d;
+    text-decoration: none;
+  }
 }
