@@ -1282,4 +1282,34 @@ function sc_social_share_buttons( $atts, $content='' ) {
 
 add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
+/**
+ * Displays a navbar menu based on the sections present
+ * on the page.
+ **/
+function sc_sections_menu( $atts, $content='' ) {
+	ob_start();
+?>
+	<nav id="sections-navbar" class="navbar navbar-gold center">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sections-menu">
+					<span class="sr-only">Toggle sections navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="sections-menu">
+				<ul class="nav navbar-nav">
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+<?php
+	return ob_get_clean();
+}
+
+add_shortcode( 'sections-menu', 'sc_sections_menu' );
+
 ?>

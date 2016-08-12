@@ -193,3 +193,136 @@ a.list-group-item {
     color: $carousel-control-color;
   }
 }
+
+$ucf-gold: #ffc904;
+$ucf-gold-light: #ffeeaf;
+$ucf-metal-gold: #c90;
+
+$ucf-bg-default      : #fc0;
+$ucf-bg-highlight    : #c90;
+$ucf-col-default     : #000;
+$ucf-col-highlight   : #fff;
+
+.navbar-gold {
+  background-color: $ucf-bg-default;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 0;
+
+  .navbar-brand {
+    color: $ucf-col-default;
+
+    &:hover,
+    &:focus {
+      color: $ucf-col-highlight;
+    }
+  }
+
+  .navbar-text {
+    color: $ucf-col-default;
+  }
+
+  .navbar-nav {
+    > li {
+      > a {
+        color: $ucf-col-default;
+        &:focus {
+          background-color: $ucf-bg-default;
+          color: $ucf-col-default;
+        }
+
+        &:hover {
+          background: $ucf-bg-highlight;
+          color: $ucf-col-highlight;
+        }
+      }
+
+      > .dropdown-menu {
+        background-color: $ucf-bg-default;
+        > li {
+          > a {
+            color: $ucf-col-default;
+            &:hover,
+            &:focus {
+              color: $ucf-col-highlight;
+              background-color: $ucf-bg-highlight;
+            }
+          }
+          > .divider {
+            background-color: $ucf-bg-highlight;
+          }
+        }
+      }
+    }
+    .open .dropdown-menu > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $ucf-col-highlight;
+        background-color: $ucf-bg-highlight;
+      }
+    }
+    > .active {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $ucf-col-highlight;
+        background-color: $ucf-bg-highlight;
+      }
+    }
+    > .open {
+      > a,
+      > a:hover,
+      > a:focus {
+        color: $ucf-col-highlight;
+        background-color: $ucf-bg-highlight;
+      }
+    }
+  }
+
+  .navbar-toggle {
+    border-color: $ucf-bg-highlight;
+
+    &:hover,
+    &:focus {
+      background-color: $ucf-bg-highlight;
+    }
+    .icon-bar {
+      background-color: $ucf-col-default;
+    }
+  }
+
+  .navbar-collapse,
+  .navbar-form {
+    border-color: $ucf-col-default;
+  }
+
+  .navbar-link {
+    color: $ucf-col-default;
+    &:hover {
+      color: $ucf-col-highlight;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .navbar-gold {
+    .navbar-nav .open .dropdown-menu {
+      > li > a {
+        color: $ucf-col-default;
+        &:hover,
+        &:focus {
+          color: $ucf-col-highlight;
+        }
+      }
+      > .active {
+        > a,
+        > a:hover,
+        > a:focus {
+          color: $ucf-col-highlight;
+          background-color: $ucf-bg-highlight;
+        }
+      }
+    }
+  }
+}
