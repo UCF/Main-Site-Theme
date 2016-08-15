@@ -9,7 +9,6 @@ var init = function() {
 };
 
 var initialize = function() {
-  var pinColor = "FFCC00";
   var pinImage = new google.maps.MarkerImage("https://www.google.com/maps/vt/icon/name=assets/icons/poi/quantum/container_shadow-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/poi/quantum/school-2-medium.png&highlight=ff0000,000000,ffcc00&color=ffcc0000?scale=1.100000023841858");
 
 	var latLng = new google.maps.LatLng(28.601947, -81.200254);

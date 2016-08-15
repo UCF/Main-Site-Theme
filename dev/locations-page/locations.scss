@@ -2,6 +2,9 @@
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/type';
 
+// Compile this file using the following command (assumes scss is installed globally)
+// scss --watch --style compressed dev/locations-page/locations.scss:dev/locations-page/locations.min.css
+
 // Mixins
 @mixin body-prefix($selector) {
   body#{$selector} & {
@@ -10,7 +13,6 @@
 }
 
 // Custom variables:
-
 $ucf-gold: #ffc904;
 $ucf-gold-light: #ffeeaf;
 $ucf-metal-gold: #c90;
@@ -21,11 +23,6 @@ $ucf-col-default     : #000;
 $ucf-col-highlight   : #fff;
 
 $grid-float-breakpoint: 992px;
-
-// Bootstrap overrides:
-$icon-font-path: '../fonts/bootstrap/';
-$fa-font-path: '../fonts/font-awesome/';
-$wi-path: '../fonts/weather-icons/';
 
 $font-family-serif: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
 $font-family-serif-alt: Georgia, serif !default;

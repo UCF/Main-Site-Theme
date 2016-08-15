@@ -3020,4 +3020,27 @@ function google_tag_manager_dl() {
 	return ob_get_clean();
 }
 
+
+function get_image_url( $filename ) {
+	global $wpdb, $post;
+
+	$post_id = wp_is_post_revision( $post->ID );
+	if( $post_id === False ) {
+		$post_id = $post->ID;
+	}
+
+	$url = '';
+	if ( $filename ) {
+		$sql = sprintf( 'SELECT * FROM %s WHERE post_title="%s" AND post_parent=%d ORDER BY post_date DESC', $wpdb->posts, $wpdb->escape( $filename ), $post_id );
+		$rows = $wpdb->get_results( $sql );
+		if ( count( $rows ) > 0 ) {
+			$obj = $rows[0];
+			if( $obj->post_type == 'attachment' && stripos( $obj->post_mime_type, 'image/' ) == 0 ) {
+				$url = wp_get_attachment_url( $obj->ID );
+			}
+		}
+	}
+	return $url;
+}
+
 ?>

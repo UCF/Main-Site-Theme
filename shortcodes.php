@@ -1323,28 +1323,36 @@ add_shortcode( 'sections-menu', 'sc_sections_menu' );
  * Search for a image by file name and return its URL.
  *
  */
-function sc_image( $attr ) {
-	global $wpdb, $post;
+function sc_full_width_image( $attr, $content='' ) {
+	$image = isset( $attr['image'] ) ? $attr['image'] : null;
+	$filename = isset ( $attr['filename'] ) ? $attr['filename'] : null;
+	$bgcolor = isset( $attr['bgcolor'] ) ? $attr['bgcolor'] : null;
+	$color = isset( $attr['color'] ) ? $attr['color'] : null;
+	$size = isset( $attr['size'] ) ? $attr['size'] : null;
+	$classes = isset( $attr['classes'] ) ? $attr['classes'] : null; 
+	$container = isset( $attr['container'] ) ? filter_var( $attr['container'],  FILTER_VALIDATE_BOOLEAN ) : true;
 
-	$post_id = wp_is_post_revision( $post->ID );
-	if( $post_id === False ) {
-		$post_id = $post->ID;
+	if ( ! $image && $filename ) {
+		$image = get_image_url( $filename );
 	}
 
-	$url = '';
-	if( isset( $attr['filename'] ) && $attr['filename'] != '' ) {
-		$sql = sprintf( 'SELECT * FROM %s WHERE post_title="%s" AND post_parent=%d ORDER BY post_date DESC', $wpdb->posts, $wpdb->escape( $attr['filename'] ), $post_id );
-		$rows = $wpdb->get_results( $sql );
-		if( count( $rows ) > 0 ) {
-			$obj = $rows[0];
-			if( $obj->post_type == 'attachment' && stripos( $obj->post_mime_type, 'image/' ) == 0 ) {
-				$url = wp_get_attachment_url( $obj->ID );
-			}
-		}
+	$styles = array();
+
+	if ( $image ) { $styles[] = 'background-image: url('.$image.');'; }
+	if ( $bgcolor ) { $styles[] = 'background-color: '.$bgcolor.';'; }
+	if ( $color ) { $styles[] = 'color: '.$color.';'; }
+	if ( $size ) { $styles[] = 'background-size: '.$size.';'; }
+
+	if ( $container ) {
+		$content = '<div class="container">'.apply_filters( 'the_content', $content ).'</div>';
 	}
-	return $url;
+
+	if ( ! empty( $styles ) ) {
+		$content = '<div class="' . $classes . '" style="'.implode( ' ', $styles ).'">'.$content.'</div>';
+	}
+
+	return $content;
 }
-
-add_shortcode('image', 'sc_image');
+add_shortcode( 'full-width-image', 'sc_full_width_image' );
 
 ?>
