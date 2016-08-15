@@ -1,6 +1,16 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+
+// Custom variables:
+
+$ucf-gold: #ffc904;
+$ucf-gold-light: #ffeeaf;
+$ucf-metal-gold: #c90;
+$font-family-serif-alt: Georgia, serif !default;
+
 .locations-section {
   font-family: Gotham;
-  margin-bottom: 24px;
+  margin-bottom: 72px;
 
   .section-header {
     height: 500px;
@@ -76,3 +86,189 @@ ul>li>a {
     text-decoration: none;
   }
 }
+
+.callout {
+  background: #fc0;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .icon-link {
+    display: inline-block;
+    margin: 10px auto;
+    width: 25%;
+
+    @media (max-width: $screen-xs-max) {
+      width: 50%;
+    }
+
+    a {
+      color: #000;
+
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+      }
+
+      h3 {
+        background: rgba(30, 30, 30, 0.25);
+        border-radius: 4px;
+        display: inline;
+        font-family: $font-family-sans-serif;
+        font-size: 14px;
+        padding: 2px 14px;
+        @include transition(background .25s, color .25s);
+      }
+
+      p {
+        font-size: 12px;
+        font-style: italic;
+        padding-top: 8px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: #fff;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: #fc0;
+        }
+      }
+    }
+  }
+}
+
+.map-search {
+  background-position: center center;
+  height: 530px;
+  margin-top: 70px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  @media (max-width: $screen-md-max) {
+    height: 400px;
+  }
+  @media (max-width: $screen-sm-max) {
+    height: 300px;
+  }
+
+  .search-box-background {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .section-header-text {
+    font-size: 45px;
+    font-family: $font-family-sans-serif;
+    font-weight: 800;
+    color: #000;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    min-width: 600px;
+    padding-top: 190px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 30%;
+
+    @media (max-width: $screen-md-max) {
+      font-size: 40px;
+      padding-top: 115px;
+      min-width: 540px;
+    }
+    @media (max-width: $screen-sm-max) {
+      font-size: 30px;
+      padding-top: 70px;
+      max-width: 420px;
+      min-width: 100%;
+      width: 100%;
+    }
+  }
+
+  .search-form {
+    background: #F7F7F7; /* For browsers that do not support gradients */
+    background: linear-gradient(#fff, #eee);
+    border-radius: 200px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    font-style: italic;
+    height: 80px;
+    margin: 0 auto;
+    padding: 15px;
+    position: relative;
+    width: 650px;
+
+    @media (max-width: $screen-sm-max) {
+      width: 80%;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .search-term {
+      border: 1px solid #E8E8E8;
+      border-radius: 50px;
+      float: left;
+      font-weight: 100;
+      font-family: $font-family-serif-alt;
+      font-size: 17px;
+      letter-spacing: .5px;
+      outline: none;
+      padding: 13px 25px;
+      width: 540px;
+
+      @media (max-width: $screen-sm-max) {
+        border: 11px solid $ucf-gold-light;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        float: none;
+        padding-right: 65px;
+        width: 100%;
+      }
+    }
+
+    .search-button {
+      background: $ucf-gold;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      float: right;
+      font-size: 26px;
+      height: 50px;
+      padding: 0;
+      width: 50px;
+
+      @media (max-width: $screen-sm-max) {
+        float: none;
+        position: absolute;
+        top: 26px;
+        right: 25px;
+      }
+
+      .fa-spinner {
+        display: none;
+      }
+
+      &.loading {
+        .fa-search {
+          display: none;
+        }
+        .fa-spinner {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+

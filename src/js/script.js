@@ -1555,6 +1555,8 @@ var mediaTemplateVideo = function($) {
 var sectionsMenu = function($) {
   var $sectionsMenu = $('#sections-menu');
   if ( $sectionsMenu.length ) {
+    var selector = $sectionsMenu.data('selector');
+
     var clickHandler = function(e) {
       e.preventDefault();
 
@@ -1603,7 +1605,7 @@ var sectionsMenu = function($) {
       offset = $firstSection.offset().top - $menu.height(); // Reduce by 50px to account for university header.
     };
 
-    var $sections = $('section'),
+    var $sections = $(selector),
         $menuList = $sectionsMenu.find('ul.nav'),
         $menu = $('#sections-navbar'),
         $firstSection = $sections.first(),

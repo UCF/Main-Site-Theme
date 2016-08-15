@@ -1287,6 +1287,13 @@ add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
  * on the page.
  **/
 function sc_sections_menu( $atts, $content='' ) {
+	$atts = shortcode_atts(
+		array(
+			selector => '.auto-section'
+		),
+		$atts
+	);
+
 	ob_start();
 ?>
 	<nav id="sections-navbar" class="navbar navbar-gold center">
@@ -1299,7 +1306,7 @@ function sc_sections_menu( $atts, $content='' ) {
 					<span class="icon-bar"></span>
 				</button>
 			</div>
-			<div class="collapse navbar-collapse" id="sections-menu">
+			<div class="collapse navbar-collapse" id="sections-menu" data-selector="<?php echo $atts['selector']; ?>">
 				<ul class="nav navbar-nav">
 
 				</ul>
