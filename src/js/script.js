@@ -1563,9 +1563,8 @@ var sectionsMenu = function($) {
       var $target = $(this.hash);
       $target = $target.length ? $target : $('[name=' + this.hash.slice() + ']');
 
-      var scrollTo = $target.offset().top;
+      var scrollTo = $target.offset().top - 50;
       if ( $(window).width() < 991 ) {
-        scrollTo -= 50;
         $sectionsMenu.collapse('toggle');
       }
 
@@ -1613,7 +1612,7 @@ var sectionsMenu = function($) {
 
     $.each($sections, addToMenu);
     $(document).on('scroll', scroll);
-    $('body').scrollspy({target: '#sections-menu'});
+    $('body').scrollspy({target: '#sections-menu', offset: 60});
     $(window).on('resize', onResize);
     scroll();
   }

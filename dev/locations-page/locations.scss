@@ -1,14 +1,125 @@
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/type';
+
+// Mixins
+@mixin body-prefix($selector) {
+  body#{$selector} & {
+    @content;
+  }
+}
 
 // Custom variables:
 
 $ucf-gold: #ffc904;
 $ucf-gold-light: #ffeeaf;
 $ucf-metal-gold: #c90;
-$font-family-serif-alt: Georgia, serif !default;
 
-.locations-section {
+$ucf-bg-default      : #fc0;
+$ucf-bg-highlight    : #c90;
+$ucf-col-default     : #000;
+$ucf-col-highlight   : #fff;
+
+$grid-float-breakpoint: 992px;
+
+// Bootstrap overrides:
+$icon-font-path: '../fonts/bootstrap/';
+$fa-font-path: '../fonts/font-awesome/';
+$wi-path: '../fonts/weather-icons/';
+
+$font-family-serif: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
+$font-family-serif-alt: Georgia, serif !default;
+$font-family-sans-serif: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
+$font-family-header: Verdana, Geneva, sans-serif;
+
+#header-menu {
+  @include center-block();
+  display: inline; 
+
+  li {
+    padding: 15px 5px;
+    @media (max-width: $screen-sm-max) {
+      padding: 0;
+    }
+
+    &:last-child {
+      height: 25px;
+
+      &:after {
+        content: '' !important;
+      }
+
+      a {
+        background-color: #fc0;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        color: #000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: $font-family-header;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 1.42857143;
+        margin-bottom: 0;
+        margin-top: -5px;
+        padding: 4px 12px;
+        text-align: center;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        user-select: none;
+        vertical-align: middle;
+        white-space: nowrap;
+
+        @include body-prefix('.ie9') {
+          @media (min-width: $screen-md-min) {
+            top: 1px;
+          }
+        }
+
+        @media (max-width: $screen-sm-max) {
+          font-size: 11px !important;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  a {
+    color: #fff;
+    font-family: $font-family-serif-alt;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 7px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 14.25px !important;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: #000;
+      color: #fc0;
+      text-decoration: none;
+    }
+  }
+
+  a[href]:after {
+    @media print {
+      content: '';
+    }
+  }
+}
+
+.locations-section,
+.intro-section {
   font-family: Gotham;
   margin-bottom: 72px;
 
@@ -272,3 +383,198 @@ ul>li>a {
   }
 }
 
+.campuses-grid {
+  width: 100%;
+  overflow: hidden;
+}
+
+.campus-card {
+  box-sizing: border-box;
+  display: block;
+  float: left;
+  font-family: $font-family-sans-serif;
+  font-size: 14px;
+  padding: 115px 20px 115px;
+  position: relative;
+  text-align: center;
+  transition: background-color .4s, color .4s;
+  width: 33.33%;
+
+  @media (max-width: $screen-sm-max) {
+    padding: 50px 20px 100px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    width: 50%;
+  }
+
+  @media (max-width: 300px) {
+    width: 100%;
+  }
+
+  .overlay {
+    background-size: 100%;
+    background-position: center center;
+    bottom: 0;
+    left: 0;
+    opacity: .05;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-size .4s, opacity .4s;
+    z-index: 10;
+  }
+
+  h2 {
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 1.25;
+    margin-bottom: 15px;
+    margin-top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 325px;
+    position: relative;
+    transition: color .4s;
+    z-index: 15;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 20px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 18px;
+    }
+  }
+
+  p {
+    margin: 0 auto;
+    max-width: 400px;
+    position: relative;
+    transition: color .4s;
+    z-index: 15;
+  }
+
+  .service-links {
+    @extend .list-inline;
+    bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    position: absolute;
+    width: 90%;
+    z-index: 20;
+
+    li {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 5px;
+    }
+    li + li {
+      padding-left: 9px;
+    }
+
+    li:after {
+      content: "";
+      padding-left: 14px;
+      transition: color .4s;
+      border: 1px solid rgba(124, 103, 30, 0.3);
+      border-width: 0 1px 0 0;
+      transition: border-color .4s;
+
+      @media (max-width: $screen-sm-max) {
+        display: none;
+      }
+    }
+
+    li:before {
+      color: #7C671E;
+      content:"\e144";
+      font-family: 'Glyphicons Halflings';
+      font-size: 11px;
+      padding-right: 5px;
+      transition: color .4s;
+    }
+    li:last-child:after {
+      display: none;
+    }
+
+  }
+
+  a {
+    &:link,
+    &:active,
+    &:visited {
+      color: #7c671e;
+      text-decoration: underline;
+      transition: color .4s;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &:nth-child(1) {
+    background-color: #ffc908;
+  }
+  &:nth-child(2) {
+    background-color: #ffd747;
+  }
+  &:nth-child(3) {
+    background-color: #ffe68a;
+  }
+  &:nth-child(4) {
+    background-color: #edbc0c;
+  }
+  &:nth-child(5) {
+    background-color: #eccb52;
+  }
+  &:nth-child(6) {
+    background-color: #f0d77d;
+  }
+  &:nth-child(7) {
+    background-color: #d3ac1f;
+  }
+  &:nth-child(8) {
+    background-color: #debe4b;
+  }
+  &:nth-child(9) {
+    background-color: #dfcb81;
+  }
+  &:nth-child(10) {
+    background-color: #B9971A;
+  }
+  &:nth-child(11) {
+    background-color: #B99C2F;
+  }
+  &:nth-child(12) {
+    background-color: #CCB86F;
+  }
+
+  &:hover {
+    background-color: #2b2b2b;
+
+    .overlay {
+      background-size: 107%;
+      opacity: 0.1;
+    }
+
+    h2, p, li, .service-links li:before, .service-links li:after {
+      color: #fff;
+    }
+
+    .service-links li:after {
+      border-color: #fff;
+    }
+
+    a {
+      &:link,
+      &:active,
+      &:visited,
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

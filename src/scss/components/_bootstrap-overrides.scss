@@ -194,14 +194,55 @@ a.list-group-item {
   }
 }
 
-$ucf-gold: #ffc904;
-$ucf-gold-light: #ffeeaf;
-$ucf-metal-gold: #c90;
+#sections-navbar {
+  box-shadow: 0 2px 32px rgba(0, 0, 0, 0.50);
+  font-size: 11px;
+  font-weight: 800;
+  overflow: hidden;
+  text-transform: uppercase;
+  transition: box-shadow .75s;
 
-$ucf-bg-default      : #fc0;
-$ucf-bg-highlight    : #c90;
-$ucf-col-default     : #000;
-$ucf-col-highlight   : #fff;
+  @media (max-width: $screen-sm-max) {
+    overflow: visible;
+  }
+
+
+  &.center {
+    box-shadow: none;
+    margin-bottom: 0;
+    margin: 0 auto;
+
+    .weather {
+      height: 0;
+      padding: 0;
+      margin: 0;
+      transform: translate(300px);
+      width: 0;
+    }
+  }
+
+  .navbar-nav {
+    > li {
+      > a {
+        padding-bottom: 17px;
+        padding-top: 17px;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .navbar-title {
+    float: left;
+    padding: 18px 0 0 18px;
+
+    @media (min-width: $screen-md-min) {
+      display: none;
+    }
+  }
+}
 
 .navbar-gold {
   background-color: $ucf-bg-default;

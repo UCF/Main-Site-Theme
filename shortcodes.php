@@ -1319,4 +1319,32 @@ function sc_sections_menu( $atts, $content='' ) {
 
 add_shortcode( 'sections-menu', 'sc_sections_menu' );
 
+/*
+ * Search for a image by file name and return its URL.
+ *
+ */
+function sc_image( $attr ) {
+	global $wpdb, $post;
+
+	$post_id = wp_is_post_revision( $post->ID );
+	if( $post_id === False ) {
+		$post_id = $post->ID;
+	}
+
+	$url = '';
+	if( isset( $attr['filename'] ) && $attr['filename'] != '' ) {
+		$sql = sprintf( 'SELECT * FROM %s WHERE post_title="%s" AND post_parent=%d ORDER BY post_date DESC', $wpdb->posts, $wpdb->escape( $attr['filename'] ), $post_id );
+		$rows = $wpdb->get_results( $sql );
+		if( count( $rows ) > 0 ) {
+			$obj = $rows[0];
+			if( $obj->post_type == 'attachment' && stripos( $obj->post_mime_type, 'image/' ) == 0 ) {
+				$url = wp_get_attachment_url( $obj->ID );
+			}
+		}
+	}
+	return $url;
+}
+
+add_shortcode('image', 'sc_image');
+
 ?>
