@@ -61,6 +61,7 @@ define('THEME_STATIC_URL', THEME_URL.'/static');
 define('THEME_IMG_URL', THEME_STATIC_URL.'/img');
 define('THEME_JS_URL', THEME_STATIC_URL.'/js');
 define('THEME_CSS_URL', THEME_STATIC_URL.'/css');
+define('THEME_DEV_URL', THEME_URL.'/dev');
 define('THEME_OPTIONS_GROUP', 'settings');
 define('THEME_OPTIONS_NAME', 'theme');
 define('THEME_OPTIONS_PAGE_TITLE', 'Theme Options');
@@ -70,6 +71,9 @@ define('ESI_INCLUDE_URL', THEME_STATIC_URL.'/esi.php');
 define('FEED_FETCH_TIMEOUT', 10); // seconds
 
 $theme_options = get_option(THEME_OPTIONS_NAME);
+
+define('DEV_MODE', intval($theme_options['dev_mode'])); # Never leave this activated in a production environment!
+
 
 # Weather
 define('WEATHER_URL', !empty($theme_options['weather_service_url']) ? $theme_options['weather_service_url'] : 'http://weather.smca.ucf.edu/');
@@ -227,6 +231,10 @@ Config::$esi_whitelist = array(
 		),
 	4 => array(
 		'name' => 'page_specific_stylesheet',
+		'safe_args' => get_all_page_ids(),
+		),
+	4 => array(
+		'name' => 'page_specific_files_local',
 		'safe_args' => get_all_page_ids(),
 		),
 );
@@ -565,6 +573,20 @@ Config::$theme_settings = array(
 			'default'     => '//cloud.typography.com/730568/675644/css/fonts.css', /* CSS Key relative to PROD project */
 			'value'       => $theme_options['cloud_font_key'],
 		)),
+	),
+	'Developers' => array(
+		new RadioField(array(
+			'name'        => 'Enable Developer Mode',
+			'id'          => THEME_OPTIONS_NAME.'[dev_mode]',
+			'description' => 'Turn on Developer Mode, which enables direct editing from the theme\'s dev/ directory. <strong>Never enable this
+								setting in a production environment.</strong>',
+			'default'     => 'Off',
+			'choices'     => array(
+				'On'  => 1,
+				'Off' => 0,
+			),
+			'value'       => $theme_options['dev_mode'],
+	    )),
 	),
 );
 

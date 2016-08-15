@@ -747,6 +747,19 @@ function get_announcements($role='all', $keyword=NULL, $time='thisweek') {
 	}
 }
 
+/*
+ * Check to see if some arbitary file exists (does not return a 404/500)
+ * http://stackoverflow.com/questions/14699941/php-curl-check-for-file-existence-before-downloading
+ *
+ * @return bool
+ */
+function curl_exists($url) {
+	$file_headers = @get_headers($url);
+	if($file_headers[0] == 'HTTP/1.1 404 Not Found' || $file_headers[0] == 'HTTP/1.1 500 Internal Server Error') {
+		return false;
+	}
+	return true;
+}
 
 /**
  * Prints a set of announcements, given an announcements array
@@ -1233,6 +1246,31 @@ function page_specific_stylesheet($pageid) {
 	else { return NULL; }
 }
 
+
+/**
+ * Output a page-specific stylesheet link to a file in the development folder,
+ * if one exists. The filename is based on the page's slug.
+ * Intended for use in header.php (in edge-side include)
+ **/
+function page_specific_files_local($pageid) {
+	$page_slug = get_post( $pageid, ARRAY_A )['post_name'];
+
+	if ( DEV_MODE == 1 ) {
+		$page_dev_filenames = THEME_DEV_URL.'/custom-pages/' . $page_slug;
+		$page_dev_stylesheet_url = $page_dev_filenames . '.css';
+		$page_dev_js_url = $page_dev_filenames . '.js';
+
+		if ( curl_exists( $page_dev_stylesheet_url ) ) {
+			print '<link rel="stylesheet" href="' . $page_dev_stylesheet_url . '" type="text/css" media="all" />';
+		}
+		if ( curl_exists( $page_dev_js_url ) ) {
+			Config::add_script( $page_dev_js_url );
+		}
+	}
+	else {
+		return NULL;
+	}
+}
 
 /**
  * Prints the Cloud.Typography font stylesheet <link> tag.
