@@ -395,7 +395,7 @@ ul>li>a {
   position: relative;
   text-align: center;
   transition: background-color .4s, color .4s;
-  width: 33.33%;
+  width: 25%;
 
   @media (max-width: $screen-sm-max) {
     padding: 50px 20px 100px;
@@ -503,7 +503,7 @@ ul>li>a {
     &:active,
     &:visited {
       color: #7c671e;
-      text-decoration: underline;
+      text-decoration: none;
       transition: color .4s;
     }
 
