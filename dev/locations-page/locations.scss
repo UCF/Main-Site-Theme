@@ -27,6 +27,10 @@ $georgia: Georgia, serif !default;
 $gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
 $verdana: Verdana, Geneva, sans-serif;
 
+.gotham {
+  font-family: $gotham;
+}
+
 #header-menu {
   @include center-block();
   display: inline; 
