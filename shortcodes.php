@@ -1355,4 +1355,23 @@ function sc_full_width_image( $attr, $content='' ) {
 }
 add_shortcode( 'full-width-image', 'sc_full_width_image' );
 
+function sc_image( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'filename' => null
+		),
+		$atts
+	);
+
+	$url = null;
+
+	if ( isset( $atts['filename'] ) ) {
+		$url = get_image_url( $atts['filename'] );
+	}
+
+	return $url;
+}
+
+add_shortcode( 'image', 'sc_image' );
+
 ?>
