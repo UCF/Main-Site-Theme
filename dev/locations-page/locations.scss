@@ -17,17 +17,15 @@ $ucf-gold: #ffc904;
 $ucf-gold-light: #ffeeaf;
 $ucf-metal-gold: #c90;
 
-$ucf-bg-default      : #fc0;
-$ucf-bg-highlight    : #c90;
 $ucf-col-default     : #000;
 $ucf-col-highlight   : #fff;
 
 $grid-float-breakpoint: 992px;
 
-$font-family-serif: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
-$font-family-serif-alt: Georgia, serif !default;
-$font-family-sans-serif: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
-$font-family-header: Verdana, Geneva, sans-serif;
+$archer: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
+$georgia: Georgia, serif !default;
+$gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
+$verdana: Verdana, Geneva, sans-serif;
 
 #header-menu {
   @include center-block();
@@ -47,14 +45,14 @@ $font-family-header: Verdana, Geneva, sans-serif;
       }
 
       a {
-        background-color: #fc0;
+        background-color: $ucf-gold;
         background-image: none;
         border: 1px solid transparent;
         border-radius: 4px;
-        color: #000;
+        color: $ucf-col-default;
         cursor: pointer;
         display: inline-block;
-        font-family: $font-family-header;
+        font-family: $verdana;
         font-size: 14px;
         font-weight: 500;
         line-height: 1.42857143;
@@ -81,16 +79,16 @@ $font-family-header: Verdana, Geneva, sans-serif;
         &:hover,
         &:active,
         &:focus {
-          background-color: #000;
-          color: #fff;
+          background-color: $ucf-col-default;
+          color: $ucf-col-highlight;
         }
       }
     }
   }
 
   a {
-    color: #fff;
-    font-family: $font-family-serif-alt;
+    color: $ucf-col-highlight;
+    font-family: $georgia;
     font-size: 17px;
     font-weight: 400;
     padding: 7px;
@@ -102,8 +100,8 @@ $font-family-header: Verdana, Geneva, sans-serif;
     &:hover,
     &:active,
     &:focus {
-      background-color: #000;
-      color: #fc0;
+      background-color: $ucf-col-default;
+      color: $ucf-gold;
       text-decoration: none;
     }
   }
@@ -117,7 +115,7 @@ $font-family-header: Verdana, Geneva, sans-serif;
 
 .locations-section,
 .intro-section {
-  font-family: Gotham;
+  font-family: $gotham;
   margin-bottom: 72px;
 
   .section-header {
@@ -129,8 +127,8 @@ $font-family-header: Verdana, Geneva, sans-serif;
     .section-title,
     .section-link {
       color: #fff;
-      font-family: Archer, serif;
-      text-shadow: 1px 1px 1px #000;
+      font-family: $gotham;
+      text-shadow: 1px 1px 1px $ucf-col-default;
     }
 
     .section-title {
@@ -149,13 +147,13 @@ $font-family-header: Verdana, Geneva, sans-serif;
 
   .content-title {
     color: #333;
-    font-family: Gotham;
+    font-family: $gotham;
     margin: 24px 0;
     padding: 12px 0;
     text-transform: uppercase;
 
     &::after {
-        background: #ffc904;
+        background: $ucf-gold;
         content: " ";
         display: block;
         height: 2px;
@@ -166,22 +164,22 @@ $font-family-header: Verdana, Geneva, sans-serif;
 }
 
 .header-title {
-  font-family: Archer;
+  font-family: $archer;
   margin-top: 34px;
 
   .header-main-title {
-    background: #fc0;
+    background: $ucf-gold;
     font-size: 48px;
     padding: 18px 12px;
   }
 
   .header-subtitle {
-    background: #000;
-    color: #fff;
+    background: $ucf-col-default;
+    color: $ucf-col-highlight;
     display: inline-block;
     font-weight: 300;
     font-size: 24px;
-    margin-top: 7px;
+    margin-top: 21px;
     padding: 18px 12px;
   }
 }
@@ -196,7 +194,7 @@ ul>li>a {
 }
 
 .callout {
-  background: #fc0;
+  background: $ucf-gold;
   margin: 0 auto;
   text-align: center;
   padding: 48px 0;
@@ -215,7 +213,7 @@ ul>li>a {
     }
 
     a {
-      color: #000;
+      color: $ucf-col-default;
 
       .fa {
         font-size: 80px;
@@ -227,7 +225,7 @@ ul>li>a {
         background: rgba(30, 30, 30, 0.25);
         border-radius: 4px;
         display: inline;
-        font-family: $font-family-sans-serif;
+        font-family: $gotham;
         font-size: 14px;
         padding: 2px 14px;
         @include transition(background .25s, color .25s);
@@ -250,7 +248,7 @@ ul>li>a {
 
         h3 {
           background: rgba(10, 10, 10, 0.55);
-          color: #fc0;
+          color: $ucf-gold;
         }
       }
     }
@@ -281,9 +279,9 @@ ul>li>a {
 
   .section-header-text {
     font-size: 45px;
-    font-family: $font-family-sans-serif;
+    font-family: $gotham;
     font-weight: 800;
-    color: #000;
+    color: $ucf-col-default;
     letter-spacing: 2px;
     margin: 0 auto;
     margin-bottom: 15px;
@@ -330,7 +328,7 @@ ul>li>a {
       border-radius: 50px;
       float: left;
       font-weight: 100;
-      font-family: $font-family-serif-alt;
+      font-family: $georgia;
       font-size: 17px;
       letter-spacing: .5px;
       outline: none;
@@ -350,7 +348,7 @@ ul>li>a {
       background: $ucf-gold;
       border: 0;
       border-radius: 50%;
-      color: #fff;
+      color: $ucf-col-highlight;
       float: right;
       font-size: 26px;
       height: 50px;
@@ -389,7 +387,7 @@ ul>li>a {
   box-sizing: border-box;
   display: block;
   float: left;
-  font-family: $font-family-sans-serif;
+  font-family: $gotham;
   font-size: 14px;
   padding: 115px 20px 115px;
   position: relative;
@@ -558,11 +556,11 @@ ul>li>a {
     }
 
     h2, p, li, .service-links li:before, .service-links li:after {
-      color: #fff;
+      color: $ucf-col-highlight;
     }
 
     .service-links li:after {
-      border-color: #fff;
+      border-color: $ucf-col-highlight;
     }
 
     a {
