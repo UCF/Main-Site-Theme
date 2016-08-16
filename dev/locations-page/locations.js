@@ -6,6 +6,12 @@ var init = function() {
 	} else {
 		lazyLoadGoogleMap();
 	}
+
+  if ($.isFunction($.matchHeight)) {
+    initializeMatchHeight();
+  } else {
+    lazyLoadMatchHeight();
+  }
 };
 
 var initialize = function() {
@@ -184,8 +190,23 @@ var lazyLoadGoogleMap = function() {
 		});
 };
 
+var lazyLoadMatchHeight = function() {
+  $.getScript("https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js")
+    .done(function() {
+      initializeMatchHeight();
+    });
+};
+
 function initializeMap() {
 	initialize();
+}
+
+function initializeMatchHeight() {
+  $('.campus-card').matchHeight();
+
+  $(window).on('resize', function() {
+    $('.campus-card').matchHeight();
+  });
 }
 
 $(document).ready(init);
