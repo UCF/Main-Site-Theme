@@ -1,0 +1,232 @@
+// Styles that are directly tied to the site footer/navigation should go in
+// this file.
+
+#footer-menu li {
+  border-right: 1px solid #fff !important;
+}
+
+.site-footer {
+  background: $footer-gray;
+  color: #fff;
+  font-family: $font-family-sans-serif;
+  margin-top: 0;
+  padding-bottom: 30px;
+
+  .footer-title {
+    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    margin-top: 30px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  a {
+    color: #fff !important;
+
+    &:hover {
+      color: #fff !important;
+      text-decoration: none;
+
+      .event {
+        opacity: .8;
+      }
+    }
+  }
+
+  .center-col,
+  .left-col,
+  .right-col {
+    border-width: 0 1px;
+    padding: 0 25px;
+    margin: 0 -10px;
+
+    @media (max-width: $screen-xs-max) {
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .center-col {
+    border-style: solid;
+    border-color: #3e3e3e;
+  }
+
+  .footer-news {
+    list-style: none;
+    margin-top: 14px;
+    padding-left: 0;
+
+    h3 {
+      font-size: 18px;
+      font-weight: normal;
+      margin: 0 auto 8px;
+    }
+
+    .news-item {
+      border-radius: 2px;
+      margin-bottom: 18px;
+      margin-top: -18px;
+      padding-bottom: 18px;
+      padding-top: 18px;
+    }
+
+    a {
+      &:hover {
+        .news-item {
+          opacity: .8;
+
+          @media (max-width: $screen-xs-max) {
+            border-radius: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .footer-events {
+    margin-top: 12px;
+
+    .event {
+      border-radius: 2px;
+      margin-bottom: 18px;
+      margin-top: -18px;
+      padding-top: 18px;
+    }
+
+    .event-date {
+      border: 1px solid #fff;
+      border-radius: 4px;
+      text-align: center;
+
+      @media (max-width: $screen-xs-max) {
+        border: 0;
+      }
+
+      .month {
+        background: #fff;
+        color: #000;
+        display: block;
+        font-weight: 700;
+        padding: 12px auto;
+        text-transform: uppercase;
+
+        @media (max-width: $screen-xs-max) {
+          background: transparent;
+          color: #fff;
+        }
+      }
+
+      .day {
+        font-size: 22px;
+      }
+    }
+
+    .event-details {
+      h4 {
+        margin: 0 auto 8px;
+      }
+
+      .time {
+        font-style: italic;
+      }
+    }
+  }
+
+  .all-link {
+    color: #fc0;
+    display: block;
+    margin-left: 20px;
+    margin-top: 20px;
+    text-align: right;
+    font-family: $font-family-serif;
+    font-style: italic;
+
+    @media (max-width: $screen-xs-max) {
+        margin-top: 0;
+        margin-left: 0;
+        margin-bottom: 50px;
+        text-align: left;
+    }
+
+  }
+
+  .read-more {
+    color: #fc0;
+  }
+
+  .site-footer-menu {
+    li {
+      border-right: 1px solid #fff;
+      padding-right: 10px;
+
+      a {
+        color: #fff;
+        font-size: 10px;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  .social {
+    margin-bottom: 24px;
+    text-align: center;
+    
+    .social-icon {
+      background: #fff;
+      border-radius: 50%;
+      display: inline-block;
+      height: 32px;
+      margin: 0 5px;
+      padding-top: 10px;
+      width: 32px;
+
+      &:hover {
+        background: #D4D4D4;
+      }
+    }
+
+    span {
+      color: #3E3E3E;
+      padding: 6px;
+      font-size: 24px;
+      line-height: 0;
+
+      &.fa-facebook {
+        font-size: 20px;
+        padding: 6px 8px 0 8px;
+      }
+
+      &.fa-twitter {
+        font-size: 20px;
+      }
+
+      &.fa-google-plus {
+        font-size: 20px;
+      }
+
+      &.fa-linkedin {
+        font-size: 20px;
+        padding: 4px 8px;
+      }
+    }
+  }
+}
+
+.main-site-footer {
+  background: #3e3e3e;
+  padding: 48px 0;
+  text-align: center;
+
+  .main-site-title {
+    color: #fff;
+    font-family: $font-family-sans-serif;
+    font-size: 19px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+}

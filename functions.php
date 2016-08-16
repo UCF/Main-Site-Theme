@@ -3043,4 +3043,51 @@ function get_image_url( $filename ) {
 	return $url;
 }
 
+function display_social_menu() {
+	$items = wp_get_nav_menu_items( 'social-links' );
+
+	ob_start();
+?>
+	<div class="social">
+<?php
+	foreach( $items as $item ):
+		$href = $item->url;
+		$icon = get_social_icon( $item->post_name );
+?>
+		<a href="<?php echo $href; ?>" class="social-icon ga-event-link">
+			<span class="<?php echo $icon; ?>"></span>
+		</a>
+
+<?php
+	endforeach;
+?>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+function get_social_icon( $item_slug ) {
+	
+	switch( true ) {
+		case stristr( $item_slug, 'facebook' ):
+			return 'fa fa-facebook';
+		case stristr( $item_slug, 'twitter' ):
+			return 'fa fa-twitter';
+		case stristr( $item_slug, 'google' ):
+			return 'fa fa-google-plus';
+		case stristr( $item_slug, 'linkedin' ):
+			return 'fa fa-linkedin';
+		case stristr( $item_slug, 'instagram' ):
+			return 'fa fa-instagram';
+		case stristr( $item_slug, 'pinterest' ):
+			return 'fa fa-pinterest-p';
+		case stristr( $item_slug, 'youtube' ):
+			return 'fa fa-youtube';
+		case stristr( $item_slug, 'flickr' ):
+			return 'fa fa-flickr';
+		default:
+			return 'fa fa-pencil';
+	}
+}
+
 ?>

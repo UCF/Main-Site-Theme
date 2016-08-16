@@ -1,6 +1,7 @@
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/type';
+@import '../../src/scss/variables';
 
 // Compile this file using the following command (assumes scss is installed globally)
 // scss --watch --style compressed dev/locations-page/locations.scss:dev/locations-page/locations.min.css
@@ -11,16 +12,7 @@
     @content;
   }
 }
-
 // Custom variables:
-$ucf-gold: #ffc904;
-$ucf-gold-light: #ffeeaf;
-$ucf-metal-gold: #c90;
-
-$ucf-col-default     : #000;
-$ucf-col-highlight   : #fff;
-
-$grid-float-breakpoint: 992px;
 
 $archer: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
 $georgia: Georgia, serif !default;
