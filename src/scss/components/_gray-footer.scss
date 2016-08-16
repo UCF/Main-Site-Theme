@@ -18,6 +18,10 @@
     margin-top: 30px;
     text-align: center;
     text-transform: uppercase;
+
+    @media(max-width: $screen-xs-max) {
+      font-size: 18px;
+    }
   }
 
   a {
