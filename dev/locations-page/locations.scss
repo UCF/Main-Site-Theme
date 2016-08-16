@@ -29,7 +29,7 @@ $verdana: Verdana, Geneva, sans-serif;
 
 #header-menu {
   @include center-block();
-  display: inline; 
+  display: inline;
 
   li {
     padding: 15px 5px;
@@ -570,6 +570,45 @@ ul>li>a {
       &:hover {
         color: #fff;
       }
+    }
+  }
+}
+
+.image-strip {
+  box-sizing: border-box;
+  display: block;
+  font-family: $gotham;
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+  transition: background-color .4s, color .4s;
+  width: 100%;
+
+  h3 {
+    color: #333;
+    font-size: 18px;
+    line-height: 28px;
+    margin: 24px 0;
+    padding: 12px 0;
+    text-transform: uppercase;
+  }
+
+  .image-strip-image {
+    background-position: center center;
+    background-size: 100%;
+    float:left;
+    height: 300px;
+    transition: background-size .4s, opacity .4s;
+    width: 25%;
+    z-index: 10;
+
+    @media (max-width: $screen-sm-max) {
+      height: 200px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      height: 125px;
+      width: 50%;
     }
   }
 }
