@@ -30,13 +30,6 @@
 			page_specific_webfonts( $post->ID );
 		}
 
-		// Load page-specific css & js, for development.
-		if ( is_page() || ( is_404() && $post = get_page_by_title( '404' ) ) ) {
-			if ( DEV_MODE == 1 ) {
-				esi_include( 'page_specific_files_local', $post->ID ); // Wrap in ESI to prevent caching of .css file
-			}
-		}
-
 		// Load page-specific css.
 		if ( is_page() || ( is_404() && $post = get_page_by_title( '404' ) ) ) {
 			esi_include( 'page_specific_stylesheet', $post->ID ); // Wrap in ESI to prevent caching of .css file
