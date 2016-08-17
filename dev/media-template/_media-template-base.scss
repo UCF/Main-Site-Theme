@@ -372,12 +372,13 @@
     // .heading-underline elements should always be consistent in
     // font size, so force them on this class
     @extend .heading-sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     margin: 3em 0 1.7em;
     padding-bottom: 14px;
     position: relative;
 
     @media (min-width: $screen-sm-min) {
+      font-size: 16px;
       margin: 3.5em 0 1.7em;
     }
 
