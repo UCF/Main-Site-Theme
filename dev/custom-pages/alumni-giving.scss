@@ -46,6 +46,46 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
 }
 
 #contentcol {
+  blockquote {
+    border-left: 0 solid transparent;
+    padding: 0;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 10px;
+    }
+
+    &,
+    p {
+      @include gotham(3, italic);
+      font-size: 20px;
+      line-height: 1.5;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 30px;
+      }
+    }
+
+    p {
+      margin-bottom: .75em;
+    }
+
+    footer {
+      @include gotham(5);
+      color: $black;
+      font-size: 11.5px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .callout-blockquote {
+    margin: 3em 0;
+  }
+
   .img-headshot {
     height: auto;
     max-width: 250px;
