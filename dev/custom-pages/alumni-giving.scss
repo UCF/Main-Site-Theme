@@ -32,60 +32,20 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     background-position: center center;
   }
 
-  .header-title,
-  .header-subtitle {
-    clear: both;
-    display: inline-block;
-    float: right;
-  }
-
   .header-title {
-    @include archer(5);
-    background-color: rgba($ucf-gold, .8);
-    font-size: 28px;
-    line-height: 1.2;
-    margin-top: 10px;
-    padding: 12px;
-    text-align: center;
-
-    @media (min-width: 480px) {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
       font-size: 6vw;
     }
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 48px;
-      text-align: none;
-    }
   }
 
   .header-subtitle {
-    @include archer(3);
-    background-color: $black;
-    color: $white;
-    font-size: 13px;
-    font-weight: 300;
-    padding: 6px 12px;
-
-    @media (min-width: 480px) {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
       font-size: 3vw;
-    }
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 22px;
-      padding: 8px 12px;
     }
   }
 }
 
 #contentcol {
-  p:empty {
-    display: none;
-  }
-
-  .btn {
-    border-radius: 0;
-  }
-
   .img-headshot {
     height: auto;
     max-width: 250px;
@@ -153,6 +113,7 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
   .overlay-box-heading {
     font-size: 14px;
     margin-bottom: 6px;
+    margin-top: 0;
     text-transform: uppercase;
   }
 }
