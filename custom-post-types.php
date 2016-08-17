@@ -1415,6 +1415,12 @@ class Degree extends CustomPostType{
 				'desc' => 'graduate value in database. Do not modify this value.',
 				'id'   => $prefix.'is_graduate',
 				'type' => 'text',
+			),
+			array(
+				'name'  => 'Use Updated Template',
+				"desc"  => 'If checked, will used an updated template with an image header.',
+				'id'    => $prefix.'use_updated_template',
+				'type'  => 'checkbox'
 			)
 		);
 	}
