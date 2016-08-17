@@ -116,4 +116,22 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     margin-top: 0;
     text-transform: uppercase;
   }
+
+  // Applies heavy weight Gotham styles to a heading.
+  .heading-heavy {
+    @include gotham(8);
+    letter-spacing: .15em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .highlight {
+    display: inline-block;
+    padding: .2em 1em;
+  }
+
+  .highlight-white {
+    background-color: $white;
+    color: $black;
+  }
 }
