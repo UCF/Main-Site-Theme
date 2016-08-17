@@ -184,6 +184,20 @@
 }
 
 #contentcol {
+  h2,
+  .h2 {
+    margin: 2.5em 0 1.7em;
+
+    @media (min-width: $screen-sm-min) {
+      margin: 3em 0 1.7em;
+    }
+  }
+
+  h3,
+  .h3 {
+    margin: 3.5em 0 1.7em;
+  }
+
   a:not(.btn) {
     color: $brand-primary;
   }
@@ -337,17 +351,28 @@
     }
   }
 
-  // Class for second-level headings. Applies a gold border-bottom to the
-  // element, as well as adequate whitespace, forced Gotham, and uppercase
-  // text transform.
-  .section-heading {
-    margin: 2.5em 0 1.7em;
+  // Applies generic Gotham styles to a heading.
+  .heading-sans-serif {
+    @include gotham(7);
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  // Applies generic Archer styles to a heading.
+  .heading-slab-serif {
+    @include archer(7);
+    line-height: 1.25;
+  }
+
+  // Styles a heading with a gold underline, Gotham face and uppercase
+  // text.
+  .heading-underline {
+    // .heading-underline elements should always be consistent in
+    // font size, so force them on this class
+    @extend .heading-sans-serif;
+    font-size: 16px;
     padding-bottom: 14px;
     position: relative;
-
-    @media (min-width: $screen-sm-min) {
-      margin: 3em 0 1.7em;
-    }
 
     &:after {
       background-color: $ucf-gold;
@@ -359,21 +384,6 @@
       position: absolute;
       width: 50px;
     }
-  }
-
-  // Class for third-level headings, e.g. headings underneath a
-  // .section-heading.  Applies adequate whitespace, forces Gotham
-  // and applies uppercase text transform.
-  .section-subheading {
-    margin: 3.5em 0 1.7em;
-  }
-
-  .section-heading,
-  .section-subheading {
-    @include gotham(7);
-    font-size: 16px;
-    line-height: 1.25;
-    text-transform: uppercase;
   }
 
   // Class to be applied to a .fa- or .glyphicon- icon inside of a well.
