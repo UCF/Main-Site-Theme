@@ -4,6 +4,13 @@
 $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/08/header-xs.jpg';
 
 
+#contentcol {
+  h2.overlay-box-heading {
+    font-size: 14px;
+  }
+}
+
+
 .page-media-header {
   background-position: center bottom;
   background-size: 100% auto;
@@ -32,10 +39,6 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     background-position: center center;
   }
 
-  h1 {
-    margin-top: 10px;
-  }
-
   .header-title,
   .header-subtitle {
     clear: both;
@@ -48,6 +51,7 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     background-color: rgba($ucf-gold, .8);
     font-size: 28px;
     line-height: 1.2;
+    margin-top: 10px;
     padding: 12px;
     text-align: center;
 
@@ -77,5 +81,85 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
       font-size: 22px;
       padding: 8px 12px;
     }
+  }
+}
+
+.page-content {
+  p:empty {
+    display: none;
+  }
+
+  .btn {
+    border-radius: 0;
+  }
+
+  .img-headshot {
+    height: auto;
+    max-width: 250px;
+    width: 50%;
+
+    @media (min-width: $screen-sm-min) {
+      max-width: 100%;
+      width: auto;
+    }
+  }
+
+  .img-grid-item {
+    width: 100%;
+
+    @media (min-width: $screen-sm-min) {
+      float: left;
+      position: relative;
+      width: 50%;
+    }
+
+    @media (min-width: 1800px) {
+      // May as well, if you have a monitor this big
+      width: 25%;
+    }
+
+    > img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  .img-grid-contents {
+    margin: #{$grid-gutter-width / 2} #{$grid-gutter-width / 2} $grid-gutter-width #{$grid-gutter-width / 2};
+
+    @media (min-width: $screen-sm-min) {
+      bottom: 30px;
+      left: 30px;
+      margin: 0;
+      position: absolute;
+      right: 30px;
+    }
+  }
+
+  .overlay-box {
+    background-color: rgba($white, .8);
+
+    @media (min-width: $screen-sm-min) {
+      padding: 20px;
+    }
+
+    > p {
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 0 !important;
+        margin-top: 1.5em;
+      }
+
+      &:first-of-type {
+        @media (min-width: $screen-sm-min) {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .overlay-box-heading {
+    font-size: 14px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
   }
 }
