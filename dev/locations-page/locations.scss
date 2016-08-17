@@ -605,19 +605,23 @@ ul>li>a {
     color: #333;
     font-size: 18px;
     line-height: 28px;
-    margin: 24px 0;
+    margin: 24px 0 -20px 0;
     padding: 12px 0;
     text-transform: uppercase;
   }
 
   .image-strip-image {
     background-position: center center;
-    background-size: 100%;
+    background-size: cover;
     float:left;
-    height: 300px;
+    height: 257px;
     transition: background-size .4s, opacity .4s;
     width: 25%;
     z-index: 10;
+
+    @media (max-width: 1100px) {
+      height: 230px;
+    }
 
     @media (max-width: $screen-sm-max) {
       height: 200px;
@@ -625,7 +629,6 @@ ul>li>a {
 
     @media (max-width: $screen-xs-max) {
       height: 125px;
-      width: 50%;
     }
   }
 }
