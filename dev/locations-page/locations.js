@@ -15,7 +15,7 @@ var init = function() {
 };
 
 var initialize = function() {
-  var pinImage = new google.maps.MarkerImage("https://www.google.com/maps/vt/icon/name=assets/icons/poi/quantum/container_shadow-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/poi/quantum/school-2-medium.png&highlight=ff0000,000000,ffcc00&color=ffcc0000?scale=1.100000023841858");
+  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%20|FFCC00");
 
 	var latLng = new google.maps.LatLng(28.601947, -81.200254);
 	
@@ -159,7 +159,7 @@ var createMarker = function(title, lat, lng, icon, target) {
   });
 
   var infoWindow = new google.maps.InfoWindow({
-    content: title
+    content: '<p class="location-text">' + title + '</p>'
   });
 
   marker.addListener('mouseover', function() {

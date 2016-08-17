@@ -27,6 +27,11 @@ p {
   font-size: 15px;
 }
 
+.location-text {
+  font-family: $gotham;
+  margin: 0;
+}
+
 #header-menu {
   @include center-block();
   display: inline;
