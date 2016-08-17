@@ -54,11 +54,11 @@
   @include gotham();
   color: $black;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
 
   @media (min-width: $screen-sm-min) {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.65;
   }
 
   // Gotham-ize all the things
