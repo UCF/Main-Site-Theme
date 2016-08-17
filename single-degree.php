@@ -6,7 +6,7 @@
 ?>
 <?php 
 	if ( $post->use_updated_template ) {
-		get_template_part( 'degree-profile.php' );
+		get_template_part( 'degree-profile' );
 	} else {
 		get_template_part( 'classic-degree-profile' );
 	}

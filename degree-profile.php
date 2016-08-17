@@ -4,6 +4,5 @@
 	$post = append_degree_metadata( $post, true );
 	$search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) );
 ?>
-I'm the updated degree template!
 
 <?php get_footer();?>
