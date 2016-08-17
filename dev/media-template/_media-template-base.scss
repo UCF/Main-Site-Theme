@@ -186,16 +186,16 @@
 #contentcol {
   h2,
   .h2 {
-    margin: 2.5em 0 1.7em;
+    margin: 1.2em 0 .6em;
 
     @media (min-width: $screen-sm-min) {
-      margin: 3em 0 1.7em;
+      margin: 2em 0 .8em;
     }
   }
 
   h3,
   .h3 {
-    margin: 3.5em 0 1.7em;
+    margin: 2.75em 0 1.25em;
   }
 
   a:not(.btn) {
@@ -361,7 +361,6 @@
   // Applies generic Archer styles to a heading.
   .heading-slab-serif {
     @include archer(7);
-    line-height: 1.25;
   }
 
   // Styles a heading with a gold underline, Gotham face and uppercase
