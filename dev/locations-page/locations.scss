@@ -519,12 +519,13 @@ ul>li>a {
   }
 
   a {
+    transition: color .4s;
+
     &:link,
     &:active,
     &:visited {
-      color: #7c671e;
+      color: #000;
       text-decoration: none;
-      transition: color .4s;
     }
 
     &:hover {
