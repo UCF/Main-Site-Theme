@@ -52,15 +52,24 @@
   font-weight: #{$weight}00;
 }
 
+// Adds Archer font family styles to an element.
+// $weight should be a number from 1-9, which references the desired font
+// weight (100-900).  Default is 4 (400) or 'Book'.
+@mixin archer($weight: 4, $font-style: normal) {
+  font-family: 'Archer A', 'Archer B';
+  font-style: $font-style;
+  font-weight: #{$weight}00;
+}
+
 // Gold Button Style
 @mixin gold-button {
-  background-color: #ffc900;
-  color: #000;
+  background-color: $ucf-gold;
+  color: $black;
 
   &:hover,
   &:active,
   &:focus {
-    background-color: #000;
-    color: #fff;
+    background-color: $black;
+    color: $white;
   }
 }
