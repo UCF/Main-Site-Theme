@@ -427,6 +427,15 @@
   // See .callout-dark as an example.
   //
   .callout {
+    h1,
+    .h1 {
+      font-size: 34px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 42px;
+      }
+    }
+
     h2,
     .h2 {
       font-size: 18px;
@@ -450,6 +459,24 @@
 
       @media (min-width: $screen-sm-min) {
         font-size: 16px;
+      }
+    }
+
+    h5,
+    .h5 {
+      font-size: 11.5px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 14px;
+      }
+    }
+
+    h6,
+    .h6 {
+      font-size: 10px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 12px;
       }
     }
 
