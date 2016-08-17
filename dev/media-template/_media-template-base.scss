@@ -373,12 +373,12 @@
     // font size, so force them on this class
     @extend .heading-sans-serif;
     font-size: 16px;
-    margin: 2.5em 0 1.7em;
+    margin: 3em 0 1.7em;
     padding-bottom: 14px;
     position: relative;
 
     @media (min-width: $screen-sm-min) {
-      margin: 3em 0 1.7em;
+      margin: 3.5em 0 1.7em;
     }
 
     &:after {
