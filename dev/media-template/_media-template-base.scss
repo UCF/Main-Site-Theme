@@ -1,6 +1,7 @@
 //
 // This file contains a base set of classes and template overrides for custom
-// media template page development.
+// page development using the media header template and refreshed web styles
+// (e.g. ucf.edu/students/ styles).
 //
 // Please import this file at the top of your .scss file for any new page that
 // uses the media header template, so that we can reduce the number of repeated
@@ -12,35 +13,6 @@
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
 @import '../../src/scss/variables';
 @import '../../src/scss/mixins';
-
-
-/////////////////////////////////
-// Variables
-/////////////////////////////////
-
-$ucf-header-height: 50px;
-$black: #000;
-$white: #fff;
-$ucf-gold: #fc0;
-$ucf-gold-light: #ffeb9b;
-$ucf-gold-lighter: #fdf9e8;
-$ucf-gold-dark: #b18e00;
-$ucf-gold-darker: #a68500;
-$ucf-gold-darkest: #786000;
-
-
-/////////////////////////////////
-// Mixins
-/////////////////////////////////
-
-// Adds Archer font family styles to an element.
-// $weight should be a number from 1-9, which references the desired font
-// weight (100-900).  Default is 4 (400) or 'Book'.
-@mixin archer($weight: 4, $font-style: normal) {
-  font-family: 'Archer A', 'Archer B';
-  font-style: $font-style;
-  font-weight: #{$weight}00;
-}
 
 
 /////////////////////////////////
@@ -59,12 +31,6 @@ $ucf-gold-darkest: #786000;
     }
   }
 
-  h2,
-  .h2 {
-    font-size: 16px;
-    line-height: 1.25;
-  }
-
   p {
     margin-bottom: 1.5em;
   }
@@ -73,7 +39,6 @@ $ucf-gold-darkest: #786000;
     margin: 1em 0 1.7em;
   }
 }
-// scss-lint:enable IdSelector
 
 
 /////////////////////////////////
@@ -81,7 +46,7 @@ $ucf-gold-darkest: #786000;
 /////////////////////////////////
 
 .page-media,
-.page-content {
+#contentcol {
   @include gotham();
   color: $black;
   font-size: 14px;
@@ -129,21 +94,48 @@ $ucf-gold-darkest: #786000;
     @include gotham(7);
   }
 
-  h2,
+  // Re-define .h1-6 classes under the #contentcol selector to allow font
+  // size and line height overrides on h2 elements without selector
+  // specificity issues
+  .h1,
   .h2,
-  h3,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
+    line-height: $headings-line-height;
+  }
+
+  .h1 {
+    font-size: $font-size-h1;
+  }
+
+  // Base h2 element is also overridden here to reset overrides in
+  // src/scss/page/_general.scss
+  h2,
+  .h2 {
+    font-size: $font-size-h2;
+  }
+
   .h3 {
-    text-transform: uppercase;
+    font-size: $font-size-h3;
+  }
+
+  .h4 {
+    font-size: $font-size-h4;
+  }
+
+  .h5 {
+    font-size: $font-size-h5;
+  }
+
+  .h6 {
+    font-size: $font-size-h6;
   }
 
   h3,
   .h3 {
-    font-size: 15px;
     margin: 1em 0;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 16px;
-    }
   }
 
   h4,
@@ -182,7 +174,7 @@ $ucf-gold-darkest: #786000;
   }
 }
 
-.page-content {
+#contentcol {
   a:not(.btn) {
     color: $brand-primary;
   }
@@ -251,9 +243,9 @@ $ucf-gold-darkest: #786000;
 // Helper classes
 /////////////////////////////////
 
-.page-content {
+#contentcol {
 
-  // Removes text-transform from an element (e.g. from all-caps h2, h3)
+  // Removes text-transform from an element
   .text-untransform {
     text-transform: none;
   }
@@ -272,7 +264,8 @@ $ucf-gold-darkest: #786000;
   }
 
   // Class for second-level headings. Applies a gold border-bottom to the
-  // element, as well as adequate whitespace.
+  // element, as well as adequate whitespace, forced Gotham, and uppercase
+  // text transform.
   .section-heading {
     margin: 2.5em 0 1.7em;
     padding-bottom: 14px;
@@ -295,9 +288,18 @@ $ucf-gold-darkest: #786000;
   }
 
   // Class for third-level headings, e.g. headings underneath a
-  // .section-heading.  Applies adequate whitespace.
+  // .section-heading.  Applies adequate whitespace, forces Gotham
+  // and applies uppercase text transform.
   .section-subheading {
     margin: 3.5em 0 1.7em;
+  }
+
+  .section-heading,
+  .section-subheading {
+    @include gotham(7);
+    font-size: 16px;
+    line-height: 1.25;
+    text-transform: uppercase;
   }
 
   // Class to be applied to a .fa- or .glyphicon- icon inside of a well.
