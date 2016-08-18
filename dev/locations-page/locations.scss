@@ -32,6 +32,10 @@ p {
   padding-bottom: 90px;
   top: -70px;
 }
+.location-text {
+  font-family: $gotham;
+  margin: 0;
+}
 
 #header-menu {
   @include center-block();
