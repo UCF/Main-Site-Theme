@@ -1421,6 +1421,12 @@ class Degree extends CustomPostType{
 				"desc"  => 'If checked, will used an updated template with an image header.',
 				'id'    => $prefix.'use_updated_template',
 				'type'  => 'checkbox'
+			),
+			array(
+				'name'  => 'Header Image',
+				'desc'  => 'Sets the header image of the degree (only if "Use Updated Template" is checked)',
+				'id'    => $prefix.'header_image',
+				'type'  => 'file'
 			)
 		);
 	}

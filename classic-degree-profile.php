@@ -1,3 +1,4 @@
+<?php $search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) ); ?>
 	<div class="row page-content" id="degree-single">
 		<div class="col-md-12 col-sm-12">
 			<div id="page-title">
