@@ -577,9 +577,12 @@
       color: $ucf-gold;
     }
 
+    .list-navigation a {
+      font-weight: 400;
+    }
+
     .list-navigation a,
     .list-chevrons a {
-      font-weight: 400;
       text-decoration: none;
     }
   }
