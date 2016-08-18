@@ -27,6 +27,12 @@ p {
   font-size: 15px;
 }
 
+#locations-redesign {
+  margin-bottom: -50px;
+  padding-bottom: 90px;
+  top: -70px;
+}
+
 #header-menu {
   @include center-block();
   display: inline;
@@ -120,7 +126,7 @@ p {
 
   .section-header {
     height: 500px;
-    margin-bottom: 12px;
+    margin-bottom: 0;
     margin-top: 0;
     position:relative;
 
@@ -135,7 +141,12 @@ p {
       bottom: 18px;
       position: absolute;
       font-size: 48px;
-      max-width: 600px
+      max-width: 600px;
+      margin-left: -20px;
+
+      @media(max-width: $screen-sm-max) {
+        margin-left: 0;
+      }
     }
 
     .section-link {
@@ -147,9 +158,14 @@ p {
 
   .content-title {
     color: #333;
+    display: inline-block;
     font-family: $gotham;
-    margin: 24px 0;
-    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 18px;
+    margin-top: 60px;
+    padding: 0 0 10px;
     text-transform: uppercase;
 
     &::after {
@@ -160,6 +176,27 @@ p {
         margin-top: 15px;
         width: 25px;
     }
+  }
+
+  &.no-margin {
+    margin-bottom: 0;
+  }
+}
+
+#sections-navbar .section-link {
+  font-family: $gotham;
+}
+
+#contentcol .intro-section .content-title {
+  font-family: $archer;
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  margin-top: 0;
+  text-transform: none;
+
+  &::after {
+    display: none;
   }
 }
 
@@ -237,7 +274,10 @@ ul>li>a {
         display: inline;
         font-family: $gotham;
         font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 18px;
         padding: 2px 14px;
+
         @include transition(background .25s, color .25s);
       }
 
@@ -268,7 +308,7 @@ ul>li>a {
 .map-search {
   background-position: center center;
   height: 530px;
-  margin-top: 70px;
+  margin-top: 0;
   position: relative;
   text-align: center;
   width: 100%;
@@ -447,7 +487,6 @@ ul>li>a {
     margin-left: auto;
     max-width: 325px;
     position: relative;
-    transition: color .4s;
     z-index: 15;
 
     @media (max-width: $screen-sm-max) {
@@ -522,10 +561,6 @@ ul>li>a {
       color: #000;
       text-decoration: none;
     }
-
-    &:hover {
-      text-decoration: none;
-    }
   }
 
   &:nth-child(1) {
@@ -565,6 +600,45 @@ ul>li>a {
     background-color: #e6d38b;
   }
 
+  @media (max-width: $screen-xs-max) {
+    &:nth-child(1) {
+      background-color: #ffc908;
+    }
+    &:nth-child(2) {
+      background-color: #edbc0c;
+    }
+    &:nth-child(3) {
+      background-color: #ffd747;
+    }
+    &:nth-child(4) {
+      background-color: #eccb52;
+    }
+    &:nth-child(5) {
+      background-color: #ffdf6b;
+    }
+    &:nth-child(6) {
+      background-color: #f5d45d;
+    }
+    &:nth-child(7) {
+      background-color: #ffe480;
+    }
+    &:nth-child(8) {
+      background-color: #ffdf6d;
+    }
+    &:nth-child(9) {
+      background-color: #FFE991;
+    }
+    &:nth-child(10) {
+      background-color: #ffe381;
+    }
+    &:nth-child(11) {
+      background-color: #ffeca1;
+    }
+    &:nth-child(12) {
+      background-color: #ffe791;
+    }
+  }
+
   &:hover {
     background-color: #2b2b2b;
 
@@ -582,6 +656,8 @@ ul>li>a {
     }
 
     a {
+      transition: color .4s;
+
       &:link,
       &:active,
       &:visited,
@@ -604,10 +680,13 @@ ul>li>a {
 
   h3 {
     color: #333;
-    font-size: 18px;
-    line-height: 28px;
-    margin: 24px 0 -20px 0;
-    padding: 12px 0;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0;
+    margin-bottom: 0px;
+    margin-top: 30px;
+    padding: 0;
     text-transform: uppercase;
   }
 
