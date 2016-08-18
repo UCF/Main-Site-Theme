@@ -17,6 +17,18 @@
 @import '../../src/scss/mixins';
 
 
+// Basic reset for stylized ul's and ol's.
+%list-reset {
+  line-height: 1.375;
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: .8em;
+  }
+}
+
+
 /////////////////////////////////
 // General Main Site CSS Resets
 /////////////////////////////////
@@ -347,19 +359,13 @@
   // Intended for use on lists of links, e.g. "Explore Further",
   // "More Information", etc.
   .list-navigation {
-    line-height: 1.375;
-    list-style-type: none;
-    padding: 0;
-
-    li {
-      margin-bottom: .8em;
-    }
+    @extend %list-reset;
   }
 
   // Class for an unordered list with gold chevron icons for bullets.
   .list-chevrons {
-    @extend .list-navigation;
-    padding-left: 1em;
+    @extend %list-reset;
+    padding-left: 1.25em;
 
     li:before {
       @include fa-icon();
@@ -367,6 +373,8 @@
       content: $fa-var-chevron-right;
       font-size: .8em;
       line-height: 1;
+      margin-left: -1.25em;
+      width: 1.25em;
     }
   }
 
