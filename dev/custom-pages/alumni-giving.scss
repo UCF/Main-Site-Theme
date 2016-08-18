@@ -57,7 +57,7 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     &,
     p {
       @include gotham(3, italic);
-      font-size: 20px;
+      font-size: 19px;
       line-height: 1.5;
 
       @media (min-width: $screen-sm-min) {
@@ -78,6 +78,14 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
 
       @media (min-width: $screen-sm-min) {
         font-size: 13px;
+      }
+
+      strong {
+        @include gotham(8);
+      }
+
+      em {
+        @include gotham(5, italic);
       }
     }
   }
@@ -167,11 +175,84 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
 
   .highlight {
     display: inline-block;
-    padding: .2em 1em;
+    padding: .4em 1em;
   }
 
   .highlight-white {
     background-color: $white;
     color: $black;
+  }
+
+  .callout-events-list {
+    list-style: none;
+    padding-left: 0;
+
+    .events-list-item {
+      letter-spacing: .04em;
+
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 25px;
+        margin-top: 25px;
+      }
+    }
+
+    .event-link {
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .event-date,
+        .event-title {
+          text-decoration: underline;
+        }
+      }
+
+      // won't be present in shortcode-generated markup, but for the sake of development:
+      br {
+        display: none;
+      }
+    }
+
+    .event-date,
+    .event-title {
+      display: block;
+      line-height: 1.5;
+    }
+
+    .event-date {
+      color: $ucf-gold;
+      font-size: 15px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .event-title {
+      @include gotham(8);
+      @include font-smoothing();
+      font-size: 13px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+    }
+
+    .event-description {
+      @include gotham();
+      font-size: 12px;
+      line-height: 1.7;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 14px;
+      }
+    }
   }
 }
