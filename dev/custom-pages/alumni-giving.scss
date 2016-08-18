@@ -183,13 +183,18 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     color: $black;
   }
 
+  .callout-events {
+    .list-chevrons,
+    .callout-events-list {
+      letter-spacing: .04em;
+    }
+  }
+
   .callout-events-list {
     list-style: none;
     padding-left: 0;
 
     .events-list-item {
-      letter-spacing: .04em;
-
       @media (min-width: $screen-sm-min) {
         margin-bottom: 25px;
         margin-top: 25px;
