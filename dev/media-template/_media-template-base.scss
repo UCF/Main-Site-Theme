@@ -11,6 +11,8 @@
 
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
 @import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/components/font-awesome/scss/variables';
+@import '../../src/components/font-awesome/scss/mixins';
 @import '../../src/scss/variables';
 @import '../../src/scss/mixins';
 
@@ -351,6 +353,20 @@
 
     li {
       margin-bottom: .8em;
+    }
+  }
+
+  // Class for an unordered list with gold chevron icons for bullets.
+  .list-chevrons {
+    @extend .list-navigation;
+    padding-left: 1em;
+
+    li:before {
+      @include fa-icon();
+      color: $ucf-gold;
+      content: $fa-var-chevron-right;
+      font-size: .8em;
+      line-height: 1;
     }
   }
 
