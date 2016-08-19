@@ -33,6 +33,7 @@ $verdana: Verdana, Geneva, sans-serif;
   padding-bottom: 90px;
   top: -70px;
 }
+
 .location-text {
   font-family: $gotham;
   margin: 0;
@@ -57,7 +58,7 @@ $verdana: Verdana, Geneva, sans-serif;
   font-family: $gotham;
   margin-bottom: 72px;
 
-  ul>li>a {
+  ul > li > a {
     color: #428bca;
 
     &:hover {
@@ -70,7 +71,7 @@ $verdana: Verdana, Geneva, sans-serif;
     height: 500px;
     margin-bottom: 0;
     margin-top: 0;
-    position:relative;
+    position: relative;
 
     .section-title,
     .section-link {
@@ -81,10 +82,10 @@ $verdana: Verdana, Geneva, sans-serif;
 
     .section-title {
       bottom: 18px;
-      position: absolute;
       font-size: 48px;
-      max-width: 600px;
       margin-left: -20px;
+      max-width: 600px;
+      position: absolute;
 
       @media(max-width: $screen-sm-max) {
         margin-left: 0;
@@ -111,12 +112,12 @@ $verdana: Verdana, Geneva, sans-serif;
     text-transform: uppercase;
 
     &::after {
-        background: $ucf-gold;
-        content: " ";
-        display: block;
-        height: 2px;
-        margin-top: 15px;
-        width: 25px;
+      background: $ucf-gold;
+      content: ' ';
+      display: block;
+      height: 2px;
+      margin-top: 15px;
+      width: 25px;
     }
   }
 
@@ -181,8 +182,8 @@ $verdana: Verdana, Geneva, sans-serif;
 .callout {
   background: $ucf-gold;
   margin: 0 auto;
-  text-align: center;
   padding: 48px 0;
+  text-align: center;
 
   &:last-child {
     margin-right: 0;
@@ -208,7 +209,8 @@ $verdana: Verdana, Geneva, sans-serif;
       }
 
       h3 {
-        background: rgba(30, 30, 30, 0.25);
+        @include transition(background .25s, color .25s);
+        background: rgba(30, 30, 30, .25);
         border-radius: 4px;
         display: inline;
         font-family: $gotham;
@@ -216,8 +218,6 @@ $verdana: Verdana, Geneva, sans-serif;
         font-weight: 700;
         margin-bottom: 18px;
         padding: 2px 14px;
-
-        @include transition(background .25s, color .25s);
       }
 
       p {
@@ -255,41 +255,43 @@ $verdana: Verdana, Geneva, sans-serif;
   @media (max-width: $screen-md-max) {
     height: 400px;
   }
+
   @media (max-width: $screen-sm-max) {
     height: 300px;
   }
 
   .search-box-background {
     display: block;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
   }
 
   .section-header-text {
-    font-size: 45px;
-    font-family: $gotham;
-    font-weight: 800;
     color: $ucf-col-default;
+    font-family: $gotham;
+    font-size: 45px;
+    font-weight: 800;
     letter-spacing: 2px;
     margin: 0 auto;
     margin-bottom: 15px;
     min-width: 600px;
     padding-top: 190px;
-    text-transform: uppercase;
     text-align: center;
+    text-transform: uppercase;
     width: 30%;
 
     @media (max-width: $screen-md-max) {
       font-size: 40px;
-      padding-top: 115px;
       min-width: 540px;
+      padding-top: 115px;
     }
+
     @media (max-width: $screen-sm-max) {
       font-size: 30px;
-      padding-top: 70px;
       max-width: 420px;
       min-width: 100%;
+      padding-top: 70px;
       width: 100%;
     }
   }
@@ -298,7 +300,7 @@ $verdana: Verdana, Geneva, sans-serif;
     background: #F7F7F7; /* For browsers that do not support gradients */
     background: linear-gradient(#fff, #eee);
     border-radius: 200px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .3);
     font-style: italic;
     height: 80px;
     margin: 0 auto;
@@ -307,18 +309,18 @@ $verdana: Verdana, Geneva, sans-serif;
     width: 650px;
 
     @media (max-width: $screen-sm-max) {
-      width: 80%;
       background: transparent;
       box-shadow: none;
+      width: 80%;
     }
 
     .search-term {
       border: 1px solid #E8E8E8;
       border-radius: 50px;
       float: left;
-      font-weight: 100;
       font-family: $georgia;
       font-size: 17px;
+      font-weight: 100;
       letter-spacing: .5px;
       outline: none;
       padding: 13px 25px;
@@ -326,7 +328,7 @@ $verdana: Verdana, Geneva, sans-serif;
 
       @media (max-width: $screen-sm-max) {
         border: 11px solid $ucf-gold-light;
-        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 2px 15px rgba(0, 0, 0, .3);
         float: none;
         padding-right: 65px;
         width: 100%;
@@ -375,8 +377,8 @@ $verdana: Verdana, Geneva, sans-serif;
 }
 
 .campuses-grid {
-  width: 100%;
   overflow: hidden;
+  width: 100%;
 }
 
 .campus-card {
@@ -385,7 +387,7 @@ $verdana: Verdana, Geneva, sans-serif;
   float: left;
   font-family: $gotham;
   font-size: 14px;
-  padding: 115px 20px 115px;
+  padding: 115px 20px;
   position: relative;
   text-align: center;
   transition: background-color .4s, color .4s;
@@ -404,8 +406,8 @@ $verdana: Verdana, Geneva, sans-serif;
   }
 
   .overlay {
-    background-size: 100%;
     background-position: center center;
+    background-size: 100%;
     bottom: 0;
     left: 0;
     opacity: .05;
@@ -421,9 +423,9 @@ $verdana: Verdana, Geneva, sans-serif;
     font-weight: normal;
     line-height: 1.25;
     margin-bottom: 15px;
-    margin-top: 0;
-    margin-right: auto;
     margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
     max-width: 325px;
     position: relative;
     z-index: 15;
@@ -459,34 +461,35 @@ $verdana: Verdana, Geneva, sans-serif;
       padding-left: 0;
       padding-right: 0;
       padding-top: 5px;
-    }
-    li + li {
-      padding-left: 9px;
-    }
 
-    li:after {
-      content: "";
-      padding-left: 14px;
-      transition: color .4s;
-      border: 1px solid rgba(124, 103, 30, 0.3);
-      border-width: 0 1px 0 0;
-      transition: border-color .4s;
+      &:after {
+        border: 1px solid rgba(124, 103, 30, .3);
+        border-width: 0 1px 0 0;
+        content: '';
+        padding-left: 14px;
+        transition: border-color .4s, color .4s;
 
-      @media (max-width: $screen-sm-max) {
+        @media (max-width: $screen-sm-max) {
+          display: none;
+        }
+      }
+
+      &:before {
+        color: #7C671E;
+        content: "\e144";
+        font-family: 'Glyphicons Halflings';
+        font-size: 11px;
+        padding-right: 5px;
+        transition: color .4s;
+      }
+
+      &:last-child:after {
         display: none;
       }
-    }
 
-    li:before {
-      color: #7C671E;
-      content:"\e144";
-      font-family: 'Glyphicons Halflings';
-      font-size: 11px;
-      padding-right: 5px;
-      transition: color .4s;
-    }
-    li:last-child:after {
-      display: none;
+      + li {
+        padding-left: 9px;
+      }
     }
 
   }
@@ -505,36 +508,47 @@ $verdana: Verdana, Geneva, sans-serif;
   &:nth-child(1) {
     background-color: #ffc908;
   }
+
   &:nth-child(2) {
     background-color: #ffd747;
   }
+
   &:nth-child(3) {
     background-color: #ffe68a;
   }
+
   &:nth-child(4) {
     background-color: #ffe997;
   }
+
   &:nth-child(5) {
     background-color: #edbc0c;
   }
+
   &:nth-child(6) {
     background-color: #eccb52;
   }
+
   &:nth-child(7) {
     background-color: #f0d77d;
   }
+
   &:nth-child(8) {
     background-color: #f7de83;
   }
+
   &:nth-child(9) {
     background-color: #d3ac1f;
   }
+
   &:nth-child(10) {
     background-color: #debe4b;
   }
+
   &:nth-child(11) {
     background-color: #dfcb81;
   }
+
   &:nth-child(12) {
     background-color: #e6d38b;
   }
@@ -543,36 +557,47 @@ $verdana: Verdana, Geneva, sans-serif;
     &:nth-child(1) {
       background-color: #ffc908;
     }
+
     &:nth-child(2) {
       background-color: #edbc0c;
     }
+
     &:nth-child(3) {
       background-color: #ffd747;
     }
+
     &:nth-child(4) {
       background-color: #eccb52;
     }
+
     &:nth-child(5) {
       background-color: #ffdf6b;
     }
+
     &:nth-child(6) {
       background-color: #f5d45d;
     }
+
     &:nth-child(7) {
       background-color: #ffe480;
     }
+
     &:nth-child(8) {
       background-color: #ffdf6d;
     }
+
     &:nth-child(9) {
       background-color: #FFE991;
     }
+
     &:nth-child(10) {
       background-color: #ffe381;
     }
+
     &:nth-child(11) {
       background-color: #ffeca1;
     }
+
     &:nth-child(12) {
       background-color: #ffe791;
     }
@@ -583,10 +608,14 @@ $verdana: Verdana, Geneva, sans-serif;
 
     .overlay {
       background-size: 107%;
-      opacity: 0.1;
+      opacity: .1;
     }
 
-    h2, p, li, .service-links li:before, .service-links li:after {
+    h2,
+    p,
+    li,
+    .service-links li:before,
+    .service-links li:after {
       color: $ucf-col-highlight;
     }
 
@@ -620,10 +649,10 @@ $verdana: Verdana, Geneva, sans-serif;
   h3 {
     color: #333;
     display: inline-block;
-    font-weight: 700;
     font-size: 14px;
+    font-weight: 700;
     letter-spacing: 0;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     margin-top: 30px;
     padding: 0;
     text-transform: uppercase;
@@ -632,7 +661,7 @@ $verdana: Verdana, Geneva, sans-serif;
   .image-strip-image {
     background-position: center center;
     background-size: cover;
-    float:left;
+    float: left;
     height: 257px;
     transition: background-size .4s, opacity .4s;
     width: 25%;
