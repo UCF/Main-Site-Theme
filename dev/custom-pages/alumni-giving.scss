@@ -185,12 +185,12 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
 
   .callout-events {
     .list-chevrons,
-    .callout-events-list {
+    .events-list {
       letter-spacing: .04em;
     }
   }
 
-  .callout-events-list {
+  .events-list {
     list-style: none;
     padding-left: 0;
 
@@ -221,13 +221,13 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
       }
     }
 
-    .event-date,
-    .event-title {
+    .event-start-date,
+    .event-start-title {
       display: block;
       line-height: 1.5;
     }
 
-    .event-date {
+    .event-start-date {
       color: $ucf-gold;
       font-size: 15px;
       margin-bottom: 2px;
@@ -237,6 +237,19 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
         font-size: 18px;
         margin-bottom: 8px;
       }
+    }
+
+    .event-start-year,
+    .event-start-time {
+      // .sr-only
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
     }
 
     .event-title {

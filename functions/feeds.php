@@ -233,6 +233,67 @@ function display_events($start=null, $limit=null){?>
 }
 
 
+function display_events_list_item( $item, $show_description=false ) {
+	$start         = new DateTime( $item['starts'] );
+	$url           = $item['url'];
+	$title         = $item['title'];
+	$description   = $item['description'];
+
+	ob_start();
+?>
+	<li class="events-list-item vevent">
+		<a href="<?php echo $url; ?>" class="event-link url">
+			<time class="event-start-datetime dtstart" datetime="<?php echo $start->format( 'c' ); ?>">
+				<span class="event-start-date"><?php echo $start->format( 'F j' ); ?></span>
+				<span class="event-start-year"><?php echo $start->format( 'Y' ); ?></span>
+				<span class="event-start-time"><?php echo $start->format( 'h:i a' ); ?></span>
+			</time>
+			<span class="event-title summary"><?php echo $title; ?></span>
+		</a>
+
+		<?php if ( $show_description ): ?>
+		<div class="event-description description"><?php echo truncateHtml( $description, 350 ); ?></div>
+		<?php endif; ?>
+	</li>
+<?php
+	return ob_get_clean();
+}
+
+
+function display_events_list( $start=null, $limit=null, $url='', $list_classes='', $show_descriptions=false ) {
+	$options = get_option( THEME_OPTIONS_NAME );
+	$start = $start ? intval( $start ) : 0;
+
+	// Check for a given limit, then a set Options value, then if none exist, set to 4
+	if ( !$limit || $limit < 1 ) {
+		if ( $options['events_max_items'] ) {
+			$limit = $options['events_max_items'];
+		}
+		else {
+			$limit = 4;
+		}
+	}
+
+	$events = get_events( $start, $limit, $url );
+
+	ob_start();
+?>
+	<?php if ( $events && count( $events ) ): ?>
+
+	<ul class="events-list <?php echo $list_classes; ?>">
+		<?php
+		foreach ( $events as $event ) {
+			echo display_events_list_item( $event, $show_descriptions );
+		}
+		?>
+	</ul>
+
+	<?php endif; ?>
+<?php
+	return ob_get_clean();
+}
+
+
 function display_news(){?>
 	<?php
 	$options = get_option(THEME_OPTIONS_NAME);
@@ -280,29 +341,44 @@ function display_news(){?>
 
 
 /* Modified function for main site theme: */
-function get_events($start, $limit){
-	$options = get_option(THEME_OPTIONS_NAME);
-	$qstring = (bool)strpos($options['events_url'], '?');
-	$url     = $options['events_url'];
-	if (!$qstring){
-		$url .= '?';
-	}else{
-		$url .= '&';
+function get_events( $start, $limit, $url='' ) {
+	$options = get_option( THEME_OPTIONS_NAME );
+	$url = $url ?: $options['events_url'];
+
+	// Remove any query strings attached to the url provided.
+	$qstring = ( bool )strpos( $url, '?' );
+	if ( $qstring ) {
+		$url_parts = explode( '?', $url );
+		$url = $url_parts[0];
 	}
-	$url    .= 'upcoming=upcoming&format=json';
+
+	// Append trailing end slash to url.
+	if ( substr( $url, -1 ) !== '/' ) {
+		$url .= '/';
+	}
+
+	// Append /upcoming/ to the end of the url, if it's not already present.
+	if ( substr( $url, -9 ) !== 'upcoming/' ) {
+		$url .= 'upcoming/';
+	}
+
+	// Append /feed.json to the end of the url.
+	$url .= 'feed.json';
 
 	// Set a timeout
-	$opts = array('http' => array(
-						'method'  => 'GET',
-						'timeout' => FEED_FETCH_TIMEOUT
-	));
-	$context = stream_context_create($opts);
+	$opts = array(
+		'http' => array(
+			'method'  => 'GET',
+			'timeout' => FEED_FETCH_TIMEOUT
+		)
+	);
+	$context = stream_context_create( $opts );
 
-	// Grab the weather feed
-	$raw_events = file_get_contents($url, false, $context);
+	// Grab the feed
+	$raw_events = file_get_contents( $url, false, $context );
 	if ($raw_events) {
-		$events = json_decode($raw_events, TRUE);
-		$events = array_slice($events, $start, $limit);
+		$events = json_decode( $raw_events, TRUE );
+		$events = array_slice( $events, $start, $limit );
 		return $events;
 	}
 	else { return NULL; }

@@ -1282,4 +1282,33 @@ function sc_social_share_buttons( $atts, $content='' ) {
 
 add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
+
+/**
+ * Displays a list of upcoming events. Events can be filtered by
+ * calendar url and start + end limits.
+ **/
+function sc_events( $atts, $content='' ) {
+	$atts = shortcode_atts(
+		array(
+			'start'             => 0,
+			'limit'             => 4,
+			'url'               => '',
+			'list_classes'      => '',
+			'show_descriptions' => false
+		), $atts, 'sc_events'
+	);
+
+	$atts['start'] = intval( $atts['start'] );
+	$atts['limit'] = intval( $atts['limit'] );
+	$atts['show_descriptions'] = filter_var( $atts['show_descriptions'], FILTER_VALIDATE_BOOLEAN );
+
+	ob_start();
+
+	echo display_events_list( $atts['start'], $atts['limit'], $atts['url'], $atts['list_classes'], $atts['show_descriptions'] );
+
+	return ob_get_clean();
+}
+add_shortcode( 'events', 'sc_events' );
+
+
 ?>
