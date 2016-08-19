@@ -1324,13 +1324,26 @@ add_shortcode( 'sections-menu', 'sc_sections_menu' );
  *
  */
 function sc_full_width_image( $attr, $content='' ) {
-	$image = isset( $attr['image'] ) ? $attr['image'] : null;
-	$filename = isset ( $attr['filename'] ) ? $attr['filename'] : null;
-	$bgcolor = isset( $attr['bgcolor'] ) ? $attr['bgcolor'] : null;
-	$color = isset( $attr['color'] ) ? $attr['color'] : null;
-	$size = isset( $attr['size'] ) ? $attr['size'] : null;
-	$classes = isset( $attr['classes'] ) ? $attr['classes'] : null; 
-	$container = isset( $attr['container'] ) ? filter_var( $attr['container'],  FILTER_VALIDATE_BOOLEAN ) : true;
+	$attr = shortcode_atts(
+		array(
+			'image'     => null,
+			'filename'  => null,
+			'bgcolor'   => null,
+			'color'     => null,
+			'size'      => null,
+			'classes'   => null,
+			'container' => false
+		),
+		$attr
+	);
+
+	$image = $attr['image'];
+	$filename = $attr['filename'];
+	$bgcolor = $attr['bgcolor'];
+	$color = $attr['color'];
+	$size = $attr['size'];
+	$classes = $attr['classes'];
+	$container = filter_var( $attr['container'],  FILTER_VALIDATE_BOOLEAN );
 
 	if ( ! $image && $filename ) {
 		$image = get_image_url( $filename );
@@ -1338,18 +1351,20 @@ function sc_full_width_image( $attr, $content='' ) {
 
 	$styles = array();
 
-	if ( $image ) { $styles[] = 'background-image: url('.$image.');'; }
+	if ( $image ) { $styles[] = 'background-image: url(\''.$image.'\');'; }
 	if ( $bgcolor ) { $styles[] = 'background-color: '.$bgcolor.';'; }
 	if ( $color ) { $styles[] = 'color: '.$color.';'; }
 	if ( $size ) { $styles[] = 'background-size: '.$size.';'; }
+	
+
+	$content = apply_filters( 'the_content', $content );
+	$retval = '';
 
 	if ( $container ) {
-		$content = '<div class="container">'.apply_filters( 'the_content', $content ).'</div>';
+		$classes .= ' container';
 	}
 
-	if ( ! empty( $styles ) ) {
-		$content = '<div class="' . $classes . '" style="'.implode( ' ', $styles ).'">'.$content.'</div>';
-	}
+	$content = '<div class="' . $classes . '" style="'.implode( ' ', $styles ).'">'.apply_filters( 'the_content', $content ).'</div>';
 
 	return $content;
 }

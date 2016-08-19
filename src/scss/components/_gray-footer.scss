@@ -3,6 +3,10 @@
 
 #footer-menu li {
   border-right: 1px solid #fff !important;
+
+  &:last-child {
+    border-right: none !important;
+  }
 }
 
 .site-footer {
@@ -30,133 +34,7 @@
     &:hover {
       color: #fff !important;
       text-decoration: none;
-
-      .event {
-        opacity: .8;
-      }
     }
-  }
-
-  .center-col,
-  .left-col,
-  .right-col {
-    border-width: 0 1px;
-    padding: 0 25px;
-    margin: 0 -10px;
-
-    @media (max-width: $screen-xs-max) {
-      border: 0;
-      padding: 0;
-      margin: 0;
-    }
-  }
-
-  .center-col {
-    border-style: solid;
-    border-color: #3e3e3e;
-  }
-
-  .footer-news {
-    list-style: none;
-    margin-top: 14px;
-    padding-left: 0;
-
-    h3 {
-      font-size: 18px;
-      font-weight: normal;
-      margin: 0 auto 8px;
-    }
-
-    .news-item {
-      border-radius: 2px;
-      margin-bottom: 18px;
-      margin-top: -18px;
-      padding-bottom: 18px;
-      padding-top: 18px;
-    }
-
-    a {
-      &:hover {
-        .news-item {
-          opacity: .8;
-
-          @media (max-width: $screen-xs-max) {
-            border-radius: 0;
-          }
-        }
-      }
-    }
-  }
-
-  .footer-events {
-    margin-top: 12px;
-
-    .event {
-      border-radius: 2px;
-      margin-bottom: 18px;
-      margin-top: -18px;
-      padding-top: 18px;
-    }
-
-    .event-date {
-      border: 1px solid #fff;
-      border-radius: 4px;
-      text-align: center;
-
-      @media (max-width: $screen-xs-max) {
-        border: 0;
-      }
-
-      .month {
-        background: #fff;
-        color: #000;
-        display: block;
-        font-weight: 700;
-        padding: 12px auto;
-        text-transform: uppercase;
-
-        @media (max-width: $screen-xs-max) {
-          background: transparent;
-          color: #fff;
-        }
-      }
-
-      .day {
-        font-size: 22px;
-      }
-    }
-
-    .event-details {
-      h4 {
-        margin: 0 auto 8px;
-      }
-
-      .time {
-        font-style: italic;
-      }
-    }
-  }
-
-  .all-link {
-    color: #fc0;
-    display: block;
-    margin-left: 20px;
-    margin-top: 20px;
-    text-align: right;
-    font-family: $font-family-serif;
-    font-style: italic;
-
-    @media (max-width: $screen-xs-max) {
-        margin-top: 0;
-        margin-left: 0;
-        margin-bottom: 50px;
-        text-align: left;
-    }
-
-  }
-
-  .read-more {
-    color: #fc0;
   }
 
   .site-footer-menu {

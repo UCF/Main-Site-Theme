@@ -15,7 +15,7 @@ var init = function() {
 };
 
 var initialize = function() {
-  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%20|FFCC00");
+  var pinImage = new google.maps.MarkerImage("https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%20|FFCC00");
 
 	var latLng = new google.maps.LatLng(28.601947, -81.200254);
 	
@@ -184,7 +184,7 @@ var scrollToTarget = function($target) {
 };
 
 var lazyLoadGoogleMap = function() {
-	$.getScript("http://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBQtVEuBQkAjfKe1HbdO-In1LgIuu1UEXk")
+	$.getScript("https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBQtVEuBQkAjfKe1HbdO-In1LgIuu1UEXk")
 		.done(function() {
 			initializeMap();
 		});
