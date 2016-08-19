@@ -39,18 +39,12 @@ $verdana: Verdana, Geneva, sans-serif;
   margin: 0;
 }
 
-#header-menu {
-  a {
-    color: $ucf-col-highlight;
+#header-menu li a {
+  color: $ucf-col-highlight;
+}
 
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: $ucf-col-default;
-      color: $ucf-gold;
-      text-decoration: none;
-    }
-  }
+#header-menu li.last a {
+  color: $ucf-col-default;
 }
 
 .locations-section,
