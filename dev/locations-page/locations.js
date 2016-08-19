@@ -15,17 +15,15 @@ var init = function() {
 };
 
 var initialize = function() {
-  var pinImage = new google.maps.MarkerImage("https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%20|FFCC00");
-
-	var latLng = new google.maps.LatLng(28.601947, -81.200254);
-	
-	var mapOptions = {
-		center: latLng,
-		zoom: 8,
-		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		scrollwheel: false,
-		draggable: false
-	};
+  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%20|FFCC00"),
+      latLng = new google.maps.LatLng(28.601947, -81.200254),
+	    mapOptions = {
+        center: latLng,
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        scrollwheel: false,
+        draggable: false
+      };
 
 	map = new google.maps.Map(document.getElementById("campus-map"), mapOptions);
 
@@ -202,10 +200,12 @@ function initializeMap() {
 }
 
 function initializeMatchHeight() {
-  $('.campus-card').matchHeight();
+  $campusCard = $('.campus-card');
+
+  $campusCard.matchHeight();
 
   $(window).on('resize', function() {
-    $('.campus-card').matchHeight();
+    $campusCard.matchHeight();
   });
 }
 
