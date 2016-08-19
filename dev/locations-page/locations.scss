@@ -87,6 +87,7 @@ $verdana: Verdana, Geneva, sans-serif;
       position: absolute;
 
       @media(max-width: $screen-sm-max) {
+        font-size: 32px;
         margin-left: 0;
       }
     }
