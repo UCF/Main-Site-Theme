@@ -155,10 +155,12 @@ $verdana: Verdana, Geneva, sans-serif;
   .header-main-title {
     background: $ucf-gold;
     font-size: 48px;
+    line-height: 66px;
     padding: 18px 12px;
 
     @media(max-width: $screen-xs-max) {
-      font-size: 28px;
+      font-size: 20px;
+      line-height: 59px;
     }
   }
 
@@ -168,12 +170,12 @@ $verdana: Verdana, Geneva, sans-serif;
     display: inline-block;
     font-weight: 300;
     font-size: 24px;
-    margin-top: 21px;
+    margin-top: 14px;
     padding: 18px 12px;
 
     @media(max-width: $screen-xs-max) {
-      font-size: 18px;
-      margin-top: 18px;
+      font-size: 16px;
+      margin-top: -2px;
     }
   }
 }
