@@ -1,6 +1,7 @@
 @import '../media-template/media-template-base';
 
 
+// TODO update url to point to prod url
 $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/08/header-xs.jpg';
 
 
@@ -222,8 +223,13 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     }
 
     .event-start-date,
-    .event-start-title {
+    .event-start-title,
+    .event-title {
       display: block;
+    }
+
+    .event-start-date,
+    .event-start-title {
       line-height: 1.5;
     }
 
@@ -240,7 +246,8 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     }
 
     .event-start-year,
-    .event-start-time {
+    .event-start-time,
+    .event-location {
       // .sr-only
       border: 0;
       clip: rect(0, 0, 0, 0);

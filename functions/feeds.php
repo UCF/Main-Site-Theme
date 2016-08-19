@@ -234,10 +234,11 @@ function display_events($start=null, $limit=null){?>
 
 
 function display_events_list_item( $item, $show_description=false ) {
-	$start         = new DateTime( $item['starts'] );
-	$url           = $item['url'];
-	$title         = $item['title'];
-	$description   = $item['description'];
+	$start        = new DateTime( $item['starts'] );
+	$url          = $item['url'];
+	$title        = $item['title'];
+	$description  = $item['description'];
+	$location     = $item['location'];
 
 	ob_start();
 ?>
@@ -249,6 +250,7 @@ function display_events_list_item( $item, $show_description=false ) {
 				<span class="event-start-time"><?php echo $start->format( 'h:i a' ); ?></span>
 			</time>
 			<span class="event-title summary"><?php echo $title; ?></span>
+			<span class="event-location location"><?php echo $location; ?></span>
 		</a>
 
 		<?php if ( $show_description ): ?>
