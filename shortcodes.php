@@ -1358,7 +1358,6 @@ function sc_full_width_image( $attr, $content='' ) {
 	
 
 	$content = apply_filters( 'the_content', $content );
-	$retval = '';
 
 	if ( $container ) {
 		$classes .= ' container';
