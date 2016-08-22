@@ -1319,21 +1319,19 @@ add_shortcode( 'events', 'sc_events' );
 function sc_pegasus_issues( $atts, $content='' ) {
 	$atts = shortcode_atts(
 		array(
-			'start'                => 0,
-			'limit'                => 5,
-			'list_classes'         => '',
-			'list_item_classes'    => '',
-			'show_cover_subtitles' => true
+			'start'                   => 0,
+			'limit'                   => 5,
+			'list_classes'            => '',
+			'list_item_classes'       => ''
 		), $atts, 'sc_events'
 	);
 
 	$atts['start'] = intval( $atts['start'] );
 	$atts['limit'] = intval( $atts['limit'] );
-	$atts['show_feature_subtitles'] = filter_var( $atts['show_feature_subtitles'], FILTER_VALIDATE_BOOLEAN );
 
 	ob_start();
 
-	echo display_pegasus_issues_list( $atts['start'], $atts['limit'], $atts['list_classes'], $atts['list_item_classes'], $atts['show_cover_subtitles'] );
+	echo display_pegasus_issues_list( $atts['start'], $atts['limit'], $atts['list_classes'], $atts['list_item_classes'] );
 
 	return ob_get_clean();
 }

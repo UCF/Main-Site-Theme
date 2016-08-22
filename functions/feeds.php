@@ -348,21 +348,29 @@ function display_news(){?>
 }
 
 
-function display_pegasus_issues_list_item( $issue, $list_item_classes='', $show_cover_subtitles=true ) {
-	$issue_url            = $issue->link;
-	$issue_title          = $issue->title->rendered;
-	$cover_story_url      = $issue->_embedded->issue_cover_story[0]->link;
-	$cover_story_title    = $issue->_embedded->issue_cover_story[0]->title->rendered;
-	$cover_story_subtitle = null;
-	$thumbnail_id         = $issue->featured_image;
-	$thumbnail_url        = null;
+function display_pegasus_issues_list_item( $issue, $list_item_classes='' ) {
+	$issue_url               = $issue->link;
+	$issue_title             = $issue->title->rendered;
+	$cover_story             = $issue->_embedded->issue_cover_story[0];
+	$cover_story_url         = $cover_story->link;
+	$cover_story_title       = $cover_story->title->rendered;
+	$cover_story_subtitle    = $cover_story->story_subtitle;
+	$cover_story_description = $cover_story->story_description;
+	$cover_story_blurb       = null;
+	$thumbnail_id            = $issue->featured_image;
+	$thumbnail               = null;
+	$thumbnail_url           = null;
 
 	if ( $thumbnail_id !== 0 ) {
-		$thumbnail_url = $issue->_embedded->{"wp:featuredmedia"}[0]->media_details->sizes->full->source_url;
+		$thumbnail = $issue->_embedded->{"wp:featuredmedia"}[0];
+		$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
 	}
 
-	if ( $show_cover_subtitles ) {
-		$cover_story_subtitle = $issue->_embedded->issue_cover_story[0]->story_subtitle;
+	if ( $cover_story_description ) {
+		$cover_story_blurb = $cover_story_description;
+	}
+	elseif ( $cover_story_subtitle ) {
+		$cover_story_blurb = $cover_story_subtitle;
 	}
 
 	ob_start();
@@ -378,18 +386,18 @@ function display_pegasus_issues_list_item( $issue, $list_item_classes='', $show_
 		<?php endif; ?>
 
 		<a class="pegasus-issue-title" href="<?php echo $issue_url; ?>" target="_blank">
-			<?php echo $issue_title; ?>
+			<?php echo wptexturize( $issue_title ); ?>
 		</a>
 
 		<span class="pegasus-issue-featured-label">Featured Story</span>
 
 		<a class="pegasus-issue-cover-title" href="<?php echo $cover_story_url; ?>">
-			<?php echo $cover_story_title; ?>
+			<?php echo wptexturize( $cover_story_title ); ?>
 		</a>
 
-		<?php if ( $cover_story_subtitle ): ?>
-		<div class="pegasus-issue-cover-subtitle">
-			<?php echo $cover_story_subtitle; ?>
+		<?php if ( $cover_story_blurb ): ?>
+		<div class="pegasus-issue-cover-description">
+			<?php echo wptexturize( strip_tags( $cover_story_blurb, '<b><em><i><u><strong>' ) ); ?>
 		</div>
 		<?php endif; ?>
 
@@ -402,7 +410,7 @@ function display_pegasus_issues_list_item( $issue, $list_item_classes='', $show_
 }
 
 
-function display_pegasus_issues_list( $start=null, $limit=null, $list_classes='', $list_item_classes='', $show_cover_subtitles=true ) {
+function display_pegasus_issues_list( $start=null, $limit=null, $list_classes='', $list_item_classes='' ) {
 	$issues = get_pegasus_issues( $start, $limit );
 
 	if (
@@ -418,7 +426,7 @@ function display_pegasus_issues_list( $start=null, $limit=null, $list_classes=''
 	<ul class="pegasus-issues-list <?php echo $list_classes; ?>">
 		<?php
 		foreach ( $issues as $issue ) {
-			echo display_pegasus_issues_list_item( $issue, $list_item_classes, $show_cover_subtitles );
+			echo display_pegasus_issues_list_item( $issue, $list_item_classes );
 		}
 		?>
 	</ul>
