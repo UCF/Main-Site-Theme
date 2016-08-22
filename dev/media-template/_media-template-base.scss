@@ -18,7 +18,7 @@
 
 
 // Basic reset for stylized ul's and ol's.
-%list-reset {
+@mixin list-reset() {
   line-height: 1.375;
   list-style-type: none;
   padding: 0;
@@ -160,7 +160,7 @@
   }
 
   a {
-    transition: color .15s ease-in-out, background-color .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border .15s ease-in-out;
   }
 
   ol,
@@ -359,12 +359,12 @@
   // Intended for use on lists of links, e.g. "Explore Further",
   // "More Information", etc.
   .list-navigation {
-    @extend %list-reset;
+    @include list-reset();
   }
 
   // Class for an unordered list with gold chevron icons for bullets.
   .list-chevrons {
-    @extend %list-reset;
+    @include list-reset();
     padding-left: 1.25em;
 
     li:before {
