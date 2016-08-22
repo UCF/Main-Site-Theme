@@ -75,6 +75,7 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
       color: $black;
       font-size: 11.5px;
       letter-spacing: .08em;
+      line-height: 1.6;
       text-transform: uppercase;
 
       @media (min-width: $screen-sm-min) {
