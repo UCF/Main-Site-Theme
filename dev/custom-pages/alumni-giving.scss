@@ -5,6 +5,19 @@
 $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/sites/4/2016/08/header-xs.jpg';
 
 
+@mixin btn-cta() {
+  @include button-variant($black, $ucf-gold, $ucf-gold);
+  @include button-size(16px, 22px, 12px, 1.1, 0);
+  @include gotham(7);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 13px;
+  }
+}
+
+
 .page-media-header {
   background-position: center bottom;
   background-size: 100% auto;
@@ -167,6 +180,10 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     text-transform: uppercase;
   }
 
+  .btn-cta {
+    @include btn-cta();
+  }
+
   // Applies heavy weight Gotham styles to a heading.
   .heading-heavy {
     @include gotham(8);
@@ -279,6 +296,257 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
       @media (min-width: $screen-sm-min) {
         font-size: 14px;
       }
+    }
+  }
+
+  //
+  // General Pegasus issue list styles.
+  //
+  // NOTE: These are intentionally contained within this page-specific
+  // stylesheet, and not added to the main site stylesheet, because they depend
+  // heavily on cloud.typography fonts, which are not available on all pages.
+  //
+  .pegasus-issues-list {
+    line-height: 1.5;
+
+    @media (min-width: $screen-sm-min) {
+      line-height: 1.65;
+    }
+  }
+
+  .pegasus-issues-list-item {
+    margin-bottom: 2.5em;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 2em;
+    }
+  }
+
+  .pegasus-issue-thumbnail-link,
+  .pegasus-issue-title,
+  .pegasus-issue-featured-label,
+  .pegasus-issue-cover-title {
+    display: block;
+  }
+
+  .pegasus-issue-title {
+    @include gotham(7);
+    color: $black !important;  // Necessary to override #contentcol a:not(.btn) rule
+    font-size: 34px;
+    line-height: 1.1;
+    margin-bottom: .6em;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 42px;
+    }
+  }
+
+  .pegasus-issue-featured-label {
+    @include font-smoothing();
+    color: $gray-light;
+    font-size: 13px;
+    letter-spacing: .06em;
+    margin-bottom: .6em;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 15px;
+    }
+  }
+
+  .pegasus-issue-cover-title {
+    @include archer(7);
+    color: $black !important;  // Necessary to override #contentcol a:not(.btn) rule
+    font-size: 26px;
+    line-height: 1;
+    margin-bottom: .4em;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 32px;
+    }
+  }
+
+  .pegasus-issue-cover-description {
+    @include archer(4, italic);
+    font-size: 18px;
+    margin-bottom: 1.5em;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 21px;
+    }
+  }
+
+  .pegasus-issue-read-link {
+    @include btn-cta();
+
+    // Add missing .btn styles:
+    color: $black !important;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent !important;
+
+    &,
+    &:active,
+    &.active {
+      &:focus,
+      &.focus {
+        @include tab-focus;
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $black !important;
+      text-decoration: none !important;
+    }
+
+    &:active,
+    &.active {
+      @include box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
+      background-image: none;
+      outline: 0;
+    }
+  }
+
+  //
+  // Custom sizing/positioning styles for featured Pegasus issue:
+  //
+  .pegasus-featured-issue {
+    @media (min-width: $screen-sm-min) {
+      margin-top: 3.5em;
+    }
+
+    .pegasus-issues-list-item {
+      @media (min-width: $screen-sm-min) {
+        display: table;
+        width: 100%;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link,
+    .pegasus-issue-details {
+      @media (min-width: $screen-sm-min) {
+        display: table-cell;
+        vertical-align: top;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link {
+      @media (min-width: $screen-sm-min) {
+        height: auto;
+        width: 30%;
+      }
+    }
+
+    .pegasus-issue-thumbnail {
+      height: auto;
+      width: 100%;
+    }
+
+    .pegasus-issue-details {
+      @media (min-width: $screen-sm-min) {
+        padding-left: $grid-gutter-width;
+        width: 70%;
+      }
+    }
+
+    .pegasus-issue-title {
+      margin-top: .6em;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: .3em;
+      }
+    }
+  }
+
+  //
+  // Custom sizing/positioning styles for Pegasus archives:
+  //
+  .pegasus-issue-archives {
+    .pegasus-issues-list-item {
+      @media (max-width: $screen-xs-max) {
+        display: table;
+        width: 100%;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link,
+    .pegasus-issue-details {
+      @media (max-width: $screen-xs-max) {
+        display: table-cell;
+        vertical-align: top;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link {
+      @media (max-width: $screen-xs-max) {
+        height: auto;
+        width: 30%;
+      }
+    }
+
+    .pegasus-issue-thumbnail {
+      @media (max-width: $screen-xs-max) {
+        height: auto;
+        width: 100%;
+      }
+    }
+
+    .pegasus-issue-details {
+      @media (max-width: $screen-xs-max) {
+        padding-left: 20px;
+        width: 70%;
+      }
+    }
+
+    .pegasus-issue-title {
+      font-size: 22px;
+      margin-bottom: .45em;
+      margin-top: .25em;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 21px;
+        margin-top: .6em;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 28px;
+      }
+    }
+
+    .pegasus-issue-featured-label {
+      font-size: 11px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 12px;
+      }
+    }
+
+    .pegasus-issue-cover-title {
+      font-size: 18px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 22px;
+      }
+    }
+
+    .pegasus-issue-cover-description {
+      @include gotham(4, normal);
+      font-size: 12px;
+      line-height: 1.65;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 13px;
+      }
+    }
+
+    .pegasus-issue-read-link {
+      display: none;
     }
   }
 }
