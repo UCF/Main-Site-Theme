@@ -380,30 +380,32 @@ function display_pegasus_issues_list_item( $issue, $list_item_classes='' ) {
 		// Thumbnails should always be present for Issues, but just in case:
 		if ( $thumbnail_url ):
 		?>
-		<a href="<?php echo $issue_url; ?>" target="_blank">
+		<a class="pegasus-issue-thumbnail-link" href="<?php echo $issue_url; ?>" target="_blank">
 			<img class="pegasus-issue-thumbnail img-responsive" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>" title="<?php echo $issue_title; ?>">
 		</a>
 		<?php endif; ?>
 
-		<a class="pegasus-issue-title" href="<?php echo $issue_url; ?>" target="_blank">
-			<?php echo wptexturize( $issue_title ); ?>
-		</a>
+		<div class="pegasus-issue-details">
+			<a class="pegasus-issue-title" href="<?php echo $issue_url; ?>" target="_blank">
+				<?php echo wptexturize( $issue_title ); ?>
+			</a>
 
-		<span class="pegasus-issue-featured-label">Featured Story</span>
+			<span class="pegasus-issue-featured-label">Featured Story</span>
 
-		<a class="pegasus-issue-cover-title" href="<?php echo $cover_story_url; ?>">
-			<?php echo wptexturize( $cover_story_title ); ?>
-		</a>
+			<a class="pegasus-issue-cover-title" href="<?php echo $cover_story_url; ?>">
+				<?php echo wptexturize( $cover_story_title ); ?>
+			</a>
 
-		<?php if ( $cover_story_blurb ): ?>
-		<div class="pegasus-issue-cover-description">
-			<?php echo wptexturize( strip_tags( $cover_story_blurb, '<b><em><i><u><strong>' ) ); ?>
+			<?php if ( $cover_story_blurb ): ?>
+			<div class="pegasus-issue-cover-description">
+				<?php echo wptexturize( strip_tags( $cover_story_blurb, '<b><em><i><u><strong>' ) ); ?>
+			</div>
+			<?php endif; ?>
+
+			<a class="pegasus-issue-read-link" href="<?php echo $issue_url; ?>" target="_blank">
+				Read Now
+			</a>
 		</div>
-		<?php endif; ?>
-
-		<a class="pegasus-issue-read-link" href="<?php echo $issue_url; ?>" target="_blank">
-			Read Now
-		</a>
 	</li>
 <?php
 	return ob_get_clean();
