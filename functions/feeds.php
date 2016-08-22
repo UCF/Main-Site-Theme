@@ -381,7 +381,7 @@ function display_pegasus_issues_list_item( $issue, $list_item_classes='' ) {
 		if ( $thumbnail_url ):
 		?>
 		<a href="<?php echo $issue_url; ?>" target="_blank">
-			<img class="pegasus-issue-thumbnail" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>" title="<?php echo $issue_title; ?>">
+			<img class="pegasus-issue-thumbnail img-responsive" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>" title="<?php echo $issue_title; ?>">
 		</a>
 		<?php endif; ?>
 
