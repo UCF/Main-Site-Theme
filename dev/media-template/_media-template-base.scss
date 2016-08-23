@@ -28,6 +28,11 @@
   }
 }
 
+// Force equal vertical alignment of headings within callouts.
+@mixin callout-subheading() {
+  margin-top: 30px;
+}
+
 
 /////////////////////////////////
 // General Main Site CSS Resets
@@ -173,6 +178,7 @@
     }
   }
 
+  h4,
   .h4 {
     font-size: 14px;
 
@@ -188,10 +194,12 @@
     margin: 1em 0 1.2em;
   }
 
+  h5,
   .h5 {
     font-size: $font-size-h5;
   }
 
+  h6,
   .h6 {
     font-size: $font-size-h6;
   }
@@ -233,6 +241,14 @@
 }
 
 #contentcol {
+  // Dumb hack that removes 1px whitespace from bottom of page, when the last
+  // visible element on the page above the footer is a callout.
+  //
+  // This is caused by the re-opened, but empty, .container > .row >
+  // .col-md-12 inserted after the last callout on the page, which has a
+  // min-height of 1px applied to it.)
+  margin-bottom: -1px;
+
   a:not(.btn) {
     color: $brand-primary;
   }
@@ -500,92 +516,59 @@
   // See .callout-dark as an example.
   //
   .callout {
+    padding: #{$grid-gutter-width / 2} 0;
+
+    @media (min-width: $screen-sm-min) {
+      padding: $grid-gutter-width 0;
+    }
+
     h1,
-    .h1 {
-      font-size: 24px;
-      margin-bottom: 1.4em;
-      margin-top: 1.2em;
-
-      @media (min-width: $screen-sm-min) {
-        font-size: 42px;
-        margin-bottom: .8em;
-      }
-    }
-
+    .h1,
     h2,
-    .h2 {
-      font-size: 18px;
-
-      @media (min-width: $screen-sm-min) {
-        font-size: 20px;
-      }
-    }
-
+    .h2,
     h3,
     .h3 {
+      margin: 1em 0 .5em;
+
       @media (min-width: $screen-sm-min) {
-        font-size: 18px;
+        margin: 1.5em 0 .8em;
       }
     }
 
-    h4,
-    .h4 {
-      font-size: 13px;
-      text-transform: uppercase;
-
-      @media (min-width: $screen-sm-min) {
-        font-size: 16px;
-      }
+    // Force equal vertical alignment of callout subheadings:
+    .callout-subheading {
+      @include callout-subheading();
     }
 
-    h5,
-    .h5 {
-      font-size: 11.5px;
+    // Defines a section within a callout, generally a small column,
+    // with smaller text.  Should be used for displaying secondary/
+    // tertiary content.
+    .callout-aside {
+      font-size: 12px;
 
       @media (min-width: $screen-sm-min) {
         font-size: 14px;
       }
     }
 
-    h6,
-    .h6 {
-      font-size: 10px;
-
-      @media (min-width: $screen-sm-min) {
-        font-size: 12px;
-      }
-    }
-
-    // Class that defines a sidebar/aside within a callout. Ideally
-    // preceded or followed by a vertical divider.
+    // Defines a heading within a callout aside/sidebar.
+    // Designed to align with adjacent h2, h3 and h4 headings.
     //
     // Intended usage:
     //
-    // <div class="callout"><div class="container"><div class="row">
-    // <div class="col-md-8">...</div>
-    // <div class="col-md-1 hidden-sm hidden-xs"><div class="vertical-divider"></div></div>
-    // <div class="col-md-3"><div class="side-supplement">...</div></div>
-    // </div></div></div>
-    //
-    .side-supplement {
-      font-size: 14px;
-    }
-
-    // Defines a heading within a .side-supplement.
-    //
-    // Intended usage:
-    //
-    // <div class="side-supplement">
-    // <h3 class="side-supplement-title">
+    // <aside class="callout-aside">
+    // <h3 class="callout-aside-heading">
     // <a href="..."><span class="fa fa-question-circle"></span>FAQ</a>
     // </h3>
     // ...
-    // </div>
+    // </aside>
     //
-    .side-supplement-title {
+    .callout-aside-heading {
+      @include callout-subheading();
       @include archer(4, italic);
       font-size: 26px;
-      margin-top: .6em;
+      line-height: 1.3;
+      margin-bottom: 15px;
 
       a {
         font-weight: 400;
@@ -613,17 +596,17 @@
       text-decoration: underline;
     }
 
-    h4,
-    .h4 {
-      color: $ucf-gold;
-    }
-
     .list-navigation a {
       font-weight: 400;
     }
 
     .list-navigation a,
     .list-chevrons a {
+      text-decoration: none;
+    }
+
+    .callout-aside-heading a {
+      font-weight: 400;
       text-decoration: none;
     }
   }
