@@ -126,6 +126,17 @@
   }
 
   h1,
+  .h1,
+  h2,
+  .h2 {
+    margin: 1.2em 0 .6em;
+
+    @media (min-width: $screen-sm-min) {
+      margin: 2em 0 .8em;
+    }
+  }
+
+  h1,
   .h1 {
     font-size: 26px;
 
@@ -138,17 +149,43 @@
   // src/scss/page/_general.scss
   h2,
   .h2 {
-    font-size: $font-size-h2;
+    font-size: 21px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 26px;
+    }
+  }
+
+  h3,
+  .h3,
+  h4,
+  .h4 {
+    margin: 2.75em 0 1.25em;
   }
 
   // Reset h3 font size here as well
   h3,
   .h3 {
-    font-size: 16px;
+    font-size: 18px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 20px;
+    }
   }
 
   .h4 {
-    font-size: $font-size-h4;
+    font-size: 14px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+  }
+
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    margin: 1em 0 1.2em;
   }
 
   .h5 {
@@ -196,36 +233,16 @@
 }
 
 #contentcol {
-  h2,
-  .h2 {
-    margin: 1.2em 0 .6em;
-
-    @media (min-width: $screen-sm-min) {
-      margin: 2em 0 .8em;
-    }
-  }
-
-  h3,
-  .h3 {
-    margin: 2.75em 0 1.25em;
-  }
-
-  h4,
-  .h4 {
-    margin: 1em 0 1.2em;
-  }
-
   a:not(.btn) {
     color: $brand-primary;
   }
 
   .lead {
     @include archer();
-    line-height: 1.3;
+    line-height: 1.45;
 
     @media (min-width: $screen-sm-min) {
       font-size: 24px;
-      line-height: 1.4;
     }
   }
 
@@ -235,6 +252,7 @@
     border-radius: 0;
     box-shadow: none;
     line-height: 1.5;
+    margin: 2em 0 3em;
 
     @media (min-width: $screen-sm-min) {
       line-height: 1.4;
@@ -244,6 +262,23 @@
       @include gotham(6);
       color: $black;
       text-decoration: underline;
+    }
+
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+      // Intentional mix of px and em units--ensures .well-icon and
+      // headings align vertically
+      margin: 20px 0 1em;
     }
   }
 
@@ -308,7 +343,7 @@
     background-color: rgba($ucf-gold, .8);
     font-size: 28px;
     line-height: 1.2;
-    margin-top: 10px;
+    margin: 10px 0 0;
     padding: 12px;
     text-align: center;
 
@@ -328,6 +363,7 @@
     color: $white;
     font-size: 13px;
     font-weight: 300;
+    margin: 0;
     padding: 6px 12px;
 
     @media (min-width: $screen-sm-min) {
@@ -407,7 +443,7 @@
 
     @media (min-width: $screen-sm-min) {
       font-size: 16px;
-      margin: 3.5em 0 1.7em;
+      margin: 4em 0 1.7em;
     }
 
     &:after {
@@ -418,7 +454,7 @@
       height: 3px;
       left: 0;
       position: absolute;
-      width: 50px;
+      width: 40px;
     }
   }
 
@@ -437,11 +473,14 @@
     color: $ucf-gold;
     display: block;
     font-size: 60px;
-    margin: .2em 0;
+    margin: 0 0 .2em;
     text-align: center;
 
     @media (min-width: $screen-sm-min) {
       font-size: 80px;
+      // Intentional mix of px and em units--ensures .well-icon and
+      // headings align vertically
+      margin: 15px 0 .2em;
     }
 
     @media (min-width: $screen-md-min) {
