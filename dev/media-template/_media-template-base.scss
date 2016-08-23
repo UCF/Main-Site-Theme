@@ -126,6 +126,17 @@
   }
 
   h1,
+  .h1,
+  h2,
+  .h2 {
+    margin: 1.2em 0 .6em;
+
+    @media (min-width: $screen-sm-min) {
+      margin: 2em 0 .8em;
+    }
+  }
+
+  h1,
   .h1 {
     font-size: 26px;
 
@@ -139,11 +150,6 @@
   h2,
   .h2 {
     font-size: $font-size-h2;
-    margin: 1.2em 0 .6em;
-
-    @media (min-width: $screen-sm-min) {
-      margin: 2em 0 .8em;
-    }
   }
 
   // Reset h3 font size here as well
@@ -153,9 +159,17 @@
     margin: 2.75em 0 1.25em;
   }
 
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    margin: 1em 0 1.2em;
+  }
+
   .h4 {
     font-size: $font-size-h4;
-    margin: 1em 0 1.2em;
   }
 
   .h5 {
