@@ -241,14 +241,6 @@
 }
 
 #contentcol {
-  // Dumb hack that removes 1px whitespace from bottom of page, when the last
-  // visible element on the page above the footer is a callout.
-  //
-  // This is caused by the re-opened, but empty, .container > .row >
-  // .col-md-12 inserted after the last callout on the page, which has a
-  // min-height of 1px applied to it.)
-  margin-bottom: -1px;
-
   a:not(.btn) {
     color: $brand-primary;
   }
@@ -516,6 +508,14 @@
   // See .callout-dark as an example.
   //
   .callout {
+    // Dumb hack that removes 1px whitespace from bottom of page, when the last
+    // visible element on the page above the footer is a callout.
+    //
+    // This is caused by the re-opened, but empty, .container > .row >
+    // .col-md-12 inserted after the last callout on the page, which has a
+    // min-height of 1px applied to it.)
+    margin-bottom: -1px;
+    // [/end dumb hack]
     padding: #{$grid-gutter-width / 2} 0;
 
     @media (min-width: $screen-sm-min) {
