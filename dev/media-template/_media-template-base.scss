@@ -328,7 +328,7 @@
     background-color: rgba($ucf-gold, .8);
     font-size: 28px;
     line-height: 1.2;
-    margin-top: 10px;
+    margin: 10px 0 0;
     padding: 12px;
     text-align: center;
 
@@ -348,6 +348,7 @@
     color: $white;
     font-size: 13px;
     font-weight: 300;
+    margin: 0;
     padding: 6px 12px;
 
     @media (min-width: $screen-sm-min) {
