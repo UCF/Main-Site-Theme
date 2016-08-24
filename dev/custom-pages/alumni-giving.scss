@@ -207,6 +207,10 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
     .events-list {
       letter-spacing: .04em;
     }
+
+    .heading-heavy {
+      margin: 2.5em 0 1em;
+    }
   }
 
   .events-list {
@@ -281,10 +285,10 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
       @include gotham(8);
       @include font-smoothing();
       font-size: 13px;
+      margin: .4em 0;
 
       @media (min-width: $screen-sm-min) {
         font-size: 16px;
-        margin-bottom: 4px;
       }
     }
 
