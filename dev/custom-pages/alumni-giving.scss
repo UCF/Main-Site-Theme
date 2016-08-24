@@ -203,6 +203,15 @@ $header-media-xs-url: 'http://localhost/wordpress/main-site/wp-content/uploads/s
   }
 
   .callout-events {
+    h1,
+    .h1 {
+      font-size: 25px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 42px;
+      }
+    }
+
     .list-chevrons,
     .events-list {
       letter-spacing: .04em;
