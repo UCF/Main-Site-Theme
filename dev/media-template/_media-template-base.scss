@@ -30,8 +30,8 @@
 // element's font size.)
 //
 @mixin margin-h1() {
-  // 25px base-- 1.2em 0 .6em;
-  margin: 30px 0 15px;
+  // 26px base-- 1.2em 0 .6em;
+  margin: 32px 0 16px;
 
   @media (min-width: $screen-sm-min) {
     // 32px base-- 2em 0 .8em;
@@ -197,7 +197,7 @@
   h1,
   .h1 {
     @include margin-h1();
-    font-size: 25px;
+    font-size: 26px;
 
     @media (min-width: $screen-sm-min) {
       font-size: 32px;
