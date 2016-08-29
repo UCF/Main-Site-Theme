@@ -1,7 +1,7 @@
 			<div id="footer">
 
 				<div id="footer-navwrap" role="navigation" class="screen-only">
-					<?=wp_nav_menu(array(
+					<?php echo wp_nav_menu(array(
 						'theme_location' => 'footer-menu',
 						'container' => 'false',
 						'menu_class' => 'menu list-unstyled list-inline text-center',
@@ -13,7 +13,7 @@
 					?>
 				</div>
 
-				<?=wp_nav_menu(array(
+				<?php echo wp_nav_menu(array(
 					'theme_location' => 'social-links',
 					'container' => 'div',
 					'container_id' => 'social-menu-wrap',

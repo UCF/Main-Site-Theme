@@ -1552,6 +1552,72 @@ var mediaTemplateVideo = function($) {
   }
 };
 
+var sectionsMenu = function($) {
+  var $sectionsMenu = $('#sections-menu');
+  if ( $sectionsMenu.length ) {
+    var selector = $sectionsMenu.data('selector');
+
+    var clickHandler = function(e) {
+      e.preventDefault();
+
+      var $target = $(this.hash);
+      $target = $target.length ? $target : $('[name=' + this.hash.slice() + ']');
+
+      var scrollTo = $target.offset().top - 50;
+      if ( $(window).width() < 991 ) {
+        $sectionsMenu.collapse('toggle');
+      }
+
+      if ($target.length) {
+        $('html, body').animate({
+          scrollTop: scrollTo
+        }, 750);
+      }
+    };
+
+    var addToMenu = function($i, $section) {
+      var $item  = $( $section ),
+          url = $item.attr('id'),
+          text = $item.find('h2.section-title').text(),
+          $listItem = $('<li></li>'),
+          $anchor = $('<a class="section-link" href="#' + url + '">' + text + '</a>');
+
+      $anchor.on('click', clickHandler);
+      $listItem.append($anchor);
+      $menuList.append($listItem);
+
+    };
+
+    var scroll = function() {
+      if ($(window).scrollTop() >= offset) {
+        $menu.removeClass('center');
+        $menu.addClass('navbar-fixed-top');
+        $('body').addClass('fixed-navbar');
+      } else {
+        $menu.addClass('center');
+        $menu.removeClass('navbar-fixed-top');
+        $('body').removeClass('fixed-navbar');
+      }
+    };
+
+    var onResize = function() {
+      offset = $firstSection.offset().top - $menu.height(); // Reduce by 50px to account for university header.
+    };
+
+    var $sections = $(selector),
+        $menuList = $sectionsMenu.find('ul.nav'),
+        $menu = $('#sections-navbar'),
+        $firstSection = $sections.first(),
+        offset = $firstSection.offset().top;
+
+    $.each($sections, addToMenu);
+    $(document).on('scroll', scroll);
+    $('body').scrollspy({target: '#sections-menu', offset: 60});
+    $(window).on('resize', onResize);
+    scroll();
+  }
+};
+
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
     Webcom.slideshow($);
@@ -1583,6 +1649,7 @@ if (typeof jQuery != 'undefined'){
     announcementKeywordAutocomplete($);
     customChart($);
     mediaTemplateVideo($);
+    sectionsMenu($);
 
     //devBootstrap($);
 

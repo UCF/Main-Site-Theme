@@ -71,6 +71,7 @@ define('FEED_FETCH_TIMEOUT', 10); // seconds
 
 $theme_options = get_option(THEME_OPTIONS_NAME);
 
+
 # Weather
 define('WEATHER_URL', !empty($theme_options['weather_service_url']) ? $theme_options['weather_service_url'] : 'http://weather.smca.ucf.edu/');
 define('WEATHER_CLICK_URL', 'http://www.weather.com/weather/today/Orlando+FL+32816');
