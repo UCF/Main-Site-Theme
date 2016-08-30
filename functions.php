@@ -1574,6 +1574,18 @@ function append_degree_metadata( $post, $tuition_data ) {
 			$post->tuition_estimates = get_tuition_estimate( $post->tax_program_type, $post->degree_hours );
 			$post->tuition_value_message = $theme_options['tuition_value_message'];
 			$post->financial_aid_message = $theme_options['financial_aid_message'];
+
+			switch( $post->tax_program_type->slug ) {
+				case 'undergraduate-degree':
+					$post->tuition_credit_hours = get_theme_option( 'tuition_undergrad_hours', TRUE );
+					break;
+				case 'graduate-degree':
+					$post->tuition_credit_hours = get_theme_option( 'tuition_grad_hours', TRUE );
+					break;
+				default:
+					$post->tuition_credit_hours = null;
+					break;
+			}
 		}
 
 		if ( empty( $post->degree_pdf ) ) {

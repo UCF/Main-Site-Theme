@@ -223,9 +223,9 @@
 							<div class="tuition-value-message">
 								<?php echo $post->tuition_value_message; ?>
 								<div class="tuition-total">
-									<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * $post->tuition_credit_hours, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
+								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (<?php echo $post->tuition_credit_hours; ?> credit hours per year)</p>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -234,9 +234,9 @@
 							<div class="tuition-value-message">
 								<?php echo $post->tuition_value_message; ?>
 								<div class="tuition-total">
-									<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * $post->tuition_credit_hours, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
+								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (<?php echo $post->tuition_credit_hours; ?> credit hours per year)</p>
 							</div>
 						<?php endif; ?>
 					</div>

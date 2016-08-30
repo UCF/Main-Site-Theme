@@ -310,27 +310,6 @@ Config::$theme_settings = array(
 			'default'     => 'https://ww2.graduate.ucf.edu/inquiry/',
 			'value'       => $theme_options['grad_degree_info_url'],
 		)),
-		new TextareaField(array(
-			'name'        => 'Tuition Value Message',
-			'id'          => THEME_OPTIONS_NAME.'[tuition_value_message]',
-			'description' => 'HTML formatted message that will appear below the Tuition and Fees header on the degree profile page',
-			'default'     => '',
-			'value'       => $theme_options['tuition_value_message'],
-		)),
-		new TextareaField(array(
-			'name'        => 'Financial Aid Message',
-			'id'          => THEME_OPTIONS_NAME.'[financial_aid_message]',
-			'description' => 'HTML formatted message that will appear below the Tuition and Fees content on the degree profile page',
-			'default'     => '',
-			'value'       => $theme_options['financial_aid_message'],
-		)),
-		new TextField(array(
-			'name'        => 'Tuition and Fees Feed URL',
-			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',
-			'description' => 'URL for the tuition and fee feed.',
-			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
-			'value'       => $theme_options['tuition_fee_url'],
-		)),
 		new TextField(array(
 			'name'        => 'National Undergraduate Tuition Average (In State)',
 			'id'          => THEME_OPTIONS_NAME.'[national_undergraduate_in_state_average]',
@@ -361,6 +340,43 @@ Config::$theme_settings = array(
 			'description' => 'The number of degrees to display per page on the degee search page',
 			'value'       => $theme_options['degrees_per_page'],
 		)),
+	),
+	'Tuition and Fees' => array(
+		new TextField(array(
+			'name'        => 'Tuition and Fees Feed URL',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',
+			'description' => 'URL for the tuition and fee feed.',
+			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
+			'value'       => $theme_options['tuition_fee_url'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Tuition Value Message',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_value_message]',
+			'description' => 'HTML formatted message that will appear below the Tuition and Fees header on the degree profile page',
+			'default'     => '',
+			'value'       => $theme_options['tuition_value_message'],
+		)),
+		new TextareaField(array(
+			'name'        => 'Financial Aid Message',
+			'id'          => THEME_OPTIONS_NAME.'[financial_aid_message]',
+			'description' => 'HTML formatted message that will appear below the Tuition and Fees content on the degree profile page',
+			'default'     => '',
+			'value'       => $theme_options['financial_aid_message'],
+		)),
+		new TextField(array(
+			'name'        => 'Undergraduate Full-time Credit Hours',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_undergrad_hours]',
+			'description' => 'The number of credit hours to calculate a full-time tuition amount for Undergraduate Degrees',
+			'default'     => '30',
+			'value'       => $theme_options['tuition_undergrad_hours']
+		)),
+		new TextField(array(
+			'name'        => 'Graduate Full-time Credit Hours',
+			'id'          => THEME_OPTIONS_NAME.'[tuition_grad_hours]',
+			'description' => 'The number of credit hours to calculate a full-time tuition amount for Graduate Degrees',
+			'default'     => '24',
+			'value'       => $theme_options['tuition_grad_hours']
+		))
 	),
 	'Events' => array(
 		new SelectField(array(
