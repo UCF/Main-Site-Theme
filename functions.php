@@ -1579,13 +1579,13 @@ function append_degree_metadata( $post, $tuition_data ) {
 				case 'undergraduate-degree':
 				case 'articulated-program':
 				case 'minor':
-					$post->tuition_credit_hours = get_theme_option( 'tuition_undergrad_hours', TRUE );
+					$post->tuition_credit_hours = intval( get_theme_option( 'tuition_undergrad_hours', TRUE ) );
 					break;
 				case 'graduate-degree':
-					$post->tuition_credit_hours = get_theme_option( 'tuition_grad_hours', TRUE );
+					$post->tuition_credit_hours = intval( get_theme_option( 'tuition_grad_hours', TRUE ) );
 					break;
 				default:
-					$post->tuition_credit_hours = get_theme_option( 'tuition_undergrad_hours', TRUE );
+					$post->tuition_credit_hours = intval( get_theme_option( 'tuition_undergrad_hours', TRUE ) );
 					break;
 			}
 		}
