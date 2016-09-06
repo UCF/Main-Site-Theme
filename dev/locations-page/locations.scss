@@ -1,0 +1,684 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/type';
+@import '../../src/scss/variables';
+
+// Compile this file using the following command (assumes scss is installed globally)
+// scss --watch --style compressed dev/locations-page/locations.scss:dev/locations-page/locations.min.css
+
+// Mixins
+@mixin body-prefix($selector) {
+  body#{$selector} & {
+    @content;
+  }
+}
+// Custom variables:
+
+$archer: "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
+$georgia: Georgia, serif !default;
+$gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
+$verdana: Verdana, Geneva, sans-serif;
+
+.gotham {
+  font-family: $gotham;
+}
+
+.callout-ucf {
+  background: $ucf-gold;
+  color: $ucf-col-default;
+}
+
+#campus-map {
+  height: 450px;
+  width: 100%;
+}
+
+.page-media {
+  margin-bottom: -50px;
+  padding-bottom: 90px;
+  top: -70px;
+}
+
+.location-text {
+  font-family: $gotham;
+  margin: 0;
+}
+
+#header-menu li a {
+  color: $ucf-col-highlight;
+}
+
+#header-menu li.last a {
+  color: $ucf-col-default;
+}
+
+.locations-section,
+.intro-section {
+  font-family: $gotham;
+  margin-bottom: 72px;
+
+  ul > li > a {
+    color: #428bca;
+
+    &:hover {
+      color: #3c5f7d;
+      text-decoration: none;
+    }
+  }
+
+  .section-header {
+    height: 500px;
+    margin-bottom: 0;
+    margin-top: 0;
+    position: relative;
+
+    .section-title,
+    .section-link {
+      color: #fff;
+      font-family: $gotham;
+      text-shadow: 1px 1px 1px $ucf-col-default;
+    }
+
+    .section-title {
+      bottom: 18px;
+      font-size: 48px;
+      margin-left: -20px;
+      max-width: 600px;
+      position: absolute;
+
+      @media(max-width: $screen-sm-max) {
+        font-size: 32px;
+        margin-left: 0;
+      }
+    }
+
+    .section-link {
+      bottom: 18px;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .content-title {
+    color: #333;
+    display: inline-block;
+    font-family: $gotham;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 18px;
+    margin-top: 60px;
+    padding: 0 0 10px;
+    text-transform: uppercase;
+
+    &::after {
+      background: $ucf-gold;
+      content: ' ';
+      display: block;
+      height: 2px;
+      margin-top: 15px;
+      width: 25px;
+    }
+  }
+
+  &.no-margin {
+    margin-bottom: 0;
+  }
+}
+
+#sections-navbar .section-link {
+  font-family: $gotham;
+}
+
+#contentcol {
+  p {
+    font-size: 15px;
+  }
+
+  .intro-section .content-title {
+    font-family: $archer;
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    margin-top: 0;
+    text-transform: none;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+.header-title {
+  font-family: $archer;
+  margin-top: 34px;
+
+  .header-main-title {
+    background: $ucf-gold;
+    font-size: 48px;
+    line-height: 66px;
+    padding: 18px 12px;
+
+    @media(max-width: $screen-xs-max) {
+      font-size: 20px;
+      line-height: 59px;
+    }
+  }
+
+  .header-subtitle {
+    background: $ucf-col-default;
+    color: $ucf-col-highlight;
+    display: inline-block;
+    font-weight: 300;
+    font-size: 24px;
+    margin-top: 14px;
+    padding: 18px 12px;
+
+    @media(max-width: $screen-xs-max) {
+      font-size: 16px;
+      margin-top: -2px;
+    }
+  }
+}
+
+.callout {
+  background: $ucf-gold;
+  margin: 0 auto;
+  padding: 48px 0;
+  text-align: center;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .icon-link {
+    display: inline-block;
+    margin: 10px auto;
+    padding: 0 12px;
+    width: 25%;
+
+    @media (max-width: $screen-xs-max) {
+      width: 50%;
+    }
+
+    a {
+      color: $ucf-col-default;
+
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+      }
+
+      h3 {
+        @include transition(background .25s, color .25s);
+        background: rgba(30, 30, 30, .25);
+        border-radius: 4px;
+        display: inline;
+        font-family: $gotham;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        padding: 2px 14px;
+      }
+
+      p {
+        font-size: 12px;
+        font-style: italic;
+        padding-top: 8px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: #fff;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: $ucf-gold;
+        }
+      }
+    }
+  }
+}
+
+.map-search {
+  background-position: center center;
+  height: 530px;
+  margin-top: 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+  @media (max-width: $screen-md-max) {
+    height: 400px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    height: 300px;
+  }
+
+  .search-box-background {
+    display: block;
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  .section-header-text {
+    color: $ucf-col-default;
+    font-family: $gotham;
+    font-size: 45px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    min-width: 600px;
+    padding-top: 190px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 30%;
+
+    @media (max-width: $screen-md-max) {
+      font-size: 40px;
+      min-width: 540px;
+      padding-top: 115px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 30px;
+      max-width: 420px;
+      min-width: 100%;
+      padding-top: 70px;
+      width: 100%;
+    }
+  }
+
+  .search-form {
+    background: #F7F7F7; /* For browsers that do not support gradients */
+    background: linear-gradient(#fff, #eee);
+    border-radius: 200px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, .3);
+    font-style: italic;
+    height: 80px;
+    margin: 0 auto;
+    padding: 15px;
+    position: relative;
+    width: 650px;
+
+    @media (max-width: $screen-sm-max) {
+      background: transparent;
+      box-shadow: none;
+      width: 80%;
+    }
+
+    .search-term {
+      border: 1px solid #E8E8E8;
+      border-radius: 50px;
+      float: left;
+      font-family: $georgia;
+      font-size: 17px;
+      font-weight: 100;
+      letter-spacing: .5px;
+      outline: none;
+      padding: 13px 25px;
+      width: 540px;
+
+      @media (max-width: $screen-sm-max) {
+        border: 11px solid $ucf-gold-light;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, .3);
+        float: none;
+        padding-right: 65px;
+        width: 100%;
+      }
+    }
+
+    .search-button {
+      background: $ucf-gold;
+      border: 0;
+      border-radius: 50%;
+      color: $ucf-col-highlight;
+      float: right;
+      font-size: 26px;
+      height: 50px;
+      padding: 0;
+      width: 50px;
+
+      @media (max-width: $screen-sm-max) {
+        float: none;
+        position: absolute;
+        top: 26px;
+        right: 25px;
+      }
+
+      .fa-spinner {
+        display: none;
+      }
+
+      &.loading {
+        .fa-search {
+          display: none;
+        }
+        .fa-spinner {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.promo-image {
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 12px;
+}
+
+.campuses-grid {
+  overflow: hidden;
+  width: 100%;
+}
+
+.campus-card {
+  box-sizing: border-box;
+  display: block;
+  float: left;
+  font-family: $gotham;
+  font-size: 14px;
+  padding: 115px 20px;
+  position: relative;
+  text-align: center;
+  transition: background-color .4s, color .4s;
+  width: 25%;
+
+  @media (max-width: $screen-sm-max) {
+    padding: 50px 20px 100px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    width: 50%;
+  }
+
+  @media (max-width: 300px) {
+    width: 100%;
+  }
+
+  .overlay {
+    background-position: center center;
+    background-size: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: .05;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-size .4s, opacity .4s;
+    z-index: 10;
+  }
+
+  h2 {
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 1.25;
+    margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    max-width: 325px;
+    position: relative;
+    z-index: 15;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 20px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 18px;
+    }
+  }
+
+  p {
+    margin: 0 auto;
+    max-width: 400px;
+    position: relative;
+    transition: color .4s;
+    z-index: 15;
+  }
+
+  .service-links {
+    @extend .list-inline;
+    bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 10px;
+    position: absolute;
+    width: 90%;
+    z-index: 20;
+
+    li {
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 5px;
+
+      &:after {
+        border: 1px solid rgba(124, 103, 30, .3);
+        border-width: 0 1px 0 0;
+        content: '';
+        padding-left: 14px;
+        transition: border-color .4s, color .4s;
+
+        @media (max-width: $screen-sm-max) {
+          display: none;
+        }
+      }
+
+      &:before {
+        color: #7C671E;
+        content: "\e144";
+        font-family: 'Glyphicons Halflings';
+        font-size: 11px;
+        padding-right: 5px;
+        transition: color .4s;
+      }
+
+      &:last-child:after {
+        display: none;
+      }
+
+      + li {
+        padding-left: 9px;
+      }
+    }
+
+  }
+
+  a {
+    transition: color .4s;
+
+    &:link,
+    &:active,
+    &:visited {
+      color: #000;
+      text-decoration: none;
+    }
+  }
+
+  &:nth-child(1) {
+    background-color: #ffc908;
+  }
+
+  &:nth-child(2) {
+    background-color: #ffd747;
+  }
+
+  &:nth-child(3) {
+    background-color: #ffe68a;
+  }
+
+  &:nth-child(4) {
+    background-color: #ffe997;
+  }
+
+  &:nth-child(5) {
+    background-color: #edbc0c;
+  }
+
+  &:nth-child(6) {
+    background-color: #eccb52;
+  }
+
+  &:nth-child(7) {
+    background-color: #f0d77d;
+  }
+
+  &:nth-child(8) {
+    background-color: #f7de83;
+  }
+
+  &:nth-child(9) {
+    background-color: #d3ac1f;
+  }
+
+  &:nth-child(10) {
+    background-color: #debe4b;
+  }
+
+  &:nth-child(11) {
+    background-color: #dfcb81;
+  }
+
+  &:nth-child(12) {
+    background-color: #e6d38b;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    &:nth-child(1) {
+      background-color: #ffc908;
+    }
+
+    &:nth-child(2) {
+      background-color: #edbc0c;
+    }
+
+    &:nth-child(3) {
+      background-color: #ffd747;
+    }
+
+    &:nth-child(4) {
+      background-color: #eccb52;
+    }
+
+    &:nth-child(5) {
+      background-color: #ffdf6b;
+    }
+
+    &:nth-child(6) {
+      background-color: #f5d45d;
+    }
+
+    &:nth-child(7) {
+      background-color: #ffe480;
+    }
+
+    &:nth-child(8) {
+      background-color: #ffdf6d;
+    }
+
+    &:nth-child(9) {
+      background-color: #FFE991;
+    }
+
+    &:nth-child(10) {
+      background-color: #ffe381;
+    }
+
+    &:nth-child(11) {
+      background-color: #ffeca1;
+    }
+
+    &:nth-child(12) {
+      background-color: #ffe791;
+    }
+  }
+
+  &:hover {
+    background-color: #2b2b2b;
+
+    .overlay {
+      background-size: 107%;
+      opacity: .1;
+    }
+
+    h2,
+    p,
+    li,
+    .service-links li:before,
+    .service-links li:after {
+      color: $ucf-col-highlight;
+    }
+
+    .service-links li:after {
+      border-color: $ucf-col-highlight;
+    }
+
+    a {
+      transition: color .4s;
+
+      &:link,
+      &:active,
+      &:visited,
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.image-strip {
+  box-sizing: border-box;
+  display: block;
+  font-family: $gotham;
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+  transition: background-color .4s, color .4s;
+  width: 100%;
+
+  h3 {
+    color: #333;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 0;
+    margin-top: 30px;
+    padding: 0;
+    text-transform: uppercase;
+  }
+
+  .image-strip-image {
+    background-position: center center;
+    background-size: cover;
+    float: left;
+    height: 257px;
+    transition: background-size .4s, opacity .4s;
+    width: 25%;
+    z-index: 10;
+
+    @media (max-width: 1100px) {
+      height: 230px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      height: 200px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      height: 125px;
+    }
+  }
+}

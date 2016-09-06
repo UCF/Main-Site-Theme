@@ -1,0 +1,44 @@
+[
+    {
+        "value": 53,
+        "color": "#ffc904",
+        "highlight": "#ffdd18",
+        "label": "White"
+    },
+    {
+        "value": 22.5,
+        "color": "#80be1f",
+        "highlight": "#94d233",
+        "label": "Hispanic/Latino"
+    },
+    {
+        "value": 11,
+        "color": "#7560a3",
+        "highlight": "#8974b7",
+        "label": "African-American"
+    },
+    {
+        "value": 6,
+        "color": "#42758a",
+        "highlight": "#56899e",
+        "label": "Asian and Pacific Islander"
+    },
+    {
+        "value": 3.3,
+        "color": "#eb595c",
+        "highlight": "#ff6d70",
+        "label": "Multiracial"
+    },
+    {
+        "value": 3,
+        "color": "#e58a18",
+        "highlight": "#f99e2c",
+        "label": "Non-resident Alien"
+    },
+    {
+        "value": 2,
+        "color": "#b3b3b3",
+        "highlight": "#c7c7c7",
+        "label": "Not Specified"
+    }
+]

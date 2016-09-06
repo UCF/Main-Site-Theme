@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700);
+
 /*
  * Header
  */
@@ -202,6 +204,13 @@ body.ie8 #contentcol object {
   letter-spacing: -.02em;
 }
 
+#contentcol .sans-serif-condensed {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: -.02em;
+}
+
 #contentcol .text-big {
   font-size: 30px;
   line-height: 1;
@@ -358,7 +367,7 @@ body.ie8 #contentcol object {
   display: table;
   height: 265px;
   margin: 20px auto 10px;
-  max-width: 400px;
+  max-width: 455px;
   width: 100%;
 }
 
@@ -423,23 +432,6 @@ body.ie8 #contentcol object {
   background-position: top right;
   background-repeat: no-repeat;
   background-size: contain;
-  min-height: 350px;
-}
-
-#big-value .article-inner {
-  padding: 30% 30% 0 0;
-}
-
-@media (max-width: 767px) {
-  #big-value .article-inner {
-    padding: 20% 32% 0 0;
-  }
-}
-
-@media (max-width: 480px) {
-  #big-value .article-inner {
-    padding: 30% 38% 0 0;
-  }
 }
 
 
@@ -566,33 +558,105 @@ body.ie8 #contentcol object {
   }
 }
 
+/* Orlando Rising */
+
+#orlando-rising {
+  background-image: url('//www.ucf.edu/wp-content/uploads/2016/08/gray-stripes.gif');
+  background-position: left bottom;
+  background-repeat: repeat;
+  background-size: auto;
+  min-height: 485px;
+}
+
+#orlando-rising .florida-state {
+  position: absolute;
+  top: -40px;
+  right: -20px;
+}
+
+@media (max-width: 991px) {
+  #orlando-rising .florida-state {
+    top: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  #orlando-rising .florida-state {
+    top: 25px;
+    right: 28px;
+    width: 90%;
+  }
+}
+
+
+
+#contentcol #orlando-rising h2 {
+  font-size: 85px;
+  line-height: .85;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+}
+
+#orlando-rising .article-inner {
+  width: 75%;
+  padding-top: 18%;
+  padding-left: 12%;
+  font-family: "Gotham SSm 4r", "Gotham SSm A", "Gotham SSm B";
+}
+
+@media (max-width: 991px) {
+  #contentcol #orlando-rising h2 {
+    font-size: 80px;
+    margin-bottom: 8px;
+  }
+
+  #orlando-rising .article-inner {
+    padding-top: 33%;
+    width: 60%;
+  }
+}
+
+@media (max-width: 767px) {
+  #contentcol #orlando-rising h2 {
+    font-size: 43px;
+    margin-bottom: 8px;
+  }
+
+  #orlando-rising .article-inner {
+    padding-bottom: 0;
+    padding-top: 33%;
+    width: 65%;
+  }
+}
+
+#orlando-rising .feature-desc {
+  letter-spacing: .04em !important;
+}
 
 /* Student-Athlete Success */
 
 #big-athlete-success {
-  background-position: center bottom;
+  background-position: left bottom;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 63% auto;
   min-height: 485px;
 }
 
-@media (max-width: 991px) {
-  #big-athlete-success {
-    min-height: 555px;
-  }
+#contentcol #big-athlete-success h2 {
+  margin-bottom: 20px;
 }
 
 @media (max-width: 767px) {
   #big-athlete-success {
     background-image: none !important;  /* necessary to override inline css */
-    min-height: none;
   }
 }
 
 #big-athlete-success .article-inner {
   float: right;
   padding-bottom: 22%;
-  width: 45%;
+  width: 32%;
 }
 
 @media (max-width: 991px) {
@@ -613,6 +677,38 @@ body.ie8 #contentcol object {
   letter-spacing: .04em !important;
 }
 
+#contentcol .badge-stats {
+  display: block;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: #fc0;
+  padding-top: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#contentcol .badge-stats .big-text {
+  font-family: 'Georgia', serif;
+  font-size: 60px;
+  font-weight: normal;
+  display: block;
+  padding-bottom: 13px;
+}
+
+#contentcol .badge-stats .inner-text {
+  color: #000;
+  display: block;
+  font-family: "Gotham SSm 7r", "Gotham SSm A", "Gotham SSm B";
+  font-size: 14px;
+  height: 30px;
+  margin: 0 auto;
+  max-width: 140px;
+  text-transform: uppercase;
+  white-space: normal;
+  word-wrap: normal;
+}
 
 /* This is UCF */
 
@@ -631,67 +727,120 @@ body.ie8 #contentcol object {
   }
 }
 
+/* Serious Talent */
 
-/* Mentor Magnetism */
+#economic-impact {
+  position: relative;
+}
 
-#big-mentor-magnetism {
-  background-color: #DBBE9C;
-  margin-top: 30px;
+#economic-impact .article-inner {
+  padding-left: 29%;
+}
+
+#economic-impact .text-biggest {
+  color: #fff;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  font-size: 80px;
+  left: -25px;
+  position: absolute;
+  text-shadow: -1px -1px 0 #fc0, 1px -1px 0 #fc0, -1px 1px 0 #fc0, 1px 1px 0 #fc0;
+  top: 120px;
+  transform: rotate(-90deg);
+  line-height: 0;
+}
+
+.ie8 #economic-impact .text-biggest,
+.ie9 #economic-impact .text-biggest {
+  color: #fc0;
+  filter: none;
+  left: auto;
+  line-height: 1;
+  margin-bottom: -15px;
+  position: relative;
+  text-shadow: 0;
+  top: auto;
+  transform: none;
+}
+
+.ie8 #economic-impact .article-inner,
+.ie9 #economic-impact .article-inner {
+  padding-left: 0;
 }
 
 @media (max-width: 991px) {
-  #big-mentor-magnetism {
+  #economic-impact .text-biggest {
+    transform: none;
+    top: auto;
+    left: auto;
+    position: relative;
+    margin-bottom: -15px;
+    line-height: 1;
+  }
+
+  #economic-impact .article-inner {
+    padding-left: 0;
+  }
+}
+
+
+
+/* Dr. Hitt */
+
+#big-hitt .cite {
+  float: right;
+  width: 70%;
+  margin-top: -40px;
+}
+
+@media (max-width: 991px) {
+  #big-hitt .cite {
+    float: none;
+    width: auto;
+    margin-top: auto;
+  }
+}
+
+/* Our Promise */
+
+#large-bottom-callout-block {
+  background-color: #000;
+  color: #FFF;
+  margin-top: 30px;
+  font-family: "Gotham SSm 8r", "Gotham SSm A", "Gotham SSm B";
+  font-size: 15px;
+}
+
+@media (max-width: 991px) {
+  #large-bottom-callout-block {
     margin-top: 15px;
   }
 }
 
-#big-mentor-magnetism h2 a,
-#big-mentor-magnetism h2 a:hover,
-#big-mentor-magnetism h2 a:active,
-#big-mentor-magnetism h2 a:focus {
+#large-bottom-callout-block h2 a,
+#large-bottom-callout-block h2 a:hover,
+#large-bottom-callout-block h2 a:active,
+#large-bottom-callout-block h2 a:focus {
   color: #000;
 }
 
-#big-mentor-magnetism blockquote {
-  margin-top: 25px;
-}
-
-#big-mentor-magnetism .small {
-  font-size: 16px;
-}
-
-@media (max-width: 767px) {
-  #big-mentor-magnetism .small {
-    font-size: 14px;
-  }
-}
-
-#big-mentor-magnetism .article-inner {
+#large-bottom-callout-block .article-inner {
   padding: 50px 70px;
 }
 
 @media (max-width: 767px) {
-  #big-mentor-magnetism .article-inner {
+  #large-bottom-callout-block .article-inner {
     padding: 25px;
+    text-align: center;
   }
 }
 
-@media (max-width: 767px) {
-  #big-mentor-magnetism .text-big {
-    font-size: 22px;
-  }
+#large-bottom-callout-block h2.text-bigger {
+  color: #fc0;
+  font-size: 15px;
+  font-weight: 600;
+  padding-bottom: 20px;
+  text-transform: uppercase;
 }
-
-#big-mentor-magnetism .text-bigger {
-  font-size: 36px;
-}
-
-@media (max-width: 767px) {
-  #big-mentor-magnetism .text-bigger {
-    font-size: 26px;
-  }
-}
-
 
 /*
 (Minified custom build -- fading + bouncing entrances)

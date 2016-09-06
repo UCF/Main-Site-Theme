@@ -87,15 +87,15 @@
 
 				<div class="mobile-degree-cta visible-xs">
 					<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
-					<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-success btn-degree-info">
+					<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-label="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-success btn-degree-info">
 						<?php echo $theme_options['grad_degree_info_copy'] ?>
 					</a>
 					<?php endif; ?>
-					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-primary">
+					<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-label="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-primary">
 						View Catalog
 					</a>
 					<?php if ( $post->degree_website ): ?>
-					<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
+					<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-label="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 						Visit Program Website
 					</a>
 					<?php endif; ?>
@@ -107,7 +107,7 @@
 						<?php echo apply_filters( 'the_content', $post->degree_description ); ?>
 					<?php } else { ?>
 							You can find a full description of this degree in the
-							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>"
+							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-label="<?php echo $post->post_title; ?>"
 								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
 					<?php } ?>
 				</div>
@@ -130,15 +130,15 @@
 
 			<div class="hidden-xs">
 				<?php if ( Degree::is_graduate_program( $post ) && !empty( $theme_options['grad_degree_info_url'] ) && !empty( $theme_options['grad_degree_info_copy'] ) ): ?>
-				<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-success btn-degree-info">
+				<a data-ga-category="Degree Search" data-ga-action="Request Page Clicked" data-ga-label="<?php echo $post->post_title; ?>" href="<?php echo $theme_options['grad_degree_info_url'] ?>" class="ga-event btn btn-lg btn-block btn-success btn-degree-info">
 					<?php echo $theme_options['grad_degree_info_copy'] ?>
 				</a>
 				<?php endif; ?>
-				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-primary">
+				<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-label="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_pdf; ?>" target="_blank" class="ga-event btn btn-lg btn-block btn-primary">
 					View Catalog
 				</a>
 				<?php if ( $post->degree_website ): ?>
-				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-value="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
+				<a data-ga-category="Degree Search" data-ga-action="Program Page Clicked" data-ga-label="<?php echo $post->post_title; ?>" href="<?php echo $post->degree_website; ?>" class="ga-event btn btn-lg btn-block btn-default">
 					Visit Program Website
 				</a>
 				<?php endif; ?>
@@ -223,9 +223,9 @@
 							<div class="tuition-value-message">
 								<?php echo $post->tuition_value_message; ?>
 								<div class="tuition-total">
-									<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * $post->tuition_credit_hours, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
+								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (<?php echo $post->tuition_credit_hours; ?> credit hours per year)</p>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -234,9 +234,9 @@
 							<div class="tuition-value-message">
 								<?php echo $post->tuition_value_message; ?>
 								<div class="tuition-total">
-									<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * $post->tuition_credit_hours, 0 ); ?> <span class="tuition-period">per year</span></p>
 								</div>
-								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
+								<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (<?php echo $post->tuition_credit_hours; ?> credit hours per year)</p>
 							</div>
 						<?php endif; ?>
 					</div>
