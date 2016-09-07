@@ -234,134 +234,44 @@ $color-linkedin: #0077b5;
   }
 }
 
+.dcwss.dc-wall {
+  .stream {
+    li {
+      background: #393939;
 
-#ff-stream-1-slideshow,
-#ff-stream-1 {
-  @include gotham();
-}
+      .inner {
+        color: #FFFFFF;
+      }
 
-#ff-stream-1 {
-  .ff-stream-wrapper {
-    margin: 0 5px;
-    padding: 5px 0 0;
+      .section-thumb {
+        float: none;
+        margin: 0 auto;
 
-    @media (min-width: $screen-sm-min) {
-      margin: 0 15px;
-      padding: 15px 0;
+        img {
+          margin: 7px auto;
+          max-width: 100%;
+        }
+      }
+
+      .section-intro {
+        padding: 20px 15px 20px 35px;
+
+        a { 
+          border-bottom: 0 !important;
+
+          &:hover {
+            border-bottom: 0 !important;
+          }
+        }
+      }
+
+      .socicon {
+        bottom: 17px;
+      }
     }
   }
 
-  .ff-item,
-  .shuffle__sizer {
-    width: 270px !important;
-
-    // Try to make cards fit comfortably at various breakpoints:
-    @media (min-width: 415px) {
-      width: 300px !important;
-    }
-
-    @media (min-width: 500px) {
-      width: 215px !important;
-    }
-
-    @media (min-width: 625px) {
-      width: 270px !important;
-    }
-
-    @media (min-width: $screen-sm-min) {
-      width: 400px !important;
-    }
-
-    @media (min-width: 875px) {
-      width: 250px !important;
-    }
-
-    @media (min-width: $screen-md-min) {
-      width: 320px !important;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      width: 250px !important;
-    }
-
-    @media (min-width: 1300px) {
-      width: 270px !important;
-    }
-  }
-
-  .ff-theme-classic .picture-item__inner,
-  .ff-theme-classic .shuffle__sizer {
-    padding: 0 0 15px;
-  }
-
-  .ff-item h4,
-  .ff-content,
-  .ff-item-meta {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .ff-content,
-  .ff-item .ff-content p {
-    font-size: 13px;
-    line-height: 1.45 !important;
-  }
-
-  .readmore-js-toggle {
-    margin-left: 15px;
-  }
-
-  .ff-item h4 {
-    font-size: 14px !important;
-    line-height: 1.25 !important;
-    margin: 0;
-  }
-
-  .ff-name {
-    font-size: 12px !important;
-    height: auto !important;
-    line-height: 1.2 !important;
-    margin-bottom: 3px !important;
-    margin-top: 2px !important;
-    min-height: 15px !important;
-    width: calc(100% - 47px) !important;
-  }
-
-  .ff-content {
-    padding-bottom: 10px;
-    padding-top: 10px;
-  }
-
-  .ff-item h4,
-  .ff-item-meta {
-    padding-bottom: 0;
-    padding-top: 10px;
-  }
-
-  .ff-item-meta {
-    height: auto !important;
-  }
-
-  .ff-timestamp {
-    display: block !important;
-    font-size: 11px;
-    height: auto !important;
-    line-height: 1.1 !important;
-    margin-left: 27px;  // .ff-userpic width 20px + margin-right 7px
-
-    &:before {
-      content: '' !important;
-      display: none !important;
-    }
-  }
-}
-
-#ff-stream-1,
-#ff-stream-1 .ff-search input,
-#ff-stream-1.ff-layout-compact .picture-item__inner {
-  background-color: transparent !important;
-
-  @media (min-width: $screen-sm-min) {
-    background-color: #eee !important;
-  }
+  a.link-user { 
+    border-bottom: 0 !important; 
+  } 
 }
