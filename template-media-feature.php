@@ -51,4 +51,4 @@ if ( $use_video ) {
 
 </div>
 <div class="container">
-	<?php get_footer();?>
+	<?php get_footer( 'gray' );?>

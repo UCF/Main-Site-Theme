@@ -1338,4 +1338,113 @@ function sc_pegasus_issues( $atts, $content='' ) {
 add_shortcode( 'pegasus-issues', 'sc_pegasus_issues' );
 
 
+/**
+ * Displays a navbar menu based on the sections present
+ * on the page.
+ **/
+function sc_sections_menu( $atts, $content='' ) {
+	$atts = shortcode_atts(
+		array(
+			selector => '.auto-section'
+		),
+		$atts
+	);
+
+	ob_start();
+?>
+	<nav id="sections-navbar" class="navbar navbar-gold center">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sections-menu">
+					<span class="sr-only">Toggle sections navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="sections-menu" data-selector="<?php echo $atts['selector']; ?>">
+				<ul class="nav navbar-nav">
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+<?php
+	return ob_get_clean();
+}
+
+add_shortcode( 'sections-menu', 'sc_sections_menu' );
+
+
+/*
+ * Search for a image by file name and return its URL.
+ *
+ */
+function sc_full_width_image( $attr, $content='' ) {
+	$attr = shortcode_atts(
+		array(
+			'image'     => null,
+			'filename'  => null,
+			'bgcolor'   => null,
+			'color'     => null,
+			'size'      => null,
+			'classes'   => null,
+			'container' => false
+		),
+		$attr
+	);
+
+	$image = $attr['image'];
+	$filename = $attr['filename'];
+	$bgcolor = $attr['bgcolor'];
+	$color = $attr['color'];
+	$size = $attr['size'];
+	$classes = $attr['classes'];
+	$container = filter_var( $attr['container'],  FILTER_VALIDATE_BOOLEAN );
+
+	if ( ! $image && $filename ) {
+		$image = get_image_url( $filename );
+	}
+
+	$styles = array();
+
+	if ( $image ) { $styles[] = 'background-image: url(\''.$image.'\');'; }
+	if ( $bgcolor ) { $styles[] = 'background-color: '.$bgcolor.';'; }
+	if ( $color ) { $styles[] = 'color: '.$color.';'; }
+	if ( $size ) { $styles[] = 'background-size: '.$size.';'; }
+
+
+	$content = apply_filters( 'the_content', $content );
+
+	if ( $container ) {
+		$classes .= ' container';
+	}
+
+	$content = '<div class="' . $classes . '" style="'.implode( ' ', $styles ).'">'.apply_filters( 'the_content', $content ).'</div>';
+
+	return $content;
+}
+add_shortcode( 'full-width-image', 'sc_full_width_image' );
+
+
+function sc_image( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'filename' => null
+		),
+		$atts
+	);
+
+	$url = null;
+
+	if ( isset( $atts['filename'] ) ) {
+		$url = get_image_url( $atts['filename'] );
+	}
+
+	return $url;
+}
+
+add_shortcode( 'image', 'sc_image' );
+
+
 ?>
