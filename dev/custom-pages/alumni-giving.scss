@@ -1,8 +1,9 @@
 @import '../media-template/media-template-base';
 
 
-// TODO update url to point to prod url
+// TODO update urls to point to prod
 $header-media-xs-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/header-xs.jpg';
+$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg.jpg';
 
 
 @mixin btn-cta() {
@@ -120,6 +121,10 @@ $header-media-xs-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/hea
     }
   }
 
+  .img-grid {
+    @include clearfix();
+  }
+
   .img-grid-item {
     width: 100%;
 
@@ -203,6 +208,13 @@ $header-media-xs-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/hea
   }
 
   .callout-events {
+    @media (min-width: $screen-md-min) {
+      background-image: url('#{$events-bg-url}');
+      background-position: center right;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
     h1,
     .h1 {
       font-size: 25px;
