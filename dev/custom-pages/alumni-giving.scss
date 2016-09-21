@@ -325,41 +325,13 @@ $events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg
   }
 
   //
-  // General Pegasus issue list styles.
+  // General Pegasus issue list style overrides.
   //
-  // NOTE: These are intentionally contained within this page-specific
-  // stylesheet, and not added to the main site stylesheet, because they depend
-  // heavily on cloud.typography fonts, which are not available on all pages.
-  //
-  .pegasus-issues-list {
-    line-height: 1.5;
-
-    @media (min-width: $screen-sm-min) {
-      line-height: 1.65;
-    }
-  }
-
-  .pegasus-issues-list-item {
-    margin-bottom: 2.5em;
-
-    @media (min-width: $screen-sm-min) {
-      margin-bottom: 2em;
-    }
-  }
-
-  .pegasus-issue-thumbnail-link,
-  .pegasus-issue-title,
-  .pegasus-issue-featured-label,
-  .pegasus-issue-cover-title {
-    display: block;
-  }
-
   .pegasus-issue-title {
     @include gotham(7);
     color: $black !important;  // Necessary to override #contentcol a:not(.btn) rule
     font-size: 34px;
-    line-height: 1.1;
-    margin-bottom: .6em;
+    margin-top: 0;
 
     @media (min-width: $screen-md-min) {
       font-size: 42px;
@@ -367,12 +339,7 @@ $events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg
   }
 
   .pegasus-issue-featured-label {
-    @include font-smoothing();
-    color: $gray-light;
     font-size: 13px;
-    letter-spacing: .06em;
-    margin-bottom: .6em;
-    text-transform: uppercase;
 
     @media (min-width: $screen-md-min) {
       font-size: 15px;
@@ -383,8 +350,6 @@ $events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg
     @include archer(7);
     color: $black !important;  // Necessary to override #contentcol a:not(.btn) rule
     font-size: 26px;
-    line-height: 1;
-    margin-bottom: .4em;
 
     @media (min-width: $screen-md-min) {
       font-size: 32px;
@@ -394,7 +359,6 @@ $events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg
   .pegasus-issue-cover-description {
     @include archer(4, italic);
     font-size: 18px;
-    margin-bottom: 1.5em;
 
     @media (min-width: $screen-md-min) {
       font-size: 21px;
