@@ -22,17 +22,18 @@ function get_article_image($article){
  * Fetches an external url's contents with a timeout applied to the request.
  **/
 function fetch_with_timeout( $url ) {
-	// Set a timeout
-	$opts = array(
-		'http' => array(
-			'method'  => 'GET',
-			'timeout' => FEED_FETCH_TIMEOUT
-		)
-	);
-	$context = stream_context_create( $opts );
+	$retval = false;
 
-	// Grab the file
-	return file_get_contents( $url, false, $context );
+	$args = array(
+		'timeout' => FEED_FETCH_TIMEOUT
+	);
+
+	$response = wp_safe_remote_get( $url, $args );
+	if ( is_array( $response ) ) {
+		$retval = wp_remote_retrieve_body( $response );
+	}
+
+	return $retval;
 }
 
 
@@ -466,10 +467,12 @@ function get_events( $start=0, $limit=4, $url='' ) {
 	$raw_events = fetch_with_timeout( $url );
 	if ( $raw_events ) {
 		$events = json_decode( $raw_events, TRUE );
-		$events = array_slice( $events, $start, $limit );
+		if ( is_array( $events ) ) {
+			$events = array_slice( $events, $start, $limit );
+		}
 		return $events;
 	}
-	else { return NULL; }
+	else { return null; }
 }
 
 

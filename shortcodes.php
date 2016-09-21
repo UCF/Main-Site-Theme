@@ -1305,7 +1305,14 @@ function sc_events( $atts, $content='' ) {
 
 	ob_start();
 
-	echo display_events_list( $atts['start'], $atts['limit'], $atts['url'], $atts['list_classes'], $atts['list_item_classes'], $atts['show_descriptions'] );
+	$events = display_events_list( $atts['start'], $atts['limit'], $atts['url'], $atts['list_classes'], $atts['list_item_classes'], $atts['show_descriptions'] );
+
+	if ( trim( $events ) ) {
+		echo $events;
+	}
+	else {
+		echo $content;
+	}
 
 	return ob_get_clean();
 }
