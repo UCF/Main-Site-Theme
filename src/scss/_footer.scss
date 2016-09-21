@@ -71,30 +71,82 @@
   a[href*="twitter"],
   a[href*="flickr"],
   a[href*="youtube"],
-  a[href*="google"] {
-    @include sprite();
-    height: 32px;
-    width: 35px;
+  a[href*="google"],
+  a[href*="linkedin"],
+  a[href*="vine"] {
+    @include sprite('../img/social-links.png', '../img/social-links-r.png', 291px, 82px);
+    height: 41px;
+    width: 41px;
   }
 
   a[href*="facebook"] {
-    background-position: -1px -35px;
+    background-position: 0 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: 0 -41px;
+    }
   }
 
   a[href*="twitter"] {
-    background-position: -67px -34px;
+    background-position: -42px 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: -42px -41px;
+    }
   }
 
   a[href*="flickr"] {
-    background-position: -32px -35px;
+    background-position: -83px 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: -83px -41px;
+    }
   }
 
   a[href*="youtube"] {
-    background-position: -101px -35px;
+    background-position: -250px 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: -250px -41px;
+    }
   }
 
   a[href*="google"] {
-    background-position: -134px -35px;
+    background-position: -125px 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: -125px -41px;
+    }
+  }
+
+  a[href*="linkedin"] {
+    background-position: -167px 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: -167px -41px;
+    }
+  }
+
+  a[href*="vine"] {
+    background-position: -208px 0;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-position: -208px -41px;
+    }
   }
 }
 
