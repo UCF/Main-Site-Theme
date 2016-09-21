@@ -529,6 +529,13 @@ Config::$theme_settings = array(
     		'default'     => 10,
     		'value'       => $theme_options['undergraduate_catalog_feed_timeout'],
         )),
+    	new TextField(array(
+    		'name'        => 'Pegasus Magazine URL',
+    		'id'          => THEME_OPTIONS_NAME.'[pegasus_url]',
+    		'description' => 'URL to the Pegasus Magazine website.  Can be changed for development when testing Pegasus issue feeds on different environments.',
+    		'default'     => 'https://www.ucf.edu/pegasus/',
+    		'value'       => $theme_options['pegasus_url'],
+        )),
 	),
 	'Social' => array(
 		new TextField(array(
