@@ -57,21 +57,25 @@
     }
   }
 
-  #footer-menu li {
-    border-right: 1px solid $white !important;
-    padding-right: 10px;
+  #footer-menu {
+    margin-bottom: 0;
 
-    &:last-child {
-      border-right: none !important;
-    }
+    li {
+      border-right: 1px solid $white !important;
+      padding-right: 10px;
 
-    a {
-      @include gotham(3);
-      font-size: 10px;
-      letter-spacing: 0;
+      &:last-child {
+        border-right: none !important;
+      }
 
-      @media (min-width: $screen-sm-min) {
-        font-size: 12px;
+      a {
+        @include gotham(3);
+        font-size: 10px;
+        letter-spacing: 0;
+
+        @media (min-width: $screen-sm-min) {
+          font-size: 12px;
+        }
       }
     }
   }
