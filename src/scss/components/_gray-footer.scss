@@ -1,110 +1,89 @@
 // Styles that are directly tied to the site footer/navigation should go in
 // this file.
 
-#footer-menu li {
-  border-right: 1px solid #fff !important;
-
-  &:last-child {
-    border-right: none !important;
-  }
-}
-
 .site-footer {
+  @include gotham(3);
   background: $footer-gray;
-  color: #fff;
-  font-family: $font-family-sans-serif;
+  color: $white;
   margin-top: 0;
-  padding-bottom: 30px;
+  padding: 30px 0;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 60px 0;
+  }
 
   .footer-title {
-    font-family: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif;
-    font-size: 22px;
-    margin-top: 30px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
     text-align: center;
     text-transform: uppercase;
 
-    @media(max-width: $screen-xs-max) {
-      font-size: 18px;
+    @media (min-width: $screen-sm-min) {
+      font-size: 22px;
     }
   }
 
   a {
-    color: #fff !important;
+    color: $white !important;
 
-    &:hover {
-      color: #fff !important;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white !important;
       text-decoration: none;
     }
   }
 
-  .site-footer-menu {
-    li {
-      border-right: 1px solid #fff;
-      padding-right: 10px;
+  .social-menu {
+    margin-top: 0;
+  }
 
-      a {
-        color: #fff;
-        font-size: 10px;
-      }
+  .social-menu-link {
+    background: $white;
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+  }
 
-      &:last-child {
-        border-right: none;
-      }
+  .social-menu-icon {
+    color: $footer-gray;
+
+    &.fa-facebook,
+    &.fa-twitter,
+    &.fa-google-plus,
+    &.fa-linkedin {
+      font-size: 20px;
     }
   }
 
-  .social {
-    margin-bottom: 24px;
-    text-align: center;
-    
-    .social-icon {
-      background: #fff;
-      border-radius: 50%;
-      display: inline-block;
-      height: 32px;
-      margin: 0 5px;
-      padding-top: 10px;
-      width: 32px;
+  #footer-menu li {
+    border-right: 1px solid $white !important;
+    padding-right: 10px;
 
-      &:hover {
-        background: #D4D4D4;
-      }
+    &:last-child {
+      border-right: none !important;
     }
 
-    span {
-      color: #3E3E3E;
-      padding: 6px;
-      font-size: 24px;
-      line-height: 0;
+    a {
+      @include gotham(3);
+      font-size: 10px;
+      letter-spacing: 0;
 
-      &.fa-facebook {
-        font-size: 20px;
-        padding: 6px 8px 0 8px;
-      }
-
-      &.fa-twitter {
-        font-size: 20px;
-      }
-
-      &.fa-google-plus {
-        font-size: 20px;
-      }
-
-      &.fa-linkedin {
-        font-size: 20px;
-        padding: 4px 8px;
+      @media (min-width: $screen-sm-min) {
+        font-size: 12px;
       }
     }
   }
 }
 
 .main-site-footer {
-  background: #3e3e3e;
+  background: $footer-gray;
   padding: 48px 0;
   text-align: center;
 
   .main-site-title {
-    color: #fff;
+    color: $white;
     font-family: $font-family-sans-serif;
     font-size: 19px;
     margin-bottom: 12px;
