@@ -21,10 +21,10 @@ $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
 #header-menu {
   li:not(:last-child) a,
   li:not(.last) a {
-    color: #fff;
+    color: $white;
 
     &:hover {
-      color: #fc0;
+      color: $ucf-gold;
     }
   }
 }
