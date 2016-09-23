@@ -3062,14 +3062,14 @@ function display_social_menu() {
 
 	ob_start();
 ?>
-	<div class="social">
+	<div class="social-menu">
 <?php
 	foreach( $items as $item ):
 		$href = $item->url;
-		$icon = get_social_icon( $item->post_name );
+		$icon = get_social_icon( $item->url );
 ?>
-		<a href="<?php echo $href; ?>" class="social-icon ga-event-link">
-			<span class="<?php echo $icon; ?>"></span>
+		<a href="<?php echo $href; ?>" class="social-menu-link ga-event-link">
+			<span class="social-menu-icon <?php echo $icon; ?>"></span>
 		</a>
 
 <?php
@@ -3081,7 +3081,6 @@ function display_social_menu() {
 }
 
 function get_social_icon( $item_slug ) {
-	
 	switch( true ) {
 		case stristr( $item_slug, 'facebook' ):
 			return 'fa fa-facebook';
@@ -3099,6 +3098,10 @@ function get_social_icon( $item_slug ) {
 			return 'fa fa-youtube';
 		case stristr( $item_slug, 'flickr' ):
 			return 'fa fa-flickr';
+		case stristr( $item_slug, 'vine' ):
+			return 'fa fa-vine';
+		case stristr( $item_slug, 'social' ):
+			return 'fa fa-share-alt';
 		default:
 			return 'fa fa-pencil';
 	}
