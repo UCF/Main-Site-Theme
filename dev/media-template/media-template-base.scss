@@ -1,0 +1,29 @@
+//
+// This file contains a base set of classes and template overrides for custom
+// page development using the media header template and refreshed web styles
+// (e.g. ucf.edu/students/ styles).
+//
+// Please import this file at the top of your .scss file for any new page that
+// uses the media header template, so that we can reduce the number of repeated
+// classes and styles in each custom page we build.
+//
+
+
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/components/font-awesome/scss/variables';
+@import '../../src/components/font-awesome/scss/mixins';
+@import '../../src/scss/variables';
+@import '../../src/scss/mixins';
+
+
+@import 'variables';
+@import 'mixins';
+
+@import 'reset-general';
+@import 'reset-template';
+
+@import 'header';
+@import 'content-utilities';
+@import 'content-type';
+@import 'content-components';

@@ -1,0 +1,75 @@
+/////////////////////////////////
+// Helper classes - typography
+/////////////////////////////////
+
+// scss-lint:disable IdSelector
+#contentcol {
+
+  // Basic unordered list styles with optimized list item spacing applied.
+  // Intended for use on lists of links, e.g. "Explore Further",
+  // "More Information", etc.
+  .list-navigation {
+    @include list-reset();
+  }
+
+  // Class for an unordered list with gold chevron icons for bullets.
+  .list-chevrons {
+    @include list-reset();
+    padding-left: 1.25em;
+
+    li:before {
+      @include fa-icon();
+      color: $ucf-gold;
+      content: $fa-var-chevron-right;
+      font-size: .8em;
+      line-height: 1;
+      margin-left: -1.25em;
+      width: 1.25em;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  // Applies generic Gotham styles to a heading.
+  .heading-sans-serif {
+    @include gotham(7);
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  // Applies generic Archer styles to a heading.
+  .heading-slab-serif {
+    @include archer(7);
+  }
+
+  // Styles a heading with a gold underline, Gotham face and uppercase
+  // text.
+  .heading-underline {
+    // .heading-underline elements should always be consistent in
+    // font size, so force them on this class
+    @extend .heading-sans-serif;
+    font-size: 14px;
+    margin: 3em 0 1.7em;
+    padding-bottom: 14px;
+    position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+      margin: 4em 0 1.7em;
+    }
+
+    &:after {
+      background-color: $ucf-gold;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 3px;
+      left: 0;
+      position: absolute;
+      width: 40px;
+    }
+  }
+}
+// scss-lint:enable IdSelector

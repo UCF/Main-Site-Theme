@@ -1,0 +1,79 @@
+/////////////////////////////////
+// Custom Mixins
+/////////////////////////////////
+
+//
+// Margins definitions for consistency across headings and components
+// that are intended to line up with headings.
+//
+// Margin values are set in px, not em, so that components with different
+// font sizes still have equivalent margin sizes (em's are relative to the
+// element's font size.)
+//
+@mixin margin-h1() {
+  // $font-size-h1-xs base-- 1.2em 0 .6em;
+  margin: #{$font-size-h1-xs * 1.2} 0 #{$font-size-h1-xs * .6};
+
+  @media (min-width: $screen-sm-min) {
+    // $font-size-h1-sm base-- 2em 0 .8em;
+    margin: #{$font-size-h1-sm * 2} 0 #{$font-size-h1-sm * .8};
+  }
+}
+
+@mixin margin-h2() {
+  // $font-size-h2-xs base-- 1.2em 0 .6em;
+  margin: #{$font-size-h2-xs * 1.2} 0 #{$font-size-h2-xs * .6};
+
+  @media (min-width: $screen-sm-min) {
+    // $font-size-h2-sm base-- 2em 0 .8em;
+    margin: #{$font-size-h2-sm * 2} 0 #{$font-size-h2-sm * .8};
+  }
+}
+
+@mixin margin-h3() {
+  // $font-size-h3-xs base-- 2.75em 0 1.25em;
+  margin: #{$font-size-h3-xs * 2.75} 0 #{$font-size-h3-xs * 1.25};
+
+  @media (min-width: $screen-sm-min) {
+    // $font-size-h3-sm base-- 2.75em 0 1.25em;
+    margin: #{$font-size-h3-sm * 2.75} 0 #{$font-size-h3-sm * 1.25};
+  }
+}
+
+@mixin margin-h4() {
+  // $font-size-h4-xs base-- 2.75em 0 1.25em;
+  margin: #{$font-size-h4-xs * 2.75} 0 #{$font-size-h4-xs * 1.25};
+
+  @media (min-width: $screen-sm-min) {
+    // $font-size-h4-sm base-- 2.75em 0 1.25em;
+    margin: #{$font-size-h4-sm * 2.75} 0 #{$font-size-h4-sm * 1.25};
+  }
+}
+
+@mixin margin-h5() {
+  // $font-size-h5 base-- 1em 0 1.2em;
+  margin: $font-size-h5 0 #{$font-size-h5 * 1.2};
+}
+
+@mixin margin-h6() {
+  // $font-size-h6 base-- 1em 0 1.2em;
+  margin: $font-size-h6 0 #{$font-size-h6 * 1.2};
+}
+
+
+// Basic reset for stylized ul's and ol's.
+@mixin list-reset() {
+  line-height: 1.375;
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: .8em;
+  }
+}
+
+
+// Force equal vertical alignment of headings within callouts.
+@mixin callout-subheading() {
+  margin-top: 30px;
+}
