@@ -1,9 +1,8 @@
 @import '../media-template/media-template-base';
 
 
-// TODO update urls to point to prod
-$header-media-xs-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/header-xs.jpg';
-$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg.jpg';
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/09/header-xs.jpg';
+$events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
 
 
 @mixin btn-cta() {
@@ -15,6 +14,18 @@ $events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/08/events-bg
 
   @media (min-width: $screen-sm-min) {
     font-size: 13px;
+  }
+}
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
   }
 }
 
