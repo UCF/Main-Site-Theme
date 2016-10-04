@@ -1454,4 +1454,31 @@ function sc_image( $atts ) {
 add_shortcode( 'image', 'sc_image' );
 
 
+function sc_image_srcset_atts( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'filename' => null
+		),
+		$atts
+	);
+	$img = false;
+	$img_atts = '';
+	$srcset = '';
+	$sizes = '';
+
+	if ( isset( $atts['filename'] ) ) {
+		$img = get_attachment_by_filename( $atts['filename'] );
+	}
+
+	if ( $img ) {
+		$srcset = wp_get_attachment_image_srcset( $img->ID );
+		$sizes = wp_get_attachment_image_sizes( $img->ID, 'full' );
+		$img_atts = 'srcset="'. $srcset .'" sizes="'. $sizes .'"';
+	}
+
+	return $img_atts;
+}
+add_shortcode( 'image-srcset-atts', 'sc_image_srcset_atts' );
+
+
 ?>

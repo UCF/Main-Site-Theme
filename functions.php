@@ -3034,11 +3034,13 @@ function google_tag_manager_dl() {
 }
 
 
-function get_image_url( $filename ) {
+function get_attachment_by_filename( $filename ) {
 	global $wpdb, $post;
 
+	$attachment = false;
+
 	$post_id = wp_is_post_revision( $post->ID );
-	if( $post_id === False ) {
+	if ( $post_id === False ) {
 		$post_id = $post->ID;
 	}
 
@@ -3049,13 +3051,27 @@ function get_image_url( $filename ) {
 		$rows = $wpdb->get_results( $sql );
 		if ( count( $rows ) > 0 ) {
 			$obj = $rows[0];
-			if( $obj->post_type == 'attachment' && stripos( $obj->post_mime_type, 'image/' ) == 0 ) {
-				$url = wp_get_attachment_url( $obj->ID );
+			if ( $obj->post_type == 'attachment' ) {
+				$attachment = $obj;
 			}
 		}
 	}
+
+	return $attachment;
+}
+
+
+function get_image_url( $filename ) {
+	$url = '';
+	$attachment = get_attachment_by_filename( $filename );
+
+	if ( $attachment && stripos( $attachment->post_mime_type, 'image/' ) == 0 ) {
+		$url = wp_get_attachment_url( $attachment->ID );
+	}
+
 	return $url;
 }
+
 
 function display_social_menu() {
 	$items = wp_get_nav_menu_items( 'social-links' );

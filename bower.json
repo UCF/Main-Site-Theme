@@ -19,6 +19,7 @@
     "Chart.js": "~1.0.2",
     "jquery.cycle.all": "http://malsup.github.io/jquery.cycle.all.js",
     "jquery.cookie": "jquery-cookie#~1.4.1",
-    "font-awesome": "~4.5.0"
+    "font-awesome": "~4.5.0",
+    "object-fit-images": "*"
   }
 }
