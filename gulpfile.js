@@ -140,7 +140,6 @@ gulp.task('js-main', function() {
     config.componentsPath + '/jfeed/build/dist/jquery.jfeed.js',
     config.componentsPath + '/jquery.cookie/jquery.cookie.js',
     config.componentsPath + '/jquery.cycle.all/index.js',
-    config.componentsPath + '/object-fit-images/dist/ofi.browser.js',
     config.jsPath + '/webcom-base.js',
     config.jsPath + '/script.js'
   ];

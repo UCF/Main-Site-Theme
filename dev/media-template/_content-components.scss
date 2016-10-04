@@ -181,38 +181,5 @@
     }
   }
 
-
-  //
-  // Class for a wide, full-screen section heading.
-  // Designed to also contain a stylized subsection heading.
-  //
-  .section-media-header {
-    position: relative;
-  }
-
-  .section-media-header-image {
-    @include object-fit(cover);
-    height: 400px;
-    width: 100%;
-
-    @media (min-width: $screen-sm-min) {
-      height: 500px;
-    }
-  }
-
-  .section-media-title {
-    @include gotham();
-    bottom: 30px;
-    color: $white;
-    font-size: 32px;
-    position: absolute;
-    text-shadow: 1px 1px 1px $black;
-    z-index: 2;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 48px;
-    }
-  }
-
 }
 // scss-lint:enable IdSelector

@@ -1618,13 +1618,6 @@ var sectionsMenu = function($) {
   }
 };
 
-
-var objectFitPolyfill = function($) {
-  var $images = $('.js-object-fit');
-  objectFitImages($images);
-};
-
-
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
     Webcom.slideshow($);
@@ -1657,7 +1650,6 @@ if (typeof jQuery != 'undefined'){
     customChart($);
     mediaTemplateVideo($);
     sectionsMenu($);
-    objectFitPolyfill($);
 
     //devBootstrap($);
 

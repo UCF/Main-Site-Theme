@@ -1,7 +1,3 @@
-// Mixin that applies CSS and necessary hacks for the object-fit polyfill.
-// @include object-fit($fit: fill, $position: null);
-@import '../components/object-fit-images/preprocessors/mixin.scss';
-
 // Prepends body<selector> to a selector. Useful when defining IE and page-specific overrides.
 // Cannot be used on direct body selectors or their children.
 @mixin body-prefix($selector) {
