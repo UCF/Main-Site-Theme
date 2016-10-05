@@ -233,8 +233,8 @@ function display_events($start=null, $limit=null){?>
 				<?php endforeach;?>
 			</tbody>
 		</table>
-	<?php else:?>
-		<p>Events could not be retrieved at this time.  Please try again later.</p>
+	<?php else: ?>
+		<?php echo $options['events_fallback_message']; ?>
 	<?php endif;?>
 <?php
 }
