@@ -400,6 +400,13 @@ Config::$theme_settings = array(
 			'value'       => $theme_options['events_url'],
 			'default'     => 'http://events.ucf.edu',
 		)),
+		new TextareaField(array(
+			'name'        => 'Events Fallback Message',
+			'id'          => THEME_OPTIONS_NAME.'[events_fallback_message]',
+			'description' => 'Fallback message to display when events either fail to load, or when no events are found.',
+			'value'       => $theme_options['events_fallback_message'],
+			'default'     => '<p>Events could not be retrieved at this time.  Please try again later.</p>',
+		)),
 	),
 	'Home Page' => array(
 		new TextareaField(array(
