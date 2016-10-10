@@ -1,4 +1,5 @@
 <?php
+require_once('third-party/truncate-html.php');  # Includes truncateHtml function
 require_once('functions/base.php');   			# Base theme functions
 require_once('functions/feeds.php');			# Where functions related to feed data live
 require_once('custom-taxonomies.php');  		# Where per theme taxonomies are defined
@@ -6,7 +7,7 @@ require_once('custom-post-types.php');  		# Where per theme post types are defin
 require_once('functions/admin.php');  			# Admin/login functions
 require_once('functions/config.php');			# Where per theme settings are registered
 require_once('shortcodes.php');         		# Per theme shortcodes
-require_once('third-party/truncate-html.php');  # Includes truncateHtml function
+
 
 //Add theme-specific functions here.
 
@@ -3061,14 +3062,14 @@ function display_social_menu() {
 
 	ob_start();
 ?>
-	<div class="social">
+	<div class="social-menu">
 <?php
 	foreach( $items as $item ):
 		$href = $item->url;
-		$icon = get_social_icon( $item->post_name );
+		$icon = get_social_icon( $item->url );
 ?>
-		<a href="<?php echo $href; ?>" class="social-icon ga-event-link">
-			<span class="<?php echo $icon; ?>"></span>
+		<a href="<?php echo $href; ?>" class="social-menu-link ga-event-link">
+			<span class="social-menu-icon <?php echo $icon; ?>"></span>
 		</a>
 
 <?php
@@ -3080,7 +3081,6 @@ function display_social_menu() {
 }
 
 function get_social_icon( $item_slug ) {
-	
 	switch( true ) {
 		case stristr( $item_slug, 'facebook' ):
 			return 'fa fa-facebook';
@@ -3098,6 +3098,10 @@ function get_social_icon( $item_slug ) {
 			return 'fa fa-youtube';
 		case stristr( $item_slug, 'flickr' ):
 			return 'fa fa-flickr';
+		case stristr( $item_slug, 'vine' ):
+			return 'fa fa-vine';
+		case stristr( $item_slug, 'social' ):
+			return 'fa fa-share-alt';
 		default:
 			return 'fa fa-pencil';
 	}

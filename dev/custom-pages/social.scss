@@ -1,0 +1,277 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/scss/variables';
+@import '../../src/scss/mixins';
+
+
+// Adds Archer font family styles to an element.
+// $weight should be a number from 1-9, which references the desired font
+// weight (100-900).  Default is 4 (400) or 'Book'.
+@mixin archer($weight: 4, $font-style: normal) {
+  font-family: 'Archer A', 'Archer B';
+  font-style: $font-style;
+  font-weight: #{$weight}00;
+}
+
+
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/06/header-xs.jpg';
+$color-facebook: #3a5795;
+$color-twitter: #00a5e5;
+$color-youtube: #cd201f;
+$color-vine: #00b488;
+$color-linkedin: #0077b5;
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: #fff;
+
+    &:hover {
+      color: #fc0;
+    }
+  }
+}
+
+
+.page-media-header {
+  height: 500px;
+
+  @media (max-width: $screen-sm-max) {
+    height: 450px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+    height: 228vw;
+    max-height: 800px;
+  }
+}
+
+.page-media-container {
+  text-align: center;
+
+  h1 {
+    @include archer(7);
+    background-color: rgba(255, 207, 0, .7);
+    color: #000;
+    font-size: 17.5vw;
+    line-height: .9;
+    margin-top: 0;
+    padding: 25px 25px 20px;
+    text-transform: uppercase;
+
+    @media (min-width: 475px) {
+      font-size: 85px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 80px;
+      margin-top: 20px;
+      padding: 30px 30px 25px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 92px;
+      margin-top: 35px;
+    }
+
+    .alt {
+      @include gotham(8);
+      color: #fff;
+      display: block;
+      font-size: 14vw;
+
+      @media (min-width: 475px) {
+        font-size: 64px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 72px;
+      }
+    }
+  }
+
+  .subheading {
+    @include archer();
+    background-color: #000;
+    color: #fff;
+    font-size: 4.25vw;
+    line-height: 1.2;
+    padding: 12px;
+
+    @media (min-width: 475px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 18px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 20px;
+    }
+  }
+
+  .social-btn-list {
+    margin-left: -8px;
+    margin-top: 20px;
+  }
+
+  .social-btn-list-item {
+    padding-left: 3px;
+    padding-right: 3px;
+
+    @media (min-width: 475px) {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+
+  .social-btn {
+    border-radius: 100%;
+    color: #fff;
+    display: block;
+    font-size: 25px;
+    line-height: 45px;
+    height: 45px;
+    text-align: center;
+    width: 45px;
+
+    @media (min-width: 475px) {
+      font-size: 30px;
+      line-height: 55px;
+      height: 55px;
+      width: 55px;
+    }
+  }
+
+  .social-btn-facebook {
+    background-color: $color-facebook;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color-facebook, 10%);
+    }
+  }
+
+  .social-btn-twitter {
+    background-color: $color-twitter;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color-twitter, 10%);
+    }
+  }
+
+  .social-btn-youtube {
+    background-color: $color-youtube;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color-youtube, 10%);
+    }
+  }
+
+  .social-btn-vine {
+    background-color: $color-vine;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color-vine, 10%);
+    }
+  }
+
+  .social-btn-linkedin {
+    background-color: $color-linkedin;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: darken($color-linkedin, 10%);
+    }
+  }
+}
+
+
+.page-content {
+  .affix-cancel {
+    position: static !important;
+    z-index: 1;
+  }
+
+  .twitter-widget-wrapper {
+    height: 80vh;
+    width: 100%;
+
+    @media (min-width: $screen-sm-min) {
+      height: 600px;
+      height: 100vh;
+    }
+
+    &.affix {
+      position: fixed !important;
+      top: 0;
+      width: calc(33.3333% - #{$grid-gutter-width});
+
+      @media (min-width: $screen-md-min) {
+        width: calc(25% - #{$grid-gutter-width});
+      }
+
+      &.affix-cancel {
+        position: static !important;
+        width: 100% !important;
+      }
+    }
+  }
+
+  .twitter-timeline {
+    height: 100% !important;
+    width: 100% !important;
+  }
+}
+
+.dcwss.dc-wall {
+  .stream {
+    li {
+      background: #393939;
+
+      .inner {
+        color: #FFFFFF;
+      }
+
+      .section-thumb {
+        float: none;
+        margin: 0 auto;
+
+        img {
+          margin: 7px auto;
+          max-width: 100%;
+        }
+      }
+
+      .section-intro {
+        padding: 20px 15px 20px 35px;
+
+        a { 
+          border-bottom: 0 !important;
+
+          &:hover {
+            border-bottom: 0 !important;
+          }
+        }
+      }
+
+      .socicon {
+        bottom: 17px;
+      }
+    }
+  }
+
+  a.link-user { 
+    border-bottom: 0 !important; 
+  } 
+}
