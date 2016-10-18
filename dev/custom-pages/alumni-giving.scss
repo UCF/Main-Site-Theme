@@ -3,6 +3,7 @@
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/09/header-xs.jpg';
 $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
+$alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_events_knightro.jpg';
 
 
 @mixin btn-cta() {
@@ -29,6 +30,11 @@ $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
   }
 }
 
+.once-a-knight {
+  @media(max-width: $screen-xs-max) {
+    background-image: url(#{$alumni-knitro}) !important;
+  }
+}
 
 .page-media-header {
   background-position: center bottom;
@@ -171,6 +177,10 @@ $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
         max-width: 600px;
         position: absolute;
         text-shadow: 1px 1px 1px #000;
+
+        @media(min-width: $screen-sm-min) {
+          margin-left: 0;
+        }
       }
     }
   }
