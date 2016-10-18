@@ -38,9 +38,9 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
   }
 }
 
-.page-media-header {
+.page-media .page-media-header {
   background-position: center bottom;
-  background-size: 100% auto;
+  background-size: cover;
   height: calc(134vw - #{$ucf-header-height});
   max-height: 650px;
 
@@ -48,7 +48,7 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
   // header background images implies/assumes a desktop-size image:
   @media (max-width: $screen-xs-max) {
     // scss-lint:disable ImportantRule
-    background-image: url(#{$header-media-xs-url}) default;
+    background-image: url(#{$header-media-xs-url}) !important;
     // scss-lint:enable ImportantRule
     overflow: visible;
     position: static;
@@ -175,14 +175,9 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
         font-family: gotham();
         font-size: 48px;
         font-weight: 500;
-        margin-left: -20px;
         max-width: 600px;
         position: absolute;
         text-shadow: 1px 1px 1px #000;
-
-        @media(max-width: $screen-xs-max) {
-          margin-left: 0;
-        }
       }
     }
   }
