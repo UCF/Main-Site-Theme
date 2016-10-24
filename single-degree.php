@@ -10,5 +10,3 @@
 		get_template_part( 'classic-degree-profile' );
 	}
 ?>
-
-<?php get_footer();?>

@@ -1,5 +1,20 @@
 // Single Degree profiles
 .updated-degree-template {
+  #header-nav-wrap,
+  #site-nav-xs {
+    z-index: 2;
+  }
+
+  #header-nav-wrap {
+    position: relative;
+  }
+
+  #site-nav-xs {
+    left: $grid-gutter-width / 2;
+    position: absolute;
+    right: $grid-gutter-width / 2;
+  }
+
   #header-menu {
     a {
       color: #fff;
