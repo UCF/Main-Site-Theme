@@ -1,13 +1,14 @@
+<?php get_header(); ?>
 <?php $search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) ); ?>
 </div>
-<div class="container-fullwidth page-media" id="<?php echo $post->post_name; ?>">
+<div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
 	<div class="page-media-header" style="background-image: url(<?php echo $post->header_image; ?>)">
-		<div class="page-media-container degree-header">
+		<div class="page-media-container container degree-header">
 			<h1><?php echo $post->post_title; ?></h1>
 		</div>
 	</div>
 </div>
-<div class="container updated" id="degree-single">
+<div class="container" id="degree-single">
 	<div id="breadcrumbs" class="col-md-12 col-sm-12 clearfix">
 		<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
 		<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
@@ -75,10 +76,26 @@
 					<?php echo display_social( get_permalink( $post->ID ), $post->post_title, 'UCF Degree: ' . $post->post_title, 'Check out this degree at the University of Central Florida.' ); ?>
 				</div>
 				<?php echo display_degree_callout( $post->ID ); ?>
+				<div class="row">
+				<?php if ( $post->degree_pdf ) : ?>
+					<div class="col-md-6">
+						<a href="<?php echo $post->degree_pdf; ?>" class="degree-promo-button">
+							<span class="degree-promo-icon fa fa-file-pdf-o"></span> <span class="degree-promo-text">Download Catalog PDF</span>
+						</a>
+					</div>
+				<?php endif; ?>
+				<?php if ( $post->degree_website ) : ?>
+					<div class="col-md-6">
+						<a href="<?php echo $post->degree_website; ?>" class="degree-promo-button">
+							<span class="degree-promo-icon fa fa-external-link-square"></span> <span class="degree-promo-text">Visit Program Website</span>
+						</a>
+					</div>
+				<?php endif; ?>
+				</div>
 			</div>
 		</div><!-- end .col-md-8 -->
 		<div class="col-md-4" id="sidebar_right">
-			<a href="https://apply.ucf.edu/applications/" class="btn btn-ucf-gold btn-lg btn-block">
+			<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
 				<span class="fa fa-pencil-square-o"></span> Apply Now
 			</a>
 			<a href="https://apply.ucf.edu/forms/campus-tour/" class="btn btn-ucf-gold btn-lg btn-block">
@@ -121,6 +138,13 @@
 					<?php endif; ?>
 				</div>
 			<?php endif; ?>
+			<?php if ( $post->degree_hours ): ?>
+				<h3 class="degree-credit-hours"><?php echo $post->degree_hours; ?> <span class="small">Total Credit Hours</span></h3>
+			<?php else: ?>
+				<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
+<div class="container">
+	<?php get_footer();?>

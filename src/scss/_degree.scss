@@ -1,34 +1,120 @@
 // Single Degree profiles
-#degree-single {
-  &.updated {
+$ucf-gold: #fc0;
+$archer: "Archer A","Archer B","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
 
-    .degree-details {
-      background: #efefef;
-      border-left: 5px solid #acacac;
-      padding: 12px 12px !important;
+.updated-degree-template {
+  @extend .page-template-template-media-feature;
 
-      dt,
-      dd {
-        margin-bottom: 4px !important;
-      }
+  #header-menu {
+    a {
+      color: #fff;
 
-      dt {
-        font-weight: normal;
-      }
-
-      dd {
-        font-weight: 700;
+      &:hover {
+        color: #fc0;
       }
     }
 
-    .degree-description {
-      border-top: 1px solid #fc0;
-      font-family: "Archer A", "Archer B", serif;
-      font-size: 15px;
-      padding-top: 24px;
+    .last a {
+      color: #000;
+
+      &:hover {
+        color: #fff;
+      }
     }
   }
 
+  .degree-header {
+    h1 {
+      background: rgba($ucf-gold, 0.8);
+      display: inline-block;
+      font-family: $archer;
+      font-size: 44px;
+      padding: 12px 32px;
+      width: 400px;
+    }
+  }
+
+  .degree-details {
+    background: #efefef;
+    border-left: 5px solid #acacac;
+    padding: 12px 12px !important;
+
+    dt,
+    dd {
+      margin-bottom: 4px !important;
+    }
+
+    dt {
+      font-weight: normal;
+    }
+
+    dd {
+      font-weight: 700;
+    }
+  }
+
+  .degree-description {
+    border-top: 1px solid #fc0;
+    font-family: "Archer A", "Archer B", serif;
+    font-size: 15px;
+    padding-top: 24px;
+  }
+
+  #sidebar_right {
+    padding-top: 0 !important;
+
+    @media( max-width: $screen-md-max ) {
+      margin-top: 12px;
+    }
+  }
+
+  .tuition-total {
+    color: #fc0 !important;
+    text-shadow: 0 1px 1px #999 !important;
+  }
+
+  .degree-credit-hours {
+    color: #fc0;
+    font-size: 32px;
+    padding: 12px 0;
+    text-align: center;
+    text-shadow: 0 1px 1px #999;
+
+    .small {
+      color: #fc0;
+      font-size: 18px;
+    }
+  }
+
+  .degree-promo-button {
+    @extend .btn-group;
+
+    .degree-promo-icon,
+    .degree-promo-text {
+      @extend .btn;
+
+      @media( max-width: $screen-md-max ) {
+        margin: 12px 0;
+      }
+    }
+
+    .degree-promo-icon {
+      @extend btn;
+      background: #3266cc;
+      color: #fff;
+      font-size: 32px;
+      font-family: "FontAwesome";
+    }
+
+    .degree-promo-text {
+      border: 1px solid #3266cc !important;
+      font-size: 15px;
+      padding: 18px 32px;
+    }
+  }
+}
+
+#degree-single {
   #breadcrumbs a {
     color: #999;
   }
