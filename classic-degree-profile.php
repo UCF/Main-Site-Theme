@@ -203,7 +203,7 @@
 			<?php
 					endforeach;
 				endif;
-			endif
+			endif;
 			?>
 		<?php if ( $post->tuition_estimates && $post->degree_hide_tuition != 'on' ) : ?>
 			<div class="tuition-info">
@@ -246,3 +246,4 @@
 	</div>
 	<input type="hidden" id="program_type" value="<?php echo $post->tax_program_type->slug; ?>" />
 	<input type="hidden" id="credit_hours" value="<?php echo $post->degree_hours; ?>" />
+<?php get_footer(); ?>

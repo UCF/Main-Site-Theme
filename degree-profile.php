@@ -3,13 +3,13 @@
 </div>
 <div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
 	<div class="page-media-header" style="background-image: url(<?php echo $post->header_image; ?>)">
-		<div class="page-media-container container degree-header">
+		<div class="page-media-container container">
 			<h1><?php echo $post->post_title; ?></h1>
 		</div>
 	</div>
 </div>
 <div class="container" id="degree-single">
-	<div id="breadcrumbs" class="col-md-12 col-sm-12 clearfix">
+	<div id="breadcrumbs" class="clearfix">
 		<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
 		<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
 
@@ -63,14 +63,22 @@
 					</dd>
 					<?php endif; ?>
 				</dl>
+				<div class="visible-xs call-to-action">
+					<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
+						<span class="fa fa-pencil-square-o"></span> Apply Now
+					</a>
+					<a href="https://apply.ucf.edu/forms/campus-tour/" class="btn btn-ucf-gold btn-lg btn-block">
+						<span class="fa fa-map-marker"></span> Visit UCF
+					</a>
+				</div>
 				<div class="degree-description">
-					<?php if ( $post->degree_description ) { ?>
+					<?php if ( $post->degree_description ) : ?>
 						<?php echo apply_filters( 'the_content', $post->degree_description ); ?>
-					<?php } else { ?>
+					<?php else : ?>
 							You can find a full description of this degree in the
 							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-label="<?php echo $post->post_title; ?>"
 								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
-					<?php } ?>
+					<?php endif; ?>
 				</div>
 				<div class="social-wrap">
 					<?php echo display_social( get_permalink( $post->ID ), $post->post_title, 'UCF Degree: ' . $post->post_title, 'Check out this degree at the University of Central Florida.' ); ?>
@@ -95,12 +103,14 @@
 			</div>
 		</div><!-- end .col-md-8 -->
 		<div class="col-md-4" id="sidebar_right">
-			<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
-				<span class="fa fa-pencil-square-o"></span> Apply Now
-			</a>
-			<a href="https://apply.ucf.edu/forms/campus-tour/" class="btn btn-ucf-gold btn-lg btn-block">
-				<span class="fa fa-map-marker"></span> Visit UCF
-			</a>
+			<div class="hidden-xs call-to-action">
+				<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
+					<span class="fa fa-pencil-square-o"></span> Apply Now
+				</a>
+				<a href="https://apply.ucf.edu/forms/campus-tour/" class="btn btn-ucf-gold btn-lg btn-block">
+					<span class="fa fa-map-marker"></span> Visit UCF
+				</a>
+			</div>
 			<?php if ( $post->tuition_estimates && $post->degree_hide_tuition != 'on' ) : ?>
 				<div class="tuition-info">
 				<h2>Tuition and Fees</h2>
@@ -147,4 +157,4 @@
 	</div>
 </div>
 <div class="container">
-	<?php get_footer();?>
+	<?php get_footer( 'gray' );?>

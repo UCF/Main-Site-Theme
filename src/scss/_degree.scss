@@ -1,10 +1,7 @@
 // Single Degree profiles
-$ucf-gold: #fc0;
 $archer: "Archer A","Archer B","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
 
 .updated-degree-template {
-  @extend .page-template-template-media-feature;
-
   #header-menu {
     a {
       color: #fff;
@@ -25,12 +22,18 @@ $archer: "Archer A","Archer B","Palatino Linotype","Book Antiqua",Palatino,Georg
 
   .degree-header {
     h1 {
+      @include archer(7);
       background: rgba($ucf-gold, 0.8);
       display: inline-block;
-      font-family: $archer;
       font-size: 44px;
       padding: 12px 32px;
-      width: 400px;
+      max-width: 400px;
+    }
+  }
+
+  .call-to-action {
+    a {
+      color: $black !important;
     }
   }
 
@@ -54,17 +57,18 @@ $archer: "Archer A","Archer B","Palatino Linotype","Book Antiqua",Palatino,Georg
   }
 
   .degree-description {
+    @include archer();
     border-top: 1px solid #fc0;
-    font-family: "Archer A", "Archer B", serif;
-    font-size: 15px;
+    font-size: 18px;
     padding-top: 24px;
   }
 
   #sidebar_right {
+    padding-bottom: 12px;
     padding-top: 0 !important;
 
     @media( max-width: $screen-md-max ) {
-      margin-top: 12px;
+      padding-left: 15px;
     }
   }
 
