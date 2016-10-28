@@ -76,11 +76,11 @@
     h2,
     .h2,
     .margin-h2 {
-      // margin-top: 1em;
+      // e.g. margin-top: 1em;
       margin-top: $font-size-h2-xs;
 
       @media (min-width: $screen-sm-min) {
-        // margin-top: 1.5em;
+        // e.g. margin-top: 1.5em;
         margin-top: #{$font-size-h2-sm * 1.5};
       }
     }
@@ -88,11 +88,11 @@
     h3,
     .h3,
     .margin-h3 {
-      // margin-top: 1em;
+      // e.g. margin-top: 1em;
       margin-top: $font-size-h3-xs;
 
       @media (min-width: $screen-sm-min) {
-        // margin-top: 1.5em;
+        // e.g. margin-top: 1.5em;
         margin-top: #{$font-size-h3-sm * 1.5};
       }
     }
@@ -100,11 +100,11 @@
     h4,
     .h4,
     .margin-h4 {
-      // margin-top: 1em;
+      // e.g. margin-top: 1em;
       margin-top: $font-size-h4-xs;
 
       @media (min-width: $screen-sm-min) {
-        // margin-top: 1.5em;
+        // e.g. margin-top: 1.5em;
         margin-top: #{$font-size-h4-sm * 1.5};
       }
     }
