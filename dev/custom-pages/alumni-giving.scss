@@ -3,6 +3,7 @@
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/09/header-xs.jpg';
 $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
+$alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_events_knightro.jpg';
 
 
 @mixin btn-cta() {
@@ -29,10 +30,17 @@ $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
   }
 }
 
+.once-a-knight {
+  @media(max-width: $screen-xs-max) {
+    background-image: url(#{$alumni-knitro}) !important;
+    overflow: visible;
+    position: static;
+  }
+}
 
-.page-media-header {
+.page-media .page-media-header {
   background-position: center bottom;
-  background-size: 100% auto;
+  background-size: cover;
   height: calc(134vw - #{$ucf-header-height});
   max-height: 650px;
 
@@ -113,6 +121,63 @@ $events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
 
       em {
         @include gotham(5, italic);
+      }
+    }
+  }
+
+  .alumni-section {
+    font-family: gotham();
+
+    p {
+      font-size: 14px;
+    }
+
+    .explore-further {
+      li {
+        margin-bottom: 3px;
+
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .content-title {
+      color: #333;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+      margin-top: 0;
+      padding: 0 0 10px;
+      text-transform: uppercase;
+
+      &::after {
+        background: $ucf-gold;
+        content: ' ';
+        display: block;
+        height: 2px;
+        margin-top: 15px;
+        width: 25px;
+      }
+    }
+
+    .section-header {
+      height: 500px;
+      margin-bottom: 60px;
+      margin-top: 0;
+      position: relative;
+
+      .section-title {
+        bottom: 18px;
+        color: #fff;
+        font-family: gotham();
+        font-size: 48px;
+        font-weight: 500;
+        max-width: 600px;
+        position: absolute;
+        text-shadow: 1px 1px 1px #000;
       }
     }
   }
