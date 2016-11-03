@@ -811,11 +811,29 @@ $font-size-h4-sm: 16px;
       &:focus,
       &:hover {
         .fa {
-          color: $white;
+          color: $black;
         }
 
         .title-wrapper {
           background: rgba(10, 10, 10, 0.55);
+        }
+
+        h3 {
+          color: $ucf-gold;
+        }
+      }
+    }
+
+    .icon-link-dark {
+      a {
+        color: $black;
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        .fa {
+          color: $white;
         }
 
         h3 {
