@@ -784,9 +784,10 @@ $font-size-h4-sm: 16px;
       h3 {
         @include gotham(7);
         @include transition(color .25s);
-        display: inline;
+        display: block;
         font-size: 14px;
         padding: 2px 14px;
+        width: auto;
       }
 
       p {
@@ -814,11 +815,8 @@ $font-size-h4-sm: 16px;
           color: $black;
         }
 
-        .title-wrapper {
-          background: rgba(10, 10, 10, 0.55);
-        }
-
         h3 {
+          background: rgba(10, 10, 10, 0.55);
           color: $ucf-gold;
         }
       }
@@ -837,6 +835,7 @@ $font-size-h4-sm: 16px;
         }
 
         h3 {
+          background: rgba(10, 10, 10, 0.55);
           color: $ucf-gold;
         }
       }
