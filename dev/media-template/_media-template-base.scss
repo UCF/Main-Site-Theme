@@ -29,6 +29,8 @@ $font-size-h3-sm: 20px;
 $font-size-h4-xs: 14px;
 $font-size-h4-sm: 16px;
 
+$callout-light-gray: #fafafa;
+
 
 /////////////////////////////////
 // Custom Mixins
@@ -731,4 +733,152 @@ $font-size-h4-sm: 16px;
     }
   }
 
+  .callout-gold {
+    background-color: $ucf-gold;
+    color: $white;
+
+    a {
+      color: $white;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+    }
+
+    .list-navigation a,
+    .list-chevrons a {
+      text-decoration: none;
+    }
+
+    .callout-aside-heading a {
+      color: $white;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
+  .callout-light-gray {
+    background-color: $callout-light-gray;
+    color: $black;
+
+    a {
+      color: $black;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+    }
+
+    .list-navigation a,
+    .list-chevrons a {
+      text-decoration: none;
+    }
+
+    .callout-aside-heading a {
+      color: $black;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
+  .icon-links {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .icon-link {
+    display: inline-block;
+    margin: 10px auto;
+    padding: 0 12px;
+    width: 25%;
+
+    @media (max-width: $screen-xs-max) {
+      width: 50%;
+    }
+
+    a {
+      color: $ucf-col-default;
+      text-decoration: none !important;
+
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+      }
+
+      h3 {
+        @include transition(background .25s, color .25s);
+        @include gotham(7);
+        border-radius: 4px;
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        padding: 2px 14px;
+        width: auto;
+      }
+
+      p {
+        font-size: 12px;
+        font-style: italic;
+        padding-top: 8px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .icon-link-white {
+    a {
+      color: $white;
+
+      h3 {
+        background: rgba(30, 30, 30, .25);
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        .fa {
+          color: $black;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: $ucf-gold;
+        }
+      }
+    }
+  }
+
+  .icon-link-dark {
+    a {
+      color: $black;
+
+      h3 {
+        background: rgba(30, 30, 30, .25);
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        .fa {
+          color: $white;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: $ucf-gold;
+        }
+      }
+    }
+  }
 }
