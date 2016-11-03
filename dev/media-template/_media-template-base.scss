@@ -29,6 +29,8 @@ $font-size-h3-sm: 20px;
 $font-size-h4-xs: 14px;
 $font-size-h4-sm: 16px;
 
+$callout-light-gray: #fafafa;
+
 
 /////////////////////////////////
 // Custom Mixins
@@ -752,6 +754,32 @@ $font-size-h4-sm: 16px;
 
     .callout-aside-heading a {
       color: $white;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
+  .callout-light-gray {
+    background-color: $callout-light-gray;
+    color: $black;
+
+    a {
+      color: $black;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+    }
+
+    .list-navigation a,
+    .list-chevrons a {
+      text-decoration: none;
+    }
+
+    .callout-aside-heading a {
+      color: $black;
       font-weight: 400;
       text-decoration: none;
     }
