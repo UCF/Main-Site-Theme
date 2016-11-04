@@ -235,6 +235,11 @@
   .icon-links {
     margin: 0 auto;
     text-align: center;
+
+    @media (max-width: $screen-xs-max) {
+      padding-bottom: 24px;
+      padding-top: 24px;
+    }
   }
 
   .icon-link {
@@ -256,6 +261,10 @@
         font-size: 80px;
         margin-bottom: 12px;
         @include transition(color .25s);
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 60px;
+        }
       }
 
       h3 {
