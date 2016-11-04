@@ -29,11 +29,6 @@
   box-shadow: 3px 3px 6px #acacac;
 }
 
-.promo-image {
-  display: block;
-  height: auto;
-}
-
 .line-before-after {
   font-size: 48px;
   margin-bottom: 12px;
@@ -222,27 +217,4 @@
 
 #sections-navbar .section-link {
   @include gotham(7);
-}
-
-.admissions-section {
-  .content-title {
-    color: #333;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0;
-    margin-bottom: 18px;
-    margin-top: 60px;
-    padding: 0 0 10px;
-    text-transform: uppercase;
-
-    &:after {
-      background: #ffc904;
-      content: ' ';
-      display: block;
-      height: 2px;
-      margin-top: 15px;
-      width: 25px;
-    }
-  }
 }
