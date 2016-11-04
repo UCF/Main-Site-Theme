@@ -281,6 +281,19 @@
   }
 }
 
+.section-title {
+  font-size: 20px !important;
+  margin: 2em 0 1.7em !important;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 26px;
+  } 
+}
+
+.heading-underline:after {
+  width: 80px !important;
+}
+
 .section-first-subheading {
   margin-top: 12px;
   
