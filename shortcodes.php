@@ -1364,9 +1364,7 @@ function sc_sections_menu( $atts, $content='' ) {
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sections-menu">
 					<span class="sr-only">Toggle sections navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					Menu <span class="fa fa-bars" aria-hidden="true"></span>
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="sections-menu" data-selector="<?php echo $atts['selector']; ?>">
