@@ -4,6 +4,29 @@
   font-size: 70%;
 }
 
+.promo-image {
+  min-height: 300px;
+}
+
+.promo-button {
+  background: $ucf-gold;
+  border: 1px solid $black;
+  border-bottom: 1px solid $black !important;
+  border-radius: 0;
+  bottom: 15px;
+  color: $white !important;
+  left: 25%;
+  max-width: 75%;
+  padding: 12px 18px;
+  position: absolute;
+  text-align: center;
+
+  &:hover {
+    background: $black;
+    text-decoration: none !important;
+  }
+}
+
 .header-title {
   font-size: 52px !important;
 }
@@ -239,7 +262,7 @@
 
     @media (min-width: $screen-sm-min) {
       border-color: $white;
-      color: $white;
+      color: $white !important;
       margin: 0;
       visibility: hidden;
     }
