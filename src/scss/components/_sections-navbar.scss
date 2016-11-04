@@ -46,6 +46,14 @@
       display: none;
     }
   }
+
+  .navbar-toggle {
+    text-transform: uppercase;
+
+    .fa {
+      margin-left: 4px;
+    }
+  }
 }
 
 .navbar-gold {
