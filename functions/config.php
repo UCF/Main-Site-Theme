@@ -340,6 +340,18 @@ Config::$theme_settings = array(
 			'description' => 'The number of degrees to display per page on the degee search page',
 			'value'       => $theme_options['degrees_per_page'],
 		)),
+		new TextField(array(
+			'name'        => 'Undergraduate Application URL',
+			'id'          => THEME_OPTIONS_NAME.'[undergraduate_app_url]',
+			'description' => 'The url of the undergraduate application for admission.',
+			'value'       => $theme_options['undergraduate_app_url']
+		)),
+		new TextField(array(
+			'name'        => 'Graduate Application URL',
+			'id'          => THEME_OPTIONS_NAME.'[graduate_app_url]',
+			'description' => 'The url of the graduate application for admission.',
+			'value'       => $theme_options['graduate_app_url']
+		))
 	),
 	'Tuition and Fees' => array(
 		new TextField(array(

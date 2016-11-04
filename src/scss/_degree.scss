@@ -1,4 +1,136 @@
 // Single Degree profiles
+.updated-degree-template {
+  #header-nav-wrap,
+  #site-nav-xs {
+    z-index: 2;
+  }
+
+  #header-nav-wrap {
+    position: relative;
+  }
+
+  #site-nav-xs {
+    left: $grid-gutter-width / 2;
+    position: absolute;
+    right: $grid-gutter-width / 2;
+  }
+
+  #header-menu {
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #fc0;
+      }
+    }
+
+    .last a {
+      color: #000;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  .degree-header {
+    h1 {
+      @include archer(7);
+      background: rgba($ucf-gold, 0.8);
+      display: inline-block;
+      font-size: 44px;
+      padding: 12px 32px;
+      max-width: 400px;
+    }
+  }
+
+  .call-to-action {
+    a {
+      color: $black !important;
+    }
+  }
+
+  .degree-details {
+    background: #efefef;
+    border-left: 5px solid #acacac;
+    padding: 12px 12px !important;
+
+    dt,
+    dd {
+      margin-bottom: 4px !important;
+    }
+
+    dt {
+      font-weight: normal;
+    }
+
+    dd {
+      font-weight: 700;
+    }
+  }
+
+  .degree-description {
+    @include archer();
+    border-top: 1px solid #fc0;
+    font-size: 18px;
+    padding-top: 24px;
+  }
+
+  #sidebar_right {
+    padding-bottom: 12px;
+    padding-top: 0 !important;
+
+    @media( max-width: $screen-md-max ) {
+      padding-left: 15px;
+    }
+  }
+
+  .tuition-total {
+    color: #fc0 !important;
+    text-shadow: 0 1px 1px #999 !important;
+  }
+
+  .degree-credit-hours {
+    color: #fc0;
+    font-size: 32px;
+    padding: 12px 0;
+    text-align: center;
+    text-shadow: 0 1px 1px #999;
+
+    .small {
+      color: #fc0;
+      font-size: 18px;
+    }
+  }
+
+  .degree-promo-button {
+    @extend .btn-group;
+
+    .degree-promo-icon,
+    .degree-promo-text {
+      @extend .btn;
+
+      @media( max-width: $screen-md-max ) {
+        margin: 12px 0;
+      }
+    }
+
+    .degree-promo-icon {
+      @extend btn;
+      background: #3266cc;
+      color: #fff;
+      font-size: 32px;
+      font-family: "FontAwesome";
+    }
+
+    .degree-promo-text {
+      border: 1px solid #3266cc !important;
+      font-size: 15px;
+      padding: 18px 32px;
+    }
+  }
+}
+
 #degree-single {
   #breadcrumbs a {
     color: #999;
