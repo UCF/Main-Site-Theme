@@ -1,5 +1,9 @@
 @import '../media-template/media-template-base';
 
+.extra-small {
+  font-size: 70%;
+}
+
 .header-title {
   font-size: 52px !important;
 }
@@ -13,6 +17,10 @@
   border-bottom: 2px solid $ucf-gold !important;
   text-align: center;
   text-decoration: none !important;
+
+  &:hover {
+    background: $ucf-gold;
+  }
 }
 
 .header-title-container {
