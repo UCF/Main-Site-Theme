@@ -1,5 +1,13 @@
 @import '../media-template/media-template-base';
 
+.header-title {
+  font-size: 52px !important;
+}
+
+.header-subtitle {
+  font-size: 24px !important;
+}
+
 .btn-hollow-gold {
   border: 2px solid $ucf-gold;
   border-bottom: 2px solid $ucf-gold !important;
@@ -11,10 +19,6 @@
   display: table;
   margin: 40px auto;
   position: relative;
-}
-
-.no-top-margin {
-  margin-top: 0 !important;
 }
 
 .rotate-left {
@@ -30,8 +34,40 @@
 }
 
 .line-before-after {
-  font-size: 48px;
+  border-bottom: 4px solid $ucf-gold;
+  border-top: 4px solid $ucf-gold;
+  font-family: "Knockout 49 A", "Knockout 49 B" !important;
+  font-size: 42px !important;
   margin-bottom: 12px;
+  padding: 24px 12px;
+
+  @media (min-width: $screen-sm-min) {
+    border: 0;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+
+    &:before,
+    &:after {
+      background-color: $ucf-gold;
+      content: '\a0';
+      height: 4px;
+      overflow: hidden;
+      position: absolute;
+      top: 49%;
+      width: 50%;
+    }
+
+    &:before {
+      margin-left: -55%;
+      text-align: right;
+    }
+
+    &:after {
+      margin-left: 5%;
+    }
+  }
 }
 
 .publication-content {
@@ -51,19 +87,34 @@
   }
 }
 
+.publication-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 80%;
+
+  @media (min-width: $screen-sm-min) {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
 .color-card {
   @include gotham();
-  background-color: #ffc908;
   box-sizing: border-box;
+  border-bottom: 4px solid #e6e6e6;
   display: block;
   font-size: 14px;
   margin-bottom: 30px;
-  padding: 115px 20px;
-  text-align: center;
+  padding: 12px 0;
   transition: background-color .4s, color .4s;
 
-  @media (max-width: $screen-sm-max) {
-    padding: 50px 20px 100px;
+  @media (min-width: $screen-sm-min) {
+    background-color: #ffc908;
+    text-align: center;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    padding: 115px 20px;
   }
 
   .overlay {
@@ -79,7 +130,7 @@
     z-index: 10;
   }
 
-  h2 {
+  .card-title {
     color: #000;
     font-size: 25px;
     font-weight: normal;
@@ -112,7 +163,7 @@
 
   .service-links {
     @extend .list-inline;
-    background-color: #ffc908;
+    background-color: $ucf-gold;
     bottom: 40px;
     margin-left: auto;
     margin-right: auto;
@@ -170,16 +221,27 @@
   }
 
   .link-button {
-    border: 4px solid $white;
+    border: 4px solid $ucf-gold;
     border-radius: 1em;
-    color: $white !important;
+    color: $ucf-gold !important;
     font-size: 24px;
+    margin: 36px 0;
     padding: 4px 6px;
-    visibility: hidden;
+    visibility: visible;
+
+    @media (min-width: $screen-sm-min) {
+      border-color: $white;
+      color: $white;
+      margin: 0;
+      visibility: hidden;
+    }
   }
 
   &:hover {
-    background-color: #2b2b2b;
+
+    @media (min-width: $screen-sm-min) {
+      background-color: $black;
+    }
 
     .overlay {
       background-size: 107%;
@@ -191,7 +253,11 @@
     li,
     .service-links li:before,
     .service-links li:after {
-      color: $ucf-col-highlight;
+      color: $black;
+
+      @media (min-width: $screen-sm-min) {
+        color: $ucf-col-highlight;
+      }
     }
 
     .link-button {
@@ -212,5 +278,13 @@
         color: #fff;
       }
     }
+  }
+}
+
+.section-first-subheading {
+  margin-top: 12px;
+  
+  @media (min-width: $screen-sm-min) {
+    margin-top: 0 !important;
   }
 }

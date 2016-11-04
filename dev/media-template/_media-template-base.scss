@@ -794,6 +794,7 @@ $callout-light-gray: #fafafa;
     display: inline-block;
     margin: 10px auto;
     padding: 0 12px;
+    vertical-align: top;
     width: 25%;
 
     @media (max-width: $screen-xs-max) {
