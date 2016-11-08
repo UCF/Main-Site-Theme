@@ -1945,6 +1945,58 @@ function get_degree_search_search_again( $filters, $params ) {
 	return ob_get_clean();
 }
 
+/**
+ * Returns an array containing arrays of college and undergrad degrees, for use in
+ * Academics page list of colleges.
+ **/
+function get_degrees_by_college() {
+	$college_degrees;
+	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
+	if ( $colleges ) {
+
+		foreach ( $colleges as $college ) {
+
+			$args = array(
+				'post_type'      => 'degree',
+				'post_status'    => 'publish',
+				'posts_per_page' => -1,
+				'order'          => 'ASC',
+				'orderby'        => 'post_title'
+			);
+
+			$args['tax_query'][] = array(
+				'taxonomy' => 'colleges',
+				'field'    => 'term_id',
+				'terms'    => $college->term_id
+			);
+
+			$args['tax_query'][] = array(
+				'taxonomy' => 'program_types',
+				'field'    => 'slug',
+				'terms'    => 'undergraduate-degree'
+			);
+
+			$undergrad = get_posts( $args );
+
+			// modify query for graduate degrees
+			$args['tax_query'][1] = array(
+				'taxonomy' => 'program_types',
+				'field'    => 'slug',
+				'terms'    => 'graduate-degree'
+			);
+
+			$grad = get_posts( $args );
+
+			$college_degrees[$college->slug] = array(
+				'college'        =>  $college->slug,
+				'undergraduate'  =>  $undergrad,
+				'graduate'       =>  $grad,
+			);
+		}
+	}
+
+	return $college_degrees;
+}
 
 /**
  * Returns relevant params passed in, or available relevant $_GET params.
@@ -2335,6 +2387,29 @@ function get_degree_search_suggestions() {
 	return array_values( array_unique( $suggestions ) );
 }
 
+/**
+ * Returns an array of degree titles, for use by the degree search
+ * autocomplete field.
+ **/
+function get_academics_search_suggestions() {
+	$suggestions = array();
+	$posts = get_posts( array (
+		'numberposts' => -1,
+		'post_type' => 'degree'
+	) );
+
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$suggestion = (object) array (
+				'name' => str_replace( '&amp;', '&', $post->post_title ),
+				'url' => get_permalink( $post->ID ),
+			);
+			$suggestions[] = $suggestion;
+		}
+	}
+
+	return $suggestions;
+}
 
 /**
  * Returns an array containing arrays of term objects, for use in
