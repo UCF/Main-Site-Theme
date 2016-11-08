@@ -1492,8 +1492,8 @@ var mediaTemplateVideo = function($) {
       webm = $videoPlaceholder.attr('data-webm'),
       ogg = $videoPlaceholder.attr('data-ogg'),
       loop = JSON.parse($videoPlaceholder.attr('data-loop')),
-      video = '<video autoplay muted>';
-      
+      video = '<video autoplay muted';
+
     if (loop) {
       video += ' loop>';
     } else {
