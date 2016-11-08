@@ -18,10 +18,11 @@
   display: inline-block;
   font-size: 17px;
   font-weight: bold;
-  left: 50%;
-  margin-left: -90px;
+  left: 0;
+  margin: auto;
   padding: 12px 18px;
   position: absolute;
+  right: 0;
   text-align: center;
   width: 180px;
 
@@ -73,16 +74,17 @@
   box-shadow: 3px 3px 6px #acacac;
 }
 
-.line-before-after {
+#contentcol h2.line-before-after {
   border-bottom: 4px solid $ucf-gold;
   border-top: 4px solid $ucf-gold;
   font-family: "Knockout 49 A", "Knockout 49 B" !important;
-  font-size: 42px !important;
+  font-size: 32px;
   margin-bottom: 12px;
   padding: 24px 12px;
 
   @media (min-width: $screen-sm-min) {
     border: 0;
+    font-size: 42px;
     overflow: hidden;
     position: relative;
     text-align: center;
@@ -107,6 +109,10 @@
     &::after {
       margin-left: 5%;
     }
+  }
+
+  @media (min-width: $screen-md-min) {
+    font-size: 52px;
   }
 }
 
@@ -138,7 +144,7 @@
   }
 }
 
-.color-card {
+#contentcol .color-card {
   @include gotham();
   border-bottom: 4px solid #e6e6e6;
   box-sizing: border-box;
@@ -149,7 +155,7 @@
   transition: background-color .4s, color .4s;
 
   @media (min-width: $screen-sm-min) {
-    background-color: #ffc908;
+    background-color: $ucf-gold;
     text-align: center;
   }
 
@@ -176,37 +182,35 @@
 
   .card-title {
     color: #000;
-    font-size: 25px;
-    font-weight: normal;
+    font-size: 18px;
     line-height: 1.25;
-    margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0 !important;
-    max-width: 325px;
+    margin: 0 0 15px 50px;
+    max-width: 400px;
     position: relative;
     z-index: 15;
 
-    @media (max-width: $screen-sm-max) {
+    @media (min-width: $screen-sm-min) {
       font-size: 20px;
+      margin: 0 auto 20px;
     }
 
-    @media (max-width: $screen-xs-max) {
-      font-size: 18px;
+    @media (min-width: $screen-md-min) {
+      margin: 52px auto 20.8px
     }
   }
 
   p {
     color: #000;
-    margin: 0 auto;
+    margin: 0 0 0 50px;
     max-width: 400px;
     position: relative;
     transition: color .4s;
     z-index: 15;
 
     @media (min-width: $screen-sm-min) {
-      max-width: initial;
+      margin: 0 auto;
     }
+
   }
 
   .service-links {
@@ -268,6 +272,9 @@
   }
 
   .link-button {
+    border-color: $white;
+    border: 4px solid $ucf-gold;
+    border-radius: 1em;
     color: $black;
     font-size: 24px;
     margin: 36px 0;
@@ -275,11 +282,16 @@
     visibility: visible;
 
     @media (min-width: $screen-sm-min) {
-      border-color: $white;
+      border: 0;
       color: $white !important;
       margin: 0;
       visibility: hidden;
+
+      &::before {
+        content: '';
+      }
     }
+
   }
 
   &:hover {
@@ -340,13 +352,6 @@
 
   &::after {
     width: 80px !important;
-  }
-}
-
-#contentcol h2 {
-
-  @media (min-width: $screen-sm-min) {
-    margin: 0 auto 20px;
   }
 }
 
