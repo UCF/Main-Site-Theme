@@ -1491,7 +1491,14 @@ var mediaTemplateVideo = function($) {
     var mp4 = $videoPlaceholder.attr('data-mp4'),
       webm = $videoPlaceholder.attr('data-webm'),
       ogg = $videoPlaceholder.attr('data-ogg'),
-      video = '<video autoplay muted loop>';
+      loop = JSON.parse($videoPlaceholder.attr('data-loop')),
+      video = '<video autoplay muted>';
+      
+    if (loop) {
+      video += ' loop>';
+    } else {
+      video += '>';
+    }
 
     // Stop now/display nothing if no video sources are provided
     if (!mp4 && !webm && !ogg) {

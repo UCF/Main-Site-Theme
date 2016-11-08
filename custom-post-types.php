@@ -624,6 +624,13 @@ class Page extends CustomPostType {
 					'type' => 'file',
 				),
 				array(
+					'name' => '<strong>Media Template:</strong> Loop Video',
+					'desc' => 'Determines if the video should loop.',
+					'id'   => $prefix.'loop_video',
+					'type' => 'checkbox',
+					'std'  => 'off'
+				),
+				array(
 					'name' => '<strong>Media Template:</strong> Header Contents',
 					'desc' => '(Optional) Content displayed over the header section on pages using the media template.  Accepts HTML and shortcode content.',
 					'id' => $prefix.'media_header_content',
