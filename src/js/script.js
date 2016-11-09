@@ -1471,9 +1471,9 @@ var academicDegreeSearch = function ($) {
   /**
  * #search-query specific typeahead init, event handlers
  **/
-  var $acedemicsDegreeSearch = $('#acedemics-degree-search');
+  var $academicsDegreeSearch = $('#academics-degree-search');
 
-  if ($acedemicsDegreeSearch.length > 0) {
+  if ($academicsDegreeSearch.length > 0) {
 
     var degrees = new Bloodhound({
       identify: function(obj) { return obj.name; },
@@ -1490,14 +1490,14 @@ var academicDegreeSearch = function ($) {
       }
     };
 
-    $acedemicsDegreeSearch.bind('typeahead:select', function(ev, suggestion) {
+    $academicsDegreeSearch.bind('typeahead:select', function(ev, suggestion) {
       window.location = suggestion.url;
     });
 
     var degreeType = '<div class="tt-suggestion"><hr></div><div class="tt-suggestion tt-selectable footer-title"><strong>What type of degree are you interested in?</strong></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=undergraduate-degree">Undergraduate Degree</a></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=graduate-degree">Graduate Degree</a></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=certificate">Certificate</a></div>';
 
     // Typeahead init
-    $acedemicsDegreeSearch
+    $academicsDegreeSearch
       .typeahead({
         minLength: 1,
         highlight: true

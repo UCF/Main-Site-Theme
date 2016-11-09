@@ -1,8 +1,5 @@
 @import '../media-template/media-template-base';
 
-$font-family-serif-alt: "Archer", "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
-$font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
-
 #academics .top-search {
   max-width: 1170px;
 }
@@ -42,6 +39,11 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 }
 
+.fade-in.fade {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 #contentcol .college {
   border-bottom: solid 1px #e7e7e7;
   margin-bottom: 70px;
@@ -57,9 +59,9 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
 
 
   h3 {
-    font-family: $font-family-serif-alt;
+    @include archer(6);
+
     font-size: 37px;
-    font-weight: 600;
     line-height: 1.1;
     margin-bottom: 30px;
     margin-top: 0;
@@ -90,14 +92,13 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 
   .count-button {
+    @include gotham(5);
     background-color: $ucf-gold;
     border: none;
     border-bottom: 0;
     border-radius: 3px;
     color: #000;
-    font-family: $font-family-sans-serif-alt;
     font-size: 16px;
-    font-weight: 500;
     margin-bottom: 10px;
     width: 240px;
 
@@ -129,10 +130,10 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
 }
 
 .academics-intro {
+  @include archer(6);
+
   color: #000;
-  font-family: $font-family-serif-alt;
   font-size: 40px;
-  font-weight: 600;
   line-height: 1.25;
   margin-bottom: 40px;
   margin-top: 40px;
@@ -149,15 +150,14 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
 }
 
 .academics-search-box {
-  height: 92px;
-  transition: all 1s;
+  @include gotham(6);
 
   background-color: #FC0;
   color: #000;
-  font-family: $font-family-sans-serif-alt;
   font-size: 24px;
-  font-weight: bold;
+  height: 125px;
   padding: 26px 30px;
+  transition: all 1s;
 
   .title {
     font-size: 22px;
@@ -171,16 +171,11 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 
   .twitter-typeahead {
-    width: 57%;
+    width: 101.5%;
+    top: -15px;
     float: right;
     position: absolute;
     right: -7px;
-    top: -7px;
-
-    @media (max-width: $screen-md-max) {
-      width: 101.5%;
-      top: -15px;
-    }
   }
 
   .tt-menu.tt-open {
@@ -197,13 +192,13 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 
   input {
+    @include gotham(1);
+
     background: #f9dd78;
     border: none;
     border-radius: 5px;
     color: #000;
-    font-family: $font-family-sans-serif-alt;
     font-size: 17px;
-    font-weight: 100;
     letter-spacing: .5px;
     outline: 0;
     padding: 13px 54px 13px 25px;
@@ -233,8 +228,9 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 
   .title {
+    font-size: 16px;
     position: relative;
-    top: 0;
+    top: -20px;
     transition: all 0.3s;
 
     @media (max-width: $screen-md-max) {
@@ -256,34 +252,11 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 }
 
-.academics-search-box.focus.fade-in {
-  transition-delay: 0s;
-  transition: height 0.2s;
-}
-
-.academics-search-box.focus {
-  height: 125px;
-
-  .title {
-    font-size: 16px;
-    top: -20px;
-  }
-
-  .twitter-typeahead {
-    width: 101.5%;
-    top: -15px;
-  }
-
-  .search-icon {
-    top: 60px;
-  }
-}
-
 .search-icon {
   font-size: 33px;
   position: absolute;
   right: 38px;
-  top: 30px;
+  top: 60px;
   z-index: 2;
 }
 
@@ -320,10 +293,9 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
     width: 30%;
 
     li {
+      @include gotham(4);
       border-bottom: 1px solid #e4c03c;
-      font-family: $font-family-sans-serif-alt;
       font-size: 18px;
-      font-weight: normal;
       padding: 10px 0;
 
       &:last-child {
