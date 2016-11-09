@@ -14,7 +14,7 @@
   background: $ucf-gold;
   border-radius: 0;
   bottom: 55px;
-  color: $black !important;
+  color: $black;
   display: inline-block;
   font-size: 17px;
   font-weight: bold;
@@ -28,24 +28,24 @@
 
   &:hover {
     background: $black;
-    color: $white !important;
-    text-decoration: none !important;
+    color: $white;
+    text-decoration: none;
   }
 }
 
-.header-title {
-  font-size: 52px !important;
+.page-media-header .header-title {
+  font-size: 52px;
 }
 
-.header-subtitle {
-  font-size: 24px !important;
+.page-media-header .header-subtitle {
+  font-size: 24px;
 }
 
-.btn-hollow-gold {
+#contentcol a.btn-hollow-gold {
   border: 2px solid $ucf-gold;
-  border-bottom: 2px solid $ucf-gold !important;
+  border-bottom: 2px solid $ucf-gold;
   text-align: center;
-  text-decoration: none !important;
+  text-decoration: none;
 
   &:hover {
     background: $ucf-gold;
@@ -77,7 +77,7 @@
 #contentcol h2.line-before-after {
   border-bottom: 4px solid $ucf-gold;
   border-top: 4px solid $ucf-gold;
-  font-family: "Knockout 49 A", "Knockout 49 B" !important;
+  font-family: "Knockout 49 A", "Knockout 49 B";
   font-size: 32px;
   margin-bottom: 12px;
   padding: 24px 12px;
@@ -283,7 +283,7 @@
 
     @media (min-width: $screen-sm-min) {
       border: 0;
-      color: $white !important;
+      color: $white;
       margin: 0;
       visibility: hidden;
 
@@ -338,9 +338,9 @@
   }
 }
 
-.section-title {
-  font-size: 20px !important;
-  margin: 2em 0 1.7em !important;
+#contentcol .section-title {
+  font-size: 20px;
+  margin: 2em 0 1.7em;
 
   @media (min-width: $screen-sm-min) {
     font-size: 26px;
@@ -363,6 +363,6 @@
   margin-top: 12px;
 
   @media (min-width: $screen-sm-min) {
-    margin-top: 0 !important;
+    margin-top: 0;
   }
 }
