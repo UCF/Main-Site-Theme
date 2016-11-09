@@ -1284,6 +1284,65 @@ add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
 
 /**
+ *
+ **/
+function sc_college_program_list( $atts, $content='' ) {
+	global $post;
+
+	$atts = shortcode_atts(
+		array(
+			'name' => ''
+		),
+		$atts, 'sc_college_program_info'
+	);
+
+	$degree_info = get_degrees_by_college($atts['name']);
+
+	$college_name = $atts['name'];
+	$undergrad_count = count($degree_info['undergraduate']);
+	$grad_count = count($degree_info['graduate']);
+
+	ob_start();
+?>
+
+<?php if (($undergrad_count > 0  || $grad_count > 0)): ?>
+	<h4 class="buttons-heading">Degree Programs</h4>
+	<ul class="program-info-list list-unstyled">
+	<?php if ($undergrad_count > 0): ?>
+	  <li><a class="btn count-button external" target="_blank" href="/degree-search/?program-type%5B0%5D=undergraduate-degree&amp;college%5B0%5D=<?php echo $college_name; ?>" role="button"><span class="count"><?php echo $undergrad_count; ?></span> Bachelor's Degrees</a></li>
+	<?php endif; ?>
+	<?php if ($grad_count > 0): ?>
+	  <li><a class="btn count-button external" target="_blank" href="/degree-search/?program-type%5B0%5D=graduate-degree&amp;college%5B0%5D=<?php echo $college_name; ?>" role="button"><span class="count"><?php echo $grad_count; ?></span> Graduate Programs</a></li>
+	<?php endif; ?>
+	</ul>
+<?php endif; ?>
+
+<?php
+	return ob_get_clean();
+}
+
+add_shortcode( 'college-program-list', 'sc_college_program_list' );
+
+/**
+ *
+ **/
+function sc_academics_search_suggestions( $atts ) {
+	global $post;
+	ob_start();
+?>
+
+<script>
+	var searchSuggestions = <?php echo json_encode( get_academics_search_suggestions() ); ?>
+</script>
+
+<?php
+	return ob_get_clean();
+}
+
+add_shortcode( 'academics-search-suggestions', 'sc_academics_search_suggestions' );
+
+
+/**
  * Displays a list of upcoming events. Events can be filtered by
  * calendar url and start + end limits.
  **/

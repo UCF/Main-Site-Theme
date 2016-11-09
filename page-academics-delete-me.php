@@ -12,13 +12,16 @@ $degrees = get_degrees_by_college();
 	<script>
 		var searchSuggestions = <?php echo json_encode( get_academics_search_suggestions() ); ?>;
 	</script>
-
 <div class="container-fullwidth page-media academics" id="<?php echo $post->post_name; ?>">
 	<div class="page-media-header" style="background-image: url('<?php echo $header_img; ?>');">
 	</div>
 	<div class="page-media-container">
 
-		<div class="container-fluid top-search">
+		<div class="container">
+<div class="pull-left"><span class="header-title pull-left">This is a Header Title</span><h1 class="header-subtitle pull-right">Header Subtitle</h1></div>
+</div>
+
+<!-- 		<div class="container-fluid top-search">
 			<div class="title-header-container">
 				<h1 class="site-title">
 					<a href="http://www.ucf.edu/students">Academic Degrees <br />&amp; Colleges</a>
@@ -32,7 +35,8 @@ $degrees = get_degrees_by_college();
 					<span class="temp">83°F</span>
 				</div>
 			</div>
-		</div>
+		</div> -->
+
 
 		<div class="container-fluid top-search">
 			<div class="col-md-12 academics-intro fade-in text-center">
@@ -53,7 +57,7 @@ $degrees = get_degrees_by_college();
 		<div class="container main-content-container">
 			<div class="row">
 				<div class="col-md-12 col-sm-12">
-					<h2 class="section-title">Colleges at UCF</h2>
+					<h2 class="heading-underline">Colleges at UCF</h2>
 						<?php the_content(); ?>
 				</div>
 			</div>
@@ -423,7 +427,6 @@ $degrees = get_degrees_by_college();
 		</div>
 	</article>
 </div>
-
 </div>
 <div class="container">
 	<?php get_footer();?>
