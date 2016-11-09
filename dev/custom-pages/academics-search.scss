@@ -8,12 +8,12 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
 }
 
 .page-media-header {
-  height: 590px;
+  height: 610px;
   overflow: visible;
   width: 100%;
   z-index: 1;
   margin-top: -30px;
-  padding-top: 30px;
+  padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
     height: 500px;
@@ -171,7 +171,6 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   }
 
   .twitter-typeahead {
-    // display: block !important;
     width: 57%;
     float: right;
     position: absolute;
@@ -202,7 +201,6 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
     border: none;
     border-radius: 5px;
     color: #000;
-    // float: right;
     font-family: $font-family-sans-serif-alt;
     font-size: 17px;
     font-weight: 100;

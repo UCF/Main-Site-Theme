@@ -1324,7 +1324,8 @@ function sc_college_program_list( $atts, $content='' ) {
 add_shortcode( 'college-program-list', 'sc_college_program_list' );
 
 /**
- *
+ * Returns the results of get_acaemics_search_suggestions
+ * wrapped in a script tag
  **/
 function sc_academics_search_suggestions( $atts ) {
 	global $post;
