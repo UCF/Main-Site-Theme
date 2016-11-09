@@ -1,44 +1,46 @@
-@import '../../dev/media-template/media-template-base';
+@import '../media-template/media-template-base';
 
 $font-family-serif-alt: "Archer", "Archer A", "Archer B", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif !default;
 $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
+
+#academics .top-search {
+  max-width: 1170px;
+}
 
 .page-media-header {
   height: 590px;
   overflow: visible;
   width: 100%;
-  z-index: 100;
-
-  @media (max-width: $screen-sm-max) {
-    height: 450px;
-  }
+  z-index: 1;
+  margin-top: -30px;
+  padding-top: 30px;
 
   @media (max-width: $screen-xs-max) {
-    height: 425px;
+    height: 500px;
   }
 }
 
 .fade-in {
+  transition-delay: .5s;
   opacity: 0;
   -webkit-transition: transform 1s, opacity 1s;
      -moz-transition: transform 1s, opacity 1s;
        -o-transition: transform 1s, opacity 1s;
           transition: transform 1s, opacity 1s;
   transform: translateY(-10px);
-}
 
-.fade-in.fade-first {
-  transition-delay: .5s;
-}
+  &.fade-first {
+    transition-delay: .5s;
+  }
 
-.fade-in.fade-second {
-  transition-delay: 1s;
-}
+  &.fade-second {
+    transition-delay: 1s;
+  }
 
-.fade-in.fade-third {
-  transition-delay: 1.5s;
+  &.fade-third {
+    transition-delay: 1.5s;
+  }
 }
-
 
 #contentcol .college {
   border-bottom: solid 1px #e7e7e7;
@@ -132,17 +134,17 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
   font-size: 40px;
   font-weight: 600;
   line-height: 1.25;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   margin-top: 40px;
 
   @media (max-width: $screen-sm-max) {
     font-size: 30px;
-    margin-top: 70px;
+    margin-top: 25px;
   }
   @media (max-width: $screen-xs-max) {
-    font-size: 25px;
+    font-size: 22px;
     margin-bottom: 25px;
-    margin-top: 75px;
+    margin-top: 25px;
   }
 }
 
@@ -164,6 +166,8 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
 
   @media (max-width: $screen-md-max) {
     height: 125px;
+    transition-delay: 0s;
+    transition: height 0.2s;
   }
 
   .twitter-typeahead {
@@ -241,7 +245,7 @@ $font-family-sans-serif-alt: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, s
     }
 
     @media (max-width: $screen-xs-max) {
-      font-size: 14px;
+      font-size: 16px;
     }
   }
 
