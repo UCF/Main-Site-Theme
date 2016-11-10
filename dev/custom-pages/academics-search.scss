@@ -5,7 +5,7 @@
 }
 
 .page-media-header {
-  height: 610px;
+  height: 900px;
   overflow: visible;
   width: 100%;
   z-index: 1;
@@ -96,10 +96,10 @@
     background-color: $ucf-gold;
     border: none;
     border-bottom: 0;
-    border-radius: 3px;
+    border-radius: 0;
     color: #000;
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
     width: 240px;
 
     .count {
@@ -280,6 +280,7 @@
 
 
 .college-dropdown-content {
+  background: #f9dd78;
   background: rgba(255, 225, 113, 0.9);
   font-size: 18px;
   overflow: auto;
