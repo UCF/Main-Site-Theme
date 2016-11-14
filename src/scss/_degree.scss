@@ -116,7 +116,7 @@
     }
 
     .degree-promo-icon {
-      @extend btn;
+      @extend .btn;
       background: #3266cc;
       color: #fff;
       font-size: 32px;

@@ -250,7 +250,9 @@
     width: 25%;
 
     @media (max-width: $screen-xs-max) {
-      width: 50%;
+      display: block;
+      max-width: 250px;
+      width: auto;
     }
 
     a {
