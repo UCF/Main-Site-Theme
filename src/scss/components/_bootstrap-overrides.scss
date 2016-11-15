@@ -65,7 +65,7 @@
 }
 
 .btn-ucf-gold {
-  @include button-variant(#000, #fc0, #c90);
+  @include button-variant($black, $ucf-gold, $ucf-metal-gold);
 }
 
 .btn-link {
