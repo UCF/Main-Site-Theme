@@ -1362,12 +1362,9 @@ function sc_sections_menu( $atts, $content='' ) {
 	<nav id="sections-navbar" class="navbar navbar-gold center">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<span class="navbar-title">Skip To Section</span>
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sections-menu">
 					<span class="sr-only">Toggle sections navigation</span>
-					<span class="icon-bar" aria-hidden="true"></span>
-					<span class="icon-bar" aria-hidden="true"></span>
-					<span class="icon-bar" aria-hidden="true"></span>
+					Menu <span class="fa fa-bars" aria-hidden="true"></span>
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="sections-menu" data-selector="<?php echo $atts['selector']; ?>">
