@@ -34,11 +34,19 @@
 }
 
 .page-media-header .header-title {
-  font-size: 52px;
+  font-size: 30px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 52px;
+  }
 }
 
 .page-media-header .header-subtitle {
-  font-size: 24px;
+  font-size: 16px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 24px;
+  }
 }
 
 #contentcol a.btn-hollow-gold {
@@ -60,6 +68,7 @@
 
 #contentcol .callout {
   padding: 60px 0;
+  margin: 0;
 }
 
 .rotate-left {
@@ -150,16 +159,14 @@
   box-sizing: border-box;
   display: block;
   font-size: 14px;
-  margin-bottom: 30px;
+  margin-bottom: 0;
   padding: 12px 0;
   transition: background-color .4s, color .4s;
 
   @media (min-width: $screen-sm-min) {
     background-color: $ucf-gold;
+    margin-bottom: 30px;
     text-align: center;
-  }
-
-  @media (min-width: $screen-sm-min) {
     padding: 50px 20px;
   }
 
@@ -271,13 +278,21 @@
     }
   }
 
+  .link-button-wrapper {
+    text-align: right;
+
+    @media (min-width: $screen-sm-min) {
+      text-align: center;
+    }
+  }
+
   .link-button {
     border-color: $white;
     border: 4px solid $ucf-gold;
     border-radius: 1em;
     color: $black;
     font-size: 24px;
-    margin: 36px 0;
+    margin: 36px 20px 36px 0;
     padding: 4px 6px;
     visibility: visible;
 
@@ -338,9 +353,14 @@
   }
 }
 
+#contentcol .section-margin {
+  margin: 30px 0;
+}
+
 #contentcol .section-title {
   font-size: 20px;
-  margin: 2em 0 1.7em;
+  margin: 0 0 30px;
+  padding-top: 20px;
 
   @media (min-width: $screen-sm-min) {
     font-size: 26px;
@@ -359,10 +379,14 @@
   padding: 0 30px;
 }
 
-.section-first-subheading {
-  margin-top: 12px;
+#contentcol .section-first-subheading {
+  margin-top: 30px;
 
-  @media (min-width: $screen-sm-min) {
+  @media (min-width: $screen-md-min) {
     margin-top: 0;
   }
+}
+
+#continuing-education {
+  margin-bottom: 40px;
 }
