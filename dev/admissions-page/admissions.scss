@@ -8,6 +8,12 @@
   background-position: center;
   background-repeat: no-repeat;
   min-height: 300px;
+
+  &:hover .promo-button {
+    background: $black;
+    color: $white;
+    text-decoration: none;
+  }
 }
 
 .promo-button {
@@ -173,7 +179,7 @@
   .overlay {
     background-position: center center;
     background-size: 100%;
-    bottom: 30px;
+    bottom: 35px;
     left: 15px;
     opacity: .05;
     position: absolute;
