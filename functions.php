@@ -2574,6 +2574,97 @@ function colleges_render_columns( $out, $name, $term_id ) {
 }
 add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 
+/**
+ * Returns weather formatted with weather icons
+ **/
+
+function display_weather() {
+	$weather = get_weather_data();
+	$weather["icon"] = get_weather_icon( $weather["condition"] );
+	echo "$ weather->condition " . $weather["condition"] . "\n";
+	echo "$ icon " . $icon . "\n";
+	print_r($weather);
+	ob_start();
+?>
+	<?php if ( $weather ) : ?>
+		<div class="weather">
+			<?php if ( $weather["icon"] ) : ?>
+				<span class="icon" title="<?php echo $weather["condition"]; ?>">
+					<span class="<?php echo $weather["icon"]; ?>"></span>
+				</span>
+			<?php endif; ?>
+			<span class="location">Orlando, FL</span>
+			<span class="vertical-rule"></span>
+			<span class="temp"><?php echo $weather["temp"]; ?>F</span>
+		</div>
+	<?php endif; ?>
+<?php
+	return ob_get_clean();
+}
+
+function get_weather_icon( $condition ) {
+	// https://erikflowers.github.io/weather-icons/
+	$icon_prefix = "wi wi-";
+	$icons_to_conditions = array(
+			'day-sunny' => array(
+				'fair',
+				'default'
+			),
+			'hot' => array(
+				'hot',
+				'haze'
+			),
+			'cloudy' => array(
+				'overcast',
+				'partly cloudy',
+				'mostly cloudy'
+			),
+			'snowflake-cold' => array(
+				'blowing snow',
+				'cold',
+				'snow'
+			),
+			'showers' => array(
+				'showers',
+				'drizzle',
+				'mixed rain/sleet',
+				'mixed rain/hail',
+				'mixed snow/sleet',
+				'hail',
+				'freezing drizzle'
+			),
+			'cloudy-gusts' => array(
+				'windy'
+			),
+			'fog' => array(
+				'dust',
+				'smoke',
+				'foggy'
+			),
+			'storm-showers' => array(
+				'scattered thunderstorms',
+				'scattered thundershowers',
+				'scattered showers',
+				'freezing rain',
+				'isolated thunderstorms',
+				'isolated thundershowers'
+			),
+			'lightning' => array(
+				'tornado',
+				'severe thunderstorms'
+			)
+		);
+	$condition = strtolower( $condition );
+	foreach ( $icons_to_conditions as $icon => $condition_array ) {
+		if ( in_array( $condition, $condition_array ) ) {
+			return $icon_prefix . $icon;
+		}
+	}
+	// If the condition for some reason isn't listed here,
+	// no icon name will be returned and so no icon will be used
+	return false;
+}
+
 
 /**
  * Adds custom "meta fields" for Program Types terms.

@@ -542,7 +542,7 @@ Config::$theme_settings = array(
     		'description' => 'URL to the Pegasus Magazine website.  Can be changed for development when testing Pegasus issue feeds on different environments.',
     		'default'     => 'https://www.ucf.edu/pegasus/',
     		'value'       => $theme_options['pegasus_url'],
-        )),
+        ))
 	),
 	'Social' => array(
 		new TextField(array(

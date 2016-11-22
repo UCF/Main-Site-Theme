@@ -397,6 +397,13 @@ function sc_events_widget() {
 }
 add_shortcode('events-widget', 'sc_events_widget');
 
+/**
+ * Output weather information
+ **/
+function sc_show_weather() {
+	return display_weather();
+}
+add_shortcode('show-weather', 'sc_show_weather');
 
 /**
  * Post search
@@ -1317,6 +1324,15 @@ function sc_events( $atts, $content='' ) {
 	return ob_get_clean();
 }
 add_shortcode( 'events', 'sc_events' );
+
+/**
+ * Displays a list of upcoming events. Events can be filtered by
+ * calendar url and start + end limits.
+ **/
+function sc_display_news( $atts, $content='' ) {
+	esi_include('display_news');
+}
+add_shortcode( 'display-news', 'sc_display_news' );
 
 
 /**
