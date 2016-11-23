@@ -1945,6 +1945,67 @@ function get_degree_search_search_again( $filters, $params ) {
 	return ob_get_clean();
 }
 
+/**
+ * Returns an array containing college and undergrad degree counts, for use in
+ * Academics page list of colleges.
+ **/
+function get_degrees_by_college( $college='' ) {
+	$college_degrees;
+
+	$args = array(
+		'post_type'      => 'degree',
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'order'          => 'ASC',
+		'orderby'        => 'post_title'
+	);
+
+	$args['tax_query'][] = array(
+		'taxonomy' => 'colleges',
+		'field'    => 'slug',
+		'terms'    => $college
+	);
+
+	$args['tax_query'][] = array(
+		'taxonomy' => 'program_types',
+		'field'    => 'slug',
+		'terms'    => 'undergraduate-degree'
+	);
+
+	$undergrad = get_posts( $args );
+
+	// modify query for graduate degrees
+	$args['tax_query'][1] = array(
+		'taxonomy' => 'program_types',
+		'field'    => 'slug',
+		'terms'    => 'graduate-degree'
+	);
+
+	$grad = get_posts( $args );
+
+	return array(
+		'college'        =>  $college,
+		'undergraduate'  =>  $undergrad,
+		'graduate'       =>  $grad,
+	);
+}
+
+/**
+ * Returns an array containing arrays of college and undergrad degrees, for use in
+ * Academics page list of colleges.
+ **/
+function get_college_degrees() {
+	$college_degrees;
+	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
+	if ( $colleges ) {
+
+		foreach ( $colleges as $college ) {
+			$college_degrees[$college->slug] = get_degrees_by_college( $college->slug );
+		}
+	}
+
+	return $college_degrees;
+}
 
 /**
  * Returns relevant params passed in, or available relevant $_GET params.
@@ -2335,6 +2396,29 @@ function get_degree_search_suggestions() {
 	return array_values( array_unique( $suggestions ) );
 }
 
+/**
+ * Returns an array of degree titles, for use by the degree search
+ * autocomplete field.
+ **/
+function get_academics_search_suggestions() {
+	$suggestions = array();
+	$posts = get_posts( array (
+		'numberposts' => -1,
+		'post_type' => 'degree'
+	) );
+
+	if ( $posts ) {
+		foreach ( $posts as $post ) {
+			$suggestion = (object) array (
+				'name' => str_replace( '&amp;', '&', $post->post_title ),
+				'url' => get_permalink( $post->ID ),
+			);
+			$suggestions[] = $suggestion;
+		}
+	}
+
+	return $suggestions;
+}
 
 /**
  * Returns an array containing arrays of term objects, for use in

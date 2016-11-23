@@ -70,6 +70,7 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     font-size: 20px;
     margin-top: -45px;
     padding-top: 0;
+    padding-bottom: 0;
 
     img {
       width: 100%;
@@ -182,65 +183,112 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
   .callout.callout-social {
     h2 {
-      display: inline-block;
+      // display: inline-block;
       font-size: 25px;
     }
-    .social-menu {
-      display: inline-block;
-      margin-left: 8px;
+    // .social-menu {
+    //   display: inline-block;
+    //   margin-left: 8px;
 
-      .social-menu-link {
-        height: 25px;
-        line-height: 25px;
-        width: 25px;
-        margin-left: 3px;
-        margin-right: 3px;
+    //   .social-menu-link {
+    //     height: 25px;
+    //     line-height: 25px;
+    //     width: 25px;
+    //     margin-left: 3px;
+    //     margin-right: 3px;
 
-        .social-menu-icon {
-          font-size: 15px;
-        }
-      }
+    //     .social-menu-icon {
+    //       font-size: 15px;
+    //     }
+    //   }
 
-      .social-menu-link-facebook {
-        background-color: #3b5998;
+    //   .social-menu-link-facebook {
+    //     background-color: #3b5998;
 
-        &:hover {
-          background: #d4d4d4;
-        }
-      }
+    //     &:hover {
+    //       background: #d4d4d4;
+    //     }
+    //   }
 
-      .social-menu-link-twitter {
-        background-color: #55acee;
+    //   .social-menu-link-twitter {
+    //     background-color: #55acee;
 
-        &:hover {
-          background: #d4d4d4;
-        }
-      }
+    //     &:hover {
+    //       background: #d4d4d4;
+    //     }
+    //   }
 
-      .social-menu-link-flickr {
-        background-color: #ff0084;
+    //   .social-menu-link-flickr {
+    //     background-color: #ff0084;
 
-        &:hover {
-          background: #d4d4d4;
-        }
-      }
+    //     &:hover {
+    //       background: #d4d4d4;
+    //     }
+    //   }
 
-      .social-menu-link-youtube {
-        background-color: #bb0000;
+    //   .social-menu-link-youtube {
+    //     background-color: #bb0000;
 
-        &:hover {
-          background: #d4d4d4;
-        }
-      }
+    //     &:hover {
+    //       background: #d4d4d4;
+    //     }
+    //   }
 
-      .social-menu-link-googleplus {
-        background-color: #dd4b39;
+    //   .social-menu-link-googleplus {
+    //     background-color: #dd4b39;
 
-        &:hover {
-          background: #d4d4d4;
-        }
+    //     &:hover {
+    //       background: #d4d4d4;
+    //     }
+    //   }
+    // }
+  }
+
+  .callout.callout-stats {
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    margin-top: -5px;
+
+    .callout-stats-cover {
+      background: $ucf-gold;
+      height: 500px;
+      left: 0;
+      opacity: 0.9;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    h2 {
+      text-transform: uppercase;
+    }
+
+    .stats-item {
+      min-height: 100px;
+      border: dotted 0 $black;
+      text-align: center;
+      line-height: 1.2;
+      padding: 20px 10px;
+
+      span {
+        font-size: 50px;
+        font-family: $font-condensed;
+        display: block;
       }
     }
+    .stats-border-top-left {
+      border-width: 0 1px 1px 0;
+    }
+    .stats-border-top-right {
+      border-width: 0 0 1px 0;
+    }
+    .stats-border-bottom-left {
+      border-width: 0 1px 0 0;
+    }
+    // .stats-border-bottom-right {
+    //   border-width: ;
+    // }
   }
 
   .callout.callout-dark {
@@ -411,5 +459,143 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
         font-size: 14px;
       }
     }
+  }
+}
+
+
+
+
+.typeahead-search-box {
+  @include gotham(6);
+
+  background-color: transparent;
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  height: 59px;
+  margin-bottom: 20px;
+  padding: 0;
+  transition: all 1s;
+
+  .title {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  @media (max-width: $screen-md-max) {
+    height: 100px;
+    transition-delay: 0s;
+    transition: height 0.2s;
+  }
+
+  .twitter-typeahead {
+    width: 101.5%;
+    top: 5px;
+    float: right;
+    position: absolute;
+    right: -7px;
+
+    @media (max-width: $screen-sm-max) {
+      top: -1px;
+    }
+  }
+
+  .tt-menu.tt-open {
+    width: 100%;
+
+    .tt-dataset,
+    .tt-suggestion {
+      width: 100%;
+    }
+
+    .tt-cursor {
+      background: #e4c550;
+    }
+  }
+
+  input {
+    @include gotham(1);
+
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    color: #000;
+    font-size: 17px;
+    letter-spacing: .5px;
+    outline: 0;
+    padding: 13px 54px 13px 25px;
+    position: absolute;
+    transition: all 0.3s;
+    width: 90%;
+
+    z-index: 1;
+
+    &::-webkit-input-placeholder {
+      color: #222;
+    }
+    &:-moz-placeholder {
+      color: #222;
+    }
+    &::-moz-placeholder {
+      color: #222;
+    }
+    &:-ms-input-placeholder {
+      color: #222;
+    }
+    &:placeholder-shown {
+      color: #222;
+    }
+
+  }
+
+  .title {
+    font-size: 16px;
+    position: relative;
+    top: -20px;
+    transition: all 0.3s;
+
+    @media (max-width: $screen-md-max) {
+      font-size: 16px;
+      top: -20px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 16px;
+    }
+  }
+
+  .search-icon {
+    transition: all 0.3s;
+
+    @media (max-width: $screen-md-max) {
+      top: 34px;
+    }
+  }
+}
+
+.search-icon {
+  font-size: 33px;
+  position: absolute;
+  right: 38px;
+  top: 41px;
+  z-index: 2;
+}
+
+.tt-suggestion {
+  background-color: rgba(255, 225, 113, 0.9);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 5px 10px;
+  width: 500px;
+
+  hr {
+    border: 1px dashed #6f6f6f;
+    margin:0;
+  }
+
+  &:hover {
+    background-color: rgba(255, 225, 113, 0.8);
   }
 }

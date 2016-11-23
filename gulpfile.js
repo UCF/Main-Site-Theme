@@ -137,7 +137,7 @@ gulp.task('js-lint', function() {
 gulp.task('js-main', function() {
   var minified = [
     config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
-    config.componentsPath + '/bootstrap3-typeahead/bootstrap3-typeahead.js',
+    config.componentsPath + '/typeahead.js/dist/typeahead.bundle.js',
     config.componentsPath + '/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
     config.componentsPath + '/Chart.js/Chart.js',
     config.componentsPath + '/jfeed/build/dist/jquery.jfeed.js',
@@ -180,7 +180,7 @@ gulp.task('watch', function() {
   }
 
   gulp.watch(config.devPath + '/**/*.scss', ['css-dev']).on('change', browserSync.reload);
-  gulp.watch(config.scssPath + '/**/*.scss', ['css']).on('change', browserSync.reload);
+  gulp.watch(config.scssPath + '/**/*.scss', ['css']);
   gulp.watch(config.jsPath + '/**/*.js', ['js']).on('change', browserSync.reload);
   gulp.watch('**/*.php').on("change", browserSync.reload);
 });
