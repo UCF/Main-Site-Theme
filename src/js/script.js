@@ -1371,6 +1371,9 @@ var degreeSearch = function ($) {
 
       setupEventHandlers();
     }
+    else {
+      alert('nope');
+    }
   }
 
   $(initPage);

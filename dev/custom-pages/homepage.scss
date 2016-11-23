@@ -3,6 +3,7 @@
 $events-bg-url: 'http://localhost/wordpress/ucfedu/wp-content/uploads/sites/9/2016/11/athletics-background.jpg';
 $downtown-bg-url: 'http://localhost/wordpress/ucfedu/wp-content/uploads/sites/9/2016/11/downtown_orlando.jpg';
 $florida-icon-url: 'http://localhost/wordpress/ucfedu/wp-content/uploads/sites/9/2016/11/tmp-fl-pin.png';
+$ignite-banner-url: 'http://localhost/wordpress/ucfedu/wp-content/uploads/sites/9/2016/11/ignite-tmp.png';
 $light-gray: #d8d8d8;
 $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
@@ -121,6 +122,12 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     }
   }
 
+  .callout.callout-intro {
+    .degree-search {
+      color: $black;
+    }
+  }
+
   .callout.callout-downtown {
     @media (min-width: $screen-md-min) {
       background-image: url('#{$downtown-bg-url}');
@@ -141,7 +148,7 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       border: 2px solid $white;
       color: $white;
       display: block;
-      font-size: 20px;
+      font-size: 18px;
       line-height: 1.4;
       padding: 20px 20px 20px 170px;
       text-transform: uppercase;
@@ -159,6 +166,80 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       color: $white;
       font-size: 75px;
       margin-bottom: 40px;
+    }
+  }
+
+  .callout.callout-ignite {
+    background: url($ignite-banner-url);
+    background-color: black;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 0;
+    overflow: hidden;
+    padding-top: 175px;
+  }
+
+  .callout.callout-social {
+    h2 {
+      display: inline-block;
+      font-size: 25px;
+    }
+    .social-menu {
+      display: inline-block;
+      margin-left: 8px;
+
+      .social-menu-link {
+        height: 25px;
+        line-height: 25px;
+        width: 25px;
+        margin-left: 3px;
+        margin-right: 3px;
+
+        .social-menu-icon {
+          font-size: 15px;
+        }
+      }
+
+      .social-menu-link-facebook {
+        background-color: #3b5998;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-twitter {
+        background-color: #55acee;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-flickr {
+        background-color: #ff0084;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-youtube {
+        background-color: #bb0000;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-googleplus {
+        background-color: #dd4b39;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
     }
   }
 
