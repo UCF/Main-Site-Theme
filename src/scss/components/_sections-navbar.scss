@@ -6,6 +6,10 @@
   text-transform: uppercase;
   transition: box-shadow .75s;
 
+  .section-link {
+    @include gotham(7);
+  }
+
   @media (max-width: $screen-sm-max) {
     overflow: visible;
   }
@@ -18,7 +22,11 @@
   }
 
   .navbar-nav {
+    margin-bottom: 0;
+
     > li {
+      margin-bottom: 0;
+
       > a {
         padding-bottom: 17px;
         padding-top: 17px;
@@ -32,10 +40,20 @@
 
   .navbar-title {
     float: left;
+    font-weight: 800;
     padding: 18px 0 0 18px;
 
     @media (min-width: $screen-md-min) {
       display: none;
+    }
+  }
+
+  .navbar-toggle {
+    text-transform: uppercase;
+
+    .fa {
+      font-size: 14px;
+      margin-left: 4px;
     }
   }
 }
@@ -62,7 +80,7 @@
   .navbar-nav {
     > li {
       > a {
-        color: $ucf-col-default;
+        color: $ucf-col-default !important;
         &:focus {
           background-color: $ucf-gold;
           color: $ucf-col-default;
@@ -70,7 +88,8 @@
 
         &:hover {
           background: $ucf-metal-gold;
-          color: $ucf-col-highlight;
+          color: $ucf-col-highlight !important;
+          text-decoration: none !important;
         }
       }
 

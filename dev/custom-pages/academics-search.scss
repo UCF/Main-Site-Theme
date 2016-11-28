@@ -1,0 +1,319 @@
+@import '../media-template/media-template-base';
+
+#academics .top-search {
+  max-width: 1170px;
+}
+
+.page-media-header {
+  height: 900px;
+  overflow: visible;
+  width: 100%;
+  z-index: 1;
+  margin-top: -30px;
+  padding-top: 35px;
+
+  @media (max-width: $screen-xs-max) {
+    height: 500px;
+    background-position: 0 30px;
+  }
+}
+
+.fade-in {
+  transition-delay: .5s;
+  opacity: 0;
+  -webkit-transition: transform 1s, opacity 1s;
+     -moz-transition: transform 1s, opacity 1s;
+       -o-transition: transform 1s, opacity 1s;
+          transition: transform 1s, opacity 1s;
+  transform: translateY(-10px);
+
+  &.fade-first {
+    transition-delay: .5s;
+  }
+
+  &.fade-second {
+    transition-delay: 1s;
+  }
+
+  &.fade-third {
+    transition-delay: 1.5s;
+  }
+}
+
+.fade-in.fade {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#contentcol .college {
+  border-bottom: solid 1px #e7e7e7;
+  margin-bottom: 70px;
+  padding-bottom: 20px;
+
+  &:first-child {
+    margin-top: 40px;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+
+  h3 {
+    @include archer(6);
+
+    font-size: 37px;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    margin-top: 0;
+
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
+  }
+
+  .description {
+    padding-bottom: 20px;
+  }
+
+  img {
+    margin-bottom: 30px;
+  }
+
+  .program-info-list {
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
+  }
+
+  .college-info {
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
+  }
+
+  .count-button {
+    @include gotham(5);
+    background-color: $ucf-gold;
+    border: none;
+    border-bottom: 0;
+    border-radius: 0;
+    color: #000;
+    font-size: 16px;
+    margin-bottom: 0;
+    width: 240px;
+
+    .count {
+      color: #811f1f;
+      display: inline-block;
+      width: 30px;
+      border-right: solid 1px #ffe585;
+      text-align: right;
+      padding-right: 5px;
+    }
+  }
+
+  .buttons-heading {
+    border-top: solid 1px #e7e7e7;
+    color: #757575;
+    font-size: 14px;
+    font-weight: 700;
+    padding-top: 20px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
+  }
+
+}
+
+.academics-intro {
+  @include archer(6);
+
+  color: #000;
+  font-size: 40px;
+  line-height: 1.25;
+  margin-bottom: 40px;
+  margin-top: 40px;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 30px;
+    margin-top: 25px;
+  }
+  @media (max-width: $screen-xs-max) {
+    font-size: 22px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }
+}
+
+.academics-search-box {
+  @include gotham(6);
+
+  background-color: #FC0;
+  color: #000;
+  font-size: 24px;
+  height: 117px;
+  padding: 26px 30px;
+  transition: all 1s;
+
+  .title {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  @media (max-width: $screen-md-max) {
+    height: 100px;
+    transition-delay: 0s;
+    transition: height 0.2s;
+  }
+
+  .twitter-typeahead {
+    width: 101.5%;
+    top: 5px;
+    float: right;
+    position: absolute;
+    right: -7px;
+
+    @media (max-width: $screen-sm-max) {
+      top: -1px;
+    }
+  }
+
+  .tt-menu.tt-open {
+    width: 100%;
+
+    .tt-dataset,
+    .tt-suggestion {
+      width: 100%;
+    }
+
+    .tt-cursor {
+      background: #e4c550;
+    }
+  }
+
+  input {
+    @include gotham(1);
+
+    background: #f9dd78;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 17px;
+    letter-spacing: .5px;
+    outline: 0;
+    padding: 13px 54px 13px 25px;
+    position: absolute;
+    transition: all 0.3s;
+
+    width: 100%;
+
+    z-index: 1;
+
+    &::-webkit-input-placeholder {
+      color: #796b2d;
+    }
+    &:-moz-placeholder {
+      color: #796b2d;
+    }
+    &::-moz-placeholder {
+      color: #796b2d;
+    }
+    &:-ms-input-placeholder {
+      color: #796b2d;
+    }
+    &:placeholder-shown {
+      color: #796b2d;
+    }
+
+  }
+
+  .title {
+    font-size: 16px;
+    position: relative;
+    top: -20px;
+    transition: all 0.3s;
+
+    @media (max-width: $screen-md-max) {
+      font-size: 16px;
+      top: -20px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 16px;
+    }
+  }
+
+  .search-icon {
+    transition: all 0.3s;
+
+    @media (max-width: $screen-md-max) {
+      top: 34px;
+    }
+  }
+}
+
+.search-icon {
+  font-size: 33px;
+  position: absolute;
+  right: 38px;
+  top: 41px;
+  z-index: 2;
+}
+
+.tt-suggestion {
+  background-color: rgba(255, 225, 113, 0.9);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 5px 10px;
+  width: 500px;
+
+  hr {
+    border: 1px dashed #6f6f6f;
+    margin:0;
+  }
+
+  &:hover {
+    background-color: rgba(255, 225, 113, 0.8);
+  }
+}
+
+
+.college-dropdown-content {
+  background: #f9dd78;
+  background: rgba(255, 225, 113, 0.9);
+  font-size: 18px;
+  overflow: auto;
+  padding: 0 15px;
+
+  ul {
+    float: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0 15px;
+    width: 30%;
+
+    li {
+      @include gotham(4);
+      border-bottom: 1px solid #e4c03c;
+      font-size: 18px;
+      padding: 10px 0;
+
+      &:last-child {
+        border: 0;
+      }
+
+      a {
+        &:link,
+        &:visited {
+          color: #000;
+        }
+      }
+    }
+  }
+}

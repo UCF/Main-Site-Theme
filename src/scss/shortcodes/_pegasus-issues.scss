@@ -1,0 +1,56 @@
+// Pegasus issues shortcode
+
+.pegasus-issues-list {
+  line-height: 1.5;
+
+  @media (min-width: $screen-sm-min) {
+    line-height: 1.65;
+  }
+}
+
+.pegasus-issues-list-item {
+  margin-bottom: 2.5em;
+
+  @media (min-width: $screen-sm-min) {
+    margin-bottom: 2em;
+  }
+}
+
+.pegasus-issue-thumbnail-link,
+.pegasus-issue-title,
+.pegasus-issue-featured-label,
+.pegasus-issue-cover-title {
+  display: block;
+}
+
+.pegasus-issue-title {
+  color: $black !important;
+  font-family: $font-family-sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: .6em;
+  margin-top: .6em;
+}
+
+.pegasus-issue-featured-label {
+  @include font-smoothing();
+  color: $gray-light;
+  font-size: .8em;
+  letter-spacing: .06em;
+  margin-bottom: .6em;
+  text-transform: uppercase;
+}
+
+.pegasus-issue-cover-title {
+  color: $black !important;
+  font-size: 1.2em;
+  line-height: 1;
+  margin-bottom: .4em;
+}
+
+.pegasus-issue-cover-description {
+  font-size: 1em;
+  font-style: italic;
+  margin-bottom: 1.5em;
+}

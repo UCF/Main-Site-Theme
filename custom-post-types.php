@@ -624,6 +624,13 @@ class Page extends CustomPostType {
 					'type' => 'file',
 				),
 				array(
+					'name' => '<strong>Media Template:</strong> Loop Video',
+					'desc' => 'Determines if the video should loop.',
+					'id'   => $prefix.'loop_video',
+					'type' => 'checkbox',
+					'std'  => 'off'
+				),
+				array(
 					'name' => '<strong>Media Template:</strong> Header Contents',
 					'desc' => '(Optional) Content displayed over the header section on pages using the media template.  Accepts HTML and shortcode content.',
 					'id' => $prefix.'media_header_content',
@@ -1415,6 +1422,18 @@ class Degree extends CustomPostType{
 				'desc' => 'graduate value in database. Do not modify this value.',
 				'id'   => $prefix.'is_graduate',
 				'type' => 'text',
+			),
+			array(
+				'name'  => 'Use Updated Template',
+				"desc"  => 'If checked, will used an updated template with an image header.',
+				'id'    => $prefix.'use_updated_template',
+				'type'  => 'checkbox'
+			),
+			array(
+				'name'  => 'Header Image',
+				'desc'  => 'Sets the header image of the degree (only if "Use Updated Template" is checked)',
+				'id'    => $prefix.'header_image',
+				'type'  => 'file'
 			)
 		);
 	}

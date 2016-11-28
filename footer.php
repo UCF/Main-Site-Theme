@@ -13,15 +13,7 @@
 					?>
 				</div>
 
-				<?php echo wp_nav_menu(array(
-					'theme_location' => 'social-links',
-					'container' => 'div',
-					'container_id' => 'social-menu-wrap',
-					'menu_class' => 'menu list-unstyled list-inline text-center screen-only',
-					'menu_id' => 'social-menu',
-					'depth' => 1,
-					));
-				?>
+				<?php echo display_social_menu(); ?>
 
 				<p id="subfooter" role="contentinfo" class="vcard">
 					<span class="adr">

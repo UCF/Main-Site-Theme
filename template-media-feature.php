@@ -19,6 +19,7 @@ if ( $use_video ) {
 	$placeholder_attrs .= $header_video_mp4 ? 'data-mp4="'. $header_video_mp4 .'" ' : '';
 	$placeholder_attrs .= $header_video_webm ? 'data-webm="'. $header_video_webm .'" ' : '';
 	$placeholder_attrs .= $header_video_ogg ? 'data-ogg="'. $header_video_ogg .'" ' : '';
+	$placeholder_attrs .= filter_var( get_post_meta( $post->ID, 'page_loop_video', True ), FILTER_VALIDATE_BOOLEAN ) ? 'data-loop="true"' : 'data-loop="false"';
 }
 ?>
 

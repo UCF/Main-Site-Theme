@@ -21,7 +21,7 @@
   }
 
   li {
-    border-right: 1px solid #262626;
+    border-right: 1px solid $gray-darker;
     font-family: $font-family-sans-serif;
     letter-spacing: .8px;
     line-height: 1;
@@ -44,7 +44,7 @@
   }
 
   a {
-    color: #262626;
+    color: $gray-darker;
     font-size: 10px;
     line-height: 1.35;
   }
@@ -57,7 +57,7 @@
   text-align: center;
 
   a {
-    color: #262626;
+    color: $gray-darker;
   }
 }
 
@@ -66,88 +66,38 @@
   padding: 10px 0 15px;
 }
 
-#social-menu {
-  a[href*="facebook"],
-  a[href*="twitter"],
-  a[href*="flickr"],
-  a[href*="youtube"],
-  a[href*="google"],
-  a[href*="linkedin"],
-  a[href*="vine"] {
-    @include sprite('../img/social-links.png', '../img/social-links-r.png', 291px, 82px);
-    height: 41px;
-    width: 41px;
-  }
+.social-menu {
+  margin-bottom: 14px;
+  margin-top: 20px;
+  text-align: center;
+}
 
-  a[href*="facebook"] {
-    background-position: 0 0;
+.social-menu-link {
+  background: $black;
+  border-radius: 50%;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 5px 10px;
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
 
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: 0 -41px;
+  &:hover,
+  &:active,
+  &:focus {
+    background: $footer-gray-light;
+
+    .social-menu-icon {
+      color: $footer-gray;
     }
   }
+}
 
-  a[href*="twitter"] {
-    background-position: -42px 0;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: -42px -41px;
-    }
-  }
-
-  a[href*="flickr"] {
-    background-position: -83px 0;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: -83px -41px;
-    }
-  }
-
-  a[href*="youtube"] {
-    background-position: -250px 0;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: -250px -41px;
-    }
-  }
-
-  a[href*="google"] {
-    background-position: -125px 0;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: -125px -41px;
-    }
-  }
-
-  a[href*="linkedin"] {
-    background-position: -167px 0;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: -167px -41px;
-    }
-  }
-
-  a[href*="vine"] {
-    background-position: -208px 0;
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-position: -208px -41px;
-    }
-  }
+.social-menu-icon {
+  color: $white;
+  font-size: 24px;
+  line-height: inherit;
 }
 
 #footer-logo {

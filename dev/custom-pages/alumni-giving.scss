@@ -1,0 +1,617 @@
+@import '../media-template/media-template-base';
+
+
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2016/09/header-xs.jpg';
+$events-bg-url: '//www.ucf.edu/wp-content/uploads/2016/09/events-bg.jpg';
+$alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_events_knightro.jpg';
+
+
+@mixin btn-cta() {
+  @include button-variant($black, $ucf-gold, $ucf-gold);
+  @include button-size(16px, 22px, 12px, 1.1, 0);
+  @include gotham(7);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 13px;
+  }
+}
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+.once-a-knight {
+  @media(max-width: $screen-xs-max) {
+    background-image: url(#{$alumni-knitro}) !important;
+    overflow: visible;
+    position: static;
+  }
+}
+
+.page-media .page-media-header {
+  background-position: center bottom;
+  background-size: cover;
+  height: calc(134vw - #{$ucf-header-height});
+  max-height: 650px;
+
+  // Bg replacement is not written mobile-first because the meta field for
+  // header background images implies/assumes a desktop-size image:
+  @media (max-width: $screen-xs-max) {
+    // scss-lint:disable ImportantRule
+    background-image: url(#{$header-media-xs-url}) !important;
+    // scss-lint:enable ImportantRule
+    overflow: visible;
+    position: static;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    background-position: 20% center;
+    background-size: cover;
+    height: calc(75vh - #{$ucf-header-height});
+    max-height: 750px;
+    min-height: 600px;
+  }
+
+  @media (min-width: $screen-md-min) {
+    background-position: center center;
+  }
+
+  .header-title {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 6vw;
+    }
+  }
+
+  .header-subtitle {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 3vw;
+    }
+  }
+}
+
+#contentcol {
+  blockquote {
+    border-left: 0 solid transparent;
+    padding: 0;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 10px;
+    }
+
+    &,
+    p {
+      @include gotham(3, italic);
+      font-size: 19px;
+      line-height: 1.5;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 30px;
+      }
+    }
+
+    p {
+      margin-bottom: .75em;
+    }
+
+    footer {
+      @include gotham(5);
+      color: $black;
+      font-size: 11.5px;
+      letter-spacing: .08em;
+      line-height: 1.6;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 13px;
+      }
+
+      strong {
+        @include gotham(8);
+      }
+
+      em {
+        @include gotham(5, italic);
+      }
+    }
+  }
+
+  .alumni-section {
+    font-family: gotham();
+
+    p {
+      font-size: 14px;
+    }
+
+    .explore-further {
+      li {
+        margin-bottom: 3px;
+
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .content-title {
+      color: #333;
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+      margin-top: 0;
+      padding: 0 0 10px;
+      text-transform: uppercase;
+
+      &::after {
+        background: $ucf-gold;
+        content: ' ';
+        display: block;
+        height: 2px;
+        margin-top: 15px;
+        width: 25px;
+      }
+    }
+
+    .section-header {
+      height: 500px;
+      margin-bottom: 60px;
+      margin-top: 0;
+      position: relative;
+
+      .section-title {
+        bottom: 18px;
+        color: #fff;
+        font-family: gotham();
+        font-size: 48px;
+        font-weight: 500;
+        max-width: 600px;
+        position: absolute;
+        text-shadow: 1px 1px 1px #000;
+      }
+    }
+  }
+
+  .callout-blockquote {
+    margin: 3em 0;
+  }
+
+  .img-headshot {
+    height: auto;
+    max-width: 250px;
+    width: 50%;
+
+    @media (min-width: $screen-sm-min) {
+      max-width: 100%;
+      width: auto;
+    }
+  }
+
+  .img-grid {
+    @include clearfix();
+  }
+
+  .img-grid-item {
+    width: 100%;
+
+    @media (min-width: $screen-sm-min) {
+      float: left;
+      position: relative;
+      width: 50%;
+    }
+
+    @media (min-width: 1800px) {
+      // May as well, if you have a monitor this big
+      width: 25%;
+    }
+
+    > img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  .img-grid-contents {
+    margin: #{$grid-gutter-width / 2} #{$grid-gutter-width / 2} $grid-gutter-width #{$grid-gutter-width / 2};
+
+    @media (min-width: $screen-sm-min) {
+      bottom: 30px;
+      left: 30px;
+      margin: 0;
+      position: absolute;
+      right: 30px;
+    }
+  }
+
+  .overlay-box {
+    background-color: rgba($white, .8);
+
+    @media (min-width: $screen-sm-min) {
+      padding: 20px;
+    }
+
+    > p {
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 0 !important;
+        margin-top: 1.5em;
+      }
+
+      &:first-of-type {
+        @media (min-width: $screen-sm-min) {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .overlay-box-heading {
+    font-size: 14px;
+    margin-bottom: 6px;
+    margin-top: 0;
+    text-transform: uppercase;
+  }
+
+  .btn-cta {
+    @include btn-cta();
+  }
+
+  // Applies heavy weight Gotham styles to a heading.
+  .heading-heavy {
+    @include gotham(8);
+    letter-spacing: .15em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  .highlight {
+    display: inline-block;
+    padding: .4em 1em;
+  }
+
+  .highlight-white {
+    background-color: $white;
+    color: $black;
+  }
+
+  .callout-events {
+    @media (min-width: $screen-md-min) {
+      background-image: url('#{$events-bg-url}');
+      background-position: center right;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
+    h1,
+    .h1 {
+      font-size: 25px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 42px;
+      }
+    }
+
+    .list-chevrons,
+    .events-list {
+      letter-spacing: .04em;
+    }
+
+    .heading-heavy {
+      margin: 2.5em 0 1em;
+    }
+  }
+
+  .events-list {
+    list-style: none;
+    padding-left: 0;
+
+    .events-list-item {
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 25px;
+        margin-top: 25px;
+      }
+    }
+
+    .event-link {
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .event-date,
+        .event-title {
+          text-decoration: underline;
+        }
+      }
+
+      // won't be present in shortcode-generated markup, but for the sake of development:
+      br {
+        display: none;
+      }
+    }
+
+    .event-start-date,
+    .event-start-title,
+    .event-title {
+      display: block;
+    }
+
+    .event-start-date,
+    .event-start-title {
+      line-height: 1.5;
+    }
+
+    .event-start-date {
+      color: $ucf-gold;
+      font-size: 15px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .event-start-year,
+    .event-start-time,
+    .event-location {
+      // .sr-only
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    .event-title {
+      @include gotham(8);
+      @include font-smoothing();
+      font-size: 13px;
+      margin: .4em 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+      }
+    }
+
+    .event-description {
+      @include gotham();
+      font-size: 12px;
+      line-height: 1.7;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  //
+  // General Pegasus issue list style overrides.
+  //
+  .pegasus-issue-title {
+    @include gotham(7);
+    color: $black !important;  // Necessary to override #contentcol a:not(.btn) rule
+    font-size: 34px;
+    margin-top: 0;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 42px;
+    }
+  }
+
+  .pegasus-issue-featured-label {
+    font-size: 13px;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 15px;
+    }
+  }
+
+  .pegasus-issue-cover-title {
+    @include archer(7);
+    color: $black !important;  // Necessary to override #contentcol a:not(.btn) rule
+    font-size: 26px;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 32px;
+    }
+  }
+
+  .pegasus-issue-cover-description {
+    @include archer(4, italic);
+    font-size: 18px;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 21px;
+    }
+  }
+
+  .pegasus-issue-read-link {
+    @include btn-cta();
+
+    // Add missing .btn styles:
+    color: $black !important;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent !important;
+
+    &,
+    &:active,
+    &.active {
+      &:focus,
+      &.focus {
+        @include tab-focus;
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $black !important;
+      text-decoration: none !important;
+    }
+
+    &:active,
+    &.active {
+      @include box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
+      background-image: none;
+      outline: 0;
+    }
+  }
+
+  //
+  // Custom sizing/positioning styles for featured Pegasus issue:
+  //
+  .pegasus-featured-issue {
+    @media (min-width: $screen-sm-min) {
+      margin-top: 3.5em;
+    }
+
+    .pegasus-issues-list-item {
+      @media (min-width: $screen-sm-min) {
+        display: table;
+        width: 100%;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link,
+    .pegasus-issue-details {
+      @media (min-width: $screen-sm-min) {
+        display: table-cell;
+        vertical-align: top;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link {
+      @media (min-width: $screen-sm-min) {
+        height: auto;
+        width: 30%;
+      }
+    }
+
+    .pegasus-issue-thumbnail {
+      height: auto;
+      width: 100%;
+    }
+
+    .pegasus-issue-details {
+      @media (min-width: $screen-sm-min) {
+        padding-left: $grid-gutter-width;
+        width: 70%;
+      }
+    }
+
+    .pegasus-issue-title {
+      margin-top: .6em;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: .3em;
+      }
+    }
+  }
+
+  //
+  // Custom sizing/positioning styles for Pegasus archives:
+  //
+  .pegasus-issue-archives {
+    .pegasus-issues-list-item {
+      @media (max-width: $screen-xs-max) {
+        display: table;
+        width: 100%;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link,
+    .pegasus-issue-details {
+      @media (max-width: $screen-xs-max) {
+        display: table-cell;
+        vertical-align: top;
+      }
+    }
+
+    .pegasus-issue-thumbnail-link {
+      @media (max-width: $screen-xs-max) {
+        height: auto;
+        width: 30%;
+      }
+    }
+
+    .pegasus-issue-thumbnail {
+      @media (max-width: $screen-xs-max) {
+        height: auto;
+        width: 100%;
+      }
+    }
+
+    .pegasus-issue-details {
+      @media (max-width: $screen-xs-max) {
+        padding-left: 20px;
+        width: 70%;
+      }
+    }
+
+    .pegasus-issue-title {
+      font-size: 22px;
+      margin-bottom: .45em;
+      margin-top: .25em;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 21px;
+        margin-top: .6em;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 28px;
+      }
+    }
+
+    .pegasus-issue-featured-label {
+      font-size: 11px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 12px;
+      }
+    }
+
+    .pegasus-issue-cover-title {
+      font-size: 18px;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 22px;
+      }
+    }
+
+    .pegasus-issue-cover-description {
+      @include gotham(4, normal);
+      font-size: 12px;
+      line-height: 1.65;
+
+      @media (min-width: $screen-md-min) {
+        font-size: 13px;
+      }
+    }
+
+    .pegasus-issue-read-link {
+      display: none;
+    }
+  }
+}
