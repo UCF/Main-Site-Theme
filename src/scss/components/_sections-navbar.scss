@@ -40,6 +40,7 @@
 
   .navbar-title {
     float: left;
+    font-weight: 800;
     padding: 18px 0 0 18px;
 
     @media (min-width: $screen-md-min) {
@@ -51,6 +52,7 @@
     text-transform: uppercase;
 
     .fa {
+      font-size: 14px;
       margin-left: 4px;
     }
   }
