@@ -711,125 +711,39 @@ var degreeSearch = function ($) {
 
   function initAutoComplete() {
     /**
-     * Bootstrap typeahead overrides, for general fixes and usability improvements
-     **/
-    $.fn.typeahead.Constructor.prototype.blur = function () {
-      // Workaround for bug in mouse item selection
-      var that = this;
-      setTimeout(function () { that.hide(); }, 250);
-    };
-
-    $.fn.typeahead.Constructor.prototype.select = function (e) {
-      var val = this.$menu.find('.active').attr('data-value');
-      if (val) {
-        this.$element
-          .val(this.updater(val))
-          .change();
-      }
-
-      // Submit the form on select
-      if (this.$element.parents('form').length) {
-        this.$element.parents('form').eq(0).submit();
-      }
-
-      return this.hide();
-    };
-
-    $.fn.typeahead.Constructor.prototype.keyup = function (e) {
-      switch (e.keyCode) {
-        case 40: // down arrow
-        case 38: // up arrow
-        case 16: // shift
-        case 17: // ctrl
-        case 18: // alt
-        case 9:  // tab
-          break;
-
-        // case 9: // Prevent tabbing from filling the autocomplete field with the selection
-        case 13: // enter
-          if (!this.shown) { return; }
-          this.select();
-          break;
-
-        case 27: // escape
-          if (!this.shown) { return; }
-          this.hide();
-          break;
-
-        case 39: // right arrow
-          if (!this.shown) { return; }
-          this.select();
-          break;
-
-        default:
-          this.lookup();
-      }
-
-      e.stopPropagation();
-      e.preventDefault();
-    };
-
-    $.fn.typeahead.Constructor.prototype.keydown = function (e) {
-      this.suppressKeyPressRepeat = ~$.inArray(e.keyCode, [40, 38, 9, 27]); // remove 13 (enter)
-      this.move(e);
-    };
-
-    $.fn.typeahead.Constructor.prototype.move = function (e) {
-      switch (e.keyCode) {
-        // case 9: // Remove tab overrides
-        case 13: // enter
-          if (this.shown) { // Allow enter key to submit form when no suggestions are available
-            e.preventDefault();
-          }
-          break;
-
-        case 27: // escape
-          e.preventDefault();
-          break;
-
-        case 38: // up arrow
-          e.preventDefault();
-          this.prev();
-          break;
-
-        case 40: // down arrow
-          e.preventDefault();
-          this.next();
-          break;
-      }
-
-      e.stopPropagation();
-    };
-
-    $.fn.typeahead.Constructor.prototype.render = function (items) {
-      var that = this;
-
-      // Don't autoselect 1st suggestion
-      items = $(items).map(function (i, item) {
-        i = $(that.options.item).attr('data-value', item);
-        i.find('a').html(that.highlighter(item));
-        return i[0];
-      });
-
-      this.$menu.html(items);
-      return this;
-    };
-
-    /**
-     * #search-query specific typeahead init, event handlers
+     * degree search typeahead
      **/
     var $searchQuery = $academicsSearch.find('#search-query');
+
+    var degrees = new Bloodhound({
+      local: searchSuggestions,
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      datumTokenizer: Bloodhound.tokenizers.whitespace
+    });
+
+    $searchQuery.bind('typeahead:select', function (ev, suggestion) {
+      var $form = $(this).parents('form');
+      if ($form.length) {
+        $form.eq(0).submit();
+      }
+    });
 
     // Typeahead init
     $searchQuery
       .typeahead({
-      source: function (query, process) {
-        return searchSuggestions; // searchSuggestions defined in page-degree-search.php
+        minLength: 1,
+        highlight: true
       },
-      updater: function (item) {
-        $(this).val(item);
-        return item;
-      }
+      {
+        name: 'degrees',
+        source: degrees, // searchSuggestions defined in page-degree-search.php
+        templates: {
+          empty: [
+            '<div class="tt-suggestion empty-message">',
+            'No degrees found for search term.',
+            '</div>'
+          ].join('\n'),
+        }
     });
 
     // Dynamic content reloading for browsers that support history api
@@ -1491,7 +1405,14 @@ var mediaTemplateVideo = function($) {
     var mp4 = $videoPlaceholder.attr('data-mp4'),
       webm = $videoPlaceholder.attr('data-webm'),
       ogg = $videoPlaceholder.attr('data-ogg'),
-      video = '<video autoplay muted loop>';
+      loop = JSON.parse($videoPlaceholder.attr('data-loop')),
+      video = '<video autoplay muted';
+
+    if (loop) {
+      video += ' loop>';
+    } else {
+      video += '>';
+    }
 
     // Stop now/display nothing if no video sources are provided
     if (!mp4 && !webm && !ogg) {
@@ -1552,6 +1473,124 @@ var mediaTemplateVideo = function($) {
   }
 };
 
+
+var academicDegreeSearch = function ($) {
+  /**
+ * #search-query specific typeahead init, event handlers
+ **/
+  var $academicsDegreeSearch = $('#academics-degree-search');
+
+  if ($academicsDegreeSearch.length > 0) {
+
+    var degrees = new Bloodhound({
+      identify: function(obj) { return obj.name; },
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      local: searchSuggestions
+    });
+
+    var degreesWithDefaults = function (q, sync) {
+      if (q === '') {
+        sync(degrees.get('Bachelor', 'Graduate', 'Certificate'));
+      } else {
+        degrees.search(q, sync);
+      }
+    };
+
+    $academicsDegreeSearch.bind('typeahead:select', function(ev, suggestion) {
+      window.location = suggestion.url;
+    });
+
+    var degreeType = '<div class="tt-suggestion"><hr></div><div class="tt-suggestion tt-selectable footer-title"><strong>What type of degree are you interested in?</strong></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=undergraduate-degree">Undergraduate Degree</a></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=graduate-degree">Graduate Degree</a></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=certificate">Certificate</a></div>';
+
+    // Typeahead init
+    $academicsDegreeSearch
+      .typeahead({
+        minLength: 1,
+        highlight: true
+      },
+      {
+        name: 'degrees',
+        display: 'name',
+        source: degreesWithDefaults,
+        templates: {
+          empty: [
+            '<div class="tt-suggestion empty-message">',
+            'No degrees found for search term.',
+            '</div>' + degreeType
+          ].join('\n'),
+          footer: degreeType
+        }
+      });
+  }
+};
+
+var sectionsMenu = function($) {
+  var $sectionsMenu = $('#sections-menu');
+  if ( $sectionsMenu.length ) {
+    var selector = $sectionsMenu.data('selector');
+
+    var clickHandler = function(e) {
+      e.preventDefault();
+
+      var $target = $(this.hash);
+      $target = $target.length ? $target : $('[name=' + this.hash.slice() + ']');
+
+      var scrollTo = $target.offset().top - 50;
+      if ( $(window).width() < 991 ) {
+        $sectionsMenu.collapse('toggle');
+      }
+
+      if ($target.length) {
+        $('html, body').animate({
+          scrollTop: scrollTo
+        }, 750);
+      }
+    };
+
+    var addToMenu = function($i, $section) {
+      var $item  = $( $section ),
+          url = $item.attr('id'),
+          text = $item.find('h2.section-title').text(),
+          $listItem = $('<li></li>'),
+          $anchor = $('<a class="section-link" href="#' + url + '">' + text + '</a>');
+
+      $anchor.on('click', clickHandler);
+      $listItem.append($anchor);
+      $menuList.append($listItem);
+
+    };
+
+    var scroll = function() {
+      if ($(window).scrollTop() >= offset) {
+        $menu.removeClass('center');
+        $menu.addClass('navbar-fixed-top');
+        $('body').addClass('fixed-navbar');
+      } else {
+        $menu.addClass('center');
+        $menu.removeClass('navbar-fixed-top');
+        $('body').removeClass('fixed-navbar');
+      }
+    };
+
+    var onResize = function() {
+      offset = $firstSection.offset().top - $menu.height(); // Reduce by 50px to account for university header.
+    };
+
+    var $sections = $(selector),
+        $menuList = $sectionsMenu.find('ul.nav'),
+        $menu = $('#sections-navbar'),
+        $firstSection = $sections.first(),
+        offset = $firstSection.offset().top;
+
+    $.each($sections, addToMenu);
+    $(document).on('scroll', scroll);
+    $('body').scrollspy({target: '#sections-menu', offset: 60});
+    $(window).on('resize', onResize);
+    scroll();
+  }
+};
+
 if (typeof jQuery != 'undefined'){
   jQuery(document).ready(function($) {
     Webcom.slideshow($);
@@ -1583,6 +1622,8 @@ if (typeof jQuery != 'undefined'){
     announcementKeywordAutocomplete($);
     customChart($);
     mediaTemplateVideo($);
+    academicDegreeSearch($);
+    sectionsMenu($);
 
     //devBootstrap($);
 

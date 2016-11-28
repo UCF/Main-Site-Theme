@@ -1,5 +1,27 @@
 $icon-font-path: '../../static/fonts/bootstrap/';
 $fa-font-path:   '../../static/fonts/font-awesome/';
+$wi-path: '../../static/fonts/weather-icons/';
+
+// Custom variables
+$ucf-header-height: 50px;
+
+$black: #000 !default;
+$white: #fff !default;
+$ucf-gold: #ffc904 !default;
+$ucf-gold-light: #ffeb9b !default;
+$ucf-gold-lighter: #fdf9e8 !default;
+$ucf-gold-dark: #b18e00 !default;
+$ucf-gold-darker: #a68500 !default;
+$ucf-gold-darkest: #786000 !default;
+$ucf-metal-gold: #c90 !default;
+$footer-gray: #3e3e3e !default;
+$footer-gray-light: #d4d4d4 !default;
+
+// Custom variable aliases:
+$ucf-bg-default: $ucf-gold !default;
+$ucf-bg-highlight: $ucf-metal-gold !default;
+$ucf-col-default: $black !default;
+$ucf-col-highlight: $white !default;
 
 // Font overrides
 $font-family-serif: Georgia, serif;

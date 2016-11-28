@@ -18,15 +18,14 @@
   }
 
   @include body-prefix('.ie8') {
-    margin: auto;
     z-index: 1;
   }
 
   ul {
     height: 338px;
     margin-bottom: 0;
-    margin-left: 0;
     overflow: hidden;
+    padding-left: 0;
 
     @media (max-width: $screen-sm-max) {
       height: 260px;

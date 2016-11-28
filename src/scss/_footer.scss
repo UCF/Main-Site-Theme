@@ -21,7 +21,7 @@
   }
 
   li {
-    border-right: 1px solid #262626;
+    border-right: 1px solid $gray-darker;
     font-family: $font-family-sans-serif;
     letter-spacing: .8px;
     line-height: 1;
@@ -44,7 +44,7 @@
   }
 
   a {
-    color: #262626;
+    color: $gray-darker;
     font-size: 10px;
     line-height: 1.35;
   }
@@ -57,7 +57,7 @@
   text-align: center;
 
   a {
-    color: #262626;
+    color: $gray-darker;
   }
 }
 
@@ -66,36 +66,38 @@
   padding: 10px 0 15px;
 }
 
-#social-menu {
-  a[href*="facebook"],
-  a[href*="twitter"],
-  a[href*="flickr"],
-  a[href*="youtube"],
-  a[href*="google"] {
-    @include sprite();
-    height: 32px;
-    width: 35px;
-  }
+.social-menu {
+  margin-bottom: 14px;
+  margin-top: 20px;
+  text-align: center;
+}
 
-  a[href*="facebook"] {
-    background-position: -1px -35px;
-  }
+.social-menu-link {
+  background: $black;
+  border-radius: 50%;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 5px 10px;
+  text-align: center;
+  vertical-align: middle;
+  width: 40px;
 
-  a[href*="twitter"] {
-    background-position: -67px -34px;
-  }
+  &:hover,
+  &:active,
+  &:focus {
+    background: $footer-gray-light;
 
-  a[href*="flickr"] {
-    background-position: -32px -35px;
+    .social-menu-icon {
+      color: $footer-gray;
+    }
   }
+}
 
-  a[href*="youtube"] {
-    background-position: -101px -35px;
-  }
-
-  a[href*="google"] {
-    background-position: -134px -35px;
-  }
+.social-menu-icon {
+  color: $white;
+  font-size: 24px;
+  line-height: inherit;
 }
 
 #footer-logo {

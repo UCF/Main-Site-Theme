@@ -17,6 +17,26 @@ function get_article_image($article){
 	return null;
 }
 
+
+/**
+ * Fetches an external url's contents with a timeout applied to the request.
+ **/
+function fetch_with_timeout( $url ) {
+	$retval = false;
+
+	$args = array(
+		'timeout' => FEED_FETCH_TIMEOUT
+	);
+
+	$response = wp_safe_remote_get( $url, $args );
+	if ( is_array( $response ) ) {
+		$retval = wp_remote_retrieve_body( $response );
+	}
+
+	return $retval;
+}
+
+
 /**
  * Check to see if an external image exists (via curl.)
  * Alternative to getimagesize() that allows us to specify a timeout.
@@ -67,13 +87,7 @@ class FeedManager{
 		$content   = get_site_transient($cache_key);
 
 		if ($content === False){
-			// Set a timeout
-			$opts = array('http' => array(
-									'method'  => 'GET',
-									'timeout' => FEED_FETCH_TIMEOUT,
-			));
-			$context = stream_context_create($opts);
-			$content = file_get_contents($url, false, $context);
+			$content = fetch_with_timeout( $url );
 			if ($content === False || empty($content)){
 				$failed  = True;
 				$content = null;
@@ -174,13 +188,6 @@ class FeedManager{
 function display_events($start=null, $limit=null){?>
 	<?php
 	$options = get_option(THEME_OPTIONS_NAME);
-	$qstring = (bool)strpos($options['events_url'], '?');
-	$url     = $options['events_url'];
-	if (!$qstring){
-		$url .= '?';
-	}else{
-		$url .= '&';
-	}
 	$start	 = ($start) ? $start : 0;
 	// Check for a given limit, then a set Options value, then if none exist, set to 4
 	if ($limit) {
@@ -204,7 +211,7 @@ function display_events($start=null, $limit=null){?>
 					$start 		= new DateTime($item['starts']);
 					$day 		= $start->format('M d');
 					$time 		= $start->format('h:i a');
-					$link 		= $url.'eventdatetime_id='.$item['id']; // TODO: use 'url' after unify-events launches
+					$link 		= $item['url'];
 					$loc_link 	= $item['location_url'];
 					$location	= $item['location'];
 					$title		= $item['title'];
@@ -226,10 +233,73 @@ function display_events($start=null, $limit=null){?>
 				<?php endforeach;?>
 			</tbody>
 		</table>
-	<?php else:?>
-		<p>Events could not be retrieved at this time.  Please try again later.</p>
+	<?php else: ?>
+		<?php echo $options['events_fallback_message']; ?>
 	<?php endif;?>
 <?php
+}
+
+
+function display_events_list_item( $item, $list_item_classes='', $show_description=false ) {
+	$start        = new DateTime( $item['starts'] );
+	$url          = $item['url'];
+	$title        = $item['title'];
+	$description  = $item['description'];
+	$location     = $item['location'];
+
+	ob_start();
+?>
+	<li class="events-list-item vevent <?php echo $list_item_classes; ?>">
+		<a href="<?php echo $url; ?>" class="event-link url">
+			<time class="event-start-datetime dtstart" datetime="<?php echo $start->format( 'c' ); ?>">
+				<span class="event-start-date"><?php echo $start->format( 'F j' ); ?></span>
+				<span class="event-start-year"><?php echo $start->format( 'Y' ); ?></span>
+				<span class="event-start-time"><?php echo $start->format( 'h:i a' ); ?></span>
+			</time>
+			<span class="event-title summary"><?php echo $title; ?></span>
+			<span class="event-location location"><?php echo $location; ?></span>
+		</a>
+
+		<?php if ( $show_description ): ?>
+		<div class="event-description description"><?php echo truncateHtml( $description, 350 ); ?></div>
+		<?php endif; ?>
+	</li>
+<?php
+	return ob_get_clean();
+}
+
+
+function display_events_list( $start=null, $limit=null, $url='', $list_classes='', $list_item_classes='', $show_descriptions=false ) {
+	$options = get_option( THEME_OPTIONS_NAME );
+	$start = $start ? intval( $start ) : 0;
+
+	// Check for a given limit, then a set Options value, then if none exist, set to 4
+	if ( !$limit || $limit < 1 ) {
+		if ( $options['events_max_items'] ) {
+			$limit = $options['events_max_items'];
+		}
+		else {
+			$limit = 4;
+		}
+	}
+
+	$events = get_events( $start, $limit, $url );
+
+	ob_start();
+?>
+	<?php if ( $events && count( $events ) ): ?>
+
+	<ul class="events-list <?php echo $list_classes; ?>">
+		<?php
+		foreach ( $events as $event ) {
+			echo display_events_list_item( $event, $list_item_classes, $show_descriptions );
+		}
+		?>
+	</ul>
+
+	<?php endif; ?>
+<?php
+	return ob_get_clean();
 }
 
 
@@ -279,33 +349,130 @@ function display_news(){?>
 }
 
 
-/* Modified function for main site theme: */
-function get_events($start, $limit){
-	$options = get_option(THEME_OPTIONS_NAME);
-	$qstring = (bool)strpos($options['events_url'], '?');
-	$url     = $options['events_url'];
-	if (!$qstring){
-		$url .= '?';
-	}else{
-		$url .= '&';
+function display_pegasus_issues_list_item( $issue, $list_item_classes='' ) {
+	$issue_url               = $issue->link;
+	$issue_title             = $issue->title->rendered;
+	$cover_story             = $issue->_embedded->issue_cover_story[0];
+	$cover_story_url         = $cover_story->link;
+	$cover_story_title       = $cover_story->title->rendered;
+	$cover_story_subtitle    = $cover_story->story_subtitle;
+	$cover_story_description = $cover_story->story_description;
+	$cover_story_blurb       = null;
+	$thumbnail_id            = $issue->featured_image;
+	$thumbnail               = null;
+	$thumbnail_url           = null;
+
+	if ( $thumbnail_id !== 0 ) {
+		$thumbnail = $issue->_embedded->{"wp:featuredmedia"}[0];
+		$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
 	}
-	$url    .= 'upcoming=upcoming&format=json';
 
-	// Set a timeout
-	$opts = array('http' => array(
-						'method'  => 'GET',
-						'timeout' => FEED_FETCH_TIMEOUT
-	));
-	$context = stream_context_create($opts);
+	if ( $cover_story_description ) {
+		$cover_story_blurb = $cover_story_description;
+	}
+	elseif ( $cover_story_subtitle ) {
+		$cover_story_blurb = $cover_story_subtitle;
+	}
 
-	// Grab the weather feed
-	$raw_events = file_get_contents($url, false, $context);
-	if ($raw_events) {
-		$events = json_decode($raw_events, TRUE);
-		$events = array_slice($events, $start, $limit);
+	ob_start();
+?>
+	<li class="pegasus-issues-list-item <?php echo $list_item_classes; ?>">
+		<?php
+		// Thumbnails should always be present for Issues, but just in case:
+		if ( $thumbnail_url ):
+		?>
+		<a class="pegasus-issue-thumbnail-link" href="<?php echo $issue_url; ?>" target="_blank">
+			<img class="pegasus-issue-thumbnail img-responsive" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>" title="<?php echo $issue_title; ?>">
+		</a>
+		<?php endif; ?>
+
+		<div class="pegasus-issue-details">
+			<a class="pegasus-issue-title" href="<?php echo $issue_url; ?>" target="_blank">
+				<?php echo wptexturize( $issue_title ); ?>
+			</a>
+
+			<span class="pegasus-issue-featured-label">Featured Story</span>
+
+			<a class="pegasus-issue-cover-title" href="<?php echo $cover_story_url; ?>">
+				<?php echo wptexturize( $cover_story_title ); ?>
+			</a>
+
+			<?php if ( $cover_story_blurb ): ?>
+			<div class="pegasus-issue-cover-description">
+				<?php echo wptexturize( strip_tags( $cover_story_blurb, '<b><em><i><u><strong>' ) ); ?>
+			</div>
+			<?php endif; ?>
+
+			<a class="pegasus-issue-read-link" href="<?php echo $issue_url; ?>" target="_blank">
+				Read Now
+			</a>
+		</div>
+	</li>
+<?php
+	return ob_get_clean();
+}
+
+
+function display_pegasus_issues_list( $start=null, $limit=null, $list_classes='', $list_item_classes='' ) {
+	$issues = get_pegasus_issues( $start, $limit );
+
+	if (
+		!$issues
+		|| !is_array( $issues )
+		|| ( is_array( $issues ) && count( $issues ) < 1 )
+	) {
+		return;
+	}
+
+	ob_start();
+?>
+	<ul class="pegasus-issues-list <?php echo $list_classes; ?>">
+		<?php
+		foreach ( $issues as $issue ) {
+			echo display_pegasus_issues_list_item( $issue, $list_item_classes );
+		}
+		?>
+	</ul>
+<?php
+	return ob_get_clean();
+}
+
+
+/* Modified function for main site theme: */
+function get_events( $start=0, $limit=4, $url='' ) {
+	$options = get_option( THEME_OPTIONS_NAME );
+	$url = $url ?: $options['events_url'];
+
+	// Remove any query strings attached to the url provided.
+	$qstring = ( bool )strpos( $url, '?' );
+	if ( $qstring ) {
+		$url_parts = explode( '?', $url );
+		$url = $url_parts[0];
+	}
+
+	// Append trailing end slash to url.
+	if ( substr( $url, -1 ) !== '/' ) {
+		$url .= '/';
+	}
+
+	// Append /upcoming/ to the end of the url, if it's not already present.
+	if ( substr( $url, -9 ) !== 'upcoming/' ) {
+		$url .= 'upcoming/';
+	}
+
+	// Append /feed.json to the end of the url.
+	$url .= 'feed.json';
+
+	// Grab the feed
+	$raw_events = fetch_with_timeout( $url );
+	if ( $raw_events ) {
+		$events = json_decode( $raw_events, TRUE );
+		if ( is_array( $events ) ) {
+			$events = array_slice( $events, $start, $limit );
+		}
 		return $events;
 	}
-	else { return NULL; }
+	else { return null; }
 }
 
 
@@ -325,5 +492,26 @@ function get_sidebar_news($post, $start=null, $limit=null){
 	return $news;
 }
 
+
+function get_pegasus_issues( $start=0, $limit=5 ) {
+	$options = get_option( THEME_OPTIONS_NAME );
+	$pegasus_url = $options['pegasus_url'];
+
+	if ( substr( $pegasus_url, -1 ) !== '/' ) {
+		$pegasus_url .= '/';
+	}
+
+	$api_url = $pegasus_url . 'wp-json/wp/v2/';
+	$issue_url = $api_url . 'issue?_embed&offset='. $start .'&per_page='. $limit;
+
+	$issue_results = fetch_with_timeout( $issue_url );
+	if ( $issue_results ) {
+		$issue_json = json_decode( $issue_results );
+		return $issue_json;
+	}
+	else {
+		return false;
+	}
+}
 
 ?>

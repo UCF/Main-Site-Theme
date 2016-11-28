@@ -1,0 +1,97 @@
+// Styles that are directly tied to the site footer/navigation should go in
+// this file.
+
+.site-footer {
+  @include gotham(3);
+  background: $footer-gray;
+  color: $white;
+  margin-top: 0;
+  padding: 30px 0;
+
+  @media (min-width: $screen-sm-min) {
+    padding: 60px 0;
+  }
+
+  .footer-title {
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    text-align: center;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 22px;
+    }
+  }
+
+  a {
+    color: $white !important;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white !important;
+      text-decoration: none;
+    }
+  }
+
+  .social-menu {
+    margin-top: 0;
+  }
+
+  .social-menu-link {
+    background: $white;
+    height: 32px;
+    line-height: 32px;
+    width: 32px;
+  }
+
+  .social-menu-icon {
+    color: $footer-gray;
+
+    &.fa-facebook,
+    &.fa-twitter,
+    &.fa-google-plus,
+    &.fa-linkedin {
+      font-size: 20px;
+    }
+  }
+
+  #footer-menu {
+    margin-bottom: 0;
+
+    li {
+      border-right: 1px solid $white !important;
+      padding-right: 10px;
+
+      &:last-child {
+        border-right: none !important;
+      }
+
+      a {
+        @include gotham(3);
+        font-size: 10px;
+        letter-spacing: 0;
+
+        @media (min-width: $screen-sm-min) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.main-site-footer {
+  background: $footer-gray;
+  padding: 48px 0;
+  text-align: center;
+
+  .main-site-title {
+    color: $white;
+    font-family: $font-family-sans-serif;
+    font-size: 19px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+}
