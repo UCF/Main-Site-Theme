@@ -1,8 +1,8 @@
 @import '../media-template/media-template-base';
 
-$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/athletics-background.jpg';
+$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/ucf-arena.jpg';
 $downtown-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/downtown_orlando.jpg';
-$florida-icon-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/tmp-fl-pin.png';
+$florida-icon-url: '../img/florida-ucf-pin.png';
 $ignite-banner-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/ignite-tmp.png';
 $light-gray: #d8d8d8;
 $font-condensed: "Knockout 49 A", "Knockout 49 B";
@@ -53,6 +53,21 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
 }
 
 #contentcol {
+
+  .btn.btn-gold {
+    @include gotham(9);
+    background: $ucf-gold;
+    color: black;
+    font-size: 14px;
+    padding: 18px 32px;
+    text-transform: uppercase;
+    border-bottom: 0;
+
+    &:hover {
+      background-color: darken($ucf-gold, 10%);
+      border-bottom: 0;
+    }
+  }
 
   .heading-condensed {
     font-family: $font-condensed;
@@ -181,6 +196,129 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     padding-top: 175px;
   }
 
+  .callout.callout-news {
+    h2 {
+      @include gotham(9);
+      font-size: 35px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 9px;
+    }
+
+    h3.heading-underline {
+      @include gotham(9);
+      font-size: 15px;
+      margin-top: 50px;
+    }
+
+    .story-link {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .read-more {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+
+      a {
+        color: $black;
+        font-size: 14px;
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .muted {
+        color: #ccc;
+        text-transform: uppercase;
+      }
+
+      .fa {
+        color: $ucf-gold;
+      }
+    }
+
+    .story-details {
+      background: $white;
+      background-repeat: no-repeat;
+      background-size: 40px;
+      color: $black;
+      font-size: 14px;
+      overflow: auto;
+      padding: 10px 0;
+      transition: background-color 0.2s;
+      transition: background-image 0.2s;
+      transition: background-position 0.2s;
+      width: 100%;
+
+      p {
+        margin: 0;
+      }
+
+      h3 {
+        color: $black;
+        margin: 0 0 6px 0;
+        font-size: 20px;
+      }
+
+      &:hover {
+        background-color: #f6f6f6;
+      }
+
+      .story-category {
+        background: $ucf-gold;
+        color: #000000;
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+        padding: 2px 15px;
+        text-transform: uppercase;
+      }
+
+      .story-featured-heading {
+        @include gotham(4);
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #ccc;
+      }
+
+      .story-thumbnail {
+        width: 150px;
+        float: left;
+        padding-right: 15px;
+      }
+    }
+
+    .story-featured-title {
+      @include archer(6);
+      font-size: 23px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .story-featured-heading {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+      color: #656565;
+    }
+
+    .story-featured-description,
+    .story-featured-description p {
+      font-size: 14px;
+    }
+
+  }
+
   .callout.callout-social {
     h2 {
       // display: inline-block;
@@ -246,13 +384,13 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
   .callout.callout-stats {
     position: relative;
-    overflow: hidden;
     background-size: cover;
     margin-top: -5px;
+    padding: 60px 0;
 
     .callout-stats-cover {
       background: $ucf-gold;
-      height: 500px;
+      height: 100%;
       left: 0;
       opacity: 0.9;
       position: absolute;
@@ -462,10 +600,7 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
   }
 }
 
-
-
-
-.typeahead-search-box {
+#contentcol .degree-search-box {
   @include gotham(6);
 
   background-color: transparent;
@@ -511,6 +646,29 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
     .tt-cursor {
       background: #e4c550;
+    }
+  }
+
+  .tt-suggestion {
+    background-color: rgba(255, 225, 113, 1);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: normal;
+    padding: 5px 10px;
+    width: 500px;
+
+    hr {
+      border: 1px dashed #6f6f6f;
+      margin:0;
+    }
+
+    a,
+    a:link {
+      color: $black;
+    }
+
+    &:hover {
+      background-color: darken(rgb(255, 225, 113), 10%);
     }
   }
 
@@ -580,22 +738,4 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
   right: 38px;
   top: 41px;
   z-index: 2;
-}
-
-.tt-suggestion {
-  background-color: rgba(255, 225, 113, 0.9);
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: normal;
-  padding: 5px 10px;
-  width: 500px;
-
-  hr {
-    border: 1px dashed #6f6f6f;
-    margin:0;
-  }
-
-  &:hover {
-    background-color: rgba(255, 225, 113, 0.8);
-  }
 }
