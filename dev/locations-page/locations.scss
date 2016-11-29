@@ -35,7 +35,7 @@ $verdana: Verdana, Geneva, sans-serif;
 
 .page-media {
   margin-bottom: -50px;
-  padding-bottom: 90px;
+  padding-bottom: 70px;
   top: -70px;
 }
 
@@ -64,6 +64,11 @@ $verdana: Verdana, Geneva, sans-serif;
       color: #3c5f7d;
       text-decoration: none;
     }
+  }
+
+  .section-more {
+    font-family: $gotham;
+    font-size: 13px;
   }
 
   .section-header {
