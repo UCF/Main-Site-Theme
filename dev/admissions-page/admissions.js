@@ -28,7 +28,13 @@ var enableScrollSpy = function($) {
     var $target = $(this.hash);
     $target = $target.length ? $target : $('[name=' + this.hash.slice() + ']');
 
-    var scrollTo = $target.offset().top - 50;
+    var scrollTo = $target.offset().top;
+
+    if ($('#sections-menu').length > 0) {
+      scrollTo = scrollTo - $('#sections-menu').height() + 20;
+    }
+
+    var scrollTo = scrollTo - 150;
 
     if ($target.length) {
       $('html, body').animate({
