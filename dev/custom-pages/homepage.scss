@@ -1,19 +1,20 @@
 @import '../media-template/media-template-base';
 
-$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/ucf-arena.jpg';
+$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/events-athletics.jpg';
 $downtown-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/downtown_orlando.jpg';
 $florida-icon-url: '../img/florida-ucf-pin.png';
 $ignite-banner-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/ignite-tmp.png';
-$light-gray: #d8d8d8;
 $font-condensed: "Knockout 49 A", "Knockout 49 B";
+
+$color-facebook: #3a5795;
+$color-twitter: #00a5e5;
+$color-youtube: #cd201f;
+$color-vine: #00b488;
+$color-linkedin: #0077b5;
 
 .container {
   max-width: 1170px;
-  width: 1170px;
-}
-
-.page-media-container {
-  padding-top: 190px;
+  // width: 1170px;x
 }
 
 .page-media-header {
@@ -24,14 +25,29 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
   margin-top: -30px;
   padding-top: 35px;
 
-  @media (max-width: $screen-xs-max) {
+  @media (max-width: $screen-sm-max) {
     height: 500px;
+    background-position: 0 30px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    height: 360px;
     background-position: 0 30px;
   }
 
   .header-title {
     font-size: 66px;
     margin-top: 0;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 45px;
+      background: red;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 33px;
+      background: orange;
+    }
   }
 }
 
@@ -100,10 +116,26 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     margin-top: -21px;
     padding: 80px 0;
 
+    @media (max-width: $screen-sm-max) {
+      padding: 30px 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      padding: 30px 0;
+    }
+
     h2 {
       color: $ucf-gold;
       font-size: 45px;
       padding-bottom: 20px;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 35px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 25px;
+      }
     }
 
     ol li a {
@@ -122,10 +154,28 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       font-size: 12px;
       text-transform: uppercase;
       display: inline;
+
+      @media (max-width: $screen-xs-max) {
+        vertical-align: top;
+      }
+    }
+
+    h3.inline {
+      @media (max-width: $screen-xs-max) {
+        display: block;
+      }
     }
 
     .list-inline {
       display: inline-block;
+    }
+
+    .list-chevrons li {
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px;
+        padding: 5px 5px;
+        display: block;
+      }
     }
 
     .list-chevrons li::before {
@@ -146,7 +196,7 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
   .callout.callout-downtown {
     @media (min-width: $screen-md-min) {
-      background-image: url('#{$downtown-bg-url}');
+      background-image: url($downtown-bg-url);
       background-position: 100% 0;
       background-repeat: no-repeat;
       background-size: cover;
@@ -182,6 +232,14 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       color: $white;
       font-size: 75px;
       margin-bottom: 40px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 50px;
+      }
+
+      @media (min-width: $screen-xs-min) {
+        font-size: 35px;
+      }
     }
   }
 
@@ -252,7 +310,7 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       color: $black;
       font-size: 14px;
       overflow: auto;
-      padding: 10px 0;
+      padding: 16px 0;
       transition: background-color 0.2s;
       transition: background-image 0.2s;
       transition: background-position 0.2s;
@@ -298,6 +356,11 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       }
     }
 
+    .story-featured-issue {
+      @include gotham(9);
+      font-size: 30px;
+    }
+
     .story-featured-title {
       @include archer(6);
       font-size: 23px;
@@ -321,65 +384,8 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
   .callout.callout-social {
     h2 {
-      // display: inline-block;
       font-size: 25px;
     }
-    // .social-menu {
-    //   display: inline-block;
-    //   margin-left: 8px;
-
-    //   .social-menu-link {
-    //     height: 25px;
-    //     line-height: 25px;
-    //     width: 25px;
-    //     margin-left: 3px;
-    //     margin-right: 3px;
-
-    //     .social-menu-icon {
-    //       font-size: 15px;
-    //     }
-    //   }
-
-    //   .social-menu-link-facebook {
-    //     background-color: #3b5998;
-
-    //     &:hover {
-    //       background: #d4d4d4;
-    //     }
-    //   }
-
-    //   .social-menu-link-twitter {
-    //     background-color: #55acee;
-
-    //     &:hover {
-    //       background: #d4d4d4;
-    //     }
-    //   }
-
-    //   .social-menu-link-flickr {
-    //     background-color: #ff0084;
-
-    //     &:hover {
-    //       background: #d4d4d4;
-    //     }
-    //   }
-
-    //   .social-menu-link-youtube {
-    //     background-color: #bb0000;
-
-    //     &:hover {
-    //       background: #d4d4d4;
-    //     }
-    //   }
-
-    //   .social-menu-link-googleplus {
-    //     background-color: #dd4b39;
-
-    //     &:hover {
-    //       background: #d4d4d4;
-    //     }
-    //   }
-    // }
   }
 
   .callout.callout-stats {
@@ -387,6 +393,14 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     background-size: cover;
     margin-top: -5px;
     padding: 60px 0;
+
+    @media (max-width: $screen-sm-max) {
+      padding: 30px 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      padding: 30px 0;
+    }
 
     .callout-stats-cover {
       background: $ucf-gold;
@@ -409,6 +423,11 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
       line-height: 1.2;
       padding: 20px 10px;
 
+      @media (max-width: $screen-xs-max) {
+        border-right: 0 !important;
+        border-left: 0 !important;
+      }
+
       span {
         font-size: 50px;
         font-family: $font-condensed;
@@ -423,10 +442,11 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     }
     .stats-border-bottom-left {
       border-width: 0 1px 0 0;
+
+      @media (max-width: $screen-xs-max) {
+        border-bottom-width: 1px !important;
+      }
     }
-    // .stats-border-bottom-right {
-    //   border-width: ;
-    // }
   }
 
   .callout.callout-dark {
@@ -437,7 +457,7 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     }
 
     a:hover {
-      color: $light-gray;
+      color: #d8d8d8;
       text-decoration: underline;
     }
 
@@ -453,6 +473,11 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
         border-width: 0 1px 0 0;
         padding-right: 50px;
       }
+    }
+
+    .bordered-content.bordered-left {
+      padding-left:0;
+      border-width: 0;
     }
 
     ol {
@@ -497,6 +522,14 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     h1,
     .h1 {
       font-size: 75px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 50px;
+      }
+
+      @media (min-width: $screen-xs-min) {
+        font-size: 35px;
+      }
     }
 
     .list-chevrons,
@@ -600,6 +633,48 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
   }
 }
 
+#contentcol .dcwss.dc-wall {
+  .stream {
+    li {
+      background: #393939;
+
+      .inner {
+        color: #FFFFFF;
+      }
+
+      .section-thumb {
+        float: none;
+        margin: 0 auto;
+
+        img {
+          margin: 7px auto;
+          max-width: 100%;
+        }
+      }
+
+      .section-intro {
+        padding: 20px 15px 20px 35px;
+
+        a {
+          border-bottom: 0 !important;
+
+          &:hover {
+            border-bottom: 0 !important;
+          }
+        }
+      }
+
+      .socicon {
+        bottom: 17px;
+      }
+    }
+  }
+
+  a.link-user {
+    border-bottom: 0 !important;
+  }
+}
+
 #contentcol .degree-search-box {
   @include gotham(6);
 
@@ -622,6 +697,10 @@ $font-condensed: "Knockout 49 A", "Knockout 49 B";
     height: 100px;
     transition-delay: 0s;
     transition: height 0.2s;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    height: 60px;
   }
 
   .twitter-typeahead {

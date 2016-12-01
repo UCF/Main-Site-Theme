@@ -2665,9 +2665,6 @@ add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 function display_weather() {
 	$weather = get_weather_data();
 	$weather["icon"] = get_weather_icon( $weather["condition"] );
-	echo "$ weather->condition " . $weather["condition"] . "\n";
-	echo "$ icon " . $icon . "\n";
-	print_r($weather);
 	ob_start();
 ?>
 	<?php if ( $weather ) : ?>
