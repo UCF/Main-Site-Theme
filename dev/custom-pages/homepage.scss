@@ -36,17 +36,27 @@ $color-linkedin: #0077b5;
   }
 
   .header-title {
-    font-size: 66px;
-    margin-top: 0;
+    font-size: 80px;
+    margin: 0;
+    padding: 0 15px;
 
     @media (max-width: $screen-sm-max) {
-      font-size: 45px;
-      background: red;
+      display: block;
+      font-family: $font-condensed;
+      line-height: .8;
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 80px;
     }
 
+    @media (max-width: 380px) {
+      font-size: 60px;
+    }
+  }
+
+  .header-subtitle {
     @media (max-width: $screen-xs-max) {
-      font-size: 33px;
-      background: orange;
+      font-size: 18px;
     }
   }
 }
@@ -69,6 +79,10 @@ $color-linkedin: #0077b5;
 }
 
 #contentcol {
+
+  .callout {
+    padding: 15px 0;
+  }
 
   .btn.btn-gold {
     @include gotham(9);
@@ -103,18 +117,67 @@ $color-linkedin: #0077b5;
     padding-top: 0;
     padding-bottom: 0;
 
+    @media (max-width: $screen-sm-max) {
+      display: none;
+    }
+
     img {
       width: 100%;
     }
 
     .padded-top {
-       padding-top: 175px;
+        padding-top: 175px;
     }
   }
 
   .callout.callout-intro {
     margin-top: -21px;
     padding: 80px 0;
+    position: relative;
+    background-color: $black;
+    background-size: cover;
+
+    .callout-intro-cover {
+      background: $black;
+      height: 100%;
+      left: 0;
+      opacity: 0.9;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .top-majors-heading {
+      background-color: $white;
+      color: $black;
+      display: inline-block;
+      font-size: 15px;
+      padding: .4em 1em;
+      position: relative;
+      text-transform: uppercase;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 15px 20px;
+        width: 100%;
+
+        &:after {
+          content: "\F13A";
+          font-family: FontAwesome;
+          right: 15px;
+          position: absolute;
+          top: 9px;
+          font-size: 23px;
+        }
+      }
+
+    }
+
+    .top-majors-content {
+      @media (max-width: $screen-sm-max) {
+        height: 0;
+        overflow: hidden;
+      }
+    }
 
     @media (max-width: $screen-sm-max) {
       padding: 30px 0;
@@ -124,18 +187,25 @@ $color-linkedin: #0077b5;
       padding: 30px 0;
     }
 
+    p.description {
+      @include archer(1);
+      font-size: 20px;
+    }
+
     h2 {
       color: $ucf-gold;
       font-size: 45px;
       padding-bottom: 20px;
 
       @media (max-width: $screen-sm-max) {
-        font-size: 35px;
+        font-size: 40px;
+        font-weight: 900;
+        padding-bottom: 5px;
       }
 
-      @media (max-width: $screen-xs-max) {
-        font-size: 25px;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   font-size: 25px;
+      // }
     }
 
     ol li a {
@@ -161,8 +231,13 @@ $color-linkedin: #0077b5;
     }
 
     h3.inline {
+
       @media (max-width: $screen-xs-max) {
         display: block;
+        font-size: 12px;
+        font-style: italic;
+        font-weight: 100;
+        text-transform: lowercase;
       }
     }
 
@@ -171,10 +246,16 @@ $color-linkedin: #0077b5;
     }
 
     .list-chevrons li {
+      a,
+      a:link,
+      a:hover {
+        font-weight: 100;
+      }
       @media (max-width: $screen-xs-max) {
-        font-size: 16px;
+        font-size: 18px;
         padding: 5px 5px;
         display: block;
+        margin-bottom: 0;
       }
     }
 
@@ -183,9 +264,6 @@ $color-linkedin: #0077b5;
       margin-left: -11px;
     }
 
-    .highlight {
-      font-size: 15px;
-    }
   }
 
   .callout.callout-intro {
@@ -195,14 +273,43 @@ $color-linkedin: #0077b5;
   }
 
   .callout.callout-downtown {
-    @media (min-width: $screen-md-min) {
-      background-image: url($downtown-bg-url);
-      background-position: 100% 0;
-      background-repeat: no-repeat;
-      background-size: cover;
-      min-height: 800px;
-      padding: 0;
-      font-size: 20px;
+    background-image: url($downtown-bg-url);
+    background-position: 100% 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 800px;
+    padding: 0;
+    font-size: 20px;
+
+    @media (max-width: $screen-xs-max) {
+      background-size: 266%;
+      min-height: 740px;
+      font-size: 14px;
+      background-position: 76% 60%;
+    }
+
+    h1,
+    .h1 {
+      color: $white;
+      font-size: 75px;
+      margin-bottom: 40px;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 60px;
+        line-height: 1;
+      }
+    }
+
+    h2 {
+      @media (max-width: $screen-sm-max) {
+        font-size: 60px;
+      }
+    }
+
+    .lead {
+      @media (max-width: $screen-xs-max) {
+          font-size: 16px;
+      }
     }
 
     .learn-more-box {
@@ -221,24 +328,17 @@ $color-linkedin: #0077b5;
       transition: all 0.3s;
       width: 100%;
 
+      @media (max-width: $screen-xs-max) {
+        background-size: 93px;
+        margin-bottom: 30px;
+        margin-top: -15px;
+        font-size: 18px;
+        min-height: 120px;
+      }
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);
         text-decoration: none;
-      }
-    }
-
-    h1,
-    .h1 {
-      color: $white;
-      font-size: 75px;
-      margin-bottom: 40px;
-
-      @media (min-width: $screen-sm-min) {
-        font-size: 50px;
-      }
-
-      @media (min-width: $screen-xs-min) {
-        font-size: 35px;
       }
     }
   }
@@ -260,12 +360,25 @@ $color-linkedin: #0077b5;
       font-size: 35px;
       border-bottom: 1px solid #ccc;
       padding-bottom: 9px;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        margin-bottom: 10px;
+      }
     }
 
     h3.heading-underline {
       @include gotham(9);
       font-size: 15px;
       margin-top: 50px;
+
+      @media (max-width: $screen-sm-max) {
+        margin-top: 20px;
+      }
     }
 
     .story-link {
@@ -283,6 +396,11 @@ $color-linkedin: #0077b5;
       text-transform: uppercase;
       font-weight: 600;
       font-size: 14px;
+
+      @media (max-width: $screen-sm-max) {
+        position: relative;
+        top: auto;
+      }
 
       a {
         color: $black;
@@ -384,7 +502,14 @@ $color-linkedin: #0077b5;
 
   .callout.callout-social {
     h2 {
-      font-size: 25px;
+      @include gotham(9);
+      font-size: 35px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 9px;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 40px;
+      }
     }
   }
 
@@ -393,6 +518,7 @@ $color-linkedin: #0077b5;
     background-size: cover;
     margin-top: -5px;
     padding: 60px 0;
+    background-color: $ucf-gold;
 
     @media (max-width: $screen-sm-max) {
       padding: 30px 0;
@@ -423,10 +549,10 @@ $color-linkedin: #0077b5;
       line-height: 1.2;
       padding: 20px 10px;
 
-      @media (max-width: $screen-xs-max) {
-        border-right: 0 !important;
-        border-left: 0 !important;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   border-right: 0 !important;
+      //   border-left: 0 !important;
+      // }
 
       span {
         font-size: 50px;
@@ -443,9 +569,9 @@ $color-linkedin: #0077b5;
     .stats-border-bottom-left {
       border-width: 0 1px 0 0;
 
-      @media (max-width: $screen-xs-max) {
-        border-bottom-width: 1px !important;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   border-bottom-width: 1px !important;
+      // }
     }
   }
 
@@ -491,19 +617,12 @@ $color-linkedin: #0077b5;
   }
 
   .highlight {
+    font-size: 15px;
+    background-color: $ucf-gold;
+    color: $black;
     display: inline-block;
     padding: .4em 1em;
     text-transform: uppercase;
-  }
-
-  .highlight-white {
-    background-color: $white;
-    color: $black;
-  }
-
-  .highlight-gold {
-    background-color: $ucf-gold;
-    color: $black;
   }
 
   .callout-events {
@@ -523,13 +642,14 @@ $color-linkedin: #0077b5;
     .h1 {
       font-size: 75px;
 
-      @media (min-width: $screen-sm-min) {
-        font-size: 50px;
+      @media (max-width: $screen-sm-max) {
+        font-size: 60px;
+        line-height: 1;
       }
 
-      @media (min-width: $screen-xs-min) {
-        font-size: 35px;
-      }
+      // @media (max-width: $screen-xs-max) {
+      //   font-size: 35px;
+      // }
     }
 
     .list-chevrons,
@@ -686,7 +806,7 @@ $color-linkedin: #0077b5;
   height: 59px;
   margin-bottom: 20px;
   padding: 0;
-  transition: all 1s;
+  // transition: all 1s;
 
   .title {
     font-size: 22px;
