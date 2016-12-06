@@ -137,6 +137,14 @@ $color-linkedin: #0077b5;
     background-color: $black;
     background-size: cover;
 
+    h2 {
+      margin-top: 2px;
+    }
+
+    h3 {
+      margin-top: 10px;
+    }
+
     .callout-intro-cover {
       background: $black;
       height: 100%;
@@ -160,7 +168,7 @@ $color-linkedin: #0077b5;
         padding: 15px 20px;
         width: 100%;
 
-        &:after {
+        &::after {
           content: "\F13A";
           font-family: FontAwesome;
           right: 15px;
@@ -193,13 +201,13 @@ $color-linkedin: #0077b5;
     }
 
     h2 {
+      @include gotham(9);
       color: $ucf-gold;
       font-size: 45px;
       padding-bottom: 20px;
 
       @media (max-width: $screen-sm-max) {
         font-size: 40px;
-        font-weight: 900;
         padding-bottom: 5px;
       }
     }
@@ -598,8 +606,8 @@ $color-linkedin: #0077b5;
     }
 
     .bordered-content.bordered-left {
-      padding-left:0;
-      border-width: 0;
+      padding-left: 40px;
+      // border-width: 0;
     }
 
     ol {
@@ -632,6 +640,8 @@ $color-linkedin: #0077b5;
 
     @media (min-width: $screen-sm-min) {
       background-size: 50%;
+      background-size: 90%;
+      background-position: 320% -160%;
     }
 
     h1,
@@ -799,10 +809,11 @@ $color-linkedin: #0077b5;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
-  height: 59px;
-  margin-bottom: 20px;
   padding: 0;
-  // transition: all 1s;
+  position: relative;
+  margin-bottom: 140px;
+  height: 90px;
+  margin: 0;
 
   .title {
     font-size: 22px;
@@ -877,11 +888,12 @@ $color-linkedin: #0077b5;
     font-size: 17px;
     letter-spacing: .5px;
     outline: 0;
-    padding: 13px 54px 13px 25px;
+    // padding: 13px 54px 13px 25px;
+    padding: 13px 10px 13px 25px;
+    border-right: 55px $ucf-gold solid;
     position: absolute;
     transition: all 0.3s;
     width: 90%;
-
     z-index: 1;
 
     &::-webkit-input-placeholder {
@@ -930,7 +942,7 @@ $color-linkedin: #0077b5;
 .search-icon {
   font-size: 33px;
   position: absolute;
-  right: 38px;
-  top: 41px;
+  right: 68px;
+  top: 15px;
   z-index: 2;
 }
