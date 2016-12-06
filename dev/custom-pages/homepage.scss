@@ -36,9 +36,9 @@ $color-linkedin: #0077b5;
   }
 
   .header-title {
-    font-size: 80px;
+    font-size: 70px;
     margin: 0;
-    padding: 0 15px;
+    padding: 2px 15px 12px 15px;
 
     @media (max-width: $screen-sm-max) {
       display: block;
@@ -202,10 +202,6 @@ $color-linkedin: #0077b5;
         font-weight: 900;
         padding-bottom: 5px;
       }
-
-      // @media (max-width: $screen-xs-max) {
-      //   font-size: 25px;
-      // }
     }
 
     ol li a {
