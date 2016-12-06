@@ -20,6 +20,13 @@ $color-youtube: #cd201f;
 $color-vine: #00b488;
 $color-linkedin: #0077b5;
 
+#contentcol a {
+  border-bottom: none !important;
+
+  &:hover {
+    border-bottom: none !important;
+  }
+}
 
 #header-menu {
   li:not(:last-child) a,
@@ -261,6 +268,17 @@ $color-linkedin: #0077b5;
 
           &:hover {
             border-bottom: 0 !important;
+          }
+        }
+      }
+
+      .section-text {
+        a {
+          color: #fff !important;
+
+          &:hover {
+            border-bottom: none !important;
+            text-decoration: underline !important;
           }
         }
       }
