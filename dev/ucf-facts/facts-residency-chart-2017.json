@@ -1,0 +1,14 @@
+[
+    {
+        "value": 92,
+        "color": "#ffc904",
+        "highlight": "#ffdd18",
+        "label": "59,069 - In-State"
+    },
+    {
+        "value": 8,
+        "color": "#000",
+        "highlight": "#999",
+        "label": "5,249 - Out-of-State"
+    }
+]
