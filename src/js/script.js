@@ -1524,6 +1524,29 @@ var homePageMajorsList = function($) {
   });
 };
 
+//https://codepen.io/hi-im-si/pen/uhxFn
+var countUp = function($) {
+  $('.count-up').each(function() {
+    var $this = $(this),
+        countTo = $this.attr('data-num');
+
+
+    $({ countNum: 0}).animate({
+      countNum: countTo
+    },
+    {
+      duration: 4000,
+      easing:'linear',
+      step: function() {
+        $this.text(Math.floor(this.countNum));
+      },
+      complete: function() {
+        $this.text(this.countNum);
+      }
+    });
+  });
+};
+
 var sectionsMenu = function($) {
   var $sectionsMenu = $('#sections-menu');
   if ( $sectionsMenu.length ) {

@@ -794,12 +794,7 @@ $color-linkedin: #0077b5;
       line-height: 1.2;
       padding: 20px 10px;
 
-      // @media (max-width: $screen-xs-max) {
-      //   border-right: 0 !important;
-      //   border-left: 0 !important;
-      // }
-
-      span {
+      .num {
         font-size: 50px;
         font-family: $font-condensed;
         display: block;

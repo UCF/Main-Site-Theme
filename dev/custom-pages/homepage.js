@@ -1,12 +1,35 @@
-var map;
+var map,
+  offset,
+  $scrollSection,
+  scrollStop;
 
 var init = function() {
+  $scrollSection = $('#stats-section');
+  scrollStop = false;
 
   if ($.isFunction($.matchHeight)) {
     initializeMatchHeight();
   } else {
     lazyLoadMatchHeight();
   }
+
+  $('.count-up').text('0');
+  $(document).on('scroll', scroll);
+  $(window).on('resize', onResize);
+  scroll();
+  onResize();
+};
+
+var scroll = function() {
+  var scrollTop = $(window).scrollTop();
+  if ((scrollTop >= offset) && (!scrollStop)) {
+    countUp($);
+    scrollStop = true;
+  }
+};
+
+var onResize = function() {
+  offset = $scrollSection.offset().top - $(window).height();
 };
 
 var lazyLoadMatchHeight = function() {
