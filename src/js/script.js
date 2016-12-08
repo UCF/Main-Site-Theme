@@ -1550,10 +1550,15 @@ var sectionsMenu = function($) {
     var addToMenu = function($i, $section) {
       var $item  = $( $section ),
           url = $item.attr('id'),
-          text = $item.find('h2.section-title').text(),
-          $listItem = $('<li></li>'),
+          text;
+      if ($item.data('section-link-title') !== "undefined") {
+        text = $item.data('section-link-title');
+      }
+      else {
+        text = $item.find('h2.section-title').text();
+      }
+      var $listItem = $('<li></li>'),
           $anchor = $('<a class="section-link" href="#' + url + '">' + text + '</a>');
-
       $anchor.on('click', clickHandler);
       $listItem.append($anchor);
       $menuList.append($listItem);

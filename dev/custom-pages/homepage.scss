@@ -1,4 +1,5 @@
 @import '../media-template/media-template-base';
+@import '../media-template/media-template-base';
 
 $events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/events-athletics.jpg';
 $downtown-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
@@ -11,6 +12,10 @@ $color-twitter: #00a5e5;
 $color-youtube: #cd201f;
 $color-vine: #00b488;
 $color-linkedin: #0077b5;
+
+.page-template-template-media-feature #header-nav-wrap a {
+  color: $white;
+}
 
 .container {
   max-width: 1170px;
@@ -81,7 +86,87 @@ $color-linkedin: #0077b5;
   }
 }
 
+#sections-menu .navbar-nav {
+  z-index: 10;
+  margin-bottom: 0;
+
+  li {
+    margin-bottom: 0;
+
+    a {
+      font-weight: 700;
+    }
+  }
+}
+
 #contentcol {
+
+  .read-more {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+
+    @media (max-width: $screen-sm-max) {
+      position: relative;
+      top: auto;
+    }
+
+    a {
+      color: $black;
+      font-size: 14px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .muted {
+      color: #ccc;
+      text-transform: uppercase;
+    }
+
+    .fa {
+      color: $ucf-gold;
+    }
+  }
+
+  .home-top-nav {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index:5 ;
+    font-size: 18px;
+    padding-left: 15px;
+
+    ul {
+      list-style-type: none;
+
+      li {
+        margin-left: 1.5em;
+        a,
+        a:link,
+        a:hover {
+          color: #fff;
+        }
+      }
+      li::before {
+          content: "\F13A";
+          display: inline-block;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          // color: rgb(255, 201, 4);
+          color: #fff;
+          margin-left: -1.3em;
+          width: 1.5em;
+          font: 1em/1 FontAwesome;
+      }
+    }
+
+  }
 
   .callout {
     padding: 15px 0;
@@ -500,38 +585,6 @@ $color-linkedin: #0077b5;
       }
     }
 
-    .read-more {
-      position: absolute;
-      top: 50px;
-      right: 0;
-      text-transform: uppercase;
-      font-weight: 600;
-      font-size: 14px;
-
-      @media (max-width: $screen-sm-max) {
-        position: relative;
-        top: auto;
-      }
-
-      a {
-        color: $black;
-        font-size: 14px;
-
-        &:hover {
-          text-decoration: none;
-        }
-      }
-
-      .muted {
-        color: #ccc;
-        text-transform: uppercase;
-      }
-
-      .fa {
-        color: $ucf-gold;
-      }
-    }
-
     .story-details {
       background: $white;
       background-repeat: no-repeat;
@@ -591,7 +644,6 @@ $color-linkedin: #0077b5;
         @media (max-width: $screen-sm-max) {
           width: 90px;
         }
-
       }
     }
 
@@ -622,6 +674,10 @@ $color-linkedin: #0077b5;
     .magazine-cover-container {
       max-width: 90%;
       margin: 0 auto;
+
+      img {
+        margin: 0 auto;
+      }
     }
 
   }
@@ -642,6 +698,64 @@ $color-linkedin: #0077b5;
     #twitter-widget-0 {
       height: 500px !important;
     }
+
+    .social-menu {
+      display: inline-block;
+      margin-left: 8px;
+
+      .social-menu-link {
+        height: 25px;
+        line-height: 25px;
+        width: 25px;
+        margin-left: 3px;
+        margin-right: 3px;
+
+        .social-menu-icon {
+          font-size: 15px;
+        }
+      }
+
+      .social-menu-link-facebook {
+        background-color: #3b5998;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-twitter {
+        background-color: #55acee;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-flickr {
+        background-color: #ff0084;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-youtube {
+        background-color: #bb0000;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+
+      .social-menu-link-googleplus {
+        background-color: #dd4b39;
+
+        &:hover {
+          background: #d4d4d4;
+        }
+      }
+    }
+
   }
 
   .callout.callout-stats {
