@@ -23,7 +23,9 @@ var init = function() {
 var scroll = function() {
   var scrollTop = $(window).scrollTop();
   if ((scrollTop >= offset) && (!scrollStop)) {
-    countUp($);
+    if (countUp && typeof(countUp) == "function") {
+      countUp($);
+    }
     scrollStop = true;
   }
 };

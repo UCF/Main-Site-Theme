@@ -1524,7 +1524,7 @@ var homePageMajorsList = function($) {
   });
 };
 
-//https://codepen.io/hi-im-si/pen/uhxFn
+// https://codepen.io/hi-im-si/pen/uhxFn
 var countUp = function($) {
   $('.count-up').each(function() {
     var $this = $(this),
@@ -1538,13 +1538,21 @@ var countUp = function($) {
       duration: 4000,
       easing:'linear',
       step: function() {
-        $this.text(Math.floor(this.countNum));
+        $this.text(numberWithCommas(Math.floor(this.countNum)));
       },
       complete: function() {
-        $this.text(this.countNum);
+        $this.text(numberWithCommas(this.countNum));
       }
     });
   });
+};
+
+// http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+var numberWithCommas = function(x) {
+  if (x < 1000) {
+    return x;
+  }
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 var sectionsMenu = function($) {

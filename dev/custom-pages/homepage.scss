@@ -1,10 +1,11 @@
 @import '../media-template/media-template-base';
 @import '../media-template/media-template-base';
 
-$events-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/events-athletics.jpg';
 $downtown-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
 $florida-icon-url: '../img/florida-ucf-pin.png';
 $ignite-banner-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/ignite-tmp.png';
+$stats-background-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow.jpg';
+
 $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
 $color-facebook: #3a5795;
@@ -14,8 +15,24 @@ $color-vine: #00b488;
 $color-linkedin: #0077b5;
 
 .page-template-template-media-feature #header-nav-wrap a {
-  color: $white;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 7px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 14.25px !important;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: #000;
+      color: #fc0;
+      text-decoration: none;
+    }
 }
+
 
 .container {
   max-width: 1170px;
@@ -472,7 +489,7 @@ $color-linkedin: #0077b5;
 
   .callout.callout-downtown {
     background-image: url($downtown-bg-url);
-    background-position: 100% 0;
+    background-position: 0% 50%;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: #578bb9;
@@ -481,14 +498,9 @@ $color-linkedin: #0077b5;
     font-size: 20px;
 
     @media (max-width: $screen-sm-max) {
-      background-size: contain;
-      min-height: 600px;
+      background-size: 150%;
       font-size: 14px;
-      background-position: 0% 100%;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      min-height: 800px;
+      background-position: 50% 100%;
     }
 
     .heading-condensed {
@@ -590,13 +602,22 @@ $color-linkedin: #0077b5;
       background-repeat: no-repeat;
       background-size: 40px;
       color: $black;
+      cursor: pointer;
       font-size: 14px;
       overflow: auto;
-      padding: 16px 0;
+      padding: 12px 12px;
+      margin-left: -12px;
       transition: background-color 0.2s;
       transition: background-image 0.2s;
       transition: background-position 0.2s;
       width: 100%;
+
+      a:link,
+      a:visited,
+      a:active,
+      a:hover {
+        color: #000;
+      }
 
       p {
         margin: 0;
@@ -649,7 +670,9 @@ $color-linkedin: #0077b5;
 
     .story-featured-issue {
       @include gotham(9);
-      font-size: 30px;
+      font-size: 25px;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
 
     .story-featured-title {
@@ -684,11 +707,12 @@ $color-linkedin: #0077b5;
 
   .callout.callout-social {
     h2 {
+      display: inline-block;
+
       @include gotham(9);
+      margin-top: 0;
+      margin-bottom: 0;
       font-size: 35px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 9px;
-      margin-top: 25px;
 
       @media (max-width: $screen-sm-max) {
         font-size: 40px;
@@ -699,8 +723,17 @@ $color-linkedin: #0077b5;
       height: 500px !important;
     }
 
+    .heading-container {
+      border-bottom: 1px solid #ccc;
+
+      padding-bottom: 5px;
+      margin-top: 25px;
+      margin-bottom: 30px;
+    }
+
     .social-menu {
       display: inline-block;
+      margin-bottom: 0;
       margin-left: 8px;
 
       .social-menu-link {
@@ -759,18 +792,24 @@ $color-linkedin: #0077b5;
   }
 
   .callout.callout-stats {
-    position: relative;
+    background-color: $ucf-gold;
+    background-image: url($stats-background-url);
+    background-position: 50% 20%;
     background-size: cover;
     margin-top: -5px;
+    min-height: 450px;
     padding: 60px 0;
-    background-color: $ucf-gold;
+    position: relative;
 
     @media (max-width: $screen-sm-max) {
+      background-position: 35% 20%;
+      background-size: 320%;
       padding: 30px 0;
     }
 
     @media (max-width: $screen-xs-max) {
       padding: 30px 0;
+      background-size: cover;
     }
 
     .callout-stats-cover {
@@ -816,11 +855,9 @@ $color-linkedin: #0077b5;
   }
 
   .callout-events {
-
-    background-image: url('#{$events-bg-url}');
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: 110% -40px;
+    background-position: 100% 0;
 
     // @media (max-width: $screen-sm-max) {
     //   background-size: 50%;
