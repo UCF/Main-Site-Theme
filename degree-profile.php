@@ -91,27 +91,28 @@
 				</div>
 				<?php echo display_degree_callout( $post->ID ); ?>
 				<div class="row">
-				<?php if ( $post->degree_pdf ) : ?>
-					<div class="col-md-6 col-sm-6 col-xs-6">
-						<a href="<?php echo $post->degree_pdf; ?>" class="degree-promo-button">
-							<span class="degree-promo-icon fa fa-file-pdf-o"></span> <span class="degree-promo-text">Download Catalog PDF</span>
-						</a>
+					<div class="degree-promo-button-wrapper">
+					<?php if ( $post->degree_pdf ) : ?>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<a href="<?php echo $post->degree_pdf; ?>" class="degree-promo-button">
+								<span class="degree-promo-icon fa fa-file-pdf-o"></span> <span class="degree-promo-text">Download Catalog PDF</span>
+							</a>
+						</div>
+					<?php endif; ?>
+					<?php if ( $post->degree_website ) : ?>
+						<div class="col-md-6 col-sm-6 col-xs-12">
+							<a href="<?php echo $post->degree_website; ?>" class="degree-promo-button">
+								<span class="degree-promo-icon fa fa-external-link-square"></span> <span class="degree-promo-text">Visit Program Website</span>
+							</a>
+						</div>
+					<?php endif; ?>
 					</div>
-				<?php endif; ?>
-				<?php if ( $post->degree_website ) : ?>
-					<div class="col-md-6 col-sm-6 col-xs-6">
-						<a href="<?php echo $post->degree_website; ?>" class="degree-promo-button">
-							<span class="degree-promo-icon fa fa-external-link-square"></span> <span class="degree-promo-text">Visit Program Website</span>
-						</a>
-					</div>
-				<?php endif; ?>
 				</div>
 			</div>
 		</div><!-- end .col-md-8 -->
 		<div class="col-md-4" id="sidebar_right">
 			<div class="hidden-xs call-to-action">
 				<?php if ( $post->degree_hours ): ?>
-					<!-- <h3 class="degree-credit-hours"><?php echo $post->degree_hours; ?> <span class="small">Total Credit Hours</span></h3> -->
 					<h3 class="degree-credit-hours"><span class="hours"><?php echo $post->degree_hours; ?></span> total credit hours</h3>
 				<?php else: ?>
 					<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>

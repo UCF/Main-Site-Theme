@@ -120,22 +120,25 @@
     }
   }
 
+  .degree-promo-button-wrapper {
+    overflow: auto;
+    padding-bottom: 15px;
+  }
+
   .degree-promo-button {
     @extend .btn-group;
-    @media( max-width: $screen-sm-max ) {
+    // @media( max-width: $screen-sm-max ) {
       width: 100%;
-    }
+    // }
 
     .degree-promo-icon,
     .degree-promo-text {
       @extend .btn !optional;
+      margin: 12px 0;
 
-      @media( max-width: $screen-md-max ) {
-        margin: 12px 0;
-      }
-      @media( max-width: $screen-sm-max ) {
+      //@media( max-width: $screen-sm-max ) {
         width: 80%;
-      }
+      //}
     }
 
     .degree-promo-icon {
@@ -144,8 +147,13 @@
       color: #fff;
       font-size: 32px;
       font-family: "FontAwesome";
-      @media( max-width: $screen-sm-max ) {
+
+      //@media( max-width: $screen-sm-max ) {
         width: 20%;
+      //}
+
+      @media( max-width: $screen-xs-max ) {
+        margin: 6px 0;
       }
     }
 
@@ -153,6 +161,10 @@
       border: 1px solid #3266cc !important;
       font-size: 15px;
       padding: 18px 32px;
+
+      @media( max-width: $screen-xs-max ) {
+        margin: 6px 0;
+      }
     }
   }
 }
@@ -280,6 +292,13 @@
     .btn-default {
       // replace the removed border-bottom
       border-bottom: 1px solid $btn-default-border;
+    }
+
+    .call-to-action .btn.btn-ucf-gold {
+      @media( max-width: $screen-xs-max;) {
+        border: 0;
+        padding: 20px 20px;
+      }
     }
 
     .degree-details {
