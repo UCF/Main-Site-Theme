@@ -64,6 +64,12 @@
 					<?php endif; ?>
 				</dl>
 				<div class="visible-xs call-to-action">
+					<?php if ( $post->degree_hours ): ?>
+						<!-- <h3 class="degree-credit-hours">Total Credit Hours: <?php echo $post->degree_hours; ?></h3> -->
+						<h3 class="degree-credit-hours"><span class="hours"><?php echo $post->degree_hours; ?></span> total credit hours</h3>
+					<?php else: ?>
+						<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+					<?php endif; ?>
 					<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
 						<span class="fa fa-pencil-square-o"></span> Apply Now
 					</a>
@@ -86,14 +92,14 @@
 				<?php echo display_degree_callout( $post->ID ); ?>
 				<div class="row">
 				<?php if ( $post->degree_pdf ) : ?>
-					<div class="col-md-6">
+					<div class="col-md-6 col-sm-6 col-xs-6">
 						<a href="<?php echo $post->degree_pdf; ?>" class="degree-promo-button">
 							<span class="degree-promo-icon fa fa-file-pdf-o"></span> <span class="degree-promo-text">Download Catalog PDF</span>
 						</a>
 					</div>
 				<?php endif; ?>
 				<?php if ( $post->degree_website ) : ?>
-					<div class="col-md-6">
+					<div class="col-md-6 col-sm-6 col-xs-6">
 						<a href="<?php echo $post->degree_website; ?>" class="degree-promo-button">
 							<span class="degree-promo-icon fa fa-external-link-square"></span> <span class="degree-promo-text">Visit Program Website</span>
 						</a>
@@ -104,6 +110,12 @@
 		</div><!-- end .col-md-8 -->
 		<div class="col-md-4" id="sidebar_right">
 			<div class="hidden-xs call-to-action">
+				<?php if ( $post->degree_hours ): ?>
+					<!-- <h3 class="degree-credit-hours"><?php echo $post->degree_hours; ?> <span class="small">Total Credit Hours</span></h3> -->
+					<h3 class="degree-credit-hours"><span class="hours"><?php echo $post->degree_hours; ?></span> total credit hours</h3>
+				<?php else: ?>
+					<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+				<?php endif; ?>
 				<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
 					<span class="fa fa-pencil-square-o"></span> Apply Now
 				</a>
@@ -123,10 +135,12 @@
 							<?php if ( $post->tuition_value_message ) : ?>
 								<div class="tuition-value-message">
 									<?php echo $post->tuition_value_message; ?>
-									<div class="tuition-total">
-										<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<div class="tuition-total-block">
+										<div class="tuition-total">
+											<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+										</div>
+										<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
 									</div>
-									<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -147,11 +161,6 @@
 						<p class="financial-aid-message"><?php echo $post->financial_aid_message; ?><p/>
 					<?php endif; ?>
 				</div>
-			<?php endif; ?>
-			<?php if ( $post->degree_hours ): ?>
-				<h3 class="degree-credit-hours"><?php echo $post->degree_hours; ?> <span class="small">Total Credit Hours</span></h3>
-			<?php else: ?>
-				<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
 			<?php endif; ?>
 		</div>
 	</div>

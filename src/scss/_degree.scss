@@ -85,42 +85,68 @@
     }
   }
 
-  .tuition-total {
-    color: #fc0 !important;
-    text-shadow: 0 1px 1px #999 !important;
-  }
-
   .degree-credit-hours {
-    color: #fc0;
-    font-size: 32px;
-    padding: 12px 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: -5px;
+    padding: 0 12px 10px 12px;
     text-align: center;
-    text-shadow: 0 1px 1px #999;
 
-    .small {
+    @media( max-width: $screen-sm-max ) {
       color: #fc0;
-      font-size: 18px;
+      font-size: 27px !important;
+      font-weight: bold !important;
+      margin-top: 0;
+    }
+
+    @media( max-width: $screen-xs-max ) {
+      font-size: 23px !important;
+    }
+
+    .hours {
+      font-size: 20px;
+      font-weight: bold;
+
+      @media( max-width: $screen-sm-max ) {
+        font-size: 27px !important;
+        font-weight: bold !important;
+      }
+
+      @media( max-width: $screen-xs-max ) {
+        display: block;
+      }
     }
   }
 
   .degree-promo-button {
     @extend .btn-group;
+    @media( max-width: $screen-sm-max ) {
+      width: 100%;
+    }
 
     .degree-promo-icon,
     .degree-promo-text {
-      @extend .btn;
+      @extend .btn !optional;
 
       @media( max-width: $screen-md-max ) {
         margin: 12px 0;
       }
+      @media( max-width: $screen-sm-max ) {
+        width: 80%;
+      }
     }
 
     .degree-promo-icon {
-      @extend .btn;
+      @extend .btn !optional;
       background: #3266cc;
       color: #fff;
       font-size: 32px;
       font-family: "FontAwesome";
+      @media( max-width: $screen-sm-max ) {
+        width: 20%;
+      }
     }
 
     .degree-promo-text {
@@ -511,25 +537,43 @@
       }
     }
 
-    .tuition-total {
-      color: #c90;
-      font-size: 32px;
-      font-weight: 700;
-      line-height: .8;
-      padding: 20px 0;
-      text-align: center;
-      text-shadow: 0 1px 1px #cacaca;
+    .tuition-total-block {
+      background: #fff7da;
+      padding: 12px;
+
+      .tuition-total {
+        // color: #c90;
+        color: #333;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: .8;
+        padding: 15px 0 6px 0;
+        text-align: center;
+        margin-bottom: 6;
+        // text-shadow: 0 1px 1px #cacaca;
+
+    @media( max-width: $screen-sm-max ) {
+      font-size: 27px !important;
+      font-weight: bold !important;
     }
 
-    .tuition-period {
-      font-size: 18px;
-    }
+      }
 
-    .tuition-description {
-      color: #222;
-      font-size: 12px;
-      font-weight: 300;
-      padding: 0 12px;
+      .tuition-period {
+        font-size: 18px;
+    @media( max-width: $screen-sm-max ) {
+      font-size: 27px !important;
+      font-weight: bold !important;
+    }
+      }
+
+      .tuition-description {
+        color: #222;
+        font-size: 12px;
+        font-weight: 300;
+        padding: 0 5px;
+        margin-bottom: 5px;
+      }
     }
   }
 
