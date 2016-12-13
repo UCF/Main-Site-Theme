@@ -127,30 +127,22 @@
 
   .degree-promo-button {
     @extend .btn-group;
-    // @media( max-width: $screen-sm-max ) {
-      width: 100%;
-    // }
+    width: 100%;
 
     .degree-promo-icon,
     .degree-promo-text {
       @extend .btn !optional;
       margin: 12px 0;
-
-      //@media( max-width: $screen-sm-max ) {
-        width: 80%;
-      //}
+      width: 80%;
     }
 
     .degree-promo-icon {
       @extend .btn !optional;
       background: #3266cc;
       color: #fff;
-      font-size: 32px;
       font-family: "FontAwesome";
-
-      //@media( max-width: $screen-sm-max ) {
-        width: 20%;
-      //}
+      font-size: 32px;
+      width: 20%;
 
       @media( max-width: $screen-xs-max ) {
         margin: 6px 0;
@@ -561,7 +553,6 @@
       padding: 12px;
 
       .tuition-total {
-        // color: #c90;
         color: #333;
         font-size: 20px;
         font-weight: 700;
@@ -569,7 +560,6 @@
         padding: 15px 0 6px 0;
         text-align: center;
         margin-bottom: 6;
-        // text-shadow: 0 1px 1px #cacaca;
 
     @media( max-width: $screen-sm-max ) {
       font-size: 27px !important;

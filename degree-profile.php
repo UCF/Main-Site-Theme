@@ -65,7 +65,6 @@
 				</dl>
 				<div class="visible-xs call-to-action">
 					<?php if ( $post->degree_hours ): ?>
-						<!-- <h3 class="degree-credit-hours">Total Credit Hours: <?php echo $post->degree_hours; ?></h3> -->
 						<h3 class="degree-credit-hours"><span class="hours"><?php echo $post->degree_hours; ?></span> total credit hours</h3>
 					<?php else: ?>
 						<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
