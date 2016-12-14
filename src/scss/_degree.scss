@@ -44,6 +44,12 @@
     }
   }
 
+  .degree-header.no-header-image {
+    .page-media-header {
+      height: 155px;
+    }
+  }
+
   .call-to-action {
     a {
       color: $black !important;
@@ -95,14 +101,14 @@
     text-align: center;
 
     @media( max-width: $screen-sm-max ) {
-      color: #fc0;
-      font-size: 27px !important;
+      // color: #fc0;
+      font-size: 23px !important;
       font-weight: bold !important;
       margin-top: 0;
     }
 
     @media( max-width: $screen-xs-max ) {
-      font-size: 23px !important;
+      font-size: 20px !important;
     }
 
     .hours {
@@ -110,12 +116,8 @@
       font-weight: bold;
 
       @media( max-width: $screen-sm-max ) {
-        font-size: 27px !important;
+        font-size: 24px !important;
         font-weight: bold !important;
-      }
-
-      @media( max-width: $screen-xs-max ) {
-        display: block;
       }
     }
   }
@@ -144,31 +146,72 @@
       font-size: 32px;
       width: 20%;
 
+      &:hover {
+        color: #fff;
+      }
+
       @media( max-width: $screen-xs-max ) {
         margin: 6px 0;
       }
     }
 
     .degree-promo-text {
+      @include gotham(5);
       border: 1px solid #3266cc !important;
       font-size: 15px;
-      padding: 18px 32px;
+      padding: 18px 12px 18px 5px;
+      color: #3266cc;
 
       @media( max-width: $screen-xs-max ) {
         margin: 6px 0;
+      }
+    }
+
+    &:hover {
+      .degree-promo-text {
+        color: #333;
+      }
+    }
+  }
+
+  .degree-promo-button:link {
+    color: #3266cc !important;
+
+    &:hover {
+      .degree-promo-icon {
+        color: #fff !important;
+        background-color: lighter(#3266cc) !important;
+      }
+
+      .degree-promo-text {
+        border-color: lighter(#3266cc) !important;
       }
     }
   }
 }
 
 #degree-single {
+
+  &.container {
+    margin-top: 10px;
+  }
+
+  .nav-tabs > li.active > a {
+    color: #555;
+  }
+
+  #breadcrumbs.breadcrumbs-bottom {
+    border-top: 1px solid #d2d2d2;
+    padding-top: 20px;
+  }
+
   #breadcrumbs a {
     color: #999;
   }
 
   .breadcrumb {
     background-color: #fff;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 
     @media (max-width: $screen-xs-max) {
       display: none;
@@ -235,6 +278,10 @@
     font-family: $font-family-sans-serif;
     font-size: 15px;
     line-height: 1.5;
+
+    small {
+      line-height: 1.65;
+    }
 
     p {
       margin: 0 0 10px;
@@ -548,9 +595,31 @@
       }
     }
 
-    .tuition-total-block {
+    .highlight-block {
       background: #fff7da;
       padding: 12px;
+    }
+
+    .highlight-block-light {
+      background: #fff7da;
+      padding: 12px;
+    }
+
+    .tuition-missing-block {
+      text-align: center;
+
+      a:link,
+      a:active,
+      a:visited {
+        text-decoration: underline;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+
+    .tuition-total-block {
 
       .tuition-total {
         color: #333;
@@ -586,6 +655,43 @@
     }
   }
 
+  .tuition-info.tuition-info-classic {
+
+    .tuition-total {
+      // color: #fc0 !important;
+      text-shadow: 0 1px 1px #999 !important;
+
+      color: #c90;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: .8;
+      padding: 20px 0;
+      text-align: center;
+      text-shadow: 0 1px 1px #cacaca;
+
+      .tuition-period {
+        color: #c90;
+        font-size: 18px;
+      }
+
+      .in-state-amount {
+        color: #c90;
+      }
+
+      .degree-credit-hours {
+        font-size: 32px;
+        padding: 12px 0;
+        text-align: center;
+        text-shadow: 0 1px 1px #999;
+
+        .small {
+          color: #fc0;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+
   .btn {
     @include gotham();
     margin: 0 0 15px;
@@ -606,11 +712,12 @@
 
   .financial-aid-message,
   .tuition-value-message {
-    font-size: .85em;
+    font-size: 14px;
     margin-bottom: 18px;
   }
 
-  .financial-aid-message {
+  .financial-aid-message,
+  .tuition-info {
     a {
       color: #08c;
     }
@@ -658,7 +765,7 @@
 
   // Social buttons
   .social {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 }
 

@@ -11,7 +11,7 @@
 			</div>
 		</div>
 
-		<div id="breadcrumbs" class="col-md-12 col-sm-12 clearfix">
+		<div id="breadcrumbs" class="breadcrumbs-top col-md-12 col-sm-12 clearfix">
 			<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
 			<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
 
@@ -206,7 +206,7 @@
 			endif;
 			?>
 		<?php if ( $post->tuition_estimates && $post->degree_hide_tuition != 'on' ) : ?>
-			<div class="tuition-info">
+			<div class="tuition-info tuition-info-classic">
 			<h2>Tuition and Fees</h2>
 				<ul class="nav nav-tabs" id="tuition-tabs">
 					<li class="active"><a href="#in-state" data-toggle="tab">In State</a></li>

@@ -1,34 +1,21 @@
 <?php get_header(); ?>
 <?php $search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) ); ?>
 </div>
+
+<?php if ( $post->header_image ): ?>
 <div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
 	<div class="page-media-header" style="background-image: url(<?php echo $post->header_image; ?>)">
+<?php else: ?>
+<div class="container-fullwidth page-media degree-header no-header-image" id="<?php echo $post->post_name; ?>">
+	<div class="page-media-header">
+<?php endif; ?>
 		<div class="page-media-container container">
 			<h1><?php echo $post->post_title; ?></h1>
 		</div>
 	</div>
 </div>
-<div class="container" id="degree-single">
-	<div id="breadcrumbs" class="clearfix">
-		<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
-		<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
 
-		<ul class="breadcrumb-hierarchy breadcrumb">
-			<li>
-				<?php $programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ) ) ); ?>
-				<a href="<?php echo $programs_url; ?>"><?php echo $post->tax_program_type->name; ?>s</a>
-			</li>
-			<?php if ( $post->tax_college ): // Some programs may have been imported with colleges that were later deleted ?>
-			<li>
-				<?php $college_programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ), 'college' => array( $post->tax_college->slug ) ) ); ?>
-				<a href="<?php echo $college_programs_url; ?>"><?php echo $post->tax_college->name; ?></a>
-			</li>
-			<?php endif; ?>
-			<li class="active">
-				<?php the_title(); ?>
-			</li>
-		</ul>
-	</div>
+<div class="container" id="degree-single">
 	<div class="row">
 		<div class="col-md-8 degree">
 			<div id="contentcol">
@@ -66,8 +53,6 @@
 				<div class="visible-xs call-to-action">
 					<?php if ( $post->degree_hours ): ?>
 						<h3 class="degree-credit-hours"><span class="hours"><?php echo $post->degree_hours; ?></span> total credit hours</h3>
-					<?php else: ?>
-						<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
 					<?php endif; ?>
 					<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
 						<span class="fa fa-pencil-square-o"></span> Apply Now
@@ -113,8 +98,6 @@
 			<div class="hidden-xs call-to-action">
 				<?php if ( $post->degree_hours ): ?>
 					<h3 class="degree-credit-hours"><span class="hours"><?php echo $post->degree_hours; ?></span> total credit hours</h3>
-				<?php else: ?>
-					<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
 				<?php endif; ?>
 				<a href="<?php echo $post->application_url; ?>" class="btn btn-ucf-gold btn-lg btn-block">
 					<span class="fa fa-pencil-square-o"></span> Apply Now
@@ -122,6 +105,11 @@
 				<a href="https://apply.ucf.edu/forms/campus-tour/" class="btn btn-ucf-gold btn-lg btn-block">
 					<span class="fa fa-map-marker"></span> Visit UCF
 				</a>
+				<?php if ( !( $post->degree_hours ) ): ?>
+					<div class="highlight-block tuition-missing-block">
+						<a href="<?php echo $post->degree_pdf; ?>">See catalog for credit hours</a>
+					</div>
+				<?php endif; ?>
 			</div>
 			<?php if ( $post->tuition_estimates && $post->degree_hide_tuition != 'on' ) : ?>
 				<div class="tuition-info">
@@ -135,7 +123,7 @@
 							<?php if ( $post->tuition_value_message ) : ?>
 								<div class="tuition-value-message">
 									<?php echo $post->tuition_value_message; ?>
-									<div class="tuition-total-block">
+									<div class="highlight-block tuition-total-block">
 										<div class="tuition-total">
 											<p id="in-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['in_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
 										</div>
@@ -148,10 +136,12 @@
 							<?php if ( $post->tuition_value_message ) : ?>
 								<div class="tuition-value-message">
 									<?php echo $post->tuition_value_message; ?>
-									<div class="tuition-total">
-										<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+									<div class="highlight-block-alt tuition-total-block">
+										<div class="tuition-total">
+											<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
+										</div>
+										<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
 									</div>
-									<p class="tuition-description">The approximate tuition cost* for one year in this program at UCF based on a full time schedule (30 credit hours per year)</p>
 								</div>
 							<?php endif; ?>
 						</div>
@@ -163,6 +153,26 @@
 				</div>
 			<?php endif; ?>
 		</div>
+	</div>
+	<div id="breadcrumbs" class="breadcrumbs-bottom clearfix">
+		<!-- Note: link click is modified to go back 1 pg via js if last page was Degree Search -->
+		<a id="breadcrumb-search" href="<?php echo $search_page_url; ?>">&laquo; Back to Degree Search</a>
+
+		<ul class="breadcrumb-hierarchy breadcrumb">
+			<li>
+				<?php $programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ) ) ); ?>
+				<a href="<?php echo $programs_url; ?>"><?php echo $post->tax_program_type->name; ?>s</a>
+			</li>
+			<?php if ( $post->tax_college ): // Some programs may have been imported with colleges that were later deleted ?>
+			<li>
+				<?php $college_programs_url = $search_page_url . '?' . http_build_query( array( 'program-type' => array( $post->tax_program_type->slug ), 'college' => array( $post->tax_college->slug ) ) ); ?>
+				<a href="<?php echo $college_programs_url; ?>"><?php echo $post->tax_college->name; ?></a>
+			</li>
+			<?php endif; ?>
+			<li class="active">
+				<?php the_title(); ?>
+			</li>
+		</ul>
 	</div>
 </div>
 <div class="container">
