@@ -3,8 +3,8 @@
     font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
-    line-height: 1.5;
+    font-weight: 300;
+    line-height: 1.75;
 }
 
 #contentcol a {
@@ -71,7 +71,8 @@
 }
 
 #contentcol .call-out h3 {
-    margin-top: 20px;
+    margin-top: 0;
+    margin-bottom: 30px;
 }
 
 #contentcol .call-out ul {
@@ -88,9 +89,35 @@
     float: none;
 }
 
-#contentcol .financial-aid-row {
-    margin-top: 35px;
-    margin-bottom: 35px;
+@media (min-width: 768px) {
+    #contentcol .financial-aid [class*=' border-'] {
+        border: 0 dotted #000;
+        min-height: 250px;
+        text-align: center;
+    }
+
+    #contentcol .financial-aid .border-top-left {
+        border-width: 0 1px 1px 0;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+
+    #contentcol .financial-aid .border-top-right {
+        border-width: 0 0 1px;
+        margin-left: 0;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+
+    #contentcol .financial-aid .border-bottom-left {
+        border-width: 0 1px 0 0;
+        padding-top: 30px;
+    }
+
+    #contentcol .financial-aid .border-bottom-right {
+        margin-left: 0;
+        padding-top: 30px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -175,11 +202,12 @@
     font-size: 75px;
     font-weight: 800;
     letter-spacing: -.04em;
-    line-height: 1;
+    line-height: 1.4;
 }
 
 #contentcol .number-desc {
     font-weight: bold;
+    line-height: 1.4;
 }
 
 /* call out quote */
@@ -234,7 +262,7 @@
     color: #000;
     font-size: 16px;
     line-height: 22px;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 /* Tables */
