@@ -15,6 +15,10 @@
     right: $grid-gutter-width / 2;
   }
 
+  .page-media-container {
+    padding-top: 110px;
+  }
+
   #header-menu {
     a {
       color: #fff;
@@ -33,20 +37,44 @@
     }
   }
 
+  &.no-header-image {
+    #header-menu {
+      a {
+        color: #000;
+
+        &:hover {
+          color: #fc0;
+        }
+      }
+
+      .last a {
+        color: #000;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+
   .degree-header {
     h1 {
       @include archer(7);
+      color: #000;
       background: rgba($ucf-gold, 0.8);
       display: inline-block;
       font-size: 44px;
       padding: 12px 32px;
-      max-width: 400px;
     }
   }
 
   .degree-header.no-header-image {
+    .page-media-container {
+      padding-top: 80px;
+    }
+
     .page-media-header {
-      height: 155px;
+      height: 175px;
     }
   }
 
@@ -193,7 +221,7 @@
 #degree-single {
 
   &.container {
-    margin-top: 10px;
+    margin-top: 15px;
   }
 
   .nav-tabs > li.active > a {

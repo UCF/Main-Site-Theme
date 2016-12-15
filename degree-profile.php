@@ -1,13 +1,16 @@
 <?php get_header(); ?>
-<?php $search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) ); ?>
+<?php
+	$search_page_url = get_permalink( get_page_by_title( 'Degree Search' ) );
+	$css_gradient = "linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.6) 115%), ";
+?>
 </div>
 
 <?php if ( $post->header_image ): ?>
 <div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
-	<div class="page-media-header" style="background-image: url(<?php echo $post->header_image; ?>)">
+	<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>url(<?php echo $post->header_image; ?>)">
 <?php else: ?>
 <div class="container-fullwidth page-media degree-header no-header-image" id="<?php echo $post->post_name; ?>">
-	<div class="page-media-header">
+	<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>">
 <?php endif; ?>
 		<div class="page-media-container container">
 			<h1><?php echo $post->post_title; ?></h1>

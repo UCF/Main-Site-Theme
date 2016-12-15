@@ -1424,9 +1424,9 @@ class Degree extends CustomPostType{
 				'type' => 'text',
 			),
 			array(
-				'name'  => 'Use Updated Template',
-				"desc"  => 'If checked, will used an updated template with an image header.',
-				'id'    => $prefix.'use_updated_template',
+				'name'  => 'Use Classic Template',
+				"desc"  => 'If checked, will used the classic template without an image header.',
+				'id'    => $prefix.'use_classic_template',
 				'type'  => 'checkbox'
 			),
 			array(

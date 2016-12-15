@@ -1570,7 +1570,7 @@ function append_degree_metadata( $post, $tuition_data ) {
 		$post->tax_college                 = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
 		$post->tax_department              = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
 		$post->tax_program_type            = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
-		$post->use_updated_template        = filter_var( get_post_meta( $post->ID, 'degree_use_updated_template', TRUE ), FILTER_VALIDATE_BOOLEAN );
+		$post->use_classic_template        = filter_var( get_post_meta( $post->ID, 'degree_use_classic_template', TRUE ), FILTER_VALIDATE_BOOLEAN );
 		$post->header_image                = wp_get_attachment_url( get_post_meta( $post->ID, 'degree_header_image', TRUE ) );
 
 		if ( $tuition_data ) {
@@ -3203,18 +3203,26 @@ function get_social_icon( $item_slug ) {
 /**
  * Adds updated body class for degrees
  **/
-function add_updated_degree_body_class( $classes ) {
+function add_classic_degree_body_class( $classes ) {
 	global $post;
 	if ( $post->post_type == 'degree' ) {
-		$use_updated_template = get_post_meta( $post->ID, 'degree_use_updated_template', True );
-		if ( $use_updated_template ) {
+		$use_classic_template = get_post_meta( $post->ID, 'degree_use_classic_template', True );
+		$has_header_image = ( $post->header_image) ? true : false;
+		if ( $use_classic_template ) {
+			$classes[] = 'classic-degree-template';
+		}
+		else {
 			$classes[] = 'updated-degree-template';
+
+			if ( !$has_header_image ) {
+				$classes[] = 'no-header-image';
+			}
 		}
 	}
 	return $classes;
 }
 
-add_action( 'body_class', 'add_updated_degree_body_class' );
+add_action( 'body_class', 'add_classic_degree_body_class' );
 
 
 ?>

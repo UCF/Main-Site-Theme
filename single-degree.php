@@ -3,10 +3,10 @@
 <?php
 	$post = append_degree_metadata( $post, true );
 ?>
-<?php 
-	if ( $post->use_updated_template ) {
-		get_template_part( 'degree-profile' );
-	} else {
+<?php
+	if ( $post->use_classic_template ) {
 		get_template_part( 'classic-degree-profile' );
+	} else {
+		get_template_part( 'degree-profile' );
 	}
 ?>
