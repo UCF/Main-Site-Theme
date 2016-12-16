@@ -1,3 +1,5 @@
+$bright-blue: #08c;
+
 // Single Degree profiles
 .updated-degree-template {
   #header-nav-wrap,
@@ -26,7 +28,7 @@
 
   #header-menu {
     a {
-      color: #fff;
+      color: $white;
 
       &:hover {
         color: #fc0;
@@ -34,10 +36,10 @@
     }
 
     .last a {
-      color: #000;
+      color: $black;
 
       &:hover {
-        color: #fff;
+        color: $white;
       }
     }
   }
@@ -52,7 +54,7 @@
   &.no-header-image {
     #header-menu {
       a {
-        color: #000;
+        color: $black;
 
         &:hover {
           color: #fc0;
@@ -60,10 +62,10 @@
       }
 
       .last a {
-        color: #000;
+        color: $black;
 
         &:hover {
-          color: #fff;
+          color: $white;
         }
       }
     }
@@ -72,7 +74,7 @@
   .degree-header {
     h1 {
       @include archer(7);
-      color: #000;
+      color: $black;
       background: rgba($ucf-gold, 0.8);
       display: inline-block;
       font-size: 44px;
@@ -130,7 +132,7 @@
 
   .degree-description {
     @include archer();
-    border-top: 1px solid #fc0;
+    border-top: 1px solid $ucf-gold;
     font-size: 18px;
     padding-top: 24px;
   }
@@ -154,7 +156,6 @@
     text-align: center;
 
     @media( max-width: $screen-sm-max ) {
-      // color: #fc0;
       font-size: 23px !important;
       font-weight: bold !important;
       margin-top: 0;
@@ -194,13 +195,13 @@
     .degree-promo-icon {
       @extend .btn !optional;
       background: #3266cc;
-      color: #fff;
+      color: $white;
       font-family: "FontAwesome";
       font-size: 32px;
       width: 20%;
 
       &:hover {
-        color: #fff;
+        color: $white;
       }
 
       @media( max-width: $screen-xs-max ) {
@@ -232,7 +233,7 @@
 
     &:hover {
       .degree-promo-icon {
-        color: #fff !important;
+        color: $white !important;
         background-color: lighter(#3266cc) !important;
       }
 
@@ -263,7 +264,7 @@
   }
 
   .breadcrumb {
-    background-color: #fff;
+    background-color: $white;
     margin-bottom: 15px;
 
     @media (max-width: $screen-xs-max) {
@@ -300,7 +301,7 @@
     }
 
     .breadcrumb-hierarchy {
-      background: #fff;
+      background: $white;
       display: block;
       float: left;
       list-style-type: none;
@@ -378,7 +379,7 @@
 
     a {
       border-bottom: 0;
-      color: #08c;
+      color: $bright-blue;
     }
 
     .btn-default {
@@ -577,7 +578,7 @@
       }
 
       a {
-        color: #08c;
+        color: $bright-blue;
       }
 
       dt,
@@ -653,11 +654,6 @@
       padding: 12px;
     }
 
-    .highlight-block-light {
-      background: #fff7da;
-      padding: 12px;
-    }
-
     .tuition-missing-block {
       text-align: center;
 
@@ -711,9 +707,7 @@
   .tuition-info.tuition-info-classic {
 
     .tuition-total {
-      // color: #fc0 !important;
       text-shadow: 0 1px 1px #999 !important;
-
       color: #c90;
       font-size: 32px;
       font-weight: 700;
@@ -772,13 +766,13 @@
   .financial-aid-message,
   .tuition-info {
     a {
-      color: #08c;
+      color: $bright-blue;
     }
   }
 
   .tuition-value-message {
     .external {
-      color: #08c;
+      color: $bright-blue;
     }
   }
 
@@ -804,8 +798,8 @@
     }
 
     .btn {
-      background-color: #ffc904;
-      color: #000 !important;
+      background-color: $ucf-gold;
+      color: $black !important;
       margin-top: 10px;
       padding-left: 45px;
       padding-right: 45px;
