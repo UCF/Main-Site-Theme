@@ -17,6 +17,11 @@
 
   .page-media-container {
     padding-top: 110px;
+
+    @media( max-width: $screen-xs-max ) {
+      position: relative;
+      padding-top: 160px;
+    }
   }
 
   #header-menu {
@@ -34,6 +39,13 @@
       &:hover {
         color: #fff;
       }
+    }
+  }
+
+  .page-media-header {
+    @media( max-width: $screen-xs-max ) {
+      min-height: 400px;
+      height: auto;
     }
   }
 
@@ -65,16 +77,29 @@
       display: inline-block;
       font-size: 44px;
       padding: 12px 32px;
+
+      @media( max-width: $screen-xs-max ) {
+        font-size: 30px;
+      }
     }
   }
 
   .degree-header.no-header-image {
     .page-media-container {
       padding-top: 80px;
+
+      @media( max-width: $screen-xs-max ) {
+        padding-top: 160px;
+      }
     }
 
     .page-media-header {
       height: 175px;
+
+      @media( max-width: $screen-xs-max ) {
+        height: auto;
+        min-height: 245px;
+      }
     }
   }
 

@@ -139,7 +139,7 @@
 							<?php if ( $post->tuition_value_message ) : ?>
 								<div class="tuition-value-message">
 									<?php echo $post->tuition_value_message; ?>
-									<div class="highlight-block-alt tuition-total-block">
+									<div class="highlight-block tuition-total-block">
 										<div class="tuition-total">
 											<p id="out-of-state-amount">$<?php echo number_format( (float)$post->tuition_estimates['out_of_state_rate'] * 30, 0 ); ?> <span class="tuition-period">per year</span></p>
 										</div>
