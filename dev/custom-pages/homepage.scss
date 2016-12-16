@@ -14,6 +14,13 @@ $color-youtube: #cd201f;
 $color-vine: #00b488;
 $color-linkedin: #0077b5;
 
+.invisible {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .page-template-template-media-feature #header-nav-wrap a {
     color: #fff;
     font-size: 17px;
@@ -32,7 +39,6 @@ $color-linkedin: #0077b5;
       text-decoration: none;
     }
 }
-
 
 .container {
   max-width: 1170px;
@@ -62,7 +68,7 @@ $color-linkedin: #0077b5;
 
   .header-title {
     font-size: 70px;
-    margin: 0;
+    margin: 15% 0 0 0;
     padding: 2px 15px 12px 15px;
 
     @media (max-width: $screen-sm-max) {
