@@ -936,8 +936,10 @@ $color-linkedin: #0077b5;
       line-height: 1.5;
     }
 
+    .event-start-time,
     .event-start-date {
       color: $ucf-gold;
+      display: inline-block;
       font-size: 15px;
       margin-bottom: 2px;
       text-transform: uppercase;
@@ -946,6 +948,10 @@ $color-linkedin: #0077b5;
         font-size: 18px;
         margin-bottom: 8px;
       }
+    }
+
+    .event-start-time:before {
+      content: " - ";
     }
 
     .event-start-year,
