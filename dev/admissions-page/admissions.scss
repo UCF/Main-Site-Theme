@@ -1,5 +1,21 @@
 @import '../media-template/media-template-base';
 
+#sections-navbar .navbar-nav,
+#sections-navbar .navbar-nav>li,
+.navbar-gold {
+  margin-bottom: 0;
+}
+
+.navbar-gold .navbar-nav>li>a {
+  color: #000 !important;
+}
+
+#sections-navbar .section-link {
+  @include gotham();
+  font-style: normal;
+  font-weight: 700;
+}
+
 .extra-small {
   font-size: 70%;
 }
