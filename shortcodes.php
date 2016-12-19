@@ -1362,17 +1362,18 @@ function sc_events( $atts, $content='' ) {
 			'url'               => '',
 			'list_classes'      => '',
 			'list_item_classes' => '',
-			'show_descriptions' => false
+			'custom_date_format' => ''
 		), $atts, 'sc_events'
 	);
 
 	$atts['start'] = intval( $atts['start'] );
 	$atts['limit'] = intval( $atts['limit'] );
 	$atts['show_descriptions'] = filter_var( $atts['show_descriptions'], FILTER_VALIDATE_BOOLEAN );
+	$atts['use_short_month'] = filter_var( $atts['use_short_month'], FILTER_VALIDATE_BOOLEAN );
 
 	ob_start();
 
-	$events = display_events_list( $atts['start'], $atts['limit'], $atts['url'], $atts['list_classes'], $atts['list_item_classes'], $atts['show_descriptions'] );
+	$events = display_events_list( $atts['start'], $atts['limit'], $atts['url'], $atts['list_classes'], $atts['list_item_classes'], $atts['show_descriptions'], $atts['use_short_month'] );
 
 	if ( trim( $events ) ) {
 		echo $events;
