@@ -1,10 +1,9 @@
 @import '../media-template/media-template-base';
 @import '../media-template/media-template-base';
 
-$downtown-bg-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
+$downtown-bg-url: 'http://www.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
+$stats-background-url: 'http://www.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow-1.jpg';
 $florida-icon-url: '../img/florida-ucf-pin.png';
-$ignite-banner-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/11/ignite-tmp.png';
-$stats-background-url: 'http://wwwdev.smca.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow.jpg';
 
 $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
@@ -231,7 +230,6 @@ $color-linkedin: #0077b5;
   .lead {
     @include gotham(7);
     font-size: 20px;
-    text-transform: uppercase;
   }
 
   .callout.callout-knightro {
@@ -314,13 +312,6 @@ $color-linkedin: #0077b5;
           font-size: 23px;
         }
       }
-
-    &.expanded {
-      &::after {
-        content: "\F139";
-      }
-    }
-
     }
     .top-majors-content {
       @media (max-width: $screen-sm-max) {
@@ -543,17 +534,6 @@ $color-linkedin: #0077b5;
         }
       }
     }
-  }
-
-  .callout.callout-ignite {
-    background: url($ignite-banner-url);
-    background-color: black;
-    background-position: 50% 0;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 0;
-    overflow: hidden;
-    padding-top: 175px;
   }
 
   .callout.callout-news {
@@ -822,11 +802,14 @@ $color-linkedin: #0077b5;
     }
 
     .stats-item {
-      min-height: 100px;
       border: dotted 0 $black;
-      text-align: center;
+      display: block;
+      float: left;
       line-height: 1.2;
+      min-height: 100px;
       padding: 20px 10px;
+      text-align: center;
+      width: 50%;
 
       .num {
         font-size: 50px;

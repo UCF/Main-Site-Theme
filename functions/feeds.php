@@ -261,12 +261,12 @@ function display_events_list_item( $item, $list_item_classes='', $show_descripti
 				<span class="event-start-year"><?php echo $start->format( 'Y' ); ?></span>
 				<span class="event-start-time"><?php echo $start->format( 'h:i a' ); ?></span>
 				</time>
-			<span class="p-name event-title summary"><?php echo $title; ?></span>
-			<span class="p-location event-location location"><?php echo $location; ?></span>
+			<span class="event-title summary"><?php echo $title; ?></span>
+			<span class="event-location location"><?php echo $location; ?></span>
 		</a>
 
 		<?php if ( $show_description ): ?>
-		<div class="p-summary event-description description"><?php echo truncateHtml( $description, 350 ); ?></div>
+		<div class="event-description description"><?php echo truncateHtml( $description, 350 ); ?></div>
 		<?php endif; ?>
 	</li>
 <?php

@@ -3,21 +3,36 @@ var map,
   $scrollSection,
   scrollStop;
 
+/**
+ * Debouce method to pause logic until resize is complete
+ */
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this,
+            args = arguments;
+
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
+
 var init = function() {
   $scrollSection = $('#stats-section');
   scrollStop = false;
 
-  if ($.isFunction($.matchHeight)) {
-    initializeMatchHeight();
-  } else {
-    lazyLoadMatchHeight();
-  }
+  initializeMatchHeight();
 
   $('.count-up').text('0');
   $(document).on('scroll', scroll);
-  $(window).on('resize', onResize);
+  $(window).on('load resize', onResize);
   scroll();
-  onResize();
 };
 
 var scroll = function() {
@@ -30,19 +45,12 @@ var scroll = function() {
   }
 };
 
-var onResize = function() {
+var onResize = debounce(function () {
   offset = $scrollSection.offset().top - $(window).height();
-};
-
-var lazyLoadMatchHeight = function() {
-  $.getScript("https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js")
-    .done(function() {
-      initializeMatchHeight();
-    });
-};
+}, 100);
 
 function initializeMatchHeight() {
-  $statsItem = $('.stats-info .stats-item');
+  $statsItem = $('.stats-item-row .stats-item');
 
   $statsItem.matchHeight();
 
