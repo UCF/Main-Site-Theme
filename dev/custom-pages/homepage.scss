@@ -50,11 +50,11 @@ $color-linkedin: #0077b5;
 
 .page-media-header {
   height: 720px;
+  margin-top: -30px;
   overflow: hidden;
+  padding-top: 35px;
   width: 100%;
   z-index: 1;
-  margin-top: -30px;
-  padding-top: 35px;
 
   @media (max-width: $screen-sm-max) {
     height: 500px;
@@ -74,10 +74,10 @@ $color-linkedin: #0077b5;
     @media (max-width: $screen-sm-max) {
       display: block;
       font-family: $font-condensed;
+      font-size: 80px;
       line-height: .8;
       padding: 12px 15px;
       text-align: left;
-      font-size: 80px;
     }
 
     @media (max-width: 380px) {
@@ -95,11 +95,11 @@ $color-linkedin: #0077b5;
 
 .weather {
   .icon span {
-    color: $ucf-gold;
-    font-size: 27px;
-    display: inline-block;
-    position: relative;
     bottom: -3px;
+    color: $ucf-gold;
+    display: inline-block;
+    font-size: 27px;
+    position: relative;
   }
 
   .vertical-rule {
@@ -126,12 +126,12 @@ $color-linkedin: #0077b5;
 #contentcol {
 
   .read-more {
+    font-size: 14px;
+    font-weight: 600;
     position: absolute;
-    top: 50px;
     right: 0;
     text-transform: uppercase;
-    font-weight: 600;
-    font-size: 14px;
+    top: 50px;
 
     @media (max-width: $screen-sm-max) {
       position: relative;
@@ -158,13 +158,13 @@ $color-linkedin: #0077b5;
   }
 
   .home-top-nav {
-    display: block;
-    position: absolute;
     bottom: 0;
-    left: 0;
-    z-index:5 ;
+    display: block;
     font-size: 18px;
+    left: 0;
     padding-left: 15px;
+    position: absolute;
+    z-index:5 ;
 
     ul {
       list-style-type: none;
@@ -179,14 +179,13 @@ $color-linkedin: #0077b5;
       }
       li::before {
           content: "\F13A";
-          display: inline-block;
-          text-rendering: auto;
           -webkit-font-smoothing: antialiased;
-          // color: rgb(255, 201, 4);
           color: #fff;
-          margin-left: -1.3em;
-          width: 1.5em;
+          display: inline-block;
           font: 1em/1 FontAwesome;
+          margin-left: -1.3em;
+          text-rendering: auto;
+          width: 1.5em;
       }
     }
 
@@ -216,11 +215,11 @@ $color-linkedin: #0077b5;
   .btn.btn-gold {
     @include gotham(9);
     background: $ucf-gold;
+    border-bottom: 0;
     color: black;
     font-size: 14px;
     padding: 18px 32px;
     text-transform: uppercase;
-    border-bottom: 0;
 
     &:hover {
       background-color: darken($ucf-gold, 10%);
@@ -250,7 +249,7 @@ $color-linkedin: #0077b5;
     }
 
     .padded-top {
-        padding-top: 125px;
+      padding-top: 125px;
     }
   }
 
@@ -372,13 +371,6 @@ $color-linkedin: #0077b5;
       }
     }
 
-/*
-.faq dt:before {
-  content: counter(my-badass-counter);
-  counter-increment: my-badass-counter;
-}
-*/
-
     .inline {
       font-size: 12px;
       text-transform: uppercase;
@@ -478,10 +470,6 @@ $color-linkedin: #0077b5;
     ol {
       font-size: 15px;
     }
-
-
-
-
 
     .highlight {
       font-size: 15px;
@@ -854,10 +842,6 @@ $color-linkedin: #0077b5;
     }
     .stats-border-bottom-left {
       border-width: 0 1px 0 0;
-
-      // @media (max-width: $screen-xs-max) {
-      //   border-bottom-width: 1px !important;
-      // }
     }
   }
 
@@ -865,12 +849,6 @@ $color-linkedin: #0077b5;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 100% 0;
-
-    // @media (max-width: $screen-sm-max) {
-    //   background-size: 50%;
-    //   background-size: 90%;
-    //   background-position: 320% -160%;
-    // }
 
     h2 {
       font-size: 75px;
@@ -920,7 +898,6 @@ $color-linkedin: #0077b5;
         }
       }
 
-      // won't be present in shortcode-generated markup, but for the sake of development:
       br {
         display: none;
       }
@@ -1060,8 +1037,6 @@ $color-linkedin: #0077b5;
   @media (max-width: $screen-md-max) {
     height: 100px;
     width: 100%;
-    // transition-delay: 0s;
-    // transition: height 0.2s;
   }
 
   @media (max-width: $screen-xs-max) {
@@ -1122,14 +1097,13 @@ $color-linkedin: #0077b5;
     background: #fff;
     border: none;
     border-radius: 0;
+    border-right: 55px $ucf-gold solid;
     color: #000;
     font-size: 17px;
     letter-spacing: .5px;
     outline: 0;
     padding: 13px 25px 13px 25px;
-    border-right: 55px $ucf-gold solid;
     position: absolute;
-    // transition: all 0.3s;
     width: 100%;
     z-index: 1;
 
@@ -1148,7 +1122,6 @@ $color-linkedin: #0077b5;
     &:placeholder-shown {
       color: #222;
     }
-
   }
 
   .title {
