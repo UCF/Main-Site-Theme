@@ -1284,7 +1284,8 @@ add_shortcode( 'social-share-buttons', 'sc_social_share_buttons' );
 
 
 /**
- *
+ * Displays links to undergraduate and graduate degree search results,
+ * showing the total number of degrees for each type.
  **/
 function sc_college_program_list( $atts, $content='' ) {
 	global $post;
@@ -1322,6 +1323,7 @@ function sc_college_program_list( $atts, $content='' ) {
 }
 
 add_shortcode( 'college-program-list', 'sc_college_program_list' );
+
 
 /**
  * Returns the results of get_acaemics_search_suggestions
