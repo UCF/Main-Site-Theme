@@ -31,7 +31,7 @@ var configDefault = {
 
 // Run Bower
 gulp.task('bower', function() {
-  bower()
+  bower({ cmd: 'update' })
     .pipe(gulp.dest(config.componentsPath))
     .on('end', function() {
 
