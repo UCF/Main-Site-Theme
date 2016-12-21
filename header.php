@@ -81,34 +81,36 @@
 
 		<?php echo google_tag_manager(); ?>
 
-		<div class="container">
-			<div class="row status-alert" id="status-alert-template" data-alert-id="">
-				<div class="col-md-12 col-sm-12 alert-wrap">
-					<div class="alert alert-danger alert-block">
-						<div class="row">
-							<div class="col-md-2 col-sm-2 alert-icon-wrap">
-								<div class="alert-icon general"></div>
-							</div>
-							<div class="col-md-10 col-sm-10 alert-inner-wrap">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>
-								<h2>
-									<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-										<span class="title"></span>
-									</a>
-								</h2>
-								<p class="alert-body">
-									<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
-										<span class="content"></span>
-									</a>
-								</p>
-								<p class="alert-action">
-									<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>"></a>
-								</p>
-							</div>
+		<div class="status-alert" id="status-alert-template" data-alert-id="">
+			<div class="alert alert-danger alert-block">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-1 col-sm-1 col-md-offset-1 col-sm-offset-1 alert-icon-wrap">
+							<div class="alert-icon general"></div>
+						</div>
+						<div class="col-md-8 col-sm-8 alert-inner-wrap">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<h2>
+								<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+									<span class="title"></span>
+								</a>
+							</h2>
+							<p class="alert-body">
+								<a href="<?php echo get_theme_option('alert_more_information_url'); ?>">
+									<span class="content"></span>
+								</a>
+							</p>
+							<p class="alert-action">
+								<a class="more-information" href="<?php echo get_theme_option('alert_more_information_url'); ?>"></a>
+							</p>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<div class="container">
+
 			<?php if ( is_front_page() ): ?>
 			<div id="header" class="sr-only" role="banner">
 				<h1><?php echo bloginfo( 'name' ); ?></h1>

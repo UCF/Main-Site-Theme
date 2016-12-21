@@ -4,7 +4,6 @@
 }
 
 .status-alert {
-  margin-top: 20px;
 
   h2 {
     display: block;
@@ -32,47 +31,47 @@
   }
 
   .alert-icon {
-    @include sprite();
-    float: left;
-    height: 64px;
-    width: 64px;
+    color: #fff;
+    height: 42px;
+    font-size: 32px;
+    width: 42px;
 
-    @media (max-width: $screen-xs-max) {
-      width: 32px;
-      height: 32px;
-      background-size: 212px 175px;
-      margin: 0 10px 0 0;
+    @media (min-width: $screen-sm-min) {
+      font-size: 48px;
+      height: 50px;
+      width: 50px;
     }
 
     &.general {
-      background-position: -128px -283px;
 
-      @media (max-width: $screen-xs-max) {
-        background-position: -64px -141px;
+      @media (min-width: $screen-sm-min) {
+        font-size: 57px;
+      }
+
+      &::before {
+        content: '\f05a';
       }
     }
 
     &.weather {
-      background-position: -194px -281px;
-
-      @media (max-width: $screen-xs-max) {
-        background-position: -97px -140px;
+      &::before {
+        content: '\f0c2';
       }
     }
 
     &.police {
-      background-position: -264px -282px;
-
-      @media (max-width: $screen-xs-max) {
-        background-position: -132px -142px;
+      &::before {
+        content: '\f071';
       }
     }
 
     &.update {
-      background-position: -128px -283px;  // Using 'general' icon for now
+      @media (min-width: $screen-sm-min) {
+        font-size: 57px;
+      }
 
-      @media (max-width: $screen-xs-max) {
-        background-position: -64px -141px;
+      &::before {
+        content: '\f05a';
       }
     }
   }
@@ -85,10 +84,16 @@
   }
 
   .alert {
-    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, .3);
+    border: 0;
+    border-radius: 0;
     margin-bottom: 0;
     padding: 20px 35px 20px 22px;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+
+    .close {
+      font-size: 25px;
+      opacity: .5;
+      text-shadow: none;
+    }
   }
 
   .alert-body {
