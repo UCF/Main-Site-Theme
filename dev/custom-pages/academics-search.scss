@@ -48,8 +48,16 @@
 #contentcol .college {
   border-bottom: solid 1px #e7e7e7;
   margin-bottom: 70px;
-  padding-bottom: 10px;
-  overflow: auto;
+  padding-bottom: 20px;
+
+  &:first-child {
+    margin-top: 40px;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
 
   h3 {
     @include archer(6);
@@ -275,18 +283,6 @@
   }
 }
 
-#contentcol .resources-section {
-  padding-bottom: 40px;
-
-  h2 {
-    margin-top: 0;
-  }
-}
-
-#contentcol .intro-section {
-  margin-bottom: 90px;
-}
-
 .college-dropdown-content {
   background: #f9dd78;
   background: rgba(255, 225, 113, 0.9);
@@ -315,6 +311,78 @@
         &:link,
         &:visited {
           color: #000;
+        }
+      }
+    }
+  }
+}
+
+#contentcol .resources-section {
+  padding-bottom: 35px;
+}
+
+#contentcol .callout {
+  background: #fc0;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .container {
+    vertical-align: top;
+  }
+
+  .icon-link {
+    display: inline-block;
+    margin: 10px auto;
+    width: 25%;
+    vertical-align: top;
+
+    @media (max-width: $screen-xs-max) {
+      width: 50%;
+    }
+
+    a {
+      @include gotham();
+      color: #000;
+
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+      }
+
+      h3 {
+        @include gotham();
+        background: rgba(30, 30, 30, 0.25);
+        border-radius: 4px;
+        display: inline;
+        font-size: 14px;
+        padding: 2px 14px;
+        @include transition(background .25s, color .25s);
+      }
+
+      p {
+        font-size: 12px;
+        font-style: italic;
+        padding-top: 8px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: #fff;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: #fc0;
         }
       }
     }
