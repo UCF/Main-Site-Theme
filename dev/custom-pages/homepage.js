@@ -30,9 +30,8 @@ var init = function() {
   initializeMatchHeight();
 
   $('.count-up').text('0');
-  $(document).on('scroll', scroll);
+  $(document).on('load scroll', scroll);
   $(window).on('load resize', onResize);
-  scroll();
 };
 
 var scroll = function() {
