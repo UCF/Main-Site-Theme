@@ -1,3 +1,4 @@
+// TODO remove these styles in favor of UCF News Plugin classic layout
 .news {
   @extend .list-unstyled;
 
@@ -20,6 +21,7 @@
   }
 }
 
+// TODO remove these styles in favor of UCF News Plugin classic layout
 .news-thumb {
   background-position: center center;
   background-repeat: no-repeat;
@@ -34,4 +36,99 @@
   position: relative;
   text-indent: -9999px;
   width: 66px;
+}
+
+
+.ucf-news-modern {
+  .ucf-news-item {
+    display: table;
+    margin-bottom: 30px;
+    width: 100%;
+  }
+
+  .ucf-news-thumbnail,
+  .ucf-news-item-content {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  // Die, link borders!
+  .ucf-news-thumbnail,
+  .ucf-news-item-link {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 0 solid transparent !important;
+    }
+  }
+
+  .ucf-news-thumbnail {
+    width: 66px;
+
+    @media (min-width: $screen-sm-min) {
+      width: 150px;
+    }
+
+    + .ucf-news-item-content {
+      padding-left: 15px;
+    }
+  }
+
+  .ucf-news-thumbnail-image {
+    height: auto;
+    width: 100%;
+  }
+
+  .ucf-news-item-label {
+    @include gotham(7);
+    background-color: $ucf-gold;
+    color: $black;
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin: 0 0 10px;
+    padding: 2px 15px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 11px;
+    }
+  }
+
+  .ucf-news-item-title {
+    @include gotham(7);
+    font-size: 15px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 20px;
+    }
+  }
+
+  .ucf-news-item-link {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      color: $black;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline !important;
+    }
+  }
+
+  .ucf-news-item-excerpt {
+    @include gotham(4);
+    font-size: 12px;
+    line-height: 1.65;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 14px;
+    }
+  }
 }

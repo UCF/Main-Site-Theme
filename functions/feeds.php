@@ -554,18 +554,7 @@ add_action( 'ucf_news_display_modern_before', 'mainsite_news_display_modern_befo
 
 
 function mainsite_news_display_modern_title( $item, $title, $display_type ) {
-	$formatted_title = $title;
-
-	switch( $display_type ) {
-		case 'widget':
-			break;
-		case 'default':
-		default:
-			$formatted_title = '<h2 class="ucf-news-title">' . $title . '</h2>';
-			break;
-	}
-
-	echo $formatted_title;
+	echo do_action( 'ucf_news_display_classic_title', $item, $title, $display_type );
 }
 
 add_action( 'ucf_news_display_modern_title', 'mainsite_news_display_modern_title', 10, 3 );
@@ -577,20 +566,39 @@ function mainsite_news_display_modern( $items, $title, $display_type ) {
 	<div class="ucf-news-items">
 	<?php
 	foreach( $items as $item ) :
-		$item_img = UCF_News_Common::get_image_url_or_fallback( $item );
+		$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+		$sections = UCF_News_Common::get_story_sections( $item );
+		$section  = isset( $sections[0] ) ? $sections[0] : false;
 	?>
-		<div class="ucf-news-item">
+		<article class="ucf-news-item">
+
 		<?php if ( $item_img ): ?>
-			<div class="ucf-news-thumbnail">
+			<a class="ucf-news-thumbnail" href="<?php echo $item->link; ?>">
 				<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>">
-			</div>
+			</a>
 		<?php endif; ?>
-			<div class="ucf-news-item-title">
-				<a href="<?php echo $item->link; ?>">
-					<?php echo $item->title->rendered; ?>
-				</a>
+
+			<div class="ucf-news-item-content">
+
+			<?php if ( $section ): ?>
+				<span class="ucf-news-item-label">
+					<?php echo $section->name; ?>
+				</span>
+			<?php endif; ?>
+
+				<h3 class="ucf-news-item-title">
+					<a class="ucf-news-item-link" href="<?php echo $item->link; ?>">
+						<?php echo $item->title->rendered; ?>
+					</a>
+				</h3>
+
+				<div class="ucf-news-item-excerpt">
+					<?php echo $item->excerpt->rendered; ?>
+				</div>
+
 			</div>
-		</div>
+
+		</article>
 	<?php
 	endforeach;
 	?>
