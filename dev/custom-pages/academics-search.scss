@@ -48,16 +48,8 @@
 #contentcol .college {
   border-bottom: solid 1px #e7e7e7;
   margin-bottom: 70px;
-  padding-bottom: 20px;
-
-  &:first-child {
-    margin-top: 40px;
-  }
-
-  &:last-child {
-    border-bottom: 0;
-  }
-
+  padding-bottom: 10px;
+  overflow: auto;
 
   h3 {
     @include archer(6);
@@ -283,6 +275,17 @@
   }
 }
 
+#contentcol .resources-section {
+  padding-bottom: 40px;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+#contentcol .intro-section {
+  margin-bottom: 90px;
+}
 
 .college-dropdown-content {
   background: #f9dd78;
