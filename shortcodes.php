@@ -1436,6 +1436,7 @@ function sc_sections_menu( $atts, $content='' ) {
 			</div>
 		</div>
 	</nav>
+	<div class="navbar-bumper"></div>
 <?php
 	return ob_get_clean();
 }
