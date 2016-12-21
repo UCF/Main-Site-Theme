@@ -1518,12 +1518,6 @@ var academicDegreeSearch = function ($) {
   }
 };
 
-var homePageMajorsList = function($) {
-  $('.top-majors-heading').on('click', function() {
-    $('.top-majors-heading, .top-majors-content').toggleClass('expanded');
-  });
-};
-
 // https://codepen.io/hi-im-si/pen/uhxFn
 var countUp = function($) {
   $('.count-up').each(function() {
@@ -1659,7 +1653,6 @@ if (typeof jQuery != 'undefined'){
     mediaTemplateVideo($);
     academicDegreeSearch($);
     sectionsMenu($);
-    homePageMajorsList($);
 
     statusAlertCheck($);
     setInterval(function() {statusAlertCheck($);}, 30000);

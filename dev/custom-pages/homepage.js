@@ -7,20 +7,20 @@ var map,
  * Debouce method to pause logic until resize is complete
  */
 function debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-        var context = this,
-            args = arguments;
+  var timeout;
+  return function () {
+    var context = this,
+        args = arguments;
 
-        var later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
+    var later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
     };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
 };
 
 var init = function() {
@@ -28,6 +28,7 @@ var init = function() {
   scrollStop = false;
 
   initializeMatchHeight();
+  homePageMajorsList();
 
   $('.count-up').text('0');
   $(document).on('load scroll', scroll);
@@ -57,5 +58,11 @@ function initializeMatchHeight() {
     $statsItem.matchHeight();
   });
 }
+
+var homePageMajorsList = function() {
+  $('.top-majors-heading').on('click', function() {
+    $('.top-majors-heading, .top-majors-content').toggleClass('expanded');
+  });
+};
 
 $(document).ready(init);
