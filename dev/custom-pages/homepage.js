@@ -59,9 +59,11 @@ function initializeMatchHeight() {
   });
 }
 
-var homePageMajorsList = function() {
+function homePageMajorsList() {
   $('.top-majors-heading').on('click', function() {
-    $('.top-majors-heading, .top-majors-content').toggleClass('expanded');
+    if ($(window).width() < 992) {
+      $('.top-majors-heading, .top-majors-content').toggleClass('expanded');
+    }
   });
 };
 

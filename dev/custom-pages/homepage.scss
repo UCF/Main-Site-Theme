@@ -321,6 +321,16 @@ $color-linkedin: #0077b5;
         }
       }
     }
+
+    .top-majors-heading.expanded::after {
+      content: "\F139";
+      font-family: FontAwesome;
+      right: 15px;
+      position: absolute;
+      top: 9px;
+      font-size: 23px;
+    }
+
     .top-majors-content {
       @media (max-width: $screen-sm-max) {
         height: 0;
