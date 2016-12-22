@@ -610,7 +610,7 @@ var statusAlertCheck = function ($) {
           }
 
           if(existing_icon.hasClass(newest.type) === false) {
-            existing_icon.attr('class','alert-icon ' + newest.type);
+            existing_icon.attr('class','alert-icon fa ' + newest.type);
             contentChanged = true;
           }
 
@@ -627,14 +627,14 @@ var statusAlertCheck = function ($) {
             alert_markup
               .attr('id', '')
               .attr('data-alert-id', newest.id);
-            $('#header-nav-wrap').before(alert_markup);
+            $('#status-alert-template').before(alert_markup);
 
 
             var $markup = $('.status-alert[data-alert-id="' + newest.id + '"]');
             $markup.find('.title').text(newest.title).end()
               .find('.content').text(newest.description).end()
               .find('.more-information').text('Click Here for More Information').end()
-              .find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+              .find('.alert-icon').attr('class', 'alert-icon fa ' + newest.type);
 
             switch(newest.type) {
               case 'alert':

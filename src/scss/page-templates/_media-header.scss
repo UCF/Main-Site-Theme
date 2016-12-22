@@ -1,10 +1,10 @@
 // Media Header Template Pages
 .page-template-template-media-feature {
   .status-alert {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 
     @media (max-width: $screen-xs-max) {
-      margin-bottom: 5px;
+      margin-bottom: 0;
       position: relative;
       z-index: 3;
     }
