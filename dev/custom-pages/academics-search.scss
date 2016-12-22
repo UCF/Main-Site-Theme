@@ -153,7 +153,7 @@
 .academics-search-box {
   @include gotham(6);
 
-  background-color: #FC0;
+  background-color: $ucf-gold;
   color: #000;
   font-size: 24px;
   height: 117px;
@@ -209,9 +209,7 @@
     padding: 13px 54px 13px 25px;
     position: absolute;
     transition: all 0.3s;
-
     width: 100%;
-
     z-index: 1;
 
     &::-webkit-input-placeholder {
@@ -273,13 +271,13 @@
   padding: 5px 10px;
   width: 500px;
 
+  &:hover {
+    background-color: rgba(255, 225, 113, 0.8);
+  }
+
   hr {
     border: 1px dashed #6f6f6f;
     margin:0;
-  }
-
-  &:hover {
-    background-color: rgba(255, 225, 113, 0.8);
   }
 }
 
@@ -322,7 +320,7 @@
 }
 
 #contentcol .callout {
-  background: #fc0;
+  background: $ucf-gold;
   margin: 0 auto;
   text-align: center;
   padding: 48px 0;
@@ -345,9 +343,24 @@
       width: 50%;
     }
 
-    a {
+    .icon-link-anchor {
       @include gotham();
       color: #000;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: $white;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: $ucf-gold;
+        }
+      }
 
       .fa {
         font-size: 80px;
@@ -369,21 +382,6 @@
         font-size: 12px;
         font-style: italic;
         padding-top: 8px;
-      }
-
-      &:hover,
-      &:active,
-      &:focus {
-        text-decoration: none;
-
-        .fa {
-          color: #fff;
-        }
-
-        h3 {
-          background: rgba(10, 10, 10, 0.55);
-          color: #fc0;
-        }
       }
     }
   }
