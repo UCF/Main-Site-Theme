@@ -24,8 +24,11 @@
   }
 
   .alert-icon-wrap {
+    text-align: right;
+
     @media (max-width: $screen-xs-max) {
       position: relative;
+      text-align: left;
       z-index: 2;
     }
   }
