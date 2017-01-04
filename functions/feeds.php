@@ -459,7 +459,8 @@ function mainsite_news_get_layouts( $layouts ) {
 	$layouts = array_merge(
 		$layouts,
 		array(
-			'modern' => 'Modern'
+			'modern' => 'Modern',
+			'text' => 'Text'
 		)
 	);
 	return $layouts;
@@ -543,4 +544,54 @@ function mainsite_news_display_modern_after( $items, $title, $display_type ) {
 }
 
 add_action( 'ucf_news_display_modern_after', 'mainsite_news_display_modern_after', 10, 3 );
+
+/**
+ * Output of "Text" UCF News layout:
+ **/
+
+function mainsite_news_display_text_before( $items, $title, $display_type ) {
+	ob_start();
+?>
+	<div class="ucf-news ucf-news-text">
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_text_before', 'mainsite_news_display_text_before', 10, 3 );
+
+if ( ! function_exists( 'ucf_news_display_text' ) ) {
+	function ucf_news_display_text( $items, $title, $display_type ) {
+		ob_start();
+	?>
+		<div class="ucf-news-items">
+	<?php
+		foreach( $items as $item ) :
+			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+	?>
+			<div class="ucf-news-item">
+				<div class="ucf-news-item-title">
+					<a href="<?php echo $item->link; ?>" class="ucf-news-item-link">
+						<?php echo $item->title->rendered; ?>
+					</a>
+				</div>
+			</div>
+	<?php
+		endforeach;
+	?>
+	</div>
+	<?php
+		echo ob_get_clean();
+	}
+	add_action( 'ucf_news_display_text', 'ucf_news_display_text', 10, 3 );
+}
+
+function mainsite_news_display_text_after( $items, $title, $display_type ) {
+	ob_start();
+?>
+	</div>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_text_after', 'mainsite_news_display_text_after', 10, 3 );
 ?>

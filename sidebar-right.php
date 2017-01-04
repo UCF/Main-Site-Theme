@@ -17,34 +17,27 @@
 	$embed3					= get_post_meta($post->ID, 'page_widget_r_embed3', TRUE);
 
 	// Today Feed
-	if ($show_today == 'on') {
+	if ( $show_today == 'on' ) {
 
-		// TODO replace all of this with direct calls to
-		// UCF_News_Feed::get_news_items() and UCF_News_Common::display_news_items()
+		echo '<h3 id="sidebar_r_today" class="sidebar_title">';
+			$today_feed_title = $today_feed_title !== '' ? 'UCF Today &raquo; ' . $today_feed_title : 'UCF Today';
+			echo $today_feed_title;
+		echo '</h3>';
 
-		print '<h3 id="sidebar_r_today" class="sidebar_title">';
-			$today_feed_title = $today_feed_title !== '' ? 'UCF Today &raquo; '.$today_feed_title : 'UCF Today';
-			print $today_feed_title;
-		print '</h3>';
+		$args = array(
+			'sections' => null,
+			'topics'   => null,
+			'offset'   => 0,
+			'limit'    => 5
+		);
 
-		print '<div id="sidebar_r_today_wrap" class="sidebar_r_wrap">';
-		$news = get_sidebar_news($post, 0, 5);
-		if(count($news)) { ?>
-			<ul class="news">
-				<?php
-				foreach($news as $item) { ?>
-					<li class="item">
-						<a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a>
-					</li>
-				<?php
-				} ?>
-			</ul>
-		<?php
-		} else {
-			print '<p>Unable to fetch news.</p>';
+		$items = UCF_News_Feed::get_news_items( $args );
+
+		if ( $items ) {
+			echo UCF_News_Common::display_news_items( $items, 'text', '', 'default' );
 		}
-		print '<a class="rssbtn" href="'.$today_feed.'">Full Feed</a>';
-		print '</div>';
+
+		echo '<a class="rssbtn" href="' . $today_feed . '">Full Feed</a>';
 	}
 
 	// Facebook Link

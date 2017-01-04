@@ -1,4 +1,5 @@
 
+// News Modern theme
 .ucf-news-modern {
   .ucf-news-item {
     display: table;
@@ -90,6 +91,28 @@
 
     @media (min-width: $screen-sm-min) {
       font-size: 14px;
+    }
+  }
+}
+
+// News Text theme
+.ucf-news-text {
+
+  .ucf-news-item-title {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .ucf-news-item-link {
+    border-bottom: 1px solid #333;
+    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+
+    &:hover {
+      border-bottom: 1px solid #e50606;
+      color: #e50606;
+      text-decoration: none;
     }
   }
 }
