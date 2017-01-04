@@ -303,6 +303,22 @@ function display_events_list( $start=null, $limit=null, $url='', $list_classes='
 }
 
 
+function display_news() {
+	$args = array(
+		'sections' => null,
+		'topics'   => null,
+		'offset'   => 0,
+		'limit'    => get_theme_option( 'news_max_items' )
+	);
+
+	$items = UCF_News_Feed::get_news_items( $args );
+
+	if ( $items ) {
+		echo UCF_News_Common::display_news_items( $items, 'classic', 'News', 'default' );
+	}
+}
+
+
 function display_pegasus_issues_list_item( $issue, $list_item_classes='' ) {
 	$issue_url               = $issue->link;
 	$issue_title             = $issue->title->rendered;

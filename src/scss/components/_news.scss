@@ -9,7 +9,7 @@
     width: 100%;
 
     &:hover {
-      background-color: #f6f6f6;
+      background-color: $gray-lighter;
     }
   }
 
@@ -104,8 +104,8 @@
   }
 
   .ucf-news-item-link {
-    border-bottom: 1px solid #333;
-    color: #333;
+    border-bottom: 1px solid $gray-dark;
+    color: $gray-dark;
     font-size: 12px;
     font-weight: 400;
 
