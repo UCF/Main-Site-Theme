@@ -156,7 +156,7 @@
   background-color: #FC0;
   color: #000;
   font-size: 24px;
-  height: 117px;
+  height: 100px;
   padding: 26px 30px;
   transition: all 1s;
 
@@ -165,9 +165,9 @@
     font-weight: 500;
   }
 
-  @media (max-width: $screen-md-max) {
-    height: 100px;
-    transition-delay: 0s;
+  @media (min-width: $screen-sm-min) {
+    height: 117px;
+    transition-delay: 0;
     transition: height 0.2s;
   }
 
@@ -263,6 +263,29 @@
   right: 38px;
   top: 41px;
   z-index: 2;
+}
+
+.degree-list-count {
+  display: none;
+  margin-top: 62px;
+
+  @media (min-width: $screen-sm-min) {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+  }
+
+  @media (min-width: $screen-md-min) {
+    margin-top: 66px;
+  }
+
+  a,
+  a:hover,
+  a:active,
+  a:focus {
+    color: #337ab7;
+  }
 }
 
 .tt-suggestion {
