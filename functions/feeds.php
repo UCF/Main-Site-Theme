@@ -312,6 +312,8 @@ function display_news(){?>
 		<ul class="news">
 			<?php foreach($news as $key=>$item):
 				$image = get_article_image($item);
+				// Force https on image.
+				$image = str_replace('http:', 'https:', $image);
 				if (!($image)) {
 					$image = 'https://today.ucf.edu/widget/thumbnail.png';
 				}
@@ -326,8 +328,6 @@ function display_news(){?>
 					// Grab Today's 66x66px thumbnails if they're available
 					$image_small = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
 					$image = check_remote_file($image_small) !== false ? $image_small : $image;
-					// Force https on image.
-					$image = str_replace('http:', 'https:', $image);
 				}
 				$first = ($key == 0);
 			?>
