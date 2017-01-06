@@ -313,7 +313,7 @@ function display_news(){?>
 			<?php foreach($news as $key=>$item):
 				$image = get_article_image($item);
 				if (!($image)) {
-					$image = 'http://today.ucf.edu/widget/thumbnail.png';
+					$image = 'https://today.ucf.edu/widget/thumbnail.png';
 				}
 				else {
 					if (preg_match('/\.jpeg$/i', $image)) {
