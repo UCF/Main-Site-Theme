@@ -213,19 +213,19 @@
     z-index: 1;
 
     &::-webkit-input-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &:-moz-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &::-moz-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &:-ms-input-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &:placeholder-shown {
-      color: #796b2d;
+      color: #000;
     }
 
   }
