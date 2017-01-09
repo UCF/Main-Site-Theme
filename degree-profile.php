@@ -5,12 +5,12 @@
 ?>
 </div>
 
-<?php if ( $post->header_image ): ?>
-<div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
-	<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>url(<?php echo $post->header_image; ?>)">
+<?php if ( $header_image = get_degree_header_image() ): ?>
+	<div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
+		<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>url(<?php echo $header_image ?>)">
 <?php else: ?>
-<div class="container-fullwidth page-media degree-header no-header-image" id="<?php echo $post->post_name; ?>">
-	<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>">
+	<div class="container-fullwidth page-media degree-header no-header-image" id="<?php echo $post->post_name; ?>">
+		<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>">
 <?php endif; ?>
 		<div class="page-media-container container">
 			<h1><?php echo $post->post_title; ?></h1>

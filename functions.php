@@ -3224,4 +3224,23 @@ function add_classic_degree_body_class( $classes ) {
 add_action( 'body_class', 'add_classic_degree_body_class' );
 
 
+/**
+ * Get Degree Header Image logic
+ **/
+function get_degree_header_image() {
+	global $post, $theme_options;
+
+	$degree_header = $post->header_image;
+	$college_header = get_term_meta( $college_id, 'colleges_header_image');
+	$fallback = $theme_options[ 'fallback_degree_image' ];
+
+	if ( $degree_header ) {
+		return $degree_header;
+	} else if ( $college_header ) {
+		return $college_header;
+	} else {
+		return ( isset( $fallback ) && !empty( $fallback ) ) ? $fallback : NULL;
+	}
+}
+
 ?>
