@@ -435,6 +435,7 @@ WebcomAdmin.fileUploader = function($) {
 WebcomAdmin.collegesUpload = function($) {
   var fileFrame,
       $btn = $('#colleges_header_image_upload'),
+      $remove = $('#colleges_header_image_remove'),
       $field = $('#colleges_header_image'),
       $preview = $('#colleges_header_image_preview');
 
@@ -462,7 +463,13 @@ WebcomAdmin.collegesUpload = function($) {
     fileFrame.open();
   };
 
+  var removeImage = function() {
+    $field.val(null);
+    $preview.attr('src', '');
+  };
+
   $btn.click(openModal);
+  $remove.click(removeImage);
 };
 
 (function($){
