@@ -92,17 +92,17 @@ function sc_publication($attr, $content=null){
 	}
 
 	$url = get_post_meta($pub->ID, "publication_url", True);
-	$url = str_replace('https:', 'http:', $url); // Force http
+	$url = str_replace('http:', 'https:', $url); // Force https
 
 	// Get the Issuu DocumentID from the url provided
 	$docID = json_decode(file_get_contents($url.'?issuu-data=docID'));
 	$docID = $docID->docID;
 
 	// If no docID is found, assume that the publication url is invalid
-	if ($docID == NULL) { return 'DocID not found. Is the publication URL valid? Please use URLs from http://publications.ucf.edu.'; }
+	if ($docID == NULL) { return 'DocID not found. Is the publication URL valid? Please use URLs from https://publications.ucf.edu.'; }
 
 	// Output for an Issuu thumbnail, based on docID
-	$issuu_thumb = "<img src='http://image.issuu.com/".$docID."/jpg/page_1_thumb_large.jpg' alt='".$pub->post_title."' title='".$pub->post_title."' />";
+	$issuu_thumb = "<img src='https://image.issuu.com/".$docID."/jpg/page_1_thumb_large.jpg' alt='".$pub->post_title."' title='".$pub->post_title."' />";
 
 	// If a featured image is set, use it; otherwise, get the thumbnail from issuu
 	$thumb = (get_the_post_thumbnail($pub->ID, 'publication_thumb', TRUE) !== '') ? get_the_post_thumbnail($pub->ID, 'publication_thumb', TRUE) : $issuu_thumb;
@@ -154,7 +154,7 @@ function sc_video($attr, $content=null){
 	$video_yt_id		= get_youtube_id($video_url);
 	$video_description  = $video->post_content;
 	$video_thumbnail    = wp_get_attachment_image(get_post_thumbnail_id($video->ID, 'medium'));
-	$embed_url			= 'http://www.youtube.com/embed/'.$video_yt_id.'?wmode=transparent';
+	$embed_url			= 'https://www.youtube.com/embed/'.$video_yt_id.'?wmode=transparent';
 
 	switch ($display) {
 		default:
@@ -1066,8 +1066,8 @@ function gf_login_html($error = false) {
 				<div class="alert alert-danger" id="login_error">
 					<strong>Error:</strong>
 					<p>Your NID or password is invalid or the authentication service was unavailable.</p>
-					<p>To verify your NID, go to <a href="http://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"<br/>
-					To reset your password, go to the <a href="http://mynid.ucf.edu/">Change Your NID Password</a> page.<br/>
+					<p>To verify your NID, go to <a href="https://my.ucf.edu/">myUCF</a> and select "What are my PID and NID?"<br/>
+					To reset your password, go to the <a href="https://mynid.ucf.edu/">Change Your NID Password</a> page.<br/>
 					For further help, contact the Service Desk at 407-823-5117, Monday-Friday 8am-5pm.</p>
 				</div>
 				<?php endif; ?>
