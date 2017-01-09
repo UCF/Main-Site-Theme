@@ -3283,7 +3283,7 @@ function get_degree_header_image() {
 	global $post, $theme_options;
 
 	$degree_header = $post->header_image;
-	$college_header = get_term_meta( $college_id, 'colleges_header_image');
+	$college_header = get_term_meta( $post->tax_college->term_id, 'colleges_header_image', TRUE);
 	$fallback = $theme_options[ 'fallback_degree_image' ];
 
 	if ( $degree_header ) {
