@@ -1,5 +1,5 @@
 <!-- Media Template: Header Contents -->
-<div class="container-fluid text-center">
+<div class="container text-center">
   <div style="display: inline-block;"><span class="header-title pull-left">Opportunity Starts Here</span><h1 class="header-subtitle pull-right">Academics and Degree Programs</h1></div>
 </div>
 
@@ -7,11 +7,15 @@
   <div class="col-md-12 academics-intro fade-in fade-first text-center">
     <p>Whatever your passion, we've got the program to get you going in the right direction.</p>
   </div>
-  <div class="col-md-12 academics-box academics-search-box fade-in fade-second">
-    <span class="title">Find the program that's right for you:</span>
-    <span class="fa fa-search search-icon"></span>
-    <input id="academics-degree-search" name="academics-degree-search" class="academics-search-icon" type="text" autocomplete="off"
-      data-provide="typeahead" placeholder="Search for degree programs by name or area of interest" />
+  <div class="col-md-10 col-md-offset-1 academics-box academics-search-box fade-in fade-second">
+    <form action="/degree-search/" method="GET">
+      <input id="academics-degree-search" name="search-query" class="academics-search-icon" type="text" autocomplete="off"
+        data-provide="typeahead" placeholder="Search for degree programs by name or area of interest" />
+      <button class="search-icon" type="submit"><span class="fa fa-search"></span></button>
+    </form>
+  </div>
+  <div class="col-md-10 col-md-offset-1 academics-extra">
+    <p class="degree-list-count"><a href="http://www.ucf.edu/degree-search/?program-type%5B0%5D=undergraduate-degree" target="_blank" class="external">109 Bachelor’s Degrees</a> <span style="margin: 0 4px;">&diams;</span> <a href="http://www.ucf.edu/degree-search/?program-type%5B0%5D=graduate-degree" target="_blank" class="external">121 Graduate Degrees (Master’s and Doctoral)</a></p>
   </div>
 </div>
 [academics-search-suggestions]

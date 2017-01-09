@@ -150,6 +150,11 @@
   }
 }
 
+.academics-extra {
+  background: #333;
+  color: #fff;
+}
+
 .academics-search-box {
   @include gotham(6);
 
@@ -159,6 +164,7 @@
   height: 100px;
   padding: 26px 30px;
   transition: all 1s;
+  z-index: 100;
 
   .title {
     font-size: 22px;
@@ -258,7 +264,10 @@
 }
 
 .search-icon {
+  background: transparent;
+  border: 0;
   font-size: 33px;
+  line-height: 0;
   position: absolute;
   right: 38px;
   top: 41px;
@@ -267,7 +276,8 @@
 
 .degree-list-count {
   display: none;
-  margin-top: 62px;
+  margin-bottom: 0;
+  padding: 12px;
 
   .degree-list-title {
     text-transform: uppercase;
@@ -280,15 +290,15 @@
     position: relative;
   }
 
-  @media (min-width: $screen-md-min) {
-    margin-top: 66px;
-  }
+  a {
+    color: #fc0;
+    font-weight: 300;
 
-  a,
-  a:hover,
-  a:active,
-  a:focus {
-    color: #337ab7;
+    &:hover,
+    &:active,
+    &:focus {
+      color: #fff;
+    }
   }
 }
 
