@@ -2725,11 +2725,11 @@ add_action( 'edited_colleges', 'edit_colleges_meta', 10, 2 );
  * Get Degree Header Image logic
  **/
 function get_degree_header_image() {
-	global $post, $theme_options;
+	global $post;
 
 	$degree_header = $post->header_image;
-	$college_header = get_term_meta( $post->tax_college->term_id, 'colleges_header_image', TRUE);
-	$fallback = $theme_options[ 'fallback_degree_image' ];
+	$college_header = get_term_meta( $post->tax_college->term_id, 'colleges_header_image', TRUE );
+	$fallback = get_theme_option( 'fallback_degree_image' );
 
 	if ( $degree_header ) {
 		return $degree_header;
