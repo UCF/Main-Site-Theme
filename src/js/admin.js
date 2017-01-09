@@ -432,6 +432,38 @@ WebcomAdmin.fileUploader = function($) {
     .on('click', '.meta-file-delete', removeFile);
 };
 
+WebcomAdmin.collegesUpload = function($) {
+  var fileFrame,
+      $btn = $('#colleges_header_image_upload'),
+      $field = $('#colleges_header_image'),
+      $preview = $('#colleges_header_image_preview');
+
+  var openModal = function() {
+
+    if (fileFrame) {
+      fileFrame.open();
+      return;
+    }
+
+    fileFrame = wp.media.frames.file_frame = wp.media({
+        title: jQuery(this).data('uploader_title'),
+        button: {
+            text: jQuery(this).data('uploader_button_text'),
+        },
+        multiple: false // Set to true to allow multiple files to be selected
+    });
+
+    fileFrame.on('select', function() {
+      var imageData = fileFrame.state().get('selection').first().toJSON();
+      $field.val(imageData.url);
+      $preview.attr('src', imageData.url);
+    });
+
+    fileFrame.open();
+  };
+
+  $btn.click(openModal);
+};
 
 (function($){
 	WebcomAdmin.__init__($);
@@ -440,4 +472,5 @@ WebcomAdmin.fileUploader = function($) {
 	WebcomAdmin.centerpieceAdmin($);
 	WebcomAdmin.subheaderAdmin($);
   WebcomAdmin.fileUploader($);
+  WebcomAdmin.collegesUpload($);
 })(jQuery);
