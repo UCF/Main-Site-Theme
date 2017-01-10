@@ -150,30 +150,24 @@
   }
 }
 
-.academics-extra {
-  background: #333;
-  color: #fff;
-}
-
 .academics-search-box {
   @include gotham(6);
 
-  background-color: #FC0;
+  background-color: $ucf-gold;
   color: #000;
   font-size: 24px;
-  height: 100px;
+  height: 117px;
   padding: 26px 30px;
   transition: all 1s;
-  z-index: 100;
 
   .title {
     font-size: 22px;
     font-weight: 500;
   }
 
-  @media (min-width: $screen-sm-min) {
-    height: 117px;
-    transition-delay: 0;
+  @media (max-width: $screen-md-max) {
+    height: 100px;
+    transition-delay: 0s;
     transition: height 0.2s;
   }
 
@@ -215,25 +209,23 @@
     padding: 13px 54px 13px 25px;
     position: absolute;
     transition: all 0.3s;
-
     width: 100%;
-
     z-index: 1;
 
     &::-webkit-input-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &:-moz-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &::-moz-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &:-ms-input-placeholder {
-      color: #796b2d;
+      color: #000;
     }
     &:placeholder-shown {
-      color: #796b2d;
+      color: #000;
     }
 
   }
@@ -264,42 +256,11 @@
 }
 
 .search-icon {
-  background: transparent;
-  border: 0;
   font-size: 33px;
-  line-height: 0;
   position: absolute;
   right: 38px;
   top: 41px;
   z-index: 2;
-}
-
-.degree-list-count {
-  display: none;
-  margin-bottom: 0;
-  padding: 12px;
-
-  .degree-list-title {
-    text-transform: uppercase;
-  }
-
-  @media (min-width: $screen-sm-min) {
-    display: block;
-    font-size: 12px;
-    font-weight: 400;
-    position: relative;
-  }
-
-  a {
-    color: #fc0;
-    font-weight: 300;
-
-    &:hover,
-    &:active,
-    &:focus {
-      color: #fff;
-    }
-  }
 }
 
 .tt-suggestion {
@@ -310,16 +271,15 @@
   padding: 5px 10px;
   width: 500px;
 
+  &:hover {
+    background-color: rgba(255, 225, 113, 0.8);
+  }
+
   hr {
     border: 1px dashed #6f6f6f;
     margin:0;
   }
-
-  &:hover {
-    background-color: rgba(255, 225, 113, 0.8);
-  }
 }
-
 
 .college-dropdown-content {
   background: #f9dd78;
@@ -355,8 +315,12 @@
   }
 }
 
-.callout {
-  background: #fc0;
+#contentcol .resources-section {
+  padding-bottom: 35px;
+}
+
+#contentcol .callout {
+  background: $ucf-gold;
   margin: 0 auto;
   text-align: center;
   padding: 48px 0;
@@ -365,17 +329,38 @@
     margin-right: 0;
   }
 
+  .container {
+    vertical-align: top;
+  }
+
   .icon-link {
     display: inline-block;
     margin: 10px auto;
     width: 25%;
+    vertical-align: top;
 
     @media (max-width: $screen-xs-max) {
       width: 50%;
     }
 
-    a {
+    .icon-link-anchor {
+      @include gotham();
       color: #000;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: $white;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: $ucf-gold;
+        }
+      }
 
       .fa {
         font-size: 80px;
@@ -384,10 +369,10 @@
       }
 
       h3 {
+        @include gotham();
         background: rgba(30, 30, 30, 0.25);
         border-radius: 4px;
         display: inline;
-        font-family: $font-family-sans-serif;
         font-size: 14px;
         padding: 2px 14px;
         @include transition(background .25s, color .25s);
@@ -397,21 +382,6 @@
         font-size: 12px;
         font-style: italic;
         padding-top: 8px;
-      }
-
-      &:hover,
-      &:active,
-      &:focus {
-        text-decoration: none;
-
-        .fa {
-          color: #fff;
-        }
-
-        h3 {
-          background: rgba(10, 10, 10, 0.55);
-          color: #fc0;
-        }
       }
     }
   }
