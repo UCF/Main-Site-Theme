@@ -283,6 +283,12 @@ Config::$theme_settings = array(
 	),
 	'Degrees' => array(
 		new TextField(array(
+			'name'        => 'Degree Fallback Header Image',
+			'id'          => THEME_OPTIONS_NAME.'[fallback_degree_image]',
+			'description' => 'URL for the fallback degree header image.',
+			'value'       => $theme_options['fallback_degree_image'],
+		)),
+		new TextField(array(
 			'name'        => 'Undergraduate catalog URL',
 			'id'          => THEME_OPTIONS_NAME.'[undergrad_catalog_url]',
 			'description' => 'URL for the undergraduate degree catalog website.',

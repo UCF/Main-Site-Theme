@@ -2666,6 +2666,79 @@ function colleges_render_columns( $out, $name, $term_id ) {
 }
 add_filter( 'manage_colleges_custom_column', 'colleges_render_columns', 10, 3);
 
+function add_colleges_fields( $taxonomy ) {
+	wp_enqueue_script('media-upload');
+?>
+	<div class="form-field term-group">
+		<label for="colleges_header_image">Header Image</label>
+		<button type="button" class="button" id="colleges_header_image_upload">Upload Image</button>
+		<input type="hidden" name="colleges_header_image" id="colleges_header_image">
+	</div>
+	<div class="form-field term-group">
+		<img id="colleges_header_image_preview" src="" style="width: 100%;">
+	</div>
+<?php
+}
+
+add_action( 'colleges_add_form_fields', 'add_colleges_fields', 10, 1 );
+
+function edit_colleges_fields( $term, $taxonomy ) {
+	wp_enqueue_script('media-upload');
+	$image = get_term_meta( $term->term_id, 'colleges_header_image', true );
+?>
+	<tr class="form-field term-group">
+		<th scope="row"><label for="colleges_header_image">Header Image</label></th>
+		<td>
+			<button type="button" class="button" id="colleges_header_image_upload">Change Image</button>
+			<button type="button" class="button" id="colleges_header_image_remove">Remove Image</button>
+		</td>
+		<td><input type="hidden" name="colleges_header_image" id="colleges_header_image"></td>
+	</tr>
+	<tr class="form-field term-group">
+		<td>Preview: </td>
+		<td><img id="colleges_header_image_preview" src="<?php echo $image; ?>" style="width: 100%;" ></td>
+	</tr>
+<?php
+}
+
+add_action( 'colleges_edit_form_fields', 'edit_colleges_fields', 10, 2 );
+
+function save_colleges_meta( $term_id, $tt_id ) {
+	if ( isset( $_POST['colleges_header_image'] ) ) {
+		$header_image = $_POST['colleges_header_image'];
+		add_term_meta( $term_id, 'colleges_header_image', $header_image );
+	}
+}
+
+add_action( 'created_colleges', 'save_colleges_meta', 10, 2 );
+
+function edit_colleges_meta( $term_id, $tt_id ) {
+	if ( isset( $_POST['colleges_header_image'] ) ) {
+		$header_image = $_POST['colleges_header_image'];
+		update_term_meta( $term_id, 'colleges_header_image', $header_image );
+	}
+}
+
+add_action( 'edited_colleges', 'edit_colleges_meta', 10, 2 );
+
+/**
+ * Get Degree Header Image logic
+ **/
+function get_degree_header_image() {
+	global $post;
+
+	$degree_header = $post->header_image;
+	$college_header = get_term_meta( $post->tax_college->term_id, 'colleges_header_image', TRUE );
+	$fallback = get_theme_option( 'fallback_degree_image' );
+
+	if ( $degree_header ) {
+		return $degree_header;
+	} else if ( $college_header ) {
+		return $college_header;
+	} else {
+		return ( isset( $fallback ) && !empty( $fallback ) ) ? $fallback : NULL;
+	}
+}
 
 /**
  * Adds custom "meta fields" for Program Types terms.
@@ -3222,6 +3295,5 @@ function add_classic_degree_body_class( $classes ) {
 }
 
 add_action( 'body_class', 'add_classic_degree_body_class' );
-
 
 ?>
