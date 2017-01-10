@@ -1,7 +1,4 @@
 (function() {
-  // Hiding alerts temporarily to avoid duplicate information
-  $('.status-alert').parent().hide();
-
   // Make Flickr behave
   function responsiveFlickrEmbeds() {
     $('.flickr-embed-frame').each(function() {
