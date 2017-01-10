@@ -3276,19 +3276,15 @@ function get_social_icon( $item_slug ) {
  **/
 function add_classic_degree_body_class( $classes ) {
 	global $post;
+
 	if ( $post->post_type == 'degree' ) {
 		$use_classic_template = get_post_meta( $post->ID, 'degree_use_classic_template', True );
-		$header_image = get_post_meta( $post->ID, 'degree_header_image', True );
-		$has_header_image = ( $header_image !== "" ) ? true : false;
+
 		if ( $use_classic_template ) {
 			$classes[] = 'classic-degree-template';
 		}
 		else {
 			$classes[] = 'updated-degree-template';
-
-			if ( !$has_header_image ) {
-				$classes[] = 'no-header-image';
-			}
 		}
 	}
 	return $classes;
