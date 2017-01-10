@@ -29,6 +29,7 @@ $bright-blue: #08c;
   #header-menu {
     a {
       color: $white;
+      text-shadow: 0 0 1px $black;
 
       &:hover {
         color: #fc0;
@@ -37,6 +38,7 @@ $bright-blue: #08c;
 
     .last a {
       color: $black;
+      text-shadow: none;
 
       &:hover {
         color: $white;
@@ -55,6 +57,7 @@ $bright-blue: #08c;
     #header-menu {
       a {
         color: $black;
+        text-shadow: none;
 
         &:hover {
           color: #fc0;
@@ -63,6 +66,7 @@ $bright-blue: #08c;
 
       .last a {
         color: $black;
+        text-shadow: none;
 
         &:hover {
           color: $white;
