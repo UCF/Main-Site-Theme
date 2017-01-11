@@ -1,0 +1,17 @@
+@import '../media-template/media-template-base';
+
+.promo-block {
+    color: $white;
+    min-height: 240px;
+    text-align: center;
+}
+
+.promo-icon {
+    display: block;
+    font-size: 72px;
+    margin: .2em 0 .4em;
+}
+
+.btn-default {
+    color: $black !important;
+}
