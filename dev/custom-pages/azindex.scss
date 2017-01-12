@@ -144,6 +144,7 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/azindex-header-x
     font-size: 65px;
     line-height: .8;
     margin-bottom: 8px;
+    margin-top: 0;
 
     @media (min-width: $screen-sm-min) {
       font-size: 80px;
@@ -151,16 +152,44 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/azindex-header-x
   }
 
   .post-search-list {
-    border-top: 10px solid $ucf-gold;
     padding-top: 25px;
-
-    @media (min-width: $screen-sm-min) {
-      border-top-width: 15px;
-    }
   }
 
   .post-search-heading-wrap {
+    background-color: $white;
+    border-bottom: 10px solid $ucf-gold;
     position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      border-bottom-width: 15px;
+    }
+
+    &.affix {
+      position: fixed;
+      top: 0;
+      width: calc(100% - #{$grid-gutter-width});
+
+      @media (min-width: $screen-sm-min) {
+        width: calc(#{$container-sm * (7 / $grid-columns)} - #{$grid-gutter-width});
+      }
+
+      @media (min-width: $screen-md-min) {
+        width: calc(#{$container-md * (8 / $grid-columns)} - #{$grid-gutter-width});
+      }
+
+      + .post-search-list {
+        // Prevent jump upon .post-search-heading-wrap affix
+        margin-top: 70px;
+
+        @media (min-width: $screen-sm-min) {
+          margin-top: 90px;
+        }
+      }
+    }
+
+    &.affix-bottom {
+      top: unset !important;
+    }
   }
 
   .to-top-text {
