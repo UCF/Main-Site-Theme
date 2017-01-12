@@ -180,6 +180,7 @@
       text-decoration: none;
     }
   }
+
   .callout-gold {
     background-color: $ucf-gold;
     color: $white;
@@ -233,7 +234,7 @@
   }
 
   .icon-links {
-    margin: 0 auto;
+    margin: 10px auto;
     text-align: center;
 
     @media (max-width: $screen-xs-max) {
@@ -259,14 +260,10 @@
       color: $ucf-col-default;
       text-decoration: none !important;
 
-      .fa {
-        font-size: 80px;
-        margin-bottom: 12px;
-        @include transition(color .25s);
-
-        @media (max-width: $screen-xs-max) {
-          font-size: 60px;
-        }
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
       }
 
       h3 {
@@ -276,7 +273,7 @@
         display: block;
         font-size: 14px;
         font-weight: 700;
-        margin-bottom: 18px;
+        margin: 0;
         padding: 2px 14px;
         width: auto;
       }
@@ -287,10 +284,19 @@
         padding-top: 8px;
       }
 
-      &:hover,
-      &:active,
-      &:focus {
-        text-decoration: none;
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 60px;
+        }
+      }
+
+      + p {
+        // garbage added by wordpress content filters
+        display: none;
       }
     }
   }
