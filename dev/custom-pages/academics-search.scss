@@ -246,33 +246,14 @@ article:last-child {
 
   .search-icon {
     transition: all 0.3s;
-
-    @media (max-width: $screen-md-max) {
-      top: 34px;
-    }
-  }
-}
-
-.search-icon {
-  background: transparent;
-  border: 0;
-  font-size: 33px;
-  line-height: 0;
-  position: absolute;
-  right: 38px;
-  top: 58px;
-  z-index: 10;
-
-  @media (max-width: $screen-md-max) {
+    background: transparent;
+    border: 0;
+    font-size: 33px;
+    line-height: 0;
+    position: absolute;
+    right: 38px;
     top: 57px;
-  }
-
-  @media (max-width: $screen-sm-max) {
-    top: 52px;
-  }
-
-  @media (max-width: $screen-xs-max) {
-    top: 49px;
+    z-index: 10;
   }
 }
 
