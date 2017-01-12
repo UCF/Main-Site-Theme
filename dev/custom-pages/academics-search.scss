@@ -271,6 +271,30 @@
   top: 41px;
 }
 
+.degree-list-count {
+  display: none;
+  margin-bottom: 0;
+  padding: 12px;
+
+  @media (min-width: $screen-sm-min) {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+  }
+
+  a {
+    color: $ucf-gold;
+    font-weight: 300;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white;
+    }
+  }
+}
+
 .tt-suggestion {
   background-color: rgba(255, 225, 113, 0.9);
   cursor: pointer;
