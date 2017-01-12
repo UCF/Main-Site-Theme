@@ -1,5 +1,9 @@
 @import '../media-template/media-template-base';
 
+article:last-child {
+  padding-bottom: 70px;
+}
+
 #academics .top-search {
   max-width: 1170px;
 }
@@ -13,8 +17,10 @@
   padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
-    height: 500px;
-    background-position: 0 30px;
+
+    height: 550px;
+    background-position: 60% 0;
+    background-size: 500%;
   }
 }
 
@@ -67,6 +73,10 @@
     margin-bottom: 30px;
     margin-top: 0;
 
+    @media (max-width: $screen-sm-max) {
+      font-size: 33px;
+    }
+
     @media (max-width: $screen-xs-max) {
       text-align: center;
     }
@@ -102,6 +112,10 @@
     font-size: 16px;
     margin-bottom: 0;
     width: 240px;
+
+    @media (max-width: $screen-sm-max) {
+      width: 228px;
+    }
 
     .count {
       color: #811f1f;
@@ -144,10 +158,15 @@
     margin-top: 25px;
   }
   @media (max-width: $screen-xs-max) {
-    font-size: 22px;
+    font-size: 25px;
     margin-bottom: 25px;
     margin-top: 25px;
   }
+}
+
+.academics-extra {
+  background: #333;
+  color: $white;
 }
 
 .academics-search-box {
@@ -159,6 +178,7 @@
   height: 117px;
   padding: 26px 30px;
   transition: all 1s;
+  z-index: 100;
 
   .title {
     font-size: 22px;
@@ -234,11 +254,37 @@
 }
 
 .search-icon {
+  background: transparent;
+  border: 0;
   font-size: 33px;
+  line-height: 0;
   position: absolute;
   right: 38px;
   top: 41px;
-  z-index: 2;
+}
+
+.degree-list-count {
+  display: none;
+  margin-bottom: 0;
+  padding: 12px;
+
+  @media (min-width: $screen-sm-min) {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+  }
+
+  a {
+    color: $ucf-gold;
+    font-weight: 300;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white;
+    }
+  }
 }
 
 .tt-suggestion {
@@ -250,7 +296,7 @@
   width: 500px;
 
   &:hover {
-    background-color: rgba(255, 225, 113, 0.8);
+    background-color: rgba(255, 225, 113, 1);
   }
 
   hr {
@@ -295,6 +341,12 @@
 
 #contentcol .resources-section {
   padding-bottom: 35px;
+
+  img {
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 1.5em;
+    }
+  }
 }
 
 #contentcol .callout {
