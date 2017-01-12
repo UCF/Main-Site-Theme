@@ -13,8 +13,10 @@
   padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
-    height: 500px;
-    background-position: 0 30px;
+
+    height: 550px;
+    background-position: 60% 0;
+    background-size: 500%;
   }
 }
 
@@ -144,7 +146,7 @@
     margin-top: 25px;
   }
   @media (max-width: $screen-xs-max) {
-    font-size: 22px;
+    font-size: 25px;
     margin-bottom: 25px;
     margin-top: 25px;
   }
@@ -317,6 +319,12 @@
 
 #contentcol .resources-section {
   padding-bottom: 35px;
+
+  img {
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 1.5em;
+    }
+  }
 }
 
 #contentcol .callout {
