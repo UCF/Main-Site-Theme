@@ -1570,6 +1570,8 @@ function append_degree_metadata( $post, $tuition_data ) {
 		$post->tax_college                 = get_first_result( wp_get_post_terms( $post->ID, 'colleges' ) );
 		$post->tax_department              = get_first_result( wp_get_post_terms( $post->ID, 'departments' ) );
 		$post->tax_program_type            = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) );
+		$post->use_classic_template        = filter_var( get_post_meta( $post->ID, 'degree_use_classic_template', TRUE ), FILTER_VALIDATE_BOOLEAN );
+		$post->header_image                = wp_get_attachment_url( get_post_meta( $post->ID, 'degree_header_image', TRUE ) );
 
 		if ( $tuition_data ) {
 			$post->tuition_estimates = get_tuition_estimate( $post->tax_program_type, $post->degree_hours );
@@ -1591,13 +1593,21 @@ function append_degree_metadata( $post, $tuition_data ) {
 			}
 		}
 
+		$is_graduate = Degree::is_graduate_program( $post );
+
 		if ( empty( $post->degree_pdf ) ) {
-			if ( Degree::is_graduate_program( $post ) ) {
+			if ( $is_graduate ) {
 				$post->degree_pdf = GRAD_CATALOG_URL;
 			}
 			else {
 				$post->degree_pdf = UNDERGRAD_CATALOG_URL;
 			}
+		}
+
+		if ( $is_graduate ) {
+			$post->application_url = $theme_options['graduate_app_url'];
+		} else {
+			$post->application_url = $theme_options['undergraduate_app_url'];
 		}
 
 		// Append taxonomy term "meta"
@@ -1950,8 +1960,6 @@ function get_degree_search_search_again( $filters, $params ) {
  * Academics page list of colleges.
  **/
 function get_degrees_by_college( $college='' ) {
-	$college_degrees;
-
 	$args = array(
 		'post_type'      => 'degree',
 		'post_status'    => 'publish',
@@ -1995,7 +2003,7 @@ function get_degrees_by_college( $college='' ) {
  * Academics page list of colleges.
  **/
 function get_college_degrees() {
-	$college_degrees;
+	$college_degrees = array();
 	$colleges = get_terms( 'colleges', array( 'orderby' => 'name', 'order' => 'desc' ) );
 	if ( $colleges ) {
 
@@ -3205,7 +3213,6 @@ function google_tag_manager_dl() {
 	return ob_get_clean();
 }
 
-
 function get_image_url( $filename ) {
 	global $wpdb, $post;
 
@@ -3278,5 +3285,31 @@ function get_social_icon( $item_slug ) {
 			return 'fa fa-pencil';
 	}
 }
+
+/**
+ * Adds updated body class for degrees
+ **/
+function add_classic_degree_body_class( $classes ) {
+	global $post;
+	if ( $post->post_type == 'degree' ) {
+		$use_classic_template = get_post_meta( $post->ID, 'degree_use_classic_template', True );
+		$header_image = get_post_meta( $post->ID, 'degree_header_image', True );
+		$has_header_image = ( $header_image !== "" ) ? true : false;
+		if ( $use_classic_template ) {
+			$classes[] = 'classic-degree-template';
+		}
+		else {
+			$classes[] = 'updated-degree-template';
+
+			if ( !$has_header_image ) {
+				$classes[] = 'no-header-image';
+			}
+		}
+	}
+	return $classes;
+}
+
+add_action( 'body_class', 'add_classic_degree_body_class' );
+
 
 ?>

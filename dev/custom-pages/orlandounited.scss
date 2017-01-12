@@ -1,0 +1,489 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/scss/variables';
+@import '../../src/scss/mixins';
+
+
+// Adds Archer font family styles to an element.
+// $weight should be a number from 1-9, which references the desired font
+// weight (100-900).  Default is 4 (400) or 'Book'.
+@mixin archer($weight: 4, $font-style: normal) {
+  font-family: 'Archer A', 'Archer B';
+  font-style: $font-style;
+  font-weight: #{$weight}00;
+}
+
+
+$black: #000;
+$white: #fff;
+$ucf-gold: #fc0;
+$ucf-gold-dark: #e4b20c;
+
+
+// Resets
+#header-nav-wrap,
+#site-nav-xs {
+  display: none !important;
+}
+
+.page-media {
+  margin-bottom: 0;
+  position: static;
+}
+
+.page-media-header {
+  height: 500px;
+
+  @media (min-width: $screen-sm-min) {
+    height: 100vh;
+    min-height: 600px;
+  }
+}
+
+.page-media-container {
+  padding-top: $grid-gutter-width * 2;
+}
+
+#contentcol a:not(.btn) {
+  border-bottom: 0 solid transparent;
+  color: $brand-primary;
+}
+
+#contentcol embed,
+#contentcol iframe,
+#contentcol object {
+  @media (min-width: $screen-md-min) {
+    height: 500px;
+  }
+}
+
+
+
+.page-media,
+.page-content {
+  @include gotham();
+  color: $black;
+  font-size: 14px;
+  line-height: 1.5;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  // Gotham-ize all the things
+  .alert,
+  .badge,
+  .breadcrumb,
+  .btn,
+  .carousel,
+  .collapse,
+  .dropdown,
+  .dropdown-menu,
+  .jumbotron,
+  .label,
+  .list-group,
+  .media,
+  .modal,
+  .nav,
+  .navbar,
+  .pager,
+  .pagination,
+  .panel,
+  .table {
+    @include gotham(4);
+  }
+
+  h2,
+  .h2,
+  h3,
+  .h3,
+  h4,
+  .h4,
+  h5,
+  .h5,
+  h6,
+  .h6 {
+    @include gotham(7);
+    color: $black;
+  }
+
+  h2,
+  .h2,
+  h3,
+  .h3 {
+    text-transform: uppercase;
+  }
+
+  h3,
+  .h3 {
+    font-size: 15px;
+    margin: 1em 0;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+  }
+
+  h4,
+  .h4 {
+    margin: 1em 0 1.2em;
+  }
+
+  a {
+    transition: color .15s ease-in-out, background-color .15s ease-in-out;
+  }
+
+  ol,
+  ul {
+    margin-bottom: 2em;
+  }
+
+  li {
+    line-height: 1.3;
+    margin-bottom: .8em;
+  }
+
+  hr {
+    border-top: 2px solid #eee;
+  }
+
+  .text-untransform {
+    text-transform: none;
+  }
+
+  .list-navigation {
+    line-height: 1.375;
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      margin-bottom: .8em;
+    }
+  }
+}
+
+
+
+.page-media {
+  h1 {
+    @include gotham(7);
+    color: $white;
+    display: block;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+  }
+
+  .lead {
+    @include font-smoothing();
+    color: $white;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, .75);
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 30px;
+    }
+
+    a {
+      color: $white !important;
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
+
+  .hashtag {
+    @include gotham(7);
+    color: $ucf-gold;
+    font-size: 30px;
+    margin-top: $grid-gutter-width / 2;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+      margin-top: $grid-gutter-width * 1.5;
+    }
+  }
+}
+
+.page-media-header,
+.page-media-container {
+  position: static;
+}
+
+
+.page-content {
+
+  h2,
+  .h2 {
+    display: inline-block;
+    font-size: 14px !important; // needed to override `#contentcol h2` selector
+    padding: 0 0 10px;
+  }
+
+  .lead {
+    @include archer();
+    font-size: 20px;
+    line-height: 1.5;
+    padding-bottom: 5px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 24px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .icon {
+    color: $ucf-gold;
+  }
+
+
+  // Section contents
+  .section-heading {
+    margin-bottom: 18px;
+    margin-top: $grid-gutter-width;
+
+    @media (min-width: $screen-sm-min) {
+      margin-top: $grid-gutter-width * 2;
+    }
+
+    &:after {
+      background: $ucf-gold;
+      content: ' ';
+      display: block;
+      height: 2px;
+      margin-top: 15px;
+      width: 25px;
+    }
+  }
+
+  .section-subheading {
+    margin: 2.5em 0 .5em;
+  }
+
+  .section-content {
+    margin-top: $grid-gutter-width;
+
+    @media (min-width: $screen-sm-min) {
+      border-left: 2px solid #eee;
+      margin-left: $grid-gutter-width;
+      margin-top: 0;
+      padding-left: $grid-gutter-width * 1.5;
+    }
+  }
+
+  .section-menu-wrapper {
+    margin-top: $grid-gutter-width;
+  }
+
+  // Quotes
+  blockquote {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  blockquote, blockquote p {
+
+    @include archer(4, italic);
+    color: #222;
+    font-size: 22px;
+    font-weight: 200;
+    line-height: 27px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 32px;
+      line-height: 41px;
+    }
+  }
+
+  blockquote.quote {
+    padding-bottom: 0;
+  }
+
+  // Horizontal Rules
+  hr {
+    margin-top: 35px;
+    margin-bottom: 35px;
+  }
+
+  // Callouts
+  .callout {
+    h2,
+    .h2 {
+      font-size: 18px !important;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 20px !important;
+      }
+    }
+
+    h3,
+    .h3 {
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px !important;
+      }
+    }
+
+    h4,
+    .h4 {
+      font-size: 13px !important;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px !important;
+      }
+    }
+
+    .side-supplement {
+      font-size: 14px;
+    }
+
+    .side-supplement-title {
+      @include archer(4, italic);
+      font-size: 26px;
+      margin-top: .6em;
+
+      a {
+        font-weight: 400;
+        text-decoration: none;
+      }
+
+      .fa,
+      .glyphicon {
+        color: $ucf-gold;
+        font-size: 1.4em;
+        margin-right: 6px;
+        vertical-align: bottom;
+      }
+    }
+  }
+
+  .callout-dark {
+    background-color: $black;
+    color: $white;
+
+    a {
+      color: $white;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+      color: $white;
+    }
+
+    h4,
+    .h4 {
+      color: $ucf-gold;
+    }
+
+    .list-navigation a {
+      color: $white !important;  // needed to override `#contentcol h2` selector
+      font-weight: 400;
+      text-decoration: none;
+    }
+
+    .section-content {
+      border-color: #444;
+    }
+  }
+
+
+  // Events
+  .calendar-events {
+    .event {
+      margin-bottom: $grid-gutter-width / 2;
+      text-decoration: none;
+    }
+
+    .time,
+    .title,
+    .desc {
+      margin: 0 !important;
+    }
+
+    .title,
+    .desc {
+      color: $white;
+    }
+
+    .desc {
+      @include gotham(4);
+    }
+
+    .all-link {
+      color: $white !important;
+      margin-bottom: $grid-gutter-width;
+    }
+  }
+
+
+  // In Memoriam
+  .in-memoriam {
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6 {
+      @include gotham(8);
+    }
+
+    .lead {
+      @include gotham(4);
+      font-size: 18px;
+      line-height: 1.5;
+    }
+  }
+
+  .memorial {
+    margin-bottom: $grid-gutter-width;
+  }
+
+  .memorial-name {
+    margin-bottom: 0;
+  }
+
+  .memorial-title {
+    color: $ucf-gold-dark;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: bold;
+    margin-bottom: 12px !important;
+
+    &:after {
+      background: $ucf-gold;
+      content: ' ';
+      display: block;
+      height: 2px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 8px;
+      width: 35px;
+    }
+  }
+
+  .memorial-subtitle,
+  .memorial-desc {
+    font-size: 14px;
+    margin-bottom: 0 !important;
+  }
+
+  .memorial-subtitle {
+    @include gotham(7);
+    font-style: italic;
+  }
+
+}

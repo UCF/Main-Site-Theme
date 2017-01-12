@@ -308,49 +308,19 @@ function display_events_list( $start=null, $limit=null, $url='', $list_classes='
 }
 
 
-function display_news(){?>
-	<?php
-	$options = get_option(THEME_OPTIONS_NAME);
-	$count   = $options['news_max_items'];
-	$news    = get_news(0, ($count) ? $count : 3);
-	if($news !== NULL && count($news)):?>
-		<ul class="news">
-			<?php foreach($news as $key=>$item):
-				$image = get_article_image($item);
-				if (!($image)) {
-					$image = 'http://today.ucf.edu/widget/thumbnail.png';
-				}
-				else {
-					if (preg_match('/\.jpeg$/i', $image)) {
-						$end_of_str_length = 5;
-					}
-					else {
-						// assume .jpeg is the only potential 5-character file extension being used
-						$end_of_str_length = 4;
-					}
-					// Grab Today's 66x66px thumbnails if they're available
-					$image_small = substr($image, 0, (strlen($image) - $end_of_str_length)).'-66x66'.substr($image, (strlen($image) - $end_of_str_length));
-					$image = check_remote_file($image_small) !== false ? $image_small : $image;
-				}
-				$first = ($key == 0);
-			?>
-			<li class="item<?php if($first):?> first<?php else:?> not-first<?php endif;?>">
-				<a class="image ignore-external" href="<?=$item->get_link()?>">
-					<?php if($image):?>
-					<img class="print-only news-thumb" src="<?=$image?>" />
-					<div class="screen-only news-thumb" style="background-image:url('<?=$image?>'); filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?=$image?>',sizingMethod='scale');">Feed image for <?=$item->get_title()?></div>
-					<?php endif;?>
-				</a>
-				<h3 class="title"><a href="<?=$item->get_link()?>" class="ignore-external title"><?=$item->get_title()?></a></h3>
-				<div class="clearfix"></div>
-			</li>
-			<?php endforeach;?>
-		</ul>
-		<div class="clearfix"></div>
-	<?php else:?>
-		<p>News items could not be retrieved at this time.  Please try again later.</p>
-	<?php endif;?>
-<?php
+function display_news() {
+	$args = array(
+		'sections' => null,
+		'topics'   => null,
+		'offset'   => 0,
+		'limit'    => get_theme_option( 'news_max_items' )
+	);
+
+	$items = UCF_News_Feed::get_news_items( $args );
+
+	if ( $items ) {
+		echo UCF_News_Common::display_news_items( $items, 'classic', 'News', 'default' );
+	}
 }
 
 
@@ -481,23 +451,6 @@ function get_events( $start=0, $limit=4, $url='' ) {
 }
 
 
-function get_news($start=null, $limit=null){
-	$options = get_option(THEME_OPTIONS_NAME);
-	$url     = $options['news_url'];
-	$news    = FeedManager::get_items($url, $start, $limit);
-	return $news;
-}
-
-
-/* Added function for main site theme: */
-function get_sidebar_news($post, $start=null, $limit=null){
-	$options	 = get_option(THEME_OPTIONS_NAME);
-	$url      	 = get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) !== '' ? get_post_meta($post->ID, 'page_widget_r_today_feed', TRUE) : $options['news_url'];
-	$news     	 = FeedManager::get_items($url, $start, $limit);
-	return $news;
-}
-
-
 function get_pegasus_issues( $start=0, $limit=5 ) {
 	$options = get_option( THEME_OPTIONS_NAME );
 	$pegasus_url = $options['pegasus_url'];
@@ -519,4 +472,147 @@ function get_pegasus_issues( $start=0, $limit=5 ) {
 	}
 }
 
+
+/**
+ * Add new registered layouts for UCF News plugin
+ **/
+function mainsite_news_get_layouts( $layouts ) {
+	$layouts = array_merge(
+		$layouts,
+		array(
+			'modern' => 'Modern',
+			'text' => 'Text'
+		)
+	);
+	return $layouts;
+}
+add_filter( 'ucf_news_get_layouts', 'mainsite_news_get_layouts' );
+
+/**
+ * Output of "Modern" UCF News layout:
+ **/
+function mainsite_news_display_modern_before( $items, $title, $display_type ) {
+	ob_start();
+?>
+	<div class="ucf-news ucf-news-modern">
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_modern_before', 'mainsite_news_display_modern_before', 10, 3 );
+
+
+function mainsite_news_display_modern_title( $item, $title, $display_type ) {
+	echo '<h2 class="ucf-news-title">In the News</h2>';
+}
+
+add_action( 'ucf_news_display_modern_title', 'mainsite_news_display_modern_title', 10, 3 );
+
+
+function mainsite_news_display_modern( $items, $title, $display_type ) {
+	ob_start();
+?>
+	<div class="ucf-news-items">
+	<?php
+	foreach( $items as $item ) :
+		$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+		$sections = UCF_News_Common::get_story_sections( $item );
+		$section  = isset( $sections[0] ) ? $sections[0] : false;
+	?>
+		<article class="ucf-news-item">
+
+		<?php if ( $item_img ): ?>
+			<a class="ucf-news-thumbnail" href="<?php echo $item->link; ?>">
+				<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>">
+			</a>
+		<?php endif; ?>
+
+			<div class="ucf-news-item-content">
+				<a class="ucf-news-item-link" href="<?php echo $item->link; ?>">
+					<?php if ( $section ): ?>
+						<span class="ucf-news-item-label">
+							<?php echo $section->name; ?>
+						</span>
+					<?php endif; ?>
+
+					<h3 class="ucf-news-item-title">
+						<?php echo $item->title->rendered; ?>
+					</h3>
+
+					<div class="ucf-news-item-excerpt">
+						<?php echo $item->excerpt->rendered; ?>
+					</div>
+				</a>
+			</div>
+		</article>
+	<?php
+	endforeach;
+	?>
+</div>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_modern', 'mainsite_news_display_modern', 10, 3 );
+
+
+function mainsite_news_display_modern_after( $items, $title, $display_type ) {
+	ob_start();
+?>
+	</div>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_modern_after', 'mainsite_news_display_modern_after', 10, 3 );
+
+/**
+ * Output of "Text" UCF News layout:
+ **/
+
+function mainsite_news_display_text_before( $items, $title, $display_type ) {
+	ob_start();
+?>
+	<div class="ucf-news ucf-news-text">
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_text_before', 'mainsite_news_display_text_before', 10, 3 );
+
+if ( ! function_exists( 'ucf_news_display_text' ) ) {
+	function ucf_news_display_text( $items, $title, $display_type ) {
+		ob_start();
+	?>
+		<div class="ucf-news-items">
+	<?php
+		foreach( $items as $item ) :
+			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
+	?>
+			<div class="ucf-news-item">
+				<div class="ucf-news-item-title">
+					<a href="<?php echo $item->link; ?>" class="ucf-news-item-link">
+						<?php echo $item->title->rendered; ?>
+					</a>
+				</div>
+			</div>
+	<?php
+		endforeach;
+	?>
+	</div>
+	<?php
+		echo ob_get_clean();
+	}
+	add_action( 'ucf_news_display_text', 'ucf_news_display_text', 10, 3 );
+}
+
+function mainsite_news_display_text_after( $items, $title, $display_type ) {
+	ob_start();
+?>
+	</div>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'ucf_news_display_text_after', 'mainsite_news_display_text_after', 10, 3 );
 ?>

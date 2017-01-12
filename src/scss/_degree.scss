@@ -1,12 +1,271 @@
+$bright-blue: #08c;
+
 // Single Degree profiles
+.updated-degree-template {
+  #header-nav-wrap,
+  #site-nav-xs {
+    z-index: 2;
+  }
+
+  #header-nav-wrap {
+    position: relative;
+  }
+
+  #site-nav-xs {
+    left: $grid-gutter-width / 2;
+    position: absolute;
+    right: $grid-gutter-width / 2;
+  }
+
+  .page-media-container {
+    padding-top: 110px;
+
+    @media( max-width: $screen-xs-max ) {
+      position: relative;
+      padding-top: 160px;
+    }
+  }
+
+  #header-menu {
+    a {
+      color: $white;
+
+      &:hover {
+        color: #fc0;
+      }
+    }
+
+    .last a {
+      color: $black;
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .page-media-header {
+    @media( max-width: $screen-xs-max ) {
+      min-height: 400px;
+      height: auto;
+    }
+  }
+
+  &.no-header-image {
+    #header-menu {
+      a {
+        color: $black;
+
+        &:hover {
+          color: #fc0;
+        }
+      }
+
+      .last a {
+        color: $black;
+
+        &:hover {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  .degree-header {
+    h1 {
+      @include archer(7);
+      color: $black;
+      background: rgba($ucf-gold, 0.8);
+      display: inline-block;
+      font-size: 44px;
+      padding: 12px 32px;
+
+      @media( max-width: $screen-xs-max ) {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .degree-header.no-header-image {
+    .page-media-container {
+      padding-top: 80px;
+
+      @media( max-width: $screen-xs-max ) {
+        padding-top: 160px;
+      }
+    }
+
+    .page-media-header {
+      height: 175px;
+
+      @media( max-width: $screen-xs-max ) {
+        height: auto;
+        min-height: 245px;
+      }
+    }
+  }
+
+  .call-to-action {
+    a {
+      color: $black !important;
+    }
+  }
+
+  .degree-details {
+    background: #efefef;
+    border-left: 5px solid #acacac;
+    padding: 12px 12px !important;
+
+    dt,
+    dd {
+      margin-bottom: 4px !important;
+    }
+
+    dt {
+      font-weight: normal;
+    }
+
+    dd {
+      font-weight: 700;
+    }
+  }
+
+  .degree-description {
+    @include archer();
+    border-top: 1px solid $ucf-gold;
+    font-size: 18px;
+    padding-top: 24px;
+  }
+
+  #sidebar_right {
+    padding-bottom: 12px;
+    padding-top: 0 !important;
+
+    @media( max-width: $screen-md-max ) {
+      padding-left: 15px;
+    }
+  }
+
+  .degree-credit-hours {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: -5px;
+    padding: 0 12px 10px 12px;
+    text-align: center;
+
+    @media( max-width: $screen-sm-max ) {
+      font-size: 23px !important;
+      font-weight: bold !important;
+      margin-top: 0;
+    }
+
+    @media( max-width: $screen-xs-max ) {
+      font-size: 20px !important;
+    }
+
+    .hours {
+      font-size: 20px;
+      font-weight: bold;
+
+      @media( max-width: $screen-sm-max ) {
+        font-size: 24px !important;
+        font-weight: bold !important;
+      }
+    }
+  }
+
+  .degree-promo-button-wrapper {
+    overflow: auto;
+    padding-bottom: 15px;
+  }
+
+  .degree-promo-button {
+    @extend .btn-group;
+    width: 100%;
+
+    .degree-promo-icon,
+    .degree-promo-text {
+      @extend .btn !optional;
+      margin: 12px 0;
+      width: 80%;
+    }
+
+    .degree-promo-icon {
+      @extend .btn !optional;
+      background: #3266cc;
+      color: $white;
+      font-family: "FontAwesome";
+      font-size: 32px;
+      width: 20%;
+
+      &:hover {
+        color: $white;
+      }
+
+      @media( max-width: $screen-xs-max ) {
+        margin: 6px 0;
+      }
+    }
+
+    .degree-promo-text {
+      @include gotham(5);
+      border: 1px solid #3266cc !important;
+      font-size: 15px;
+      padding: 18px 12px 18px 5px;
+      color: #3266cc;
+
+      @media( max-width: $screen-xs-max ) {
+        margin: 6px 0;
+      }
+    }
+
+    &:hover {
+      .degree-promo-text {
+        color: #333;
+      }
+    }
+  }
+
+  .degree-promo-button:link {
+    color: #3266cc !important;
+
+    &:hover {
+      .degree-promo-icon {
+        color: $white !important;
+        background-color: lighter(#3266cc) !important;
+      }
+
+      .degree-promo-text {
+        border-color: lighter(#3266cc) !important;
+      }
+    }
+  }
+}
+
 #degree-single {
+
+  &.container {
+    margin-top: 15px;
+  }
+
+  .nav-tabs > li.active > a {
+    color: #555;
+  }
+
+  #breadcrumbs.breadcrumbs-bottom {
+    border-top: 1px solid #d2d2d2;
+    padding-top: 20px;
+  }
+
   #breadcrumbs a {
     color: #999;
   }
 
   .breadcrumb {
-    background-color: #fff;
-    margin-bottom: 30px;
+    background-color: $white;
+    margin-bottom: 15px;
 
     @media (max-width: $screen-xs-max) {
       display: none;
@@ -42,7 +301,7 @@
     }
 
     .breadcrumb-hierarchy {
-      background: #fff;
+      background: $white;
       display: block;
       float: left;
       list-style-type: none;
@@ -73,6 +332,10 @@
     font-family: $font-family-sans-serif;
     font-size: 15px;
     line-height: 1.5;
+
+    small {
+      line-height: 1.65;
+    }
 
     p {
       margin: 0 0 10px;
@@ -116,12 +379,19 @@
 
     a {
       border-bottom: 0;
-      color: #08c;
+      color: $bright-blue;
     }
 
     .btn-default {
       // replace the removed border-bottom
       border-bottom: 1px solid $btn-default-border;
+    }
+
+    .call-to-action .btn.btn-ucf-gold {
+      @media( max-width: $screen-xs-max ) {
+        border: 0;
+        padding: 20px 20px;
+      }
     }
 
     .degree-details {
@@ -308,7 +578,7 @@
       }
 
       a {
-        color: #08c;
+        color: $bright-blue;
       }
 
       dt,
@@ -379,7 +649,65 @@
       }
     }
 
+    .highlight-block {
+      background: #fff7da;
+      padding: 12px;
+    }
+
+    .tuition-missing-block {
+      text-align: center;
+
+      a:link,
+      a:active,
+      a:visited {
+        text-decoration: underline;
+      }
+
+      a:hover {
+        text-decoration: none;
+      }
+    }
+
+    .tuition-total-block {
+
+      .tuition-total {
+        color: #333;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: .8;
+        padding: 15px 0 6px 0;
+        text-align: center;
+        margin-bottom: 6;
+
+    @media( max-width: $screen-sm-max ) {
+      font-size: 27px !important;
+      font-weight: bold !important;
+    }
+
+      }
+
+      .tuition-period {
+        font-size: 18px;
+    @media( max-width: $screen-sm-max ) {
+      font-size: 27px !important;
+      font-weight: bold !important;
+    }
+      }
+
+      .tuition-description {
+        color: #222;
+        font-size: 12px;
+        font-weight: 300;
+        padding: 0 5px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .tuition-info.tuition-info-classic {
+
     .tuition-total {
+      text-shadow: 0 1px 1px #999 !important;
       color: #c90;
       font-size: 32px;
       font-weight: 700;
@@ -387,17 +715,27 @@
       padding: 20px 0;
       text-align: center;
       text-shadow: 0 1px 1px #cacaca;
-    }
 
-    .tuition-period {
-      font-size: 18px;
-    }
+      .tuition-period {
+        color: #c90;
+        font-size: 18px;
+      }
 
-    .tuition-description {
-      color: #222;
-      font-size: 12px;
-      font-weight: 300;
-      padding: 0 12px;
+      .in-state-amount {
+        color: #c90;
+      }
+
+      .degree-credit-hours {
+        font-size: 32px;
+        padding: 12px 0;
+        text-align: center;
+        text-shadow: 0 1px 1px #999;
+
+        .small {
+          color: #fc0;
+          font-size: 18px;
+        }
+      }
     }
   }
 
@@ -421,19 +759,20 @@
 
   .financial-aid-message,
   .tuition-value-message {
-    font-size: .85em;
+    font-size: 14px;
     margin-bottom: 18px;
   }
 
-  .financial-aid-message {
+  .financial-aid-message,
+  .tuition-info {
     a {
-      color: #08c;
+      color: $bright-blue;
     }
   }
 
   .tuition-value-message {
     .external {
-      color: #08c;
+      color: $bright-blue;
     }
   }
 
@@ -459,8 +798,8 @@
     }
 
     .btn {
-      background-color: #ffc904;
-      color: #000 !important;
+      background-color: $ucf-gold;
+      color: $black !important;
       margin-top: 10px;
       padding-left: 45px;
       padding-right: 45px;
@@ -473,7 +812,7 @@
 
   // Social buttons
   .social {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 }
 

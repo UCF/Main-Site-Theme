@@ -610,7 +610,7 @@ var statusAlertCheck = function ($) {
           }
 
           if(existing_icon.hasClass(newest.type) === false) {
-            existing_icon.attr('class','alert-icon ' + newest.type);
+            existing_icon.attr('class','alert-icon fa ' + newest.type);
             contentChanged = true;
           }
 
@@ -627,14 +627,14 @@ var statusAlertCheck = function ($) {
             alert_markup
               .attr('id', '')
               .attr('data-alert-id', newest.id);
-            $('#header-nav-wrap').before(alert_markup);
+            $('#status-alert-template').before(alert_markup);
 
 
             var $markup = $('.status-alert[data-alert-id="' + newest.id + '"]');
             $markup.find('.title').text(newest.title).end()
               .find('.content').text(newest.description).end()
               .find('.more-information').text('Click Here for More Information').end()
-              .find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+              .find('.alert-icon').attr('class', 'alert-icon fa ' + newest.type);
 
             switch(newest.type) {
               case 'alert':
@@ -1405,7 +1405,14 @@ var mediaTemplateVideo = function($) {
     var mp4 = $videoPlaceholder.attr('data-mp4'),
       webm = $videoPlaceholder.attr('data-webm'),
       ogg = $videoPlaceholder.attr('data-ogg'),
-      video = '<video autoplay muted loop>';
+      loop = JSON.parse($videoPlaceholder.attr('data-loop')),
+      video = '<video autoplay muted';
+
+    if (loop) {
+      video += ' loop>';
+    } else {
+      video += '>';
+    }
 
     // Stop now/display nothing if no video sources are provided
     if (!mp4 && !webm && !ogg) {
@@ -1518,7 +1525,10 @@ var academicDegreeSearch = function ($) {
   }
 };
 
-// https://codepen.io/hi-im-si/pen/uhxFn
+/**
+ * Count a number up form zero
+ * https://codepen.io/hi-im-si/pen/uhxFn
+ */
 var countUp = function($) {
   $('.count-up').each(function() {
     var $this = $(this),
@@ -1541,7 +1551,10 @@ var countUp = function($) {
   });
 };
 
-// http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+/**
+ * Place commas where approrpiate in large numbers
+ * http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+ */
 var numberWithCommas = function(x) {
   if (x < 1000) {
     return x;
@@ -1549,11 +1562,37 @@ var numberWithCommas = function(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
+/**
+ * Debouce method to pause logic until resize is complete
+ */
+function debounce(func, wait, immediate) {
+  var timeout;
+
+  return function () {
+    var context = this,
+        args = arguments;
+
+    var later = function () {
+      timeout = null;
+      if (!immediate) {
+        func.apply(context, args);
+      }
+    };
+
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+
+    if (callNow) {
+      func.apply(context, args);
+    }
+  };
+}
+
 var sectionsMenu = function($) {
   var $sectionsMenu = $('#sections-menu');
-  if ( $sectionsMenu.length ) {
-    var selector = $sectionsMenu.data('selector');
 
+  if ( $sectionsMenu.length ) {
     var clickHandler = function(e) {
       e.preventDefault();
 
@@ -1590,6 +1629,10 @@ var sectionsMenu = function($) {
 
     };
 
+    var setBumperHeight = function() {
+      $bumper.height($menu.height());
+    };
+
     var scroll = function() {
       if ($(window).scrollTop() >= offset) {
         $menu.removeClass('center');
@@ -1602,20 +1645,27 @@ var sectionsMenu = function($) {
       }
     };
 
-    var onResize = function() {
+    var onResize = debounce( function() {
       offset = $firstSection.offset().top - $menu.height(); // Reduce by 50px to account for university header.
-    };
+      setBumperHeight();
+    }, 100);
 
-    var $sections = $(selector),
-        $menuList = $sectionsMenu.find('ul.nav'),
-        $menu = $('#sections-navbar'),
+
+    var selector      = $sectionsMenu.data('selector'),
+        $sections     = $(selector),
+        $menuList     = $sectionsMenu.find('ul.nav'),
+        $menu         = $('#sections-navbar'),
         $firstSection = $sections.first(),
-        offset = $firstSection.offset().top;
+        offset        = $firstSection.offset().top,
+        $bumper       = $menu.next('.navbar-bumper');
 
     $.each($sections, addToMenu);
+
     $(document).on('scroll', scroll);
     $('body').scrollspy({target: '#sections-menu', offset: 60});
     $(window).on('resize', onResize);
+
+    setBumperHeight();
     scroll();
   }
 };

@@ -15,23 +15,40 @@ var init = function() {
 };
 
 var initialize = function() {
-  var pinImage = new google.maps.MarkerImage("http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%20|FFCC00"),
-      latLng = new google.maps.LatLng(28.601947, -81.200254),
-	    mapOptions = {
-        center: latLng,
-        zoom: 8,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        scrollwheel: false,
-        draggable: false
-      };
+  var mainCampusIcon = {
+    path: 'M 16,0 20,12 32,12 22,19 26,32 16,23 6,32 10,19 0,12 12,12 z',
+    fillColor: '#ffcc00',
+    fillOpacity: 1,
+    scale: 1,
+    strokeColor: '#000000',
+    strokeWeight: 2,
+    size: new google.maps.Point(32, 32),
+    anchor: new google.maps.Point(16, 16)
+  },
+  pinImage = {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: '#ffcc00',
+    fillOpacity: 1,
+    scale: 5,
+    strokeColor: '#000000',
+    strokeWeight: 4
+  },
+  latLng = new google.maps.LatLng(28.601947, -81.200254),
+  mapOptions = {
+    center: latLng,
+    zoom: 8,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    scrollwheel: false,
+    draggable: false
+  };
 
 	map = new google.maps.Map(document.getElementById("campus-map"), mapOptions);
 
   createMarker(
-    'Home Campus',
+    'Main Campus',
     28.602201,
     -81.200061,
-    pinImage,
+    mainCampusIcon,
     '#main-campus'
   );
 

@@ -1,37 +1,124 @@
-.news {
-  @extend .list-unstyled;
 
-  .item {
-    line-height: 1.5;
-    margin-bottom: 10px;
+// News Modern theme
+.ucf-news-modern {
+  .ucf-news-item {
+    display: table;
+    margin-bottom: 30px;
+    margin-left: -12px;
+    padding: 12px;
+    width: 100%;
 
-    a {
-      border-bottom: 1px solid #ccc;
-      color: #333;
-      font-size: 12px;
-      font-weight: normal;
+    &:hover {
+      background-color: $gray-lighter;
+    }
+  }
 
-      &:hover {
-        border-bottom: 1px solid #e50606;
-        color: #e50606;
-        text-decoration: none;
-      }
+  .ucf-news-thumbnail,
+  .ucf-news-item-content {
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  // Die, link borders!
+  .ucf-news-thumbnail,
+  .ucf-news-item-link {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 0 solid transparent !important;
+    }
+  }
+
+  .ucf-news-thumbnail {
+    width: 66px;
+
+    @media (min-width: $screen-sm-min) {
+      width: 150px;
+    }
+
+    + .ucf-news-item-content {
+      padding-left: 15px;
+    }
+  }
+
+  .ucf-news-thumbnail-image {
+    height: auto;
+    width: 100%;
+  }
+
+  .ucf-news-item-label {
+    @include gotham(7);
+    background-color: $ucf-gold;
+    color: $black;
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin: 0 0 10px;
+    padding: 2px 15px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 11px;
+    }
+  }
+
+  .ucf-news-item-title {
+    @include gotham(7);
+    font-size: 15px;
+    line-height: 1.25;
+    margin: 0 0 10px !important;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 20px;
+    }
+  }
+
+  .ucf-news-item-link {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      color: $black !important;
+      text-decoration: none !important;
+    }
+  }
+
+  .ucf-news-item-excerpt {
+    @include gotham(4);
+    font-size: 12px;
+    line-height: 1.65;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 14px;
     }
   }
 }
 
-.news-thumb {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border: 0;
-  border-radius: 10px;
-  box-shadow: none;
-  cursor: pointer;
-  float: left;
-  height: 66px;
-  margin-right: 15px;
-  position: relative;
-  text-indent: -9999px;
-  width: 66px;
+// News Text theme
+.ucf-news-text {
+
+  .ucf-news-item-title {
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .ucf-news-item-link {
+    border-bottom: 1px solid $gray-dark;
+    color: $gray-dark;
+    font-size: 12px;
+    font-weight: 400;
+
+    &:hover {
+      border-bottom: 1px solid #e50606;
+      color: #e50606;
+      text-decoration: none;
+    }
+  }
+}
+
+.rssbtn {
+    float: none;
+    margin-right: 5px;
+    margin-bottom: 30px;
 }
