@@ -1,5 +1,9 @@
 @import '../media-template/media-template-base';
 
+article:last-child {
+  padding-bottom: 70px;
+}
+
 #academics .top-search {
   max-width: 1170px;
 }
