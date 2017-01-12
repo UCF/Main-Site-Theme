@@ -172,15 +172,9 @@
   }
 
   .twitter-typeahead {
-    width: 101.5%;
+    width: 100%;
     top: 5px;
-    float: right;
     position: absolute;
-    right: -7px;
-
-    @media (max-width: $screen-sm-max) {
-      top: -1px;
-    }
   }
 
   .tt-menu.tt-open {
@@ -199,11 +193,12 @@
   input {
     @include gotham(1);
 
-    background: #f9dd78;
+    background: $white !important;
     border: none;
     border-radius: 5px;
-    color: #000;
+    color: $black;
     font-size: 17px;
+    font-weight: normal;
     letter-spacing: .5px;
     outline: 0;
     padding: 13px 54px 13px 25px;
@@ -211,23 +206,6 @@
     transition: all 0.3s;
     width: 100%;
     z-index: 1;
-
-    &::-webkit-input-placeholder {
-      color: #000;
-    }
-    &:-moz-placeholder {
-      color: #000;
-    }
-    &::-moz-placeholder {
-      color: #000;
-    }
-    &:-ms-input-placeholder {
-      color: #000;
-    }
-    &:placeholder-shown {
-      color: #000;
-    }
-
   }
 
   .title {
