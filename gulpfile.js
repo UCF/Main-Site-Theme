@@ -181,7 +181,6 @@ gulp.task('watch', function() {
   }
 
   gulp.watch(config.devPath + '/**/*.scss', ['css-dev']).on('change', browserSync.reload);
-  gulp.watch(config.devPath + '/**/*.scss', ['css']);
   gulp.watch(config.scssPath + '/**/*.scss', ['css']);
   gulp.watch(config.jsPath + '/**/*.js', ['js']).on('change', browserSync.reload);
   gulp.watch('**/*.php').on("change", browserSync.reload);
