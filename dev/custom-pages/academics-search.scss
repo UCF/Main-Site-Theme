@@ -152,6 +152,11 @@
   }
 }
 
+.academics-extra {
+  background: #333;
+  color: $white;
+}
+
 .academics-search-box {
   @include gotham(6);
 
@@ -161,6 +166,7 @@
   height: 117px;
   padding: 26px 30px;
   transition: all 1s;
+  z-index: 100;
 
   .title {
     font-size: 22px;
@@ -258,11 +264,37 @@
 }
 
 .search-icon {
+  background: transparent;
+  border: 0;
   font-size: 33px;
+  line-height: 0;
   position: absolute;
   right: 38px;
   top: 41px;
-  z-index: 2;
+}
+
+.degree-list-count {
+  display: none;
+  margin-bottom: 0;
+  padding: 12px;
+
+  @media (min-width: $screen-sm-min) {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+  }
+
+  a {
+    color: $ucf-gold;
+    font-weight: 300;
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white;
+    }
+  }
 }
 
 .tt-suggestion {
@@ -274,7 +306,7 @@
   width: 500px;
 
   &:hover {
-    background-color: rgba(255, 225, 113, 0.8);
+    background-color: rgba(255, 225, 113, 1);
   }
 
   hr {
