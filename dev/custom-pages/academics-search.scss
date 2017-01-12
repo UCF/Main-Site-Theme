@@ -73,6 +73,10 @@ article:last-child {
     margin-bottom: 30px;
     margin-top: 0;
 
+    @media (max-width: $screen-sm-max) {
+      font-size: 33px;
+    }
+
     @media (max-width: $screen-xs-max) {
       text-align: center;
     }
@@ -108,6 +112,10 @@ article:last-child {
     font-size: 16px;
     margin-bottom: 0;
     width: 240px;
+
+    @media (max-width: $screen-sm-max) {
+      width: 228px;
+    }
 
     .count {
       color: #811f1f;
