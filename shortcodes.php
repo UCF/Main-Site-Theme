@@ -549,8 +549,12 @@ function sc_post_type_search( $params=array(), $content='' ) {
 	<div class="post-type-search">
 		<div class="post-type-search-header">
 			<form class="post-type-search-form form-inline" action="." method="get">
-				<label><?php echo $params['default_search_label']; ?></label>
-				<input type="text" class="form-control" placeholder="<?php echo $params['default_search_text']; ?>">
+				<label class="post-type-search-label">
+					<span class="post-type-search-labeltext">
+						<?php echo $params['default_search_label']; ?>
+					</span>
+					<input type="text" class="form-control post-type-search-input" placeholder="<?php echo $params['default_search_text']; ?>">
+				</label>
 			</form>
 		</div>
 		<div class="post-type-search-results"></div>
@@ -593,7 +597,9 @@ function sc_post_type_search( $params=array(), $content='' ) {
 					</div>
 						<div class="row">
 							<div class="<?php echo $params['column_width']; ?>">
-								<h3><?php echo esc_html( $section_title ); ?></h3>
+								<div class="post-search-heading-wrap">
+									<h3 class="post-search-heading"><?php echo esc_html( $section_title ); ?></h3>
+								</div>
 							</div>
 						</div>
 
@@ -605,7 +611,7 @@ function sc_post_type_search( $params=array(), $content='' ) {
 						foreach ( $split_posts as $index => $column_posts ):
 						?>
 							<div class="<?php echo $params['column_width']; ?>">
-								<ul>
+								<ul class="post-search-list">
 								<?php foreach( $column_posts as $key => $post ): ?>
 									<li data-post-id="<?php echo $post->ID; ?>">
 										<?php echo $post_type->toHTML( $post ); ?><span class="search-post-pgsection"><?php echo $section_title; ?></span>
@@ -622,8 +628,10 @@ function sc_post_type_search( $params=array(), $content='' ) {
 					<?php endif; ?>
 
 					<div class="<?php echo $params['column_width']; ?>">
-						<h3><?php echo esc_html( $section_title ); ?></h3>
-						<ul>
+						<div class="post-search-heading-wrap">
+							<h3 class="post-search-heading"><?php echo esc_html( $section_title ); ?></h3>
+						</div>
+						<ul class="post-search-list">
 						<?php foreach( $section_posts as $post ):  ?>
 							<li data-post-id="<?php echo $post->ID; ?>">
 								<?php echo $post_type->toHTML( $post ); ?><span class="search-post-pgsection"><?php echo $section_title; ?></span>
@@ -1230,34 +1238,6 @@ function sc_chart( $attr ) {
 	return ob_get_clean();
 }
 add_shortcode( 'chart', 'sc_chart' );
-
-
-/**
- * Displays affixed navigation for the A-Z Index.
- **/
-function sc_azindex_navbar( $attr ) {
-	ob_start();
-?>
-	<div id="top"></div>
-
-	<div id="azIndexList" data-spy="affix" data-offset-top="200">
-		<span id="azIndexList-label">Jump To:</span>
-		<div class="navbar navbar-default">
-			<ul class="nav navbar-nav">
-			<?php foreach ( range( 'A', 'Z' ) as $index=>$alpha ): ?>
-				<li <?php echo $index === 0 ? 'class="active"' : ''; ?>>
-					<a href="#az-<?php echo strtolower( $alpha ); ?>">
-						<?php echo $alpha; ?>
-					</a>
-				</li>
-			<?php endforeach; ?>
-			</ul>
-		</div>
-	</div>
-<?php
-	return ob_get_clean();
-}
-add_shortcode( 'azindex-navbar', 'sc_azindex_navbar' );
 
 
 /**
