@@ -282,7 +282,20 @@ article:last-child {
   line-height: 0;
   position: absolute;
   right: 38px;
-  top: 41px;
+  top: 58px;
+  z-index: 10;
+
+  @media (max-width: $screen-md-max) {
+    top: 57px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    top: 52px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    top: 49px;
+  }
 }
 
 .degree-list-count {
