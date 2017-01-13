@@ -19,7 +19,7 @@ article:last-child {
   padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
-    height: 550px;
+    height: 625px;
     background-image: url($header-media-xs-url) !important;
     background-size: cover;
   }
