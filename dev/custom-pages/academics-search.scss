@@ -1,5 +1,7 @@
 @import '../media-template/media-template-base';
 
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/academics-mobile-header.jpg';
+
 article:last-child {
   padding-bottom: 70px;
 }
@@ -17,10 +19,9 @@ article:last-child {
   padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
-
     height: 550px;
-    background-position: 60% 0;
-    background-size: 500%;
+    background-image: url($header-media-xs-url) !important;
+    background-size: cover;
   }
 }
 
