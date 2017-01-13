@@ -272,8 +272,14 @@ article:last-child {
 
   a {
     color: $ucf-gold;
+    display: block;
     font-size: .8em;
     font-weight: 300;
+
+    @media(min-width: $screen-sm-min) {
+      display: inline;
+      font-size: 1em;
+    }
 
     &:hover,
     &:active,
