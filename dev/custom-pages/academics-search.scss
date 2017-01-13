@@ -114,7 +114,8 @@ article:last-child {
     width: 240px;
 
     @media (max-width: $screen-sm-max) {
-      width: 228px;
+      font-size: 14px;
+      width: 100%;
     }
 
     .count {
@@ -177,6 +178,7 @@ article:last-child {
   font-size: 24px;
   height: 117px;
   padding: 26px 30px;
+  position: relative;
   transition: all 1s;
   z-index: 100;
 
@@ -186,7 +188,7 @@ article:last-child {
   }
 
   @media (max-width: $screen-md-max) {
-    height: 100px;
+    // height: 100px;
     transition-delay: 0s;
     transition: height 0.2s;
   }
@@ -252,7 +254,8 @@ article:last-child {
     line-height: 0;
     position: absolute;
     right: 38px;
-    top: 57px;
+    transform: translateY(-50%);
+    top: 50%;
     z-index: 10;
   }
 }
