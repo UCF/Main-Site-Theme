@@ -260,12 +260,11 @@ article:last-child {
 }
 
 .degree-list-count {
-  display: none;
+  display: block;
   margin-bottom: 0;
   padding: 12px;
 
   @media (min-width: $screen-sm-min) {
-    display: block;
     font-size: 12px;
     font-weight: 400;
     position: relative;
@@ -273,12 +272,21 @@ article:last-child {
 
   a {
     color: $ucf-gold;
+    font-size: .8em;
     font-weight: 300;
 
     &:hover,
     &:active,
     &:focus {
       color: $white;
+    }
+
+    &:first-child {
+      margin-bottom: 8px;
+
+      @media(min-width: $screen-sm-min) {
+        margin-bottom: 0;
+      }
     }
   }
 }
