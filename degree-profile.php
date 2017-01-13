@@ -7,7 +7,7 @@
 
 <?php if ( $header_image = get_degree_header_image() ): ?>
 	<div class="container-fullwidth page-media degree-header" id="<?php echo $post->post_name; ?>">
-		<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>url(<?php echo $header_image ?>)">
+		<div class="page-media-header" style="background-image: url('<?php echo $header_image ?>'); background-image: <?php echo $css_gradient; ?>url(<?php echo $header_image ?>)">
 <?php else: ?>
 	<div class="container-fullwidth page-media degree-header no-header-image" id="<?php echo $post->post_name; ?>">
 		<div class="page-media-header" style="background-image: <?php echo $css_gradient; ?>">
