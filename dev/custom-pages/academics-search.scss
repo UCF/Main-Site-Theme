@@ -213,14 +213,13 @@ article:last-child {
   }
 
   input {
-    @include gotham(1);
+    @include gotham();
 
     background: $white !important;
     border: none;
     border-radius: 5px;
     color: $black;
     font-size: 17px;
-    font-weight: normal;
     height: 60px;
     letter-spacing: .5px;
     outline: 0;
