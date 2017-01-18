@@ -139,6 +139,7 @@ gulp.task('js-main', function() {
     config.componentsPath + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
     config.componentsPath + '/typeahead.js/dist/typeahead.bundle.js',
     config.componentsPath + '/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
+    config.componentsPath + '/matchHeight/jquery.matchHeight.js',
     config.componentsPath + '/Chart.js/Chart.js',
     config.componentsPath + '/jfeed/build/dist/jquery.jfeed.js',
     config.componentsPath + '/jquery.cookie/jquery.cookie.js',
