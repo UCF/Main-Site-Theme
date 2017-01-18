@@ -1,5 +1,7 @@
 @import '../media-template/media-template-base';
 
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/academics-mobile-header.jpg';
+
 article:last-child {
   padding-bottom: 70px;
 }
@@ -17,10 +19,9 @@ article:last-child {
   padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
-
-    height: 550px;
-    background-position: 60% 0;
-    background-size: 500%;
+    height: 625px;
+    background-image: url($header-media-xs-url) !important;
+    background-size: cover;
   }
 }
 
@@ -260,12 +261,11 @@ article:last-child {
 }
 
 .degree-list-count {
-  display: none;
+  display: block;
   margin-bottom: 0;
   padding: 12px;
 
   @media (min-width: $screen-sm-min) {
-    display: block;
     font-size: 12px;
     font-weight: 400;
     position: relative;
@@ -273,12 +273,27 @@ article:last-child {
 
   a {
     color: $ucf-gold;
+    display: block;
+    font-size: .8em;
     font-weight: 300;
+
+    @media(min-width: $screen-sm-min) {
+      display: inline;
+      font-size: 1em;
+    }
 
     &:hover,
     &:active,
     &:focus {
       color: $white;
+    }
+
+    &:first-child {
+      margin-bottom: 8px;
+
+      @media(min-width: $screen-sm-min) {
+        margin-bottom: 0;
+      }
     }
   }
 }
