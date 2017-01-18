@@ -1526,6 +1526,43 @@ var academicDegreeSearch = function ($) {
 };
 
 /**
+ * Count a number up form zero
+ * https://codepen.io/hi-im-si/pen/uhxFn
+ */
+var countUp = function($) {
+  $('.count-up').each(function() {
+    var $this = $(this),
+        countTo = $this.attr('data-num');
+
+
+    $({ countNum: 0}).animate({
+      countNum: countTo
+    },
+    {
+      duration: 4000,
+      easing:'linear',
+      step: function() {
+        $this.text(numberWithCommas(Math.floor(this.countNum)));
+      },
+      complete: function() {
+        $this.text(numberWithCommas(this.countNum));
+      }
+    });
+  });
+};
+
+/**
+ * Place commas where approrpiate in large numbers
+ * http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+ */
+var numberWithCommas = function(x) {
+  if (x < 1000) {
+    return x;
+  }
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+/**
  * Debouce method to pause logic until resize is complete
  */
 function debounce(func, wait, immediate) {
@@ -1577,10 +1614,15 @@ var sectionsMenu = function($) {
     var addToMenu = function($i, $section) {
       var $item  = $( $section ),
           url = $item.attr('id'),
-          text = $item.find('h2.section-title').text(),
-          $listItem = $('<li></li>'),
+          text;
+      if ($item.data('section-link-title') !== "undefined") {
+        text = $item.data('section-link-title');
+      }
+      else {
+        text = $item.find('h2.section-title').text();
+      }
+      var $listItem = $('<li></li>'),
           $anchor = $('<a class="section-link" href="#' + url + '">' + text + '</a>');
-
       $anchor.on('click', clickHandler);
       $listItem.append($anchor);
       $menuList.append($listItem);
@@ -1661,8 +1703,6 @@ if (typeof jQuery != 'undefined'){
     mediaTemplateVideo($);
     academicDegreeSearch($);
     sectionsMenu($);
-
-    //devBootstrap($);
 
     statusAlertCheck($);
     setInterval(function() {statusAlertCheck($);}, 30000);
