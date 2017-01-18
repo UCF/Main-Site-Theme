@@ -56,16 +56,6 @@ $color-linkedin: #0077b5;
   width: 100%;
   z-index: 1;
 
-  // @media (max-width: $screen-sm-max) {
-  //   height: 500px;
-  //   background-position: 0 30px;
-  // }
-
-  // @media (max-width: $screen-xs-max) {
-  //   height: 360px;
-  //   background-position: 0 30px;
-  // }
-
   @media (max-width: $screen-xs-max) {
     height: 625px;
     background-image: url($header-media-xs-url) !important;
