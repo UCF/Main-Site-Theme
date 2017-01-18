@@ -1,0 +1,91 @@
+@import '../media-template/media-template-base';
+
+
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.jpg';
+
+
+.page-media .page-media-header {
+  @media (max-width: $screen-sm-max) {
+    height: 450px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+    background-position: bottom center;
+    height: 124vw;
+    max-height: 700px;
+  }
+
+  .header-title {
+    @media (max-width: 479px) {
+      font-size: 9vw;
+    }
+
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 7vw;
+    }
+  }
+
+  .header-subtitle {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 3vw;
+    }
+  }
+}
+
+
+#contentcol {
+  // Override fixed video height in theme css
+  .embed-responsive {
+    embed,
+    iframe,
+    object {
+      height: 100%;
+    }
+  }
+
+  // Larger underline headings on this page
+  .heading-underline {
+    font-size: 21px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 26px;
+    }
+  }
+
+  // Add more letter spacing to sans-serif headings on this page
+  .heading-underline,
+  .heading-sans-serif {
+    letter-spacing: .08em;
+  }
+
+  // Make all gold callout text black on this page
+  .callout-gold {
+    color: $black;
+
+    a {
+      color: $black;
+    }
+
+    .callout-aside-heading a {
+      color: $black;
+    }
+  }
+
+  // .intro {
+
+  // }
+
+  // .section-1 { // TODO rename
+
+  // }
+
+  // .section-2 { // TODO rename
+
+  // }
+
+  // .section-3 { // TODO rename
+
+  // }
+
+}
