@@ -35,6 +35,22 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.
 
 
 #contentcol {
+
+  // Divider style overrides
+  hr {
+    border-color: $black;
+    border-style: dotted;
+  }
+
+  .hr-vertical {
+    border-left: 1px dotted $black; // will be 1px off-center, but whatever
+    display: block;
+    height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 1px;
+  }
+
   // Override fixed video height in theme css
   .embed-responsive {
     embed,
@@ -50,6 +66,7 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.
 
     @media (min-width: $screen-sm-min) {
       font-size: 26px;
+      margin-top: 80px;
     }
   }
 
@@ -72,13 +89,25 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.
     }
   }
 
+  .stats-num {
+    @include knockout();
+    display: block;
+    font-size: 40px;
+    line-height: .8;
+  }
+
   // .intro {
 
   // }
 
-  // .section-1 { // TODO rename
+  .section-1 { // TODO rename
+    background-color: #9acae5;
+    padding-bottom: 20vw;
 
-  // }
+    @media (min-width: $screen-sm-min) {
+      padding: 60px 0 25vw;
+    }
+  }
 
   // .section-2 { // TODO rename
 
