@@ -2,6 +2,11 @@
 
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.jpg';
+$section-foundation-bg-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/arena-psych-bg-xs.jpg';
+$section-foundation-bg-md-url: '//www.ucf.edu/wp-content/uploads/2017/01/arena-psych-bg-md.jpg';
+$section-knightlife-bg-md-url: '//www.ucf.edu/wp-content/uploads/2017/01/student-union-bg-md.jpg';
+$cta-primary-icon-bgcolor: $brand-success;
+$cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, darken($cta-primary-icon-bgcolor, 5%) 51%, $cta-primary-icon-bgcolor 100%);
 
 
 .page-media .page-media-header {
@@ -36,19 +41,21 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.
 
 #contentcol {
 
+  //
+  // BASE OVERRIDES
+  //
+
   // Divider style overrides
   hr {
     border-color: $black;
     border-style: dotted;
-  }
+    margin-bottom: 30px;
+    margin-top: 30px;
 
-  .hr-vertical {
-    border-left: 1px dotted $black; // will be 1px off-center, but whatever
-    display: block;
-    height: 100%;
-    margin-bottom: 0;
-    margin-top: 0;
-    width: 1px;
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 40px;
+      margin-top: 40px;
+    }
   }
 
   // Override fixed video height in theme css
@@ -89,32 +96,392 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.
     }
   }
 
-  .stats-num {
-    @include knockout();
+
+  //
+  // PAGE-SPECIFIC STYLES
+  //
+
+  // Vertical hr's
+  .hr-vertical {
+    border-left: 1px dotted $black;
     display: block;
-    font-size: 40px;
-    line-height: .8;
+    height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 1px;
   }
 
-  // .intro {
+  // Stats/facts
+  .stats-num,
+  .stats-num-small {
+    @include knockout();
+    display: block;
+  }
 
-  // }
+  .stats-num {
+    font-size: 40px;
+    line-height: .8;
+    margin-bottom: 12px;
+    margin-top: 25px;
 
-  .section-1 { // TODO rename
-    background-color: #9acae5;
-    padding-bottom: 20vw;
-
-    @media (min-width: $screen-sm-min) {
-      padding: 60px 0 25vw;
+    @media (min-width: $screen-md-min) {
+      font-size: 50px;
     }
   }
 
-  // .section-2 { // TODO rename
+  .stats-num-small {
+    font-size: 21px;
+    line-height: 1;
+    margin-bottom: 25px;
 
-  // }
+    @media (min-width: $screen-sm-min) {
+      font-size: 26px;
+    }
+  }
 
-  // .section-3 { // TODO rename
+  .stats-desc {
+    line-height: 1.2;
+    margin-bottom: 25px;
 
-  // }
+    &,
+    small {
+      display: block;
+    }
+
+    small {
+      font-size: 70%;
+      margin-top: 6px;
+    }
+  }
+
+  // Call-to-action buttons with icons
+  .btn-cta-primary,
+  .btn-cta-secondary {
+    border-radius: 0;
+    display: block;
+    margin: 0 0 3em;
+    padding: 0;
+    white-space: normal;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .btn-cta-primary {
+    background-color: $ucf-gold;
+    border: 0;
+
+    @media (min-width: $screen-sm-min) {
+      display: table;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold-dark;
+
+      .btn-cta-text {
+        color: $white;
+      }
+    }
+
+    .btn-cta-icon {
+      color: $white;
+      padding: 20px 0 0;
+
+      @media (min-width: $screen-sm-min) {
+        background: $cta-primary-icon-bgcolor;  // ie9
+        background: $cta-primary-icon-bg;
+        display: table-cell;
+        padding: 15px;
+        vertical-align: middle;
+      }
+    }
+
+    .btn-cta-text {
+      padding: 15px;
+
+      @media (min-width: $screen-sm-min) {
+        display: table-cell;
+        padding: 15px 30px;
+        vertical-align: middle;
+      }
+
+      @media (min-width: $screen-md-min) {
+        padding: 15px 25px;
+      }
+    }
+  }
+
+  .btn-cta-secondary {
+    background-color: transparent;
+    border: 3px solid $ucf-gold;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: $ucf-gold;
+      border-bottom: 3px solid $ucf-gold;  // kill greedy border-bottom override on links
+
+      .btn-cta-icon {
+        color: $white;
+      }
+    }
+
+    .btn-cta-icon {
+      color: $ucf-gold;
+      padding: 25px 0 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 60px;
+        padding: 35px 0 0;
+      }
+    }
+
+    .btn-cta-text {
+      padding: 15px 45px 25px;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 15px 25px 35px;
+      }
+    }
+  }
+
+  .btn-cta-icon {
+    display: block;
+    font-size: 44px;
+    text-align: center;
+    top: 0;
+  }
+
+  .btn-cta-text {
+    color: $black;
+    display: block;
+    font-weight: 900;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+  }
+
+  // Social menu
+  .social-menu {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .social-menu-link {
+    height: 25px;
+    line-height: 25px;
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 25px;
+  }
+
+  .social-menu-icon {
+    font-size: 15px;
+  }
+
+  .social-menu-link-facebook {
+    background-color: #3b5998;
+
+    &:hover {
+      background: $footer-gray-light;
+    }
+  }
+
+  .social-menu-link-twitter {
+    background-color: #55acee;
+
+    &:hover {
+      background: $footer-gray-light;
+    }
+  }
+
+  .social-menu-link-flickr {
+    background-color: #ff0084;
+
+    &:hover {
+      background: $footer-gray-light;
+    }
+  }
+
+  .social-menu-link-youtube {
+    background-color: #bb0000;
+
+    &:hover {
+      background: $footer-gray-light;
+    }
+  }
+
+  .social-menu-link-googleplus {
+    background-color: #dd4b39;
+
+    &:hover {
+      background: $footer-gray-light;
+    }
+  }
+
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  .section-foundation {
+    background-color: #b1def1;
+    background-image: url($section-foundation-bg-xs-url);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    padding-bottom: 60vw;
+    padding-top: 35px;
+
+    @media (min-width: $screen-sm-min) {
+      background-image: url($section-foundation-bg-md-url);
+      padding-bottom: 28vw;
+      padding-top: 80px;
+    }
+
+    a {
+      color: $black;
+      font-weight: bold;
+      text-decoration: underline;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: $gray;
+      }
+    }
+
+    .section-heading {
+      margin-top: 0;
+    }
+
+    .stats-num {
+      &:first-child {
+        @media (min-width: $screen-sm-min) {
+          margin-top: 0;
+        }
+      }
+    }
+
+    .stats-desc:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .section-knightlife {
+    background-color: $gray-lighter;
+    position: relative;
+
+    @media (min-width: $screen-md-min) {
+      padding-bottom: 60px;
+    }
+
+    .section-bg-wrap {
+      margin-top: 10px;
+      width: 100%;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: 30px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        background-image: url($section-knightlife-bg-md-url);
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        margin-top: 0;
+        position: absolute;
+        top: 0;
+        width: 50%;
+      }
+    }
+  }
+
+  .section-social {
+    margin-bottom: 30px;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 50px;
+    }
+
+    .section-heading-wrap {
+      border-bottom: 1px solid $gray-lighter;
+      margin-bottom: 30px;
+      margin-top: 30px;
+      padding-bottom: 5px;
+      position: relative;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: 60px;
+      }
+
+      .read-more {
+        color: #ccc; // todo variable?
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+
+        @media (min-width: $screen-md-min) {
+          bottom: 10px;
+          position: absolute;
+          right: 0;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+          text-decoration: underline;
+        }
+
+        .fa {
+          margin-left: 8px;
+
+          &:hover,
+          &:active,
+          &:focus {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    .section-heading {
+      @include gotham(9);
+      display: inline-block;
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+
+    .social-menu {
+      margin-top: 8px;
+      text-align: left;
+
+      @media (min-width: $screen-md-min) {
+        display: inline-block;
+        margin-left: 8px;
+      }
+    }
+
+    .social-widget {
+      margin-bottom: 30px;
+    }
+
+  }
+
+  #twitter-widget-0 {
+    height: 500px !important;
+  }
 
 }
