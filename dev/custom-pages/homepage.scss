@@ -487,6 +487,18 @@ $color-linkedin: #0077b5;
 
 .callout.callout-ignite {
     -webkit-font-smoothing: antialiased;
+    position: relative;
+    z-index: 10;
+
+    @media (max-width: $screen-sm-max) {
+      background-image: none !important;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      -webkit-font-smoothing: inherit;
+      text-align: center;
+      background-image: none !important;
+    }
 
     blockquote {
       @include archer(1);
@@ -497,6 +509,10 @@ $color-linkedin: #0077b5;
       font-size: 34px;
       line-height: 1.5;
       font-style: italic;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 19px;
+      }
 
       p {
         margin-top: .4em;
@@ -509,6 +525,12 @@ $color-linkedin: #0077b5;
       color: $white;
       font-style: italic;
       font-size: 22px;
+
+      @media (max-width: $screen-xs-max) {
+        display: block;
+        font-size: 14px;
+        margin-top: 0.75em;
+      }
     }
 
     .ignite-ad {
@@ -516,6 +538,10 @@ $color-linkedin: #0077b5;
       color: $ucf-gold;
       font-size: 23px;
       margin-bottom: .7em;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 15px;
+      }
 
       a {
         text-decoration: underline;
@@ -539,6 +565,11 @@ $color-linkedin: #0077b5;
       overflow: hidden;
       padding-top: 60px;
       width: 170px;
+
+      @media (max-width: $screen-xs-max) {
+        padding-top: 39px;
+        width: 92px;
+      }
     }
   }
 
