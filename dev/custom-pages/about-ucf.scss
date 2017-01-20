@@ -2,12 +2,24 @@
 
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/about-header-xs.jpg';
+$section-intro-bg-url: '//www.ucf.edu/wp-content/uploads/2017/01/knight-bg.jpg';
 $section-foundation-bg-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/arena-psych-bg-xs.jpg';
 $section-foundation-bg-md-url: '//www.ucf.edu/wp-content/uploads/2017/01/arena-psych-bg-md.jpg';
 $section-knightlife-bg-md-url: '//www.ucf.edu/wp-content/uploads/2017/01/student-union-bg-md.jpg';
 $cta-primary-icon-bgcolor: $brand-success;
 $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, darken($cta-primary-icon-bgcolor, 5%) 51%, $cta-primary-icon-bgcolor 100%);
 
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
 
 .page-media .page-media-header {
   @media (max-width: $screen-sm-max) {
@@ -22,12 +34,18 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
   }
 
   .header-title {
+    background-color: rgba($ucf-gold, .9); // increase opacity slightly for this page
+
     @media (max-width: 479px) {
       font-size: 9vw;
     }
 
     @media (min-width: 480px) and (max-width: $screen-xs-max) {
       font-size: 7vw;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 60px;
     }
   }
 
@@ -109,6 +127,22 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     margin-bottom: 0;
     margin-top: 0;
     width: 1px;
+  }
+
+  // Comma-separated inline lists
+  .list-commas {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      display: inline;
+      line-height: 1;
+      margin-bottom: 0;
+
+      &:not(:last-child)::after {
+        content: ', ';
+      }
+    }
   }
 
   // Stats/facts
@@ -332,6 +366,46 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
   // PER-SECTION OVERRIDES
   //
 
+  .section-intro {
+    overflow-x: hidden;
+    position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      min-height: 450px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      padding-bottom: 20px;
+    }
+
+    .section-bg-wrap {
+      background-image: url($section-intro-bg-url);
+      background-position: 66% bottom;
+      background-repeat: no-repeat;
+      background-size: 150%;
+      height: 88vw;
+      width: 100%;
+
+      @media (min-width: 480px) {
+        background-size: auto;
+        height: 450px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        background-position: right bottom;
+        bottom: 0;
+        height: 100%;
+        left: 50%;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        width: 1150px;
+        z-index: -1;
+      }
+    }
+  }
+
   .section-foundation {
     background-color: #b1def1;
     background-image: url($section-foundation-bg-xs-url);
@@ -417,8 +491,8 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
 
     .section-heading-wrap {
       border-bottom: 1px solid $gray-lighter;
-      margin-bottom: 30px;
-      margin-top: 30px;
+      margin-bottom: 35px;
+      margin-top: 35px;
       padding-bottom: 5px;
       position: relative;
 
