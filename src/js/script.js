@@ -743,6 +743,10 @@ var degreeSearch = function ($) {
             'No degrees found for search term.',
             '</div>'
           ].join('\n'),
+          suggestion: function(data) {
+            // Defining a custom suggestion template fixes entity encoding issues
+            return '<div>' + data + '</div>';
+          }
         }
     });
 
@@ -1615,7 +1619,7 @@ var sectionsMenu = function($) {
       var $item  = $( $section ),
           url = $item.attr('id'),
           text;
-      
+
       if (typeof $item.data('section-link-title') !== "undefined") {
         text = $item.data('section-link-title');
       }
