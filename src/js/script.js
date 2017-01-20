@@ -737,16 +737,16 @@ var degreeSearch = function ($) {
       {
         name: 'degrees',
         source: degrees, // searchSuggestions defined in page-degree-search.php
+        display: function(data) {
+          // Stupid hack that forces parsing of html entities
+          return $('<textarea />').html(data).text();
+        },
         templates: {
           empty: [
             '<div class="tt-suggestion empty-message">',
             'No degrees found for search term.',
             '</div>'
-          ].join('\n'),
-          suggestion: function(data) {
-            // Defining a custom suggestion template fixes entity encoding issues
-            return '<div>' + data + '</div>';
-          }
+          ].join('\n')
         }
     });
 
