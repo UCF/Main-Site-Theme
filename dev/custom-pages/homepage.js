@@ -51,11 +51,11 @@ var onResize = debounce(function () {
 
 function initializeMatchHeight() {
   $statsItem = $('.stats-item-row .stats-item');
+  $matchHeights = $('.match-heights');
 
-  $statsItem.matchHeight();
-
-  $(window).on('resize', function() {
+  $(window).on('load resize', function() {
     $statsItem.matchHeight();
+    $matchHeights.matchHeight();
   });
 }
 
