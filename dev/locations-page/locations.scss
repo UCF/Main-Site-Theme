@@ -19,6 +19,49 @@ $georgia: Georgia, serif !default;
 $gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
 $verdana: Verdana, Geneva, sans-serif;
 
+.page-media-header {
+
+  .header-title {
+    background-color: rgba($ucf-gold, .8);
+    color: #000;
+    font-family: $archer;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 10px 0 0;
+    margin-top: 15%;
+    padding: 12px;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 52px;
+      text-align: none;
+    }
+  }
+
+  .header-subtitle {
+    font-family: $archer;
+    background-color: $black;
+    color: $white;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+    padding: 6px 12px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 22px;
+      padding: 8px 12px;
+    }
+  }
+
+  .header-title,
+  .header-subtitle {
+    clear: both;
+    display: inline-block;
+  }
+}
+
 .gotham {
   font-family: $gotham;
 }
