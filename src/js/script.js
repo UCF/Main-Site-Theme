@@ -1515,8 +1515,11 @@ var academicDegreeSearch = function ($) {
       },
       {
         name: 'degrees',
-        display: 'name',
         source: degreesWithDefaults,
+        display: function(data) {
+          // Stupid hack that forces parsing of html entities
+          return $('<textarea />').html(data).text();
+        },
         templates: {
           empty: [
             '<div class="tt-suggestion empty-message">',
