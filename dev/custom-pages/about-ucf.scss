@@ -35,13 +35,14 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
 
   .header-title {
     background-color: rgba($ucf-gold, .9); // increase opacity slightly for this page
+    margin-top: 70px;
 
     @media (max-width: 479px) {
-      font-size: 9vw;
+      font-size: 10vw;
     }
 
     @media (min-width: 480px) and (max-width: $screen-xs-max) {
-      font-size: 7vw;
+      font-size: 8vw;
     }
 
     @media (min-width: $screen-md-min) {
