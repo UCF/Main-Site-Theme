@@ -737,12 +737,16 @@ var degreeSearch = function ($) {
       {
         name: 'degrees',
         source: degrees, // searchSuggestions defined in page-degree-search.php
+        display: function(data) {
+          // Stupid hack that forces parsing of html entities
+          return $('<textarea />').html(data).text();
+        },
         templates: {
           empty: [
             '<div class="tt-suggestion empty-message">',
             'No degrees found for search term.',
             '</div>'
-          ].join('\n'),
+          ].join('\n')
         }
     });
 
@@ -1511,8 +1515,11 @@ var academicDegreeSearch = function ($) {
       },
       {
         name: 'degrees',
-        display: 'name',
         source: degreesWithDefaults,
+        display: function(data) {
+          // Stupid hack that forces parsing of html entities
+          return $('<textarea />').html(data.name).text();
+        },
         templates: {
           empty: [
             '<div class="tt-suggestion empty-message">',
@@ -1615,7 +1622,7 @@ var sectionsMenu = function($) {
       var $item  = $( $section ),
           url = $item.attr('id'),
           text;
-      
+
       if (typeof $item.data('section-link-title') !== "undefined") {
         text = $item.data('section-link-title');
       }
