@@ -67,6 +67,8 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
   }
 
   .header-title {
+    margin-top: 12%;
+
     @media (min-width: 480px) and (max-width: $screen-xs-max) {
       font-size: 6vw;
     }
