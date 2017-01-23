@@ -19,11 +19,6 @@ $georgia: Georgia, serif !default;
 $gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
 $verdana: Verdana, Geneva, sans-serif;
 
-body {
-  font-size: 16px;
-  line-height: 1.65;
-}
-
 .page-media-header {
   background-position: center 0 !important;
 
@@ -106,7 +101,9 @@ body {
 
 .locations-section,
 .intro-section {
+  font-size: 16px;
   font-family: $gotham;
+  line-height: 1.65;
   margin-bottom: 72px;
 
   ul > li > a {
