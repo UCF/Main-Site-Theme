@@ -1394,6 +1394,11 @@ function wp_title_degree_programs($title, $separator) {
 add_filter('wp_title', 'wp_title_degree_programs', 11, 2); // Allow overriding by SEO plugins
 
 
+function format_search_query( $search_query ) {
+	return htmlspecialchars( urldecode( stripslashes( $search_query ) ) );
+}
+
+
 /**
  * Generates text used in page <title> for Degree Search based on current filters/search val.
  **/
@@ -1404,7 +1409,7 @@ function get_degree_search_title( $separator='|', $params=null ) {
 
 	if ( !empty( $params ) ) {
 		if ( isset( $params['search-query'] ) ) {
-			$title = htmlspecialchars( urldecode( $params['search-query'] ) ) . ' ' . $title;
+			$title = format_search_query( $params['search-query'] ) . ' ' . $title;
 		}
 
 		$title .= ' '. $separator . ' Top ';
@@ -1760,7 +1765,7 @@ function fetch_degree_data( $params ) {
 
 	if ( $params ) {
 		if ( isset( $params['search-query'] ) ) {
-			$args['s'] = htmlspecialchars( urldecode( $params['search-query'] ) );
+			$args['s'] = format_search_query( $params['search-query'] );
 			$use_suggestions = true;
 		}
 
@@ -1862,7 +1867,7 @@ function get_degree_search_result_phrase( $result_count_total, $params ) {
 	<?php
 	// Search query phrasing
 	if ( isset( $params['search-query'] ) ): ?>
-	<span class="search-result">&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</span>
+	<span class="search-result">&ldquo;<?php echo format_search_query( $params['search-query'] ); ?>&rdquo;</span>
 	<?php endif; ?>
 
 	<span class="degree-result-phrase-desktop">degree program<?php if ( $result_count_total !== 1 ): ?>s<?php endif; ?> found</span>
@@ -1931,7 +1936,7 @@ function get_degree_search_search_again( $filters, $params ) {
 	if ( isset( $params['search-query'] ) ): ?>
 		<div class="degree-search-again-container">
 			<p class="degree-search-similar">
-				Try your search again for <strong>&ldquo;<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>&rdquo;</strong> filtered by degree type:
+				Try your search again for <strong>&ldquo;<?php echo format_search_query( $params['search-query'] ); ?>&rdquo;</strong> filtered by degree type:
 			</p>
 			<?php foreach ( $filters as $key=>$filter ): ?>
 				<?php if ( $filter['name'] == 'Degrees'): ?>
@@ -1943,7 +1948,7 @@ function get_degree_search_search_again( $filters, $params ) {
 								'search-query' => $params['search-query']
 							) );
 						?>
-							<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo htmlspecialchars( urldecode( $params['search-query'] ) ); ?>">
+							<a class="search-again-link <?php echo $term->slug; ?>" href="<?php echo get_permalink( get_page_by_title( 'Degree Search' ) ); ?>?<?php echo $query; ?>" data-<?php echo $key; ?>="<?php echo $term->slug; ?>" data-search-term="<?php echo format_search_query( $params['search-query'] ); ?>">
 								<?php echo $term->name; ?>s
 							</a>
 						<?php endif; ?>
@@ -2031,10 +2036,13 @@ function degree_search_params_or_fallback( $params ) {
 		// Force default search view params (search results triggered immediately from the default view)
 		else if ( isset( $_GET['search-default'] ) && intval( $_GET['search-default'] ) === 1 ) {
 			$params = unserialize( DEGREE_SEARCH_S_DEFAULT_PARAMS );
-			$params['search-query'] = $_GET['search-query'];
+			$params['search-query'] = stripslashes( $_GET['search-query'] );
 		}
 		else {
 			$params = $_GET;
+			if ( isset( $params['search-query'] ) ) {
+				$params['search-query'] = stripslashes( $params['search-query'] );
+			}
 		}
 	}
 
@@ -2255,7 +2263,7 @@ function get_degree_search_contents( $return=false, $params=null ) {
 	} else {
 		$no_results = 'No results found';
 		if ( isset( $params['search-query'] ) ) {
-			$no_results .= ' for <strong>&ldquo;'. htmlspecialchars( urldecode( $params['search-query'] ) ) .'&rdquo;</strong>';
+			$no_results .= ' for <strong>&ldquo;'. format_search_query( $params['search-query'] ) .'&rdquo;</strong>';
 		}
 		$no_results .= '.';
 	}
