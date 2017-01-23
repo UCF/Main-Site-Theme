@@ -19,7 +19,13 @@ $georgia: Georgia, serif !default;
 $gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
 $verdana: Verdana, Geneva, sans-serif;
 
+body {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
 .page-media-header {
+  background-position: center 0 !important;
 
   .header-title {
     background-color: rgba($ucf-gold, .8);
@@ -59,6 +65,10 @@ $verdana: Verdana, Geneva, sans-serif;
     clear: both;
     display: inline-block;
   }
+}
+
+.page-media-container {
+    background-image: linear-gradient(to top,transparent 0,transparent 80%,rgba(0,0,0,.6) 115%);
 }
 
 .gotham {
@@ -147,14 +157,14 @@ $verdana: Verdana, Geneva, sans-serif;
   }
 
   .content-title {
-    color: #333;
+    color: $black;
     display: inline-block;
     font-family: $gotham;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
+    line-height: 1.25;
     letter-spacing: 0;
-    margin-bottom: 18px;
-    margin-top: 60px;
+    margin: 4em 0 1.7em;
     padding: 0 0 10px;
     text-transform: uppercase;
 
@@ -162,9 +172,9 @@ $verdana: Verdana, Geneva, sans-serif;
       background: $ucf-gold;
       content: ' ';
       display: block;
-      height: 2px;
+      height: 3px;
       margin-top: 15px;
-      width: 25px;
+      width: 40px;
     }
   }
 
@@ -178,9 +188,8 @@ $verdana: Verdana, Geneva, sans-serif;
 }
 
 #contentcol {
-  p {
-    font-size: 15px;
-  }
+  font-size: 16px;
+  line-height: 1.65;
 
   .intro-section .content-title {
     font-family: $archer;
@@ -696,10 +705,11 @@ $verdana: Verdana, Geneva, sans-serif;
   width: 100%;
 
   h3 {
-    color: #333;
+    color: $black;
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
+    line-height: 1.25;
     letter-spacing: 0;
     margin-bottom: 0;
     margin-top: 30px;
