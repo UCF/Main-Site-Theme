@@ -133,8 +133,7 @@ $verdana: Verdana, Geneva, sans-serif;
       text-shadow: 1px 1px 1px $ucf-col-default;
     }
 
-    .section-title,
-    #h2.section-title {
+    .section-title {
       bottom: 18px;
       font-size: 48px;
       margin-left: -20px;
@@ -201,6 +200,12 @@ $verdana: Verdana, Geneva, sans-serif;
       display: none;
     }
   }
+
+  .section-title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
 }
 
 .header-title {
