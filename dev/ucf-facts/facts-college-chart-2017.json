@@ -60,16 +60,16 @@
         "label": "Business Admin : 8,890"
     },
     {
-        "value": 10262,
-        "color": "#81BD1D",
-        "highlight": "#95d131",
-        "label": "Engr & Comp Sci : 10,262"
-    },
-    {
         "value": 10160,
         "color": "#ffc907",
         "highlight": "#ffdd18",
         "label": "Health & Pub Affairs : 10,160"
+    },
+    {
+        "value": 10262,
+        "color": "#81BD1D",
+        "highlight": "#95d131",
+        "label": "Engr & Comp Sci : 10,262"
     },
     {
         "value": 11534,
