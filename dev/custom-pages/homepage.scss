@@ -873,6 +873,11 @@ $color-linkedin: #0077b5;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: 100% 0;
+    overflow-x: hidden;
+
+    @media (max-width: $screen-sm-max) {
+      background-image: none !important;
+    }
 
     h2 {
       font-size: 75px;
@@ -904,10 +909,6 @@ $color-linkedin: #0077b5;
     }
   }
 
-  .events-section {
-    overflow-x: hidden;
-  }
-
   .events-list {
     @include gotham(5);
     list-style: none;
@@ -937,7 +938,7 @@ $color-linkedin: #0077b5;
         content: '\f0da';
         font-family: FontAwesome;
         font-size: 24px;
-        left: -40px;
+        left: -25px;
         top: -6px;
         position: absolute;
       }
