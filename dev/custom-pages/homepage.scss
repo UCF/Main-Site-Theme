@@ -879,6 +879,10 @@ $color-linkedin: #0077b5;
     }
   }
 
+  .events-section {
+    overflow-x: hidden;
+  }
+
   .events-list {
     list-style: none;
     padding-left: 0;
@@ -903,12 +907,12 @@ $color-linkedin: #0077b5;
       }
 
       &:hover::before {
-        color: #fc0;
+        color: $ucf-gold;
         content: '\f0da';
         font-family: FontAwesome;
         font-size: 24px;
-        margin-left: -40px;
-        margin-top: -2px;
+        left: -40px;
+        top: -6px;
         position: absolute;
       }
 
