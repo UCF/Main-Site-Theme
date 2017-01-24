@@ -40,6 +40,14 @@ $color-linkedin: #0077b5;
     }
 }
 
+#header-menu .last a {
+  color: $black;
+
+  &:hover {
+    color: $white;
+  }
+}
+
 .container {
   max-width: 1170px;
 
