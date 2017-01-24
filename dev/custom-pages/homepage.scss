@@ -254,7 +254,7 @@ $color-linkedin: #0077b5;
 
 
     @media (max-width: $screen-sm-max) {
-      display: none;
+      min-height: 175px;
     }
 
     img {
@@ -265,6 +265,10 @@ $color-linkedin: #0077b5;
 
     .padded-top {
       padding-top: 125px;
+    }
+
+    .padded-bottom {
+      padding-bottom: 70px;
     }
   }
 
