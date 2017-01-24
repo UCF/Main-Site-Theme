@@ -2,8 +2,7 @@
 
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/athletics-header-xs.jpg';
-$cta-primary-icon-bgcolor: $brand-success;
-$cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, darken($cta-primary-icon-bgcolor, 5%) 51%, $cta-primary-icon-bgcolor 100%);
+$events-bg-url: '';
 
 
 .page-media .page-media-header {
@@ -58,6 +57,20 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     }
   }
 
+  // Bigger h1's on this page
+  h1,
+  .h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 42px;
+    }
+  }
+
+  // Smaller h4's on this page
+  h4,
+  .h4 {
+    font-size: 15px;
+  }
+
   // Larger underline headings on this page
   .heading-underline {
     font-size: 21px;
@@ -74,6 +87,17 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     letter-spacing: .08em;
   }
 
+  // Increased padding on callouts on this page
+  .callout {
+    padding-bottom: 25px;
+    padding-top: 25px;
+
+    @media (min-width: $screen-sm-min) {
+      padding-bottom: 60px;
+      padding-top: 60px;
+    }
+  }
+
 
   //
   // PAGE-SPECIFIC STYLES
@@ -87,6 +111,186 @@ $cta-primary-icon-bg: linear-gradient(to bottom, $cta-primary-icon-bgcolor 50%, 
     margin-bottom: 0;
     margin-top: 0;
     width: 1px;
+  }
+
+  .highlight {
+    display: inline-block;
+    padding: .4em .8em;
+  }
+
+  .highlight-white {
+    background-color: $white;
+    color: $black;
+  }
+
+  .highlight-gold {
+    background-color: $ucf-gold;
+    color: $black;
+  }
+
+  .heading-condensed {
+    @include knockout();
+    text-transform: uppercase;
+  }
+
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  .section-intro {
+    // Remove gap between .page-media and closed page contents
+    margin-top: -1px;
+
+    @media (min-width: $screen-sm-min) {
+      margin-top: -21px;
+    }
+
+    // Nested class to be more specific than #contentcol .callout heading selector
+    .section-heading {
+      margin-top: 0;
+    }
+  }
+
+  .intro-teams-list {
+    margin-bottom: 0;
+
+    li {
+      margin-bottom: .6em;
+    }
+  }
+
+
+  .section-events {
+    .section-heading {
+      font-size: 42px;
+      margin-top: 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 70px;
+      }
+    }
+  }
+
+  .callout-events {
+    @media (min-width: $screen-md-min) {
+      background-image: url('#{$events-bg-url}');
+      background-position: center right;
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
+    .list-chevrons,
+    .events-list {
+      letter-spacing: .04em;
+    }
+
+    .heading-heavy {
+      margin: 2.5em 0 1em;
+    }
+
+    .btn-ucf-gold {
+      border-bottom: 1px solid $ucf-gold;
+      color: $black;
+      font-size: inherit;
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        border-bottom: 1px solid $ucf-metal-gold;
+      }
+    }
+  }
+
+  .events-list {
+    list-style: none;
+    padding-left: 0;
+
+    .events-list-item {
+      @media (min-width: $screen-sm-min) {
+        margin-bottom: 25px;
+        margin-top: 25px;
+      }
+    }
+
+    .event-link {
+      text-decoration: none;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .event-date,
+        .event-title {
+          text-decoration: underline;
+        }
+      }
+
+      // won't be present in shortcode-generated markup, but for the sake of development:
+      br {
+        display: none;
+      }
+    }
+
+    .event-start-date,
+    .event-start-title,
+    .event-title {
+      display: block;
+    }
+
+    .event-start-date,
+    .event-start-title {
+      line-height: 1.5;
+    }
+
+    .event-start-date {
+      color: $ucf-gold;
+      font-size: 15px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+    }
+
+    .event-start-year,
+    .event-start-time,
+    .event-location {
+      // .sr-only
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    .event-title {
+      @include gotham(8);
+      @include font-smoothing();
+      font-size: 13px;
+      margin: .4em 0;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+      }
+    }
+
+    .event-description {
+      @include gotham();
+      font-size: 12px;
+      line-height: 1.7;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 14px;
+      }
+    }
   }
 
 }
