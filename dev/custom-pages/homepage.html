@@ -7,8 +7,10 @@
         <h2>Get the degree you want.</h2>
         <p class="description">UCF has <a href="/degree-search">more than 210 degree programs</a> in <a href="/academics/#colleges">13 colleges</a>, plus a talented team of faculty and staff to help find what’s right for you. Whatever your passion, we’ll put you on the path to success.</p>
         <div class="degree-search-box">
-        <span class="fa fa-search search-icon"></span>
-        <input id="academics-degree-search" name="academics-degree-search" class="degree-search academics-search-icon" type="text" autocomplete="off" data-provide="typeahead" placeholder="Search for degree programs by name or area of interest" /></div>
+          <form action="//www.ucf.edu/degree-search/" method="GET">
+            <button type="submit" class="search-icon"><span class="fa fa-search search-icon"></span></button>
+            <input id="academics-degree-search" name="search-query" class="degree-search academics-search-icon" type="text" autocomplete="off" data-provide="typeahead" placeholder="Search for degree programs by name or area of interest" /></div>
+          </form>
         <h3 class="inline">Or browse by:</h3>
         <ul class="list-inline list-chevrons">
           <li><a href="//www.ucf.edu/degree-search/?program-type%5B0%5D=undergraduate-degree&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Bachelor's Degrees</a></li>
