@@ -888,6 +888,7 @@ $color-linkedin: #0077b5;
     }
 
     .event-link {
+      position: relative;
       text-decoration: none;
 
       &:hover,
