@@ -901,6 +901,15 @@ $color-linkedin: #0077b5;
         }
       }
 
+      &:hover::before {
+        color: #fc0;
+        content: '\f0da';
+        font-family: FontAwesome;
+        margin-left: -40px;
+        margin-top: -2px;
+        position: absolute;
+      }
+
       br {
         display: none;
       }
