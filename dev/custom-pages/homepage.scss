@@ -140,15 +140,7 @@ $color-linkedin: #0077b5;
   .read-more {
     font-size: 14px;
     font-weight: 600;
-    position: absolute;
-    right: 0;
     text-transform: uppercase;
-    top: 43px;
-
-    @media (max-width: $screen-sm-max) {
-      position: relative;
-      top: auto;
-    }
 
     a {
       color: $black;
@@ -654,28 +646,40 @@ $color-linkedin: #0077b5;
   .callout.callout-news {
     h2 {
       @include gotham(9);
-      font-size: 35px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 9px;
-      margin-top: 25px;
+      font-size: 40px;
+      margin-bottom: 10px;
 
-      @media (max-width: $screen-sm-max) {
-        font-size: 40px;
-        margin-bottom: 10px;
+      @media (min-width: $screen-sm-min) {
+        font-size: 35px;
+        margin-top: 15px;
       }
 
-      @media (max-width: $screen-xs-max) {
-        margin-bottom: 10px;
+      @media (min-width: $screen-md-min) {
+        margin-bottom: 0;
       }
     }
 
     h3.heading-underline {
       @include gotham(9);
       font-size: 15px;
-      margin-top: 50px;
+      margin-top: 30px;
+    }
 
-      @media (max-width: $screen-sm-max) {
-        margin-top: 20px;
+    .news-heading-wrap {
+      border-bottom: 1px solid $gray-lighter;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+
+      @media (min-width: $screen-md-min) {
+        position: relative;
+      }
+    }
+
+    .read-more {
+      @media (min-width: $screen-md-min) {
+        bottom: 8px;
+        position: absolute;
+        right: 0;
       }
     }
 
@@ -708,15 +712,6 @@ $color-linkedin: #0077b5;
     .story-featured-description,
     .story-featured-description p {
       font-size: 14px;
-    }
-
-    .magazine-cover-container {
-      max-width: 90%;
-      margin: 0 auto;
-
-      img {
-        margin: 0 auto;
-      }
     }
 
   }

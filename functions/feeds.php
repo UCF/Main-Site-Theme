@@ -501,7 +501,7 @@ add_action( 'ucf_news_display_modern_before', 'mainsite_news_display_modern_befo
 
 
 function mainsite_news_display_modern_title( $item, $title, $display_type ) {
-	echo '<h2 class="ucf-news-title">In the News</h2>';
+	echo do_action( 'ucf_news_display_classic_title', $item, $title, $display_type );
 }
 
 add_action( 'ucf_news_display_modern_title', 'mainsite_news_display_modern_title', 10, 3 );
