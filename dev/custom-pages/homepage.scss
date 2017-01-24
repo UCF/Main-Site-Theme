@@ -1146,13 +1146,13 @@ $color-linkedin: #0077b5;
   }
 
   input {
-    @include gotham(1);
+    @include gotham(4);
 
-    background: #fff;
+    background: $white;
     border: none;
     border-radius: 0;
     border-right: 55px $ucf-gold solid;
-    color: #000;
+    color: $black;
     font-size: 17px;
     letter-spacing: .5px;
     outline: 0;
@@ -1195,18 +1195,21 @@ $color-linkedin: #0077b5;
   }
 
   .search-icon {
-    background-color: #fc0;
+    background-color: transparent;
     border: 0;
+    display: block;
     font-size: 33px;
-    height: 48px;
+    height: 49px;
     line-height: 44px;
     position: absolute;
-    right: 2px;
-    top: 5px;
+    right: -7px;
+    top: 1px;
+    width: 55px;
     z-index: 2;
 
-    @media (max-width: $screen-sm-max) {
-      top: 1px;
+    @media (min-width: $screen-md-min) {
+      height: 55px;
+      top: 5px;
     }
   }
 }
