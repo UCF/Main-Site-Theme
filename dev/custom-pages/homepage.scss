@@ -1195,14 +1195,18 @@ $color-linkedin: #0077b5;
   }
 
   .search-icon {
+    background-color: #fc0;
+    border: 0;
     font-size: 33px;
+    height: 48px;
+    line-height: 44px;
     position: absolute;
-    right: 4px;
-    top: 16px;
+    right: 2px;
+    top: 5px;
     z-index: 2;
 
     @media (max-width: $screen-sm-max) {
-      top: 10px;
+      top: 1px;
     }
   }
 }
