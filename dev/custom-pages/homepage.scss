@@ -654,6 +654,10 @@ $color-linkedin: #0077b5;
         @media (max-width: $screen-xs-max) {
           max-width: 100px;
         }
+
+        @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+          max-width: 125px;
+        }
       }
     }
   }
