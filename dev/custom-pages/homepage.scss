@@ -507,7 +507,7 @@ $color-linkedin: #0077b5;
 .callout.callout-ignite {
     -webkit-font-smoothing: antialiased;
     position: relative;
-    z-index: 10;
+    z-index: 0;
 
     @media (max-width: $screen-sm-max) {
       background-image: none !important;
@@ -1073,6 +1073,7 @@ $color-linkedin: #0077b5;
   height: 90px;
   margin: 0;
   width: 90%;
+  z-index: 0;
 
   .title {
     font-size: 22px;
