@@ -44,12 +44,6 @@
       };
     }
 
-
-    // Apply jump-to logic to select option click event
-    $jumpTo.on('change', function() {
-      window.location.hash = $jumpTo.val();
-    });
-
     // Manipulate post type search results, per each letter section
     $alphaResults.find('.post-search-heading-wrap').each(function() {
       var $letterWrap        = $(this),

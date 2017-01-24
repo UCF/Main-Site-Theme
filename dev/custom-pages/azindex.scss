@@ -138,11 +138,23 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/azindex-header-x
     padding: 0;
   }
 
-  .post-type-search-alpha {
-    margin-top: 30px;
+  .jump-to-list {
+    margin-bottom: 30px;
+
+    .btn {
+      padding: 8px 7px;
+    }
 
     @media (min-width: $screen-sm-min) {
-      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+  }
+
+  .post-type-search-alpha {
+    margin-top: 20px;
+
+    @media (min-width: $screen-sm-min) {
+      margin-top: 30px;
     }
   }
 
