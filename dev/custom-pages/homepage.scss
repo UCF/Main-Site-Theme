@@ -126,6 +126,17 @@ $color-linkedin: #0077b5;
 
 #contentcol {
 
+  .black-underline {
+    color: $black !important;
+    text-decoration: underline;
+
+    &:hover,
+    &:visited,
+    &:active {
+      text-transform: none;
+    }
+  }
+
   .read-more {
     font-size: 14px;
     font-weight: 600;
@@ -972,6 +983,7 @@ $color-linkedin: #0077b5;
   }
 
   .events-list {
+    @include gotham(5);
     list-style: none;
     padding-left: 0;
 
