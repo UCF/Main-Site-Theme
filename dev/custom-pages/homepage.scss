@@ -133,6 +133,8 @@ $color-linkedin: #0077b5;
 }
 
 #contentcol {
+  position: relative;
+  z-index: 0;
 
   .black-underline {
     color: $black !important;
@@ -1077,7 +1079,7 @@ $color-linkedin: #0077b5;
   height: 90px;
   margin: 0;
   width: 90%;
-  z-index: 0;
+  z-index: 1;
 
   .title {
     font-size: 22px;
