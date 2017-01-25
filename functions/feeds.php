@@ -309,7 +309,7 @@ function display_events_list( $start=null, $limit=null, $url='', $list_classes='
 function display_news() {
 	$args = array(
 		'sections' => null,
-		'topics'   => 'main-site-stories',
+		'topics'   => null,
 		'offset'   => 0,
 		'limit'    => get_theme_option( 'news_max_items' )
 	);
