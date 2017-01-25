@@ -915,11 +915,17 @@ $color-linkedin: #0077b5;
 
     .highlight {
       font-size: 15px;
-      background-color: #ffc904;
-      color: #000;
+      background-color: $ucf-gold;
+      color: $black;
       display: inline-block;
       padding: .4em 1em;
       text-transform: uppercase;
+    }
+
+    .events-view-all {
+      background: transparent;
+      color: $ucf-gold;
+      padding: .4em 0;
     }
   }
 
