@@ -2,7 +2,9 @@
 
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/athletics-header-xs.jpg';
-$events-bg-url: '';
+$events-bg-url:       '';
+$fightsong-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/football-fan.jpg';
+$destiny-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-player.jpg';
 
 
 .page-media .page-media-header {
@@ -211,7 +213,37 @@ $events-bg-url: '';
   }
 
 
-  .section-fightsong { }
+  .section-fightsong {
+    @media (min-width: $screen-sm-min) {
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @media (min-width: $screen-md-min) {
+      min-height: 700px;
+    }
+
+    .section-bgwrap {
+      @media (min-width: $screen-sm-min) {
+        background-image: url($fightsong-sm-url);
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        background-size: 250px auto;
+        bottom: 0;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        width: 800px;
+        z-index: -1;
+      }
+
+      @media (min-width: $screen-md-min) {
+        background-size: auto;
+        width: 1130px;
+      }
+    }
+  }
 
   .fightsong-wrap {
     @include clearfix();
