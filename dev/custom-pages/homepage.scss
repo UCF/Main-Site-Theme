@@ -819,6 +819,18 @@ $color-linkedin: #0077b5;
       }
     }
 
+    .read-more {
+      @media (min-width: $screen-sm-min) {
+        bottom: 10px;
+        position: absolute;
+        right: #{$grid-gutter-width / 2};
+      }
+
+      @media (min-width: $screen-md-min) {
+        bottom: 40px;
+      }
+    }
+
   }
 
   .callout.callout-stats {
