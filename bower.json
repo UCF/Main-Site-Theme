@@ -19,8 +19,9 @@
     "Chart.js": "~1.0.2",
     "jquery.cycle.all": "http://malsup.github.io/jquery.cycle.all.js",
     "jquery.cookie": "jquery-cookie#~1.4.1",
-    "font-awesome": "~4.5.0",
+    "font-awesome": "~4.7.0",
     "typeahead.js": "^0.11.1",
-    "weather-icons": "~2.0.10"
+    "weather-icons": "~2.0.10",
+    "matchHeight": "0.7.0"
   }
 }
