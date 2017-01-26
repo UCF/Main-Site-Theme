@@ -3,8 +3,10 @@
 
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/athletics-header-xs.jpg';
 $events-bg-url:       '';
-$fightsong-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/football-fan.jpg';
-$destiny-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-player.jpg';
+$fightsong-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/football-fan.jpg';
+$destiny-bg-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-player.jpg';
+$nextlevel-bg-xs-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-crowd-xs.jpg';
+$nextlevel-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-crowd.jpg';
 
 
 .page-media .page-media-header {
@@ -49,6 +51,39 @@ $destiny-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-playe
   //
   // BASE OVERRIDES
   //
+
+  blockquote {
+    border-left: 0 solid transparent;
+    padding: 0;
+
+    &,
+    p {
+      @include archer(4, italic);
+      font-size: 21px;
+      margin-bottom: 1em;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 28px;
+      }
+    }
+
+    footer {
+      @include gotham(6);
+
+      &,
+      small {
+        color: $black;
+
+        &::before {
+          content: '';
+        }
+      }
+
+      small {
+        display: inline;
+      }
+    }
+  }
 
   // Override fixed video height in theme css
   .embed-responsive {
@@ -132,6 +167,7 @@ $destiny-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-playe
 
   .heading-condensed {
     @include knockout();
+    line-height: .9;
     text-transform: uppercase;
   }
 
@@ -225,7 +261,7 @@ $destiny-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-playe
 
     .section-bgwrap {
       @media (min-width: $screen-sm-min) {
-        background-image: url($fightsong-sm-url);
+        background-image: url($fightsong-bg-sm-url);
         background-position: right bottom;
         background-repeat: no-repeat;
         background-size: 250px auto;
@@ -417,6 +453,51 @@ $destiny-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-playe
 
       @media (min-width: $screen-sm-min) {
         font-size: 14px;
+      }
+    }
+  }
+
+
+  .section-destiny {
+    @media (min-width: $screen-sm-min) {
+      min-height: 570px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @media (min-width: $screen-md-min) {
+      min-height: 475px;
+    }
+
+    .section-bgwrap {
+      @media (min-width: $screen-sm-min) {
+        background-image: url($destiny-bg-sm-url);
+        background-position: left bottom;
+        background-repeat: no-repeat;
+        bottom: 0;
+        left: 50%;
+        position: absolute;
+        top: 0;
+        transform: translateX(-50%);
+        width: 830px;
+        z-index: -1;
+      }
+
+      @media (min-width: $screen-md-min) {
+        background-size: auto;
+        width: 1130px;
+      }
+    }
+  }
+
+
+  .section-nextlevel {
+    .callout {
+      background-image: url($nextlevel-bg-xs-url);
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($nextlevel-bg-sm-url);
       }
     }
   }
