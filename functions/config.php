@@ -232,7 +232,7 @@ Config::$esi_whitelist = array(
 		),
 	5 => array(
 		'name' => 'echo_shortcode',
-		'safe_args' => '[ucf-news-feed title="News" layout="classic" topics="main-site-stories"]',
+		'safe_args' => array( '[ucf-news-feed title="News" layout="classic" topics="main-site-stories"]' ),
 	)
 );
 
