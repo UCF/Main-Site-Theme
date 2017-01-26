@@ -246,13 +246,24 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
     .section-heading {
       margin-top: 0;
     }
-  }
 
-  .intro-teams-list {
-    margin-bottom: 0;
+    .intro-teams-list {
+      margin-bottom: 0;
 
-    li {
-      margin-bottom: .6em;
+      li {
+        margin-bottom: .6em;
+      }
+
+      a {
+        font-weight: normal;
+        text-decoration: none;
+
+        &:hover,
+        &:active,
+        &:focus {
+          text-decoration: underline;
+        }
+      }
     }
   }
 
@@ -558,6 +569,10 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
 
     li {
       margin-bottom: .6em;
+    }
+
+    a {
+      color: $black;
     }
   }
 
