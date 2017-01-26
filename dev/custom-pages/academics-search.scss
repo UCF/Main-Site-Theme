@@ -1,5 +1,11 @@
 @import '../media-template/media-template-base';
 
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/academics-mobile-header.jpg';
+
+article:last-child {
+  padding-bottom: 70px;
+}
+
 #academics .top-search {
   max-width: 1170px;
 }
@@ -13,8 +19,9 @@
   padding-top: 35px;
 
   @media (max-width: $screen-xs-max) {
-    height: 500px;
-    background-position: 0 30px;
+    height: 625px;
+    background-image: url($header-media-xs-url) !important;
+    background-size: cover;
   }
 }
 
@@ -67,6 +74,10 @@
     margin-bottom: 30px;
     margin-top: 0;
 
+    @media (max-width: $screen-sm-max) {
+      font-size: 33px;
+    }
+
     @media (max-width: $screen-xs-max) {
       text-align: center;
     }
@@ -102,6 +113,11 @@
     font-size: 16px;
     margin-bottom: 0;
     width: 240px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 14px;
+      width: 100%;
+    }
 
     .count {
       color: #811f1f;
@@ -144,21 +160,28 @@
     margin-top: 25px;
   }
   @media (max-width: $screen-xs-max) {
-    font-size: 22px;
+    font-size: 25px;
     margin-bottom: 25px;
     margin-top: 25px;
   }
 }
 
+.academics-extra {
+  background: #333;
+  color: $white;
+}
+
 .academics-search-box {
   @include gotham(6);
 
-  background-color: #FC0;
+  background-color: $ucf-gold;
   color: #000;
   font-size: 24px;
   height: 117px;
   padding: 26px 30px;
+  position: relative;
   transition: all 1s;
+  z-index: 100;
 
   .title {
     font-size: 22px;
@@ -166,21 +189,14 @@
   }
 
   @media (max-width: $screen-md-max) {
-    height: 100px;
     transition-delay: 0s;
     transition: height 0.2s;
   }
 
   .twitter-typeahead {
-    width: 101.5%;
+    width: 100%;
     top: 5px;
-    float: right;
     position: absolute;
-    right: -7px;
-
-    @media (max-width: $screen-sm-max) {
-      top: -1px;
-    }
   }
 
   .tt-menu.tt-open {
@@ -197,39 +213,21 @@
   }
 
   input {
-    @include gotham(1);
+    @include gotham();
 
-    background: #f9dd78;
+    background: $white !important;
     border: none;
     border-radius: 5px;
-    color: #000;
+    color: $black;
     font-size: 17px;
+    height: 60px;
     letter-spacing: .5px;
     outline: 0;
     padding: 13px 54px 13px 25px;
     position: absolute;
     transition: all 0.3s;
-
     width: 100%;
-
     z-index: 1;
-
-    &::-webkit-input-placeholder {
-      color: #796b2d;
-    }
-    &:-moz-placeholder {
-      color: #796b2d;
-    }
-    &::-moz-placeholder {
-      color: #796b2d;
-    }
-    &:-ms-input-placeholder {
-      color: #796b2d;
-    }
-    &:placeholder-shown {
-      color: #796b2d;
-    }
-
   }
 
   .title {
@@ -250,19 +248,54 @@
 
   .search-icon {
     transition: all 0.3s;
-
-    @media (max-width: $screen-md-max) {
-      top: 34px;
-    }
+    background: transparent;
+    border: 0;
+    font-size: 33px;
+    line-height: 0;
+    position: absolute;
+    right: 38px;
+    transform: translateY(-50%);
+    top: 50%;
+    z-index: 10;
   }
 }
 
-.search-icon {
-  font-size: 33px;
-  position: absolute;
-  right: 38px;
-  top: 41px;
-  z-index: 2;
+.degree-list-count {
+  display: block;
+  margin-bottom: 0;
+  padding: 12px;
+
+  @media (min-width: $screen-sm-min) {
+    font-size: 12px;
+    font-weight: 400;
+    position: relative;
+  }
+
+  a {
+    color: $ucf-gold;
+    display: block;
+    font-size: .8em;
+    font-weight: 300;
+
+    @media(min-width: $screen-sm-min) {
+      display: inline;
+      font-size: 1em;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $white;
+    }
+
+    &:first-child {
+      margin-bottom: 8px;
+
+      @media(min-width: $screen-sm-min) {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 .tt-suggestion {
@@ -273,16 +306,15 @@
   padding: 5px 10px;
   width: 500px;
 
+  &:hover {
+    background-color: rgba(255, 225, 113, 1);
+  }
+
   hr {
     border: 1px dashed #6f6f6f;
     margin:0;
   }
-
-  &:hover {
-    background-color: rgba(255, 225, 113, 0.8);
-  }
 }
-
 
 .college-dropdown-content {
   background: #f9dd78;
@@ -313,6 +345,84 @@
         &:visited {
           color: #000;
         }
+      }
+    }
+  }
+}
+
+#contentcol .resources-section {
+  padding-bottom: 35px;
+
+  img {
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+#contentcol .callout {
+  background: $ucf-gold;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 0;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .container {
+    vertical-align: top;
+  }
+
+  .icon-link {
+    display: inline-block;
+    margin: 10px auto;
+    width: 25%;
+    vertical-align: top;
+
+    @media (max-width: $screen-xs-max) {
+      width: 50%;
+    }
+
+    .icon-link-anchor {
+      @include gotham();
+      color: #000;
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+
+        .fa {
+          color: $white;
+        }
+
+        h3 {
+          background: rgba(10, 10, 10, 0.55);
+          color: $ucf-gold;
+        }
+      }
+
+      .fa {
+        font-size: 80px;
+        margin-bottom: 12px;
+        @include transition(color .25s);
+      }
+
+      h3 {
+        @include gotham();
+        background: rgba(30, 30, 30, 0.25);
+        border-radius: 4px;
+        display: inline;
+        font-size: 14px;
+        padding: 2px 14px;
+        @include transition(background .25s, color .25s);
+      }
+
+      p {
+        font-size: 12px;
+        font-style: italic;
+        padding-top: 8px;
       }
     }
   }

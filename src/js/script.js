@@ -610,7 +610,7 @@ var statusAlertCheck = function ($) {
           }
 
           if(existing_icon.hasClass(newest.type) === false) {
-            existing_icon.attr('class','alert-icon ' + newest.type);
+            existing_icon.attr('class','alert-icon fa ' + newest.type);
             contentChanged = true;
           }
 
@@ -627,14 +627,14 @@ var statusAlertCheck = function ($) {
             alert_markup
               .attr('id', '')
               .attr('data-alert-id', newest.id);
-            $('#header-nav-wrap').before(alert_markup);
+            $('#status-alert-template').before(alert_markup);
 
 
             var $markup = $('.status-alert[data-alert-id="' + newest.id + '"]');
             $markup.find('.title').text(newest.title).end()
               .find('.content').text(newest.description).end()
               .find('.more-information').text('Click Here for More Information').end()
-              .find('.alert-icon').attr('class', 'alert-icon ' + newest.type);
+              .find('.alert-icon').attr('class', 'alert-icon fa ' + newest.type);
 
             switch(newest.type) {
               case 'alert':
@@ -737,12 +737,16 @@ var degreeSearch = function ($) {
       {
         name: 'degrees',
         source: degrees, // searchSuggestions defined in page-degree-search.php
+        display: function(data) {
+          // Stupid hack that forces parsing of html entities
+          return $('<textarea />').html(data).text();
+        },
         templates: {
           empty: [
             '<div class="tt-suggestion empty-message">',
             'No degrees found for search term.',
             '</div>'
-          ].join('\n'),
+          ].join('\n')
         }
     });
 
@@ -1511,8 +1515,11 @@ var academicDegreeSearch = function ($) {
       },
       {
         name: 'degrees',
-        display: 'name',
         source: degreesWithDefaults,
+        display: function(data) {
+          // Stupid hack that forces parsing of html entities
+          return $('<textarea />').html(data.name).text();
+        },
         templates: {
           empty: [
             '<div class="tt-suggestion empty-message">',
@@ -1525,11 +1532,74 @@ var academicDegreeSearch = function ($) {
   }
 };
 
+/**
+ * Count a number up form zero
+ * https://codepen.io/hi-im-si/pen/uhxFn
+ */
+var countUp = function($) {
+  $('.count-up').each(function() {
+    var $this = $(this),
+        countTo = $this.attr('data-num');
+
+
+    $({ countNum: 0}).animate({
+      countNum: countTo
+    },
+    {
+      duration: 4000,
+      easing:'linear',
+      step: function() {
+        $this.text(numberWithCommas(Math.floor(this.countNum)));
+      },
+      complete: function() {
+        $this.text(numberWithCommas(this.countNum));
+      }
+    });
+  });
+};
+
+/**
+ * Place commas where approrpiate in large numbers
+ * http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+ */
+var numberWithCommas = function(x) {
+  if (x < 1000) {
+    return x;
+  }
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+/**
+ * Debouce method to pause logic until resize is complete
+ */
+function debounce(func, wait, immediate) {
+  var timeout;
+
+  return function () {
+    var context = this,
+        args = arguments;
+
+    var later = function () {
+      timeout = null;
+      if (!immediate) {
+        func.apply(context, args);
+      }
+    };
+
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+
+    if (callNow) {
+      func.apply(context, args);
+    }
+  };
+}
+
 var sectionsMenu = function($) {
   var $sectionsMenu = $('#sections-menu');
-  if ( $sectionsMenu.length ) {
-    var selector = $sectionsMenu.data('selector');
 
+  if ( $sectionsMenu.length ) {
     var clickHandler = function(e) {
       e.preventDefault();
 
@@ -1551,14 +1621,24 @@ var sectionsMenu = function($) {
     var addToMenu = function($i, $section) {
       var $item  = $( $section ),
           url = $item.attr('id'),
-          text = $item.find('h2.section-title').text(),
-          $listItem = $('<li></li>'),
-          $anchor = $('<a class="section-link" href="#' + url + '">' + text + '</a>');
+          text;
 
+      if (typeof $item.data('section-link-title') !== "undefined") {
+        text = $item.data('section-link-title');
+      }
+      else {
+        text = $item.find('.section-title').text();
+      }
+      var $listItem = $('<li></li>'),
+          $anchor = $('<a class="section-link" href="#' + url + '">' + text + '</a>');
       $anchor.on('click', clickHandler);
       $listItem.append($anchor);
       $menuList.append($listItem);
 
+    };
+
+    var setBumperHeight = function() {
+      $bumper.height($menu.height());
     };
 
     var scroll = function() {
@@ -1573,20 +1653,27 @@ var sectionsMenu = function($) {
       }
     };
 
-    var onResize = function() {
+    var onResize = debounce( function() {
       offset = $firstSection.offset().top - $menu.height(); // Reduce by 50px to account for university header.
-    };
+      setBumperHeight();
+    }, 100);
 
-    var $sections = $(selector),
-        $menuList = $sectionsMenu.find('ul.nav'),
-        $menu = $('#sections-navbar'),
+
+    var selector      = $sectionsMenu.data('selector'),
+        $sections     = $(selector),
+        $menuList     = $sectionsMenu.find('ul.nav'),
+        $menu         = $('#sections-navbar'),
         $firstSection = $sections.first(),
-        offset = $firstSection.offset().top;
+        offset        = $firstSection.offset().top,
+        $bumper       = $menu.next('.navbar-bumper');
 
     $.each($sections, addToMenu);
+
     $(document).on('scroll', scroll);
     $('body').scrollspy({target: '#sections-menu', offset: 60});
     $(window).on('resize', onResize);
+
+    setBumperHeight();
     scroll();
   }
 };
@@ -1624,8 +1711,6 @@ if (typeof jQuery != 'undefined'){
     mediaTemplateVideo($);
     academicDegreeSearch($);
     sectionsMenu($);
-
-    //devBootstrap($);
 
     statusAlertCheck($);
     setInterval(function() {statusAlertCheck($);}, 30000);

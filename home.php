@@ -18,7 +18,6 @@
 			<p class="screen-only"><a href="<?=get_permalink(get_page_by_title('Spotlight Archives', OBJECT, 'page')->ID);?>" class="home_col_morelink">Spotlight Archive</a></p>
 		</div>
 		<div class="col-md-4 col-sm-4 col-md-xpad col-sm-xpad" id="home_centercol">
-			<h2>News</h2>
 			<?php esi_include('display_news'); ?>
 			<p class="screen-only"><a href="http://today.ucf.edu/" class="home_col_morelink">More News</a></p>
 		</div>

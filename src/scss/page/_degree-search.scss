@@ -384,6 +384,37 @@
     }
   }
 
+  .twitter-typeahead {
+    display: block !important;
+
+    .tt-menu {
+      background-color: #fff;
+      border: 1px solid rgba(0,0,0,.15);
+      box-shadow: 0 6px 12px rgba(0,0,0,.175);
+      font-size: 13px;
+      list-style: none;
+      margin: 2px 0 0;
+      padding: 5px 0;
+      text-align: left;
+
+      .tt-suggestion {
+        padding: 5px 10px;
+
+        &:hover, &.tt-cursor {
+          cursor: pointer;
+          color: #fff;
+          background-color: #337ab7;
+        }
+
+        &.empty-message:hover {
+          cursor: inherit;
+          color: #000;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
   .degree-search-sort {
     border-bottom: 1px solid #e5e5e5;
     margin-top: 30px;

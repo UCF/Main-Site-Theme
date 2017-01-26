@@ -16,6 +16,11 @@
 					));
 				?>
 			</div>
+			<p class="ucf-footer-address">
+				4000 Central Florida Blvd. Orlando, Florida, 32816 | <a href="tel:4078232000">407.823.2000</a>
+				<br>
+				&copy; <a href="http://www.ucf.edu/">University of Central Florida</a>
+			</p>
 		</footer>
 	</body>
 	<?php echo footer_(); ?>

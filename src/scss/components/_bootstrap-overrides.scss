@@ -32,6 +32,16 @@
 }
 
 
+// Navbars
+.navbar-bumper {
+  display: none;
+  height: $navbar-height;
+
+  @include body-prefix('.fixed-navbar') {
+    display: block;
+  }
+}
+
 // Line-height override for mobile navbars (for consistency with BS2)
 .navbar-nav > li > a {
   line-height: 27px;
