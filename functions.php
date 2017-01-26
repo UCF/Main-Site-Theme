@@ -3389,4 +3389,9 @@ function add_classic_degree_body_class( $classes ) {
 
 add_action( 'body_class', 'add_classic_degree_body_class' );
 
+// Echos the output of a shortcode.
+function echo_shortcode( $shortcode ) {
+	echo do_shortcode( $shortcode );
+}
+
 ?>

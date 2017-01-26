@@ -1,0 +1,80 @@
+[
+    {
+        "value": 148,
+        "color": "#000",
+        "highlight": "#261d00",
+        "label": "Graduate Studies : 148"
+    },
+    {
+        "value": 224,
+        "color": "#b3b3b3",
+        "highlight": "#c7c7c7",
+        "label": "Optics & Photonics : 224"
+    },
+    {
+        "value": 991,
+        "color": "#E86F28",
+        "highlight": "#fc833c",
+        "label": "Undeclared : 991"
+    },
+    {
+        "value": 1605,
+        "color": "#eb595c",
+        "highlight": "#ff6d70",
+        "label": "Undergrad Studies : 1,605"
+    },
+    {
+        "value": 2773,
+        "color": "#D44B91",
+        "highlight": "#e85fa5",
+        "label": "Nursing : 2,773"
+    },
+    {
+        "value": 3059,
+        "color": "#A74EA0",
+        "highlight": "#bb62b4",
+        "label": "Rosen Hosp Mgmt : 3,059"
+    },
+    {
+        "value": 3526,
+        "color": "#7560a3",
+        "highlight": "#8974b7",
+        "label": "Medicine : 3,526"
+    },
+    {
+        "value": 5751,
+        "color": "#42758a",
+        "highlight": "#56899e",
+        "label": "Arts & Humanities : 5,751"
+    },
+    {
+        "value": 5395,
+        "color": "#368E5C",
+        "highlight": "#4aa270",
+        "label": "Educ & Human Perf : 5,395"
+    },
+    {
+        "value": 8890,
+        "color": "#55A930",
+        "highlight": "#69bd44",
+        "label": "Business Admin : 8,890"
+    },
+    {
+        "value": 10160,
+        "color": "#ffc907",
+        "highlight": "#ffdd18",
+        "label": "Health & Pub Affairs : 10,160"
+    },
+    {
+        "value": 10262,
+        "color": "#81BD1D",
+        "highlight": "#95d131",
+        "label": "Engr & Comp Sci : 10,262"
+    },
+    {
+        "value": 11534,
+        "color": "#E5A319",
+        "highlight": "#f9b72d",
+        "label": "Sciences : 11,534"
+    }
+]
