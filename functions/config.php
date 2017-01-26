@@ -220,7 +220,7 @@ Config::$esi_whitelist = array(
 		),
 	2 => array(
 		'name' => 'do_shortcode',
-		'safe_args' => array('[events-widget]'),
+		'safe_args' => array('[events-widget]', '[ucf-news-feed title="News" layout="classic" topics="main-site-stories"]'),
 		),
 	3 => array(
 		'name' => 'display_news',
