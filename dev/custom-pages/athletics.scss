@@ -1,12 +1,13 @@
 @import '../media-template/media-template-base';
 
 
-$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/athletics-header-xs.jpg';
-$events-bg-url:       '';
+$header-media-xs-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-header-xs.jpg';
 $fightsong-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/football-fan.jpg';
+$events-bg-md-url:       '//placehold.it/850x950/';
 $destiny-bg-sm-url:      '//www.ucf.edu/wp-content/uploads/2017/01/basketball-player.jpg';
 $nextlevel-bg-xs-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-crowd-xs.jpg';
 $nextlevel-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-crowd.jpg';
+$facilities-bg-sm-url:    '//placehold.it/1600x650/';
 
 
 .page-media .page-media-header {
@@ -31,10 +32,6 @@ $nextlevel-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-cro
 
     @media (min-width: 480px) and (max-width: $screen-xs-max) {
       font-size: 8vw;
-    }
-
-    @media (min-width: $screen-md-min) {
-      font-size: 60px;
     }
   }
 
@@ -338,7 +335,7 @@ $nextlevel-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-cro
 
   .callout-events {
     @media (min-width: $screen-md-min) {
-      background-image: url('#{$events-bg-url}');
+      background-image: url('#{$events-bg-md-url}');
       background-position: center right;
       background-repeat: no-repeat;
       background-size: auto 100%;
@@ -499,6 +496,53 @@ $nextlevel-bg-sm-url:    '//www.ucf.edu/wp-content/uploads/2017/01/athletics-cro
       @media (min-width: $screen-sm-min) {
         background-image: url($nextlevel-bg-sm-url);
       }
+    }
+  }
+
+
+  .section-news {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 30px;
+    }
+  }
+
+
+  .section-facilities {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 30px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      background-image: url($facilities-bg-sm-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 60px 0;
+    }
+
+    .section-heading {
+      @media (min-width: $screen-sm-min) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .facilities-wrap {
+    @media (min-width: $screen-sm-min) {
+      background-color: $white;
+      padding: 30px;
+    }
+  }
+
+  .facilities-venues-list {
+    font-size: 12px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 14px;
+    }
+
+    li {
+      margin-bottom: .6em;
     }
   }
 
