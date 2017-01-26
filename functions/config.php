@@ -220,7 +220,7 @@ Config::$esi_whitelist = array(
 		),
 	2 => array(
 		'name' => 'do_shortcode',
-		'safe_args' => array('[events-widget]', '[ucf-news-feed title="News" layout="classic" topics="main-site-stories"]'),
+		'safe_args' => array('[events-widget]'),
 		),
 	3 => array(
 		'name' => 'display_news',
@@ -230,6 +230,10 @@ Config::$esi_whitelist = array(
 		'name' => 'page_specific_stylesheet',
 		'safe_args' => get_all_page_ids(),
 		),
+	5 => array(
+		'name' => 'echo_shortcode',
+		'safe_args' => '[ucf-news-feed title="News" layout="classic" topics="main-site-stories"]',
+	)
 );
 
 /**
