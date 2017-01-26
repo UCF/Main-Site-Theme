@@ -293,21 +293,10 @@ $color-linkedin: #0077b5;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
-    // h2 {
-    //   margin-top: 0 !important;
-    // }
   }
 
   .callout.callout-news {
     background: $color-light-gray;
-
-    // h3.heading-underline {
-    //   @include gotham(9);
-    //   font-size: 15px;
-    //   margin-top: 30px;
-    // }
-
 
     .news-heading-wrap {
       border-bottom: 1px solid $gray-lighter;
