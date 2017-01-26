@@ -1,0 +1,14 @@
+[
+    {
+        "value": 78,
+        "color": "#80BE1F",
+        "highlight": "#94d233",
+        "label": "Faculty with Doctoral Degrees"
+    },
+    {
+        "value": 22,
+        "color": "#ffc904",
+        "highlight": "#ffdd18",
+        "label": "Faculty without Doctoral Degrees"
+    }
+]
