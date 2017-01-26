@@ -23,19 +23,8 @@
 			$today_feed_title = $today_feed_title !== '' ? 'UCF Today &raquo; ' . $today_feed_title : 'UCF Today';
 			echo $today_feed_title;
 		echo '</h3>';
-
-		$args = array(
-			'sections' => null,
-			'topics'   => null,
-			'offset'   => 0,
-			'limit'    => 5
-		);
-
-		$items = UCF_News_Feed::get_news_items( $args );
-
-		if ( $items ) {
-			echo UCF_News_Common::display_news_items( $items, 'text', '', 'default' );
-		}
+		
+		echo do_shortcode('[ucf-news-feed layout="text" limit="5"]');
 
 		echo '<a class="rssbtn" href="' . $today_feed . '">Full Feed</a>';
 	}
