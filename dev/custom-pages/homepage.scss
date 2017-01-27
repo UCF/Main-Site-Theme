@@ -5,6 +5,7 @@ $downtown-bg-url: '//www.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky
 $stats-background-url: '//www.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow-1.jpg';
 $stats-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-StatsBackground.jpg';
 $events-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-LightupUCF.jpg';
+$ignite-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-Grads1.jpg';
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-HeaderImage.jpg';
 $florida-icon-url: '../img/florida-ucf-pin.png';
 $ignite-logo-url: '//www.ucf.edu/wp-content/uploads/2017/01/ignite-logo.png';
@@ -519,13 +520,17 @@ $color-linkedin: #0077b5;
     z-index: 0;
 
     @media (max-width: $screen-sm-max) {
-      background-image: none !important;
+      background: $black url($ignite-background-mobile-url) !important;
+      background-position: 50% 75% !important;
+      background-repeat: no-repeat !important;
+      background-size: cover !important;
+      padding: 30px 0 300px;
     }
 
     @media (max-width: $screen-xs-max) {
       -webkit-font-smoothing: inherit;
       text-align: center;
-      background-image: none !important;
+      padding: 18px 0 220px;
     }
 
     blockquote {
