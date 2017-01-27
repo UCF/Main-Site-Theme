@@ -1,0 +1,481 @@
+#contentcol {
+    color: #000;
+    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.75;
+}
+
+#contentcol a {
+    color: #000;
+}
+
+#contentcol .lead {
+    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+    font-style: normal;
+    font-size: 20px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: auto;
+}
+
+#contentcol h2 {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    margin-bottom: 20px;
+    margin-top: 45px;
+    text-transform: uppercase;
+}
+
+#contentcol small {
+    color: #999;
+}
+
+#contentcol h2,
+#contentcol h3,
+#contentcol h4,
+#contentcol h5,
+#contentcol h6 {
+    font-family: 'Gotham SSm 4r', 'Gotham SSm A', 'Gotham SSm B';
+    font-style: normal;
+}
+
+#contentcol h3 {
+    font-size: 20px;
+    line-height: normal;
+    margin-bottom: 12px;
+}
+
+#contentcol .campus-map {
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+#contentcol .call-out {
+    background-color: #ffcc00;
+    padding: 19px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+
+#contentcol .call-out.gold {
+    background-color: #fef7e1;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px;
+}
+
+#contentcol .call-out h3 {
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+#contentcol .call-out ul {
+    list-style-type: square;
+}
+
+#contentcol .margin-auto {
+    margin: 0 auto;
+}
+
+#contentcol .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+@media (min-width: 768px) {
+    #contentcol .financial-aid [class*=' border-'] {
+        border: 0 dotted #000;
+        min-height: 250px;
+        text-align: center;
+    }
+
+    #contentcol .financial-aid .border-top-left {
+        border-width: 0 1px 1px 0;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+
+    #contentcol .financial-aid .border-top-right {
+        border-width: 0 0 1px;
+        margin-left: 0;
+        padding-bottom: 30px;
+        padding-top: 30px;
+    }
+
+    #contentcol .financial-aid .border-bottom-left {
+        border-width: 0 1px 0 0;
+        padding-top: 30px;
+    }
+
+    #contentcol .financial-aid .border-bottom-right {
+        margin-left: 0;
+        padding-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    #contentcol .vcenter {
+        margin-top: 20px;
+    }
+
+    #contentcol .financial-aid {
+        text-align: center;
+    }
+
+    #contentcol .financial-aid h3,
+    #contentcol .financial-aid .col-md-4 {
+        margin-bottom: 30px;
+        padding: 0 20px;
+    }
+
+    #contentcol .financial-aid-row {
+         margin-top: 0;
+         margin-bottom: 0;
+    }
+}
+
+#contentcol .text-center {
+    text-align: center;
+}
+
+#contentcol .icon-feature {
+    font-size: 60px;
+    background-color: #000;
+    border-radius: 50%;
+    color: #fff;
+    padding: 26px;
+}
+
+#contentcol .icon-feature.fa-usd {
+    padding: 26px 38px;
+}
+
+#contentcol .icon-feature.fa-exclamation {
+    padding: 20px 38px;
+}
+
+@media (max-width: 979px) {
+    #contentcol .icon-feature {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    #contentcol .icon-feature.fa-usd {
+        padding: 20px 33px;
+    }
+
+    #contentcol .icon-feature.fa-exclamation {
+        padding: 20px 38px;
+    }
+}
+
+@media (max-width: 979px) and (min-width: 768px) {
+    #contentcol .icon-feature {
+        font-size: 40px;
+    }
+
+    #contentcol .call-out .col-md-2 {
+        width: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    #contentcol .icon-feature {
+        margin: 0;
+    }
+}
+
+#contentcol h2 span {
+    color: #ffc904;
+    margin-right: 5px;
+}
+
+#contentcol .number {
+    color: #fff;
+    font-size: 75px;
+    font-weight: 800;
+    letter-spacing: -.04em;
+    line-height: 1.4;
+}
+
+#contentcol .number-desc {
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+/* call out quote */
+
+#contentcol .call-out-quote {
+    margin-top: 35px;
+    margin-bottom: 10px;
+}
+
+#contentcol blockquote {
+    border-left: 0;
+}
+
+#contentcol blockquote.quote {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-style: italic;
+    padding-left: 0;
+}
+
+#contentcol blockquote.quote:before {
+    display: block;
+    float: left;
+    font-size: 28px;
+    left: -5px;
+    line-height: 38px;
+    position: relative;
+    top: 0;
+}
+
+@media (max-width: 767px) {
+    #contentcol blockquote.quote:before {
+        font-size: 26px;
+        line-height: 36px;
+
+    }
+}
+
+#contentcol blockquote.quote p {
+    font-size: 28px;
+    line-height: 38px;
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    #contentcol blockquote.quote p {
+        font-size: 20px;
+        line-height: 36px;
+    }
+}
+
+#contentcol blockquote.quote small {
+    color: #000;
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 30px;
+}
+
+/* Tables */
+
+.ucfacts-table {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.ucfacts-table.top-margin {
+    margin-top: 40px;
+}
+
+.ucfacts-table caption {
+    border: 0 none;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.ucfacts-table th {
+    font-weight: normal;
+    padding-right: 10px;
+    text-align: left;
+}
+
+.ucfacts-table th,
+.ucfacts-table td {
+    border-bottom: 1px solid #eee;
+    line-height: 1.35;
+    padding: 7px 0;
+}
+
+.ucfacts-table td {
+    text-align: right;
+}
+
+.ucfacts-table tr.title td,
+.ucfacts-table tr.title th {
+    color: #999;
+    font-weight: bold;
+}
+
+.ucfacts-table tr.total td,
+.ucfacts-table tr.total th {
+    font-weight: bold;
+}
+
+/* Lists */
+
+#contentcol ul, #contentcol ol {
+    margin-bottom: 20px;
+    margin-left: 0;
+    margin-top: 5px;
+    padding-left: 0;
+}
+
+#contentcol ol {
+    margin-left: 20px;
+}
+
+#contentcol ul li,
+#contentcol ol li {
+    margin-left: 22px;
+    margin-bottom: 8px;
+}
+
+#contentcol ol li {
+    margin-left: 0;
+}
+
+#contentcol .unstyled li {
+    list-style-type: none;
+    margin-bottom: 8px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/* Side Bar */
+
+#contentcol .ucfacts-sidebar {
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+#contentcol .ucfacts-sidebar h2 {
+    color: #888;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+#contentcol .ucfacts-sidebar ol {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 0;
+}
+
+#contentcol .ucfacts-sidebar li {
+    margin-left: 28px;
+    line-height: 18px;
+    margin-bottom: 21px;
+}
+
+#contentcol .ucfacts-sidebar ol span {
+    color: #000;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+#contentcol .ucfacts-sidebar .ucfacts-goldbg {
+    background-color: #eee;
+    padding: 20px;
+}
+
+#contentcol .ucfacts-sidebar h2:first-child {
+    margin-top: 0;
+}
+
+#contentcol .ucfacts-heading-alt {
+    background-color: #000;
+    color: #fff;
+    font-weight: 400;
+    font-size: 26px;
+    margin: 0;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+#contentcol .ucfacts-heading-alt span {
+    font-weight: 600;
+}
+
+#contentcol .ucfacts-sidebar .award-img {
+    text-align: center;
+}
+
+/* Charts */
+
+#contentcol #faculty-chart {
+    margin-left: 15%;
+    margin-top: 8%;
+}
+
+#contentcol #college-chart {
+    margin-top: 15px;
+}
+
+#contentcol .student-profile .top-margin {
+    margin-top: 70px;
+}
+
+@media (max-width: 768px) {
+    #contentcol .diverse-header {
+        margin-top: 70px;
+    }
+}
+
+/* icons */
+
+#contentcol [class$="male"] {
+    color: #FFC904;
+    font-size: 20px;
+}
+
+/* button */
+
+#contentcol .cta {
+    margin-top: 50px;
+}
+
+#contentcol .cta-button {
+    background-color: #ffcc00;
+    display: block;
+    padding: 4px 12px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border-radius: 4px;
+}
+
+
+@media (max-width: 979px) {
+    #contentcol .cta-button {
+        font-size: 16px;
+    }
+}
+
+#contentcol .cta-button span {
+    color: white;
+}
+
+#contentcol a.cta-button:hover {
+    background-color: #000;
+    color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+#contentcol .campus-map {
+    margin-bottom: 20px;
+}
+
+body.ie8 #contentcol .campus-map {
+    display: none;
+}

@@ -309,7 +309,7 @@ function display_events_list( $start=null, $limit=null, $url='', $list_classes='
 function display_news() {
 	$args = array(
 		'sections' => null,
-		'topics'   => null,
+		'topics'   => 'main-site-stories',
 		'offset'   => 0,
 		'limit'    => get_theme_option( 'news_max_items' )
 	);
@@ -501,7 +501,7 @@ add_action( 'ucf_news_display_modern_before', 'mainsite_news_display_modern_befo
 
 
 function mainsite_news_display_modern_title( $item, $title, $display_type ) {
-	echo '<h2 class="ucf-news-title">In the News</h2>';
+	echo do_action( 'ucf_news_display_classic_title', $item, $title, $display_type );
 }
 
 add_action( 'ucf_news_display_modern_title', 'mainsite_news_display_modern_title', 10, 3 );

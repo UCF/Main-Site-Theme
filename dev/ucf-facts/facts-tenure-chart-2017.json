@@ -1,0 +1,20 @@
+[
+    {
+        "value": 42,
+        "color": "#80BE1F",
+        "highlight": "#94d233",
+        "label": "Faculty Tenured "
+    },
+    {
+        "value": 39,
+        "color": "#7560A3",
+        "highlight": "#8974b7",
+        "label": "Faculty Non-Tenured Track"
+    },
+    {
+        "value": 19,
+        "color": "#42758A",
+        "highlight": "#56899e",
+        "label": "Faculty Non-Tenured on Track"
+    }
+]
