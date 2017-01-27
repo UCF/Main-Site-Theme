@@ -3320,7 +3320,6 @@ function get_image_url( $filename ) {
 
 function display_social_menu() {
 	$items = wp_get_nav_menu_items( 'social-links' );
-
 	ob_start();
 ?>
 	<div class="social-menu">
@@ -3329,8 +3328,9 @@ function display_social_menu() {
 		$href = $item->url;
 		$icon = get_social_icon( $item->url );
 ?>
-		<a href="<?php echo $href; ?>" class="social-menu-link ga-event-link">
-			<span class="social-menu-icon <?php echo $icon; ?>"></span>
+		<a href="<?php echo $href; ?>" class="social-menu-link ga-event-link" title="UCF on <?php echo $item->title; ?>">
+			<span class="social-menu-icon <?php echo $icon; ?>" aria-hidden="true"></span>
+			<p class="sr-only">Visit us on <?php echo $item->title; ?></p>
 		</a>
 
 <?php
