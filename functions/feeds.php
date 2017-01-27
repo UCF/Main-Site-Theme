@@ -265,7 +265,7 @@ function display_events_list_item( $item, $list_item_classes='', $show_descripti
 		</a>
 
 		<?php if ( $show_description ): ?>
-		<div class="event-description description"><?php echo truncateHtml( $description, 350 ); ?></div>
+		<div class="event-description description"><?php echo wp_trim_words( $description, 40 ); ?></div>
 		<?php endif; ?>
 	</li>
 <?php
