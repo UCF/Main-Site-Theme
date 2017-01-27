@@ -3,6 +3,8 @@
 
 $downtown-bg-url: '//www.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
 $stats-background-url: '//www.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow-1.jpg';
+$stats-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-StatsBackground.jpg';
+$events-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-LightupUCF.jpg';
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-HeaderImage.jpg';
 $florida-icon-url: '../img/florida-ucf-pin.png';
 $ignite-logo-url: '//www.ucf.edu/wp-content/uploads/2017/01/ignite-logo.png';
@@ -135,6 +137,10 @@ $color-linkedin: #0077b5;
 #contentcol {
   position: relative;
   z-index: 0;
+
+  a, a:hover {
+    border-bottom: 0;
+  }
 
   .black-underline {
     color: $black !important;
@@ -663,6 +669,11 @@ $color-linkedin: #0077b5;
   }
 
   .callout.callout-news {
+
+    .news-heading-title {
+      display: inline;
+    }
+
     h2 {
       @include gotham(9);
       font-size: 40px;
@@ -685,9 +696,9 @@ $color-linkedin: #0077b5;
     }
 
     .news-heading-wrap {
-      border-bottom: 1px solid $gray-lighter;
       margin-bottom: 15px;
       padding-bottom: 8px;
+      letter-spacing: normal;
 
       @media (min-width: $screen-md-min) {
         position: relative;
@@ -696,7 +707,10 @@ $color-linkedin: #0077b5;
 
     .read-more {
       @media (min-width: $screen-md-min) {
+        @include gotham(9);
+        border-bottom: 1px solid $gray-lighter;
         bottom: 8px;
+        letter-spacing: normal;
         position: absolute;
         right: 0;
       }
@@ -844,14 +858,10 @@ $color-linkedin: #0077b5;
     position: relative;
 
     @media (max-width: $screen-sm-max) {
+      background: url($stats-background-mobile-url) !important;
+      background-size: cover !important;
       background-position: 35% 20%;
-      background-size: 320%;
       padding: 30px 0;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      padding: 30px 0;
-      background-size: cover;
     }
 
     .callout-stats-cover {
@@ -862,6 +872,10 @@ $color-linkedin: #0077b5;
       position: absolute;
       top: 0;
       width: 100%;
+
+      @media (max-width: $screen-sm-max) {
+        opacity: 0.6 !important;
+      }
     }
 
     h2 {
@@ -902,7 +916,16 @@ $color-linkedin: #0077b5;
     overflow-x: hidden;
 
     @media (max-width: $screen-sm-max) {
-      background-image: none !important;
+      background: url($events-background-mobile-url) !important;
+      background-size: cover ;
+      padding: 30px 0 300px;
+      background-position: 50% 75%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      background-position: 50% 62%;
+      background-size: cover;
+      padding: 30px 0 220px;
     }
 
     h2 {
