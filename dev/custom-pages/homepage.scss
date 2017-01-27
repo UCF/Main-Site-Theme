@@ -16,7 +16,7 @@ $color-linkedin: #0077b5;
 
 
 .page-template-template-media-feature #header-nav-wrap a {
-    color: #fff;
+    color: $white;
     font-size: 17px;
     font-weight: 400;
     padding: 7px;
@@ -28,8 +28,8 @@ $color-linkedin: #0077b5;
     &:hover,
     &:active,
     &:focus {
-      background-color: #000;
-      color: #fc0;
+      background-color: $black;
+      color: $ucf-gold;
       text-decoration: none;
     }
 }
@@ -55,6 +55,7 @@ $color-linkedin: #0077b5;
 }
 
 .page-media-header {
+  background-color: $gray-dark; // fallback
   height: 720px;
   margin-top: -30px;
   overflow: hidden;
