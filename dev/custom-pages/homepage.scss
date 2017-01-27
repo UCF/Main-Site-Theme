@@ -4,8 +4,8 @@
 $downtown-bg-url: '//www.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
 $stats-background-url: '//www.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow-1.jpg';
 $stats-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-StatsBackground.jpg';
-$events-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-LightupUCF.jpg';
-$ignite-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-Grads1.jpg';
+$events-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-LightupUCF-cropped.jpg';
+$ignite-background-mobile-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-EventsBackground-Grads1-cropped.jpg';
 $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/MainPage-MOBILE-HeaderImage.jpg';
 $florida-icon-url: '../img/florida-ucf-pin.png';
 $ignite-logo-url: '//www.ucf.edu/wp-content/uploads/2017/01/ignite-logo.png';
@@ -521,16 +521,17 @@ $color-linkedin: #0077b5;
 
     @media (max-width: $screen-sm-max) {
       background: $black url($ignite-background-mobile-url) !important;
-      background-position: 50% 75% !important;
+      background-position: center bottom !important;
       background-repeat: no-repeat !important;
-      background-size: cover !important;
-      padding: 30px 0 300px;
+      background-size: contain !important;
+      padding: 30px 0;
+      padding-bottom: 62vw;
     }
 
     @media (max-width: $screen-xs-max) {
       -webkit-font-smoothing: inherit;
       text-align: center;
-      padding: 18px 0 220px;
+      padding-top: 18px;
     }
 
     blockquote {
@@ -924,14 +925,15 @@ $color-linkedin: #0077b5;
 
     @media (max-width: $screen-sm-max) {
       background: $black url($events-background-mobile-url) !important;
-      background-position: 50% 75% !important;
+      background-position: center bottom !important;
       background-repeat: no-repeat !important;
-      background-size: cover !important;
-      padding: 30px 0 300px;
+      background-size: contain !important;
+      padding: 30px 0;
+      padding-bottom: 49vw;
     }
 
     @media (max-width: $screen-xs-max) {
-      padding: 5px 0 220px;
+      padding-top: 5px;
     }
 
     h2 {
