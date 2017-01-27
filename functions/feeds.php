@@ -521,7 +521,7 @@ function mainsite_news_display_modern( $items, $title, $display_type ) {
 			<a class="ucf-news-item-link" href="<?php echo $item->link; ?>">
 		<?php if ( $item_img ): ?>
 				<div class="ucf-news-thumbnail">
-					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>">
+					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>" alt="">
 				</div>
 		<?php endif; ?>
 				<div class="ucf-news-item-content">
