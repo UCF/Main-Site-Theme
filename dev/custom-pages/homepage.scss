@@ -14,15 +14,9 @@ $color-youtube: #cd201f;
 $color-vine: #00b488;
 $color-linkedin: #0077b5;
 
-.invisible {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
 
 .page-template-template-media-feature #header-nav-wrap a {
-    color: #fff;
+    color: $white;
     font-size: 17px;
     font-weight: 400;
     padding: 7px;
@@ -34,8 +28,8 @@ $color-linkedin: #0077b5;
     &:hover,
     &:active,
     &:focus {
-      background-color: #000;
-      color: #fc0;
+      background-color: $black;
+      color: $ucf-gold;
       text-decoration: none;
     }
 }
@@ -61,6 +55,7 @@ $color-linkedin: #0077b5;
 }
 
 .page-media-header {
+  background-color: $gray-dark; // fallback
   height: 720px;
   margin-top: -30px;
   overflow: hidden;
@@ -162,7 +157,7 @@ $color-linkedin: #0077b5;
     }
 
     .muted {
-      color: #ccc;
+      color: #595959;
       text-transform: uppercase;
     }
 
