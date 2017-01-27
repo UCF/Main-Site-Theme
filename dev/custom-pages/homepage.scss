@@ -1180,7 +1180,8 @@ $color-linkedin: #0077b5;
     }
 
     a,
-    a:link {
+    a:link,
+    a:hover {
       color: $black;
     }
 

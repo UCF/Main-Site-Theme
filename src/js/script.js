@@ -1501,7 +1501,7 @@ var academicDegreeSearch = function ($) {
       }
     };
 
-    $('.academics-search-box').on('click', '#show-all-degrees', function () {
+    $('.degree-search-box, .academics-search-box').on('click', '#show-all-degrees', function () {
       window.location = '/degree-search/?search-query=' + $('#academics-degree-search').val();
     });
 
