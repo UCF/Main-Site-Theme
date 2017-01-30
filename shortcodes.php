@@ -556,8 +556,12 @@ function sc_post_type_search( $params=array(), $content='' ) {
 	<div class="post-type-search">
 		<div class="post-type-search-header">
 			<form class="post-type-search-form form-inline" action="." method="get">
-				<label><?php echo $params['default_search_label']; ?></label>
-				<input type="text" class="form-control" placeholder="<?php echo $params['default_search_text']; ?>">
+				<label class="post-type-search-label">
+					<span class="post-type-search-labeltext">
+						<?php echo $params['default_search_label']; ?>
+					</span>
+					<input type="text" class="form-control post-type-search-input" placeholder="<?php echo $params['default_search_text']; ?>">
+				</label>
 			</form>
 		</div>
 		<div class="post-type-search-results"></div>
@@ -571,6 +575,39 @@ function sc_post_type_search( $params=array(), $content='' ) {
 			</button>
 		</div>
 		<?php } ?>
+
+		<div class="btn-toolbar jump-to-list" role="toolbar" aria-label="Jump To List">
+			<div class="btn-group" role="group">
+				<a href="#az-a" class="btn btn-default">A</a>
+				<a href="#az-b" class="btn btn-default">B</a>
+				<a href="#az-c" class="btn btn-default">C</a>
+				<a href="#az-d" class="btn btn-default">D</a>
+				<a href="#az-e" class="btn btn-default">E</a>
+				<a href="#az-f" class="btn btn-default">F</a>
+				<a href="#az-g" class="btn btn-default">G</a>
+				<a href="#az-h" class="btn btn-default">H</a>
+				<a href="#az-i" class="btn btn-default">I</a>
+				<a href="#az-j" class="btn btn-default">J</a>
+				<a href="#az-k" class="btn btn-default">K</a>
+				<a href="#az-l" class="btn btn-default">L</a>
+				<a href="#az-m" class="btn btn-default">M</a>
+				<br class="visible-xs visible-sm">
+				<a href="#az-n" class="btn btn-default">N</a>
+				<a href="#az-o" class="btn btn-default">O</a>
+				<a href="#az-p" class="btn btn-default">P</a>
+				<a href="#az-q" class="btn btn-default disabled">Q</a>
+				<a href="#az-r" class="btn btn-default">R</a>
+				<a href="#az-s" class="btn btn-default">S</a>
+				<a href="#az-t" class="btn btn-default">T</a>
+				<a href="#az-u" class="btn btn-default">U</a>
+				<a href="#az-v" class="btn btn-default">V</a>
+				<a href="#az-w" class="btn btn-default">W</a>
+				<a href="#az-x" class="btn btn-default disabled">X</a>
+				<a href="#az-y" class="btn btn-default disabled">Y</a>
+				<a href="#az-z" class="btn btn-default disabled">Z</a>
+			</div>
+		</div>
+
 	<?php
 
 	foreach ( $sections as $id => $section ):
@@ -600,7 +637,9 @@ function sc_post_type_search( $params=array(), $content='' ) {
 					</div>
 						<div class="row">
 							<div class="<?php echo $params['column_width']; ?>">
-								<h3><?php echo esc_html( $section_title ); ?></h3>
+								<div class="post-search-heading-wrap">
+									<h3 class="post-search-heading"><?php echo esc_html( $section_title ); ?></h3>
+								</div>
 							</div>
 						</div>
 
@@ -612,7 +651,7 @@ function sc_post_type_search( $params=array(), $content='' ) {
 						foreach ( $split_posts as $index => $column_posts ):
 						?>
 							<div class="<?php echo $params['column_width']; ?>">
-								<ul>
+								<ul class="post-search-list">
 								<?php foreach( $column_posts as $key => $post ): ?>
 									<li data-post-id="<?php echo $post->ID; ?>">
 										<?php echo $post_type->toHTML( $post ); ?><span class="search-post-pgsection"><?php echo $section_title; ?></span>
@@ -629,8 +668,11 @@ function sc_post_type_search( $params=array(), $content='' ) {
 					<?php endif; ?>
 
 					<div class="<?php echo $params['column_width']; ?>">
-						<h3><?php echo esc_html( $section_title ); ?></h3>
-						<ul>
+
+						<div class="post-search-heading-wrap">
+							<h3 class="post-search-heading"><?php echo esc_html( $section_title ); ?></h3>
+						</div>
+						<ul class="post-search-list">
 						<?php foreach( $section_posts as $post ):  ?>
 							<li data-post-id="<?php echo $post->ID; ?>">
 								<?php echo $post_type->toHTML( $post ); ?><span class="search-post-pgsection"><?php echo $section_title; ?></span>
@@ -1237,34 +1279,6 @@ function sc_chart( $attr ) {
 	return ob_get_clean();
 }
 add_shortcode( 'chart', 'sc_chart' );
-
-
-/**
- * Displays affixed navigation for the A-Z Index.
- **/
-function sc_azindex_navbar( $attr ) {
-	ob_start();
-?>
-	<div id="top"></div>
-
-	<div id="azIndexList" data-spy="affix" data-offset-top="200">
-		<span id="azIndexList-label">Jump To:</span>
-		<div class="navbar navbar-default">
-			<ul class="nav navbar-nav">
-			<?php foreach ( range( 'A', 'Z' ) as $index=>$alpha ): ?>
-				<li <?php echo $index === 0 ? 'class="active"' : ''; ?>>
-					<a href="#az-<?php echo strtolower( $alpha ); ?>">
-						<?php echo $alpha; ?>
-					</a>
-				</li>
-			<?php endforeach; ?>
-			</ul>
-		</div>
-	</div>
-<?php
-	return ob_get_clean();
-}
-add_shortcode( 'azindex-navbar', 'sc_azindex_navbar' );
 
 
 /**
