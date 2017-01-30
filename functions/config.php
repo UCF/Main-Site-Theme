@@ -230,6 +230,10 @@ Config::$esi_whitelist = array(
 		'name' => 'page_specific_stylesheet',
 		'safe_args' => get_all_page_ids(),
 		),
+	5 => array(
+		'name' => 'echo_shortcode',
+		'safe_args' => array( '[ucf-news-feed title="News" layout="classic" topics="main-site-stories"]' ),
+	)
 );
 
 /**
@@ -560,7 +564,7 @@ Config::$theme_settings = array(
     		'description' => 'URL to the Pegasus Magazine website.  Can be changed for development when testing Pegasus issue feeds on different environments.',
     		'default'     => 'https://www.ucf.edu/pegasus/',
     		'value'       => $theme_options['pegasus_url'],
-        )),
+        ))
 	),
 	'Social' => array(
 		new TextField(array(

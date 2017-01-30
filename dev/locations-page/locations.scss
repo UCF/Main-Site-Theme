@@ -19,6 +19,53 @@ $georgia: Georgia, serif !default;
 $gotham: "Gotham SSm A", "Gotham SSm B", Helvetica, Arial, sans-serif !default;
 $verdana: Verdana, Geneva, sans-serif;
 
+.page-media-header {
+  background-position: center 0 !important;
+
+  .header-title {
+    background-color: rgba($ucf-gold, .8);
+    color: #000;
+    font-family: $archer;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 15% 0 0;
+    padding: 12px;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 52px;
+      text-align: none;
+    }
+  }
+
+  .header-subtitle {
+    font-family: $archer;
+    background-color: $black;
+    color: $white;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+    padding: 6px 12px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 22px;
+      padding: 8px 12px;
+    }
+  }
+
+  .header-title,
+  .header-subtitle {
+    clear: both;
+    display: inline-block;
+  }
+}
+
+.page-media-container {
+    background-image: linear-gradient(to top,transparent 0,transparent 80%,rgba(0,0,0,.6) 115%);
+}
+
 .gotham {
   font-family: $gotham;
 }
@@ -54,7 +101,9 @@ $verdana: Verdana, Geneva, sans-serif;
 
 .locations-section,
 .intro-section {
+  font-size: 16px;
   font-family: $gotham;
+  line-height: 1.65;
   margin-bottom: 72px;
 
   ul > li > a {
@@ -105,14 +154,14 @@ $verdana: Verdana, Geneva, sans-serif;
   }
 
   .content-title {
-    color: #333;
+    color: $black;
     display: inline-block;
     font-family: $gotham;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
+    line-height: 1.25;
     letter-spacing: 0;
-    margin-bottom: 18px;
-    margin-top: 60px;
+    margin: 4em 0 1.7em;
     padding: 0 0 10px;
     text-transform: uppercase;
 
@@ -120,9 +169,9 @@ $verdana: Verdana, Geneva, sans-serif;
       background: $ucf-gold;
       content: ' ';
       display: block;
-      height: 2px;
+      height: 3px;
       margin-top: 15px;
-      width: 25px;
+      width: 40px;
     }
   }
 
@@ -136,9 +185,8 @@ $verdana: Verdana, Geneva, sans-serif;
 }
 
 #contentcol {
-  p {
-    font-size: 15px;
-  }
+  font-size: 16px;
+  line-height: 1.65;
 
   .intro-section .content-title {
     font-family: $archer;
@@ -152,6 +200,12 @@ $verdana: Verdana, Geneva, sans-serif;
       display: none;
     }
   }
+
+  .section-title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
 }
 
 .header-title {
@@ -654,10 +708,11 @@ $verdana: Verdana, Geneva, sans-serif;
   width: 100%;
 
   h3 {
-    color: #333;
+    color: $black;
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
+    line-height: 1.25;
     letter-spacing: 0;
     margin-bottom: 0;
     margin-top: 30px;

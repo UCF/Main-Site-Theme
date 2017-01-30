@@ -73,9 +73,6 @@
 								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
 					<?php endif; ?>
 				</div>
-				<div class="social-wrap">
-					<?php echo display_social( get_permalink( $post->ID ), $post->post_title, 'UCF Degree: ' . $post->post_title, 'Check out this degree at the University of Central Florida.' ); ?>
-				</div>
 				<?php echo display_degree_callout( $post->ID ); ?>
 				<div class="row">
 					<div class="degree-promo-button-wrapper">
