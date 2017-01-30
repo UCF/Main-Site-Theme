@@ -61,14 +61,16 @@
       $letterHeading
         .after(toTopMarkup);
 
-      // Apply affixing to each heading wrap, if that letter has list items.
-      letterWrapAffix.offset = getLetterWrapAffixOffset($letterWrap, $letterList);
-      $letterWrap.affix(letterWrapAffix);
+      if ($letterList.children().length) {
+        // Apply affixing to each heading wrap, if that letter has list items.
+        letterWrapAffix.offset = getLetterWrapAffixOffset($letterWrap, $letterList);
+        $letterWrap.affix(letterWrapAffix);
 
-      // Update affix offsets on window resize.
-      $(window).on('resize', debounce( function() {
-        $letterWrap.data('bs.affix').options.offset = getLetterWrapAffixOffset($letterWrap, $letterList);
-      }, 100));
+        // Update affix offsets on window resize.
+        $(window).on('resize', debounce( function() {
+          $letterWrap.data('bs.affix').options.offset = getLetterWrapAffixOffset($letterWrap, $letterList);
+        }, 100));
+      }
 
     });
 
