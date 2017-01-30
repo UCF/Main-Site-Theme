@@ -233,6 +233,33 @@
     }
   }
 
+  // Athletics gold callouts
+  .callout-athletics-gold {
+    background-color: $ucf-athletics-gold-light;
+    color: $black;
+
+    a {
+      color: $black;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+    }
+
+    .list-navigation a,
+    .list-chevrons a {
+      text-decoration: none;
+    }
+
+    .callout-aside-heading a {
+      color: $black;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
   .icon-links {
     margin: 10px auto;
     text-align: center;
