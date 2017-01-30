@@ -265,7 +265,7 @@ function display_events_list_item( $item, $list_item_classes='', $show_descripti
 		</a>
 
 		<?php if ( $show_description ): ?>
-		<div class="event-description description"><?php echo truncateHtml( $description, 350 ); ?></div>
+		<div class="event-description description"><?php echo wp_trim_words( $description, 40 ); ?></div>
 		<?php endif; ?>
 	</li>
 <?php
@@ -518,15 +518,13 @@ function mainsite_news_display_modern( $items, $title, $display_type ) {
 		$section  = isset( $sections[0] ) ? $sections[0] : false;
 	?>
 		<article class="ucf-news-item">
-
+			<a class="ucf-news-item-link" href="<?php echo $item->link; ?>">
 		<?php if ( $item_img ): ?>
-			<a class="ucf-news-thumbnail" href="<?php echo $item->link; ?>">
-				<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>">
-			</a>
+				<div class="ucf-news-thumbnail">
+					<img class="ucf-news-thumbnail-image" src="<?php echo $item_img; ?>" alt="">
+				</div>
 		<?php endif; ?>
-
-			<div class="ucf-news-item-content">
-				<a class="ucf-news-item-link" href="<?php echo $item->link; ?>">
+				<div class="ucf-news-item-content">
 					<?php if ( $section ): ?>
 						<span class="ucf-news-item-label">
 							<?php echo $section->name; ?>
@@ -540,8 +538,8 @@ function mainsite_news_display_modern( $items, $title, $display_type ) {
 					<div class="ucf-news-item-excerpt">
 						<?php echo $item->excerpt->rendered; ?>
 					</div>
-				</a>
-			</div>
+				</div>
+			</a>
 		</article>
 	<?php
 	endforeach;
