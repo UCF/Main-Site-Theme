@@ -570,6 +570,28 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
         }
       }
     }
+
+    // Hide default category labels and always display "Sports"
+    .ucf-news-item-label {
+      display: none;
+    }
+
+    .ucf-news-item-content::before {
+      @include gotham(7);
+      background-color: $ucf-gold;
+      color: $black;
+      content: 'Sports';
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin: 0 0 10px;
+      padding: 2px 15px;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 11px;
+      }
+    }
   }
 
 
