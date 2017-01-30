@@ -400,6 +400,7 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
     }
 
     .event-link {
+      position: relative;
       text-decoration: none;
 
       &:hover,
@@ -413,7 +414,16 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
         }
       }
 
-      // won't be present in shortcode-generated markup, but for the sake of development:
+      &:hover::before {
+        color: $ucf-gold;
+        content: '\f0da';
+        font-family: FontAwesome;
+        font-size: 24px;
+        left: -25px;
+        top: 14px;
+        position: absolute;
+      }
+
       br {
         display: none;
       }
