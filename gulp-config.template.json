@@ -1,4 +1,4 @@
 {
   "sync": false,
-  "target": "http://localhost/"
+  "syncTarget": "http://localhost/"
 }
