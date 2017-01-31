@@ -1558,6 +1558,10 @@ var academicDegreeSearch = function ($) {
       {
         name: 'degrees',
         source: function(query, sync, async) {
+          // degree.search is called here 2x because I (Jim) was unable to come up with
+          // a way of hooking into the typehead sync function. So instead, I hook into
+          // a custom countSync function first to set the count variable, followed by
+          // passing the typeahead sync function.
           // Set Count
           degrees.search(query, countSync);
           // Set Results
