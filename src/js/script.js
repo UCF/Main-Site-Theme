@@ -1571,7 +1571,7 @@ var academicDegreeSearch = function ($) {
             '</div>' + degreeType
           ].join('\n'),
           footer: function (context) {
-            return '<div class="tt-suggestion tt-selectable"><a href="#" id="show-all-degrees">Show all ' + resultCount + ' degress for <em>&ldquo;' + $academicsDegreeSearch.val() + '&rdquo;</em></a></div>' + degreeType;
+            return '<div class="tt-suggestion tt-selectable"><a href="#" id="show-all-degrees">Show all ' + resultCount + ' degress for <em>&ldquo;' + context.query + '&rdquo;</em></a></div>' + degreeType;
           }
         }
       });
