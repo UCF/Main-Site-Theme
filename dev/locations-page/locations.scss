@@ -136,12 +136,14 @@ $verdana: Verdana, Geneva, sans-serif;
     .section-title {
       bottom: 18px;
       font-size: 48px;
+      font-weight: 500;
       margin-left: -20px;
       max-width: 600px;
       position: absolute;
 
       @media(max-width: $screen-sm-max) {
         font-size: 32px;
+        line-height: 35px;
         margin-left: 0;
       }
     }
@@ -442,6 +444,30 @@ $verdana: Verdana, Geneva, sans-serif;
   width: 100%;
 }
 
+
+.page-content h2,
+section.sections-menu-target h2,
+.map-search h2 {
+  font-size: 25px;
+  font-weight: normal;
+  line-height: 1.25;
+  margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  max-width: 325px;
+  position: relative;
+  z-index: 15;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 20px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 18px;
+  }
+}
+
 .campus-card {
   box-sizing: border-box;
   display: block;
@@ -477,27 +503,6 @@ $verdana: Verdana, Geneva, sans-serif;
     top: 0;
     transition: background-size .4s, opacity .4s;
     z-index: 10;
-  }
-
-  .page-content h2 {
-    font-size: 25px;
-    font-weight: normal;
-    line-height: 1.25;
-    margin-bottom: 15px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    max-width: 325px;
-    position: relative;
-    z-index: 15;
-
-    @media (max-width: $screen-sm-max) {
-      font-size: 20px;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 18px;
-    }
   }
 
   p {
