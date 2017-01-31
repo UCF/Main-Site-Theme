@@ -2425,9 +2425,29 @@ function get_academics_search_suggestions() {
 
 	if ( $posts ) {
 		foreach ( $posts as $post ) {
+			$program_type = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) )->slug;
+			$program_score = 0;
+			switch($program_type) {
+				case 'undergraduate-degree':
+				case 'articulated-program':
+					$program_score = 4;
+					break;
+				case 'graduate-degree':
+				case 'accelerated-program':
+					$program_score = 3;
+					break;
+				case 'certificate':
+					$program_score = 2;
+					break;
+				case 'minor':
+					$program_score = 1;
+					break;
+			}
+
 			$suggestion = (object) array (
-				'name' => str_replace( '&amp;', '&', $post->post_title ),
-				'url' => get_permalink( $post->ID ),
+				'name'  => str_replace( '&amp;', '&', $post->post_title ),
+				'url'   => get_permalink( $post->ID ),
+				'score' => $program_score,
 			);
 			$suggestions[] = $suggestion;
 		}

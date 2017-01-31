@@ -1486,20 +1486,22 @@ var academicDegreeSearch = function ($) {
 
   if ($academicsDegreeSearch.length > 0) {
 
+    var scoreSorter = function(a, b) {
+      if (a.score < b.score) {
+        return 1;
+      }
+      if (a.score > b.score) {
+        return -1;
+      }
+      return 0;
+    };
+
     var degrees = new Bloodhound({
       identify: function(obj) { return obj.name; },
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      local: searchSuggestions
+      local: searchSuggestions.sort(scoreSorter)
     });
-
-    var degreesWithDefaults = function (q, sync) {
-      if (q === '') {
-        sync(degrees.get('Bachelor', 'Graduate', 'Certificate'));
-      } else {
-        degrees.search(q, sync);
-      }
-    };
 
     $('.degree-search-box, .academics-search-box').on('click', '#show-all-degrees', function () {
       window.location = '/degree-search/?search-query=' + $('#academics-degree-search').val();
@@ -1527,7 +1529,7 @@ var academicDegreeSearch = function ($) {
       },
       {
         name: 'degrees',
-        source: degreesWithDefaults,
+        source: degrees,
         display: function(data) {
           // Stupid hack that forces parsing of html entities
           return $('<textarea />').html(data.name).text();
