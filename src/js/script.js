@@ -1530,14 +1530,6 @@ var academicDegreeSearch = function ($) {
       window.location = '/degree-search/?search-query=' + $('#academics-degree-search').val();
     });
 
-    var updateShowAll = function () {
-      $('#show-all-degrees').html('Show all ' + resultCount + ' degress for <em>"' + $academicsDegreeSearch.val() + '"</em>');
-    };
-
-    $academicsDegreeSearch.on('input', function () {
-      setTimeout(updateShowAll, 50);
-    });
-
     $academicsDegreeSearch.bind('typeahead:select', function(ev, suggestion) {
       window.location = suggestion.url;
     });
@@ -1578,7 +1570,9 @@ var academicDegreeSearch = function ($) {
             'No degrees found for search term.',
             '</div>' + degreeType
           ].join('\n'),
-          footer: '<div class="tt-suggestion tt-selectable"><a href="#" id="show-all-degrees">Show all degress for </a></div>' + degreeType
+          footer: function (context) {
+            return '<div class="tt-suggestion tt-selectable"><a href="#" id="show-all-degrees">Show all ' + resultCount + ' degress for <em>&ldquo;' + $academicsDegreeSearch.val() + '&rdquo;</em></a></div>' + degreeType;
+          }
         }
       });
   }
