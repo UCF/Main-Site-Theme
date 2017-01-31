@@ -254,7 +254,6 @@ $color-linkedin: #0077b5;
     padding-bottom: 0;
     padding-top: 0;
 
-
     @media (max-width: $screen-sm-max) {
       min-height: 175px;
     }
@@ -263,14 +262,26 @@ $color-linkedin: #0077b5;
       width: 100%;
       position: absolute;
       top: 10px;
+
+      @media (max-width: $screen-md-max) {
+        top: 73px;
+      }
     }
 
     .padded-top {
       padding-top: 125px;
+
+      @media (max-width: $screen-md-max) {
+        padding-top: 95px;
+      }
     }
 
     .padded-bottom {
-      padding-bottom: 70px;
+      padding-bottom: 47px;
+
+      @media (max-width: $screen-md-max) {
+        padding-bottom: 25px;
+      }
     }
   }
 
@@ -1182,7 +1193,8 @@ $color-linkedin: #0077b5;
     }
 
     a,
-    a:link {
+    a:link,
+    a:hover {
       color: $black;
     }
 

@@ -2420,14 +2420,24 @@ function get_academics_search_suggestions() {
 	$suggestions = array();
 	$posts = get_posts( array (
 		'numberposts' => -1,
-		'post_type' => 'degree'
+		'post_type' => 'degree',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'program_types',
+				'field'    => 'slug',
+				'terms'    => array( 'undergraduate-degree', 'accelerated-program', 'articulated-program', 'graduate-degree', 'certificate' )
+			)
+		)
 	) );
 
 	if ( $posts ) {
 		foreach ( $posts as $post ) {
+			$program_type = get_first_result( wp_get_post_terms( $post->ID, 'program_types' ) )->slug;
+
 			$suggestion = (object) array (
-				'name' => str_replace( '&amp;', '&', $post->post_title ),
-				'url' => get_permalink( $post->ID ),
+				'name'        => str_replace( '&amp;', '&', $post->post_title ),
+				'url'         => get_permalink( $post->ID ),
+				'programType' => $program_type,
 			);
 			$suggestions[] = $suggestion;
 		}
