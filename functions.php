@@ -2420,7 +2420,14 @@ function get_academics_search_suggestions() {
 	$suggestions = array();
 	$posts = get_posts( array (
 		'numberposts' => -1,
-		'post_type' => 'degree'
+		'post_type' => 'degree',
+		'tax_query' => array(
+			array(
+				'taxonomy' => 'program_types',
+				'field'    => 'slug',
+				'terms'    => array( 'undergraduate-degree', 'accelerated-program', 'articulated-program', 'graduate-degree', 'certificate' )
+			)
+		)
 	) );
 
 	if ( $posts ) {

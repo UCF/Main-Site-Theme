@@ -1501,9 +1501,6 @@ var academicDegreeSearch = function ($) {
           case 'certificate':
             degree.score = 25;
             break;
-          case 'minor':
-            degree.score = 10;
-            break;
         }
       }
 
