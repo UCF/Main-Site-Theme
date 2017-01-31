@@ -374,8 +374,8 @@ $color-linkedin: #0077b5;
         margin-top: 0;
       }
 
-      @media (max-width: $screen-sm-max) {
-        img {
+      img {
+        @media (max-width: $screen-sm-max) {
           width: 100%;
         }
       }
