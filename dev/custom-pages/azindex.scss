@@ -1,0 +1,250 @@
+@import '../media-template/media-template-base';
+
+
+$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/azindex-header-xs.jpg';
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+
+.page-media .page-media-header {
+  @media (max-width: $screen-sm-max) {
+    height: 450px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+    background-position: bottom center;
+    height: 124vw;
+    max-height: 600px;
+  }
+
+  .header-title {
+    background-color: rgba($ucf-gold, .9); // increase opacity slightly for this page
+    margin-top: 20%;
+
+    @media (max-width: 479px) {
+      font-size: 9vw;
+    }
+
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 7vw;
+    }
+  }
+
+  .header-subtitle {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 3vw;
+    }
+  }
+}
+
+
+#contentcol {
+  margin-bottom: 40px;
+
+  .post-type-search-label {
+    display: block;
+    position: relative;
+
+    // Search icon
+    &::after {
+      background-color: $white;
+      color: $input-border;
+      content: '';
+      display: block;
+      font-family: 'FontAwesome';
+      font-size: 34px;
+      font-weight: normal;
+      height: 34px;
+      line-height: 34px;
+      padding-left: 5px;
+      padding-right: 10px;
+      position: absolute;
+      right: 1px;
+      top: 8px;
+      z-index: 2;
+
+      @media (min-width: $screen-sm-min) {
+        padding-right: 15px;
+        top: 13px;
+      }
+    }
+  }
+
+  .post-type-search-labeltext {
+    @include sr-only();
+  }
+
+  .post-type-search-input {
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: normal;
+    height: 50px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    @media (min-width: $screen-sm-min) {
+      height: 60px;
+    }
+  }
+
+  .post-type-search-results {
+    background-color: transparent;
+    font-size: inherit;
+    padding: 0;
+    position: relative;
+  }
+
+  .post-search-result-list {
+    background-color: $gray-lighter;
+    margin-bottom: 0;
+    margin-top: 15px;
+    padding: 20px 20px 20px 30px;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 30px 30px 30px 40px;
+    }
+
+    // Caret
+    &::before {
+      border-color: transparent transparent $gray-lighter;
+      border-style: solid;
+      border-width: 0 15px 15px;
+      content: '';
+      left: 30px;
+      position: absolute;
+      top: -15px;
+
+      @media (min-width: $screen-sm-min) {
+        top: 0;
+      }
+    }
+  }
+
+  .post-type-search-message {
+    color: $gray;
+    font-style: italic;
+    margin-top: 20px;
+    padding: 0;
+  }
+
+  .jump-to-list {
+    margin: 30px 0;
+
+    .btn {
+      min-width: 25px;
+      padding: 8px 0;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      margin: 50px 0;
+
+      .btn {
+        min-width: 30px;
+      }
+    }
+
+    @media (min-width: $screen-md-min) {
+      .btn {
+        min-width: 24px;
+      }
+    }
+  }
+
+  .post-type-search-alpha {
+    margin-top: 20px;
+
+    @media (min-width: $screen-sm-min) {
+      margin-top: 30px;
+    }
+  }
+
+  .post-search-heading {
+    @include archer();
+    display: inline-block;
+    font-size: 65px;
+    line-height: .8;
+    margin-bottom: 8px;
+    margin-top: 0;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 80px;
+    }
+  }
+
+  .post-search-list {
+    padding-top: 25px;
+  }
+
+  .post-search-heading-wrap {
+    background-color: $white;
+    border-bottom: 10px solid $ucf-gold;
+    position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      border-bottom-width: 15px;
+    }
+
+    &.affix {
+      position: fixed;
+      top: 0;
+      width: calc(100% - #{$grid-gutter-width});
+
+      @media (min-width: $screen-sm-min) {
+        width: calc(#{$container-sm * (7 / $grid-columns)} - #{$grid-gutter-width});
+      }
+
+      @media (min-width: $screen-md-min) {
+        width: calc(#{$container-md * (8 / $grid-columns)} - #{$grid-gutter-width});
+      }
+
+      + .post-search-list {
+        // Prevent jump upon .post-search-heading-wrap affix
+        margin-top: 70px;
+
+        @media (min-width: $screen-sm-min) {
+          margin-top: 90px;
+        }
+      }
+    }
+
+    &.affix-bottom {
+      top: unset !important;
+    }
+  }
+
+  .to-top-text {
+    bottom: 3px;
+    color: $gray;
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 14px;
+    }
+
+    // `#contentcol .to-top-text a` should be able to override #contentcol a:not(.btn)
+    a {
+      color: inherit;
+      margin-left: 6px;
+      text-transform: uppercase;
+    }
+  }
+
+  .jump-to-input {
+    font-size: 18px;
+    height: 40px;
+  }
+}

@@ -61,6 +61,15 @@
   font-weight: #{$weight}00;
 }
 
+// Adds Knockout font family styles to an element.
+// $weight should be a number from 1-9, which references the desired font
+// weight (100-900).  Default is 4 (400) or 'Book'.
+@mixin knockout($weight: 4, $font-style: normal) {
+  font-family: 'Knockout 49 A', 'Knockout 49 B', $font-family-serif;
+  font-style: $font-style;
+  font-weight: #{$weight}00;
+}
+
 // Gold Button Style
 @mixin gold-button {
   background-color: $ucf-gold;
