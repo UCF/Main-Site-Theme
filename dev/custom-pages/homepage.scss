@@ -262,36 +262,27 @@ $color-linkedin: #0077b5;
       width: 100%;
       position: absolute;
       top: 10px;
+
+      @media (max-width: $screen-md-max) {
+        top: 73px;
+      }
     }
 
     .padded-top {
       padding-top: 125px;
+
+      @media (max-width: $screen-md-max) {
+        padding-top: 95px;
+      }
     }
 
     .padded-bottom {
       padding-bottom: 47px;
-    }
 
-    @media (max-width: $screen-md-max) {
-      img {
-        top: 73px;
-      }
-
-      .padded-top {
-        padding-top: 95px;
-      }
-
-      .padded-bottom {
-        padding-bottom: 0;
-      }
-    }
-
-    @media (max-width: $screen-sm-max) {
-      .padded-bottom {
+      @media (max-width: $screen-md-max) {
         padding-bottom: 25px;
       }
     }
-
   }
 
   .callout.callout-intro {
