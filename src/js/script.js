@@ -1511,11 +1511,6 @@ var academicDegreeSearch = function ($) {
     };
 
     var scoreSorter = function(a, b) {
-      var q = $('.tt-input').val().toLowerCase();
-      
-      if (q===a.name.toLowerCase()) { return -1; }
-      if (q===b.name.toLowerCase()) { return 1; }
-
       if (a.score < b.score) {
         return 1;
       }
@@ -1530,7 +1525,6 @@ var academicDegreeSearch = function ($) {
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       local: addScore(searchSuggestions),
-      limit: 8,
       sorter: scoreSorter
     });
 
@@ -1561,6 +1555,7 @@ var academicDegreeSearch = function ($) {
       {
         name: 'degrees',
         source: degrees,
+        limit: 8,
         display: function(data) {
           // Stupid hack that forces parsing of html entities
           return $('<textarea />').html(data.name).text();
