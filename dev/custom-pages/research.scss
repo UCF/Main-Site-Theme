@@ -45,32 +45,41 @@ $color-linkedin: #0077b5;
 }
 
 .page-media-header {
-  height: 720px;
-  margin-top: -30px;
-  overflow: hidden;
-  padding-top: 30px;
-  width: 100%;
-  z-index: 1;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+
+  // height: 720px;
+  // margin-top: -30px;
+  // overflow: hidden;
+  // padding-top: 30px;
+  // width: 100%;
+  // z-index: 1;
 
   /* per roger */
-  max-height: 750px;
-  min-height: 600px;
+  // max-height: 750px;
+  // min-height: 600px;
 
-  @media (max-width: $screen-sm-max) {
-    height: 500px;
-    background-position: 0 30px;
-  }
+  // @media (max-width: $screen-sm-max) {
+  //   height: 500px;
+  //   background-position: 0 30px;
+  // }
 
-  @media (max-width: $screen-sm-max) {
-    .pull-right {
-      float: left !important;
-    }
-  }
+  // @media (max-width: $screen-sm-max) {
+  //   .pull-right {
+  //     float: left !important;
+  //   }
+  // }
 
-  @media (max-width: $screen-xs-max) {
-    height: 360px;
-    background-position: center 30px;
-  }
+  // @media (max-width: $screen-xs-max) {
+  //   height: 360px;
+  //   background-position: center 30px;
+  // }
 
   .header-title {
     margin: 20% 0 0 0;
@@ -283,8 +292,18 @@ $color-linkedin: #0077b5;
   }
 
   .callout.callout-intro {
+    padding-top: 15px;
+
     a:hover img {
       opacity: 0.85;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      padding-top: 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      padding-top: 0;
     }
   }
 
@@ -355,6 +374,12 @@ $color-linkedin: #0077b5;
     .story-featured-description,
     .story-featured-description p {
       font-size: 14px;
+    }
+
+    .magazine-cover-container {
+      .entry-title {
+        margin-top: 0;
+      }
     }
 
   }

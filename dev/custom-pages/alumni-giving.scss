@@ -167,7 +167,6 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
 
     .section-header {
       height: 500px;
-      margin-bottom: 60px;
       margin-top: 0;
       position: relative;
 
@@ -286,6 +285,8 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
   }
 
   .callout-events {
+    margin-top: 2em;
+
     @media (min-width: $screen-md-min) {
       background-image: url('#{$events-bg-url}');
       background-position: center right;
