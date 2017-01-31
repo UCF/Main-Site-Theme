@@ -1482,8 +1482,8 @@ var academicDegreeSearch = function ($) {
   /**
  * #search-query specific typeahead init, event handlers
  **/
-  var $academicsDegreeSearch = $('#academics-degree-search');
-  var resultCount = 0;
+  var $academicsDegreeSearch = $('#academics-degree-search'),
+      resultCount = 0;
 
   if ($academicsDegreeSearch.length > 0) {
 
