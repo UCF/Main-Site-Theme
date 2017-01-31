@@ -54,33 +54,6 @@ $color-linkedin: #0077b5;
     position: relative;
     z-index: -1;
 
-  // height: 720px;
-  // margin-top: -30px;
-  // overflow: hidden;
-  // padding-top: 30px;
-  // width: 100%;
-  // z-index: 1;
-
-  /* per roger */
-  // max-height: 750px;
-  // min-height: 600px;
-
-  // @media (max-width: $screen-sm-max) {
-  //   height: 500px;
-  //   background-position: 0 30px;
-  // }
-
-  // @media (max-width: $screen-sm-max) {
-  //   .pull-right {
-  //     float: left !important;
-  //   }
-  // }
-
-  // @media (max-width: $screen-xs-max) {
-  //   height: 360px;
-  //   background-position: center 30px;
-  // }
-
   .header-title {
     margin: 20% 0 0 0;
     padding: 12px;
@@ -152,6 +125,17 @@ $color-linkedin: #0077b5;
   .muted {
     color: #ccc;
     text-transform: uppercase;
+  }
+
+  .going-public {
+    height: 240px;
+    margin-top: 53px;
+  }
+
+  .clusters-graphic {
+    left: -15%;
+    width: 125%;
+    max-width: 125%;
   }
 }
 
@@ -334,6 +318,15 @@ $color-linkedin: #0077b5;
 
     .read-more {
       font-weight: 600;
+
+      a:not(.btn), a:hover {
+        color: $ucf-gold;
+      }
+
+      .fa {
+        color: $ucf-gold;
+      }
+
       @media (min-width: $screen-md-min) {
         bottom: 8px;
         position: absolute;
@@ -379,6 +372,12 @@ $color-linkedin: #0077b5;
     .magazine-cover-container {
       .entry-title {
         margin-top: 0;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        img {
+          width: 100%;
+        }
       }
     }
 
