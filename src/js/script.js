@@ -1486,7 +1486,36 @@ var academicDegreeSearch = function ($) {
 
   if ($academicsDegreeSearch.length > 0) {
 
+    var addScore = function(data) {
+      for (var d in data) {
+        var degree = data[d];
+        switch(degree.programType) {
+          case 'undergraduate-degree':
+          case 'articulated-program':
+            degree.score = 100;
+            break;
+          case 'graduate-degree':
+          case 'accelerated-program':
+            degree.score = 50;
+            break;
+          case 'certificate':
+            degree.score = 25;
+            break;
+          case 'minor':
+            degree.score = 10;
+            break;
+        }
+      }
+
+      return data;
+    };
+
     var scoreSorter = function(a, b) {
+      var q = $('.tt-input').val().toLowerCase();
+      
+      if (q===a.name.toLowerCase()) { return -1; }
+      if (q===b.name.toLowerCase()) { return 1; }
+
       if (a.score < b.score) {
         return 1;
       }
@@ -1500,7 +1529,9 @@ var academicDegreeSearch = function ($) {
       identify: function(obj) { return obj.name; },
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      local: searchSuggestions.sort(scoreSorter)
+      local: addScore(searchSuggestions),
+      limit: 8,
+      sorter: scoreSorter
     });
 
     $('.degree-search-box, .academics-search-box').on('click', '#show-all-degrees', function () {
