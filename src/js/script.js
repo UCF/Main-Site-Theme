@@ -1523,11 +1523,8 @@ var academicDegreeSearch = function ($) {
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       local: addScore(searchSuggestions),
-      sorter: scoreSorter,
-      initialize: false
+      sorter: scoreSorter
     });
-
-    degrees.initialize();
 
     $('.degree-search-box, .academics-search-box').on('click', '#show-all-degrees', function () {
       window.location = '/degree-search/?search-query=' + $('#academics-degree-search').val();
