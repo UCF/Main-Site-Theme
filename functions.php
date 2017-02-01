@@ -2750,11 +2750,11 @@ function get_degree_header_image() {
 	$fallback = get_theme_option( 'fallback_degree_image' );
 
 	if ( $degree_header ) {
-		return $degree_header;
+		return str_replace( 'http:', 'https:', $degree_header );
 	} else if ( $college_header ) {
-		return $college_header;
+		return str_replace( 'http:', 'https:', $college_header );
 	} else {
-		return ( isset( $fallback ) && !empty( $fallback ) ) ? $fallback : NULL;
+		return ( isset( $fallback ) && !empty( $fallback ) ) ? str_replace( 'http:', 'https', $fallback ) : NULL;
 	}
 }
 
