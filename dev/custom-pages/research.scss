@@ -13,23 +13,15 @@ $color-youtube: #cd201f;
 $color-vine: #00b488;
 $color-linkedin: #0077b5;
 
-.page-template-template-media-feature #header-nav-wrap a {
-    color: #fff;
-    font-size: 17px;
-    font-weight: 400;
-    padding: 7px;
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
 
-    @media (max-width: $screen-sm-max) {
-      font-size: 14.25px !important;
+    &:hover {
+      color: $ucf-gold;
     }
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: #000;
-      color: #fc0;
-      text-decoration: none;
-    }
+  }
 }
 
 .container {
