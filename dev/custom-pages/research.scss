@@ -1,0 +1,448 @@
+@import '../media-template/media-template-base';
+
+$downtown-bg-url: '//www.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
+$stats-background-url: '//www.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow-1.jpg';
+$impact-background-url: 'http://wwwqa.cc.ucf.edu/wp-content/uploads/2017/01/ResearchImpactBackgroundWhite.jpg';
+$florida-icon-url: '../img/florida-ucf-pin.png';
+$font-condensed: "Knockout 49 A", "Knockout 49 B";
+
+$color-light-gray: #fafafa;
+$color-facebook: #3a5795;
+$color-twitter: #00a5e5;
+$color-youtube: #cd201f;
+$color-vine: #00b488;
+$color-linkedin: #0077b5;
+
+.page-template-template-media-feature #header-nav-wrap a {
+    color: #fff;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 7px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 14.25px !important;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: #000;
+      color: #fc0;
+      text-decoration: none;
+    }
+}
+
+.container {
+  max-width: 1170px;
+
+  @media (min-width: 1200px){
+    width: 1170px;
+  }
+}
+
+.page-media-container {
+    background-image: linear-gradient(to top,transparent 0,transparent 80%,rgba(0,0,0,.6) 115%);
+}
+
+.page-media-header {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    z-index: -1;
+
+  .header-title {
+    margin: 20% 0 0 0;
+    padding: 12px;
+    font-size: 52px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 30px;
+    }
+  }
+
+  .header-subtitle {
+    line-height: 1.4;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 13px;
+    }
+  }
+}
+
+.header-image-container {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.weather {
+  .icon span {
+    bottom: -3px;
+    color: $ucf-gold;
+    display: inline-block;
+    font-size: 27px;
+    position: relative;
+  }
+
+  .vertical-rule {
+    border-left: 1px solid #fff;
+    margin-left: 4px;
+    margin-right: 6px;
+    width: 2px;
+  }
+}
+
+#sections-menu .navbar-nav {
+  z-index: 10;
+  margin-bottom: 0;
+
+  li {
+    margin-bottom: 0;
+
+    a {
+      font-weight: 700;
+    }
+  }
+}
+
+#contentcol {
+  a {
+    color: #337ab7;
+    text-decoration: none;
+    border-bottom: 0;
+
+
+    &:hover {
+      text-decoration: underline;
+      border-bottom: 0;
+    }
+  }
+
+  .muted {
+    color: #ccc;
+    text-transform: uppercase;
+  }
+
+  .going-public {
+    height: 240px;
+    margin-top: 53px;
+  }
+
+  .clusters-graphic {
+    left: -15%;
+    width: 125%;
+    max-width: 125%;
+  }
+}
+
+#contentcol {
+  .home-top-nav {
+    bottom: 0;
+    display: block;
+    font-size: 18px;
+    left: 0;
+    padding-left: 15px;
+    position: absolute;
+    z-index:5 ;
+
+    ul {
+      list-style-type: none;
+
+      li {
+        margin-left: 1.5em;
+        a,
+        a:link,
+        a:hover {
+          color: #fff;
+        }
+      }
+      li::before {
+          content: "\F13A";
+          -webkit-font-smoothing: antialiased;
+          color: #fff;
+          display: inline-block;
+          font: 1em/1 FontAwesome;
+          margin-left: -1.3em;
+          text-rendering: auto;
+          width: 1.5em;
+      }
+    }
+  }
+
+  aside {
+    margin-top: 48px;
+
+    .ucf-news-item-label {
+        font-weight: 700;
+        background-color: #ffc904;
+        color: #000;
+        display: inline-block;
+        font-size: 10px;
+        letter-spacing: 2px;
+        margin: 0 0 10px;
+        padding: 2px 15px;
+        text-transform: uppercase;
+    }
+
+    .ucf-news-item-title {
+      margin: 0;
+    }
+
+    .ucf-news-item-excerpt {
+
+    }
+
+    a p,
+    a h3 {
+      color: $black;
+      text-decoration: none;
+    }
+  }
+
+  .callout {
+    padding: 15px 0;
+
+    .heading-condensed,
+    h1.heading-condensed,
+    h2.heading-condensed {
+      font-size: 70px;
+      font-family: $font-condensed;
+      font-weight: 400;
+      text-transform: uppercase;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 60px;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 50px;
+      }
+    }
+  }
+
+  .btn.btn-gold {
+    @include gotham(9);
+    background: $ucf-gold;
+    border-bottom: 0;
+    color: black;
+    font-size: 14px;
+    padding: 18px 32px;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: darken($ucf-gold, 10%);
+      border-bottom: 0;
+    }
+  }
+
+  .heading-uppercase,
+  h2.heading-uppercase,
+  h3.heading-uppercase {
+    font-size: 16px;
+    margin: 39px 0 1.7em;
+    padding-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .callout.callout-clusters {
+    .fa-chevron-circle-right {
+      color: $ucf-gold;
+      padding-right: 5px;
+    }
+
+    .list-navigation .last {
+      margin-top: 40px;
+    }
+
+    .img-responsive.section-image {
+        @media (max-width: $screen-sm-max) {
+          width: 100% !important;
+          max-width: 100% !important;
+          left: 0 !important;
+        }
+    }
+  }
+
+  .callout.callout-serving {
+    h3 {
+      @include gotham(5);
+      display: block;
+      font-size: 20px;
+    }
+  }
+
+  .callout.callout-intro {
+    padding-top: 15px;
+
+    a:hover img {
+      opacity: 0.85;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      padding-top: 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      padding-top: 0;
+    }
+  }
+
+  .callout.callout-impact {
+    background: url($impact-background-url);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .callout.callout-news {
+    background: $color-light-gray;
+
+    .news-heading-wrap {
+      border-bottom: 1px solid $gray-lighter;
+      margin-bottom: 15px;
+      padding-bottom: 8px;
+
+      h2 {
+        display: inline;
+      }
+
+      @media (min-width: $screen-md-min) {
+        position: relative;
+      }
+
+    }
+
+    .read-more {
+      font-weight: 600;
+
+      a:not(.btn), a:hover {
+        color: $ucf-gold;
+      }
+
+      .fa {
+        color: $ucf-gold;
+      }
+
+      @media (min-width: $screen-md-min) {
+        bottom: 8px;
+        position: absolute;
+        right: 0;
+      }
+    }
+
+    .ucf-news-item-link + p {
+      // Garbage generated by WP content filters
+      display: none;
+    }
+
+    .story-featured-issue {
+      @include gotham(9);
+      font-size: 25px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      a {
+        color: $black;
+        text-decoration: underline;
+      }
+    }
+
+    .story-featured-title {
+      @include archer(6);
+      font-size: 23px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .story-featured-heading {
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+      color: #656565;
+    }
+
+    .story-featured-description,
+    .story-featured-description p {
+      font-size: 14px;
+    }
+
+    .magazine-cover-container {
+      .entry-title {
+        margin-top: 0;
+      }
+
+      img {
+        @media (max-width: $screen-sm-max) {
+          width: 100%;
+        }
+      }
+    }
+
+  }
+
+  .callout.callout-stats {
+    background-color: $ucf-gold;
+    background-image: url($stats-background-url);
+    background-position: 50% 20%;
+    background-size: cover;
+    margin-top: -5px;
+    min-height: 450px;
+    padding: 60px 0;
+    position: relative;
+
+    @media (max-width: $screen-sm-max) {
+      background-position: 35% 20%;
+      background-size: 320%;
+      padding: 30px 0;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      padding: 30px 0;
+      background-size: cover;
+    }
+
+    .callout-stats-cover {
+      background: $ucf-gold;
+      height: 100%;
+      left: 0;
+      opacity: 0.9;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+    .stats-item {
+      border: dotted 0 $black;
+      display: block;
+      float: left;
+      line-height: 1.2;
+      min-height: 100px;
+      padding: 20px 10px;
+      text-align: center;
+      width: 50%;
+
+      .num {
+        font-size: 50px;
+        font-family: $font-condensed;
+        display: block;
+      }
+    }
+    .stats-border-top-left {
+      border-width: 0 1px 1px 0;
+    }
+    .stats-border-top-right {
+      border-width: 0 0 1px 0;
+    }
+    .stats-border-bottom-left {
+      border-width: 0 1px 0 0;
+    }
+  }
+
+  .container-wide.header-image-container {
+    @media (max-width: $screen-sm-max) {
+      background-position: 23% 0 !important;
+    }
+  }
+}

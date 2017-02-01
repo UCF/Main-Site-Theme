@@ -1436,30 +1436,64 @@ var academicDegreeSearch = function ($) {
   /**
  * #search-query specific typeahead init, event handlers
  **/
-  var $academicsDegreeSearch = $('#academics-degree-search');
+  var $academicsDegreeSearch = $('#academics-degree-search'),
+      resultCount = 0;
 
   if ($academicsDegreeSearch.length > 0) {
 
+    var addScore = function(data) {
+      for (var d in data) {
+        var degree = data[d];
+        switch(degree.programType) {
+          case 'undergraduate-degree':
+          case 'articulated-program':
+            degree.score = 100;
+            break;
+          case 'graduate-degree':
+          case 'accelerated-program':
+            degree.score = 50;
+            break;
+          case 'certificate':
+            degree.score = 25;
+            break;
+        }
+      }
+
+      return data;
+    };
+
+    var scoreSorter = function(a, b) {
+      if (a.score < b.score) {
+        return 1;
+      }
+      if (a.score > b.score) {
+        return -1;
+      }
+      return 0;
+    };
+
     var degrees = new Bloodhound({
-      identify: function(obj) { return obj.name; },
+      identify: function(obj) { return obj.name + obj.programType; },
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      local: searchSuggestions
+      local: addScore(searchSuggestions),
+      sorter: scoreSorter
     });
 
-    var degreesWithDefaults = function (q, sync) {
-      if (q === '') {
-        sync(degrees.get('Bachelor', 'Graduate', 'Certificate'));
-      } else {
-        degrees.search(q, sync);
-      }
-    };
+    $('.degree-search-box, .academics-search-box').on('click', '#show-all-degrees', function () {
+      window.location = '/degree-search/?search-query=' + $('#academics-degree-search').val();
+    });
 
     $academicsDegreeSearch.bind('typeahead:select', function(ev, suggestion) {
       window.location = suggestion.url;
     });
 
     var degreeType = '<div class="tt-suggestion"><hr></div><div class="tt-suggestion tt-selectable footer-title"><strong>What type of degree are you interested in?</strong></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=undergraduate-degree">Undergraduate Degree</a></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=graduate-degree">Graduate Degree</a></div><div class="tt-suggestion tt-selectable"><a href="/degree-search/?program-type%5B0%5D=certificate">Certificate</a></div>';
+
+    var countSync = function(datum) {
+      resultCount = datum.length;
+      return datum;
+    };
 
     // Typeahead init
     $academicsDegreeSearch
@@ -1469,7 +1503,17 @@ var academicDegreeSearch = function ($) {
       },
       {
         name: 'degrees',
-        source: degreesWithDefaults,
+        source: function(query, sync, async) {
+          // degree.search is called here 2x because I (Jim) was unable to come up with
+          // a way of hooking into the typehead sync function. So instead, I hook into
+          // a custom countSync function first to set the count variable, followed by
+          // passing the typeahead sync function.
+          // Set Count
+          degrees.search(query, countSync);
+          // Set Results
+          degrees.search(query, sync);
+        },
+        limit: 8,
         display: function(data) {
           // Stupid hack that forces parsing of html entities
           return $('<textarea />').html(data.name).text();
@@ -1480,7 +1524,9 @@ var academicDegreeSearch = function ($) {
             'No degrees found for search term.',
             '</div>' + degreeType
           ].join('\n'),
-          footer: degreeType
+          footer: function (context) {
+            return '<div class="tt-suggestion tt-selectable"><a href="#" id="show-all-degrees">Show all ' + resultCount + ' degrees for <em>&ldquo;' + context.query + '&rdquo;</em></a></div>' + degreeType;
+          }
         }
       });
   }

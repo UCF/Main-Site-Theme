@@ -30,6 +30,7 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/01/azindex-header-x
 
   .header-title {
     background-color: rgba($ucf-gold, .9); // increase opacity slightly for this page
+    margin-top: 20%;
 
     @media (max-width: 479px) {
       font-size: 9vw;
