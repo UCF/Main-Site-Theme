@@ -314,6 +314,7 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
   }
 
   .events-list {
+    @include gotham(5);
     list-style: none;
     padding-left: 0;
 
@@ -325,6 +326,7 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
     }
 
     .event-link {
+      display: block;
       position: relative;
       text-decoration: none;
 
