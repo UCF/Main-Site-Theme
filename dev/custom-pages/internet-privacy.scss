@@ -2,6 +2,10 @@
 
 .page-media-container {
   background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.6) 115%);
+
+  .header-title {
+    margin-top: 140px;
+  }
 }
 
 #header-menu {
@@ -24,8 +28,12 @@
   }
 }
 
+.callout-black {
+  background: $black;
+}
+
 .promo-block {
-  color: $white;
+  color: $ucf-gold;
   margin-bottom: 12px !important;
   min-height: 240px;
   text-align: center;
@@ -39,4 +47,16 @@
 
 .btn-default {
   color: $black !important;
+}
+
+.margin-h2 {
+  margin-top: 52px;
+}
+
+#contentcol a {
+  border-bottom: 0;
+
+  &:hover {
+    border-bottom: 0;
+  }
 }
