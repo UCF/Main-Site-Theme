@@ -314,6 +314,7 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
   }
 
   .events-list {
+    @include gotham(5);
     list-style: none;
     padding-left: 0;
 
@@ -325,6 +326,8 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
     }
 
     .event-link {
+      display: block;
+      position: relative;
       text-decoration: none;
 
       &:hover,
@@ -336,6 +339,16 @@ $alumni-knitro: '//www.ucf.edu/wp-content/uploads/2016/10/ucf_alumni_orlando_eve
         .event-title {
           text-decoration: underline;
         }
+      }
+
+      &:hover::before {
+        color: $ucf-gold;
+        content: '\f0da';
+        font-family: FontAwesome;
+        font-size: 24px;
+        left: -25px;
+        top: -2px;
+        position: absolute;
       }
 
       // won't be present in shortcode-generated markup, but for the sake of development:
