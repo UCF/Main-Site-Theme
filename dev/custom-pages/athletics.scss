@@ -389,6 +389,7 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
   }
 
   .events-list {
+    @include gotham(5);
     list-style: none;
     padding-left: 0;
 
@@ -400,6 +401,7 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
     }
 
     .event-link {
+      display: block;
       position: relative;
       text-decoration: none;
 
@@ -420,7 +422,7 @@ $facilities-bg-sm-url:   '//www.ucf.edu/wp-content/uploads/2017/01/athletics-aer
         font-family: FontAwesome;
         font-size: 24px;
         left: -25px;
-        top: 14px;
+        top: -2px;
         position: absolute;
       }
 
