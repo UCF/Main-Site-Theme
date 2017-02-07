@@ -2,7 +2,7 @@
 
 $downtown-bg-url: '//www.ucf.edu/wp-content/uploads/2016/12/downtown-orlando-sky.png';
 $stats-background-url: '//www.ucf.edu/wp-content/uploads/2016/12/MainPage-StatsBackgroundnoyellow-1.jpg';
-$impact-background-url: 'http://wwwqa.cc.ucf.edu/wp-content/uploads/2017/01/ResearchImpactBackgroundWhite.jpg';
+$impact-background-url: '//www.ucf.edu/wp-content/uploads/2017/02/ResearchImpactBackgroundWhite-1.jpg';
 $florida-icon-url: '../img/florida-ucf-pin.png';
 $font-condensed: "Knockout 49 A", "Knockout 49 B";
 
@@ -13,23 +13,15 @@ $color-youtube: #cd201f;
 $color-vine: #00b488;
 $color-linkedin: #0077b5;
 
-.page-template-template-media-feature #header-nav-wrap a {
-    color: #fff;
-    font-size: 17px;
-    font-weight: 400;
-    padding: 7px;
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
 
-    @media (max-width: $screen-sm-max) {
-      font-size: 14.25px !important;
+    &:hover {
+      color: $ucf-gold;
     }
-
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: #000;
-      color: #fc0;
-      text-decoration: none;
-    }
+  }
 }
 
 .container {

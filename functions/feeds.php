@@ -377,7 +377,7 @@ function display_pegasus_issues_list_item( $issue, $list_item_classes='' ) {
 			<?php endif; ?>
 
 			<a class="pegasus-issue-read-link" href="<?php echo $issue_url; ?>" target="_blank">
-				Read Now
+				Read More
 			</a>
 		</div>
 	</li>
