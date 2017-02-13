@@ -1331,7 +1331,7 @@ function sc_college_program_list( $atts, $content='' ) {
 	<h4 class="buttons-heading">Degree Programs</h4>
 	<ul class="program-info-list list-unstyled">
 	<?php if ($undergrad_count > 0): ?>
-	  <li><a class="btn count-button external" target="_blank" href="/degree-search/?program-type%5B0%5D=undergraduate-degree&amp;college%5B0%5D=<?php echo $college_name; ?>" role="button"><span class="count"><?php echo $undergrad_count; ?></span> Bachelor's Degrees</a></li>
+	  <li><a class="btn count-button external" target="_blank" href="/degree-search/?program-type%5B0%5D=undergraduate-degree&program-type%5B1%5D=articulated-program&program-type%5B2%5D=accelerated-program&amp;college%5B0%5D=<?php echo $college_name; ?>" role="button"><span class="count"><?php echo $undergrad_count; ?></span> Bachelor's Degrees</a></li>
 	<?php endif; ?>
 	<?php if ($grad_count > 0): ?>
 	  <li><a class="btn count-button external" target="_blank" href="/degree-search/?program-type%5B0%5D=graduate-degree&amp;college%5B0%5D=<?php echo $college_name; ?>" role="button"><span class="count"><?php echo $grad_count; ?></span> Graduate Programs</a></li>
