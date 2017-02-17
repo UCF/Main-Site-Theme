@@ -118,12 +118,12 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   hr {
     border-color: $black;
     border-style: dotted;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 
     @media (min-width: $screen-sm-min) {
-      margin-bottom: 40px;
-      margin-top: 40px;
+      margin-bottom: 30px;
+      margin-top: 30px;
     }
   }
 
@@ -645,13 +645,96 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
 
   // Remarkable Growth | TODO
 
-  .section-remarkable-growth {
+  .remarkable-growth-tables {
     @media (min-width: $screen-sm-min) {
       margin-bottom: 60px;
+      margin-top: 60px;
     }
   }
 
-  // TODO table styles
+  .remarkable-growth-tborder-sm {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      border-left: 3px solid $ucf-gold;
+      height: 100%;
+      margin-left: ($grid-gutter-width / 2) * -1;
+      padding-left: ($grid-gutter-width / 2) - 3px;
+    }
+  }
+
+  .remarkable-growth-tborder-md {
+    @media (min-width: $screen-md-min) {
+      border-left: 3px solid $ucf-gold;
+      height: 100%;
+      margin-left: ($grid-gutter-width / 2) * -1;
+      padding-left: ($grid-gutter-width / 2) - 3px;
+    }
+  }
+
+  .remarkable-growth-table {
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      width: auto;
+    }
+
+    > thead > tr > th {
+      border-bottom: 0 solid transparent;
+      font-weight: 800;
+      padding-bottom: 0;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 17.5px;
+      }
+    }
+  }
+
+  .remarkable-growth-table-inner {
+    th {
+      font-weight: normal;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 12px;
+      }
+    }
+
+    td {
+      font-weight: bold;
+      vertical-align: top;
+
+      &::before {
+        content: '—';
+        font-weight: normal;
+      }
+    }
+  }
+
+  .remarkable-growth-increase {
+    font-weight: bold;
+    line-height: 1.1;
+    padding-left: 20px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 17.5px;
+    }
+  }
+
+  .remarkable-growth-increase-num {
+    display: block;
+    font-size: 1.25em;
+  }
+
+  .remarkable-growth-tiny-linebreak {
+    display: none;
+
+    @media (max-width: 374px) {
+      display: block;
+    }
+  }
 
 
   // Frank Brogan quote | TODO
