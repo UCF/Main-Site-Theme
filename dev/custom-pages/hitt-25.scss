@@ -1,7 +1,13 @@
 @import '../media-template/media-template-base';
 
 
-$header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighter-Mobile.jpg';
+$header-media-xs-url:             '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighter-Mobile.jpg';
+$section-meaningful-impact-bg-xs: '//www.ucf.edu/wp-content/uploads/2017/02/UCF-Seal-Yellow.jpg';
+$section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-DH25-Millican-Sunset.jpg'; // TODO need right portion of image cropped out
+$section-plans-bg-xs:             '//www.ucf.edu/wp-content/uploads/2017/02/Past-Presidents-DrHitt-Mobile.jpg';
+$section-plans-bg-sm:             '//www.ucf.edu/wp-content/uploads/2017/02/Hitt-Millican-Colbourn-Golden-EFX.jpg';
+$section-jennings-bg-sm:          '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Office-BW.jpg'; // TODO need right portion of image cropped out
+$section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
 
 
 #header-menu {
@@ -78,6 +84,7 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighte
 
   blockquote {
     border-left: 0 solid transparent;
+    margin-top: 1em;
     padding: 0;
 
     &,
@@ -97,6 +104,7 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighte
 
       small {
         @include gotham(4);
+        font-size: 75%;
       }
 
       &,
@@ -392,5 +400,283 @@ $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighte
   // PER-SECTION OVERRIDES
   //
 
+
+  // Video Section | done
+
+  .section-video {
+    @media (min-width: $screen-sm-min) {
+      margin-top: 60px;
+    }
+  }
+
+
+  // Meaningful Impact | done
+
+  .section-meaningful-impact {
+    .callout {
+      background-image: url($section-meaningful-impact-bg-xs);
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 20px 0;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 80px 0;
+      }
+    }
+  }
+
+
+  // Jeb Bush quote | TODO
+
+  .section-bush-quote {
+    // TODO bg positioning and text colors need adjusting
+    .callout {
+      // NOTE: vetoed mobile bg; just provide bg for -sm+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($section-bush-bg-sm);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+
+  .bush-quote-blockquote {
+    @media (min-width: $screen-sm-min) {
+      margin-top: 120px;
+    }
+  }
+
+
+  // Big Plans | done
+
+  .section-plans {
+    .callout {
+      background-image: url($section-plans-bg-xs);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($section-plans-bg-sm);
+      }
+
+      @media (min-width: $screen-sm-min) {
+        padding: 60px 0;
+      }
+    }
+  }
+
+  .plans-presidents-photo {
+    border: 10px solid $white;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 60px;
+    }
+  }
+
+  .university-goals {
+    @include make-row();
+    counter-reset: section;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .university-goal {
+    @include make-md-column($grid-columns * .2); // 20% width columns
+
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 1.5em;
+      padding-left: calc(1.5em + #{$grid-gutter-width} + 5px);
+    }
+
+    @media (min-width: $screen-md-min) {
+      text-align: center;
+    }
+
+    &::before {
+      @include gotham(7);
+      background-color: $white;
+      border-radius: 100%;
+      color: $ucf-gold-dark;
+      content: counter(section);
+      counter-increment: section;
+      display: block;
+      font-size: 1.35em;
+      height: 1.5em;
+      line-height: 1.5;
+      text-align: center;
+      width: 1.5em;
+
+      @media (max-width: $screen-sm-max) {
+        left: $grid-gutter-width / 2;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 34px;
+        margin: 0 auto 12px;
+      }
+    }
+  }
+
+
+  // National Prominence / Living Legacy | done
+
+  .section-prominence-legacy {
+    padding: 30px 0;
+
+    @media (min-width: $screen-sm-min) {
+      padding: 60px 0;
+    }
+
+    .section-bg-wrap {
+      position: relative;
+
+      @media (min-width: $screen-md-min) {
+        position: absolute;
+      }
+    }
+  }
+
+  // Warning: Positioning Hell below.  This layout is super fragile.
+  // You've been warned.
+
+  .prominence-number {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .prominence-number-inner {
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+
+  .prominence-number-pound {
+    @include gotham(8);
+    bottom: 13%;
+    font-size: 16vw;
+    left: 32%;
+    line-height: .8;
+    position: absolute;
+    z-index: 2;
+
+    @media (min-width: $screen-sm-min) {
+      bottom: 16%;
+      font-size: 100px;
+      left: 26%;
+    }
+
+    @media (min-width: $screen-md-min) {
+      bottom: unset;
+      font-size: 120px;
+      left: $grid-gutter-width * -1;
+      top: 49%;
+    }
+  }
+
+  .prominence-number-digit {
+    @include knockout(7);
+    bottom: 0;
+    color: rgba(saturate($ucf-gold, 50%), .65);
+    font-size: 66vw;
+    left: 50%;
+    line-height: .75;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 360px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      bottom: unset;
+      font-size: 480px;
+      left: ($grid-gutter-width / 2) * -1;
+      top: 0;
+      transform: none;
+    }
+  }
+
+  .prominence-spacer {
+    display: none;
+
+    @media (min-width: $screen-md-min) {
+      display: block;
+      height: 151px; // match whatever the SUS logo dimensions are
+    }
+  }
+
+  // End Positioning Hell
+
+  .prominence-legacy-col {
+    @media (min-width: $screen-sm-min) {
+      border-left: 1px solid $black;
+      height: 100%;
+      padding-left: $grid-gutter-width;
+    }
+  }
+
+
+  // Toni Jennings quote | TODO
+
+  .section-jennings-quote {
+    .callout {
+      // NOTE: vetoed mobile bg; just provide bg for -sm+
+      @media (min-width: $screen-sm-min) {
+        // TODO bg needs cropping/positioning adjustments
+        background-image: url($section-jennings-bg-sm);
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 60px 0 100px;
+      }
+    }
+  }
+
+
+  // Remarkable Growth | TODO
+
+  .section-remarkable-growth {
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 60px;
+    }
+  }
+
+  // TODO table styles
+
+
+  // Frank Brogan quote | TODO
+
+  .section-brogan-quote {
+    .callout {
+      // NOTE: vetoed mobile bg; just provide bg for -sm+
+      @media (min-width: $screen-sm-min) {
+        // TODO bg needs cropping/positioning adjustments
+        background-image: url($section-brogan-bg-sm);
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 100px 0 60px;
+      }
+    }
+  }
+
+
+  // History Lesson / Honor Roll | done
+
+  .section-history-honor {
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 60px;
+    }
+  }
 
 }
