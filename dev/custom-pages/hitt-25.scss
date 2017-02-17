@@ -3,10 +3,10 @@
 
 $header-media-xs-url:             '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighter-Mobile.jpg';
 $section-meaningful-impact-bg-xs: '//www.ucf.edu/wp-content/uploads/2017/02/UCF-Seal-Yellow.jpg';
-$section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-DH25-Millican-Sunset.jpg'; // TODO need right portion of image cropped out
+$section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-DH25-Millican-Sunset-crop.jpg';
 $section-plans-bg-xs:             '//www.ucf.edu/wp-content/uploads/2017/02/Past-Presidents-DrHitt-Mobile.jpg';
 $section-plans-bg-sm:             '//www.ucf.edu/wp-content/uploads/2017/02/Hitt-Millican-Colbourn-Golden-EFX.jpg';
-$section-jennings-bg-sm:          '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Office-BW.jpg'; // TODO need right portion of image cropped out
+$section-jennings-bg-sm:          '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Office-BW-crop.jpg';
 $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
 
 
@@ -427,15 +427,14 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
 
-  // Jeb Bush quote | TODO
+  // Jeb Bush quote | done
 
   .section-bush-quote {
-    // TODO bg positioning and text colors need adjusting
     .callout {
       // NOTE: vetoed mobile bg; just provide bg for -sm+
       @media (min-width: $screen-sm-min) {
         background-image: url($section-bush-bg-sm);
-        background-position: center center;
+        background-position: center bottom;
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -626,15 +625,14 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
 
-  // Toni Jennings quote | TODO
+  // Toni Jennings quote | done
 
   .section-jennings-quote {
     .callout {
       // NOTE: vetoed mobile bg; just provide bg for -sm+
       @media (min-width: $screen-sm-min) {
-        // TODO bg needs cropping/positioning adjustments
         background-image: url($section-jennings-bg-sm);
-        background-position: right center;
+        background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 60px 0 100px;
@@ -643,7 +641,7 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
 
-  // Remarkable Growth | TODO
+  // Remarkable Growth | done
 
   .remarkable-growth-tables {
     @media (min-width: $screen-sm-min) {
@@ -737,15 +735,14 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
 
-  // Frank Brogan quote | TODO
+  // Frank Brogan quote | done
 
   .section-brogan-quote {
     .callout {
       // NOTE: vetoed mobile bg; just provide bg for -sm+
       @media (min-width: $screen-sm-min) {
-        // TODO bg needs cropping/positioning adjustments
         background-image: url($section-brogan-bg-sm);
-        background-position: right center;
+        background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
         padding: 100px 0 60px;
