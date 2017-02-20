@@ -1,8 +1,10 @@
 var offset,
-  $scrollSection;
+  $scrollSection,
+  scrollStop;
 
 var init = function() {
   $scrollSection = $('#meaningful-impact');
+  scrollStop = false;
 
   $('.count-up').text('0');
 
@@ -12,10 +14,11 @@ var init = function() {
 
 var scroll = function() {
   var scrollTop = $(window).scrollTop();
-  if (scrollTop >= offset) {
+  if (scrollTop >= offset && (!scrollStop)) {
     if (countUp && typeof(countUp) == "function") {
       countUp($);
     }
+    scrollStop = true;
     $(document).off('scroll', scroll);
   }
 };
