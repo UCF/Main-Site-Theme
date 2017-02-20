@@ -1683,8 +1683,8 @@ function get_tuition_estimate( $program_type, $credit_hours ) {
 
 				foreach ( $fees as $fee ) {
 					if ( strpos($fee->FeeName, '(Per Hour)' ) == false ) {
-						$in_state_estimated_fees += $fee->ResidentFee;
-						$out_of_state_estimated_fees += $fee->NonResidentFee;
+						$in_state_estimated_fees += $fee->MaxResidentFee;
+						$out_of_state_estimated_fees += $fee->MaxNonResidentFee;
 					}
 				}
 
