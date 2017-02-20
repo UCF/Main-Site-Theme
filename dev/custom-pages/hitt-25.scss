@@ -529,33 +529,23 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
     padding: 30px 0;
 
     @media (min-width: $screen-sm-min) {
+      font-size: 14px;
       padding: 60px 0;
     }
+  }
 
-    .section-bg-wrap {
+  .prominence-col {
+    @media (min-width: $screen-md-min) {
       position: relative;
-
-      @media (min-width: $screen-md-min) {
-        position: absolute;
-      }
     }
   }
 
-  // Warning: Positioning Hell below.  This layout is super fragile.
-  // You've been warned.
-
-  .prominence-number {
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .prominence-number-inner {
-    height: 100%;
+  .prominence-col-graphic {
     position: relative;
-    width: 100%;
+
+    @media (min-width: $screen-md-min) {
+      position: absolute;
+    }
   }
 
   .prominence-number-pound {
@@ -584,7 +574,7 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   .prominence-number-digit {
     @include knockout(7);
     bottom: 0;
-    color: rgba(saturate($ucf-gold, 50%), .65);
+    color: $ucf-gold;
     font-size: 66vw;
     left: 50%;
     line-height: .75;
@@ -614,9 +604,7 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
     }
   }
 
-  // End Positioning Hell
-
-  .prominence-legacy-col {
+  .living-legacy-col {
     @media (min-width: $screen-sm-min) {
       border-left: 1px solid $black;
       height: 100%;
