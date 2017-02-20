@@ -12,13 +12,13 @@
 //
 @mixin margin-h1() {
   // $font-size-h1-xs base-- 1.2em, .6em;
-  margin-top: #{$font-size-h1-xs * 1.2};
   margin-bottom: #{$font-size-h1-xs * .6};
+  margin-top: #{$font-size-h1-xs * 1.2};
 
   @media (min-width: $screen-sm-min) {
     // $font-size-h1-sm base-- 2em, .8em;
-    margin-bottom: #{$font-size-h1-sm * 2};
-    margin-top: #{$font-size-h1-sm * .8};
+    margin-bottom: #{$font-size-h1-sm * .8};
+    margin-top: #{$font-size-h1-sm * 2};
   }
 }
 
