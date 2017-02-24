@@ -34,8 +34,6 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
   .header-title {
-    background-color: rgba($ucf-gold, .9); // increase opacity slightly for this page
-
     @media (max-width: 479px) {
       font-size: 8.5vw;
     }
