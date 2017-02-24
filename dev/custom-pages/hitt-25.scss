@@ -213,14 +213,6 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
     }
   }
 
-  // More granular control of where to put "-" before a blockquote citation
-  .blockquote-who {
-    &::before {
-      content: '—';
-      padding-right: .2em;
-    }
-  }
-
   // Photos next to blockquote citations
   .blockquote-photo {
     border: 4px solid $gray-light;
@@ -611,9 +603,9 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
 
-  // Toni Jennings quote | done
+  // Barbara Jenkins quote | done
 
-  .section-jennings-quote {
+  .section-jenkins-quote {
     .callout {
       // NOTE: vetoed mobile bg; just provide bg for -sm+
       @media (min-width: $screen-sm-min) {
