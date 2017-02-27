@@ -1,6 +1,7 @@
 var map,
   offset,
-  $scrollSection,
+  $statsSection,
+  $socialSection,
   scrollStop;
 
 /**
@@ -24,30 +25,81 @@ function debounce(func, wait, immediate) {
 };
 
 var init = function() {
-  $scrollSection = $('#stats-section');
-  scrollStop = false;
+  $statsSection = $('#stats-section');
+  $socialSection = $('#social-section');
+  scrollStop = {
+    stats: false,
+    social: false
+  };
+  offset = {
+    stats: 0,
+    social: 0
+  };
 
   initializeMatchHeight();
   homePageMajorsList();
 
   $('.count-up').text('0');
-  $(document).on('load scroll', scroll);
+
+  $(document)
+    .on('scroll', statsCounter)
+    .on('scroll', socialLazyLoad);
   $(window).on('load resize', onResize);
 };
 
-var scroll = function() {
-  var scrollTop = $(window).scrollTop();
-  if ((scrollTop >= offset) && (!scrollStop)) {
-    if (countUp && typeof(countUp) == "function") {
-      countUp($);
-    }
-    scrollStop = true;
-  }
+var setOffsets = function() {
+  offset = {
+    stats: $statsSection.offset().top - $(window).height(),
+    social: $socialSection.offset().top - $(window).height()
+  };
 };
 
 var onResize = debounce(function () {
-  offset = $scrollSection.offset().top - $(window).height();
+  setOffsets();
+
+  // Allow scroll events to re-run after ensuring offsets are set
+  statsCounter();
+  socialLazyLoad();
 }, 100);
+
+var statsCounter = function() {
+  if (($(window).scrollTop() >= offset.stats) && (!scrollStop.stats)) {
+    if (countUp && typeof(countUp) == 'function') {
+      countUp($);
+    }
+    scrollStop.stats = true;
+    $(document).off('scroll', statsCounter);
+  }
+};
+
+var socialLazyLoad = function() {
+  if (($(window).scrollTop() >= offset.social) && (!scrollStop.social)) {
+    // TODO make this less sloppy somehow...
+
+    // Facebook
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '637856803059940',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+    // Twitter
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+    scrollStop.social = true;
+    $(document).off('scroll', socialLazyLoad);
+  }
+};
 
 function initializeMatchHeight() {
   $statsItem = $('.stats-item-row .stats-item');
