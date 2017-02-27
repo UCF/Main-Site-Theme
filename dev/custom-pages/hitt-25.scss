@@ -7,7 +7,7 @@ $section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-
 $section-plans-bg-xs:             '//www.ucf.edu/wp-content/uploads/2017/02/Past-Presidents-DrHitt-Mobile.jpg';
 $section-plans-bg-sm:             '//www.ucf.edu/wp-content/uploads/2017/02/Hitt-Millican-Colbourn-Golden-EFX.jpg';
 $section-jennings-bg-sm:          '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Office-BW-crop.jpg';
-$section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
+$section-criser-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
 
 
 #header-menu {
@@ -713,17 +713,17 @@ $section-brogan-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
   }
 
 
-  // Frank Brogan quote | done
+  // Marshall Criser quote | done
 
-  .section-brogan-quote {
+  .section-criser-quote {
     .callout {
       // NOTE: vetoed mobile bg; just provide bg for -sm+
       @media (min-width: $screen-sm-min) {
-        background-image: url($section-brogan-bg-sm);
+        background-image: url($section-criser-bg-sm);
         background-position: center center;
         background-repeat: no-repeat;
         background-size: cover;
-        padding: 100px 0 60px;
+        padding: 60px 0;
       }
     }
   }
