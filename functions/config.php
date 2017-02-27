@@ -368,7 +368,7 @@ Config::$theme_settings = array(
 			'name'        => 'Tuition and Fees Feed URL',
 			'id'          => THEME_OPTIONS_NAME.'[tuition_fee_url]',
 			'description' => 'URL for the tuition and fee feed.',
-			'default'     => 'http://tuitionfees.ikm.ucf.edu/feed',
+			'default'     => 'http://www.studentaccounts.ucf.edu/feed/feed.cfm',
 			'value'       => $theme_options['tuition_fee_url'],
 		)),
 		new TextareaField(array(

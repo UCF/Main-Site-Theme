@@ -1,0 +1,740 @@
+@import '../media-template/media-template-base';
+
+
+$header-media-xs-url:             '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Hero-Lighter-Mobile.jpg';
+$section-meaningful-impact-bg-xs: '//www.ucf.edu/wp-content/uploads/2017/02/UCF-Seal-Yellow.jpg';
+$section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-DH25-Millican-Sunset-crop.jpg';
+$section-plans-bg-xs:             '//www.ucf.edu/wp-content/uploads/2017/02/Past-Presidents-DrHitt-Mobile.jpg';
+$section-plans-bg-sm:             '//www.ucf.edu/wp-content/uploads/2017/02/Hitt-Millican-Colbourn-Golden-EFX.jpg';
+$section-jennings-bg-sm:          '//www.ucf.edu/wp-content/uploads/2017/02/DH25-Office-BW-crop.jpg';
+$section-criser-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+.page-media .page-media-header {
+  @media (max-width: $screen-sm-max) {
+    height: 450px;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+    background-position: bottom center;
+    height: 124vw;
+    max-height: 700px;
+  }
+
+  .header-title {
+    @media (max-width: 479px) {
+      font-size: 8.5vw;
+    }
+
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 8vw;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 44px;
+      line-height: 1.1;
+      margin-top: 70px;
+      padding-left: 30px;
+      padding-right: 30px;
+      text-align: right; // right-align on this page
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 54px;
+    }
+  }
+
+  .header-subtitle {
+    @media (min-width: 480px) and (max-width: $screen-xs-max) {
+      font-size: 3vw;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 18px;
+    }
+  }
+}
+
+
+#contentcol {
+
+  //
+  // BASE OVERRIDES
+  //
+
+  blockquote {
+    border-left: 0 solid transparent;
+    margin-top: 1em;
+    padding: 0;
+
+    &,
+    p {
+      font-size: 16px;
+      font-style: italic;
+      margin-bottom: 1em;
+    }
+
+    footer {
+      @include gotham(7);
+
+      &::before,
+      small::before {
+        content: '';
+      }
+
+      small {
+        @include gotham(4);
+        font-size: 75%;
+      }
+
+      &,
+      cite {
+        font-style: normal;
+      }
+    }
+  }
+
+  // Divider style overrides
+  hr {
+    border-color: $black;
+    border-style: dotted;
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+  }
+
+  // Override fixed video height in theme css
+  .embed-responsive {
+    embed,
+    iframe,
+    object {
+      height: 100%;
+    }
+  }
+
+  // Larger underline headings on this page
+  .heading-underline {
+    font-size: 21px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 26px;
+      margin-top: 80px;
+    }
+  }
+
+  // Add more letter spacing to sans-serif headings on this page
+  .heading-underline,
+  .heading-sans-serif {
+    letter-spacing: .08em;
+  }
+
+  // Make all gold callout text black on this page
+  .callout-gold {
+    color: $black;
+
+    a {
+      color: $black;
+    }
+
+    .callout-aside-heading a {
+      color: $black;
+    }
+  }
+
+  // Beefed-up h1 font sizes on this page
+  h1,
+  .h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 42px;
+    }
+  }
+
+
+  //
+  // PAGE-SPECIFIC STYLES
+  //
+
+  // Vertical hr's
+  .hr-vertical {
+    border-left: 1px dotted $black;
+    display: block;
+    height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 1px;
+  }
+
+  // Custom blockquote styles
+  .blockquote-large {
+    &,
+    p {
+      font-size: 21px;
+      line-height: 1.4;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 32px;
+      }
+    }
+
+    footer {
+      font-size: 16px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 21px;
+      }
+
+      small {
+        @media (min-width: $screen-sm-min) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  // Photos next to blockquote citations
+  .blockquote-photo {
+    border: 4px solid $gray-light;
+    width: 100px;
+
+    @media (min-width: $screen-sm-min) {
+      width: 125px;
+    }
+
+    &.pull-left {
+      margin-right: 20px;
+    }
+
+    &.pull-right {
+      margin-left: 20px;
+    }
+  }
+
+  // Text utilities
+  .text-slab-serif {
+    @include archer();
+    font-size: 1.1em; // bump up average font size slightly for improved readability
+  }
+
+  .text-color-white {
+    color: $white;
+  }
+
+  .text-color-black {
+    color: $black;
+  }
+
+  .text-weight-black {
+    font-weight: 800;
+  }
+
+  // Condensed headings
+  .heading-condensed {
+    @include knockout();
+    line-height: .9;
+    text-transform: uppercase;
+  }
+
+  h1.heading-condensed,
+  .h1.heading-condensed {
+    font-size: 50px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 88px;
+    }
+  }
+
+  h2.heading-condensed,
+  .h2.heading-condensed {
+    font-size: 42px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 70px;
+    }
+  }
+
+  h3.heading-condensed,
+  .h3.heading-condensed {
+    font-size: 34px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 52px;
+    }
+  }
+
+  h4.heading-condensed,
+  .h4.heading-condensed {
+    font-size: 28px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 44px;
+    }
+  }
+
+  h5.heading-condensed,
+  .h5.heading-condensed {
+    font-size: 20px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 24px;
+    }
+  }
+
+  h6.heading-condensed,
+  .h6.heading-condensed {
+    font-size: 18px;
+  }
+
+  // Dark gold callouts
+  .callout-dark-gold {
+    background-color: $ucf-gold-dark;
+    color: $white;
+
+    a {
+      color: $white;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    .list-navigation a {
+      font-weight: 400;
+    }
+
+    .list-navigation a,
+    .list-chevrons a {
+      text-decoration: none;
+    }
+
+    .callout-aside-heading a {
+      color: $white;
+      font-weight: 400;
+      text-decoration: none;
+    }
+  }
+
+  // Alternate lead text styles
+  .lead-alt {
+    @include gotham(4);
+    font-size: 16px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 18px;
+    }
+  }
+
+  // Stylized statistic grids
+  .stats-item {
+    border: dotted 0 $black;
+    display: block;
+    float: left;
+    line-height: 1.2;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    width: 50%;
+  }
+
+  .stats-border-top-left {
+    border-bottom-width: 1px;
+    border-right-width: 1px;
+    padding-bottom: 20px;
+  }
+
+  .stats-border-top-right {
+    border-bottom-width: 1px;
+    padding-bottom: 20px;
+  }
+
+  .stats-border-bottom-left {
+    border-right-width: 1px;
+    padding-top: 20px;
+  }
+
+  .stats-border-bottom-right {
+    padding-top: 20px;
+  }
+
+  .stats-item-num {
+    @include knockout();
+    display: block;
+    font-size: 40px;
+
+    @media (min-width: $screen-md-min) {
+      font-size: 50px;
+    }
+  }
+
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+
+  // Video Section | done
+
+  .section-video {
+    @media (min-width: $screen-sm-min) {
+      margin-top: 60px;
+    }
+  }
+
+
+  // Meaningful Impact | done
+
+  .section-meaningful-impact {
+    .callout {
+      background-image: url($section-meaningful-impact-bg-xs);
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      background-size: cover;
+      padding: 20px 0;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 80px 0;
+      }
+    }
+  }
+
+
+  // Jeb Bush quote | done
+
+  .section-bush-quote {
+    .callout {
+      // NOTE: vetoed mobile bg; just provide bg for -sm+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($section-bush-bg-sm);
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+
+  .bush-quote-blockquote {
+    @media (min-width: $screen-sm-min) {
+      margin-top: 120px;
+    }
+  }
+
+
+  // Big Plans | done
+
+  .section-plans {
+    .callout {
+      background-image: url($section-plans-bg-xs);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($section-plans-bg-sm);
+      }
+
+      @media (min-width: $screen-sm-min) {
+        padding: 60px 0;
+      }
+    }
+  }
+
+  .plans-presidents-photo {
+    border: 10px solid $white;
+
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 60px;
+    }
+  }
+
+  .university-goals {
+    @include make-row();
+    counter-reset: section;
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .university-goal {
+    @include make-md-column($grid-columns * .2); // 20% width columns
+
+    @media (max-width: $screen-sm-max) {
+      margin-bottom: 1.5em;
+      padding-left: calc(1.5em + #{$grid-gutter-width} + 5px);
+    }
+
+    @media (min-width: $screen-md-min) {
+      text-align: center;
+    }
+
+    &::before {
+      @include gotham(7);
+      background-color: $white;
+      border-radius: 100%;
+      color: $ucf-gold-dark;
+      content: counter(section);
+      counter-increment: section;
+      display: block;
+      font-size: 1.35em;
+      height: 1.5em;
+      line-height: 1.5;
+      text-align: center;
+      width: 1.5em;
+
+      @media (max-width: $screen-sm-max) {
+        left: $grid-gutter-width / 2;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 34px;
+        margin: 0 auto 12px;
+      }
+    }
+  }
+
+
+  // National Prominence / Living Legacy | done
+
+  .section-prominence-legacy {
+    padding: 30px 0;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 14px;
+      padding: 60px 0;
+    }
+  }
+
+  .prominence-col {
+    @media (min-width: $screen-md-min) {
+      position: relative;
+    }
+  }
+
+  .prominence-col-graphic {
+    position: relative;
+
+    @media (min-width: $screen-md-min) {
+      position: absolute;
+    }
+  }
+
+  .prominence-number-pound {
+    @include gotham(8);
+    bottom: 13%;
+    font-size: 16vw;
+    left: 32%;
+    line-height: .8;
+    position: absolute;
+    z-index: 2;
+
+    @media (min-width: $screen-sm-min) {
+      bottom: 16%;
+      font-size: 100px;
+      left: 26%;
+    }
+
+    @media (min-width: $screen-md-min) {
+      bottom: unset;
+      font-size: 120px;
+      left: $grid-gutter-width * -1;
+      top: 49%;
+    }
+  }
+
+  .prominence-number-digit {
+    @include knockout(7);
+    bottom: 0;
+    color: $ucf-gold;
+    font-size: 66vw;
+    left: 50%;
+    line-height: .75;
+    position: absolute;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 360px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      bottom: unset;
+      font-size: 480px;
+      left: ($grid-gutter-width / 2) * -1;
+      top: 0;
+      transform: none;
+    }
+  }
+
+  .prominence-spacer {
+    display: none;
+
+    @media (min-width: $screen-md-min) {
+      display: block;
+      height: 151px; // match whatever the SUS logo dimensions are
+    }
+  }
+
+  .living-legacy-col {
+    @media (min-width: $screen-sm-min) {
+      border-left: 1px solid $black;
+      height: 100%;
+      padding-left: $grid-gutter-width;
+    }
+  }
+
+
+  // Barbara Jenkins quote | done
+
+  .section-jenkins-quote {
+    .callout {
+      // NOTE: vetoed mobile bg; just provide bg for -sm+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($section-jennings-bg-sm);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 60px 0 100px;
+      }
+    }
+  }
+
+
+  // Remarkable Growth | done
+
+  .remarkable-growth-tables {
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 60px;
+      margin-top: 60px;
+    }
+  }
+
+  .remarkable-growth-tborder-sm {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      border-left: 3px solid $ucf-gold;
+      height: 100%;
+      margin-left: ($grid-gutter-width / 2) * -1;
+      padding-left: ($grid-gutter-width / 2) - 3px;
+    }
+  }
+
+  .remarkable-growth-tborder-md {
+    @media (min-width: $screen-md-min) {
+      border-left: 3px solid $ucf-gold;
+      height: 100%;
+      margin-left: ($grid-gutter-width / 2) * -1;
+      padding-left: ($grid-gutter-width / 2) - 3px;
+    }
+  }
+
+  .remarkable-growth-table {
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      width: auto;
+    }
+
+    > thead > tr > th {
+      border-bottom: 0 solid transparent;
+      font-weight: 800;
+      padding-bottom: 0;
+      text-transform: uppercase;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 17px;
+      }
+    }
+  }
+
+  .remarkable-growth-table-inner {
+    th {
+      font-weight: normal;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 12px;
+      }
+    }
+
+    td {
+      font-weight: bold;
+      vertical-align: top;
+
+      &::before {
+        content: '—';
+        font-weight: normal;
+      }
+    }
+  }
+
+  .remarkable-growth-increase {
+    font-weight: bold;
+    line-height: 1.1;
+    padding-left: 20px;
+    text-transform: uppercase;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 17px;
+    }
+  }
+
+  .remarkable-growth-increase-num {
+    display: block;
+    font-size: 1.25em;
+  }
+
+  .remarkable-growth-tiny-linebreak {
+    display: none;
+
+    @media (max-width: 374px) {
+      display: block;
+    }
+  }
+
+
+  // Marshall Criser quote | done
+
+  .section-criser-quote {
+    .callout {
+      // NOTE: vetoed mobile bg; just provide bg for -sm+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($section-criser-bg-sm);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 60px 0;
+      }
+    }
+  }
+
+
+  // History Lesson / Honor Roll | done
+
+  .section-history-honor {
+    @media (min-width: $screen-sm-min) {
+      margin-bottom: 60px;
+    }
+  }
+
+}
