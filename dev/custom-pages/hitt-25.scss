@@ -199,7 +199,7 @@ $section-criser-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
     }
 
     footer {
-      font-size: 16px;
+      font-size: 15px;
 
       @media (min-width: $screen-sm-min) {
         font-size: 21px;
@@ -684,6 +684,11 @@ $section-criser-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.H
       &::before {
         content: '—';
         font-weight: normal;
+        padding: 0 2px;
+
+        @media (min-width: $screen-sm-min) {
+          padding: 0 4px;
+        }
       }
     }
   }
