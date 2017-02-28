@@ -55,7 +55,6 @@ var statsCounter = function() {
 var socialLazyLoad = function() {
   if (($(window).scrollTop() >= offset.social) && (!scrollStop.social)) {
     facebookWidgetInit();
-    twitterWidgetInit();
 
     scrollStop.social = true;
     $(document).off('scroll', socialLazyLoad);
@@ -87,20 +86,6 @@ function facebookWidgetInit() {
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-}
-
-// The javascript and html provided by the Twitter widget to initialize it.
-// NOTE: the WordPress Social Streams plugin already injects this script--
-// the script will not be dynamically loaded on environments with this plugin
-// activated
-function twitterWidgetInit() {
-  var widgetMarkup = '<a class="twitter-timeline" href="https://twitter.com/UCF" data-widget-id="702527884762681344">Tweets by @UCF</a>';
-
-  $socialSection
-    .find('#js-twitter-widget')
-    .html(widgetMarkup);
-
-  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 }
 
 function initializeMatchHeight() {
