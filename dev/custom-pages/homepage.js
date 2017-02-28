@@ -66,6 +66,12 @@ var socialLazyLoad = function() {
 // Included here instead of manually within the page markup so that we can
 // conditionally initialize it based on the user's scroll position.
 function facebookWidgetInit() {
+  var widgetMarkup = '<div class="fb-page" data-href="https://www.facebook.com/ucf" data-tabs="timeline" data-width="500px" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/ucf" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ucf">University of Central Florida</a></blockquote></div>';
+
+  $socialSection
+    .find('#js-facebook-widget')
+    .html(widgetMarkup);
+
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '637856803059940',
@@ -84,9 +90,16 @@ function facebookWidgetInit() {
 }
 
 // The javascript provided by the Twitter widget to initialize it.
-// Included here instead of manually within the page markup so that we can
-// conditionally initialize it based on the user's scroll position.
+// NOTE: the WordPress Social Streams plugin already injects this script--
+// the script will not be dynamically loaded on environments with this plugin
+// activated
 function twitterWidgetInit() {
+  var widgetMarkup = '<a class="twitter-timeline" href="https://twitter.com/UCF" data-widget-id="702527884762681344">Tweets by @UCF</a>';
+
+  $socialSection
+    .find('#js-twitter-widget')
+    .html(widgetMarkup);
+
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 }
 
