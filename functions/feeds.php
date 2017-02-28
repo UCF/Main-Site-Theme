@@ -21,11 +21,11 @@ function get_article_image($article){
 /**
  * Fetches an external url's contents with a timeout applied to the request.
  **/
-function fetch_with_timeout( $url ) {
+function fetch_with_timeout( $url, $timeout=NULL ) {
 	$retval = false;
 
 	$args = array(
-		'timeout' => FEED_FETCH_TIMEOUT
+		'timeout' => $timeout ? $timeout : FEED_FETCH_TIMEOUT
 	);
 
 	$response = wp_safe_remote_get( $url, $args );
@@ -440,16 +440,26 @@ function get_events( $start=0, $limit=4, $url='' ) {
 	// Append /feed.json to the end of the url.
 	$url .= 'feed.json';
 
-	// Grab the feed
-	$raw_events = fetch_with_timeout( $url );
-	if ( $raw_events ) {
-		$events = json_decode( $raw_events, TRUE );
-		if ( is_array( $events ) ) {
-			$events = array_slice( $events, $start, $limit );
+	$transient_name = get_events_transient_name( $url );
+
+	$events = get_transient( $transient_name );
+
+	if ( false === $events ) {
+		// Grab the feed
+		$raw_events = fetch_with_timeout( $url, 5 );
+		if ( $raw_events ) {
+			$events = json_decode( $raw_events, TRUE );
+			if ( is_array( $events ) ) {
+				set_transient( $transient_name, $events, 300 );
+			}
 		}
-		return $events;
 	}
-	else { return null; }
+
+	if ( is_array( $events ) ) {
+		$events = array_slice( $events, $start, $limit );
+	}
+
+	return $events;
 }
 
 
@@ -472,6 +482,13 @@ function get_pegasus_issues( $start=0, $limit=5 ) {
 	else {
 		return false;
 	}
+}
+
+/**
+ * Gets the feed transient name.
+ **/
+function get_events_transient_name( $url ) {
+	return 'ucf_events_' . md5( $url );
 }
 
 
