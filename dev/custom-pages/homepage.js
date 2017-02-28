@@ -74,32 +74,41 @@ var statsCounter = function() {
 
 var socialLazyLoad = function() {
   if (($(window).scrollTop() >= offset.social) && (!scrollStop.social)) {
-    // TODO make this less sloppy somehow...
-
-    // Facebook
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : '637856803059940',
-        xfbml      : true,
-        version    : 'v2.8'
-      });
-    };
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-
-    // Twitter
-    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+    facebookWidgetInit();
+    twitterWidgetInit();
 
     scrollStop.social = true;
     $(document).off('scroll', socialLazyLoad);
   }
 };
+
+// The javascript provided by the Facebook widget to initialize it.
+// Included here instead of manually within the page markup so that we can
+// conditionally initialize it based on the user's scroll position.
+function facebookWidgetInit() {
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '637856803059940',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+}
+
+// The javascript provided by the Twitter widget to initialize it.
+// Included here instead of manually within the page markup so that we can
+// conditionally initialize it based on the user's scroll position.
+function twitterWidgetInit() {
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+}
 
 function initializeMatchHeight() {
   $statsItem = $('.stats-item-row .stats-item');
