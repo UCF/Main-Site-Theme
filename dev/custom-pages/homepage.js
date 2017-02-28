@@ -62,7 +62,7 @@ var socialLazyLoad = function() {
   }
 };
 
-// The javascript provided by the Facebook widget to initialize it.
+// The javascript and html provided by the Facebook widget to initialize it.
 // Included here instead of manually within the page markup so that we can
 // conditionally initialize it based on the user's scroll position.
 function facebookWidgetInit() {
@@ -89,7 +89,7 @@ function facebookWidgetInit() {
    }(document, 'script', 'facebook-jssdk'));
 }
 
-// The javascript provided by the Twitter widget to initialize it.
+// The javascript and html provided by the Twitter widget to initialize it.
 // NOTE: the WordPress Social Streams plugin already injects this script--
 // the script will not be dynamically loaded on environments with this plugin
 // activated
