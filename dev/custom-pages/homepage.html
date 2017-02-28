@@ -1,23 +1,5 @@
 <!-- Header contents -->
 
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '637856803059940',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-
 <div class="container">
 <h1 class="sr-only">University of Central Florida - UCF</h1><h2 class="sr-only">Orlando, FL</h2>
 <div class="pull-left"><span class="h1 header-title pull-left"><span class="hidden-sm hidden-xs">The next big thing is now.
@@ -206,11 +188,13 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="fb-page" data-href="https://www.facebook.com/ucf" data-tabs="timeline" data-width="500px" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false"><blockquote cite="https://www.facebook.com/ucf" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/ucf">University of Central Florida</a></blockquote></div>
+        <div id="js-facebook-widget">
+          <a href="https://www.facebook.com/ucf">University of Central Florida on Facebook</a>
+        </div>
       </div>
       <div class="col-md-6">
-        <div id="js-twitter-widget" class="twitter-widget-wrapper">
-          <a class="twitter-timeline"  href="https://twitter.com/UCF" data-widget-id="702527884762681344">Tweets by @UCF</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <div id="js-twitter-widget">
+          <a href="https://twitter.com/UCF">Tweets by @UCF</a>
         </div>
       </div>
     </div>
