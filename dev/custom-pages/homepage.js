@@ -4,26 +4,6 @@ var map,
   $socialSection,
   scrollStop;
 
-/**
- * Debouce method to pause logic until resize is complete
- */
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function () {
-    var context = this,
-        args = arguments;
-
-    var later = function () {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-};
-
 var init = function() {
   $statsSection = $('#stats-section');
   $socialSection = $('#social-section');
@@ -50,7 +30,7 @@ var init = function() {
 var setOffsets = function() {
   offset = {
     stats: $statsSection.offset().top - $(window).height(),
-    social: $socialSection.offset().top - $(window).height()
+    social: $socialSection.offset().top - $(window).height() - 100 // start loading just before it's scrolled to
   };
 };
 
