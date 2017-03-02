@@ -314,7 +314,7 @@
     }
 
     @media (min-width: $screen-md-min) {
-      width: 33.333%;
+      width: calc(100% / 3);
     }
 
     // Apply vertical borders per-breakpoint
@@ -544,7 +544,7 @@
 
         &:not(:last-child) {
           @media (min-width: $screen-sm-min) {
-            padding-right: 15px;
+            padding-right: 20px;
           }
         }
       }
@@ -742,7 +742,7 @@
     width: 50%;
 
     @media (min-width: $screen-sm-min) {
-      width: 33.333%;
+      width: calc(100% / 3); // more accurate repeating decimal percentage
     }
 
     @media (min-width: $screen-md-min) {
@@ -750,7 +750,7 @@
     }
 
     @media (min-width: 1400px) { // intentionally not using $screen-lg-min here
-      width: 16.667%;
+      width: calc(100% / 6); // more accurate repeating decimal percentage
     }
 
     &::before {
