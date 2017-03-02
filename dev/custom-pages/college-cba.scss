@@ -1,0 +1,103 @@
+@import '../media-template/colleges-base';
+
+
+// $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/03/college-cah-header-xs.jpg';
+$header-media-xs-url: '//placehold.it/767x400';
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+.page-media .page-media-header {
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+  }
+}
+
+
+#contentcol {
+
+  //
+  // BASE OVERRIDES
+  //
+
+  // Adjusted h1's on this page
+  h1,
+  .h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+    }
+  }
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  // MBA quote/ad
+  .aside-mba-cta {
+    .callout {
+      @media (min-width: $screen-sm-min) {
+        padding: 40px 0;
+      }
+    }
+  }
+
+  .mba-quote {
+    border-left: 0 solid transparent;
+    margin: 10px 0;
+    padding: 0;
+
+    &,
+    p {
+      color: $ucf-gold;
+      font-size: 9vw;
+      font-weight: 800;
+      line-height: 1.2;
+
+      @media (min-width: 480px) {
+        font-size: 7vw;
+        line-height: 1.1;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 48px;
+      }
+    }
+
+    p:last-child {
+      margin: 0;
+    }
+  }
+
+  .mba-cite {
+    font-size: 5vw;
+
+    &::before {
+      content: '- ';
+    }
+
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 480px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 26px;
+      display: inline-block;
+      margin-right: 30px;
+      vertical-align: middle;
+    }
+  }
+}

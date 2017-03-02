@@ -127,6 +127,18 @@
     }
   }
 
+  // Update .callout-dark button colors
+  .callout-dark {
+    .btn-ucf-gold {
+      &,
+      &:hover,
+      &:focus {
+        color: $black;
+        text-decoration: none;
+      }
+    }
+  }
+
 
   //
   // PAGE-SPECIFIC STYLES
@@ -310,36 +322,21 @@
     @media (min-width: $screen-sm-min) {
       float: left;
       padding: 30px;
-      width: 50%;
-    }
-
-    @media (min-width: $screen-md-min) {
       width: calc(100% / 3);
     }
 
     // Apply vertical borders per-breakpoint
-    &:nth-child(even) {
-      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-        border-left: 1px dotted $black;
-      }
-    }
-
     &:not(:nth-child(3n+1)) {
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $screen-sm-min) {
         border-left: 1px dotted $black;
       }
     }
 
     // Remove border-bottom from last row's blocks per-breakpoint.
     // Assumes each generated row contains an equal number of blocks.
-    &:nth-last-child(2) {
-      @media (min-width: $screen-sm-min) {
-        border-bottom: 0 solid transparent;
-      }
-    }
-
+    &:nth-last-child(2),
     &:nth-last-child(3) {
-      @media (min-width: $screen-md-min) {
+      @media (min-width: $screen-sm-min) {
         border-bottom: 0 solid transparent;
       }
     }
@@ -352,6 +349,12 @@
     line-height: 100px;
     margin: 0 auto 15px;
     text-align: center;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      font-size: 75px;
+      height: 75px;
+      line-height: 75px;
+    }
 
     img {
       height: 100%;
@@ -367,6 +370,10 @@
   .fact-details {
     line-height: 1.7;
     text-align: center;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      font-size: 14px;
+    }
   }
 
 
