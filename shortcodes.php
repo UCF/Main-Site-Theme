@@ -1351,12 +1351,25 @@ add_shortcode( 'college-program-list', 'sc_college_program_list' );
  * wrapped in a script tag
  **/
 function sc_academics_search_suggestions( $atts ) {
+	$atts = shortcode_atts(
+		array(
+			'colleges' => '',
+			'program_types' => '',
+			'keywords' => ''
+		),
+		$atts, 'sc_academics_search_suggestions'
+	);
+
+	$colleges      = !empty( $atts['colleges'] ) ? array_map( 'trim', explode( ',', $atts['colleges'] ) ) : null;
+	$program_types = !empty( $atts['program_types'] ) ? array_map( 'trim', explode( ',', $atts['program_types'] ) ) : null;
+	$keywords      = !empty( $atts['keywords'] ) ? array_map( 'trim', explode( ',', $atts['keywords'] ) ) : null;
+
 	global $post;
 	ob_start();
 ?>
 
 <script>
-	var searchSuggestions = <?php echo json_encode( get_academics_search_suggestions() ); ?>
+	var searchSuggestions = <?php echo json_encode( get_academics_search_suggestions( $colleges, $program_types, $keywords ) ); ?>
 </script>
 
 <?php
