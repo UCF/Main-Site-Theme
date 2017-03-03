@@ -1,6 +1,6 @@
 function init() {
   topDegreesListToggle();
-};
+}
 
 function topDegreesListToggle() {
   $('.top-majors-heading').on('click', function() {
@@ -12,7 +12,7 @@ function topDegreesListToggle() {
         .toggleClass('expanded');
     }
   });
-};
+}
 
 
 $(init);
