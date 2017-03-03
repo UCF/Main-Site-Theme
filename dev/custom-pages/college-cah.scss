@@ -1,0 +1,40 @@
+@import '../media-template/colleges-base';
+
+
+// $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/03/college-cah-header-xs.jpg';
+$header-media-xs-url: '//placehold.it/767x400';
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+.page-media .page-media-header {
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+  }
+}
+
+
+#contentcol {
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  .section-degrees {
+    .top-majors-heading {
+      @media (min-width: $screen-md-min) {
+        font-size: 14px;  // fudge it a bit to make the text fit on one line
+      }
+    }
+  }
+
+}

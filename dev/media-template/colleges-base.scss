@@ -1,0 +1,838 @@
+//
+// This file imports a base set of classes and template overrides for custom
+// college pages using the media header template.
+//
+// Please import this file at the top of your .scss file for any new college
+// page, so that we can reduce the number of repeated classes and styles in
+// each custom page we build.
+//
+
+
+@import 'media-template-base';
+
+
+.page-media {
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 10px;
+  }
+
+  .page-media-container {
+    height: 100%;
+  }
+
+  .page-media-header {
+    height: 400px; // NOTE: shorter dimensions than other media header template pages!
+
+    @media (max-width: $screen-xs-max) {
+      // Bg img should be set per-page manually
+      // background-image: url('#{$header-media-xs-url}') !important;
+      background-position: center center;
+      height: 80vw;
+      max-height: 400px;
+    }
+  }
+
+  // Header title is moved into the body copy on college pages due to the need
+  // for clipping between the header and main body sections (.page-media-header
+  // does not allow overflow)
+  .header-title-wrap {
+    margin-top: -35px;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) {
+      bottom: -35px;
+      left: 0;
+      margin-top: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .header-title {
+    @include archer(5);
+    background-color: rgba($ucf-gold, .8);
+    display: inline-block;
+    font-size: 28px;
+    line-height: 1.1;
+    margin: 0 auto;
+    padding: 12px;
+
+    @media (min-width: 480px) {
+      font-size: 6vw;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 48px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 60px;
+    }
+  }
+}
+
+
+#contentcol {
+
+  //
+  // BASE OVERRIDES
+  //
+
+  // Override fixed video height in theme css
+  .embed-responsive {
+    embed,
+    iframe,
+    object {
+      height: 100%;
+    }
+  }
+
+  // Bigger h1's on this page
+  h1,
+  .h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 42px;
+    }
+  }
+
+  // Smaller h4's on this page
+  h4,
+  .h4 {
+    font-size: 15px;
+  }
+
+  // Add more letter spacing to sans-serif headings on this page
+  .heading-underline,
+  .heading-sans-serif {
+    letter-spacing: .08em;
+  }
+
+  // Fatter callouts
+  .callout {
+    @media (min-width: $screen-sm-min) {
+      padding: 60px 0;
+    }
+  }
+
+  // Make all gold callout text black on this page
+  .callout-gold {
+    color: $black;
+
+    a {
+      color: $black;
+    }
+
+    .callout-aside-heading a {
+      color: $black;
+    }
+  }
+
+  // Update .callout-dark button colors
+  .callout-dark {
+    .btn-ucf-gold {
+      &,
+      &:hover,
+      &:focus {
+        color: $black;
+        text-decoration: none;
+      }
+    }
+  }
+
+
+  //
+  // PAGE-SPECIFIC STYLES
+  //
+
+  // Vertical hr's
+  .hr-vertical {
+    border-left: 1px solid;
+    display: block;
+    height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 1px;
+  }
+
+  // Hr color variants
+  .hr-white {
+    border-top-color: $white;
+  }
+
+  .hr-vertical-white {
+    border-left-color: $white;
+  }
+
+  // Highlight text
+  .highlight {
+    display: inline-block;
+    padding: .4em 1em;
+  }
+
+  .highlight-white {
+    background-color: $white;
+    color: $black;
+  }
+
+  .highlight-gold {
+    background-color: $ucf-gold;
+    color: $black;
+  }
+
+  // Condensed headings
+  .heading-condensed {
+    @include knockout();
+    line-height: .9;
+    text-transform: uppercase;
+  }
+
+  h1.heading-condensed,
+  .h1.heading-condensed {
+    font-size: 50px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 88px;
+    }
+  }
+
+  h2.heading-condensed,
+  .h2.heading-condensed {
+    font-size: 42px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 70px;
+    }
+  }
+
+  h3.heading-condensed,
+  .h3.heading-condensed {
+    font-size: 34px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 52px;
+    }
+  }
+
+  h4.heading-condensed,
+  .h4.heading-condensed {
+    font-size: 28px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 44px;
+    }
+  }
+
+  h5.heading-condensed,
+  .h5.heading-condensed {
+    font-size: 20px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 24px;
+    }
+  }
+
+  h6.heading-condensed,
+  .h6.heading-condensed {
+    font-size: 18px;
+  }
+
+  // Color utilities
+  .text-color-white {
+    color: $white;
+  }
+
+  .text-color-black {
+    color: $black;
+  }
+
+  // Font weight utilities
+  .text-heavy {
+    font-weight: 800;
+  }
+
+  // Display utilities
+  .inline {
+    display: inline;
+  }
+
+  // Description text (similar to .lead, but in sans-serif font)
+  .description {
+    font-size: 16px;
+    line-height: 1.7;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 18px;
+    }
+  }
+
+  // Gold buttons
+  .btn-ucf-gold {
+    border-color: transparent;
+    color: $black;
+    font-size: inherit;
+    font-weight: bold;
+    padding: .8em 1.2em;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover,
+    &:active,
+    &:focus {
+      border-bottom: 1px solid transparent;
+    }
+  }
+
+
+  //
+  // Intro sections
+  //
+  .intro-button-wrap {
+    text-align: center;
+
+    @media (min-width: $screen-md-min) {
+      text-align: left;
+    }
+  }
+
+
+  //
+  // Fact grid
+  //
+  .fact-blocks {
+    @include clearfix();
+
+    @media (max-width: $screen-xs-max) {
+      margin: auto;
+      max-width: 320px;
+      width: 75%;
+    }
+  }
+
+  .fact-block {
+    padding: 7vw 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px dotted $black;
+    }
+
+    @media (min-width: 480px) {
+      padding: 5vw 0;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      float: left;
+      padding: 30px;
+      width: calc(100% / 3);
+    }
+
+    // Apply vertical borders per-breakpoint
+    &:not(:nth-child(3n+1)) {
+      @media (min-width: $screen-sm-min) {
+        border-left: 1px dotted $black;
+      }
+    }
+
+    // Remove border-bottom from last row's blocks per-breakpoint.
+    // Assumes each generated row contains an equal number of blocks.
+    &:nth-last-child(2),
+    &:nth-last-child(3) {
+      @media (min-width: $screen-sm-min) {
+        border-bottom: 0 solid transparent;
+      }
+    }
+  }
+
+  .fact-icon {
+    font-size: 100px;
+    font-weight: 800;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 auto 15px;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      font-size: 75px;
+      height: 75px;
+      line-height: 75px;
+    }
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+
+    small,
+    .small {
+      font-size: 55px;
+    }
+  }
+
+  .fact-details {
+    line-height: 1.7;
+    text-align: center;
+
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+      font-size: 14px;
+    }
+  }
+
+
+  //
+  // Degree search field
+  //
+  .degree-search-box {
+    @include gotham(6);
+    background-color: transparent;
+    color: $black;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+
+    @media (min-width: $screen-sm-min) {
+      height: 90px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      height: 100px;
+    }
+
+    br {
+      display: none;
+    }
+
+    input {
+      @include gotham(4);
+      background: $white;
+      border: 0;
+      border-radius: 0;
+      border-right: 55px $ucf-gold solid;
+      color: $black;
+      font-size: 17px;
+      letter-spacing: .5px;
+      outline: 0;
+      padding: 13px 25px;
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+
+      &::placeholder {
+        color: $gray-darker;
+      }
+    }
+
+    .title {
+      font-size: 16px;
+      position: relative;
+      top: -20px;
+      transition: all .3s;
+    }
+
+    .twitter-typeahead {
+      position: absolute;
+      top: 5px;
+      width: 100%;
+
+      @media (max-width: $screen-sm-max) {
+        top: -1px;
+      }
+    }
+
+    .tt-menu.tt-open {
+      width: 100%;
+
+      .tt-dataset,
+      .tt-suggestion {
+        width: 100%;
+      }
+
+      .tt-cursor {
+        background: #e4c550;
+      }
+    }
+
+    .tt-suggestion {
+      background-color: rgba(255, 225, 113, 1);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: normal;
+      padding: 5px 10px;
+      width: 500px;
+
+      &:hover {
+        background-color: darken(rgb(255, 225, 113), 10%);
+      }
+
+      a,
+      a:link,
+      a:hover {
+        color: $black !important;
+        text-decoration: none !important;
+      }
+
+      hr {
+        border: 1px dashed $gray;
+        margin: 0;
+      }
+    }
+
+    .search-icon {
+      background-color: transparent;
+      border: 0;
+      display: block;
+      font-size: 33px;
+      height: 49px;
+      line-height: 44px;
+      position: absolute;
+      right: 0;
+      top: 1px;
+      width: 55px;
+      z-index: 2;
+
+      @media (min-width: $screen-md-min) {
+        height: 55px;
+        top: 5px;
+      }
+    }
+  }
+
+
+  //
+  // Degree search section
+  //
+  .section-degrees {
+    .callout {
+      @media (min-width: $screen-sm-min) {
+        font-size: 15px;
+        padding: 80px 0;
+      }
+
+      a {
+        font-weight: normal;
+        text-decoration: none;
+
+        &:hover {
+          color: $gray-lighter;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .browse-by-heading,
+    .browse-by-list {
+      @media (min-width: $screen-sm-min) {
+        display: inline-block;
+      }
+    }
+
+    .browse-by-heading {
+      @media (min-width: $screen-sm-min) {
+        margin-top: 0;
+        margin-right: 10px;
+      }
+    }
+
+    .browse-by-list {
+      @media (min-width: $screen-md-min) {
+        margin-bottom: 0;
+      }
+
+      li {
+        @media (min-width: $screen-sm-min) {
+          display: inline-block;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+
+        &:not(:last-child) {
+          @media (min-width: $screen-sm-min) {
+            padding-right: 20px;
+          }
+        }
+      }
+    }
+
+    .section-heading,
+    .top-majors-heading {
+      @media (min-width: $screen-sm-min) {
+        margin-top: 0;
+      }
+    }
+
+    .top-majors-heading {
+      background-color: $white;
+      color: $black;
+      display: inline-block;
+      padding: .4em 1em;
+      position: relative;
+
+      @media (max-width: $screen-sm-max) {
+        background: $black;
+        border: 1px solid $white;
+        color: $white;
+        padding: 15px 20px;
+        transition: background-color .1s;
+        width: 100%;
+      }
+
+      &::after {
+        @media (max-width: $screen-sm-max) {
+          content: '\F13A';
+          font-family: 'FontAwesome';
+          font-size: 23px;
+          position: absolute;
+          right: 15px;
+          top: 9px;
+        }
+      }
+
+      &:hover {
+        @media (max-width: $screen-sm-max) {
+          background: darken($white, 75%);
+          cursor: pointer;
+        }
+      }
+
+      &.expanded {
+        &::after {
+          @media (max-width: $screen-sm-max) {
+            content: '\F139';
+          }
+        }
+      }
+    }
+
+    .top-majors-content {
+      @media (max-width: $screen-sm-max) {
+        height: 0;
+        overflow: hidden;
+      }
+
+      &.expanded {
+        @media (max-width: $screen-sm-max) {
+          height: auto;
+          overflow: visible;
+        }
+      }
+    }
+
+    .top-majors-list {
+      &,
+      & li:last-child {
+        @media (min-width: $screen-sm-min) {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+  }
+
+
+  //
+  // News sections
+  //
+  .section-news {
+    @media (max-width: $screen-xs-max) {
+      margin-bottom: 30px;
+    }
+
+    .section-heading-wrap {
+      border-bottom: 1px solid $gray-lighter;
+      margin-bottom: 20px;
+      padding: 0 0 8px;
+      position: relative;
+    }
+
+    .section-heading {
+      margin-bottom: 0;
+    }
+
+    .section-subheading {
+      margin-top: 30px;
+
+      @media (min-width: $screen-sm-min) {
+        margin-top: 75px;
+      }
+    }
+
+    .read-more {
+      bottom: 8px;
+      position: absolute;
+      right: 0;
+
+      .fa {
+        margin-left: 6px;
+      }
+
+      a {
+        color: $gray;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: uppercase;
+
+        @media (min-width: $screen-sm-min) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+
+  //
+  // Profile sections
+  //
+  .profile-subtitle {
+    color: $black;
+    display: block;
+    font-style: italic;
+    letter-spacing: 0;
+    margin-top: 4px;
+    text-transform: none;
+  }
+
+
+  //
+  // Colleges nav grid
+  //
+  .section-colleges {
+    .callout {
+      padding: 6vw 0;
+
+      @media (min-width: $screen-sm-min) {
+        padding: 3vw 0;
+      }
+
+      @media (min-width: $screen-md-min) {
+        padding: 2.5vw 0;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        padding: 2vw 0;
+      }
+    }
+
+    .section-heading {
+      font-size: 7vw;
+      margin: 0;
+      text-align: center;
+
+      @media (min-width: 480px) {
+        font-size: 6vw;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 4vw;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 3.25vw;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        font-size: 2.75vw;
+      }
+    }
+  }
+
+  .college-blocks {
+    @include clearfix();
+  }
+
+  .college-block {
+    float: left;
+    position: relative;
+    width: 50%;
+
+    @media (min-width: $screen-sm-min) {
+      width: calc(100% / 3); // more accurate repeating decimal percentage
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: 25%;
+    }
+
+    @media (min-width: 1400px) { // intentionally not using $screen-lg-min here
+      width: calc(100% / 6); // more accurate repeating decimal percentage
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+
+    &:hover,
+    &:focus {
+      .college-block-img {
+        filter: none;
+      }
+
+      .college-block-text {
+        color: $black;
+      }
+    }
+  }
+
+  .college-block-img,
+  .college-block-link {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .college-block-img {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: grayscale(1) sepia(.35) contrast(.65);
+    transition: filter .3s;
+    z-index: 1;
+  }
+
+  .college-block-link {
+    display: block;
+    z-index: 2;
+  }
+
+  .college-block-text {
+    @include knockout();
+    bottom: 0;
+    color: $white;
+    display: block;
+    font-size: 7.25vw;
+    left: 0;
+    line-height: 1;
+    padding: 3vw;
+    position: absolute;
+    text-transform: uppercase;
+    transition: color .3s;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 4vw;
+      padding: 2vw;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 3vw;
+      padding: 1.5vw;
+    }
+
+    @media (min-width: 1400px) { // intentionally not using $screen-lg-min here
+      font-size: 2vw;
+    }
+  }
+
+}
+
+
+.site-footer {
+  // Fix 1px gap caused by empty container/row/col at the end of the article
+  margin-top: -1px;
+}
