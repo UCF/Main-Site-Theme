@@ -2416,18 +2416,44 @@ function get_degree_search_suggestions() {
  * Returns an array of degree titles, for use by the degree search
  * autocomplete field.
  **/
-function get_academics_search_suggestions() {
-	$suggestions = array();
+function get_academics_search_suggestions( $colleges=null, $program_types=null, $keywords=null ) {
+	$suggestions = $tax_query = array();
+
+	if ( $colleges ) {
+		$tax_query[] = array(
+			'taxonomy' => 'colleges',
+			'field'    => 'slug',
+			'terms'    => $colleges
+		);
+	}
+
+	if ( !$program_types ) {
+		$program_types = array(
+			'undergraduate-degree',
+			'accelerated-program',
+			'articulated-program',
+			'graduate-degree',
+			'certificate'
+		);
+	}
+	$tax_query[] = array(
+		'taxonomy' => 'program_types',
+		'field'    => 'slug',
+		'terms'    => $program_types
+	);
+
+	if ( $keywords ) {
+		$tax_query[] = array(
+			'taxonomy' => 'keywords',
+			'field'    => 'slug',
+			'terms'    => $keywords
+		);
+	}
+
 	$posts = get_posts( array (
 		'numberposts' => -1,
 		'post_type' => 'degree',
-		'tax_query' => array(
-			array(
-				'taxonomy' => 'program_types',
-				'field'    => 'slug',
-				'terms'    => array( 'undergraduate-degree', 'accelerated-program', 'articulated-program', 'graduate-degree', 'certificate' )
-			)
-		)
+		'tax_query' => $tax_query
 	) );
 
 	if ( $posts ) {
