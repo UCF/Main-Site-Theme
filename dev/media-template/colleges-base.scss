@@ -791,7 +791,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    filter: grayscale(1) sepia(.35) contrast(.65);
+    filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
     transition: filter .3s;
     z-index: 1;
   }
