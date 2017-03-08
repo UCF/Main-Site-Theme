@@ -87,11 +87,11 @@
     }
   }
 
-  // Bigger h1's on this page
+  // Modified h1's on this page
   h1,
   .h1 {
     @media (min-width: $screen-sm-min) {
-      font-size: 42px;
+      font-size: 38px;
     }
   }
 
@@ -136,6 +136,13 @@
         color: $black;
         text-decoration: none;
       }
+    }
+  }
+
+  // Wider icon links
+  .icon-link {
+    @media (min-width: $screen-sm-min) {
+      width: 32%;
     }
   }
 
@@ -279,18 +286,6 @@
     &:active,
     &:focus {
       border-bottom: 1px solid transparent;
-    }
-  }
-
-
-  //
-  // Intro sections
-  //
-  .intro-button-wrap {
-    text-align: center;
-
-    @media (min-width: $screen-md-min) {
-      text-align: left;
     }
   }
 
@@ -630,6 +625,12 @@
       }
     }
 
+    // Unranked-specific style overrides
+    ul.top-majors-list {
+      list-style-type: none;
+      padding-left: 15px;
+    }
+
   }
 
 
@@ -652,20 +653,15 @@
       margin-bottom: 0;
     }
 
-    .section-subheading {
-      margin-top: 30px;
-
-      @media (min-width: $screen-sm-min) {
-        margin-top: 75px;
-      }
-    }
-
     .read-more {
-      bottom: 8px;
-      position: absolute;
-      right: 0;
+      @media (min-width: $screen-md-min) {
+        bottom: 8px;
+        position: absolute;
+        right: 0;
+      }
 
       .fa {
+        color: $ucf-gold;
         margin-left: 6px;
       }
 
@@ -773,7 +769,7 @@
       }
 
       .college-block-text {
-        color: $black;
+        text-shadow: 0 0 10px rgba(0, 0, 0, .7);
       }
     }
   }
@@ -811,8 +807,9 @@
     line-height: 1;
     padding: 3vw;
     position: absolute;
+    text-shadow: 0 0 10px transparent;
     text-transform: uppercase;
-    transition: color .3s;
+    transition: text-shadow .3s;
 
     @media (min-width: $screen-sm-min) {
       font-size: 4vw;

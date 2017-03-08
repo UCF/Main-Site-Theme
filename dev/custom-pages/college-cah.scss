@@ -29,10 +29,11 @@ $header-media-xs-url: '//placehold.it/767x400';
   // PER-SECTION OVERRIDES
   //
 
-  .section-degrees {
-    .top-majors-heading {
-      @media (min-width: $screen-md-min) {
-        font-size: 14px;  // fudge it a bit to make the text fit on one line
+  .section-news {
+    .section-heading {
+      @media (min-width: $screen-sm-min) {
+        // Make the heading fit on one line
+        font-size: 34px;
       }
     }
   }
