@@ -3,6 +3,10 @@
 
 // $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/03/college-cah-header-xs.jpg';
 $header-media-xs-url: '//placehold.it/767x400';
+$intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-CAHmobile.jpg';
+$intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-CAH.jpg';
+$facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-767x1800-CAH.jpg';
+$facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-CAH.jpg';
 
 
 #header-menu {
@@ -29,6 +33,35 @@ $header-media-xs-url: '//placehold.it/767x400';
   // PER-SECTION OVERRIDES
   //
 
+  // Intro
+  .section-intro {
+    .callout {
+      background-image: url($intro-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($intro-bg-sm-url);
+      }
+    }
+  }
+
+  // Stats/Facts
+  .section-facts {
+    .callout {
+      background-image: url($facts-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($facts-bg-sm-url);
+      }
+    }
+  }
+
+  // News
   .section-news {
     .section-heading {
       @media (min-width: $screen-sm-min) {

@@ -1,8 +1,11 @@
 @import '../media-template/colleges-base';
 
 
-// $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/03/college-cah-header-xs.jpg';
 $header-media-xs-url: '//placehold.it/767x400';
+$intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-COBmobile.jpg';
+$intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-COB.jpg';
+$facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-767x1800-COB.jpg';
+$facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-COB.jpg';
 
 
 #header-menu {
@@ -40,6 +43,34 @@ $header-media-xs-url: '//placehold.it/767x400';
   //
   // PER-SECTION OVERRIDES
   //
+
+  // Intro
+  .section-intro {
+    .callout {
+      background-image: url($intro-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($intro-bg-sm-url);
+      }
+    }
+  }
+
+  // Stats/Facts
+  .section-facts {
+    .callout {
+      background-image: url($facts-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($facts-bg-sm-url);
+      }
+    }
+  }
 
   // MBA quote/ad
   .aside-mba-cta {
@@ -94,8 +125,8 @@ $header-media-xs-url: '//placehold.it/767x400';
     }
 
     @media (min-width: $screen-sm-min) {
-      font-size: 26px;
       display: inline-block;
+      font-size: 26px;
       vertical-align: middle;
     }
   }
