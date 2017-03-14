@@ -1,23 +1,12 @@
 @import '../media-template/colleges-base';
 
 
-$header-media-xs-url: '//placehold.it/767x400';
+$header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-HeaderMobile-767x400-COB.jpg';
 $intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-COBmobile.jpg';
 $intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-COB.jpg';
 $facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-767x1800-COB.jpg';
 $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-COB.jpg';
 
-
-#header-menu {
-  li:not(:last-child) a,
-  li:not(.last) a {
-    color: $white;
-
-    &:hover {
-      color: $ucf-gold;
-    }
-  }
-}
 
 .page-media .page-media-header {
   @media (max-width: $screen-xs-max) {
