@@ -431,7 +431,7 @@ function get_events( $start=0, $limit=4, $url='' ) {
 	// Append /upcoming/ to the end of the url, if it's not already present.
 	// Don't append to category or tag event lists.
 	if (
-		( substr( $url, '/category/' ) === false || substr( $url, '/tag/' ) === false )
+		( strpos( $url, '/category/' ) === false && strpos( $url, '/tag/' ) === false )
 		&& ( substr( $url, -9 ) !== 'upcoming/' )
 	) {
 		$url .= 'upcoming/';
