@@ -1,0 +1,75 @@
+@import '../media-template/colleges-base';
+
+
+// $header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-HeaderMobile-767x400-COS.jpg';
+$header-media-xs-url: '//placehold.it/767x400';
+$intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-mobile-COS.jpg';
+$intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-COS.jpg';
+$facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-Mobile-767x1800-COS.jpg';
+$facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-COS.jpg';
+
+
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+.page-media .page-media-header {
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+  }
+}
+
+
+#contentcol {
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  // Intro
+  .section-intro {
+    .callout {
+      background-image: url($intro-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($intro-bg-sm-url);
+      }
+    }
+  }
+
+  // Stats/Facts
+  .section-facts {
+    .callout {
+      background-image: url($facts-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($facts-bg-sm-url);
+      }
+    }
+  }
+
+  // News
+  // .section-news {
+  //   .section-heading {
+  //     @media (min-width: $screen-sm-min) {
+  //       // Make the heading fit on one line
+  //       font-size: 34px;
+  //     }
+  //   }
+  // }
+
+}
