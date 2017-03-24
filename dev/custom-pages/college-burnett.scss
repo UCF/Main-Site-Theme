@@ -1,0 +1,122 @@
+@import '../media-template/colleges-base';
+
+
+$header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Nav-Images-600x600-burnett-1.jpg';
+$intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-mobile-HONORS.jpg';
+$intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-HONORS.jpg';
+$facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-Mobile-767x1800-HONORS.jpg';
+$facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-HONORS.jpg';
+
+
+.page-media .page-media-header {
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+  }
+}
+
+
+#contentcol {
+
+  //
+  // BASE OVERRIDES
+  //
+
+  // Adjusted h1's on this page
+  h1,
+  .h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+    }
+  }
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  // Intro
+  .section-intro {
+    .callout {
+      background-image: url($intro-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($intro-bg-sm-url);
+      }
+    }
+  }
+
+  // Stats/Facts
+  .section-facts {
+    .callout {
+      background-image: url($facts-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($facts-bg-sm-url);
+      }
+    }
+  }
+
+  // MBA quote/ad
+  .aside-mba-cta {
+    .callout {
+      @media (min-width: $screen-sm-min) {
+        padding: 40px 0;
+      }
+    }
+  }
+
+  .mba-quote {
+    border-left: 0 solid transparent;
+    margin: 10px 0;
+    padding: 0;
+
+    &,
+    p {
+      color: $ucf-gold;
+      font-size: 9vw;
+      font-weight: 800;
+      line-height: 1.2;
+
+      @media (min-width: 480px) {
+        font-size: 7vw;
+        line-height: 1.1;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 48px;
+      }
+    }
+
+    p:last-child {
+      margin: 0;
+    }
+  }
+
+  .mba-cite {
+    font-size: 5vw;
+
+    &::before {
+      content: '- ';
+    }
+
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 480px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      display: inline-block;
+      font-size: 26px;
+      vertical-align: middle;
+    }
+  }
+}
