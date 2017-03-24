@@ -529,6 +529,8 @@ add_action( 'ucf_news_display_modern_title', 'mainsite_news_display_modern_title
 
 
 function mainsite_news_display_modern( $items, $title, $display_type ) {
+	if ( ! is_array( $items ) ) { $items = array( $items ); }
+
 	ob_start();
 ?>
 	<div class="ucf-news-items">
@@ -599,6 +601,8 @@ add_action( 'ucf_news_display_text_before', 'mainsite_news_display_text_before',
 
 if ( ! function_exists( 'ucf_news_display_text' ) ) {
 	function ucf_news_display_text( $items, $title, $display_type ) {
+		if ( ! is_array( $items ) ) { $items = array( $items ); }
+
 		ob_start();
 	?>
 		<div class="ucf-news-items">
