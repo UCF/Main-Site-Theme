@@ -559,7 +559,7 @@ function mainsite_news_display_modern( $items, $title, $display_type ) {
 					</h3>
 
 					<div class="ucf-news-item-excerpt">
-						<?php echo $item->excerpt->rendered; ?>
+						<?php echo wp_trim_words( $item->excerpt->rendered, 40 ); ?>
 					</div>
 				</div>
 			</a>
