@@ -17,10 +17,11 @@
 
 				<p id="subfooter" role="contentinfo" class="vcard">
 					<span class="adr">
+						<address>
 						<span class="street-address">4000 Central Florida Blvd. </span>
 						<span class="locality">Orlando</span>,
-						<span class="region">Florida</span>,
-						<span class="postal-code">32816</span> |
+						<span class="region">Florida</span>
+						<span class="postal-code">32816</span></address> |
 						<span class="tel"><a href="tel:4078232000">407.823.2000</a></span>
 					</span>
 					<br/>
