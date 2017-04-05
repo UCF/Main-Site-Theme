@@ -2,8 +2,6 @@
 
 
 $header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-HeaderMobile-767x400-COHPA.jpg';
-$intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-mobile-COHPA.jpg';
-$intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-COHPA.jpg';
 $facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-767x1800-COHPA.jpg';
 $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-UNDRGRAD.jpg';
 
@@ -21,6 +19,13 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
 .page-media .page-media-header {
   @media (max-width: $screen-xs-max) {
     background-image: url('#{$header-media-xs-url}') !important;
+  }
+
+  /* add shadow underneath heading navigation */
+  .page-media-container {
+    @media (min-width: $screen-sm-min) {
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.6) 115%);
+    }
   }
 }
 
@@ -43,20 +48,6 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
   // PER-SECTION OVERRIDES
   //
 
-  // Intro
-  .section-intro {
-    .callout {
-      background-image: url($intro-bg-xs-url);
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-
-      @media (min-width: $screen-sm-min) {
-        background-image: url($intro-bg-sm-url);
-      }
-    }
-  }
-
   // Stats/Facts
   .section-facts {
     .callout {
@@ -68,6 +59,19 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
       @media (min-width: $screen-sm-min) {
         background-image: url($facts-bg-sm-url);
       }
+    }
+
+    .fact-icon.fact-text-stacked {
+      font-size: 100px;
+
+      .small {
+        display: block;
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+    }
+    .fact-icon.fact-text-smaller {
+      font-size: 100px;
     }
   }
 

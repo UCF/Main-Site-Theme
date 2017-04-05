@@ -3,8 +3,7 @@
 
 // $header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-HeaderMobile-767x400-undergrad.jpg';
 $header-media-xs-url: '//placehold.it/767x400';
-$intro-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-mobile-UNDRGRD.jpg';
-$intro-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Intro-Section-BG-UNDRGRAD-flipped.jpg';
+
 $facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-Mobile-767x1800-UNDRGRAD.jpg';
 $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-UNDRGRAD.jpg';
 
@@ -33,20 +32,6 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
   //
   // PER-SECTION OVERRIDES
   //
-
-  // Intro
-  .section-intro {
-    .callout {
-      background-image: url($intro-bg-xs-url);
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-
-      @media (min-width: $screen-sm-min) {
-        background-image: url($intro-bg-sm-url);
-      }
-    }
-  }
 
   // Stats/Facts
   .section-facts {
