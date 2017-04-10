@@ -50,7 +50,17 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
     }
 
     .fact-icon.fact-text-stacked {
-      font-size: 100px;
+      // font-size: 100px;
+
+      @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        // font-size: 65px;
+        // height: 65px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 100px;
+        height: 120px;
+      }
 
       .small {
         display: block;

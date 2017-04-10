@@ -57,6 +57,10 @@ $gray: #ececec;
     @media (min-width: $screen-md-min) {
       font-size: 54px;
     }
+
+    &.header-text-left {
+      text-align: left !important;
+    }
   }
 
   .header-subtitle {
@@ -191,6 +195,25 @@ $gray: #ececec;
       font-size: 42px;
     }
   }
+
+  // .section-facts {
+
+  //   .text-inline {
+  //     display: inline-block;
+  //     vertical-align: middle;
+  //   }
+
+  //   h2.text-inline {
+  //     font-size: 20px;
+  //     margin: 0;
+  //   }
+
+  //   p.text-inline {
+  //     font-size: 20px;
+  //     margin: 0;
+  //     padding: 7px 0 0 20px;
+  //   }
+  // }
 
 
   //
@@ -508,6 +531,26 @@ $gray: #ececec;
     @media (min-width: $screen-sm-min) {
       padding-bottom: 30px;
     }
+
+    ol {
+      @include knockout();
+      color: $ucf-gold;
+      font-size: 1.35em;
+      font-weight: bold;
+      line-height: 1;
+      li {
+        padding-left: 0.75em;
+      }
+      li span {
+        @include gotham();
+        color: $black;
+        font-size: 16px;
+        font-weight: normal;
+        line-height: 1;
+      }
+    }
+
+
   }
 
   .section-video {
@@ -647,6 +690,11 @@ $gray: #ececec;
   }
   .btn-ucf-gold {
     font-size: 14px;
+
+    @media (max-width: $screen-sm-max) {
+      white-space: normal;
+      line-height: 1.5;
+    }
   }
 
   // National Prominence / Living Legacy | done
