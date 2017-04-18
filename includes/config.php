@@ -8,10 +8,20 @@ define( 'THEME_STATIC_URL', THEME_URL . '/static' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
 
 function __init__() {
+	add_theme_support( 'menus' );
+	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'title-tag' );
 
+	add_theme_support( 'custom-header', array(
+		'width'  => 1600,
+		'height' => 400
+	) );
+
+	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
+	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 }
 
-add_action( 'init', '__init__' );
+add_action( 'after_setup_theme', '__init__' );
 
 function enqueue_frontend_assets() {
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css' );
