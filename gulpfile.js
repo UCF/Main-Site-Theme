@@ -14,16 +14,20 @@ var config = {
   },
   dist: {
     css: './static/css',
-    js: './static/js'
+    js: './static/js',
+    fonts: './static/fonts'
   }
 };
 
 gulp.task('bower', function() {
   return bower()
     .pipe(gulp.dest(config.bowerPath))
-    .on('finish', function() {
+    .on('end', function() {
       gulp.src(config.bowerPath + '/Athena-Framework/dist/js/framework.min.js')
         .pipe(gulp.dest(config.dist.js));
+
+      gulp.src(config.bowerPath + '/font-awesome/fonts/**/*')
+       .pipe(gulp.dest(config.dist.fonts + '/font-awesome'));
     });
 });
 
@@ -50,4 +54,4 @@ gulp.task('watch', function() {
   gulp.watch(config.src.scss + '/**/*.scss', ['css']);
 });
 
-gulp.task('default', ['css'])
+gulp.task('default', ['bower', 'css'])
