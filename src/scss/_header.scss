@@ -1,0 +1,7 @@
+.header-image {
+    min-height: 700px;
+
+    @include media-breakpoint-up(xs) {
+        min-height: 400px;
+    }
+}

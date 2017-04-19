@@ -6,6 +6,7 @@
 define( 'THEME_URL', get_stylesheet_directory_uri() );
 define( 'THEME_STATIC_URL', THEME_URL . '/static' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
+define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
 
 function __init__() {
 	add_theme_support( 'menus' );
@@ -31,7 +32,8 @@ function enqueue_frontend_assets() {
 	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, true );
 	wp_enqueue_script( 'jquery' );
 
-	wp_enqueue_script( 'script', THEME_JS_URL . '/framework.min.js', array( 'jquery' ), null, true );
+	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', null, null, true );
+	wp_enqueue_script( 'script', THEME_JS_URL . '/framework.min.js', array( 'jquery', 'tether' ), null, true );
 }
 
-add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets', 99, 0 );
+add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
