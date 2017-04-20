@@ -1,7 +1,11 @@
 .header-image {
     min-height: 700px;
 
-    @include media-breakpoint-up(xs) {
+    @include media-breakpoint-up(sm) {
         min-height: 400px;
     }
+}
+
+.media-heading {
+  margin-top: 100px;
 }

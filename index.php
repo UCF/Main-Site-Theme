@@ -1,7 +1,6 @@
 <?php get_header(); ?>
 
 <?php while ( have_posts() ) : the_post(); ?>
-<h1>Hello World</h1>
 <article class="<?php echo $post->post_status; ?> post-list-item">
 	<h2>
 		<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
