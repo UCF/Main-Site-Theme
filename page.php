@@ -1,12 +1,6 @@
 <?php get_header(); the_post(); ?>
-<?php $images = get_header_images( $post ); ?>
 <header>
-	<div class="header-image jumbotron jumbotron-fluid media-background-container">
-		<img class="media-background object-fit-cover" src="<?php echo $images['header_image']; ?>" srcset="<?php echo $images['header_image']; ?> 1600w, <?php echo $images['header_image_xs']; ?> 767w" alt="">
-		<div class="container">
-			<h1><?php the_title(); ?></h1>
-		</div>
-	</div>
+	<?php echo get_header_image_markup( $post ); ?>
 </header>
 <article class="<?php echo $post->post_status; ?> post-list-item">
 	<div class="meta">
