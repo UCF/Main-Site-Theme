@@ -33,7 +33,10 @@ function enqueue_frontend_assets() {
 	wp_enqueue_script( 'jquery' );
 
 	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', null, null, true );
+	wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	wp_enqueue_script( 'script', THEME_JS_URL . '/framework.min.js', array( 'jquery', 'tether' ), null, true );
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
+
+
