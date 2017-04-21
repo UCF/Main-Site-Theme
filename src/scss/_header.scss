@@ -22,36 +22,29 @@
   @extend .navbar-inverse;
 
   .navbar-nav {
-    .nav-item {
-      background: transparent;
+    .nav-link {
+      color: $white;
+
+      &:hover {
+        background: rgba(0,0,0,.9);
+        color: $white
+      }
+    }
+
+    .nav-item:last-child {
+      background: $brand-primary;
+      
+      .nav-link {
+        color: $black;
+      }
 
       &:hover {
         background: $black;
 
         .nav-link {
-          color: $brand-primary;
+          color: $white;
         }
       }
-
-      &:last-child {
-        background: $brand-primary;
-        
-        .nav-link {
-          color: $black;
-        }
-
-        &:hover {
-          background: $black;
-
-          .nav-link {
-            color: $white;
-          }
-        }
-      }
-    }
-
-    .nav-link {
-      color: $white;
     }
   }
 }

@@ -22,7 +22,7 @@ function get_header_images( $post ) {
 function get_nav_markup() {
 	ob_start();
 ?>
-	<nav class="navbar navbar-toggleable-sm navbar-custom header-gradient py-4" role="navigation">
+	<nav class="navbar navbar-toggleable-md navbar-custom header-gradient py-4" role="navigation">
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
