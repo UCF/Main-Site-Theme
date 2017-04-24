@@ -6,6 +6,23 @@
   }
 }
 
+.header-title {
+  font-family: $font-family-slab-serif;
+  font-size: 70px;
+  font-weight: 500;
+  padding: 2px 15px 12px;
+  margin: 0;
+}
+
+.header-subtitle {
+  font-size: 22px;
+  padding: 8px 12px;
+
+  .wi {
+    color: $brand-primary;
+  }
+}
+
 .title-wrapper {
   min-height: 265px;
 }

@@ -65,9 +65,15 @@ function get_header_image_markup( $post ) {
 			<div class="container">
 				<div class="row align-items-center title-wrapper">
 					<div class="col">
-						<div class="d-inline-block bg-primary-faded p-4">
-							<h1><?php echo $title ?></h1>
+						<div class="d-inline-block bg-primary-faded">
+							<h1 class="header-title"><?php echo $title ?></h1>
 						</div>
+						<?php if ( $subtitle ) : ?>
+						<div class="clear"></div>
+						<div class="d-inline-block bg-inverse">
+							<div class="header-subtitle"><?php echo do_shortcode( $subtitle ); ?></div>
+						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
