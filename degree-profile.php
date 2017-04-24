@@ -72,6 +72,9 @@
 							<a data-ga-category="Degree Search" data-ga-action="Catalog Link Clicked" data-ga-label="<?php echo $post->post_title; ?>"
 								href="<?php echo $post->degree_pdf; ?>" target="_blank">course catalog</a>.
 					<?php endif; ?>
+					<?php if ( $the_content = the_content() ) : ?>
+						<?php echo $the_content; ?>
+					<?php endif; ?>
 				</div>
 				<?php echo display_degree_callout( $post->ID ); ?>
 				<div class="row">
