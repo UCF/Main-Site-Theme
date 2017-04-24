@@ -19,10 +19,10 @@ function get_header_images( $post ) {
 	return false;
 }
 
-function get_nav_markup() {
+function get_nav_markup( $image=true ) {
 	ob_start();
 ?>
-	<nav class="navbar navbar-toggleable-md navbar-custom header-gradient py-4" role="navigation">
+	<nav class="navbar navbar-toggleable-md<?php echo $image ? ' navbar-custom header-gradient' : ' navbar-light'; ?> py-4" role="navigation">
 		<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -50,6 +50,10 @@ function get_nav_markup() {
  **/
 function get_header_image_markup( $post ) {
 	ob_start();
+	$page_title = get_post_meta( $post->ID, 'page_header_title', true );
+	$title = ( ! empty( $page_title ) ) ? $page_title : $post->post_title;
+	$subtitle = get_post_meta( $post->ID, 'page_header_subtitle', true );
+
 	if ( $images = get_header_images( $post ) ) : 
 ?>
 	<div class="header-image media-background-container mb-0">
@@ -62,13 +66,13 @@ function get_header_image_markup( $post ) {
 				<div class="row align-items-center title-wrapper">
 					<div class="col">
 						<div class="d-inline-block bg-primary-faded p-4">
-							<h1><?php the_title(); ?></h1>
+							<h1><?php echo $title ?></h1>
 						</div>
 					</div>
 				</div>
 			</div>
 <?php else : ?>
-	<?php echo get_nav_markup(); ?>
+	<?php echo get_nav_markup( false ); ?>
 	<div class="container">
 		<h1><?php the_title(); ?></h1>
 	</div>
