@@ -65,7 +65,7 @@ function get_header_image_markup( $post ) {
 			<div class="container">
 				<div class="row align-items-center title-wrapper">
 					<div class="col">
-						<div class="d-inline-block bg-primary-faded">
+						<div class="d-inline-block bg-primary-t-3">
 							<h1 class="header-title"><?php echo $title ?></h1>
 						</div>
 						<?php if ( $subtitle ) : ?>

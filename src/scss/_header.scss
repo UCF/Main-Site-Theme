@@ -1,22 +1,39 @@
 .header-image {
   min-height: 700px;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     min-height: 400px;
   }
 }
 
 .header-title {
   font-family: $font-family-slab-serif;
-  font-size: 70px;
-  font-weight: 500;
+  font-size: 8.75vw;
+  font-weight: 400;
   margin: 0;
-  padding: 2px 15px 12px;
+  padding: .5rem .75rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 3.25rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 4.25rem;
+  }
 }
 
 .header-subtitle {
-  font-size: 22px;
-  padding: 8px 12px;
+  font-family: $font-family-slab-serif;
+  font-size: 4.25vw;
+  padding: .25rem .75rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 1.25rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.4rem;
+  }
 
   .wi {
     color: $brand-primary;
@@ -25,10 +42,6 @@
 
 .title-wrapper {
   min-height: 265px;
-}
-
-.media-heading {
-  margin-top: 100px;
 }
 
 .header-gradient {
