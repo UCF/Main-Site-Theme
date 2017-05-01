@@ -10,8 +10,8 @@
   font-family: $font-family-slab-serif;
   font-size: 70px;
   font-weight: 500;
-  padding: 2px 15px 12px;
   margin: 0;
+  padding: 2px 15px 12px;
 }
 
 .header-subtitle {
@@ -36,32 +36,29 @@
 }
 
 .navbar-custom {
-  @extend .navbar-inverse;
-
+  // Selector depth required to match Bootstrap/Athena selectors
+  // scss-lint:disable NestingDepth SelectorDepth
   .navbar-nav {
     .nav-link {
-      color: $white;
-
-      &:hover {
-        background: rgba(0,0,0,.9);
-        color: $white
+      &:hover,
+      &:active {
+        background-color: rgba(0, 0, 0, .9);
+        color: $white;
       }
     }
 
     .nav-item:last-child {
-      background: $brand-primary;
-      
       .nav-link {
+        background-color: $brand-primary;
         color: $black;
-      }
 
-      &:hover {
-        background: $black;
-
-        .nav-link {
+        &:hover,
+        &:active {
+          background-color: $black;
           color: $white;
         }
       }
     }
   }
+  // scss-lint:enable NestingDepth SelectorDepth
 }
