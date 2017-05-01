@@ -65,7 +65,10 @@ function buildCSS(src, filename, dest) {
   dest = dest || config.dist.cssPath;
 
   return gulp.src(src)
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({
+      includePaths: [config.src.scssPath, config.packagesPath]
+    })
+      .on('error', sass.logError))
     .pipe(cleanCSS())
     .pipe(autoprefixer({
       // Supported browsers added in package.json ("browserslist")
