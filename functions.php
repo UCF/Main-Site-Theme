@@ -41,31 +41,53 @@ function get_attachment_src_by_size( $id, $size ) {
 
 
 /**
+ * Returns an array of picture <source>'s, given a set of breakpoints
+ * and image sizes for an attachment.
+ **/
+function get_media_background_picture_sources( $attachment_id, $sizes ) {
+	$bg_images = array();
+	if ( is_array( $sizes ) ) {
+		foreach ( $sizes as $breakpoint => $img_size ) {
+			$bg_images[$breakpoint] = get_attachment_src_by_size( $attachment_id, $img_size );
+		}
+	}
+
+	// Remove duplicate image sizes, in case an old image isn't pre-cropped
+	$bg_images = array_unique( $bg_images );
+
+	return $bg_images;
+}
+
+
+/**
  * Section markup override
  **/
 function add_section_markup_before( $content, $section ) {
 
 	// Retrieve background image sizes
-	$bg_images = array(
-		'xs' => false,
-		'sm' => false,
-		'md' => false,
-		'lg' => false,
-		'xl' => false
-	);
+	$bg_images = array();
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 
 	if ( $bg_image_xs_id ) {
-		$bg_images['xs'] = get_attachment_src_by_size( $bg_image_xs_id, 'bg-img' );
+		$bg_images = array_merge(
+			$bg_images,
+			get_media_background_picture_sources( $bg_image_xs_id, array(
+				'xs' => 'bg-img'
+			) )
+		);
 	}
 	if ( $bg_image_sm_id ) {
-		$bg_images['sm'] = get_attachment_src_by_size( $bg_image_sm_id, 'bg-img-sm' );
-		$bg_images['md'] = get_attachment_src_by_size( $bg_image_sm_id, 'bg-img-md' );
-		$bg_images['lg'] = get_attachment_src_by_size( $bg_image_sm_id, 'bg-img-lg' );
-		$bg_images['xl'] = get_attachment_src_by_size( $bg_image_sm_id, 'bg-img-xl' );
+		$bg_images = array_merge(
+			$bg_images,
+			get_media_background_picture_sources( $bg_image_sm_id, array(
+				'sm' => 'bg-img-sm',
+				'md' => 'bg-img-md',
+				'lg' => 'bg-img-lg',
+				'xl' => 'bg-img-xl'
+			) )
+		);
 
-		$bg_images = array_unique( $bg_images ); // remove duplicate image sizes, in case an old image isn't pre-cropped
 		$bg_images['fallback'] = end( $bg_images ); // use the largest-available image as the fallback <img>
 		reset( $bg_images ); // reset pointer
 	}
