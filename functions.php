@@ -98,10 +98,10 @@ function add_section_markup_before( $content, $section ) {
 	// Define custom style attribute values for the section
 	$style_attrs = '';
 	if ( $bg_color_custom ) {
-		$style_attrs = 'background-color: '. $bg_color_custom .'; ';
+		$style_attrs .= 'background-color: '. $bg_color_custom .'; ';
 	}
 	if ( $text_color_custom ) {
-		$style_attrs = 'color: '. $text_color_custom .'; ';
+		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 
 	// Define classes for the <picture> element
