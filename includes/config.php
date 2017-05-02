@@ -19,11 +19,24 @@ function __init__() {
 		'height' => 400
 	) );
 
+	add_image_size( 'header-img', 575, 767, true );
+	add_image_size( 'header-img-sm', 767, 400, true );
+	add_image_size( 'header-img-md', 991, 400, true );
+	add_image_size( 'header-img-lg', 1199, 400, true );
+	add_image_size( 'header-img-xl', 1600, 400, true );
+	add_image_size( 'bg-img', 575, 767, false );
+	add_image_size( 'bg-img-sm', 767, 400, false );
+	add_image_size( 'bg-img-md', 991, 400, false );
+	add_image_size( 'bg-img-lg', 1199, 400, false );
+	add_image_size( 'bg-img-xl', 1600, 400, false );
+
+
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 }
 
 add_action( 'after_setup_theme', '__init__' );
+
 
 function enqueue_frontend_assets() {
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css' );
@@ -44,6 +57,7 @@ function enqueue_frontend_assets() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
+
 function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'webfonts',
@@ -54,6 +68,7 @@ function define_customizer_sections( $wp_customize ) {
 }
 
 add_action( 'customize_register', 'define_customizer_sections' );
+
 
 function define_customizer_fields( $wp_customize ) {
 	// Web Fonts
