@@ -73,34 +73,28 @@ function add_section_markup_before( $content, $section ) {
 	// Retrieve color classes/custom definitions
 	$bg_color = get_field( 'section_background_color', $section->ID );
 	$bg_color_custom = get_field( 'section_background_color_custom', $section->ID );
-	if ( $bg_color == 'custom' ) {
-		$bg_color = false;
-	}
 
 	$text_color = get_field( 'section_text_color', $section->ID );
 	$text_color_custom = get_field( 'section_text_color_custom', $section->ID );
-	if ( $text_color == 'custom' ) {
-		$text_color = false;
-	}
 
 	// Define classes for the section
 	$section_classes = '';
 	if ( $bg_images['fallback'] ) {
 		$section_classes .= ' media-background-container';
 	}
-	if ( $bg_color ) {
+	if ( $bg_color && !empty( $bg_color ) && $bg_color !== 'custom' ) {
 		$section_classes .= ' ' . $bg_color;
 	}
-	if ( $text_color ) {
+	if ( $text_color && !empty( $text_color ) && $text_color !== 'custom' ) {
 		$section_classes .= ' ' . $text_color;
 	}
 
 	// Define custom style attribute values for the section
 	$style_attrs = '';
-	if ( $bg_color_custom ) {
+	if ( $bg_color === 'custom' && $bg_color_custom ) {
 		$style_attrs .= 'background-color: '. $bg_color_custom .'; ';
 	}
-	if ( $text_color_custom ) {
+	if ( $text_color === 'custom' && $text_color_custom ) {
 		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 

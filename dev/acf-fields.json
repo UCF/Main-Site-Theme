@@ -505,7 +505,6 @@
                     "id": ""
                 },
                 "choices": {
-                    "---": "---",
                     "custom": "Custom color",
                     "bg-primary": "Gold (brand-primary)",
                     "bg-secondary": "White (brand-secondary)",
@@ -529,7 +528,7 @@
                 "default_value": [
                     
                 ],
-                "allow_null": 0,
+                "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
                 "ajax": 0,
@@ -573,7 +572,6 @@
                     "id": ""
                 },
                 "choices": {
-                    "---": "---",
                     "custom": "Custom color",
                     "text-primary": "Gold (brand-primary)",
                     "text-secondary": "Black (brand-secondary)",
@@ -606,7 +604,7 @@
                 "default_value": [
                     
                 ],
-                "allow_null": 0,
+                "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
                 "ajax": 0,
