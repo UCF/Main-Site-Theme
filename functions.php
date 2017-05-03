@@ -41,21 +41,99 @@ function get_attachment_src_by_size( $id, $size ) {
 
 
 /**
- * Returns an array of picture <source>'s, given a set of breakpoints
- * and image sizes for an attachment.
+ * Returns an array of src's for a media background <picture>'s <source>s by
+ * breakpoint.
+ *
+ * $img_size_prefix is expected to be a prefix for a set of registered image
+ * sizes, which has dimensions defined for each of Athena's responsive
+ * breakpoints.  For example, if given a prefix 'bg-img', it is expected that
+ * bg-img, bg-img-sm, bg-img-md, bg-img-lg, and bg-img-xl are valid registered
+ * image sizes.
+ *
+ * @param int $attachment_xs_id Attachment ID for the image to be used at the -xs breakpoint
+ * @param int $attachment_sm_id Attachment ID for the image to be used at the -sm breakpoint and up
+ * @param string $img_size_prefix Prefix for a set of image sizes
+ * @return array
  **/
-function get_media_background_picture_sources( $attachment_id, $sizes ) {
+function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id, $img_size_prefix ) {
 	$bg_images = array();
-	if ( is_array( $sizes ) ) {
-		foreach ( $sizes as $breakpoint => $img_size ) {
-			$bg_images[$breakpoint] = get_attachment_src_by_size( $attachment_id, $img_size );
-		}
+
+	if ( $attachment_sm_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array(
+				'xl' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-xl' ),
+				'lg' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-lg' ),
+				'md' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-md' ),
+				'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-sm' )
+			)
+		);
+
+		// Remove duplicate image sizes, in case an old image isn't pre-cropped
+		$bg_images = array_unique( $bg_images );
+
+		// Use the largest-available image as the fallback <img>
+		$bg_images['fallback'] = reset( $bg_images );
+	}
+	if ( $attachment_xs_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array( 'xs' => get_attachment_src_by_size( $attachment_xs_id, $img_size_prefix ) )
+		);
 	}
 
-	// Remove duplicate image sizes, in case an old image isn't pre-cropped
-	$bg_images = array_unique( $bg_images );
+	// Strip out false-y values (in case an attachment failed to return somewhere)
+	$bg_images = array_filter( $bg_images );
 
 	return $bg_images;
+}
+
+
+/**
+ * Returns markup for a media background, given an array of media background
+ * picture <source> src's from get_media_background_picture_srcs().
+ **/
+function get_media_background_picture( $srcs ) {
+	ob_start();
+
+	if ( isset( $srcs['fallback'] ) ) :
+?>
+	<?php
+	// Define classes for the <picture> element
+	$picture_classes = '';
+	if ( !isset( $srcs['xs'] ) ) {
+		// Hide the <picture> element at -xs breakpoint when no mobile image
+		// is available
+		$picture_classes .= 'hidden-xs-down ';
+	}
+	?>
+	<picture class="<?php echo $picture_classes; ?>">
+		<?php if ( isset( $srcs['xl'] ) ) : ?>
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
+		<?php endif; ?>
+
+		<?php if ( isset( $srcs['lg'] ) ) : ?>
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['lg']; ?>" media="(min-width: 992px)">
+		<?php endif; ?>
+
+		<?php if ( isset( $srcs['md'] ) ) : ?>
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['md']; ?>" media="(min-width: 768px)">
+		<?php endif; ?>
+
+		<?php if ( isset( $srcs['sm'] ) ) : ?>
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 575px)">
+		<?php endif; ?>
+
+		<?php if ( isset( $srcs['xs'] ) ) : ?>
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 574px)">
+		<?php endif; ?>
+
+		<img class="media-background object-fit-cover" src="<?php echo $srcs['fallback']; ?>" alt="">
+	</picture>
+<?php
+	endif;
+
+	return ob_get_clean();
 }
 
 
@@ -65,32 +143,9 @@ function get_media_background_picture_sources( $attachment_id, $sizes ) {
 function add_section_markup_before( $content, $section ) {
 
 	// Retrieve background image sizes
-	$bg_images = array();
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
-
-	if ( $bg_image_sm_id ) {
-		$bg_images = array_merge(
-			$bg_images,
-			get_media_background_picture_sources( $bg_image_sm_id, array(
-				'xl' => 'bg-img-xl',
-				'lg' => 'bg-img-lg',
-				'md' => 'bg-img-md',
-				'sm' => 'bg-img-sm'
-			) )
-		);
-
-		$bg_images['fallback'] = end( $bg_images ); // use the largest-available image as the fallback <img>
-		reset( $bg_images ); // reset pointer
-	}
-	if ( $bg_image_xs_id ) {
-		$bg_images = array_merge(
-			$bg_images,
-			get_media_background_picture_sources( $bg_image_xs_id, array(
-				'xs' => 'bg-img'
-			) )
-		);
-	}
+	$bg_images = get_media_background_picture_srcs( $bg_image_xs_id, $bg_image_sm_id, 'bg-img' );
 
 	// Retrieve color classes/custom definitions
 	$bg_color = get_field( 'section_background_color', $section->ID );
@@ -120,40 +175,10 @@ function add_section_markup_before( $content, $section ) {
 		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 
-	// Define classes for the <picture> element
-	$picture_classes = '';
-	if ( !$bg_images['xs'] ) {
-		// Hide the <picture> element at -xs breakpoint when no mobile image
-		// is available
-		$picture_classes .= 'hidden-xs-down ';
-	}
-
 	ob_start();
 ?>
 	<section class="jumbotron jumbotron-fluid <?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
-	<?php if ( $bg_images['fallback'] ) : ?>
-		<picture class="<?php echo $picture_classes; ?>">
-			<?php if ( $bg_images['xl'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xl']; ?>" media="(min-width: 1200px)">
-			<?php endif; ?>
-
-			<?php if ( $bg_images['lg'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['lg']; ?>" media="(min-width: 992px)">
-			<?php endif; ?>
-
-			<?php if ( $bg_images['md'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['md']; ?>" media="(min-width: 768px)">
-			<?php endif; ?>
-
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['sm']; ?>" media="(min-width: 575px)">
-
-			<?php if ( $bg_images['xs'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xs']; ?>" media="(max-width: 574px)">
-			<?php endif; ?>
-
-			<img class="media-background object-fit-cover" src="<?php echo $bg_images['fallback']; ?>" alt="">
-		</picture>
-	<?php endif; ?>
+	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
 }
