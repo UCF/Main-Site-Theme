@@ -323,7 +323,7 @@
         "fields": [
             {
                 "key": "field_58f7a778185ef",
-                "label": "Header Image",
+                "label": "Header Image (-sm+)",
                 "name": "page_header_image",
                 "type": "image",
                 "instructions": "",
@@ -334,7 +334,7 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
+                "return_format": "id",
                 "preview_size": "full",
                 "library": "all",
                 "min_width": "",
@@ -347,7 +347,7 @@
             },
             {
                 "key": "field_58f7a7b8185f0",
-                "label": "Header Image XS",
+                "label": "Header Image (-xs)",
                 "name": "page_header_image_xs",
                 "type": "image",
                 "instructions": "",
@@ -358,7 +358,7 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
+                "return_format": "id",
                 "preview_size": "thumbnail",
                 "library": "all",
                 "min_width": "",
