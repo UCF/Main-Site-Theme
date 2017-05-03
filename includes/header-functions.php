@@ -55,11 +55,61 @@ function get_header_image_markup( $post ) {
 	$subtitle = get_post_meta( $post->ID, 'page_header_subtitle', true );
 
 	if ( $images = get_header_images( $post ) ) :
+		$bg_images = array();
+
+		// Retrieve all header image sizes
+		if ( isset( $images['header_image'] ) ) {
+			$bg_images = array_merge(
+				$bg_images,
+				get_media_background_picture_sources( $images['header_image'], array(
+					'xl' => 'bg-img-xl',
+					'lg' => 'bg-img-lg',
+					'md' => 'bg-img-md',
+					'sm' => 'bg-img-sm'
+				) )
+			);
+
+			$bg_images['fallback'] = end( $bg_images ); // use the largest-available image as the fallback <img>
+			reset( $bg_images ); // reset pointer
+		}
+		if ( isset( $images['header_image_xs'] ) ) {
+			$bg_images = array_merge(
+				$bg_images,
+				get_media_background_picture_sources( $images['header_image_xs'], array(
+					'xs' => 'bg-img'
+				) )
+			);
+		}
+
+		// Define classes for the <picture> element
+		$picture_classes = '';
+		if ( !$bg_images['xs'] ) {
+			// Hide the <picture> element at -xs breakpoint when no mobile image
+			// is available
+			$picture_classes .= 'hidden-xs-down ';
+		}
 ?>
 	<div class="header-image media-background-container mb-0">
-		<picture>
-			<source srcset="<?php echo $images['header_image']; ?>" media="(min-width: 768px)">
-			<img class="media-background object-fit-cover" src="<?php echo $images['header_image_xs']; ?>" alt="">
+		<picture class="<?php echo $picture_classes; ?>">
+			<?php if ( $bg_images['xl'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xl']; ?>" media="(min-width: 1200px)">
+			<?php endif; ?>
+
+			<?php if ( $bg_images['lg'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['lg']; ?>" media="(min-width: 992px)">
+			<?php endif; ?>
+
+			<?php if ( $bg_images['md'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['md']; ?>" media="(min-width: 768px)">
+			<?php endif; ?>
+
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['sm']; ?>" media="(min-width: 575px)">
+
+			<?php if ( $bg_images['xs'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xs']; ?>" media="(max-width: 574px)">
+			<?php endif; ?>
+
+			<img class="media-background object-fit-cover" src="<?php echo $bg_images['fallback']; ?>" alt="">
 		</picture>
 		<?php echo get_nav_markup(); ?>
 			<div class="container">

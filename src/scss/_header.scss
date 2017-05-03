@@ -1,7 +1,7 @@
 .header-image {
-  min-height: 700px;
+  min-height: ($header-img-xs-width / $header-img-xs-height) * 100vw;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(sm) {
     min-height: 400px;
   }
 }
