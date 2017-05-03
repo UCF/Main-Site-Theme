@@ -1,8 +1,0 @@
-{
-  "name": "main-site-theme",
-  "private": true,
-  "devDependencies": {
-    "Athena-Framework": "git://github.com/UCF/Athena-Framework",
-    "font-awesome": "^4.7.0"
-  }
-}
