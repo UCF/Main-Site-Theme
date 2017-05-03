@@ -66,9 +66,23 @@ function add_section_markup_before( $content, $section ) {
 
 	// Retrieve background image sizes
 	$bg_images = array();
-	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
+	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
 
+	if ( $bg_image_sm_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			get_media_background_picture_sources( $bg_image_sm_id, array(
+				'xl' => 'bg-img-xl',
+				'lg' => 'bg-img-lg',
+				'md' => 'bg-img-md',
+				'sm' => 'bg-img-sm'
+			) )
+		);
+
+		$bg_images['fallback'] = end( $bg_images ); // use the largest-available image as the fallback <img>
+		reset( $bg_images ); // reset pointer
+	}
 	if ( $bg_image_xs_id ) {
 		$bg_images = array_merge(
 			$bg_images,
@@ -76,20 +90,6 @@ function add_section_markup_before( $content, $section ) {
 				'xs' => 'bg-img'
 			) )
 		);
-	}
-	if ( $bg_image_sm_id ) {
-		$bg_images = array_merge(
-			$bg_images,
-			get_media_background_picture_sources( $bg_image_sm_id, array(
-				'sm' => 'bg-img-sm',
-				'md' => 'bg-img-md',
-				'lg' => 'bg-img-lg',
-				'xl' => 'bg-img-xl'
-			) )
-		);
-
-		$bg_images['fallback'] = end( $bg_images ); // use the largest-available image as the fallback <img>
-		reset( $bg_images ); // reset pointer
 	}
 
 	// Retrieve color classes/custom definitions
@@ -133,19 +133,24 @@ function add_section_markup_before( $content, $section ) {
 	<section class="jumbotron jumbotron-fluid <?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
 	<?php if ( $bg_images['fallback'] ) : ?>
 		<picture class="<?php echo $picture_classes; ?>">
-			<?php if ( $bg_images['xs'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xs']; ?>" media="(max-width: 574px)">
-			<?php endif; ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['sm']; ?>" media="(min-width: 575px)">
-			<?php if ( $bg_images['md'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['md']; ?>" media="(min-width: 768px)">
-			<?php endif; ?>
-			<?php if ( $bg_images['lg'] ) : ?>
-			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['lg']; ?>" media="(min-width: 992px)">
-			<?php endif; ?>
 			<?php if ( $bg_images['xl'] ) : ?>
 			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xl']; ?>" media="(min-width: 1200px)">
 			<?php endif; ?>
+
+			<?php if ( $bg_images['lg'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['lg']; ?>" media="(min-width: 992px)">
+			<?php endif; ?>
+
+			<?php if ( $bg_images['md'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['md']; ?>" media="(min-width: 768px)">
+			<?php endif; ?>
+
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['sm']; ?>" media="(min-width: 575px)">
+
+			<?php if ( $bg_images['xs'] ) : ?>
+			<source class="media-background object-fit-cover" srcset="<?php echo $bg_images['xs']; ?>" media="(max-width: 574px)">
+			<?php endif; ?>
+
 			<img class="media-background object-fit-cover" src="<?php echo $bg_images['fallback']; ?>" alt="">
 		</picture>
 	<?php endif; ?>

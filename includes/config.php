@@ -24,11 +24,11 @@ function __init__() {
 	add_image_size( 'header-img-md', 991, 400, true );
 	add_image_size( 'header-img-lg', 1199, 400, true );
 	add_image_size( 'header-img-xl', 1600, 400, true );
-	add_image_size( 'bg-img', 575, 767, false );
-	add_image_size( 'bg-img-sm', 767, 400, false );
-	add_image_size( 'bg-img-md', 991, 400, false );
-	add_image_size( 'bg-img-lg', 1199, 400, false );
-	add_image_size( 'bg-img-xl', 1600, 400, false );
+	add_image_size( 'bg-img', 575, 2000, true );
+	add_image_size( 'bg-img-sm', 767, 2000, true );
+	add_image_size( 'bg-img-md', 991, 2000, true );
+	add_image_size( 'bg-img-lg', 1199, 2000, true );
+	add_image_size( 'bg-img-xl', 1600, 2000, true );
 
 
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
