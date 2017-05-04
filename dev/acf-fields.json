@@ -374,7 +374,7 @@
                 "label": "Header Video (MP4)",
                 "name": "page_header_mp4",
                 "type": "file",
-                "instructions": "If video is defined, will show video instead of image.",
+                "instructions": "If a MP4 video is defined, video will be used instead of an image in the header at the -sm breakpoint and higher.  Note that videos will never be displayed at the -xs breakpoint, so a fallback header image should always be provided when using video.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -393,7 +393,7 @@
                 "label": "Header Video (WebM)",
                 "name": "page_header_webm",
                 "type": "file",
-                "instructions": "",
+                "instructions": "Supplemental video format used by supported browsers for optimized performance.  Note that a MP4 must at least be provided for video to be displayed in the header.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -406,25 +406,6 @@
                 "min_size": "",
                 "max_size": "",
                 "mime_types": "webm"
-            },
-            {
-                "key": "field_58fe094228bcb",
-                "label": "Header Video (OGG)",
-                "name": "header_video_ogg",
-                "type": "file",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "array",
-                "library": "all",
-                "min_size": "",
-                "max_size": "",
-                "mime_types": "ogg"
             },
             {
                 "key": "field_58fe096728bcc",

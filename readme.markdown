@@ -24,6 +24,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 * WordPress Social Stream
 
 ### Recommended Plugins
+* Disable Real MIME Check\*\*
 * Page Links To
 * UCF Content Scheduler
 * Varnish Dependency Purger
@@ -31,6 +32,8 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 * WP Allowed Hosts
 * WP Shortcode Interface
 * Yoast SEO
+
+\*\* Install only if your instance of WordPress blocks uploads of WebM or other file formats to the media library that should normally be uploadable.  WordPress's internal MIME checks have been a little spotty since 4.7.1.  https://core.trac.wordpress.org/ticket/40175
 
 
 ## Configuration
