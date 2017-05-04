@@ -101,7 +101,6 @@ add_action( 'customize_register', 'define_customizer_fields' );
  **/
 function custom_mimes( $mimes ) {
 	$mimes['svg'] = 'image/svg+xml';
-	$mimes['webm'] = 'video/webm';
 
 	return $mimes;
 }
