@@ -4,3 +4,10 @@
   margin-right: 6px;
   width: 2px;
 }
+
+.media-background-video + .media-background-picture,
+.media-background-video + .media-background-img {
+  @include media-breakpoint-up(sm) {
+    display: none;
+  }
+}

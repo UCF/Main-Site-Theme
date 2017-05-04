@@ -95,4 +95,17 @@ function define_customizer_fields( $wp_customize ) {
 
 add_action( 'customize_register', 'define_customizer_fields' );
 
+
+/**
+ * Allow extra file types to be uploaded to the media library.
+ **/
+function custom_mimes( $mimes ) {
+	$mimes['svg'] = 'image/svg+xml';
+	$mimes['webm'] = 'video/webm';
+
+	return $mimes;
+}
+
+add_filter( 'upload_mimes', 'custom_mimes' );
+
 ?>

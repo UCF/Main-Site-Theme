@@ -90,8 +90,11 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 
 
 /**
- * Returns markup for a media background, given an array of media background
- * picture <source> src's from get_media_background_picture_srcs().
+ * Returns markup for a media background <picture>, given an array of media
+ * background picture <source> src's from get_media_background_picture_srcs().
+ *
+ * @param array $srcs Array of image urls that correspond to <source> src vals
+ * @return string
  **/
 function get_media_background_picture( $srcs ) {
 	ob_start();
@@ -100,11 +103,11 @@ function get_media_background_picture( $srcs ) {
 ?>
 	<?php
 	// Define classes for the <picture> element
-	$picture_classes = '';
+	$picture_classes = 'media-background-picture ';
 	if ( !isset( $srcs['xs'] ) ) {
 		// Hide the <picture> element at -xs breakpoint when no mobile image
 		// is available
-		$picture_classes .= 'hidden-xs-down ';
+		$picture_classes .= 'hidden-xs-down';
 	}
 	?>
 	<picture class="<?php echo $picture_classes; ?>">
@@ -133,6 +136,35 @@ function get_media_background_picture( $srcs ) {
 <?php
 	endif;
 
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns markup for a media background <video> element.
+ *
+ * $videos is expected to be an array whose keys correspond to supported
+ * <source> filetypes; e.g. $videos = array( 'webm' => '...', 'mp4' => '...' ).
+ * Values should be video urls.
+ *
+ * Note: we never display autoplay videos at the -xs breakpoint.
+ *
+ * @param array $videos Array of video urls that correspond to <source> src vals
+ * @return string
+ **/
+function get_media_background_video( $videos ) {
+	ob_start();
+?>
+	<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted>
+		<?php if ( isset( $videos['webm'] ) ) : ?>
+		<source src="<?php echo $videos['webm']; ?>" type="video/webm">
+		<?php endif; ?>
+
+		<?php if ( isset( $videos['mp4'] ) ) : ?>
+		<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
+		<?php endif; ?>
+	</video>
+<?php
 	return ob_get_clean();
 }
 

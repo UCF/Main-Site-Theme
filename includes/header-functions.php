@@ -19,6 +19,27 @@ function get_header_images( $post ) {
 	return false;
 }
 
+
+/**
+ * Gets the header video sources for pages.
+ **/
+function get_header_videos( $post ) {
+    $retval = array(
+        'webm' => get_field( 'page_header_webm', $post->ID ),
+        'mp4'  => get_field( 'page_header_mp4', $post->ID )
+    );
+
+    $retval = array_filter( $retval );
+
+    // MP4 must be available to display video successfully cross-browser
+	if ( isset( $retval['mp4'] ) ) {
+		return $retval;
+	}
+
+	return false;
+}
+
+
 function get_nav_markup( $image=true ) {
 	ob_start();
 ?>
@@ -45,21 +66,31 @@ function get_nav_markup( $image=true ) {
 	return ob_get_clean();
 }
 
+
 /**
  * Returns the markup for page headers.
  **/
-function get_header_image_markup( $post ) {
+function get_header_media_markup( $post ) {
 	$page_title = get_post_meta( $post->ID, 'page_header_title', true );
 	$title = ( ! empty( $page_title ) ) ? $page_title : $post->post_title;
 	$subtitle = get_post_meta( $post->ID, 'page_header_subtitle', true );
+	$videos = get_header_videos( $post );
+	$images = get_header_images( $post );
 
 	ob_start();
 
-	if ( $images = get_header_images( $post ) ) :
-		$bg_images = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+	if ( $images || $videos ) :
 ?>
-		<div class="header-image media-background-container mb-0">
-			<?php echo get_media_background_picture( $bg_images ); ?>
+		<div class="header-media media-background-container mb-0">
+			<?php
+			if ( $videos ) {
+				echo get_media_background_video( $videos );
+			}
+			if ( $images ) {
+				$bg_images = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+				echo get_media_background_picture( $bg_images );
+			}
+			?>
 			<?php echo get_nav_markup(); ?>
 			<div class="container">
 				<div class="row align-items-center title-wrapper">
@@ -86,9 +117,10 @@ function get_header_image_markup( $post ) {
 	return ob_get_clean();
 }
 
+
 function get_header_markup() {
 	global $post;
-	echo get_header_image_markup( $post );
+	echo get_header_media_markup( $post );
 }
 
 ?>
