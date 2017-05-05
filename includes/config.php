@@ -58,6 +58,17 @@ function enqueue_frontend_assets() {
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
 
+function add_id_to_ucfhb( $url ) {
+	if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
+      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+      return "$url' id='ucfhb-script";
+    }
+    return $url;
+}
+
+add_filter( 'clean_url', 'add_id_to_ucfhb', 10, 1 );
+
+
 function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'webfonts',
