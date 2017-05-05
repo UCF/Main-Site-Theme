@@ -42,12 +42,16 @@
     font-size: 1.25rem;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(xl) {
     font-size: 1.4rem;
   }
 
-  .wi {
-    color: $brand-primary;
+  .weather.theme-default {
+    color: $white;
+
+    .wi {
+      color: $brand-primary;
+    }
   }
 }
 
