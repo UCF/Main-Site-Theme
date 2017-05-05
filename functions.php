@@ -152,10 +152,10 @@ function get_media_background_picture( $srcs ) {
  * @param array $videos Array of video urls that correspond to <source> src vals
  * @return string
  **/
-function get_media_background_video( $videos ) {
+function get_media_background_video( $videos, $loop=false ) {
 	ob_start();
 ?>
-	<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted>
+	<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted <?php if ( $loop ) { ?>loop<?php } ?>>
 		<?php if ( isset( $videos['webm'] ) ) : ?>
 		<source src="<?php echo $videos['webm']; ?>" type="video/webm">
 		<?php endif; ?>

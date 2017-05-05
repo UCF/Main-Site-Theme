@@ -76,6 +76,7 @@ function get_header_media_markup( $post ) {
 	$subtitle = get_post_meta( $post->ID, 'page_header_subtitle', true );
 	$videos = get_header_videos( $post );
 	$images = get_header_images( $post );
+	$video_loop = get_field( 'page_header_video_loop', $post->ID );
 
 	ob_start();
 
@@ -84,7 +85,7 @@ function get_header_media_markup( $post ) {
 		<div class="header-media media-background-container mb-0">
 			<?php
 			if ( $videos ) {
-				echo get_media_background_video( $videos );
+				echo get_media_background_video( $videos, $video_loop );
 			}
 			if ( $images ) {
 				$bg_images = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
