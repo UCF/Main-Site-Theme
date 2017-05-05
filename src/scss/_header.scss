@@ -44,6 +44,8 @@
 
   @include media-breakpoint-up(xl) {
     font-size: 1.4rem;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
   }
 
   .weather.theme-default {
