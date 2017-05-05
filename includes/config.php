@@ -45,7 +45,7 @@ function enqueue_frontend_assets() {
 		wp_enqueue_style( 'webfont', $fontkey );
 	}
 
-	// Deregister jquery and re-register newer version.
+	// Deregister jquery and re-register newer version in the document head.
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, false );
 	wp_enqueue_script( 'jquery' );
@@ -58,9 +58,26 @@ function enqueue_frontend_assets() {
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
 
+/**
+ * Meta tags to insert into the document head.
+ **/
+function add_meta_tags() {
+?>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php
+}
+
+add_action( 'wp_head', 'add_meta_tags', 1 );
+
+
 function add_id_to_ucfhb( $url ) {
-	if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
-      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+	if (
+		( false !== strpos($url, 'bar/js/university-header.js' ) )
+		|| ( false !== strpos( $url, 'bar/js/university-header-full.js' ) )
+	) {
+      remove_filter( 'clean_url', 'add_id_to_ucfhb', 10, 3 );
       return "$url' id='ucfhb-script";
     }
     return $url;
