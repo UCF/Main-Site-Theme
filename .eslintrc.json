@@ -7,7 +7,7 @@
     "jquery": true
   },
   "globals": {
-    "objectFitPolyfill": true
+    "Cookies": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
