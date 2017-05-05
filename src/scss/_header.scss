@@ -1,7 +1,18 @@
 .header-media {
-  min-height: ($header-img-xs-width / $header-img-xs-height) * 100vw;
+  @include media-breakpoint-down(xs) {
+    min-height: ($header-img-xs-width / $header-img-xs-height) * 100vw;
+  }
+}
 
+.header-media-default {
   @include media-breakpoint-up(sm) {
+    min-height: 400px;
+  }
+}
+
+.header-media-fullscreen {
+  @include media-breakpoint-up(sm) {
+    height: calc(90vh - #{$ucf-header-height});
     min-height: 400px;
   }
 }

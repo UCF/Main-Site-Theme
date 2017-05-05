@@ -81,15 +81,26 @@ function get_header_media_markup( $post ) {
 	ob_start();
 
 	if ( $images || $videos ) :
+		$header_height = get_field( 'page_header_height', $post->ID );
 ?>
-		<div class="header-media media-background-container mb-0">
+		<div class="header-media <?php echo $header_height; ?> media-background-container mb-0">
 			<?php
 			if ( $videos ) {
 				echo get_media_background_video( $videos, $video_loop );
 			}
 			if ( $images ) {
-				$bg_images = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
-				echo get_media_background_picture( $bg_images );
+				$bg_image_srcs = array();
+				switch ( $header_height ) {
+					case 'header-media-fullscreen':
+						$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
+						$bg_image_srcs_sm = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
+						$bg_image_srcs = array_merge( $bg_image_src_xs, $bg_image_srcs_sm );
+						break;
+					default:
+						$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+						break;
+				}
+				echo get_media_background_picture( $bg_image_srcs );
 			}
 			?>
 			<?php echo get_nav_markup(); ?>
