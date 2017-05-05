@@ -83,7 +83,7 @@ function get_header_media_markup( $post ) {
 	if ( $images || $videos ) :
 		$header_height = get_field( 'page_header_height', $post->ID );
 ?>
-		<div class="header-media <?php echo $header_height; ?> media-background-container mb-0">
+		<div class="header-media <?php echo $header_height; ?> media-background-container mb-0 d-flex flex-column">
 			<?php
 			if ( $videos ) {
 				echo get_media_background_video( $videos, $video_loop );
@@ -104,8 +104,8 @@ function get_header_media_markup( $post ) {
 			}
 			?>
 			<?php echo get_nav_markup(); ?>
-			<div class="container">
-				<div class="row align-items-center title-wrapper">
+			<div class="container header-container">
+				<div class="row h-75 align-items-center">
 					<div class="col">
 						<div class="d-inline-block bg-primary-t-1">
 							<h1 class="header-title"><?php echo $title ?></h1>
