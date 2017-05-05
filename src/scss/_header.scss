@@ -73,7 +73,9 @@
   // Selector depth required to match Bootstrap/Athena selectors
   // scss-lint:disable NestingDepth SelectorDepth
   .navbar-nav {
-    margin-right: 0;
+    @include media-breakpoint-up(md) {
+      margin-right: 0;
+    }
 
     .nav-link {
       &:hover,
@@ -84,7 +86,9 @@
     }
 
     .nav-item:last-child {
-      margin-right: -$grid-gutter-width-base / 2;
+      @include media-breakpoint-up(md) {
+        margin-right: -$grid-gutter-width-base / 2;
+      }
 
       .nav-link {
         background-color: $brand-primary;
