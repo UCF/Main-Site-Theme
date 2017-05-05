@@ -19,7 +19,7 @@ function __init__() {
 		'height' => 400
 	) );
 
-	add_image_size( 'header-img', 575, 767, true );
+	add_image_size( 'header-img', 575, 575, true );
 	add_image_size( 'header-img-sm', 767, 400, true );
 	add_image_size( 'header-img-md', 991, 400, true );
 	add_image_size( 'header-img-lg', 1199, 400, true );

@@ -124,11 +124,11 @@ function get_media_background_picture( $srcs ) {
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['sm'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 575px)">
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 576px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['xs'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 574px)">
+		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 575px)">
 		<?php endif; ?>
 
 		<img class="media-background object-fit-cover" src="<?php echo $srcs['fallback']; ?>" alt="">

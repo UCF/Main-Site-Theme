@@ -8,7 +8,7 @@
 
 .header-media {
   @include media-breakpoint-down(xs) {
-    min-height: ($header-img-xs-width / $header-img-xs-height) * 100vw;
+    min-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
   }
 }
 
