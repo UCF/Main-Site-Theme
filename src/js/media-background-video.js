@@ -64,8 +64,7 @@
     // Set the autoplay cookie if it hasn't been set yet
     if (typeof Cookies.get('ucfedu-autoplay-bg-videos') === 'undefined') {
       Cookies.set('ucfedu-autoplay-bg-videos', '1', {
-        expires: 365,
-        domain: 'localhost'
+        expires: 365
       });
     }
 
