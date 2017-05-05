@@ -19,11 +19,24 @@ function __init__() {
 		'height' => 400
 	) );
 
+	add_image_size( 'header-img', 575, 767, true );
+	add_image_size( 'header-img-sm', 767, 400, true );
+	add_image_size( 'header-img-md', 991, 400, true );
+	add_image_size( 'header-img-lg', 1199, 400, true );
+	add_image_size( 'header-img-xl', 1600, 400, true );
+	add_image_size( 'bg-img', 575, 2000, true );
+	add_image_size( 'bg-img-sm', 767, 2000, true );
+	add_image_size( 'bg-img-md', 991, 2000, true );
+	add_image_size( 'bg-img-lg', 1199, 2000, true );
+	add_image_size( 'bg-img-xl', 1600, 2000, true );
+
+
 	register_nav_menu( 'header-menu', __( 'Header Menu' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu' ) );
 }
 
 add_action( 'after_setup_theme', '__init__' );
+
 
 function enqueue_frontend_assets() {
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css' );
@@ -34,7 +47,7 @@ function enqueue_frontend_assets() {
 
 	// Deregister jquery and re-register newer version.
 	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, true );
+	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, false );
 	wp_enqueue_script( 'jquery' );
 
 	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', null, null, true );
@@ -43,6 +56,18 @@ function enqueue_frontend_assets() {
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
+
+
+function add_id_to_ucfhb( $url ) {
+	if ( (false !== strpos($url, 'bar/js/university-header.js')) || (false !== strpos($url, 'bar/js/university-header-full.js')) ) {
+      remove_filter('clean_url', 'add_id_to_ucfhb', 10, 3);
+      return "$url' id='ucfhb-script";
+    }
+    return $url;
+}
+
+add_filter( 'clean_url', 'add_id_to_ucfhb', 10, 1 );
+
 
 function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
@@ -54,6 +79,7 @@ function define_customizer_sections( $wp_customize ) {
 }
 
 add_action( 'customize_register', 'define_customizer_sections' );
+
 
 function define_customizer_fields( $wp_customize ) {
 	// Web Fonts
@@ -79,5 +105,17 @@ function define_customizer_fields( $wp_customize ) {
 }
 
 add_action( 'customize_register', 'define_customizer_fields' );
+
+
+/**
+ * Allow extra file types to be uploaded to the media library.
+ **/
+function custom_mimes( $mimes ) {
+	$mimes['svg'] = 'image/svg+xml';
+
+	return $mimes;
+}
+
+add_filter( 'upload_mimes', 'custom_mimes' );
 
 ?>
