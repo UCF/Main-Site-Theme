@@ -7,10 +7,10 @@
  * Gets the header image for pages.
  **/
 function get_header_images( $post ) {
-    $retval = array(
-        'header_image'    => get_field( 'page_header_image', $post->ID ),
-        'header_image_xs' => get_field( 'page_header_image_xs', $post->ID )
-    );
+	$retval = array(
+		'header_image'    => get_field( 'page_header_image', $post->ID ),
+		'header_image_xs' => get_field( 'page_header_image_xs', $post->ID )
+	);
 
 	if ( $retval['header_image'] ) {
 		return $retval;
@@ -24,14 +24,14 @@ function get_header_images( $post ) {
  * Gets the header video sources for pages.
  **/
 function get_header_videos( $post ) {
-    $retval = array(
-        'webm' => get_field( 'page_header_webm', $post->ID ),
-        'mp4'  => get_field( 'page_header_mp4', $post->ID )
-    );
+	$retval = array(
+		'webm' => get_field( 'page_header_webm', $post->ID ),
+		'mp4'  => get_field( 'page_header_mp4', $post->ID )
+	);
 
-    $retval = array_filter( $retval );
+	$retval = array_filter( $retval );
 
-    // MP4 must be available to display video successfully cross-browser
+	// MP4 must be available to display video successfully cross-browser
 	if ( isset( $retval['mp4'] ) ) {
 		return $retval;
 	}
