@@ -104,18 +104,20 @@ function get_header_media_markup( $post ) {
 			}
 			?>
 			<?php echo get_nav_markup(); ?>
-			<div class="container header-container">
-				<div class="row h-75 align-items-center">
-					<div class="col">
-						<div class="d-inline-block bg-primary-t-1">
-							<h1 class="header-title"><?php echo $title ?></h1>
+			<div class="header-content">
+				<div class="header-content-flexfix">
+					<div class="header-content-inner d-flex h-75 align-items-center">
+						<div class="container">
+							<div class="d-inline-block bg-primary-t-1">
+								<h1 class="header-title"><?php echo $title ?></h1>
+							</div>
+							<?php if ( $subtitle ) : ?>
+							<div class="clearfix"></div>
+							<div class="d-inline-block bg-inverse">
+								<div class="header-subtitle"><?php echo do_shortcode( $subtitle ); ?></div>
+							</div>
+							<?php endif; ?>
 						</div>
-						<?php if ( $subtitle ) : ?>
-						<div class="clearfix"></div>
-						<div class="d-inline-block bg-inverse">
-							<div class="header-subtitle"><?php echo do_shortcode( $subtitle ); ?></div>
-						</div>
-						<?php endif; ?>
 					</div>
 				</div>
 			</div>
