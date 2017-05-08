@@ -148,8 +148,8 @@
                     "id": ""
                 },
                 "collapsed": "",
-                "min": "",
-                "max": "",
+                "min": 0,
+                "max": 0,
                 "layout": "table",
                 "button_label": "Add Contact",
                 "sub_fields": [
@@ -208,7 +208,10 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 0
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_58fa440d8a362",
@@ -266,7 +269,10 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 0
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_58fa445e8a365",
@@ -316,10 +322,10 @@
         "title": "Page Header Fields",
         "fields": [
             {
-                "key": "field_58f7a778185ef",
-                "label": "Header Image",
-                "name": "page_header_image",
-                "type": "image",
+                "key": "field_590ca423f6654",
+                "label": "Header Content",
+                "name": "",
+                "type": "tab",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -328,97 +334,8 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "full",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg"
-            },
-            {
-                "key": "field_58f7a7b8185f0",
-                "label": "Header Image XS",
-                "name": "page_header_image_xs",
-                "type": "image",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "url",
-                "preview_size": "thumbnail",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg"
-            },
-            {
-                "key": "field_58fe08bf28bc9",
-                "label": "Header Video (MP4)",
-                "name": "page_header_mp4",
-                "type": "file",
-                "instructions": "If video is defined, will show video instead of image.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "url",
-                "library": "all",
-                "min_size": "",
-                "max_size": "",
-                "mime_types": "mp4"
-            },
-            {
-                "key": "field_58fe08ff28bca",
-                "label": "Header Video (WebM)",
-                "name": "page_header_webm",
-                "type": "file",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "url",
-                "library": "all",
-                "min_size": "",
-                "max_size": "",
-                "mime_types": "webm"
-            },
-            {
-                "key": "field_58fe094228bcb",
-                "label": "Header Video (OGG)",
-                "name": "header_video_ogg",
-                "type": "file",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "array",
-                "library": "all",
-                "min_size": "",
-                "max_size": "",
-                "mime_types": "ogg"
+                "placement": "top",
+                "endpoint": 0
             },
             {
                 "key": "field_58fe096728bcc",
@@ -461,6 +378,183 @@
                 "maxlength": "",
                 "readonly": 0,
                 "disabled": 0
+            },
+            {
+                "key": "field_590ca453f6655",
+                "label": "Header Size",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_590ca47bf6656",
+                "label": "Header Height (sm+)",
+                "name": "page_header_height",
+                "type": "radio",
+                "instructions": "Height of the page header at the -sm breakpoint and above.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "header-media-default": "Default (400px)",
+                    "header-media-fullscreen": "Fullscreen"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "save_other_choice": 0,
+                "default_value": "header-media-default",
+                "layout": "vertical",
+                "return_format": "value"
+            },
+            {
+                "key": "field_590ca625f6657",
+                "label": "Header Images",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_58f7a778185ef",
+                "label": "Header Image (-sm+)",
+                "name": "page_header_image",
+                "type": "image",
+                "instructions": "Header image to display at the -sm breakpoint and up.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "preview_size": "header-img-sm",
+                "library": "all",
+                "min_width": 1200,
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "png,jpg,jpeg"
+            },
+            {
+                "key": "field_58f7a7b8185f0",
+                "label": "Header Image (-xs)",
+                "name": "page_header_image_xs",
+                "type": "image",
+                "instructions": "Header image to display at the -xs breakpoint.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "id",
+                "preview_size": "header-img",
+                "library": "all",
+                "min_width": 575,
+                "min_height": 575,
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "png,jpg,jpeg"
+            },
+            {
+                "key": "field_590ca64ef6659",
+                "label": "Header Video",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_58fe08bf28bc9",
+                "label": "Header Video (MP4)",
+                "name": "page_header_mp4",
+                "type": "file",
+                "instructions": "If a MP4 video is defined, video will be used instead of an image in the header at the -sm breakpoint and higher.  Note that videos will never be displayed at the -xs breakpoint, so a fallback header image should always be provided when using video.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": "mp4"
+            },
+            {
+                "key": "field_58fe08ff28bca",
+                "label": "Header Video (WebM)",
+                "name": "page_header_webm",
+                "type": "file",
+                "instructions": "Supplemental video format used by supported browsers for optimized performance.  Note that a MP4 must at least be provided for video to be displayed in the header.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "library": "all",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": "webm"
+            },
+            {
+                "key": "field_590c84c7a1360",
+                "label": "Header Video Loop",
+                "name": "page_header_video_loop",
+                "type": "true_false",
+                "instructions": "If checked, and a header video is available, the header video will loop indefinitely.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Loop video indefinitely",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             }
         ],
         "location": [
@@ -489,8 +583,8 @@
                 "key": "field_58f8d03d1abb3",
                 "label": "Background Color",
                 "name": "section_background_color",
-                "type": "color_picker",
-                "instructions": "Select the background color of the section",
+                "type": "select",
+                "instructions": "Select the background color of the section.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -498,14 +592,142 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "#FFFFFF"
+                "choices": {
+                    "custom": "Custom color",
+                    "bg-primary": "Gold (brand-primary)",
+                    "bg-secondary": "White (brand-secondary)",
+                    "bg-inverse": "Black (brand-inverse)",
+                    "bg-default": "Gray (brand-default)",
+                    "bg-primary-darkest": "Gold Darkest (brand-primary-darkest)",
+                    "bg-primary-darker": "Gold Darker (brand-primary-darker)",
+                    "bg-primary-lighter": "Gold Lighter (brand-primary-lighter)",
+                    "bg-primary-lightest": "Gold Lightest (brand-primary-lightest)",
+                    "bg-metallic-darkest": "Metallic Gold Darkest (brand-metallic-darkest)",
+                    "bg-metallic-darker": "Metallic Gold Darker (brand-metallic-darker)",
+                    "bg-metallic": "Metallic Gold (brand-metallic)",
+                    "bg-metallic-lighter": "Metallic Gold Lighter (brand-metallic-lighter)",
+                    "bg-metallic-lightest": "Metallic Gold Lightest (brand-metallic-lightest)",
+                    "bg-complementary": "Blue (brand-complementary)",
+                    "bg-success": "Green (brand-success)",
+                    "bg-info": "Light Blue (brand-info)",
+                    "bg-warning": "Orange (brand-warning)",
+                    "bg-danger": "Red (brand-danger)"
+                },
+                "default_value": [
+                    
+                ],
+                "allow_null": 1,
+                "multiple": 0,
+                "ui": 1,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            },
+            {
+                "key": "field_59088a54aa936",
+                "label": "Custom Background Color",
+                "name": "section_background_color_custom",
+                "type": "color_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_58f8d03d1abb3",
+                            "operator": "==",
+                            "value": "custom"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": ""
+            },
+            {
+                "key": "field_59089420aa937",
+                "label": "Text Color",
+                "name": "section_text_color",
+                "type": "select",
+                "instructions": "Override the default text color within the section.\r\n\r\nNote that if you picked a predefined color in the Background Color field, an accessible text color will already be applied.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "custom": "Custom color",
+                    "text-primary": "Gold (brand-primary)",
+                    "text-secondary": "Black (brand-secondary)",
+                    "text-inverse": "White (brand-inverse)",
+                    "text-default": "Gray (brand-default)",
+                    "text-primary-aw": "Gold AW (brand-primary, against-white accessible)",
+                    "text-secondary-aw": "Black AW (brand-secondary, against-white accessible)",
+                    "text-inverse-aw": "White AW (brand-inverse, against-white accessible)",
+                    "text-default-aw": "Gray AW (brand-default, against-white accessible)",
+                    "text-primary-darkest": "Gold Darkest (brand-primary-darkest)",
+                    "text-primary-darker": "Gold Darker (brand-primary-darker)",
+                    "text-primary-lighter": "Gold Lighter (brand-primary-lighter)",
+                    "text-primary-lightest": "Gold Lightest (brand-primary-lightest)",
+                    "text-metallic-darkest": "Metallic Gold Darkest (brand-metallic-darkest)",
+                    "text-metallic-darker": "Metallic Gold Darker (brand-metallic-darker)",
+                    "text-metallic": "Metallic Gold (brand-metallic)",
+                    "text-metallic-lighter": "Metallic Gold Lighter (brand-metallic-lighter)",
+                    "text-metallic-lightest": "Metallic Gold Lightest (brand-metallic-lightest)",
+                    "text-complementary": "Blue (brand-complementary)",
+                    "text-success": "Green (brand-success)",
+                    "text-info": "Light Blue (brand-info)",
+                    "text-warning": "Orange (brand-warning)",
+                    "text-danger": "Red (brand-danger)",
+                    "text-complementary-aw": "Blue AW (brand-complementary, against-white accessible)",
+                    "text-success-aw": "Green AW (brand-success, against-white accessible)",
+                    "text-info-aw": "Light Blue AW (brand-info, against-white accessible)",
+                    "text-warning-aw": "Orange AW (brand-warning, against-white accessible)",
+                    "text-danger-aw": "Red AW (brand-danger, against-white accessible)"
+                },
+                "default_value": [
+                    
+                ],
+                "allow_null": 1,
+                "multiple": 0,
+                "ui": 1,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            },
+            {
+                "key": "field_59089624aa938",
+                "label": "Custom Text Color",
+                "name": "section_text_color_custom",
+                "type": "color_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59089420aa937",
+                            "operator": "==",
+                            "value": "custom"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": ""
             },
             {
                 "key": "field_58f8d0611abb4",
-                "label": "Background Image",
+                "label": "Background Image (-sm+)",
                 "name": "section_background_image",
                 "type": "image",
-                "instructions": "The background image to display behind the section",
+                "instructions": "The background image to display behind the section at the -sm breakpoint and up (576px+ wide).",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -513,23 +735,23 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "full",
+                "return_format": "id",
+                "preview_size": "bg-img-sm",
                 "library": "all",
-                "min_width": "",
+                "min_width": 767,
                 "min_height": "",
                 "min_size": "",
-                "max_width": "",
+                "max_width": 1600,
                 "max_height": "",
                 "max_size": "",
                 "mime_types": ""
             },
             {
                 "key": "field_58f8d08b1abb5",
-                "label": "Background Image XS",
+                "label": "Background Image (-xs)",
                 "name": "section_background_image_xs",
                 "type": "image",
-                "instructions": "",
+                "instructions": "The background image to display behind the section at the -xs breakpoint (<=575px wide).  This image is only displayed when a -sm background image has also been selected.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -537,10 +759,10 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "full",
+                "return_format": "id",
+                "preview_size": "bg-img",
                 "library": "all",
-                "min_width": "",
+                "min_width": 575,
                 "min_height": "",
                 "min_size": "",
                 "max_width": "",
@@ -550,8 +772,8 @@
             },
             {
                 "key": "field_58f8d09f1abb6",
-                "label": "Add Content Conatiner",
-                "name": "section_add_content_conatiner",
+                "label": "Add Content Container",
+                "name": "section_add_content_container",
                 "type": "true_false",
                 "instructions": "If checked, the content will be wrapped in a container.",
                 "required": 0,
@@ -562,7 +784,10 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 1
+                "default_value": 1,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             }
         ],
         "location": [

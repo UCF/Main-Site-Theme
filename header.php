@@ -3,7 +3,7 @@
 	<head>
 		<?php wp_head(); ?>
 	</head>
-	<body ontouchstart>
+	<body ontouchstart <?php body_class(); ?>>
 		<header>
 			<?php echo get_header_markup(); ?>
 		</header>

@@ -7,7 +7,8 @@
     "jquery": true
   },
   "globals": {
-    "objectFitPolyfill": true
+    "Cookies": true,
+    "UCFEDU": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
