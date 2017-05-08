@@ -1,8 +1,26 @@
-.header-container {
+.header-content {
   flex: 1 1 auto;
+  position: relative;
+}
 
-  @include media-breakpoint-down(xs) {
-    width: 100%;
+.header-content-flexfix {
+  // Workaround for Chrome + Safari bug, where a flex child's contents can't
+  // have a percentage-based height when the parent is set with
+  // flex-direction:column and flex-grow:1
+  //
+  // http://stackoverflow.com/a/33644245
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.header-content-inner {
+  .container {
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+    }
   }
 }
 
