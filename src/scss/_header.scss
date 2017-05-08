@@ -48,6 +48,7 @@
   font-family: $font-family-slab-serif;
   font-size: 8.75vw;
   font-weight: 400;
+  line-height: 1;
   margin: 0;
   padding: .5rem .75rem;
 
@@ -57,6 +58,8 @@
 
   @include media-breakpoint-up(xl) {
     font-size: 4.25rem;
+    padding-bottom: .75rem;
+    padding-top: .75rem;
   }
 }
 
