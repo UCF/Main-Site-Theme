@@ -229,7 +229,12 @@ else {
 			$args = array(
 				'post_type' => $post_data['post_type'],
 				'posts_per_page' => 1,
-				'meta_query' => array(),
+				'meta_query' => array(
+					array(
+						'key'   => 'degree_id',
+						'value' => $post_meta['degree_id']
+					)
+				),
 				'tax_query' => array(
 					array(
 						'taxonomy' => 'program_types',
@@ -238,13 +243,6 @@ else {
 					),
 				),
 			);
-
-			if ( $post_meta['degree_id'] !== null ) {
-				$args['meta_query'][] = array(
-					'key'   => 'degree_id',
-					'value' => $post_meta['degree_id']
-				);
-			}
 
 			if ( $post_meta['degree_type_id'] ) {
 				$args['meta_query'][] = array(
