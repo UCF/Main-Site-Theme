@@ -226,29 +226,34 @@ else {
 
 			// Attempt to fetch an existing post to compare against.
 			// Check against post type, degree_id, type_id, and program_type.
-			$existing_post = get_posts(
-				array(
-					'post_type' => $post_data['post_type'],
-					'posts_per_page' => 1,
-					'meta_query' => array(
-						array(
-							'key' => 'degree_id',
-							'value' => $post_meta['degree_id'],
-						),
-						array(
-							'key' => 'degree_type_id',
-							'value' => $post_meta['degree_type_id'],
-						),
+			$args = array(
+				'post_type' => $post_data['post_type'],
+				'posts_per_page' => 1,
+				'meta_query' => array(),
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'program_types',
+						'field' => 'slug',
+						'terms' => sanitize_title($post_terms['program_types']),
 					),
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'program_types',
-							'field' => 'slug',
-							'terms' => sanitize_title($post_terms['program_types']),
-						),
-					),
-				)
+				),
 			);
+
+			if ( $post_meta['degree_id'] !== null ) {
+				$args['meta_query'][] = array(
+					'key'   => 'degree_id',
+					'value' => $post_meta['degree_id']
+				);
+			}
+
+			if ( $post_meta['degree_type_id'] ) {
+				$args['meta_query'][] = array(
+					'key'   => 'degree_type_id',
+					'value' => $post_meta['degree_type_id']
+				);
+			}
+
+			$existing_post = get_posts( $args );
 			$existing_post = empty($existing_post) ? false : $existing_post[0]; // Get 1st array value
 
 			// Check for existing content; if it exists, update the post and remove the post ID
