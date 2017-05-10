@@ -17,6 +17,8 @@ else {
 	$ucatalog_data = query_undergraduate_catalog();
 
 	if ($results) {
+		$new_posts = array();
+
 		/**
 		 * Grab all existing Degree Program posts.  Store IDs in an array ($existing_posts_array).
 		 *
@@ -182,7 +184,7 @@ else {
 			$program = array(
 				'post_data' => array(
 					'post_title' 	=> $program->name,
-					'post_status' 	=> 'publish',
+					'post_status' 	=> 'draft',
 					'post_date' 	=> date('Y-m-d H:i:s'),
 					'post_author' 	=> 1,
 					'post_type' 	=> 'degree',
@@ -224,29 +226,32 @@ else {
 
 			// Attempt to fetch an existing post to compare against.
 			// Check against post type, degree_id, type_id, and program_type.
-			$existing_post = get_posts(
-				array(
-					'post_type' => $post_data['post_type'],
-					'posts_per_page' => 1,
-					'meta_query' => array(
-						array(
-							'key' => 'degree_id',
-							'value' => $post_meta['degree_id'],
-						),
-						array(
-							'key' => 'degree_type_id',
-							'value' => $post_meta['degree_type_id'],
-						),
+			$args = array(
+				'post_type' => $post_data['post_type'],
+				'posts_per_page' => 1,
+				'meta_query' => array(
+					array(
+						'key'   => 'degree_id',
+						'value' => $post_meta['degree_id']
+					)
+				),
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'program_types',
+						'field' => 'slug',
+						'terms' => sanitize_title($post_terms['program_types']),
 					),
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'program_types',
-							'field' => 'slug',
-							'terms' => sanitize_title($post_terms['program_types']),
-						),
-					),
-				)
+				),
 			);
+
+			if ( $post_meta['degree_type_id'] ) {
+				$args['meta_query'][] = array(
+					'key'   => 'degree_type_id',
+					'value' => $post_meta['degree_type_id']
+				);
+			}
+
+			$existing_post = get_posts( $args );
 			$existing_post = empty($existing_post) ? false : $existing_post[0]; // Get 1st array value
 
 			// Check for existing content; if it exists, update the post and remove the post ID
@@ -255,6 +260,7 @@ else {
 			if ($existing_post !== false) {
 				$post_id = $existing_post->ID;
 				$post_data['ID'] = $post_id;
+				$post_data['post_status'] = $existing_post->post_status;
 				wp_update_post($post_data);
 				unset($existing_posts_array[$post_data['ID']]);
 
@@ -263,8 +269,9 @@ else {
 			}
 			else {
 				$post_id = wp_insert_post($post['post_data']);
+				$new_posts[] = $post_id;
 
-				print 'Saved new post '.$post_data['post_title'].'.<br>';
+				print 'Saved new post '.$post_data['post_title'].' as a draft.<br>';
 				$count++;
 			}
 			// Create/update meta field values.
@@ -343,6 +350,16 @@ else {
 			print 'Post '.$post_title.' with ID '.$post_id.' was deleted.<br>';
 		}
 		print '<br>Deleted '.count($existing_posts_array).' existing posts.';
+
+		/**
+		 * Actually publish each new degree post, now that removeable degree posts have been
+		 * deleted (prevents new posts from having number-appended slugs, if their degree names
+		 * match an old deleted post).
+		 **/
+		foreach ( $new_posts as $post_id ) {
+			$published_post_id = wp_update_post( array( 'ID' => $post_id, 'post_status' => 'publish' ) );
+		}
+		print '<br>Published '. count( $new_posts ) .' new posts.';
 
 		print '<br><br><strong>Finished running degree import.</strong>  Make sure to check the newly imported degree data, including program type, college terms, and departments, look okay.';
 	}
