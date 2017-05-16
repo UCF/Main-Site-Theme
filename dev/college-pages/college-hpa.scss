@@ -59,7 +59,22 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
         background-image: url($facts-bg-sm-url);
       }
     }
-  }
+    .fact-icon.fact-text-stacked {
+      font-size: 95px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 65px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 100px;
+      }
+      .small {
+        display: block;
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+    }
 
   // MBA quote/ad
   .aside-mba-cta {

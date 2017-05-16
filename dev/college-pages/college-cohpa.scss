@@ -1,7 +1,6 @@
 @import '../media-template/colleges-base';
 
 
-$header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-HeaderMobile-767x400-COHPA.jpg';
 $facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-767x1800-COHPA.jpg';
 $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-UNDRGRAD.jpg';
 
@@ -62,16 +61,31 @@ $facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-
     }
 
     .fact-icon.fact-text-stacked {
-      font-size: 100px;
+      font-size: 95px;
 
+      @media (min-width: $screen-sm-min) {
+        font-size: 65px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 100px;
+      }
       .small {
         display: block;
         font-size: 22px;
         text-transform: uppercase;
       }
     }
-    .fact-icon.fact-text-smaller {
-      font-size: 100px;
+    .fact-icon.fact-text {
+      font-size: 115px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 75px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 100px;
+      }
     }
   }
 
