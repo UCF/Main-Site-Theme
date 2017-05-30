@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-			<?php 
+			
 		</div>
 	</div>
 </div>
