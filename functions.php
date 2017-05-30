@@ -2,6 +2,7 @@
 include_once 'includes/config.php';
 include_once 'includes/wp-bs-navwalker.php';
 include_once 'includes/header-functions.php';
+include_once 'includes/utilities.php';
 
 /**
  * Enqueues assets for a particular page
