@@ -20,6 +20,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 * UCF Rest Menus
 * UCF Section
 * UCF Spotlight
+* UCF Tuition and Fees
 * UCF Weather Shortcode
 * WordPress Social Stream
 

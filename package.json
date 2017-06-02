@@ -1,7 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "athena-framework": "github:UCF/Athena-Framework",
+    "ucf-athena-framework": "1.0.0-alpha.2",
     "babel": "^6.23.0",
     "babel-eslint": "^7.2.1",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
