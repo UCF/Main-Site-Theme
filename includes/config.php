@@ -94,6 +94,13 @@ add_filter( 'clean_url', 'add_id_to_ucfhb', 10, 1 );
 
 function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees',
+		array(
+			'title' => 'Degrees'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'webfonts',
 		array(
 			'title' => 'Web Fonts'
@@ -105,6 +112,69 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 
 function define_customizer_fields( $wp_customize ) {
+	// Degrees
+	$wp_customize->add_setting(
+		'degrees_undergraduate_application',
+		array(
+			'default' => 'https://apply.ucf.edu/application/'
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_undergraduate_application',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Application URL',
+			'description' => 'The url of the online undergraduate application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_graduate_application',
+		array(
+			'default' => 'https://application.graduate.ucf.edu/#/'
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_graduate_application',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Application URL',
+			'description' => 'The url of the online graudate application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'tuition_value_message'
+	);
+
+	$wp_customize->add_control(
+		'tuition_value_message',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Tuition Value Message',
+			'description' => 'The message displayed above the tuition per credit hour on degree pages.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'tuition_disclaimer'
+	);
+
+	$wp_customize->add_control(
+		'tuition_disclaimer',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Tuition Value Message',
+			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
 	// Web Fonts
 	$wp_customize->add_setting(
 		'cloud_typography_key',

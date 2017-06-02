@@ -26,16 +26,44 @@
 					<?php endif; ?>
 				</dl>
 			</div>
-			<div class="content">
-				<?php if ( $post->post_content ) : ?>
+			<div class="content mb-4">
 				<?php the_content(); ?>
-				<?php else : ?>
-					<p> No degree description </p>
-				<?php endif; ?>
+				<?php echo apply_filters( 'the_content', $post_meta['degree_description'] ); ?>
+			</div>
+			<div class="row">
+			<?php if ( isset( $post_meta['degree_pdf'] ) ) : ?>
+				<div class="col-sm-6">
+					<a class="degree-promo mb-4 mb-sm-0" href="<?php echo $post_meta['degree_pdf']; ?>">
+						<span class="degree-promo-icon fa fa-file-pdf-o w-20"></span>
+						<span class="degree-promo-text">
+							Download Catalog PDF
+						</span>
+					</a>
+				</div>
+			<?php endif; ?>
+			<?php if ( isset( $post_meta['degree_website'] ) ) : ?>
+				<div class="col-sm-6">
+					<a class="degree-promo" href="<?php echo $post_meta['degree_website']; ?>">
+						<span class="degree-promo-icon fa fa-external-link-square w-20"></span>
+						<span class="degree-promo-text">
+							Visit Program Website
+						</span>
+					</a>
+				</div>
+			<?php endif; ?>
 			</div>
 		</div>
 		<div class="col-md-4">
-			
+		<?php if ( isset( $post_meta['degree_hours'] ) ) : ?>
+			<div class="degree-hours my-4">
+				<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> total credit hours</p>
+			</div>
+		<?php endif; ?>
+		<?php echo get_degree_apply_button( $post_meta ); ?>
+		<a class="btn btn-lg btn-block bg-primary mb-4">
+			<span class="fa fa-map-marker"></span> Visit UCF
+		</a>
+		<?php echo get_degree_tuition_markup( $post_meta ); ?>
 		</div>
 	</div>
 </div>
