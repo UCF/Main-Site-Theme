@@ -1,0 +1,59 @@
+.degree-title-wrap {
+  box-sizing: border-box;
+  display: table;
+  font-size: 17px;
+  margin-bottom: 0;
+  padding: 15px;
+  width: 100%;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+
+  @include media-breakpoint-up( xs ) {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-down( xs ) {
+    padding: 2px 0;
+  }
+}
+
+.degree-title {
+  border: 0 solid transparent;
+  box-sizing: border-box;
+  color: #08c;
+  display: table-cell;
+  margin-bottom: 5px;
+  padding-right: 20px;
+  vertical-align: middle;
+  width: 85%;
+
+  @include media-breakpoint-down( xs ) {
+    font-size: 15px;
+    line-height: 1.1;
+    margin-bottom: 4px;
+    width: 79%;
+  }
+
+  .degree-program-type {
+    display: block;
+    margin-top: 6px;
+    width: 100%;
+  }
+}
+
+.degree-credits-count {
+  color: #888;
+  font-size: 11.5px;
+  font-weight: normal;
+  line-height: 1.1;
+
+  @include media-breakpoint-down(xs) {
+    display: block;
+    float: left;
+    width: 100%;
+  }
+}
