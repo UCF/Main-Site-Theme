@@ -1,0 +1,130 @@
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/variables';
+@import '../../src/components/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins';
+@import '../../src/scss/variables';
+@import '../../src/scss/mixins';
+
+#contentcol {
+  .college-blocks {
+    overflow: auto;
+    background: #ffcc00;
+  }
+
+  .college-block {
+    width: 50%;
+    float: left;
+    overflow: hidden;
+    position: relative;
+
+    @media (min-width: $screen-sm-min) {
+      width: calc(100%/3);
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: calc(100%/4);
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: calc(100%/5);
+    }
+
+    .college-block-img {
+      width: 100%;
+      transition: -webkit-filter .3s;
+      transition: filter .3s;
+      transition: filter .3s, -webkit-filter .3s;
+      z-index: 1;
+
+      -webkit-filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
+      filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
+    }
+
+    .college-block-text {
+      font-family: "Knockout 49 A","Knockout 49 B",Georgia,serif;
+      font-style: normal;
+      font-weight: 400;
+      bottom: 0;
+      color: $white;
+      display: block;
+      font-size: 7.25vw;
+      left: 0;
+      line-height: 1;
+      padding: 3vw;
+      position: absolute;
+      text-shadow: 0 0 10px transparent;
+      text-transform: uppercase;
+      transition: text-shadow .3s;
+      text-shadow: 0 0 10px rgba(0,0,0,.7);
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 4vw;
+        padding: 2vw;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 3vw;
+        padding: 1.5vw;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        font-size: 2vw;
+        padding: 1.5vw;
+      }
+    }
+  }
+
+  .college-block:hover .college-block-img {
+    -webkit-filter: none;
+    filter: none;
+  }
+
+  .college-block.context-block {
+    background: $ucf-gold;
+    color: $black;
+
+    @media (min-width: $screen-sm-min) {
+      width: calc(100%/3*2);
+    }
+
+    @media (min-width: $screen-md-min) {
+      width: calc(100%/4*3);
+    }
+
+    @media (min-width: $screen-lg-min) {
+      width: calc(100%/5*2);
+    }
+
+    .college-block-text {
+      position: relative;
+      line-height: 1.25;
+      width: 85%;
+
+      font-family: "Knockout 49 A","Knockout 49 B",Georgia,serif;
+      text-shadow: none !important;
+      font-style: normal;
+      font-weight: 400;
+      bottom: 0;
+      color: $white;
+      display: block;
+      left: 0;
+      line-height: 1;
+      padding: 3vw;
+
+      text-transform: uppercase;
+      color: $black;
+      font-size: 5vw;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 5vw;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 5vw;
+      }
+
+      @media (min-width: $screen-lg-min) {
+        font-size: 3vw;
+      }
+
+    }
+  }
+}
