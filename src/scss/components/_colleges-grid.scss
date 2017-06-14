@@ -87,21 +87,20 @@
     width: calc(100%/5*2);
   }
 
-  .college-block-text {
+  .college-block-head {
+    @include knockout();
+
     position: relative;
     line-height: 1.25;
     width: 85%;
 
-    font-family: "Knockout 49 A","Knockout 49 B",Georgia,serif;
     text-shadow: none !important;
-    font-style: normal;
-    font-weight: 400;
     bottom: 0;
     color: $white;
     display: block;
     left: 0;
     line-height: 1;
-    padding: 3vw;
+    padding: 2.5vw 2.5vw 0 2.5vw;
 
     text-transform: uppercase;
     color: $black;
@@ -116,8 +115,49 @@
     }
 
     @media (min-width: $screen-lg-min) {
-      font-size: 3vw;
+      font-size: 2.75vw;
+    }
+  }
+
+  .college-block-text {
+    @include gotham();
+
+    position: relative;
+    line-height: 1.25;
+    width: 100%;
+
+    text-shadow: none !important;
+    bottom: 0;
+    color: $white;
+    display: block;
+    left: 0;
+    padding: 1vw 2.5vw 0 2.5vw;
+
+    text-transform: none;
+    line-height: 1.65;
+    color: $black;
+
+    font-size: 14px;
+    // color: green;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+      // color: red;
     }
 
+    @media (min-width: $screen-md-min) {
+      font-size: 14px;
+      // color: blue;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 14px;
+      // color: purple;
+    }
+
+    @media (min-width: 2000px) {
+      font-size: 20px;
+      // color: orange;
+    }
   }
 }
