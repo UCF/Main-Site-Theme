@@ -28,6 +28,50 @@ function get_degree_apply_button( $post_meta ) {
 	return ob_get_clean();
 }
 
+function get_colleges_markup( $post_id ) {
+	$colleges = wp_get_post_terms( $post_id, 'colleges' );
+
+	ob_start();
+	foreach( $colleges as $college ) :
+		$college_url = get_term_meta( $college->term_id, 'colleges_url', true );
+		if ( $college_url ) :
+?>
+		<a href="<?php echo $college_url; ?>" class="d-block text-inverse">
+		<?php echo $college->name; ?>
+		</a>
+<?php 	else : ?>
+		<span class="d-block text-inverse">
+		<?php echo $college->name; ?>
+		</span>
+<?php
+		endif;
+	endforeach;
+
+	return ob_get_clean();
+}
+
+function get_departments_markup( $post_id ) {
+	$departments = wp_get_post_terms( $post_id, 'departments' );
+
+	ob_start();
+	foreach( $departments as $department ) :
+		$department_url = get_term_meta( $department->term_id, 'departments_url', true );
+		if ( $department_url ) :
+?>
+		<a href="<?php echo $department_url; ?>" class="d-block text-inverse">
+		<?php echo $department->name; ?>
+		</a>
+<?php 	else : ?>
+		<span class="d-block text-inverse">
+		<?php echo $department->name; ?>
+		</span>
+<?php
+		endif;
+	endforeach;
+
+	return ob_get_clean();
+}
+
 function get_degree_tuition_markup( $post_meta ) {
 	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
 	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
