@@ -22,6 +22,7 @@ function get_header_images( $post ) {
 }
 
 function degree_backup_headers( $post ) {
+
 	$college = wp_get_post_terms( $post->ID, 'colleges' );
 
 	if ( is_array( $college ) ) {
@@ -29,8 +30,8 @@ function degree_backup_headers( $post ) {
 	}
 
 	return array(
-		'header_image'    => get_field( 'colleges_header_image', 'colleges_' . $college->term_id ),
-		'header_image_xs' => null
+		'header_image'    => get_field( 'page_header_image', 'colleges_' . $college->term_id ),
+		'header_image_xs' => get_field( 'page_header_image_xs', 'colleges_' . $college->term_id )
 	);
 }
 

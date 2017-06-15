@@ -4,30 +4,6 @@
         "title": "College Fields",
         "fields": [
             {
-                "key": "field_58ff540c2d1ed",
-                "label": "Header Image",
-                "name": "colleges_header_image",
-                "type": "image",
-                "instructions": "Set the college header image.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "id",
-                "preview_size": "full",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": ""
-            },
-            {
                 "key": "field_58ff547f2d1ef",
                 "label": "URL",
                 "name": "colleges_url",
@@ -663,6 +639,13 @@
                     "param": "post_type",
                     "operator": "==",
                     "value": "degree"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "colleges"
                 }
             ]
         ],
