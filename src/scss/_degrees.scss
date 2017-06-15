@@ -21,22 +21,21 @@
 .degree-promo-icon {
   background: $brand-complementary;
   color: $white;
-  font-size: 32px;
-  padding: 6px 12px;
+  font-size: 2rem;
+  padding: .33rem .75rem;
   width: 20%;
 
   @include media-breakpoint-down(md) {
-    font-size: 24px;
+    font-size: 1.75rem;
     padding: 10px 12px;
   }
 }
 
 .degree-promo-text {
-  font-size: 15px;
-  padding: 18px 6px;
+  padding: 1.1rem .4rem;
   width: 80%;
 
   @include media-breakpoint-down(md) {
-    font-size: 12px;
+    font-size: .75rem;
   }
 }
