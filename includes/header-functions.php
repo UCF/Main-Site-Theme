@@ -14,11 +14,25 @@ function get_header_images( $post ) {
 
 	if ( $retval['header_image'] ) {
 		return $retval;
+	} else if( $post->post_type === 'degree' ) {
+		return degree_backup_headers( $post );
 	}
 
 	return false;
 }
 
+function degree_backup_headers( $post ) {
+	$college = wp_get_post_terms( $post->ID, 'colleges' );
+
+	if ( is_array( $college ) ) {
+		$college = $college[0];
+	}
+
+	return array(
+		'header_image'    => get_field( 'colleges_header_image', 'colleges_' . $college->term_id ),
+		'header_image_xs' => null
+	);
+}
 
 /**
  * Gets the header video sources for pages.
