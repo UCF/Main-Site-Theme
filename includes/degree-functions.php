@@ -29,8 +29,8 @@ function get_degree_apply_button( $post_meta ) {
 }
 
 function get_degree_tuition_markup( $post_meta ) {
-	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'][0] : null;
-	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'][0] : null;
+	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
+	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
 
 	if ( $resident && $nonresident ) {
 		return ucf_tuition_fees_degree_layout( $resident, $nonresident );
