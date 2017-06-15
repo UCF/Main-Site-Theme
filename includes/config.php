@@ -148,6 +148,23 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'degrees_visit_ucf_url',
+		array(
+			'default' => 'https://apply.ucf.edu/forms/campus-tour/'
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_visit_ucf_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Visit UCF URL',
+			'description' =>'URL for the campus tour application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
 		'tuition_value_message'
 	);
 

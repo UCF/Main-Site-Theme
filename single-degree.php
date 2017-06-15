@@ -64,10 +64,10 @@
 				<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> total credit hours</p>
 			</div>
 		<?php endif; ?>
-		<?php echo get_degree_apply_button( $post_meta ); ?>
-		<a class="btn btn-lg btn-block bg-primary mb-4">
-			<span class="fa fa-map-marker"></span> Visit UCF
-		</a>
+		<div class="mb-4 degree-cta-buttons">
+			<?php echo get_degree_apply_button( $post_meta ); ?>
+			<?php echo get_degree_visit_ucf_button(); ?>
+		</div>
 		<?php echo get_degree_tuition_markup( $post_meta ); ?>
 		</div>
 	</div>
