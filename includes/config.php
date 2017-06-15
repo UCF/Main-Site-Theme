@@ -10,14 +10,9 @@ define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 
 function __init__() {
-	add_theme_support( 'menus' );
 	add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
 	add_theme_support( 'title-tag' );
-
-	add_theme_support( 'custom-header', array(
-		'width'  => 1600,
-		'height' => 400
-	) );
 
 	add_image_size( 'header-img', 575, 575, true );
 	add_image_size( 'header-img-sm', 767, 400, true );
@@ -210,5 +205,13 @@ function custom_mimes( $mimes ) {
 }
 
 add_filter( 'upload_mimes', 'custom_mimes' );
+
+
+/**
+ * Enable TinyMCE formatting options in the Athena Shortcodes plugin.
+ **/
+if ( is_plugin_active( 'Athena-Shortcodes-Plugin/athena-shortcodes.php' ) ) {
+	add_filter( 'athena_sc_enable_tinymce_formatting', '__return_true' );
+}
 
 ?>
