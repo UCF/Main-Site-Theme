@@ -1,5 +1,44 @@
 [
     {
+        "key": "group_58ff540088983",
+        "title": "College Fields",
+        "fields": [
+            {
+                "key": "field_58ff547f2d1ef",
+                "label": "URL",
+                "name": "colleges_url",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "colleges"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    },
+    {
         "key": "group_58fa427b4efb7",
         "title": "Degree Fields",
         "fields": [
@@ -137,7 +176,7 @@
             {
                 "key": "field_58fa43c48a360",
                 "label": "Contacts",
-                "name": "contacts",
+                "name": "degree_contacts",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -175,12 +214,49 @@
                         "disabled": 0
                     },
                     {
+                        "key": "field_593060ac19bc8",
+                        "label": "Contact Title",
+                        "name": "degree_contact_title",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
                         "key": "field_58fa45128a367",
                         "label": "Contact Phone",
                         "name": "degree_contact_phone",
                         "type": "email",
                         "instructions": "",
-                        "required": 1,
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": ""
+                    },
+                    {
+                        "key": "field_593060c619bc9",
+                        "label": "Contact Email",
+                        "name": "degree_contact_email",
+                        "type": "email",
+                        "instructions": "",
+                        "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
                             "width": "",
@@ -193,25 +269,6 @@
                         "append": ""
                     }
                 ]
-            },
-            {
-                "key": "field_58fa43ef8a361",
-                "label": "Hide Tuition Information",
-                "name": "degree_hide_tuition",
-                "type": "true_false",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 0,
-                "ui_on_text": "",
-                "ui_off_text": ""
             },
             {
                 "key": "field_58fa440d8a362",
@@ -240,7 +297,7 @@
                 "name": "degree_type_id",
                 "type": "text",
                 "instructions": "",
-                "required": 1,
+                "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
                     "width": "",
@@ -251,9 +308,7 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
-                "maxlength": "",
-                "readonly": 0,
-                "disabled": 0
+                "maxlength": ""
             },
             {
                 "key": "field_58fa443e8a364",
@@ -275,10 +330,10 @@
                 "ui_off_text": ""
             },
             {
-                "key": "field_58fa445e8a365",
-                "label": "Header Image",
-                "name": "degree_header_image",
-                "type": "image",
+                "key": "field_5931a83da2c0f",
+                "label": "Resident Tuition",
+                "name": "degree_resident_tuition",
+                "type": "text",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -287,16 +342,30 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "array",
-                "preview_size": "thumbnail",
-                "library": "all",
-                "min_width": 1600,
-                "min_height": 400,
-                "min_size": "",
-                "max_width": 1600,
-                "max_height": 400,
-                "max_size": "",
-                "mime_types": ""
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5931a857a2c10",
+                "label": "Nonresident Tuition",
+                "name": "degree_nonresident_tuition",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             }
         ],
         "location": [
@@ -563,6 +632,20 @@
                     "param": "post_type",
                     "operator": "==",
                     "value": "page"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "colleges"
                 }
             ]
         ],
