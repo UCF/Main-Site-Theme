@@ -1,7 +1,8 @@
 <?php get_header(); the_post(); ?>
 <?php
 	$degree_search = get_permalink( get_page_by_title( 'Degree Search' ) );
-	$post_meta = format_raw_postmeta( get_post_meta( $post->ID ) );
+	$raw_postmeta = get_post_meta( $post->ID );
+	$post_meta = format_raw_postmeta( $raw_postmeta );
 	$program_types = wp_get_post_terms( $post->ID, 'program_types' );
 	$program_type = is_array( $program_types ) ? $program_types[0] : null;
 	$colleges = wp_get_post_terms( $post->ID, 'colleges' );
