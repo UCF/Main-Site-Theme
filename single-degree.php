@@ -5,8 +5,8 @@
 	$post_meta = format_raw_postmeta( $raw_postmeta );
 	$program_types = wp_get_post_terms( $post->ID, 'program_types' );
 	$program_type = is_array( $program_types ) ? $program_types[0] : null;
-	$colleges = wp_get_post_terms( $post->ID, 'colleges' );
-	$college = is_array( $colleges ) ? $colleges[0] : null;
+	$colleges = get_colleges_markup( $post->ID );
+	$departments = get_departments_markup( $post->ID );
 ?>
 <div class="container">
 	<div class="row">
@@ -17,12 +17,16 @@
 					<dt class="col-sm-6">Program:</dt>
 					<dd class="col-sm-6"><?php echo $program_type->name; ?></dd>
 					<?php endif; ?>
-					<?php if ( $college ) : ?>
-					<dt class="col-sm-6">College:</dt>
+					<?php if ( $colleges ) : ?>
+					<dt class="col-sm-6">College(s):</dt>
 					<dd class="col-sm-6">
-						<a class="text-inverse" href="#">
-							<?php echo $college->name; ?>
-						</a>
+						<?php echo $colleges; ?>
+					</dd>
+					<?php endif; ?>
+					<?php if ( $departments ) : ?>
+					<dt class="col-sm-6">Department(s): </dt>
+					<dd class="col-sm-6">
+						<?php echo $departments; ?>
 					</dd>
 					<?php endif; ?>
 				</dl>
