@@ -227,7 +227,7 @@ add_filter( 'upload_mimes', 'custom_mimes' );
 /**
  * Enable TinyMCE formatting options in the Athena Shortcodes plugin.
  **/
-if ( is_plugin_active( 'Athena-Shortcodes-Plugin/athena-shortcodes.php' ) ) {
+if ( function_exists( 'athena_sc_tinymce_init' ) ) {
 	add_filter( 'athena_sc_enable_tinymce_formatting', '__return_true' );
 }
 
