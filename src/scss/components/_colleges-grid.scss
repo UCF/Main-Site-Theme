@@ -1,6 +1,6 @@
 .college-blocks {
   overflow: auto;
-  background: #ffcc00;
+  background: $ucf-gold;
 }
 
 .college-block {
@@ -26,14 +26,14 @@
     transition: -webkit-filter .3s;
     transition: filter .3s;
     transition: filter .3s, -webkit-filter .3s;
-    z-index: 1;
+    z-index: 0;
 
     -webkit-filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
     filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
   }
 
   .college-block-text {
-    font-family: "Knockout 49 A","Knockout 49 B",Georgia,serif;
+    @include knockout();
     font-style: normal;
     font-weight: 400;
     bottom: 0;
@@ -123,41 +123,28 @@
     @include gotham();
 
     position: relative;
-    line-height: 1.25;
     width: 100%;
-
     text-shadow: none !important;
     bottom: 0;
-    color: $white;
     display: block;
     left: 0;
     padding: 1vw 2.5vw 0 2.5vw;
-
     text-transform: none;
     line-height: 1.65;
     color: $black;
 
     font-size: 14px;
-    // color: green;
 
     @media (min-width: $screen-sm-min) {
       font-size: 16px;
-      // color: red;
     }
 
     @media (min-width: $screen-md-min) {
       font-size: 14px;
-      // color: blue;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      font-size: 14px;
-      // color: purple;
     }
 
     @media (min-width: 2000px) {
       font-size: 20px;
-      // color: orange;
     }
   }
 }
