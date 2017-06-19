@@ -1,0 +1,150 @@
+.college-blocks {
+  overflow: auto;
+  background: $ucf-gold;
+}
+
+.college-block {
+  width: 50%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+
+  @media (min-width: $screen-sm-min) {
+    width: calc(100%/3);
+  }
+
+  @media (min-width: $screen-md-min) {
+    width: calc(100%/4);
+  }
+
+  @media (min-width: $screen-lg-min) {
+    width: calc(100%/5);
+  }
+
+  .college-block-img {
+    width: 100%;
+    transition: -webkit-filter .3s;
+    transition: filter .3s;
+    transition: filter .3s, -webkit-filter .3s;
+    z-index: 0;
+
+    -webkit-filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
+    filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
+  }
+
+  .college-block-text {
+    @include knockout();
+    font-style: normal;
+    font-weight: 400;
+    bottom: 0;
+    color: $white;
+    display: block;
+    font-size: 7.25vw;
+    left: 0;
+    line-height: 1;
+    padding: 3vw;
+    position: absolute;
+    text-shadow: 0 0 10px transparent;
+    text-transform: uppercase;
+    transition: text-shadow .3s;
+    text-shadow: 0 0 10px rgba(0,0,0,.7);
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 4vw;
+      padding: 2vw;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 3vw;
+      padding: 1.5vw;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 2vw;
+      padding: 1.5vw;
+    }
+  }
+}
+
+.college-block:hover .college-block-img {
+  -webkit-filter: none;
+  filter: none;
+}
+
+.college-block.context-block {
+  background: $ucf-gold;
+  color: $black;
+
+  @media (min-width: $screen-sm-min) {
+    width: calc(100%/3*2);
+  }
+
+  @media (min-width: $screen-md-min) {
+    width: calc(100%/4*3);
+  }
+
+  @media (min-width: $screen-lg-min) {
+    width: calc(100%/5*2);
+  }
+
+  .college-block-head {
+    @include knockout();
+
+    position: relative;
+    line-height: 1.25;
+    width: 85%;
+
+    text-shadow: none !important;
+    bottom: 0;
+    color: $white;
+    display: block;
+    left: 0;
+    line-height: 1;
+    padding: 2.5vw 2.5vw 0 2.5vw;
+
+    text-transform: uppercase;
+    color: $black;
+    font-size: 5vw;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 5vw;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 5vw;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 2.75vw;
+    }
+  }
+
+  .college-block-text {
+    @include gotham();
+
+    position: relative;
+    width: 100%;
+    text-shadow: none !important;
+    bottom: 0;
+    display: block;
+    left: 0;
+    padding: 1vw 2.5vw 0 2.5vw;
+    text-transform: none;
+    line-height: 1.65;
+    color: $black;
+
+    font-size: 14px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 16px;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 14px;
+    }
+
+    @media (min-width: 2000px) {
+      font-size: 20px;
+    }
+  }
+}

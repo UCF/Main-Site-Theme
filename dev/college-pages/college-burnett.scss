@@ -1,20 +1,8 @@
 @import '../media-template/colleges-base';
 
-
-// $header-media-xs-url: '//www.ucf.edu/wp-content/uploads/2017/03/college-cah-header-xs.jpg';
-$header-media-xs-url: '//placehold.it/767x400';
-
-
-#header-menu {
-  li:not(:last-child) a,
-  li:not(.last) a {
-    color: $white;
-
-    &:hover {
-      color: $ucf-gold;
-    }
-  }
-}
+$header-media-xs-url: 'https://wwwqa.cc.ucf.edu/wp-content/uploads/2017/04/burnett-1600x400.jpg';
+$facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-Mobile-767x1800-HONORS-Modified.jpg';
+$facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-HONORS-Modified.jpg';
 
 .page-media .page-media-header {
   @media (max-width: $screen-xs-max) {
@@ -40,6 +28,20 @@ $header-media-xs-url: '//placehold.it/767x400';
   //
   // PER-SECTION OVERRIDES
   //
+
+  // Stats/Facts
+  .section-facts {
+    .callout {
+      background-image: url($facts-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($facts-bg-sm-url);
+      }
+    }
+  }
 
   // MBA quote/ad
   .aside-mba-cta {
@@ -94,9 +96,8 @@ $header-media-xs-url: '//placehold.it/767x400';
     }
 
     @media (min-width: $screen-sm-min) {
-      font-size: 26px;
       display: inline-block;
-      margin-right: 30px;
+      font-size: 26px;
       vertical-align: middle;
     }
   }
