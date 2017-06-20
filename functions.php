@@ -216,7 +216,7 @@ function add_section_markup_before( $content, $section ) {
 
 	ob_start();
 ?>
-	<section class="jumbotron jumbotron-fluid <?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
+	<section class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
 	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
