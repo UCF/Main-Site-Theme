@@ -150,12 +150,14 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
 function main_site_degree_search_display( $output ) {
 	ob_start();
 ?>
-	<div class="input-group degree-search">
-		<input type="text" class="form-control degree-search-typeahead" placeholder="Search for degree programs">
-		<span class="input-group-btn">
-			<button id="ucf-degree-search-submit" type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
-		</span>
-	</div>
+	<form id="degree-search" action="<?php echo get_permalink( get_page_by_path( 'degree-search' ) );?>" method="GET">
+		<div class="input-group degree-search">
+			<input type="text" name="search" class="form-control degree-search-typeahead" placeholder="Search for degree programs">
+			<span class="input-group-btn">
+				<button id="ucf-degree-search-submit" type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+			</span>
+		</div>
+	</form>
 <?php
 	return ob_get_clean();
 }

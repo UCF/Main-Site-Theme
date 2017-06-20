@@ -1,7 +1,19 @@
 const degreeSearchInit = ($) => {
   let degree;
 
-  if ($('.degree-search-typeahead')) {
+  if ($('.degree-search-typeahead').length) {
+    const $form = $('#degree-search');
+
+    $form.on('submit', (e) => {
+      e.preventDefault();
+
+      const query = $('.tt-input').val(),
+        target = $(e.target).attr('action'),
+        url = `${target}#!/search/${query}`;
+
+      window.location = url;
+    });
+
     const keywords = {
       bachelor: ['bachelor\'s', 'bachelors', 'bs', 'ba', 'major', 'majors'],
       minor: ['minor', 'minors'],
