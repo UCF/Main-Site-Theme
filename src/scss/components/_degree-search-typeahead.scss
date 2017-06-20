@@ -1,0 +1,78 @@
+.degree-search {
+  .twitter-typeahead {
+    width: 100%;
+  }
+
+  .form-control {
+    width: 100%;
+  }
+
+  .tt-menu {
+    background-color: $black;
+    font-size: .9rem;
+    width: 100%;
+  }
+
+  .tt-dataset {
+    color: $white;
+  }
+
+  .ucf-degree-search-suggestion {
+    border-top: 1px solid $gray-dark;
+    color: $white;
+    margin-bottom: 0;
+    overflow: hidden;
+    padding: .5rem 1.25rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:first-child,
+    &.no-border {
+      border-top: 0 solid transparent;
+    }
+
+    &.tt-cursor,
+    &:focus,
+    &:hover {
+      background-color: $brand-primary;
+      color: $black;
+
+      .suggestion-match-type {
+        color: $gray-dark;
+      }
+    }
+
+    &.no-hover {
+      &.tt-cursor,
+      &:focus,
+      &:hover {
+        background-color: inherit;
+        color: $white;
+      }
+    }
+
+    .suggestion-match-type {
+        color: $gray-dark;
+        font-size: .75rem;
+        margin-left: .75rem;
+      }
+  }
+}
+
+.top-degrees-wrapper {
+  padding-left: 0;
+
+  @include media-breakpoint-up(sm) {
+    border-left: 1px solid $white;
+    padding-left: 4rem;
+  }
+}
+
+.top-degrees-list {
+  font-size: 1rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: .9em;
+    padding-left: 1.25rem;
+  }
+}

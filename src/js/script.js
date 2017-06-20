@@ -11,3 +11,4 @@
 //
 
 // =require media-background-video.js
+// =require degree-search-typeahead.js

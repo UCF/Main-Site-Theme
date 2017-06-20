@@ -1,0 +1,40 @@
+.icon-link {
+  display: inline-block;
+  margin: 1rem auto;
+  padding: 3rem 2rem;
+  width: 25%;
+  vertical-align: top;
+
+  .icon-link-anchor {
+    font-weight: 400;
+    color: $black;
+
+    &:hover {
+      text-decoration: none !important;
+
+      .fa {
+        color: $white;
+      }
+
+      .icon-link-label {
+        background: rgba(10, 10, 10, .55);
+        color: $brand-primary;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .fa {
+    font-size: 5rem;
+    margin-bottom: .75rem;
+    transition: color .25s;
+  }
+
+  .icon-link-label {
+    background: rgba(30, 30, 30, .25);
+    display: inline-block;
+    padding: .125rem 1rem;
+    margin-bottom: .75rem;
+    transition: background .25s, color .25s;
+  }
+}
