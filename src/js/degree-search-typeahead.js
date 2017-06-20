@@ -13,13 +13,14 @@ const degreeSearchInit = ($) => {
 
     const keywordReplace = (q) => {
       for (const x in q) {
-        const term = q[x].toLowerCase().replace(/\.\ \'/, '');
+        const term = q[x].toLowerCase().replace(/\. '/, '');
         for (const y in keywords) {
-          if (keywords[y].indexOf(term) > -1) {
-            q[x] = y;
+          if (keywords[y].indexOf(term) > 1) {
+            q[x] = keywords[y];
           }
         }
       }
+
       return q;
     };
 
@@ -53,17 +54,19 @@ const degreeSearchInit = ($) => {
       const partialMatch = new RegExp(q, 'i');
 
       data.forEach((d) => {
-        let score = 0,
-          matchString = '',
-          titleExactMatch = exactMatch.exec(d.title.rendered) !== null,
+        d.title.rendered = $(`<p>${d.title.rendered}</p>`).text();
+
+        let matchString = '',
+          score = 0;
+        const titleExactMatch = exactMatch.exec(d.title.rendered) !== null,
           titlePartialMatch = partialMatch.exec(d.title.rendered) !== null;
 
         score += titleExactMatch ? 50 : 0;
         score += titlePartialMatch ? 10 : 0;
 
         d.program_types.forEach((pt) => {
-          let ptWholeMatch = exactMatch.exec(pt.name) !== null,
-            ptPartialMatch = partialMatch.exec(pt.name) !== null;
+          const ptPartialMatch = partialMatch.exec(pt.name) !== null,
+            ptWholeMatch = exactMatch.exec(pt.name) !== null;
 
           score += ptWholeMatch ? 25 : 0;
           score += ptPartialMatch ? 10 : 0;
@@ -96,7 +99,7 @@ const degreeSearchInit = ($) => {
 
 if (typeof jQuery !== 'undefined') {
   jQuery(document).ready(($) => {
-    if (UCFDegreeSearch !== 'undefined') {
+    if (typeof UCFDegreeSearch !== 'undefined') {
       degreeSearchInit($);
     }
   });
