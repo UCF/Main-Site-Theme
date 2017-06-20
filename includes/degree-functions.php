@@ -145,3 +145,31 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
 <?php
 	return ob_get_clean();
 }
+
+/** Degree Search Typeahead Functions */
+function main_site_degree_search_display( $output ) {
+	ob_start();
+?>
+	<div class="input-group degree-search">
+		<input type="text" class="form-control degree-search-typeahead" placeholder="Search for degree programs">
+		<span class="input-group-btn">
+			<button id="ucf-degree-search-submit" type="submit" class="btn btn-primary"><span class="fa fa-search"></span></button>
+		</span>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_degree_search_display', 'main_site_degree_search_display', 11, 1 );
+
+function main_site_degree_search_suggestion() {
+	ob_start();
+?>
+	<p class="ucf-degree-search-suggestion tt-suggestion">
+		{{ title.rendered }} <em class="suggestion-match-type text-capitalize">{{ matchString }}</em>
+	</p>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_degree_search_suggestion', 'main_site_degree_search_suggestion', 11, 0 );
