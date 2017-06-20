@@ -3,5 +3,9 @@
 @import 'header';
 @import 'degrees';
 
+// Components
+@import 'components/degree-search-typeahead';
+@import 'components/icon-link';
+
 // Pages
 @import 'pages/degree-search';

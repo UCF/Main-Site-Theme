@@ -231,7 +231,7 @@ function add_section_markup( $output, $section ) {
 	ob_start();
 ?>
 	<?php if ( $container ) : ?>
-		<div class="container"><?php echo $section->post_content; ?></div>
+		<div class="container"><?php echo apply_filters( 'the_content', $section->post_content ); ?></div>
 	<?php else : ?>
 		<?php echo apply_filters( 'the_content', $section->post_content ); ?>
 	<?php endif; ?>
@@ -240,5 +240,7 @@ function add_section_markup( $output, $section ) {
 }
 
 add_filter( 'ucf_section_display', 'add_section_markup', 10, 2 );
+
+remove_filter( 'the_content', 'wpautop' );
 
 ?>
