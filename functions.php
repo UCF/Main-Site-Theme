@@ -217,7 +217,7 @@ function add_section_markup_before( $content, $section ) {
 
 	ob_start();
 ?>
-	<section class="jumbotron jumbotron-fluid <?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
+	<section class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
 	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
@@ -232,7 +232,7 @@ function add_section_markup( $output, $section ) {
 	ob_start();
 ?>
 	<?php if ( $container ) : ?>
-		<div class="container"><?php echo $section->post_content; ?></div>
+		<div class="container"><?php echo apply_filters( 'the_content', $section->post_content ); ?></div>
 	<?php else : ?>
 		<?php echo apply_filters( 'the_content', $section->post_content ); ?>
 	<?php endif; ?>

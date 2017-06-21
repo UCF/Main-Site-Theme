@@ -8,7 +8,9 @@
   },
   "globals": {
     "Cookies": true,
-    "UCFEDU": true
+    "UCFEDU": true,
+    "UCFDegreeSearch": true,
+    "Bloodhound": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
@@ -56,11 +58,7 @@
     "no-labels": "error",
     "no-lone-blocks": "error",
     "no-loop-func": "error",
-    "no-magic-numbers": ["error", {
-      "ignore": [-1, 0, 1],
-      "ignoreArrayIndexes": true
-      }
-    ],
+    "no-magic-numbers": "off",
     "no-multi-spaces": ["error", {
       "exceptions": {
         "AssignmentExpression": true,
@@ -135,7 +133,7 @@
     "eol-last": "error",
     "func-call-spacing": "error",
     "func-names": "off",
-    "func-style": ["error", "declaration"],
+    "func-style": "off",
     "id-blacklist": "error",
     "id-length": "off",
     "id-match": "error",
@@ -181,8 +179,8 @@
     "object-curly-newline": ["error", { "minProperties": 1 }],
     "object-curly-spacing": ["error", "always"],
     "object-property-newline": "error",
-    "one-var-declaration-per-line": "error",
-    "one-var": ["error", "never"],
+    "one-var-declaration-per-line": "off",
+    "one-var": "off",
     "operator-assignment": "error",
     "operator-linebreak": "off",
     "padded-blocks": "off",
