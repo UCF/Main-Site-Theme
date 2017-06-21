@@ -11,6 +11,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 * Advanced Custom Fields PRO
 * Athena Shortcodes
 * Gravity Forms
+* UCF Alert Plugin
 * UCF College Custom Taxonomy
 * UCF Degree Custom Post Type
 * UCF Degree Search Plugin
