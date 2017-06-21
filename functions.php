@@ -241,6 +241,4 @@ function add_section_markup( $output, $section ) {
 
 add_filter( 'ucf_section_display', 'add_section_markup', 10, 2 );
 
-remove_filter( 'the_content', 'wpautop' );
-
 ?>
