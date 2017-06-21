@@ -1,0 +1,150 @@
+@import '../media-template/colleges-base';
+
+$header-media-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/04/cohpa-1600x400-1.jpg';
+$facts-bg-xs-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-767x1800-COHPA.jpg';
+$facts-bg-sm-url: 'https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-UNDRGRAD.jpg';
+
+#header-menu {
+  li:not(:last-child) a,
+  li:not(.last) a {
+    color: $white;
+
+    &:hover {
+      color: $ucf-gold;
+    }
+  }
+}
+
+.page-media .page-media-header {
+  @media (max-width: $screen-xs-max) {
+    background-image: url('#{$header-media-xs-url}') !important;
+  }
+
+  /* add shadow underneath heading navigation */
+  .page-media-container {
+    @media (min-width: $screen-sm-min) {
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.6) 115%);
+    }
+  }
+}
+
+
+#contentcol {
+
+  //
+  // BASE OVERRIDES
+  //
+
+  // Adjusted h1's on this page
+  h1,
+  .h1 {
+    @media (min-width: $screen-sm-min) {
+      font-size: 40px;
+    }
+  }
+
+  //
+  // PER-SECTION OVERRIDES
+  //
+
+  // Stats/Facts
+  .section-facts {
+    .callout {
+      background-image: url($facts-bg-xs-url);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      @media (min-width: $screen-sm-min) {
+        background-image: url($facts-bg-sm-url);
+      }
+    }
+
+    .fact-icon.fact-text-stacked {
+      font-size: 95px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 65px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 100px;
+      }
+      .small {
+        display: block;
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+    }
+    .fact-icon.fact-text {
+      font-size: 115px;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 75px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 100px;
+      }
+    }
+  }
+
+  // MBA quote/ad
+  .aside-mba-cta {
+    .callout {
+      @media (min-width: $screen-sm-min) {
+        padding: 40px 0;
+      }
+    }
+  }
+
+  .mba-quote {
+    border-left: 0 solid transparent;
+    margin: 10px 0;
+    padding: 0;
+
+    &,
+    p {
+      color: $ucf-gold;
+      font-size: 9vw;
+      font-weight: 800;
+      line-height: 1.2;
+
+      @media (min-width: 480px) {
+        font-size: 7vw;
+        line-height: 1.1;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 48px;
+      }
+    }
+
+    p:last-child {
+      margin: 0;
+    }
+  }
+
+  .mba-cite {
+    font-size: 5vw;
+
+    &::before {
+      content: '- ';
+    }
+
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 480px) {
+      font-size: 20px;
+    }
+
+    @media (min-width: $screen-sm-min) {
+      display: inline-block;
+      font-size: 26px;
+      vertical-align: middle;
+    }
+  }
+}
