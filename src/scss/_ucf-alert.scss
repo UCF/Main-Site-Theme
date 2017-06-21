@@ -75,6 +75,12 @@
     margin-bottom: .5rem;
   }
 
+  .ucf-alert-body {
+    @include media-breakpoint-down(xs) {
+      display: none;
+    }
+  }
+
   .ucf-alert-cta {
     margin-top: .5rem;
     text-decoration: underline;
