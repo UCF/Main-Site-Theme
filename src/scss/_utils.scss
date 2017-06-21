@@ -1,14 +1,3 @@
-// Remove when athena-framework v1.0.0-beta.1 is tagged+pulled in
-@each $breakpoint in map-keys($grid-breakpoints) {
-  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-  .col#{$infix}-auto {
-    @include make-gutters($grid-gutter-widths);
-    min-height: 1px; // Prevent columns from collapsing when empty
-    position: relative;
-  }
-}
-
 .vertical-rule {
   border-left: 1px solid $white;
   margin-left: 4px;
