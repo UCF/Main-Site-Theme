@@ -81,6 +81,7 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 	 * Set required settings changes for UCF-Alert-Plugin
 	 **/
 	update_option( 'ucf_alert_include_css', false ); // mainsite rolls its own alert layout/styles
+	update_option( 'ucf_alert_include_js', true ); // mainsite uses vanilla UCF-Alert-Plugin js
 	update_option( 'ucf_alert_include_js_deps', false ); // mainsite includes js-cookie; see below
 
 	function mainsite_alert_js_deps() {
