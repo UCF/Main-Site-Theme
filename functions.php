@@ -5,6 +5,7 @@ include_once 'includes/header-functions.php';
 include_once 'includes/utilities.php';
 
 include_once 'includes/degree-functions.php';
+include_once 'includes/ucf-alert-functions.php';
 
 /**
  * Enqueues assets for a particular page
@@ -240,5 +241,3 @@ function add_section_markup( $output, $section ) {
 }
 
 add_filter( 'ucf_section_display', 'add_section_markup', 10, 2 );
-
-?>

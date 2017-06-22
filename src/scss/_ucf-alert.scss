@@ -1,0 +1,88 @@
+.ucf-alert-faicon {
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+
+  @include media-breakpoint-up(sm) {
+    padding-bottom: 1.75rem;
+    padding-top: 1.75rem;
+  }
+
+  &.ucf-alert-type-general,
+  &.ucf-alert-type-update,
+  &.ucf-alert-type-weather,
+  &.ucf-alert-type-police {
+    @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+
+    .ucf-alert-content {
+      color: $alert-danger-text;
+
+      @include hover-focus {
+        color: $brand-danger-aw;
+        text-decoration: none;
+      }
+    }
+  }
+
+  &.ucf-alert-type-general,
+  &.ucf-alert-type-update {
+    .ucf-alert-icon::before {
+      content: $fa-var-info-circle;
+    }
+  }
+
+  &.ucf-alert-type-weather {
+    .ucf-alert-icon::before {
+      content: $fa-var-cloud;
+    }
+  }
+
+  &.ucf-alert-type-police {
+    .ucf-alert-icon::before {
+      content: $fa-var-exclamation-triangle;
+    }
+  }
+
+  &.ucf-alert-type-message {
+    @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
+
+    .ucf-alert-content {
+      color: $alert-info-text;
+
+      @include hover-focus {
+        color: $brand-info-aw;
+        text-decoration: none;
+      }
+    }
+
+    .ucf-alert-icon::before {
+      content: $fa-var-info-circle;
+    }
+  }
+
+  .ucf-alert-icon {
+    font-size: 2rem;
+    padding-right: 1rem;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 3rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  .ucf-alert-title {
+    display: block;
+    margin-bottom: .5rem;
+  }
+
+  .ucf-alert-body {
+    @include media-breakpoint-down(xs) {
+      display: none;
+    }
+  }
+
+  .ucf-alert-cta {
+    margin-top: .5rem;
+    text-decoration: underline;
+  }
+}
