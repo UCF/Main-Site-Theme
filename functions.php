@@ -7,30 +7,6 @@ include_once 'includes/header-functions.php';
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
 
-/**
- * Enqueues assets for a particular page
- **/
-function enqueue_page_assets() {
-	global $post;
-
-	if ( $post ) {
-
-		$stylesheet = get_field( 'page_stylesheet', $post->ID );
-
-		if ( $stylesheet ) {
-			wp_enqueue_style( $post->post_name . '-stylesheet', $stylesheet );
-		}
-
-		$script = get_field( 'page_script', $post->ID );
-
-		if ( $script ) {
-			wp_enqueue_script( $post->post_name - '-script', $script, array( 'jquery' ), null, true );
-		}
-	}
-}
-
-add_action( 'wp_enqueue_scripts', 'enqueue_page_assets' );
-
 
 /**
  * Utility function that returns an image url by its thumbnail size.
