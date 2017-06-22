@@ -180,7 +180,7 @@ function get_media_background_video( $videos, $loop=false ) {
 /**
  * Section markup override
  **/
-function add_section_markup_before( $content, $section, $class, $title, $disable_id ) {
+function add_section_markup_before( $content, $section, $class, $title, $section_id ) {
 	// Retrieve background image sizes
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
@@ -220,11 +220,11 @@ function add_section_markup_before( $content, $section, $class, $title, $disable
 
 	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '"' : '';
 
-	$id = $disable_id ? '' : 'id="' . $section->post_name . '" ';
+	$section_id = ! empty( $section_id ) ? ' id="' . $section_id . '"' : '';
 
 	ob_start();
 ?>
-	<section <?php echo $id; ?>class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>"<?php echo $title; ?>>
+	<section <?php echo $section_id; ?>class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>"<?php echo $title; ?>>
 	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
