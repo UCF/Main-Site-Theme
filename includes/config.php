@@ -148,6 +148,7 @@ function header_title( $title, $separator ) {
 	}
 	return $doctitle;
 }
+
 add_filter( 'wp_title', 'header_title', 10, 2 );
 
 
@@ -414,6 +415,7 @@ $allowedposttags['button'] = array(
 function hide_admin_links() {
 	remove_menu_page( 'edit-comments.php' );
 }
+
 add_action( 'admin_menu', 'hide_admin_links' );
 
 
@@ -429,6 +431,7 @@ function no_redirect_on_404( $redirect_url ) {
 	}
 	return $redirect_url;
 }
+
 add_filter( 'redirect_canonical', 'no_redirect_on_404' );
 
 
@@ -445,6 +448,7 @@ function kill_unused_templates() {
 		exit();
 	}
 }
+
 add_action( 'template_redirect', 'kill_unused_templates' );
 
 
@@ -461,6 +465,7 @@ function remove_yoast_meta_boxes() {
 		remove_meta_box( 'wpseo_meta', $post_type, 'normal' );
 	}
 }
+
 add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
 
 
