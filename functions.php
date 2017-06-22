@@ -180,7 +180,7 @@ function get_media_background_video( $videos, $loop=false ) {
 /**
  * Section markup override
  **/
-function add_section_markup_before( $content, $section, $class ) {
+function add_section_markup_before( $content, $section, $class, $title ) {
 	// Retrieve background image sizes
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
@@ -218,15 +218,17 @@ function add_section_markup_before( $content, $section, $class ) {
 		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 
+	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '"' : '';
+
 	ob_start();
 ?>
-	<section class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
+	<section id="<?php echo $section->post_name; ?>" class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>"<?php echo $title; ?>>
 	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_section_display_before', 'add_section_markup_before', 10, 3 );
+add_filter( 'ucf_section_display_before', 'add_section_markup_before', 10, 4 );
 
 
 function add_section_markup( $output, $section ) {
