@@ -8,6 +8,15 @@ define( 'THEME_STATIC_URL', THEME_URL . '/static' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
 define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
+define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
+	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
+	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
+	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
+	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
+	'gtm_id'                            => 'GTM-MBPLZH',
+	'chartbeat_uid'                     => '2806',
+	'chartbeat_domain'                  => 'ucf.edu'
+) ) );
 
 function __init__() {
 	add_theme_support( 'post-thumbnails' );
@@ -36,7 +45,7 @@ add_action( 'after_setup_theme', '__init__' );
 function enqueue_frontend_assets() {
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css' );
 
-	if ( $fontkey = get_theme_mod( 'cloud_typography_key' ) ) {
+	if ( $fontkey = get_theme_mod_or_default( 'cloud_typography_key' ) ) {
 		wp_enqueue_style( 'webfont', $fontkey );
 	}
 
@@ -86,6 +95,106 @@ function add_id_to_ucfhb( $url ) {
 }
 
 add_filter( 'clean_url', 'add_id_to_ucfhb', 10, 1 );
+
+
+/**
+ * Prints Chartbeat tracking code in the footer if a UID and Domain are set in
+ * the customizer.
+ **/
+function add_chartbeat() {
+	$uid = get_theme_mod_or_default( 'chartbeat_uid' );
+	$domain = get_theme_mod_or_default( 'chartbeat_domain' );
+
+	if ( $uid && $domain ) {
+?>
+<script type="text/javascript">
+    var _sf_async_config = _sf_async_config || {};
+    /** CONFIGURATION START **/
+    _sf_async_config.uid = '<?php echo $uid; ?>'
+    _sf_async_config.domain = '<?php echo $domain; ?>';
+    /** CONFIGURATION END **/
+    (function() {
+        function loadChartbeat() {
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+            document.body.appendChild(e);
+        }
+        var oldonload = window.onload;
+        window.onload = (typeof window.onload != 'function') ?
+            loadChartbeat : function() {
+                oldonload();
+                loadChartbeat();
+            };
+    })();
+</script>
+<?php
+	}
+}
+
+add_action( 'wp_footer', 'add_chartbeat' );
+
+
+/**
+ * Prints the Google Tag Manager data layer snippet in the document head if a
+ * GTM ID is set in the customizer.
+ **/
+function google_tag_manager_dl() {
+	$gtm_id = get_theme_mod_or_default( 'gtm_id' );
+	if ( $gtm_id ) :
+?>
+<script>
+	dataLayer = [];
+</script>
+<?php
+	endif;
+}
+
+add_action( 'wp_head', 'google_tag_manager_dl', 2 );
+
+
+/**
+ * Prints the Google Tag Manager script tag in the document head if a GTM ID is
+ * set in the customizer.
+ **/
+function google_tag_manager() {
+	$gtm_id = get_theme_mod_or_default( 'gtm_id' );
+	if ( $gtm_id ) :
+?>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','<?php echo $gtm_id; ?>');</script>
+<!-- End Google Tag Manager -->
+<?php
+	endif;
+}
+
+add_action( 'wp_head', 'google_tag_manager', 3 );
+
+
+/**
+ * Prints the Google Tag Manager noscript snippet using the GTM ID in Theme Options.
+ *
+ * Must be printed explicitly in header.php to render in the correct location
+ * (immediately below the opening <body> tag.)
+ **/
+function google_tag_manager_noscript() {
+	ob_start();
+	$gtm_id = get_theme_mod_or_default( 'gtm_id' );
+	if ( $gtm_id ) :
+?>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=<?php echo $gtm_id; ?>"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<?php
+	endif;
+	return ob_get_clean();
+}
 
 
 /**
@@ -166,6 +275,13 @@ function define_customizer_sections( $wp_customize ) {
 			'title' => 'Web Fonts'
 		)
 	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'analytics',
+		array(
+			'title' => 'Analytics'
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_sections' );
@@ -176,7 +292,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'degrees_undergraduate_application',
 		array(
-			'default' => 'https://apply.ucf.edu/application/'
+			'default' => get_theme_mod_default( 'degrees_undergraduate_application' )
 		)
 	);
 
@@ -193,7 +309,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'degrees_graduate_application',
 		array(
-			'default' => 'https://application.graduate.ucf.edu/#/'
+			'default' => get_theme_mod_default( 'degrees_graduate_application' )
 		)
 	);
 
@@ -210,7 +326,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'degrees_visit_ucf_url',
 		array(
-			'default' => 'https://apply.ucf.edu/forms/campus-tour/'
+			'default' => get_theme_mod_default( 'degrees_visit_ucf_url' )
 		)
 	);
 
@@ -256,7 +372,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'cloud_typography_key',
 		array(
-			'default' => '//cloud.typography.com/730568/675644/css/fonts.css'
+			'default' => get_theme_mod_default( 'cloud_typography_key' )
 		)
 	);
 
@@ -270,6 +386,58 @@ function define_customizer_fields( $wp_customize ) {
 								project has been configured to deliver fonts to this site\'s domain.<br>
 								See the <a target="_blank" href="http://www.typography.com/cloud/user-guide/managing-domains">Cloud.Typography docs on managing domains</a> for more info.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'webfonts'
+		)
+	);
+
+	// Analytics
+	$wp_customize->add_setting(
+		'gtm_id',
+		array(
+			'default' => get_theme_mod_default( 'gtm_id' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'gtm_id',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google Tag Manager Container ID',
+			'description' => 'The ID for the container in Google Tag Manager that represents this site.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'chartbeat_uid',
+		array(
+			'default' => get_theme_mod_default( 'chartbeat_uid' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'chartbeat_uid',
+		array(
+			'type'        => 'text',
+			'label'       => 'Chartbeat UID',
+			'description' => 'Example: <em>1842</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'chartbeat_domain',
+		array(
+			'default' => get_theme_mod_default( 'chartbeat_domain' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'chartbeat_domain',
+		array(
+			'type'        => 'text',
+			'label'       => 'Chartbeat Domain',
+			'description' => 'Example: <em>some.domain.com</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
 		)
 	);
 }
