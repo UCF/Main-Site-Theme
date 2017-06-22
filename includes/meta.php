@@ -157,12 +157,8 @@ add_action( 'wp_head', 'google_tag_manager', 3 );
 
 /**
  * Prints the Google Tag Manager noscript snippet using the GTM ID in Theme Options.
- *
- * Must be printed explicitly in header.php to render in the correct location
- * (immediately below the opening <body> tag.)
  **/
 function google_tag_manager_noscript() {
-	ob_start();
 	$gtm_id = get_theme_mod_or_default( 'gtm_id' );
 	if ( $gtm_id ) :
 ?>
@@ -172,8 +168,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <?php
 	endif;
-	return ob_get_clean();
 }
+
+add_action( 'after_body_open', 'google_tag_manager_noscript', 0 );
 
 
 /**

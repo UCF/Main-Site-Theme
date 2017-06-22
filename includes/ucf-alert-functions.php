@@ -91,4 +91,13 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 	}
 	add_filter( 'ucf_alert_script_deps', 'mainsite_alert_js_deps', 10, 0 );
 
+
+	/**
+	 * Hook into the header template to display the alert
+	 **/
+	function mainsite_display_alert() {
+		UCF_Alert_Common::display_alert( 'faicon' );
+	}
+	add_filter( 'after_body_open', 'mainsite_display_alert', 1 );
+
 }
