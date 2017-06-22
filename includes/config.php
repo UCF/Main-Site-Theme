@@ -432,28 +432,16 @@ add_filter( 'redirect_canonical', 'no_redirect_on_404' );
 
 
 /**
- * Kill attachment, author, and daily archive pages.
+ * Kill attachment pages, author pages, daily archive pages, search, and feeds.
  *
  * http://betterwp.net/wordpress-tips/disable-some-wordpress-pages/
  **/
 function kill_unused_templates() {
 	global $wp_query, $post;
 
-	if ( is_author() || is_attachment() || is_day() || is_search() ) {
+	if ( is_author() || is_attachment() || is_day() || is_search() || is_feed() ) {
 		wp_redirect( home_url() );
-	}
-
-	if ( is_feed() ) {
-		$author     = get_query_var( 'author_name' );
-		$attachment = get_query_var( 'attachment' );
-		$attachment = ( empty( $attachment ) ) ? get_query_var( 'attachment_id' ) : $attachment;
-		$day        = get_query_var( 'day' );
-		$search     = get_query_var( 's' );
-
-		if ( !empty( $author ) || !empty( $attachment ) || !empty( $day ) || !empty( $search ) ) {
-			wp_redirect( home_url() );
-			$wp_query->is_feed = false;
-		}
+		exit();
 	}
 }
 add_action( 'template_redirect', 'kill_unused_templates' );
