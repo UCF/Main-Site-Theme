@@ -5,6 +5,7 @@
 	</head>
 	<body ontouchstart <?php body_class(); ?>>
 		<?php if ( class_exists( 'UCF_Alert_Common' ) ) { echo UCF_Alert_Common::display_alert( 'faicon' );  } ?>
-		<header>
+		<header class="site-header">
 			<?php echo get_header_markup(); ?>
 		</header>
+		<main class="site-main">
