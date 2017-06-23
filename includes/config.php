@@ -8,6 +8,15 @@ define( 'THEME_STATIC_URL', THEME_URL . '/static' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
 define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
+define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
+	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
+	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
+	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
+	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
+	'gtm_id'                            => 'GTM-MBPLZH',
+	'chartbeat_uid'                     => '2806',
+	'chartbeat_domain'                  => 'ucf.edu'
+) ) );
 
 function __init__() {
 	add_theme_support( 'post-thumbnails' );
@@ -33,60 +42,6 @@ function __init__() {
 add_action( 'after_setup_theme', '__init__' );
 
 
-function enqueue_frontend_assets() {
-	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css' );
-
-	if ( $fontkey = get_theme_mod( 'cloud_typography_key' ) ) {
-		wp_enqueue_style( 'webfont', $fontkey );
-	}
-
-	// Deregister jquery and re-register newer version in the document head.
-	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, false );
-	wp_enqueue_script( 'jquery' );
-
-	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', null, null, true );
-	wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
-	wp_enqueue_script( 'script', THEME_JS_URL . '/script.min.js', array( 'jquery', 'tether' ), null, true );
-
-	// Add localized script variables to the document
-	$site_url = parse_url( get_site_url() );
-	wp_localize_script( 'script', 'UCFEDU', array(
-		'domain' => $site_url['host']
-	) );
-}
-
-add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
-
-
-/**
- * Meta tags to insert into the document head.
- **/
-function add_meta_tags() {
-?>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<?php
-}
-
-add_action( 'wp_head', 'add_meta_tags', 1 );
-
-
-function add_id_to_ucfhb( $url ) {
-	if (
-		( false !== strpos($url, 'bar/js/university-header.js' ) )
-		|| ( false !== strpos( $url, 'bar/js/university-header-full.js' ) )
-	) {
-      remove_filter( 'clean_url', 'add_id_to_ucfhb', 10, 3 );
-      return "$url' id='ucfhb-script";
-    }
-    return $url;
-}
-
-add_filter( 'clean_url', 'add_id_to_ucfhb', 10, 1 );
-
-
 function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'degrees',
@@ -108,6 +63,13 @@ function define_customizer_sections( $wp_customize ) {
 			'title' => 'Web Fonts'
 		)
 	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'analytics',
+		array(
+			'title' => 'Analytics'
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_sections' );
@@ -118,7 +80,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'degrees_undergraduate_application',
 		array(
-			'default' => 'https://apply.ucf.edu/application/'
+			'default' => get_theme_mod_default( 'degrees_undergraduate_application' )
 		)
 	);
 
@@ -135,7 +97,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'degrees_graduate_application',
 		array(
-			'default' => 'https://application.graduate.ucf.edu/#/'
+			'default' => get_theme_mod_default( 'degrees_graduate_application' )
 		)
 	);
 
@@ -152,7 +114,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'degrees_visit_ucf_url',
 		array(
-			'default' => 'https://apply.ucf.edu/forms/campus-tour/'
+			'default' => get_theme_mod_default( 'degrees_visit_ucf_url' )
 		)
 	);
 
@@ -213,7 +175,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_setting(
 		'cloud_typography_key',
 		array(
-			'default' => '//cloud.typography.com/730568/675644/css/fonts.css'
+			'default' => get_theme_mod_default( 'cloud_typography_key' )
 		)
 	);
 
@@ -229,6 +191,58 @@ function define_customizer_fields( $wp_customize ) {
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'webfonts'
 		)
 	);
+
+	// Analytics
+	$wp_customize->add_setting(
+		'gtm_id',
+		array(
+			'default' => get_theme_mod_default( 'gtm_id' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'gtm_id',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google Tag Manager Container ID',
+			'description' => 'The ID for the container in Google Tag Manager that represents this site.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'chartbeat_uid',
+		array(
+			'default' => get_theme_mod_default( 'chartbeat_uid' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'chartbeat_uid',
+		array(
+			'type'        => 'text',
+			'label'       => 'Chartbeat UID',
+			'description' => 'Example: <em>1842</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'chartbeat_domain',
+		array(
+			'default' => get_theme_mod_default( 'chartbeat_domain' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'chartbeat_domain',
+		array(
+			'type'        => 'text',
+			'label'       => 'Chartbeat Domain',
+			'description' => 'Example: <em>some.domain.com</em>',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_fields' );
@@ -239,6 +253,7 @@ add_action( 'customize_register', 'define_customizer_fields' );
  **/
 function custom_mimes( $mimes ) {
 	$mimes['svg'] = 'image/svg+xml';
+	$mimes['json'] = 'application/json';
 
 	return $mimes;
 }
@@ -253,4 +268,180 @@ if ( function_exists( 'athena_sc_tinymce_init' ) ) {
 	add_filter( 'athena_sc_enable_tinymce_formatting', '__return_true' );
 }
 
-?>
+
+/**
+ * Allow special tags in post bodies that would get stripped otherwise for most users.
+ * Modifies $allowedposttags defined in wp-includes/kses.php
+ *
+ * http://wordpress.org/support/topic/div-ids-being-stripped-out
+ * http://wpquicktips.wordpress.com/2010/03/12/how-to-change-the-allowed-html-tags-for-wordpress/
+ **/
+$allowedposttags['input'] = array(
+	'type' => array(),
+	'value' => array(),
+	'id' => array(),
+	'name' => array(),
+	'class' => array()
+);
+$allowedposttags['select'] = array(
+	'id' => array(),
+	'name' => array()
+);
+$allowedposttags['option'] = array(
+	'id' => array(),
+	'name' => array(),
+	'value' => array()
+);
+$allowedposttags['iframe'] = array(
+	'type' => array(),
+	'value' => array(),
+	'id' => array(),
+	'name' => array(),
+	'class' => array(),
+	'src' => array(),
+	'height' => array(),
+	'width' => array(),
+	'allowfullscreen' => array(),
+	'frameborder' => array()
+);
+$allowedposttags['object'] = array(
+	'height' => array(),
+	'width' => array()
+);
+
+$allowedposttags['param'] = array(
+	'name' => array(),
+	'value' => array()
+);
+
+$allowedposttags['embed'] = array(
+	'src' => array(),
+	'type' => array(),
+	'allowfullscreen' => array(),
+	'allowscriptaccess' => array(),
+	'height' => array(),
+	'width' => array()
+);
+// Most of these attributes aren't actually valid for some of
+// the tags they're assigned to, but whatever:
+$allowedposttags['div'] =
+$allowedposttags['a'] =
+$allowedposttags['button'] = array(
+	'id' => array(),
+	'class' => array(),
+	'style' => array(),
+	'width' => array(),
+	'height' => array(),
+
+	'align' => array(),
+	'aria-hidden' => array(),
+	'aria-labelledby' => array(),
+	'autofocus' => array(),
+	'dir' => array(),
+	'disabled' => array(),
+	'form' => array(),
+	'formaction' => array(),
+	'formenctype' => array(),
+	'formmethod' => array(),
+	'formonvalidate' => array(),
+	'formtarget' => array(),
+	'hidden' => array(),
+	'href' => array(),
+	'name' => array(),
+	'rel' => array(),
+	'rev' => array(),
+	'role' => array(),
+	'target' => array(),
+	'type' => array(),
+	'title' => array(),
+	'value' => array(),
+
+	// Bootstrap JS stuff:
+	'data-dismiss' => array(),
+	'data-toggle' => array(),
+	'data-target' => array(),
+	'data-backdrop' => array(),
+	'data-spy' => array(),
+	'data-offset' => array(),
+	'data-animation' => array(),
+	'data-html' => array(),
+	'data-placement' => array(),
+	'data-selector' => array(),
+	'data-title' => array(),
+	'data-trigger' => array(),
+	'data-delay' => array(),
+	'data-content' => array(),
+	'data-offset' => array(),
+	'data-offset-top' => array(),
+	'data-loading-text' => array(),
+	'data-complete-text' => array(),
+	'autocomplete' => array(),
+	'data-parent' => array(),
+);
+
+
+/**
+ * Remove paragraph tag from excerpts
+ **/
+remove_filter( 'the_excerpt', 'wpautop' );
+
+
+/**
+ * Hide unused admin tools
+ **/
+function hide_admin_links() {
+	remove_menu_page( 'edit-comments.php' );
+}
+
+add_action( 'admin_menu', 'hide_admin_links' );
+
+
+/**
+ * Prevent Wordpress from trying to redirect to a "loose match" post when
+ * an invalid URL is requested.  WordPress will redirect to 404.php instead.
+ *
+ * See http://wordpress.stackexchange.com/questions/3326/301-redirect-instead-of-404-when-url-is-a-prefix-of-a-post-or-page-name
+ **/
+function no_redirect_on_404( $redirect_url ) {
+	if ( is_404() ) {
+		return false;
+	}
+	return $redirect_url;
+}
+
+add_filter( 'redirect_canonical', 'no_redirect_on_404' );
+
+
+/**
+ * Kill attachment pages, author pages, daily archive pages, search, and feeds.
+ *
+ * http://betterwp.net/wordpress-tips/disable-some-wordpress-pages/
+ **/
+function kill_unused_templates() {
+	global $wp_query, $post;
+
+	if ( is_author() || is_attachment() || is_day() || is_search() || is_feed() ) {
+		wp_redirect( home_url() );
+		exit();
+	}
+}
+
+add_action( 'template_redirect', 'kill_unused_templates' );
+
+
+/**
+ * Disable the Yoast SEO meta box on post types that we don't need it on
+ * (non-public-facing posts, i.e. Sections)
+ **/
+function remove_yoast_meta_boxes() {
+	$post_types = array(
+		'ucf_resource_link',
+		'ucf_section'
+	);
+	foreach ( $post_types as $post_type ) {
+		remove_meta_box( 'wpseo_meta', $post_type, 'normal' );
+	}
+}
+
+add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
+
