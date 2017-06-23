@@ -6,6 +6,7 @@ include_once 'includes/utilities.php';
 
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
+include_once 'includes/phonebook-functions.php';
 
 /**
  * Enqueues assets for a particular page

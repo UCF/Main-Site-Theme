@@ -96,6 +96,13 @@ function define_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'phonebook',
+		array(
+			'title' => 'Phonebook'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'webfonts',
 		array(
 			'title' => 'Web Fonts'
@@ -184,6 +191,21 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Tuition Value Message',
 			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	//Phonebook
+	$wp_customize->add_setting(
+		'search_service_url'
+	);
+
+	$wp_customize->add_control(
+		'search_service_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Search Service URL',
+			'description' => 'The base url of the UCF Search service.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'phonebook'
 		)
 	);
 

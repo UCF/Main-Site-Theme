@@ -1,0 +1,19 @@
+.staff-list {
+  columns: auto 3;
+  column-rule: 1px solid $gray;
+
+  & li {
+    padding: 2px 8px;
+  }
+}
+
+.phonebook-results {
+  font-size: .9rem;
+}
+
+.result {
+  .name {
+    font-size: .95rem;
+   font-weight: 700;
+  }
+}
