@@ -15,7 +15,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gtm_id'                            => 'GTM-MBPLZH',
 	'chartbeat_uid'                     => '2806',
-	'chartbeat_domain'                  => 'ucf.edu'
+	'chartbeat_domain'                  => 'ucf.edu',
+	'search_service_url'                => 'https://search.smca.ucf.edu/service.php'
 ) ) );
 
 function __init__() {

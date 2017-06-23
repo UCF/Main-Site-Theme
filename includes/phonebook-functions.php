@@ -17,7 +17,7 @@ function get_phonebook_results( $query ) {
 
 	$retval = array();
 
-	$url = get_theme_mod( 'search_service_url', 'https://search.smca.ucf.edu/service.php' );
+	$url = get_theme_mod_or_default( 'search_service_url' );
 
 	$params = array(
 		'search' => $query
@@ -206,20 +206,23 @@ function format_phonebook_result( $result ) {
 		<table class="table">
 			<tbody>
 				<tr class="row mx-auto">
-					<td class="col-sm-6">
+					<td class="col-md-6">
 						<?php echo format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group ); ?>
 					</td>
-					<td class="col-sm-3">
+					<td class="col-md-3">
 						<?php echo format_phonebook_result_location( $result, $is_dept, $is_org, $is_group ); ?>
 					</td>
-					<td class="col-sm-3">
+					<td class="col-md-3">
 						<?php echo format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ); ?>
 					</td>
 				</tr>
 				<?php if ( ! $is_group && ( ! empty( $result->secondary ) ) ) : ?>
 				<tr class="row mx-auto">
 					<td class="col-sm-12">
-						<a class="person-secondary" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>"><span class="fa fa-plus"></span> More Results</a>
+						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
+							<span class="fa fa-plus"></span>
+							<span class="fa fa-minus"> More Results
+						</a>
 						<div class="collapse" id="<?php echo $unique_slug; ?>">
 							<ul class="list-unstyled">
 							<?php foreach( $result->secondary as $secondary ) : ?>
@@ -227,13 +230,13 @@ function format_phonebook_result( $result ) {
 									<table class="table">
 										<tbody>
 											<tr>
-												<td class="col-sm-6">
+												<td class="col-md-6">
 													<?php echo format_phonebook_result_primary( $secondary, false, false, false ); ?>
 												</td>
-												<td class="col-sm-3">
+												<td class="col-md-3">
 													<?php echo format_phonebook_result_location( $secondary, false, false, false ); ?>
 												</td>
-												<td class="col-sm-3">
+												<td class="col-md-3">
 													<?php echo format_phonebook_result_contact( $secondary, false, false, false ); ?>
 												</td>
 											</tr>
@@ -248,20 +251,22 @@ function format_phonebook_result( $result ) {
 				<?php elseif ( $is_group && ( count( $result->staff ) > 0 ) ) : ?>
 				<tr class="row mx-auto">
 					<td colspan="3" class="col-sm-12">
-						<a class="toggle" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>" ><span class="fa fa-plus"></span> Show Staff</a>
+						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>" >
+							<span class="fa fa-plus"></span>
+							<span class="fa fa-minus"></span> Show Staff
+						</a>
 						<div class="collapse" id="<?php echo $unique_slug; ?>">
 							<ul class="staff-list list-unstyled">
 								<?php foreach( $result->staff as $person ) : ?>
-									<li>
+									<li class="clearfix">
 										<?php if ( $person->email ) : ?>
-											<span class="email pull-left"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
+											<span class="email"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
 										<?php else : ?>
-											<span class="name pull-left"><?php echo $person->name; ?></span>
+											<span class="name"><?php echo $person->name; ?></span>
 										<?php endif; ?>
 										<?php if ( $person->phone ) : ?>
-											<span class="phone pull-right"><a href="tel:<?php echo str_replace( '-', '', $person->phone ); ?>"><?php echo $person->phone; ?></a></span>
+											<span class="phone"><a href="tel:<?php echo str_replace( '-', '', $person->phone ); ?>"><?php echo $person->phone; ?></a></span>
 										<?php endif; ?>
-										<span class="clearfix"></span>
 									</li>
 								<?php endforeach; ?>
 							</ul>

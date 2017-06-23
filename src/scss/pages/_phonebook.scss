@@ -2,13 +2,55 @@
   columns: auto 3;
   column-rule: 1px solid $gray;
 
-  & li {
+  li {
+    border-bottom: 1px solid $gray-lightest;
     padding: 2px 8px;
+  }
+
+  .email,
+  .name {
+    display: block;
+    float: none;
+
+    @include media-breakpoint-up(lg) {
+      display: inline-block;
+      float: left;
+    }
+  }
+
+  .phone {
+    display: block;
+    float: none;
+    padding-bottom: .25rem;
+
+    @include media-breakpoint-up(lg) {
+      display: inline-block;
+      float: right;
+    }
   }
 }
 
 .phonebook-results {
   font-size: .9rem;
+
+  .toggle {
+    &:not(.collapsed) {
+      .fa-plus {
+        display: none;
+      }
+    }
+
+    &.collapsed {
+      .fa-minus {
+        display: none;
+      }
+    }
+  }
+
+  .email,
+  .phone {
+    text-overflow: ellipsis;
+  }
 }
 
 .result {
