@@ -94,9 +94,22 @@
 .navbar-custom {
   // Selector depth required to match Bootstrap/Athena selectors
   // scss-lint:disable NestingDepth SelectorDepth
+  .navbar-collapse {
+    @include media-breakpoint-down(md) {
+      // position: relative;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: $nav-height;
+      z-index: 1;
+    }
+  }
+
   .navbar-nav {
+
     @include media-breakpoint-up(md) {
       margin-right: 0;
+      width: 100%;
     }
 
     .nav-link {

@@ -60,7 +60,8 @@ function get_nav_markup( $image=true ) {
 ?>
 	<nav class="navbar navbar-toggleable-md<?php echo $image ? ' navbar-inverse navbar-custom header-gradient' : ' navbar-light navbar-custom'; ?> py-4" role="navigation">
 		<div class="container">
-			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler ml-auto collapsed" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-text">Navigation</span>
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<?php
@@ -70,7 +71,7 @@ function get_nav_markup( $image=true ) {
 					'container'       => 'div',
 					'container_class' => 'collapse navbar-collapse',
 					'container_id'    => 'header-menu',
-					'menu_class'      => 'nav navbar-nav nav-fill w-100',
+					'menu_class'      => 'nav navbar-nav nav-fill',
 					'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
 					'walker'          => new WP_Bootstrap_Navwalker()
 				) );
