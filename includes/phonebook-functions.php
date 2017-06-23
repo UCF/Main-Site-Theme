@@ -221,7 +221,7 @@ function format_phonebook_result( $result ) {
 					<td class="col-sm-12">
 						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
 							<span class="fa fa-plus"></span>
-							<span class="fa fa-minus"> More Results
+							<span class="fa fa-minus"></span> More Results
 						</a>
 						<div class="collapse" id="<?php echo $unique_slug; ?>">
 							<ul class="list-unstyled">
