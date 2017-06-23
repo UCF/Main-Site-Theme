@@ -180,8 +180,7 @@ function get_media_background_video( $videos, $loop=false ) {
 /**
  * Section markup override
  **/
-function add_section_markup_before( $content, $section ) {
-
+function add_section_markup_before( $content, $section, $class, $title, $section_id ) {
 	// Retrieve background image sizes
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
@@ -196,6 +195,10 @@ function add_section_markup_before( $content, $section ) {
 
 	// Define classes for the section
 	$section_classes = '';
+	if ( $class ) {
+		$section_classes = $class;
+	}
+
 	if ( $bg_images['fallback'] ) {
 		$section_classes .= ' media-background-container';
 	}
@@ -215,15 +218,19 @@ function add_section_markup_before( $content, $section ) {
 		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 
+	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '"' : '';
+
+	$section_id = ! empty( $section_id ) ? ' id="' . $section_id . '"' : '';
+
 	ob_start();
 ?>
-	<section class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>">
+	<section <?php echo $section_id; ?>class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>"<?php echo $title; ?>>
 	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_section_display_before', 'add_section_markup_before', 10, 2 );
+add_filter( 'ucf_section_display_before', 'add_section_markup_before', 10, 5 );
 
 
 function add_section_markup( $output, $section ) {
