@@ -276,6 +276,16 @@ function format_phonebook_result( $result ) {
 	return ob_get_clean();
 }
 
+/**
+ * Outputs the primary info for the result
+ * @author Jim Barnes
+ * @since 3.0.0
+ * @param $result Object | The phonebook result
+ * @param $is_dept boolean | True, if the result is a department
+ * @param $is_org boolean | True, if the result is an organization
+ * @param $is_group boolean | True, if the result is a department or organization
+ * @return string | The html markup
+ **/
 function format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group ) {
 	ob_start();
 ?>
@@ -285,23 +295,33 @@ function format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group 
 	<?php endif; ?>
 	<?php if ( $is_dept && $result->organization ) : ?>
 		<span class="division  d-block">
-			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo ucwords( strtolower( $result->organization ) ); ?></a>
+			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php phonebook_fix_name_case( $result->organization ); ?></a>
 		</span>
 	<?php endif; ?>
 	<?php if ( ! $is_group && $result->department ) : ?>
 		<span class="department  d-block">
-			<a href="?query=<?php echo urlencode( $result->department ); ?>"><?php echo ucwords( strtolower( $result->department ) ); ?></a>
+			<a href="?query=<?php echo urlencode( $result->department ); ?>"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
 		</span>
 	<?php endif; ?>
 	<?php if ( ! $is_group && $result->organization ) : ?>
 		<span class="organization  d-block">
-			<a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo ucwords( strtolower( $result->organization ) ); ?></a>
+			<a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo phonebook_fix_name_case( $result->organization ); ?></a>
 		</span>
 	<?php endif; ?>
 <?php
 	return ob_get_clean();
 }
 
+/**
+ * Outputs the location info for the result
+ * @author Jim Barnes
+ * @since 3.0.0
+ * @param $result Object | The phonebook result
+ * @param $is_dept boolean | True, if the result is a department
+ * @param $is_org boolean | True, if the result is an organization
+ * @param $is_group boolean | True, if the result is a department or organization
+ * @return string | The html markup
+ **/
 function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group ) {
 	ob_start();
 ?>
@@ -313,7 +333,7 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	<?php if ( $result->building ) : ?>
 		<span class="location d-block">
 			<a href="https://map.ucf.edu/?show=<?php echo $result->bldg_id; ?>">
-				<?php echo ucwords( strtolower( $result->building ) ); ?>
+				<?php echo phonebook_fix_name_case( $result->building ); ?>
 				<?php if ( $result->room ) : ?>
 					<?php echo ' - ' . $result->room; ?>
 				<?php endif; ?>
@@ -329,6 +349,16 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	return ob_get_clean();
 }
 
+/**
+ * Outputs the contact info for the result
+ * @author Jim Barnes
+ * @since 3.0.0
+ * @param $result Object | The phonebook result
+ * @param $is_dept boolean | True, if the result is a department
+ * @param $is_org boolean | True, if the result is an organization
+ * @param $is_group boolean | True, if the result is a department or organization
+ * @return string | The html markup
+ **/
 function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ) {
 	ob_start();
 ?>
@@ -344,4 +374,52 @@ function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group 
 	<?php endif; ?>
 <?php
 	return ob_get_clean();
+}
+
+/**
+ * Helper function for naming consistencies
+ * @author Jim Barnes
+ * @since 3.0.0
+ * @param $name string | The name to normalize
+ * @return string | The normalized name
+ **/
+function phonebook_fix_name_case( $name ) {
+	$str_replace = array(
+		'Ucf' => 'UCF',
+		'dr.' => 'Dr.',
+		'alumni' => 'Alumni',
+		' And ' => ' and ',
+		'Cosas' => 'COSAS',
+		'Creol' => 'CREOL',
+		'Lead Scholars' => 'LEAD Scholars',
+		'Rotc' => 'ROTC',
+		' Of ' => ' of ',
+		' For ' => ' for ',
+		'&public' => '$amp; Public',
+		'Student-athletes' => 'Student Athletes',
+		'Wucf' => 'WUCF',
+		'WUCF Tv' => 'WUCF TV',
+		'WUCF-fm' => 'WUCF-FM'
+	);
+
+	$regex = array(
+		'/\bSdes\b/' => 'SDES',
+		'/\sOf$/' => ' of',
+		'/\sFor$/' => ' for'
+	);
+
+	$name = ucwords( strtolower( $name ) );
+
+	foreach( $str_replace as $key => $val ) {
+		$name = str_replace( $key, $val, $name );
+	}
+
+	foreach( $regex as $key => $val ) {
+		$name = preg_replace( $key, $val, $name );
+	}
+
+	$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+	$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+
+	return $name;
 }
