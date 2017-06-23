@@ -28,6 +28,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 ### Recommended Plugins
 * Page Links To
 * UCF Content Scheduler
+* UCF Page Assets
 * Varnish Dependency Purger
 * WP-Mail-SMTP
 * WP Allowed Hosts
