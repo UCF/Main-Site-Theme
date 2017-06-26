@@ -218,7 +218,7 @@ function format_phonebook_result( $result ) {
 				</tr>
 				<?php if ( ! $is_group && ( ! empty( $result->secondary ) ) ) : ?>
 				<tr class="row mx-auto">
-					<td class="col-sm-12">
+					<td class="col-md-12">
 						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
 							<span class="fa fa-plus"></span>
 							<span class="fa fa-minus"></span> More Results
@@ -229,7 +229,7 @@ function format_phonebook_result( $result ) {
 								<li>
 									<table class="table">
 										<tbody>
-											<tr>
+											<tr class="row">
 												<td class="col-md-6">
 													<?php echo format_phonebook_result_primary( $secondary, false, false, false ); ?>
 												</td>
