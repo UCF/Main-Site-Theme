@@ -43,6 +43,12 @@ function add_meta_tags() {
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <?php
+$gw_verify = get_theme_mod_or_default( 'gw_verify' );
+if ( $gw_verify ):
+?>
+<meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
+<?php endif; ?>
+<?php
 }
 
 add_action( 'wp_head', 'add_meta_tags', 1 );
