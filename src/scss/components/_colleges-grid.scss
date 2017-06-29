@@ -1,6 +1,10 @@
 .college-blocks {
   overflow: auto;
   background: $ucf-gold;
+
+  br {
+    display: none;
+  }
 }
 
 .college-block {
@@ -8,6 +12,7 @@
   float: left;
   overflow: hidden;
   position: relative;
+  margin-bottom: -1px;
 
   @media (min-width: $screen-sm-min) {
     width: calc(100%/3);
@@ -104,7 +109,7 @@
 
     text-transform: uppercase;
     color: $black;
-    font-size: 5vw;
+    font-size: 3vw;
 
     @media (min-width: $screen-sm-min) {
       font-size: 5vw;
@@ -132,8 +137,15 @@
     text-transform: none;
     line-height: 1.65;
     color: $black;
+    font-size: 10px;
 
-    font-size: 14px;
+    p {
+      margin-bottom: 0;
+    }
+
+    @media (min-width: 576px) {
+      font-size: 14px;
+    }
 
     @media (min-width: $screen-sm-min) {
       font-size: 16px;
