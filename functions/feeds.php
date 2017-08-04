@@ -499,7 +499,6 @@ function mainsite_news_get_layouts( $layouts ) {
 	$layouts = array_merge(
 		$layouts,
 		array(
-			'modern' => 'Modern',
 			'text' => 'Text'
 		)
 	);
