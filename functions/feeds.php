@@ -511,51 +511,39 @@ add_filter( 'ucf_news_get_layouts', 'mainsite_news_get_layouts' );
  * Output of "Text" UCF News layout:
  **/
 
-function mainsite_news_display_text_before( $items, $title, $display_type ) {
+function mainsite_news_display_text_before( $content, $items, $args, $display_type ) {
 	ob_start();
 ?>
 	<div class="ucf-news ucf-news-text">
 <?php
-	echo ob_get_clean();
+	return ob_get_clean();
 }
 
-add_action( 'ucf_news_display_text_before', 'mainsite_news_display_text_before', 10, 3 );
+add_filter( 'ucf_news_display_text_before', 'mainsite_news_display_text_before', 10, 4 );
 
-if ( ! function_exists( 'ucf_news_display_text' ) ) {
-	function ucf_news_display_text( $items, $title, $display_type ) {
-		if ( ! is_array( $items ) ) { $items = array( $items ); }
+function mainsite_news_display_text( $content, $items, $args, $display_type ) {
+	if ( ! is_array( $items ) ) { $items = array( $items ); }
 
-		ob_start();
-	?>
-		<div class="ucf-news-items">
-	<?php
-		foreach( $items as $item ) :
-			$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
-	?>
-			<div class="ucf-news-item">
-				<div class="ucf-news-item-title">
-					<a href="<?php echo $item->link; ?>" class="ucf-news-item-link">
-						<?php echo $item->title->rendered; ?>
-					</a>
-				</div>
-			</div>
-	<?php
-		endforeach;
-	?>
-	</div>
-	<?php
-		echo ob_get_clean();
-	}
-	add_action( 'ucf_news_display_text', 'ucf_news_display_text', 10, 3 );
-}
-
-function mainsite_news_display_text_after( $items, $title, $display_type ) {
 	ob_start();
 ?>
-	</div>
+	<div class="ucf-news-items">
 <?php
-	echo ob_get_clean();
-}
-
-add_action( 'ucf_news_display_text_after', 'mainsite_news_display_text_after', 10, 3 );
+	foreach( $items as $item ) :
+		$item_img = UCF_News_Common::get_story_image_or_fallback( $item );
 ?>
+		<div class="ucf-news-item">
+			<div class="ucf-news-item-title">
+				<a href="<?php echo $item->link; ?>" class="ucf-news-item-link">
+					<?php echo $item->title->rendered; ?>
+				</a>
+			</div>
+		</div>
+<?php
+	endforeach;
+?>
+</div>
+<?php
+	return ob_get_clean();
+}
+add_filter( 'ucf_news_display_text', 'mainsite_news_display_text', 10, 4 );
+
