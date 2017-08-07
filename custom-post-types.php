@@ -1434,6 +1434,24 @@ class Degree extends CustomPostType{
 				'desc'  => 'Sets the header image of the degree (only if "Use Updated Template" is checked)',
 				'id'    => $prefix.'header_image',
 				'type'  => 'file'
+			),
+			array(
+				'name'  => 'Online',
+				'desc'  => 'Indicates if the degree is available online',
+				'id'    => $prefix.'online',
+				'type'  => 'checkbox'
+			),
+			array(
+				'name'  => 'Plan Code',
+				'desc'  => 'The programs plan code from People Soft',
+				'id'    => $prefix.'plan_code',
+				'type'  => 'text'
+			),
+			array(
+				'name'  => 'Sub Plan Code',
+				'desc'  => 'The program\'s sub plan code from People Soft',
+				'id'    => $prefix.'sub_plan_code',
+				'type'  => 'text'
 			)
 		);
 	}

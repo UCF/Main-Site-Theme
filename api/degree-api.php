@@ -8,12 +8,11 @@ class Degree_API extends WP_REST_Controller {
 		$namespace = 'ucf/v' . $version;
 		$base = 'degrees';
 
-		register_rest_route( $namespace . '/' . $base, array(
+		register_rest_route( "$namespace/", $base, array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => array( 'Degree_API', 'get_degrees' ),
-				'permission_callback' => function() { return true; },
-				'args'                => array(  )
+				'permission_callback' => function() { return true; }
 			)
 		) );
 	}
@@ -27,7 +26,7 @@ class Degree_API extends WP_REST_Controller {
 		$retval = array();
 
 		foreach( $items as $item ) {
-			$retval[] = $item->post_title;
+			$retval[] = $item;
 		}
 
 		return new WP_REST_Response( $retval, 200 );
