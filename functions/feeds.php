@@ -317,7 +317,7 @@ function display_news() {
 	$items = UCF_News_Feed::get_news_items( $args );
 
 	if ( $items ) {
-		echo UCF_News_Common::display_news_items( $items, 'classic', 'News', 'default' );
+		echo UCF_News_Common::display_news_items( $items, 'classic', array_merge( $args, array( 'title' => 'News' ) ), 'default' );
 	}
 }
 
