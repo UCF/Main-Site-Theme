@@ -46,7 +46,7 @@ add_action( 'rest_api_init', 'add_rest_fields', 99 );
 /**
  * Gets all terms set to the post for the provided taxonomy
  * @author Jim Barnes
- * @since 0.0.1
+ * @since 2.3.16
  * @param $object array | The data object that will be returned to the Rest API
  * @param $tax string | The field name, which is this case should be a taxonomy slug
  * @param $request array | The request object, which includes get and post parameters
@@ -71,7 +71,7 @@ function degree_rest_get_taxonomies( $object, $tax, $request ) {
 /**
  * Adds the postmeta to the `meta` field.
  * @author Jim Barnes
- * @since 1.0.1
+ * @since 2.3.16
  * @param $object array | The data object that will be returned to the Rest API
  * @param $field_name string | The field name
  * @param $request array | The request object, which includes get and post parameters
