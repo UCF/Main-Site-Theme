@@ -87,3 +87,10 @@ function degree_rest_get_termmeta( $object, $field_name, $request ) {
 	}
 	return $retval;
 }
+
+function my_allow_meta_query( $valid_vars ) {
+	
+	$valid_vars = array_merge( $valid_vars, array( 'meta_key', 'meta_value' ) );
+	return $valid_vars;
+}
+add_filter( 'rest_query_vars', 'my_allow_meta_query' );
