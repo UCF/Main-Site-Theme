@@ -88,6 +88,13 @@ function degree_rest_get_termmeta( $object, $field_name, $request ) {
 	return $retval;
 }
 
+/** 
+ * Adds meta_key and meta_value to allowed query args
+ * @author Jim Barnes
+ * @since 2.3.16
+ * @param $valid_args Array | The array of valid argument names
+ * @return Array | The array of valid argument names
+ **/
 function allow_meta_query( $valid_vars ) {
 	
 	$valid_vars = array_merge( $valid_vars, array( 'meta_key', 'meta_value' ) );
@@ -96,6 +103,14 @@ function allow_meta_query( $valid_vars ) {
 
 add_filter( 'rest_query_vars', 'allow_meta_query', 10, 1 );
 
+/**
+ * Processes the meta_key and meta_value args
+ * @author Jim Barnes
+ * @since 2.3.16
+ * @param $args Array | The array of arguments for WP_Query
+ * @param $request Array | The request array, including GET params
+ * @return Array | The argument array
+ **/
 function rest_meta_query( $args, $request ) {
 	if ( isset( $request['meta_key'] ) && isset( $request['meta_value'] ) ) {
 		$args['meta_query'] = array(
