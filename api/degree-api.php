@@ -88,9 +88,25 @@ function degree_rest_get_termmeta( $object, $field_name, $request ) {
 	return $retval;
 }
 
-function my_allow_meta_query( $valid_vars ) {
+function allow_meta_query( $valid_vars ) {
 	
 	$valid_vars = array_merge( $valid_vars, array( 'meta_key', 'meta_value' ) );
 	return $valid_vars;
 }
-add_filter( 'rest_query_vars', 'my_allow_meta_query' );
+
+add_filter( 'rest_query_vars', 'allow_meta_query', 10, 1 );
+
+function rest_meta_query( $args, $request ) {
+	if ( isset( $request['meta_key'] ) && isset( $request['meta_value'] ) ) {
+		$args['meta_query'] = array(
+			array(
+				'key'   => $request['meta_key'],
+				'value' => $request['meta_value']
+			)
+		);
+	}
+
+	return $args;
+}
+
+add_filter( 'rest_degree_query', 'rest_meta_query', 10, 2 );
