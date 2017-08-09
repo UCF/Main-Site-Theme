@@ -1,5 +1,9 @@
 
 // News Modern theme
+// NOTE: .ucf-news-modern is still included here (along with some redundant
+// styles already provided by the UCF News plugin) to maintain styles for
+// news items added to page contents manually (e.g. IGNITE campaign links).
+.ucf-news.modern,
 .ucf-news-modern {
   .ucf-news-item {
     display: table;
@@ -15,8 +19,12 @@
 
   .ucf-news-thumbnail,
   .ucf-news-item-content {
-    display: table-cell;
+    display: table-cell !important;
     vertical-align: top;
+  }
+
+  .ucf-news-item-content {
+    width: auto !important;
   }
 
   // Die, link borders!
@@ -31,10 +39,10 @@
   }
 
   .ucf-news-thumbnail {
-    width: 66px;
+    width: 66px !important;
 
     @media (min-width: $screen-sm-min) {
-      width: 150px;
+      width: 150px !important;
     }
 
     + .ucf-news-item-content {
@@ -47,6 +55,7 @@
     width: 100%;
   }
 
+  .ucf-news-section-title,
   .ucf-news-item-label {
     @include gotham(7);
     background-color: $ucf-gold;
@@ -88,6 +97,7 @@
     @include gotham(4);
     font-size: 12px;
     line-height: 1.65;
+    margin-bottom: 0 !important;
 
     @media (min-width: $screen-sm-min) {
       font-size: 14px;
