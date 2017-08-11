@@ -83,7 +83,8 @@
     }
   }
 
-  .ucf-news-item-link {
+  .ucf-news-item-link,
+  .ucf-news-item > a {
     &,
     &:hover,
     &:active,
