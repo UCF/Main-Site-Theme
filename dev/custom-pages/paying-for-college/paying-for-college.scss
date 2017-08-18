@@ -1,0 +1,439 @@
+@import '../../media-template/media-template-base';
+
+$gray: #ececec;
+$ucf-metalic-gold: #c90;
+
+#header-menu li:not(.last) a,
+#header-menu li:not(:last-child) a {
+  color: #fff;
+
+  &:hover,
+  &:hover {
+    color: $ucf-gold;
+  }
+}
+
+.page-media {
+
+  @media (min-width: $screen-sm-min) {
+    margin-bottom: -71px;
+  }
+
+  .page-media-header {
+    background-position: bottom center;
+    height: 124vw;
+
+    @media (min-width: $screen-sm-min) {
+      height: 450px;
+      padding-top: 7em;
+    }
+
+    @media (min-width: $screen-md-min) {
+      height: 700px;
+      padding-top: 15em;
+    }
+
+    .header-title {
+      background-color: inherit;
+      color: #fff;
+      font-family: 'Knockout 49 A','Knockout 49 B',Georgia,serif;
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 6em;
+      }
+    }
+  }
+}
+
+#contentcol {
+
+  .callout-gold {
+    color: #000;
+  }
+
+  .section-link {
+    font-weight: 800;
+  }
+
+  // Condensed headings
+  .heading-condensed {
+    line-height: .9;
+    text-transform: uppercase;
+
+    @include knockout();
+  }
+
+  h1.heading-condensed,
+  .h1.heading-condensed {
+    font-size: 50px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 88px;
+    }
+  }
+
+  h2.heading-condensed,
+  .h2.heading-condensed {
+    font-size: 42px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 70px;
+    }
+  }
+
+  h3.heading-condensed,
+  .h3.heading-condensed {
+    font-size: 34px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 52px;
+    }
+  }
+
+  h4.heading-condensed,
+  .h4.heading-condensed {
+    font-size: 28px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 44px;
+    }
+  }
+
+  h5.heading-condensed,
+  .h5.heading-condensed {
+    font-size: 20px;
+
+    @media (min-width: $screen-sm-min) {
+      font-size: 24px;
+    }
+  }
+
+  h6.heading-condensed,
+  .h6.heading-condensed {
+    font-size: 18px;
+  }
+
+  // Lead Section
+  .lead-fact {
+    margin-top: .4em;
+  }
+
+  // Student Quote Section
+  .student-quote {
+
+    .container {
+
+      @media (max-width: $screen-sm-max) {
+        background-image: none !important;
+      }
+    }
+
+    .heading {
+      font-family: Georgia,'Times New Roman',Times,serif;
+      font-size: 2em;
+      font-style: italic;
+    }
+
+    .caption {
+      font-size: .8em;
+      margin-bottom: 50px;
+    }
+  }
+
+  // Stats Section
+  .stats-wrapper {
+    color: #000;
+
+    .stats-item {
+      border: 0 dotted #000;
+      display: block;
+      float: left;
+      height: 200px;
+      line-height: 1.2;
+      min-height: 100px;
+      padding: 20px 10px;
+      text-align: center;
+      width: 50%;
+
+      p {
+        margin: 0 auto;
+      }
+    }
+
+    .stats-border-top-left {
+      border-width: 0 1px 1px 0;
+    }
+
+    .stats-border-top-right {
+      border-width: 0 0 1px;
+    }
+
+    .stats-border-bottom-left {
+      border-width: 0 1px 0 0;
+    }
+  }
+
+  // Events Section
+  .callout-events {
+
+    @media (max-width: $screen-sm-max) {
+      background-image: none !important;
+    }
+
+    .container {
+      padding-bottom: 2em;
+
+      .events-list {
+        padding-left: 0;
+      }
+
+      .events-list-item {
+        list-style: none;
+      }
+
+      .event-link {
+        text-decoration: none;
+      }
+
+      .event-start-datetime {
+        color: $ucf-gold;
+        display: block;
+        font-size: 1.1em;
+        margin-bottom: .6em;
+      }
+
+      .event-title {
+        display: block;
+        margin-bottom: 2em;
+      }
+
+      .event-location {
+        display: none;
+      }
+
+      .events-view-all {
+        color: $ucf-gold;
+      }
+    }
+  }
+
+  // Tuition and Fees
+  .tuition-fees-table tfoot {
+    font-weight: bold;
+  }
+
+  // News Section
+  .callout-news {
+
+    .read-more {
+      margin-right: 10px;
+      margin-top: 50px;
+      text-align: right;
+    }
+  }
+
+  // Calendar
+  .calendar-section {
+
+    .giant-event-date {
+      border: 1px solid #c90;
+      border-radius: 4px;
+      max-width: 200px;
+      text-align: center;
+
+      .month {
+        background: #c90;
+        color: #000;
+        display: block;
+        font-size: 26px;
+        font-weight: 700;
+        line-height: 1.5;
+        text-transform: uppercase;
+      }
+
+      .day {
+        color: #fff;
+        font-size: 70px;
+        font-weight: normal;
+        line-height: 1.25;
+      }
+    }
+
+    .vertical-border {
+      border-left: 2px solid #666;
+      padding-bottom: 20px;
+    }
+
+    h3,
+    h4 {
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .first-item {
+      text-transform: uppercase;
+
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .event-details {
+      transition: all .2s ease-in;
+
+      &:hover {
+        opacity: .8;
+        transition: all .2s ease-in;
+      }
+
+      a {
+        font-weight: normal;
+        text-decoration: none;
+      }
+
+      p {
+        font-family: 'Archer A','Archer B','Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;
+        font-size: 18px;
+        margin-bottom: 0;
+      }
+    }
+
+    .time {
+      color: $ucf-metalic-gold;
+    }
+
+    .all-link {
+      color: $ucf-gold;
+      float: right;
+      font-family: 'Archer A','Archer B','Palatino Linotype','Book Antiqua',Palatino,Georgia,serif;
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 40px;
+      text-decoration: none;
+    }
+  }
+
+  // Colleges Grid Section
+  .section-colleges {
+    padding-bottom: 0 !important;
+  }
+
+  // Responsible Borrowing
+  .icon-grid {
+    text-align: center;
+
+    a {
+      display: inline-block;
+      padding: 1.5em 0;
+      text-decoration: none;
+      transition: all .3s ease-in;
+
+      &:hover {
+        background-color: #e5e5e5;
+        text-decoration: underline;
+        transition: all .3s ease-in;
+      }
+    }
+
+    img {
+      width: 50%;
+    }
+  }
+
+  // Utilities
+
+  .embed-responsive iframe,
+  .embed-responsive object {
+    height: 100%;
+  }
+
+  .btn-ucf-gold {
+    border-bottom: none !important;
+    border-color: transparent;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    padding: .8em 1.2em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .callout-stats {
+    background-position: 50% 50%;
+    background-size: cover;
+    margin-top: -5px;
+    min-height: 450px;
+    padding: 60px 0;
+    position: relative;
+  }
+
+  .callout-stats-cover {
+    background: $ucf-gold;
+    height: 100%;
+    left: 0;
+    opacity: .9;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .heading-underline {
+    margin-top: 1em;
+  }
+
+  .number-lg {
+    color: #fff;
+    font-size: 5em;
+    font-weight: 700;
+
+    small {
+      font-size: .6em;
+    }
+  }
+
+  .font-weight-bold {
+    font-weight: bold;
+  }
+
+  .font-weight-normal {
+    font-weight: normal;
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+
+  .mt-5 {
+    margin-top: 3rem;
+  }
+
+  .mt-6 {
+    margin-top: 4rem;
+  }
+
+  .mb-5 {
+    margin-bottom: 3rem;
+  }
+
+  .mb-6 {
+    margin-bottom: 4rem;
+  }
+
+  .pt-0 {
+    padding-top: 0;
+  }
+
+  .pb-0 {
+    padding-bottom: 0;
+  }
+}
