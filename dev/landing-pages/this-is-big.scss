@@ -1,7 +1,7 @@
 @import '../media-template/media-template-base';
 
 
-$header-media-xs-url:             '//www.ucf.edu/wp-content/uploads/2017/04/Header-LandingPage_KnightroCheer-MOBILE-767x400.jpg';
+$header-media-xs-url:             '//wwwqa.cc.ucf.edu/wp-content/uploads/2017/08/this-is-big-header-mobile.jpg';
 $section-meaningful-impact-bg-xs: '//www.ucf.edu/wp-content/uploads/2017/02/UCF-Seal-Yellow.jpg';
 $section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-DH25-Millican-Sunset-crop.jpg';
 $section-plans-bg-xs:             '//www.ucf.edu/wp-content/uploads/2017/02/Past-Presidents-DrHitt-Mobile.jpg';
@@ -23,10 +23,25 @@ $gray: #ececec;
   }
 }
 
+#contentcol .page-media {
+  margin-bottom: -70px;
+}
+
 .page-media .page-media-header {
+  background-position: top center;
+  height: 700px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.25vw;
+  border-bottom: 3px solid $ucf-gold;
+  padding-top: 7vh;
+
   @media (max-width: $screen-sm-max) {
+    font-size: 1.25em;
     height: 450px;
     margin-bottom: -35px;
+    padding-top: 2vh;
   }
 
   @media (max-width: $screen-xs-max) {
@@ -36,30 +51,46 @@ $gray: #ececec;
     max-height: 700px;
   }
 
+  &::after {
+    content: "\f103";
+    color: #ffc904;
+    font-family: FontAwesome;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 100;
+    position: absolute;
+    bottom: 0;
+  }
+
   .header-title {
-    @media (max-width: 479px) {
-      font-size: 8.5vw;
-    }
+    @include knockout();
+    background: none;
+    color: #fff;
+    font-size: 50px;
+    line-height: 0.85;
+    padding: 0 0 7px 0;
+    text-align: left;
+    text-transform: uppercase;
+
+    // @media (max-width: 479px) {
+    //   // font-size: 8.5vw;
+    // }
 
     @media (min-width: 480px) and (max-width: $screen-xs-max) {
-      font-size: 8vw;
+      // font-size: 8vw;
+      font-size: 75px;
     }
 
     @media (min-width: $screen-sm-min) {
-      font-size: 44px;
-      line-height: 1.1;
-      margin-top: 70px;
-      padding-left: 30px;
-      padding-right: 30px;
-      text-align: right; // right-align on this page
+      font-size: 115px;
     }
 
     @media (min-width: $screen-md-min) {
-      font-size: 54px;
-    }
+      // font-size: 54px;
 
-    &.header-text-left {
-      text-align: left !important;
+      font-size: 150px;
     }
   }
 
@@ -80,12 +111,33 @@ $gray: #ececec;
   }
 }
 
+  //
+  // MODALS
+  //
+
+#contentcol h3.modal-title {
+    margin: 0;
+}
+
+@media (min-width: 992px) {
+  .modal-lg {
+      width: 90%;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal-lg {
+      width: 90%;
+  }
+}
 
 #contentcol {
 
   //
   // BASE OVERRIDES
   //
+
+  margin-top: -75px;
 
   blockquote {
     border-left: 0 solid transparent;
@@ -121,6 +173,12 @@ $gray: #ececec;
 
   .gold-highlight {
     color: $ucf-gold;
+  }
+
+  .background-image-container {
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   // Divider style overrides
@@ -188,6 +246,20 @@ $gray: #ececec;
     }
   }
 
+  // Make all gold callout text black on this page
+  .callout-dark-gray {
+    background-color: #242424;
+    color: #fff;
+
+    a {
+      color: $ucf-gold;
+    }
+
+    .callout-aside-heading a {
+      color: $ucf-gold;
+    }
+  }
+
   // Beefed-up h1 font sizes on this page
   h1,
   .h1 {
@@ -195,26 +267,6 @@ $gray: #ececec;
       font-size: 42px;
     }
   }
-
-  // .section-facts {
-
-  //   .text-inline {
-  //     display: inline-block;
-  //     vertical-align: middle;
-  //   }
-
-  //   h2.text-inline {
-  //     font-size: 20px;
-  //     margin: 0;
-  //   }
-
-  //   p.text-inline {
-  //     font-size: 20px;
-  //     margin: 0;
-  //     padding: 7px 0 0 20px;
-  //   }
-  // }
-
 
   //
   // Fact grid
@@ -264,6 +316,7 @@ $gray: #ececec;
   }
 
   .fact-icon {
+    @include knockout();
     font-size: 100px;
     font-weight: 800;
     line-height: 1.5;
@@ -383,6 +436,13 @@ $gray: #ececec;
     font-weight: 800;
   }
 
+  // Section title
+  h2.section-title,
+  .h2.section-title {
+    font-weight: 800;
+    font-size: 2.25em;
+  }
+
   // Condensed headings
   .heading-condensed {
     @include knockout();
@@ -438,6 +498,13 @@ $gray: #ececec;
   h6.heading-condensed,
   .h6.heading-condensed {
     font-size: 18px;
+  }
+
+  // Large condensed headings
+  h2.heading-condensed.condensed-big,
+  .h2.heading-condensed.condensed-big {
+    font-weight: 100;
+    font-size: 10em;
   }
 
   // Dark gold callouts
@@ -519,156 +586,200 @@ $gray: #ececec;
     }
   }
 
-
   //
   // PER-SECTION OVERRIDES
   //
 
-
-  // Video Section | done
-
-  .section-intro {
-    @media (min-width: $screen-sm-min) {
-      padding-bottom: 30px;
-    }
-
-    ol {
-      @include knockout();
-      color: $ucf-gold;
-      font-size: 1.35em;
-      font-weight: bold;
-      line-height: 1;
-      li {
-        padding-left: 0.75em;
-      }
-      li span {
-        @include gotham();
-        color: $black;
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 1;
-      }
-    }
-
-
+  .section-spotlight {
+    padding: 40px 0;
   }
 
-  .section-video {
-    @media (min-width: $screen-sm-min) {
-      margin-top: -35px;
-    }
-  }
-
-
-  // Meaningful Impact | done
-
-  .section-meaningful-impact {
-    .callout {
-      background-image: url($section-meaningful-impact-bg-xs);
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      background-size: cover;
-      padding: 20px 0;
-
-      @media (min-width: $screen-sm-min) {
-        padding: 80px 0;
-      }
-    }
-  }
-
-
-  // Jeb Bush quote | done
-
-  .section-bush-quote {
-    .callout {
-      // NOTE: vetoed mobile bg; just provide bg for -sm+
-      @media (min-width: $screen-sm-min) {
-        background-image: url($section-bush-bg-sm);
-        background-position: center bottom;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-    }
-  }
-
-  .bush-quote-blockquote {
-    @media (min-width: $screen-sm-min) {
-      margin-top: 120px;
-    }
-  }
-
-
-  // Big Plans | done
-
-  .section-plans {
-    .callout {
-      background-image: url($section-plans-bg-xs);
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-
-      @media (min-width: $screen-sm-min) {
-        background-image: url($section-plans-bg-sm);
-      }
-
-      @media (min-width: $screen-sm-min) {
-        padding: 60px 0;
-      }
-    }
-  }
-
-  .plans-presidents-photo {
-    border: 10px solid $white;
-
-    @media (min-width: $screen-sm-min) {
-      margin-bottom: 60px;
-    }
-  }
-
-  .university-goals {
-    @include make-row();
-    counter-reset: section;
-    list-style-type: none;
-    padding: 0;
-  }
-
-  .university-goal {
-    @include make-md-column($grid-columns * .2); // 20% width columns
+  .section-intro,
+  .section-sports {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $white;
+    font-size: 28px;
+    font-weight: 100;
+    padding: 70px 20px;
+    text-align: center;
 
     @media (max-width: $screen-sm-max) {
-      margin-bottom: 1.5em;
-      padding-left: calc(1.5em + #{$grid-gutter-width} + 5px);
+      background-image: none !important;
+      text-align: left;
+      color: $black;
+      font-size: 16px;
+      font-weight: 400;
     }
 
-    @media (min-width: $screen-md-min) {
-      text-align: center;
-    }
+    h2 {
+      margin-top: 0;
 
-    &::before {
-      @include gotham(7);
-      background-color: $white;
-      border-radius: 100%;
-      color: $ucf-gold-dark;
-      content: counter(section);
-      counter-increment: section;
-      display: block;
-      font-size: 1.35em;
-      height: 1.5em;
-      line-height: 1.5;
-      text-align: center;
-      width: 1.5em;
+      @include knockout();
+      font-size: 100px;
+      text-transform: uppercase;
 
       @media (max-width: $screen-sm-max) {
-        left: $grid-gutter-width / 2;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        @include gotham();
+        font-size: 26px;
+        text-transform: none;
+      }
+    }
+  }
+
+  .section-sports {
+    color: $black;
+  }
+
+  .section-better {
+    font-size: 28px;
+    margin: 0;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 16px;
+    }
+
+    h2 {
+      font-size: 40px;
+      font-weight: 800;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 40px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .section-grad {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: $white;
+    font-size: 28px;
+    font-weight: 100;
+    padding: 70px 20px;
+    margin: 0;
+
+    @media (max-width: $screen-sm-max) {
+      background-image: none !important;
+      color: $black;
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    h2 {
+      @include knockout();
+      letter-spacing: normal;
+      text-transform: uppercase;
+      font-size: 6em;
+      font-weight: 100;
+
+      @media (max-width: $screen-sm-max) {
+        @include gotham();
+        font-size: 26px;
+        text-transform: none;
+      }
+    }
+  }
+
+  .section-debt {
+    h2 {
+      @include knockout();
+      letter-spacing: normal;
+      text-transform: uppercase;
+      font-size: 11em;
+      font-weight: 100;
+
+      @media (max-width: $screen-sm-max) {
+        @include gotham();
+        font-size: 26px;
+        text-transform: none;
+      }
+    }
+  }
+
+  .section-impact {
+    margin: 0;
+    h2 {
+      margin-top: 20.8px;
+
+      @media (max-width: $screen-sm-max) {
+        margin-top: 52px;
+      }
+    }
+  }
+
+  .section-quote {
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    z-index: 0;
+    padding: 40px 0;
+
+    @media (max-width: $screen-xs-max) {
+      -webkit-font-smoothing: inherit;
+      text-align: center;
+      padding-top: 18px;
+      background-image: none !important;
+    }
+
+    blockquote {
+      @include archer(1);
+      color: $white;
+      margin: 0;
+      border: 0;
+      padding: 0;
+      font-size: 34px;
+      line-height: 1.5;
+      font-style: italic;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 19px;
       }
 
-      @media (min-width: $screen-md-min) {
+      p {
         font-size: 34px;
-        margin: 0 auto 12px;
+        margin-top: .4em;
+        margin-bottom: .5em;
+
+        @media (max-width: $screen-md-max) {
+          font-size: 30px;
+        }
+
+        @media (max-width: $screen-sm-max) {
+          font-size: 25px;
+        }
+
+        @media (max-width: $screen-xs-max) {
+          font-size: 19px;
+        }
       }
+    }
+
+    cite {
+      @include gotham(4);
+      color: $white;
+      font-style: italic;
+      font-size: 22px;
+
+      @media (max-width: $screen-xs-max) {
+        display: block;
+        font-size: 14px;
+        margin-top: 0.75em;
+      }
+    }
+
+
+  }
+
+  section .content-box {
+    border-left: solid 1px #868a8b;
+    padding: 5px 0 5px 20px;
+
+    @media (max-width: $screen-sm-max) {
+      border-left: none;
+      padding-left: 0;
     }
   }
 
@@ -678,7 +789,7 @@ $gray: #ececec;
     color: $black;
     font-size: inherit;
     font-weight: bold;
-    padding: .8em 1.2em;
+    padding: 1.4em 3em;
     text-decoration: none;
     text-transform: uppercase;
 
@@ -697,237 +808,307 @@ $gray: #ececec;
     }
   }
 
-  // National Prominence / Living Legacy | done
+  // Degree Search
 
-  .section-prominence-legacy {
-    padding: 30px 0;
+  .callout.degree-search-section {
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 14px;
-      padding: 60px 0;
-    }
-  }
-
-  .prominence-col {
-    @media (min-width: $screen-md-min) {
+    .top-majors-heading {
+      background-color: $white;
+      color: $black;
+      display: inline-block;
+      font-size: 15px;
+      padding: .4em 1em;
       position: relative;
-    }
-  }
-
-  .prominence-col-graphic {
-    position: relative;
-
-    @media (min-width: $screen-md-min) {
-      position: absolute;
-    }
-  }
-
-  .prominence-number-pound {
-    @include gotham(8);
-    bottom: 13%;
-    font-size: 16vw;
-    left: 32%;
-    line-height: .8;
-    position: absolute;
-    z-index: 2;
-
-    @media (min-width: $screen-sm-min) {
-      bottom: 16%;
-      font-size: 100px;
-      left: 26%;
-    }
-
-    @media (min-width: $screen-md-min) {
-      bottom: unset;
-      font-size: 120px;
-      left: $grid-gutter-width * -1;
-      top: 49%;
-    }
-  }
-
-  .prominence-number-digit {
-    @include knockout(7);
-    bottom: 0;
-    color: $ucf-gold;
-    font-size: 66vw;
-    left: 50%;
-    line-height: .75;
-    position: absolute;
-    transform: translateX(-50%);
-    z-index: 1;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 360px;
-    }
-
-    @media (min-width: $screen-md-min) {
-      bottom: unset;
-      font-size: 480px;
-      left: ($grid-gutter-width / 2) * -1;
-      top: 0;
-      transform: none;
-    }
-  }
-
-  .prominence-spacer {
-    display: none;
-
-    @media (min-width: $screen-md-min) {
-      display: block;
-      height: 151px; // match whatever the SUS logo dimensions are
-    }
-  }
-
-  .living-legacy-col {
-    @media (min-width: $screen-sm-min) {
-      border-left: 1px solid $black;
-      height: 100%;
-      padding-left: $grid-gutter-width;
-    }
-  }
-
-
-  // Summary
-
-  .section-summary-quote {
-    .callout {
-      // NOTE: vetoed mobile bg; just provide bg for -sm+
-      @media (min-width: $screen-xs-min) {
-        background-image: url($section-summary-bg-xs);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 60px 0 100px;
-      }
-      @media (min-width: $screen-md-min) {
-        background-image: url($section-summary-bg-md);
-        padding: 100px 0 30px;
-      }
-    }
-  }
-
-
-  // Remarkable Growth | done
-
-  .remarkable-growth-tables {
-    @media (min-width: $screen-sm-min) {
-      margin-bottom: 60px;
-      margin-top: 60px;
-    }
-  }
-
-  .remarkable-growth-tborder-sm {
-    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
-      border-left: 3px solid $ucf-gold;
-      height: 100%;
-      margin-left: ($grid-gutter-width / 2) * -1;
-      padding-left: ($grid-gutter-width / 2) - 3px;
-    }
-  }
-
-  .remarkable-growth-tborder-md {
-    @media (min-width: $screen-md-min) {
-      border-left: 3px solid $ucf-gold;
-      height: 100%;
-      margin-left: ($grid-gutter-width / 2) * -1;
-      padding-left: ($grid-gutter-width / 2) - 3px;
-    }
-  }
-
-  .remarkable-growth-table {
-    @media (min-width: $screen-sm-min) {
-      font-size: 16px;
-      margin-bottom: 0;
-    }
-
-    @media (max-width: $screen-sm-max) {
-      width: auto;
-    }
-
-    > thead > tr > th {
-      border-bottom: 0 solid transparent;
-      font-weight: 800;
-      padding-bottom: 0;
       text-transform: uppercase;
 
-      @media (min-width: $screen-sm-min) {
-        font-size: 17px;
-      }
-    }
-  }
+      @media (max-width: $screen-sm-max) {
+        padding: 15px 20px;
+        width: 100%;
 
-  .remarkable-growth-table-inner {
-    th {
-      font-weight: normal;
+        color: $white;
+        background: $black;
+        border: solid 1px $white;
 
-      @media (max-width: $screen-xs-max) {
-        font-size: 12px;
-      }
-    }
+        transition: background-color 0.1s;
 
-    td {
-      font-weight: bold;
-      vertical-align: top;
+        &:hover {
+          background: darken($white, 75%);
+        }
 
-      &::before {
-        content: '—';
-        font-weight: normal;
-        padding: 0 2px;
-
-        @media (min-width: $screen-sm-min) {
-          padding: 0 4px;
+        &::after {
+          content: "\F13A";
+          font-family: FontAwesome;
+          right: 15px;
+          position: absolute;
+          top: 9px;
+          font-size: 23px;
         }
       }
     }
-  }
 
-  .remarkable-growth-increase {
-    font-weight: bold;
-    line-height: 1.1;
-    padding-left: 20px;
-    text-transform: uppercase;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 17px;
+    .top-majors-heading.expanded::after {
+      content: "\F139";
+      font-family: FontAwesome;
+      right: 15px;
+      position: absolute;
+      top: 9px;
+      font-size: 23px;
     }
-  }
 
-  .remarkable-growth-increase-num {
-    display: block;
-    font-size: 1.25em;
-  }
+    .top-majors-content {
+      @media (max-width: $screen-sm-max) {
+        height: 0;
+        overflow: hidden;
+      }
 
-  .remarkable-growth-tiny-linebreak {
-    display: none;
-
-    @media (max-width: 374px) {
-      display: block;
-    }
-  }
-
-
-  // Marshall Criser quote | done
-
-  .section-criser-quote {
-    .callout {
-      // NOTE: vetoed mobile bg; just provide bg for -sm+
-      @media (min-width: $screen-sm-min) {
-        background-image: url($section-criser-bg-sm);
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        padding: 60px 0;
+      &.expanded {
+        height: auto !important;
+        overflow: visible !important;
       }
     }
+
+  .degree-search-heading {
+    font-family: "Gotham SSm 9r","Gotham SSm A","Gotham SSm B","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    color: #ffc904;
+    font-size: 45px;
+    padding-bottom: 20px;
   }
 
+  .degree-search-box {
+    @include gotham(6);
 
-  // History Lesson / Honor Roll | done
+    background-color: transparent;
+    color: #000;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    padding: 0;
+    position: relative;
+    margin-bottom: 140px;
+    height: 90px;
+    margin: 0;
+    width: 90%;
+    z-index: 1;
 
-  .section-history-honor {
+    .title {
+      font-size: 22px;
+      font-weight: 500;
+    }
+
+    br {
+      display: none;
+    }
+
+    @media (max-width: $screen-md-max) {
+      height: 100px;
+      width: 100%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      height: 60px;
+    }
+
+    .twitter-typeahead {
+      width: 101.5%;
+      top: 5px;
+      float: right;
+      position: absolute;
+      right: -7px;
+
+      @media (max-width: $screen-sm-max) {
+        top: -1px;
+      }
+    }
+
+    .tt-menu.tt-open {
+      width: 100%;
+
+      .tt-dataset,
+      .tt-suggestion {
+        width: 100%;
+      }
+
+      .tt-cursor {
+        background: #e4c550;
+      }
+    }
+
+    .tt-suggestion {
+      background-color: rgba(255, 225, 113, 1);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: normal;
+      padding: 5px 10px;
+      width: 500px;
+
+      hr {
+        border: 1px dashed #6f6f6f;
+        margin:0;
+      }
+
+      a,
+      a:link,
+      a:hover {
+        color: $black;
+      }
+
+      &:hover {
+        background-color: darken(rgb(255, 225, 113), 10%);
+      }
+    }
+
+    input {
+      @include gotham(4);
+
+      background: $white;
+      border: none;
+      border-radius: 0;
+      border-right: 55px $ucf-gold solid;
+      color: $black;
+      font-size: 17px;
+      letter-spacing: .5px;
+      outline: 0;
+      padding: 13px 25px 13px 25px;
+      position: absolute;
+      width: 100%;
+      z-index: 1;
+
+      &::-webkit-input-placeholder {
+        color: #222;
+      }
+      &:-moz-placeholder {
+        color: #222;
+      }
+      &::-moz-placeholder {
+        color: #222;
+      }
+      &:-ms-input-placeholder {
+        color: #222;
+      }
+      &:placeholder-shown {
+        color: #222;
+      }
+    }
+
+    .title {
+      font-size: 16px;
+      position: relative;
+      top: -20px;
+      transition: all 0.3s;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 16px;
+        top: -20px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 16px;
+      }
+    }
+
+    .search-icon {
+      background-color: transparent;
+      border: 0;
+      display: block;
+      font-size: 33px;
+      height: 49px;
+      line-height: 44px;
+      position: absolute;
+      right: -7px;
+      top: 1px;
+      width: 55px;
+      z-index: 2;
+
+      @media (min-width: $screen-md-min) {
+        height: 55px;
+        top: 5px;
+      }
+    }
+    }
+
+
+    .bordered-content {
+      box-sizing: border-box;
+      border: solid 1px $white;
+
+      &.bordered-left {
+        border-width: 0 0 0 1px;
+        padding-left: 50px;
+      }
+      &.bordered-right {
+        border-width: 0 1px 0 0;
+        padding-right: 50px;
+      }
+    }
+
+    .bordered-content.bordered-left {
+      padding-left: 40px;
+
+      @media (max-width: $screen-sm-max) {
+        padding-left: 0;
+        border-left: 0;
+      }
+    }
+
+    ol {
+      font-size: 15px;
+    }
+
+    .highlight {
+      font-size: 15px;
+      background-color: $ucf-gold;
+      color: $black;
+      display: inline-block;
+      padding: .4em 1em;
+      text-transform: uppercase;
+    }
+
+
+  }
+
+  //
+  // COLLEGES GRID
+  //
+
+  .section-colleges {
+    margin-bottom: -1px;
+  }
+
+  h2.college-block-head {
+    @include knockout();
+
+    position: relative;
+    line-height: 1.25;
+    width: 85%;
+
+    text-shadow: none !important;
+    bottom: 0;
+    color: $white;
+    display: block;
+    left: 0;
+    line-height: 1;
+    padding: 2.5vw 2.5vw 0 2.5vw;
+
+    margin-top: 0;
+
+    text-transform: uppercase;
+    color: $black;
+    font-size: 3vw;
+
     @media (min-width: $screen-sm-min) {
-      margin-bottom: 60px;
+      font-size: 5vw;
+    }
+
+    @media (min-width: $screen-md-min) {
+      font-size: 5vw;
+    }
+
+    @media (min-width: $screen-lg-min) {
+      font-size: 2.75vw;
     }
   }
 
 }
+
