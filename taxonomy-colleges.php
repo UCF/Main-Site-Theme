@@ -4,7 +4,7 @@
 	$custom_content = get_field( 'custom_content', 'colleges_' . $term->term_id );
 ?>
 <article role="main">
-	<section>
+	<section class="section-lead">
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-sm-12 col-md-8 lead">
@@ -22,12 +22,25 @@
 			</div>
 		</div>
 	</section>
-	<section>
-		<div class="jumbotron jumbotron-fluid bg-primary mb-0">
-			<div class="container my-5">
-				<div class="row">
-					<div class="col-sm-12">
-						Stats Section
+	<section class="section-stats">
+		<div class="media-background-container">
+			<img class="media-background object-fit-cover" srcset="https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-CAH.jpg" src="https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-CAH.jpg" alt="">
+			<div class="jumbotron jumbotron-fluid bg-primary-t-3 mb-0">
+				<div class="container my-5">
+					<div class="row">
+						<div class="col-sm-12">
+							<?php
+								$stats = get_field( 'stat', 'colleges_' . $term->term_id );
+								ob_start();
+								foreach( $stats as $stat ) :
+									?>
+									<img src="<?php echo $stat["icon"]["url"]; ?>" class="img-fluid">
+									<p><?php echo $stat["copy"]; ?></p>
+									<?php
+								endforeach;
+								echo ob_get_clean();
+							?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -38,10 +51,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-8">
-						<h2 class="h1 text-primary section-heading"><?php echo get_field( 'degree_search_title', 'colleges_' . $term->term_id ); ?></h2>
-						<p class="mt-3"><?php echo get_field( 'degree_search_copy', 'colleges_' . $term->term_id ); ?></p>
-						{ Insert Degree Search Shortcode }
-						<h3 class="browse-by-heading h5 heading-sans-serif">Or browse by:</h3>
+						<h2 class="h1 mb-4 text-primary font-weight-black section-heading"><?php echo get_field( 'degree_search_title', 'colleges_' . $term->term_id ); ?></h2>
+						<div class="mb-5"><?php echo get_field( 'degree_search_copy', 'colleges_' . $term->term_id ); ?></div>
+						<div class="mb-5"><?php echo do_shortcode( '[ucf-degree-search placeholder="Search for degree programs"]' ); ?></div>
+						<h3 class="browse-by-heading h6 heading-sans-serif text-uppercase">Or browse by:</h3>
 						<ul class="browse-by-list list-chevrons">
 							<li><a href="https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Bachelor’s Degrees</a></li>
 							<li><a href="https://www.ucf.edu/degree-search/?program-type%5B0%5D=graduate-degree&amp;college%5B0%5D=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Graduate Degrees</a></li>
@@ -49,19 +62,18 @@
 							<li><a href="https://www.ucf.edu/degree-search/?program-type%5B0%5D=certificate&amp;college%5B0%5D=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Certificates</a></li>
 						</ul>
 					</div>
-					<div class="col-md-4">
-						<h3 class="h4 top-majors-heading btn text-upper btn-inverse btn-sm text-left">Top College<br>Degrees</h3>
+					<div class="col-md-1" data-mh="section-degrees-col" style="height: 442px;">
+						<hr class="hidden-xs hidden-sm hr-vertical hr-vertical-white center-block">
+					</div>
+					<div class="col-md-3">
+						<h3 class="h4 top-majors-heading btn text-upper btn-inverse btn-sm text-left w-100">Top College<br>Degrees</h3>
 						<ul class="top-majors-list list-unstyled">
-						<li><a href="https://www.ucf.edu/academics/art-emerging-media-track/" class="text-inverse">Art - Emerging Media</a></li>
-						<li><a href="https://www.ucf.edu/academics/philosophy/" class="text-inverse">Philosophy</a></li>
-						<li><a href="https://www.ucf.edu/academics/music/" class="text-inverse">Music</a></li>
-						<li><a href="https://www.ucf.edu/academics/photography/" class="text-inverse">Photography</a></li>
-						<li><a href="https://www.ucf.edu/academics/humanities-and-cultural-studies/" class="text-inverse">Humanities and Cultural Studies</a></li>
-						<li><a href="https://www.ucf.edu/academics/creative-writing-mfa/" class="text-inverse">Creative Writing MFA</a></li>
-						<li><a href="https://www.ucf.edu/academics/history-ma-2/" class="text-inverse">Master's Degree in History</a></li>
-						<li><a href="https://www.ucf.edu/academics/theatre-mfa-2/" class="text-inverse">Theater MFA</a></li>
-						<li><a href="https://www.ucf.edu/academics/interactive-entertainment-ms-2/" class="text-inverse">Interactive Entertainment MS</a></li>
-						<li><a href="https://www.ucf.edu/academics/texts-and-technology-phd-2/" class="text-inverse">Texts and Technology PhD</a></li>
+						<?php
+							$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
+							foreach( $top_degrees as $top_degree ) :
+								echo '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
+							endforeach;
+						?>
 						</ul>
 					</div>
 				</div>
@@ -69,6 +81,7 @@
 		</div>
 	</section>
 	<aside class="aside-ctas">
+		<?php echo do_shortcode( '[ucf-section slug="colleges-cta-bar"][/ucf-section]'); ?>
 		<div class="jumbotron jumbotron-fluid bg-primary py-0 my-0">
 			<div class="container icon-links">
 				<div class="row">
@@ -123,7 +136,7 @@
 		</div>
 	</section>
 	<?php if( $custom_content ) : ?>
-	<section>
+	<section class="section-custom">
 		<?php echo $custom_content; ?>
 	</section>
 	<?php endif; ?>
