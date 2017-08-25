@@ -24,24 +24,28 @@
 	</section>
 	<section class="section-stats">
 		<div class="media-background-container">
-			<img class="media-background object-fit-cover" srcset="https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-CAH.jpg" src="https://www.ucf.edu/wp-content/uploads/2017/03/College-Pages-Facts-BG-Images-1600x900-CAH.jpg" alt="">
-			<div class="jumbotron jumbotron-fluid bg-primary-t-3 mb-0">
-				<div class="container my-5">
-					<div class="row">
-						<div class="col-sm-12">
-							<?php
-								$stats = get_field( 'stat', 'colleges_' . $term->term_id );
-								ob_start();
-								foreach( $stats as $stat ) :
-									?>
-									<img src="<?php echo $stat["icon"]["url"]; ?>" class="img-fluid">
-									<p><?php echo $stat["copy"]; ?></p>
-									<?php
-								endforeach;
-								echo ob_get_clean();
-							?>
+			<img class="media-background object-fit-cover" srcset="<?php echo get_field( 'stats_background_image', 'colleges_' . $term->term_id )['url']; ?>" src="<?php echo get_field( 'stats_background_image', 'colleges_' . $term->term_id )['url']; ?>" alt="">
+			<div class="container my-5">
+				<div class="row">
+				<?php
+					$stats = get_field( 'stat', 'colleges_' . $term->term_id );
+					ob_start();
+					foreach( $stats as $index=>$stat ) :
+						?>
+						<div class="col-md-4 d-flex align-items-stretch">
+							<aside class="fact-block text-center align-self-center p-3">
+								<div class="fact-icon"><img src="<?php echo $stat["icon"]["url"]; ?>" alt="" class="img-fluid w-50"></div>
+								<div class="fact-details"><?php echo $stat["copy"]; ?></div>
+							</aside>
 						</div>
-					</div>
+					<?php if( $index !== 0 && ( ( $index+1 ) % 3 ) === 0 ) : ?>
+						</div>
+						<div class="row">
+					<?php endif; ?>
+						<?php
+					endforeach;
+					echo ob_get_clean();
+				?>
 				</div>
 			</div>
 		</div>
@@ -56,10 +60,15 @@
 						<div class="mb-5"><?php echo do_shortcode( '[ucf-degree-search placeholder="Search for degree programs"]' ); ?></div>
 						<h3 class="browse-by-heading h6 heading-sans-serif text-uppercase">Or browse by:</h3>
 						<ul class="browse-by-list list-chevrons">
-							<li><a href="https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Bachelor’s Degrees</a></li>
-							<li><a href="https://www.ucf.edu/degree-search/?program-type%5B0%5D=graduate-degree&amp;college%5B0%5D=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Graduate Degrees</a></li>
-							<li><a href="https://www.ucf.edu/degree-search/?program-type%5B0%5D=minor&amp;college%5B0%5D=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Minors</a></li>
-							<li><a href="https://www.ucf.edu/degree-search/?program-type%5B0%5D=certificate&amp;college%5B0%5D=college-of-business-administration&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0">Certificates</a></li>
+						<?php
+						$degree_types = get_field( 'degree_types_available', 'colleges_' . $term->term_id );
+						ob_start();
+						foreach( $degree_types as $degree_type ) : ?>
+							<li><a href="https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=<?php echo get_field( 'degree_search_parameter', 'colleges_' . $term->term_id ); ?>&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0"><?php echo $degree_type ?></a></li>
+						<?php
+							echo ob_get_clean();
+							endforeach;
+						?>
 						</ul>
 					</div>
 					<div class="col-md-1" data-mh="section-degrees-col" style="height: 442px;">
@@ -81,7 +90,8 @@
 		</div>
 	</section>
 	<aside class="aside-ctas">
-		<?php echo do_shortcode( '[ucf-section slug="colleges-cta-bar"][/ucf-section]'); ?>
+		<?php // TODO: Update this to pull in a section using the ucf-section plugin ?>
+		<?php // echo do_shortcode( '[ucf-section slug="colleges-cta-bar"][/ucf-section]'); ?>
 		<div class="jumbotron jumbotron-fluid bg-primary py-0 my-0">
 			<div class="container icon-links">
 				<div class="row">
@@ -121,7 +131,13 @@
 			<div class="row">
 				<div class="col-12">
 					<a href="https://today.ucf.edu/topic/<?php echo get_field( 'news_topic', 'colleges_' . $term->term_id ); ?>" class="float-md-right text-uppercase">Check out more stories <span class="fa fa-external-link" aria-hidden="true"></span></a>
-					<h2><?php echo str_replace( 'College of ', '', $term->name ); ?> News</h2>
+					<h2><?php
+					if( $news_title = get_field( 'news_title', 'colleges_' . $term->term_id ) ) {
+						echo $news_title;
+					} else {
+						echo str_replace( 'College of ', '', $term->name );
+					}
+					?> News</h2>
 					<hr>
 				</div>
 			</div>
