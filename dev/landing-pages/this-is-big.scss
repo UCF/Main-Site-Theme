@@ -1,16 +1,12 @@
 @import '../media-template/media-template-base';
 
 
-$header-media-xs-url:             '//wwwqa.cc.ucf.edu/wp-content/uploads/2017/08/this-is-big-header-mobile.jpg';
-$section-meaningful-impact-bg-xs: '//www.ucf.edu/wp-content/uploads/2017/02/UCF-Seal-Yellow.jpg';
-$section-bush-bg-sm:              '//www.ucf.edu/wp-content/uploads/2017/02/UCF-DH25-Millican-Sunset-crop.jpg';
-$section-plans-bg-xs:             '//www.ucf.edu/wp-content/uploads/2017/02/Past-Presidents-DrHitt-Mobile.jpg';
-$section-plans-bg-sm:             '//www.ucf.edu/wp-content/uploads/2017/02/Hitt-Millican-Colbourn-Golden-EFX.jpg';
-$section-summary-bg-xs:          '//www.ucf.edu/wp-content/uploads/2017/04/SummaryBlock-Background-MOBILE-767x550.jpg';
-$section-summary-bg-md:          '//www.ucf.edu/wp-content/uploads/2017/04/SummaryBlock-Background-1600x450.jpg';
+$header-media-xs-url:             '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-header-mobile.jpg';
 $section-criser-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
+$section-quote-bg-md:             '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-teacher-3.jpg';
 
 $gray: #ececec;
+$dark-gray: #242424;
 
 #header-menu {
   li:not(:last-child) a,
@@ -24,62 +20,58 @@ $gray: #ececec;
 }
 
 #contentcol .page-media {
-  margin-bottom: -70px;
+  // margin-bottom: -70px;
+
+  @media (max-width: $screen-sm-max) {
+    margin-bottom: 50px;
+  }
 }
 
 .page-media .page-media-header {
   background-position: top center;
-  height: 700px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 1.25vw;
   border-bottom: 3px solid $ucf-gold;
+  color: #fff;
+  font-size: 1.25em;
+  font-size: 1.25vw;
+  font-weight: 500;
+  height: 700px;
+  min-height: 600px;
   padding-top: 7vh;
-
-  @media (max-width: $screen-sm-max) {
-    font-size: 1.25em;
-    height: 450px;
-    margin-bottom: -35px;
-    padding-top: 2vh;
-  }
+  text-transform: uppercase;
 
   @media (max-width: $screen-xs-max) {
     background-image: url('#{$header-media-xs-url}') !important;
     background-position: bottom center;
     height: 124vw;
     max-height: 700px;
+    min-height: 600px;
+    padding-top: 10px;
   }
 
   &::after {
-    content: "\f103";
+    bottom: 0;
     color: #ffc904;
-    font-family: FontAwesome;
-    width: 100%;
+    content: "\f103";
     display: block;
-    text-align: center;
+    font-family: FontAwesome;
     font-size: 30px;
     font-weight: 100;
     position: absolute;
-    bottom: 0;
+    text-align: center;
+    width: 100%;
   }
 
   .header-title {
     @include knockout();
     background: none;
     color: #fff;
-    font-size: 50px;
+    font-size: 80px;
     line-height: 0.85;
     padding: 0 0 7px 0;
     text-align: left;
     text-transform: uppercase;
 
-    // @media (max-width: 479px) {
-    //   // font-size: 8.5vw;
-    // }
-
     @media (min-width: 480px) and (max-width: $screen-xs-max) {
-      // font-size: 8vw;
       font-size: 75px;
     }
 
@@ -88,8 +80,6 @@ $gray: #ececec;
     }
 
     @media (min-width: $screen-md-min) {
-      // font-size: 54px;
-
       font-size: 150px;
     }
   }
@@ -109,6 +99,23 @@ $gray: #ececec;
       font-size: 18px;
     }
   }
+
+  .nav {
+    text-align: center;
+
+    li a {
+      background: rgba(225,225,225,0.15);
+      border-radius: 0;
+      border: solid 2px #fff;
+      color: #fff;
+      margin-top: 20px;
+      padding: 15px;
+
+      &:hover {
+        background: rgba(225,225,225,0.35);
+      }
+    }
+  }
 }
 
   //
@@ -121,7 +128,7 @@ $gray: #ececec;
 
 @media (min-width: 992px) {
   .modal-lg {
-      width: 90%;
+    width: 90%;
   }
 }
 
@@ -137,7 +144,10 @@ $gray: #ececec;
   // BASE OVERRIDES
   //
 
-  margin-top: -75px;
+  @media (min-width: $screen-md-min) {
+    margin-top: -75px;
+  }
+
 
   blockquote {
     border-left: 0 solid transparent;
@@ -177,8 +187,8 @@ $gray: #ececec;
 
   .background-image-container {
     background-position: 50% 50%;
-    background-size: cover;
     background-repeat: no-repeat;
+    background-size: cover;
   }
 
   // Divider style overrides
@@ -229,34 +239,6 @@ $gray: #ececec;
 
     .callout-aside-heading a {
       color: $black;
-    }
-  }
-
-  // Make all gold callout text black on this page
-  .callout-gray {
-    background-color: $gray;
-    color: $black;
-
-    a {
-      color: $black;
-    }
-
-    .callout-aside-heading a {
-      color: $black;
-    }
-  }
-
-  // Make all gold callout text black on this page
-  .callout-dark-gray {
-    background-color: #242424;
-    color: #fff;
-
-    a {
-      color: $ucf-gold;
-    }
-
-    .callout-aside-heading a {
-      color: $ucf-gold;
     }
   }
 
@@ -440,7 +422,7 @@ $gray: #ececec;
   h2.section-title,
   .h2.section-title {
     font-weight: 800;
-    font-size: 2.25em;
+    font-size: 38px;
   }
 
   // Condensed headings
@@ -527,6 +509,10 @@ $gray: #ececec;
       text-decoration: none;
     }
 
+    .list-chevrons li {
+      padding-right: 20px;
+    }
+
     .callout-aside-heading a {
       color: $white;
       font-weight: 400;
@@ -586,6 +572,39 @@ $gray: #ececec;
     }
   }
 
+  section .full-width-container {
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: $screen-sm-max) {
+      flex-direction: column;
+    }
+
+    .full-width-box-half {
+      width: 50%;
+      min-height: 300px;
+
+      @media (max-width: $screen-sm-max) {
+        width: 100%;
+      }
+    }
+
+    .centered-content {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: center;
+      padding: 60px 0;
+    }
+
+    .centered-content {
+      @media (max-width: $screen-sm-max) {
+        padding: 0 15px;
+      }
+    }
+  }
+
   //
   // PER-SECTION OVERRIDES
   //
@@ -594,26 +613,33 @@ $gray: #ececec;
     padding: 40px 0;
   }
 
-  .section-intro,
-  .section-sports {
+  .section-intro {
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
     color: $white;
     font-size: 28px;
     font-weight: 100;
-    padding: 70px 20px;
+    padding: 150px 0;
     text-align: center;
 
     @media (max-width: $screen-sm-max) {
       background-image: none !important;
-      text-align: left;
       color: $black;
       font-size: 16px;
       font-weight: 400;
+      padding-bottom: 0;
+      padding-top: 20px;
+      text-align: left;
     }
 
-    h2 {
+    p {
+      margin-bottom: 0;
+    }
+
+
+
+    .section-title {
       margin-top: 0;
 
       @include knockout();
@@ -629,15 +655,61 @@ $gray: #ececec;
   }
 
   .section-sports {
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
     color: $black;
+    font-size: 28px;
+    font-weight: 100;
+    padding: 70px 0;
+    text-align: center;
+
+    @media (max-width: $screen-sm-max) {
+      background-image: none !important;
+      color: $black;
+      font-size: 16px;
+      font-weight: 400;
+      padding-bottom: 0;
+      padding: 20px 0;
+      text-align: left;
+    }
+
+    .section-title {
+      margin-top: 0;
+
+      @include knockout();
+      font-size: 100px;
+      text-transform: uppercase;
+
+      @media (max-width: $screen-sm-max) {
+        @include gotham();
+        font-size: 26px;
+        text-transform: none;
+      }
+    }
+
+    h2 {
+      @media (max-width: $screen-sm-max) {
+        font-size: 70px;
+        font-weight: 100;
+      }
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
   }
 
   .section-better {
-    font-size: 28px;
+    background-color: $dark-gray;
+    color: $white;
+    font-size: 18px;
+    font-weight: 100;
     margin: 0;
 
-    @media (max-width: $screen-sm-max) {
-      font-size: 16px;
+    a {
+      color: $white;
     }
 
     h2 {
@@ -649,6 +721,26 @@ $gray: #ececec;
         font-weight: 600;
       }
     }
+
+    h3 {
+      margin-bottom: 4px;
+
+    }
+
+    img.img-responsive {
+      @media (min-width: $screen-sm-min) {
+        width: 80%;
+      }
+    }
+
+    .footnote {
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 16px;
+    }
   }
 
   .section-grad {
@@ -658,8 +750,8 @@ $gray: #ececec;
     color: $white;
     font-size: 28px;
     font-weight: 100;
-    padding: 70px 20px;
     margin: 0;
+    padding: 70px 0;
 
     @media (max-width: $screen-sm-max) {
       background-image: none !important;
@@ -667,35 +759,78 @@ $gray: #ececec;
       font-size: 16px;
       font-weight: 400;
       margin: 0;
+      padding: 20px 0;
     }
 
     h2 {
       @include knockout();
-      letter-spacing: normal;
-      text-transform: uppercase;
       font-size: 6em;
       font-weight: 100;
+      letter-spacing: normal;
+      text-transform: uppercase;
 
       @media (max-width: $screen-sm-max) {
-        @include gotham();
-        font-size: 26px;
-        text-transform: none;
+        font-size: 70px;
+        margin-top: 30px;
+      }
+    }
+
+    h3 {
+      @media (max-width: $screen-sm-max) {
+        margin-bottom: 15px;
+        margin-top: 20px;
       }
     }
   }
 
   .section-debt {
-    h2 {
+    .section-title {
       @include knockout();
-      letter-spacing: normal;
-      text-transform: uppercase;
       font-size: 11em;
       font-weight: 100;
+      letter-spacing: normal;
+      margin-top: 10px;
+      text-transform: uppercase;
 
       @media (max-width: $screen-sm-max) {
-        @include gotham();
-        font-size: 26px;
-        text-transform: none;
+        font-size: 70px;
+        font-weight: 100;
+      }
+    }
+
+    .section-subtitle {
+      margin-bottom: 40px;
+      margin-top: 30px;
+
+      @media (max-width: $screen-sm-max) {
+        margin-bottom: 20px;
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .section-jobs {
+    .section-title {
+      @include knockout();
+      font-size: 11em;
+      font-weight: 100;
+      letter-spacing: normal;
+      margin-top: 10px;
+      text-transform: uppercase;
+
+      @media (max-width: $screen-sm-max) {
+        font-size: 70px;
+        font-weight: 100;
+      }
+    }
+
+    .section-subtitle {
+      margin-bottom: 40px;
+      margin-top: 30px;
+
+      @media (max-width: $screen-sm-max) {
+        margin-bottom: 20px;
+        margin-top: 15px;
       }
     }
   }
@@ -713,26 +848,42 @@ $gray: #ececec;
 
   .section-quote {
     -webkit-font-smoothing: antialiased;
+    background-color: #000;
+    background-image: url('#{$section-quote-bg-md}');
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 50px 0;
     position: relative;
     z-index: 0;
-    padding: 40px 0;
 
-    @media (max-width: $screen-xs-max) {
+    @media (max-width: $screen-sm-max) {
       -webkit-font-smoothing: inherit;
-      text-align: center;
-      padding-top: 18px;
       background-image: none !important;
+      padding-top: 18px;
+      text-align: center;
+    }
+
+    a:link,
+    a:active,
+    a:visited {
+      color: $white;
+      text-decoration: underline;
+    }
+    a:hover {
+      color: $white;
+      text-decoration: none;
     }
 
     blockquote {
       @include archer(1);
-      color: $white;
-      margin: 0;
       border: 0;
-      padding: 0;
+      color: $white;
       font-size: 34px;
-      line-height: 1.5;
       font-style: italic;
+      line-height: 1.5;
+      margin: 0;
+      padding: 0;
 
       @media (max-width: $screen-xs-max) {
         font-size: 19px;
@@ -740,8 +891,8 @@ $gray: #ececec;
 
       p {
         font-size: 34px;
-        margin-top: .4em;
         margin-bottom: .5em;
+        margin-top: .4em;
 
         @media (max-width: $screen-md-max) {
           font-size: 30px;
@@ -811,7 +962,6 @@ $gray: #ececec;
   // Degree Search
 
   .callout.degree-search-section {
-
     .top-majors-heading {
       background-color: $white;
       color: $black;
@@ -838,10 +988,10 @@ $gray: #ececec;
         &::after {
           content: "\F13A";
           font-family: FontAwesome;
-          right: 15px;
-          position: absolute;
-          top: 9px;
           font-size: 23px;
+          position: absolute;
+          right: 15px;
+          top: 9px;
         }
       }
     }
@@ -849,10 +999,10 @@ $gray: #ececec;
     .top-majors-heading.expanded::after {
       content: "\F139";
       font-family: FontAwesome;
-      right: 15px;
-      position: absolute;
-      top: 9px;
       font-size: 23px;
+      position: absolute;
+      right: 15px;
+      top: 9px;
     }
 
     .top-majors-content {
@@ -868,27 +1018,26 @@ $gray: #ececec;
     }
 
   .degree-search-heading {
+    color: #ffc904;
     font-family: "Gotham SSm 9r","Gotham SSm A","Gotham SSm B","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 45px;
     font-style: normal;
     font-weight: 900;
-    color: #ffc904;
-    font-size: 45px;
     padding-bottom: 20px;
   }
 
   .degree-search-box {
     @include gotham(6);
-
     background-color: transparent;
     color: #000;
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
+    height: 90px;
+    margin-bottom: 140px;
+    margin: 0;
     padding: 0;
     position: relative;
-    margin-bottom: 140px;
-    height: 90px;
-    margin: 0;
     width: 90%;
     z-index: 1;
 
@@ -961,11 +1110,10 @@ $gray: #ececec;
 
     input {
       @include gotham(4);
-
       background: $white;
-      border: none;
       border-radius: 0;
       border-right: 55px $ucf-gold solid;
+      border: none;
       color: $black;
       font-size: 17px;
       letter-spacing: .5px;
@@ -1057,10 +1205,10 @@ $gray: #ececec;
     }
 
     .highlight {
-      font-size: 15px;
       background-color: $ucf-gold;
       color: $black;
       display: inline-block;
+      font-size: 15px;
       padding: .4em 1em;
       text-transform: uppercase;
     }
@@ -1078,24 +1226,19 @@ $gray: #ececec;
 
   h2.college-block-head {
     @include knockout();
-
-    position: relative;
-    line-height: 1.25;
-    width: 85%;
-
-    text-shadow: none !important;
     bottom: 0;
-    color: $white;
-    display: block;
-    left: 0;
-    line-height: 1;
-    padding: 2.5vw 2.5vw 0 2.5vw;
-
-    margin-top: 0;
-
-    text-transform: uppercase;
     color: $black;
+    display: block;
     font-size: 3vw;
+    left: 0;
+    line-height: 1.25;
+    line-height: 1;
+    margin-top: 0;
+    padding: 2.5vw 2.5vw 0 2.5vw;
+    position: relative;
+    text-shadow: none !important;
+    text-transform: uppercase;
+    width: 85%;
 
     @media (min-width: $screen-sm-min) {
       font-size: 5vw;
@@ -1107,6 +1250,16 @@ $gray: #ececec;
 
     @media (min-width: $screen-lg-min) {
       font-size: 2.75vw;
+    }
+  }
+
+  .college-blocks {
+    p {
+      margin-bottom: 0;
+    }
+
+    h2 br {
+      display: block;
     }
   }
 
