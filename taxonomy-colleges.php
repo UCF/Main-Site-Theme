@@ -8,10 +8,10 @@
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-sm-12 col-md-8 lead">
-					<?php echo get_field( 'lead_copy', 'colleges_' . $term->term_id ); ?>
+					<?php echo get_field( 'college_page_lead_copy', 'colleges_' . $term->term_id ); ?>
 				</div>
 				<div class="col-sm-12 col-md-4">
-					<img src="<?php echo get_field( 'lead_image', 'colleges_' . $term->term_id )['url']; ?>" alt="" class="img-fluid">
+					<img src="<?php echo get_field( 'college_page_lead_image', 'colleges_' . $term->term_id )['url']; ?>" alt="" class="img-fluid">
 				</div>
 			</div>
 			<div class="row">
@@ -159,9 +159,40 @@
 			</div>
 		</div>
 	</section>
-	<?php if( $custom_content ) : ?>
+	<?php if( $sections = get_field( 'section_content', 'colleges_' . $term->term_id ) ) : ?>
 	<section class="section-custom">
-		<?php echo $custom_content; ?>
+		<?php
+		if( $sections ) :
+			foreach( $sections as $section ) :
+				// open section container
+				if( get_field( 'section_add_content_container', $section['section']->ID ) ) :
+					$class = "";
+					$style = "";
+					if( get_field( 'section_background_color', $section['section']->ID ) !== 'custom' ) {
+						$class = get_field( 'section_background_color', $section['section']->ID );
+					} else if ( get_field( 'section_background_color_custom', $section['section']->ID ) ) {
+						$style = "background-color:" . get_field( 'section_background_color_custom', $section['section']->ID ) . ";";
+					}
+					if( get_field( 'section_text_color', $section['section']->ID ) !== 'custom' ) {
+						$class .= ' ' . get_field( 'section_text_color', $section['section']->ID );
+					} else if ( get_field( 'section_text_color_custom', $section['section']->ID ) ) {
+						$style .= "color:" . get_field( 'section_text_color_custom', $section['section']->ID ) . ";";
+					}
+		?>
+					<div class="jumbotron jumbotron-fluid <?php echo $class; ?> py-4 my-0 text-center" <?php echo 'style="' . $style . '"' ?>>
+		<?php
+				endif;
+				// display section content
+				echo $section['section']->post_content;
+				// close section container
+				if ( get_field( 'section_add_content_container', $section['section']->ID ) ) {
+					echo '</div>';
+				}
+		?>
+		<?php
+			endforeach;
+		endif;
+		?>
 	</section>
 	<?php endif; ?>
 	<section class="section-colleges">
