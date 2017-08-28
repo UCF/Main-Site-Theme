@@ -30,20 +30,22 @@
 				<?php
 					$stats = get_field( 'stat', 'colleges_' . $term->term_id );
 					ob_start();
-					foreach( $stats as $index=>$stat ) :
-						?>
-						<div class="col-md-4 d-flex align-items-stretch">
-							<aside class="fact-block text-center align-self-center p-3">
-								<div class="fact-icon"><img src="<?php echo $stat["icon"]["url"]; ?>" alt="" class="img-fluid w-50"></div>
-								<div class="fact-details"><?php echo $stat["copy"]; ?></div>
-							</aside>
-						</div>
-					<?php if( $index !== 0 && ( ( $index+1 ) % 3 ) === 0 ) : ?>
-						</div>
-						<div class="row">
-					<?php endif; ?>
-						<?php
-					endforeach;
+					if( $stats ) :
+						foreach( $stats as $index=>$stat ) :
+							?>
+							<div class="col-md-4 d-flex align-items-stretch">
+								<aside class="fact-block text-center align-self-center p-3">
+									<div class="fact-icon"><img src="<?php echo $stat["icon"]["url"]; ?>" alt="" class="img-fluid w-50"></div>
+									<div class="fact-details"><?php echo $stat["copy"]; ?></div>
+								</aside>
+							</div>
+						<?php if( $index !== 0 && ( ( $index+1 ) % 3 ) === 0 ) : ?>
+							</div>
+							<div class="row">
+						<?php endif; ?>
+							<?php
+						endforeach;
+					endif;
 					echo ob_get_clean();
 				?>
 				</div>
@@ -63,11 +65,13 @@
 						<?php
 						$degree_types = get_field( 'degree_types_available', 'colleges_' . $term->term_id );
 						ob_start();
-						foreach( $degree_types as $degree_type ) : ?>
-							<li><a href="https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=<?php echo get_field( 'degree_search_parameter', 'colleges_' . $term->term_id ); ?>&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0"><?php echo $degree_type ?></a></li>
+						if( $degree_types ) :
+							foreach( $degree_types as $degree_type ) : ?>
+								<li><a href="https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=<?php echo get_field( 'degree_search_parameter', 'colleges_' . $term->term_id ); ?>&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0"><?php echo $degree_type ?></a></li>
 						<?php
 							echo ob_get_clean();
 							endforeach;
+						endif;
 						?>
 						</ul>
 					</div>
@@ -79,9 +83,11 @@
 						<ul class="top-majors-list list-unstyled">
 						<?php
 							$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
-							foreach( $top_degrees as $top_degree ) :
-								echo '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
-							endforeach;
+							if( $top_degrees ) :
+								foreach( $top_degrees as $top_degree ) :
+									echo '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
+								endforeach;
+							endif;
 						?>
 						</ul>
 					</div>
@@ -145,9 +151,11 @@
 				<div class="col-md-8 col-sm-12">
 					<?php echo do_shortcode( '[ucf-news-feed title="" layout="modern" topics="' . get_field( 'news_topic', 'colleges_' . $term->term_id ) . '"]' ); ?>
 				</div>
-				<div class="col-md-4 col-sm-12">
-					<?php  echo do_shortcode( '[ucf-spotlight slug="' . get_field( 'college_spotlight', 'colleges_' . $term->term_id )->post_name . '"]' ); ?>
-				</div>
+				<?php if( $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id ) ) : ?>
+					<div class="col-md-4 col-sm-12">
+						<?php  echo do_shortcode( '[ucf-spotlight slug="' . $spotlight->post_name . '"]' ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>
