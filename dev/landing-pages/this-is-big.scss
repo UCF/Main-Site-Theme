@@ -1,9 +1,9 @@
 @import '../media-template/media-template-base';
 
 
-$header-media-xs-url:             '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-header-mobile.jpg';
-$section-criser-bg-sm:            '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
-$section-quote-bg-md:             '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-teacher-3.jpg';
+$header-media-xs-url:   '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-graduation-1-1.jpg';
+$section-criser-bg-sm:  '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
+$section-quote-bg-md:   '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-teacher-3.jpg';
 
 $gray: #ececec;
 $dark-gray: #242424;
@@ -27,12 +27,16 @@ $dark-gray: #242424;
   }
 }
 
+.page-media-container {
+  bottom: 0;
+  top: 0;
+}
+
 .page-media .page-media-header {
   background-position: top center;
   border-bottom: 3px solid $ucf-gold;
   color: #fff;
-  font-size: 1.25em;
-  font-size: 1.25vw;
+  font-size: 16px;
   font-weight: 500;
   height: 700px;
   min-height: 600px;
@@ -48,7 +52,7 @@ $dark-gray: #242424;
     padding-top: 10px;
   }
 
-  &::after {
+  .skip-to-content {
     bottom: 0;
     color: #ffc904;
     content: "\f103";
@@ -110,6 +114,7 @@ $dark-gray: #242424;
       color: #fff;
       margin-top: 20px;
       padding: 15px;
+      font-size: 18px;
 
       &:hover {
         background: rgba(225,225,225,0.35);
@@ -489,37 +494,6 @@ $dark-gray: #242424;
     font-size: 10em;
   }
 
-  // Dark gold callouts
-  .callout-dark-gold {
-    background-color: $ucf-gold-dark;
-    color: $white;
-
-    a {
-      color: $white;
-      font-weight: 700;
-      text-decoration: underline;
-    }
-
-    .list-navigation a {
-      font-weight: 400;
-    }
-
-    .list-navigation a,
-    .list-chevrons a {
-      text-decoration: none;
-    }
-
-    .list-chevrons li {
-      padding-right: 20px;
-    }
-
-    .callout-aside-heading a {
-      color: $white;
-      font-weight: 400;
-      text-decoration: none;
-    }
-  }
-
   // Alternate lead text styles
   .lead-alt {
     @include gotham(4);
@@ -527,6 +501,7 @@ $dark-gray: #242424;
 
     @media (min-width: $screen-sm-min) {
       font-size: 18px;
+      margin-bottom: 0;
     }
   }
 
@@ -637,8 +612,6 @@ $dark-gray: #242424;
       margin-bottom: 0;
     }
 
-
-
     .section-title {
       margin-top: 0;
 
@@ -650,6 +623,7 @@ $dark-gray: #242424;
         @include gotham();
         font-size: 26px;
         text-transform: none;
+        margin-top: 20px;
       }
     }
   }
@@ -672,6 +646,15 @@ $dark-gray: #242424;
       padding-bottom: 0;
       padding: 20px 0;
       text-align: left;
+    }
+
+    .full-width-container .centered-content {
+      padding: 110px 0;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 20px 0;
+        display: block;
+      }
     }
 
     .section-title {
@@ -786,25 +769,49 @@ $dark-gray: #242424;
   .section-debt {
     .section-title {
       @include knockout();
-      font-size: 11em;
+      font-size: 140px;
       font-weight: 100;
       letter-spacing: normal;
-      margin-top: 10px;
+
+    margin-top: 40px;
       text-transform: uppercase;
 
       @media (max-width: $screen-sm-max) {
         font-size: 70px;
         font-weight: 100;
       }
+
+      .smaller {
+        font-size: 83px;
+
+        @media (max-width: $screen-sm-max) {
+          font-size: 70px;
+          font-weight: 100;
+        }
+      }
     }
 
     .section-subtitle {
-      margin-bottom: 40px;
-      margin-top: 30px;
+      @include gotham();
+
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      margin-top: 10px;
 
       @media (max-width: $screen-sm-max) {
         margin-bottom: 20px;
         margin-top: 15px;
+      }
+    }
+
+    .full-width-container .centered-content {
+      padding: 110px 0;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 20px 0;
+        display: block;
       }
     }
   }
@@ -812,15 +819,28 @@ $dark-gray: #242424;
   .section-jobs {
     .section-title {
       @include knockout();
-      font-size: 11em;
+      font-size: 140px;
       font-weight: 100;
       letter-spacing: normal;
       margin-top: 10px;
       text-transform: uppercase;
+      white-space: nowrap;
 
       @media (max-width: $screen-sm-max) {
         font-size: 70px;
         font-weight: 100;
+        white-space: normal;
+      }
+
+      .smaller {
+        font-size: 83px;
+        margin-left: -15px;
+
+        @media (max-width: $screen-sm-max) {
+          font-size: 70px;
+          font-weight: 100;
+          margin-left: 0;
+        }
       }
     }
 
@@ -833,6 +853,16 @@ $dark-gray: #242424;
         margin-top: 15px;
       }
     }
+
+    .full-width-container .centered-content {
+      padding: 110px 0;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 20px 0;
+        display: block;
+      }
+    }
+
   }
 
   .section-impact {
@@ -842,6 +872,26 @@ $dark-gray: #242424;
 
       @media (max-width: $screen-sm-max) {
         margin-top: 52px;
+      }
+    }
+
+    .full-width-container .centered-content {
+      padding: 110px 0;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 20px 0;
+        display: block;
+      }
+    }
+  }
+
+  .section-value {
+    .full-width-container .centered-content {
+      padding: 110px 0;
+
+      @media (max-width: $screen-sm-max) {
+        padding: 20px 0;
+        display: block;
       }
     }
   }
@@ -994,6 +1044,10 @@ $dark-gray: #242424;
           top: 9px;
         }
       }
+    }
+
+    .list-inline > li {
+      padding-right: 1.5em;
     }
 
     .top-majors-heading.expanded::after {
