@@ -1,0 +1,43 @@
+.college-grid-item {
+  @extend .col-6;
+
+  @include media-breakpoint-up(sm) {
+    -webkit-box-flex: 0;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+  }
+
+  @include media-breakpoint-up(md) {
+    -webkit-box-flex: 0;
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    -webkit-box-flex: 0;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+.college-grid-message {
+  @extend .col-6;
+
+  @include media-breakpoint-up(sm) {
+    -webkit-box-flex: 0;
+    flex: 0 0 66.66666%;
+    max-width: 66.66666%;
+  }
+
+  @include media-breakpoint-up(md) {
+    -webkit-box-flex: 0;
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    -webkit-box-flex: 0;
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+}
