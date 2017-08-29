@@ -64,6 +64,6 @@
   font-size: 2vw;
 
   @include media-breakpoint-up(md) {
-    font-size: inherit;
+    font-size: .8rem;
   }
 }
