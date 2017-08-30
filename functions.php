@@ -8,6 +8,7 @@ include_once 'includes/header-functions.php';
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
 include_once 'includes/phonebook-functions.php';
+include_once 'includes/college-functions.php';
 
 
 /**
