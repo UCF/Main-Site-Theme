@@ -19,11 +19,16 @@ $dark-gray: #242424;
   }
 }
 
-#contentcol .page-media {
-  // margin-bottom: -70px;
-
+.page-media {
   @media (max-width: $screen-sm-max) {
-    margin-bottom: 50px;
+    margin-bottom: -40px;
+    top: -70px;
+    position: relative;
+  }
+  @media (max-width: $screen-xs-max) {
+    margin-bottom: 0;
+    top: -10px;
+    position: relative;
   }
 }
 
@@ -557,10 +562,16 @@ $dark-gray: #242424;
 
     .full-width-box-half {
       width: 50%;
-      min-height: 300px;
 
       @media (max-width: $screen-sm-max) {
         width: 100%;
+        min-height: 0;
+      }
+    }
+
+    .full-width-box-half.background-image-container {
+      @media (max-width: $screen-sm-max) {
+        min-height: 400px;
       }
     }
 
@@ -773,12 +784,13 @@ $dark-gray: #242424;
       font-weight: 100;
       letter-spacing: normal;
 
-    margin-top: 40px;
+      margin-top: 40px;
       text-transform: uppercase;
 
       @media (max-width: $screen-sm-max) {
         font-size: 70px;
         font-weight: 100;
+        margin-top: 20px
       }
 
       .smaller {
@@ -845,8 +857,13 @@ $dark-gray: #242424;
     }
 
     .section-subtitle {
-      margin-bottom: 40px;
-      margin-top: 30px;
+      @include gotham();
+
+      display: block;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      margin-top: 10px;
 
       @media (max-width: $screen-sm-max) {
         margin-bottom: 20px;
@@ -856,6 +873,10 @@ $dark-gray: #242424;
 
     .full-width-container .centered-content {
       padding: 110px 0;
+
+      p {
+            min-width: 200px;
+      }
 
       @media (max-width: $screen-sm-max) {
         padding: 20px 0;
@@ -871,7 +892,7 @@ $dark-gray: #242424;
       margin-top: 20.8px;
 
       @media (max-width: $screen-sm-max) {
-        margin-top: 52px;
+        margin-top: 20px;
       }
     }
 
@@ -886,6 +907,12 @@ $dark-gray: #242424;
   }
 
   .section-value {
+    h2 {
+      @media (max-width: $screen-sm-max) {
+        margin-top: 20px;
+      }
+    }
+
     .full-width-container .centered-content {
       padding: 110px 0;
 
