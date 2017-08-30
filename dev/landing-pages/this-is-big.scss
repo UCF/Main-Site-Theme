@@ -37,7 +37,7 @@ $dark-gray: #242424;
   .page-media-header {
     background-position: top center;
     border-bottom: 3px solid $ucf-gold;
-    color: #fff;
+    color: $white;
     font-size: 16px;
     font-weight: 500;
     height: 700px;
@@ -56,7 +56,7 @@ $dark-gray: #242424;
 
     .skip-to-content {
       bottom: 0;
-      color: #ffc904;
+      color: $ucf-gold;
       content: "\f103";
       display: block;
       font-family: FontAwesome;
@@ -70,7 +70,7 @@ $dark-gray: #242424;
     .header-title {
       @include knockout();
       background: none;
-      color: #fff;
+      color: $white;
       font-size: 80px;
       line-height: 0.85;
       padding: 0 0 7px 0;
@@ -112,8 +112,8 @@ $dark-gray: #242424;
       li a {
         background: rgba(225,225,225,0.15);
         border-radius: 0;
-        border: solid 2px #fff;
-        color: #fff;
+        border: solid 2px $white;
+        color: $white;
         margin-top: 20px;
         padding: 15px;
         font-size: 18px;
@@ -921,7 +921,7 @@ $dark-gray: #242424;
 
   .section-quote {
     -webkit-font-smoothing: antialiased;
-    background-color: #000;
+    background-color: $black;
     background-image: url('#{$section-quote-bg-md}');
     background-position: 100% 100%;
     background-repeat: no-repeat;
@@ -1093,7 +1093,7 @@ $dark-gray: #242424;
 
   .degree-search-heading {
     @include gotham(9);
-    color: #ffc904;
+    color: $ucf-gold;
     font-size: 45px;
     font-style: normal;
     padding-bottom: 20px;
@@ -1102,7 +1102,7 @@ $dark-gray: #242424;
   .degree-search-box {
     @include gotham(6);
     background-color: transparent;
-    color: #000;
+    color: $black;
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -1301,7 +1301,6 @@ $dark-gray: #242424;
     display: block;
     font-size: 3vw;
     left: 0;
-    line-height: 1.25;
     line-height: 1;
     margin-top: 0;
     padding: 2.5vw 2.5vw 0 2.5vw;
