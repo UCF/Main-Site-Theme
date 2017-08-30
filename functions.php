@@ -8,7 +8,6 @@ include_once 'includes/header-functions.php';
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
 include_once 'includes/phonebook-functions.php';
-include_once 'includes/college-functions.php';
 
 
 /**
@@ -178,7 +177,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 		$section_classes = $class;
 	}
 
-	if ( $bg_images['fallback'] ) {
+	if ( isset( $bg_images['fallback'] ) ) {
 		$section_classes .= ' media-background-container';
 	}
 	if ( $bg_color && !empty( $bg_color ) && $bg_color !== 'custom' ) {

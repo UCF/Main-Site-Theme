@@ -13,11 +13,31 @@
 	$degree_copy = get_field( 'degree_search_copy', 'colleges_' . $term->term_id );
 	$degree_search_url = "https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=" . get_field( 'degree_search_parameter', 'colleges_' . $term->term_id ) . "&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0";
 	$degree_types = get_field( 'degree_types_available', 'colleges_' . $term->term_id );
+	// CTA
+	$cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id );
 	// News
 	$news_topic = get_field( 'news_topic', 'colleges_' . $term->term_id );
 	$spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 	// Colleges Grid
 	$colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) );
+
+	/**
+	* Displays a list of top degrees
+	* @author RJ Bruneel
+	* @since 3.0.0
+	* @param $term object | Object with top degrees
+	* @return string | Top Degrees List.
+	**/
+	function display_top_degrees( $term ) {
+		$ret = "";
+		$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
+		if( $top_degrees ) :
+			foreach( $top_degrees as $top_degree ) :
+				$ret .= '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
+			endforeach;
+		endif;
+		return $ret;
+	}
 ?>
 <article role="main">
 	<section class="section-lead">
@@ -114,16 +134,16 @@
 			</div>
 		</div>
 	</section>
-	<?php if( $cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id ) ) : ?>
+	<?php if( $cta ) : ?>
 	<aside class="aside-ctas">
-		<?php echo display_section( $cta->ID, $cta->post_content ); ?>
+		<?php echo do_shortcode( '[ucf-section slug="' . $cta->post_name . '"]' ); ?>
 	</aside>
 	<?php endif; ?>
 	<section class="section-news">
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-lg-8">
-					<h2><?php echo display_news_title( $term ); ?></h2>
+					<h2><?php echo ( $news_title = $term->colleges_alias ) ? $news_title . " News" : str_replace( 'College of ', '', $term->name ) . " News"; ?></h2>
 				</div>
 				<div class="col-lg-4">
 					<a href="https://today.ucf.edu/topic/<?php echo $news_topic; ?>" class="more-stories float-lg-right text-uppercase text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
@@ -147,15 +167,13 @@
 		</div>
 	</section>
 	<?php if( $sections = get_field( 'section_content', 'colleges_' . $term->term_id ) ) : ?>
-	<section class="section-custom">
-		<?php
-		if( $sections ) :
-			foreach( $sections as $section ) :
-				echo display_section( $section['section']->ID, $section['section']->post_content );
-			endforeach;
-		endif;
-		?>
-	</section>
+	<?php
+	if( $sections ) :
+		foreach( $sections as $section ) :
+			echo do_shortcode( '[ucf-section slug="' . $section['section']->post_name . '"]' );
+		endforeach;
+	endif;
+	?>
 	<?php endif; ?>
 	<section class="section-colleges">
 		<div class="jumbotron jumbotron-fluid bg-primary py-4 my-0 text-center">
