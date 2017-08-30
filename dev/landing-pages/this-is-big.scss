@@ -1,8 +1,6 @@
 @import '../media-template/media-template-base';
 
-
 $header-media-xs-url:   '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-graduation-1-1.jpg';
-$section-criser-bg-sm:  '//www.ucf.edu/wp-content/uploads/2017/02/Dr.Hitt-Black-Bkg.jpg';
 $section-quote-bg-md:   '//www.ucf.edu/wp-content/uploads/2017/08/this-is-big-teacher-3.jpg';
 
 $gray: #ececec;
@@ -19,6 +17,11 @@ $dark-gray: #242424;
   }
 }
 
+.page-media-container {
+  bottom: 0;
+  top: 0;
+}
+
 .page-media {
   @media (max-width: $screen-sm-max) {
     margin-bottom: -40px;
@@ -30,107 +33,102 @@ $dark-gray: #242424;
     top: -10px;
     position: relative;
   }
-}
 
-.page-media-container {
-  bottom: 0;
-  top: 0;
-}
-
-.page-media .page-media-header {
-  background-position: top center;
-  border-bottom: 3px solid $ucf-gold;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 500;
-  height: 700px;
-  min-height: 600px;
-  padding-top: 7vh;
-  text-transform: uppercase;
-
-  @media (max-width: $screen-xs-max) {
-    background-image: url('#{$header-media-xs-url}') !important;
-    background-position: bottom center;
-    height: 124vw;
-    max-height: 700px;
-    min-height: 600px;
-    padding-top: 10px;
-  }
-
-  .skip-to-content {
-    bottom: 0;
-    color: #ffc904;
-    content: "\f103";
-    display: block;
-    font-family: FontAwesome;
-    font-size: 30px;
-    font-weight: 100;
-    position: absolute;
-    text-align: center;
-    width: 100%;
-  }
-
-  .header-title {
-    @include knockout();
-    background: none;
+  .page-media-header {
+    background-position: top center;
+    border-bottom: 3px solid $ucf-gold;
     color: #fff;
-    font-size: 80px;
-    line-height: 0.85;
-    padding: 0 0 7px 0;
-    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    height: 700px;
+    min-height: 600px;
+    padding-top: 7vh;
     text-transform: uppercase;
 
-    @media (min-width: 480px) and (max-width: $screen-xs-max) {
-      font-size: 75px;
+    @media (max-width: $screen-xs-max) {
+      background-image: url('#{$header-media-xs-url}') !important;
+      background-position: bottom center;
+      height: 124vw;
+      max-height: 700px;
+      min-height: 600px;
+      padding-top: 10px;
     }
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 115px;
+    .skip-to-content {
+      bottom: 0;
+      color: #ffc904;
+      content: "\f103";
+      display: block;
+      font-family: FontAwesome;
+      font-size: 30px;
+      font-weight: 100;
+      position: absolute;
+      text-align: center;
+      width: 100%;
     }
 
-    @media (min-width: $screen-md-min) {
-      font-size: 150px;
-    }
-  }
-
-  .header-subtitle {
-    @media (min-width: 480px) and (max-width: $screen-xs-max) {
-      font-size: 3vw;
-    }
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 16px;
-      padding-left: 30px;
-      padding-right: 30px;
-    }
-
-    @media (min-width: $screen-md-min) {
-      font-size: 18px;
-    }
-  }
-
-  .nav {
-    text-align: center;
-
-    li a {
-      background: rgba(225,225,225,0.15);
-      border-radius: 0;
-      border: solid 2px #fff;
+    .header-title {
+      @include knockout();
+      background: none;
       color: #fff;
-      margin-top: 20px;
-      padding: 15px;
-      font-size: 18px;
+      font-size: 80px;
+      line-height: 0.85;
+      padding: 0 0 7px 0;
+      text-align: left;
+      text-transform: uppercase;
 
-      &:hover {
-        background: rgba(225,225,225,0.35);
+      @media (min-width: 480px) and (max-width: $screen-xs-max) {
+        font-size: 75px;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 115px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 150px;
+      }
+    }
+
+    .header-subtitle {
+      @media (min-width: 480px) and (max-width: $screen-xs-max) {
+        font-size: 3vw;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        font-size: 16px;
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      @media (min-width: $screen-md-min) {
+        font-size: 18px;
+      }
+    }
+
+    .nav {
+      text-align: center;
+
+      li a {
+        background: rgba(225,225,225,0.15);
+        border-radius: 0;
+        border: solid 2px #fff;
+        color: #fff;
+        margin-top: 20px;
+        padding: 15px;
+        font-size: 18px;
+
+        &:hover {
+          background: rgba(225,225,225,0.35);
+        }
       }
     }
   }
 }
 
-  //
-  // MODALS
-  //
+//
+// MODALS
+//
 
 #contentcol h3.modal-title {
     margin: 0;
@@ -153,11 +151,9 @@ $dark-gray: #242424;
   //
   // BASE OVERRIDES
   //
-
   @media (min-width: $screen-md-min) {
     margin-top: -75px;
   }
-
 
   blockquote {
     border-left: 0 solid transparent;
@@ -261,7 +257,7 @@ $dark-gray: #242424;
   }
 
   //
-  // Fact grid
+  // FACT GRID
   //
   .fact-blocks {
     @include clearfix();
@@ -997,8 +993,6 @@ $dark-gray: #242424;
         margin-top: 0.75em;
       }
     }
-
-
   }
 
   section .content-box {
@@ -1037,7 +1031,6 @@ $dark-gray: #242424;
   }
 
   // Degree Search
-
   .callout.degree-search-section {
     .top-majors-heading {
       background-color: $white;
@@ -1099,11 +1092,10 @@ $dark-gray: #242424;
     }
 
   .degree-search-heading {
+    @include gotham(9);
     color: #ffc904;
-    font-family: "Gotham SSm 9r","Gotham SSm A","Gotham SSm B","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 45px;
     font-style: normal;
-    font-weight: 900;
     padding-bottom: 20px;
   }
 
@@ -1199,7 +1191,7 @@ $dark-gray: #242424;
       font-size: 17px;
       letter-spacing: .5px;
       outline: 0;
-      padding: 13px 25px 13px 25px;
+      padding: 13px 25px;
       position: absolute;
       width: 100%;
       z-index: 1;
@@ -1255,47 +1247,44 @@ $dark-gray: #242424;
         top: 5px;
       }
     }
-    }
-
-
-    .bordered-content {
-      box-sizing: border-box;
-      border: solid 1px $white;
-
-      &.bordered-left {
-        border-width: 0 0 0 1px;
-        padding-left: 50px;
-      }
-      &.bordered-right {
-        border-width: 0 1px 0 0;
-        padding-right: 50px;
-      }
-    }
-
-    .bordered-content.bordered-left {
-      padding-left: 40px;
-
-      @media (max-width: $screen-sm-max) {
-        padding-left: 0;
-        border-left: 0;
-      }
-    }
-
-    ol {
-      font-size: 15px;
-    }
-
-    .highlight {
-      background-color: $ucf-gold;
-      color: $black;
-      display: inline-block;
-      font-size: 15px;
-      padding: .4em 1em;
-      text-transform: uppercase;
-    }
-
-
   }
+
+  .bordered-content {
+    box-sizing: border-box;
+    border: solid 1px $white;
+
+    &.bordered-left {
+      border-width: 0 0 0 1px;
+      padding-left: 50px;
+    }
+    &.bordered-right {
+      border-width: 0 1px 0 0;
+      padding-right: 50px;
+    }
+  }
+
+  .bordered-content.bordered-left {
+    padding-left: 40px;
+
+    @media (max-width: $screen-sm-max) {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  ol {
+    font-size: 15px;
+  }
+
+  .highlight {
+    background-color: $ucf-gold;
+    color: $black;
+    display: inline-block;
+    font-size: 15px;
+    padding: .4em 1em;
+    text-transform: uppercase;
+  }
+}
 
   //
   // COLLEGES GRID
@@ -1343,6 +1332,5 @@ $dark-gray: #242424;
       display: block;
     }
   }
-
 }
 
