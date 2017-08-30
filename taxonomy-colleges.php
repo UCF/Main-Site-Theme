@@ -27,7 +27,9 @@
 					<?php echo $lead_copy; ?>
 				</div>
 				<div class="col-sm-12 col-md-4">
-					<img src="<?php echo $lead_image; ?>" alt="" class="img-fluid">
+					<?php if( $lead_image ) : ?>
+						<img src="<?php echo $lead_image; ?>" alt="" class="img-fluid">
+					<?php endif; ?>
 				</div>
 			</div>
 			<div class="row">

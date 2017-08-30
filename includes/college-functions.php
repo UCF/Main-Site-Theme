@@ -29,7 +29,7 @@ function display_top_degrees( $term ) {
  * @return string | News Title.
  **/
 function display_news_title( $term ) {
-	if( $news_title = get_field( 'news_title', 'colleges_' . $term->term_id ) ) {
+	if( $news_title = $term->colleges_alias ) {
 		return $news_title . " News";
 	} else {
 		return str_replace( 'College of ', '', $term->name ) . " News";
