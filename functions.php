@@ -177,7 +177,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 		$section_classes = $class;
 	}
 
-	if ( $bg_images['fallback'] ) {
+	if ( isset( $bg_images['fallback'] ) ) {
 		$section_classes .= ' media-background-container';
 	}
 	if ( $bg_color && !empty( $bg_color ) && $bg_color !== 'custom' ) {
