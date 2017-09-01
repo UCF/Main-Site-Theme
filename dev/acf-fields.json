@@ -42,25 +42,6 @@
                 "max_height": 600,
                 "max_size": "",
                 "mime_types": ""
-            },
-            {
-                "key": "field_599ee8867c27e",
-                "label": "News Topic",
-                "name": "news_topic",
-                "type": "text",
-                "instructions": "Enter the today news topic for the college news section on the college pages.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
             }
         ],
         "location": [
@@ -422,25 +403,6 @@
                 },
                 "placement": "top",
                 "endpoint": 0
-            },
-            {
-                "key": "field_599f2abad5220",
-                "label": "News Title (override)",
-                "name": "news_title",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
             },
             {
                 "key": "field_599f2a428079e",
