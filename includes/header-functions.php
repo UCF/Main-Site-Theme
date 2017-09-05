@@ -215,11 +215,11 @@ function get_header_media_markup( $post, $videos, $images ) {
 		<div class="header-content">
 			<div class="header-content-flexfix">
 				<?php
-				if ( get_field( 'page_header_content_type', $post->ID ) === 'title_subtitle' ) {
-					echo get_header_content_title_subtitle( $post );
+				if ( get_field( 'page_header_content_type', $post->ID ) === 'custom' ) {
+					echo get_header_content_custom( $post );
 				}
 				else {
-					echo get_header_content_custom( $post );
+					echo get_header_content_title_subtitle( $post );
 				}
 				?>
 			</div>
