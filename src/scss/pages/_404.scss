@@ -1,0 +1,16 @@
+.knightro-bg {
+  background: none;
+  padding-right: 0;
+
+  @include media-breakpoint-up(sm) {
+    background: url('../img/knightro-searching.jpg') center right no-repeat;
+    background-size: 100px auto;
+    min-height: 470px;
+    padding-right: 40px;
+  }
+
+  @include media-breakpoint-up(md) {
+    background-position: top right;
+    background-size: auto;
+  }
+}

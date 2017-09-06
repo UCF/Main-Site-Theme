@@ -7,6 +7,7 @@ include_once 'includes/header-functions.php';
 
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
+include_once 'includes/phonebook-functions.php';
 
 
 /**
@@ -18,6 +19,25 @@ function get_attachment_src_by_size( $id, $size ) {
 		return $attachment[0];
 	}
 	return $attachment;
+}
+
+
+/**
+* Displays a list of top degrees for the colleges taxonomy template
+* @author RJ Bruneel
+* @since 3.0.0
+* @param $term object | Object with top degrees
+* @return string | Top Degrees List.
+**/
+function display_top_degrees( $term ) {
+	$ret = "";
+	$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
+	if( $top_degrees ) :
+		foreach( $top_degrees as $top_degree ) :
+			$ret .= '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
+		endforeach;
+	endif;
+	return $ret;
 }
 
 
@@ -176,7 +196,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 		$section_classes = $class;
 	}
 
-	if ( $bg_images['fallback'] ) {
+	if ( isset( $bg_images['fallback'] ) ) {
 		$section_classes .= ' media-background-container';
 	}
 	if ( $bg_color && !empty( $bg_color ) && $bg_color !== 'custom' ) {

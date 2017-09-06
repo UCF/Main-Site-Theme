@@ -16,7 +16,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
 	'chartbeat_uid'                     => '2806',
-	'chartbeat_domain'                  => 'ucf.edu'
+	'chartbeat_domain'                  => 'ucf.edu',
+	'search_service_url'                => 'https://search.smca.ucf.edu/service.php'
 ) ) );
 
 function __init__() {
@@ -48,6 +49,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'degrees',
 		array(
 			'title' => 'Degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'phonebook',
+		array(
+			'title' => 'Phonebook'
 		)
 	);
 
@@ -147,6 +155,21 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Tuition Value Message',
 			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	//Phonebook
+	$wp_customize->add_setting(
+		'search_service_url'
+	);
+
+	$wp_customize->add_control(
+		'search_service_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Search Service URL',
+			'description' => 'The base url of the UCF Search service.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'phonebook'
 		)
 	);
 
