@@ -13,7 +13,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
 	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
-	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48',
+	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
 	'chartbeat_uid'                     => '2806',
 	'chartbeat_domain'                  => 'ucf.edu'
