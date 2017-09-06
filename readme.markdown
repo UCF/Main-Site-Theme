@@ -10,6 +10,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 ### Required Plugins
 * Advanced Custom Fields PRO
 * Athena Shortcodes
+* Automatic Section Menu Shortcode
 * Gravity Forms
 * UCF Alert Plugin
 * UCF College Custom Taxonomy
@@ -18,6 +19,9 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 * UCF Events
 * UCF Footer
 * UCF News
+* UCF Page Assets
+* UCF Post List Shortcode
+* UCF Resource Search
 * UCF Rest Menus
 * UCF Section
 * UCF Spotlight
@@ -27,12 +31,14 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 
 ### Recommended Plugins
 * Page Links To
+* Main Site Utilities
 * UCF Content Scheduler
 * UCF Page Assets
 * Varnish Dependency Purger
 * WP-Mail-SMTP
 * WP Allowed Hosts
 * WP Shortcode Interface
+* WordPress Importer
 * Yoast SEO
 
 
