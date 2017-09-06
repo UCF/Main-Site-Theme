@@ -892,13 +892,45 @@
                 "endpoint": 0
             },
             {
+                "key": "field_59aed971c187c",
+                "label": "Header Content - Type of Content",
+                "name": "page_header_content_type",
+                "type": "radio",
+                "instructions": "Specify the type of content that should be displayed within the header.  Choose \"Title and subtitle\" to display a styled page title and optional subtitle, or choose \"Custom content\" to add any arbitrary content.  If \"Custom content\" is selected, a page title and subtitle are NOT included by default and should be added manually.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "title_subtitle": "Title and subtitle",
+                    "custom": "Custom content"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "save_other_choice": 0,
+                "default_value": "title_subtitle",
+                "layout": "vertical",
+                "return_format": "value"
+            },
+            {
                 "key": "field_58fe096728bcc",
                 "label": "Header Title Text",
                 "name": "page_header_title",
                 "type": "text",
                 "instructions": "Overrides the page title.",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -908,9 +940,7 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
-                "maxlength": "",
-                "readonly": 0,
-                "disabled": 0
+                "maxlength": ""
             },
             {
                 "key": "field_58fe097f28bcd",
@@ -919,7 +949,15 @@
                 "type": "text",
                 "instructions": "",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -929,9 +967,34 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
-                "maxlength": "",
-                "readonly": 0,
-                "disabled": 0
+                "maxlength": ""
+            },
+            {
+                "key": "field_59aed93dc187b",
+                "label": "Header Custom Contents",
+                "name": "page_header_content",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "custom"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             },
             {
                 "key": "field_590ca453f6655",

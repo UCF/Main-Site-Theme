@@ -45,3 +45,39 @@ function get_theme_mod_or_default( $theme_mod ) {
 	}
 	return $mod;
 }
+
+
+/**
+ * Given a WP_Term or WP_Post object, returns the relevant object ID property
+ * or null.
+ **/
+function get_object_id( $obj ) {
+	$obj_id = null;
+
+	if ( $obj instanceof WP_Post ) {
+		$obj_id = $obj->ID;
+	}
+	else if ( $obj instanceof WP_Term ) {
+		$obj_id = $obj->term_id;
+	}
+
+	return $obj_id;
+}
+
+
+/**
+ * Given a WP_Term or WP_Post object, returns the relevant $post_id argument
+ * for ACF field retrieval/modification functions (e.g. get_field()) or null.
+ **/
+function get_object_field_id( $obj ) {
+	$field_id = null;
+
+	if ( $obj instanceof WP_Post ) {
+		$field_id = $obj->ID;
+	}
+	else if ( $obj instanceof WP_Term ) {
+		$field_id = $obj->taxonomy . '_' . $obj->term_id;
+	}
+
+	return $field_id;
+}

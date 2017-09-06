@@ -70,6 +70,14 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 			)
 		);
 
+		// Try to get a fallback -xs image if needed
+		if ( !$attachment_xs_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'xs' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix ) )
+			);
+		}
+
 		// Remove duplicate image sizes, in case an old image isn't pre-cropped
 		$bg_images = array_unique( $bg_images );
 
