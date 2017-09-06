@@ -79,15 +79,13 @@ function get_header_videos( $obj ) {
 	if ( is_tax() || is_category() || is_tag() ) {
 		$title = $obj->name;
 	}
+	else if ( $obj instanceof WP_Post ) {
+		$title = $post->post_title;
+	}
 
 	// Apply custom header title override, if available
 	if ( $custom_header_title = get_field( 'page_header_title', $field_id ) ) {
 		$title = do_shortcode( $custom_header_title );
-	}
-
-	// Fall back to the post title for post objects
-	if ( !$title && $obj instanceof WP_Post ) {
-		$title = $post->post_title;
 	}
 
 	return wptexturize( $title );
