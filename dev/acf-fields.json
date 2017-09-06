@@ -18,6 +18,30 @@
                 },
                 "default_value": "",
                 "placeholder": ""
+            },
+            {
+                "key": "field_599da06596f3e",
+                "label": "Thumbnail Image",
+                "name": "thumbnail_image",
+                "type": "image",
+                "instructions": "Thumbnail image to be displayed in the college grid at the bottom of each college page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": 600,
+                "min_height": 600,
+                "min_size": "",
+                "max_width": 600,
+                "max_height": 600,
+                "max_size": "",
+                "mime_types": ""
             }
         ],
         "location": [
@@ -31,6 +55,467 @@
         ],
         "menu_order": 0,
         "position": "acf_after_title",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    },
+    {
+        "key": "group_599f2908dc88f",
+        "title": "College Page Fields",
+        "fields": [
+            {
+                "key": "field_599f291374d3f",
+                "label": "Lead Section",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_599f298774d42",
+                "label": "Lead Copy",
+                "name": "college_page_lead_copy",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "basic",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_599f2b8e4e687",
+                "label": "Lead Image",
+                "name": "college_page_lead_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_599f296e74d41",
+                "label": "Stats Section",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_59a08770f6ce5",
+                "label": "Stats Background Image",
+                "name": "stats_background_image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_599f29b374d43",
+                "label": "Stat",
+                "name": "stat",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_599f2cbf5920d",
+                        "label": "Icon",
+                        "name": "icon",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_599f2ccd5920e",
+                        "label": "Copy",
+                        "name": "copy",
+                        "type": "wysiwyg",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "tabs": "all",
+                        "toolbar": "basic",
+                        "media_upload": 1,
+                        "delay": 0
+                    }
+                ]
+            },
+            {
+                "key": "field_599f2a048079b",
+                "label": "Degree Search Section",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_599f2ad48b498",
+                "label": "Degree Search Title",
+                "name": "degree_search_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_599f2aec8b499",
+                "label": "Degree Search Copy",
+                "name": "degree_search_copy",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": "wpautop"
+            },
+            {
+                "key": "field_59a08d0de6535",
+                "label": "Degree Types Available",
+                "name": "degree_types_available",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Bachelor’s Degrees": "Bachelor’s Degrees",
+                    "Graduate Degrees": "Graduate Degrees",
+                    "Minors": "Minors",
+                    "Certificates": "Certificates"
+                },
+                "allow_custom": 0,
+                "save_custom": 0,
+                "default_value": [],
+                "layout": "vertical",
+                "toggle": 0,
+                "return_format": "value"
+            },
+            {
+                "key": "field_59a08c15cffec",
+                "label": "Degree Search Parameter",
+                "name": "degree_search_parameter",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_599f2b3099a61",
+                "label": "Top Degrees",
+                "name": "top_degrees",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "degree"
+                ],
+                "taxonomy": [],
+                "allow_null": 0,
+                "multiple": 1,
+                "return_format": "object",
+                "ui": 1
+            },
+            {
+                "key": "field_59a5a672eab38",
+                "label": "Call to Action Bar",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_59a5a696c41bb",
+                "label": "CTA Section",
+                "name": "college_page_cta_section",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "ucf_section"
+                ],
+                "taxonomy": [],
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            },
+            {
+                "key": "field_599f2a198079c",
+                "label": "News Section",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_599f2a428079e",
+                "label": "News Topic",
+                "name": "news_topic",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_599f3ad71b4b1",
+                "label": "College Spotlight",
+                "name": "college_spotlight",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "ucf_spotlight"
+                ],
+                "taxonomy": [],
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "object",
+                "ui": 1
+            },
+            {
+                "key": "field_599f2a348079d",
+                "label": "Custom Content Section",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_59a438ba6507e",
+                "label": "Section Content",
+                "name": "section_content",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_59a438d36507f",
+                        "label": "Section",
+                        "name": "section",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "ucf_section"
+                        ],
+                        "taxonomy": [],
+                        "allow_null": 0,
+                        "multiple": 0,
+                        "return_format": "object",
+                        "ui": 1
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "colleges"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
         "style": "default",
         "label_placement": "top",
         "instruction_placement": "label",
@@ -407,13 +892,45 @@
                 "endpoint": 0
             },
             {
+                "key": "field_59aed971c187c",
+                "label": "Header Content - Type of Content",
+                "name": "page_header_content_type",
+                "type": "radio",
+                "instructions": "Specify the type of content that should be displayed within the header.  Choose \"Title and subtitle\" to display a styled page title and optional subtitle, or choose \"Custom content\" to add any arbitrary content.  If \"Custom content\" is selected, a page title and subtitle are NOT included by default and should be added manually.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "title_subtitle": "Title and subtitle",
+                    "custom": "Custom content"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "save_other_choice": 0,
+                "default_value": "title_subtitle",
+                "layout": "vertical",
+                "return_format": "value"
+            },
+            {
                 "key": "field_58fe096728bcc",
                 "label": "Header Title Text",
                 "name": "page_header_title",
                 "type": "text",
                 "instructions": "Overrides the page title.",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -423,9 +940,7 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
-                "maxlength": "",
-                "readonly": 0,
-                "disabled": 0
+                "maxlength": ""
             },
             {
                 "key": "field_58fe097f28bcd",
@@ -434,7 +949,15 @@
                 "type": "text",
                 "instructions": "",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -444,9 +967,34 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
-                "maxlength": "",
-                "readonly": 0,
-                "disabled": 0
+                "maxlength": ""
+            },
+            {
+                "key": "field_59aed93dc187b",
+                "label": "Header Custom Contents",
+                "name": "page_header_content",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "custom"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             },
             {
                 "key": "field_590ca453f6655",
@@ -696,9 +1244,7 @@
                     "bg-warning": "Orange (brand-warning)",
                     "bg-danger": "Red (brand-danger)"
                 },
-                "default_value": [
-                    
-                ],
+                "default_value": [],
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
@@ -772,9 +1318,7 @@
                     "text-warning-aw": "Orange AW (brand-warning, against-white accessible)",
                     "text-danger-aw": "Red AW (brand-danger, against-white accessible)"
                 },
-                "default_value": [
-                    
-                ],
+                "default_value": [],
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,

@@ -18,7 +18,7 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 
 	add_filter( 'ucf_alert_get_layouts', 'mainsite_alert_get_layouts' );
 
-	function mainsite_alert_display_faicon_before() {
+	function mainsite_alert_display_faicon_before( $content, $args ) {
 		$id = UCF_Alert_Common::get_alert_wrapper_id();
 		ob_start();
 	?>
@@ -26,12 +26,12 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 		<script type="text/html" id="<?php echo $id; ?>">
 			<div class="alert ucf-alert ucf-alert-faicon" data-alert-id="" role="alert">
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 
-	add_action( 'ucf_alert_display_faicon_before', 'mainsite_alert_display_faicon_before', 10, 0 );
+	add_filter( 'ucf_alert_display_faicon_before', 'mainsite_alert_display_faicon_before', 10, 2 );
 
-	function mainsite_alert_display_faicon() {
+	function mainsite_alert_display_faicon( $content, $args ) {
 		ob_start();
 	?>
 		<div class="container">
@@ -60,21 +60,21 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 			</div>
 		</div>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 
-	add_action( 'ucf_alert_display_faicon', 'mainsite_alert_display_faicon', 10, 0 );
+	add_filter( 'ucf_alert_display_faicon', 'mainsite_alert_display_faicon', 10, 2 );
 
-	function mainsite_alert_display_faicon_after() {
+	function mainsite_alert_display_faicon_after( $content, $args ) {
 		ob_start();
 	?>
 			</div>
 		</script>
 	<?php
-		echo ob_get_clean();
+		return ob_get_clean();
 	}
 
-	add_action( 'ucf_alert_display_faicon_after', 'mainsite_alert_display_faicon_after', 10, 0 );
+	add_filter( 'ucf_alert_display_faicon_after', 'mainsite_alert_display_faicon_after', 10, 2 );
 
 
 	/**
@@ -90,5 +90,14 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 		return array( 'jquery', 'script' );
 	}
 	add_filter( 'ucf_alert_script_deps', 'mainsite_alert_js_deps', 10, 0 );
+
+
+	/**
+	 * Hook into the header template to display the alert
+	 **/
+	function mainsite_display_alert() {
+		echo UCF_Alert_Common::display_alert( 'faicon', array() );
+	}
+	add_filter( 'after_body_open', 'mainsite_display_alert', 1 );
 
 }
