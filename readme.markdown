@@ -16,6 +16,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 * UCF College Custom Taxonomy
 * UCF Degree Custom Post Type
 * UCF Degree Search Plugin
+* UCF Departments Taxonomy
 * UCF Events
 * UCF Footer
 * UCF News
