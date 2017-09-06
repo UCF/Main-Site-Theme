@@ -80,7 +80,7 @@ function get_header_videos( $obj ) {
 		$title = $obj->name;
 	}
 	else if ( $obj instanceof WP_Post ) {
-		$title = $post->post_title;
+		$title = $obj->post_title;
 	}
 
 	// Apply custom header title override, if available
