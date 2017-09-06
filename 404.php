@@ -14,7 +14,7 @@
 				<?php if ( $content ): ?>
 					<?php echo $content; ?>
 				<?php else: ?>
-					<div class="knightro-bg">
+					<div class="knightro-bg my-4">
 						<div class="row">
 							<div class="col-lg-8 col-md-8 col-sm-10">
 								<h1 class="text-primary display-3">Page Not Found</h1>
