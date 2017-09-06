@@ -6,21 +6,24 @@
 /**
  * Gets the header image for pages.
  **/
-function get_header_images( $post ) {
+function get_header_images( $obj ) {
+	$obj_id = get_object_id( $obj );
+	$field_id = get_object_field_id( $obj );
+
 	$retval = array(
 		'header_image'    => '',
 		'header_image_xs' => ''
 	);
 
-	if ( $post->post_type === 'degree' ) {
-		$retval = degree_backup_headers( $post );
+	if ( $obj instanceof WP_Post && $obj->post_type === 'degree' ) {
+		$retval = degree_backup_headers( $obj );
 	}
 
-	if ( $post_header_image = get_field( 'page_header_image', $post->ID ) ) {
-		$retval['header_image'] = $post_header_image;
+	if ( $obj_header_image = get_field( 'page_header_image', $field_id ) ) {
+		$retval['header_image'] = $obj_header_image;
 	}
-	if ( $post_header_image_xs = get_field( 'page_header_image_xs', $post->ID ) ) {
-		$retval['header_image_xs'] = $post_header_image_xs;
+	if ( $obj_header_image_xs = get_field( 'page_header_image_xs', $field_id ) ) {
+		$retval['header_image_xs'] = $obj_header_image_xs;
 	}
 
 	if ( $retval['header_image'] ) {
@@ -46,10 +49,13 @@ function degree_backup_headers( $post ) {
 /**
  * Gets the header video sources for pages.
  **/
-function get_header_videos( $post ) {
+function get_header_videos( $obj ) {
+	$obj_id = get_object_id( $obj );
+	$field_id = get_object_field_id( $obj );
+
 	$retval = array(
-		'webm' => get_field( 'page_header_webm', $post->ID ),
-		'mp4'  => get_field( 'page_header_mp4', $post->ID )
+		'webm' => get_field( 'page_header_webm', $field_id ),
+		'mp4'  => get_field( 'page_header_mp4', $field_id )
 	);
 
 	$retval = array_filter( $retval );
@@ -66,18 +72,24 @@ function get_header_videos( $post ) {
 /**
  * Returns title text for use in the page header.
  **/
- function get_header_title( $post ) {
+ function get_header_title( $obj ) {
+	$field_id = get_object_field_id( $obj );
 	$title = '';
 
 	if ( is_404() ) {
-		$title = '404 Not Found';
+		$title = 'Page Not Found';
 	}
-	else {
-		$title = do_shortcode( get_field( 'page_header_title', $post->ID ) );
+	else if ( is_tax() || is_category() || is_tag() ) {
+		$title = $obj->name;
 	}
 
-	if ( !$title ) {
-		// Fall back to the post title
+	// Apply custom header title override, if available
+	if ( $custom_header_title = get_field( 'page_header_title', $field_id ) ) {
+		$title = do_shortcode( $custom_header_title );
+	}
+
+	// Fall back to the post title for post objects
+	if ( !$title && $obj instanceof WP_Post ) {
 		$title = $post->post_title;
 	}
 
@@ -88,8 +100,9 @@ function get_header_videos( $post ) {
 /**
  * Returns subtitle text for use in the page header.
  **/
- function get_header_subtitle( $post ) {
-	return wptexturize( do_shortcode( get_field( 'page_header_subtitle', $post->ID ) ) );
+ function get_header_subtitle( $obj ) {
+	$field_id = get_object_field_id( $obj );
+	return wptexturize( do_shortcode( get_field( 'page_header_subtitle', $field_id ) ) );
 }
 
 
@@ -124,9 +137,9 @@ function get_nav_markup( $image=true ) {
  * Returns markup for page header title + subtitles within headers that use a
  * media background.
  **/
-function get_header_content_title_subtitle( $post ) {
-	$title = get_header_title( $post );
-	$subtitle = get_header_subtitle( $post );
+function get_header_content_title_subtitle( $obj ) {
+	$title = get_header_title( $obj );
+	$subtitle = get_header_subtitle( $obj );
 
 	ob_start();
 ?>
@@ -152,8 +165,9 @@ function get_header_content_title_subtitle( $post ) {
  * Returns markup for page header custom content within headers that use a
  * media background.
  **/
-function get_header_content_custom( $post ) {
-	$content = get_field( 'page_header_content', $post->ID );
+function get_header_content_custom( $obj ) {
+	$field_id = get_object_field_id( $obj );
+	$content = get_field( 'page_header_content', $field_id );
 
 	ob_start();
 
@@ -168,14 +182,15 @@ function get_header_content_custom( $post ) {
 /**
  * Returns the markup for page headers with media backgrounds.
  **/
-function get_header_media_markup( $post, $videos, $images ) {
-	$videos     = $videos ?: get_header_videos( $post );
-	$images     = $images ?: get_header_images( $post );
-	$video_loop = get_field( 'page_header_video_loop', $post->ID );
+function get_header_media_markup( $obj, $videos, $images ) {
+	$field_id   = get_object_field_id( $obj );
+	$videos     = $videos ?: get_header_videos( $obj );
+	$images     = $images ?: get_header_images( $obj );
+	$video_loop = get_field( 'page_header_video_loop', $field_id );
 
 	ob_start();
 
-	$header_height = get_field( 'page_header_height', $post->ID );
+	$header_height = get_field( 'page_header_height', $field_id );
 ?>
 	<div class="header-media <?php echo $header_height; ?> media-background-container mb-0 d-flex flex-column">
 		<?php
@@ -215,11 +230,11 @@ function get_header_media_markup( $post, $videos, $images ) {
 		<div class="header-content">
 			<div class="header-content-flexfix">
 				<?php
-				if ( get_field( 'page_header_content_type', $post->ID ) === 'custom' ) {
-					echo get_header_content_custom( $post );
+				if ( get_field( 'page_header_content_type', $field_id ) === 'custom' ) {
+					echo get_header_content_custom( $obj );
 				}
 				else {
-					echo get_header_content_title_subtitle( $post );
+					echo get_header_content_title_subtitle( $obj );
 				}
 				?>
 			</div>
@@ -233,9 +248,9 @@ function get_header_media_markup( $post, $videos, $images ) {
 /**
  * Returns the default markup for page headers without a media background.
  **/
- function get_header_default_markup( $post ) {
-	$title    = get_header_title( $post );
-	$subtitle = get_header_subtitle( $post );
+ function get_header_default_markup( $obj ) {
+	$title    = get_header_title( $obj );
+	$subtitle = get_header_subtitle( $obj );
 
 	ob_start();
 ?>
@@ -254,16 +269,16 @@ function get_header_media_markup( $post, $videos, $images ) {
 
 
 function get_header_markup() {
-	global $post;
+	$obj = get_queried_object();
 
-	$videos = get_header_videos( $post );
-	$images = get_header_images( $post );
+	$videos = get_header_videos( $obj );
+	$images = get_header_images( $obj );
 
 	if ( $videos || $images ) {
-		echo get_header_media_markup( $post, $videos, $images );
+		echo get_header_media_markup( $obj, $videos, $images );
 	}
 	else {
-		echo get_header_default_markup( $post );
+		echo get_header_default_markup( $obj );
 	}
 }
 
