@@ -76,10 +76,7 @@ function get_header_videos( $obj ) {
 	$field_id = get_object_field_id( $obj );
 	$title = '';
 
-	if ( is_404() ) {
-		$title = 'Page Not Found';
-	}
-	else if ( is_tax() || is_category() || is_tag() ) {
+	if ( is_tax() || is_category() || is_tag() ) {
 		$title = $obj->name;
 	}
 
@@ -142,6 +139,8 @@ function get_header_content_title_subtitle( $obj ) {
 	$subtitle = get_header_subtitle( $obj );
 
 	ob_start();
+
+	if ( $title ):
 ?>
 	<div class="header-content-inner d-flex h-75 align-items-center">
 		<div class="container">
@@ -157,6 +156,8 @@ function get_header_content_title_subtitle( $obj ) {
 		</div>
 	</div>
 <?php
+	endif;
+
 	return ob_get_clean();
 }
 
@@ -256,6 +257,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 ?>
 	<?php echo get_nav_markup(); ?>
 
+	<?php if ( $title ): ?>
 	<div class="container">
 		<h1 class="mt-3 mt-sm-4 mt-md-5 mb-3"><?php echo $title; ?></h1>
 
@@ -263,6 +265,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 		<p class="lead mb-4 mb-md-5"><?php echo $subtitle; ?></p>
 		<?php endif; ?>
 	</div>
+	<?php endif; ?>
 <?php
 	return ob_get_clean();
 }
