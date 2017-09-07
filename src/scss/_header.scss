@@ -112,13 +112,18 @@
       left: 0;
       position: absolute;
       right: 0;
-      top: calc(#{$nav-height} - 1px);
+      top: $nav-height;
       z-index: 1;
     }
 
     @include media-breakpoint-down(xs) {
       left: -$navbar-padding-x;
       right: -$navbar-padding-x;
+    }
+
+    &.collapse.show,
+    &.collapsing {
+      border-top: 0 solid transparent;
     }
   }
 

@@ -104,7 +104,7 @@ function get_header_videos( $obj ) {
 function get_nav_markup( $image=true ) {
 	ob_start();
 ?>
-	<nav class="navbar navbar-toggleable-md<?php echo $image ? ' navbar-inverse navbar-custom header-gradient' : ' navbar-light navbar-custom'; ?> py-2 py-sm-4" role="navigation">
+	<nav class="navbar navbar-toggleable-md navbar-custom py-2<?php echo $image ? ' py-sm-4 navbar-inverse header-gradient' : ' navbar-inverse bg-inverse-t-3 py-lg-4'; ?>" role="navigation">
 		<div class="container">
 			<button class="navbar-toggler ml-auto mr-0 collapsed" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-text">Navigation</span>
@@ -262,7 +262,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 
 	ob_start();
 ?>
-	<?php echo get_nav_markup(); ?>
+	<?php echo get_nav_markup( false ); ?>
 
 	<?php if ( $title ): ?>
 	<div class="container">
