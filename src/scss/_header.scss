@@ -108,16 +108,26 @@
   // scss-lint:disable NestingDepth SelectorDepth
   .navbar-collapse {
     @include media-breakpoint-down(md) {
-      // position: relative;
+      background-color: transparentize(darken($brand-default, 25%), .025);
       left: 0;
       position: absolute;
       right: 0;
-      top: $nav-height;
+      top: calc(#{$nav-height} - 1px);
       z-index: 1;
+    }
+
+    @include media-breakpoint-down(xs) {
+      left: -$navbar-padding-x;
+      right: -$navbar-padding-x;
     }
   }
 
   .navbar-nav {
+    @include media-breakpoint-down(md) {
+      margin-left: 0;
+      margin-right: 0;
+      padding: $grid-gutter-width-base / 2;
+    }
 
     @include media-breakpoint-up(lg) {
       width: 100%;
