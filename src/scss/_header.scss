@@ -3,6 +3,7 @@
   flex: 1 1 auto;
   flex-direction: column;
   position: relative;
+  z-index: 2;
 }
 
 .header-content-flexfix {
@@ -48,7 +49,7 @@
   position: absolute;
   right: 0;
   top: 0;
-  z-index: -1;
+  z-index: 1;
 }
 
 .header-media-background {
@@ -104,6 +105,8 @@
 }
 
 .navbar-custom {
+  z-index: 3;
+
   // Selector depth required to match Bootstrap/Athena selectors
   // scss-lint:disable NestingDepth SelectorDepth
   .navbar-collapse {
@@ -169,4 +172,13 @@
     }
   }
   // scss-lint:enable NestingDepth SelectorDepth
+}
+
+// Pushes .header-content up enough to prevent overlap with the
+// media background's video controls.
+.header-media-controlfix {
+  @include media-breakpoint-up(sm) {
+    height: 4.5rem;
+    pointer-events: none;
+  }
 }

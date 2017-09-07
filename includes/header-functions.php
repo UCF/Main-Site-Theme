@@ -141,7 +141,7 @@ function get_header_content_title_subtitle( $obj ) {
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner pb-4 align-self-center">
+	<div class="header-content-inner align-self-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
 				<h1 class="header-title"><?php echo $title; ?></h1>
@@ -247,6 +247,8 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				?>
 			</div>
 		</div>
+
+		<div class="header-media-controlfix"></div>
 	</div>
 <?php
 	return ob_get_clean();
