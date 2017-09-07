@@ -191,10 +191,10 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$videos     = $videos ?: get_header_videos( $obj );
 	$images     = $images ?: get_header_images( $obj );
 	$video_loop = get_field( 'page_header_video_loop', $field_id );
+	$header_content_type = get_field( 'page_header_content_type', $field_id );
+	$header_height       = get_field( 'page_header_height', $field_id );
 
 	ob_start();
-
-	$header_height = get_field( 'page_header_height', $field_id );
 ?>
 	<div class="header-media <?php echo $header_height; ?> mb-0 d-flex flex-column">
 		<div class="header-media-background-wrap">
@@ -238,7 +238,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 		<div class="header-content">
 			<div class="header-content-flexfix">
 				<?php
-				if ( get_field( 'page_header_content_type', $field_id ) === 'custom' ) {
+				if ( $header_content_type === 'custom' ) {
 					echo get_header_content_custom( $obj );
 				}
 				else {
@@ -248,7 +248,14 @@ function get_header_media_markup( $obj, $videos, $images ) {
 			</div>
 		</div>
 
+		<?php
+		// Print a spacer div for headers with background videos (to make
+		// control buttons accessible), and for headers showing a standard
+		// title/subtitle to push them up a bit
+		if ( $videos || $header_content_type === 'title_subtitle' ):
+		?>
 		<div class="header-media-controlfix"></div>
+		<?php endif; ?>
 	</div>
 <?php
 	return ob_get_clean();
