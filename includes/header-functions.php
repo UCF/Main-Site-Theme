@@ -141,7 +141,7 @@ function get_header_content_title_subtitle( $obj ) {
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner d-flex h-75 align-items-center">
+	<div class="header-content-inner pb-4 align-self-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
 				<h1 class="header-title"><?php echo $title; ?></h1>
@@ -170,11 +170,15 @@ function get_header_content_custom( $obj ) {
 	$content = get_field( 'page_header_content', $field_id );
 
 	ob_start();
-
+?>
+	<div class="header-content-inner">
+<?php
 	if ( $content ) {
 		echo $content;
 	}
-
+?>
+	</div>
+<?php
 	return ob_get_clean();
 }
 
@@ -192,32 +196,36 @@ function get_header_media_markup( $obj, $videos, $images ) {
 
 	$header_height = get_field( 'page_header_height', $field_id );
 ?>
-	<div class="header-media <?php echo $header_height; ?> media-background-container mb-0 d-flex flex-column">
-		<?php
-		// Display the media background (video + picture)
+	<div class="header-media <?php echo $header_height; ?> mb-0 d-flex flex-column">
+		<div class="header-media-background-wrap">
+			<div class="header-media-background media-background-container">
+				<?php
+				// Display the media background (video + picture)
 
-		if ( $videos ) {
-			echo get_media_background_video( $videos, $video_loop );
-		}
-		if ( $images ) {
-			$bg_image_srcs = array();
-			switch ( $header_height ) {
-				case 'header-media-fullscreen':
-					$bg_image_srcs = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
-					$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
+				if ( $videos ) {
+					echo get_media_background_video( $videos, $video_loop );
+				}
+				if ( $images ) {
+					$bg_image_srcs = array();
+					switch ( $header_height ) {
+						case 'header-media-fullscreen':
+							$bg_image_srcs = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
+							$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
 
-					if ( isset( $bg_image_src_xs['xs'] ) ) {
-						$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
+							if ( isset( $bg_image_src_xs['xs'] ) ) {
+								$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
+							}
+
+							break;
+						default:
+							$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+							break;
 					}
-
-					break;
-				default:
-					$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
-					break;
-			}
-			echo get_media_background_picture( $bg_image_srcs );
-		}
-		?>
+					echo get_media_background_picture( $bg_image_srcs );
+				}
+				?>
+			</div>
+		</div>
 
 		<?php
 		// Display the site nav
