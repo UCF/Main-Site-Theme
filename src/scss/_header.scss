@@ -107,6 +107,12 @@
 .navbar-custom {
   z-index: 3;
 
+  .navbar-toggler.collapsed {
+    .navbar-toggler-text {
+      text-shadow: $nav-text-shadow;
+    }
+  }
+
   // Selector depth required to match Bootstrap/Athena selectors
   // scss-lint:disable NestingDepth SelectorDepth
   .navbar-collapse {
@@ -142,6 +148,8 @@
     }
 
     .nav-link {
+      text-shadow: $nav-text-shadow;
+
       @include media-breakpoint-only(lg) {
         font-size: .7rem;
       }
@@ -161,6 +169,7 @@
       .nav-link {
         background-color: $brand-primary;
         color: $black;
+        text-shadow: none;
 
         &:hover,
         &:focus,
