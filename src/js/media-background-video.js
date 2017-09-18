@@ -6,6 +6,11 @@
 
   const $btns = $('.media-background-video-toggle');
   const $videos = $('.media-background-video');
+  const cookieName = 'ucfedu-autoplay-bg-videos';
+  const cookieSettings = {
+    expires: 365,
+    domain: UCFEDU.domain
+  };
 
 
   function btnClickHandler() {
@@ -49,29 +54,43 @@
   }
 
   function enableBgVideoAutoplay() {
-    if (Cookies.get('ucfedu-autoplay-bg-videos') !== '1') {
-      Cookies.set('ucfedu-autoplay-bg-videos', '1');
+    if (getAutoplayCookie() !== '1') {
+      updateAutoplayCookie('1');
     }
   }
 
   function disableBgVideoAutoplay() {
-    if (Cookies.get('ucfedu-autoplay-bg-videos') !== '0') {
-      Cookies.set('ucfedu-autoplay-bg-videos', '0');
+    if (getAutoplayCookie() !== '0') {
+      updateAutoplayCookie('0');
     }
+  }
+
+  function getAutoplayCookie() {
+    return Cookies.get(cookieName);
+  }
+
+  function setAutoplayCookie(value) {
+    Cookies.set(cookieName, value, cookieSettings);
+  }
+
+  function deleteAutoplayCookie() {
+    Cookies.remove(cookieName, cookieSettings);
+  }
+
+  function updateAutoplayCookie(value) {
+    deleteAutoplayCookie();
+    setAutoplayCookie(value);
   }
 
   function init() {
     if ($videos.length && $btns.length) {
       // Set the autoplay cookie if it hasn't been set yet
-      if (typeof Cookies.get('ucfedu-autoplay-bg-videos') === 'undefined') {
-        Cookies.set('ucfedu-autoplay-bg-videos', '1', {
-          expires: 365,
-          domain: UCFEDU.domain
-        });
+      if (typeof Cookies.get(cookieName) === 'undefined') {
+        setAutoplayCookie('1');
       }
 
       // Toggle the btn and video play on load
-      if (Cookies.get('ucfedu-autoplay-bg-videos') === '1') {
+      if (getAutoplayCookie() === '1') {
         toggleBtnPlay();
       } else {
         toggleBtnPause();
