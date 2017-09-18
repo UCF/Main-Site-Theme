@@ -104,9 +104,10 @@ function get_header_videos( $obj ) {
 function get_nav_markup( $image=true ) {
 	ob_start();
 ?>
-	<nav class="navbar navbar-toggleable-md<?php echo $image ? ' navbar-inverse navbar-custom header-gradient' : ' navbar-light navbar-custom'; ?> py-2 py-sm-4" role="navigation">
+	<nav class="navbar navbar-toggleable-md navbar-custom py-2<?php echo $image ? ' py-sm-4 navbar-inverse header-gradient' : ' navbar-inverse bg-inverse-t-3 py-lg-4'; ?>" role="navigation">
 		<div class="container">
-			<button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler ml-auto mr-0 collapsed" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-text">Navigation</span>
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<?php
@@ -116,9 +117,9 @@ function get_nav_markup( $image=true ) {
 					'container'       => 'div',
 					'container_class' => 'collapse navbar-collapse',
 					'container_id'    => 'header-menu',
-					'menu_class'      => 'nav navbar-nav nav-fill w-100',
-					'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-					'walker'          => new WP_Bootstrap_Navwalker()
+					'menu_class'      => 'nav navbar-nav nav-fill',
+					'fallback_cb'     => 'bs4Navwalker::fallback',
+					'walker'          => new bs4Navwalker()
 				) );
 			?>
 		</div>
@@ -140,7 +141,7 @@ function get_header_content_title_subtitle( $obj ) {
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner d-flex h-75 align-items-center">
+	<div class="header-content-inner align-self-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
 				<h1 class="header-title"><?php echo $title; ?></h1>
@@ -169,11 +170,15 @@ function get_header_content_custom( $obj ) {
 	$content = get_field( 'page_header_content', $field_id );
 
 	ob_start();
-
+?>
+	<div class="header-content-inner">
+<?php
 	if ( $content ) {
 		echo $content;
 	}
-
+?>
+	</div>
+<?php
 	return ob_get_clean();
 }
 
@@ -186,37 +191,41 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$videos     = $videos ?: get_header_videos( $obj );
 	$images     = $images ?: get_header_images( $obj );
 	$video_loop = get_field( 'page_header_video_loop', $field_id );
+	$header_content_type = get_field( 'page_header_content_type', $field_id );
+	$header_height       = get_field( 'page_header_height', $field_id );
 
 	ob_start();
-
-	$header_height = get_field( 'page_header_height', $field_id );
 ?>
-	<div class="header-media <?php echo $header_height; ?> media-background-container mb-0 d-flex flex-column">
-		<?php
-		// Display the media background (video + picture)
+	<div class="header-media <?php echo $header_height; ?> mb-0 d-flex flex-column">
+		<div class="header-media-background-wrap">
+			<div class="header-media-background media-background-container">
+				<?php
+				// Display the media background (video + picture)
 
-		if ( $videos ) {
-			echo get_media_background_video( $videos, $video_loop );
-		}
-		if ( $images ) {
-			$bg_image_srcs = array();
-			switch ( $header_height ) {
-				case 'header-media-fullscreen':
-					$bg_image_srcs = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
-					$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
+				if ( $videos ) {
+					echo get_media_background_video( $videos, $video_loop );
+				}
+				if ( $images ) {
+					$bg_image_srcs = array();
+					switch ( $header_height ) {
+						case 'header-media-fullscreen':
+							$bg_image_srcs = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
+							$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
 
-					if ( isset( $bg_image_src_xs['xs'] ) ) {
-						$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
+							if ( isset( $bg_image_src_xs['xs'] ) ) {
+								$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
+							}
+
+							break;
+						default:
+							$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+							break;
 					}
-
-					break;
-				default:
-					$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
-					break;
-			}
-			echo get_media_background_picture( $bg_image_srcs );
-		}
-		?>
+					echo get_media_background_picture( $bg_image_srcs );
+				}
+				?>
+			</div>
+		</div>
 
 		<?php
 		// Display the site nav
@@ -229,7 +238,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 		<div class="header-content">
 			<div class="header-content-flexfix">
 				<?php
-				if ( get_field( 'page_header_content_type', $field_id ) === 'custom' ) {
+				if ( $header_content_type === 'custom' ) {
 					echo get_header_content_custom( $obj );
 				}
 				else {
@@ -238,6 +247,15 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				?>
 			</div>
 		</div>
+
+		<?php
+		// Print a spacer div for headers with background videos (to make
+		// control buttons accessible), and for headers showing a standard
+		// title/subtitle to push them up a bit
+		if ( $videos || $header_content_type === 'title_subtitle' ):
+		?>
+		<div class="header-media-controlfix"></div>
+		<?php endif; ?>
 	</div>
 <?php
 	return ob_get_clean();
@@ -253,7 +271,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 
 	ob_start();
 ?>
-	<?php echo get_nav_markup(); ?>
+	<?php echo get_nav_markup( false ); ?>
 
 	<?php if ( $title ): ?>
 	<div class="container">

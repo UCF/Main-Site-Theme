@@ -1,23 +1,20 @@
 .header-content {
+  display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
   position: relative;
+  z-index: 2;
 }
 
 .header-content-flexfix {
-  // Workaround for Chrome + Safari bug, where a flex child's contents can't
-  // have a percentage-based height when the parent is set with
-  // flex-direction:column and flex-grow:1
-  //
-  // http://stackoverflow.com/a/33644245
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1;
+  // Reset flex rules so that child elements behave more predictably
+  display: flex;
+  flex: 1 1 auto;
 }
 
 .header-content-inner {
+  width: 100%;
+
   .container {
     @include media-breakpoint-down(xs) {
       width: 100%;
@@ -26,6 +23,8 @@
 }
 
 .header-media {
+  position: relative;
+
   @include media-breakpoint-down(xs) {
     min-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
   }
@@ -42,6 +41,20 @@
     height: calc(90vh - #{$ucf-header-height});
     min-height: 400px;
   }
+}
+
+.header-media-background-wrap {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.header-media-background {
+  height: 100%;
+  width: 100%;
 }
 
 .header-title {
@@ -92,14 +105,55 @@
 }
 
 .navbar-custom {
+  z-index: 3;
+
+  .navbar-toggler.collapsed {
+    .navbar-toggler-text {
+      text-shadow: $nav-text-shadow;
+    }
+  }
+
   // Selector depth required to match Bootstrap/Athena selectors
   // scss-lint:disable NestingDepth SelectorDepth
+  .navbar-collapse {
+    @include media-breakpoint-down(md) {
+      background-color: transparentize(darken($brand-default, 25%), .025);
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: $nav-height;
+      z-index: 1;
+    }
+
+    @include media-breakpoint-down(xs) {
+      left: -$navbar-padding-x;
+      right: -$navbar-padding-x;
+    }
+
+    &.collapse.show,
+    &.collapsing {
+      border-top: 0 solid transparent;
+    }
+  }
+
   .navbar-nav {
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-down(md) {
+      margin-left: 0;
       margin-right: 0;
+      padding: $grid-gutter-width-base / 2;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 100%;
     }
 
     .nav-link {
+      text-shadow: $nav-text-shadow;
+
+      @include media-breakpoint-only(lg) {
+        font-size: .7rem;
+      }
+
       &:hover,
       &:active {
         background-color: rgba(0, 0, 0, .9);
@@ -108,13 +162,14 @@
     }
 
     .nav-item:last-child {
-      @include media-breakpoint-up(md) {
-        margin-right: -$grid-gutter-width-base / 2;
+      @include media-breakpoint-up(lg) {
+        margin-right: -$grid-gutter-width-base;
       }
 
       .nav-link {
         background-color: $brand-primary;
         color: $black;
+        text-shadow: none;
 
         &:hover,
         &:focus,
@@ -126,4 +181,13 @@
     }
   }
   // scss-lint:enable NestingDepth SelectorDepth
+}
+
+// Pushes .header-content up enough to prevent overlap with the
+// media background's video controls.
+.header-media-controlfix {
+  @include media-breakpoint-up(sm) {
+    height: 4.5rem;
+    pointer-events: none;
+  }
 }
