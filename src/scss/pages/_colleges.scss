@@ -132,55 +132,38 @@
 .section-colleges {
 
   .college-block {
-    position: relative;
+    min-height: 48.2vw;
     width: 50%;
 
     @include media-breakpoint-up( sm ) {
+      min-height: 33vw;
       width: calc(100% / 3);
     }
     @include media-breakpoint-up( md ) {
-      width: calc(100% / 4);
+      min-height: 24.6vw;
+      width: 25%;
     }
     @include media-breakpoint-up( lg ) {
+      min-height: 16.5vw;
       width: calc(100% / 6);
     }
 
-    &:hover .college-block-img {
-      filter: none;
-    }
-  }
+    .college-block-text {
+      font-size: 7.25vw;
+      padding: 3vw;
+      text-shadow: 0 0 10px rgba(0,0,0,.7);
 
-  .college-block-img {
-    filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
-    transition: filter .3s;
-    z-index: 0;
-  }
-
-  .college-block-text {
-    bottom: 0;
-    color: $white;
-    display: block;
-    font-family: $font-family-condensed;
-    font-size: 7.25vw;
-    line-height: 1;
-    padding: 3vw;
-    position: absolute;
-    text-shadow: 0 0 10px rgba(0,0,0,.7);
-    text-transform: uppercase;
-    transition: text-shadow .3s;
-    z-index: 20;
-
-    @include media-breakpoint-up( sm ) {
-      font-size: 4vw;
-      padding: 2vw;
-    }
-    @include media-breakpoint-up( md ) {
-      font-size: 3vw;
-      padding: 1.5vw;
-    }
-    @include media-breakpoint-up( lg ) {
-      font-size: 2vw;
-      padding: 1.5vw;
+      @include media-breakpoint-up( sm ) {
+        font-size: 4vw;
+        padding: 2vw;
+      }
+      @include media-breakpoint-up( md ) {
+        font-size: 3vw;
+        padding: 1.5vw;
+      }
+      @include media-breakpoint-up( lg ) {
+        font-size: 2vw;
+      }
     }
   }
 }
