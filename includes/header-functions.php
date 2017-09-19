@@ -141,7 +141,7 @@ function get_header_content_title_subtitle( $obj ) {
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner align-self-center">
+	<div class="header-content-inner align-self-start pt-2 pt-sm-0 align-self-sm-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
 				<h1 class="header-title"><?php echo $title; ?></h1>
