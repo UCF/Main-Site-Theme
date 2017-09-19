@@ -38,8 +38,7 @@
 
 .header-media-fullscreen {
   @include media-breakpoint-up(sm) {
-    height: calc(90vh - #{$ucf-header-height});
-    min-height: 400px;
+    min-height: calc(90vh - #{$ucf-header-height});
   }
 }
 
