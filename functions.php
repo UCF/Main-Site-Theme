@@ -2,7 +2,7 @@
 include_once 'includes/utilities.php';
 include_once 'includes/config.php';
 include_once 'includes/meta.php';
-include_once 'includes/wp-bs-navwalker.php';
+include_once 'includes/navwalker.php';
 include_once 'includes/header-functions.php';
 
 include_once 'includes/degree-functions.php';
@@ -69,6 +69,14 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 				'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-sm' )
 			)
 		);
+
+		// Try to get a fallback -xs image if needed
+		if ( !$attachment_xs_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'xs' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix ) )
+			);
+		}
 
 		// Remove duplicate image sizes, in case an old image isn't pre-cropped
 		$bg_images = array_unique( $bg_images );
