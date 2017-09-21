@@ -1,13 +1,15 @@
 @import 'utils';
 
 @import 'header';
-@import 'ucf-alert';
 @import 'degrees';
 
 // Components
 @import 'components/degree-search-typeahead';
 @import 'components/icon-link';
 @import 'components/colleges-grid';
+@import 'components/news';
+@import 'components/events';
+@import 'components/ucf-alert';
 
 // Pages
 @import 'pages/404';

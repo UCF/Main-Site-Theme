@@ -1,0 +1,23 @@
+.ucf-events-modern,
+.ucf-events-modern-nodesc {
+  .ucf-event-when {
+    margin-bottom: .5rem;
+  }
+
+  .ucf-event-start-date,
+  .ucf-event-title {
+    @extend .h5;
+  }
+
+  .ucf-event-start-date {
+    color: $brand-primary;
+  }
+
+  .ucf-event-start-time {
+    display: none;
+  }
+
+  .ucf-event-title {
+    color: inherit;
+  }
+}
