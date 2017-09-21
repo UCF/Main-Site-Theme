@@ -1,0 +1,30 @@
+.ucf-news.modern {
+  .ucf-news-item {
+    margin-left: -$grid-gutter-width-base / 2;
+    margin-right: -$grid-gutter-width-base / 2;
+
+    a {
+      @extend .media;
+    }
+  }
+
+  .ucf-news-thumbnail {
+    display: flex;
+    margin-right: $spacer-x;
+  }
+
+  .ucf-news-item-content {
+    @extend .media-body;
+  }
+
+  .ucf-news-section-title {
+    @extend .badge;
+    @extend .badge-primary;
+    margin-bottom: .75rem;
+  }
+
+  .ucf-news-item-title {
+    @extend .h5;
+    color: $brand-secondary;
+  }
+}
