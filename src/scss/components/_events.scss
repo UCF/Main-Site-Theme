@@ -1,7 +1,15 @@
 .ucf-events-modern,
 .ucf-events-modern-nodesc {
+  .ucf-event-row-margin {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: .5rem;
+    }
+  }
+
   .ucf-event-when {
-    margin-bottom: .5rem;
+    @include media-breakpoint-up(md) {
+      margin-bottom: .5rem;
+    }
   }
 
   .ucf-event-start-date,
@@ -19,5 +27,13 @@
 
   .ucf-event-title {
     color: inherit;
+  }
+
+  .ucf-event-description-wrapper {
+    font-size: $font-size-xs;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-sm;
+    }
   }
 }

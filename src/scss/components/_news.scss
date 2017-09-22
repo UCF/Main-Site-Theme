@@ -13,6 +13,11 @@
     margin-right: $spacer-x;
   }
 
+  .ucf-news-thumbnail-image {
+    align-self: center; // fix img stretching in Chrome
+    flex-shrink: 0; // fix img stretching in IE11
+  }
+
   .ucf-news-item-content {
     @extend .media-body;
   }
@@ -26,5 +31,13 @@
   .ucf-news-item-title {
     @extend .h5;
     color: $brand-secondary;
+  }
+
+  .ucf-news-item-excerpt {
+    font-size: $font-size-xs;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-sm;
+    }
   }
 }
