@@ -18,7 +18,11 @@
   }
 
   .ucf-event-start-date {
-    color: $brand-primary;
+    color: $brand-default;
+
+    *[class*="bg-inverse"] & {
+      color: $brand-primary;
+    }
   }
 
   .ucf-event-start-time {
