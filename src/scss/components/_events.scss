@@ -1,0 +1,43 @@
+.ucf-events-modern,
+.ucf-events-modern-nodesc {
+  .ucf-event-row-margin {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: .5rem;
+    }
+  }
+
+  .ucf-event-when {
+    @include media-breakpoint-up(md) {
+      margin-bottom: .5rem;
+    }
+  }
+
+  .ucf-event-start-date,
+  .ucf-event-title {
+    @extend .h5;
+  }
+
+  .ucf-event-start-date {
+    color: $brand-default;
+
+    *[class*="bg-inverse"] & {
+      color: $brand-primary;
+    }
+  }
+
+  .ucf-event-start-time {
+    display: none;
+  }
+
+  .ucf-event-title {
+    color: inherit;
+  }
+
+  .ucf-event-description-wrapper {
+    font-size: $font-size-xs;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-sm;
+    }
+  }
+}
