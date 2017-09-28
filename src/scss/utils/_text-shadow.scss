@@ -1,0 +1,15 @@
+.text-shadow-soft {
+  text-shadow: $text-shadow-soft-length $text-shadow-color;
+}
+
+.text-shadow-soft-inverse {
+  text-shadow: $text-shadow-soft-length $text-shadow-color-inverse;
+}
+
+.text-shadow-hard {
+  text-shadow: $text-shadow-hard-length $text-shadow-color;
+}
+
+.text-shadow-hard-inverse {
+  text-shadow: $text-shadow-hard-length $text-shadow-color-inverse;
+}
