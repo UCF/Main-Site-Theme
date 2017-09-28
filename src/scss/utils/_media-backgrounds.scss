@@ -1,0 +1,35 @@
+.media-background-video ~ .media-background-picture,
+.media-background-video ~ .media-background-img {
+  @include media-breakpoint-up(sm) {
+    display: none;
+  }
+}
+
+.media-background-video-toggle {
+  @include button-variant(rgba($white, .75), rgba($black, .3), transparent);
+  @include button-variant-overrides(rgba($white, .75), rgba($black, .75), transparent, $white);
+  font-size: $font-size-xs;
+
+  @include media-breakpoint-down(xs) {
+    display: none;
+  }
+
+  .media-background-container & {
+    bottom: $grid-gutter-width-base / 2;
+    position: absolute;
+    right: $grid-gutter-width-base / 2;
+    z-index: 2;
+  }
+}
+
+.media-background-video-pause {
+  .media-background-video-toggle.play-disabled & {
+    display: none;
+  }
+}
+
+.media-background-video-play {
+  .media-background-video-toggle.play-enabled & {
+    display: none;
+  }
+}
