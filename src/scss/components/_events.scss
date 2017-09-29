@@ -1,3 +1,67 @@
+//
+// Classic layout
+//
+.ucf-events-classic {
+  .ucf-event-when,
+  .ucf-event-content {
+    padding-bottom: $grid-gutter-width-base;
+  }
+
+  .ucf-event-start-datetime {
+    border: 1px solid;
+    border-radius: $border-radius-lg;
+    display: block;
+    text-align: center;
+  }
+
+  .ucf-event-start-month,
+  .ucf-event-start-date {
+    display: block;
+  }
+
+  .ucf-event-start-month {
+    border-top-left-radius: $border-radius-lg;
+    border-top-right-radius: $border-radius-lg;
+    font-weight: bold;
+    padding-top: .15rem;
+    text-transform: uppercase;
+  }
+
+  .ucf-event-start-date {
+    font-size: 1.65rem;
+    line-height: 1.2;
+    padding-bottom: .15rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+
+  .ucf-event-content {
+    line-height: 1.4;
+  }
+
+  .ucf-event-link {
+    color: inherit;
+  }
+
+  .ucf-event-title {
+    font-size: 1rem;
+  }
+
+  .ucf-event-time {
+    display: block;
+    font-style: italic;
+    padding-top: .5rem;
+  }
+
+  .ucf-event-start-time,
+  .ucf-event-end-time {
+    display: inline;
+  }
+}
+
+//
+// Modern layouts
+//
 .ucf-events-modern,
 .ucf-events-modern-nodesc {
   .ucf-event-row-margin {
