@@ -1,0 +1,36 @@
+.spotlight-header {
+  .spotlight-horizontal & {
+    @extend .display-3;
+    font-family: $font-family-condensed;
+    font-weight: normal;
+  }
+
+  .spotlight-vertical & {
+    @extend .h3;
+    font-family: $font-family-base;
+  }
+
+  .spotlight-square & {
+    @extend .h3;
+    @extend .text-shadow-soft;
+    color: $brand-inverse;
+    font-family: $font-family-slab-serif;
+    margin-bottom: .75rem;
+  }
+}
+
+.spotlight-horizontal,
+.spotlight-vertical,
+.spotlight-square {
+  .spotlight-copy {
+    font-family: $font-family-base;
+  }
+}
+
+.spotlight-vertical .spotlight-image {
+  margin-bottom: 1.2rem;
+}
+
+.spotlight-square .spotlight-btn-wrapper .btn {
+  font-size: $font-size-sm;
+}
