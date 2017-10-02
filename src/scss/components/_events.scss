@@ -44,7 +44,11 @@
   }
 
   .ucf-event-title {
-    font-size: 1rem;
+    font-size: $font-size-base;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-base-md;
+    }
   }
 
   .ucf-event-time {
