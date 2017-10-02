@@ -1,3 +1,36 @@
+//
+// Classic layout
+//
+.ucf-news.classic {
+  .ucf-news-item {
+    @extend .media;
+    margin-bottom: $grid-gutter-width-base;
+  }
+
+  .ucf-news-thumbnail {
+    display: flex;
+    margin-right: $spacer-x;
+
+    .ucf-news-thumbnail-image {
+      align-self: center; // fix img stretching in Chrome
+      border-radius: 0;
+      flex-shrink: 0; // fix img stretching in IE11
+    }
+  }
+
+  .ucf-news-item-title {
+    @extend .media-body;
+    line-height: 1.4;
+
+    a {
+      color: inherit;
+    }
+  }
+}
+
+//
+// Modern layout
+//
 .ucf-news.modern {
   .ucf-news-item {
     margin-left: -$grid-gutter-width-base / 2;
