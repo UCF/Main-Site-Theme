@@ -299,4 +299,4 @@ function mainsite_events_display_classic( $content, $items, $args, $display_type
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_events_display_classic', 'mainsite_events_display_classic', 10, 4 );
+add_filter( 'ucf_events_display_classic', 'mainsite_events_display_classic', 11, 4 );
