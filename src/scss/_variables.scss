@@ -2,6 +2,19 @@ $fa-font-path: '../fonts/font-awesome';
 
 $line-height-base: 1.65;
 
+$blockquote-small-color:  inherit;
+$blockquote-font-size:    1.1rem;
+$blockquote-font-size-md: 1.875rem;
+$font-serif-blockquote-size:         $blockquote-font-size * 1.2;
+$font-serif-blockquote-size-md:      $blockquote-font-size-md * 1.14;
+$font-slab-serif-blockquote-size:    $blockquote-font-size * 1.25;
+$font-slab-serif-blockquote-size-md: $blockquote-font-size-md * 1.2;
+$font-serif-blockquote-line-height:  1.4;
+$blockquote-line-height:             1.6;
+
+$small-font-size: 70% !default;
+
+
 $header-img-xs-width: 575px;
 $header-img-xs-height: 575px;
 
@@ -13,3 +26,11 @@ $text-shadow-hard-length: 0 1px 0;
 $text-shadow-soft-length: 0 0 .2em;
 $text-shadow-color: rgba(0, 0, 0, 1);
 $text-shadow-color-inverse: rgba(255, 255, 255, .75);
+
+$box-shadow-hard-length: $text-shadow-hard-length;
+$box-shadow-soft-length: .5em .5em 1em;
+$box-shadow-color: rgba(0, 0, 0, .325);
+$box-shadow-color-inverse: $text-shadow-color-inverse;
+
+$rotate-left: rotate(-5deg);
+$rotate-right: rotate(5deg);

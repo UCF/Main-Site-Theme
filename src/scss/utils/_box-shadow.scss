@@ -1,0 +1,15 @@
+.box-shadow-soft {
+  box-shadow: $box-shadow-soft-length $box-shadow-color;
+}
+
+.box-shadow-soft-inverse {
+  box-shadow: $box-shadow-soft-length $box-shadow-color-inverse;
+}
+
+.box-shadow-hard {
+  box-shadow: $box-shadow-hard-length $box-shadow-color;
+}
+
+.box-shadow-hard-inverse {
+  box-shadow: $box-shadow-hard-length $box-shadow-color-inverse;
+}
