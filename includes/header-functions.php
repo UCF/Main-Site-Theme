@@ -162,8 +162,7 @@ function get_header_content_title_subtitle( $obj ) {
 
 
 /**
- * Returns markup for page header custom content within headers that use a
- * media background.
+ * Returns markup for page header custom content.
  **/
 function get_header_content_custom( $obj ) {
 	$field_id = get_object_field_id( $obj );
@@ -266,14 +265,20 @@ function get_header_media_markup( $obj, $videos, $images ) {
  * Returns the default markup for page headers without a media background.
  **/
  function get_header_default_markup( $obj ) {
-	$title    = get_header_title( $obj );
-	$subtitle = get_header_subtitle( $obj );
+	$title      = get_header_title( $obj );
+	$subtitle   = get_header_subtitle( $obj );
+	$field_id   = get_object_field_id( $obj );
+	$header_content_type = get_field( 'page_header_content_type', $field_id );
 
 	ob_start();
 ?>
 	<?php echo get_nav_markup( false ); ?>
 
-	<?php if ( $title ): ?>
+	<?php
+	if ( $header_content_type === 'custom' ):
+		echo get_header_content_custom( $obj );
+	elseif ( $title ):
+	?>
 	<div class="container">
 		<h1 class="mt-3 mt-sm-4 mt-md-5 mb-3"><?php echo $title; ?></h1>
 
