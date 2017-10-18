@@ -1,0 +1,62 @@
+@import '../src/scss/variables';
+@import './ucf-athena-framework/src/scss/variables';
+@import './ucf-athena-framework/src/scss/bootstrap/variables';
+@import './ucf-athena-framework/src/scss/mixins';
+@import './ucf-athena-framework/src/scss/bootstrap/mixins';
+
+
+.fightsong-wrap {
+  @include clearfix();
+}
+
+.fightsong-line {
+  border: $border-width-thicker solid $brand-primary;
+  clear: both;
+  display: block;
+  font-family: $font-family-condensed;
+  font-size: 5vw;
+  letter-spacing: .05em;
+  line-height: 1;
+  padding: .4em .8em;
+  text-transform: uppercase;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 1.5rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 2.25rem;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 2rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 2.375rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: -$border-width-thicker;
+  }
+
+  &:nth-child(odd) {
+    float: left;
+
+    &:nth-child(3n+3) {
+      margin-left: 1em;
+    }
+  }
+
+  &:nth-child(even) {
+    float: right;
+
+    &:nth-child(4n+4) {
+      margin-right: 1em;
+    }
+
+    &:nth-child(6n+6) {
+      margin-right: 1.5em;
+    }
+  }
+}
