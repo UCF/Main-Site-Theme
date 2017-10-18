@@ -25,6 +25,7 @@ var configLocal = require('./gulp-config.json'),
         jsPath:   './static/js',
         fontPath: './static/fonts'
       },
+      devPath: './dev',
       packagesPath: './node_modules',
       sync: false,
       syncTarget: 'http://localhost/'
@@ -52,16 +53,26 @@ gulp.task('components', [
 // CSS
 //
 
-// Lint scss files
-gulp.task('scss-lint', function() {
-  return gulp.src(config.src.scssPath + '/*.scss')
+// Base linting function
+function lintSCSS(src) {
+  return gulp.src(src)
     .pipe(scsslint({
       'maxBuffer': 400 * 1024  // default: 300 * 1024
     }));
+}
+
+// Lint all theme scss files
+gulp.task('scss-lint-theme', function() {
+  return lintSCSS(config.src.scssPath + '/*.scss');
 });
 
-// Compile scss files
-function buildCSS(src, filename, dest) {
+// Lint all dev scss files
+gulp.task('scss-lint-dev', function(event) {
+  return lintSCSS(config.devPath + '/**/*.scss');
+});
+
+// Base SCSS compile function
+function buildCSS(src, dest) {
   dest = dest || config.dist.cssPath;
 
   return gulp.src(src)
@@ -74,19 +85,46 @@ function buildCSS(src, filename, dest) {
       // Supported browsers added in package.json ("browserslist")
       cascade: false
     }))
-    .pipe(rename(filename))
+    .pipe(rename({
+      extname: '.min.css'
+    }))
     .pipe(gulp.dest(dest))
     .pipe(browserSync.stream());
 }
 
-gulp.task('scss-build-theme-css', function() {
-  return buildCSS(config.src.scssPath + '/style.scss', 'style.min.css');
+// Compile theme stylesheet
+gulp.task('scss-build-theme', function() {
+  return buildCSS(config.src.scssPath + '/style.scss');
 });
 
-gulp.task('scss-build', ['scss-build-theme-css']);
+// Compile all dev scss files
+gulp.task('scss-build-dev', function() {
+  return buildCSS(config.devPath + '/**/*.scss', config.devPath);
+});
 
-// All css-related tasks
-gulp.task('css', ['scss-lint', 'scss-build']);
+// All theme css-related tasks
+gulp.task('css', ['scss-lint-theme', 'scss-build-theme']);
+
+// All dev css-related tasks
+gulp.task('css-dev', ['scss-lint-dev', 'scss-build-dev']);
+
+// Watcher callback for dev scss files, to be used with gulp watch task
+function cssDevWatch(event) {
+  var src,
+      dest;
+
+  if (event) {
+    src = event.path;
+    dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
+  }
+  else {
+    src = config.devPath + '/**/*.scss';
+    dest = config.devPath;
+  }
+
+  lintSCSS(src);
+  return buildCSS(src, dest);
+}
 
 
 //
@@ -133,6 +171,7 @@ gulp.task('watch', function() {
     });
   }
 
+  gulp.watch(config.devPath + '/**/*.scss', cssDevWatch);
   gulp.watch(config.src.scssPath + '/**/*.scss', ['css']);
   gulp.watch(config.src.jsPath + '/**/*.js', ['js']).on('change', browserSync.reload);
   gulp.watch('./**/*.php').on('change', browserSync.reload);
