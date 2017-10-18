@@ -300,3 +300,51 @@ function mainsite_events_display_classic( $content, $items, $args, $display_type
 }
 
 add_filter( 'ucf_events_display_classic', 'mainsite_events_display_classic', 11, 4 );
+
+/**
+ * Academic Calendar Main-Site Layout
+ **/
+function main_site_academic_calendar_before( $content, $items, $args ) {
+	return '<div class="academic-calendar-container">';
+}
+
+add_filter( 'ucf_acad_cal_display_main_site_before', 'main_site_academic_calendar_before', 10, 3 );
+
+function main_site_academic_calendar_content( $content, $items, $args ) {
+	$first_time = array_shift( $items );
+
+	ob_start();
+?>
+	<div class="row">
+		<div class="col-md-4">
+			<!-- Featured -->
+		</div>
+		<div class="col-md-8">
+		<?php foreach( $items as $item ) : ?>
+			<!-- Additional events -->
+		<?php endforeach; ?>
+		</div>
+	</div>
+		<li class="academic-calendar-item"><?php echo $item->description; ?></li>
+	</ul>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_acad_cal_display_main_site', 'main_site_academic_calendar_content', 10, 3 );
+
+function main_site_academic_calendar_after( $content, $items, $args ) {
+	return '</div>';
+}
+
+add_filter( 'ucf_acad_cal_display_main_site_after', 'main_site_academic_calendar_after', 10, 3 );
+
+function main_site_academic_calendar_add_layout( $layouts ) {
+	if ( ! isset( $layouts['main_site'] ) ) {
+		$layouts['main_site'] = 'Main Site Layout';
+	}
+
+	return $layouts;
+}
+
+add_filter( 'ucf_acad_cal_get_layouts', 'main_site_academic_calendar_add_layout', 10, 1 );
