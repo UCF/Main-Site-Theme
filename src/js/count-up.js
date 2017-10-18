@@ -10,8 +10,8 @@
       easing: 'linear'
     }, options);
 
-    this.each(function () {
-      const $num = $(this);
+    this.each((index, elem) => {
+      const $num = $(elem);
       const countTo = $num.data('num') ? parseInt($num.data('num'), 10) : parseInt($num.text().replace(/\D/g, ''), 10);
       const start = $num.data('start') ? parseInt($num.data('start'), 10) : 0;
 
