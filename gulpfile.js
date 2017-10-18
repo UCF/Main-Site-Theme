@@ -108,6 +108,24 @@ gulp.task('css', ['scss-lint-theme', 'scss-build-theme']);
 // All dev css-related tasks
 gulp.task('css-dev', ['scss-lint-dev', 'scss-build-dev']);
 
+// Watcher callback for dev scss files, to be used with gulp watch task
+function cssDevWatch(event) {
+  var src,
+      dest;
+
+  if (event) {
+    src = event.path;
+    dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
+  }
+  else {
+    src = config.devPath + '/**/*.scss';
+    dest = config.devPath;
+  }
+
+  lintSCSS(src);
+  return buildCSS(src, dest);
+}
+
 
 //
 // JavaScript
@@ -153,23 +171,7 @@ gulp.task('watch', function() {
     });
   }
 
-  gulp.watch(config.devPath + '/**/*.scss', function(event) {
-    var src,
-      dest;
-
-    if (event) {
-      src = event.path;
-      dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
-    }
-    else {
-      src = config.devPath + '/**/*.scss';
-      dest = config.devPath;
-    }
-
-    lintSCSS(src);
-    return buildCSS(src, dest);
-  });
-
+  gulp.watch(config.devPath + '/**/*.scss', cssDevWatch);
   gulp.watch(config.src.scssPath + '/**/*.scss', ['css']);
   gulp.watch(config.src.jsPath + '/**/*.js', ['js']).on('change', browserSync.reload);
   gulp.watch('./**/*.php').on('change', browserSync.reload);
