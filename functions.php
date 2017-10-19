@@ -310,24 +310,71 @@ function main_site_academic_calendar_before( $content, $items, $args ) {
 
 add_filter( 'ucf_acad_cal_display_main_site_before', 'main_site_academic_calendar_before', 10, 3 );
 
+function main_site_academic_calendar_title( $content, $items, $args ) {
+	$title = isset( $args['title'] ) ? $args['title'] : 'Academic Calendar';
+
+	ob_start();
+?>
+	<h2 class="mt-2 mb-4"><span class="fa fa-calendar text-primary"></span> <?php echo $title; ?></h2>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_acad_cal_display_main_site_title', 'main_site_academic_calendar_title', 10, 3 );
+
 function main_site_academic_calendar_content( $content, $items, $args ) {
-	$first_time = array_shift( $items );
+	$first_item = array_shift( $items );
 
 	ob_start();
 ?>
 	<div class="row">
 		<div class="col-md-4">
-			<!-- Featured -->
+			<h3 class="h5 text-inverse text-uppercase">Up Next</h3>
+			<div class="academic-calendar-item">
+				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
+					<?php echo main_site_academic_calendar_format_date( $first_item->dtstart, $first_item->dtend ); ?>
+					<span class="text-inverse title"><?php echo $first_item->summary; ?></span>
+					<?php if ( ! empty( $first_item->description ) ) : ?>
+						<p class="text-inverse"><?php echo $first_item->description; ?></p>
+					<?php endif; ?>
+				</a>
+			</div>
 		</div>
 		<div class="col-md-8">
-		<?php foreach( $items as $item ) : ?>
-			<!-- Additional events -->
-		<?php endforeach; ?>
+			<h3 class="h5 text-inverse text-uppercase">Looking Ahead</h3>
+			<div class="academic-calendar-columns">
+			<?php foreach( $items as $item ) : ?>
+				<div class="academic-calendar-item">
+					<a href="<?php echo $item->directUrl; ?>" target="_blank">
+						<?php echo main_site_academic_calendar_format_date( $item->dtstart, $item->dtend ); ?>
+						<span class="text-inverse title"><?php echo $item->summary; ?></span>
+					</a>
+				</div>
+			<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
-		<li class="academic-calendar-item"><?php echo $item->description; ?></li>
-	</ul>
 <?php
+	return ob_get_clean();
+}
+
+function main_site_academic_calendar_format_date( $start_date, $end_date ) {
+	$start_date = strtotime( $start_date );
+	$end_date = strtotime( $end_date );
+
+	ob_start();
+?>
+	<time class="time text-primary" datetime="<?php echo date( 'Y-m-d', $start_date ); ?>"><?php echo date( 'F j', $start_date ); ?></time>
+<?php
+	if ( $end_date ) :
+		if ( date( 'F',  $start_date ) === date( 'F', $end_date ) ) :
+	?>
+		- <time class="time text-primary" datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'j', $end_date ); ?></time>
+	<?php else: ?>
+		- <timg class="time text-primary" datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'F j', $end_date ); ?></time>
+	<?php endif;
+	endif;
+
 	return ob_get_clean();
 }
 
@@ -348,3 +395,5 @@ function main_site_academic_calendar_add_layout( $layouts ) {
 }
 
 add_filter( 'ucf_acad_cal_get_layouts', 'main_site_academic_calendar_add_layout', 10, 1 );
+
+
