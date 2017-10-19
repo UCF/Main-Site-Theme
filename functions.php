@@ -332,8 +332,8 @@ function main_site_academic_calendar_content( $content, $items, $args ) {
 			<h3 class="h5 text-inverse text-uppercase">Up Next</h3>
 			<div class="academic-calendar-item">
 				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
+					<span class="text-inverse title h4 mb-2 heading-underline"><?php echo $first_item->summary; ?></span>
 					<?php echo main_site_academic_calendar_format_date( $first_item->dtstart, $first_item->dtend ); ?>
-					<span class="text-inverse title h4 heading-underline"><?php echo $first_item->summary; ?></span>
 					<?php if ( ! empty( $first_item->description ) ) : ?>
 						<p class="text-inverse"><?php echo $first_item->description; ?></p>
 					<?php endif; ?>
