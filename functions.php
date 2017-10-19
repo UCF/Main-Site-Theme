@@ -315,7 +315,7 @@ function main_site_academic_calendar_title( $content, $items, $args ) {
 
 	ob_start();
 ?>
-	<h2 class="mt-2 mb-4"><span class="fa fa-calendar text-primary"></span> <?php echo $title; ?></h2>
+	<h2 class="mt-2 mb-4 text-inverse"><span class="fa fa-calendar text-primary"></span> <?php echo $title; ?></h2>
 <?php
 	return ob_get_clean();
 }
@@ -333,7 +333,7 @@ function main_site_academic_calendar_content( $content, $items, $args ) {
 			<div class="academic-calendar-item">
 				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
 					<?php echo main_site_academic_calendar_format_date( $first_item->dtstart, $first_item->dtend ); ?>
-					<span class="text-inverse title"><?php echo $first_item->summary; ?></span>
+					<span class="text-inverse title h4 heading-underline"><?php echo $first_item->summary; ?></span>
 					<?php if ( ! empty( $first_item->description ) ) : ?>
 						<p class="text-inverse"><?php echo $first_item->description; ?></p>
 					<?php endif; ?>
@@ -364,17 +364,21 @@ function main_site_academic_calendar_format_date( $start_date, $end_date ) {
 
 	ob_start();
 ?>
-	<time class="time text-primary" datetime="<?php echo date( 'Y-m-d', $start_date ); ?>"><?php echo date( 'F j', $start_date ); ?></time>
+	<div class="time text-primary">
+	<time datetime="<?php echo date( 'Y-m-d', $start_date ); ?>"><?php echo date( 'F j', $start_date ); ?></time>
 <?php
 	if ( $end_date ) :
 		if ( date( 'F',  $start_date ) === date( 'F', $end_date ) ) :
 	?>
-		- <time class="time text-primary" datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'j', $end_date ); ?></time>
+		- <time datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'j', $end_date ); ?></time>
 	<?php else: ?>
-		- <timg class="time text-primary" datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'F j', $end_date ); ?></time>
+		- <time datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'F j', $end_date ); ?></time>
 	<?php endif;
 	endif;
 
+	?>
+	</div>
+	<?php
 	return ob_get_clean();
 }
 
