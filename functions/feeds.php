@@ -472,7 +472,7 @@ function get_pegasus_issues( $start=0, $limit=5 ) {
 	}
 
 	$api_url = $pegasus_url . 'wp-json/wp/v2/';
-	$issue_url = $api_url . 'issue?_embed&offset='. $start .'&per_page='. $limit;
+	$issue_url = $api_url . 'issue/active?_embed&offset='. $start .'&per_page='. $limit;
 
 	$issue_results = fetch_with_timeout( $issue_url );
 	if ( $issue_results ) {
