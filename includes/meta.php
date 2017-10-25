@@ -180,6 +180,20 @@ add_action( 'after_body_open', 'google_tag_manager_noscript', 0 );
 
 
 /**
+ * Sets a default favicon if a site icon is not already set.
+ */
+function add_favicon_default() {
+	if ( !has_site_icon() ):
+?>
+<link rel="shortcut icon" href="<?php echo THEME_URL . '/favicon.ico'; ?>" />
+<?php
+	endif;
+}
+
+add_filter( 'wp_head', 'add_favicon_default' );
+
+
+/**
  * Generates a title based on context page is viewed.  Stolen from Thematic
  **/
 function header_title( $title, $separator ) {
