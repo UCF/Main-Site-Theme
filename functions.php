@@ -300,3 +300,239 @@ function mainsite_events_display_classic( $content, $items, $args, $display_type
 }
 
 add_filter( 'ucf_events_display_classic', 'mainsite_events_display_classic', 11, 4 );
+
+
+/**
+ * Academic Calendar Main-Site Layout
+ **/
+function main_site_academic_calendar_before( $content, $items, $args ) {
+	return '<div class="academic-calendar-container">';
+}
+
+add_filter( 'ucf_acad_cal_display_main_site_before', 'main_site_academic_calendar_before', 10, 3 );
+
+function main_site_academic_calendar_title( $content, $items, $args ) {
+	$title = isset( $args['title'] ) ? $args['title'] : 'Academic Calendar';
+
+	ob_start();
+?>
+	<h2 class="mt-2 mb-4 text-inverse"><span class="fa fa-calendar text-primary"></span> <?php echo $title; ?></h2>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_acad_cal_display_main_site_title', 'main_site_academic_calendar_title', 10, 3 );
+
+function main_site_academic_calendar_content( $content, $items, $args ) {
+	$first_item = array_shift( $items );
+
+	ob_start();
+?>
+	<div class="row">
+		<div class="col-md-4">
+			<h3 class="h5 text-inverse text-uppercase">Up Next</h3>
+			<div class="academic-calendar-item">
+				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
+					<span class="text-inverse title h4 mb-2 heading-underline"><?php echo $first_item->summary; ?></span>
+					<?php echo main_site_academic_calendar_format_date( $first_item->dtstart, $first_item->dtend ); ?>
+					<?php if ( ! empty( $first_item->description ) ) : ?>
+						<p class="text-inverse"><?php echo $first_item->description; ?></p>
+					<?php endif; ?>
+				</a>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h3 class="h5 text-inverse text-uppercase">Looking Ahead</h3>
+			<div class="academic-calendar-columns">
+			<?php foreach( $items as $item ) : ?>
+				<div class="academic-calendar-item">
+					<a href="<?php echo $item->directUrl; ?>" target="_blank">
+						<?php echo main_site_academic_calendar_format_date( $item->dtstart, $item->dtend ); ?>
+						<span class="text-inverse title"><?php echo $item->summary; ?></span>
+					</a>
+				</div>
+			<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+function main_site_academic_calendar_format_date( $start_date, $end_date ) {
+	$start_date = strtotime( $start_date );
+	$end_date = strtotime( $end_date );
+
+	ob_start();
+?>
+	<div class="time text-primary">
+	<time datetime="<?php echo date( 'Y-m-d', $start_date ); ?>"><?php echo date( 'F j', $start_date ); ?></time>
+<?php
+	if ( $end_date ) :
+		if ( date( 'F',  $start_date ) === date( 'F', $end_date ) ) :
+	?>
+		- <time datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'j', $end_date ); ?></time>
+	<?php else: ?>
+		- <time datetime="<?php echo date( 'Y-m-d', $end_date ); ?>"><?php echo date( 'F j', $end_date ); ?></time>
+	<?php endif;
+	endif;
+
+	?>
+	</div>
+	<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_acad_cal_display_main_site', 'main_site_academic_calendar_content', 10, 3 );
+
+function main_site_academic_calendar_after( $content, $items, $args ) {
+	return '</div>';
+}
+
+add_filter( 'ucf_acad_cal_display_main_site_after', 'main_site_academic_calendar_after', 10, 3 );
+
+function main_site_academic_calendar_add_layout( $layouts ) {
+	if ( ! isset( $layouts['main_site'] ) ) {
+		$layouts['main_site'] = 'Main Site Layout';
+	}
+
+	return $layouts;
+}
+
+add_filter( 'ucf_acad_cal_get_layouts', 'main_site_academic_calendar_add_layout', 10, 1 );
+
+
+/**
+ * Main-Site Pegasus List Layout
+ **/
+function main_site_pegasus_list_before( $content, $items, $args ) {
+	ob_start();
+?>
+	<div class="ucf-pegasus-list ucf-pegasus-list-main-site">
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_pegasus_list_display_main_site_before', 'main_site_pegasus_list_before', 10, 3 );
+
+function main_site_pegasus_list_content( $content, $items, $args ) {
+	$first       = array_shift( $items );
+	$issue_url   = $first->link;
+	$issue_title = $first->title->rendered;
+	$cover_story = $first->_embedded->issue_cover_story[0];
+	$cover_story_url = $cover_story->link;
+	$cover_story_title = $cover_story->title->rendered;
+	$cover_story_subtitle = $cover_story->story_subtitle;
+	$cover_story_description = $cover_story->story_description;
+	$cover_story_blurb = null;
+	$thumbnail_id = $first->featured_media;
+	$thumbnail = null;
+	$thumbnail_url = null;
+
+	if ( $thumbnail_id !== 0 ) {
+		$thumbnail = $first->_embedded->{"wp:featuredmedia"}[0];
+		$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+	}
+	if ( $cover_story_description ) {
+		$cover_story_blurb = $cover_story_description;
+	} else if ( $cover_story_subtitle ) {
+		$cover_story_blurb = $cover_story_subtitle;
+	}
+
+	ob_start();
+?>
+	<!-- Featured Issue -->
+	<div class="row mb-4 mb-md-5">
+		<div class="col-sm-4">
+			<a class="h2 mb-2" href="<?php echo $issue_url; ?>" target="_blank">
+				<img class="w-100" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>">
+			</a>
+		</div>
+		<div class="col-sm-8 mt-3 mt-sm-0">
+			<a class="h1 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+				<?php echo $issue_title; ?>
+			</a>
+			<p class="mt-2 mt-md-4 mb-2 text-muted text-uppercase">Featured Story</p>
+			<a class="h3 font-slab-serif text-secondary" href="<?php echo $cover_story_url; ?>" target="_blank">
+				<?php echo $cover_story_title; ?>
+			</a>
+			<p class="mt-3 mb-4"><?php echo $cover_story_blurb; ?></p>
+			<a class="btn btn-primary" href="<?php echo $issue_url; ?>" target="_blank">
+				Read More<span class="sr-only"> from <?php echo $issue_title; ?></span>
+			</a>
+		</div>
+	</div>
+
+	<hr class="hidden-lg-up my-4 my-md-5">
+
+	<div class="row">
+	<?php foreach( $items as $item ) :
+		$issue_url   = $item->link;
+		$issue_title = $item->title->rendered;
+		$cover_story = $item->_embedded->issue_cover_story[0];
+		$cover_story_url = $cover_story->link;
+		$cover_story_title = $cover_story->title->rendered;
+		$cover_story_subtitle = $cover_story->story_subtitle;
+		$cover_story_description = $cover_story->story_description;
+		$cover_story_blurb = null;
+		$thumbnail_id = $item->featured_media;
+		$thumbnail = null;
+		$thumbnail_url = null;
+
+		if ( $thumbnail_id !== 0 ) {
+			$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
+			$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+		}
+		if ( $cover_story_description ) {
+			$cover_story_blurb = $cover_story_description;
+		} else if ( $cover_story_subtitle ) {
+			$cover_story_blurb = $cover_story_subtitle;
+		}
+	?>
+		<div class="col-lg-3 mb-4">
+			<div class="row">
+				<div class="col-3 col-lg-12 pr-0 pr-sm-3">
+					<a class="text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+						<img class="w-100 mb-3" src="<?php echo $thumbnail_url; ?>" alt="<?php echo $issue_title; ?>">
+					</a>
+				</div>
+				<div class="col-9 col-lg-12">
+					<a class="h3 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+						<?php echo $issue_title; ?>
+					</a>
+					<p class="mt-2 mt-md-3 mb-1 small text-muted text-uppercase">Featured Story</p>
+					<a class="h5 font-slab-serif text-secondary mb-3" href="<?php echo $cover_story_url; ?>" target="_blank">
+						<?php echo $cover_story_title; ?>
+					</a>
+					<p class="my-2"><?php echo $cover_story_blurb; ?></p>
+				</div>
+			</div>
+		</div>
+	<?php endforeach; ?>
+
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_pegasus_list_display_main_site_content', 'main_site_pegasus_list_content', 10, 3 );
+
+function main_site_pegasus_list_after( $content, $items, $args ) {
+	ob_start();
+?>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_pegasus_list_display_main_site_after', 'main_site_pegasus_list_after', 10, 3 );
+
+function main_site_pegasus_add_layout( $layouts ) {
+	if ( ! isset( $layouts['main_site'] ) ) {
+		$layouts['main_site'] = 'Main Site Layout';
+	}
+
+	return $layouts;
+}
+
+add_filter( 'ucf_pegasus_list_get_layouts', 'main_site_pegasus_add_layout', 10, 1 );
