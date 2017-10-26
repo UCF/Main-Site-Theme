@@ -1,0 +1,17 @@
+.academic-calendar-container {
+  .academic-calendar-columns {
+    column-count: 2;
+  }
+
+  .academic-calendar-item {
+    padding: .5rem 0;
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  .time {
+    display: block;
+  }
+}
