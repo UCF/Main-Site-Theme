@@ -49,20 +49,20 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 				<div class="row">
 				<?php
 					ob_start();
-					if( $stats ) :
-						foreach( $stats as $index=>$stat ) :
-							?>
-							<div class="col-md-4 d-flex align-items-stretch">
-								<aside class="fact-block text-center align-self-top p-3">
-									<div class="fact-icon"><img src="<?php echo $stat["icon"]["url"]; ?>" alt="" class="img-fluid w-50"></div>
+					if ( $stats ) :
+						foreach ( $stats as $index => $stat ) :
+				?>
+							<div class="col-sm-6 col-lg-4 fact-block">
+								<aside>
+									<img src="<?php echo $stat["icon"]["url"]; ?>" alt="" class="fact-header fact-header-lg fact-header-icon img-fluid">
 									<div class="fact-details"><?php echo $stat["copy"]; ?></div>
 								</aside>
 							</div>
-						<?php if( $index !== 0 && ( ( $index+1 ) % 3 ) === 0 ) : ?>
+						<?php if ( $index !== 0 && ( ( $index + 1 ) % 3 ) === 0 ) : ?>
 							</div>
 							<div class="row">
 						<?php endif; ?>
-							<?php
+				<?php
 						endforeach;
 					endif;
 					echo ob_get_clean();
