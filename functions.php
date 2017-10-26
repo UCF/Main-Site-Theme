@@ -400,4 +400,127 @@ function main_site_academic_calendar_add_layout( $layouts ) {
 
 add_filter( 'ucf_acad_cal_get_layouts', 'main_site_academic_calendar_add_layout', 10, 1 );
 
+/**
+ * Main-Site Pegasus List Layout
+ **/
+function main_site_pegasus_list_before( $content, $items, $args ) {
+	ob_start();
+?>
+	<div class="ucf-pegasus-list ucf-pegasus-list-main-site">
+<?php
+	return ob_get_clean();
+}
 
+add_filter( 'ucf_pegasus_list_display_main_site_before', 'main_site_pegasus_list_before', 10, 3 );
+
+function main_site_pegasus_list_content( $content, $items, $args ) {
+	$first       = array_shift( $items );
+	$issue_url   = $first->link;
+	$issue_title = $first->title->rendered;
+	$cover_story = $first->_embedded->issue_cover_story[0];
+	$cover_story_url = $cover_story->link;
+	$cover_story_title = $cover_story->title->rendered;
+	$cover_story_subtitle = $cover_story->story_subtitle;
+	$cover_story_description = $cover_story->story_description;
+	$cover_story_blurb = null;
+	$thumbnail_id = $first->featured_image;
+	$thumbnail = null;
+	$thumbnail_url = null;
+
+	if ( $thumbnail_id !== 0 ) {
+		$thumbnail = $first->_embedded->{"wp:featuredmedia"}[0];
+		$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+	}
+	if ( $cover_story_description ) {
+		$cover_story_blurb = $cover_story_description;
+	} else if ( $cover_story_subtitle ) {
+		$cover_story_blurb = $cover_story_subtitle;
+	}
+
+	ob_start();
+?>
+	<!-- Featured Issue -->
+	<div class="row mb-4">
+		<div class="col-sm-3">
+			<img class="w-100" src="<?php echo $thumbnail_url; ?>">
+		</div>
+		<div class="col-sm-9">
+			<a class="h2 mb-2" href="<?php echo $issue_url; ?>" target="_blank">
+				<?php echo $issue_title; ?>
+			</a>
+			<p class="text-muted font-condensed text-uppercase">Featured Story</p>
+			<a class="h4" href="<?php echo $cover_story_url; ?>" target="_blank">
+				<?php echo $cover_story_title; ?>
+			</a>
+			<p class="font-weight-light font-italic mb-2"><?php echo $cover_story_blurb; ?></p>
+			<a class="btn btn-primary" href="<?php echo $issue_url; ?>" target="_blank">
+				Read More
+			</a>
+		</div>
+	</div>
+	<div class="row">
+	<?php foreach( $items as $item ) : 
+		$issue_url   = $item->link;
+		$issue_title = $item->title->rendered;
+		$cover_story = $item->_embedded->issue_cover_story[0];
+		$cover_story_url = $cover_story->link;
+		$cover_story_title = $cover_story->title->rendered;
+		$cover_story_subtitle = $cover_story->story_subtitle;
+		$cover_story_description = $cover_story->story_description;
+		$cover_story_blurb = null;
+		$thumbnail_id = $item->featured_image;
+		$thumbnail = null;
+		$thumbnail_url = null;
+	
+		if ( $thumbnail_id !== 0 ) {
+			$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
+			$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+		}
+		if ( $cover_story_description ) {
+			$cover_story_blurb = $cover_story_description;
+		} else if ( $cover_story_subtitle ) {
+			$cover_story_blurb = $cover_story_subtitle;
+		}	
+	?>
+		<div class="col-sm-3">
+			<img class="w-100 mb-2" src="<?php echo $thumbnail_url; ?>">
+			<a class="h2" href="<?php echo $issue_url; ?>" target="_blank">
+				<?php echo $issue_title; ?>
+			</a>
+			<p class="mt-2 text-muted font-condensed text-uppercase">Featured Story</p>
+			<a class="h4" href="<?php echo $cover_story_url; ?>" target="_blank">
+				<?php echo $cover_story_title; ?>
+			</a>
+			<p class="font-weight-light font-italic mb-2"><?php echo $cover_story_blurb; ?></p>
+			<a class="btn btn-primary" href="<?php echo $issue_url; ?>" target="_blank">
+				Read More
+			</a>
+		</div>
+	<?php endforeach; ?>
+
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_pegasus_list_display_main_site_content', 'main_site_pegasus_list_content', 10, 3 );
+
+function main_site_pegasus_list_after( $content, $items, $args ) {
+	ob_start();
+?>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+add_filter( 'ucf_pegasus_list_display_main_site_after', 'main_site_pegasus_list_after', 10, 3 );
+
+function main_site_pegasus_add_layout( $layouts ) {
+	if ( ! isset( $layouts['main_site'] ) ) {
+		$layouts['main_site'] = 'Main Site Layout';
+	}
+
+	return $layouts;
+}
+
+add_filter( 'ucf_pegasus_list_get_layouts', 'main_site_pegasus_add_layout', 10, 1 );
