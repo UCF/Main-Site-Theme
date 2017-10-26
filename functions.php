@@ -468,7 +468,7 @@ function main_site_pegasus_list_content( $content, $items, $args ) {
 		$cover_story_subtitle = $cover_story->story_subtitle;
 		$cover_story_description = $cover_story->story_description;
 		$cover_story_blurb = null;
-		$thumbnail_id = $item->featured_image;
+		$thumbnail_id = $item->featured_media;
 		$thumbnail = null;
 		$thumbnail_url = null;
 	
