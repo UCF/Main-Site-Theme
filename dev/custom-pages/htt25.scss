@@ -1,0 +1,54 @@
+@import '../custom-base';
+
+.section-plans {
+
+  .university-goals {
+    counter-reset: section;
+    list-style-type: none;
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0;
+
+    .university-goal {
+      margin-bottom: 1.5em;
+      min-height: 1px;
+      padding-left: calc(1.5em + 30px + 5px);
+      padding-right: 15px;
+      position: relative;
+
+      @include media-breakpoint-up(lg) {
+        float: left;
+        text-align: center;
+        width: 20%;
+      }
+
+      &::before {
+        background-color: $white;
+        border-radius: 100%;
+        color: $ucf-gold-darker;
+        content: counter(section);
+        counter-increment: section;
+        display: block;
+        font-size: 1.3em;
+        font-style: normal;
+        font-weight: 700;
+        height: 1.5em;
+        left: 15px;
+        line-height: 1.6;
+        margin: 0 auto 12px;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1.5em;
+
+        @include media-breakpoint-up(lg) {
+          font-size: 2em;
+          left: 0;
+          margin-bottom: 0;
+          position: relative;
+        }
+      }
+    }
+  }
+}
