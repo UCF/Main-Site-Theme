@@ -68,6 +68,10 @@
 .result {
   border-bottom: 1px solid $gray;
 
+  &:last-child {
+    border-bottom: 0;
+  }
+
   .name {
     font-size: .95rem;
    font-weight: 700;
