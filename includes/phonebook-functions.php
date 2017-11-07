@@ -359,7 +359,11 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ) {
 	ob_start();
 ?>
-	<?php if ( $result->phone ) : ?>
+	<?php if ( $result->phone === '000-000-0000' ) : ?>
+		<span class="phone d-block">
+			Phone: N/A
+		</span>
+	<?php elseif ( $result->phone ) : ?>
 		<span class="phone d-block">
 			Phone: <a href="tel:<?php echo str_replace( '-', '', $result->phone ); ?>"><?php echo $result->phone; ?></a>
 		</span>
