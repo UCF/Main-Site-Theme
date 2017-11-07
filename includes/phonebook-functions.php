@@ -291,12 +291,12 @@ function format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group 
 		<span class="job-title text-muted"><?php echo $result->job_position; ?></span>
 	<?php endif; ?>
 	<?php if ( $is_dept && $result->organization ) : ?>
-		<span class="division  d-block">
-			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php phonebook_fix_name_case( $result->organization ); ?></a>
+		<span class="division d-block">
+			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo phonebook_fix_name_case( $result->organization ); ?></a>
 		</span>
 	<?php endif; ?>
 	<?php if ( ! $is_group && $result->department ) : ?>
-		<span class="department  d-block">
+		<span class="department d-block">
 			<a href="?query=<?php echo urlencode( $result->department ); ?>"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
 		</span>
 	<?php endif; ?>
