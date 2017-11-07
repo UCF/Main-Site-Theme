@@ -41,6 +41,10 @@
 .phonebook-results {
   font-size: .9rem;
 
+  .more-toggle {
+    cursor: pointer;
+  }
+
   .toggle {
     &:not(.collapsed) {
       .fa-plus {

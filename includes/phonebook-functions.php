@@ -219,7 +219,7 @@ function format_phonebook_result( $result ) {
 				<?php if ( ! $is_group && ( ! empty( $result->secondary ) ) ) : ?>
 				<tr class="row mx-auto">
 					<td class="col-md-12">
-						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
+						<a class="more-toggle toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
 							<span class="fa fa-plus"></span>
 							<span class="fa fa-minus"></span> More Results
 						</a>
@@ -251,7 +251,7 @@ function format_phonebook_result( $result ) {
 				<?php elseif ( $is_group && ( count( $result->staff ) > 0 ) ) : ?>
 				<tr class="row mx-auto">
 					<td colspan="3" class="col-sm-12">
-						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>" >
+						<a class="more-toggle toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>" >
 							<span class="fa fa-plus"></span>
 							<span class="fa fa-minus"></span> Show Staff
 						</a>
