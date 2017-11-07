@@ -1,6 +1,14 @@
 .staff-list {
-  columns: auto 3;
+  columns: auto 1;
   column-rule: 1px solid $gray;
+
+  @include media-breakpoint-up(sm) {
+    columns: auto 2;
+  }
+
+  @include media-breakpoint-up(md) {
+    columns: auto 3;
+  }
 
   li {
     border-bottom: 1px solid $gray-lightest;
