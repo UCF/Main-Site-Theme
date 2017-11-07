@@ -244,9 +244,9 @@ function format_phonebook_result( $result ) {
 			<span class="fa fa-minus" aria-hidden="true"></span> Show Staff
 		</a>
 		<div class="collapse" id="<?php echo $unique_slug; ?>">
-			<ul class="staff-list list-unstyled">
+			<ul class="staff-list row list-unstyled">
 				<?php foreach( $result->staff as $person ) : ?>
-					<li class="clearfix">
+					<li class="col-sm-6 col-md-4">
 						<?php if ( $person->email ) : ?>
 							<span class="email"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
 						<?php else : ?>
