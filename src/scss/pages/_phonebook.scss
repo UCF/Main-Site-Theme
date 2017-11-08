@@ -1,11 +1,27 @@
 .staff-list {
   li {
     border-bottom: 1px solid $gray-lightest;
-    border-right: 1px solid $gray;
+    border-right: 0;
     padding: 2px 16px;
 
-    &:nth-child(3n) {
-      border-right: 0;
+    @include media-breakpoint-up(sm) {
+      border-right: 1px solid $gray;
+
+      &:nth-child(2n) {
+        border-right: 0;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      border-right: 1px solid $gray;
+
+      &:nth-child(2n) {
+        border-right: 1px solid $gray;
+      }
+
+      &:nth-child(3n) {
+        border-right: 0;
+      }
     }
   }
 
