@@ -202,80 +202,64 @@ function format_phonebook_result( $result ) {
 
 	ob_start();
 ?>
-	<li class="result<?php echo $class; ?> list-unstyled mb-2">
-		<table class="table">
-			<tbody>
-				<tr class="row mx-auto">
-					<td class="col-md-6">
-						<?php echo format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group ); ?>
-					</td>
-					<td class="col-md-3">
-						<?php echo format_phonebook_result_location( $result, $is_dept, $is_org, $is_group ); ?>
-					</td>
-					<td class="col-md-3">
-						<?php echo format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ); ?>
-					</td>
-				</tr>
-				<?php if ( ! $is_group && ( ! empty( $result->secondary ) ) ) : ?>
-				<tr class="row mx-auto">
-					<td class="col-md-12">
-						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
-							<span class="fa fa-plus"></span>
-							<span class="fa fa-minus"></span> More Results
-						</a>
-						<div class="collapse" id="<?php echo $unique_slug; ?>">
-							<ul class="list-unstyled">
-							<?php foreach( $result->secondary as $secondary ) : ?>
-								<li>
-									<table class="table">
-										<tbody>
-											<tr class="row">
-												<td class="col-md-6">
-													<?php echo format_phonebook_result_primary( $secondary, false, false, false ); ?>
-												</td>
-												<td class="col-md-3">
-													<?php echo format_phonebook_result_location( $secondary, false, false, false ); ?>
-												</td>
-												<td class="col-md-3">
-													<?php echo format_phonebook_result_contact( $secondary, false, false, false ); ?>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</li>
-							<?php endforeach; ?>
-							</ul>
+	<li class="result<?php echo $class; ?> list-unstyled mb-2 py-4">
+		<div class="row">
+			<div class="col-md-6">
+				<?php echo format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group ); ?>
+			</div>
+			<div class="col-md-3">
+				<?php echo format_phonebook_result_location( $result, $is_dept, $is_org, $is_group ); ?>
+			</div>
+			<div class="col-md-3">
+				<?php echo format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ); ?>
+			</div>
+		</div>
+		<?php if ( ! $is_group && ( ! empty( $result->secondary ) ) ) : ?>
+		<a href="#<?php echo $unique_slug; ?>" class="toggle collapsed btn btn-sm btn-outline-secondary my-3" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>">
+			<span class="fa fa-plus" aria-hidden="true"></span>
+			<span class="fa fa-minus" aria-hidden="true"></span> More Results
+		</a>
+		<div class="collapse" id="<?php echo $unique_slug; ?>">
+			<ul class="list-unstyled">
+			<?php foreach( $result->secondary as $secondary ) : ?>
+				<li>
+					<div class="row">
+						<div class="col-md-6">
+							<?php echo format_phonebook_result_primary( $secondary, false, false, false ); ?>
 						</div>
-					</td>
-				</tr>
-				<?php elseif ( $is_group && ( count( $result->staff ) > 0 ) ) : ?>
-				<tr class="row mx-auto">
-					<td colspan="3" class="col-sm-12">
-						<a class="toggle collapsed" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>" >
-							<span class="fa fa-plus"></span>
-							<span class="fa fa-minus"></span> Show Staff
-						</a>
-						<div class="collapse" id="<?php echo $unique_slug; ?>">
-							<ul class="staff-list list-unstyled">
-								<?php foreach( $result->staff as $person ) : ?>
-									<li class="clearfix">
-										<?php if ( $person->email ) : ?>
-											<span class="email"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
-										<?php else : ?>
-											<span class="name"><?php echo $person->name; ?></span>
-										<?php endif; ?>
-										<?php if ( $person->phone ) : ?>
-											<span class="phone"><a href="tel:<?php echo str_replace( '-', '', $person->phone ); ?>"><?php echo $person->phone; ?></a></span>
-										<?php endif; ?>
-									</li>
-								<?php endforeach; ?>
-							</ul>
+						<div class="col-md-3">
+							<?php echo format_phonebook_result_location( $secondary, false, false, false ); ?>
 						</div>
-					</td>
-				</tr>
-				<?php endif; ?>
-			</tbody>
-		</table>
+						<div class="col-md-3">
+							<?php echo format_phonebook_result_contact( $secondary, false, false, false ); ?>
+						</div>
+					</div>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php elseif ( $is_group && ( count( $result->staff ) > 0 ) ) : ?>
+		<a href="#<?php echo $unique_slug; ?>" class="toggle collapsed btn btn-sm btn-outline-secondary my-3" data-toggle="collapse" data-target="#<?php echo $unique_slug; ?>" >
+			<span class="fa fa-plus" aria-hidden="true"></span>
+			<span class="fa fa-minus" aria-hidden="true"></span> Show Staff
+		</a>
+		<div class="collapse" id="<?php echo $unique_slug; ?>">
+			<ul class="staff-list row list-unstyled">
+				<?php foreach( $result->staff as $person ) : ?>
+					<li class="col-sm-6 col-md-4">
+						<?php if ( $person->email ) : ?>
+							<span class="email"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
+						<?php else : ?>
+							<span class="name"><?php echo $person->name; ?></span>
+						<?php endif; ?>
+						<?php if ( $person->phone ) : ?>
+							<span class="phone"><a href="tel:<?php echo str_replace( '-', '', $person->phone ); ?>"><?php echo $person->phone; ?></a></span>
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php endif; ?>
 	</li>
 <?php
 	return ob_get_clean();
@@ -299,12 +283,12 @@ function format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group 
 		<span class="job-title text-muted"><?php echo $result->job_position; ?></span>
 	<?php endif; ?>
 	<?php if ( $is_dept && $result->organization ) : ?>
-		<span class="division  d-block">
-			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php phonebook_fix_name_case( $result->organization ); ?></a>
+		<span class="division d-block">
+			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo phonebook_fix_name_case( $result->organization ); ?></a>
 		</span>
 	<?php endif; ?>
 	<?php if ( ! $is_group && $result->department ) : ?>
-		<span class="department  d-block">
+		<span class="department d-block">
 			<a href="?query=<?php echo urlencode( $result->department ); ?>"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
 		</span>
 	<?php endif; ?>
@@ -367,7 +351,11 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ) {
 	ob_start();
 ?>
-	<?php if ( $result->phone ) : ?>
+	<?php if ( $result->phone === '000-000-0000' ) : ?>
+		<span class="phone d-block">
+			Phone: N/A
+		</span>
+	<?php elseif ( $result->phone ) : ?>
 		<span class="phone d-block">
 			Phone: <a href="tel:<?php echo str_replace( '-', '', $result->phone ); ?>"><?php echo $result->phone; ?></a>
 		</span>
