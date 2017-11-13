@@ -1,7 +1,21 @@
+.fact-grid-wrap {
+  overflow: hidden;
+  padding: 0;
+}
+
+.fact-grid {
+  // Hide superfluous border
+  margin-bottom: -$border-width * 2; // Double $border-width to avoid browser-specific rendering inconsistencies/flicker
+  margin-left: 0;
+  margin-right: -$border-width * 2;
+}
+
 // Wrapper element that surrounds fact graphic/text and description
 .fact-block {
   $p-4: map-get($spacers, 4);
 
+  border-bottom: $border-width dotted;
+  border-right: $border-width dotted;
   padding-bottom: $spacer-y;
   padding-top: $spacer-y;
   text-align: center;
