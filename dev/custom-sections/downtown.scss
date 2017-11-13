@@ -2,5 +2,17 @@
 
 
 .ucf-section-downtown-section {
+  .downtown-jumbotron {
+    @include media-breakpoint-up(lg) {
+      min-height: 875px;
+    }
 
+    @include media-breakpoint-up(xl) {
+      min-height: 775px;
+    }
+  }
+
+  .downtown-fl-icon {
+    max-width: 120px;
+  }
 }
