@@ -4,7 +4,7 @@
 
   &.container {
     @include media-breakpoint-down(xs) {
-      width: calc(100% - $grid-gutter-width);
+      width: calc(100% - #{$grid-gutter-width-base});
     }
   }
 }
