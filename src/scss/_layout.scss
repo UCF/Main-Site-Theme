@@ -9,5 +9,5 @@ body {
 }
 
 .screen-reader-text {
-  @extend .sr-only;
+  @include sr-only();
 }
