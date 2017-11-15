@@ -7,3 +7,7 @@ body {
 .site-main {
   flex: 1 0 auto;
 }
+
+.screen-reader-text {
+  @extend .sr-only;
+}

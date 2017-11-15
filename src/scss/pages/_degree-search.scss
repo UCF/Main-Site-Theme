@@ -8,6 +8,7 @@
   &:hover,
   &:active,
   &:focus {
+    background-color: $gray-lighter;
     text-decoration: none;
   }
 }
