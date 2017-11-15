@@ -51,3 +51,18 @@
     font-size: 1.25rem;
   }
 }
+
+.filter-wrapper {
+  visibility: hidden;
+
+  transition: visibility 5s ease;
+
+  &.show {
+    visibility: visible;
+  }
+
+  @include media-breakpoint-up(md) {
+    height: auto;
+    visibility: visible;
+  }
+}
