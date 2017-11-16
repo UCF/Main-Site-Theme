@@ -997,6 +997,25 @@
                 "delay": 0
             },
             {
+                "key": "field_5a0dead0cd525",
+                "label": "Exclude Primary Site Navigation",
+                "name": "page_header_exclude_nav",
+                "type": "true_false",
+                "instructions": "Controls whether or not the primary site navigation should be displayed at the top of the page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Exclude site navigation",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_590ca453f6655",
                 "label": "Header Size",
                 "name": "",

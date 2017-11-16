@@ -141,7 +141,7 @@ function get_header_content_title_subtitle( $obj ) {
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner align-self-start pt-2 pt-sm-0 align-self-sm-center">
+	<div class="header-content-inner align-self-start pt-4 pt-sm-0 align-self-sm-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
 				<h1 class="header-title"><?php echo $title; ?></h1>
@@ -192,6 +192,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$video_loop = get_field( 'page_header_video_loop', $field_id );
 	$header_content_type = get_field( 'page_header_content_type', $field_id );
 	$header_height       = get_field( 'page_header_height', $field_id );
+	$exclude_nav         = get_field( 'page_header_exclude_nav', $field_id );
 
 	ob_start();
 ?>
@@ -228,7 +229,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 
 		<?php
 		// Display the site nav
-		echo get_nav_markup();
+		if ( !$exclude_nav ) { echo get_nav_markup(); }
 		?>
 
 		<?php
@@ -265,14 +266,15 @@ function get_header_media_markup( $obj, $videos, $images ) {
  * Returns the default markup for page headers without a media background.
  **/
  function get_header_default_markup( $obj ) {
-	$title      = get_header_title( $obj );
-	$subtitle   = get_header_subtitle( $obj );
-	$field_id   = get_object_field_id( $obj );
+	$title               = get_header_title( $obj );
+	$subtitle            = get_header_subtitle( $obj );
+	$field_id            = get_object_field_id( $obj );
 	$header_content_type = get_field( 'page_header_content_type', $field_id );
+	$exclude_nav         = get_field( 'page_header_exclude_nav', $field_id );
 
 	ob_start();
 ?>
-	<?php echo get_nav_markup( false ); ?>
+	<?php if ( !$exclude_nav ) { echo get_nav_markup( false ); } ?>
 
 	<?php
 	if ( $header_content_type === 'custom' ):
