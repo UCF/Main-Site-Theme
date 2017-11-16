@@ -1,0 +1,58 @@
+.slide-out-modal {
+  background: $gray-lightest;
+  height: 100vh;
+  left: 0;
+  padding: 2rem 3rem;
+  position: fixed;
+  top: 0;
+  transform: translateX(100vw);
+  width: 100vw;
+  z-index: 999999;
+
+  transition: transform .25s ease;
+
+  &.show {
+    transform: translateX(0);
+  }
+
+  @include media-breakpoint-up(md) {
+    background: transparent;
+    height: auto;
+    left: auto;
+    padding: 0;
+    position: relative;
+    transform: translateX(0);
+    top: auto;
+    width: auto;
+    z-index: auto;
+  }
+
+  .modal-header {
+    background: transparent;
+    border-bottom: 1px solid $black;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+  }
+
+  .modal-content {
+    background: transparent;
+    height: calc(100% - 150px);
+    padding: 0 .1rem;
+    overflow-y: scroll;
+  }
+
+  .modal-footer {
+    bottom: 0;
+    position: fixed;
+    right: 0;
+    width: 100vw;
+
+    @include media-breakpoint-up(md) {
+      display: none;
+    }
+  }
+}

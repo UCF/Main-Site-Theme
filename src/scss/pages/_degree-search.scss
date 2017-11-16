@@ -51,33 +51,3 @@
     font-size: 1.25rem;
   }
 }
-
-.filter-wrapper {
-  background: $white;
-  height: 100vh;
-  left: 0;
-  overflow-y: scroll;
-  padding: 2rem 3rem;
-  position: fixed;
-  top: 0;
-  transform: translateX(100vw);
-  width: 100vw;
-  z-index: 999999;
-
-  transition: transform .25s ease;
-
-  &.show {
-    transform: translateX(0);
-  }
-
-  @include media-breakpoint-up(md) {
-    height: auto;
-    left: auto;
-    padding: 0;
-    position: relative;
-    transform: translateX(0);
-    top: auto;
-    width: auto;
-    z-index: auto;
-  }
-}
