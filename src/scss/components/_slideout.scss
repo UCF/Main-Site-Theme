@@ -19,7 +19,7 @@
   top: 0;
   transform: translateX(100vw);
   transition: transform .25s ease;
-  width: 100vw;
+  width: 85vw;
   z-index: 999999;
 
   @include media-breakpoint-up(md) {
@@ -34,7 +34,7 @@
   }
 
   &.show {
-    transform: translateX(0);
+    transform: translateX(15vw);
   }
 }
 
