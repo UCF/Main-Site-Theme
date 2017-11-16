@@ -1,0 +1,13 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.site-main {
+  flex: 1 0 auto;
+}
+
+.screen-reader-text {
+  @include sr-only();
+}

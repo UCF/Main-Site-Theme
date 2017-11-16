@@ -1,10 +1,28 @@
 .staff-list {
-  columns: auto 3;
-  column-rule: 1px solid $gray;
-
   li {
     border-bottom: 1px solid $gray-lightest;
-    padding: 2px 8px;
+    border-right: 0;
+    padding: 2px 16px;
+
+    @include media-breakpoint-up(sm) {
+      border-right: 1px solid $gray;
+
+      &:nth-child(2n) {
+        border-right: 0;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      border-right: 1px solid $gray;
+
+      &:nth-child(2n) {
+        border-right: 1px solid $gray;
+      }
+
+      &:nth-child(3n) {
+        border-right: 0;
+      }
+    }
   }
 
   .email,
@@ -54,6 +72,12 @@
 }
 
 .result {
+  border-bottom: 1px solid $gray;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
   .name {
     font-size: .95rem;
    font-weight: 700;
