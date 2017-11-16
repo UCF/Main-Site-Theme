@@ -95,9 +95,28 @@ function get_header_videos( $obj ) {
 /**
  * Returns subtitle text for use in the page header.
  **/
- function get_header_subtitle( $obj ) {
+function get_header_subtitle( $obj ) {
 	$field_id = get_object_field_id( $obj );
 	return wptexturize( do_shortcode( get_field( 'page_header_subtitle', $field_id ) ) );
+}
+
+
+/**
+ * Returns whether the page title or subtitle was designated as the page's h1.
+ * Defaults to 'title' if the option isn't set.
+ * Will force return a different value if the user screwed up (e.g. specified
+ * "subtitle" but didn't provide a subtitle value).
+ **/
+function get_header_h1_option( $obj ) {
+	$field_id = get_object_field_id( $obj );
+	$subtitle = get_field( 'page_header_subtitle', $field_id ) ?: '';
+	$h1       = get_field( 'page_header_h1', $field_id ) ?: 'title';
+
+	if ( $h1 === 'subtitle' && trim( $subtitle ) === '' ) {
+		$h1 = 'title';
+	}
+
+	return $h1;
 }
 
 
@@ -134,8 +153,11 @@ function get_nav_markup( $image=true ) {
  * media background.
  **/
 function get_header_content_title_subtitle( $obj ) {
-	$title = get_header_title( $obj );
-	$subtitle = get_header_subtitle( $obj );
+	$title         = get_header_title( $obj );
+	$subtitle      = get_header_subtitle( $obj );
+	$h1            = get_header_h1_option( $obj );
+	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
+	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 
 	ob_start();
 
@@ -144,12 +166,12 @@ function get_header_content_title_subtitle( $obj ) {
 	<div class="header-content-inner align-self-start pt-2 pt-sm-0 align-self-sm-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
-				<h1 class="header-title"><?php echo $title; ?></h1>
+				<<?php echo $title_elem; ?> class="header-title"><?php echo $title; ?></<?php echo $title_elem; ?>>
 			</div>
 			<?php if ( $subtitle ) : ?>
 			<div class="clearfix"></div>
 			<div class="d-inline-block bg-inverse">
-				<div class="header-subtitle"><?php echo $subtitle; ?></div>
+				<<?php echo $subtitle_elem; ?> class="header-subtitle"><?php echo $subtitle; ?></<?php echo $subtitle_elem; ?>>
 			</div>
 			<?php endif; ?>
 		</div>
@@ -269,6 +291,15 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$subtitle   = get_header_subtitle( $obj );
 	$field_id   = get_object_field_id( $obj );
 	$header_content_type = get_field( 'page_header_content_type', $field_id );
+	$h1               = get_header_h1_option( $obj );
+	$title_elem       = ( $h1 === 'title' ) ? 'h1' : 'span';
+	$subtitle_elem    = ( $h1 === 'subtitle' ) ? 'h1' : 'p';
+
+	$title_classes    = 'mt-3 mt-sm-4 mt-md-5 mb-3';
+	if ( $h1 !== 'title' ) {
+		$title_classes .= ' h1 d-block';
+	}
+	$subtitle_classes = 'lead mb-4 mb-md-5';
 
 	ob_start();
 ?>
@@ -280,10 +311,14 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	elseif ( $title ):
 	?>
 	<div class="container">
-		<h1 class="mt-3 mt-sm-4 mt-md-5 mb-3"><?php echo $title; ?></h1>
+		<<?php echo $title_elem; ?> class="<?php echo $title_classes; ?>">
+			<?php echo $title; ?>
+		</<?php echo $title_elem; ?>>
 
 		<?php if ( $subtitle ): ?>
-		<p class="lead mb-4 mb-md-5"><?php echo $subtitle; ?></p>
+			<<?php echo $subtitle_elem; ?> class="<?php echo $subtitle_classes; ?>">
+				<?php echo $subtitle; ?>
+			</<?php echo $subtitle_elem; ?>>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
