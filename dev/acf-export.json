@@ -970,6 +970,38 @@
                 "maxlength": ""
             },
             {
+                "key": "field_5a0e009ff592e",
+                "label": "Page h1",
+                "name": "page_header_h1",
+                "type": "radio",
+                "instructions": "Specify which part of the page title to use as the h1 for the page.  Styling of the title\/subtitle will not be affected by this choice.",
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "title": "Title Text",
+                    "subtitle": "Subtitle Text"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "save_other_choice": 0,
+                "default_value": "title",
+                "layout": "vertical",
+                "return_format": "value"
+            },
+            {
                 "key": "field_59aed93dc187b",
                 "label": "Header Custom Contents",
                 "name": "page_header_content",
