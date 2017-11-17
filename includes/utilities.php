@@ -81,3 +81,15 @@ function get_object_field_id( $obj ) {
 
 	return $field_id;
 }
+
+
+/**
+ * Utility function that returns an image url by its thumbnail size.
+ **/
+function get_attachment_src_by_size( $id, $size ) {
+	$attachment = wp_get_attachment_image_src( $id, $size, false );
+	if ( is_array( $attachment ) ) {
+		return $attachment[0];
+	}
+	return $attachment;
+}
