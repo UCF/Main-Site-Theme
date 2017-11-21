@@ -8,8 +8,7 @@
   }
 }
 
-.degree-search-typeahead,
-.btn-degree-search {
+.degree-search-typeahead {
   font-size: .85rem;
   padding: calc(.85rem + 1px) .65rem;
 
@@ -20,9 +19,11 @@
 }
 
 .btn-degree-search {
-  padding: calc(.85rem + 1px) calc(1.25rem + 1px);
+  font-size: 1.25rem;
+  padding: calc(.65rem + 1px) calc(1.25rem + 1px);
 
   @include media-breakpoint-up(sm) {
-    padding: calc(1.25rem + 2px) calc(2.25rem + 2px);
+    font-size: 2rem;
+    padding: calc(.85rem + 2px) calc(2.25rem + 2px);
   }
 }
