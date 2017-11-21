@@ -1,0 +1,9 @@
+@import '../custom-base';
+
+.header-media-background-wrap {
+  min-height: auto;
+
+  @include media-breakpoint-up(sm) {
+    min-height: 825px;
+  }
+}
