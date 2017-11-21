@@ -32,15 +32,4 @@
     }
   });
 
-  $(document).on('DOMNodeInserted', function(e) {
-    if($(e.target).hasClass('dcsns-facebook')) {
-      var $links = $(e.target).find('a[href*="%23"]');
-      $.each($links, function(i, t) {
-        var url = $(t).attr('href');
-        url = url.replace('%23', '');
-        $(t).attr('href', url);
-      });
-    }
-  });
-
 }());
