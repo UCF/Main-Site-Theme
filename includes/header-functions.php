@@ -215,6 +215,8 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$header_content_type = get_field( 'page_header_content_type', $field_id );
 	$header_height       = get_field( 'page_header_height', $field_id );
 	$exclude_nav         = get_field( 'page_header_exclude_nav', $field_id );
+	$object_fits         = get_media_background_object_fits( get_field( 'page_header_media_fit_xs', $field_id ), get_field( 'page_header_media_fit', $field_id ) );
+	$object_positions    = get_media_background_object_positions( get_field( 'page_header_media_position_xs', $field_id ), get_field( 'page_header_media_position', $field_id ) );
 
 	ob_start();
 ?>
@@ -225,7 +227,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				// Display the media background (video + picture)
 
 				if ( $videos ) {
-					echo get_media_background_video( $videos, $video_loop );
+					echo get_media_background_video( $videos, $video_loop, $object_fits['sm'], $object_positions['sm'] );
 				}
 				if ( $images ) {
 					$bg_image_srcs = array();
@@ -243,7 +245,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 							$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
 							break;
 					}
-					echo get_media_background_picture( $bg_image_srcs );
+					echo get_media_background_picture( $bg_image_srcs, $object_fits, $object_positions );
 				}
 				?>
 			</div>
