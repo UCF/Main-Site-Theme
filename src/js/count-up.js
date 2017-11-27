@@ -21,16 +21,16 @@
         }).animate({
           countNum: countTo
         },
-          {
-            duration: settings.duration,
-            easing: settings.easing,
-            step: (i) => {
-              $num.text(numberWithCommas(Math.floor(i)));
-            },
-            complete: () => {
-              $num.text(numberWithCommas(countTo));
-            }
-          });
+        {
+          duration: settings.duration,
+          easing: settings.easing,
+          step: (i) => {
+            $num.text(numberWithCommas(Math.floor(i)));
+          },
+          complete: () => {
+            $num.text(numberWithCommas(countTo));
+          }
+        });
       }
     });
 

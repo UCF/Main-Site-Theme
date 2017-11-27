@@ -45,8 +45,8 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 	<section class="section-stats">
 		<div class="media-background-container">
 			<img class="media-background object-fit-cover" srcset="<?php echo $stats_background; ?>" src="<?php echo $stats_background; ?>" alt="">
-			<div class="container my-5">
-				<div class="row">
+			<div class="container my-5 fact-grid-wrap">
+				<div class="row fact-grid">
 				<?php
 					ob_start();
 					if ( $stats ) :

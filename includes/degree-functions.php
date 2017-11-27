@@ -154,7 +154,7 @@ function main_site_degree_search_display( $output ) {
 		<div class="input-group degree-search">
 			<input type="text" name="search" class="form-control degree-search-typeahead" placeholder="Search for degree programs">
 			<span class="input-group-btn">
-				<button id="ucf-degree-search-submit" type="submit" class="btn btn-primary" aria-label="Search Degrees"><span class="fa fa-search" aria-hidden="true"></span></button>
+				<button id="ucf-degree-search-submit" type="submit" class="btn btn-degree-search btn-primary bg-primary-darker text-inverse border-0" aria-label="Search Degrees"><span class="fa fa-search" aria-hidden="true"></span></button>
 			</span>
 		</div>
 	</form>

@@ -57,6 +57,7 @@
 }
 
 .header-title {
+  display: block;
   font-family: $font-family-slab-serif;
   font-size: 8.75vw;
   font-weight: 400;
@@ -80,8 +81,12 @@
 }
 
 .header-subtitle {
+  display: block;
   font-family: $font-family-slab-serif;
   font-size: 4.25vw;
+  font-weight: 400;
+  line-height: $line-height-base;
+  margin: 0;
   padding: .25rem .75rem;
 
   @include media-breakpoint-up(sm) {
