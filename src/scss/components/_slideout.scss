@@ -1,0 +1,61 @@
+//
+// Creates a slide-out, full-screen, toggleable block at the -xs and -sm
+// breakpoints.  Styles are reset at the -md breakpoint.
+//
+// Intended as an extension of Athena's card classes.
+//
+
+// Parent elem; intended for use with .card class
+.slideout {
+  align-items: stretch;
+  background: $gray-lightest;
+  border: 0;
+  display: flex !important;
+  flex-direction: column;
+  height: 100vh;
+  left: 0;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  transform: translateX(100vw);
+  transition: transform .25s ease;
+  width: 85vw;
+  z-index: 999999;
+
+  @include media-breakpoint-up(md) {
+    background: transparent;
+    height: auto;
+    left: auto;
+    position: static;
+    top: auto;
+    transform: translateX(0);
+    width: auto;
+    z-index: auto;
+  }
+
+  &.show {
+    transform: translateX(15vw);
+  }
+}
+
+// Intended for use with .card-header and .card-footer, respectively
+.slideout-header,
+.slideout-footer {
+  flex: 0 1 auto;
+
+  @include media-breakpoint-up(md) {
+    display: none;
+  }
+}
+
+// Intended for use with .card-block
+.slideout-body {
+  flex: 1 1 auto;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+
+  @include media-breakpoint-up(md) {
+    overflow-y: visible;
+    padding: 0;
+  }
+}
