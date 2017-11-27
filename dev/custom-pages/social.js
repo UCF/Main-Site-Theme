@@ -1,7 +1,7 @@
 (function() {
 
   var $twitterWidget = $('#js-twitter-widget'),
-      $siteFooter = $('#footer'),
+      $siteFooter = $('.site-footer'),
       affixInitiated = false;
 
   $(window).on('load resize', function() {

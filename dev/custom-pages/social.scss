@@ -243,24 +243,20 @@ $color-linkedin: #0077b5;
 
 .crt-social-icon {
   .crt-icon-facebook {
-    color: $color-facebook!important;
+    color: $color-facebook !important;
   }
 
   .crt-icon-youtube {
-    color: $color-youtube!important;
+    color: $color-youtube !important;
   }
 
   .crt-icon-instagram {
     background: #f09433;
-    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
     border-radius: 8px;
-    color: white!important;
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+    color: white !important;
   }
 }
 
 .crt-feed-container .crt-feed-more a {
-  border: 1px solid rgba(0, 0, 0, 0.1)!important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
 }
