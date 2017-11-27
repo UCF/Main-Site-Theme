@@ -54,7 +54,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 				?>
 							<div class="col-sm-6 col-lg-4 fact-block">
 								<aside>
-									<img src="<?php echo $stat["icon"]["url"]; ?>" alt="" class="fact-header fact-header-lg fact-header-icon img-fluid">
+									<img src="<?php echo $stat["icon"]["url"]; ?>" alt="<?php echo $stat["icon"]["alt"]; ?>" title="<?php echo $stat["icon"]["title"]; ?>" class="fact-header fact-header-lg fact-header-icon img-fluid">
 									<div class="fact-details"><?php echo $stat["copy"]; ?></div>
 								</aside>
 							</div>
