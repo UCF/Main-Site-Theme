@@ -107,7 +107,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 						</div>
 					</div>
 					<div class="col-lg-3 hidden-md-down">
-						<h3 class="h4 top-majors-heading btn text-upper btn-sm text-left w-100">Top College <br class="hidden-md-down">Degrees</h3>
+						<h3 class="h4 top-majors-heading btn text-upper btn-sm text-left w-100">Top <?php echo get_field( 'colleges_alias', 'colleges_' . $term->term_id ); ?> Degrees</h3>
 						<ul class="top-majors-list list-unstyled">
 							<?php echo display_top_degrees( $term ); // located in functions.php ?>
 						</ul>
@@ -125,7 +125,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-lg-8">
-					<h2><?php echo ( $news_title = $term->colleges_alias ) ? $news_title . " News" : str_replace( 'College of ', '', $term->name ) . " News"; ?></h2>
+					<h2><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : str_replace( 'College of ', '', $term->name ) . " News"; ?></h2>
 				</div>
 				<div class="col-lg-4">
 					<a href="https://today.ucf.edu/topic/<?php echo $news_topic; ?>" class="more-stories float-lg-right text-uppercase text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
