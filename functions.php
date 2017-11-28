@@ -28,10 +28,10 @@ function display_top_degrees( $term ) {
 
 	$top_degrees_custom = get_field( 'top_degrees_custom', 'colleges_' . $term->term_id );
 	if( $top_degrees_custom ) :
-	foreach( $top_degrees_custom as $top_degree_custom ) :
-		$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
-	endforeach;
-endif;
+		foreach( $top_degrees_custom as $top_degree_custom ) :
+			$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
+		endforeach;
+	endif;
 	return $ret;
 }
 
