@@ -87,84 +87,17 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 
 
 /**
- * Returns an array of object-fit classes for a media background's sources by
- * breakpoint.
- *
- * @param string $xs_override Object-fit class to be used at the -xs breakpoint
- * @param string $sm_override Object-fit class to be used at the -sm breakpoint and up
- * @return array
- **/
-function get_media_background_object_fits( $xs_override=null, $sm_override=null ) {
-	$defaults = array_fill_keys( array( 'xl', 'lg', 'md', 'sm', 'xs', 'fallback' ), 'object-fit-cover' );
-	$overrides = array();
-
-	if ( $sm_override ) {
-		$overrides['xl'] = $sm_override;
-		$overrides['lg'] = $sm_override;
-		$overrides['md'] = $sm_override;
-		$overrides['sm'] = $sm_override;
-		$overrides['fallback'] = $sm_override;
-	}
-
-	if ( $xs_override ) {
-		$overrides['xs'] = $xs_override;
-	}
-
-	return array_merge( $defaults, $overrides );
-}
-
-
-/**
- * Returns an array of object-position values for a media background's sources
- * by breakpoint.
- *
- * @param string $xs_override Object-position value to be used at the -xs breakpoint
- * @param string $sm_override Object-position value to be used at the -sm breakpoint and up
- * @return array
- **/
-function get_media_background_object_positions( $xs_override=null, $sm_override=null ) {
-	$defaults = array_fill_keys( array( 'xl', 'lg', 'md', 'sm', 'xs', 'fallback' ), '50% 50%' );
-	$overrides = array();
-
-	if ( $sm_override ) {
-		$overrides['xl'] = $sm_override;
-		$overrides['lg'] = $sm_override;
-		$overrides['md'] = $sm_override;
-		$overrides['sm'] = $sm_override;
-		$overrides['fallback'] = $sm_override;
-	}
-
-	if ( $xs_override ) {
-		$overrides['xs'] = $xs_override;
-	}
-
-	return array_merge( $defaults, $overrides );
-}
-
-
-/**
  * Returns markup for a media background <picture>.
  *
  * @param array $srcs Array of image urls that correspond to <source> src vals. Expects output from get_media_background_picture_srcs()
- * @param array $object_fits Array of object-fit classes per breakpoint. Expects output from get_media_background_object_fits()
- * @param array $object_positions Array of object-position per breakpoint. Expects output from get_media_background_object_positions()
  * @return string
  **/
-function get_media_background_picture( $srcs, $object_fits, $object_positions ) {
+function get_media_background_picture( $srcs ) {
 	ob_start();
 
 	if ( isset( $srcs['fallback'] ) ) :
 ?>
-	<?php
-	// Define classes for the <picture> element
-	$picture_classes = 'media-background-picture ';
-	if ( !isset( $srcs['xs'] ) ) {
-		// Hide the <picture> element at -xs breakpoint when no mobile image
-		// is available
-		$picture_classes .= 'hidden-xs-down';
-	}
-	?>
-	<picture class="<?php echo $picture_classes; ?>">
+	<picture class="media-background-picture">
 		<?php if ( isset( $srcs['xl'] ) ) : ?>
 		<source srcset="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
 		<?php endif; ?>
@@ -181,12 +114,12 @@ function get_media_background_picture( $srcs, $object_fits, $object_positions ) 
 		<source srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 576px)">
 		<?php endif; ?>
 
-		<img class="media-background <?php echo $object_fits['fallback']; ?>" src="<?php echo $srcs['fallback']; ?>" style="object-position: <?php echo $object_positions['fallback']; ?>;" data-object-position="<?php echo $object_positions['fallback']; ?>" alt="">
-	</picture>
+		<?php if ( isset( $srcs['xs'] ) ) : ?>
+		<source srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 575px)">
+		<?php endif; ?>
 
-	<?php if ( isset( $srcs['xs'] ) ) : ?>
-	<img class="media-background hidden-sm-up <?php echo $object_fits['xs']; ?>" src="<?php echo $srcs['xs']; ?>" style="object-position: <?php echo $object_positions['xs']; ?>;" data-object-position="<?php echo $object_positions['xs']; ?>" alt="">
-	<?php endif; ?>
+		<img class="media-background object-fit-cover" src="<?php echo $srcs['fallback']; ?>" alt="">
+	</picture>
 <?php
 	endif;
 
@@ -204,14 +137,12 @@ function get_media_background_picture( $srcs, $object_fits, $object_positions ) 
  * Note: we never display autoplay videos at the -xs breakpoint.
  *
  * @param array $videos Array of video urls that correspond to <source> src vals
- * @param string $object_fit Object-fit class for the video (sm+)
- * @param string $object_position Object-position value for the video (sm+)
  * @return string
  **/
-function get_media_background_video( $videos, $loop=false, $object_fit, $object_position ) {
+function get_media_background_video( $videos, $loop=false ) {
 	ob_start();
 ?>
-	<video class="hidden-xs-down media-background media-background-video <?php echo $object_fit; ?>" style="object-position: <?php echo $object_position; ?>;" data-object-position="<?php echo $object_position; ?>" autoplay muted <?php if ( $loop ) { ?>loop<?php } ?>>
+	<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted <?php if ( $loop ) { ?>loop<?php } ?>>
 		<?php if ( isset( $videos['webm'] ) ) : ?>
 		<source src="<?php echo $videos['webm']; ?>" type="video/webm">
 		<?php endif; ?>
@@ -237,8 +168,6 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
 	$bg_images = get_media_background_picture_srcs( $bg_image_xs_id, $bg_image_sm_id, 'bg-img' );
-	$bg_object_fits = get_media_background_object_fits();
-	$bg_object_positions = get_media_background_object_positions();
 
 	// Retrieve color classes/custom definitions
 	$bg_color = get_field( 'section_background_color', $section->ID );
@@ -279,7 +208,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 	ob_start();
 ?>
 	<section <?php echo $section_id; ?>class="<?php echo $section_classes; ?>" style="<?php echo $style_attrs; ?>"<?php echo $title; ?>>
-	<?php echo get_media_background_picture( $bg_images, $bg_object_fits, $bg_object_positions ); ?>
+	<?php echo get_media_background_picture( $bg_images ); ?>
 <?php
 	return ob_get_clean();
 }
