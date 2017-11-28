@@ -351,6 +351,62 @@
                 "ui": 1
             },
             {
+                "key": "field_5a1d88cad3b42",
+                "label": "Top Degrees Custom",
+                "name": "top_degrees_custom",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5a1d88e9d3b43",
+                        "label": "Top Degree Custom Text",
+                        "name": "top_degree_custom_text",
+                        "type": "text",
+                        "instructions": "Link text to be displayed for the custom top degree.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5a1d8a76d3b44",
+                        "label": "Top Degree Custom Link",
+                        "name": "top_degree_custom_link",
+                        "type": "url",
+                        "instructions": "Degree search link for the custom top degree.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": ""
+                    }
+                ]
+            },
+            {
                 "key": "field_59a5a672eab38",
                 "label": "Call to Action Bar",
                 "name": "",
