@@ -166,27 +166,27 @@ function get_media_background_picture( $srcs, $object_fits, $object_positions ) 
 	?>
 	<picture class="<?php echo $picture_classes; ?>">
 		<?php if ( isset( $srcs['xl'] ) ) : ?>
-		<source class="media-background <?php echo $object_fits['xl']; ?>" srcset="<?php echo $srcs['xl']; ?>" style="object-position: <?php echo $object_positions['xl']; ?>;" data-object-position="<?php echo $object_positions['xl']; ?>" media="(min-width: 1200px)">
+		<source srcset="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['lg'] ) ) : ?>
-		<source class="media-background <?php echo $object_fits['lg']; ?>" srcset="<?php echo $srcs['lg']; ?>" style="object-position: <?php echo $object_positions['lg']; ?>;" data-object-position="<?php echo $object_positions['lg']; ?>" media="(min-width: 992px)">
+		<source srcset="<?php echo $srcs['lg']; ?>" media="(min-width: 992px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['md'] ) ) : ?>
-		<source class="media-background <?php echo $object_fits['md']; ?>" srcset="<?php echo $srcs['md']; ?>" style="object-position: <?php echo $object_positions['md']; ?>;" data-object-position="<?php echo $object_positions['md']; ?>" media="(min-width: 768px)">
+		<source srcset="<?php echo $srcs['md']; ?>" media="(min-width: 768px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['sm'] ) ) : ?>
-		<source class="media-background <?php echo $object_fits['sm']; ?>" srcset="<?php echo $srcs['sm']; ?>" style="object-position: <?php echo $object_positions['sm']; ?>;" data-object-position="<?php echo $object_positions['sm']; ?>" media="(min-width: 576px)">
-		<?php endif; ?>
-
-		<?php if ( isset( $srcs['xs'] ) ) : ?>
-		<source class="media-background <?php echo $object_fits['xs']; ?>" srcset="<?php echo $srcs['xs']; ?>" style="object-position: <?php echo $object_positions['xs']; ?>;" data-object-position="<?php echo $object_positions['xs']; ?>" media="(max-width: 575px)">
+		<source srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 576px)">
 		<?php endif; ?>
 
 		<img class="media-background <?php echo $object_fits['fallback']; ?>" src="<?php echo $srcs['fallback']; ?>" style="object-position: <?php echo $object_positions['fallback']; ?>;" data-object-position="<?php echo $object_positions['fallback']; ?>" alt="">
 	</picture>
+
+	<?php if ( isset( $srcs['xs'] ) ) : ?>
+	<img class="media-background hidden-sm-up <?php echo $object_fits['xs']; ?>" src="<?php echo $srcs['xs']; ?>" style="object-position: <?php echo $object_positions['xs']; ?>;" data-object-position="<?php echo $object_positions['xs']; ?>" alt="">
+	<?php endif; ?>
 <?php
 	endif;
 
