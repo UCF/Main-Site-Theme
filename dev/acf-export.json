@@ -1049,7 +1049,7 @@
             },
             {
                 "key": "field_590ca453f6655",
-                "label": "Header Size",
+                "label": "Header Size and Positioning",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -1086,6 +1086,104 @@
                 "default_value": "header-media-default",
                 "layout": "vertical",
                 "return_format": "value"
+            },
+            {
+                "key": "field_5a1c45076e658",
+                "label": "Header Media Sizing (-sm+)",
+                "name": "page_header_media_fit",
+                "type": "select",
+                "instructions": "Specify how the header image\/video should be stretched or adjusted to fit within the header at the -sm breakpoint and up.  In most cases, this should be set to \"Cover\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "object-fit-cover": "Cover",
+                    "object-fit-contain": "Contain",
+                    "object-fit-fill": "Fill",
+                    "object-fit-scale-down": "Scale Down",
+                    "object-fit-none": "None"
+                },
+                "default_value": [
+                    "object-fit-cover"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            },
+            {
+                "key": "field_5a1c468c6e659",
+                "label": "Header Media Sizing (-xs)",
+                "name": "page_header_media_fit_xs",
+                "type": "select",
+                "instructions": "Specify how the header image\/video should be stretched or adjusted to fit within the header at the -xs breakpoint.  In most cases, this should be set to \"Cover\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "object-fit-cover": "Cover",
+                    "object-fit-contain": "Contain",
+                    "object-fit-fill": "Fill",
+                    "object-fit-scale-down": "Scale Down",
+                    "object-fit-none": "None"
+                },
+                "default_value": [
+                    "object-fit-cover"
+                ],
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "ajax": 0,
+                "return_format": "value",
+                "placeholder": ""
+            },
+            {
+                "key": "field_5a1c46e46e65b",
+                "label": "Header Media Positioning (-sm+)",
+                "name": "page_header_media_position",
+                "type": "text",
+                "instructions": "How the header image\/video should be positioned horizontally and vertically within the header at the -sm breakpoint and up.  See <a href=\"https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/CSS\/object-position\" target=\"_blank\">https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/CSS\/object-position<\/a> for example usage and possible values.\r\n\r\nMedia is centered horizontally and vertically by default.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "e.g. \"center center\" or \"40% 60%\"",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5a1c48b36e65e",
+                "label": "Header Media Positioning (-xs)",
+                "name": "page_header_media_position_xs",
+                "type": "text",
+                "instructions": "How the header image\/video should be positioned horizontally and vertically within the header at the -xs breakpoint.  See <a href=\"https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/CSS\/object-position\" target=\"_blank\">https:\/\/developer.mozilla.org\/en-US\/docs\/Web\/CSS\/object-position<\/a> for example usage and possible values.\r\n\r\nMedia is centered horizontally and vertically by default.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "e.g. \"center center\" or \"40% 60%\"",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_590ca625f6657",
