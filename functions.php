@@ -25,6 +25,13 @@ function display_top_degrees( $term ) {
 			$ret .= '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
 		endforeach;
 	endif;
+
+	$top_degrees_custom = get_field( 'top_degrees_custom', 'colleges_' . $term->term_id );
+	if( $top_degrees_custom ) :
+		foreach( $top_degrees_custom as $top_degree_custom ) :
+			$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
+		endforeach;
+	endif;
 	return $ret;
 }
 
@@ -87,10 +94,9 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 
 
 /**
- * Returns markup for a media background <picture>, given an array of media
- * background picture <source> src's from get_media_background_picture_srcs().
+ * Returns markup for a media background <picture>.
  *
- * @param array $srcs Array of image urls that correspond to <source> src vals
+ * @param array $srcs Array of image urls that correspond to <source> src vals. Expects output from get_media_background_picture_srcs()
  * @return string
  **/
 function get_media_background_picture( $srcs ) {
@@ -98,34 +104,25 @@ function get_media_background_picture( $srcs ) {
 
 	if ( isset( $srcs['fallback'] ) ) :
 ?>
-	<?php
-	// Define classes for the <picture> element
-	$picture_classes = 'media-background-picture ';
-	if ( !isset( $srcs['xs'] ) ) {
-		// Hide the <picture> element at -xs breakpoint when no mobile image
-		// is available
-		$picture_classes .= 'hidden-xs-down';
-	}
-	?>
-	<picture class="<?php echo $picture_classes; ?>">
+	<picture class="media-background-picture">
 		<?php if ( isset( $srcs['xl'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
+		<source srcset="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['lg'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['lg']; ?>" media="(min-width: 992px)">
+		<source srcset="<?php echo $srcs['lg']; ?>" media="(min-width: 992px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['md'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['md']; ?>" media="(min-width: 768px)">
+		<source srcset="<?php echo $srcs['md']; ?>" media="(min-width: 768px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['sm'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 576px)">
+		<source srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 576px)">
 		<?php endif; ?>
 
 		<?php if ( isset( $srcs['xs'] ) ) : ?>
-		<source class="media-background object-fit-cover" srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 575px)">
+		<source srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 575px)">
 		<?php endif; ?>
 
 		<img class="media-background object-fit-cover" src="<?php echo $srcs['fallback']; ?>" alt="">

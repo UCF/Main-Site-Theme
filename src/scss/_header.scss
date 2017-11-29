@@ -23,6 +23,7 @@
 }
 
 .header-media {
+  height: 100%;
   position: relative;
 
   @include media-breakpoint-down(xs) {
