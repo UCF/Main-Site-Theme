@@ -59,6 +59,8 @@
     @extend .badge;
     @extend .badge-primary;
     margin-bottom: .75rem;
+    text-align: left;
+    white-space: normal;
   }
 
   .ucf-news-item-title {
