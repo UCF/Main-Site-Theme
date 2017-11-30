@@ -89,24 +89,19 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 						?>
 						</ul>
 					</div>
-					<div class="col-lg-1 hidden-md-down" data-mh="section-degrees-col" style="height: 442px;">
+					<div class="col-lg-1 hidden-md-down">
 						<hr class="hidden-xs hidden-sm hr-vertical hr-vertical-white center-block">
 					</div>
-					<div class="col-lg-3 hidden-lg-up">
-						<div id="accordion" class="accordion">
-							<h3 class="h4 top-majors-heading btn text-upper btn-sm text-left w-100 collapsed" data-toggle="collapse" data-parent="#accordion" href="#top-degree-collapse">Top College <br class="hidden-md-down">Degrees</h3>
-							<div id="top-degree-collapse" class="collapse">
-								<ul class="top-majors-list list-unstyled">
-									<?php echo display_top_degrees( $term ); // located in functions.php ?>
-								</ul>
-							</div>
+					<div class="col-lg-3">
+						<h3 class="h5 mb-3 hidden-md-down"><span class="badge badge-inverse">Top College Degrees</span></h3>
+						<a class="hidden-lg-up btn btn-outline-inverse btn-block mb-3 collapsed" data-toggle="collapse" data-target="#top-degree-collapse" href="#top-degree-collapse">
+							Top College Degrees <span class="fa fa-chevron-circle-down" aria-hidden="true"></span>
+						</a>
+						<div id="top-degree-collapse" class="collapse d-lg-block">
+							<ul class="top-majors-list list-unstyled">
+								<?php echo display_top_degrees( $term ); // located in functions.php ?>
+							</ul>
 						</div>
-					</div>
-					<div class="col-lg-3 hidden-md-down">
-						<h3 class="h4 top-majors-heading btn text-upper btn-sm text-left w-100">Top <?php echo get_field( 'colleges_alias', 'colleges_' . $term->term_id ); ?> Degrees</h3>
-						<ul class="top-majors-list list-unstyled">
-							<?php echo display_top_degrees( $term ); // located in functions.php ?>
-						</ul>
 					</div>
 				</div>
 			</div>
