@@ -58,10 +58,6 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 									<div class="fact-details"><?php echo $stat["copy"]; ?></div>
 								</aside>
 							</div>
-						<?php if ( $index !== 0 && ( ( $index + 1 ) % 3 ) === 0 ) : ?>
-							</div>
-							<div class="row fact-grid">
-						<?php endif; ?>
 				<?php
 						endforeach;
 					endif;
