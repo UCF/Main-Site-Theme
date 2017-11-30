@@ -60,7 +60,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 							</div>
 						<?php if ( $index !== 0 && ( ( $index + 1 ) % 3 ) === 0 ) : ?>
 							</div>
-							<div class="row">
+							<div class="row fact-grid">
 						<?php endif; ?>
 				<?php
 						endforeach;
