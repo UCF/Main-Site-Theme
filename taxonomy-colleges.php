@@ -168,7 +168,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 				if( $college->slug !== $term->slug ) : ?>
 					<a class="college-block d-flex media-background-container text-inverse hover-text-inverse text-decoration-none" href="../<?php echo $college->slug; ?>">
 						<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id); ?>" alt="<?php echo $college->name; ?>">
-						<span class="college-block-text align-self-end pointer-events-none h5 font-condensed text-uppercase"><?php echo $college->name; ?></span>
+						<span class="college-block-text align-self-end pointer-events-none h5 font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
 					</a>
 			<?php
 				endif;
