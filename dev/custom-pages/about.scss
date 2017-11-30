@@ -1,0 +1,12 @@
+@import '../custom-base';
+
+
+.section-foundation {
+  @include media-breakpoint-up(md) {
+    min-height: 950px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    min-height: 850px;
+  }
+}
