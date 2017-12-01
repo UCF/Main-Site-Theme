@@ -8,38 +8,45 @@ A responsive WordPress theme for ucf.edu, built off of the [Athena Framework](ht
 This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 
 ### Required Plugins
+These plugins *must* be activated for the theme to function properly, and/or to satisfy core feature requirements for ucf.edu.
 * Advanced Custom Fields PRO
-* Athena Shortcodes
-* Automatic Section Menu Shortcode
-* Gravity Forms
+* Athena Gravity Forms
 * UCF Alert Plugin
 * UCF College Custom Taxonomy
 * UCF Degree Custom Post Type
 * UCF Degree Search Plugin
 * UCF Departments Taxonomy
-* UCF Events
-* UCF Footer
-* UCF News
-* UCF Page Assets
-* UCF Post List Shortcode
 * UCF Resource Search
 * UCF Rest Menus
 * UCF Section
 * UCF Spotlight
 * UCF Tuition and Fees
-* UCF Weather Shortcode
-* WordPress Social Stream
 
-### Recommended Plugins
-* Page Links To
+### Supported Plugins
+These plugins provide features that are extended by the theme; they are generally expected to be activated with the theme but are not technically required.
+* UCF Academic Calendar Plugin
+* UCF Charts Plugin
+* UCF Events
+* UCF Footer
+* UCF News
+* UCF Pegasus List Shortcode
+* UCF Post List Shortcode
+* UCF Social Plugin
+* UCF Weather Shortcode
+
+### Other Recommended Plugins
+These plugins add desirable features, some of which are environment-specific for ucf.edu, but are not technically required to use this theme.
+* Athena Shortcodes
+* Automatic Section Menu Shortcode
+* Gravity Forms
 * Main Site Utilities
+* Page Links To
 * UCF Content Scheduler
 * UCF Page Assets
-* Varnish Dependency Purger
+* Varnish Dependency Purger or Varnish as a Service
 * WP-Mail-SMTP
 * WP Allowed Hosts
 * WP Shortcode Interface
-* WordPress Importer
 * Yoast SEO
 
 
