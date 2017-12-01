@@ -301,7 +301,7 @@ function main_site_academic_calendar_title( $content, $items, $args ) {
 
 	ob_start();
 ?>
-	<h2 class="mt-2 mb-4 text-inverse"><span class="fa fa-calendar text-primary"></span> <?php echo $title; ?></h2>
+	<h2 class="mt-2 mb-4 mb-md-5 text-inverse"><span class="fa fa-calendar text-primary align-top" aria-hidden="true"></span> <?php echo $title; ?></h2>
 <?php
 	return ob_get_clean();
 }
@@ -313,12 +313,12 @@ function main_site_academic_calendar_content( $content, $items, $args ) {
 
 	ob_start();
 ?>
-	<div class="row">
-		<div class="col-md-4">
-			<h3 class="h5 text-inverse text-uppercase">Up Next</h3>
+	<div class="row pt-2 pt-md-0">
+		<div class="col-lg-4 mb-2 mb-lg-0">
+			<h3 class="h5 mb-3"><span class="badge badge-inverse">Up Next</span></h3>
 			<div class="academic-calendar-item">
 				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
-					<span class="text-inverse title h4 mb-2 heading-underline"><?php echo $first_item->summary; ?></span>
+					<span class="text-inverse title h4 mb-3 d-block"><?php echo $first_item->summary; ?></span>
 					<?php echo main_site_academic_calendar_format_date( $first_item->dtstart, $first_item->dtend ); ?>
 					<?php if ( ! empty( $first_item->description ) ) : ?>
 						<p class="text-inverse"><?php echo $first_item->description; ?></p>
@@ -326,8 +326,8 @@ function main_site_academic_calendar_content( $content, $items, $args ) {
 				</a>
 			</div>
 		</div>
-		<div class="col-md-8">
-			<h3 class="h5 text-inverse text-uppercase">Looking Ahead</h3>
+		<div class="col-lg-7 offset-lg-1">
+			<h3 class="h5 mb-3"><span class="badge badge-inverse">Looking Ahead</span></h3>
 			<div class="academic-calendar-columns">
 			<?php foreach( $items as $item ) : ?>
 				<div class="academic-calendar-item">
