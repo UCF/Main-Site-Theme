@@ -11,6 +11,7 @@ This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
 These plugins *must* be activated for the theme to function properly, and/or to satisfy core feature requirements for ucf.edu.
 * Advanced Custom Fields PRO
 * Athena Gravity Forms
+* Gravity Forms
 * UCF Alert Plugin
 * UCF College Custom Taxonomy
 * UCF Degree Custom Post Type
@@ -23,7 +24,7 @@ These plugins *must* be activated for the theme to function properly, and/or to 
 * UCF Tuition and Fees
 
 ### Supported Plugins
-These plugins provide features that are extended by the theme; they are generally expected to be activated with the theme but are not technically required.
+These plugins provide features that are extended or modified by the theme; they are generally expected to be activated with the theme but are not technically required.
 * UCF Academic Calendar Plugin
 * UCF Charts Plugin
 * UCF Events
@@ -33,12 +34,12 @@ These plugins provide features that are extended by the theme; they are generall
 * UCF Post List Shortcode
 * UCF Social Plugin
 * UCF Weather Shortcode
+* Yoast SEO
 
 ### Other Recommended Plugins
 These plugins add desirable features, some of which are environment-specific for ucf.edu, but are not technically required to use this theme.
 * Athena Shortcodes
 * Automatic Section Menu Shortcode
-* Gravity Forms
 * Main Site Utilities
 * Page Links To
 * UCF Content Scheduler
@@ -47,7 +48,6 @@ These plugins add desirable features, some of which are environment-specific for
 * WP-Mail-SMTP
 * WP Allowed Hosts
 * WP Shortcode Interface
-* Yoast SEO
 
 
 ## Configuration
