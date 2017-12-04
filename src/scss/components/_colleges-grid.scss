@@ -43,8 +43,8 @@
   }
 
   @include media-breakpoint-up(xl) {
-    @include make-col(2, 10); // 20%
-    min-height: 20vw;
+    @include make-col(2);
+    min-height: 16.667vw;
   }
 
   // Modify grid block dimensions when a grid message is also present
