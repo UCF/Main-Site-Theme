@@ -154,12 +154,12 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 			<h2 class="section-heading h3 m-0 text-uppercase font-weight-bold font-condensed">University of Central Florida Colleges</h2>
 			</div>
 		</div>
-		<div class="d-flex flex-wrap">
+		<div class="colleges-grid">
 			<?php foreach( $colleges as $index=>$college ) :
 				if( $college->slug !== $term->slug ) : ?>
-					<a class="college-block d-flex media-background-container text-inverse hover-text-inverse text-decoration-none" href="../<?php echo $college->slug; ?>">
+					<a class="colleges-block media-background-container text-inverse hover-text-inverse text-decoration-none justify-content-end" href="../<?php echo $college->slug; ?>">
 						<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id); ?>" alt="<?php echo $college->name; ?>">
-						<span class="college-block-text align-self-end pointer-events-none h5 font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
+						<span class="colleges-block-text pointer-events-none font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
 					</a>
 			<?php
 				endif;
