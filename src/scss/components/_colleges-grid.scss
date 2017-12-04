@@ -112,7 +112,11 @@
   }
 }
 
-// Optional heading to use within college grid intro message
+// Optional heading to use within college grid intro message.
+//
+// NOTE: Heading font family/size are opinionated due to how Athena applies
+// family-specific font size overrides to headings, which prevent us from using
+// this class with font-family utility classes (e.g. .font-condensed).
 .colleges-grid-heading {
   font-family: $font-family-condensed;
   font-size: $font-size-h2;
