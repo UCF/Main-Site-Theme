@@ -22,14 +22,14 @@ function display_top_degrees( $term ) {
 	$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
 	if( $top_degrees ) :
 		foreach( $top_degrees as $top_degree ) :
-			$ret .= '<li><a href="' . $top_degree->post_name . '" class="text-inverse">' . $top_degree->post_title . '</a></li>';
+			$ret .= '<li><a href="' . $top_degree->post_name . '" class="text-inverse nav-link">' . $top_degree->post_title . '</a></li>';
 		endforeach;
 	endif;
 
 	$top_degrees_custom = get_field( 'top_degrees_custom', 'colleges_' . $term->term_id );
 	if( $top_degrees_custom ) :
 		foreach( $top_degrees_custom as $top_degree_custom ) :
-			$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
+			$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse nav-link">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
 		endforeach;
 	endif;
 	return $ret;

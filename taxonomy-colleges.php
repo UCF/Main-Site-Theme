@@ -98,7 +98,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 							Top College Degrees <span class="fa fa-chevron-circle-down" aria-hidden="true"></span>
 						</a>
 						<div id="top-degree-collapse" class="collapse d-lg-block">
-							<ul class="top-majors-list list-unstyled ml-0 pl-4">
+							<ul class="top-majors-list nav flex-column align-items-start list-unstyled pl-3">
 								<?php echo display_top_degrees( $term ); // located in functions.php ?>
 							</ul>
 						</div>
