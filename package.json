@@ -25,7 +25,7 @@
     "js-cookie": "^2.2.0",
     "merge": "^1.2.0",
     "run-sequence": "^2.2.0",
-    "ucf-athena-framework": "^1.0.0-beta.6"
+    "ucf-athena-framework": "^1.0.0-beta.7"
   },
   "browserslist": [
     "last 2 versions"
