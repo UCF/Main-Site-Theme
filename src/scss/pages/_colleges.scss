@@ -1,8 +1,6 @@
 
 .section-degrees {
-
   .degree-search {
-
     .btn-degree-search {
       padding: .4em;
 
@@ -16,10 +14,6 @@
     }
   }
 
-  .browse-by-heading {
-    font-size: .8em;
-  }
-
   .hr-vertical {
     border-left: 1px solid;
     display: block;
@@ -27,109 +21,5 @@
     margin-bottom: 0;
     margin-top: 0;
     width: 1px;
-  }
-
-  .list-chevrons {
-    margin-bottom: 2em;
-    padding: 0;
-
-    @include media-breakpoint-up(lg) {
-      padding-left: .6em;
-    }
-
-    li {
-      list-style: none;
-
-      @include media-breakpoint-up(lg) {
-        display: inline-block;
-      }
-
-      &::before {
-        color: $ucf-gold;
-        content: '';
-        display: inline-block;
-        font: normal normal normal 14px/1 FontAwesome;
-        font-size: .8em;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        line-height: 1;
-        text-rendering: auto;
-        width: 1.25em;
-      }
-    }
-
-    a {
-      text-decoration: none;
-    }
-  }
-
-  .top-majors-list {
-    padding-left: .7em;
-
-    li {
-      margin-bottom: .5em;
-    }
-  }
-}
-
-.aside-ctas {
-  .icon-link {
-    padding-bottom: 0;
-    padding-top: 0;
-
-    @include media-breakpoint-up(sm) {
-      padding: 3rem 2rem;
-    }
-  }
-}
-
-.section-news {
-  .more-stories {
-    font-size: .85em;
-    font-weight: bold;
-    margin-top: 1em;
-  }
-}
-
-.section-colleges {
-
-  .college-block {
-    min-height: 48.2vw;
-    width: 50%;
-
-    @include media-breakpoint-up(sm) {
-      min-height: 33vw;
-      width: calc(100% / 3);
-    }
-
-    @include media-breakpoint-up(md) {
-      min-height: 24.6vw;
-      width: 25%;
-    }
-
-    @include media-breakpoint-up(lg) {
-      min-height: 16.5vw;
-      width: calc(100% / 6);
-    }
-
-    .college-block-text {
-      font-size: 7.25vw;
-      padding: 3vw;
-      text-shadow: 0 0 10px rgba(0, 0, 0, .7);
-
-      @include media-breakpoint-up(sm) {
-        font-size: 4vw;
-        padding: 2vw;
-      }
-
-      @include media-breakpoint-up(md) {
-        font-size: 3vw;
-        padding: 1.5vw;
-      }
-
-      @include media-breakpoint-up(lg) {
-        font-size: 2vw;
-      }
-    }
   }
 }

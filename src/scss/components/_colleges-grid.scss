@@ -1,69 +1,142 @@
-.college-grid-item {
-  @extend .col-6;
-  padding-left: 0;
-  padding-right: 0;
+.colleges-grid {
+  @include make-row();
+  background-color: $black;
+  margin-left: 0;
+  margin-right: 0;
+
+  @include media-breakpoint-up(sm) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+// General classes for inner college grid blocks
+.colleges-block,
+.colleges-grid-message {
+  @include make-col-ready();
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
+
+  @include media-breakpoint-up(sm) {
+    padding: 2vw;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding: 1.5vw;
+  }
+}
+
+// Inner block of a college grid
+.colleges-block {
+  @include make-col(6);
   min-height: 50vw;
 
-  @include media-breakpoint-up(md) {
-    -webkit-box-flex: 0;
-    flex: 0 0 33.33333%;
-    min-height: 33vw;
-    max-width: 33.33333%;
-  }
-
-  @include media-breakpoint-up(lg) {
-    -webkit-box-flex: 0;
-    flex: 0 0 25%;
+  @include media-breakpoint-up(sm) {
+    @include make-col(3);
     min-height: 25vw;
-    max-width: 25%;
   }
-
-  @include media-breakpoint-up(xl) {
-    -webkit-box-flex: 0;
-    flex: 0 0 20%;
-    min-height: 20vw;
-    max-width: 20%;
-  }
-}
-
-.college-grid-message {
-  @extend .col-6;
 
   @include media-breakpoint-up(md) {
-    -webkit-box-flex: 0;
-    flex: 0 0 66.66666%;
-    max-width: 66.66666%;
+    @include make-col(4);
+    min-height: 33.333vw;
   }
 
   @include media-breakpoint-up(lg) {
-    -webkit-box-flex: 0;
-    flex: 0 0 75%;
-    max-width: 75%;
+    @include make-col(3);
+    min-height: 25vw;
   }
 
   @include media-breakpoint-up(xl) {
-    -webkit-box-flex: 0;
-    flex: 0 0 40%;
-    max-width: 40%;
+    @include make-col(2);
+    min-height: 16.667vw;
+  }
+
+  // Modify grid block dimensions when a grid message is also present
+  .colleges-grid-message ~ & {
+    @include media-breakpoint-up(xl) {
+      @include make-col(2, 10); // 20%
+      min-height: 20vw;
+    }
   }
 }
 
+// Optional intro message for the college grid
+.colleges-grid-message {
+  @include make-col(12);
+  font-size: $font-size-xs;
+  padding: 1.5rem;
+
+  @include media-breakpoint-up(sm) {
+    @include make-col(9);
+    font-size: 2vw;
+  }
+
+  @include media-breakpoint-up(md) {
+    @include make-col(8);
+    font-size: 1.75vw;
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include make-col(9);
+    font-size: 1.5vw;
+  }
+
+  @include media-breakpoint-up(xl) {
+    @include make-col(4, 10); // 40%
+    font-size: 1vw;
+  }
+}
+
+// Fluid college name text within a college block
+.colleges-block-text {
+  display: block;
+  font-size: 7.25vw;
+  line-height: .9;
+  text-shadow: 0 0 10px rgba(0, 0, 0, .7);
+
+  @include media-breakpoint-up(sm) {
+    font-size: 3.75vw;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 4vw;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 3.25vw;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 2.5vw;
+  }
+}
+
+// Optional heading to use within college grid intro message.
+//
+// NOTE: Heading font family/size are opinionated due to how Athena applies
+// family-specific font size overrides to headings, which prevent us from using
+// this class with font-family utility classes (e.g. .font-condensed).
 .colleges-grid-heading {
-  font-size: 3vw !important;
+  font-family: $font-family-condensed;
+  font-size: $font-size-h2;
+  font-weight: normal;
+  line-height: .95;
+  text-transform: uppercase;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 4vw;
+  }
 
   @include media-breakpoint-up(md) {
-    font-size: 1.3rem !important;
+    font-size: 5vw;
   }
 
   @include media-breakpoint-up(lg) {
-    font-size: 2.3rem !important;
+    font-size: 4vw;
   }
-}
 
-.colleges-grid-content {
-  font-size: 2vw;
-
-  @include media-breakpoint-up(md) {
-    font-size: .8rem;
+  @include media-breakpoint-up(xl) {
+    font-size: 3vw;
   }
 }

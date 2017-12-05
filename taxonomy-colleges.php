@@ -98,7 +98,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 							Top College Degrees <span class="fa fa-chevron-circle-down" aria-hidden="true"></span>
 						</a>
 						<div id="top-degree-collapse" class="collapse d-lg-block">
-							<ul class="top-majors-list list-unstyled">
+							<ul class="top-majors-list nav flex-column align-items-start list-unstyled pl-3">
 								<?php echo display_top_degrees( $term ); // located in functions.php ?>
 							</ul>
 						</div>
@@ -114,19 +114,15 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 	<?php endif; ?>
 	<section class="section-news">
 		<div class="container my-5">
-			<div class="row">
-				<div class="col-lg-8">
-					<h2><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : $term->name . " News"; ?></h2>
+			<div class="row justify-content-between align-items-end">
+				<div class="col-auto">
+					<h2 class="mb-0"><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : $term->name . " News"; ?></h2>
 				</div>
-				<div class="col-lg-4">
-					<a href="https://today.ucf.edu/topic/<?php echo $news_topic; ?>" class="more-stories float-lg-right text-uppercase text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<hr class="mt-0">
+				<div class="col-auto">
+					<a href="https://today.ucf.edu/topic/<?php echo $news_topic; ?>" class="h6 text-uppercase d-block mb-0 mt-2 text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
 				</div>
 			</div>
+			<hr class="mt-2">
 			<div class="row">
 				<div class="col-md-8 col-sm-12">
 					<?php echo do_shortcode( '[ucf-news-feed title="" layout="modern" topics="' . $news_topic . '"]' ); ?>
@@ -154,12 +150,12 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 			<h2 class="section-heading h3 m-0 text-uppercase font-weight-bold font-condensed">University of Central Florida Colleges</h2>
 			</div>
 		</div>
-		<div class="d-flex flex-wrap">
+		<div class="colleges-grid">
 			<?php foreach( $colleges as $index=>$college ) :
 				if( $college->slug !== $term->slug ) : ?>
-					<a class="college-block d-flex media-background-container text-inverse hover-text-inverse text-decoration-none" href="../<?php echo $college->slug; ?>">
+					<a class="colleges-block media-background-container text-inverse hover-text-inverse text-decoration-none justify-content-end" href="../<?php echo $college->slug; ?>">
 						<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id); ?>" alt="<?php echo $college->name; ?>">
-						<span class="college-block-text align-self-end pointer-events-none h5 font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
+						<span class="colleges-block-text pointer-events-none font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
 					</a>
 			<?php
 				endif;
