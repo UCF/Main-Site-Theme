@@ -12,6 +12,7 @@ These plugins *must* be activated for the theme to function properly, and/or to 
 * Advanced Custom Fields PRO
 * Athena Gravity Forms
 * Gravity Forms
+* Redirection
 * UCF Alert Plugin
 * UCF College Custom Taxonomy
 * UCF Degree Custom Post Type
@@ -55,6 +56,7 @@ These plugins add desirable features, some of which are environment-specific for
 * Import field groups (`dev/acf-fields.json`) using the ACF importer under Custom Fields > Tools.
 * Ensure that webfonts have been properly configured to a [Cloud.Typography](https://www.typography.com/cloud/welcome/) CSS Key that [allows access to your environment](https://dashboard.typography.com/user-guide/managing-domains).
 * Create and set a static front page under Settings > Reading.
+* Create a redirect group with at least 1 redirect rule in the Redirection plugin for the Main Site/Alert Switchover.
 
 
 ## Development
