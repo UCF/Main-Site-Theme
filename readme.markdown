@@ -7,6 +7,7 @@ Theme built off of Generic Bootstrap to convert UCF.edu into a responsive WordPr
 * Gravity Forms
 * Varnish Dependency Purger
 * UCF News Plugin (2.0.0+)
+* Redirection
 
 ## Recommended Plugins
 * WordPress SEO
@@ -24,6 +25,7 @@ WordPress 4.2 is required (primarly for access to wp-a11y accessibility script).
 * In Theme Options > Search, 'Enable Google Search' should be set to 'Off'.
 * Make sure that the 'Feed URL' and 'More Information URL' Theme Options are set.
 * In Appearance > Widgets, remove any existing widgets from 'Left Sidebar' (or 'Right Sidebar', if there are any.)
+* Make sure a redirect group with at least 1 redirect rule has been set up in the Redirection plugin for the Main Site/Alert Switchover.
 
 
 ## Deployment
