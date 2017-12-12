@@ -28,6 +28,7 @@ bower_components
 src/components/*
 gulp-config.json
 typings
+.sass-cache/
 
 # debug files
 npm-debug.log

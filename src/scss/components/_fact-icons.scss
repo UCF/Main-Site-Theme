@@ -1,0 +1,84 @@
+.fact-grid-wrap {
+  overflow: hidden;
+  padding: 0;
+
+  &.container {
+    @include media-breakpoint-down(xs) {
+      width: calc(100% - #{$grid-gutter-width-base});
+    }
+  }
+}
+
+.fact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  // Hide superfluous border
+  margin-bottom: -$border-width * 2; // Double $border-width to avoid browser-specific rendering inconsistencies/flicker
+  margin-left: 0;
+  margin-right: -$border-width * 2;
+}
+
+// Wrapper element that surrounds fact graphic/text and description
+.fact-block {
+  $p-4: map-get($spacers, 4);
+
+  border-bottom: $border-width dotted;
+  border-right: $border-width dotted;
+  padding-bottom: $spacer-y;
+  padding-top: $spacer-y;
+  text-align: center;
+
+  @include media-breakpoint-up(sm) {
+    padding-left: $spacer-x;
+    padding-right: $spacer-x;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: map-get($p-4, y);
+    padding-left: map-get($p-4, x);
+    padding-right: map-get($p-4, x);
+    padding-top: map-get($p-4, y);
+  }
+
+  // Assign a default width to fact blocks that don't attempt to utilize Athena
+  // columns or width utilities
+  &:not(.col):not([class*=" col-"]):not([class^="col-"]):not([class^="w-"]):not([class*=" w-"]) {
+    flex: 0 0 100%;
+
+    @include media-breakpoint-up(sm) {
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+  }
+}
+
+// General class for a fact's header (fact text or icon)
+.fact-header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Class that sets a fixed height on fact headers, intended for use with
+// large icons and/or text to enforce equal heights across blocks
+.fact-header-lg {
+  margin-bottom: $spacer-y;
+
+  @include media-breakpoint-up(sm) {
+    height: 80px;
+  }
+
+  @include media-breakpoint-up(md) {
+    height: 125px;
+  }
+}
+
+// Specific class for img-based fact graphics (not text)
+.fact-header-icon {
+  @include media-breakpoint-down(xs) {
+    height: 25vw;
+  }
+}

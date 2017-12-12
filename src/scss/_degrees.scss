@@ -1,0 +1,41 @@
+.degree-promo {
+  border: 1px solid $brand-complementary;
+  display: inline-block;
+  padding: 0;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.degree-promo-icon,
+.degree-promo-text {
+  display: inline-block;
+  float: left;
+  font-weight: 400;
+  line-height: 1.42857;
+  margin-bottom: -1px;
+  position: relative;
+  text-align: center;
+}
+
+.degree-promo-icon {
+  background: $brand-complementary;
+  color: $white;
+  font-size: 2rem;
+  padding: .33rem .75rem;
+  width: 20%;
+
+  @include media-breakpoint-down(md) {
+    font-size: 1.75rem;
+    padding: 10px 12px;
+  }
+}
+
+.degree-promo-text {
+  padding: 1.1rem .4rem;
+  width: 80%;
+
+  @include media-breakpoint-down(md) {
+    font-size: .75rem;
+  }
+}

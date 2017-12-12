@@ -1,135 +1,78 @@
-
-// News Modern theme
-// NOTE: .ucf-news-modern is still included here (along with some redundant
-// styles already provided by the UCF News plugin) to maintain styles for
-// news items added to page contents manually (e.g. IGNITE campaign links).
-.ucf-news.modern,
-.ucf-news-modern {
+//
+// Classic layout
+//
+.ucf-news.classic {
   .ucf-news-item {
-    display: table;
-    margin-bottom: 30px;
-    margin-left: ($grid-gutter-width / 2) * -1;
-    padding: $grid-gutter-width / 2;
-    width: calc(100% + #{$grid-gutter-width});
+    @extend .media;
+    margin-bottom: $grid-gutter-width-base;
+  }
 
-    &:hover {
-      background-color: $gray-lighter;
+  .ucf-news-thumbnail {
+    display: flex;
+    margin-right: $spacer-x;
+
+    .ucf-news-thumbnail-image {
+      align-self: center; // fix img stretching in Chrome
+      border-radius: 0;
+      flex-shrink: 0; // fix img stretching in IE11
     }
   }
 
-  .ucf-news-thumbnail,
-  .ucf-news-item-content {
-    display: table-cell !important;
-    vertical-align: top;
-  }
+  .ucf-news-item-title {
+    @extend .media-body;
+    line-height: 1.4;
 
-  .ucf-news-item-content {
-    width: auto !important;
+    a {
+      color: inherit;
+    }
   }
+}
 
-  // Die, link borders!
-  .ucf-news-thumbnail,
-  .ucf-news-item-link {
-    &,
-    &:hover,
-    &:active,
-    &:focus {
-      border-bottom: 0 solid transparent !important;
+//
+// Modern layout
+//
+.ucf-news.modern {
+  .ucf-news-item {
+    margin-left: -$grid-gutter-width-base / 2;
+    margin-right: -$grid-gutter-width-base / 2;
+
+    a {
+      @extend .media;
     }
   }
 
   .ucf-news-thumbnail {
-    width: 66px !important;
-
-    @media (min-width: $screen-sm-min) {
-      width: 150px !important;
-    }
-
-    + .ucf-news-item-content {
-      padding-left: 15px;
-    }
+    display: flex;
+    margin-right: $spacer-x;
   }
 
   .ucf-news-thumbnail-image {
-    height: auto;
-    width: 100%;
+    align-self: center; // fix img stretching in Chrome
+    flex-shrink: 0; // fix img stretching in IE11
   }
 
-  .ucf-news-section-title,
-  .ucf-news-item-label {
-    @include gotham(7);
-    background-color: $ucf-gold;
-    color: $black;
-    display: inline-block;
-    font-size: 10px;
-    letter-spacing: 2px;
-    margin: 0 0 10px;
-    padding: 2px 15px;
-    text-transform: uppercase;
+  .ucf-news-item-content {
+    @extend .media-body;
+  }
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 11px;
-    }
+  .ucf-news-section-title {
+    @extend .badge;
+    @extend .badge-primary;
+    margin-bottom: .75rem;
+    text-align: left;
+    white-space: normal;
   }
 
   .ucf-news-item-title {
-    @include gotham(7);
-    font-size: 15px;
-    line-height: 1.25;
-    margin: 0 0 10px !important;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 20px;
-    }
-  }
-
-  .ucf-news-item-link,
-  .ucf-news-item > a {
-    &,
-    &:hover,
-    &:active,
-    &:focus {
-      color: $black !important;
-      text-decoration: none !important;
-    }
+    @extend .h5;
+    color: $brand-secondary;
   }
 
   .ucf-news-item-excerpt {
-    @include gotham(4);
-    font-size: 12px;
-    line-height: 1.65;
-    margin-bottom: 0 !important;
+    font-size: $font-size-xs;
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 14px;
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-sm;
     }
   }
-}
-
-// News Text theme
-.ucf-news-text {
-
-  .ucf-news-item-title {
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-
-  .ucf-news-item-link {
-    border-bottom: 1px solid $gray-dark;
-    color: $gray-dark;
-    font-size: 12px;
-    font-weight: 400;
-
-    &:hover {
-      border-bottom: 1px solid #e50606;
-      color: #e50606;
-      text-decoration: none;
-    }
-  }
-}
-
-.rssbtn {
-    float: none;
-    margin-right: 5px;
-    margin-bottom: 30px;
 }

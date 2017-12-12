@@ -1,131 +1,202 @@
-// Desktop nav
-#header-menu {
-  @include center-block();
-  margin-bottom: 20px;
-  margin-top: 20px;
+.header-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
 
-  li {
-    @media (max-width: $screen-sm-max) {
-      padding: 0;
+.header-content-flexfix {
+  // Reset flex rules so that child elements behave more predictably
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.header-content-inner {
+  width: 100%;
+
+  .container {
+    @include media-breakpoint-down(xs) {
+      width: 100%;
+    }
+  }
+}
+
+.header-media {
+  height: 100%;
+  position: relative;
+
+  @include media-breakpoint-down(xs) {
+    min-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
+  }
+}
+
+.header-media-default {
+  @include media-breakpoint-up(sm) {
+    min-height: 500px;
+  }
+}
+
+.header-media-fullscreen {
+  @include media-breakpoint-up(sm) {
+    min-height: calc(90vh - #{$ucf-header-height});
+  }
+}
+
+.header-media-background-wrap {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.header-media-background {
+  height: 100%;
+  width: 100%;
+}
+
+.header-title {
+  display: block;
+  font-family: $font-family-slab-serif;
+  font-size: 8.75vw;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+  padding: .5rem .75rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 2.75rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 3.25rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 4.25rem;
+    padding-bottom: .75rem;
+    padding-top: .75rem;
+  }
+}
+
+.header-subtitle {
+  display: block;
+  font-family: $font-family-slab-serif;
+  font-size: 4.25vw;
+  font-weight: 400;
+  line-height: $line-height-base;
+  margin: 0;
+  padding: .25rem .75rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 1.25rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 1.4rem;
+    padding-bottom: .5rem;
+    padding-top: .5rem;
+  }
+
+  .weather.theme-default {
+    color: $white;
+
+    .wi {
+      color: $brand-primary;
+    }
+  }
+}
+
+.header-gradient {
+  @include gradient-y(rgba($black, .5), transparent);
+}
+
+.navbar-custom {
+  z-index: 3;
+
+  .navbar-toggler.collapsed {
+    .navbar-toggler-text {
+      text-shadow: $nav-text-shadow;
     }
   }
 
-  a {
-    color: #262626;
-    font-size: 17px;
-    font-weight: 400;
-    padding: 7px;
-
-    @media (max-width: $screen-sm-max) {
-      font-size: 14.25px !important;
+  // Selector depth required to match Bootstrap/Athena selectors
+  // scss-lint:disable NestingDepth SelectorDepth
+  .navbar-collapse {
+    @include media-breakpoint-down(md) {
+      background-color: transparentize(darken($brand-default, 25%), .025);
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: $nav-height;
+      z-index: 1;
     }
 
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: #000;
-      color: #fc0;
-      text-decoration: none;
+    @include media-breakpoint-down(xs) {
+      left: -$navbar-padding-x;
+      right: -$navbar-padding-x;
     }
-  }
 
-  a[href]:after {
-    @media print {
-      content: '';
+    &.collapse.show,
+    &.collapsing {
+      border-top: 0 solid transparent;
     }
   }
 
-  .last {
-    height: 25px;
-
-    &:after {
-      content: '' !important;
+  .navbar-nav {
+    @include media-breakpoint-down(md) {
+      margin-left: 0;
+      margin-right: 0;
+      padding: $grid-gutter-width-base / 2;
     }
 
-    a {
-      background-color: #fc0;
-      background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-      cursor: pointer;
-      display: inline-block;
-      font-family: Verdana, Geneva, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 1.42857143;
-      margin-bottom: 0;
-      margin-top: -5px;
-      padding: 4px 12px;
-      text-align: center;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      vertical-align: middle;
-      white-space: nowrap;
+    @include media-breakpoint-up(lg) {
+      width: 100%;
+    }
 
-      @media (min-width: $screen-md-min) {
-        @include body-prefix('.ie9') {
-          top: 1px;
-        }
-      }
+    .nav-link {
+      text-shadow: $nav-text-shadow;
 
-      @media (max-width: $screen-sm-max) {
-        font-size: 11px !important;
+      @include media-breakpoint-only(lg) {
+        font-size: .7rem;
       }
 
       &:hover,
-      &:active,
-      &:focus {
-        background-color: #000;
-        color: #fff;
+      &:active {
+        background-color: rgba(0, 0, 0, .9);
+        color: $white;
+      }
+    }
+
+    .nav-item:last-child {
+      @include media-breakpoint-up(lg) {
+        margin-right: -$grid-gutter-width-base;
+      }
+
+      .nav-link {
+        background-color: $brand-primary;
+        color: $black;
+        text-shadow: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: $black;
+          color: $white;
+        }
       }
     }
   }
+  // scss-lint:enable NestingDepth SelectorDepth
 }
 
-.no_nav_separator:after {
-  content: '' !important;
-}
-
-
-// Mobile nav
-#site-nav-xs {
-  border-radius: 4px;
-  margin: 10px 0 20px;
-
-  .navbar-brand {
-    color: #fff;
-    font-family: $font-family-serif, serif;
-    font-size: 20px;
-  }
-}
-
-#header-menu-xs {
-  font-family: $font-family-serif, serif;
-
-  li {
-    margin-bottom: 0;
-  }
-
-  a {
-    font-size: 14px;
-    font-weight: bold;
-  }
-
-  .last {
-    text-align: center;
-
-    a {
-      background-color: #fc0;
-      border-radius: 4px;
-      color: #000;
-      font-family: Verdana, Geneva, sans-serif;
-      font-size: 11px;
-      margin: 10px 15px;
-      padding: 6px 15px;
-    }
+// Pushes .header-content up enough to prevent overlap with the
+// media background's video controls.
+.header-media-controlfix {
+  @include media-breakpoint-up(sm) {
+    height: 4.5rem;
+    pointer-events: none;
   }
 }

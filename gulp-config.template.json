@@ -1,4 +1,4 @@
 {
   "sync": false,
-  "syncTarget": "http://localhost/"
+  "syncTarget": "http://localhost/wordpress/main-site/"
 }

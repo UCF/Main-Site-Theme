@@ -1,39 +1,36 @@
-$icon-font-path: '../../static/fonts/bootstrap/';
-$fa-font-path:   '../../static/fonts/font-awesome/';
-$wi-path: '../../static/fonts/weather-icons/';
+$fa-font-path: '../fonts/font-awesome';
 
-// Custom variables
-$ucf-header-height: 50px;
+$line-height-base: 1.65;
 
-$black: #000 !default;
-$white: #fff !default;
-$ucf-gold: #ffc904 !default;
-$ucf-gold-light: #ffeb9b !default;
-$ucf-gold-lighter: #fdf9e8 !default;
-$ucf-gold-dark: #b18e00 !default;
-$ucf-gold-darker: #a68500 !default;
-$ucf-gold-darkest: #786000 !default;
-$ucf-metal-gold: #c90 !default;
-$ucf-athletics-gold: #bc9a36 !default;
-$ucf-athletics-gold-light: #eee6cd !default;
-$footer-gray: #3e3e3e !default;
-$footer-gray-light: #d4d4d4 !default;
+$blockquote-small-color:  inherit;
+$blockquote-font-size:    1.1rem;
+$blockquote-font-size-md: 1.875rem;
+$font-serif-blockquote-size:         $blockquote-font-size * 1.2;
+$font-serif-blockquote-size-md:      $blockquote-font-size-md * 1.14;
+$font-slab-serif-blockquote-size:    $blockquote-font-size * 1.25;
+$font-slab-serif-blockquote-size-md: $blockquote-font-size-md * 1.2;
+$font-serif-blockquote-line-height:  1.4;
+$blockquote-line-height:             1.6;
 
-// Custom variable aliases:
-$ucf-bg-default: $ucf-gold !default;
-$ucf-bg-highlight: $ucf-metal-gold !default;
-$ucf-col-default: $black !default;
-$ucf-col-highlight: $white !default;
+$small-font-size: 70% !default;
 
-// Font overrides
-$font-family-serif: Georgia, serif;
-$font-family-base: $font-family-serif;
-$font-size-base: 13px;
-$font-size-h1: 30px;
-$font-size-h2: 24px;
-$font-size-h3: 15px;
-$font-size-h4: 14px;
-$font-size-h5: 12px;
-$font-size-h6: 11px;
-$headings-font-weight: 600;
-$blockquote-font-size: $font-size-base;
+
+$header-img-xs-width: 575px;
+$header-img-xs-height: 575px;
+
+$nav-height: 4.35rem;
+$nav-height-md: 6rem;
+$nav-text-shadow: 0 1px 0 rgba(0, 0, 0, .25);
+
+$text-shadow-hard-length: 0 1px 0;
+$text-shadow-soft-length: 0 0 .2em;
+$text-shadow-color: rgba(0, 0, 0, 1);
+$text-shadow-color-inverse: rgba(255, 255, 255, .75);
+
+$box-shadow-hard-length: $text-shadow-hard-length;
+$box-shadow-soft-length: .5em .5em 1em;
+$box-shadow-color: rgba(0, 0, 0, .325);
+$box-shadow-color-inverse: $text-shadow-color-inverse;
+
+$rotate-left: rotate(-5deg);
+$rotate-right: rotate(5deg);

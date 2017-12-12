@@ -1,65 +1,118 @@
-// Events Widget
-.events_icons {
-  margin-bottom: 20px;
-  overflow: hidden;
-  width: 100%;
+//
+// Classic layout
+//
+.ucf-events-classic {
+
+  .ucf-event-when,
+  .ucf-event-content {
+    padding-bottom: $grid-gutter-width-base;
+  }
+
+  .ucf-event-start-datetime {
+    border: 1px solid;
+    border-radius: $border-radius-lg;
+    display: block;
+    text-align: center;
+  }
+
+  .ucf-event-start-month,
+  .ucf-event-start-date {
+    display: block;
+  }
+
+  .ucf-event-start-month {
+    border-top-left-radius: $border-radius-lg;
+    border-top-right-radius: $border-radius-lg;
+    font-weight: bold;
+    padding-top: .15rem;
+    text-transform: uppercase;
+  }
+
+  .ucf-event-start-date {
+    font-size: 1.65rem;
+    line-height: 1.2;
+    padding-bottom: .15rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .ucf-event-content {
+    line-height: 1.4;
+  }
+
+  .ucf-event-link {
+    color: inherit;
+  }
+
+  .ucf-event-title {
+    font-size: $font-size-base;
+
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-base-md;
+    }
+  }
+
+  .ucf-event-time {
+    display: block;
+    font-style: italic;
+    padding-top: .5rem;
+  }
+
+  .ucf-event-start-time,
+  .ucf-event-end-time {
+    display: inline;
+  }
 }
 
-.events {
-  a {
-    color: #000;
+//
+// Modern layouts
+//
+.ucf-events-modern,
+.ucf-events-modern-nodesc {
 
-    &:hover {
-      color: #990000;
-      text-decoration: underline;
+  .ucf-event-row-margin {
+    @include media-breakpoint-down(sm) {
+      margin-bottom: .5rem;
     }
   }
 
-  thead {
-    font-weight: bold;
-
-    td {
-      text-align: center;
+  .ucf-event-when {
+    @include media-breakpoint-up(md) {
+      margin-bottom: .5rem;
     }
   }
 
-  tbody {
-    tr:nth-child(2n+1) td,
-    tr:nth-child(2n+1) th {
-      background-color: #FFFDF4 !important;
-      border-top: 1px solid #F9DD8C;
+  .ucf-event-start-date,
+  .ucf-event-start-time,
+  .ucf-event-title {
+    @extend .h5;
+  }
+
+  .ucf-event-start-date,
+  .ucf-event-start-time {
+    color: $brand-default;
+
+    *[class*='bg-inverse'] & {
+      color: $brand-primary;
     }
   }
 
-  &.table th,
-  &.table td {
-    border-top: 1px solid #F9DD8C;
+  .ucf-event-start-time {
+
+    &::before {
+      content: ' - ';
+    }
   }
 
-  .date {
-    width: 70px;
+  .ucf-event-title {
+    color: inherit;
   }
 
-  .dtstart {
-    border-bottom: 0 solid transparent;
-    font-size: 12px;
-  }
+  .ucf-event-description-wrapper {
+    font-size: $font-size-xs;
 
-  .summary,
-  .location {
-    width: 100%;
-  }
-
-  .summary {
-    padding-bottom: 2px;
-  }
-
-  .location a,
-  .location a:hover {
-    border-bottom: 0 solid transparent;
-    color: #363636;
-    font-size: 10px;
-    line-height: 14px;
-    text-transform: uppercase;
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-sm;
+    }
   }
 }

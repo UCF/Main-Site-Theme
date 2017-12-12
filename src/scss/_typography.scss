@@ -1,0 +1,37 @@
+.nav-link {
+  line-height: 1.25;
+}
+
+.list-chevrons {
+  margin-bottom: 2em;
+  padding: 0;
+
+  @include media-breakpoint-up(lg) {
+    padding-left: .6em;
+  }
+
+  li {
+    list-style: none;
+
+    @include media-breakpoint-up(lg) {
+      display: inline-block;
+    }
+
+    &::before {
+      color: $ucf-gold;
+      content: '';
+      display: inline-block;
+      font: normal normal normal 14px/1 FontAwesome;
+      font-size: .8em;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1;
+      text-rendering: auto;
+      width: 1.25em;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

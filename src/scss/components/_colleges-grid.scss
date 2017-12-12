@@ -1,162 +1,142 @@
-.college-blocks {
-  overflow: auto;
-  background: $ucf-gold;
+.colleges-grid {
+  @include make-row();
+  background-color: $black;
+  margin-left: 0;
+  margin-right: 0;
 
-  br {
-    display: none;
+  @include media-breakpoint-up(sm) {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
-.college-block {
-  width: 50%;
-  float: left;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: -1px;
+// General classes for inner college grid blocks
+.colleges-block,
+.colleges-grid-message {
+  @include make-col-ready();
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
 
-  @media (min-width: $screen-sm-min) {
-    width: calc(100%/3);
+  @include media-breakpoint-up(sm) {
+    padding: 2vw;
   }
 
-  @media (min-width: $screen-md-min) {
-    width: calc(100%/4);
+  @include media-breakpoint-up(md) {
+    padding: 1.5vw;
+  }
+}
+
+// Inner block of a college grid
+.colleges-block {
+  @include make-col(6);
+  min-height: 50vw;
+
+  @include media-breakpoint-up(sm) {
+    @include make-col(3);
+    min-height: 25vw;
   }
 
-  @media (min-width: $screen-lg-min) {
-    width: calc(100%/5);
+  @include media-breakpoint-up(md) {
+    @include make-col(4);
+    min-height: 33.333vw;
   }
 
-  .college-block-img {
-    width: 100%;
-    transition: -webkit-filter .3s;
-    transition: filter .3s;
-    transition: filter .3s, -webkit-filter .3s;
-    z-index: 0;
-
-    -webkit-filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
-    filter: grayscale(1) sepia(.15) contrast(.65) brightness(.65);
+  @include media-breakpoint-up(lg) {
+    @include make-col(3);
+    min-height: 25vw;
   }
 
-  .college-block-text {
-    @include knockout();
-    font-style: normal;
-    font-weight: 400;
-    bottom: 0;
-    color: $white;
-    display: block;
-    font-size: 7.25vw;
-    left: 0;
-    line-height: 1;
-    padding: 3vw;
-    position: absolute;
-    text-shadow: 0 0 10px transparent;
-    text-transform: uppercase;
-    transition: text-shadow .3s;
-    text-shadow: 0 0 10px rgba(0,0,0,.7);
+  @include media-breakpoint-up(xl) {
+    @include make-col(2);
+    min-height: 16.667vw;
+  }
 
-    @media (min-width: $screen-sm-min) {
-      font-size: 4vw;
-      padding: 2vw;
-    }
-
-    @media (min-width: $screen-md-min) {
-      font-size: 3vw;
-      padding: 1.5vw;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      font-size: 2vw;
-      padding: 1.5vw;
+  // Modify grid block dimensions when a grid message is also present
+  .colleges-grid-message ~ & {
+    @include media-breakpoint-up(xl) {
+      @include make-col(2, 10); // 20%
+      min-height: 20vw;
     }
   }
 }
 
-.college-block:hover .college-block-img {
-  -webkit-filter: none;
-  filter: none;
+// Optional intro message for the college grid
+.colleges-grid-message {
+  @include make-col(12);
+  font-size: $font-size-xs;
+  padding: 1.5rem;
+
+  @include media-breakpoint-up(sm) {
+    @include make-col(9);
+    font-size: 2vw;
+  }
+
+  @include media-breakpoint-up(md) {
+    @include make-col(8);
+    font-size: 1.75vw;
+  }
+
+  @include media-breakpoint-up(lg) {
+    @include make-col(9);
+    font-size: 1.5vw;
+  }
+
+  @include media-breakpoint-up(xl) {
+    @include make-col(4, 10); // 40%
+    font-size: 1vw;
+  }
 }
 
-.college-block.context-block {
-  background: $ucf-gold;
-  color: $black;
+// Fluid college name text within a college block
+.colleges-block-text {
+  display: block;
+  font-size: 7.25vw;
+  line-height: .9;
+  text-shadow: 0 0 10px rgba(0, 0, 0, .7);
 
-  @media (min-width: $screen-sm-min) {
-    width: calc(100%/3*2);
+  @include media-breakpoint-up(sm) {
+    font-size: 3.75vw;
   }
 
-  @media (min-width: $screen-md-min) {
-    width: calc(100%/4*3);
+  @include media-breakpoint-up(md) {
+    font-size: 4vw;
   }
 
-  @media (min-width: $screen-lg-min) {
-    width: calc(100%/5*2);
+  @include media-breakpoint-up(lg) {
+    font-size: 3.25vw;
   }
 
-  .college-block-head {
-    @include knockout();
+  @include media-breakpoint-up(xl) {
+    font-size: 2.5vw;
+  }
+}
 
-    position: relative;
-    line-height: 1.25;
-    width: 85%;
+// Optional heading to use within college grid intro message.
+//
+// NOTE: Heading font family/size are opinionated due to how Athena applies
+// family-specific font size overrides to headings, which prevent us from using
+// this class with font-family utility classes (e.g. .font-condensed).
+.colleges-grid-heading {
+  font-family: $font-family-condensed;
+  font-size: $font-size-h2;
+  font-weight: normal;
+  line-height: .95;
+  text-transform: uppercase;
 
-    text-shadow: none !important;
-    bottom: 0;
-    color: $white;
-    display: block;
-    left: 0;
-    line-height: 1;
-    padding: 2.5vw 2.5vw 0 2.5vw;
+  @include media-breakpoint-up(sm) {
+    font-size: 4vw;
+  }
 
-    text-transform: uppercase;
-    color: $black;
+  @include media-breakpoint-up(md) {
+    font-size: 5vw;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 4vw;
+  }
+
+  @include media-breakpoint-up(xl) {
     font-size: 3vw;
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 5vw;
-    }
-
-    @media (min-width: $screen-md-min) {
-      font-size: 5vw;
-    }
-
-    @media (min-width: $screen-lg-min) {
-      font-size: 2.75vw;
-    }
-  }
-
-  .college-block-text {
-    @include gotham();
-
-    position: relative;
-    width: 100%;
-    text-shadow: none !important;
-    bottom: 0;
-    display: block;
-    left: 0;
-    padding: 1vw 2.5vw 0 2.5vw;
-    text-transform: none;
-    line-height: 1.65;
-    color: $black;
-    font-size: 10px;
-
-    p {
-      margin-bottom: 0;
-    }
-
-    @media (min-width: 576px) {
-      font-size: 14px;
-    }
-
-    @media (min-width: $screen-sm-min) {
-      font-size: 16px;
-    }
-
-    @media (min-width: $screen-md-min) {
-      font-size: 14px;
-    }
-
-    @media (min-width: 2000px) {
-      font-size: 20px;
-    }
   }
 }

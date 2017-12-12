@@ -1,0 +1,85 @@
+.staff-list {
+  li {
+    border-bottom: 1px solid $gray-lightest;
+    border-right: 0;
+    padding: 2px 16px;
+
+    @include media-breakpoint-up(sm) {
+      border-right: 1px solid $gray;
+
+      &:nth-child(2n) {
+        border-right: 0;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+      border-right: 1px solid $gray;
+
+      &:nth-child(2n) {
+        border-right: 1px solid $gray;
+      }
+
+      &:nth-child(3n) {
+        border-right: 0;
+      }
+    }
+  }
+
+  .email,
+  .name {
+    display: block;
+    float: none;
+
+    @include media-breakpoint-up(lg) {
+      display: inline-block;
+      float: left;
+    }
+  }
+
+  .phone {
+    display: block;
+    float: none;
+    padding-bottom: .25rem;
+
+    @include media-breakpoint-up(lg) {
+      display: inline-block;
+      float: right;
+    }
+  }
+}
+
+.phonebook-results {
+  font-size: .9rem;
+
+  .toggle {
+    &:not(.collapsed) {
+      .fa-plus {
+        display: none;
+      }
+    }
+
+    &.collapsed {
+      .fa-minus {
+        display: none;
+      }
+    }
+  }
+
+  .email,
+  .phone {
+    text-overflow: ellipsis;
+  }
+}
+
+.result {
+  border-bottom: 1px solid $gray;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  .name {
+    font-size: .95rem;
+   font-weight: 700;
+  }
+}
