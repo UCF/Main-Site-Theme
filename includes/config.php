@@ -26,10 +26,10 @@ function __init__() {
 	add_theme_support( 'title-tag' );
 
 	add_image_size( 'header-img', 575, 575, true );
-	add_image_size( 'header-img-sm', 767, 400, true );
-	add_image_size( 'header-img-md', 991, 400, true );
-	add_image_size( 'header-img-lg', 1199, 400, true );
-	add_image_size( 'header-img-xl', 1600, 400, true );
+	add_image_size( 'header-img-sm', 767, 500, true );
+	add_image_size( 'header-img-md', 991, 500, true );
+	add_image_size( 'header-img-lg', 1199, 500, true );
+	add_image_size( 'header-img-xl', 1600, 500, true );
 	add_image_size( 'bg-img', 575, 2000, true );
 	add_image_size( 'bg-img-sm', 767, 2000, true );
 	add_image_size( 'bg-img-md', 991, 2000, true );
