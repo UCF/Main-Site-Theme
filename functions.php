@@ -22,7 +22,7 @@ function display_top_degrees( $term ) {
 	$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
 	if( $top_degrees ) :
 		foreach( $top_degrees as $top_degree ) :
-			$ret .= '<li><a href="' . $top_degree->post_name . '" class="text-inverse nav-link">' . $top_degree->post_title . '</a></li>';
+			$ret .= '<li><a href="' . get_permalink( $top_degree->ID ) . '" class="text-inverse nav-link">' . $top_degree->post_title . '</a></li>';
 		endforeach;
 	endif;
 

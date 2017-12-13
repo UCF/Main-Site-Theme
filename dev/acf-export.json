@@ -297,10 +297,10 @@
                     "id": ""
                 },
                 "choices": {
-                    "Bachelor’s Degrees": "Bachelor’s Degrees",
-                    "Graduate Degrees": "Graduate Degrees",
-                    "Minors": "Minors",
-                    "Certificates": "Certificates"
+                    "undergraduate-degree": "Undergraduate Degrees",
+                    "master": "Graduate Degrees",
+                    "minor": "Minors",
+                    "certificate": "Certificates"
                 },
                 "allow_custom": 0,
                 "save_custom": 0,
