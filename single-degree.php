@@ -46,7 +46,7 @@
 					</a>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $post_meta['degree_website'] ) ) : ?>
+			<?php if ( isset( $post_meta['degree_website'] ) && ! empty ( $post_meta['degree_website'] ) ) : ?>
 				<div class="col-sm-6">
 					<a class="degree-promo" href="<?php echo $post_meta['degree_website']; ?>">
 						<span class="degree-promo-icon fa fa-external-link-square w-20"></span>
