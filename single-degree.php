@@ -36,7 +36,7 @@
 				<?php echo apply_filters( 'the_content', $post_meta['degree_description'] ); ?>
 			</div>
 			<div class="row">
-			<?php if ( isset( $post_meta['degree_pdf'] ) ) : ?>
+			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
 				<div class="col-sm-6">
 					<a class="degree-promo mb-4 mb-sm-0" href="<?php echo $post_meta['degree_pdf']; ?>">
 						<span class="degree-promo-icon fa fa-file-pdf-o w-20"></span>
@@ -46,7 +46,7 @@
 					</a>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $post_meta['degree_website'] ) ) : ?>
+			<?php if ( isset( $post_meta['degree_website'] ) && ! empty ( $post_meta['degree_website'] ) ) : ?>
 				<div class="col-sm-6">
 					<a class="degree-promo" href="<?php echo $post_meta['degree_website']; ?>">
 						<span class="degree-promo-icon fa fa-external-link-square w-20"></span>

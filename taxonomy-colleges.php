@@ -11,8 +11,9 @@ $stats_background = get_field( 'stats_background_image', 'colleges_' . $term->te
 // Degree
 $degree_title = get_field( 'degree_search_title', 'colleges_' . $term->term_id );
 $degree_copy = get_field( 'degree_search_copy', 'colleges_' . $term->term_id );
-$degree_search_url = "https://www.ucf.edu/degree-search/?program-type[0]=undergraduate-degree&amp;college[0]=" . get_field( 'degree_search_parameter', 'colleges_' . $term->term_id ) . "&amp;sort-by=title&amp;default=0&amp;offset=0&amp;search-default=0";
+$degree_search_url = "https://www.ucf.edu/degree-search/#!/college/" . $term->slug . "/";
 $degree_types = get_field( 'degree_types_available', 'colleges_' . $term->term_id );
+$degree_types = map_degree_types( $degree_types );
 // CTA
 $cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id );
 // News
@@ -80,8 +81,8 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 						<?php
 							ob_start();
 							if( $degree_types ) :
-								foreach( $degree_types as $degree_type ) : ?>
-									<li><a href="<?php echo $degree_search_url; ?>" class="text-inverse"><?php echo $degree_type ?></a></li>
+								foreach( $degree_types as $slug => $name ) : ?>
+									<li><a href="<?php echo $degree_search_url . $slug . '/'; ?>" class="text-inverse"><?php echo $name . 's'; ?></a></li>
 							<?php
 								echo ob_get_clean();
 								endforeach;
