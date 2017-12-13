@@ -14,9 +14,9 @@ function get_degree_apply_button( $post_meta ) {
 	$apply_url = '';
 
 	if ( isset( $post_meta['degree_is_graduate'] ) && $post_meta['degree_is_graduate'] === true ) {
-		$apply_url = get_theme_mod( 'degree_graduate_application' );
+		$apply_url = get_theme_mod( 'degrees_graduate_application' );
 	} else {
-		$apply_url = get_theme_mod( 'degree_undergraduate_application' );
+		$apply_url = get_theme_mod( 'degrees_undergraduate_application' );
 	}
 
 	ob_start();
