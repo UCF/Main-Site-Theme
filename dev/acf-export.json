@@ -1133,7 +1133,7 @@
                     "id": ""
                 },
                 "choices": {
-                    "header-media-default": "Default (400px)",
+                    "header-media-default": "Default (500px)",
                     "header-media-fullscreen": "Fullscreen"
                 },
                 "allow_null": 0,
