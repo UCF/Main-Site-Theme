@@ -43,9 +43,16 @@ gulp.task('move-components-fontawesome', function() {
    .pipe(gulp.dest(config.dist.fontPath + '/font-awesome'));
 });
 
+// Athena Framework web font processing
+gulp.task('move-components-athena-fonts', function() {
+  return gulp.src([config.packagesPath + '/ucf-athena-framework/dist/fonts/**/*'])
+    .pipe(gulp.dest(config.dist.fontPath));
+});
+
 // Run all component-related tasks
 gulp.task('components', [
   'move-components-fontawesome',
+  'move-components-athena-fonts'
 ]);
 
 
