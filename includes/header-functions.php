@@ -218,7 +218,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 
 	ob_start();
 ?>
-	<div class="header-media <?php echo $header_height; ?> mb-0 d-flex flex-column">
+	<div class="header-media <?php echo $header_height; ?> mb-0 d-flex flex-column bg-default">
 		<div class="header-media-background-wrap">
 			<div class="header-media-background media-background-container">
 				<?php
