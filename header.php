@@ -8,4 +8,4 @@
 		<header class="site-header">
 			<?php echo get_header_markup(); ?>
 		</header>
-		<main class="site-main">
+		<main class="site-main" id="content">

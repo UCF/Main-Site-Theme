@@ -11,3 +11,20 @@ body {
 .screen-reader-text {
   @include sr-only();
 }
+
+.skip-navigation {
+  @include sr-only();
+  @include sr-only-focusable();
+
+  &:focus {
+    align-self: center;
+    display: flex;
+    left: $spacer-x;
+    position: absolute;
+    z-index: 2;
+
+    @include media-breakpoint-up(lg) {
+      top: $spacer-y;
+    }
+  }
+}
