@@ -22,7 +22,7 @@
 								<p>Try double-checking the spelling of the address you requested, or search using the field below:</p>
 								<form class="search-form mb-3" action="https://search.ucf.edu">
 									<div class="input-group">
-										<label class="sr-only" for="q">Search UCF</label>
+										<label class="sr-only" for="q-404">Search UCF</label>
 										<input id="q-404" class="search-field form-control" name="q" type="text" placeholder="Tell us more about what you're looking for...">
 										<input name="client" type="hidden" value="UCF_Main">
 										<input name="proxystylesheet" type="hidden" value="UCF_Main">
