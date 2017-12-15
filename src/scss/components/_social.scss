@@ -1,0 +1,18 @@
+$color-facebook: #3a5795;
+$color-youtube: #cd201f;
+
+.crt-social-icon {
+    .crt-icon-facebook {
+        color: $color-facebook !important;
+    }
+
+    .crt-icon-youtube {
+        color: $color-youtube !important;
+    }
+
+    .crt-icon-instagram {
+        background: radial-gradient(circle at 33% 100%, #FED373 4%, #F15245 30%, #D92E7F 62%, #9B36B7 85%, #515ECF);
+        border-radius: 7px;
+        color: $white !important;
+    }
+}
