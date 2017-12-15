@@ -21,10 +21,7 @@ body {
     display: flex;
     left: $spacer-x;
     position: absolute;
-    z-index: 2;
-
-    @include media-breakpoint-up(lg) {
-      top: $spacer-y;
-    }
+    top: calc(#{$ucf-header-height} + #{$spacer-y});
+    z-index: 4;
   }
 }
