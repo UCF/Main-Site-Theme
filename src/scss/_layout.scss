@@ -17,8 +17,6 @@ body {
   @include sr-only-focusable();
 
   &:focus {
-    align-self: center;
-    display: flex;
     left: $spacer-x;
     position: absolute;
     top: calc(#{$ucf-header-height} + #{$spacer-y});
