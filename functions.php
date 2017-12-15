@@ -159,8 +159,8 @@ function get_media_background_video( $videos, $loop=false ) {
 		<?php endif; ?>
 	</video>
 	<button class="media-background-video-toggle btn play-enabled hidden-xs-up" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
-		<span class="fa fa-pause media-background-video-pause"></span>
-		<span class="fa fa-play media-background-video-play"></span>
+		<span class="fa fa-pause media-background-video-pause" aria-hidden="true"></span>
+		<span class="fa fa-play media-background-video-play" aria-hidden="true"></span>
 	</button>
 <?php
 	return ob_get_clean();
