@@ -22,7 +22,7 @@ function get_degree_apply_button( $post_meta ) {
 	ob_start();
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
-		<span class="fa fa-pencil"></span> Apply Now
+		<span class="fa fa-pencil" aria-hidden="true"></span> Apply Now
 	</a>
 <?php
 	return ob_get_clean();
@@ -36,7 +36,7 @@ function get_degree_visit_ucf_button() {
 	if ( $url ) :
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $url; ?>">
-		<span class="fa fa-map-marker"></span> Visit UCF
+		<span class="fa fa-map-marker" aria-hidden="true"></span> Visit UCF
 	</a>
 <?php
 	endif;
@@ -147,14 +147,14 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
 }
 
 /** Degree Search Typeahead Functions */
-function main_site_degree_search_display( $output ) {
+function main_site_degree_search_display( $output, $args ) {
 	ob_start();
 ?>
 	<form id="degree-search" action="<?php echo get_permalink( get_page_by_path( 'degree-search' ) );?>" method="GET">
 		<div class="input-group degree-search">
-			<input type="text" name="search" class="form-control degree-search-typeahead" placeholder="Search for degree programs">
+			<input type="text" name="search" class="form-control degree-search-typeahead" aria-label="Search degree programs" placeholder="<?php echo $args['placeholder']; ?>">
 			<span class="input-group-btn">
-				<button id="ucf-degree-search-submit" type="submit" class="btn btn-degree-search btn-primary text-inverse" aria-label="Search Degrees"><span class="fa fa-search" aria-hidden="true"></span></button>
+				<button id="ucf-degree-search-submit" type="submit" class="btn btn-degree-search btn-primary text-inverse" aria-label="Search"><span class="fa fa-search" aria-hidden="true"></span></button>
 			</span>
 		</div>
 	</form>
@@ -162,7 +162,7 @@ function main_site_degree_search_display( $output ) {
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_degree_search_display', 'main_site_degree_search_display', 11, 1 );
+add_filter( 'ucf_degree_search_input', 'main_site_degree_search_display', 11, 2 );
 
 function main_site_degree_search_suggestion() {
 	ob_start();
