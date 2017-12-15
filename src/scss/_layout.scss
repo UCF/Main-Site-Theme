@@ -11,3 +11,15 @@ body {
 .screen-reader-text {
   @include sr-only();
 }
+
+.skip-navigation {
+  @include sr-only();
+  @include sr-only-focusable();
+
+  &:focus {
+    left: $spacer-x;
+    position: absolute;
+    top: calc(#{$ucf-header-height} + #{$spacer-y});
+    z-index: 4;
+  }
+}
