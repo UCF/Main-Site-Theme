@@ -2,16 +2,17 @@
 /**
  * The page template for the phonebook
  **/
-$query = $_GET['query'];
+$query = isset( $_GET['query'] ) ? $_GET['query'] : '';
 $results = get_phonebook_results( $query );
 
 ?>
 <div class="container">
 	<form id="phonebook-search">
 		<div class="input-group">
-			<input type="text" id="phonebook-search-query" name="query" class="search-query form-control" value="<?php echo stripslashes( htmlentities( $query ) ); ?>" placeholder="Organization, Department, or Person(Name, Email, Phone)">
+			<label for="phonebook-search-query" class="sr-only">Search Organizations, Departments, and People at UCF</label>
+			<input type="text" id="phonebook-search-query" name="query" class="search-query form-control" value="<?php echo stripslashes( htmlentities( $query ) ); ?>" placeholder="Organization, Department, or Person (Name, Email, Phone)">
 			<span class="input-group-btn">
-				<button class="btn btn-primary" type="submit"><span class="fa fa-search"></span> Search
+				<button class="btn btn-primary" type="submit"><span class="fa fa-search" aria-labelledby="search-btn-text"></span><span class="hidden-sm-down" id="search-btn-text"> Search</span></button>
 			</span>
 		</div>
 	</form>

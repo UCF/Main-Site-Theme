@@ -57,13 +57,13 @@ function get_phonebook_results( $query ) {
  * @return Array | The filtered array of results
  **/
 function filter_phonebook_results( $results ) {
-	$results = array_filter( $results, phonebook_filter_tables );
+	$results = array_filter( $results, 'phonebook_filter_tables' );
 
 	foreach( $results as $result ) {
 		$result->email = trim( $result->email );
 	}
 
-	$results = array_filter( $results, phonebook_filter_fax_in_name );
+	$results = array_filter( $results, 'phonebook_filter_fax_in_name' );
 
 	return $results;
 }
