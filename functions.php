@@ -308,14 +308,16 @@ function main_site_academic_calendar_title( $content, $items, $args ) {
 
 add_filter( 'ucf_acad_cal_display_main_site_title', 'main_site_academic_calendar_title', 10, 3 );
 
-function main_site_academic_calendar_content( $content, $items, $args ) {
-	$first_item = array_shift( $items );
-
+function main_site_academic_calendar_content( $content, $items, $args, $fallback_message ) {
 	ob_start();
 ?>
 	<div class="row pt-2 pt-md-0">
-		<div class="col-lg-4 mb-2 mb-lg-0">
+		<div class="col-lg-4 mb-4 mb-lg-0">
 			<h3 class="h5 mb-3"><span class="badge badge-inverse">Up Next</span></h3>
+			<?php
+			if ( !empty( $items ) ) :
+				$first_item = array_shift( $items );
+			?>
 			<div class="academic-calendar-item">
 				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
 					<span class="text-inverse title h4 mb-3 d-block"><?php echo $first_item->summary; ?></span>
@@ -325,19 +327,26 @@ function main_site_academic_calendar_content( $content, $items, $args ) {
 					<?php endif; ?>
 				</a>
 			</div>
+			<?php else: ?>
+			<div class="ucf-academic-calendar-error"><?php echo $fallback_message; ?></div>
+			<?php endif; ?>
 		</div>
 		<div class="col-lg-7 offset-lg-1">
 			<h3 class="h5 mb-3"><span class="badge badge-inverse">Looking Ahead</span></h3>
+			<?php if ( !empty( $items ) ) : ?>
 			<div class="academic-calendar-columns">
-			<?php foreach( $items as $item ) : ?>
+				<?php foreach ( $items as $item ) : ?>
 				<div class="academic-calendar-item">
 					<a href="<?php echo $item->directUrl; ?>" target="_blank">
 						<?php echo main_site_academic_calendar_format_date( $item->dtstart, $item->dtend ); ?>
 						<span class="text-inverse title"><?php echo $item->summary; ?></span>
 					</a>
 				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
 			</div>
+			<?php else: ?>
+			<div class="ucf-academic-calendar-error"><?php echo $fallback_message; ?></div>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php
@@ -368,7 +377,7 @@ function main_site_academic_calendar_format_date( $start_date, $end_date ) {
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_acad_cal_display_main_site', 'main_site_academic_calendar_content', 10, 3 );
+add_filter( 'ucf_acad_cal_display_main_site', 'main_site_academic_calendar_content', 10, 4 );
 
 function main_site_academic_calendar_after( $content, $items, $args ) {
 	return '</div>';
