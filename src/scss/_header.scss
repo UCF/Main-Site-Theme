@@ -27,25 +27,19 @@
   position: relative;
 
   @include media-breakpoint-down(xs) {
-    @media screen {
-      min-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
-    }
+    min-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
   }
 }
 
 .header-media-default {
   @include media-breakpoint-up(sm) {
-    @media screen {
-      min-height: 500px;
-    }
+    min-height: 500px;
   }
 }
 
 .header-media-fullscreen {
   @include media-breakpoint-up(sm) {
-    @media screen {
-      min-height: calc(90vh - #{$ucf-header-height});
-    }
+    min-height: calc(90vh - #{$ucf-header-height});
   }
 }
 
