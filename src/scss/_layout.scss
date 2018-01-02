@@ -1,15 +1,11 @@
 body {
-  @media screen {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .site-main {
-  @media screen {
-    flex: 1 0 auto;
-  }
+  flex: 1 0 auto;
 }
 
 .screen-reader-text {
