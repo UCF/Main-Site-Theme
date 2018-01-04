@@ -1,0 +1,59 @@
+// scss-lint:disable ImportantRule
+@media print {
+
+  //
+  // Layout
+  //
+  body {
+    display: initial;
+  }
+
+  .site-main {
+    flex: initial;
+  }
+
+  .header-media {
+    @include media-breakpoint-down(xs) {
+      min-height: initial;
+    }
+  }
+
+  .header-media-default {
+    @include media-breakpoint-up(sm) {
+      min-height: initial;
+    }
+  }
+
+  .header-media-fullscreen {
+    @include media-breakpoint-up(sm) {
+      min-height: initial;
+    }
+  }
+
+
+  //
+  // Utils
+  //
+  .media-background-video-toggle {
+    display: none;
+  }
+
+  .ignite-logo {
+    // Encourage browsers to always print the bg img
+    // scss-lint:disable PropertySpelling
+    color-adjust: exact !important;
+    // scss-lint:enable PropertySpelling
+    -webkit-print-color-adjust: exact !important;
+  }
+
+
+  //
+  // Components
+  //
+  .colleges-block {
+    justify-content: center !important;
+    min-height: auto !important;
+  }
+
+}
+// scss-lint:enable ImportantRule
