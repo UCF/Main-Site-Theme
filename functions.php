@@ -530,3 +530,44 @@ function main_site_pegasus_add_layout( $layouts ) {
 }
 
 add_filter( 'ucf_pegasus_list_get_layouts', 'main_site_pegasus_add_layout', 10, 1 );
+
+
+/**
+ * Returns markup for the colleges grid (without intro text).
+ *
+ * @author Jo Dickson
+ * @since v3.0.4
+ * @param obj $exclude_term College term object to exclude from the grid
+ * @return string Colleges grid HTML
+ */
+function get_colleges_grid( $exclude_term=null ) {
+	$colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) );
+	ob_start();
+
+	if ( $colleges ):
+?>
+<section class="section-colleges">
+	<div class="jumbotron jumbotron-fluid bg-primary py-4 my-0 text-center">
+		<div class="container">
+			<h2 class="section-heading h3 m-0 text-uppercase font-weight-bold font-condensed">University of Central Florida Colleges</h2>
+		</div>
+	</div>
+	<div class="colleges-grid">
+		<?php foreach( $colleges as $index=>$college ) :
+			if( !$exclude_term || ( $exclude_term && $college->slug !== $exclude_term->slug ) ) :
+		?>
+			<a class="colleges-block media-background-container text-inverse hover-text-inverse text-decoration-none justify-content-end" href="../<?php echo $college->slug; ?>">
+				<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id); ?>" alt="">
+				<span class="colleges-block-text pointer-events-none font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
+			</a>
+		<?php
+			endif;
+		endforeach;
+		?>
+	</div>
+</section>
+<?php
+	endif;
+
+	return ob_get_clean();
+}

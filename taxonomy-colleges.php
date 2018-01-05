@@ -19,8 +19,6 @@ $cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id );
 // News
 $news_topic = get_field( 'news_topic', 'colleges_' . $term->term_id );
 $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
-// Colleges Grid
-$colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) );
 ?>
 <article role="main">
 	<section class="section-lead">
@@ -145,24 +143,7 @@ $colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) 
 	endif;
 	?>
 	<?php endif; ?>
-	<section class="section-colleges">
-		<div class="jumbotron jumbotron-fluid bg-primary py-4 my-0 text-center">
-			<div class="container">
-			<h2 class="section-heading h3 m-0 text-uppercase font-weight-bold font-condensed">University of Central Florida Colleges</h2>
-			</div>
-		</div>
-		<div class="colleges-grid">
-			<?php foreach( $colleges as $index=>$college ) :
-				if( $college->slug !== $term->slug ) : ?>
-					<a class="colleges-block media-background-container text-inverse hover-text-inverse text-decoration-none justify-content-end" href="../<?php echo $college->slug; ?>">
-						<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id); ?>" alt="">
-						<span class="colleges-block-text pointer-events-none font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
-					</a>
-			<?php
-				endif;
-			endforeach;
-			?>
-		</div>
-	</section>
+
+	<?php echo get_colleges_grid( $term ); ?>
 </article>
 <?php get_footer();?>
