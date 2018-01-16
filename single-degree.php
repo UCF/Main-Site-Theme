@@ -1,12 +1,14 @@
 <?php get_header(); the_post(); ?>
 <?php
-	$raw_postmeta  = get_post_meta( $post->ID );
-	$post_meta     = format_raw_postmeta( $raw_postmeta );
-	$program_types = wp_get_post_terms( $post->ID, 'program_types' );
-	$program_type  = is_array( $program_types ) ? $program_types[0] : null;
-	$colleges      = get_colleges_markup( $post->ID );
-	$departments   = get_departments_markup( $post->ID );
-	$breadcrumbs   = get_degree_breadcrumb_markup( $post->ID );
+	$raw_postmeta     = get_post_meta( $post->ID );
+	$post_meta        = format_raw_postmeta( $raw_postmeta );
+	$program_types    = wp_get_post_terms( $post->ID, 'program_types' );
+	$program_type     = is_array( $program_types ) ? $program_types[0] : null;
+	$colleges         = wp_get_post_terms( $post->ID, 'colleges' );
+	$college          = is_array( $colleges ) ? $colleges[0] : null;
+	$colleges_list    = get_colleges_markup( $post->ID );
+	$departments_list = get_departments_markup( $post->ID );
+	$breadcrumbs      = get_degree_breadcrumb_markup( $post->ID );
 ?>
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
@@ -17,16 +19,16 @@
 					<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Program:</dt>
 					<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9"><?php echo $program_type->name; ?></dd>
 					<?php endif; ?>
-					<?php if ( $colleges ) : ?>
+					<?php if ( $colleges_list ) : ?>
 					<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">College(s):</dt>
 					<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
-						<?php echo $colleges; ?>
+						<?php echo $colleges_list; ?>
 					</dd>
 					<?php endif; ?>
-					<?php if ( $departments ) : ?>
+					<?php if ( $departments_list ) : ?>
 					<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Department(s): </dt>
 					<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
-						<?php echo $departments; ?>
+						<?php echo $departments_list; ?>
 					</dd>
 					<?php endif; ?>
 				</dl>
@@ -75,6 +77,6 @@
 	<?php echo $breadcrumbs; ?>
 </div>
 
-<?php echo get_colleges_grid(); ?>
+<?php echo get_colleges_grid( $college ); ?>
 
 <?php get_footer(); ?>
