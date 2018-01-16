@@ -152,7 +152,7 @@ function define_customizer_fields( $wp_customize ) {
 		'tuition_disclaimer',
 		array(
 			'type'        => 'textarea',
-			'label'       => 'Tuition Value Message',
+			'label'       => 'Tuition Disclaimer',
 			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
