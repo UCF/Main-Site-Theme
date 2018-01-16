@@ -10,7 +10,7 @@
 ?>
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
-		<div class="col-lg-8 pr-lg-5">
+		<div class="col-lg-8 col-xl-7 pr-lg-5 pr-xl-0">
 			<div class="bg-faded p-3 p-sm-4 mb-4">
 				<dl class="row mb-0">
 					<?php if ( $program_type ) : ?>
@@ -54,7 +54,7 @@
 			<?php endif; ?>
 			</div>
 		</div>
-		<div class="col-lg-4 mt-5 mt-lg-0">
+		<div class="col-lg-4 offset-xl-1 mt-5 mt-lg-0">
 			<div class="mb-4 degree-cta-buttons">
 				<?php echo get_degree_apply_button( $post_meta ); ?>
 				<?php echo get_degree_visit_ucf_button(); ?>
