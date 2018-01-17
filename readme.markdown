@@ -12,6 +12,7 @@ These plugins *must* be activated for the theme to function properly, and/or to 
 * Advanced Custom Fields PRO
 * Athena Gravity Forms
 * Gravity Forms
+* Main Site Utilities
 * Redirection
 * UCF Alert Plugin
 * UCF College Custom Taxonomy
@@ -41,7 +42,6 @@ These plugins provide features that are extended or modified by the theme; they 
 These plugins add desirable features, some of which are environment-specific for ucf.edu, but are not technically required to use this theme.
 * Athena Shortcodes
 * Automatic Section Menu Shortcode
-* Main Site Utilities
 * Page Links To
 * UCF Content Scheduler
 * UCF Page Assets
