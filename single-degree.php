@@ -71,7 +71,7 @@
 			</div>
 
 			<?php if ( isset( $post_meta['degree_hours'] ) ) : ?>
-			<div class="degree-hours mb-4 my-lg-5">
+			<div class="degree-hours mb-5 mt-lg-5">
 				<hr>
 				<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> <span class="font-weight-normal">total credit hours</span></p>
 				<hr>
