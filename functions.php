@@ -557,7 +557,7 @@ function get_colleges_grid( $exclude_term=null ) {
 			if( !$exclude_term || ( $exclude_term && $college->slug !== $exclude_term->slug ) ) :
 		?>
 			<a class="colleges-block media-background-container text-inverse hover-text-inverse text-decoration-none justify-content-end" href="<?php echo get_term_link( $college ); ?>">
-				<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id); ?>" alt="">
+				<img class="media-background object-fit-cover filter-sepia hover-filter-none" src="<?php echo get_field( 'thumbnail_image', 'colleges_' . $college->term_id ); ?>" alt="">
 				<span class="colleges-block-text pointer-events-none font-condensed text-uppercase"><?php echo get_field( 'colleges_alias', 'colleges_' . $college->term_id ); ?></span>
 			</a>
 		<?php

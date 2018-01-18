@@ -22,7 +22,7 @@ function get_degree_apply_button( $post_meta ) {
 	ob_start();
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
-		<span class="fa fa-pencil" aria-hidden="true"></span> Apply Now
+		<span class="fa fa-pencil pr-2" aria-hidden="true"></span> Apply Now
 	</a>
 <?php
 	return ob_get_clean();
@@ -36,7 +36,7 @@ function get_degree_visit_ucf_button() {
 	if ( $url ) :
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $url; ?>">
-		<span class="fa fa-map-marker" aria-hidden="true"></span> Visit UCF
+		<span class="fa fa-map-marker pr-2" aria-hidden="true"></span> Visit UCF
 	</a>
 <?php
 	endif;
