@@ -33,7 +33,15 @@
 					<?php endif; ?>
 				</dl>
 			</div>
-			<div class="content mb-5">
+			<div class="hidden-lg-up row mb-3">
+				<div class="col-sm mb-2">
+					<?php echo get_degree_apply_button( $post_meta ); ?>
+				</div>
+				<div class="col-sm mb-2">
+					<?php echo get_degree_visit_ucf_button(); ?>
+				</div>
+			</div>
+			<div class="mb-5">
 				<?php the_content(); ?>
 				<?php echo apply_filters( 'the_content', $post_meta['degree_description'] ); ?>
 			</div>
@@ -56,14 +64,14 @@
 			<?php endif; ?>
 			</div>
 		</div>
-		<div class="col-lg-4 offset-xl-1 mt-5 mt-lg-0">
-			<div class="mb-4 degree-cta-buttons">
+		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
+			<div class="hidden-md-down mb-4">
 				<?php echo get_degree_apply_button( $post_meta ); ?>
 				<?php echo get_degree_visit_ucf_button(); ?>
 			</div>
 
 			<?php if ( isset( $post_meta['degree_hours'] ) ) : ?>
-			<div class="degree-hours my-4 my-md-5">
+			<div class="degree-hours mb-4 my-lg-5">
 				<hr>
 				<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> <span class="font-weight-normal">total credit hours</span></p>
 				<hr>
