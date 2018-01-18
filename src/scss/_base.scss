@@ -6,6 +6,7 @@
 @import 'degrees';
 
 // Components
+@import 'components/breadcrumbs';
 @import 'components/degree-search-typeahead';
 @import 'components/icon-link';
 @import 'components/colleges-grid';
@@ -13,13 +14,12 @@
 @import 'components/events';
 @import 'components/ucf-alert';
 @import 'components/spotlights';
-@import 'components/misc';
 @import 'components/slideout';
 @import 'components/social';
-
 @import 'components/academic-calendar';
 @import 'components/charts';
 @import 'components/fact-icons';
+@import 'components/misc';
 
 // Pages
 @import 'pages/404';
