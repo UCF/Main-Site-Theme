@@ -41,7 +41,6 @@ These plugins provide features that are extended or modified by the theme; they 
 These plugins add desirable features, some of which are environment-specific for ucf.edu, but are not technically required to use this theme.
 * Athena Shortcodes
 * Automatic Section Menu Shortcode
-* Main Site Utilities
 * Page Links To
 * UCF Content Scheduler
 * UCF Page Assets
