@@ -409,32 +409,40 @@ function main_site_pegasus_list_before( $content, $items, $args ) {
 
 add_filter( 'ucf_pegasus_list_display_main_site_before', 'main_site_pegasus_list_before', 10, 3 );
 
-function main_site_pegasus_list_content( $content, $items, $args ) {
-	$first       = array_shift( $items );
-	$issue_url   = $first->link;
-	$issue_title = $first->title->rendered;
-	$cover_story = $first->_embedded->issue_cover_story[0];
-	$cover_story_url = $cover_story->link;
-	$cover_story_title = $cover_story->title->rendered;
-	$cover_story_subtitle = $cover_story->story_subtitle;
-	$cover_story_description = $cover_story->story_description;
-	$cover_story_blurb = null;
-	$thumbnail_id = $first->featured_media;
-	$thumbnail = null;
-	$thumbnail_url = null;
+function main_site_pegasus_list_content( $content, $items, $args, $fallback_message='' ) {
+	if ( $items && ! is_array( $items ) ) { $items = array( $items ); }
 
-	if ( $thumbnail_id !== 0 ) {
-		$thumbnail = $first->_embedded->{"wp:featuredmedia"}[0];
-		$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
-	}
-	if ( $cover_story_description ) {
-		$cover_story_blurb = $cover_story_description;
-	} else if ( $cover_story_subtitle ) {
-		$cover_story_blurb = $cover_story_subtitle;
+	$first = null;
+	if ( $items ) {
+		$first = array_shift( $items );
 	}
 
 	ob_start();
 ?>
+	<?php
+	if ( $first ) :
+		$issue_url   = $first->link;
+		$issue_title = $first->title->rendered;
+		$cover_story = $first->_embedded->issue_cover_story[0];
+		$cover_story_url = $cover_story->link;
+		$cover_story_title = $cover_story->title->rendered;
+		$cover_story_subtitle = $cover_story->story_subtitle;
+		$cover_story_description = $cover_story->story_description;
+		$cover_story_blurb = null;
+		$thumbnail_id = $first->featured_media;
+		$thumbnail = null;
+		$thumbnail_url = null;
+
+		if ( $thumbnail_id !== 0 ) {
+			$thumbnail = $first->_embedded->{"wp:featuredmedia"}[0];
+			$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+		}
+		if ( $cover_story_description ) {
+			$cover_story_blurb = $cover_story_description;
+		} else if ( $cover_story_subtitle ) {
+			$cover_story_blurb = $cover_story_subtitle;
+		}
+	?>
 	<!-- Featured Issue -->
 	<div class="row mb-4 mb-md-5">
 		<div class="col-sm-4">
@@ -457,32 +465,39 @@ function main_site_pegasus_list_content( $content, $items, $args ) {
 		</div>
 	</div>
 
+	<?php elseif ( $fallback_message ) : ?>
+	<p><?php echo $fallback_message; ?></p>
+	<?php endif; ?>
+
+	<?php if ( $items ) : ?>
 	<hr class="hidden-lg-up my-4 my-md-5">
 
 	<div class="row">
-	<?php foreach( $items as $item ) :
-		$issue_url   = $item->link;
-		$issue_title = $item->title->rendered;
-		$cover_story = $item->_embedded->issue_cover_story[0];
-		$cover_story_url = $cover_story->link;
-		$cover_story_title = $cover_story->title->rendered;
-		$cover_story_subtitle = $cover_story->story_subtitle;
-		$cover_story_description = $cover_story->story_description;
-		$cover_story_blurb = null;
-		$thumbnail_id = $item->featured_media;
-		$thumbnail = null;
-		$thumbnail_url = null;
 
-		if ( $thumbnail_id !== 0 ) {
-			$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
-			$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
-		}
-		if ( $cover_story_description ) {
-			$cover_story_blurb = $cover_story_description;
-		} else if ( $cover_story_subtitle ) {
-			$cover_story_blurb = $cover_story_subtitle;
-		}
-	?>
+		<?php
+		foreach ( $items as $item ) :
+			$issue_url   = $item->link;
+			$issue_title = $item->title->rendered;
+			$cover_story = $item->_embedded->issue_cover_story[0];
+			$cover_story_url = $cover_story->link;
+			$cover_story_title = $cover_story->title->rendered;
+			$cover_story_subtitle = $cover_story->story_subtitle;
+			$cover_story_description = $cover_story->story_description;
+			$cover_story_blurb = null;
+			$thumbnail_id = $item->featured_media;
+			$thumbnail = null;
+			$thumbnail_url = null;
+
+			if ( $thumbnail_id !== 0 ) {
+				$thumbnail = $item->_embedded->{"wp:featuredmedia"}[0];
+				$thumbnail_url = $thumbnail->media_details->sizes->full->source_url;
+			}
+			if ( $cover_story_description ) {
+				$cover_story_blurb = $cover_story_description;
+			} else if ( $cover_story_subtitle ) {
+				$cover_story_blurb = $cover_story_subtitle;
+			}
+		?>
 		<div class="col-lg-3 mb-4">
 			<div class="row">
 				<div class="col-3 col-lg-12 pr-0 pr-sm-3">
@@ -502,14 +517,16 @@ function main_site_pegasus_list_content( $content, $items, $args ) {
 				</div>
 			</div>
 		</div>
-	<?php endforeach; ?>
+		<?php endforeach; ?>
 
 	</div>
+	<?php endif; ?>
+
 <?php
 	return ob_get_clean();
 }
 
-add_filter( 'ucf_pegasus_list_display_main_site_content', 'main_site_pegasus_list_content', 10, 3 );
+add_filter( 'ucf_pegasus_list_display_main_site_content', 'main_site_pegasus_list_content', 10, 4 );
 
 function main_site_pegasus_list_after( $content, $items, $args ) {
 	ob_start();
@@ -536,7 +553,7 @@ add_filter( 'ucf_pegasus_list_get_layouts', 'main_site_pegasus_add_layout', 10, 
  * Returns markup for the colleges grid (without intro text).
  *
  * @author Jo Dickson
- * @since v3.0.4
+ * @since v3.0.5
  * @param obj $exclude_term College term object to exclude from the grid
  * @return string Colleges grid HTML
  */

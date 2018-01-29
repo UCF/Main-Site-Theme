@@ -148,7 +148,7 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
  * Returns the markup for breadcrumbs for a single degree profile.
  *
  * @author Jo Dickson
- * @since v3.0.4
+ * @since v3.0.5
  * @param int $post_id ID of the degree post
  * @return string HTML markup for the degree's breadcrumbs
  */
