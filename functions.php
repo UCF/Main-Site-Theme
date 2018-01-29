@@ -553,7 +553,7 @@ add_filter( 'ucf_pegasus_list_get_layouts', 'main_site_pegasus_add_layout', 10, 
  * Returns markup for the colleges grid (without intro text).
  *
  * @author Jo Dickson
- * @since v3.0.4
+ * @since v3.0.5
  * @param obj $exclude_term College term object to exclude from the grid
  * @return string Colleges grid HTML
  */
