@@ -45,6 +45,7 @@ function add_meta_tags() {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php wp_site_icon(); ?>
 <?php
 $gw_verify = get_theme_mod_or_default( 'gw_verify' );
 if ( $gw_verify ):
