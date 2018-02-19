@@ -46,6 +46,7 @@ These plugins add desirable features, some of which are environment-specific for
 * UCF Page Assets
 * Varnish Dependency Purger or Varnish as a Service
 * WP-Mail-SMTP
+* WP Apple Touch Icons
 * WP Allowed Hosts
 * WP Shortcode Interface
 
