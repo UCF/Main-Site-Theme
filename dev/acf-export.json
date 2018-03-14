@@ -299,6 +299,7 @@
                 "choices": {
                     "undergraduate-degree": "Undergraduate Degrees",
                     "master": "Graduate Degrees",
+                    "doctorate": "Doctorates",
                     "minor": "Minors",
                     "certificate": "Certificates"
                 },
