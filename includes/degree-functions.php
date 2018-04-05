@@ -280,7 +280,7 @@ function main_site_degree_search_program_types() {
 	ob_start();
 ?>
 	<div class="degree-search-types" ng-controller="ProgramController as programCtl" ng-init="programCtl.init()">
-		<h3 class="h5">Program Types</h2>
+		<h3 class="h5">Program Types</h3>
 		<div class="degree-search-type-container" ng-repeat="(key, type) in programCtl.programTypes">
 			<label class="form-check-label" ng-show="type.count > 0">
 				<input class="form-check-input" type="radio" name="program_type[]" value="{{ type.slug }}" ng-checked="mainCtl.selectedProgramType === type.slug" ng-click="programCtl.onSelected(type.slug)">
@@ -298,7 +298,7 @@ function main_site_degree_search_colleges() {
 	ob_start();
 ?>
 	<div class="degree-search-colleges" ng-controller="CollegeController as collegeCtl" ng-init="collegeCtl.init()">
-		<h3 class="h5">Colleges</h2>
+		<h3 class="h5">Colleges</h3>
 		<div class="degree-search-college-container" ng-repeat="(key, college) in collegeCtl.colleges">
 			<label class="form-check-label" ng-show="college.count > 0">
 				<input class="form-check-input" type="radio" name="college[]" value="{{ college.slug }}" ng-checked="mainCtl.selectedCollege === college.slug" ng-click="collegeCtl.onSelected(college.slug)">
