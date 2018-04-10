@@ -22,16 +22,12 @@ function enqueue_frontend_assets() {
 	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, false );
 	wp_enqueue_script( 'jquery' );
 
+	// Conditionally include the UCF Header
 	global $post;
-	if ( $post ) {
-		$ucf_header_disabled = get_field( 'page_disable_ucf_header', $post->ID );
-
-		if ( !$ucf_header_disabled ) {
-			wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
-		}
-	} else {
+	if ( !$post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) {
 		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
+
 	wp_enqueue_script( 'wp-a11y' );
 	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', null, null, true );
 	wp_enqueue_script( 'script', THEME_JS_URL . '/script.min.js', array( 'jquery', 'tether' ), $theme_version, true );
@@ -209,17 +205,12 @@ add_filter( 'wp_head', 'add_favicon_default' );
 /**
 * Disables the UCF Footer if ACF page template field is set.
 */
-function disable_ucf_footer() {
+function maybe_disable_ucf_footer() {
 	global $post;
-
-	if ( $post ) {
-		$ucf_footer_disabled = get_field( 'page_disable_ucf_footer', $post->ID );
-
-		if ( $ucf_footer_disabled ) {
-			remove_action( 'wp_enqueue_scripts', array( 'UCF_Footer_Common', 'enqueue_styles' ) );
-			remove_action( 'wp_footer', array( 'UCF_Footer_Common', 'display_footer' ) );
-		}
+	if ( $post && ( get_field( 'page_disable_ucf_footer', $post->ID ) === true ) ) {
+		remove_action( 'wp_enqueue_scripts', array( 'UCF_Footer_Common', 'enqueue_styles' ), 99 );
+		add_filter( 'ucf_footer_display_footer', '__return_false' );
 	}
 }
 
-add_action( 'init', 'disable_ucf_footer' );
+add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
