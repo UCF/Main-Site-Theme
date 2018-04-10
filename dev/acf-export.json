@@ -950,25 +950,6 @@
                 "delay": 0
             },
             {
-                "key": "field_5a0dead0cd525",
-                "label": "Exclude Primary Site Navigation",
-                "name": "page_header_exclude_nav",
-                "type": "true_false",
-                "instructions": "Controls whether or not the primary site navigation should be displayed at the top of the page.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "Exclude site navigation",
-                "default_value": 0,
-                "ui": 0,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
                 "key": "field_590ca453f6655",
                 "label": "Header Size",
                 "name": "",
@@ -1399,6 +1380,86 @@
             ]
         ],
         "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": 1,
+        "description": ""
+    },
+    {
+        "key": "group_5acbcd281486f",
+        "title": "Page Template Settings",
+        "fields": [
+            {
+                "key": "field_5acbcd4b7f670",
+                "label": "Disable UCF Header",
+                "name": "page_disable_ucf_header",
+                "type": "true_false",
+                "instructions": "If checked, the UCF Header will not be loaded.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5a0dead0cd525",
+                "label": "Exclude Primary Site Navigation",
+                "name": "page_header_exclude_nav",
+                "type": "true_false",
+                "instructions": "Controls whether or not the primary site navigation should be displayed at the top of the page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Exclude site navigation",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5acbcd8f7f671",
+                "label": "Disable UCF Footer",
+                "name": "page_disable_ucf_footer",
+                "type": "true_false",
+                "instructions": "If checked, the UCF Footer will not be loaded.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ]
+        ],
+        "menu_order": 1,
         "position": "normal",
         "style": "default",
         "label_placement": "top",
