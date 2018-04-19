@@ -19,7 +19,7 @@ function enqueue_frontend_assets() {
 
 	// Deregister jquery and re-register newer version in the document head.
 	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', '//code.jquery.com/jquery-3.2.1.min.js', null, null, false );
+	wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js', null, null, false );
 	wp_enqueue_script( 'jquery' );
 
 	// Conditionally include the UCF Header
