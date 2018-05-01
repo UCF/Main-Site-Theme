@@ -719,7 +719,7 @@
             },
             {
                 "key": "field_58fa433f8a35a",
-                "label": "Description",
+                "label": "Catalog Description",
                 "name": "degree_description",
                 "type": "read_only",
                 "instructions": "",
