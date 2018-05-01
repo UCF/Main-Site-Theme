@@ -26,6 +26,7 @@ These plugins *must* be activated for the theme to function properly, and/or to 
 
 ### Supported Plugins
 These plugins provide features that are extended or modified by the theme; they are generally expected to be activated with the theme but are not technically required.
+* Advanced Custom Fields: Read only
 * UCF Academic Calendar Plugin
 * UCF Charts Plugin
 * UCF Events
