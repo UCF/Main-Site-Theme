@@ -261,7 +261,7 @@ function degree_website_is_valid( $url ) {
  * @author Jo Dickson
  */
 function mainsite_degree_format_post_data( $meta, $program ) {
-	$meta['post_meta']['page_header_height'] = 'header-media-default';
+	$meta['page_header_height'] = 'header-media-default';
 
 	return $meta;
 }
