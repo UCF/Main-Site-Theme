@@ -260,16 +260,13 @@ function degree_website_is_valid( $url ) {
  * @since 3.0.5
  * @author Jo Dickson
  */
-function mainsite_degree_format_post_data( $post_array_item, $program ) {
-	$post_array_item['post_meta']['degree_hours']       = $program->required_hours;
-	$post_array_item['post_meta']['degree_website']     = degree_website_is_valid( $program->website ) ? $program->website : '';
-	$post_array_item['post_meta']['degree_is_graduate'] = filter_var( $program->graduate, FILTER_VALIDATE_BOOLEAN );
-	$post_array_item['post_meta']['page_header_height'] = 'header-media-default';
+function mainsite_degree_format_post_data( $meta, $program ) {
+	$meta['post_meta']['page_header_height'] = 'header-media-default';
 
-	return $post_array_item;
+	return $meta;
 }
 
-add_filter( 'ucf_degree_format_post_data', 'mainsite_degree_format_post_data', 10, 2 );
+add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 10, 2 );
 
 
 /**
