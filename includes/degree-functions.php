@@ -254,6 +254,47 @@ function degree_website_is_valid( $url ) {
 }
 
 /**
+ * Helper function that returns the catalog description for the given
+ * UCF Search Service program object.
+ *
+ * @since 3.1.0
+ * @author Jo Dickson
+ * @param object $program  A single program object from the UCF Search Service
+ * @return string  The program's catalog description
+ */
+function get_api_catalog_description( $program ) {
+	$retval = '';
+
+	if ( ! class_exists( 'UCF_Degree_Config' ) ) {
+		return $retval;
+	}
+
+	// Determine the catalog description type's ID
+	$description_types = UCF_Degree_Config::get_description_types();
+	$catalog_desc_type_id = null;
+
+	foreach ( $description_types as $desc_id => $desc_name ) {
+		if ( stripos( $desc_name, 'Catalog Description' ) !== false ) {
+			$catalog_desc_type_id = $desc_id;
+			break;
+		}
+	}
+
+	// Find the program's description by the catalog description type ID
+	$descriptions = $program->descriptions;
+
+	if ( !empty( $descriptions ) && $catalog_desc_type_id ) {
+		foreach ( $descriptions as $d ) {
+			if ( $d->description_type->id === $catalog_desc_type_id ) {
+				$retval = $d->description;
+			}
+		}
+	}
+
+	return $retval;
+}
+
+/**
  * Apply main site-specific meta data to degrees during the degree import
  * process.
  *
@@ -262,6 +303,7 @@ function degree_website_is_valid( $url ) {
  */
 function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
+	$meta['degree_description'] = get_program_catalog_description( $program );
 
 	return $meta;
 }
