@@ -303,7 +303,7 @@ function get_api_catalog_description( $program ) {
  */
 function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
-	$meta['degree_description'] = get_program_catalog_description( $program );
+	$meta['degree_description'] = get_api_catalog_description( $program );
 
 	return $meta;
 }
