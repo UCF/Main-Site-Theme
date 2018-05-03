@@ -4,27 +4,57 @@
  **/
 
 /**
+ * Returns the child program_type assigned to the given degree.
+ *
+ * @since 3.1.0
+ * @author Jo Dickson
+ * @param object $degree  WP_Post object
+ * @return mixed  WP_Term object, or null on failure
+ */
+function get_degree_program_type( $degree ) {
+	$retval = null;
+	$args   = array( 'childless' => true );
+	$terms  = wp_get_post_terms( $degree->ID, 'program_types', $args );
+
+	if ( !empty( $terms ) && ! is_wp_error( $terms ) ) {
+		$retval = $terms[0];
+	}
+
+	return $retval;
+}
+
+/**
  * Gets the "Apply Now" button markup for degree.
  * @author Jim Barnes
  * @since 3.0.0
- * @param $post_meta Array | An array of post meta data
+ * @param object $degree | WP_Post object for the degree
  * @return string | The button markup.
  **/
-function get_degree_apply_button( $post_meta ) {
+function get_degree_apply_button( $degree ) {
 	$apply_url = '';
 
-	if ( isset( $post_meta['degree_is_graduate'] ) && $post_meta['degree_is_graduate'] === true ) {
+	$type = get_degree_program_type( $degree );
+	if ( ! $type ) { return $apply_url; }
+	$type_parent = get_term( $type->parent, 'program_types' );
+	$type_parent = ( ! is_wp_error( $type_parent ) && !empty( $type_parent ) ) ? $type_parent : null;
+
+	if ( $type->name === 'Graduate Program' || ( $type_parent && $type_parent->name === 'Graduate Program' ) ) {
 		$apply_url = get_theme_mod_or_default( 'degrees_graduate_application' );
-	} else {
+	}
+	else if ( $type->name === 'Undergraduate Program' || ( $type_parent && $type_parent->name === 'Undergraduate Program' ) ) {
 		$apply_url = get_theme_mod_or_default( 'degrees_undergraduate_application' );
 	}
 
 	ob_start();
+
+	if ( ! empty( $apply_url ) ):
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
 		<span class="fa fa-pencil pr-2" aria-hidden="true"></span> Apply Now
 	</a>
 <?php
+	endif;
+
 	return ob_get_clean();
 }
 

@@ -2,8 +2,7 @@
 <?php
 	$raw_postmeta     = get_post_meta( $post->ID );
 	$post_meta        = format_raw_postmeta( $raw_postmeta );
-	$program_types    = wp_get_post_terms( $post->ID, 'program_types' );
-	$program_type     = is_array( $program_types ) ? $program_types[0] : null;
+	$program_type     = get_degree_program_type( $post );
 	$colleges         = wp_get_post_terms( $post->ID, 'colleges' );
 	$college          = is_array( $colleges ) ? $colleges[0] : null;
 	$colleges_list    = get_colleges_markup( $post->ID );
@@ -35,7 +34,7 @@
 			</div>
 			<div class="hidden-lg-up row mb-3">
 				<div class="col-sm mb-2">
-					<?php echo get_degree_apply_button( $post_meta ); ?>
+					<?php echo get_degree_apply_button( $post ); ?>
 				</div>
 				<div class="col-sm mb-2">
 					<?php echo get_degree_visit_ucf_button(); ?>
@@ -66,7 +65,7 @@
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
 			<div class="hidden-md-down mb-4">
-				<?php echo get_degree_apply_button( $post_meta ); ?>
+				<?php echo get_degree_apply_button( $post ); ?>
 				<?php echo get_degree_visit_ucf_button(); ?>
 			</div>
 
