@@ -622,22 +622,6 @@
                 "step": ""
             },
             {
-                "key": "field_58fa435f8a35b",
-                "label": "Website",
-                "name": "degree_website",
-                "type": "url",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
                 "key": "field_5adf83192113d",
                 "label": "Imported Degree Data",
                 "name": "",

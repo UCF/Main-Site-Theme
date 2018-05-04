@@ -268,22 +268,6 @@ function map_degree_types( $degree_types ) {
 
 
 /**
- * Returns whether or not the given URL looks like a valid degree website
- * value.
- *
- * @since 3.0.5
- * @author Jo Dickson
- * @param string $url Degree website URL to check against
- * @return boolean
- */
-function degree_website_is_valid( $url ) {
-	if ( substr_count( $url, '://' ) === 1 && preg_match( '/^http(s)?\:\/\//', $url ) && filter_var( $url, FILTER_VALIDATE_URL ) !== false ) {
-		return true;
-	}
-	return false;
-}
-
-/**
  * Helper function that returns the catalog description for the given
  * UCF Search Service program object.
  *

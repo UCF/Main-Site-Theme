@@ -53,14 +53,6 @@
 					</a>
 				</div>
 			<?php endif; ?>
-			<?php if ( isset( $post_meta['degree_website'] ) && ! empty ( $post_meta['degree_website'] ) ) : ?>
-				<div class="col-md-6 col-lg-10 col-xl-6">
-					<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_website']; ?>">
-						<div class="bg-complementary p-3 px-sm-4 d-flex align-items-center"><span class="fa fa-external-link-square fa-2x" aria-hidden="true"></span></div>
-						<div class="p-3 align-self-center mx-auto">Visit Program Website</div>
-					</a>
-				</div>
-			<?php endif; ?>
 			</div>
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
