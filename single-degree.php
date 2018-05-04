@@ -1,13 +1,14 @@
 <?php get_header(); the_post(); ?>
 <?php
-	$raw_postmeta     = get_post_meta( $post->ID );
-	$post_meta        = format_raw_postmeta( $raw_postmeta );
-	$program_type     = get_degree_program_type( $post );
-	$colleges         = wp_get_post_terms( $post->ID, 'colleges' );
-	$college          = is_array( $colleges ) ? $colleges[0] : null;
-	$colleges_list    = get_colleges_markup( $post->ID );
-	$departments_list = get_departments_markup( $post->ID );
-	$breadcrumbs      = get_degree_breadcrumb_markup( $post->ID );
+	$raw_postmeta      = get_post_meta( $post->ID );
+	$post_meta         = format_raw_postmeta( $raw_postmeta );
+	$program_type      = get_degree_program_type( $post );
+	$colleges          = wp_get_post_terms( $post->ID, 'colleges' );
+	$college           = is_array( $colleges ) ? $colleges[0] : null;
+	$colleges_list     = get_colleges_markup( $post->ID );
+	$departments_list  = get_departments_markup( $post->ID );
+	$breadcrumbs       = get_degree_breadcrumb_markup( $post->ID );
+	$hide_catalog_desc = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 ?>
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
@@ -42,7 +43,11 @@
 			</div>
 			<div class="mb-5">
 				<?php the_content(); ?>
-				<?php echo apply_filters( 'the_content', $post_meta['degree_description'] ); ?>
+				<?php
+				if ( ! $hide_catalog_desc ) {
+					echo apply_filters( 'the_content', $post_meta['degree_description'] );
+				}
+				?>
 			</div>
 			<div class="row">
 			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>

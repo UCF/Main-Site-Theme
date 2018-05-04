@@ -764,6 +764,41 @@
                 },
                 "copy_to_clipboard": 0,
                 "display_type": "text"
+            },
+            {
+                "key": "field_5aec63848617d",
+                "label": "Degree Settings",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5aec63a28617e",
+                "label": "Hide Catalog Description on Degree Profile",
+                "name": "degree_disable_catalog_desc",
+                "type": "true_false",
+                "instructions": "Check this box to prevent this degree's Catalog Description from being displayed on its degree profile.  Both the degree's post content and the Catalog Description value are displayed by default on degree profiles.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
             }
         ],
         "location": [
