@@ -4,27 +4,57 @@
  **/
 
 /**
+ * Returns the child program_type assigned to the given degree.
+ *
+ * @since 3.1.0
+ * @author Jo Dickson
+ * @param object $degree  WP_Post object
+ * @return mixed  WP_Term object, or null on failure
+ */
+function get_degree_program_type( $degree ) {
+	$retval = null;
+	$args   = array( 'childless' => true );
+	$terms  = wp_get_post_terms( $degree->ID, 'program_types', $args );
+
+	if ( !empty( $terms ) && ! is_wp_error( $terms ) ) {
+		$retval = $terms[0];
+	}
+
+	return $retval;
+}
+
+/**
  * Gets the "Apply Now" button markup for degree.
  * @author Jim Barnes
  * @since 3.0.0
- * @param $post_meta Array | An array of post meta data
+ * @param object $degree | WP_Post object for the degree
  * @return string | The button markup.
  **/
-function get_degree_apply_button( $post_meta ) {
+function get_degree_apply_button( $degree ) {
 	$apply_url = '';
 
-	if ( isset( $post_meta['degree_is_graduate'] ) && $post_meta['degree_is_graduate'] === true ) {
+	$type = get_degree_program_type( $degree );
+	if ( ! $type ) { return $apply_url; }
+	$type_parent = get_term( $type->parent, 'program_types' );
+	$type_parent = ( ! is_wp_error( $type_parent ) && !empty( $type_parent ) ) ? $type_parent : null;
+
+	if ( $type->name === 'Graduate Program' || ( $type_parent && $type_parent->name === 'Graduate Program' ) ) {
 		$apply_url = get_theme_mod_or_default( 'degrees_graduate_application' );
-	} else {
+	}
+	else if ( $type->name === 'Undergraduate Program' || ( $type_parent && $type_parent->name === 'Undergraduate Program' ) ) {
 		$apply_url = get_theme_mod_or_default( 'degrees_undergraduate_application' );
 	}
 
 	ob_start();
+
+	if ( ! empty( $apply_url ) ):
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
 		<span class="fa fa-pencil pr-2" aria-hidden="true"></span> Apply Now
 	</a>
 <?php
+	endif;
+
 	return ob_get_clean();
 }
 
@@ -238,19 +268,44 @@ function map_degree_types( $degree_types ) {
 
 
 /**
- * Returns whether or not the given URL looks like a valid degree website
- * value.
+ * Helper function that returns the catalog description for the given
+ * UCF Search Service program object.
  *
- * @since 3.0.5
+ * @since 3.1.0
  * @author Jo Dickson
- * @param string $url Degree website URL to check against
- * @return boolean
+ * @param object $program  A single program object from the UCF Search Service
+ * @return string  The program's catalog description
  */
-function degree_website_is_valid( $url ) {
-	if ( substr_count( $url, '://' ) === 1 && preg_match( '/^http(s)?\:\/\//', $url ) && filter_var( $url, FILTER_VALIDATE_URL ) !== false ) {
-		return true;
+function get_api_catalog_description( $program ) {
+	$retval = '';
+
+	if ( ! class_exists( 'UCF_Degree_Config' ) ) {
+		return $retval;
 	}
-	return false;
+
+	// Determine the catalog description type's ID
+	$description_types = UCF_Degree_Config::get_description_types();
+	$catalog_desc_type_id = null;
+
+	foreach ( $description_types as $desc_id => $desc_name ) {
+		if ( stripos( $desc_name, 'Catalog Description' ) !== false ) {
+			$catalog_desc_type_id = $desc_id;
+			break;
+		}
+	}
+
+	// Find the program's description by the catalog description type ID
+	$descriptions = $program->descriptions;
+
+	if ( !empty( $descriptions ) && $catalog_desc_type_id ) {
+		foreach ( $descriptions as $d ) {
+			if ( $d->description_type->id === $catalog_desc_type_id ) {
+				$retval = $d->description;
+			}
+		}
+	}
+
+	return $retval;
 }
 
 /**
@@ -260,16 +315,14 @@ function degree_website_is_valid( $url ) {
  * @since 3.0.5
  * @author Jo Dickson
  */
-function mainsite_degree_format_post_data( $post_array_item, $program ) {
-	$post_array_item['post_meta']['degree_hours']       = $program->required_hours;
-	$post_array_item['post_meta']['degree_website']     = degree_website_is_valid( $program->website ) ? $program->website : '';
-	$post_array_item['post_meta']['degree_is_graduate'] = filter_var( $program->graduate, FILTER_VALIDATE_BOOLEAN );
-	$post_array_item['post_meta']['page_header_height'] = 'header-media-default';
+function mainsite_degree_format_post_data( $meta, $program ) {
+	$meta['page_header_height'] = 'header-media-default';
+	$meta['degree_description'] = get_api_catalog_description( $program );
 
-	return $post_array_item;
+	return $meta;
 }
 
-add_filter( 'ucf_degree_format_post_data', 'mainsite_degree_format_post_data', 10, 2 );
+add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 10, 2 );
 
 
 /**
