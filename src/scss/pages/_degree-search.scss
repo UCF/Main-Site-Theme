@@ -3,7 +3,6 @@
   display: table;
   margin-bottom: 0;
   padding: .95rem;
-  width: 100%;
 
   &:hover,
   &:active,
@@ -22,19 +21,16 @@
   margin-bottom: 5px;
   padding-right: 1.2rem;
   vertical-align: middle;
-  width: 85%;
 
   @include media-breakpoint-up( sm ) {
     font-size: 1.2rem;
     line-height: 1.1;
     margin-bottom: .25rem;
-    width: 79%;
   }
 
   .degree-program-type {
     display: block;
     margin-top: 6px;
-    width: 100%;
   }
 }
 
