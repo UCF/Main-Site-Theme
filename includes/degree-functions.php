@@ -336,7 +336,11 @@ function main_site_degree_search_program_types() {
 		<a ng-click="programCtl.onClear()">View All</a>
 		<ul class="degree-search-program-types list-unstyled">
 			<li class="degree-search-type" ng-repeat="(key, type) in programCtl.programTypes">
+<<<<<<< HEAD
 				<a ng-click="programCtl.onSelected(type.slug)">{{ type.name }}</a>
+=======
+				<a g-click="programCtl.onSelected(type.slug)">{{ type.name }}</a>
+>>>>>>> 821b50829f97a7cf2a41adae3c529f4e556bbe9c
 				<ul class="degree-search-type-children list-unstyled ml-3" ng-if="type.children && mainCtl.selectedParentProgramType == type.slug">
 					<li class="degree-search-child-type" ng-repeat="(subkey, subtype) in type.children">
 						<a ng-click="programCtl.onSelected(subtype.slug)">{{ subtype.name }}</a>
