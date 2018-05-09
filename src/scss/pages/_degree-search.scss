@@ -40,12 +40,9 @@
   a {
     cursor: pointer;
     display: inline-block;
+    line-height: 1.2;
     margin: 5px 0;
     width: 100%;
-
-    @include media-breakpoint-up(sm) {
-      margin: 3px 0;
-    }
 
     &.active {
       font-weight: 700;
