@@ -355,10 +355,10 @@ function main_site_degree_search_colleges() {
 	ob_start();
 ?>
 	<div class="degree-search-colleges" ng-controller="CollegeController as collegeCtl" ng-init="collegeCtl.init()">
-		<a ng-click="collegeCtl.onClear()">View All</a>
+		<a ng-class="{'active': mainCtl.selectedCollege == 'all'}" ng-click="collegeCtl.onClear()">View All</a>
 		<ul class="degree-search-colleges list-unstyled">
 			<li class="degree-search-college" ng-repeat="(key, college) in collegeCtl.colleges">
-				<a ng-click="collegeCtl.onSelected(college.slug)">{{ college.name }}</a>
+				<a ng-class="{'active': mainCtl.selectedCollege == college.slug}" ng-click="collegeCtl.onSelected(college.slug)">{{ college.name }}</a>
 			</li>
 		</ul>
 	</div>
