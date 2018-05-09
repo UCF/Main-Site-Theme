@@ -23,7 +23,7 @@
   padding-right: 1.2rem;
   vertical-align: middle;
 
-  @include media-breakpoint-up( sm ) {
+  @include media-breakpoint-up(sm) {
     font-size: 1.2rem;
     line-height: 1.1;
     margin-bottom: .25rem;
@@ -33,4 +33,27 @@
     display: block;
     margin-top: 6px;
   }
+}
+
+.degree-search-types,
+.degree-search-colleges {
+  a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 5px 0;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+      margin: 3px 0;
+    }
+
+    &.active {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  }
+}
+
+.results-count {
+  min-height: 26px;
 }
