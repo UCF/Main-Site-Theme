@@ -333,13 +333,13 @@ function main_site_degree_search_program_types() {
 	ob_start();
 ?>
 	<div class="degree-search-types" ng-controller="ProgramController as programCtl" ng-init="programCtl.init()">
-		<a ng-click="programCtl.onClear()">View All</a>
+		<a ng-class="{'active': mainCtl.selectedProgramType === 'all'}" ng-click="programCtl.onClear()">View All</a>
 		<ul class="degree-search-program-types list-unstyled">
 			<li class="degree-search-type" ng-repeat="(key, type) in programCtl.programTypes">
-				<a ng-click="programCtl.onSelected(type.slug)">{{ type.name }}</a>
+				<a ng-class="{'active': mainCtl.selectedProgramType === type.slug}" ng-click="programCtl.onSelected(type.slug)">{{ type.name }}</a>
 				<ul class="degree-search-type-children list-unstyled ml-3" ng-if="type.children && mainCtl.selectedParentProgramType == type.slug">
 					<li class="degree-search-child-type" ng-repeat="(subkey, subtype) in type.children">
-						<a ng-click="programCtl.onSelected(subtype.slug)">{{ subtype.name }}</a>
+						<a ng-class="{'active': mainCtl.selectedProgramType === subtype.slug}" ng-click="programCtl.onSelected(subtype.slug)">{{ subtype.name }}</a>
 					</li>
 				</ul>
 			</li>
