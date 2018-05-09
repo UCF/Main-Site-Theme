@@ -333,7 +333,6 @@ function main_site_degree_search_program_types() {
 	ob_start();
 ?>
 	<div class="degree-search-types" ng-controller="ProgramController as programCtl" ng-init="programCtl.init()">
-		<h2 class="h4">Program Types</h2>
 		<a href="" ng-click="programCtl.onClear()">View All</a>
 		<ul class="degree-search-program-types list-unstyled">
 			<li class="degree-search-type" ng-repeat="(key, type) in programCtl.programTypes">
