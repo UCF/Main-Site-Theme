@@ -22,32 +22,15 @@
   margin-bottom: 5px;
   padding-right: 1.2rem;
   vertical-align: middle;
-  width: 85%;
 
   @include media-breakpoint-up( sm ) {
     font-size: 1.2rem;
     line-height: 1.1;
     margin-bottom: .25rem;
-    width: 79%;
   }
 
   .degree-program-type {
     display: block;
     margin-top: 6px;
-    width: 100%;
-  }
-}
-
-.degree-credits-count {
-  color: #888;
-  display: inline-block;
-  font-size: .75rem;
-  font-weight: normal;
-  line-height: 1.1;
-  text-align: center;
-
-  .number {
-    display: block;
-    font-size: 1.25rem;
   }
 }
