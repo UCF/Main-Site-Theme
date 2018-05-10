@@ -702,6 +702,38 @@
                 "display_type": "text"
             },
             {
+                "key": "field_5af0696eeb799",
+                "label": "Degree Short Name",
+                "name": "degree_name_short",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5af35d5e6475d",
+                "label": "Is Online",
+                "name": "degree_online",
+                "type": "read_only",
+                "instructions": "Whether or not the degree is an online program.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "boolean"
+            },
+            {
                 "key": "field_58fa433f8a35a",
                 "label": "Catalog Description",
                 "name": "degree_description",
