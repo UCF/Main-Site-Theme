@@ -48,6 +48,7 @@
 					echo apply_filters( 'the_content', $post_meta['degree_description'] );
 				}
 				?>
+				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 			</div>
 			<div class="row">
 			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
