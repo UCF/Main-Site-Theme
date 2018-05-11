@@ -379,3 +379,25 @@ function main_site_degree_search_result_count() {
 }
 
 add_filter( 'udsa_result_count_template', 'main_site_degree_search_result_count', 10, 0 );
+
+function main_site_degree_display_subplans( $post_id ) {
+	$children = get_children( array(
+		'post_parent' => $post_id,
+		'post_type'   => 'degree',
+		'numberposts' => -1,
+		'post_status' => 'publish'
+	) );
+
+	if ( $children ) :
+?>
+	<h3>Related Programs</h3>
+	<ul>
+	<?php foreach( $children as $child ) : ?>
+		<li><a href="<?php echo get_permalink( $child->ID ); ?>"><?php echo $child->post_title; ?></a></li>
+	<?php endforeach; ?>
+	</ul>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
