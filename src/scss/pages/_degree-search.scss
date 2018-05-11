@@ -46,15 +46,13 @@
 .degree-search-types,
 .degree-search-colleges {
   a {
-    cursor: pointer;
-    display: inline-block;
-    line-height: 1.2;
-    margin: 5px 0;
-    width: 100%;
-
     &.active {
       font-weight: 700;
       text-decoration: underline;
+    }
+
+    &:not([disabled]):focus {
+      outline: none;
     }
   }
 }
