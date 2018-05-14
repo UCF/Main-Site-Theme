@@ -844,6 +844,11 @@
                     "param": "current_user_role",
                     "operator": "==",
                     "value": "administrator"
+                },
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
                 }
             ]
         ],
