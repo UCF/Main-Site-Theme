@@ -287,10 +287,12 @@ function get_api_catalog_description( $program ) {
 	$description_types = UCF_Degree_Config::get_description_types();
 	$catalog_desc_type_id = null;
 
-	foreach ( $description_types as $desc_id => $desc_name ) {
-		if ( stripos( $desc_name, 'Catalog Description' ) !== false ) {
-			$catalog_desc_type_id = $desc_id;
-			break;
+	if ( $description_types ) {
+		foreach ( $description_types as $desc_id => $desc_name ) {
+			if ( stripos( $desc_name, 'Catalog Description' ) !== false ) {
+				$catalog_desc_type_id = $desc_id;
+				break;
+			}
 		}
 	}
 
