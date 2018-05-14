@@ -20,6 +20,7 @@
   .ucf-degree-search-suggestion {
     border-top: 1px solid $gray-dark;
     color: $white;
+    cursor: pointer;
     margin-bottom: 0;
     overflow: hidden;
     padding: .5rem 1.25rem;
@@ -55,6 +56,14 @@
       color: $gray-dark;
       font-size: .75rem;
       margin-left: .75rem;
+    }
+  }
+
+  .empty-message {
+    padding: .5rem 1.25rem;
+
+    p {
+      margin-bottom: 0;
     }
   }
 }

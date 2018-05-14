@@ -585,6 +585,22 @@
         "title": "Degree Fields",
         "fields": [
             {
+                "key": "field_5ae0c4dcee248",
+                "label": "Custom Degree Data",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
                 "key": "field_58fa42808a359",
                 "label": "Required Hours",
                 "name": "degree_hours",
@@ -593,7 +609,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "40",
                     "class": "",
                     "id": ""
                 },
@@ -603,15 +619,13 @@
                 "append": "",
                 "min": "",
                 "max": "",
-                "step": "",
-                "readonly": 0,
-                "disabled": 0
+                "step": ""
             },
             {
-                "key": "field_58fa433f8a35a",
-                "label": "Description",
-                "name": "degree_description",
-                "type": "textarea",
+                "key": "field_5adf83192113d",
+                "label": "Imported Degree Data",
+                "name": "",
+                "type": "tab",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -620,88 +634,78 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": "wpautop",
-                "readonly": 0,
-                "disabled": 0
-            },
-            {
-                "key": "field_58fa435f8a35b",
-                "label": "Website",
-                "name": "degree_website",
-                "type": "url",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
-                "key": "field_58fa436d8a35c",
-                "label": "Catalog PDF",
-                "name": "degree_pdf",
-                "type": "url",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
-                "key": "field_58fa43808a35d",
-                "label": "Profile URL",
-                "name": "degree_profile_url",
-                "type": "url",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
+                "placement": "top",
+                "endpoint": 0
             },
             {
                 "key": "field_58fa440d8a362",
                 "label": "Degree ID",
                 "name": "degree_id",
-                "type": "text",
-                "instructions": "",
+                "type": "read_only",
+                "instructions": "A unique identifier for the degree.",
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": "",
-                "readonly": 0,
-                "disabled": 0
+                "copy_to_clipboard": 0,
+                "display_type": "text"
             },
             {
-                "key": "field_58fa442f8a363",
-                "label": "Degree Type ID",
-                "name": "degree_type_id",
-                "type": "text",
+                "key": "field_5ae32d36ac658",
+                "label": "Search Service Degree ID",
+                "name": "degree_api_id",
+                "type": "read_only",
+                "instructions": "The ID assigned to the program in the UCF Search Service.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5adf859313850",
+                "label": "Plan Code",
+                "name": "degree_plan_code",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5adf85a813851",
+                "label": "Subplan Code",
+                "name": "degree_subplan_code",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5af0696eeb799",
+                "label": "Degree Short Name",
+                "name": "degree_name_short",
+                "type": "read_only",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
@@ -710,18 +714,111 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "copy_to_clipboard": 0,
+                "display_type": "text"
             },
             {
-                "key": "field_58fa443e8a364",
-                "label": "Is Graduate Program",
-                "name": "degree_is_graduate",
-                "type": "true_false",
+                "key": "field_5af35d5e6475d",
+                "label": "Is Online",
+                "name": "degree_online",
+                "type": "read_only",
+                "instructions": "Whether or not the degree is an online program.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "boolean"
+            },
+            {
+                "key": "field_58fa433f8a35a",
+                "label": "Catalog Description",
+                "name": "degree_description",
+                "type": "read_only",
                 "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_58fa436d8a35c",
+                "label": "Catalog URL",
+                "name": "degree_pdf",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5931a83da2c0f",
+                "label": "Resident Tuition",
+                "name": "degree_resident_tuition",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5931a857a2c10",
+                "label": "Nonresident Tuition",
+                "name": "degree_nonresident_tuition",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5aec63848617d",
+                "label": "Degree Settings",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5aec63a28617e",
+                "label": "Hide Catalog Description on Degree Profile",
+                "name": "degree_disable_catalog_desc",
+                "type": "true_false",
+                "instructions": "Check this box to prevent this degree's Catalog Description from being displayed on its degree profile.  Both the degree's post content and the Catalog Description value are displayed by default on degree profiles.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -734,48 +831,20 @@
                 "ui": 0,
                 "ui_on_text": "",
                 "ui_off_text": ""
-            },
-            {
-                "key": "field_5931a83da2c0f",
-                "label": "Resident Tuition",
-                "name": "degree_resident_tuition",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5931a857a2c10",
-                "label": "Nonresident Tuition",
-                "name": "degree_nonresident_tuition",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
             }
         ],
         "location": [
             [
+                {
+                    "param": "current_user_role",
+                    "operator": "==",
+                    "value": "super_admin"
+                },
+                {
+                    "param": "current_user_role",
+                    "operator": "==",
+                    "value": "administrator"
+                },
                 {
                     "param": "post_type",
                     "operator": "==",

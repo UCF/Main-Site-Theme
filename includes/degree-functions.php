@@ -4,27 +4,57 @@
  **/
 
 /**
+ * Returns the child program_type assigned to the given degree.
+ *
+ * @since 3.1.0
+ * @author Jo Dickson
+ * @param object $degree  WP_Post object
+ * @return mixed  WP_Term object, or null on failure
+ */
+function get_degree_program_type( $degree ) {
+	$retval = null;
+	$args   = array( 'childless' => true );
+	$terms  = wp_get_post_terms( $degree->ID, 'program_types', $args );
+
+	if ( !empty( $terms ) && ! is_wp_error( $terms ) ) {
+		$retval = $terms[0];
+	}
+
+	return $retval;
+}
+
+/**
  * Gets the "Apply Now" button markup for degree.
  * @author Jim Barnes
  * @since 3.0.0
- * @param $post_meta Array | An array of post meta data
+ * @param object $degree | WP_Post object for the degree
  * @return string | The button markup.
  **/
-function get_degree_apply_button( $post_meta ) {
+function get_degree_apply_button( $degree ) {
 	$apply_url = '';
 
-	if ( isset( $post_meta['degree_is_graduate'] ) && $post_meta['degree_is_graduate'] ) {
+	$type = get_degree_program_type( $degree );
+	if ( ! $type ) { return $apply_url; }
+	$type_parent = get_term( $type->parent, 'program_types' );
+	$type_parent = ( ! is_wp_error( $type_parent ) && !empty( $type_parent ) ) ? $type_parent : null;
+
+	if ( $type->name === 'Graduate Program' || ( $type_parent && $type_parent->name === 'Graduate Program' ) ) {
 		$apply_url = get_theme_mod_or_default( 'degrees_graduate_application' );
-	} else {
+	}
+	else if ( $type->name === 'Undergraduate Program' || ( $type_parent && $type_parent->name === 'Undergraduate Program' ) ) {
 		$apply_url = get_theme_mod_or_default( 'degrees_undergraduate_application' );
 	}
 
 	ob_start();
+
+	if ( ! empty( $apply_url ) ):
 ?>
 	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
 		<span class="fa fa-pencil pr-2" aria-hidden="true"></span> Apply Now
 	</a>
 <?php
+	endif;
+
 	return ob_get_clean();
 }
 
@@ -238,19 +268,46 @@ function map_degree_types( $degree_types ) {
 
 
 /**
- * Returns whether or not the given URL looks like a valid degree website
- * value.
+ * Helper function that returns the catalog description for the given
+ * UCF Search Service program object.
  *
- * @since 3.0.5
+ * @since 3.1.0
  * @author Jo Dickson
- * @param string $url Degree website URL to check against
- * @return boolean
+ * @param object $program  A single program object from the UCF Search Service
+ * @return string  The program's catalog description
  */
-function degree_website_is_valid( $url ) {
-	if ( substr_count( $url, '://' ) === 1 && preg_match( '/^http(s)?\:\/\//', $url ) && filter_var( $url, FILTER_VALIDATE_URL ) !== false ) {
-		return true;
+function get_api_catalog_description( $program ) {
+	$retval = '';
+
+	if ( ! class_exists( 'UCF_Degree_Config' ) ) {
+		return $retval;
 	}
-	return false;
+
+	// Determine the catalog description type's ID
+	$description_types = UCF_Degree_Config::get_description_types();
+	$catalog_desc_type_id = null;
+
+	if ( $description_types ) {
+		foreach ( $description_types as $desc_id => $desc_name ) {
+			if ( stripos( $desc_name, 'Catalog Description' ) !== false ) {
+				$catalog_desc_type_id = $desc_id;
+				break;
+			}
+		}
+	}
+
+	// Find the program's description by the catalog description type ID
+	$descriptions = $program->descriptions;
+
+	if ( !empty( $descriptions ) && $catalog_desc_type_id ) {
+		foreach ( $descriptions as $d ) {
+			if ( $d->description_type->id === $catalog_desc_type_id ) {
+				$retval = $d->description;
+			}
+		}
+	}
+
+	return $retval;
 }
 
 /**
@@ -260,16 +317,14 @@ function degree_website_is_valid( $url ) {
  * @since 3.0.5
  * @author Jo Dickson
  */
-function mainsite_degree_format_post_data( $post_array_item, $program ) {
-	$post_array_item['post_meta']['degree_hours']       = $program->required_hours;
-	$post_array_item['post_meta']['degree_website']     = degree_website_is_valid( $program->website ) ? $program->website : '';
-	$post_array_item['post_meta']['degree_is_graduate'] = filter_var( $program->graduate, FILTER_VALIDATE_BOOLEAN );
-	$post_array_item['post_meta']['page_header_height'] = 'header-media-default';
+function mainsite_degree_format_post_data( $meta, $program ) {
+	$meta['page_header_height'] = 'header-media-default';
+	$meta['degree_description'] = get_api_catalog_description( $program );
 
-	return $post_array_item;
+	return $meta;
 }
 
-add_filter( 'ucf_degree_format_post_data', 'mainsite_degree_format_post_data', 10, 2 );
+add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 10, 2 );
 
 
 /**
@@ -280,13 +335,17 @@ function main_site_degree_search_program_types() {
 	ob_start();
 ?>
 	<div class="degree-search-types" ng-controller="ProgramController as programCtl" ng-init="programCtl.init()">
-		<h3 class="h5">Program Types</h3>
-		<div class="degree-search-type-container" ng-repeat="(key, type) in programCtl.programTypes">
-			<label class="form-check-label" ng-show="type.count > 0">
-				<input class="form-check-input" type="radio" name="program_type[]" value="{{ type.slug }}" ng-checked="mainCtl.selectedProgramType === type.slug" ng-click="programCtl.onSelected(type.slug)">
-				{{ type.name }} ({{ type.count }})
-			</label>
-		</div>
+		<a href ng-class="{'active': mainCtl.selectedProgramType === 'all'}" ng-click="programCtl.onClear()">View All</a>
+		<ul class="degree-search-program-types list-unstyled">
+			<li class="degree-search-type" ng-repeat="(key, type) in programCtl.programTypes">
+				<a href ng-class="{'active': mainCtl.selectedProgramType === type.slug}" ng-click="programCtl.onSelected(type.slug)">{{ type.name }}</a>
+				<ul class="degree-search-type-children list-unstyled ml-3" ng-if="type.children && mainCtl.selectedParentProgramType == type.slug">
+					<li class="degree-search-child-type" ng-repeat="(subkey, subtype) in type.children">
+						<a href ng-class="{'active': mainCtl.selectedProgramType === subtype.slug}" ng-click="programCtl.onSelected(subtype.slug)">{{ subtype.name }}</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
 	</div>
 <?php
 	return ob_get_clean();
@@ -298,13 +357,12 @@ function main_site_degree_search_colleges() {
 	ob_start();
 ?>
 	<div class="degree-search-colleges" ng-controller="CollegeController as collegeCtl" ng-init="collegeCtl.init()">
-		<h3 class="h5">Colleges</h3>
-		<div class="degree-search-college-container" ng-repeat="(key, college) in collegeCtl.colleges">
-			<label class="form-check-label" ng-show="college.count > 0">
-				<input class="form-check-input" type="radio" name="college[]" value="{{ college.slug }}" ng-checked="mainCtl.selectedCollege === college.slug" ng-click="collegeCtl.onSelected(college.slug)">
-				{{ college.name }} ({{ college.count }})
-			</label>
-		</div>
+		<a href ng-class="{'active': mainCtl.selectedCollege == 'all'}" ng-click="collegeCtl.onClear()">View All</a>
+		<ul class="degree-search-colleges list-unstyled">
+			<li class="degree-search-college" ng-repeat="(key, college) in collegeCtl.colleges">
+				<a href ng-class="{'active': mainCtl.selectedCollege == college.slug}" ng-click="collegeCtl.onSelected(college.slug)">{{ college.name }}</a>
+			</li>
+		</ul>
 	</div>
 <?php
 	return ob_get_clean();
@@ -323,3 +381,25 @@ function main_site_degree_search_result_count() {
 }
 
 add_filter( 'udsa_result_count_template', 'main_site_degree_search_result_count', 10, 0 );
+
+function main_site_degree_display_subplans( $post_id ) {
+	$children = get_children( array(
+		'post_parent' => $post_id,
+		'post_type'   => 'degree',
+		'numberposts' => -1,
+		'post_status' => 'publish'
+	) );
+
+	if ( $children ) :
+?>
+	<h3>Related Programs</h3>
+	<ul>
+	<?php foreach( $children as $child ) : ?>
+		<li><a href="<?php echo get_permalink( $child->ID ); ?>"><?php echo $child->post_title; ?></a></li>
+	<?php endforeach; ?>
+	</ul>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
