@@ -297,11 +297,14 @@
                     "id": ""
                 },
                 "choices": {
-                    "undergraduate-degree": "Undergraduate Degrees",
-                    "master": "Graduate Degrees",
-                    "doctorate": "Doctorates",
+                    "bachelor": "Bachelors",
                     "minor": "Minors",
-                    "certificate": "Certificates"
+                    "undergraduate-certificate": "Undergraduate Certificates",
+                    "master": "Masters",
+                    "doctorate": "Doctorates",
+                    "graduate-certificate": "Graduate Certificates",
+                    "specialist": "Specialist Degrees",
+                    "professional-program": "Professional Programs"
                 },
                 "allow_custom": 0,
                 "save_custom": 0,

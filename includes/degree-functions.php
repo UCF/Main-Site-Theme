@@ -186,8 +186,7 @@ function get_degree_breadcrumb_markup( $post_id ) {
 	$degree = get_post( $post_id );
 	if ( !$degree || ( $degree && $degree->post_type !== 'degree' ) ) { return; }
 
-	$program_types         = wp_get_post_terms( $post_id, 'program_types' );
-	$program_type          = is_array( $program_types ) ? $program_types[0] : null;
+	$program_type          = get_degree_program_type( $degree );
 	$colleges              = wp_get_post_terms( $post_id, 'colleges' );
 	$college               = is_array( $colleges ) ? $colleges[0] : null;
 
@@ -210,7 +209,7 @@ function get_degree_breadcrumb_markup( $post_id ) {
 		<?php endif; ?>
 
 		<?php if ( $program_type ) : ?>
-		<a class="breadcrumb-item" href="<?php echo $program_type_url; ?>"><?php echo $program_type->name; ?></a>
+		<a class="breadcrumb-item" href="<?php echo $program_type_url; ?>"><?php echo $program_type->name; ?>s</a>
 		<?php endif; ?>
 
 		<span class="breadcrumb-item active"><?php echo $degree->post_title; ?></span>
