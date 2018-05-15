@@ -23,7 +23,7 @@
   padding-right: 1.2rem;
   vertical-align: middle;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     font-size: 1.2rem;
     line-height: 1.1;
     margin-bottom: .25rem;
@@ -38,7 +38,7 @@
 .degree-search-subplan-results-container {
   margin-left: 1.2rem;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     margin-left: 1.5rem;
   }
 
@@ -49,7 +49,7 @@
   .degree-title {
     font-size: .85rem;
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(md) {
       font-size: 1.1rem;
     }
   }
@@ -93,5 +93,30 @@
 }
 
 .results-count {
-  min-height: 26px;
+  min-height: calc(26px + 1.25rem);
+
+  @include media-breakpoint-up(md) {
+    padding-bottom: .25rem;
+  }
+}
+
+.degree-search-results {
+  .loading {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.degree-search-results-container {
+  margin-bottom: 1.75rem;
+}
+
+.degree-search-group-title {
+  @include media-breakpoint-down(sm) {
+    font-size: 1.5rem;
+  }
+
+  span {
+    @extend .small;
+    color: $text-muted;
+  }
 }
