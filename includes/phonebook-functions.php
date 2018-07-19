@@ -148,11 +148,11 @@ function phonebook_deduplicate_staff( $results ) {
  **/
 function phonebook_result_is_in_group( $group, $result, $org ) {
 	if ( $org ) {
-		return ( $group->name === $result->organization );
+		return ( $group->id === $result->org_id );
 	}
 
 	// This is not an org, check department
-	return ( $group->name === $result->department );
+	return ( $group->id === $result->dept_id );
 }
 
 /**
