@@ -388,7 +388,7 @@ function phonebook_fix_name_case( $name ) {
 		'Rotc' => 'ROTC',
 		' Of ' => ' of ',
 		' For ' => ' for ',
-		'&public' => '$amp; Public',
+		'&public' => '&amp; Public',
 		'Student-athletes' => 'Student Athletes',
 		'Wucf' => 'WUCF',
 		'WUCF Tv' => 'WUCF TV',
