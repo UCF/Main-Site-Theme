@@ -15,8 +15,6 @@ function get_phonebook_results( $query ) {
 		return false;
 	}
 
-	$retval = array();
-
 	$url = get_theme_mod_or_default( 'search_service_url' );
 
 	$params = array(
@@ -25,12 +23,16 @@ function get_phonebook_results( $query ) {
 
 	$response = wp_remote_get( $url . '?' . http_build_query( $params ) );
 
+	$results = array();
+
 	if ( is_array( $response ) ) {
 		$results = json_decode( wp_remote_retrieve_body( $response ) );
 
-		if ( isset( $results->results ) ) {
-			$results = $results->results;
-		}
+		$results = $results->results;
+	}
+
+	if ( empty( $results ) ) {
+		return $results;
 	}
 
 	// Filter out unwanted results
