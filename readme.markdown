@@ -5,7 +5,7 @@ A responsive WordPress theme for ucf.edu, built off of the [Athena Framework](ht
 
 ## Installation Requirements
 
-This theme is developed and tested against WordPress 4.7.3+ and PHP 5.3.x+.
+This theme is developed and tested against WordPress 4.9.8 and PHP 5.4.x+.
 
 ### Required Plugins
 These plugins *must* be activated for the theme to function properly, and/or to satisfy core feature requirements for ucf.edu.
