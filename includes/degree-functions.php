@@ -120,10 +120,13 @@ function get_departments_markup( $post_id ) {
 function get_degree_tuition_markup( $post_meta ) {
 	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
 	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
+	$skip = ( isset( $post_meta['degree_tuition_skip'] ) && $post_meta['degree_tuition_skip'] === 'on' ) ? true : false;
 
-	if ( $resident && $nonresident ) {
+	if ( $resident && $nonresident && ! $skip ) {
 		return ucf_tuition_fees_degree_layout( $resident, $nonresident );
 	}
+
+	return '';
 }
 
 function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
