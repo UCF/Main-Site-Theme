@@ -1,0 +1,4 @@
+# Ignore project config json files
+package.json
+.eslintrc.json
+gulp-config.template.json
