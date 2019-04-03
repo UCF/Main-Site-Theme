@@ -5,7 +5,7 @@ about: Suggest an idea for this theme
 ---
 
 <!--
-Thank you for suggesting an idea to make {{My-Project}} better.
+Thank you for suggesting an idea to make the  Main Site Theme better.
 
 Please provide a general summary of your feature request in the Title above, and fill in as much of the template below as you can.
 -->

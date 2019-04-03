@@ -1,8 +1,5 @@
 <!---
-Thank you for contributing to {{My-Project}}.
-
-Please make sure you've read our contributing guidelines:
-https://github.com/UCF/{{My-Project}}/blob/master/CONTRIBUTING.md
+Thank you for contributing to the Main Site Theme.
 
 Provide a general summary of your changes in the Title above and fill in the template below.
 -->
