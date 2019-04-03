@@ -23,6 +23,7 @@
 }
 
 .header-media {
+  background-color: $gray; // fallback color for readability if assets fail to load
   height: 100%;
   position: relative;
 
