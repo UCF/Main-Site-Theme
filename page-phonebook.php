@@ -1,12 +1,17 @@
-<?php get_header();
+<?php
 /**
  * The page template for the phonebook
  **/
+?>
+
+<?php get_header(); ?>
+
+<?php
 $query = isset( $_GET['query'] ) ? $_GET['query'] : '';
 $results = get_phonebook_results( $query );
-
 ?>
-<div class="container">
+
+<div class="container mt-md-4 mb-4 mb-sm-5 pb-md-5">
 	<form id="phonebook-search">
 		<div class="input-group">
 			<label for="phonebook-search-query" class="sr-only">Search Organizations, Departments, and People at UCF</label>
@@ -16,16 +21,24 @@ $results = get_phonebook_results( $query );
 			</span>
 		</div>
 	</form>
-	<?php if ( is_array( $results ) ) : ?>
-	<div class="phonebook-results my-5">
+
+	<?php if ( $query ): ?>
+	<div class="phonebook-results my-4 my-md-5">
+
 		<?php if ( count( $results ) === 0 ) : ?>
-			<p class="text-bold">No results were found.</p>
-		<?php else :
+			<div class="alert alert-warning">
+				<p class="mb-0">No results were found.</p>
+			</div>
+		<?php else: ?>
+			<?php
 			foreach( $results as $result ) {
 				echo format_phonebook_result( $result );
 			}
-			endif; ?>
+			?>
+		<?php endif; ?>
+
 	</div>
 	<?php endif; ?>
 </div>
+
 <?php get_footer(); ?>

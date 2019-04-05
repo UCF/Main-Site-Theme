@@ -28,7 +28,9 @@ function get_phonebook_results( $query ) {
 	if ( is_array( $response ) ) {
 		$results = json_decode( wp_remote_retrieve_body( $response ) );
 
-		$results = $results->results;
+		// Force cast empty values to array;
+		// the search service can sometimes return null here
+		$results = $results->results ?: array();
 	}
 
 	if ( empty( $results ) ) {
@@ -254,7 +256,8 @@ function format_phonebook_result( $result ) {
 						<?php else : ?>
 							<span class="name"><?php echo $person->name; ?></span>
 						<?php endif; ?>
-						<?php if ( $person->phone ) : ?>
+
+						<?php if ( $person->phone && $person->phone !== '000-000-0000' ) : ?>
 							<span class="phone"><a href="tel:<?php echo str_replace( '-', '', $person->phone ); ?>"><?php echo $person->phone; ?></a></span>
 						<?php endif; ?>
 					</li>
@@ -333,7 +336,7 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	<?php endif; ?>
 	<?php if ( $result->postal ) : ?>
 		<span class="postal d-block">
-			Zip: <?php echo $result->postal; ?>
+			ZIP: <?php echo $result->postal; ?>
 		</span>
 	<?php endif; ?>
 <?php
