@@ -28,7 +28,9 @@ function get_phonebook_results( $query ) {
 	if ( is_array( $response ) ) {
 		$results = json_decode( wp_remote_retrieve_body( $response ) );
 
-		$results = $results->results;
+		// Force cast empty values to array;
+		// the search service can sometimes return null here
+		$results = $results->results ?: array();
 	}
 
 	if ( empty( $results ) ) {
