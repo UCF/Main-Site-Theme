@@ -143,16 +143,15 @@ function serverServe(done) {
 //
 
 // Copy Font Awesome files
-gulp.task('move-components-fontawesome', (done) => {
-  gulp.src([`${config.packagesPath}/font-awesome/fonts/**/*`])
+gulp.task('move-components-fontawesome', () => {
+  return gulp.src([`${config.packagesPath}/font-awesome/fonts/**/*`])
     .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome`));
 });
 
 // Athena Framework web font processing
-gulp.task('move-components-athena-fonts', (done) => {
-  gulp.src([`${config.packagesPath}/ucf-athena-framework/dist/fonts/**/*`])
+gulp.task('move-components-athena-fonts', () => {
+  return gulp.src([`${config.packagesPath}/ucf-athena-framework/dist/fonts/**/*`])
     .pipe(gulp.dest(config.dist.fontPath));
-  done();
 });
 
 // Run all component-related tasks

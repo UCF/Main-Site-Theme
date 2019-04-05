@@ -18,13 +18,13 @@
     }
 
     &::before {
+      -moz-osx-font-smoothing: grayscale; // sass-lint:disable-line no-vendor-prefixes
+      -webkit-font-smoothing: antialiased; // sass-lint:disable-line no-vendor-prefixes
       color: $ucf-gold;
       content: '';
       display: inline-block;
       font: normal normal normal 14px/1 FontAwesome;
       font-size: .8em;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-font-smoothing: antialiased;
       line-height: 1;
       text-rendering: auto;
       width: 1.25em;
