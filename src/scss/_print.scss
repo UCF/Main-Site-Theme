@@ -1,4 +1,4 @@
-// scss-lint:disable ImportantRule
+// sass-lint:disable no-important
 @media print {
 
   //
@@ -40,10 +40,8 @@
 
   .ignite-logo {
     // Encourage browsers to always print the bg img
-    // scss-lint:disable PropertySpelling
+    -webkit-print-color-adjust: exact !important; // sass-lint:disable-line no-vendor-prefixes
     color-adjust: exact !important;
-    // scss-lint:enable PropertySpelling
-    -webkit-print-color-adjust: exact !important;
   }
 
 
@@ -56,4 +54,4 @@
   }
 
 }
-// scss-lint:enable ImportantRule
+// sass-lint:enable no-important
