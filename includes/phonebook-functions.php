@@ -256,7 +256,8 @@ function format_phonebook_result( $result ) {
 						<?php else : ?>
 							<span class="name"><?php echo $person->name; ?></span>
 						<?php endif; ?>
-						<?php if ( $person->phone ) : ?>
+
+						<?php if ( $person->phone && $person->phone !== '000-000-0000' ) : ?>
 							<span class="phone"><a href="tel:<?php echo str_replace( '-', '', $person->phone ); ?>"><?php echo $person->phone; ?></a></span>
 						<?php endif; ?>
 					</li>
