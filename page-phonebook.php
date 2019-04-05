@@ -1,11 +1,16 @@
-<?php get_header();
+<?php
 /**
  * The page template for the phonebook
  **/
+?>
+
+<?php get_header(); ?>
+
+<?php
 $query = isset( $_GET['query'] ) ? $_GET['query'] : '';
 $results = get_phonebook_results( $query );
-
 ?>
+
 <div class="container mt-md-4 mb-4 mb-sm-5 pb-md-5">
 	<form id="phonebook-search">
 		<div class="input-group">
@@ -16,7 +21,10 @@ $results = get_phonebook_results( $query );
 			</span>
 		</div>
 	</form>
+
+	<?php if ( $query ): ?>
 	<div class="phonebook-results my-4 my-md-5">
+
 		<?php if ( count( $results ) === 0 ) : ?>
 			<div class="alert alert-warning">
 				<p class="mb-0">No results were found.</p>
@@ -28,6 +36,9 @@ $results = get_phonebook_results( $query );
 			}
 			?>
 		<?php endif; ?>
+
 	</div>
+	<?php endif; ?>
 </div>
+
 <?php get_footer(); ?>
