@@ -23,6 +23,7 @@
 }
 
 .header-media {
+  background-color: $gray; // fallback color for readability if assets fail to load
   height: 100%;
   position: relative;
 
@@ -123,7 +124,7 @@
   }
 
   // Selector depth required to match Bootstrap/Athena selectors
-  // scss-lint:disable NestingDepth SelectorDepth
+  // sass-lint:disable nesting-depth
   .navbar-collapse {
     @include media-breakpoint-down(md) {
       background-color: transparentize(darken($brand-default, 25%), .025);
@@ -189,7 +190,7 @@
       }
     }
   }
-  // scss-lint:enable NestingDepth SelectorDepth
+  // sass-lint:enable nesting-depth
 }
 
 // Pushes .header-content up enough to prevent overlap with the

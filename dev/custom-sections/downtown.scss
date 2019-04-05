@@ -3,9 +3,7 @@
 
 .ucf-section-downtown-section {
   .downtown-jumbotron {
-    // scss-lint:disable ImportantRule
-    background-color: #578bba !important;
-    // scss-lint:enable ImportantRule
+    background-color: #578bba !important; // sass-lint:disable-line no-important
     padding-bottom: 55vw;
 
     @include media-breakpoint-up(md) {
