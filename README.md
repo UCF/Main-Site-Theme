@@ -2,6 +2,7 @@
 
 A responsive WordPress theme for ucf.edu, built off of the [Athena Framework](https://github.com/UCF/Athena-Framework).
 
+-----
 
 ## Installation Requirements
 
@@ -51,6 +52,7 @@ These plugins add desirable features, some of which are environment-specific for
 * WP Allowed Hosts
 * WP Shortcode Interface
 
+-----
 
 ## Configuration
 * Ensure that menus have been created and assigned to the Header Menu and Footer Menu locations.  Other sites on your environment that depend on the main site header navigation and/or the UCF Footer plugin should be configured to reference these menus' REST API endpoints.
@@ -59,6 +61,7 @@ These plugins add desirable features, some of which are environment-specific for
 * Create and set a static front page under Settings > Reading.
 * Create a redirect group with at least 1 redirect rule in the Redirection plugin for the Main Site/Alert Switchover.
 
+-----
 
 ## Development
 
@@ -68,13 +71,18 @@ Note that compiled, minified css and js files are included within the repo.  Cha
 
 ### Requirements
 * node
-* gulp
+* gulp-cli
 
 ### Instructions
-1. Clone the Main-Site-Theme repo into your development environment, within your WordPress installation's `themes/` directory: `git clone https://github.com/UCF/Main-Site-Theme.git`
-2. `cd` into the Main-Site-Theme directory, and run `npm install` to install required packages for development into `node_modules/` within the repo
-3. Copy `gulp-config.template.json`, make any desired changes, and save as `gulp-config.json`.
+1. Clone the Main-Site-Theme repo into your local development environment, within your WordPress installation's `themes/` directory: `git clone https://github.com/UCF/Main-Site-Theme.git`
+2. `cd` into the new Main-Site-Theme directory, and run `npm install` to install required packages for development into `node_modules/` within the repo
+3. Optional: If you'd like to enable [BrowserSync](https://browsersync.io) for local development, or make other changes to this project's default gulp configuration, copy `gulp-config.template.json`, make any desired changes, and save as `gulp-config.json`.
+
+    To enable BrowserSync, set `sync` to `true` and assign `syncTarget` the base URL of a site on your local WordPress instance that will use this theme, such as `http://localhost/wordpress/my-site/`.  Your `syncTarget` value will vary depending on your local host setup.
+
+    The full list of modifiable config values can be viewed in `gulpfile.js` (see `config` variable).
 3. Run `gulp default` to process front-end assets.
-4. If you haven't already done so, create a new WordPress site on your development environment, install the required plugins listed above, and set the Main Site Theme as the active theme.
-5. Make sure you've done all the steps listed under "Configuration" above.
-6. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
+4. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](#installation-requirements).
+5. Set Main Site Theme as the active theme.
+6. Make sure you've completed [all theme configuration steps](#configuration).
+7. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
