@@ -6,7 +6,7 @@ $query = isset( $_GET['query'] ) ? $_GET['query'] : '';
 $results = get_phonebook_results( $query );
 
 ?>
-<div class="container">
+<div class="container mb-5 pb-md-5">
 	<form id="phonebook-search">
 		<div class="input-group">
 			<label for="phonebook-search-query" class="sr-only">Search Organizations, Departments, and People at UCF</label>
