@@ -336,7 +336,7 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	<?php endif; ?>
 	<?php if ( $result->postal ) : ?>
 		<span class="postal d-block">
-			Zip: <?php echo $result->postal; ?>
+			ZIP: <?php echo $result->postal; ?>
 		</span>
 	<?php endif; ?>
 <?php
