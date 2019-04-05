@@ -82,7 +82,7 @@ Note that compiled, minified css and js files are included within the repo.  Cha
 
     The full list of modifiable config values can be viewed in `gulpfile.js` (see `config` variable).
 3. Run `gulp default` to process front-end assets.
-4. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](https://github.com/UCF/Main-Site-Theme/wiki/Installation#installation-requirements).
+4. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](#installation-requirements).
 5. Set Main Site Theme as the active theme.
-6. Make sure you've completed [all theme configuration steps](https://github.com/UCF/Main-Site-Theme/wiki/Installation#theme-configuration).
+6. Make sure you've completed [all theme configuration steps](#configuration).
 7. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
