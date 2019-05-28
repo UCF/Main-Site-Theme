@@ -118,7 +118,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 					<h2 class="mb-0"><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : $term->name . " News"; ?></h2>
 				</div>
 				<div class="col-auto">
-					<a href="https://today.ucf.edu/topic/<?php echo $news_topic; ?>" class="h6 text-uppercase d-block mb-0 mt-2 text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
+					<a href="https://www.ucf.edu/news/tag/<?php echo $news_topic; ?>" class="h6 text-uppercase d-block mb-0 mt-2 text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
 				</div>
 			</div>
 			<hr class="mt-2">
