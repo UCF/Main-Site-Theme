@@ -2,8 +2,8 @@
 // Import vendor assets
 //
 
-// =require ./ucf-athena-framework/dist/js/framework.min.js
-// =require ./js-cookie/src/js.cookie.js
+// =require ucf-athena-framework/dist/js/framework.min.js
+// =require js-cookie/src/js.cookie.js
 
 
 //
