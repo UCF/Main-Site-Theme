@@ -471,8 +471,9 @@ add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
  *
  * @since v3.2.4
  * @author Jo Dickson
- * @param bool $hide_empty Yoast default setting (defaults to true)
+ * @param bool $hide_empty Yoast default setting for (defaults to true)
  * @param array $taxonomy_names Array of names for the taxonomies being processed.
+ * @return bool Whether or not the taxonomy should be queried with empty terms
  */
 function yoast_sitemap_empty_terms( $hide_empty, $taxonomies ) {
 	if ( $taxonomies === array( 'colleges' ) ) {
