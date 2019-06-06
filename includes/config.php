@@ -464,3 +464,21 @@ function remove_yoast_meta_boxes() {
 
 add_action( 'add_meta_boxes', 'remove_yoast_meta_boxes' );
 
+
+/**
+ * Ensure that empty College terms appear in Yoast's generated
+ * sitemap for Colleges.
+ *
+ * @since v3.2.4
+ * @author Jo Dickson
+ * @param bool $hide_empty Yoast default setting (defaults to true)
+ * @param array $taxonomy_names Array of names for the taxonomies being processed.
+ */
+function yoast_sitemap_empty_terms( $hide_empty, $taxonomies ) {
+	if ( $taxonomies === array( 'colleges' ) ) {
+		$hide_empty = false;
+	}
+	return $hide_empty;
+}
+
+add_filter( 'wpseo_sitemap_exclude_empty_terms', 'yoast_sitemap_empty_terms', 10, 2 );
