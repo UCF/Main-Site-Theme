@@ -1,22 +1,22 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.5",
     "eslint": "^5.16.0",
     "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
     "gulp-babel": "^8.0.0",
-    "gulp-clean-css": "^4.0.0",
+    "gulp-clean-css": "^4.2.0",
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^5.0.0",
     "gulp-eslint-if-fixed": "^1.0.0",
-    "gulp-include": "^2.3.1",
+    "gulp-include": "^2.4.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "~4.0.2",
     "gulp-sass-lint": "^1.4.0",
@@ -24,7 +24,7 @@
     "gulp-uglify": "^3.0.2",
     "js-cookie": "^2.2.0",
     "merge": "^1.2.1",
-    "ucf-athena-framework": "^1.0.4"
+    "ucf-athena-framework": "^1.0.6"
   },
   "browserslist": [
     "last 2 versions"
