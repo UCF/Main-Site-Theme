@@ -6,7 +6,7 @@
     "@babel/preset-env": "^7.4.5",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
-    "browser-sync": "^2.26.5",
+    "browser-sync": "^2.26.7",
     "eslint": "^5.16.0",
     "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
     "gulp": "^4.0.2",
