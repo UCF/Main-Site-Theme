@@ -1,5 +1,5 @@
 //
-// Handles pause/play buttons for video backgrounds.
+// Make IE11 behave with lazy-loaded media backgrounds via lazysizes.
 //
 
 (function ($) {
