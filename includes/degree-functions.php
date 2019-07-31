@@ -257,11 +257,13 @@ add_filter( 'ucf_degree_search_suggestion', 'main_site_degree_search_suggestion'
 function map_degree_types( $degree_types ) {
 	$retval = array();
 
-	foreach( $degree_types as $degree_type ) {
-		$term = get_term_by( 'slug', $degree_type, 'program_types' );
+	if ( ! empty( $degree_types ) ) {
+		foreach( $degree_types as $degree_type ) {
+			$term = get_term_by( 'slug', $degree_type, 'program_types' );
 
-		if ( $term ) {
-			$retval[$term->slug] = $term->name;
+			if ( $term ) {
+				$retval[$term->slug] = $term->name;
+			}
 		}
 	}
 
