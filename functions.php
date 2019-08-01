@@ -147,21 +147,25 @@ function get_media_background_picture( $srcs ) {
  * @return string
  **/
 function get_media_background_video( $videos, $loop=false ) {
+	$placeholder_id = 'js-placeholder-media-background-video--' . md5( json_encode( $videos ) ) . '-' . wp_rand( 0, 9999 );
 	ob_start();
 ?>
-	<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted <?php if ( $loop ) { ?>loop<?php } ?>>
-		<?php if ( isset( $videos['webm'] ) ) : ?>
-		<source src="<?php echo $videos['webm']; ?>" type="video/webm">
-		<?php endif; ?>
+	<div id="<?php echo $placeholder_id; ?>"></div>
+	<script type="text/template" class="js-tmpl-media-background-video" data-placeholder="<?php echo $placeholder_id; ?>">
+		<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted <?php if ( $loop ) { ?>loop<?php } ?>>
+			<?php if ( isset( $videos['webm'] ) ) : ?>
+			<source src="<?php echo $videos['webm']; ?>" type="video/webm">
+			<?php endif; ?>
 
-		<?php if ( isset( $videos['mp4'] ) ) : ?>
-		<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
-		<?php endif; ?>
-	</video>
-	<button class="media-background-video-toggle btn play-enabled hidden-xs-up" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
-		<span class="fa fa-pause media-background-video-pause" aria-hidden="true"></span>
-		<span class="fa fa-play media-background-video-play" aria-hidden="true"></span>
-	</button>
+			<?php if ( isset( $videos['mp4'] ) ) : ?>
+			<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
+			<?php endif; ?>
+		</video>
+		<button class="media-background-video-toggle btn play-enabled hidden-xs-up" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
+			<span class="fa fa-pause media-background-video-pause" aria-hidden="true"></span>
+			<span class="fa fa-play media-background-video-play" aria-hidden="true"></span>
+		</button>
+	</script>
 <?php
 	return ob_get_clean();
 }
