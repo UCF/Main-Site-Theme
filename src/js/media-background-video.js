@@ -159,7 +159,10 @@
         };
 
         // TODO add debounce
-        $(window).on('load scroll', scrollCallback);
+        $(window).on('scroll', scrollCallback);
+
+        // Call scrollCallback manually for onload event or window resize up:
+        scrollCallback();
       }
     });
 
@@ -177,10 +180,13 @@
         // Reset the btn controls when the first video on the page ends
         $videos.get(0).addEventListener('ended', toggleBtnPause, false);
       }
+
+      $(window).off('resize', init);
     }
   }
 
-  $(init);
+  // TODO add debounce
+  $(window).on('load resize', init);
 
 
 }(jQuery));
