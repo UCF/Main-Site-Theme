@@ -12,6 +12,7 @@
     expires: 365,
     domain: UCFEDU.domain
   };
+  let initTimer = null;
 
 
   function isPlaybackEnabled() {
@@ -155,8 +156,13 @@
   $.fn.autoloadVideo = function () {
     this.each(function () {
       const $video = $(this);
+      const video = $video.get(0);
+      let scrollCallbackTimer = null;
 
-      if ($video.attr('preload') === 'none') {
+      if (
+        video.preload === 'none'
+        || video.preload === 'auto' && !video.autoplay
+      ) {
         const scrollCallback = function () {
           if ($video.isInViewport()) {
             $video
@@ -168,12 +174,16 @@
 
             syncToggleableVideos();
 
-            $(window).off('scroll', scrollCallback);
+            $(window).off('scroll', scrollCallbackDebounce);
           }
         };
 
-        // TODO add debounce
-        $(window).on('scroll', scrollCallback);
+        const scrollCallbackDebounce = function () {
+          clearTimeout(scrollCallbackTimer);
+          scrollCallbackTimer = setTimeout(scrollCallback, 25);
+        };
+
+        $(window).on('scroll', scrollCallbackDebounce);
 
         // Call scrollCallback manually for onload event or window resize up:
         scrollCallback();
@@ -183,6 +193,11 @@
     return this;
 
   };
+
+  function initDebounce() {
+    clearTimeout(initTimer);
+    initTimer = setTimeout(init, 250);
+  }
 
   function init() {
     if ($(window).width() >= videoViewportMinThreshold) {
@@ -195,12 +210,13 @@
         $videos.get(0).addEventListener('ended', toggleBtnPause, false);
       }
 
-      $(window).off('resize', init);
+      $(window).off('resize', initDebounce);
     }
   }
 
-  // TODO add debounce
-  $(window).on('load resize', init);
+  $(window)
+    .on('load', init)
+    .on('resize', initDebounce);
 
 
 }(jQuery));
