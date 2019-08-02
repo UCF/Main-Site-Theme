@@ -168,7 +168,6 @@
             $video
               .attr('autoplay', true)
               .attr('preload', 'auto');
-            const video = $video.get(0);
             video.autoplay = true;
             video.preload = 'auto';
 
