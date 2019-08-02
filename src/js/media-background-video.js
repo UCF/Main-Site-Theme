@@ -14,9 +14,13 @@
   };
 
 
-  function btnClickHandler() {
+  function isPlaybackEnabled() {
     const $btns = getVideoBtns();
-    if ($btns.first().hasClass('play-enabled')) {
+    return $btns.first().hasClass('play-enabled');
+  }
+
+  function btnClickHandler() {
+    if (isPlaybackEnabled()) {
       toggleBtnPause();
       bgVideosPause();
       disableBgVideoAutoplay();
@@ -44,7 +48,10 @@
   function bgVideosPlay() {
     const $videos = getVideos();
     $videos.each(function () {
-      if (this.paused || this.ended) {
+      if (
+        (this.paused || this.ended)
+        && this.autoplay
+      ) {
         this.play();
       }
     });
@@ -96,18 +103,23 @@
     return $(btnSelector);
   }
 
-  // Synchronizes all video playback and toggle button behavior based on cookie settings
+  // Synchronizes all video playback and toggle button behavior
   function syncToggleableVideos() {
     const $btns = getVideoBtns();
+    let playbackSetting = '0';
 
     // Set the autoplay cookie if it hasn't been set yet
     if (typeof Cookies.get(cookieName) === 'undefined') {
-      setAutoplayCookie('1');
+      playbackSetting = isPlaybackEnabled() ? '1' : '0';
+      setAutoplayCookie(playbackSetting);
+    } else {
+      playbackSetting = getAutoplayCookie();
     }
 
     // Toggle the btn and video play on load
-    if (getAutoplayCookie() === '1') {
+    if (playbackSetting === '1') {
       toggleBtnPlay();
+      bgVideosPlay();
     } else {
       toggleBtnPause();
       bgVideosPause();
@@ -141,13 +153,15 @@
   // Updates a preload="none" media background video to
   // load when visible and autoplay.
   $.fn.autoloadVideo = function () {
-
     this.each(function () {
       const $video = $(this);
 
       if ($video.attr('preload') === 'none') {
         const scrollCallback = function () {
           if ($video.isInViewport()) {
+            $video
+              .attr('autoplay', true)
+              .attr('preload', 'auto');
             const video = $video.get(0);
             video.autoplay = true;
             video.preload = 'auto';
