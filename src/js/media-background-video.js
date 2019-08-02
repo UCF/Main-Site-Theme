@@ -6,7 +6,6 @@
 
   const btnSelector = '.media-background-video-toggle';
   const videoSelector = '.media-background-video';
-  const templateSelector = '.js-tmpl-media-background-video';
   const videoViewportMinThreshold = 576; // px
   const cookieName = 'ucfedu-autoplay-bg-videos';
   const cookieSettings = {
@@ -93,27 +92,12 @@
     return $(videoSelector);
   }
 
-  function getTemplates() {
-    return $(templateSelector);
-  }
-
   function getVideoBtns() {
     return $(btnSelector);
   }
 
-  // Inserts a video into the page from a template, replacing its placeholder.
-  function insertVideoIfVisible($template, $placeholder) {
-    if ($placeholder.isInViewport()) {
-      const $video = $($template.html());
-      $placeholder.replaceWith($video);
-      $(window).trigger('videoAutoloaded');
-      $template.remove();
-    }
-  }
-
   // Synchronizes all video playback and toggle button behavior based on cookie settings
   function syncToggleableVideos() {
-    const $videos = getVideos();
     const $btns = getVideoBtns();
 
     // Set the autoplay cookie if it hasn't been set yet
@@ -130,12 +114,17 @@
     }
 
     // Show the toggle btns and apply event handling
-    $btns
-      .removeClass('hidden-xs-up')
-      .on('click', btnClickHandler);
-
-    // Reset the btn controls when the first video on the page ends
-    $videos.get(0).addEventListener('ended', toggleBtnPause, false);
+    $btns.each(function () {
+      const $btn = $(this);
+      // NOTE: All toggle btns, whether included in the page header or
+      // elsewhere, must have the class 'hidden-xs-up'. The click handler will
+      // not be assigned to the button if it doesn't have this class.
+      if ($btn.hasClass('hidden-xs-up')) {
+        $btn
+          .removeClass('hidden-xs-up')
+          .on('click', btnClickHandler);
+      }
+    });
   }
 
   // Returns whether or not a given element is visible in the viewport
@@ -149,22 +138,27 @@
     return elementBottom > viewportTop && elementTop < viewportBottom;
   };
 
-  // Autoloads a video from a template into a placeholder on the page.
+  // Updates a preload="none" media background video to
+  // load when visible and autoplay.
   $.fn.autoloadVideo = function () {
 
-    this.each(() => {
-      const $tmpl = $(this);
-      const $placeholder = $(`#${$tmpl.attr('data-placeholder')}`);
+    this.each(function () {
+      const $video = $(this);
 
-      if ($placeholder.length) {
+      if ($video.attr('preload') === 'none') {
         const scrollCallback = function () {
-          insertVideoIfVisible($tmpl, $placeholder);
+          if ($video.isInViewport()) {
+            const video = $video.get(0);
+            video.autoplay = true;
+            video.preload = 'auto';
 
-          if (!$(document).find($tmpl).length) {
+            syncToggleableVideos();
+
             $(window).off('scroll', scrollCallback);
           }
         };
 
+        // TODO add debounce
         $(window).on('load scroll', scrollCallback);
       }
     });
@@ -175,16 +169,13 @@
 
   function init() {
     if ($(window).width() >= videoViewportMinThreshold) {
-      const $templates = getTemplates();
       const $videos = getVideos();
-      const $btns = getVideoBtns();
 
-      if ($templates.length) {
-        $templates.autoloadVideo();
-        $(window).on('videoAutoloaded', syncToggleableVideos);
-      }
-      if ($videos.length && $btns.length) {
-        syncToggleableVideos();
+      if ($videos.length) {
+        $videos.autoloadVideo();
+
+        // Reset the btn controls when the first video on the page ends
+        $videos.get(0).addEventListener('ended', toggleBtnPause, false);
       }
     }
   }
