@@ -204,7 +204,7 @@ function get_degree_breadcrumb_markup( $post_id ) {
 ?>
 <div class="hidden-md-down">
 	<hr class="mt-5 mb-4">
-	<nav class="breadcrumb">
+	<nav class="breadcrumb" aria-label="Breadcrumb">
 		<a class="breadcrumb-item" href="<?php echo $degree_search_url; ?>">Degree Search</a>
 
 		<?php if ( $college ): ?>
@@ -215,7 +215,7 @@ function get_degree_breadcrumb_markup( $post_id ) {
 		<a class="breadcrumb-item" href="<?php echo $program_type_url; ?>"><?php echo $program_type->name; ?>s</a>
 		<?php endif; ?>
 
-		<span class="breadcrumb-item active"><?php echo $degree->post_title; ?></span>
+		<span class="breadcrumb-item active" aria-current="page"><?php echo $degree->post_title; ?></span>
 	</nav>
 </div>
 <?php
