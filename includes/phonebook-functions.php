@@ -416,8 +416,8 @@ function phonebook_fix_name_case( $name ) {
 		$name = preg_replace( $key, $val, $name );
 	}
 
-	$name = preg_replace_callback('/\([a-z]+\)/', create_function('$m', 'return strtoupper($m[0]);'), $name);
-	$name = preg_replace_callback('/\([a-z]{1}/', create_function('$m', 'return strtoupper($m[0]);'), $name);
+	$name = preg_replace_callback( '/\([a-z]+\)/', function( $m ) { return strtoupper($m[0]); }, $name );
+	$name = preg_replace_callback( '/\([a-z]{1}/', function( $m ) { return strtoupper($m[0]); }, $name );
 
 	return $name;
 }
