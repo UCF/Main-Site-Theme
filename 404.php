@@ -1,6 +1,6 @@
 <?php @header( 'HTTP/1.1 404 Not found', true, 404 ); ?>
 
-<?php get_header(); the_post();?>
+<?php get_header(); ?>
 <article role="main" id="page-not-found">
 	<div class="container">
 		<?php
