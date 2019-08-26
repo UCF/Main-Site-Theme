@@ -1,20 +1,4 @@
-//
-// Theme variables and variable overrides
-//
-@import 'variables';
-
-
-//
-// Third-party assets
-//
-
-// Athena Framework
-@import './ucf-athena-framework/src/scss/variables';
-@import './ucf-athena-framework/src/scss/mixins';
-
-// Font Awesome
-@import './font-awesome/scss/variables';
-@import './font-awesome/scss/mixins';
+@import '../custom-base';
 
 
 .co-subtitle {
