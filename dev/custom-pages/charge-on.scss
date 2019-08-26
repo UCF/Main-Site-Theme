@@ -17,48 +17,18 @@
 @import './font-awesome/scss/mixins';
 
 
-.co-font-sans-narrow {
-  -webkit-text-stroke: .04em; //sass-lint:disable-line no-vendor-prefixes
-  display: inline-block;
-  font-style: italic;
-  font-weight: 900;
-  letter-spacing: -.045em;
-  text-transform: uppercase;
-  transform: scale(1, 1.25);
-  transform-origin: center center;
-}
-
-.co-subtitle,
-.co-lead,
-.co-p {
+.co-subtitle {
+  color: $brand-inverse;
+  font-size: .75rem;
   font-weight: bold;
   text-transform: uppercase;
-}
-
-.co-subtitle {
-  background-color: rgba($brand-primary-darkest, map-get($bg-transparencies, 3));
-  color: $brand-inverse;
-  font-size: .8rem;
-  letter-spacing: map-get($letter-spacing, 5);
-  line-height: 1.2;
-  padding: .5rem 1.5rem;
 
   @include media-breakpoint-up(md) {
+    background-color: rgba($brand-primary-darkest, map-get($bg-transparencies, 3));
     font-size: 1rem;
-  }
-
-  @include media-breakpoint-up(lg) {
-    font-size: $font-size-h4-md;
-  }
-}
-
-.co-lead {
-  font-size: .8rem;
-  letter-spacing: map-get($letter-spacing, 5);
-  line-height: 2.25;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1rem;
+    letter-spacing: map-get($letter-spacing, 5);
+    line-height: 1.2;
+    padding: .5rem 1.5rem;
   }
 
   @include media-breakpoint-up(lg) {
@@ -67,18 +37,14 @@
 }
 
 .co-p {
-  font-size: .8rem;
-
-  @include media-breakpoint-up(md) {
-    font-size: 1rem;
-  }
-
-  @include media-breakpoint-up(lg) {
-    font-size: $font-size-h5-md;
+  @include media-breakpoint-up(sm) {
+    line-height: 2.25;
   }
 }
 
-.co-story-wrap {
+.co-jumbotron-wrap {
+  min-height: 110vw;
+
   @include media-breakpoint-up(sm) {
     min-height: 495.5px;
   }
@@ -88,9 +54,55 @@
   }
 }
 
-.co-story-bg {
+.co-jumbotron-bg {
   @include media-breakpoint-down(sm) {
-    object-fit: contain !important; //sass-lint:disable-line no-important
+    object-position: center bottom !important; //sass-lint:disable-line no-important
+  }
+}
+
+.co-video-bg {
+  @include media-breakpoint-down(sm) {
     object-position: center top !important; //sass-lint:disable-line no-important
+  }
+}
+
+.co-story {
+  display: block;
+
+  @include hover-focus-active {
+    .co-story-img img {
+      filter: brightness(120%);
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    background: linear-gradient(to right, #f3c400 0%, #af8520 100%);
+    background-color: #f3c400;
+    height: 100%;
+    transition: background .25s ease-in-out;
+
+    @include hover-focus-active {
+      background: $brand-primary;
+      text-decoration: none;
+    }
+  }
+}
+
+.co-story-img {
+  margin-bottom: 1.5rem;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: 0;
+  }
+
+  img {
+    transition: filter .25s ease-in-out;
+  }
+}
+
+.co-story-text {
+  @include media-breakpoint-up(md) {
+    color: $brand-secondary;
+    padding: 1rem;
   }
 }
