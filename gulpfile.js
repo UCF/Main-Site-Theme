@@ -50,24 +50,6 @@ function lintSCSS(src) {
     .pipe(sassLint.failOnError());
 }
 
-// Watcher callback for dev scss files, to be used with gulp watch task
-function cssDevWatch(event) {
-  var src,
-    dest;
-
-  if (event) {
-    src = event.path;
-    dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
-  }
-  else {
-    src = `${config.devPath}/**/*.scss`;
-    dest = config.devPath;
-  }
-
-  lintSCSS(src);
-  return buildCSS(src, dest);
-}
-
 // Base SCSS compile function
 function buildCSS(src, dest) {
   dest = dest || config.dist.cssPath;
@@ -115,6 +97,26 @@ function buildJS(src, dest) {
       extname: '.min.js'
     }))
     .pipe(gulp.dest(dest));
+}
+
+// Returns source and destination paths for use by functions that
+// process Dev assets.
+function getDevWatchSrcDest(eventPath, srcExt) {
+  let src;
+  let dest;
+
+  if (eventPath) {
+    src = eventPath;
+    dest = src.slice(0, (src.lastIndexOf('/') > -1 ? src.lastIndexOf('/') : src.lastIndexOf('\\')) + 1);
+  } else {
+    src = `${config.devPath}/**/*.${srcExt}`;
+    dest = config.devPath;
+  }
+
+  return {
+    src: src,
+    dest: dest
+  };
 }
 
 // BrowserSync reload function
@@ -170,27 +172,13 @@ gulp.task('scss-lint-theme', () => {
   return lintSCSS(`${config.src.scssPath}/*.scss`);
 });
 
-// Lint all dev scss files
-gulp.task('scss-lint-dev', () => {
-  return lintSCSS(`${config.devPath}/**/*.scss`);
-});
-
 // Compile theme stylesheet
 gulp.task('scss-build-theme', () => {
   return buildCSS(`${config.src.scssPath}/style.scss`);
 });
 
-// Compile all dev scss files
-gulp.task('scss-build-dev', () => {
-  return buildCSS(`${config.devPath}/**/*.scss`, config.devPath);
-});
-
-
 // All theme css-related tasks
 gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
-
-// All dev css-related tasks
-gulp.task('css-dev', gulp.series('scss-lint-dev', 'scss-build-dev'));
 
 
 //
@@ -217,9 +205,33 @@ gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme'));
 gulp.task('watch', (done) => {
   serverServe(done);
 
-  gulp.watch(`${config.devPath}/**/*.scss`, cssDevWatch);
+  // Dev Scss files
+  gulp.watch(`${config.devPath}/**/*.scss`).on('change', (eventPath) => {
+    const srcDest = getDevWatchSrcDest(eventPath, 'scss');
+    const src = srcDest.src;
+    const dest = srcDest.dest;
+
+    lintSCSS(src);
+    return buildCSS(src, dest);
+  });
+
+  // Dev js files
+  gulp.watch([`${config.devPath}/**/*.js`, `!${config.devPath}/**/*.min.js`]).on('change', (eventPath) => {
+    const srcDest = getDevWatchSrcDest(eventPath, 'js');
+    const src = srcDest.src;
+    const dest = srcDest.dest;
+
+    lintJS(src, dest);
+    return buildJS(src, dest);
+  });
+
+  // Theme scss files
   gulp.watch(`${config.src.scssPath}/**/*.scss`, gulp.series('css', serverReload));
+
+  // Theme js files
   gulp.watch(`${config.src.jsPath}/**/*.js`, gulp.series('js', serverReload));
+
+  // Theme PHP files
   gulp.watch('./**/*.php', gulp.series(serverReload));
 });
 
