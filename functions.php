@@ -588,3 +588,36 @@ function get_colleges_grid( $exclude_term=null ) {
 
 	return ob_get_clean();
 }
+
+/**
+ * Returns markup for the location details.
+ *
+ * @author RJ Bruneel
+ * @since v3.2.8
+ * @return string Location details HTML
+ */
+function get_location_html() {
+	
+	$id = get_field( "ucf_location_id" );
+	$abbreviation = ( get_field( "ucf_location_abbr" ) ) ? "Abbreviation: " .  get_field( "ucf_location_abbr" ) : "";
+	$address = preg_replace( '/,/', '<br>', get_field( "ucf_location_address" ), 1 );
+	$lat_lon = get_field( "ucf_location_lng_lat" );
+	$google_map_link = "https://www.google.com/maps?saddr=&daddr=" . $lat_lon["ucf_location_lat"] . "," . $lat_lon["ucf_location_lng"];
+
+	ob_start();
+?>
+	<p>
+		Location ID: <?php echo $id; ?><br>
+		<?php echo $abbreviation; ?>
+	</p>
+
+	<?php if( isset( $address ) ) : ?>
+	<p>
+		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener"><?php echo $address; ?></a>
+	</p>
+	<?php endif; ?>
+
+	<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-secondary btn-sm text-uppercase mt-3">Get Directions</a>
+<?php
+	return ob_get_clean();
+}
