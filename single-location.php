@@ -4,6 +4,7 @@ the_post();
 
 $lat_lng = $post->meta['ucf_location_lat_lng'];
 $lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
+$events = ( isset( $post->meta['events_markup'] ) && ! empty( $post->meta['events_markup'] ) ) ? $post->meta['events_markup'] : null;
 ?>
 
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
@@ -37,11 +38,10 @@ $lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["
 				<li><a href="#">TODO</a></li>
 			</ul>
 
+		<?php if( $events ) : ?>
 			<h3 class="h5 heading-underline mt-4">Events</h3>
-
-			<ul class="list-unstyled">
-				<li><a href="#">TODO</a></li>
-			</ul>
+			<?php echo $events; ?>
+		<?php endif; ?>
 		</div>
 	</div>
 </div>
