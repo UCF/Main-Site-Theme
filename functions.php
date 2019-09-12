@@ -599,6 +599,8 @@ function get_colleges_grid( $exclude_term=null ) {
 function get_location_html() {
 	
 	$id = get_field( "ucf_location_id" );
+	$id = ( isset( $id ) && $id !== get_post_field( 'post_name', get_post() ) ) ? "Location ID: $id <br>" : "";
+
 	$abbreviation = ( get_field( "ucf_location_abbr" ) ) ? "Abbreviation: " .  get_field( "ucf_location_abbr" ) : "";
 	$address = preg_replace( '/,/', '<br>', get_field( "ucf_location_address" ), 1 );
 	$lat_lng = get_field( "ucf_location_lat_lng" );
@@ -607,17 +609,18 @@ function get_location_html() {
 	ob_start();
 ?>
 	<p>
-		Location ID: <?php echo $id; ?><br>
+		<?php echo $id; ?>
 		<?php echo $abbreviation; ?>
 	</p>
 
-	<?php if( isset( $address ) ) : ?>
+<?php if( isset( $address ) ) : ?>
 	<p>
 		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener"><?php echo $address; ?></a>
 	</p>
-	<?php endif; ?>
+<?php endif; ?>
 
-	<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-secondary btn-sm text-uppercase mt-3">Get Directions</a>
+	<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-secondary btn-sm text-uppercase mb-4 mt-2">Get Directions</a>
+
 <?php
 	return ob_get_clean();
 }
