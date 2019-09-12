@@ -1,8 +1,8 @@
 <?php 
 get_header();
-the_post(); 
+the_post();
 
-$lat_lng = get_field( "ucf_location_lat_lng" );
+$lat_lng = $post->meta['ucf_location_lat_lng'];
 $lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
 ?>
 
@@ -19,7 +19,7 @@ $lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["
 				src="https://www.google.com/maps/embed/v1/view?key=<?php echo htmlentities( get_theme_mod_or_default( 'google_map_key' ) ); ?>&amp;center=<?php echo $lat_lng_string; ?>&amp;maptype=satellite&amp;zoom=18"></iframe>
 		<?php endif; ?>
 
-			<a href="https://map.ucf.edu/?show=<?php echo get_field( "ucf_location_id" ); ?>" class="text-right text-uppercase d-block mb-3 pr-2">View on Map</a>
+			<a href="https://map.ucf.edu/?show=<?php echo $post->ucf_location_id; ?>" class="text-right text-uppercase d-block mb-3 pr-2">View on Map</a>
 
 		<?php if( ! empty( the_content() ) ) : ?>
 			<p><?php the_content(); ?></p>

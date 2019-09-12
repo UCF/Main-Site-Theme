@@ -598,19 +598,23 @@ function get_colleges_grid( $exclude_term=null ) {
  */
 function get_location_html() {
 	
-	$id = get_field( "ucf_location_id" );
-	$id = ( isset( $id ) && $id !== get_post_field( 'post_name', get_post() ) ) ? "Location ID: $id <br>" : "";
+	$post = get_post();
+	$post_name = get_post_field( 'post_name', $post );
+	$abbr = $post->ucf_location_abbr;
 
-	$abbreviation = ( get_field( "ucf_location_abbr" ) ) ? "Abbreviation: " .  get_field( "ucf_location_abbr" ) : "";
-	$address = preg_replace( '/,/', '<br>', get_field( "ucf_location_address" ), 1 );
-	$lat_lng = get_field( "ucf_location_lat_lng" );
+	$id = $post->ucf_location_id;
+	$id = ( isset( $id ) && $id . '-' . strtolower( $abbr ) !== $post_name ) ? "Location ID: $id <br>" : "";
+
+	$abbr = ( $abbr ) ? "Abbreviation: " .  $abbr : "";
+	$address = preg_replace( '/,/', '<br>', $post->ucf_location_address, 1 );
+	$lat_lng = $post->meta['ucf_location_lat_lng'];
 	$google_map_link = "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"];
 
 	ob_start();
 ?>
 	<p>
 		<?php echo $id; ?>
-		<?php echo $abbreviation; ?>
+		<?php echo $abbr; ?>
 	</p>
 
 <?php if( isset( $address ) ) : ?>
