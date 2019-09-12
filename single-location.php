@@ -37,7 +37,7 @@ $lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["
 				<li><a href="#">TODO</a></li>
 			</ul>
 
-			<h3 class="h5 heading-underline mt-4">Events at <?php echo the_title(); ?></h3>
+			<h3 class="h5 heading-underline mt-4">Events</h3>
 
 			<ul class="list-unstyled">
 				<li><a href="#">TODO</a></li>
