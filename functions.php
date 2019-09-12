@@ -601,8 +601,8 @@ function get_location_html() {
 	$id = get_field( "ucf_location_id" );
 	$abbreviation = ( get_field( "ucf_location_abbr" ) ) ? "Abbreviation: " .  get_field( "ucf_location_abbr" ) : "";
 	$address = preg_replace( '/,/', '<br>', get_field( "ucf_location_address" ), 1 );
-	$lat_lon = get_field( "ucf_location_lng_lat" );
-	$google_map_link = "https://www.google.com/maps?saddr=&daddr=" . $lat_lon["ucf_location_lat"] . "," . $lat_lon["ucf_location_lng"];
+	$lat_lng = get_field( "ucf_location_lat_lng" );
+	$google_map_link = "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"];
 
 	ob_start();
 ?>

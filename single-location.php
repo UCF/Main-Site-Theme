@@ -2,7 +2,8 @@
 get_header();
 the_post(); 
 
-$lat_lon = get_field( "ucf_location_lat_lng" );
+$lat_lng = get_field( "ucf_location_lat_lng" );
+$lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
 ?>
 
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
@@ -13,9 +14,9 @@ $lat_lon = get_field( "ucf_location_lat_lng" );
 				<?php echo get_location_html(); ?>
 			</div>
 
-		<?php if( isset( $lat_lon ) ) : ?>
+		<?php if( ! empty ( $lat_lng_string ) ) : ?>
 			<iframe width="100%" height="300" frameborder="0" allowfullscreen="" class="mb-3"
-				src="https://www.google.com/maps/embed/v1/view?key=<?php echo htmlentities( get_theme_mod_or_default( 'google_map_key' ) ); ?>&amp;center=<?php echo $lat_lon["ucf_location_lat"] . "," . $lat_lon["ucf_location_lng"]; ?>&amp;maptype=satellite&amp;zoom=18"></iframe>
+				src="https://www.google.com/maps/embed/v1/view?key=<?php echo htmlentities( get_theme_mod_or_default( 'google_map_key' ) ); ?>&amp;center=<?php echo $lat_lng_string; ?>&amp;maptype=satellite&amp;zoom=18"></iframe>
 		<?php endif; ?>
 
 		<?php if( ! empty( the_content() ) ) : ?>
