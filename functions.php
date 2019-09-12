@@ -608,7 +608,7 @@ function get_location_html() {
 	$abbr = ( $abbr ) ? "Abbreviation: " .  $abbr : "";
 	$address = preg_replace( '/,/', '<br>', $post->ucf_location_address, 1 );
 	$lat_lng = $post->meta['ucf_location_lat_lng'];
-	$google_map_link = "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"];
+	$google_map_link = ( $lat_lng ) ? "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
 
 	ob_start();
 ?>
@@ -619,11 +619,19 @@ function get_location_html() {
 
 <?php if( isset( $address ) ) : ?>
 	<p>
-		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener"><?php echo $address; ?></a>
+	<?php if( ! empty( $google_map_link ) ) : ?>
+		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener">
+	<?php endif; ?>
+			<?php echo $address; ?>
+	<?php if( ! empty( $google_map_link ) ) : ?>
+		</a>
+	<?php endif; ?>
 	</p>
 <?php endif; ?>
 
+<?php if( ! empty( $google_map_link ) ) : ?>
 	<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-secondary btn-sm text-uppercase mb-4 mt-2">Get Directions</a>
+<?php endif; ?>
 
 <?php
 	return ob_get_clean();
