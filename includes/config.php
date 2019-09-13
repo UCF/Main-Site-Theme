@@ -15,6 +15,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
+	'google_map_key'                    => '',
 	'chartbeat_uid'                     => '2806',
 	'chartbeat_domain'                  => 'ucf.edu',
 	'search_service_url'                => 'https://search.smca.ucf.edu/service.php'
@@ -70,6 +71,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'analytics',
 		array(
 			'title' => 'Analytics'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'location',
+		array(
+			'title' => 'Location'
 		)
 	);
 }
@@ -260,6 +268,23 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Chartbeat Domain',
 			'description' => 'Example: <em>some.domain.com</em>',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	// Google Map Key
+	$wp_customize->add_setting(
+		'google_map_key',
+		array(
+			'default' => get_theme_mod_default( 'google_map_key' )
+		)
+	);	
+
+	$wp_customize->add_control(
+		'google_map_key',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google Map Key',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
 		)
 	);
 }
