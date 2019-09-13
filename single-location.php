@@ -9,7 +9,7 @@ $events = ( isset( $post->meta['events_markup'] ) && ! empty( $post->meta['event
 
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
-		<div class="col-md-8 col-xl-7 pr-lg-5">
+		<div class="col-md-8 col-xl-8">
 
 			<div class="d-block d-md-none">
 				<?php echo get_location_html(); ?>
@@ -27,7 +27,7 @@ $events = ( isset( $post->meta['events_markup'] ) && ! empty( $post->meta['event
 		<?php endif; ?>
 
 		</div>
-		<div class="col-md-4 col-xl-5">
+		<div class="col-md-4 col-xl-3 offset-xl-1">
 			<div class="d-none d-md-block">
 				<?php echo get_location_html(); ?>
 			</div>
