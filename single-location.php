@@ -7,19 +7,24 @@ $lat_lng = $post->meta['ucf_location_lat_lng'];
 $lat_lng_string = ( $lat_lng ) ? $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
 $events = ( isset( $post->meta['events_markup'] ) && ! empty( $post->meta['events_markup'] ) ) ? $post->meta['events_markup'] : null;
 $featured_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID) );
+$location_fallback_image = "";
+
+if( ! empty( get_theme_mod_or_default( 'location_fallback_image' ) ) ) {
+	$location_fallback_image = '<div class="col-md-6"><img src="' . get_theme_mod_or_default( 'location_fallback_image' ) . '" alt="" class="img-fluid"></div>';
+}
 ?>
 
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
 		<div class="col-lg-7">
 			<div class="row mb-3">
-				<div class="col-md-6">
 					<?php if( $featured_image ) : ?>
-						<img src="<?php echo $featured_image ?>" alt="" class="img-fluid mb-3">
+						<div class="col-md-6">
+							<img src="<?php echo $featured_image ?>" alt="" class="img-fluid mb-3">
+						</div>
 					<?php else : ?>
-						<img src="" alt=""> Fallback Image
+						<?php echo $location_fallback_image; ?>
 					<?php endif; ?>
-				</div>
 				<div class="col-md-6">
 					<?php echo get_location_html(); ?>
 				</div>
