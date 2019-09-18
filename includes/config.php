@@ -277,7 +277,7 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'default' => get_theme_mod_default( 'google_map_key' )
 		)
-	);	
+	);
 
 	$wp_customize->add_control(
 		'google_map_key',
@@ -285,6 +285,38 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Google Map Key',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_location_header_lg'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'fallback_location_header_lg',
+			array(
+				'label'       => __( 'Upload a default header image (large) for locations' ),
+				'description' => 'The large background image displayed for location posts.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_location_header_sm'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'fallback_location_header_sm',
+			array(
+				'label'       => __( 'Upload a default header image (small) for locations' ),
+				'description' => 'The small background image displayed for location posts.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+			)
 		)
 	);
 }
