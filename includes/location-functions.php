@@ -72,7 +72,7 @@ function get_header_content_custom_location( $markup, $obj ) {
 				<?php if ( $address ) : ?>
 				<div class="clearfix"></div>
 				<div class="d-inline-block bg-inverse">
-					<address class="d-block header-subtitle small"><?php echo $address; ?></address>
+					<address class="d-block header-subtitle location-address"><?php echo $address; ?></address>
 				</div>
 				<?php endif; ?>
 			</div>
