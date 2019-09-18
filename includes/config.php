@@ -293,13 +293,17 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_control(
-		new WP_Customize_Media_Control(
+		new WP_Customize_Cropped_Image_Control(
 			$wp_customize,
 			'fallback_location_header',
 			array(
 				'label'       => __( 'Upload a default header image (large) for locations' ),
 				'description' => 'The large background image displayed for location posts.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location',
+				'width'       => 1600,
+				'height'      => 550,
+				'flex_width'  => false,
+				'flex_height' => false
 			)
 		)
 	);
@@ -309,13 +313,17 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_control(
-		new WP_Customize_Media_Control(
+		new WP_Customize_Cropped_Image_Control(
 			$wp_customize,
 			'fallback_location_header_xs',
 			array(
 				'label'       => __( 'Upload a default header image (small) for locations' ),
 				'description' => 'The small background image displayed for location posts.',
-				'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location',
+				'width'       => 575,
+				'height'      => 575,
+				'flex_width'  => false,
+				'flex_height' => false
 			)
 		)
 	);
