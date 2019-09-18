@@ -289,7 +289,7 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
-		'fallback_location_header_lg'
+		'fallback_location_header'
 	);
 
 	$wp_customize->add_control(
@@ -305,7 +305,7 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
-		'fallback_location_header_sm'
+		'fallback_location_header_xs'
 	);
 
 	$wp_customize->add_control(
