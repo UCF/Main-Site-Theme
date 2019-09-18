@@ -52,8 +52,8 @@ function degree_backup_headers( $post ) {
 
 function location_backup_headers( $post ) {
 	$retval = array(
-		'header_image'    => get_theme_mod_or_default( 'fallback_location_header_lg' ),
-		'header_image_xs' => get_theme_mod_or_default( 'fallback_location_header_sm' )
+		'header_image'    => get_theme_mod_or_default( 'fallback_location_header' ),
+		'header_image_xs' => get_theme_mod_or_default( 'fallback_location_header_xs' )
 	);
 
 	return $retval;

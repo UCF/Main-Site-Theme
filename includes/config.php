@@ -295,7 +295,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Media_Control(
 			$wp_customize,
-			'fallback_location_header_lg',
+			'fallback_location_header',
 			array(
 				'label'       => __( 'Upload a default header image (large) for locations' ),
 				'description' => 'The large background image displayed for location posts.',
@@ -311,7 +311,7 @@ function define_customizer_fields( $wp_customize ) {
 	$wp_customize->add_control(
 		new WP_Customize_Media_Control(
 			$wp_customize,
-			'fallback_location_header_sm',
+			'fallback_location_header_xs',
 			array(
 				'label'       => __( 'Upload a default header image (small) for locations' ),
 				'description' => 'The small background image displayed for location posts.',
