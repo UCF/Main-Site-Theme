@@ -193,7 +193,7 @@ function get_header_content_title_subtitle( $obj ) {
 <?php
 	endif;
 
-	return apply_filters( 'get_header_content_custom', ob_get_clean(), $obj );
+	return apply_filters( 'get_header_content_title_subtitle', ob_get_clean(), $obj );
 }
 
 

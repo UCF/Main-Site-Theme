@@ -84,4 +84,4 @@ function get_header_content_custom_location( $markup, $obj ) {
 	}
 }
 
-add_filter( 'get_header_content_custom', 'get_header_content_custom_location', 10, 2 );
+add_filter( 'get_header_content_title_subtitle', 'get_header_content_custom_location', 10, 2 );
