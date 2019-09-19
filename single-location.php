@@ -14,7 +14,7 @@ if( ! empty( get_theme_mod_or_default( 'location_fallback_image' ) ) ) {
 }
 ?>
 
-<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
+<div class="container mt-5 pt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
 		<div class="col-lg-7">
 			<div class="row mb-3">
