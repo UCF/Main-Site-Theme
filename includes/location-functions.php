@@ -20,7 +20,7 @@ function get_location_html() {
 	$abbr = isset( $post->meta['ucf_location_abbr'] ) ? $post->meta['ucf_location_abbr'] : null;
 
 	$id = isset( $post->meta['ucf_location_id'] ) ? $post->meta['ucf_location_id'] : null;
-	$id = ( isset( $id ) && $id . '-' . strtolower( $abbr ) !== $post_name ) ? "Location ID: $id" : "";
+	$id = ( isset( $id ) && $id !== $post_name ) ? "Location ID: $id" : "";
 
 	$abbr = ( $abbr ) ? "Abbreviation: $abbr<br>" : "";
 	$lat_lng = $post->meta['ucf_location_lat_lng'];
