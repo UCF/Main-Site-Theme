@@ -98,7 +98,7 @@ function get_location_organizations( $post ) {
 
 	if( isset( $post->meta['ucf_location_orgs'] ) && $post->meta['ucf_location_orgs'] ) : ?>
 
-		<h3 class="h5 heading-underline">Organizations</h3>
+		<h2 class="h5 heading-underline">Organizations</h2>
 		<dl>
 		<?php
 			$orgs = $post->meta['ucf_location_orgs'];
