@@ -153,10 +153,10 @@ function get_header_content_custom_location( $markup, $obj ) {
 			</div>
 		</div>
 	<?php
-		$retval = ob_get_clean();
-
-		return $retval;
+		$markup = ob_get_clean();
 	}
+
+	return $markup;
 }
 
 add_filter( 'get_header_content_title_subtitle', 'get_header_content_custom_location', 10, 2 );
