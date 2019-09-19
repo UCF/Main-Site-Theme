@@ -278,7 +278,7 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'default' => get_theme_mod_default( 'google_map_key' )
 		)
-	);	
+	);
 
 	$wp_customize->add_control(
 		'google_map_key',
@@ -305,6 +305,46 @@ function define_customizer_fields( $wp_customize ) {
 				'label'      => __( 'Upload a Location Fallback Image', 'theme_name' ),
 				'description' => 'The image displayed if not available in location data.',
 				'section'    => THEME_CUSTOMIZER_PREFIX . 'location'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_location_header'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_location_header',
+			array(
+				'label'       => __( 'Upload a default header image (large) for locations' ),
+				'description' => 'The large background image displayed for location posts.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location',
+				'width'       => 1600,
+				'height'      => 550,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_location_header_xs'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_location_header_xs',
+			array(
+				'label'       => __( 'Upload a default header image (small) for locations' ),
+				'description' => 'The small background image displayed for location posts.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location',
+				'width'       => 575,
+				'height'      => 575,
+				'flex_width'  => false,
+				'flex_height' => false
 			)
 		)
 	);
