@@ -53,11 +53,7 @@ if( ! empty( get_theme_mod_or_default( 'location_fallback_image' ) ) ) {
 				<?php endif; ?>
 
 				<div class="col-sm-12 col-md-5 col-lg-12">
-					<h3 class="h5 heading-underline">Organizations</h3>
-
-					<ul class="list-unstyled">
-						<li><a href="#">TODO</a></li>
-					</ul>				
+					<?php echo get_location_organizations( $post ); ?>
 				</div>
 			</div>
 		</div>
