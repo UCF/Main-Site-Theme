@@ -38,7 +38,7 @@ if( ! empty( get_theme_mod_or_default( 'location_fallback_image' ) ) ) {
 				<iframe class="mt-3" width="100%" height="300" frameborder="0" allowfullscreen=""
 					src="https://www.google.com/maps/embed/v1/view?key=<?php echo htmlentities( get_theme_mod_or_default( 'google_map_key' ) ); ?>&amp;center=<?php echo $lat_lng_string; ?>&amp;maptype=satellite&amp;zoom=18"></iframe>
 				
-				<a href="https://map.ucf.edu/?show=<?php echo $post->ucf_location_id; ?>" class="text-right text-uppercase d-block mb-3 pr-2">View on Map</a>
+				<a href="https://map.ucf.edu/?show=<?php echo $post->ucf_location_id; ?>" class="text-right text-uppercase d-block mb-3 pr-2">View UCF Campus Map</a>
 			<?php endif; ?>		
 
 		</div>
