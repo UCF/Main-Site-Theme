@@ -62,26 +62,56 @@ function format_phone_link( $object, $index ) {
  * @return string The header markup
 */
 function get_organization_html( $title, $org, $count ) {
-	if ( isset( $org['org_name'] ) && ! empty( $org['org_name'] ) ) {
-		echo '<dt><a href="#collapse' . $count . '" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse' . $count . '">' . $org['org_name'] . '</a></dt>';
-	}
-	echo '<div class="collapse mb-4" id="collapse' . $count . '">';
-		echo ( isset( $org['org_room'] ) && ! empty( $org['org_room'] ) ) ? '<dd class="mb-0">' . $title . ' Room ' . $org['org_room'] . '</dd>' : '';
-		echo ( isset( $org['org_phone'] ) && ! empty( $org['org_phone'] ) ) ? '<dd>' . format_phone_link( $org, 'org_phone' ) . '</dd>' : '';
 
-		if( isset( $org['org_departments'] ) && $org['org_departments'] ) :
-			echo 'Departments';
-			echo '<ul class="pl-4">';
-			foreach( $org['org_departments'] as $dept ) :
-				echo '<li>' . $dept['dept_name'] . '<br>';
-				echo ( isset( $dept['dept_building'] ) && ! empty( $dept['dept_building'] ) ) ? $dept['dept_building'] : '';
-				echo ( isset( $dept['dept_room'] ) && ! empty( $dept['dept_room'] ) ) ? ' Room ' . $dept['dept_room'] . '<br>' : '';
-				echo ( isset( $dept['dept_phone'] ) && ! empty( $dept['dept_phone'] ) ) ? format_phone_link( $dept, 'dept_phone' ) . '<br>' : '';
-				echo '</li>';
-			endforeach;
-			echo '</ul>';
-		endif;
-	echo "</div>";
+	ob_start();
+
+	if ( isset( $org['org_name'] ) && ! empty( $org['org_name'] ) ) : ?>
+		<dt>
+			<a href="#collapse<?php echo $count; ?>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
+				<?php echo $org['org_name']; ?>
+			</a>
+		</dt>
+	<?php endif; ?>
+
+	<div class="collapse pb-2" id="collapse<?php echo $count; ?>">
+
+		<?php if ( isset( $org['org_room'] ) && ! empty( $org['org_room'] ) ) : ?>
+			<dd class="mb-0">
+				 <?php echo $title ?> Room <?php echo $org['org_room']; ?>
+			</dd>
+		<?php endif; ?>
+		
+		<?php if ( isset( $org['org_phone'] ) && ! empty( $org['org_phone'] ) ) : ?>
+			<dd>
+				<?php echo format_phone_link( $org, 'org_phone' ) ?>
+			</dd>
+		<?php endif; ?>
+
+		<?php if( isset( $org['org_departments'] ) && $org['org_departments'] ) : ?>
+			Departments
+			<ul class="pl-4">
+				<?php 
+				foreach( $org['org_departments'] as $dept ) :
+					$dept_name = ( isset( $dept['dept_name'] ) && ! empty( $dept['dept_name'] ) ) ? ' Room ' . $dept['dept_name'] . '<br>' : '';
+					$dept_building = ( isset( $dept['dept_building'] ) && ! empty( $dept['dept_building'] ) ) ? $dept['dept_building'] : '';
+					$dept_room = ( isset( $dept['dept_room'] ) && ! empty( $dept['dept_room'] ) ) ? ' Room ' . $dept['dept_room'] . '<br>' : '';
+					$dept_phone = ( isset( $dept['dept_phone'] ) && ! empty( $dept['dept_phone'] ) ) ? format_phone_link( $dept, 'dept_phone' ) . '<br>' : '';
+				?>
+				<li>
+					<?php
+						echo $dept_name;
+						echo $dept_building;
+						echo $dept_room;
+						echo $dept_phone;
+					?>
+				</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+			</div>
+		<?php
+	return ob_get_clean();
+
 }
 
 /**
@@ -107,11 +137,11 @@ function get_location_organizations( $post ) {
 			// $org is not an array if it contains only one item
 			if( isset( $orgs['org_name'] ) ) :
 				$org = $orgs;
-				get_organization_html( $post->post_title, $org, $count );
+				echo get_organization_html( $post->post_title, $org, $count );
 			else :
 				foreach( $orgs as $org ) :
 					$count++;
-					get_organization_html( $post->post_title, $org, $count );
+					echo get_organization_html( $post->post_title, $org, $count );
 				endforeach;
 			endif;
 		?>
