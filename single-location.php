@@ -33,7 +33,7 @@ else if ( ! empty( $location_fallback_image ) ) {
 			</div>
 
 			<?php if( ! empty( the_content() ) ) : ?>
-				<p><?php the_content(); ?></p>
+				<?php the_content(); ?>
 			<?php endif; ?>
 
 			<?php if( ! empty ( $lat_lng_string ) ) : ?>
