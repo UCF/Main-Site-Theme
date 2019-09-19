@@ -10,20 +10,17 @@ function get_location_html() {
 
 	$post = get_post();
 	$post_name = $post->post_name;
-	$campus = isset( $post->meta['ucf_location_campus'] ) ? $post->meta['ucf_location_campus'] : null;
-	if( $campus ) {
-		$campus = 'Campus: ' . $campus->post_title . '<br>';
-	} else {
-		$campus = "";
-	}
+
+	$campus = ( isset( $post->meta['ucf_location_campus'] ) ) ? $post->meta['ucf_location_campus'] : null;
+	$campus = ( $campus ) ? 'Campus: ' . $campus->post_title . '<br>' : "";
 
 	$abbr = isset( $post->meta['ucf_location_abbr'] ) ? $post->meta['ucf_location_abbr'] : null;
+	$abbr = ( $abbr ) ? "Abbreviation: $abbr<br>" : "";
 
 	$id = isset( $post->meta['ucf_location_id'] ) ? $post->meta['ucf_location_id'] : null;
 	$id = ( isset( $id ) && $id !== $post_name ) ? "Location ID: $id" : "";
-
-	$abbr = ( $abbr ) ? "Abbreviation: $abbr<br>" : "";
-	$lat_lng = $post->meta['ucf_location_lat_lng'];
+	
+	$lat_lng = ( isset( $post->meta['ucf_location_lat_lng'] ) ) ? $post->meta['ucf_location_lat_lng'] : null;
 	$google_map_link = ( $lat_lng ) ? "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
 
 	ob_start();
