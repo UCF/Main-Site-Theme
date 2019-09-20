@@ -1,4 +1,4 @@
-<?php 
+<?php
 get_header();
 the_post();
 
@@ -9,6 +9,8 @@ $events = ( isset( $post->meta['events_markup'] ) && ! empty( $post->meta['event
 $featured_image = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
 $location_fallback_image = get_theme_mod_or_default( 'location_fallback_image' );
 $location_image = '';
+
+$location_ankle_content = get_theme_mod_or_default( 'location_ankle_content' );
 
 if ( $featured_image ) {
 	$location_image = $featured_image;
@@ -61,5 +63,11 @@ else if ( ! empty( $location_fallback_image ) ) {
 		</div>
 	</div>
 </div>
+
+<?php
+if ( $location_ankle_content ) {
+	echo apply_filters( 'the_content', $location_ankle_content );
+}
+?>
 
 <?php get_footer(); ?>

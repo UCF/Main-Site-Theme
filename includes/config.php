@@ -348,6 +348,20 @@ function define_customizer_fields( $wp_customize ) {
 			)
 		)
 	);
+
+	$wp_customize->add_setting(
+		'location_ankle_content'
+	);
+
+	$wp_customize->add_control(
+		'location_ankle_content',
+		array(
+			'label'       => 'Location Ankle Content',
+			'description' => 'The content that appears at the bottom of all location profiles.',
+			'type'        => 'textarea',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_fields' );
