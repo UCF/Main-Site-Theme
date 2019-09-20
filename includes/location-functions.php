@@ -85,7 +85,7 @@ function get_organization_html( $title, $org, $count ) {
 
 	if ( isset( $org['org_name'] ) && ! empty( $org['org_name'] ) ) : ?>
 		<dt>
-			<a href="#collapse<?php echo $count; ?>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
+			<a href="#collapse<?php echo $count; ?>" class="text-uppercase" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
 				<?php echo $org['org_name']; ?>
 			</a>
 		</dt>
@@ -95,10 +95,10 @@ function get_organization_html( $title, $org, $count ) {
 
 		<?php if ( isset( $org['org_room'] ) && ! empty( $org['org_room'] ) ) : ?>
 			<dd class="mb-0">
-				 <?php echo $title ?> Room <?php echo $org['org_room']; ?>
+				 <?php echo $title ?>, Room <?php echo $org['org_room']; ?>
 			</dd>
 		<?php endif; ?>
-		
+
 		<?php if ( isset( $org['org_phone'] ) && ! empty( $org['org_phone'] ) ) : ?>
 			<dd>
 				<?php echo format_phone_link( $org, 'org_phone' ) ?>
@@ -110,10 +110,10 @@ function get_organization_html( $title, $org, $count ) {
 			<ul class="pl-4">
 				<?php 
 				foreach( $org['org_departments'] as $dept ) :
-					$dept_name = ( isset( $dept['dept_name'] ) && ! empty( $dept['dept_name'] ) ) ? ' Room ' . $dept['dept_name'] . '<br>' : '';
+					$dept_name = ( isset( $dept['dept_name'] ) && ! empty( $dept['dept_name'] ) ) ? $dept['dept_name'] . '<br>' : '';
 					$dept_building = ( isset( $dept['dept_building'] ) && ! empty( $dept['dept_building'] ) ) ? $dept['dept_building'] : '';
-					$dept_room = ( isset( $dept['dept_room'] ) && ! empty( $dept['dept_room'] ) ) ? ' Room ' . $dept['dept_room'] . '<br>' : '';
-					$dept_phone = ( isset( $dept['dept_phone'] ) && ! empty( $dept['dept_phone'] ) ) ? format_phone_link( $dept, 'dept_phone' ) . '<br>' : '';
+					$dept_room = ( isset( $dept['dept_room'] ) && ! empty( $dept['dept_room'] ) ) ? ', Room ' . $dept['dept_room']: '';
+					$dept_phone = ( isset( $dept['dept_phone'] ) && ! empty( $dept['dept_phone'] ) ) ? '<br>' . format_phone_link( $dept, 'dept_phone' ) : '';
 				?>
 				<li>
 					<?php
