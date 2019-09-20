@@ -11,7 +11,12 @@ function get_location_html() {
 	$post = get_post();
 	$post_name = $post->post_name;
 
-	$campus = ( isset( $post->meta['ucf_location_campus'] ) ) ? $post->meta['ucf_location_campus']->post_title : null;
+	$campus = null;
+	if ( isset( $post->meta['ucf_location_campus'] ) ) {
+		if( isset( $post->meta['ucf_location_campus']->post_title ) ) {
+			$campus = $post->meta['ucf_location_campus']->post_title;
+		}
+	}
 	$abbr = isset( $post->meta['ucf_location_abbr'] ) ? $post->meta['ucf_location_abbr'] : null;
 	$id = ( isset( $post->meta['ucf_location_id'] ) && $post->meta['ucf_location_id'] !== $post_name  ) ? $post->meta['ucf_location_id'] : null;
 
@@ -30,15 +35,15 @@ function get_location_html() {
 	<?php endif; ?>
 	<?php if( $abbr ) : ?>
 		<div class="row">
-			<div class="col-6 text-uppercase font-weight-bold">
+			<div class="col-5 col-md-6 col-lg-7 col-xl-6 text-uppercase font-weight-bold">
 				Abbreviation</div>
-			<div class="col-6"><?php echo $abbr ?></div>
+			<div class="col"><?php echo $abbr ?></div>
 		</div>
 	<?php endif; ?>
 	<?php if( $id ) : ?>
 		<div class="row">
-			<div class="col-6 text-uppercase font-weight-bold">Location ID</div>
-			<div class="col-6"><?php echo $id ?></div>
+			<div class="col-5 col-md-6 col-lg-7 col-xl-6 text-uppercase font-weight-bold">Location ID</div>
+			<div class="col"><?php echo $id ?></div>
 		</div>
 	<?php endif; ?>
 	<?php if( ! empty( $google_map_link ) ) : ?>
