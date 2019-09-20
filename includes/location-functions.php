@@ -85,7 +85,7 @@ function get_organization_html( $title, $org, $count ) {
 
 	if ( isset( $org['org_name'] ) && ! empty( $org['org_name'] ) ) : ?>
 		<dt>
-			<a href="#collapse<?php echo $count; ?>" class="text-uppercase" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
+			<a href="#collapse<?php echo $count; ?>" class="org-dept-name text-uppercase d-inline-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
 				<?php echo $org['org_name']; ?>
 			</a>
 		</dt>
