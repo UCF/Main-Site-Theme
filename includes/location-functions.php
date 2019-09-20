@@ -11,28 +11,41 @@ function get_location_html() {
 	$post = get_post();
 	$post_name = $post->post_name;
 
-	$campus = ( isset( $post->meta['ucf_location_campus'] ) ) ? $post->meta['ucf_location_campus'] : null;
-	$campus = ( $campus ) ? 'Campus: ' . $campus->post_title . '<br>' : "";
-
+	$campus = ( isset( $post->meta['ucf_location_campus'] ) ) ? $post->meta['ucf_location_campus']->post_title : null;
 	$abbr = isset( $post->meta['ucf_location_abbr'] ) ? $post->meta['ucf_location_abbr'] : null;
-	$abbr = ( $abbr ) ? "Abbreviation: $abbr<br>" : "";
+	$id = ( isset( $post->meta['ucf_location_id'] ) && $post->meta['ucf_location_id'] !== $post_name  ) ? $post->meta['ucf_location_id'] : null;
 
-	$id = isset( $post->meta['ucf_location_id'] ) ? $post->meta['ucf_location_id'] : null;
-	$id = ( isset( $id ) && $id !== $post_name ) ? "Location ID: $id" : "";
-	
 	$lat_lng = ( isset( $post->meta['ucf_location_lat_lng'] ) ) ? $post->meta['ucf_location_lat_lng'] : null;
 	$google_map_link = ( $lat_lng ) ? "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
 
 	ob_start();
 ?>
-	<p>
-		<?php echo $campus; ?>
-		<?php echo $abbr; ?>
-		<?php echo $id; ?>
-	</p>
-
+	<?php if( $campus ) : ?>
+		<div class="row">
+			<div class="col-12 mb-3">
+				<strong class="text-uppercase">Campus</strong><br>
+				<?php echo $campus ?>
+			</div>
+		</div>
+	<?php endif; ?>
+	<?php if( $abbr ) : ?>
+		<div class="row">
+			<div class="col-6 text-uppercase font-weight-bold">
+				Abbreviation</div>
+			<div class="col-6"><?php echo $abbr ?></div>
+		</div>
+	<?php endif; ?>
+	<?php if( $id ) : ?>
+		<div class="row">
+			<div class="col-6 text-uppercase font-weight-bold">Location ID</div>
+			<div class="col-6"><?php echo $id ?></div>
+		</div>
+	<?php endif; ?>
 	<?php if( ! empty( $google_map_link ) ) : ?>
-		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-secondary btn-sm text-uppercase mb-4 mt-2">Get Directions</a>
+		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm text-uppercase mb-4 mt-3">
+			<span class="fa fa-location-arrow"></span>
+			Get Directions
+		</a>
 	<?php endif; ?>
 
 <?php
