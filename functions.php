@@ -9,6 +9,7 @@ include_once 'includes/location-functions.php';
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
 include_once 'includes/phonebook-functions.php';
+include_once 'includes/post-list-layouts.php';
 
 
 /**
