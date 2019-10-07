@@ -40,7 +40,7 @@ if ( ! function_exists( 'mainsite_post_list_search_classnames' ) ) {
 		ob_start();
 ?>
 		{
-			input: 'form-control mb-4'
+			input: 'form-control mb-4 form-control-search'
 		}
 <?php
 		$classnames = ob_get_clean();
@@ -96,31 +96,4 @@ if ( ! function_exists( 'mainsite_list_display_location_after' ) ) {
 	}
 
 	add_filter( 'ucf_post_list_display_location_after', 'mainsite_list_display_location_after', 10, 3 );
-}
-
-if ( ! function_exists( 'mainsite_get_location_image_or_default' ) ) {
-	/**
-	 * Gets the post thumbnail or the location fallback image
-	 * @author Jim Barnes
-	 * @since 3.3.0
-	 * @param int $post_id The post id
-	 * @param string $size The size to retrieve
-	 * @return string The attachment id
-	 */
-	function mainsite_get_location_image_or_default( $post_id, $size = 'large' ) {
-		$img_id = get_post_thumbnail_id( $post_id );
-
-		if ( ! $img_id ) {
-			$img_url = get_theme_mod_or_default( 'location_fallback_image' );
-			$img_id  = attachment_url_to_postid( $img_url );
-		} else {
-			$img_array = wp_get_attachment_image_src( $img_id, $size );
-
-			if ( is_array( $img_array ) ) {
-				$img_url = $img_array[0];
-			}
-		}
-
-		return array( $img_id, $img_url );
-	}
 }
