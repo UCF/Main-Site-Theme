@@ -8,7 +8,7 @@ if ( ! function_exists( 'ucf_post_list_display_location_before' ) ) {
 	function mainsite_list_display_location_before( $content, $posts, $atts ) {
 		ob_start();
 	?>
-		<div class="ucf-post-list card-layout" id="post-list-<?php echo $atts['list_id']; ?>">
+		<div class="ucf-post-list card-layout locations-search" id="post-list-<?php echo $atts['list_id']; ?>">
 	<?php
 		return ob_get_clean();
 	}
