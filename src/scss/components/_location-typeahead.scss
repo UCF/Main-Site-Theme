@@ -66,4 +66,30 @@
       margin-bottom: 0;
     }
   }
+
+  .ucf-post-list-location-item {
+    border-bottom: 1px solid $brand-secondary;
+    padding: .5rem 0;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    .ucf-post-list-location-title {
+      color: $brand-secondary;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0;
+      padding: .8rem;
+    }
+
+    .ucf-post-list-location-text {
+      color: $brand-default;
+      font-size: .8rem;
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 0;
+      padding: .8rem;
+    }
+  }
 }
