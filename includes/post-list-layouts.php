@@ -61,7 +61,7 @@ if ( ! function_exists( 'mainsite_list_display_location' ) ) {
 
 			<?php
 			foreach( $posts as $index=>$item ) :
-				$date = date( "M d", strtotime( $item->post_date ) );
+				$address = get_field( 'ucf_location_address', $item->ID );
 				if( $atts['show_image'] ) {
 					list( $img_id, $item_img ) = mainsite_get_location_image_or_default( $item->ID );
 					$item_img_srcset           = wp_get_attachment_image_srcset( $img_id, 'large' );
@@ -78,7 +78,9 @@ if ( ! function_exists( 'mainsite_list_display_location' ) ) {
 						<?php endif; ?>
 						<div class="ucf-post-list-card-block">
 							<h3 class="ucf-post-list-card-title"><?php echo $item->post_title; ?></h3>
-							<p class="ucf-post-list-card-text"><?php echo $date; ?></p>
+							<?php if ( $address ) : ?>
+							<p class="ucf-post-list-card-text"><?php echo $address; ?></p>
+							<?php endif; ?>
 						</div>
 					</a>
 				</div>
