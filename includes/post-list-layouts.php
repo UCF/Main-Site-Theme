@@ -40,7 +40,7 @@ if ( ! function_exists( 'mainsite_post_list_search_classnames' ) ) {
 		ob_start();
 ?>
 		{
-			input: 'form-control'
+			input: 'form-control mb-4'
 		}
 <?php
 		$classnames = ob_get_clean();
