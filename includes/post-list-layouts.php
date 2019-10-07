@@ -61,18 +61,16 @@ if ( ! function_exists( 'mainsite_list_display_location' ) ) {
 			foreach( $posts as $index=>$item ) :
 				$address = get_field( 'ucf_location_address', $item->ID );
 			?>
-				<div class="ucf-post-list-card">
+				<div class="ucf-post-list-location-item">
 					<a class="ucf-post-list-card-link" href="<?php echo get_permalink( $item->ID ); ?>">
-						<div class="ucf-post-list-card-block">
-							<div class="row">
-								<div class="col-sm-4">
-									<h3 class="ucf-post-list-card-title"><?php echo $item->post_title; ?></h3>
-								</div>
-								<div class="col-sm">
-									<?php if ( $address ) : ?>
-									<p class="ucf-post-list-card-text"><?php echo $address; ?></p>
-									<?php endif; ?>
-								</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<h3 class="ucf-post-list-location-title"><?php echo $item->post_title; ?></h3>
+							</div>
+							<div class="col-sm">
+								<?php if ( $address ) : ?>
+								<p class="ucf-post-list-location-text"><?php echo $address; ?></p>
+								<?php endif; ?>
 							</div>
 						</div>
 					</a>
