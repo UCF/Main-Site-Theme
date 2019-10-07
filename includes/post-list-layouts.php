@@ -57,34 +57,27 @@ if ( ! function_exists( 'mainsite_list_display_location' ) ) {
 		ob_start();
 ?>
 		<?php if ( $posts ): ?>
-			<div class="ucf-post-list-card-deck">
-
 			<?php
 			foreach( $posts as $index=>$item ) :
 				$address = get_field( 'ucf_location_address', $item->ID );
-				if( $atts['show_image'] ) {
-					list( $img_id, $item_img ) = mainsite_get_location_image_or_default( $item->ID );
-					$item_img_srcset           = wp_get_attachment_image_srcset( $img_id, 'large' );
-				}
-
-				if( $atts['posts_per_row'] > 0 && $index !== 0 && ( $index % $atts['posts_per_row'] ) === 0 ) {
-					echo '</div><div class="ucf-post-list-card-deck">';
-				}
 			?>
 				<div class="ucf-post-list-card">
 					<a class="ucf-post-list-card-link" href="<?php echo get_permalink( $item->ID ); ?>">
 						<div class="ucf-post-list-card-block">
-							<h3 class="ucf-post-list-card-title"><?php echo $item->post_title; ?></h3>
-							<?php if ( $address ) : ?>
-							<p class="ucf-post-list-card-text"><?php echo $address; ?></p>
-							<?php endif; ?>
+							<div class="row">
+								<div class="col-sm-4">
+									<h3 class="ucf-post-list-card-title"><?php echo $item->post_title; ?></h3>
+								</div>
+								<div class="col-sm">
+									<?php if ( $address ) : ?>
+									<p class="ucf-post-list-card-text"><?php echo $address; ?></p>
+									<?php endif; ?>
+								</div>
+							</div>
 						</div>
 					</a>
 				</div>
 			<?php endforeach; ?>
-
-			</div>
-
 		<?php else: ?>
 			<div class="ucf-post-list-error">No results found.</div>
 		<?php endif;
