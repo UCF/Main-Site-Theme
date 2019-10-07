@@ -62,18 +62,18 @@ if ( ! function_exists( 'mainsite_list_display_location' ) ) {
 				$address = get_field( 'ucf_location_address', $item->ID );
 			?>
 				<div class="ucf-post-list-location-item">
-					<a class="ucf-post-list-card-link" href="<?php echo get_permalink( $item->ID ); ?>">
-						<div class="row">
-							<div class="col-sm-4">
+					<div class="row">
+						<div class="col-sm-4">
+							<a class="ucf-post-list-card-link" href="<?php echo get_permalink( $item->ID ); ?>">
 								<h3 class="ucf-post-list-location-title"><?php echo $item->post_title; ?></h3>
-							</div>
-							<div class="col-sm">
-								<?php if ( $address ) : ?>
-								<p class="ucf-post-list-location-text"><?php echo $address; ?></p>
-								<?php endif; ?>
-							</div>
+							</a>
 						</div>
-					</a>
+						<div class="col-md-8">
+							<?php if ( $address ) : ?>
+							<p class="ucf-post-list-location-text"><?php echo $address; ?></p>
+							<?php endif; ?>
+						</div>
+					</div>
 				</div>
 			<?php endforeach; ?>
 		<?php else: ?>
