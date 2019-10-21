@@ -5,7 +5,7 @@
     padding: 2px 16px;
 
     @include media-breakpoint-up(sm) {
-      border-right: 1px solid $gray;
+      border-right: 1px solid $gray-light;
 
       &:nth-child(2n) {
         border-right: 0;
@@ -13,10 +13,10 @@
     }
 
     @include media-breakpoint-up(md) {
-      border-right: 1px solid $gray;
+      border-right: 1px solid $gray-light;
 
       &:nth-child(2n) {
-        border-right: 1px solid $gray;
+        border-right: 1px solid $gray-light;
       }
 
       &:nth-child(3n) {
