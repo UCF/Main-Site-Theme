@@ -250,7 +250,7 @@ function format_phonebook_result( $result ) {
 		<div class="collapse" id="<?php echo $unique_slug; ?>">
 			<ul class="staff-list row list-unstyled">
 				<?php foreach( $result->staff as $person ) : ?>
-					<li class="col-sm-6 col-md-4 py-2">
+					<li class="col-sm-6 col-md-4 py-3">
 						<?php if ( $person->email ) : ?>
 							<span class="email"><a href="?query=<?php echo urlencode( $person->email ); ?>"><?php echo $person->name; ?></a></span>
 						<?php else : ?>
