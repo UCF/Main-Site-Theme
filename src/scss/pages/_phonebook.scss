@@ -26,25 +26,14 @@
   }
 
   .email,
+  .title,
   .name {
     display: block;
-    float: none;
-
-    @include media-breakpoint-up(lg) {
-      display: inline-block;
-      float: left;
-    }
   }
 
   .phone {
     display: block;
-    float: none;
     padding-bottom: .25rem;
-
-    @include media-breakpoint-up(lg) {
-      display: inline-block;
-      float: right;
-    }
   }
 }
 
