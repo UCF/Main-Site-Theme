@@ -250,11 +250,15 @@ function format_phonebook_result( $result ) {
 		<div class="collapse" id="<?php echo $unique_slug; ?>">
 			<ul class="staff-list row list-unstyled">
 				<?php foreach( $result->staff as $person ) : ?>
-					<li class="col-sm-6 col-md-4">
+					<li class="col-sm-6 col-md-4 py-2">
 						<?php if ( $person->email ) : ?>
-							<span class="email"><a href="mailto:<?php echo $person->email; ?>"><?php echo $person->name; ?></a></span>
+							<span class="email"><a href="?query=<?php echo urlencode( $person->email ); ?>"><?php echo $person->name; ?></a></span>
 						<?php else : ?>
 							<span class="name"><?php echo $person->name; ?></span>
+						<?php endif; ?>
+
+						<?php if ( $person->job_position ) : ?>
+							<span class="title text-muted"><?php echo $person->job_position; ?></span>
 						<?php endif; ?>
 
 						<?php if ( $person->phone && $person->phone !== '000-000-0000' ) : ?>
