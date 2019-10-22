@@ -1240,7 +1240,7 @@
                 "label": "Phonebook CTAs",
                 "name": "phonebook_ctas",
                 "type": "wysiwyg",
-                "instructions": "HTML to be displayed under the phonebook search before a search.",
+                "instructions": "HTML to be displayed under the phone book search before a search.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
