@@ -1,7 +1,8 @@
 <?php
 /**
- * The page template for the phonebook
- **/
+ * Template Name: Phonebook
+ * Template Post Type: page
+ */
 ?>
 
 <?php get_header(); ?>
