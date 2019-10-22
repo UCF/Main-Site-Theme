@@ -9,6 +9,7 @@
 <?php
 $query = isset( $_GET['query'] ) ? $_GET['query'] : '';
 $results = get_phonebook_results( $query );
+$phonebook_ctas = get_field( 'phonebook_ctas' );
 ?>
 
 <div class="container mt-md-4 mb-4 mb-sm-5 pb-md-5">
@@ -38,7 +39,13 @@ $results = get_phonebook_results( $query );
 		<?php endif; ?>
 
 	</div>
-	<?php endif; ?>
+	<?php
+	else :
+		if( isset( $phonebook_ctas ) ) {
+			echo $phonebook_ctas;
+		}
+	endif;
+	?>
 </div>
 
 <?php get_footer(); ?>
