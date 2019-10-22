@@ -1258,9 +1258,9 @@
         "location": [
             [
                 {
-                    "param": "page",
+                    "param": "page_template",
                     "operator": "==",
-                    "value": "2037"
+                    "value": "template-phonebook.php"
                 }
             ]
         ],
