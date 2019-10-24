@@ -210,7 +210,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 
-	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '" role="region" aria-label="' . $title . '"' : '';
+	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '" aria-label="' . $title . '"' : '';
 
 	$section_id = ! empty( $section_id ) ? ' id="' . $section_id . '"' : '';
 
