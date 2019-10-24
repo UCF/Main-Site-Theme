@@ -59,7 +59,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": 1,
+        "active": true,
         "description": ""
     },
     {
@@ -580,7 +580,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": 1,
+        "active": true,
         "description": ""
     },
     {
@@ -861,7 +861,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": 1,
+        "active": true,
         "description": ""
     },
     {
@@ -1228,7 +1228,49 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": 1,
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_5daf1e03c69ab",
+        "title": "Phone Book Fields",
+        "fields": [
+            {
+                "key": "field_5daf1e11796f7",
+                "label": "Phonebook CTAs",
+                "name": "phonebook_ctas",
+                "type": "wysiwyg",
+                "instructions": "HTML to be displayed under the phone book search before a search.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "page_template",
+                    "operator": "==",
+                    "value": "template-phonebook.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
         "description": ""
     },
     {
@@ -1457,7 +1499,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": 1,
+        "active": true,
         "description": ""
     },
     {
@@ -1537,7 +1579,7 @@
         "label_placement": "top",
         "instruction_placement": "label",
         "hide_on_screen": "",
-        "active": 1,
+        "active": true,
         "description": ""
     }
 ]

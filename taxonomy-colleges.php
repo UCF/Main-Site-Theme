@@ -20,7 +20,7 @@ $cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id );
 $news_topic = get_field( 'news_topic', 'colleges_' . $term->term_id );
 $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 ?>
-<article role="main">
+<article>
 	<section class="section-lead">
 		<div class="container my-5">
 			<div class="row">
