@@ -127,8 +127,8 @@ function phonebook_deduplicate_staff( $results ) {
 			foreach( $results as $_key => $_result ) {
 				// Deduplicate on email
 				if (
-					( $result->email !== null ) &&
-					( $_result->email !== null ) &&
+					( ! empty( $result->email ) ) &&
+					( ! empty( $_result->email ) ) &&
 					( $result !== $_result ) &&
 					( $result->email === $_result->email )
 				) {
