@@ -326,11 +326,11 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	<?php if ( $result->building ) : ?>
 		<div class="row mb-2">
 			<div class="col-3 col-md-12">
-				<span class="result-label text-default-aw text-uppercase">Location</span>
+				<span class="result-label text-default-aw text-uppercase" id="location-label">Location</span>
 			</div>
 			<div class="col-9 col-md-12">
 				<span class="location">
-					<a href="https://map.ucf.edu/?show=<?php echo $result->bldg_id; ?>">
+					<a href="https://map.ucf.edu/?show=<?php echo $result->bldg_id; ?>" aria-labelledby="location-label">
 						<?php echo phonebook_fix_name_case( $result->building ); ?>
 						<?php if ( $result->room ) : ?>
 							<?php echo ' - ' . $result->room; ?>
@@ -343,10 +343,10 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	<?php if ( $result->postal ) : ?>
 	<div class="row mb-2">
 		<div class="col-3 col-md-12">
-			<span class="result-label text-default-aw text-uppercase">Zip</span>
+			<span class="result-label text-default-aw text-uppercase" id="zip-label">Zip</span>
 		</div>
 		<div class="col-9 col-md-12">
-			<span class="postal">
+			<span class="postal" aria-labelledby="zip-label">
 				<?php echo $result->postal; ?>
 			</span>
 		</div>
@@ -372,25 +372,25 @@ function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group 
 	<?php if ( ! $is_group && $result->email ) : ?>
 		<div class="row mb-2">
 			<div class="col-3 col-md-12">
-				<span class="result-label text-default-aw text-uppercase">Email</span>
+				<span class="result-label text-default-aw text-uppercase" id="email-label">Email</span>
 			</div>
 			<div class="col-9 col-md-12">
 				<span class="email">
-					<a href="mailto:<?php echo $result->email; ?>"><?php echo $result->email; ?></a>
+					<a href="mailto:<?php echo $result->email; ?>" aria-labelledby="email-label"><?php echo $result->email; ?></a>
 				</span>
 			</div>
 		</div>
 	<?php endif; ?>
 		<div class="row mb-2">
 			<div class="col-3 col-md-12">
-				<span class="result-label text-default-aw text-uppercase">Phone</span>
+				<span class="result-label text-default-aw text-uppercase" id="phone-label">Phone</span>
 			</div>
 			<div class="col-9 col-md-12">
 				<span class="phone">
 				<?php if ( $result->phone === '000-000-0000' || empty( $result->phone ) ) : ?>
 					N/A
 				<?php elseif ( $result->phone ) : ?>
-					<a href="tel:<?php echo str_replace( '-', '', $result->phone ); ?>"><?php echo $result->phone; ?></a>
+					<a href="tel:<?php echo str_replace( '-', '', $result->phone ); ?>" aria-labelledby="phone-label"><?php echo $result->phone; ?></a>
 				<?php endif; ?>
 				</span>
 			</div>
@@ -398,10 +398,10 @@ function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group 
 	<?php if ( $is_group && $result->fax ) : ?>
 		<div class="row mb-2">
 			<div class="col-3 col-md-12">
-				<span class="result-label text-default-aw text-uppercase">Fax</span>
+				<span class="result-label text-default-aw text-uppercase" id="fax-label">Fax</span>
 			</div>
 			<div class="col-9 col-md-12">
-				<span class="fax">
+				<span class="fax" aria-labelledby="fax-label">
 					<?php echo $result->fax; ?>
 				</span>
 			</div>
