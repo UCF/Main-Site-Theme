@@ -343,10 +343,10 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 	<?php if ( $result->postal ) : ?>
 	<div class="row mb-2">
 		<div class="col-3 col-md-12">
-			<span class="result-label text-default-aw text-uppercase">Zip</span>
+			<span class="result-label text-default-aw text-uppercase">ZIP</span>
 		</div>
 		<div class="col-9 col-md-12">
-			<span class="postal" aria-label="Zip Code">
+			<span class="postal" aria-label="ZIP Code">
 				<?php echo $result->postal; ?>
 			</span>
 		</div>
