@@ -1,3 +1,43 @@
+.phonebook-results {
+  font-size: .9rem;
+
+  .toggle {
+    &:not(.collapsed) {
+      .fa-plus {
+        display: none;
+      }
+    }
+
+    &.collapsed {
+      .fa-minus {
+        display: none;
+      }
+    }
+  }
+
+  .result-label {
+    font-size: 85%;
+  }
+
+  .email,
+  .phone {
+    text-overflow: ellipsis;
+  }
+
+  .name {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+
+.result {
+  border-bottom: 1px solid $gray;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
 .staff-list {
   li {
     border-bottom: 1px solid $gray-lighter;
@@ -27,52 +67,10 @@
 
   .email,
   .title,
-  .name {
-    display: block;
-  }
-
+  .name,
   .phone {
     display: block;
-    padding-bottom: .25rem;
-  }
-}
-
-.phonebook-results {
-  font-size: .9rem;
-
-  .toggle {
-    &:not(.collapsed) {
-      .fa-plus {
-        display: none;
-      }
-    }
-
-    &.collapsed {
-      .fa-minus {
-        display: none;
-      }
-    }
-  }
-
-  .result-label {
-    font-size: 85%;
-  }
-
-  .email,
-  .phone {
-    text-overflow: ellipsis;
-  }
-}
-
-.result {
-  border-bottom: 1px solid $gray;
-
-  &:last-child {
-    border-bottom: 0;
-  }
-
-  .name {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: inherit;
+    font-weight: 400;
   }
 }
