@@ -208,13 +208,13 @@ function format_phonebook_result( $result ) {
 ?>
 	<li class="result<?php echo $class; ?> list-unstyled mb-2 py-3 py-md-4">
 		<div class="row">
-			<div class="col-md-6 mb-2">
+			<div class="col-md-5 mb-2">
 				<?php echo format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group ); ?>
 			</div>
 			<div class="col-md-3">
 				<?php echo format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ); ?>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<?php echo format_phonebook_result_location( $result, $is_dept, $is_org, $is_group ); ?>
 			</div>
 		</div>
