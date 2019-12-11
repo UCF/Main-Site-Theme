@@ -325,6 +325,14 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
 	$meta['degree_description'] = get_api_catalog_description( $program );
 
+	$meta['degree_avg_annual_earnings'] = isset( $program->outcomes->latest->avg_annual_earnings ) ?
+		$program->outcomes->latest->avg_annual_earnings :
+		null;
+
+	$meta['degree_outcome_academic_year'] = isset( $program->outcomes->latest->academic_year_display ) ?
+		$program->outcomes->latest->academic_year_display :
+		null;
+
 	return $meta;
 }
 
