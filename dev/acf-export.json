@@ -801,6 +801,70 @@
                 "display_type": "text"
             },
             {
+                "key": "field_5df107af52f9e",
+                "label": "Outcome Academic Year",
+                "name": "degree_outcome_academic_year",
+                "type": "read_only",
+                "instructions": "The academic year of the graduates represented in the outcome data to the right.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df107d052f9f",
+                "label": "Average Annual Earnings",
+                "name": "degree_avg_annual_earnings",
+                "type": "read_only",
+                "instructions": "The average annual earnings of graduates who are employed full time from the graduating class of the Outcome Academic Year",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df107ed52fa0",
+                "label": "Employed Full Time (%)",
+                "name": "degree_employed_full_time",
+                "type": "read_only",
+                "instructions": "The percentage of graduates from the Outcome Academic Year that were employed full time at the time of the NCES survey.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df107fe52fa1",
+                "label": "Continuing Education (%)",
+                "name": "degree_continuing_education",
+                "type": "read_only",
+                "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional education at the time of the NCES survey.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
                 "key": "field_5aec63848617d",
                 "label": "Degree Settings",
                 "name": "",
