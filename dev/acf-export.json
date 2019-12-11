@@ -853,7 +853,7 @@
                 "label": "Continuing Education (%)",
                 "name": "degree_continuing_education",
                 "type": "read_only",
-                "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional edication at the time of the NCES survey.",
+                "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional education at the time of the NCES survey.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
