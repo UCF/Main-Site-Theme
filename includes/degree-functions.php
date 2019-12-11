@@ -329,6 +329,14 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 		$program->outcomes->latest->avg_annual_earnings :
 		null;
 
+	$meta['degree_employed_full_time'] = isset( $program->outcomes->latest->employed_full_time ) ?
+		$program->outcomes->latest->employed_full_time :
+		null;
+
+	$meta['degree_continuing_education'] = isset( $program->outcomes->latest->continuing_education ) ?
+		$program->outcomes->latest->continuing_education :
+		null;
+
 	$meta['degree_outcome_academic_year'] = isset( $program->outcomes->latest->academic_year_display ) ?
 		$program->outcomes->latest->academic_year_display :
 		null;
