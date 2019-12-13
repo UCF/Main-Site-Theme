@@ -885,7 +885,7 @@
                 "label": "Report Year Start",
                 "name": "degree_prj_begin_year",
                 "type": "read_only",
-                "instructions": "The start year in the data projection",
+                "instructions": "The start year in the data projection.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -901,7 +901,7 @@
                 "label": "Report Year End",
                 "name": "degree_prj_end_year",
                 "type": "read_only",
-                "instructions": "The end year in the data projection",
+                "instructions": "The end year in the data projection.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -965,7 +965,7 @@
                 "label": "Projected New Positions Percentage",
                 "name": "degree_prj_change_percentage",
                 "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
+                "instructions": "The projected change in the number of positions available between the start and end year as a percentage.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
