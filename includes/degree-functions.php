@@ -341,11 +341,54 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 		$program->outcomes->latest->academic_year_display :
 		null;
 
+	$meta['degree_prj_begin_year'] = isset( $program->projection_totals->begin_year ) ?
+		$program->projection_totals->begin_year :
+		null;
+
+	$meta['degree_prj_end_year'] = isset( $program->projection_totals->end_year ) ?
+		$program->projection_totals->end_year :
+		null;
+
+	$meta['degree_prj_begin_employment'] = isset( $program->projection_totals->begin_employment ) ?
+		$program->projection_totals->begin_employment :
+		null;
+
+	$meta['degree_prj_end_employment'] = isset( $program->projection_totals->end_employment ) ?
+		$program->projection_totals->end_employment :
+		null;
+
+	$meta['degree_prj_change'] = isset( $program->projection_totals->change ) ?
+		$program->projection_totals->change :
+		null;
+
+	$meta['degree_prj_change_percentage'] = isset( $program->projection_totals->change_percentage ) ?
+		$program->projection_totals->change_percentage :
+		null;
+
+	$meta['degree_prj_openings'] = isset( $program->projection_totals->openings ) ?
+		$program->projection_totals->openings :
+		null;
+
 	return $meta;
 }
 
 add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 10, 2 );
 
+/**
+ * Adds career paths from the career data within the program
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $terms The array of terms to return
+ * @param object The program object from the search service
+ * @return array
+ */
+function mainsite_degree_get_post_terms( $terms, $program ) {
+	$terms['career_paths'] = $program->careers;
+
+	return $terms;
+}
+
+add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2 );
 
 /**
  * Angular Degree Template Overrides

@@ -865,6 +865,134 @@
                 "display_type": "text"
             },
             {
+                "key": "field_5df2a7190443b",
+                "label": "Employment Projection Data",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df29fdf4c2d8",
+                "label": "Report Year Start",
+                "name": "degree_prj_begin_year",
+                "type": "read_only",
+                "instructions": "The start year in the data projection.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0084c2d9",
+                "label": "Report Year End",
+                "name": "degree_prj_end_year",
+                "type": "read_only",
+                "instructions": "The end year in the data projection.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0484c2da",
+                "label": "Beginning Employment",
+                "name": "degree_prj_begin_employment",
+                "type": "read_only",
+                "instructions": "The estimated number of positions available for graduates with this degree in the start year of the report.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0724c2db",
+                "label": "Projected Employment",
+                "name": "degree_prj_end_employment",
+                "type": "read_only",
+                "instructions": "The projected number of positions for graduates with this degree by the end year of the report.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0ca4c2dc",
+                "label": "Projected New Positions",
+                "name": "degree_prj_change",
+                "type": "read_only",
+                "instructions": "The projected change in the number of positions available between the start and end year.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a1024c2dd",
+                "label": "Projected New Positions Percentage",
+                "name": "degree_prj_change_percentage",
+                "type": "read_only",
+                "instructions": "The projected change in the number of positions available between the start and end year as a percentage.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a12d4c2de",
+                "label": "Projected Openings",
+                "name": "degree_prj_openings",
+                "type": "read_only",
+                "instructions": "The projected number of openings for graduates with this degree within the report's timeframe.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
                 "key": "field_5aec63848617d",
                 "label": "Degree Settings",
                 "name": "",
