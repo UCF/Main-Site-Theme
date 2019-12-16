@@ -1035,7 +1035,7 @@
                 "label": "Projected New Positions Percentage",
                 "name": "degree_prj_change_percentage",
                 "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year as a percentage.",
+                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1148,6 +1148,25 @@
                 "message": "",
                 "default_value": 0,
                 "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7ef62fece7",
+                "label": "Display Career Paths",
+                "name": "degree_display_career_paths",
+                "type": "true_false",
+                "instructions": "Determines if career paths are displayed for this degree.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
             }
