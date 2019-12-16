@@ -1035,7 +1035,7 @@
                 "label": "Projected New Positions Percentage",
                 "name": "degree_prj_change_percentage",
                 "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
+                "instructions": "The projected change in the number of positions available between the start and end year as a percentage.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
