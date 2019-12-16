@@ -610,7 +610,9 @@ function main_site_degree_news_stories( $post_meta ) {
  * @param int $post_id The post id
  * @return string
  */
-function main_site_degree_careers( $post_id ) {
+function main_site_degree_careers( $post_id, $post_meta ) {
+	$display = isset( $post_meta['degree_display_career_paths'] ) ? filter_var( $post_meta['degree_display_career_paths'] ) : true;
+
 	$terms = wp_get_post_terms(
 		$post_id,
 		'career_paths'
@@ -626,8 +628,9 @@ function main_site_degree_careers( $post_id ) {
 
 	ob_start();
 
-	if ( count( $terms ) > 0 ) :
+	if ( count( $terms ) > 0 && $display ) :
 ?>
+	<h3>Careers</h3>
 	<ul>
 <?php foreach( $terms as $term ) : ?>
 		<li><?php echo $term->name; ?></li>
