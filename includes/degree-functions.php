@@ -588,7 +588,7 @@ function main_site_projection_data( $post_meta ) {
  * @param array $post_meta The post meta array
  * @return string
  */
-function main_site_news_stories( $post_meta ) {
+function main_site_degree_news_stories( $post_meta ) {
 	ob_start();
 
 	$display = isset( $post_meta['degree_display_news'] ) ? filter_var( $post_meta['degree_display_news'], FILTER_VALIDATE_BOOLEAN ) : false;
@@ -601,4 +601,40 @@ function main_site_news_stories( $post_meta ) {
 	endif;
 
 	return do_shortcode( ob_get_clean() );
+}
+
+/**
+ * Returns a list of careers for a degree
+ * @author Jim Barnes
+ * @since v3.4.0
+ * @param int $post_id The post id
+ * @return string
+ */
+function main_site_degree_careers( $post_id ) {
+	$terms = wp_get_post_terms(
+		$post_id,
+		'career_paths'
+	);
+
+	shuffle( $terms );
+
+	$terms = array_slice( $terms, 0, 10 );
+
+	usort( $terms, function($a, $b) {
+		return strcmp( $a->name, $b->name );
+	} );
+
+	ob_start();
+
+	if ( count( $terms ) > 0 ) :
+?>
+	<ul>
+<?php foreach( $terms as $term ) : ?>
+		<li><?php echo $term->name; ?></li>
+<?php endforeach; ?>
+	</ul>
+<?php
+	endif;
+
+	return ob_get_clean();
 }
