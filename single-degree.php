@@ -49,6 +49,8 @@
 				}
 				?>
 				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+				<?php echo main_site_outcome_data( $post_meta ); ?>
+				<?php echo main_site_projection_data( $post_meta ); ?>
 			</div>
 			<div class="row">
 			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>

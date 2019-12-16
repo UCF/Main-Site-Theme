@@ -466,3 +466,113 @@ function main_site_degree_display_subplans( $post_id ) {
 
 	return ob_get_clean();
 }
+
+
+/**
+ * Formats degree meta
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $post_meta The post_meta array
+ * @return array
+ */
+function main_site_format_degree_data( $post_meta ) {
+	setlocale(LC_MONETARY, 'en_US');
+
+	if ( isset( $post_meta['degree_avg_annual_earnings'] ) ) {
+		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', $post_meta['degree_avg_annual_earnings'] );
+	}
+
+	if ( isset( $post_meta['degree_employed_full_time'] ) ) {
+		$post_meta['degree_employed_full_time'] = number_format( $post_meta['degree_employed_full_time'] ) . '%';
+	}
+
+	if ( isset( $post_meta['degree_continuing_education'] ) ) {
+		$post_meta['degree_continuing_education'] = number_format( $post_meta['degree_continuing_education'] ) . '%';
+	}
+
+	if ( isset( $post_meta['degree_prj_begin_employment'] ) ) {
+		$post_meta['degree_prj_begin_employment'] = number_format( $post_meta['degree_prj_begin_employment'] );
+	}
+
+	if ( isset( $post_meta['degree_prj_end_employment'] ) ) {
+		$post_meta['degree_prj_end_employment'] = number_format( $post_meta['degree_prj_end_employment'] );
+	}
+
+	if ( isset( $post_meta['degree_prj_change'] ) ) {
+		$post_meta['degree_prj_change'] = number_format( $post_meta['degree_prj_change'] );
+	}
+
+	if ( isset( $post_meta['degree_prj_change_percentage'] ) ) {
+		$post_meta['degree_prj_change_percentage'] = number_format( $post_meta['degree_prj_change_percentage'], 2 ) . '%';
+	}
+
+	if ( isset( $post_meta['degree_prj_openings'] ) ) {
+		$post_meta['degree_prj_openings'] = number_format( $post_meta['degree_prj_openings'] );
+	}
+
+	return $post_meta;
+}
+
+/**
+ * Formats the outcome data
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $post_meta The formatted post_meta array
+ * @return string
+ */
+function main_site_outcome_data( $post_meta ) {
+	ob_start();
+	$keys = array(
+		'degree_avg_annual_earnings',
+		'degree_employed_full_time'
+	);
+
+	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 ) :
+
+		$report_year = isset( $post_meta['degree_outcome_academic_year'] ) ?
+			'(per ' . $post_meta['degree_outcome_academic_year'] . ' Data)' :
+			'';
+?>
+	<?php if ( isset( $post_meta['degree_employed_full_time'] ) ) : ?>
+	<p>UCF Alumni Working full-time: <?php echo $post_meta['degree_employed_full_time']; ?> <?php echo $report_year; ?></p>
+	<?php endif; ?>
+	<?php if ( isset( $post_meta['degree_avg_annual_earnings'] ) ) : ?>
+	<p>UCF Alumni Average Annual Earnings: <?php echo $post_meta['degree_avg_annual_earnings']; ?> <?php echo $report_year; ?></p>
+	<?php endif; ?>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
+
+/**
+ * Formats the projection data
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $post_meta The formatted post_meta array
+ * @return string
+ */
+function main_site_projection_data( $post_meta ) {
+	ob_start();
+
+	$keys = array(
+		'degree_prj_openings',
+		'degree_prj_change'
+	);
+
+	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 ) :
+?>
+	<?php if ( isset( $post_meta['degree_prj_begin_year'] ) && isset( $post_meta['degree_prj_end_year'] ) ) : ?>
+	<p>Projected <?php echo $post_meta['degree_prj_begin_year']; ?>-<?php echo $post_meta['degree_prj_end_year']; ?>
+	<?php endif; ?>
+	<?php if ( isset( $post_meta['degree_prj_openings'] ) ) : ?>
+	<p>Job Openings: <?php echo $post_meta['degree_prj_openings']; ?></p>
+	<?php endif; ?>
+	<?php if ( isset( $post_meta['degree_prj_change'] ) ) : ?>
+	<p>New Jobs: <?php echo $post_meta['degree_prj_change']; ?>
+	<?php endif; ?>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
