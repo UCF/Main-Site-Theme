@@ -527,7 +527,9 @@ function main_site_outcome_data( $post_meta ) {
 		'degree_employed_full_time'
 	);
 
-	$display = isset( $post_meta['degree_display_outcomes'] ) ? filter_var( $post_meta['degree_display_outcomes'], FILTER_VALIDATE_BOOLEAN ) : true;
+	$display = isset( $post_meta['degree_display_outcomes'] ) ?
+		filter_var( $post_meta['degree_display_outcomes'], FILTER_VALIDATE_BOOLEAN ) :
+		true;
 
 	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
 
@@ -562,7 +564,9 @@ function main_site_projection_data( $post_meta ) {
 		'degree_prj_change'
 	);
 
-	$display = isset( $post_meta['degree_display_projections'] ) ? filter_var( $post_meta['degree_display_projections'], FILTER_VALIDATE_BOOLEAN ) : true;
+	$display = isset( $post_meta['degree_display_projections'] ) ?
+		filter_var( $post_meta['degree_display_projections'], FILTER_VALIDATE_BOOLEAN ) :
+		false;
 
 	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
 ?>
@@ -591,7 +595,10 @@ function main_site_projection_data( $post_meta ) {
 function main_site_degree_news_stories( $post_meta ) {
 	ob_start();
 
-	$display = isset( $post_meta['degree_display_news'] ) ? filter_var( $post_meta['degree_display_news'], FILTER_VALIDATE_BOOLEAN ) : false;
+	$display = isset( $post_meta['degree_display_news'] ) ?
+		filter_var( $post_meta['degree_display_news'], FILTER_VALIDATE_BOOLEAN ) :
+		false;
+
 	$tag = isset( $post_meta['degree_news_tag'] ) ? $post_meta['degree_news_tag'] : null;
 
 	if ( $display && ! empty( $tag ) ) :
@@ -613,7 +620,7 @@ function main_site_degree_news_stories( $post_meta ) {
 function main_site_degree_careers( $post_id, $post_meta ) {
 	$display = isset( $post_meta['degree_display_career_paths'] ) ?
 		filter_var( $post_meta['degree_display_career_paths'], FILTER_VALIDATE_BOOLEAN )
-		: true;
+		: false;
 
 	$terms = wp_get_post_terms(
 		$post_id,

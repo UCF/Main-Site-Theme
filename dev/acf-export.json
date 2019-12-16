@@ -837,7 +837,7 @@
                 "label": "Display Degree Outcomes",
                 "name": "degree_display_outcomes",
                 "type": "true_false",
-                "instructions": "Determines if degree outcomes are displayed",
+                "instructions": "Determines if degree outcomes are displayed.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -846,7 +846,7 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 1,
+                "default_value": 0,
                 "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
@@ -945,7 +945,7 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 1,
+                "default_value": 0,
                 "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
@@ -955,7 +955,7 @@
                 "label": "Report Year Start",
                 "name": "degree_prj_begin_year",
                 "type": "read_only",
-                "instructions": "The start year in the data projection",
+                "instructions": "The start year in the data projection.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1165,7 +1165,7 @@
                     "id": ""
                 },
                 "message": "",
-                "default_value": 1,
+                "default_value": 0,
                 "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
