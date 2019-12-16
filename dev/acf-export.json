@@ -1063,6 +1063,60 @@
                 "display_type": "text"
             },
             {
+                "key": "field_5df7bacf0f53e",
+                "label": "Degree News",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df7bae40f53f",
+                "label": "Display News",
+                "name": "degree_display_news",
+                "type": "true_false",
+                "instructions": "Determines if news articles are displayed for degrees.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7bb6d0f541",
+                "label": "News Tag",
+                "name": "degree_news_tag",
+                "type": "text",
+                "instructions": "Specify the tag used on the news site to retrieve the stories.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5aec63848617d",
                 "label": "Degree Settings",
                 "name": "",
