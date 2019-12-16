@@ -611,7 +611,9 @@ function main_site_degree_news_stories( $post_meta ) {
  * @return string
  */
 function main_site_degree_careers( $post_id, $post_meta ) {
-	$display = isset( $post_meta['degree_display_career_paths'] ) ? filter_var( $post_meta['degree_display_career_paths'], FILTER_VALIDATE_BOOLEAN ) : true;
+	$display = isset( $post_meta['degree_display_career_paths'] ) ?
+		filter_var( $post_meta['degree_display_career_paths'], FILTER_VALIDATE_BOOLEAN )
+		: true;
 
 	$terms = wp_get_post_terms(
 		$post_id,
