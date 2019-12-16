@@ -1102,7 +1102,7 @@
                 "label": "News Tag",
                 "name": "degree_news_tag",
                 "type": "text",
-                "instructions": "Specify the tag used on the news site to retrieve the stories.",
+                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
