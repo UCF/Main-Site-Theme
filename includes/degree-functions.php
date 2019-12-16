@@ -529,7 +529,7 @@ function main_site_outcome_data( $post_meta ) {
 
 	$display = isset( $post_meta['degree_display_outcomes'] ) ?
 		filter_var( $post_meta['degree_display_outcomes'], FILTER_VALIDATE_BOOLEAN ) :
-		true;
+		false;
 
 	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
 
