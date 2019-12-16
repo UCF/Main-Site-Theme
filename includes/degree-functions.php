@@ -527,7 +527,9 @@ function main_site_outcome_data( $post_meta ) {
 		'degree_employed_full_time'
 	);
 
-	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 ) :
+	$display = isset( $post_meta['degree_display_outcomes'] ) ? filter_var( $post_meta['degree_display_outcomes'], FILTER_VALIDATE_BOOLEAN ) : true;
+
+	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
 
 		$report_year = isset( $post_meta['degree_outcome_academic_year'] ) ?
 			'(per ' . $post_meta['degree_outcome_academic_year'] . ' Data)' :
@@ -560,7 +562,9 @@ function main_site_projection_data( $post_meta ) {
 		'degree_prj_change'
 	);
 
-	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 ) :
+	$display = isset( $post_meta['degree_display_projections'] ) ? filter_var( $post_meta['degree_display_projections'], FILTER_VALIDATE_BOOLEAN ) : true;
+
+	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
 ?>
 	<?php if ( isset( $post_meta['degree_prj_begin_year'] ) && isset( $post_meta['degree_prj_end_year'] ) ) : ?>
 	<p>Projected <?php echo $post_meta['degree_prj_begin_year']; ?>-<?php echo $post_meta['degree_prj_end_year']; ?>
