@@ -817,22 +817,6 @@
                 "display_type": "text"
             },
             {
-                "key": "field_5df107af52f9e",
-                "label": "Outcome Academic Year",
-                "name": "degree_outcome_academic_year",
-                "type": "read_only",
-                "instructions": "The academic year of the graduates represented in the outcome data to the right.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
                 "key": "field_5df79878fc895",
                 "label": "Degree Outcome Data",
                 "name": "",
@@ -847,6 +831,22 @@
                 },
                 "placement": "top",
                 "endpoint": 0
+            },
+            {
+                "key": "field_5df107af52f9e",
+                "label": "Outcome Academic Year",
+                "name": "degree_outcome_academic_year",
+                "type": "read_only",
+                "instructions": "The academic year of the graduates represented in the outcome data to the right.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
             },
             {
                 "key": "field_5df79894fc896",
