@@ -625,6 +625,22 @@
                 "step": ""
             },
             {
+                "key": "field_5df7896609d12",
+                "label": "Online URL",
+                "name": "degree_online_url",
+                "type": "url",
+                "instructions": "URL of the UCF Online profile for this degree.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
                 "key": "field_5adf83192113d",
                 "label": "Imported Degree Data",
                 "name": "",
@@ -801,6 +817,41 @@
                 "display_type": "text"
             },
             {
+                "key": "field_5df79878fc895",
+                "label": "Degree Outcome Data",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df79894fc896",
+                "label": "Display Degree Outcomes",
+                "name": "degree_display_outcomes",
+                "type": "true_false",
+                "instructions": "Determines if degree outcomes are displayed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5df107af52f9e",
                 "label": "Outcome Academic Year",
                 "name": "degree_outcome_academic_year",
@@ -881,6 +932,25 @@
                 "endpoint": 0
             },
             {
+                "key": "field_5df798cdfc897",
+                "label": "Display Degree Projections",
+                "name": "degree_display_projections",
+                "type": "true_false",
+                "instructions": "Determines if projection data is displayed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5df29fdf4c2d8",
                 "label": "Report Year Start",
                 "name": "degree_prj_begin_year",
@@ -901,7 +971,7 @@
                 "label": "Report Year End",
                 "name": "degree_prj_end_year",
                 "type": "read_only",
-                "instructions": "The end year in the data projection.",
+                "instructions": "The end year in the data projection",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -965,7 +1035,7 @@
                 "label": "Projected New Positions Percentage",
                 "name": "degree_prj_change_percentage",
                 "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year as a percentage.",
+                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -991,6 +1061,60 @@
                 },
                 "copy_to_clipboard": 0,
                 "display_type": "text"
+            },
+            {
+                "key": "field_5df7bacf0f53e",
+                "label": "Degree News",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df7bae40f53f",
+                "label": "Display News",
+                "name": "degree_display_news",
+                "type": "true_false",
+                "instructions": "Determines if news articles are displayed for degrees.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7bb6d0f541",
+                "label": "News Tag",
+                "name": "degree_news_tag",
+                "type": "text",
+                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_5aec63848617d",
@@ -1024,6 +1148,25 @@
                 "message": "",
                 "default_value": 0,
                 "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7ef62fece7",
+                "label": "Display Career Paths",
+                "name": "degree_display_career_paths",
+                "type": "true_false",
+                "instructions": "Determines if career paths are displayed for this degree.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
             }
