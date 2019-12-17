@@ -41,16 +41,15 @@
 					<?php echo get_degree_visit_ucf_button(); ?>
 				</div>
 			</div>
-			<div class="mb-5">
+			<div class="mb-3">
 				<?php the_content(); ?>
 				<?php
 				if ( ! $hide_catalog_desc ) {
 					echo apply_filters( 'the_content', $post_meta['degree_description'] );
 				}
 				?>
-				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 			</div>
-			<div class="row">
+			<div class="row mb-4 mb-lg-5">
 			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
 				<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
 					<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
@@ -59,6 +58,12 @@
 					</a>
 				</div>
 			<?php endif; ?>
+			</div>
+			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+			<div class="row">
+				<div class="col-12">
+					<div class="alert alert-danger">TODO: UCF Online CTA (only show if ACF Online field is set)</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
