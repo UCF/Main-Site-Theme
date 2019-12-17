@@ -72,7 +72,7 @@
 							<span class="fa fa-info-circle fa-3x align-middle"></span>
 						</div>
 						<div class="col">
-							<p class="h5 mt-3 align-middle">Did you know this program is available online?</p>
+							<p class="h5 mt-1 align-middle">Did you know this program is available online?</p>
 							<p class="mb-0 py-lg-4">Find out more about our fully online program option and connect with our online student specialist now.</p>
 						</div>
 					</div>
