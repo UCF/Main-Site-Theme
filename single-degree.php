@@ -62,14 +62,14 @@
 			</div>
 			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 			<?php if ( isset( $post_meta['degree_online_url'] ) && ! empty( $post_meta['degree_online_url'] ) ) : ?>
-			<aside class="online-callout">
+			<aside class="online-callout" aria-label="Apply for this program online">
 				<a class="media-background-container d-block py-3 px-3 px-lg-4 py-lg-4 hover-parent bg-inverse hover-text-black text-decoration-none" href="<?php echo $post_meta['degree_online_url']; ?>" target="_blank">
 					<img src="<?php echo $online_bg_img; ?>" alt="" class=" media-background object-fit-cover hover-child" data-object-fit="cover">
 					<div class="media-background object-fit-cover bg-inverse-t-3 hover-child hover-child-hide fade" data-object-fit="cover"></div>
 					<div class="media-background object-fit-cover bg-primary-t-1 hover-child hover-child-show fade" data-object-fit="cover"></div>
 					<div class="row">
 						<div class="col-auto">
-							<span class="fa fa-info-circle fa-3x align-middle"></span>
+							<span class="fa fa-info-circle fa-3x align-middle" aria-hidden="true"></span>
 						</div>
 						<div class="col">
 							<p class="h5 mt-1 align-middle">Did you know this program is available online?</p>
