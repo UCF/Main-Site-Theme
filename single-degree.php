@@ -8,6 +8,7 @@
 	$colleges_list     = get_colleges_markup( $post->ID );
 	$departments_list  = get_departments_markup( $post->ID );
 	$breadcrumbs       = get_degree_breadcrumb_markup( $post->ID );
+	$online_bg_img     = get_theme_mod_or_default( 'online_banner_background_img' );
 	$hide_catalog_desc = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 ?>
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
@@ -41,16 +42,15 @@
 					<?php echo get_degree_visit_ucf_button(); ?>
 				</div>
 			</div>
-			<div class="mb-5">
+			<div class="mb-3">
 				<?php the_content(); ?>
 				<?php
 				if ( ! $hide_catalog_desc ) {
 					echo apply_filters( 'the_content', $post_meta['degree_description'] );
 				}
 				?>
-				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 			</div>
-			<div class="row">
+			<div class="row mb-4 mb-lg-5">
 			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
 				<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
 					<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
@@ -60,6 +60,25 @@
 				</div>
 			<?php endif; ?>
 			</div>
+			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+			<?php if ( isset( $post_meta['degree_online_url'] ) && ! empty( $post_meta['degree_online_url'] ) ) : ?>
+			<aside class="online-callout" aria-label="Apply for this program online">
+				<a class="media-background-container d-block py-3 px-3 px-lg-4 py-lg-4 hover-parent bg-inverse hover-text-black text-decoration-none" href="<?php echo $post_meta['degree_online_url']; ?>" target="_blank">
+					<img src="<?php echo $online_bg_img; ?>" alt="" class=" media-background object-fit-cover hover-child" data-object-fit="cover">
+					<div class="media-background object-fit-cover bg-inverse-t-2 hover-child hover-child-hide fade" data-object-fit="cover"></div>
+					<div class="media-background object-fit-cover bg-primary-t-1 hover-child hover-child-show fade" data-object-fit="cover"></div>
+					<div class="row py-3">
+						<div class="col-auto">
+							<span class="fa fa-info-circle fa-3x align-middle" aria-hidden="true"></span>
+						</div>
+						<div class="col">
+							<p class="h5 mt-1 align-middle">Did you know this program is available online?</p>
+							<p class="mb-0">Find out more about our fully online program option and connect with our online student specialist now.</p>
+						</div>
+					</div>
+				</a>
+			</aside>
+			<?php endif; ?>
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
 			<div class="hidden-md-down mb-4">
