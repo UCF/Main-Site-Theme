@@ -69,9 +69,9 @@
 					<div class="media-background object-fit-cover bg-primary-t-1 hover-child hover-child-show fade" data-object-fit="cover"></div>
 					<div class="row">
 						<div class="col-auto">
-							<span class="fa fa-info-circle fa-3x mr-4 align-middle"></span>
+							<span class="fa fa-info-circle fa-3x align-middle"></span>
 						</div>
-						<div class="col-auto">
+						<div class="col">
 							<p class="font-weight-black align-middle">Did you know this program is available online?</p>
 							<p class="mb-0">Find out more about our fully online program option and connect with our online student specialist now.</p>
 						</div>
