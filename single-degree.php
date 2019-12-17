@@ -65,9 +65,9 @@
 			<aside class="online-callout" aria-label="Apply for this program online">
 				<a class="media-background-container d-block py-3 px-3 px-lg-4 py-lg-4 hover-parent bg-inverse hover-text-black text-decoration-none" href="<?php echo $post_meta['degree_online_url']; ?>" target="_blank">
 					<img src="<?php echo $online_bg_img; ?>" alt="" class=" media-background object-fit-cover hover-child" data-object-fit="cover">
-					<div class="media-background object-fit-cover bg-inverse-t-3 hover-child hover-child-hide fade" data-object-fit="cover"></div>
+					<div class="media-background object-fit-cover bg-inverse-t-2 hover-child hover-child-hide fade" data-object-fit="cover"></div>
 					<div class="media-background object-fit-cover bg-primary-t-1 hover-child hover-child-show fade" data-object-fit="cover"></div>
-					<div class="row">
+					<div class="row py-3">
 						<div class="col-auto">
 							<span class="fa fa-info-circle fa-3x align-middle" aria-hidden="true"></span>
 						</div>
