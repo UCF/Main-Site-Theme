@@ -625,6 +625,22 @@
                 "step": ""
             },
             {
+                "key": "field_5df8f51b3d434",
+                "label": "Online URL",
+                "name": "degree_online_url",
+                "type": "url",
+                "instructions": "URL of the UCF Online profile for this degree.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
                 "key": "field_5adf83192113d",
                 "label": "Imported Degree Data",
                 "name": "",
