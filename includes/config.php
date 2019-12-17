@@ -12,7 +12,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
 	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
-	'online_banner_background_bg'       => get_template_directory_uri() . 'static/img/online_banner-background.jpg',
+	'online_banner_background_img'      => get_template_directory_uri() . '/static/img/online_banner-background.jpg',
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
