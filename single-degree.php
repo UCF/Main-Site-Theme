@@ -64,7 +64,7 @@
 			<?php if ( isset( $post_meta['degree_online_url'] ) && ! empty( $post_meta['degree_online_url'] ) ) : ?>
 			<aside class="online-callout">
 				<a class="media-background-container d-block h-100 py-3 px-3 px-lg-4 hover-parent bg-inverse hover-text-black text-decoration-none" href="<?php echo $post_meta['degree_online_url']; ?>" target="_blank">
-					<img src="<?php echo $online_bg_img; ?>" alt="" class=" media-background object-fit-cover hover-child hover-child-scale-up" data-object-fit="cover">
+					<img src="<?php echo $online_bg_img; ?>" alt="" class=" media-background object-fit-cover hover-child" data-object-fit="cover">
 					<div class="media-background object-fit-cover bg-inverse-t-3 hover-child hover-child-hide fade" data-object-fit="cover"></div>
 					<div class="media-background object-fit-cover bg-primary-t-1 hover-child hover-child-show fade" data-object-fit="cover"></div>
 					<div class="row">
@@ -72,8 +72,8 @@
 							<span class="fa fa-info-circle fa-3x align-middle"></span>
 						</div>
 						<div class="col">
-							<p class="font-weight-black align-middle">Did you know this program is available online?</p>
-							<p class="mb-0">Find out more about our fully online program option and connect with our online student specialist now.</p>
+							<p class="h5 mt-3 align-middle">Did you know this program is available online?</p>
+							<p class="mb-0 py-lg-4">Find out more about our fully online program option and connect with our online student specialist now.</p>
 						</div>
 					</div>
 				</a>
