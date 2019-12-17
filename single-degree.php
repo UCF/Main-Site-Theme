@@ -63,12 +63,19 @@
 			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 			<?php if ( isset( $post_meta['degree_online_url'] ) && ! empty( $post_meta['degree_online_url'] ) ) : ?>
 			<div class="online-callout">
-				<a class="media-background-container d-block h-100 py-5 px-3 px-lg-4 hover-parent bg-inverse hover-text-black text-decoration-none" href="<?php echo $post_meta['degree_online_url']; ?>" target="_blank">
+				<a class="media-background-container d-block h-100 py-3 px-3 px-lg-4 hover-parent bg-inverse hover-text-black text-decoration-none" href="<?php echo $post_meta['degree_online_url']; ?>" target="_blank">
 					<img src="<?php echo $online_bg_img; ?>" alt="" class=" media-background object-fit-cover hover-child hover-child-scale-up" data-object-fit="cover">
 					<div class="media-background object-fit-cover bg-inverse-t-3 hover-child hover-child-hide fade" data-object-fit="cover"></div>
 					<div class="media-background object-fit-cover bg-primary-t-1 hover-child hover-child-show fade" data-object-fit="cover"></div>
-					<p><span class="fa fa-info-circle fa-3x mr-2 align-middle"></span><span class="lead align-middle">Did you know this program is available online?</span></p>
-					<p>Find out more about our fully online program option and connect with our online student specialist now.</p>
+					<div class="row">
+						<div class="col-auto">
+							<span class="fa fa-info-circle fa-3x mr-4 align-middle"></span>
+						</div>
+						<div class="col-auto">
+							<p class="font-weight-black align-middle">Did you know this program is available online?</p>
+							<p class="mb-0">Find out more about our fully online program option and connect with our online student specialist now.</p>
+						</div>
+					</div>
 				</a>
 			</div>
 			<?php endif; ?>
