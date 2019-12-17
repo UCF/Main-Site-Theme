@@ -12,6 +12,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
 	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
+	'online_banner_background_bg'       => get_template_directory_uri() . 'static/img/online_banner-background.jpg',
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
@@ -164,6 +165,25 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Tuition Disclaimer',
 			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'online_banner_background_img',
+		array(
+			'default' => get_theme_mod_default( 'online_banner_background_img' )
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'online_banner_background_img',
+			array(
+				'label'      => __( 'Online Banner Background Image', 'theme_name' ),
+				'description' => 'The image used in the background of the Online banner for degrees.',
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			)
 		)
 	);
 
