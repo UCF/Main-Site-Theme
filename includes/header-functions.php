@@ -172,8 +172,6 @@ function get_header_content_title_subtitle( $obj ) {
 	$h1            = get_header_h1_option( $obj );
 	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
 	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
-	$is_degree     = ( get_post_type( $obj ) === 'degree' );
-	$title_class   = ( $is_degree ) ? 'header-title header-title-degree' : 'header-title';
 
 	ob_start();
 
@@ -182,7 +180,7 @@ function get_header_content_title_subtitle( $obj ) {
 	<div class="header-content-inner align-self-start pt-4 pt-sm-0 align-self-sm-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
-				<<?php echo $title_elem; ?> class="<?php echo $title_class; ?>"><?php echo $title; ?></<?php echo $title_elem; ?>>
+				<<?php echo $title_elem; ?> class="header-title"><?php echo $title; ?></<?php echo $title_elem; ?>>
 			</div>
 			<?php if ( $subtitle ) : ?>
 			<div class="clearfix"></div>
