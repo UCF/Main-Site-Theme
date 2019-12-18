@@ -479,35 +479,35 @@ function main_site_format_degree_data( $post_meta ) {
 	setlocale(LC_MONETARY, 'en_US');
 
 	if ( isset( $post_meta['degree_avg_annual_earnings'] ) && ! empty( $post_meta['degree_avg_annual_earnings'] ) ) {
-		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', $post_meta['degree_avg_annual_earnings'] );
+		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', floatval( $post_meta['degree_avg_annual_earnings'] ) );
 	}
 
 	if ( isset( $post_meta['degree_employed_full_time'] ) && ! empty( $post_meta['degree_employed_full_time'] ) ) {
-		$post_meta['degree_employed_full_time'] = number_format( $post_meta['degree_employed_full_time'] ) . '%';
+		$post_meta['degree_employed_full_time'] = number_format( floatval( $post_meta['degree_employed_full_time'] ) ) . '%';
 	}
 
 	if ( isset( $post_meta['degree_continuing_education'] ) && ! empty( $post_meta['degree_continuing_education'] ) ) {
-		$post_meta['degree_continuing_education'] = number_format( $post_meta['degree_continuing_education'] ) . '%';
+		$post_meta['degree_continuing_education'] = number_format( floatval( $post_meta['degree_continuing_education'] ) ) . '%';
 	}
 
 	if ( isset( $post_meta['degree_prj_begin_employment'] ) &&  ! empty( 'degree_prj_begin_employment' ) ) {
-		$post_meta['degree_prj_begin_employment'] = number_format( $post_meta['degree_prj_begin_employment'] );
+		$post_meta['degree_prj_begin_employment'] = number_format( floatval( $post_meta['degree_prj_begin_employment'] ) );
 	}
 
 	if ( isset( $post_meta['degree_prj_end_employment'] ) &&  ! empty( $post_meta['degree_prj_end_employment'] ) ) {
-		$post_meta['degree_prj_end_employment'] = number_format( $post_meta['degree_prj_end_employment'] );
+		$post_meta['degree_prj_end_employment'] = number_format( floatval( $post_meta['degree_prj_end_employment'] ) );
 	}
 
 	if ( isset( $post_meta['degree_prj_change'] ) &&  ! empty( $post_meta['degree_prj_change'] ) ) {
-		$post_meta['degree_prj_change'] = number_format( $post_meta['degree_prj_change'] );
+		$post_meta['degree_prj_change'] = number_format( floatval( $post_meta['degree_prj_change'] ) );
 	}
 
 	if ( isset( $post_meta['degree_prj_change_percentage'] ) &&  ! empty( $post_meta['degree_prj_change_percentage'] ) ) {
-		$post_meta['degree_prj_change_percentage'] = number_format( $post_meta['degree_prj_change_percentage'], 2 ) . '%';
+		$post_meta['degree_prj_change_percentage'] = number_format( floatval( $post_meta['degree_prj_change_percentage'], 2 ) ) . '%';
 	}
 
 	if ( isset( $post_meta['degree_prj_openings'] ) && ! empty( $post_meta['degree_prj_openings'] ) ) {
-		$post_meta['degree_prj_openings'] = number_format( $post_meta['degree_prj_openings'] );
+		$post_meta['degree_prj_openings'] = number_format( floatval( $post_meta['degree_prj_openings'] ) );
 	}
 
 	return $post_meta;
