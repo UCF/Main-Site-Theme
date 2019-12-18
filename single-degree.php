@@ -101,6 +101,12 @@
 	<?php echo $breadcrumbs; ?>
 </div>
 
+<?php
+if ( isset( $post_meta['degree_full_width_content_bottom'] ) && ! empty( $post_meta['degree_full_width_content_bottom'] ) ) {
+	echo apply_filters( 'the_content', $post_meta['degree_full_width_content_bottom'] );
+}
+?>
+
 <?php echo get_colleges_grid( $college ); ?>
 
 <?php get_footer(); ?>

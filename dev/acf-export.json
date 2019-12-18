@@ -584,6 +584,48 @@
         "description": ""
     },
     {
+        "key": "group_5df8fb174faec",
+        "title": "Degree Content Fields",
+        "fields": [
+            {
+                "key": "field_5df8fb1d7bbc1",
+                "label": "Full-Width Content - Bottom of Page",
+                "name": "degree_full_width_content_bottom",
+                "type": "wysiwyg",
+                "instructions": "Content placed here will be displayed full-width below the two-column layout and the breadcrumbs, and before the UCF Colleges section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
         "key": "group_58fa427b4efb7",
         "title": "Degree Fields",
         "fields": [
