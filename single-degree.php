@@ -76,6 +76,12 @@
 			<?php endif; ?>
 
 			<?php echo get_degree_tuition_markup( $post_meta ); ?>
+
+			<?php
+			if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
+				echo apply_filters( 'the_content', $post_meta['degree_sidebar_content_bottom'] );
+			}
+			?>
 		</div>
 	</div>
 
