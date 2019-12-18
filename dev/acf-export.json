@@ -588,6 +588,57 @@
         "title": "Degree Content Fields",
         "fields": [
             {
+                "key": "field_5dfa8794d5761",
+                "label": "Sidebar Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5dfa86409fa89",
+                "label": "Sidebar Content - Bottom",
+                "name": "degree_sidebar_content_bottom",
+                "type": "wysiwyg",
+                "instructions": "Content placed here will be displayed at the bottom of the sidebar, under existing content.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5dfa87a4d5762",
+                "label": "Full-Width Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
                 "key": "field_5df8fb1d7bbc1",
                 "label": "Full-Width Content - Bottom of Page",
                 "name": "degree_full_width_content_bottom",
