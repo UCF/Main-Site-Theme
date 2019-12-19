@@ -62,7 +62,7 @@
 			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
-			<div class="hidden-md-down mb-4">
+			<div class="hidden-md-down mb-5">
 				<?php echo get_degree_apply_button( $post ); ?>
 				<?php echo get_degree_visit_ucf_button(); ?>
 			</div>
