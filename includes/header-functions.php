@@ -134,14 +134,17 @@ function get_header_h1_option( $obj ) {
 }
 
 /**
- * Returns whether the subtitle should be set to a span or h2.
- * Defaults to 'span' if the option isn't set.
- * Returns 'span' if the 'page_header_subtitle' option is set to subtitle.
- * Will force return a different value if the user screwed up (e.g. specified
- * "h2" but didn't provide a subtitle value).
+ * Returns the element to use for the subtitle.
+ * Defaults to 'span' if the option isn't set, returns 'span' if the $h1 is set to subtitle.
+ *
+ * @author Cadie Stockman
+ * @since 3.3.5
+ * @param object $obj | WP_Post object for the post
+ * @param string $h1  | Return value of get_header_h1_option()
+ * @return string | Element to use for the subtitle
  **/
 function get_header_subtitle_elem( $obj, $h1 ) {
-	$field_id = get_object_field_id( $obj );
+	$field_id      = get_object_field_id( $obj );
 	$subtitle      = get_field( 'page_header_subtitle', $field_id ) ?: '';
 	$subtitle_elem = get_field( 'page_header_subtitle_elem', $field_id ) ?: 'span';
 
