@@ -135,7 +135,7 @@ function get_header_h1_option( $obj ) {
 
 /**
  * Returns the element to use for the subtitle.
- * Defaults to 'span' if the option isn't set, returns 'span' if the $h1 is set to subtitle.
+ * Defaults to 'span' if the option isn't set, returns 'h1' if the $h1 is set to subtitle.
  *
  * @author Cadie Stockman
  * @since 3.3.5
