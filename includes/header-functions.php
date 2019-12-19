@@ -133,6 +133,27 @@ function get_header_h1_option( $obj ) {
 	return $h1;
 }
 
+/**
+ * Returns whether the subtitle should be set to a span or h2.
+ * Defaults to 'span' if the option isn't set.
+ * Returns 'span' if the 'page_header_subtitle' option is set to subtitle.
+ * Will force return a different value if the user screwed up (e.g. specified
+ * "h2" but didn't provide a subtitle value).
+ **/
+function get_header_subtitle_elem( $obj, $h1 ) {
+	$field_id = get_object_field_id( $obj );
+	$subtitle      = get_field( 'page_header_subtitle', $field_id ) ?: '';
+	$subtitle_elem = get_field( 'page_header_subtitle_elem', $field_id ) ?: 'span';
+
+	if ( $h1 === 'subtitle' ) {
+		$subtitle_elem = 'h1';
+	} elseif ( trim( $subtitle ) === '' ) {
+		$subtitle_elem = 'span';
+	}
+
+	return $subtitle_elem;
+}
+
 
 function get_nav_markup( $image=true ) {
 	ob_start();
@@ -171,7 +192,7 @@ function get_header_content_title_subtitle( $obj ) {
 	$subtitle      = get_header_subtitle( $obj );
 	$h1            = get_header_h1_option( $obj );
 	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
-	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
+	$subtitle_elem = get_header_subtitle_elem( $obj, $h1 );
 
 	ob_start();
 
