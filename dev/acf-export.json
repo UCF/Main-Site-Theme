@@ -1072,7 +1072,7 @@
                     ]
                 ],
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
@@ -1082,10 +1082,47 @@
                 },
                 "allow_null": 0,
                 "other_choice": 0,
-                "save_other_choice": 0,
                 "default_value": "title",
                 "layout": "vertical",
-                "return_format": "value"
+                "return_format": "value",
+                "save_other_choice": 0
+            },
+            {
+                "key": "field_5dfbc6c075e41",
+                "label": "Subtitle Element",
+                "name": "page_header_subtitle_elem",
+                "type": "radio",
+                "instructions": "Specify if the subtitle should be wrapped in a <code>span<\/code> or <code>h2<\/code> element.  Styling of the title\/subtitle will not be affected by this choice. Defaults to span.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        },
+                        {
+                            "field": "field_5a0e009ff592e",
+                            "operator": "==",
+                            "value": "title"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "span": "span",
+                    "h2": "h2"
+                },
+                "allow_null": 0,
+                "other_choice": 0,
+                "default_value": "title",
+                "layout": "vertical",
+                "return_format": "value",
+                "save_other_choice": 0
             },
             {
                 "key": "field_59aed93dc187b",
