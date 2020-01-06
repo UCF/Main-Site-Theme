@@ -133,30 +133,6 @@ function get_header_h1_option( $obj ) {
 	return $h1;
 }
 
-/**
- * Returns the element to use for the subtitle.
- * Defaults to 'span' if the option isn't set, returns 'h1' if the $h1 is set to subtitle.
- *
- * @author Cadie Stockman
- * @since 3.3.5
- * @param object $obj | WP_Post object for the post
- * @param string $h1  | Return value of get_header_h1_option()
- * @return string | Element to use for the subtitle
- **/
-function get_header_subtitle_elem( $obj, $h1 ) {
-	$field_id      = get_object_field_id( $obj );
-	$subtitle      = get_field( 'page_header_subtitle', $field_id ) ?: '';
-	$subtitle_elem = get_field( 'page_header_subtitle_elem', $field_id ) ?: 'span';
-
-	if ( $h1 === 'subtitle' ) {
-		$subtitle_elem = 'h1';
-	} elseif ( trim( $subtitle ) === '' ) {
-		$subtitle_elem = 'span';
-	}
-
-	return $subtitle_elem;
-}
-
 
 function get_nav_markup( $image=true ) {
 	ob_start();
@@ -195,7 +171,7 @@ function get_header_content_title_subtitle( $obj ) {
 	$subtitle      = get_header_subtitle( $obj );
 	$h1            = get_header_h1_option( $obj );
 	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
-	$subtitle_elem = get_header_subtitle_elem( $obj, $h1 );
+	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 
 	ob_start();
 
