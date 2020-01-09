@@ -315,6 +315,28 @@ function get_api_catalog_description( $program ) {
 }
 
 /**
+ * Helper function for getting remote json
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param string $url The URL to retrieve
+ * @param object The serialized JSON obejct
+ */
+function main_site_get_remote_response_json( $url, $default=null ) {
+	$args = array(
+		'timeout' => 5
+	);
+
+	$retval = $default;
+	$response = wp_remote_get( $url, $args );
+
+	if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) < 400 ) {
+		$retval = json_decode( wp_remote_retrieve_body( $response ) );
+	}
+
+	return $retval;
+}
+
+/**
  * Apply main site-specific meta data to degrees during the degree import
  * process.
  *
@@ -325,48 +347,51 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
 	$meta['degree_description'] = get_api_catalog_description( $program );
 
-	$meta['degree_avg_annual_earnings'] = isset( $program->outcomes->latest->avg_annual_earnings ) ?
-		$program->outcomes->latest->avg_annual_earnings :
+	$outcomes    = main_site_get_remote_response_json( $program->outcomes );
+	$projections = main_site_get_remote_response_json( $program->projection_totals );
+
+	$meta['degree_avg_annual_earnings'] = isset( $outcomes->latest->avg_annual_earnings ) ?
+		$outcomes->latest->avg_annual_earnings :
 		null;
 
-	$meta['degree_employed_full_time'] = isset( $program->outcomes->latest->employed_full_time ) ?
-		$program->outcomes->latest->employed_full_time :
+	$meta['degree_employed_full_time'] = isset( $outcomes->latest->employed_full_time ) ?
+		$outcomes->latest->employed_full_time :
 		null;
 
-	$meta['degree_continuing_education'] = isset( $program->outcomes->latest->continuing_education ) ?
-		$program->outcomes->latest->continuing_education :
+	$meta['degree_continuing_education'] = isset( $outcomes->latest->continuing_education ) ?
+		$outcomes->latest->continuing_education :
 		null;
 
-	$meta['degree_outcome_academic_year'] = isset( $program->outcomes->latest->academic_year_display ) ?
-		$program->outcomes->latest->academic_year_display :
+	$meta['degree_outcome_academic_year'] = isset( $outcomes->latest->academic_year_display ) ?
+		$outcomes->latest->academic_year_display :
 		null;
 
-	$meta['degree_prj_begin_year'] = isset( $program->projection_totals->begin_year ) ?
-		$program->projection_totals->begin_year :
+	$meta['degree_prj_begin_year'] = isset( $projections->begin_year ) ?
+		$projections->begin_year :
 		null;
 
-	$meta['degree_prj_end_year'] = isset( $program->projection_totals->end_year ) ?
-		$program->projection_totals->end_year :
+	$meta['degree_prj_end_year'] = isset( $projections->end_year ) ?
+		$projections->end_year :
 		null;
 
-	$meta['degree_prj_begin_employment'] = isset( $program->projection_totals->begin_employment ) ?
-		$program->projection_totals->begin_employment :
+	$meta['degree_prj_begin_employment'] = isset( $projections->begin_employment ) ?
+		$projections->begin_employment :
 		null;
 
-	$meta['degree_prj_end_employment'] = isset( $program->projection_totals->end_employment ) ?
-		$program->projection_totals->end_employment :
+	$meta['degree_prj_end_employment'] = isset( $projections->end_employment ) ?
+		$projections->end_employment :
 		null;
 
-	$meta['degree_prj_change'] = isset( $program->projection_totals->change ) ?
-		$program->projection_totals->change :
+	$meta['degree_prj_change'] = isset( $projections->change ) ?
+		$projections->change :
 		null;
 
-	$meta['degree_prj_change_percentage'] = isset( $program->projection_totals->change_percentage ) ?
-		$program->projection_totals->change_percentage :
+	$meta['degree_prj_change_percentage'] = isset( $projections->change_percentage ) ?
+		$projections->change_percentage :
 		null;
 
-	$meta['degree_prj_openings'] = isset( $program->projection_totals->openings ) ?
-		$program->projection_totals->openings :
+	$meta['degree_prj_openings'] = isset( $projections->openings ) ?
+		$projections->openings :
 		null;
 
 	return $meta;
@@ -383,7 +408,9 @@ add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 
  * @return array
  */
 function mainsite_degree_get_post_terms( $terms, $program ) {
-	$terms['career_paths'] = $program->careers;
+	$careers = main_site_get_remote_response_json( $program->careers, array() );
+
+	$terms['career_paths'] = $careers;
 
 	return $terms;
 }
