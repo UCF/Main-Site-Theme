@@ -144,7 +144,7 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
 			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
 		</li>
 	</ul>
-	<div class="tab-content py-4">
+	<div class="tab-content pt-4 mb-4 mb-md-5">
 		<div class="tab-pane active" id="in-state" role="tabpanel">
 			<?php if ( $value_message ) : ?>
 			<?php echo apply_filters( 'the_content', $value_message ); ?>

@@ -41,20 +41,23 @@
 					<?php echo get_degree_visit_ucf_button(); ?>
 				</div>
 			</div>
-			<div class="mb-5">
+			<div class="mb-3">
 				<?php the_content(); ?>
 				<?php
 				if ( ! $hide_catalog_desc ) {
 					echo apply_filters( 'the_content', $post_meta['degree_description'] );
 				}
 				?>
+<<<<<<< HEAD
 				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 				<?php echo main_site_outcome_data( $post_meta ); ?>
 				<?php echo main_site_projection_data( $post_meta ); ?>
 				<?php echo main_site_degree_news_stories( $post_meta ); ?>
 				<?php echo main_site_degree_careers( $post->ID, $post_meta ); ?>
+=======
+>>>>>>> master
 			</div>
-			<div class="row">
+			<div class="row mb-4 mb-lg-5">
 			<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
 				<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
 					<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
@@ -64,9 +67,10 @@
 				</div>
 			<?php endif; ?>
 			</div>
+			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
-			<div class="hidden-md-down mb-4">
+			<div class="hidden-md-down mb-5">
 				<?php echo get_degree_apply_button( $post ); ?>
 				<?php echo get_degree_visit_ucf_button(); ?>
 			</div>
@@ -80,11 +84,23 @@
 			<?php endif; ?>
 
 			<?php echo get_degree_tuition_markup( $post_meta ); ?>
+
+			<?php
+			if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
+				echo apply_filters( 'the_content', $post_meta['degree_sidebar_content_bottom'] );
+			}
+			?>
 		</div>
 	</div>
 
 	<?php echo $breadcrumbs; ?>
 </div>
+
+<?php
+if ( isset( $post_meta['degree_full_width_content_bottom'] ) && ! empty( $post_meta['degree_full_width_content_bottom'] ) ) {
+	echo apply_filters( 'the_content', $post_meta['degree_full_width_content_bottom'] );
+}
+?>
 
 <?php echo get_colleges_grid( $college ); ?>
 
