@@ -590,4 +590,28 @@ function get_colleges_grid( $exclude_term=null ) {
 
 	return ob_get_clean();
 }
+
+function add_rel_preload($html, $handle, $href, $media) {
+
+    if (is_admin())
+        return $html;
+
+	ob_start();
+
+	if ( $handle !== 'style' ) :
+?>
+	<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id="<?php echo $handle; ?>" href="<?php echo $href; ?>" type="text/css" media="<?php echo $media; ?>" />
+<?php
+	else :
+?>
+	<link rel="stylesheet" id="<?php echo $handle; ?>" href="<?php echo $href; ?>" type="text/css" media="<?php echo $media; ?>" />
+<?php
+
+	endif;
+
+    return ob_get_clean();
+}
+
+add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
+
 ?>
