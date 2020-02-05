@@ -15,6 +15,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
+	'google_map_key'                    => '',
+	'location_fallback_image'           => '',
 	'chartbeat_uid'                     => '2806',
 	'chartbeat_domain'                  => 'ucf.edu',
 	'search_service_url'                => 'https://search.smca.ucf.edu/service.php'
@@ -70,6 +72,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'analytics',
 		array(
 			'title' => 'Analytics'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'location',
+		array(
+			'title' => 'Location'
 		)
 	);
 }
@@ -260,6 +269,97 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Chartbeat Domain',
 			'description' => 'Example: <em>some.domain.com</em>',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	// Google Map Key
+	$wp_customize->add_setting(
+		'google_map_key',
+		array(
+			'default' => get_theme_mod_default( 'google_map_key' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'google_map_key',
+		array(
+			'type'        => 'text',
+			'label'       => 'Google Map Key',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+		)
+	);
+
+	// Location Fallback Image
+	$wp_customize->add_setting(
+		'location_fallback_image',
+		array(
+			'default' => get_theme_mod_default( 'location_fallback_image' )
+		)
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'location_fallback_image',
+			array(
+				'label'      => __( 'Upload a Location Fallback Image', 'theme_name' ),
+				'description' => 'The image displayed if not available in location data.',
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'location'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_location_header'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_location_header',
+			array(
+				'label'       => __( 'Upload a default header image (large) for locations' ),
+				'description' => 'The large background image displayed for location posts.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location',
+				'width'       => 1600,
+				'height'      => 550,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_location_header_xs'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_location_header_xs',
+			array(
+				'label'       => __( 'Upload a default header image (small) for locations' ),
+				'description' => 'The small background image displayed for location posts.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'location',
+				'width'       => 575,
+				'height'      => 575,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'location_ankle_content'
+	);
+
+	$wp_customize->add_control(
+		'location_ankle_content',
+		array(
+			'label'       => 'Location Ankle Content',
+			'description' => 'The content that appears at the bottom of all location profiles.',
+			'type'        => 'textarea',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
 		)
 	);
 }

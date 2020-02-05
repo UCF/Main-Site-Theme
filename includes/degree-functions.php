@@ -144,7 +144,7 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
 			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
 		</li>
 	</ul>
-	<div class="tab-content py-4">
+	<div class="tab-content pt-4 mb-4 mb-md-5">
 		<div class="tab-pane active" id="in-state" role="tabpanel">
 			<?php if ( $value_message ) : ?>
 			<?php echo apply_filters( 'the_content', $value_message ); ?>
@@ -204,7 +204,7 @@ function get_degree_breadcrumb_markup( $post_id ) {
 ?>
 <div class="hidden-md-down">
 	<hr class="mt-5 mb-4">
-	<nav class="breadcrumb">
+	<nav class="breadcrumb" aria-label="Breadcrumb">
 		<a class="breadcrumb-item" href="<?php echo $degree_search_url; ?>">Degree Search</a>
 
 		<?php if ( $college ): ?>
@@ -215,7 +215,7 @@ function get_degree_breadcrumb_markup( $post_id ) {
 		<a class="breadcrumb-item" href="<?php echo $program_type_url; ?>"><?php echo $program_type->name; ?>s</a>
 		<?php endif; ?>
 
-		<span class="breadcrumb-item active"><?php echo $degree->post_title; ?></span>
+		<span class="breadcrumb-item active" aria-current="page"><?php echo $degree->post_title; ?></span>
 	</nav>
 </div>
 <?php
@@ -257,11 +257,13 @@ add_filter( 'ucf_degree_search_suggestion', 'main_site_degree_search_suggestion'
 function map_degree_types( $degree_types ) {
 	$retval = array();
 
-	foreach( $degree_types as $degree_type ) {
-		$term = get_term_by( 'slug', $degree_type, 'program_types' );
+	if ( ! empty( $degree_types ) ) {
+		foreach( $degree_types as $degree_type ) {
+			$term = get_term_by( 'slug', $degree_type, 'program_types' );
 
-		if ( $term ) {
-			$retval[$term->slug] = $term->name;
+			if ( $term ) {
+				$retval[$term->slug] = $term->name;
+			}
 		}
 	}
 

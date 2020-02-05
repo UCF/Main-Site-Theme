@@ -19,9 +19,14 @@ function get_header_images( $obj ) {
 		$retval = degree_backup_headers( $obj );
 	}
 
+	if ( $obj instanceof WP_Post && $obj->post_type === 'location' ) {
+		$retval = location_backup_headers( $obj );
+	}
+
 	if ( $obj_header_image = get_field( 'page_header_image', $field_id ) ) {
 		$retval['header_image'] = $obj_header_image;
 	}
+
 	if ( $obj_header_image_xs = get_field( 'page_header_image_xs', $field_id ) ) {
 		$retval['header_image_xs'] = $obj_header_image_xs;
 	}
@@ -43,6 +48,15 @@ function degree_backup_headers( $post ) {
 		'header_image'    => get_field( 'page_header_image', 'colleges_' . $college->term_id ),
 		'header_image_xs' => get_field( 'page_header_image_xs', 'colleges_' . $college->term_id )
 	);
+}
+
+function location_backup_headers( $post ) {
+	$retval = array(
+		'header_image'    => get_theme_mod_or_default( 'fallback_location_header' ),
+		'header_image_xs' => get_theme_mod_or_default( 'fallback_location_header_xs' )
+	);
+
+	return $retval;
 }
 
 
@@ -123,9 +137,9 @@ function get_header_h1_option( $obj ) {
 function get_nav_markup( $image=true ) {
 	ob_start();
 ?>
-	<nav class="navbar navbar-toggleable-md navbar-custom py-2<?php echo $image ? ' py-sm-4 navbar-inverse header-gradient' : ' navbar-inverse bg-inverse-t-3 py-lg-4'; ?>" role="navigation">
+	<nav class="navbar navbar-toggleable-md navbar-custom py-2<?php echo $image ? ' py-sm-4 navbar-inverse header-gradient' : ' navbar-inverse bg-inverse-t-3 py-lg-4'; ?>" aria-label="Site navigation">
 		<div class="container">
-			<button class="navbar-toggler ml-auto mr-0 collapsed" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler ml-auto mr-0 collapsed" type="button" data-toggle="collapse" data-target="#header-menu" aria-controls="header-menu" aria-expanded="false">
 				<span class="navbar-toggler-text">Navigation</span>
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -179,7 +193,7 @@ function get_header_content_title_subtitle( $obj ) {
 <?php
 	endif;
 
-	return ob_get_clean();
+	return apply_filters( 'get_header_content_title_subtitle', ob_get_clean(), $obj );
 }
 
 
@@ -200,7 +214,7 @@ function get_header_content_custom( $obj ) {
 ?>
 	</div>
 <?php
-	return ob_get_clean();
+	return apply_filters( 'get_header_content_custom',  ob_get_clean(), $obj );
 }
 
 
@@ -213,8 +227,8 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$images     = $images ?: get_header_images( $obj );
 	$video_loop = get_field( 'page_header_video_loop', $field_id );
 	$header_content_type = get_field( 'page_header_content_type', $field_id );
-	$header_height       = get_field( 'page_header_height', $field_id );
-	$exclude_nav         = get_field( 'page_header_exclude_nav', $field_id );
+	$header_height       = get_field( 'page_header_height', $field_id ) ?: 'header-media-default';
+	$exclude_nav         = get_field( 'page_header_exclude_nav', $field_id ) ?: false;
 
 	ob_start();
 ?>
@@ -224,9 +238,6 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				<?php
 				// Display the media background (video + picture)
 
-				if ( $videos ) {
-					echo get_media_background_video( $videos, $video_loop );
-				}
 				if ( $images ) {
 					$bg_image_srcs = array();
 					switch ( $header_height ) {
@@ -244,6 +255,9 @@ function get_header_media_markup( $obj, $videos, $images ) {
 							break;
 					}
 					echo get_media_background_picture( $bg_image_srcs );
+				}
+				if ( $videos ) {
+					echo get_media_background_video( $videos, $video_loop );
 				}
 				?>
 			</div>

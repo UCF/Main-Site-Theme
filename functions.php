@@ -4,10 +4,12 @@ include_once 'includes/config.php';
 include_once 'includes/meta.php';
 include_once 'includes/navwalker.php';
 include_once 'includes/header-functions.php';
+include_once 'includes/location-functions.php';
 
 include_once 'includes/degree-functions.php';
 include_once 'includes/ucf-alert-functions.php';
 include_once 'includes/phonebook-functions.php';
+include_once 'includes/post-list-layouts.php';
 
 
 /**
@@ -149,7 +151,7 @@ function get_media_background_picture( $srcs ) {
 function get_media_background_video( $videos, $loop=false ) {
 	ob_start();
 ?>
-	<video class="hidden-xs-down media-background media-background-video object-fit-cover" autoplay muted <?php if ( $loop ) { ?>loop<?php } ?>>
+	<video class="hidden-xs-down media-background media-background-video object-fit-cover" aria-hidden="true" preload="none" muted <?php if ( $loop ) { ?>loop<?php } ?>>
 		<?php if ( isset( $videos['webm'] ) ) : ?>
 		<source src="<?php echo $videos['webm']; ?>" type="video/webm">
 		<?php endif; ?>
@@ -208,7 +210,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 		$style_attrs .= 'color: '. $text_color_custom .'; ';
 	}
 
-	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '" role="region" aria-label="' . $title . '"' : '';
+	$title = ! empty( $title ) ? ' data-section-link-title="' . $title . '" aria-label="' . $title . '"' : '';
 
 	$section_id = ! empty( $section_id ) ? ' id="' . $section_id . '"' : '';
 
@@ -588,3 +590,4 @@ function get_colleges_grid( $exclude_term=null ) {
 
 	return ob_get_clean();
 }
+?>
