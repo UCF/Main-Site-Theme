@@ -38,12 +38,16 @@ function enqueue_frontend_assets() {
 		'domain' => $site_url['host']
 	) );
 
-	// De-queue Gutenberg block styles if the Classic plugin is enabled.
-	// We do this in lieu of checking on a per-post basis via `has_blocks()`
-	// to ensure non-posts (e.g. college terms) are accounted for as well,
-	// and because we assume that if this plugin is active on this site, we
-	// have no intention of using Gutenberg/blocks anywhere.
-	if ( class_exists( 'Classic_Editor' ) ) {
+	// De-queue Gutenberg block styles when the Classic Editor plugin
+	// is active and users are not given the option to utilize the block
+	// editor at all.
+	$editor_choice = get_network_option( null, 'classic-editor-replace', get_option( 'classic-editor-replace' ) );
+	$allow_user_editor_choice = get_network_option( null, 'classic-editor-allow-users', get_option( 'classic-editor-allow-users' ) );
+	if (
+		class_exists( 'Classic_Editor' )
+		&& get_option( 'classic-editor-replace' ) === 'classic'
+		&& get_option( 'classic-editor-allow-users' ) === 'disallow'
+	) {
 		wp_deregister_style( 'wp-block-library' );
 	}
 }
