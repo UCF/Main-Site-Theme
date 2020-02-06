@@ -42,11 +42,11 @@ function enqueue_frontend_assets() {
 	// is active and users are not given the option to utilize the block
 	// editor at all.
 	$editor_choice = get_network_option( null, 'classic-editor-replace', get_option( 'classic-editor-replace' ) );
-	$allow_user_editor_choice = get_network_option( null, 'classic-editor-allow-users', get_option( 'classic-editor-allow-users' ) );
+	$allow_user_editor_choice = get_option( 'classic-editor-allow-users' );
 	if (
 		class_exists( 'Classic_Editor' )
 		&& get_option( 'classic-editor-replace' ) === 'classic'
-		&& get_option( 'classic-editor-allow-users' ) === 'disallow'
+		&& get_option( 'classic-editor-allow-users' ) !== 'allow'
 	) {
 		wp_deregister_style( 'wp-block-library' );
 	}
