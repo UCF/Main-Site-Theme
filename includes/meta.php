@@ -45,8 +45,8 @@ function enqueue_frontend_assets() {
 	$allow_user_editor_choice = get_option( 'classic-editor-allow-users' );
 	if (
 		class_exists( 'Classic_Editor' )
-		&& get_option( 'classic-editor-replace' ) === 'classic'
-		&& get_option( 'classic-editor-allow-users' ) !== 'allow'
+		&& $editor_choice !== 'block'
+		&& $allow_user_editor_choice !== 'allow'
 	) {
 		wp_deregister_style( 'wp-block-library' );
 	}
