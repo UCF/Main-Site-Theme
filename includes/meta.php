@@ -37,6 +37,19 @@ function enqueue_frontend_assets() {
 	wp_localize_script( 'script', 'UCFEDU', array(
 		'domain' => $site_url['host']
 	) );
+
+	// De-queue Gutenberg block styles when the Classic Editor plugin
+	// is active and users are not given the option to utilize the block
+	// editor at all.
+	$editor_choice = get_network_option( null, 'classic-editor-replace', get_option( 'classic-editor-replace' ) );
+	$allow_user_editor_choice = get_option( 'classic-editor-allow-users' );
+	if (
+		class_exists( 'Classic_Editor' )
+		&& $editor_choice !== 'block'
+		&& $allow_user_editor_choice !== 'allow'
+	) {
+		wp_deregister_style( 'wp-block-library' );
+	}
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
