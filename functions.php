@@ -597,21 +597,27 @@ function add_rel_preload($html, $handle, $href, $media) {
         return $html;
 
 	ob_start();
-
-	if ( $handle !== 'style' ) :
 ?>
 	<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id="<?php echo $handle; ?>" href="<?php echo $href; ?>" type="text/css" media="<?php echo $media; ?>" />
 <?php
-	else :
-?>
-	<link rel="stylesheet" id="<?php echo $handle; ?>" href="<?php echo $href; ?>" type="text/css" media="<?php echo $media; ?>" />
-<?php
-
-	endif;
 
     return ob_get_clean();
 }
 
 add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
+
+function print_critical_css() {
+	$critical_css_path = get_stylesheet_directory() . '/static/css/critical.min.css';
+
+	$critical_css = file_get_contents( $critical_css_path );
+?>
+	<style>
+		<?php echo $critical_css; ?>
+	</style>
+<?php
+
+}
+
+add_action( 'wp_head', 'print_critical_css', 10, 0 );
 
 ?>

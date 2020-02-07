@@ -12,7 +12,8 @@ const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const merge = require('merge');
-
+const critical = require('critical');
+const request = require('request');
 
 let config = {
   src: {
@@ -27,7 +28,8 @@ let config = {
   devPath: './dev',
   packagesPath: './node_modules',
   sync: false,
-  syncTarget: 'http://localhost/wordpress/'
+  syncTarget: 'http://localhost/wordpress/',
+  criticalTarget: 'https://www.ucf.edu'
 };
 
 /* eslint-disable no-sync */
@@ -175,6 +177,19 @@ gulp.task('scss-lint-theme', () => {
 // Compile theme stylesheet
 gulp.task('scss-build-theme', () => {
   return buildCSS(`${config.src.scssPath}/style.scss`);
+});
+
+// Generates critical css file for homepage
+gulp.task('generate-critical', () => {
+  return critical.generate({
+    inline: false,
+    base: `${config.dist.cssPath}`,
+    src: config.criticalTarget,
+    css: [`${config.dist.cssPath}/style.min.css`],
+    width: 1300,
+    height: 900,
+    dest: 'critical.min.css'
+  });
 });
 
 // All theme css-related tasks
