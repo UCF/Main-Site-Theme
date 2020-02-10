@@ -593,7 +593,7 @@ function get_colleges_grid( $exclude_term=null ) {
 
 function add_rel_preload($html, $handle, $href, $media) {
 
-    if (is_admin())
+    if (is_admin() || ! is_front_page())
         return $html;
 
 	ob_start();
@@ -607,6 +607,7 @@ function add_rel_preload($html, $handle, $href, $media) {
 add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
 
 function print_critical_css() {
+	if ( if_front_page() ) :
 	$critical_css_path = get_stylesheet_directory() . '/static/css/critical.min.css';
 
 	$critical_css = file_get_contents( $critical_css_path );
@@ -615,7 +616,7 @@ function print_critical_css() {
 		<?php echo $critical_css; ?>
 	</style>
 <?php
-
+	endif;
 }
 
 add_action( 'wp_head', 'print_critical_css', 10, 0 );
