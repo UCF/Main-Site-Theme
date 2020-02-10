@@ -14,3 +14,4 @@
 // =require media-background-lazyload.js
 // =require degree-search-typeahead.js
 // =require count-up.js
+// =require preload.js

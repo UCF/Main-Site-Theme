@@ -598,7 +598,7 @@ function add_rel_preload($html, $handle, $href, $media) {
 
 	ob_start();
 ?>
-	<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id="<?php echo $handle; ?>" href="<?php echo $href; ?>" type="text/css" media="<?php echo $media; ?>" />
+	<link rel="preload" as="style" id="<?php echo $handle; ?>" href="<?php echo $href; ?>" type="text/css" media="<?php echo $media; ?>" />
 <?php
 
     return ob_get_clean();
