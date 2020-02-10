@@ -607,7 +607,7 @@ function add_rel_preload($html, $handle, $href, $media) {
 add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
 
 function print_critical_css() {
-	if ( if_front_page() ) :
+	if ( is_front_page() ) :
 	$critical_css_path = get_stylesheet_directory() . '/static/css/critical.min.css';
 
 	$critical_css = file_get_contents( $critical_css_path );
