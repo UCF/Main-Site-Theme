@@ -2,10 +2,7 @@
 get_header();
 the_post();
 
-$lat_lng = $post->meta['ucf_location_lat_lng'];
-$lat_lng_string = ( ! empty( $lat_lng['ucf_location_lat'] ) && ! empty( $lat_lng['ucf_location_lng'] ) )
-	? $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"]
-	: null;
+$lat_lng_string = get_location_latlng_str( $post );
 $events = ( isset( $post->meta['events_markup'] ) && ! empty( $post->meta['events_markup'] ) ) ? $post->meta['events_markup'] : null;
 
 $featured_image = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
