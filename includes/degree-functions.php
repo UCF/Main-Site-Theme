@@ -24,6 +24,27 @@ function get_degree_program_type( $degree ) {
 }
 
 /**
+ * Returns true|false if program_type is a graduate program.
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ * @param object $degree  WP_Post object
+ * @return boolean
+ */
+function is_graduate_degree( $post ) {
+	$is_graduate = false;
+	$terms = wp_get_post_terms( $post->ID, 'program_types' );
+
+	foreach( $terms as $term ) {
+		if( $term->slug === "graduate-program" ) {
+			$is_graduate = true;
+			break;
+		}
+	}
+	return $is_graduate;
+}
+
+/**
  * Gets the "Apply Now" button markup for degree.
  * @author Jim Barnes
  * @since 3.0.0
@@ -55,6 +76,57 @@ function get_degree_apply_button( $degree ) {
 <?php
 	endif;
 
+	return ob_get_clean();
+}
+
+/**
+ * Gets the "Request Info" button markup for degree.
+ * @author RJ Bruneel
+ * @since 3.3.8
+ * @return string | The button markup.
+ **/
+function get_degree_request_info_ucf_button() {
+	$url = get_theme_mod_or_default( 'degrees_visit_ucf_url' );
+	$url = true;
+
+	ob_start();
+
+	if ( $url ) :
+?>
+	<button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#requestInfoModal">
+		<span class="fa fa-map-marker pr-2" aria-hidden="true"></span> Request Info
+	</button>
+<?php
+	endif;
+	return ob_get_clean();
+}
+
+/**
+ * Gets the "Request Info" modal markup for degree.
+ * @author RJ Bruneel
+ * @since 3.3.8
+ * @return string | The modal markup.
+ **/
+function get_degree_request_info_ucf_modal() {
+	ob_start();
+?>
+	<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog" aria-labelledby="requestInfoModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="requestInfoModalLabel">Request Info</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="form_99ccc299-b0c7-4d3e-9630-3d697883ae43">Loading Request Form...</div>
+					<script>/*<![CDATA[*/var script = document.createElement('script'); script.async = 1; script.src = 'https://ucf.test.technolutions.net/register/?id=99ccc299-b0c7-4d3e-9630-3d697883ae43&output=embed&div=form_99ccc299-b0c7-4d3e-9630-3d697883ae43' + ((location.search.length > 1) ? '&' + location.search.substring(1) : ''); var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);/*]]>*/</script>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
 	return ob_get_clean();
 }
 

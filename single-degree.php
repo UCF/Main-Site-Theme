@@ -1,14 +1,15 @@
 <?php get_header(); the_post(); ?>
 <?php
-	$raw_postmeta      = get_post_meta( $post->ID );
-	$post_meta         = format_raw_postmeta( $raw_postmeta );
-	$program_type      = get_degree_program_type( $post );
-	$colleges          = wp_get_post_terms( $post->ID, 'colleges' );
-	$college           = is_array( $colleges ) ? $colleges[0] : null;
-	$colleges_list     = get_colleges_markup( $post->ID );
-	$departments_list  = get_departments_markup( $post->ID );
-	$breadcrumbs       = get_degree_breadcrumb_markup( $post->ID );
-	$hide_catalog_desc = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
+	$raw_postmeta       = get_post_meta( $post->ID );
+	$post_meta          = format_raw_postmeta( $raw_postmeta );
+	$program_type       = get_degree_program_type( $post );
+	$colleges           = wp_get_post_terms( $post->ID, 'colleges' );
+	$college            = is_array( $colleges ) ? $colleges[0] : null;
+	$colleges_list      = get_colleges_markup( $post->ID );
+	$departments_list   = get_departments_markup( $post->ID );
+	$breadcrumbs        = get_degree_breadcrumb_markup( $post->ID );
+	$hide_catalog_desc  = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
+	$is_graduate_degree = is_graduate_degree( $post );
 ?>
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<div class="row">
@@ -37,8 +38,14 @@
 				<div class="col-sm mb-2">
 					<?php echo get_degree_apply_button( $post ); ?>
 				</div>
-				<div class="col-sm mb-2">
-					<?php echo get_degree_visit_ucf_button(); ?>
+				<div class="col-md mb-2">
+					<?php
+						if( $is_graduate_degree ):
+							echo get_degree_request_info_ucf_button();
+						else:
+							echo get_degree_visit_ucf_button();
+						endif;
+					?>
 				</div>
 			</div>
 			<div class="mb-3">
@@ -59,14 +66,19 @@
 				</div>
 			<?php endif; ?>
 			</div>
-			<?php echo main_site_degree_display_subplans( $post->ID ); ?>
 		</div>
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
 			<div class="hidden-md-down mb-5">
+				<?php wp_get_post_terms( $post->ID ); ?>
 				<?php echo get_degree_apply_button( $post ); ?>
-				<?php echo get_degree_visit_ucf_button(); ?>
+				<?php
+					if( $is_graduate_degree ):
+						echo get_degree_request_info_ucf_button();
+					else:
+						echo get_degree_visit_ucf_button();
+					endif;
+				?>
 			</div>
-
 			<?php if ( isset( $post_meta['degree_hours'] ) && ! empty( $post_meta['degree_hours'] ) ) : ?>
 			<div class="degree-hours mb-5 mt-lg-5">
 				<hr>
@@ -97,3 +109,9 @@ if ( isset( $post_meta['degree_full_width_content_bottom'] ) && ! empty( $post_m
 <?php echo get_colleges_grid( $college ); ?>
 
 <?php get_footer(); ?>
+
+<?php
+	if( $is_graduate_degree ) {
+		echo get_degree_request_info_ucf_modal();
+	}
+?>
