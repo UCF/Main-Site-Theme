@@ -93,7 +93,10 @@ function get_degree_request_info_ucf_button() {
 
 	if ( $url ) :
 ?>
-	<button type="button" class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#requestInfoModal">
+	<button type="button" class="btn btn-lg btn-block btn-primary"
+		data-toggle="modal" data-target="#requestInfoModal"
+		data-plan="<?php echo get_field( 'degree_plan_code' ); ?>"
+		data-subplan="<?php echo get_field( 'degree_subplan_code' ); ?>">
 		<span class="fa fa-map-marker pr-2" aria-hidden="true"></span> Request Info
 	</button>
 <?php
@@ -107,10 +110,12 @@ function get_degree_request_info_ucf_button() {
  * @since 3.3.8
  * @return string | The modal markup.
  **/
-function get_degree_request_info_ucf_modal() {
+function get_degree_request_info_ucf_modal( $degree ) {
 	ob_start();
 ?>
-	<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog" aria-labelledby="requestInfoModalLabel" aria-hidden="true">
+	<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog"
+		aria-labelledby="requestInfoModalLabel" aria-hidden="true"
+		data-degree="<?php echo $degree; ?>">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
