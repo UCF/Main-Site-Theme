@@ -112,6 +112,7 @@ function get_degree_request_info_ucf_button() {
  **/
 function get_degree_request_info_ucf_modal( $degree ) {
 	ob_start();
+	$selectedDegree = "e92d44e3-8d24-4314-abd0-44766ebe11a0";
 ?>
 	<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog"
 		aria-labelledby="requestInfoModalLabel" aria-hidden="true"
@@ -126,7 +127,7 @@ function get_degree_request_info_ucf_modal( $degree ) {
 				</div>
 				<div class="modal-body">
 					<div id="form_99ccc299-b0c7-4d3e-9630-3d697883ae43">Loading Request Form...</div>
-					<script>/*<![CDATA[*/var script = document.createElement('script'); script.async = 1; script.src = 'https://ucf.test.technolutions.net/register/?id=99ccc299-b0c7-4d3e-9630-3d697883ae43&output=embed&div=form_99ccc299-b0c7-4d3e-9630-3d697883ae43' + ((location.search.length > 1) ? '&' + location.search.substring(1) : ''); var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);/*]]>*/</script>
+					<script>/*<![CDATA[*/var script = document.createElement('script'); script.async = 1; script.src = 'https://ucf.test.technolutions.net/register/?id=99ccc299-b0c7-4d3e-9630-3d697883ae43&sys:field:pros_program1=<?php echo $selectedDegree; ?>&output=embed&div=form_99ccc299-b0c7-4d3e-9630-3d697883ae43' + ((location.search.length > 1) ? '&' + location.search.substring(1) : ''); var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);/*]]>*/</script>
 				</div>
 			</div>
 		</div>

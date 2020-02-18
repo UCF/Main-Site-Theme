@@ -31,7 +31,7 @@
       $requestInfoModal.find('.default').addClass('btn btn-primary');
       $requestInfoModal.find('.form_question, input[type=text], input[type=email]').addClass('w-100');
       $requestInfoSelect.addClass('custom-select');
-      selectDefault($requestInfoModal.find('select > option'));
+      // selectDefault($requestInfoModal.find('select > option'));
     }
   }
 
