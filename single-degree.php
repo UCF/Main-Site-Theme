@@ -110,7 +110,7 @@ if ( isset( $post_meta['degree_full_width_content_bottom'] ) && ! empty( $post_m
 
 <?php
 	if( $is_graduate_degree ) {
-		echo get_degree_request_info_ucf_modal( $post->post_title );
+		echo get_degree_request_info_ucf_modal();
 	}
 ?>
 
