@@ -35,18 +35,19 @@
 				</dl>
 			</div>
 			<div class="hidden-lg-up row mb-3">
+			<?php if( $is_graduate_degree ): ?>
+				<div class="col-sm mb-2">
+					<?php echo get_degree_request_info_ucf_button(); ?>
+				</div>
+			<?php endif; ?>
 				<div class="col-sm mb-2">
 					<?php echo get_degree_apply_button( $post ); ?>
 				</div>
-				<div class="col-md mb-2">
-					<?php
-						if( $is_graduate_degree ):
-							echo get_degree_request_info_ucf_button();
-						else:
-							echo get_degree_visit_ucf_button();
-						endif;
-					?>
+			<?php if( !$is_graduate_degree ): ?>
+				<div class="col-sm mb-2">
+					<?php echo get_degree_visit_ucf_button(); ?>
 				</div>
+			<?php endif; ?>
 			</div>
 			<div class="mb-3">
 				<?php the_content(); ?>
@@ -70,11 +71,14 @@
 		<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
 			<div class="hidden-md-down mb-5">
 				<?php wp_get_post_terms( $post->ID ); ?>
-				<?php echo get_degree_apply_button( $post ); ?>
 				<?php
 					if( $is_graduate_degree ):
 						echo get_degree_request_info_ucf_button();
-					else:
+					endif;
+				?>
+				<?php echo get_degree_apply_button( $post ); ?>
+				<?php
+					if( !$is_graduate_degree ):
 						echo get_degree_visit_ucf_button();
 					endif;
 				?>
