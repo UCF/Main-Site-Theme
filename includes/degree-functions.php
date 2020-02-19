@@ -93,9 +93,9 @@ function get_degree_request_info_ucf_button() {
 
 	if ( $url ) :
 ?>
-	<button type="button" class="btn btn-lg btn-block btn-primary"
+	<button type="button" class="btn btn-lg btn-block btn-secondary text-primary"
 		data-toggle="modal" data-target="#requestInfoModal">
-		<span class="fa fa-map-marker pr-2" aria-hidden="true"></span> Request Info
+		<span class="fa fa-question-circle pr-2" aria-hidden="true"></span> Request Info
 	</button>
 <?php
 	endif;
