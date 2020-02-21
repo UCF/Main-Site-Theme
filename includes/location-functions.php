@@ -20,8 +20,8 @@ function get_location_html() {
 	$abbr = isset( $post->meta['ucf_location_abbr'] ) ? $post->meta['ucf_location_abbr'] : null;
 	$id = ( isset( $post->meta['ucf_location_id'] ) && $post->meta['ucf_location_id'] !== $post_name  ) ? $post->meta['ucf_location_id'] : null;
 
-	$lat_lng = ( isset( $post->meta['ucf_location_lat_lng'] ) ) ? $post->meta['ucf_location_lat_lng'] : null;
-	$google_map_link = ( $lat_lng ) ? "https://www.google.com/maps?saddr=&daddr=" . $lat_lng["ucf_location_lat"] . "," . $lat_lng["ucf_location_lng"] : "";
+	$lat_lng_str = get_location_latlng_str( $post );
+	$google_map_link = $lat_lng_str ? 'https://www.google.com/maps?saddr=&daddr=' . $lat_lng_str : null;
 
 	ob_start();
 ?>
@@ -36,7 +36,8 @@ function get_location_html() {
 	<?php if( $abbr ) : ?>
 		<div class="row">
 			<div class="col-5 col-md-6 col-lg-7 col-xl-6 text-uppercase font-weight-bold">
-				Abbreviation</div>
+				Abbreviation
+			</div>
 			<div class="col"><?php echo $abbr ?></div>
 		</div>
 	<?php endif; ?>
@@ -48,7 +49,7 @@ function get_location_html() {
 	<?php endif; ?>
 	<?php if( ! empty( $google_map_link ) ) : ?>
 		<a href="<?php echo $google_map_link; ?>" target="_blank" rel="noopener" class="btn btn-outline-secondary btn-sm text-uppercase mb-4 mt-3">
-			<span class="fa fa-location-arrow"></span>
+			<span class="fa fa-location-arrow" aria-hidden="true"></span>
 			Get Directions
 		</a>
 	<?php endif; ?>
@@ -108,7 +109,7 @@ function get_organization_html( $title, $org, $count ) {
 		<?php if( isset( $org['org_departments'] ) && $org['org_departments'] ) : ?>
 			Departments
 			<ul class="pl-4">
-				<?php 
+				<?php
 				foreach( $org['org_departments'] as $dept ) :
 					$dept_name = ( isset( $dept['dept_name'] ) && ! empty( $dept['dept_name'] ) ) ? $dept['dept_name'] . '<br>' : '';
 					$dept_building = ( isset( $dept['dept_building'] ) && ! empty( $dept['dept_building'] ) ) ? $dept['dept_building'] : '';
@@ -208,4 +209,33 @@ function get_header_content_custom_location( $markup, $obj ) {
 }
 
 add_filter( 'get_header_content_title_subtitle', 'get_header_content_custom_location', 10, 2 );
+
+
+/**
+ * Returns a lat+lng string suitable for use in
+ * map embed/link query params.
+ *
+ * @since 3.3.8
+ * @author Jo Dickson
+ * @param object WP_Post object representing the location
+ * @return mixed lat+lng string, or null if no valid lat+lng combination is available
+ */
+function get_location_latlng_str( $location ) {
+	$lat_lng_str = null;
+	if ( ! ( $location instanceof WP_Post ) ) return $lat_lng_str;
+
+	$lat_lng = $location->meta['ucf_location_lat_lng'];
+	if (
+		isset( $lat_lng['ucf_location_lat'] )
+		&& ! empty( $lat_lng['ucf_location_lat'] )
+		&& isset( $lat_lng['ucf_location_lng'] )
+		&& ! empty( $lat_lng['ucf_location_lng'] )
+	) {
+		$lat_lng_str = $lat_lng['ucf_location_lat'] . ',' . $lat_lng['ucf_location_lng'];
+	}
+
+	return $lat_lng_str;
+}
+
+
 ?>

@@ -11,5 +11,6 @@
 //
 
 // =require media-background-video.js
+// =require media-background-lazyload.js
 // =require degree-search-typeahead.js
 // =require count-up.js
