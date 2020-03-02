@@ -93,3 +93,32 @@ function get_attachment_src_by_size( $id, $size ) {
 	}
 	return $attachment;
 }
+
+
+
+if ( ! function_exists( 'is_rest' ) ) {
+	/**
+	 * Checks if the current request is a WP REST API request.
+	 *
+	 * @return boolean
+	 * @see https://gist.github.com/matzeeable/dfd82239f48c2fedef25141e48c8dc30
+	 */
+	function is_rest() {
+		if (
+			( defined( 'REST_REQUEST' ) && REST_REQUEST )
+			|| (
+				isset( $_GET['rest_route'] )
+				&& strpos( trim( $_GET['rest_route'], '\\/' ), rest_get_url_prefix() , 0 ) === 0
+			)
+		) {
+			return true;
+		}
+
+		global $wp_rewrite;
+		if ( $wp_rewrite === null ) $wp_rewrite = new WP_Rewrite();
+
+		$rest_url = wp_parse_url( trailingslashit( rest_url() ) );
+		$current_url = wp_parse_url( add_query_arg( array() ) );
+		return strpos( $current_url['path'], $rest_url['path'], 0 ) === 0;
+	}
+}
