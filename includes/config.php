@@ -597,10 +597,9 @@ function disable_lazyload_in_rest() {
 	if (
 		isset( $lazy_loader )
 		&& $lazy_loader instanceof FlorianBrinkmann\LazyLoadResponsiveImages\Plugin
-		&& is_rest()
 	) {
 		remove_filter( 'the_content', array( $lazy_loader, 'filter_markup' ), 10001 );
 	}
 }
 
-add_action( 'init', 'disable_lazyload_in_rest' );
+add_action( 'rest_api_init', 'disable_lazyload_in_rest' );
