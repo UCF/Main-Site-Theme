@@ -3,6 +3,178 @@
  * Functions specific to degrees
  **/
 
+
+/**
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ *
+ */
+ function get_degree_content_classic_layout() {
+		$raw_postmeta        = get_post_meta( $post->ID );
+		$post_meta           = format_raw_postmeta( $raw_postmeta );
+		$program_type        = get_degree_program_type( $post );
+		$colleges_list       = get_colleges_markup( $post->ID );
+		$departments_list    = get_departments_markup( $post->ID );
+		$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
+
+		ob_start();
+		echo "Program Type: " . $program_type->name;
+		?>
+		<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
+			<div class="row">
+				<div class="col-lg-8 col-xl-7 pr-lg-5 pr-xl-0">
+					<div class="bg-faded p-3 p-sm-4 mb-4">
+						<dl class="row mb-0">
+							<?php if ( $program_type ) : ?>
+							<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Program:</dt>
+							<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9"><?php echo $program_type->name; ?></dd>
+							<?php endif; ?>
+							<?php if ( $colleges_list ) : ?>
+							<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">College(s):</dt>
+							<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
+								<?php echo $colleges_list; ?>
+							</dd>
+							<?php endif; ?>
+							<?php if ( $departments_list ) : ?>
+							<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Department(s): </dt>
+							<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
+								<?php echo $departments_list; ?>
+							</dd>
+							<?php endif; ?>
+						</dl>
+					</div>
+					<div class="hidden-lg-up row mb-3">
+						<div class="col-sm mb-2">
+							<?php echo get_degree_apply_button( $post ); ?>
+						</div>
+						<div class="col-sm mb-2">
+							<?php echo get_degree_visit_ucf_button(); ?>
+						</div>
+					</div>
+					<div class="mb-3">
+						<?php the_content(); ?>
+						<?php
+						if ( ! $hide_catalog_desc ) {
+							echo apply_filters( 'the_content', $post_meta['degree_description'] );
+						}
+						?>
+					</div>
+					<div class="row mb-4 mb-lg-5">
+					<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
+						<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
+							<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
+								<div class="bg-complementary p-3 px-sm-4 d-flex align-items-center"><span class="fa fa-book fa-2x" aria-hidden="true"></span></div>
+								<div class="p-3 align-self-center mx-auto">View Catalog</div>
+							</a>
+						</div>
+					<?php endif; ?>
+					</div>
+					<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+				</div>
+				<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
+					<div class="hidden-md-down mb-5">
+						<?php echo get_degree_apply_button( $post ); ?>
+						<?php echo get_degree_visit_ucf_button(); ?>
+					</div>
+
+					<?php if ( isset( $post_meta['degree_hours'] ) && ! empty( $post_meta['degree_hours'] ) ) : ?>
+					<div class="degree-hours mb-5 mt-lg-5">
+						<hr>
+						<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> <span class="font-weight-normal">total credit hours</span></p>
+						<hr>
+					</div>
+					<?php endif; ?>
+
+					<?php echo get_degree_tuition_markup( $post_meta ); ?>
+
+					<?php
+					if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
+						echo apply_filters( 'the_content', $post_meta['degree_sidebar_content_bottom'] );
+					}
+					?>
+				</div>
+			</div>
+		</div>
+
+		<?php
+		return ob_get_clean();
+	}
+
+
+
+/**
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ *
+ */
+	function get_degree_content_modern_layout() {
+
+		$program_type        = get_degree_program_type( $post );
+		$colleges_list       = get_colleges_markup( $post->ID );
+		$departments_list    = get_departments_markup( $post->ID );
+		$industry_highlights = get_field('industry_highlights');
+		$promo_image         = get_field('promo_image');
+
+		ob_start();
+		?>
+		<div class="container program-at-a-glance py-lg-3">
+			<div class="row my-lg-3">
+				<div class="col-lg-3 p-4 pb-3 mt-3 mt-lg-0">
+
+					<h2 class="h4 font-condensed text-uppercase">Program at a Glance</h2>
+					<dl class="mt-4 mt-lg-5">
+						<?php if ( $colleges_list ) : ?>
+						<dt class="h5 text-uppercase text-default">College(s)</dt>
+						<dd class="h5 mb-4"><?php echo $colleges_list; ?></dd>
+						<?php endif; ?>
+						<?php if ( $program_type ) : ?>
+						<dt class="h5 text-uppercase text-default">Type</dt>
+						<dd class="h5 mb-4"><?php echo $program_type->name; ?></dd>
+						<?php endif; ?>
+						<?php if ( $departments_list ) : ?>
+						<dt class="h5 text-uppercase text-default">Department(s)</dt>
+						<dd class="h5"><?php echo $departments_list; ?></dd>
+						<?php endif; ?>
+					</dl>
+				</div>
+
+				<div class="col-lg-2 text-center align-self-center">
+
+					<img class="icon-calendar img-fluid" style="max-height: 4em;" role="img"
+						src="https://www.ucf.edu/online/files/2019/12/Calendar-Icon-light-gray.svg" alt="">
+					<div class="h1 mt-2 mb-0">16</div>
+					<div class="h5 text-muted text-uppercase">Weeks</div>
+
+					<img class="icon-clock img-fluid" style="max-height: 4em;" role="img"
+						src="https://www.ucf.edu/online/files/2019/12/Clock-Icon-light-gray.svg" alt="">
+					<div class="h1 mt-2 mb-0">44</div>
+					<div class="h5 text-muted text-uppercase">Credit Hours</div>
+
+				</div>
+
+				<div class="col-lg-4 bg-secondary text-uppercase border-bottom mb-md-3">
+					<?php echo get_degree_tuition_markup( $post_meta ); ?>
+				</div>
+
+				<div class="col-lg-3 text-center align-self-center">
+					<?php if ( $promo_image ) : ?>
+					<img src="<?php echo $promo_image; ?>" class="img-fluid p-4" role="img">
+					<?php endif; ?>
+					<?php /* if ( $industry_highlights ) : ?>
+					<h2 class="h4 font-condensed text-uppercase">Industry Highlights</h3>
+					<?php echo $industry_highlights; ?>
+					<?php endif; */ ?>
+				</div>
+
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+ }
+
+
 /**
  * Returns the child program_type assigned to the given degree.
  *
@@ -123,13 +295,13 @@ function get_degree_tuition_markup( $post_meta ) {
 	$skip = ( isset( $post_meta['degree_tuition_skip'] ) && $post_meta['degree_tuition_skip'] === 'on' ) ? true : false;
 
 	if ( $resident && $nonresident && ! $skip ) {
-		return ucf_tuition_fees_degree_layout( $resident, $nonresident );
+		return ucf_tuition_fees_degree_classic_layout( $resident, $nonresident );
 	}
 
 	return '';
 }
 
-function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
+function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 	$value_message = get_theme_mod( 'tuition_value_message', null );
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
 
@@ -164,6 +336,51 @@ function ucf_tuition_fees_degree_layout( $resident, $nonresident ) {
 			<?php endif; ?>
 			<div class="bg-primary-lighter p-4">
 				<p class="h5 text-center font-weight-bold mb-0">
+					<?php echo $nonresident; ?>
+				</p>
+			<?php if ( $disclaimer ) : ?>
+				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
+			<?php endif; ?>
+			</div>
+		</div>
+	</div>
+<?php
+	return ob_get_clean();
+}
+
+
+function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
+	$value_message = get_theme_mod( 'tuition_value_message', null );
+	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
+
+	ob_start();
+?>
+	<ul class="nav nav-tabs pt-3" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" data-toggle="tab" href="#in-state" role="tab">In State</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
+		</li>
+	</ul>
+	<div class="tab-content pt-4 mb-4 mb-md-5">
+		<div class="tab-pane active" id="in-state" role="tabpanel">
+			<?php if ( $value_message ) : ?>
+			<?php endif; ?>
+			<div class="p-4">
+				<p class="h1 text-center font-weight-bold mb-0">
+					<?php echo $resident; ?>
+				</p>
+			<?php if ( $disclaimer ) : ?>
+				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
+			<?php endif; ?>
+			</div>
+		</div>
+		<div class="tab-pane" id="out-of-state" role="tabpanel">
+			<?php if ( $value_message ) : ?>
+			<?php endif; ?>
+			<div class="p-4">
+				<p class="h1 text-center font-weight-bold mb-0">
 					<?php echo $nonresident; ?>
 				</p>
 			<?php if ( $disclaimer ) : ?>
