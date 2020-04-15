@@ -5,11 +5,14 @@
 
 
 /**
- *
- * @since 3.3.8
- * @author RJ Bruneel
- *
- */
+  * Returns HTML for the classic degree layout.
+  *
+  * @since 3.4.0
+  * @author RJ Bruneel
+  * @param object $post  WP_Post object
+  * @return string HTML markup
+  *
+  */
  function get_degree_content_classic_layout( $post ) {
 		$raw_postmeta        = get_post_meta( $post->ID );
 		$post_meta           = format_raw_postmeta( $raw_postmeta );
@@ -103,9 +106,12 @@
 
 
 /**
+ * Returns HTML for the modern degree layout.
  *
- * @since 3.3.8
+ * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $post WP_Post object
+ * @return string HTML markup
  *
  */
 function get_degree_content_modern_layout( $post ) {
@@ -122,9 +128,14 @@ function get_degree_content_modern_layout( $post ) {
 
 
 /**
+ * Returns HTML for the degree info section.
  *
- * @since 3.3.8
+ * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $post WP_Post object
+ * @return string HTML markup
+ *
+ * // TODO Make this section dynamic
  *
  */
 
@@ -190,10 +201,6 @@ function get_degree_content_modern_layout( $post ) {
 		</div>
 	</div>
 
-	<?php /* if ( $industry_highlights ) : ?>
-	<h2 class="h4 font-condensed text-uppercase">Industry Highlights</h3>
-	<?php echo $industry_highlights; ?>
-	<?php endif; */ ?>
 	<?php
 	return ob_get_clean();
 
@@ -202,9 +209,11 @@ function get_degree_content_modern_layout( $post ) {
 
 
  /**
+ * Returns HTML for the degree description section.
   *
-  * @since 3.3.8
+  * @since 3.4.0
   * @author RJ Bruneel
+  * @return string HTML markup
   *
   */
   function get_degree_description_modern_layout() {
@@ -227,9 +236,11 @@ function get_degree_content_modern_layout( $post ) {
 
 
   /**
+   * Returns HTML for the application deadline section.
    *
-   * @since 3.3.8
+   * @since 3.4.0
    * @author RJ Bruneel
+   * @return string HTML markup
    *
    */
    function get_degree_application_deadline_modern_layout() {
@@ -258,9 +269,11 @@ function get_degree_content_modern_layout( $post ) {
 
 
  /**
+  * Returns HTML for the course overview section.
   *
-  * @since 3.3.8
+  * @since 3.4.0
   * @author RJ Bruneel
+  * @return string HTML markup
   *
   */
   function get_degree_course_overview_modern_layout() {
@@ -285,11 +298,13 @@ function get_degree_content_modern_layout( $post ) {
 
 
 /**
- *
- * @since 3.3.8
- * @author RJ Bruneel
- *
- */
+  * Returns HTML for the degree skills and careers section.
+  *
+  * @since 3.4.0
+  * @author RJ Bruneel
+  * @return string HTML markup
+  *
+  */
  function get_degree_skills_career_modern_layout() {
 	$skills_heading = get_field( 'skills_heading' );
 	$skills_content = get_field( 'skills_content' );
@@ -333,11 +348,13 @@ function get_degree_content_modern_layout( $post ) {
 
 
 /**
- *
- * @since 3.3.8
- * @author RJ Bruneel
- *
- */
+  * Returns HTML for the admissions requirements section.
+  *
+  * @since 3.4.0
+  * @author RJ Bruneel
+  * @return string HTML markup
+  *
+  */
 function get_degree_admission_requirements_modern_layout() {
 	$admission_requirements = get_field( 'admission_requirements' );
 
