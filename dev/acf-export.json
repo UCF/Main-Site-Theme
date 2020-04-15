@@ -604,25 +604,6 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e9610665a3c3",
-                "label": "Display Modern Layout",
-                "name": "modern_layout_toggle",
-                "type": "true_false",
-                "instructions": "Toggle this field to display the modern layout for this degree,",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
                 "key": "field_5e94d0629bc99",
                 "label": "Promo Image",
                 "name": "promo_image",

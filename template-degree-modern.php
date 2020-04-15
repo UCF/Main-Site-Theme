@@ -1,3 +1,10 @@
+<?php
+/**
+ * Template Name: Degree Modern
+ * Template Post Type: degree
+ */
+?>
+
 <?php get_header(); the_post(); ?>
 <?php
 	$raw_postmeta      = get_post_meta( $post->ID );
@@ -10,7 +17,7 @@
 	$breadcrumbs       = get_degree_breadcrumb_markup( $post->ID );
 	$hide_catalog_desc = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
-    echo get_degree_content_classic_layout( $post );
+    echo get_degree_content_modern_layout( $post );
 ?>
 
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
