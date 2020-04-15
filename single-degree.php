@@ -5,14 +5,15 @@
 	$colleges            = wp_get_post_terms( $post->ID, 'colleges' );
 	$college             = is_array( $colleges ) ? $colleges[0] : null;
 	$breadcrumbs         = get_degree_breadcrumb_markup( $post->ID );
+
+    if( get_field( 'modern_layout_toggle' ) ) {
+        echo get_degree_content_modern_layout( $post );
+    } else {
+        echo get_degree_content_classic_layout( $post );
+    }
 ?>
+
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
-
-<?php
-    echo get_degree_content_classic_layout();
-    echo get_degree_content_modern_layout();
-?>
-
     <?php echo $breadcrumbs; ?>
 </div>
 

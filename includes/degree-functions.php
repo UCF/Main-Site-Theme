@@ -10,7 +10,7 @@
  * @author RJ Bruneel
  *
  */
- function get_degree_content_classic_layout() {
+ function get_degree_content_classic_layout( $post ) {
 		$raw_postmeta        = get_post_meta( $post->ID );
 		$post_meta           = format_raw_postmeta( $raw_postmeta );
 		$program_type        = get_degree_program_type( $post );
@@ -19,7 +19,6 @@
 		$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
 		ob_start();
-		echo "Program Type: " . $program_type->name;
 		?>
 		<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 			<div class="row">
@@ -86,7 +85,7 @@
 					</div>
 					<?php endif; ?>
 
-					<?php echo get_degree_tuition_markup( $post_meta ); ?>
+					<?php echo get_degree_tuition_markup( $post_meta, 'classic' ); ?>
 
 					<?php
 					if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
@@ -109,33 +108,56 @@
  * @author RJ Bruneel
  *
  */
-	function get_degree_content_modern_layout() {
+function get_degree_content_modern_layout( $post ) {
 
-		$program_type        = get_degree_program_type( $post );
-		$colleges_list       = get_colleges_markup( $post->ID );
-		$departments_list    = get_departments_markup( $post->ID );
-		$industry_highlights = get_field('industry_highlights');
-		$promo_image         = get_field('promo_image');
+	echo get_degree_info_modern_layout( $post );
+	echo get_degree_description_modern_layout();
+	echo get_degree_application_deadline_modern_layout();
+	echo get_degree_course_overview_modern_layout();
+	echo get_degree_skills_career_modern_layout();
+	echo get_degree_admission_requirements_modern_layout();
 
-		ob_start();
-		?>
+}
+
+
+
+/**
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ *
+ */
+
+ function get_degree_info_modern_layout( $post ) {
+
+	$program_type        = get_degree_program_type( $post );
+	$raw_postmeta        = get_post_meta( $post->ID );
+	$post_meta           = format_raw_postmeta( $raw_postmeta );
+	$colleges_list       = get_colleges_markup( $post->ID );
+	$departments_list    = get_departments_markup( $post->ID );
+	$industry_highlights = get_field('industry_highlights');
+	$promo_image         = get_field('promo_image');
+
+	ob_start();
+	?>
+	<div class="bg-faded">
 		<div class="container program-at-a-glance py-lg-3">
 			<div class="row my-lg-3">
 				<div class="col-lg-3 p-4 pb-3 mt-3 mt-lg-0">
 
-					<h2 class="h4 font-condensed text-uppercase">Program at a Glance</h2>
+					<h2 class="h5 font-condensed text-uppercase">Program at a Glance</h2>
 					<dl class="mt-4 mt-lg-5">
-						<?php if ( $colleges_list ) : ?>
-						<dt class="h5 text-uppercase text-default">College(s)</dt>
-						<dd class="h5 mb-4"><?php echo $colleges_list; ?></dd>
-						<?php endif; ?>
 						<?php if ( $program_type ) : ?>
-						<dt class="h5 text-uppercase text-default">Type</dt>
-						<dd class="h5 mb-4"><?php echo $program_type->name; ?></dd>
+						<dt class="h6 text-uppercase text-default">Program</dt>
+						<dd class="h6 mb-4"><?php echo $program_type->name; ?></dd>
+						<?php endif; ?>
+						<?php if ( $colleges_list ) : ?>
+						<dt class="h6 text-uppercase text-default">College(s)</dt>
+						<dd class="h6 mb-4"><?php echo $colleges_list; ?></dd>
 						<?php endif; ?>
 						<?php if ( $departments_list ) : ?>
-						<dt class="h5 text-uppercase text-default">Department(s)</dt>
-						<dd class="h5"><?php echo $departments_list; ?></dd>
+						<dt class="h6 text-uppercase text-default">Department(s)</dt>
+						<dd class="h6"><?php echo $departments_list; ?></dd>
 						<?php endif; ?>
 					</dl>
 				</div>
@@ -145,35 +167,196 @@
 					<img class="icon-calendar img-fluid" style="max-height: 4em;" role="img"
 						src="https://www.ucf.edu/online/files/2019/12/Calendar-Icon-light-gray.svg" alt="">
 					<div class="h1 mt-2 mb-0">16</div>
-					<div class="h5 text-muted text-uppercase">Weeks</div>
+					<div class="h6 text-muted text-uppercase">Weeks</div>
 
 					<img class="icon-clock img-fluid" style="max-height: 4em;" role="img"
 						src="https://www.ucf.edu/online/files/2019/12/Clock-Icon-light-gray.svg" alt="">
 					<div class="h1 mt-2 mb-0">44</div>
-					<div class="h5 text-muted text-uppercase">Credit Hours</div>
+					<div class="h6 text-muted text-uppercase">Credit Hours</div>
 
 				</div>
 
 				<div class="col-lg-4 bg-secondary text-uppercase border-bottom mb-md-3">
-					<?php echo get_degree_tuition_markup( $post_meta ); ?>
+					<?php echo get_degree_tuition_markup( $post_meta, 'modern' ); ?>
 				</div>
 
 				<div class="col-lg-3 text-center align-self-center">
 					<?php if ( $promo_image ) : ?>
 					<img src="<?php echo $promo_image; ?>" class="img-fluid p-4" role="img">
 					<?php endif; ?>
-					<?php /* if ( $industry_highlights ) : ?>
-					<h2 class="h4 font-condensed text-uppercase">Industry Highlights</h3>
-					<?php echo $industry_highlights; ?>
-					<?php endif; */ ?>
 				</div>
 
 			</div>
 		</div>
-		<?php
-		return ob_get_clean();
+	</div>
+
+	<?php /* if ( $industry_highlights ) : ?>
+	<h2 class="h4 font-condensed text-uppercase">Industry Highlights</h3>
+	<?php echo $industry_highlights; ?>
+	<?php endif; */ ?>
+	<?php
+	return ob_get_clean();
+
  }
 
+
+
+ /**
+  *
+  * @since 3.3.8
+  * @author RJ Bruneel
+  *
+  */
+  function get_degree_description_modern_layout() {
+	$degree_description_modern_layout = get_field( 'degree_description_modern_layout' );
+
+	if( empty( $degree_description_modern_layout ) ) return '';
+
+	ob_start();
+	?>
+	<div class="container py-lg-3">
+		<div class="row my-lg-3">
+			<?php echo $degree_description_modern_layout; ?>
+		</div>
+	</div>
+	<?php
+
+	return ob_get_clean();
+  }
+
+
+
+  /**
+   *
+   * @since 3.3.8
+   * @author RJ Bruneel
+   *
+   */
+   function get_degree_application_deadline_modern_layout() {
+	 $application_deadline_first = get_field( 'application_deadline_first' );
+	 $application_deadline_second = get_field( 'application_deadline_second' );
+
+	 if( empty( $application_deadline_first ) && empty( $application_deadline_second ) ) return '';
+ 
+	 ob_start();
+	 ?>
+	 <div class="bg-default">
+		<div class="container py-lg-3">
+			<div class="row my-lg-3">
+				<div class="col text-center text-uppercase">
+					<?php echo $application_deadline_first; ?><br>
+					<?php echo $application_deadline_second; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	 <?php
+ 
+	 return ob_get_clean();
+   }
+
+
+
+ /**
+  *
+  * @since 3.3.8
+  * @author RJ Bruneel
+  *
+  */
+  function get_degree_course_overview_modern_layout() {
+	$course_overview = get_field( 'course_overview' );
+
+	if( empty( $course_overview ) ) return '';
+
+	ob_start();
+	?>
+	<div class="bg-faded">
+		<div class="container py-lg-3">
+			<div class="row my-lg-3">
+				<?php echo $course_overview; ?>
+			</div>
+		</div>
+	</div>
+	<?php
+
+	return ob_get_clean();
+  }
+
+
+
+/**
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ *
+ */
+ function get_degree_skills_career_modern_layout() {
+	$skills_heading = get_field( 'skills_heading' );
+	$skills_content = get_field( 'skills_content' );
+	$careers_heading = get_field( 'careers_heading' );
+	$careers_content = get_field( 'careers_content' );
+
+	if( empty( $skills_content ) && empty( $careers_content ) ) return '';
+
+	ob_start();
+	?>
+	<div class="bg-inverse">
+		<div class="container">
+			<div class="row py-lg-5">
+				<div class="col-12">
+					<?php if( $skills_heading ) : ?>
+						<h2 class="font-condensed text-primary text-uppercase mb-4"><?php echo $skills_heading; ?></h2>
+					<?php endif; ?>
+				</div>
+				<div class="col-lg-8 py-lg-3">
+					<?php if( $skills_content ) : ?>
+						<?php echo $skills_content; ?>
+					<?php endif; ?>
+				</div>
+				<div class="col-lg-4">
+					<?php if( $careers_heading ) : ?>
+						<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $careers_heading; ?></h2>
+					<?php endif; ?>
+					<?php if( $careers_content ) : ?>
+						<?php echo $careers_content; ?>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
+
+	return ob_get_clean();
+ }
+
+
+
+/**
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ *
+ */
+function get_degree_admission_requirements_modern_layout() {
+	$admission_requirements = get_field( 'admission_requirements' );
+
+	if( empty( $admission_requirements ) ) return '';
+
+	ob_start();
+	?>
+	<div class="bg-faded">
+		<div class="container py-lg-3">
+			<div class="row my-lg-3">
+				<?php echo $admission_requirements; ?>
+			</div>
+		</div>
+	</div>
+
+	<?php
+
+	return ob_get_clean();
+}
 
 /**
  * Returns the child program_type assigned to the given degree.
@@ -289,13 +472,17 @@ function get_departments_markup( $post_id ) {
 	return ob_get_clean();
 }
 
-function get_degree_tuition_markup( $post_meta ) {
+function get_degree_tuition_markup( $post_meta, $type ) {
 	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
 	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
 	$skip = ( isset( $post_meta['degree_tuition_skip'] ) && $post_meta['degree_tuition_skip'] === 'on' ) ? true : false;
 
 	if ( $resident && $nonresident && ! $skip ) {
-		return ucf_tuition_fees_degree_classic_layout( $resident, $nonresident );
+		if( $type === 'modern' ) {
+			return ucf_tuition_fees_degree_modern_layout( $resident, $nonresident );
+		} else {
+			return ucf_tuition_fees_degree_classic_layout( $resident, $nonresident );
+		}
 	}
 
 	return '';
