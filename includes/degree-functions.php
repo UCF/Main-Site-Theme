@@ -146,8 +146,8 @@ function get_degree_content_modern_layout( $post ) {
 	$post_meta           = format_raw_postmeta( $raw_postmeta );
 	$colleges_list       = get_colleges_markup( $post->ID );
 	$departments_list    = get_departments_markup( $post->ID );
-	$industry_highlights = get_field('industry_highlights');
 	$promo_image         = get_field('promo_image');
+	$promo_image_alt     = get_field('promo_image_alt');
 
 	ob_start();
 	?>
@@ -193,7 +193,7 @@ function get_degree_content_modern_layout( $post ) {
 
 				<div class="col-lg-3 text-center align-self-center">
 					<?php if ( $promo_image ) : ?>
-					<img src="<?php echo $promo_image; ?>" class="img-fluid p-4" role="img">
+						<img src="<?php echo $promo_image; ?>" class="img-fluid p-4" role="img" alt="<?php echo $promo_image_alt; ?>">
 					<?php endif; ?>
 				</div>
 
@@ -225,7 +225,9 @@ function get_degree_content_modern_layout( $post ) {
 	?>
 	<div class="container py-lg-3">
 		<div class="row my-lg-3">
-			<?php echo $degree_description_modern_layout; ?>
+			<div class="col-12">
+				<?php echo $degree_description_modern_layout; ?>
+			</div>
 		</div>
 	</div>
 	<?php
@@ -286,7 +288,9 @@ function get_degree_content_modern_layout( $post ) {
 	<div class="bg-faded">
 		<div class="container py-lg-3">
 			<div class="row my-lg-3">
-				<?php echo $course_overview; ?>
+				<div class="col-12">
+					<?php echo $course_overview; ?>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -365,7 +369,9 @@ function get_degree_admission_requirements_modern_layout() {
 	<div class="bg-faded">
 		<div class="container py-lg-3">
 			<div class="row my-lg-3">
-				<?php echo $admission_requirements; ?>
+				<div class="col-12">
+					<?php echo $admission_requirements; ?>
+				</div>
 			</div>
 		</div>
 	</div>
