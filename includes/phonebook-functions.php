@@ -18,7 +18,8 @@ function get_phonebook_results( $query ) {
 	$url = get_theme_mod_or_default( 'search_service_url' );
 
 	$params = array(
-		'search' => $query
+		'search' => $query,
+		'active' => 'True'
 	);
 
 	$response = wp_remote_get( $url . '?' . http_build_query( $params ) );
