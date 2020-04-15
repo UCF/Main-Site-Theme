@@ -719,6 +719,28 @@ function get_api_catalog_description( $program ) {
 }
 
 /**
+ * Helper function for getting remote json
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param string $url The URL to retrieve
+ * @param object The serialized JSON obejct
+ */
+function main_site_get_remote_response_json( $url, $default=null ) {
+	$args = array(
+		'timeout' => 5
+	);
+
+	$retval = $default;
+	$response = wp_remote_get( $url, $args );
+
+	if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) < 400 ) {
+		$retval = json_decode( wp_remote_retrieve_body( $response ) );
+	}
+
+	return $retval;
+}
+
+/**
  * Apply main site-specific meta data to degrees during the degree import
  * process.
  *
@@ -729,11 +751,75 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
 	$meta['degree_description'] = get_api_catalog_description( $program );
 
+	$outcomes    = main_site_get_remote_response_json( $program->outcomes );
+	$projections = main_site_get_remote_response_json( $program->projection_totals );
+
+	$meta['degree_avg_annual_earnings'] = isset( $outcomes->latest->avg_annual_earnings ) ?
+		$outcomes->latest->avg_annual_earnings :
+		null;
+
+	$meta['degree_employed_full_time'] = isset( $outcomes->latest->employed_full_time ) ?
+		$outcomes->latest->employed_full_time :
+		null;
+
+	$meta['degree_continuing_education'] = isset( $outcomes->latest->continuing_education ) ?
+		$outcomes->latest->continuing_education :
+		null;
+
+	$meta['degree_outcome_academic_year'] = isset( $outcomes->latest->academic_year_display ) ?
+		$outcomes->latest->academic_year_display :
+		null;
+
+	$meta['degree_prj_begin_year'] = isset( $projections->begin_year ) ?
+		$projections->begin_year :
+		null;
+
+	$meta['degree_prj_end_year'] = isset( $projections->end_year ) ?
+		$projections->end_year :
+		null;
+
+	$meta['degree_prj_begin_employment'] = isset( $projections->begin_employment ) ?
+		$projections->begin_employment :
+		null;
+
+	$meta['degree_prj_end_employment'] = isset( $projections->end_employment ) ?
+		$projections->end_employment :
+		null;
+
+	$meta['degree_prj_change'] = isset( $projections->change ) ?
+		$projections->change :
+		null;
+
+	$meta['degree_prj_change_percentage'] = isset( $projections->change_percentage ) ?
+		$projections->change_percentage :
+		null;
+
+	$meta['degree_prj_openings'] = isset( $projections->openings ) ?
+		$projections->openings :
+		null;
+
 	return $meta;
 }
 
 add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 10, 2 );
 
+/**
+ * Adds career paths from the career data within the program
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $terms The array of terms to return
+ * @param object The program object from the search service
+ * @return array
+ */
+function mainsite_degree_get_post_terms( $terms, $program ) {
+	$careers = main_site_get_remote_response_json( $program->careers, array() );
+
+	$terms['career_paths'] = $careers;
+
+	return $terms;
+}
+
+add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2 );
 
 /**
  * Angular Degree Template Overrides
@@ -805,6 +891,190 @@ function main_site_degree_display_subplans( $post_id ) {
 	<?php foreach( $children as $child ) : ?>
 		<li><a href="<?php echo get_permalink( $child->ID ); ?>"><?php echo $child->post_title; ?></a></li>
 	<?php endforeach; ?>
+	</ul>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
+
+
+/**
+ * Formats degree meta
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $post_meta The post_meta array
+ * @return array
+ */
+function main_site_format_degree_data( $post_meta ) {
+	setlocale(LC_MONETARY, 'en_US');
+
+	if ( isset( $post_meta['degree_avg_annual_earnings'] ) && ! empty( $post_meta['degree_avg_annual_earnings'] ) ) {
+		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', floatval( $post_meta['degree_avg_annual_earnings'] ) );
+	}
+
+	if ( isset( $post_meta['degree_employed_full_time'] ) && ! empty( $post_meta['degree_employed_full_time'] ) ) {
+		$post_meta['degree_employed_full_time'] = number_format( floatval( $post_meta['degree_employed_full_time'] ) ) . '%';
+	}
+
+	if ( isset( $post_meta['degree_continuing_education'] ) && ! empty( $post_meta['degree_continuing_education'] ) ) {
+		$post_meta['degree_continuing_education'] = number_format( floatval( $post_meta['degree_continuing_education'] ) ) . '%';
+	}
+
+	if ( isset( $post_meta['degree_prj_begin_employment'] ) &&  ! empty( 'degree_prj_begin_employment' ) ) {
+		$post_meta['degree_prj_begin_employment'] = number_format( floatval( $post_meta['degree_prj_begin_employment'] ) );
+	}
+
+	if ( isset( $post_meta['degree_prj_end_employment'] ) &&  ! empty( $post_meta['degree_prj_end_employment'] ) ) {
+		$post_meta['degree_prj_end_employment'] = number_format( floatval( $post_meta['degree_prj_end_employment'] ) );
+	}
+
+	if ( isset( $post_meta['degree_prj_change'] ) &&  ! empty( $post_meta['degree_prj_change'] ) ) {
+		$post_meta['degree_prj_change'] = number_format( floatval( $post_meta['degree_prj_change'] ) );
+	}
+
+	if ( isset( $post_meta['degree_prj_change_percentage'] ) &&  ! empty( $post_meta['degree_prj_change_percentage'] ) ) {
+		$post_meta['degree_prj_change_percentage'] = number_format( floatval( $post_meta['degree_prj_change_percentage'] ), 2 ) . '%';
+	}
+
+	if ( isset( $post_meta['degree_prj_openings'] ) && ! empty( $post_meta['degree_prj_openings'] ) ) {
+		$post_meta['degree_prj_openings'] = number_format( floatval( $post_meta['degree_prj_openings'] ) );
+	}
+
+	return $post_meta;
+}
+
+/**
+ * Formats the outcome data
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $post_meta The formatted post_meta array
+ * @return string
+ */
+function main_site_outcome_data( $post_meta ) {
+	ob_start();
+	$keys = array(
+		'degree_avg_annual_earnings',
+		'degree_employed_full_time'
+	);
+
+	$display = isset( $post_meta['degree_display_outcomes'] ) ?
+		filter_var( $post_meta['degree_display_outcomes'], FILTER_VALIDATE_BOOLEAN ) :
+		false;
+
+	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
+
+		$report_year = isset( $post_meta['degree_outcome_academic_year'] ) ?
+			'(per ' . $post_meta['degree_outcome_academic_year'] . ' Data)' :
+			'';
+?>
+	<?php if ( isset( $post_meta['degree_employed_full_time'] ) ) : ?>
+	<p>UCF Alumni Working full-time: <?php echo $post_meta['degree_employed_full_time']; ?> <?php echo $report_year; ?></p>
+	<?php endif; ?>
+	<?php if ( isset( $post_meta['degree_avg_annual_earnings'] ) ) : ?>
+	<p>UCF Alumni Average Annual Earnings: <?php echo $post_meta['degree_avg_annual_earnings']; ?> <?php echo $report_year; ?></p>
+	<?php endif; ?>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
+
+/**
+ * Formats the projection data
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param array $post_meta The formatted post_meta array
+ * @return string
+ */
+function main_site_projection_data( $post_meta ) {
+	ob_start();
+
+	$keys = array(
+		'degree_prj_openings',
+		'degree_prj_change'
+	);
+
+	$display = isset( $post_meta['degree_display_projections'] ) ?
+		filter_var( $post_meta['degree_display_projections'], FILTER_VALIDATE_BOOLEAN ) :
+		false;
+
+	if ( count( array_intersect( array_keys( $post_meta ), $keys ) ) > 0 && $display ) :
+?>
+	<?php if ( isset( $post_meta['degree_prj_begin_year'] ) && isset( $post_meta['degree_prj_end_year'] ) ) : ?>
+	<p>Projected <?php echo $post_meta['degree_prj_begin_year']; ?>-<?php echo $post_meta['degree_prj_end_year']; ?>
+	<?php endif; ?>
+	<?php if ( isset( $post_meta['degree_prj_openings'] ) ) : ?>
+	<p>Job Openings: <?php echo $post_meta['degree_prj_openings']; ?></p>
+	<?php endif; ?>
+	<?php if ( isset( $post_meta['degree_prj_change'] ) ) : ?>
+	<p>New Jobs: <?php echo $post_meta['degree_prj_change']; ?>
+	<?php endif; ?>
+<?php
+	endif;
+
+	return ob_get_clean();
+}
+
+/**
+ * Returns the news shortcode for degrees
+ * @author Jim Barnes
+ * @since v3.4.0
+ * @param array $post_meta The post meta array
+ * @return string
+ */
+function main_site_degree_news_stories( $post_meta ) {
+	ob_start();
+
+	$display = isset( $post_meta['degree_display_news'] ) ?
+		filter_var( $post_meta['degree_display_news'], FILTER_VALIDATE_BOOLEAN ) :
+		false;
+
+	$tag = isset( $post_meta['degree_news_tag'] ) ? $post_meta['degree_news_tag'] : null;
+
+	if ( $display && ! empty( $tag ) ) :
+?>
+		[ucf-news-feed topics="<?php echo $tag; ?>"]
+<?php
+	endif;
+
+	return do_shortcode( ob_get_clean() );
+}
+
+/**
+ * Returns a list of careers for a degree
+ * @author Jim Barnes
+ * @since v3.4.0
+ * @param int $post_id The post id
+ * @return string
+ */
+function main_site_degree_careers( $post_id, $post_meta ) {
+	$display = isset( $post_meta['degree_display_career_paths'] ) ?
+		filter_var( $post_meta['degree_display_career_paths'], FILTER_VALIDATE_BOOLEAN )
+		: false;
+
+	$terms = wp_get_post_terms(
+		$post_id,
+		'career_paths'
+	);
+
+	shuffle( $terms );
+
+	$terms = array_slice( $terms, 0, 10 );
+
+	usort( $terms, function($a, $b) {
+		return strcmp( $a->name, $b->name );
+	} );
+
+	ob_start();
+
+	if ( count( $terms ) > 0 && $display ) :
+?>
+	<h3>Careers</h3>
+	<ul>
+<?php foreach( $terms as $term ) : ?>
+		<li><?php echo $term->name; ?></li>
+<?php endforeach; ?>
 	</ul>
 <?php
 	endif;

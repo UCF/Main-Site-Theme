@@ -1,10 +1,14 @@
 <?php get_header(); the_post(); ?>
 <?php
-	$raw_postmeta        = get_post_meta( $post->ID );
-	$post_meta           = format_raw_postmeta( $raw_postmeta );
-	$colleges            = wp_get_post_terms( $post->ID, 'colleges' );
-	$college             = is_array( $colleges ) ? $colleges[0] : null;
-	$breadcrumbs         = get_degree_breadcrumb_markup( $post->ID );
+	$raw_postmeta      = get_post_meta( $post->ID );
+	$post_meta         = format_raw_postmeta( $raw_postmeta );
+	$program_type      = get_degree_program_type( $post );
+	$colleges          = wp_get_post_terms( $post->ID, 'colleges' );
+	$college           = is_array( $colleges ) ? $colleges[0] : null;
+	$colleges_list     = get_colleges_markup( $post->ID );
+	$departments_list  = get_departments_markup( $post->ID );
+	$breadcrumbs       = get_degree_breadcrumb_markup( $post->ID );
+	$hide_catalog_desc = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
     if( get_field( 'modern_layout_toggle' ) ) {
         echo get_degree_content_modern_layout( $post );
