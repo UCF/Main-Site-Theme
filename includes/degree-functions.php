@@ -191,11 +191,11 @@ function get_degree_content_modern_layout( $post ) {
 					<?php echo get_degree_tuition_markup( $post_meta, 'modern' ); ?>
 				</div>
 
-				<div class="col-lg-3 text-center align-self-center">
-					<?php if ( $promo_image ) : ?>
+				<?php if ( $promo_image ) : ?>
+					<div class="col-lg-3 text-center align-self-center">
 						<img src="<?php echo $promo_image; ?>" class="img-fluid p-4" role="img" alt="<?php echo $promo_image_alt; ?>">
-					<?php endif; ?>
-				</div>
+					</div>
+				<?php endif; ?>
 
 			</div>
 		</div>
@@ -322,24 +322,28 @@ function get_degree_content_modern_layout( $post ) {
 	<div class="bg-inverse">
 		<div class="container">
 			<div class="row py-lg-5">
-				<div class="col-12">
-					<?php if( $skills_heading ) : ?>
+				<?php if( $skills_heading ) : ?>
+					<div class="col-12">
 						<h2 class="font-condensed text-primary text-uppercase mb-4"><?php echo $skills_heading; ?></h2>
-					<?php endif; ?>
-				</div>
-				<div class="col-lg-8 py-lg-3">
-					<?php if( $skills_content ) : ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if( $skills_content ) : ?>
+					<div class="col-lg-8 py-lg-3">
 						<?php echo $skills_content; ?>
-					<?php endif; ?>
-				</div>
-				<div class="col-lg-4">
-					<?php if( $careers_heading ) : ?>
-						<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $careers_heading; ?></h2>
-					<?php endif; ?>
-					<?php if( $careers_content ) : ?>
-						<?php echo $careers_content; ?>
-					<?php endif; ?>
-				</div>
+					</div>
+				<?php endif; ?>
+
+				<?php if( $careers_heading || $careers_content ) : ?>
+					<div class="col-lg-4">
+						<?php if( $careers_heading ) : ?>
+							<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $careers_heading; ?></h2>
+						<?php endif; ?>
+						<?php if( $careers_content ) : ?>
+							<?php echo $careers_content; ?>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
