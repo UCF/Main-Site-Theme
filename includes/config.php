@@ -583,3 +583,23 @@ function yoast_sitemap_empty_terms( $hide_empty, $taxonomies ) {
 }
 
 add_filter( 'wpseo_sitemap_exclude_empty_terms', 'yoast_sitemap_empty_terms', 10, 2 );
+
+
+/**
+ * Prevent the Lazy Loader plugin from modifying contents of REST API feeds.
+ *
+ * @since v3.3.9
+ * @author Jo Dickson
+ */
+function disable_lazyload_in_rest() {
+	global $lazy_loader;
+
+	if (
+		isset( $lazy_loader )
+		&& $lazy_loader instanceof FlorianBrinkmann\LazyLoadResponsiveImages\Plugin
+	) {
+		remove_filter( 'the_content', array( $lazy_loader, 'filter_markup' ), 10001 );
+	}
+}
+
+add_action( 'rest_api_init', 'disable_lazyload_in_rest' );
