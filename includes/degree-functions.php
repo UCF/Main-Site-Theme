@@ -174,20 +174,10 @@ function get_degree_content_modern_layout( $post ) {
 				</div>
 
 				<div class="col-lg-2 text-center align-self-center">
-
-					<img class="icon-calendar img-fluid" style="max-height: 4em;" role="img"
-						src="https://www.ucf.edu/online/files/2019/12/Calendar-Icon-light-gray.svg" alt="">
-					<div class="h1 mt-2 mb-0">16</div>
-					<div class="h6 text-muted text-uppercase">Weeks</div>
-
-					<img class="icon-clock img-fluid" style="max-height: 4em;" role="img"
-						src="https://www.ucf.edu/online/files/2019/12/Clock-Icon-light-gray.svg" alt="">
-					<div class="h1 mt-2 mb-0">44</div>
-					<div class="h6 text-muted text-uppercase">Credit Hours</div>
-
+					<?php echo get_field('program_length'); ?>
 				</div>
 
-				<div class="col-lg-4 bg-secondary text-uppercase border-bottom mb-md-3">
+				<div class="col-lg-4 bg-faded text-uppercase border-bottom mb-md-3">
 					<?php echo get_degree_tuition_markup( $post_meta, 'modern' ); ?>
 				</div>
 
@@ -564,8 +554,8 @@ function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 
 
 function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
-	$value_message = get_theme_mod( 'tuition_value_message', null );
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
+	$format_label = '<div class="text-uppercase text-center font-weight-bold mt-2">per credit hour</div>';
 
 	ob_start();
 ?>
@@ -577,13 +567,12 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
 		</li>
 	</ul>
-	<div class="tab-content pt-4 mb-4 mb-md-5">
+	<?php //TODO move style atr ?>
+	<div class="tab-content pt-4 bg-secondary" style="border-left: 1px solid #ccc;border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;">
 		<div class="tab-pane active" id="in-state" role="tabpanel">
-			<?php if ( $value_message ) : ?>
-			<?php endif; ?>
 			<div class="p-4">
 				<p class="h1 text-center font-weight-bold mb-0">
-					<?php echo $resident; ?>
+					<?php echo str_replace( "per credit hour", $format_label, $resident ); ?>
 				</p>
 			<?php if ( $disclaimer ) : ?>
 				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
@@ -591,11 +580,9 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 			</div>
 		</div>
 		<div class="tab-pane" id="out-of-state" role="tabpanel">
-			<?php if ( $value_message ) : ?>
-			<?php endif; ?>
 			<div class="p-4">
 				<p class="h1 text-center font-weight-bold mb-0">
-					<?php echo $nonresident; ?>
+					<?php echo str_replace( "per credit hour", $format_label, $nonresident ); ?>
 				</p>
 			<?php if ( $disclaimer ) : ?>
 				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
