@@ -1247,6 +1247,25 @@
                 "maxlength": ""
             },
             {
+                "key": "field_5e986fb2666dc",
+                "label": "Program Length",
+                "name": "program_length",
+                "type": "textarea",
+                "instructions": "Add icon and text to be displayed for the program length.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
+            {
                 "key": "field_5e961c9a35232",
                 "label": "Degree Description",
                 "name": "degree_description_modern_layout",
@@ -1345,7 +1364,7 @@
                 "key": "field_5e9618f641b44",
                 "label": "Skills Content",
                 "name": "skills_content",
-                "type": "wysiwyg",
+                "type": "textarea",
                 "instructions": "Enter content to be added to the Skills Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1355,10 +1374,10 @@
                     "id": ""
                 },
                 "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
             },
             {
                 "key": "field_5e97185304f1f",
@@ -1383,7 +1402,7 @@
                 "key": "field_5e97180504f1d",
                 "label": "Careers Content",
                 "name": "careers_content",
-                "type": "wysiwyg",
+                "type": "textarea",
                 "instructions": "Enter content to be added to the Careers Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1393,10 +1412,10 @@
                     "id": ""
                 },
                 "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
             },
             {
                 "key": "field_5e9616d9cd652",
