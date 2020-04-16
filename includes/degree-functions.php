@@ -135,8 +135,6 @@ function get_degree_content_modern_layout( $post ) {
  * @param object $post WP_Post object
  * @return string HTML markup
  *
- * // TODO Make this section dynamic
- *
  */
 
  function get_degree_info_modern_layout( $post ) {
@@ -240,16 +238,78 @@ function get_degree_content_modern_layout( $post ) {
 	 $application_deadline_second = get_field( 'application_deadline_second' );
 
 	 if( empty( $application_deadline_first ) && empty( $application_deadline_second ) ) return '';
- 
+
 	 ob_start();
 	 ?>
-	 <div class="bg-default">
-		<div class="container py-lg-3">
-			<div class="row my-lg-3">
-				<div class="col text-center text-uppercase">
-					<?php echo $application_deadline_first; ?><br>
+	<div class="ucf-section" aria-label="Application Deadline">
+		<div class=" d-block d-lg-none">
+			<div class="bg-primary text-center pt-5">
+				<h2 class="h4 text-uppercase font-condensed my-0">Application Deadline</h2>
+		<?php if( $application_deadline_first ) : ?>
+			</div>
+			<div class="text-uppercase text-center bg-primary py-4">
+				<?php echo $application_deadline_first; ?>
+			</div>
+		<?php endif; ?>
+		<?php if( $application_deadline_second ) : ?>
+			<div class="bg-primary py-1">
+				<hr class="hr-white hr-2 my-0 application-deadline-hr">
+			</div>
+			<div class="text-uppercase text-center bg-primary py-4 bg-arrow-down">
+				<div class="pb-5">
 					<?php echo $application_deadline_second; ?>
 				</div>
+			</div>
+		<?php endif; ?>
+			<div class="modern-degree-dark-grey text-white py-4 text-center">
+				<h2 class="h5 text-uppercase font-condensed mt-3">Ready to<br>get started?</h2>
+			</div>
+			<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
+				<a id="CTA" class="btn btn-lg btn-primary rounded" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid px-0 d-none d-lg-block">
+		<div class="row no-gutters">
+			<div class="col bg-primary">
+			</div>
+			<div class="col">
+				<div class="container bg-primary">
+					<div class="row">
+						<div class="col-auto py-4 bg-primary align-self-center">
+							<h2 class="h5 text-uppercase font-condensed mb-0">Application<br>Deadline</h2>
+						</div>
+					<?php if( $application_deadline_first ) : ?>
+						<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
+							<?php echo $application_deadline_first; ?>
+						</div>
+					<?php endif; ?>
+					<?php if( $application_deadline_second ) : ?>
+						<div class="col-auto py-4 bg-primary">
+							<hr class="hr-white hr-vertical hr-2 mx-0">
+						</div>
+						<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
+							<?php echo $application_deadline_second; ?>
+						</div>
+					<?php endif; ?>
+						<div class="col-auto px-0">
+							<div class="triangle"></div>
+						</div>
+						<div class="col-auto py-4 modern-degree-dark-grey text-white">
+							<div class="h-100 d-flex align-items-center">
+								<h2 class="h5 text-uppercase font-condensed mb-0 ml-4">Ready to<br>get started?</h2>
+							</div>
+						</div>
+						<div class="col-auto py-4 text-uppercase modern-degree-dark-grey">
+							<div class="h-100 d-flex align-items-center">
+								<a id="CTA" class="btn btn-lg btn-primary rounded mt-1" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col modern-degree-dark-grey">
 			</div>
 		</div>
 	</div>
@@ -567,8 +627,8 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
 		</li>
 	</ul>
-	<?php //TODO move style atr ?>
-	<div class="tab-content pt-4 bg-secondary" style="border-left: 1px solid #ccc;border-right: 1px solid #ccc;border-bottom: 1px solid #ccc;">
+
+	<div class="tab-content pt-4 bg-secondary">
 		<div class="tab-pane active" id="in-state" role="tabpanel">
 			<div class="p-4">
 				<p class="h1 text-center font-weight-bold mb-0">
