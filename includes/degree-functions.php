@@ -628,7 +628,7 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 		</li>
 	</ul>
 
-	<div class="tab-content pt-4 bg-secondary">
+	<div class="tuition-fees-tab-content tab-content pt-4 bg-secondary">
 		<div class="tab-pane active" id="in-state" role="tabpanel">
 			<div class="p-4">
 				<p class="h1 text-center font-weight-bold mb-0">
