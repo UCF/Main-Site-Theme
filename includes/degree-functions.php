@@ -225,7 +225,7 @@ function get_degree_content_modern_layout( $post ) {
 
 				<?php if( $modern_description_copy ) : ?>
 					<?php echo $modern_description_copy; ?>
-				`<?php endif; ?>
+				<?php endif; ?>
 
 				<?php // TODO update href ?>
 				<a class="btn btn-complementary mt-3" href="#">Request Information</a>
