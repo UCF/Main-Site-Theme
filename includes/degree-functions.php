@@ -414,9 +414,10 @@ function get_degree_content_modern_layout( $post ) {
   *
   */
 function get_degree_admission_requirements_modern_layout() {
-	$admission_requirements = get_field( 'admission_requirements' );
+	$admission_copy = get_field( 'admission_copy' );
+	$admission_list = get_field( 'admission_list' );
 
-	if( empty( $admission_requirements ) ) return '';
+	if( empty( $admission_copy ) && empty( $admission_list ) ) return '';
 
 	ob_start();
 	?>
@@ -424,8 +425,24 @@ function get_degree_admission_requirements_modern_layout() {
 		<div class="container py-lg-3">
 			<div class="row my-lg-3">
 				<div class="col-12">
-					<?php echo $admission_requirements; ?>
+					<h2 class="font-condensed text-uppercase mb-4">Admission Requirements</h2>
 				</div>
+				<?php if( $admission_copy ) : ?>
+				<div class="col-6">
+					<?php echo $admission_copy; ?>
+					<?php // TODO update link href ?>
+					<a class="btn btn-primary" href="#">
+						Request Information
+					</a>
+				</div>
+				<?php endif; ?>
+				<?php if( $admission_list ) : ?>
+				<div class="col-6">
+					<div class="py-3 px-4 bg-secondary">
+						<?php echo $admission_list; ?>
+					</div>
+				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
