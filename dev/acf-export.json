@@ -585,7 +585,7 @@
     },
     {
         "key": "group_58fa427b4efb7",
-        "title": "Degree Fields",
+        "title": "Degree Data",
         "fields": [
             {
                 "key": "field_5ae0c4dcee248",
@@ -833,25 +833,6 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5df79894fc896",
-                "label": "Display Degree Outcomes",
-                "name": "degree_display_outcomes",
-                "type": "true_false",
-                "instructions": "Determines if degree outcomes are displayed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
                 "key": "field_5df107af52f9e",
                 "label": "Outcome Academic Year",
                 "name": "degree_outcome_academic_year",
@@ -930,25 +911,6 @@
                 },
                 "placement": "top",
                 "endpoint": 0
-            },
-            {
-                "key": "field_5df798cdfc897",
-                "label": "Display Degree Projections",
-                "name": "degree_display_projections",
-                "type": "true_false",
-                "instructions": "Determines if projection data is displayed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
             },
             {
                 "key": "field_5df29fdf4c2d8",
@@ -1061,64 +1023,43 @@
                 },
                 "copy_to_clipboard": 0,
                 "display_type": "text"
-            },
-            {
-                "key": "field_5df7bacf0f53e",
-                "label": "Degree News",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "current_user_role",
+                    "operator": "==",
+                    "value": "super_admin"
                 },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df7bae40f53f",
-                "label": "Display News",
-                "name": "degree_display_news",
-                "type": "true_false",
-                "instructions": "Determines if news articles are displayed for degrees.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
+                {
+                    "param": "current_user_role",
+                    "operator": "==",
+                    "value": "administrator"
                 },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_5df8fb174faec",
+        "title": "Degree Fields - Default Template",
+        "fields": [
             {
-                "key": "field_5df7bb6d0f541",
-                "label": "News Tag",
-                "name": "degree_news_tag",
-                "type": "text",
-                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5aec63848617d",
-                "label": "Degree Settings",
+                "key": "field_5e99f04356ec3",
+                "label": "Data Display Settings",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -1169,24 +1110,173 @@
                 "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
+            },
+            {
+                "key": "field_5df79894fc896",
+                "label": "Display Degree Outcomes",
+                "name": "degree_display_outcomes",
+                "type": "true_false",
+                "instructions": "Determines if degree outcomes are displayed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df798cdfc897",
+                "label": "Display Degree Projections",
+                "name": "degree_display_projections",
+                "type": "true_false",
+                "instructions": "Determines if projection data is displayed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7bae40f53f",
+                "label": "Display News",
+                "name": "degree_display_news",
+                "type": "true_false",
+                "instructions": "Determines if news articles are displayed for degrees.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7bb6d0f541",
+                "label": "News Tag",
+                "name": "degree_news_tag",
+                "type": "text",
+                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5df7bae40f53f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5dfa8794d5761",
+                "label": "Sidebar Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5dfa86409fa89",
+                "label": "Sidebar Content - Bottom",
+                "name": "degree_sidebar_content_bottom",
+                "type": "wysiwyg",
+                "instructions": "Content placed here will be displayed at the bottom of the sidebar, under existing content.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5dfa87a4d5762",
+                "label": "Full-Width Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df8fb1d7bbc1",
+                "label": "Full-Width Content - Bottom of Page",
+                "name": "degree_full_width_content_bottom",
+                "type": "wysiwyg",
+                "instructions": "Content placed here will be displayed full-width below the two-column layout and the breadcrumbs, and before the UCF Colleges section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             }
         ],
         "location": [
             [
                 {
-                    "param": "current_user_role",
-                    "operator": "==",
-                    "value": "super_admin"
-                },
-                {
-                    "param": "current_user_role",
-                    "operator": "==",
-                    "value": "administrator"
-                },
-                {
                     "param": "post_type",
                     "operator": "==",
                     "value": "degree"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "default"
                 }
             ]
         ],
@@ -1201,8 +1291,43 @@
     },
     {
         "key": "group_5e985ee080417",
-        "title": "Modern Layout Degree Fields",
+        "title": "Degree Fields - Modern Layout",
         "fields": [
+            {
+                "key": "field_5e99f80012a12",
+                "label": "Degree Description & Highlights",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e961c9a35232",
+                "label": "Degree Description",
+                "name": "degree_description_modern_layout",
+                "type": "wysiwyg",
+                "instructions": "Enter content to be added to the Degree Description Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
             {
                 "key": "field_5e94d0629bc99",
                 "label": "Promo Image",
@@ -1247,11 +1372,11 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5e986fb2666dc",
-                "label": "Program Length",
-                "name": "program_length",
-                "type": "textarea",
-                "instructions": "Add icon and text to be displayed for the program length.",
+                "key": "field_5e99f82f12a13",
+                "label": "Application Deadlines",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1259,30 +1384,8 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
-            },
-            {
-                "key": "field_5e961c9a35232",
-                "label": "Degree Description",
-                "name": "degree_description_modern_layout",
-                "type": "wysiwyg",
-                "instructions": "Enter content to be added to the Degree Description Section",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "placement": "left",
+                "endpoint": 0
             },
             {
                 "key": "field_5e961e1022155",
@@ -1323,6 +1426,22 @@
                 "maxlength": ""
             },
             {
+                "key": "field_5e99f84712a14",
+                "label": "Course Overview",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
                 "key": "field_5e961a02e3191",
                 "label": "Course Overview",
                 "name": "course_overview",
@@ -1340,6 +1459,22 @@
                 "toolbar": "full",
                 "media_upload": 1,
                 "delay": 0
+            },
+            {
+                "key": "field_5e99f86912a15",
+                "label": "Skills & Opportunities",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
             },
             {
                 "key": "field_5e97183304f1e",
@@ -1364,7 +1499,7 @@
                 "key": "field_5e9618f641b44",
                 "label": "Skills Content",
                 "name": "skills_content",
-                "type": "textarea",
+                "type": "wysiwyg",
                 "instructions": "Enter content to be added to the Skills Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1374,10 +1509,10 @@
                     "id": ""
                 },
                 "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             },
             {
                 "key": "field_5e97185304f1f",
@@ -1402,7 +1537,7 @@
                 "key": "field_5e97180504f1d",
                 "label": "Careers Content",
                 "name": "careers_content",
-                "type": "textarea",
+                "type": "wysiwyg",
                 "instructions": "Enter content to be added to the Careers Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1412,10 +1547,26 @@
                     "id": ""
                 },
                 "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5e99f87f12a16",
+                "label": "Admission Requirements",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
             },
             {
                 "key": "field_5e9616d9cd652",
@@ -1443,6 +1594,309 @@
                     "param": "post_template",
                     "operator": "==",
                     "value": "template-degree-modern.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_5cc3647a5be86",
+        "title": "MyUCF Control Panel Fields",
+        "fields": [
+            {
+                "key": "field_5cc364816d5df",
+                "label": "Header Images",
+                "name": "myucf_header_images",
+                "type": "repeater",
+                "instructions": "Add various images to display as the header image on myUCF.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "field_5cc3650b6d5e0",
+                "min": 1,
+                "max": 10,
+                "layout": "row",
+                "button_label": "Add Image",
+                "sub_fields": [
+                    {
+                        "key": "field_5ccb2088363f6",
+                        "label": "Header Image",
+                        "name": "header_image",
+                        "type": "group",
+                        "instructions": "Add a header image in several viewport sizes.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "layout": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5ccb20cf363f7",
+                                "label": "Header Image Extra Small (575x270)",
+                                "name": "header_image_xs",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 575px and lower.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "header-img",
+                                "library": "all",
+                                "min_width": 575,
+                                "min_height": 270,
+                                "min_size": "",
+                                "max_width": 575,
+                                "max_height": 270,
+                                "max_size": 1,
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5ccb2144363f8",
+                                "label": "Header Image Small (767x270)",
+                                "name": "header_image_sm",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 767px down to 576px.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "header-img-sm",
+                                "library": "all",
+                                "min_width": 767,
+                                "min_height": 270,
+                                "min_size": "",
+                                "max_width": 767,
+                                "max_height": 270,
+                                "max_size": 1,
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5ccb21a5363fa",
+                                "label": "Header Image Medium (991x270)",
+                                "name": "header_image_md",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 991px down to 768px.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "header-img-md",
+                                "library": "all",
+                                "min_width": 991,
+                                "min_height": 270,
+                                "min_size": "",
+                                "max_width": 991,
+                                "max_height": 270,
+                                "max_size": 1,
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5ccb21dd363fb",
+                                "label": "Header Image Large (1600x550)",
+                                "name": "header_image_lg",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 992px and up.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "full",
+                                "library": "all",
+                                "min_width": 1600,
+                                "min_height": 550,
+                                "min_size": "",
+                                "max_width": 1600,
+                                "max_height": 550,
+                                "max_size": 1,
+                                "mime_types": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "key": "field_5cc366346d5e2",
+                "label": "Sidebar Spotlight",
+                "name": "myucf_sidebar_spotlight",
+                "type": "group",
+                "instructions": "Specify the sidebar spotlight to display on myUCF.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5cc366576d5e3",
+                        "label": "Spotlight URL",
+                        "name": "spotlight_url",
+                        "type": "url",
+                        "instructions": "The URL to link to when the spotlight is clicked on.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "https:\/\/www.ucf.edu\/news\/"
+                    },
+                    {
+                        "key": "field_5cc366836d5e4",
+                        "label": "Spotlight Image",
+                        "name": "spotlight_image",
+                        "type": "image",
+                        "instructions": "The image to display as the spotlight.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "ucf-spotlight-vertical",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": 475,
+                        "max_height": "",
+                        "max_size": 1,
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5cc366c16d5e5",
+                        "label": "Spotlight Alt Text",
+                        "name": "spotlight_alt_text",
+                        "type": "text",
+                        "instructions": "The alt text to add to the spotlight image.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5cc368ee61165",
+                "label": "Bottom Spotlight",
+                "name": "myucf_bottom_spotlight",
+                "type": "wysiwyg",
+                "instructions": "Allows for a custom banner spotlight along the bottom ucf myUCF.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5cc70023a48b6",
+                "label": "Header Menu",
+                "name": "myucf_header_menu",
+                "type": "nav_menu",
+                "instructions": "Choose the Nav Menu that will be displayed first in the footer.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "save_format": "id",
+                "container": 0,
+                "allow_null": 0
+            },
+            {
+                "key": "field_5cc70050a48b7",
+                "label": "Social Menu",
+                "name": "myucf_social_menu",
+                "type": "nav_menu",
+                "instructions": "The Nav Menu that will be used to generate the social icons in the footer.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "save_format": "id",
+                "container": 0,
+                "allow_null": 0
+            },
+            {
+                "key": "field_5cc70071a48b8",
+                "label": "Footer Menu",
+                "name": "myucf_footer_menu",
+                "type": "nav_menu",
+                "instructions": "The Nav Menu that will be used for the footer menu items.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "save_format": "id",
+                "container": 0,
+                "allow_null": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "myucf-control-panel"
                 }
             ]
         ],
