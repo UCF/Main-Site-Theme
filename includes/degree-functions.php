@@ -429,7 +429,7 @@ function get_degree_admission_requirements_modern_layout() {
 				</div>
 				<?php if( $admission_copy ) : ?>
 				<div class="col-6">
-					<p><?php echo $admission_copy; ?></p>
+					<?php echo $admission_copy; ?>
 					<?php // TODO update link href ?>
 					<a class="btn btn-primary" href="#">
 						Request Information
