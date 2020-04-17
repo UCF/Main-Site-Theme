@@ -218,7 +218,7 @@ function get_degree_content_modern_layout( $post ) {
 		<div class="row my-lg-3">
 			<div class="col-lg-6">
 				<?php if( $modern_description_heading ) : ?>
-					<h2 class="font-weight-light text-complementary mb-4 pb-2">
+					<h2 class="font-weight-light mb-4 pb-2">
 						<?php echo $modern_description_heading; ?>
 					</h2>
 				<?php endif; ?>
