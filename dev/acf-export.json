@@ -1267,8 +1267,27 @@
             },
             {
                 "key": "field_5e961c9a35232",
-                "label": "Degree Description",
-                "name": "degree_description_modern_layout",
+                "label": "Degree Description Heading",
+                "name": "modern_description_heading",
+                "type": "text",
+                "instructions": "Enter content to be added to the Degree Description Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5e99d7308626b",
+                "label": "Degree Description Copy",
+                "name": "modern_description_copy",
                 "type": "wysiwyg",
                 "instructions": "Enter content to be added to the Degree Description Section",
                 "required": 0,
@@ -1283,6 +1302,113 @@
                 "toolbar": "full",
                 "media_upload": 1,
                 "delay": 0
+            },
+            {
+                "key": "field_5e99d8d7130db",
+                "label": "Degree Description Image",
+                "name": "modern_description_image",
+                "type": "image",
+                "instructions": "Enter content to be added to the Degree Description Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5e99d98c3902e",
+                "label": "Degree Description Image Alt Text",
+                "name": "modern_description_image_alt",
+                "type": "text",
+                "instructions": "Enter content to be added to the Degree Description Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5e99e5b773cc6",
+                "label": "Highlights",
+                "name": "highlights",
+                "type": "repeater",
+                "instructions": "Enter content to be added to the Degree Description Highlights Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5e99e5fd73cc7",
+                        "label": "Highlight Image",
+                        "name": "highlight_image",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5e99e61c73cc8",
+                        "label": "Highlight Copy",
+                        "name": "highlight_copy",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
                 "key": "field_5e961e1022155",
