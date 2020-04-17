@@ -1569,11 +1569,30 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e9616d9cd652",
-                "label": "Admission Requirements",
-                "name": "admission_requirements",
+                "key": "field_5e99ad4b5d498",
+                "label": "Admission Requirements Copy",
+                "name": "admission_copy",
+                "type": "textarea",
+                "instructions": "Copy to be added to the Admission Requirements Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_5e99ad615d499",
+                "label": "Admission Requirements List",
+                "name": "admission_list",
                 "type": "wysiwyg",
-                "instructions": "Enter content to be added to the Admission Requirements Section",
+                "instructions": "List to be added to the Admission Requirements Section",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
