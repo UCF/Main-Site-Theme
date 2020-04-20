@@ -329,7 +329,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				if ( $header_content_type === 'custom' ) {
 					echo get_header_content_custom( $obj );
 				}
-				else if ( $obj instanceof WP_Post && $obj->post_type === 'degree' ) { // TODO only modify degrees with 'modern' layout?
+				else if ( $obj instanceof WP_Post && $obj->post_type === 'degree' ) {
 					echo get_header_content_degree( $obj );
 				}
 				else {
