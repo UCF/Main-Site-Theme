@@ -219,58 +219,6 @@ function get_header_content_custom( $obj ) {
 
 
 /**
- * Returns markup for degree page header title + subtitle.
- **/
-function get_header_content_degree( $obj ) {
-	$title                        = get_header_title( $obj );
-	$subtitle                     = get_header_subtitle( $obj );
-	$h1                           = get_header_h1_option( $obj );
-	$title_elem                   = ( $h1 === 'title' ) ? 'h1' : 'span';
-	$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
-	$degree_template              = get_page_template_slug( $obj );
-	$show_degree_request_info_btn = false;
-	$header_content_col_classes   = 'header-degree-content-col col-sm-auto d-sm-flex align-items-sm-center';
-
-	if ( $degree_template === 'template-degree-modern.php' ) {
-		$header_content_col_classes .= ' ml-sm-auto';
-		$show_degree_request_info_btn = true;
-	}
-
-	ob_start();
-
-	if ( $title ):
-?>
-	<div class="header-content-inner">
-		<div class="container px-0 h-100">
-			<div class="row no-gutters h-100">
-				<div class="<?php echo $header_content_col_classes; ?>">
-					<div class="header-degree-content-bg bg-primary-t-2 p-3 p-sm-4 mb-sm-5">
-						<<?php echo $title_elem; ?> class="header-title header-title-degree"><?php echo $title; ?></<?php echo $title_elem; ?>>
-
-						<?php if ( $subtitle ) : ?>
-							<<?php echo $subtitle_elem; ?> class="header-subtitle header-subtitle-degree"><?php echo $subtitle; ?></<?php echo $subtitle_elem; ?>>
-						<?php endif; ?>
-
-						<!-- TODO toggle form w/button click -->
-						<?php if ( $degree_template === 'template-degree-modern.php' && $show_degree_request_info_btn ): ?>
-						<button class="header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3">
-							<span class="mr-3 fa fa-info-circle fa-2x"></span>
-							Request Info
-						</button>
-						<?php endif; ?>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-<?php
-	endif;
-
-	return apply_filters( 'get_header_content_title_subtitle', ob_get_clean(), $obj );
-}
-
-
-/**
  * Returns the markup for page headers with media backgrounds.
  **/
 function get_header_media_markup( $obj, $videos, $images ) {
@@ -328,9 +276,6 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				<?php
 				if ( $header_content_type === 'custom' ) {
 					echo get_header_content_custom( $obj );
-				}
-				else if ( $obj instanceof WP_Post && $obj->post_type === 'degree' ) {
-					echo get_header_content_degree( $obj );
 				}
 				else {
 					echo get_header_content_title_subtitle( $obj );
