@@ -168,7 +168,7 @@ function get_header_content_degree( $markup, $obj ) {
 							<!-- TODO toggle form w/button click -->
 							<?php if ( $show_degree_request_info_btn ): ?>
 							<button class="header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3">
-								<span class="mr-3 fa fa-info-circle fa-2x"></span>
+								<span class="mr-3 fa fa-info-circle fa-2x" aria-hidden="true"></span>
 								Request Info
 							</button>
 							<?php endif; ?>
