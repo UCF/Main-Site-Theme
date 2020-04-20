@@ -278,7 +278,7 @@ function get_header_media_markup( $obj, $videos, $images ) {
 	$videos     = $videos ?: get_header_videos( $obj );
 	$images     = $images ?: get_header_images( $obj );
 	$video_loop = get_field( 'page_header_video_loop', $field_id );
-	$header_content_type = get_field( 'page_header_content_type', $field_id );
+	$header_content_type = get_field( 'page_header_content_type', $field_id ) ?: 'title_subtitle';
 	$header_height       = get_field( 'page_header_height', $field_id ) ?: 'header-media-default';
 	$exclude_nav         = get_field( 'page_header_exclude_nav', $field_id ) ?: false;
 
