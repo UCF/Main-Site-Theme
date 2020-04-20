@@ -232,7 +232,7 @@ function get_header_content_degree( $obj ) {
 	$header_content_col_classes   = 'header-degree-content-col col-sm-auto';
 
 	if ( $degree_template === 'template-degree-modern.php' ) {
-		$header_content_col_classes .= ' d-sm-flex justify-content-sm-end';
+		$header_content_col_classes .= ' d-sm-flex align-items-sm-center ml-sm-auto';
 		$show_degree_request_info_btn = true;
 	}
 
@@ -240,7 +240,7 @@ function get_header_content_degree( $obj ) {
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner d-sm-flex align-items-sm-center">
+	<div class="header-content-inner">
 		<div class="container px-0">
 			<div class="row no-gutters">
 				<div class="<?php echo $header_content_col_classes; ?>">
