@@ -229,10 +229,10 @@ function get_header_content_degree( $obj ) {
 	$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 	$degree_template              = get_page_template_slug( $obj );
 	$show_degree_request_info_btn = false;
-	$header_content_col_classes   = 'header-degree-content-col col-sm-auto';
+	$header_content_col_classes   = 'header-degree-content-col col-sm-auto d-sm-flex align-items-sm-center';
 
 	if ( $degree_template === 'template-degree-modern.php' ) {
-		$header_content_col_classes .= ' d-sm-flex align-items-sm-center ml-sm-auto';
+		$header_content_col_classes .= ' ml-sm-auto';
 		$show_degree_request_info_btn = true;
 	}
 
