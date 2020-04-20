@@ -1603,8 +1603,8 @@
                 "key": "field_5e961a02e3191",
                 "label": "Course Overview",
                 "name": "course_overview",
-                "type": "wysiwyg",
-                "instructions": "Enter content to be added to the Skills and Careers Section",
+                "type": "repeater",
+                "instructions": "Enter content to be added to the Course Overview Section",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1612,11 +1612,51 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5e9dbd9801581",
+                        "label": "Course Title",
+                        "name": "course_title",
+                        "type": "text",
+                        "instructions": "Enter the course title",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5e9dbdc801582",
+                        "label": "Course Description",
+                        "name": "course_description",
+                        "type": "textarea",
+                        "instructions": "Enter the course description",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    }
+                ]
             },
             {
                 "key": "field_5e99f86912a15",
