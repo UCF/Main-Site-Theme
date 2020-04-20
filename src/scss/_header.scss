@@ -80,9 +80,7 @@
   width: 100%;
 }
 
-.header-degree-content-bg {
-  position: relative;
-
+.header-degree-content-col {
   .degree-template-template-degree-modern & {
     @include media-breakpoint-up(sm) {
       min-width: 25rem;
@@ -100,6 +98,10 @@
   @include media-breakpoint-up(lg) {
     max-width: 60%;
   }
+}
+
+.header-degree-content-bg {
+  position: relative;
 }
 
 .header-degree-cta {
