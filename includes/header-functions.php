@@ -241,8 +241,8 @@ function get_header_content_degree( $obj ) {
 	if ( $title ):
 ?>
 	<div class="header-content-inner">
-		<div class="container px-0">
-			<div class="row no-gutters">
+		<div class="container px-0 h-100">
+			<div class="row no-gutters h-100">
 				<div class="<?php echo $header_content_col_classes; ?>">
 					<div class="header-degree-content-bg bg-primary-t-2 p-3 p-sm-4 mb-sm-5">
 						<<?php echo $title_elem; ?> class="header-title header-title-degree"><?php echo $title; ?></<?php echo $title_elem; ?>>
