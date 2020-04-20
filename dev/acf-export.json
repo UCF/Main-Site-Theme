@@ -584,541 +584,12 @@
         "description": ""
     },
     {
-        "key": "group_58fa427b4efb7",
-        "title": "Degree Fields",
+        "key": "group_5df8fb174faec",
+        "title": "Degree Fields - Default Template",
         "fields": [
             {
-                "key": "field_5ae0c4dcee248",
-                "label": "Custom Degree Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_58fa42808a359",
-                "label": "Required Hours",
-                "name": "degree_hours",
-                "type": "number",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "40",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "min": "",
-                "max": "",
-                "step": ""
-            },
-            {
-                "key": "field_5df7896609d12",
-                "label": "Online URL",
-                "name": "degree_online_url",
-                "type": "url",
-                "instructions": "URL of the UCF Online profile for this degree.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
-                "key": "field_5adf83192113d",
-                "label": "Imported Degree Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_58fa440d8a362",
-                "label": "Degree ID",
-                "name": "degree_id",
-                "type": "read_only",
-                "instructions": "A unique identifier for the degree.",
-                "required": 1,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5ae32d36ac658",
-                "label": "Search Service Degree ID",
-                "name": "degree_api_id",
-                "type": "read_only",
-                "instructions": "The ID assigned to the program in the UCF Search Service.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5adf859313850",
-                "label": "Plan Code",
-                "name": "degree_plan_code",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5adf85a813851",
-                "label": "Subplan Code",
-                "name": "degree_subplan_code",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5af0696eeb799",
-                "label": "Degree Short Name",
-                "name": "degree_name_short",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5af35d5e6475d",
-                "label": "Is Online",
-                "name": "degree_online",
-                "type": "read_only",
-                "instructions": "Whether or not the degree is an online program.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "boolean"
-            },
-            {
-                "key": "field_58fa433f8a35a",
-                "label": "Catalog Description",
-                "name": "degree_description",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_58fa436d8a35c",
-                "label": "Catalog URL",
-                "name": "degree_pdf",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5931a83da2c0f",
-                "label": "Resident Tuition",
-                "name": "degree_resident_tuition",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5931a857a2c10",
-                "label": "Nonresident Tuition",
-                "name": "degree_nonresident_tuition",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df79878fc895",
-                "label": "Degree Outcome Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df79894fc896",
-                "label": "Display Degree Outcomes",
-                "name": "degree_display_outcomes",
-                "type": "true_false",
-                "instructions": "Determines if degree outcomes are displayed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df107af52f9e",
-                "label": "Outcome Academic Year",
-                "name": "degree_outcome_academic_year",
-                "type": "read_only",
-                "instructions": "The academic year of the graduates represented in the outcome data to the right.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df107d052f9f",
-                "label": "Average Annual Earnings",
-                "name": "degree_avg_annual_earnings",
-                "type": "read_only",
-                "instructions": "The average annual earnings of graduates who are employed full time from the graduating class of the Outcome Academic Year",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df107ed52fa0",
-                "label": "Employed Full Time (%)",
-                "name": "degree_employed_full_time",
-                "type": "read_only",
-                "instructions": "The percentage of graduates from the Outcome Academic Year that were employed full time at the time of the NCES survey.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df107fe52fa1",
-                "label": "Continuing Education (%)",
-                "name": "degree_continuing_education",
-                "type": "read_only",
-                "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional education at the time of the NCES survey.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a7190443b",
-                "label": "Employment Projection Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df798cdfc897",
-                "label": "Display Degree Projections",
-                "name": "degree_display_projections",
-                "type": "true_false",
-                "instructions": "Determines if projection data is displayed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df29fdf4c2d8",
-                "label": "Report Year Start",
-                "name": "degree_prj_begin_year",
-                "type": "read_only",
-                "instructions": "The start year in the data projection.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0084c2d9",
-                "label": "Report Year End",
-                "name": "degree_prj_end_year",
-                "type": "read_only",
-                "instructions": "The end year in the data projection",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0484c2da",
-                "label": "Beginning Employment",
-                "name": "degree_prj_begin_employment",
-                "type": "read_only",
-                "instructions": "The estimated number of positions available for graduates with this degree in the start year of the report.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0724c2db",
-                "label": "Projected Employment",
-                "name": "degree_prj_end_employment",
-                "type": "read_only",
-                "instructions": "The projected number of positions for graduates with this degree by the end year of the report.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0ca4c2dc",
-                "label": "Projected New Positions",
-                "name": "degree_prj_change",
-                "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a1024c2dd",
-                "label": "Projected New Positions Percentage",
-                "name": "degree_prj_change_percentage",
-                "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a12d4c2de",
-                "label": "Projected Openings",
-                "name": "degree_prj_openings",
-                "type": "read_only",
-                "instructions": "The projected number of openings for graduates with this degree within the report's timeframe.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df7bacf0f53e",
-                "label": "Degree News",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df7bae40f53f",
-                "label": "Display News",
-                "name": "degree_display_news",
-                "type": "true_false",
-                "instructions": "Determines if news articles are displayed for degrees.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df7bb6d0f541",
-                "label": "News Tag",
-                "name": "degree_news_tag",
-                "type": "text",
-                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5aec63848617d",
-                "label": "Degree Settings",
+                "key": "field_5e99f04356ec3",
+                "label": "Data Display Settings",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -1169,24 +640,173 @@
                 "ui": 1,
                 "ui_on_text": "",
                 "ui_off_text": ""
+            },
+            {
+                "key": "field_5df79894fc896",
+                "label": "Display Degree Outcomes",
+                "name": "degree_display_outcomes",
+                "type": "true_false",
+                "instructions": "Determines if degree outcomes are displayed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df798cdfc897",
+                "label": "Display Degree Projections",
+                "name": "degree_display_projections",
+                "type": "true_false",
+                "instructions": "Determines if projection data is displayed.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7bae40f53f",
+                "label": "Display News",
+                "name": "degree_display_news",
+                "type": "true_false",
+                "instructions": "Determines if news articles are displayed for degrees.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5df7bb6d0f541",
+                "label": "News Tag",
+                "name": "degree_news_tag",
+                "type": "text",
+                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5df7bae40f53f",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5dfa8794d5761",
+                "label": "Sidebar Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5dfa86409fa89",
+                "label": "Sidebar Content - Bottom",
+                "name": "degree_sidebar_content_bottom",
+                "type": "wysiwyg",
+                "instructions": "Content placed here will be displayed at the bottom of the sidebar, under existing content.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5dfa87a4d5762",
+                "label": "Full-Width Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df8fb1d7bbc1",
+                "label": "Full-Width Content - Bottom of Page",
+                "name": "degree_full_width_content_bottom",
+                "type": "wysiwyg",
+                "instructions": "Content placed here will be displayed full-width below the two-column layout and the breadcrumbs, and before the UCF Colleges section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             }
         ],
         "location": [
             [
                 {
-                    "param": "current_user_role",
-                    "operator": "==",
-                    "value": "super_admin"
-                },
-                {
-                    "param": "current_user_role",
-                    "operator": "==",
-                    "value": "administrator"
-                },
-                {
                     "param": "post_type",
                     "operator": "==",
                     "value": "degree"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "default"
                 }
             ]
         ],
@@ -1201,8 +821,43 @@
     },
     {
         "key": "group_5e985ee080417",
-        "title": "Modern Layout Degree Fields",
+        "title": "Degree Fields - Modern Layout",
         "fields": [
+            {
+                "key": "field_5e99fb2dbcede",
+                "label": "Program at a Glance",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e986fb2666dc",
+                "label": "Program Length",
+                "name": "program_length",
+                "type": "textarea",
+                "instructions": "Add icon and text to be displayed for the program length.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": "",
+                "new_lines": ""
+            },
             {
                 "key": "field_5e94d0629bc99",
                 "label": "Promo Image",
@@ -1247,11 +902,11 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5e986fb2666dc",
-                "label": "Program Length",
-                "name": "program_length",
-                "type": "textarea",
-                "instructions": "Add icon and text to be displayed for the program length.",
+                "key": "field_5e99f80012a12",
+                "label": "Degree Description & Highlights",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1259,11 +914,8 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "placement": "left",
+                "endpoint": 0
             },
             {
                 "key": "field_5e961c9a35232",
@@ -1297,10 +949,12 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
+                "placement": "left",
+                "endpoint": 0,
                 "tabs": "all",
                 "toolbar": "full",
                 "media_upload": 1,
+                "default_value": "",
                 "delay": 0
             },
             {
@@ -1411,6 +1065,22 @@
                 ]
             },
             {
+                "key": "field_5e99f82f12a13",
+                "label": "Application Deadlines",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
                 "key": "field_5e961e1022155",
                 "label": "Application Deadline First",
                 "name": "application_deadline_first",
@@ -1449,10 +1119,26 @@
                 "maxlength": ""
             },
             {
+                "key": "field_5e99f84712a14",
+                "label": "Course Overview",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
                 "key": "field_5e961a02e3191",
                 "label": "Course Overview",
                 "name": "course_overview",
-                "type": "wysiwyg",
+                "type": "repeater",
                 "instructions": "Enter content to be added to the Skills and Careers Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1461,11 +1147,67 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5e9dbd9801581",
+                        "label": "Course Title",
+                        "name": "course_title",
+                        "type": "text",
+                        "instructions": "Enter the course title",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5e9dbdc801582",
+                        "label": "Course Description",
+                        "name": "course_description",
+                        "type": "textarea",
+                        "instructions": "Enter the course description",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": "",
+                        "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5e99f86912a15",
+                "label": "Skills & Opportunities",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
             },
             {
                 "key": "field_5e97183304f1e",
@@ -1490,7 +1232,7 @@
                 "key": "field_5e9618f641b44",
                 "label": "Skills Content",
                 "name": "skills_content",
-                "type": "textarea",
+                "type": "wysiwyg",
                 "instructions": "Enter content to be added to the Skills Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1500,10 +1242,10 @@
                     "id": ""
                 },
                 "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             },
             {
                 "key": "field_5e97185304f1f",
@@ -1528,7 +1270,7 @@
                 "key": "field_5e97180504f1d",
                 "label": "Careers Content",
                 "name": "careers_content",
-                "type": "textarea",
+                "type": "wysiwyg",
                 "instructions": "Enter content to be added to the Careers Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1538,10 +1280,26 @@
                     "id": ""
                 },
                 "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5e99f87f12a16",
+                "label": "Admission Requirements",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
             },
             {
                 "key": "field_5e99ad4b5d498",
