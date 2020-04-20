@@ -1420,7 +1420,12 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "default_value": "",
+                "delay": 0
             },
             {
                 "key": "field_5e99d8d7130db",
@@ -2077,7 +2082,7 @@
                 "preview_size": "header-img",
                 "library": "all",
                 "min_width": 575,
-                "min_height": 575,
+                "min_height": "",
                 "min_size": "",
                 "max_width": "",
                 "max_height": "",
