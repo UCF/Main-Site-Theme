@@ -227,27 +227,37 @@ function get_header_content_degree( $obj ) {
 	$h1            = get_header_h1_option( $obj );
 	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
 	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
+	$degree_layout = 'default'; // TODO
+	$show_degree_request_info_btn = false;
+	$header_content_col_classes = 'col-sm-10 col-lg-8 col-xl-7';
+
+	if ( $degree_layout === 'modern' ) {
+		$header_content_col_classes .= ' offset-sm-2 offset-lg-4 offset-xl-5';
+		$show_degree_request_info_btn = true;
+	}
 
 	ob_start();
 
 	if ( $title ):
 ?>
-	<div class="header-content-inner">
+	<div class="header-content-inner d-sm-flex align-items-sm-center">
 		<div class="container px-0">
 			<div class="row no-gutters">
-				<div class="col-sm-10 offset-sm-2 col-lg-8 offset-lg-4 col-xl-7 offset-xl-5">
-					<div class="bg-primary-t-3 p-3 p-sm-4">
+				<div class="<?php echo $header_content_col_classes; ?>">
+					<div class="header-degree-content-bg bg-primary-t-2 p-3 p-sm-4">
 						<<?php echo $title_elem; ?> class="header-title header-title-degree"><?php echo $title; ?></<?php echo $title_elem; ?>>
 
 						<?php if ( $subtitle ) : ?>
 							<<?php echo $subtitle_elem; ?> class="header-subtitle header-subtitle-degree"><?php echo $subtitle; ?></<?php echo $subtitle_elem; ?>>
 						<?php endif; ?>
 
-						<!-- TODO conditional display -->
-						<button class="btn btn-secondary d-flex align-items-center">
+						<!-- TODO toggle form w/button click -->
+						<?php if ( $degree_layout === 'modern' && $show_degree_request_info_btn ): ?>
+						<button class="header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5">
 							<span class="mr-3 fa fa-info-circle fa-2x"></span>
 							Request Info
 						</button>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>
