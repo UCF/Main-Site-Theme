@@ -17,7 +17,9 @@ $small-font-size: 70% !default;
 
 $header-img-xs-width: 575px;
 $header-img-xs-height: 575px;
+$header-img-degree-xs-height: 300px;
 $header-media-xs-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
+$header-media-degree-xs-height: ($header-img-degree-xs-height / $header-img-xs-width) * 100vw;
 
 $nav-height: 4.9rem;
 $nav-height-md: 6rem;
