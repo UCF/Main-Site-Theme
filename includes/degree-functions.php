@@ -205,16 +205,49 @@ function get_degree_content_modern_layout( $post ) {
   *
   */
   function get_degree_description_modern_layout() {
-	$degree_description_modern_layout = get_field( 'degree_description_modern_layout' );
+	$modern_description_heading = get_field( 'modern_description_heading' );
+	$modern_description_copy = get_field( 'modern_description_copy' );
+	$modern_description_image = get_field( 'modern_description_image' );
+	$modern_description_image_alt = get_field( 'modern_description_image_alt' );
 
-	if( empty( $degree_description_modern_layout ) ) return '';
+	if( empty( $modern_description_heading ) && empty( $modern_description_copy ) ) return '';
 
 	ob_start();
 	?>
-	<div class="container py-lg-3">
+	<div class="container py-lg-3 my-5">
 		<div class="row my-lg-3">
-			<div class="col-12">
-				<?php echo $degree_description_modern_layout; ?>
+			<div class="col-lg-6">
+				<?php if( $modern_description_heading ) : ?>
+					<h2 class="font-weight-light mb-4 pb-2">
+						<?php echo $modern_description_heading; ?>
+					</h2>
+				<?php endif; ?>
+
+				<?php if( $modern_description_copy ) : ?>
+					<?php echo $modern_description_copy; ?>
+				<?php endif; ?>
+
+				<?php // TODO update href ?>
+				<a class="btn btn-complementary mt-3" href="#">Request Information</a>
+			</div>
+			<div class="col-lg-6">
+				<?php if ( $modern_description_image ) : ?>
+					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" role="img" alt="<?php echo $modern_description_image_alt; ?>">
+				<?php endif; ?>
+
+				<?php if ( have_rows( 'highlights' ) ) : ?>
+					<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
+					<?php while( have_rows( 'highlights' ) ): the_row(); ?>
+						<div class="row mb-4">
+							<div class="col-3">
+								<img src="<?php the_sub_field('highlight_image'); ?>" class="img-fluid" role="img" alt="">
+							</div>
+							<div class="col-9 align-self-center">
+								<?php the_sub_field('highlight_copy'); ?>
+							</div>
+						</div>
+					<?php endwhile; ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
