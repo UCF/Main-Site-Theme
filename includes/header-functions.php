@@ -229,10 +229,10 @@ function get_header_content_degree( $obj ) {
 	$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 	$degree_template              = get_page_template_slug( $obj );
 	$show_degree_request_info_btn = false;
-	$header_content_col_classes   = 'col-sm-10 col-lg-8 col-xl-7';
+	$header_content_col_classes   = 'col-sm-auto';
 
 	if ( $degree_template === 'template-degree-modern.php' ) {
-		$header_content_col_classes .= ' offset-sm-2 offset-lg-4 offset-xl-5';
+		$header_content_col_classes .= ' d-sm-flex justify-content-sm-end';
 		$show_degree_request_info_btn = true;
 	}
 
@@ -244,7 +244,7 @@ function get_header_content_degree( $obj ) {
 		<div class="container px-0">
 			<div class="row no-gutters">
 				<div class="<?php echo $header_content_col_classes; ?>">
-					<div class="header-degree-content-bg bg-primary-t-2 p-3 p-sm-4">
+					<div class="header-degree-content-bg bg-primary-t-2 p-3 p-sm-4 mb-sm-5">
 						<<?php echo $title_elem; ?> class="header-title header-title-degree"><?php echo $title; ?></<?php echo $title_elem; ?>>
 
 						<?php if ( $subtitle ) : ?>
