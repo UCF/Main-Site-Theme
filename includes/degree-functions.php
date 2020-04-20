@@ -363,32 +363,32 @@ function get_degree_content_modern_layout( $post ) {
  */
 function get_degree_course_overview_modern_layout()
 {
-	$course_overview = get_field('course_overview');
+	$course_overview = get_field( 'course_overview' );
 
-	if (empty($course_overview)) return '';
+	if ( empty( $course_overview ) ) return '';
 
 	ob_start();
 
-	if (have_rows('course_overview')) : ?>
+	if ( have_rows( 'course_overview' ) ) : ?>
 		<div class="bg-faded py-5">
 			<div class="container py-lg-3">
 				<div class="row my-lg-3">
 					<div class="col-12">
 						<h2 class="font-condensed text-uppercase mb-4">Course Overview</h2>
 						<div class="accordion" role="tablist" id="courses">
-							<?php while (have_rows('course_overview')) : the_row(); ?>
+							<?php while ( have_rows( 'course_overview' ) ) : the_row(); ?>
 								<div class="accordion-courses mt-0 pt-0 pt-lg-3">
 									<h3 class="mb-0">
 										<a data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>"
 											aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
 											<span class="font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
-												<?php the_sub_field('course_title'); ?>
+												<?php the_sub_field( 'course_title' ); ?>
 											</span>
 											<span class="fa pull-right text-inverse-aw fa-minus-circle" aria-hidden="true"></span>
 										</a>
 									</h3>
-									<div class="collapse<?php if( get_row_index() === 1 ) echo " show" ?>" id="course-<?php echo get_row_index(); ?>" data-parent="#courses" role="tabpanel" aria-expanded="true">
-										<p class="mt-3 mb-0"><?php the_sub_field('course_description'); ?></p>
+									<div class="collapse<?php if ( get_row_index() === 1 ) echo " show" ?>" id="course-<?php echo get_row_index(); ?>" data-parent="#courses" role="tabpanel" aria-expanded="true">
+										<p class="mt-3 mb-0"><?php the_sub_field( 'course_description' ); ?></p>
 									</div>
 								</div>
 							<?php endwhile; ?>
