@@ -222,16 +222,16 @@ function get_header_content_custom( $obj ) {
  * Returns markup for degree page header title + subtitle.
  **/
 function get_header_content_degree( $obj ) {
-	$title         = get_header_title( $obj );
-	$subtitle      = get_header_subtitle( $obj );
-	$h1            = get_header_h1_option( $obj );
-	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
-	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
-	$degree_layout = 'default'; // TODO
+	$title                        = get_header_title( $obj );
+	$subtitle                     = get_header_subtitle( $obj );
+	$h1                           = get_header_h1_option( $obj );
+	$title_elem                   = ( $h1 === 'title' ) ? 'h1' : 'span';
+	$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
+	$degree_template              = get_page_template_slug( $obj );
 	$show_degree_request_info_btn = false;
-	$header_content_col_classes = 'col-sm-10 col-lg-8 col-xl-7';
+	$header_content_col_classes   = 'col-sm-10 col-lg-8 col-xl-7';
 
-	if ( $degree_layout === 'modern' ) {
+	if ( $degree_template === 'template-degree-modern.php' ) {
 		$header_content_col_classes .= ' offset-sm-2 offset-lg-4 offset-xl-5';
 		$show_degree_request_info_btn = true;
 	}
@@ -252,7 +252,7 @@ function get_header_content_degree( $obj ) {
 						<?php endif; ?>
 
 						<!-- TODO toggle form w/button click -->
-						<?php if ( $degree_layout === 'modern' && $show_degree_request_info_btn ): ?>
+						<?php if ( $degree_template === 'template-degree-modern.php' && $show_degree_request_info_btn ): ?>
 						<button class="header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5">
 							<span class="mr-3 fa fa-info-circle fa-2x"></span>
 							Request Info

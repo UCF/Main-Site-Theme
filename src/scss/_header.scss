@@ -118,7 +118,8 @@
   font-size: 1.75rem;
   font-weight: bold;
   letter-spacing: -.025em;
-  padding-bottom: .25rem;
+  line-height: 1.1;
+  padding-bottom: .5rem;
   padding-top: 1rem;
 
   @include media-breakpoint-up(sm) {
@@ -164,6 +165,7 @@
 
 .header-subtitle-degree {
   font-family: $font-family-sans-serif;
+  line-height: 1.4;
   padding-bottom: 1rem;
 
   @include media-breakpoint-down(xs) {
