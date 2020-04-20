@@ -172,8 +172,6 @@ function get_header_content_title_subtitle( $obj ) {
 	$h1            = get_header_h1_option( $obj );
 	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
 	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
-	$is_degree     = ( get_post_type( $obj ) === 'degree' );
-	$title_class   = ( $is_degree ) ? 'header-title header-title-degree' : 'header-title';
 
 	ob_start();
 
@@ -182,7 +180,7 @@ function get_header_content_title_subtitle( $obj ) {
 	<div class="header-content-inner align-self-start pt-4 pt-sm-0 align-self-sm-center">
 		<div class="container">
 			<div class="d-inline-block bg-primary-t-1">
-				<<?php echo $title_elem; ?> class="<?php echo $title_class; ?>"><?php echo $title; ?></<?php echo $title_elem; ?>>
+				<<?php echo $title_elem; ?> class="header-title"><?php echo $title; ?></<?php echo $title_elem; ?>>
 			</div>
 			<?php if ( $subtitle ) : ?>
 			<div class="clearfix"></div>
@@ -217,6 +215,48 @@ function get_header_content_custom( $obj ) {
 	</div>
 <?php
 	return apply_filters( 'get_header_content_custom',  ob_get_clean(), $obj );
+}
+
+
+/**
+ * Returns markup for degree page header title + subtitle.
+ **/
+function get_header_content_degree( $obj ) {
+	$title         = get_header_title( $obj );
+	$subtitle      = get_header_subtitle( $obj );
+	$h1            = get_header_h1_option( $obj );
+	$title_elem    = ( $h1 === 'title' ) ? 'h1' : 'span';
+	$subtitle_elem = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
+
+	ob_start();
+
+	if ( $title ):
+?>
+	<div class="header-content-inner">
+		<div class="container px-0">
+			<div class="row no-gutters">
+				<div class="col-sm-10 offset-sm-2 col-lg-8 offset-lg-4 col-xl-7 offset-xl-5">
+					<div class="bg-primary-t-3 p-3 p-sm-4">
+						<<?php echo $title_elem; ?> class="header-title header-title-degree"><?php echo $title; ?></<?php echo $title_elem; ?>>
+
+						<?php if ( $subtitle ) : ?>
+							<<?php echo $subtitle_elem; ?> class="header-subtitle header-subtitle-degree"><?php echo $subtitle; ?></<?php echo $subtitle_elem; ?>>
+						<?php endif; ?>
+
+						<!-- TODO conditional display -->
+						<button class="btn btn-secondary d-flex align-items-center">
+							<span class="mr-3 fa fa-info-circle fa-2x"></span>
+							Request Info
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php
+	endif;
+
+	return apply_filters( 'get_header_content_title_subtitle', ob_get_clean(), $obj );
 }
 
 
@@ -278,6 +318,9 @@ function get_header_media_markup( $obj, $videos, $images ) {
 				<?php
 				if ( $header_content_type === 'custom' ) {
 					echo get_header_content_custom( $obj );
+				}
+				else if ( $obj instanceof WP_Post && $obj->post_type === 'degree' ) { // TODO only modify degrees with 'modern' layout?
+					echo get_header_content_degree( $obj );
 				}
 				else {
 					echo get_header_content_title_subtitle( $obj );

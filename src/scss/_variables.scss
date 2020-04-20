@@ -17,8 +17,9 @@ $small-font-size: 70% !default;
 
 $header-img-xs-width: 575px;
 $header-img-xs-height: 575px;
+$header-media-xs-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
 
-$nav-height: 4.35rem;
+$nav-height: 4.9rem;
 $nav-height-md: 6rem;
 $nav-text-shadow: 0 1px 0 rgba(0, 0, 0, .25);
 
