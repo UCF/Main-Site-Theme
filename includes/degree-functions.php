@@ -719,7 +719,7 @@ function get_degree_request_info_modal( $degree ) {
 
 	// Retrieve GUID data that map plan+subplan codes to programs
 	// in the RFI form.  Back out early if something fails.
-	$guid_data = file_get_contents( THEME_JS_URL . '/guid.json' );
+	$guid_data = file_get_contents( THEME_JS_DIR . '/guid.json' );
 	if ( ! $guid_data ) return '';
 
 	$degrees = json_decode( $guid_data, true );

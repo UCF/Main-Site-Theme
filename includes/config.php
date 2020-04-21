@@ -4,9 +4,13 @@
  **/
 
 define( 'THEME_URL', get_stylesheet_directory_uri() );
+define( 'THEME_DIR', get_template_directory() );
 define( 'THEME_STATIC_URL', THEME_URL . '/static' );
+define( 'THEME_STATIC_DIR', THEME_DIR . '/static' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
+define( 'THEME_CSS_DIR', THEME_STATIC_DIR . '/css' );
 define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
+define( 'THEME_JS_DIR', THEME_STATIC_DIR . '/js' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
