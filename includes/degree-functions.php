@@ -638,7 +638,7 @@ function get_degree_program_type( $degree ) {
  *
  * @since 3.3.8
  * @author RJ Bruneel
- * @param object $degree  WP_Post object
+ * @param object $post  WP_Post object
  * @return boolean
  */
 function is_graduate_degree( $post ) {
@@ -657,9 +657,13 @@ function is_graduate_degree( $post ) {
 
 /**
  * Gets the "Apply Now" button markup for degree.
+ *
  * @author Jim Barnes
  * @since 3.0.0
  * @param object $degree | WP_Post object for the degree
+ * @param string $btn_classes | CSS classes to apply to the button
+ * @param string $icon_classes | CSS classes to apply to the inner icon in the button. Leave empty to omit icon
+ * @param string $btn_text | Text to display within the button
  * @return string | The button markup.
  **/
 function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block btn-primary', $icon_classes='fa fa-pencil pr-2', $btn_text='Apply Now' ) {
@@ -700,6 +704,10 @@ function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block bt
  *
  * @author RJ Bruneel
  * @since 3.4.0
+ * @param object $degree | WP_Post object representing a degree
+ * @param string $btn_classes | CSS classes to apply to the button
+ * @param string $icon_classes | CSS classes to apply to the inner icon in the button. Leave empty to omit icon
+ * @param string $btn_text | Text to display within the button
  * @return string | The button markup.
  **/
 function get_degree_request_info_button( $degree, $btn_classes='btn btn-primary', $icon_classes='', $btn_text='Request Information' ) {
@@ -730,6 +738,7 @@ function get_degree_request_info_button( $degree, $btn_classes='btn btn-primary'
  *
  * @author Jo Dickson
  * @since 3.4.0
+ * @param array $params Assoc. array of query params + values to append to the URL string
  * @return mixed URL string, or null if the URL base or form ID aren't set
  */
 function get_degree_request_info_url_graduate( $params=array() ) {
@@ -749,8 +758,10 @@ function get_degree_request_info_url_graduate( $params=array() ) {
 
 /**
  * Gets the "Request Info" modal markup for degrees.
+ *
  * @author RJ Bruneel
  * @since 3.4.0
+ * @param object $degree WP_Post object representing a degree
  * @return string | The modal markup.
  **/
 function get_degree_request_info_modal( $degree ) {
