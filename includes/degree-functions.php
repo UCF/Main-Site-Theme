@@ -9,16 +9,15 @@
   *
   * @since 3.4.0
   * @author RJ Bruneel
-  * @param object $post  WP_Post object
+  * @param object $degree  WP_Post object
   * @return string HTML markup
-  *
   */
- function get_degree_content_classic_layout( $post ) {
-	$raw_postmeta        = get_post_meta( $post->ID );
+ function get_degree_content_classic_layout( $degree ) {
+	$raw_postmeta        = get_post_meta( $degree->ID );
 	$post_meta           = format_raw_postmeta( $raw_postmeta );
-	$program_type        = get_degree_program_type( $post );
-	$colleges_list       = get_colleges_markup( $post->ID );
-	$departments_list    = get_departments_markup( $post->ID );
+	$program_type        = get_degree_program_type( $degree );
+	$colleges_list       = get_colleges_markup( $degree->ID );
+	$departments_list    = get_departments_markup( $degree->ID );
 	$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
 	ob_start();
@@ -48,7 +47,7 @@
 				</div>
 				<div class="hidden-lg-up row mb-3">
 					<div class="col-sm mb-2">
-						<?php echo get_degree_apply_button( $post ); ?>
+						<?php echo get_degree_apply_button( $degree ); ?>
 					</div>
 					<div class="col-sm mb-2">
 						<?php echo get_degree_visit_ucf_button(); ?>
@@ -72,11 +71,11 @@
 					</div>
 				<?php endif; ?>
 				</div>
-				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+				<?php echo main_site_degree_display_subplans( $degree->ID ); ?>
 			</div>
 			<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
 				<div class="hidden-md-down mb-5">
-					<?php echo get_degree_apply_button( $post ); ?>
+					<?php echo get_degree_apply_button( $degree ); ?>
 					<?php echo get_degree_visit_ucf_button(); ?>
 				</div>
 
@@ -109,20 +108,18 @@
  *
  * @since 3.4.0
  * @author RJ Bruneel
- * @param object $post WP_Post object
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
  *
  */
-function get_degree_content_modern_layout( $post ) {
-
-	echo get_degree_info_modern_layout( $post );
-	echo get_degree_description_modern_layout();
-	echo get_degree_application_deadline_modern_layout();
-	echo get_degree_course_overview_modern_layout();
-	echo get_degree_quotes_modern_layout();
-	echo get_degree_skills_career_modern_layout();
-	echo get_degree_admission_requirements_modern_layout();
-
+function get_degree_content_modern_layout( $degree ) {
+	echo get_degree_info_modern_layout( $degree );
+	echo get_degree_description_modern_layout( $degree );
+	echo get_degree_application_deadline_modern_layout( $degree );
+	echo get_degree_course_overview_modern_layout( $degree );
+	echo get_degree_quotes_modern_layout( $degree );
+	echo get_degree_skills_career_modern_layout( $degree );
+	echo get_degree_admission_requirements_modern_layout( $degree );
 }
 
 
@@ -166,13 +163,16 @@ function get_header_content_degree( $markup, $obj ) {
 								<<?php echo $subtitle_elem; ?> class="header-subtitle header-subtitle-degree"><?php echo $subtitle; ?></<?php echo $subtitle_elem; ?>>
 							<?php endif; ?>
 
-							<!-- TODO toggle form w/button click -->
-							<?php if ( $show_degree_request_info_btn ): ?>
-							<button class="header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3">
-								<span class="mr-3 fa fa-info-circle fa-2x" aria-hidden="true"></span>
-								Request Info
-							</button>
-							<?php endif; ?>
+							<?php
+							if ( $show_degree_request_info_btn ) {
+								echo get_degree_request_info_button(
+									$obj,
+									'header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3',
+									'mr-3 fa fa-info-circle fa-2x',
+									'Request Info'
+								);
+							}
+							?>
 						</div>
 					</div>
 				</div>
@@ -196,20 +196,17 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
  *
  * @since 3.4.0
  * @author RJ Bruneel
- * @param object $post WP_Post object
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-
- function get_degree_info_modern_layout( $post ) {
-
-	$program_type        = get_degree_program_type( $post );
-	$raw_postmeta        = get_post_meta( $post->ID );
+function get_degree_info_modern_layout( $degree ) {
+	$program_type        = get_degree_program_type( $degree );
+	$raw_postmeta        = get_post_meta( $degree->ID );
 	$post_meta           = format_raw_postmeta( $raw_postmeta );
-	$colleges_list       = get_colleges_markup( $post->ID );
-	$departments_list    = get_departments_markup( $post->ID );
-	$promo_image         = get_field('promo_image');
-	$promo_image_alt     = get_field('promo_image_alt');
+	$colleges_list       = get_colleges_markup( $degree->ID );
+	$departments_list    = get_departments_markup( $degree->ID );
+	$promo_image         = get_field( 'promo_image', $degree );
+	$promo_image_alt     = get_field( 'promo_image_alt', $degree );
 
 	ob_start();
 	?>
@@ -236,7 +233,7 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
 				</div>
 
 				<div class="col-lg-2 text-center align-self-center">
-					<?php echo get_field('program_length'); ?>
+					<?php echo get_field( 'program_length', $degree ); ?>
 				</div>
 
 				<div class="col-lg-4 bg-faded text-uppercase border-bottom mb-md-3">
@@ -256,23 +253,22 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
 	<?php
 	return ob_get_clean();
 
- }
+}
 
 
-
- /**
+/**
  * Returns HTML for the degree description section.
-  *
-  * @since 3.4.0
-  * @author RJ Bruneel
-  * @return string HTML markup
-  *
-  */
-  function get_degree_description_modern_layout() {
-	$modern_description_heading = get_field( 'modern_description_heading' );
-	$modern_description_copy = get_field( 'modern_description_copy' );
-	$modern_description_image = get_field( 'modern_description_image' );
-	$modern_description_image_alt = get_field( 'modern_description_image_alt' );
+ *
+ * @since 3.4.0
+ * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_description_modern_layout( $degree ) {
+	$modern_description_heading = get_field( 'modern_description_heading', $degree );
+	$modern_description_copy = get_field( 'modern_description_copy', $degree );
+	$modern_description_image = get_field( 'modern_description_image', $degree );
+	$modern_description_image_alt = get_field( 'modern_description_image_alt', $degree );
 
 	if( empty( $modern_description_heading ) && empty( $modern_description_copy ) ) return '';
 
@@ -291,23 +287,29 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
 					<?php echo $modern_description_copy; ?>
 				<?php endif; ?>
 
-				<?php // TODO update href ?>
-				<a class="btn btn-complementary mt-3" href="#">Request Information</a>
+				<?php
+				echo get_degree_request_info_button(
+					$degree,
+					'btn btn-complementary mt-3',
+					'',
+					'Request Information'
+				);
+				?>
 			</div>
 			<div class="col-lg-6">
 				<?php if ( $modern_description_image ) : ?>
-					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" role="img" alt="<?php echo $modern_description_image_alt; ?>">
+					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" alt="<?php echo $modern_description_image_alt; ?>">
 				<?php endif; ?>
 
-				<?php if ( have_rows( 'highlights' ) ) : ?>
+				<?php if ( have_rows( 'highlights', $degree ) ) : ?>
 					<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
-					<?php while( have_rows( 'highlights' ) ): the_row(); ?>
+					<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
 						<div class="row mb-4">
 							<div class="col-3">
-								<img src="<?php the_sub_field('highlight_image'); ?>" class="img-fluid" role="img" alt="">
+								<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
 							</div>
 							<div class="col-9 align-self-center">
-								<?php the_sub_field('highlight_copy'); ?>
+								<?php the_sub_field( 'highlight_copy' ); ?>
 							</div>
 						</div>
 					<?php endwhile; ?>
@@ -318,103 +320,113 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
 	<?php
 
 	return ob_get_clean();
-  }
+}
 
 
+/**
+ * Returns HTML for the application deadline section.
+ *
+ * @since 3.4.0
+ * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_application_deadline_modern_layout( $degree ) {
+	$application_deadline_first = get_field( 'application_deadline_first', $degree );
+	$application_deadline_second = get_field( 'application_deadline_second', $degree );
 
-  /**
-   * Returns HTML for the application deadline section.
-   *
-   * @since 3.4.0
-   * @author RJ Bruneel
-   * @return string HTML markup
-   *
-   */
-   function get_degree_application_deadline_modern_layout() {
-		$application_deadline_first = get_field( 'application_deadline_first' );
-		$application_deadline_second = get_field( 'application_deadline_second' );
+	if( empty( $application_deadline_first ) && empty( $application_deadline_second ) ) return '';
 
-		if( empty( $application_deadline_first ) && empty( $application_deadline_second ) ) return '';
-
-		ob_start();
-		?>
-		<section aria-label="Application Deadline">
-			<div class=" d-block d-lg-none">
-				<div class="bg-primary text-center pt-5">
-					<h2 class="h4 text-uppercase font-condensed my-0">Application Deadline</h2>
-				</div>
-			<?php if( $application_deadline_first ) : ?>
-				<div class="text-uppercase text-center bg-primary py-4">
-					<?php echo $application_deadline_first; ?>
-				</div>
-			<?php endif; ?>
-			<?php if( $application_deadline_second ) : ?>
-				<div class="bg-primary py-1">
-					<hr class="hr-white hr-2 my-0 mx-5 application-deadline-hr">
-				</div>
-				<div class="text-uppercase text-center bg-primary py-4 bg-arrow-down">
-					<div class="pb-5">
-						<?php echo $application_deadline_second; ?>
-					</div>
-				</div>
-			<?php endif; ?>
-				<div class="modern-degree-dark-grey text-white py-4 text-center">
-					<h2 class="h5 text-uppercase font-condensed mt-3">Ready to<br>get started?</h2>
-				</div>
-				<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
-					<a id="CTA" class="btn btn-lg btn-primary rounded" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
+	ob_start();
+	?>
+	<section aria-label="Application Deadline">
+		<div class=" d-block d-lg-none">
+			<div class="bg-primary text-center pt-5">
+				<h2 class="h4 text-uppercase font-condensed my-0">Application Deadline</h2>
+			</div>
+		<?php if( $application_deadline_first ) : ?>
+			<div class="text-uppercase text-center bg-primary py-4">
+				<?php echo $application_deadline_first; ?>
+			</div>
+		<?php endif; ?>
+		<?php if( $application_deadline_second ) : ?>
+			<div class="bg-primary py-1">
+				<hr class="hr-white hr-2 my-0 mx-5 application-deadline-hr">
+			</div>
+			<div class="text-uppercase text-center bg-primary py-4 bg-arrow-down">
+				<div class="pb-5">
+					<?php echo $application_deadline_second; ?>
 				</div>
 			</div>
+		<?php endif; ?>
+			<div class="modern-degree-dark-grey text-white py-4 text-center">
+				<h2 class="h5 text-uppercase font-condensed mt-3">Ready to<br>get started?</h2>
+			</div>
+			<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
+				<?php
+				echo get_degree_apply_button(
+					$degree,
+					'btn btn-lg btn-primary rounded',
+					''
+				);
+				?>
+			</div>
+		</div>
 
-			<div class="container-fluid px-0 d-none d-lg-block">
-				<div class="row no-gutters">
-					<div class="col bg-primary">
-					</div>
-					<div class="col bg-primary">
-						<div class="container bg-primary">
-							<div class="row">
-								<div class="col-auto py-4 bg-primary align-self-center">
-									<h2 class="h5 text-uppercase font-condensed mb-0">Application<br>Deadline</h2>
+		<div class="container-fluid px-0 d-none d-lg-block">
+			<div class="row no-gutters">
+				<div class="col bg-primary">
+				</div>
+				<div class="col bg-primary">
+					<div class="container bg-primary">
+						<div class="row">
+							<div class="col-auto py-4 bg-primary align-self-center">
+								<h2 class="h5 text-uppercase font-condensed mb-0">Application<br>Deadline</h2>
+							</div>
+						<?php if( $application_deadline_first ) : ?>
+							<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
+								<?php echo $application_deadline_first; ?>
+							</div>
+						<?php endif; ?>
+						<?php if( $application_deadline_second ) : ?>
+							<div class="col-auto py-4 bg-primary">
+								<hr class="hr-white hr-vertical hr-2 mx-0">
+							</div>
+							<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
+								<?php echo $application_deadline_second; ?>
+							</div>
+						<?php endif; ?>
+							<div class="col-auto px-0">
+								<div class="triangle"></div>
+							</div>
+							<div class="col-auto py-4 modern-degree-dark-grey text-white">
+								<div class="h-100 d-flex align-items-center">
+									<h2 class="h5 text-uppercase font-condensed mb-0 ml-4">Ready to<br>get started?</h2>
 								</div>
-							<?php if( $application_deadline_first ) : ?>
-								<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
-									<?php echo $application_deadline_first; ?>
-								</div>
-							<?php endif; ?>
-							<?php if( $application_deadline_second ) : ?>
-								<div class="col-auto py-4 bg-primary">
-									<hr class="hr-white hr-vertical hr-2 mx-0">
-								</div>
-								<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
-									<?php echo $application_deadline_second; ?>
-								</div>
-							<?php endif; ?>
-								<div class="col-auto px-0">
-									<div class="triangle"></div>
-								</div>
-								<div class="col-auto py-4 modern-degree-dark-grey text-white">
-									<div class="h-100 d-flex align-items-center">
-										<h2 class="h5 text-uppercase font-condensed mb-0 ml-4">Ready to<br>get started?</h2>
-									</div>
-								</div>
-								<div class="col-auto py-4 text-uppercase modern-degree-dark-grey">
-									<div class="h-100 d-flex align-items-center">
-										<a id="CTA" class="btn btn-lg btn-primary rounded mt-1" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
-									</div>
+							</div>
+							<div class="col-auto py-4 text-uppercase modern-degree-dark-grey">
+								<div class="h-100 d-flex align-items-center">
+									<?php
+									echo get_degree_apply_button(
+										$degree,
+										'btn btn-lg btn-primary rounded',
+										''
+									);
+									?>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col modern-degree-dark-grey">
-					</div>
+				</div>
+				<div class="col modern-degree-dark-grey">
 				</div>
 			</div>
-		</section>
-		<?php
+		</div>
+	</section>
+	<?php
 
-		return ob_get_clean();
-   }
-
+	return ob_get_clean();
+}
 
 
 /**
@@ -422,28 +434,27 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
  *
  * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-function get_degree_course_overview_modern_layout() {
-	$course_overview = get_field( 'course_overview' );
+function get_degree_course_overview_modern_layout( $degree ) {
+	$course_overview = get_field( 'course_overview', $degree );
 
 	if ( empty( $course_overview ) ) return '';
 
 	ob_start();
 
-	if ( have_rows( 'course_overview' ) ) : ?>
+	if ( have_rows( 'course_overview', $degree ) ) : ?>
 		<div class="py-4">
 			<div class="container py-lg-3">
 				<div class="row my-lg-3">
 					<div class="col-12">
 						<h2 class="font-condensed text-uppercase mb-4">Course Overview</h2>
 						<div class="accordion" role="tablist" id="courses">
-							<?php while ( have_rows( 'course_overview' ) ) : the_row(); ?>
+							<?php while ( have_rows( 'course_overview', $degree ) ) : the_row(); ?>
 								<div class="accordion-courses mt-0 pt-0 pt-lg-3">
 									<h3 class="mb-0">
-										<a data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>"
-											aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
+										<a data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>" aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
 											<span class="font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
 												<?php the_sub_field( 'course_title' ); ?>
 											</span>
@@ -466,27 +477,26 @@ function get_degree_course_overview_modern_layout() {
 }
 
 
-
 /**
  * Returns HTML for the quotes section.
  *
  * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-function get_degree_quotes_modern_layout() {
-	$course_overview = get_field( 'course_overview' );
+function get_degree_quotes_modern_layout( $degree ) {
+	$course_overview = get_field( 'course_overview', $degree );
 
 	if ( empty( $course_overview ) ) return '';
 
 	ob_start();
 
-	if ( have_rows( 'degree_quotes' ) ) : ?>
+	if ( have_rows( 'degree_quotes', $degree ) ) : ?>
 		<div class="bg-faded">
 			<div class="container py-lg-4">
 				<div class="row my-lg-3">
-					<?php while ( have_rows( 'degree_quotes' ) ) : the_row(); ?>
+					<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row(); ?>
 						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
 							<div class="col-lg-3">
 								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
@@ -506,27 +516,26 @@ function get_degree_quotes_modern_layout() {
 		</div>
 
 	<?php endif;
-	
+
 	return ob_get_clean();
 }
 
 
-
 /**
-  * Returns HTML for the degree skills and careers section.
-  *
-  * @since 3.4.0
-  * @author RJ Bruneel
-  * @return string HTML markup
-  *
-  */
- function get_degree_skills_career_modern_layout() {
-	$skills_heading = get_field( 'skills_heading' );
-	$skills_content = get_field( 'skills_content' );
-	$careers_heading = get_field( 'careers_heading' );
-	$careers_content = get_field( 'careers_content' );
+ * Returns HTML for the degree skills and careers section.
+ *
+ * @since 3.4.0
+ * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_skills_career_modern_layout( $degree ) {
+	$skills_heading = get_field( 'skills_heading', $degree );
+	$skills_content = get_field( 'skills_content', $degree );
+	$careers_heading = get_field( 'careers_heading', $degree );
+	$careers_content = get_field( 'careers_content', $degree );
 
-	if( empty( $skills_content ) && empty( $careers_content ) ) return '';
+	if ( empty( $skills_content ) && empty( $careers_content ) ) return '';
 
 	ob_start();
 	?>
@@ -562,8 +571,7 @@ function get_degree_quotes_modern_layout() {
 	<?php
 
 	return ob_get_clean();
- }
-
+}
 
 
 /**
@@ -571,12 +579,12 @@ function get_degree_quotes_modern_layout() {
   *
   * @since 3.4.0
   * @author RJ Bruneel
+  * @param object $degree WP_Post object representing a degree
   * @return string HTML markup
-  *
   */
-function get_degree_admission_requirements_modern_layout() {
-	$admission_copy = get_field( 'admission_copy' );
-	$admission_list = get_field( 'admission_list' );
+function get_degree_admission_requirements_modern_layout( $degree ) {
+	$admission_copy = get_field( 'admission_copy', $degree );
+	$admission_list = get_field( 'admission_list', $degree );
 
 	if( empty( $admission_copy ) && empty( $admission_list ) ) return '';
 
@@ -591,10 +599,7 @@ function get_degree_admission_requirements_modern_layout() {
 				<?php if( $admission_copy ) : ?>
 				<div class="col-6">
 					<?php echo $admission_copy; ?>
-					<?php // TODO update link href ?>
-					<a class="btn btn-primary" href="#">
-						Request Information
-					</a>
+					<?php echo get_degree_request_info_button( $degree ); ?>
 				</div>
 				<?php endif; ?>
 				<?php if( $admission_list ) : ?>
@@ -612,6 +617,7 @@ function get_degree_admission_requirements_modern_layout() {
 
 	return ob_get_clean();
 }
+
 
 /**
  * Returns the child program_type assigned to the given degree.
@@ -633,14 +639,41 @@ function get_degree_program_type( $degree ) {
 	return $retval;
 }
 
+
+/**
+ * Returns true|false if program_type is a graduate program.
+ *
+ * @since 3.3.8
+ * @author RJ Bruneel
+ * @param object $post  WP_Post object
+ * @return boolean
+ */
+function is_graduate_degree( $post ) {
+	$is_graduate = false;
+	$terms = wp_get_post_terms( $post->ID, 'program_types' );
+
+	foreach( $terms as $term ) {
+		if( $term->slug === "graduate-program" ) {
+			$is_graduate = true;
+			break;
+		}
+	}
+	return $is_graduate;
+}
+
+
 /**
  * Gets the "Apply Now" button markup for degree.
+ *
  * @author Jim Barnes
  * @since 3.0.0
  * @param object $degree | WP_Post object for the degree
+ * @param string $btn_classes | CSS classes to apply to the button
+ * @param string $icon_classes | CSS classes to apply to the inner icon in the button. Leave empty to omit icon
+ * @param string $btn_text | Text to display within the button
  * @return string | The button markup.
  **/
-function get_degree_apply_button( $degree ) {
+function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block btn-primary', $icon_classes='fa fa-pencil pr-2', $btn_text='Apply Now' ) {
 	$apply_url = '';
 
 	$type = get_degree_program_type( $degree );
@@ -659,14 +692,148 @@ function get_degree_apply_button( $degree ) {
 
 	if ( ! empty( $apply_url ) ):
 ?>
-	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
-		<span class="fa fa-pencil pr-2" aria-hidden="true"></span> Apply Now
+	<a class="<?php echo $btn_classes; ?>" href="<?php echo $apply_url; ?>">
+		<?php if ( $icon_classes ): ?>
+		<span class="fa fa-pencil pr-2" aria-hidden="true"></span>
+		<?php endif; ?>
+
+		<?php echo $btn_text; ?>
 	</a>
 <?php
 	endif;
 
 	return ob_get_clean();
 }
+
+
+/**
+ * Gets the "Request Info" button markup for degrees.
+ *
+ * @author RJ Bruneel
+ * @since 3.4.0
+ * @param object $degree | WP_Post object representing a degree
+ * @param string $btn_classes | CSS classes to apply to the button
+ * @param string $icon_classes | CSS classes to apply to the inner icon in the button. Leave empty to omit icon
+ * @param string $btn_text | Text to display within the button
+ * @return string | The button markup.
+ **/
+function get_degree_request_info_button( $degree, $btn_classes='btn btn-primary', $icon_classes='', $btn_text='Request Information' ) {
+	$modal = get_degree_request_info_modal( $degree );
+
+	ob_start();
+
+	// Don't render button if the corresponding Request Info
+	// modal failed to render correctly:
+	if ( $modal ) :
+?>
+	<button class="<?php echo $btn_classes; ?>" data-toggle="modal" data-target="#requestInfoModal">
+		<?php if ( $icon_classes ): ?>
+		<span class="<?php echo $icon_classes; ?>" aria-hidden="true"></span>
+		<?php endif; ?>
+
+		<?php echo $btn_text; ?>
+	</button>
+<?php
+	endif;
+	return trim( ob_get_clean() );
+}
+
+
+/**
+ * Returns a complete URL for the graduate RFI form, with
+ * optional params.
+ *
+ * @author Jo Dickson
+ * @since 3.4.0
+ * @param array $params Assoc. array of query params + values to append to the URL string
+ * @return mixed URL string, or null if the URL base or form ID aren't set
+ */
+function get_degree_request_info_url_graduate( $params=array() ) {
+	$base = get_theme_mod_or_default( 'degrees_graduate_rfi_url_base' );
+	if ( ! $base ) return null;
+
+	$form_id = get_theme_mod_or_default( 'degrees_graduate_rfi_form_id' );
+	if ( ! $form_id ) return null;
+
+	$params['id'] = $form_id;
+	$separator = ( strpos( $base, '?' ) !== false ) ? '&' : '?';
+
+	$url = $base . $separator . http_build_query( $params );
+	return $url;
+}
+
+
+/**
+ * Gets the "Request Info" modal markup for degrees.
+ *
+ * @author RJ Bruneel
+ * @since 3.4.0
+ * @param object $degree WP_Post object representing a degree
+ * @return string | The modal markup.
+ **/
+function get_degree_request_info_modal( $degree ) {
+	$markup = '';
+
+	// If this isn't a graduate degree, return early.
+	//
+	// If/when we start supporting undergraduate RFIs, this
+	// (and the rest of this function) will have to be adjusted:
+	if ( ! is_graduate_degree( $degree ) ) return $markup;
+
+	// Retrieve GUID data that map plan+subplan codes to programs
+	// in the RFI form.  Back out early if something fails.
+	$guid_data = file_get_contents( THEME_JS_DIR . '/guid.json' );
+	if ( ! $guid_data ) return '';
+
+	$degrees = json_decode( $guid_data, true );
+	$plan_sub_plan = get_field( 'degree_plan_code', $degree ) . get_field( 'degree_subplan_code', $degree );
+	$form_div_id  = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
+	$rfi_form_src = get_degree_request_info_url_graduate( array(
+		'sys:field:pros_program1' => $degrees[$plan_sub_plan],
+		'output' => 'embed',
+		'div' => $form_div_id
+	) );
+
+	if ( $rfi_form_src ):
+		ob_start();
+?>
+		<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog" aria-labelledby="requestInfoModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header px-4 pt-4">
+						<h2 class="h5 modal-title d-flex align-items-center" id="requestInfoModalLabel">
+							<span class="fa fa-info-circle fa-2x mr-3" aria-hidden="true"></span>
+							Request Information
+						</h2>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body mb-2 px-4 pb-4">
+						<p class="mb-4">
+							Enter your information below to receive more information about the <strong><?php echo wptexturize( $degree->post_title ); ?></strong> program offered at UCF.
+						</p>
+						<div id="<?php echo $form_div_id; ?>">Loading...</div>
+						<script>
+						/*<![CDATA[*/
+						var script = document.createElement('script');
+						script.async = 1;
+						script.src = '<?php echo $rfi_form_src; ?>' + ((location.search.length > 1) ? '&' + location.search.substring(1) : '');
+						var s = document.getElementsByTagName('script')[0];
+						s.parentNode.insertBefore(script, s);
+						/*]]>*/
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+<?php
+		$markup = trim( ob_get_clean() );
+	endif;
+
+	return $markup;
+}
+
 
 function get_degree_visit_ucf_button() {
 	$url = get_theme_mod_or_default( 'degrees_visit_ucf_url' );
@@ -682,6 +849,7 @@ function get_degree_visit_ucf_button() {
 	endif;
 	return ob_get_clean();
 }
+
 
 function get_colleges_markup( $post_id ) {
 	$colleges = wp_get_post_terms( $post_id, 'colleges' );
@@ -705,6 +873,7 @@ function get_colleges_markup( $post_id ) {
 	return ob_get_clean();
 }
 
+
 function get_departments_markup( $post_id ) {
 	$departments = wp_get_post_terms( $post_id, 'departments' );
 
@@ -727,6 +896,7 @@ function get_departments_markup( $post_id ) {
 	return ob_get_clean();
 }
 
+
 function get_degree_tuition_markup( $post_meta, $type ) {
 	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
 	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
@@ -742,6 +912,7 @@ function get_degree_tuition_markup( $post_meta, $type ) {
 
 	return '';
 }
+
 
 function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 	$value_message = get_theme_mod( 'tuition_value_message', null );
@@ -897,6 +1068,7 @@ function main_site_degree_search_display( $output, $args ) {
 
 add_filter( 'ucf_degree_search_input', 'main_site_degree_search_display', 11, 2 );
 
+
 function main_site_degree_search_suggestion() {
 	ob_start();
 ?>
@@ -908,6 +1080,7 @@ function main_site_degree_search_suggestion() {
 }
 
 add_filter( 'ucf_degree_search_suggestion', 'main_site_degree_search_suggestion', 11, 0 );
+
 
 // College tax functions
 function map_degree_types( $degree_types ) {
@@ -970,6 +1143,7 @@ function get_api_catalog_description( $program ) {
 	return $retval;
 }
 
+
 /**
  * Helper function for getting remote json
  * @author Jim Barnes
@@ -991,6 +1165,7 @@ function main_site_get_remote_response_json( $url, $default=null ) {
 
 	return $retval;
 }
+
 
 /**
  * Apply main site-specific meta data to degrees during the degree import
@@ -1055,6 +1230,7 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 
 add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 10, 2 );
 
+
 /**
  * Adds career paths from the career data within the program
  * @author Jim Barnes
@@ -1072,6 +1248,7 @@ function mainsite_degree_get_post_terms( $terms, $program ) {
 }
 
 add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2 );
+
 
 /**
  * Angular Degree Template Overrides
@@ -1099,6 +1276,7 @@ function main_site_degree_search_program_types() {
 
 add_filter( 'udsa_program_types_template', 'main_site_degree_search_program_types', 10, 0 );
 
+
 function main_site_degree_search_colleges() {
 	ob_start();
 ?>
@@ -1116,6 +1294,7 @@ function main_site_degree_search_colleges() {
 
 add_filter( 'udsa_colleges_template', 'main_site_degree_search_colleges', 10, 0 );
 
+
 function main_site_degree_search_result_count() {
 	ob_start();
 ?>
@@ -1127,6 +1306,7 @@ function main_site_degree_search_result_count() {
 }
 
 add_filter( 'udsa_result_count_template', 'main_site_degree_search_result_count', 10, 0 );
+
 
 function main_site_degree_display_subplans( $post_id ) {
 	$children = get_children( array(
@@ -1196,6 +1376,7 @@ function main_site_format_degree_data( $post_meta ) {
 	return $post_meta;
 }
 
+
 /**
  * Formats the outcome data
  * @author Jim Barnes
@@ -1231,6 +1412,7 @@ function main_site_outcome_data( $post_meta ) {
 
 	return ob_get_clean();
 }
+
 
 /**
  * Formats the projection data
@@ -1268,6 +1450,7 @@ function main_site_projection_data( $post_meta ) {
 	return ob_get_clean();
 }
 
+
 /**
  * Returns the news shortcode for degrees
  * @author Jim Barnes
@@ -1292,6 +1475,7 @@ function main_site_degree_news_stories( $post_meta ) {
 
 	return do_shortcode( ob_get_clean() );
 }
+
 
 /**
  * Returns a list of careers for a degree
@@ -1333,3 +1517,4 @@ function main_site_degree_careers( $post_id, $post_meta ) {
 
 	return ob_get_clean();
 }
+
