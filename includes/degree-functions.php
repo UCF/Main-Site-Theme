@@ -117,7 +117,7 @@ function get_degree_content_modern_layout( $degree ) {
 	echo get_degree_description_modern_layout( $degree );
 	echo get_degree_application_deadline_modern_layout( $degree );
 	echo get_degree_course_overview_modern_layout( $degree );
-	echo get_degree_quotes_modern_layout();
+	echo get_degree_quotes_modern_layout( $degree );
 	echo get_degree_skills_career_modern_layout( $degree );
 	echo get_degree_admission_requirements_modern_layout( $degree );
 }
@@ -475,21 +475,21 @@ function get_degree_course_overview_modern_layout( $degree ) {
  *
  * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-function get_degree_quotes_modern_layout() {
-	$course_overview = get_field( 'course_overview' );
+function get_degree_quotes_modern_layout( $degree ) {
+	$course_overview = get_field( 'course_overview', $degree );
 
 	if ( empty( $course_overview ) ) return '';
 
 	ob_start();
 
-	if ( have_rows( 'degree_quotes' ) ) : ?>
+	if ( have_rows( 'degree_quotes', $degree ) ) : ?>
 		<div class="bg-faded">
 			<div class="container py-lg-4">
 				<div class="row my-lg-3">
-					<?php while ( have_rows( 'degree_quotes' ) ) : the_row(); ?>
+					<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row(); ?>
 						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
 							<div class="col-lg-3">
 								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
