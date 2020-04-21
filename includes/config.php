@@ -12,6 +12,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
 	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
+	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
+	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
@@ -135,6 +137,40 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Visit UCF URL',
 			'description' =>'URL for the campus tour application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_graduate_rfi_url_base',
+		array(
+			'default' => get_theme_mod_default( 'degrees_graduate_rfi_url_base' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_graduate_rfi_url_base',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Degree RFI URL base',
+			'description' => 'Base URL for the request-for-information form for graduate degrees.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_graduate_rfi_form_id',
+		array(
+			'default' => get_theme_mod_default( 'degrees_graduate_rfi_form_id' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_graduate_rfi_form_id',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Degree RFI Form ID',
+			'description' => 'ID of the request-for-information form for graduate degrees.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
 	);

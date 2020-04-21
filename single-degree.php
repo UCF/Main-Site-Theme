@@ -25,10 +25,4 @@ if ( isset( $post_meta['degree_full_width_content_bottom'] ) && ! empty( $post_m
 
 <?php echo get_colleges_grid( $college ); ?>
 
-<?php
-	if( $is_graduate_degree ) {
-		echo get_degree_request_info_ucf_modal();
-	}
-?>
-
 <?php get_footer(); ?>
