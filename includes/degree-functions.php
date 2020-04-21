@@ -119,6 +119,7 @@ function get_degree_content_modern_layout( $post ) {
 	echo get_degree_description_modern_layout();
 	echo get_degree_application_deadline_modern_layout();
 	echo get_degree_course_overview_modern_layout();
+	echo get_degree_quotes_modern_layout();
 	echo get_degree_skills_career_modern_layout();
 	echo get_degree_admission_requirements_modern_layout();
 
@@ -424,8 +425,7 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
  * @return string HTML markup
  *
  */
-function get_degree_course_overview_modern_layout()
-{
+function get_degree_course_overview_modern_layout() {
 	$course_overview = get_field( 'course_overview' );
 
 	if ( empty( $course_overview ) ) return '';
@@ -433,7 +433,7 @@ function get_degree_course_overview_modern_layout()
 	ob_start();
 
 	if ( have_rows( 'course_overview' ) ) : ?>
-		<div class="bg-faded py-5">
+		<div class="py-4">
 			<div class="container py-lg-3">
 				<div class="row my-lg-3">
 					<div class="col-12">
@@ -462,6 +462,51 @@ function get_degree_course_overview_modern_layout()
 		</div>
 	<?php endif;
 
+	return ob_get_clean();
+}
+
+
+
+/**
+ * Returns HTML for the quotes section.
+ *
+ * @since 3.4.0
+ * @author RJ Bruneel
+ * @return string HTML markup
+ *
+ */
+function get_degree_quotes_modern_layout() {
+	$course_overview = get_field( 'course_overview' );
+
+	if ( empty( $course_overview ) ) return '';
+
+	ob_start();
+
+	if ( have_rows( 'degree_quotes' ) ) : ?>
+		<div class="bg-faded">
+			<div class="container py-lg-4">
+				<div class="row my-lg-3">
+					<?php while ( have_rows( 'degree_quotes' ) ) : the_row(); ?>
+						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
+							<div class="col-lg-3">
+								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
+									alt="<?php the_sub_field( 'degree_quote_image_alt' ); ?>">
+							</div>
+						<?php endif; ?>
+
+						<div class="col-lg-9">
+							<blockquote class="blockquote blockquote-quotation">
+								<p class="mb-0"><?php the_sub_field( 'degree_quote' ); ?></p>
+								<footer class="blockquote-footer"><?php the_sub_field( 'degree_quote_footer' ); ?></footer>
+							</blockquote>
+						</div>
+					<?php endwhile; ?>
+				</div>
+			</div>
+		</div>
+
+	<?php endif;
+	
 	return ob_get_clean();
 }
 

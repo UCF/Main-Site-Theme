@@ -1589,7 +1589,7 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5e99f84712a14",
+                "key": "field_5e9dfbc04b1b0",
                 "label": "Course Overview",
                 "name": "",
                 "type": "tab",
@@ -1609,7 +1609,7 @@
                 "label": "Course Overview",
                 "name": "course_overview",
                 "type": "repeater",
-                "instructions": "Enter content to be added to the Course Overview Section",
+                "instructions": "Enter content to be added to the Course Overview Section.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1660,6 +1660,124 @@
                         "maxlength": "",
                         "rows": "",
                         "new_lines": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5e99f84712a14",
+                "label": "Degree Quotes",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5e9dfbdf4b1b1",
+                "label": "Degree Quotes",
+                "name": "degree_quotes",
+                "type": "repeater",
+                "instructions": "Add quotes to be displayed on the degree page.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5e9dfc2e4b1b3",
+                        "label": "Image",
+                        "name": "degree_quote_image",
+                        "type": "image",
+                        "instructions": "Optional image of the person quoted.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5e9f0ddea2389",
+                        "label": "Image Alt Text",
+                        "name": "degree_quote_image_alt",
+                        "type": "text",
+                        "instructions": "Enter text to be used for the image alt attribute.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5e9dfc184b1b2",
+                        "label": "Quote",
+                        "name": "degree_quote",
+                        "type": "text",
+                        "instructions": "Quote to be displayed",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5e9dfd994b1b4",
+                        "label": "Footer",
+                        "name": "degree_quote_footer",
+                        "type": "text",
+                        "instructions": "The footer should contain the name, title (with cite tag) and company of the person quoted.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "[Name], <cite title=\"[Title]\">[Title]<\/cite>, [Company]",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
                     }
                 ]
             },
