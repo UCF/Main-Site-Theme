@@ -423,19 +423,22 @@ function get_degree_quotes_modern_layout() {
 		<div class="bg-faded">
 			<div class="container py-lg-4">
 				<div class="row my-lg-3">
-						<?php while ( have_rows( 'degree_quotes' ) ) : the_row(); ?>
-							<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
-								<div class="col-lg-3">
-									<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid">
-								</div>
-							<?php endif; ?>
-							<div class="col-lg-9">
-								<blockquote class="blockquote blockquote-quotation">
-									<p class="mb-0"><?php the_sub_field( 'degree_quote' ); ?></p>
-									<footer class="blockquote-footer"><?php the_sub_field( 'degree_quote_footer' ); ?></footer>
-								</blockquote>
+					<?php while ( have_rows( 'degree_quotes' ) ) : the_row(); ?>
+						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
+							<div class="col-lg-3">
+								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
+									alt="<?php the_sub_field( 'degree_quote_image_alt' ); ?>">
 							</div>
-						<?php endwhile; ?>
+						<?php endif; ?>
+
+						<div class="col-lg-9">
+							<blockquote class="blockquote blockquote-quotation">
+								<p class="mb-0"><?php the_sub_field( 'degree_quote' ); ?></p>
+								<footer class="blockquote-footer"><?php the_sub_field( 'degree_quote_footer' ); ?></footer>
+							</blockquote>
+						</div>
+					<?php endwhile; ?>
+				</div>
 			</div>
 		</div>
 

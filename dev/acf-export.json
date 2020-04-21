@@ -1723,6 +1723,25 @@
                         "mime_types": ""
                     },
                     {
+                        "key": "field_5e9f0ddea2389",
+                        "label": "Image Alt Text",
+                        "name": "degree_quote_image_alt",
+                        "type": "text",
+                        "instructions": "Enter text to be used for the image alt attribute.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
                         "key": "field_5e9dfc184b1b2",
                         "label": "Quote",
                         "name": "degree_quote",
