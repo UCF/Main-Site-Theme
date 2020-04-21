@@ -370,7 +370,7 @@ function get_degree_course_overview_modern_layout() {
 	ob_start();
 
 	if ( have_rows( 'course_overview' ) ) : ?>
-		<div class="bg-faded py-5">
+		<div class="py-4">
 			<div class="container py-lg-3">
 				<div class="row my-lg-3">
 					<div class="col-12">
@@ -420,8 +420,8 @@ function get_degree_quotes_modern_layout() {
 	ob_start();
 
 	if ( have_rows( 'degree_quotes' ) ) : ?>
-		<div class="bg-faded py-5">
-			<div class="container py-lg-3">
+		<div class="bg-faded">
+			<div class="container py-lg-4">
 				<div class="row my-lg-3">
 						<?php while ( have_rows( 'degree_quotes' ) ) : the_row(); ?>
 							<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>

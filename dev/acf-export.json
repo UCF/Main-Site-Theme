@@ -1609,7 +1609,7 @@
                 "label": "Course Overview",
                 "name": "course_overview",
                 "type": "repeater",
-                "instructions": "Enter content to be added to the Course Overview Section",
+                "instructions": "Enter content to be added to the Course Overview Section.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
