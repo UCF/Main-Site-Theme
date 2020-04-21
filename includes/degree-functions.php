@@ -365,6 +365,7 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 			<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
 				<?php
 				echo get_degree_apply_button(
+					$degree,
 					'btn btn-lg btn-primary rounded',
 					''
 				);
@@ -405,7 +406,13 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 							</div>
 							<div class="col-auto py-4 text-uppercase modern-degree-dark-grey">
 								<div class="h-100 d-flex align-items-center">
-									<a id="CTA" class="btn btn-lg btn-primary rounded mt-1" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
+									<?php
+									echo get_degree_apply_button(
+										$degree,
+										'btn btn-lg btn-primary rounded',
+										''
+									);
+									?>
 								</div>
 							</div>
 						</div>
