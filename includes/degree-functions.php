@@ -120,6 +120,7 @@ function get_degree_content_modern_layout( $degree ) {
 	echo get_degree_quotes_modern_layout( $degree );
 	echo get_degree_skills_career_modern_layout( $degree );
 	echo get_degree_admission_requirements_modern_layout( $degree );
+	echo get_degree_news_spotlight_modern_layout( $degree );
 }
 
 
@@ -610,6 +611,63 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 				</div>
 				<?php endif; ?>
 			</div>
+		</div>
+	</div>
+
+	<?php
+
+	return ob_get_clean();
+}
+
+
+/**
+  * Returns HTML for the news and spotlight section.
+  *
+  * @since 3.4.0
+  * @author RJ Bruneel
+  * @param object $degree WP_Post object representing a degree
+  * @return string HTML markup
+  */
+function get_degree_news_spotlight_modern_layout( $degree ) {
+	$degree_news_shortcode = get_field( 'degree_news_shortcode', $degree );
+	$degree_spotlight = get_field( 'degree_spotlight', $degree );
+
+	if( empty( $degree_news_shortcode ) && empty( $degree_spotlight ) ) return '';
+
+	ob_start();
+	?>
+
+	<div class="container py-lg-5">
+		<div class="row justify-content-between align-items-end">
+			<div class="col-auto">
+				<h2 class="h1 mb-0">In The News</h2>
+			</div>
+			<div class=" col-auto">
+				<p class="mb-0">
+					<a class="h6 text-uppercase mb-0 text-secondary" href="https://www.ucf.edu/news/">
+						Check out more stories
+						<span class="fa fa-external-link text-primary" aria-hidden="true"></span>
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<hr class="mt-2">
+
+		<div class="row my-lg-3">
+
+			<?php if( $degree_news_shortcode ) : ?>
+				<div class="col-md-8">
+					<?php echo do_shortcode( $degree_news_shortcode ); ?>
+				</div>
+			<?php endif; ?>
+
+			<?php if( $degree_spotlight ) : ?>
+				<div class="col-md-4">
+					<?php echo do_shortcode( "[ucf-spotlight slug=" . $degree_spotlight->post_name . "]" ); ?>
+				</div>
+			<?php endif; ?>
+
 		</div>
 	</div>
 
