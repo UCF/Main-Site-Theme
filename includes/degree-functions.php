@@ -362,8 +362,12 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 				<h2 class="h5 text-uppercase font-condensed mt-3">Ready to<br>get started?</h2>
 			</div>
 			<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
-				<!-- TODO update link action? -->
-				<a id="CTA" class="btn btn-lg btn-primary rounded" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
+				<?php
+				echo get_degree_apply_button(
+					'btn btn-lg btn-primary rounded',
+					''
+				);
+				?>
 			</div>
 		</div>
 
@@ -613,7 +617,7 @@ function is_graduate_degree( $post ) {
  * @param object $degree | WP_Post object for the degree
  * @return string | The button markup.
  **/
-function get_degree_apply_button( $degree ) {
+function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block btn-primary', $icon_classes='fa fa-pencil pr-2', $btn_text='Apply Now' ) {
 	$apply_url = '';
 
 	$type = get_degree_program_type( $degree );
@@ -632,8 +636,12 @@ function get_degree_apply_button( $degree ) {
 
 	if ( ! empty( $apply_url ) ):
 ?>
-	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $apply_url; ?>">
-		<span class="fa fa-pencil pr-2" aria-hidden="true"></span> Apply Now
+	<a class="<?php echo $btn_classes; ?>" href="<?php echo $apply_url; ?>">
+		<?php if ( $icon_classes ): ?>
+		<span class="fa fa-pencil pr-2" aria-hidden="true"></span>
+		<?php endif; ?>
+
+		<?php echo $btn_text; ?>
 	</a>
 <?php
 	endif;
