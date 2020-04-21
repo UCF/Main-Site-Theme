@@ -9,16 +9,15 @@
   *
   * @since 3.4.0
   * @author RJ Bruneel
-  * @param object $post  WP_Post object
+  * @param object $degree  WP_Post object
   * @return string HTML markup
-  *
   */
- function get_degree_content_classic_layout( $post ) {
-	$raw_postmeta        = get_post_meta( $post->ID );
+ function get_degree_content_classic_layout( $degree ) {
+	$raw_postmeta        = get_post_meta( $degree->ID );
 	$post_meta           = format_raw_postmeta( $raw_postmeta );
-	$program_type        = get_degree_program_type( $post );
-	$colleges_list       = get_colleges_markup( $post->ID );
-	$departments_list    = get_departments_markup( $post->ID );
+	$program_type        = get_degree_program_type( $degree );
+	$colleges_list       = get_colleges_markup( $degree->ID );
+	$departments_list    = get_departments_markup( $degree->ID );
 	$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
 	ob_start();
@@ -48,7 +47,7 @@
 				</div>
 				<div class="hidden-lg-up row mb-3">
 					<div class="col-sm mb-2">
-						<?php echo get_degree_apply_button( $post ); ?>
+						<?php echo get_degree_apply_button( $degree ); ?>
 					</div>
 					<div class="col-sm mb-2">
 						<?php echo get_degree_visit_ucf_button(); ?>
@@ -72,11 +71,11 @@
 					</div>
 				<?php endif; ?>
 				</div>
-				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+				<?php echo main_site_degree_display_subplans( $degree->ID ); ?>
 			</div>
 			<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
 				<div class="hidden-md-down mb-5">
-					<?php echo get_degree_apply_button( $post ); ?>
+					<?php echo get_degree_apply_button( $degree ); ?>
 					<?php echo get_degree_visit_ucf_button(); ?>
 				</div>
 
@@ -109,17 +108,17 @@
  *
  * @since 3.4.0
  * @author RJ Bruneel
- * @param object $post WP_Post object
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
  *
  */
-function get_degree_content_modern_layout( $post ) {
-	echo get_degree_info_modern_layout( $post );
-	echo get_degree_description_modern_layout();
-	echo get_degree_application_deadline_modern_layout();
-	echo get_degree_course_overview_modern_layout();
-	echo get_degree_skills_career_modern_layout();
-	echo get_degree_admission_requirements_modern_layout();
+function get_degree_content_modern_layout( $degree ) {
+	echo get_degree_info_modern_layout( $degree );
+	echo get_degree_description_modern_layout( $degree );
+	echo get_degree_application_deadline_modern_layout( $degree );
+	echo get_degree_course_overview_modern_layout( $degree );
+	echo get_degree_skills_career_modern_layout( $degree );
+	echo get_degree_admission_requirements_modern_layout( $degree );
 }
 
 
@@ -196,20 +195,17 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
  *
  * @since 3.4.0
  * @author RJ Bruneel
- * @param object $post WP_Post object
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-
-function get_degree_info_modern_layout( $post ) {
-
-	$program_type        = get_degree_program_type( $post );
-	$raw_postmeta        = get_post_meta( $post->ID );
+function get_degree_info_modern_layout( $degree ) {
+	$program_type        = get_degree_program_type( $degree );
+	$raw_postmeta        = get_post_meta( $degree->ID );
 	$post_meta           = format_raw_postmeta( $raw_postmeta );
-	$colleges_list       = get_colleges_markup( $post->ID );
-	$departments_list    = get_departments_markup( $post->ID );
-	$promo_image         = get_field('promo_image');
-	$promo_image_alt     = get_field('promo_image_alt');
+	$colleges_list       = get_colleges_markup( $degree->ID );
+	$departments_list    = get_departments_markup( $degree->ID );
+	$promo_image         = get_field( 'promo_image', $degree );
+	$promo_image_alt     = get_field( 'promo_image_alt', $degree );
 
 	ob_start();
 	?>
@@ -236,7 +232,7 @@ function get_degree_info_modern_layout( $post ) {
 				</div>
 
 				<div class="col-lg-2 text-center align-self-center">
-					<?php echo get_field('program_length'); ?>
+					<?php echo get_field( 'program_length', $degree ); ?>
 				</div>
 
 				<div class="col-lg-4 bg-faded text-uppercase border-bottom mb-md-3">
@@ -264,16 +260,14 @@ function get_degree_info_modern_layout( $post ) {
  *
  * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-function get_degree_description_modern_layout() {
-	global $post;
-
-	$modern_description_heading = get_field( 'modern_description_heading' );
-	$modern_description_copy = get_field( 'modern_description_copy' );
-	$modern_description_image = get_field( 'modern_description_image' );
-	$modern_description_image_alt = get_field( 'modern_description_image_alt' );
+function get_degree_description_modern_layout( $degree ) {
+	$modern_description_heading = get_field( 'modern_description_heading', $degree );
+	$modern_description_copy = get_field( 'modern_description_copy', $degree );
+	$modern_description_image = get_field( 'modern_description_image', $degree );
+	$modern_description_image_alt = get_field( 'modern_description_image_alt', $degree );
 
 	if( empty( $modern_description_heading ) && empty( $modern_description_copy ) ) return '';
 
@@ -294,7 +288,7 @@ function get_degree_description_modern_layout() {
 
 				<?php
 				echo get_degree_request_info_button(
-					$post,
+					$degree,
 					'btn btn-complementary mt-3',
 					'',
 					'Request Information'
@@ -303,18 +297,18 @@ function get_degree_description_modern_layout() {
 			</div>
 			<div class="col-lg-6">
 				<?php if ( $modern_description_image ) : ?>
-					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" role="img" alt="<?php echo $modern_description_image_alt; ?>">
+					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" alt="<?php echo $modern_description_image_alt; ?>">
 				<?php endif; ?>
 
-				<?php if ( have_rows( 'highlights' ) ) : ?>
+				<?php if ( have_rows( 'highlights', $degree ) ) : ?>
 					<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
-					<?php while( have_rows( 'highlights' ) ): the_row(); ?>
+					<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
 						<div class="row mb-4">
 							<div class="col-3">
-								<img src="<?php the_sub_field('highlight_image'); ?>" class="img-fluid" role="img" alt="">
+								<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
 							</div>
 							<div class="col-9 align-self-center">
-								<?php the_sub_field('highlight_copy'); ?>
+								<?php the_sub_field( 'highlight_copy' ); ?>
 							</div>
 						</div>
 					<?php endwhile; ?>
@@ -333,12 +327,12 @@ function get_degree_description_modern_layout() {
  *
  * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-function get_degree_application_deadline_modern_layout() {
-	$application_deadline_first = get_field( 'application_deadline_first' );
-	$application_deadline_second = get_field( 'application_deadline_second' );
+function get_degree_application_deadline_modern_layout( $degree ) {
+	$application_deadline_first = get_field( 'application_deadline_first', $degree );
+	$application_deadline_second = get_field( 'application_deadline_second', $degree );
 
 	if( empty( $application_deadline_first ) && empty( $application_deadline_second ) ) return '';
 
@@ -368,6 +362,7 @@ function get_degree_application_deadline_modern_layout() {
 				<h2 class="h5 text-uppercase font-condensed mt-3">Ready to<br>get started?</h2>
 			</div>
 			<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
+				<!-- TODO update link action? -->
 				<a id="CTA" class="btn btn-lg btn-primary rounded" rel="noopener noreferrer" data-toggle="modal" data-target="#formModal">Apply Now</a>
 			</div>
 		</div>
@@ -427,28 +422,27 @@ function get_degree_application_deadline_modern_layout() {
  *
  * @since 3.4.0
  * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
- *
  */
-function get_degree_course_overview_modern_layout() {
-	$course_overview = get_field( 'course_overview' );
+function get_degree_course_overview_modern_layout( $degree ) {
+	$course_overview = get_field( 'course_overview', $degree );
 
 	if ( empty( $course_overview ) ) return '';
 
 	ob_start();
 
-	if ( have_rows( 'course_overview' ) ) : ?>
+	if ( have_rows( 'course_overview', $degree ) ) : ?>
 		<div class="bg-faded py-5">
 			<div class="container py-lg-3">
 				<div class="row my-lg-3">
 					<div class="col-12">
 						<h2 class="font-condensed text-uppercase mb-4">Course Overview</h2>
 						<div class="accordion" role="tablist" id="courses">
-							<?php while ( have_rows( 'course_overview' ) ) : the_row(); ?>
+							<?php while ( have_rows( 'course_overview', $degree ) ) : the_row(); ?>
 								<div class="accordion-courses mt-0 pt-0 pt-lg-3">
 									<h3 class="mb-0">
-										<a data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>"
-											aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
+										<a data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>" aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
 											<span class="font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
 												<?php the_sub_field( 'course_title' ); ?>
 											</span>
@@ -472,18 +466,18 @@ function get_degree_course_overview_modern_layout() {
 
 
 /**
-  * Returns HTML for the degree skills and careers section.
-  *
-  * @since 3.4.0
-  * @author RJ Bruneel
-  * @return string HTML markup
-  *
-  */
-function get_degree_skills_career_modern_layout() {
-	$skills_heading = get_field( 'skills_heading' );
-	$skills_content = get_field( 'skills_content' );
-	$careers_heading = get_field( 'careers_heading' );
-	$careers_content = get_field( 'careers_content' );
+ * Returns HTML for the degree skills and careers section.
+ *
+ * @since 3.4.0
+ * @author RJ Bruneel
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_skills_career_modern_layout( $degree ) {
+	$skills_heading = get_field( 'skills_heading', $degree );
+	$skills_content = get_field( 'skills_content', $degree );
+	$careers_heading = get_field( 'careers_heading', $degree );
+	$careers_content = get_field( 'careers_content', $degree );
 
 	if( empty( $skills_content ) && empty( $careers_content ) ) return '';
 
@@ -529,14 +523,12 @@ function get_degree_skills_career_modern_layout() {
   *
   * @since 3.4.0
   * @author RJ Bruneel
+  * @param object $degree WP_Post object representing a degree
   * @return string HTML markup
-  *
   */
-function get_degree_admission_requirements_modern_layout() {
-	global $post;
-
-	$admission_copy = get_field( 'admission_copy' );
-	$admission_list = get_field( 'admission_list' );
+function get_degree_admission_requirements_modern_layout( $degree ) {
+	$admission_copy = get_field( 'admission_copy', $degree );
+	$admission_list = get_field( 'admission_list', $degree );
 
 	if( empty( $admission_copy ) && empty( $admission_list ) ) return '';
 
@@ -551,7 +543,7 @@ function get_degree_admission_requirements_modern_layout() {
 				<?php if( $admission_copy ) : ?>
 				<div class="col-6">
 					<?php echo $admission_copy; ?>
-					<?php echo get_degree_request_info_button( $post ); ?>
+					<?php echo get_degree_request_info_button( $degree ); ?>
 				</div>
 				<?php endif; ?>
 				<?php if( $admission_list ) : ?>
