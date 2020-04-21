@@ -166,6 +166,7 @@ function get_header_content_degree( $markup, $obj ) {
 							<?php
 							if ( $show_degree_request_info_btn ) {
 								echo get_degree_request_info_button(
+									$obj,
 									'header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3',
 									'mr-3 fa fa-info-circle fa-2x',
 									'Request Info'
@@ -260,13 +261,15 @@ function get_degree_info_modern_layout( $post ) {
 
 /**
  * Returns HTML for the degree description section.
-  *
-  * @since 3.4.0
-  * @author RJ Bruneel
-  * @return string HTML markup
-  *
-  */
-  function get_degree_description_modern_layout() {
+ *
+ * @since 3.4.0
+ * @author RJ Bruneel
+ * @return string HTML markup
+ *
+ */
+function get_degree_description_modern_layout() {
+	global $post;
+
 	$modern_description_heading = get_field( 'modern_description_heading' );
 	$modern_description_copy = get_field( 'modern_description_copy' );
 	$modern_description_image = get_field( 'modern_description_image' );
@@ -289,7 +292,14 @@ function get_degree_info_modern_layout( $post ) {
 					<?php echo $modern_description_copy; ?>
 				<?php endif; ?>
 
-				<?php echo get_degree_request_info_button( 'btn btn-complementary mt-3', '', 'Request Information' ); ?>
+				<?php
+				echo get_degree_request_info_button(
+					$post,
+					'btn btn-complementary mt-3',
+					'',
+					'Request Information'
+				);
+				?>
 			</div>
 			<div class="col-lg-6">
 				<?php if ( $modern_description_image ) : ?>
@@ -523,6 +533,8 @@ function get_degree_skills_career_modern_layout() {
   *
   */
 function get_degree_admission_requirements_modern_layout() {
+	global $post;
+
 	$admission_copy = get_field( 'admission_copy' );
 	$admission_list = get_field( 'admission_list' );
 
@@ -539,7 +551,7 @@ function get_degree_admission_requirements_modern_layout() {
 				<?php if( $admission_copy ) : ?>
 				<div class="col-6">
 					<?php echo $admission_copy; ?>
-					<?php echo get_degree_request_info_button(); ?>
+					<?php echo get_degree_request_info_button( $post ); ?>
 				</div>
 				<?php endif; ?>
 				<?php if( $admission_list ) : ?>
@@ -645,9 +657,14 @@ function get_degree_apply_button( $degree ) {
  * @since 3.4.0
  * @return string | The button markup.
  **/
-function get_degree_request_info_button( $btn_classes='btn btn-primary', $icon_classes='', $btn_text='Request Information' ) {
+function get_degree_request_info_button( $degree, $btn_classes='btn btn-primary', $icon_classes='', $btn_text='Request Information' ) {
+	$modal = get_degree_request_info_modal( $degree );
+
 	ob_start();
-	if ( get_degree_request_info_url_graduate() ) :
+
+	// Don't render button if the corresponding Request Info
+	// modal failed to render correctly:
+	if ( $modal ) :
 ?>
 	<button class="<?php echo $btn_classes; ?>" data-toggle="modal" data-target="#requestInfoModal">
 		<?php if ( $icon_classes ): ?>
@@ -658,7 +675,7 @@ function get_degree_request_info_button( $btn_classes='btn btn-primary', $icon_c
 	</button>
 <?php
 	endif;
-	return ob_get_clean();
+	return trim( ob_get_clean() );
 }
 
 
