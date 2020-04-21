@@ -14,95 +14,94 @@
   *
   */
  function get_degree_content_classic_layout( $post ) {
-		$raw_postmeta        = get_post_meta( $post->ID );
-		$post_meta           = format_raw_postmeta( $raw_postmeta );
-		$program_type        = get_degree_program_type( $post );
-		$colleges_list       = get_colleges_markup( $post->ID );
-		$departments_list    = get_departments_markup( $post->ID );
-		$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
+	$raw_postmeta        = get_post_meta( $post->ID );
+	$post_meta           = format_raw_postmeta( $raw_postmeta );
+	$program_type        = get_degree_program_type( $post );
+	$colleges_list       = get_colleges_markup( $post->ID );
+	$departments_list    = get_departments_markup( $post->ID );
+	$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
-		ob_start();
-		?>
-		<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
-			<div class="row">
-				<div class="col-lg-8 col-xl-7 pr-lg-5 pr-xl-0">
-					<div class="bg-faded p-3 p-sm-4 mb-4">
-						<dl class="row mb-0">
-							<?php if ( $program_type ) : ?>
-							<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Program:</dt>
-							<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9"><?php echo $program_type->name; ?></dd>
-							<?php endif; ?>
-							<?php if ( $colleges_list ) : ?>
-							<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">College(s):</dt>
-							<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
-								<?php echo $colleges_list; ?>
-							</dd>
-							<?php endif; ?>
-							<?php if ( $departments_list ) : ?>
-							<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Department(s): </dt>
-							<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
-								<?php echo $departments_list; ?>
-							</dd>
-							<?php endif; ?>
-						</dl>
-					</div>
-					<div class="hidden-lg-up row mb-3">
-						<div class="col-sm mb-2">
-							<?php echo get_degree_apply_button( $post ); ?>
-						</div>
-						<div class="col-sm mb-2">
-							<?php echo get_degree_visit_ucf_button(); ?>
-						</div>
-					</div>
-					<div class="mb-3">
-						<?php the_content(); ?>
-						<?php
-						if ( ! $hide_catalog_desc ) {
-							echo apply_filters( 'the_content', $post_meta['degree_description'] );
-						}
-						?>
-					</div>
-					<div class="row mb-4 mb-lg-5">
-					<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
-						<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
-							<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
-								<div class="bg-complementary p-3 px-sm-4 d-flex align-items-center"><span class="fa fa-book fa-2x" aria-hidden="true"></span></div>
-								<div class="p-3 align-self-center mx-auto">View Catalog</div>
-							</a>
-						</div>
-					<?php endif; ?>
-					</div>
-					<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+	ob_start();
+	?>
+	<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
+		<div class="row">
+			<div class="col-lg-8 col-xl-7 pr-lg-5 pr-xl-0">
+				<div class="bg-faded p-3 p-sm-4 mb-4">
+					<dl class="row mb-0">
+						<?php if ( $program_type ) : ?>
+						<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Program:</dt>
+						<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9"><?php echo $program_type->name; ?></dd>
+						<?php endif; ?>
+						<?php if ( $colleges_list ) : ?>
+						<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">College(s):</dt>
+						<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
+							<?php echo $colleges_list; ?>
+						</dd>
+						<?php endif; ?>
+						<?php if ( $departments_list ) : ?>
+						<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Department(s): </dt>
+						<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
+							<?php echo $departments_list; ?>
+						</dd>
+						<?php endif; ?>
+					</dl>
 				</div>
-				<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
-					<div class="hidden-md-down mb-5">
+				<div class="hidden-lg-up row mb-3">
+					<div class="col-sm mb-2">
 						<?php echo get_degree_apply_button( $post ); ?>
+					</div>
+					<div class="col-sm mb-2">
 						<?php echo get_degree_visit_ucf_button(); ?>
 					</div>
-
-					<?php if ( isset( $post_meta['degree_hours'] ) && ! empty( $post_meta['degree_hours'] ) ) : ?>
-					<div class="degree-hours mb-5 mt-lg-5">
-						<hr>
-						<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> <span class="font-weight-normal">total credit hours</span></p>
-						<hr>
-					</div>
-					<?php endif; ?>
-
-					<?php echo get_degree_tuition_markup( $post_meta, 'classic' ); ?>
-
+				</div>
+				<div class="mb-3">
+					<?php the_content(); ?>
 					<?php
-					if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
-						echo apply_filters( 'the_content', $post_meta['degree_sidebar_content_bottom'] );
+					if ( ! $hide_catalog_desc ) {
+						echo apply_filters( 'the_content', $post_meta['degree_description'] );
 					}
 					?>
 				</div>
+				<div class="row mb-4 mb-lg-5">
+				<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
+					<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
+						<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
+							<div class="bg-complementary p-3 px-sm-4 d-flex align-items-center"><span class="fa fa-book fa-2x" aria-hidden="true"></span></div>
+							<div class="p-3 align-self-center mx-auto">View Catalog</div>
+						</a>
+					</div>
+				<?php endif; ?>
+				</div>
+				<?php echo main_site_degree_display_subplans( $post->ID ); ?>
+			</div>
+			<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
+				<div class="hidden-md-down mb-5">
+					<?php echo get_degree_apply_button( $post ); ?>
+					<?php echo get_degree_visit_ucf_button(); ?>
+				</div>
+
+				<?php if ( isset( $post_meta['degree_hours'] ) && ! empty( $post_meta['degree_hours'] ) ) : ?>
+				<div class="degree-hours mb-5 mt-lg-5">
+					<hr>
+					<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> <span class="font-weight-normal">total credit hours</span></p>
+					<hr>
+				</div>
+				<?php endif; ?>
+
+				<?php echo get_degree_tuition_markup( $post_meta, 'classic' ); ?>
+
+				<?php
+				if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
+					echo apply_filters( 'the_content', $post_meta['degree_sidebar_content_bottom'] );
+				}
+				?>
 			</div>
 		</div>
+	</div>
 
-		<?php
-		return ob_get_clean();
-	}
-
+	<?php
+	return ob_get_clean();
+}
 
 
 /**
@@ -125,6 +124,70 @@ function get_degree_content_modern_layout( $post ) {
 
 }
 
+
+/**
+ * Filter that sets header contents for degrees.
+ *
+ * @author Jo Dickson
+ * @since 3.4.0
+ * @param string $markup The passed in markup
+ * @param mixed $obj The post/term object, or null
+ * @return string The header markup
+ */
+function get_header_content_degree( $markup, $obj ) {
+	if ( isset( $obj->post_type ) && $obj->post_type === 'degree' ) {
+		$title                        = get_header_title( $obj );
+		$subtitle                     = get_header_subtitle( $obj );
+		$h1                           = get_header_h1_option( $obj );
+		$title_elem                   = ( $h1 === 'title' ) ? 'h1' : 'span';
+		$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
+		$degree_template              = get_page_template_slug( $obj );
+		$show_degree_request_info_btn = false;
+		$header_content_col_classes   = 'header-degree-content-col col-sm-auto d-sm-flex align-items-sm-center';
+
+		if ( $degree_template === 'template-degree-modern.php' ) {
+			$header_content_col_classes .= ' ml-sm-auto';
+			$show_degree_request_info_btn = true;
+		}
+
+		ob_start();
+
+		if ( $title ):
+?>
+		<div class="header-content-inner">
+			<div class="container px-0 h-100">
+				<div class="row no-gutters h-100">
+					<div class="<?php echo $header_content_col_classes; ?>">
+						<div class="header-degree-content-bg bg-primary-t-2 p-3 p-sm-4 mb-sm-5">
+							<<?php echo $title_elem; ?> class="header-title header-title-degree"><?php echo $title; ?></<?php echo $title_elem; ?>>
+
+							<?php if ( $subtitle ) : ?>
+								<<?php echo $subtitle_elem; ?> class="header-subtitle header-subtitle-degree"><?php echo $subtitle; ?></<?php echo $subtitle_elem; ?>>
+							<?php endif; ?>
+
+							<!-- TODO toggle form w/button click -->
+							<?php if ( $show_degree_request_info_btn ): ?>
+							<button class="header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3">
+								<span class="mr-3 fa fa-info-circle fa-2x" aria-hidden="true"></span>
+								Request Info
+							</button>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<?php
+		endif;
+
+		$markup = ob_get_clean();
+
+	}
+
+	return $markup;
+}
+
+add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10, 2 );
 
 
 /**
@@ -347,7 +410,7 @@ function get_degree_content_modern_layout( $post ) {
 			</div>
 		</section>
 		<?php
- 
+
 		return ob_get_clean();
    }
 

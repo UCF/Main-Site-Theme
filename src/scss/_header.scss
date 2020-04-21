@@ -15,6 +15,12 @@
 .header-content-inner {
   width: 100%;
 
+  .single-degree & {
+    @include media-breakpoint-down(xs) {
+      margin-top: calc(#{$header-media-degree-xs-height} - #{$nav-height});
+    }
+  }
+
   .container {
     @include media-breakpoint-down(xs) {
       width: 100%;
@@ -27,8 +33,16 @@
   height: 100%;
   position: relative;
 
+  .single-degree & {
+    background-color: $white;
+
+    @include media-breakpoint-down(xs) {
+      min-height: $header-media-degree-xs-height;
+    }
+  }
+
   @include media-breakpoint-down(xs) {
-    min-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
+    min-height: $header-media-xs-height;
   }
 }
 
@@ -51,11 +65,52 @@
   right: 0;
   top: 0;
   z-index: 1;
+
+  .single-degree & {
+    background-color: $gray; // fallback color for readability if assets fail to load
+
+    @include media-breakpoint-down(xs) {
+      height: $header-media-degree-xs-height;
+    }
+  }
 }
 
 .header-media-background {
   height: 100%;
   width: 100%;
+}
+
+.header-degree-content-col {
+  .degree-template-template-degree-modern & {
+    @include media-breakpoint-up(sm) {
+      min-width: 25rem;
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    max-width: 80%;
+  }
+
+  @include media-breakpoint-up(md) {
+    max-width: 70%;
+  }
+
+  @include media-breakpoint-up(lg) {
+    max-width: 60%;
+  }
+}
+
+.header-degree-content-bg {
+  position: relative;
+}
+
+.header-degree-cta {
+  @include media-breakpoint-up(sm) {
+    margin-top: 0;
+    position: absolute;
+    right: .5rem;
+    top: calc(100% - 1.5rem);
+  }
 }
 
 .header-title {
@@ -83,7 +138,25 @@
 }
 
 .header-title-degree {
-  font-family: $font-family-condensed;
+  font-family: $font-family-sans-serif;
+  font-size: 1.75rem;
+  font-weight: bold;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 2rem;
+  }
+
+  @include media-breakpoint-up(md) {
+    font-size: 2.5rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 3rem;
+  }
 }
 
 .header-subtitle {
@@ -111,6 +184,17 @@
     .wi {
       color: $brand-primary;
     }
+  }
+}
+
+.header-subtitle-degree {
+  font-family: $font-family-sans-serif;
+  line-height: 1.4;
+  padding-bottom: 1rem;
+  padding-top: 0;
+
+  @include media-breakpoint-down(xs) {
+    font-size: 1rem;
   }
 }
 
