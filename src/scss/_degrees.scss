@@ -136,7 +136,24 @@
 }
 
 .accordion-courses {
-  border-bottom: 1px solid #fc0;
+  border-bottom: 1px solid $brand-primary;
   margin: 1.25rem 0;
   padding: 1.25rem 0;
+}
+
+.degree-skill-list-item {
+  font-size: 1.2em;
+}
+
+.degree-career-list {
+  list-style: none; /* Remove default bullets */
+}
+
+.degree-career-list-item::before {
+  content: "\2022";
+  color: $brand-primary;
+  font-weight: 900;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }

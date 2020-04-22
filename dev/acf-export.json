@@ -1821,7 +1821,7 @@
             {
                 "key": "field_5e97183304f1e",
                 "label": "Skills Heading",
-                "name": "skills_heading",
+                "name": "degree_skills_heading",
                 "type": "text",
                 "instructions": "Enter header to be added to the Skills Section",
                 "required": 0,
@@ -1839,9 +1839,9 @@
             },
             {
                 "key": "field_5e9618f641b44",
-                "label": "Skills Content",
-                "name": "skills_content",
-                "type": "wysiwyg",
+                "label": "Skills List",
+                "name": "degree_skills_list",
+                "type": "repeater",
                 "instructions": "Enter content to be added to the Skills Section",
                 "required": 0,
                 "conditional_logic": 0,
@@ -1850,18 +1850,39 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add List Item",
+                "sub_fields": [
+                    {
+                        "key": "field_5e9f4a7f42439",
+                        "label": "Skill List Item",
+                        "name": "degree_skills_list_item",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
                 "key": "field_5e97185304f1f",
-                "label": "Careers Heading",
-                "name": "careers_heading",
+                "label": "Career Opportunites Heading",
+                "name": "degree_careers_heading",
                 "type": "text",
-                "instructions": "Enter header to be added to the Skills Section",
+                "instructions": "Enter header to be added to the Career Opportunities Section",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1877,10 +1898,10 @@
             },
             {
                 "key": "field_5e97180504f1d",
-                "label": "Careers Content",
-                "name": "careers_content",
-                "type": "wysiwyg",
-                "instructions": "Enter content to be added to the Careers Section",
+                "label": "Career Opportunities List",
+                "name": "degree_career_list",
+                "type": "repeater",
+                "instructions": "Enter items to be added to the Career Opportunities Section",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1888,11 +1909,32 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5e9f4ec46e344",
+                        "label": "Career Opportunity",
+                        "name": "degree_career_list_item",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
                 "key": "field_5e99f87f12a16",

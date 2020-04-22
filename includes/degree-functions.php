@@ -490,24 +490,24 @@ function get_degree_quotes_modern_layout( $degree ) {
 
 	if ( have_rows( 'degree_quotes', $degree ) ) : ?>
 		<div class="bg-faded">
-			<div class="container py-lg-4">
-				<div class="row my-lg-3">
-					<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row(); ?>
+			<div class="container pt-5">
+				<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row(); ?>
+					<div class="row pb-5">
 						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
-							<div class="col-lg-3">
+							<div class="col-lg-3 text-center text-lg-right align-self-center">
 								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
 									alt="<?php the_sub_field( 'degree_quote_image_alt' ); ?>">
 							</div>
 						<?php endif; ?>
-
-						<div class="col-lg-9">
+						<?php $quote_col_class = ( get_sub_field( 'degree_quote_image' ) ) ? "col-lg-9" : "col-12 col-xl-10 offset-xl-1"; ?>
+						<div class="<?php echo $quote_col_class; ?>">
 							<blockquote class="blockquote blockquote-quotation">
 								<p class="mb-0"><?php the_sub_field( 'degree_quote' ); ?></p>
 								<footer class="blockquote-footer"><?php the_sub_field( 'degree_quote_footer' ); ?></footer>
 							</blockquote>
 						</div>
-					<?php endwhile; ?>
-				</div>
+					</div>
+				<?php endwhile; ?>
 			</div>
 		</div>
 
@@ -526,37 +526,54 @@ function get_degree_quotes_modern_layout( $degree ) {
  * @return string HTML markup
  */
 function get_degree_skills_career_modern_layout( $degree ) {
-	$skills_heading = get_field( 'skills_heading', $degree );
-	$skills_content = get_field( 'skills_content', $degree );
-	$careers_heading = get_field( 'careers_heading', $degree );
-	$careers_content = get_field( 'careers_content', $degree );
+	$degree_skills_heading = get_field( 'degree_skills_heading', $degree );
+	$degree_careers_heading = get_field( 'degree_careers_heading', $degree );
 
-	if ( empty( $skills_content ) && empty( $careers_content ) ) return '';
+	if ( empty( $degree_skills_heading ) && empty( $degree_careers_heading ) ) return '';
 
 	ob_start();
 	?>
 	<div class="bg-inverse">
 		<div class="container">
-			<div class="row py-lg-5">
-				<?php if( $skills_heading ) : ?>
+			<div class="row py-5">
+				<?php if( $degree_skills_heading ) : ?>
 					<div class="col-12">
-						<h2 class="font-condensed text-primary text-uppercase mb-4"><?php echo $skills_heading; ?></h2>
+						<h2 class="font-condensed text-primary text-uppercase my-4"><?php echo $degree_skills_heading; ?></h2>
 					</div>
 				<?php endif; ?>
 
-				<?php if( $skills_content ) : ?>
-					<div class="col-lg-8 py-lg-3">
-						<?php echo $skills_content; ?>
+				<?php if( have_rows( 'degree_skills_list', $degree ) ) : ?>
+					<div class="col-lg-7 py-lg-3">
+						<ul class="pl-4 mb-0">
+							<?php while ( have_rows( 'degree_skills_list', $degree ) ) : the_row(); ?>
+								<?php if( get_sub_field( 'degree_skills_list_item' ) ) : ?>
+									<li class="degree-skill-list-item mb-4">
+										<?php the_sub_field( 'degree_skills_list_item' ); ?>
+									</li>
+								<?php endif; ?>
+							<?php endwhile; ?>
+						</ul>
 					</div>
 				<?php endif; ?>
 
-				<?php if( $careers_heading || $careers_content ) : ?>
-					<div class="col-lg-4">
-						<?php if( $careers_heading ) : ?>
-							<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $careers_heading; ?></h2>
+				<?php if( $degree_careers_heading ) : ?>
+					<div class="col-lg-4 offset-lg-1 mt-4">
+						<?php if( $degree_careers_heading ) : ?>
+							<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $degree_careers_heading; ?></h2>
 						<?php endif; ?>
-						<?php if( $careers_content ) : ?>
-							<?php echo $careers_content; ?>
+
+						<?php if( have_rows( 'degree_career_list', $degree ) ) : ?>
+							<div class="col-lg-8 py-lg-3">
+								<ul class="degree-career-list pl-2">
+									<?php while ( have_rows( 'degree_career_list', $degree ) ) : the_row(); ?>
+										<?php if( get_sub_field( 'degree_career_list_item' ) ) : ?>
+											<li class="degree-career-list-item">
+												<?php the_sub_field( 'degree_career_list_item' ); ?>
+											</li>
+										<?php endif; ?>
+									<?php endwhile; ?>
+								</ul>
+							</div>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
