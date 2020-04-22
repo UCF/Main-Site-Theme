@@ -274,56 +274,58 @@ function get_degree_description_modern_layout( $degree ) {
 	if( empty( $modern_description_heading ) && empty( $modern_description_copy ) ) return '';
 
 	ob_start();
-	?>
-	<div class="container py-lg-3 my-5">
-		<div class="row my-lg-3">
-			<div class="col">
-				<?php if( $modern_description_heading ) : ?>
-					<h2 class="font-weight-light mb-4 pb-2">
-						<?php echo $modern_description_heading; ?>
-					</h2>
-				<?php endif; ?>
+?>
+	<section aria-label="Program description and highlights">
+		<div class="container py-lg-3 my-5">
+			<div class="row my-lg-3">
+				<div class="col">
+					<?php if( $modern_description_heading ) : ?>
+						<h2 class="font-weight-light mb-4 pb-2">
+							<?php echo $modern_description_heading; ?>
+						</h2>
+					<?php endif; ?>
 
-				<?php if( $modern_description_copy ) : ?>
-					<?php echo $modern_description_copy; ?>
-				<?php endif; ?>
+					<?php if( $modern_description_copy ) : ?>
+						<?php echo $modern_description_copy; ?>
+					<?php endif; ?>
 
-				<?php
-				echo get_degree_request_info_button(
-					$degree,
-					'btn btn-complementary mt-3',
-					'',
-					'Request Information'
-				);
-				?>
-			</div>
+					<?php
+					echo get_degree_request_info_button(
+						$degree,
+						'btn btn-complementary mt-3',
+						'',
+						'Request Information'
+					);
+					?>
+				</div>
 
-			<?php if ( $modern_description_image || ( have_rows( 'highlights', $degree ) ) ): ?>
-			<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
-				<?php if ( $modern_description_image ) : ?>
-					<div class="px-5 px-lg-0">
-						<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
-					</div>
-				<?php endif; ?>
-
-				<?php if ( have_rows( 'highlights', $degree ) ) : ?>
-					<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
-					<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
-						<div class="row mb-4">
-							<div class="col-3 text-center">
-								<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
-							</div>
-							<div class="col-9 align-self-center">
-								<?php the_sub_field( 'highlight_copy' ); ?>
-							</div>
+				<?php if ( $modern_description_image || ( have_rows( 'highlights', $degree ) ) ): ?>
+				<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
+					<?php if ( $modern_description_image ) : ?>
+						<div class="px-5 px-lg-0">
+							<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
 						</div>
-					<?php endwhile; ?>
+					<?php endif; ?>
+
+					<?php if ( have_rows( 'highlights', $degree ) ) : ?>
+						<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
+						<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
+							<div class="row mb-4">
+								<div class="col-3 text-center">
+									<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
+								</div>
+								<div class="col-9 align-self-center">
+									<?php the_sub_field( 'highlight_copy' ); ?>
+								</div>
+							</div>
+						<?php endwhile; ?>
+					<?php endif; ?>
+				</div>
 				<?php endif; ?>
 			</div>
-			<?php endif; ?>
 		</div>
-	</div>
-	<?php
+	</section>
+<?php
 
 	return ob_get_clean();
 }
