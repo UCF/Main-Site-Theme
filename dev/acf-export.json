@@ -1311,10 +1311,34 @@
             },
             {
                 "key": "field_5e986fb2666dc",
-                "label": "Program Length",
-                "name": "program_length",
-                "type": "textarea",
-                "instructions": "Add icon and text to be displayed for the program length.",
+                "label": "Program Length Image",
+                "name": "program_length_image",
+                "type": "image",
+                "instructions": "Add image to be displayed for the program length.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5ea0a6bcb0c0d",
+                "label": "Program Length Number",
+                "name": "program_length_number",
+                "type": "text",
+                "instructions": "Add the number to be displayed for the program length.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1324,9 +1348,28 @@
                 },
                 "default_value": "",
                 "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5ea0a6e8b0c0e",
+                "label": "Program Length Text",
+                "name": "program_length_text",
+                "type": "text",
+                "instructions": "Add the text to be displayed under the number for the program length.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_5e94d0629bc99",
