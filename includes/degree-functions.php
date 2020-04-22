@@ -277,7 +277,7 @@ function get_degree_description_modern_layout( $degree ) {
 	?>
 	<div class="container py-lg-3 my-5">
 		<div class="row my-lg-3">
-			<div class="col-lg-6">
+			<div class="col">
 				<?php if( $modern_description_heading ) : ?>
 					<h2 class="font-weight-light mb-4 pb-2">
 						<?php echo $modern_description_heading; ?>
@@ -297,16 +297,20 @@ function get_degree_description_modern_layout( $degree ) {
 				);
 				?>
 			</div>
-			<div class="col-lg-6">
+
+			<?php if ( $modern_description_image || ( have_rows( 'highlights', $degree ) ) ): ?>
+			<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
 				<?php if ( $modern_description_image ) : ?>
-					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" alt="<?php echo $modern_description_image_alt; ?>">
+					<div class="px-5 px-lg-0">
+						<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
+					</div>
 				<?php endif; ?>
 
 				<?php if ( have_rows( 'highlights', $degree ) ) : ?>
 					<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
 					<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
 						<div class="row mb-4">
-							<div class="col-3">
+							<div class="col-3 text-center">
 								<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
 							</div>
 							<div class="col-9 align-self-center">
@@ -316,6 +320,7 @@ function get_degree_description_modern_layout( $degree ) {
 					<?php endwhile; ?>
 				<?php endif; ?>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php
