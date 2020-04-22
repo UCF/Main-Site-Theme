@@ -360,7 +360,7 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 					<div class="degree-deadline-content degree-deadline-content-deadlines text-center text-lg-left">
 						<div class="row no-gutters w-100 h-100 d-lg-flex align-items-lg-center">
 							<div class="col-12 <?php echo $deadline_heading_col_class; ?>">
-								<h2 class="h4 text-uppercase font-condensed mb-4 mb-lg-0">
+								<h2 class="h4 text-uppercase font-condensed mb-4 mb-md-5 mb-lg-0">
 									Application Deadline
 								</h2>
 							</div>
