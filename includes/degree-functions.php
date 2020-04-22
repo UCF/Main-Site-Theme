@@ -1100,7 +1100,7 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 			<?php endif; ?>
 
 			<?php if ( $disclaimer ) : ?>
-			<p class="mt-3 mx-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
+			<p class="mt-4 mx-3 mb-0" style="line-height: 1.2;"><small><?php echo $disclaimer; ?></small></p>
 			<?php endif; ?>
 		</div>
 	</div>
