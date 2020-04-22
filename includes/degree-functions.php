@@ -644,7 +644,7 @@ function get_degree_news_spotlight_modern_layout( $degree ) {
 			</div>
 			<div class=" col-auto">
 				<p class="mb-0">
-					<a class="h6 text-uppercase mb-0 text-secondary" href="https://www.ucf.edu/news/">
+					<a class="h6 text-uppercase mb-0 text-default-aw" href="https://www.ucf.edu/news/">
 						Check out more stories
 						<span class="fa fa-external-link text-primary" aria-hidden="true"></span>
 					</a>
