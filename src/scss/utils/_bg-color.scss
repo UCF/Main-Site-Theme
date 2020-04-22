@@ -1,0 +1,4 @@
+@include bg-variant('.bg-gray-darker', $gray-darker);
+.bg-gray-darker {
+  color: $white;
+}
