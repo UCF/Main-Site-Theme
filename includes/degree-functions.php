@@ -249,7 +249,7 @@ function get_degree_info_modern_layout( $degree ) {
 					<div class="w-100 hidden-sm-down hidden-lg-up"></div>
 
 					<?php if ( $tuition ): ?>
-					<div class="col-md-6 col-lg mb-4 mb-lg-0">
+					<div class="col-md-6 col-lg mb-4 mb-lg-0 pr-lg-4 pr-xl-3">
 						<?php echo $tuition; ?>
 					</div>
 					<?php endif; ?>
@@ -1100,7 +1100,7 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 			<?php endif; ?>
 
 			<?php if ( $disclaimer ) : ?>
-			<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
+			<p class="mt-3 mx-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
 			<?php endif; ?>
 		</div>
 	</div>
