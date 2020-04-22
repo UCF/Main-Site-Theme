@@ -109,7 +109,7 @@
   @include media-breakpoint-up(lg) {
     background-image: str-replace(url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' id='bg' height='100%25' width='150' viewBox='0 0 150 100' preserveAspectRatio='none' shape-rendering='geometricPrecision' style='background-color: #{$gray-darker};'%3E%3Cpath fill='#{$brand-primary}' d='M0,0 h110 l40,50 l-40,50 h-110z'%3E%3C/path%3E%3C/svg%3E"), '#', '%23'); // sass-lint:disable-line quotes
     background-position: center right;
-    background-size: auto 100%;
+    background-size: 50% 100%;
     flex-grow: 1;
     padding-bottom: 2.5rem;
     padding-right: 6rem;
