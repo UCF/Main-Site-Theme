@@ -256,7 +256,7 @@ function get_degree_info_modern_layout( $degree ) {
 
 					<?php if ( $promo_image ) : ?>
 					<div class="col-md-5 col-lg-2 col-xl-3 mb-4 mb-lg-0 text-center d-flex align-items-center">
-						<div class="row">
+						<div class="row no-gutters w-100">
 							<div class="col-6 offset-3 col-sm-4 offset-sm-4 col-md-8 offset-md-2 col-lg-12 offset-lg-0 col-xl-10 offset-xl-1">
 								<img src="<?php echo $promo_image; ?>" class="img-fluid" alt="<?php echo $promo_image_alt; ?>">
 							</div>
