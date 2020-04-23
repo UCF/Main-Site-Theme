@@ -247,7 +247,7 @@ function get_degree_info_modern_layout( $degree ) {
 							<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
 								<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center align-self-center">
 									<div class="text-center mb-3">
-										<img class="icon-calendar img-fluid"  style="max-height: 4em;" src="<?php echo $program_length_image; ?>" alt="">
+										<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 									</div>
 									<div class="h1 mb-0 text-center"><?php echo $program_length_number; ?></div>
 									<div class="h6 text-default text-uppercase text-center"><?php echo $program_length_text; ?></div>
