@@ -632,11 +632,11 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 	<section aria-labelledby="admissions-requirements">
 		<div class="jumbotron jumbotron-fluid bg-faded mb-0">
 			<div class="container">
-				<h2 id="admissions-requirements" class="font-condensed text-uppercase mb-4 d-flex flex-column flex-md-row align-items-md-center">
+				<h2 id="admissions-requirements" class="font-condensed text-uppercase mb-4 d-flex flex-column flex-md-row align-items-md-end">
 					<div class="mb-4 mb-md-0 mr-md-3 text-center text-sm-left">
-						<img src="https://placehold.it/75x75/" class="img-fluid" alt="">
+						<img src="<?php echo THEME_STATIC_URL . '/img/user-check-solid.svg'; ?>" alt="" style="width: 100px; height: auto;">
 					</div>
-					<span>Admission Requirements</span>
+					<span class="d-inline-block">Admission Requirements</span>
 				</h2>
 
 				<div class="row">
