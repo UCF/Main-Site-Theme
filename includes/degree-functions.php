@@ -715,7 +715,7 @@ function get_degree_news_spotlight_modern_layout( $degree ) {
 				<div class="row my-lg-3">
 
 					<div class="col-lg">
-						<?php echo do_shortcode( '[ucf-news-feed title="" layout="modern" topics="' . $degree_news_tag . '"]No articles found.[/ucf-news-feed]' ); ?>
+						<?php echo do_shortcode( '[ucf-news-feed title="" layout="modern" limit="4" topics="' . $degree_news_tag . '"]No articles found.[/ucf-news-feed]' ); ?>
 					</div>
 
 					<?php if( $degree_spotlight ) : ?>
