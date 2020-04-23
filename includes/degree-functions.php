@@ -413,7 +413,8 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 								echo get_degree_apply_button(
 									$degree,
 									'btn btn-lg btn-primary rounded',
-									''
+									'',
+									'Apply Today'
 								);
 								?>
 							</div>
