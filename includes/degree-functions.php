@@ -214,7 +214,7 @@ function get_degree_info_modern_layout( $degree ) {
 	ob_start();
 	?>
 	<section aria-label="Program at a glance">
-		<div class="jumbotron bg-faded pb-4 pb-md-5">
+		<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5">
 			<div class="container">
 				<div class="row d-lg-flex justify-content-lg-between">
 					<div class="col col-lg-5 pr-lg-5">
@@ -628,32 +628,49 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 	if( empty( $admission_copy ) && empty( $admission_list ) ) return '';
 
 	ob_start();
-	?>
-	<div class="bg-faded">
-		<div class="container py-lg-3">
-			<div class="row my-lg-3">
-				<div class="col-12">
-					<h2 class="font-condensed text-uppercase mb-4">Admission Requirements</h2>
+?>
+	<section aria-labelledby="admissions-requirements">
+		<div class="jumbotron jumbotron-fluid bg-faded mb-0">
+			<div class="container">
+				<h2 id="admissions-requirements" class="font-condensed text-uppercase mb-4 d-flex flex-column flex-md-row align-items-md-center">
+					<div class="mb-4 mb-md-0 mr-md-3 text-center text-sm-left">
+						<img src="https://placehold.it/75x75/" class="img-fluid" alt="">
+					</div>
+					<span>Admission Requirements</span>
+				</h2>
+
+				<div class="row">
+					<?php if( $admission_copy ) : ?>
+					<div class="col-lg">
+						<div class="mb-lg-4">
+							<?php echo $admission_copy; ?>
+						</div>
+						<?php
+						echo get_degree_request_info_button(
+							$degree,
+							'btn btn-primary hidden-md-down',
+							'',
+							'Request Information',
+						);
+						?>
+					</div>
+					<?php endif; ?>
+					<?php if( $admission_list ) : ?>
+					<div class="col-lg-6 mt-4 mt-lg-0 pl-lg-5">
+						<div class="p-4 bg-secondary" style="font-size: .9em;">
+							<?php echo $admission_list; ?>
+						</div>
+					</div>
+					<?php endif; ?>
 				</div>
-				<?php if( $admission_copy ) : ?>
-				<div class="col-6">
-					<?php echo $admission_copy; ?>
+
+				<div class="text-center hidden-lg-up mt-4">
 					<?php echo get_degree_request_info_button( $degree ); ?>
 				</div>
-				<?php endif; ?>
-				<?php if( $admission_list ) : ?>
-				<div class="col-6">
-					<div class="py-3 px-4 bg-secondary">
-						<?php echo $admission_list; ?>
-					</div>
-				</div>
-				<?php endif; ?>
 			</div>
 		</div>
-	</div>
-
-	<?php
-
+	</section>
+<?php
 	return ob_get_clean();
 }
 
