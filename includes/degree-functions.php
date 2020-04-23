@@ -291,51 +291,58 @@ function get_degree_description_modern_layout( $degree ) {
 	if( empty( $modern_description_heading ) && empty( $modern_description_copy ) ) return '';
 
 	ob_start();
-	?>
-	<div class="container py-lg-3 my-5">
-		<div class="row my-lg-3">
-			<div class="col-lg-6">
-				<?php if( $modern_description_heading ) : ?>
-					<h2 class="font-weight-light mb-4 pb-2">
-						<?php echo $modern_description_heading; ?>
-					</h2>
-				<?php endif; ?>
+?>
+	<section aria-label="Program description and highlights">
+		<div class="container py-lg-3 my-5">
+			<div class="row my-lg-3">
+				<div class="col">
+					<?php if( $modern_description_heading ) : ?>
+						<h2 class="font-weight-light mb-4 pb-2">
+							<?php echo $modern_description_heading; ?>
+						</h2>
+					<?php endif; ?>
 
-				<?php if( $modern_description_copy ) : ?>
-					<?php echo $modern_description_copy; ?>
-				<?php endif; ?>
+					<?php if( $modern_description_copy ) : ?>
+						<?php echo $modern_description_copy; ?>
+					<?php endif; ?>
 
-				<?php
-				echo get_degree_request_info_button(
-					$degree,
-					'btn btn-complementary mt-3',
-					'',
-					'Request Information'
-				);
-				?>
-			</div>
-			<div class="col-lg-6">
-				<?php if ( $modern_description_image ) : ?>
-					<img src="<?php echo $modern_description_image; ?>" class="img-fluid pb-5" alt="<?php echo $modern_description_image_alt; ?>">
-				<?php endif; ?>
+					<?php
+					echo get_degree_request_info_button(
+						$degree,
+						'btn btn-complementary mt-3',
+						'',
+						'Request Information'
+					);
+					?>
+				</div>
 
-				<?php if ( have_rows( 'highlights', $degree ) ) : ?>
-					<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
-					<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
-						<div class="row mb-4">
-							<div class="col-3">
-								<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
-							</div>
-							<div class="col-9 align-self-center">
-								<?php the_sub_field( 'highlight_copy' ); ?>
-							</div>
+				<?php if ( $modern_description_image || ( have_rows( 'highlights', $degree ) ) ): ?>
+				<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
+					<?php if ( $modern_description_image ) : ?>
+						<div class="px-5 px-lg-0">
+							<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
 						</div>
-					<?php endwhile; ?>
+					<?php endif; ?>
+
+					<?php if ( have_rows( 'highlights', $degree ) ) : ?>
+						<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
+						<?php while( have_rows( 'highlights', $degree ) ): the_row(); ?>
+							<div class="row mb-4">
+								<div class="col-3 text-center">
+									<img src="<?php the_sub_field( 'highlight_image' ); ?>" class="img-fluid" alt="">
+								</div>
+								<div class="col-9 align-self-center">
+									<?php the_sub_field( 'highlight_copy' ); ?>
+								</div>
+							</div>
+						<?php endwhile; ?>
+					<?php endif; ?>
+				</div>
 				<?php endif; ?>
 			</div>
 		</div>
-	</div>
-	<?php
+	</section>
+<?php
 
 	return ob_get_clean();
 }
@@ -350,98 +357,93 @@ function get_degree_description_modern_layout( $degree ) {
  * @return string HTML markup
  */
 function get_degree_application_deadline_modern_layout( $degree ) {
-	$application_deadline_first = get_field( 'application_deadline_first', $degree );
-	$application_deadline_second = get_field( 'application_deadline_second', $degree );
-
-	if( empty( $application_deadline_first ) && empty( $application_deadline_second ) ) return '';
+	$deadlines = get_field( 'application_deadlines', $degree );
+	$deadlines_count = is_array( $deadlines ) ? count( $deadlines ) : 0;
 
 	ob_start();
-	?>
-	<section aria-label="Application Deadline">
-		<div class=" d-block d-lg-none">
-			<div class="bg-primary text-center pt-5">
-				<h2 class="h4 text-uppercase font-condensed my-0">Application Deadline</h2>
-			</div>
-		<?php if( $application_deadline_first ) : ?>
-			<div class="text-uppercase text-center bg-primary py-4">
-				<?php echo $application_deadline_first; ?>
-			</div>
-		<?php endif; ?>
-		<?php if( $application_deadline_second ) : ?>
-			<div class="bg-primary py-1">
-				<hr class="hr-white hr-2 my-0 mx-5 application-deadline-hr">
-			</div>
-			<div class="text-uppercase text-center bg-primary py-4 bg-arrow-down">
-				<div class="pb-5">
-					<?php echo $application_deadline_second; ?>
-				</div>
-			</div>
-		<?php endif; ?>
-			<div class="modern-degree-dark-grey text-white py-4 text-center">
-				<h2 class="h5 text-uppercase font-condensed mt-3">Ready to<br>get started?</h2>
-			</div>
-			<div class="col pt-1 pb-5 text-uppercase modern-degree-dark-grey text-center">
-				<?php
-				echo get_degree_apply_button(
-					$degree,
-					'btn btn-lg btn-primary rounded',
-					''
-				);
-				?>
-			</div>
-		</div>
 
-		<div class="container-fluid px-0 d-none d-lg-block">
-			<div class="row no-gutters">
-				<div class="col bg-primary">
-				</div>
-				<div class="col bg-primary">
-					<div class="container bg-primary">
-						<div class="row">
-							<div class="col-auto py-4 bg-primary align-self-center">
-								<h2 class="h5 text-uppercase font-condensed mb-0">Application<br>Deadline</h2>
+	if ( $deadlines_count ):
+		$deadline_heading_col_class = 'col-lg-4';
+		$deadlines_col_class = 'col-lg-8 pl-lg-5 pr-xl-5';
+		if ( $deadlines_count === 1 ) {
+			$deadline_heading_col_class = 'col-lg-7 pr-lg-3';
+			$deadlines_col_class = 'col-lg-5 pl-lg-5';
+		}
+		else if ( $deadlines_count > 2 ) {
+			$deadline_heading_col_class = 'mb-4';
+			$deadlines_col_class = 'pr-lg-5';
+		}
+?>
+		<section aria-label="Application Deadline">
+			<div class="degree-deadline-wrap">
+				<div class="degree-deadline-row">
+					<!-- Left-hand surrounding pad, for desktop -->
+					<div class="degree-deadline-pad bg-primary"></div>
+
+					<!-- Inner content -->
+					<div class="degree-deadline-content degree-deadline-content-deadlines text-center text-lg-left">
+						<div class="row no-gutters w-100 h-100 d-lg-flex align-items-lg-center">
+							<div class="col-12 <?php echo $deadline_heading_col_class; ?>">
+								<h2 class="h4 text-uppercase font-condensed mb-4 mb-md-5 mb-lg-0">
+									Application Deadline
+								</h2>
 							</div>
-						<?php if( $application_deadline_first ) : ?>
-							<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
-								<?php echo $application_deadline_first; ?>
-							</div>
-						<?php endif; ?>
-						<?php if( $application_deadline_second ) : ?>
-							<div class="col-auto py-4 bg-primary">
-								<hr class="hr-white hr-vertical hr-2 mx-0">
-							</div>
-							<div class="col py-4 text-uppercase text-center bg-primary align-self-center">
-								<?php echo $application_deadline_second; ?>
-							</div>
-						<?php endif; ?>
-							<div class="col-auto px-0">
-								<div class="triangle"></div>
-							</div>
-							<div class="col-auto py-4 modern-degree-dark-grey text-white">
-								<div class="h-100 d-flex align-items-center">
-									<h2 class="h5 text-uppercase font-condensed mb-0 ml-4">Ready to<br>get started?</h2>
-								</div>
-							</div>
-							<div class="col-auto py-4 text-uppercase modern-degree-dark-grey">
-								<div class="h-100 d-flex align-items-center">
-									<?php
-									echo get_degree_apply_button(
-										$degree,
-										'btn btn-lg btn-primary rounded',
-										''
-									);
-									?>
+							<div class="col-12 <?php echo $deadlines_col_class; ?>">
+								<div class="row d-lg-flex justify-content-lg-between">
+								<?php while ( have_rows( 'application_deadlines', $degree ) ) : the_row(); ?>
+
+									<div class="col-lg-auto my-lg-3 text-center text-uppercase">
+										<h3 class="h5">
+											<?php the_sub_field( 'deadline_term' ); ?>
+										</h3>
+										<p class="mb-0">
+											<?php the_sub_field( 'deadline' ); ?>
+										</p>
+									</div>
+
+									<?php if ( get_row_index() < $deadlines_count ): ?>
+									<div class="col-12 col-lg-auto">
+										<div class="hidden-lg-up">
+											<hr class="hr-2 hr-white w-50 my-4" role="presentational">
+										</div>
+										<div class="hidden-md-down h-100">
+											<hr class="hr-2 hr-white hr-vertical mx-0" role="presentational">
+										</div>
+									</div>
+									<?php endif; ?>
+
+								<?php endwhile; ?>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col modern-degree-dark-grey">
+					<div class="degree-deadline-content degree-deadline-content-start text-center text-lg-left bg-gray-darker">
+						<div class="row no-gutters d-lg-flex justify-content-lg-center align-self-lg-center">
+							<div class="col-12 col-lg-auto pr-xl-4">
+								<h2 class="h5 text-uppercase font-condensed mb-4 mb-lg-3 mb-xl-0">
+									<span class="d-xl-block">Ready to</span>
+									<span class="d-xl-block">get started?</span>
+								</h2>
+							</div>
+							<div class="col-12 col-lg-auto">
+								<?php
+								echo get_degree_apply_button(
+									$degree,
+									'btn btn-lg btn-primary rounded',
+									''
+								);
+								?>
+							</div>
+						</div>
+					</div>
+
+					<!-- Right-hand surrounding pad, for desktop -->
+					<div class="degree-deadline-pad bg-gray-darker"></div>
 				</div>
 			</div>
-		</div>
-	</section>
-	<?php
+		</section>
+<?php
+	endif;
 
 	return ob_get_clean();
 }
