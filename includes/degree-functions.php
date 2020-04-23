@@ -470,30 +470,37 @@ function get_degree_application_deadline_modern_layout( $degree ) {
  * @return string HTML markup
  */
 function get_degree_course_overview_modern_layout( $degree ) {
+	$raw_postmeta        = get_post_meta( $degree->ID );
+	$post_meta           = format_raw_postmeta( $raw_postmeta );
+
 	$course_overview = get_field( 'course_overview', $degree );
+	$course_catalog_link_text = get_field( 'course_catalog_link_text', $degree );
 
 	if ( empty( $course_overview ) ) return '';
 
 	ob_start();
 
 	if ( have_rows( 'course_overview', $degree ) ) : ?>
-		<div class="py-4">
-			<div class="container py-lg-3">
+		<section aria-label="Course Overview">
+			<div class="container py-lg-3 my-5">
 				<div class="row my-lg-3">
 					<div class="col-12">
 						<h2 class="font-condensed text-uppercase mb-4">Course Overview</h2>
 						<div class="accordion" role="tablist" id="courses">
 							<?php while ( have_rows( 'course_overview', $degree ) ) : the_row(); ?>
 								<div class="accordion-courses mt-0 pt-0 pt-lg-3">
-									<h3 class="mb-0">
-										<a data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>" aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
+									<a <?php if ( get_row_index() !== 1 ) echo 'class="collapsed"' ?>
+										data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>"
+										aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
+										<h3 class="mb-0">
 											<span class="font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
 												<?php the_sub_field( 'course_title' ); ?>
 											</span>
-											<span class="fa pull-right text-inverse-aw fa-minus-circle" aria-hidden="true"></span>
-										</a>
-									</h3>
-									<div class="collapse<?php if ( get_row_index() === 1 ) echo " show" ?>" id="course-<?php echo get_row_index(); ?>" data-parent="#courses" role="tabpanel" aria-expanded="true">
+											<span class="course-icon pull-right text-inverse-aw fa" aria-hidden="true"></span>
+										</h3>
+									</a>
+									<div class="collapse<?php if ( get_row_index() === 1 ) echo " show" ?>"
+										id="course-<?php echo get_row_index(); ?>" data-parent="#courses" role="tabpanel" aria-expanded="true">
 										<p class="mt-3 mb-0"><?php the_sub_field( 'course_description' ); ?></p>
 									</div>
 								</div>
@@ -501,8 +508,23 @@ function get_degree_course_overview_modern_layout( $degree ) {
 						</div>
 					</div>
 				</div>
+				<?php if( ! empty( $post_meta['degree_pdf'] ) ) : ?>
+					<div class="row">
+						<div class="col-12">
+							<a href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
+							<?php
+							if( $course_catalog_link_text ) :
+								echo $course_catalog_link_text;
+							else :
+							?>
+								View all <?php echo get_header_title( $degree ); ?> Courses
+							<?php endif; ?>
+							</a>
+						</div>
+					</div>
+				<?php endif; ?>
 			</div>
-		</div>
+		</section>
 	<?php endif;
 
 	return ob_get_clean();

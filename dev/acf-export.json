@@ -1728,6 +1728,25 @@
                 ]
             },
             {
+                "key": "field_5ea1e9de29bab",
+                "label": "Catalog Link Text",
+                "name": "course_catalog_link_text",
+                "type": "text",
+                "instructions": "Enter the text to be used for the link below the course list in the Course Overview section. If left blank the following text will be used \"View all [Degree Name] Courses\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5e99f84712a14",
                 "label": "Degree Quotes",
                 "name": "",

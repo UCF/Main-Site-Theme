@@ -161,3 +161,11 @@
 .program-length-image {
   max-height: 6em;
 }
+
+.accordion-courses .course-icon:before {
+  content: "";
+}
+
+.accordion-courses .collapsed .course-icon:before {
+  content: "";
+}
