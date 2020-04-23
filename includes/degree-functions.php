@@ -642,7 +642,7 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 				<div class="row">
 					<?php if( $admission_copy ) : ?>
 					<div class="col-lg">
-						<div class="mb-lg-4">
+						<div class="mb-lg-5">
 							<?php echo $admission_copy; ?>
 						</div>
 						<?php
@@ -664,7 +664,7 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 					<?php endif; ?>
 				</div>
 
-				<div class="text-center hidden-lg-up mt-4">
+				<div class="text-center hidden-lg-up mt-5">
 					<?php echo get_degree_request_info_button( $degree ); ?>
 				</div>
 			</div>
