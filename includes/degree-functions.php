@@ -673,44 +673,47 @@ function get_degree_news_spotlight_modern_layout( $degree ) {
 	if( empty( $degree_news_shortcode ) && empty( $degree_spotlight ) ) return '';
 
 	ob_start();
-	?>
+?>
 
-	<div class="container py-lg-5">
-		<div class="row justify-content-between align-items-end">
-			<div class="col-auto">
-				<h2 class="h1 mb-0">In The News</h2>
-			</div>
-			<div class=" col-auto">
-				<p class="mb-0">
-					<a class="h6 text-uppercase mb-0 text-default-aw" href="https://www.ucf.edu/news/">
-						Check out more stories
-						<span class="fa fa-external-link text-primary" aria-hidden="true"></span>
-					</a>
-				</p>
+	<section aria-labelledby="in-the-news">
+		<div class="jumbotron jumbotron-fluid bg-secondary">
+			<div class="container">
+				<div class="row justify-content-between align-items-end">
+					<div class="col-auto">
+						<h2 class="h1 mb-0" id="in-the-news">In The News</h2>
+					</div>
+					<div class="col-auto">
+						<p class="mb-0">
+							<a class="h6 text-uppercase mb-0 text-default-aw" href="https://www.ucf.edu/news/">
+								Check out more stories
+								<span class="fa fa-external-link text-primary" aria-hidden="true"></span>
+							</a>
+						</p>
+					</div>
+				</div>
+
+				<hr class="mt-2" role="presentation">
+
+				<div class="row my-lg-3">
+
+					<?php if( $degree_news_shortcode ) : ?>
+						<div class="col-lg">
+							<?php echo do_shortcode( $degree_news_shortcode ); ?>
+						</div>
+					<?php endif; ?>
+
+					<?php if( $degree_spotlight ) : ?>
+						<div class="col-sm-8 col-lg-5 col-xl-4 pl-lg-5 pl-xl-4 mt-4 mt-lg-0">
+							<?php echo do_shortcode( "[ucf-spotlight slug=" . $degree_spotlight->post_name . "]" ); ?>
+						</div>
+					<?php endif; ?>
+
+				</div>
 			</div>
 		</div>
+	</section>
 
-		<hr class="mt-2">
-
-		<div class="row my-lg-3">
-
-			<?php if( $degree_news_shortcode ) : ?>
-				<div class="col-md-8">
-					<?php echo do_shortcode( $degree_news_shortcode ); ?>
-				</div>
-			<?php endif; ?>
-
-			<?php if( $degree_spotlight ) : ?>
-				<div class="col-md-4">
-					<?php echo do_shortcode( "[ucf-spotlight slug=" . $degree_spotlight->post_name . "]" ); ?>
-				</div>
-			<?php endif; ?>
-
-		</div>
-	</div>
-
-	<?php
-
+<?php
 	return ob_get_clean();
 }
 
