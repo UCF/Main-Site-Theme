@@ -1662,7 +1662,7 @@ function modern_degree_hide_editor() {
 		$post_id = $_GET['post'];
 		if ( ! $post_id ) return;
 
-		if ( get_page_template_slug( $post_id ) ) {
+		if ( get_page_template_slug( $post_id ) === 'template-degree-modern.php' ) {
 			remove_post_type_support( 'degree', 'editor' );
 		}
 	}
