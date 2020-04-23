@@ -204,10 +204,16 @@ function get_degree_info_modern_layout( $degree ) {
 	$program_type        = get_degree_program_type( $degree );
 	$raw_postmeta        = get_post_meta( $degree->ID );
 	$post_meta           = format_raw_postmeta( $raw_postmeta );
+
 	$colleges_list       = get_colleges_markup( $degree->ID );
 	$departments_list    = get_departments_markup( $degree->ID );
-	$program_length      = get_field( 'program_length', $degree );
+
+	$program_length_image  = get_field( 'program_length_image', $degree );
+	$program_length_number = get_field( 'program_length_number', $degree );
+	$program_length_text   = get_field( 'program_length_text', $degree );
+
 	$tuition             = get_degree_tuition_markup( $post_meta, 'modern' );
+
 	$promo_image         = get_field( 'promo_image', $degree );
 	$promo_image_alt     = get_field( 'promo_image_alt', $degree );
 
@@ -238,10 +244,14 @@ function get_degree_info_modern_layout( $degree ) {
 									<?php endif; ?>
 								</dl>
 							</div>
-							<?php if ( $program_length ): ?>
-							<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0">
-								<?php echo $program_length; ?>
-							</div>
+							<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
+								<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center align-self-center">
+									<div class="text-center mb-3">
+										<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
+									</div>
+									<div class="h1 mb-0 text-center"><?php echo $program_length_number; ?></div>
+									<div class="h6 text-default text-uppercase text-center"><?php echo $program_length_text; ?></div>
+								</div>
 							<?php endif; ?>
 						</div>
 					</div>
