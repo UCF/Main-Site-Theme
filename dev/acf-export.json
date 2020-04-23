@@ -1956,8 +1956,8 @@
                 "key": "field_5e99ad4b5d498",
                 "label": "Admission Requirements Copy",
                 "name": "admission_copy",
-                "type": "textarea",
-                "instructions": "Copy to be added to the Admission Requirements Section",
+                "type": "wysiwyg",
+                "instructions": "A general description of admissions requirements for this program.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1966,17 +1966,17 @@
                     "id": ""
                 },
                 "default_value": "",
-                "placeholder": "",
-                "maxlength": "",
-                "rows": "",
-                "new_lines": ""
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             },
             {
                 "key": "field_5e99ad615d499",
-                "label": "Admission Requirements List",
+                "label": "Admission Requirements Highlights",
                 "name": "admission_list",
                 "type": "wysiwyg",
-                "instructions": "List to be added to the Admission Requirements Section",
+                "instructions": "Additional admissions requirements that are highlighted in a white box next to the general requirements copy.  A good place for adding bulleted lists or other small chunks of information that need extra prominence.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
