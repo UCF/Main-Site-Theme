@@ -212,61 +212,72 @@ function get_degree_info_modern_layout( $degree ) {
 	$program_length_number = get_field( 'program_length_number', $degree );
 	$program_length_text   = get_field( 'program_length_text', $degree );
 
+	$tuition             = get_degree_tuition_markup( $post_meta, 'modern' );
+
 	$promo_image         = get_field( 'promo_image', $degree );
 	$promo_image_alt     = get_field( 'promo_image_alt', $degree );
 
 	ob_start();
 	?>
-	<div class="bg-faded">
-		<div class="container program-at-a-glance py-lg-3">
-			<div class="row my-lg-3">
-				<div class="col-lg-3 p-4 pb-3 mt-3 mt-lg-0">
-
-					<h2 class="h5 font-condensed text-uppercase">Program at a Glance</h2>
-					<dl class="mt-4 mt-lg-5">
-						<?php if ( $program_type ) : ?>
-						<dt class="h6 text-uppercase text-default">Program</dt>
-						<dd class="h6 mb-4"><?php echo $program_type->name; ?></dd>
-						<?php endif; ?>
-						<?php if ( $colleges_list ) : ?>
-						<dt class="h6 text-uppercase text-default">College(s)</dt>
-						<dd class="h6 mb-4"><?php echo $colleges_list; ?></dd>
-						<?php endif; ?>
-						<?php if ( $departments_list ) : ?>
-						<dt class="h6 text-uppercase text-default">Department(s)</dt>
-						<dd class="h6"><?php echo $departments_list; ?></dd>
-						<?php endif; ?>
-					</dl>
-				</div>
-
-				<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
-					<div class="col-lg-2 text-center align-self-center">
+	<section aria-label="Program at a glance">
+		<div class="jumbotron bg-faded pb-4 pb-md-5">
+			<div class="container">
+				<div class="row d-lg-flex justify-content-lg-between">
+					<div class="col col-lg-5 pr-lg-5">
+						<h2 class="h4 font-condensed text-uppercase mb-4 pb-2">Program at a Glance</h2>
 						<div class="row">
-							<div class="col-3 offset-3 offset-lg-0 col-lg-12 text-center ">
-								<img class="program-length-image img-fluid mb-3" role="img"
-									src="<?php echo $program_length_image; ?>" alt="">
+							<div class="col col-sm-9 col-lg mb-4 mb-lg-0">
+								<dl>
+									<?php if ( $program_type ) : ?>
+									<dt class="h6 text-uppercase text-default">Program</dt>
+									<dd class="h5 mb-4"><?php echo $program_type->name; ?></dd>
+									<?php endif; ?>
+
+									<?php if ( $colleges_list ) : ?>
+									<dt class="h6 text-uppercase text-default">College(s)</dt>
+									<dd class="h5 mb-4"><?php echo $colleges_list; ?></dd>
+									<?php endif; ?>
+
+									<?php if ( $departments_list ) : ?>
+									<dt class="h6 text-uppercase text-default">Department(s)</dt>
+									<dd class="h5"><?php echo $departments_list; ?></dd>
+									<?php endif; ?>
+								</dl>
 							</div>
-							<div class="col-3 col-lg-12 align-self-center">
-								<div class="h1 mb-0"><?php echo $program_length_number; ?></div>
-								<div class="h6 text-default text-uppercase"><?php echo $program_length_text; ?></div>
+							<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
+								<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center align-self-center">
+									<div class="text-center mb-3">
+										<img class="icon-calendar img-fluid"  style="max-height: 4em;" src="<?php echo $program_length_image; ?>" alt="">
+									</div>
+									<div class="h1 mb-0 text-center"><?php echo $program_length_number; ?></div>
+									<div class="h6 text-default text-uppercase text-center"><?php echo $program_length_text; ?></div>
+								</div>
+							<?php endif; ?>
+						</div>
+					</div>
+
+					<div class="w-100 hidden-sm-down hidden-lg-up"></div>
+
+					<?php if ( $tuition ): ?>
+					<div class="col-md-7 col-lg mb-4 mb-lg-0 pr-lg-4 pr-xl-3">
+						<?php echo $tuition; ?>
+					</div>
+					<?php endif; ?>
+
+					<?php if ( $promo_image ) : ?>
+					<div class="col-md-5 col-lg-2 col-xl-3 mb-4 mb-lg-0 text-center d-flex align-items-center">
+						<div class="row no-gutters w-100">
+							<div class="col-6 offset-3 col-sm-4 offset-sm-4 col-md-8 offset-md-2 col-lg-12 offset-lg-0 col-xl-10 offset-xl-1">
+								<img src="<?php echo $promo_image; ?>" class="img-fluid" alt="<?php echo $promo_image_alt; ?>">
 							</div>
 						</div>
 					</div>
-				<?php endif; ?>
+					<?php endif; ?>
 
-				<div class="col-lg-4 bg-faded text-uppercase border-bottom mb-md-3">
-					<?php echo get_degree_tuition_markup( $post_meta, 'modern' ); ?>
 				</div>
-
-				<?php if ( $promo_image ) : ?>
-					<div class="col-lg-3 text-center align-self-center">
-						<img src="<?php echo $promo_image; ?>" class="img-fluid p-4" role="img" alt="<?php echo $promo_image_alt; ?>">
-					</div>
-				<?php endif; ?>
-
 			</div>
 		</div>
-	</div>
+	</section>
 
 	<?php
 	return ob_get_clean();
@@ -430,7 +441,8 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 								echo get_degree_apply_button(
 									$degree,
 									'btn btn-lg btn-primary rounded',
-									''
+									'',
+									'Apply Today'
 								);
 								?>
 							</div>
@@ -1058,39 +1070,51 @@ function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 
 function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
-	$format_label = '<div class="text-uppercase text-center font-weight-bold mt-2">per credit hour</div>';
 
 	ob_start();
 ?>
-	<ul class="nav nav-tabs pt-3" role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active" data-toggle="tab" href="#in-state" role="tab">In State</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
-		</li>
-	</ul>
+	<div class="card h-100 text-center">
+		<div class="card-header">
+			<ul class="nav nav-tabs card-header-tabs" id="tuition-tabs" role="tablist">
+				<?php if ( $resident ): ?>
+				<li class="nav-item text-nowrap">
+					<a class="nav-link active" id="resident-tuition-tab" data-toggle="tab" href="#resident-tuition" role="tab" aria-controls="resident-tuition" aria-selected="true">
+						In State<span class="sr-only"> Tuition</span>
+					</a>
+				</li>
+				<?php endif; ?>
 
-	<div class="tuition-fees-tab-content tab-content pt-4 bg-secondary">
-		<div class="tab-pane active" id="in-state" role="tabpanel">
-			<div class="p-4">
-				<p class="h1 text-center font-weight-bold mb-0">
-					<?php echo str_replace( "per credit hour", $format_label, $resident ); ?>
-				</p>
-			<?php if ( $disclaimer ) : ?>
-				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
-			<?php endif; ?>
-			</div>
+				<?php if ( $nonresident ): ?>
+				<li class="nav-item text-nowrap">
+					<a class="nav-link" id="nonresident-tuition-tab" data-toggle="tab" href="#nonresident-tuition" role="tab" aria-controls="nonresident-tuition" aria-selected="false">
+						Out of State<span class="sr-only"> Tuition</span>
+					</a>
+				</li>
+				<?php endif; ?>
+			</ul>
 		</div>
-		<div class="tab-pane" id="out-of-state" role="tabpanel">
-			<div class="p-4">
-				<p class="h1 text-center font-weight-bold mb-0">
-					<?php echo str_replace( "per credit hour", $format_label, $nonresident ); ?>
-				</p>
-			<?php if ( $disclaimer ) : ?>
-				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
-			<?php endif; ?>
+		<div class="card-block d-flex flex-column justify-content-center px-sm-4 px-md-2 px-xl-3 pt-4 py-md-5 pt-lg-4 pb-lg-3 tab-content" id="tuition-panes">
+			<?php if ( $resident ): ?>
+			<div class="tab-pane fade show active" id="resident-tuition" role="tabpanel" aria-labelledby="resident-tuition-tab">
+				<span class="d-block display-4">
+					<?php echo str_replace( 'per credit hour', '', $resident ); ?>
+				</span>
+				<span class="d-block small text-uppercase font-weight-bold"> per credit hour</span>
 			</div>
+			<?php endif; ?>
+
+			<?php if ( $nonresident ): ?>
+			<div class="tab-pane fade <?php if ( ! $resident ) { ?>show active<?php } ?>" id="nonresident-tuition" role="tabpanel" aria-labelledby="nonresident-tuition-tab">
+				<span class="d-block display-4">
+					<?php echo str_replace( 'per credit hour', '', $nonresident ); ?>
+				</span>
+				<span class="d-block small text-uppercase font-weight-bold"> per credit hour</span>
+			</div>
+			<?php endif; ?>
+
+			<?php if ( $disclaimer ) : ?>
+			<p class="mt-4 mx-3 mb-0" style="line-height: 1.2;"><small><?php echo $disclaimer; ?></small></p>
+			<?php endif; ?>
 		</div>
 	</div>
 <?php
