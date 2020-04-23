@@ -2050,11 +2050,11 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e9f3a40d038f",
-                "label": "News",
-                "name": "degree_news_shortcode",
+                "key": "field_5ea1bc67bf52d",
+                "label": "News Tag",
+                "name": "degree_news_tag",
                 "type": "text",
-                "instructions": "Enter the shortcode to display the news content for this degree.",
+                "instructions": "Specify the tag <strong>slug<\/strong> to pull UCF Today stories from for this program.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
