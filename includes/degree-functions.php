@@ -525,10 +525,10 @@ function get_degree_quotes_modern_layout( $degree ) {
 	ob_start();
 
 	if ( have_rows( 'degree_quotes', $degree ) ) : ?>
-		<div class="bg-faded">
-			<div class="container pt-5">
+		<div class="jumbotron jumbotron-fluid bg-faded mb-0">
+			<div class="container">
 				<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row(); ?>
-					<div class="row pb-5">
+					<div class="row">
 						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
 							<div class="col-lg-3 text-center text-lg-right align-self-center">
 								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
@@ -546,7 +546,6 @@ function get_degree_quotes_modern_layout( $degree ) {
 				<?php endwhile; ?>
 			</div>
 		</div>
-
 	<?php endif;
 
 	return ob_get_clean();
@@ -569,13 +568,13 @@ function get_degree_skills_career_modern_layout( $degree ) {
 
 	ob_start();
 	?>
-	<section aria-labelledby="skills-career-opportunities">
+	<section aria-labelledby="skills">
 		<div class="jumbotron jumbotron-fluid bg-inverse mb-0">
 			<div class="container">
 				<div class="row">
 					<?php if( $degree_skills_heading ) : ?>
 						<div class="col-12">
-							<h2 class="font-condensed text-primary text-uppercase my-4"><?php echo $degree_skills_heading; ?></h2>
+							<h2 id="skills" class="font-condensed text-primary text-uppercase my-4"><?php echo $degree_skills_heading; ?></h2>
 						</div>
 					<?php endif; ?>
 
