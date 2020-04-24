@@ -400,7 +400,7 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 								</h2>
 							</div>
 							<div class="col-12 <?php echo $deadlines_col_class; ?>">
-								<div class="row d-lg-flex justify-content-lg-between">
+								<div class="row d-lg-flex justify-content-lg-between flex-lg-nowrap">
 								<?php while ( have_rows( 'application_deadlines', $degree ) ) : the_row(); ?>
 
 									<div class="col-lg-auto my-lg-3 text-center text-uppercase">
