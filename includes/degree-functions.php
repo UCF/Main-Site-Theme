@@ -510,14 +510,19 @@ function get_degree_course_overview_modern_layout( $degree ) {
 				</div>
 				<?php if( ! empty( $post_meta['degree_pdf'] ) ) : ?>
 					<div class="row">
-						<div class="col-12">
-							<a href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
+						<div class="col-12 text-right">
+							
+						<a href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
 							<?php
 							if( $course_catalog_link_text ) :
 								echo $course_catalog_link_text;
+								?>
+								<span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
+								<?php
 							else :
 							?>
 								View all <?php echo get_header_title( $degree ); ?> Courses
+								<span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
 							<?php endif; ?>
 							</a>
 						</div>
