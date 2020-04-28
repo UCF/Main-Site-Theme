@@ -2069,6 +2069,25 @@
                 "endpoint": 0
             },
             {
+                "key": "field_5ea856c7532c5",
+                "label": "News Title",
+                "name": "degree_news_title",
+                "type": "text",
+                "instructions": "Enter header to be added to the News Section",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5ea1bc67bf52d",
                 "label": "News Tag",
                 "name": "degree_news_tag",

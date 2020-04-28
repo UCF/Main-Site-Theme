@@ -727,6 +727,11 @@ function get_degree_news_spotlight_modern_layout( $degree ) {
 	$degree_news_tag  = trim( get_field( 'degree_news_tag', $degree ) ?? '' );
 	$news_tag_archive = $degree_news_tag ? 'https://www.ucf.edu/news/tag/' . $degree_news_tag . '/' : 'https://www.ucf.edu/news/';
 	$degree_spotlight = get_field( 'degree_spotlight', $degree );
+	$degree_news_title = get_field( 'degree_news_title', $degree );
+
+	if( empty( $degree_news_title ) ) {
+		$degree_news_title = get_header_title( $degree ) . ' News';
+	}
 
 	if( empty( $degree_news_tag ) ) return '';
 
@@ -738,7 +743,7 @@ function get_degree_news_spotlight_modern_layout( $degree ) {
 			<div class="container">
 				<div class="row justify-content-between align-items-end">
 					<div class="col-auto">
-						<h2 class="h1 mb-0" id="in-the-news">In The News</h2>
+						<h2 class="h3 mb-0" id="in-the-news"><?php echo $degree_news_title; ?></h2>
 					</div>
 					<div class="col-auto">
 						<p class="mb-0">
