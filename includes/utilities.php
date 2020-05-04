@@ -13,7 +13,7 @@ function format_raw_postmeta( $postmeta ) {
 		}
 	}
 
-	return $retval;
+	return main_site_format_degree_data( $retval );
 }
 
 
