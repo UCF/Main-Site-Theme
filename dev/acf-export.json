@@ -589,7 +589,7 @@
         "fields": [
             {
                 "key": "field_5ae0c4dcee248",
-                "label": "Custom Degree Data",
+                "label": "Custom Data",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -642,7 +642,7 @@
             },
             {
                 "key": "field_5adf83192113d",
-                "label": "Imported Degree Data",
+                "label": "Degree Data",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -1014,6 +1014,144 @@
                 "name": "degree_prj_openings",
                 "type": "read_only",
                 "instructions": "The projected number of openings for graduates with this degree within the report's timeframe.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5eb457b4db29f",
+                "label": "Application Deadlines and Info",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5eb45823db2a0",
+                "label": "Deadlines",
+                "name": "degree_application_deadlines",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5eb45884db2a1",
+                        "label": "Admission Term",
+                        "name": "admission_term",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_5eb458b1db2a2",
+                        "label": "Deadline Type",
+                        "name": "deadline_type",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_5eb458badb2a3",
+                        "label": "Deadline",
+                        "name": "deadline",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_5eb45904db2a4",
+                "label": "Application Requirements",
+                "name": "degree_application_requirements",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5eb4591fdb2a5",
+                        "label": "Requirement",
+                        "name": "requirement",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_5eb45938db2a6",
+                "label": "Deadline Details",
+                "name": "degree_deadline_details",
+                "type": "read_only",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
