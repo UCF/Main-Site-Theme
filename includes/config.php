@@ -695,7 +695,7 @@ function read_only_repeater_fields() {
 					.find('.acf-actions')
 						.remove()
 						.end()
-					.find('.acf-row-handle:last-child')
+					.find('.acf-row-handle')
 						.remove()
 			});
 
