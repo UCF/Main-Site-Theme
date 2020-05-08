@@ -1350,8 +1350,9 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
 	$meta['degree_description'] = get_api_catalog_description( $program );
 
-	$outcomes    = main_site_get_remote_response_json( $program->outcomes );
-	$projections = main_site_get_remote_response_json( $program->projection_totals );
+	$outcomes      = main_site_get_remote_response_json( $program->outcomes );
+	$projections   = main_site_get_remote_response_json( $program->projection_totals );
+	$deadline_data = main_site_get_remote_response_json( $program->application_deadlines );
 
 	$meta['degree_avg_annual_earnings'] = isset( $outcomes->latest->avg_annual_earnings ) ?
 		$outcomes->latest->avg_annual_earnings :
@@ -1396,6 +1397,28 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['degree_prj_openings'] = isset( $projections->openings ) ?
 		$projections->openings :
 		null;
+
+	$meta['degree_application_deadlines'] = array();
+	if ( isset( $deadline_data->application_deadlines ) ) {
+		foreach ( $deadline_data->application_deadlines as $deadline ) {
+			$meta['degree_application_deadlines'][] = array(
+				'admission_term' => $deadline->admission_term,
+				'deadline_type'  => $deadline->deadline_type,
+				'deadline'       => $deadline->display
+			);
+		}
+	}
+
+	$meta['degree_application_requirements'] = array();
+	if ( isset( $deadline_data->application_requirements ) ) {
+		foreach ( $deadline_data->application_requirements as $requirement ) {
+			$meta['degree_application_requirements'][] = array(
+				'requirement' => $requirement
+			);
+		}
+	}
+
+	$meta['degree_deadline_details'] = $deadline_data->application_deadline_details ?? null;
 
 	return $meta;
 }
