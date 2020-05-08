@@ -1060,9 +1060,9 @@
                 "button_label": "",
                 "sub_fields": [
                     {
-                        "key": "field_5eb45884db2a1",
-                        "label": "Admission Term",
-                        "name": "admission_term",
+                        "key": "field_5eb458b1db2a2",
+                        "label": "Deadline Type",
+                        "name": "deadline_type",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -1076,9 +1076,9 @@
                         "display_type": "text"
                     },
                     {
-                        "key": "field_5eb458b1db2a2",
-                        "label": "Deadline Type",
-                        "name": "deadline_type",
+                        "key": "field_5eb45884db2a1",
+                        "label": "Admission Term",
+                        "name": "admission_term",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
