@@ -1078,6 +1078,9 @@ function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 	$value_message = get_theme_mod( 'tuition_value_message', null );
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
 
+	$nonresident = str_replace( '.00', '', $nonresident );
+	$resident    = str_replace( '.00', '', $resident );
+
 	ob_start();
 ?>
 	<h2 class="h4 mb-4">Tuition and Fees</h2>
