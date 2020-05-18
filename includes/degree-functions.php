@@ -1125,6 +1125,9 @@ function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
 
+	$nonresident = str_replace( '.00', '', $nonresident );
+	$resident    = str_replace( '.00', '', $resident );
+
 	ob_start();
 ?>
 	<div class="card h-100 text-center">
