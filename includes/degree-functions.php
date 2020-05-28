@@ -952,6 +952,7 @@ function get_degree_request_info_modal( $degree ) {
 			$plan_sub_plan = get_field( 'degree_plan_code', $degree ) . get_field( 'degree_subplan_code', $degree );
 			$guid = $degrees[$plan_sub_plan];
 		}
+	}
 	if ( ! $guid ) return '';
 
 	$form_div_id  = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
