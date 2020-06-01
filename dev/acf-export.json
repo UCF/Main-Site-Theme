@@ -665,7 +665,7 @@
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "30",
                     "class": "",
                     "id": ""
                 },
@@ -681,7 +681,23 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5ed01d99c33fb",
+                "label": "Graduate Slate ID",
+                "name": "graduate_slate_id",
+                "type": "read_only",
+                "instructions": "The GUID of this program in Graduate Studies' Slate instance. (Applies to graduate programs only)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
                     "class": "",
                     "id": ""
                 },

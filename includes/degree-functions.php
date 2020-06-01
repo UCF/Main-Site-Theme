@@ -511,7 +511,7 @@ function get_degree_course_overview_modern_layout( $degree ) {
 				<?php if( ! empty( $post_meta['degree_pdf'] ) ) : ?>
 					<div class="row">
 						<div class="col-12 text-right">
-							
+
 						<a href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
 							<?php
 							if( $course_catalog_link_text ) :
@@ -940,16 +940,24 @@ function get_degree_request_info_modal( $degree ) {
 	// (and the rest of this function) will have to be adjusted:
 	if ( ! is_graduate_degree( $degree ) ) return $markup;
 
-	// Retrieve GUID data that map plan+subplan codes to programs
-	// in the RFI form.  Back out early if something fails.
-	$guid_data = file_get_contents( THEME_JS_DIR . '/guid.json' );
-	if ( ! $guid_data ) return '';
+	// Back out early if a GUID isn't assigned to the program.
+	$guid = get_field( 'graduate_slate_id', $degree );
+	if ( ! $guid ) {
+		// Retrieve GUID data that map plan+subplan codes to programs
+		// in the RFI form.  Back out early if something fails.
+		// (This block will be removed in a future release)
+		$guid_data = file_get_contents( THEME_JS_DIR . '/guid.json' );
+		if ( $guid_data ) {
+			$degrees = json_decode( $guid_data, true );
+			$plan_sub_plan = get_field( 'degree_plan_code', $degree ) . get_field( 'degree_subplan_code', $degree );
+			$guid = $degrees[$plan_sub_plan];
+		}
+	}
+	if ( ! $guid ) return '';
 
-	$degrees = json_decode( $guid_data, true );
-	$plan_sub_plan = get_field( 'degree_plan_code', $degree ) . get_field( 'degree_subplan_code', $degree );
 	$form_div_id  = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
 	$rfi_form_src = get_degree_request_info_url_graduate( array(
-		'sys:field:pros_program1' => $degrees[$plan_sub_plan],
+		'sys:field:pros_program1' => $guid,
 		'output' => 'embed',
 		'div' => $form_div_id
 	) );
@@ -1078,6 +1086,9 @@ function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 	$value_message = get_theme_mod( 'tuition_value_message', null );
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
 
+	$nonresident = str_replace( '.00', '', $nonresident );
+	$resident    = str_replace( '.00', '', $resident );
+
 	ob_start();
 ?>
 	<h2 class="h4 mb-4">Tuition and Fees</h2>
@@ -1124,6 +1135,9 @@ function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
 
 function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
+
+	$nonresident = str_replace( '.00', '', $nonresident );
+	$resident    = str_replace( '.00', '', $resident );
 
 	ob_start();
 ?>
@@ -1349,6 +1363,7 @@ function main_site_get_remote_response_json( $url, $default=null ) {
 function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height'] = 'header-media-default';
 	$meta['degree_description'] = get_api_catalog_description( $program );
+	$meta['graduate_slate_id']  = $program->graduate_slate_id ?? null;
 
 	$outcomes    = main_site_get_remote_response_json( $program->outcomes );
 	$projections = main_site_get_remote_response_json( $program->projection_totals );
