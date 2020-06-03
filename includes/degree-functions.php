@@ -942,17 +942,6 @@ function get_degree_request_info_modal( $degree ) {
 
 	// Back out early if a GUID isn't assigned to the program.
 	$guid = get_field( 'graduate_slate_id', $degree );
-	if ( ! $guid ) {
-		// Retrieve GUID data that map plan+subplan codes to programs
-		// in the RFI form.  Back out early if something fails.
-		// (This block will be removed in a future release)
-		$guid_data = file_get_contents( THEME_JS_DIR . '/guid.json' );
-		if ( $guid_data ) {
-			$degrees = json_decode( $guid_data, true );
-			$plan_sub_plan = get_field( 'degree_plan_code', $degree ) . get_field( 'degree_subplan_code', $degree );
-			$guid = $degrees[$plan_sub_plan];
-		}
-	}
 	if ( ! $guid ) return '';
 
 	$form_div_id  = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
