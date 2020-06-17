@@ -626,6 +626,26 @@ add_filter( 'wpseo_sitemap_exclude_empty_terms', 'yoast_sitemap_empty_terms', 10
 
 
 /**
+ * Ensures that only published degrees are available to
+ * select from when picking existing degrees for Colleges'
+ * "Top Degrees" lists.
+ *
+ * @since 3.4.2
+ * @author Jo Dickson
+ * @param array $args WP_Query args
+ * @param array $field Array of ACF field settings
+ * @param int $post_id Post ID
+ * @return array Modified query args
+ */
+function college_top_degrees_options( $args, $field, $post_id ) {
+	$args['post_status'] = array( 'publish' );
+	return $args;
+}
+
+add_filter( 'acf/fields/post_object/query/name=top_degrees', 'college_top_degrees_options', 10, 3 );
+
+
+/**
  * Prevent the Lazy Loader plugin from modifying contents of REST API feeds.
  *
  * @since v3.3.9
