@@ -21,19 +21,24 @@ include_once 'includes/post-list-layouts.php';
 **/
 function display_top_degrees( $term ) {
 	$ret = "";
-	$top_degrees = get_field( 'top_degrees', 'colleges_' . $term->term_id );
-	if( $top_degrees ) :
-		foreach( $top_degrees as $top_degree ) :
-			$ret .= '<li><a href="' . get_permalink( $top_degree->ID ) . '" class="text-inverse nav-link">' . $top_degree->post_title . '</a></li>';
+
+	$top_degrees = get_field( 'top_degrees', $term );
+	if ( $top_degrees ) :
+		foreach ( $top_degrees as $top_degree ) :
+			// Ensure stale degrees are omitted from this list:
+			if ( $top_degree->post_status === 'publish' ):
+				$ret .= '<li><a href="' . get_permalink( $top_degree->ID ) . '" class="text-inverse nav-link">' . $top_degree->post_title . '</a></li>';
+			endif;
 		endforeach;
 	endif;
 
-	$top_degrees_custom = get_field( 'top_degrees_custom', 'colleges_' . $term->term_id );
-	if( $top_degrees_custom ) :
-		foreach( $top_degrees_custom as $top_degree_custom ) :
+	$top_degrees_custom = get_field( 'top_degrees_custom', $term );
+	if ( $top_degrees_custom ) :
+		foreach ( $top_degrees_custom as $top_degree_custom ) :
 			$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse nav-link">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
 		endforeach;
 	endif;
+
 	return $ret;
 }
 

@@ -14,6 +14,7 @@ $degree_copy = get_field( 'degree_search_copy', 'colleges_' . $term->term_id );
 $degree_search_url = "https://www.ucf.edu/degree-search/#!/college/" . $term->slug . "/";
 $degree_types = get_field( 'degree_types_available', 'colleges_' . $term->term_id );
 $degree_types = map_degree_types( $degree_types );
+$top_degrees = display_top_degrees( $term );
 // CTA
 $cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id );
 // News
@@ -88,6 +89,8 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 						?>
 						</ul>
 					</div>
+
+					<?php if ( $top_degrees ): ?>
 					<div class="col-lg-1 hidden-md-down">
 						<hr class="hidden-xs hidden-sm hr-vertical hr-vertical-white center-block">
 					</div>
@@ -98,10 +101,11 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 						</a>
 						<div id="top-degree-collapse" class="collapse d-lg-block">
 							<ul class="top-majors-list nav flex-column align-items-start list-unstyled pl-3">
-								<?php echo display_top_degrees( $term ); // located in functions.php ?>
+								<?php echo $top_degrees; // located in functions.php ?>
 							</ul>
 						</div>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
