@@ -572,7 +572,7 @@ add_filter( 'redirect_canonical', 'no_redirect_on_404' );
 
 
 /**
- * Ensures that deleted/drafted degrees are 302 redirected
+ * Ensures that deleted/drafted degrees are 307 redirected
  * to the degree search instead of returning a 404.  Helps
  * avoid situations with broken links after running a
  * degree import.
