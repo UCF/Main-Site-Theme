@@ -572,6 +572,33 @@ add_filter( 'redirect_canonical', 'no_redirect_on_404' );
 
 
 /**
+ * Ensures that deleted/drafted degrees are 302 redirected
+ * to the degree search instead of returning a 404.  Helps
+ * avoid situations with broken links after running a
+ * degree import.
+ *
+ * @since 3.4.3
+ * @author Jo Dickson
+ */
+function stale_degree_redirect() {
+	global $wp_query;
+
+	// is_singular() doesn't return an accurate value
+	// this early, so investigate $wp_query directly instead:
+	if (
+		is_404()
+		&& isset( $wp_query->query['post_type'] )
+		&& $wp_query->query['post_type'] === 'degree'
+	) {
+		wp_redirect( home_url( '/degree-search/' ) );
+		exit();
+	}
+}
+
+add_filter( 'template_redirect', 'stale_degree_redirect' );
+
+
+/**
  * Kill attachment pages, author pages, daily archive pages, search, and feeds.
  *
  * http://betterwp.net/wordpress-tips/disable-some-wordpress-pages/
