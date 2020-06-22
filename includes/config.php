@@ -590,7 +590,7 @@ function stale_degree_redirect() {
 		&& isset( $wp_query->query['post_type'] )
 		&& $wp_query->query['post_type'] === 'degree'
 	) {
-		wp_redirect( home_url( '/degree-search/' ) );
+		wp_redirect( home_url( '/degree-search/' ), 307 );
 		exit();
 	}
 }
