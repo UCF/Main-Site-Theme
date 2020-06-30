@@ -5,6 +5,8 @@ $term = get_queried_object();
 $lead_copy = get_field( 'college_page_lead_copy', 'colleges_' . $term->term_id );
 $lead_image = get_field( 'college_page_lead_image', 'colleges_' . $term->term_id )['url'];
 $college_url = get_field( 'colleges_url', 'colleges_' . $term->term_id );
+$lead_cta_text = get_field( 'lead_cta_text', 'colleges_' . $term->term_id ) ?: 'Visit ' . str_replace( array( 'http://', 'https://' ), '', $college_url );
+$lead_cta_url = get_field( 'lead_cta_url', 'colleges_' . $term->term_id ) ?: $college_url;
 // Stats
 $stats = get_field( 'stat', 'colleges_' . $term->term_id );
 $stats_background = get_field( 'stats_background_image', 'colleges_' . $term->term_id )['url'];
@@ -34,12 +36,13 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 					<?php endif; ?>
 				</div>
 			</div>
+			<?php if ( $lead_cta_url ): ?>
 			<div class="row">
 				<div class="col-12 text-center mt-3">
-					<?php $http = array( "http://", "https://" ); ?>
-					<a class="btn btn-primary" href="<?php echo $college_url; ?>" target="_blank">Visit <?php echo str_replace( $http, '', $college_url ) ; ?></a>
+					<a class="btn btn-primary" href="<?php echo $lead_cta_url; ?>" target="_blank"><?php echo $lead_cta_text; ?></a>
 				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</section>
 	<section class="section-stats">
