@@ -126,6 +126,44 @@
                 "mime_types": ""
             },
             {
+                "key": "field_5efb4d4223a6d",
+                "label": "Lead CTA Text",
+                "name": "lead_cta_text",
+                "type": "text",
+                "instructions": "Text to display in the call-to-action button underneath the lead section.  If not provided, \"Visit [college URL]\" will be displayed instead.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5efb4d8123a6e",
+                "label": "Lead CTA URL",
+                "name": "lead_cta_url",
+                "type": "text",
+                "instructions": "A custom URL to use on the lead call-to-action button.  If not provided, the College URL will be used instead.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_599f296e74d41",
                 "label": "Stats Section",
                 "name": "",
