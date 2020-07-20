@@ -1422,8 +1422,6 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 		}
 	}
 
-	$meta['degree_deadline_details'] = $deadline_data->application_deadline_details ?? null;
-
 	return $meta;
 }
 

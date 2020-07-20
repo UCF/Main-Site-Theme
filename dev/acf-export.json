@@ -1199,22 +1199,6 @@
                         "display_type": "text"
                     }
                 ]
-            },
-            {
-                "key": "field_5eb45938db2a6",
-                "label": "Deadline Details",
-                "name": "degree_deadline_details",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
             }
         ],
         "location": [
