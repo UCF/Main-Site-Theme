@@ -720,10 +720,11 @@ add_action( 'admin_head', 'modern_degree_hide_editor' );
 
 
 /**
- * Modifies Degree deadline and application requirement
- * repeater fields to be read-only in the WP admin.
+ * Removes editability of repeater fields that have
+ * the CSS class `repeater-field-readonly` applied to
+ * them, ultimately resulting in read-only repeaters.
  *
- * @since 3.4.1
+ * @since 3.4.5
  * @author Jo Dickson
  */
 function read_only_repeater_fields() {
