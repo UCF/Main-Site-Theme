@@ -1354,8 +1354,9 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['degree_description'] = get_api_catalog_description( $program );
 	$meta['graduate_slate_id']  = $program->graduate_slate_id ?? null;
 
-	$outcomes    = main_site_get_remote_response_json( $program->outcomes );
-	$projections = main_site_get_remote_response_json( $program->projection_totals );
+	$outcomes      = main_site_get_remote_response_json( $program->outcomes );
+	$projections   = main_site_get_remote_response_json( $program->projection_totals );
+	$deadline_data = main_site_get_remote_response_json( $program->application_deadlines );
 
 	$meta['degree_avg_annual_earnings'] = isset( $outcomes->latest->avg_annual_earnings ) ?
 		$outcomes->latest->avg_annual_earnings :
@@ -1400,6 +1401,26 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['degree_prj_openings'] = isset( $projections->openings ) ?
 		$projections->openings :
 		null;
+
+	$meta['degree_application_deadlines'] = array();
+	if ( isset( $deadline_data->application_deadlines ) ) {
+		foreach ( $deadline_data->application_deadlines as $deadline ) {
+			$meta['degree_application_deadlines'][] = array(
+				'admission_term' => $deadline->admission_term,
+				'deadline_type'  => $deadline->deadline_type,
+				'deadline'       => $deadline->display
+			);
+		}
+	}
+
+	$meta['degree_application_requirements'] = array();
+	if ( isset( $deadline_data->application_requirements ) ) {
+		foreach ( $deadline_data->application_requirements as $requirement ) {
+			$meta['degree_application_requirements'][] = array(
+				'requirement' => $requirement
+			);
+		}
+	}
 
 	return $meta;
 }
@@ -1693,30 +1714,3 @@ function main_site_degree_careers( $post_id, $post_meta ) {
 
 	return ob_get_clean();
 }
-
-
-/**
- * Disable the post content WYSIWYG editor for degrees
- * that use the 'modern' degree template
- *
- * @since 3.4.0
- * @author Jo Dickson
- */
-function modern_degree_hide_editor() {
-	$current_screen = get_current_screen();
-
-	if (
-		$current_screen
-		&& $current_screen->id === 'degree'
-		&& $current_screen->post_type === 'degree'
-	) {
-		$post_id = $_GET['post'];
-		if ( ! $post_id ) return;
-
-		if ( get_page_template_slug( $post_id ) === 'template-degree-modern.php' ) {
-			remove_post_type_support( 'degree', 'editor' );
-		}
-	}
-}
-
-add_action( 'admin_head', 'modern_degree_hide_editor' );
