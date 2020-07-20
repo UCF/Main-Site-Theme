@@ -572,6 +572,33 @@ add_filter( 'redirect_canonical', 'no_redirect_on_404' );
 
 
 /**
+ * Ensures that deleted/drafted degrees are 307 redirected
+ * to the degree search instead of returning a 404.  Helps
+ * avoid situations with broken links after running a
+ * degree import.
+ *
+ * @since 3.4.3
+ * @author Jo Dickson
+ */
+function stale_degree_redirect() {
+	global $wp_query;
+
+	// is_singular() doesn't return an accurate value
+	// this early, so investigate $wp_query directly instead:
+	if (
+		is_404()
+		&& isset( $wp_query->query['post_type'] )
+		&& $wp_query->query['post_type'] === 'degree'
+	) {
+		wp_redirect( home_url( '/degree-search/' ), 307 );
+		exit();
+	}
+}
+
+add_filter( 'template_redirect', 'stale_degree_redirect' );
+
+
+/**
  * Kill attachment pages, author pages, daily archive pages, search, and feeds.
  *
  * http://betterwp.net/wordpress-tips/disable-some-wordpress-pages/
@@ -623,6 +650,26 @@ function yoast_sitemap_empty_terms( $hide_empty, $taxonomies ) {
 }
 
 add_filter( 'wpseo_sitemap_exclude_empty_terms', 'yoast_sitemap_empty_terms', 10, 2 );
+
+
+/**
+ * Ensures that only published degrees are available to
+ * select from when picking existing degrees for Colleges'
+ * "Top Degrees" lists.
+ *
+ * @since 3.4.2
+ * @author Jo Dickson
+ * @param array $args WP_Query args
+ * @param array $field Array of ACF field settings
+ * @param int $post_id Post ID
+ * @return array Modified query args
+ */
+function college_top_degrees_options( $args, $field, $post_id ) {
+	$args['post_status'] = array( 'publish' );
+	return $args;
+}
+
+add_filter( 'acf/fields/post_object/query/name=top_degrees', 'college_top_degrees_options', 10, 3 );
 
 
 /**

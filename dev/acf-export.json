@@ -126,6 +126,44 @@
                 "mime_types": ""
             },
             {
+                "key": "field_5efb4d4223a6d",
+                "label": "Lead CTA Text",
+                "name": "lead_cta_text",
+                "type": "text",
+                "instructions": "Text to display in the call-to-action button underneath the lead section.  If not provided, \"Visit [college URL]\" will be displayed instead.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5efb4d8123a6e",
+                "label": "Lead CTA URL",
+                "name": "lead_cta_url",
+                "type": "text",
+                "instructions": "A custom URL to use on the lead call-to-action button.  If not provided, the College URL will be used instead.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_599f296e74d41",
                 "label": "Stats Section",
                 "name": "",
@@ -665,7 +703,7 @@
                 "required": 1,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "30",
                     "class": "",
                     "id": ""
                 },
@@ -681,7 +719,23 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5ed01d99c33fb",
+                "label": "Graduate Slate ID",
+                "name": "graduate_slate_id",
+                "type": "read_only",
+                "instructions": "The GUID of this program in Graduate Studies' Slate instance. (Applies to graduate programs only)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
                     "class": "",
                     "id": ""
                 },

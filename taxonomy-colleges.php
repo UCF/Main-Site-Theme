@@ -5,6 +5,8 @@ $term = get_queried_object();
 $lead_copy = get_field( 'college_page_lead_copy', 'colleges_' . $term->term_id );
 $lead_image = get_field( 'college_page_lead_image', 'colleges_' . $term->term_id )['url'];
 $college_url = get_field( 'colleges_url', 'colleges_' . $term->term_id );
+$lead_cta_text = get_field( 'lead_cta_text', 'colleges_' . $term->term_id ) ?: 'Visit ' . str_replace( array( 'http://', 'https://' ), '', $college_url );
+$lead_cta_url = get_field( 'lead_cta_url', 'colleges_' . $term->term_id ) ?: $college_url;
 // Stats
 $stats = get_field( 'stat', 'colleges_' . $term->term_id );
 $stats_background = get_field( 'stats_background_image', 'colleges_' . $term->term_id )['url'];
@@ -14,6 +16,7 @@ $degree_copy = get_field( 'degree_search_copy', 'colleges_' . $term->term_id );
 $degree_search_url = "https://www.ucf.edu/degree-search/#!/college/" . $term->slug . "/";
 $degree_types = get_field( 'degree_types_available', 'colleges_' . $term->term_id );
 $degree_types = map_degree_types( $degree_types );
+$top_degrees = display_top_degrees( $term );
 // CTA
 $cta = get_field( 'college_page_cta_section', 'colleges_' . $term->term_id );
 // News
@@ -33,12 +36,13 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 					<?php endif; ?>
 				</div>
 			</div>
+			<?php if ( $lead_cta_url ): ?>
 			<div class="row">
 				<div class="col-12 text-center mt-3">
-					<?php $http = array( "http://", "https://" ); ?>
-					<a class="btn btn-primary" href="<?php echo $college_url; ?>" target="_blank">Visit <?php echo str_replace( $http, '', $college_url ) ; ?></a>
+					<a class="btn btn-primary" href="<?php echo $lead_cta_url; ?>" target="_blank"><?php echo $lead_cta_text; ?></a>
 				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</section>
 	<section class="section-stats">
@@ -88,6 +92,8 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 						?>
 						</ul>
 					</div>
+
+					<?php if ( $top_degrees ): ?>
 					<div class="col-lg-1 hidden-md-down">
 						<hr class="hidden-xs hidden-sm hr-vertical hr-vertical-white center-block">
 					</div>
@@ -98,10 +104,11 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 						</a>
 						<div id="top-degree-collapse" class="collapse d-lg-block">
 							<ul class="top-majors-list nav flex-column align-items-start list-unstyled pl-3">
-								<?php echo display_top_degrees( $term ); // located in functions.php ?>
+								<?php echo $top_degrees; // located in functions.php ?>
 							</ul>
 						</div>
 					</div>
+					<?php endif; ?>
 				</div>
 			</div>
 		</div>
