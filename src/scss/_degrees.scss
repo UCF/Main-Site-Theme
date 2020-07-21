@@ -169,3 +169,16 @@
 .accordion-courses .collapsed .course-icon:before {
   content: "";
 }
+
+.start-application-card-number {
+  background-color: $brand-primary;
+  border: .25rem solid $white;
+  border-radius: 3rem;
+  color: $black;
+  height: 3rem;
+  line-height: 1.1rem;
+  margin: -1.5rem auto 0 auto;
+  padding: .75rem 1rem;
+  text-align: center;
+  width: 3rem;
+}
