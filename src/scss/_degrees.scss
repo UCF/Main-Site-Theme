@@ -146,19 +146,19 @@
 }
 
 .degree-career-list {
-  list-style: none; /* Remove default bullets */
+  list-style: none; // Remove default bullets
 }
 
 .degree-career-list-item {
   line-height: 1.4;
 
   &::before {
-    content: "\2022";
     color: $brand-primary;
-    font-weight: 900;
+    content: '\2022';
     display: inline-block;
-    width: 1em;
+    font-weight: 900;
     margin-left: -1em;
+    width: 1em;
   }
 }
 
@@ -167,11 +167,11 @@
 }
 
 .accordion-courses .course-icon:before {
-  content: "";
+  content: '';
 }
 
 .accordion-courses .collapsed .course-icon:before {
-  content: "";
+  content: '';
 }
 
 .start-application-card-number {
@@ -180,9 +180,6 @@
   border-radius: 3rem;
   color: $black;
   height: 3rem;
-  line-height: 1.1rem;
-  margin: -1.5rem auto 0 auto;
-  padding: .75rem 1rem;
-  text-align: center;
+  margin: -1.5rem auto 0;
   width: 3rem;
 }

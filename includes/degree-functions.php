@@ -504,7 +504,7 @@ function get_degree_start_application_today_modern_layout( $degree ) {
 							<div class="row mb-4">
 								<div class="col-12 col-lg-6">
 									<div class="card start-application-card h-100 mt-3">
-										<div class="d-inline-block start-application-card-number font-weight-bold">1</div>
+										<div class="start-application-card-number font-weight-bold d-inline-flex align-items-center justify-content-center">1</div>
 										<div class="card-block text-default text-center">
 										<p class="mb-0"><?php echo $app_steps['step_one_copy']; ?></p>
 										</div>
@@ -512,7 +512,7 @@ function get_degree_start_application_today_modern_layout( $degree ) {
 								</div>
 								<div class="col-12 col-lg-6">
 									<div class="card start-application-card h-100 mt-3">
-										<div class="d-inline-block start-application-card-number font-weight-bold">2</div>
+										<div class="start-application-card-number font-weight-bold d-inline-flex align-items-center justify-content-center">2</div>
 										<div class="card-block text-default text-center">
 											<p class="mb-0"><?php echo $app_steps['step_two_copy']; ?></p>
 										</div>
