@@ -121,6 +121,7 @@ function get_degree_content_modern_layout( $degree ) {
 	echo get_degree_quotes_modern_layout( $degree );
 	echo get_degree_skills_career_modern_layout( $degree );
 	echo get_degree_admission_requirements_modern_layout( $degree );
+	echo get_degree_ucf_online_modern_layout( $degree );
 	echo get_degree_news_spotlight_modern_layout( $degree );
 }
 
@@ -777,6 +778,57 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 			</div>
 		</div>
 	</section>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns HTML for the UCF Online callout section.
+ *
+ * @since 3.5.0
+ * @author Cadie Stockman
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_ucf_online_modern_layout( $degree ) {
+	$online_heading = get_field( 'degree_online_heading', $degree );
+	$online_copy    = get_field( 'degree_online_copy', $degree );
+	$online_button  = get_field( 'degree_online_button', $degree );
+	$online_image   = get_field( 'degree_online_image', $degree );
+
+	// Set content column classes based on if an image for the section is set.
+	$online_content_col_class = ( $online_image ) ? "col-12 col-lg-8" : "col-12";
+
+	// Return an empty string if some of the UCF Online fields are empty.
+	if ( empty( $online_heading ) || empty( $online_copy ) ) return '';
+
+	foreach ( $online_button as $button_fields ) {
+		if ( empty( $button_fields ) ) {
+			return '';
+		}
+	}
+
+	ob_start();
+?>
+		<section id="earn-your-degree-online" aria-label="Earn Your Degree Online">
+			<div class="jumbotron jumbotron-fluid bg-primary mb-0 py-lg-5">
+				<div class="container">
+					<div class="row">
+						<div class="<?php echo $online_content_col_class; ?> d-flex flex-column justify-content-center align-items-start">
+							<h2 class="mb-3 mb-lg-4"><?php echo $online_heading; ?></h2>
+							<p class="degree-online-copy mb-4 pb-lg-2"><?php echo $online_copy; ?></p>
+							<a class="btn btn-secondary" href="<?php echo $online_button['button_link']; ?>"><?php echo $online_button['button_text']; ?></a>
+						</div>
+						<?php if ( $online_image ) : ?>
+						<div class="col-lg-4 hidden-md-down d-flex align-items-center justify-content-end">
+							<img src="<?php echo $online_image; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
+						</div>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</section>
 <?php
 	return ob_get_clean();
 }
