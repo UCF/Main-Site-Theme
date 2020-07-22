@@ -466,7 +466,7 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 /**
  * Returns HTML for the Start Your Application Today section.
  *
- * @since 3.5.0
+ * @since 3.4.5
  * @author Cadie Stockman
  * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
@@ -786,7 +786,7 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 /**
  * Returns HTML for the UCF Online callout section.
  *
- * @since 3.5.0
+ * @since 3.4.5
  * @author Cadie Stockman
  * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
