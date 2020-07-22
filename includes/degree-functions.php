@@ -331,7 +331,7 @@ function get_degree_description_modern_layout( $degree ) {
 				<?php if ( $modern_description_image || ( have_rows( 'highlights', $degree ) ) ): ?>
 				<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
 					<?php if ( $modern_description_image ) : ?>
-						<div class="px-5 px-lg-0">
+						<div class="px-5 px-lg-0 text-center">
 							<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
 						</div>
 					<?php endif; ?>
