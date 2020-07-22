@@ -690,3 +690,69 @@ function disable_lazyload_in_rest() {
 }
 
 add_action( 'rest_api_init', 'disable_lazyload_in_rest' );
+
+
+/**
+ * Disable the post content WYSIWYG editor for degrees
+ * that use the 'modern' degree template
+ *
+ * @since 3.4.0
+ * @author Jo Dickson
+ */
+function modern_degree_hide_editor() {
+	$current_screen = get_current_screen();
+
+	if (
+		$current_screen
+		&& $current_screen->id === 'degree'
+		&& $current_screen->post_type === 'degree'
+	) {
+		$post_id = $_GET['post'];
+		if ( ! $post_id ) return;
+
+		if ( get_page_template_slug( $post_id ) === 'template-degree-modern.php' ) {
+			remove_post_type_support( 'degree', 'editor' );
+		}
+	}
+}
+
+add_action( 'admin_head', 'modern_degree_hide_editor' );
+
+
+/**
+ * Removes editability of repeater fields that have
+ * the CSS class `repeater-field-readonly` applied to
+ * them, ultimately resulting in read-only repeaters.
+ *
+ * @since 3.4.5
+ * @author Jo Dickson
+ */
+function read_only_repeater_fields() {
+	ob_start();
+?>
+	<script type="text/javascript">
+	(function($) {
+
+		acf.add_action('ready', function( $el ) {
+
+			var $readonly_fields = $('.repeater-field-readonly');
+			$readonly_fields.each(function() {
+				var $field = $(this);
+
+				$field
+					.find('.acf-actions')
+						.remove()
+						.end()
+					.find('.acf-row-handle')
+						.remove()
+			});
+
+		});
+
+	})(jQuery);
+	</script>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
