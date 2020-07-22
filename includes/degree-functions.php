@@ -225,7 +225,7 @@ function get_degree_info_modern_layout( $degree ) {
 			<div class="container">
 				<div class="row d-lg-flex justify-content-lg-between">
 					<div class="col col-lg-5 pr-lg-5">
-						<h2 class="h4 font-condensed text-uppercase mb-4 pb-2">Program at a Glance</h2>
+						<h2 class="h4 font-condensed text-uppercase mb-4 pb-lg-2">Program at a Glance</h2>
 						<div class="row">
 							<div class="col col-sm-9 col-lg mb-4 mb-lg-0">
 								<dl>
@@ -305,11 +305,11 @@ function get_degree_description_modern_layout( $degree ) {
 	ob_start();
 ?>
 	<section aria-label="Program description and highlights">
-		<div class="container py-lg-3 my-5">
-			<div class="row my-lg-3">
+		<div class="container py-lg-3 my-lg-5">
+			<div class="row">
 				<div class="col">
 					<?php if( $modern_description_heading ) : ?>
-						<h2 class="font-weight-light mb-4 pb-2">
+						<h2 class="font-weight-light mb-4">
 							<?php echo $modern_description_heading; ?>
 						</h2>
 					<?php endif; ?>
@@ -674,7 +674,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 				<div class="row">
 					<?php if( $degree_skills_heading ) : ?>
 						<div class="col-12">
-							<h2 id="skills" class="font-condensed text-primary text-uppercase my-4"><?php echo $degree_skills_heading; ?></h2>
+							<h2 id="skills" class="font-condensed text-primary text-uppercase mb-4"><?php echo $degree_skills_heading; ?></h2>
 						</div>
 					<?php endif; ?>
 
@@ -683,7 +683,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 							<ul class="pl-4 mb-0">
 								<?php while ( have_rows( 'degree_skills_list', $degree ) ) : the_row(); ?>
 									<?php if( get_sub_field( 'degree_skills_list_item' ) ) : ?>
-										<li class="degree-skill-list-item mb-4"><?php the_sub_field( 'degree_skills_list_item' ); ?></li>
+										<li class="degree-skill-list-item mb-3 mb-lg-4"><?php the_sub_field( 'degree_skills_list_item' ); ?></li>
 									<?php endif; ?>
 								<?php endwhile; ?>
 							</ul>
@@ -691,9 +691,9 @@ function get_degree_skills_career_modern_layout( $degree ) {
 					<?php endif; ?>
 
 					<?php if( $degree_careers_heading ) : ?>
-						<div class="col-lg-4 offset-lg-1 mt-4">
+						<div class="col-lg-4 offset-lg-1">
 							<?php if( $degree_careers_heading ) : ?>
-								<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $degree_careers_heading; ?></h3>
+								<h3 class="font-condensed h5 text-uppercase mb-3 pt-3"><?php echo $degree_careers_heading; ?></h3>
 							<?php endif; ?>
 
 							<?php if( have_rows( 'degree_career_list', $degree ) ) : ?>
@@ -701,7 +701,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 									<ul class="degree-career-list pl-2">
 										<?php while ( have_rows( 'degree_career_list', $degree ) ) : the_row(); ?>
 											<?php if( get_sub_field( 'degree_career_list_item' ) ) : ?>
-												<li class="degree-career-list-item"><?php the_sub_field( 'degree_career_list_item' ); ?></li>
+												<li class="degree-career-list-item mb-2"><?php the_sub_field( 'degree_career_list_item' ); ?></li>
 											<?php endif; ?>
 										<?php endwhile; ?>
 									</ul>
