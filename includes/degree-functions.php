@@ -465,19 +465,19 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 /**
  * Returns HTML for the Start Your Application Today section.
  *
- * @since 3.4.5
+ * @since 3.5.0
  * @author Cadie Stockman
  * @param object $degree WP_Post object representing a degree
  * @return string HTML markup
  */
 function get_degree_start_application_today_modern_layout( $degree ) {
-	$app_img       = get_field( 'start_application_image', $degree );
+	$app_image     = get_field( 'start_application_image', $degree );
 	$app_heading   = get_field( 'start_application_heading', $degree );
 	$app_lead_copy = get_field( 'start_application_lead_copy', $degree );
 	$app_steps     = get_field( 'start_application_steps', $degree );
 
 	// Set content column classes based on if an image for the section is set.
-	$app_content_col_class = ( $app_img ) ? "col-12 col-lg-7" : "col-12 col-lg-10 offset-lg-1";
+	$app_content_col_class = ( $app_image ) ? "col-12 col-lg-7" : "col-12 col-lg-10 offset-lg-1";
 
 	// Return an empty string if any of the Application Steps fields are empty.
 	foreach ( $app_steps as $step_field ) {
@@ -493,9 +493,9 @@ function get_degree_start_application_today_modern_layout( $degree ) {
 				<img class="media-background object-fit-cover hidden-md-down" src="<?php echo THEME_STATIC_URL . '/img/start-your-application-dark-bg.jpg'; ?>" alt="" aria-hidden="true">
 				<div class="container py-lg-3">
 					<div class="row">
-						<?php if ( $app_img ) : ?>
+						<?php if ( $app_image ) : ?>
 						<div class="hidden-md-down col-lg-5 pr-lg-5 d-flex align-items-center justify-content-center">
-							<img src="<?php echo $app_img; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
+							<img src="<?php echo $app_image; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
 						</div>
 						<?php endif; ?>
 						<div class="<?php echo $app_content_col_class; ?>">
