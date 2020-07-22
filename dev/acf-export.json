@@ -1707,6 +1707,174 @@
                 ]
             },
             {
+                "key": "field_5f16515899d7b",
+                "label": "Start Your Application",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f17393e12e2d",
+                "label": "Start Application Image",
+                "name": "start_application_image",
+                "type": "image",
+                "instructions": "Image to be displayed to the left of the Start Your Application heading, copy and steps. The image will be hidden in the xs, sm and md breakpoints.\r\n<br><br>\r\nThe image should be a square 450px by 450px JPG with the focus of the image in the center. The circular crop is handled with CSS.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": 450,
+                "max_height": 450,
+                "max_size": "",
+                "mime_types": "jpg"
+            },
+            {
+                "key": "field_5f16518a99d7d",
+                "label": "Start Your Application Heading",
+                "name": "start_application_heading",
+                "type": "text",
+                "instructions": "The heading to be displayed in the Start Your Application section. Defaults to 'Start Your Application Today'.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Start Your Application Today",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f16520999d7e",
+                "label": "Start Your Application Lead Copy",
+                "name": "start_application_lead_copy",
+                "type": "textarea",
+                "instructions": "Lead copy displayed under the Start Your Application heading. Defaults to 'Ready to get started? Take the next step to save your spot at UCF.'",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Ready to get started? Take the next step to save your spot at UCF.",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 2,
+                "new_lines": ""
+            },
+            {
+                "key": "field_5f16531899d81",
+                "label": "Start Your Application Steps",
+                "name": "start_application_steps",
+                "type": "group",
+                "instructions": "The Start Your Application section will only display if the Step One, Step Two, Button Copy and Button Link fields are filled.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f1652ae99d7f",
+                        "label": "Step One Copy",
+                        "name": "step_one_copy",
+                        "type": "textarea",
+                        "instructions": "The copy displayed in the Start Your Application section's Step 1 box.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": 6,
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5f1652fd99d80",
+                        "label": "Step Two Copy",
+                        "name": "step_two_copy",
+                        "type": "textarea",
+                        "instructions": "The copy displayed in the Start Your Application section's Step 2 box.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": 6,
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5f16536599d82",
+                        "label": "Button Text",
+                        "name": "step_two_button_text",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f16538e99d83",
+                        "label": "Button Link",
+                        "name": "step_two_button_link",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": ""
+                    }
+                ]
+            },
+            {
                 "key": "field_5e9dfbc04b1b0",
                 "label": "Course Overview",
                 "name": "",
@@ -2105,6 +2273,136 @@
                 "toolbar": "full",
                 "media_upload": 1,
                 "delay": 0
+            },
+            {
+                "key": "field_5f17a7026229f",
+                "label": "UCF Online Callout",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f17a74c622a1",
+                "label": "UCF Online Heading",
+                "name": "degree_online_heading",
+                "type": "text",
+                "instructions": "The heading to be displayed in the UCF Online callout section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f17a7bd622a2",
+                "label": "UCF Online Copy",
+                "name": "degree_online_copy",
+                "type": "textarea",
+                "instructions": "Copy displayed under the UCF Online callout heading.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_5f17a808622a3",
+                "label": "UCF Online Button",
+                "name": "degree_online_button",
+                "type": "group",
+                "instructions": "Button displayed under the UCF Online callout section copy.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f17a84a622a4",
+                        "label": "Button Text",
+                        "name": "button_text",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f17a864622a5",
+                        "label": "Button Link",
+                        "name": "button_link",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5f17a876622a6",
+                "label": "UCF Online Image",
+                "name": "degree_online_image",
+                "type": "image",
+                "instructions": "Image to be displayed to the right of the UCF Online heading, copy and button. The image will be hidden in the xs, sm and md breakpoints.\r\n<br><br>\r\nThe image should be a square 300px by 300px JPG with the focus of the image in the center. The circular crop is handled with CSS.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": 300,
+                "max_height": 300,
+                "max_size": "",
+                "mime_types": "jpg"
             },
             {
                 "key": "field_5e9f3a2ed038e",
