@@ -683,9 +683,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 							<ul class="pl-4 mb-0">
 								<?php while ( have_rows( 'degree_skills_list', $degree ) ) : the_row(); ?>
 									<?php if( get_sub_field( 'degree_skills_list_item' ) ) : ?>
-										<li class="degree-skill-list-item mb-4">
-											<?php the_sub_field( 'degree_skills_list_item' ); ?>
-										</li>
+										<li class="degree-skill-list-item mb-4"><?php the_sub_field( 'degree_skills_list_item' ); ?></li>
 									<?php endif; ?>
 								<?php endwhile; ?>
 							</ul>
@@ -703,9 +701,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 									<ul class="degree-career-list pl-2">
 										<?php while ( have_rows( 'degree_career_list', $degree ) ) : the_row(); ?>
 											<?php if( get_sub_field( 'degree_career_list_item' ) ) : ?>
-												<li class="degree-career-list-item">
-													<?php the_sub_field( 'degree_career_list_item' ); ?>
-												</li>
+												<li class="degree-career-list-item"><?php the_sub_field( 'degree_career_list_item' ); ?></li>
 											<?php endif; ?>
 										<?php endwhile; ?>
 									</ul>
