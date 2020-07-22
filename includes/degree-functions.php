@@ -494,7 +494,7 @@ function get_degree_start_application_today_modern_layout( $degree ) {
 				<div class="container py-lg-3">
 					<div class="row">
 						<?php if ( $app_img ) : ?>
-						<div class="hidden-md-down col-lg-5 pr-lg-5 d-flex align-items-center">
+						<div class="hidden-md-down col-lg-5 pr-lg-5 d-flex align-items-center justify-content-center">
 							<img src="<?php echo $app_img; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
 						</div>
 						<?php endif; ?>
