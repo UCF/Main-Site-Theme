@@ -481,10 +481,14 @@ function get_degree_start_application_today_modern_layout( $degree ) {
 	$app_content_col_class = ( $app_image ) ? "col-12 col-lg-7" : "col-12 col-lg-10 offset-lg-1";
 
 	// Return an empty string if any of the Application Steps fields are empty.
-	foreach ( $app_steps as $step_field ) {
-		if ( empty( $step_field ) ) {
-			return '';
+	if ( isset( $app_steps ) ) {
+		foreach ( $app_steps as $step_field ) {
+			if ( empty( $step_field ) ) {
+				return '';
+			}
 		}
+	} else {
+		return '';
 	}
 
 	ob_start();
