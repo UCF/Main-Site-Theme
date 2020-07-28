@@ -116,10 +116,12 @@ function get_degree_content_modern_layout( $degree ) {
 	echo get_degree_info_modern_layout( $degree );
 	echo get_degree_description_modern_layout( $degree );
 	echo get_degree_application_deadline_modern_layout( $degree );
+	echo get_degree_start_application_today_modern_layout( $degree );
 	echo get_degree_course_overview_modern_layout( $degree );
 	echo get_degree_quotes_modern_layout( $degree );
 	echo get_degree_skills_career_modern_layout( $degree );
 	echo get_degree_admission_requirements_modern_layout( $degree );
+	echo get_degree_ucf_online_modern_layout( $degree );
 	echo get_degree_news_spotlight_modern_layout( $degree );
 }
 
@@ -224,7 +226,7 @@ function get_degree_info_modern_layout( $degree ) {
 			<div class="container">
 				<div class="row d-lg-flex justify-content-lg-between">
 					<div class="col col-lg-5 pr-lg-5">
-						<h2 class="h4 font-condensed text-uppercase mb-4 pb-2">Program at a Glance</h2>
+						<h2 class="h4 font-condensed text-uppercase mb-4 pb-lg-2">Program at a Glance</h2>
 						<div class="row">
 							<div class="col col-sm-9 col-lg mb-4 mb-lg-0">
 								<dl>
@@ -304,11 +306,11 @@ function get_degree_description_modern_layout( $degree ) {
 	ob_start();
 ?>
 	<section aria-label="Program description and highlights">
-		<div class="container py-lg-3 my-5">
-			<div class="row my-lg-3">
+		<div class="container py-lg-3 my-lg-5">
+			<div class="row">
 				<div class="col">
 					<?php if( $modern_description_heading ) : ?>
-						<h2 class="font-weight-light mb-4 pb-2">
+						<h2 class="font-weight-light mb-4">
 							<?php echo $modern_description_heading; ?>
 						</h2>
 					<?php endif; ?>
@@ -330,7 +332,7 @@ function get_degree_description_modern_layout( $degree ) {
 				<?php if ( $modern_description_image || ( have_rows( 'highlights', $degree ) ) ): ?>
 				<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
 					<?php if ( $modern_description_image ) : ?>
-						<div class="px-5 px-lg-0">
+						<div class="px-5 px-lg-0 text-center">
 							<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
 						</div>
 					<?php endif; ?>
@@ -457,6 +459,76 @@ function get_degree_application_deadline_modern_layout( $degree ) {
 <?php
 	endif;
 
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns HTML for the Start Your Application Today section.
+ *
+ * @since 3.4.5
+ * @author Cadie Stockman
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_start_application_today_modern_layout( $degree ) {
+	$app_image     = get_field( 'start_application_image', $degree );
+	$app_heading   = get_field( 'start_application_heading', $degree );
+	$app_lead_copy = get_field( 'start_application_lead_copy', $degree );
+	$app_steps     = get_field( 'start_application_steps', $degree );
+
+	// Set content column classes based on if an image for the section is set.
+	$app_content_col_class = ( $app_image ) ? "col-12 col-lg-7" : "col-12 col-lg-10 offset-lg-1";
+
+	// Return an empty string if any of the Application Steps fields are empty.
+	foreach ( $app_steps as $step_field ) {
+		if ( empty( $step_field ) ) {
+			return '';
+		}
+	}
+
+	ob_start();
+?>
+		<section id="start-your-application" aria-label="Start Your Application">
+			<div class="media-background-container bg-inverse py-lg-5 py-4">
+				<img class="media-background object-fit-cover hidden-md-down" src="<?php echo THEME_STATIC_URL . '/img/start-your-application-dark-bg.jpg'; ?>" alt="" aria-hidden="true">
+				<div class="container py-lg-3">
+					<div class="row">
+						<?php if ( $app_image ) : ?>
+						<div class="hidden-md-down col-lg-5 pr-lg-5 d-flex align-items-center justify-content-center">
+							<img src="<?php echo $app_image; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
+						</div>
+						<?php endif; ?>
+						<div class="<?php echo $app_content_col_class; ?>">
+							<h2 class="heading-underline"><?php echo $app_heading; ?></h2>
+							<p class="lead mb-lg-4"><?php echo $app_lead_copy; ?></p>
+							<div class="row mb-4">
+								<div class="col-12 col-lg-6">
+									<div class="card start-application-card h-100 mt-3">
+										<div class="start-application-card-number font-weight-bold d-inline-flex align-items-center justify-content-center">1</div>
+										<div class="card-block text-default text-center">
+										<p class="mb-0"><?php echo $app_steps['step_one_copy']; ?></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-12 col-lg-6">
+									<div class="card start-application-card h-100 mt-3">
+										<div class="start-application-card-number font-weight-bold d-inline-flex align-items-center justify-content-center">2</div>
+										<div class="card-block text-default text-center">
+											<p class="mb-0"><?php echo $app_steps['step_two_copy']; ?></p>
+										</div>
+										<div class="mb-0">
+											<a class="btn btn-primary btn-block" href="<?php echo $app_steps['step_two_button_link']; ?>" target="_blank" rel="noopener"><?php echo $app_steps['step_two_button_text']; ?></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+<?php
 	return ob_get_clean();
 }
 
@@ -603,7 +675,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 				<div class="row">
 					<?php if( $degree_skills_heading ) : ?>
 						<div class="col-12">
-							<h2 id="skills" class="font-condensed text-primary text-uppercase my-4"><?php echo $degree_skills_heading; ?></h2>
+							<h2 id="skills" class="font-condensed text-primary text-uppercase mb-4"><?php echo $degree_skills_heading; ?></h2>
 						</div>
 					<?php endif; ?>
 
@@ -612,9 +684,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 							<ul class="pl-4 mb-0">
 								<?php while ( have_rows( 'degree_skills_list', $degree ) ) : the_row(); ?>
 									<?php if( get_sub_field( 'degree_skills_list_item' ) ) : ?>
-										<li class="degree-skill-list-item mb-4">
-											<?php the_sub_field( 'degree_skills_list_item' ); ?>
-										</li>
+										<li class="degree-skill-list-item mb-3 mb-lg-4"><?php the_sub_field( 'degree_skills_list_item' ); ?></li>
 									<?php endif; ?>
 								<?php endwhile; ?>
 							</ul>
@@ -622,9 +692,9 @@ function get_degree_skills_career_modern_layout( $degree ) {
 					<?php endif; ?>
 
 					<?php if( $degree_careers_heading ) : ?>
-						<div class="col-lg-4 offset-lg-1 mt-4">
+						<div class="col-lg-4 offset-lg-1">
 							<?php if( $degree_careers_heading ) : ?>
-								<h3 class="font-condensed h5 text-uppercase mb-3"><?php echo $degree_careers_heading; ?></h3>
+								<h3 class="font-condensed h5 text-uppercase mb-3 pt-3"><?php echo $degree_careers_heading; ?></h3>
 							<?php endif; ?>
 
 							<?php if( have_rows( 'degree_career_list', $degree ) ) : ?>
@@ -632,9 +702,7 @@ function get_degree_skills_career_modern_layout( $degree ) {
 									<ul class="degree-career-list pl-2">
 										<?php while ( have_rows( 'degree_career_list', $degree ) ) : the_row(); ?>
 											<?php if( get_sub_field( 'degree_career_list_item' ) ) : ?>
-												<li class="degree-career-list-item">
-													<?php the_sub_field( 'degree_career_list_item' ); ?>
-												</li>
+												<li class="degree-career-list-item mb-2"><?php the_sub_field( 'degree_career_list_item' ); ?></li>
 											<?php endif; ?>
 										<?php endwhile; ?>
 									</ul>
@@ -710,6 +778,57 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 			</div>
 		</div>
 	</section>
+<?php
+	return ob_get_clean();
+}
+
+
+/**
+ * Returns HTML for the UCF Online callout section.
+ *
+ * @since 3.4.5
+ * @author Cadie Stockman
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_ucf_online_modern_layout( $degree ) {
+	$online_heading = get_field( 'degree_online_heading', $degree );
+	$online_copy    = get_field( 'degree_online_copy', $degree );
+	$online_button  = get_field( 'degree_online_button', $degree );
+	$online_image   = get_field( 'degree_online_image', $degree );
+
+	// Set content column classes based on if an image for the section is set.
+	$online_content_col_class = ( $online_image ) ? "col-12 col-lg-8" : "col-12";
+
+	// Return an empty string if some of the UCF Online fields are empty.
+	if ( empty( $online_heading ) || empty( $online_copy ) ) return '';
+
+	foreach ( $online_button as $button_fields ) {
+		if ( empty( $button_fields ) ) {
+			return '';
+		}
+	}
+
+	ob_start();
+?>
+		<section id="earn-your-degree-online" aria-label="Earn Your Degree Online">
+			<div class="jumbotron jumbotron-fluid bg-primary mb-0 py-lg-5">
+				<div class="container">
+					<div class="row">
+						<div class="<?php echo $online_content_col_class; ?> d-flex flex-column justify-content-center align-items-start">
+							<h2 class="mb-3 mb-lg-4"><?php echo $online_heading; ?></h2>
+							<p class="degree-online-copy mb-4 pb-lg-2"><?php echo $online_copy; ?></p>
+							<a class="btn btn-secondary" href="<?php echo $online_button['button_link']; ?>"><?php echo $online_button['button_text']; ?></a>
+						</div>
+						<?php if ( $online_image ) : ?>
+						<div class="col-lg-4 hidden-md-down d-flex align-items-center justify-content-end">
+							<img src="<?php echo $online_image; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
+						</div>
+						<?php endif; ?>
+					</div>
+				</div>
+			</div>
+		</section>
 <?php
 	return ob_get_clean();
 }
