@@ -134,13 +134,29 @@ function get_organization_html( $title, $org, $count ) {
 }
 
 /**
+ * Returns formatted spotlight markup.
+ *
+ * @author RJ Bruneel
+ * @since 3.5.1
+ * @param object $post The post object
+ * @return string The spotlight markup
+*/
+function get_location_spotlight( $post ) {
+	if( isset( $post->meta['ucf_location_spotlight'] ) && $post->meta['ucf_location_spotlight'] ) :
+		$spotlight = do_shortcode( '[ucf-spotlight slug="' . $post->meta['ucf_location_spotlight']->post_name . '"]' );
+		return '<div class="my-5 mt-lg-0 mb-lg-5">' . $spotlight . '</div>';
+	endif;
+
+	return '';
+}
+
+/**
  * Returns a formatted list of location organizations.
  *
  * @author RJ Bruneel
  * @since 3.2.8
- * @param string $markup The passed in markup
  * @param object $post The post object
- * @return string The header markup
+ * @return string The location organizations markup
 */
 function get_location_organizations( $post ) {
 	ob_start();
