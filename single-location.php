@@ -56,6 +56,7 @@ else if ( ! empty( $location_fallback_image ) ) {
 				<?php endif; ?>
 
 				<div class="col-sm-12 col-md-5 col-lg-12">
+					<?php echo get_location_spotlight( $post ); ?>
 					<?php echo get_location_organizations( $post ); ?>
 				</div>
 			</div>
