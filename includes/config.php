@@ -724,7 +724,7 @@ add_action( 'admin_head', 'modern_degree_hide_editor' );
  * the CSS class `repeater-field-readonly` applied to
  * them, ultimately resulting in read-only repeaters.
  *
- * @since 3.4.5
+ * @since 3.6.0
  * @author Jo Dickson
  */
 function read_only_repeater_fields() {
