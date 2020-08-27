@@ -49,7 +49,6 @@ function get_phonebook_results( $query ) {
 
 	$results = phonebook_deduplicate_staff( $results );
 
-	// $results = array_merge( $organizations, $departments, $results );
 	$results = array(
 		'total_results' => count( $organizations ) + count( $departments ) + count( $results ),
 		'organizations' => $organizations,
