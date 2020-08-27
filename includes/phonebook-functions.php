@@ -309,25 +309,15 @@ function format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group 
 	</div>
 
 	<?php if ( $is_dept && $result->organization ) : ?>
-		<span class="division d-block mb-3">
-			A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo phonebook_fix_name_case( $result->organization ); ?></a>
-		</span>
+	<span class="division d-block mb-3">
+		A division of: <a href="?query=<?php echo urlencode( $result->organization ); ?>#phonebook-organizations"><?php echo phonebook_fix_name_case( $result->organization ); ?></a>
+	</span>
 	<?php endif; ?>
 
-	<?php if ( ! $is_group && ( $result->department || $result->organization ) ): ?>
-	<div class="mb-2">
-		<?php if ( $result->department ) : ?>
-			<span class="department d-block mb-2">
-				<a href="?query=<?php echo urlencode( $result->department ); ?>"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
-			</span>
-		<?php endif; ?>
-
-		<?php if ( $result->organization ) : ?>
-			<span class="organization d-block mb-2">
-				<a href="?query=<?php echo urlencode( $result->organization ); ?>"><?php echo phonebook_fix_name_case( $result->organization ); ?></a>
-			</span>
-		<?php endif; ?>
-	</div>
+	<?php if ( ! $is_group && $result->department ): ?>
+	<span class="department d-block mb-3">
+		<a href="?query=<?php echo urlencode( $result->department ); ?>#phonebook-departments"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
+	</span>
 	<?php endif; ?>
 <?php
 	return ob_get_clean();

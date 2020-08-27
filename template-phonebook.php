@@ -40,7 +40,7 @@ $phonebook_ctas = get_field( 'phonebook_ctas' );
 				<p class="lead mb-5"><?php echo $results['total_results']; ?> phonebook results found for &ldquo;<?php echo stripslashes( htmlentities( $query ) ); ?>&rdquo;</p>
 
 				<?php if ( count( $results['organizations'] ) ) : ?>
-				<h2 class="h3 sticky-top pt-3 pb-4 bg-faded">
+				<h2 id="phonebook-organizations" class="h3 sticky-top pt-3 pb-4 bg-faded">
 					Organizations
 					<span class="small d-inline-block ml-1">(<?php echo count( $results['organizations'] ); ?> results)</span>
 				</h2>
@@ -54,7 +54,7 @@ $phonebook_ctas = get_field( 'phonebook_ctas' );
 				<?php endif; ?>
 
 				<?php if ( count( $results['departments'] ) ) : ?>
-				<h2 class="h3 sticky-top pt-3 pb-4 bg-faded">
+				<h2 id="phonebook-departments" class="h3 sticky-top pt-3 pb-4 bg-faded">
 					Departments
 					<span class="small d-inline-block ml-1">(<?php echo count( $results['departments'] ); ?> results)</span>
 				</h2>
@@ -68,7 +68,7 @@ $phonebook_ctas = get_field( 'phonebook_ctas' );
 				<?php endif; ?>
 
 				<?php if ( count( $results['staff'] ) ) : ?>
-				<h2 class="h3 sticky-top pt-3 pb-4 bg-faded">
+				<h2 id="phonebook-staff" class="h3 sticky-top pt-3 pb-4 bg-faded">
 					Staff
 					<span class="small d-inline-block ml-1">(<?php echo count( $results['staff'] ); ?> results)</span>
 				</h2>
