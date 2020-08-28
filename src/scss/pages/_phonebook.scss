@@ -1,5 +1,12 @@
 .phonebook-results {
-  font-size: .9rem;
+  font-size: .9em;
+  line-height: 1.3;
+
+  .result {
+    &:not(:last-child) {
+      border-bottom: $card-border-width solid $card-border-color;
+    }
+  }
 
   .toggle {
     &:not(.collapsed) {
@@ -28,21 +35,21 @@
   }
 
   .name {
-    font-size: 1rem;
+    font-size: $font-size-sm;
     font-weight: 700;
-  }
-}
 
-.result {
-  border-bottom: 1px solid $gray;
-
-  &:last-child {
-    border-bottom: 0;
+    @include media-breakpoint-up(md) {
+      font-size: $font-size-md;
+    }
   }
 }
 
 .staff-list {
+  background-color: $gray-lighter;
+  margin-bottom: -1px;
+
   li {
+    background-color: $white;
     border-bottom: 1px solid $gray-lighter;
     border-right: 0;
     padding: 2px 16px;
@@ -55,7 +62,7 @@
       }
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       border-right: 1px solid $gray-lighter;
 
       &:nth-child(2n) {
