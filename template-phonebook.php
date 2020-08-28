@@ -5,7 +5,7 @@
  */
 ?>
 
-<?php get_header(); ?>
+<?php get_header(); the_post(); ?>
 
 <?php
 $query = isset( $_GET['query'] ) ? $_GET['query'] : '';
@@ -24,7 +24,7 @@ if ( is_array( $results ) ) {
 ?>
 
 <div class="container mt-md-4 pb-4 pb-md-5">
-	<form id="phonebook-search">
+	<form id="phonebook-search" action="<?php echo get_permalink( $post->ID ); ?>">
 		<div class="input-group">
 			<label for="phonebook-search-query" class="sr-only">Search Organizations, Departments, and People at UCF</label>
 			<input type="text" id="phonebook-search-query" name="query" class="search-query form-control" value="<?php echo stripslashes( htmlentities( $query ) ); ?>" placeholder="Organization, Department, or Person (Name, Email, Phone)">
