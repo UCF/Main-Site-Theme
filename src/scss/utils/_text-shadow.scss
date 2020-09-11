@@ -13,3 +13,19 @@
 .text-shadow-hard-inverse {
   text-shadow: $text-shadow-hard-length $text-shadow-color-inverse;
 }
+
+.text-shadow-primary {
+  text-shadow: 4px 4px 0px $brand-primary;
+}
+
+.text-shadow-black {
+  text-shadow: 4px 4px 0px $black;
+}
+
+.text-shadow-white {
+  text-shadow: 4px 4px 0px $white;
+}
+
+.text-shadow-primary-darker {
+  text-shadow: 4px 4px 0px $brand-primary-darker;
+}
