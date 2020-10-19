@@ -1246,6 +1246,16 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 
 	$nonresident = str_replace( '.00', '', $nonresident );
 	$resident    = str_replace( '.00', '', $resident );
+	$nonresident_parts = array();
+	$resident_parts    = array();
+
+	preg_match( '/^(\$[\d,.]+)/', $nonresident, $nonresident_parts );
+	$nonresident_val = $nonresident_parts[1];
+	$nonresident_per = trim( str_replace( $nonresident_val, '', $nonresident ) );
+
+	preg_match( '/^(\$[\d,.]+)/', $resident, $resident_parts );
+	$resident_val = $resident_parts[1];
+	$resident_per = trim( str_replace( $resident_val, '', $resident ) );
 
 	ob_start();
 ?>
@@ -1273,18 +1283,18 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 			<?php if ( $resident ): ?>
 			<div class="tab-pane fade show active" id="resident-tuition" role="tabpanel" aria-labelledby="resident-tuition-tab">
 				<span class="d-block display-4">
-					<?php echo str_replace( 'per credit hour', '', $resident ); ?>
+					<?php echo $resident_val; ?>
 				</span>
-				<span class="d-block small text-uppercase font-weight-bold"> per credit hour</span>
+				<span class="d-block small text-uppercase font-weight-bold"> <?php echo $resident_per; ?></span>
 			</div>
 			<?php endif; ?>
 
 			<?php if ( $nonresident ): ?>
 			<div class="tab-pane fade <?php if ( ! $resident ) { ?>show active<?php } ?>" id="nonresident-tuition" role="tabpanel" aria-labelledby="nonresident-tuition-tab">
 				<span class="d-block display-4">
-					<?php echo str_replace( 'per credit hour', '', $nonresident ); ?>
+					<?php echo $nonresident_val; ?>
 				</span>
-				<span class="d-block small text-uppercase font-weight-bold"> per credit hour</span>
+				<span class="d-block small text-uppercase font-weight-bold"> <?php echo $nonresident_per; ?></span>
 			</div>
 			<?php endif; ?>
 
