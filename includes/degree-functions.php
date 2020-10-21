@@ -314,6 +314,7 @@ function get_degree_description_modern_layout( $degree ) {
 	$modern_description_copy = get_field( 'modern_description_copy', $degree );
 	$modern_description_image = get_field( 'modern_description_image', $degree );
 	$modern_description_image_alt = get_field( 'modern_description_image_alt', $degree );
+	$modern_description_image_circle_class = get_field( 'modern_description_image_circle_class' ) ? 'rounded-circle' : '';
 
 	if( empty( $modern_description_heading ) && empty( $modern_description_copy ) ) return '';
 
@@ -347,7 +348,7 @@ function get_degree_description_modern_layout( $degree ) {
 				<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
 					<?php if ( $modern_description_image ) : ?>
 						<div class="px-5 px-lg-0 text-center">
-							<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5" alt="<?php echo $modern_description_image_alt; ?>">
+							<img src="<?php echo $modern_description_image; ?>" class="img-fluid mb-5 <?php echo $modern_description_image_circle_class; ?>" alt="<?php echo $modern_description_image_alt; ?>">
 						</div>
 					<?php endif; ?>
 
@@ -641,11 +642,13 @@ function get_degree_quotes_modern_layout( $degree ) {
 		<section>
 			<div class="jumbotron jumbotron-fluid bg-faded mb-0">
 				<div class="container">
-					<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row(); ?>
+					<?php while ( have_rows( 'degree_quotes', $degree ) ) : the_row();
+						$circle_class = ( get_sub_field( 'degree_quote_image_circle_class' ) ) ? 'rounded-circle' : '';
+					?>
 						<div class="row">
 							<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
 								<div class="col-lg-3 text-center text-lg-right align-self-center">
-									<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
+									<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid <?php echo $circle_class; ?>"
 										alt="<?php the_sub_field( 'degree_quote_image_alt' ); ?>">
 								</div>
 							<?php endif; ?>
