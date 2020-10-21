@@ -1470,8 +1470,8 @@
         "title": "Degree Fields - Modern Layout",
         "fields": [
             {
-                "key": "field_5e99fb2dbcede",
-                "label": "Program at a Glance",
+                "key": "field_5f8e67c342090",
+                "label": "Page Options",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -1484,6 +1484,87 @@
                 },
                 "placement": "left",
                 "endpoint": 0
+            },
+            {
+                "key": "field_5f8e67d642091",
+                "label": "Is Parent Program",
+                "name": "degree_is_parent_program",
+                "type": "true_false",
+                "instructions": "Set this to true if this program is a parent program and should be displayed with the parent\/umbrella program layout adjustments.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5f9066b2a8273",
+                "label": "Hide Colleges Grid",
+                "name": "degree_hide_colleges_grid",
+                "type": "true_false",
+                "instructions": "Hides the colleges grid displayed above the footer. Defaults to false.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5e99fb2dbcede",
+                "label": "Program at a Glance",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5f8e67d642091",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5ea0a6bcb0c0d",
+                "label": "Program Length Number",
+                "name": "program_length_number",
+                "type": "text",
+                "instructions": "Add the number to be displayed for the program length.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
             },
             {
                 "key": "field_5e986fb2666dc",
@@ -1508,25 +1589,6 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": ""
-            },
-            {
-                "key": "field_5ea0a6bcb0c0d",
-                "label": "Program Length Number",
-                "name": "program_length_number",
-                "type": "text",
-                "instructions": "Add the number to be displayed for the program length.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
             },
             {
                 "key": "field_5ea0a6e8b0c0e",
@@ -1655,7 +1717,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
@@ -1669,6 +1731,25 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": ""
+            },
+            {
+                "key": "field_5f8e76505ded8",
+                "label": "Degree Description Image Circle Class",
+                "name": "modern_description_image_circle_class",
+                "type": "true_false",
+                "instructions": "Set to 'yes' if the description image should have the `rounded-circle` class set.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_5e99d98c3902e",
@@ -1752,6 +1833,162 @@
                         "maxlength": ""
                     }
                 ]
+            },
+            {
+                "key": "field_5f8e6b2b9506f",
+                "label": "Program Tracks",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5f8e67d642091",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f8e6d2995074",
+                "label": "Program Tracks Heading",
+                "name": "program_tracks_heading",
+                "type": "text",
+                "instructions": "Heading for this program's tracks section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f8e6d9895075",
+                "label": "Program Tracks Lead Copy",
+                "name": "program_tracks_lead_copy",
+                "type": "textarea",
+                "instructions": "Introduction text displayed underneath the Program Track Section Headline.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 4,
+                "new_lines": ""
+            },
+            {
+                "key": "field_5f8e6b7e95070",
+                "label": "Program Tracks",
+                "name": "program_tracks",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "field_5f8e6c4995071",
+                "min": 1,
+                "max": 0,
+                "layout": "block",
+                "button_label": "Add Track",
+                "sub_fields": [
+                    {
+                        "key": "field_5f8e6c4995071",
+                        "label": "Track Heading",
+                        "name": "track_heading",
+                        "type": "text",
+                        "instructions": "Heading displayed for the track.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f8e6c9195072",
+                        "label": "Track Description",
+                        "name": "track_description",
+                        "type": "textarea",
+                        "instructions": "Short description of the track.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "maxlength": "",
+                        "rows": 4,
+                        "new_lines": ""
+                    },
+                    {
+                        "key": "field_5f905f860ec1f",
+                        "label": "Track URL",
+                        "name": "track_url",
+                        "type": "url",
+                        "instructions": "The URL of the track's degree page.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5f8e6de495076",
+                "label": "Program Tracks Custom Content",
+                "name": "program_tracks_custom_content",
+                "type": "wysiwyg",
+                "instructions": "Custom content displayed at the end of the Program Track section, underneath the individual program track cards.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 0,
+                "delay": 0
             },
             {
                 "key": "field_5e99f82f12a13",
@@ -2122,7 +2359,7 @@
                 "collapsed": "",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "",
                 "sub_fields": [
                     {
@@ -2134,7 +2371,7 @@
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "50",
                             "class": "",
                             "id": ""
                         },
@@ -2148,6 +2385,25 @@
                         "max_height": "",
                         "max_size": "",
                         "mime_types": ""
+                    },
+                    {
+                        "key": "field_5f9062fbe9e36",
+                        "label": "Image Circle Class",
+                        "name": "degree_quote_image_circle_class",
+                        "type": "true_false",
+                        "instructions": "Set to 'yes' if the quote image should have the `rounded-circle` class set.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 1,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
                     },
                     {
                         "key": "field_5e9f0ddea2389",
@@ -2601,6 +2857,147 @@
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1
+            },
+            {
+                "key": "field_5f8e71e6b48b3",
+                "label": "Callout",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5f8e67d642091",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5f8e71e9b48b4",
+                "label": "Callout Heading",
+                "name": "degree_callout_heading",
+                "type": "text",
+                "instructions": "The heading to be displayed in the callout section.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5f8e71f3b48b5",
+                "label": "Callout Copy",
+                "name": "degree_callout_copy",
+                "type": "textarea",
+                "instructions": "Copy displayed under the callout heading.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "maxlength": "",
+                "rows": 3,
+                "new_lines": ""
+            },
+            {
+                "key": "field_5f8e71f5b48b6",
+                "label": "Callout Button",
+                "name": "degree_callout_button",
+                "type": "group",
+                "instructions": "Button displayed under the callout copy.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f8e71f5b48b7",
+                        "label": "Button Text",
+                        "name": "button_text",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f8e71f5b48b8",
+                        "label": "Button Link",
+                        "name": "button_link",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5f8e71f9b48b9",
+                "label": "Callout Image",
+                "name": "degree_callout_image",
+                "type": "image",
+                "instructions": "Image to be displayed to the right of the callout heading, copy and button. The image will be hidden in the xs, sm and md breakpoints.\r\n<br><br>\r\nThe image should be a square 300px by 300px JPG with the focus of the image in the center. The circular crop is handled with CSS.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": 300,
+                "max_height": 300,
+                "max_size": "",
+                "mime_types": "jpg"
             }
         ],
         "location": [
