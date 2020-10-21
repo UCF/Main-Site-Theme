@@ -377,6 +377,67 @@ function get_degree_description_modern_layout( $degree ) {
 
 
 /**
+ * Returns HTML for the tracks/subplan section.
+ *
+ * @since 3.7.0
+ * @author Cadie Stockman
+ * @param object $degree WP_Post object representing a degree
+ * @return string HTML markup
+ */
+function get_degree_tracks_modern_layout( $degree ) {
+	$tracks_heading        = get_field( 'program_tracks_heading', $degree );
+	$tracks_lead           = get_field( 'program_tracks_lead_copy', $degree );
+	$tracks_custom_content = get_field( 'program_tracks_custom_content' );
+
+	if ( empty( $tracks_heading ) && empty( $tracks_lead ) ) return '';
+
+	ob_start();
+	?>
+		<section id="program-tracks" aria-label="<?php echo $degree->post_title; ?> Tracks" class="bg-faded">
+			<div class="jumbotron mb-0 py-5">
+				<div class="container">
+					<div class="row text-center mb-4">
+						<div class="col-12">
+							<h2 class="h1 mb-3"><?php echo $tracks_heading; ?></h2>
+							<p class="lead"><?php echo $tracks_lead; ?></p>
+						</div>
+					</div>
+					<?php if ( have_rows( 'program_tracks', $degree ) ) : ?>
+					<div class="row">
+						<?php while ( have_rows( 'program_tracks', $degree ) ) : the_row(); ?>
+							<div class="col-12 mb-4">
+								<a href="<?php the_sub_field( 'track_url' ); ?>" class="d-block hover-parent text-decoration-none text-secondary h-100">
+									<div class="card border-0 card-secondary">
+										<h3 class="card-header h5 bg-primary d-flex align-items-center justify-content-between">
+											<?php the_sub_field( 'track_heading' ); ?>
+											<span class="fa fa-chevron-right hover-child-show fade" aria-hidden="true"></span>
+										</h3>
+										<div class="card-block">
+											<div class="card-text">
+											<?php the_sub_field( 'track_description' ); ?>
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						<?php endwhile; ?>
+					</div>
+					<?php endif; ?>
+
+					<?php if ( $tracks_custom_content ) : ?>
+					<div class="row">
+						<?php echo $tracks_custom_content; ?>
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</section>
+	<?php
+	return ob_get_clean();
+}
+
+
+/**
  * Returns HTML for the application deadline section.
  *
  * @since 3.4.0
