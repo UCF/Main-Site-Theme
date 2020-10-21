@@ -321,7 +321,7 @@ function get_degree_description_modern_layout( $degree ) {
 	ob_start();
 ?>
 	<section aria-label="Program description and highlights">
-		<div class="container py-lg-3 my-lg-5">
+		<div class="container py-lg-3 mt-4 my-lg-5">
 			<div class="row">
 				<div class="col">
 					<?php if( $modern_description_heading ) : ?>
