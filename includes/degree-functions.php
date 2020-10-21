@@ -1388,6 +1388,55 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 
 
 /**
+  * Returns HTML for the modern degree callout section.
+  *
+  * @since 3.7.0
+  * @author Cadie Stockman
+  * @param object $degree WP_Post object representing a degree
+  * @return string HTML markup
+  */
+  function get_degree_callout_modern_layout( $degree ) {
+	$callout_heading = get_field( 'degree_callout_heading', $degree );
+	$callout_copy    = get_field( 'degree_callout_copy', $degree );
+	$callout_button  = get_field( 'degree_callout_button', $degree );
+	$callout_image   = get_field( 'degree_callout_image', $degree );
+
+	// Set content column classes based on if an image for the section is set.
+	$callout_content_col_class = ( $callout_image ) ? "col-12 col-lg-8" : "col-12";
+
+	// Return an empty string if some of the callout fields are empty.
+	if ( empty( $callout_heading ) || empty( $callout_copy ) ) return '';
+
+	foreach ( $callout_button as $button_field ) {
+		if ( empty( $button_field ) ) {
+			return '';
+		}
+	}
+
+	ob_start();
+	?>
+		<div class="jumbotron bg-secondary mb-0 py-lg-5">
+			<div class="container">
+				<div class="row">
+					<div class="<?php echo $callout_content_col_class; ?> d-flex flex-column justify-content-center align-items-start">
+						<h2 class="mb-3 mb-lg-4"><?php echo $callout_heading; ?></h2>
+						<p class="degree-online-copy mb-4 pb-lg-2"><?php echo $callout_copy; ?></p>
+						<a class="btn btn-primary" href="<?php echo $callout_button['button_link']; ?>"><?php echo $callout_button['button_text']; ?></a>
+					</div>
+					<?php if ( $callout_image ) : ?>
+					<div class="col-lg-4 hidden-md-down d-flex align-items-center justify-content-end">
+						<img src="<?php echo $callout_image; ?>" class="img-fluid rounded-circle" alt="" aria-hidden="true">
+					</div>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+	<?php
+	return ob_get_clean();
+}
+
+
+/**
  * Returns the markup for breadcrumbs for a single degree profile.
  *
  * @author Jo Dickson
