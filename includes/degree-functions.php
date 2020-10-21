@@ -632,9 +632,10 @@ function get_degree_course_overview_modern_layout( $degree ) {
  * @return string HTML markup
  */
 function get_degree_quotes_modern_layout( $degree ) {
-	$course_overview = get_field( 'course_overview', $degree );
+	$course_overview   = get_field( 'course_overview', $degree );
+	$is_parent_program = get_field( 'degree_is_parent_program', $degree );
 
-	if ( empty( $course_overview ) ) return '';
+	if ( ! $is_parent_program && empty( $course_overview ) ) return '';
 
 	ob_start();
 
