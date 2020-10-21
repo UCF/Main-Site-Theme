@@ -113,8 +113,18 @@
  *
  */
 function get_degree_content_modern_layout( $degree ) {
-	echo get_degree_info_modern_layout( $degree );
+	$is_parent_program = get_field( 'degree_is_parent_program', $degree );
+
+	if ( ! $is_parent_program ) {
+		echo get_degree_info_modern_layout( $degree );
+	}
+
 	echo get_degree_description_modern_layout( $degree );
+
+	if ( $is_parent_program ) {
+		echo get_degree_tracks_modern_layout( $degree );
+	}
+
 	echo get_degree_application_deadline_modern_layout( $degree );
 	echo get_degree_start_application_today_modern_layout( $degree );
 	echo get_degree_course_overview_modern_layout( $degree );
@@ -123,6 +133,10 @@ function get_degree_content_modern_layout( $degree ) {
 	echo get_degree_admission_requirements_modern_layout( $degree );
 	echo get_degree_ucf_online_modern_layout( $degree );
 	echo get_degree_news_spotlight_modern_layout( $degree );
+
+	if ( $is_parent_program ) {
+		echo get_degree_callout_modern_layout( $degree );
+	}
 }
 
 
