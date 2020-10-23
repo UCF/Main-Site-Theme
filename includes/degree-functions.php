@@ -758,7 +758,7 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 							$degree,
 							'btn btn-primary hidden-md-down',
 							'',
-							'Request Information',
+							'Request Information'
 						);
 						?>
 					</div>
