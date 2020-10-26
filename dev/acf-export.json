@@ -1235,10 +1235,10 @@
         "fields": [
             {
                 "key": "field_5f93258d2ddac",
-                "label": "Display Request Info Button\/Modal in Header",
-                "name": "degree_custom_rfi_header",
+                "label": "Enable Request Info Button\/Modal",
+                "name": "degree_custom_enable_rfi",
                 "type": "true_false",
-                "instructions": "Determines if the 'Request Information' button is displayed in the header, along with adding the Slate RFI form modal code to the page. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have Slate GUIDs imported.<\/i><br><br>\r\nIf you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
+                "instructions": "If enabled, the 'Request Information' modal and button will be included on the page. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have Slate GUIDs imported.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
