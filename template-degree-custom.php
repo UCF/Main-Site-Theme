@@ -27,7 +27,7 @@ if ( ! $hide_colleges_grid ) {
 ?>
 
 <?php
-if ( is_graduate_degree( $post ) ) {
+if ( $enable_rfi_modal ) {
 	echo get_degree_request_info_modal( $post );
 }
 ?>
