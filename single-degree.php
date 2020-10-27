@@ -10,7 +10,7 @@
 	$breadcrumbs       = get_degree_breadcrumb_markup( $post->ID );
 	$hide_catalog_desc = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
 
-    echo get_degree_content_classic_layout( $post );
+    echo get_degree_content_modern_layout( $post );
 ?>
 
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
@@ -24,5 +24,11 @@ if ( isset( $post_meta['degree_full_width_content_bottom'] ) && ! empty( $post_m
 ?>
 
 <?php echo get_colleges_grid( $college ); ?>
+
+<?php
+if ( is_graduate_degree( $post ) ) {
+	echo get_degree_request_info_modal( $post );
+}
+?>
 
 <?php get_footer(); ?>
