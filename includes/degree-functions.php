@@ -5,105 +5,6 @@
 
 
 /**
-  * Returns HTML for the classic degree layout.
-  *
-  * @since 3.4.0
-  * @author RJ Bruneel
-  * @param object $degree  WP_Post object
-  * @return string HTML markup
-  */
- function get_degree_content_classic_layout( $degree ) {
-	$raw_postmeta        = get_post_meta( $degree->ID );
-	$post_meta           = format_raw_postmeta( $raw_postmeta );
-	$program_type        = get_degree_program_type( $degree );
-	$colleges_list       = get_colleges_markup( $degree->ID );
-	$departments_list    = get_departments_markup( $degree->ID );
-	$hide_catalog_desc   = ( isset( $post_meta['degree_disable_catalog_desc'] ) && filter_var( $post_meta['degree_disable_catalog_desc'], FILTER_VALIDATE_BOOLEAN ) === true );
-
-	ob_start();
-	?>
-	<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
-		<div class="row">
-			<div class="col-lg-8 col-xl-7 pr-lg-5 pr-xl-0">
-				<div class="bg-faded p-3 p-sm-4 mb-4">
-					<dl class="row mb-0">
-						<?php if ( $program_type ) : ?>
-						<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Program:</dt>
-						<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9"><?php echo $program_type->name; ?></dd>
-						<?php endif; ?>
-						<?php if ( $colleges_list ) : ?>
-						<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">College(s):</dt>
-						<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
-							<?php echo $colleges_list; ?>
-						</dd>
-						<?php endif; ?>
-						<?php if ( $departments_list ) : ?>
-						<dt class="col-sm-4 col-md-3 col-lg-4 col-xl-3">Department(s): </dt>
-						<dd class="col-sm-8 col-md-9 col-lg-8 col-xl-9">
-							<?php echo $departments_list; ?>
-						</dd>
-						<?php endif; ?>
-					</dl>
-				</div>
-				<div class="hidden-lg-up row mb-3">
-					<div class="col-sm mb-2">
-						<?php echo get_degree_apply_button( $degree ); ?>
-					</div>
-					<div class="col-sm mb-2">
-						<?php echo get_degree_visit_ucf_button(); ?>
-					</div>
-				</div>
-				<div class="mb-3">
-					<?php the_content(); ?>
-					<?php
-					if ( ! $hide_catalog_desc ) {
-						echo apply_filters( 'the_content', $post_meta['degree_description'] );
-					}
-					?>
-				</div>
-				<div class="row mb-4 mb-lg-5">
-				<?php if ( isset( $post_meta['degree_pdf'] ) && ! empty( $post_meta['degree_pdf'] ) ) : ?>
-					<div class="col-md-6 col-lg-10 col-xl-6 mb-2 mb-md-0 mb-lg-2 mb-xl-0">
-						<a class="btn btn-outline-complementary p-0 h-100 d-flex flex-row justify-content-between" href="<?php echo $post_meta['degree_pdf']; ?>" rel="nofollow">
-							<div class="bg-complementary p-3 px-sm-4 d-flex align-items-center"><span class="fa fa-book fa-2x" aria-hidden="true"></span></div>
-							<div class="p-3 align-self-center mx-auto">View Catalog</div>
-						</a>
-					</div>
-				<?php endif; ?>
-				</div>
-				<?php echo main_site_degree_display_subplans( $degree->ID ); ?>
-			</div>
-			<div class="col-lg-4 offset-xl-1 mt-4 mt-lg-0">
-				<div class="hidden-md-down mb-5">
-					<?php echo get_degree_apply_button( $degree ); ?>
-					<?php echo get_degree_visit_ucf_button(); ?>
-				</div>
-
-				<?php if ( isset( $post_meta['degree_hours'] ) && ! empty( $post_meta['degree_hours'] ) ) : ?>
-				<div class="degree-hours mb-5 mt-lg-5">
-					<hr>
-					<p class="h4 text-center"><?php echo $post_meta['degree_hours']; ?> <span class="font-weight-normal">total credit hours</span></p>
-					<hr>
-				</div>
-				<?php endif; ?>
-
-				<?php echo get_degree_tuition_markup( $post_meta, 'classic' ); ?>
-
-				<?php
-				if ( isset( $post_meta['degree_sidebar_content_bottom'] ) && ! empty( $post_meta['degree_sidebar_content_bottom'] ) ) {
-					echo apply_filters( 'the_content', $post_meta['degree_sidebar_content_bottom'] );
-				}
-				?>
-			</div>
-		</div>
-	</div>
-
-	<?php
-	return ob_get_clean();
-}
-
-
-/**
  * Returns HTML for the modern degree layout.
  *
  * @since 3.4.0
@@ -215,7 +116,7 @@ function get_degree_info_modern_layout( $degree ) {
 	$program_length_number = get_field( 'program_length_number', $degree );
 	$program_length_text   = get_field( 'program_length_text', $degree );
 
-	$tuition             = get_degree_tuition_markup( $post_meta, 'modern' );
+	$tuition             = get_degree_tuition_markup( $post_meta );
 
 	$promo_image         = get_field( 'promo_image', $degree );
 	$promo_image_alt     = get_field( 'promo_image_alt', $degree );
@@ -1112,22 +1013,6 @@ function get_degree_request_info_modal( $degree ) {
 }
 
 
-function get_degree_visit_ucf_button() {
-	$url = get_theme_mod_or_default( 'degrees_visit_ucf_url' );
-
-	ob_start();
-
-	if ( $url ) :
-?>
-	<a class="btn btn-lg btn-block btn-primary" href="<?php echo $url; ?>">
-		<span class="fa fa-map-marker pr-2" aria-hidden="true"></span> Visit UCF
-	</a>
-<?php
-	endif;
-	return ob_get_clean();
-}
-
-
 function get_colleges_markup( $post_id ) {
 	$colleges = wp_get_post_terms( $post_id, 'colleges' );
 
@@ -1174,71 +1059,16 @@ function get_departments_markup( $post_id ) {
 }
 
 
-function get_degree_tuition_markup( $post_meta, $type ) {
+function get_degree_tuition_markup( $post_meta ) {
 	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
 	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
 	$skip = ( isset( $post_meta['degree_tuition_skip'] ) && $post_meta['degree_tuition_skip'] === 'on' ) ? true : false;
 
 	if ( $resident && $nonresident && ! $skip ) {
-		if( $type === 'modern' ) {
-			return ucf_tuition_fees_degree_modern_layout( $resident, $nonresident );
-		} else {
-			return ucf_tuition_fees_degree_classic_layout( $resident, $nonresident );
-		}
+		return ucf_tuition_fees_degree_modern_layout( $resident, $nonresident );
 	}
 
 	return '';
-}
-
-
-function ucf_tuition_fees_degree_classic_layout( $resident, $nonresident ) {
-	$value_message = get_theme_mod( 'tuition_value_message', null );
-	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
-
-	$nonresident = str_replace( '.00', '', $nonresident );
-	$resident    = str_replace( '.00', '', $resident );
-
-	ob_start();
-?>
-	<h2 class="h4 mb-4">Tuition and Fees</h2>
-	<ul class="nav nav-tabs" role="tablist">
-		<li class="nav-item">
-			<a class="nav-link active" data-toggle="tab" href="#in-state" role="tab">In State</a>
-		</li>
-		<li class="nav-item">
-			<a class="nav-link" data-toggle="tab" href="#out-of-state" role="tab">Out of State</a>
-		</li>
-	</ul>
-	<div class="tab-content pt-4 mb-4 mb-md-5">
-		<div class="tab-pane active" id="in-state" role="tabpanel">
-			<?php if ( $value_message ) : ?>
-			<?php echo apply_filters( 'the_content', $value_message ); ?>
-			<?php endif; ?>
-			<div class="bg-primary-lighter p-4">
-				<p class="h5 text-center font-weight-bold mb-0">
-					<?php echo $resident; ?>
-				</p>
-			<?php if ( $disclaimer ) : ?>
-				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
-			<?php endif; ?>
-			</div>
-		</div>
-		<div class="tab-pane" id="out-of-state" role="tabpanel">
-			<?php if ( $value_message ) : ?>
-			<?php echo apply_filters( 'the_content', $value_message ); ?>
-			<?php endif; ?>
-			<div class="bg-primary-lighter p-4">
-				<p class="h5 text-center font-weight-bold mb-0">
-					<?php echo $nonresident; ?>
-				</p>
-			<?php if ( $disclaimer ) : ?>
-				<p class="mt-3 mb-0"><small><?php echo $disclaimer; ?></small></p>
-			<?php endif; ?>
-			</div>
-		</div>
-	</div>
-<?php
-	return ob_get_clean();
 }
 
 
@@ -1443,29 +1273,6 @@ function get_api_catalog_description( $program ) {
 				$retval = $d->description;
 			}
 		}
-	}
-
-	return $retval;
-}
-
-
-/**
- * Helper function for getting remote json
- * @author Jim Barnes
- * @since 3.4.0
- * @param string $url The URL to retrieve
- * @param object The serialized JSON obejct
- */
-function main_site_get_remote_response_json( $url, $default=null ) {
-	$args = array(
-		'timeout' => 5
-	);
-
-	$retval = $default;
-	$response = wp_remote_get( $url, $args );
-
-	if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) < 400 ) {
-		$retval = json_decode( wp_remote_retrieve_body( $response ) );
 	}
 
 	return $retval;
@@ -1781,7 +1588,7 @@ function main_site_projection_data( $post_meta ) {
 /**
  * Returns the news shortcode for degrees
  * @author Jim Barnes
- * @since v3.4.0
+ * @since 3.4.0
  * @param array $post_meta The post meta array
  * @return string
  */
@@ -1807,7 +1614,7 @@ function main_site_degree_news_stories( $post_meta ) {
 /**
  * Returns a list of careers for a degree
  * @author Jim Barnes
- * @since v3.4.0
+ * @since 3.4.0
  * @param int $post_id The post id
  * @return string
  */

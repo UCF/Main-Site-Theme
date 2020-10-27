@@ -93,3 +93,27 @@ function get_attachment_src_by_size( $id, $size ) {
 	}
 	return $attachment;
 }
+
+
+/**
+ * Helper function for getting remote json
+ *
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param string $url The URL to retrieve
+ * @param object The serialized JSON obejct
+ */
+function main_site_get_remote_response_json( $url, $default=null ) {
+	$args = array(
+		'timeout' => 5
+	);
+
+	$retval = $default;
+	$response = wp_remote_get( $url, $args );
+
+	if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) < 400 ) {
+		$retval = json_decode( wp_remote_retrieve_body( $response ) );
+	}
+
+	return $retval;
+}
