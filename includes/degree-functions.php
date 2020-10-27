@@ -144,9 +144,10 @@ function get_header_content_degree( $markup, $obj ) {
 		$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 		$degree_template              = get_page_template_slug( $obj );
 		$show_degree_request_info_btn = false;
+		$custom_template_show_rfi     = ( $degree_template === 'template-degree-custom.php' ) ? get_field( 'degree_custom_enable_rfi', $obj ) : false;
 		$header_content_col_classes   = 'header-degree-content-col col-sm-auto d-sm-flex align-items-sm-center';
 
-		if ( $degree_template === 'template-degree-modern.php' ) {
+		if ( $degree_template === 'template-degree-modern.php' || $custom_template_show_rfi ) {
 			$header_content_col_classes .= ' ml-sm-auto';
 			$show_degree_request_info_btn = true;
 		}
@@ -758,7 +759,7 @@ function get_degree_admission_requirements_modern_layout( $degree ) {
 							$degree,
 							'btn btn-primary hidden-md-down',
 							'',
-							'Request Information',
+							'Request Information'
 						);
 						?>
 					</div>

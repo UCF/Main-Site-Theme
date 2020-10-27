@@ -1230,6 +1230,72 @@
         "description": ""
     },
     {
+        "key": "group_5f932570666c4",
+        "title": "Degree Fields - Custom Template",
+        "fields": [
+            {
+                "key": "field_5f93258d2ddac",
+                "label": "Enable Request Info Button\/Modal",
+                "name": "degree_custom_enable_rfi",
+                "type": "true_false",
+                "instructions": "If enabled, the 'Request Information' modal and button will be included on the page. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have Slate GUIDs imported.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5f9328062ddad",
+                "label": "Hide Colleges Grid",
+                "name": "degree_custom_hide_colleges_grid",
+                "type": "true_false",
+                "instructions": "Determines if the colleges grid is hidden from displaying above the footer.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-degree-custom.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
         "key": "group_5df8fb174faec",
         "title": "Degree Fields - Default Template",
         "fields": [
