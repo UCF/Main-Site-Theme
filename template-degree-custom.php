@@ -16,9 +16,7 @@
 
 <?php the_content(); ?>
 
-<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
-	<?php echo $breadcrumbs; ?>
-</div>
+<?php get_template_part( 'template-parts/degree', 'breadcrumbs' ); ?>
 
 <?php
 if ( ! $hide_colleges_grid ) {
