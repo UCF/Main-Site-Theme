@@ -762,6 +762,8 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
  * Adds a new column for displaying degree template names
  * in the degree list admin view.
  *
+ * Removes the Tags and Areas of Interests columns.
+ *
  * @since 3.8.0
  * @author Jo Dickson
  * @param array $columns Existing column data
@@ -769,6 +771,13 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
  */
 function degree_admin_define_columns( $columns ) {
 	$columns['template'] = 'Template';
+
+	if ( isset( $columns['tags'] ) ) {
+		unset( $columns['tags'] );
+	}
+	if ( isset( $columns['taxonomy-interests'] ) ) {
+		unset( $columns['taxonomy-interests'] );
+	}
 
 	return $columns;
 }
@@ -798,3 +807,4 @@ function degree_admin_set_columns( $column_name, $post_id ) {
 }
 
 add_action( 'manage_degree_posts_custom_column' , 'degree_admin_set_columns', 10, 2 );
+
