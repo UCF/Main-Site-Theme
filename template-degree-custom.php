@@ -9,7 +9,6 @@
 <?php
 	$colleges           = wp_get_post_terms( $post->ID, 'colleges' );
 	$college            = is_array( $colleges ) ? $colleges[0] : null;
-	$breadcrumbs        = get_degree_breadcrumb_markup( $post->ID );
 	$hide_colleges_grid = get_field( 'degree_custom_hide_colleges_grid', $post );
 	$enable_rfi_modal   = get_field( 'degree_custom_enable_rfi', $post );
 ?>
