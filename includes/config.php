@@ -179,20 +179,6 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
-		'tuition_value_message'
-	);
-
-	$wp_customize->add_control(
-		'tuition_value_message',
-		array(
-			'type'        => 'textarea',
-			'label'       => 'Tuition Value Message',
-			'description' => 'The message displayed above the tuition per credit hour on degree pages.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
-		)
-	);
-
-	$wp_customize->add_setting(
 		'tuition_disclaimer'
 	);
 
