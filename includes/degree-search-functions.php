@@ -7,7 +7,7 @@
  * @author TODO
  * @param TODO $output TODO
  * @param TODO $args TODO
- * @return TODO
+ * @return string
  */
 function main_site_degree_search_display( $output, $args ) {
 	ob_start();
@@ -32,9 +32,7 @@ add_filter( 'ucf_degree_search_input', 'main_site_degree_search_display', 11, 2 
  *
  * @since TODO
  * @author TODO
- * @param TODO $output TODO
- * @param TODO $args TODO
- * @return TODO
+ * @return string
  */
 function main_site_degree_search_suggestion() {
 	ob_start();
@@ -54,9 +52,7 @@ add_filter( 'ucf_degree_search_suggestion', 'main_site_degree_search_suggestion'
  *
  * @since TODO
  * @author TODO
- * @param TODO $output TODO
- * @param TODO $args TODO
- * @return TODO
+ * @return string
  */
 function main_site_degree_search_program_types() {
 	ob_start();
@@ -86,9 +82,7 @@ add_filter( 'udsa_program_types_template', 'main_site_degree_search_program_type
  *
  * @since TODO
  * @author TODO
- * @param TODO $output TODO
- * @param TODO $args TODO
- * @return TODO
+ * @return string
  */
 function main_site_degree_search_colleges() {
 	ob_start();
@@ -113,9 +107,7 @@ add_filter( 'udsa_colleges_template', 'main_site_degree_search_colleges', 10, 0 
  *
  * @since TODO
  * @author TODO
- * @param TODO $output TODO
- * @param TODO $args TODO
- * @return TODO
+ * @return string
  */
 function main_site_degree_search_result_count() {
 	ob_start();
