@@ -1,15 +1,19 @@
 <?php
-include_once 'includes/utilities.php';
-include_once 'includes/config.php';
-include_once 'includes/meta.php';
-include_once 'includes/navwalker.php';
-include_once 'includes/header-functions.php';
-include_once 'includes/location-functions.php';
+define( 'THEME_DIR', trailingslashit( get_template_directory() ) );
 
-include_once 'includes/degree-functions.php';
-include_once 'includes/ucf-alert-functions.php';
-include_once 'includes/phonebook-functions.php';
-include_once 'includes/post-list-layouts.php';
+
+include_once THEME_DIR . 'includes/utilities.php';
+include_once THEME_DIR . 'includes/config.php';
+include_once THEME_DIR . 'includes/meta.php';
+include_once THEME_DIR . 'includes/navwalker.php';
+include_once THEME_DIR . 'includes/header-functions.php';
+include_once THEME_DIR . 'includes/location-functions.php';
+
+include_once THEME_DIR . 'includes/degree-functions.php';
+include_once THEME_DIR . 'includes/degree-search-functions.php';
+include_once THEME_DIR . 'includes/ucf-alert-functions.php';
+include_once THEME_DIR . 'includes/phonebook-functions.php';
+include_once THEME_DIR . 'includes/post-list-layouts.php';
 
 
 /**

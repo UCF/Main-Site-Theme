@@ -9,16 +9,13 @@
 <?php
 	$colleges           = wp_get_post_terms( $post->ID, 'colleges' );
 	$college            = is_array( $colleges ) ? $colleges[0] : null;
-	$breadcrumbs        = get_degree_breadcrumb_markup( $post->ID );
 	$hide_colleges_grid = get_field( 'degree_custom_hide_colleges_grid', $post );
 	$enable_rfi_modal   = get_field( 'degree_custom_enable_rfi', $post );
 ?>
 
 <?php the_content(); ?>
 
-<div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
-	<?php echo $breadcrumbs; ?>
-</div>
+<?php get_template_part( 'template-parts/degree', 'breadcrumbs' ); ?>
 
 <?php
 if ( ! $hide_colleges_grid ) {
