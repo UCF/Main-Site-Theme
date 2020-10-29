@@ -45,7 +45,7 @@ if ( $post->post_type === 'degree' ) :
 							</dl>
 						</div>
 						<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
-							<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center align-self-center">
+							<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center">
 								<div class="text-center mb-3">
 									<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 								</div>
@@ -68,13 +68,13 @@ if ( $post->post_type === 'degree' ) :
 				<div class="col-md-5 col-lg-2 mb-4 mb-lg-0 text-center d-flex align-items-center">
 					<div class="row no-gutters w-100">
 						<?php if ( $badge_1 ) : ?>
-						<div class="text-center px-2 px-md-0 d-flex align-items-center justify-content-center col col-lg-12 <?php if ( $badge_2 ) { ?>px-xl-2 mb-2<?php } ?>">
+						<div class="text-center px-2 px-lg-0 d-flex align-items-center justify-content-center col col-lg-12 <?php if ( $badge_2 ) { ?>px-xl-2 mb-2<?php } ?>">
 							<img src="<?php echo $badge_1['url']; ?>" class="img-fluid" alt="<?php echo $badge_1['alt']; ?>">
 						</div>
 						<?php endif; ?>
 
 						<?php if ( $badge_2 ) : ?>
-						<div class="text-center px-2 px-md-0 px-xl-2 d-flex align-items-center justify-content-center col col-lg-12">
+						<div class="text-center px-2 px-lg-0 px-xl-2 d-flex align-items-center justify-content-center col col-lg-12">
 							<img src="<?php echo $badge_2['url']; ?>" class="img-fluid" alt="<?php echo $badge_2['alt']; ?>">
 						</div>
 						<?php endif; ?>

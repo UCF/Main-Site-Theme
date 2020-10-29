@@ -642,11 +642,11 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e986fb2666dc",
-                "label": "Program Length Image",
-                "name": "program_length_image",
-                "type": "image",
-                "instructions": "Add image to be displayed for the program length.",
+                "key": "field_5f9adda85c2cc",
+                "label": "Program Length",
+                "name": "program_length",
+                "type": "group",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -654,23 +654,78 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "thumbnail",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": ""
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f9addc95c2cd",
+                        "label": "Image",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "An icon to supplement the program's duration.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5f9addf15c2ce",
+                        "label": "Number",
+                        "name": "number",
+                        "type": "text",
+                        "instructions": "The actual program length value, e.g. \"30\", \"12-24\"",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f9ade145c2cf",
+                        "label": "Text",
+                        "name": "text",
+                        "type": "text",
+                        "instructions": "Units of measure, and\/or supplementary info about the program length.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
-                "key": "field_5ea0a6bcb0c0d",
-                "label": "Program Length Number",
-                "name": "program_length_number",
-                "type": "text",
-                "instructions": "Add the number to be displayed for the program length.",
+                "key": "field_5f9ae0f0c8e71",
+                "label": "Badges\/Promotional Graphics",
+                "name": "",
+                "type": "message",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -678,73 +733,129 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "message": "<em>Note: if no badge\/promo graphics are set below, fallback badge(s) defined in the Customizer will be displayed on this degree's profile instead.<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
             },
             {
-                "key": "field_5ea0a6e8b0c0e",
-                "label": "Program Length Text",
-                "name": "program_length_text",
-                "type": "text",
-                "instructions": "Add the text to be displayed under the number for the program length.",
+                "key": "field_5f9ad88cd8a1b",
+                "label": "Badge\/Promo 1",
+                "name": "promo",
+                "type": "group",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5e94d0629bc99",
+                        "label": "Image",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "A badge, trust symbol, or other promotional graphic relevant to this degree.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": "png, jpg"
+                    },
+                    {
+                        "key": "field_5e976d0d22df6",
+                        "label": "Alt Text",
+                        "name": "image_alt",
+                        "type": "text",
+                        "instructions": "Text that describes the contents of the badge\/promo graphic.  <strong>Required<\/strong> for the graphic to be displayed on the degree profile.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
-                "key": "field_5e94d0629bc99",
-                "label": "Promo Image",
-                "name": "promo_image",
-                "type": "image",
-                "instructions": "Image to be displayed at the top of the page next to the fees.",
+                "key": "field_5f9adba88bd5d",
+                "label": "Badge\/Promo 2",
+                "name": "promo_2",
+                "type": "group",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "medium",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png, jpg"
-            },
-            {
-                "key": "field_5e976d0d22df6",
-                "label": "Promo Image Alt Text",
-                "name": "promo_image_alt",
-                "type": "text",
-                "instructions": "Text to be displayed as the alt text for the promo image.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f9adba98bd60",
+                        "label": "Image",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "A badge, trust symbol, or other promotional graphic relevant to this degree.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": "png, jpg"
+                    },
+                    {
+                        "key": "field_5f9adba98bd61",
+                        "label": "Alt Text",
+                        "name": "image_alt",
+                        "type": "text",
+                        "instructions": "Text that describes the contents of the badge\/promo graphic.  <strong>Required<\/strong> for the graphic to be displayed on the degree profile.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
                 "key": "field_5e99f80012a12",

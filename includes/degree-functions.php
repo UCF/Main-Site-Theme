@@ -129,15 +129,22 @@ function get_degree_badges( $post=null ) {
 	$badges = array();
 
 	// Use post-specific badge, if available
-	// TODO incorporate 2nd badge field/alt options
 	if ( $post ) {
 		$post_badge_1     = get_field( 'promo_image', $post );
 		$post_badge_1_alt = get_field( 'promo_image_alt', $post );
+		$post_badge_2     = get_field( 'promo_2_image', $post );
+		$post_badge_2_alt = get_field( 'promo_2_image_alt', $post );
 
 		if ( $post_badge_1 && $post_badge_1_alt ) {
 			$badges[] = array(
 				'url' => $post_badge_1,
 				'alt' => $post_badge_1_alt
+			);
+		}
+		if ( $post_badge_2 && $post_badge_2_alt ) {
+			$badges[] = array(
+				'url' => $post_badge_2,
+				'alt' => $post_badge_2_alt
 			);
 		}
 	}
