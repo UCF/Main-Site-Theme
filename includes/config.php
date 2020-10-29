@@ -201,8 +201,8 @@ function define_customizer_fields( $wp_customize ) {
 			$wp_customize,
 			'degrees_badge_1',
 			array(
-				'label'      => 'Fallback Trust Badge 1',
-				'description' => 'A badge graphic to display on all degrees that don\'t have their own set.',
+				'label'      => 'Fallback Promo/Badge 1',
+				'description' => 'A badge or other promotional graphic to display on all degrees that don\'t have their own set.',
 				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
 			)
 		)
@@ -216,7 +216,7 @@ function define_customizer_fields( $wp_customize ) {
 		'degrees_badge_1_alt',
 		array(
 			'type'        => 'text',
-			'label'       => 'Fallback Trust Badge 1 Alt Text',
+			'label'       => 'Fallback Promo/Badge 1 Alt Text',
 			'description' => 'Alt text for the Badge 1 graphic.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
@@ -231,8 +231,8 @@ function define_customizer_fields( $wp_customize ) {
 			$wp_customize,
 			'degrees_badge_2',
 			array(
-				'label'      => 'Fallback Trust Badge 2',
-				'description' => 'A badge graphic to display on all degrees that don\'t have their own set.',
+				'label'      => 'Fallback Promo/Badge 2',
+				'description' => 'A badge or other promotional graphic to display on all degrees that don\'t have their own set.',
 				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
 			)
 		)
@@ -246,7 +246,7 @@ function define_customizer_fields( $wp_customize ) {
 		'degrees_badge_2_alt',
 		array(
 			'type'        => 'text',
-			'label'       => 'Fallback Trust Badge 2 Alt Text',
+			'label'       => 'Fallback Promo/Badge 2 Alt Text',
 			'description' => 'Alt text for the Badge 2 graphic.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
