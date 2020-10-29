@@ -192,6 +192,66 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'degrees_badge_1'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_badge_1',
+			array(
+				'label'      => 'Fallback Trust Badge 1',
+				'description' => 'A badge graphic to display on all degrees that don\'t have their own set.',
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Trust Badge 1 Alt Text',
+			'description' => 'Alt text for the Badge 1 graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_badge_2',
+			array(
+				'label'      => 'Fallback Trust Badge 2',
+				'description' => 'A badge graphic to display on all degrees that don\'t have their own set.',
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Trust Badge 2 Alt Text',
+			'description' => 'Alt text for the Badge 2 graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
 	//Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'

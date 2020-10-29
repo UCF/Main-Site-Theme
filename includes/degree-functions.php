@@ -117,6 +117,59 @@ function is_graduate_degree( $post ) {
 
 
 /**
+ * Returns an array of image URLs and alt text for
+ * badge graphics to display on degree profiles.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post WP_Post object
+ * @return array
+ */
+function get_degree_badges( $post=null ) {
+	$badges = array();
+
+	// Use post-specific badge, if available
+	// TODO incorporate 2nd badge field/alt options
+	if ( $post ) {
+		$post_badge_1     = get_field( 'promo_image', $post );
+		$post_badge_1_alt = get_field( 'promo_image_alt', $post );
+
+		if ( $post_badge_1 && $post_badge_1_alt ) {
+			$badges[] = array(
+				'url' => $post_badge_1,
+				'alt' => $post_badge_1_alt
+			);
+		}
+	}
+
+	// Use fallback badge(s) if there were none available
+	// for the provided $post
+	if ( empty( $badges ) ) {
+		$fallback_badge_1     = get_theme_mod( 'degrees_badge_1' );
+		$fallback_badge_1_alt = get_theme_mod( 'degrees_badge_1_alt' );
+		$fallback_badge_2     = get_theme_mod( 'degrees_badge_2' );
+		$fallback_badge_2_alt = get_theme_mod( 'degrees_badge_2_alt' );
+
+		if ( $fallback_badge_1 && $fallback_badge_1_alt ) {
+			$badges[] = array(
+				'url' => $fallback_badge_1,
+				'alt' => $fallback_badge_1_alt
+			);
+		}
+		if ( $fallback_badge_2 && $fallback_badge_2_alt ) {
+			$badges[] = array(
+				'url' => $fallback_badge_2,
+				'alt' => $fallback_badge_2_alt
+			);
+		}
+	}
+
+	return $badges;
+}
+
+
+
+/**
  * Gets the "Apply Now" button markup for degree.
  *
  * @author Jim Barnes
