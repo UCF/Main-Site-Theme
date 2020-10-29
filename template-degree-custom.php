@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Degree Custom
+ * Template Name: Custom Degree
  * Template Post Type: degree
  */
 ?>

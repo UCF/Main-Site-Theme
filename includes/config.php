@@ -710,7 +710,7 @@ function modern_degree_hide_editor() {
 		$post_id = $_GET['post'];
 		if ( ! $post_id ) return;
 
-		if ( get_page_template_slug( $post_id ) === 'template-degree-modern.php' ) {
+		if ( get_page_template_slug( $post_id ) !== 'template-degree-custom.php' ) {
 			remove_post_type_support( 'degree', 'editor' );
 		}
 	}
@@ -756,3 +756,55 @@ function read_only_repeater_fields() {
 }
 
 add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
+
+
+/**
+ * Adds a new column for displaying degree template names
+ * in the degree list admin view.
+ *
+ * Removes the Tags and Areas of Interests columns.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param array $columns Existing column data
+ * @return array Modified column data
+ */
+function degree_admin_define_columns( $columns ) {
+	$columns['template'] = 'Template';
+
+	if ( isset( $columns['tags'] ) ) {
+		unset( $columns['tags'] );
+	}
+	if ( isset( $columns['taxonomy-interests'] ) ) {
+		unset( $columns['taxonomy-interests'] );
+	}
+
+	return $columns;
+}
+
+add_filter( 'manage_degree_posts_columns', 'degree_admin_define_columns' );
+
+
+/**
+ * Displays the template name in the custom "Template"
+ * column in the degree list admin view.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param string $column_name Column name
+ * @param int $post_id Post ID for individual post obj's in the list
+ * @return void
+ */
+function degree_admin_set_columns( $column_name, $post_id ) {
+	switch ( $column_name ) {
+		case 'template':
+			$template_name_slug_map = wp_get_theme()->get_page_templates( null, 'degree' );
+			$template_slug = get_page_template_slug( $post_id );
+			$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[$template_slug] : 'Default';
+			echo $template_name;
+			break;
+	}
+}
+
+add_action( 'manage_degree_posts_custom_column' , 'degree_admin_set_columns', 10, 2 );
+
