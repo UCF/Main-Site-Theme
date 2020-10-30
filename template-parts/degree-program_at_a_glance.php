@@ -15,8 +15,9 @@ if ( $post->post_type === 'degree' ) :
 
 	$tuition             = get_degree_tuition_markup( $post_meta );
 
-	$promo_image         = get_field( 'promo_image', $post );
-	$promo_image_alt     = get_field( 'promo_image_alt', $post );
+	$badges              = get_degree_badges( $post );
+	$badge_1             = $badges[0] ?? null;
+	$badge_2             = $badges[1] ?? null;
 ?>
 <section aria-label="Program at a glance">
 	<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5">
@@ -44,7 +45,7 @@ if ( $post->post_type === 'degree' ) :
 							</dl>
 						</div>
 						<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
-							<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center align-self-center">
+							<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center">
 								<div class="text-center mb-3">
 									<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 								</div>
@@ -58,17 +59,25 @@ if ( $post->post_type === 'degree' ) :
 				<div class="w-100 hidden-sm-down hidden-lg-up"></div>
 
 				<?php if ( $tuition ): ?>
-				<div class="col-md-7 col-lg mb-4 mb-lg-0 pr-lg-4 pr-xl-3">
+				<div class="col-md-7 col-lg mb-4 mb-lg-0 pr-lg-4">
 					<?php echo $tuition; ?>
 				</div>
 				<?php endif; ?>
 
-				<?php if ( $promo_image ) : ?>
-				<div class="col-md-5 col-lg-2 col-xl-3 mb-4 mb-lg-0 text-center d-flex align-items-center">
+				<?php if ( ! empty( $badges ) ) : ?>
+				<div class="col-md-5 col-lg-2 mb-4 mb-lg-0 text-center d-flex align-items-center">
 					<div class="row no-gutters w-100">
-						<div class="col-6 offset-3 col-sm-4 offset-sm-4 col-md-8 offset-md-2 col-lg-12 offset-lg-0 col-xl-10 offset-xl-1">
-							<img src="<?php echo $promo_image; ?>" class="img-fluid" alt="<?php echo $promo_image_alt; ?>">
+						<?php if ( $badge_1 ) : ?>
+						<div class="text-center px-2 px-lg-0 d-flex align-items-center justify-content-center col col-lg-12 <?php if ( $badge_2 ) { ?>px-xl-2 mb-2<?php } ?>">
+							<img src="<?php echo $badge_1['url']; ?>" class="img-fluid" alt="<?php echo $badge_1['alt']; ?>">
 						</div>
+						<?php endif; ?>
+
+						<?php if ( $badge_2 ) : ?>
+						<div class="text-center px-2 px-lg-0 px-xl-2 d-flex align-items-center justify-content-center col col-lg-12">
+							<img src="<?php echo $badge_2['url']; ?>" class="img-fluid" alt="<?php echo $badge_2['alt']; ?>">
+						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 				<?php endif; ?>
