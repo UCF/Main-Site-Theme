@@ -64,7 +64,7 @@ if ( $post->post_type === 'degree' ) :
 							</dl>
 						</div>
 						<?php if ( $has_duration ): ?>
-						<div class="col-auto mb-4 mb-lg-0 px-xl-4">
+						<div class="col-auto mb-4 mb-lg-0 px-lg-4">
 							<div class="text-center mb-3">
 								<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 							</div>
