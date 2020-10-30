@@ -67,7 +67,7 @@ if ( $post->post_type === 'degree' ) :
 				<?php endif; ?>
 
 				<?php if ( $badges ): ?>
-				<div class="col-md-6 col-lg d-flex flex-row mb-4 mb-lg-0 pl-lg-4">
+				<div class="col-md d-flex flex-row mb-4 mb-lg-0 pl-lg-4">
 					<div class="degree-badges">
 						<?php if ( $badge_1 ) : ?>
 						<div class="degree-badge-col">
