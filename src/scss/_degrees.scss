@@ -47,6 +47,21 @@
   }
 }
 
+.tuition-amount {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: $headings-line-height;
+
+  @include media-breakpoint-up(md) {
+    font-size: 2.75rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 3rem;
+  }
+}
+
 
 //
 // Application Deadlines/Apply CTA
