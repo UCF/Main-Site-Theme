@@ -12,6 +12,7 @@ if ( $post->post_type === 'degree' ) :
 	$program_length_image  = get_field( 'program_length_image', $post );
 	$program_length_number = get_field( 'program_length_number', $post );
 	$program_length_text   = get_field( 'program_length_text', $post );
+	$has_duration          = ( $program_length_image && $program_length_number && $program_length_text );
 
 	$tuition             = get_degree_tuition_markup( $post_meta );
 
@@ -22,11 +23,12 @@ if ( $post->post_type === 'degree' ) :
 <section aria-label="Program at a glance">
 	<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5">
 		<div class="container">
-			<div class="row d-lg-flex justify-content-lg-between">
-				<div class="col col-lg-5 pr-lg-5">
-					<h2 class="h4 font-condensed text-uppercase mb-4 pb-lg-2">Program at a Glance</h2>
+			<div class="row">
+
+				<div class="col col-lg-5 <?php if ( ! $has_duration ) { ?>col-xl-4<?php } ?> pr-lg-4 mb-4 mb-lg-0">
+					<h2 class="h4 font-condensed text-uppercase mb-4">Program at a Glance</h2>
 					<div class="row">
-						<div class="col col-sm-9 col-lg mb-4 mb-lg-0">
+						<div class="col">
 							<dl>
 								<?php if ( $program_type ) : ?>
 								<dt class="h6 text-uppercase text-default">Program</dt>
@@ -44,14 +46,14 @@ if ( $post->post_type === 'degree' ) :
 								<?php endif; ?>
 							</dl>
 						</div>
-						<?php if ( $program_length_image && $program_length_number && $program_length_text ) : ?>
-							<div class="col-auto pr-5 pr-sm-3 mb-4 mb-lg-0 text-center">
-								<div class="text-center mb-3">
-									<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
-								</div>
-								<div class="h1 mb-0 text-center"><?php echo $program_length_number; ?></div>
-								<div class="h6 text-default text-uppercase text-center"><?php echo $program_length_text; ?></div>
+						<?php if ( $has_duration ): ?>
+						<div class="col-auto mb-4 mb-lg-0">
+							<div class="text-center mb-3">
+								<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 							</div>
+							<div class="h1 mb-0 text-center"><?php echo $program_length_number; ?></div>
+							<div class="h6 text-default text-uppercase text-center"><?php echo $program_length_text; ?></div>
+						</div>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -59,23 +61,23 @@ if ( $post->post_type === 'degree' ) :
 				<div class="w-100 hidden-sm-down hidden-lg-up"></div>
 
 				<?php if ( $tuition ): ?>
-				<div class="col-md-7 col-lg mb-4 mb-lg-0 pr-lg-4">
+				<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
 					<?php echo $tuition; ?>
 				</div>
 				<?php endif; ?>
 
-				<?php if ( ! empty( $badges ) ) : ?>
-				<div class="col-md-5 col-lg-2 mb-4 mb-lg-0 text-center d-flex align-items-center">
-					<div class="row no-gutters w-100">
+				<?php if ( $badges ): ?>
+				<div class="col-md-6 col-lg d-flex flex-row mb-4 mb-lg-0 pl-lg-4">
+					<div class="degree-badges">
 						<?php if ( $badge_1 ) : ?>
-						<div class="text-center px-2 px-lg-0 d-flex align-items-center justify-content-center col col-lg-12 <?php if ( $badge_2 ) { ?>px-xl-2 mb-2<?php } ?>">
-							<img src="<?php echo $badge_1['url']; ?>" class="img-fluid" alt="<?php echo $badge_1['alt']; ?>">
+						<div class="degree-badge-col">
+							<img src="<?php echo $badge_1['url']; ?>" alt="<?php echo $badge_1['alt']; ?>" class="degree-badge">
 						</div>
 						<?php endif; ?>
 
 						<?php if ( $badge_2 ) : ?>
-						<div class="text-center px-2 px-lg-0 px-xl-2 d-flex align-items-center justify-content-center col col-lg-12">
-							<img src="<?php echo $badge_2['url']; ?>" class="img-fluid" alt="<?php echo $badge_2['alt']; ?>">
+						<div class="degree-badge-col">
+							<img src="<?php echo $badge_2['url']; ?>" alt="<?php echo $badge_2['alt']; ?>" class="degree-badge">
 						</div>
 						<?php endif; ?>
 					</div>

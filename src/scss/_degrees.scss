@@ -1,46 +1,56 @@
-.degree-promo {
-  border: 1px solid $brand-complementary;
-  display: inline-block;
-  padding: 0;
-  position: relative;
-  vertical-align: middle;
-  width: 100%;
+//
+// Program at a Glance
+//
+.program-length-image {
+  max-height: 6em;
 }
 
-.degree-promo-icon,
-.degree-promo-text {
-  display: inline-block;
-  float: left;
-  font-weight: 400;
-  line-height: 1.42857;
-  margin-bottom: -1px;
-  position: relative;
+.degree-badges {
+  @include make-row();
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.degree-badge-col {
+  @include make-col-ready();
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 200px;
   text-align: center;
-}
 
-.degree-promo-icon {
-  background: $brand-complementary;
-  color: $white;
-  font-size: 2rem;
-  padding: .33rem .75rem;
-  width: 20%;
+  &:not(:only-child) {
+    max-width: 150px;
 
-  @include media-breakpoint-down(md) {
-    font-size: 1.75rem;
-    padding: 10px 12px;
+    .degree-badge {
+      max-height: 150px;
+
+      @include media-breakpoint-only(lg) {
+        max-height: 100px;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: $spacer-y;
+    margin-top: $spacer-y;
+  }
+
+  @include media-breakpoint-only(lg) {
+    @include make-col(12);
+  }
+
+  .degree-badge {
+    max-height: 200px;
+    max-width: 100%;
   }
 }
 
-.degree-promo-text {
-  padding: 1.1rem .4rem;
-  width: 80%;
 
-  @include media-breakpoint-down(md) {
-    font-size: .75rem;
-  }
-}
-
-
+//
+// Application Deadlines/Apply CTA
+//
 .degree-deadline-wrap {
   background-color: $brand-primary;
 
@@ -129,18 +139,28 @@
   }
 }
 
-.tuition-fees-tab-content {
-  border-bottom: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-}
 
+//
+// Courses Overview
+//
 .accordion-courses {
   border-bottom: 1px solid $brand-primary;
   margin: 1.25rem 0;
   padding: 1.25rem 0;
 }
 
+.accordion-courses .course-icon:before {
+  content: '';
+}
+
+.accordion-courses .collapsed .course-icon:before {
+  content: '';
+}
+
+
+//
+// Skills and Careers
+//
 .degree-skill-list-item {
   font-size: 1.2em;
 }
@@ -162,18 +182,10 @@
   }
 }
 
-.program-length-image {
-  max-height: 6em;
-}
 
-.accordion-courses .course-icon:before {
-  content: '';
-}
-
-.accordion-courses .collapsed .course-icon:before {
-  content: '';
-}
-
+//
+// Start Your Application Today
+//
 .start-application-card-number {
   background-color: $brand-primary;
   border: .25rem solid $white;
@@ -184,6 +196,10 @@
   width: 3rem;
 }
 
+
+//
+// Online Callout
+//
 .degree-online-copy {
   font-size: 1.15em;
 }
