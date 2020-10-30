@@ -13,7 +13,7 @@
   justify-content: center;
 
   @include media-breakpoint-up(xl) {
-    justify-content: end;
+    justify-content: flex-end;
   }
 }
 
@@ -50,12 +50,8 @@
       }
     }
 
-    .degree-badge {
-      max-height: 200px;
-
-      @include media-breakpoint-only(lg) {
-        max-height: 175px;
-      }
+    @include media-breakpoint-up(xl) {
+      min-width: 165px;
     }
   }
 
@@ -66,6 +62,9 @@
 
   @include media-breakpoint-only(lg) {
     @include make-col(12);
+  }
+
+  @include media-breakpoint-up(lg) {
     margin-bottom: $spacer-y / 2;
     margin-top: $spacer-y / 2;
   }
@@ -73,6 +72,10 @@
   .degree-badge {
     max-height: 200px;
     max-width: 100%;
+
+    @include media-breakpoint-only(lg) {
+      max-height: 175px;
+    }
   }
 }
 

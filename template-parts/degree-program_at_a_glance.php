@@ -19,13 +19,30 @@ if ( $post->post_type === 'degree' ) :
 	$badges              = get_degree_badges( $post );
 	$badge_1             = $badges[0] ?? null;
 	$badge_2             = $badges[1] ?? null;
+
+	$details_col_classes = 'pr-lg-4 pr-xl-5 mb-4 mb-lg-0 col';
+	if ( $tuition ) {
+		// Set a fixed column size at -lg+ when tuition is available.
+		// (Otherwise, this column will effectively calculate out to
+		// a col-lg-6)
+		$details_col_classes .= ' col-lg-5';
+
+		if ( $has_duration ) {
+			// If program duration info is present, make even more room at -xl+
+			$details_col_classes .= ' col-xl-6';
+		} else if ( $badge_2 ) {
+			// If there's no program duration info, but there are two badges,
+			// shrink this column at -xl to allow badges to sit on one line
+			$details_col_classes .= ' col-xl-4';
+		}
+	}
 ?>
 <section aria-label="Program at a glance">
 	<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5">
 		<div class="container">
 			<div class="row">
 
-				<div class="col <?php if ( $tuition ) { ?>col-lg-5<?php } ?> <?php if ( $tuition && ! $has_duration ) { ?>col-xl-4<?php } ?> pr-lg-4 pr-xl-5 mb-4 mb-lg-0">
+				<div class="<?php echo $details_col_classes; ?>">
 					<h2 class="h4 font-condensed text-uppercase mb-4">Program at a Glance</h2>
 					<div class="row">
 						<div class="col">
