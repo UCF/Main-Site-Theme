@@ -25,7 +25,7 @@ if ( $post->post_type === 'degree' ) :
 		<div class="container">
 			<div class="row">
 
-				<div class="col col-lg-5 <?php if ( ! $has_duration ) { ?>col-xl-4<?php } ?> pr-lg-4 pr-xl-5 mb-4 mb-lg-0">
+				<div class="col <?php if ( $tuition ) { ?>col-lg-5<?php } ?> <?php if ( $tuition && ! $has_duration ) { ?>col-xl-4<?php } ?> pr-lg-4 pr-xl-5 mb-4 mb-lg-0">
 					<h2 class="h4 font-condensed text-uppercase mb-4">Program at a Glance</h2>
 					<div class="row">
 						<div class="col">
@@ -47,7 +47,7 @@ if ( $post->post_type === 'degree' ) :
 							</dl>
 						</div>
 						<?php if ( $has_duration ): ?>
-						<div class="col-auto mb-4 mb-lg-0 pr-xl-4">
+						<div class="col-auto mb-4 mb-lg-0 px-xl-4">
 							<div class="text-center mb-3">
 								<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 							</div>

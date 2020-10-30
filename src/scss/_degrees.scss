@@ -20,14 +20,37 @@
   max-width: 200px;
   text-align: center;
 
+  &:only-child {
+    @include media-breakpoint-up(lg) {
+      margin-left: auto;
+      text-align: right;
+    }
+  }
+
   &:not(:only-child) {
-    max-width: 150px;
+    max-width: 35%;
+
+    @include media-breakpoint-up(md) {
+      max-width: 150px;
+      // must use literals here because sass be dumb
+      @supports (max-width: #{'max(45%, 150px)'}) {
+        max-width: #{'max(45%, 150px)'};
+      }
+    }
 
     .degree-badge {
       max-height: 150px;
+      // must use literals here because sass be dumb
+      @supports (max-height: #{'max(45%, 150px)'}) {
+        max-height: #{'max(45%, 150px)'};
+      }
 
       @include media-breakpoint-only(lg) {
         max-height: 100px;
+        // must use literals here because sass be dumb
+        @supports (max-height: #{'max(45%, 100px)'}) {
+          max-height: #{'max(45%, 100px)'};
+        }
       }
     }
   }
@@ -39,6 +62,8 @@
 
   @include media-breakpoint-only(lg) {
     @include make-col(12);
+    margin-bottom: $spacer-y / 2;
+    margin-top: $spacer-y / 2;
   }
 
   .degree-badge {
