@@ -11,6 +11,10 @@
   display: flex;
   flex: 1;
   justify-content: center;
+
+  @include media-breakpoint-up(xl) {
+    justify-content: end;
+  }
 }
 
 .degree-badge-col {
@@ -31,6 +35,14 @@
     max-width: 35%;
 
     @include media-breakpoint-up(md) {
+      max-width: 200px;
+      // must use literals here because sass be dumb
+      @supports (max-width: #{'min(45%, 200px)'}) {
+        max-width: #{'min(45%, 200px)'};
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
       max-width: 150px;
       // must use literals here because sass be dumb
       @supports (max-width: #{'max(45%, 150px)'}) {
@@ -39,18 +51,10 @@
     }
 
     .degree-badge {
-      max-height: 150px;
-      // must use literals here because sass be dumb
-      @supports (max-height: #{'max(45%, 150px)'}) {
-        max-height: #{'max(45%, 150px)'};
-      }
+      max-height: 200px;
 
       @include media-breakpoint-only(lg) {
-        max-height: 100px;
-        // must use literals here because sass be dumb
-        @supports (max-height: #{'max(45%, 100px)'}) {
-          max-height: #{'max(45%, 100px)'};
-        }
+        max-height: 175px;
       }
     }
   }
