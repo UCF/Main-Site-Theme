@@ -43,7 +43,7 @@ if ( $post->post_type === 'degree' ) :
 			<div class="row">
 
 				<div class="<?php echo $details_col_classes; ?>">
-					<h2 class="h4 font-condensed text-uppercase mb-4">Program at a Glance</h2>
+					<h2 class="h4 font-condensed text-uppercase mb-4 pb-sm-2">Program at a Glance</h2>
 					<div class="row">
 						<div class="col">
 							<dl>
