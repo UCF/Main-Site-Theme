@@ -804,8 +804,9 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
 
 
 /**
- * Adds a new column for displaying degree template names
- * in the degree list admin view.
+ * Adds new columns for displaying degree template names
+ * and the types of available degree descriptions in the
+ * degree list admin view.
  *
  * Removes the Tags and Areas of Interests columns.
  *
@@ -815,6 +816,7 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
  * @return array Modified column data
  */
 function degree_admin_define_columns( $columns ) {
+	$columns['avail_desc'] = 'Available Description';
 	$columns['template'] = 'Template';
 
 	if ( isset( $columns['tags'] ) ) {
@@ -831,8 +833,8 @@ add_filter( 'manage_degree_posts_columns', 'degree_admin_define_columns' );
 
 
 /**
- * Displays the template name in the custom "Template"
- * column in the degree list admin view.
+ * Displays values for custom "Template" and "Available Description"
+ * columns in the degree list admin view.
  *
  * @since 3.8.0
  * @author Jo Dickson
@@ -842,6 +844,18 @@ add_filter( 'manage_degree_posts_columns', 'degree_admin_define_columns' );
  */
 function degree_admin_set_columns( $column_name, $post_id ) {
 	switch ( $column_name ) {
+		case 'avail_desc':
+			$avail_desc = 'None';
+			$catalog_desc = get_field( 'degree_description', $post_id );
+			$custom_desc  = get_field( 'modern_description_copy', $post_id );
+
+			if ( ! empty( $custom_desc ) ) {
+				$avail_desc = 'Custom';
+			} else if ( ! empty( $catalog_desc ) ) {
+				$avail_desc = 'Catalog';
+			}
+			echo $avail_desc;
+			break;
 		case 'template':
 			$template_name_slug_map = wp_get_theme()->get_page_templates( null, 'degree' );
 			$template_slug = get_page_template_slug( $post_id );
