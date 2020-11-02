@@ -446,7 +446,7 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 		<div class="card-block d-flex flex-column justify-content-center px-sm-4 px-md-2 px-xl-3 pt-4 py-md-5 pt-lg-4 pb-lg-3 tab-content" id="tuition-panes">
 			<?php if ( $resident ): ?>
 			<div class="tab-pane fade show active" id="resident-tuition" role="tabpanel" aria-labelledby="resident-tuition-tab">
-				<span class="d-block display-4">
+				<span class="tuition-amount">
 					<?php echo $resident_val; ?>
 				</span>
 				<span class="d-block small text-uppercase font-weight-bold"> <?php echo $resident_per; ?></span>
@@ -455,7 +455,7 @@ function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
 
 			<?php if ( $nonresident ): ?>
 			<div class="tab-pane fade <?php if ( ! $resident ) { ?>show active<?php } ?>" id="nonresident-tuition" role="tabpanel" aria-labelledby="nonresident-tuition-tab">
-				<span class="d-block display-4">
+				<span class="tuition-amount">
 					<?php echo $nonresident_val; ?>
 				</span>
 				<span class="d-block small text-uppercase font-weight-bold"> <?php echo $nonresident_per; ?></span>
