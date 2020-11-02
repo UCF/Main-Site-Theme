@@ -10,7 +10,6 @@ if ( $post->post_type === 'degree' ) :
 		<?php echo $description; ?>
 
 		<?php
-		// TODO conditionally display this only?
 		echo get_degree_request_info_button(
 			$post,
 			'btn btn-complementary mt-3',
