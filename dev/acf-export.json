@@ -1032,7 +1032,7 @@
                             {
                                 "key": "field_5fa1acf442552",
                                 "label": "Alt Text",
-                                "name": "alt_text",
+                                "name": "image_alt_text",
                                 "type": "text",
                                 "instructions": "",
                                 "required": 0,
