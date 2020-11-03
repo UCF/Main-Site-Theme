@@ -7,7 +7,7 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( $description_image || have_rows( 'highlights', $post ) ) :
 ?>
-	<div class="col-lg-6 pl-lg-5 mt-5 mt-lg-0">
+	<div class="col-lg-6 pl-lg-5 py-lg-3 my-5">
 
 		<?php if ( $description_image ) : ?>
 		<div class="px-5 px-lg-0 text-center">
