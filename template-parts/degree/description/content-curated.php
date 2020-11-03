@@ -7,7 +7,7 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( $description ) :
 ?>
-	<div class="col my-4 my-sm-5">
+	<div class="col py-lg-3 my-4 my-sm-5">
 		<?php if ( $description_heading ) : ?>
 		<h2 class="font-weight-light mb-4">
 			<?php echo $description_heading; ?>
