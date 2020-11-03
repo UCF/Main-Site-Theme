@@ -38,7 +38,7 @@ if ( $post->post_type === 'degree' ) :
 	}
 ?>
 <section aria-label="Program at a glance">
-	<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5">
+	<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5 mb-0">
 		<div class="container">
 			<div class="row">
 

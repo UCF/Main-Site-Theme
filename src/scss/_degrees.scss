@@ -96,6 +96,44 @@
 
 
 //
+// Program Description
+//
+.degree-catalog-description {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 300;
+    margin-bottom: .75em;
+
+    &:not(:first-child) {
+      margin-top: 1.5em;
+    }
+  }
+}
+
+.degree-catalog-sidebar {
+  @include media-breakpoint-up(lg) {
+    position: sticky;
+    top: 0;
+    z-index: $zindex-sticky;
+  }
+}
+
+.degree-catalog-cta-info {
+  font-family: $font-family-slab-serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.4;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.2rem;
+  }
+}
+
+
+//
 // Application Deadlines/Apply CTA
 //
 .degree-deadline-wrap {

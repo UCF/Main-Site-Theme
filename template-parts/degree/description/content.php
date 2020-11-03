@@ -6,8 +6,10 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( $description ) :
 ?>
-	<div class="col">
-		<?php echo $description; ?>
+	<div class="col py-lg-3 my-4 my-sm-5">
+		<div class="degree-catalog-description">
+			<?php echo $description; ?>
+		</div>
 
 		<?php
 		echo get_degree_request_info_button(
