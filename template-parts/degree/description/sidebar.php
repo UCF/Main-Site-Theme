@@ -2,8 +2,9 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'degree' ) :
-	$catalog_url = get_field( 'degree_pdf', $post );
-	$subplans    = get_children( array(
+	$catalog_url       = get_field( 'degree_pdf', $post );
+	$catalog_cta_intro = get_theme_mod_or_default( 'catalog_desc_cta_intro' );
+	$subplans          = get_children( array(
 		'post_parent' => $post->ID,
 		'post_type'   => 'degree',
 		'numberposts' => -1,
@@ -19,18 +20,23 @@ if ( $post->post_type === 'degree' ) :
 
 			<?php if ( $catalog_url ) : ?>
 			<div class="row py-3 py-sm-0">
+
+				<?php if ( $catalog_cta_intro ) : ?>
 				<div class="col-auto pr-0">
 					<span class="fa fa-info-circle text-info fa-3x" aria-hidden="true"></span>
 				</div>
 				<div class="col d-flex align-self-center">
 					<p class="degree-catalog-cta-info mb-0">
-						A full description of this program can be found in UCF&rsquo;s catalog.
+						<?php echo $catalog_cta_intro; ?>
 					</p>
 				</div>
 				<div class="w-100 mb-4"></div>
+				<?php endif; ?>
+
 				<div class="col col-sm-8 col-md-6 col-lg">
 					<a href="<?php echo $catalog_url; ?>" target="_blank" class="btn btn-block btn-outline-info rounded py-3">View in Catalog</a>
 				</div>
+
 			</div>
 			<?php endif; ?>
 

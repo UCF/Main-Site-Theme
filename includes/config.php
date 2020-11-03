@@ -17,6 +17,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
 	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
+	'catalog_desc_cta_intro'            => 'A full description of this program can be found in UCF&rsquo;s catalog.',
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
@@ -248,6 +249,23 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Fallback Promo/Badge 2 Alt Text',
 			'description' => 'Alt text for the Badge 2 graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'catalog_desc_cta_intro',
+		array(
+			'default' => get_theme_mod_default( 'catalog_desc_cta_intro' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'catalog_desc_cta_intro',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Catalog CTA Intro Text',
+			'description' => 'Text to display above the "View in Catalog" button on programs that display a catalog description.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
 	);
