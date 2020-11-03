@@ -1,8 +1,7 @@
 <?php
 $post = isset( $post ) ? $post : get_queried_object();
 
-if ( $post->post_type === 'degree' ) :
-	// TODO display nothing on programs that can't be completed individually (minors, ugrad certs)
+if ( $post->post_type === 'degree' && ! is_supplementary_degree( $post ) ) :
 	// TODO utilize imported career paths
 	// TODO alternate layout when no skills are set
 

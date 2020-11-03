@@ -117,6 +117,32 @@ function is_graduate_degree( $post ) {
 
 
 /**
+ * Returns true/false if the given degree $post represents
+ * a program that cannot be completed on its own (must be
+ * completed alongside a full program.)
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post WP_Post object representing a degree post
+ * @return boolean
+ */
+function is_supplementary_degree( $post ) {
+	$is_supplementary = false;
+	$terms = wp_get_post_terms( $post->ID, 'program_types' );
+
+	foreach ( $terms as $term ) {
+		if ( in_array( $term->slug, array( 'minor', 'undergraduate-certificate' ) ) ) {
+			$is_supplementary = true;
+			break;
+		}
+	}
+
+
+	return $is_supplementary;
+}
+
+
+/**
  * Returns an array of image URLs and alt text for
  * badge graphics to display on degree profiles.
  *
