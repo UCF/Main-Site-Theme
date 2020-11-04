@@ -117,6 +117,32 @@ function is_graduate_degree( $post ) {
 
 
 /**
+ * Returns true/false if the given degree $post represents
+ * a program that cannot be completed on its own (must be
+ * completed alongside a full program.)
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post WP_Post object representing a degree post
+ * @return boolean
+ */
+function is_supplementary_degree( $post ) {
+	$is_supplementary = false;
+	$terms = wp_get_post_terms( $post->ID, 'program_types' );
+
+	foreach ( $terms as $term ) {
+		if ( in_array( $term->slug, array( 'minor', 'undergraduate-certificate' ) ) ) {
+			$is_supplementary = true;
+			break;
+		}
+	}
+
+
+	return $is_supplementary;
+}
+
+
+/**
  * Returns an array of image URLs and alt text for
  * badge graphics to display on degree profiles.
  *
@@ -793,42 +819,49 @@ function main_site_degree_news_stories( $post_meta ) {
 
 
 /**
- * Returns a list of careers for a degree
+ * Returns an array of career paths assigned to a degree.
+ * Results are limited to a fixed amount and are randomized.
+ *
  * @author Jim Barnes
  * @since 3.4.0
- * @param int $post_id The post id
- * @return string
+ * @param object $post WP_Post object
+ * @return array
  */
-function main_site_degree_careers( $post_id, $post_meta ) {
-	$display = isset( $post_meta['degree_display_career_paths'] ) ?
-		filter_var( $post_meta['degree_display_career_paths'], FILTER_VALIDATE_BOOLEAN )
-		: false;
+function main_site_get_degree_careers( $post, $limit=20 ) {
+	$careers = array();
+	$terms   = array();
 
-	$terms = wp_get_post_terms(
-		$post_id,
-		'career_paths'
-	);
+	if ( have_rows( 'degree_career_list', $post ) ) {
+		while ( have_rows( 'degree_career_list', $post ) ) : the_row();
+			$careers[] = trim( get_sub_field( 'degree_career_list_item' ) );
+		endwhile;
 
-	shuffle( $terms );
+		$careers = array_filter( $careers );
+	}
 
-	$terms = array_slice( $terms, 0, 10 );
+	if ( ! $careers ) {
+		$terms = wp_get_post_terms(
+			$post->ID,
+			'career_paths',
+			array(
+				'fields' => 'id=>name'
+			)
+		);
 
-	usort( $terms, function($a, $b) {
-		return strcmp( $a->name, $b->name );
-	} );
+		if ( ! is_wp_error( $terms ) ) {
+			shuffle( $terms );
 
-	ob_start();
+			if ( $limit > 0 ) {
+				$terms = array_slice( $terms, 0, $limit );
+			}
 
-	if ( count( $terms ) > 0 && $display ) :
-?>
-	<h3>Careers</h3>
-	<ul>
-<?php foreach( $terms as $term ) : ?>
-		<li><?php echo $term->name; ?></li>
-<?php endforeach; ?>
-	</ul>
-<?php
-	endif;
+			usort( $terms, function( $a, $b ) {
+				return strcmp( $a, $b );
+			} );
 
-	return ob_get_clean();
+			$careers = $terms;
+		}
+	}
+
+	return $careers;
 }

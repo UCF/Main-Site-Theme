@@ -252,18 +252,36 @@
 
 .degree-career-list {
   list-style: none; // Remove default bullets
+  padding-left: .5rem;
+
+  @include media-breakpoint-up(sm) {
+    column-gap: $grid-gutter-width-base;
+    // NOTE: column-width value below is a magic number that happens
+    // to work with both possible list layouts. Easier to just do this
+    // vs adjusting `columns` property.  Will need to be adjusted if
+    // columns in the skills/careers template parts change.
+    column-width: 210px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-width: 190px; // magic number, again
+  }
 }
 
 .degree-career-list-item {
+  break-inside: avoid;
+  display: flex;
+  flex-direction: row;
   line-height: 1.4;
+  margin-bottom: 1rem;
+  page-break-inside: avoid;
 
   &::before {
     color: $brand-primary;
     content: '\2022';
-    display: inline-block;
+    flex: 0 0 auto;
     font-weight: 900;
-    margin-left: -1em;
-    width: 1em;
+    width: 1rem;
   }
 }
 
