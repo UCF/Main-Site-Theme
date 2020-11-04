@@ -18,7 +18,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
 	'catalog_desc_cta_intro'            => 'A full description of this program can be found in UCF&rsquo;s catalog.',
-	'degree_careers_intro'              => 'TODO Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et sagittis nisi.',
+	'degree_careers_intro'              => '', // TODO
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
