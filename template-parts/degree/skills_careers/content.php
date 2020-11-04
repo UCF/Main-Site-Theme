@@ -15,10 +15,10 @@ if ( $post->post_type === 'degree' ) :
 			<?php echo $fallback_career_content; ?>
 		</div>
 	</div>
-	<div class="col-lg-6 offset-xl-1 mt-4 mt-lg-0">
-		<ul class="degree-career-list pl-3">
+	<div class="col-lg-6 offset-xl-1 mt-4 mt-lg-0 pt-sm-3">
+		<ul class="degree-career-list">
 			<?php foreach ( $careers as $career ) : ?>
-			<li class="degree-career-list-item mb-3">
+			<li class="degree-career-list-item">
 				<?php echo $career; ?>
 			</li>
 			<?php endforeach; ?>

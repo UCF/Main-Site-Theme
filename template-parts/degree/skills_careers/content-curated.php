@@ -26,13 +26,13 @@ if ( $post->post_type === 'degree' ) :
 	<?php endif; ?>
 
 	<div class="col-lg-4 offset-lg-1 mt-4 mt-lg-0">
-		<h2 class="font-condensed h5 text-uppercase mb-3 pt-3">
+		<h2 class="font-condensed h5 text-uppercase mb-4 pt-3">
 			<?php echo $degree_careers_heading; ?>
 		</h2>
 
-		<ul class="degree-career-list pl-3">
+		<ul class="degree-career-list">
 			<?php foreach ( $careers as $career ) : ?>
-			<li class="degree-career-list-item mb-3">
+			<li class="degree-career-list-item">
 				<?php echo $career; ?>
 			</li>
 			<?php endforeach; ?>
