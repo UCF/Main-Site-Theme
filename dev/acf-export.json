@@ -874,11 +874,28 @@
                 "endpoint": 0
             },
             {
+                "key": "field_5fa1b13bea6b7",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "<em>Note: this content is only displayed on this degree's profile if a Degree Description is set below; otherwise, the degree's imported catalog description will be shown.<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
                 "key": "field_5e961c9a35232",
-                "label": "Degree Description Heading",
+                "label": "Description Heading",
                 "name": "modern_description_heading",
                 "type": "text",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "Optional heading text to display above the degree description.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -894,10 +911,10 @@
             },
             {
                 "key": "field_5e99d7308626b",
-                "label": "Degree Description Copy",
+                "label": "Degree Description",
                 "name": "modern_description_copy",
                 "type": "wysiwyg",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "A unique description for this degree.  Replaces the degree's catalog description on this degree's profile.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -905,20 +922,18 @@
                     "class": "",
                     "id": ""
                 },
-                "placement": "left",
-                "endpoint": 0,
+                "default_value": "",
                 "tabs": "all",
                 "toolbar": "full",
                 "media_upload": 1,
-                "default_value": "",
                 "delay": 0
             },
             {
                 "key": "field_5e99d8d7130db",
-                "label": "Degree Description Image",
+                "label": "Description Image",
                 "name": "modern_description_image",
                 "type": "image",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "An optional graphic to display alongside this degree's description.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -939,10 +954,10 @@
             },
             {
                 "key": "field_5e99d98c3902e",
-                "label": "Degree Description Image Alt Text",
+                "label": "Description Image Alt Text",
                 "name": "modern_description_image_alt",
                 "type": "text",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "Alt text for the Description Image above.  Not required, but should be set if the Description Image is not purely decorative or contains text.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -961,7 +976,7 @@
                 "label": "Highlights",
                 "name": "highlights",
                 "type": "repeater",
-                "instructions": "Enter content to be added to the Degree Description Highlights Section",
+                "instructions": "A list of selling points\/highlighted information about this program.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -972,51 +987,87 @@
                 "collapsed": "",
                 "min": 0,
                 "max": 0,
-                "layout": "table",
-                "button_label": "",
+                "layout": "block",
+                "button_label": "Add Highlight",
                 "sub_fields": [
                     {
-                        "key": "field_5e99e5fd73cc7",
+                        "key": "field_5fa1adbb0c966",
                         "label": "Highlight Image",
-                        "name": "highlight_image",
-                        "type": "image",
+                        "name": "highlight",
+                        "type": "group",
                         "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "50",
                             "class": "",
                             "id": ""
                         },
-                        "return_format": "url",
-                        "preview_size": "thumbnail",
-                        "library": "all",
-                        "min_width": "",
-                        "min_height": "",
-                        "min_size": "",
-                        "max_width": "",
-                        "max_height": "",
-                        "max_size": "",
-                        "mime_types": ""
+                        "layout": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5e99e5fd73cc7",
+                                "label": "Image",
+                                "name": "image",
+                                "type": "image",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "thumbnail",
+                                "library": "all",
+                                "min_width": "",
+                                "min_height": "",
+                                "min_size": "",
+                                "max_width": "",
+                                "max_height": "",
+                                "max_size": "",
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5fa1acf442552",
+                                "label": "Alt Text",
+                                "name": "image_alt_text",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            }
+                        ]
                     },
                     {
                         "key": "field_5e99e61c73cc8",
                         "label": "Highlight Copy",
                         "name": "highlight_copy",
-                        "type": "text",
+                        "type": "textarea",
                         "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "50",
                             "class": "",
                             "id": ""
                         },
                         "default_value": "",
                         "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "rows": 6,
+                        "new_lines": ""
                     }
                 ]
             },
