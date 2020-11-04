@@ -1543,11 +1543,11 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e97183304f1e",
-                "label": "Skills Heading",
-                "name": "degree_skills_heading",
-                "type": "text",
-                "instructions": "Enter header to be added to the Skills Section",
+                "key": "field_5fa1cfcf9b6ac",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1555,7 +1555,24 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
+                "message": "<em>Note: If the Skills List field below is left empty, only career opportunities will be displayed in this section on this degree's profile (as well as fallback copy defined in the Customizer.)<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5e97183304f1e",
+                "label": "Skills Heading",
+                "name": "degree_skills_heading",
+                "type": "text",
+                "instructions": "Heading text to display above the degree's list of learnable skills.  If a value for this field isn't provided and skills are set below, this heading's text will be \"Skills You'll Learn\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Skills You'll Learn",
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
@@ -1566,7 +1583,7 @@
                 "label": "Skills List",
                 "name": "degree_skills_list",
                 "type": "repeater",
-                "instructions": "Enter content to be added to the Skills Section",
+                "instructions": "A list of learnable skills provided by this degree.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1578,7 +1595,7 @@
                 "min": 0,
                 "max": 0,
                 "layout": "row",
-                "button_label": "Add List Item",
+                "button_label": "Add Skill",
                 "sub_fields": [
                     {
                         "key": "field_5e9f4a7f42439",
@@ -1606,7 +1623,7 @@
                 "label": "Career Opportunites Heading",
                 "name": "degree_careers_heading",
                 "type": "text",
-                "instructions": "Enter header to be added to the Career Opportunities Section",
+                "instructions": "Heading text to display alongside the degree's list of potential careers.  If a value for this field isn't provided, this heading's text will be \"Career Opportunities\".",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1614,7 +1631,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
+                "default_value": "Career Opportunities",
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
@@ -1622,10 +1639,10 @@
             },
             {
                 "key": "field_5e97180504f1d",
-                "label": "Career Opportunities List",
+                "label": "Career Opportunities",
                 "name": "degree_career_list",
                 "type": "repeater",
-                "instructions": "Enter items to be added to the Career Opportunities Section",
+                "instructions": "Specify a list of career opportunities to display on this degree's profile.  If provided, this list replaces the list of Career Path terms assigned to this degree.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1636,12 +1653,12 @@
                 "collapsed": "",
                 "min": 0,
                 "max": 0,
-                "layout": "block",
-                "button_label": "",
+                "layout": "row",
+                "button_label": "Add Career Path",
                 "sub_fields": [
                     {
                         "key": "field_5e9f4ec46e344",
-                        "label": "Career Opportunity",
+                        "label": "Career Path",
                         "name": "degree_career_list_item",
                         "type": "text",
                         "instructions": "",
