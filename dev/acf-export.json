@@ -1638,7 +1638,7 @@
                 "maxlength": ""
             },
             {
-                "key": "field_5fa2ecae6b344",
+                "key": "field_5e97180504f1d",
                 "label": "Career Opportunities",
                 "name": "degree_career_list",
                 "type": "repeater",
@@ -1657,7 +1657,7 @@
                 "button_label": "Add Career Path",
                 "sub_fields": [
                     {
-                        "key": "field_5fa2ecc56b345",
+                        "key": "field_5e9f4ec46e344",
                         "label": "Career Path",
                         "name": "degree_career_list_item",
                         "type": "text",
