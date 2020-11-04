@@ -22,7 +22,7 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( $has_desc ):
 ?>
-	<section aria-label="Program description">
+	<section id="program-description" aria-label="Program description">
 		<div class="container">
 			<div class="row">
 				<?php get_template_part( 'template-parts/degree/description/content', $content_part_name ); ?>

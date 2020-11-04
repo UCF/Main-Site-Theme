@@ -2,10 +2,9 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'degree' ) :
-	// TODO section needs ARIA label
 	if ( have_rows( 'degree_quotes', $post ) ) :
 ?>
-	<section>
+	<section id="quotes" aria-label="Quotes/Testimonials">
 		<div class="jumbotron jumbotron-fluid bg-faded mb-0">
 			<div class="container">
 				<?php while ( have_rows( 'degree_quotes', $post ) ) : the_row(); ?>

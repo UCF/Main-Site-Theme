@@ -37,13 +37,15 @@ if ( $post->post_type === 'degree' ) :
 		}
 	}
 ?>
-<section aria-label="Program at a glance">
+<section id="program-at-a-glance" aria-labelledby="program-at-a-glance-heading">
 	<div class="jumbotron jumbotron-fluid bg-faded pb-4 pb-md-5 mb-0">
 		<div class="container">
 			<div class="row">
 
 				<div class="<?php echo $details_col_classes; ?>">
-					<h2 class="h4 font-condensed text-uppercase mb-4 pb-sm-2">Program at a Glance</h2>
+					<h2 id="program-at-a-glance-heading" class="h4 font-condensed text-uppercase mb-4 pb-sm-2">
+						Program at a Glance
+					</h2>
 					<div class="row">
 						<div class="col">
 							<dl>

@@ -19,7 +19,7 @@ if ( $post->post_type === 'degree' ) :
 			$deadlines_col_class = 'pr-lg-5';
 		}
 ?>
-	<section aria-label="Application Deadline">
+	<section id="application-deadline" aria-labelledby="application-deadline-heading">
 		<div class="degree-deadline-wrap">
 			<div class="degree-deadline-row">
 				<!-- Left-hand surrounding pad, for desktop -->
@@ -29,7 +29,7 @@ if ( $post->post_type === 'degree' ) :
 				<div class="degree-deadline-content degree-deadline-content-deadlines text-center text-lg-left">
 					<div class="row no-gutters w-100 h-100 d-lg-flex align-items-lg-center">
 						<div class="col-12 <?php echo $deadline_heading_col_class; ?>">
-							<h2 class="h4 text-uppercase font-condensed mb-4 mb-md-5 mb-lg-0">
+							<h2 id="application-deadline-heading" class="h4 text-uppercase font-condensed mb-4 mb-md-5 mb-lg-0">
 								Application Deadline
 							</h2>
 						</div>
