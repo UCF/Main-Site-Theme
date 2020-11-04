@@ -4,7 +4,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'degree' ) :
 	$degree_careers_heading  = get_field( 'degree_careers_heading', $post ) ?: 'Career Opportunities';
 	$fallback_career_content = wptexturize( trim( get_theme_mod_or_default( 'degree_careers_intro' ) ) );
-	$careers                 = main_site_get_degree_careers( $post->ID );
+	$careers                 = main_site_get_degree_careers( $post );
 ?>
 <div class="row">
 	<div class="col-lg pr-lg-5 pr-xl-3">

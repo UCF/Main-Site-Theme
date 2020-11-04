@@ -4,7 +4,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'degree' ) :
 	$degree_skills_heading  = trim( get_field( 'degree_skills_heading', $post ) ) ?: 'Skills You&rsquo;ll Learn';
 	$degree_careers_heading = trim( get_field( 'degree_careers_heading', $post ) ) ?: 'Career Opportunities';
-	$careers = main_site_get_degree_careers( $post->ID, 10 );
+	$careers = main_site_get_degree_careers( $post, 10 );
 ?>
 <h2 class="font-condensed text-primary text-uppercase mb-4">
 	<?php echo $degree_skills_heading; ?>

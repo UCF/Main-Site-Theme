@@ -3,7 +3,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'degree' && ! is_supplementary_degree( $post ) ) :
 	$fallback_career_content = trim( get_theme_mod_or_default( 'degree_careers_intro' ) );
-	$has_careers             = empty( main_site_get_degree_careers( $post->ID ) ) ? false : true;
+	$has_careers             = empty( main_site_get_degree_careers( $post ) ) ? false : true;
 	$has_skills              = have_rows( 'degree_skills_list', $post );
 	$content_part_name       = $has_skills ? 'curated' : '';
 	$aria_label              = $has_skills ? 'Skills and Career Opportunities' : 'Career Opportunities';

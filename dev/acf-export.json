@@ -1555,7 +1555,7 @@
                     "class": "",
                     "id": ""
                 },
-                "message": "<em>Note: If the Skills List field below is left empty, only imported career opportunities will be displayed in this section on this degree's profile (as well as fallback copy defined in the Customizer.)<\/em>",
+                "message": "<em>Note: If the Skills List field below is left empty, only career opportunities will be displayed in this section on this degree's profile (as well as fallback copy defined in the Customizer.)<\/em>",
                 "new_lines": "wpautop",
                 "esc_html": 0
             },
@@ -1595,7 +1595,7 @@
                 "min": 0,
                 "max": 0,
                 "layout": "row",
-                "button_label": "Add List Item",
+                "button_label": "Add Skill",
                 "sub_fields": [
                     {
                         "key": "field_5e9f4a7f42439",
@@ -1636,6 +1636,46 @@
                 "prepend": "",
                 "append": "",
                 "maxlength": ""
+            },
+            {
+                "key": "field_5fa2ecae6b344",
+                "label": "Career Opportunities",
+                "name": "degree_career_list",
+                "type": "repeater",
+                "instructions": "Specify a list of career opportunities to display on this degree's profile.  If provided, this list replaces the list of Career Path terms assigned to this degree.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Career Path",
+                "sub_fields": [
+                    {
+                        "key": "field_5fa2ecc56b345",
+                        "label": "Career Path",
+                        "name": "degree_career_list_item",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
                 "key": "field_5e99f87f12a16",

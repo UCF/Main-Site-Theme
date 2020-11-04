@@ -819,37 +819,49 @@ function main_site_degree_news_stories( $post_meta ) {
 
 
 /**
- * Returns an array of careers assigned to a degree.
+ * Returns an array of career paths assigned to a degree.
  * Results are limited to a fixed amount and are randomized.
  *
  * @author Jim Barnes
  * @since 3.4.0
- * @param int $post_id The post id
+ * @param object $post WP_Post object
  * @return array
  */
-function main_site_get_degree_careers( $post_id, $limit=20 ) {
-	$terms = wp_get_post_terms(
-		$post_id,
-		'career_paths',
-		array(
-			'fields' => 'id=>name'
-		)
-	);
+function main_site_get_degree_careers( $post, $limit=20 ) {
+	$careers = array();
+	$terms   = array();
 
-	if ( is_wp_error( $terms ) ) {
-		// Whatever, just return early here
-		return array();
+	if ( have_rows( 'degree_career_list', $post ) ) {
+		while ( have_rows( 'degree_career_list', $post ) ) : the_row();
+			$careers[] = trim( get_sub_field( 'degree_career_list_item' ) );
+		endwhile;
+
+		$careers = array_filter( $careers );
 	}
 
-	shuffle( $terms );
+	if ( ! $careers ) {
+		$terms = wp_get_post_terms(
+			$post->ID,
+			'career_paths',
+			array(
+				'fields' => 'id=>name'
+			)
+		);
 
-	if ( $limit > 0 ) {
-		$terms = array_slice( $terms, 0, $limit );
+		if ( ! is_wp_error( $terms ) ) {
+			shuffle( $terms );
+
+			if ( $limit > 0 ) {
+				$terms = array_slice( $terms, 0, $limit );
+			}
+
+			usort( $terms, function( $a, $b ) {
+				return strcmp( $a, $b );
+			} );
+
+			$careers = $terms;
+		}
 	}
 
-	usort( $terms, function( $a, $b ) {
-		return strcmp( $a, $b );
-	} );
-
-	return $terms;
+	return $careers;
 }
