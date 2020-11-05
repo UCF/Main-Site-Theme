@@ -202,7 +202,11 @@ function get_degree_badges( $post=null ) {
 
 
 /**
- * TODO
+ * Returns an array of deadlines, grouped by deadline type
+ * (e.g. domestic/transfer/international).
+ *
+ * If custom application deadlines are defined, they are
+ * returned instead in an unnamed group.
  *
  * @since 3.8.0
  * @author Jo Dickson
@@ -214,10 +218,28 @@ function get_degree_application_deadlines( $post ) {
 
 	if ( have_rows( 'application_deadlines', $post ) ) {
 		// Custom deadlines
-		$deadlines = get_field( 'application_deadlines', $post );
+		$custom_deadlines = get_field( 'application_deadlines', $post );
+		foreach ( $custom_deadlines as $deadline ) {
+			$deadlines[''][] = array(
+				'term'     => $deadline['deadline_term'],
+				'deadline' => $deadline['deadline']
+			);
+		}
 	} else if ( have_rows( 'degree_application_deadlines', $post ) ) {
 		// Imported deadlines
-		$deadlines = get_field( 'degree_application_deadlines', $post );
+		$imported_deadlines = get_field( 'degree_application_deadlines', $post );
+		foreach ( $imported_deadlines as $deadline ) {
+			if (
+				isset( $deadline['deadline_type'] )
+				&& isset( $deadline['admission_term'] )
+				&& isset( $deadline['deadline'] )
+			) {
+				$deadlines[$deadline['deadline_type']][] = array(
+					'term'     => $deadline['admission_term'],
+					'deadline' => $deadline['deadline']
+				);
+			}
+		}
 	}
 
 	return $deadlines;
