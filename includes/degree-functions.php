@@ -201,6 +201,28 @@ function get_degree_badges( $post=null ) {
 }
 
 
+/**
+ * TODO
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post WP_Post object
+ * @return array
+ */
+function get_degree_application_deadlines( $post ) {
+	$deadlines = array();
+
+	if ( have_rows( 'application_deadlines', $post ) ) {
+		// Custom deadlines
+		$deadlines = get_field( 'application_deadlines', $post );
+	} else if ( have_rows( 'degree_application_deadlines', $post ) ) {
+		// Imported deadlines
+		$deadlines = get_field( 'degree_application_deadlines', $post );
+	}
+
+	return $deadlines;
+}
+
 
 /**
  * Gets the "Apply Now" button markup for degree.

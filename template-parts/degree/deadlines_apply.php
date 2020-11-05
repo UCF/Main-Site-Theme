@@ -2,12 +2,21 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'degree' ) :
-	// TODO replace content for programs without deadlines, minors, ugrad certs (existing Section selection)
-	// TODO utilize imported deadline data
-	$deadlines = get_field( 'application_deadlines', $post );
-	$deadlines_count = is_array( $deadlines ) ? count( $deadlines ) : 0;
+	$deadlines                 = get_degree_application_deadlines( $post );
+	$deadlines_count           = is_array( $deadlines ) ? count( $deadlines ) : 0;
+	$alternate_section         = null;
+	$degree_alternate_section  = get_field( 'alternate_deadlines_section', $post );
+	$fallback_section          = is_graduate_degree( $post ) ? get_theme_mod( 'degree_deadlines_graduate_fallback' ) : get_theme_mod( 'degree_deadlines_undergraduate_fallback' );
 
-	if ( $deadlines_count ):
+	if ( $degree_alternate_section ) {
+		$alternate_section = $degree_alternate_section;
+	} else if ( ! $deadlines_count ) {
+		$alternate_section = $fallback_section;
+	}
+
+	if ( $alternate_section ) :
+		echo do_shortcode( "[ucf-section id='$alternate_section']" );
+	elseif ( $deadlines_count ) :
 		$deadline_heading_col_class = 'col-lg-4';
 		$deadlines_col_class = 'col-lg-8 pl-lg-5 pr-xl-5';
 		if ( $deadlines_count === 1 ) {
@@ -35,29 +44,9 @@ if ( $post->post_type === 'degree' ) :
 						</div>
 						<div class="col-12 <?php echo $deadlines_col_class; ?>">
 							<div class="row d-lg-flex justify-content-lg-between flex-lg-nowrap">
-							<?php while ( have_rows( 'application_deadlines', $post ) ) : the_row(); ?>
-
-								<div class="col-lg-auto my-lg-3 text-center text-uppercase">
-									<h3 class="h5">
-										<?php the_sub_field( 'deadline_term' ); ?>
-									</h3>
-									<p class="mb-0">
-										<?php the_sub_field( 'deadline' ); ?>
-									</p>
+								<div class="col">
+									TODO
 								</div>
-
-								<?php if ( get_row_index() < $deadlines_count ): ?>
-								<div class="col-12 col-lg-auto">
-									<div class="hidden-lg-up">
-										<hr class="hr-2 hr-white w-50 my-4" role="presentational">
-									</div>
-									<div class="hidden-md-down h-100">
-										<hr class="hr-2 hr-white hr-vertical mx-0" role="presentational">
-									</div>
-								</div>
-								<?php endif; ?>
-
-							<?php endwhile; ?>
 							</div>
 						</div>
 					</div>
