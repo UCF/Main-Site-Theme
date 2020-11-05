@@ -138,7 +138,7 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 
 function define_customizer_fields( $wp_customize ) {
-	$section_choices = array();
+	$section_choices = array( '' => '---' );
 	$sections        = get_posts( array(
 		'post_type'   => 'ucf_section',
 		'numberposts' => -1,

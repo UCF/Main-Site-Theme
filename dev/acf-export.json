@@ -1109,7 +1109,7 @@
             {
                 "key": "field_5fa41b8492d13",
                 "label": "Alternate Section",
-                "name": "alternate_section",
+                "name": "alternate_deadlines_section",
                 "type": "post_object",
                 "instructions": "Specify an alternate Section post to display in lieu of the standard Application Deadlines section on this degree's profile.  This value takes precedence over the Undergraduate\/Graduate Fallback Section values in the Customizer.",
                 "required": 0,
