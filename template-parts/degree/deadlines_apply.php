@@ -38,7 +38,7 @@ if ( $post->post_type === 'degree' ) :
 		) {
 			$deadline_heading_show_inline = true;
 		}
-		$deadline_heading_col_class = $deadline_heading_show_inline ? 'col-lg-4 mb-4 mb-md-5 mb-lg-0' : 'col-12 mb-4';
+		$deadline_heading_col_class = $deadline_heading_show_inline ? 'col-lg-4 mb-4 mb-lg-0 mr-lg-5' : 'col-12 mb-4';
 ?>
 	<section aria-labelledby="application-deadlines-heading">
 		<div class="degree-deadline-wrap">
@@ -59,7 +59,7 @@ if ( $post->post_type === 'degree' ) :
 
 								<?php if ( $deadline_group_names ) : ?>
 								<div class="col-lg-auto">
-									<ul class="nav nav-pills flex-lg-column" id="degree-deadline-tabs" role="tablist">
+									<ul class="nav nav-pills degree-deadline-tab-nav flex-lg-column" id="degree-deadline-tabs" role="tablist">
 										<?php
 										foreach ( $deadline_group_names as $i => $group_name ) :
 											$nav_link_class = 'nav-link';
@@ -107,7 +107,7 @@ if ( $post->post_type === 'degree' ) :
 
 											<dl class="row mb-0">
 												<?php foreach ( $group as $deadline ) : ?>
-												<div class="col-12 col-sm text-lg-center">
+												<div class="col-12 col-sm text-lg-center degree-deadline">
 													<dt class="font-weight-normal"><?php echo $deadline['term']; ?></dt>
 													<dd class="font-weight-bold"><?php echo $deadline['deadline']; ?></dd>
 												</div>
@@ -125,15 +125,19 @@ if ( $post->post_type === 'degree' ) :
 						</div>
 					</div>
 				</div>
-				<div class="degree-deadline-content degree-deadline-content-start text-center text-lg-left bg-gray-darker">
+				<div class="degree-deadline-content degree-deadline-content-start <?php if ( ! $deadline_heading_show_inline ) { ?>degree-deadline-content-start-condensed<?php } ?> text-center text-lg-left bg-gray-darker">
 					<div class="row no-gutters d-lg-flex justify-content-lg-center align-self-lg-center">
-						<div class="col-12 col-lg-auto pr-xl-4">
-							<h2 class="h5 text-uppercase font-condensed mb-4 mb-lg-3 mb-xl-0">
-								<span class="d-xl-block">Ready to</span>
-								<span class="d-xl-block">get started?</span>
+						<div class="col-12 col-lg-auto align-self-lg-center pr-xl-4">
+								<h2 class="h5 text-uppercase font-condensed mb-4 mb-lg-3 <?php if ( $deadline_heading_show_inline ) { ?>mb-xl-0<?php } ?>">
+								<span class="d-inline-block <?php if ( $deadline_heading_show_inline ) { ?>d-xl-block<?php } ?>">
+									Ready to
+								</span>
+								<span class="d-inline-block">
+									get started?
+								</span>
 							</h2>
 						</div>
-						<div class="col-12 col-lg-auto">
+						<div class="col-12 col-lg-auto align-self-lg-center">
 							<?php
 							echo get_degree_apply_button(
 								$post,
