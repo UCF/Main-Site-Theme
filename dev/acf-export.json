@@ -929,6 +929,25 @@
                 "delay": 0
             },
             {
+                "key": "field_5fa30c20b2db6",
+                "label": "Show Subplan List",
+                "name": "show_subplan_list",
+                "type": "true_false",
+                "instructions": "When checked, a list of program tracks\/options and their excerpts will be displayed underneath this program's unique degree description if this program has at least one subplan.  Not applicable when the Degree Description is empty.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5e99d8d7130db",
                 "label": "Description Image",
                 "name": "modern_description_image",
