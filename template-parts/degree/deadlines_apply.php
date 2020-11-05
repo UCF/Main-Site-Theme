@@ -57,7 +57,7 @@ if ( $post->post_type === 'degree' ) :
 						<div class="col">
 							<div class="row d-lg-flex align-items-lg-center justify-content-lg-between flex-lg-nowrap">
 
-								<?php if ( $deadline_group_names && count( $deadline_group_names > 1 ) ) : ?>
+								<?php if ( $deadline_group_names && count( $deadline_group_names ) > 1 ) : ?>
 								<div class="col-lg-auto">
 									<ul class="nav nav-pills degree-deadline-tab-nav flex-lg-column" id="degree-deadline-tabs" role="tablist">
 										<?php
