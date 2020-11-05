@@ -57,7 +57,7 @@ if ( $post->post_type === 'degree' ) :
 						<div class="col">
 							<div class="row d-lg-flex align-items-lg-center justify-content-lg-between flex-lg-nowrap">
 
-								<?php if ( $deadline_group_names ) : ?>
+								<?php if ( $deadline_group_names && count( $deadline_group_names > 1 ) ) : ?>
 								<div class="col-lg-auto">
 									<ul class="nav nav-pills degree-deadline-tab-nav flex-lg-column" id="degree-deadline-tabs" role="tablist">
 										<?php
@@ -92,7 +92,8 @@ if ( $post->post_type === 'degree' ) :
 										<?php
 										// Only render a tab pane if more than one group
 										// is available (and tab nav is available)
-										if ( $group_name ) :
+										$wrap_in_pane = ( $group_name && count( $deadline_group_names ) > 1 ) ? true : false;
+										if ( $wrap_in_pane ) :
 											$tab_pane_class = 'tab-pane fade';
 											if ( $j === 0 ) $tab_pane_class .= ' show active';
 											$j++;
@@ -114,7 +115,7 @@ if ( $post->post_type === 'degree' ) :
 												<?php endforeach; ?>
 											</dl>
 
-										<?php if ( $group_name ) : ?>
+										<?php if ( $wrap_in_pane ) : ?>
 										</div>
 										<?php endif; ?>
 									<?php endforeach; ?>
