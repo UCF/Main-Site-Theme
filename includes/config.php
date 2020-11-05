@@ -138,7 +138,22 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 
 function define_customizer_fields( $wp_customize ) {
-	// Degrees
+	$section_choices = array();
+	$sections        = get_posts( array(
+		'post_type'   => 'ucf_section',
+		'numberposts' => -1,
+		'orderby'     => 'post_title',
+		'order'       => 'ASC'
+	) );
+
+	if ( $sections ) {
+		foreach ( $sections as $section ) {
+			$section_choices[$section->ID] = $section->post_title;
+		}
+	}
+
+
+	// Degrees - CTAs
 	$wp_customize->add_setting(
 		'degrees_undergraduate_application',
 		array(
@@ -207,6 +222,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Degrees - Program at a Glance
 	$wp_customize->add_setting(
 		'tuition_disclaimer'
 	);
@@ -281,6 +297,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Degrees - Description
 	$wp_customize->add_setting(
 		'catalog_desc_cta_intro',
 		array(
@@ -298,6 +315,38 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Degrees - Deadlines
+	$wp_customize->add_setting(
+		'degree_deadlines_undergraduate_fallback'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_undergraduate_fallback',
+		array(
+			'type'        => 'select',
+			'label'       => 'Undergraduate Degree Fallback Section',
+			'description' => 'An alternate Section post to display instead of the Application Deadlines section for undergraduate programs without deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+			'choices'     => $section_choices
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_graduate_fallback'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_graduate_fallback',
+		array(
+			'type'        => 'select',
+			'label'       => 'Graduate Degree Fallback Section',
+			'description' => 'An alternate Section post to display instead of the Application Deadlines section for graduate programs without deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+			'choices'     => $section_choices
+		)
+	);
+
+	// Degrees - Skills and Career Opportunities
 	$wp_customize->add_setting(
 		'degree_careers_intro',
 		array(
@@ -315,7 +364,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	//Phonebook
+	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'
 	);

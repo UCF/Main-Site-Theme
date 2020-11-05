@@ -1107,11 +1107,33 @@
                 "endpoint": 0
             },
             {
+                "key": "field_5fa41b8492d13",
+                "label": "Alternate Section",
+                "name": "alternate_section",
+                "type": "post_object",
+                "instructions": "Specify an alternate Section post to display in lieu of the standard Application Deadlines section on this degree's profile.  This value takes precedence over the Undergraduate\/Graduate Fallback Section values in the Customizer.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "ucf_section"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "id",
+                "ui": 1
+            },
+            {
                 "key": "field_5e9f44774068c",
-                "label": "Application Deadlines",
+                "label": "Deadlines",
                 "name": "application_deadlines",
                 "type": "repeater",
-                "instructions": "",
+                "instructions": "Specify a list of application deadlines to display on this degree's profile.  If provided, this list replaces the list of imported deadlines assigned to this degree.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
