@@ -14,7 +14,6 @@ define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
-	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
 	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
 	'catalog_desc_cta_intro'            => 'A full description of this program can be found in UCF&rsquo;s catalog.',
@@ -53,11 +52,56 @@ function __init__() {
 add_action( 'after_setup_theme', '__init__' );
 
 
-function define_customizer_sections( $wp_customize ) {
-	$wp_customize->add_section(
+function define_customizer_panels( $wp_customize ) {
+	$wp_customize->add_panel(
 		THEME_CUSTOMIZER_PREFIX . 'degrees',
 		array(
 			'title' => 'Degrees'
+		)
+	);
+}
+
+add_action( 'customize_register', 'define_customizer_panels' );
+
+
+function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-ctas',
+		array(
+			'title' => 'Calls to Action (CTAs)',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance',
+		array(
+			'title' => 'Program at a Glance',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-description',
+		array(
+			'title' => 'Description',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+		array(
+			'title' => 'Application Deadlines',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers',
+		array(
+			'title' => 'Skills and Career Opportunities',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
 	);
 
@@ -94,7 +138,22 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 
 function define_customizer_fields( $wp_customize ) {
-	// Degrees
+	$section_choices = array( '' => '---' );
+	$sections        = get_posts( array(
+		'post_type'   => 'ucf_section',
+		'numberposts' => -1,
+		'orderby'     => 'post_title',
+		'order'       => 'ASC'
+	) );
+
+	if ( $sections ) {
+		foreach ( $sections as $section ) {
+			$section_choices[$section->ID] = $section->post_title;
+		}
+	}
+
+
+	// Degrees - CTAs
 	$wp_customize->add_setting(
 		'degrees_undergraduate_application',
 		array(
@@ -107,8 +166,8 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Undergraduate Application URL',
-			'description' => 'The url of the online undergraduate application.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'description' => 'The URL of the online undergraduate application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
@@ -124,25 +183,8 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Graduate Application URL',
-			'description' => 'The url of the online graudate application.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
-		)
-	);
-
-	$wp_customize->add_setting(
-		'degrees_visit_ucf_url',
-		array(
-			'default' => get_theme_mod_default( 'degrees_visit_ucf_url' )
-		)
-	);
-
-	$wp_customize->add_control(
-		'degrees_visit_ucf_url',
-		array(
-			'type'        => 'text',
-			'label'       => 'Visit UCF URL',
-			'description' =>'URL for the campus tour application.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'description' => 'The URL of the online graduate application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
@@ -159,7 +201,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Graduate Degree RFI URL base',
 			'description' => 'Base URL for the request-for-information form for graduate degrees.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
@@ -176,10 +218,11 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Graduate Degree RFI Form ID',
 			'description' => 'ID of the request-for-information form for graduate degrees.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
+	// Degrees - Program at a Glance
 	$wp_customize->add_setting(
 		'tuition_disclaimer'
 	);
@@ -189,8 +232,8 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'textarea',
 			'label'       => 'Tuition Disclaimer',
-			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'description' => 'A message displayed below the tuition per credit hour on degree pages.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 		)
 	);
 
@@ -205,7 +248,7 @@ function define_customizer_fields( $wp_customize ) {
 			array(
 				'label'      => 'Fallback Promo/Badge 1',
 				'description' => 'A badge or other promotional graphic to display on all degrees that don\'t have their own set.',
-				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 			)
 		)
 	);
@@ -220,7 +263,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Fallback Promo/Badge 1 Alt Text',
 			'description' => 'Alt text for the Badge 1 graphic.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 		)
 	);
 
@@ -235,7 +278,7 @@ function define_customizer_fields( $wp_customize ) {
 			array(
 				'label'      => 'Fallback Promo/Badge 2',
 				'description' => 'A badge or other promotional graphic to display on all degrees that don\'t have their own set.',
-				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees'
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 			)
 		)
 	);
@@ -250,10 +293,11 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Fallback Promo/Badge 2 Alt Text',
 			'description' => 'Alt text for the Badge 2 graphic.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 		)
 	);
 
+	// Degrees - Description
 	$wp_customize->add_setting(
 		'catalog_desc_cta_intro',
 		array(
@@ -267,10 +311,42 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'textarea',
 			'label'       => 'Catalog CTA Intro Text',
 			'description' => 'Text to display above the "View in Catalog" button on programs that display a catalog description.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
 		)
 	);
 
+	// Degrees - Deadlines
+	$wp_customize->add_setting(
+		'degree_deadlines_undergraduate_fallback'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_undergraduate_fallback',
+		array(
+			'type'        => 'select',
+			'label'       => 'Undergraduate Degree Fallback Section',
+			'description' => 'An alternate Section post to display instead of the Application Deadlines section for undergraduate programs without deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+			'choices'     => $section_choices
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_graduate_fallback'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_graduate_fallback',
+		array(
+			'type'        => 'select',
+			'label'       => 'Graduate Degree Fallback Section',
+			'description' => 'An alternate Section post to display instead of the Application Deadlines section for graduate programs without deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+			'choices'     => $section_choices
+		)
+	);
+
+	// Degrees - Skills and Career Opportunities
 	$wp_customize->add_setting(
 		'degree_careers_intro',
 		array(
@@ -284,11 +360,11 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'textarea',
 			'label'       => 'Degree Career Fallback Intro Text',
 			'description' => 'Text to display next to a program\'s careers when a list of learnable skills is not set.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers'
 		)
 	);
 
-	//Phonebook
+	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'
 	);

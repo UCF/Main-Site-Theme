@@ -222,6 +222,70 @@
     flex-wrap: nowrap;
     max-width: #{map-get($container-max-widths, xl) * (5/12)};
   }
+
+  &.degree-deadline-content-start-condensed {
+    @include media-breakpoint-up(lg) {
+      max-width: 290px; // magic number, sorry
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-width: #{map-get($container-max-widths, xl) * (3/12)};
+    }
+  }
+}
+
+.degree-deadline-tab-nav {
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media-breakpoint-up(lg) {
+    margin-left: -.75rem;
+  }
+
+  .nav-item {
+    margin: .25rem 0;
+  }
+
+  .nav-link {
+    color: transparentize($black, .4);
+    font-size: $font-size-xs;
+    padding: .75rem;
+    text-transform: uppercase;
+
+    &.active {
+      color: $black;
+      font-weight: bold;
+      position: relative;
+
+      &::after {
+        background-color: $white;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: $border-width-thicker;
+        left: .75rem;
+        position: absolute;
+        right: .75rem;
+      }
+    }
+  }
+}
+
+.degree-deadline {
+  font-size: 1.1em;
+  text-align: center;
+
+  @include media-breakpoint-only(lg) {
+    font-size: 1em;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 0;
+    }
+  }
 }
 
 
