@@ -278,7 +278,7 @@ function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block bt
 ?>
 	<a class="<?php echo $btn_classes; ?>" href="<?php echo $apply_url; ?>">
 		<?php if ( $icon_classes ): ?>
-		<span class="fa fa-pencil pr-2" aria-hidden="true"></span>
+		<span class="<?php echo $icon_classes; ?>" aria-hidden="true"></span>
 		<?php endif; ?>
 
 		<?php echo $btn_text; ?>
