@@ -18,14 +18,10 @@ if ( $post->post_type === 'degree' ) :
 	elseif ( $deadlines ) :
 		$deadline_group_names = array_filter( array_keys( $deadlines ) );
 
-		// Modify heading text depending on the type of degree
-		// and the number of deadline groups are available:
+		// Modify heading text depending on the type of degree:
 		$heading_text = '<span class="d-inline-block">Application Deadlines</span>';
 		if ( ! is_graduate_degree( $post ) ) {
 			$heading_text = 'Undergraduate ' . $heading_text;
-		} else if ( count( $deadlines ) === 1 ) {
-			$first_group_name = $deadline_group_names[0] ?? '';
-			$heading_text = trim( $first_group_name . ' ' . $heading_text );
 		}
 
 		// Allow the heading for this section to display inline if
