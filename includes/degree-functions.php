@@ -444,12 +444,14 @@ function get_degree_tuition_parts( $tuition ) {
 
 
 /**
- * TODO
+ * Returns an associative array of degree types available under
+ * a college, using a slug=>name structure.
  *
- * @since TODO
- * @author TODO
- * @param TODO $degree_types TODO
- * @return TODO
+ * @since 3.0.1
+ * @author Jim Barnes
+ * @param array $degree_types An array of available degree types
+ *              for a college (via `degree_types_available` meta)
+ * @return array Formatted list of degree types
  */
 function map_degree_types( $degree_types ) {
 	$retval = array();
