@@ -63,7 +63,7 @@ if ( $post->post_type === 'degree' ) :
 
 								<!-- Deadline group tabs column, if applicable -->
 								<?php if ( $deadline_group_names && count( $deadline_group_names ) > 1 ) : ?>
-								<div class="col-lg-auto d-flex mb-3 mb-lg-0">
+								<div class="col-lg-auto d-flex mb-3 mb-lg-0 pr-lg-4">
 									<ul class="nav nav-pills degree-deadline-tab-nav flex-lg-column" id="degree-deadline-tabs" role="tablist">
 										<?php
 										foreach ( $deadline_group_names as $i => $group_name ) :
