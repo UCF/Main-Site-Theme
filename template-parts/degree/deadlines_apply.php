@@ -35,6 +35,8 @@ if ( $post->post_type === 'degree' ) :
 			$deadline_heading_show_inline = true;
 		}
 		$deadline_heading_col_class = $deadline_heading_show_inline ? 'col-lg-4 mb-4 mb-lg-0 mr-lg-5' : 'col-12 mb-4';
+		// We shouldn't have to do this, but, IE11:
+		$deadline_groups_col_class  = $deadline_heading_show_inline ? 'col' : 'col-12';
 ?>
 	<section aria-labelledby="application-deadlines-heading">
 		<div class="degree-deadline-wrap">
@@ -44,7 +46,7 @@ if ( $post->post_type === 'degree' ) :
 
 				<!-- Gold block, contains section heading and deadline groups -->
 				<div class="degree-deadline-content degree-deadline-content-deadlines">
-					<div class="row no-gutters w-100 h-100 d-lg-flex align-items-lg-center">
+					<div class="row no-gutters w-100 h-100 d-lg-flex flex-wrap align-items-lg-center">
 
 						<!-- Section heading column -->
 						<div class="<?php echo $deadline_heading_col_class; ?>">
@@ -54,7 +56,7 @@ if ( $post->post_type === 'degree' ) :
 						</div>
 
 						<!-- Deadline groups column -->
-						<div class="col">
+						<div class="<?php echo $deadline_groups_col_class; ?>">
 							<div class="row d-lg-flex align-items-lg-center justify-content-lg-between flex-lg-nowrap">
 
 								<!-- Deadline group tabs column, if applicable -->
@@ -135,7 +137,7 @@ if ( $post->post_type === 'degree' ) :
 					<div class="row no-gutters d-lg-flex justify-content-lg-center align-self-lg-center">
 
 						<!-- CTA lead text column -->
-						<div class="col-12 col-lg-auto align-self-lg-center pr-xl-4">
+						<div class="col-12 col-lg-auto align-self-lg-center pr-xl-3">
 							<h2 class="h5 text-uppercase font-condensed mb-4 mb-lg-3 <?php if ( $deadline_heading_show_inline ) { ?>mb-xl-0<?php } ?>">
 								<span class="d-inline-block <?php if ( $deadline_heading_show_inline ) { ?>d-xl-block<?php } ?>">
 									Ready to
