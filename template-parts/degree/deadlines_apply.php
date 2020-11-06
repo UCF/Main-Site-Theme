@@ -38,24 +38,12 @@ if ( $post->post_type === 'degree' ) :
 		// We shouldn't have to do this, but, IE11:
 		$deadline_groups_col_class  = $deadline_heading_show_inline ? 'col' : 'col-12';
 ?>
-<<<<<<< HEAD
-	<section id="application-deadline" aria-labelledby="application-deadline-heading">
-=======
-	<section aria-labelledby="application-deadlines-heading">
->>>>>>> deadline-display
+	<section id="application-deadline" aria-labelledby="application-deadlines-heading">
 		<div class="degree-deadline-wrap">
 			<div class="degree-deadline-row">
 				<!-- Left-hand surrounding pad, for desktop -->
 				<div class="degree-deadline-pad bg-primary"></div>
 
-<<<<<<< HEAD
-				<!-- Inner content -->
-				<div class="degree-deadline-content degree-deadline-content-deadlines text-center text-lg-left">
-					<div class="row no-gutters w-100 h-100 d-lg-flex align-items-lg-center">
-						<div class="col-12 <?php echo $deadline_heading_col_class; ?>">
-							<h2 id="application-deadline-heading" class="h4 text-uppercase font-condensed mb-4 mb-md-5 mb-lg-0">
-								Application Deadline
-=======
 				<!-- Gold block, contains section heading and deadline groups -->
 				<div class="degree-deadline-content degree-deadline-content-deadlines">
 					<div class="row no-gutters w-100 h-100 d-lg-flex flex-wrap align-items-lg-center">
@@ -64,7 +52,6 @@ if ( $post->post_type === 'degree' ) :
 						<div class="<?php echo $deadline_heading_col_class; ?>">
 							<h2 id="application-deadlines-heading" class="h4 text-uppercase font-condensed text-center text-lg-left mb-0">
 								<?php echo $heading_text; ?>
->>>>>>> deadline-display
 							</h2>
 						</div>
 
