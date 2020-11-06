@@ -235,7 +235,12 @@
 }
 
 .degree-deadline-tab-nav {
-  margin-left: -.75rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media-breakpoint-up(lg) {
+    margin-left: -.75rem;
+  }
 
   .nav-item {
     margin: .25rem 0;
@@ -268,9 +273,18 @@
 
 .degree-deadline {
   font-size: 1.1em;
+  text-align: center;
 
   @include media-breakpoint-only(lg) {
     font-size: 1em;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 0;
+    }
   }
 }
 

@@ -20,7 +20,7 @@ if ( $post->post_type === 'degree' ) :
 
 		// Modify heading text depending on the type of degree
 		// and the number of deadline groups are available:
-		$heading_text         = 'Application Deadlines';
+		$heading_text = '<span class="d-inline-block">Application Deadlines</span>';
 		if ( ! is_graduate_degree( $post ) ) {
 			$heading_text = 'Undergraduate ' . $heading_text;
 		} else if ( count( $deadlines ) === 1 ) {
@@ -46,19 +46,24 @@ if ( $post->post_type === 'degree' ) :
 				<!-- Left-hand surrounding pad, for desktop -->
 				<div class="degree-deadline-pad bg-primary"></div>
 
-				<!-- Inner content -->
+				<!-- Gold block, contains section heading and deadline groups -->
 				<div class="degree-deadline-content degree-deadline-content-deadlines">
 					<div class="row no-gutters w-100 h-100 d-lg-flex align-items-lg-center">
+
+						<!-- Section heading column -->
 						<div class="<?php echo $deadline_heading_col_class; ?>">
-							<h2 id="application-deadlines-heading" class="h4 text-uppercase font-condensed mb-0">
+							<h2 id="application-deadlines-heading" class="h4 text-uppercase font-condensed text-center text-lg-left mb-0">
 								<?php echo $heading_text; ?>
 							</h2>
 						</div>
+
+						<!-- Deadline groups column -->
 						<div class="col">
 							<div class="row d-lg-flex align-items-lg-center justify-content-lg-between flex-lg-nowrap">
 
+								<!-- Deadline group tabs column, if applicable -->
 								<?php if ( $deadline_group_names && count( $deadline_group_names ) > 1 ) : ?>
-								<div class="col-lg-auto">
+								<div class="col-lg-auto d-flex mb-3 mb-lg-0">
 									<ul class="nav nav-pills degree-deadline-tab-nav flex-lg-column" id="degree-deadline-tabs" role="tablist">
 										<?php
 										foreach ( $deadline_group_names as $i => $group_name ) :
@@ -83,7 +88,8 @@ if ( $post->post_type === 'degree' ) :
 								</div>
 								<?php endif; ?>
 
-								<div class="col">
+								<!-- Deadlines column -->
+								<div class="col mt-2 mt-lg-0">
 									<div class="tab-content" id="degree-deadlines">
 									<?php
 									$j = 0;
@@ -108,9 +114,9 @@ if ( $post->post_type === 'degree' ) :
 
 											<dl class="row mb-0">
 												<?php foreach ( $group as $deadline ) : ?>
-												<div class="col-12 col-sm text-lg-center degree-deadline">
+												<div class="col-12 col-sm degree-deadline">
 													<dt class="font-weight-normal"><?php echo $deadline['term']; ?></dt>
-													<dd class="font-weight-bold"><?php echo $deadline['deadline']; ?></dd>
+													<dd class="font-weight-bold mb-lg-0"><?php echo $deadline['deadline']; ?></dd>
 												</div>
 												<?php endforeach; ?>
 											</dl>
@@ -124,12 +130,17 @@ if ( $post->post_type === 'degree' ) :
 
 							</div>
 						</div>
+
 					</div>
 				</div>
+
+				<!-- Gray block, contains apply CTA -->
 				<div class="degree-deadline-content degree-deadline-content-start <?php if ( ! $deadline_heading_show_inline ) { ?>degree-deadline-content-start-condensed<?php } ?> text-center text-lg-left bg-gray-darker">
 					<div class="row no-gutters d-lg-flex justify-content-lg-center align-self-lg-center">
+
+						<!-- CTA lead text column -->
 						<div class="col-12 col-lg-auto align-self-lg-center pr-xl-4">
-								<h2 class="h5 text-uppercase font-condensed mb-4 mb-lg-3 <?php if ( $deadline_heading_show_inline ) { ?>mb-xl-0<?php } ?>">
+							<h2 class="h5 text-uppercase font-condensed mb-4 mb-lg-3 <?php if ( $deadline_heading_show_inline ) { ?>mb-xl-0<?php } ?>">
 								<span class="d-inline-block <?php if ( $deadline_heading_show_inline ) { ?>d-xl-block<?php } ?>">
 									Ready to
 								</span>
@@ -138,6 +149,8 @@ if ( $post->post_type === 'degree' ) :
 								</span>
 							</h2>
 						</div>
+
+						<!-- Apply button column -->
 						<div class="col-12 col-lg-auto align-self-lg-center">
 							<?php
 							echo get_degree_apply_button(
@@ -148,6 +161,7 @@ if ( $post->post_type === 'degree' ) :
 							);
 							?>
 						</div>
+
 					</div>
 				</div>
 
