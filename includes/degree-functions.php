@@ -416,129 +416,30 @@ function get_degree_request_info_modal( $degree ) {
 }
 
 
-function get_colleges_markup( $post_id ) {
-	$colleges = wp_get_post_terms( $post_id, 'colleges' );
+/**
+ * Splits a provided tuition string into two parts:
+ * the tuition value, and "per" string (e.g. per credit hour).
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param string $tuition_val
+ * @return array
+ */
+function get_degree_tuition_parts( $tuition ) {
+	if ( ! $tuition ) return array();
 
-	ob_start();
-	foreach( $colleges as $college ) :
-		$college_url = get_term_link( $college->term_id );
-		if ( $college_url ) :
-?>
-		<a href="<?php echo $college_url; ?>" class="d-block">
-		<?php echo $college->name; ?>
-		</a>
-<?php 	else : ?>
-		<span class="d-block">
-		<?php echo $college->name; ?>
-		</span>
-<?php
-		endif;
-	endforeach;
+	$tuition       = str_replace( '.00', '', $tuition );
+	$tuition_parts = array();
 
-	return ob_get_clean();
-}
+	preg_match( '/^(\$[\d,.]+)/', $tuition, $tuition_parts );
 
+	$tuition_val = $tuition_parts[1] ?? '';
+	$tuition_per = trim( str_replace( $tuition_val, '', $tuition ) );
 
-function get_departments_markup( $post_id ) {
-	$departments = wp_get_post_terms( $post_id, 'departments' );
-
-	ob_start();
-	foreach( $departments as $department ) :
-		$department_url = get_term_meta( $department->term_id, 'departments_url', true );
-		if ( $department_url ) :
-?>
-		<a href="<?php echo $department_url; ?>" class="d-block">
-		<?php echo $department->name; ?>
-		</a>
-<?php 	else : ?>
-		<span class="d-block">
-		<?php echo $department->name; ?>
-		</span>
-<?php
-		endif;
-	endforeach;
-
-	return ob_get_clean();
-}
-
-
-function get_degree_tuition_markup( $post_meta ) {
-	$resident = isset( $post_meta['degree_resident_tuition'] ) ? $post_meta['degree_resident_tuition'] : null;
-	$nonresident = isset( $post_meta['degree_nonresident_tuition'] ) ? $post_meta['degree_nonresident_tuition'] : null;
-	$skip = ( isset( $post_meta['degree_tuition_skip'] ) && $post_meta['degree_tuition_skip'] === 'on' ) ? true : false;
-
-	if ( $resident && $nonresident && ! $skip ) {
-		return ucf_tuition_fees_degree_modern_layout( $resident, $nonresident );
-	}
-
-	return '';
-}
-
-
-function ucf_tuition_fees_degree_modern_layout( $resident, $nonresident ) {
-	$disclaimer = get_theme_mod( 'tuition_disclaimer', null );
-
-	$nonresident = str_replace( '.00', '', $nonresident );
-	$resident    = str_replace( '.00', '', $resident );
-	$nonresident_parts = array();
-	$resident_parts    = array();
-
-	preg_match( '/^(\$[\d,.]+)/', $nonresident, $nonresident_parts );
-	$nonresident_val = $nonresident_parts[1];
-	$nonresident_per = trim( str_replace( $nonresident_val, '', $nonresident ) );
-
-	preg_match( '/^(\$[\d,.]+)/', $resident, $resident_parts );
-	$resident_val = $resident_parts[1];
-	$resident_per = trim( str_replace( $resident_val, '', $resident ) );
-
-	ob_start();
-?>
-	<div class="card h-100 text-center">
-		<div class="card-header">
-			<ul class="nav nav-tabs card-header-tabs" id="tuition-tabs" role="tablist">
-				<?php if ( $resident ): ?>
-				<li class="nav-item text-nowrap">
-					<a class="nav-link active" id="resident-tuition-tab" data-toggle="tab" href="#resident-tuition" role="tab" aria-controls="resident-tuition" aria-selected="true">
-						In State<span class="sr-only"> Tuition</span>
-					</a>
-				</li>
-				<?php endif; ?>
-
-				<?php if ( $nonresident ): ?>
-				<li class="nav-item text-nowrap">
-					<a class="nav-link" id="nonresident-tuition-tab" data-toggle="tab" href="#nonresident-tuition" role="tab" aria-controls="nonresident-tuition" aria-selected="false">
-						Out of State<span class="sr-only"> Tuition</span>
-					</a>
-				</li>
-				<?php endif; ?>
-			</ul>
-		</div>
-		<div class="card-block d-flex flex-column justify-content-center px-sm-4 px-md-2 px-xl-3 pt-4 py-md-5 pt-lg-4 pb-lg-3 tab-content" id="tuition-panes">
-			<?php if ( $resident ): ?>
-			<div class="tab-pane fade show active" id="resident-tuition" role="tabpanel" aria-labelledby="resident-tuition-tab">
-				<span class="tuition-amount">
-					<?php echo $resident_val; ?>
-				</span>
-				<span class="d-block small text-uppercase font-weight-bold"> <?php echo $resident_per; ?></span>
-			</div>
-			<?php endif; ?>
-
-			<?php if ( $nonresident ): ?>
-			<div class="tab-pane fade <?php if ( ! $resident ) { ?>show active<?php } ?>" id="nonresident-tuition" role="tabpanel" aria-labelledby="nonresident-tuition-tab">
-				<span class="tuition-amount">
-					<?php echo $nonresident_val; ?>
-				</span>
-				<span class="d-block small text-uppercase font-weight-bold"> <?php echo $nonresident_per; ?></span>
-			</div>
-			<?php endif; ?>
-
-			<?php if ( $disclaimer ) : ?>
-			<p class="mt-4 mx-3 mb-0" style="line-height: 1.2;"><small><?php echo $disclaimer; ?></small></p>
-			<?php endif; ?>
-		</div>
-	</div>
-<?php
-	return ob_get_clean();
+	return array(
+		'value' => $tuition_val,
+		'per'   => $tuition_per
+	);
 }
 
 
