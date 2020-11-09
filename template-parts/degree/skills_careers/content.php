@@ -4,7 +4,6 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'degree' ) :
 	$degree_careers_heading  = get_field( 'degree_careers_heading', $post ) ?: 'Career Opportunities';
 	$fallback_career_content = wptexturize( trim( get_theme_mod_or_default( 'degree_careers_intro' ) ) );
-	$careers                 = main_site_get_degree_careers( $post );
 ?>
 <div class="row">
 	<div class="col-lg pr-lg-5 pr-xl-3">
@@ -16,13 +15,7 @@ if ( $post->post_type === 'degree' ) :
 		</div>
 	</div>
 	<div class="col-lg-6 offset-xl-1 mt-4 mt-lg-0 pt-sm-3">
-		<ul class="degree-career-list">
-			<?php foreach ( $careers as $career ) : ?>
-			<li class="degree-career-list-item">
-				<?php echo $career; ?>
-			</li>
-			<?php endforeach; ?>
-		</ul>
+		<?php get_template_part( 'template-parts/degree/skills_careers/careers' ); ?>
 	</div>
 </div>
 <?php

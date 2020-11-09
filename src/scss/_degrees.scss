@@ -318,6 +318,37 @@
   font-size: 1.2em;
 }
 
+.degree-careers-expandable {
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+
+  @include media-breakpoint-up(sm) {
+    max-height: none;
+  }
+
+  &:target {
+    max-height: none;
+
+    .degree-careers-expand {
+      display: none;
+    }
+  }
+}
+
+.degree-careers-expand {
+  background-color: transparentize($black, .2);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  @include media-breakpoint-up(sm) {
+    display: none;
+  }
+}
+
 .degree-career-list {
   list-style: none; // Remove default bullets
   padding-left: .5rem;

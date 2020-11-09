@@ -4,7 +4,6 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'degree' ) :
 	$degree_skills_heading  = trim( get_field( 'degree_skills_heading', $post ) ) ?: 'Skills You&rsquo;ll Learn';
 	$degree_careers_heading = trim( get_field( 'degree_careers_heading', $post ) ) ?: 'Career Opportunities';
-	$careers = main_site_get_degree_careers( $post, 10 );
 ?>
 <h2 class="font-condensed text-primary text-uppercase mb-4">
 	<?php echo $degree_skills_heading; ?>
@@ -30,13 +29,7 @@ if ( $post->post_type === 'degree' ) :
 			<?php echo $degree_careers_heading; ?>
 		</h2>
 
-		<ul class="degree-career-list">
-			<?php foreach ( $careers as $career ) : ?>
-			<li class="degree-career-list-item">
-				<?php echo $career; ?>
-			</li>
-			<?php endforeach; ?>
-		</ul>
+		<?php get_template_part( 'template-parts/degree/skills_careers/careers' ); ?>
 	</div>
 
 </div>
