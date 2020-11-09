@@ -1,12 +1,12 @@
 <?php
 
 /**
- * TODO
+ * Overrides the template for the degree search typeahead form.
  *
- * @since TODO
- * @author TODO
- * @param TODO $output TODO
- * @param TODO $args TODO
+ * @since 3.0.0
+ * @author Jim Barnes
+ * @param string $output Existing typeahead markup
+ * @param array $args Extra arguments passed in from `UCF_Degree_Search_Common::display_degree_search()`
  * @return string
  */
 function main_site_degree_search_display( $output, $args ) {
@@ -28,10 +28,10 @@ add_filter( 'ucf_degree_search_input', 'main_site_degree_search_display', 11, 2 
 
 
 /**
- * TODO
+ * Overrides the template for degree search typeahead suggestions.
  *
- * @since TODO
- * @author TODO
+ * @since 3.0.0
+ * @author Jim Barnes
  * @return string
  */
 function main_site_degree_search_suggestion() {
@@ -48,10 +48,11 @@ add_filter( 'ucf_degree_search_suggestion', 'main_site_degree_search_suggestion'
 
 
 /**
- * TODO
+ * Modifies the list of filterable program types used
+ * in the Angular degree search.
  *
- * @since TODO
- * @author TODO
+ * @since 3.0.8
+ * @author Jim Barnes
  * @return string
  */
 function main_site_degree_search_program_types() {
@@ -78,10 +79,11 @@ add_filter( 'udsa_program_types_template', 'main_site_degree_search_program_type
 
 
 /**
- * TODO
+ * Modifies the list of filterable colleges used
+ * in the Angular degree search.
  *
- * @since TODO
- * @author TODO
+ * @since 3.0.8
+ * @author Jim Barnes
  * @return string
  */
 function main_site_degree_search_colleges() {
@@ -103,10 +105,10 @@ add_filter( 'udsa_colleges_template', 'main_site_degree_search_colleges', 10, 0 
 
 
 /**
- * TODO
+ * Modifies the result count markup on the Angular degree search.
  *
- * @since TODO
- * @author TODO
+ * @since 3.0.8
+ * @author Jim Barnes
  * @return string
  */
 function main_site_degree_search_result_count() {
