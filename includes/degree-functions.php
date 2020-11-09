@@ -21,13 +21,10 @@ function get_header_content_degree( $markup, $obj ) {
 		$title_elem                   = ( $h1 === 'title' ) ? 'h1' : 'span';
 		$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 		$degree_template              = get_page_template_slug( $obj );
-		$show_degree_request_info_btn = false;
-		$custom_template_show_rfi     = ( $degree_template === 'template-degree-custom.php' ) ? get_field( 'degree_custom_enable_rfi', $obj ) : false;
 		$header_content_col_classes   = 'header-degree-content-col col-sm-auto d-sm-flex align-items-sm-center';
 
-		if ( $degree_template === 'template-degree-modern.php' || $custom_template_show_rfi ) {
+		if ( degree_show_rfi( $obj ) ) {
 			$header_content_col_classes .= ' ml-sm-auto';
-			$show_degree_request_info_btn = true;
 		}
 
 		ob_start();
@@ -46,14 +43,12 @@ function get_header_content_degree( $markup, $obj ) {
 							<?php endif; ?>
 
 							<?php
-							if ( $show_degree_request_info_btn ) {
-								echo get_degree_request_info_button(
-									$obj,
-									'header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3',
-									'mr-3 fa fa-info-circle fa-2x',
-									'Request Info'
-								);
-							}
+							echo get_degree_request_info_button(
+								$obj,
+								'header-degree-cta btn btn-secondary text-primary hover-text-white d-flex align-items-center my-2 mx-auto mx-sm-2 px-5 py-3',
+								'mr-3 fa fa-info-circle fa-2x',
+								'Request Info'
+							);
 							?>
 						</div>
 					</div>
@@ -139,6 +134,41 @@ function is_supplementary_degree( $post ) {
 
 
 	return $is_supplementary;
+}
+
+
+/**
+ * Returns whether or not a given degree $post can and
+ * should display a RFI modal and calls-to-action.
+ *
+ * If/when we start supporting undergraduate RFIs, this
+ * function will have to be adjusted.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post WP_Post object
+ * @return boolean
+ */
+function degree_show_rfi( $post ) {
+	$show_rfi = false;
+
+	if (
+		$post->post_type === 'degree'
+		&& is_graduate_degree( $post )
+		&& ! (
+			get_page_template_slug( $post ) === 'template-degree-custom.php'
+			&& get_field( 'degree_custom_enable_rfi', $post ) !== true
+		)
+	) {
+		$guid              = get_field( 'graduate_slate_id', $post );
+		$rfi_form_src_base = get_degree_request_info_url_graduate();
+
+		if ( $guid && $rfi_form_src_base ) {
+			$show_rfi = true;
+		}
+	}
+
+	return $show_rfi;
 }
 
 
@@ -302,13 +332,12 @@ function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block bt
  * @return string | The button markup.
  **/
 function get_degree_request_info_button( $degree, $btn_classes='btn btn-primary', $icon_classes='', $btn_text='Request Information' ) {
-	$modal = get_degree_request_info_modal( $degree );
+	$show_rfi = degree_show_rfi( $degree );
 
 	ob_start();
 
-	// Don't render button if the corresponding Request Info
-	// modal failed to render correctly:
-	if ( $modal ) :
+	// Don't render button if RFIs can't be displayed for this degree:
+	if ( $show_rfi ) :
 ?>
 	<button class="<?php echo $btn_classes; ?>" data-toggle="modal" data-target="#requestInfoModal">
 		<?php if ( $icon_classes ): ?>
@@ -344,75 +373,6 @@ function get_degree_request_info_url_graduate( $params=array() ) {
 
 	$url = $base . $separator . http_build_query( $params );
 	return $url;
-}
-
-
-/**
- * Gets the "Request Info" modal markup for degrees.
- *
- * @author RJ Bruneel
- * @since 3.4.0
- * @param object $degree WP_Post object representing a degree
- * @return string | The modal markup.
- **/
-function get_degree_request_info_modal( $degree ) {
-	$markup = '';
-
-	// If this isn't a graduate degree, return early.
-	//
-	// If/when we start supporting undergraduate RFIs, this
-	// (and the rest of this function) will have to be adjusted:
-	if ( ! is_graduate_degree( $degree ) ) return $markup;
-
-	// Back out early if a GUID isn't assigned to the program.
-	$guid = get_field( 'graduate_slate_id', $degree );
-	if ( ! $guid ) return '';
-
-	$form_div_id  = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
-	$rfi_form_src = get_degree_request_info_url_graduate( array(
-		'sys:field:pros_program1' => $guid,
-		'output' => 'embed',
-		'div' => $form_div_id
-	) );
-
-	if ( $rfi_form_src ):
-		ob_start();
-?>
-		<div class="modal fade" id="requestInfoModal" tabindex="-1" role="dialog" aria-labelledby="requestInfoModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header px-4 pt-4">
-						<h2 class="h5 modal-title d-flex align-items-center" id="requestInfoModalLabel">
-							<span class="fa fa-info-circle fa-2x mr-3" aria-hidden="true"></span>
-							Request Information
-						</h2>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body mb-2 px-4 pb-4">
-						<p class="mb-4">
-							Enter your information below to receive more information about the <strong><?php echo wptexturize( $degree->post_title ); ?></strong> program offered at UCF.
-						</p>
-						<div id="<?php echo $form_div_id; ?>">Loading...</div>
-						<script>
-						/*<![CDATA[*/
-						var script = document.createElement('script');
-						script.async = 1;
-						script.src = '<?php echo $rfi_form_src; ?>' + ((location.search.length > 1) ? '&' + location.search.substring(1) : '');
-						var s = document.getElementsByTagName('script')[0];
-						s.parentNode.insertBefore(script, s);
-						/*]]>*/
-						</script>
-					</div>
-				</div>
-			</div>
-		</div>
-<?php
-		$markup = trim( ob_get_clean() );
-	endif;
-
-	return $markup;
 }
 
 
