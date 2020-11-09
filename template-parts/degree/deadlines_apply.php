@@ -38,7 +38,7 @@ if ( $post->post_type === 'degree' ) :
 		// We shouldn't have to do this, but, IE11:
 		$deadline_groups_col_class  = $deadline_heading_show_inline ? 'col' : 'col-12';
 ?>
-	<section aria-labelledby="application-deadlines-heading">
+	<section id="application-deadline" aria-labelledby="application-deadlines-heading">
 		<div class="degree-deadline-wrap">
 			<div class="degree-deadline-row">
 				<!-- Left-hand surrounding pad, for desktop -->

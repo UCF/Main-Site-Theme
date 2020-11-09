@@ -10,12 +10,11 @@
 	$colleges           = wp_get_post_terms( $post->ID, 'colleges' );
 	$college            = is_array( $colleges ) ? $colleges[0] : null;
 	$hide_colleges_grid = get_field( 'degree_custom_hide_colleges_grid', $post );
-	$enable_rfi_modal   = get_field( 'degree_custom_enable_rfi', $post );
 ?>
 
 <?php the_content(); ?>
 
-<?php get_template_part( 'template-parts/degree', 'breadcrumbs' ); ?>
+<?php get_template_part( 'template-parts/degree/breadcrumbs' ); ?>
 
 <?php
 if ( ! $hide_colleges_grid ) {
@@ -23,10 +22,6 @@ if ( ! $hide_colleges_grid ) {
 }
 ?>
 
-<?php
-if ( $enable_rfi_modal ) {
-	echo get_degree_request_info_modal( $post );
-}
-?>
+<?php get_template_part( 'template-parts/degree/rfi_modal' ); ?>
 
 <?php get_footer(); ?>

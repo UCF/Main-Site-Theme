@@ -7,10 +7,10 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( ! empty( $admission_copy ) && ! empty( $admission_list ) ) :
 ?>
-	<section aria-labelledby="admissions-requirements">
+	<section id="admissions-requirements" aria-labelledby="admissions-requirements-heading">
 		<div class="jumbotron jumbotron-fluid bg-faded mb-0">
 			<div class="container">
-				<h2 id="admissions-requirements" class="font-condensed text-uppercase mb-4 d-flex flex-column flex-md-row align-items-md-end">
+				<h2 id="admissions-requirements-heading" class="font-condensed text-uppercase mb-4 d-flex flex-column flex-md-row align-items-md-end">
 					<div class="mb-4 mb-md-0 mr-md-3 text-center text-sm-left">
 						<img src="<?php echo THEME_STATIC_URL . '/img/user-check-solid.svg'; ?>" alt="" style="width: 100px; height: auto;">
 					</div>
