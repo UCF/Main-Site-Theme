@@ -2,7 +2,6 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'degree' ) :
-	// TODO wrap in <nav>
 	$program_type          = get_degree_program_type( $post );
 	$colleges              = wp_get_post_terms( $post->ID, 'colleges' );
 	$college               = is_array( $colleges ) ? $colleges[0] : null;
@@ -21,11 +20,16 @@ if ( $post->post_type === 'degree' ) :
 			<a class="breadcrumb-item" href="<?php echo $degree_search_url; ?>">Degree Search</a>
 
 			<?php if ( $college ): ?>
-			<a class="breadcrumb-item" href="<?php echo $college_url; ?>"><?php echo $college->name; ?></a>
+			<a class="breadcrumb-item" href="<?php echo $college_url; ?>">
+				<?php echo $college->name; ?>
+				<span class="sr-only">programs</span>
+			</a>
 			<?php endif; ?>
 
 			<?php if ( $program_type ) : ?>
-			<a class="breadcrumb-item" href="<?php echo $program_type_url; ?>"><?php echo $program_type->name; ?>s</a>
+			<a class="breadcrumb-item" href="<?php echo $program_type_url; ?>">
+				<?php echo $program_type->name; ?>s
+			</a>
 			<?php endif; ?>
 
 			<span class="breadcrumb-item active" aria-current="page"><?php echo $post->post_title; ?></span>

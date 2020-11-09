@@ -10,11 +10,11 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( ! empty ( $course_overview ) && have_rows( 'course_overview', $post ) ) :
 ?>
-	<section aria-label="Course Overview">
+	<section id="course-overview" aria-labelledby="course-overview-heading">
 		<div class="container py-lg-3 my-5">
 			<div class="row my-lg-3">
 				<div class="col-12">
-					<h2 class="font-condensed text-uppercase mb-4">Course Overview</h2>
+					<h2 id="course-overview-heading" class="font-condensed text-uppercase mb-4">Course Overview</h2>
 					<div class="accordion" role="tablist" id="courses">
 						<?php while ( have_rows( 'course_overview', $post ) ) : the_row(); ?>
 							<div class="accordion-courses mt-0 pt-0 pt-lg-3">

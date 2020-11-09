@@ -10,6 +10,7 @@ include_once THEME_DIR . 'includes/header-functions.php';
 include_once THEME_DIR . 'includes/location-functions.php';
 
 include_once THEME_DIR . 'includes/degree-functions.php';
+include_once THEME_DIR . 'includes/degree-import-functions.php';
 include_once THEME_DIR . 'includes/degree-search-functions.php';
 include_once THEME_DIR . 'includes/ucf-alert-functions.php';
 include_once THEME_DIR . 'includes/phonebook-functions.php';

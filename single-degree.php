@@ -18,9 +18,7 @@
 
 	echo get_colleges_grid( $college );
 
-	if ( is_graduate_degree( $post ) ) {
-		echo get_degree_request_info_modal( $post );
-	}
+	get_template_part( 'template-parts/degree/rfi_modal' );
 ?>
 
 <?php get_footer(); ?>

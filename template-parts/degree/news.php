@@ -13,7 +13,7 @@ if ( $post->post_type === 'degree' ) :
 
 	if ( $degree_news_tag ) :
 ?>
-	<section aria-labelledby="in-the-news">
+	<section id="news" aria-labelledby="in-the-news">
 		<div class="jumbotron jumbotron-fluid bg-secondary mb-0">
 			<div class="container">
 				<div class="row justify-content-between align-items-end">
