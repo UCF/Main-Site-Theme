@@ -21,9 +21,10 @@ function get_header_content_degree( $markup, $obj ) {
 		$title_elem                   = ( $h1 === 'title' ) ? 'h1' : 'span';
 		$subtitle_elem                = ( $h1 === 'subtitle' ) ? 'h1' : 'span';
 		$degree_template              = get_page_template_slug( $obj );
+		$content_position             = get_field( 'page_header_content_position', $obj ) ?: 'left';
 		$header_content_col_classes   = 'header-degree-content-col col-sm-auto d-sm-flex align-items-sm-center';
 
-		if ( degree_show_rfi( $obj ) ) {
+		if ( $content_position === 'right' ) {
 			$header_content_col_classes .= ' ml-sm-auto';
 		}
 
