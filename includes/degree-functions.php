@@ -156,10 +156,7 @@ function degree_show_rfi( $post ) {
 	if (
 		$post->post_type === 'degree'
 		&& is_graduate_degree( $post )
-		&& ! (
-			get_page_template_slug( $post ) === 'template-degree-custom.php'
-			&& get_field( 'degree_custom_enable_rfi', $post ) !== true
-		)
+		&& get_field( 'degree_custom_enable_rfi', $post ) === true
 	) {
 		$guid              = get_field( 'graduate_slate_id', $post );
 		$rfi_form_src_base = get_degree_request_info_url_graduate();
