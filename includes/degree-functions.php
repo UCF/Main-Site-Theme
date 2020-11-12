@@ -184,21 +184,30 @@ function get_degree_badges( $post=null ) {
 
 	// Use post-specific badge, if available
 	if ( $post ) {
-		$post_badge_1     = get_field( 'promo_image', $post );
-		$post_badge_1_alt = get_field( 'promo_image_alt', $post );
-		$post_badge_2     = get_field( 'promo_2_image', $post );
-		$post_badge_2_alt = get_field( 'promo_2_image_alt', $post );
+		$post_badge_1     = get_field( 'promo', $post );
+		$post_badge_1_img = $post_badge_1['image'] ?? '';
+		$post_badge_1_alt = $post_badge_1['image_alt'] ?? '';
+
+		$post_badge_2     = get_field( 'promo_2', $post );
+		$post_badge_2_img = $post_badge_2['image'] ?? '';
+		$post_badge_2_alt = $post_badge_2['image_alt'] ?? '';
 
 		if ( $post_badge_1 && $post_badge_1_alt ) {
 			$badges[] = array(
-				'url' => $post_badge_1,
-				'alt' => $post_badge_1_alt
+				'img'        => $post_badge_1_img,
+				'alt'        => $post_badge_1_alt,
+				'link_url'   => $post_badge_1['link_url'] ?? '',
+				'link_rel'   => $post_badge_1['link_rel'] ?? '',
+				'new_window' => $post_badge_1['link_new_window'] ?? false
 			);
 		}
 		if ( $post_badge_2 && $post_badge_2_alt ) {
 			$badges[] = array(
-				'url' => $post_badge_2,
-				'alt' => $post_badge_2_alt
+				'img'        => $post_badge_2_img,
+				'alt'        => $post_badge_2_alt,
+				'link_url'   => $post_badge_2['link_url'] ?? '',
+				'link_rel'   => $post_badge_2['link_rel'] ?? '',
+				'new_window' => $post_badge_2['link_new_window'] ?? false
 			);
 		}
 	}
@@ -206,21 +215,27 @@ function get_degree_badges( $post=null ) {
 	// Use fallback badge(s) if there were none available
 	// for the provided $post
 	if ( empty( $badges ) ) {
-		$fallback_badge_1     = get_theme_mod( 'degrees_badge_1' );
+		$fallback_badge_1_img = get_theme_mod( 'degrees_badge_1' );
 		$fallback_badge_1_alt = get_theme_mod( 'degrees_badge_1_alt' );
-		$fallback_badge_2     = get_theme_mod( 'degrees_badge_2' );
+		$fallback_badge_2_img = get_theme_mod( 'degrees_badge_2' );
 		$fallback_badge_2_alt = get_theme_mod( 'degrees_badge_2_alt' );
 
-		if ( $fallback_badge_1 && $fallback_badge_1_alt ) {
+		if ( $fallback_badge_1_img && $fallback_badge_1_alt ) {
 			$badges[] = array(
-				'url' => $fallback_badge_1,
-				'alt' => $fallback_badge_1_alt
+				'img'        => $fallback_badge_1_img,
+				'alt'        => $fallback_badge_1_alt,
+				'link_url'   => get_theme_mod( 'degrees_badge_1_link_url', '' ),
+				'link_rel'   => get_theme_mod( 'degrees_badge_1_link_rel', '' ),
+				'new_window' => get_theme_mod( 'degrees_badge_1_link_new_window', false ),
 			);
 		}
-		if ( $fallback_badge_2 && $fallback_badge_2_alt ) {
+		if ( $fallback_badge_2_img && $fallback_badge_2_alt ) {
 			$badges[] = array(
-				'url' => $fallback_badge_2,
-				'alt' => $fallback_badge_2_alt
+				'img'        => $fallback_badge_2_img,
+				'alt'        => $fallback_badge_2_alt,
+				'link_url'   => get_theme_mod( 'degrees_badge_2_link_url', '' ),
+				'link_rel'   => get_theme_mod( 'degrees_badge_2_link_rel', '' ),
+				'new_window' => get_theme_mod( 'degrees_badge_2_link_new_window', false ),
 			);
 		}
 	}
