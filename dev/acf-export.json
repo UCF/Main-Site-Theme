@@ -626,6 +626,41 @@
         "title": "Degree Fields",
         "fields": [
             {
+                "key": "field_5fad56c553062",
+                "label": "Requests for Information (RFI)",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5fad570953063",
+                "label": "Enable Request Info Button\/Modal",
+                "name": "degree_custom_enable_rfi",
+                "type": "true_false",
+                "instructions": "If enabled, the 'Request Information' modal and button will be included on the degree profile. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have an imported Slate GUID.<\/i>",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5e99fb2dbcede",
                 "label": "Program at a Glance",
                 "name": "",
@@ -2013,7 +2048,7 @@
                 "label": "Enable Request Info Button\/Modal",
                 "name": "degree_custom_enable_rfi",
                 "type": "true_false",
-                "instructions": "If enabled, the 'Request Information' modal and button will be included on the page. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have Slate GUIDs imported.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
+                "instructions": "If enabled, the 'Request Information' modal and button will be included on the degree profile. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have an imported Slate GUID.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
