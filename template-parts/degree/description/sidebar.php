@@ -10,6 +10,7 @@ if ( $post->post_type === 'degree' ) :
 		'numberposts' => -1,
 		'post_status' => 'publish'
 	) );
+	$promo             = get_degree_promo( $post );
 
 	if ( $catalog_url || $subplans ) :
 ?>
@@ -17,6 +18,26 @@ if ( $post->post_type === 'degree' ) :
 		<div class="degree-catalog-sidebar pt-lg-3">
 
 			<hr class="mb-4 mb-sm-5 hidden-lg-up" role="presentation">
+
+			<?php if ( $promo ) : ?>
+			<div class="text-center">
+
+				<?php if ( $promo['link_url'] ) : ?>
+				<a href="<?php echo $promo['link_url']; ?>"
+					<?php if ( $promo['link_rel'] ) { ?>rel="<?php echo $promo['link_rel']; ?>"<?php } ?>
+					<?php if ( $promo['new_window'] ) { ?>target="_blank"<?php } ?>>
+				<?php endif; ?>
+					<img class="img-fluid" src="<?php echo $promo['img']; ?>" alt="<?php echo $promo['alt']; ?>">
+				<?php if ( $promo['link_url'] ) : ?>
+				</a>
+				<?php endif; ?>
+
+			</div>
+			<?php endif; ?>
+
+			<?php if ( $promo && $catalog_url ) : ?>
+			<hr class="my-4 my-sm-5" role="presentation">
+			<?php endif; ?>
 
 			<?php if ( $catalog_url ) : ?>
 			<div class="row py-3 py-sm-0">
