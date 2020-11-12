@@ -186,13 +186,33 @@ if ( $post->post_type === 'degree' ) :
 					<div class="degree-badges">
 						<?php if ( $badge_1 ) : ?>
 						<div class="degree-badge-col">
-							<img src="<?php echo $badge_1['url']; ?>" alt="<?php echo $badge_1['alt']; ?>" class="degree-badge">
+
+							<?php if ( $badge_1['link_url'] ) : ?>
+							<a href="<?php echo $badge_1['link_url']; ?>"
+								<?php if ( $badge_1['link_rel'] ) { ?>rel="<?php echo $badge_1['link_rel']; ?>"<?php } ?>
+								<?php if ( $badge_1['new_window'] ) { ?>target="_blank"<?php } ?>>
+							<?php endif; ?>
+								<img src="<?php echo $badge_1['img']; ?>" alt="<?php echo $badge_1['alt']; ?>" class="degree-badge">
+							<?php if ( $badge_1['link_url'] ) : ?>
+							</a>
+							<?php endif; ?>
+
 						</div>
 						<?php endif; ?>
 
 						<?php if ( $badge_2 ) : ?>
 						<div class="degree-badge-col">
-							<img src="<?php echo $badge_2['url']; ?>" alt="<?php echo $badge_2['alt']; ?>" class="degree-badge">
+
+							<?php if ( $badge_2['link_url'] ) : ?>
+							<a href="<?php echo $badge_2['link_url']; ?>"
+								<?php if ( $badge_2['link_rel'] ) { ?>rel="<?php echo $badge_2['link_rel']; ?>"<?php } ?>
+								<?php if ( $badge_2['new_window'] ) { ?>target="_blank"<?php } ?>>
+							<?php endif; ?>
+								<img src="<?php echo $badge_2['img']; ?>" alt="<?php echo $badge_2['alt']; ?>" class="degree-badge">
+							<?php if ( $badge_2['link_url'] ) : ?>
+							</a>
+							<?php endif; ?>
+
 						</div>
 						<?php endif; ?>
 					</div>

@@ -262,7 +262,50 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Fallback Promo/Badge 1 Alt Text',
-			'description' => 'Alt text for the Badge 1 graphic.',
+			'description' => 'Alt text for the Badge 1 graphic. <strong>Required</strong> for the graphic to be displayed on degree profiles.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 1 Link URL',
+			'description' => 'An Optional URL for the Badge 1 graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 1 Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Fallback Promo/Badge 1 Link - Open in New Window',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 		)
 	);
@@ -292,7 +335,50 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Fallback Promo/Badge 2 Alt Text',
-			'description' => 'Alt text for the Badge 2 graphic.',
+			'description' => 'Alt text for the Badge 2 graphic. <strong>Required</strong> for the graphic to be displayed on degree profiles.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 2 Link URL',
+			'description' => 'An Optional URL for the Badge 2 graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 2 Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Fallback Promo/Badge 2 Link - Open in New Window',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 		)
 	);
