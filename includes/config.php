@@ -299,6 +299,152 @@ function define_customizer_fields( $wp_customize ) {
 
 	// Degrees - Description
 	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_sidebar_promo_undergraduate',
+			array(
+				'label'       => 'Undergraduate Promo Graphic',
+				'description' => 'An image or other promotional graphic to display alongside undergraduate catalog descriptions.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Promo Graphic Alt Text',
+			'description' => 'Alt text for the Undergraduate Promo graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Promo Link URL',
+			'description' => 'An optional URL for the Undergraduate Promo graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Promo Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Undergraduate Promo Link - Open in New Window',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_sidebar_promo_graduate',
+			array(
+				'label'       => 'Graduate Promo Graphic',
+				'description' => 'An image or other promotional graphic to display alongside graduate catalog descriptions.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Promo Graphic Alt Text',
+			'description' => 'Alt text for the Graduate Promo graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Promo Link URL',
+			'description' => 'An optional URL for the Graduate Promo graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Promo Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Graduate Promo Link - Open in New Window',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
 		'catalog_desc_cta_intro',
 		array(
 			'default' => get_theme_mod_default( 'catalog_desc_cta_intro' )

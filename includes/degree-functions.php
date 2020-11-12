@@ -102,13 +102,36 @@ function is_graduate_degree( $post ) {
 	$is_graduate = false;
 	$terms = wp_get_post_terms( $post->ID, 'program_types' );
 
-	foreach( $terms as $term ) {
-		if( $term->slug === "graduate-program" ) {
+	foreach ( $terms as $term ) {
+		if ( $term->slug === 'graduate-program' ) {
 			$is_graduate = true;
 			break;
 		}
 	}
 	return $is_graduate;
+}
+
+
+/**
+ * Returns true/false if the given degree $post is
+ * an undergraduate program.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post  WP_Post object
+ * @return boolean
+ */
+function is_undergraduate_degree( $post ) {
+	$is_undergraduate = false;
+	$terms = wp_get_post_terms( $post->ID, 'program_types' );
+
+	foreach ( $terms as $term ) {
+		if ( $term->slug === 'undergraduate-program' ) {
+			$is_undergraduate = true;
+			break;
+		}
+	}
+	return $is_undergraduate;
 }
 
 
@@ -226,6 +249,44 @@ function get_degree_badges( $post=null ) {
 	}
 
 	return $badges;
+}
+
+
+/**
+ * Returns details for a promotional graphic to display
+ * alongside degree catalog descriptions.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param object $post WP_Post object
+ * @return array
+ */
+function get_degree_promo( $post ) {
+	$promo = array();
+	$theme_mod_name_base = '';
+	$promo_img = null;
+
+	if ( is_graduate_degree( $post ) ) {
+		$theme_mod_name_base = 'degrees_sidebar_promo_graduate';
+	} else if ( is_undergraduate_degree( $post ) ) {
+		$theme_mod_name_base = 'degrees_sidebar_promo_undergraduate';
+	}
+
+	if ( $theme_mod_name_base ) {
+		$promo_img = get_theme_mod( $theme_mod_name_base );
+	}
+
+	if ( $promo_img ) {
+		$promo = array(
+			'img'        => $promo_img,
+			'alt'        => get_theme_mod( $theme_mod_name_base . '_alt', '' ),
+			'link_url'   => get_theme_mod( $theme_mod_name_base . '_link_url', '' ),
+			'link_rel'   => get_theme_mod( $theme_mod_name_base . '_link_rel', '' ),
+			'new_window' => get_theme_mod( $theme_mod_name_base . '_link_new_window', false ),
+		);
+	}
+
+	return $promo;
 }
 
 

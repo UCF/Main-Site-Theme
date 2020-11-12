@@ -5,11 +5,22 @@ if ( $post->post_type === 'degree' ) :
 	$deadlines                 = get_degree_application_deadlines( $post );
 	$alternate_section         = null;
 	$degree_alternate_section  = get_field( 'alternate_deadlines_section', $post );
-	$fallback_section          = is_graduate_degree( $post ) ? get_theme_mod( 'degree_deadlines_graduate_fallback' ) : get_theme_mod( 'degree_deadlines_undergraduate_fallback' );
 
+	// Retrieve a fallback section
+	$fallback_section_name = '';
+	if ( is_graduate_degree( $post ) ) {
+		$fallback_section_name = 'degree_deadlines_graduate_fallback';
+	} elseif ( is_undergraduate_degree( $post ) ) {
+		$fallback_section_name = 'degree_deadlines_undergraduate_fallback';
+	}
+	$fallback_section = $fallback_section_name ? get_theme_mod( $fallback_section_name ) : null;
+
+	// Set $alternate_section to the degree-specific
+	// alternate Section post that's set, or a fallback
+	// if deadlines aren't available:
 	if ( $degree_alternate_section ) {
 		$alternate_section = $degree_alternate_section;
-	} else if ( ! $deadlines ) {
+	} elseif ( ! $deadlines ) {
 		$alternate_section = $fallback_section;
 	}
 
@@ -20,7 +31,7 @@ if ( $post->post_type === 'degree' ) :
 
 		// Modify heading text depending on the type of degree:
 		$heading_text = '<span class="d-inline-block">Application Deadlines</span>';
-		if ( ! is_graduate_degree( $post ) ) {
+		if ( is_undergraduate_degree( $post ) ) {
 			$heading_text = 'Undergraduate ' . $heading_text;
 		}
 
