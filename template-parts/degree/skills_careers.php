@@ -18,7 +18,7 @@ if ( $post->post_type === 'degree' && ! is_supplementary_degree( $post ) ) :
 
 	if ( $has_content ) :
 ?>
-	<section id="skills-careers" aria-label="<?php echo $aria_label ?>">
+	<section id="skills-careers" aria-label="<?php echo $aria_label; ?>">
 		<div class="jumbotron jumbotron-fluid bg-inverse-t-1 mb-0">
 			<div class="container">
 				<?php get_template_part( 'template-parts/degree/skills_careers/content', $content_part_name ); ?>
