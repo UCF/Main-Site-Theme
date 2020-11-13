@@ -277,14 +277,17 @@ function get_degree_badges( $post=null ) {
  * @return array
  */
 function get_degree_promo( $post ) {
-	$promo = array();
+	$promo               = array();
+	$disable_promo       = get_field( 'degree_disable_sidebar_promo', $post ) ?: false;
 	$theme_mod_name_base = '';
-	$promo_img = null;
+	$promo_img           = null;
 
-	if ( is_graduate_degree( $post ) ) {
-		$theme_mod_name_base = 'degrees_sidebar_promo_graduate';
-	} else if ( is_undergraduate_degree( $post ) ) {
-		$theme_mod_name_base = 'degrees_sidebar_promo_undergraduate';
+	if ( ! $disable_promo ) {
+		if ( is_graduate_degree( $post ) ) {
+			$theme_mod_name_base = 'degrees_sidebar_promo_graduate';
+		} else if ( is_undergraduate_degree( $post ) ) {
+			$theme_mod_name_base = 'degrees_sidebar_promo_undergraduate';
+		}
 	}
 
 	if ( $theme_mod_name_base ) {
