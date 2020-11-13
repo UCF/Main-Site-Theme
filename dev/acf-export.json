@@ -1035,6 +1035,58 @@
                 ]
             },
             {
+                "key": "field_5faeb8ce5d327",
+                "label": "Catalog Description",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5faebbbb92089",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "<em>Note: these settings only apply to degrees that display a catalog description (i.e. don't have a custom Degree Description set.)<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5faeb73f9e0c7",
+                "label": "Disable Sidebar Promo",
+                "name": "degree_disable_sidebar_promo",
+                "type": "true_false",
+                "instructions": "If checked, the promo graphic set in the Customizer for this type of degree will <em>not<\/em> be displayed on this degree's profile.  Only applicable when this degree displays a catalog description (and not a custom description).",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5e99f80012a12",
                 "label": "Degree Description & Highlights",
                 "name": "",
