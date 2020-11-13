@@ -19,64 +19,79 @@ if ( $post->post_type === 'degree' ) :
 
 			<hr class="mb-4 mb-sm-5 hidden-lg-up" role="presentation">
 
-			<?php if ( $promo ) : ?>
-			<div class="text-center">
+			<div class="row">
 
-				<?php if ( $promo['link_url'] ) : ?>
-				<a href="<?php echo $promo['link_url']; ?>"
-					<?php if ( $promo['link_rel'] ) { ?>rel="<?php echo $promo['link_rel']; ?>"<?php } ?>
-					<?php if ( $promo['new_window'] ) { ?>target="_blank"<?php } ?>>
-				<?php endif; ?>
-					<img class="img-fluid" src="<?php echo $promo['img']; ?>" alt="<?php echo $promo['alt']; ?>">
-				<?php if ( $promo['link_url'] ) : ?>
-				</a>
-				<?php endif; ?>
+				<?php if ( $catalog_url ) : ?>
+				<div class="col-12">
+					<div class="row py-3 py-sm-0">
 
-			</div>
-			<?php endif; ?>
+						<?php if ( $catalog_cta_intro ) : ?>
+						<div class="col-auto pr-0">
+							<span class="fa fa-info-circle text-info fa-3x" aria-hidden="true"></span>
+						</div>
+						<div class="col d-flex align-self-center">
+							<p class="degree-catalog-cta-info mb-0">
+								<?php echo $catalog_cta_intro; ?>
+							</p>
+						</div>
+						<div class="w-100 mb-4"></div>
+						<?php endif; ?>
 
-			<?php if ( $promo && $catalog_url ) : ?>
-			<hr class="my-4 my-sm-5" role="presentation">
-			<?php endif; ?>
+						<div class="col col-sm-8 col-md-6 col-lg">
+							<a href="<?php echo $catalog_url; ?>" target="_blank" class="btn btn-block btn-outline-info rounded py-3">View in Catalog</a>
+						</div>
 
-			<?php if ( $catalog_url ) : ?>
-			<div class="row py-3 py-sm-0">
-
-				<?php if ( $catalog_cta_intro ) : ?>
-				<div class="col-auto pr-0">
-					<span class="fa fa-info-circle text-info fa-3x" aria-hidden="true"></span>
+					</div>
 				</div>
-				<div class="col d-flex align-self-center">
-					<p class="degree-catalog-cta-info mb-0">
-						<?php echo $catalog_cta_intro; ?>
-					</p>
-				</div>
-				<div class="w-100 mb-4"></div>
 				<?php endif; ?>
 
-				<div class="col col-sm-8 col-md-6 col-lg">
-					<a href="<?php echo $catalog_url; ?>" target="_blank" class="btn btn-block btn-outline-info rounded py-3">View in Catalog</a>
+				<?php if ( $catalog_url && $subplans ) : ?>
+				<div class="col-12">
+					<hr class="my-4 my-sm-5" role="presentation">
 				</div>
+				<?php endif; ?>
 
-			</div>
-			<?php endif; ?>
+				<?php if ( $subplans ) : ?>
+				<div class="col-12">
+					<h2 class="h6 text-uppercase text-default pt-3 pt-sm-0 mb-4 pb-md-2">Program Tracks/Options</h2>
+					<ul class="list-unstyled">
+						<?php foreach ( $subplans as $subplan ) : ?>
+						<li class="d-block degree-title mb-3 mb-md-4">
+							<a href="<?php echo get_permalink( $subplan ); ?>">
+								<?php echo get_field( 'degree_name_short', $subplan ) ?: $subplan->post_title; ?>
+							</a>
+						</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<?php endif; ?>
 
-			<?php if ( $catalog_url && $subplans ) : ?>
-			<hr class="my-4 my-sm-5" role="presentation">
-			<?php endif; ?>
+				<?php if ( $promo ) : ?>
+				<div class="col-12 text-center flex-lg-first">
 
-			<?php if ( $subplans ) : ?>
-			<h2 class="h6 text-uppercase text-default pt-3 pt-sm-0 mb-4 pb-md-2">Program Tracks/Options</h2>
-			<ul class="list-unstyled">
-				<?php foreach ( $subplans as $subplan ) : ?>
-				<li class="d-block degree-title mb-3 mb-md-4">
-					<a href="<?php echo get_permalink( $subplan ); ?>">
-						<?php echo get_field( 'degree_name_short', $subplan ) ?: $subplan->post_title; ?>
+					<?php if ( $catalog_url || $subplans ) : ?>
+					<hr class="hidden-lg-up my-4 my-sm-5 pb-2 pb-sm-0" role="presentation">
+					<?php endif; ?>
+
+					<?php if ( $promo['link_url'] ) : ?>
+					<a class="d-inline-block"
+						href="<?php echo $promo['link_url']; ?>"
+						<?php if ( $promo['link_rel'] ) { ?>rel="<?php echo $promo['link_rel']; ?>"<?php } ?>
+						<?php if ( $promo['new_window'] ) { ?>target="_blank"<?php } ?>>
+					<?php endif; ?>
+						<img class="img-fluid" src="<?php echo $promo['img']; ?>" alt="<?php echo $promo['alt']; ?>">
+					<?php if ( $promo['link_url'] ) : ?>
 					</a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
-			<?php endif; ?>
+					<?php endif; ?>
+
+					<?php if ( $catalog_url || $subplans ) : ?>
+					<hr class="hidden-md-down my-5" role="presentation">
+					<?php endif; ?>
+
+				</div>
+				<?php endif; ?>
+
+			</div>
 
 		</div>
 	</div>
