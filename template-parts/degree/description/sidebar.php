@@ -38,7 +38,13 @@ if ( $post->post_type === 'degree' ) :
 						<?php endif; ?>
 
 						<div class="col col-sm-8 col-md-6 col-lg">
-							<a href="<?php echo $catalog_url; ?>" target="_blank" class="btn btn-block btn-outline-info rounded py-3">View in Catalog</a>
+							<a href="<?php echo $catalog_url; ?>"
+								target="_blank"
+								class="btn btn-block btn-outline-info rounded py-3"
+								data-toggle="modal"
+								data-target="#catalogModal">
+								View in Catalog
+							</a>
 						</div>
 
 					</div>

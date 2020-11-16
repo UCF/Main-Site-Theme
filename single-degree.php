@@ -19,6 +19,7 @@
 	echo get_colleges_grid( $college );
 
 	get_template_part( 'template-parts/degree/rfi_modal' );
+	get_template_part( 'template-parts/degree/catalog_modal' );
 ?>
 
 <?php get_footer(); ?>
