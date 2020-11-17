@@ -12,7 +12,9 @@ if ( $post->post_type === 'degree' ) :
 	) );
 	$promo             = get_degree_promo( $post );
 
-	if ( $catalog_desc_full || $subplans ) :
+	$has_content = ( $catalog_desc_full || $subplans || $promo );
+
+	if ( $has_content ) :
 ?>
 	<div class="col-lg-5 col-xl-4 offset-xl-1 pl-lg-5 pl-xl-3 pb-lg-3 mb-5 mt-lg-5">
 		<div class="degree-catalog-sidebar pt-lg-3">
