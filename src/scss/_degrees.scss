@@ -111,6 +111,16 @@
       margin-top: 1.5em;
     }
   }
+
+  table {
+    // Sass-lint shushed here bc we don't have mixins
+    // or placeholders in Athena for these styles
+    // sass-lint:disable-block placeholder-in-extend
+    @extend .table;
+    @extend .table-bordered;
+    @extend .table-responsive;
+    font-size: .8em;
+  }
 }
 
 .degree-catalog-sidebar {
