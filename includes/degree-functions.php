@@ -70,31 +70,6 @@ add_filter( 'get_header_content_title_subtitle', 'get_header_content_degree', 10
 
 
 /**
- * TODO
- */
-function degree_catalog_rewrite_rule() {
-	add_rewrite_tag( '%degree_catalog%', '([^&]+)', 'degree_catalog=' );
-	add_rewrite_rule( 'degree_catalog/([a-z0-9-]+)[/]?$', 'index.php?degree_catalog=$matches[1]', 'top' );
-}
-
-add_action( 'init', 'degree_catalog_rewrite_rule', 10, 0 );
-
-
-/**
- * TODO
- */
-function degree_catalog_template_redirect( $template ) {
-	if ( get_query_var( 'degree_catalog' ) === false || get_query_var( 'degree_catalog' ) === '' ) {
-		return $template;
-	}
-
-	return get_template_directory() . '/template-degree_catalog.php';
-}
-
-add_action( 'template_include', 'degree_catalog_template_redirect', 10, 1 );
-
-
-/**
  * Returns the child program_type assigned to the given degree.
  *
  * @since 3.1.0
