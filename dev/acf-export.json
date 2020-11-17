@@ -3104,8 +3104,24 @@
             },
             {
                 "key": "field_58fa433f8a35a",
-                "label": "Catalog Description",
+                "label": "Abbreviated Catalog Description",
                 "name": "degree_description",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5fb3ec1cb4ff6",
+                "label": "Full Catalog Description",
+                "name": "degree_description_full",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,

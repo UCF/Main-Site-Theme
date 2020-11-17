@@ -6,15 +6,16 @@
 
 
 /**
- * Helper function that returns the catalog description for the given
+ * Helper function that returns a catalog description for the given
  * UCF Search Service program object.
  *
  * @since 3.1.0
  * @author Jo Dickson
- * @param object $program  A single program object from the UCF Search Service
- * @return string  The program's catalog description
+ * @param object $program A single program object from the UCF Search Service
+ * @param string $description_type The name of the Program Description Type to retrieve
+ * @return string The program's catalog description
  */
-function get_api_catalog_description( $program ) {
+function get_api_catalog_description( $program, $description_type='Catalog Description' ) {
 	$retval = '';
 
 	if ( ! class_exists( 'UCF_Degree_Config' ) ) {
@@ -27,7 +28,7 @@ function get_api_catalog_description( $program ) {
 
 	if ( $description_types ) {
 		foreach ( $description_types as $desc_id => $desc_name ) {
-			if ( stripos( $desc_name, 'Catalog Description' ) !== false ) {
+			if ( strtolower( $desc_name ) === strtolower( $description_type ) ) {
 				$catalog_desc_type_id = $desc_id;
 				break;
 			}
@@ -57,9 +58,10 @@ function get_api_catalog_description( $program ) {
  * @author Jo Dickson
  */
 function mainsite_degree_format_post_data( $meta, $program ) {
-	$meta['page_header_height'] = 'header-media-default';
-	$meta['degree_description'] = get_api_catalog_description( $program );
-	$meta['graduate_slate_id']  = $program->graduate_slate_id ?? null;
+	$meta['page_header_height']      = 'header-media-default';
+	$meta['degree_description']      = get_api_catalog_description( $program );
+	$meta['degree_description_full'] = get_api_catalog_description( $program, 'Full Catalog Description' );
+	$meta['graduate_slate_id']       = $program->graduate_slate_id ?? null;
 
 	$outcomes      = main_site_get_remote_response_json( $program->outcomes );
 	$projections   = main_site_get_remote_response_json( $program->projection_totals );
