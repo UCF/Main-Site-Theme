@@ -120,6 +120,10 @@
     @extend .table-bordered;
     @extend .table-responsive;
     font-size: .8em;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 }
 
