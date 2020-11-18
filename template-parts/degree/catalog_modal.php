@@ -1,8 +1,6 @@
 <?php
 $post = isset( $post ) ? $post : get_queried_object();
 
-// If/when we start supporting undergraduate RFIs, this block
-// (and the rest of this template part) will have to be adjusted:
 if ( $post->post_type === 'degree' ) :
 	$catalog_desc_full = trim( get_field( 'degree_description_full', $post ) );
 	$curated_desc      = trim( get_field( 'modern_description_copy', $post ) );
