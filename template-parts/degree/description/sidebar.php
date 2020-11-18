@@ -2,7 +2,7 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'degree' ) :
-	$catalog_url       = get_field( 'degree_pdf', $post );
+	$catalog_desc_full = trim( get_field( 'degree_description_full', $post ) );
 	$catalog_cta_intro = get_theme_mod_or_default( 'catalog_desc_cta_intro' );
 	$subplans          = get_children( array(
 		'post_parent' => $post->ID,
@@ -12,7 +12,9 @@ if ( $post->post_type === 'degree' ) :
 	) );
 	$promo             = get_degree_promo( $post );
 
-	if ( $catalog_url || $subplans ) :
+	$has_content = ( $catalog_desc_full || $subplans || $promo );
+
+	if ( $has_content ) :
 ?>
 	<div class="col-lg-5 col-xl-4 offset-xl-1 pl-lg-5 pl-xl-3 pb-lg-3 mb-5 mt-lg-5">
 		<div class="degree-catalog-sidebar pt-lg-3">
@@ -21,7 +23,7 @@ if ( $post->post_type === 'degree' ) :
 
 			<div class="row">
 
-				<?php if ( $catalog_url ) : ?>
+				<?php if ( $catalog_desc_full ) : ?>
 				<div class="col-12">
 					<div class="row py-3 py-sm-0">
 
@@ -38,14 +40,18 @@ if ( $post->post_type === 'degree' ) :
 						<?php endif; ?>
 
 						<div class="col col-sm-8 col-md-6 col-lg">
-							<a href="<?php echo $catalog_url; ?>" target="_blank" class="btn btn-block btn-outline-info rounded py-3">View in Catalog</a>
+							<button class="btn btn-block btn-outline-info rounded py-3"
+								data-toggle="modal"
+								data-target="#catalogModal">
+								View Full Description
+							</button>
 						</div>
 
 					</div>
 				</div>
 				<?php endif; ?>
 
-				<?php if ( $catalog_url && $subplans ) : ?>
+				<?php if ( $catalog_desc_full && $subplans ) : ?>
 				<div class="col-12">
 					<hr class="my-4 my-sm-5" role="presentation">
 				</div>
@@ -69,7 +75,7 @@ if ( $post->post_type === 'degree' ) :
 				<?php if ( $promo ) : ?>
 				<div class="col-12 text-center flex-lg-first">
 
-					<?php if ( $catalog_url || $subplans ) : ?>
+					<?php if ( $catalog_desc_full || $subplans ) : ?>
 					<hr class="hidden-lg-up my-4 my-sm-5 pb-2 pb-sm-0" role="presentation">
 					<?php endif; ?>
 
@@ -84,7 +90,7 @@ if ( $post->post_type === 'degree' ) :
 					</a>
 					<?php endif; ?>
 
-					<?php if ( $catalog_url || $subplans ) : ?>
+					<?php if ( $catalog_desc_full || $subplans ) : ?>
 					<hr class="hidden-md-down my-5" role="presentation">
 					<?php endif; ?>
 
