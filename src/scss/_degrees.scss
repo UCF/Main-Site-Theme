@@ -125,6 +125,7 @@
     td,
     th {
       background-color: $white;
+      min-width: 6em;
     }
 
     p:last-child {
