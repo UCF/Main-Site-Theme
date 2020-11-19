@@ -119,7 +119,13 @@
     @extend .table;
     @extend .table-bordered;
     @extend .table-responsive;
+    background-color: $table-border-color;
     font-size: .8em;
+
+    td,
+    th {
+      background-color: $white;
+    }
 
     p:last-child {
       margin-bottom: 0;
