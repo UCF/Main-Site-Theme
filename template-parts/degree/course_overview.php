@@ -4,7 +4,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'degree' ) :
 	$course_overview          = get_field( 'course_overview', $post );
 	$catalog_desc_full        = trim( get_field( 'degree_description_full', $post ) );
-	$course_catalog_link_text = get_field( 'course_catalog_link_text', $post ) ?: 'View all ' . get_header_title( $post ) . 'Courses';
+	$course_catalog_link_text = get_field( 'course_catalog_link_text', $post ) ?: 'View all ' . get_header_title( $post ) . ' Courses';
 
 	if ( ! empty ( $course_overview ) && have_rows( 'course_overview', $post ) ) :
 ?>
