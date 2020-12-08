@@ -515,10 +515,10 @@ function map_degree_types( $degree_types ) {
  * @return array
  */
 function main_site_format_degree_data( $post_meta ) {
-	setlocale(LC_MONETARY, 'en_US');
+	$fmt = new NumberFormatter( 'en_US', NumberFormatter::CURRENCY );
 
 	if ( isset( $post_meta['degree_avg_annual_earnings'] ) && ! empty( $post_meta['degree_avg_annual_earnings'] ) ) {
-		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', floatval( $post_meta['degree_avg_annual_earnings'] ) );
+		$post_meta['degree_avg_annual_earnings'] = $fmt->formatCurrency( floatval( $post_meta['degree_avg_annual_earnings'] ), 'USD' );
 	}
 
 	if ( isset( $post_meta['degree_employed_full_time'] ) && ! empty( $post_meta['degree_employed_full_time'] ) ) {
