@@ -16,7 +16,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
 	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
-	'catalog_desc_cta_intro'            => 'A full description of this program can be found in UCF&rsquo;s catalog.',
+	'catalog_desc_cta_intro'            => '',
 	'degree_careers_intro'              => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
 										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
 										   . 'faculty to networking with top employers across Central Florida to gaining '
