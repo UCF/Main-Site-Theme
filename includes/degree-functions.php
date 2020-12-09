@@ -333,7 +333,19 @@ function get_degree_application_deadlines( $post ) {
 			);
 		}
 	} else if ( have_rows( 'degree_application_deadlines', $post ) ) {
-		// Imported deadlines
+		// If a deadline group order is defined, use it:
+		$group_order = array();
+		if ( is_undergraduate_degree( $post ) ) {
+			$group_order = array_filter( array_map( 'trim', explode( ',', get_theme_mod_or_default( 'degree_deadlines_undergraduate_deadline_order' ) ) ) );
+		} else if ( is_graduate_degree( $post ) ) {
+			$group_order = array_filter( array_map( 'trim', explode( ',', get_theme_mod_or_default( 'degree_deadlines_graduate_deadline_order' ) ) ) );
+		}
+
+		if ( $group_order ) {
+			$deadlines = array_fill_keys( $group_order, array() );
+		}
+
+		// Assign imported deadlines to groups:
 		$imported_deadlines = get_field( 'degree_application_deadlines', $post );
 		foreach ( $imported_deadlines as $deadline ) {
 			if (
@@ -347,6 +359,10 @@ function get_degree_application_deadlines( $post ) {
 				);
 			}
 		}
+
+		// If $group_order contains an invalid group name, make sure
+		// it doesn't generate an empty set of deadlines:
+		$deadlines = array_filter( $deadlines );
 	}
 
 	return $deadlines;

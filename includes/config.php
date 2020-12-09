@@ -17,6 +17,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
 	'catalog_desc_cta_intro'            => '',
+	'degree_deadlines_undergraduate_deadline_order' => 'Freshmen, Transfers, International',
+	'degree_deadlines_graduate_deadline_order'      => 'Domestic, International',
 	'degree_careers_intro'              => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
 										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
 										   . 'faculty to networking with top employers across Central Florida to gaining '
@@ -550,7 +552,41 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	// Degrees - Deadlines
+	// Degrees - Deadlines/Apply
+	$wp_customize->add_setting(
+		'degree_deadlines_undergraduate_deadline_order',
+		array(
+			'default' => get_theme_mod_default( 'degree_deadlines_undergraduate_deadline_order' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_undergraduate_deadline_order',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Deadline Type Order',
+			'description' => 'A case-sensitive, comma-separated list designating the order by which deadlines should be grouped for undergraduate programs that display grouped deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_graduate_deadline_order',
+		array(
+			'default' => get_theme_mod_default( 'degree_deadlines_graduate_deadline_order' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_graduate_deadline_order',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Deadline Type Order',
+			'description' => 'A case-sensitive, comma-separated list designating the order by which deadlines should be grouped for graduate programs that display grouped deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply'
+		)
+	);
+
 	$wp_customize->add_setting(
 		'degree_deadlines_undergraduate_fallback'
 	);
