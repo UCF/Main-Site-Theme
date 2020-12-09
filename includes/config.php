@@ -4,7 +4,6 @@
  **/
 
 define( 'THEME_URL', get_stylesheet_directory_uri() );
-define( 'THEME_DIR', get_template_directory() );
 define( 'THEME_STATIC_URL', THEME_URL . '/static' );
 define( 'THEME_STATIC_DIR', THEME_DIR . '/static' );
 define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
@@ -15,9 +14,13 @@ define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
 	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
-	'degrees_visit_ucf_url'             => 'https://apply.ucf.edu/forms/campus-tour/',
 	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
+	'catalog_desc_cta_intro'            => '',
+	'degree_careers_intro'              => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
+										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
+										   . 'faculty to networking with top employers across Central Florida to gaining '
+										   . 'first-hand experience in internships nearby. Achieve your degree and more as a Knight.',
 	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                            => 'GTM-MBPLZH',
@@ -52,11 +55,56 @@ function __init__() {
 add_action( 'after_setup_theme', '__init__' );
 
 
-function define_customizer_sections( $wp_customize ) {
-	$wp_customize->add_section(
+function define_customizer_panels( $wp_customize ) {
+	$wp_customize->add_panel(
 		THEME_CUSTOMIZER_PREFIX . 'degrees',
 		array(
 			'title' => 'Degrees'
+		)
+	);
+}
+
+add_action( 'customize_register', 'define_customizer_panels' );
+
+
+function define_customizer_sections( $wp_customize ) {
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-ctas',
+		array(
+			'title' => 'Calls to Action (CTAs)',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance',
+		array(
+			'title' => 'Program at a Glance',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-description',
+		array(
+			'title' => 'Description',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+		array(
+			'title' => 'Application Deadlines',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers',
+		array(
+			'title' => 'Skills and Career Opportunities',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
 	);
 
@@ -93,7 +141,22 @@ add_action( 'customize_register', 'define_customizer_sections' );
 
 
 function define_customizer_fields( $wp_customize ) {
-	// Degrees
+	$section_choices = array( '' => '---' );
+	$sections        = get_posts( array(
+		'post_type'   => 'ucf_section',
+		'numberposts' => -1,
+		'orderby'     => 'post_title',
+		'order'       => 'ASC'
+	) );
+
+	if ( $sections ) {
+		foreach ( $sections as $section ) {
+			$section_choices[$section->ID] = $section->post_title;
+		}
+	}
+
+
+	// Degrees - CTAs
 	$wp_customize->add_setting(
 		'degrees_undergraduate_application',
 		array(
@@ -106,8 +169,8 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Undergraduate Application URL',
-			'description' => 'The url of the online undergraduate application.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'description' => 'The URL of the online undergraduate application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
@@ -123,25 +186,8 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'text',
 			'label'       => 'Graduate Application URL',
-			'description' => 'The url of the online graudate application.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
-		)
-	);
-
-	$wp_customize->add_setting(
-		'degrees_visit_ucf_url',
-		array(
-			'default' => get_theme_mod_default( 'degrees_visit_ucf_url' )
-		)
-	);
-
-	$wp_customize->add_control(
-		'degrees_visit_ucf_url',
-		array(
-			'type'        => 'text',
-			'label'       => 'Visit UCF URL',
-			'description' =>'URL for the campus tour application.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'description' => 'The URL of the online graduate application.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
@@ -158,7 +204,7 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Graduate Degree RFI URL base',
 			'description' => 'Base URL for the request-for-information form for graduate degrees.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
@@ -175,24 +221,11 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Graduate Degree RFI Form ID',
 			'description' => 'ID of the request-for-information form for graduate degrees.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
 
-	$wp_customize->add_setting(
-		'tuition_value_message'
-	);
-
-	$wp_customize->add_control(
-		'tuition_value_message',
-		array(
-			'type'        => 'textarea',
-			'label'       => 'Tuition Value Message',
-			'description' => 'The message displayed above the tuition per credit hour on degree pages.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
-		)
-	);
-
+	// Degrees - Program at a Glance
 	$wp_customize->add_setting(
 		'tuition_disclaimer'
 	);
@@ -202,12 +235,371 @@ function define_customizer_fields( $wp_customize ) {
 		array(
 			'type'        => 'textarea',
 			'label'       => 'Tuition Disclaimer',
-			'description' => 'The message displayed below the tuition per credit hour on degree pages.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees'
+			'description' => 'A message displayed below the tuition per credit hour on degree pages.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
 		)
 	);
 
-	//Phonebook
+	$wp_customize->add_setting(
+		'degrees_badge_1'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_badge_1',
+			array(
+				'label'      => 'Fallback Promo/Badge 1',
+				'description' => 'A badge or other promotional graphic to display on all degrees that don\'t have their own set.',
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 1 Alt Text',
+			'description' => 'Alt text for the Badge 1 graphic. <strong>Required</strong> for the graphic to be displayed on degree profiles.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 1 Link URL',
+			'description' => 'An Optional URL for the Badge 1 graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 1 Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_1_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_1_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Fallback Promo/Badge 1 Link - Open in New Window',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_badge_2',
+			array(
+				'label'      => 'Fallback Promo/Badge 2',
+				'description' => 'A badge or other promotional graphic to display on all degrees that don\'t have their own set.',
+				'section'    => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 2 Alt Text',
+			'description' => 'Alt text for the Badge 2 graphic. <strong>Required</strong> for the graphic to be displayed on degree profiles.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 2 Link URL',
+			'description' => 'An Optional URL for the Badge 2 graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fallback Promo/Badge 2 Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_badge_2_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_badge_2_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Fallback Promo/Badge 2 Link - Open in New Window',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-program_at_a_glance'
+		)
+	);
+
+	// Degrees - Description
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_sidebar_promo_undergraduate',
+			array(
+				'label'       => 'Undergraduate Promo Graphic',
+				'description' => 'An image or other promotional graphic to display alongside undergraduate catalog descriptions.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Promo Graphic Alt Text',
+			'description' => 'Alt text for the Undergraduate Promo graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Promo Link URL',
+			'description' => 'An optional URL for the Undergraduate Promo graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Promo Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_undergraduate_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_undergraduate_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Undergraduate Promo Link - Open in New Window',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Image_Control(
+			$wp_customize,
+			'degrees_sidebar_promo_graduate',
+			array(
+				'label'       => 'Graduate Promo Graphic',
+				'description' => 'An image or other promotional graphic to display alongside graduate catalog descriptions.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_alt'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_alt',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Promo Graphic Alt Text',
+			'description' => 'Alt text for the Graduate Promo graphic.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_link_url'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_link_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Promo Link URL',
+			'description' => 'An optional URL for the Graduate Promo graphic to link out to.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_link_rel'
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_link_rel',
+		array(
+			'type'        => 'text',
+			'label'       => 'Graduate Promo Link Rel Attribute',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_sidebar_promo_graduate_link_new_window',
+		array(
+			'default' => 0
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_sidebar_promo_graduate_link_new_window',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Graduate Promo Link - Open in New Window',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'catalog_desc_cta_intro',
+		array(
+			'default' => get_theme_mod_default( 'catalog_desc_cta_intro' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'catalog_desc_cta_intro',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Catalog CTA Intro Text',
+			'description' => 'Text to display above the "View in Catalog" button on programs that display a catalog description.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description'
+		)
+	);
+
+	// Degrees - Deadlines
+	$wp_customize->add_setting(
+		'degree_deadlines_undergraduate_fallback'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_undergraduate_fallback',
+		array(
+			'type'        => 'select',
+			'label'       => 'Undergraduate Degree Fallback Section',
+			'description' => 'An alternate Section post to display instead of the Application Deadlines section for undergraduate programs without deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+			'choices'     => $section_choices
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_graduate_fallback'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_graduate_fallback',
+		array(
+			'type'        => 'select',
+			'label'       => 'Graduate Degree Fallback Section',
+			'description' => 'An alternate Section post to display instead of the Application Deadlines section for graduate programs without deadlines.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
+			'choices'     => $section_choices
+		)
+	);
+
+	// Degrees - Skills and Career Opportunities
+	$wp_customize->add_setting(
+		'degree_careers_intro',
+		array(
+			'default' => get_theme_mod_default( 'degree_careers_intro' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degree_careers_intro',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Degree Career Fallback Intro Text',
+			'description' => 'Text to display next to a program\'s careers when a list of learnable skills is not set.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers'
+		)
+	);
+
+	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'
 	);
@@ -710,7 +1102,7 @@ function modern_degree_hide_editor() {
 		$post_id = $_GET['post'];
 		if ( ! $post_id ) return;
 
-		if ( get_page_template_slug( $post_id ) === 'template-degree-modern.php' ) {
+		if ( get_page_template_slug( $post_id ) !== 'template-degree-custom.php' ) {
 			remove_post_type_support( 'degree', 'editor' );
 		}
 	}
@@ -756,3 +1148,69 @@ function read_only_repeater_fields() {
 }
 
 add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
+
+
+/**
+ * Adds new columns for displaying degree template names
+ * and the types of available degree descriptions in the
+ * degree list admin view.
+ *
+ * Removes the Tags and Areas of Interests columns.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param array $columns Existing column data
+ * @return array Modified column data
+ */
+function degree_admin_define_columns( $columns ) {
+	$columns['avail_desc'] = 'Available Description';
+	$columns['template'] = 'Template';
+
+	if ( isset( $columns['tags'] ) ) {
+		unset( $columns['tags'] );
+	}
+	if ( isset( $columns['taxonomy-interests'] ) ) {
+		unset( $columns['taxonomy-interests'] );
+	}
+
+	return $columns;
+}
+
+add_filter( 'manage_degree_posts_columns', 'degree_admin_define_columns' );
+
+
+/**
+ * Displays values for custom "Template" and "Available Description"
+ * columns in the degree list admin view.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param string $column_name Column name
+ * @param int $post_id Post ID for individual post obj's in the list
+ * @return void
+ */
+function degree_admin_set_columns( $column_name, $post_id ) {
+	switch ( $column_name ) {
+		case 'avail_desc':
+			$avail_desc = 'None';
+			$catalog_desc = get_field( 'degree_description', $post_id );
+			$custom_desc  = get_field( 'modern_description_copy', $post_id );
+
+			if ( ! empty( $custom_desc ) ) {
+				$avail_desc = 'Custom';
+			} else if ( ! empty( $catalog_desc ) ) {
+				$avail_desc = 'Catalog';
+			}
+			echo $avail_desc;
+			break;
+		case 'template':
+			$template_name_slug_map = wp_get_theme()->get_page_templates( null, 'degree' );
+			$template_slug = get_page_template_slug( $post_id );
+			$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[$template_slug] : 'Default';
+			echo $template_name;
+			break;
+	}
+}
+
+add_action( 'manage_degree_posts_custom_column' , 'degree_admin_set_columns', 10, 2 );
+

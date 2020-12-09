@@ -1,46 +1,154 @@
-.degree-promo {
-  border: 1px solid $brand-complementary;
-  display: inline-block;
-  padding: 0;
-  position: relative;
-  vertical-align: middle;
-  width: 100%;
+//
+// Program at a Glance
+//
+.program-length-image {
+  max-height: 6em;
 }
 
-.degree-promo-icon,
-.degree-promo-text {
-  display: inline-block;
-  float: left;
-  font-weight: 400;
-  line-height: 1.42857;
-  margin-bottom: -1px;
-  position: relative;
+.degree-badges {
+  @include make-row();
+  align-items: center;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+
+  @include media-breakpoint-up(xl) {
+    justify-content: flex-end;
+  }
+}
+
+.degree-badge-col {
+  @include make-col-ready();
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 200px;
   text-align: center;
-}
 
-.degree-promo-icon {
-  background: $brand-complementary;
-  color: $white;
-  font-size: 2rem;
-  padding: .33rem .75rem;
-  width: 20%;
+  &:only-child {
+    @include media-breakpoint-up(lg) {
+      margin-left: auto;
+      text-align: right;
+    }
+  }
 
-  @include media-breakpoint-down(md) {
-    font-size: 1.75rem;
-    padding: 10px 12px;
+  &:not(:only-child) {
+    max-width: 35%;
+
+    @include media-breakpoint-up(md) {
+      max-width: 200px;
+      // must use literals here because sass be dumb
+      @supports (max-width: #{'min(45%, 200px)'}) {
+        max-width: #{'min(45%, 200px)'};
+      }
+    }
+
+    @include media-breakpoint-up(lg) {
+      max-width: 150px;
+      // must use literals here because sass be dumb
+      @supports (max-width: #{'max(45%, 150px)'}) {
+        max-width: #{'max(45%, 150px)'};
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      min-width: 165px;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: $spacer-y;
+    margin-top: $spacer-y;
+  }
+
+  @include media-breakpoint-only(lg) {
+    @include make-col(12);
+  }
+
+  @include media-breakpoint-up(lg) {
+    margin-bottom: $spacer-y / 2;
+    margin-top: $spacer-y / 2;
+  }
+
+  .degree-badge {
+    max-height: 200px;
+    max-width: 100%;
+
+    @include media-breakpoint-only(lg) {
+      max-height: 175px;
+    }
   }
 }
 
-.degree-promo-text {
-  padding: 1.1rem .4rem;
-  width: 80%;
+.tuition-amount {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  line-height: $headings-line-height;
 
-  @include media-breakpoint-down(md) {
-    font-size: .75rem;
+  @include media-breakpoint-up(md) {
+    font-size: 2.75rem;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: 3rem;
   }
 }
 
 
+//
+// Program Description
+//
+.degree-catalog-description {
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 300;
+    margin-bottom: .75em;
+
+    &:not(:first-child) {
+      margin-top: 1.5em;
+    }
+  }
+
+  table {
+    // Sass-lint shushed here bc we don't have mixins
+    // or placeholders in Athena for these styles
+    // sass-lint:disable-block placeholder-in-extend
+    @extend .table;
+    @extend .table-bordered;
+    @extend .table-responsive;
+    background-color: $table-border-color;
+    font-size: .8em;
+
+    td,
+    th {
+      background-color: $white;
+      min-width: 6em;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.degree-catalog-cta-info {
+  font-family: $font-family-slab-serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.4;
+
+  @include media-breakpoint-up(md) {
+    font-size: 1.2rem;
+  }
+}
+
+
+//
+// Application Deadlines/Apply CTA
+//
 .degree-deadline-wrap {
   background-color: $brand-primary;
 
@@ -127,43 +235,84 @@
     flex-wrap: nowrap;
     max-width: #{map-get($container-max-widths, xl) * (5/12)};
   }
+
+  &.degree-deadline-content-start-condensed {
+    @include media-breakpoint-up(lg) {
+      max-width: 290px; // magic number, sorry
+    }
+
+    @include media-breakpoint-up(xl) {
+      max-width: #{map-get($container-max-widths, xl) * (3/12)};
+    }
+  }
 }
 
-.tuition-fees-tab-content {
-  border-bottom: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+.degree-deadline-tab-nav {
+  margin-left: auto;
+  margin-right: auto;
+
+  @include media-breakpoint-up(lg) {
+    margin-left: -.75rem;
+  }
+
+  .nav-item {
+    margin: .25rem 0;
+  }
+
+  .nav-link {
+    color: transparentize($black, .4);
+    font-size: .65rem;
+    padding: .75rem;
+    text-transform: uppercase;
+
+    @include media-breakpoint-up(sm) {
+      font-size: $font-size-xs;
+    }
+
+    &.active {
+      color: $black;
+      font-weight: bold;
+      position: relative;
+
+      &::after {
+        background-color: $white;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: $border-width-thicker;
+        left: .75rem;
+        position: absolute;
+        right: .75rem;
+      }
+    }
+  }
 }
 
+.degree-deadline {
+  font-size: 1.1em;
+  text-align: center;
+
+  @include media-breakpoint-only(lg) {
+    font-size: 1em;
+  }
+
+  &:not(:last-of-type) {
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+//
+// Courses Overview
+//
 .accordion-courses {
   border-bottom: 1px solid $brand-primary;
   margin: 1.25rem 0;
   padding: 1.25rem 0;
-}
-
-.degree-skill-list-item {
-  font-size: 1.2em;
-}
-
-.degree-career-list {
-  list-style: none; // Remove default bullets
-}
-
-.degree-career-list-item {
-  line-height: 1.4;
-
-  &::before {
-    color: $brand-primary;
-    content: '\2022';
-    display: inline-block;
-    font-weight: 900;
-    margin-left: -1em;
-    width: 1em;
-  }
-}
-
-.program-length-image {
-  max-height: 6em;
 }
 
 .accordion-courses .course-icon:before {
@@ -174,6 +323,84 @@
   content: '';
 }
 
+
+//
+// Skills and Careers
+//
+.degree-skill-list-item {
+  font-size: 1.2em;
+}
+
+.degree-careers-expandable {
+  max-height: 300px;
+  overflow: hidden;
+  position: relative;
+
+  @include media-breakpoint-up(sm) {
+    max-height: none;
+  }
+
+  &:target {
+    max-height: none;
+
+    .degree-careers-expand {
+      display: none;
+    }
+  }
+}
+
+.degree-careers-expand {
+  background-color: transparentize($black, .2);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+
+  @include media-breakpoint-up(sm) {
+    display: none;
+  }
+}
+
+.degree-career-list {
+  list-style: none; // Remove default bullets
+  padding-left: .5rem;
+
+  @include media-breakpoint-up(sm) {
+    column-gap: $grid-gutter-width-base;
+    // NOTE: column-width value below is a magic number that happens
+    // to work with both possible list layouts. Easier to just do this
+    // vs adjusting `columns` property.  Will need to be adjusted if
+    // columns in the skills/careers template parts change.
+    column-width: 210px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    column-width: 190px; // magic number, again
+  }
+}
+
+.degree-career-list-item {
+  break-inside: avoid;
+  display: flex;
+  flex-direction: row;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  page-break-inside: avoid;
+
+  &::before {
+    color: $brand-primary;
+    content: '\2022';
+    flex: 0 0 auto;
+    font-weight: 900;
+    width: 1rem;
+  }
+}
+
+
+//
+// Start Your Application Today
+//
 .start-application-card-number {
   background-color: $brand-primary;
   border: .25rem solid $white;
@@ -184,6 +411,10 @@
   width: 3rem;
 }
 
+
+//
+// Online Callout
+//
 .degree-online-copy {
   font-size: 1.15em;
 }

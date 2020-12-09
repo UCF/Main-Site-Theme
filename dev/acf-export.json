@@ -622,12 +622,12 @@
         "description": ""
     },
     {
-        "key": "group_58fa427b4efb7",
-        "title": "Degree Data",
+        "key": "group_5e985ee080417",
+        "title": "Degree Fields",
         "fields": [
             {
-                "key": "field_5ae0c4dcee248",
-                "label": "Custom Data",
+                "key": "field_5fad56c553062",
+                "label": "Requests for Information (RFI)",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -638,607 +638,15 @@
                     "class": "",
                     "id": ""
                 },
-                "placement": "top",
+                "placement": "left",
                 "endpoint": 0
             },
             {
-                "key": "field_58fa42808a359",
-                "label": "Required Hours",
-                "name": "degree_hours",
-                "type": "number",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "40",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "min": "",
-                "max": "",
-                "step": ""
-            },
-            {
-                "key": "field_5df7896609d12",
-                "label": "Online URL",
-                "name": "degree_online_url",
-                "type": "url",
-                "instructions": "URL of the UCF Online profile for this degree.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": ""
-            },
-            {
-                "key": "field_5adf83192113d",
-                "label": "Degree Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_58fa440d8a362",
-                "label": "Degree ID",
-                "name": "degree_id",
-                "type": "read_only",
-                "instructions": "A unique identifier for the degree.",
-                "required": 1,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "30",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5ae32d36ac658",
-                "label": "Search Service Degree ID",
-                "name": "degree_api_id",
-                "type": "read_only",
-                "instructions": "The ID assigned to the program in the UCF Search Service.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "30",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5ed01d99c33fb",
-                "label": "Graduate Slate ID",
-                "name": "graduate_slate_id",
-                "type": "read_only",
-                "instructions": "The GUID of this program in Graduate Studies' Slate instance. (Applies to graduate programs only)",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "40",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5adf859313850",
-                "label": "Plan Code",
-                "name": "degree_plan_code",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5adf85a813851",
-                "label": "Subplan Code",
-                "name": "degree_subplan_code",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5af0696eeb799",
-                "label": "Degree Short Name",
-                "name": "degree_name_short",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5af35d5e6475d",
-                "label": "Is Online",
-                "name": "degree_online",
-                "type": "read_only",
-                "instructions": "Whether or not the degree is an online program.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "boolean"
-            },
-            {
-                "key": "field_58fa433f8a35a",
-                "label": "Catalog Description",
-                "name": "degree_description",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_58fa436d8a35c",
-                "label": "Catalog URL",
-                "name": "degree_pdf",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5931a83da2c0f",
-                "label": "Resident Tuition",
-                "name": "degree_resident_tuition",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5931a857a2c10",
-                "label": "Nonresident Tuition",
-                "name": "degree_nonresident_tuition",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df79878fc895",
-                "label": "Degree Outcome Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df107af52f9e",
-                "label": "Outcome Academic Year",
-                "name": "degree_outcome_academic_year",
-                "type": "read_only",
-                "instructions": "The academic year of the graduates represented in the outcome data to the right.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df107d052f9f",
-                "label": "Average Annual Earnings",
-                "name": "degree_avg_annual_earnings",
-                "type": "read_only",
-                "instructions": "The average annual earnings of graduates who are employed full time from the graduating class of the Outcome Academic Year",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df107ed52fa0",
-                "label": "Employed Full Time (%)",
-                "name": "degree_employed_full_time",
-                "type": "read_only",
-                "instructions": "The percentage of graduates from the Outcome Academic Year that were employed full time at the time of the NCES survey.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df107fe52fa1",
-                "label": "Continuing Education (%)",
-                "name": "degree_continuing_education",
-                "type": "read_only",
-                "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional education at the time of the NCES survey.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "25",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a7190443b",
-                "label": "Employment Projection Data",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df29fdf4c2d8",
-                "label": "Report Year Start",
-                "name": "degree_prj_begin_year",
-                "type": "read_only",
-                "instructions": "The start year in the data projection.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0084c2d9",
-                "label": "Report Year End",
-                "name": "degree_prj_end_year",
-                "type": "read_only",
-                "instructions": "The end year in the data projection",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "50",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0484c2da",
-                "label": "Beginning Employment",
-                "name": "degree_prj_begin_employment",
-                "type": "read_only",
-                "instructions": "The estimated number of positions available for graduates with this degree in the start year of the report.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0724c2db",
-                "label": "Projected Employment",
-                "name": "degree_prj_end_employment",
-                "type": "read_only",
-                "instructions": "The projected number of positions for graduates with this degree by the end year of the report.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a0ca4c2dc",
-                "label": "Projected New Positions",
-                "name": "degree_prj_change",
-                "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a1024c2dd",
-                "label": "Projected New Positions Percentage",
-                "name": "degree_prj_change_percentage",
-                "type": "read_only",
-                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5df2a12d4c2de",
-                "label": "Projected Openings",
-                "name": "degree_prj_openings",
-                "type": "read_only",
-                "instructions": "The projected number of openings for graduates with this degree within the report's timeframe.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_5eb457b4db29f",
-                "label": "Application Deadlines and Info",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5eb45823db2a0",
-                "label": "Deadlines",
-                "name": "degree_application_deadlines",
-                "type": "repeater",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "repeater-field-readonly",
-                    "id": ""
-                },
-                "collapsed": "",
-                "min": 0,
-                "max": 0,
-                "layout": "table",
-                "button_label": "",
-                "sub_fields": [
-                    {
-                        "key": "field_5eb458b1db2a2",
-                        "label": "Deadline Type",
-                        "name": "deadline_type",
-                        "type": "read_only",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "copy_to_clipboard": 0,
-                        "display_type": "text"
-                    },
-                    {
-                        "key": "field_5eb45884db2a1",
-                        "label": "Admission Term",
-                        "name": "admission_term",
-                        "type": "read_only",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "copy_to_clipboard": 0,
-                        "display_type": "text"
-                    },
-                    {
-                        "key": "field_5eb458badb2a3",
-                        "label": "Deadline",
-                        "name": "deadline",
-                        "type": "read_only",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "copy_to_clipboard": 0,
-                        "display_type": "text"
-                    }
-                ]
-            },
-            {
-                "key": "field_5eb45904db2a4",
-                "label": "Application Requirements",
-                "name": "degree_application_requirements",
-                "type": "repeater",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "repeater-field-readonly",
-                    "id": ""
-                },
-                "collapsed": "",
-                "min": 0,
-                "max": 0,
-                "layout": "table",
-                "button_label": "",
-                "sub_fields": [
-                    {
-                        "key": "field_5eb4591fdb2a5",
-                        "label": "Requirement",
-                        "name": "requirement",
-                        "type": "read_only",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "copy_to_clipboard": 0,
-                        "display_type": "text"
-                    }
-                ]
-            }
-        ],
-        "location": [
-            [
-                {
-                    "param": "current_user_role",
-                    "operator": "==",
-                    "value": "super_admin"
-                },
-                {
-                    "param": "current_user_role",
-                    "operator": "==",
-                    "value": "administrator"
-                },
-                {
-                    "param": "post_type",
-                    "operator": "==",
-                    "value": "degree"
-                }
-            ]
-        ],
-        "menu_order": 0,
-        "position": "normal",
-        "style": "default",
-        "label_placement": "top",
-        "instruction_placement": "label",
-        "hide_on_screen": "",
-        "active": true,
-        "description": ""
-    },
-    {
-        "key": "group_5f932570666c4",
-        "title": "Degree Fields - Custom Template",
-        "fields": [
-            {
-                "key": "field_5f93258d2ddac",
+                "key": "field_5fad570953063",
                 "label": "Enable Request Info Button\/Modal",
                 "name": "degree_custom_enable_rfi",
                 "type": "true_false",
-                "instructions": "If enabled, the 'Request Information' modal and button will be included on the page. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have Slate GUIDs imported.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
+                "instructions": "If enabled, the 'Request Information' modal and button will be included on the degree profile. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have an imported Slate GUID.<\/i>",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1252,289 +660,6 @@
                 "ui_on_text": "",
                 "ui_off_text": ""
             },
-            {
-                "key": "field_5f9328062ddad",
-                "label": "Hide Colleges Grid",
-                "name": "degree_custom_hide_colleges_grid",
-                "type": "true_false",
-                "instructions": "Determines if the colleges grid is hidden from displaying above the footer.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            }
-        ],
-        "location": [
-            [
-                {
-                    "param": "post_type",
-                    "operator": "==",
-                    "value": "degree"
-                },
-                {
-                    "param": "post_template",
-                    "operator": "==",
-                    "value": "template-degree-custom.php"
-                }
-            ]
-        ],
-        "menu_order": 0,
-        "position": "normal",
-        "style": "default",
-        "label_placement": "top",
-        "instruction_placement": "label",
-        "hide_on_screen": "",
-        "active": true,
-        "description": ""
-    },
-    {
-        "key": "group_5df8fb174faec",
-        "title": "Degree Fields - Default Template",
-        "fields": [
-            {
-                "key": "field_5e99f04356ec3",
-                "label": "Data Display Settings",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5aec63a28617e",
-                "label": "Hide Catalog Description on Degree Profile",
-                "name": "degree_disable_catalog_desc",
-                "type": "true_false",
-                "instructions": "Check this box to prevent this degree's Catalog Description from being displayed on its degree profile.  Both the degree's post content and the Catalog Description value are displayed by default on degree profiles.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 0,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df7ef62fece7",
-                "label": "Display Career Paths",
-                "name": "degree_display_career_paths",
-                "type": "true_false",
-                "instructions": "Determines if career paths are displayed for this degree.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df79894fc896",
-                "label": "Display Degree Outcomes",
-                "name": "degree_display_outcomes",
-                "type": "true_false",
-                "instructions": "Determines if degree outcomes are displayed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df798cdfc897",
-                "label": "Display Degree Projections",
-                "name": "degree_display_projections",
-                "type": "true_false",
-                "instructions": "Determines if projection data is displayed.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df7bae40f53f",
-                "label": "Display News",
-                "name": "degree_display_news",
-                "type": "true_false",
-                "instructions": "Determines if news articles are displayed for degrees.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "message": "",
-                "default_value": 0,
-                "ui": 1,
-                "ui_on_text": "",
-                "ui_off_text": ""
-            },
-            {
-                "key": "field_5df7bb6d0f541",
-                "label": "News Tag",
-                "name": "degree_news_tag",
-                "type": "text",
-                "instructions": "Specify the tag used on the news site to retrieve the stories. If no tag is provided, no news stories will be listed.",
-                "required": 0,
-                "conditional_logic": [
-                    [
-                        {
-                            "field": "field_5df7bae40f53f",
-                            "operator": "==",
-                            "value": "1"
-                        }
-                    ]
-                ],
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_5dfa8794d5761",
-                "label": "Sidebar Content",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5dfa86409fa89",
-                "label": "Sidebar Content - Bottom",
-                "name": "degree_sidebar_content_bottom",
-                "type": "wysiwyg",
-                "instructions": "Content placed here will be displayed at the bottom of the sidebar, under existing content.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
-            },
-            {
-                "key": "field_5dfa87a4d5762",
-                "label": "Full-Width Content",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_5df8fb1d7bbc1",
-                "label": "Full-Width Content - Bottom of Page",
-                "name": "degree_full_width_content_bottom",
-                "type": "wysiwyg",
-                "instructions": "Content placed here will be displayed full-width below the two-column layout and the breadcrumbs, and before the UCF Colleges section.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "tabs": "all",
-                "toolbar": "full",
-                "media_upload": 1,
-                "delay": 0
-            }
-        ],
-        "location": [
-            [
-                {
-                    "param": "post_type",
-                    "operator": "==",
-                    "value": "degree"
-                },
-                {
-                    "param": "post_template",
-                    "operator": "==",
-                    "value": "default"
-                }
-            ]
-        ],
-        "menu_order": 0,
-        "position": "normal",
-        "style": "default",
-        "label_placement": "top",
-        "instruction_placement": "label",
-        "hide_on_screen": "",
-        "active": true,
-        "description": ""
-    },
-    {
-        "key": "group_5e985ee080417",
-        "title": "Degree Fields - Modern Layout",
-        "fields": [
             {
                 "key": "field_5e99fb2dbcede",
                 "label": "Program at a Glance",
@@ -1552,11 +677,11 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e986fb2666dc",
-                "label": "Program Length Image",
-                "name": "program_length_image",
-                "type": "image",
-                "instructions": "Add image to be displayed for the program length.",
+                "key": "field_5f9adda85c2cc",
+                "label": "Program Length",
+                "name": "program_length",
+                "type": "group",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1564,23 +689,78 @@
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "thumbnail",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": ""
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f9addc95c2cd",
+                        "label": "Image",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "An icon to supplement the program's duration.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5f9addf15c2ce",
+                        "label": "Number",
+                        "name": "number",
+                        "type": "text",
+                        "instructions": "The actual program length value, e.g. \"30\", \"12-24\"",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "30",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5f9ade145c2cf",
+                        "label": "Text",
+                        "name": "text",
+                        "type": "text",
+                        "instructions": "Units of measure, and\/or supplementary info about the program length.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "40",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
             },
             {
-                "key": "field_5ea0a6bcb0c0d",
-                "label": "Program Length Number",
-                "name": "program_length_number",
-                "type": "text",
-                "instructions": "Add the number to be displayed for the program length.",
+                "key": "field_5f9ae0f0c8e71",
+                "label": "Badges\/Promotional Graphics",
+                "name": "",
+                "type": "message",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1588,61 +768,278 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "message": "<em>Note: if no badge\/promo graphics are set below, fallback badge(s) defined in the Customizer will be displayed on this degree's profile instead.<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
             },
             {
-                "key": "field_5ea0a6e8b0c0e",
-                "label": "Program Length Text",
-                "name": "program_length_text",
-                "type": "text",
-                "instructions": "Add the text to be displayed under the number for the program length.",
+                "key": "field_5f9ad88cd8a1b",
+                "label": "Badge\/Promo 1",
+                "name": "promo",
+                "type": "group",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5e94d0629bc99",
+                        "label": "Image",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "A badge, trust symbol, or other promotional graphic relevant to this degree.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": "png, jpg"
+                    },
+                    {
+                        "key": "field_5e976d0d22df6",
+                        "label": "Alt Text",
+                        "name": "image_alt",
+                        "type": "text",
+                        "instructions": "Text that describes the contents of the badge\/promo graphic.  <strong>Required<\/strong> for the graphic to be displayed on the degree profile.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fad5affc0394",
+                        "label": "Link URL",
+                        "name": "link_url",
+                        "type": "text",
+                        "instructions": "An optional URL that this graphic should link out to.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fad5fca24565",
+                        "label": "Link Rel Attribute",
+                        "name": "link_rel",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fad5affc0394",
+                                    "operator": "!=empty"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fad5ff124566",
+                        "label": "Open Link in New Window",
+                        "name": "link_new_window",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fad5affc0394",
+                                    "operator": "!=empty"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 1,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    }
+                ]
             },
             {
-                "key": "field_5e94d0629bc99",
-                "label": "Promo Image",
-                "name": "promo_image",
-                "type": "image",
-                "instructions": "Image to be displayed at the top of the page next to the fees.",
+                "key": "field_5f9adba88bd5d",
+                "label": "Badge\/Promo 2",
+                "name": "promo_2",
+                "type": "group",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
-                "return_format": "url",
-                "preview_size": "medium",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png, jpg"
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5f9adba98bd60",
+                        "label": "Image",
+                        "name": "image",
+                        "type": "image",
+                        "instructions": "A badge, trust symbol, or other promotional graphic relevant to this degree.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "medium",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": "png, jpg"
+                    },
+                    {
+                        "key": "field_5f9adba98bd61",
+                        "label": "Alt Text",
+                        "name": "image_alt",
+                        "type": "text",
+                        "instructions": "Text that describes the contents of the badge\/promo graphic.  <strong>Required<\/strong> for the graphic to be displayed on the degree profile.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fad5b4dc0395",
+                        "label": "Link URL",
+                        "name": "link_url",
+                        "type": "text",
+                        "instructions": "An optional URL that this graphic should link out to.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fad601f24568",
+                        "label": "Link Rel Attribute",
+                        "name": "link_rel",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fad5b4dc0395",
+                                    "operator": "!=empty"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    },
+                    {
+                        "key": "field_5fad602624569",
+                        "label": "Open Link in New Window",
+                        "name": "link_new_window",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5fad5b4dc0395",
+                                    "operator": "!=empty"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "50",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "ui": 1,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
+                    }
+                ]
             },
             {
-                "key": "field_5e976d0d22df6",
-                "label": "Promo Image Alt Text",
-                "name": "promo_image_alt",
-                "type": "text",
-                "instructions": "Text to be displayed as the alt text for the promo image.",
+                "key": "field_5faeb8ce5d327",
+                "label": "Catalog Description",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1650,11 +1047,44 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
+                "placement": "left",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5faebbbb92089",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "<em>Note: these settings only apply to degrees that display a catalog description (i.e. don't have a custom Degree Description set.)<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5faeb73f9e0c7",
+                "label": "Disable Sidebar Promo",
+                "name": "degree_disable_sidebar_promo",
+                "type": "true_false",
+                "instructions": "If checked, the promo graphic set in the Customizer for this type of degree will <em>not<\/em> be displayed on this degree's profile.  Only applicable when this degree displays a catalog description (and not a custom description).",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_5e99f80012a12",
@@ -1673,11 +1103,28 @@
                 "endpoint": 0
             },
             {
+                "key": "field_5fa1b13bea6b7",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "<em>Note: this content is only displayed on this degree's profile if a Degree Description is set below; otherwise, the degree's imported catalog description will be shown.<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
                 "key": "field_5e961c9a35232",
-                "label": "Degree Description Heading",
+                "label": "Description Heading",
                 "name": "modern_description_heading",
                 "type": "text",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "Optional heading text to display above the degree description.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1693,10 +1140,10 @@
             },
             {
                 "key": "field_5e99d7308626b",
-                "label": "Degree Description Copy",
+                "label": "Degree Description",
                 "name": "modern_description_copy",
                 "type": "wysiwyg",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "A unique description for this degree.  Replaces the degree's catalog description on this degree's profile.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1704,20 +1151,37 @@
                     "class": "",
                     "id": ""
                 },
-                "placement": "left",
-                "endpoint": 0,
+                "default_value": "",
                 "tabs": "all",
                 "toolbar": "full",
                 "media_upload": 1,
-                "default_value": "",
                 "delay": 0
             },
             {
+                "key": "field_5fa30c20b2db6",
+                "label": "Show Subplan List",
+                "name": "show_subplan_list",
+                "type": "true_false",
+                "instructions": "When checked, a list of program tracks\/options and their excerpts will be displayed underneath this program's unique degree description if this program has at least one subplan.  Not applicable when the Degree Description is empty.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5e99d8d7130db",
-                "label": "Degree Description Image",
+                "label": "Description Image",
                 "name": "modern_description_image",
                 "type": "image",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "An optional graphic to display alongside this degree's description.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1738,10 +1202,10 @@
             },
             {
                 "key": "field_5e99d98c3902e",
-                "label": "Degree Description Image Alt Text",
+                "label": "Description Image Alt Text",
                 "name": "modern_description_image_alt",
                 "type": "text",
-                "instructions": "Enter content to be added to the Degree Description Section",
+                "instructions": "Alt text for the Description Image above.  Not required, but should be set if the Description Image is not purely decorative or contains text.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1760,7 +1224,7 @@
                 "label": "Highlights",
                 "name": "highlights",
                 "type": "repeater",
-                "instructions": "Enter content to be added to the Degree Description Highlights Section",
+                "instructions": "A list of selling points\/highlighted information about this program.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -1771,51 +1235,87 @@
                 "collapsed": "",
                 "min": 0,
                 "max": 0,
-                "layout": "table",
-                "button_label": "",
+                "layout": "block",
+                "button_label": "Add Highlight",
                 "sub_fields": [
                     {
-                        "key": "field_5e99e5fd73cc7",
+                        "key": "field_5fa1adbb0c966",
                         "label": "Highlight Image",
-                        "name": "highlight_image",
-                        "type": "image",
+                        "name": "highlight",
+                        "type": "group",
                         "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "50",
                             "class": "",
                             "id": ""
                         },
-                        "return_format": "url",
-                        "preview_size": "thumbnail",
-                        "library": "all",
-                        "min_width": "",
-                        "min_height": "",
-                        "min_size": "",
-                        "max_width": "",
-                        "max_height": "",
-                        "max_size": "",
-                        "mime_types": ""
+                        "layout": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5e99e5fd73cc7",
+                                "label": "Image",
+                                "name": "image",
+                                "type": "image",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "thumbnail",
+                                "library": "all",
+                                "min_width": "",
+                                "min_height": "",
+                                "min_size": "",
+                                "max_width": "",
+                                "max_height": "",
+                                "max_size": "",
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5fa1acf442552",
+                                "label": "Alt Text",
+                                "name": "image_alt_text",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "default_value": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "maxlength": ""
+                            }
+                        ]
                     },
                     {
                         "key": "field_5e99e61c73cc8",
                         "label": "Highlight Copy",
                         "name": "highlight_copy",
-                        "type": "text",
+                        "type": "textarea",
                         "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "50",
                             "class": "",
                             "id": ""
                         },
                         "default_value": "",
                         "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "rows": 6,
+                        "new_lines": ""
                     }
                 ]
             },
@@ -1836,11 +1336,33 @@
                 "endpoint": 0
             },
             {
+                "key": "field_5fa41b8492d13",
+                "label": "Alternate Section",
+                "name": "alternate_deadlines_section",
+                "type": "post_object",
+                "instructions": "Specify an alternate Section post to display in lieu of the standard Application Deadlines section on this degree's profile.  This value takes precedence over the Undergraduate\/Graduate Fallback Section values in the Customizer.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "ucf_section"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "id",
+                "ui": 1
+            },
+            {
                 "key": "field_5e9f44774068c",
-                "label": "Application Deadlines",
+                "label": "Deadlines",
                 "name": "application_deadlines",
                 "type": "repeater",
-                "instructions": "",
+                "instructions": "Specify a list of application deadlines to display on this degree's profile.  If provided, this list replaces the list of imported deadlines assigned to this degree.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2291,11 +1813,11 @@
                 "endpoint": 0
             },
             {
-                "key": "field_5e97183304f1e",
-                "label": "Skills Heading",
-                "name": "degree_skills_heading",
-                "type": "text",
-                "instructions": "Enter header to be added to the Skills Section",
+                "key": "field_5fa1cfcf9b6ac",
+                "label": "",
+                "name": "",
+                "type": "message",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2303,7 +1825,24 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
+                "message": "<em>Note: If the Skills List field below is left empty, only career opportunities will be displayed in this section on this degree's profile (as well as fallback copy defined in the Customizer.)<\/em>",
+                "new_lines": "wpautop",
+                "esc_html": 0
+            },
+            {
+                "key": "field_5e97183304f1e",
+                "label": "Skills Heading",
+                "name": "degree_skills_heading",
+                "type": "text",
+                "instructions": "Heading text to display above the degree's list of learnable skills.  If a value for this field isn't provided and skills are set below, this heading's text will be \"Skills You'll Learn\".",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Skills You'll Learn",
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
@@ -2314,7 +1853,7 @@
                 "label": "Skills List",
                 "name": "degree_skills_list",
                 "type": "repeater",
-                "instructions": "Enter content to be added to the Skills Section",
+                "instructions": "A list of learnable skills provided by this degree.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2326,7 +1865,7 @@
                 "min": 0,
                 "max": 0,
                 "layout": "row",
-                "button_label": "Add List Item",
+                "button_label": "Add Skill",
                 "sub_fields": [
                     {
                         "key": "field_5e9f4a7f42439",
@@ -2354,7 +1893,7 @@
                 "label": "Career Opportunites Heading",
                 "name": "degree_careers_heading",
                 "type": "text",
-                "instructions": "Enter header to be added to the Career Opportunities Section",
+                "instructions": "Heading text to display alongside the degree's list of potential careers.  If a value for this field isn't provided, this heading's text will be \"Career Opportunities\".",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2362,7 +1901,7 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
+                "default_value": "Career Opportunities",
                 "placeholder": "",
                 "prepend": "",
                 "append": "",
@@ -2370,10 +1909,10 @@
             },
             {
                 "key": "field_5e97180504f1d",
-                "label": "Career Opportunities List",
+                "label": "Career Opportunities",
                 "name": "degree_career_list",
                 "type": "repeater",
-                "instructions": "Enter items to be added to the Career Opportunities Section",
+                "instructions": "Specify a list of career opportunities to display on this degree's profile.  If provided, this list replaces the list of Career Path terms assigned to this degree.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2384,12 +1923,12 @@
                 "collapsed": "",
                 "min": 0,
                 "max": 0,
-                "layout": "block",
-                "button_label": "",
+                "layout": "row",
+                "button_label": "Add Career Path",
                 "sub_fields": [
                     {
                         "key": "field_5e9f4ec46e344",
-                        "label": "Career Opportunity",
+                        "label": "Career Path",
                         "name": "degree_career_list_item",
                         "type": "text",
                         "instructions": "",
@@ -2672,9 +2211,82 @@
         "location": [
             [
                 {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "!=",
+                    "value": "template-degree-custom.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "the_content"
+        ],
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_5f932570666c4",
+        "title": "Degree Fields - Custom Template",
+        "fields": [
+            {
+                "key": "field_5f93258d2ddac",
+                "label": "Enable Request Info Button\/Modal",
+                "name": "degree_custom_enable_rfi",
+                "type": "true_false",
+                "instructions": "If enabled, the 'Request Information' modal and button will be included on the degree profile. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have an imported Slate GUID.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5f9328062ddad",
+                "label": "Hide Colleges Grid",
+                "name": "degree_custom_hide_colleges_grid",
+                "type": "true_false",
+                "instructions": "Determines if the colleges grid is hidden from displaying above the footer.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                },
+                {
                     "param": "post_template",
                     "operator": "==",
-                    "value": "template-degree-modern.php"
+                    "value": "template-degree-custom.php"
                 }
             ]
         ],
@@ -2816,6 +2428,39 @@
                 "default_value": "title",
                 "layout": "vertical",
                 "return_format": "value"
+            },
+            {
+                "key": "field_5fa99e8d324cc",
+                "label": "Header Content Position",
+                "name": "page_header_content_position",
+                "type": "select",
+                "instructions": "Determines which side of the header the title and subtitle are aligned against.  Not applicable when a header background isn't set.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_59aed971c187c",
+                            "operator": "==",
+                            "value": "title_subtitle"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "left": "Left",
+                    "right": "Right"
+                },
+                "default_value": "left",
+                "allow_null": 0,
+                "multiple": 0,
+                "ui": 0,
+                "return_format": "value",
+                "ajax": 0,
+                "placeholder": ""
             },
             {
                 "key": "field_59aed93dc187b",
@@ -3134,7 +2779,7 @@
                     "bg-warning": "Orange (brand-warning)",
                     "bg-danger": "Red (brand-danger)"
                 },
-                "default_value": [],
+                "default_value": false,
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
@@ -3208,7 +2853,7 @@
                     "text-warning-aw": "Orange AW (brand-warning, against-white accessible)",
                     "text-danger-aw": "Red AW (brand-danger, against-white accessible)"
                 },
-                "default_value": [],
+                "default_value": false,
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
@@ -3317,6 +2962,577 @@
             ]
         ],
         "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_58fa427b4efb7",
+        "title": "Degree Data",
+        "fields": [
+            {
+                "key": "field_5adf83192113d",
+                "label": "Degree Data",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_58fa440d8a362",
+                "label": "Degree ID",
+                "name": "degree_id",
+                "type": "read_only",
+                "instructions": "A unique identifier for the degree.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5ae32d36ac658",
+                "label": "Search Service Degree ID",
+                "name": "degree_api_id",
+                "type": "read_only",
+                "instructions": "The ID assigned to the program in the UCF Search Service.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5ed01d99c33fb",
+                "label": "Graduate Slate ID",
+                "name": "graduate_slate_id",
+                "type": "read_only",
+                "instructions": "The GUID of this program in Graduate Studies' Slate instance. (Applies to graduate programs only)",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5adf859313850",
+                "label": "Plan Code",
+                "name": "degree_plan_code",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5adf85a813851",
+                "label": "Subplan Code",
+                "name": "degree_subplan_code",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5af0696eeb799",
+                "label": "Degree Short Name",
+                "name": "degree_name_short",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5af35d5e6475d",
+                "label": "Is Online",
+                "name": "degree_online",
+                "type": "read_only",
+                "instructions": "Whether or not the degree is an online program.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "boolean"
+            },
+            {
+                "key": "field_58fa433f8a35a",
+                "label": "Abbreviated Catalog Description",
+                "name": "degree_description",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5fb3ec1cb4ff6",
+                "label": "Full Catalog Description",
+                "name": "degree_description_full",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_58fa436d8a35c",
+                "label": "Catalog URL",
+                "name": "degree_pdf",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5931a83da2c0f",
+                "label": "Resident Tuition",
+                "name": "degree_resident_tuition",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5931a857a2c10",
+                "label": "Nonresident Tuition",
+                "name": "degree_nonresident_tuition",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df79878fc895",
+                "label": "Degree Outcome Data",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df107af52f9e",
+                "label": "Outcome Academic Year",
+                "name": "degree_outcome_academic_year",
+                "type": "read_only",
+                "instructions": "The academic year of the graduates represented in the outcome data to the right.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df107d052f9f",
+                "label": "Average Annual Earnings",
+                "name": "degree_avg_annual_earnings",
+                "type": "read_only",
+                "instructions": "The average annual earnings of graduates who are employed full time from the graduating class of the Outcome Academic Year",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df107ed52fa0",
+                "label": "Employed Full Time (%)",
+                "name": "degree_employed_full_time",
+                "type": "read_only",
+                "instructions": "The percentage of graduates from the Outcome Academic Year that were employed full time at the time of the NCES survey.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df107fe52fa1",
+                "label": "Continuing Education (%)",
+                "name": "degree_continuing_education",
+                "type": "read_only",
+                "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional education at the time of the NCES survey.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "25",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a7190443b",
+                "label": "Employment Projection Data",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5df29fdf4c2d8",
+                "label": "Report Year Start",
+                "name": "degree_prj_begin_year",
+                "type": "read_only",
+                "instructions": "The start year in the data projection.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0084c2d9",
+                "label": "Report Year End",
+                "name": "degree_prj_end_year",
+                "type": "read_only",
+                "instructions": "The end year in the data projection",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0484c2da",
+                "label": "Beginning Employment",
+                "name": "degree_prj_begin_employment",
+                "type": "read_only",
+                "instructions": "The estimated number of positions available for graduates with this degree in the start year of the report.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0724c2db",
+                "label": "Projected Employment",
+                "name": "degree_prj_end_employment",
+                "type": "read_only",
+                "instructions": "The projected number of positions for graduates with this degree by the end year of the report.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a0ca4c2dc",
+                "label": "Projected New Positions",
+                "name": "degree_prj_change",
+                "type": "read_only",
+                "instructions": "The projected change in the number of positions available between the start and end year.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a1024c2dd",
+                "label": "Projected New Positions Percentage",
+                "name": "degree_prj_change_percentage",
+                "type": "read_only",
+                "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5df2a12d4c2de",
+                "label": "Projected Openings",
+                "name": "degree_prj_openings",
+                "type": "read_only",
+                "instructions": "The projected number of openings for graduates with this degree within the report's timeframe.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_5eb457b4db29f",
+                "label": "Application Deadlines and Info",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_5eb45823db2a0",
+                "label": "Deadlines",
+                "name": "degree_application_deadlines",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5eb458b1db2a2",
+                        "label": "Deadline Type",
+                        "name": "deadline_type",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_5eb45884db2a1",
+                        "label": "Admission Term",
+                        "name": "admission_term",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_5eb458badb2a3",
+                        "label": "Deadline",
+                        "name": "deadline",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_5eb45904db2a4",
+                "label": "Application Requirements",
+                "name": "degree_application_requirements",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_5eb4591fdb2a5",
+                        "label": "Requirement",
+                        "name": "requirement",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "current_user_role",
+                    "operator": "==",
+                    "value": "super_admin"
+                },
+                {
+                    "param": "current_user_role",
+                    "operator": "==",
+                    "value": "administrator"
+                },
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                }
+            ]
+        ],
+        "menu_order": 1,
         "position": "normal",
         "style": "default",
         "label_placement": "top",
