@@ -1107,6 +1107,7 @@ function get_yoast_title_degree_program_type() {
 	}
 }
 
+
 /**
  * Registers the Yoast variable additions.
  * NOTE: The snippet preview in the backend will show the custom variable markup
