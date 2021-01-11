@@ -221,6 +221,39 @@ function get_header_content_custom( $obj ) {
 
 
 /**
+ * Returns per-breakpoint image assets for a header media background.
+ *
+ * @since TODO
+ * @author Jo Dickson
+ * @param object $obj Current post/term object
+ * @param array $images Header image data returned from `get_header_images()`
+ * @return array
+ */
+function get_header_media_picture_srcs( $obj, $images=array() ) {
+	$images        = $images ?: get_header_images( $obj );
+	$header_height = get_field( 'page_header_height', $obj ) ?: 'header-media-default';
+	$bg_image_srcs = array();
+
+	switch ( $header_height ) {
+		case 'header-media-fullscreen':
+			$bg_image_srcs   = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
+			$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
+
+			if ( isset( $bg_image_src_xs['xs'] ) ) {
+				$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
+			}
+
+			break;
+		default:
+			$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+			break;
+	}
+
+	return $bg_image_srcs;
+}
+
+
+/**
  * Returns the markup for page headers with media backgrounds.
  **/
 function get_header_media_markup( $obj, $videos, $images ) {
@@ -239,23 +272,8 @@ function get_header_media_markup( $obj, $videos, $images ) {
 			<div class="header-media-background media-background-container">
 				<?php
 				// Display the media background (video + picture)
-
 				if ( $images ) {
-					$bg_image_srcs = array();
-					switch ( $header_height ) {
-						case 'header-media-fullscreen':
-							$bg_image_srcs = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
-							$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
-
-							if ( isset( $bg_image_src_xs['xs'] ) ) {
-								$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
-							}
-
-							break;
-						default:
-							$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
-							break;
-					}
+					$bg_image_srcs = get_header_media_picture_srcs( $obj, $images );
 					echo get_media_background_picture( $bg_image_srcs );
 				}
 				if ( $videos ) {
@@ -359,4 +377,41 @@ function get_header_markup() {
 	}
 }
 
+
+/**
+ * Adds preloading for header media background image assets.
+ *
+ * @since TODO
+ * @author Jo Dickson
+ * @return void
+ */
+function add_header_img_preload() {
+	$obj  = get_queried_object();
+	$srcs = get_header_media_picture_srcs( $obj );
+
+	if ( $srcs ) {
 ?>
+	<?php if ( isset( $srcs['xl'] ) ) : ?>
+	<link rel="preload" as="image" href="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
+	<?php endif; ?>
+
+	<?php if ( isset( $srcs['lg'] ) ) : ?>
+	<link rel="preload" as="image" href="<?php echo $srcs['lg']; ?>" media="(min-width: 992px) and (max-width: 1199px)">
+	<?php endif; ?>
+
+	<?php if ( isset( $srcs['md'] ) ) : ?>
+	<link rel="preload" as="image" href="<?php echo $srcs['md']; ?>" media="(min-width: 768px) and (max-width: 991px)">
+	<?php endif; ?>
+
+	<?php if ( isset( $srcs['sm'] ) ) : ?>
+	<link rel="preload" as="image" href="<?php echo $srcs['sm']; ?>" media="(min-width: 576px) and (max-width: 767px)">
+	<?php endif; ?>
+
+	<?php if ( isset( $srcs['xs'] ) ) : ?>
+	<link rel="preload" as="image" href="<?php echo $srcs['xs']; ?>" media="(max-width: 575px)">
+	<?php endif; ?>
+<?php
+	}
+}
+
+add_action( 'wp_head', 'add_header_img_preload', 1 );
