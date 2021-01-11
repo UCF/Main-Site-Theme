@@ -25,7 +25,7 @@ function enqueue_frontend_assets() {
 	// Conditionally include the UCF Header
 	global $post;
 	if ( !$post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) {
-		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
+		wp_enqueue_script( 'ucf-header', 'https://universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
 
 	wp_enqueue_script( 'wp-a11y' );
@@ -63,13 +63,41 @@ function add_meta_tags() {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <?php wp_site_icon(); ?>
+
 <?php
 $gw_verify = get_theme_mod_or_default( 'gw_verify' );
 if ( $gw_verify ):
 ?>
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
 <?php endif; ?>
+
+<?php
+// Preload UCF Header assets
+global $post;
+if ( ! $post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) :
+?>
+<link rel="preload" href="https://universityheader.ucf.edu/bar/css/bar.css" as="style" crossorigin>
+<link rel="preload" href="https://universityheader.ucf.edu/bar/css/1200-breakpoint.css" as="style" crossorigin>
+<?php endif; ?>
+
+<?php
+// Preload cloud.typography key or most common fallback fonts
+if ( $fontkey = get_theme_mod_or_default( 'cloud_typography_key' ) ) :
+?>
+<link rel="preload" href="<?php echo $fontkey; ?>" as="style" crossorigin>
+<?php else: ?>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff" as="font" type="application/font-woff" crossorigin>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff" as="font" type="application/font-woff" crossorigin>
+<?php endif; ?>
+
+<?php // Preload Font Awesome ?>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="application/font-woff" crossorigin>
+
 <?php
 }
 
