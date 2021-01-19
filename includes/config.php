@@ -1081,6 +1081,49 @@ add_filter( 'wpseo_sitemap_exclude_empty_terms', 'yoast_sitemap_empty_terms', 10
 
 
 /**
+ * Returns a degree's program type formatted to be used
+ * as a custom variable in Yoast titles and descriptions.
+ *
+ * @since v3.8.2
+ * @author Cadie Stockman
+ * @return string program type title
+ */
+function get_yoast_title_degree_program_type() {
+	global $post;
+	if ( ! $post || $post->post_type !== 'degree' ) return;
+
+	$program_type = get_degree_program_type( $post );
+
+	switch ( $program_type->name ) {
+		case 'Master':
+			return 'Master\'s Degree';
+			break;
+		case 'Bachelor':
+			return 'Bachelor\'s Degree';
+			break;
+		default:
+			return $program_type->name;
+			break;
+	}
+}
+
+
+/**
+ * Registers the Yoast variable additions.
+ * NOTE: The snippet preview in the backend will show the custom variable markup
+ * (i.e. '%%program_type%%') but the variable's output will be utilized on the front-end.
+ *
+ * @since v3.8.2
+ * @author Cadie Stockman
+ */
+function yoast_register_variables() {
+    wpseo_register_var_replacement( '%%program_type%%', 'get_yoast_title_degree_program_type', 'advanced', 'Provides a program_type string for usage in degree titles.' );
+}
+
+add_action( 'wpseo_register_extra_replacements', 'yoast_register_variables' );
+
+
+/**
  * Ensures that only published degrees are available to
  * select from when picking existing degrees for Colleges'
  * "Top Degrees" lists.
