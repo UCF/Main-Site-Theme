@@ -72,6 +72,19 @@ if ( $gw_verify ):
 ?>
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
 <?php endif; ?>
+
+<?php
+// Preload UCF Header assets
+global $post;
+if ( ! $post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) :
+?>
+<link rel="preload" href="https://universityheader.ucf.edu/bar/css/bar.css" as="style" crossorigin>
+<link rel="preload" href="https://universityheader.ucf.edu/bar/css/1200-breakpoint.css" as="style" crossorigin>
+<?php endif; ?>
+
+<?php // Preload Font Awesome ?>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
+
 <?php
 }
 
