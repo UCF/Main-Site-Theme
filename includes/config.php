@@ -10,6 +10,8 @@ define( 'THEME_CSS_URL', THEME_STATIC_URL . '/css' );
 define( 'THEME_CSS_DIR', THEME_STATIC_DIR . '/css' );
 define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
 define( 'THEME_JS_DIR', THEME_STATIC_DIR . '/js' );
+define( 'THEME_FONT_URL', THEME_STATIC_URL . '/fonts' );
+define( 'THEME_FA_VERSION', '4.7.0' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
@@ -1106,6 +1108,7 @@ function get_yoast_title_degree_program_type() {
 			break;
 	}
 }
+
 
 /**
  * Registers the Yoast variable additions.
