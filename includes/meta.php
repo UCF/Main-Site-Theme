@@ -38,9 +38,9 @@ function enqueue_frontend_assets() {
 		'domain' => $site_url['host']
 	) );
 
-	// De-queue Gutenberg block styles when the Classic Editor plugin
-	// is active and users are not given the option to utilize the block
-	// editor at all.
+	// De-queue Gutenberg block styles and scripts when the Classic Editor
+	// plugin is active and users are not given the option to utilize the
+	// block editor at all.
 	$editor_choice = get_network_option( null, 'classic-editor-replace', get_option( 'classic-editor-replace' ) );
 	$allow_user_editor_choice = get_option( 'classic-editor-allow-users' );
 	if (
@@ -49,6 +49,8 @@ function enqueue_frontend_assets() {
 		&& $allow_user_editor_choice !== 'allow'
 	) {
 		wp_deregister_style( 'wp-block-library' );
+		wp_deregister_script( 'wp-polyfill' );
+		wp_deregister_script( 'wp-dom-ready' );
 	}
 }
 
@@ -70,6 +72,10 @@ if ( $gw_verify ):
 ?>
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
 <?php endif; ?>
+
+<?php // Preload Font Awesome ?>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
+
 <?php
 }
 
