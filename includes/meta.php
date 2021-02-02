@@ -49,8 +49,6 @@ function enqueue_frontend_assets() {
 		&& $allow_user_editor_choice !== 'allow'
 	) {
 		wp_deregister_style( 'wp-block-library' );
-		wp_deregister_script( 'wp-polyfill' );
-		wp_deregister_script( 'wp-dom-ready' );
 	}
 }
 
