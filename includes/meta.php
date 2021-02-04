@@ -252,11 +252,15 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
  * @return string The modified link tag
  */
 function async_enqueued_styles( $html, $handle, $href, $media ) {
-	$exclude = array_filter( array_map( 'trim', explode( ',', get_theme_mod( 'async_css_exclude' ) ) ) );
-	if ( ! in_array( $handle, $exclude ) && $media !== 'print' ) {
-		$media_replaced = str_replace( 'media=\'' . $media . '\'', 'media=\'print\' onload=\'this.media="' . $media . '"\'', $html );
-		$html = $media_replaced . '<noscript>' . $html . '</noscript>';
+	$critical_css = get_theme_mod( 'critical_css' );
+	if ( $critical_css ) {
+		$exclude = array_filter( array_map( 'trim', explode( ',', get_theme_mod( 'async_css_exclude' ) ) ) );
+		if ( ! in_array( $handle, $exclude ) && $media !== 'print' ) {
+			$media_replaced = str_replace( 'media=\'' . $media . '\'', 'media=\'print\' onload=\'this.media="' . $media . '"\'', $html );
+			$html = $media_replaced . '<noscript>' . $html . '</noscript>';
+		}
 	}
+
 	return $html;
 }
 
