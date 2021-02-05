@@ -82,6 +82,14 @@ if ( $critical_css ) :
 <link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
 
 <?php
+// Preload Cloud.Typography
+$cloud_typography_key = get_theme_mod_or_default( 'cloud_typography_key' );
+if ( $cloud_typography_key ) :
+?>
+<link rel="preload" href="<?php echo $cloud_typography_key; ?>" as="style">
+<?php
+endif;
+
 }
 
 add_action( 'wp_head', 'add_meta_tags', 1 );
