@@ -14,7 +14,7 @@ function enqueue_frontend_assets() {
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css', null, $theme_version );
 
 	if ( $fontkey = get_theme_mod_or_default( 'cloud_typography_key' ) ) {
-		wp_enqueue_style( 'webfont', $fontkey );
+		wp_enqueue_style( 'webfont', $fontkey, null, null );
 	}
 
 	// Deregister jquery and re-register newer version in the document head.
