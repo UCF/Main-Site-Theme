@@ -72,7 +72,7 @@ if ( $gw_verify ):
 
 <?php
 // Inline critical CSS
-$critical_css = get_theme_mod( 'critical_css' );
+$critical_css = get_critical_css();
 if ( $critical_css ) :
 ?>
 <style><?php echo $critical_css; ?></style>
@@ -249,6 +249,24 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
 
 
 /**
+ * Returns critical CSS to utilize for the provided object.
+ *
+ * @since TODO
+ * @author Jo Dickson
+ * @param object $obj WordPress post or term object
+ * @return string
+ */
+function get_critical_css( $obj=null ) {
+	if ( ! $obj ) {
+		$obj = get_queried_object();
+	}
+	if ( ! $obj ) return '';
+
+	return get_field( 'critical_css', $obj );
+}
+
+
+/**
  * Updates enqueued stylesheets to load asynchronously.
  *
  * @since TODO
@@ -260,7 +278,7 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
  * @return string The modified link tag
  */
 function async_enqueued_styles( $html, $handle, $href, $media ) {
-	$critical_css = get_theme_mod( 'critical_css' );
+	$critical_css = get_critical_css();
 	if ( $critical_css ) {
 		$exclude = array_filter( array_map( 'trim', explode( ',', get_theme_mod( 'async_css_exclude' ) ) ) );
 		if ( ! in_array( $handle, $exclude ) && $media !== 'print' ) {

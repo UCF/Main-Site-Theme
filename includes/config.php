@@ -751,20 +751,6 @@ function define_customizer_fields( $wp_customize ) {
 
 	// Performance Settings
 	$wp_customize->add_setting(
-		'critical_css'
-	);
-
-	$wp_customize->add_control(
-		'critical_css',
-		array(
-			'type'        => 'textarea',
-			'label'       => 'Critical CSS',
-			'description' => 'Paste in minified critical CSS that should be inlined on each page. If provided, enqueues styles will also be asynchronously loaded.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
-		)
-	);
-
-	$wp_customize->add_setting(
 		'async_css_exclude'
 	);
 
