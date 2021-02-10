@@ -249,6 +249,25 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
 
 
 /**
+ * Appends additional URLs to WP's list of domains to generate
+ * <link rel="dns-prefetch"> tags for.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ */
+function add_dns_prefetch_domains( $urls, $relation_type ) {
+	$new_urls = get_theme_mod( 'dns_prefetch_domains' );
+	if ( $new_urls && $relation_type === 'dns-prefetch' ) {
+		$new_urls = array_unique( array_filter( array_map( 'trim', explode( ',', $new_urls ) ) ) );
+		$urls = array_merge( $urls, $new_urls );
+	}
+	return $urls;
+}
+
+add_filter( 'wp_resource_hints', 'add_dns_prefetch_domains', 10, 2 );
+
+
+/**
  * Returns critical CSS to utilize for the provided object.
  *
  * @since 3.8.5
@@ -291,22 +310,3 @@ function async_enqueued_styles( $html, $handle, $href, $media ) {
 }
 
 add_action( 'style_loader_tag', 'async_enqueued_styles', 99, 4 );
-
-
-/**
- * Appends additional URLs to WP's list of domains to generate
- * <link rel="dns-prefetch"> tags for.
- *
- * @since TODO
- * @author Jo Dickson
- */
-function add_dns_prefetch_domains( $urls, $relation_type ) {
-	$new_urls = get_theme_mod( 'dns_prefetch_domains' );
-	if ( $new_urls && $relation_type === 'dns-prefetch' ) {
-		$new_urls = array_unique( array_filter( array_map( 'trim', explode( ',', $new_urls ) ) ) );
-		$urls = array_merge( $urls, $new_urls );
-	}
-	return $urls;
-}
-
-add_filter( 'wp_resource_hints', 'add_dns_prefetch_domains', 10, 2 );
