@@ -195,8 +195,16 @@ gulp.task('js-build-theme', () => {
   return buildJS(`${config.src.jsPath}/script.js`, config.dist.jsPath);
 });
 
+gulp.task('js-build-degree-page', () => {
+  return buildJS(`${config.src.jsPath}/degree-page.js`, config.dist.jsPath);
+});
+
+gulp.task('js-build-degree-search-typeahead', () => {
+  return buildJS(`${config.src.jsPath}/degree-search-typeahead.js`, config.dist.jsPath);
+});
+
 // All js-related tasks
-gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme'));
+gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme', 'js-build-degree-page', 'js-build-degree-search-typeahead'));
 
 
 //

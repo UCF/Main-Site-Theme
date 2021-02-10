@@ -8,6 +8,7 @@
  * Enqueue front-end css and js.
  **/
 function enqueue_frontend_assets() {
+	global $post;
 	$theme = wp_get_theme();
 	$theme_version = $theme->get( 'Version' );
 
@@ -23,7 +24,6 @@ function enqueue_frontend_assets() {
 	wp_enqueue_script( 'jquery' );
 
 	// Conditionally include the UCF Header
-	global $post;
 	if ( !$post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) {
 		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
@@ -36,6 +36,15 @@ function enqueue_frontend_assets() {
 	wp_localize_script( 'script', 'UCFEDU', array(
 		'domain' => $site_url['host']
 	) );
+
+	// Register this theme's custom degree search typeahead logic.
+	// Will be enqueued late via `enqueue_degree_search_typeahead`.
+	wp_register_script( 'mainsite-degree-search-typeahead', THEME_JS_URL . '/degree-search-typeahead.min.js', array( 'jquery', 'ucf-degree-search-js' ), $theme_version, true );
+
+	// Enqueue script specific to degree profiles
+	if ( $post && $post->post_type === 'degree' ) {
+		wp_enqueue_script( 'mainsite-degree-page', THEME_JS_URL . '/degree-page.min.js', array( 'jquery' ), $theme_version, true );
+	}
 
 	// De-queue Gutenberg block styles and scripts when the Classic Editor
 	// plugin is active and users are not given the option to utilize the
@@ -52,6 +61,22 @@ function enqueue_frontend_assets() {
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
+
+
+/**
+ * Registers an action that enqueues this theme's custom
+ * degree search typeahead logic when the Degree Search Plugin's
+ * late JS enqueueing takes effect.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @return void
+ */
+function enqueue_degree_search_typeahead() {
+	wp_enqueue_script( 'mainsite-degree-search-typeahead' );
+}
+
+add_action( 'ucf_degree_search_enqueue_scripts_after', 'enqueue_degree_search_typeahead' );
 
 
 /**
