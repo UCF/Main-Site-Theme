@@ -14,7 +14,7 @@ function enqueue_frontend_assets() {
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css', null, $theme_version );
 
 	if ( $fontkey = get_theme_mod_or_default( 'cloud_typography_key' ) ) {
-		wp_enqueue_style( 'webfont', $fontkey );
+		wp_enqueue_style( 'webfont', $fontkey, null, null );
 	}
 
 	// Deregister jquery and re-register newer version in the document head.
@@ -70,10 +70,26 @@ if ( $gw_verify ):
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
 <?php endif; ?>
 
+<?php
+// Inline critical CSS
+$critical_css = get_critical_css();
+if ( $critical_css ) :
+?>
+<style><?php echo $critical_css; ?></style>
+<?php endif; ?>
+
 <?php // Preload Font Awesome ?>
 <link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
 
 <?php
+// Preload Cloud.Typography
+$cloud_typography_key = get_theme_mod_or_default( 'cloud_typography_key' );
+if ( $cloud_typography_key ) :
+?>
+<link rel="preload" href="<?php echo $cloud_typography_key; ?>" as="style">
+<?php
+endif;
+
 }
 
 add_action( 'wp_head', 'add_meta_tags', 1 );
@@ -230,3 +246,48 @@ function maybe_disable_ucf_footer() {
 }
 
 add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
+
+
+/**
+ * Returns critical CSS to utilize for the provided object.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @param object $obj WordPress post or term object
+ * @return string
+ */
+function get_critical_css( $obj=null ) {
+	if ( ! $obj ) {
+		$obj = get_queried_object();
+	}
+	if ( ! $obj ) return '';
+
+	return get_field( 'critical_css', $obj );
+}
+
+
+/**
+ * Updates enqueued stylesheets to load asynchronously.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @param string $html The link tag for the enqueued style.
+ * @param string $handle The style's registered handle.
+ * @param string $href The stylesheet's source URL.
+ * @param string $media The stylesheet's media attribute.
+ * @return string The modified link tag
+ */
+function async_enqueued_styles( $html, $handle, $href, $media ) {
+	$critical_css = get_critical_css();
+	if ( $critical_css ) {
+		$exclude = array_filter( array_map( 'trim', explode( ',', get_theme_mod( 'async_css_exclude' ) ) ) );
+		if ( ! in_array( $handle, $exclude ) && $media !== 'print' ) {
+			$media_replaced = str_replace( 'media=\'' . $media . '\'', 'media=\'print\' onload=\'this.media="' . $media . '"\'', $html );
+			$html = $media_replaced . '<noscript>' . $html . '</noscript>';
+		}
+	}
+
+	return $html;
+}
+
+add_action( 'style_loader_tag', 'async_enqueued_styles', 99, 4 );

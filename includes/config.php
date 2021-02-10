@@ -134,6 +134,13 @@ function define_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'performance',
+		array(
+			'title' => 'Performance'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'location',
 		array(
 			'title' => 'Location'
@@ -739,6 +746,21 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Chartbeat Domain',
 			'description' => 'Example: <em>some.domain.com</em>',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	// Performance Settings
+	$wp_customize->add_setting(
+		'async_css_exclude'
+	);
+
+	$wp_customize->add_control(
+		'async_css_exclude',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Exclude Stylesheets',
+			'description' => 'Specify a comma-separated list of stylesheet handles that should not be loaded asynchronously when critical CSS is in use.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
 		)
 	);
 
