@@ -251,7 +251,7 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
 /**
  * Returns critical CSS to utilize for the provided object.
  *
- * @since TODO
+ * @since 3.8.5
  * @author Jo Dickson
  * @param object $obj WordPress post or term object
  * @return string
@@ -269,7 +269,7 @@ function get_critical_css( $obj=null ) {
 /**
  * Updates enqueued stylesheets to load asynchronously.
  *
- * @since TODO
+ * @since 3.8.5
  * @author Jo Dickson
  * @param string $html The link tag for the enqueued style.
  * @param string $handle The style's registered handle.
