@@ -749,6 +749,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Performance Settings
 	$wp_customize->add_setting(
 		'dns_prefetch_domains',
 	);
@@ -759,6 +760,20 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'textarea',
 			'label'       => 'Additional Required Origins for DNS Prefetching',
 			'description' => 'Specify a comma-separated list of domains to third-party origins that should be prefetched using <code>&lt;link rel="dns-prefetch"&gt;</code> that WordPress doesn\'t already handle out-of-the-box.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'async_css_exclude'
+	);
+
+	$wp_customize->add_control(
+		'async_css_exclude',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Exclude Stylesheets',
+			'description' => 'Specify a comma-separated list of stylesheet handles that should not be loaded asynchronously when critical CSS is in use.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
 		)
 	);
