@@ -10,8 +10,6 @@
 // Import our assets
 //
 
-// =require media-background-video.js
-// =require media-background-lazyload.js
-// =require degree-search-typeahead.js
-// =require count-up.js
-// =require degree-page.js
+// =require script/media-background-video.js
+// =require script/media-background-lazyload.js
+// =require script/count-up.js
