@@ -1295,3 +1295,72 @@ function degree_admin_set_columns( $column_name, $post_id ) {
 
 add_action( 'manage_degree_posts_custom_column' , 'degree_admin_set_columns', 10, 2 );
 
+
+/**
+ * Defines custom bulk actions for degrees.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @param array $bulk_actions Existing array of bulk action keys/names
+ * @return array Modified $bulk_actions
+ */
+function degree_admin_define_bulk_actions( $bulk_actions ) {
+	$bulk_actions['enable-rfi'] = 'Enable RFI Form';
+	$bulk_actions['disable-rfi'] = 'Disable RFI Form';
+
+	return $bulk_actions;
+}
+
+add_filter( 'bulk_actions-edit-degree', 'degree_admin_define_bulk_actions', 10, 1 );
+
+
+/**
+ * Defines behavior for custom degree bulk actions.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @param string $redirect_url The redirect URL when bulk action completes
+ * @param string $action The action name being taken
+ * @param array $post_ids Array of degree IDs to take the action on
+ * @return string Redirect URL
+ */
+function degree_admin_set_bulk_actions( $redirect_url, $action, $post_ids ) {
+	if ( in_array( $action, array( 'enable-rfi', 'disable-rfi' ) ) ) {
+		$updated_value = ( $action === 'enable-rfi' );
+		$query_arg     = ( $action === 'enable-rfi' ) ? 'rfi-enabled' : 'rfi-disabled';
+
+		foreach ( $post_ids as $post_id ) {
+			// `degree_custom_enable_rfi` field key
+			update_field( 'field_5fad570953063', $updated_value, $post_id );
+		}
+
+		// Remove existing query args from previous requests
+		$redirect_url = remove_query_arg( 'rfi-disabled', remove_query_arg( 'rfi-enabled', $redirect_url ) );
+
+		$redirect_url = add_query_arg( $query_arg, count( $post_ids ), $redirect_url );
+	}
+
+	return $redirect_url;
+}
+
+add_filter( 'handle_bulk_actions-edit-degree', 'degree_admin_set_bulk_actions', 10, 3 );
+
+
+/**
+ * Defines admin notices for degree-related actions.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @return void
+ */
+function degree_admin_notices() {
+	if ( ! empty( $_REQUEST['rfi-enabled'] ) ) {
+		$num_changed = (int) $_REQUEST['rfi-enabled'];
+		printf( '<div id="message" class="updated notice is-dismissable"><p>' . __( 'Enabled RFI forms on %d degrees.', 'txtdomain' ) . '</p></div>', $num_changed );
+	} else if ( ! empty( $_REQUEST['rfi-disabled'] ) ) {
+		$num_changed = (int) $_REQUEST['rfi-disabled'];
+		printf( '<div id="message" class="updated notice is-dismissable"><p>' . __( 'Disabled RFI forms on %d degrees.', 'txtdomain' ) . '</p></div>', $num_changed );
+	}
+}
+
+add_action( 'admin_notices', 'degree_admin_notices' );
