@@ -279,6 +279,7 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
  *
  * @since 3.8.5
  * @author Jo Dickson
+ * @return array
  */
 function add_dns_prefetch_domains( $urls, $relation_type ) {
 	$new_urls = get_theme_mod( 'dns_prefetch_domains' );
