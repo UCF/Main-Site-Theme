@@ -68,7 +68,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
  * degree search typeahead logic when the Degree Search Plugin's
  * late JS enqueueing takes effect.
  *
- * @since 3.8.5
+ * @since 3.8.6
  * @author Jo Dickson
  * @return void
  */
@@ -277,7 +277,7 @@ add_action( 'wp_enqueue_scripts', 'maybe_disable_ucf_footer' );
  * Appends additional URLs to WP's list of domains to generate
  * <link rel="dns-prefetch"> tags for.
  *
- * @since 3.8.5
+ * @since 3.8.6
  * @author Jo Dickson
  * @return array
  */
@@ -296,7 +296,7 @@ add_filter( 'wp_resource_hints', 'add_dns_prefetch_domains', 10, 2 );
 /**
  * Returns critical CSS to utilize for the provided object.
  *
- * @since 3.8.5
+ * @since 3.8.6
  * @author Jo Dickson
  * @param object $obj WordPress post or term object
  * @return string
@@ -314,7 +314,7 @@ function get_critical_css( $obj=null ) {
 /**
  * Updates enqueued stylesheets to load asynchronously.
  *
- * @since 3.8.5
+ * @since 3.8.6
  * @author Jo Dickson
  * @param string $html The link tag for the enqueued style.
  * @param string $handle The style's registered handle.
