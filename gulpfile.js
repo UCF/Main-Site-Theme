@@ -231,8 +231,7 @@ gulp.task('critical-css', (done) => {
       minify: true,
       extract: false,
       ignore: {
-        atrule: ['@font-face'],
-        decl: (node, value) => /url\(/.test(value)
+        atrule: ['@font-face']
       }
     };
 
