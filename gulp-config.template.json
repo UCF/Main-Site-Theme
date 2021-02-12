@@ -1,4 +1,16 @@
 {
   "sync": false,
-  "syncTarget": "http://localhost/wordpress/main-site/"
+  "syncTarget": "http://localhost/wordpress/main-site/",
+  "criticalCSS": {
+    "sources": [
+      {
+        "name": "home",
+        "url": "https://www.ucf.edu/",
+        "ignoreStylesheets": [
+          "//cloud.typography.com/"
+        ],
+        "args": {}
+      }
+    ]
+  }
 }
