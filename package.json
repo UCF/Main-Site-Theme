@@ -7,6 +7,8 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
     "browser-sync": "^2.26.14",
+    "cheerio": "^1.0.0-rc.5",
+    "critical": "^2.0.6",
     "eslint": "^7.19.0",
     "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
     "gulp": "^4.0.2",
@@ -24,6 +26,7 @@
     "gulp-uglify": "^3.0.2",
     "js-cookie": "^2.2.1",
     "merge": "^2.1.0",
+    "node-fetch": "^2.6.1",
     "ucf-athena-framework": "^1.0.8"
   },
   "browserslist": [

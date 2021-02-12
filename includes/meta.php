@@ -100,7 +100,7 @@ if ( $gw_verify ):
 $critical_css = get_critical_css();
 if ( $critical_css ) :
 ?>
-<style><?php echo $critical_css; ?></style>
+<style id="critical-css"><?php echo $critical_css; ?></style>
 <?php endif; ?>
 
 <?php // Preload Font Awesome ?>
