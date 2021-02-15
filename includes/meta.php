@@ -96,25 +96,24 @@ if ( $gw_verify ):
 <?php endif; ?>
 
 <?php
-// Inline critical CSS
-$critical_css = get_critical_css();
-if ( $critical_css ) :
+// Preload Cloud.Typography
+$cloud_typography_key = get_theme_mod_or_default( 'cloud_typography_key' );
+if ( $cloud_typography_key ) :
 ?>
-<style id="critical-css"><?php echo $critical_css; ?></style>
+<link rel="preload" href="<?php echo $cloud_typography_key; ?>" as="style">
 <?php endif; ?>
 
 <?php // Preload Font Awesome ?>
 <link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
 
 <?php
-// Preload Cloud.Typography
-$cloud_typography_key = get_theme_mod_or_default( 'cloud_typography_key' );
-if ( $cloud_typography_key ) :
+// Inline critical CSS
+$critical_css = get_critical_css();
+if ( $critical_css ) :
 ?>
-<link rel="preload" href="<?php echo $cloud_typography_key; ?>" as="style">
+<style id="critical-css"><?php echo $critical_css; ?></style>
 <?php
 endif;
-
 }
 
 add_action( 'wp_head', 'add_meta_tags', 1 );
