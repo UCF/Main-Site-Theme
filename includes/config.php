@@ -32,7 +32,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'location_fallback_image'           => '',
 	'chartbeat_uid'                     => '2806',
 	'chartbeat_domain'                  => 'ucf.edu',
-	'search_service_url'                => 'https://search.smca.ucf.edu/service.php'
+	'search_service_url'                => 'https://search.smca.ucf.edu/service.php',
+	'statements_page_path'              => 'statements'
 ) ) );
 
 function __init__() {
@@ -116,6 +117,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'phonebook',
 		array(
 			'title' => 'Phonebook'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'statements',
+		array(
+			'title' => 'Statements Archive'
 		)
 	);
 
@@ -656,6 +664,38 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Search Service URL',
 			'description' => 'The base url of the UCF Search service.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'phonebook'
+		)
+	);
+
+	// Phonebook
+	$wp_customize->add_setting(
+		'statements_page_path',
+		array(
+			'default' => get_theme_mod_default( 'statements_page_path' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'statements_page_path',
+		array(
+			'type'        => 'text',
+			'label'       => 'Statements Page Path',
+			'description' => 'Relative path from the main site root that the Statements page lives at.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'statements_archive_endpoint'
+	);
+
+	$wp_customize->add_control(
+		'statements_archive_endpoint',
+		array(
+			'type'        => 'text',
+			'label'       => 'Statements Archive API Endpoint',
+			'description' => 'URL to the API endpoint that lists Statement data by year and author.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
 		)
 	);
 
