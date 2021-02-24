@@ -170,14 +170,75 @@ function get_statement_archive_data() {
 
 
 /**
+ * Returns an array of statements, filtered by year/author
+ * if query params are set.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @param array $archive_data Archive data from get_statement_archive_data()
+ * @return array
+ */
+function get_statement_data( $archive_data ) {
+	if ( ! $archive_data ) return array();
+
+	$endpoint = $archive_data->all->endpoint ?? '';
+	$q_year   = intval( get_query_var( 'by-year' ) );
+	$q_author = get_query_var( 'tu_author' );
+
+	if ( $q_year ) {
+		foreach ( $archive_data->years as $year ) {
+			if ( $q_year === $year->year ) {
+				$endpoint = $year->endpoint;
+				break;
+			}
+		}
+	} else if ( $q_author ) {
+		foreach ( $archive_data->authors as $author ) {
+			if ( $q_author === $author->slug ) {
+				$endpoint = $author->endpoint;
+				break;
+			}
+		}
+	}
+
+	// If we still don't have a valid endpoint by now,
+	// back out:
+	if ( ! $endpoint ) return array();
+
+	// TODO utilize transients
+	return main_site_get_remote_response_json( $endpoint, array() );
+}
+
+
+/**
  * Returns markup for a list of statements. TODO
  *
  * @since 3.9.0
  * @author Jo Dickson
+ * @param array $archive_data Archive data from get_statement_archive_data()
  * @return string
  */
 function get_statements( $archive_data ) {
-	return '';
+	if ( ! $archive_data ) return '';
+
+	$statements = get_statement_data( $archive_data );
+	ob_start();
+?>
+	<?php if ( $statements ) : ?>
+	<ul>
+		<?php foreach ( $statements as $statement ) : ?>
+		<li>
+			<a href="<?php echo $statement->link; ?>">
+				<?php echo $statement->title->rendered; ?>
+			</a>
+		</li>
+		<?php endforeach; ?>
+	</ul>
+	<?php else : ?>
+	<p>No statements found.</p>
+	<?php endif; ?>
+<?php
+	return trim( ob_get_clean() );
 }
 
 
@@ -187,6 +248,7 @@ function get_statements( $archive_data ) {
  *
  * @since 3.9.0
  * @author Jo Dickson
+ * @param array $archive_data Archive data from get_statement_archive_data()
  * @return string
  */
 function get_statement_filters( $archive_data ) {
