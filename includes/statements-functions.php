@@ -234,5 +234,5 @@ function get_statement_filters( $archive_data ) {
 	</div>
 	<?php endif; ?>
 <?php
-	return ob_get_clean();
+	return trim( ob_get_clean() );
 }
