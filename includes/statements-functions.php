@@ -18,12 +18,12 @@ function register_statement_rewrite_rules() {
 	$statements_pg = get_page_by_path( $statements_pg_path );
 	if ( $statements_pg ) {
 		add_rewrite_rule(
-			'^' . $statements_pg_path . '/year/([0-9]{4})(/page/\d+)?[/]?$',
+			'^' . $statements_pg_path . '/year/([0-9]{4})(/page/(\d+))?[/]?$',
 			'index.php?page_id=' . $statements_pg->ID . '&by-year=$matches[1]&paged=$matches[3]',
 			'top'
 		);
 		add_rewrite_rule(
-			'^' . $statements_pg_path . '/author/([a-z0-9_-]+)(/page/\d+)?[/]?$',
+			'^' . $statements_pg_path . '/author/([a-z0-9_-]+)(/page/(\d+))?[/]?$',
 			'index.php?page_id=' . $statements_pg->ID . '&tu_author=$matches[1]&paged=$matches[3]',
 			'top'
 		);
@@ -65,16 +65,19 @@ function statement_redirects() {
 	$statements_pg = get_page_by_path( $statements_pg_path );
 	if ( $statements_pg && is_page( $statements_pg->ID ) ) {
 		$should_redirect = false;
-		$year            = get_query_var( 'by-year' );
+		$year            = intval( get_query_var( 'year' ) );
 		$author          = get_query_var( 'tu_author' );
 
 		// Redirect requests for /{statements_pg_path}/author/,
 		// /{statements_pg_path}/year/, and .../page/X/
 		// with bogus/invalid values
-		// TODO handle bogus pagination
+		//
+		// TODO can pagination validation be done in a way
+		// that doesn't require multiple requests out? :/
 		if (
 			( $year && ! statement_year_is_valid( $year ) )
 			|| ( $author && ! statement_author_is_valid( $author ) )
+			|| ! statement_query_pagination_is_valid()
 		) {
 			$should_redirect = true;
 		}
@@ -128,6 +131,36 @@ function statement_author_is_valid( $author ) {
 	if ( ! $author ) return false;
 
 	return get_statement_author_data( $author ) ? true : false;
+}
+
+
+/**
+ * Returns whether or not query vars set on the current request
+ * result in valid pagination.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return bool
+ */
+function statement_query_pagination_is_valid() {
+	$endpoint = get_queried_statements_endpoint();
+	if ( ! $endpoint ) return false;
+
+	$response_headers = wp_get_http_headers( $endpoint );
+	if ( ! $response_headers ) return false;
+
+	$current_page = get_statements_current_page();
+	if (
+		! isset( $response_headers['x-wp-totalpages'] )
+		|| (
+			isset( $response_headers['x-wp-totalpages'] )
+			&& $current_page > intval( $response_headers['x-wp-totalpages'] )
+		)
+	) {
+		return false;
+	}
+
+	return true;
 }
 
 
@@ -207,17 +240,19 @@ function get_statement_author_data( $author ) {
 
 
 /**
- * Returns an array of request data for the statements endpoint on Today,
- * filtered by year/author if query params are set.
+ * Returns the URL to the endpoint that provides statement data
+ * for the query params passed to this request.
  *
  * @since 3.9.0
  * @author Jo Dickson
- * @return array
+ * @return string
  */
-function get_statements() {
+function get_queried_statements_endpoint() {
 	$endpoint = '';
 	$q_year   = intval( get_query_var( 'by-year' ) );
 	$q_author = get_query_var( 'tu_author' );
+	$q_page   = get_statements_current_page();
+	$per_page = intval( get_theme_mod_or_default( 'statements_per_page' ) );
 
 	if ( $q_year ) {
 		$year_data = get_statement_year_data( $q_year );
@@ -238,8 +273,38 @@ function get_statements() {
 	// back out:
 	if ( ! $endpoint ) return null;
 
-	// TODO implement per_page
-	// TODO pagination
+	// Add per_page param
+	if ( $per_page ) {
+		$endpoint = add_query_arg(
+			'per_page',
+			$per_page,
+			$endpoint
+		);
+	}
+
+	// Add page param
+	if ( $q_page ) {
+		$endpoint = add_query_arg(
+			'page',
+			$q_page,
+			$endpoint
+		);
+	}
+
+	return $endpoint;
+}
+
+
+/**
+ * Returns an array of request data for the statements endpoint on Today,
+ * filtered by year/author if query params are set.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return mixed Array of response data, or null on failure
+ */
+function get_statements_response() {
+	$endpoint = get_queried_statements_endpoint();
 
 	// Give this request a little extra time to return back
 	return main_site_get_remote_response( $endpoint, 10 );
@@ -249,25 +314,15 @@ function get_statements() {
 /**
  * Returns markup for a list of statements.
  * TODO styling
- * TODO pagination
  *
  * @since 3.9.0
  * @author Jo Dickson
+ * @param array $statements_response Response data from get_statements_response()
  * @return string
  */
-function get_statements_list() {
-	$statements_response = get_statements();
+function get_statements_list( $statements_response ) {
+	$statements_response = $statements_response ?: get_statements_response();
 	$statements          = main_site_get_remote_response_json( $statements_response, null );
-	$statements_total    = 0;
-	$statements_pages    = 1;
-
-	if ( $statements ) {
-		$statements_total = intval( $statements_response['headers']['x-wp-total'] );
-		$statements_pages = intval( $statements_response['headers']['x-wp-totalpages'] );
-	}
-
-	// var_dump($statements_total);
-	// var_dump($statements_pages);
 
 	ob_start();
 ?>
@@ -397,6 +452,59 @@ function get_statement_details( $unfiltered_fallback='' ) {
 
 
 /**
+ * Returns markup for statement pagination.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return string
+ */
+function get_statement_pagination( $statements_response ) {
+	$statements_response = $statements_response ?: get_statements_response();
+	global $wp;
+	global $post;
+	if ( ! $statements_response || ! $post || ! $wp ) return '';
+
+	$statements_pages = intval( $statements_response['headers']['x-wp-totalpages'] );
+	$current_page     = get_statements_current_page();
+
+	$has_prev = $current_page !== 1;
+	$has_next = $current_page < $statements_pages;
+
+	// TODO raw ?paged param gets used on the prev/next links;
+	// find some elegant way of making pretty urls instead?
+	$link_base = home_url( $wp->request );
+
+	ob_start();
+?>
+	<?php if ( $has_prev || $has_next ) : ?>
+	<nav aria-label="Statements Pagination">
+		<ul class="pagination justify-content-center">
+			<?php if ( $has_prev ) : ?>
+			<li class="page-item">
+				<a class="page-link" href="<?php echo add_query_arg( 'paged', $current_page - 1, $link_base ); ?>">
+					<span class="fa fa-chevron-left mr-1" aria-hidden="true"></span>
+					Newer<span class="sr-only"> Statements</span>
+				</a>
+			</li>
+			<?php endif; ?>
+
+			<?php if ( $has_next ) : ?>
+			<li class="page-item">
+				<a class="page-link" href="<?php echo add_query_arg( 'paged', $current_page + 1, $link_base ); ?>">
+					Older<span class="sr-only"> Statements</span>
+					<span class="fa fa-chevron-right ml-1" aria-hidden="true"></span>
+				</a>
+			</li>
+			<?php endif; ?>
+		</ul>
+	</nav>
+	<?php endif; ?>
+<?php
+	return trim( ob_get_clean() );
+}
+
+
+/**
  * Returns whether or not the current view has
  * statement-specific query params set.
  *
@@ -408,4 +516,16 @@ function has_statement_filters() {
 	$q_year   = get_query_var( 'by-year' );
 	$q_author = get_query_var( 'tu_author' );
 	return $q_year || $q_author;
+}
+
+
+/**
+ * Returns the current page number for the queried results page.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return int
+ */
+function get_statements_current_page() {
+	return intval( get_query_var( 'paged' ) ?: 1 );
 }
