@@ -68,8 +68,10 @@ function statement_redirects() {
 		$year            = get_query_var( 'by-year' );
 		$author          = get_query_var( 'tu_author' );
 
-		// Redirect requests for /{statements_pg_path}/author/ and
-		// /{statements_pg_path}/year/ with bogus/invalid values
+		// Redirect requests for /{statements_pg_path}/author/,
+		// /{statements_pg_path}/year/, and .../page/X/
+		// with bogus/invalid values
+		// TODO handle bogus pagination
 		if (
 			( $year && ! statement_year_is_valid( $year ) )
 			|| ( $author && ! statement_author_is_valid( $author ) )
@@ -205,8 +207,8 @@ function get_statement_author_data( $author ) {
 
 
 /**
- * Returns an array of statements, filtered by year/author
- * if query params are set.
+ * Returns an array of request data for the statements endpoint on Today,
+ * filtered by year/author if query params are set.
  *
  * @since 3.9.0
  * @author Jo Dickson
@@ -236,10 +238,11 @@ function get_statements() {
 	// back out:
 	if ( ! $endpoint ) return null;
 
+	// TODO implement per_page
 	// TODO pagination
 
 	// Give this request a little extra time to return back
-	return main_site_get_remote_response_json( $endpoint, null, 10 );
+	return main_site_get_remote_response( $endpoint, 10 );
 }
 
 
@@ -253,7 +256,19 @@ function get_statements() {
  * @return string
  */
 function get_statements_list() {
-	$statements = get_statements();
+	$statements_response = get_statements();
+	$statements          = main_site_get_remote_response_json( $statements_response, null );
+	$statements_total    = 0;
+	$statements_pages    = 1;
+
+	if ( $statements ) {
+		$statements_total = intval( $statements_response['headers']['x-wp-total'] );
+		$statements_pages = intval( $statements_response['headers']['x-wp-totalpages'] );
+	}
+
+	// var_dump($statements_total);
+	// var_dump($statements_pages);
+
 	ob_start();
 ?>
 	<?php if ( $statements ) : ?>
