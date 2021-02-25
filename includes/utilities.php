@@ -101,11 +101,13 @@ function get_attachment_src_by_size( $id, $size ) {
  * @author Jim Barnes
  * @since 3.4.0
  * @param string $url The URL to retrieve
- * @param object The serialized JSON obejct
+ * @param mixed $default A default value to return if the response is invalid
+ * @param int $timeout Timeout for the request, in seconds
+ * @return mixed The serialized JSON object, or $default
  */
-function main_site_get_remote_response_json( $url, $default=null ) {
+function main_site_get_remote_response_json( $url, $default=null, $timeout=5 ) {
 	$args = array(
-		'timeout' => 5
+		'timeout' => $timeout
 	);
 
 	$retval = $default;

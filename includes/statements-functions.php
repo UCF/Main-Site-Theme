@@ -230,7 +230,8 @@ function get_statements() {
 
 	// TODO pagination
 
-	return main_site_get_remote_response_json( $endpoint, null );
+	// Give this request a little extra time to return back
+	return main_site_get_remote_response_json( $endpoint, null, 10 );
 }
 
 
