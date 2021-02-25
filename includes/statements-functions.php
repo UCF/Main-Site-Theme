@@ -295,7 +295,7 @@ function get_statement_filters() {
 	</div>
 	<?php endif; ?>
 
-	<?php if ( $years ) : ?>
+	<?php if ( $years && count( $years ) > 1 ) : ?>
 	<div class="mb-4 mb-sm-5">
 		<h2 class="h6 text-uppercase letter-spacing-3 mb-4">By Year</h2>
 		<ul class="nav nav-pills flex-column">
@@ -317,7 +317,7 @@ function get_statement_filters() {
 	</div>
 	<?php endif; ?>
 
-	<?php if ( $authors ) : ?>
+	<?php if ( $authors && count( $authors ) > 1 ) : ?>
 	<div class="mb-4 mb-sm-5">
 		<h2 class="h6 text-uppercase letter-spacing-3 mb-4">Statements Issued By</h2>
 		<ul class="nav nav-pills flex-column">
