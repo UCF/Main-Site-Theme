@@ -17,8 +17,16 @@ function register_statement_rewrite_rules() {
 
 	$statements_pg = get_page_by_path( $statements_pg_path );
 	if ( $statements_pg ) {
-		add_rewrite_rule( '^' . $statements_pg_path . '/year/([0-9]{4})[/]?$', 'index.php?page_id=' . $statements_pg->ID . '&by-year=$matches[1]', 'top' );
-		add_rewrite_rule( '^' . $statements_pg_path . '/author/([a-z0-9_-]+)[/]?$', 'index.php?page_id=' . $statements_pg->ID . '&tu_author=$matches[1]', 'top' );
+		add_rewrite_rule(
+			'^' . $statements_pg_path . '/year/([0-9]{4})(/page/\d+)?[/]?$',
+			'index.php?page_id=' . $statements_pg->ID . '&by-year=$matches[1]&paged=$matches[3]',
+			'top'
+		);
+		add_rewrite_rule(
+			'^' . $statements_pg_path . '/author/([a-z0-9_-]+)(/page/\d+)?[/]?$',
+			'index.php?page_id=' . $statements_pg->ID . '&tu_author=$matches[1]&paged=$matches[3]',
+			'top'
+		);
 	}
 }
 
