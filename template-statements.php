@@ -9,7 +9,7 @@
 
 <?php
 $statement_details = get_statement_details( get_the_content() );
-$statements        = get_statements();
+$statements        = get_statements_list();
 $filters           = get_statement_filters();
 ?>
 

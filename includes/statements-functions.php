@@ -204,7 +204,7 @@ function get_statement_author_data( $author ) {
  * @author Jo Dickson
  * @return array
  */
-function get_statement_data() {
+function get_statements() {
 	$endpoint = '';
 	$q_year   = intval( get_query_var( 'by-year' ) );
 	$q_author = get_query_var( 'tu_author' );
@@ -228,20 +228,23 @@ function get_statement_data() {
 	// back out:
 	if ( ! $endpoint ) return null;
 
-	// TODO utilize transients
+	// TODO pagination
+
 	return main_site_get_remote_response_json( $endpoint, null );
 }
 
 
 /**
- * Returns markup for a list of statements. TODO
+ * Returns markup for a list of statements.
+ * TODO styling
+ * TODO pagination
  *
  * @since 3.9.0
  * @author Jo Dickson
  * @return string
  */
-function get_statements() {
-	$statements = get_statement_data();
+function get_statements_list() {
+	$statements = get_statements();
 	ob_start();
 ?>
 	<?php if ( $statements ) : ?>
