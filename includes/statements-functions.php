@@ -101,16 +101,7 @@ function statement_year_is_valid( $year ) {
 	if ( ! $year ) return false;
 	$year = intval( $year );
 
-	$archive_data = get_statement_archive_data();
-	if ( ! $archive_data || ! property_exists( $archive_data, 'years' ) ) return false;
-
-	if ( in_array(
-		$year,
-		array_column( $archive_data->years, 'year' )
-	) ) {
-		return true;
-	}
-	return false;
+	return get_statement_year_data( $year ) ? true : false;
 }
 
 
@@ -126,16 +117,7 @@ function statement_year_is_valid( $year ) {
 function statement_author_is_valid( $author ) {
 	if ( ! $author ) return false;
 
-	$archive_data = get_statement_archive_data();
-	if ( ! $archive_data || ! property_exists( $archive_data, 'authors' ) ) return false;
-
-	if ( in_array(
-		$author,
-		array_column( $archive_data->authors, 'slug' )
-	) ) {
-		return true;
-	}
-	return false;
+	return get_statement_author_data( $author ) ? true : false;
 }
 
 
@@ -145,19 +127,19 @@ function statement_author_is_valid( $author ) {
  *
  * @since 3.9.0
  * @author Jo Dickson
- * @return array
+ * @return mixed Object, or null on failure
  */
 function get_statement_archive_data() {
 	$endpoint = get_theme_mod( 'statements_archive_endpoint' );
-	if ( ! $endpoint ) return array();
+	if ( ! $endpoint ) return null;
 
-	$data = array();
+	$data = null;
 
 	$transient = get_transient( 'statements_archive_data' );
 	if ( $transient ) {
 		$data = $transient;
 	} else {
-		$data = main_site_get_remote_response_json( $endpoint, array() );
+		$data = main_site_get_remote_response_json( $endpoint, null );
 		if ( $data ) {
 			// Store transient data for 5 minutes (300 seconds)
 			// TODO allow transient expiration to be configured
@@ -170,58 +152,99 @@ function get_statement_archive_data() {
 
 
 /**
+ * Returns data for the provided year in the statement archive data
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @param string|int $year Year
+ * @return mixed Object with year data, or null if data for $year isn't available
+ */
+function get_statement_year_data( $year ) {
+	$archive_data = get_statement_archive_data();
+	if ( ! $year || ! $archive_data || ! property_exists( $archive_data, 'years' ) ) return false;
+
+	$year = intval( $year );
+	foreach ( $archive_data->years as $year_data ) {
+		if ( $year === $year_data->year ) {
+			return $year_data;
+			break;
+		}
+	}
+	return null;
+}
+
+
+/**
+ * Returns data for the provided author slug in the statement archive data
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @param string $author Author slug
+ * @return mixed Object with author data, or null if data for $author isn't available
+ */
+function get_statement_author_data( $author ) {
+	$archive_data = get_statement_archive_data();
+	if ( ! $author || ! $archive_data || ! property_exists( $archive_data, 'authors' ) ) return false;
+
+	foreach ( $archive_data->authors as $author_data ) {
+		if ( $author === $author_data->slug ) {
+			return $author_data;
+			break;
+		}
+	}
+	return null;
+}
+
+
+/**
  * Returns an array of statements, filtered by year/author
  * if query params are set.
  *
  * @since 3.9.0
  * @author Jo Dickson
- * @param array $archive_data Archive data from get_statement_archive_data()
  * @return array
  */
-function get_statement_data( $archive_data ) {
-	if ( ! $archive_data ) return array();
-
-	$endpoint = $archive_data->all->endpoint ?? '';
+function get_statements() {
+	$endpoint = '';
 	$q_year   = intval( get_query_var( 'by-year' ) );
 	$q_author = get_query_var( 'tu_author' );
 
 	if ( $q_year ) {
-		foreach ( $archive_data->years as $year ) {
-			if ( $q_year === $year->year ) {
-				$endpoint = $year->endpoint;
-				break;
-			}
+		$year_data = get_statement_year_data( $q_year );
+		if ( $year_data ) {
+			$endpoint = $year_data->endpoint;
 		}
 	} else if ( $q_author ) {
-		foreach ( $archive_data->authors as $author ) {
-			if ( $q_author === $author->slug ) {
-				$endpoint = $author->endpoint;
-				break;
-			}
+		$author_data = get_statement_author_data( $q_author );
+		if ( $author_data ) {
+			$endpoint = $author_data->endpoint;
 		}
+	} else {
+		$archive_data = get_statement_archive_data();
+		$endpoint = $archive_data->all->endpoint ?? '';
 	}
 
 	// If we still don't have a valid endpoint by now,
 	// back out:
-	if ( ! $endpoint ) return array();
+	if ( ! $endpoint ) return null;
 
-	// TODO utilize transients
-	return main_site_get_remote_response_json( $endpoint, array() );
+	// TODO pagination
+
+	return main_site_get_remote_response_json( $endpoint, null );
 }
 
 
 /**
- * Returns markup for a list of statements. TODO
+ * Returns markup for a list of statements.
+ * TODO styling
+ * TODO pagination
  *
  * @since 3.9.0
  * @author Jo Dickson
- * @param array $archive_data Archive data from get_statement_archive_data()
  * @return string
  */
-function get_statements( $archive_data ) {
-	if ( ! $archive_data ) return '';
-
-	$statements = get_statement_data( $archive_data );
+function get_statements_list() {
+	$statements = get_statements();
 	ob_start();
 ?>
 	<?php if ( $statements ) : ?>
@@ -248,28 +271,44 @@ function get_statements( $archive_data ) {
  *
  * @since 3.9.0
  * @author Jo Dickson
- * @param array $archive_data Archive data from get_statement_archive_data()
  * @return string
  */
-function get_statement_filters( $archive_data ) {
+function get_statement_filters() {
 	global $post;
-	if ( ! $post ) return '';
+	$archive_data = get_statement_archive_data();
+	if ( ! $archive_data || ! $post ) return '';
 
-	$years   = $archive_data->years ?? array();
-	$authors = $archive_data->authors ?? array();
+	$years     = $archive_data->years ?? array();
+	$authors   = $archive_data->authors ?? array();
+	$q_year    = intval( get_query_var( 'by-year' ) );
+	$q_author  = get_query_var( 'tu_author' );
+	$permalink = get_permalink( $post );
 
 	ob_start();
 ?>
+	<?php if ( $q_year || $q_author ) : ?>
+	<div class="mb-4 mb-sm-5">
+		<a href="<?php echo $permalink; ?>">
+			<span class="fa fa-chevron-left mr-1" aria-hidden="true"></span>
+			All Statements
+		</a>
+	</div>
+	<?php endif; ?>
+
 	<?php if ( $years ) : ?>
 	<div class="mb-4 mb-sm-5">
 		<h2 class="h6 text-uppercase letter-spacing-3 mb-4">By Year</h2>
 		<ul class="nav nav-pills flex-column">
 			<?php
 			foreach ( $years as $year ) :
-				$year_link = get_permalink( $post ) . 'year/' . $year->year . '/';
+				$year_link = $permalink. 'year/' . $year->year . '/';
+				$year_link_class = 'nav-link w-100';
+				if ( $q_year === $year->year ) {
+					$year_link_class .= ' active';
+				}
 			?>
 			<li class="nav-item">
-				<a class="nav-link w-100" href="<?php echo $year_link; ?>">
+				<a class="<?php echo $year_link_class; ?>" href="<?php echo $year_link; ?>">
 					<?php echo $year->year; ?>
 				</a>
 			</li>
@@ -284,10 +323,14 @@ function get_statement_filters( $archive_data ) {
 		<ul class="nav nav-pills flex-column">
 			<?php
 			foreach ( $authors as $author ) :
-				$author_link = get_permalink( $post ) . 'author/' . $author->slug . '/';
+				$author_link = $permalink . 'author/' . $author->slug . '/';
+				$author_link_class = 'nav-link w-100';
+				if ( $q_author === $author->slug ) {
+					$author_link_class .= ' active';
+				}
 			?>
 			<li class="nav-item">
-				<a class="nav-link w-100" href="<?php echo $author_link; ?>">
+				<a class="<?php echo $author_link_class; ?>" href="<?php echo $author_link; ?>">
 					<?php echo $author->name; ?>
 				</a>
 			</li>
@@ -297,4 +340,48 @@ function get_statement_filters( $archive_data ) {
 	<?php endif; ?>
 <?php
 	return trim( ob_get_clean() );
+}
+
+
+/**
+ * Returns a subhead with extra details about the statement
+ * data being displayed.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @param string $unfiltered_fallback Fallback content to return if no filters are present
+ * @return string
+ */
+function get_statement_details( $unfiltered_fallback='' ) {
+	if ( ! has_statement_filters() ) return $unfiltered_fallback;
+
+	$details  = '';
+	$q_year   = intval( get_query_var( 'by-year' ) );
+	$q_author = get_query_var( 'tu_author' );
+
+	if ( $q_year ) {
+		$details = '<h2 class="mb-4">' . $q_year . '</h2>';
+	} else if ( $q_author ) {
+		$author_data = get_statement_author_data( $q_author );
+		if ( $author_data && property_exists( $author_data, 'name' ) ) {
+			$details = '<h2 class="mb-4">' . $author_data->name . '</h2>';
+		}
+	}
+
+	return $details;
+}
+
+
+/**
+ * Returns whether or not the current view has
+ * statement-specific query params set.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return bool
+ */
+function has_statement_filters() {
+	$q_year   = get_query_var( 'by-year' );
+	$q_author = get_query_var( 'tu_author' );
+	return $q_year || $q_author;
 }
