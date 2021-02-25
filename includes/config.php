@@ -33,7 +33,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'chartbeat_uid'                     => '2806',
 	'chartbeat_domain'                  => 'ucf.edu',
 	'search_service_url'                => 'https://search.smca.ucf.edu/service.php',
-	'statements_page_path'              => 'statements'
+	'statements_page_path'              => 'statements',
+	'statements_per_page'               => 30
 ) ) );
 
 function __init__() {
@@ -667,7 +668,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	// Phonebook
+	// Statements
 	$wp_customize->add_setting(
 		'statements_page_path',
 		array(
@@ -695,6 +696,23 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Statements Archive API Endpoint',
 			'description' => 'URL to the API endpoint that lists Statement data by year and author.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'statements_per_page',
+		array(
+			'default' => get_theme_mod_default( 'statements_per_page' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'statements_per_page',
+		array(
+			'type'        => 'number',
+			'label'       => 'Statements Per Page',
+			'description' => 'The number of Statements that should be listed on the Statements page at a time.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
 		)
 	);
