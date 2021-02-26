@@ -96,25 +96,50 @@ function get_attachment_src_by_size( $id, $size ) {
 
 
 /**
+ * Helper function for retrieving a remote response
+ *
+ * @author Jo Dickson
+ * @since 3.9.0
+ * @param mixed $remote The URL to retrieve, or a response array from wp_remote_get()
+ * @param int $timeout Timeout for the request, in seconds
+ * @return mixed Array of response data, or null on failure/bad response
+ */
+function main_site_get_remote_response( $url, $timeout=5 ) {
+	$retval = null;
+	if ( ! $url || ! is_string( $url ) ) return $retval;
+
+	$args = array(
+		'timeout' => $timeout
+	);
+	$response = wp_remote_get( $url, $args );
+
+	if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) < 400 ) {
+		$retval = $response;
+	}
+
+	return $retval;
+}
+
+
+/**
  * Helper function for getting remote json
  *
  * @author Jim Barnes
  * @since 3.4.0
- * @param string $url The URL to retrieve
+ * @param mixed $remote The URL to retrieve, or a response array from wp_remote_get()
  * @param mixed $default A default value to return if the response is invalid
  * @param int $timeout Timeout for the request, in seconds
  * @return mixed The serialized JSON object, or $default
  */
-function main_site_get_remote_response_json( $url, $default=null, $timeout=5 ) {
-	$args = array(
-		'timeout' => $timeout
-	);
+function main_site_get_remote_response_json( $remote, $default=null, $timeout=5 ) {
+	$retval   = $default;
+	$response = is_array( $remote ) ? $remote : main_site_get_remote_response( $remote, $timeout );
 
-	$retval = $default;
-	$response = wp_remote_get( $url, $args );
-
-	if ( is_array( $response ) && wp_remote_retrieve_response_code( $response ) < 400 ) {
-		$retval = json_decode( wp_remote_retrieve_body( $response ) );
+	if ( $response ) {
+		$json = json_decode( wp_remote_retrieve_body( $response ) );
+		if ( $json ) {
+			$retval = $json;
+		}
 	}
 
 	return $retval;
