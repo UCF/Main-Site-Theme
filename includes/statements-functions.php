@@ -339,7 +339,7 @@ class Statements_View {
 			foreach ( $statements as $statement ) :
 				$link     = $statement->link;
 				$title    = $statement->title->rendered;
-				$author   = $statement->tu_author->fullname;
+				$author   = $statement->tu_author->fullname ?? '';
 				$datetime = $statement->date;
 				$date     = date( 'F j, Y', strtotime( $datetime ) );
 
