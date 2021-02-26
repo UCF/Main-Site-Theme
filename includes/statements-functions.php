@@ -455,7 +455,6 @@ class Statements_View {
 		return $details;
 	}
 
-
 	/**
 	 * Returns markup for statement pagination.
 	 *
@@ -465,17 +464,12 @@ class Statements_View {
 	 */
 	public function get_statement_pagination() {
 		$statements_response = $this->statements_response;
-		global $wp;
-		if ( ! $statements_response || ! $wp ) return '';
+		if ( ! $statements_response ) return '';
 
 		$page_num_previous = $this->page_num_previous;
 		$page_num_next     = $this->page_num_next;
 		$has_previous      = $page_num_previous ? true : false;
 		$has_next          = $page_num_next ? true : false;
-
-		// TODO raw ?paged param gets used on the prev/next links;
-		// find some elegant way of making pretty urls instead?
-		$link_base = home_url( $wp->request );
 
 		ob_start();
 	?>
@@ -484,7 +478,7 @@ class Statements_View {
 			<ul class="pagination justify-content-center">
 				<?php if ( $has_previous ) : ?>
 				<li class="page-item">
-					<a class="page-link" href="<?php echo add_query_arg( 'paged', $page_num_previous, $link_base ); ?>">
+					<a class="page-link" href="<?php echo $this->get_statement_pagination_url( $page_num_previous ); ?>">
 						<span class="fa fa-chevron-left mr-1" aria-hidden="true"></span>
 						Newer<span class="sr-only"> Statements</span>
 					</a>
@@ -493,7 +487,7 @@ class Statements_View {
 
 				<?php if ( $has_next ) : ?>
 				<li class="page-item">
-					<a class="page-link" href="<?php echo add_query_arg( 'paged', $page_num_next, $link_base ); ?>">
+					<a class="page-link" href="<?php echo $this->get_statement_pagination_url( $page_num_next ); ?>">
 						Older<span class="sr-only"> Statements</span>
 						<span class="fa fa-chevron-right ml-1" aria-hidden="true"></span>
 					</a>
@@ -504,6 +498,29 @@ class Statements_View {
 		<?php endif; ?>
 	<?php
 		return trim( ob_get_clean() );
+	}
+
+	/**
+	 * Given a desired page number, returns the current view's
+	 * URL with a /page/ path appended to the end.
+	 *
+	 * This function is necessary as WP doesn't provide this type
+	 * of logic out-of-the-box for registered query params.
+	 *
+	 * @since 3.9.0
+	 * @author Jo Dickson
+	 * @param int $page Page number that a URL should be generated for
+	 * @return string URL for the desired page
+	 */
+	public function get_statement_pagination_url( $page ) {
+		global $wp;
+		if ( ! $wp ) return '';
+
+		$url_parts = explode( '/page/', home_url( $wp->request ) );
+		$url_base  = isset( $url_parts[0] ) ? $url_parts[0] : '';
+		$url       = $page > 1 ? $url_base . '/page/' . $page . '/' : $url_base;
+
+		return $url;
 	}
 
 }
