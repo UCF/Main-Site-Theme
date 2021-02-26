@@ -322,7 +322,6 @@ class Statements_View {
 
 	/**
  	 * Returns markup for a list of statements.
-	 * TODO styling
 	 *
 	 * @since 3.9.0
 	 * @author Jo Dickson
