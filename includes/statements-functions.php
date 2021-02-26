@@ -334,17 +334,35 @@ class Statements_View {
 		ob_start();
 	?>
 		<?php if ( $statements ) : ?>
-		<ul>
-			<?php foreach ( $statements as $statement ) : ?>
-			<li>
-				<a href="<?php echo $statement->link; ?>">
-					<?php echo $statement->title->rendered; ?>
+		<ul class="my-4 my-sm-5 list-unstyled">
+			<?php
+			foreach ( $statements as $statement ) :
+				$link     = $statement->link;
+				$title    = $statement->title->rendered;
+				$author   = $statement->tu_author->fullname;
+				$datetime = $statement->date;
+				$date     = date( 'F j, Y', strtotime( $datetime ) );
+
+			?>
+			<li class="mb-4 pb-md-2">
+				<a href="<?php echo $link; ?>">
+					<span class="h5 d-block"><?php echo $title; ?></span>
 				</a>
+
+				<?php if ( $author ) : ?>
+				<cite class="d-block font-italic">
+					<?php echo $author; ?>
+				</cite>
+				<?php endif; ?>
+
+				<time class="small text-default" datetime="<?php echo $datetime; ?>">
+					<?php echo $date; ?>
+				</time>
 			</li>
 			<?php endforeach; ?>
 		</ul>
 		<?php else : ?>
-		<p>No statements found.</p>
+		<p class="my-4 my-sm-5">No statements found.</p>
 		<?php endif; ?>
 	<?php
 		return trim( ob_get_clean() );
