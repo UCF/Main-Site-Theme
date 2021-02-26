@@ -8,11 +8,11 @@
 <?php get_header(); the_post(); ?>
 
 <?php
-$statements_response = get_statements_response();
-$statement_details   = get_statement_details( get_the_content() );
-$statements          = get_statements_list( $statements_response );
-$filters             = get_statement_filters();
-$pagination          = get_statement_pagination( $statements_response );
+$statements_view     = apply_filters( 'mainsite_statements_view', null );
+$statement_details   = $statements_view->get_statements_details( get_the_content() ) ?? get_the_content();
+$statements          = $statements_view->get_statements_list() ?? '<p>No statements available.</p>';
+$filters             = $statements_view->get_statement_filters() ?? '';
+$pagination          = $statements_view->get_statement_pagination() ?? '';
 ?>
 
 <div class="container mt-4 mt-md-5 pb-4 pb-md-5">
