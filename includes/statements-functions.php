@@ -372,7 +372,7 @@ class Statements_View {
 		ob_start();
 	?>
 		<?php if ( $q_year || $q_author ) : ?>
-		<div class="mb-4 mb-sm-5">
+		<div class="mb-4 mb-lg-5">
 			<a href="<?php echo $permalink; ?>">
 				<span class="fa fa-chevron-left mr-1" aria-hidden="true"></span>
 				All Statements
@@ -380,9 +380,32 @@ class Statements_View {
 		</div>
 		<?php endif; ?>
 
+		<?php if ( ( $years && count( $years ) > 1 ) || ( $authors && count( $authors ) > 1 ) ) : ?>
+		<div class="row hidden-lg-up pb-3 align-items-center">
+			<div class="col-auto">
+				<span class="d-block mb-0 text-default">Filter by:</span>
+			</div>
+			<div class="col">
+				<div class="btn-group" role="group" aria-label="Statement filters">
+					<?php if ( $years && count( $years ) > 1 ) : ?>
+					<button class="btn btn-default btn-sm" data-toggle="collapse" data-target="#statement-filters-year" aria-expanded="false" aria-controls="statement-filters-year">
+						<span class="sr-only">Filter by </span>Year <span class="fa fa-chevron-down" aria-hidden="true"></span>
+					</button>
+					<?php endif; ?>
+
+					<?php if ( $authors && count( $authors ) > 1 ) : ?>
+					<button class="btn btn-default btn-sm" data-toggle="collapse" data-target="#statement-filters-author" aria-expanded="false" aria-controls="statement-filters-author">
+						<span class="sr-only">Filter by </span>Author <span class="fa fa-chevron-down" aria-hidden="true"></span>
+					</button>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+		<?php endif; ?>
+
 		<?php if ( $years && count( $years ) > 1 ) : ?>
-		<div class="mb-4 mb-sm-5">
-			<h2 class="h6 text-uppercase letter-spacing-3 mb-4">By Year</h2>
+		<div class="collapse d-lg-block mb-lg-5" id="statement-filters-year">
+			<h2 class="h6 text-uppercase letter-spacing-3 pt-4 pt-lg-0 mb-4">By Year</h2>
 			<ul class="nav nav-pills flex-column">
 				<?php
 				foreach ( $years as $year ) :
@@ -403,8 +426,8 @@ class Statements_View {
 		<?php endif; ?>
 
 		<?php if ( $authors && count( $authors ) > 1 ) : ?>
-		<div class="mb-4 mb-sm-5">
-			<h2 class="h6 text-uppercase letter-spacing-3 mb-4">Statements Issued By</h2>
+		<div class="collapse d-lg-block mb-lg-5" id="statement-filters-author">
+			<h2 class="h6 text-uppercase letter-spacing-3 pt-4 pt-lg-0 mb-4">Statements Issued By</h2>
 			<ul class="nav nav-pills flex-column">
 				<?php
 				foreach ( $authors as $author ) :
@@ -422,6 +445,10 @@ class Statements_View {
 				<?php endforeach; ?>
 			</ul>
 		</div>
+		<?php endif; ?>
+
+		<?php if ( ( $years && count( $years ) > 1 ) || ( $authors && count( $authors ) > 1 ) ) : ?>
+		<hr class="mt-4 mb-3 hidden-lg-up" role="presentation">
 		<?php endif; ?>
 	<?php
 		return trim( ob_get_clean() );
