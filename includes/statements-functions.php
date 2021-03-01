@@ -305,17 +305,11 @@ class Statements_View {
 			}
 
 			if ( $should_redirect ) {
-				// TODO this works for now, but would be nice
-				// if these 404'd instead. This hook doesn't
-				// appear to fire early enough, and the "Statements"
-				// h1 gets printed above the 404 template content.
-				wp_redirect( $this->page_permalink );
+				global $wp_query;
+				$wp_query->set_404();
+				status_header( 404 );
+				get_template_part( 404 );
 				exit();
-				// global $wp_query;
-				// $wp_query->set_404();
-				// status_header( 404 );
-				// get_template_part( 404 );
-				// exit();
 			}
 		}
 	}
@@ -538,7 +532,7 @@ add_action( 'wp', function() use( $statements_view ) {
 
 		add_action( 'template_redirect', function() use( $statements_view ) {
 			$statements_view->statement_redirects();
-		}, 999 );
+		}, 99 );
 
 		// TODO there is probably a better way of doing this, but whatever
 		add_filter( 'mainsite_statements_view', function() use( $statements_view ) {
