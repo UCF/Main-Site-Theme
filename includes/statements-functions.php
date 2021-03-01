@@ -320,7 +320,6 @@ class Statements_View {
 
 	/**
  	 * Returns markup for a list of statements.
-	 * TODO styling
 	 *
 	 * @since 3.9.0
 	 * @author Jo Dickson
@@ -565,6 +564,32 @@ class Statements_View {
 		return $url;
 	}
 
+	/**
+	 * Returns a partial string intended for use in the Statement
+	 * page's Yoast title or meta description that helps distinguish
+	 * between filtered results.
+	 *
+	 * @since 3.9.0
+	 * @author Jo Dickson
+	 * @return string
+	 */
+	public function get_yoast_snippet_variable_string() {
+		$q_author = $this->query_vars['tu_author'];
+		$q_year   = $this->query_vars['by-year'];
+		$phrase   = '';
+
+		if ( $q_author ) {
+			$author_data = $this->get_author_data( $q_author );
+			if ( $author_data && property_exists( $author_data, 'name' ) ) {
+				$phrase = 'by ' . $author_data->name;
+			}
+		} else if ( $q_year ) {
+			$phrase = 'from ' . $q_year;
+		}
+
+		return $phrase;
+	}
+
 }
 
 
@@ -582,9 +607,12 @@ add_action( 'wp', function() use( $statements_view ) {
 			$statements_view->statement_redirects();
 		}, 99 );
 
-		// TODO there is probably a better way of doing this, but whatever
 		add_filter( 'mainsite_statements_view', function() use( $statements_view ) {
 			return $statements_view;
+		} );
+
+		add_filter( 'mainsite_yoast_statements_snippet_variable', function() use( $statements_view ) {
+			return $statements_view->get_yoast_snippet_variable_string();
 		} );
 	}
 } );
