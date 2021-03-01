@@ -41,7 +41,7 @@ class Statements_View {
 		$this->statements_response = $this->get_statements_response();
 		$this->statements_data     = main_site_get_remote_response_json( $this->statements_response, null );
 
-		$this->page_num_total    = intval( wp_remote_retrieve_header( $this->statements_response, 'x-wp-totalpages' ) );
+		$this->page_num_total    = intval( wp_remote_retrieve_header( $this->statements_response, 'x-wp-totalpages' ) ) ?: 1;
 		$this->page_num_previous = $this->page_num_current > 1 ? $this->page_num_current - 1 : 0;
 		$this->page_num_next     = $this->page_num_current < $this->page_num_total ? $this->page_num_current + 1 : 0;
 	}
