@@ -331,7 +331,7 @@ class Statements_View {
 		ob_start();
 	?>
 		<?php if ( $statements ) : ?>
-		<ul class="my-4 my-sm-5 list-unstyled">
+		<ul class="mt-4 mt-sm-5 mb-5 list-unstyled">
 			<?php
 			foreach ( $statements as $statement ) :
 				$link     = $statement->link;
@@ -542,15 +542,21 @@ class Statements_View {
 				<li class="page-item">
 					<a class="page-link" href="<?php echo $this->get_statement_pagination_url( $page_num_previous ); ?>">
 						<span class="fa fa-chevron-left mr-1" aria-hidden="true"></span>
-						Newer<span class="sr-only"> Statements</span>
+						Previous<span class="sr-only"> Statements</span>
 					</a>
 				</li>
 				<?php endif; ?>
 
+				<li class="page-item disabled">
+					<span class="page-link px-3">
+						Page <?php echo $this->page_num_current; ?> of <?php echo $this->page_num_total; ?>
+					</span>
+				</li>
+
 				<?php if ( $has_next ) : ?>
 				<li class="page-item">
 					<a class="page-link" href="<?php echo $this->get_statement_pagination_url( $page_num_next ); ?>">
-						Older<span class="sr-only"> Statements</span>
+						Next<span class="sr-only"> Statements</span>
 						<span class="fa fa-chevron-right ml-1" aria-hidden="true"></span>
 					</a>
 				</li>
