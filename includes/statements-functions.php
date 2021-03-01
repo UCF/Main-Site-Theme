@@ -469,6 +469,33 @@ class Statements_View {
 	}
 
 	/**
+	 * Returns a human-friendly string value describing
+	 * the current active filter (author or year).
+	 *
+	 * @since 3.9.0
+	 * @author Jo Dickson
+	 * @return string
+	 */
+	public function get_statements_filter_string() {
+		if ( ! $this->has_filters() ) return '';
+
+		$filter_str = '';
+		$q_year     = $this->query_vars['by-year'];
+		$q_author   = $this->query_vars['tu_author'];
+
+		if ( $q_year ) {
+			$filter_str = strval( $q_year );
+		} else if ( $q_author ) {
+			$author_data = $this->get_author_data( $q_author );
+			if ( $author_data && property_exists( $author_data, 'name' ) ) {
+				$filter_str = $author_data->name;
+			}
+		}
+
+		return $filter_str;
+	}
+
+	/**
 	 * Returns a subhead with extra details about the statement
 	 * data being displayed.
 	 *
@@ -478,19 +505,13 @@ class Statements_View {
 	 * @return string
 	 */
 	public function get_statements_details( $unfiltered_fallback='' ) {
-		if ( ! $this->has_filters() ) return $unfiltered_fallback;
+		$details    = '';
+		$filter_str = $this->get_statements_filter_string();
 
-		$details  = '';
-		$q_year   = $this->query_vars['by-year'];
-		$q_author = $this->query_vars['tu_author'];
-
-		if ( $q_year ) {
-			$details = '<h2 class="mb-4">' . $q_year . '</h2>';
-		} else if ( $q_author ) {
-			$author_data = $this->get_author_data( $q_author );
-			if ( $author_data && property_exists( $author_data, 'name' ) ) {
-				$details = '<h2 class="mb-4">' . $author_data->name . '</h2>';
-			}
+		if ( $filter_str ) {
+			$details = '<h2 class="mb-4">' . $filter_str . '</h2>';
+		} else {
+			$details = $unfiltered_fallback;
 		}
 
 		return $details;
@@ -566,25 +587,25 @@ class Statements_View {
 
 	/**
 	 * Returns a partial string intended for use in the Statement
-	 * page's Yoast title or meta description that helps distinguish
-	 * between filtered results.
+	 * page's meta description that helps distinguish between
+	 * filtered results.
 	 *
 	 * @since 3.9.0
 	 * @author Jo Dickson
 	 * @return string
 	 */
-	public function get_yoast_snippet_variable_string() {
-		$q_author = $this->query_vars['tu_author'];
-		$q_year   = $this->query_vars['by-year'];
-		$phrase   = '';
+	public function get_yoast_by_filter_snippet_variable_string() {
+		$q_author   = $this->query_vars['tu_author'];
+		$q_year     = $this->query_vars['by-year'];
+		$filter_str = $this->get_statements_filter_string();
+		$phrase     = '';
 
-		if ( $q_author ) {
-			$author_data = $this->get_author_data( $q_author );
-			if ( $author_data && property_exists( $author_data, 'name' ) ) {
-				$phrase = 'by ' . $author_data->name;
+		if ( $filter_str ) {
+			if ( $q_author ) {
+				$phrase = 'by ' . $filter_str;
+			} else if ( $q_year ) {
+				$phrase = 'from ' . $filter_str;
 			}
-		} else if ( $q_year ) {
-			$phrase = 'from ' . $q_year;
 		}
 
 		return $phrase;
@@ -611,8 +632,11 @@ add_action( 'wp', function() use( $statements_view ) {
 			return $statements_view;
 		} );
 
-		add_filter( 'mainsite_yoast_statements_snippet_variable', function() use( $statements_view ) {
-			return $statements_view->get_yoast_snippet_variable_string();
+		add_filter( 'mainsite_yoast_statements_current_filter_snippet_variable', function() use( $statements_view ) {
+			return $statements_view->get_statements_filter_string();
+		} );
+		add_filter( 'mainsite_yoast_statements_by_filter_snippet_variable', function() use( $statements_view ) {
+			return $statements_view->get_yoast_by_filter_snippet_variable_string();
 		} );
 	}
 } );
