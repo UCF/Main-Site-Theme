@@ -60,15 +60,19 @@ class Statements_View {
 
 		$data = null;
 
-		$transient = get_transient( 'statements_archive_data' );
+		$transient = null;
+		$transient_expiration = intval( get_theme_mod_or_default( 'statements_archive_transient_expire' ) );
+		if ( $transient_expiration ) {
+			$transient = get_transient( 'statements_archive_data' );
+		}
+
 		if ( $transient ) {
 			$data = $transient;
 		} else {
 			$data = main_site_get_remote_response_json( $endpoint, null );
-			if ( $data ) {
-				// Store transient data for 5 minutes (300 seconds)
-				// TODO allow transient expiration to be configured
-				set_transient( 'statements_archive_data', $data, 300 );
+			if ( $data && $transient_expiration ) {
+				// Store successful data fetch if transients are in use
+				set_transient( 'statements_archive_data', $data, $transient_expiration );
 			}
 		}
 

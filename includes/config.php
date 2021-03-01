@@ -14,27 +14,28 @@ define( 'THEME_FONT_URL', THEME_STATIC_URL . '/fonts' );
 define( 'THEME_FA_VERSION', '4.7.0' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
-	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
-	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
-	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
-	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
-	'catalog_desc_cta_intro'            => '',
+	'degrees_undergraduate_application'   => 'https://apply.ucf.edu/application/',
+	'degrees_graduate_application'        => 'https://application.graduate.ucf.edu/#/',
+	'degrees_graduate_rfi_url_base'       => 'https://applynow.graduate.ucf.edu/register/',
+	'degrees_graduate_rfi_form_id'        => 'bad6c39a-5c60-4895-9128-5785ce014085',
+	'catalog_desc_cta_intro'              => '',
 	'degree_deadlines_undergraduate_deadline_order' => 'Freshmen, Transfers, International',
 	'degree_deadlines_graduate_deadline_order'      => 'Domestic, International',
-	'degree_careers_intro'              => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
+	'degree_careers_intro'                => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
 										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
 										   . 'faculty to networking with top employers across Central Florida to gaining '
 										   . 'first-hand experience in internships nearby. Achieve your degree and more as a Knight.',
-	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
-	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
-	'gtm_id'                            => 'GTM-MBPLZH',
-	'google_map_key'                    => '',
-	'location_fallback_image'           => '',
-	'chartbeat_uid'                     => '2806',
-	'chartbeat_domain'                  => 'ucf.edu',
-	'search_service_url'                => 'https://search.smca.ucf.edu/service.php',
-	'statements_page_path'              => 'statements',
-	'statements_per_page'               => 30
+	'cloud_typography_key'                => '//cloud.typography.com/730568/675644/css/fonts.css',
+	'gw_verify'                           => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
+	'gtm_id'                              => 'GTM-MBPLZH',
+	'google_map_key'                      => '',
+	'location_fallback_image'             => '',
+	'chartbeat_uid'                       => '2806',
+	'chartbeat_domain'                    => 'ucf.edu',
+	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
+	'statements_page_path'                => 'statements',
+	'statements_per_page'                 => 30,
+	'statements_archive_transient_expire' => 300 // seconds
 ) ) );
 
 function __init__() {
@@ -696,6 +697,23 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Statements Archive API Endpoint',
 			'description' => 'URL to the API endpoint that lists Statement data by year and author.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'statements_archive_transient_expire',
+		array(
+			'default' => get_theme_mod_default( 'statements_archive_transient_expire' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'statements_archive_transient_expire',
+		array(
+			'type'        => 'text',
+			'label'       => 'Statements Archive Transient Expiration',
+			'description' => 'Amount of time, in seconds, that Statement archive data should be cached. Set to 0 or an empty value to not utilize transient caching.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
 		)
 	);
