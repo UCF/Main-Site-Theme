@@ -1223,15 +1223,29 @@ function get_yoast_title_degree_program_type() {
 
 
 /**
- * Callback for the %%statements_filters%% snippet variable
+ * Callback for the %%statements_current_filter%% snippet variable
  * for use on the Statements page title/meta description.
  *
  * @since 3.9.0
  * @author Jo Dickson
  * @return mixed String, or void if the current page is not the Statements page
  */
-function get_yoast_statements_snippet_variable() {
-	$phrase = apply_filters( 'mainsite_yoast_statements_snippet_variable', '' );
+function get_yoast_statements_current_filter_snippet_variable() {
+	$phrase = apply_filters( 'mainsite_yoast_statements_current_filter_snippet_variable', '' );
+	if ( $phrase ) return $phrase;
+}
+
+
+/**
+ * Callback for the %%statements_by_filter%% snippet variable
+ * for use on the Statements page title/meta description.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return mixed String, or void if the current page is not the Statements page
+ */
+function get_yoast_statements_by_filter_snippet_variable() {
+	$phrase = apply_filters( 'mainsite_yoast_statements_by_filter_snippet_variable', '' );
 	if ( $phrase ) return $phrase;
 }
 
@@ -1246,7 +1260,8 @@ function get_yoast_statements_snippet_variable() {
  */
 function yoast_register_variables() {
 	wpseo_register_var_replacement( '%%program_type%%', 'get_yoast_title_degree_program_type', 'advanced', 'Provides a program_type string for usage in degree titles.' );
-	wpseo_register_var_replacement( '%%statements_filters%%', 'get_yoast_statements_snippet_variable', 'advanced', 'Provides a string describing the current view for use on the Statements page title/meta description.' );
+	wpseo_register_var_replacement( '%%statements_current_filter%%', 'get_yoast_statements_current_filter_snippet_variable', 'advanced', 'Provides the current filter in use on the Statements page title/meta description.' );
+	wpseo_register_var_replacement( '%%statements_by_filter%%', 'get_yoast_statements_by_filter_snippet_variable', 'advanced', 'Provides a string describing the current view for use on the Statements page title/meta description.' );
 }
 
 add_action( 'wpseo_register_extra_replacements', 'yoast_register_variables' );
