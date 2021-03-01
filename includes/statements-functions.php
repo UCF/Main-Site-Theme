@@ -41,7 +41,7 @@ class Statements_View {
 		$this->statements_response = $this->get_statements_response();
 		$this->statements_data     = main_site_get_remote_response_json( $this->statements_response, null );
 
-		$this->page_num_total    = intval( wp_remote_retrieve_header( $this->statements_response, 'x-wp-totalpages' ) );
+		$this->page_num_total    = intval( wp_remote_retrieve_header( $this->statements_response, 'x-wp-totalpages' ) ) ?: 1;
 		$this->page_num_previous = $this->page_num_current > 1 ? $this->page_num_current - 1 : 0;
 		$this->page_num_next     = $this->page_num_current < $this->page_num_total ? $this->page_num_current + 1 : 0;
 	}
@@ -331,7 +331,7 @@ class Statements_View {
 		ob_start();
 	?>
 		<?php if ( $statements ) : ?>
-		<ul class="my-4 my-sm-5 list-unstyled">
+		<ul class="mt-4 mt-sm-5 mb-5 list-unstyled">
 			<?php
 			foreach ( $statements as $statement ) :
 				$link     = $statement->link;
@@ -469,6 +469,33 @@ class Statements_View {
 	}
 
 	/**
+	 * Returns a human-friendly string value describing
+	 * the current active filter (author or year).
+	 *
+	 * @since 3.9.0
+	 * @author Jo Dickson
+	 * @return string
+	 */
+	public function get_statements_filter_string() {
+		if ( ! $this->has_filters() ) return '';
+
+		$filter_str = '';
+		$q_year     = $this->query_vars['by-year'];
+		$q_author   = $this->query_vars['tu_author'];
+
+		if ( $q_year ) {
+			$filter_str = strval( $q_year );
+		} else if ( $q_author ) {
+			$author_data = $this->get_author_data( $q_author );
+			if ( $author_data && property_exists( $author_data, 'name' ) ) {
+				$filter_str = $author_data->name;
+			}
+		}
+
+		return $filter_str;
+	}
+
+	/**
 	 * Returns a subhead with extra details about the statement
 	 * data being displayed.
 	 *
@@ -478,19 +505,13 @@ class Statements_View {
 	 * @return string
 	 */
 	public function get_statements_details( $unfiltered_fallback='' ) {
-		if ( ! $this->has_filters() ) return $unfiltered_fallback;
+		$details    = '';
+		$filter_str = $this->get_statements_filter_string();
 
-		$details  = '';
-		$q_year   = $this->query_vars['by-year'];
-		$q_author = $this->query_vars['tu_author'];
-
-		if ( $q_year ) {
-			$details = '<h2 class="mb-4">' . $q_year . '</h2>';
-		} else if ( $q_author ) {
-			$author_data = $this->get_author_data( $q_author );
-			if ( $author_data && property_exists( $author_data, 'name' ) ) {
-				$details = '<h2 class="mb-4">' . $author_data->name . '</h2>';
-			}
+		if ( $filter_str ) {
+			$details = '<h2 class="mb-4">' . $filter_str . '</h2>';
+		} else {
+			$details = $unfiltered_fallback;
 		}
 
 		return $details;
@@ -521,15 +542,21 @@ class Statements_View {
 				<li class="page-item">
 					<a class="page-link" href="<?php echo $this->get_statement_pagination_url( $page_num_previous ); ?>">
 						<span class="fa fa-chevron-left mr-1" aria-hidden="true"></span>
-						Newer<span class="sr-only"> Statements</span>
+						Previous<span class="sr-only"> Statements</span>
 					</a>
 				</li>
 				<?php endif; ?>
 
+				<li class="page-item disabled">
+					<span class="page-link px-3">
+						Page <?php echo $this->page_num_current; ?> of <?php echo $this->page_num_total; ?>
+					</span>
+				</li>
+
 				<?php if ( $has_next ) : ?>
 				<li class="page-item">
 					<a class="page-link" href="<?php echo $this->get_statement_pagination_url( $page_num_next ); ?>">
-						Older<span class="sr-only"> Statements</span>
+						Next<span class="sr-only"> Statements</span>
 						<span class="fa fa-chevron-right ml-1" aria-hidden="true"></span>
 					</a>
 				</li>
@@ -566,25 +593,25 @@ class Statements_View {
 
 	/**
 	 * Returns a partial string intended for use in the Statement
-	 * page's Yoast title or meta description that helps distinguish
-	 * between filtered results.
+	 * page's meta description that helps distinguish between
+	 * filtered results.
 	 *
 	 * @since 3.9.0
 	 * @author Jo Dickson
 	 * @return string
 	 */
-	public function get_yoast_snippet_variable_string() {
-		$q_author = $this->query_vars['tu_author'];
-		$q_year   = $this->query_vars['by-year'];
-		$phrase   = '';
+	public function get_yoast_by_filter_snippet_variable_string() {
+		$q_author   = $this->query_vars['tu_author'];
+		$q_year     = $this->query_vars['by-year'];
+		$filter_str = $this->get_statements_filter_string();
+		$phrase     = '';
 
-		if ( $q_author ) {
-			$author_data = $this->get_author_data( $q_author );
-			if ( $author_data && property_exists( $author_data, 'name' ) ) {
-				$phrase = 'by ' . $author_data->name;
+		if ( $filter_str ) {
+			if ( $q_author ) {
+				$phrase = 'by ' . $filter_str;
+			} else if ( $q_year ) {
+				$phrase = 'from ' . $filter_str;
 			}
-		} else if ( $q_year ) {
-			$phrase = 'from ' . $q_year;
 		}
 
 		return $phrase;
@@ -611,8 +638,11 @@ add_action( 'wp', function() use( $statements_view ) {
 			return $statements_view;
 		} );
 
-		add_filter( 'mainsite_yoast_statements_snippet_variable', function() use( $statements_view ) {
-			return $statements_view->get_yoast_snippet_variable_string();
+		add_filter( 'mainsite_yoast_statements_current_filter_snippet_variable', function() use( $statements_view ) {
+			return $statements_view->get_statements_filter_string();
+		} );
+		add_filter( 'mainsite_yoast_statements_by_filter_snippet_variable', function() use( $statements_view ) {
+			return $statements_view->get_yoast_by_filter_snippet_variable_string();
 		} );
 	}
 } );
