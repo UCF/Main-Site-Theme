@@ -265,6 +265,31 @@ gulp.task('critical-css', (done) => {
             });
           }
 
+          // Remove preload and noscript tags in the head
+          const $preload = $('head link[rel="preload"]');
+          if ($preload.length) {
+            $preload.remove();
+          }
+          const $noscript = $('head noscript');
+          if ($noscript.length) {
+            $noscript.remove();
+          }
+
+          // Revert async loading to non-async so that critical
+          // can do its job. For the purpose of this script, just
+          // set the media attr to `screen` for all async-loaded
+          // styles.
+          const $headStyles = $('head link[rel="stylesheet"]');
+          if ($headStyles.length) {
+            $headStyles.each((i, elem) => {
+              const onload = $(elem).attr('onload');
+              if (onload) {
+                $(elem).attr('media', 'screen');
+                $(elem).attr('onload', null);
+              }
+            });
+          }
+
           body = $.html();
 
           args.html = body;
