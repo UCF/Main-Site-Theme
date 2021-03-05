@@ -627,7 +627,7 @@ add_filter( 'query_vars', array( $statements_view, 'register_query_vars' ), 10, 
 
 // Only finish initializing view stuff if we're on the Statements page:
 add_action( 'wp', function() use( $statements_view ) {
-	if ( is_page( $statements_view->page->ID ) ) {
+	if ( $statements_view->page && is_page( $statements_view->page->ID ) ) {
 		$statements_view->setup();
 
 		add_action( 'template_redirect', function() use( $statements_view ) {
