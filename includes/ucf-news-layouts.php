@@ -111,5 +111,5 @@ if ( ! function_exists( 'add_header_card_layout' ) ) {
 		return $layouts;
 	}
 
-	add_action( 'ucf_news_get_layouts', 'add_header_card_layout', 10, 1 );
+	add_filter( 'ucf_news_get_layouts', 'add_header_card_layout', 10, 1 );
 }
