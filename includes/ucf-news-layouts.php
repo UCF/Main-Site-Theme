@@ -70,8 +70,8 @@ if ( ! function_exists( 'ucf_news_display_header_card' ) ) {
 				<?php endif; ?>
 
 				<div class="ucf-news-header-card-block">
-					<h3 class="ucf-news-header-card-title"><?php echo $item->title->rendered; ?></h3>
-					<h3 class="ucf-news-header-card-subtitle"><?php echo $item->excerpt->rendered; ?></h3>
+					<strong class="ucf-news-header-card-title"><?php echo $item->title->rendered; ?></strong>
+					<div class="ucf-news-header-card-subtitle"><?php echo $item->excerpt->rendered; ?></div>
 				</div>
 			</a>
 		</div>
@@ -102,7 +102,6 @@ if ( ! function_exists( 'ucf_news_display_header_card_after' ) ) {
 
 if ( ! function_exists( 'add_header_card_layout' ) ) {
 	function add_header_card_layout( $layouts ) {
-        var_dump( 'Adding Header Card layout.' );
 		$layouts['header_card'] = 'Header Card Layout';
 		return $layouts;
 	}
