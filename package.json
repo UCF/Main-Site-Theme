@@ -1,15 +1,15 @@
 {
   "private": true,
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.1",
     "babel-eslint": "^10.1.0",
-    "babel-plugin-transform-es2015-modules-strip": "^0.1.1",
+    "babel-plugin-transform-es2015-modules-strip": "^0.1.2",
     "browser-sync": "^2.26.14",
-    "cheerio": "^1.0.0-rc.5",
-    "critical": "^2.0.6",
-    "eslint": "^7.19.0",
+    "cheerio": "^1.0.0-rc.6",
+    "critical": "^3.0.1",
+    "eslint": "^7.25.0",
     "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
@@ -25,9 +25,9 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "js-cookie": "^2.2.1",
-    "merge": "^2.1.0",
+    "merge": "^2.1.1",
     "node-fetch": "^2.6.1",
-    "ucf-athena-framework": "^1.0.8"
+    "ucf-athena-framework": "^1.1.0"
   },
   "browserslist": [
     "last 2 versions"
