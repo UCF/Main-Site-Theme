@@ -18,9 +18,9 @@ function enqueue_frontend_assets() {
 		wp_enqueue_style( 'webfont', $fontkey, null, null );
 	}
 
-	// Deregister jquery and re-register newer version in the document head.
+	// Deregister jquery and re-register newer version in the document footer.
 	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', null, null, false );
+	wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js', null, null, true );
 	wp_enqueue_script( 'jquery' );
 
 	// Conditionally include the UCF Header
@@ -28,7 +28,7 @@ function enqueue_frontend_assets() {
 		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
 
-	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', null, null, true );
+	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', null, null, true );
 	wp_enqueue_script( 'script', THEME_JS_URL . '/script.min.js', array( 'jquery', 'tether' ), $theme_version, true );
 
 	// Add localized script variables to the document
