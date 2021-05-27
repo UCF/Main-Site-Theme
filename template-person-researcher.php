@@ -1,0 +1,16 @@
+<?php
+/**
+ * Template Name: Researcher Profile
+ * Template Post Type: person
+ */
+?>
+
+<?php get_header(); the_post(); ?>
+
+<?php the_content(); ?>
+
+<?php get_template_part( 'template-parts/person/bio_education' ); ?>
+<?php get_template_part( 'template-parts/person/research' ); ?>
+<?php get_template_part( 'template-parts/person/news' ); ?>
+
+<?php get_footer(); ?>
