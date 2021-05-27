@@ -827,7 +827,7 @@ function define_customizer_fields( $wp_customize ) {
 
 	// Performance Settings
 	$wp_customize->add_setting(
-		'dns_prefetch_domains',
+		'dns_prefetch_domains'
 	);
 
 	$wp_customize->add_control(
