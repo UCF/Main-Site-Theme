@@ -2361,6 +2361,25 @@
                 "maxlength": ""
             },
             {
+                "key": "field_60b1044c625b5",
+                "label": "ORCID ID",
+                "name": "person_orcid_id",
+                "type": "text",
+                "instructions": "Unique ID out of the ORCID system that identifies a faculty member. Used for import purposes only.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_60afe6f4124ac",
                 "label": "Education",
                 "name": "",
@@ -2528,7 +2547,7 @@
             {
                 "key": "field_60afe79a124b1",
                 "label": "Books",
-                "name": "person_research_books",
+                "name": "person_books",
                 "type": "repeater",
                 "instructions": "Enter a citation for each book.",
                 "required": 0,
@@ -2550,25 +2569,6 @@
                         "name": "book_citation",
                         "type": "text",
                         "instructions": "",
-                        "required": 1,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    },
-                    {
-                        "key": "field_60afeb823c61d",
-                        "label": "Put Code",
-                        "name": "book_put_code",
-                        "type": "text",
-                        "instructions": "The unique code from ORCID which identifies the record. Used for import purposes.",
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
@@ -2610,25 +2610,6 @@
                         "type": "text",
                         "instructions": "",
                         "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    },
-                    {
-                        "key": "field_60afeba53c61e",
-                        "label": "Article Put Code",
-                        "name": "article_put_code",
-                        "type": "text",
-                        "instructions": "The unique code used by ORCID to identify the record. Used for import purposes.",
-                        "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
                             "width": "",
@@ -3093,7 +3074,7 @@
             {
                 "key": "field_60afe51815aad",
                 "label": "Email",
-                "name": "email",
+                "name": "person_email",
                 "type": "email",
                 "instructions": "The email of the person.",
                 "required": 0,
@@ -3111,7 +3092,7 @@
             {
                 "key": "field_60afe53415aae",
                 "label": "Phone",
-                "name": "phone",
+                "name": "person_phone",
                 "type": "text",
                 "instructions": "The person's phone number.",
                 "required": 0,
