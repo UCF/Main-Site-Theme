@@ -6,7 +6,7 @@
 $obj                 = get_queried_object();
 $videos              = get_query_var( 'header_videos' );
 $images              = get_query_var( 'header_images' );
-$header_height       = get_header_media_height( $obj );
+$header_height       = get_query_var( 'header_height' );
 ?>
 <div class="header-media-background-wrap">
 	<div class="header-media-background media-background-container">

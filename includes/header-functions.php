@@ -124,6 +124,26 @@ function get_header_h1_option( $obj ) {
 
 
 /**
+ * Returns the class name to apply to a header with a
+ * background image/video set to determine its height.
+ *
+ * @since 3.10.0
+ * @author Jo Dickson
+ * @param mixed $obj A queried object (e.g. WP_Post, WP_Term), or null
+ * @return string
+ */
+function get_header_media_height( $obj ) {
+	$header_height = get_field( 'page_header_height', $obj ) ?: 'header-media-default';
+
+	if ( $obj instanceof WP_Post && $obj->post_type === 'person' ) {
+		$header_height = 'header-media-person';
+	}
+
+	return $header_height;
+}
+
+
+/**
  * Returns the type of header to use for the given object.
  * The value returned will represent an equivalent template part's name.
  *
@@ -217,6 +237,7 @@ function get_header_markup() {
 	// Determine the header, content types to use
 	$header_type = get_header_type( $obj, $videos, $images );
 	$header_content_type = get_header_content_type( $obj );
+	$header_height = get_header_media_height( $obj );
 
 	// Set some variables to pass along to our template parts
 	// NOTE: set_query_var() and get_query_var() usage can be
@@ -226,6 +247,9 @@ function get_header_markup() {
 	set_query_var( 'header_content_type', $header_content_type );
 	set_query_var( 'header_images', $images );
 	set_query_var( 'header_videos', $videos );
+	if ( $header_type !== '' ) {
+		set_query_var( 'header_height', $header_height );
+	}
 
 	get_template_part( 'template-parts/layout/header', $header_type );
 }
