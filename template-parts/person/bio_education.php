@@ -14,7 +14,7 @@ if ( $post->post_type === 'person' ) :
 		$left_col_class  = 'col-lg-4 pr-lg-5 pull-lg-8';
 		$right_col_class = 'col-lg-8 push-lg-4';
 ?>
-	<section id="program-description" aria-labelledby="<?php echo $aria_labelledby; ?>">
+	<section id="person-description" aria-labelledby="<?php echo $aria_labelledby; ?>">
 		<div class="jumbotron jumbotron-fluid bg-secondary mb-0">
 			<div class="container">
 				<div class="row">

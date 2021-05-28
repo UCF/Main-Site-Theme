@@ -58,6 +58,16 @@
   }
 }
 
+.header-media-person {
+  @include media-breakpoint-down(xs) {
+    min-height: $header-media-xs-height / 2;
+  }
+
+  @include media-breakpoint-up(sm) {
+    min-height: 310px;
+  }
+}
+
 .header-media-background-wrap {
   bottom: 0;
   left: 0;

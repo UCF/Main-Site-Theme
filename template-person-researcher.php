@@ -7,8 +7,7 @@
 
 <?php get_header(); the_post(); ?>
 
-<?php the_content(); ?>
-
+<?php get_template_part( 'template-parts/person/at_a_glance' ); ?>
 <?php get_template_part( 'template-parts/person/bio_education' ); ?>
 <?php get_template_part( 'template-parts/person/research' ); ?>
 <?php get_template_part( 'template-parts/person/news' ); ?>
