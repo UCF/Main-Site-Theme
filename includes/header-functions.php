@@ -144,6 +144,11 @@ function get_header_type( $obj, $videos=null, $images=null ) {
 		$header_type = 'media';
 	}
 
+	// Post, term-specific overrides:
+	if ( $obj instanceof WP_Post && $obj->post_type === 'person' ) {
+		$header_type = 'person';
+	}
+
 	return $header_type;
 }
 
@@ -196,26 +201,6 @@ function get_header_content_type( $obj ) {
 	}
 
 	return $content_type;
-}
-
-
-/**
- * Returns the class name to apply to a header with a
- * background image/video set to determine its height.
- *
- * @since 3.10.0
- * @author Jo Dickson
- * @param mixed $obj A queried object (e.g. WP_Post, WP_Term), or null
- * @return string
- */
-function get_header_media_height( $obj ) {
-	$header_height = get_field( 'page_header_height', $obj ) ?: 'header-media-default';
-
-	if ( $obj instanceof WP_Post && $obj->post_type === 'person' ) {
-		$header_height = 'header-media-person';
-	}
-
-	return $header_height;
 }
 
 

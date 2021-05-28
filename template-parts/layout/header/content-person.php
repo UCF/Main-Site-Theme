@@ -1,6 +1,6 @@
 <?php
 /**
- * Markup for single Degree header content.
+ * Markup for single Person header content.
  */
 
 $obj      = get_queried_object();
@@ -11,13 +11,13 @@ if ( $title ):
 ?>
 <div class="header-content-inner">
 	<div class="container h-100 px-0">
-		<div class="row w-100" style="position: absolute; bottom: -30%;">
+		<div class="row w-100">
 			<div class="col-6 offset-3 col-md-4 offset-md-0 text-center text-md-left">
 				<img src="https://via.placeholder.com/300x300/" width="300" height="300" class="img-fluid rounded-circle" alt="">
 			</div>
 		</div>
 		<div class="row h-100">
-			<div class="col-md-8 offset-md-4 hidden-sm-down">
+			<div class="col-md-8 offset-md-4">
 				<h1 class="mt-5 mb-3">
 					<?php echo $title; ?>
 				</h1>
