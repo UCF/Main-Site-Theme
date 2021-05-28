@@ -132,8 +132,8 @@ function get_header_h1_option( $obj ) {
 function get_header_type( $obj, $videos=null, $images=null ) {
 	$header_type = '';
 
-	$videos = ( $videos !== null ) ? $videos : get_header_videos( $obj );
-	$images = ( $images !== null ) ? $images : get_header_images( $obj );
+	$videos = $videos ?? get_header_videos( $obj );
+	$images = $videos ?? get_header_images( $obj );
 
 	if ( $videos || $images ) {
 		$header_type = 'media';
