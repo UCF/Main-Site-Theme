@@ -187,45 +187,6 @@ function get_location_organizations( $post ) {
 	return ob_get_clean();
 }
 
-/**
- * Filter for setting the custom header content
- * @author Jim Barnes
- * @since 3.2.8
- * @param string $markup The passed in markup
- * @param object $obj The page object
- * @return string The header markup
- */
-function get_header_content_custom_location( $markup, $obj ) {
-	if ( isset( $obj->post_type ) && $obj->post_type === 'location' ) {
-		$title = $obj->post_title;
-		$address = isset( $obj->meta['ucf_location_address'] ) ?
-					$obj->meta['ucf_location_address'] :
-					null;
-
-		ob_start();
-	?>
-		<div class="header-content-inner align-self-start pt-4 pt-sm-0 align-self-sm-center">
-			<div class="container">
-				<div class="d-inline-block bg-primary-t-1">
-					<h1 class="header-title"><?php echo $title; ?></h1>
-				</div>
-				<?php if ( $address ) : ?>
-				<div class="clearfix"></div>
-				<div class="d-inline-block bg-inverse">
-					<address class="d-block header-subtitle location-address"><?php echo $address; ?></address>
-				</div>
-				<?php endif; ?>
-			</div>
-		</div>
-	<?php
-		$markup = ob_get_clean();
-	}
-
-	return $markup;
-}
-
-add_filter( 'get_header_content_title_subtitle', 'get_header_content_custom_location', 10, 2 );
-
 
 /**
  * Returns a lat+lng string suitable for use in
