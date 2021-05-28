@@ -179,6 +179,14 @@ function get_header_content_type( $obj ) {
 			break;
 	}
 
+	// Post, term-specific overrides:
+	if ( $obj instanceof WP_Post && $obj->post_type === 'location' ) {
+		$content_type = 'location';
+	}
+	if ( $obj instanceof WP_Post && $obj->post_type === 'degree' ) {
+		$content_type = 'degree';
+	}
+
 	return $content_type;
 }
 
