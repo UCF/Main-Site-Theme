@@ -123,7 +123,7 @@ function get_header_h1_option( $obj ) {
  * The value returned will represent an equivalent template part's name.
  *
  * @author Jo Dickson
- * @since TODO
+ * @since 3.10.0
  * @param mixed $obj A queried object (e.g. WP_Post, WP_Term), or null
  * @param array $videos Array of video files set to use in the header background for the given $obj
  * @param array $images Array of image files set to use in the header background for the given $obj
@@ -148,7 +148,7 @@ function get_header_type( $obj, $videos=null, $images=null ) {
  * The value returned will represent an equivalent template part's name.
  *
  * @author Jo Dickson
- * @since TODO
+ * @since 3.10.0
  * @param mixed $obj A queried object (e.g. WP_Post, WP_Term), or null
  * @return string The header type name
  */
@@ -194,8 +194,6 @@ function get_header_content_type( $obj ) {
 /**
  * Displays a header for the current queried object.
  *
- * @since TODO
- * @author Jo Dickson
  * @return void
  */
 function get_header_markup() {
