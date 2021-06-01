@@ -953,6 +953,23 @@ function define_customizer_fields( $wp_customize ) {
 
 	// People
 	$wp_customize->add_setting(
+		'fallback_person_thumbnail'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'fallback_person_thumbnail',
+			array(
+				'label'       => __( 'Default thumbnail' ),
+				'description' => 'The default thumbnail image for people when a featured image isn\'t set.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'mime_type'   => 'image'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
 		'fallback_person_header'
 	);
 
