@@ -58,6 +58,18 @@
   }
 }
 
+.header-media-person {
+  background-color: darken($body-bg, 3%); // match .bg-faded
+
+  @include media-breakpoint-down(xs) {
+    min-height: 0; // adjust height on .header-media-background-wrap instead
+  }
+
+  @include media-breakpoint-up(lg) {
+    min-height: $header-media-person-lg-height;
+  }
+}
+
 .header-media-background-wrap {
   bottom: 0;
   left: 0;
@@ -65,6 +77,16 @@
   right: 0;
   top: 0;
   z-index: 1;
+
+  .header-media-person & {
+    @include media-breakpoint-only(xs) {
+      height: $header-media-person-xs-height;
+    }
+
+    @include media-breakpoint-between(sm, md) {
+      height: $header-media-person-sm-height;
+    }
+  }
 
   .single-degree & {
     background-color: $gray; // fallback color for readability if assets fail to load
@@ -78,6 +100,13 @@
 .header-media-background {
   height: 100%;
   width: 100%;
+}
+
+.header-person-img-row {
+  @include media-breakpoint-up(lg) {
+    position: absolute;
+    width: 100%;
+  }
 }
 
 .header-degree-content-col {

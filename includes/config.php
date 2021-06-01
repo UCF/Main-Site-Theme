@@ -153,7 +153,14 @@ function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'location',
 		array(
-			'title' => 'Location'
+			'title' => 'Locations'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'person',
+		array(
+			'title' => 'People'
 		)
 	);
 }
@@ -854,7 +861,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	// Google Map Key
+	// Locations
 	$wp_customize->add_setting(
 		'google_map_key',
 		array(
@@ -871,7 +878,6 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	// Location Fallback Image
 	$wp_customize->add_setting(
 		'location_fallback_image',
 		array(
@@ -942,6 +948,47 @@ function define_customizer_fields( $wp_customize ) {
 			'description' => 'The content that appears at the bottom of all location profiles.',
 			'type'        => 'textarea',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
+		)
+	);
+
+	// People
+	$wp_customize->add_setting(
+		'fallback_person_header'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_person_header',
+			array(
+				'label'       => __( 'Default header image (-sm+)' ),
+				'description' => 'The default background image displayed in the header of person profiles at the -sm breakpoint and up.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'width'       => 1600,
+				'height'      => 310,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_person_header_xs'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_person_header_xs',
+			array(
+				'label'       => __( 'Default header image (-xs)' ),
+				'description' => 'The default background image displayed in the header of person profiles at the -xs breakpoint.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'width'       => 575,
+				'height'      => 440,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
 		)
 	);
 }

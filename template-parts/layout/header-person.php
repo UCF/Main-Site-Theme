@@ -1,10 +1,11 @@
 <?php
 /**
- * Markup for page headers with media background(s).
+ * Markup for single Person profiles' headers.
  */
 
 $obj                 = get_queried_object();
 $videos              = get_query_var( 'header_videos' );
+$images              = get_query_var( 'header_images' );
 $header_content_type = get_query_var( 'header_content_type' );
 $header_height       = get_query_var( 'header_height' );
 ?>
@@ -17,13 +18,4 @@ $header_height       = get_query_var( 'header_height' );
 			<?php get_template_part( 'template-parts/layout/header/content', $header_content_type ); ?>
 		</div>
 	</div>
-
-	<?php
-	// Print a spacer div for headers with background videos (to make
-	// control buttons accessible), and for headers showing a standard
-	// title/subtitle to push them up a bit
-	if ( $videos || $header_content_type === 'title_subtitle' ):
-	?>
-	<div class="header-media-controlfix"></div>
-	<?php endif; ?>
 </div>
