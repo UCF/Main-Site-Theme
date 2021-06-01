@@ -135,6 +135,7 @@ function get_header_h1_option( $obj ) {
 function get_header_media_height( $obj ) {
 	$header_height = get_field( 'page_header_height', $obj ) ?: 'header-media-default';
 
+	// Post, term-specific overrides:
 	if ( $obj instanceof WP_Post && $obj->post_type === 'person' ) {
 		$header_height = 'header-media-person';
 	}
@@ -162,11 +163,6 @@ function get_header_type( $obj, $videos=null, $images=null ) {
 
 	if ( $videos || $images ) {
 		$header_type = 'media';
-	}
-
-	// Post, term-specific overrides:
-	if ( $obj instanceof WP_Post && $obj->post_type === 'person' ) {
-		$header_type = 'person';
 	}
 
 	return $header_type;
