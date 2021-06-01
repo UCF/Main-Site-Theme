@@ -7,7 +7,7 @@
  * Modifies the rewrite rules for the People
  * custom post type
  * @author Jim Barnes
- * @since 3.9.3
+ * @since 3.10.0
  * @param array $args The argument array
  * @return array
  */
