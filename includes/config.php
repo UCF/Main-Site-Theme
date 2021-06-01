@@ -982,7 +982,7 @@ function define_customizer_fields( $wp_customize ) {
 				'description' => 'The default background image displayed in the header of person profiles at the -sm breakpoint and up.',
 				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
 				'width'       => 1600,
-				'height'      => 310,
+				'height'      => 330,
 				'flex_width'  => false,
 				'flex_height' => false
 			)
