@@ -10,20 +10,20 @@ $subtitle = 'TODO'; // TODO modify to use person's title instead
 if ( $title ):
 ?>
 <div class="header-content-inner">
-	<div class="container h-100 px-0">
-		<div class="row w-100">
-			<div class="col-6 offset-3 col-md-4 offset-md-0 text-center text-md-left">
-				<img src="https://via.placeholder.com/300x300/" width="300" height="300" class="img-fluid rounded-circle" alt="">
+	<div class="container d-flex flex-column h-100">
+		<div class="row header-person-img-row">
+			<div class="col-6 offset-3 col-lg-4 offset-lg-0 px-0 px-md-5 px-lg-3 text-center text-lg-left">
+				<img src="https://via.placeholder.com/320x320/" width="320" height="320" class="img-fluid rounded-circle" alt="">
 			</div>
 		</div>
-		<div class="row h-100">
-			<div class="col-md-8 offset-md-4">
-				<h1 class="mt-5 mb-3">
+		<div class="row mt-lg-auto mb-lg-auto">
+			<div class="col-lg-8 offset-lg-4 text-center text-lg-left">
+				<h1 class="mt-4 mb-3 pt-sm-2">
 					<?php echo $title; ?>
 				</h1>
 
 				<?php if ( $subtitle ) : ?>
-				<span class="lead d-block">
+				<span class="lead d-block mb-4">
 					<?php echo $subtitle; ?>
 				</span>
 				<?php endif; ?>

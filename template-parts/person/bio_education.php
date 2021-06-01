@@ -11,7 +11,7 @@ if ( $post->post_type === 'person' ) :
 		if ( $education ) $aria_labelledby .= 'education-heading ';
 		$aria_labelledby = trim( $aria_labelledby );
 
-		$left_col_class  = 'col-lg-4 pr-lg-5 pull-lg-8';
+		$left_col_class  = 'col-lg-4 pr-lg-5 pull-lg-8 mt-5 mt-lg-0';
 		$right_col_class = 'col-lg-8 push-lg-4';
 ?>
 	<section id="person-description" aria-labelledby="<?php echo $aria_labelledby; ?>">

@@ -6,10 +6,10 @@ if ( $post->post_type === 'person' ) :
 	$departments = array(); // TODO
 ?>
 <section id="at-a-glance" aria-label="Details and Contact Information">
-	<div class="jumbotron jumbotron-fluid bg-faded mb-0">
+	<div class="jumbotron jumbotron-fluid bg-faded mb-0 pt-3 pt-lg-5 pb-4 pb-lg-5">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 offset-md-4">
+				<div class="col-lg-8 offset-lg-4">
 					<dl>
 						<?php if ( $colleges ) : ?>
 						<dt class="h6 text-uppercase text-default">College(s)</dt>
