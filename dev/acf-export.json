@@ -2324,7 +2324,7 @@
                 "label": "College",
                 "name": "person_college",
                 "type": "taxonomy",
-                "instructions": "Choose the college the faculty member is associate with.",
+                "instructions": "Choose the college the faculty member is associated with.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -3057,7 +3057,7 @@
                 "label": "Title",
                 "name": "person_title",
                 "type": "text",
-                "instructions": "The title of the person",
+                "instructions": "The person's job title",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -3076,7 +3076,7 @@
                 "label": "Email",
                 "name": "person_email",
                 "type": "email",
-                "instructions": "The email of the person.",
+                "instructions": "The person's email address",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
