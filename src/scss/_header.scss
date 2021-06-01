@@ -109,6 +109,10 @@
   }
 }
 
+.header-person-img {
+  max-width: $person-thumbnail-max-width;
+}
+
 .header-degree-content-col {
   .degree-template-template-degree-modern & {
     @include media-breakpoint-up(sm) {
