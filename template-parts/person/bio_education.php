@@ -2,8 +2,8 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
-	$biography = 'TODO';
-	$education = 'TODO';
+	$biography = get_the_content( null, false, $post );
+	$education = get_field( 'person_degrees', $post );
 
 	if ( $biography || $education ) :
 		$aria_labelledby = '';
@@ -31,7 +31,34 @@ if ( $post->post_type === 'person' ) :
 					?>
 					<div class="<?php echo $education_col; ?>">
 						<h2 class="h6 text-uppercase text-default mb-4" id="education-heading">Education</h2>
-						<?php echo $education; ?>
+						<ul class="list-unstyled">
+						<?php
+						foreach ( $education as $degree ) :
+							$degree_title = $degree['role_name'];
+
+							// Require base degree title before displaying anything else:
+							if ( $degree_title ) :
+								$institution = $degree['institution_name'];
+								$start_date  = $degree['start_date'];
+								$end_date    = $degree['end_date'];
+								$department  = $degree['department_name'];
+
+								if ( $department ) $degree_title .= ', ' . $department;
+								if ( $start_date ) $start_date = date( 'Y', strtotime( $start_date ) );
+								if ( $end_date ) $end_date = date( 'Y', strtotime( $end_date ) );
+
+								$date_range = implode( '-', array_filter( array( $start_date, $end_date ) ) );
+								$degree_subtitle = implode( ', ', array_filter( array( $institution, $date_range ) ) );
+						?>
+							<li class="mb-3">
+								<strong class="d-block"><?php echo $degree_title; ?></strong>
+								<?php echo $degree_subtitle; ?>
+							</li>
+						<?php
+							endif;
+						endforeach;
+						?>
+						</ul>
 					</div>
 					<?php endif; ?>
 				</div>
