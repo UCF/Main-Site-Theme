@@ -104,6 +104,7 @@
 
 .header-person-img-row {
   @include media-breakpoint-up(lg) {
+    pointer-events: none;
     position: absolute;
     width: 100%;
   }
