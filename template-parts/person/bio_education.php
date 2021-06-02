@@ -2,7 +2,7 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
-	$biography = get_the_content( null, false, $post );
+	$biography = trim( apply_filters( 'the_content', $post->post_content ) );
 	$education = get_field( 'person_degrees', $post );
 
 	if ( $biography || $education ) :
@@ -21,7 +21,10 @@ if ( $post->post_type === 'person' ) :
 					<?php if ( $biography ) : ?>
 					<div class="<?php echo $right_col_class; ?>">
 						<h2 id="biography-heading" class="sr-only">Biography</h2>
-						<?php echo $biography; ?>
+						<?php
+						// TODO add "view more" button for -xs-sm
+						echo $biography;
+						?>
 					</div>
 					<?php endif; ?>
 
