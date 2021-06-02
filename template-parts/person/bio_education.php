@@ -47,7 +47,7 @@ if ( $post->post_type === 'person' ) :
 								if ( $start_date ) $start_date = date( 'Y', strtotime( $start_date ) );
 								if ( $end_date ) $end_date = date( 'Y', strtotime( $end_date ) );
 
-								$date_range = implode( '-', array_filter( array( $start_date, $end_date ) ) );
+								$date_range = implode( '-', array_filter( array_unique( array( $start_date, $end_date ) ) ) );
 								$degree_subtitle = implode( ', ', array_filter( array( $institution, $date_range ) ) );
 						?>
 							<li class="mb-3">
