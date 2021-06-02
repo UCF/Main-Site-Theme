@@ -22,7 +22,7 @@ if ( $post->post_type === 'person' ) :
 					<div class="col-lg-8 offset-lg-4 mb-lg-2">
 						<dl class="row mb-0">
 							<?php if ( $has_org_info ) : ?>
-							<div class="<?php echo $col_class; ?> pr-sm-4 pr-lg-5">
+							<div class="<?php echo $col_class; ?> pr-sm-4 pr-md-5">
 
 								<?php if ( $colleges ) : ?>
 								<dt class="h6 text-uppercase text-default mb-3">College(s)</dt>
