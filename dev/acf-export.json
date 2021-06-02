@@ -2416,8 +2416,8 @@
                 "sub_fields": [
                     {
                         "key": "field_60afeac23c617",
-                        "label": "Insitution Name",
-                        "name": "insitution_name",
+                        "label": "Institution Name",
+                        "name": "institution_name",
                         "type": "text",
                         "instructions": "",
                         "required": 1,
