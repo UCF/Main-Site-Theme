@@ -3,3 +3,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.research-citations-list {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 1rem;
+    margin-left: 2em;
+    text-indent: -2em;
+  }
+}
