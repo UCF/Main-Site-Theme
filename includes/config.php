@@ -1008,6 +1008,23 @@ function define_customizer_fields( $wp_customize ) {
 			)
 		)
 	);
+
+	$wp_customize->add_setting(
+		'published_research_image'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'published_research_image',
+			array(
+				'label'       => __( 'Faculty - Published Research Graphic' ),
+				'description' => 'An icon or photo to display next to a faculty member\'s published research.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'mime_type'   => 'image'
+			)
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_fields' );
