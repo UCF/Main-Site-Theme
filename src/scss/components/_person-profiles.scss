@@ -3,3 +3,29 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.research-citation {
+  margin-bottom: 1rem;
+  margin-left: 2em;
+  text-indent: -2em;
+}
+
+.research-citations-more + .research-citations-expand {
+  .research-citations-expand-text-show {
+    display: inline;
+  }
+
+  .research-citations-expand-text-hide {
+    display: none;
+  }
+}
+
+.research-citations-more.show + .research-citations-expand {
+  .research-citations-expand-text-show {
+    display: none;
+  }
+
+  .research-citations-expand-text-hide {
+    display: inline;
+  }
+}
