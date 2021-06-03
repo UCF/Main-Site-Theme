@@ -29,7 +29,7 @@ if ( $post->post_type === 'person' ) :
 					<div class="col-12 col-lg-8 pr-lg-5">
 						<?php if ( $books ) : ?>
 						<h3 class="h5 text-uppercase mb-3">Books</h3>
-						<ul class="research-citations-list">
+						<ul class="research-citations-list mb-5">
 							<?php foreach ( $books as $book ) : ?>
 							<li>
 								<?php echo html_entity_decode( $book['book_citation'] ) ?>
@@ -39,8 +39,8 @@ if ( $post->post_type === 'person' ) :
 						<?php endif; ?>
 
 						<?php if ( $articles ) : ?>
-						<h3 class="h5 text-uppercase mt-5 mb-3">Articles</h3>
-						<ul class="research-citations-list">
+						<h3 class="h5 text-uppercase mb-3">Articles</h3>
+						<ul class="research-citations-list mb-5">
 							<?php foreach ( $articles as $article ) : ?>
 							<li>
 								<?php echo html_entity_decode( $article['article_citation'] ); ?>
