@@ -2,9 +2,13 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
-	$books                = get_field( 'person_books', $post );
-	$articles             = get_field( 'person_articles', $post );
 	$research_display_max = 5;
+	$books                = get_field( 'person_books', $post );
+	$books_featured       = is_array( $books ) && count( $books ) ? array_slice( $books, 0, $research_display_max ) : array();
+	$books_more           = is_array( $books ) && count( $books ) ? array_slice( $books, $research_display_max + 1 ) : array();
+	$articles             = get_field( 'person_articles', $post );
+	$articles_featured    = is_array( $articles ) && count( $articles ) ? array_slice( $articles, 0, $research_display_max ) : array();
+	$articles_more        = is_array( $articles ) && count( $articles ) ? array_slice( $articles, $research_display_max + 1 ) : array();
 	$has_research         = $books || $articles;
 
 	if ( $has_research ) :
@@ -31,25 +35,19 @@ if ( $post->post_type === 'person' ) :
 						<?php if ( $books ) : ?>
 						<div id="published-research-books" class="mb-5">
 							<h3 class="h5 text-uppercase mb-3">Books</h3>
-							<?php
-							for ( $i = 0; $i < $research_display_max; $i++ ) :
-								if ( isset( $books[$i]['book_citation'] ) ) :
-							?>
+							<?php foreach ( $books_featured as $book_featured ) : ?>
 							<p class="research-citation">
-								<?php echo html_entity_decode( $books[$i]['book_citation'] ) ?>
+								<?php echo html_entity_decode( $book_featured['book_citation'] ) ?>
 							</p>
-							<?php
-								endif;
-							endfor;
-							?>
+							<?php endforeach; ?>
 
-							<?php if ( count( $books ) > $research_display_max ) : ?>
+							<?php if ( $books_more ) : ?>
 							<div class="research-citations-more collapse" id="published-research-books-more">
-								<?php for ( $i = $research_display_max; $i < count( $books ); $i++ ) : ?>
+								<?php foreach ( $books_more as $book_more ) : ?>
 								<p class="research-citation">
-									<?php echo html_entity_decode( $books[$i]['book_citation'] ) ?>
+									<?php echo html_entity_decode( $book_more['book_citation'] ) ?>
 								</p>
-								<?php endfor; ?>
+								<?php endforeach; ?>
 							</div>
 
 							<button class="research-citations-expand btn btn-outline-primary mt-3" data-toggle="collapse" data-target="#published-research-books-more" aria-expanded="false" aria-controls="published-research-books-more">
@@ -70,25 +68,19 @@ if ( $post->post_type === 'person' ) :
 						<?php if ( $articles ) : ?>
 						<div id="published-research-articles" class="mb-5">
 							<h3 class="h5 text-uppercase mb-3">Articles</h3>
-							<?php
-							for ( $i = 0; $i < $research_display_max; $i++ ) :
-								if ( isset( $articles[$i]['article_citation'] ) ) :
-							?>
+							<?php foreach ( $articles_featured as $article_featured ) : ?>
 							<p class="research-citation">
-								<?php echo html_entity_decode( $articles[$i]['article_citation'] ) ?>
+								<?php echo html_entity_decode( $article_featured['article_citation'] ) ?>
 							</p>
-							<?php
-								endif;
-							endfor;
-							?>
+							<?php endforeach; ?>
 
-							<?php if ( count( $articles ) > $research_display_max ) : ?>
+							<?php if ( $articles_more ) : ?>
 							<div class="research-citations-more collapse" id="published-research-articles-more">
-								<?php for ( $i = $research_display_max; $i < count( $articles ); $i++ ) : ?>
+								<?php foreach ( $articles_more as $article_more ) : ?>
 								<p class="research-citation">
-									<?php echo html_entity_decode( $articles[$i]['article_citation'] ) ?>
+									<?php echo html_entity_decode( $article_more['article_citation'] ) ?>
 								</p>
-								<?php endfor; ?>
+								<?php endforeach; ?>
 							</div>
 
 							<button class="research-citations-expand btn btn-outline-primary mt-3" data-toggle="collapse" data-target="#published-research-articles-more" aria-expanded="false" aria-controls="published-research-articles-more">
