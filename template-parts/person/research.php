@@ -31,11 +31,17 @@ if ( $post->post_type === 'person' ) :
 						<?php if ( $books ) : ?>
 						<div id="published-research-books" class="mb-5">
 							<h3 class="h5 text-uppercase mb-3">Books</h3>
-							<?php for ( $i = 0; $i < $research_display_max; $i++ ) : ?>
+							<?php
+							for ( $i = 0; $i < $research_display_max; $i++ ) :
+								if ( isset( $books[$i]['book_citation'] ) ) :
+							?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $books[$i]['book_citation'] ) ?>
 							</p>
-							<?php endfor; ?>
+							<?php
+								endif;
+							endfor;
+							?>
 
 							<?php if ( count( $books ) > $research_display_max ) : ?>
 							<div class="research-citations-more collapse" id="published-research-books-more">
@@ -64,11 +70,17 @@ if ( $post->post_type === 'person' ) :
 						<?php if ( $articles ) : ?>
 						<div id="published-research-articles" class="mb-5">
 							<h3 class="h5 text-uppercase mb-3">Articles</h3>
-							<?php for ( $i = 0; $i < $research_display_max; $i++ ) : ?>
+							<?php
+							for ( $i = 0; $i < $research_display_max; $i++ ) :
+								if ( isset( $articles[$i]['article_citation'] ) ) :
+							?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $articles[$i]['article_citation'] ) ?>
 							</p>
-							<?php endfor; ?>
+							<?php
+								endif;
+							endfor;
+							?>
 
 							<?php if ( count( $articles ) > $research_display_max ) : ?>
 							<div class="research-citations-more collapse" id="published-research-articles-more">
