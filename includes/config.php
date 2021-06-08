@@ -1602,3 +1602,50 @@ function degree_admin_notices() {
 }
 
 add_action( 'admin_notices', 'degree_admin_notices' );
+
+
+/**
+ * Adds new columns for displaying person template names
+ * and each person's type
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param array $columns Existing column data
+ * @return array Modified column data
+ */
+function person_admin_define_columns( $columns ) {
+	$columns['type'] = 'Type';
+	$columns['template'] = 'Template';
+
+	return $columns;
+}
+
+add_filter( 'manage_person_posts_columns', 'person_admin_define_columns' );
+
+
+/**
+ * Displays values for custom "Template" and "Available Description"
+ * columns in the degree list admin view.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param string $column_name Column name
+ * @param int $post_id Post ID for individual post obj's in the list
+ * @return void
+ */
+function person_admin_set_columns( $column_name, $post_id ) {
+	switch ( $column_name ) {
+		case 'type':
+			$type = ucwords( get_post_meta( $post_id, 'person_type', true ) ) ?: 'Default';
+			echo $type;
+			break;
+		case 'template':
+			$template_name_slug_map = wp_get_theme()->get_page_templates( null, 'person' );
+			$template_slug = get_page_template_slug( $post_id );
+			$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[$template_slug] : 'Default';
+			echo $template_name;
+			break;
+	}
+}
+
+add_action( 'manage_person_posts_custom_column' , 'person_admin_set_columns', 10, 2 );
