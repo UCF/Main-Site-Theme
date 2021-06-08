@@ -2302,46 +2302,7 @@
     {
         "key": "group_60afe6ef8a553",
         "title": "Faculty Fields",
-        "fields": [
-            {
-                "key": "field_60bf83276fdf3",
-                "label": "At a Glance",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_60afe850124b6",
-                "label": "College",
-                "name": "person_college",
-                "type": "taxonomy",
-                "instructions": "Choose the college the faculty member is associated with.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "taxonomy": "colleges",
-                "field_type": "checkbox",
-                "add_term": 0,
-                "save_terms": 0,
-                "load_terms": 0,
-                "return_format": "object",
-                "multiple": 0,
-                "allow_null": 0
-            }
-        ],
+        "fields": [],
         "location": [
             [
                 {

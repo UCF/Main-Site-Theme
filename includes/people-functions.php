@@ -24,6 +24,27 @@ add_filter( 'ucf_people_post_type_args', 'modify_people_post_type_args', 10, 1 )
 
 
 /**
+ * Unregister the People Group taxonomy for this site
+ */
+function remove_people_group_taxonomy() {
+	unregister_taxonomy( 'people_group' );
+}
+
+add_action( 'init', 'remove_people_group_taxonomy' );
+
+
+/**
+ * Modifies the taxonomies assigned to the Person
+ * post type for this site.
+ */
+function modify_person_taxonomies() {
+	return array( 'colleges' );
+}
+
+add_filter( 'ucf_people_taxonomies', 'modify_person_taxonomies' );
+
+
+/**
  * Returns the featured image or a fallback for the
  * given Person.
  *
