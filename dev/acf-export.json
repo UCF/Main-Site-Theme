@@ -2304,8 +2304,8 @@
         "title": "Faculty Fields",
         "fields": [
             {
-                "key": "field_60afe82b124b5",
-                "label": "Organizational Information",
+                "key": "field_60bf83276fdf3",
+                "label": "At a Glance",
                 "name": "",
                 "type": "tab",
                 "instructions": "",
@@ -2340,289 +2340,6 @@
                 "return_format": "object",
                 "multiple": 0,
                 "allow_null": 0
-            },
-            {
-                "key": "field_60afe880124b7",
-                "label": "Department",
-                "name": "person_department",
-                "type": "text",
-                "instructions": "Enter the department of the faculty member.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_60b1044c625b5",
-                "label": "ORCID ID",
-                "name": "person_orcid_id",
-                "type": "text",
-                "instructions": "Unique ID out of the ORCID system that identifies a faculty member. Used for import purposes only.",
-                "required": 1,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
-                "key": "field_60afe6f4124ac",
-                "label": "Education",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_60afe706124ad",
-                "label": "Degrees",
-                "name": "person_degrees",
-                "type": "repeater",
-                "instructions": "Enter the degree, institution and years when each degree was received.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "collapsed": "",
-                "min": 0,
-                "max": 0,
-                "layout": "table",
-                "button_label": "",
-                "sub_fields": [
-                    {
-                        "key": "field_60afeac23c617",
-                        "label": "Institution Name",
-                        "name": "institution_name",
-                        "type": "text",
-                        "instructions": "",
-                        "required": 1,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    },
-                    {
-                        "key": "field_60afeb303c61b",
-                        "label": "Role Name",
-                        "name": "role_name",
-                        "type": "text",
-                        "instructions": "Generally this is the name of the degree conferred.",
-                        "required": 1,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    },
-                    {
-                        "key": "field_60afeae23c618",
-                        "label": "Start Date",
-                        "name": "start_date",
-                        "type": "date_picker",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "display_format": "F j, Y",
-                        "return_format": "m\/d\/Y",
-                        "first_day": 0
-                    },
-                    {
-                        "key": "field_60afeb073c619",
-                        "label": "End Date",
-                        "name": "end_date",
-                        "type": "date_picker",
-                        "instructions": "",
-                        "required": 1,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "display_format": "F j, Y",
-                        "return_format": "m\/d\/Y",
-                        "first_day": 0
-                    },
-                    {
-                        "key": "field_60afeb233c61a",
-                        "label": "Department Name",
-                        "name": "department_name",
-                        "type": "text",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    },
-                    {
-                        "key": "field_60afeb533c61c",
-                        "label": "Education Put Code",
-                        "name": "education_put_code",
-                        "type": "number",
-                        "instructions": "The number from ORCID which identifies the record. Used for import purposes.",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "min": "",
-                        "max": "",
-                        "step": ""
-                    }
-                ]
-            },
-            {
-                "key": "field_60afe789124b0",
-                "label": "Research",
-                "name": "",
-                "type": "tab",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "placement": "top",
-                "endpoint": 0
-            },
-            {
-                "key": "field_60afe79a124b1",
-                "label": "Books",
-                "name": "person_books",
-                "type": "repeater",
-                "instructions": "Enter a citation for each book.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "collapsed": "field_60afe7ae124b2",
-                "min": 0,
-                "max": 0,
-                "layout": "row",
-                "button_label": "Add Book",
-                "sub_fields": [
-                    {
-                        "key": "field_60afe7ae124b2",
-                        "label": "Book Citation",
-                        "name": "book_citation",
-                        "type": "text",
-                        "instructions": "",
-                        "required": 1,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    }
-                ]
-            },
-            {
-                "key": "field_60afe7cb124b3",
-                "label": "Articles",
-                "name": "person_articles",
-                "type": "repeater",
-                "instructions": "Enter a citation for each article published.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "collapsed": "field_60afe7e1124b4",
-                "min": 0,
-                "max": 0,
-                "layout": "row",
-                "button_label": "Add Article",
-                "sub_fields": [
-                    {
-                        "key": "field_60afe7e1124b4",
-                        "label": "Article Citation",
-                        "name": "article_citation",
-                        "type": "text",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
-                    }
-                ]
             }
         ],
         "location": [
@@ -3054,10 +2771,10 @@
         "fields": [
             {
                 "key": "field_60afe4f815aac",
-                "label": "Title",
+                "label": "Job Title",
                 "name": "person_title",
                 "type": "text",
-                "instructions": "The person's job title",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -3076,11 +2793,11 @@
                 "label": "Email",
                 "name": "person_email",
                 "type": "email",
-                "instructions": "The person's email address",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "40",
                     "class": "",
                     "id": ""
                 },
@@ -3094,11 +2811,11 @@
                 "label": "Phone",
                 "name": "person_phone",
                 "type": "text",
-                "instructions": "The person's phone number.",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "30",
                     "class": "",
                     "id": ""
                 },
@@ -3110,14 +2827,14 @@
             },
             {
                 "key": "field_60afe54e15aaf",
-                "label": "Office",
+                "label": "Office Bldg and Number",
                 "name": "person_office",
                 "type": "text",
-                "instructions": "The person's office (building and number).",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "30",
                     "class": "",
                     "id": ""
                 },
@@ -3134,6 +2851,11 @@
                     "param": "post_type",
                     "operator": "==",
                     "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "default"
                 }
             ]
         ],
@@ -3976,6 +3698,373 @@
                     "param": "post_type",
                     "operator": "==",
                     "value": "degree"
+                }
+            ]
+        ],
+        "menu_order": 1,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_60bf81b8ce7f1",
+        "title": "Faculty Data",
+        "fields": [
+            {
+                "key": "field_60bf83d59851c",
+                "label": "Title and Organizational Info",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60bf8388c8af9",
+                "label": "Job Title",
+                "name": "person_title",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": "",
+                "copy_to_clipboard": false
+            },
+            {
+                "key": "field_60bf85ec22be3",
+                "label": "Email",
+                "name": "person_email",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf8393c8afb",
+                "label": "Phone",
+                "name": "person_phone",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf8395c8afc",
+                "label": "Office Bldg and Number",
+                "name": "person_office",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf859c32c6b",
+                "label": "Department",
+                "name": "person_department",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf85ba32c6c",
+                "label": "ORCID ID",
+                "name": "person_orcid_id",
+                "type": "read_only",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60afe6f4124ac",
+                "label": "Education",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60afe706124ad",
+                "label": "Degrees",
+                "name": "person_degrees",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_60afeac23c617",
+                        "label": "Institution Name",
+                        "name": "institution_name",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb303c61b",
+                        "label": "Role Name",
+                        "name": "role_name",
+                        "type": "read_only",
+                        "instructions": "Generally this is the name of the degree conferred.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeae23c618",
+                        "label": "Start Date",
+                        "name": "start_date",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb073c619",
+                        "label": "End Date",
+                        "name": "end_date",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb233c61a",
+                        "label": "Department Name",
+                        "name": "department_name",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb533c61c",
+                        "label": "Education Put Code",
+                        "name": "education_put_code",
+                        "type": "read_only",
+                        "instructions": "The number from ORCID which identifies the record. Used for import purposes.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_60afe789124b0",
+                "label": "Research",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60afe79a124b1",
+                "label": "Books",
+                "name": "person_books",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7ae124b2",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Book",
+                "sub_fields": [
+                    {
+                        "key": "field_60afe7ae124b2",
+                        "label": "Book Citation",
+                        "name": "book_citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_60afe7cb124b3",
+                "label": "Articles",
+                "name": "person_articles",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Article",
+                "sub_fields": [
+                    {
+                        "key": "field_60afe7e1124b4",
+                        "label": "Article Citation",
+                        "name": "article_citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-faculty.php"
                 }
             ]
         ],
