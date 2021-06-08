@@ -2302,7 +2302,46 @@
     {
         "key": "group_60afe6ef8a553",
         "title": "Faculty Fields",
-        "fields": [],
+        "fields": [
+            {
+                "key": "field_60bfb3877b135",
+                "label": "Promotional Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60bfb3957b136",
+                "label": "Promo Section",
+                "name": "person_promo_section",
+                "type": "post_object",
+                "instructions": "Select an existing Section to display at the bottom of the faculty member's profile.  This will be shown in lieu of the Faculty Promo Default Section set in the Customizer, if set.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "ucf_section"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "id",
+                "ui": 1
+            }
+        ],
         "location": [
             [
                 {
