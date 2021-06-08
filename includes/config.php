@@ -1025,6 +1025,21 @@ function define_customizer_fields( $wp_customize ) {
 			)
 		)
 	);
+
+	$wp_customize->add_setting(
+		'faculty_fallback_promo'
+	);
+
+	$wp_customize->add_control(
+		'faculty_fallback_promo',
+		array(
+			'type'        => 'select',
+			'label'       => 'Faculty Promo Default Section',
+			'description' => 'An default Section post to display on faculty profiles when a person-specific Section isn\'t set.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+			'choices'     => $section_choices
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_fields' );
