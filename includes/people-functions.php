@@ -78,6 +78,27 @@ function add_people_rewrite_rules() {
 add_action( 'init', 'add_people_rewrite_rules', 10, 0 );
 
 /**
+ * Unregister the People Group taxonomy for this site
+ */
+function remove_people_group_taxonomy() {
+	unregister_taxonomy( 'people_group' );
+}
+
+add_action( 'init', 'remove_people_group_taxonomy' );
+
+
+/**
+ * Modifies the taxonomies assigned to the Person
+ * post type for this site.
+ */
+function modify_person_taxonomies() {
+	return array( 'colleges' );
+}
+
+add_filter( 'ucf_people_taxonomies', 'modify_person_taxonomies' );
+
+
+/**
  * Returns the featured image or a fallback for the
  * given Person.
  *
