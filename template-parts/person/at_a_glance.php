@@ -2,7 +2,7 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
-	$colleges   = get_field( 'person_college', $post );
+	$colleges   = wp_get_post_terms( $post->ID, 'colleges' );
 	$department = get_field( 'person_department', $post );
 	$office     = get_field( 'person_office', $post );
 	$phone      = get_field( 'person_phone', $post );
