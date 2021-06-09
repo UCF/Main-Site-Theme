@@ -1,13 +1,7 @@
 <?php
 $post = isset( $post ) ? $post : get_queried_object();
 
-$alternate_career_section = get_field( 'alternate_career_section', $post );
-
-if ( $post->post_type === 'degree' && ! empty( $alternate_career_section ) && ! is_supplementary_degree( $post ) ) :
-	echo do_shortcode( "[ucf-section id='$alternate_career_section']" );
-endif;
-
-if ( $post->post_type === 'degree' && empty( $alternate_career_section ) && ! is_supplementary_degree( $post ) ) :
+if ( $post->post_type === 'degree' && ! is_supplementary_degree( $post ) ) :
 	$fallback_career_content = trim( get_theme_mod_or_default( 'degree_careers_intro' ) );
 	$has_careers             = empty( main_site_get_degree_careers( $post ) ) ? false : true;
 	$has_skills              = have_rows( 'degree_skills_list', $post );
@@ -33,4 +27,10 @@ if ( $post->post_type === 'degree' && empty( $alternate_career_section ) && ! is
 	</section>
 <?php
 	endif;
+endif;
+
+$additional_careers_section = get_field( 'additional_careers_section', $post );
+
+if ( $post->post_type === 'degree' && ! empty( $additional_careers_section ) && ! is_supplementary_degree( $post ) ) :
+	echo do_shortcode( "[ucf-section id='$additional_careers_section']" );
 endif;
