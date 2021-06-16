@@ -14,25 +14,28 @@ define( 'THEME_FONT_URL', THEME_STATIC_URL . '/fonts' );
 define( 'THEME_FA_VERSION', '4.7.0' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
-	'degrees_undergraduate_application' => 'https://apply.ucf.edu/application/',
-	'degrees_graduate_application'      => 'https://application.graduate.ucf.edu/#/',
-	'degrees_graduate_rfi_url_base'     => 'https://applynow.graduate.ucf.edu/register/',
-	'degrees_graduate_rfi_form_id'      => 'bad6c39a-5c60-4895-9128-5785ce014085',
-	'catalog_desc_cta_intro'            => '',
+	'degrees_undergraduate_application'   => 'https://apply.ucf.edu/application/',
+	'degrees_graduate_application'        => 'https://application.graduate.ucf.edu/#/',
+	'degrees_graduate_rfi_url_base'       => 'https://applynow.graduate.ucf.edu/register/',
+	'degrees_graduate_rfi_form_id'        => 'bad6c39a-5c60-4895-9128-5785ce014085',
+	'catalog_desc_cta_intro'              => '',
 	'degree_deadlines_undergraduate_deadline_order' => 'Freshmen, Transfers, International',
 	'degree_deadlines_graduate_deadline_order'      => 'Domestic, International',
-	'degree_careers_intro'              => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
+	'degree_careers_intro'                => 'UCF prepares you for life beyond the classroom. Here, you&rsquo;ll experience '
 										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
 										   . 'faculty to networking with top employers across Central Florida to gaining '
 										   . 'first-hand experience in internships nearby. Achieve your degree and more as a Knight.',
-	'cloud_typography_key'              => '//cloud.typography.com/730568/675644/css/fonts.css',
-	'gw_verify'                         => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
-	'gtm_id'                            => 'GTM-MBPLZH',
-	'google_map_key'                    => '',
-	'location_fallback_image'           => '',
-	'chartbeat_uid'                     => '2806',
-	'chartbeat_domain'                  => 'ucf.edu',
-	'search_service_url'                => 'https://search.smca.ucf.edu/service.php'
+	'cloud_typography_key'                => '//cloud.typography.com/730568/675644/css/fonts.css',
+	'gw_verify'                           => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
+	'gtm_id'                              => 'GTM-MBPLZH',
+	'google_map_key'                      => '',
+	'location_fallback_image'             => '',
+	'chartbeat_uid'                       => '2806',
+	'chartbeat_domain'                    => 'ucf.edu',
+	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
+	'statements_page_path'                => 'statements',
+	'statements_per_page'                 => 30,
+	'statements_archive_transient_expire' => 300 // seconds
 ) ) );
 
 function __init__() {
@@ -120,6 +123,13 @@ function define_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'statements',
+		array(
+			'title' => 'Statements Archive'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'webfonts',
 		array(
 			'title' => 'Web Fonts'
@@ -130,6 +140,13 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'analytics',
 		array(
 			'title' => 'Analytics'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'performance',
+		array(
+			'title' => 'Performance'
 		)
 	);
 
@@ -652,6 +669,72 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Statements
+	$wp_customize->add_setting(
+		'statements_page_path',
+		array(
+			'default' => get_theme_mod_default( 'statements_page_path' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'statements_page_path',
+		array(
+			'type'        => 'text',
+			'label'       => 'Statements Page Path',
+			'description' => 'Relative path from the main site root that the Statements page lives at.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'statements_archive_endpoint'
+	);
+
+	$wp_customize->add_control(
+		'statements_archive_endpoint',
+		array(
+			'type'        => 'text',
+			'label'       => 'Statements Archive API Endpoint',
+			'description' => 'URL to the API endpoint that lists Statement data by year and author.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'statements_archive_transient_expire',
+		array(
+			'default' => get_theme_mod_default( 'statements_archive_transient_expire' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'statements_archive_transient_expire',
+		array(
+			'type'        => 'text',
+			'label'       => 'Statements Archive Transient Expiration',
+			'description' => 'Amount of time, in seconds, that Statement archive data should be cached. Set to 0 or an empty value to not utilize transient caching.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'statements_per_page',
+		array(
+			'default' => get_theme_mod_default( 'statements_per_page' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'statements_per_page',
+		array(
+			'type'        => 'number',
+			'label'       => 'Statements Per Page',
+			'description' => 'The number of Statements that should be listed on the Statements page at a time.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
+		)
+	);
+
 	// Web Fonts
 	$wp_customize->add_setting(
 		'cloud_typography_key',
@@ -739,6 +822,35 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Chartbeat Domain',
 			'description' => 'Example: <em>some.domain.com</em>',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'analytics'
+		)
+	);
+
+	// Performance Settings
+	$wp_customize->add_setting(
+		'dns_prefetch_domains',
+	);
+
+	$wp_customize->add_control(
+		'dns_prefetch_domains',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Additional Required Origins for DNS Prefetching',
+			'description' => 'Specify a comma-separated list of domains to third-party origins that should be prefetched using <code>&lt;link rel="dns-prefetch"&gt;</code> that WordPress doesn\'t already handle out-of-the-box.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'async_css_exclude'
+	);
+
+	$wp_customize->add_control(
+		'async_css_exclude',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Exclude Stylesheets',
+			'description' => 'Specify a comma-separated list of stylesheet handles that should not be loaded asynchronously when critical CSS is in use.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
 		)
 	);
 
@@ -1083,6 +1195,79 @@ add_filter( 'wpseo_sitemap_exclude_empty_terms', 'yoast_sitemap_empty_terms', 10
 
 
 /**
+ * Returns a degree's program type formatted to be used
+ * as a custom variable in Yoast titles and descriptions.
+ *
+ * @since v3.8.2
+ * @author Cadie Stockman
+ * @return string program type title
+ */
+function get_yoast_title_degree_program_type() {
+	global $post;
+	if ( ! $post || $post->post_type !== 'degree' ) return;
+
+	$program_type = get_degree_program_type( $post );
+
+	switch ( $program_type->name ) {
+		case 'Master':
+			return 'Master\'s Degree';
+			break;
+		case 'Bachelor':
+			return 'Bachelor\'s Degree';
+			break;
+		default:
+			return $program_type->name;
+			break;
+	}
+}
+
+
+/**
+ * Callback for the %%statements_current_filter%% snippet variable
+ * for use on the Statements page title/meta description.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return mixed String, or void if the current page is not the Statements page
+ */
+function get_yoast_statements_current_filter_snippet_variable() {
+	$phrase = apply_filters( 'mainsite_yoast_statements_current_filter_snippet_variable', '' );
+	if ( $phrase ) return $phrase;
+}
+
+
+/**
+ * Callback for the %%statements_by_filter%% snippet variable
+ * for use on the Statements page title/meta description.
+ *
+ * @since 3.9.0
+ * @author Jo Dickson
+ * @return mixed String, or void if the current page is not the Statements page
+ */
+function get_yoast_statements_by_filter_snippet_variable() {
+	$phrase = apply_filters( 'mainsite_yoast_statements_by_filter_snippet_variable', '' );
+	if ( $phrase ) return $phrase;
+}
+
+
+/**
+ * Registers the Yoast variable additions.
+ * NOTE: The snippet preview in the backend will show the custom variable markup
+ * (i.e. '%%program_type%%') but the variable's output will be utilized on the front-end.
+ *
+ * @since v3.8.2
+ * @author Cadie Stockman
+ */
+function yoast_register_variables() {
+	wpseo_register_var_replacement( '%%program_type%%', 'get_yoast_title_degree_program_type', 'advanced', 'Provides a program_type string for usage in degree titles.' );
+	wpseo_register_var_replacement( '%%statements_current_filter%%', 'get_yoast_statements_current_filter_snippet_variable', 'advanced', 'Provides the current filter in use on the Statements page title/meta description.' );
+	wpseo_register_var_replacement( '%%statements_by_filter%%', 'get_yoast_statements_by_filter_snippet_variable', 'advanced', 'Provides a string describing the current view for use on the Statements page title/meta description.' );
+}
+
+add_action( 'wpseo_register_extra_replacements', 'yoast_register_variables' );
+
+
+/**
  * Ensures that only published degrees are available to
  * select from when picking existing degrees for Colleges'
  * "Top Degrees" lists.
@@ -1252,3 +1437,72 @@ function degree_admin_set_columns( $column_name, $post_id ) {
 
 add_action( 'manage_degree_posts_custom_column' , 'degree_admin_set_columns', 10, 2 );
 
+
+/**
+ * Defines custom bulk actions for degrees.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @param array $bulk_actions Existing array of bulk action keys/names
+ * @return array Modified $bulk_actions
+ */
+function degree_admin_define_bulk_actions( $bulk_actions ) {
+	$bulk_actions['enable-rfi'] = 'Enable RFI Form';
+	$bulk_actions['disable-rfi'] = 'Disable RFI Form';
+
+	return $bulk_actions;
+}
+
+add_filter( 'bulk_actions-edit-degree', 'degree_admin_define_bulk_actions', 10, 1 );
+
+
+/**
+ * Defines behavior for custom degree bulk actions.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @param string $redirect_url The redirect URL when bulk action completes
+ * @param string $action The action name being taken
+ * @param array $post_ids Array of degree IDs to take the action on
+ * @return string Redirect URL
+ */
+function degree_admin_set_bulk_actions( $redirect_url, $action, $post_ids ) {
+	if ( in_array( $action, array( 'enable-rfi', 'disable-rfi' ) ) ) {
+		$updated_value = ( $action === 'enable-rfi' );
+		$query_arg     = ( $action === 'enable-rfi' ) ? 'rfi-enabled' : 'rfi-disabled';
+
+		foreach ( $post_ids as $post_id ) {
+			// `degree_custom_enable_rfi` field key
+			update_field( 'field_5fad570953063', $updated_value, $post_id );
+		}
+
+		// Remove existing query args from previous requests
+		$redirect_url = remove_query_arg( 'rfi-disabled', remove_query_arg( 'rfi-enabled', $redirect_url ) );
+
+		$redirect_url = add_query_arg( $query_arg, count( $post_ids ), $redirect_url );
+	}
+
+	return $redirect_url;
+}
+
+add_filter( 'handle_bulk_actions-edit-degree', 'degree_admin_set_bulk_actions', 10, 3 );
+
+
+/**
+ * Defines admin notices for degree-related actions.
+ *
+ * @since 3.8.5
+ * @author Jo Dickson
+ * @return void
+ */
+function degree_admin_notices() {
+	if ( ! empty( $_REQUEST['rfi-enabled'] ) ) {
+		$num_changed = (int) $_REQUEST['rfi-enabled'];
+		printf( '<div id="message" class="updated notice is-dismissable"><p>' . __( 'Enabled RFI forms on %d degrees.', 'txtdomain' ) . '</p></div>', $num_changed );
+	} else if ( ! empty( $_REQUEST['rfi-disabled'] ) ) {
+		$num_changed = (int) $_REQUEST['rfi-disabled'];
+		printf( '<div id="message" class="updated notice is-dismissable"><p>' . __( 'Disabled RFI forms on %d degrees.', 'txtdomain' ) . '</p></div>', $num_changed );
+	}
+}
+
+add_action( 'admin_notices', 'degree_admin_notices' );

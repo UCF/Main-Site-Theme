@@ -12,6 +12,9 @@ const sass = require('gulp-sass');
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const merge = require('merge');
+const critical = require('critical');
+const fetch = require('node-fetch');
+const cheerio = require('cheerio');
 
 
 let config = {
@@ -25,9 +28,13 @@ let config = {
     fontPath: './static/fonts'
   },
   devPath: './dev',
+  criticalCSSPath: './dev/critical-css',
   packagesPath: './node_modules',
   sync: false,
-  syncTarget: 'http://localhost/wordpress/'
+  syncTarget: 'http://localhost/wordpress/',
+  criticalCSS: {
+    sources: []
+  }
 };
 
 /* eslint-disable no-sync */
@@ -182,6 +189,120 @@ gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
 
 
 //
+// Critical CSS generation
+//
+gulp.task('critical-css', (done) => {
+  const sources = config.criticalCSS.sources;
+
+  if (sources.length) {
+    // Define a base set of arguments to pass to Critical
+    // for each source in `sources`:
+    const baseArgs = {
+      inline: false,
+      target: {
+        css: `${config.criticalCSSPath}/critical.min.css`
+      },
+      // Viewport dimensions to determine above-the-fold content.
+      // These values should be roughly based on available Athena
+      // breakpoints, but factor in most common device dimensions and
+      // aspect ratios logged via analytics for each breakpoint range.
+      dimensions: [
+        {
+          height: 900,
+          width: 575
+        },
+        {
+          height: 1024,
+          width: 767
+        },
+        {
+          height: 1366,
+          width: 991
+        },
+        {
+          height: 800,
+          width: 1199
+        },
+        {
+          height: 1000,
+          width: 1600
+        }
+      ],
+      minify: true,
+      extract: false,
+      ignore: {
+        atrule: ['@font-face']
+      }
+    };
+
+    // Retrieve each source, and pass each thru Critical:
+    sources.forEach((source) => {
+      const args = merge(baseArgs, source.args);
+      args.target.css = `${config.criticalCSSPath}/${source.name}.min.css`;
+
+      fetch(source.url)
+        .catch((err) => console.error(err))
+        .then((res) => res.text())
+        .then((body) => {
+          // Load document into Cheerio for easier DOM processing/traversal
+          const $ = cheerio.load(body);
+
+          // Remove existing inline critical CSS
+          const $existingCriticalCSS = $('style#critical-css');
+          if ($existingCriticalCSS.length) {
+            $existingCriticalCSS.remove();
+          }
+
+          // Strip stylesheets whose hrefs are found in
+          // source.ignoreStylesheets, because Critical
+          // apparently can't do this on its own
+          if (source.ignoreStylesheets) {
+            source.ignoreStylesheets.forEach((ignoreRule) => {
+              const $ignoreStylesheets = $(`link[rel="stylesheet"][href^="${ignoreRule}"]`);
+              if ($ignoreStylesheets.length) {
+                $ignoreStylesheets.remove();
+              }
+            });
+          }
+
+          // Remove preload and noscript tags in the head
+          const $preload = $('head link[rel="preload"]');
+          if ($preload.length) {
+            $preload.remove();
+          }
+          const $noscript = $('head noscript');
+          if ($noscript.length) {
+            $noscript.remove();
+          }
+
+          // Revert async loading to non-async so that critical
+          // can do its job. For the purpose of this script, just
+          // set the media attr to `screen` for all async-loaded
+          // styles.
+          const $headStyles = $('head link[rel="stylesheet"]');
+          if ($headStyles.length) {
+            $headStyles.each((i, elem) => {
+              const onload = $(elem).attr('onload');
+              if (onload) {
+                $(elem).attr('media', 'screen');
+                $(elem).attr('onload', null);
+              }
+            });
+          }
+
+          body = $.html();
+
+          args.html = body;
+          critical.generate(args);
+        });
+    });
+  }
+
+  done();
+});
+
+
+//
 // JavaScript
 //
 
@@ -195,8 +316,16 @@ gulp.task('js-build-theme', () => {
   return buildJS(`${config.src.jsPath}/script.js`, config.dist.jsPath);
 });
 
+gulp.task('js-build-degree-page', () => {
+  return buildJS(`${config.src.jsPath}/degree-page.js`, config.dist.jsPath);
+});
+
+gulp.task('js-build-degree-search-typeahead', () => {
+  return buildJS(`${config.src.jsPath}/degree-search-typeahead.js`, config.dist.jsPath);
+});
+
 // All js-related tasks
-gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme'));
+gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme', 'js-build-degree-page', 'js-build-degree-search-typeahead'));
 
 
 //

@@ -87,6 +87,8 @@ function get_header_videos( $obj ) {
  * Returns title text for use in the page header.
  **/
  function get_header_title( $obj ) {
+	if ( is_404() ) return '';
+
 	$field_id = get_object_field_id( $obj );
 	$title = '';
 
