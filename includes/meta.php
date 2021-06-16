@@ -102,15 +102,15 @@ if ( $gw_verify ):
 global $post;
 if ( ! $post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) :
 ?>
-<link rel="preload" href="https://universityheader.ucf.edu/bar/css/bar.css" as="style" crossorigin>
-<link rel="preload" href="https://universityheader.ucf.edu/bar/css/1200-breakpoint.css" as="style" crossorigin>
+<link rel="preload" href="https://universityheader.ucf.edu/bar/css/bar.css" as="style">
+<link rel="preload" href="https://universityheader.ucf.edu/bar/css/1200-breakpoint.css" as="style">
 <?php endif; ?>
 
 <?php
 // Preload cloud.typography key or most common fallback fonts
 if ( $fontkey = get_theme_mod_or_default( 'cloud_typography_key' ) ) :
 ?>
-<link rel="preload" href="<?php echo $fontkey; ?>" as="style" crossorigin>
+<link rel="preload" href="<?php echo $fontkey; ?>" as="style">
 <?php else: ?>
 <link rel="preload" href="<?php echo THEME_FONT_URL; ?>/ucf-sans-serif-alt/ucfsansserifalt-medium-webfont.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="<?php echo THEME_FONT_URL; ?>/ucf-sans-serif-alt/ucfsansserifalt-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
