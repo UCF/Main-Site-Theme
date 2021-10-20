@@ -3850,12 +3850,28 @@
                 "display_type": "text"
             },
             {
+                "key": "field_61704977b3a1b",
+                "label": "Employee ID",
+                "name": "person_employee_id",
+                "type": "read_only",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
                 "key": "field_60bf85ba32c6c",
                 "label": "ORCID ID",
                 "name": "person_orcid_id",
                 "type": "read_only",
                 "instructions": "",
-                "required": 1,
+                "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
                     "width": "",
@@ -4035,8 +4051,8 @@
                 "sub_fields": [
                     {
                         "key": "field_60afe7ae124b2",
-                        "label": "Book Citation",
-                        "name": "book_citation",
+                        "label": "Citation",
+                        "name": "citation",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4072,8 +4088,193 @@
                 "sub_fields": [
                     {
                         "key": "field_60afe7e1124b4",
-                        "label": "Article Citation",
-                        "name": "article_citation",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_617048c3b3a11",
+                "label": "Conference Proceedings",
+                "name": "person_proceedings",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Conference Proceeding",
+                "sub_fields": [
+                    {
+                        "key": "field_617048c3b3a12",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_61704906b3a13",
+                "label": "Grants",
+                "name": "person_grants",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Grant",
+                "sub_fields": [
+                    {
+                        "key": "field_61704906b3a14",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_6170491db3a15",
+                "label": "Honorific Awards",
+                "name": "person_awards",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Honorific Award",
+                "sub_fields": [
+                    {
+                        "key": "field_6170491db3a16",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_61704936b3a17",
+                "label": "Patents",
+                "name": "person_patents",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Patent",
+                "sub_fields": [
+                    {
+                        "key": "field_61704936b3a18",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_61704954b3a19",
+                "label": "Clinical Trials",
+                "name": "person_trials",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Clinical Trial",
+                "sub_fields": [
+                    {
+                        "key": "field_61704954b3a1a",
+                        "label": "Citation",
+                        "name": "citation",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
