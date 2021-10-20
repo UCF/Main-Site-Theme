@@ -55,7 +55,7 @@ if ( $post->post_type === 'person' ) :
 							<h3 class="h5 text-uppercase mb-3">Books</h3>
 							<?php foreach ( $books_featured as $book_featured ) : ?>
 							<p class="research-citation">
-								<?php echo html_entity_decode( $book_featured['book_citation'] ) ?>
+								<?php echo html_entity_decode( $book_featured['citation'] ) ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -63,7 +63,7 @@ if ( $post->post_type === 'person' ) :
 							<div class="research-citations-more collapse" id="published-research-books-more">
 								<?php foreach ( $books_more as $book_more ) : ?>
 								<p class="research-citation">
-									<?php echo html_entity_decode( $book_more['book_citation'] ) ?>
+									<?php echo html_entity_decode( $book_more['citation'] ) ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
