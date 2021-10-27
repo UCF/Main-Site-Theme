@@ -70,7 +70,7 @@ Note that compiled, minified css and js files are included within the repo.  Cha
 [Enabling debug mode](https://codex.wordpress.org/Debugging_in_WordPress) in your `wp-config.php` file is recommended during development to help catch warnings and bugs.
 
 ### Requirements
-* node
+* node v16+
 * gulp-cli
 
 ### Instructions
