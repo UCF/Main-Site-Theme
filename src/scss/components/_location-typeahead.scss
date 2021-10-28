@@ -22,10 +22,7 @@
     color: $white;
     cursor: pointer;
     margin-bottom: 0;
-    overflow: hidden;
     padding: .5rem 1.25rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 
     &:first-child,
     &.no-border {
