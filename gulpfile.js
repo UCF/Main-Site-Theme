@@ -4,11 +4,11 @@ const gulp = require('gulp');
 const autoprefixer = require('gulp-autoprefixer');
 const cleanCSS = require('gulp-clean-css');
 const include = require('gulp-include');
-const eslint = require('gulp-eslint');
+const eslint = require('gulp-eslint-new');
 const isFixed = require('gulp-eslint-if-fixed');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const merge = require('merge');
@@ -228,7 +228,6 @@ gulp.task('critical-css', (done) => {
           width: 1600
         }
       ],
-      minify: true,
       extract: false,
       ignore: {
         atrule: ['@font-face']
