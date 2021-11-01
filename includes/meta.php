@@ -254,7 +254,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	endif;
 }
 
-add_action( 'after_body_open', 'google_tag_manager_noscript', 0 );
+add_action( 'wp_body_open', 'google_tag_manager_noscript', 0 );
 
 
 /**
