@@ -54,11 +54,18 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 					ob_start();
 					if ( $stats ) :
 						foreach ( $stats as $index => $stat ) :
+							$details_id = "fact-details-$index";
 				?>
 							<div class="col-sm-6 col-lg-4 fact-block">
-								<aside>
-									<img src="<?php echo $stat["icon"]["url"]; ?>" alt="<?php echo $stat["icon"]["alt"]; ?>" title="<?php echo $stat["icon"]["title"]; ?>" class="fact-header fact-header-lg fact-header-icon img-fluid">
-									<div class="fact-details"><?php echo $stat["copy"]; ?></div>
+								<aside aria-labelledby="<?php echo $details_id; ?>">
+									<img
+										src="<?php echo $stat['icon']['url']; ?>"
+										alt="<?php echo $stat['icon']['alt']; ?>"
+										width="<?php echo $stat['icon']['width']; ?>"
+										height="<?php echo $stat['icon']['height']; ?>"
+										class="fact-header fact-header-lg fact-header-icon w-auto"
+									>
+									<div class="fact-details" id="<?php echo $details_id; ?>"><?php echo $stat["copy"]; ?></div>
 								</aside>
 							</div>
 				<?php

@@ -313,9 +313,12 @@ function format_phonebook_result_primary( $result, $is_dept, $is_org, $is_group 
 	</span>
 	<?php endif; ?>
 
-	<?php if ( ! $is_group && $result->department ): ?>
-	<span class="department d-block mb-3">
-		<a href="?query=<?php echo urlencode( $result->department ); ?>#phonebook-departments"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
+	<?php if ( ! $is_group && $result->email ): ?>
+	<span class="email d-block mb-3">
+		<a href="mailto:<?php echo $result->email; ?>">
+			<span class="fa fa-envelope mr-1" aria-hidden="true"></span>Email
+			<span class="sr-only"> <?php echo $result->email; ?></span>
+		</a>
 	</span>
 	<?php endif; ?>
 <?php
@@ -381,14 +384,14 @@ function format_phonebook_result_location( $result, $is_dept, $is_org, $is_group
 function format_phonebook_result_contact( $result, $is_dept, $is_org, $is_group ) {
 	ob_start();
 ?>
-	<?php if ( ! $is_group && $result->email ) : ?>
+	<?php if ( ! $is_group && $result->department ): ?>
 		<div class="row">
 			<div class="col-3 col-md-12 mb-2">
-				<span class="result-label text-default-aw text-uppercase">Email</span>
+				<span class="result-label text-default-aw text-uppercase">Department</span>
 			</div>
 			<div class="col-9 col-md-12 mb-3">
-				<span class="email">
-					<a href="mailto:<?php echo $result->email; ?>" aria-label="Email"><?php echo $result->email; ?></a>
+				<span class="department">
+					<a href="?query=<?php echo urlencode( $result->department ); ?>#phonebook-departments"><?php echo phonebook_fix_name_case( $result->department ); ?></a>
 				</span>
 			</div>
 		</div>

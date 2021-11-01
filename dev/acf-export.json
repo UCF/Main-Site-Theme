@@ -1336,13 +1336,40 @@
                 "endpoint": 0
             },
             {
+                "key": "field_6127ec2c61df1",
+                "label": "Disable Deadlines",
+                "name": "disable_deadlines",
+                "type": "true_false",
+                "instructions": "If checked, application deadlines will <em>not<\/em> be displayed on this degree's profile.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "Disable",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5fa41b8492d13",
                 "label": "Alternate Section",
                 "name": "alternate_deadlines_section",
                 "type": "post_object",
                 "instructions": "Specify an alternate Section post to display in lieu of the standard Application Deadlines section on this degree's profile.  This value takes precedence over the Undergraduate\/Graduate Fallback Section values in the Customizer.",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_6127ec2c61df1",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -1352,7 +1379,7 @@
                     "ucf_section"
                 ],
                 "taxonomy": "",
-                "allow_null": 0,
+                "allow_null": 1,
                 "multiple": 0,
                 "return_format": "id",
                 "ui": 1
@@ -1364,7 +1391,15 @@
                 "type": "repeater",
                 "instructions": "Specify a list of application deadlines to display on this degree's profile.  If provided, this list replaces the list of imported deadlines assigned to this degree.",
                 "required": 0,
-                "conditional_logic": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_6127ec2c61df1",
+                            "operator": "!=",
+                            "value": "1"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
