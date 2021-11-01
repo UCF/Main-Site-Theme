@@ -29,9 +29,10 @@
   .email,
   .phone {
     display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  }
+
+  .phone {
+    overflow-wrap: break-word;
   }
 
   .name {

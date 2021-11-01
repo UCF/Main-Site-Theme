@@ -13,7 +13,7 @@
 		<div id="ucfhb" style="min-height: 50px; background-color: #000;"></div>
 		<?php endif; ?>
 
-		<?php do_action( 'after_body_open' ); ?>
+		<?php do_action( 'wp_body_open' ); ?>
 
 		<header class="site-header">
 			<?php echo get_header_markup(); ?>

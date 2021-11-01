@@ -96,6 +96,6 @@ if ( class_exists( 'UCF_Alert_Common' ) ) {
 	function mainsite_display_alert() {
 		echo UCF_Alert_Common::display_alert( 'faicon', array() );
 	}
-	add_filter( 'after_body_open', 'mainsite_display_alert', 1 );
+	add_filter( 'wp_body_open', 'mainsite_display_alert', 1 );
 
 }

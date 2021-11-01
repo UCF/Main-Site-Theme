@@ -84,7 +84,7 @@ if ( $post->post_type === 'degree' ) :
 
 												$nav_link_slug = ( $group_name ) ? 'degree-deadlines--' . sanitize_title( $group_name ) : 'degree-deadlines--all';
 											?>
-											<li class="nav-item">
+											<li class="nav-item" role="presentation">
 												<a class="<?php echo $nav_link_class; ?>"
 													id="tab-<?php echo $nav_link_slug; ?>"
 													data-toggle="pill"
