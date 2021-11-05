@@ -28,6 +28,25 @@ function enqueue_frontend_assets() {
 		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
 
+	// Register TypeaheadJS and Handlebars. Gets enqueued on the
+	// Faculty Search page template.  Not currently used by other
+	// plugins.
+	wp_register_script(
+		'mainsite-typeahead',
+		'https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.0.1/typeahead.bundle.min.js',
+		array( 'jquery' ),
+		null,
+		true
+	);
+	wp_register_script(
+		'mainsite-handlebars',
+		'https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js',
+		array(),
+		null,
+		true
+	);
+
+	// Enqueue Tether and our main theme script file
 	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', null, null, true );
 	wp_enqueue_script( 'script', THEME_JS_URL . '/script.min.js', array( 'jquery', 'tether' ), $theme_version, true );
 
@@ -44,6 +63,21 @@ function enqueue_frontend_assets() {
 	// Enqueue script specific to degree profiles
 	if ( $post && $post->post_type === 'degree' ) {
 		wp_enqueue_script( 'mainsite-degree-page', THEME_JS_URL . '/degree-page.min.js', array( 'jquery' ), $theme_version, true );
+	}
+
+	// Enqueue scripts specific to the faculty search page
+	if (
+		$post
+		&& $post->post_type === 'page'
+		&& get_page_template_slug( $post ) === 'template-faculty-search.php'
+	) {
+		wp_enqueue_script(
+			'mainsite-faculty-search',
+			THEME_JS_URL . '/faculty-search-typeahead.min.js',
+			array( 'jquery', 'mainsite-typeahead', 'mainsite-handlebars' ),
+			$theme_version,
+			true
+		);
 	}
 
 	// De-queue Gutenberg block styles and scripts when the Classic Editor

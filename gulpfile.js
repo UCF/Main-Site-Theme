@@ -323,8 +323,18 @@ gulp.task('js-build-degree-search-typeahead', () => {
   return buildJS(`${config.src.jsPath}/degree-search-typeahead.js`, config.dist.jsPath);
 });
 
+gulp.task('js-build-faculty-search-typeahead', () => {
+  return buildJS(`${config.src.jsPath}/faculty-search-typeahead.js`, config.dist.jsPath);
+});
+
 // All js-related tasks
-gulp.task('js', gulp.series('es-lint-theme', 'js-build-theme', 'js-build-degree-page', 'js-build-degree-search-typeahead'));
+gulp.task('js', gulp.series(
+  'es-lint-theme',
+  'js-build-theme',
+  'js-build-degree-page',
+  'js-build-degree-search-typeahead',
+  'js-build-faculty-search-typeahead'
+));
 
 
 //
