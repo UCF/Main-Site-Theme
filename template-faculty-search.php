@@ -57,7 +57,7 @@ $faculty_wp_query = new WP_Query( $args );
 	<script>
 		var FACULTY_SEARCH_SETTINGS = {
 			faculty: {
-				dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person' ); ?>",
+				dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?meta_key=person_type&meta_value=faculty' ); ?>",
 				selectedAction: function(event, obj) {
 					window.location = obj.link;
 				}

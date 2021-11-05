@@ -10,7 +10,7 @@
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
-      url: `${FACULTY_SEARCH_SETTINGS.faculty.dataEndpoint}?search=%QUERY`, // TODO filter by faculty
+      url: `${FACULTY_SEARCH_SETTINGS.faculty.dataEndpoint}&search=%QUERY`,
       wildcard: '%QUERY'
     },
     identify: function (data) {
