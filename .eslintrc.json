@@ -11,7 +11,8 @@
     "Cookies": true,
     "UCFEDU": true,
     "UCFDegreeSearch": true,
-    "Bloodhound": true
+    "Bloodhound": true,
+    "FACULTY_SEARCH_SETTINGS": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
