@@ -8,10 +8,10 @@
 <?php get_header(); the_post(); ?>
 
 <?php
-$query      = isset( $_GET['query'] ) ? sanitize_text_field( $_GET['query'] ) : '';
-$paged      = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
-$college    = isset( $_GET['colleges'] ) ? sanitize_text_field( $_GET['colleges'] ) : null;
-$department = isset( $_GET['departments'] ) ? sanitize_text_field( $_GET['departments'] ) : null;
+$query       = isset( $_GET['query'] ) ? sanitize_text_field( $_GET['query'] ) : '';
+$paged       = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
+$colleges    = isset( $_GET['colleges'] ) ? sanitize_text_field( $_GET['colleges'] ) : null;
+$departments = isset( $_GET['departments'] ) ? sanitize_text_field( $_GET['departments'] ) : null;
 
 $args = array(
 	'post_type'  => 'person',
