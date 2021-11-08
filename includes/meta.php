@@ -48,14 +48,10 @@ function enqueue_frontend_assets() {
 	}
 
 	// Register scripts and settings specific to the faculty search typeahead
-	$faculty_search_deps = apply_filters( 'ucf_post_list_js_deps', array() );
-	if ( ! in_array( 'jquery', $faculty_search_deps ) ) {
-		$faculty_search_deps[] = 'jquery';
-	}
 	wp_register_script(
 		'mainsite-faculty-search',
 		THEME_JS_URL . '/faculty-search-typeahead.min.js',
-		$faculty_search_deps,
+		array( 'jquery', 'typeahead-js', 'handlebars-js' ),
 		$theme_version,
 		true
 	);
