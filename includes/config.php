@@ -1094,7 +1094,7 @@ if ( function_exists( 'athena_sc_tinymce_init' ) ) {
 
 /**
  * Ensure the UCF Post List's JS dependencies are always
- * registered if the plugin is active (the "faculty" post
+ * registered if the plugin is active (the "faculty search" post
  * list layout requires them.)
  */
 if ( class_exists( 'UCF_Post_List_Common' ) ) {
