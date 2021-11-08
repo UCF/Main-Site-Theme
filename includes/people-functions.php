@@ -131,7 +131,7 @@ function get_person_thumbnail( $obj, $thumbnail_size='medium', $attr ) {
  * @author Jo Dickson
  * @return string
  */
-function get_faculty_page_url() {
+function get_faculty_search_page_url() {
 	$faculty_search_pg_path = untrailingslashit( get_theme_mod_or_default( 'faculty_search_page_path' ) );
 	$faculty_search_pg      = $faculty_search_pg_path ? get_page_by_path( $faculty_search_pg_path ) : null;
 	$faculty_search_url     = $faculty_search_pg ? get_permalink( $faculty_search_pg ) : '';
