@@ -17,6 +17,8 @@ $args = array(
 	'post_type'  => 'person',
 	'meta_key'   => 'person_type',
 	'meta_value' => 'faculty',
+	'orderby'    => 'post_title', // TODO use a meta field that stores last name/sort name instead
+	'order'      => 'ASC',
 	'paged'      => $paged
 );
 
@@ -54,73 +56,68 @@ $faculty_wp_query = new WP_Query( $args );
 ?>
 
 <div class="container mt-4 mt-md-5 pb-4 pb-md-5">
-	<script>
-		var FACULTY_SEARCH_SETTINGS = {
-			faculty: {
-				dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?meta_key=person_type&meta_value=faculty' ); ?>",
-				selectedAction: function(event, obj) {
-					window.location = obj.link;
-				}
-			},
-			colleges: {
-				dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges' ) ?>",
-				selectedAction: function(event, obj) {
-					window.location = "<?php echo get_permalink( $post->ID ); ?>?colleges=" + obj.slug;
-				}
-			},
-			departments: {
-				dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments' ) ?>",
-				selectedAction: function(event, obj) {
-					window.location = "<?php echo get_permalink( $post->ID ); ?>?departments=" + obj.slug;
-				}
-			}
-		};
-	</script>
-	<form class="faculty-search" action="<?php echo get_permalink( $post->ID ); ?>">
-		<div class="input-group">
-			<label for="faculty-search-query" class="sr-only">Faculty member name, college or department</label>
-			<input
-				type="text"
-				name="query"
-				class="faculty-search-typeahead form-control"
-				value="<?php echo stripslashes( htmlentities( $query ) ); ?>"
-				placeholder="Search by name, college or department"
-			>
-			<span class="input-group-btn">
-				<button class="btn btn-primary" type="submit">
-					<span class="fa fa-search" aria-hidden="true"></span>
-					<span class="sr-only hidden-md-up">Search</span>
-					<span class="hidden-sm-down">Search</span>
-				</button>
-			</span>
-		</div>
-	</form>
+	<?php the_content(); ?>
+</div>
 
-	<p>
-		<?php echo $faculty_wp_query->found_posts; ?>
-		results found
-		<?php if ( $query ) : ?>
-			for <strong>&ldquo;<?php echo $query; ?>&rdquo;</strong>
-		<?php elseif ( $colleges ) : ?>
-			in <strong><?php echo $colleges; // TODO use college name(s) or alias(es) here ?></strong>
-		<?php elseif ( $departments ) : ?>
-			in <strong><?php echo $departments; // TODO use dept name(s) here ?></strong>
+<hr role="presentation" class="my-0">
+
+<div class="jumbotron bg-faded mb-0 px-0">
+	<div class="container">
+		<p class="lead mb-5">
+			<?php echo $faculty_wp_query->found_posts; ?>
+			results found
+			<?php if ( $query ) : ?>
+				for <strong>&ldquo;<?php echo $query; ?>&rdquo;</strong>
+			<?php elseif ( $colleges ) : ?>
+				in <strong><?php echo $colleges; // TODO use college name(s) or alias(es) here ?></strong>
+			<?php elseif ( $departments ) : ?>
+				in <strong><?php echo $departments; // TODO use dept name(s) here ?></strong>
+			<?php endif; ?>
+		</p>
+
+		<?php if ( $faculty_wp_query->have_posts() ) : ?>
+			<?php
+			while ( $faculty_wp_query->have_posts() ) : $faculty_wp_query->the_post();
+				$job_title = get_post_meta( $post->ID, 'person_title', true );
+			?>
+			<div class="card mb-4 position-relative">
+				<div class="card-block">
+					<div class="row">
+						<div class="col-3 col-lg-2">
+							<?php
+							echo get_person_thumbnail(
+								$post,
+								'medium',
+								array(
+									'class' => 'w-100 h-auto'
+								)
+							); ?>
+						</div>
+						<div class="col-9 col-lg-10 position-static">
+							<h2 class="h5">
+								<a class="stretched-link" href="<?php echo get_permalink(); ?>">
+									<?php the_title(); ?>
+								</a>
+							</h2>
+
+							<?php if ( $job_title ) : ?>
+							<p class="mb-0"><?php echo $job_title; ?></p>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php endwhile; ?>
+
+			<?php
+			// TODO port over pagination overrides from UCF WP Theme?
+			echo paginate_links( array(
+				'current' => $paged,
+				'total'   => $faculty_wp_query->max_num_pages
+			) );
+			?>
 		<?php endif; ?>
-	</p>
-
-	<?php if ( $faculty_wp_query->have_posts() ) : ?>
-		<?php while ( $faculty_wp_query->have_posts() ) : $faculty_wp_query->the_post(); ?>
-			<?php echo get_the_title(); // TODO ?>
-		<?php endwhile; ?>
-
-		<?php
-		// TODO port over pagination overrides from UCF WP Theme?
-		echo paginate_links( array(
-			'current' => $paged,
-			'total'   => $faculty_wp_query->max_num_pages
-		) );
-		?>
-	<?php endif; ?>
+	</div>
 </div>
 
 <?php wp_reset_postdata(); ?>
