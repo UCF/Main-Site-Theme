@@ -16,8 +16,9 @@ add_filter( 'ucf_post_list_get_layouts', 'mainsite_get_post_list_layouts', 10, 1
 
 function mainsite_post_list_sc_atts( $sc_atts, $layout ) {
 	if ( $layout === 'faculty' ) {
-		// TODO verify numberposts override works
-		$sc_atts['numberposts'] = 0; // force get_posts() to return nothing (since this layout returns REST endpoint results)
+		// force get_posts() to return nothing (since this layout
+		// returns REST endpoint results)
+		$sc_atts['post_type']      = 'idontexist';
 		$sc_atts['display_search'] = true; // this layout always returns a typeahead
 	}
 
@@ -209,13 +210,11 @@ function mainsite_post_list_search( $content, $posts, $atts ) {
 				value="<?php echo stripslashes( htmlentities( $query ) ); ?>"
 				placeholder="<?php echo $atts['search_placeholder']; ?>"
 			>
-			<span class="input-group-btn">
-				<button class="btn btn-primary" type="submit">
-					<span class="fa fa-search" aria-hidden="true"></span>
-					<span class="sr-only hidden-md-up">Search</span>
-					<span class="hidden-sm-down">Search</span>
-				</button>
-			</span>
+			<button class="btn btn-primary d-md-flex" type="submit">
+				<span class="fa fa-search mr-md-2" aria-hidden="true"></span>
+				<span class="sr-only hidden-md-up">Search</span>
+				<span class="hidden-sm-down">Search</span>
+			</button>
 		</div>
 	</form>
 <?php
