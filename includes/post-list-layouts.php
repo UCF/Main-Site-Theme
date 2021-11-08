@@ -16,6 +16,7 @@ add_filter( 'ucf_post_list_get_layouts', 'mainsite_get_post_list_layouts', 10, 1
 
 function mainsite_post_list_sc_atts( $sc_atts, $layout ) {
 	if ( $layout === 'faculty' ) {
+		// TODO verify numberposts override works
 		$sc_atts['numberposts'] = 0; // force get_posts() to return nothing (since this layout returns REST endpoint results)
 		$sc_atts['display_search'] = true; // this layout always returns a typeahead
 	}
@@ -186,12 +187,13 @@ function mainsite_post_list_search( $content, $posts, $atts ) {
 	if ( $atts['layout'] !== 'faculty' ) return $content;
 
 	$current_queried_obj = get_queried_object();
-	$faculty_search_url = ''; // TODO get from customizer option?
+	$faculty_search_url  = get_faculty_page_url();
 	// If we're on the Faculty Search pg, allow the current `query` param
 	// to populate into the typeahead <input> by default:
 	$query = (
 		isset( $_GET['query'] )
 		&& $current_queried_obj
+		&& $faculty_search_url
 		&& get_permalink( $current_queried_obj ) === $faculty_search_url
 	) ? sanitize_text_field( $_GET['query'] ) : '';
 

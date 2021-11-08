@@ -60,8 +60,7 @@ function enqueue_frontend_assets() {
 		true
 	);
 
-	// TODO get faculty search page from customizer option?
-	$faculty_search_url = '';
+	$faculty_search_url = get_faculty_page_url();
 	ob_start();
 ?>
 	var FACULTY_SEARCH_SETTINGS = {
