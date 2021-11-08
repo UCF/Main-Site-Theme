@@ -4,7 +4,7 @@
  */
 function mainsite_get_post_list_layouts( $layouts ) {
 	$layouts['location'] = 'Locations';
-	$layouts['faculty'] = 'Faculty Search';
+	$layouts['faculty_search'] = 'Faculty Search';
 }
 
 add_filter( 'ucf_post_list_get_layouts', 'mainsite_get_post_list_layouts', 10, 1 );
@@ -15,7 +15,7 @@ add_filter( 'ucf_post_list_get_layouts', 'mainsite_get_post_list_layouts', 10, 1
  */
 
 function mainsite_post_list_sc_atts( $sc_atts, $layout ) {
-	if ( $layout === 'faculty' ) {
+	if ( $layout === 'faculty_search' ) {
 		// force get_posts() to return nothing (since this layout
 		// returns REST endpoint results)
 		$sc_atts['post_type']      = 'idontexist';
@@ -53,14 +53,14 @@ add_filter( 'ucf_post_list_search_classnames', 'mainsite_post_list_search_classn
  * Modifies the post list search script printed per layout
  * in this theme.
  *
- * NOTE: The "faculty" layout does not utilize typeahead settings
+ * NOTE: The "faculty_search" layout does not utilize typeahead settings
  * passed in from UCF Post List SC filters, and overriding of settings
  * with the `ucf_post_list_search_localdata`, `ucf_post_list_search_classnames`
  * `ucf_post_list_search_limit` and `ucf_post_list_search_templates` hooks are
  * not supported.
  */
 function mainsite_post_list_search_script( $content, $posts, $atts, $typeahead_settings ) {
-	if ( $atts['layout'] === 'faculty' ) {
+	if ( $atts['layout'] === 'faculty_search' ) {
 		// Generate inline script that initializes the search typeahead:
 		ob_start();
 	?>
@@ -168,27 +168,27 @@ if ( ! function_exists( 'ucf_post_list_display_location_after' ) ) {
  * which directs search queries to our designated Faculty Search page
  */
 
-if ( ! function_exists( 'ucf_post_list_display_faculty_before' ) ) {
-	add_filter( 'ucf_post_list_display_faculty_before', '__return_empty_string', 10, 3 );
+if ( ! function_exists( 'ucf_post_list_display_faculty_search_before' ) ) {
+	add_filter( 'ucf_post_list_display_faculty_search_before', '__return_empty_string', 10, 3 );
 }
 
-if ( ! function_exists( 'ucf_post_list_display_faculty_title' ) ) {
-	add_filter( 'ucf_post_list_display_faculty_title', '__return_empty_string', 10, 3 );
+if ( ! function_exists( 'ucf_post_list_display_faculty_search_title' ) ) {
+	add_filter( 'ucf_post_list_display_faculty_search_title', '__return_empty_string', 10, 3 );
 }
 
-if ( ! function_exists( 'ucf_post_list_display_faculty' ) ) {
-	add_filter( 'ucf_post_list_display_faculty', '__return_empty_string', 10, 3 );
+if ( ! function_exists( 'ucf_post_list_display_faculty_search' ) ) {
+	add_filter( 'ucf_post_list_display_faculty_search', '__return_empty_string', 10, 3 );
 }
 
-if ( ! function_exists( 'ucf_post_list_display_faculty_after' ) ) {
-	add_filter( 'ucf_post_list_display_faculty_after', '__return_empty_string', 10, 3 );
+if ( ! function_exists( 'ucf_post_list_display_faculty_search_after' ) ) {
+	add_filter( 'ucf_post_list_display_faculty_search_after', '__return_empty_string', 10, 3 );
 }
 
 function mainsite_post_list_search( $content, $posts, $atts ) {
-	if ( $atts['layout'] !== 'faculty' ) return $content;
+	if ( $atts['layout'] !== 'faculty_search' ) return $content;
 
 	$current_queried_obj = get_queried_object();
-	$faculty_search_url  = get_faculty_page_url();
+	$faculty_search_url  = get_faculty_search_page_url();
 	// If we're on the Faculty Search pg, allow the current `query` param
 	// to populate into the typeahead <input> by default:
 	$query = (

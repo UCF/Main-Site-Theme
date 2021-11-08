@@ -56,7 +56,7 @@ function enqueue_frontend_assets() {
 		true
 	);
 
-	$faculty_search_url = get_faculty_page_url();
+	$faculty_search_url = get_faculty_search_page_url();
 	ob_start();
 ?>
 	var FACULTY_SEARCH_SETTINGS = {
