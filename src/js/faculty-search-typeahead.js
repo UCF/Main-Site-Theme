@@ -1,53 +1,56 @@
 (function ($) {
 
-  const facultyLimit = 5;
-  const collegeLimit = 3;
-  const departmentLimit = 5;
+  $.fn.MainSiteFacultySearch = function (options) {
 
-  const typeaheadFacultySource = new Bloodhound({
-    datumTokenizer: function (datum) {
-      return Bloodhound.tokenizers.whitespace(datum.title.rendered);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    remote: {
-      url: `${FACULTY_SEARCH_SETTINGS.faculty.dataEndpoint}?search=%QUERY`, // TODO filter by faculty
-      wildcard: '%QUERY'
-    },
-    identify: function (data) {
-      return `degree_${data.id}`;
-    }
-  });
+    const typeaheadSettings = $.extend({
+      highlight: true,
+      minLength: 2
+    }, options);
 
-  const typeaheadCollegesSource = new Bloodhound({
-    datumTokenizer: function (datum) {
-      return Bloodhound.tokenizers.whitespace(datum.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: FACULTY_SEARCH_SETTINGS.colleges.dataEndpoint,
-    identify: function (data) {
-      return `college_${data.id}`;
-    }
-  });
+    const facultyLimit = 5;
+    const collegeLimit = 3;
+    const departmentLimit = 5;
 
-  const typeaheadDepartmentsSource = new Bloodhound({
-    datumTokenizer: function (datum) {
-      return Bloodhound.tokenizers.whitespace(datum.name);
-    },
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: FACULTY_SEARCH_SETTINGS.departments.dataEndpoint,
-    identify: function (data) {
-      return `department_${data.id}`;
-    }
-  });
 
-  $('.faculty-search-typeahead').each(function () {
-    const $input = $(this);
-
-    $input.typeahead(
-      {
-        highlight: true,
-        minLength: 2
+    const typeaheadFacultySource = new Bloodhound({
+      datumTokenizer: function (datum) {
+        return Bloodhound.tokenizers.whitespace(datum.title.rendered);
       },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote: {
+        url: `${FACULTY_SEARCH_SETTINGS.faculty.dataEndpoint}&search=%QUERY`,
+        wildcard: '%QUERY'
+      },
+      identify: function (data) {
+        return `degree_${data.id}`;
+      }
+    });
+
+    const typeaheadCollegesSource = new Bloodhound({
+      datumTokenizer: function (datum) {
+        return Bloodhound.tokenizers.whitespace(datum.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: FACULTY_SEARCH_SETTINGS.colleges.dataEndpoint,
+      identify: function (data) {
+        return `college_${data.id}`;
+      }
+    });
+
+    const typeaheadDepartmentsSource = new Bloodhound({
+      datumTokenizer: function (datum) {
+        return Bloodhound.tokenizers.whitespace(datum.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: FACULTY_SEARCH_SETTINGS.departments.dataEndpoint,
+      identify: function (data) {
+        return `department_${data.id}`;
+      }
+    });
+
+
+    this.typeahead(
+      typeaheadSettings,
       {
         name: 'results-faculty',
         source: typeaheadFacultySource.ttAdapter(),
@@ -89,6 +92,9 @@
       }
       return false;
     });
-  });
+
+    return this;
+
+  };
 
 }(jQuery));

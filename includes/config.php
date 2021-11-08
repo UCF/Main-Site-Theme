@@ -1067,6 +1067,16 @@ if ( function_exists( 'athena_sc_tinymce_init' ) ) {
 
 
 /**
+ * Ensure the UCF Post List's JS dependencies are always
+ * registered if the plugin is active (the "faculty" post
+ * list layout requires them.)
+ */
+if ( class_exists( 'UCF_Post_List_Common' ) ) {
+	add_filter( 'option_ucf_post_list_include_js_libs', '__return_true' );
+}
+
+
+/**
  * Allow special tags in post bodies that would get stripped otherwise for most users.
  * Modifies $allowedposttags defined in wp-includes/kses.php
  *
