@@ -109,13 +109,17 @@ $faculty_wp_query = new WP_Query( $args );
 			</div>
 			<?php endwhile; ?>
 
-			<?php
-			// TODO port over pagination overrides from UCF WP Theme?
-			echo paginate_links( array(
-				'current' => $paged,
-				'total'   => $faculty_wp_query->max_num_pages
-			) );
-			?>
+			<nav aria-label="Faculty result pagination">
+				<?php
+				echo paginate_links( array(
+					'current'   => $paged,
+					'total'     => $faculty_wp_query->max_num_pages,
+					'type'      => 'list',
+					'prev_text' => '<span class="fa fa-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
+					'next_text' => '<span class="fa fa-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>'
+				) );
+				?>
+			</nav>
 		<?php endif; ?>
 	</div>
 </div>
