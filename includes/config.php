@@ -32,6 +32,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'location_fallback_image'             => '',
 	'chartbeat_uid'                       => '2806',
 	'chartbeat_domain'                    => 'ucf.edu',
+	'faculty_search_page_path'            => 'faculty-search',
 	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
 	'statements_page_path'                => 'statements',
 	'statements_per_page'                 => 30,
@@ -112,6 +113,13 @@ function define_customizer_sections( $wp_customize ) {
 		array(
 			'title' => 'Skills and Career Opportunities',
 			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'faculty_search',
+		array(
+			'title' => 'Faculty Search'
 		)
 	);
 
@@ -661,6 +669,24 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Faculty Search
+	$wp_customize->add_setting(
+		'faculty_search_page_path',
+		array(
+			'default' => get_theme_mod_default( 'faculty_search_page_path' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'faculty_search_page_path',
+		array(
+			'type'        => 'text',
+			'label'       => 'Faculty Search Page Path',
+			'description' => 'Relative path from the main site root that the Faculty Search page lives at.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'faculty_search'
+		)
+	);
+
 	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'
@@ -1063,6 +1089,16 @@ add_filter( 'upload_mimes', 'custom_mimes' );
  **/
 if ( function_exists( 'athena_sc_tinymce_init' ) ) {
 	add_filter( 'athena_sc_enable_tinymce_formatting', '__return_true' );
+}
+
+
+/**
+ * Ensure the UCF Post List's JS dependencies are always
+ * registered if the plugin is active (the "faculty search" post
+ * list layout requires them.)
+ */
+if ( class_exists( 'UCF_Post_List_Common' ) ) {
+	add_filter( 'option_ucf_post_list_include_js_libs', '__return_true' );
 }
 
 

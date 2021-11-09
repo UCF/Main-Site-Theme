@@ -28,6 +28,7 @@ function enqueue_frontend_assets() {
 		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
 
+	// Enqueue Tether and our main theme script file
 	wp_enqueue_script( 'tether', 'https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js', null, null, true );
 	wp_enqueue_script( 'script', THEME_JS_URL . '/script.min.js', array( 'jquery', 'tether' ), $theme_version, true );
 
@@ -45,6 +46,43 @@ function enqueue_frontend_assets() {
 	if ( $post && $post->post_type === 'degree' ) {
 		wp_enqueue_script( 'mainsite-degree-page', THEME_JS_URL . '/degree-page.min.js', array( 'jquery' ), $theme_version, true );
 	}
+
+	// Register scripts and settings specific to the faculty search typeahead
+	wp_register_script(
+		'mainsite-faculty-search',
+		THEME_JS_URL . '/faculty-search-typeahead.min.js',
+		array( 'jquery', 'typeahead-js', 'handlebars-js' ),
+		$theme_version,
+		true
+	);
+
+	$faculty_search_url = get_faculty_search_page_url();
+	ob_start();
+?>
+	var FACULTY_SEARCH_SETTINGS = {
+		faculty: {
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?meta_key=person_type&meta_value=faculty' ); ?>",
+			selectedAction: function(event, obj) {
+				window.location = obj.link;
+			}
+		},
+		colleges: {
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges' ) ?>",
+			selectedAction: function(event, obj) {
+				window.location = "<?php echo $faculty_search_url; ?>?colleges=" + obj.slug;
+			}
+		},
+		departments: {
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments' ) ?>",
+			selectedAction: function(event, obj) {
+				window.location = "<?php echo $faculty_search_url; ?>?departments=" + obj.slug;
+			}
+		}
+	};
+<?php
+	$faculty_search_settings = trim( ob_get_clean() );
+
+	wp_add_inline_script( 'mainsite-faculty-search', $faculty_search_settings, 'before' );
 
 	// De-queue Gutenberg block styles and scripts when the Classic Editor
 	// plugin is active and users are not given the option to utilize the

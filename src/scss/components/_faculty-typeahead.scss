@@ -1,0 +1,58 @@
+.faculty-search {
+  .twitter-typeahead {
+    width: 100%;
+  }
+
+  .form-control {
+    width: 100%;
+  }
+
+  .tt-menu {
+    background-color: $black;
+    font-size: .9rem;
+    width: 100%;
+  }
+
+  .tt-dataset {
+    color: $white;
+  }
+
+  .tt-suggestion {
+    border-top: 1px solid $gray-dark;
+    color: $white;
+    cursor: pointer;
+    margin-bottom: 0;
+    padding: .5rem 1.25rem;
+
+    &:first-child,
+    &.no-border {
+      border-top: 0 solid transparent;
+    }
+
+    &.tt-cursor,
+    &:focus,
+    &:hover {
+      background-color: $brand-primary;
+      color: $black;
+
+      .suggestion-match-type {
+        color: $gray-dark;
+      }
+    }
+
+    &.no-hover {
+      &.tt-cursor,
+      &:focus,
+      &:hover {
+        background-color: inherit;
+        color: $white;
+      }
+    }
+
+    .suggestion-match-type {
+      color: $gray-dark;
+      font-size: .75rem;
+      margin-left: .75rem;
+    }
+  }
+}
