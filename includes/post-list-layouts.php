@@ -202,8 +202,8 @@ function mainsite_post_list_search( $content, $posts, $atts ) {
 ?>
 	<form class="faculty-search" action="<?php echo $faculty_search_url; ?>" data-id="post-list-<?php echo $atts['list_id']; ?>">
 		<div class="input-group">
-			<label for="faculty-search-query" class="sr-only">Faculty member name, college or department</label>
 			<input
+				aria-label="Search faculty members"
 				type="text"
 				name="query"
 				class="typeahead faculty-search-typeahead form-control"

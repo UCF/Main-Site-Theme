@@ -1,0 +1,42 @@
+//
+// Generic WP pagination styles
+//
+
+ul.page-numbers {
+  @extend .pagination;
+  justify-content: center;
+
+  li {
+    @extend .page-item;
+  }
+
+  a,
+  .current,
+  .dots {
+    @extend .page-link;
+  }
+
+  .current {
+    // Mimics .page-item.active .page-link
+    background-color: $pagination-active-bg;
+    border-color: $pagination-active-border;
+    color: $pagination-active-color;
+    z-index: 2;
+
+    @include hover-focus {
+      // Unset hover/focus states, since .current is not a link
+      background-color: $pagination-active-bg;
+      border-color: $pagination-active-border;
+      color: $pagination-active-color;
+    }
+  }
+
+  .dots {
+    // Mimics .page-item.disabled .page-link
+    background-color: $pagination-disabled-bg;
+    border-color: $pagination-disabled-border;
+    color: $pagination-disabled-color;
+    cursor: $cursor-disabled;
+    pointer-events: none;
+  }
+}
