@@ -8,51 +8,73 @@
 <?php get_header(); the_post(); ?>
 
 <?php
-$query       = isset( $_GET['query'] ) ? sanitize_text_field( $_GET['query'] ) : '';
-$paged       = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
-$colleges    = isset( $_GET['colleges'] ) ? sanitize_text_field( $_GET['colleges'] ) : null;
-$departments = isset( $_GET['departments'] ) ? sanitize_text_field( $_GET['departments'] ) : null;
+$query                 = isset( $_GET['query'] ) ? sanitize_text_field( $_GET['query'] ) : '';
+$paged                 = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
+$college_filter        = isset( $_GET['college'] ) ? sanitize_text_field( $_GET['college'] ) : null;
+$department_filter     = isset( $_GET['department'] ) ? sanitize_text_field( $_GET['department'] ) : null;
+$college               = null;
+$department            = null;
 
+// If the user explicitly filtered by college or department,
+// grab the term object:
+if ( $college_filter ) {
+	$college = get_term_by( 'slug', $college_filter, 'colleges' );
+}
+
+if ( $department_filter ) {
+	$department = get_term_by( 'slug', $department_filter, 'departments' );
+}
+
+// Set up baseline WP_Query args
 $args = array(
-	'post_type'  => 'person',
-	'meta_key'   => 'person_type',
-	'meta_value' => 'faculty',
-	'orderby'    => 'post_title', // TODO use a meta field that stores last name/sort name instead
-	'order'      => 'ASC',
-	'paged'      => $paged
+	'post_type'      => 'person',
+	'meta_key'       => 'person_type',
+	'meta_value'     => 'faculty',
+	'orderby'        => 'post_title', // TODO use a meta field that stores last name/sort name instead
+	'order'          => 'ASC',
+	'paged'          => $paged, // NOTE: this value must be explicitly set for paginate_links() to work properly
+	'posts_per_page' => 20 // NOTE: this value must be explicitly set for $faculty_wp_query->max_num_pages to be accurate when passed thru relevanssi
 );
 
 if ( $query ) {
-	// TODO why on earth does this work in the REST endpoint,
-	// but not via WP_Query directly???
 	$args['s'] = $query;
 }
 
-if ( $colleges || $departments ) {
+if ( $college || $department ) {
 	$args['tax_query'] = array();
 }
 
-if ( $colleges && $departments ) {
+if ( $college && $department ) {
 	$args['tax_query']['relation'] = 'AND';
 }
 
-if ( $colleges ) {
+if ( $college ) {
 	$args['tax_query'][] = array(
 		'taxonomy' => 'colleges',
-		'field'    => 'slug',
-		'terms'    => $colleges
+		'field'    => 'term_id',
+		'terms'    => $college->term_id
 	);
 }
 
-if ( $departments ) {
+if ( $department ) {
 	$args['tax_query'][] = array(
 		'taxonomy' => 'departments',
-		'field'    => 'slug',
-		'terms'    => $departments
+		'field'    => 'term_id',
+		'terms'    => $department->term_id
 	);
 }
 
-$faculty_wp_query = new WP_Query( $args );
+// If we're performing a search for a faculty member
+// by person name and Relevanssi is enabled, use
+// Relevanssi to get better search results.
+// Otherwise, just initialize a new WP_Query directly.
+if ( $query && function_exists( 'relevanssi_do_query' ) ) {
+	$faculty_wp_query = new WP_Query();
+	$faculty_wp_query->parse_query( $args );
+	relevanssi_do_query( $faculty_wp_query );
+} else {
+	$faculty_wp_query = new WP_Query( $args );
+}
 ?>
 
 <div class="container mt-4 mt-md-5 pb-4 pb-md-5">
@@ -65,13 +87,18 @@ $faculty_wp_query = new WP_Query( $args );
 	<div class="container">
 		<p class="lead mb-5">
 			<?php echo $faculty_wp_query->found_posts; ?>
-			results found
+			result<?php if ( $faculty_wp_query->found_posts !== 1 ) { ?>s<?php } ?> found
+
 			<?php if ( $query ) : ?>
-				for <strong>&ldquo;<?php echo $query; ?>&rdquo;</strong>
-			<?php elseif ( $colleges ) : ?>
-				in <strong><?php echo $colleges; // TODO use college name(s) or alias(es) here ?></strong>
-			<?php elseif ( $departments ) : ?>
-				in <strong><?php echo $departments; // TODO use dept name(s) here ?></strong>
+			for <strong>&ldquo;<?php echo $query; ?>&rdquo;</strong>
+			<?php endif; ?>
+
+			<?php if ( $department ) : ?>
+			in <strong><?php echo $department->name; ?></strong>
+			<?php endif; ?>
+
+			<?php if ( $college ) : ?>
+			in <strong>the <?php echo $college->name; ?></strong>
 			<?php endif; ?>
 		</p>
 
