@@ -59,7 +59,7 @@
           return $('<span>').html(obj.name).text();
         },
         templates: {
-          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-4 pt-2 mb-1">Faculty by College:</strong>'
+          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by College:</strong>'
         }
       },
       {
@@ -70,7 +70,7 @@
           return $('<span>').html(obj.name).text();
         },
         templates: {
-          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-4 pt-2 mb-1">Faculty by Department:</strong>'
+          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Department:</strong>'
         }
       },
       {
