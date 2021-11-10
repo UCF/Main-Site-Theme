@@ -78,7 +78,7 @@ $faculty_wp_query = new WP_Query( $args );
 		<?php if ( $faculty_wp_query->have_posts() ) : ?>
 			<?php
 			while ( $faculty_wp_query->have_posts() ) : $faculty_wp_query->the_post();
-				$job_title = get_post_meta( $post->ID, 'person_title', true );
+				$job_title = get_field( 'person_title', $post->ID );
 			?>
 			<div class="card mb-4 position-relative">
 				<div class="card-block">
