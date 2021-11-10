@@ -45,28 +45,115 @@ add_filter( 'ucf_people_taxonomies', 'modify_person_taxonomies' );
 
 
 /**
+ * Returns the ID of the featured image or fallback
+ * for the given Person.
+ *
+ * @since 3.10.0
+ * @author Jo Dickson
+ * @param object $obj WP_Post object for a single Person post
+ * @return mixed Attachment ID, or null if neither are available
+ */
+function get_person_thumbnail_id( $obj ) {
+	$thumbnail_id = get_post_thumbnail_id( $obj );
+
+	if ( ! $thumbnail_id ) {
+		$thumbnail_id = get_theme_mod( 'fallback_person_thumbnail' );
+	}
+
+	if ( $thumbnail_id ) {
+		$thumbnail_id = intval( $thumbnail_id );
+	}
+
+	return $thumbnail_id;
+}
+
+
+/**
  * Returns the featured image or a fallback for the
  * given Person.
  *
  * @since 3.10.0
  * @author Jo Dickson
- * @param object WP_Post object for a single Person post
+ * @param object $obj WP_Post object for a single Person post
  * @param string $thumbnail_size Thumbnail size to use for the returned image
- * @param array $attr Additional arguments to pass to `get_the_post_thumbnail()` or `wp_get_attachment_image()`.
+ * @param array $attr Additional arguments to pass to `wp_get_attachment_image()`
  * @return string <img> HTML tag
  */
 function get_person_thumbnail( $obj, $thumbnail_size='medium', $attr ) {
-	$thumbnail = get_the_post_thumbnail( $obj, $thumbnail_size, $attr );
+	$thumbnail_id = get_person_thumbnail_id( $obj );
+	$thumbnail    = '';
 
-	if ( ! $thumbnail ) {
-		$fallback_id = get_theme_mod( 'fallback_person_thumbnail' );
-		if ( $fallback_id ) {
-			$thumbnail = wp_get_attachment_image( $fallback_id, $thumbnail_size, false, $attr );
-		}
+	if ( $thumbnail_id ) {
+		$thumbnail = wp_get_attachment_image( $thumbnail_id, $thumbnail_size, false, $attr );
 	}
 
 	return $thumbnail;
 }
+
+
+/**
+ * REST API callback function that returns thumbnail details
+ * for a single person
+ *
+ * @since 3.10.0
+ * @author Jo Dickson
+ * @param array $data Array of single feed object data
+ * @param string $field_name Name of the current field (in this case, 'thumbnails')
+ * @param object $request WP_REST_Request object; contains details about the current request
+ * @return mixed Image URL string or null
+ */
+function get_person_thumbnail_rest_callback( $data, $field_name, $request ) {
+	$thumbnail_id      = get_person_thumbnail_id( $data['id'] );
+	$details_thumbnail = wp_get_attachment_image_src( $thumbnail_id, 'thumbnail' );
+
+	return array(
+		'thumbnail' => array(
+			'src'    => $details_thumbnail[0],
+			'width'  => $details_thumbnail[1],
+			'height' => $details_thumbnail[2]
+		)
+	);
+}
+
+
+/**
+ * REST API callback function that returns a person's job title
+ *
+ * @since 3.10.0
+ * @author Jo Dickson
+ * @param array $data Array of single feed object data
+ * @param string $field_name Name of the current field (in this case, 'person_title')
+ * @param object $request WP_REST_Request object; contains details about the current request
+ * @return mixed Job title string or null
+ */
+function get_person_title_rest_callback( $data, $field_name, $request ) {
+	return get_field( 'person_title', $data['id'] );
+}
+
+
+/**
+ * Registers custom fields in REST API results for people.
+ *
+ * @since 3.10.0
+ * @author Jo Dickson
+ */
+function add_person_feed_data() {
+	register_rest_field( 'person', 'thumbnails',
+		array(
+			'get_callback' => 'get_person_thumbnail_rest_callback',
+			'schema'       => null,
+		)
+	);
+
+	register_rest_field( 'person', 'person_title',
+		array(
+			'get_callback' => 'get_person_title_rest_callback',
+			'schema'       => null,
+		)
+	);
+}
+
+add_action( 'rest_api_init', 'add_person_feed_data' );
 
 
 /**
