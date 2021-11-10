@@ -52,18 +52,6 @@
     this.typeahead(
       typeaheadSettings,
       {
-        name: 'results-faculty',
-        source: typeaheadFacultySource.ttAdapter(),
-        limit: facultyLimit,
-        displayKey: function (obj) {
-          return $('<span>').html(obj.title.rendered).text();
-        },
-        templates: {
-          pending: '<span>Loading...</span>', // TODO
-          footer: '<span>More results</span>' // TODO
-        }
-      },
-      {
         name: 'results-colleges',
         source: typeaheadCollegesSource.ttAdapter(),
         limit: collegeLimit,
@@ -71,7 +59,7 @@
           return $('<span>').html(obj.name).text();
         },
         templates: {
-          header: '<strong class="d-block h6 text-uppercase">Faculty by College:</strong>'
+          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-4 pt-2 mb-1">Faculty by College:</strong>'
         }
       },
       {
@@ -82,7 +70,28 @@
           return $('<span>').html(obj.name).text();
         },
         templates: {
-          header: '<strong class="d-block h6 text-uppercase">Faculty by Department:</strong>'
+          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-4 pt-2 mb-1">Faculty by Department:</strong>'
+        }
+      },
+      {
+        name: 'results-faculty',
+        source: typeaheadFacultySource.ttAdapter(),
+        limit: facultyLimit,
+        displayKey: function (obj) {
+          return $('<span>').html(obj.title.rendered).text();
+        },
+        templates: {
+          suggestion: Handlebars.compile(`
+            <div class="d-flex flex-row mb-0">
+              <div class="media-background-container rounded-circle mr-2 suggestion-image">
+                <img src="{{thumbnails.thumbnail.src}}" class="media-background object-fit-cover" alt="" width="{{thumbnails.thumbnail.width}}" height="{{thumbnails.thumbnail.height}}">
+              </div>
+              <div class="align-self-center suggestion-text">
+                <span class="d-block">{{title.rendered}}</span>
+                <span class="d-block text-default small">{{person_job_title}}</span>
+              </div>
+            </div>
+          `)
         }
       }
     ).on('typeahead:selected', (event, obj) => {
