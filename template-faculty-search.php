@@ -29,6 +29,7 @@ if ( $query ) {
 
 	if ( is_array( $college_from_query ) && ! empty( $college_from_query ) ) {
 		$college = $college_from_query[0];
+		$query = '';
 	} else {
 		$department_from_query = get_terms( array(
 			'taxonomy'   => 'departments',
@@ -38,6 +39,7 @@ if ( $query ) {
 
 		if ( is_array( $department_from_query ) && ! empty( $department_from_query ) ) {
 			$department = $department_from_query[0];
+			$query = '';
 		}
 	}
 }
