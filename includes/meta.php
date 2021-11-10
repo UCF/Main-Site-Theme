@@ -69,13 +69,13 @@ function enqueue_frontend_assets() {
 		colleges: {
 			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges' ) ?>",
 			selectedAction: function(event, obj) {
-				window.location = "<?php echo $faculty_search_url; ?>?colleges=" + obj.slug;
+				window.location = "<?php echo $faculty_search_url; ?>?college=" + obj.slug;
 			}
 		},
 		departments: {
 			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments' ) ?>",
 			selectedAction: function(event, obj) {
-				window.location = "<?php echo $faculty_search_url; ?>?departments=" + obj.slug;
+				window.location = "<?php echo $faculty_search_url; ?>?department=" + obj.slug;
 			}
 		}
 	};
