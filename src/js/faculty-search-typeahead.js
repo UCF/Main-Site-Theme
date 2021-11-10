@@ -88,7 +88,7 @@
               </div>
               <div class="align-self-center suggestion-text">
                 <span class="d-block">{{title.rendered}}</span>
-                <span class="d-block text-default small">{{person_job_title}}</span>
+                <span class="d-block text-default small">{{person_title}}</span>
               </div>
             </div>
           `)
