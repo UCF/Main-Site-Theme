@@ -176,12 +176,12 @@ function get_person_thumbnail_rest_callback( $data, $field_name, $request ) {
  * @since 3.10.0
  * @author Jo Dickson
  * @param array $data Array of single feed object data
- * @param string $field_name Name of the current field (in this case, 'person_job_title')
+ * @param string $field_name Name of the current field (in this case, 'person_title')
  * @param object $request WP_REST_Request object; contains details about the current request
  * @return mixed Job title string or null
  */
-function get_person_job_title_rest_callback( $data, $field_name, $request ) {
-	return get_field( 'person_job_title', $data['id'] );
+function get_person_title_rest_callback( $data, $field_name, $request ) {
+	return get_field( 'person_title', $data['id'] );
 }
 
 
@@ -199,9 +199,9 @@ function add_person_feed_data() {
 		)
 	);
 
-	register_rest_field( 'person', 'person_job_title',
+	register_rest_field( 'person', 'person_title',
 		array(
-			'get_callback' => 'get_person_job_title_rest_callback',
+			'get_callback' => 'get_person_title_rest_callback',
 			'schema'       => null,
 		)
 	);
