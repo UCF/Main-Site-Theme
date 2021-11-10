@@ -13,36 +13,7 @@ $paged                 = get_query_var( 'paged' ) ? absint( get_query_var( 'page
 $college_filter        = isset( $_GET['college'] ) ? sanitize_text_field( $_GET['college'] ) : null;
 $department_filter     = isset( $_GET['department'] ) ? sanitize_text_field( $_GET['department'] ) : null;
 $college               = null;
-$college_from_query    = null;
 $department            = null;
-$department_from_query = null;
-
-// Try to be helpful when a user submits a search
-// that aligns with a college or department name without
-// using available filters
-if ( $query ) {
-	$college_from_query = get_terms( array(
-		'taxonomy'   => 'colleges',
-		'number'     => 1,
-		'name__like' => $query
-	) );
-
-	if ( is_array( $college_from_query ) && ! empty( $college_from_query ) ) {
-		$college = $college_from_query[0];
-		$query = '';
-	} else {
-		$department_from_query = get_terms( array(
-			'taxonomy'   => 'departments',
-			'number'     => 1,
-			'name__like' => $query
-		) );
-
-		if ( is_array( $department_from_query ) && ! empty( $department_from_query ) ) {
-			$department = $department_from_query[0];
-			$query = '';
-		}
-	}
-}
 
 // If the user explicitly filtered by college or department,
 // grab the term object:
