@@ -3766,6 +3766,26 @@
                 "endpoint": 0
             },
             {
+                "key": "field_61928d9a03aea",
+                "label": "Last Name",
+                "name": "person_last_name",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": "",
+                "copy_to_clipboard": false
+            },
+            {
                 "key": "field_60bf8388c8af9",
                 "label": "Job Title",
                 "name": "person_title",
@@ -3774,7 +3794,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
