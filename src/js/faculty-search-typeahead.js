@@ -42,7 +42,10 @@
         return Bloodhound.tokenizers.whitespace(datum.name);
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: FACULTY_SEARCH_SETTINGS.departments.dataEndpoint,
+      remote: {
+        url: `${FACULTY_SEARCH_SETTINGS.departments.dataEndpoint}?search=%QUERY`,
+        wildcard: '%QUERY'
+      },
       identify: function (data) {
         return `department_${data.id}`;
       }
