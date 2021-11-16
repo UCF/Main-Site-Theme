@@ -3774,36 +3774,49 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
+                    "width": "",
                     "class": "",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": "",
-                "copy_to_clipboard": false
+                "copy_to_clipboard": 0,
+                "display_type": "text"
             },
             {
                 "key": "field_60bf8388c8af9",
-                "label": "Job Title",
-                "name": "person_title",
-                "type": "read_only",
+                "label": "Job Titles",
+                "name": "person_titles",
+                "type": "repeater",
                 "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "50",
-                    "class": "",
+                    "width": "",
+                    "class": "repeater-field-readonly repeater-field-hide-thead",
                     "id": ""
                 },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": "",
-                "copy_to_clipboard": false
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_6193ccaae5993",
+                        "label": "Title",
+                        "name": "job_title",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
             },
             {
                 "key": "field_60bf85ec22be3",
@@ -3814,7 +3827,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "40",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
@@ -3830,39 +3843,7 @@
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
-                    "width": "30",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_60bf8395c8afc",
-                "label": "Office Bldg and Number",
-                "name": "person_office",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "30",
-                    "class": "",
-                    "id": ""
-                },
-                "copy_to_clipboard": 0,
-                "display_type": "text"
-            },
-            {
-                "key": "field_60bf859c32c6b",
-                "label": "Department",
-                "name": "person_department",
-                "type": "read_only",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
+                    "width": "50",
                     "class": "",
                     "id": ""
                 },
