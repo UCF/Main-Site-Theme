@@ -1506,6 +1506,29 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
 
 
 /**
+ * Hides the <thead> of repeater fields that have
+ * the CSS class `repeater-field-hide-thead` applied to
+ * them to improve ease of readability.
+ *
+ * @since 3.10.0
+ * @author Cadie Stockman
+ */
+function hidden_thead_repeater_fields() {
+	ob_start();
+?>
+	<style type="text/css">
+		.repeater-field-hide-thead thead {
+			display: none;
+		}
+	</style>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'acf/input/admin_head', 'hidden_thead_repeater_fields' );
+
+
+/**
  * Adds new columns for displaying degree template names
  * and the types of available degree descriptions in the
  * degree list admin view.
