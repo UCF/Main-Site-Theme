@@ -67,7 +67,7 @@ function enqueue_frontend_assets() {
 			}
 		},
 		colleges: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges' ) ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges?per_page=50' ) ?>",
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?college=" + obj.slug;
 			}
