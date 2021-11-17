@@ -4,12 +4,11 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'person' ) :
 	$colleges   = wp_get_post_terms( $post->ID, 'colleges' );
 	$department = get_field( 'person_department', $post );
-	$office     = get_field( 'person_office', $post );
 	$phone      = get_field( 'person_phone', $post );
 	$email      = get_field( 'person_email', $post );
 
 	$has_org_info     = $colleges || $department;
-	$has_contact_info = $office || $phone || $email;
+	$has_contact_info = $phone || $email;
 	$has_any_info     = $has_org_info || $has_contact_info;
 	$col_class        = $has_org_info && $has_contact_info ? 'col-sm-6' : 'col' ;
 
@@ -65,14 +64,6 @@ if ( $post->post_type === 'person' ) :
 								<dt class="h6 text-uppercase text-muted mb-3">Contact</dt>
 								<dd>
 									<dl>
-										<?php if ( $office ) : ?>
-										<dt class="sr-only">Office Location</dt>
-										<dd>
-											<span class="fa fa-fw fa-lg fa-map-marker mr-1" aria-hidden="true"></span>
-											<?php echo $office; ?>
-										</dd>
-										<?php endif; ?>
-
 										<?php if ( $phone ) : ?>
 										<dt class="sr-only">Phone</dt>
 										<dd>
