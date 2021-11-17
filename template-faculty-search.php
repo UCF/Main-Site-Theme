@@ -28,9 +28,17 @@ if ( $department_filter ) {
 // Set up baseline WP_Query args
 $args = array(
 	'post_type'      => 'person',
-	'meta_key'       => 'person_type',
-	'meta_value'     => 'faculty',
-	'orderby'        => 'post_title', // TODO use a meta field that stores last name/sort name instead
+	'meta_query'     => array(
+		'person_type_clause' => array(
+			'key'     => 'person_type',
+			'value'   => 'faculty'
+		),
+		'orderby_clause' => array(
+			'key'     => 'person_last_name',
+			'compare' => 'EXISTS'
+		)
+	),
+	'orderby'        => 'orderby_clause',
 	'order'          => 'ASC',
 	'paged'          => $paged, // NOTE: this value must be explicitly set for paginate_links() to work properly
 	'posts_per_page' => 20 // NOTE: this value must be explicitly set for $faculty_wp_query->max_num_pages to be accurate when passed thru relevanssi
