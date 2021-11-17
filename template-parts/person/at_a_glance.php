@@ -86,7 +86,7 @@ if ( $post->post_type === 'person' ) :
 
 										<?php if ( $email ) : ?>
 										<dt class="sr-only">Email</dt>
-										<dd class="person-email">
+										<dd>
 											<span class="fa fa-fw fa-lg fa-envelope mr-1" aria-hidden="true"></span>
 											<a href="mailto:<?php echo $email; ?>">
 												<?php echo $email; ?>
