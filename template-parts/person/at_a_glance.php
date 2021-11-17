@@ -25,7 +25,7 @@ if ( $post->post_type === 'person' ) :
 							<div class="<?php echo $col_class; ?> pr-sm-4 pr-md-5">
 
 								<?php if ( $colleges ) : ?>
-								<dt class="h6 text-uppercase text-default mb-3">College(s)</dt>
+								<dt class="h6 text-uppercase text-muted mb-3">College(s)</dt>
 								<dd class="h5 mb-4">
 									<?php
 									foreach ( $colleges as $college ) :
@@ -47,7 +47,7 @@ if ( $post->post_type === 'person' ) :
 								<?php endif; ?>
 
 								<?php if ( $department ) : ?>
-								<dt class="h6 text-uppercase text-default mb-3">Department</dt>
+								<dt class="h6 text-uppercase text-muted mb-3">Department</dt>
 								<dd class="h5 mt-2 mb-4">
 									<span class="d-block">
 										<?php echo $department; ?>
@@ -62,7 +62,7 @@ if ( $post->post_type === 'person' ) :
 							<?php if ( $has_contact_info ) : ?>
 							<div class="<?php echo $col_class; ?>">
 
-								<dt class="h6 text-uppercase text-default mb-3">Contact</dt>
+								<dt class="h6 text-uppercase text-muted mb-3">Contact</dt>
 								<dd>
 									<dl>
 										<?php if ( $office ) : ?>
