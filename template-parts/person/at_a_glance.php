@@ -89,7 +89,8 @@ if ( $post->post_type === 'person' ) :
 										<dd>
 											<span class="fa fa-fw fa-lg fa-envelope mr-1" aria-hidden="true"></span>
 											<a href="mailto:<?php echo $email; ?>">
-												<?php echo $email; ?>
+												Email
+												<span class="sr-only"> <?php echo $result->email; ?></span>
 											</a>
 										</dd>
 										<?php endif; ?>
