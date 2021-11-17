@@ -180,8 +180,15 @@ function get_person_thumbnail_rest_callback( $data, $field_name, $request ) {
  * @param object $request WP_REST_Request object; contains details about the current request
  * @return mixed Job title string or null
  */
-function get_person_title_rest_callback( $data, $field_name, $request ) {
-	return get_field( 'person_title', $data['id'] );
+function get_person_titles_rest_callback( $data, $field_name, $request ) {
+	$titles = array();
+	$title_rows = get_field( 'person_titles', $data['id'] );
+	if ( $title_rows ) {
+		foreach ( $title_rows as $title_row ) {
+			$titles[] = $title_row['job_title'];
+		}
+	}
+	return $titles;
 }
 
 
@@ -199,9 +206,9 @@ function add_person_feed_data() {
 		)
 	);
 
-	register_rest_field( 'person', 'person_title',
+	register_rest_field( 'person', 'person_titles',
 		array(
-			'get_callback' => 'get_person_title_rest_callback',
+			'get_callback' => 'get_person_titles_rest_callback',
 			'schema'       => null,
 		)
 	);

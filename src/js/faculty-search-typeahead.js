@@ -91,7 +91,13 @@
               </div>
               <div class="align-self-center suggestion-text">
                 <span class="d-block">{{title.rendered}}</span>
-                <span class="d-block text-default small">{{person_title}}</span>
+                {{#if person_titles}}
+                <ul class="list-inline d-block mb-0 line-height-2">
+                  {{#each person_titles}}
+                  <li class="list-inline-item text-default small suggestion-title">{{this}}</li>
+                  {{/each}}
+                </ul>
+                {{/if}}
               </div>
             </div>
           `)
