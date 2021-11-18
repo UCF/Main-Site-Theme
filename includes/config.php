@@ -1036,6 +1036,27 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	$wp_customize->add_setting(
+		'person_heading_text_color',
+		array (
+			'default' => 'person-heading-text-secondary'
+		)
+	);
+
+	$wp_customize->add_control(
+		'person_heading_text_color',
+		array(
+			'label'       => __( 'Heading Text Color' ),
+			'description' => 'Select the text color that meets 4.5:1 color contrast ratio against the selected background image for the -lg breakpoint and up. Heading text is not displayed on top of the image at the -md breakpoint and lower.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+			'type'        => 'radio',
+			'choices'     => array(
+				'person-heading-text-secondary' => 'Black',
+				'person-heading-text-inverse'   => 'White',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
 		'published_research_image'
 	);
 
