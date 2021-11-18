@@ -62,4 +62,10 @@
     width: 2rem;
   }
 
+  .suggestion-title {
+    &:not(:last-child)::after {
+      content: ',';
+    }
+  }
+
 }
