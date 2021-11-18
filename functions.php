@@ -473,6 +473,15 @@ function get_colleges_grid( $exclude_term=null ) {
 	return ob_get_clean();
 }
 
+/**
+ * Adds the `post_types` argument to the args array
+ * if it is request in the GET parameters of the request
+ * @author Jim Barnes
+ * @since v3.10.0
+ * @param array $args The argument array for the query
+ * @param WP_Request $request The WP_Request argument
+ * @return array $args The modified args array
+ */
 function modify_rest_departments_query( $args, $request ) {
 	if ( isset( $request['post_types'] ) && ! empty( $request['post_types'] ) ) {
 		$args['post_types'] = $request['post_types'];
@@ -497,6 +506,8 @@ function filter_terms_by_post_type( $pieces, $taxonomies, $args ) {
 	if ( isset( $args['post_types'] ) ) {
 		global $wpdb;
 
+		$pieces['fields'] .= ", COUNT(*) ";
+
 		$pieces['join'] .= " INNER JOIN $wpdb->term_relationships as tr ON tr.term_taxonomy_id = tt.term_taxonomy_id
 							 INNER JOIN $wpdb->posts as p ON p.ID = tr.object_id ";
 
@@ -508,5 +519,57 @@ function filter_terms_by_post_type( $pieces, $taxonomies, $args ) {
 }
 
 add_filter( 'terms_clauses', 'filter_terms_by_post_type', 10, 3 );
+
+
+/**
+ * Custom callback for getting an accurate count
+ * when the `post_types` filter is used.
+ * @author Jim Barnes
+ * @since v3.10.0
+ * @param array $term The term in array form
+ * @param string $field_name The field name being modified
+ * @param WP_Request $request The request object
+ * @return mixed In this case, we're returning an integer
+ */
+function get_term_count_rest_api( $term, $field_name, $request ) {
+	if ( isset( $request['post_types'] ) && ! empty( $request['post_types'] ) ) {
+		$post_types = explode( ',', $request['post_types'] );
+
+		$args = array(
+			'post_type' => $post_types,
+			'tax_query' => array(
+				array(
+					'taxonomy' => $term['taxonomy'],
+					'field'    => 'term_id',
+					'terms'    => $term['id']
+				)
+			)
+		);
+
+		$query = new WP_Query( $args );
+
+		return intval($query->found_posts);
+	}
+
+	return $term['count'];
+}
+
+/**
+ * Overrides the built in `count` field on the
+ * departments API
+ * @author Jim Barnes
+ * @since v3.10.0
+ */
+function add_custom_count_to_department_api() {
+	register_rest_field(
+		'departments',
+		'count',
+		array(
+			'get_callback' => 'get_term_count_rest_api'
+		)
+	);
+}
+
+add_action( 'rest_api_init', 'add_custom_count_to_department_api', 10, 0 );
 
 ?>
