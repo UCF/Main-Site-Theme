@@ -61,19 +61,19 @@ function enqueue_frontend_assets() {
 ?>
 	var FACULTY_SEARCH_SETTINGS = {
 		faculty: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?meta_key=person_type&meta_value=faculty' ); ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?_fields=title,link,thumbnails,person_titles&meta_key=person_type&meta_value=faculty' ); ?>",
 			selectedAction: function(event, obj) {
 				window.location = obj.link;
 			}
 		},
 		colleges: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges?per_page=50' ) ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges?_fields=name,slug,taxonomy&per_page=50&post_types=person' ) ?>",
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?college=" + obj.slug;
 			}
 		},
 		departments: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments' ) ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments?_fields=name,slug,taxonomy&post_types=person' ) ?>",
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?department=" + obj.slug;
 			}
