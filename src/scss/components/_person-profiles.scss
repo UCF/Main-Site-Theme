@@ -1,3 +1,9 @@
+.person-heading-text-inverse {
+  @include media-breakpoint-up(lg) {
+    color: $white;
+  }
+}
+
 .research-citation {
   margin-bottom: 1rem;
   margin-left: 2em;
