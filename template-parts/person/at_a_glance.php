@@ -50,18 +50,11 @@ if ( $post->post_type === 'person' ) :
 								<dd class="h5 mt-2 mb-4">
 									<?php
 									foreach ( $departments as $department ) :
-										$department_url = get_term_link( $department->term_id );
-										if ( $department_url ) :
 									?>
-										<a href="<?php echo $department_url; ?>" class="d-block mt-2 pt-1">
-											<?php echo $department->name; ?>
-										</a>
-									<?php else : ?>
-										<span class="d-block">
+										<span class="d-block mt-2 pt-1">
 											<?php echo $department->name; ?>
 										</span>
 									<?php
-										endif;
 									endforeach;
 									?>
 								</dd>

@@ -1,3 +1,9 @@
+.header-media-person {
+  @include media-breakpoint-up(lg) {
+    background-color: $brand-default;
+  }
+}
+
 .person-heading-text-inverse {
   @include media-breakpoint-up(lg) {
     color: $white;
