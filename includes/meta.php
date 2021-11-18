@@ -67,13 +67,13 @@ function enqueue_frontend_assets() {
 			}
 		},
 		colleges: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges?per_page=50' ) ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/colleges?per_page=50&post_types=person' ) ?>",
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?college=" + obj.slug;
 			}
 		},
 		departments: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments' ) ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments?post_types=person' ) ?>",
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?department=" + obj.slug;
 			}

@@ -43,7 +43,7 @@
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       remote: {
-        url: `${FACULTY_SEARCH_SETTINGS.departments.dataEndpoint}?search=%QUERY`,
+        url: `${FACULTY_SEARCH_SETTINGS.departments.dataEndpoint}&search=%QUERY`,
         wildcard: '%QUERY'
       },
       identify: function (data) {
