@@ -2,12 +2,12 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
-	$colleges   = wp_get_post_terms( $post->ID, 'colleges' );
-	$department = get_field( 'person_department', $post );
-	$phone      = get_field( 'person_phone', $post );
-	$email      = get_field( 'person_email', $post );
+	$colleges     = wp_get_post_terms( $post->ID, 'colleges' );
+	$departments  = wp_get_post_terms( $post->ID, 'departments' );
+	$phone        = get_field( 'person_phone', $post );
+	$email        = get_field( 'person_email', $post );
 
-	$has_org_info     = $colleges || $department;
+	$has_org_info     = $colleges || $departments;
 	$has_contact_info = $phone || $email;
 	$has_any_info     = $has_org_info || $has_contact_info;
 	$col_class        = $has_org_info && $has_contact_info ? 'col-sm-6' : 'col' ;
@@ -24,14 +24,14 @@ if ( $post->post_type === 'person' ) :
 							<div class="<?php echo $col_class; ?> pr-sm-4 pr-md-5">
 
 								<?php if ( $colleges ) : ?>
-								<dt class="h6 text-uppercase text-muted mb-3">College(s)</dt>
+								<dt class="h6 text-uppercase text-muted mb-2">College(s)</dt>
 								<dd class="h5 mb-4">
 									<?php
 									foreach ( $colleges as $college ) :
 										$college_url = get_term_link( $college->term_id );
 										if ( $college_url ) :
 									?>
-										<a href="<?php echo $college_url; ?>" class="d-block mt-2">
+										<a href="<?php echo $college_url; ?>" class="d-block mt-2 pt-1">
 											<?php echo $college->name; ?>
 										</a>
 									<?php else : ?>
@@ -45,12 +45,25 @@ if ( $post->post_type === 'person' ) :
 								</dd>
 								<?php endif; ?>
 
-								<?php if ( $department ) : ?>
-								<dt class="h6 text-uppercase text-muted mb-3">Department</dt>
+								<?php if ( $departments ) : ?>
+								<dt class="h6 text-uppercase text-muted mb-2">Department(s)</dt>
 								<dd class="h5 mt-2 mb-4">
-									<span class="d-block">
-										<?php echo $department; ?>
-									</span>
+									<?php
+									foreach ( $departments as $department ) :
+										$department_url = get_term_link( $department->term_id );
+										if ( $department_url ) :
+									?>
+										<a href="<?php echo $department_url; ?>" class="d-block mt-2 pt-1">
+											<?php echo $department->name; ?>
+										</a>
+									<?php else : ?>
+										<span class="d-block">
+											<?php echo $department->name; ?>
+										</span>
+									<?php
+										endif;
+									endforeach;
+									?>
 								</dd>
 								<?php endif; ?>
 
