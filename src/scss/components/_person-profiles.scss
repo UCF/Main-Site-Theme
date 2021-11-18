@@ -1,7 +1,7 @@
-.person-email {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.person-heading-text-inverse {
+  @include media-breakpoint-up(lg) {
+    color: $white;
+  }
 }
 
 .research-citation {
