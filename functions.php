@@ -473,4 +473,41 @@ function get_colleges_grid( $exclude_term=null ) {
 
 	return ob_get_clean();
 }
+
+function modify_rest_departments_query( $args, $request ) {
+	if ( isset( $request['post_types'] ) && ! empty( $request['post_types'] ) ) {
+		$args['post_types'] = $request['post_types'];
+	}
+
+	return $args;
+}
+
+add_filter( 'rest_departments_query', 'modify_rest_departments_query', 10, 2 );
+
+
+/**
+ * Custom filter for filtering terms by post_type
+ * @author Jim Barnes
+ * @since v3.10.0
+ * @param array $pieces The pieces of the query to be sent to MySQL ('select', 'join', 'where')
+ * @param array $taxonomies The taxonomies being filtered
+ * @param array $args The get_terms arguments
+ * @return array $pieces The modified $pieces array
+ */
+function filter_terms_by_post_type( $pieces, $taxonomies, $args ) {
+	if ( isset( $args['post_types'] ) ) {
+		global $wpdb;
+
+		$pieces['join'] .= " INNER JOIN $wpdb->term_relationships as tr ON tr.term_taxonomy_id = tt.term_taxonomy_id
+							 INNER JOIN $wpdb->posts as p ON p.ID = tr.object_id ";
+
+		$post_types = $args['post_types'];
+		$pieces['where'] .= $wpdb->prepare( " AND p.post_type IN(%s) GROUP BY t.term_id", $post_types );
+	}
+
+	return $pieces;
+}
+
+add_filter( 'terms_clauses', 'filter_terms_by_post_type', 10, 3 );
+
 ?>
