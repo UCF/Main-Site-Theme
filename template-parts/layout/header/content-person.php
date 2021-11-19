@@ -10,7 +10,7 @@ $title    = get_header_title( $obj );
 $heading_color_class = get_theme_mod_or_default( 'person_heading_text_color' ) === 'person-heading-text-inverse' ? ' person-heading-text-inverse' : '';
 
 if ( $title ):
-	$subtitles  = get_field( 'person_titles', $obj );
+	$subtitles = get_field( 'person_titles', $obj );
 	$thumbnail = get_person_thumbnail(
 		$obj,
 		'medium',
@@ -38,17 +38,7 @@ if ( $title ):
 				<?php if ( $subtitles ) :
 				?>
 					<span class="lead d-inline-block mb-2<?php echo $heading_color_class; ?>">
-					<?php
-					foreach( $subtitles as $key => $title ) :
-						$job_title = $title['job_title'];
-
-						echo $job_title;
-
-						if ( $key !== array_key_last( $subtitles ) ) {
-							echo ",";
-						}
-					?>
-					<?php endforeach; ?>
+					<?php echo implode( ', ', array_column( $subtitles, 'job_title' ) ); ?>
 					</span>
 				<?php endif; ?>
 				</div>
