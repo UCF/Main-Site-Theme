@@ -111,50 +111,61 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 		</p>
 
 		<?php if ( $faculty_wp_query->have_posts() ) : ?>
+		<ul class="list-group">
 			<?php
 			while ( $faculty_wp_query->have_posts() ) : $faculty_wp_query->the_post();
-				$job_title = get_field( 'person_title', $post->ID );
+				$job_titles = get_field( 'person_titles', $post->ID );
 			?>
-			<div class="card mb-4 position-relative">
-				<div class="card-block">
-					<div class="row">
-						<div class="col-3 col-lg-2">
-							<?php
-							echo get_person_thumbnail(
-								$post,
-								'medium',
-								array(
-									'class' => 'w-100 h-auto'
-								)
-							); ?>
-						</div>
-						<div class="col-9 col-lg-10 position-static">
-							<h2 class="h5">
-								<a class="stretched-link" href="<?php echo get_permalink(); ?>">
-									<?php the_title(); ?>
-								</a>
-							</h2>
+			<li class="list-group-item">
+				<div class="row position-relative w-100">
+					<div class="col-2 col-lg-1 pr-0">
+						<?php
+						echo get_person_thumbnail(
+							$post,
+							'medium',
+							array(
+								'class' => 'w-100 h-auto'
+							)
+						);
+						?>
+					</div>
+					<div class="col-10 col-lg-11 pl-3 pl-sm-4 align-self-center position-static">
+						<h2 class="h5 mb-0">
+							<a class="stretched-link" href="<?php echo get_permalink(); ?>">
+								<?php the_title(); ?>
+							</a>
+						</h2>
 
-							<?php if ( $job_title ) : ?>
-							<p class="mb-0"><?php echo $job_title; ?></p>
-							<?php endif; ?>
-						</div>
+						<?php if ( $job_titles ) : ?>
+						<p class="mt-1 mb-0">
+							<?php
+							foreach ( $job_titles as $index => $job_title_row ) :
+								$job_title = $job_title_row['job_title'];
+								if ( $index !== count( $job_titles ) - 1 ) {
+									$job_title .= ', ';
+								}
+							?>
+								<?php echo $job_title; ?>
+							<?php endforeach; ?>
+						</p>
+						<?php endif; ?>
 					</div>
 				</div>
-			</div>
+			</li>
 			<?php endwhile; ?>
+		</ul>
 
-			<nav aria-label="Faculty result pagination">
-				<?php
-				echo paginate_links( array(
-					'current'   => $paged,
-					'total'     => $faculty_wp_query->max_num_pages,
-					'type'      => 'list',
-					'prev_text' => '<span class="fa fa-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
-					'next_text' => '<span class="fa fa-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>'
-				) );
-				?>
-			</nav>
+		<nav aria-label="Faculty result pagination" class="mt-5">
+			<?php
+			echo paginate_links( array(
+				'current'   => $paged,
+				'total'     => $faculty_wp_query->max_num_pages,
+				'type'      => 'list',
+				'prev_text' => '<span class="fa fa-chevron-left" aria-hidden="true"></span><span class="sr-only">Previous</span>',
+				'next_text' => '<span class="fa fa-chevron-right" aria-hidden="true"></span><span class="sr-only">Next</span>'
+			) );
+			?>
+		</nav>
 		<?php endif; ?>
 	</div>
 </div>
