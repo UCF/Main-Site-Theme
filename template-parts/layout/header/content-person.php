@@ -10,7 +10,7 @@ $title    = get_header_title( $obj );
 $heading_color_class = get_theme_mod_or_default( 'person_heading_text_color' ) === 'person-heading-text-inverse' ? ' person-heading-text-inverse' : '';
 
 if ( $title ):
-	$subtitle  = wptexturize( get_field( 'person_title', $obj ) );
+	$subtitles  = get_field( 'person_titles', $obj );
 	$thumbnail = get_person_thumbnail(
 		$obj,
 		'medium',
@@ -34,12 +34,24 @@ if ( $title ):
 				<h1 class="mt-4 mb-3 pt-sm-2<?php echo $heading_color_class; ?>">
 					<?php echo $title; ?>
 				</h1>
+				<div class="mb-4">
+				<?php if ( $subtitles ) :
+				?>
+					<span class="lead d-inline-block mb-2<?php echo $heading_color_class; ?>">
+					<?php
+					foreach( $subtitles as $key => $title ) :
+						$job_title = $title['job_title'];
 
-				<?php if ( $subtitle ) : ?>
-				<span class="lead d-block mb-4 <?php echo $heading_color_class; ?>">
-					<?php echo $subtitle; ?>
-				</span>
+						echo $job_title;
+
+						if ( $key !== array_key_last( $subtitles ) ) {
+							echo ",";
+						}
+					?>
+					<?php endforeach; ?>
+					</span>
 				<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</div>
