@@ -38,17 +38,7 @@ if ( $title ):
 				<?php if ( $subtitles ) :
 				?>
 					<span class="lead d-inline-block mb-2<?php echo $heading_color_class; ?>">
-					<?php
-					foreach( $subtitles as $key => $title ) :
-						$job_title = $title['job_title'];
-
-						echo $job_title;
-
-						if ( $key !== array_key_last( $subtitles ) ) {
-							echo ",";
-						}
-					?>
-					<?php endforeach; ?>
+					<?php echo implode( ', ', array_column( $subtitles, 'job_title' ) ); ?>
 					</span>
 				<?php endif; ?>
 				</div>
