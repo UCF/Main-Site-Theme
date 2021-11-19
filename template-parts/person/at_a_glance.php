@@ -2,14 +2,13 @@
 $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
-	$colleges   = wp_get_post_terms( $post->ID, 'colleges' );
-	$department = get_field( 'person_department', $post );
-	$office     = get_field( 'person_office', $post );
-	$phone      = get_field( 'person_phone', $post );
-	$email      = get_field( 'person_email', $post );
+	$colleges     = wp_get_post_terms( $post->ID, 'colleges' );
+	$departments  = wp_get_post_terms( $post->ID, 'departments' );
+	$phone        = get_field( 'person_phone', $post );
+	$email        = get_field( 'person_email', $post );
 
-	$has_org_info     = $colleges || $department;
-	$has_contact_info = $office || $phone || $email;
+	$has_org_info     = $colleges || $departments;
+	$has_contact_info = $phone || $email;
 	$has_any_info     = $has_org_info || $has_contact_info;
 	$col_class        = $has_org_info && $has_contact_info ? 'col-sm-6' : 'col' ;
 
@@ -25,14 +24,14 @@ if ( $post->post_type === 'person' ) :
 							<div class="<?php echo $col_class; ?> pr-sm-4 pr-md-5">
 
 								<?php if ( $colleges ) : ?>
-								<dt class="h6 text-uppercase text-default mb-3">College(s)</dt>
+								<dt class="h6 text-uppercase text-muted mb-2">College(s)</dt>
 								<dd class="h5 mb-4">
 									<?php
 									foreach ( $colleges as $college ) :
 										$college_url = get_term_link( $college->term_id );
 										if ( $college_url ) :
 									?>
-										<a href="<?php echo $college_url; ?>" class="d-block mt-2">
+										<a href="<?php echo $college_url; ?>" class="d-block mt-2 pt-1">
 											<?php echo $college->name; ?>
 										</a>
 									<?php else : ?>
@@ -46,12 +45,18 @@ if ( $post->post_type === 'person' ) :
 								</dd>
 								<?php endif; ?>
 
-								<?php if ( $department ) : ?>
-								<dt class="h6 text-uppercase text-default mb-3">Department</dt>
+								<?php if ( $departments ) : ?>
+								<dt class="h6 text-uppercase text-muted mb-2">Department(s)</dt>
 								<dd class="h5 mt-2 mb-4">
-									<span class="d-block">
-										<?php echo $department; ?>
-									</span>
+									<?php
+									foreach ( $departments as $department ) :
+									?>
+										<span class="d-block mt-2 pt-1">
+											<?php echo $department->name; ?>
+										</span>
+									<?php
+									endforeach;
+									?>
 								</dd>
 								<?php endif; ?>
 
@@ -62,17 +67,9 @@ if ( $post->post_type === 'person' ) :
 							<?php if ( $has_contact_info ) : ?>
 							<div class="<?php echo $col_class; ?>">
 
-								<dt class="h6 text-uppercase text-default mb-3">Contact</dt>
+								<dt class="h6 text-uppercase text-muted mb-3">Contact</dt>
 								<dd>
 									<dl>
-										<?php if ( $office ) : ?>
-										<dt class="sr-only">Office Location</dt>
-										<dd>
-											<span class="fa fa-fw fa-lg fa-map-marker mr-1" aria-hidden="true"></span>
-											<?php echo $office; ?>
-										</dd>
-										<?php endif; ?>
-
 										<?php if ( $phone ) : ?>
 										<dt class="sr-only">Phone</dt>
 										<dd>
@@ -86,10 +83,11 @@ if ( $post->post_type === 'person' ) :
 
 										<?php if ( $email ) : ?>
 										<dt class="sr-only">Email</dt>
-										<dd class="person-email">
+										<dd>
 											<span class="fa fa-fw fa-lg fa-envelope mr-1" aria-hidden="true"></span>
 											<a href="mailto:<?php echo $email; ?>">
-												<?php echo $email; ?>
+												Email
+												<span class="sr-only"> <?php echo $email; ?></span>
 											</a>
 										</dd>
 										<?php endif; ?>

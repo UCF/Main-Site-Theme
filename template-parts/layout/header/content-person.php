@@ -6,8 +6,11 @@
 $obj      = get_queried_object();
 $title    = get_header_title( $obj );
 
+// Adjust heading color if customizer option set to white
+$heading_color_class = get_theme_mod_or_default( 'person_heading_text_color' ) === 'person-heading-text-inverse' ? ' person-heading-text-inverse' : '';
+
 if ( $title ):
-	$subtitle  = wptexturize( get_field( 'person_title', $obj ) );
+	$subtitles = get_field( 'person_titles', $obj );
 	$thumbnail = get_person_thumbnail(
 		$obj,
 		'medium',
@@ -28,15 +31,17 @@ if ( $title ):
 		</div>
 		<div class="row mt-lg-auto mb-lg-auto">
 			<div class="col-lg-8 offset-lg-4 text-center text-lg-left">
-				<h1 class="mt-4 mb-3 pt-sm-2">
+				<h1 class="mt-4 mb-3 pt-sm-2<?php echo $heading_color_class; ?>">
 					<?php echo $title; ?>
 				</h1>
-
-				<?php if ( $subtitle ) : ?>
-				<span class="lead d-block mb-4">
-					<?php echo $subtitle; ?>
-				</span>
+				<div class="mb-4">
+				<?php if ( $subtitles ) :
+				?>
+					<span class="lead d-inline-block mb-2<?php echo $heading_color_class; ?>">
+					<?php echo implode( ', ', array_column( $subtitles, 'job_title' ) ); ?>
+					</span>
 				<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</div>
