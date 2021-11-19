@@ -138,15 +138,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 
 						<?php if ( $job_titles ) : ?>
 						<p class="mt-1 mb-0">
-							<?php
-							foreach ( $job_titles as $index => $job_title_row ) :
-								$job_title = $job_title_row['job_title'];
-								if ( $index !== count( $job_titles ) - 1 ) {
-									$job_title .= ', ';
-								}
-							?>
-								<?php echo $job_title; ?>
-							<?php endforeach; ?>
+							<?php echo implode( ', ', array_column( $job_titles, 'job_title' ) ); ?>
 						</p>
 						<?php endif; ?>
 					</div>
