@@ -10,7 +10,7 @@ $title    = get_header_title( $obj );
 $heading_color_class = get_theme_mod_or_default( 'person_heading_text_color' ) === 'person-heading-text-inverse' ? ' person-heading-text-inverse' : '';
 
 if ( $title ):
-	$subtitles  = get_field( 'person_titles', $obj );
+	$subtitles = get_field( 'person_titles', $obj );
 	$thumbnail = get_person_thumbnail(
 		$obj,
 		'medium',
