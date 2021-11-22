@@ -92,7 +92,7 @@ add_action( 'init', 'remove_people_group_taxonomy' );
  * post type for this site.
  */
 function modify_person_taxonomies() {
-	return array( 'colleges' );
+	return array( 'colleges', 'post_tag' );
 }
 
 add_filter( 'ucf_people_taxonomies', 'modify_person_taxonomies' );
