@@ -176,12 +176,12 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 						</div>
 						<?php endif; ?>
 					</div>
-					<div class="col-lg-3 offset-2 offset-lg-0 pl-lg-3 my-2 my-lg-0">
+					<div class="col-lg-3 offset-2 offset-lg-0 pl-lg-3 my-2 my-lg-0 my-xl-1">
 						<?php if ( is_array( $person_tags ) ) : ?>
 						<ul class="list-unstyled list-inline">
 							<?php foreach ( $person_tags as $person_tag ) : ?>
 							<li class="list-inline-item">
-								<span class="badge badge-pill badge-default">
+								<span class="badge badge-pill badge-faded">
 									<?php echo $person_tag->name; ?>
 								</span>
 							</li>
