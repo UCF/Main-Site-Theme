@@ -114,32 +114,79 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 		<ul class="list-group">
 			<?php
 			while ( $faculty_wp_query->have_posts() ) : $faculty_wp_query->the_post();
-				$job_titles = get_field( 'person_titles', $post->ID );
+				$person_titles      = get_field( 'person_titles', $post->ID );
+				$person_colleges    = get_the_terms( $post, 'colleges' );
+				$person_departments = get_the_terms( $post, 'departments' );
+				$person_tags        = get_the_tags( $post );
 			?>
 			<li class="list-group-item">
-				<div class="row position-relative w-100">
-					<div class="col-2 col-lg-1 pr-0">
-						<?php
-						echo get_person_thumbnail(
-							$post,
-							'medium',
-							array(
-								'class' => 'w-100 h-auto'
-							)
-						);
-						?>
-					</div>
-					<div class="col-10 col-lg-11 pl-3 pl-sm-4 align-self-center position-static">
-						<h2 class="h5 mb-0">
-							<a class="stretched-link" href="<?php echo get_permalink(); ?>">
-								<?php the_title(); ?>
-							</a>
-						</h2>
+				<div class="row no-gutters w-100 align-items-lg-center">
+					<div class="col-lg-6 col-xl-5">
+						<div class="row no-gutters position-relative w-100">
+							<div class="col-2 col-lg-3 pr-3 pr-sm-4">
+								<?php
+								echo get_person_thumbnail(
+									$post,
+									'medium',
+									array(
+										'class' => 'w-100 h-auto'
+									)
+								);
+								?>
+							</div>
+							<div class="col-10 col-lg-9 align-self-center position-static">
+								<h2 class="h5 mb-0">
+									<a class="stretched-link" href="<?php echo get_permalink(); ?>">
+										<?php the_title(); ?>
+									</a>
+								</h2>
 
-						<?php if ( $job_titles ) : ?>
-						<p class="mt-1 mb-0">
-							<?php echo implode( ', ', array_column( $job_titles, 'job_title' ) ); ?>
-						</p>
+								<?php if ( $person_titles ) : ?>
+								<p class="mt-1 mb-0 text-default">
+									<?php echo implode( ', ', array_column( $person_titles, 'job_title' ) ); ?>
+								</p>
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3 col-xl-4 offset-2 offset-lg-0">
+						<?php if ( $person_colleges ) : ?>
+						<div class="my-2 font-size-sm line-height-2">
+							<?php foreach ( $person_colleges as $k => $person_college ) : ?>
+								<?php
+								echo $person_college->name;
+								if ( $k < count( $person_colleges ) - 1 ) {
+									echo ',';
+								}
+								?>
+							<?php endforeach; ?>
+						</div>
+						<?php endif; ?>
+
+						<?php if ( $person_departments ) : ?>
+						<div class="my-2 font-size-sm line-height-2">
+							<?php foreach ( $person_departments as $k => $person_department ) : ?>
+								<?php
+								echo $person_department->name;
+								if ( $k < count( $person_departments ) - 1 ) {
+									echo ',';
+								}
+								?>
+							<?php endforeach; ?>
+						</div>
+						<?php endif; ?>
+					</div>
+					<div class="col-lg-3 offset-2 offset-lg-0 px-lg-3 my-2 my-lg-0">
+						<?php if ( is_array( $person_tags ) ) : ?>
+						<ul class="list-unstyled list-inline">
+							<?php foreach ( $person_tags as $person_tag ) : ?>
+							<li class="list-inline-item">
+								<span class="badge badge-pill badge-default">
+									<?php echo $person_tag->name; ?>
+								</span>
+							</li>
+							<?php endforeach; ?>
+						</ul>
 						<?php endif; ?>
 					</div>
 				</div>
