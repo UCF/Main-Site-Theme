@@ -121,7 +121,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 			?>
 			<li class="list-group-item">
 				<div class="row no-gutters w-100 align-items-lg-center">
-					<div class="col-lg-6 col-xl-5">
+					<div class="col-lg-6 col-xl-5 pr-lg-5">
 						<div class="row no-gutters position-relative w-100">
 							<div class="col-2 col-lg-3 pr-3 pr-sm-4">
 								<?php
@@ -149,7 +149,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-xl-4 offset-2 offset-lg-0">
+					<div class="col-lg-3 col-xl-4 offset-2 offset-lg-0 pr-2">
 						<?php if ( $person_colleges ) : ?>
 						<div class="my-2 font-size-sm line-height-2">
 							<?php foreach ( $person_colleges as $k => $person_college ) : ?>
@@ -176,7 +176,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 						</div>
 						<?php endif; ?>
 					</div>
-					<div class="col-lg-3 offset-2 offset-lg-0 px-lg-3 my-2 my-lg-0">
+					<div class="col-lg-3 offset-2 offset-lg-0 pl-lg-3 my-2 my-lg-0">
 						<?php if ( is_array( $person_tags ) ) : ?>
 						<ul class="list-unstyled list-inline">
 							<?php foreach ( $person_tags as $person_tag ) : ?>
