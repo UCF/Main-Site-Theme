@@ -209,7 +209,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 									foreach ( $person_tags as $person_tag ) :
 										$person_tag_filter_url = add_query_arg(
 											'query',
-											$person_tag->slug,
+											$person_tag->name,
 											$page_permalink
 										);
 									?>
