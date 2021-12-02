@@ -135,7 +135,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 								);
 								?>
 							</div>
-							<div class="col-10 col-lg-9 align-self-center position-static py-2">
+							<div class="col-10 col-lg-9 align-self-center position-static py-2 py-lg-3">
 								<h2 class="h5 mb-0">
 									<a class="stretched-link" href="<?php echo get_permalink(); ?>">
 										<?php the_title(); ?>
@@ -152,7 +152,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 					</div>
 					<div class="col-sm-5 col-lg offset-2 offset-lg-0 pr-sm-2 pr-lg-3">
 						<?php if ( $person_departments ) : ?>
-						<div class="my-2 mt-lg-3">
+						<div class="my-2 my-lg-3">
 							<h3 class="small font-weight-normal text-default text-uppercase mb-1 mb-sm-2">Department(s)</h3>
 							<div class="font-size-sm line-height-2">
 							<?php
@@ -176,7 +176,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 					</div>
 					<div class="col-sm-5 col-lg offset-2 offset-sm-0 pl-sm-2 pl-lg-3">
 						<?php if ( $person_colleges ) : ?>
-						<div class="my-2 mt-lg-3">
+						<div class="my-2 my-lg-3">
 							<h3 class="small font-weight-normal text-default text-uppercase mb-1 mb-sm-2">College(s)</h3>
 							<div class="font-size-sm line-height-2">
 							<?php
