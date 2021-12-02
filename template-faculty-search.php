@@ -219,9 +219,9 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 									</li>
 									<?php endforeach; ?>
 								</ul>
-								<?php endif; ?>
 							</div>
 						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</li>
