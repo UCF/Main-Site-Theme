@@ -122,9 +122,9 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 			?>
 			<li class="list-group-item mb-2 mb-sm-3 py-sm-3">
 				<div class="row no-gutters w-100">
-					<div class="col-lg-6 col-xl-5 pr-lg-5">
+					<div class="col-lg-8 col-xl-7">
 						<div class="row no-gutters position-relative w-100">
-							<div class="col-2 col-lg-3 pr-3 pr-sm-4">
+							<div class="col-2 pr-3 pr-sm-4">
 								<?php
 								echo get_person_thumbnail(
 									$post,
@@ -149,11 +149,9 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 								<?php endif; ?>
 							</div>
 						</div>
-					</div>
-					<div class="col-sm-5 col-lg offset-2 offset-lg-0 pr-sm-2 pr-lg-3">
+
 						<?php if ( $person_departments ) : ?>
-						<div class="my-2 my-lg-3">
-							<h3 class="small font-weight-normal text-default text-uppercase mb-1 mb-sm-2">Department(s)</h3>
+						<div class="offset-2 mb-2">
 							<div class="font-size-sm line-height-2">
 							<?php
 							foreach ( $person_departments as $k => $person_department ) :
@@ -174,9 +172,9 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 						</div>
 						<?php endif; ?>
 					</div>
-					<div class="col-sm-5 col-lg offset-2 offset-sm-0 pl-sm-2 pl-lg-3">
+					<div class="col-sm-6 col-lg-4 col-xl-5 offset-2 offset-lg-0 pl-lg-5">
 						<?php if ( $person_colleges ) : ?>
-						<div class="my-2 my-lg-3">
+						<div class="my-2 mt-lg-5 py-sm-1 py-lg-0">
 							<h3 class="small font-weight-normal text-default text-uppercase mb-1 mb-sm-2">College(s)</h3>
 							<div class="font-size-sm line-height-2">
 							<?php
@@ -198,26 +196,32 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 						</div>
 						<?php endif; ?>
 					</div>
-					<div class="col-10 offset-2 offset-lg-0 pl-lg-5 ml-lg-5">
+					<div class="col-10 col-lg offset-2 offset-lg-0 pl-lg-5 ml-lg-5">
 						<?php if ( is_array( $person_tags ) ) : ?>
-						<h3 class="sr-only">Related Topics</h3>
-						<ul class="list-unstyled list-inline mt-2 mb-1">
-							<?php
-							foreach ( $person_tags as $person_tag ) :
-								$person_tag_filter_url = add_query_arg(
-									'query',
-									$person_tag->slug,
-									$page_permalink
-								);
-							?>
-							<li class="list-inline-item my-1 mr-2">
-								<a class="badge badge-pill badge-faded letter-spacing-0 text-transform-none" href="<?php echo $person_tag_filter_url; ?>">
-									<?php echo $person_tag->name; ?>
-								</a>
-							</li>
-							<?php endforeach; ?>
-						</ul>
-						<?php endif; ?>
+						<div class="row my-2 mt-lg-3 py-sm-1 py-lg-0">
+							<div class="col-lg-auto mt-lg-1">
+								<h3 class="small font-weight-normal text-default text-uppercase ml-lg-1 ml-xl-2 mb-0 pt-lg-2">Research Topics</h3>
+							</div>
+							<div class="col-lg">
+								<ul class="list-unstyled list-inline">
+									<?php
+									foreach ( $person_tags as $person_tag ) :
+										$person_tag_filter_url = add_query_arg(
+											'query',
+											$person_tag->slug,
+											$page_permalink
+										);
+									?>
+									<li class="list-inline-item my-1 mr-2">
+										<a class="badge badge-pill badge-faded letter-spacing-0 text-transform-none font-weight-normal" href="<?php echo $person_tag_filter_url; ?>">
+											<?php echo $person_tag->name; ?>
+										</a>
+									</li>
+									<?php endforeach; ?>
+								</ul>
+								<?php endif; ?>
+							</div>
+						</div>
 					</div>
 				</div>
 			</li>
