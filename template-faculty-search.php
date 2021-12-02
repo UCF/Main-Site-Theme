@@ -179,13 +179,14 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 							<div class="font-size-sm line-height-2">
 							<?php
 							foreach ( $person_colleges as $k => $person_college ) :
+								$person_college_name = get_field( 'colleges_alias', 'colleges_' . $person_college->term_id ) ?: $person_college->name;
 								$person_college_filter_url = add_query_arg(
 									'college',
 									$person_college->slug,
 									$page_permalink
 								);
 							?>
-								<a href="<?php echo $person_college_filter_url; ?>"><?php echo $person_college->name; ?></a>
+								<a href="<?php echo $person_college_filter_url; ?>"><?php echo $person_college_name; ?></a>
 								<?php
 								if ( $k < count( $person_colleges ) - 1 ) {
 									echo ', ';
