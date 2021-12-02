@@ -120,8 +120,8 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 				$person_departments = get_the_terms( $post, 'departments' );
 				$person_tags        = get_the_tags();
 			?>
-			<li class="list-group-item">
-				<div class="row no-gutters w-100 align-items-lg-center">
+			<li class="list-group-item mb-2 mb-sm-3">
+				<div class="row no-gutters w-100">
 					<div class="col-lg-6 col-xl-5 pr-lg-5">
 						<div class="row no-gutters position-relative w-100">
 							<div class="col-2 col-lg-3 pr-3 pr-sm-4">
@@ -143,16 +143,18 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 								</h2>
 
 								<?php if ( $person_titles ) : ?>
-								<p class="mt-1 mb-0 text-default">
+								<p class="mt-1 mb-0">
 									<?php echo implode( ', ', array_column( $person_titles, 'job_title' ) ); ?>
 								</p>
 								<?php endif; ?>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg offset-2 offset-lg-0 pr-lg-3">
+					<div class="col-sm-5 col-lg offset-2 offset-lg-0 pr-sm-2 pr-lg-3">
 						<?php if ( $person_departments ) : ?>
-						<div class="my-1 font-size-sm line-height-2">
+						<div class="my-2 mt-lg-3">
+							<h3 class="small font-weight-normal text-default text-uppercase mb-1 mb-sm-2">Department(s)</h3>
+							<div class="font-size-sm line-height-2">
 							<?php
 							foreach ( $person_departments as $k => $person_department ) :
 								$person_dept_filter_url = add_query_arg(
@@ -161,21 +163,22 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 									$page_permalink
 								);
 							?>
-							<a href="<?php echo $person_dept_filter_url; ?>">
+								<a href="<?php echo $person_dept_filter_url; ?>"><?php echo $person_department->name; ?></a>
 								<?php
-								echo $person_department->name;
 								if ( $k < count( $person_departments ) - 1 ) {
-									echo ',';
+									echo ', ';
 								}
 								?>
-							</a>
 							<?php endforeach; ?>
+							</div>
 						</div>
 						<?php endif; ?>
 					</div>
-					<div class="col-lg offset-2 offset-lg-0 pl-lg-3">
+					<div class="col-sm-5 col-lg offset-2 offset-sm-0 pl-sm-2 pl-lg-3">
 						<?php if ( $person_colleges ) : ?>
-						<div class="my-1 font-size-sm line-height-2">
+						<div class="my-2 mt-lg-3">
+							<h3 class="small font-weight-normal text-default text-uppercase mb-1 mb-sm-2">College(s)</h3>
+							<div class="font-size-sm line-height-2">
 							<?php
 							foreach ( $person_colleges as $k => $person_college ) :
 								$person_college_filter_url = add_query_arg(
@@ -184,20 +187,20 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 									$page_permalink
 								);
 							?>
-							<a href="<?php echo $person_college_filter_url; ?>">
+								<a href="<?php echo $person_college_filter_url; ?>"><?php echo $person_college->name; ?></a>
 								<?php
-								echo $person_college->name;
 								if ( $k < count( $person_colleges ) - 1 ) {
-									echo ',';
+									echo ', ';
 								}
 								?>
-							</a>
 							<?php endforeach; ?>
+							</div>
 						</div>
 						<?php endif; ?>
 					</div>
 					<div class="col-10 offset-2 offset-lg-0 pl-lg-5 ml-lg-5">
 						<?php if ( is_array( $person_tags ) ) : ?>
+						<h3 class="sr-only">Related Topics</h3>
 						<ul class="list-unstyled list-inline mt-2 mb-1">
 							<?php
 							foreach ( $person_tags as $person_tag ) :
