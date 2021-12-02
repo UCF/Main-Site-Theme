@@ -2,4 +2,10 @@
   @include badge-variant($gray-lighter);
   border: $border-width solid $gray-light;
   color: $black;
+
+  &[href] {
+    @include hover-focus-active() {
+      color: $black;
+    }
+  }
 }
