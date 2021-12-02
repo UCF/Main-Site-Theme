@@ -200,7 +200,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 						<?php if ( is_array( $person_tags ) ) : ?>
 						<div class="row my-2 mt-lg-3 py-sm-1 py-lg-0">
 							<div class="col-lg-auto mt-lg-1">
-								<h3 class="small font-weight-normal text-default text-uppercase ml-lg-1 ml-xl-2 mb-0 pt-lg-2">Research Topics</h3>
+								<h3 class="small font-weight-normal text-default text-uppercase ml-lg-1 ml-xl-2 mb-0 pt-lg-2">Research Keywords</h3>
 							</div>
 							<div class="col-lg">
 								<ul class="list-unstyled list-inline">
