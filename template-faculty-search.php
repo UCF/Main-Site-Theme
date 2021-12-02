@@ -120,7 +120,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 				$person_departments = get_the_terms( $post, 'departments' );
 				$person_tags        = get_the_tags();
 			?>
-			<li class="list-group-item mb-2 mb-sm-3">
+			<li class="list-group-item mb-2 mb-sm-3 py-sm-3">
 				<div class="row no-gutters w-100">
 					<div class="col-lg-6 col-xl-5 pr-lg-5">
 						<div class="row no-gutters position-relative w-100">
