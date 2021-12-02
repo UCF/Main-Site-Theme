@@ -211,7 +211,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 								);
 							?>
 							<li class="list-inline-item my-1 mr-2">
-								<a class="badge badge-pill badge-faded" href="<?php echo $person_tag_filter_url; ?>">
+								<a class="badge badge-pill badge-faded letter-spacing-0 text-transform-none" href="<?php echo $person_tag_filter_url; ?>">
 									<?php echo $person_tag->name; ?>
 								</a>
 							</li>
