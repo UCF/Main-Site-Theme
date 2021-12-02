@@ -99,7 +99,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 			result<?php if ( $faculty_wp_query->found_posts !== 1 ) { ?>s<?php } ?> found
 
 			<?php if ( $query ) : ?>
-			for <strong>&ldquo;<?php echo $query; ?>&rdquo;</strong>
+			for <strong>&ldquo;<?php echo stripslashes( htmlentities( $query ) ); ?>&rdquo;</strong>
 			<?php endif; ?>
 
 			<?php if ( $department ) : ?>
