@@ -8,6 +8,7 @@
 <?php get_header(); the_post(); ?>
 
 <?php
+$page_permalink        = get_permalink();
 $query                 = isset( $_GET['query'] ) ? sanitize_text_field( $_GET['query'] ) : '';
 $paged                 = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
 $college_filter        = isset( $_GET['college'] ) ? sanitize_text_field( $_GET['college'] ) : null;
@@ -117,7 +118,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 				$person_titles      = get_field( 'person_titles', $post->ID );
 				$person_colleges    = get_the_terms( $post, 'colleges' );
 				$person_departments = get_the_terms( $post, 'departments' );
-				$person_tags        = get_the_tags( $post );
+				$person_tags        = get_the_tags();
 			?>
 			<li class="list-group-item">
 				<div class="row no-gutters w-100 align-items-lg-center">
@@ -134,7 +135,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 								);
 								?>
 							</div>
-							<div class="col-10 col-lg-9 align-self-center position-static">
+							<div class="col-10 col-lg-9 align-self-center position-static py-2">
 								<h2 class="h5 mb-0">
 									<a class="stretched-link" href="<?php echo get_permalink(); ?>">
 										<?php the_title(); ?>
@@ -149,41 +150,67 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3 col-xl-4 offset-2 offset-lg-0 pr-2">
-						<?php if ( $person_colleges ) : ?>
-						<div class="my-2 font-size-sm line-height-2">
-							<?php foreach ( $person_colleges as $k => $person_college ) : ?>
-								<?php
-								echo $person_college->name;
-								if ( $k < count( $person_colleges ) - 1 ) {
-									echo ',';
-								}
-								?>
-							<?php endforeach; ?>
-						</div>
-						<?php endif; ?>
-
+					<div class="col-lg offset-2 offset-lg-0 pr-lg-3">
 						<?php if ( $person_departments ) : ?>
-						<div class="my-2 font-size-sm line-height-2">
-							<?php foreach ( $person_departments as $k => $person_department ) : ?>
+						<div class="my-1 font-size-sm line-height-2">
+							<?php
+							foreach ( $person_departments as $k => $person_department ) :
+								$person_dept_filter_url = add_query_arg(
+									'department',
+									$person_department->slug,
+									$page_permalink
+								);
+							?>
+							<a href="<?php echo $person_dept_filter_url; ?>">
 								<?php
 								echo $person_department->name;
 								if ( $k < count( $person_departments ) - 1 ) {
 									echo ',';
 								}
 								?>
+							</a>
 							<?php endforeach; ?>
 						</div>
 						<?php endif; ?>
 					</div>
-					<div class="col-lg-3 offset-2 offset-lg-0 pl-lg-3">
+					<div class="col-lg offset-2 offset-lg-0 pl-lg-3">
+						<?php if ( $person_colleges ) : ?>
+						<div class="my-1 font-size-sm line-height-2">
+							<?php
+							foreach ( $person_colleges as $k => $person_college ) :
+								$person_college_filter_url = add_query_arg(
+									'college',
+									$person_college->slug,
+									$page_permalink
+								);
+							?>
+							<a href="<?php echo $person_college_filter_url; ?>">
+								<?php
+								echo $person_college->name;
+								if ( $k < count( $person_colleges ) - 1 ) {
+									echo ',';
+								}
+								?>
+							</a>
+							<?php endforeach; ?>
+						</div>
+						<?php endif; ?>
+					</div>
+					<div class="col-10 offset-2 offset-lg-0 pl-lg-5 ml-lg-5">
 						<?php if ( is_array( $person_tags ) ) : ?>
-						<ul class="list-unstyled list-inline my-2 my-lg-0 my-xl-1">
-							<?php foreach ( $person_tags as $person_tag ) : ?>
-							<li class="list-inline-item">
-								<span class="badge badge-pill badge-faded">
+						<ul class="list-unstyled list-inline mt-2 mb-1">
+							<?php
+							foreach ( $person_tags as $person_tag ) :
+								$person_tag_filter_url = add_query_arg(
+									'query',
+									$person_tag->slug,
+									$page_permalink
+								);
+							?>
+							<li class="list-inline-item my-1 mr-2">
+								<a class="badge badge-pill badge-faded" href="<?php echo $person_tag_filter_url; ?>">
 									<?php echo $person_tag->name; ?>
-								</span>
+								</a>
 							</li>
 							<?php endforeach; ?>
 						</ul>
