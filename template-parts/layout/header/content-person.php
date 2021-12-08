@@ -17,8 +17,8 @@ if ( $title ):
 		array(
 			'class'                => 'media-background object-fit-cover',
 			'alt'                  => '',
-			'style'                => 'object-position: 50% 25%;',
-			'data-object-position' => '50% 25%'
+			'style'                => 'object-position: 50% 0%;',
+			'data-object-position' => '50% 0%'
 		)
 	);
 ?>
