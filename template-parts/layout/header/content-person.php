@@ -15,8 +15,10 @@ if ( $title ):
 		$obj,
 		'medium',
 		array(
-			'class' => 'media-background object-fit-cover',
-			'alt'   => ''
+			'class'                => 'media-background object-fit-cover',
+			'alt'                  => '',
+			'style'                => 'object-position: 50% 35%;',
+			'data-object-position' => '50% 35%'
 		)
 	);
 ?>
