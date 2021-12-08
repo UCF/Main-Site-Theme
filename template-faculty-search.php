@@ -125,15 +125,20 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 					<div class="col-lg-8 col-xl-7">
 						<div class="row no-gutters position-relative w-100">
 							<div class="col-2 pr-3 pr-sm-4">
-								<?php
-								echo get_person_thumbnail(
-									$post,
-									'medium',
-									array(
-										'class' => 'w-100 h-auto'
-									)
-								);
-								?>
+								<div class="embed-responsive embed-responsive-1by1 media-background-container rounded-circle">
+									<?php
+									echo get_person_thumbnail(
+										$post,
+										'thumbnail',
+										array(
+											'class'                => 'media-background object-fit-cover',
+											'alt'                  => '',
+											'style'                => 'object-position: 50% 25%;',
+											'data-object-position' => '50% 25%'
+										)
+									);
+									?>
+								</div>
 							</div>
 							<div class="col-10 col-lg-9 align-self-center position-static py-2 py-lg-3">
 								<h2 class="h5 mb-0">
