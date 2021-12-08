@@ -129,7 +129,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 									<?php
 									echo get_person_thumbnail(
 										$post,
-										'medium',
+										'thumbnail',
 										array(
 											'class' => 'media-background object-fit-cover',
 											'style' => 'object-position: 50% 35%;',
