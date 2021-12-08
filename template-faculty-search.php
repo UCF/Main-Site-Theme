@@ -133,8 +133,8 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 										array(
 											'class'                => 'media-background object-fit-cover',
 											'alt'                  => '',
-											'style'                => 'object-position: 50% 35%;',
-											'data-object-position' => '50% 35%'
+											'style'                => 'object-position: 50% 25%;',
+											'data-object-position' => '50% 25%'
 										)
 									);
 									?>

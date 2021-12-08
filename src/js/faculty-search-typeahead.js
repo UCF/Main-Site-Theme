@@ -87,7 +87,7 @@
           suggestion: Handlebars.compile(`
             <div class="d-flex flex-row mb-0">
               <div class="media-background-container rounded-circle mr-2 suggestion-image">
-                <img src="{{thumbnails.thumbnail.src}}" class="media-background object-fit-cover" style="object-position: 50% 35%;" data-object-position="50% 35%" alt="" width="{{thumbnails.thumbnail.width}}" height="{{thumbnails.thumbnail.height}}">
+                <img src="{{thumbnails.thumbnail.src}}" class="media-background object-fit-cover" style="object-position: 50% 25%;" data-object-position="50% 25%" alt="" width="{{thumbnails.thumbnail.width}}" height="{{thumbnails.thumbnail.height}}">
               </div>
               <div class="align-self-center suggestion-text">
                 <span class="d-block">{{title.rendered}}</span>
