@@ -2335,6 +2335,72 @@
         "description": ""
     },
     {
+        "key": "group_60afe6ef8a553",
+        "title": "Faculty Fields",
+        "fields": [
+            {
+                "key": "field_60bfb3877b135",
+                "label": "Promotional Content",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60bfb3957b136",
+                "label": "Promo Section",
+                "name": "person_promo_section",
+                "type": "post_object",
+                "instructions": "Select an existing Section to display at the bottom of the faculty member's profile.  This will be shown in lieu of the Faculty Promo Default Section set in the Customizer, if set.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "post_type": [
+                    "ucf_section"
+                ],
+                "taxonomy": "",
+                "allow_null": 0,
+                "multiple": 0,
+                "return_format": "id",
+                "ui": 1
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-faculty.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
         "key": "group_58f7a73f5fecc",
         "title": "Page Header Fields",
         "fields": [
@@ -2722,6 +2788,109 @@
                     "param": "taxonomy",
                     "operator": "==",
                     "value": "colleges"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_60afe4968b8d2",
+        "title": "Person Fields",
+        "fields": [
+            {
+                "key": "field_60afe4f815aac",
+                "label": "Job Title",
+                "name": "person_title",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_60afe51815aad",
+                "label": "Email",
+                "name": "person_email",
+                "type": "email",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "40",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_60afe53415aae",
+                "label": "Phone",
+                "name": "person_phone",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_60afe54e15aaf",
+                "label": "Office Bldg and Number",
+                "name": "person_office",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "30",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "default"
                 }
             ]
         ],
@@ -3564,6 +3733,575 @@
                     "param": "post_type",
                     "operator": "==",
                     "value": "degree"
+                }
+            ]
+        ],
+        "menu_order": 1,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": ""
+    },
+    {
+        "key": "group_60bf81b8ce7f1",
+        "title": "Faculty Data",
+        "fields": [
+            {
+                "key": "field_60bf83d59851c",
+                "label": "Title and Organizational Info",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_61928d9a03aea",
+                "label": "Last Name",
+                "name": "person_last_name",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf8388c8af9",
+                "label": "Job Titles",
+                "name": "person_titles",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly repeater-field-hide-thead",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_6193ccaae5993",
+                        "label": "Title",
+                        "name": "job_title",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_60bf85ec22be3",
+                "label": "Email",
+                "name": "person_email",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf8393c8afb",
+                "label": "Phone",
+                "name": "person_phone",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_61704977b3a1b",
+                "label": "Employee ID",
+                "name": "person_employee_id",
+                "type": "read_only",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60bf85ba32c6c",
+                "label": "ORCID ID",
+                "name": "person_orcid_id",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "copy_to_clipboard": 0,
+                "display_type": "text"
+            },
+            {
+                "key": "field_60afe6f4124ac",
+                "label": "Education",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60afe706124ad",
+                "label": "Degrees",
+                "name": "person_degrees",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "",
+                "min": 0,
+                "max": 0,
+                "layout": "table",
+                "button_label": "",
+                "sub_fields": [
+                    {
+                        "key": "field_60afeac23c617",
+                        "label": "Institution Name",
+                        "name": "institution_name",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb303c61b",
+                        "label": "Role Name",
+                        "name": "role_name",
+                        "type": "read_only",
+                        "instructions": "Generally this is the name of the degree conferred.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeae23c618",
+                        "label": "Start Date",
+                        "name": "start_date",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb073c619",
+                        "label": "End Date",
+                        "name": "end_date",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb233c61a",
+                        "label": "Department Name",
+                        "name": "department_name",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    },
+                    {
+                        "key": "field_60afeb533c61c",
+                        "label": "Education Put Code",
+                        "name": "education_put_code",
+                        "type": "read_only",
+                        "instructions": "The number from ORCID which identifies the record. Used for import purposes.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_60afe789124b0",
+                "label": "Research",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_60afe79a124b1",
+                "label": "Books",
+                "name": "person_books",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7ae124b2",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Book",
+                "sub_fields": [
+                    {
+                        "key": "field_60afe7ae124b2",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_60afe7cb124b3",
+                "label": "Articles",
+                "name": "person_articles",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Article",
+                "sub_fields": [
+                    {
+                        "key": "field_60afe7e1124b4",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_617048c3b3a11",
+                "label": "Conference Proceedings",
+                "name": "person_proceedings",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Conference Proceeding",
+                "sub_fields": [
+                    {
+                        "key": "field_617048c3b3a12",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_61704906b3a13",
+                "label": "Grants",
+                "name": "person_grants",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Grant",
+                "sub_fields": [
+                    {
+                        "key": "field_61704906b3a14",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_6170491db3a15",
+                "label": "Honorific Awards",
+                "name": "person_awards",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Honorific Award",
+                "sub_fields": [
+                    {
+                        "key": "field_6170491db3a16",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_61704936b3a17",
+                "label": "Patents",
+                "name": "person_patents",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Patent",
+                "sub_fields": [
+                    {
+                        "key": "field_61704936b3a18",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            },
+            {
+                "key": "field_61704954b3a19",
+                "label": "Clinical Trials",
+                "name": "person_trials",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "repeater-field-readonly",
+                    "id": ""
+                },
+                "collapsed": "field_60afe7e1124b4",
+                "min": 0,
+                "max": 0,
+                "layout": "row",
+                "button_label": "Add Clinical Trial",
+                "sub_fields": [
+                    {
+                        "key": "field_61704954b3a1a",
+                        "label": "Citation",
+                        "name": "citation",
+                        "type": "read_only",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "copy_to_clipboard": 0,
+                        "display_type": "text"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-faculty.php"
                 }
             ]
         ],

@@ -1,0 +1,11 @@
+.badge-faded {
+  @include badge-variant($gray-lighter);
+  border: $border-width solid $gray-light;
+  color: $gray-darkest;
+
+  &[href] {
+    @include hover-focus-active() {
+      color: $gray-darkest;
+    }
+  }
+}

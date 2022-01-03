@@ -1,0 +1,75 @@
+.faculty-search {
+
+  .twitter-typeahead {
+    width: 100%;
+
+    .tt-input {
+      @extend .form-control;
+    }
+
+    .tt-hint {
+      color: $gray-light;
+      height: 100%;
+      line-height: 1;
+      padding: calc(#{$input-padding-y} + #{$btn-border-width - $input-btn-border-width}) $input-padding-x;
+      width: 100%;
+
+      @include media-breakpoint-up(md) {
+        padding: calc(#{$input-padding-y-md} + #{$btn-border-width - $input-btn-border-width}) $input-padding-x;
+      }
+    }
+
+    .tt-menu {
+      width: 100%;
+    }
+
+    .tt-dataset {
+      width: 100%;
+
+      @include media-breakpoint-up(md) {
+        max-width: 100%;
+      }
+
+      &:not(:empty) {
+        padding-bottom: .5rem;
+        padding-top: .5rem;
+      }
+
+      + .tt-dataset:not(:empty) {
+        border-top: 1px solid $dropdown-border-color;
+      }
+    }
+
+    .tt-suggestion {
+      @extend .dropdown-item;
+      white-space: normal;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .tt-cursor {
+      background-color: $dropdown-link-hover-bg;
+      color: $dropdown-link-hover-color;
+      text-decoration: none;
+    }
+  }
+
+  .suggestion-image {
+    flex: 0 0 auto;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  .suggestion-title {
+    &:not(:last-child) {
+      margin-right: 0;
+
+      &::after {
+        content: ',';
+      }
+    }
+  }
+
+}

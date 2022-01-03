@@ -32,6 +32,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'location_fallback_image'             => '',
 	'chartbeat_uid'                       => '2806',
 	'chartbeat_domain'                    => 'ucf.edu',
+	'faculty_search_page_path'            => 'faculty-search',
 	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
 	'statements_page_path'                => 'statements',
 	'statements_per_page'                 => 30,
@@ -116,6 +117,13 @@ function define_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'faculty_search',
+		array(
+			'title' => 'Faculty Search'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'phonebook',
 		array(
 			'title' => 'Phonebook'
@@ -153,7 +161,14 @@ function define_customizer_sections( $wp_customize ) {
 	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'location',
 		array(
-			'title' => 'Location'
+			'title' => 'Locations'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'person',
+		array(
+			'title' => 'People'
 		)
 	);
 }
@@ -654,6 +669,24 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Faculty Search
+	$wp_customize->add_setting(
+		'faculty_search_page_path',
+		array(
+			'default' => get_theme_mod_default( 'faculty_search_page_path' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'faculty_search_page_path',
+		array(
+			'type'        => 'text',
+			'label'       => 'Faculty Search Page Path',
+			'description' => 'Relative path from the main site root that the Faculty Search page lives at.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'faculty_search'
+		)
+	);
+
 	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'
@@ -827,7 +860,7 @@ function define_customizer_fields( $wp_customize ) {
 
 	// Performance Settings
 	$wp_customize->add_setting(
-		'dns_prefetch_domains',
+		'dns_prefetch_domains'
 	);
 
 	$wp_customize->add_control(
@@ -854,7 +887,7 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	// Google Map Key
+	// Locations
 	$wp_customize->add_setting(
 		'google_map_key',
 		array(
@@ -871,7 +904,6 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
-	// Location Fallback Image
 	$wp_customize->add_setting(
 		'location_fallback_image',
 		array(
@@ -944,6 +976,117 @@ function define_customizer_fields( $wp_customize ) {
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'location'
 		)
 	);
+
+	// People
+	$wp_customize->add_setting(
+		'fallback_person_thumbnail'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'fallback_person_thumbnail',
+			array(
+				'label'       => __( 'Default thumbnail' ),
+				'description' => 'The default thumbnail image for people when a featured image isn\'t set.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'mime_type'   => 'image'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_person_header'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_person_header',
+			array(
+				'label'       => __( 'Default header image (-sm+)' ),
+				'description' => 'The default background image displayed in the header of person profiles at the -sm breakpoint and up.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'width'       => 1600,
+				'height'      => 330,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fallback_person_header_xs'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Cropped_Image_Control(
+			$wp_customize,
+			'fallback_person_header_xs',
+			array(
+				'label'       => __( 'Default header image (-xs)' ),
+				'description' => 'The default background image displayed in the header of person profiles at the -xs breakpoint.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'width'       => 575,
+				'height'      => 440,
+				'flex_width'  => false,
+				'flex_height' => false
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'person_heading_text_color',
+		array (
+			'default' => 'person-heading-text-secondary'
+		)
+	);
+
+	$wp_customize->add_control(
+		'person_heading_text_color',
+		array(
+			'label'       => __( 'Heading Text Color' ),
+			'description' => 'Select the text color that meets 4.5:1 color contrast ratio against the selected background image for the -lg breakpoint and up. Heading text is not displayed on top of the image at the -md breakpoint and lower.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+			'type'        => 'radio',
+			'choices'     => array(
+				'person-heading-text-secondary' => 'Black',
+				'person-heading-text-inverse'   => 'White',
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'published_research_image'
+	);
+
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'published_research_image',
+			array(
+				'label'       => __( 'Faculty - Published Research Graphic' ),
+				'description' => 'An icon or photo to display next to a faculty member\'s published research.',
+				'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+				'mime_type'   => 'image'
+			)
+		)
+	);
+
+	$wp_customize->add_setting(
+		'faculty_fallback_promo'
+	);
+
+	$wp_customize->add_control(
+		'faculty_fallback_promo',
+		array(
+			'type'        => 'select',
+			'label'       => 'Faculty Promo Default Section',
+			'description' => 'An default Section post to display on faculty profiles when a person-specific Section isn\'t set.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'person',
+			'choices'     => $section_choices
+		)
+	);
 }
 
 add_action( 'customize_register', 'define_customizer_fields' );
@@ -967,6 +1110,16 @@ add_filter( 'upload_mimes', 'custom_mimes' );
  **/
 if ( function_exists( 'athena_sc_tinymce_init' ) ) {
 	add_filter( 'athena_sc_enable_tinymce_formatting', '__return_true' );
+}
+
+
+/**
+ * Ensure the UCF Post List's JS dependencies are always
+ * registered if the plugin is active (the "faculty search" post
+ * list layout requires them.)
+ */
+if ( class_exists( 'UCF_Post_List_Common' ) ) {
+	add_filter( 'option_ucf_post_list_include_js_libs', '__return_true' );
 }
 
 
@@ -1374,6 +1527,29 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
 
 
 /**
+ * Hides the <thead> of repeater fields that have
+ * the CSS class `repeater-field-hide-thead` applied to
+ * them to improve ease of readability.
+ *
+ * @since 3.10.0
+ * @author Cadie Stockman
+ */
+function hidden_thead_repeater_fields() {
+	ob_start();
+?>
+	<style type="text/css">
+		.repeater-field-hide-thead thead {
+			display: none;
+		}
+	</style>
+<?php
+	echo ob_get_clean();
+}
+
+add_action( 'acf/input/admin_head', 'hidden_thead_repeater_fields' );
+
+
+/**
  * Adds new columns for displaying degree template names
  * and the types of available degree descriptions in the
  * degree list admin view.
@@ -1506,3 +1682,50 @@ function degree_admin_notices() {
 }
 
 add_action( 'admin_notices', 'degree_admin_notices' );
+
+
+/**
+ * Adds new columns for displaying person template names
+ * and each person's type
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param array $columns Existing column data
+ * @return array Modified column data
+ */
+function person_admin_define_columns( $columns ) {
+	$columns['type'] = 'Type';
+	$columns['template'] = 'Template';
+
+	return $columns;
+}
+
+add_filter( 'manage_person_posts_columns', 'person_admin_define_columns' );
+
+
+/**
+ * Displays values for custom "Template" and "Available Description"
+ * columns in the degree list admin view.
+ *
+ * @since 3.8.0
+ * @author Jo Dickson
+ * @param string $column_name Column name
+ * @param int $post_id Post ID for individual post obj's in the list
+ * @return void
+ */
+function person_admin_set_columns( $column_name, $post_id ) {
+	switch ( $column_name ) {
+		case 'type':
+			$type = ucwords( get_post_meta( $post_id, 'person_type', true ) ) ?: 'Default';
+			echo $type;
+			break;
+		case 'template':
+			$template_name_slug_map = wp_get_theme()->get_page_templates( null, 'person' );
+			$template_slug = get_page_template_slug( $post_id );
+			$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[$template_slug] : 'Default';
+			echo $template_name;
+			break;
+	}
+}
+
+add_action( 'manage_person_posts_custom_column' , 'person_admin_set_columns', 10, 2 );

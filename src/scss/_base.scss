@@ -6,6 +6,7 @@
 @import 'degrees';
 
 // Components
+@import 'components/badges';
 @import 'components/degree-search-typeahead';
 @import 'components/icon-link';
 @import 'components/colleges-grid';
@@ -21,6 +22,9 @@
 @import 'components/misc';
 @import 'components/location-profiles';
 @import 'components/location-typeahead';
+@import 'components/person-profiles';
+@import 'components/faculty-typeahead';
+@import 'components/pagination';
 
 // Pages
 @import 'pages/404';

@@ -5,10 +5,11 @@ define( 'THEME_DIR', trailingslashit( get_template_directory() ) );
 include_once THEME_DIR . 'includes/utilities.php';
 include_once THEME_DIR . 'includes/config.php';
 include_once THEME_DIR . 'includes/meta.php';
+include_once THEME_DIR . 'includes/media-backgrounds.php';
 include_once THEME_DIR . 'includes/navwalker.php';
 include_once THEME_DIR . 'includes/header-functions.php';
-include_once THEME_DIR . 'includes/location-functions.php';
 
+include_once THEME_DIR . 'includes/location-functions.php';
 include_once THEME_DIR . 'includes/degree-functions.php';
 include_once THEME_DIR . 'includes/degree-import-functions.php';
 include_once THEME_DIR . 'includes/degree-search-functions.php';
@@ -16,6 +17,7 @@ include_once THEME_DIR . 'includes/ucf-alert-functions.php';
 include_once THEME_DIR . 'includes/phonebook-functions.php';
 include_once THEME_DIR . 'includes/statements-functions.php';
 include_once THEME_DIR . 'includes/post-list-layouts.php';
+include_once THEME_DIR . 'includes/people-functions.php';
 
 
 /**
@@ -46,137 +48,6 @@ function display_top_degrees( $term ) {
 	endif;
 
 	return $ret;
-}
-
-
-/**
- * Returns an array of src's for a media background <picture>'s <source>s by
- * breakpoint.
- *
- * $img_size_prefix is expected to be a prefix for a set of registered image
- * sizes, which has dimensions defined for each of Athena's responsive
- * breakpoints.  For example, if given a prefix 'bg-img', it is expected that
- * bg-img, bg-img-sm, bg-img-md, bg-img-lg, and bg-img-xl are valid registered
- * image sizes.
- *
- * @param int $attachment_xs_id Attachment ID for the image to be used at the -xs breakpoint
- * @param int $attachment_sm_id Attachment ID for the image to be used at the -sm breakpoint and up
- * @param string $img_size_prefix Prefix for a set of image sizes
- * @return array
- **/
-function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id, $img_size_prefix ) {
-	$bg_images = array();
-
-	if ( $attachment_sm_id ) {
-		$bg_images = array_merge(
-			$bg_images,
-			array(
-				'xl' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-xl' ),
-				'lg' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-lg' ),
-				'md' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-md' ),
-				'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-sm' )
-			)
-		);
-
-		// Try to get a fallback -xs image if needed
-		if ( !$attachment_xs_id ) {
-			$bg_images = array_merge(
-				$bg_images,
-				array( 'xs' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix ) )
-			);
-		}
-
-		// Remove duplicate image sizes, in case an old image isn't pre-cropped
-		$bg_images = array_unique( $bg_images );
-
-		// Use the largest-available image as the fallback <img>
-		$bg_images['fallback'] = reset( $bg_images );
-	}
-	if ( $attachment_xs_id ) {
-		$bg_images = array_merge(
-			$bg_images,
-			array( 'xs' => get_attachment_src_by_size( $attachment_xs_id, $img_size_prefix ) )
-		);
-	}
-
-	// Strip out false-y values (in case an attachment failed to return somewhere)
-	$bg_images = array_filter( $bg_images );
-
-	return $bg_images;
-}
-
-
-/**
- * Returns markup for a media background <picture>.
- *
- * @param array $srcs Array of image urls that correspond to <source> src vals. Expects output from get_media_background_picture_srcs()
- * @return string
- **/
-function get_media_background_picture( $srcs ) {
-	ob_start();
-
-	if ( isset( $srcs['fallback'] ) ) :
-?>
-	<picture class="media-background-picture">
-		<?php if ( isset( $srcs['xl'] ) ) : ?>
-		<source srcset="<?php echo $srcs['xl']; ?>" media="(min-width: 1200px)">
-		<?php endif; ?>
-
-		<?php if ( isset( $srcs['lg'] ) ) : ?>
-		<source srcset="<?php echo $srcs['lg']; ?>" media="(min-width: 992px)">
-		<?php endif; ?>
-
-		<?php if ( isset( $srcs['md'] ) ) : ?>
-		<source srcset="<?php echo $srcs['md']; ?>" media="(min-width: 768px)">
-		<?php endif; ?>
-
-		<?php if ( isset( $srcs['sm'] ) ) : ?>
-		<source srcset="<?php echo $srcs['sm']; ?>" media="(min-width: 576px)">
-		<?php endif; ?>
-
-		<?php if ( isset( $srcs['xs'] ) ) : ?>
-		<source srcset="<?php echo $srcs['xs']; ?>" media="(max-width: 575px)">
-		<?php endif; ?>
-
-		<img class="media-background object-fit-cover" src="<?php echo $srcs['fallback']; ?>" alt="">
-	</picture>
-<?php
-	endif;
-
-	return ob_get_clean();
-}
-
-
-/**
- * Returns markup for a media background <video> element.
- *
- * $videos is expected to be an array whose keys correspond to supported
- * <source> filetypes; e.g. $videos = array( 'webm' => '...', 'mp4' => '...' ).
- * Values should be video urls.
- *
- * Note: we never display autoplay videos at the -xs breakpoint.
- *
- * @param array $videos Array of video urls that correspond to <source> src vals
- * @return string
- **/
-function get_media_background_video( $videos, $loop=false ) {
-	ob_start();
-?>
-	<video class="hidden-xs-down media-background media-background-video object-fit-cover" aria-hidden="true" preload="none" muted <?php if ( $loop ) { ?>loop<?php } ?>>
-		<?php if ( isset( $videos['webm'] ) ) : ?>
-		<source src="<?php echo $videos['webm']; ?>" type="video/webm">
-		<?php endif; ?>
-
-		<?php if ( isset( $videos['mp4'] ) ) : ?>
-		<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
-		<?php endif; ?>
-	</video>
-	<button class="media-background-video-toggle btn play-enabled hidden-xs-up" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
-		<span class="fa fa-pause media-background-video-pause" aria-hidden="true"></span>
-		<span class="fa fa-play media-background-video-play" aria-hidden="true"></span>
-	</button>
-<?php
-	return ob_get_clean();
 }
 
 
@@ -601,4 +472,104 @@ function get_colleges_grid( $exclude_term=null ) {
 
 	return ob_get_clean();
 }
+
+/**
+ * Adds the `post_types` argument to the args array
+ * if it is request in the GET parameters of the request
+ * @author Jim Barnes
+ * @since v3.10.0
+ * @param array $args The argument array for the query
+ * @param WP_Request $request The WP_Request argument
+ * @return array $args The modified args array
+ */
+function modify_rest_departments_query( $args, $request ) {
+	if ( isset( $request['post_types'] ) && ! empty( $request['post_types'] ) ) {
+		$args['post_types'] = $request['post_types'];
+	}
+
+	return $args;
+}
+
+add_filter( 'rest_departments_query', 'modify_rest_departments_query', 10, 2 );
+
+
+/**
+ * Custom filter for filtering terms by post_type
+ * @author Jim Barnes
+ * @since v3.10.0
+ * @param array $pieces The pieces of the query to be sent to MySQL ('select', 'join', 'where')
+ * @param array $taxonomies The taxonomies being filtered
+ * @param array $args The get_terms arguments
+ * @return array $pieces The modified $pieces array
+ */
+function filter_terms_by_post_type( $pieces, $taxonomies, $args ) {
+	if ( isset( $args['post_types'] ) ) {
+		global $wpdb;
+
+		$pieces['fields'] .= ", COUNT(*) ";
+
+		$pieces['join'] .= " INNER JOIN $wpdb->term_relationships as tr ON tr.term_taxonomy_id = tt.term_taxonomy_id
+							 INNER JOIN $wpdb->posts as p ON p.ID = tr.object_id ";
+
+		$post_types = $args['post_types'];
+		$pieces['where'] .= $wpdb->prepare( " AND p.post_type IN(%s) GROUP BY t.term_id", $post_types );
+	}
+
+	return $pieces;
+}
+
+add_filter( 'terms_clauses', 'filter_terms_by_post_type', 10, 3 );
+
+
+/**
+ * Custom callback for getting an accurate count
+ * when the `post_types` filter is used.
+ * @author Jim Barnes
+ * @since v3.10.0
+ * @param array $term The term in array form
+ * @param string $field_name The field name being modified
+ * @param WP_Request $request The request object
+ * @return mixed In this case, we're returning an integer
+ */
+function get_term_count_rest_api( $term, $field_name, $request ) {
+	if ( isset( $request['post_types'] ) && ! empty( $request['post_types'] ) ) {
+		$post_types = explode( ',', $request['post_types'] );
+
+		$args = array(
+			'post_type' => $post_types,
+			'tax_query' => array(
+				array(
+					'taxonomy' => $term['taxonomy'],
+					'field'    => 'term_id',
+					'terms'    => $term['id']
+				)
+			)
+		);
+
+		$query = new WP_Query( $args );
+
+		return intval($query->found_posts);
+	}
+
+	return $term['count'];
+}
+
+/**
+ * Overrides the built in `count` field on the
+ * departments API
+ * @author Jim Barnes
+ * @since v3.10.0
+ */
+function add_custom_count_to_department_api() {
+	register_rest_field(
+		'departments',
+		'count',
+		array(
+			'get_callback' => 'get_term_count_rest_api'
+		)
+	);
+}
+
+add_action( 'rest_api_init', 'add_custom_count_to_department_api', 10, 0 );
+
 ?>
