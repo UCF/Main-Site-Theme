@@ -1,0 +1,79 @@
+.clip-caret {
+  --caret-height: #{$caret-height};
+  --caret-width: #{$caret-width};
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint);
+
+  @include media-breakpoint-up($breakpoint) {
+    .clip-caret#{$infix}-down {
+      clip-path: polygon(
+        0 0,
+        0 100%,
+        100% 100%,
+        100% 0,
+        calc(50% + calc(var(--caret-width) / 2)) 0,
+        50% var(--caret-height),
+        calc(50% - calc(var(--caret-width) / 2)) 0,
+        0 0
+      );
+      margin-left: 0;
+      margin-top: calc(var(--caret-height) * -1);
+    }
+
+    .clip-caret#{$infix}-left {
+      clip-path: polygon(
+        0 0,
+        var(--caret-height) 0,
+        var(--caret-height) calc(50% - calc(var(--caret-width) / 2)),
+        0 50%,
+        var(--caret-height) calc(50% + calc(var(--caret-width) / 2)),
+        var(--caret-height) 100%,
+        0 100%,
+        100% 100%,
+        100% 0,
+        0 0
+      );
+      margin-left: calc(var(--caret-height) * -1);
+      margin-top: 0;
+    }
+
+    .clip-caret#{$infix}-up {
+      clip-path: polygon(
+        0 0,
+        0 100%,
+        100% 100%,
+        100% var(--caret-height),
+        calc(50% + calc(var(--caret-width) / 2)) var(--caret-height),
+        50% 0,
+        calc(50% - calc(var(--caret-width) / 2)) var(--caret-height),
+        0 var(--caret-height),
+        0 0
+      );
+      margin-left: 0;
+      margin-top: calc(var(--caret-height) * -1);
+    }
+
+    .clip-caret#{$infix}-right {
+      clip-path: polygon(
+        0 0,
+        0 calc(50% - calc(var(--caret-width) / 2)),
+        var(--caret-height) 50%,
+        0 calc(50% + calc(var(--caret-width) / 2)),
+        0 100%,
+        100% 100%,
+        100% 0,
+        0 0
+      );
+      margin-left: calc(var(--caret-height) * -1);
+      margin-top: 0;
+    }
+
+    .clip-caret#{$infix}-none {
+      clip-path: none;
+      margin-left: 0;
+      margin-top: 0;
+    }
+  }
+}

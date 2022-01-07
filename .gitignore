@@ -32,3 +32,6 @@ typings
 
 # debug files
 npm-debug.log
+
+# vscode
+.vscode
