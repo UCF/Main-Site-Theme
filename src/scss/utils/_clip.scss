@@ -1,36 +1,41 @@
-@each $breakpoint in map-keys($grid-breakpoints) {
-  $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+.clip-caret {
+  --caret-height: #{$caret-height};
+  --caret-width: #{$caret-width};
+}
 
-  @include media-breakpoint-up($breakpoint, $grid-breakpoints) {
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $infix: breakpoint-infix($breakpoint);
+
+  @include media-breakpoint-up($breakpoint) {
     .clip-caret#{$infix}-down {
       clip-path: polygon(
         0 0,
         0 100%,
         100% 100%,
         100% 0,
-        calc(50% + #{$caret-size}) 0,
-        50% #{$caret-size},
-        calc(50% - #{$caret-size}) 0,
+        calc(50% + calc(var(--caret-width) / 2)) 0,
+        50% var(--caret-height),
+        calc(50% - calc(var(--caret-width) / 2)) 0,
         0 0
       );
       margin-left: 0;
-      margin-top: -#{$caret-size};
+      margin-top: calc(var(--caret-height) * -1);
     }
 
     .clip-caret#{$infix}-left {
       clip-path: polygon(
         0 0,
-        #{$caret-size} 0,
-        #{$caret-size} calc(50% - #{$caret-size}),
+        var(--caret-height) 0,
+        var(--caret-height) calc(50% - calc(var(--caret-width) / 2)),
         0 50%,
-        #{$caret-size} calc(50% + #{$caret-size}),
-        #{$caret-size} 100%,
+        var(--caret-height) calc(50% + calc(var(--caret-width) / 2)),
+        var(--caret-height) 100%,
         0 100%,
         100% 100%,
         100% 0,
         0 0
       );
-      margin-left: -#{$caret-size};
+      margin-left: calc(var(--caret-height) * -1);
       margin-top: 0;
     }
 
@@ -39,29 +44,29 @@
         0 0,
         0 100%,
         100% 100%,
-        100% #{$caret-size},
-        calc(50% + #{$caret-size}) #{$caret-size},
+        100% var(--caret-height),
+        calc(50% + calc(var(--caret-width) / 2)) var(--caret-height),
         50% 0,
-        calc(50% - #{$caret-size}) #{$caret-size},
-        0 #{$caret-size},
+        calc(50% - calc(var(--caret-width) / 2)) var(--caret-height),
+        0 var(--caret-height),
         0 0
       );
       margin-left: 0;
-      margin-top: -#{$caret-size};
+      margin-top: calc(var(--caret-height) * -1);
     }
 
     .clip-caret#{$infix}-right {
       clip-path: polygon(
         0 0,
-        0 calc(50% - #{$caret-size}),
-        #{$caret-size} 50%,
-        0 calc(50% + #{$caret-size}),
+        0 calc(50% - calc(var(--caret-width) / 2)),
+        var(--caret-height) 50%,
+        0 calc(50% + calc(var(--caret-width) / 2)),
         0 100%,
         100% 100%,
         100% 0,
         0 0
       );
-      margin-left: -#{$caret-size};
+      margin-left: calc(var(--caret-height) * -1);
       margin-top: 0;
     }
 
