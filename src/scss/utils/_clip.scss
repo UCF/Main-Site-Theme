@@ -1,6 +1,10 @@
 .clip-caret {
   --caret-height: #{$caret-height};
   --caret-width: #{$caret-width};
+  // position and z-index are necessary here to play nice
+  // with page headers with media backgrounds:
+  position: relative;
+  z-index: 2;
 }
 
 @each $breakpoint in map-keys($grid-breakpoints) {
