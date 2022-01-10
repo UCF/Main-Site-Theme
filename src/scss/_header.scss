@@ -319,7 +319,7 @@
 // media background's video controls.
 .header-media-controlfix {
   @include media-breakpoint-up(sm) {
-    height: 4.5rem;
+    height: 6rem;
     pointer-events: none;
   }
 }
