@@ -8,9 +8,9 @@
   }
 
   .media-background-container & {
-    bottom: $grid-gutter-width-base / 2;
+    bottom: 2.5rem;
     position: absolute;
-    right: $grid-gutter-width-base / 2;
+    right: 2.5rem;
     z-index: 2;
   }
 }
