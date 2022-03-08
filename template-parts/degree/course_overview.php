@@ -19,7 +19,7 @@ if ( $post->post_type === 'degree' ) :
 						<div class="accordion-courses mt-0 pt-0 pt-lg-3">
 							<a <?php if ( get_row_index() !== 1 ) echo 'class="collapsed"' ?>
 								data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>"
-								aria-controls="course-<?php echo get_row_index(); ?>" role="button" tabindex="0" aria-expanded="true">
+								aria-controls="course-<?php echo get_row_index(); ?>" role="tab" tabindex="0" aria-expanded="true">
 								<h3 class="mb-0">
 									<span class="font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
 										<?php the_sub_field( 'course_title' ); ?>
