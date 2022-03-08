@@ -13,6 +13,7 @@ These plugins *must* be activated for the theme to function properly, and/or to 
 * Advanced Custom Fields PRO
 * Athena Gravity Forms
 * Gravity Forms
+* Query Terms by Post Type
 * Redirection
 * UCF Alert Plugin
 * UCF College Custom Taxonomy
