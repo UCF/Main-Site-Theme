@@ -28,7 +28,7 @@ if ( $post->post_type === 'degree' ) :
 								</h3>
 							</a>
 							<div class="collapse<?php if ( get_row_index() === 1 ) echo " show" ?>"
-								id="course-<?php echo get_row_index(); ?>" data-parent="#courses" role="tabpanel" aria-expanded="true">
+								id="course-<?php echo get_row_index(); ?>" data-parent="#courses" role="tabpanel">
 								<p class="mt-3 mb-0">
 									<?php the_sub_field( 'course_description' ); ?>
 								</p>
