@@ -449,7 +449,8 @@ function phonebook_fix_name_case( $name ) {
 		'Student-athletes' => 'Student Athletes',
 		'Wucf' => 'WUCF',
 		'WUCF Tv' => 'WUCF TV',
-		'WUCF-fm' => 'WUCF-FM'
+		'WUCF-fm' => 'WUCF-FM',
+		'It' => 'IT'
 	);
 
 	$regex = array(
