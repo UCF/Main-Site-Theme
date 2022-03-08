@@ -64,12 +64,12 @@ if ( $post->post_type === 'degree' ) :
 						<div class="col">
 							<dl>
 								<?php if ( $program_type ) : ?>
-								<dt class="h6 text-uppercase text-default">Program</dt>
+								<dt class="h6 text-uppercase text-inverse-aw">Program</dt>
 								<dd class="h5 mb-4"><?php echo $program_type->name; ?></dd>
 								<?php endif; ?>
 
 								<?php if ( $colleges ) : ?>
-								<dt class="h6 text-uppercase text-default">College(s)</dt>
+								<dt class="h6 text-uppercase text-inverse-aw">College(s)</dt>
 								<dd class="h5 mb-4">
 									<?php
 									foreach ( $colleges as $college ) :
@@ -91,7 +91,7 @@ if ( $post->post_type === 'degree' ) :
 								<?php endif; ?>
 
 								<?php if ( $departments ) : ?>
-								<dt class="h6 text-uppercase text-default">Department(s)</dt>
+								<dt class="h6 text-uppercase text-inverse-aw">Department(s)</dt>
 								<dd class="h5">
 									<?php
 									foreach ( $departments as $department ) :
