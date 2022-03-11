@@ -1529,7 +1529,7 @@ add_action( 'acf/input/admin_footer', 'read_only_repeater_fields' );
 /**
  * Hides the <thead> of repeater fields that have
  * the CSS class `repeater-field-hide-thead` applied to
- * them to improve ease of readability.
+ * them to improve readability.
  *
  * @since 3.10.0
  * @author Cadie Stockman
