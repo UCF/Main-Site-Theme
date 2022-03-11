@@ -12,11 +12,11 @@
 function main_site_degree_search_display( $output, $args ) {
 	ob_start();
 ?>
-	<form id="degree-search" action="<?php echo get_permalink( get_page_by_path( 'degree-search' ) );?>" method="GET">
+	<form action="<?php echo get_permalink( get_page_by_path( 'degree-search' ) );?>" method="GET" class="degree-search">
 		<div class="input-group degree-search">
 			<input type="text" name="search" class="form-control degree-search-typeahead" aria-label="Search degree programs" placeholder="<?php echo $args['placeholder']; ?>">
 			<span class="input-group-btn">
-				<button id="ucf-degree-search-submit" type="submit" class="btn btn-degree-search btn-primary text-inverse" aria-label="Search"><span class="fa fa-search" aria-hidden="true"></span></button>
+				<button type="submit" class="btn btn-degree-search btn-primary" aria-label="Search"><span class="fa fa-search" aria-hidden="true"></span></button>
 			</span>
 		</div>
 	</form>
