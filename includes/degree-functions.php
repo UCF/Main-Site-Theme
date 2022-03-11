@@ -315,7 +315,7 @@ function get_degree_application_deadlines( $post ) {
  * @param string $btn_text | Text to display within the button
  * @return string | The button markup.
  **/
-function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block btn-primary', $icon_classes='fa fa-pencil pr-2', $btn_text='Apply Now' ) {
+function get_degree_apply_button( $degree, $btn_classes='btn btn-lg btn-block btn-primary', $icon_classes='fa fa-pencil pr-2', $btn_text='Apply Today' ) {
 	$apply_url = '';
 
 	$type = get_degree_program_type( $degree );
