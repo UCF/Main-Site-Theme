@@ -335,11 +335,11 @@ function main_site_pegasus_list_content( $content, $items, $args, $fallback_mess
 			</a>
 		</div>
 		<div class="col-sm-8 mt-3 mt-sm-0">
-			<a class="h1 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+			<a class="text-decoration-none hover-text-underline h1 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
 				<?php echo $issue_title; ?>
 			</a>
-			<p class="mt-2 mt-md-4 mb-2 text-muted text-uppercase">Featured Story</p>
-			<a class="h3 font-slab-serif text-secondary" href="<?php echo $cover_story_url; ?>" target="_blank">
+			<span class="d-block mt-2 mt-md-4 mb-2 text-muted text-uppercase">Featured Story</span>
+			<a class="text-decoration-none hover-text-underline h3 font-slab-serif text-secondary" href="<?php echo $cover_story_url; ?>" target="_blank">
 				<?php echo $cover_story_title; ?>
 			</a>
 			<p class="mt-3 mb-4"><?php echo $cover_story_blurb; ?></p>
@@ -390,11 +390,11 @@ function main_site_pegasus_list_content( $content, $items, $args, $fallback_mess
 					</a>
 				</div>
 				<div class="col-9 col-lg-12">
-					<a class="h3 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+					<a class="text-decoration-none hover-text-underline h3 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
 						<?php echo $issue_title; ?>
 					</a>
-					<p class="mt-2 mt-md-3 mb-1 small text-muted text-uppercase">Featured Story</p>
-					<a class="h5 font-slab-serif text-secondary mb-3" href="<?php echo $cover_story_url; ?>" target="_blank">
+					<span class="d-block mt-2 mt-md-3 mb-1 small text-muted text-uppercase">Featured Story</span>
+					<a class="text-decoration-none hover-text-underline h5 font-slab-serif text-secondary mb-3" href="<?php echo $cover_story_url; ?>" target="_blank">
 						<?php echo $cover_story_title; ?>
 					</a>
 					<p class="my-2"><?php echo $cover_story_blurb; ?></p>
