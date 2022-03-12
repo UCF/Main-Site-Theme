@@ -22,7 +22,7 @@ if ( $post->post_type === 'degree' ) :
 					</div>
 					<div class="col-auto">
 						<p class="mb-0">
-							<a class="h6 text-uppercase mb-0 text-default-aw text-decoration-none hover-text-underline" href="<?php echo $news_tag_archive; ?>">
+							<a class="h6 text-uppercase mb-0 text-default-aw text-decoration-none" href="<?php echo $news_tag_archive; ?>">
 								Check out more stories
 								<span class="fa fa-external-link text-primary" aria-hidden="true"></span>
 							</a>
