@@ -144,7 +144,7 @@ function get_organization_html( $title, $org, $count ) {
 function get_location_spotlight( $post ) {
 	if( isset( $post->meta['ucf_location_spotlight'] ) && $post->meta['ucf_location_spotlight'] ) :
 		$spotlight = do_shortcode( '[ucf-spotlight slug="' . $post->meta['ucf_location_spotlight']->post_name . '"]' );
-		return '<div class="my-5 mt-lg-0 mb-lg-5">' . $spotlight . '</div>';
+		return '<div class="my-5 mt-lg-0">' . $spotlight . '</div>';
 	endif;
 
 	return '';

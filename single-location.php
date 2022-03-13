@@ -19,7 +19,7 @@ else if ( ! empty( $location_fallback_image ) ) {
 }
 ?>
 
-<div class="container mt-5 pt-4 mb-4 mb-sm-5 pb-md-3">
+<div class="container my-4 my-lg-5">
 	<div class="row">
 		<div class="col-lg-7">
 			<div class="row mb-3">
@@ -49,13 +49,13 @@ else if ( ! empty( $location_fallback_image ) ) {
 			<div class="row">
 
 				<?php if( $events ) : ?>
-					<div class="col-sm-12 col-md-7 col-lg-12">
+					<div class="col-md-7 col-lg-12">
 						<h2 class="h5 heading-underline mt-4 mt-md-0">Events</h2>
 						<?php echo $events; ?>
 					</div>
 				<?php endif; ?>
 
-				<div class="col-sm-12 col-md-5 col-lg-12">
+				<div class="col-md-5 col-lg-12">
 					<?php echo get_location_spotlight( $post ); ?>
 					<?php echo get_location_organizations( $post ); ?>
 				</div>
