@@ -147,8 +147,8 @@ function mainsite_events_display_classic( $content, $items, $args, $display_type
 				</time>
 			</div>
 			<div class="ucf-event-col ucf-event-content">
-				<a class="ucf-event-link" href="<?php echo $event->url; ?>">
-					<span class="ucf-event-title"><?php echo $event->title; ?></span>
+				<a class="ucf-event-link text-decoration-none hover-parent" href="<?php echo $event->url; ?>">
+					<span class="ucf-event-title hover-child-text-underline"><?php echo $event->title; ?></span>
 					<span class="ucf-event-time">
 						<span class="ucf-event-start-time"><?php echo $starts->format( 'g:i a' ); ?></span>
 						-
@@ -203,8 +203,8 @@ function main_site_academic_calendar_content( $content, $items, $args, $fallback
 				$first_item = array_shift( $items );
 			?>
 			<div class="academic-calendar-item">
-				<a href="<?php echo $first_item->directUrl; ?>" target="_blank">
-					<span class="text-inverse title h4 mb-3 d-block"><?php echo $first_item->summary; ?></span>
+				<a class="text-decoration-none hover-parent" href="<?php echo $first_item->directUrl; ?>" target="_blank">
+					<span class="text-inverse title h4 mb-3 d-block hover-child-text-underline"><?php echo $first_item->summary; ?></span>
 					<?php echo main_site_academic_calendar_format_date( $first_item->dtstart, $first_item->dtend ); ?>
 					<?php if ( ! empty( $first_item->description ) ) : ?>
 						<p class="text-inverse"><?php echo $first_item->description; ?></p>
@@ -221,9 +221,9 @@ function main_site_academic_calendar_content( $content, $items, $args, $fallback
 			<div class="academic-calendar-columns">
 				<?php foreach ( $items as $item ) : ?>
 				<div class="academic-calendar-item">
-					<a href="<?php echo $item->directUrl; ?>" target="_blank">
+					<a class="text-decoration-none hover-parent" href="<?php echo $item->directUrl; ?>" target="_blank">
 						<?php echo main_site_academic_calendar_format_date( $item->dtstart, $item->dtend ); ?>
-						<span class="text-inverse title"><?php echo $item->summary; ?></span>
+						<span class="text-inverse title hover-child-text-underline"><?php echo $item->summary; ?></span>
 					</a>
 				</div>
 				<?php endforeach; ?>
@@ -335,11 +335,11 @@ function main_site_pegasus_list_content( $content, $items, $args, $fallback_mess
 			</a>
 		</div>
 		<div class="col-sm-8 mt-3 mt-sm-0">
-			<a class="h1 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+			<a class="text-decoration-none hover-text-underline h1 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
 				<?php echo $issue_title; ?>
 			</a>
-			<p class="mt-2 mt-md-4 mb-2 text-muted text-uppercase">Featured Story</p>
-			<a class="h3 font-slab-serif text-secondary" href="<?php echo $cover_story_url; ?>" target="_blank">
+			<span class="d-block mt-2 mt-md-4 mb-2 text-muted text-uppercase">Featured Story</span>
+			<a class="text-decoration-none hover-text-underline h3 font-slab-serif text-secondary" href="<?php echo $cover_story_url; ?>" target="_blank">
 				<?php echo $cover_story_title; ?>
 			</a>
 			<p class="mt-3 mb-4"><?php echo $cover_story_blurb; ?></p>
@@ -390,11 +390,11 @@ function main_site_pegasus_list_content( $content, $items, $args, $fallback_mess
 					</a>
 				</div>
 				<div class="col-9 col-lg-12">
-					<a class="h3 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
+					<a class="text-decoration-none hover-text-underline h3 text-secondary" href="<?php echo $issue_url; ?>" target="_blank">
 						<?php echo $issue_title; ?>
 					</a>
-					<p class="mt-2 mt-md-3 mb-1 small text-muted text-uppercase">Featured Story</p>
-					<a class="h5 font-slab-serif text-secondary mb-3" href="<?php echo $cover_story_url; ?>" target="_blank">
+					<span class="d-block mt-2 mt-md-3 mb-1 small text-muted text-uppercase">Featured Story</span>
+					<a class="text-decoration-none hover-text-underline h5 font-slab-serif text-secondary mb-3" href="<?php echo $cover_story_url; ?>" target="_blank">
 						<?php echo $cover_story_title; ?>
 					</a>
 					<p class="my-2"><?php echo $cover_story_blurb; ?></p>
