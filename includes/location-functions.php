@@ -86,7 +86,7 @@ function get_organization_html( $title, $org, $count ) {
 
 	if ( isset( $org['org_name'] ) && ! empty( $org['org_name'] ) ) : ?>
 		<dt>
-			<a href="#collapse<?php echo $count; ?>" class="org-dept-name text-uppercase d-inline-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
+			<a href="#collapse<?php echo $count; ?>" class="org-dept-name d-inline-block" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse<?php echo $count; ?>">
 				<?php echo $org['org_name']; ?>
 			</a>
 		</dt>
@@ -144,7 +144,7 @@ function get_organization_html( $title, $org, $count ) {
 function get_location_spotlight( $post ) {
 	if( isset( $post->meta['ucf_location_spotlight'] ) && $post->meta['ucf_location_spotlight'] ) :
 		$spotlight = do_shortcode( '[ucf-spotlight slug="' . $post->meta['ucf_location_spotlight']->post_name . '"]' );
-		return '<div class="my-5 mt-lg-0 mb-lg-5">' . $spotlight . '</div>';
+		return '<div class="my-5 mt-lg-0">' . $spotlight . '</div>';
 	endif;
 
 	return '';

@@ -65,8 +65,8 @@
   }
 
   @include media-breakpoint-up(lg) {
-    margin-bottom: $spacer-y / 2;
-    margin-top: $spacer-y / 2;
+    margin-bottom: $spacer-y * .5;
+    margin-top: $spacer-y * .5;
   }
 
   .degree-badge {
@@ -176,27 +176,27 @@
 
   @include media-breakpoint-up(lg) {
     display: flex;
-    flex: 0 0 calc(((100vw - #{map-get($container-max-widths, lg)}) / 2) + (#{$grid-gutter-width-base} / 2));
-    width: calc(((100vw - #{map-get($container-max-widths, lg)}) / 2) + (#{$grid-gutter-width-base} / 2));
+    flex: 0 0 calc(((100vw - #{map-get($container-max-widths, lg)}) * .5) + (#{$grid-gutter-width-base} * .5));
+    width: calc(((100vw - #{map-get($container-max-widths, lg)}) * .5) + (#{$grid-gutter-width-base} * .5));
   }
 
   @include media-breakpoint-up(xl) {
-    flex: 0 0 calc(((100vw - #{map-get($container-max-widths, xl)}) / 2) + (#{$grid-gutter-width-base} / 2));
-    width: calc(((100vw - #{map-get($container-max-widths, xl)}) / 2) + (#{$grid-gutter-width-base} / 2));
+    flex: 0 0 calc(((100vw - #{map-get($container-max-widths, xl)}) * .5) + (#{$grid-gutter-width-base} * .5));
+    width: calc(((100vw - #{map-get($container-max-widths, xl)}) * .5) + (#{$grid-gutter-width-base} * .5));
   }
 }
 
 .degree-deadline-content {
   display: block;
-  padding: 2rem #{$grid-gutter-width-base / 2};
+  padding: 2rem #{$grid-gutter-width-base * .5};
 
   @include media-breakpoint-up(sm) {
-    padding: 2.5rem calc(((100vw - #{map-get($container-max-widths, sm)}) / 2) + (#{$grid-gutter-width-base} / 2));
+    padding: 2.5rem calc(((100vw - #{map-get($container-max-widths, sm)}) * .5) + (#{$grid-gutter-width-base} * .5));
     width: 100%;
   }
 
   @include media-breakpoint-up(md) {
-    padding: 2.5rem calc(((100vw - #{map-get($container-max-widths, md)}) / 2) + (#{$grid-gutter-width-base} / 2));
+    padding: 2.5rem calc(((100vw - #{map-get($container-max-widths, md)}) * .5) + (#{$grid-gutter-width-base} * .5));
   }
 
   @include media-breakpoint-up(lg) {
@@ -227,13 +227,13 @@
 .degree-deadline-content-start {
   @include media-breakpoint-up(lg) {
     flex-shrink: 0;
-    max-width: #{map-get($container-max-widths, lg) * (4/12)};
+    max-width: #{map-get($container-max-widths, lg) * calc(4 / 12)};
     padding-left: 2.5rem;
   }
 
   @include media-breakpoint-up(xl) {
     flex-wrap: nowrap;
-    max-width: #{map-get($container-max-widths, xl) * (5/12)};
+    max-width: #{map-get($container-max-widths, xl) * calc(5 / 12)};
   }
 
   &.degree-deadline-content-start-condensed {
@@ -242,7 +242,7 @@
     }
 
     @include media-breakpoint-up(xl) {
-      max-width: #{map-get($container-max-widths, xl) * (3/12)};
+      max-width: #{map-get($container-max-widths, xl) * calc(3 / 12)};
     }
   }
 }
@@ -417,4 +417,8 @@
 //
 .degree-online-copy {
   font-size: 1.15em;
+}
+
+.accordion-course-title {
+  cursor: pointer;
 }

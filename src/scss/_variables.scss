@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 $fa-font-path: '../fonts/font-awesome';
 
 $line-height-base: 1.65;
@@ -12,16 +14,14 @@ $font-slab-serif-blockquote-size-md: $blockquote-font-size-md * 1.2;
 $font-serif-blockquote-line-height:  1.4;
 $blockquote-line-height:             1.6;
 
-$small-font-size: 70% !default;
-
 
 $header-img-xs-width: 575px;
 $header-img-xs-height: 575px;
 $header-img-degree-xs-height: 300px;
 $header-img-person-xs-height: 300px;
-$header-media-xs-height: ($header-img-xs-height / $header-img-xs-width) * 100vw;
-$header-media-degree-xs-height: ($header-img-degree-xs-height / $header-img-xs-width) * 100vw;
-$header-media-person-xs-height: ($header-img-person-xs-height / $header-img-xs-width) * 100vw;
+$header-media-xs-height: math.div($header-img-xs-height, $header-img-xs-width) * 100vw;
+$header-media-degree-xs-height: math.div($header-img-degree-xs-height, $header-img-xs-width) * 100vw;
+$header-media-person-xs-height: math.div($header-img-person-xs-height, $header-img-xs-width) * 100vw;
 $header-media-person-sm-height: 275px;
 $header-media-person-lg-height: 330px;
 
@@ -46,5 +46,5 @@ $box-shadow-color-inverse: $text-shadow-color-inverse;
 $rotate-left: rotate(-5deg);
 $rotate-right: rotate(5deg);
 
-$caret-width: 3rem; // match .px-4/.mx-4 * 2
-$caret-height: 1.5rem; // match .py-4/.my-4
+$clip-caret-width: 3rem; // match .px-4/.mx-4 * 2
+$clip-caret-height: 1.5rem; // match .py-4/.my-4

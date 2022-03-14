@@ -2,7 +2,7 @@ const degreeSearchInit = ($) => {
   let degree;
 
   if ($('.degree-search-typeahead').length) {
-    const $form = $('#degree-search');
+    const $form = $('.degree-search');
 
     $form.on('submit', (e) => {
       e.preventDefault();
