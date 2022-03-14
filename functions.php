@@ -147,8 +147,8 @@ function mainsite_events_display_classic( $content, $items, $args, $display_type
 				</time>
 			</div>
 			<div class="ucf-event-col ucf-event-content">
-				<a class="ucf-event-link text-decoration-none hover-text-underline" href="<?php echo $event->url; ?>">
-					<span class="ucf-event-title"><?php echo $event->title; ?></span>
+				<a class="ucf-event-link text-decoration-none hover-parent" href="<?php echo $event->url; ?>">
+					<span class="ucf-event-title hover-child-text-underline"><?php echo $event->title; ?></span>
 					<span class="ucf-event-time">
 						<span class="ucf-event-start-time"><?php echo $starts->format( 'g:i a' ); ?></span>
 						-
