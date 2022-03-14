@@ -17,11 +17,11 @@ if ( $post->post_type === 'degree' ) :
 
 						<?php while ( have_rows( 'course_overview', $post ) ) : the_row(); ?>
 						<div class="accordion-courses mt-0 pt-0 pt-lg-3">
-							<a class="text-decoration-none hover-parent<?php if ( get_row_index() !== 1 ) echo ' collapsed'; ?>"
+							<a class="accordion-course-title text-decoration-none <?php if ( get_row_index() !== 1 ) echo ' collapsed'; ?>"
 								data-toggle="collapse" data-target="#course-<?php echo get_row_index(); ?>"
 								aria-controls="course-<?php echo get_row_index(); ?>" role="tab" tabindex="0" aria-expanded="true">
 								<h3 class="mb-0">
-									<span class="hover-child-text-underline font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
+									<span class="font-condensed h6 letter-spacing-2 mb-3 text-uppercase">
 										<?php the_sub_field( 'course_title' ); ?>
 									</span>
 									<span class="course-icon pull-right text-inverse-aw fa" aria-hidden="true"></span>
@@ -43,7 +43,7 @@ if ( $post->post_type === 'degree' ) :
 			<?php if ( $catalog_desc_full ) : ?>
 			<div class="row">
 				<div class="col-12 text-right">
-					<a href="#catalogModal" data-toggle="modal">
+					<a class="text-decoration-none hover-text-underline" href="#catalogModal" data-toggle="modal">
 						<?php echo $course_catalog_link_text; ?>
 						<span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
 					</a>
