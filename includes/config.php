@@ -33,10 +33,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'chartbeat_uid'                       => '2806',
 	'chartbeat_domain'                    => 'ucf.edu',
 	'faculty_search_page_path'            => 'faculty-search',
-	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
-	'statements_page_path'                => 'statements',
-	'statements_per_page'                 => 30,
-	'statements_archive_transient_expire' => 300 // seconds
+	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php'
 ) ) );
 
 function __init__() {
@@ -127,13 +124,6 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'phonebook',
 		array(
 			'title' => 'Phonebook'
-		)
-	);
-
-	$wp_customize->add_section(
-		THEME_CUSTOMIZER_PREFIX . 'statements',
-		array(
-			'title' => 'Statements Archive'
 		)
 	);
 
@@ -699,72 +689,6 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Search Service URL',
 			'description' => 'The base url of the UCF Search service.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'phonebook'
-		)
-	);
-
-	// Statements
-	$wp_customize->add_setting(
-		'statements_page_path',
-		array(
-			'default' => get_theme_mod_default( 'statements_page_path' )
-		)
-	);
-
-	$wp_customize->add_control(
-		'statements_page_path',
-		array(
-			'type'        => 'text',
-			'label'       => 'Statements Page Path',
-			'description' => 'Relative path from the main site root that the Statements page lives at.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
-		)
-	);
-
-	$wp_customize->add_setting(
-		'statements_archive_endpoint'
-	);
-
-	$wp_customize->add_control(
-		'statements_archive_endpoint',
-		array(
-			'type'        => 'text',
-			'label'       => 'Statements Archive API Endpoint',
-			'description' => 'URL to the API endpoint that lists Statement data by year and author.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
-		)
-	);
-
-	$wp_customize->add_setting(
-		'statements_archive_transient_expire',
-		array(
-			'default' => get_theme_mod_default( 'statements_archive_transient_expire' )
-		)
-	);
-
-	$wp_customize->add_control(
-		'statements_archive_transient_expire',
-		array(
-			'type'        => 'text',
-			'label'       => 'Statements Archive Transient Expiration',
-			'description' => 'Amount of time, in seconds, that Statement archive data should be cached. Set to 0 or an empty value to not utilize transient caching.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
-		)
-	);
-
-	$wp_customize->add_setting(
-		'statements_per_page',
-		array(
-			'default' => get_theme_mod_default( 'statements_per_page' )
-		)
-	);
-
-	$wp_customize->add_control(
-		'statements_per_page',
-		array(
-			'type'        => 'number',
-			'label'       => 'Statements Per Page',
-			'description' => 'The number of Statements that should be listed on the Statements page at a time.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'statements'
 		)
 	);
 
@@ -1376,34 +1300,6 @@ function get_yoast_title_degree_program_type() {
 
 
 /**
- * Callback for the %%statements_current_filter%% snippet variable
- * for use on the Statements page title/meta description.
- *
- * @since 3.9.0
- * @author Jo Dickson
- * @return mixed String, or void if the current page is not the Statements page
- */
-function get_yoast_statements_current_filter_snippet_variable() {
-	$phrase = apply_filters( 'mainsite_yoast_statements_current_filter_snippet_variable', '' );
-	if ( $phrase ) return $phrase;
-}
-
-
-/**
- * Callback for the %%statements_by_filter%% snippet variable
- * for use on the Statements page title/meta description.
- *
- * @since 3.9.0
- * @author Jo Dickson
- * @return mixed String, or void if the current page is not the Statements page
- */
-function get_yoast_statements_by_filter_snippet_variable() {
-	$phrase = apply_filters( 'mainsite_yoast_statements_by_filter_snippet_variable', '' );
-	if ( $phrase ) return $phrase;
-}
-
-
-/**
  * Registers the Yoast variable additions.
  * NOTE: The snippet preview in the backend will show the custom variable markup
  * (i.e. '%%program_type%%') but the variable's output will be utilized on the front-end.
@@ -1413,8 +1309,6 @@ function get_yoast_statements_by_filter_snippet_variable() {
  */
 function yoast_register_variables() {
 	wpseo_register_var_replacement( '%%program_type%%', 'get_yoast_title_degree_program_type', 'advanced', 'Provides a program_type string for usage in degree titles.' );
-	wpseo_register_var_replacement( '%%statements_current_filter%%', 'get_yoast_statements_current_filter_snippet_variable', 'advanced', 'Provides the current filter in use on the Statements page title/meta description.' );
-	wpseo_register_var_replacement( '%%statements_by_filter%%', 'get_yoast_statements_by_filter_snippet_variable', 'advanced', 'Provides a string describing the current view for use on the Statements page title/meta description.' );
 }
 
 add_action( 'wpseo_register_extra_replacements', 'yoast_register_variables' );
