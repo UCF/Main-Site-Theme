@@ -43,7 +43,7 @@ if ( $post->post_type === 'degree' ) :
 			<?php if ( $catalog_desc_full ) : ?>
 			<div class="row">
 				<div class="col-12 text-right">
-					<a href="#catalogModal" data-toggle="modal">
+					<a class="text-decoration-none hover-text-underline" href="#catalogModal" data-toggle="modal">
 						<?php echo $course_catalog_link_text; ?>
 						<span class="fa fa-arrow-circle-right" aria-hidden="true"></span>
 					</a>
