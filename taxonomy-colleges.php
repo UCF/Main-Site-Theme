@@ -102,7 +102,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 
 					<?php if ( $top_degrees ): ?>
 					<div class="col-lg-1 hidden-md-down">
-						<hr class="hidden-xs hidden-sm hr-vertical hr-vertical-white center-block">
+						<hr class="hidden-xs hidden-sm hr-vertical mx-auto">
 					</div>
 					<div class="col-lg-3">
 						<h3 class="h5 mb-3 hidden-md-down"><span class="badge badge-inverse">Top College Degrees</span></h3>
