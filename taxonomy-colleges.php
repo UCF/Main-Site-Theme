@@ -102,7 +102,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 
 					<?php if ( $top_degrees ): ?>
 					<div class="col-lg-1 hidden-md-down">
-						<hr class="hidden-xs hidden-sm hr-vertical hr-vertical-white center-block">
+						<hr class="hidden-xs hidden-sm hr-vertical mx-auto">
 					</div>
 					<div class="col-lg-3">
 						<h3 class="h5 mb-3 hidden-md-down"><span class="badge badge-inverse">Top College Degrees</span></h3>
@@ -132,7 +132,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 					<h2 class="mb-0"><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : $term->name . " News"; ?></h2>
 				</div>
 				<div class="col-auto">
-					<a href="https://www.ucf.edu/news/tag/<?php echo $news_topic; ?>" class="h6 text-uppercase d-block mb-0 mt-2 text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
+					<a href="https://www.ucf.edu/news/tag/<?php echo $news_topic; ?>" class="text-decoration-none h6 text-uppercase d-block mb-0 mt-2 text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>
 				</div>
 			</div>
 			<hr class="mt-2">

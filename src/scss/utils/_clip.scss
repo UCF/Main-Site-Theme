@@ -1,6 +1,6 @@
 .clip-caret {
-  --caret-height: #{$caret-height};
-  --caret-width: #{$caret-width};
+  --clip-caret-height: #{$clip-caret-height};
+  --clip-caret-width: #{$clip-caret-width};
   // position and z-index are necessary here to play nice
   // with page headers with media backgrounds:
   position: relative;
@@ -17,29 +17,29 @@
         0 100%,
         100% 100%,
         100% 0,
-        calc(50% + calc(var(--caret-width) / 2)) 0,
-        50% var(--caret-height),
-        calc(50% - calc(var(--caret-width) / 2)) 0,
+        calc(50% + calc(var(--clip-caret-width) / 2)) 0,
+        50% var(--clip-caret-height),
+        calc(50% - calc(var(--clip-caret-width) / 2)) 0,
         0 0
       );
       margin-left: 0;
-      margin-top: calc(var(--caret-height) * -1);
+      margin-top: calc(var(--clip-caret-height) * -1);
     }
 
     .clip-caret#{$infix}-left {
       clip-path: polygon(
         0 0,
-        var(--caret-height) 0,
-        var(--caret-height) calc(50% - calc(var(--caret-width) / 2)),
+        var(--clip-caret-height) 0,
+        var(--clip-caret-height) calc(50% - calc(var(--clip-caret-width) / 2)),
         0 50%,
-        var(--caret-height) calc(50% + calc(var(--caret-width) / 2)),
-        var(--caret-height) 100%,
+        var(--clip-caret-height) calc(50% + calc(var(--clip-caret-width) / 2)),
+        var(--clip-caret-height) 100%,
         0 100%,
         100% 100%,
         100% 0,
         0 0
       );
-      margin-left: calc(var(--caret-height) * -1);
+      margin-left: calc(var(--clip-caret-height) * -1);
       margin-top: 0;
     }
 
@@ -48,29 +48,29 @@
         0 0,
         0 100%,
         100% 100%,
-        100% var(--caret-height),
-        calc(50% + calc(var(--caret-width) / 2)) var(--caret-height),
+        100% var(--clip-caret-height),
+        calc(50% + calc(var(--clip-caret-width) / 2)) var(--clip-caret-height),
         50% 0,
-        calc(50% - calc(var(--caret-width) / 2)) var(--caret-height),
-        0 var(--caret-height),
+        calc(50% - calc(var(--clip-caret-width) / 2)) var(--clip-caret-height),
+        0 var(--clip-caret-height),
         0 0
       );
       margin-left: 0;
-      margin-top: calc(var(--caret-height) * -1);
+      margin-top: calc(var(--clip-caret-height) * -1);
     }
 
     .clip-caret#{$infix}-right {
       clip-path: polygon(
         0 0,
-        0 calc(50% - calc(var(--caret-width) / 2)),
-        var(--caret-height) 50%,
-        0 calc(50% + calc(var(--caret-width) / 2)),
+        0 calc(50% - calc(var(--clip-caret-width) / 2)),
+        var(--clip-caret-height) 50%,
+        0 calc(50% + calc(var(--clip-caret-width) / 2)),
         0 100%,
         100% 100%,
         100% 0,
         0 0
       );
-      margin-left: calc(var(--caret-height) * -1);
+      margin-left: calc(var(--clip-caret-height) * -1);
       margin-top: 0;
     }
 
