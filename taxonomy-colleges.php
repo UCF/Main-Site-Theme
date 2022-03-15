@@ -24,7 +24,7 @@ $news_topic = get_field( 'news_topic', 'colleges_' . $term->term_id );
 $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 ?>
 <article>
-	<section class="section-lead" id="intro">
+	<section class="section-lead" id="intro" aria-label="Introduction">
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-sm-12 col-md-8 lead">
@@ -45,7 +45,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 			<?php endif; ?>
 		</div>
 	</section>
-	<section class="section-stats" id="stats">
+	<section class="section-stats" id="stats" aria-label="Facts and figures">
 		<div class="media-background-container">
 			<img class="media-background object-fit-cover" srcset="<?php echo $stats_background; ?>" src="<?php echo $stats_background; ?>" alt="">
 			<div class="container my-5 fact-grid-wrap">
@@ -77,12 +77,12 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 			</div>
 		</div>
 	</section>
-	<section class="section-degrees" id="degrees">
+	<section class="section-degrees" id="degrees" aria-labelledby="section-degrees-heading">
 		<div class="jumbotron jumbotron-fluid bg-inverse mb-0">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-8">
-						<h2 class="h1 mb-4 text-primary font-weight-black section-heading"><?php echo $degree_title; ?></h2>
+						<h2 id="section-degrees-heading" class="h1 mb-4 text-primary font-weight-black section-heading"><?php echo $degree_title; ?></h2>
 						<div class="mb-5"><?php echo $degree_copy; ?></div>
 						<div class="mb-5"><?php echo do_shortcode( '[ucf-degree-search placeholder="Search ' . $term->name . ' Degrees"]' ); ?></div>
 						<h3 class="browse-by-heading h6 heading-sans-serif text-uppercase">Or browse by:</h3>
@@ -121,15 +121,13 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 		</div>
 	</section>
 	<?php if( $cta ) : ?>
-	<aside class="aside-ctas" id="ctas">
-		<?php echo do_shortcode( '[ucf-section slug="' . $cta->post_name . '"]' ); ?>
-	</aside>
+		<?php echo do_shortcode( '[ucf-section slug="' . $cta->post_name . '" title="Next steps and learn more"]' ); ?>
 	<?php endif; ?>
-	<section class="section-news" id="news">
+	<section class="section-news" id="news" aria-labelledby="news-heading">
 		<div class="container my-5">
 			<div class="row justify-content-between align-items-end">
 				<div class="col-auto">
-					<h2 class="mb-0"><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : $term->name . " News"; ?></h2>
+					<h2 id="news-heading" class="mb-0"><?php echo ( $news_title = get_field( 'colleges_alias', 'colleges_' . $term->term_id ) ) ? $news_title . " News" : $term->name . " News"; ?></h2>
 				</div>
 				<div class="col-auto">
 					<a href="https://www.ucf.edu/news/tag/<?php echo $news_topic; ?>" class="text-decoration-none h6 text-uppercase d-block mb-0 mt-2 text-default">Check out more stories <span class="fa fa-external-link text-primary" aria-hidden="true"></span></a>

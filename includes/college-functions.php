@@ -45,10 +45,10 @@ function get_colleges_grid( $exclude_term=null ) {
 
 	if ( $colleges ):
 ?>
-<section class="section-colleges">
+<section class="section-colleges" aria-labelledby="colleges-grid-heading">
 	<div class="jumbotron jumbotron-fluid bg-primary py-4 my-0 text-center">
 		<div class="container">
-			<h2 class="section-heading h3 m-0 text-uppercase font-weight-bold font-condensed">University of Central Florida Colleges</h2>
+			<h2 id="colleges-grid-heading" class="section-heading h3 m-0 text-uppercase font-weight-bold font-condensed">University of Central Florida Colleges</h2>
 		</div>
 	</div>
 	<div class="colleges-grid">
