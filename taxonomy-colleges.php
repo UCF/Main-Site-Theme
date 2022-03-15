@@ -24,7 +24,7 @@ $news_topic = get_field( 'news_topic', 'colleges_' . $term->term_id );
 $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 ?>
 <article>
-	<section class="section-lead">
+	<section class="section-lead" id="intro">
 		<div class="container my-5">
 			<div class="row">
 				<div class="col-sm-12 col-md-8 lead">
@@ -45,7 +45,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 			<?php endif; ?>
 		</div>
 	</section>
-	<section class="section-stats">
+	<section class="section-stats" id="stats">
 		<div class="media-background-container">
 			<img class="media-background object-fit-cover" srcset="<?php echo $stats_background; ?>" src="<?php echo $stats_background; ?>" alt="">
 			<div class="container my-5 fact-grid-wrap">
@@ -77,7 +77,7 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 			</div>
 		</div>
 	</section>
-	<section class="section-degrees">
+	<section class="section-degrees" id="degrees">
 		<div class="jumbotron jumbotron-fluid bg-inverse mb-0">
 			<div class="container">
 				<div class="row">
@@ -121,11 +121,11 @@ $spotlight = get_field( 'college_spotlight', 'colleges_' . $term->term_id );
 		</div>
 	</section>
 	<?php if( $cta ) : ?>
-	<aside class="aside-ctas">
+	<aside class="aside-ctas" id="ctas">
 		<?php echo do_shortcode( '[ucf-section slug="' . $cta->post_name . '"]' ); ?>
 	</aside>
 	<?php endif; ?>
-	<section class="section-news">
+	<section class="section-news" id="news">
 		<div class="container my-5">
 			<div class="row justify-content-between align-items-end">
 				<div class="col-auto">
