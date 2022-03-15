@@ -352,25 +352,6 @@
                 "return_format": "value"
             },
             {
-                "key": "field_59a08c15cffec",
-                "label": "Degree Search Parameter",
-                "name": "degree_search_parameter",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "default_value": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": "",
-                "maxlength": ""
-            },
-            {
                 "key": "field_6230e53f6225a",
                 "label": "Top Degrees Heading",
                 "name": "top_degrees_heading",
