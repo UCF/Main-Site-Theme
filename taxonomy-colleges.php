@@ -99,24 +99,28 @@ $spotlight = get_field( 'college_spotlight', $term );
 						<?php endif; ?>
 					</div>
 
-					<?php if ( $top_degrees ): ?>
+					<?php if ( $top_degrees || $custom_top_degrees ): ?>
 					<div class="col-lg-1 hidden-md-down">
 						<hr class="hidden-xs hidden-sm hr-vertical mx-auto">
 					</div>
 					<div class="col-lg-3">
+						<?php if ( $top_degrees || ( ! $top_degrees && $custom_top_degrees && ! $custom_top_degrees_heading ) ) : ?>
 						<h3 class="h5 mb-3 hidden-md-down"><span class="badge badge-inverse"><?php echo $top_degrees_heading; ?></span></h3>
 						<a class="hidden-lg-up btn btn-outline-inverse btn-block mb-3 collapsed" data-toggle="collapse" data-target="#top-degree-collapse" href="#top-degree-collapse">
 							<?php echo $top_degrees_heading; ?> <span class="fa fa-chevron-circle-down" aria-hidden="true"></span>
 						</a>
 						<div id="top-degree-collapse" class="collapse d-lg-block">
 							<ul class="top-majors-list nav flex-column align-items-start list-unstyled pl-3">
-								<?php echo $top_degrees; ?>
+								<?php if ( $top_degrees ) : ?>
+									<?php echo $top_degrees; ?>
+								<?php endif; ?>
 
 								<?php if ( $custom_top_degrees && ! $custom_top_degrees_heading ) : ?>
 									<?php echo $custom_top_degrees; ?>
 								<?php endif; ?>
 							</ul>
 						</div>
+						<?php endif; ?>
 
 						<?php if ( $custom_top_degrees && $custom_top_degrees_heading ) : ?>
 						<h3 class="h5 mt-3 mt-lg-4 mb-3 hidden-md-down"><span class="badge badge-inverse"><?php echo $custom_top_degrees_heading; ?></span></h3>
