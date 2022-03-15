@@ -88,19 +88,15 @@ $spotlight = get_field( 'college_spotlight', $term );
 						<h2 id="section-degrees-heading" class="h1 mb-4 text-primary font-weight-black section-heading"><?php echo $degree_title; ?></h2>
 						<div class="mb-5"><?php echo $degree_copy; ?></div>
 						<div class="mb-5"><?php echo do_shortcode( '[ucf-degree-search placeholder="Search ' . $term->name . ' Degrees"]' ); ?></div>
+
+						<?php if ( $degree_types ) : ?>
 						<h3 class="browse-by-heading h6 heading-sans-serif text-uppercase">Or browse by:</h3>
 						<ul class="browse-by-list list-chevrons">
-						<?php
-							ob_start();
-							if( $degree_types ) :
-								foreach( $degree_types as $slug => $name ) : ?>
-									<li><a href="<?php echo $degree_search_url . $slug . '/'; ?>" class="text-inverse"><?php echo $name . 's'; ?></a></li>
-							<?php
-								echo ob_get_clean();
-								endforeach;
-							endif;
-						?>
+							<?php foreach( $degree_types as $slug => $name ) : ?>
+							<li><a href="<?php echo $degree_search_url . $slug . '/'; ?>" class="text-inverse"><?php echo $name . 's'; ?></a></li>
+							<?php endforeach; ?>
 						</ul>
+						<?php endif; ?>
 					</div>
 
 					<?php if ( $top_degrees ): ?>
