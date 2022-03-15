@@ -8,7 +8,7 @@
 * @return string | Top Degrees List.
 **/
 function display_top_degrees( $term ) {
-	$ret = "";
+	$ret = '';
 
 	$top_degrees = get_field( 'top_degrees', $term );
 	if ( $top_degrees ) :
@@ -20,14 +20,30 @@ function display_top_degrees( $term ) {
 		endforeach;
 	endif;
 
+	return $ret;
+}
+
+
+/**
+ * Displays a list of custom links to display under
+ * top college degrees for the colleges taxonomy template.
+ *
+ * @author Jo Dickson
+ * @since v3.11.1
+ * @param $term object WP_Term object for a college
+ * @return string HTML string of <li>s
+ */
+function display_custom_top_degrees( $term ) {
+	$retval = '';
+
 	$top_degrees_custom = get_field( 'top_degrees_custom', $term );
 	if ( $top_degrees_custom ) :
 		foreach ( $top_degrees_custom as $top_degree_custom ) :
-			$ret .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse nav-link">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
+			$retval .= '<li><a href="' . $top_degree_custom["top_degree_custom_link"] . '" class="text-inverse nav-link">' . $top_degree_custom["top_degree_custom_text"] . '</a></li>';
 		endforeach;
 	endif;
 
-	return $ret;
+	return $retval;
 }
 
 
