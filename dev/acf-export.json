@@ -371,6 +371,25 @@
                 "maxlength": ""
             },
             {
+                "key": "field_6230e53f6225a",
+                "label": "Top Degrees Heading",
+                "name": "top_degrees_heading",
+                "type": "text",
+                "instructions": "Text to display in a heading text and toggle button text for mobile above the college's Top Degrees list.  If left blank, \"Top College Degrees\" will be used.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Top College Degrees",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_599f2b3099a61",
                 "label": "Top Degrees",
                 "name": "top_degrees",
@@ -393,11 +412,30 @@
                 "ui": 1
             },
             {
+                "key": "field_6230e3e0be96d",
+                "label": "Extra Degrees Heading",
+                "name": "top_degrees_custom_heading",
+                "type": "text",
+                "instructions": "Optional heading and toggle button to insert between the college's Top Degrees and any extra degree list items defined below.  Will only be displayed if at least one extra degree link is defined.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_5a1d88cad3b42",
-                "label": "Top Degrees Custom",
+                "label": "Extra Degrees",
                 "name": "top_degrees_custom",
                 "type": "repeater",
-                "instructions": "",
+                "instructions": "Optionally add one or more custom links to the bottom of the college's Top Degrees list.  If an Extra Degrees Heading is defined above, these links will be displayed in a separate list separated by that heading instead.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2577,7 +2615,9 @@
                     "left": "Left",
                     "right": "Right"
                 },
-                "default_value": "left",
+                "default_value": [
+                    "left"
+                ],
                 "allow_null": 0,
                 "multiple": 0,
                 "ui": 0,
@@ -3005,7 +3045,7 @@
                     "bg-warning": "Orange (brand-warning)",
                     "bg-danger": "Red (brand-danger)"
                 },
-                "default_value": false,
+                "default_value": [],
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
@@ -3079,7 +3119,7 @@
                     "text-warning-aw": "Orange AW (brand-warning, against-white accessible)",
                     "text-danger-aw": "Red AW (brand-danger, against-white accessible)"
                 },
-                "default_value": false,
+                "default_value": [],
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
