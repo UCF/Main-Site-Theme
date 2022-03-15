@@ -3,13 +3,13 @@ get_header();
 $term = get_queried_object();
 // Lead
 $lead_copy = get_field( 'college_page_lead_copy', $term );
-$lead_image = get_field( 'college_page_lead_image', $term )['url'];
+$lead_image = get_field( 'college_page_lead_image', $term )['url'] ?? null;
 $college_url = get_field( 'colleges_url', $term );
 $lead_cta_text = get_field( 'lead_cta_text', $term ) ?: 'Visit ' . str_replace( array( 'http://', 'https://' ), '', $college_url );
 $lead_cta_url = get_field( 'lead_cta_url', $term ) ?: $college_url;
 // Stats
 $stats = get_field( 'stat', $term );
-$stats_background = get_field( 'stats_background_image', $term )['url'];
+$stats_background = get_field( 'stats_background_image', $term )['url'] ?? null;
 // Degree
 $degree_title = get_field( 'degree_search_title', $term );
 $degree_copy = get_field( 'degree_search_copy', $term );
