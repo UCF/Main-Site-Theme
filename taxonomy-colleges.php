@@ -11,7 +11,7 @@ $lead_cta_url = get_field( 'lead_cta_url', $term ) ?: $college_url;
 $stats = get_field( 'stat', $term );
 $stats_background = get_field( 'stats_background_image', $term )['url'] ?? null;
 // Degree
-$degree_title = get_field( 'degree_search_title', $term );
+$degree_title = get_field( 'degree_search_title', $term ) ?: 'Search Degrees';
 $degree_copy = get_field( 'degree_search_copy', $term );
 $degree_search_url = "https://www.ucf.edu/degree-search/#!/college/" . $term->slug . "/";
 $degree_types = get_field( 'degree_types_available', $term );
