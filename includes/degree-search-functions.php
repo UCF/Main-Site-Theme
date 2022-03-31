@@ -114,7 +114,7 @@ add_filter( 'udsa_colleges_template', 'main_site_degree_search_colleges', 10, 0 
 function main_site_degree_search_result_count() {
 	ob_start();
 ?>
-	<p class="text-muted my-3" ng-if="mainCtl.totalResults > 0">
+	<p class="text-muted my-3" ng-if="mainCtl.totalResults > 0" aria-live="polite">
 		{{ mainCtl.resultMessage }}
 	</p>
 <?php
