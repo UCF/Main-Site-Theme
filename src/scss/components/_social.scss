@@ -26,4 +26,24 @@ $color-youtube: #cd201f;
   white-space: normal !important;
 }
 
+.crt-widget .crt-post {
+  font-size: .9em;
+}
+
+.crt-widget .crt-post-text a {
+  color: $link-color !important;
+}
+
+.crt-post .crt-post-footer {
+  background-color: #fafafa !important;
+}
+
+.crt-widget .crt-post-date {
+  opacity: 1 !important;
+
+  a {
+    color: $gray-dark !important;
+  }
+}
+
 // sass-lint:enable no-important
