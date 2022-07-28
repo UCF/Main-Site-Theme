@@ -459,7 +459,7 @@ function phonebook_fix_name_case( $name ) {
 		'/\sFor$/' => ' for'
 	);
 
-	$name = ucwords( strtolower( $name ) );
+	$name = ucwords( strtolower( $name ), " \t\r\n\f\v/" );
 
 	foreach( $str_replace as $key => $val ) {
 		$name = str_replace( $key, $val, $name );
