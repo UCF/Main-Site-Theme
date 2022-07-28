@@ -109,7 +109,7 @@ function get_media_background_picture( $srcs ) {
  * @param array $videos Array of video urls that correspond to <source> src vals
  * @return string
  **/
-function get_media_background_video( $videos, $loop=false ) {
+function get_media_background_video( $videos, $loop=false, $description ) {
 	ob_start();
 ?>
 	<video class="hidden-xs-down media-background media-background-video object-fit-cover" aria-hidden="true" preload="none" muted <?php if ( $loop ) { ?>loop<?php } ?>>
@@ -119,6 +119,10 @@ function get_media_background_video( $videos, $loop=false ) {
 
 		<?php if ( isset( $videos['mp4'] ) ) : ?>
 		<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
+		<?php endif; ?>
+
+		<?php if ( isset( $description ) ) : ?>
+		<meta itemprop="description" content="<?php echo $description; ?>">
 		<?php endif; ?>
 	</video>
 	<button class="media-background-video-toggle btn play-enabled hidden-xs-up" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
