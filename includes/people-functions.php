@@ -201,7 +201,7 @@ function get_additional_contributors_markup( $work ) {
 			$authors[] = ob_get_clean();
 		}
 
-		$retval = "<br><span class=\"small\">(UCF Research Partners: " . implode( ', ', $authors ) . ')</span>';
+		$retval = "<br><span class=\"small text-muted\">(UCF Research Partners: " . implode( ', ', $authors ) . ')</span>';
 	}
 
 	return $retval;
