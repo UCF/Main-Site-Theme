@@ -4072,7 +4072,7 @@
                 "button_label": "Add Book",
                 "sub_fields": [
                     {
-                        "key": "field_60afe7ae124b2",
+                        "key": "book_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4080,12 +4080,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "book_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             },
@@ -4105,11 +4127,11 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Article",
                 "sub_fields": [
                     {
-                        "key": "field_60afe7e1124b4",
+                        "key": "article_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4117,12 +4139,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "article_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             },
@@ -4142,11 +4186,11 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Conference Proceeding",
                 "sub_fields": [
                     {
-                        "key": "field_617048c3b3a12",
+                        "key": "conf_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4154,12 +4198,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "conf_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             },
@@ -4179,11 +4245,11 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Grant",
                 "sub_fields": [
                     {
-                        "key": "field_61704906b3a14",
+                        "key": "grant_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4191,12 +4257,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "grant_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             },
@@ -4216,11 +4304,11 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Honorific Award",
                 "sub_fields": [
                     {
-                        "key": "field_6170491db3a16",
+                        "key": "award_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4228,12 +4316,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "award_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             },
@@ -4253,11 +4363,11 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Patent",
                 "sub_fields": [
                     {
-                        "key": "field_61704936b3a18",
+                        "key": "patent_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4265,12 +4375,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "patent_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             },
@@ -4290,11 +4422,11 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Clinical Trial",
                 "sub_fields": [
                     {
-                        "key": "field_61704954b3a1a",
+                        "key": "trial_citation",
                         "label": "Citation",
                         "name": "citation",
                         "type": "read_only",
@@ -4302,12 +4434,34 @@
                         "required": 1,
                         "conditional_logic": 0,
                         "wrapper": {
-                            "width": "",
+                            "width": "75",
                             "class": "",
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
                         "display_type": "text"
+                    },
+                    {
+                        "key": "trial_additional_contributors",
+                        "label": "Additional Contributors",
+                        "name": "additional_contributors",
+                        "type": "post_object",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "25",
+                            "class": "",
+                            "id": ""
+                        },
+                        "post_type": [
+                            "person"
+                        ],
+                        "taxonomy": "",
+                        "allow_null": 1,
+                        "multiple": 1,
+                        "return_format": "object",
+                        "ui": 1
                     }
                 ]
             }
