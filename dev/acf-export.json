@@ -4127,7 +4127,7 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Article",
                 "sub_fields": [
                     {
@@ -4186,7 +4186,7 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Conference Proceeding",
                 "sub_fields": [
                     {
@@ -4245,7 +4245,7 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Grant",
                 "sub_fields": [
                     {
@@ -4304,7 +4304,7 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Honorific Award",
                 "sub_fields": [
                     {
@@ -4363,7 +4363,7 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Patent",
                 "sub_fields": [
                     {
@@ -4422,7 +4422,7 @@
                 "collapsed": "field_60afe7e1124b4",
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "layout": "block",
                 "button_label": "Add Clinical Trial",
                 "sub_fields": [
                     {
