@@ -20,6 +20,7 @@ These plugins *must* be activated for the theme to function properly, and/or to 
 * UCF Degree Custom Post Type
 * UCF Degree Search Plugin
 * UCF Departments Taxonomy
+* UCF News
 * UCF Resource Search
 * UCF Rest Menus
 * UCF Section
@@ -33,7 +34,6 @@ These plugins provide features that are extended or modified by the theme; they 
 * UCF Charts Plugin
 * UCF Events
 * UCF Footer
-* UCF News
 * UCF Pegasus List Shortcode
 * UCF Post List Shortcode
 * UCF Social Plugin

@@ -13,7 +13,7 @@
  */
 function modify_people_post_type_args( $args ) {
 	$args['rewrite'] = array(
-		'slug'       => 'faculty',
+		'slug'       => 'person',
 		'with_front' => false
 	);
 
@@ -22,6 +22,60 @@ function modify_people_post_type_args( $args ) {
 
 add_filter( 'ucf_people_post_type_args', 'modify_people_post_type_args', 10, 1 );
 
+/**
+ * Returns an array of valid person types
+ * @author Jim Barnes
+ * @since 3.10.0
+ * @return array
+ */
+function get_valid_person_types() {
+	return array(
+		'person',
+		'faculty'
+	);
+}
+
+/**
+ * Updates the url for people based on the `person_type` post meta.
+ * @author Jim Barnes
+ * @since 3.10.0
+ * @param string $link The default link value.
+ * @param WP_Post $post the WP_Post object
+ * @return string
+ */
+function modify_people_post_type_slugs( $link, $post ) {
+	if ( 'person' !== $post->post_type ) {
+		return $link;
+	}
+
+	$type = get_post_meta( $post->ID, 'person_type', true );
+	$slug = ! empty( $type ) &&  in_array( $type, get_valid_person_types() ) ? $type : 'person';
+	$link = str_replace( 'person', $slug, $link );
+
+	return $link;
+}
+
+add_filter( 'post_type_link', 'modify_people_post_type_slugs', 10, 2 );
+
+
+/**
+ * Adds rewrite rules for valid person type slugs
+ * @author Jim Barnes
+ * @since 3.10.0
+ * @return void
+ */
+function add_people_rewrite_rules() {
+	$valid_types = get_valid_person_types();
+
+	foreach( $valid_types as $type ) {
+		// We don't want to create another rewrite for the default
+		if ( $type === 'person' ) continue;
+
+		add_rewrite_rule( "{$type}/([^/]+)/?$", 'index.php?post_type=person&name=$matches[1]', 'top' );
+	}
+}
+
+add_action( 'init', 'add_people_rewrite_rules', 10, 0 );
 
 /**
  * Unregister the People Group taxonomy for this site
