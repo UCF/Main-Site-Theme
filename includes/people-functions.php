@@ -248,11 +248,9 @@ function get_additional_contributors_markup( $work ) {
 		$authors = [];
 
 		foreach( $work['additional_contributors'] as $author ) {
-			ob_start();
-?>
-<a href="<?php echo get_permalink( $author ); ?>"><?php echo $author->post_title; ?></a>
-<?php
-			$authors[] = ob_get_clean();
+			$permalink = get_permalink( $author );
+			$name = $author->post_title;
+			$authors[] = "<a href=\"$permalink\">$name</a>";
 		}
 
 		$retval = "<br><span class=\"small text-muted\">(UCF Research Partners: " . implode( ', ', $authors ) . ')</span>';

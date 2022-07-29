@@ -31,7 +31,8 @@ $header_height       = get_query_var( 'header_height' );
 		}
 		if ( $videos ) {
 			$video_loop = get_field( 'page_header_video_loop', $obj );
-			echo get_media_background_video( $videos, $video_loop );
+			$description = get_field( 'page_header_video_description', $obj );
+			echo get_media_background_video( $videos, $video_loop, $description );
 		}
 		?>
 	</div>
