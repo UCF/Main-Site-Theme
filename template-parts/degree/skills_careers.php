@@ -28,9 +28,3 @@ if ( $post->post_type === 'degree' && ! is_supplementary_degree( $post ) ) :
 <?php
 	endif;
 endif;
-
-$additional_careers_section = get_field( 'additional_careers_section', $post );
-
-if ( $post->post_type === 'degree' && ! empty( $additional_careers_section ) && ! is_supplementary_degree( $post ) ) :
-	echo do_shortcode( "[ucf-section id='$additional_careers_section']" );
-endif;

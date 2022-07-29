@@ -16,7 +16,6 @@ include_once THEME_DIR . 'includes/degree-search-functions.php';
 include_once THEME_DIR . 'includes/ucf-alert-functions.php';
 include_once THEME_DIR . 'includes/phonebook-functions.php';
 include_once THEME_DIR . 'includes/post-list-layouts.php';
-include_once THEME_DIR . 'includes/ucf-news-layouts.php';
 include_once THEME_DIR . 'includes/people-functions.php';
 include_once THEME_DIR . 'includes/college-functions.php';
 

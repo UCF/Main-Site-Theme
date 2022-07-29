@@ -1884,28 +1884,6 @@
                 "esc_html": 0
             },
             {
-                "key": "field_60c1154c5ab1d",
-                "label": "Additional Careers Section",
-                "name": "additional_careers_section",
-                "type": "post_object",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "post_type": [
-                    "ucf_section"
-                ],
-                "taxonomy": "",
-                "allow_null": 0,
-                "multiple": 0,
-                "return_format": "id",
-                "ui": 1
-            },
-            {
                 "key": "field_5e97183304f1e",
                 "label": "Skills Heading",
                 "name": "degree_skills_heading",
