@@ -109,7 +109,7 @@ function get_media_background_picture( $srcs ) {
  * @param array $videos Array of video urls that correspond to <source> src vals
  * @return string
  **/
-function get_media_background_video( $videos, $loop=false, $description ) {
+function get_media_background_video( $videos, $loop=false, $description=null ) {
 	ob_start();
 ?>
 	<video class="hidden-xs-down media-background media-background-video object-fit-cover" aria-hidden="true" preload="none" muted <?php if ( $loop ) { ?>loop<?php } ?>>
