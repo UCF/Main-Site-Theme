@@ -120,6 +120,9 @@ function get_media_background_video( $videos, $loop=false ) {
 		<?php if ( isset( $videos['mp4'] ) ) : ?>
 		<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
 		<?php endif; ?>
+		<?php if ( function_exists( 'UCF\Video_Vtt\Tools\get_track_markup' ) ) : ?>
+		<?php echo UCF\Video_Vtt\Tools\get_track_markup( $videos['mp4'] ); ?>
+		<?php endif; ?>
 	</video>
 	<button class="media-background-video-toggle btn play-enabled hidden-xs-up" type="button" data-toggle="button" aria-pressed="false" aria-label="Play or pause background videos">
 		<span class="fa fa-pause media-background-video-pause" aria-hidden="true"></span>
