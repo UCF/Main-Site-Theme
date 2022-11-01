@@ -3264,6 +3264,25 @@
                 "display_type": "text"
             },
             {
+                "key": "field_6361483126897",
+                "label": "Lock Excerpt",
+                "name": "degree_lock_excerpt",
+                "type": "true_false",
+                "instructions": "When locked, degree excerpts will not be updated during import.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 0,
+                "ui": 1,
+                "ui_on_text": "Locked",
+                "ui_off_text": "Unlocked"
+            },
+            {
                 "key": "field_5adf859313850",
                 "label": "Plan Code",
                 "name": "degree_plan_code",
