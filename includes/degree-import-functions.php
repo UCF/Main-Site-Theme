@@ -146,14 +146,40 @@ add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 
  * @return array
  */
 function mainsite_degree_get_post_terms( $terms, $program ) {
-	$careers = main_site_get_remote_response_json( $program->careers, array() );
-
-	$terms['career_paths'] = $careers;
+	$careers = main_site_get_remote_response_json( "{$program->careers}ranked/", array() );
+	$terms['career_paths'] = mainsite_filter_career_paths( $careers );
 
 	return $terms;
 }
 
 add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2 );
+
+
+/**
+ * Filters the careers from the ranked endpoint
+ * by weight and limiting to the max number of
+ * career paths.
+ *
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param  array $careers The array of career objects from the search service
+ * @return array[string] The array of career names
+ */
+function mainsite_filter_career_paths( $careers ) {
+	$threshold = get_theme_mod( 'degrees_careers_weight_threshold' );
+	$limit = get_theme_mod( 'degrees_careers_per_program_limit' );
+	$retval = array();
+
+	foreach ( $careers as $i => $career ) {
+		if ( $career->weight < $threshold || $i === $limit - 1 ) {
+			break;
+		}
+
+		$retval[] = $career->job;
+	}
+
+	return $retval;
+}
 
 
 /**
