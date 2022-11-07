@@ -180,3 +180,29 @@ function mainsite_filter_career_paths( $careers ) {
 
 	return $retval;
 }
+
+
+/**
+ * Handles writing the excerpt into the post_excerpt
+ * field on the import of degrees.
+ *
+ * @author Jim Barnes
+ * @since 3.11.6
+ * @param  array $post_data The post data to be saved
+ * @param  UCF_Degree_Import $program The UCF_Degree_Import object
+ * @return array The modified post data
+ */
+function mainsite_degree_formatted_post_data( $post_data, $program ) {
+	// Check to see if the excerpt is locked before continuing
+	if ( $program->existing_post && get_field( 'degree_lock_excerpt', $program->existing_post->ID ) === true ) {
+		return $post_data;
+	}
+
+	if ( $program->program->excerpt ) {
+		$post_data['post_excerpt'] = $program->program->excerpt;
+	}
+
+	return $post_data;
+}
+
+add_filter( 'ucf_degree_formatted_post_data', 'mainsite_degree_formatted_post_data', 10, 2 );
