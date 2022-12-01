@@ -17,7 +17,7 @@
     background: $gray-lighter;
     height: 100%;
     padding-top: 4rem;
-    clip-path: polygon(0% 0%, 50% 2rem, 100% 0%, 100% 100%, 0% 100%, 0% 0%);
+    clip-path: none;
 
     @include media-breakpoint-up(md) {
       padding-left: 4rem;
@@ -25,4 +25,9 @@
       clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 2rem 50%);
     }
   }
+}
+
+.special-heading-padding {
+  line-height: .7;
+  padding-bottom: 1rem;
 }
