@@ -180,34 +180,6 @@ function mainsite_filter_career_paths( $careers ) {
 	return $retval;
 }
 
-
-/**
- * Filters the careers from the ranked endpoint
- * by weight and limiting to the max number of
- * career paths.
- *
- * @author Jim Barnes
- * @since 3.4.0
- * @param  array $careers The array of career objects from the search service
- * @return array[string] The array of career names
- */
-function mainsite_filter_career_paths( $careers ) {
-	$threshold = get_theme_mod( 'degrees_careers_weight_threshold' );
-	$limit = get_theme_mod( 'degrees_careers_per_program_limit' );
-	$retval = array();
-
-	foreach ( $careers as $i => $career ) {
-		if ( $career->weight < $threshold || $i === $limit - 1 ) {
-			break;
-		}
-
-		$retval[] = $career->job;
-	}
-
-	return $retval;
-}
-
-
 /**
  * Handles writing the excerpt into the post_excerpt
  * field on the import of degrees.
