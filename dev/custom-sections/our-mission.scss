@@ -1,6 +1,16 @@
+@import '../custom-base';
+
 .heavy-underline {
-  background-image: linear-gradient(to bottom, #fc0 0%, #fc0 100%);
+  background-image: linear-gradient(to bottom, $ucf-gold 0%, $ucf-gold 100%);
   background-position: 0 .85em;
   background-size: 100% 14px;
   background-repeat: repeat-x;
+}
+
+.ucf-section-our-mission {
+  min-height: 700px;
+
+  @include media-breakpoint-up(md) {
+    min-height: 0;
+  }
 }
