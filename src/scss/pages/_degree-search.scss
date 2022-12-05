@@ -120,3 +120,17 @@
     color: $text-muted;
   }
 }
+
+.program-text-underline {
+  text-decoration-color: #fc0 !important;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 1em;
+}
+
+.program-text-underline-hover:hover {
+  text-decoration-color: #fc0 !important;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 1em;
+}
