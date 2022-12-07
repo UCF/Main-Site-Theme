@@ -18,6 +18,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_graduate_application'        => 'https://application.graduate.ucf.edu/#/',
 	'degrees_graduate_rfi_url_base'       => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'        => 'bad6c39a-5c60-4895-9128-5785ce014085',
+	'degrees_careers_weight_threshold'    => 0.5,
+	'degrees_careers_per_program_limit'   => 10,
 	'catalog_desc_cta_intro'              => '',
 	'degree_deadlines_undergraduate_deadline_order' => 'Freshmen, Transfers, International',
 	'degree_deadlines_graduate_deadline_order'      => 'Domestic, International',
@@ -655,6 +657,40 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'textarea',
 			'label'       => 'Degree Career Fallback Intro Text',
 			'description' => 'Text to display next to a program\'s careers when a list of learnable skills is not set.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_careers_weight_threshold',
+		array(
+			'default' => get_theme_mod_default( 'degrees_careers_weight_threshold' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_careers_weight_threshold',
+		array(
+			'type'        => 'text',
+			'label'       => 'Degree Career Weight Threshold',
+			'description' => 'The weight threshold a weighted job position must meet in order to be imported.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_careers_per_program_limit',
+		array(
+			'default' => get_theme_mod_default( 'degrees_careers_per_program_limit' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_careers_per_program_limit',
+		array(
+			'type'        => 'text',
+			'label'       => 'Degree Career Program Limit',
+			'description' => 'The maximum number of job careers to import from the search service.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers'
 		)
 	);
