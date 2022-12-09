@@ -469,7 +469,7 @@ function main_site_format_degree_data( $post_meta ) {
 	setlocale(LC_MONETARY, 'en_US');
 
 	if ( isset( $post_meta['degree_avg_annual_earnings'] ) && ! empty( $post_meta['degree_avg_annual_earnings'] ) ) {
-		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', floatval( $post_meta['degree_avg_annual_earnings'] ) );
+		$post_meta['degree_avg_annual_earnings'] = sprintf( '%01.2f', floatval( $post_meta['degree_avg_annual_earnings'] ) );
 	}
 
 	if ( isset( $post_meta['degree_employed_full_time'] ) && ! empty( $post_meta['degree_employed_full_time'] ) ) {
