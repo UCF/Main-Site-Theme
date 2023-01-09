@@ -22,6 +22,15 @@
   }
 }
 
+.degree-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .degree-title {
   border: 0 solid transparent;
   box-sizing: border-box;
