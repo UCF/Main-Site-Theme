@@ -58,6 +58,7 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
  * @author Jo Dickson
  */
 function mainsite_degree_format_post_data( $meta, $program ) {
+	$meta['degree_hours']            = $program->credit_hours !== '' ? $program->credit_hours : null;
 	$meta['page_header_height']      = 'header-media-default';
 	$meta['degree_description']      = get_api_catalog_description( $program );
 	$meta['degree_description_full'] = get_api_catalog_description( $program, 'Full Catalog Description' );
@@ -146,11 +147,63 @@ add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 
  * @return array
  */
 function mainsite_degree_get_post_terms( $terms, $program ) {
-	$careers = main_site_get_remote_response_json( $program->careers, array() );
-
-	$terms['career_paths'] = $careers;
+	$careers = main_site_get_remote_response_json( "{$program->careers}ranked/", array() );
+	$terms['career_paths'] = mainsite_filter_career_paths( $careers );
 
 	return $terms;
 }
 
 add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2 );
+
+
+/**
+ * Filters the careers from the ranked endpoint
+ * by weight and limiting to the max number of
+ * career paths.
+ *
+ * @author Jim Barnes
+ * @since 3.4.0
+ * @param  array $careers The array of career objects from the search service
+ * @return array[string] The array of career names
+ */
+function mainsite_filter_career_paths( $careers ) {
+	$threshold = get_theme_mod( 'degrees_careers_weight_threshold' );
+	$limit = get_theme_mod( 'degrees_careers_per_program_limit' );
+	$retval = array();
+
+	foreach ( $careers as $i => $career ) {
+		if ( $career->weight < $threshold || $i === $limit - 1 ) {
+			break;
+		}
+
+		$retval[] = $career->job;
+	}
+
+	return $retval;
+}
+
+
+/**
+ * Handles writing the excerpt into the post_excerpt
+ * field on the import of degrees.
+ *
+ * @author Jim Barnes
+ * @since 3.11.6
+ * @param  array $post_data The post data to be saved
+ * @param  UCF_Degree_Import $program The UCF_Degree_Import object
+ * @return array The modified post data
+ */
+function mainsite_degree_formatted_post_data( $post_data, $program ) {
+	// Check to see if the excerpt is locked before continuing
+	if ( $program->existing_post && get_field( 'degree_lock_excerpt', $program->existing_post->ID ) === true ) {
+		return $post_data;
+	}
+
+	if ( $program->program->excerpt ) {
+		$post_data['post_excerpt'] = $program->program->excerpt;
+	}
+
+	return $post_data;
+}
+
+add_filter( 'ucf_degree_formatted_post_data', 'mainsite_degree_formatted_post_data', 10, 2 );
