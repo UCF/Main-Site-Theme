@@ -8,7 +8,7 @@
     "babel-plugin-transform-es2015-modules-strip": "^0.1.2",
     "browser-sync": "^2.27.9",
     "cheerio": "^1.0.0-rc.10",
-    "critical": "^4.0.1",
+    "critical": "^5.0.4",
     "eslint": "^8.11.0",
     "font-awesome": "github:FortAwesome/Font-Awesome#v4.7.0",
     "gulp": "^4.0.2",
