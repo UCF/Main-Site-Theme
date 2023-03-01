@@ -56,6 +56,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $books_featured as $book_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $book_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $book_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -64,6 +65,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $books_more as $book_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $book_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $book_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -89,6 +91,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $articles_featured as $article_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $article_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $article_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -97,6 +100,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $articles_more as $article_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $article_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $article_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -122,6 +126,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $chapters_featured as $chapter_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $chapter_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $chapter_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -130,6 +135,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $chapters_more as $chapter_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $chapter_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $chapter_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -155,6 +161,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $proceedings_featured as $proceeding_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $proceeding_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $proceeding_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -163,6 +170,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $proceedings_more as $proceeding_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $proceeding_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $proceeding_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -188,6 +196,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $grants_featured as $grant_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $grant_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $grant_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -196,6 +205,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $grants_more as $grant_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $grant_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $grant_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -221,6 +231,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $awards_featured as $award_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $award_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $award_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -229,6 +240,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $awards_more as $award_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $award_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $award_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -254,6 +266,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $patents_featured as $patent_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $patent_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $patent_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -262,6 +275,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $patents_more as $patent_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $patent_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $patent_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>
@@ -287,6 +301,7 @@ if ( $post->post_type === 'person' ) :
 							<?php foreach ( $trials_featured as $trial_featured ) : ?>
 							<p class="research-citation">
 								<?php echo html_entity_decode( $trial_featured['citation'] ) ?>
+								<?php echo get_additional_contributors_markup( $trial_featured ); ?>
 							</p>
 							<?php endforeach; ?>
 
@@ -295,6 +310,7 @@ if ( $post->post_type === 'person' ) :
 								<?php foreach ( $trials_more as $trial_more ) : ?>
 								<p class="research-citation">
 									<?php echo html_entity_decode( $trial_more['citation'] ) ?>
+									<?php echo get_additional_contributors_markup( $trial_more ); ?>
 								</p>
 								<?php endforeach; ?>
 							</div>

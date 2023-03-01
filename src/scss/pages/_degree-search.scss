@@ -14,6 +14,23 @@
   }
 }
 
+.degree-hover {
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $gray-lighter;
+  }
+}
+
+.degree-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* number of lines to show */
+            line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
 .degree-title {
   border: 0 solid transparent;
   box-sizing: border-box;
@@ -63,27 +80,6 @@
   padding-right: ($input-padding-x * 3);
 }
 
-.degree-search-types,
-.degree-search-colleges {
-  a {
-    &.active {
-      font-weight: 700;
-      text-decoration: underline;
-    }
-  }
-}
-
-.degree-search-type,
-.degree-search-college {
-  line-height: 1.5;
-  margin: 1rem 0;
-
-  @include media-breakpoint-up(sm) {
-    line-height: 1.25;
-    margin: .75rem 0;
-  }
-}
-
 .degree-search-child-type {
   margin: .5rem 0;
 
@@ -119,4 +115,36 @@
     @extend .small;
     color: $text-muted;
   }
+}
+
+.program-text-underline {
+  text-decoration-color: #fc0 !important;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 1em;
+}
+
+.program-text-underline-hover:hover {
+  text-decoration-color: #fc0 !important;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 1em;
+}
+
+.degree-search-sidebar .custom-control-indicator {
+  height: .8rem;
+  width: .8rem;
+}
+
+.degree-search-sidebar .custom-control-description {
+  font-size: .8rem;
+}
+
+.degree-results-stats {
+  font-size: .8rem;
+}
+
+.program-header {
+  font-size: .8rem;
+  line-height: 1.25;
 }

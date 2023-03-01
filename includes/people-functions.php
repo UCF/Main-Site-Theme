@@ -178,3 +178,29 @@ function get_faculty_search_page_url() {
 
 	return $faculty_search_url;
 }
+
+/**
+ * Builds the additional contribution string
+ *
+ * @author Jim Barnes
+ * @since 3.0.1
+ * @param  array $work The array of works. Could be books, articles, awards, etc.
+ * @return void
+ */
+function get_additional_contributors_markup( $work ) {
+	$retval = '';
+
+	if ( is_array( $work['additional_contributors'] ) && count( $work['additional_contributors'] ) > 0 ) {
+		$authors = [];
+
+		foreach( $work['additional_contributors'] as $author ) {
+			$permalink = get_permalink( $author );
+			$name = $author->post_title;
+			$authors[] = "<a href=\"$permalink\">$name</a>";
+		}
+
+		$retval = "<br><span class=\"small text-muted\">(UCF Research Partners: " . implode( ', ', $authors ) . ')</span>';
+	}
+
+	return $retval;
+}

@@ -4,6 +4,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 if ( $post->post_type === 'person' ) :
 	$colleges     = wp_get_post_terms( $post->ID, 'colleges' );
 	$departments  = wp_get_post_terms( $post->ID, 'departments' );
+	$tags         = wp_get_post_terms( $post->ID, 'post_tag' );
 	$phone        = get_field( 'person_phone', $post );
 	$email        = get_field( 'person_email', $post );
 
@@ -11,6 +12,8 @@ if ( $post->post_type === 'person' ) :
 	$has_contact_info = $phone || $email;
 	$has_any_info     = $has_org_info || $has_contact_info;
 	$col_class        = $has_org_info && $has_contact_info ? 'col-sm-6' : 'col' ;
+
+	$page_permalink = get_permalink( get_page_by_path( 'faculty-search' ) );
 
 	if ( $has_any_info ) :
 ?>
@@ -57,6 +60,27 @@ if ( $post->post_type === 'person' ) :
 									<?php
 									endforeach;
 									?>
+								</dd>
+								<?php endif; ?>
+								<?php if ( $tags ) : ?>
+								<dt class="h6 text-uppercase text-muted mb-2">Research Area(s)</dt>
+								<dd class="mt-2 mb-4">
+									<ul class="list-unstyled list-inline">
+										<?php
+										foreach ( $tags as $tag ) :
+											$tag_filter_url = add_query_arg(
+												'query',
+												$tag->name,
+												$page_permalink
+											);
+										?>
+										<li class="list-inline-item my-1 mr-2">
+											<a class="badge badge-pill badge-faded letter-spacing-0 text-transform-none font-weight-normal" href="<?php echo $tag_filter_url; ?>">
+												<?php echo $tag->name; ?>
+											</a>
+										</li>
+										<?php endforeach; ?>
+									</ul>
 								</dd>
 								<?php endif; ?>
 
