@@ -1,0 +1,8 @@
+{
+    "name": "ucf/main-site-theme",
+    "description": "A responsive WordPress theme for ucf.edu, built off of the Athena Framework.",
+    "type": "wordpress-theme",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
