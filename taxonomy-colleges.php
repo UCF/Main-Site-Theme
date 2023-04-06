@@ -184,7 +184,22 @@ $display_news_section = get_field( 'college_page_news_display', $term );
 	if( $sections ) :
 		foreach( $sections as $section ) :
 			if ( $section['display'] ) {
+				$styles = UCF_Section_Common::get_post_section_styles( array( $section['section'] ) );
+				$scripts = UCF_Section_Common::get_post_section_javascript( array( $section['section'] ) );
+
+				if ( $styles ) : ?>
+				<style>
+					<?php echo implode( "\n", $styles ); ?>
+				</style>
+				<?php endif;
+
 				echo do_shortcode( '[ucf-section slug="' . $section['section']->post_name . '"]' );
+
+				if ( $scripts ) : ?>
+				<script>
+					<?php echo implode( "\n", $scripts ); ?>
+				</script>
+				<?php endif;
 			}
 		endforeach;
 	endif;
