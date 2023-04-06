@@ -48,6 +48,7 @@ $spotlight = get_field( 'college_spotlight', $term );
 			<?php endif; ?>
 		</div>
 	</section>
+	<?php if ( $stats ) : ?>
 	<section class="section-stats" id="stats" aria-label="Facts and figures">
 		<div class="media-background-container">
 			<img class="media-background object-fit-cover" srcset="<?php echo $stats_background; ?>" src="<?php echo $stats_background; ?>" alt="">
@@ -55,7 +56,6 @@ $spotlight = get_field( 'college_spotlight', $term );
 				<div class="row fact-grid">
 				<?php
 					ob_start();
-					if ( $stats ) :
 						foreach ( $stats as $index => $stat ) :
 							$details_id = "fact-details-$index";
 				?>
@@ -73,13 +73,13 @@ $spotlight = get_field( 'college_spotlight', $term );
 							</div>
 				<?php
 						endforeach;
-					endif;
 					echo ob_get_clean();
 				?>
 				</div>
 			</div>
 		</div>
 	</section>
+	<?php endif; ?>
 	<section class="section-degrees" id="degrees" aria-labelledby="section-degrees-heading">
 		<div class="jumbotron jumbotron-fluid bg-inverse mb-0">
 			<div class="container">
