@@ -31,6 +31,7 @@ $display_lead_section = get_field( 'college_page_lead_display', $term );
 $display_stats_section = get_field( 'college_page_stats_display', $term );
 $display_degrees_section = get_field( 'college_page_degrees_display', $term );
 $display_cta_section = get_field( 'college_page_cta_display', $term );
+$display_news_section = get_field( 'college_page_news_display', $term );
 
 ?>
 <article>
@@ -153,6 +154,7 @@ $display_cta_section = get_field( 'college_page_cta_display', $term );
 	<?php if ( $cta && $display_cta_section ) : ?>
 		<?php echo do_shortcode( '[ucf-section slug="' . $cta->post_name . '" title="Next steps and learn more"]' ); ?>
 	<?php endif; ?>
+	<?php if ( $display_news_section ) : ?>
 	<section class="section-news" id="news" aria-labelledby="news-heading">
 		<div class="container my-5">
 			<div class="row justify-content-between align-items-end">
@@ -176,6 +178,7 @@ $display_cta_section = get_field( 'college_page_cta_display', $term );
 			</div>
 		</div>
 	</section>
+	<?php endif; ?>
 	<?php if( $sections = get_field( 'section_content', 'colleges_' . $term->term_id ) ) : ?>
 	<?php
 	if( $sections ) :
