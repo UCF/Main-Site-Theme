@@ -83,6 +83,25 @@
                 "endpoint": 0
             },
             {
+                "key": "field_642ee338b45a5",
+                "label": "Display Lead Section",
+                "name": "college_page_lead_display",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_599f298774d42",
                 "label": "Lead Copy",
                 "name": "college_page_lead_copy",
@@ -178,6 +197,25 @@
                 },
                 "placement": "top",
                 "endpoint": 0
+            },
+            {
+                "key": "field_642ee375b45a6",
+                "label": "Display Stats Section",
+                "name": "college_page_stats_display",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_59a08770f6ce5",
@@ -282,6 +320,25 @@
                 },
                 "placement": "top",
                 "endpoint": 0
+            },
+            {
+                "key": "field_642ee3a4b45a7",
+                "label": "Display Degree Section",
+                "name": "college_page_degrees_display",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_599f2ad48b498",
@@ -484,6 +541,25 @@
                 "endpoint": 0
             },
             {
+                "key": "field_642ee3cfb45a8",
+                "label": "Display CTA Section",
+                "name": "college_page_cta_display",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_59a5a696c41bb",
                 "label": "CTA Section",
                 "name": "college_page_cta_section",
@@ -520,6 +596,25 @@
                 },
                 "placement": "top",
                 "endpoint": 0
+            },
+            {
+                "key": "field_642ee3fcb45a9",
+                "label": "Display News Section",
+                "name": "college_page_news_display",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 1,
+                "ui_on_text": "",
+                "ui_off_text": ""
             },
             {
                 "key": "field_599f2a428079e",
@@ -618,6 +713,25 @@
                         "multiple": 0,
                         "return_format": "object",
                         "ui": 1
+                    },
+                    {
+                        "key": "field_642ee41db45aa",
+                        "label": "Display",
+                        "name": "display",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 1,
+                        "ui": 1,
+                        "ui_on_text": "",
+                        "ui_off_text": ""
                     }
                 ]
             }
@@ -638,7 +752,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": 0
     },
     {
         "key": "group_5e985ee080417",

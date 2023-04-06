@@ -25,8 +25,17 @@ $cta = get_field( 'college_page_cta_section', $term );
 // News
 $news_topic = get_field( 'news_topic', $term );
 $spotlight = get_field( 'college_spotlight', $term );
+
+// Display toggles
+$display_lead_section = get_field( 'college_page_lead_display', $term );
+$display_stats_section = get_field( 'college_page_stats_display', $term );
+$display_degrees_section = get_field( 'college_page_degrees_display', $term );
+$display_cta_section = get_field( 'college_page_cta_display', $term );
+$display_news_section = get_field( 'college_page_news_display', $term );
+
 ?>
 <article>
+	<?php if ( $display_lead_section ) : ?>
 	<section class="section-lead" id="intro" aria-label="Introduction">
 		<div class="container my-5">
 			<div class="row">
@@ -48,6 +57,8 @@ $spotlight = get_field( 'college_spotlight', $term );
 			<?php endif; ?>
 		</div>
 	</section>
+	<?php endif; ?>
+	<?php if ( $stats && $display_stats_section ) : ?>
 	<section class="section-stats" id="stats" aria-label="Facts and figures">
 		<div class="media-background-container">
 			<img class="media-background object-fit-cover" srcset="<?php echo $stats_background; ?>" src="<?php echo $stats_background; ?>" alt="">
@@ -55,7 +66,6 @@ $spotlight = get_field( 'college_spotlight', $term );
 				<div class="row fact-grid">
 				<?php
 					ob_start();
-					if ( $stats ) :
 						foreach ( $stats as $index => $stat ) :
 							$details_id = "fact-details-$index";
 				?>
@@ -73,13 +83,14 @@ $spotlight = get_field( 'college_spotlight', $term );
 							</div>
 				<?php
 						endforeach;
-					endif;
 					echo ob_get_clean();
 				?>
 				</div>
 			</div>
 		</div>
 	</section>
+	<?php endif; ?>
+	<?php if ( $display_degrees_section ) : ?>
 	<section class="section-degrees" id="degrees" aria-labelledby="section-degrees-heading">
 		<div class="jumbotron jumbotron-fluid bg-inverse mb-0">
 			<div class="container">
@@ -139,9 +150,11 @@ $spotlight = get_field( 'college_spotlight', $term );
 			</div>
 		</div>
 	</section>
-	<?php if ( $cta ) : ?>
+	<?php endif; ?>
+	<?php if ( $cta && $display_cta_section ) : ?>
 		<?php echo do_shortcode( '[ucf-section slug="' . $cta->post_name . '" title="Next steps and learn more"]' ); ?>
 	<?php endif; ?>
+	<?php if ( $display_news_section ) : ?>
 	<section class="section-news" id="news" aria-labelledby="news-heading">
 		<div class="container my-5">
 			<div class="row justify-content-between align-items-end">
@@ -165,11 +178,14 @@ $spotlight = get_field( 'college_spotlight', $term );
 			</div>
 		</div>
 	</section>
+	<?php endif; ?>
 	<?php if( $sections = get_field( 'section_content', 'colleges_' . $term->term_id ) ) : ?>
 	<?php
 	if( $sections ) :
 		foreach( $sections as $section ) :
-			echo do_shortcode( '[ucf-section slug="' . $section['section']->post_name . '"]' );
+			if ( $section['display'] ) {
+				echo do_shortcode( '[ucf-section slug="' . $section['section']->post_name . '"]' );
+			}
 		endforeach;
 	endif;
 	?>
