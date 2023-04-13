@@ -13,7 +13,7 @@ $stats_background = get_field( 'stats_background_image', $term )['url'] ?? null;
 // Degree
 $degree_title = get_field( 'degree_search_title', $term ) ?: 'Search Degrees';
 $degree_copy = get_field( 'degree_search_copy', $term );
-$degree_search_url = "https://www.ucf.edu/degree-search/#!/college/" . $term->slug . "/";
+$degree_search_url = get_permalink( get_page_by_path( 'degree-search' ) );
 $degree_types = get_field( 'degree_types_available', $term );
 $degree_types = map_degree_types( $degree_types );
 $top_degrees = display_top_degrees( $term );
@@ -93,7 +93,7 @@ $spotlight = get_field( 'college_spotlight', $term );
 						<h3 class="browse-by-heading h6 heading-sans-serif text-uppercase">Or browse by:</h3>
 						<ul class="browse-by-list list-chevrons">
 							<?php foreach( $degree_types as $slug => $name ) : ?>
-							<li><a href="<?php echo $degree_search_url . $slug . '/'; ?>" class="text-inverse"><?php echo $name . 's'; ?></a></li>
+							<li><a href="<?php echo sprintf( "%s%s/college/%s/", $degree_search_url, $slug, $term->slug ); ?>" class="text-inverse"><?php echo $name . 's'; ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 						<?php endif; ?>
