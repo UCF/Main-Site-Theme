@@ -1,0 +1,20 @@
+name: Trigger Packagist Rebuild
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GIT_EMAIL: mcatech@ucf.edu
+          GIT_NAME: mcatech
+        run: |
+          curl -XPOST \
+            -H "Authorization: Bearer ${{ secrets.PACKAGIST_REPO_PAT }}" \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/UCF/ucf-packagist/actions/workflows/partial-composer-build.yml/dispatches \
+            --data '{"ref": "main", "inputs": {"package": "ucf/main-site-theme"}}'
