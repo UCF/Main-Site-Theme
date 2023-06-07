@@ -151,7 +151,10 @@ function mainsite_degree_get_post_terms( $terms, $program ) {
 	$terms['career_paths'] = mainsite_filter_career_paths( $careers );
 
 	$area_of_interest = $program->area_of_interest;
+
 	if ( $area_of_interest !== null ) {
+		$area_of_interest = str_replace( ',', '--', rtrim( $area_of_interest, '.' ) );
+		$area_of_interest = str_replace( ' And ', ' and ', $area_of_interest );
 		$terms['interests'] = array( $area_of_interest );
 	} else {
 		$terms['interests'] = array();
@@ -161,7 +164,6 @@ function mainsite_degree_get_post_terms( $terms, $program ) {
 }
 
 add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2 );
-
 
 /**
  * Filters the careers from the ranked endpoint
