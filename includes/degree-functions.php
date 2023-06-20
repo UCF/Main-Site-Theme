@@ -560,8 +560,8 @@ if ( ! is_admin() ) {
 	 *
 	 * @author Jim Barnes
 	 * @since v3.14.2
-	 * @param  WP_Term|int $tag_arr
-	 * @return WP_Term|int
+	 * @param  WP_Term|int|string $tag_arr
+	 * @return WP_Term|int|string
 	 */
 	function comma_interest_filter( $tag_arr ) {
 		if ( is_int( $tag_arr ) || is_string( $tag_arr ) ) return $tag_arr;
