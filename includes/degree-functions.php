@@ -551,3 +551,49 @@ function main_site_get_degree_careers( $post, $limit=20 ) {
 
 	return $careers;
 }
+
+if ( ! is_admin() ) {
+	/**
+	 * When retrieving an `interests` term, replace
+	 * the `--` with a comma. This allows us to
+	 * store a comma in the term name.
+	 *
+	 * @author Jim Barnes
+	 * @since v3.14.2
+	 * @param  WP_Term|int|string $tag_arr
+	 * @return WP_Term|int|string
+	 */
+	function comma_interest_filter( $tag_arr ) {
+		if ( is_int( $tag_arr ) || is_string( $tag_arr ) ) return $tag_arr;
+
+		$retval = $tag_arr;
+		if ( $tag_arr->taxonomy === 'interests' && strpos( $tag_arr->name, '--' ) ) {
+			$retval->name = str_replace( '--', ',', $tag_arr->name );
+		}
+
+		return $retval;
+	}
+
+	add_filter( 'get_interests', 'comma_interest_filter' );
+
+	/**
+	 * Ensures that the `--` character is replaced
+	 * with a comma for interests.
+	 *
+	 * @author Jim Barnes
+	 * @since v3.14.2
+	 * @param  array $tags_arr
+	 * @return array
+	 */
+	function comma_interests_filter( $tags_arr ) {
+		$retval = array();
+		foreach( $tags_arr as $tag_arr ) {
+			$retval[] = comma_interest_filter( $tag_arr );
+		}
+
+		return $retval;
+	}
+
+	add_filter( 'get_terms', 'comma_interests_filter' );
+	add_filter( 'get_the_terms', 'comma_interests_filter' );
+}
