@@ -21,6 +21,11 @@ function get_header_images( $obj ) {
 		}
 
 		if ( $college ) {
+			$retval['header_image'] = get_field( 'degree_fallback_header_image', 'colleges_' . $college->term_id );
+			$retval['header_image_xs'] = get_field( 'degree_fallback_header_image_xs', 'colleges_' . $college->term_id );
+		}
+
+		if ( ! $retval['header_image'] ) {
 			$retval['header_image'] = get_field( 'page_header_image', 'colleges_' . $college->term_id );
 			$retval['header_image_xs'] = get_field( 'page_header_image_xs', 'colleges_' . $college->term_id );
 		}
