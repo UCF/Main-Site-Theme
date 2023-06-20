@@ -469,7 +469,7 @@ function main_site_format_degree_data( $post_meta ) {
 	setlocale(LC_MONETARY, 'en_US');
 
 	if ( isset( $post_meta['degree_avg_annual_earnings'] ) && ! empty( $post_meta['degree_avg_annual_earnings'] ) ) {
-		$post_meta['degree_avg_annual_earnings'] = money_format( '%n', floatval( $post_meta['degree_avg_annual_earnings'] ) );
+		$post_meta['degree_avg_annual_earnings'] = sprintf( '%01.2f', floatval( $post_meta['degree_avg_annual_earnings'] ) );
 	}
 
 	if ( isset( $post_meta['degree_employed_full_time'] ) && ! empty( $post_meta['degree_employed_full_time'] ) ) {
@@ -560,11 +560,11 @@ if ( ! is_admin() ) {
 	 *
 	 * @author Jim Barnes
 	 * @since v3.14.2
-	 * @param  WP_Term|int $tag_arr
-	 * @return WP_Term|int
+	 * @param  WP_Term|int|string $tag_arr
+	 * @return WP_Term|int|string
 	 */
 	function comma_interest_filter( $tag_arr ) {
-		if ( is_int( $tag_arr ) ) return $tag_arr;
+		if ( is_int( $tag_arr ) || is_string( $tag_arr ) ) return $tag_arr;
 
 		$retval = $tag_arr;
 		if ( $tag_arr->taxonomy === 'interests' && strpos( $tag_arr->name, '--' ) ) {
