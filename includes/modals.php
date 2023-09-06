@@ -136,6 +136,14 @@ function enqueue_slate_js() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_slate_js', 10, 0 );
 
+/**
+ * Enqueues the admin script that allows for the 
+ * modal toggle to be copied to a clipboard.
+ * @author Jim Barnes
+ * @since 3.16.0
+ * @param string $hook The hook name of the screen being loaded
+ *
+ */
 function enqueue_shortcode_copy_script( $hook ) {
     if ( 'post.php' !== $hook ) return;
 

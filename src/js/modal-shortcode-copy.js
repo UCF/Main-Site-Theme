@@ -20,26 +20,34 @@
     return title;
   };
 
-  $('.copy-modal-toggle').on('click', (e) => {
-    const $btn = $(e.target);
-    const $parent = $btn.closest('.acf-row');
-    const $message = $parent.find('.copy-modal-message');
-    const idx = $parent.data('id').substr(4, $parent.data('id').length);
-    const title = $parent.find('input')
-      .not('.acf-order-input')
-      .first()
-      .val();
+  const init = () => {
+    $('.copy-modal-toggle').off();
 
-    let slug = slugify(title);
-    slug += idx > 0 ? `-${idx}` : '';
+    $('.copy-modal-toggle').on('click', (e) => {
+      const $btn = $(e.target);
+      const $parent = $btn.closest('.acf-row');
+      const $message = $parent.find('.copy-modal-message');
+      const idx = $parent.data('id').substr(4, $parent.data('id').length);
+      const title = $parent.find('input')
+        .not('.acf-order-input')
+        .first()
+        .val();
 
-    const textToCopy = `[modal-toggle id="${slug}-toggle" class="btn btn-primary" target="#${slug}"]${title}[/modal-toggle]`;
-    navigator.clipboard.writeText(textToCopy);
+      let slug = slugify(title);
+      slug += idx > 0 ? `-${idx}` : '';
 
-    $message.removeClass('hidden');
+      const textToCopy = `[modal-toggle id="${slug}-toggle" class="btn btn-primary" target="#${slug}"]${title}[/modal-toggle]`;
+      navigator.clipboard.writeText(textToCopy);
 
-    setTimeout(() => {
-      $message.addClass('hidden');
-    }, 5000);
+      $message.removeClass('hidden');
+
+      setTimeout(() => {
+        $message.addClass('hidden');
+      }, 5000);
+    });
+  };
+
+  $(document).ready(() => {
+    init();
   });
 }(jQuery));
