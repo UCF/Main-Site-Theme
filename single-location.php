@@ -71,5 +71,5 @@ if ( $location_ankle_content ) {
 	echo apply_filters( 'the_content', $location_ankle_content );
 }
 ?>
-
+<?php get_modals(); ?>
 <?php get_footer(); ?>

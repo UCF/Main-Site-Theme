@@ -208,4 +208,5 @@ $display_news_section = get_field( 'college_page_news_display', $term );
 
 	<?php echo get_colleges_grid( $term ); ?>
 </article>
-<?php get_footer();?>
+<?php get_modals(); ?>
+<?php get_footer(); ?>

@@ -19,8 +19,8 @@ function obj_has_modals() {
         $modals = get_field( 'page_modals', $obj->ID );
         return count( $modals ) > 0 ? $modals : false;
     } else if ( is_a( $obj, 'WP_Term' ) ) {
-        $modals = get_field( 'page_modals', "college_" . $obj->term_id );
-        return count( $modals ) > 0 ? $modals : false;
+        $modals = get_field( 'page_modals', "colleges_" . $obj->term_id );
+        return $modals !== null && count( $modals ) > 0 ? $modals : false;
     }
 
     return false;
@@ -145,7 +145,7 @@ add_action( 'wp_enqueue_scripts', 'enqueue_slate_js', 10, 0 );
  *
  */
 function enqueue_shortcode_copy_script( $hook ) {
-    if ( 'post.php' !== $hook ) return;
+    if ( ! in_array( $hook, array( 'post.php', 'term.php' ) ) ) return;
 
     $args = array(
         'strategy'  => 'async',
