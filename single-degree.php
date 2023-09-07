@@ -21,5 +21,5 @@
 	get_template_part( 'template-parts/degree/rfi_modal' );
 	get_template_part( 'template-parts/degree/catalog_modal' );
 ?>
-
+<?php get_modals(); ?>
 <?php get_footer(); ?>

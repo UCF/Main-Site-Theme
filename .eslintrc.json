@@ -13,7 +13,8 @@
     "UCFDegreeSearch": true,
     "Bloodhound": true,
     "Handlebars": true,
-    "FACULTY_SEARCH_SETTINGS": true
+    "FACULTY_SEARCH_SETTINGS": true,
+    "acf": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
