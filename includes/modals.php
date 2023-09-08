@@ -14,6 +14,7 @@
  */
 function obj_has_modals() {
     $obj = get_queried_object();
+    $modals = null;
 
     if ( is_a( $obj, 'WP_Post' ) ) {
         $modals = get_field( 'page_modals', $obj->ID );
@@ -23,7 +24,7 @@ function obj_has_modals() {
         return $modals !== null && count( $modals ) > 0 ? $modals : false;
     }
 
-    return false;
+    return $modals !== null && count( $modals ) > 0 ? $modals : false;
 }
 
 /**
@@ -44,6 +45,14 @@ function get_modal_markup( $modal, $idx = 0 ) {
     }
 
     $modal_classes = implode( ' ', $classes );
+    $modal_contents = '';
+    
+    if ( $modal['modal_type'] === 'slate' ) {
+        $slate_div_id = $modal['modal_slate_div_id'];
+        $modal_contents = "<div id=\"$slate_div_id\">Loading&hellip;</div>";
+    }
+
+    $modal_contents .= $modal['modal_contents'];
 
     ob_start();
 ?>
@@ -51,13 +60,13 @@ function get_modal_markup( $modal, $idx = 0 ) {
         <div class="<?php echo $modal_classes; ?>" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><?php echo $modal['modal_heading']; ?></h5>
+                    <h5 class="modal-title"><?php echo do_shortcode( $modal['modal_heading'] ); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <?php echo $modal['modal_contents']; ?>
+                    <?php echo $modal_contents; ?>
                 </div>
             </div>
         </div>
@@ -93,6 +102,8 @@ function get_modals() {
  * @return string
  */
 function generate_modal_id( $modal, $idx = 0 ) {
+    if ( $modal['modal_id'] ) return $modal['modal_id'];
+
     $modal_id = sanitize_title( $modal['modal_heading'] );
     $modal_id .= $idx > 0 ? "-{$idx}" : '';
 

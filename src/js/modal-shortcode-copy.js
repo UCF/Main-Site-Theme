@@ -3,6 +3,9 @@
     title = title.replace(/^\s+|\s+$/g, '');
     title = title.toLowerCase();
 
+    // Remove shortcodes
+    title = title.replace(/\[.*\]/g, '');
+
     // remove accents, swap ñ for n, etc
     const from = 'àáäâèéëêìíïîòóöôùúüûñçěščřžýúůďťň·/_,:;';
     const to   = 'aaaaeeeeiiiioooouuuuncescrzyuudtn------';
@@ -21,20 +24,33 @@
   };
 
   const init = () => {
-    $('.copy-modal-toggle').off();
+    $('.acf-repeater[data-orig_name="page_modals"] .acf-row').each((idx, row) => {
+      addCopyLogic($(row));
+    });
+  };
 
-    $('.copy-modal-toggle').on('click', (e) => {
-      const $btn = $(e.target);
-      const $parent = $btn.closest('.acf-row');
-      const $message = $parent.find('.copy-modal-message');
-      const idx = $parent.data('id').substr(4, $parent.data('id').length);
-      const title = $parent.find('input')
-        .not('.acf-order-input')
-        .first()
+  const addCopyLogic = ($row) => {
+    const $btn = $row.find('.copy-modal-toggle').first();
+
+    $btn.on('click', () => {
+      const $message = $row.find('.copy-modal-message');
+      const idx = $row.index();
+      const title = $row
+        .find('.acf-field[data-name="modal_heading"] input')
         .val();
 
-      let slug = slugify(title);
-      slug += idx > 0 ? `-${idx}` : '';
+      const modalId = $row
+        .find('.acf-field[data-name="modal_id"] input')
+        .val();
+
+      let slug = modalId;
+
+      if (!slug) {
+        slug = slugify(title);
+        slug += idx !== 0 ? `-${idx}` : '';
+      }
+
+      console.log(slug);
 
       const textToCopy = `[modal-toggle id="${slug}-toggle" class="btn btn-primary" target="#${slug}"]${title}[/modal-toggle]`;
       navigator.clipboard.writeText(textToCopy);
@@ -49,5 +65,9 @@
 
   $(document).ready(() => {
     init();
+  });
+
+  acf.addAction('append', ($el) => {
+    addCopyLogic($el);
   });
 }(jQuery));
