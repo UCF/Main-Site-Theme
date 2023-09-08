@@ -102,6 +102,8 @@ function get_modals() {
  * @return string
  */
 function generate_modal_id( $modal, $idx = 0 ) {
+    if ( $modal['modal_id'] ) return $modal['modal_id'];
+
     $modal_id = sanitize_title( $modal['modal_heading'] );
     $modal_id .= $idx > 0 ? "-{$idx}" : '';
 

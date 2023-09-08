@@ -35,14 +35,22 @@
     $btn.on('click', () => {
       const $message = $row.find('.copy-modal-message');
       const idx = $row.index();
-      const title = $row.find('input')
-        .not('.acf-order-input')
-        .not('.acf-row-status')
-        .first()
+      const title = $row
+        .find('.acf-field[data-name="modal_heading"] input')
         .val();
 
-      let slug = slugify(title);
-      slug += idx !== 0 ? `-${idx}` : '';
+      const modalId = $row
+        .find('.acf-field[data-name="modal_id"] input')
+        .val();
+
+      let slug = modalId;
+
+      if (!slug) {
+        slug = slugify(title);
+        slug += idx !== 0 ? `-${idx}` : '';
+      }
+
+      console.log(slug);
 
       const textToCopy = `[modal-toggle id="${slug}-toggle" class="btn btn-primary" target="#${slug}"]${title}[/modal-toggle]`;
       navigator.clipboard.writeText(textToCopy);

@@ -2789,6 +2789,28 @@
                         "parent_repeater": "field_64f86e93520b6"
                     },
                     {
+                        "key": "field_64fb6d6ace002",
+                        "label": "Modal ID",
+                        "name": "modal_id",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "This explicitly sets the ID of the modal. If this is left black, the ID of the modal will be automatically generated using the text in the heading.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
                         "key": "field_64f86f9f520b9",
                         "label": "Contents",
                         "name": "modal_contents",
