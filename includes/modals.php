@@ -45,6 +45,14 @@ function get_modal_markup( $modal, $idx = 0 ) {
     }
 
     $modal_classes = implode( ' ', $classes );
+    $modal_contents = '';
+    
+    if ( $modal['modal_type'] === 'slate' ) {
+        $slate_div_id = $modal['modal_slate_div_id'];
+        $modal_contents = "<div id=\"$slate_div_id\">Loading&hellip;</div>";
+    }
+
+    $modal_contents .= $modal['modal_contents'];
 
     ob_start();
 ?>
@@ -58,7 +66,7 @@ function get_modal_markup( $modal, $idx = 0 ) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <?php echo $modal['modal_contents']; ?>
+                    <?php echo $modal_contents; ?>
                 </div>
             </div>
         </div>
