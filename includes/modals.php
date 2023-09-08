@@ -14,6 +14,7 @@
  */
 function obj_has_modals() {
     $obj = get_queried_object();
+    $modals = null;
 
     if ( is_a( $obj, 'WP_Post' ) ) {
         $modals = get_field( 'page_modals', $obj->ID );
@@ -23,7 +24,7 @@ function obj_has_modals() {
         return $modals !== null && count( $modals ) > 0 ? $modals : false;
     }
 
-    return false;
+    return $modals !== null && count( $modals ) > 0 ? $modals : false;
 }
 
 /**
@@ -51,7 +52,7 @@ function get_modal_markup( $modal, $idx = 0 ) {
         <div class="<?php echo $modal_classes; ?>" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><?php echo $modal['modal_heading']; ?></h5>
+                    <h5 class="modal-title"><?php echo do_shortcode( $modal['modal_heading'] ); ?></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
