@@ -18,10 +18,8 @@ function obj_has_modals() {
 
     if ( is_a( $obj, 'WP_Post' ) ) {
         $modals = get_field( 'page_modals', $obj->ID );
-        return count( $modals ) > 0 ? $modals : false;
     } else if ( is_a( $obj, 'WP_Term' ) ) {
         $modals = get_field( 'page_modals', "colleges_" . $obj->term_id );
-        return $modals !== null && count( $modals ) > 0 ? $modals : false;
     }
 
     return $modals !== null && count( $modals ) > 0 ? $modals : false;
