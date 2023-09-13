@@ -18,10 +18,8 @@ function obj_has_modals() {
 
     if ( is_a( $obj, 'WP_Post' ) ) {
         $modals = get_field( 'page_modals', $obj->ID );
-        return count( $modals ) > 0 ? $modals : false;
     } else if ( is_a( $obj, 'WP_Term' ) ) {
         $modals = get_field( 'page_modals', "colleges_" . $obj->term_id );
-        return $modals !== null && count( $modals ) > 0 ? $modals : false;
     }
 
     return $modals !== null && count( $modals ) > 0 ? $modals : false;
@@ -45,28 +43,44 @@ function get_modal_markup( $modal, $idx = 0 ) {
     }
 
     $modal_classes = implode( ' ', $classes );
-    $modal_contents = '';
-    
-    if ( $modal['modal_type'] === 'slate' ) {
-        $slate_div_id = $modal['modal_slate_div_id'];
-        $modal_contents = "<div id=\"$slate_div_id\">Loading&hellip;</div>";
-    }
 
-    $modal_contents .= $modal['modal_contents'];
+    $modal_contents = $modal['modal_contents'];
+
+    if ( $modal['modal_type'] === 'slate' ) {
+        $slate_div_id = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
+        $modal_contents .= "<div id=\"$slate_div_id\">Loading&hellip;</div>";
+        $rfi_form_src = get_degree_request_info_url_graduate( array(
+            'output' => 'embed',
+            'div' => $slate_div_id
+        ) );
+    }
 
     ob_start();
 ?>
-    <div id="<?php echo $modal_id; ?>" class="modal fade">
+    <div id="<?php echo $modal_id; ?>" class="modal fade slate-modal"  tabindex="-1" role="dialog" aria-labelledby="<?php echo $modal_id ?>-label" aria-hidden="true">
         <div class="<?php echo $modal_classes; ?>" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><?php echo do_shortcode( $modal['modal_heading'] ); ?></h5>
+                <div class="modal-header px-4 pt-4">
+                    <h2 id="<?php echo $modal_id; ?>-label" class="h5 modal-title d-flex align-items-center">
+                        <?php echo do_shortcode( $modal['modal_heading'] ); ?>
+                    </h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+						<span aria-hidden="true">&times;</span>
+					</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body mb-2 px-4 pb-4">
                     <?php echo $modal_contents; ?>
+                    <?php if ( $modal['modal_type'] === 'slate' ) : ?>
+                    <script>
+                    /*<![CDATA[*/
+                    var script = document.createElement('script');
+                    script.async = 1;
+                    script.src = '<?php echo $rfi_form_src; ?>' + ((location.search.length > 1) ? '&' + location.search.substring(1) : '');
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(script, s);
+                    /*]]>*/
+                    </script>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -117,6 +131,9 @@ function generate_modal_id( $modal, $idx = 0 ) {
  * @since 3.16.0
  */
 function enqueue_slate_js() {
+    $theme = wp_get_theme();
+	$theme_version = $theme->get( 'Version' );
+
     $args = array(
         'strategy'  => 'async',
         'in_footer' => true
@@ -125,11 +142,7 @@ function enqueue_slate_js() {
     if ( $modals = obj_has_modals() ) {
         foreach( $modals as $idx => $modal ) {
             if ( $modal['modal_type'] === 'slate' ) {
-                $modal_id = generate_modal_id( $modal, $idx );
-                $slate_id = $modal['modal_slate_id'];
-                $slate_div = $modal['modal_slate_div_id'];
-                $script_url = "https://applynow.graduate.ucf.edu/register/?id=$slate_id&output=embed&div=$slate_div";
-                wp_enqueue_script( "$modal_id-js", $script_url, array( 'script' ), false, $args );
+                wp_enqueue_script( 'mainsite-degree-page', THEME_JS_URL . '/degree-page.min.js', array( 'jquery' ), $theme_version, true );
             } else if ( $modal['modal_type'] === 'custom' ) {
                 $modal_id = generate_modal_id( $modal, $idx );
                 
