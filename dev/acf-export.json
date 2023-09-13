@@ -2850,7 +2850,7 @@
                         "choices": {
                             "default": "Default",
                             "custom": "Custom",
-                            "slate": "Slate"
+                            "slate": "Graduate Slate Form"
                         },
                         "default_value": "default",
                         "return_format": "value",
@@ -2919,66 +2919,6 @@
                         "min_size": "",
                         "max_size": "",
                         "mime_types": "js",
-                        "parent_repeater": "field_64f86e93520b6"
-                    },
-                    {
-                        "key": "field_64f87026520bb",
-                        "label": "Slate ID",
-                        "name": "modal_slate_id",
-                        "aria-label": "",
-                        "type": "text",
-                        "instructions": "The Slate form ID to use.",
-                        "required": 0,
-                        "conditional_logic": [
-                            [
-                                {
-                                    "field": "field_64f88681c1eb7",
-                                    "operator": "==",
-                                    "value": "slate"
-                                }
-                            ]
-                        ],
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "relevanssi_exclude": 0,
-                        "default_value": "",
-                        "maxlength": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "parent_repeater": "field_64f86e93520b6"
-                    },
-                    {
-                        "key": "field_64f879d1122aa",
-                        "label": "Slate Div ID",
-                        "name": "modal_slate_div_id",
-                        "aria-label": "",
-                        "type": "text",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": [
-                            [
-                                {
-                                    "field": "field_64f88681c1eb7",
-                                    "operator": "==",
-                                    "value": "slate"
-                                }
-                            ]
-                        ],
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "relevanssi_exclude": 0,
-                        "default_value": "slate-rfi-container",
-                        "maxlength": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
                         "parent_repeater": "field_64f86e93520b6"
                     },
                     {

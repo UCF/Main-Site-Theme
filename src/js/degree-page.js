@@ -15,7 +15,7 @@
   }
 
   function degreePageInit() {
-    $requestInfoModal = $('#requestInfoModal');
+    $requestInfoModal = $('#requestInfoModal, .slate-modal');
 
     if ($requestInfoModal) {
       requestInfoIntervalId = setInterval(addClasses, 100);
