@@ -22,7 +22,7 @@ function obj_has_modals() {
         $modals = get_field( 'page_modals', "colleges_" . $obj->term_id );
     }
 
-    return $modals !== null && count( $modals ) > 0 ? $modals : false;
+    return $modals && count( $modals ) > 0 ? $modals : false;
 }
 
 /**
