@@ -150,7 +150,7 @@ function mainsite_degree_get_post_terms( $terms, $program ) {
 	$careers = main_site_get_remote_response_json( "{$program->careers}ranked/", array() );
 	$terms['career_paths'] = mainsite_filter_career_paths( $careers );
 
-	$area_of_interest = $program->area_of_interest;
+	$area_of_interest = $program->subarea_of_interest;
 
 	if ( $area_of_interest !== null ) {
 		$area_of_interest = str_replace( ',', '--', rtrim( $area_of_interest, '.' ) );
