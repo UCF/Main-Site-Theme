@@ -22,6 +22,21 @@ function modify_people_post_type_args( $args ) {
 
 add_filter( 'ucf_people_post_type_args', 'modify_people_post_type_args', 10, 1 );
 
+/**
+ * Modifies the post_types array for the expertise
+ * custom taxonomy.
+ * @author Jim Barnes
+ * @since 3.17.0
+ * @param array $post_types The unmodified post_type array
+ * @return array
+ */
+function modify_expertise_objects( $post_types ) {
+	$post_types[] = 'person';
+	return $post_types;
+}
+
+add_filter( 'ucf_expertise_taxonomy_objects', 'modify_expertise_objects', 10, 1 );
+
 
 /**
  * Unregister the People Group taxonomy for this site
