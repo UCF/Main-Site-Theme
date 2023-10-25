@@ -713,6 +713,20 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'expert_request_form_url'
+	);
+
+	$wp_customize->add_control(
+		'expert_request_form_url',
+		array(
+			'type'        => 'text',
+			'label'       => 'Expert Request Form URL',
+			'description' => 'The URL of the webpage media should be directed to request a UCF expert for interview.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'faculty_search'
+		)
+	);
+
 	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'

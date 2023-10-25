@@ -8,7 +8,7 @@ if ( $post->post_type === 'person' ) :
 	$association = get_field( 'expert_association_fellow', $post->ID );
 	$bilingual = get_field( 'expert_bilingual', $post->ID );
 	$lang_array = get_field( 'expert_languages', $post->ID );
-	$photos = get_field( 'expert_photos', $post->ID );
+	$request_url = get_theme_mod_or_default( 'expert_request_form_url' );
 	$languages = array();
 	array_walk_recursive( $lang_array, function( $l ) use ( &$languages ) {
 		$languages[] = $l; 
@@ -82,8 +82,8 @@ if ( $post->post_type === 'person' ) :
 						<?php endif; ?>
 						</ul>
 						<?php get_template_part( 'template-parts/expert/social' ); ?>
-						<?php if ( $photos ) : ?>
-						<a class="btn btn-primary" href="<?php echo $photos; ?>" rel="nofollow" target="_blank">Download Distributable Images</a>
+						<?php if ( $request_url ) : ?>
+						<a class="btn btn-primary" href="<?php echo $request_url; ?>" rel="nofollow" target="_blank">Contact this Expert</a>
 						<?php endif; ?>
 					</div>
 					<?php endif; ?>
