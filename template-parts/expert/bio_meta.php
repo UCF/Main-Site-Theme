@@ -9,6 +9,7 @@ if ( $post->post_type === 'person' ) :
 	$bilingual = get_field( 'expert_bilingual', $post->ID );
 	$lang_array = get_field( 'expert_languages', $post->ID );
 	$request_url = get_theme_mod_or_default( 'expert_request_form_url' );
+	$request_text = get_theme_mod_or_default( 'expert_request_button_text' );
 	$languages = array();
 	array_walk_recursive( $lang_array, function( $l ) use ( &$languages ) {
 		$languages[] = $l; 
@@ -83,7 +84,7 @@ if ( $post->post_type === 'person' ) :
 						</ul>
 						<?php get_template_part( 'template-parts/expert/social' ); ?>
 						<?php if ( $request_url ) : ?>
-						<a class="btn btn-primary" href="<?php echo $request_url; ?>" rel="nofollow" target="_blank">Contact this Expert</a>
+						<a class="btn btn-primary" href="<?php echo $request_url; ?>" rel="nofollow" target="_blank"><?php echo $request_text ; ?></a>
 						<?php endif; ?>
 					</div>
 					<?php endif; ?>
