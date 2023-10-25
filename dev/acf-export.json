@@ -473,7 +473,8 @@
                 "allow_null": 0,
                 "multiple": 1,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_6230e3e0be96d",
@@ -665,7 +666,8 @@
                 "allow_null": 0,
                 "multiple": 0,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_599f2a198079c",
@@ -745,7 +747,8 @@
                 "allow_null": 0,
                 "multiple": 0,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_599f2a348079d",
@@ -807,6 +810,7 @@
                         "multiple": 0,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_59a438ba6507e"
                     },
                     {
@@ -1654,7 +1658,8 @@
                 "allow_null": 1,
                 "multiple": 0,
                 "return_format": "id",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_5e9f44774068c",
@@ -2572,7 +2577,8 @@
                 "allow_null": 1,
                 "multiple": 0,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             }
         ],
         "location": [
@@ -2671,6 +2677,844 @@
         "show_in_rest": false
     },
     {
+        "key": "group_652fe686ac8a9",
+        "title": "Expert Fields",
+        "fields": [
+            {
+                "key": "field_652fea6be42a2",
+                "label": "General Tab",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fe687410bb",
+                "label": "First Name",
+                "name": "expert_first_name",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe6ba410bc",
+                "label": "Last Name",
+                "name": "expert_last_name",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe6e4410bd",
+                "label": "Title",
+                "name": "expert_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe6fa410be",
+                "label": "Cluster, Center or Institute",
+                "name": "expert_institute",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe998bdf20",
+                "label": "Association Fellow",
+                "name": "expert_association_fellow",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fea87e42a3",
+                "label": "Languages Tab",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fe714410bf",
+                "label": "Bilingual",
+                "name": "expert_bilingual",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 1,
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_652fe73f410c0",
+                "label": "Languages",
+                "name": "expert_languages",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_652fe714410bf",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_652fe96cbdf1f",
+                        "label": "Language",
+                        "name": "language",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_652fe73f410c0"
+                    }
+                ]
+            },
+            {
+                "key": "field_652feaa5e42a4",
+                "label": "Social",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652feac4e42a5",
+                "label": "Linkedin",
+                "name": "expert_linkedin_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652fead0e42a6",
+                "label": "Facebook",
+                "name": "expert_facebook_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feadde42a7",
+                "label": "Twitter\/X",
+                "name": "expert_twitter_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feaeae42a8",
+                "label": "Instagram",
+                "name": "expert_instagram_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feaf7e42a9",
+                "label": "Other",
+                "name": "expert_other_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feb7821649",
+                "label": "Photos",
+                "name": "expert_photos",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "The URL of the mediagraph collection of photos for this expert.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652febae19723",
+                "label": "Availability",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652febba19724",
+                "label": "Media Availability",
+                "name": "expert_media_availability",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "choices": {
+                    "tv": "TV",
+                    "radio": "Radio",
+                    "print": "Print"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "layout": "vertical",
+                "toggle": 1,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_652fec4c30670",
+                "label": "Media Coverage",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fec5c30671",
+                "label": "Recent Media Coverage",
+                "name": "expert_media_coverage",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "row",
+                "pagination": 1,
+                "rows_per_page": 5,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Story",
+                "sub_fields": [
+                    {
+                        "key": "field_652ffa1217e49",
+                        "label": "Story Title",
+                        "name": "story_title",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_652fec5c30671"
+                    },
+                    {
+                        "key": "field_652fec7c30672",
+                        "label": "Story URL",
+                        "name": "story_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_652fec5c30671"
+                    }
+                ]
+            },
+            {
+                "key": "field_652fec8c30673",
+                "label": "Today Stories",
+                "name": "expert_today_stories",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "row",
+                "pagination": 1,
+                "rows_per_page": 5,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "sub_fields": [
+                    {
+                        "key": "field_652ffa2617e4a",
+                        "label": "Story Title",
+                        "name": "story_title",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_652fec8c30673"
+                    },
+                    {
+                        "key": "field_652fec9f30674",
+                        "label": "Story URL",
+                        "name": "story_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_652fec8c30673"
+                    }
+                ]
+            },
+            {
+                "key": "field_6539203d88abb",
+                "label": "Pegasus Feature",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fed94df133",
+                "label": "Pegasus Feature URL",
+                "name": "expert_pegasus_feature_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_653810b265e91",
+                "label": "Pegasus Feature Title",
+                "name": "expert_pegasus_feature_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6539205288abc",
+                "label": "Pegasus Feature Description",
+                "name": "expert_pegasus_feature_description",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_6538108965e90",
+                "label": "Pegasus Feature Image",
+                "name": "expert_pegasus_feature_image",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_6539207088abd",
+                "label": "Podcast Episode",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652feda6df134",
+                "label": "Podcast URL",
+                "name": "expert_podcast_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_6538112f65e92",
+                "label": "Podcast Title",
+                "name": "expert_podcast_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6539208288abe",
+                "label": "Podcast Description",
+                "name": "expert_podcast_description",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_6538115765e93",
+                "label": "Podcast Image",
+                "name": "expert_podcast_image",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_653920b63591d",
+                "label": "Videos",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fedb3df135",
+                "label": "Videos",
+                "name": "expert_videos",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_652fedc2df136",
+                        "label": "Video",
+                        "name": "video",
+                        "aria-label": "",
+                        "type": "oembed",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "width": "",
+                        "height": "",
+                        "parent_repeater": "field_652fedb3df135"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-expert.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
+    },
+    {
         "key": "group_60afe6ef8a553",
         "title": "Faculty Fields",
         "fields": [
@@ -2712,7 +3556,8 @@
                 "allow_null": 0,
                 "multiple": 0,
                 "return_format": "id",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             }
         ],
         "location": [
@@ -4827,6 +5672,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_60afe79a124b1"
                     }
                 ]
@@ -4892,6 +5738,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_60afe7cb124b3"
                     }
                 ]
@@ -4957,6 +5804,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_617048c3b3a11"
                     }
                 ]
@@ -5022,6 +5870,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_61704906b3a13"
                     }
                 ]
@@ -5087,6 +5936,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_6170491db3a15"
                     }
                 ]
@@ -5152,6 +6002,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_61704936b3a17"
                     }
                 ]
@@ -5217,6 +6068,7 @@
                         "multiple": 1,
                         "return_format": "object",
                         "ui": 1,
+                        "bidirectional_target": [],
                         "parent_repeater": "field_61704954b3a19"
                     }
                 ]

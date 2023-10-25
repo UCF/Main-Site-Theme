@@ -9,7 +9,8 @@
 
     const facultyLimit = 5;
     const collegeLimit = 3;
-    const departmentLimit = 5;
+    const departmentLimit = 3;
+    const expertiseLimit = 3;
 
 
     const typeaheadFacultySource = new Bloodhound({
@@ -51,6 +52,20 @@
       }
     });
 
+    const typeaheadExpertiseSource = new Bloodhound({
+      datumTokenizer: function (datum) {
+        return Bloodhound.tokenizers.whitespace(datum.name);
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      remote: {
+        url: `${FACULTY_SEARCH_SETTINGS.expertise.dataEndpoint}&search=%QUERY`,
+        wildcard: '%QUERY'
+      },
+      identify: function (data) {
+        return `expertise_${data.id}`;
+      }
+    });
+
 
     this.typeahead(
       typeaheadSettings,
@@ -74,6 +89,17 @@
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Department:</strong>'
+        }
+      },
+      {
+        name: 'results-expertise',
+        source: typeaheadExpertiseSource.ttAdapter(),
+        limit: expertiseLimit,
+        displayKey: function (obj) {
+          return $('<span>').html(obj.name).text();
+        },
+        templates: {
+          header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Expertise:</strong>'
         }
       },
       {
