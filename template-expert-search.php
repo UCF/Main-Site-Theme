@@ -29,6 +29,13 @@ if ( $expertise_filter ) {
 // Set up baseline WP_Query args
 $args = array(
 	'post_type'      => 'person',
+	'tax_query'      => array(
+		array(
+			'taxonomy' => 'people_group',
+			'field'    => 'slug',
+			'terms'    => 'expert'
+		)
+	),
 	'meta_query'     => array(
 		'person_type_clause' => array(
 			'key'     => 'person_type',
@@ -46,10 +53,6 @@ if ( $query ) {
 }
 
 if ( $college || $expertise ) {
-	$args['tax_query'] = array();
-}
-
-if ( $college && $expertise ) {
 	$args['tax_query']['relation'] = 'AND';
 }
 

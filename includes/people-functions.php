@@ -38,15 +38,6 @@ function modify_expertise_objects( $post_types ) {
 add_filter( 'ucf_expertise_taxonomy_objects', 'modify_expertise_objects', 10, 1 );
 
 
-/**
- * Unregister the People Group taxonomy for this site
- */
-function remove_people_group_taxonomy() {
-	unregister_taxonomy( 'people_group' );
-}
-
-add_action( 'init', 'remove_people_group_taxonomy' );
-
 
 /**
  * Modifies the taxonomies assigned to the Person
@@ -193,6 +184,23 @@ function get_faculty_search_page_url() {
 
 	return $faculty_search_url;
 }
+
+/**
+ * Returns the permalink of the page assigned as
+ * the Expert Search page in the Customizer.
+ *
+ * @since 3.17.0
+ * @author Jim Barnes
+ * @return string
+ */
+function get_expert_search_page_url() {
+	$expert_search_pg_path = untrailingslashit( get_theme_mod_or_default( 'expert_search_page_path' ) );
+	$expert_search_pg      = $expert_search_pg_path ? get_page_by_path( $expert_search_pg_path ) : null;
+	$expert_search_url     = $expert_search_pg ? get_permalink( $expert_search_pg ) : '';
+
+	return $expert_search_url;
+}
+
 
 /**
  * Builds the additional contribution string
