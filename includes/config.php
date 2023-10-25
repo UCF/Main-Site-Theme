@@ -35,6 +35,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'chartbeat_uid'                       => '2806',
 	'chartbeat_domain'                    => 'ucf.edu',
 	'faculty_search_page_path'            => 'faculty-search',
+	'expert_request_button_text'          => 'Contact this expert',
 	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php'
 ) ) );
 
@@ -723,6 +724,23 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Expert Request Form URL',
 			'description' => 'The URL of the webpage media should be directed to request a UCF expert for interview.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'faculty_search'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'expert_request_button_text',
+		array(
+			'default' => get_theme_mod_default( 'expert_request_button_text' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'expert_request_button_text',
+		array(
+			'type'        => 'text',
+			'label'       => 'Expert Request Button Text',
+			'description' => 'The text of the button that links media to a request form for UCF experts.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'faculty_search'
 		)
 	);
