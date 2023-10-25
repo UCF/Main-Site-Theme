@@ -77,6 +77,12 @@ function enqueue_frontend_assets() {
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?department=" + obj.slug;
 			}
+		},
+		expertise: {
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/expertise?_fields=id,name,slug,taxonomy&post_types=person' ) ?>",
+			selectedAction: function(event, obj) {
+				window.location = "<?php echo $faculty_search_url; ?>?expertise=" + obj.slug;
+			}
 		}
 	};
 <?php
