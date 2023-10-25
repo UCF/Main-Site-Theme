@@ -36,12 +36,6 @@ $args = array(
 			'terms'    => 'expert'
 		)
 	),
-	'meta_query'     => array(
-		'person_type_clause' => array(
-			'key'     => 'person_type',
-			'value'   => 'expert'
-		)
-	),
 	'orderby'        => 'orderby_clause',
 	'order'          => 'ASC',
 	'paged'          => $paged, // NOTE: this value must be explicitly set for paginate_links() to work properly
