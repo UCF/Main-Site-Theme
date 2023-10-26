@@ -7,6 +7,7 @@
                 "key": "field_58ff547f2d1ef",
                 "label": "URL",
                 "name": "colleges_url",
+                "aria-label": "",
                 "type": "url",
                 "instructions": "",
                 "required": 0,
@@ -23,6 +24,7 @@
                 "key": "field_599da06596f3e",
                 "label": "Thumbnail Image",
                 "name": "thumbnail_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Thumbnail image to be displayed in the college grid at the bottom of each college page.",
                 "required": 0,
@@ -60,7 +62,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_599f2908dc88f",
@@ -70,6 +73,7 @@
                 "key": "field_599f291374d3f",
                 "label": "Lead Section",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -86,6 +90,7 @@
                 "key": "field_642ee338b45a5",
                 "label": "Display Lead Section",
                 "name": "college_page_lead_display",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "",
                 "required": 0,
@@ -105,6 +110,7 @@
                 "key": "field_599f298774d42",
                 "label": "Lead Copy",
                 "name": "college_page_lead_copy",
+                "aria-label": "",
                 "type": "wysiwyg",
                 "instructions": "",
                 "required": 0,
@@ -124,6 +130,7 @@
                 "key": "field_599f2b8e4e687",
                 "label": "Lead Image",
                 "name": "college_page_lead_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "",
                 "required": 0,
@@ -148,6 +155,7 @@
                 "key": "field_5efb4d4223a6d",
                 "label": "Lead CTA Text",
                 "name": "lead_cta_text",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Text to display in the call-to-action button underneath the lead section.  If not provided, \"Visit [college URL]\" will be displayed instead.",
                 "required": 0,
@@ -167,6 +175,7 @@
                 "key": "field_5efb4d8123a6e",
                 "label": "Lead CTA URL",
                 "name": "lead_cta_url",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "A custom URL to use on the lead call-to-action button.  If not provided, the College URL will be used instead.",
                 "required": 0,
@@ -186,6 +195,7 @@
                 "key": "field_599f296e74d41",
                 "label": "Stats Section",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -202,6 +212,7 @@
                 "key": "field_642ee375b45a6",
                 "label": "Display Stats Section",
                 "name": "college_page_stats_display",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "",
                 "required": 0,
@@ -221,6 +232,7 @@
                 "key": "field_59a08770f6ce5",
                 "label": "Stats Background Image",
                 "name": "stats_background_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "",
                 "required": 0,
@@ -245,6 +257,7 @@
                 "key": "field_599f29b374d43",
                 "label": "Stat",
                 "name": "stat",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -258,12 +271,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_599f2cbf5920d",
                         "label": "Icon",
                         "name": "icon",
+                        "aria-label": "",
                         "type": "image",
                         "instructions": "",
                         "required": 0,
@@ -282,12 +297,14 @@
                         "max_width": "",
                         "max_height": "",
                         "max_size": "",
-                        "mime_types": ""
+                        "mime_types": "",
+                        "parent_repeater": "field_599f29b374d43"
                     },
                     {
                         "key": "field_599f2ccd5920e",
                         "label": "Copy",
                         "name": "copy",
+                        "aria-label": "",
                         "type": "wysiwyg",
                         "instructions": "",
                         "required": 0,
@@ -301,7 +318,8 @@
                         "tabs": "all",
                         "toolbar": "basic",
                         "media_upload": 1,
-                        "delay": 0
+                        "delay": 0,
+                        "parent_repeater": "field_599f29b374d43"
                     }
                 ]
             },
@@ -309,6 +327,7 @@
                 "key": "field_599f2a048079b",
                 "label": "Degree Search Section",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -325,6 +344,7 @@
                 "key": "field_642ee3a4b45a7",
                 "label": "Display Degree Section",
                 "name": "college_page_degrees_display",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "",
                 "required": 0,
@@ -344,6 +364,7 @@
                 "key": "field_599f2ad48b498",
                 "label": "Degree Search Title",
                 "name": "degree_search_title",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -363,6 +384,7 @@
                 "key": "field_599f2aec8b499",
                 "label": "Degree Search Copy",
                 "name": "degree_search_copy",
+                "aria-label": "",
                 "type": "textarea",
                 "instructions": "",
                 "required": 0,
@@ -382,6 +404,7 @@
                 "key": "field_59a08d0de6535",
                 "label": "Degree Types Available",
                 "name": "degree_types_available",
+                "aria-label": "",
                 "type": "checkbox",
                 "instructions": "",
                 "required": 0,
@@ -406,12 +429,14 @@
                 "default_value": [],
                 "layout": "vertical",
                 "toggle": 0,
-                "return_format": "value"
+                "return_format": "value",
+                "custom_choice_button_text": "Add new choice"
             },
             {
                 "key": "field_6230e53f6225a",
                 "label": "Top Degrees Heading",
                 "name": "top_degrees_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Text to display in a heading text and toggle button text for mobile above the college's Top Degrees list.  If left blank, \"Top College Degrees\" will be used.",
                 "required": 0,
@@ -431,6 +456,7 @@
                 "key": "field_599f2b3099a61",
                 "label": "Top Degrees",
                 "name": "top_degrees",
+                "aria-label": "",
                 "type": "post_object",
                 "instructions": "",
                 "required": 0,
@@ -447,12 +473,14 @@
                 "allow_null": 0,
                 "multiple": 1,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_6230e3e0be96d",
                 "label": "Extra Degrees Heading",
                 "name": "top_degrees_custom_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Optional heading and toggle button to insert between the college's Top Degrees and any extra degree list items defined below.  Will only be displayed if at least one extra degree link is defined.",
                 "required": 0,
@@ -472,6 +500,7 @@
                 "key": "field_5a1d88cad3b42",
                 "label": "Extra Degrees",
                 "name": "top_degrees_custom",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "Optionally add one or more custom links to the bottom of the college's Top Degrees list.  If an Extra Degrees Heading is defined above, these links will be displayed in a separate list separated by that heading instead.",
                 "required": 0,
@@ -485,12 +514,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5a1d88e9d3b43",
                         "label": "Top Degree Custom Text",
                         "name": "top_degree_custom_text",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Link text to be displayed for the custom top degree.",
                         "required": 1,
@@ -504,12 +535,14 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5a1d88cad3b42"
                     },
                     {
                         "key": "field_5a1d8a76d3b44",
                         "label": "Top Degree Custom Link",
                         "name": "top_degree_custom_link",
+                        "aria-label": "",
                         "type": "url",
                         "instructions": "Degree search link for the custom top degree.",
                         "required": 1,
@@ -520,7 +553,8 @@
                             "id": ""
                         },
                         "default_value": "",
-                        "placeholder": ""
+                        "placeholder": "",
+                        "parent_repeater": "field_5a1d88cad3b42"
                     }
                 ]
             },
@@ -528,6 +562,7 @@
                 "key": "field_6491b33c708e7",
                 "label": "Degree Fallback Header Image (-sm+)",
                 "name": "degree_fallback_header_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Header image to display at the -sm breakpoint and up.",
                 "required": 0,
@@ -552,6 +587,7 @@
                 "key": "field_6491b3cc708e8",
                 "label": "Degree Fallback Header Image (-xs)",
                 "name": "degree_fallback_header_image_xs",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Header image to display at the -xs breakpoint.",
                 "required": 0,
@@ -576,6 +612,7 @@
                 "key": "field_59a5a672eab38",
                 "label": "Call to Action Bar",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -592,6 +629,7 @@
                 "key": "field_642ee3cfb45a8",
                 "label": "Display CTA Section",
                 "name": "college_page_cta_display",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "",
                 "required": 0,
@@ -611,6 +649,7 @@
                 "key": "field_59a5a696c41bb",
                 "label": "CTA Section",
                 "name": "college_page_cta_section",
+                "aria-label": "",
                 "type": "post_object",
                 "instructions": "",
                 "required": 0,
@@ -627,12 +666,14 @@
                 "allow_null": 0,
                 "multiple": 0,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_599f2a198079c",
                 "label": "News Section",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -649,6 +690,7 @@
                 "key": "field_642ee3fcb45a9",
                 "label": "Display News Section",
                 "name": "college_page_news_display",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "",
                 "required": 0,
@@ -668,6 +710,7 @@
                 "key": "field_599f2a428079e",
                 "label": "News Topic",
                 "name": "news_topic",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -687,6 +730,7 @@
                 "key": "field_599f3ad71b4b1",
                 "label": "College Spotlight",
                 "name": "college_spotlight",
+                "aria-label": "",
                 "type": "post_object",
                 "instructions": "",
                 "required": 0,
@@ -703,12 +747,14 @@
                 "allow_null": 0,
                 "multiple": 0,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_599f2a348079d",
                 "label": "Custom Content Section",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -725,6 +771,7 @@
                 "key": "field_59a438ba6507e",
                 "label": "Section Content",
                 "name": "section_content",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -738,12 +785,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_59a438d36507f",
                         "label": "Section",
                         "name": "section",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -760,12 +809,15 @@
                         "allow_null": 0,
                         "multiple": 0,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_59a438ba6507e"
                     },
                     {
                         "key": "field_642ee41db45aa",
                         "label": "Display",
                         "name": "display",
+                        "aria-label": "",
                         "type": "true_false",
                         "instructions": "",
                         "required": 0,
@@ -779,7 +831,8 @@
                         "default_value": 1,
                         "ui": 1,
                         "ui_on_text": "",
-                        "ui_off_text": ""
+                        "ui_off_text": "",
+                        "parent_repeater": "field_59a438ba6507e"
                     }
                 ]
             }
@@ -811,6 +864,7 @@
                 "key": "field_5fad56c553062",
                 "label": "Requests for Information (RFI)",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -827,6 +881,7 @@
                 "key": "field_5fad570953063",
                 "label": "Enable Request Info Button\/Modal",
                 "name": "degree_custom_enable_rfi",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If enabled, the 'Request Information' modal and button will be included on the degree profile. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have an imported Slate GUID.<\/i>",
                 "required": 0,
@@ -846,6 +901,7 @@
                 "key": "field_5e99fb2dbcede",
                 "label": "Program at a Glance",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -862,6 +918,7 @@
                 "key": "field_5f9adda85c2cc",
                 "label": "Program Length",
                 "name": "program_length",
+                "aria-label": "",
                 "type": "group",
                 "instructions": "",
                 "required": 0,
@@ -877,6 +934,7 @@
                         "key": "field_5f9addc95c2cd",
                         "label": "Image",
                         "name": "image",
+                        "aria-label": "",
                         "type": "image",
                         "instructions": "An icon to supplement the program's duration.",
                         "required": 0,
@@ -901,6 +959,7 @@
                         "key": "field_5f9addf15c2ce",
                         "label": "Number",
                         "name": "number",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "The actual program length value, e.g. \"30\", \"12-24\"",
                         "required": 0,
@@ -920,6 +979,7 @@
                         "key": "field_5f9ade145c2cf",
                         "label": "Text",
                         "name": "text",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Units of measure, and\/or supplementary info about the program length.",
                         "required": 0,
@@ -941,6 +1001,7 @@
                 "key": "field_5f9ae0f0c8e71",
                 "label": "Badges\/Promotional Graphics",
                 "name": "",
+                "aria-label": "",
                 "type": "message",
                 "instructions": "",
                 "required": 0,
@@ -958,6 +1019,7 @@
                 "key": "field_5f9ad88cd8a1b",
                 "label": "Badge\/Promo 1",
                 "name": "promo",
+                "aria-label": "",
                 "type": "group",
                 "instructions": "",
                 "required": 0,
@@ -973,6 +1035,7 @@
                         "key": "field_5e94d0629bc99",
                         "label": "Image",
                         "name": "image",
+                        "aria-label": "",
                         "type": "image",
                         "instructions": "A badge, trust symbol, or other promotional graphic relevant to this degree.",
                         "required": 0,
@@ -997,6 +1060,7 @@
                         "key": "field_5e976d0d22df6",
                         "label": "Alt Text",
                         "name": "image_alt",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Text that describes the contents of the badge\/promo graphic.  <strong>Required<\/strong> for the graphic to be displayed on the degree profile.",
                         "required": 0,
@@ -1016,6 +1080,7 @@
                         "key": "field_5fad5affc0394",
                         "label": "Link URL",
                         "name": "link_url",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "An optional URL that this graphic should link out to.",
                         "required": 0,
@@ -1035,6 +1100,7 @@
                         "key": "field_5fad5fca24565",
                         "label": "Link Rel Attribute",
                         "name": "link_rel",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "",
                         "required": 0,
@@ -1061,6 +1127,7 @@
                         "key": "field_5fad5ff124566",
                         "label": "Open Link in New Window",
                         "name": "link_new_window",
+                        "aria-label": "",
                         "type": "true_false",
                         "instructions": "",
                         "required": 0,
@@ -1089,6 +1156,7 @@
                 "key": "field_5f9adba88bd5d",
                 "label": "Badge\/Promo 2",
                 "name": "promo_2",
+                "aria-label": "",
                 "type": "group",
                 "instructions": "",
                 "required": 0,
@@ -1104,6 +1172,7 @@
                         "key": "field_5f9adba98bd60",
                         "label": "Image",
                         "name": "image",
+                        "aria-label": "",
                         "type": "image",
                         "instructions": "A badge, trust symbol, or other promotional graphic relevant to this degree.",
                         "required": 0,
@@ -1128,6 +1197,7 @@
                         "key": "field_5f9adba98bd61",
                         "label": "Alt Text",
                         "name": "image_alt",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Text that describes the contents of the badge\/promo graphic.  <strong>Required<\/strong> for the graphic to be displayed on the degree profile.",
                         "required": 0,
@@ -1147,6 +1217,7 @@
                         "key": "field_5fad5b4dc0395",
                         "label": "Link URL",
                         "name": "link_url",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "An optional URL that this graphic should link out to.",
                         "required": 0,
@@ -1166,6 +1237,7 @@
                         "key": "field_5fad601f24568",
                         "label": "Link Rel Attribute",
                         "name": "link_rel",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "",
                         "required": 0,
@@ -1192,6 +1264,7 @@
                         "key": "field_5fad602624569",
                         "label": "Open Link in New Window",
                         "name": "link_new_window",
+                        "aria-label": "",
                         "type": "true_false",
                         "instructions": "",
                         "required": 0,
@@ -1220,6 +1293,7 @@
                 "key": "field_5faeb8ce5d327",
                 "label": "Catalog Description",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -1236,6 +1310,7 @@
                 "key": "field_5faebbbb92089",
                 "label": "",
                 "name": "",
+                "aria-label": "",
                 "type": "message",
                 "instructions": "",
                 "required": 0,
@@ -1253,6 +1328,7 @@
                 "key": "field_5faeb73f9e0c7",
                 "label": "Disable Sidebar Promo",
                 "name": "degree_disable_sidebar_promo",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If checked, the promo graphic set in the Customizer for this type of degree will <em>not<\/em> be displayed on this degree's profile.  Only applicable when this degree displays a catalog description (and not a custom description).",
                 "required": 0,
@@ -1272,6 +1348,7 @@
                 "key": "field_5e99f80012a12",
                 "label": "Degree Description & Highlights",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -1288,6 +1365,7 @@
                 "key": "field_5fa1b13bea6b7",
                 "label": "",
                 "name": "",
+                "aria-label": "",
                 "type": "message",
                 "instructions": "",
                 "required": 0,
@@ -1305,6 +1383,7 @@
                 "key": "field_5e961c9a35232",
                 "label": "Description Heading",
                 "name": "modern_description_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Optional heading text to display above the degree description.",
                 "required": 0,
@@ -1324,6 +1403,7 @@
                 "key": "field_5e99d7308626b",
                 "label": "Degree Description",
                 "name": "modern_description_copy",
+                "aria-label": "",
                 "type": "wysiwyg",
                 "instructions": "A unique description for this degree.  Replaces the degree's catalog description on this degree's profile.",
                 "required": 0,
@@ -1343,6 +1423,7 @@
                 "key": "field_5fa30c20b2db6",
                 "label": "Show Subplan List",
                 "name": "show_subplan_list",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "When checked, a list of program tracks\/options and their excerpts will be displayed underneath this program's unique degree description if this program has at least one subplan.  Not applicable when the Degree Description is empty.",
                 "required": 0,
@@ -1362,6 +1443,7 @@
                 "key": "field_5e99d8d7130db",
                 "label": "Description Image",
                 "name": "modern_description_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "An optional graphic to display alongside this degree's description.",
                 "required": 0,
@@ -1386,6 +1468,7 @@
                 "key": "field_5e99d98c3902e",
                 "label": "Description Image Alt Text",
                 "name": "modern_description_image_alt",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Alt text for the Description Image above.  Not required, but should be set if the Description Image is not purely decorative or contains text.",
                 "required": 0,
@@ -1405,6 +1488,7 @@
                 "key": "field_5e99e5b773cc6",
                 "label": "Highlights",
                 "name": "highlights",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "A list of selling points\/highlighted information about this program.",
                 "required": 0,
@@ -1419,11 +1503,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Highlight",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5fa1adbb0c966",
                         "label": "Highlight Image",
                         "name": "highlight",
+                        "aria-label": "",
                         "type": "group",
                         "instructions": "",
                         "required": 0,
@@ -1439,6 +1525,7 @@
                                 "key": "field_5e99e5fd73cc7",
                                 "label": "Image",
                                 "name": "image",
+                                "aria-label": "",
                                 "type": "image",
                                 "instructions": "",
                                 "required": 0,
@@ -1463,6 +1550,7 @@
                                 "key": "field_5fa1acf442552",
                                 "label": "Alt Text",
                                 "name": "image_alt_text",
+                                "aria-label": "",
                                 "type": "text",
                                 "instructions": "",
                                 "required": 0,
@@ -1478,12 +1566,14 @@
                                 "append": "",
                                 "maxlength": ""
                             }
-                        ]
+                        ],
+                        "parent_repeater": "field_5e99e5b773cc6"
                     },
                     {
                         "key": "field_5e99e61c73cc8",
                         "label": "Highlight Copy",
                         "name": "highlight_copy",
+                        "aria-label": "",
                         "type": "textarea",
                         "instructions": "",
                         "required": 0,
@@ -1497,7 +1587,8 @@
                         "placeholder": "",
                         "maxlength": "",
                         "rows": 6,
-                        "new_lines": ""
+                        "new_lines": "",
+                        "parent_repeater": "field_5e99e5b773cc6"
                     }
                 ]
             },
@@ -1505,6 +1596,7 @@
                 "key": "field_5e99f82f12a13",
                 "label": "Application Deadlines",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -1521,6 +1613,7 @@
                 "key": "field_6127ec2c61df1",
                 "label": "Disable Deadlines",
                 "name": "disable_deadlines",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If checked, application deadlines will <em>not<\/em> be displayed on this degree's profile.",
                 "required": 0,
@@ -1540,6 +1633,7 @@
                 "key": "field_5fa41b8492d13",
                 "label": "Alternate Section",
                 "name": "alternate_deadlines_section",
+                "aria-label": "",
                 "type": "post_object",
                 "instructions": "Specify an alternate Section post to display in lieu of the standard Application Deadlines section on this degree's profile.  This value takes precedence over the Undergraduate\/Graduate Fallback Section values in the Customizer.",
                 "required": 0,
@@ -1564,12 +1658,14 @@
                 "allow_null": 1,
                 "multiple": 0,
                 "return_format": "id",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             },
             {
                 "key": "field_5e9f44774068c",
                 "label": "Deadlines",
                 "name": "application_deadlines",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "Specify a list of application deadlines to display on this degree's profile.  If provided, this list replaces the list of imported deadlines assigned to this degree.",
                 "required": 0,
@@ -1592,11 +1688,13 @@
                 "max": 3,
                 "layout": "block",
                 "button_label": "Add Deadline",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5e9f44ae4068d",
                         "label": "Deadline Term",
                         "name": "deadline_term",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "e.g. \"Fall\", \"Spring\", \"Summer\"",
                         "required": 0,
@@ -1610,12 +1708,14 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e9f44774068c"
                     },
                     {
                         "key": "field_5e9f45084068e",
                         "label": "Deadline",
                         "name": "deadline",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "e.g. \"Dec 1, 2020\"",
                         "required": 0,
@@ -1629,7 +1729,8 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e9f44774068c"
                     }
                 ]
             },
@@ -1637,6 +1738,7 @@
                 "key": "field_5f16515899d7b",
                 "label": "Start Your Application",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -1653,6 +1755,7 @@
                 "key": "field_5f17393e12e2d",
                 "label": "Start Application Image",
                 "name": "start_application_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Image to be displayed to the left of the Start Your Application heading, copy and steps. The image will be hidden in the xs, sm and md breakpoints.\r\n<br><br>\r\nThe image should be a square 450px by 450px JPG with the focus of the image in the center. The circular crop is handled with CSS.",
                 "required": 0,
@@ -1677,6 +1780,7 @@
                 "key": "field_5f16518a99d7d",
                 "label": "Start Your Application Heading",
                 "name": "start_application_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "The heading to be displayed in the Start Your Application section. Defaults to 'Start Your Application Today'.",
                 "required": 0,
@@ -1696,6 +1800,7 @@
                 "key": "field_5f16520999d7e",
                 "label": "Start Your Application Lead Copy",
                 "name": "start_application_lead_copy",
+                "aria-label": "",
                 "type": "textarea",
                 "instructions": "Lead copy displayed under the Start Your Application heading. Defaults to 'Ready to get started? Take the next step to save your spot at UCF.'",
                 "required": 0,
@@ -1715,6 +1820,7 @@
                 "key": "field_5f16531899d81",
                 "label": "Start Your Application Steps",
                 "name": "start_application_steps",
+                "aria-label": "",
                 "type": "group",
                 "instructions": "The Start Your Application section will only display if the Step One, Step Two, Button Copy and Button Link fields are filled.",
                 "required": 0,
@@ -1730,6 +1836,7 @@
                         "key": "field_5f1652ae99d7f",
                         "label": "Step One Copy",
                         "name": "step_one_copy",
+                        "aria-label": "",
                         "type": "textarea",
                         "instructions": "The copy displayed in the Start Your Application section's Step 1 box.",
                         "required": 0,
@@ -1749,6 +1856,7 @@
                         "key": "field_5f1652fd99d80",
                         "label": "Step Two Copy",
                         "name": "step_two_copy",
+                        "aria-label": "",
                         "type": "textarea",
                         "instructions": "The copy displayed in the Start Your Application section's Step 2 box.",
                         "required": 0,
@@ -1768,6 +1876,7 @@
                         "key": "field_5f16536599d82",
                         "label": "Button Text",
                         "name": "step_two_button_text",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "",
                         "required": 0,
@@ -1787,6 +1896,7 @@
                         "key": "field_5f16538e99d83",
                         "label": "Button Link",
                         "name": "step_two_button_link",
+                        "aria-label": "",
                         "type": "url",
                         "instructions": "",
                         "required": 0,
@@ -1805,6 +1915,7 @@
                 "key": "field_5e9dfbc04b1b0",
                 "label": "Course Overview",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -1821,6 +1932,7 @@
                 "key": "field_5e961a02e3191",
                 "label": "Course Overview",
                 "name": "course_overview",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "Enter content to be added to the Course Overview Section.",
                 "required": 0,
@@ -1834,12 +1946,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "row",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5e9dbd9801581",
                         "label": "Course Title",
                         "name": "course_title",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Enter the course title",
                         "required": 0,
@@ -1853,12 +1967,14 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e961a02e3191"
                     },
                     {
                         "key": "field_5e9dbdc801582",
                         "label": "Course Description",
                         "name": "course_description",
+                        "aria-label": "",
                         "type": "textarea",
                         "instructions": "Enter the course description",
                         "required": 0,
@@ -1872,7 +1988,8 @@
                         "placeholder": "",
                         "maxlength": "",
                         "rows": "",
-                        "new_lines": ""
+                        "new_lines": "",
+                        "parent_repeater": "field_5e961a02e3191"
                     }
                 ]
             },
@@ -1880,6 +1997,7 @@
                 "key": "field_5ea1e9de29bab",
                 "label": "Catalog Link Text",
                 "name": "course_catalog_link_text",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Enter the text to be used for the link below the course list in the Course Overview section. If left blank the following text will be used \"View all [Degree Name] Courses\".",
                 "required": 0,
@@ -1899,6 +2017,7 @@
                 "key": "field_5e99f84712a14",
                 "label": "Degree Quotes",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -1915,6 +2034,7 @@
                 "key": "field_5e9dfbdf4b1b1",
                 "label": "Degree Quotes",
                 "name": "degree_quotes",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "Add quotes to be displayed on the degree page.",
                 "required": 0,
@@ -1928,12 +2048,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "row",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5e9dfc2e4b1b3",
                         "label": "Image",
                         "name": "degree_quote_image",
+                        "aria-label": "",
                         "type": "image",
                         "instructions": "Optional image of the person quoted.",
                         "required": 0,
@@ -1952,12 +2074,14 @@
                         "max_width": "",
                         "max_height": "",
                         "max_size": "",
-                        "mime_types": ""
+                        "mime_types": "",
+                        "parent_repeater": "field_5e9dfbdf4b1b1"
                     },
                     {
                         "key": "field_5e9f0ddea2389",
                         "label": "Image Alt Text",
                         "name": "degree_quote_image_alt",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Enter text to be used for the image alt attribute.",
                         "required": 0,
@@ -1971,12 +2095,14 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e9dfbdf4b1b1"
                     },
                     {
                         "key": "field_5e9dfc184b1b2",
                         "label": "Quote",
                         "name": "degree_quote",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "Quote to be displayed",
                         "required": 0,
@@ -1990,12 +2116,14 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e9dfbdf4b1b1"
                     },
                     {
                         "key": "field_5e9dfd994b1b4",
                         "label": "Footer",
                         "name": "degree_quote_footer",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "The footer should contain the name, title (with cite tag) and company of the person quoted.",
                         "required": 0,
@@ -2009,7 +2137,8 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e9dfbdf4b1b1"
                     }
                 ]
             },
@@ -2017,6 +2146,7 @@
                 "key": "field_5e99f86912a15",
                 "label": "Skills & Opportunities",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2033,6 +2163,7 @@
                 "key": "field_5fa1cfcf9b6ac",
                 "label": "",
                 "name": "",
+                "aria-label": "",
                 "type": "message",
                 "instructions": "",
                 "required": 0,
@@ -2050,6 +2181,7 @@
                 "key": "field_5e97183304f1e",
                 "label": "Skills Heading",
                 "name": "degree_skills_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Heading text to display above the degree's list of learnable skills.  If a value for this field isn't provided and skills are set below, this heading's text will be \"Skills You'll Learn\".",
                 "required": 0,
@@ -2069,6 +2201,7 @@
                 "key": "field_5e9618f641b44",
                 "label": "Skills List",
                 "name": "degree_skills_list",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "A list of learnable skills provided by this degree.",
                 "required": 0,
@@ -2083,11 +2216,13 @@
                 "max": 0,
                 "layout": "row",
                 "button_label": "Add Skill",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5e9f4a7f42439",
                         "label": "Skill List Item",
                         "name": "degree_skills_list_item",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "",
                         "required": 0,
@@ -2101,7 +2236,8 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e9618f641b44"
                     }
                 ]
             },
@@ -2109,6 +2245,7 @@
                 "key": "field_5e97185304f1f",
                 "label": "Career Opportunites Heading",
                 "name": "degree_careers_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Heading text to display alongside the degree's list of potential careers.  If a value for this field isn't provided, this heading's text will be \"Career Opportunities\".",
                 "required": 0,
@@ -2128,6 +2265,7 @@
                 "key": "field_5e97180504f1d",
                 "label": "Career Opportunities",
                 "name": "degree_career_list",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "Specify a list of career opportunities to display on this degree's profile.  If provided, this list replaces the list of Career Path terms assigned to this degree.",
                 "required": 0,
@@ -2142,11 +2280,13 @@
                 "max": 0,
                 "layout": "row",
                 "button_label": "Add Career Path",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5e9f4ec46e344",
                         "label": "Career Path",
                         "name": "degree_career_list_item",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "",
                         "required": 0,
@@ -2160,7 +2300,8 @@
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": ""
+                        "maxlength": "",
+                        "parent_repeater": "field_5e97180504f1d"
                     }
                 ]
             },
@@ -2168,6 +2309,7 @@
                 "key": "field_5e99f87f12a16",
                 "label": "Admission Requirements",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2184,6 +2326,7 @@
                 "key": "field_5e99ad4b5d498",
                 "label": "Admission Requirements Copy",
                 "name": "admission_copy",
+                "aria-label": "",
                 "type": "wysiwyg",
                 "instructions": "A general description of admissions requirements for this program.",
                 "required": 0,
@@ -2203,6 +2346,7 @@
                 "key": "field_5e99ad615d499",
                 "label": "Admission Requirements Highlights",
                 "name": "admission_list",
+                "aria-label": "",
                 "type": "wysiwyg",
                 "instructions": "Additional admissions requirements that are highlighted in a white box next to the general requirements copy.  A good place for adding bulleted lists or other small chunks of information that need extra prominence.",
                 "required": 0,
@@ -2222,6 +2366,7 @@
                 "key": "field_5f17a7026229f",
                 "label": "UCF Online Callout",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2238,6 +2383,7 @@
                 "key": "field_5f17a74c622a1",
                 "label": "UCF Online Heading",
                 "name": "degree_online_heading",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "The heading to be displayed in the UCF Online callout section.",
                 "required": 0,
@@ -2257,6 +2403,7 @@
                 "key": "field_5f17a7bd622a2",
                 "label": "UCF Online Copy",
                 "name": "degree_online_copy",
+                "aria-label": "",
                 "type": "textarea",
                 "instructions": "Copy displayed under the UCF Online callout heading.",
                 "required": 0,
@@ -2276,6 +2423,7 @@
                 "key": "field_5f17a808622a3",
                 "label": "UCF Online Button",
                 "name": "degree_online_button",
+                "aria-label": "",
                 "type": "group",
                 "instructions": "Button displayed under the UCF Online callout section copy.",
                 "required": 0,
@@ -2291,6 +2439,7 @@
                         "key": "field_5f17a84a622a4",
                         "label": "Button Text",
                         "name": "button_text",
+                        "aria-label": "",
                         "type": "text",
                         "instructions": "",
                         "required": 0,
@@ -2310,6 +2459,7 @@
                         "key": "field_5f17a864622a5",
                         "label": "Button Link",
                         "name": "button_link",
+                        "aria-label": "",
                         "type": "url",
                         "instructions": "",
                         "required": 0,
@@ -2328,6 +2478,7 @@
                 "key": "field_5f17a876622a6",
                 "label": "UCF Online Image",
                 "name": "degree_online_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Image to be displayed to the right of the UCF Online heading, copy and button. The image will be hidden in the xs, sm and md breakpoints.\r\n<br><br>\r\nThe image should be a square 300px by 300px JPG with the focus of the image in the center. The circular crop is handled with CSS.",
                 "required": 0,
@@ -2352,6 +2503,7 @@
                 "key": "field_5e9f3a2ed038e",
                 "label": "News and Spotlight",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2368,6 +2520,7 @@
                 "key": "field_5ea856c7532c5",
                 "label": "News Title",
                 "name": "degree_news_title",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Enter header to be added to the News Section",
                 "required": 0,
@@ -2387,6 +2540,7 @@
                 "key": "field_5ea1bc67bf52d",
                 "label": "News Tag",
                 "name": "degree_news_tag",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Specify the tag <strong>slug<\/strong> to pull UCF Today stories from for this program.",
                 "required": 0,
@@ -2406,6 +2560,7 @@
                 "key": "field_5e9f3a8cd0390",
                 "label": "Spotlight",
                 "name": "degree_spotlight",
+                "aria-label": "",
                 "type": "post_object",
                 "instructions": "Select the spotlight to use for this degree.",
                 "required": 0,
@@ -2422,7 +2577,8 @@
                 "allow_null": 1,
                 "multiple": 0,
                 "return_format": "object",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             }
         ],
         "location": [
@@ -2448,7 +2604,8 @@
             "the_content"
         ],
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_5f932570666c4",
@@ -2458,6 +2615,7 @@
                 "key": "field_5f93258d2ddac",
                 "label": "Enable Request Info Button\/Modal",
                 "name": "degree_custom_enable_rfi",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If enabled, the 'Request Information' modal and button will be included on the degree profile. <i>Note: This feature is currently only available for <strong>graduate<\/strong> programs that have an imported Slate GUID.<\/i><br><br>\r\nIf enabled and you'd like to display a button that opens the RFI modal somewhere else on the page, you can create add a [modal-toggle] shortcode with the target set to '#requestInfoModal'. <br>Example: <code>[modal-toggle class=\"btn btn-complementary\" target=\"#requestInfoModal\"]Button Copy Here[\/modal-toggle]<\/code>",
                 "required": 0,
@@ -2477,6 +2635,7 @@
                 "key": "field_5f9328062ddad",
                 "label": "Hide Colleges Grid",
                 "name": "degree_custom_hide_colleges_grid",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "Determines if the colleges grid is hidden from displaying above the footer.",
                 "required": 0,
@@ -2514,7 +2673,846 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
+    },
+    {
+        "key": "group_652fe686ac8a9",
+        "title": "Expert Fields",
+        "fields": [
+            {
+                "key": "field_652fea6be42a2",
+                "label": "General Tab",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fe687410bb",
+                "label": "First Name",
+                "name": "expert_first_name",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe6ba410bc",
+                "label": "Last Name",
+                "name": "expert_last_name",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe6e4410bd",
+                "label": "Title",
+                "name": "expert_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe6fa410be",
+                "label": "Cluster, Center or Institute",
+                "name": "expert_institute",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fe998bdf20",
+                "label": "Association Fellow",
+                "name": "expert_association_fellow",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_652fea87e42a3",
+                "label": "Languages Tab",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fe714410bf",
+                "label": "Bilingual",
+                "name": "expert_bilingual",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 1,
+                "message": "",
+                "default_value": 0,
+                "ui_on_text": "",
+                "ui_off_text": "",
+                "ui": 1
+            },
+            {
+                "key": "field_652fe73f410c0",
+                "label": "Languages",
+                "name": "expert_languages",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_652fe714410bf",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_652fe96cbdf1f",
+                        "label": "Language",
+                        "name": "language",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_652fe73f410c0"
+                    }
+                ]
+            },
+            {
+                "key": "field_652feaa5e42a4",
+                "label": "Social",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652feac4e42a5",
+                "label": "Linkedin",
+                "name": "expert_linkedin_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652fead0e42a6",
+                "label": "Facebook",
+                "name": "expert_facebook_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feadde42a7",
+                "label": "Twitter\/X",
+                "name": "expert_twitter_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feaeae42a8",
+                "label": "Instagram",
+                "name": "expert_instagram_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feaf7e42a9",
+                "label": "Other",
+                "name": "expert_other_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652feb7821649",
+                "label": "Photos",
+                "name": "expert_photos",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "The URL of the mediagraph collection of photos for this expert.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_652febae19723",
+                "label": "Availability",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652febba19724",
+                "label": "Media Availability",
+                "name": "expert_media_availability",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "choices": {
+                    "tv": "TV",
+                    "radio": "Radio",
+                    "print": "Print"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "layout": "vertical",
+                "toggle": 1,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_652fec4c30670",
+                "label": "Media Coverage",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fec5c30671",
+                "label": "Recent Media Coverage",
+                "name": "expert_media_coverage",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "row",
+                "pagination": 1,
+                "rows_per_page": 5,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Story",
+                "sub_fields": [
+                    {
+                        "key": "field_652ffa1217e49",
+                        "label": "Story Title",
+                        "name": "story_title",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_652fec5c30671"
+                    },
+                    {
+                        "key": "field_652fec7c30672",
+                        "label": "Story URL",
+                        "name": "story_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_652fec5c30671"
+                    }
+                ]
+            },
+            {
+                "key": "field_652fec8c30673",
+                "label": "Today Stories",
+                "name": "expert_today_stories",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "50",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "row",
+                "pagination": 1,
+                "rows_per_page": 5,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "sub_fields": [
+                    {
+                        "key": "field_652ffa2617e4a",
+                        "label": "Story Title",
+                        "name": "story_title",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_652fec8c30673"
+                    },
+                    {
+                        "key": "field_652fec9f30674",
+                        "label": "Story URL",
+                        "name": "story_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "placeholder": "",
+                        "parent_repeater": "field_652fec8c30673"
+                    }
+                ]
+            },
+            {
+                "key": "field_6539203d88abb",
+                "label": "Pegasus Feature",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fed94df133",
+                "label": "Pegasus Feature URL",
+                "name": "expert_pegasus_feature_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_653810b265e91",
+                "label": "Pegasus Feature Title",
+                "name": "expert_pegasus_feature_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6539205288abc",
+                "label": "Pegasus Feature Description",
+                "name": "expert_pegasus_feature_description",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_6538108965e90",
+                "label": "Pegasus Feature Image",
+                "name": "expert_pegasus_feature_image",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_6539207088abd",
+                "label": "Podcast Episode",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652feda6df134",
+                "label": "Podcast URL",
+                "name": "expert_podcast_url",
+                "aria-label": "",
+                "type": "url",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "placeholder": ""
+            },
+            {
+                "key": "field_6538112f65e92",
+                "label": "Podcast Title",
+                "name": "expert_podcast_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6539208288abe",
+                "label": "Podcast Description",
+                "name": "expert_podcast_description",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_6538115765e93",
+                "label": "Podcast Image",
+                "name": "expert_podcast_image",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "return_format": "url",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "",
+                "preview_size": "medium"
+            },
+            {
+                "key": "field_653920b63591d",
+                "label": "Videos",
+                "name": "",
+                "aria-label": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_652fedb3df135",
+                "label": "Videos",
+                "name": "expert_videos",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_652fedc2df136",
+                        "label": "Video",
+                        "name": "video",
+                        "aria-label": "",
+                        "type": "oembed",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "width": "",
+                        "height": "",
+                        "parent_repeater": "field_652fedb3df135"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "person"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-expert.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
     },
     {
         "key": "group_60afe6ef8a553",
@@ -2524,6 +3522,7 @@
                 "key": "field_60bfb3877b135",
                 "label": "Promotional Content",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2540,6 +3539,7 @@
                 "key": "field_60bfb3957b136",
                 "label": "Promo Section",
                 "name": "person_promo_section",
+                "aria-label": "",
                 "type": "post_object",
                 "instructions": "Select an existing Section to display at the bottom of the faculty member's profile.  This will be shown in lieu of the Faculty Promo Default Section set in the Customizer, if set.",
                 "required": 0,
@@ -2556,7 +3556,8 @@
                 "allow_null": 0,
                 "multiple": 0,
                 "return_format": "id",
-                "ui": 1
+                "ui": 1,
+                "bidirectional_target": []
             }
         ],
         "location": [
@@ -2580,7 +3581,282 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
+    },
+    {
+        "key": "group_64f86c462b094",
+        "title": "Modal Fields",
+        "fields": [
+            {
+                "key": "field_64f86e93520b6",
+                "label": "Modals",
+                "name": "page_modals",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "layout": "row",
+                "pagination": 1,
+                "rows_per_page": 5,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "sub_fields": [
+                    {
+                        "key": "field_64f86f78520b8",
+                        "label": "Heading",
+                        "name": "modal_heading",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "The heading that appears at the top of the modal",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "Request Information",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64fb6d6ace002",
+                        "label": "Modal ID",
+                        "name": "modal_id",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "This explicitly sets the ID of the modal. If this is left black, the ID of the modal will be automatically generated using the text in the heading.",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64f86f9f520b9",
+                        "label": "Contents",
+                        "name": "modal_contents",
+                        "aria-label": "",
+                        "type": "wysiwyg",
+                        "instructions": "The contents of the modal.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "tabs": "all",
+                        "toolbar": "full",
+                        "media_upload": 1,
+                        "delay": 0,
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64f88681c1eb7",
+                        "label": "Modal Type",
+                        "name": "modal_type",
+                        "aria-label": "",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "choices": {
+                            "default": "Default",
+                            "custom": "Custom",
+                            "slate": "Graduate Slate Form"
+                        },
+                        "default_value": "default",
+                        "return_format": "value",
+                        "multiple": 0,
+                        "allow_null": 0,
+                        "ui": 0,
+                        "ajax": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64f886f9c1eb8",
+                        "label": "Custom CSS",
+                        "name": "modal_custom_css",
+                        "aria-label": "",
+                        "type": "file",
+                        "instructions": "A stylesheet to be enqueued for this modal.",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_64f88681c1eb7",
+                                    "operator": "==",
+                                    "value": "custom"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "return_format": "url",
+                        "library": "all",
+                        "min_size": "",
+                        "max_size": "",
+                        "mime_types": "css",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64f88741c1eb9",
+                        "label": "Custom JS",
+                        "name": "modal_custom_js",
+                        "aria-label": "",
+                        "type": "file",
+                        "instructions": "Javascript that will be enqueued for this modal.",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_64f88681c1eb7",
+                                    "operator": "==",
+                                    "value": "custom"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "return_format": "url",
+                        "library": "all",
+                        "min_size": "",
+                        "max_size": "",
+                        "mime_types": "js",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64f8a83064ce9",
+                        "label": "Modal Size",
+                        "name": "modal_size",
+                        "aria-label": "",
+                        "type": "select",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "choices": {
+                            "default": "Default",
+                            "modal-sm": "Small",
+                            "modal-lg": "Large"
+                        },
+                        "default_value": "default",
+                        "return_format": "value",
+                        "multiple": 0,
+                        "allow_null": 0,
+                        "ui": 0,
+                        "ajax": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_64f86e93520b6"
+                    },
+                    {
+                        "key": "field_64f88a52a7dc6",
+                        "label": "Copy Toggle Shortcode",
+                        "name": "",
+                        "aria-label": "",
+                        "type": "message",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "message": "Click the button below to copy a simple <code>[modal-toggle]<\/code> shortcode onto your clipboard.\r\n\r\n<button type=\"button\" class=\"button copy-modal-toggle\">Copy Shortcode<\/button>\r\n<p class=\"copy-modal-message hidden\">Copied to clipboard<\/p>",
+                        "new_lines": "wpautop",
+                        "esc_html": 0,
+                        "parent_repeater": "field_64f86e93520b6"
+                    }
+                ]
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "degree"
+                }
+            ],
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "location"
+                }
+            ],
+            [
+                {
+                    "param": "taxonomy",
+                    "operator": "==",
+                    "value": "colleges"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0
     },
     {
         "key": "group_58f7a73f5fecc",
@@ -2590,6 +3866,7 @@
                 "key": "field_590ca423f6654",
                 "label": "Header Content",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2606,6 +3883,7 @@
                 "key": "field_59aed971c187c",
                 "label": "Header Content - Type of Content",
                 "name": "page_header_content_type",
+                "aria-label": "",
                 "type": "radio",
                 "instructions": "Specify the type of content that should be displayed within the header.  Choose \"Title and subtitle\" to display a styled page title and optional subtitle, or choose \"Custom content\" to add any arbitrary content.  If \"Custom content\" is selected, a page title and subtitle are NOT included by default and should be added manually.",
                 "required": 1,
@@ -2630,6 +3908,7 @@
                 "key": "field_58fe096728bcc",
                 "label": "Header Title Text",
                 "name": "page_header_title",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "Overrides the page title.",
                 "required": 0,
@@ -2657,6 +3936,7 @@
                 "key": "field_58fe097f28bcd",
                 "label": "Header Subtitle Text",
                 "name": "page_header_subtitle",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -2684,6 +3964,7 @@
                 "key": "field_5a0e009ff592e",
                 "label": "Page h1",
                 "name": "page_header_h1",
+                "aria-label": "",
                 "type": "radio",
                 "instructions": "Specify which part of the page title to use as the h1 for the page.  Styling of the title\/subtitle will not be affected by this choice.",
                 "required": 1,
@@ -2716,6 +3997,7 @@
                 "key": "field_5fa99e8d324cc",
                 "label": "Header Content Position",
                 "name": "page_header_content_position",
+                "aria-label": "",
                 "type": "select",
                 "instructions": "Determines which side of the header the title and subtitle are aligned against.  Not applicable when a header background isn't set.",
                 "required": 0,
@@ -2737,9 +4019,7 @@
                     "left": "Left",
                     "right": "Right"
                 },
-                "default_value": [
-                    "left"
-                ],
+                "default_value": "left",
                 "allow_null": 0,
                 "multiple": 0,
                 "ui": 0,
@@ -2751,6 +4031,7 @@
                 "key": "field_59aed93dc187b",
                 "label": "Header Custom Contents",
                 "name": "page_header_content",
+                "aria-label": "",
                 "type": "wysiwyg",
                 "instructions": "",
                 "required": 0,
@@ -2778,6 +4059,7 @@
                 "key": "field_590ca453f6655",
                 "label": "Header Size",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2794,6 +4076,7 @@
                 "key": "field_590ca47bf6656",
                 "label": "Header Height (sm+)",
                 "name": "page_header_height",
+                "aria-label": "",
                 "type": "radio",
                 "instructions": "Height of the page header at the -sm breakpoint and above.",
                 "required": 1,
@@ -2818,6 +4101,7 @@
                 "key": "field_590ca625f6657",
                 "label": "Header Images",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2834,6 +4118,7 @@
                 "key": "field_58f7a778185ef",
                 "label": "Header Image (-sm+)",
                 "name": "page_header_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Header image to display at the -sm breakpoint and up.",
                 "required": 0,
@@ -2858,6 +4143,7 @@
                 "key": "field_58f7a7b8185f0",
                 "label": "Header Image (-xs)",
                 "name": "page_header_image_xs",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "Header image to display at the -xs breakpoint.",
                 "required": 0,
@@ -2882,6 +4168,7 @@
                 "key": "field_590ca64ef6659",
                 "label": "Header Video",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -2898,6 +4185,7 @@
                 "key": "field_58fe08bf28bc9",
                 "label": "Header Video (MP4)",
                 "name": "page_header_mp4",
+                "aria-label": "",
                 "type": "file",
                 "instructions": "If a MP4 video is defined, video will be used instead of an image in the header at the -sm breakpoint and higher.  Note that videos will never be displayed at the -xs breakpoint, so a fallback header image should always be provided when using video.",
                 "required": 0,
@@ -2917,6 +4205,7 @@
                 "key": "field_58fe08ff28bca",
                 "label": "Header Video (WebM)",
                 "name": "page_header_webm",
+                "aria-label": "",
                 "type": "file",
                 "instructions": "Supplemental video format used by supported browsers for optimized performance.  Note that a MP4 must at least be provided for video to be displayed in the header.",
                 "required": 0,
@@ -2936,6 +4225,7 @@
                 "key": "field_590c84c7a1360",
                 "label": "Header Video Loop",
                 "name": "page_header_video_loop",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If checked, and a header video is available, the header video will loop indefinitely.",
                 "required": 0,
@@ -2982,7 +4272,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_60afe4968b8d2",
@@ -2992,6 +4283,7 @@
                 "key": "field_60afe4f815aac",
                 "label": "Job Title",
                 "name": "person_title",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -3011,6 +4303,7 @@
                 "key": "field_60afe51815aad",
                 "label": "Email",
                 "name": "person_email",
+                "aria-label": "",
                 "type": "email",
                 "instructions": "",
                 "required": 0,
@@ -3029,6 +4322,7 @@
                 "key": "field_60afe53415aae",
                 "label": "Phone",
                 "name": "person_phone",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -3048,6 +4342,7 @@
                 "key": "field_60afe54e15aaf",
                 "label": "Office Bldg and Number",
                 "name": "person_office",
+                "aria-label": "",
                 "type": "text",
                 "instructions": "",
                 "required": 0,
@@ -3085,7 +4380,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_5daf1e03c69ab",
@@ -3095,6 +4391,7 @@
                 "key": "field_5daf1e11796f7",
                 "label": "Phonebook CTAs",
                 "name": "phonebook_ctas",
+                "aria-label": "",
                 "type": "wysiwyg",
                 "instructions": "HTML to be displayed under the phone book search before a search.",
                 "required": 0,
@@ -3127,7 +4424,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_58f8d037a370f",
@@ -3137,6 +4435,7 @@
                 "key": "field_58f8d03d1abb3",
                 "label": "Background Color",
                 "name": "section_background_color",
+                "aria-label": "",
                 "type": "select",
                 "instructions": "Select the background color of the section.",
                 "required": 0,
@@ -3167,7 +4466,7 @@
                     "bg-warning": "Orange (brand-warning)",
                     "bg-danger": "Red (brand-danger)"
                 },
-                "default_value": [],
+                "default_value": false,
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
@@ -3179,6 +4478,7 @@
                 "key": "field_59088a54aa936",
                 "label": "Custom Background Color",
                 "name": "section_background_color_custom",
+                "aria-label": "",
                 "type": "color_picker",
                 "instructions": "",
                 "required": 0,
@@ -3196,12 +4496,15 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": ""
+                "default_value": "",
+                "enable_opacity": false,
+                "return_format": "string"
             },
             {
                 "key": "field_59089420aa937",
                 "label": "Text Color",
                 "name": "section_text_color",
+                "aria-label": "",
                 "type": "select",
                 "instructions": "Override the default text color within the section.\r\n\r\nNote that if you picked a predefined color in the Background Color field, an accessible text color will already be applied.",
                 "required": 0,
@@ -3241,7 +4544,7 @@
                     "text-warning-aw": "Orange AW (brand-warning, against-white accessible)",
                     "text-danger-aw": "Red AW (brand-danger, against-white accessible)"
                 },
-                "default_value": [],
+                "default_value": false,
                 "allow_null": 1,
                 "multiple": 0,
                 "ui": 1,
@@ -3253,6 +4556,7 @@
                 "key": "field_59089624aa938",
                 "label": "Custom Text Color",
                 "name": "section_text_color_custom",
+                "aria-label": "",
                 "type": "color_picker",
                 "instructions": "",
                 "required": 0,
@@ -3270,12 +4574,15 @@
                     "class": "",
                     "id": ""
                 },
-                "default_value": ""
+                "default_value": "",
+                "enable_opacity": false,
+                "return_format": "string"
             },
             {
                 "key": "field_58f8d0611abb4",
                 "label": "Background Image (-sm+)",
                 "name": "section_background_image",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "The background image to display behind the section at the -sm breakpoint and up (576px+ wide).",
                 "required": 0,
@@ -3300,6 +4607,7 @@
                 "key": "field_58f8d08b1abb5",
                 "label": "Background Image (-xs)",
                 "name": "section_background_image_xs",
+                "aria-label": "",
                 "type": "image",
                 "instructions": "The background image to display behind the section at the -xs breakpoint (<=575px wide).  This image is only displayed when a -sm background image has also been selected.",
                 "required": 0,
@@ -3324,6 +4632,7 @@
                 "key": "field_58f8d09f1abb6",
                 "label": "Add Content Container",
                 "name": "section_add_content_container",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If checked, the content will be wrapped in a container.",
                 "required": 0,
@@ -3356,7 +4665,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_58fa427b4efb7",
@@ -3366,6 +4676,7 @@
                 "key": "field_5adf83192113d",
                 "label": "Degree Data",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -3382,6 +4693,7 @@
                 "key": "field_58fa440d8a362",
                 "label": "Degree ID",
                 "name": "degree_id",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "A unique identifier for the degree.",
                 "required": 1,
@@ -3398,6 +4710,7 @@
                 "key": "field_5ae32d36ac658",
                 "label": "Search Service Degree ID",
                 "name": "degree_api_id",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The ID assigned to the program in the UCF Search Service.",
                 "required": 0,
@@ -3414,6 +4727,7 @@
                 "key": "field_5ed01d99c33fb",
                 "label": "Graduate Slate ID",
                 "name": "graduate_slate_id",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The GUID of this program in Graduate Studies' Slate instance. (Applies to graduate programs only)",
                 "required": 0,
@@ -3430,6 +4744,7 @@
                 "key": "field_6361483126897",
                 "label": "Lock Excerpt",
                 "name": "degree_lock_excerpt",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "When locked, degree excerpts will not be updated during import.",
                 "required": 0,
@@ -3449,6 +4764,7 @@
                 "key": "field_5adf859313850",
                 "label": "Plan Code",
                 "name": "degree_plan_code",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3465,6 +4781,7 @@
                 "key": "field_5adf85a813851",
                 "label": "Subplan Code",
                 "name": "degree_subplan_code",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3481,6 +4798,7 @@
                 "key": "field_5af0696eeb799",
                 "label": "Degree Short Name",
                 "name": "degree_name_short",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3497,6 +4815,7 @@
                 "key": "field_5af35d5e6475d",
                 "label": "Is Online",
                 "name": "degree_online",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "Whether or not the degree is an online program.",
                 "required": 0,
@@ -3513,6 +4832,7 @@
                 "key": "field_58fa433f8a35a",
                 "label": "Abbreviated Catalog Description",
                 "name": "degree_description",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3529,6 +4849,7 @@
                 "key": "field_5fb3ec1cb4ff6",
                 "label": "Full Catalog Description",
                 "name": "degree_description_full",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3545,6 +4866,7 @@
                 "key": "field_58fa436d8a35c",
                 "label": "Catalog URL",
                 "name": "degree_pdf",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3561,6 +4883,7 @@
                 "key": "field_5931a83da2c0f",
                 "label": "Resident Tuition",
                 "name": "degree_resident_tuition",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3577,6 +4900,7 @@
                 "key": "field_5931a857a2c10",
                 "label": "Nonresident Tuition",
                 "name": "degree_nonresident_tuition",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3593,6 +4917,7 @@
                 "key": "field_5df79878fc895",
                 "label": "Degree Outcome Data",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -3609,6 +4934,7 @@
                 "key": "field_5df107af52f9e",
                 "label": "Outcome Academic Year",
                 "name": "degree_outcome_academic_year",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The academic year of the graduates represented in the outcome data to the right.",
                 "required": 0,
@@ -3625,6 +4951,7 @@
                 "key": "field_5df107d052f9f",
                 "label": "Average Annual Earnings",
                 "name": "degree_avg_annual_earnings",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The average annual earnings of graduates who are employed full time from the graduating class of the Outcome Academic Year",
                 "required": 0,
@@ -3641,6 +4968,7 @@
                 "key": "field_5df107ed52fa0",
                 "label": "Employed Full Time (%)",
                 "name": "degree_employed_full_time",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The percentage of graduates from the Outcome Academic Year that were employed full time at the time of the NCES survey.",
                 "required": 0,
@@ -3657,6 +4985,7 @@
                 "key": "field_5df107fe52fa1",
                 "label": "Continuing Education (%)",
                 "name": "degree_continuing_education",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The percentage of graduates from the Outcome Academic Year that were pursuing additional education at the time of the NCES survey.",
                 "required": 0,
@@ -3673,6 +5002,7 @@
                 "key": "field_5df2a7190443b",
                 "label": "Employment Projection Data",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -3689,6 +5019,7 @@
                 "key": "field_5df29fdf4c2d8",
                 "label": "Report Year Start",
                 "name": "degree_prj_begin_year",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The start year in the data projection.",
                 "required": 0,
@@ -3705,6 +5036,7 @@
                 "key": "field_5df2a0084c2d9",
                 "label": "Report Year End",
                 "name": "degree_prj_end_year",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The end year in the data projection",
                 "required": 0,
@@ -3721,6 +5053,7 @@
                 "key": "field_5df2a0484c2da",
                 "label": "Beginning Employment",
                 "name": "degree_prj_begin_employment",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The estimated number of positions available for graduates with this degree in the start year of the report.",
                 "required": 0,
@@ -3737,6 +5070,7 @@
                 "key": "field_5df2a0724c2db",
                 "label": "Projected Employment",
                 "name": "degree_prj_end_employment",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The projected number of positions for graduates with this degree by the end year of the report.",
                 "required": 0,
@@ -3753,6 +5087,7 @@
                 "key": "field_5df2a0ca4c2dc",
                 "label": "Projected New Positions",
                 "name": "degree_prj_change",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The projected change in the number of positions available between the start and end year.",
                 "required": 0,
@@ -3769,6 +5104,7 @@
                 "key": "field_5df2a1024c2dd",
                 "label": "Projected New Positions Percentage",
                 "name": "degree_prj_change_percentage",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The projected change in the number of positions available between the start and end year as a precentage.",
                 "required": 0,
@@ -3785,6 +5121,7 @@
                 "key": "field_5df2a12d4c2de",
                 "label": "Projected Openings",
                 "name": "degree_prj_openings",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "The projected number of openings for graduates with this degree within the report's timeframe.",
                 "required": 0,
@@ -3801,6 +5138,7 @@
                 "key": "field_5eb457b4db29f",
                 "label": "Application Deadlines and Info",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -3817,6 +5155,7 @@
                 "key": "field_5eb45823db2a0",
                 "label": "Deadlines",
                 "name": "degree_application_deadlines",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -3830,12 +5169,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5eb458b1db2a2",
                         "label": "Deadline Type",
                         "name": "deadline_type",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -3846,12 +5187,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_5eb45823db2a0"
                     },
                     {
                         "key": "field_5eb45884db2a1",
                         "label": "Admission Term",
                         "name": "admission_term",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -3862,12 +5205,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_5eb45823db2a0"
                     },
                     {
                         "key": "field_5eb458badb2a3",
                         "label": "Deadline",
                         "name": "deadline",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -3878,7 +5223,8 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_5eb45823db2a0"
                     }
                 ]
             },
@@ -3886,6 +5232,7 @@
                 "key": "field_5eb45904db2a4",
                 "label": "Application Requirements",
                 "name": "degree_application_requirements",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -3899,12 +5246,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_5eb4591fdb2a5",
                         "label": "Requirement",
                         "name": "requirement",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -3915,7 +5264,8 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_5eb45904db2a4"
                     }
                 ]
             }
@@ -3946,7 +5296,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_60bf81b8ce7f1",
@@ -3956,6 +5307,7 @@
                 "key": "field_60bf83d59851c",
                 "label": "Title and Organizational Info",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -3972,6 +5324,7 @@
                 "key": "field_61928d9a03aea",
                 "label": "Last Name",
                 "name": "person_last_name",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -3988,6 +5341,7 @@
                 "key": "field_60bf8388c8af9",
                 "label": "Job Titles",
                 "name": "person_titles",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4001,12 +5355,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_6193ccaae5993",
                         "label": "Title",
                         "name": "job_title",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -4017,7 +5373,8 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60bf8388c8af9"
                     }
                 ]
             },
@@ -4025,6 +5382,7 @@
                 "key": "field_60bf85ec22be3",
                 "label": "Email",
                 "name": "person_email",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -4041,6 +5399,7 @@
                 "key": "field_60bf8393c8afb",
                 "label": "Phone",
                 "name": "person_phone",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -4057,6 +5416,7 @@
                 "key": "field_61704977b3a1b",
                 "label": "Employee ID",
                 "name": "person_employee_id",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 1,
@@ -4073,6 +5433,7 @@
                 "key": "field_60bf85ba32c6c",
                 "label": "ORCID ID",
                 "name": "person_orcid_id",
+                "aria-label": "",
                 "type": "read_only",
                 "instructions": "",
                 "required": 0,
@@ -4089,6 +5450,7 @@
                 "key": "field_60afe6f4124ac",
                 "label": "Education",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -4105,6 +5467,7 @@
                 "key": "field_60afe706124ad",
                 "label": "Degrees",
                 "name": "person_degrees",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4118,12 +5481,14 @@
                 "min": 0,
                 "max": 0,
                 "layout": "table",
-                "button_label": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "field_60afeac23c617",
                         "label": "Institution Name",
                         "name": "institution_name",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4134,12 +5499,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe706124ad"
                     },
                     {
                         "key": "field_60afeb303c61b",
                         "label": "Role Name",
                         "name": "role_name",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "Generally this is the name of the degree conferred.",
                         "required": 1,
@@ -4150,12 +5517,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe706124ad"
                     },
                     {
                         "key": "field_60afeae23c618",
                         "label": "Start Date",
                         "name": "start_date",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -4166,12 +5535,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe706124ad"
                     },
                     {
                         "key": "field_60afeb073c619",
                         "label": "End Date",
                         "name": "end_date",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -4182,12 +5553,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe706124ad"
                     },
                     {
                         "key": "field_60afeb233c61a",
                         "label": "Department Name",
                         "name": "department_name",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 0,
@@ -4198,12 +5571,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe706124ad"
                     },
                     {
                         "key": "field_60afeb533c61c",
                         "label": "Education Put Code",
                         "name": "education_put_code",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "The number from ORCID which identifies the record. Used for import purposes.",
                         "required": 0,
@@ -4214,7 +5589,8 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe706124ad"
                     }
                 ]
             },
@@ -4222,6 +5598,7 @@
                 "key": "field_60afe789124b0",
                 "label": "Research",
                 "name": "",
+                "aria-label": "",
                 "type": "tab",
                 "instructions": "",
                 "required": 0,
@@ -4238,6 +5615,7 @@
                 "key": "field_60afe79a124b1",
                 "label": "Books",
                 "name": "person_books",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4252,11 +5630,13 @@
                 "max": 0,
                 "layout": "row",
                 "button_label": "Add Book",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "book_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4267,12 +5647,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe79a124b1"
                     },
                     {
                         "key": "book_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4289,7 +5671,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_60afe79a124b1"
                     }
                 ]
             },
@@ -4297,6 +5681,7 @@
                 "key": "field_60afe7cb124b3",
                 "label": "Articles",
                 "name": "person_articles",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4311,11 +5696,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Article",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "article_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4326,12 +5713,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_60afe7cb124b3"
                     },
                     {
                         "key": "article_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4348,7 +5737,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_60afe7cb124b3"
                     }
                 ]
             },
@@ -4356,6 +5747,7 @@
                 "key": "field_617048c3b3a11",
                 "label": "Conference Proceedings",
                 "name": "person_proceedings",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4370,11 +5762,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Conference Proceeding",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "conf_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4385,12 +5779,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_617048c3b3a11"
                     },
                     {
                         "key": "conf_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4407,7 +5803,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_617048c3b3a11"
                     }
                 ]
             },
@@ -4415,6 +5813,7 @@
                 "key": "field_61704906b3a13",
                 "label": "Grants",
                 "name": "person_grants",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4429,11 +5828,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Grant",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "grant_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4444,12 +5845,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_61704906b3a13"
                     },
                     {
                         "key": "grant_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4466,7 +5869,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_61704906b3a13"
                     }
                 ]
             },
@@ -4474,6 +5879,7 @@
                 "key": "field_6170491db3a15",
                 "label": "Honorific Awards",
                 "name": "person_awards",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4488,11 +5894,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Honorific Award",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "award_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4503,12 +5911,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_6170491db3a15"
                     },
                     {
                         "key": "award_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4525,7 +5935,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_6170491db3a15"
                     }
                 ]
             },
@@ -4533,6 +5945,7 @@
                 "key": "field_61704936b3a17",
                 "label": "Patents",
                 "name": "person_patents",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4547,11 +5960,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Patent",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "patent_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4562,12 +5977,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_61704936b3a17"
                     },
                     {
                         "key": "patent_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4584,7 +6001,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_61704936b3a17"
                     }
                 ]
             },
@@ -4592,6 +6011,7 @@
                 "key": "field_61704954b3a19",
                 "label": "Clinical Trials",
                 "name": "person_trials",
+                "aria-label": "",
                 "type": "repeater",
                 "instructions": "",
                 "required": 0,
@@ -4606,11 +6026,13 @@
                 "max": 0,
                 "layout": "block",
                 "button_label": "Add Clinical Trial",
+                "rows_per_page": 20,
                 "sub_fields": [
                     {
                         "key": "trial_citation",
                         "label": "Citation",
                         "name": "citation",
+                        "aria-label": "",
                         "type": "read_only",
                         "instructions": "",
                         "required": 1,
@@ -4621,12 +6043,14 @@
                             "id": ""
                         },
                         "copy_to_clipboard": 0,
-                        "display_type": "text"
+                        "display_type": "text",
+                        "parent_repeater": "field_61704954b3a19"
                     },
                     {
                         "key": "trial_additional_contributors",
                         "label": "Additional Contributors",
                         "name": "additional_contributors",
+                        "aria-label": "",
                         "type": "post_object",
                         "instructions": "",
                         "required": 0,
@@ -4643,7 +6067,9 @@
                         "allow_null": 1,
                         "multiple": 1,
                         "return_format": "object",
-                        "ui": 1
+                        "ui": 1,
+                        "bidirectional_target": [],
+                        "parent_repeater": "field_61704954b3a19"
                     }
                 ]
             }
@@ -4669,7 +6095,8 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     },
     {
         "key": "group_5acbcd281486f",
@@ -4679,6 +6106,7 @@
                 "key": "field_5acbcd4b7f670",
                 "label": "Disable UCF Header",
                 "name": "page_disable_ucf_header",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If checked, the UCF Header will not be loaded.",
                 "required": 0,
@@ -4698,6 +6126,7 @@
                 "key": "field_5a0dead0cd525",
                 "label": "Exclude Primary Site Navigation",
                 "name": "page_header_exclude_nav",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "Controls whether or not the primary site navigation should be displayed at the top of the page.",
                 "required": 0,
@@ -4717,6 +6146,7 @@
                 "key": "field_5acbcd8f7f671",
                 "label": "Disable UCF Footer",
                 "name": "page_disable_ucf_footer",
+                "aria-label": "",
                 "type": "true_false",
                 "instructions": "If checked, the UCF Footer will not be loaded.",
                 "required": 0,
@@ -4736,6 +6166,7 @@
                 "key": "field_6022fde2db7e9",
                 "label": "Critical CSS",
                 "name": "critical_css",
+                "aria-label": "",
                 "type": "textarea",
                 "instructions": "Copy and paste critical CSS to utilize on this page.  Do not include <code>&lt;style&gt;<\/code> tags.  If critical CSS is provided, it will be inserted at the very top of the document, and enqueued stylesheets will be asynchronously loaded.\r\n<br><br>\r\nCritical CSS should be generated by a developer using a service such as <a href=\"https:\/\/github.com\/addyosmani\/critical#cli\" target=\"_blank\">Critical<\/a> any time more than basic text changes are made to the page header or content immediately underneath it (including Section content) that qualifies as being \"above the fold\" on desktop or mobile devices.",
                 "required": 0,
@@ -4768,6 +6199,7 @@
         "instruction_placement": "label",
         "hide_on_screen": "",
         "active": true,
-        "description": ""
+        "description": "",
+        "show_in_rest": false
     }
 ]

@@ -25,7 +25,7 @@ if ( $title ):
 <div class="header-content-inner">
 	<div class="container d-flex flex-column h-100">
 		<div class="row header-person-img-row">
-			<div class="col-6 offset-3 col-lg-4 offset-lg-0 mt-lg-4 mt-xl-0 px-0 px-md-5 pl-lg-3 pr-lg-4 text-center text-lg-left">
+			<div class="col-6 offset-3 col-lg-4 offset-lg-0 mt-4 px-0 px-md-5 pl-lg-3 pr-lg-4 text-center text-lg-left">
 				<div class="header-person-img embed-responsive embed-responsive-1by1 media-background-container rounded-circle">
 					<?php echo $thumbnail; ?>
 				</div>

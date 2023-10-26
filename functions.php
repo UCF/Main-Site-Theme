@@ -19,6 +19,7 @@ include_once THEME_DIR . 'includes/post-list-layouts.php';
 include_once THEME_DIR . 'includes/people-functions.php';
 include_once THEME_DIR . 'includes/college-functions.php';
 include_once THEME_DIR . 'includes/section-menu-functions.php';
+include_once THEME_DIR . 'includes/modals.php';
 
 
 /**

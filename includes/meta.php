@@ -61,7 +61,7 @@ function enqueue_frontend_assets() {
 ?>
 	var FACULTY_SEARCH_SETTINGS = {
 		faculty: {
-			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?_fields=id,title,link,thumbnails,person_titles&meta_key=person_type&meta_value=faculty' ); ?>",
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/person?_fields=id,title,link,thumbnails,person_titles&meta_key=person_type&meta_value=expert' ); ?>",
 			selectedAction: function(event, obj) {
 				window.location = obj.link;
 			}
@@ -76,6 +76,12 @@ function enqueue_frontend_assets() {
 			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/departments?_fields=id,name,slug,taxonomy&post_types=person' ) ?>",
 			selectedAction: function(event, obj) {
 				window.location = "<?php echo $faculty_search_url; ?>?department=" + obj.slug;
+			}
+		},
+		expertise: {
+			dataEndpoint: "<?php echo get_rest_url( null, 'wp/v2/expertise?_fields=id,name,slug,taxonomy&post_types=person' ) ?>",
+			selectedAction: function(event, obj) {
+				window.location = "<?php echo $faculty_search_url; ?>?expertise=" + obj.slug;
 			}
 		}
 	};
