@@ -13,10 +13,8 @@ $profile_section = get_theme_mod( 'expert_profile_closing_section' );
 <?php get_template_part( 'template-parts/expert/bio_meta' ); ?>
 <?php get_template_part( 'template-parts/expert/news' ); ?>
 <?php get_template_part( 'template-parts/expert/marketing' ); ?>
-<?php
-if ( $profile_section ) {
-    echo do_shortcode( "[ucf-section id='$profile_section'][/ucf-section]" );
-}
-?>
+<?php if ( $profile_section ) : ?>
+<?php echo do_shortcode( "[ucf-section id='$profile_section'][/ucf-section]" ); ?>
+<?php endif; ?>
 
 <?php get_footer(); ?>

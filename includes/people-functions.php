@@ -210,3 +210,36 @@ function get_additional_contributors_markup( $work ) {
 
 	return $retval;
 }
+
+function enqueue_expert_section_scripts() {
+	$obj = get_queried_object();
+
+	if ( $obj->post_type === 'person' ) {
+		$theme = wp_get_theme();
+		$theme_version = $theme->get( 'Version' );
+
+		// Get the section to be added
+		$section_id = get_theme_mod( 'expert_profile_closing_section' );
+		if ( ! $section_id ) return;
+
+		$css_file_id = get_field( 'ucf_section_stylesheet', $section_id );
+		$js_file_id = get_field( 'ucf_section_javascript', $section_id );
+
+		if ( $css_file_id ) {
+			$css_url = wp_get_attachment_url( $css_file_id );
+			if ( $css_url ) {
+				wp_enqueue_style( "expert-profile-section-style-$css_file_id", $css_url, array( 'style' ), $theme_version );
+			}
+		}
+
+		if ( $js_file_id ) {
+			$js_url = wp_get_attachment_url( $js_file_id );
+			if ( $js_url ) {
+				wp_enqueue_script( "expert-profile-section-style-$js_file_id", $js_url, array( 'script' ), $theme_version, true );
+			}
+		}
+
+	}
+}
+
+add_action( 'wp_enqueue_scripts', 'enqueue_expert_section_scripts', 10, 0 );
