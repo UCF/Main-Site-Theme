@@ -70,14 +70,20 @@ if ( $post->post_type === 'person' ) :
 				</div>
 			</div>
 		</div>
+		<?php if ( $videos ): ?>
 		<div class="container mb-4">
 			<h3 class="font-condensed text-uppercase my-4 mb-sm-5">Videos</h3>
+			<div class="row">
 			<?php foreach( $videos as $video ) : ?>
+			<div class="col-md-6 col-lg-4">
 				<div class="embed-responsive embed-responsive-16by9">
 				<?php echo do_shortcode( $video['video'] ); ?>
 				</div>
+			</div>
 			<?php endforeach; ?>
+			</div>
 		</div>
+		<?php endif; ?>
 	</section>
 <?php
 	endif;

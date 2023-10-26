@@ -3,17 +3,21 @@ $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
 	$biography = trim( apply_filters( 'the_content', $post->post_content ) );
-	$title = get_field( 'expert_title', $post->ID );
-	$institute = get_field( 'expert_institute', $post->ID );
+	
 	$association = get_field( 'expert_association_fellow', $post->ID );
+	$colleges     = wp_get_post_terms( $post->ID, 'colleges' );
+	$departments  = wp_get_post_terms( $post->ID, 'departments' );
+	$has_org_info     = $colleges || $departments;
 	$bilingual = get_field( 'expert_bilingual', $post->ID );
 	$lang_array = get_field( 'expert_languages', $post->ID );
-	$request_url = get_theme_mod_or_default( 'expert_request_form_url' );
-	$request_text = get_theme_mod_or_default( 'expert_request_button_text' );
+
 	$languages = array();
-	array_walk_recursive( $lang_array, function( $l ) use ( &$languages ) {
-		$languages[] = $l; 
-	} );
+
+	if ( $bilingual && is_array( $lang_array ) ) {
+		array_walk_recursive( $lang_array, function( $l ) use ( &$languages ) {
+			$languages[] = $l; 
+		} );
+	}
 
 	$media_availability = get_field( 'expert_media_availability', $post->ID );
 
@@ -52,24 +56,12 @@ if ( $post->post_type === 'person' ) :
 					?>
 					<div class="<?php echo $meta_col; ?>">
 						<h2 class="h6 text-uppercase text-default mb-4" id="meta-heading">Information about <?php the_title(); ?></h2>
-						<dl>
-						<?php if ( $title ) : ?>
-							<dt>Title</dt>
-							<dl><?php echo $title; ?></dl>
-						<?php endif; ?>
-						<?php if ( $institute ) : ?>
-							<dt>Cluster, Center, or Institute</dt>
-							<dl><?php echo $institute; ?></dl>
-						<?php endif;?>
 						<?php if ( $association ) : ?>
+						<dl>
 							<dt>Association Fellow</dt>
 							<dd><?php echo $association; ?></dd>
-						<?php endif;?>
-						<?php if ( $bilingual ) : ?>
-							<dt>Languages Spoken</dt>
-							<dd><?php echo implode( ', ', $languages ); ?></dd>
-						<?php endif; ?>
 						</dl>
+						<?php endif;?>
 						<h3 class="h6">Media Availability</h3>
 						<ul class="list-unstyled">
 						<?php if ( in_array( 'tv', $media_availability ) ) : ?>
@@ -82,10 +74,55 @@ if ( $post->post_type === 'person' ) :
 							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Print</li>
 						<?php endif; ?>
 						</ul>
-						<?php get_template_part( 'template-parts/expert/social' ); ?>
-						<?php if ( $request_url ) : ?>
-						<a class="btn btn-primary" href="<?php echo $request_url; ?>" rel="nofollow" target="_blank"><?php echo $request_text ; ?></a>
+						<?php if ( $bilingual ) : ?>
+						<dl>
+							<dt>Languages Spoken</dt>
+							<dd><?php echo implode( ', ', $languages ); ?></dd>
+						</dl>
 						<?php endif; ?>
+						<?php if ( $has_org_info ) : ?>
+								<?php if ( $colleges ) : ?>
+								<dl>
+									<dt>College(s)</dt>
+									<dd>
+										<?php
+										foreach ( $colleges as $college ) :
+											$college_url = get_term_link( $college->term_id );
+											if ( $college_url ) :
+										?>
+											<a href="<?php echo $college_url; ?>" class="mb-2">
+												<?php echo $college->name; ?>
+											</a>
+										<?php else : ?>
+											<span class="d-block">
+												<?php echo $college->name; ?>
+											</span>
+										<?php
+											endif;
+										endforeach;
+										?>
+									</dd>
+								</dl>
+								<?php endif; ?>
+
+								<?php if ( $departments ) : ?>
+								<dl>
+									<dt>Department(s)</dt>
+									<dd>
+										<?php
+										foreach ( $departments as $department ) :
+										?>
+											<span class="d-block mb-2">
+												<?php echo $department->name; ?>
+											</span>
+										<?php
+										endforeach;
+										?>
+									</dd>
+								</dl>
+								<?php endif; ?>
+							<?php endif; ?>
+						<?php get_template_part( 'template-parts/expert/social' ); ?>
 					</div>
 					<?php endif; ?>
 				</div>
