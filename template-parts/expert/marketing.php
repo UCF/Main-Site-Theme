@@ -70,14 +70,22 @@ if ( $post->post_type === 'person' ) :
 				</div>
 			</div>
 		</div>
-		<div class="container mb-4">
-			<h3 class="font-condensed text-uppercase my-4 mb-sm-5">Videos</h3>
-			<?php foreach( $videos as $video ) : ?>
-				<div class="embed-responsive embed-responsive-16by9">
-				<?php echo do_shortcode( $video['video'] ); ?>
+		<?php if ( $videos ): ?>
+		<div class="jumbotron jumbotron-fluid bg-secondary mb-0">
+			<div class="container">
+				<h3 class="font-condensed text-uppercase mb-4 mb-sm-5">Videos</h3>
+				<div class="row">
+				<?php foreach( $videos as $video ) : ?>
+				<div class="col-md-6 col-lg-4">
+					<div class="embed-responsive embed-responsive-16by9">
+					<?php echo do_shortcode( $video['video'] ); ?>
+					</div>
 				</div>
-			<?php endforeach; ?>
+				<?php endforeach; ?>
+				</div>
+			</div>
 		</div>
+		<?php endif; ?>
 	</section>
 <?php
 	endif;

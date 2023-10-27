@@ -745,6 +745,33 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	// Get sections for the dropdown
+	$sections = get_posts( array(
+		'post_type'      => 'ucf_section',
+		'posts_per_page' => -1
+	) );
+
+	$section_choices = array();
+
+	array_walk_recursive( $sections, function( $section ) use ( &$section_choices ) {
+		$section_choices[$section->ID] = $section->post_title;
+	} );
+
+	$wp_customize->add_setting(
+		'expert_profile_closing_section'
+	);
+
+	$wp_customize->add_control(
+		'expert_profile_closing_section',
+		array(
+			'label'       => 'Expert Profile Closing Section',
+			'description' => 'The section that appears at the end of the expert profile pages.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'faculty_search',
+			'type'        => 'select',
+			'choices'     => $section_choices
+		)
+	);
+
 	// Phonebook
 	$wp_customize->add_setting(
 		'search_service_url'
