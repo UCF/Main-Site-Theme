@@ -102,6 +102,11 @@ function enqueue_frontend_assets() {
 	) {
 		wp_deregister_style( 'wp-block-library' );
 	}
+
+	if ( $post && $post->post_type === 'page' && $optimizely_code = get_field( 'page_optimizely_code' ) ) {
+		wp_enqueue_script( 'optimizely-script', "https://cdn.optimizely.com/js/$optimizely_code.js", null, null, false );
+	}
+
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
