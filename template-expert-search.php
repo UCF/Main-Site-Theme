@@ -78,14 +78,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 	$faculty_wp_query = new WP_Query( $args );
 }
 ?>
-
-<div class="container mt-4 mt-md-5 pb-4 pb-md-5">
-	<?php the_content(); ?>
-</div>
-
-<hr role="presentation" class="my-0">
-
-<div class="jumbotron bg-faded mb-0 px-0">
+<div class="jumbotron bg-faded clip-caret clip-caret-down mb-0 px-0">
 	<div class="container">
 		<p class="lead mb-5">
 			<?php echo $faculty_wp_query->found_posts; ?>
@@ -240,5 +233,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 </div>
 
 <?php wp_reset_postdata(); ?>
+
+<?php the_content(); ?>
 
 <?php get_footer(); ?>

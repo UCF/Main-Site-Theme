@@ -3,7 +3,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
 	$biography = trim( apply_filters( 'the_content', $post->post_content ) );
-	
+
 	$association = get_field( 'expert_association_fellow', $post->ID );
 	$colleges     = wp_get_post_terms( $post->ID, 'colleges' );
 	$departments  = wp_get_post_terms( $post->ID, 'departments' );
@@ -15,7 +15,7 @@ if ( $post->post_type === 'person' ) :
 
 	if ( $bilingual && is_array( $lang_array ) ) {
 		array_walk_recursive( $lang_array, function( $l ) use ( &$languages ) {
-			$languages[] = $l; 
+			$languages[] = $l;
 		} );
 	}
 
@@ -62,6 +62,7 @@ if ( $post->post_type === 'person' ) :
 							<dd><?php echo $association; ?></dd>
 						</dl>
 						<?php endif;?>
+						<?php if ( $media_availability ) : ?>
 						<h3 class="h6">Media Availability</h3>
 						<ul class="list-unstyled">
 						<?php if ( in_array( 'tv', $media_availability ) ) : ?>
@@ -74,6 +75,7 @@ if ( $post->post_type === 'person' ) :
 							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Print</li>
 						<?php endif; ?>
 						</ul>
+						<?php endif; ?>
 						<?php if ( $bilingual ) : ?>
 						<dl>
 							<dt>Languages Spoken</dt>
