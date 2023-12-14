@@ -80,8 +80,7 @@ if ( $post->post_type === 'person' ) :
 											</ul>
 										</dd>
 								<?php endif; ?>
-								<!-- I want to add social media component here usually it works out of wordpress env -->
-								<?php include('./social.php') ?>
+								<?php get_template_part('template-parts/expert/social') ?>
 							</div>
 						</dl>
 						<?php if ( $request_url ) : ?>
