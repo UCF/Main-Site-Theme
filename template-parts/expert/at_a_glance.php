@@ -17,6 +17,8 @@ if ( $post->post_type === 'person' ) :
 	$col_class        = $has_title_info && $has_meta_info ? 'col-sm-6' : 'col' ;
 
 	$page_permalink = get_permalink( get_page_by_path( 'experts' ) );
+	// $media_availability = get_field( 'expert_media_availability', $post->ID );
+	$media_availability = false;
 
 	if ( $has_any_info ) :
 ?>

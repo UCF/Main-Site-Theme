@@ -19,14 +19,11 @@ if ( $post->post_type === 'person' ) :
 		} );
 	}
 
-	// $media_availability = get_field( 'expert_media_availability', $post->ID );
-	$media_availability = false;
-
 	$meta = isset( $title ) ||
-		isset( $institute ) ||
 		isset( $association ) ||
 		isset( $languages ) ||
-		isset( $media_availability );
+		! empty( $colleges ) ||
+		! empty( $departments );
 
 	if ( $biography || $meta ) :
 		$aria_labelledby = '';
@@ -111,7 +108,6 @@ if ( $post->post_type === 'person' ) :
 								</dl>
 								<?php endif; ?>
 							<?php endif; ?>
-						<?php get_template_part( 'template-parts/expert/social' ); ?>
 					</div>
 					<?php endif; ?>
 				</div>
