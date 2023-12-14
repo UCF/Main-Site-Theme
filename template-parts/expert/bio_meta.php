@@ -111,7 +111,6 @@ if ( $post->post_type === 'person' ) :
 								</dl>
 								<?php endif; ?>
 							<?php endif; ?>
-						<?php get_template_part( 'template-parts/expert/social' ); ?>
 					</div>
 					<?php endif; ?>
 				</div>
