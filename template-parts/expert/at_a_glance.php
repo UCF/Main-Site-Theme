@@ -12,7 +12,7 @@ if ( $post->post_type === 'person' ) :
 
 	$request_url = get_theme_mod_or_default( 'expert_request_form_url' );
 	$request_text = get_theme_mod_or_default( 'expert_request_button_text' );
-	
+
 	$has_any_info     = $has_title_info || $has_meta_info;
 	$col_class        = $has_title_info && $has_meta_info ? 'col-sm-6' : 'col' ;
 
@@ -26,18 +26,6 @@ if ( $post->post_type === 'person' ) :
 				<div class="row">
 					<div class="col-lg-8 offset-lg-4 mb-lg-2">
 						<dl class="row mb-0">
-							<?php if ( $has_title_info ) : ?>
-							<div class="<?php echo $col_class; ?>">
-								<?php if ( $title ) : ?>
-								<dt class="h6 text-uppercase text-muted mb-2">Title</dt>
-								<dd class="h5 mt-2 mb-4"><?php echo $title; ?></dd>
-								<?php endif; ?>
-								<?php if ( $institute ) : ?>
-								<dt class="h6 text-uppercase text-muted mb-2">Cluster, Center, or Institute</dt>
-								<dd class="h5 mt-2 mb-4"><?php echo $institute; ?></dd>
-								<?php endif; ?>
-							</div>
-							<?php endif; ?>
 							<?php if ( $has_meta_info ) : ?>
 							<div class="<?php echo $col_class; ?>">
 								<?php if ( $expertise ) : ?>
@@ -75,6 +63,26 @@ if ( $post->post_type === 'person' ) :
 								<?php endif; ?>
 							</div>
 							<?php endif; ?>
+							<div class="<?php echo $col_class; ?>">
+								<?php if ( $media_availability ) : ?>
+										<dt class="h6 text-uppercase text-muted mb-2">Media Availability</dt>
+										<dd class="mt-2 mb-4">
+											<ul class="list-unstyled">
+													<?php if ( in_array( 'tv', $media_availability ) ) : ?>
+														<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Television</li>
+													<?php endif; ?>
+													<?php if ( in_array( 'radio', $media_availability ) ) : ?>
+														<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Radio</li>
+													<?php endif; ?>
+													<?php if ( in_array( 'print', $media_availability ) ) : ?>
+														<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Print</li>
+													<?php endif; ?>
+											</ul>
+										</dd>
+								<?php endif; ?>
+								<!-- I want to add social media component here usually it works out of wordpress env -->
+								<?php include('./social.php') ?>
+							</div>
 						</dl>
 						<?php if ( $request_url ) : ?>
 						<div>
