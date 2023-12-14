@@ -31,10 +31,12 @@ if ( $post->post_type === 'person' ) :
 								<?php if ( $expertise ) : ?>
 								<dt class="h6 text-uppercase text-muted mb-2">Area(s) of Expertise</dt>
 								<dd class="h5 mt-2 mb-4">
-									<ul class="list-unstyled list-inline">
+									<ul class="list-unstyled">
 									<?php foreach( $expertise as $exp ) : ?>
 										<li class="list-inline-item my-1 mr-2">
-											<?php echo $exp->name; ?>
+											<a href="<?php echo get_expert_filter_url( $exp->name ); ?>">
+												<?php echo $exp->name; ?>
+											</a>
 										</li>
 									<?php endforeach; ?>
 									</ul>
