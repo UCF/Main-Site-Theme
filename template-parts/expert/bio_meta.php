@@ -19,7 +19,8 @@ if ( $post->post_type === 'person' ) :
 		} );
 	}
 
-	$media_availability = get_field( 'expert_media_availability', $post->ID );
+	// $media_availability = get_field( 'expert_media_availability', $post->ID );
+	$media_availability = false;
 
 	$meta = isset( $title ) ||
 		isset( $institute ) ||
