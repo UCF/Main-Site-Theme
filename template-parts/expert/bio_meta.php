@@ -63,20 +63,6 @@ if ( $post->post_type === 'person' ) :
 							<dd><?php echo $association; ?></dd>
 						</dl>
 						<?php endif;?>
-						<?php if ( $media_availability ) : ?>
-						<h3 class="h6">Media Availability</h3>
-						<ul class="list-unstyled">
-						<?php if ( in_array( 'tv', $media_availability ) ) : ?>
-							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Television</li>
-						<?php endif; ?>
-						<?php if ( in_array( 'radio', $media_availability ) ) : ?>
-							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Radio</li>
-						<?php endif; ?>
-						<?php if ( in_array( 'print', $media_availability ) ) : ?>
-							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Print</li>
-						<?php endif; ?>
-						</ul>
-						<?php endif; ?>
 						<?php if ( $bilingual ) : ?>
 						<dl>
 							<dt>Languages Spoken</dt>

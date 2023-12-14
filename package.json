@@ -32,5 +32,8 @@
   },
   "browserslist": [
     "last 2 versions"
-  ]
+  ],
+  "dependencies": {
+    "gulp-cli": "^2.3.0"
+  }
 }

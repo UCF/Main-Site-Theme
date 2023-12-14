@@ -5,6 +5,7 @@
 
 $obj      = get_queried_object();
 $title    = get_header_title( $obj );
+$professional_title    = get_field( 'expert_title', $post->ID );
 
 // Adjust heading color if customizer option set to white
 $heading_color_class = get_theme_mod_or_default( 'person_heading_text_color' ) === 'person-heading-text-inverse' ? ' person-heading-text-inverse' : '';
@@ -37,6 +38,10 @@ if ( $title ):
 					<?php echo $title; ?>
 				</h1>
 				<div class="mb-4">
+					<!-- Professional Title -->
+					<?php if($professional_title) :?>
+						<span class='h5'><?php  echo $professional_title ?> </span>
+					<?php endif; ?>
 				<?php if ( $subtitles ) :
 				?>
 					<span class="lead d-inline-block mb-2<?php echo $heading_color_class; ?>">
