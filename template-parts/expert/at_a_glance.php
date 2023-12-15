@@ -36,7 +36,7 @@ if ( $post->post_type === 'person' ) :
 									<ul class="list-unstyled">
 									<?php foreach( $expertise as $exp ) : ?>
 										<li class="list-inline-item my-1 mr-2">
-											<a href="<?php echo get_expert_filter_url( $exp->name ); ?>">
+											<a class="badge badge-secondary" href="<?php echo get_expert_filter_url( $exp->name ); ?>">
 												<?php echo $exp->name; ?>
 											</a>
 										</li>
