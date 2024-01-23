@@ -3,7 +3,7 @@ $post = isset( $post ) ? $post : get_queried_object();
 
 if ( $post->post_type === 'person' ) :
 	$biography = trim( apply_filters( 'the_content', $post->post_content ) );
-	
+
 	$association = get_field( 'expert_association_fellow', $post->ID );
 	$colleges     = wp_get_post_terms( $post->ID, 'colleges' );
 	$departments  = wp_get_post_terms( $post->ID, 'departments' );
@@ -15,17 +15,15 @@ if ( $post->post_type === 'person' ) :
 
 	if ( $bilingual && is_array( $lang_array ) ) {
 		array_walk_recursive( $lang_array, function( $l ) use ( &$languages ) {
-			$languages[] = $l; 
+			$languages[] = $l;
 		} );
 	}
 
-	$media_availability = get_field( 'expert_media_availability', $post->ID );
-
 	$meta = isset( $title ) ||
-		isset( $institute ) ||
 		isset( $association ) ||
 		isset( $languages ) ||
-		isset( $media_availability );
+		! empty( $colleges ) ||
+		! empty( $departments );
 
 	if ( $biography || $meta ) :
 		$aria_labelledby = '';
@@ -62,18 +60,6 @@ if ( $post->post_type === 'person' ) :
 							<dd><?php echo $association; ?></dd>
 						</dl>
 						<?php endif;?>
-						<h3 class="h6">Media Availability</h3>
-						<ul class="list-unstyled">
-						<?php if ( in_array( 'tv', $media_availability ) ) : ?>
-							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Television</li>
-						<?php endif; ?>
-						<?php if ( in_array( 'radio', $media_availability ) ) : ?>
-							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Radio</li>
-						<?php endif; ?>
-						<?php if ( in_array( 'print', $media_availability ) ) : ?>
-							<li class="list-item"><span class="fa fa-check-circle text-success mr-2"></span> Print</li>
-						<?php endif; ?>
-						</ul>
 						<?php if ( $bilingual ) : ?>
 						<dl>
 							<dt>Languages Spoken</dt>
@@ -122,7 +108,6 @@ if ( $post->post_type === 'person' ) :
 								</dl>
 								<?php endif; ?>
 							<?php endif; ?>
-						<?php get_template_part( 'template-parts/expert/social' ); ?>
 					</div>
 					<?php endif; ?>
 				</div>

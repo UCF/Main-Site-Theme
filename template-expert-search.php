@@ -78,14 +78,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 	$faculty_wp_query = new WP_Query( $args );
 }
 ?>
-
-<div class="container mt-4 mt-md-5 pb-4 pb-md-5">
-	<?php the_content(); ?>
-</div>
-
-<hr role="presentation" class="my-0">
-
-<div class="jumbotron bg-faded mb-0 px-0">
+<div class="jumbotron bg-faded clip-caret clip-caret-down mb-0 px-0">
 	<div class="container">
 		<p class="lead mb-5">
 			<?php echo $faculty_wp_query->found_posts; ?>
@@ -114,7 +107,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 				$person_departments = get_the_terms( $post, 'departments' );
 				$person_tags        = get_the_tags();
 			?>
-			<li class="list-group-item mb-2 mb-sm-3 py-sm-3">
+			<li class="list-group-item expert-list-item mb-2 mb-sm-3 py-sm-3">
 				<div class="row no-gutters w-100">
 					<div class="col-lg-8 col-xl-7">
 						<div class="row no-gutters position-relative w-100">
@@ -240,5 +233,7 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 </div>
 
 <?php wp_reset_postdata(); ?>
+
+<?php the_content(); ?>
 
 <?php get_footer(); ?>
