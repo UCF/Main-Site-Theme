@@ -147,7 +147,7 @@ add_filter( 'ucf_degree_get_post_metadata', 'mainsite_degree_format_post_data', 
  * @return array
  */
 function mainsite_degree_get_post_terms( $terms, $program ) {
-	$careers = main_site_get_remote_response_json( "{$program->careers}ranked/", array() );
+	$careers = main_site_get_remote_response_json( "{$program->careers}", array() );
 
 	if ( $careers !== null ) {
 		$terms['career_paths'] = $careers;
