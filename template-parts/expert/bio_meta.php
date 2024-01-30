@@ -53,7 +53,6 @@ if ( $post->post_type === 'person' ) :
 						$meta_col = $meta ? $left_col_class : $right_col_class;
 					?>
 					<div class="<?php echo $meta_col; ?>">
-						<h2 class="h6 text-uppercase text-default mb-4" id="meta-heading">Information about <?php the_title(); ?></h2>
 						<?php if ( $association ) : ?>
 						<dl>
 							<dt>Association Fellow</dt>
@@ -69,7 +68,7 @@ if ( $post->post_type === 'person' ) :
 						<?php if ( $has_org_info ) : ?>
 								<?php if ( $colleges ) : ?>
 								<dl>
-									<dt>College(s)</dt>
+									<dt>College</dt>
 									<dd>
 										<?php
 										foreach ( $colleges as $college ) :
@@ -93,7 +92,7 @@ if ( $post->post_type === 'person' ) :
 
 								<?php if ( $departments ) : ?>
 								<dl>
-									<dt>Department(s)</dt>
+									<dt>Department</dt>
 									<dd>
 										<?php
 										foreach ( $departments as $department ) :
