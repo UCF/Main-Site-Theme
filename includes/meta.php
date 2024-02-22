@@ -14,10 +14,6 @@ function enqueue_frontend_assets() {
 
 	wp_enqueue_style( 'style', THEME_CSS_URL . '/style.min.css', null, $theme_version );
 
-	if ( $fontkey = get_theme_mod_or_default( 'cloud_typography_key' ) ) {
-		wp_enqueue_style( 'webfont', $fontkey, null, null );
-	}
-
 	// Deregister jquery and re-register newer version in the document footer.
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js', null, null, true );
@@ -142,14 +138,6 @@ $gw_verify = get_theme_mod_or_default( 'gw_verify' );
 if ( $gw_verify ):
 ?>
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
-<?php endif; ?>
-
-<?php
-// Preload Cloud.Typography
-$cloud_typography_key = get_theme_mod_or_default( 'cloud_typography_key' );
-if ( $cloud_typography_key ) :
-?>
-<link rel="preload" href="<?php echo $cloud_typography_key; ?>" as="style">
 <?php endif; ?>
 
 <?php // Preload Font Awesome ?>
