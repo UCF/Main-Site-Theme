@@ -13,7 +13,7 @@
  */
 function modify_people_post_type_args( $args ) {
 	$args['rewrite'] = array(
-		'slug'       => 'faculty',
+		'slug'       => 'expert',
 		'with_front' => false
 	);
 
