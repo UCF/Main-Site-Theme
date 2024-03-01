@@ -27,7 +27,6 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
 										   . 'faculty to networking with top employers across Central Florida to gaining '
 										   . 'first-hand experience in internships nearby. Achieve your degree and more as a Knight.',
-	'cloud_typography_key'                => '//cloud.typography.com/730568/675644/css/fonts.css',
 	'gw_verify'                           => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                              => 'GTM-MBPLZH',
 	'google_map_key'                      => '',
@@ -128,13 +127,6 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'phonebook',
 		array(
 			'title' => 'Phonebook'
-		)
-	);
-
-	$wp_customize->add_section(
-		THEME_CUSTOMIZER_PREFIX . 'webfonts',
-		array(
-			'title' => 'Web Fonts'
 		)
 	);
 
@@ -802,27 +794,6 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Search Service URL',
 			'description' => 'The base url of the UCF Search service.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'phonebook'
-		)
-	);
-
-	// Web Fonts
-	$wp_customize->add_setting(
-		'cloud_typography_key',
-		array(
-			'default' => get_theme_mod_default( 'cloud_typography_key' )
-		)
-	);
-
-	$wp_customize->add_control(
-		'cloud_typography_key',
-		array(
-			'type'        => 'text',
-			'label'       => 'Cloud.Typography CSS Key URL',
-			'description' => 'The CSS Key provided by Cloud.Typography for this project.  <strong>Only include the value in the "href" portion of the link
-								tag provided; e.g. "//cloud.typography.com/000000/000000/css/fonts.css".</strong><br><br>NOTE: Make sure the Cloud.Typography
-								project has been configured to deliver fonts to this site\'s domain.<br>
-								See the <a target="_blank" href="http://www.typography.com/cloud/user-guide/managing-domains">Cloud.Typography docs on managing domains</a> for more info.',
-			'section'     => THEME_CUSTOMIZER_PREFIX . 'webfonts'
 		)
 	);
 

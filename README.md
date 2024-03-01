@@ -58,7 +58,6 @@ These plugins add desirable features, some of which are environment-specific for
 ## Configuration
 * Ensure that menus have been created and assigned to the Header Menu and Footer Menu locations.  Other sites on your environment that depend on the main site header navigation and/or the UCF Footer plugin should be configured to reference these menus' REST API endpoints.
 * Import field groups (`dev/acf-fields.json`) using the ACF importer under Custom Fields > Tools.
-* Ensure that webfonts have been properly configured to a [Cloud.Typography](https://www.typography.com/cloud/welcome/) CSS Key that [allows access to your environment](https://dashboard.typography.com/user-guide/managing-domains).
 * Create and set a static front page under Settings > Reading.
 * Create a redirect group with at least 1 redirect rule in the Redirection plugin for the Main Site/Alert Switchover.
 
@@ -82,8 +81,8 @@ Note that compiled, minified css and js files are included within the repo.  Cha
     To enable BrowserSync, set `sync` to `true` and assign `syncTarget` the base URL of a site on your local WordPress instance that will use this theme, such as `http://localhost/wordpress/my-site/`.  Your `syncTarget` value will vary depending on your local host setup.
 
     The full list of modifiable config values can be viewed in `gulpfile.js` (see `config` variable).
-3. Run `gulp default` to process front-end assets.
-4. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](#installation-requirements).
-5. Set Main Site Theme as the active theme.
-6. Make sure you've completed [all theme configuration steps](#configuration).
-7. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
+4. Run `gulp default` to process front-end assets.
+5. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](#installation-requirements).
+6. Set Main Site Theme as the active theme.
+7. Make sure you've completed [all theme configuration steps](#configuration).
+8. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
