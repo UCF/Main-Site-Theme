@@ -21,7 +21,7 @@ function enqueue_frontend_assets() {
 
 	// Conditionally include the UCF Header
 	if ( !$post || $post && get_field( 'page_disable_ucf_header', $post->ID ) !== true ) {
-		wp_enqueue_script( 'ucf-header', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
+		wp_enqueue_script( 'ucfhb-script', '//universityheader.ucf.edu/bar/js/university-header.js?use-1200-breakpoint=1', null, null, true );
 	}
 
 	// Enqueue Tether and our main theme script file
@@ -107,6 +107,15 @@ function enqueue_frontend_assets() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
+function ucfhb_script_handle( $tag, $handle, $src ) {
+	if ( 'ucfhb-script' === $handle ) {
+		$tag = str_replace( 'ucfhb-script-js', 'ucfhb-script', $tag );
+	}
+
+	return $tag;
+}
+
+add_filter( 'script_loader_tag', 'ucfhb_script_handle', 10, 3 );
 
 /**
  * Registers an action that enqueues this theme's custom
@@ -165,23 +174,6 @@ remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
 remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 remove_action( 'wp_print_styles', 'print_emoji_styles' );
 add_filter( 'emoji_svg_url', '__return_false' );
-
-
-/**
- * Adds ID attribute to UCF Header script.
- **/
-function add_id_to_ucfhb( $url ) {
-	if (
-		( false !== strpos($url, 'bar/js/university-header.js' ) )
-		|| ( false !== strpos( $url, 'bar/js/university-header-full.js' ) )
-	) {
-      remove_filter( 'clean_url', 'add_id_to_ucfhb', 10, 3 );
-      return "$url' id='ucfhb-script";
-    }
-    return $url;
-}
-
-add_filter( 'clean_url', 'add_id_to_ucfhb', 10, 1 );
 
 
 /**
