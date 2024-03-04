@@ -107,6 +107,15 @@ function enqueue_frontend_assets() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
+function ucfhb_script_handle( $tag, $handle, $src ) {
+	if ( 'ucfhb-script' === $handle ) {
+		$tag = str_replace( 'ucfhb-script-js', 'ucfhb-script', $tag );
+	}
+
+	return $tag;
+}
+
+add_filter( 'script_loader_tag', 'ucfhb_script_handle', 10, 3 );
 
 /**
  * Registers an action that enqueues this theme's custom
