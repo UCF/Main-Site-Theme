@@ -107,9 +107,20 @@ function enqueue_frontend_assets() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
+/**
+ * Replaces the ucf-header bar ID with the correct
+ * ID needed for the script to work correctly.
+ *
+ * @author Jim Barnes
+ * @since v3.19.4
+ *
+ * @param string $tag The script tag being filtered
+ * @param string $handle The handle of the header script
+ * @param string $src The source of the script
+ */
 function ucfhb_script_handle( $tag, $handle, $src ) {
-	if ( 'ucfhb-script' === $handle ) {
-		$tag = str_replace( 'ucfhb-script-js', 'ucfhb-script', $tag );
+	if ( false !== strpos( $src, 'universityheader.ucf.edu' ) ) {
+		$tag = str_replace( "{$handle}-js", 'ucfhb-script', $tag );
 	}
 
 	return $tag;
