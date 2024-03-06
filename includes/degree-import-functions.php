@@ -17,22 +17,30 @@
  */
 function get_api_catalog_description( $program, $description_type='Catalog Description' ) {
 	$retval = '';
+	$fallback = '';
 
 	if ( ! class_exists( 'UCF_Degree_Config' ) ) {
 		return $retval;
 	}
 
-	// Determine the catalog description type's ID
+	// Get the preferred description type
+	$catalog_desc_type_id = get_theme_mod( 'preferred_degree_description_type' );
+
 	$description_types = UCF_Degree_Config::get_description_types();
-	$catalog_desc_type_id = null;
+	$fallback_desc_type_id = null;
 
 	if ( $description_types ) {
 		foreach ( $description_types as $desc_id => $desc_name ) {
 			if ( strtolower( $desc_name ) === strtolower( $description_type ) ) {
-				$catalog_desc_type_id = $desc_id;
+				$fallback_desc_type_id = $desc_id;
 				break;
 			}
 		}
+	}
+
+	// Determine the catalog description type's ID
+	if ( ! $catalog_desc_type_id ) {
+		$catalog_desc_type_id = $fallback_desc_type_id;
 	}
 
 	// Find the program's description by the catalog description type ID
@@ -43,10 +51,14 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
 			if ( $d->description_type->id === $catalog_desc_type_id ) {
 				$retval = $d->description;
 			}
+
+			if ( $d->description_type->id === $fallback_desc_type_id ) {
+				$fallback = $d->description;
+			}
 		}
 	}
 
-	return $retval;
+	return ! empty ( $retval ) ? $retval : $fallback;
 }
 
 
