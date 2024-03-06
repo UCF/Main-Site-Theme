@@ -15,32 +15,36 @@
  * @param string $description_type The name of the Program Description Type to retrieve
  * @return string The program's catalog description
  */
-function get_api_catalog_description( $program, $description_type='Catalog Description' ) {
+function get_api_catalog_description( $program, $description_type='Catalog Description', $use_preferred = false ) {
 	$retval = '';
 	$fallback = '';
+
+	$catalog_desc_type_id = null;
+	$fallback_desc_type_id = null;
 
 	if ( ! class_exists( 'UCF_Degree_Config' ) ) {
 		return $retval;
 	}
 
-	// Get the preferred description type
-	$catalog_desc_type_id = get_theme_mod( 'preferred_degree_description_type' );
+	if ( $use_preferred ) {
+		$preferred_desc_type = get_theme_mod( 'preferred_degree_description_type' );
+		$catalog_desc_type_id = $preferred_desc_type ? (int) $preferred_desc_type : null;
+	}
 
 	$description_types = UCF_Degree_Config::get_description_types();
-	$fallback_desc_type_id = null;
 
 	if ( $description_types ) {
 		foreach ( $description_types as $desc_id => $desc_name ) {
 			if ( strtolower( $desc_name ) === strtolower( $description_type ) ) {
+				if ( ! $use_preferred ) {
+					$catalog_desc_type_id = $desc_id;
+				}
+
 				$fallback_desc_type_id = $desc_id;
+
 				break;
 			}
 		}
-	}
-
-	// Determine the catalog description type's ID
-	if ( ! $catalog_desc_type_id ) {
-		$catalog_desc_type_id = $fallback_desc_type_id;
 	}
 
 	// Find the program's description by the catalog description type ID
@@ -58,7 +62,7 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
 		}
 	}
 
-	return ! empty ( $retval ) ? $retval : $fallback;
+	return ! empty( $retval ) ? $retval : $fallback;
 }
 
 
@@ -72,7 +76,7 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
 function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['degree_hours']            = $program->credit_hours !== '' ? $program->credit_hours : null;
 	$meta['page_header_height']      = 'header-media-default';
-	$meta['degree_description']      = get_api_catalog_description( $program );
+	$meta['degree_description']      = get_api_catalog_description( $program, 'Catalog Description', true );
 	$meta['degree_description_full'] = get_api_catalog_description( $program, 'Full Catalog Description' );
 	$meta['graduate_slate_id']       = $program->graduate_slate_id ?? null;
 
