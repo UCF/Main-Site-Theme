@@ -63,14 +63,15 @@ function get_header_images( $obj ) {
  **/
 function get_header_videos( $obj ) {
 	$retval = array(
-		'webm' => get_field( 'page_header_webm', $obj ),
-		'mp4'  => get_field( 'page_header_mp4', $obj )
+		'webm'   => get_field( 'page_header_webm', $obj ),
+		'mp4'    => get_field( 'page_header_mp4', $obj ),
+		'mp4_xs' => get_field( 'page_header_mp4_xs', $obj )
 	);
 
 	$retval = array_filter( $retval );
 
 	// MP4 must be available to display video successfully cross-browser
-	if ( isset( $retval['mp4'] ) ) {
+	if ( isset( $retval['mp4']) || isset( $retval['mp4_xs'] ) ) {
 		return $retval;
 	}
 

@@ -120,6 +120,11 @@ function get_media_background_video( $videos, $loop=false ) {
 		<?php if ( isset( $videos['mp4'] ) ) : ?>
 		<source src="<?php echo $videos['mp4']; ?>" type="video/mp4">
 		<?php endif; ?>
+
+		<?php if ( isset( $videos['mp4_xs'] ) ) : ?>
+		<source src="<?php echo $videos['mp4_xs']; ?>" type="video/mp4">
+		<?php endif; ?>
+
 		<?php if ( function_exists( 'UCF\Video_Vtt\Tools\get_track_markup' ) ) : ?>
 		<?php echo UCF\Video_Vtt\Tools\get_track_markup( $videos['mp4'] ); ?>
 		<?php endif; ?>
