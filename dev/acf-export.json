@@ -4070,7 +4070,9 @@
                 "ui": 0,
                 "return_format": "value",
                 "ajax": 0,
-                "placeholder": ""
+                "placeholder": "",
+                "allow_custom": 0,
+                "search_placeholder": ""
             },
             {
                 "key": "field_59aed93dc187b",
@@ -4182,7 +4184,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": "png,jpg,jpeg"
+                "mime_types": "png,jpg,jpeg",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_58f7a7b8185f0",
@@ -4207,7 +4211,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": "png,jpg,jpeg"
+                "mime_types": "png,jpg,jpeg",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_590ca64ef6659",
@@ -4228,11 +4234,11 @@
             },
             {
                 "key": "field_58fe08bf28bc9",
-                "label": "Header Video (MP4)",
+                "label": "Header Video (MP4) (-sm+)",
                 "name": "page_header_mp4",
                 "aria-label": "",
                 "type": "file",
-                "instructions": "If a MP4 video is defined, video will be used instead of an image in the header at the -sm breakpoint and higher.  Note that videos will never be displayed at the -xs breakpoint, so a fallback header image should always be provided when using video.",
+                "instructions": "Header video to display at the -sm breakpoint and up. If a MP4 video is defined, video will be used instead of an image in the header.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4240,11 +4246,35 @@
                     "class": "",
                     "id": ""
                 },
+                "relevanssi_exclude": 0,
+                "uploader": "",
                 "return_format": "url",
-                "library": "all",
                 "min_size": "",
                 "max_size": "",
-                "mime_types": "mp4"
+                "mime_types": "mp4",
+                "library": "all"
+            },
+            {
+                "key": "field_6605b1ee1a448",
+                "label": "Header Video (MP4) (-xs)",
+                "name": "page_header_mp4_xs",
+                "aria-label": "",
+                "type": "file",
+                "instructions": "Header video to display at the -xs breakpoint. if the video is not defined, header video -sm+ will be displayed for all sizes.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "uploader": "",
+                "return_format": "url",
+                "min_size": "",
+                "max_size": "",
+                "mime_types": "mp4",
+                "library": "all"
             },
             {
                 "key": "field_58fe08ff28bca",
@@ -4264,7 +4294,8 @@
                 "library": "all",
                 "min_size": "",
                 "max_size": "",
-                "mime_types": "webm"
+                "mime_types": "webm",
+                "uploader": ""
             },
             {
                 "key": "field_590c84c7a1360",
@@ -4318,7 +4349,12 @@
         "hide_on_screen": "",
         "active": true,
         "description": "",
-        "show_in_rest": false
+        "show_in_rest": 0,
+        "acfe_display_title": "",
+        "acfe_autosync": "",
+        "acfe_form": 0,
+        "acfe_meta": "",
+        "acfe_note": ""
     },
     {
         "key": "group_60afe4968b8d2",
