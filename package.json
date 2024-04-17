@@ -35,5 +35,8 @@
   ],
   "dependencies": {
     "gulp-cli": "^2.3.0"
+  },
+  "optionalDependencies": {
+    "@fortawesome/fontawesome-pro": "*"
   }
 }
