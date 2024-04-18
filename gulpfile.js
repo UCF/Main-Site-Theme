@@ -164,11 +164,6 @@ gulp.task('move-components-fontawesome', () => {
   }
 });
 
-// Copy Font Awesome 6 pro files
-gulp.task('move-components-fontawesome6', () => {
-
-});
-
 // Athena Framework web font processing
 gulp.task('move-components-athena-fonts', () => {
   return gulp.src([`${config.packagesPath}/ucf-athena-framework/dist/fonts/**/*`])
