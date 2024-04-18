@@ -160,9 +160,26 @@ if ( $gw_verify ):
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
 <?php endif; ?>
 
-<?php // Preload Font Awesome ?>
-<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
-
+<?php // Preload Font Awesome
+$fonts_array = array(
+	'/font-awesome-pro/fa-brands-400.woff2',
+	'/font-awesome-pro/fa-duotone-900.woff2',
+	'/font-awesome-pro/fa-light-300.woff2',
+	'/font-awesome-pro/fa-regular-400.woff2',
+	'/font-awesome-pro/fa-sharp-light-300.woff2',
+	'/font-awesome-pro/fa-sharp-regular-400.woff2',
+	'/font-awesome-pro/fa-sharp-solid-900.woff2',
+	'/font-awesome-pro/fa-sharp-thin-100.woff2',
+	'/font-awesome-pro/fa-solid-900.woff2',
+	'/font-awesome-pro/fa-thin-100.woff2',
+	'/font-awesome-pro/fa-v4compatibility.woff2',
+);
+foreach ($fonts_array as $font) {
+    ?>
+<link rel="preload" href="<?php echo THEME_FONT_URL . $font?>?v=<?php echo THEME_FA_PRO_VERSION; ?>" as="font" type="font/woff2" crossorigin>
+<?php
+}
+?>
 <?php
 // Inline critical CSS
 $critical_css = get_critical_css();
