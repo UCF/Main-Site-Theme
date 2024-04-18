@@ -156,6 +156,11 @@ gulp.task('move-components-fontawesome', () => {
   return gulp.src([`${config.packagesPath}/font-awesome/fonts/**/*`])
     .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome`));
 });
+// Copy Font Awesome 6 pro files
+gulp.task('move-components-fontawesome6', () => {
+  return gulp.src([`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/**/*`])
+    .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome-pro`));
+});
 
 // Athena Framework web font processing
 gulp.task('move-components-athena-fonts', () => {

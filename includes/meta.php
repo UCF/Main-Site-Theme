@@ -162,6 +162,7 @@ if ( $gw_verify ):
 
 <?php // Preload Font Awesome ?>
 <link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome-pro/fa-regular-400.woff2?v=6.5.2" as="font" type="font/woff2" crossorigin>
 
 <?php
 // Inline critical CSS
