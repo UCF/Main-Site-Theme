@@ -171,6 +171,7 @@ gulp.task('move-components-athena-fonts', () => {
 // Run all component-related tasks
 gulp.task('components', gulp.parallel(
   'move-components-fontawesome',
+  'move-components-fontawesome6',
   'move-components-athena-fonts'
 ));
 
