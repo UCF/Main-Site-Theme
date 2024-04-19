@@ -191,8 +191,29 @@ gulp.task('scss-build-theme', () => {
   return buildCSS(`${config.src.scssPath}/style.scss`);
 });
 
+// Check to see if Fontawesome-pro folder exists in node_modules then will overwrite the $fa-font-path: variable in _variables.scss
+gulp.task('scss-variable-fontawesome-pro', (done) => {
+
+  let fontPath = fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`)
+    ? '../fonts/font-awesome-pro'
+    : '../fonts/font-awesome';
+  const existingContent = fs.readFileSync(`${config.src.scssPath}/_variables.scss`, 'utf8');
+
+    if (existingContent.includes('$fa-font-path:')) {
+      // If it exists, overwrite it
+      const newContent = existingContent.replace(/\$fa-font-path:.*;/, `$fa-font-path: '${fontPath}';`);
+      fs.writeFileSync(`${config.src.scssPath}/_variables.scss`, newContent);
+    } else {
+      // If it doesn't exist, append it to the file
+      const newContent = `${existingContent}\n$fa-font-path: '${fontPath}';\n`;
+      fs.writeFileSync(`${config.src.scssPath}/_variables.scss`, newContent);
+    }
+
+    done();
+})
+
 // All theme css-related tasks
-gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
+gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme','scss-variable-fontawesome-pro' ));
 
 
 //
