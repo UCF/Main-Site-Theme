@@ -15,7 +15,6 @@ const merge = require('merge');
 const critical = require('critical');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
-const sassVars = require('gulp-sass-variables');
 const replace = require('gulp-replace');
 
 
@@ -207,17 +206,8 @@ gulp.task('scss-variable-fontawesome-pro', (done) => {
   return gulp.src(`${config.src.scssPath}/_variables.scss`)
     .pipe(replace(fontPathRegex, fontPathReplacement))
     .pipe(gulp.dest(`${config.src.scssPath}`))
-    .on('end', () => {
-      // Check if $fa-font-path was found and replaced
-      const existingFontPath = fs.readFileSync(`${config.src.scssPath}/_variables.scss`, 'utf8');
-      if (!existingFontPath.match(fontPathRegex)) {
-        // If $fa-font-path doesn't exist, add it at the end of the file
-        fs.appendFileSync(`${config.src.scssPath}/_variables.scss`, `\n${fontPathReplacement}`);
-      }
-      done();
-    });
+    .on('end', done);
 });
-
 
 // All theme css-related tasks
 gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme','scss-variable-fontawesome-pro' ));
