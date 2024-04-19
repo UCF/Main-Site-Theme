@@ -15,6 +15,10 @@ const merge = require('merge');
 const critical = require('critical');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const sassVars = require('gulp-sass-variables');
+const replace = require('gulp-replace');
+
+
 
 
 let config = {
@@ -193,24 +197,27 @@ gulp.task('scss-build-theme', () => {
 
 // Check to see if Fontawesome-pro folder exists in node_modules then will overwrite the $fa-font-path: variable in _variables.scss
 gulp.task('scss-variable-fontawesome-pro', (done) => {
-
-  let fontPath = fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`)
+  const fontPath = fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`)
     ? '../fonts/font-awesome-pro'
     : '../fonts/font-awesome';
-  const existingContent = fs.readFileSync(`${config.src.scssPath}/_variables.scss`, 'utf8');
 
-    if (existingContent.includes('$fa-font-path:')) {
-      // If it exists, overwrite it
-      const newContent = existingContent.replace(/\$fa-font-path:.*;/, `$fa-font-path: '${fontPath}';`);
-      fs.writeFileSync(`${config.src.scssPath}/_variables.scss`, newContent);
-    } else {
-      // If it doesn't exist, append it to the file
-      const newContent = `${existingContent}\n$fa-font-path: '${fontPath}';\n`;
-      fs.writeFileSync(`${config.src.scssPath}/_variables.scss`, newContent);
-    }
+  const fontPathRegex = /\$fa-font-path:\s*['"][^'"]*['"];/;
+  const fontPathReplacement = `$fa-font-path: '${fontPath}';`;
 
-    done();
-})
+  return gulp.src(`${config.src.scssPath}/_variables.scss`)
+    .pipe(replace(fontPathRegex, fontPathReplacement))
+    .pipe(gulp.dest(`${config.src.scssPath}`))
+    .on('end', () => {
+      // Check if $fa-font-path was found and replaced
+      const existingFontPath = fs.readFileSync(`${config.src.scssPath}/_variables.scss`, 'utf8');
+      if (!existingFontPath.match(fontPathRegex)) {
+        // If $fa-font-path doesn't exist, add it at the end of the file
+        fs.appendFileSync(`${config.src.scssPath}/_variables.scss`, `\n${fontPathReplacement}`);
+      }
+      done();
+    });
+});
+
 
 // All theme css-related tasks
 gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme','scss-variable-fontawesome-pro' ));

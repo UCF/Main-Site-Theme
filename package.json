@@ -34,7 +34,9 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "gulp-cli": "^2.3.0"
+    "gulp-cli": "^2.3.0",
+    "gulp-replace": "^1.1.4",
+    "gulp-sass-variables": "^1.2.0"
   },
   "optionalDependencies": {
     "@fortawesome/fontawesome-pro": "^6.5.2"
