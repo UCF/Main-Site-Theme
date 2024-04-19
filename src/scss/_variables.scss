@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-$fa-font-path: '../fonts/font-awesome-pro';
+$fa-font-path: '../fonts/font-awesome' !default;
 
 $line-height-base: 1.65;
 

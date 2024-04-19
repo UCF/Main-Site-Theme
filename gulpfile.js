@@ -9,15 +9,13 @@ const isFixed = require('gulp-eslint-if-fixed');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass')(require('sass'));
+const sassVariables = require('gulp-sass-variables');
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const merge = require('merge');
 const critical = require('critical');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
-const replace = require('gulp-replace');
-
-
 
 
 let config = {
@@ -52,6 +50,28 @@ if (fs.existsSync('./gulp-config.json')) {
 // Helper functions
 //
 
+/**
+ * Returns a boolean indicating whether or not
+ * font-awesome pro is installed.
+ * @returns {bool} Whether or not font-awesome pro is installed
+ */
+function usingFontAwesomePro() {
+  return fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`);
+}
+
+/**
+ * Determine which font awesome project type
+ * we're using and return back the appropriate
+ * font path.
+ *
+ * @return {string} Returning the font path.
+ */
+function getFontPath() {
+  return usingFontAwesomePro()
+    ? '../fonts/font-awesome-pro'
+    : '../fonts/font-awesome';
+}
+
 // Base SCSS linting function
 function lintSCSS(src) {
   return gulp.src(src)
@@ -64,7 +84,12 @@ function lintSCSS(src) {
 function buildCSS(src, dest) {
   dest = dest || config.dist.cssPath;
 
+  const fontPath = getFontPath();
+
   return gulp.src(src)
+    .pipe(sassVariables({
+      '$fa-font-path': fontPath
+    }))
     .pipe(sass({
       includePaths: [config.src.scssPath, config.packagesPath]
     })
@@ -157,7 +182,7 @@ function serverServe(done) {
 // Copy Font Awesome files
 gulp.task('move-components-fontawesome', () => {
   try {
-    fs.statSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`);
+    fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`);
     return gulp.src([`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/**/*`])
       .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome-pro`));
   } catch (error) {
@@ -194,23 +219,8 @@ gulp.task('scss-build-theme', () => {
   return buildCSS(`${config.src.scssPath}/style.scss`);
 });
 
-// Check to see if Fontawesome-pro folder exists in node_modules then will overwrite the $fa-font-path: variable in _variables.scss
-gulp.task('scss-variable-fontawesome-pro', (done) => {
-  const fontPath = fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`)
-    ? '../fonts/font-awesome-pro'
-    : '../fonts/font-awesome';
-
-  const fontPathRegex = /\$fa-font-path:\s*['"][^'"]*['"];/;
-  const fontPathReplacement = `$fa-font-path: '${fontPath}';`;
-
-  return gulp.src(`${config.src.scssPath}/_variables.scss`)
-    .pipe(replace(fontPathRegex, fontPathReplacement))
-    .pipe(gulp.dest(`${config.src.scssPath}`))
-    .on('end', done);
-});
-
 // All theme css-related tasks
-gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme','scss-variable-fontawesome-pro' ));
+gulp.task('css', gulp.series('scss-lint-theme', 'scss-build-theme'));
 
 
 //
