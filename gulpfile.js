@@ -9,6 +9,7 @@ const isFixed = require('gulp-eslint-if-fixed');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const sass = require('gulp-sass')(require('sass'));
+const sassVariables = require('gulp-sass-variables');
 const sassLint = require('gulp-sass-lint');
 const uglify = require('gulp-uglify');
 const merge = require('merge');
@@ -49,6 +50,28 @@ if (fs.existsSync('./gulp-config.json')) {
 // Helper functions
 //
 
+/**
+ * Returns a boolean indicating whether or not
+ * font-awesome pro is installed.
+ * @returns {bool} Whether or not font-awesome pro is installed
+ */
+function usingFontAwesomePro() {
+  return fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`);
+}
+
+/**
+ * Determine which font awesome project type
+ * we're using and return back the appropriate
+ * font path.
+ *
+ * @return {string} Returning the font path.
+ */
+function getFontPath() {
+  return usingFontAwesomePro()
+    ? '../fonts/font-awesome-pro'
+    : '../fonts/font-awesome';
+}
+
 // Base SCSS linting function
 function lintSCSS(src) {
   return gulp.src(src)
@@ -61,7 +84,12 @@ function lintSCSS(src) {
 function buildCSS(src, dest) {
   dest = dest || config.dist.cssPath;
 
+  const fontPath = getFontPath();
+
   return gulp.src(src)
+    .pipe(sassVariables({
+      '$fa-font-path': fontPath
+    }))
     .pipe(sass({
       includePaths: [config.src.scssPath, config.packagesPath]
     })
@@ -153,15 +181,13 @@ function serverServe(done) {
 
 // Copy Font Awesome files
 gulp.task('move-components-fontawesome', () => {
-  try {
-    fs.statSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`);
-    return gulp.src([`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/**/*`])
+    if (fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`)){
+      return gulp.src([`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/**/*`])
       .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome-pro`));
-  } catch (error) {
-    console.log(error);
-    return gulp.src([`${config.packagesPath}/font-awesome/fonts/**/*`])
+    } else {
+      return gulp.src([`${config.packagesPath}/font-awesome/fonts/**/*`])
       .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome`));
-  }
+    }
 });
 
 // Athena Framework web font processing
