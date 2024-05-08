@@ -43,7 +43,9 @@
                 "max_width": 600,
                 "max_height": 600,
                 "max_size": "",
-                "mime_types": ""
+                "mime_types": "",
+                "uploader": "",
+                "acfe_thumbnail": 0
             }
         ],
         "location": [
@@ -149,7 +151,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": ""
+                "mime_types": "",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_5efb4d4223a6d",
@@ -251,7 +255,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": ""
+                "mime_types": "",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_599f29b374d43",
@@ -273,6 +279,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_599f2cbf5920d",
@@ -298,7 +305,9 @@
                         "max_height": "",
                         "max_size": "",
                         "mime_types": "",
-                        "parent_repeater": "field_599f29b374d43"
+                        "parent_repeater": "field_599f29b374d43",
+                        "uploader": "",
+                        "acfe_thumbnail": 0
                     },
                     {
                         "key": "field_599f2ccd5920e",
@@ -398,7 +407,8 @@
                 "placeholder": "",
                 "maxlength": "",
                 "rows": "",
-                "new_lines": "wpautop"
+                "new_lines": "wpautop",
+                "acfe_textarea_code": 0
             },
             {
                 "key": "field_59a08d0de6535",
@@ -474,7 +484,10 @@
                 "multiple": 1,
                 "return_format": "object",
                 "ui": 1,
-                "bidirectional_target": []
+                "bidirectional_target": [],
+                "save_custom": 0,
+                "save_post_type": "",
+                "save_post_status": ""
             },
             {
                 "key": "field_6230e3e0be96d",
@@ -516,6 +529,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5a1d88e9d3b43",
@@ -581,7 +595,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": "png,jpg,jpeg"
+                "mime_types": "png,jpg,jpeg",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_6491b3cc708e8",
@@ -606,7 +622,65 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": "png,jpg,jpeg"
+                "mime_types": "png,jpg,jpeg",
+                "uploader": "",
+                "acfe_thumbnail": 0
+            },
+            {
+                "key": "field_663be02e4187d",
+                "label": "Degree Fallback Header Image (-md)",
+                "name": "degree_fallback_header_image_md",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "Header image to display at the -md breakpoint.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "uploader": "",
+                "return_format": "id",
+                "acfe_thumbnail": 0,
+                "min_width": 992,
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "png,jpg,jpeg",
+                "preview_size": "header-img-md",
+                "library": "all"
+            },
+            {
+                "key": "field_663be0424187e",
+                "label": "Degree Fallback Header Image (-lg)",
+                "name": "degree_fallback_header_image_lg",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "Header image to display at the -lg breakpoint.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "uploader": "",
+                "return_format": "id",
+                "acfe_thumbnail": 0,
+                "min_width": 1200,
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "png,jpg,jpeg",
+                "preview_size": "header-img-lg",
+                "library": "all"
             },
             {
                 "key": "field_59a5a672eab38",
@@ -667,7 +741,10 @@
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1,
-                "bidirectional_target": []
+                "bidirectional_target": [],
+                "save_custom": 0,
+                "save_post_type": "",
+                "save_post_status": ""
             },
             {
                 "key": "field_599f2a198079c",
@@ -748,7 +825,10 @@
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1,
-                "bidirectional_target": []
+                "bidirectional_target": [],
+                "save_custom": 0,
+                "save_post_type": "",
+                "save_post_status": ""
             },
             {
                 "key": "field_599f2a348079d",
@@ -787,6 +867,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_59a438d36507f",
@@ -811,7 +892,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_59a438ba6507e"
+                        "parent_repeater": "field_59a438ba6507e",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     },
                     {
                         "key": "field_642ee41db45aa",
@@ -854,7 +938,12 @@
         "hide_on_screen": "",
         "active": true,
         "description": "",
-        "show_in_rest": 0
+        "show_in_rest": 0,
+        "acfe_display_title": "",
+        "acfe_autosync": "",
+        "acfe_form": 0,
+        "acfe_meta": "",
+        "acfe_note": ""
     },
     {
         "key": "group_5e985ee080417",
@@ -953,7 +1042,9 @@
                         "max_width": "",
                         "max_height": "",
                         "max_size": "",
-                        "mime_types": ""
+                        "mime_types": "",
+                        "uploader": "",
+                        "acfe_thumbnail": 0
                     },
                     {
                         "key": "field_5f9addf15c2ce",
@@ -995,7 +1086,12 @@
                         "append": "",
                         "maxlength": ""
                     }
-                ]
+                ],
+                "acfe_seamless_style": 0,
+                "acfe_group_modal": 0,
+                "acfe_group_modal_close": 0,
+                "acfe_group_modal_button": "",
+                "acfe_group_modal_size": "large"
             },
             {
                 "key": "field_5f9ae0f0c8e71",
@@ -1054,7 +1150,9 @@
                         "max_width": "",
                         "max_height": "",
                         "max_size": "",
-                        "mime_types": "png, jpg"
+                        "mime_types": "png, jpg",
+                        "uploader": "",
+                        "acfe_thumbnail": 0
                     },
                     {
                         "key": "field_5e976d0d22df6",
@@ -1150,7 +1248,12 @@
                         "ui_on_text": "",
                         "ui_off_text": ""
                     }
-                ]
+                ],
+                "acfe_seamless_style": 0,
+                "acfe_group_modal": 0,
+                "acfe_group_modal_close": 0,
+                "acfe_group_modal_button": "",
+                "acfe_group_modal_size": "large"
             },
             {
                 "key": "field_5f9adba88bd5d",
@@ -1191,7 +1294,9 @@
                         "max_width": "",
                         "max_height": "",
                         "max_size": "",
-                        "mime_types": "png, jpg"
+                        "mime_types": "png, jpg",
+                        "uploader": "",
+                        "acfe_thumbnail": 0
                     },
                     {
                         "key": "field_5f9adba98bd61",
@@ -1287,7 +1392,12 @@
                         "ui_on_text": "",
                         "ui_off_text": ""
                     }
-                ]
+                ],
+                "acfe_seamless_style": 0,
+                "acfe_group_modal": 0,
+                "acfe_group_modal_close": 0,
+                "acfe_group_modal_button": "",
+                "acfe_group_modal_size": "large"
             },
             {
                 "key": "field_5faeb8ce5d327",
@@ -1462,7 +1572,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": ""
+                "mime_types": "",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_5e99d98c3902e",
@@ -1504,6 +1616,7 @@
                 "layout": "block",
                 "button_label": "Add Highlight",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5fa1adbb0c966",
@@ -1520,6 +1633,7 @@
                             "id": ""
                         },
                         "layout": "block",
+                        "parent_repeater": "field_5e99e5b773cc6",
                         "sub_fields": [
                             {
                                 "key": "field_5e99e5fd73cc7",
@@ -1544,7 +1658,9 @@
                                 "max_width": "",
                                 "max_height": "",
                                 "max_size": "",
-                                "mime_types": ""
+                                "mime_types": "",
+                                "uploader": "",
+                                "acfe_thumbnail": 0
                             },
                             {
                                 "key": "field_5fa1acf442552",
@@ -1567,7 +1683,11 @@
                                 "maxlength": ""
                             }
                         ],
-                        "parent_repeater": "field_5e99e5b773cc6"
+                        "acfe_seamless_style": 0,
+                        "acfe_group_modal": 0,
+                        "acfe_group_modal_close": 0,
+                        "acfe_group_modal_button": "",
+                        "acfe_group_modal_size": "large"
                     },
                     {
                         "key": "field_5e99e61c73cc8",
@@ -1588,7 +1708,8 @@
                         "maxlength": "",
                         "rows": 6,
                         "new_lines": "",
-                        "parent_repeater": "field_5e99e5b773cc6"
+                        "parent_repeater": "field_5e99e5b773cc6",
+                        "acfe_textarea_code": 0
                     }
                 ]
             },
@@ -1659,7 +1780,10 @@
                 "multiple": 0,
                 "return_format": "id",
                 "ui": 1,
-                "bidirectional_target": []
+                "bidirectional_target": [],
+                "save_custom": 0,
+                "save_post_type": "",
+                "save_post_status": ""
             },
             {
                 "key": "field_5e9f44774068c",
@@ -1689,6 +1813,7 @@
                 "layout": "block",
                 "button_label": "Add Deadline",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5e9f44ae4068d",
@@ -1774,7 +1899,9 @@
                 "max_width": 450,
                 "max_height": 450,
                 "max_size": "",
-                "mime_types": "jpg"
+                "mime_types": "jpg",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_5f16518a99d7d",
@@ -1814,7 +1941,8 @@
                 "placeholder": "",
                 "maxlength": "",
                 "rows": 2,
-                "new_lines": ""
+                "new_lines": "",
+                "acfe_textarea_code": 0
             },
             {
                 "key": "field_5f16531899d81",
@@ -1850,7 +1978,8 @@
                         "placeholder": "",
                         "maxlength": "",
                         "rows": 6,
-                        "new_lines": ""
+                        "new_lines": "",
+                        "acfe_textarea_code": 0
                     },
                     {
                         "key": "field_5f1652fd99d80",
@@ -1870,7 +1999,8 @@
                         "placeholder": "",
                         "maxlength": "",
                         "rows": 6,
-                        "new_lines": ""
+                        "new_lines": "",
+                        "acfe_textarea_code": 0
                     },
                     {
                         "key": "field_5f16536599d82",
@@ -1909,7 +2039,12 @@
                         "default_value": "",
                         "placeholder": ""
                     }
-                ]
+                ],
+                "acfe_seamless_style": 0,
+                "acfe_group_modal": 0,
+                "acfe_group_modal_close": 0,
+                "acfe_group_modal_button": "",
+                "acfe_group_modal_size": "large"
             },
             {
                 "key": "field_5e9dfbc04b1b0",
@@ -1948,6 +2083,7 @@
                 "layout": "row",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5e9dbd9801581",
@@ -1989,7 +2125,8 @@
                         "maxlength": "",
                         "rows": "",
                         "new_lines": "",
-                        "parent_repeater": "field_5e961a02e3191"
+                        "parent_repeater": "field_5e961a02e3191",
+                        "acfe_textarea_code": 0
                     }
                 ]
             },
@@ -2050,6 +2187,7 @@
                 "layout": "row",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5e9dfc2e4b1b3",
@@ -2075,7 +2213,9 @@
                         "max_height": "",
                         "max_size": "",
                         "mime_types": "",
-                        "parent_repeater": "field_5e9dfbdf4b1b1"
+                        "parent_repeater": "field_5e9dfbdf4b1b1",
+                        "uploader": "",
+                        "acfe_thumbnail": 0
                     },
                     {
                         "key": "field_5e9f0ddea2389",
@@ -2217,6 +2357,7 @@
                 "layout": "row",
                 "button_label": "Add Skill",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5e9f4a7f42439",
@@ -2281,6 +2422,7 @@
                 "layout": "row",
                 "button_label": "Add Career Path",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5e9f4ec46e344",
@@ -2417,7 +2559,8 @@
                 "placeholder": "",
                 "maxlength": "",
                 "rows": 3,
-                "new_lines": ""
+                "new_lines": "",
+                "acfe_textarea_code": 0
             },
             {
                 "key": "field_5f17a808622a3",
@@ -2472,7 +2615,12 @@
                         "default_value": "",
                         "placeholder": ""
                     }
-                ]
+                ],
+                "acfe_seamless_style": 0,
+                "acfe_group_modal": 0,
+                "acfe_group_modal_close": 0,
+                "acfe_group_modal_button": "",
+                "acfe_group_modal_size": "large"
             },
             {
                 "key": "field_5f17a876622a6",
@@ -2497,7 +2645,9 @@
                 "max_width": 300,
                 "max_height": 300,
                 "max_size": "",
-                "mime_types": "jpg"
+                "mime_types": "jpg",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_5e9f3a2ed038e",
@@ -2578,7 +2728,10 @@
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1,
-                "bidirectional_target": []
+                "bidirectional_target": [],
+                "save_custom": 0,
+                "save_post_type": "",
+                "save_post_status": ""
             }
         ],
         "location": [
@@ -2872,6 +3025,7 @@
                 "collapsed": "",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_652fe96cbdf1f",
@@ -3109,6 +3263,7 @@
                 "max": 0,
                 "collapsed": "",
                 "button_label": "Add Story",
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_652ffa1217e49",
@@ -3175,6 +3330,7 @@
                 "max": 0,
                 "collapsed": "",
                 "button_label": "Add Row",
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_652ffa2617e4a",
@@ -3295,7 +3451,8 @@
                 "maxlength": "",
                 "rows": "",
                 "placeholder": "",
-                "new_lines": ""
+                "new_lines": "",
+                "acfe_textarea_code": 0
             },
             {
                 "key": "field_6538108965e90",
@@ -3321,7 +3478,9 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": "",
-                "preview_size": "medium"
+                "preview_size": "medium",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_6539207088abd",
@@ -3399,7 +3558,8 @@
                 "maxlength": "",
                 "rows": "",
                 "placeholder": "",
-                "new_lines": ""
+                "new_lines": "",
+                "acfe_textarea_code": 0
             },
             {
                 "key": "field_6538115765e93",
@@ -3425,7 +3585,9 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": "",
-                "preview_size": "medium"
+                "preview_size": "medium",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_653920b63591d",
@@ -3467,6 +3629,7 @@
                 "collapsed": "",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_652fedc2df136",
@@ -3557,7 +3720,10 @@
                 "multiple": 0,
                 "return_format": "id",
                 "ui": 1,
-                "bidirectional_target": []
+                "bidirectional_target": [],
+                "save_custom": 0,
+                "save_post_type": "",
+                "save_post_status": ""
             }
         ],
         "location": [
@@ -3610,6 +3776,7 @@
                 "max": 0,
                 "collapsed": "",
                 "button_label": "Add Row",
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_64f86f78520b8",
@@ -3704,7 +3871,9 @@
                         "ui": 0,
                         "ajax": 0,
                         "placeholder": "",
-                        "parent_repeater": "field_64f86e93520b6"
+                        "parent_repeater": "field_64f86e93520b6",
+                        "allow_custom": 0,
+                        "search_placeholder": ""
                     },
                     {
                         "key": "field_64f886f9c1eb8",
@@ -3734,7 +3903,8 @@
                         "min_size": "",
                         "max_size": "",
                         "mime_types": "css",
-                        "parent_repeater": "field_64f86e93520b6"
+                        "parent_repeater": "field_64f86e93520b6",
+                        "uploader": ""
                     },
                     {
                         "key": "field_64f88741c1eb9",
@@ -3764,7 +3934,8 @@
                         "min_size": "",
                         "max_size": "",
                         "mime_types": "js",
-                        "parent_repeater": "field_64f86e93520b6"
+                        "parent_repeater": "field_64f86e93520b6",
+                        "uploader": ""
                     },
                     {
                         "key": "field_64f8a83064ce9",
@@ -3793,7 +3964,9 @@
                         "ui": 0,
                         "ajax": 0,
                         "placeholder": "",
-                        "parent_repeater": "field_64f86e93520b6"
+                        "parent_repeater": "field_64f86e93520b6",
+                        "allow_custom": 0,
+                        "search_placeholder": ""
                     },
                     {
                         "key": "field_64f88a52a7dc6",
@@ -4070,7 +4243,9 @@
                 "ui": 0,
                 "return_format": "value",
                 "ajax": 0,
-                "placeholder": ""
+                "placeholder": "",
+                "allow_custom": 0,
+                "search_placeholder": ""
             },
             {
                 "key": "field_59aed93dc187b",
@@ -4182,7 +4357,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": "png,jpg,jpeg"
+                "mime_types": "png,jpg,jpeg",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_58f7a7b8185f0",
@@ -4207,7 +4384,65 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": "png,jpg,jpeg"
+                "mime_types": "png,jpg,jpeg",
+                "uploader": "",
+                "acfe_thumbnail": 0
+            },
+            {
+                "key": "field_663be0bc8ea47",
+                "label": "Header Image (-md)",
+                "name": "page_header_image_md",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "Header image to display at the -md breakpoint.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "uploader": "",
+                "return_format": "id",
+                "acfe_thumbnail": 0,
+                "min_width": 992,
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "png,jpg,jpeg",
+                "preview_size": "header-img-md",
+                "library": "all"
+            },
+            {
+                "key": "field_663be0e48ea48",
+                "label": "Header Image (-lg)",
+                "name": "page_header_image_lg",
+                "aria-label": "",
+                "type": "image",
+                "instructions": "Header image to display at the -lg breakpoint.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "uploader": "",
+                "return_format": "id",
+                "acfe_thumbnail": 0,
+                "min_width": 1200,
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": "png,jpg,jpeg",
+                "preview_size": "header-img-lg",
+                "library": "all"
             },
             {
                 "key": "field_590ca64ef6659",
@@ -4244,7 +4479,8 @@
                 "library": "all",
                 "min_size": "",
                 "max_size": "",
-                "mime_types": "mp4"
+                "mime_types": "mp4",
+                "uploader": ""
             },
             {
                 "key": "field_58fe08ff28bca",
@@ -4264,7 +4500,8 @@
                 "library": "all",
                 "min_size": "",
                 "max_size": "",
-                "mime_types": "webm"
+                "mime_types": "webm",
+                "uploader": ""
             },
             {
                 "key": "field_590c84c7a1360",
@@ -4318,7 +4555,12 @@
         "hide_on_screen": "",
         "active": true,
         "description": "",
-        "show_in_rest": false
+        "show_in_rest": 0,
+        "acfe_display_title": "",
+        "acfe_autosync": "",
+        "acfe_form": 0,
+        "acfe_meta": "",
+        "acfe_note": ""
     },
     {
         "key": "group_60afe4968b8d2",
@@ -4517,7 +4759,9 @@
                 "ui": 1,
                 "ajax": 0,
                 "return_format": "value",
-                "placeholder": ""
+                "placeholder": "",
+                "allow_custom": 0,
+                "search_placeholder": ""
             },
             {
                 "key": "field_59088a54aa936",
@@ -4595,7 +4839,9 @@
                 "ui": 1,
                 "ajax": 0,
                 "return_format": "value",
-                "placeholder": ""
+                "placeholder": "",
+                "allow_custom": 0,
+                "search_placeholder": ""
             },
             {
                 "key": "field_59089624aa938",
@@ -4646,7 +4892,9 @@
                 "max_width": 1600,
                 "max_height": "",
                 "max_size": "",
-                "mime_types": ""
+                "mime_types": "",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_58f8d08b1abb5",
@@ -4671,7 +4919,9 @@
                 "max_width": "",
                 "max_height": "",
                 "max_size": "",
-                "mime_types": ""
+                "mime_types": "",
+                "uploader": "",
+                "acfe_thumbnail": 0
             },
             {
                 "key": "field_58f8d09f1abb6",
@@ -5216,6 +5466,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5eb458b1db2a2",
@@ -5293,6 +5544,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_5eb4591fdb2a5",
@@ -5402,6 +5654,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_6193ccaae5993",
@@ -5528,6 +5781,7 @@
                 "layout": "table",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "field_60afeac23c617",
@@ -5676,6 +5930,7 @@
                 "layout": "row",
                 "button_label": "Add Book",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "book_citation",
@@ -5718,7 +5973,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_60afe79a124b1"
+                        "parent_repeater": "field_60afe79a124b1",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             },
@@ -5742,6 +6000,7 @@
                 "layout": "block",
                 "button_label": "Add Article",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "article_citation",
@@ -5784,7 +6043,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_60afe7cb124b3"
+                        "parent_repeater": "field_60afe7cb124b3",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             },
@@ -5808,6 +6070,7 @@
                 "layout": "block",
                 "button_label": "Add Conference Proceeding",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "conf_citation",
@@ -5850,7 +6113,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_617048c3b3a11"
+                        "parent_repeater": "field_617048c3b3a11",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             },
@@ -5874,6 +6140,7 @@
                 "layout": "block",
                 "button_label": "Add Grant",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "grant_citation",
@@ -5916,7 +6183,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_61704906b3a13"
+                        "parent_repeater": "field_61704906b3a13",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             },
@@ -5940,6 +6210,7 @@
                 "layout": "block",
                 "button_label": "Add Honorific Award",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "award_citation",
@@ -5982,7 +6253,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_6170491db3a15"
+                        "parent_repeater": "field_6170491db3a15",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             },
@@ -6006,6 +6280,7 @@
                 "layout": "block",
                 "button_label": "Add Patent",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "patent_citation",
@@ -6048,7 +6323,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_61704936b3a17"
+                        "parent_repeater": "field_61704936b3a17",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             },
@@ -6072,6 +6350,7 @@
                 "layout": "block",
                 "button_label": "Add Clinical Trial",
                 "rows_per_page": 20,
+                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
                         "key": "trial_citation",
@@ -6114,7 +6393,10 @@
                         "return_format": "object",
                         "ui": 1,
                         "bidirectional_target": [],
-                        "parent_repeater": "field_61704954b3a19"
+                        "parent_repeater": "field_61704954b3a19",
+                        "save_custom": 0,
+                        "save_post_type": "",
+                        "save_post_status": ""
                     }
                 ]
             }
@@ -6225,7 +6507,8 @@
                 "placeholder": "",
                 "maxlength": "",
                 "rows": "",
-                "new_lines": ""
+                "new_lines": "",
+                "acfe_textarea_code": 0
             }
         ],
         "location": [
