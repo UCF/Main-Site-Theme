@@ -25,7 +25,7 @@ function get_header_images( $obj ) {
 		if ( $college ) {
 			$retval['header_image'] = get_field( 'degree_fallback_header_image', 'colleges_' . $college->term_id );
 			$retval['header_image_xs'] = get_field( 'degree_fallback_header_image_xs', 'colleges_' . $college->term_id );
-			$retval['header_image_md'] = get_field('degree_fallback_header_image_md', 'colleges_' . $college->term_id );			$retval['header_image_md'] = get_field('degree_fallback_header_image_md', 'colleges_' . $college->term_id );
+			$retval['header_image_md'] = get_field('degree_fallback_header_image_md', 'colleges_' . $college->term_id );
 			$retval['header_image_lg'] = get_field('degree_fallback_header_image_lg', 'colleges_' . $college->term_id );
 		}
 
