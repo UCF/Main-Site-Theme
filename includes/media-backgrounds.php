@@ -14,19 +14,35 @@
  * @param string $img_size_prefix Prefix for a set of image sizes
  * @return array
  **/
-function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id, $img_size_prefix ) {
+function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id, $attachment_md_id, $attachment_lg_id, $img_size_prefix ) {
 	$bg_images = array();
 
-	if ( $attachment_sm_id ) {
+
+	if ( $attachment_sm_id && !$attachment_lg_id) {
 		$bg_images = array_merge(
 			$bg_images,
 			array(
-				'xl' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-xl' ),
-				'lg' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-lg' ),
-				'md' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-md' ),
-				'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-sm' )
+				'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-xl' ),
 			)
 		);
+
+		// Try to get a fallback -lg image if needed
+		if ( !$attachment_lg_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'lg' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-lg' ),
+						'xl' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-xl' )
+				)
+			);
+		}
+
+		// Try to get a fallback -md image if needed
+		if ( !$attachment_md_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'md' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-md' ))
+			);
+		}
 
 		// Try to get a fallback -xs image if needed
 		if ( !$attachment_xs_id ) {
@@ -41,11 +57,68 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 
 		// Use the largest-available image as the fallback <img>
 		$bg_images['fallback'] = reset( $bg_images );
+
+	} else if ( $attachment_lg_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array(
+				'lg' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-lg' ),
+				'xl' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-xl' )
+			)
+		);
+		// Try to get a fallback -md image if needed
+		if ( !$attachment_md_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'md' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-md' ))
+			);
+		}
+		// Try to get a fallback -sm image if needed
+		if ( !$attachment_sm_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'sm' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-sm' ))
+			);
+		}
+
+		// Try to get a fallback -xs image if needed
+		if ( !$attachment_xs_id ) {
+			$bg_images = array_merge(
+				$bg_images,
+				array( 'xs' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-xs') )
+			);
+		}
+
+		// Remove duplicate image sizes, in case an old image isn't pre-cropped
+		$bg_images = array_unique( $bg_images );
+
+		// Use the largest-available image as the fallback <img>
+		$bg_images['fallback'] = reset( $bg_images );
 	}
+
+	if ( $attachment_lg_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array( 'lg' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-lg' ) )
+		);
+	}
+	if ( $attachment_md_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array( 'md' => get_attachment_src_by_size( $attachment_md_id, $img_size_prefix . '-md' ) )
+		);
+	}
+	if ( $attachment_sm_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array( 'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-sm' ) )
+		);
+	}
+
 	if ( $attachment_xs_id ) {
 		$bg_images = array_merge(
 			$bg_images,
-			array( 'xs' => get_attachment_src_by_size( $attachment_xs_id, $img_size_prefix ) )
+			array( 'xs' => get_attachment_src_by_size( $attachment_xs_id, $img_size_prefix . '-xs' ) )
 		);
 	}
 
