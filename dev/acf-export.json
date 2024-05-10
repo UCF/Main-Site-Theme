@@ -630,34 +630,6 @@
                 "library": "all"
             },
             {
-                "key": "field_663be02e4187d",
-                "label": "Degree Fallback Header Image (-md+)",
-                "name": "degree_fallback_header_image_md",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "uploader": "",
-                "return_format": "id",
-                "acfe_thumbnail": 0,
-                "min_width": 575,
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg",
-                "preview_size": "header-img",
-                "library": "all"
-            },
-            {
                 "key": "field_59a5a672eab38",
                 "label": "Call to Action Bar",
                 "name": "",
@@ -4363,34 +4335,6 @@
                 "max_size": "",
                 "mime_types": "png,jpg,jpeg",
                 "preview_size": "header-img-md",
-                "library": "all"
-            },
-            {
-                "key": "field_663be0bc8ea47",
-                "label": "Header Image (-md+)",
-                "name": "page_header_image_md",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "uploader": "",
-                "return_format": "id",
-                "acfe_thumbnail": 0,
-                "min_width": 576,
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg",
-                "preview_size": "header-img",
                 "library": "all"
             },
             {
