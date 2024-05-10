@@ -24,7 +24,7 @@ $header_height       = get_query_var( 'header_height' );
 
 					break;
 				default:
-					$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image'], 'header-img' );
+					$bg_image_srcs = get_media_background_picture_srcs( $images['header_image_xs'], $images['header_image_md'], $images['header_image'], 'header-img' );
 					break;
 			}
 			echo get_media_background_picture( $bg_image_srcs );
