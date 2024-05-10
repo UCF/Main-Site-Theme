@@ -15,8 +15,8 @@ $header_height       = get_query_var( 'header_height' );
 			$bg_image_srcs = array();
 			switch ( $header_height ) {
 				case 'header-media-fullscreen':
-					$bg_image_srcs = get_media_background_picture_srcs( null, $images['header_image'], 'bg-img' );
-					$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, 'header-img' );
+					$bg_image_srcs = get_media_background_picture_srcs( null, null, $images['header_image'], 'bg-img' );
+					$bg_image_src_xs = get_media_background_picture_srcs( $images['header_image_xs'], null, null, 'header-img' );
 
 					if ( isset( $bg_image_src_xs['xs'] ) ) {
 						$bg_image_srcs['xs'] = $bg_image_src_xs['xs'];
