@@ -574,15 +574,9 @@
                 ]
             },
             {
-<<<<<<< HEAD
                 "key": "field_6491b33c708e7",
                 "label": "Degree Fallback Header Image (lg+)",
                 "name": "degree_fallback_header_image",
-=======
-                "key": "field_663be0424187e",
-                "label": "Degree Fallback Header Image (-lg+)",
-                "name": "degree_fallback_header_image_lg",
->>>>>>> rc-v3.23.0
                 "aria-label": "",
                 "type": "image",
                 "instructions": "Header image to display at the -lg (1200px width) breakpoint and up.",
@@ -606,7 +600,6 @@
                 "mime_types": "png,jpg,jpeg",
                 "preview_size": "header-img-lg",
                 "library": "all"
-<<<<<<< HEAD
             },
             {
                 "key": "field_663be02e4187d",
@@ -635,8 +628,6 @@
                 "mime_types": "png,jpg,jpeg",
                 "preview_size": "header-img-md",
                 "library": "all"
-=======
->>>>>>> rc-v3.23.0
             },
             {
                 "key": "field_663be02e4187d",
@@ -644,11 +635,7 @@
                 "name": "degree_fallback_header_image_md",
                 "aria-label": "",
                 "type": "image",
-<<<<<<< HEAD
                 "instructions": "Header image to display at the -xs (575px width) breakpoint and below.",
-=======
-                "instructions": "Header image to display at the -md (992px width) breakpoint and up.",
->>>>>>> rc-v3.23.0
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -660,65 +647,6 @@
                 "uploader": "",
                 "return_format": "id",
                 "acfe_thumbnail": 0,
-<<<<<<< HEAD
-=======
-                "min_width": 992,
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg",
-                "preview_size": "header-img-md",
-                "library": "all"
-            },
-            {
-                "key": "field_6491b33c708e7",
-                "label": "Degree Fallback Header Image (-sm+)",
-                "name": "degree_fallback_header_image",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -sm (768px width) breakpoint and up.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "uploader": "",
-                "return_format": "id",
-                "acfe_thumbnail": 0,
-                "min_width": 1200,
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg",
-                "preview_size": "header-img-sm",
-                "library": "all"
-            },
-            {
-                "key": "field_6491b3cc708e8",
-                "label": "Degree Fallback Header Image (-xs+)",
-                "name": "degree_fallback_header_image_xs",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -xs (576px width) breakpoint and up.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "uploader": "",
-                "return_format": "id",
-                "acfe_thumbnail": 0,
->>>>>>> rc-v3.23.0
                 "min_width": 575,
                 "min_height": "",
                 "min_size": "",
@@ -4382,21 +4310,12 @@
                 "endpoint": 0
             },
             {
-<<<<<<< HEAD
                 "key": "field_58f7a778185ef",
                 "label": "Header Image (lg+)",
                 "name": "page_header_image",
                 "aria-label": "",
                 "type": "image",
                 "instructions": "Header image to display at the lg+(1200px width) breakpoint and up.",
-=======
-                "key": "field_663be0e48ea48",
-                "label": "Header Image (-lg+)",
-                "name": "page_header_image_lg",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -lg (1200px width) breakpoint and up.",
->>>>>>> rc-v3.23.0
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4408,11 +4327,7 @@
                 "uploader": "",
                 "return_format": "id",
                 "acfe_thumbnail": 0,
-<<<<<<< HEAD
                 "min_width": 768,
-=======
-                "min_width": 1200,
->>>>>>> rc-v3.23.0
                 "min_height": "",
                 "min_size": "",
                 "max_width": "",
@@ -4421,7 +4336,6 @@
                 "mime_types": "png,jpg,jpeg",
                 "preview_size": "header-img-lg",
                 "library": "all"
-<<<<<<< HEAD
             },
             {
                 "key": "field_663be0bc8ea47",
@@ -4450,8 +4364,6 @@
                 "mime_types": "png,jpg,jpeg",
                 "preview_size": "header-img-md",
                 "library": "all"
-=======
->>>>>>> rc-v3.23.0
             },
             {
                 "key": "field_663be0bc8ea47",
@@ -4459,73 +4371,7 @@
                 "name": "page_header_image_md",
                 "aria-label": "",
                 "type": "image",
-<<<<<<< HEAD
                 "instructions": "Header image to display at the -xs (575px width) breakpoint and below.",
-=======
-                "instructions": "Header image to display at the -md (992px width) breakpoint and up.",
->>>>>>> rc-v3.23.0
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "uploader": "",
-                "return_format": "id",
-                "acfe_thumbnail": 0,
-<<<<<<< HEAD
-                "min_width": 576,
-=======
-                "min_width": 992,
->>>>>>> rc-v3.23.0
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg",
-<<<<<<< HEAD
-=======
-                "preview_size": "header-img-md",
-                "library": "all"
-            },
-            {
-                "key": "field_58f7a778185ef",
-                "label": "Header Image (-sm+)",
-                "name": "page_header_image",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -sm (768px width) breakpoint and up.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "uploader": "",
-                "return_format": "id",
-                "acfe_thumbnail": 0,
-                "min_width": 768,
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg",
-                "preview_size": "header-img-sm",
-                "library": "all"
-            },
-            {
-                "key": "field_58f7a7b8185f0",
-                "label": "Header Image (-xs+)",
-                "name": "page_header_image_xs",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the -xs (576px width) breakpoint and up.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4544,7 +4390,6 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": "png,jpg,jpeg",
->>>>>>> rc-v3.23.0
                 "preview_size": "header-img",
                 "library": "all"
             },
