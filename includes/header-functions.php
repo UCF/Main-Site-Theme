@@ -9,8 +9,14 @@
 function get_header_images( $obj ) {
 	$retval = array(
 		'header_image'    => '',
+<<<<<<< HEAD
 		'header_image_md' => '',
 		'header_image_xs' => ''
+=======
+		'header_image_xs' => '',
+		'header_image_md' => '',
+		'header_image_lg' => ''
+>>>>>>> rc-v3.23.0
 	);
 
 	// Set post type, term fallback images
@@ -25,12 +31,17 @@ function get_header_images( $obj ) {
 			$retval['header_image'] = get_field( 'degree_fallback_header_image', 'colleges_' . $college->term_id );
 			$retval['header_image_md'] = get_field( 'degree_fallback_header_image', 'colleges_' . $college->term_id );
 			$retval['header_image_xs'] = get_field( 'degree_fallback_header_image_xs', 'colleges_' . $college->term_id );
+			$retval['header_image_md'] = get_field('degree_fallback_header_image_md', 'colleges_' . $college->term_id );
+			$retval['header_image_lg'] = get_field('degree_fallback_header_image_lg', 'colleges_' . $college->term_id );
 		}
 
 		if ( ! $retval['header_image'] ) {
 			$retval['header_image'] = get_field( 'page_header_image', 'colleges_' . $college->term_id );
 			$retval['header_image_md'] = get_field( 'page_header_image', 'colleges_' . $college->term_id );
 			$retval['header_image_xs'] = get_field( 'page_header_image_xs', 'colleges_' . $college->term_id );
+			$retval['header_image_md'] = get_field( 'page_header_image_md', 'colleges_' . $college->term_id );
+			$retval['header_image_lg'] = get_field( 'page_header_image_lg', 'colleges_' . $college->term_id );
+
 		}
 	}
 
@@ -57,6 +68,13 @@ function get_header_images( $obj ) {
 		$retval['header_image_xs'] = $obj_header_image_xs;
 	}
 
+	if ( $obj_header_image_md = get_field( 'page_header_image_md', $obj ) ) {
+		$retval['header_image_md'] = $obj_header_image_md;
+	}
+
+	if ( $obj_header_image_lg = get_field( 'page_header_image_lg', $obj ) ) {
+		$retval['header_image_lg'] = $obj_header_image_lg;
+	}
 	// Only return back an image set if the larger `header_image` is set:
 	if ( $retval['header_image'] ) {
 		return $retval;
