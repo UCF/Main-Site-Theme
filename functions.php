@@ -30,7 +30,7 @@ function add_section_markup_before( $content, $section, $class, $title, $section
 	// Retrieve background image sizes
 	$bg_image_sm_id = get_field( 'section_background_image', $section->ID );    // -sm+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
-	$bg_images = get_media_background_picture_srcs( $bg_image_xs_id,null, $bg_image_sm_id, 'bg-img' );
+	$bg_images = get_media_background_picture_srcs( $bg_image_xs_id, $bg_image_sm_id, 'bg-img' );
 
 	// Retrieve color classes/custom definitions
 	$bg_color = get_field( 'section_background_color', $section->ID );
