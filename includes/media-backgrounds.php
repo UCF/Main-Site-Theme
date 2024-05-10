@@ -9,31 +9,49 @@
  * bg-img, bg-img-sm, bg-img-md, bg-img-lg, and bg-img-xl are valid registered
  * image sizes.
  *
- * @param int $attachment_xs_id Attachment ID for the image to be used at the -xs breakpoint
- * @param int $attachment_sm_id Attachment ID for the image to be used at the -sm breakpoint and up
+ * @param int $attachment_xs_id Attachment ID for the image to be used at the -xs breakpoint and below
+ * @param int $attachment_md_id Attachment ID for the image to be used at the -md breakpoint and up
+ * @param int $attachment_lg_id Attachment ID for the image to be used at the -lg breakpoint and up
  * @param string $img_size_prefix Prefix for a set of image sizes
  * @return array
  **/
-function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id, $img_size_prefix ) {
+function get_media_background_picture_srcs( $attachment_xs_id, $attachment_md_id, $attachment_lg_id, $img_size_prefix ) {
 	$bg_images = array();
 
-	if ( $attachment_sm_id ) {
+	if ( $attachment_lg_id ) {
 		$bg_images = array_merge(
 			$bg_images,
 			array(
-				'xl' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-xl' ),
-				'lg' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-lg' ),
-				'md' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-md' ),
-				'sm' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix . '-sm' )
+				'xl' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-xl' ),
 			)
 		);
 
-		// Try to get a fallback -xs image if needed
-		if ( !$attachment_xs_id ) {
+		// Try to get a fallback -md image if needed
+		if ( !$attachment_md_id ) {
 			$bg_images = array_merge(
 				$bg_images,
-				array( 'xs' => get_attachment_src_by_size( $attachment_sm_id, $img_size_prefix ) )
+				array(
+					'lg' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-lg' ),
+					'md' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-md' ),
+					'sm' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix . '-sm' )
+					)
 			);
+		}
+
+		// Try to get a fallback -xs image if needed
+		if ( !$attachment_xs_id ) {
+			if ($attachment_md_id){
+				$bg_images = array_merge(
+					$bg_images,
+					array( 'xs' => get_attachment_src_by_size( $attachment_md_id, $img_size_prefix ) )
+				);
+			} else {
+				$bg_images = array_merge(
+					$bg_images,
+					array( 'xs' => get_attachment_src_by_size( $attachment_lg_id, $img_size_prefix ) )
+				);
+			}
+
 		}
 
 		// Remove duplicate image sizes, in case an old image isn't pre-cropped
@@ -42,12 +60,25 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_sm_id
 		// Use the largest-available image as the fallback <img>
 		$bg_images['fallback'] = reset( $bg_images );
 	}
+
+	if ( $attachment_md_id ) {
+		$bg_images = array_merge(
+			$bg_images,
+			array(
+				'lg' => get_attachment_src_by_size( $attachment_md_id, $img_size_prefix . '-lg' ),
+				'md' => get_attachment_src_by_size( $attachment_md_id, $img_size_prefix . '-md' ),
+				'sm' => get_attachment_src_by_size( $attachment_md_id, $img_size_prefix . '-sm' )
+				 )
+		);
+	}
+
 	if ( $attachment_xs_id ) {
 		$bg_images = array_merge(
 			$bg_images,
 			array( 'xs' => get_attachment_src_by_size( $attachment_xs_id, $img_size_prefix ) )
 		);
 	}
+
 
 	// Strip out false-y values (in case an attachment failed to return somewhere)
 	$bg_images = array_filter( $bg_images );
