@@ -28,7 +28,7 @@ include_once THEME_DIR . 'includes/modals.php';
  **/
 function add_section_markup_before( $content, $section, $class, $title, $section_id ) {
 	// Retrieve background image sizes
-	$$bg_image_lg_id = get_field( 'section_background_image', $section->ID );    // 576px+
+	$bg_image_lg_id = get_field( 'section_background_image', $section->ID );    // 576px+
 	$bg_image_xs_id = get_field( 'section_background_image_xs', $section->ID ); // -xs only
 	$bg_images = get_media_background_picture_srcs( $bg_image_xs_id,null , $bg_image_lg_id, 'bg-img' );
 
