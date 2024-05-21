@@ -635,7 +635,7 @@
                 "name": "degree_fallback_header_image_xs",
                 "aria-label": "",
                 "type": "image",
-                "instructions": "Header image to display at the -xs (576px width) breakpoint and up.",
+                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4371,7 +4371,7 @@
                 "name": "page_header_image_xs",
                 "aria-label": "",
                 "type": "image",
-                "instructions": "Header image to display at the -xs (576px width) breakpoint and up.",
+                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4383,7 +4383,7 @@
                 "uploader": "",
                 "return_format": "id",
                 "acfe_thumbnail": 0,
-                "min_width": 576,
+                "min_width": 575,
                 "min_height": "",
                 "min_size": "",
                 "max_width": "",
