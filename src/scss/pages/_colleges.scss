@@ -182,8 +182,29 @@
   border-bottom: 5px solid $ucf-gold;
 }
 
-.heavy-underline {
+.heavy-underline-default {
+  background-image: linear-gradient(to bottom, #767676 0%, #767676 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline, .heavy-underline-primary {
   background-image: linear-gradient(to bottom, #fc0 0%, #fc0 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-secondary {
+  background-image: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-inverse {
+  background-image: linear-gradient(to bottom, #000 0%, #000 100%);
   background-position: 0 .85em;
   background-size: 100% 14px;
   background-repeat: repeat-x;
