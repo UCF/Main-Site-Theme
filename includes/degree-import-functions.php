@@ -148,6 +148,16 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 		}
 	}
 
+	$meta['highlights_imported'] = array();
+	if ( isset( $program->highlights) ) {
+		foreach ( $program->highlights as $highlight) {
+			$meta['highlights_imported'][] = array (
+				'icon_name' => $highlight->icon_class,
+				'description' => $highlight->description
+			);
+		}
+	}
+
 	return $meta;
 }
 
