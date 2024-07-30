@@ -156,7 +156,6 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 				'highlight_imported_copy' => $highlight->description
 			);
 		}
-		update_field('highlights_imported', $meta['highlights_imported']);
 	}
 
 	return $meta;
