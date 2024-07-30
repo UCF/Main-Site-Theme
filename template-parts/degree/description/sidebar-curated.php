@@ -64,7 +64,7 @@ if ( $post->post_type === 'degree' ) :
 
 						<?php if ( $highlight_imported_icon_name ) : ?>
 						<div class="col-3 text-center">
-							<span style="font-size:5em" class="d-block text-complementary fa-solid fa-<?php echo $highlight_imported_icon_name; ?>"></span>
+							<span class="d-block text-complementary fa-5x fa-solid fa-<?php echo $highlight_imported_icon_name; ?>"></span>
 						</div>
 						<?php endif; ?>
 
