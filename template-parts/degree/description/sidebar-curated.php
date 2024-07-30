@@ -5,6 +5,7 @@ if ( $post->post_type === 'degree' ) :
 	$description_image     = get_field( 'modern_description_image', $post );
 	$description_image_alt = get_field( 'modern_description_image_alt', $post );
 
+
 	if ( $description_image || have_rows( 'highlights', $post ) ) :
 ?>
 	<div class="col-lg-6 pl-lg-5 py-lg-3 my-5">
@@ -46,6 +47,39 @@ if ( $post->post_type === 'degree' ) :
 		<?php endif; ?>
 
 	</div>
+<?php
+	elseif (have_rows( 'highlights_imported', $post )) : ?>
+		<div class="col-lg-6 pl-lg-5 py-lg-3 my-5">
+
+			<?php if ( have_rows( 'highlights_imported', $post ) ) : ?>
+			<h3 class="heading-underline mb-4 pb-2">Highlights</h3>
+				<?php
+				while ( have_rows( 'highlights_imported', $post ) ) : the_row();
+					$highlight_imported_icon_name = get_sub_field( 'highlight_imported_icon_name' );
+					$highlight_imported_copy      = get_sub_field( 'highlight_imported_copy' );
+
+					if ( $highlight_imported_copy ) :
+				?>
+					<div class="row mb-4">
+
+						<?php if ( $highlight_imported_icon_name ) : ?>
+						<div class="col-3 text-center">
+							<span style="font-size:5em" class="d-block text-complementary fa-solid fa-<?php echo $highlight_imported_icon_name; ?>"></span>
+						</div>
+						<?php endif; ?>
+
+						<div class="col-9 align-self-center">
+							<?php echo $highlight_imported_copy; ?>
+						</div>
+
+					</div>
+				<?php
+					endif;
+				endwhile;
+				?>
+			<?php endif; ?>
+
+		</div>
 <?php
 	endif;
 endif;

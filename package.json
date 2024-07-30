@@ -35,6 +35,6 @@
     "last 2 versions"
   ],
   "optionalDependencies": {
-    "@fortawesome/fontawesome-pro": "^6.5.2"
+    "@fortawesome/fontawesome-pro": "^6.6.0"
   }
 }

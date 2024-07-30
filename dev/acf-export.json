@@ -1663,28 +1663,83 @@
                         "acfe_group_modal_close": 0,
                         "acfe_group_modal_button": "",
                         "acfe_group_modal_size": "large"
-                    },
-                    {
-                        "key": "field_5e99e61c73cc8",
-                        "label": "Highlight Copy",
-                        "name": "highlight_copy",
+                    },{
+                        "key": "field_66a3eb288dc14",
+                        "label": "Highlights Imported",
+                        "name": "highlights_imported",
                         "aria-label": "",
-                        "type": "textarea",
-                        "instructions": "",
+                        "type": "repeater",
+                        "instructions": "A list of selling points\/highlighted information about this program.",
                         "required": 0,
-                        "conditional_logic": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_5e99e5b773cc6",
+                                    "operator": "==empty"
+                                }
+                            ]
+                        ],
                         "wrapper": {
-                            "width": "50",
+                            "width": "",
                             "class": "",
                             "id": ""
                         },
-                        "default_value": "",
-                        "placeholder": "",
-                        "maxlength": "",
-                        "rows": 6,
-                        "new_lines": "",
-                        "parent_repeater": "field_5e99e5b773cc6",
-                        "acfe_textarea_code": 0
+                        "relevanssi_exclude": 0,
+                        "acfe_repeater_stylised_button": 0,
+                        "layout": "block",
+                        "pagination": 0,
+                        "min": 0,
+                        "max": 0,
+                        "collapsed": "",
+                        "button_label": "Add Row",
+                        "rows_per_page": 20,
+                        "sub_fields": [
+                            {
+                                "key": "field_66a3eb288dc15",
+                                "label": "Icon Name",
+                                "name": "highlight_imported_icon_name",
+                                "aria-label": "",
+                                "type": "text",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "relevanssi_exclude": 0,
+                                "default_value": "",
+                                "maxlength": "",
+                                "placeholder": "",
+                                "prepend": "",
+                                "append": "",
+                                "parent_repeater": "field_66a3eb288dc14"
+                            },
+                            {
+                                "key": "field_66a3eb288dc18",
+                                "label": "Description",
+                                "name": "highlight_imported_copy",
+                                "aria-label": "",
+                                "type": "textarea",
+                                "instructions": "",
+                                "required": 0,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "50",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "relevanssi_exclude": 0,
+                                "default_value": "",
+                                "acfe_textarea_code": 0,
+                                "maxlength": "",
+                                "rows": "",
+                                "placeholder": "",
+                                "new_lines": "",
+                                "parent_repeater": "field_66a3eb288dc14"
+                            }
+                        ]
                     }
                 ]
             },

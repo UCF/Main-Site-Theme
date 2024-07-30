@@ -150,12 +150,13 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 
 	$meta['highlights_imported'] = array();
 	if ( isset( $program->highlights) ) {
-		foreach ( $program->highlights as $highlight) {
+		foreach ( $program->highlights as $index => $highlight) {
 			$meta['highlights_imported'][] = array (
-				'icon_name' => $highlight->icon_class,
-				'description' => $highlight->description
+				'highlight_imported_icon_name' => $highlight->icon_class,
+				'highlight_imported_copy' => $highlight->description
 			);
 		}
+		update_field('highlights_imported', $meta['highlights_imported']);
 	}
 
 	return $meta;
