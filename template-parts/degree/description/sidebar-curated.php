@@ -48,7 +48,7 @@ if ( $post->post_type === 'degree' ) :
 
 	</div>
 <?php
-	elseif (have_rows( 'highlights_imported', $post )) : ?>
+	elseif ( have_rows( 'highlights_imported', $post ) ) : ?>
 		<div class="col-lg-6 pl-lg-5 py-lg-3 my-5">
 
 			<?php if ( have_rows( 'highlights_imported', $post ) ) : ?>
