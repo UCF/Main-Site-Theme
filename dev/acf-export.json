@@ -634,7 +634,7 @@
                 "name": "degree_fallback_header_image_xs",
                 "aria-label": "",
                 "type": "image",
-                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.\r\nSuggested size: 575 x 500 pixels.",
+                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.\r\nSuggested size: 575 x 575 pixels.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4453,7 +4453,7 @@
                 "name": "page_header_image_xs",
                 "aria-label": "",
                 "type": "image",
-                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.\r\nSuggested size: 575 x 500 pixels.",
+                "instructions": "Header image to display at the -xs (575px width) breakpoint and below.\r\nSuggested size: 575 x 575 pixels.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -6562,4 +6562,3 @@
         "show_in_rest": false
     }
 ]
-
