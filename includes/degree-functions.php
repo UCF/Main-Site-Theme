@@ -85,7 +85,7 @@ function is_supplementary_degree( $post ) {
 	$terms = wp_get_post_terms( $post->ID, 'program_types' );
 
 	foreach ( $terms as $term ) {
-		if ( in_array( $term->slug, array( 'minor', 'undergraduate-certificate' ) ) ) {
+		if ( in_array( $term->slug, array( 'undergraduate-certificate' ) ) ) {
 			$is_supplementary = true;
 			break;
 		}
