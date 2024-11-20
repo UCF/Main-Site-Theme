@@ -13,7 +13,7 @@
  */
 function modify_people_post_type_args( $args ) {
 	$args['rewrite'] = array(
-		'slug'       => 'experts',
+		'slug'       => 'expert',
 		'with_front' => false
 	);
 
@@ -21,6 +21,7 @@ function modify_people_post_type_args( $args ) {
 }
 
 add_filter( 'ucf_people_post_type_args', 'modify_people_post_type_args', 10, 1 );
+
 
 /**
  * Modifies the post_types array for the expertise
@@ -214,7 +215,7 @@ function get_additional_contributors_markup( $work ) {
 function enqueue_expert_section_scripts() {
 	$obj = get_queried_object();
 
-	if ( $obj->post_type === 'person' ) {
+	if ( $obj && $obj->post_type === 'person' ) {
 		$theme = wp_get_theme();
 		$theme_version = $theme->get( 'Version' );
 

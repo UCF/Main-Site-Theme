@@ -1,6 +1,12 @@
 @import 'variables';
 
 @import './ucf-athena-framework/src/scss/framework';
-@import './font-awesome/scss/font-awesome';
+
+// Uncomment this if you are using font-awesome free-version.
+// @import 'fontawesome-free';
+
+// Uncomment this if you are using font-awesome Pro-version.
+@import 'fontawesome-pro';
+
 
 @import 'base';

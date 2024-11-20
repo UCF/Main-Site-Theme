@@ -158,8 +158,71 @@
   border-bottom: 5px solid $ucf-gold;
 }
 
-.heavy-underline {
+.heavy-underline-default {
+  background-image: linear-gradient(to bottom, #767676 0%, #767676 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline, .heavy-underline-primary {
   background-image: linear-gradient(to bottom, #fc0 0%, #fc0 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-secondary {
+  background-image: linear-gradient(to bottom, #000 0%, #000 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-complementary {
+  background-image: linear-gradient(to bottom, #0275d8 0%, #0275d8 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-success {
+  background-image: linear-gradient(to bottom, #2ecc71 0%, #2ecc71 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-info {
+  background-image: linear-gradient(to bottom, #81cfe0 0%, #81cfe0 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-warning {
+  background-image: linear-gradient(to bottom, #f4b350 0%, #f4b350 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-danger {
+  background-image: linear-gradient(to bottom, #ff6445 0%, #ff6445 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-inverse, .heavy-underline-white {
+  background-image: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  background-position: 0 .85em;
+  background-size: 100% 14px;
+  background-repeat: repeat-x;
+}
+
+.heavy-underline-muted {
+  background-image: linear-gradient(to bottom, #636c72 0%, #636c72 100%);
   background-position: 0 .85em;
   background-size: 100% 14px;
   background-repeat: repeat-x;

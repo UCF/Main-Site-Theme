@@ -29,6 +29,7 @@ src/components/*
 gulp-config.json
 typings
 .sass-cache/
+.npmrc
 
 # debug files
 npm-debug.log

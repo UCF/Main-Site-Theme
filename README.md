@@ -81,8 +81,9 @@ Note that compiled, minified css and js files are included within the repo.  Cha
     To enable BrowserSync, set `sync` to `true` and assign `syncTarget` the base URL of a site on your local WordPress instance that will use this theme, such as `http://localhost/wordpress/my-site/`.  Your `syncTarget` value will vary depending on your local host setup.
 
     The full list of modifiable config values can be viewed in `gulpfile.js` (see `config` variable).
-4. Run `gulp default` to process front-end assets.
-5. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](#installation-requirements).
-6. Set Main Site Theme as the active theme.
-7. Make sure you've completed [all theme configuration steps](#configuration).
-8. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.
+4. Optional: If you'd like to enable Font Awesome 6 Pro, you should copy the code from template.npmrc and paste it into the .npmrc file in the root directory. Then run `npm install --save-optional @fortawesome/fontawesome-pro` in the terminal to install the package in the local node_modules.
+5. Run `gulp default` to process front-end assets.
+6. If you haven't already done so, create a new WordPress site on your development environment, and [install and activate theme dependencies](#installation-requirements).
+7. Set Main Site Theme as the active theme.
+8. Make sure you've completed [all theme configuration steps](#configuration).
+9. Run `gulp watch` to continuously watch changes to scss and js files.  If you enabled BrowserSync in `gulp-config.json`, it will also reload your browser when scss or js files change.

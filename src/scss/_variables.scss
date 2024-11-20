@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-$fa-font-path: '../fonts/font-awesome';
+$fa-font-path: '../fonts/font-awesome' !default;
 
 $line-height-base: 1.65;
 
@@ -53,3 +53,5 @@ $rotate-right: rotate(5deg);
 
 $clip-caret-width: 3rem; // match .px-4/.mx-4 * 2
 $clip-caret-height: 1.5rem; // match .py-4/.my-4
+
+

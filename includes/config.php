@@ -12,6 +12,7 @@ define( 'THEME_JS_URL', THEME_STATIC_URL . '/js' );
 define( 'THEME_JS_DIR', THEME_STATIC_DIR . '/js' );
 define( 'THEME_FONT_URL', THEME_STATIC_URL . '/fonts' );
 define( 'THEME_FA_VERSION', '4.7.0' );
+define( 'THEME_FA_PRO_VERSION', '6.5.2' );
 define( 'THEME_CUSTOMIZER_PREFIX', 'ucf_main_site_' );
 define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_undergraduate_application'   => 'https://apply.ucf.edu/application/',
@@ -409,6 +410,28 @@ function define_customizer_fields( $wp_customize ) {
 	);
 
 	// Degrees - Description
+	$desc_types_data = UCF_Degree_Config::get_description_types();
+	$desc_type_choices = array();
+
+	foreach ( $desc_types_data as $desc_id => $desc_name ) {
+		$desc_type_choices[$desc_id] = $desc_name;
+	}
+
+	$wp_customize->add_setting(
+		'preferred_degree_description_type'
+	);
+
+	$wp_customize->add_control(
+		'preferred_degree_description_type',
+		array(
+			'type'        => 'select',
+			'label'       => 'Preferred Degree Description Type',
+			'description' => 'The description type that will be preferred for a program. If a description of that type is not available, the default description type set in the UCF Degree settings will be used.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-description',
+			'choices'     => $desc_type_choices
+		)
+	);
+
 	$wp_customize->add_setting(
 		'degrees_sidebar_promo_undergraduate'
 	);

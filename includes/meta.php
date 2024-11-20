@@ -107,9 +107,20 @@ function enqueue_frontend_assets() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_frontend_assets' );
 
+/**
+ * Replaces the ucf-header bar ID with the correct
+ * ID needed for the script to work correctly.
+ *
+ * @author Jim Barnes
+ * @since v3.19.4
+ *
+ * @param string $tag The script tag being filtered
+ * @param string $handle The handle of the header script
+ * @param string $src The source of the script
+ */
 function ucfhb_script_handle( $tag, $handle, $src ) {
-	if ( 'ucfhb-script' === $handle ) {
-		$tag = str_replace( 'ucfhb-script-js', 'ucfhb-script', $tag );
+	if ( false !== strpos( $src, 'universityheader.ucf.edu' ) ) {
+		$tag = str_replace( "{$handle}-js", 'ucfhb-script', $tag );
 	}
 
 	return $tag;
@@ -149,9 +160,26 @@ if ( $gw_verify ):
 <meta name="google-site-verification" content="<?php echo htmlentities( $gw_verify ); ?>">
 <?php endif; ?>
 
-<?php // Preload Font Awesome ?>
-<link rel="preload" href="<?php echo THEME_FONT_URL; ?>/font-awesome/fontawesome-webfont.woff2?v=<?php echo THEME_FA_VERSION; ?>" as="font" type="font/woff2" crossorigin>
-
+<?php // Preload Font Awesome
+$fonts_array = array(
+	'/font-awesome-pro/fa-brands-400.woff2',
+	'/font-awesome-pro/fa-duotone-900.woff2',
+	'/font-awesome-pro/fa-light-300.woff2',
+	'/font-awesome-pro/fa-regular-400.woff2',
+	'/font-awesome-pro/fa-sharp-light-300.woff2',
+	'/font-awesome-pro/fa-sharp-regular-400.woff2',
+	'/font-awesome-pro/fa-sharp-solid-900.woff2',
+	'/font-awesome-pro/fa-sharp-thin-100.woff2',
+	'/font-awesome-pro/fa-solid-900.woff2',
+	'/font-awesome-pro/fa-thin-100.woff2',
+	'/font-awesome-pro/fa-v4compatibility.woff2',
+);
+foreach ($fonts_array as $font) {
+    ?>
+<link rel="preload" href="<?php echo THEME_FONT_URL . $font?>?v=<?php echo THEME_FA_PRO_VERSION; ?>" as="font" type="font/woff2" crossorigin>
+<?php
+}
+?>
 <?php
 // Inline critical CSS
 $critical_css = get_critical_css();
