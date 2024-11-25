@@ -37,7 +37,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'faculty_search_page_path'            => 'faculty-search',
 	'expert_search_page_path'             => 'experts',
 	'expert_request_button_text'          => 'Contact this expert',
-	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php'
+	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
+	'fastly_header_format'                => '',
 ) ) );
 
 function __init__() {
@@ -915,6 +916,21 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Exclude Stylesheets',
 			'description' => 'Specify a comma-separated list of stylesheet handles that should not be loaded asynchronously when critical CSS is in use.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fastly_header_format'
+	);
+
+	$wp_customize->add_control(
+		'fastly_header_format',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fastly Header Image Format',
+			'description' => 'Specifies the image format to request from the Fastly caching platform. Appends the query parameter <code>?format=</code> to the end of the image URL.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance',
+			'default'     => get_theme_mod_default( 'fastly_header_format' )
 		)
 	);
 
