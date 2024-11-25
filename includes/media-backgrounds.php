@@ -87,7 +87,7 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_md_id
 
 	if ( ! empty( $heading_format  ) ) {
 		foreach( $bg_images as $key => $image ) {
-			$bg_images[$key] .= "?format=$heading_format";
+			$bg_images[$key] .= "?auto=$heading_format";
 		}
 	}
 
