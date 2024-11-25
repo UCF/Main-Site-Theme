@@ -83,6 +83,14 @@ function get_media_background_picture_srcs( $attachment_xs_id, $attachment_md_id
 	// Strip out false-y values (in case an attachment failed to return somewhere)
 	$bg_images = array_filter( $bg_images );
 
+	$heading_format = get_theme_mod_or_default( 'fastly_header_format' );
+
+	if ( ! empty( $heading_format  ) ) {
+		foreach( $bg_images as $key => $image ) {
+			$bg_images[$key] .= "?format=$heading_format";
+		}
+	}
+
 	return $bg_images;
 }
 
