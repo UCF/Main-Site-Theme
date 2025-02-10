@@ -1,6 +1,9 @@
 <?php
 $post = isset( $post ) ? $post : get_queried_object();
 
+$undergraduate_deadlines_disclaimer = get_theme_mod( 'degree_deadlines_undergraduate_disclaimer' ) ?: null;
+$graduate_deadlines_disclaimer = get_theme_mod( 'degree_deadlines_graduate_disclaimer' ) ?: null;
+
 if ( $post->post_type === 'degree' ) :
 	$disable_deadlines = get_field( 'disable_deadlines', $post );
 	if ( $disable_deadlines !== true ) :
@@ -142,6 +145,18 @@ if ( $post->post_type === 'degree' ) :
 
 								</div>
 							</div>
+
+							<?php if ( $undergraduate_deadlines_disclaimer || $graduate_deadlines_disclaimer ) : ?>
+							<div class="<?php echo $deadline_groups_col_class; ?>">
+							<?php
+								if ( ! is_graduate_degree( $post ) && $undergraduate_deadlines_disclaimer ) {
+									echo $undergraduate_deadlines_disclaimer;
+								} elseif ( is_graduate_degree( $post ) && $graduate_deadlines_disclaimer ) {
+									echo $graduate_deadlines_disclaimer;
+								}
+							?>
+							</div>
+							<?php endif; ?>
 
 						</div>
 					</div>

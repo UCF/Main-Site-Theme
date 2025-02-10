@@ -111,6 +111,14 @@ function define_customizer_sections( $wp_customize ) {
 	);
 
 	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degree-deadlines-disclaimer',
+		array(
+			'title' => 'Degree Deadline Disclaimers',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
 		THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers',
 		array(
 			'title' => 'Skills and Career Opportunities',
@@ -658,6 +666,34 @@ function define_customizer_fields( $wp_customize ) {
 			'description' => 'An alternate Section post to display instead of the Application Deadlines section for graduate programs without deadlines.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
 			'choices'     => $section_choices
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_undergraduate_disclaimer'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_undergraduate_disclaimer',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Undergraduate Deadline Disclaimer',
+			'description' => 'HTML that is displayed within the degree deadline section for undergraduate degrees that linked to official deadline information.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degree-deadlines-disclaimer'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_graduate_disclaimer'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_graduate_disclaimer',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Graduate Deadline Disclaimer',
+			'description' => 'HTML that is displayed within the degree deadline section for graduate degrees that linked to official deadline information.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degree-deadlines-disclaimer'
 		)
 	);
 
