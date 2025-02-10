@@ -147,7 +147,7 @@ if ( $post->post_type === 'degree' ) :
 							</div>
 
 							<?php if ( $undergraduate_deadlines_disclaimer || $graduate_deadlines_disclaimer ) : ?>
-							<div class="<?php echo $deadline_groups_col_class; ?>">
+							<div class="col-12">
 							<?php
 								if ( ! is_graduate_degree( $post ) && $undergraduate_deadlines_disclaimer ) {
 									echo $undergraduate_deadlines_disclaimer;
