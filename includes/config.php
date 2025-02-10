@@ -37,7 +37,8 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'faculty_search_page_path'            => 'faculty-search',
 	'expert_search_page_path'             => 'experts',
 	'expert_request_button_text'          => 'Contact this expert',
-	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php'
+	'search_service_url'                  => 'https://search.smca.ucf.edu/service.php',
+	'fastly_header_format'                => '',
 ) ) );
 
 function __init__() {
@@ -105,6 +106,14 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'degrees-deadlines_apply',
 		array(
 			'title' => 'Application Deadlines',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degree-deadlines-disclaimer',
+		array(
+			'title' => 'Degree Deadline Disclaimers',
 			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
 	);
@@ -660,6 +669,34 @@ function define_customizer_fields( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting(
+		'degree_deadlines_undergraduate_disclaimer'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_undergraduate_disclaimer',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Undergraduate Deadline Disclaimer',
+			'description' => 'HTML that is displayed within the degree deadline section for undergraduate degrees that linked to official deadline information.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degree-deadlines-disclaimer'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degree_deadlines_graduate_disclaimer'
+	);
+
+	$wp_customize->add_control(
+		'degree_deadlines_graduate_disclaimer',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Graduate Deadline Disclaimer',
+			'description' => 'HTML that is displayed within the degree deadline section for graduate degrees that linked to official deadline information.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degree-deadlines-disclaimer'
+		)
+	);
+
 	// Degrees - Skills and Career Opportunities
 	$wp_customize->add_setting(
 		'degree_careers_intro',
@@ -915,6 +952,21 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Exclude Stylesheets',
 			'description' => 'Specify a comma-separated list of stylesheet handles that should not be loaded asynchronously when critical CSS is in use.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'fastly_header_format'
+	);
+
+	$wp_customize->add_control(
+		'fastly_header_format',
+		array(
+			'type'        => 'text',
+			'label'       => 'Fastly Header Image Format',
+			'description' => 'Specifies the image format to request from the Fastly caching platform. Appends the query parameter <code>?format=</code> to the end of the image URL.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'performance',
+			'default'     => get_theme_mod_default( 'fastly_header_format' )
 		)
 	);
 
