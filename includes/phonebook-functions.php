@@ -25,8 +25,6 @@ function get_phonebook_results( $query ) {
 
 	$response = wp_remote_get( $url . '?' . http_build_query( $params ) );
 
-	var_dump( $response );
-
 	$results = array();
 
 	if ( is_array( $response ) ) {
