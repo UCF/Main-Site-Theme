@@ -19,10 +19,13 @@ function get_phonebook_results( $query ) {
 
 	$params = array(
 		'search' => $query,
+		'from_table__in' => 'organizations,departments',
 		'active' => 'True'
 	);
 
 	$response = wp_remote_get( $url . '?' . http_build_query( $params ) );
+
+	var_dump( $response );
 
 	$results = array();
 
