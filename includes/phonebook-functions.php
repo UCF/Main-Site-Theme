@@ -19,6 +19,7 @@ function get_phonebook_results( $query ) {
 
 	$params = array(
 		'search' => $query,
+		'from_table__in' => 'organizations,departments',
 		'active' => 'True'
 	);
 
