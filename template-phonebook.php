@@ -26,8 +26,8 @@ if ( is_array( $results ) ) {
 <div class="container mt-md-4 pb-4 pb-md-5">
 	<form id="phonebook-search" action="<?php echo get_permalink( $post->ID ); ?>">
 		<div class="input-group">
-			<label for="phonebook-search-query" class="sr-only">Search Organizations, Departments, and People at UCF</label>
-			<input type="text" id="phonebook-search-query" name="query" class="search-query form-control" value="<?php echo stripslashes( htmlentities( $query ) ); ?>" placeholder="Organization, Department, or Person (Name, Email, Phone)">
+			<label for="phonebook-search-query" class="sr-only">Search for Departments or Organizations</label>
+			<input type="text" id="phonebook-search-query" name="query" class="search-query form-control" value="<?php echo stripslashes( htmlentities( $query ) ); ?>" placeholder="Search for Departments or Organizations">
 			<span class="input-group-btn">
 				<button class="btn btn-primary" type="submit"><span class="fa fa-search" aria-labelledby="search-btn-text"></span><span class="hidden-sm-down" id="search-btn-text"> Search</span></button>
 			</span>
