@@ -3,6 +3,8 @@ $obj           = get_queried_object();
 $exclude_nav   = get_field( 'page_header_exclude_nav', $obj );
 $header_images = get_query_var( 'header_images' );
 
+if ( is_404() ) $header_images = array();
+
 if ( ! $exclude_nav ) :
 ?>
 <nav class="navbar navbar-toggleable-md navbar-custom py-2<?php echo $header_images ? ' py-sm-4 navbar-inverse header-gradient' : ' navbar-inverse bg-inverse-t-3 py-lg-4'; ?>" aria-label="Site navigation">
