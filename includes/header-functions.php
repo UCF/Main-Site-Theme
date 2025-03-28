@@ -254,6 +254,11 @@ function get_header_markup() {
 	$header_content_type = get_header_content_type( $obj );
 	$header_height = get_header_media_height( $obj );
 
+	if ( is_404() ) {
+		$header_type = '';
+		$header_content_type = '';
+	}
+
 	// Set some variables to pass along to our template parts
 	// NOTE: set_query_var() and get_query_var() usage can be
 	// replaced post-WP 5.5:
