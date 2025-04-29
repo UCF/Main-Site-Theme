@@ -16,6 +16,9 @@ if ( $h1 !== 'title' ) {
 	$title_classes .= ' h1 d-block';
 }
 $subtitle_classes = 'lead mb-4 mb-md-5';
+
+if ( is_404() ) return;
+
 ?>
 
 <div class="container">

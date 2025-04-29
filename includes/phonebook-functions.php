@@ -19,6 +19,7 @@ function get_phonebook_results( $query ) {
 
 	$params = array(
 		'search' => $query,
+		'from_table__in' => 'organizations,departments',
 		'active' => 'True'
 	);
 
@@ -474,3 +475,16 @@ function phonebook_fix_name_case( $name ) {
 
 	return $name;
 }
+
+
+// if the path is phonebook, enqueue the programmableSE script
+
+function enqueue_phonebook_script() {
+    if ( is_page( 'phonebook' ) )  {
+        wp_enqueue_script(
+            'phonebook-programmableSE',
+            get_template_directory_uri() . '/static/js/phonebook-programmableSE.min.js',
+        );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'enqueue_phonebook_script' );

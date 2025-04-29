@@ -120,7 +120,7 @@ if ( $post->post_type === 'degree' ) :
 								<img class="program-length-image img-fluid" src="<?php echo $program_length_image; ?>" alt="">
 							</div>
 							<div class="h1 mb-0 text-center"><?php echo $program_length_number; ?></div>
-							<div class="h6 text-default text-uppercase text-center"><?php echo $program_length_text; ?></div>
+							<div class="h6 text-inverse-aw text-uppercase text-center"><?php echo $program_length_text; ?></div>
 						</div>
 						<?php endif; ?>
 
