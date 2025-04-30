@@ -481,9 +481,40 @@ function phonebook_fix_name_case( $name ) {
 
 function enqueue_phonebook_script() {
     if ( is_page( 'phonebook' ) )  {
+
+		$theme_info = wp_get_theme();
+		$version = $theme_info->get( 'Version' );
+
+		$google_search_engine_name = 'ucf-phonebook';
+		$google_search_engine_id = 'c41924672054e4f57';
+		$google_search_url = add_query_arg(
+			array(
+				'cx' => $google_search_engine_id,
+				'gname' => $google_search_engine_name
+			),
+			'https://cse.google.com/cse.js'
+		);
+
+		wp_enqueue_script(
+			'google-programmable-search',
+			$google_search_url,
+			null,
+			$version,
+			array(
+				'strategy' => 'async',
+				'in_footer' => true
+			)
+			);
+
         wp_enqueue_script(
-            'phonebook-programmableSE',
-            get_template_directory_uri() . '/static/js/phonebook-programmableSE.min.js',
+            'phonebook-programmable-search-engine',
+            get_template_directory_uri() . '/static/js/phonebook-programmable-search-engine.min.js',
+			array( 'google-programmable-search' ),
+			$version,
+			array(
+				'strategy' => 'async',
+				'in_footer' => true
+			)
         );
     }
 }

@@ -364,8 +364,8 @@ gulp.task('js-build-modal-shortcode-copy', () => {
   return buildJS(`${config.src.jsPath}/modal-shortcode-copy.js`, config.dist.jsPath);
 });
 
-gulp.task('js-build-phonebook-programmableSE', () => {
-  return buildJS(`${config.src.jsPath}/phonebook-programmableSE.js`, config.dist.jsPath);
+gulp.task('js-build-phonebook-programmable-search-engine', () => {
+  return buildJS(`${config.src.jsPath}/phonebook-programmable-search-engine.js`, config.dist.jsPath);
 });
 
 // All js-related tasks
@@ -376,7 +376,7 @@ gulp.task('js', gulp.series(
   'js-build-degree-search-typeahead',
   'js-build-faculty-search-typeahead',
   'js-build-modal-shortcode-copy',
-  'js-build-phonebook-programmableSE'
+  'js-build-phonebook-programmable-search-engine'
 ));
 
 
