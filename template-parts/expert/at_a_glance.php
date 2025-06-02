@@ -36,7 +36,7 @@ if ( $post->post_type === 'person' ) :
 									<ul class="mb-4">
 									<?php foreach( $expertise as $exp ) : ?>
 										<li class="list-item my-1 mr-2">
-											<a href="<?php echo get_expert_filter_url( $exp->name ); ?>">
+											<a href="<?php echo get_expert_filter_url( $exp->slug ); ?>">
 												<?php echo $exp->name; ?>
 											</a>
 										</li>
@@ -51,8 +51,8 @@ if ( $post->post_type === 'person' ) :
 										<?php
 										foreach ( $tags as $tag ) :
 											$tag_filter_url = add_query_arg(
-												'query',
-												$tag->name,
+												'tag',
+												$tag->slug,
 												$page_permalink
 											);
 										?>

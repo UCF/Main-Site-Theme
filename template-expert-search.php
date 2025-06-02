@@ -13,8 +13,10 @@ $query                 = isset( $_GET['query'] ) ? sanitize_text_field( $_GET['q
 $paged                 = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
 $college_filter        = isset( $_GET['college'] ) ? sanitize_text_field( $_GET['college'] ) : null;
 $expertise_filter      = isset( $_GET['expertise'] ) ? sanitize_text_field( $_GET['expertise'] ) : null;
+$tag_filter            = isset( $_GET['tag'] ) ? sanitize_text_field( $_GET['tag'] ) : null;
 $college               = null;
 $expertise             = null;
+$tag_term              = null;
 
 // If the user explicitly filtered by college or department,
 // grab the term object:
@@ -24,6 +26,10 @@ if ( $college_filter ) {
 
 if ( $expertise_filter ) {
 	$expertise = get_term_by( 'slug', $expertise_filter, 'expertise' );
+}
+
+if ( $tag_filter ) {
+	$tag_term = get_term_by( 'slug', $tag_filter, 'post_tag' );
 }
 
 // Set up baseline WP_Query args
@@ -46,7 +52,7 @@ if ( $query ) {
 	$args['s'] = $query;
 }
 
-if ( $college || $expertise ) {
+if ( $college || $expertise || $tag ) {
 	$args['tax_query']['relation'] = 'AND';
 }
 
@@ -65,6 +71,16 @@ if ( $expertise ) {
 		'terms'    => $expertise->term_id
 	);
 }
+
+if ( $tag_term ) {
+	$args['tax_query'][] = array(
+		'taxonomy' => 'post_tag',
+		'field'    => 'term_id',
+		'terms'    => $tag_term->term_id
+	);
+}
+
+var_dump( $query );
 
 // If we're performing a search for a faculty member
 // by person name and Relevanssi is enabled, use
@@ -196,8 +212,8 @@ if ( $query && function_exists( 'relevanssi_do_query' ) ) {
 									<?php
 									foreach ( $person_tags as $person_tag ) :
 										$person_tag_filter_url = add_query_arg(
-											'query',
-											$person_tag->name,
+											'tag',
+											$person_tag->slug,
 											$page_permalink
 										);
 									?>
