@@ -12,9 +12,12 @@ if ( $post->post_type === 'degree' ) :
 	// available, the 'curated' sidebar should always be used:
 	if ( $curated_desc ) {
 		$content_part_name = 'curated';
-		$sidebar_part_name = 'curated';
 	} else if ( ! $catalog_desc ) {
 		$has_desc = false;
+	}
+
+	if ( have_rows( 'highlights', $post ) ) {
+		$sidebar_part_name = 'curated';
 	}
 
 	if ( $has_desc ):
