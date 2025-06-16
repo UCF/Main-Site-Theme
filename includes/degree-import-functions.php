@@ -76,9 +76,12 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
 function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['degree_hours']            = $program->credit_hours !== '' ? $program->credit_hours : null;
 	$meta['page_header_height']      = 'header-media-default';
-	$meta['degree_description']      = get_api_catalog_description( $program, 'Catalog Description', true );
+	$meta['degree_description']      = get_api_catalog_description( $program, 'Catalog Description' );
 	$meta['degree_description_full'] = get_api_catalog_description( $program, 'Full Catalog Description' );
+	$meta['modern_description_copy'] = get_api_catalog_description( $program, 'Custom Description' );
 	$meta['graduate_slate_id']       = $program->graduate_slate_id ?? null;
+
+	if ( empty( $meta['modern_degree_description'] ) ) unset( $meta['modern_degree_description'] );
 
 	$outcomes      = main_site_get_remote_response_json( $program->outcomes );
 	$projections   = main_site_get_remote_response_json( $program->projection_totals );
