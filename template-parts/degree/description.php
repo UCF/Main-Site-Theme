@@ -16,7 +16,7 @@ if ( $post->post_type === 'degree' ) :
 		$has_desc = false;
 	}
 
-	if ( have_rows( 'highlights', $post ) ) {
+	if ( have_rows( 'highlights', $post ) || have_rows( 'highlights_imported', $post ) ) {
 		$sidebar_part_name = 'curated';
 	}
 
