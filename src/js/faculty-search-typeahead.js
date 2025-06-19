@@ -2,15 +2,6 @@
 
   $.fn.MainSiteFacultySearch = function (options) {
 
-    const decodeString = (str) => {
-      if (!str) {
-        return '';
-      }
-
-      const obj = new DOMParser().parseFromString(str, 'text/html');
-      return obj.documentElement.innerText;
-    };
-
     const typeaheadSettings = $.extend({
       highlight: true,
       minLength: 2
@@ -24,7 +15,7 @@
 
     const typeaheadFacultySource = new Bloodhound({
       datumTokenizer: function (datum) {
-        return Bloodhound.tokenizers.whitespace(decodeString(datum.title.rendered));
+        return Bloodhound.tokenizers.whitespace(datum.title.rendered);
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       remote: {
@@ -83,7 +74,7 @@
         source: typeaheadCollegesSource.ttAdapter(),
         limit: collegeLimit,
         displayKey: function (obj) {
-          return decodeString(obj.name);
+          return obj.name;
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by College:</strong>'
@@ -94,7 +85,7 @@
         source: typeaheadDepartmentsSource.ttAdapter(),
         limit: departmentLimit,
         displayKey: function (obj) {
-          return decodeString(obj.name);
+          return obj.name;
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Department:</strong>'
@@ -105,7 +96,7 @@
         source: typeaheadExpertiseSource.ttAdapter(),
         limit: expertiseLimit,
         displayKey: function (obj) {
-          return decodeString(obj.name);
+          return obj.name;
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Expertise:</strong>'
@@ -116,7 +107,7 @@
         source: typeaheadFacultySource.ttAdapter(),
         limit: facultyLimit,
         displayKey: function (obj) {
-          return decodeString(obj.title.rendered);
+          return obj.title.rendered;
         },
         templates: {
           suggestion: Handlebars.compile(`
