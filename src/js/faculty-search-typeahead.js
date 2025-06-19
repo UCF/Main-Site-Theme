@@ -23,7 +23,7 @@
         wildcard: '%QUERY'
       },
       identify: function (data) {
-        return `degree_${data.id}`;
+        return `expert_${data.id}`;
       }
     });
 
@@ -74,7 +74,7 @@
         source: typeaheadCollegesSource.ttAdapter(),
         limit: collegeLimit,
         displayKey: function (obj) {
-          return $('<span>').html(obj.name).text();
+          return obj.name;
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by College:</strong>'
@@ -85,7 +85,7 @@
         source: typeaheadDepartmentsSource.ttAdapter(),
         limit: departmentLimit,
         displayKey: function (obj) {
-          return $('<span>').html(obj.name).text();
+          return obj.name;
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Department:</strong>'
@@ -96,7 +96,7 @@
         source: typeaheadExpertiseSource.ttAdapter(),
         limit: expertiseLimit,
         displayKey: function (obj) {
-          return $('<span>').html(obj.name).text();
+          return obj.name;
         },
         templates: {
           header: '<strong class="d-block font-size-sm text-default text-uppercase letter-spacing-2 px-3 px-sm-4 pt-2 mb-1">Faculty by Expertise:</strong>'
@@ -107,7 +107,7 @@
         source: typeaheadFacultySource.ttAdapter(),
         limit: facultyLimit,
         displayKey: function (obj) {
-          return $('<span>').html(obj.title.rendered).text();
+          return obj.title.rendered;
         },
         templates: {
           suggestion: Handlebars.compile(`
@@ -116,7 +116,7 @@
                 <img src="{{thumbnails.thumbnail.src}}" class="media-background object-fit-cover" style="object-position: 50% 0%;" data-object-position="50% 0%" alt="" width="{{thumbnails.thumbnail.width}}" height="{{thumbnails.thumbnail.height}}">
               </div>
               <div class="align-self-center suggestion-text">
-                <span class="d-block">{{title.rendered}}</span>
+                <span class="d-block">{{{ title.rendered }}}</span>
                 {{#if person_titles}}
                 <ul class="list-inline d-block mb-0 line-height-2">
                   {{#each person_titles}}
