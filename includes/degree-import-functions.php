@@ -65,6 +65,34 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
 	return ! empty( $retval ) ? $retval : $fallback;
 }
 
+/**
+ * Retrieves and formats quote data from the API.
+ *
+ * @param string $quote_id The quote ID to fetch.
+ * @return array|null The formatted quote data or null if not found.
+ */
+
+function get_imported_quote_data( $quote_id ) {
+	if ( empty( $quote_id ) ) return null;
+
+	$base_url = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_base_url' );
+	$api_key  = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_key' );
+
+	$quotes_url = trailingslashit( $base_url ) . 'marketing/quotes/' . $quote_id . '/';
+
+	$quote_data = main_site_get_remote_response_json( $quotes_url );
+
+	if ( $quote_data ) {
+		return array(
+			'quote_image' => $quote_data->image,
+			'quote_image_alt' => $quote_data->image_alt,
+			'quote_text_imported' => $quote_data->quote_text,
+			'quote_source_formatted' => $quote_data->source_formatted,
+		);
+	}
+
+	return null;
+}
 
 /**
  * Apply main site-specific meta data to degrees during the degree import
@@ -162,25 +190,14 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	}
 
 	// We are just getting the first id but we can change this later if needed to catch more quotes
-	$meta['quotes_imported_id'] = (!empty($program->quotes[0])) ? $program->quotes[0] : '';
+	$meta['quotes_imported_id'] = ( ! empty( $program->quotes[0] ) ) ?
+		$program->quotes[0] :
+		'';
 
-	if(!empty($meta['quotes_imported_id'])){
-		$base_url = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_base_url' );
-		$api_key  = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_key' );
-
-		// Build the API URL (assumes quotes endpoint structure like /marketing/quotes/<id>/)
-		$quotes_url = trailingslashit( $base_url ) . 'marketing/quotes/' . $meta['quotes_imported_id'] . '/';
-
-		$quote_data = main_site_get_remote_response_json( $quotes_url );
-		if ( $quote_data ) {
-			$meta['quote_imported_obj'] = array (
-				'quote_image' => $quote_data->image,
-				'quote_image_alt' => $quote_data->image_alt,
-				'quote_text_imported' => $quote_data->quote_text,
-				'quote_source_formatted' => $quote_data->source_formatted,
-			);
+	$quote_obj = get_imported_quote_data( $meta['quotes_imported_id'] );
+		if ( $quote_obj ) {
+			$meta['quote_imported_obj'] = $quote_obj;
 		}
-	}
 
 	return $meta;
 }
