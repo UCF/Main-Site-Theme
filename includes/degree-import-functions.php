@@ -195,9 +195,10 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 		'';
 
 	$quote_obj = get_imported_quote_data( $meta['quotes_imported_id'] );
-		if ( $quote_obj ) {
-			$meta['quote_imported_obj'] = $quote_obj;
-		}
+
+	if ( $quote_obj ) {
+		$meta['quote_imported_obj'] = $quote_obj;
+	}
 
 	return $meta;
 }
