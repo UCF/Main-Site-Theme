@@ -84,10 +84,10 @@ function get_imported_quote_data( $quote_id ) {
 
 	if ( $quote_data ) {
 		return array(
-			'quote_image' => $quote_data->image,
-			'quote_image_alt' => $quote_data->image_alt,
-			'quote_text_imported' => $quote_data->quote_text,
-			'quote_source_formatted' => $quote_data->source_formatted,
+			'degree_quote_image_url' => $quote_data->image,
+			'degree_quote_image_alt' => $quote_data->image_alt,
+			'degree_quote' => $quote_data->quote_text,
+			'degree_quote_footer' => $quote_data->source_formatted,
 		);
 	}
 
@@ -197,7 +197,7 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$quote_obj = get_imported_quote_data( $meta['quotes_imported_id'] );
 
 	if ( $quote_obj ) {
-		$meta['quote_imported_obj'] = $quote_obj;
+		$meta['degree_quotes'][] = $quote_obj;
 	}
 
 	return $meta;
