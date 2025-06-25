@@ -161,6 +161,27 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 		}
 	}
 
+	// We are just getting the first id but we can change this later if needed to catch more quotes
+	$meta['quotes_imported_id'] = (!empty($program->quotes[0])) ? $program->quotes[0] : '';
+
+	if(!empty($meta['quotes_imported_id'])){
+		$base_url = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_base_url' );
+		$api_key  = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_key' );
+
+		// Build the API URL (assumes quotes endpoint structure like /marketing/quotes/<id>/)
+		$quotes_url = trailingslashit( $base_url ) . 'marketing/quotes/' . $meta['quotes_imported_id'] . '/';
+
+		$quote_data = main_site_get_remote_response_json( $quotes_url );
+		if ( $quote_data ) {
+			$meta['quote_imported_obj'] = array (
+				'quote_image' => $quote_data->image,
+				'quote_image_alt' => $quote_data->image_alt,
+				'quote_text_imported' => $quote_data->quote_text,
+				'quote_source_formatted' => $quote_data->source_formatted,
+			);
+		}
+	}
+
 	return $meta;
 }
 
