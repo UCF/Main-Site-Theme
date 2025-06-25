@@ -86,7 +86,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_642ee338b45a5",
@@ -210,7 +211,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_642ee375b45a6",
@@ -347,7 +349,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_642ee3a4b45a7",
@@ -671,7 +674,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_642ee3cfb45a8",
@@ -735,7 +739,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_642ee3fcb45a9",
@@ -819,7 +824,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_59a438ba6507e",
@@ -938,7 +944,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5fad570953063",
@@ -975,7 +982,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5f9adda85c2cc",
@@ -1388,7 +1396,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5faebbbb92089",
@@ -1443,7 +1452,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5fa1b13bea6b7",
@@ -1780,7 +1790,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_6127ec2c61df1",
@@ -1926,7 +1937,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5f17393e12e2d",
@@ -2113,7 +2125,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5e961a02e3191",
@@ -2217,15 +2230,16 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
-                "key": "field_5e9dfbdf4b1b1",
+                "key": "field_685adf594cefe",
                 "label": "Degree Quotes",
                 "name": "degree_quotes",
                 "aria-label": "",
                 "type": "repeater",
-                "instructions": "Add quotes to be displayed on the degree page.",
+                "instructions": "",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -2233,21 +2247,22 @@
                     "class": "",
                     "id": ""
                 },
-                "collapsed": "",
+                "relevanssi_exclude": 0,
+                "layout": "row",
+                "pagination": 0,
                 "min": 0,
                 "max": 0,
-                "layout": "row",
+                "collapsed": "",
                 "button_label": "Add Row",
                 "rows_per_page": 20,
-                "acfe_repeater_stylised_button": 0,
                 "sub_fields": [
                     {
-                        "key": "field_5e9dfc2e4b1b3",
-                        "label": "Image",
-                        "name": "degree_quote_image",
+                        "key": "field_685ae3586f55b",
+                        "label": "Image Source",
+                        "name": "degree_quote_image_source",
                         "aria-label": "",
-                        "type": "image",
-                        "instructions": "Optional image of the person quoted.",
+                        "type": "radio",
+                        "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
@@ -2255,8 +2270,44 @@
                             "class": "",
                             "id": ""
                         },
+                        "relevanssi_exclude": 0,
+                        "choices": {
+                            "upload": "Uploaded Image",
+                            "url": "Image URL"
+                        },
+                        "default_value": "upload",
+                        "return_format": "value",
+                        "allow_null": 0,
+                        "other_choice": 0,
+                        "allow_in_bindings": 0,
+                        "layout": "vertical",
+                        "save_other_choice": 0,
+                        "parent_repeater": "field_685adf594cefe"
+                    },
+                    {
+                        "key": "field_685adf7c4ceff",
+                        "label": "Image",
+                        "name": "degree_quote_image",
+                        "aria-label": "",
+                        "type": "image",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_685ae3586f55b",
+                                    "operator": "==",
+                                    "value": "upload"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
                         "return_format": "url",
-                        "preview_size": "medium",
                         "library": "all",
                         "min_width": "",
                         "min_height": "",
@@ -2265,17 +2316,45 @@
                         "max_height": "",
                         "max_size": "",
                         "mime_types": "",
-                        "parent_repeater": "field_5e9dfbdf4b1b1",
-                        "uploader": "",
-                        "acfe_thumbnail": 0
+                        "allow_in_bindings": 0,
+                        "preview_size": "medium",
+                        "parent_repeater": "field_685adf594cefe"
                     },
                     {
-                        "key": "field_5e9f0ddea2389",
+                        "key": "field_685adf944cf00",
+                        "label": "Image URL",
+                        "name": "degree_quote_image_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": [
+                            [
+                                {
+                                    "field": "field_685ae3586f55b",
+                                    "operator": "==",
+                                    "value": "url"
+                                }
+                            ]
+                        ],
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_685adf594cefe"
+                    },
+                    {
+                        "key": "field_685adfa74cf01",
                         "label": "Image Alt Text",
                         "name": "degree_quote_image_alt",
                         "aria-label": "",
                         "type": "text",
-                        "instructions": "Enter text to be used for the image alt attribute.",
+                        "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
@@ -2283,20 +2362,22 @@
                             "class": "",
                             "id": ""
                         },
+                        "relevanssi_exclude": 0,
                         "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": "",
-                        "parent_repeater": "field_5e9dfbdf4b1b1"
+                        "parent_repeater": "field_685adf594cefe"
                     },
                     {
-                        "key": "field_5e9dfc184b1b2",
+                        "key": "field_685adfb84cf02",
                         "label": "Quote",
                         "name": "degree_quote",
                         "aria-label": "",
                         "type": "text",
-                        "instructions": "Quote to be displayed",
+                        "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
@@ -2304,20 +2385,22 @@
                             "class": "",
                             "id": ""
                         },
+                        "relevanssi_exclude": 0,
                         "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": "",
-                        "parent_repeater": "field_5e9dfbdf4b1b1"
+                        "parent_repeater": "field_685adf594cefe"
                     },
                     {
-                        "key": "field_5e9dfd994b1b4",
+                        "key": "field_685adfc14cf03",
                         "label": "Footer",
                         "name": "degree_quote_footer",
                         "aria-label": "",
                         "type": "text",
-                        "instructions": "The footer should contain the name, title (with cite tag) and company of the person quoted.",
+                        "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
                         "wrapper": {
@@ -2325,12 +2408,14 @@
                             "class": "",
                             "id": ""
                         },
-                        "default_value": "[Name], <cite title=\"[Title]\">[Title]<\/cite>, [Company]",
+                        "relevanssi_exclude": 0,
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
                         "placeholder": "",
                         "prepend": "",
                         "append": "",
-                        "maxlength": "",
-                        "parent_repeater": "field_5e9dfbdf4b1b1"
+                        "parent_repeater": "field_685adf594cefe"
                     }
                 ]
             },
@@ -2349,7 +2434,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5fa1cfcf9b6ac",
@@ -2514,7 +2600,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5e99ad4b5d498",
@@ -2571,7 +2658,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5f17a74c622a1",
@@ -2716,7 +2804,8 @@
                     "id": ""
                 },
                 "placement": "left",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5ea856c7532c5",
@@ -2810,12 +2899,7 @@
         ],
         "active": true,
         "description": "",
-        "show_in_rest": 0,
-        "acfe_display_title": "",
-        "acfe_autosync": "",
-        "acfe_form": 0,
-        "acfe_meta": "",
-        "acfe_note": ""
+        "show_in_rest": 0
     },
     {
         "key": "group_5f932570666c4",
@@ -2906,7 +2990,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652fe687410bb",
@@ -3029,7 +3114,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652fe714410bf",
@@ -3124,7 +3210,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652feac4e42a5",
@@ -3250,7 +3337,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652febba19724",
@@ -3296,7 +3384,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652fec5c30671",
@@ -3448,7 +3537,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652fed94df133",
@@ -3555,7 +3645,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652feda6df134",
@@ -3662,7 +3753,8 @@
                 },
                 "relevanssi_exclude": 0,
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_652fedb3df135",
@@ -3753,7 +3845,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_60bfb3957b136",
@@ -3930,7 +4023,9 @@
                         "placeholder": "",
                         "parent_repeater": "field_64f86e93520b6",
                         "allow_custom": 0,
-                        "search_placeholder": ""
+                        "search_placeholder": "",
+                        "create_options": 0,
+                        "save_options": 0
                     },
                     {
                         "key": "field_64f886f9c1eb8",
@@ -4023,7 +4118,9 @@
                         "placeholder": "",
                         "parent_repeater": "field_64f86e93520b6",
                         "allow_custom": 0,
-                        "search_placeholder": ""
+                        "search_placeholder": "",
+                        "create_options": 0,
+                        "save_options": 0
                     },
                     {
                         "key": "field_64f88a52a7dc6",
@@ -4152,7 +4249,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_59aed971c187c",
@@ -4302,7 +4400,9 @@
                 "ajax": 0,
                 "placeholder": "",
                 "allow_custom": 0,
-                "search_placeholder": ""
+                "search_placeholder": "",
+                "create_options": 0,
+                "save_options": 0
             },
             {
                 "key": "field_59aed93dc187b",
@@ -4347,7 +4447,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_590ca47bf6656",
@@ -4389,7 +4490,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_58f7a778185ef",
@@ -4490,7 +4592,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_58fe08bf28bc9",
@@ -4792,7 +4895,9 @@
                 "return_format": "value",
                 "placeholder": "",
                 "allow_custom": 0,
-                "search_placeholder": ""
+                "search_placeholder": "",
+                "create_options": 0,
+                "save_options": 0
             },
             {
                 "key": "field_59088a54aa936",
@@ -4872,7 +4977,9 @@
                 "return_format": "value",
                 "placeholder": "",
                 "allow_custom": 0,
-                "search_placeholder": ""
+                "search_placeholder": "",
+                "create_options": 0,
+                "save_options": 0
             },
             {
                 "key": "field_59089624aa938",
@@ -5013,7 +5120,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_58fa440d8a362",
@@ -5254,7 +5362,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5df107af52f9e",
@@ -5339,7 +5448,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5df29fdf4c2d8",
@@ -5475,7 +5585,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_5eb45823db2a0",
@@ -5646,7 +5757,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_61928d9a03aea",
@@ -5790,7 +5902,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_60afe706124ad",
@@ -5939,7 +6052,8 @@
                     "id": ""
                 },
                 "placement": "top",
-                "endpoint": 0
+                "endpoint": 0,
+                "selected": 0
             },
             {
                 "key": "field_60afe79a124b1",

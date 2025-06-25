@@ -597,3 +597,12 @@ if ( ! is_admin() ) {
 	add_filter( 'get_terms', 'comma_interests_filter' );
 	add_filter( 'get_the_terms', 'comma_interests_filter' );
 }
+
+function check_postmeta_update( $value, $post_id, $field, $original ) {
+	$label = $field['label'];
+	error_log("$label: $value");
+
+	return $value;
+}
+
+add_action( 'acf/update_value', 'check_postmeta_update', 10, 4 );
