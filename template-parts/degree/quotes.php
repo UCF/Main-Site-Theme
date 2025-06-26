@@ -12,7 +12,7 @@ if ( $post->post_type === 'degree' ) :
 						<?php
 							$source = get_sub_field( 'degree_quote_image_source' );
 							$img_url = $source === 'upload' ? get_sub_field( 'degree_quote_image' ) : get_sub_field( 'degree_quote_image_url' );
-							$quote_col_class = ( $img_url ) ? "col-lg-9" : "col-12 col-xl-10 offset-xl-1";
+							$quote_col_class = $img_url ? "col-lg-9" : "col-12 col-xl-10 offset-xl-1";
 						?>
 						<?php if ( $img_url ) : ?>
 							<div class="col-lg-3 text-center text-lg-right align-self-center">
