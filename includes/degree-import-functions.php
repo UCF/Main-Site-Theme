@@ -107,14 +107,8 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['page_header_height']      = 'header-media-default';
 	$meta['degree_description']      = get_api_catalog_description( $program, 'Catalog Description' );
 	$meta['degree_description_full'] = get_api_catalog_description( $program, 'Full Catalog Description' );
+	$meta['modern_description_copy'] = get_api_catalog_description( $program, 'Custom Description' );
 	$meta['graduate_slate_id']       = $program->graduate_slate_id ?? null;
-
-	if ( !empty ( get_api_catalog_description( $program, 'Main Site Description' ) ) ) {
-		$meta['modern_description_copy'] = get_api_catalog_description( $program, 'Main Site Description' );
-	} elseif ( empty( $meta['modern_description_copy'] ) ) {
-		// Here should be the logic to overwrite the modern description copy with catalog description if custom description is not set or we description from wordpress is not exists.
-		// $meta['modern_description_copy'] = $meta['degree_description'];
-	}
 
 	if ( empty( $meta['modern_degree_description'] ) ) unset( $meta['modern_degree_description'] );
 
@@ -257,8 +251,6 @@ add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2
  * @return array The modified post data
  */
 function mainsite_degree_formatted_post_data( $post_data, $program ) {
-	global $custom_post_data;
-	$custom_post_data = $post_data;
 	// Check to see if the excerpt is locked before continuing
 	if ( $program->existing_post && get_field( 'degree_lock_excerpt', $program->existing_post->ID ) === true ) {
 		return $post_data;
