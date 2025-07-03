@@ -257,8 +257,6 @@ add_filter( 'ucf_degree_get_post_terms', 'mainsite_degree_get_post_terms', 10, 2
  * @return array The modified post data
  */
 function mainsite_degree_formatted_post_data( $post_data, $program ) {
-	global $custom_post_data;
-	$custom_post_data = $post_data;
 	// Check to see if the excerpt is locked before continuing
 	if ( $program->existing_post && get_field( 'degree_lock_excerpt', $program->existing_post->ID ) === true ) {
 		return $post_data;
