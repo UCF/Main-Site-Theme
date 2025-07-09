@@ -110,7 +110,7 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['modern_description_copy'] = get_api_catalog_description( $program, 'Custom Description' );
 	$meta['graduate_slate_id']       = $program->graduate_slate_id ?? null;
 
-	if ( empty( $meta['modern_degree_description'] ) ) unset( $meta['modern_degree_description'] );
+	if ( empty( trim( $meta['modern_description_copy'] ) ) ) unset( $meta['modern_description_copy'] );
 
 	$outcomes      = main_site_get_remote_response_json( $program->outcomes );
 	$projections   = main_site_get_remote_response_json( $program->projection_totals );
