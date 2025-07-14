@@ -4186,6 +4186,326 @@
         "show_in_rest": 0
     },
     {
+        "key": "group_5cc3647a5be86",
+        "title": "MyUCF Control Panel Fields",
+        "fields": [
+            {
+                "key": "field_5cc364816d5df",
+                "label": "Header Images",
+                "name": "myucf_header_images",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "Add various images to display as the header image on myUCF.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "collapsed": "field_5cc3650b6d5e0",
+                "min": 1,
+                "max": 10,
+                "layout": "row",
+                "button_label": "Add Image",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_5ccb2088363f6",
+                        "label": "Header Image",
+                        "name": "header_image",
+                        "aria-label": "",
+                        "type": "group",
+                        "instructions": "Add a header image in several viewport sizes.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "layout": "block",
+                        "sub_fields": [
+                            {
+                                "key": "field_5ccb20cf363f7",
+                                "label": "Header Image Extra Small (575x270)",
+                                "name": "header_image_xs",
+                                "aria-label": "",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 575px and lower.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "header-img",
+                                "library": "all",
+                                "min_width": 575,
+                                "min_height": 270,
+                                "min_size": "",
+                                "max_width": 575,
+                                "max_height": 270,
+                                "max_size": 1,
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5ccb2144363f8",
+                                "label": "Header Image Small (767x270)",
+                                "name": "header_image_sm",
+                                "aria-label": "",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 767px down to 576px.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "header-img-sm",
+                                "library": "all",
+                                "min_width": 767,
+                                "min_height": 270,
+                                "min_size": "",
+                                "max_width": 767,
+                                "max_height": 270,
+                                "max_size": 1,
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5ccb21a5363fa",
+                                "label": "Header Image Medium (991x270)",
+                                "name": "header_image_md",
+                                "aria-label": "",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 991px down to 768px.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "header-img-md",
+                                "library": "all",
+                                "min_width": 991,
+                                "min_height": 270,
+                                "min_size": "",
+                                "max_width": 991,
+                                "max_height": 270,
+                                "max_size": 1,
+                                "mime_types": ""
+                            },
+                            {
+                                "key": "field_5ccb21dd363fb",
+                                "label": "Header Image Large (1600x550)",
+                                "name": "header_image_lg",
+                                "aria-label": "",
+                                "type": "image",
+                                "instructions": "Header image for view ports of 992px and up.",
+                                "required": 1,
+                                "conditional_logic": 0,
+                                "wrapper": {
+                                    "width": "",
+                                    "class": "",
+                                    "id": ""
+                                },
+                                "return_format": "url",
+                                "preview_size": "full",
+                                "library": "all",
+                                "min_width": 1600,
+                                "min_height": 550,
+                                "min_size": "",
+                                "max_width": 1600,
+                                "max_height": 550,
+                                "max_size": 1,
+                                "mime_types": ""
+                            }
+                        ],
+                        "parent_repeater": "field_5cc364816d5df"
+                    }
+                ]
+            },
+            {
+                "key": "field_5cc366346d5e2",
+                "label": "Sidebar Spotlight",
+                "name": "myucf_sidebar_spotlight",
+                "aria-label": "",
+                "type": "group",
+                "instructions": "Specify the sidebar spotlight to display on myUCF.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "sub_fields": [
+                    {
+                        "key": "field_5cc366576d5e3",
+                        "label": "Spotlight URL",
+                        "name": "spotlight_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "The URL to link to when the spotlight is clicked on.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "https:\/\/www.ucf.edu\/news\/"
+                    },
+                    {
+                        "key": "field_5cc366836d5e4",
+                        "label": "Spotlight Image",
+                        "name": "spotlight_image",
+                        "aria-label": "",
+                        "type": "image",
+                        "instructions": "The image to display as the spotlight.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "url",
+                        "preview_size": "ucf-spotlight-vertical",
+                        "library": "all",
+                        "min_width": "",
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": 475,
+                        "max_height": "",
+                        "max_size": 1,
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5cc366c16d5e5",
+                        "label": "Spotlight Alt Text",
+                        "name": "spotlight_alt_text",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "The alt text to add to the spotlight image.",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "maxlength": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5cc368ee61165",
+                "label": "Bottom Spotlight",
+                "name": "myucf_bottom_spotlight",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "Allows for a custom banner spotlight along the bottom ucf myUCF.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5cc70023a48b6",
+                "label": "Header Menu",
+                "name": "myucf_header_menu",
+                "aria-label": "",
+                "type": "nav_menu",
+                "instructions": "Choose the Nav Menu that will be displayed first in the footer.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "save_format": "id",
+                "container": 0,
+                "allow_null": 0
+            },
+            {
+                "key": "field_5cc70050a48b7",
+                "label": "Social Menu",
+                "name": "myucf_social_menu",
+                "aria-label": "",
+                "type": "nav_menu",
+                "instructions": "The Nav Menu that will be used to generate the social icons in the footer.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "save_format": "id",
+                "container": 0,
+                "allow_null": 0
+            },
+            {
+                "key": "field_5cc70071a48b8",
+                "label": "Footer Menu",
+                "name": "myucf_footer_menu",
+                "aria-label": "",
+                "type": "nav_menu",
+                "instructions": "The Nav Menu that will be used for the footer menu items.",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "save_format": "id",
+                "container": 0,
+                "allow_null": 0
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "options_page",
+                    "operator": "==",
+                    "value": "myucf-control-panel"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": false
+    },
+    {
         "key": "group_65494857be0c2",
         "title": "Optimizely Fields",
         "fields": [
@@ -4499,7 +4819,7 @@
                 "name": "page_header_image",
                 "aria-label": "",
                 "type": "image",
-                "instructions": "Header image to display at the lg+(1200px width) breakpoint and up.\r\nSuggested size: 1600 x 500 pixels.",
+                "instructions": "Header image to display at the lg+(1200px width) breakpoint and up.\r\nSuggested size: 1600 x 800 pixels.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4508,9 +4828,8 @@
                     "id": ""
                 },
                 "relevanssi_exclude": 0,
-                "uploader": "",
                 "return_format": "id",
-                "acfe_thumbnail": 0,
+                "library": "all",
                 "min_width": 768,
                 "min_height": "",
                 "min_size": "",
@@ -4518,8 +4837,7 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": "png,jpg,jpeg,webp",
-                "preview_size": "header-img-lg",
-                "library": "all"
+                "preview_size": "header-img-lg"
             },
             {
                 "key": "field_663be0bc8ea47",
@@ -4689,12 +5007,7 @@
         "hide_on_screen": "",
         "active": true,
         "description": "",
-        "show_in_rest": 0,
-        "acfe_display_title": "",
-        "acfe_autosync": "",
-        "acfe_form": 0,
-        "acfe_meta": "",
-        "acfe_note": ""
+        "show_in_rest": 0
     },
     {
         "key": "group_60afe4968b8d2",
