@@ -4548,32 +4548,6 @@
                 "library": "all"
             },
             {
-                "key": "field_68754b05f2484",
-                "label": "Header Image (md+) (copy)",
-                "name": "page_header_image_md_copy",
-                "aria-label": "",
-                "type": "image",
-                "instructions": "Header image to display at the md+ (576px width) breakpoint and up.\r\nSuggested size: 1200 x 500 pixels.",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "relevanssi_exclude": 0,
-                "return_format": "id",
-                "library": "all",
-                "min_width": 992,
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": "png,jpg,jpeg,webp",
-                "preview_size": "header-img-md"
-            },
-            {
                 "key": "field_58f7a7b8185f0",
                 "label": "Header Image (-xs)",
                 "name": "page_header_image_xs",
