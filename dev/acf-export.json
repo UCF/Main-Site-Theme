@@ -4499,7 +4499,7 @@
                 "name": "page_header_image",
                 "aria-label": "",
                 "type": "image",
-                "instructions": "Header image to display at the lg+(1200px width) breakpoint and up.\r\nSuggested size: 1600 x 500 pixels.",
+                "instructions": "Header image to display at the large (1200px width) breakpoint and above. The recommended size for a default header is 1600 × 500 pixels and for a fullscreen header, 1600 × 800 pixels.",
                 "required": 0,
                 "conditional_logic": 0,
                 "wrapper": {
@@ -4508,9 +4508,8 @@
                     "id": ""
                 },
                 "relevanssi_exclude": 0,
-                "uploader": "",
                 "return_format": "id",
-                "acfe_thumbnail": 0,
+                "library": "all",
                 "min_width": 768,
                 "min_height": "",
                 "min_size": "",
@@ -4518,8 +4517,7 @@
                 "max_height": "",
                 "max_size": "",
                 "mime_types": "png,jpg,jpeg,webp",
-                "preview_size": "header-img-lg",
-                "library": "all"
+                "preview_size": "header-img-lg"
             },
             {
                 "key": "field_663be0bc8ea47",
@@ -4689,12 +4687,7 @@
         "hide_on_screen": "",
         "active": true,
         "description": "",
-        "show_in_rest": 0,
-        "acfe_display_title": "",
-        "acfe_autosync": "",
-        "acfe_form": 0,
-        "acfe_meta": "",
-        "acfe_note": ""
+        "show_in_rest": 0
     },
     {
         "key": "group_60afe4968b8d2",
