@@ -21,17 +21,13 @@
       requestInfoIntervalId = setInterval(addClasses, 100);
     }
 
-    // Open the modal if the URL hash is "#requestInfoModal"
+    // Open the modal if the URL hash is #requestInfoModal or #catalogModal
     if (window.location.hash === '#requestInfoModal') {
       $requestInfoModal.modal('show');
     }
-
-    // Clear the hash when the modal is closed
-    $requestInfoModal.on('hidden.bs.modal', () => {
-      if (window.location.hash === '#requestInfoModal') {
-        history.replaceState(null, null, window.location.pathname + window.location.search);
-      }
-    });
+    if (window.location.hash === '#catalogModal') {
+      $('#catalogModal').modal('show');
+    }
   }
 
   $(degreePageInit);
