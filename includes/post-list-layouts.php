@@ -259,23 +259,6 @@ if ( class_exists( 'UCF_People_PostType' ) ) {
 	function ucfwp_post_list_display_people( $content, $items, $atts ) {
 		if ( ! is_array( $items ) && $items !== false ) { $items = array( $items ); }
 
-		$fa_version = get_theme_mod( 'font_awesome_version' );
-		$fa_email_icon = '';
-		$fa_phone_icon = '';
-		switch ( $fa_version ) {
-			case 'none':
-				break;
-			case '5':
-				$fa_email_icon = 'fas fa-envelope fa-fw mr-1';
-				$fa_phone_icon = 'fas fa-phone fa-fw mr-1';
-				break;
-			case '4':
-			default:
-				$fa_email_icon = 'fa fa-envelope fa-fw mr-1';
-				$fa_phone_icon = 'fa fa-phone fa-fw mr-1';
-				break;
-		}
-
 		ob_start();
 	?>
 		<?php if ( $items ): ?>
@@ -305,25 +288,6 @@ if ( class_exists( 'UCF_People_PostType' ) ) {
 				<?php if ( ! $is_content_empty ): ?>
 				</a>
 				<?php endif; ?>
-
-				<?php
-				if ( $email = get_field( 'person_email', $item->ID ) ):
-
-				?>
-				<div class="person-email">
-					<a href="mailto:<?php echo $email; ?>">
-						<?php if ( $fa_email_icon ): ?><span class="<?php echo $fa_email_icon; ?>" aria-hidden="true"></span><?php endif; ?>Email
-						<span class="sr-only"> <?php echo $email; ?></span>
-					</a>
-				</div>
-				<?php endif; ?>
-
-				<?php if ( $phone = get_field( 'person_phone', $item->ID ) ): ?>
-				<div class="person-phone">
-					<?php if ( $fa_phone_icon ): ?><span class="<?php echo $fa_phone_icon; ?>" aria-hidden="true"></span><?php endif; ?><?php echo $phone; ?>
-				</div>
-				<?php endif; ?>
-
 			</li>
 			<?php endforeach; ?>
 		</ul>
