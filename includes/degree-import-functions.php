@@ -65,6 +65,35 @@ function get_api_catalog_description( $program, $description_type='Catalog Descr
 	return ! empty( $retval ) ? $retval : $fallback;
 }
 
+/**
+ * Retrieves and formats quote data from the API.
+ *
+ * @param string $quote_id The quote ID to fetch.
+ * @return array|null The formatted quote data or null if not found.
+ */
+
+function get_imported_quote_data( $quote_id ) {
+	if ( empty( $quote_id ) ) return null;
+
+	$base_url = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_base_url' );
+	$api_key  = UCF_Degree_Config::get_option_or_default( 'ucf_degree_api_key' );
+
+	$quotes_url = trailingslashit( $base_url ) . 'marketing/quotes/' . $quote_id . '/';
+
+	$quote_data = main_site_get_remote_response_json( $quotes_url );
+
+	if ( $quote_data ) {
+		return array(
+			'degree_quote_image_source' => 'url',
+			'degree_quote_image_url' => $quote_data->image,
+			'degree_quote_image_alt' => $quote_data->image_alt,
+			'degree_quote' => $quote_data->quote_text,
+			'degree_quote_footer' => $quote_data->source_formatted,
+		);
+	}
+
+	return null;
+}
 
 /**
  * Apply main site-specific meta data to degrees during the degree import
@@ -81,7 +110,7 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 	$meta['modern_description_copy'] = get_api_catalog_description( $program, 'Custom Description' );
 	$meta['graduate_slate_id']       = $program->graduate_slate_id ?? null;
 
-	if ( empty( $meta['modern_degree_description'] ) ) unset( $meta['modern_degree_description'] );
+	if ( empty( trim( $meta['modern_description_copy'] ) ) ) unset( $meta['modern_description_copy'] );
 
 	$outcomes      = main_site_get_remote_response_json( $program->outcomes );
 	$projections   = main_site_get_remote_response_json( $program->projection_totals );
@@ -159,6 +188,19 @@ function mainsite_degree_format_post_data( $meta, $program ) {
 				'highlight_imported_copy' => $highlight->description
 			);
 		}
+	}
+
+	// We are just getting the first id but we can change this later if needed to catch more quotes
+	$meta['quotes_imported_id'] = ( ! empty( $program->quotes[0] ) ) ?
+		$program->quotes[0] :
+		'';
+
+	$quote_obj = get_imported_quote_data( $meta['quotes_imported_id'] );
+
+	if ( $quote_obj ) {
+		$meta['degree_quotes'] = array(
+			$quote_obj
+		);
 	}
 
 	return $meta;

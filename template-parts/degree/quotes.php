@@ -9,17 +9,24 @@ if ( $post->post_type === 'degree' ) :
 			<div class="container">
 				<?php while ( have_rows( 'degree_quotes', $post ) ) : the_row(); ?>
 					<div class="row">
-						<?php if( get_sub_field( 'degree_quote_image' ) ) : ?>
+						<?php
+							$source = get_sub_field( 'degree_quote_image_source' );
+							$img_url = $source === 'upload' ? get_sub_field( 'degree_quote_image' ) : get_sub_field( 'degree_quote_image_url' );
+							$quote_col_class = $img_url ? "col-lg-9" : "col-12 col-xl-10 offset-xl-1";
+						?>
+						<?php if ( $img_url ) : ?>
 							<div class="col-lg-3 text-center text-lg-right align-self-center">
-								<img src="<?php the_sub_field( 'degree_quote_image' ); ?>" class="img-fluid"
-									alt="<?php the_sub_field( 'degree_quote_image_alt' ); ?>">
+								<img src="<?php echo $img_url ?>" class="img-fluid rounded-circle" alt="<?php the_sub_field( 'degree_quote_image_alt' ); ?>">
 							</div>
 						<?php endif; ?>
-						<?php $quote_col_class = ( get_sub_field( 'degree_quote_image' ) ) ? "col-lg-9" : "col-12 col-xl-10 offset-xl-1"; ?>
 						<div class="<?php echo $quote_col_class; ?>">
 							<blockquote class="blockquote blockquote-quotation">
-								<p class="mb-0"><?php the_sub_field( 'degree_quote' ); ?></p>
-								<footer class="blockquote-footer"><?php the_sub_field( 'degree_quote_footer' ); ?></footer>
+								<p class="mb-0">
+									<?php the_sub_field( 'degree_quote' ); ?>”
+								</p>
+								<footer class="blockquote-footer mt-3">
+									<?php the_sub_field( 'degree_quote_footer' ); ?>
+								</footer>
 							</blockquote>
 						</div>
 					</div>

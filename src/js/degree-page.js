@@ -20,8 +20,17 @@
     if ($requestInfoModal) {
       requestInfoIntervalId = setInterval(addClasses, 100);
     }
+
+    // Open the modal if the URL hash is #requestInfoModal or #catalogModal
+    if (window.location.hash === '#requestInfoModal') {
+      $requestInfoModal.modal('show');
+    }
+    if (window.location.hash === '#catalogModal') {
+      $('#catalogModal').modal('show');
+    }
   }
 
   $(degreePageInit);
 
 }(jQuery));
+

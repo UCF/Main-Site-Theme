@@ -5,6 +5,12 @@
 function mainsite_get_post_list_layouts( $layouts ) {
 	$layouts['location'] = 'Locations';
 	$layouts['faculty_search'] = 'Faculty Search';
+
+	if ( class_exists( 'UCF_People_PostType' ) ) {
+		$layouts['people'] = 'People Layout';
+	}
+
+	return $layouts;
 }
 
 add_filter( 'ucf_post_list_get_layouts', 'mainsite_get_post_list_layouts', 10, 1 );
@@ -223,3 +229,85 @@ function mainsite_post_list_search( $content, $posts, $atts ) {
 
 add_filter( 'ucf_post_list_search', 'mainsite_post_list_search', 10, 3 );
 
+/**
+ * Add custom people list layout for UCF Post List shortcode
+ *
+ * @since 3.27.0
+ **/
+if ( class_exists( 'UCF_People_PostType' ) ) {
+	function mainsite_post_list_display_people_before( $content, $items, $atts ) {
+		ob_start();
+	?>
+	<div class="ucf-post-list mainsite-post-list-people">
+	<?php
+		return ob_get_clean();
+	}
+
+	add_filter( 'ucf_post_list_display_people_before', 'mainsite_post_list_display_people_before', 10, 3 );
+
+	function mainsite_post_list_display_people_title( $content, $items, $atts ) {
+		$formatted_title = '';
+		if ( $atts['list_title'] ) {
+			$formatted_title = '<h2 class="ucf-post-list-title">' . $atts['list_title'] . '</h2>';
+		}
+		return $formatted_title;
+	}
+
+	add_filter( 'ucf_post_list_display_people_title', 'mainsite_post_list_display_people_title', 10, 3 );
+
+
+	function ucfwp_post_list_display_people( $content, $items, $atts ) {
+		if ( ! is_array( $items ) && $items !== false ) { $items = array( $items ); }
+
+		ob_start();
+	?>
+		<?php if ( $items ): ?>
+		<ul class="list-unstyled row ucf-post-list-items">
+			<?php
+			foreach ( $items as $item ):
+				$is_content_empty = empty( $item->post_content );
+			?>
+			<li class="col-6 col-sm-4 col-md-3 col-xl-2 mt-3 mb-2 ucf-post-list-item">
+
+				<?php if ( ! $is_content_empty ): ?>
+				<a class="person-link" href="<?php echo get_permalink( $item->ID ); ?>">
+				<?php endif; ?>
+
+					<?php echo get_person_thumbnail( $item, 'thumbnail', array() ); ?>
+
+					<strong class="my-2 d-block person-name">
+						<?php echo mainsite_get_person_name( $item ); ?>
+					</strong>
+
+					<?php if ( $job_title = get_field( 'person_jobtitle', $item->ID ) ): ?>
+					<div class="mb-2 font-italic person-job-title">
+						<?php echo $job_title; ?>
+					</div>
+					<?php endif; ?>
+
+				<?php if ( ! $is_content_empty ): ?>
+				</a>
+				<?php endif; ?>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+		<?php else: ?>
+		<div class="ucf-post-list-error mb-4">No results found.</div>
+		<?php endif; ?>
+	<?php
+		return ob_get_clean();
+	}
+
+	add_filter( 'ucf_post_list_display_people', 'ucfwp_post_list_display_people', 10, 3 );
+
+
+	function ucfwp_post_list_display_people_after( $content, $items, $atts ) {
+		ob_start();
+	?>
+	</div>
+	<?php
+		return ob_get_clean();
+	}
+
+	add_filter( 'ucf_post_list_display_people_after', 'ucfwp_post_list_display_people_after', 10, 3 );
+}
