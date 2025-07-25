@@ -238,7 +238,7 @@ if ( class_exists( 'UCF_People_PostType' ) ) {
 	function mainsite_post_list_display_people_before( $content, $items, $atts ) {
 		ob_start();
 	?>
-	<div class="ucf-post-list ucfwp-post-list-people">
+	<div class="ucf-post-list mainsite-post-list-people">
 	<?php
 		return ob_get_clean();
 	}
