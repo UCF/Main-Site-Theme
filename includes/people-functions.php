@@ -24,6 +24,26 @@ add_filter( 'ucf_people_post_type_args', 'modify_people_post_type_args', 10, 1 )
 
 
 /**
+ * Builds the person's title using the built-in fields
+ * @author Jim Barnes
+ * @since 3.27.0
+ * @param WP_Post $post The Person post
+ * @return string
+ */
+function mainsite_get_person_name( $post ) {
+	if ( ! $post->post_type == 'person' ) { return; }
+	$prefix = get_field( 'person_title_prefix', $post->ID ) ?: '';
+	$suffix = get_field( 'person_title_suffix', $post->ID ) ?: '';
+	if ( $prefix ) {
+		$prefix = trim( $prefix ) . ' ';
+	}
+	if ( $suffix && substr( $suffix, 0, 1 ) !== ',' ) {
+		$suffix = ' ' . trim( $suffix );
+	}
+	return wptexturize( $prefix . $post->post_title . $suffix );
+}
+
+/**
  * Modifies the post_types array for the expertise
  * custom taxonomy.
  * @author Jim Barnes
