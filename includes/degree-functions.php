@@ -640,6 +640,54 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		$retval['alternateName'] = $post_meta['degree_name_short'];
 	}
 
+	$tuition_regex = '/[$](\d+[\d,.]*)\s(.*)/';
+	$offers = array();
+
+	if ( key_exists( 'degree_resident_tuition', $post_meta ) ) {
+		$matches = null;
+		preg_match( $tuition_regex, $post_meta['degree_resident_tuition'], $matches );
+
+		if ( $matches ) {
+			$amount = $matches[1];
+			$unit = $matches[2];
+
+			$offers[] = array(
+				'@type'              => 'Offer',
+				'category'           => 'Resident Tuition',
+				'priceSpecification' => array(
+					'@type'         => 'PriceSpecification',
+					'price'         => floatval( $amount ),
+					'priceCurrency' => 'USD',
+					'unitText'      => $unit
+				)
+			);
+		}
+	}
+
+	if ( key_exists( 'degree_nonresident_tuition', $post_meta ) ) {
+		$matches = null;
+		preg_match( $tuition_regex, $post_meta['degree_nonresident_tuition'], $matches );
+
+		if ( $matches ) {
+			$amount = $matches[1];
+			$unit = $matches[2];
+
+			$offers[] = array(
+				'@type'              => 'Offer',
+				'category'           => 'Nonresident Tuition',
+				'priceSpecification' => array(
+					'@type'         => 'PriceSpecification',
+					'price'         => floatval( $amount ),
+					'priceCurrency' => 'USD',
+					'unitText'      => $unit
+				)
+			);
+		}
+	}
+
+	if ( count( $offers ) ) {
+		$retval['offers'] = $offers;
+	}
 
 	return json_encode( $retval );
 }
