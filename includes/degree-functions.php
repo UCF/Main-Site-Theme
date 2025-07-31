@@ -622,6 +622,8 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 	$retval = array(
 		'@context' => 'https://schema.org',
 		'@type'    => 'EducationalOccupationalProgram',
+		'name'     => $degree->post_title,
+		'url'      => get_permalink( $degree->ID ),
 		'provider' => array(
 			'@type'   => 'CollegeOrUniversity',
 			'name'    => 'University of Central Florida'
@@ -633,6 +635,11 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 	if ( key_exists( 'degree_hours', $post_meta ) ) {
 		$retval['numberOfCredits'] = intval( $post_meta['degree_hours'] );
 	}
+
+	if ( key_exists( 'degree_name_short', $post_meta ) ) {
+		$retval['alternateName'] = $post_meta['degree_name_short'];
+	}
+
 
 	return json_encode( $retval );
 }
