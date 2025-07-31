@@ -606,3 +606,49 @@ function check_postmeta_update( $value, $post_id, $field, $original ) {
 }
 
 add_action( 'acf/update_value', 'check_postmeta_update', 10, 4 );
+
+/**
+ * Generates the JSON-LD data for a degree
+ * and returns the string for output in a
+ * script tag.
+ * @author Jim Barnes
+ * @since 3.28.0
+ * @param WP_Post $degree The degree data
+ *
+ * @return string
+ */
+function generate_degree_json_schema( $degree, $post_meta = null ) {
+	// Set all the required, common values
+	$retval = array(
+		'@context' => 'https://schema.org',
+		'@type'    => 'EducationalOccupationalProgram',
+		'provider' => array(
+			'@type'   => 'CollegeOrUniversity',
+			'name'    => 'University of Central Florida'
+		)
+	);
+
+	if ( ! $post_meta ) return json_encode( $retval );
+
+	if ( key_exists( 'degree_hours', $post_meta ) ) {
+		$retval['numberOfCredits'] = intval( $post_meta['degree_hours'] );
+	}
+
+	return json_encode( $retval );
+}
+
+function enqueue_degree_json_schema() {
+	$object = get_queried_object();
+	if ( $object->post_type !== 'degree' ) return;
+
+	$raw_postmeta = get_post_meta( $object->ID );
+	$post_meta = format_raw_postmeta( $raw_postmeta );
+
+?>
+<script type="application/ld+json">
+	<?php echo generate_degree_json_schema( $object, $post_meta ); ?>
+</script>
+<?php
+}
+
+add_action( 'wp_footer', 'enqueue_degree_json_schema' );
