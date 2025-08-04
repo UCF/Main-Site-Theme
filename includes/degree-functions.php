@@ -623,11 +623,7 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		'@context' => 'https://schema.org',
 		'@type'    => 'EducationalOccupationalProgram',
 		'name'     => $degree->post_title,
-		'url'      => get_permalink( $degree->ID ),
-		'provider' => array(
-			'@type'   => 'CollegeOrUniversity',
-			'name'    => 'University of Central Florida'
-		)
+		'url'      => get_permalink( $degree->ID )
 	);
 
 	if ( ! $post_meta ) return json_encode( $retval );
@@ -683,6 +679,22 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 				)
 			);
 		}
+	}
+
+	$colleges = wp_get_post_terms( $degree->ID, 'colleges' );
+	$college  = is_array( $colleges ) ? $colleges[0] : null;
+
+	$college_url = get_field( 'colleges_url', 'colleges_' . $college->term_id );
+	$college_url_clean = explode( '?', $college_url )[0] ? $college_url : null;
+
+	if ( $college ) {
+		$retval['provider'] = array(
+			'@type' => 'CollegeOrUniversity',
+			'name'  => $college->name,
+			'url'   => array(
+				'@id' => $college_url_clean
+			)
+		);
 	}
 
 	if ( count( $offers ) ) {

@@ -80,8 +80,6 @@ if ( $tag_term ) {
 	);
 }
 
-var_dump( $query );
-
 // If we're performing a search for a faculty member
 // by person name and Relevanssi is enabled, use
 // Relevanssi to get better search results.
