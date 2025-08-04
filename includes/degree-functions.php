@@ -606,3 +606,131 @@ function check_postmeta_update( $value, $post_id, $field, $original ) {
 }
 
 add_action( 'acf/update_value', 'check_postmeta_update', 10, 4 );
+
+/**
+ * Generates the JSON-LD data for a degree
+ * and returns the string for output in a
+ * script tag.
+ * @author Jim Barnes
+ * @since 3.28.0
+ * @param WP_Post $degree The degree data
+ *
+ * @return string
+ */
+function generate_degree_json_schema( $degree, $post_meta = null ) {
+	// Set all the required, common values
+	$retval = array(
+		'@context' => 'https://schema.org',
+		'@type'    => 'EducationalOccupationalProgram',
+		'name'     => $degree->post_title,
+		'url'      => get_permalink( $degree->ID )
+	);
+
+	if ( ! $post_meta ) return json_encode( $retval );
+
+	if ( key_exists( 'degree_hours', $post_meta ) ) {
+		$retval['numberOfCredits'] = intval( $post_meta['degree_hours'] );
+	}
+
+	if ( key_exists( 'degree_name_short', $post_meta ) ) {
+		$retval['alternateName'] = $post_meta['degree_name_short'];
+	}
+
+	$tuition_regex = '/[$](\d+[\d,.]*)\s(.*)/';
+	$offers = array();
+
+	if ( key_exists( 'degree_resident_tuition', $post_meta ) ) {
+		$matches = null;
+		preg_match( $tuition_regex, $post_meta['degree_resident_tuition'], $matches );
+
+		if ( $matches ) {
+			$amount = $matches[1];
+			$unit = $matches[2];
+
+			$offers[] = array(
+				'@type'              => 'Offer',
+				'category'           => 'Resident Tuition',
+				'priceSpecification' => array(
+					'@type'         => 'PriceSpecification',
+					'price'         => floatval( $amount ),
+					'priceCurrency' => 'USD',
+					'unitText'      => $unit
+				)
+			);
+		}
+	}
+
+	if ( key_exists( 'degree_nonresident_tuition', $post_meta ) ) {
+		$matches = null;
+		preg_match( $tuition_regex, $post_meta['degree_nonresident_tuition'], $matches );
+
+		if ( $matches ) {
+			$amount = $matches[1];
+			$unit = $matches[2];
+
+			$offers[] = array(
+				'@type'              => 'Offer',
+				'category'           => 'Nonresident Tuition',
+				'priceSpecification' => array(
+					'@type'         => 'PriceSpecification',
+					'price'         => floatval( $amount ),
+					'priceCurrency' => 'USD',
+					'unitText'      => $unit
+				)
+			);
+		}
+	}
+
+	$colleges = wp_get_post_terms( $degree->ID, 'colleges' );
+	$college  = is_array( $colleges ) ? $colleges[0] : null;
+
+	$college_profile_url = get_term_link( $college );
+
+	$college_url = get_field( 'colleges_url', 'colleges_' . $college->term_id );
+	$college_url_clean = explode( '?', $college_url )[0] ? $college_url : null;
+
+	if ( $college ) {
+		$retval['provider'] = array(
+			'@type'  => 'CollegeOrUniversity',
+			'name'   => $college->name,
+			'url'    => $college_profile_url,
+			'sameAs' =>  $college_url_clean
+		);
+	}
+
+	$program_types = wp_get_post_terms(
+		$degree->ID,
+		'program_types',
+		array(
+			'childless' => true
+		)
+	);
+
+	$program_type = is_array( $program_types ) ? $program_types[0] : null;
+
+	if ( $program_type ) {
+		$retval['programType'] = $program_type->name;
+	}
+
+	if ( count( $offers ) ) {
+		$retval['offers'] = $offers;
+	}
+
+	return json_encode( $retval );
+}
+
+function enqueue_degree_json_schema() {
+	$object = get_queried_object();
+	if ( $object->post_type !== 'degree' ) return;
+
+	$raw_postmeta = get_post_meta( $object->ID );
+	$post_meta = format_raw_postmeta( $raw_postmeta );
+
+?>
+<script type="application/ld+json">
+	<?php echo generate_degree_json_schema( $object, $post_meta ); ?>
+</script>
+<?php
+}
+
+add_action( 'wp_footer', 'enqueue_degree_json_schema' );
