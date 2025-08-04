@@ -698,6 +698,20 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		);
 	}
 
+	$program_types = wp_get_post_terms(
+		$degree->ID,
+		'program_types',
+		array(
+			'childless' => true
+		)
+	);
+
+	$program_type = is_array( $program_types ) ? $program_types[0] : null;
+
+	if ( $program_type ) {
+		$retval['programType'] = $program_type->name;
+	}
+
 	if ( count( $offers ) ) {
 		$retval['offers'] = $offers;
 	}
