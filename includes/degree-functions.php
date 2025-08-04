@@ -692,7 +692,7 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 	if ( $college ) {
 		$retval['provider'] = array(
 			'@type'  => 'CollegeOrUniversity',
-			'name'   => $college->name,
+			'name'   => 'UCF ' . $college->name,
 			'url'    => $college_profile_url,
 			'sameAs' =>  $college_url_clean
 		);
