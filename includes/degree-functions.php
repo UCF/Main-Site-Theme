@@ -684,16 +684,17 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 	$colleges = wp_get_post_terms( $degree->ID, 'colleges' );
 	$college  = is_array( $colleges ) ? $colleges[0] : null;
 
+	$college_profile_url = get_term_link( $college );
+
 	$college_url = get_field( 'colleges_url', 'colleges_' . $college->term_id );
 	$college_url_clean = explode( '?', $college_url )[0] ? $college_url : null;
 
 	if ( $college ) {
 		$retval['provider'] = array(
-			'@type' => 'CollegeOrUniversity',
-			'name'  => $college->name,
-			'url'   => array(
-				'@id' => $college_url_clean
-			)
+			'@type'  => 'CollegeOrUniversity',
+			'name'   => $college->name,
+			'url'    => $college_profile_url,
+			'sameAs' =>  $college_url_clean
 		);
 	}
 
