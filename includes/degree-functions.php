@@ -687,7 +687,7 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 	$college_profile_url = get_term_link( $college );
 
 	$college_url = get_field( 'colleges_url', 'colleges_' . $college->term_id );
-	$college_url_clean = explode( '?', $college_url )[0] ? $college_url : null;
+	$college_url_clean =  $college_url ? explode( '?', $college_url )[0] : null;
 
 	if ( $college ) {
 		$retval['provider'] = array(
