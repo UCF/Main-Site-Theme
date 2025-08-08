@@ -187,6 +187,10 @@ gulp.task('move-components-fontawesome', () => {
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-light-300.*`,
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.*`,
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-solid-900.*`,
+        `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-sharp-thin-100.*`,
+        `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-sharp-light-300.*`,
+        `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-sharp-regular-400.*`,
+        `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-sharp-solid-900.*`,
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-v4compatibility.*`
       ])
       .pipe(gulp.dest(`${config.dist.fontPath}/font-awesome-pro`));
