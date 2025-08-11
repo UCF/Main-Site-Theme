@@ -644,14 +644,14 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		preg_match( $tuition_regex, $post_meta['degree_resident_tuition'], $matches );
 
 		if ( $matches ) {
-			$amount = $matches[1];
+			$amount = str_replace( ',', '', $matches[1] );
 			$unit = $matches[2];
 
 			$offers[] = array(
 				'@type'              => 'Offer',
 				'category'           => 'Resident Tuition',
 				'priceSpecification' => array(
-					'@type'         => 'PriceSpecification',
+					'@type'         => 'UnitPriceSpecification',
 					'price'         => floatval( $amount ),
 					'priceCurrency' => 'USD',
 					'unitText'      => $unit
@@ -665,14 +665,14 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		preg_match( $tuition_regex, $post_meta['degree_nonresident_tuition'], $matches );
 
 		if ( $matches ) {
-			$amount = $matches[1];
+			$amount = str_replace( ',', '', $matches[1] );
 			$unit = $matches[2];
 
 			$offers[] = array(
 				'@type'              => 'Offer',
 				'category'           => 'Nonresident Tuition',
 				'priceSpecification' => array(
-					'@type'         => 'PriceSpecification',
+					'@type'         => 'UnitPriceSpecification',
 					'price'         => floatval( $amount ),
 					'priceCurrency' => 'USD',
 					'unitText'      => $unit
