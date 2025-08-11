@@ -644,14 +644,14 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		preg_match( $tuition_regex, $post_meta['degree_resident_tuition'], $matches );
 
 		if ( $matches ) {
-			$amount = $matches[1];
+			$amount = str_replace( ',', '', $matches[1] );
 			$unit = $matches[2];
 
 			$offers[] = array(
 				'@type'              => 'Offer',
 				'category'           => 'Resident Tuition',
 				'priceSpecification' => array(
-					'@type'         => 'PriceSpecification',
+					'@type'         => 'UnitPriceSpecification',
 					'price'         => floatval( $amount ),
 					'priceCurrency' => 'USD',
 					'unitText'      => $unit
@@ -665,14 +665,14 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 		preg_match( $tuition_regex, $post_meta['degree_nonresident_tuition'], $matches );
 
 		if ( $matches ) {
-			$amount = $matches[1];
+			$amount = str_replace( ',', '', $matches[1] );
 			$unit = $matches[2];
 
 			$offers[] = array(
 				'@type'              => 'Offer',
 				'category'           => 'Nonresident Tuition',
 				'priceSpecification' => array(
-					'@type'         => 'PriceSpecification',
+					'@type'         => 'UnitPriceSpecification',
 					'price'         => floatval( $amount ),
 					'priceCurrency' => 'USD',
 					'unitText'      => $unit
@@ -687,7 +687,7 @@ function generate_degree_json_schema( $degree, $post_meta = null ) {
 	$college_profile_url = get_term_link( $college );
 
 	$college_url = get_field( 'colleges_url', 'colleges_' . $college->term_id );
-	$college_url_clean = explode( '?', $college_url )[0] ? $college_url : null;
+	$college_url_clean =  $college_url ? explode( '?', $college_url )[0] : null;
 
 	if ( $college ) {
 		$retval['provider'] = array(
