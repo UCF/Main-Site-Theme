@@ -10,17 +10,27 @@
 <?php
 
 $full_transcript = get_field( 'video_full_transcript', $post->ID );
-$video_sections = get_field( 'video_sections', $post->ID );
-$spotlight = get_field( 'video_spotlight', $post->ID );
+$transcript      = get_field( 'video_full_transcript', $post->ID );
+$video_sections  = get_field( 'video_sections', $post->ID );
+$spotlight       = get_field( 'video_spotlight', $post->ID );
 
 ?>
 
-<div class="video-template-content">
-	<div class="container">
+<div class="video-template-content mb-4">
+	<div class="container pt-4">
 		<?php echo the_content(); ?>
 		<div class="row">
 			<div class="col-md-7">
-				<h2>Video Transcripts</h2>
+				<div class="row">
+					<div class="col-lg-7">
+						<h2>Video Transcripts</h2>
+					</div>
+				<?php if ( $transcript ) : ?>
+					<div class="col-lg-5 text-lg-right">
+						<button class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#transcripts">Full Transcript</button>
+					</div>
+				<?php endif; ?>
+				</div>
 				<div id="video-chapters" role="tablist">
 				<?php foreach( $video_sections as $idx => $section ) : ?>
 					<?php $section_id = sanitize_title( $section['section_title'] ); ?>
@@ -54,5 +64,24 @@ $spotlight = get_field( 'video_spotlight', $post->ID );
 		</div>
 	</div>
 </div>
+
+<?php if ( $transcript ) : ?>
+<!-- Transcript Modal -->
+<div class="modal fade" id="transcripts" tabindex="-1" role="dialog" aria-labelledby="transcriptLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="transcriptLabel">Full Transcript</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <?php echo wpautop( $transcript ); ?>
+      </div>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
 
 <?php get_footer(); ?>
