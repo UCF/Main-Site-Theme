@@ -183,6 +183,7 @@ function serverServe(done) {
 gulp.task('move-components-fontawesome', () => {
     if (fs.existsSync(`${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts`)){
       return gulp.src([
+        `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-brands-400.*`,
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-thin-100.*`,
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-light-300.*`,
         `${config.packagesPath}/@fortawesome/fontawesome-pro/webfonts/fa-regular-400.*`,

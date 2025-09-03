@@ -28,6 +28,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 										   . 'a wide range of opportunity, like learning diverse skills from world-renowned '
 										   . 'faculty to networking with top employers across Central Florida to gaining '
 										   . 'first-hand experience in internships nearby. Achieve your degree and more as a Knight.',
+	'degrees_colleges_activate_cta'       => false,
 	'gw_verify'                           => '8hYa3fslnyoRE8vg6COo48-GCMdi5Kd-1qFpQTTXSIw',
 	'gtm_id'                              => 'GTM-MBPLZH',
 	'google_map_key'                      => '',
@@ -122,6 +123,14 @@ function define_customizer_sections( $wp_customize ) {
 		THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers',
 		array(
 			'title' => 'Skills and Career Opportunities',
+			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
+		)
+	);
+
+	$wp_customize->add_section(
+		THEME_CUSTOMIZER_PREFIX . 'degrees-colleges',
+		array(
+			'title' => 'Colleges',
 			'panel' => THEME_CUSTOMIZER_PREFIX . 'degrees'
 		)
 	);
@@ -746,6 +755,52 @@ function define_customizer_fields( $wp_customize ) {
 			'label'       => 'Degree Career Program Limit',
 			'description' => 'The maximum number of job careers to import from the search service.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-skills_careers'
+		)
+	);
+
+	// Colleges
+	$wp_customize->add_setting(
+		'degrees_colleges_activate_cta',
+		array(
+			'default' => get_theme_mod_default( 'degrees_colleges_activate_cta' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_colleges_activate_cta',
+		array(
+			'type'        => 'checkbox',
+			'label'       => 'Activate Colleges Grid CTA',
+			'description' => 'Adds a single item to the colleges grid that can be used as a customizable call to action',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-colleges'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_colleges_cta_link'
+	);
+
+	$wp_customize->add_control(
+		'degrees_colleges_cta_link',
+		array(
+			'type'        => 'text',
+			'label'       => 'Colleges grid CTA Link URL',
+			'description' => 'The URL of the call to action grid item in the colleges grid',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-colleges'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_colleges_cta_content'
+	);
+
+	$wp_customize->add_control(
+		'degrees_colleges_cta_content',
+		array(
+			'type'        => 'textarea',
+			'label'       => 'Colleges grid CTA Content',
+			'description' => 'The content of the colleges grid call to action. Supports HTML.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-colleges'
 		)
 	);
 

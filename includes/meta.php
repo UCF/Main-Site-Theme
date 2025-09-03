@@ -162,6 +162,7 @@ if ( $gw_verify ):
 
 <?php // Preload Font Awesome
 $fonts_array = array(
+	'/font-awesome-pro/fa-brands-400.woff2',
 	'/font-awesome-pro/fa-thin-100.woff2',
 	'/font-awesome-pro/fa-light-300.woff2',
 	'/font-awesome-pro/fa-regular-400.woff2',
