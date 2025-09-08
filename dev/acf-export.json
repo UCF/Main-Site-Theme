@@ -1153,6 +1153,28 @@
                         "delay": 0
                     }
                 ]
+            },
+            {
+                "key": "field_68bee1b515450",
+                "label": "Additional Content",
+                "name": "video_additional_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "The page content after the spotlight area of the page until the footer.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "allow_in_bindings": 0,
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
             }
         ],
         "location": [

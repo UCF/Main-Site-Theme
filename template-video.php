@@ -9,10 +9,12 @@
 
 <?php
 
-$full_transcript = get_field( 'video_full_transcript', $post->ID );
-$transcript      = get_field( 'video_full_transcript', $post->ID );
-$video_sections  = get_field( 'video_sections', $post->ID );
-$spotlight       = get_field( 'video_spotlight', $post->ID );
+$full_transcript    = get_field( 'video_full_transcript', $post->ID );
+$transcript         = get_field( 'video_full_transcript', $post->ID );
+$video_sections     = get_field( 'video_sections', $post->ID );
+$spotlight          = get_field( 'video_spotlight', $post->ID );
+
+$additional_content = get_field( 'video_additional_content', $post->ID );
 
 ?>
 
@@ -63,7 +65,9 @@ $spotlight       = get_field( 'video_spotlight', $post->ID );
 			</div>
 		</div>
 	</div>
-</div>
+<?php if ( $additional_content ) : ?>
+	<?php echo apply_filters( 'the_content', $additional_content ); ?>
+<?php endif; ?>
 
 <?php if ( $transcript ) : ?>
 <!-- Transcript Modal -->
