@@ -57,6 +57,11 @@ function display_custom_top_degrees( $term ) {
  */
 function get_colleges_grid( $exclude_term=null ) {
 	$colleges = get_terms( array( 'taxonomy' => 'colleges', 'hide_empty' => false ) );
+
+	$activate_cta = get_theme_mod_or_default( 'degrees_colleges_activate_cta' );
+	$cta_link     = get_theme_mod_or_default( 'degrees_colleges_cta_link' );
+	$cta_content  = get_theme_mod_or_default( 'degrees_colleges_cta_content' );
+
 	ob_start();
 
 	if ( $colleges ):
@@ -79,6 +84,11 @@ function get_colleges_grid( $exclude_term=null ) {
 			endif;
 		endforeach;
 		?>
+		<?php if ( $activate_cta ) : ?>
+			<a href="<?php echo $cta_link; ?>" class="colleges-block bg-primary text-decoration-none">
+				<?php echo apply_filters( 'the_content', $cta_content ); ?>
+			</a>
+		<?php endif; ?>
 	</div>
 </section>
 <?php
