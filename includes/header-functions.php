@@ -200,6 +200,11 @@ function get_header_type( $obj, $videos=null, $images=null ) {
 function get_header_content_type( $obj ) {
 	$content_type = get_field( 'page_header_content_type', $obj ) ?: '';
 	$header_type  = get_query_var( 'header_type', null );
+
+	$template_filename = ( $obj instanceof WP_Post ) ?
+		get_post_meta( $obj->ID, '_wp_page_template', true ) :
+		null;
+
 	// we shouldn't have to do this, but, just in case:
 	if ( $header_type === null ) {
 		$header_type = get_header_type( $obj );
@@ -233,6 +238,9 @@ function get_header_content_type( $obj ) {
 	}
 	if ( $obj instanceof WP_Post && $obj->post_type === 'person' ) {
 		$content_type = 'person';
+	}
+	if ( $template_filename === 'template-video.php') {
+		$content_type = 'video';
 	}
 
 	return $content_type;
