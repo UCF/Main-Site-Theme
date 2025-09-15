@@ -25,11 +25,11 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 			<div class="col-md-7">
 				<div class="row">
 					<div class="col-lg-7">
-						<h2>Video Transcripts</h2>
+						<h2 class="mb-3">Video Highlights</h2>
 					</div>
 				<?php if ( $transcript ) : ?>
 					<div class="col-lg-5 text-lg-right">
-						<button class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#transcripts">Full Transcript</button>
+						<button class="btn btn-outline-primary btn-sm mb-3" data-toggle="modal" data-target="#transcripts">Full Transcript</button>
 					</div>
 				<?php endif; ?>
 				</div>
@@ -39,7 +39,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 					<div class="card">
 						<div class="card-header" id="<?php echo $section_id; ?>-id">
 							<h3 class="h5 mb-0">
-								<a data-toggle="collapse" href="#<?php echo $section_id; ?>"<?php echo ( $idx === 0 ) ? "aria-expanded=\"true\"" : ""; ?> aria-controls="<?php echo $section_id; ?>">
+								<a class="font-size-base text-secondary" data-toggle="collapse" href="#<?php echo $section_id; ?>"<?php echo ( $idx === 0 ) ? "aria-expanded=\"true\"" : ""; ?> aria-controls="<?php echo $section_id; ?>">
 									<?php echo $section['section_title']; ?>
 								</a>
 							</h3>
@@ -80,7 +80,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body font-serif">
         <?php echo wpautop( $transcript ); ?>
       </div>
     </div>
