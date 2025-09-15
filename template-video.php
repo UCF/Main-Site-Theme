@@ -19,17 +19,17 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 ?>
 
 <div class="video-template-content mb-4">
-	<div class="container pt-4">
+	<div class="container pt-5">
 		<?php echo the_content(); ?>
-		<div class="row">
+		<div class="row mt-5">
 			<div class="col-md-7">
 				<div class="row">
 					<div class="col-lg-7">
-						<h2 class="mb-3">Video Highlights</h2>
+						<h2 class="my-3">Video Highlights</h2>
 					</div>
 				<?php if ( $transcript ) : ?>
-					<div class="col-lg-5 text-lg-right">
-						<button class="btn btn-outline-primary btn-sm mb-3" data-toggle="modal" data-target="#transcripts">Full Transcript</button>
+					<div class="col-lg-5 text-lg-right py-3 align-content-end">
+						<a class="" href="#transcript" data-toggle="modal" data-target="#transcripts"><span class="fas fa-file-alt mr-2"></span>Full Transcript</a>
 					</div>
 				<?php endif; ?>
 				</div>
@@ -46,8 +46,10 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 						</div>
 						<div class="collapse<?php echo ( $idx === 0 ) ? " show" : ""; ?>" id="<?php echo $section_id; ?>" role="tabpanel" aria-labelledby="#<?php echo $section_id; ?>-id" data-parent="#video-chapters">
 							<div class="card-block">
-								<p class="text-center h6"><?php echo $section['section_time_stamp']; ?></p>
-								<?php echo wpautop( $section['section_summary'] ); ?>
+								<p class="text-center h5"><?php echo $section['section_time_stamp']; ?></p>
+								<div class="font-slab-serif font-size-lg line-height-5">
+									<?php echo wpautop( $section['section_summary'] ); ?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -80,7 +82,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body font-serif">
+      <div class="modal-body font-slab-serif">
         <?php echo wpautop( $transcript ); ?>
       </div>
     </div>
