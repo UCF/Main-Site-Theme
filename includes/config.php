@@ -19,6 +19,7 @@ define( 'THEME_CUSTOMIZER_DEFAULTS', serialize( array(
 	'degrees_graduate_application'        => 'https://application.graduate.ucf.edu/#/',
 	'degrees_graduate_rfi_url_base'       => 'https://applynow.graduate.ucf.edu/register/',
 	'degrees_graduate_rfi_form_id'        => 'bad6c39a-5c60-4895-9128-5785ce014085',
+	'degrees_undergraduate_rfi_url_base'  => 'https://futureknight.apply.ucf.edu/register/',
 	'degrees_careers_weight_threshold'    => 0.5,
 	'degrees_careers_per_program_limit'   => 10,
 	'catalog_desc_cta_intro'              => '',
@@ -262,6 +263,23 @@ function define_customizer_fields( $wp_customize ) {
 			'type'        => 'text',
 			'label'       => 'Graduate Degree RFI Form ID',
 			'description' => 'ID of the request-for-information form for graduate degrees.',
+			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
+		)
+	);
+
+	$wp_customize->add_setting(
+		'degrees_undergraduate_rfi_url_base',
+		array(
+			'default' => get_theme_mod_default( 'degrees_undergraduate_rfi_url_base' )
+		)
+	);
+
+	$wp_customize->add_control(
+		'degrees_undergraduate_rfi_url_base',
+		array(
+			'type'        => 'text',
+			'label'       => 'Undergraduate Degree RFI URL base',
+			'description' => 'Base URL for the request-for-information form for undergraduate degrees.',
 			'section'     => THEME_CUSTOMIZER_PREFIX . 'degrees-ctas'
 		)
 	);
