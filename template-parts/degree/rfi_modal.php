@@ -4,13 +4,33 @@ $post = isset( $post ) ? $post : get_queried_object();
 // If/when we start supporting undergraduate RFIs, this block
 // (and the rest of this template part) will have to be adjusted:
 if ( degree_show_rfi( $post ) ) :
-	$guid         = get_field( 'graduate_slate_id', $post );
-	$form_div_id  = 'form_bad6c39a-5c60-4895-9128-5785ce014085';
-	$rfi_form_src = get_degree_request_info_url_graduate( array(
-		'sys:field:pros_program1' => $guid,
-		'output' => 'embed',
-		'div' => $form_div_id
-	) );
+	$rfi_form_src = null;
+
+	if ( is_graduate_degree( $post ) ) {
+		$guid         = get_field( 'graduate_slate_id', $post );
+		$form_id      = ! empty( get_field( 'degree_override_form_id' ) ) ?
+			get_field( 'degree_override_form_id' ) :
+			get_theme_mod_or_default( 'degrees_graduate_rfi_form_id' );
+		$form_div_id  = "form_$form_id";
+		$rfi_form_src = get_degree_request_info_url_graduate( array(
+			'sys:field:pros_program1' => $guid,
+			'output' => 'embed',
+			'div' => $form_div_id
+		) );
+	} else if ( is_undergraduate_degree( $post ) ) {
+		$guid         = get_field( 'undergraduate_slate_id', $post );
+		$form_id      = ! empty( get_field( 'degree_override_form_id' ) ) ?
+			get_field( 'degree_override_form_id' ) :
+			get_theme_mod_or_default( 'degrees_undergraduate_rfi_form_id' );
+		$form_div_id  = "form_$form_id";
+		$rfi_form_src = get_degree_request_info_url_undergraduate( array(
+			'id'              => $form_id,
+			'sys:field:major' => $guid,
+			'output' => 'embed',
+			'div' => $form_div_id
+		) );
+	}
+
 
 	if ( $rfi_form_src ):
 ?>
