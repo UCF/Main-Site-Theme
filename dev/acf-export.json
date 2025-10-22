@@ -1244,6 +1244,93 @@
                 "ui_off_text": ""
             },
             {
+                "key": "field_68f8f9b377cbb",
+                "label": "Override Form ID",
+                "name": "degree_override_form_id",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "The form ID to use instead of the default undergraduate or graduate Slate form.",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5fad570953063",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_68f8e98248ba7",
+                "label": "Undergraduate Slate ID",
+                "name": "undergraduate_slate_id",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5fad570953063",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_68f8e9cf48ba9",
+                "label": "Graduate Slate ID",
+                "name": "graduate_slate_id",
+                "aria-label": "",
+                "type": "read_only",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5fad570953063",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "copy_to_clipboard": 0,
+                "display_type": "text",
+                "allow_in_bindings": 0
+            },
+            {
                 "key": "field_5e99fb2dbcede",
                 "label": "Program at a Glance",
                 "name": "",

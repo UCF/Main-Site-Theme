@@ -122,6 +122,17 @@ function degree_show_rfi( $post ) {
 		if ( $guid && $rfi_form_src_base ) {
 			$show_rfi = true;
 		}
+	} else if (
+		$post->post_type === 'degree'
+		&& is_undergraduate_degree( $post )
+		&& get_field( 'degree_custom_enable_rfi', $post ) === true
+	) {
+		$guid              = get_field( 'undergraduate_slate_id', $post );
+		$rfi_form_src_base = get_degree_request_info_url_undergraduate();
+
+		if ( $guid && $rfi_form_src_base ) {
+			$show_rfi = true;
+		}
 	}
 
 	return $show_rfi;
@@ -403,6 +414,31 @@ function get_degree_request_info_url_graduate( $params=array() ) {
 	return $url;
 }
 
+/**
+ * Returns a complete URL for the undergraduate RFI form, with
+ * optional params.
+ *
+ * @author Jim Barnes
+ * @since 3.32.0
+ * @param array $params Assoc. array of query params + values to append to the URL string
+ * @return mixed URL string or null if the URL base of form ID aren't set
+ */
+function get_degree_request_info_url_undergraduate( $params=array() ) {
+	$base = get_theme_mod_or_default( 'degrees_undergraduate_rfi_url_base' );
+	if ( ! $base ) return null;
+
+	if ( ! in_array( 'id', array_keys( $params ) ) ) {
+		$form_id = get_theme_mod_or_default( 'degrees_undergraduate_rfi_form_id' );
+		if ( ! $form_id ) return null;
+
+		$params['id'] = $form_id;
+	}
+
+	$separator = ( strpos( $base, '?' ) !== false ) ? '&' : '?';
+
+	$url = $base . $separator . http_build_query( $params );
+	return $url;
+}
 
 /**
  * Splits a provided tuition string into two parts:
