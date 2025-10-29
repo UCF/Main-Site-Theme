@@ -25,7 +25,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 			<div class="col-md-7">
 				<div class="row">
 					<div class="col-lg-7">
-						<h2 class="my-3">Video Highlights</h2>
+						<h2 class="heading-underline my-3 h3">Video Highlights</h2>
 					</div>
 				<?php if ( $transcript ) : ?>
 					<div class="col-lg-5 text-lg-right py-3 align-content-end">
@@ -60,7 +60,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 				<div class="card card-faded">
 					<img class="img-fliod card-top" src="<?php echo $spotlight['spotlight_image']; ?>" alt="" />
 					<div class="card-block">
-						<h2><?php echo $spotlight['spotlight_title']; ?></h2>
+						<h2 class="heading-underline mb-3 h3"><?php echo $spotlight['spotlight_title']; ?></h2>
 						<?php echo wpautop( $spotlight['spotlight_content'] ); ?>
 					</div>
 				</div>
