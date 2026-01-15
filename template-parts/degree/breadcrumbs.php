@@ -9,9 +9,19 @@ if ( $post->post_type === 'degree' ) :
 	$program_type_url_part = $program_type ? $program_type->slug . '/' : '';
 	$college_url_part      = $college ? 'college/' . $college->slug . '/' : '';
 
-	$degree_search_url     = get_permalink( get_page_by_title( 'Degree Search' ) );
-	$college_url           = $degree_search_url . '#!/' . $college_url_part;
-	$program_type_url      = $degree_search_url . '#!/' . $college_url_part . $program_type_url_part;
+	$degree_search_results = get_posts( array(
+		'post_title'             => 'Degree Search',
+		'post_type'              => 'page',
+		'numberposts'            => 1,
+		'update_post_term_cache' => false,
+		'update_post_meta_cache' => false,
+		'orderby'                => 'date ID',
+		'order'                  => 'ASC',
+	) );
+
+	$degree_search_url     = ! empty( $degree_search_results ) ? get_permalink( $degree_search_results[0] ) : false;
+	$college_url           = $degree_search_url . $college_url_part;
+	$program_type_url      = $degree_search_url . $program_type_url_part . $college_url_part;
 ?>
 <div class="container mt-4 mb-4 mb-sm-5 pb-md-3">
 	<hr class="mt-5 mb-4">
