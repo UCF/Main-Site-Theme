@@ -5,8 +5,12 @@
 @import 'header';
 @import 'degrees';
 
+// Functions
+@import 'functions/clip';
+
 // Components
 @import 'components/badges';
+@import 'components/brackets';
 @import 'components/degree-search-typeahead';
 @import 'components/icon-link';
 @import 'components/colleges-grid';
