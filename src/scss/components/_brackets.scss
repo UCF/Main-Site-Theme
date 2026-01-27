@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
+@use 'sass:math';
 
 $layouts: (
   '': (true, false, true, false),
@@ -21,12 +22,18 @@ $sizes: (
 
 @each $label, $layout in $layouts {
   .brackets#{$label} {
+    $size: map.get($sizes, 'default');
+
     border-width: $thickness;
     border-style: solid;
     border-color: $brand-primary;
+
+    // padding should be equal to the size of the bracket
+    padding: $size - $thickness;
+
     clip-path: create-bracket-clip(
       5px,
-      map.get($sizes, 'default'),
+      $size,
       list.nth($layout, 1),
       list.nth($layout, 2),
       list.nth($layout, 3),
@@ -35,6 +42,8 @@ $sizes: (
 
     @each $slabel, $size in $sizes {
       &.brackets-size-#{$slabel} {
+        padding: $size - $thickness !important;
+
         clip-path: create-bracket-clip(
           $thickness,
           $size,
