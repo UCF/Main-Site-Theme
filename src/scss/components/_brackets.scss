@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use 'sass:list';
+
+$layouts: (
+  '': (true, false, true, false),
+  '-alt': (false, true, false, true),
+  '-full': (true, true, true, true),
+  '-top-left': (true, false, false, false),
+  '-top-right': (false, true, false, false),
+  '-bottom-right': (false, false, true, false),
+  '-bottom-left': (false, false, false, true),
+);
+
+$thickness: 5px;
+
+$sizes: (
+  'sm': 24px,
+  'default': 48px,
+  'lg': 72px
+);
+
+@each $label, $layout in $layouts {
+  .brackets#{$label} {
+    border-width: $thickness;
+    border-style: solid;
+    border-color: $brand-primary;
+    clip-path: create-bracket-clip(
+      5px,
+      map.get($sizes, 'default'),
+      list.nth($layout, 1),
+      list.nth($layout, 2),
+      list.nth($layout, 3),
+      list.nth($layout, 4)
+    );
+
+    @each $slabel, $size in $sizes {
+      &.brackets-size-#{$slabel} {
+        clip-path: create-bracket-clip(
+          $thickness,
+          $size,
+          list.nth($layout, 1),
+          list.nth($layout, 2),
+          list.nth($layout, 3),
+          list.nth($layout, 4)
+        ) !important;
+      }
+    }
+  }
+}
+
+@each $label, $color in $brand-colors {
+  .brackets-color-#{$label} {
+    border-color: map.get($color, 'color');
+  }
+}
