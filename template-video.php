@@ -68,7 +68,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 		</div>
 	</div>
 <?php if ( $additional_content ) : ?>
-	<?php echo apply_filters( 'the_content', $additional_content ); ?>
+	<?php echo $additional_content; ?>
 <?php endif; ?>
 
 <?php if ( $transcript ) : ?>
