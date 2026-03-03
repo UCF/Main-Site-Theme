@@ -119,9 +119,13 @@ $responses = get_field( 'personal_response', $post->ID );
 $categories = get_the_category( $post->ID );
 
 $args = array(
-	'post_type'    => 'page',
-	'post__not_in' => array( $post->ID ),
-	'category_in'  => $categories
+	'post_type'      => 'page',
+	'post__not_in'   => array( $post->ID ),
+	'posts_per_page' => 8,
+	'orderby'        => 'rand',
+	'category_in'    => $categories,
+	'meta_key'       => '_wp_page_template',
+	'meta_value'     => 'template-article.php'
 );
 
 $related_stories = get_posts( $args );
