@@ -119,6 +119,7 @@
  */
 $responses = get_field( 'personal_response', $post->ID );
 ?>
+<?php if ( $responses ) : ?>
 <aside>
 	<div class="container mb-4">
 		<div class="row">
@@ -140,6 +141,7 @@ $responses = get_field( 'personal_response', $post->ID );
 		</div>
 	</div>
 </aside>
+<?php endif; ?>
 </article>
 
 <?php
@@ -162,7 +164,7 @@ $args = array(
 $related_stories = get_posts( $args );
 
 ?>
-<aside class="jumbotron py-5 bg-faded">
+<aside class="jumbotron py-5 bg-faded mb-0">
 	<div class="container">
 		<div class="row">
 		<?php foreach ( $related_stories as $story ) :
