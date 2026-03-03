@@ -13,8 +13,6 @@
 	/**
 	 * This is the main content section
 	 */
-	$title = get_field( 'title', $post->ID );
-	$subtitle = get_field( 'sub_title', $post->ID );
 	$thumbnail = get_the_post_thumbnail(
 		$post->ID,
 		'large',
@@ -25,8 +23,6 @@
 	$abstract = get_field( 'abstract', $post->ID );
 	?>
 	<div class="col-md-8">
-		<h1 class="text-uppercase"><?php echo $title; ?></h1>
-		<p class="text-default"><?php echo $subtitle; ?></p>
 		<?php echo $thumbnail; ?>
 		<div class="abstract mb-4"><p><?php echo $abstract; ?></p></div>
 		<?php the_content(); ?>
