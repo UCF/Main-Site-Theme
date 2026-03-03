@@ -40,14 +40,17 @@
 	$coauthors = get_field( 'co-authors', $post->ID );
 	$references = get_field( 'references', $post->ID );
 
+	$undergraduate_programs = get_field( 'related_undergraduate_programs', $post->ID );
+	$graduate_programs = get_field( 'related_graduate_programs', $post->ID );
+
 	?>
 	<div class="col-md-4">
 	<?php if ( $authors ) : ?>
 	<aside class="card bg-faded mb-4">
 		<div class="card-block">
-			<h2 class="h3 heading-underline">Researchers in Focus</h2>
+			<h2 class="h4 heading-underline">Researchers in Focus</h2>
 			<?php if ( $authors ) : ?>
-			<h3 class="h4">Authors</h3>
+			<h3 class="h6">Authors</h3>
 			<?php foreach ($authors as $author) : ?>
 				<div class="pl-2">
 					<p class="h6"><?php echo $author['name']; ?></p>
@@ -56,7 +59,7 @@
 			<?php endforeach; ?>
 			<?php endif; ?>
 			<?php if ( $references ) : ?>
-			<h3 class="h4">References</h3>
+			<h3 class="h6">References</h3>
 			<ol class="references pl-4">
 			<?php foreach( $references as $idx => $reference ) : ?>
 				<li class="list-item font-size-sm"><?php echo $reference['reference']; ?></li>
@@ -70,12 +73,40 @@
 	<?php if ( $coauthors ) : ?>
 	<aside class="card bg-faded mb-4">
 		<div class="card-block">
-			<h2 class="h3 heading-underline">Co-Authors</h2>
+			<h2 class="h4 heading-underline">Co-Authors</h2>
 			<ul class="list-unstyled">
 			<?php foreach ( $coauthors as $coauthor ) : ?>
 				<li class="list-item mb-4"><?php echo $coauthor['co-author']; ?></li>
 			<?php endforeach; ?>
 			</ul>
+		</div>
+	</aside>
+	<?php endif; ?>
+
+	<?php if ( $undergraduate_programs || $graduate_programs ) : ?>
+	<aside class="card bg-faded mb-4">
+		<div class="card-block">
+			<h2 class="h4 heading-underline">Related Programs</h2>
+		<?php if ( $undergraduate_programs ) : ?>
+			<h3 class="h6 text-uppercase">Undergraduate Programs</h3>
+			<ul class="list-unstyled pl-4">
+			<?php foreach ( $undergraduate_programs as $program ) : ?>
+				<li class="list-item">
+					<a href="<?php echo get_the_permalink( $program ); ?>"><?php echo $program->post_title; ?></a>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+		<?php if ( $graduate_programs ) : ?>
+			<h3 class="h6 text-uppercase">Graduate Programs</h3>
+			<ul class="list-unstyled pl-4">
+			<?php foreach ( $graduate_programs as $program ) : ?>
+				<li class="list-item">
+					<a href="<?php echo get_the_permalink( $program ); ?>"><?php echo $program->post_title; ?></a>
+				</li>
+			<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
 		</div>
 	</aside>
 	<?php endif; ?>
