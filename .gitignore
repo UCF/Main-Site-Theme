@@ -36,3 +36,7 @@ npm-debug.log
 
 # vscode
 .vscode
+
+# Local place to keep files
+# we don't want tracked
+localstash/
