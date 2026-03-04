@@ -1,5 +1,854 @@
 [
     {
+        "key": "group_68d5c41de6558",
+        "title": "Article Fields",
+        "fields": [
+            {
+                "key": "field_68d5c436a9e9a",
+                "label": "Title",
+                "name": "title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_68d5c70ea9e9b",
+                "label": "Sub Title",
+                "name": "sub_title",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_68d5c41ba9e99",
+                "label": "Abstract",
+                "name": "abstract",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_68d5c73ba9e9c",
+                "label": "Author",
+                "name": "author",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_68d5c778a9e9d",
+                        "label": "Name",
+                        "name": "name",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_68d5c73ba9e9c"
+                    },
+                    {
+                        "key": "field_68d5c7faa9e9f",
+                        "label": "Bio",
+                        "name": "bio",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68d5c73ba9e9c"
+                    },
+                    {
+                        "key": "field_68d5c80aa9ea0",
+                        "label": "Email",
+                        "name": "email",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_68d5c73ba9e9c"
+                    },
+                    {
+                        "key": "field_68d5c813a9ea1",
+                        "label": "Mobile",
+                        "name": "mobile",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_68d5c73ba9e9c"
+                    },
+                    {
+                        "key": "field_68d5c81aa9ea2",
+                        "label": "Profile URL",
+                        "name": "profile_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_68d5c73ba9e9c"
+                    }
+                ]
+            },
+            {
+                "key": "field_68e53111d1b3e",
+                "label": "Interview",
+                "name": "interview",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_68e53111d1b3f",
+                        "label": "Name",
+                        "name": "name",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_68e53111d1b3e"
+                    },
+                    {
+                        "key": "field_68e53111d1b40",
+                        "label": "Bio",
+                        "name": "bio",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68e53111d1b3e"
+                    },
+                    {
+                        "key": "field_68e53111d1b41",
+                        "label": "Email",
+                        "name": "email",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_68e53111d1b3e"
+                    },
+                    {
+                        "key": "field_68e53111d1b42",
+                        "label": "Mobile",
+                        "name": "mobile",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_68e53111d1b3e"
+                    },
+                    {
+                        "key": "field_68e53111d1b43",
+                        "label": "Profile URL",
+                        "name": "profile_url",
+                        "aria-label": "",
+                        "type": "url",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "parent_repeater": "field_68e53111d1b3e"
+                    },
+                    {
+                        "key": "field_68e53137d1b44",
+                        "label": "Interviewer",
+                        "name": "interviewer",
+                        "aria-label": "",
+                        "type": "true_false",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "message": "",
+                        "default_value": 0,
+                        "allow_in_bindings": 0,
+                        "ui": 0,
+                        "ui_on_text": "",
+                        "ui_off_text": "",
+                        "parent_repeater": "field_68e53111d1b3e"
+                    }
+                ]
+            },
+            {
+                "key": "field_68d5caf0af131",
+                "label": "Research Objectives",
+                "name": "research_objectives",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_68d5cb09af132",
+                        "label": "Objectives",
+                        "name": "objectives",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68d5caf0af131"
+                    }
+                ]
+            },
+            {
+                "key": "field_68d5cb24af133",
+                "label": "References",
+                "name": "references",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_68d5cb44af134",
+                        "label": "Reference",
+                        "name": "reference",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68d5cb24af133"
+                    }
+                ]
+            },
+            {
+                "key": "field_68d5cb56af135",
+                "label": "Co-Authors",
+                "name": "co-authors",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_68d5cb6eaf136",
+                        "label": "Co-Author",
+                        "name": "co-author",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68d5cb56af135"
+                    }
+                ]
+            },
+            {
+                "key": "field_68d5cb81af137",
+                "label": "Personal Response",
+                "name": "personal_response",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add Row",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_68d5cb96af138",
+                        "label": "Question",
+                        "name": "question",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68d5cb81af137"
+                    },
+                    {
+                        "key": "field_68d5cba6af139",
+                        "label": "Answer",
+                        "name": "answer",
+                        "aria-label": "",
+                        "type": "textarea",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "rows": "",
+                        "placeholder": "",
+                        "new_lines": "",
+                        "parent_repeater": "field_68d5cb81af137"
+                    }
+                ]
+            },
+            {
+                "key": "field_68d5cd250d492",
+                "label": "Recommended Citation",
+                "name": "recommended_citation",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_69a6fced8de5c",
+                "label": "Related Undergraduate Programs",
+                "name": "related_undergraduate_programs",
+                "aria-label": "",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "post_type": [
+                    "degree"
+                ],
+                "post_status": [
+                    "publish"
+                ],
+                "taxonomy": [
+                    "program_types:undergraduate-program"
+                ],
+                "return_format": "object",
+                "multiple": 1,
+                "allow_null": 0,
+                "allow_in_bindings": 0,
+                "bidirectional": 0,
+                "ui": 1,
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_69a6fd408de5d",
+                "label": "Related Graduate Programs",
+                "name": "related_graduate_programs",
+                "aria-label": "",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "post_type": [
+                    "degree"
+                ],
+                "post_status": [
+                    "publish"
+                ],
+                "taxonomy": [
+                    "program_types:graduate-program"
+                ],
+                "return_format": "object",
+                "multiple": 1,
+                "allow_null": 0,
+                "allow_in_bindings": 0,
+                "bidirectional": 0,
+                "ui": 1,
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_68ed607e5d307",
+                "label": "Related Undergraduate Degree Programs",
+                "name": "related_undergraduate_degree_programs",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Bachelor’s in Entertainment Management": "Bachelor’s in Entertainment Management",
+                    "Bachelor’s in Event Management": "Bachelor’s in Event Management",
+                    "Bachelor’s in Hospitality Management": "Bachelor’s in Hospitality Management",
+                    "Bachelor’s in Lodging and Restaurant Management": "Bachelor’s in Lodging and Restaurant Management",
+                    "Bachelor’s in Theme Park and Attraction Management": "Bachelor’s in Theme Park and Attraction Management",
+                    "Online Bachelor’s in Hospitality Management": "Online Bachelor’s in Hospitality Management",
+                    "Online Bachelor’s in Entertainment Management": "Online Bachelor’s in Entertainment Management",
+                    "Online Bachelor’s in Lodging and Restaurant Management": "Online Bachelor’s in Lodging and Restaurant Management"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "allow_in_bindings": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_68ed60db4ffc6",
+                "label": "Related Undergraduate Certificate Programs",
+                "name": "related_undergraduate_certificate_programs",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Entertainment Management Undergraduate Certificate": "Entertainment Management Undergraduate Certificate",
+                    "Beverage Management Undergraduate Certificate": "Beverage Management Undergraduate Certificate",
+                    "Hospitality Information Technology Undergraduate Certificate": "Hospitality Information Technology Undergraduate Certificate",
+                    "Hospitality, Health, and Well-Being Undergraduate Certificate": "Hospitality, Health, and Well-Being Undergraduate Certificate",
+                    "Managing Sporting Events Undergraduate Certificate": "Managing Sporting Events Undergraduate Certificate",
+                    "Professional Tennis Management Undergraduate Certificate": "Professional Tennis Management Undergraduate Certificate",
+                    "Theme Park and Attraction Management Undergraduate Certificate": "Theme Park and Attraction Management Undergraduate Certificate"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "allow_in_bindings": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_68ed61044ffc7",
+                "label": "Related Hospitality Minors",
+                "name": "related_hospitality_minors",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Hospitality Management Minor": "Hospitality Management Minor",
+                    "Event Management Minor": "Event Management Minor"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "allow_in_bindings": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_68ed61244ffc8",
+                "label": "Related Graduate Degree Programs",
+                "name": "related_graduate_degree_programs",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Master’s in Hospitality & Tourism Management": "Master’s in Hospitality & Tourism Management",
+                    "Master’s in Themed Experiences": "Master’s in Themed Experiences",
+                    "Master’s in Travel Technology and Analytics": "Master’s in Travel Technology and Analytics",
+                    "Online Master’s in Event Leadership": "Online Master’s in Event Leadership",
+                    "Online Master’s in Hospitality & Tourism Management": "Online Master’s in Hospitality & Tourism Management",
+                    "Online Master’s in Travel Technology and Analytics": "Online Master’s in Travel Technology and Analytics"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "allow_in_bindings": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_68ed61494ffc9",
+                "label": "Related Graduate Certificate Programs",
+                "name": "related_graduate_certificate_programs",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Leadership and Strategy in Hospitality and Tourism": "Leadership and Strategy in Hospitality and Tourism",
+                    "Financial Management for the Hospitality and Tourism Industry": "Financial Management for the Hospitality and Tourism Industry",
+                    "Destination Marketing & Management": "Destination Marketing & Management",
+                    "Event Management": "Event Management",
+                    "Hospitality and Tourism Technologies": "Hospitality and Tourism Technologies"
+                },
+                "default_value": [],
+                "return_format": "value",
+                "allow_custom": 0,
+                "allow_in_bindings": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            },
+            {
+                "key": "field_68ed61634ffca",
+                "label": "Related Doctoral Degree Programs",
+                "name": "related_doctoral_degree_programs",
+                "aria-label": "",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Hospitality Management (PhD)": "Hospitality Management (PhD)"
+                },
+                "default_value": [
+                    "Hospitality Management (PhD)"
+                ],
+                "return_format": "value",
+                "allow_custom": 0,
+                "allow_in_bindings": 0,
+                "layout": "vertical",
+                "toggle": 0,
+                "save_custom": 0,
+                "custom_choice_button_text": "Add new choice"
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-article.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0,
+        "display_title": ""
+    },
+    {
         "key": "group_58ff540088983",
         "title": "College Fields",
         "fields": [
