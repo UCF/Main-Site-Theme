@@ -33,6 +33,7 @@
 	 * This is the sidebar section
 	 */
 	$authors = get_field( 'author', $post->ID );
+	$interview = get_field( 'interview', $post->ID );
 	$coauthors = get_field( 'co-authors', $post->ID );
 	$references = get_field( 'references', $post->ID );
 
@@ -64,6 +65,44 @@
 			<?php endif; ?>
 		</div>
 	</aside>
+	<?php endif; ?>
+
+	<?php if ( $interview ) :
+
+		$interviewees = array_filter( $interview, function( $person ) {
+			return $person['interviewer'] === false;
+		} );
+
+		$interviewers = array_filter( $interview, function( $person ) {
+			return $person['interviewer'] === true;
+		} );
+	?>
+	<?php if ( $interviewees ) : ?>
+	<aside class="card bg-faded mb-4">
+		<div class="card-block">
+		<?php foreach ( $interviewees as $person ) : ?>
+		<div class="pl-2">
+			<p class="h4"><?php echo $person['name']; ?></p>
+			<p class="font-size-sm"><?php echo $person['bio']; ?></p>
+		</div>
+		<?php endforeach; ?>
+		</div>
+	</aside>
+	<?php endif; ?>
+
+	<?php if ( $interviewers ) : ?>
+	<aside class="card bg-faded mb-4">
+		<div class="card-block">
+			<h2 class="h4 heading-underline">Interviewers</h2>
+			<?php foreach ( $interviewers as $person ) : ?>
+			<div class="pl-2">
+				<p class="h6"><?php echo $person['name']; ?></p>
+				<p class="font-size-sm"><?php echo $person['bio']; ?></p>
+			</div>
+			<?php endforeach; ?>
+		</div>
+	</aside>
+	<?php endif; ?>
 	<?php endif; ?>
 
 	<?php if ( $coauthors ) : ?>
