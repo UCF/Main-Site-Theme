@@ -8,6 +8,7 @@ include_once THEME_DIR . 'includes/meta.php';
 include_once THEME_DIR . 'includes/media-backgrounds.php';
 include_once THEME_DIR . 'includes/navwalker.php';
 include_once THEME_DIR . 'includes/header-functions.php';
+include_once THEME_DIR . 'includes/page-functions.php';
 
 include_once THEME_DIR . 'includes/location-functions.php';
 include_once THEME_DIR . 'includes/degree-functions.php';
