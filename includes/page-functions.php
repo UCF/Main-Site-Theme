@@ -40,13 +40,16 @@ add_filter( 'manage_page_posts_columns', 'main_site_add_page_template_column', 1
 function main_site_page_template_column_data( $column_name, $post_id ) {
 	if ( $column_name !== 'template_name' ) return;
 
-	global $wp;
-
 	$template_name_slug_map = wp_get_theme()->get_page_templates();
 	$template_slug = get_page_template_slug( $post_id );
 	$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[$template_slug] : 'Default';
 
-	$current_url = home_url( add_query_arg( array( 'post_type' => 'page' ), $wp->request ) );
+	$current_url = add_query_arg(
+		array(
+			'post_type' => 'page',
+		),
+		admin_url( 'edit.php' )
+	);
 
 	$url = add_query_arg(
 		'page_template',
@@ -56,7 +59,7 @@ function main_site_page_template_column_data( $column_name, $post_id ) {
 
 	ob_start();
 ?>
-	<a href="<?php echo $url; ?>"><?php echo $template_name; ?></a>
+	<a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $template_name ); ?></a>
 <?php
 	echo ob_get_clean();
 }
