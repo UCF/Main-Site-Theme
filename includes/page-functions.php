@@ -36,7 +36,10 @@ add_filter('manage_page_posts_columns', 'main_site_add_page_template_column', 10
  * Sets the template name for the page template name column
  * @author Jim Barnes
  * @since 3.34.2
- * @return string
+ * @param string $column_name The name of the column
+ * @param int $post_id The post ID of the specific row
+ *
+ * @return void
  */
 function main_site_page_template_column_data($column_name, $post_id) {
 	if ($column_name !== 'template_name') return;
