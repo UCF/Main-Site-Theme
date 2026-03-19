@@ -98,7 +98,10 @@ function main_site_add_template_filter() {
 	$screen = get_current_screen();
 
     if ( $screen->post_type === 'page' ) {
-        $selected = $_GET['page_template'] ?? '';
+        $selected = isset( $_GET['page_template'] )
+			? sanitize_text_field( wp_unslash( $_GET['page_template'] ) )
+			: '';
+
 		$page_templates = wp_get_theme()->get_page_templates();
 
 		ob_start();
@@ -107,8 +110,8 @@ function main_site_add_template_filter() {
 		<option value="">All Templates</option>
 		<?php foreach( $page_templates as $slug => $name ) : ?>
 		<option
-			value="<?php echo $slug; ?>"<?php echo $selected === $slug ? ' selected' : ''; ?>>
-				<?php echo $name; ?>
+			value="<?php echo esc_attr( $slug ); ?>"<?php echo $selected === $slug ? ' selected' : ''; ?>>
+				<?php echo esc_html( $name ); ?>
 		</option>
 		<?php endforeach; ?>
 	</select>
@@ -138,15 +141,24 @@ function main_site_template_name_order_by( $query ) {
         $query->set( 'orderby', 'meta_value' ); // Use 'meta_value' for text
     }
 
-	if ( ! empty( $_GET['page_template'] ) ) {
+	$page_template = sanitize_text_field( wp_unslash( $_GET['page_template'] ) );
 
-		$query->set( 'meta_query', array(
-			array(
-				'key'     => '_wp_page_template',
-				'value'   => $_GET['page_template'],
-				'compare' => '='
-			)
-		) );
+	if ( '' !== $page_template ) {
+		// Retrieve the meta_query in case there is one already set
+		$meta_query = $query->get( 'meta_query' );
+
+		// If the meta_query doesn't already exist, let's create the wrapper array
+		if ( ! is_array( $meta_query ) ) {
+			$meta_query = array();
+		}
+
+		$meta_query[] = array(
+			'key'     => '_wp_page_template',
+			'value'   => $page_template,
+			'compare' => '='
+		);
+
+		$query->set( 'meta_query', $meta_query );
 	}
 }
 
