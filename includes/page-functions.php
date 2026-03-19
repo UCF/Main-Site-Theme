@@ -42,7 +42,10 @@ function main_site_page_template_column_data( $column_name, $post_id ) {
 
 	$template_name_slug_map = wp_get_theme()->get_page_templates();
 	$template_slug = get_page_template_slug( $post_id );
-	$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[$template_slug] : 'Default';
+	$template_name = array_key_exists( $template_slug, $template_name_slug_map ) ? $template_name_slug_map[ $template_slug ] : 'Default';
+
+	// Use a non-empty sentinel for the default template so filtering can distinguish it from "no filter".
+ 	$template_query_slug = $template_slug === '' ? 'default' : $template_slug;
 
 	$current_url = add_query_arg(
 		array(
@@ -53,7 +56,7 @@ function main_site_page_template_column_data( $column_name, $post_id ) {
 
 	$url = add_query_arg(
 		'page_template',
-		$template_slug,
+		$template_query_slug,
 		$current_url
 	);
 
