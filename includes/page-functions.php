@@ -102,8 +102,8 @@ function main_site_add_template_filter() {
 	$screen = get_current_screen();
 
 	if ( $screen->post_type === 'page' ) {
-		$selected = isset($_GET['page_template'])
-			? sanitize_text_field(wp_unslash($_GET['page_template']))
+		$selected = isset( $_GET['page_template'] )
+			? sanitize_text_field( wp_unslash( $_GET['page_template'] ) )
 			: '';
 
 		$page_templates = wp_get_theme()->get_page_templates();
@@ -136,7 +136,7 @@ add_action( 'restrict_manage_posts', 'main_site_add_template_filter', 10, 0 );
  * @return void
  */
 function main_site_template_name_order_by( $query ) {
-	if (! is_admin() || ! $query->is_main_query()) {
+	if (! is_admin() || ! $query->is_main_query() ) {
 		return;
 	}
 
@@ -145,7 +145,10 @@ function main_site_template_name_order_by( $query ) {
 		$query->set( 'orderby', 'meta_value' ); // Use 'meta_value' for text
 	}
 
-	$page_template = sanitize_text_field(wp_unslash($_GET['page_template']));
+	// Early exit if the page template isn't in the GET parameters
+	if ( ! isset( $_GET['page_template'] ) ) return;
+
+	$page_template = sanitize_text_field( wp_unslash( $_GET['page_template'] ) );
 
 	if ( '' !== $page_template ) {
 		// Retrieve the meta_query in case there is one already set
