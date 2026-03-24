@@ -167,3 +167,36 @@ function main_site_template_name_order_by($query) {
 }
 
 add_action('pre_get_posts', 'main_site_template_name_order_by', 10, 1);
+
+/**
+ * Adds a meta tag to the page with the page categories
+ * @author Jim Barnes
+ * @since 3.34.3
+ *
+ * @return void
+ */
+function add_categories_to_meta() {
+	$object = get_queried_object();
+
+	// If this isn't a page, move on.
+	if ( ! isset( $object->post_type ) || $object->post_type !== 'page' ) return;
+
+	$category_names = [];
+	$categories = get_the_Terms( $object->ID, 'category' );
+
+	// If we have no categories, move on.
+	if ( empty( $categories ) ) return;
+
+	foreach( $categories as $category ) {
+		$category_names[] = $category->name;
+	}
+
+	if ( ! empty( $category_names ) ) :
+	?>
+		<meta name="ucf_categories" value="<?php echo implode( ', ', $category_names ); ?>" />
+	<?php
+
+	endif;
+}
+
+add_action( 'wp_head', 'add_categories_to_meta', 1, 0 );
