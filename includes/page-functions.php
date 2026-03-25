@@ -185,10 +185,10 @@ function add_categories_to_meta() {
 	if ( ! isset( $object->post_type ) || $object->post_type !== 'page' ) return;
 
 	$category_names = [];
-	$categories = get_the_Terms( $object->ID, 'category' );
+	$categories = get_the_terms( $object->ID, 'category' );
 
-	// If we have no categories, move on.
-	if ( empty( $categories ) ) return;
+	// If term retrieval failed or we have no categories, move on.
+	if ( is_wp_error( $categories ) || empty( $categories ) ) return;
 
 	foreach( $categories as $category ) {
 		$category_names[] = $category->name;
@@ -196,7 +196,7 @@ function add_categories_to_meta() {
 
 	if ( ! empty( $category_names ) ) :
 	?>
-		<meta name="ucf_categories" value="<?php echo implode( ',', $category_names ); ?>" />
+		<meta name="ucf_categories" content="<?php echo esc_attr( implode( ',', $category_names ) ); ?>" />
 	<?php
 
 	endif;
