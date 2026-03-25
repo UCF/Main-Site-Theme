@@ -193,7 +193,7 @@ function add_categories_to_meta() {
 
 	if ( ! empty( $category_names ) ) :
 	?>
-		<meta name="ucf_categories" value="<?php echo implode( ', ', $category_names ); ?>" />
+		<meta name="ucf_categories" value="<?php echo implode( ',', $category_names ); ?>" />
 	<?php
 
 	endif;
