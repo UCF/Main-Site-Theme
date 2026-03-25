@@ -178,7 +178,7 @@ add_action( 'pre_get_posts', 'main_site_template_name_order_by', 10, 1 );
  *
  * @return void
  */
-function add_categories_to_meta() {
+function main_site_add_categories_to_meta() {
 	$object = get_queried_object();
 
 	// If this isn't a page, move on.
@@ -202,4 +202,4 @@ function add_categories_to_meta() {
 	endif;
 }
 
-add_action( 'wp_head', 'add_categories_to_meta', 1, 0 );
+add_action( 'wp_head', 'main_site_add_categories_to_meta', 1, 0 );
