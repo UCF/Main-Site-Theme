@@ -39,7 +39,7 @@ $additional_content = get_field( 'video_additional_content', $post->ID );
 					<div class="card">
 						<div class="card-header" id="<?php echo $section_id; ?>-id">
 							<h3 class="h5 mb-0">
-								<a class="font-size-base text-secondary" data-toggle="collapse" href="#<?php echo $section_id; ?>" role="tab" aria-expanded="<?php echo ( $idx === 0 ) ? 'true' : 'false'; ?>" aria-selected="<?php echo ( $idx === 0 ) ? 'true' : 'false'; ?>" aria-controls="<?php echo $section_id; ?>">
+								<a class="font-size-base text-secondary" data-toggle="collapse" href="#<?php echo $section_id; ?>" role="tab" aria-expanded="<?php echo ( $idx === 0 ) ? 'true' : 'false'; ?>" aria-controls="<?php echo $section_id; ?>">
 									<?php echo $section['section_title']; ?>
 								</a>
 							</h3>
