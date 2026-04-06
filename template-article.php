@@ -207,20 +207,19 @@ $related_stories = get_posts( $args );
 				'class' => 'card-img-top img-fluid'
 			) );
 			$story_title = get_field( 'title', $story->ID );
-			$story_subtitle = get_field( 'sub_title', $story->ID );
-			$excerpt = get_the_excerpt( $story );
+			$story_subtitle = get_field( 'sub_title', $story->ID ) ?? 'Read more...';
 			$permalink = get_permalink( $story->ID );
 		?>
 			<div class="col-6 col-sm-4 col-md-3">
 				<article class="card mb-4">
 					<?php echo $story_thumbnail; ?>
 					<div class="card-block">
-						<p class="h5 mb-2"><?php echo $story_title; ?></p>
-						<p class="text-default small">
-							<a href="<?php echo $permalink; ?>" class="stretched-link">
-								<?php echo $story_subtitle; ?>
-							</a>
-						</p>
+						<a class="text-secondary" href="<?php echo $permalink; ?>" class="stretched-link">
+							<p class="h5 mb-2"><?php echo $story_title; ?></p>
+						</a>
+						<?php if ( ! empty( $story_subtitle ) ): ?>
+						<p class="text-muted font-size-sm"><?php echo $story_subtitle; ?></p>
+						<?php endif; ?>
 					</div>
 				</article>
 			</div>
