@@ -212,17 +212,17 @@ $related_stories = get_posts( $args );
 			$permalink = get_permalink( $story->ID );
 		?>
 			<div class="col-6 col-sm-4 col-md-3">
-				<div class="card mb-4">
+				<article class="card mb-4">
 					<?php echo $story_thumbnail; ?>
 					<div class="card-block">
-						<h2 class="h5"><?php echo $story_title; ?></h2>
+						<p class="h5 mb-2"><?php echo $story_title; ?></p>
 						<p class="text-default small">
 							<a href="<?php echo $permalink; ?>" class="stretched-link">
 								<?php echo $story_subtitle; ?>
 							</a>
 						</p>
 					</div>
-				</div>
+				</article>
 			</div>
 		<?php endforeach; ?>
 		</div>
