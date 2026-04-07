@@ -214,7 +214,7 @@ $related_stories = get_posts( $args );
 				<article class="card mb-4">
 					<?php echo $story_thumbnail; ?>
 					<div class="card-block">
-						<a class="text-secondary" href="<?php echo $permalink; ?>" class="stretched-link">
+						<a class="text-secondary stretched-link" href="<?php echo $permalink; ?>">
 							<p class="h5 mb-2"><?php echo $story_title; ?></p>
 						</a>
 						<?php if ( ! empty( $story_subtitle ) ): ?>
