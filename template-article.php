@@ -7,6 +7,11 @@
 
 <?php get_header(); the_post(); ?>
 <article>
+<div class="story-progress sticky-top my-4">
+	<div class="progress bg-faded" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+		<div class="progress-bar bg-primary" style="width: 0%;"></div>
+	</div>
+</div>
 <div class="container mb-4">
 	<div class="row">
 	<?php
@@ -25,7 +30,9 @@
 	<div class="col-md-8">
 		<?php echo $thumbnail; ?>
 		<div class="abstract mb-4"><p><?php echo $abstract; ?></p></div>
-		<?php the_content(); ?>
+		<div class="post-content">
+			<?php the_content(); ?>
+		</div>
 	</div>
 
 	<?php

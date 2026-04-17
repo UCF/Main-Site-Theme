@@ -1,0 +1,8 @@
+.story-progress {
+  top: -1px;
+  z-index: 5;
+
+  & .progress-bar {
+    height: .5rem;
+  }
+}

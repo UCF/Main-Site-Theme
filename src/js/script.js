@@ -13,3 +13,4 @@
 // =require script/media-background-video.js
 // =require script/media-background-lazyload.js
 // =require script/count-up.js
+// =require script/story-progress.js
