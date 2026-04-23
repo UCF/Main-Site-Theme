@@ -213,8 +213,8 @@ $related_stories = get_posts( $args );
 			$story_thumbnail = get_the_post_thumbnail( $story->ID, 'post-thumbnail', array(
 				'class' => 'card-img-top img-fluid'
 			) );
-			$story_title = get_field( 'title', $story->ID );
-			$story_subtitle = get_field( 'sub_title', $story->ID ) ?? 'Read more...';
+			$story_title = get_field( 'page_header_title', $story->ID );
+			$story_subtitle = get_field( 'page_header_subtitle', $story->ID ) ?? 'Read more...';
 			$permalink = get_permalink( $story->ID );
 		?>
 			<div class="col-6 col-sm-4 col-md-3">
