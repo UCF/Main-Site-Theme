@@ -12,7 +12,7 @@
 
 	<div class="container d-flex">
 		<input class="form-control" type="text" id="gsc-input" placeholder="" />
-		<button class="btn btn-primary d-flex align-items-center" id="gsc-search-button"><span class="fa-sharp fa-solid fa-magnifying-glass mr-2"></span><span>Search</span></button>
+		<button class="btn btn-primary d-flex align-items-center" id="gsc-search-button"><span class="fa-solid fa-magnifying-glass mr-2"></span><span>Search</span></button>
 	</div>
 	<div class="container">
 		<div class="gcse-searchresults-only" data-gname="ucf-phonebook" data-queryParameterName="q"></div>
