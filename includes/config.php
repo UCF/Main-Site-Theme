@@ -1873,3 +1873,38 @@ function person_admin_set_columns( $column_name, $post_id ) {
 }
 
 add_action( 'manage_person_posts_custom_column' , 'person_admin_set_columns', 10, 2 );
+
+
+// Completely disable password reset
+add_filter( 'allow_password_reset', '__return_false' );
+
+/**
+ * Removes the reset password link text from the login page since password reset is disabled.
+ *
+ * @author Jim Barnes
+ * @since 3.34.9
+ *
+ * @param string $translation The translated text.
+ * @param string $text        The original text before translation.
+ * @param string $domain      Text domain.
+ * @return string The modified text to display for the lost password link.
+ */
+function mainsite_remove_lostpassword_text( $translation, $text, $domain ) {
+	if ( 'Lost your password?' === $text ) {
+		return '';
+	}
+
+	return $translation;
+}
+
+/**
+ * Adds the lost password text filter only on login requests.
+ *
+ * @since 3.34.9
+ * @return void
+ */
+function mainsite_setup_login_text_filters() {
+	add_filter( 'gettext', 'mainsite_remove_lostpassword_text', 10, 3 );
+}
+
+add_action( 'login_init', 'mainsite_setup_login_text_filters' );
