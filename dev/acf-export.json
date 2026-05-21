@@ -601,6 +601,260 @@
         "display_title": ""
     },
     {
+        "key": "group_6a0a510123abc",
+        "title": "Article (Two Column) Fields",
+        "fields": [
+            {
+                "key": "field_6a0a510223abd",
+                "label": "Abstract",
+                "name": "abstract",
+                "aria-label": "",
+                "type": "textarea",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "rows": "",
+                "placeholder": "",
+                "new_lines": ""
+            },
+            {
+                "key": "field_6a0a510323abe",
+                "label": "Sidebar Content",
+                "name": "sidebar_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "HTML content to display in the right-hand sidebar column. If left empty, the main content column will be centered.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "allow_in_bindings": 0,
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_6a0a510a23ac5",
+                "label": "Related Degrees Heading",
+                "name": "related_degrees_heading",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Related Degrees",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6a0a510b23ac6",
+                "label": "Related Degrees",
+                "name": "related_degrees",
+                "aria-label": "",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "post_type": [
+                    "degree"
+                ],
+                "post_status": [
+                    "publish"
+                ],
+                "taxonomy": [],
+                "return_format": "object",
+                "multiple": 1,
+                "allow_null": 1,
+                "allow_in_bindings": 0,
+                "bidirectional": 0,
+                "ui": 1,
+                "bidirectional_target": []
+            },
+            {
+                "key": "field_6a0a510423abf",
+                "label": "Additional Content",
+                "name": "additional_content",
+                "aria-label": "",
+                "type": "wysiwyg",
+                "instructions": "Full-width content area displayed below the main content and sidebar. Not wrapped in a container.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "allow_in_bindings": 0,
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_6a0a510523ac0",
+                "label": "FAQs",
+                "name": "faqs",
+                "aria-label": "",
+                "type": "repeater",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "block",
+                "pagination": 0,
+                "min": 0,
+                "max": 0,
+                "collapsed": "",
+                "button_label": "Add FAQ",
+                "rows_per_page": 20,
+                "sub_fields": [
+                    {
+                        "key": "field_6a0a510623ac1",
+                        "label": "Question",
+                        "name": "question",
+                        "aria-label": "",
+                        "type": "text",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "maxlength": "",
+                        "allow_in_bindings": 0,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "parent_repeater": "field_6a0a510523ac0"
+                    },
+                    {
+                        "key": "field_6a0a510723ac2",
+                        "label": "Answer",
+                        "name": "answer",
+                        "aria-label": "",
+                        "type": "wysiwyg",
+                        "instructions": "",
+                        "required": 0,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": "",
+                        "allow_in_bindings": 0,
+                        "tabs": "all",
+                        "toolbar": "basic",
+                        "media_upload": 0,
+                        "delay": 0,
+                        "parent_repeater": "field_6a0a510523ac0"
+                    }
+                ]
+            },
+            {
+                "key": "field_6a0a510823ac3",
+                "label": "FAQs Heading",
+                "name": "faqs_heading",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Heading displayed above the FAQ section. Defaults to \"Frequently Asked Questions\" if left empty.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Frequently Asked Questions",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6a0a510923ac4",
+                "label": "Related Stories Heading",
+                "name": "related_stories_heading",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Heading displayed above the related stories section. Defaults to \"Related Stories\" if left empty.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Related Stories",
+                "prepend": "",
+                "append": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "page"
+                },
+                {
+                    "param": "post_template",
+                    "operator": "==",
+                    "value": "template-article-two-col.php"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "normal",
+        "style": "default",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": "",
+        "active": true,
+        "description": "",
+        "show_in_rest": 0,
+        "display_title": ""
+    },
+    {
         "key": "group_58ff540088983",
         "title": "College Fields",
         "fields": [
