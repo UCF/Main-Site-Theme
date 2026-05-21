@@ -109,7 +109,7 @@ if ( $faqs ) {
 		$faq_id = 'page-faq-' . $post->ID . '-' . $index;
 	?>
 	<div class="d-flex mb-4 flex-column">
-		<a href="#<?php echo esc_attr( $faq_id ); ?>" class="ucf-faq-question-link collapsed d-flex" data-toggle="collapse" data-target="#<?php echo esc_attr( $faq_id ); ?>" aria-expanded="false">
+		<a href="#<?php echo esc_attr( $faq_id ); ?>" class="ucf-faq-question-link collapsed d-flex" data-toggle="collapse" data-target="#<?php echo esc_attr( $faq_id ); ?>" role="button" aria-controls="<?php echo esc_attr( $faq_id ); ?>" aria-expanded="false">
 			<div class="ucf-faq-collapse-icon-container mr-2 mr-md-3">
 				<span class="ucf-faq-collapse-icon" aria-hidden="true"></span>
 			</div>
