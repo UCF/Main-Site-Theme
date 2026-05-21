@@ -58,6 +58,64 @@ if ( ! $sidebar_content ) {
 
 <?php
 /**
+ * FAQs
+ */
+$faqs = get_field( 'faqs', $post->ID );
+$faqs_heading = get_field( 'faqs_heading', $post->ID ) ?: 'Frequently Asked Questions';
+
+if ( $faqs ) {
+	add_action( 'wp_footer', function() use ( $faqs ) {
+		$schema = array(
+			'@context'   => 'https://schema.org',
+			'@type'      => 'FAQPage',
+			'mainEntity' => array(),
+		);
+
+		foreach ( $faqs as $faq ) {
+			$schema['mainEntity'][] = array(
+				'@type'          => 'Question',
+				'name'           => wp_strip_all_tags( $faq['question'] ),
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text'  => wp_strip_all_tags( $faq['answer'] ),
+				),
+			);
+		}
+
+		echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . '</script>' . "\n";
+	} );
+}
+?>
+
+<?php if ( $faqs ) : ?>
+<section class="container my-5">
+	<h2><?php echo esc_html( $faqs_heading ); ?></h2>
+	<div class="ucf-faq-list ucf-faq-list-classic">
+	<?php foreach ( $faqs as $index => $faq ) :
+		$faq_id = 'page-faq-' . $post->ID . '-' . $index;
+	?>
+	<div class="d-flex mb-4 flex-column">
+		<a href="#<?php echo esc_attr( $faq_id ); ?>" class="ucf-faq-question-link collapsed d-flex" data-toggle="collapse" data-target="#<?php echo esc_attr( $faq_id ); ?>" aria-expanded="false">
+			<div class="ucf-faq-collapse-icon-container mr-2 mr-md-3">
+				<span class="ucf-faq-collapse-icon" aria-hidden="true"></span>
+			</div>
+			<strong class="ucf-faq-question align-self-center mb-0 h5"><?php echo esc_html( $faq['question'] ); ?></strong>
+		</a>
+		<div class="ucf-faq-topic-answer collapse ml-2 ml-md-3 mt-2" id="<?php echo esc_attr( $faq_id ); ?>">
+			<div class="card text-secondary">
+				<div class="card-block">
+					<?php echo $faq['answer']; ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php endforeach; ?>
+	</div>
+</section>
+<?php endif; ?>
+
+<?php
+/**
  * Related articles
  */
 $categories = get_the_category( $post->ID );
@@ -82,11 +140,13 @@ if ( ! empty( $category_ids ) ) {
 }
 
 $related_stories = get_posts( $related_args );
+$related_stories_heading = get_field( 'related_stories_heading', $post->ID ) ?: 'Related Stories';
 ?>
 
 <?php if ( $related_stories ) : ?>
 <aside class="jumbotron py-5 bg-faded mb-0">
 	<div class="container">
+		<h2><?php echo esc_html( $related_stories_heading ); ?></h2>
 		<div class="row">
 		<?php foreach ( $related_stories as $story ) :
 			$story_thumbnail = get_the_post_thumbnail( $story->ID, 'post-thumbnail', array(
@@ -113,39 +173,6 @@ $related_stories = get_posts( $related_args );
 		</div>
 	</div>
 </aside>
-<?php endif; ?>
-
-<?php
-/**
- * FAQs
- */
-$faqs = get_field( 'faqs', $post->ID );
-?>
-
-<?php if ( $faqs ) : ?>
-<section class="container my-5">
-	<div class="ucf-faq-list ucf-faq-list-classic">
-	<?php foreach ( $faqs as $index => $faq ) :
-		$faq_id = 'page-faq-' . $post->ID . '-' . $index;
-	?>
-	<div class="d-flex mb-4 flex-column">
-		<a href="#<?php echo esc_attr( $faq_id ); ?>" class="ucf-faq-question-link collapsed d-flex" data-toggle="collapse" data-target="#<?php echo esc_attr( $faq_id ); ?>" aria-expanded="false">
-			<div class="ucf-faq-collapse-icon-container mr-2 mr-md-3">
-				<span class="ucf-faq-collapse-icon" aria-hidden="true"></span>
-			</div>
-			<strong class="ucf-faq-question align-self-center mb-0 h5"><?php echo esc_html( $faq['question'] ); ?></strong>
-		</a>
-		<div class="ucf-faq-topic-answer collapse ml-2 ml-md-3 mt-2" id="<?php echo esc_attr( $faq_id ); ?>">
-			<div class="card text-secondary">
-				<div class="card-block">
-					<?php echo $faq['answer']; ?>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php endforeach; ?>
-	</div>
-</section>
 <?php endif; ?>
 
 <?php get_footer(); ?>

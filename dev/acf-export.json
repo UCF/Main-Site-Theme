@@ -734,6 +734,48 @@
                         "parent_repeater": "field_6a0a510523ac0"
                     }
                 ]
+            },
+            {
+                "key": "field_6a0a510823ac3",
+                "label": "FAQs Heading",
+                "name": "faqs_heading",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Heading displayed above the FAQ section. Defaults to \"Frequently Asked Questions\" if left empty.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Frequently Asked Questions",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6a0a510923ac4",
+                "label": "Related Stories Heading",
+                "name": "related_stories_heading",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "Heading displayed above the related stories section. Defaults to \"Related Stories\" if left empty.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "Related Stories",
+                "prepend": "",
+                "append": ""
             }
         ],
         "location": [
