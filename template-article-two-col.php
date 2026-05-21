@@ -36,7 +36,9 @@ if ( ! $sidebar_content && ! $related_degrees ) {
 	<div class="row">
 		<div class="<?php echo $main_content_classes; ?>"><!-- Main content column -->
 			<?php echo $thumbnail; ?>
+			<?php if ( ! empty( $abstract ) ) : ?>
 			<div class="abstract mb-4"><p><?php echo $abstract; ?></p></div>
+			<?php endif; ?>
 			<div class="post-content">
 				<?php the_content(); ?>
 			</div>
