@@ -16,10 +16,12 @@ $thumbnail = get_the_post_thumbnail(
 
 $abstract = get_field( 'abstract', $post->ID );
 $sidebar_content = get_field( 'sidebar_content', $post->ID );
+$related_degrees = get_field( 'related_degrees', $post->ID );
+$related_degrees_heading = get_field( 'related_degrees_heading', $post->ID ) ?: 'Related Degrees';
 
 $main_content_classes = 'col-md-8';
 
-if ( ! $sidebar_content ) {
+if ( ! $sidebar_content && ! $related_degrees ) {
 	$main_content_classes .= ' offset-md-2';
 }
 
@@ -39,9 +41,21 @@ if ( ! $sidebar_content ) {
 				<?php the_content(); ?>
 			</div>
 		</div><!-- End main content column -->
-		<?php if ( $sidebar_content ) : ?>
+		<?php if ( $sidebar_content || $related_degrees ) : ?>
 		<div class="col-md-4"><!-- Sidebar column -->
 			<?php echo $sidebar_content; ?>
+			<?php if ( $related_degrees ) : ?>
+			<aside class="card bg-faded mb-4">
+				<div class="card-block">
+					<h2 class="h4 heading-underline"><?php echo esc_html( $related_degrees_heading ); ?></h2>
+					<ul class="list-unstyled">
+					<?php foreach ( $related_degrees as $degree ) : ?>
+						<li><a href="<?php echo esc_url( get_the_permalink( $degree->ID ) ); ?>"><?php echo esc_html( $degree->post_title ); ?></a></li>
+					<?php endforeach; ?>
+					</ul>
+				</div>
+			</aside>
+			<?php endif; ?>
 		</div><!-- End sidebar column -->
 		<?php endif; ?>
 	</div>

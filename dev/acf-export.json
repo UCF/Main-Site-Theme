@@ -647,6 +647,57 @@
                 "delay": 0
             },
             {
+                "key": "field_6a0a510a23ac5",
+                "label": "Related Degrees Heading",
+                "name": "related_degrees_heading",
+                "aria-label": "",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "Related Degrees",
+                "maxlength": "",
+                "allow_in_bindings": 0,
+                "placeholder": "",
+                "prepend": "",
+                "append": ""
+            },
+            {
+                "key": "field_6a0a510b23ac6",
+                "label": "Related Degrees",
+                "name": "related_degrees",
+                "aria-label": "",
+                "type": "post_object",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "post_type": [
+                    "degree"
+                ],
+                "post_status": [
+                    "publish"
+                ],
+                "taxonomy": [],
+                "return_format": "object",
+                "multiple": 1,
+                "allow_null": 1,
+                "allow_in_bindings": 0,
+                "bidirectional": 0,
+                "ui": 1,
+                "bidirectional_target": []
+            },
+            {
                 "key": "field_6a0a510423abf",
                 "label": "Additional Content",
                 "name": "additional_content",
