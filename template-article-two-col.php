@@ -89,7 +89,7 @@ if ( $faqs ) {
 
 <?php if ( $faqs ) : ?>
 <section class="container my-5">
-	<h2><?php echo esc_html( $faqs_heading ); ?></h2>
+	<h2 class="mb-4"><?php echo esc_html( $faqs_heading ); ?></h2>
 	<div class="ucf-faq-list ucf-faq-list-classic">
 	<?php foreach ( $faqs as $index => $faq ) :
 		$faq_id = 'page-faq-' . $post->ID . '-' . $index;
@@ -146,7 +146,7 @@ $related_stories_heading = get_field( 'related_stories_heading', $post->ID ) ?: 
 <?php if ( $related_stories ) : ?>
 <aside class="jumbotron py-5 bg-faded mb-0">
 	<div class="container">
-		<h2><?php echo esc_html( $related_stories_heading ); ?></h2>
+		<h2 class="mb-4"><?php echo esc_html( $related_stories_heading ); ?></h2>
 		<div class="row">
 		<?php foreach ( $related_stories as $story ) :
 			$story_thumbnail = get_the_post_thumbnail( $story->ID, 'post-thumbnail', array(
