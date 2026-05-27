@@ -23,6 +23,7 @@ function modify_people_post_type_args( $args ) {
 add_filter( 'ucf_people_post_type_args', 'modify_people_post_type_args', 10, 1 );
 
 
+
 /**
  * Builds the person's title using the built-in fields
  * @author Jim Barnes
@@ -44,21 +45,97 @@ function mainsite_get_person_name( $post ) {
 }
 
 /**
- * Modifies the post_types array for the expertise
- * custom taxonomy.
- * @author Jim Barnes
- * @since 3.17.0
- * @param array $post_types The unmodified post_type array
- * @return array
+ * Returns the first people_group taxonomy term for a given person post,
+ * or null if none is assigned.
+ *
+ * @author Darren Johnson
+ * @param int $post_id The person post ID
+ * @return WP_Term|null
  */
-function modify_expertise_objects( $post_types ) {
-	$post_types[] = 'person';
-	return $post_types;
+function get_person_people_group( $post_id ) {
+	$terms = get_the_terms( $post_id, 'people_group' );
+	if ( $terms && ! is_wp_error( $terms ) ) {
+		return array_shift( $terms );
+	}
+	return null;
 }
 
-add_filter( 'ucf_expertise_taxonomy_objects', 'modify_expertise_objects', 10, 1 );
+/**
+ * Registers custom rewrite rules for each people_group term, allowing
+ * URLs like /{group-slug}/{person-slug}/ to resolve to the correct person post.
+ * Falls back to the 'expert' slug for unassigned people.
+ *
+ * @author Darren Johnson
+ */
+function add_people_group_rewrite_rules() {
+	$terms = get_terms( array(
+		'taxonomy'   => 'people_group',
+		'hide_empty' => false,
+	) );
 
+	if ( is_wp_error( $terms ) || empty( $terms ) ) {
+		return;
+	}
 
+	foreach ( $terms as $term ) {
+		add_rewrite_rule(
+			'^' . preg_quote( $term->slug, '/' ) . '/([^/]+)/?$',
+			'index.php?post_type=person&name=$matches[1]',
+			'top'
+		);
+	}
+
+	// Fallback for people without a group term
+	add_rewrite_rule(
+		'^expert/([^/]+)/?$',
+		'index.php?post_type=person&name=$matches[1]',
+		'top'
+	);
+}
+
+add_action( 'init', 'add_people_group_rewrite_rules', 20 );
+
+/**
+ * Flushes rewrite rules whenever a people_group term is created, updated,
+ * or deleted so new slugs are immediately resolvable.
+ *
+ * @author Darren Johnson
+ * @param int    $term_id  Term ID
+ * @param int    $tt_id    Term taxonomy ID
+ * @param string $taxonomy Taxonomy slug
+ */
+function flush_people_group_rewrite_rules( $term_id, $tt_id, $taxonomy ) {
+	if ( $taxonomy === 'people_group' ) {
+		flush_rewrite_rules();
+	}
+}
+
+add_action( 'created_term', 'flush_people_group_rewrite_rules', 10, 3 );
+add_action( 'edited_term',  'flush_people_group_rewrite_rules', 10, 3 );
+add_action( 'delete_term',  'flush_people_group_rewrite_rules', 10, 3 );
+
+/**
+ * Filters the permalink for person posts to use their first people_group
+ * term slug as the URL prefix instead of the default 'expert' slug.
+ * People without a group term retain the 'expert' prefix.
+ *
+ * @author Darren Johnson
+ * @param string  $post_link The default permalink
+ * @param WP_Post $post      The post object
+ * @return string
+ */
+function filter_person_post_type_link( $post_link, $post ) {
+	if ( ! isset( $post->post_type ) || $post->post_type !== 'person' ) {
+		return $post_link;
+	}
+	$term = get_person_people_group( $post->ID );
+	if ( $term ) {
+		$post_link = home_url( '/' . $term->slug . '/' . $post->post_name . '/' );
+	}
+	return $post_link;
+}
+
+add_filter( 'post_type_link', 'filter_person_post_type_link', 10, 2 );
 
 /**
  * Modifies the taxonomies assigned to the Person
