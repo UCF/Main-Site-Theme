@@ -2672,10 +2672,10 @@
                 "relevanssi_exclude": 0,
                 "message": "Force \"View Full Description\" button to display",
                 "default_value": 0,
-                "allow_in_bindings": 1,
-                "ui": 0,
+                "allow_in_bindings": 0,
                 "ui_on_text": "",
-                "ui_off_text": ""
+                "ui_off_text": "",
+                "ui": 1
             },
             {
                 "key": "field_5e99f80012a12",
