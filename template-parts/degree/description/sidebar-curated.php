@@ -5,6 +5,8 @@ if ( $post->post_type === 'degree' ) :
 	$description_image     = get_field( 'modern_description_image', $post );
 	$description_image_alt = get_field( 'modern_description_image_alt', $post );
 
+	$force_full_desc_btn = get_field( 'degree_show_catalog_description', $post );
+	$catalog_desc_full   = trim( get_field( 'degree_description_full', $post ) );
 
 	if ( $description_image || have_rows( 'highlights', $post ) ) :
 ?>
@@ -46,6 +48,13 @@ if ( $post->post_type === 'degree' ) :
 			?>
 		<?php endif; ?>
 
+		<?php if ( $force_full_desc_btn && $catalog_desc_full ) : ?>
+			<button class="btn btn-outline-info rounded py-3"
+				data-toggle="modal"
+				data-target="#catalogModal">
+				View Full Description
+			</button>
+		<?php endif; ?>
 	</div>
 <?php
 	elseif ( have_rows( 'highlights_imported', $post ) ) : ?>
@@ -77,6 +86,14 @@ if ( $post->post_type === 'degree' ) :
 					endif;
 				endwhile;
 				?>
+			<?php endif; ?>
+
+			<?php if ( $force_full_desc_btn && $catalog_desc_full ) : ?>
+				<button class="btn btn-outline-info rounded py-3"
+					data-toggle="modal"
+					data-target="#catalogModal">
+					View Full Description
+				</button>
 			<?php endif; ?>
 
 		</div>
