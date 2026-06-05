@@ -2656,6 +2656,28 @@
                 "ui_off_text": ""
             },
             {
+                "key": "field_6a22de87c8dbf",
+                "label": "Show Catalog Description",
+                "name": "degree_show_catalog_description",
+                "aria-label": "",
+                "type": "true_false",
+                "instructions": "For programs with curated sidebar content (Highlights or other sidebar content), this will force the \"View Full Description\" button to still appear.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "relevanssi_exclude": 0,
+                "message": "Force \"View Full Description\" button to display",
+                "default_value": 0,
+                "allow_in_bindings": 1,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
                 "key": "field_5e99f80012a12",
                 "label": "Degree Description & Highlights",
                 "name": "",
